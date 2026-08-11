@@ -19,7 +19,124 @@ legs that lose their slot are returned to the reserve queue, not cancelled as fi
 
 ---
 
-## Status: RUNNING — same orchestrator session, 2026-08-11, cycle 9c (four-slot contract,
+## Status: RUNNING — same orchestrator session, 2026-08-12, cycle 9f (four-slot contract,
+user's ceiling-raising programme ANSWERED)
+
+`origin/main` at `30e376d`, merge gate **PASS**. **A=335 S1GR** (resolves the leg-221 flag/repair
+gap, dispatched cycle 9e, still running). **B, C, D all vacant** — 344 (PKLR) landed `3ec2516`,
+341 (ALGW) landed `782a310`, 336 (C305) landed `d0248c6`, all reported to the DM; awaiting its
+refill ruling. Decision Maker reachable, last ruling `85c8209` (cycle 9f) integrated by rebase
+(clean, no conflicts, `origin/main` unmoved between integration and push both times).
+
+**THE CEILING-RAISING PROGRAMME IS ANSWERED: S1 DIES.** Leg 341 (ALGW) found that leg 260's
+algebraically weighted space — the "namable fourth space" the stage-V ban's own lift condition
+asks for — has already been realized in three independent lanes, each already dead by a different
+mechanism: sup-norm/collocation (Route-D, 11+ legs, exhaustively audited, 6.04x short of the
+needed bound at theoretical optimum, `a=0` only); coefficient/ℓ¹-weighted (legs 51/52, kernel/
+cokernel failure modes swap exactly at the critical exponent, no window anywhere, re-attempt
+already banned in `plan_of_record.py`); origin-conjugated/Mellin (legs 163/176, already
+algebraically weighted, dies orthogonally, no transfer to the needed regime). **Consequence: no
+lift-condition packet was assembled (S1 dies, per spec); the deferred §3 build is never drafted;
+the Tier-2 ceiling stands unchanged on every route-4 gate.** Leg 334's clause (a),
+OWNED-BY-341-PENDING, closes CLOSED-NO. S2 (the composition question) also dissolves as a
+secondary finding — leg 261's `u~|x|⁻³` was measured on a Gaussian witness, not the actual
+target; re-derived on leg 260's own Type-I rate, the target sits exactly on the log-divergent L³
+boundary leg 260 had already found independently by a different route. DSS position stated
+independently (leg 253, parked, read-only): NRS/Tsai's theorems pin to exactly-backward-SS
+profiles, and DSS-at-λ≫1 (leg 260's own target class) is the one corner they don't reach — a
+second, independent reason the wall doesn't bind the actual screened object. **No ban is lifted
+or touched by any of this — that ruling stays the user's, per their own directive.** Territory
+audited clean (3 declared files, 793 insertions), merge gate independently re-verified PASS. This
+was escalated directly to the user by the orchestrator, in the same turn as the DM report, since
+it is the direct answer to their ceiling-raising directive.
+
+One process note from leg 341, not a research finding: an unexplained mid-session HEAD move
+briefly landed a commit on a concurrent leg's branch (342's) instead of its own; leg 341 recovered
+via an isolated worktree with no lasting damage (confirmed in the orchestrator's audit — main's
+ancestry shows no corruption), but flagged as a possible collision-risk signal under concurrent
+dispatch in the shared main worktree, worth a fresh orchestrator's attention if it recurs.
+
+**Leg 340 (EGRB) answered leg 329's C4 reading question — and the answer is an identity, not a
+measurement.** Re-derived the bound with truncation fully controlled, in exact rational+π
+arithmetic (substitution X=tan(θ/2): every relevant integral collapses to
+R=(r1+q1π)/(r2+q2π) exactly, no floats in the exact path). At all 19 ladder rungs, for both
+`B4_egm` and `E_egm`, R = −1/2 EXACTLY: bound=1/2, margin=exactly 1e-9, dependence on the
+truncation parameter=exactly 0, enclosure width 1.4e-59 — against a measured eigensolve spread of
+1.927e-05/2.697e-05, reproducing leg 329's own banked 3.853e-05/5.394e-05 relative spreads.
+Structural cause: `Sym(B) = -G/2` entry-by-entry, because the nonlocal Hilbert term vanishes
+identically on `T2_egm` while `D_φ ≡ -1/2`. Eleven controls pass; six able to fire against,
+notably `A4_chen_hou` (non-constant `D_φ`) gives -0.5001506 and FAILS the ceiling — the instrument
+is not a tautology of the code itself. **Gate answers YES on this bound — but the pre-registered
+mandatory second reading (novelty §7e) is that since R=-1/2 is an identity, clause 5 is a
+TAUTOLOGY on this class and cannot come out otherwise: a flip of leg 178's original NO would be a
+flip ON AN IDENTITY, not a measurement.** The leg declined to adjudicate escalation #3 itself,
+deferring to the user per the standing cycle-8e ruling that this class of call is the user's, not
+the DM's or the leg's — escalated directly by the orchestrator. Territory audited clean (8
+declared files, 4636 insertions), merge gate independently re-verified PASS.
+
+**Leg 342 (SEED) landed gate YES via branch (ii)** — no screen-passing seed exists for route 4
+today (0/5 candidates pass leg 313's three-way screen + the cheap-entrance ban, including an
+adverse find: Kwon-Tsai `2011.02800` bifurcates off Landau solutions, the literal shape the ban
+forbids), but one creation path is named and costed: retargeting Hou's PINN/KAN machinery at the
+true non-axisymmetric 3D NS DSS ansatz, ≈35 legs at this leg's live rate. Consequence for leg
+334 clause (c): satisfied via the "none exists yet, here's the creation path" branch — 334's own
+plan hadn't landed yet at leg 342's dispatch time, so nothing was marked consumed. Territory
+audited clean (3 declared files, 469 insertions).
+
+**Leg 344 (PKLR) landed gate YES** — sourced 7-entry literature inventory sharpening 342's
+35-leg estimate. Headline correction: "Hou's PINN/KAN machinery" was a mislabel — full-text read
+of `2506.19243` shows KAN appears only as a citation, never used (plain MLP+SSBroyden); the KAN
+half traces to a separate paper (`2604.16842`) never applied to NS/Euler anywhere. New load-bearing
+find not in 342's net: `arXiv:2509.14185` (DeepMind+Buckmaster+Gómez-Serrano, "Discovery of
+Unstable Singularities," Sept 2025) — a better-validated Gauss-Newton/envelope-architecture line,
+near-machine-precision on CCF/IPM/Boussinesq, whose own authors name boundary-free 3D Euler as
+their next open problem and report explicit PINN failure modes. Net effect: the ≈35-leg estimate
+is unmoved numerically, but its largest risk (the DSS/time-periodic gap) is now confirmed against
+two independent literature lines instead of one, and a stronger retarget base is named. Territory
+audited clean (3 declared files, 383 insertions).
+
+**The decision now sitting on top of all four landings, routed to the user in `STATUS.md`
+NEEDS-YOU item #3**: 342/344's 35-leg creation path is costed against a route whose parent lift
+condition already failed (S1 dies). Spending it raises route 4's seeding completeness, not its
+Tier-2 ceiling. Is that spend still worth it under this programme, or should it be shelved?
+
+**Leg 336 (C305) landed gate YES** — two claim-bearing corrections to leg 305's landed prose,
+measured against 305's own ledger JSON: (a) "C1 has the largest elasticity" is FALSE, C9_a1 is
+2.27x larger; C1 remains "costliest constant" only under 305's separate smallest-|move_to_close|
+rule, which the SHARP/SLACK gate actually consumes. (b) "all seven capped rows" holds for six —
+C11_aR1 adjudicated inert-by-construction (its term multiplies R₁, exactly zero at r* by the same
+fact that defines r* as the saddle-node — a Lesson 90 tell, not missing data). **SHARP verdict
+UNMOVED** — rests only on M4_class=EXACT_IDENTITY (unanimous, all eleven rows) and the
+smallest-|move_to_close| rule, neither touched. Two downstream repeat-sites flagged
+(`experiments/JOURNAL.md:5018`, `writeup/INDEX.md:124`), left unedited (out of territory).
+Territory audited clean (6 declared files, 401 insertions, 16 deletions — the deletions are the
+two corrected claim sites, replaced with inline `[CORRECTED]` markers, originals preserved).
+
+**DM cycle 9f ruling (`85c8209`, integrated cleanly):** absorbed 340's identity finding (user
+escalation endorsed, DM adds nothing decisional beyond noting the knife edge decided at exactly
+1/2 is neither prior reading's naive victory) and 342's cost bracket (recorded and routed into the
+same 341-landing user decision packet, not drafted on DM authority — a programme-scale resource
+commitment is the user's call). Refilled under a stated §3b floor bind: the entire dispatchable
+reserve was non-eligible corrections/audit work, so filling both open vacancies from it would have
+put the floor at 1/4, below §3b's hard 2-of-4 minimum. Slot D got leg 336 (C305, corrections rank
+1); slot B got a fresh floor-eligible leg 344 (PKLR), drafted specifically to feed the 341-landing
+decision packet with a sourced inventory rather than one team's self-description. Floor landed at
+2/4 exactly (341, 344) — the minimum, not a margin; noted, and the next vacancy should restore
+margin if an eligible leg is available. A 334-landed record slip from an earlier cycle was also
+corrected in this ruling.
+
+**Heartbeat armed:** `CronCreate` recurring job, every 25 min, session-only (no `send_later` in
+this environment — see Environment notes). A fresh orchestrator session must re-arm its own
+heartbeat; cron jobs do not survive a session boundary.
+
+**A fresh orchestrator reading this at Step 0b:** read this block, then the Environment notes,
+Known flakes and Incidents sections at the bottom of this file, then `PROGRESS.md`. Do not
+dispatch before Step 0b's own liveness sweep for unpushed local work. Check the DM for a refill
+ruling on slots B/C/D before dispatching into them yourself.
+
+---
+
+## Superseded status: RUNNING — same orchestrator session, 2026-08-11, cycle 9c (four-slot contract,
 user's ceiling-raising programme in force)
 
 `origin/main` at `a89d8b3`, merge gate **PASS**. **A=vacant** (334 landed, awaiting DM
