@@ -5,7 +5,7 @@ formalized the S1-DIES/Tier-2 decision packet in cycle 10, then executed the
 user's post-S1 reframing in cycle 10b: leg 348 POCP drafted at reserve rank
 1 — does periodic-orbit CAP for dissipative PDEs reach route 4's object,
 scoping only, "the build is the next ruling"; leg 349 GAFV drafted gated on
-348). `origin/main` at `7fcb66b`, merge gate green. Full detail in
+348). `origin/main` at `6ab40a5`, merge gate green. Full detail in
 `PROGRESS.md` (git-ignored, more current), `reports/ORCH_STATE.md` (full
 handoff detail and institutional memory), and `experiments/JOURNAL.md` (the
 durable ledger).*
@@ -397,19 +397,35 @@ drew an explicit boundary: leg 348's future answer (the certification-route
 reframing) is a NEW decision item, not a late edit to this packet. Slot B
 refilled: 348 (POCP) — reserve rank 1, dispatched.
 
+**Leg 337 (C318) landed gate YES `ce0e485`, leg 343 (DSSP-B1, critical path)
+landed gate YES `0f6acf7`, leg 338 (LCB1) and leg 348 (POCP) dispatched, and
+leg 350 (DSSP-B2, the critical-path sequel to 343) dispatched — full detail
+in `reports/ORCH_STATE.md`.**
+
+**Leg 343 (DSSP-B1) landed gate YES on both clauses** — "the space is
+pinned, B2 proceeds." Consumed leg 341's S1-DIES verdict without
+re-litigating it (the algebraically-weighted certificate space is dead, but
+the unweighted vorticity/compactified-X search space still stands). The
+`2p+s>d` criterion made executable reproduces leg 313's s=1 crossing and leg
+331's measured tail exponents (gaps <2%); the spectrum of `-Δ + ½(y·∇) + 1`
+on the ℓ=0 radial channel is measured continuous, licensed by a
+planted-Gaussian-well control that converges a genuine eigenvalue to 8
+digits. New figure fig91 shipped. Audited clean.
+
 **Currently running:**
 
 | Slot | Leg | Route | Status |
 |---|---|---|---|
 | A | 335 | S1GR — resolves the 221 flag/repair gap | still running, mid-diagnosis (waiting on a background diagnostic script) |
-| B | 348 | POCP — does periodic-orbit CAP for dissipative PDEs reach route 4's object (user's §1 reframing) | dispatched, running (isolated worktree) |
-| C | 343 | DSSP-B1 — critical path, plan brick B1 | running (isolated worktree) |
-| D | — | vacant (337 C318 landed `ce0e485`, reported to DM, awaiting refill) | — |
+| B | 348 | POCP — does periodic-orbit CAP for dissipative PDEs reach route 4's object (user's §1 reframing) | running (isolated worktree) |
+| C | 350 | DSSP-B2 — critical path, brick B2 (enriched compactified basis vs. leg 313's baseline) | dispatched, running (isolated worktree) |
+| D | 338 | LCB1 — light corrections batch (four sites incl. amended item iv) | running (isolated worktree) |
 
-Reserve and next fresh leg number as of the DM's cycle 10c ruling: 20
-undispatched, 12 dispatchable, next fresh number **350**. No ban lifted this
-window; no L1→L4 link moved. Awaiting the DM's next refill ruling for
-slot D.
+Reserve and next fresh leg number as of the DM's cycle 10e ruling: 19
+undispatched, 11 dispatchable, next fresh number **351**. No ban lifted this
+window; no L1→L4 link moved. Floor 2/4 (348, 350) — the two eligible slots
+are the two live research questions; the corrections queue (338, and 307
+TSCX next) fills the rest.
 
 ## Context — the ten-to-four downsize and the spend-limit kill
 
