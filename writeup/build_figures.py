@@ -317,6 +317,13 @@ P2_EVIDENCE = [
     "../experiments/p2_route_cadx_v1_scope.py",                 # fig67 -- Route-CADX v1 (leg 304)
     "../experiments/p2_route_gaf_v1_sweep_evidence.py",         # fig71 -- Route-GAF v1 (leg 303), renumbered from fig68
     "../experiments/p2_route_dfre_v1_evidence.py",              # fig74 -- Route-DFRE v1 (leg 316), renumbered from fig71
+    "../experiments/p2_route_tms_v1_scoping.py",                # fig79 -- Route-TMS v1 (leg 315)
+    # fig69 (Route-P2T1 v1, leg 302) is deliberately NOT registered here. Its runner emits
+    # the figure only under --figure, and it exits nonzero because its gate answers NO --
+    # a correct leg outcome, but one that would fail this rebuild. It owes a
+    # p2_route_p2t1_v1_evidence.py that redraws from the curated JSON, like items 9, 10 and
+    # 13 of writeup/INDEX.md. Writing one is a claim-bearing choice about what to plot, so
+    # it belongs to a leg, not to integration.
 ]
 
 
@@ -324,12 +331,16 @@ def build_p2_evidence_figures():
     import subprocess
     import sys
     here = Path(__file__).resolve().parent
-    for rel in P2_EVIDENCE:
+    for entry in P2_EVIDENCE:
+        # An entry is either a path, or a (path, extra_args) pair for the few runners that
+        # emit their figure only when asked -- leg 302's --figure is the first such case.
+        rel, extra = (entry, []) if isinstance(entry, str) else entry
+        extra = [a.format(figures=here / "figures") for a in extra]
         script = here / rel
         if not script.exists():
             print(f"  SKIP {rel} (not present)")
             continue
-        subprocess.run([sys.executable, str(script)], check=True)
+        subprocess.run([sys.executable, str(script), *extra], check=True)
 
 
 if __name__ == "__main__":

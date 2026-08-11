@@ -4687,3 +4687,139 @@ way to lock. Filed to reports/ORCH_STATE.md.
 which restores an assumption rather than advancing one; not by leg 316's reproduction, which
 is someone else's proof checked against someone else's data; not by leg 302's diagnosis,
 which re-ranks apparatus that has not been built.
+
+## Cycle 5, 2026-08-11 — legs 321, 320, 315, 313
+
+Four legs close here. Two were written into writeup/INDEX.md last cycle but never reached
+this journal (321, 320) and are recorded now; two are new (315, 313). Two of the four are
+escalations parked on their own branches with no files on main.
+
+**321 (Route-BLCX) — gate YES, landed cc1c98d.** Record work, and the reason it is worth a
+paragraph is not the arithmetic. It corrected the two blog surfaces leg 280 had flagged but
+could not reach (L102 0.0420 -> 0.057643 at norm-R_X = 17.348; L108's 0.71465
+cross-reference restated as convention-FREE to 1.87e-16), appended CORRECTIONS.md section
+16, and changed nothing else. Every value was quoted from a landed leg rather than
+re-derived. It delivered its diff-check instead of asserting it: 9 insertions, 3 deletions,
+confined to the two flagged sentences, every other digit byte-identical. And it confirmed
+the two immutable gate-text sites (DIRECTION.md:13330, :13338) still read 6.855x and were
+not edited -- the rule leg 319 established held on first contact with a leg that had every
+incentive to "finish the job". It also took section 16 only after checking that 15 was last
+on main: the third leg in two cycles to verify its own section number rather than trust the
+brief it was handed.
+
+**320 (Route-MTSC) — gate YES on all four clauses = escalation.** Branch leg/320-mtsc-v1 at
+79fea23, pushed, never merged. It scoped the Malmquist-Takenaka / Christov rational Hardy
+basis that leg 301 had left as its single survivor from 14 candidates, and it measured on
+the real target's coupled operator rather than a bare differentiation matrix: l_min flat at
+0.4773, sigma_min stable 0.025-0.031 across an 8x truncation range, so leg 301's own kill
+condition (sigma_min -> 0) is not triggered; exact closed-form Hilbert diagonal with
+skew-Hermitian error exactly 0.0; and the nonlinearity -- leg 301's entirely unmeasured
+counterweight -- bounded for the first time at 0.34-1.37. Cost floored at 6-9 legs, ~40-65
+leg-hours.
+
+Two honesty items travel with that packet and are the reason it can be trusted at all. A
+first pass falsely showed sigma_min collapsing to 1e-17, and a Gram-matrix control caught it
+as a quadrature-under-resolution artifact -- unchecked, it would have killed the only
+surviving candidate space on an instrument defect. And the top test point at n=64 coincided
+with the projection window's cap; the leg reported it unresolved rather than selling it as a
+pass. The counterweight that survives untouched: no validated (interval/CAP) MT transform
+exists anywhere. arXiv:1904.10755 supplies classical, non-interval convergence theory for
+the matching structure, which lowers the cost estimate without discharging the gap.
+
+**The l1-Fourier / radii-polynomial ban is NOT lifted, and nothing is built.** Only the user
+rules on it. A surviving candidate space is not a result about the equations.
+
+**315 (Route-TMS) — gate YES, landed 3e6ea15.** Steer item 2. Asked to name a concrete
+object this repository's radii-polynomial / Newton-Kantorovich apparatus does not reach and
+that validated integration does, it named two. The headline is O1, the sonic-crossing
+r-tube: a rigorous enclosure of BCG's autonomous (W,Z) self-similar EULER ODE flow at
+gamma=7/5, through the sonic point, as a Taylor model in the similarity exponent --
+certifying profile-vs-F_dis domination beyond the dominance-window endpoint r = 1.1909830.
+Certified width 0.0243163 against available 0.1666667; shortfall (7+3sqrt5)/2 =
+6.8541019662496845446. That is leg 300's exact constant, and the leg found in passing that
+float64 had truncated it, which is how the digit was caught.
+
+Named mechanism (lesson 91): sonic-point-desingularized Taylor-model flow-map stepping with
+Lohner-QR / shrink-wrapping as the wrapping control -- not the quasi-homogeneous enclosure
+already in-repo. Cost class C (research), and the reason is the finding underneath the
+finding: Zgliczynski's ODE->PDE bridge (math/0005247) assumes DISSIPATIVITY, while BCG's
+rescaled system is quasilinear HYPERBOLIC, so the Galerkin-plus-tail bridge has no known
+form here. That single sentence is now a screening criterion for every NEW-term proposal.
+
+Two controls came out the other way and were asserted in code, not narrated (lesson 90). C1
+is the repo's own bordered certificate. C2 is arXiv:2305.08221, which does validated
+PARABOLIC time-integration by Newton-Kantorovich -- and thereby refutes this leg's own naive
+thesis that NK cannot do time. The leg reported that against itself and kept the gate answer
+anyway, on the narrower ground it could actually defend. O3 was recorded as reached by
+neither apparatus, so the YES is not over-read.
+
+The leg also named its own mis-carry risk, which belongs here verbatim in substance: Taylor
+models unlock ONE ODE RUNG, not the compressible route -- and the compressible route is not
+the system Clay asks about.
+
+**313 (Route-SDSS) — gate NO = escalation.** Branch leg/313-sdss-v1 at 434b49a, pushed,
+never merged. Steer item 3, which states in the user's own wording that the leg answers and
+reports and does not lift the ban; it did exactly that, and plan_of_record.py is
+byte-identical to origin/main.
+
+Leg 260's substantive obstruction -- "Entry B's defining adjective UNSEEDED is incompatible
+with its object's only function space" -- does not survive seeding. It holds in exactly one
+unnamed realization, a finite-box unweighted L2(dy) trawl, and all four of leg 260 section
+3.4's reasons dissolve, including the two it called the finding. (a) In weighted
+L2((1+|y|)^-s) the crossing sits at exactly s=1 (0.9 -> 1.072 diverges, 1.1 -> 0.933
+finite), and in the compactified variable the Type-I profile is exactly (1-X) with norm
+sqrt(1/3); the X^(1-iy) difficulty is carried, not evaded. (b) All three ban reasons are
+gCLM-only while the target is NS. (c) The cost floor was re-read live and ROSE, 27 -> ~33
+legs, where leg 260 predicted it would fall -- 53 legs of evidence later.
+
+Named mechanism (lesson 91): THE COMPACTIFICATION TRANSPOSITION. The compactification that
+makes the norm finite carries r^(-1+i*kappa) into (1-X)^(1-i*kappa) -- the identical form to
+clause (a)'s own difficulty, at the opposite end of the domain. The defect is an invariant
+of the entrance: it can be moved, not deleted. Priced at n ~ 791*kappa^0.954 (823 -> 14,149
+modes at kappa = 1 -> 20, against 10 for a smooth control), with a measured 1414.9x far-field
+resolution penalty and DOF 4.64e8, or 23,182x Phase 1's viscous rung.
+
+Two obstructions surfaced that are NOT leg 260's, and any ruling has to be made with both in
+view. The seed set for the screened object is EMPTY -- Hou arXiv:2405.10916 fails the screen
+three ways (axisymmetric; generalized NS at dim ~3.188; stationary, not time-periodic) --
+which is availability, not impossibility. And the only one of the three that is a theorem:
+Chae-Tsai's nonexistence for DSS solutions with time-periodic V under a decay hypothesis on
+Omega = curl V, concluding V == 0. That is this leg's exact object met in the rigidity
+direction. It is carried at summary level, with whether the hypothesis reaches the screened
+object recorded as unknown rather than guessed, and nothing in (a)/(b)/(c) leans on it.
+
+**MF3 -- the instrument defect this cycle turns on.** Leg 315's mandatory novelty pass
+controlled its instrument before trusting it and found the instrument broken: the arXiv
+search endpoint returns ZERO results for any two ANDed quoted phrases, while the same
+phrases return 84 and 20 results singly. Leg 315 discarded six all-zero queries rather than
+banking them, and passed a positive control (Cadiot 2505.03091) and a negative control
+before proceeding. Relayed mid-run to every live leg then running a novelty pass.
+
+It changed an answer. Leg 313 re-ran under the prescribed single-phrase shape across two
+spellings including the LaTeX double hyphen; the absence it was relying on survived, but the
+re-run is what surfaced Chae-Tsai -- the one adverse theorem in its packet. A zero from an
+ANDed quoted-phrase query is a broken instrument, not evidence of absence; and this is now
+the third defect of its kind on the record, after MF1 (a target-cell paper spells itself
+Navier--Stokes, so plain search strings silently miss it) and MF2 (leg 174 banked counts
+rather than links, so ten of its links are permanently unrecoverable).
+
+That makes four legs in two cycles saved by diagnosing an instrument before believing it:
+leg 302's IEEE-double cancellation, leg 320's false sigma_min = 1e-17, leg 315's six zeros,
+and leg 313's re-run. The rule earned its place: an implausible zero is a broken instrument
+until proven otherwise.
+
+**Figure hygiene.** fig79 (leg 315) was shipped without being registered; integration
+registered it centrally and confirmed the registered script rebuilds it byte-identical.
+fig76 is reserved to parked leg 313 rather than registered, since its files are not on main.
+fig69 (leg 302) is deliberately NOT registered in the shared rebuild list: its runner emits
+the figure only under --figure and exits nonzero because its gate answers NO -- a correct leg
+outcome that would fail the rebuild. It owes a *_evidence.py that redraws from its curated
+JSON, which is a claim-bearing choice about what to plot and therefore a leg's work, not
+integration's.
+
+**No link of the L1-L4 chain moved. Clay odds remain ~0.05%.** Not by leg 315, which named
+an object an apparatus that has not been built could reach, on a route that is compressible
+rather than the system Clay asks about; not by leg 313, which dissolved a reason for not
+looking somewhere and found the seed set for looking there empty; not by leg 320, which
+found a candidate space and no transform to validate it with; not by leg 321, which
+corrected digits. Dissolving an obstruction is not the same as making progress through it.
