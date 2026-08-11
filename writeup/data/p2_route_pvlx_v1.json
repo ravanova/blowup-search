@@ -1,0 +1,285 @@
+{
+  "leg": 330,
+  "route": "PVLX",
+  "title": "Does Pineau-Vicol's Liouville theorem (arXiv:2607.09619v2) reach the screened object?",
+  "date": "2026-08-11",
+  "branch": "leg/330-pvlx-v1",
+  "role": "LEG, literature-typed (math + external literature), difficulty standard",
+  "dispatched_by": "DM cycle-8c ruling d38de3f, slot D",
+  "territory": [
+    "writeup/data/p2_route_pvlx_v1.json",
+    "writeup/novelty/leg_330.md",
+    "experiments/journal/leg_330.md"
+  ],
+  "files_read_only_never_edited": [
+    "leg/313-sdss-v1 (leg 313's branch, incl. its packet file writeup/4_p2_lottery/TECHNICAL_P2_ROUTE_SDSS_V1.md)",
+    "leg 326's landed files on main (c541cdb)",
+    "plan_of_record.py (never edited, never proposed for edit)"
+  ],
+  "figures_assigned": 0,
+
+  "gate": {
+    "pre_committed_wording": "Does a full-text read yield a definite answer -- (i) the theorem's hypotheses DO reach the screened object (the theorem bears on the packet), or (ii) they do NOT (the lambda regime and/or the Type I clause excludes it; the packet's balance is unchanged) -- with the deciding clause quoted either way?",
+    "answer": "YES -- definite, branch (ii)",
+    "verdict": "PINEAU-VICOL DOES NOT REACH THE SCREENED OBJECT. The theorem is silent on NS3D-DSS-NONAXI-LAMBDA-LARGE.",
+    "deciding_clause_verbatim": "There exists \\underline{\\lambda} = \\underline{\\lambda}(C_{U,0}) > 1, such that if 1 < \\lambda < \\underline{\\lambda}, then U \\equiv 0.",
+    "deciding_clause_locator": "Liouvillev2.tex l.296-299, Theorem 'Main result for DSS solutions' (the alpha = 0 theorem)",
+    "deciding_clause_is_which_theorem": "the DSS theorem, NOT the RDSS theorem the dispatch pointed at -- see correction GAP-330-B",
+    "which_half_of_the_and_or_decides": "the lambda regime ALONE. The Type I clause does NOT exclude the object: the object SATISFIES it -- see correction GAP-330-C",
+    "immediate_flag_required": false,
+    "immediate_flag_condition": "the dispatch requires an immediate out-of-turn flag only on branch (i); the answer is (ii)",
+    "ambiguity_branch_not_taken": "The 'no' branch (genuinely ambiguous after a full read) does not apply. The hypothesis is a single displayed inequality on lambda and the object is specified by its negation; nothing in the comparison is ambiguous."
+  },
+
+  "sources": {
+    "primary": {
+      "arxiv": "2607.09619v2",
+      "title_confirmed_from_abstract_page": "On rotated backwards self-similar solutions of the incompressible 3D Navier-Stokes equations",
+      "authors": "Ben Pineau, Vlad Vicol",
+      "v2_submitted": "Thu, 6 Aug 2026 05:19:02 UTC (48 KB)",
+      "versions_on_abs_page": ["v1", "v2"],
+      "v3_exists": false,
+      "refereed": false,
+      "journal_ref": null,
+      "eprint_tarball_sha256": "8028df65146f445755c9fb32cd9663e4a4a8b2819f6f8ce6c212d5803c71737d",
+      "eprint_tarball_md5": "cc69d25d7184eab4494246056e90a61d",
+      "eprint_tarball_bytes": 49462,
+      "tex_file": "Liouvillev2.tex",
+      "tex_sha256": "898a1e1061a52a3edecae1013a3fa8f4a835cb2d21d482a32f3cf650e7599c0b",
+      "tex_md5": "60709a886c376134b3eba14294c09516",
+      "tex_lines": 2405,
+      "pdf_sha256": "379591aa3c1036c9140702ebe71aaab309fe207439a57db5ceff893f15d0ae8e",
+      "pdf_bytes": 617825,
+      "pdf_sha256_matches_leg_326_pin": true,
+      "read_mode": "full text, LaTeX source (not extracted PDF text), for leg 262's stated reason: theorem environments and equation labels unambiguous"
+    },
+    "prior_version_read_for_the_diff": {
+      "arxiv": "2607.09619v1",
+      "eprint_tarball_md5": "05dfc6a9d461d5b42f0e637ced866c66",
+      "eprint_tarball_sha256": "bd0b13cbbe25294a8643226ef6d510e901bc0bf4f4ae5a40515ec1722ac17e9f",
+      "tex_file": "Liouville_Ben_Vlad_14.tex",
+      "tex_md5": "62c6bdae8e08cfd3ef4cdf17263ffcca",
+      "tex_lines": 1869,
+      "both_md5s_match_leg_262_pins": true,
+      "note": "The two md5s that appear across main for 'leg 262's v1 read' are the TARBALL (05dfc6a9) and the .tex FILE (62c6bdae). They are two different objects, not a transcription error; both reproduced independently here."
+    },
+    "pins_reverified_by_independent_download": 3,
+    "pins_reverified_that_matched": 3
+  },
+
+  "v1_to_v2_diff": {
+    "unified_diff_added_lines": 587,
+    "unified_diff_removed_lines": 51,
+    "sections_v1": 8,
+    "sections_v2": 9,
+    "DSS_theorem_byte_identical": true,
+    "RDSS_theorem_byte_identical": true,
+    "comparison_method": "string equality of the theorem blocks (v1 l.294-299 vs v2 l.296-301; v1 l.347-352 vs v2 l.349-354), computed, not eyeballed",
+    "alpha_underline_formula_unchanged": true,
+    "alpha_underline_formula_locator_v2": "l.676",
+    "new_in_v2": [
+      "Theorem 'Approximately self-similar Type I solutions are regular' (l.379-400), label thm:local:theorem -- 0 occurrences in v1, 8 in v2",
+      "Section 9 proving it",
+      "Remark 'Navier-Stokes solitons and breathers' (l.356-372), crediting V. Sverak"
+    ],
+    "consequence": "The two clauses this leg adjudicates were NOT revised between the version leg 262 read and the version leg 326 flagged."
+  },
+
+  "theorems_in_v2": [
+    {"tag": "T1", "name": "Main result for RSS solutions", "locator": "l.229-232", "class": "rotated SS, time-independent profile", "free_parameter_hypothesis": "either |alpha| < alpha_underline or |alpha| > alpha_overline, with 0 < alpha_underline << 1 and 1 << alpha_overline < infinity"},
+    {"tag": "T2", "name": "Main result for DSS solutions", "locator": "l.296-299", "class": "backward globally DSS, alpha = 0", "free_parameter_hypothesis": "1 < lambda < lambda_underline(C_{U,0})", "bears_on_screened_object": true},
+    {"tag": "T3", "name": "Main result for RDSS solutions", "locator": "l.349-352", "class": "rotated DSS", "free_parameter_hypothesis": "(|alpha| <= alpha_underline AND 1 < lambda < lambda_underline) OR (|alpha| >= alpha_overline AND 1 < lambda < lambda_underline^{1/(1+alpha^2)})"},
+    {"tag": "T4", "name": "Approximately self-similar Type I solutions are regular", "locator": "l.379-400", "class": "no self-similarity assumed; local", "free_parameter_hypothesis": "Type I in B_1, pressure bounded on the annulus {1/2<|x|<3/4}, and ||d_s U(.,sbar)||_{Linf(B_{e^{sbar/2}})} <= delta_0 at ONE time sbar >= s_0", "new_in_v2": true}
+  ],
+
+  "no_clause_anywhere_reaches_large_lambda": {
+    "statement": "Every lambda-window in the paper is a subset of (1, lambda_underline). T3's windows are strict subsets of T2's: lambda_underline^{1/(1+alpha^2)} < lambda_underline for every alpha != 0, and -> 1 as |alpha| -> infinity.",
+    "section_titles_say_so": [
+      "l.1378: 'DSS and RDSS: proof of the main result for alpha small and lambda close to 1'",
+      "l.1602: 'DSS and RDSS: proof of the main result for alpha large and lambda close to 1'"
+    ]
+  },
+
+  "magnitudes_of_near_1": [
+    {"id": "M1", "what": "the authors' own WLOG ceiling on lambda_underline", "quote": "Without loss of generality, we let \\underline{\\alpha} \\leq 1 and \\underline{\\lambda} \\leq e^{\\frac 12}, so that |\\alpha| \\leq 1 and S \\leq 1.", "locator": "l.1382", "value_lambda_ceiling": 1.6487212707001282, "value_S_ceiling": 1.0},
+    {"id": "M2", "what": "the smallness the proof actually needs", "quote": "(1+\\alpha^2) S < 2 \\log \\underline{\\lambda} \\ll 1", "locator": "l.1607-1611 (eq:moral:of:the:story)"},
+    {"id": "M3", "what": "how lambda_underline is finally chosen", "quote": "choose \\underline{\\lambda}=\\underline{\\lambda}(C_{U,0}) sufficiently close to 1", "locator": "l.1715"}
+  ],
+
+  "screened_object": {
+    "label": "NS3D-DSS-NONAXI-LAMBDA-LARGE",
+    "owner": "leg 251's first CONDITIONAL-tier candidate; specification carried by legs 253, 260, 313",
+    "source_quote_leg_313": "The object under seeding is leg 251's NS3D-DSS-NONAXI-LAMBDA-LARGE: 3D incompressible NS, non-axisymmetric backward DSS, lambda significantly larger than 1, profile outside L^inf_t L^3 -- as a search target, a periodic orbit of the dynamically rescaled flow with period T = 2 log lambda.",
+    "source_locator": "leg/313-sdss-v1, writeup/4_p2_lottery/TECHNICAL_P2_ROUTE_SDSS_V1.md at 434b49a, l.170-176",
+    "decay_clause_quote": "The object is the Type-I profile |U(y)| <= C/(1+|y|) on R^3 (Chae-Wolf arXiv:1610.09464 Thm 1.1, carried from leg 253 via leg 260 -- not re-derived here).",
+    "decay_clause_locator": "same file, l.67",
+    "lambda_is_an_output_quote": "with lambda an output of the search, not an input. ... leg 253 measured that lambda_*, lambda-bar and alpha-bar are all non-explicit, each depending on an unpublished Type-I constant. A candidate cannot buy safety by picking a number; there is no number to clear. It can only clear the structural conditions -- non-axisymmetric, outside L^inf_t L^3, lambda not near 1 -- which is exactly what this candidate is defined to do.",
+    "lambda_is_an_output_locator": "experiments/journal/leg_260.md l.126-137",
+    "verified_independently_against_primary_sources": true,
+    "leg_326_extraction_used_as": "cross-check only, not inherited"
+  },
+
+  "clause_by_clause": [
+    {"id": "H1", "hypothesis_quote": "a solution of the 3D incompressible Navier-Stokes equations on R^3 x [-1,0)", "locator": "l.296", "object": "3D incompressible NS on R^3", "verdict": "MET", "note": "Unlike Chae-Tsai (leg 326's Euler-only finding) the equation matches exactly."},
+    {"id": "H2", "hypothesis_quote": "satisfies the Type I upper bound (1.7) |u(x,t)| <= C_{U,0}/(|x|+sqrt(-t))", "locator": "l.213-216", "object": "|U(y)| <= C/(1+|y|) on R^3", "verdict": "MET -- the Type I clause does NOT exclude the object", "supporting_quote": "it is immediate to show the global bound (1.6) is equivalent (within this class of rotated backwards self-similar solutions) to the borderline Type I blowup rate ... The constants in (1.6) and (1.7) are the same.", "supporting_locator": "Remark 1.2, l.211-217"},
+    {"id": "H3", "hypothesis_quote": "there exists lambda > 1 ... such that u is a backwards globally discretely self-similar solution ... (the DSS ansatz holds), with period S := 2 log(lambda) > 0", "locator": "l.264-266, 296-298", "object": "a periodic orbit of the dynamically rescaled flow with period T = 2 log lambda", "verdict": "MET -- the two definitions coincide symbol for symbol"},
+    {"id": "H4", "hypothesis_quote": "U in C^2(R^3 x [0,S])", "locator": "l.297", "object": "hypothetical smooth blow-up profile", "verdict": "MET by construction; not the deciding clause"},
+    {"id": "H5", "hypothesis_quote": "if 1 < lambda < \\underline{\\lambda}", "locator": "l.298, with l.1382 and l.1715", "object": "lambda significantly larger than 1; 'lambda not near 1' is one of the three defining structural conditions", "verdict": "FAILS -- THIS IS THE DECIDING CLAUSE"},
+    {"id": "H6", "hypothesis_quote": "(none -- T2 assumes no symmetry)", "locator": "l.296-299", "object": "non-axisymmetric", "verdict": "IRRELEVANT -- the hypothesis fails at H5 before symmetry is reached; recorded to close the ledger"}
+  ],
+  "clause_tally": {"checked": 6, "met": 4, "silent": 1, "failed": 1},
+
+  "second_independent_ground": {
+    "title": "T2 is the theorem the object was ALREADY screened against",
+    "quote_1": "Not much seems to be known about the existence of solutions to (1.13), other than the following Liouville-type theorem of Chae and Wolf [ChaeWolf17], which concerns the case of discrete self-similarity factors lambda such that 0 < lambda - 1 << 1.",
+    "locator_1": "l.293",
+    "quote_2": "In fact, a slight modification of the proof of Theorem 1.4 immediately recovers the main result in [ChaeWolf17], which we re-state here for convenience.",
+    "locator_2": "l.295",
+    "consequence": "Leg 253's lambda_*, carried into leg 260's specification as one of the three structural conditions, IS Chae-Wolf's lambda_*. The packet cannot gain an obstruction from T2, because T2 is already inside the screen that defined the object."
+  },
+
+  "third_independent_ground": {
+    "title": "PV place the screened object's class exactly where they say the difficulty is",
+    "quote": "Assumption (1.6) only implies that the profile U belongs to the weak-L^3 class L^{3,infty}(R^3). Had we assumed that the profile decays a little bit faster, to ensure that U in L^3(R^3), then we would have u in L^infty([-1,0);L^3(R^3)), and by the theory of Escauriaza, Seregin, and Sverak this would imply regularity (and hence the triviality of U). ... The genuine difficulty therefore lies in the borderline decay rate (1.6).",
+    "locator": "l.225",
+    "consequence": "The object's clause (delta) -- profile outside L^inf_t L^3 -- is the same distinction PV build the paper on. PV's paper is evidence that the object's class is the hard, OPEN one; it is not evidence that the class is empty."
+  },
+
+  "corrections": [
+    {
+      "id": "GAP-330-A",
+      "title": "The paper's title as carried in the dispatch and DIRECTION.md is not its title",
+      "what_was_written": "a Liouville theorem for backward self-similar and discretely self-similar solutions of 3D Navier-Stokes under a Type I bound ('or similarly titled -- confirm the exact title')",
+      "the_actual_title": "On rotated backwards self-similar solutions of the incompressible 3D Navier-Stokes equations",
+      "status": "an accurate description of the contents, a wrong string for the title; leg 326's landed novelty log had it right (writeup/novelty/leg_326.md:140)",
+      "caught_by": "the dispatch's own instruction to confirm the title from the abstract page"
+    },
+    {
+      "id": "GAP-330-B",
+      "title": "The dispatch points at the RDSS clause; the clause that decides is the DSS one",
+      "what_was_written": "whose RDSS clause requires the scaling factor lambda sufficiently close to 1 while the screened object is specified with lambda significantly larger than 1",
+      "why_it_needed_correcting": "The screened object is NS3D-DSS-NONAXI-LAMBDA-LARGE, a DSS object with alpha = 0. The theorem whose hypotheses must be checked is T2 (DSS), not T3 (RDSS). Leg 251's SECOND, explicitly not-recommended candidate NS3D-RDSS is the one T3 addresses.",
+      "does_the_conclusion_change": false,
+      "why_not": "T2 carries the same lambda-near-1 clause and T3's lambda-windows are strict subsets of T2's",
+      "why_it_still_matters": "a packet that quotes T3 quotes a theorem about a different object than the one it is screening; this leg quotes both"
+    },
+    {
+      "id": "GAP-330-C",
+      "title": "'the Type I clause excludes it' is FALSE",
+      "what_was_written": "gate branch (ii): 'the lambda regime and/or the Type I clause excludes it'",
+      "measured": "the screened object SATISFIES PV's Type I bound (clause H2), on PV's own equivalence at l.211-217 with 'the constants ... are the same'",
+      "corrected_reading": "the exclusion is carried by the lambda clause ALONE; the and/or must resolve to 'lambda only'"
+    }
+  ],
+
+  "v2_local_theorem_T4": {
+    "adjudicated_separately_because": "it is the one part of v2 no prior leg has read (0 occurrences of its label in v1), and it is not a self-similarity theorem, so the lambda argument does not automatically dispose of it",
+    "hypotheses_verbatim": [
+      "|u(x,t)| <= C_u/(sqrt(-t)+|x|), (x,t) in B_1 x [-1,0)",
+      "|p(x,t)| <= C_p, (x,t) in A x [-1,0), A := {1/2 < |x| < 3/4}",
+      "There exist delta_0 = delta_0(C_u) in (0,1] and s_0 = s_0(C_u,C_p) >= 1 such that if, at a single time tbar in (-e^{-s_0},0) we have the bound ... <= delta_0, then (0,0) is a regular point."
+    ],
+    "self_similar_restatement_quote": "||d_s U(.,sbar)||_{L^infty(B_{e^{sbar/2}})} <= delta_0, for some sbar >= s_0. In the proof of Theorem 1.9 we work with the restatement (1.24) of assumption (1.23).",
+    "locator": "l.379-400, l.412-419",
+    "verdict": "DOES NOT REACH the screened object either -- hypothesis (iii) is not implied by the object's specification; a DSS profile is a genuinely time-periodic orbit and nothing makes d_s U small at any phase",
+    "derived_screen": {
+      "labelled": "THIS LEG'S OWN INFERENCE from PV's statement, not a statement PV make",
+      "statement": "If U is a nontrivial profile of the screened object then (0,0) is singular, U is S-periodic in s with S = 2 log lambda, and B_{e^{sbar/2}} increases to R^3; applying T4's contrapositive at sbar = sigma + kS for all k in N gives ||d_s U(.,sigma)||_{L^infty(R^3)} >= delta_0(C_{U,0}) for EVERY phase sigma in [0,S].",
+      "plain_reading": "the object must be uniformly non-self-similar at every point of its orbit, not merely on average",
+      "condition_1": "The pressure hypothesis is NOT verified for a globally DSS solution from the paper's own decay estimates: PV's bound is |grad^k P| <= C_{P,k}/(1+|y|)^{2-sigma+k} with 'C_{P,k} depends on C_{U,0}, k, and sigma > 0' (l.1414-1420), i.e. an arbitrarily small but STRICTLY POSITIVE loss. For a DSS solution p(x,t) = (-t)^{-1}P(y,s) this gives |p| <~ C_{P,0}(-t)^{-sigma/2}|x|^{sigma-2} on the annulus, which DIVERGES as t -> 0^- for every sigma > 0. The screen is CONDITIONAL on closing that sigma-loss.",
+      "condition_2": "delta_0 = delta_0(C_u) is non-explicit, so the screen cannot be evaluated numerically as it stands -- the same wall leg 260 recorded: 'there is no number to clear'",
+      "why_recorded_anyway": "it is a falsifiable structural check a future numerical candidate can carry: a constructed DSS profile with a nearly-stationary phase is, conditionally on condition_1, trivial",
+      "new_to_this_repository": true
+    }
+  },
+
+  "the_one_corner_where_PV_touches_the_class": {
+    "why_recorded": "an adjudication that only ever reports 'no' and never looks for the 'yes' is not an adjudication",
+    "changes_the_gate_answer": false,
+    "mechanism_quote": "rotated self-similar (RSS) solutions ... are automatically discretely self-similar (lambda-DSS) for any factor lambda > 1 such that 2 alpha log(lambda) in 2 pi Z. ... the discrete similarity factor lambda and the rotation strength alpha are related via lambda = e^{pi/|alpha|}. Importantly, we note that the regime |alpha| << 1 corresponds to lambda >> 1, while the regime |alpha| -> infinity corresponds to lambda -> 1^+.",
+    "mechanism_locator": "Remark 1.5, l.272-279",
+    "threshold_lambda_for_the_RSS_sublocus": "lambda >= e^{pi/alpha_underline} = e^{50507.9} = 10^{21935.3}",
+    "threshold_inputs": "alpha_underline <= 6.22e-5 at C_{U,0} = C_{U,1} = 1, leg 262's most-favourable evaluation of the formula at l.676 (formula verified unchanged from v1 by this leg)",
+    "T2_ceiling_on_the_same_axis": 1.6487212707001282,
+    "lambda_of_an_RSS_profile_at_the_open_case_alpha_1": 23.140692632779267,
+    "lambda_scale_implied_by_T1_large_alpha_clause": "lambda - 1 ~ 10^{-5149999.5}, from log10(alpha_overline) = 5.15e6 (leg 262's chain)",
+    "four_things_this_corner_is_not": [
+      "RSS is a STRICT sub-locus of DSS (l.331-334): an RSS solution's orbit is a rigid rotation of a fixed profile; the screened object is a general DSS periodic orbit",
+      "it is 10^{21935}-remote; any numerically constructed candidate carries lambda = O(1)",
+      "the threshold is not purchasable -- alpha_underline inherits leg 262's gap G4, the unperformed quantitative Serrin interior regularity (l.1406), so 10^{21935.3} is indicative under most-favourable constants, NOT a certified threshold",
+      "it bears on leg 251's SECOND candidate NS3D-RDSS, which leg 251 already specified as outside PV's two windows"
+    ]
+  },
+
+  "packet_append": {
+    "delivery_mode": "quoted clause ledger, leg 326's identical pattern -- leg 313's packet file (writeup/4_p2_lottery/TECHNICAL_P2_ROUTE_SDSS_V1.md on leg/313-sdss-v1) is OUTSIDE this leg's territory and its branch is read-only; nothing on it is touched",
+    "addressee": "whoever owns that file (orchestrator / DM), for carrying in",
+    "text": "PINEAU-VICOL (arXiv:2607.09619v2, 6 Aug 2026) -- ADJUDICATED, DOES NOT REACH THE SCREENED OBJECT. The theorem that bears is 'Main result for DSS solutions' (the alpha = 0 clause, not the RDSS clause). Its deciding hypothesis, verbatim: 'There exists \\underline{\\lambda} = \\underline{\\lambda}(C_{U,0}) > 1, such that if 1 < \\lambda < \\underline{\\lambda}, then U \\equiv 0.' The paper's own WLOG bounds that window by \\underline{\\lambda} <= e^{1/2} = 1.6487... ('Without loss of generality, we let ... \\underline{\\lambda} \\leq e^{\\frac 12}, so that ... S \\leq 1'), needs '(1+\\alpha^2)S < 2 \\log \\underline{\\lambda} \\ll 1', and finally chooses \\underline{\\lambda} 'sufficiently close to 1'. The screened object NS3D-DSS-NONAXI-LAMBDA-LARGE is specified with lambda significantly larger than 1. The theorem is silent on it. Type I does not exclude the object -- the object SATISFIES PV's Type I bound, with, in PV's words, 'the constants ... are the same'; the lambda clause alone decides. Moreover PV state that this DSS theorem is a restatement of Chae-Wolf -- the theorem the object was already screened against -- so the packet neither gains nor loses an obstruction here. The packet's balance is unchanged by this item.",
+    "effect_on_the_packet": {
+      "after_leg_326": "the packet's only theorem (Chae-Tsai) was measured silent",
+      "after_this_leg": "the one remaining candidate theorem is measured silent as well",
+      "what_remains": ["leg 260's dissolved argument", "the empty seed set that leg 313 itself called 'an availability fact, not an impossibility'"],
+      "stated_as": "a fact about the packet, NOT an argument about any ban",
+      "this_leg_lifts_nothing": true,
+      "ban_files_touched": 0,
+      "plan_of_record_touched": false,
+      "ruling_is_the_users": true
+    }
+  },
+
+  "instrument_control": {
+    "endpoint": "https://export.arxiv.org/api/query (the export API)",
+    "environment_fact_banked": "The export API is ALIVE over https on 2026-08-11 in this session -- HTTP 200 with enumerated identifiers. Leg 326 recorded it as a refusal to measure the same day (6/6 failures on its positive control). Both records stand: the endpoint is intermittent, not dead.",
+    "positive_control": {"query": "all:electron", "attempts": ["429 (first battery)", "503", "429", "200"], "final_total": 184814, "verdict": "PASSES on retry at 25s spacing; the two failures are REFUSALS TO MEASURE, not zeros"},
+    "negative_control": {"query": "abs:\"quixotic hyperbolic zebrafish tensor\"", "http": 200, "total": 0, "verdict": "PASSES -- the instrument can report zero"},
+    "second_positive_control_id_list_endpoint": {"attempts": ["503", "503", "200"], "requested": 23, "returned": 23, "verdict": "PASSES on retry at 25s spacing; same intermittency pattern as the search endpoint"},
+    "Q1_titles_banked": "all 23 titles and dates enumerated in writeup/novelty/leg_330.md section 2.1",
+    "Q1_structural_reading": "20 of 23 are FORWARD-DSS or weak-solution-existence papers -- a different literature sharing a phrase, not near-misses. 1610.09464 (Chae-Wolf) is already the source of the object's Type-I clause. 1610.05680 'Rotationally corrected scaling invariant solutions' is the RSS-class precursor, banked but not adjudicated (flagged for whoever next works the RSS sub-locus corner). Exactly one backward-DSS rigidity paper appears: 2607.09619.",
+    "date_field_caveat": "the API's <published> for 2607.09619 is 2026-07-10, the v1 date; v2 is dated 2026-08-06 on the abstract page. Recorded so a later leg does not read 2026-07-10 as evidence it holds the flagged version.",
+    "measurements": [
+      {"id": "Q1", "query": "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"", "total": 23, "ids": ["1801.08060v1","1610.01386v1","1906.11038v1","1306.0305v5","1210.2783v2","1610.09464v2","1910.11267v2","1812.10509v1","1510.07504v1","1902.10771v3","1610.05680v1","1703.03480v1","1910.06929v1","1105.0414v1","2202.08352v1","1907.00256v1","2006.13145v2","2011.02800v1","2003.06717v3","2407.06179v1","2607.09619v2","2012.15848v1","2409.13586v1"]},
+      {"id": "Q2", "query": "abs:\"discretely self-similar\" AND abs:\"Liouville\"", "total": 3, "ids": ["2512.16623v1", "0912.0813v1", "2607.09619v2"]},
+      {"id": "Q3", "role": "MF1 spelling variant, unhyphenated", "query": "abs:\"discretely self similar\" AND abs:\"Navier-Stokes\"", "total": 23, "identical_id_set_to_Q1": true},
+      {"id": "Q4", "query": "abs:\"rotated discretely self-similar\"", "total": 1, "ids": ["2607.09619v2"]}
+    ],
+    "Q2_non_PV_hits_adjudicated": [
+      {"id": "2512.16623", "title": "Existence and stability of discretely self-similar blowup for a wave maps type equation", "authors": "Glogic, Hilditch, Wallauch", "date": "2025-12-18", "verdict": "FALSE POSITIVE on the word -- a wave-maps paper; 'Liouville' appears only as 'Liouville-Green transformations'. Not NS, not Euler, not adverse."},
+      {"id": "0912.0813", "title": "On spectrum of Jacobi operator with exponentially increasing matrix elements", "authors": "I.A. Sheipak", "date": "2009-12-04", "verdict": "FALSE POSITIVE on the words -- functional analysis / spectral theory; 'Sturm-Liouville operator with discrete self-similar weight'. Not a fluid paper."}
+    ],
+    "banked_absence": "Within the export API's abs-field index on 2026-08-11, the ONLY fluid-dynamics paper matching 'discretely self-similar' AND 'Liouville' is arXiv:2607.09619 -- the other two hits are word-level false positives, adjudicated individually above. 'rotated discretely self-similar' returns exactly one record, the same paper: no other work even uses the RDSS term.",
+    "cross_instrument_significance": "This independently reproduces leg 326's conclusion on a DIFFERENT endpoint (leg 326 measured it on the arXiv WEB search after its export-API battery refused to measure). Two endpoints, two query shapes, same answer: the indexed backward-DSS-NS rigidity literature is one paper, and this repository has it.",
+    "MF1_spelling_variants_run": ["\"discretely self-similar\"", "\"discretely self similar\"", "\"Navier-Stokes\" hyphenated"],
+    "MF1_result": "Q1 and Q3 return the IDENTICAL 23-identifier set -- on this endpoint the hyphen in 'self-similar' does not partition the index",
+    "MF2_links_not_counts": true,
+    "load_bearing": false,
+    "load_bearing_note": "the gate was decided entirely by the primary source's own text; no claim in this leg leans on any absence"
+  },
+
+  "magnitudes": {
+    "primary_source_lines_read_v2": 2405,
+    "second_source_lines_read_v1": 1869,
+    "pins_reverified": "3 of 3, all matched",
+    "theorems_in_v2": 4,
+    "theorems_in_v1": 3,
+    "adjudicated_theorem_statements_changed_v1_to_v2": 0,
+    "hypothesis_clauses_checked": 6,
+    "clauses_met": 4,
+    "clauses_silent": 1,
+    "clauses_failed": 1,
+    "T2_lambda_window_hard_ceiling": [1.0, 1.6487212707001282],
+    "screened_object_lambda": "significantly larger than 1; an OUTPUT of the search; no number to clear",
+    "RSS_sublocus_corner_threshold_log10_lambda": 21935.311155013525,
+    "figures_assigned": 0,
+    "bans_touched_lifted_or_argued": 0,
+    "L1_L4_links_moved": 0,
+    "clay_odds": "~0.05%, unchanged"
+  },
+
+  "what_this_leg_is_not": [
+    "It is a literature adjudication: it read a preprint's hypotheses and compared them to a specification. It constructed nothing and certified nothing.",
+    "The preprint is UNREFEREED -- leg 262 recorded that as a fact and not a formality, and it stays true of v2: two versions, no journal reference on the abstract page.",
+    "Every 'does not reach' is a statement about this theorem's hypotheses, not a claim that the screened object exists.",
+    "Every 'is met' is a statement about a HYPOTHETICAL object's specification, not about an object anyone has built.",
+    "Leg 262's full constant chain was NOT re-derived; the corner magnitudes are leg 262's numbers used as indicative scale, after checking the defining formula at l.676 survives v2 unchanged."
+  ]
+}
