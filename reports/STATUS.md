@@ -1,10 +1,14 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-12 — same orchestrator session, cycle 9f (user's
-ceiling-raising programme ANSWERED: S1 DIES, ceiling stays Tier 2).
-`origin/main` at `d0248c6`, merge gate green. Full detail in `PROGRESS.md`
-(git-ignored, more current), `reports/ORCH_STATE.md` (full handoff detail and
-institutional memory), and `experiments/JOURNAL.md` (the durable ledger).*
+*Refreshed 2026-08-12 — same orchestrator session, cycle 10b (DM
+formalized the S1-DIES/Tier-2 decision packet in cycle 10, then executed the
+user's post-S1 reframing in cycle 10b: leg 348 POCP drafted at reserve rank
+1 — does periodic-orbit CAP for dissipative PDEs reach route 4's object,
+scoping only, "the build is the next ruling"; leg 349 GAFV drafted gated on
+348). `origin/main` at `7fcb66b`, merge gate green. Full detail in
+`PROGRESS.md` (git-ignored, more current), `reports/ORCH_STATE.md` (full
+handoff detail and institutional memory), and `experiments/JOURNAL.md` (the
+durable ledger).*
 
 ## ⚠ NEEDS YOU
 
@@ -326,19 +330,86 @@ verdict unmoved by either. Two downstream repeat-sites flagged
 (`experiments/JOURNAL.md:5018`, `writeup/INDEX.md:124`), not edited
 (out of leg 336's territory).
 
-**Currently running (three of four slots vacant, awaiting DM refill):**
+**Cycle 10 (`ec462ee`) absorbed 341/344/336 at full strength and ruled ONE
+consolidated user decision packet** (ceiling answer + 342/344's ≈35-leg seed
+option on the corrected literature base + route-4-continues-Tier-2 under
+standing authority), with leg 347 (DSSC)'s object-level screen of
+arXiv:2509.14185 named as the packet's final scheduled input. Refills fired:
+C←343 (DSSP-B1, critical-path precondition), B←347 (DSSC), D←337 (C318).
+
+**Leg 347 (DSSC) landed gate YES, `fb6bd4d`** — screened all 12 objects
+arXiv:2509.14185 reports (3 CCF, 4 IPM, 5 Boussinesq) against leg 313's
+three-way screen object by object: 0/12 pass, 11/12 fail with named clauses
+(wrong-equation + stationary-not-time-periodic; Boussinesq additionally
+axisymmetric by the authors' own stated 3D-Euler correspondence), 1
+(unresolved 4th Boussinesq candidate) flagged incomplete/no-verdict since the
+paper's own authors don't certify it. Zero objects are cheap-entrance-shaped
+— no Kwon-Tsai-style adverse find. The 35-leg creation-path cost estimate is
+unmoved (0 legs; capabilities.py reconfirmed at 49 modules); the risk record
+sharpens with object-level evidence of a convergence-degrades-with-
+instability-order gradient (precision O(1e-13)→O(1e-7)→unresolved),
+including one demonstrated non-convergence case inside the module a DSS
+retarget would inherit from. Audited clean (territory-confined, 507
+insertions/0 deletions across only its 3 declared files, independent
+merge-gate PASS).
+
+**The user's own message, "AFTER S1's DEATH: the certification route,
+reframed" (2026-08-11), arrived addressed to the DM** and reframes route 4's
+object as "not a profile in a space" but "a periodic orbit of a dissipative
+PDE" (leg 260's framing), naming mature never-touched-by-this-repo
+certification technology (Zgliczyński self-consistent a-priori bounds,
+Kuramoto-Sivashinsky/Arioli-Koch lines, Taylor-model flow-map enclosure) and
+asking whether it reaches route 4's actual object where four
+profile-in-a-space certifications already died. Relayed to the DM in full;
+DM cycle 10b verified §0's factual claims first (leg 315's blocker confirmed
+verbatim BCG-specific/hyperbolic-only; arXiv:2305.08221 confirmed already in
+the ledger; zero in-repo prior art on Zgliczyński/Kuramoto/Arioli confirmed
+by grep) before drafting leg 348 (POCP) and leg 349 (GAFV, gated on 348). The
+user's guard — "the build is the next ruling, not this leg's to start" — is
+written directly into leg 348's gate text. No ban touched; no GA compute on
+either branch.
+
+**Leg 337 (C318) landed gate YES, `ce0e485`** — re-measured leg 318's
+float64 mechanism directly on the live scoping functions at the worst grid
+point (γ=1.075) and across all 45 grid points: `alpha_of` carries zero
+rounding error (exact by Sterbenz's lemma), `r_crit` carries ≈0.88 ulp, and
+that sub-ulp error is amplified by δ_dis's own sensitivity (`1/alpha ≈
+26.667`), reproducing the observed residual (`-5.424e-15` reconstructed vs.
+`-5.329e-15` observed). Corrected mechanism statement: 1 ulp of pre-existing
+rounding error amplified by `1/alpha` — NOT catastrophic cancellation
+between two ~1-sized operands; "leg 302's failure mode" label retracted as
+inapplicable. The tautological control (`not shallow_water_supercritical or
+True`) was rewritten falsifiable (`shallow_water_supercritical`) and re-run:
+PASSES for a real reason now. `writeup/data/p2_route_decr_v1.json`
+regenerates byte-identical (confirmed untouched). Audited clean (territory-
+confined across 6 declared files, 448 insertions/17 deletions, independent
+merge-gate PASS).
+
+**DM cycle 10c (`7fcb66b`) absorbed leg 347's YES without amendment and
+declared THE CYCLE-10 USER DECISION PACKET COMPLETE AND RELEASED** — 347 was
+its final scheduled input. The packet ships as ruled at cycle 10: the
+ceiling answer (S1-DIES, Tier-2 stands, stage-V ban unmoved), the ≈35-leg
+seed option on 344's corrected literature base with 347's risk record
+attached (convergence degrades with instability order; one demonstrated
+non-convergence; none of 2509.14185's 12 existing objects shortcut the seed
+problem), and route 4 continuing Tier-2 under standing authority. The DM
+drew an explicit boundary: leg 348's future answer (the certification-route
+reframing) is a NEW decision item, not a late edit to this packet. Slot B
+refilled: 348 (POCP) — reserve rank 1, dispatched.
+
+**Currently running:**
 
 | Slot | Leg | Route | Status |
 |---|---|---|---|
-| A | 335 | S1GR — resolves the 221 flag/repair gap | cycle 9e, running |
-| B | — | vacant (344 PKLR landed `3ec2516`) | — |
-| C | — | vacant (341 ALGW landed `782a310`) | — |
-| D | — | vacant (336 C305 landed `d0248c6`) | — |
+| A | 335 | S1GR — resolves the 221 flag/repair gap | still running, mid-diagnosis (waiting on a background diagnostic script) |
+| B | 348 | POCP — does periodic-orbit CAP for dissipative PDEs reach route 4's object (user's §1 reframing) | dispatched, running (isolated worktree) |
+| C | 343 | DSSP-B1 — critical path, plan brick B1 | running (isolated worktree) |
+| D | — | vacant (337 C318 landed `ce0e485`, reported to DM, awaiting refill) | — |
 
-Reserve and next fresh leg number as of the DM's cycle 9f ruling: 19
-undispatched, 12 dispatchable, next fresh number **345**. No ban lifted this
+Reserve and next fresh leg number as of the DM's cycle 10c ruling: 20
+undispatched, 12 dispatchable, next fresh number **350**. No ban lifted this
 window; no L1→L4 link moved. Awaiting the DM's next refill ruling for
-slots B/C/D.
+slot D.
 
 ## Context — the ten-to-four downsize and the spend-limit kill
 
