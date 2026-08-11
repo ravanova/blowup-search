@@ -749,31 +749,55 @@ def make_figure(checks: dict, out: dict) -> None:
     # -- left: the (gamma, r) plane.  The knife-edge IS the window's own lower edge. -----
     g = np.linspace(1.05, 2.15, 400)
     rc = 2 * g / (g + 1)
-    ax1.plot(g, rc, lw=2.4, color="#c0392b", zorder=5,
-             label=r"$r_{\rm crit}=\frac{2\gamma}{\gamma+1}$  ($\delta_{\rm dis}=0$)"
-                   "\nENCLOSURE-eligible: exactly this line")
-    for gg, key, col in ((7 / 5, "7_5", "#2c3e50"), (5 / 3, "5_3", "#2c3e50")):
+    ax1.fill_between(g, rc, 1.45, color="#2c3e50", alpha=0.08, lw=0)
+    ax1.fill_between(g, 1.02, rc, color="#95a5a6", alpha=0.12, lw=0)
+    ax1.plot(g, rc, lw=2.6, color="#c0392b", zorder=5,
+             label=r"$r_{\rm crit}=2\gamma/(\gamma+1)$   ($\delta_{\rm dis}=0$)")
+    ax1.text(1.62, 1.395, "DOMINATED  ($\\delta_{\\rm dis}>0$)\n"
+             "no $\\nu$-dependent profile exists;\n"
+             "viscosity can only be an error term",
+             fontsize=8.5, color="#2c3e50", va="top")
+    ax1.text(1.10, 1.088, "$\\delta_{\\rm dis}<0$: dissipation outscales the\n"
+             "nonlinearity, the ansatz fails",
+             fontsize=8.5, color="#5d6d7e", va="top")
+    ax1.annotate("ENCLOSURE-eligible set = this line ONLY\n(measure zero in $r$)",
+                 xy=(1.98, 2 * 1.98 / 2.98), xytext=(1.50, 1.155),
+                 fontsize=8.5, color="#c0392b", va="top",
+                 arrowprops=dict(arrowstyle="->", lw=1.1, color="#c0392b"))
+    for gg, key in ((7 / 5, "7_5"), (5 / 3, "5_3")):
         w = checks[f"window_gamma_{key}"]
-        ax1.plot([gg, gg], [w["lo"], w["hi"]], color=col, lw=6, alpha=0.35, solid_capstyle="butt")
-        ax1.plot(gg, w["lo"], "o", ms=7, mfc="white", mec="#c0392b", mew=2, zorder=6)
-        ax1.plot(gg, w["hi"], "s", ms=6, color=col, zorder=6)
-        ax1.annotate(
-            f"banked window\n$\\gamma$={gg:.4f}\nwidth {w['width']:.7f}",
-            xy=(gg, w["hi"]), xytext=(gg + 0.06, w["hi"] + 0.06), fontsize=8,
-            arrowprops=dict(arrowstyle="-", lw=0.8, color="#555"),
-        )
-    ax1.fill_between(g, rc, rc + 0.30, color="#2c3e50", alpha=0.07)
-    ax1.text(1.75, 1.34, "DOMINATED\n$\\delta_{\\rm dis}>0$: no $\\nu$-dependent\nprofile exists",
-             fontsize=9, color="#2c3e50")
-    ax1.text(1.55, 1.08, "$\\delta_{\\rm dis}<0$: ansatz fails", fontsize=9, color="#7f8c8d")
+        ax1.plot([gg, gg], [w["lo"], w["hi"]], color="#2c3e50", lw=5, alpha=0.85,
+                 solid_capstyle="butt", zorder=4)
+    ax1.plot([], [], color="#2c3e50", lw=5, alpha=0.85,
+             label="banked domination window (leg 240)")
     ax1.set_xlabel(r"adiabatic exponent $\gamma$")
     ax1.set_ylabel(r"self-similar exponent $r$")
-    ax1.set_title("THE KNIFE-EDGE\nthe enclosure exponent is the window's excluded endpoint",
+    ax1.set_title("THE KNIFE-EDGE\nthe enclosure exponent IS the window's excluded endpoint",
                   fontsize=10.5)
-    ax1.legend(fontsize=8, loc="upper left")
+    ax1.legend(fontsize=8, loc="lower right", framealpha=0.97, borderpad=0.6)
     ax1.set_xlim(1.05, 2.15)
     ax1.set_ylim(1.02, 1.45)
-    ax1.grid(alpha=0.25)
+    ax1.grid(alpha=0.2)
+
+    # inset: the gamma = 7/5 window is only 0.0243163 wide, invisible at the outer scale
+    w = checks["window_gamma_7_5"]
+    axi = ax1.inset_axes((0.06, 0.56, 0.40, 0.38))
+    axi.axhspan(w["lo"], w["hi"], color="#2c3e50", alpha=0.22, lw=0)
+    axi.axhline(w["lo"], color="#c0392b", lw=2.2)
+    axi.axhline(w["hi"], color="#2c3e50", lw=1.4, ls="--")
+    axi.plot(0.5, w["lo"], "o", ms=9, mfc="white", mec="#c0392b", mew=2.2, zorder=6,
+             clip_on=False)
+    axi.text(0.06, w["lo"] + 0.0012, "EXCLUDED endpoint $r=7/6$\n= $r_{\\rm crit}$: the only\n"
+             "enclosure-eligible $r$", fontsize=6.8, color="#c0392b")
+    axi.text(0.06, w["hi"] - 0.0075, "$r_*=1.1909830$ (profile existence)", fontsize=6.8,
+             color="#2c3e50")
+    axi.text(0.55, 0.5 * (w["lo"] + w["hi"]), "width\n0.0243163", fontsize=6.8,
+             color="#2c3e50", ha="center", va="center")
+    axi.set_xlim(0, 1)
+    axi.set_ylim(w["lo"] - 0.004, w["hi"] + 0.004)
+    axi.set_xticks([])
+    axi.tick_params(labelsize=6)
+    axi.set_title(r"zoom: $\gamma=7/5$", fontsize=7.5)
 
     # -- right: the out-of-sample degenerate-viscosity test (FT4) ------------------------
     w = checks["window_gamma_7_5"]
