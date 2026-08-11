@@ -1,0 +1,265 @@
+{
+  "leg": 318,
+  "route": "DECR",
+  "date": "2026-08-11",
+  "gate_question": "Does the leg state a general structural criterion for viscous-term enclosure that is falsifiable on at least one banked model of this repository?",
+  "criterion": {
+    "name": "ENCLOSURE IS CRITICALITY",
+    "one_line": "You cannot enclose an object that does not exist: a nu-dependent self-similar profile exists only when the dissipation is scaling-CRITICAL for the blow-up ansatz, so DOMINATED is not a weakness of the method but the signature of a SUBCRITICAL dissipative term.",
+    "clauses": {
+      "C1": "necessary. ENCLOSURE requires delta_dis = 0 at an admissible exponent. delta_dis > 0 on the whole admissible set => no nu-dependent profile exists => DOMINATED is maximal. delta_dis < 0 => the ansatz fails.",
+      "C2": "necessary for continuation from nu = 0. No order jump (ord D <= ord N), else the nu > 0 profile problem is a singular perturbation and must be certified ab initio.",
+      "C3": "necessary at PDE level. CITED TO LEG 315: the validated ODE->PDE bridge is dissipative-hypothesis-only; a quasilinear hyperbolic rescaled system has none."
+    },
+    "sharp_corollary_named": "THE KNIFE-EDGE: for BCG-type compressible implosion the exponent at which enclosure becomes structurally possible is EXACTLY the excluded left endpoint of the domination window. DOMINATED owns the open interval (2*gamma/(gamma+1), r_star(gamma)); ENCLOSED could only live at 2*gamma/(gamma+1), which the window excludes because that is precisely where the domination decay rate hits zero. The two treatments are complementary in r and share exactly one point, which neither occupies -- domination has no decay there, and enclosure is blocked there by C2 (first-order Euler profile ODE -> second-order with nu*Laplacian) and by C3 (quasilinear hyperbolic).",
+    "not_a_lane": "Per the gate's own yes-branch: this does NOT become a lane. It is a screening rule for certificate design, not a route to a certificate.",
+    "not_clay": "No link of L1->L4 moves. A statement about what COULD be enclosed is not a link moving. Clay odds unchanged at ~0.05%."
+  },
+  "banked_sources_read": [
+    {
+      "path": "writeup/data/p2_route_cns2_v1_lit.json",
+      "leg": 240,
+      "gate_answer": "NO",
+      "windows_used": {
+        "gamma_7_5": {
+          "lo": 1.1666666666666667,
+          "hi": 1.1909830056250525,
+          "width": 0.024316338958385808,
+          "nonempty": true,
+          "delta_dis_max": 0.1458980337503153
+        },
+        "gamma_5_3": {
+          "lo": 1.25,
+          "hi": 1.2679491924311228,
+          "width": 0.017949192431122807,
+          "nonempty": true,
+          "delta_dis_max": 0.07179676972449123
+        }
+      }
+    },
+    {
+      "path": "solver/viscous_novelty.py",
+      "leg": 197,
+      "n_precedent_rows": 7,
+      "ids": [
+        "arXiv:2410.05480",
+        "arXiv:2404.04054",
+        "arXiv:2207.07548",
+        "arXiv:1908.09385",
+        "arXiv:2210.07191 + Part II (2305.05660)",
+        "arXiv:2509.14185",
+        "arXiv:2208.09445"
+      ],
+      "note": "READ ONLY. leg 197's file, imported for its ledger, never edited."
+    }
+  ],
+  "models": [
+    {
+      "key": "BCG-NS",
+      "what": "3D isentropic compressible Navier-Stokes implosion (Buckmaster, Cao-Labora, Gomez-Serrano arXiv:2208.09445; CGSS arXiv:2310.05325; Shao-Wei-Wang-Zhang arXiv:2501.15701)",
+      "bank": "writeup/data/p2_route_cns2_v1_lit.json (leg 240) + solver/viscous_novelty.py PRECEDENTS (leg 197, via leg 174)",
+      "banked_verdict": "DOMINATED",
+      "delta_dis": 0.07294901687515853,
+      "C1_prediction": "DOMINATION_ONLY",
+      "C2_order_jump": true,
+      "dial_followed_from_zero": false,
+      "C1_consistent_with_bank": true,
+      "delta_dis_at_window_lo": 8.881784197001252e-16,
+      "delta_dis_at_window_mid": 0.07294901687515853,
+      "delta_dis_at_window_hi": 0.1458980337503153,
+      "banked_delta_dis_max": 0.1458980337503153,
+      "positive_on_open_window": true
+    },
+    {
+      "key": "DF-CGL",
+      "what": "complex Ginzburg-Landau / NLS self-similar singular solutions (Dahne-Figueras arXiv:2410.05480), dissipation dial eps in (1 - i eps)Laplacian",
+      "bank": "solver/viscous_novelty.py PRECEDENTS (leg 197/48), verdict PRE_EMPTS",
+      "banked_verdict": "ENCLOSED",
+      "delta_dis": 0.0,
+      "C1_prediction": "ENCLOSURE_POSSIBLE",
+      "C2_order_jump": false,
+      "dial_followed_from_zero": true,
+      "C1_consistent_with_bank": true,
+      "delta_dis_from_1_minus_m_b": 0.0
+    },
+    {
+      "key": "BC-VISCOUS-BURGERS",
+      "what": "generalised viscous Burgers self-similar profile (arXiv:2404.04054), certified in H^2(e^{|x|^2/4}) as -Laplacian u - (x/2).grad u = f",
+      "bank": "solver/viscous_novelty.py PRECEDENTS (leg 197), verdict ADJACENT",
+      "banked_verdict": "ENCLOSED",
+      "delta_dis": 0.0,
+      "C1_prediction": "ENCLOSURE_POSSIBLE",
+      "C2_order_jump": true,
+      "dial_followed_from_zero": false,
+      "C1_consistent_with_bank": true,
+      "delta_dis_from_1_minus_m_b": 0.0
+    },
+    {
+      "key": "BC-NONLINEAR-HEAT",
+      "what": "nonlinear heat equation self-similar profile (arXiv:2404.04054)",
+      "bank": "solver/viscous_novelty.py PRECEDENTS (leg 197), verdict ADJACENT",
+      "banked_verdict": "ENCLOSED",
+      "delta_dis": 0.0,
+      "C1_prediction": "ENCLOSURE_POSSIBLE",
+      "C2_order_jump": false,
+      "dial_followed_from_zero": false,
+      "C1_consistent_with_bank": true,
+      "delta_dis_from_1_minus_m_b": 0.0
+    },
+    {
+      "key": "CHEN-HOU-EULER",
+      "what": "Chen-Hou 2D Boussinesq / 3D Euler with boundary (arXiv:2210.07191, 2305.05660) and the Hou-Luo model -- INVISCID certificates",
+      "bank": "solver/viscous_novelty.py PRECEDENTS (leg 197), verdict EXCLUSION",
+      "banked_verdict": "NO_CERTIFICATE",
+      "delta_dis": null,
+      "C1_prediction": "ABSTAIN",
+      "C2_order_jump": null,
+      "dial_followed_from_zero": false,
+      "C1_consistent_with_bank": null
+    },
+    {
+      "key": "GCLM-DISSIPATIVE",
+      "what": "gCLM with fractional dissipation nu Lambda^sigma (Ambrose-Lushnikov-Siegel-Silantyev arXiv:2207.07548; J. Chen arXiv:1908.09385)",
+      "bank": "solver/viscous_novelty.py PRECEDENTS (leg 197), verdict EXCLUSION (analysis + numerics, NO computer-assisted certificate of a profile)",
+      "banked_verdict": "NO_CERTIFICATE",
+      "delta_dis": null,
+      "C1_prediction": "ABSTAIN",
+      "C2_order_jump": null,
+      "dial_followed_from_zero": false,
+      "C1_consistent_with_bank": null
+    },
+    {
+      "key": "INCOMPRESSIBLE-NS-LERAY",
+      "what": "Leray self-similar solutions of 3D incompressible Navier-Stokes: u = (T-t)^{-1/2} U(x/sqrt(T-t)) -- the viscous term is scaling-CRITICAL",
+      "bank": "plan_of_record.py stage P0's own gate (the NRS/Tsai screen); located again this leg at 1509.08177 / 1901.01510 / 1812.00957",
+      "banked_verdict": "NONEXISTENT",
+      "delta_dis": 0.0,
+      "C1_prediction": "ENCLOSURE_POSSIBLE",
+      "C2_order_jump": true,
+      "dial_followed_from_zero": false,
+      "C1_consistent_with_bank": null,
+      "delta_dis_from_1_minus_m_b": 0.0
+    }
+  ],
+  "falsification_tests": [
+    {
+      "id": "FT1",
+      "name": "the knife-edge identity, on leg 240's banked compressible model",
+      "banked_model": "BCG-NS (writeup/data/p2_route_cns2_v1_lit.json)",
+      "prediction": "zero(delta_dis) = {r = 2 gamma/(gamma+1)} exactly, and that value equals the banked domination window's LOWER endpoint at every gamma",
+      "what_would_refute_it": "any gamma on the grid at which the two differ by more than leg 240's own transcription tolerance 1.78e-15; or a bank in which the window's lower endpoint is set by profile existence rather than by delta_dis",
+      "max_abs_residual_of_delta_dis_at_r_crit_EXACT_RATIONAL": 0.0,
+      "max_abs_residual_float64": 5.329070518200751e-15,
+      "float64_cancellation_scale": 0.975609756097561,
+      "float64_relative_residual": 5.4622972811557705e-15,
+      "instrument_note": "float64 gives 5.329e-15, and a naive 1e-15 tolerance would have reported this test REFUTED -- i.e. would have reported the knife-edge identity as FALSE. It is not: (r-1)/alpha and (r-2) are two ~1-sized quantities that cancel exactly, so 5.329e-15 is ~25 ulp of the cancelled operands. Leg 302's failure mode verbatim. The verdict below is decided in EXACT RATIONAL arithmetic, where the residual is identically 0; the float number is kept as the diagnosis, never as the measurement.",
+      "endpoint_deviation_from_bank": {
+        "7/5": 0.0,
+        "5/3": 0.0
+      },
+      "tolerance": 1.7763568394002505e-15,
+      "lower_endpoint_is_not_a_profile_existence_bound": true,
+      "verdict": "NOT REFUTED"
+    },
+    {
+      "id": "FT2",
+      "name": "C1 against every banked model that carries a certificate",
+      "banked_model": "solver/viscous_novelty.py PRECEDENTS (leg 197) + leg 240's bank",
+      "prediction": "for every banked row with a certificate: ENCLOSED <=> delta_dis = 0, DOMINATED <=> delta_dis > 0",
+      "what_would_refute_it": "one banked row whose certificate encloses a dissipative term at delta_dis != 0, or a row that is DOMINATED at delta_dis = 0",
+      "n_rows_tested": 4,
+      "n_rows_abstained": 3,
+      "verdict": "NOT REFUTED"
+    },
+    {
+      "id": "FT3",
+      "name": "C2, the continuation sub-criterion",
+      "banked_model": "DF-CGL (arXiv:2410.05480), the only banked row whose certificate is CONTINUED from the nu = 0 limit",
+      "prediction": "a certificate continued from nu = 0 has NO order jump (ord D <= ord N)",
+      "what_would_refute_it": "a banked validated continuation from nu = 0 across an order jump -- e.g. a viscous-Burgers profile branch certified down to nu = 0",
+      "n_continued_rows": 1,
+      "continued_rows": [
+        "DF-CGL"
+      ],
+      "verdict": "NOT REFUTED",
+      "note": "DF-CGL's eps multiplies the SAME Laplacian as the dispersive term, so there is no order jump -- which is exactly why DF can follow branches from eps = 0 (their Thm 4.1) while nothing in the bank continues a viscous-Burgers branch to nu = 0."
+    },
+    {
+      "id": "FT4",
+      "name": "OUT-OF-SAMPLE: C1 extended to mu(rho) = rho^theta, against two published theorems located in this leg's own \u00a70a pass",
+      "banked_model": "BCG-NS, extended; the two target theorems are arXiv:2603.10141 and arXiv:2512.18545 (both NEW to this repository's bank)",
+      "derivation_status": "delta_dis^(theta) = (1-theta)(r-1)/alpha + r - 2 is DERIVED HERE from BCG's own exponent bookkeeping, NOT transcribed from either paper. theta = 0 recovers the published formula to 0.000e+00.",
+      "prediction_1": "theta = 1 (viscosity LINEAR in density, the shallow-water degeneracy) gives delta_dis = r - 2 < 0 on the whole window: SUPERCRITICAL, so the implosion mechanism cannot survive and there should be NO implosion",
+      "published_1": "arXiv:2512.18545 proves globally regular spherically symmetric solutions that cannot cavitate or implode, at exactly that degeneracy",
+      "prediction_2": "for theta < theta*(gamma, r) = 1 - alpha(2-r)/(r-1) the dissipation is subcritical and implosion survives, DOMINATED -- i.e. there is a THRESHOLD in the viscosity power depending on the adiabatic exponent",
+      "published_2": "arXiv:2603.10141 abstract: 'We identify a threshold value, depending on the adiabatic exponent, such that, for any power below this threshold, there exists a class of smooth initial data ... which implode ... the degenerate viscous terms are not sufficiently strong to suppress the convective mechanism'",
+      "what_would_refute_it": "an implosion theorem AT theta = 1, or a proof that arXiv:2603.10141's threshold is not theta*(gamma, r). THE SECOND HALF IS NOT YET RUN: only the abstract of 2603.10141 was read, so the threshold VALUE is an open, named, one-leg falsification test, not a confirmed match.",
+      "theta_equals_1_supercritical_on_whole_window": true,
+      "theta_0_recovers_published_formula_max_dev": 0.0,
+      "theta_star_predicted": {
+        "gamma_7_5_r_mid": 0.08158712005267243,
+        "gamma_5_3_r_mid": 0.046205799573696305
+      },
+      "verdict": "NOT REFUTED (sign test passes; threshold-value test NAMED AND NOT YET RUN)"
+    },
+    {
+      "id": "FT5",
+      "name": "necessary-not-sufficient, on the repository's own target",
+      "banked_model": "INCOMPRESSIBLE-NS-LERAY (plan_of_record.py stage P0's NRS/Tsai screen)",
+      "prediction": "C1 is SATISFIED for Leray self-similar incompressible NS (delta_dis = 0 exactly) while the object is nonetheless closed -- by a NON-EXISTENCE theorem, not by an enclosure failure",
+      "what_would_refute_it": "reading C1 as sufficient, i.e. as saying that an enclosure is achievable there. It is not, and P0's gate already says so.",
+      "C1_prediction": "ENCLOSURE_POSSIBLE",
+      "banked_verdict": "NONEXISTENT",
+      "verdict": "NOT REFUTED",
+      "consequence": "the criterion SCREENS OUT routes; it never opens one. This is why the gate's yes-branch says it does not become a lane."
+    }
+  ],
+  "controls": [
+    {
+      "name": "not_a_tautology__test_set_discriminates",
+      "passed": true,
+      "why": "the test set must contain BOTH a banked ENCLOSED row and a banked DOMINATED row, plus rows the criterion abstains on; a criterion tested only on agreeing rows is a tautology"
+    },
+    {
+      "name": "not_a_tautology__C1_can_output_all_three_classes",
+      "passed": true,
+      "why": "C1's classifier must be able to emit all three verdicts, not just the one the bank happens to contain"
+    },
+    {
+      "name": "abstention_is_recorded_not_hidden",
+      "passed": true,
+      "why": "rows with no certificate (Chen-Hou inviscid, dissipative gCLM) and the nonexistent-object row are ABSTAINED on and counted; a criterion that 'explains' rows it cannot see is unfalsifiable"
+    },
+    {
+      "name": "adverse__delta_dis_is_strictly_positive_on_the_OPEN_window_only",
+      "passed": true,
+      "why": "the knife-edge claim REQUIRES delta_dis to vanish exactly at the window's lower endpoint and to be positive inside; if it were positive AT the endpoint too, the 'complementary, sharing one point' statement would be false"
+    },
+    {
+      "name": "adverse__banked_delta_dis_max_reproduced",
+      "passed": true,
+      "why": "this leg's delta_dis must reproduce leg 240's own banked maximum (0.1458980) -- if it did not, this leg would be using a different formula from the bank it claims to test against"
+    },
+    {
+      "name": "adverse__criterion_makes_a_prediction_it_could_lose",
+      "passed": true,
+      "why": "FT4's theta = 1 sign test was run BEFORE 2512.18545's theorem was consulted for its direction; had it come out positive the criterion would have been refuted by a published theorem it did not choose"
+    },
+    {
+      "name": "leg_305_territory_not_entered",
+      "passed": true,
+      "why": "leg 305 (Route-DWM) is live on whether the dominance-window DEFICIT is sharp or slack via a per-constant ledger. This leg uses only the window's ENDPOINT IDENTITY, touches none of 305's files, and re-derives none of its per-constant decomposition. Cited, not entered."
+    },
+    {
+      "name": "exact_closed_form_quoted_not_truncated",
+      "passed": true,
+      "why": "leg 300/315's shortfall is the EXACT (7+3sqrt5)/2 = 6.8541019662496845446, not the wrong 6.855 this run corrected across seven surfaces; cross-checked here against the banked width as an internal consistency test, NOT re-derived as a result of this leg"
+    }
+  ],
+  "gate_answer": "yes",
+  "gate_answer_verbatim": "yes -> Bank the criterion together with the named falsification test. This still does not become a lane.",
+  "headline": "ENCLOSURE IS CRITICALITY. A nu-dependent self-similar profile exists only when the dissipative term is scaling-CRITICAL for the blow-up ansatz (delta_dis = 0), so DOMINATED is not a weakness of anyone's method but the signature of a SUBCRITICAL dissipative term -- you cannot enclose an object that does not exist. THE KNIFE-EDGE: for BCG's compressible implosion delta_dis(gamma, r) vanishes exactly at r = 2 gamma/(gamma+1), which IS the excluded left endpoint of leg 240's banked domination window: agreement 0.0 at gamma = 7/5 and 5/3, and the residual over 45 gammas is IDENTICALLY ZERO in exact rational arithmetic (the float64 value 5.329e-15 is ~25 ulp of catastrophic cancellation and would have reported the identity FALSE under a naive 1e-15 tolerance -- leg 302's failure mode, caught here). Domination owns the open window; enclosure could only live at the one point the window excludes, and there it is blocked by C2 (first-order Euler profile ODE becomes second order when nu*Laplacian is admitted: a singular perturbation, not a continuation) and by C3 (leg 315: the validated ODE->PDE bridge is dissipative-hypothesis-only, BCG's rescaled system is quasilinear hyperbolic). Five named falsification tests, none refuted; the strongest is out-of-sample and half-unrun by design. NOT A LANE, per the gate's own yes-branch. No L1->L4 link moved; Clay ~0.05%.",
+  "all_controls_passed": true,
+  "n_falsification_tests": 5,
+  "n_not_refuted": 5
+}
