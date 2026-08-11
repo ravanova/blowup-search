@@ -1,7 +1,8 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-11 — same orchestrator session, cycle 8e + leg 330 landing.
-`origin/main` at `5496bbc`, merge gate green. Full detail in `PROGRESS.md`
+*Refreshed 2026-08-11 — same orchestrator session, cycle 9 (user's ceiling-raising
+programme executed).
+`origin/main` at `a17554c`, merge gate green. Full detail in `PROGRESS.md`
 (git-ignored, more current), `reports/ORCH_STATE.md` (full handoff detail and
 institutional memory), and `experiments/JOURNAL.md` (the durable ledger).*
 
@@ -44,6 +45,44 @@ institutional memory), and `experiments/JOURNAL.md` (the durable ledger).*
    `plan_of_record.py` untouched. **This is the complete packet — your
    ruling on the DSS ban-wording question is the only thing this is waiting
    on.**
+
+2. **NEW — leg 329's C4 pre-registration defect, a reading question, routed to
+   you directly per your own ceiling-raising-programme directive (the DM's
+   cycle-8e ruling on this is now withdrawn of force; its content is attached
+   below as analysis only, not a decision).** Leg 329 (arbitrary-precision
+   recheck of `B4_egm`/`E_egm`) found that its control C4 was pre-registered
+   as an agreement test (does an MP Rayleigh quotient match the eigensolve),
+   but is actually a one-sided upper bound on the gap the eigensolve measures.
+   The question, in the leg's own terms: **is −R(x) an agreement test, or the
+   bound it actually computes?**
+   - Read as pre-registered (agreement test): C4 fires (disagrees at
+     8.69e-06/1.18e-05, four orders above its 1e-9 slack) → the gate is
+     **NO**, consistent with leg 178's original finding, escalation #3 stays
+     parked.
+   - Read as what it computes (a one-sided bound): the bound lands *below*
+     1/2 by 5.19e-18/1.42e-18 → clause 5 ("gap ≤ 1/2 + 1e-9") is **established
+     more firmly than the eigensolve ever could**, the gate flips to **YES**,
+     and escalation #3's parked yes-branch fires (report-and-escalate,
+     leg 178's gate text stays byte-identical).
+   - Magnitudes on equal footing: bound margin 5.19e-18 (`B4_egm`) /
+     1.42e-18 (`E_egm`); measured truncation sensitivity under leg 329's own
+     C5 rcond ladder 3.85e-05 / 5.39e-05 (thirteen orders larger);
+     `cond(G) = 2.554e+11`. The leg's own ground for not resolving this
+     itself: novelty §7d forbids overriding a fired control in the direction
+     everyone hopes the answer moves, so it reported literally and escalated.
+   - **DM analysis, attached without force, for your consideration only**: the
+     margin is thirteen orders smaller than C5's measured truncation
+     sensitivity; a Rayleigh quotient one-sides the *truncated matrix's*
+     eigenvalue rather than the operator clause 5 names; these rows sit at
+     EGM's published +1/2, a knife edge, and this repo's standing 318/302
+     lesson is that knife edges are decided in exact/enclosed arithmetic, not
+     by which side a float lands on.
+   - **Independent of your ruling here**, leg 340 (EGRB, running in slot D)
+     is separately re-deriving the bound with the truncation explicitly
+     controlled at every C5 ladder rung — that measurement is useful input to
+     this question under either reading and will report on its own schedule.
+   Files: `writeup/data/p2_route_egmf_v1.json`
+   (`gate_answer.C4_pre_registration_defect`), `experiments/journal/leg_329.md` §4d.
 
 (Older NEEDS-YOU items — leg 297's anchor-JSON fix, leg 280's sign-off, the
 Phase-1 construction-decision packet — have since been resolved/absorbed in
