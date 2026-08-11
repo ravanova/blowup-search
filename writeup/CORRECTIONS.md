@@ -912,3 +912,59 @@ current, uncorrected value. No sibling document needed a fix.
 does not touch `writeup/data/p2_route_d_v11_anchor.json` on `main` (still stale by ~6.55e+11x on
 `margin` — leg 252's own integration decision, unmade, reserved as leg 297) and does not touch
 any argument's meaning beyond adding the resolved scalar. Clay stays **~0.05%**.
+
+---
+
+## §13 — The width ratio `6.855` corrected to `6.854` on 5 of the 7 landed surfaces
+(leg 300's own no-branch rework)
+
+### 13.1 What leg 300 found
+
+Leg 300 (`experiments/journal/leg_300.md`, landed `5e30bf3`) independently verified leg
+266's GATE-YES correction. Its clause (c) found the width ratio quoted `6.855` re-derives
+from BCG's own `(eq:rstar)` and `(eq:r:restriction)` at γ=7/5 as the closed form
+`(7+3√5)/2 = 6.8541019662496845...`, i.e. `6.854` at the quoted precision — absolute error
+`0.00090`, relative error `1.310e-04`. Re-dividing leg 266's own rounded endpoints
+(`0.1666667 / 0.0243163`) independently reproduces `6.854`, so the defect is a single
+transcribed digit, not an architectural or arithmetic error. Leg 300's own propagation
+census (§7) measured 8 surfaces carrying `6.855`, 7 already on `main`, and drafted this
+leg (Route-P0TCR) as the rework.
+
+### 13.2 What was done
+
+5 of the 7 enumerated surfaces were corrected in place to `6.854`, each citing leg 300's
+re-derivation and the closed form `(7+3√5)/2`: `experiments/JOURNAL.md:3730`,
+`DIRECTION.md:11154`, `DIRECTION.md:13288`, `DIRECTION.md:13474` (reserve leg 305's
+title), `DIRECTION.md:13479` (reserve leg 305's thesis). Window endpoints `1.1666667` /
+`1.1909830` and both widths `0.0243163` / `0.1666667` are byte-identical before/after on
+every touched line; no other numeric content changed.
+
+### 13.3 What resisted, and why
+
+2 of the 7 — `DIRECTION.md:13328` and `DIRECTION.md:13336`, the text of **leg 300's own
+pre-committed gate** (thesis and question) — were left untouched, verbatim. Leg 300's own
+journal (§7) states this text must not be edited: "a pre-committed gate records what was
+asked." Editing it after the fact would misrepresent the historical record of what leg 300
+was actually asked to verify (it was asked to check whether `6.855x` re-derives; it found
+that it does not). This is this leg's own gate's no-branch condition — "a surface resists
+correction without touching an argument" — so the gate answers **NO**, reported here and
+in `experiments/journal/leg_319.md` rather than silently forced to yes.
+
+### 13.4 The sweep for an 8th surface
+
+A whole-tree, case-sensitive, literal-decimal-point sweep for `6.855` found no 8th
+surface. All hits outside the 7 enumerated surfaces and leg 266/300's own prior artifacts
+are incidental digit overlap in unrelated floats (`writeup/data/spike1_stepA_velocity.json`
+`6.855039399091452` / `-6.855288156608295`; `writeup/data/p2_weight_repairs_v2.json`,
+`p2_route_wvr_v1_fitness.json`, `p2_route_ngx_v1_general.json` — `26.85575221999712`,
+`86.85522233596849`), and `writeup/INDEX.md` / leg 300's own `BLOG_`/`TECHNICAL_` /
+`experiments/p2_route_p0tcv_v1_verify*.py` quote `6.855` accurately as leg 266's original,
+now-superseded claim under test, outside this leg's declared territory.
+
+### The ceiling
+
+**5 numbers corrected, each cited to leg 300. 2 left untouched by design (§13.3). 0 other
+numeric content changed anywhere (window endpoints and widths byte-identical). 0 lines
+deleted.** This entry does not touch `leg/266-p0tc-v1` / `leg/251-p0t-v1` branch files, does
+not touch `experiments/journal/leg_266.md:70`, does not touch `writeup/INDEX.md`, and does
+not re-derive the closed form independently. Clay stays **~0.05%**.

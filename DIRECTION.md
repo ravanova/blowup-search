@@ -11151,7 +11151,8 @@ merge; THE USER PACKET IS NOW ASSEMBLABLE
 unmerged — 251 remains an escalation): obligation #1 re-posed onto the stability step
 (enclosing the argument WITH F_dis retained, at r outside BCG's dominance window
 `(1.1666667, 1.1909830)`, width 0.0243163; target window `(1, 7/6]` confirmed non-empty
-and 6.855× wider — coherent, not vacuous). Every verifier-confirmed claim byte-untouched;
+and 6.854× wider (closed form (7+3√5)/2, per leg 300's re-derivation, corrected from a
+transcribed 6.855 by leg 319) — coherent, not vacuous). Every verifier-confirmed claim byte-untouched;
 visible dated correction note citing verify_251.
 
 **268 (PUB2R) landed on `main`** (`3f6d5d0`): PUB2 now states the honest convergent
@@ -13284,7 +13285,8 @@ the leg-251 Phase-1 packet, 257, 129/188.
 ### Ruling 2 — leg 266's finished, unmerged GATE YES: VERIFY FIRST, then land
 
 266 is claim-bearing (the dominance-window numbers r ∈ (1.1666667, 1.1909830), width
-0.0243163 vs target (1, 7/6] width 0.1666667, 6.855x) and it corrects the user-facing
+0.0243163 vs target (1, 7/6] width 0.1666667, 6.854x — closed form (7+3√5)/2, per leg
+300's re-derivation, corrected from a transcribed 6.855 by leg 319) and it corrects the user-facing
 Phase-1 packet — and it finished in a dead session where no paired VER pass ever ran.
 The standing discipline (every claim a leg's landing rests on gets an independent
 re-measure before anyone builds on it, lesson 85; every leg gets a paired verifier)
@@ -13469,12 +13471,13 @@ verbatim.
 ### Fresh reserve legs, drafted now (§3a watermark: effective-dispatchable was 2)
 
 ```
-### 305 — ROUTE-DWM: IS THE 6.855x DOMINANCE-WINDOW DEFICIT SHARP OR SLACK? (per-
+### 305 — ROUTE-DWM: IS THE 6.854x DOMINANCE-WINDOW DEFICIT SHARP OR SLACK? (per-
 constant width ledger of BCG's own r-dominance argument)
 [FLOOR-ELIGIBLE: math]
 **Thesis.** 266 (once verified/landed by 300) fixes the certificate obligation at the
 stability step with F_dis retained, r outside the dominance window (1.1666667,
-1.1909830) — 6.855x narrower than the target window (1, 7/6]. Nobody knows whether
+1.1909830) — 6.854x narrower than the target window (1, 7/6] (closed form (7+3√5)/2, per
+leg 300's re-derivation, corrected from a transcribed 6.855 by leg 319). Nobody knows whether
 that width is sharp for BCG's argument or an artifact of one generous intermediate
 constant. Re-derive the window tracking every intermediate constant; measure which
 constant costs the most width.

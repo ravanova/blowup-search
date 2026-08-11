@@ -3727,7 +3727,8 @@ preempted agents had reached a landing.
   STABILITY STEP (the r-restriction by which the profile dominates F_dis) at
   r outside BCG's own dominance window (1.1666667, 1.1909830, width
   0.0243163) -- confirmed non-vacuous, since the target window (1, 7/6] is
-  6.855x wider. Every other verifier-confirmed claim in 251's report is
+  6.854x wider (closed form (7+3√5)/2, per leg 300's re-derivation, corrected from a
+  transcribed 6.855 by leg 319). Every other verifier-confirmed claim in 251's report is
   byte-untouched; a dated correction note cites verify_251. Unblocks leg 265
   (Phase-1 costing).
 - **Leg 268 (Route-PUB2R) -- rework leg, gate YES, landed.** Corrected PUB2's
