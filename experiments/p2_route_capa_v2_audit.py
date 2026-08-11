@@ -393,6 +393,45 @@ def run_one(test: str, timeout: int) -> dict:
     }
 
 
+SWEEP_LINE = re.compile(
+    r"^\[\s*\d+/\s*\d+\]\s+(ok|RED|TMO)\s+([\d.]+)s\s+(\S+)\s*$")
+
+
+def ingest_sweep_log(path: Path) -> list[dict]:
+    """Reconstruct sweep verdicts from the runner's own printed progress lines.
+
+    WHY THIS EXISTS, stated plainly so a later reader does not mistake it for a
+    convenience: this audit's sweep is hours long, and on the run of record the driver
+    process was killed by the surrounding harness at 45 of 46 tests -- after every one
+    of those 45 verdicts had been printed, but before the JSON was serialised.  The
+    verdicts are real measurements (each is the exit status of a real subprocess); the
+    only thing lost was the serialisation step.  Discarding them and re-running would
+    not have made them truer, so they are ingested from the log the runner itself
+    printed, and every ingested record is stamped `source: "log-ingest"` so it can never
+    be confused with a record this process observed directly.
+
+    The per-test stdout/stderr tails are NOT recoverable this way and are recorded as
+    empty rather than fabricated.
+    """
+    out = []
+    for line in path.read_text(errors="replace").splitlines():
+        m = SWEEP_LINE.match(line.strip())
+        if not m:
+            continue
+        flag, wall, test = m.group(1), float(m.group(2)), m.group(3)
+        out.append({
+            "test": test,
+            "returncode": (0 if flag == "ok" else None),
+            "timed_out": (flag == "TMO"),
+            "green": (flag == "ok"),
+            "wall_s": wall,
+            "stdout_tail": "",
+            "stderr_tail": "",
+            "source": "log-ingest",
+        })
+    return sorted(out, key=lambda r: r["test"])
+
+
 def sweep(tests: list[str], workers: int, timeout: int) -> list[dict]:
     results = []
     with cf.ThreadPoolExecutor(max_workers=workers) as ex:
@@ -495,6 +534,11 @@ def main() -> int:
     ap.add_argument("--recheck", nargs="*", default=None,
                     help="re-run these tests ALONE, serially (flake diagnosis)")
     ap.add_argument("--figure", action="store_true", help="rebuild the figure from JSON")
+    ap.add_argument("--ingest-sweep-log", type=str, default=None,
+                    help="reconstruct sweep verdicts from a killed run's progress log")
+    ap.add_argument("--only", nargs="*", default=None,
+                    help="sweep only these tests and MERGE them into the banked sweep "
+                         "(used to finish a sweep whose driver was interrupted)")
     args = ap.parse_args()
 
     if args.figure and DATA.exists():
@@ -551,7 +595,27 @@ def main() -> int:
         print(f"      DANGLING  {d['module']} -> {d['cited_path']}")
     print(f"S3  distinct cited tests to execute: {st['n_distinct_cited_tests']}")
 
-    if args.recheck is not None:
+    if args.ingest_sweep_log:
+        got = ingest_sweep_log(Path(args.ingest_sweep_log))
+        have = {r["test"] for r in payload.get("sweep", [])}
+        merged = payload.get("sweep", []) + [r for r in got if r["test"] not in have]
+        payload["sweep"] = sorted(merged, key=lambda r: r["test"])
+        payload["sweep_source_log"] = args.ingest_sweep_log
+        missing = sorted(set(st["distinct_cited_tests"]) -
+                         {r["test"] for r in payload["sweep"]})
+        print(f"[ingest] {len(got)} verdicts from log; sweep now "
+              f"{len(payload['sweep'])} of {st['n_distinct_cited_tests']}; "
+              f"still missing: {missing}")
+    elif args.only:
+        fresh = sweep(args.only, args.workers, args.timeout)
+        keep = [r for r in payload.get("sweep", [])
+                if r["test"] not in {f["test"] for f in fresh}]
+        payload["sweep"] = sorted(keep + fresh, key=lambda r: r["test"])
+        missing = sorted(set(st["distinct_cited_tests"]) -
+                         {r["test"] for r in payload["sweep"]})
+        print(f"[only] sweep now {len(payload['sweep'])} of "
+              f"{st['n_distinct_cited_tests']}; still missing: {missing}")
+    elif args.recheck is not None:
         tests = args.recheck or [r["test"] for r in payload.get("sweep", [])
                                  if not r["green"]]
         print(f"[recheck] {len(tests)} test(s), serial, pinned env")

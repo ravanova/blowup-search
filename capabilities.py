@@ -55,13 +55,19 @@ axes, every count in writeup/data/p2_route_capa_v2_audit.json.
                    module from an audit chair is the fabrication this field exists to stop.
                    If you own one of those 12 and have the number, this row is the cheapest
                    place in the repository to bank it.
-  S5 relevance     NEW AXIS -- does the cited test actually LOAD the module citing it?
-                   Leg 71 named this gap in words and never systematised it; it is now an
-                   executable check in the runner.  1 of 48 rows failed:
-                   solver/finite_support.py cited test_first_integral.py, which contains
-                   zero occurrences of "finite_support", while the test that does import it
-                   (test_finite_support_adversarial.py, leg 124, green) was cited by no row.
-                   `test` field corrected below; `validated` left frozen.
+  S5 relevance     Does the cited test actually LOAD the module citing it?  Leg 71 DID
+                   measure this (per-row test_imports_module in its own JSON) and flagged
+                   the same single row; what it could not do was repair it, because at
+                   e203b52 no test in the repository loaded that module.  Leg 292's
+                   contribution is not the axis but the repair, now possible: 1 of 48 rows
+                   fails, the SUPERSEDED row at the bottom of this file, whose cited test
+                   never loads it.  Leg 124 wrote the adversarial test that does, 53 legs
+                   later, and no one moved the citation for ~220 legs -- the check was run
+                   once, not standing.  `test` field corrected below; `validated` frozen.
+                   CAUTION for future editors of that row: leg 124's S10 gate greps every
+                   *.py in the tree for a line containing both the module's stem and the
+                   word "imp"+"ort", so prose here that puts those two on ONE line turns
+                   that test red.  Measured, not guessed: this header did exactly that.
   S6 references    19 repo paths cited inside row prose, 0 dangling.
 NOTE: `test_capabilities.py` has received 0 commits since leg 71's base -- it still checks
 only that `test` is non-empty, that the path EXISTS, and that `validated` is over 20
@@ -657,15 +663,19 @@ CAPABILITIES = [
      "holds": "replaced by solver/first_integral.py (Route-D v14)",
      "validated": ("nothing -- SUPERSEDED, kept only so the name resolves to a warning "
                    "instead of to nothing"),
-     # Leg 292 (Route-CAPA, the second-generation self-audit): was `test_first_integral.py`,
-     # which contains zero occurrences of the string `finite_support` and never imports the
-     # module -- the same defect leg 71 found on solver/ga_search.py, second instance, and
-     # the only one of 48 rows where the cited test cannot fail when the module breaks.
-     # test_finite_support_adversarial.py (leg 124) is what actually exercises it
-     # (`from solver.finite_support import ...`), it is green at HEAD, and its gate S10
-     # re-checks the exact property this `validated` field claims -- "zero importers, and
-     # the SUPERSEDED / DO NOT USE banner is intact". It was on disk and cited by NO row.
+     # Leg 292 (Route-CAPA, the second-generation self-audit): this `test` field was
+     # `test_first_integral.py`, a file containing zero occurrences of this module's name,
+     # which therefore could not fail when the module broke -- the only such row of 48, and
+     # the same defect leg 71 measured here at e203b52 and could not then repair.
+     # test_finite_support_adversarial.py (leg 124, 1424da6) is the file that actually
+     # loads the module; it is green at HEAD (30s), and its gate S10 re-checks the exact
+     # property this `validated` field claims -- "zero importers, and the SUPERSEDED /
+     # DO NOT USE banner is intact". It sat on disk, cited by NO row, for ~220 legs.
      # Factual `test`-field correction only; `validated` left frozen.
+     # Do NOT write this module's stem and the word imp/ort on one line anywhere in the
+     # tree: leg 124's S10 greps for that pair and a comment is indistinguishable from a
+     # real importer to it. That is measured -- an earlier draft of this note turned the
+     # test red, which is how a documentation comment became a test failure.
      "test": "test_finite_support_adversarial.py"},
 ]
 

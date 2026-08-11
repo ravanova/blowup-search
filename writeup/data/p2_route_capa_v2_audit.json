@@ -1,5 +1,5 @@
 {
-  "head": "23335b96161710b138a66ff0bd68d39f25eef15b",
+  "head": "ec6a4faee5545c34b1b6e304a3df561b0796d5ad",
   "python": "/home/andy/projects/Unsolved/.venv/bin/python",
   "static": {
     "S5_relevance": [
@@ -1923,8 +1923,8 @@
     "S1_missing": 0,
     "S1_ghost": 0,
     "S2_absent_test_files": 0,
-    "S3_executed": 0,
-    "S3_green_in_sweep": 0,
+    "S3_executed": 46,
+    "S3_green_in_sweep": 46,
     "S3_nongreen_in_sweep": 0,
     "S3_red_after_solo_recheck": 0,
     "S3_red_after_solo_recheck_names": [],
@@ -1936,5 +1936,467 @@
     "S6_dangling": 0,
     "count_claims_checked": 3,
     "count_claims_disagreeing": 0
-  }
+  },
+  "sweep": [
+    {
+      "test": "test_bc_weighted_sobolev.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 1.8,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_bordered_hl.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 7.0,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_boussinesq_dedicated.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 9.6,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_boussinesq_rescaled.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 54.8,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_boussinesq_velocity.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 0.5,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_certificate_shapes.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 13.4,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_chen_inviscid_certificate.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 8.0,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_collocation_newton.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 4.4,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_critical_dissipation.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 95.4,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_decay_collocation.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 140.0,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_decay_grading.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 3.8,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_dissipative_profile.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 7.3,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_energy_coercivity.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 2.2,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_finite_support_adversarial.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 33.4,
+      "stdout_tail": " word. (a=0 raising is S8.)\n    clean control (must be all finite): {'system': True, 'system_jacobian': True, 'operator_norm': True, 'profile_values': True}\n    nan in b[3] -> finite? {'system': False, 'system_jacobian': False, 'operator_norm': False, 'profile_values': False}\n    inf in b[3] -> finite? {'system': False, 'system_jacobian': False, 'operator_norm': False, 'profile_values': False}\n    X_c = -5.0 (impossible) -> finite? {'system': True, 'system_jacobian': True, 'operator_norm': True, 'profile_values': True}\n[ok] S9 nan/inf coefficients propagate 8/8; C9 OPEN: a negative support radius is accepted by 4/4 entry points and the kill switch returns a finite number on it\n    importers of solver.finite_support outside leg 124's own files: 0\n[ok] S10 zero importers, and the SUPERSEDED / DO NOT USE banner is intact\n\nAll leg-124 adversarial gates passed: 4 SOUNDNESS gates hold and 6 CHARACTERIZATION gates confirm the five silent-corruption sites are still OPEN. solver/finite_support.py is byte-identical to origin/main -- leg 124's gate escalates and does not patch. A characterization gate FAILING is good news: read experiments/journal/leg_124.md and convert it, do not loosen it.\n",
+      "stderr_tail": "/home/andy/projects/Unsolved/.claude/worktrees/agent-aa04b2e273533d873/solver/finite_support.py:187: RuntimeWarning: invalid value encountered in multiply\n  log_term = np.where(phi_v != 0.0, phi_v * lg[:, None], 0.0)\n/home/andy/projects/Unsolved/.claude/worktrees/agent-aa04b2e273533d873/solver/finite_support.py:187: RuntimeWarning: invalid value encountered in multiply\n  log_term = np.where(phi_v != 0.0, phi_v * lg[:, None], 0.0)\n"
+    },
+    {
+      "test": "test_first_integral.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 143.0,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_fractional_boussinesq.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 222.0,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_fractional_gclm.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 24.4,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_gclm_dedicated.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 9.4,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_gclm_family.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 45.0,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_gclm_rescaled.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 140.2,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_hl_rescaled.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 28.7,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_holder_norms.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 1.9,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_interval.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 0.3,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_interval_certificate.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 39.9,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_line_hilbert.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 46.6,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_literature_gates.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 20.1,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_marginal_flow.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 556.0,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_nk_bounds.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 27.9,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_nk_bounds_adversarial.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 2.1,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_nk_fourier.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 17.7,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_nk_hilbert_holder.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 147.7,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_nk_hilbert_pointwise.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 10.0,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_nk_seminorm.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 25.1,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_op_lower.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 24.3,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_origin_h2_certificate.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 1.2,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_port_certification.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 3.5,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_profile_newton.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 160.5,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_reduced_certificate.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 40.5,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_rescaled_spectrum.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 93.0,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_spectral_certificate.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 308.2,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_spectral_utils_dedicated.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 0.5,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_target_norm.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 0.5,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_target_selection.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 0.4,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_turning_point.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 38.8,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_viscous_novelty.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 310.3,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    },
+    {
+      "test": "test_weight_search.py",
+      "returncode": 0,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 13.0,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "source": "log-ingest"
+    }
+  ],
+  "sweep_source_log": "/tmp/claude-1001/-home-andy-projects-Unsolved/090bf745-3560-4741-bb93-541e3b60669e/scratchpad/sweep.log"
 }
