@@ -152,6 +152,70 @@ SOURCES = {
                 "problem, 8 Jun 2010 (with math-ph/0702025, 2007, and 1003.0707, 2010)",
         "role": "OLD prior art -- the classical template for finiteness of the unstable set",
     },
+    "GW": {
+        "arxiv": "math/0102197",
+        "url": "https://arxiv.org/abs/math/0102197",
+        "cite": ("Gallay & Wayne, Invariant manifolds and the long-time asymptotics of the "
+                 "Navier-Stokes and vorticity equations on R^2, ARMA 163 (2002) 209-258; "
+                 "doi:10.1007/s002050200200. Companion: arXiv:math/0402449, CMP 255 (2005)"),
+        "role": ("PROVES finiteness in a genuine FLUID similarity-variable setting, and is "
+                 "the OLD prior art for the WEIGHT-DEPENDENCE this leg's obstruction turns "
+                 "on: in L^2(m) the advection term is RELATIVELY COMPACT however large its "
+                 "coefficient, so sigma_ess = {Re lambda <= -(m-1)/2} -- the boundary MOVES "
+                 "WITH THE WEIGHT m, and finiteness is bought by raising m. Viscous: the "
+                 "Laplacian does the work, so it does NOT transfer to the four models"),
+    },
+    "BZ": {
+        "arxiv": "1601.00837",
+        "url": "https://arxiv.org/abs/1601.00837",
+        "cite": ("Barker & Zumbrun, Numerical proof of stability of viscous shock profiles, "
+                 "M3AS 26 (2016) 2451-2469; doi:10.1142/S0218202516500588"),
+        "role": ("THE decisive precedent for a CERTIFIED COUNT, and it confirms this leg's "
+                 "two-half structure exactly: interval arithmetic + rigorous ODE bounds + an "
+                 "Evans-function WINDING NUMBER on the boundary of B(0,R) cap {Re lambda >= "
+                 "0} -- where the radius R = (sqrt(gamma) + 1/2)^2 enclosing ALL possible "
+                 "unstable eigenvalues is derived ANALYTICALLY. The computer works inside "
+                 "the disc; the disc itself is a THEOREM. Travelling waves, not self-similar "
+                 "blow-up profiles"),
+    },
+    "CH": {
+        "arxiv": "2210.07191",
+        "url": "https://arxiv.org/abs/2210.07191",
+        "cite": ("Chen & Hou, Stable nearly self-similar blowup of the 2D Boussinesq and 3D "
+                 "Euler equations with smooth data I: Analysis (II: Rigorous Numerics, "
+                 "arXiv:2305.05660)"),
+        "role": ("THE THIRD OPTION, and it is neither prove nor check: Chen-Hou DELIBERATELY "
+                 "DO NOT COUNT EIGENVALUES. They avoid weighted L^2/H^k (advection normal to "
+                 "the boundary produces a large growth factor), work in weighted "
+                 "L^inf cap C^{1/2}, split L into leading-order plus FINITE RANK, and prove "
+                 "coercivity/damping DIRECTLY. This SIDESTEPS the finiteness question rather "
+                 "than answering it -- recorded because it is the option the DM should weigh "
+                 "against building any count at all"),
+    },
+    "VOIGT": {
+        "arxiv": None,
+        "url": "https://doi.org/10.1007/BF01303264",
+        "cite": ("Voigt, Monatsh. Math. 90 (1980) 153-161 (Jorgens-Vidav-Voigt chain; Vidav, "
+                 "JMAA 30 (1970) 264-279; Greiner, Math. Z. 185 (1984) 167-177). Kato, "
+                 "Perturbation Theory for Linear Operators, 2nd ed., Ch. IV Thm 5.35, "
+                 "doi:10.1007/978-3-642-66282-9. Chicone & Latushkin, Evolution Semigroups, "
+                 "AMS Surveys & Monographs 70 (1999)"),
+        "role": ("the ~50-year-old ABSTRACT mechanism, in semigroup form: spectrum outside "
+                 "the essential spectral radius consists of eigenvalues of FINITE algebraic "
+                 "multiplicity. The theory has been adequate since 1980. What is missing for "
+                 "the four models is not theory but the VERIFICATION of its hypothesis"),
+    },
+    "BK": {
+        "arxiv": "chao-dyn/9306007",
+        "url": "https://arxiv.org/abs/chao-dyn/9306007",
+        "cite": ("Bricmont & Kupiainen, Universality in blow-up for nonlinear heat equations, "
+                 "Nonlinearity 7 (1994) 539-575; with Merle & Zaag, Duke Math. J. 86 (1997) "
+                 "143-195, doi:10.1215/S0012-7094-97-08605-1"),
+        "role": ("OLD prior art, the cleanest PROVED case: in similarity variables the "
+                 "linearisation is a HERMITE operator with PURELY DISCRETE spectrum "
+                 "{1 - m/2}. IRRELEVANT to the four models -- the discreteness comes from "
+                 "the Laplacian, and CCF/IPM/Boussinesq/Euler have no such smoothing"),
+    },
 }
 
 QUOTES = {
@@ -539,6 +603,48 @@ ROUTE_IF_WANTED = {
 # ======================================================================================
 # 5.  ASSEMBLY
 # ======================================================================================
+# ----------------------------------------------------------------------------------------
+# MF3 audit.  The orchestrator reported that the arXiv endpoint returns ZERO for any two
+# ANDed quoted phrases, and directed that any zero of that shape be DISCARDED, not banked
+# as absence.  This leg has exactly ONE absence-based discriminator (D4), so the report was
+# TESTED rather than assumed.  Full narrative: writeup/novelty/leg_314.md sec 4a.
+MF3_AUDIT = {
+    "defect_as_reported": ("arXiv search endpoint returns ZERO results for any two ANDed "
+                           "quoted phrases (orchestrator measured 84 and 20 singly, 0 ANDed)"),
+    "reproduced_on_this_instrument": False,
+    "reproduction_test": [
+        {"query": 'all:"essential spectrum"', "total_results": 728, "shape": "single phrase"},
+        {"query": 'all:"essential spectrum" AND all:"self-similar"', "total_results": 1,
+         "shape": "ANDed quoted pair", "note": "the single hit is Xu arXiv:2607.19762"},
+        {"query": 'all:"self-similar"', "total_results": 8472, "shape": "single phrase"},
+        {"query": 'all:"self-similar" AND all:"blow-up"', "total_results": 251,
+         "shape": "ANDed quoted pair",
+         "note": ("DECISIVE: an ANDed quoted pair returns 251 with correct on-object titles, "
+                  "so the conjunction operator works on this instrument")},
+    ],
+    "anded_queries_run_by_this_leg_all_nonzero": True,
+    "anded_zero_results_banked_anywhere_in_this_leg": 0,
+    "only_all_zero_return_in_this_leg": ("instrument 1 (curl/urllib), independently diagnosed "
+                                         "as broken (HTTP 301 -> HTTP 429) and DISCARDED whole "
+                                         "BEFORE the MF3 report arrived; none of its output is "
+                                         "cited in this JSON, the TECHNICAL file or the BLOG"),
+    "absence_based_discriminators": ["D4_certified_count_exists_for_these_models"],
+    "presence_based_discriminators": ["D1", "D2", "D3", "D5"],
+    "d4_basis": ("multi-instrument sweep (WebSearch + WebFetch + direct PDF pulls of "
+                 "2208.09445, 2310.05325, 2509.14185), NOT any query returning zero; its "
+                 "strongest support is POSITIVE -- 2509.14185 p.19 calls finiteness "
+                 "'desirable', i.e. the authors state they have not established it"),
+    "does_the_iii_open_branch_rest_on_an_anded_zero": ("NO. Obstructions (1) and (2) are "
+                                                       "presence claims resting on quoted "
+                                                       "text and stand even if D4 is "
+                                                       "withdrawn entirely."),
+    "residual_limitation_recorded": ("1 of 728 for 'essential spectrum' AND 'self-similar' is "
+                                     "a plausible UNDERCOUNT; combined with arXiv all: being "
+                                     "metadata-only, all: queries are used here to FIND "
+                                     "papers, never to ESTABLISH that none exist"),
+}
+
+
 def build(root=ROOT):
     guard = self_guard()
     rows = load_banked(root)
@@ -580,6 +686,7 @@ def build(root=ROOT):
         "positive_control": control,
         "classifier_self_tests": tests,
         "route_if_wanted": ROUTE_IF_WANTED,
+        "mf3_audit": MF3_AUDIT,
         "discriminators": {
             "D1_realization_named_by_2509_14185": d1,
             "D2_realization_dichotomy_published": d2,
