@@ -681,6 +681,23 @@ CAPABILITIES = [
      # real importer to it. That is measured -- an earlier draft of this note turned the
      # test red, which is how a documentation comment became a test failure.
      "test": "test_finite_support_adversarial.py"},
+    {"module": "solver/interval_mp.py",
+     "object": "arbitrary-precision interval arithmetic (leg 312, Route-APIA)",
+     "holds": ("decimal.Decimal-backed rigorous MPInterval (directed-rounding "
+               "+ - * /, isum/dot, Taylor sin/cos/atan/pi with proved remainders) "
+               "for pointwise-cancellation regimes float64 cannot resolve, plus "
+               "flagged-non-rigorous banded Cholesky / banded triangular inverse "
+               "/ banded matmul exploiting exact bandwidth-4 Gram structure"),
+     "validated": ("test_interval_mp.py, 13/13: dsin/dcos/atan/pi checked against "
+                   "an independent fractions.Fraction Taylor reference and a "
+                   "65-digit pi string (caught 3 real bugs -- an atan recurrence "
+                   "missing a ratio factor, bare abs()/negate silently rounding to "
+                   "the ambient 28-digit decimal context, Decimal(1)/Decimal(239) "
+                   "computed outside any explicit context -- all fixed); banded "
+                   "linear algebra checked against exact Fraction arithmetic on "
+                   "random banded SPD matrices; leg 178's own theta~3e-31 regime "
+                   "directly tested"),
+     "test": "test_interval_mp.py"},
 ]
 
 
