@@ -1,0 +1,1202 @@
+{
+  "leg": 323,
+  "route": "CENV",
+  "run_utc": "2026-08-11T17:46:08Z",
+  "gate": "Does the variant re-run surface at least one work the original instrument missed (beyond 2604.09949 itself)?",
+  "gate_answer": "NO",
+  "n_unavailable": 20,
+  "mechanism_findings": {
+    "description": "Step A: per-term standalone abs: phrase queries, baseline (fresh single-hyphen) vs each of 5 variant forms. A non-empty entry means the arXiv retrieval layer's result set changed for that dash form -- i.e. is dash-sensitive for that term.",
+    "n_terms_tested": 7,
+    "n_forms_with_a_delta": 5,
+    "deltas": [
+      {
+        "term": "Navier-Stokes",
+        "form": "unhyphenated",
+        "baseline_only": [
+          "2607.18993",
+          "2607.19071",
+          "2607.20976",
+          "2607.21142",
+          "2607.21282",
+          "2607.21380",
+          "2607.21439",
+          "2607.21644",
+          "2607.21926",
+          "2607.22146",
+          "2607.22492",
+          "2607.23234",
+          "2607.23635",
+          "2607.23707",
+          "2607.23720",
+          "2607.23756",
+          "2607.24059",
+          "2607.24140",
+          "2607.24635",
+          "2607.25009",
+          "2607.25028",
+          "2607.25048",
+          "2607.25453",
+          "2607.25836",
+          "2607.26895",
+          "2607.27440",
+          "2607.27477",
+          "2607.27580",
+          "2607.27583",
+          "2607.28333",
+          "2607.28960",
+          "2607.29298",
+          "2608.00465",
+          "2608.00675",
+          "2608.00727",
+          "2608.00843",
+          "2608.00972",
+          "2608.01155",
+          "2608.02377",
+          "2608.02662",
+          "2608.03115",
+          "2608.03672",
+          "2608.04138",
+          "2608.04191",
+          "2608.04621",
+          "2608.05208",
+          "2608.05654",
+          "2608.05849",
+          "2608.05940",
+          "2608.06040",
+          "2608.06099",
+          "2608.06173",
+          "2608.06428",
+          "2608.06533",
+          "2608.06606",
+          "2608.06899",
+          "2608.08117",
+          "2608.08568",
+          "2608.08841",
+          "2608.09483"
+        ],
+        "variant_only": [
+          "2303.06149",
+          "2305.03823",
+          "2601.08498",
+          "2602.17303",
+          "2603.27861"
+        ]
+      },
+      {
+        "term": "self-similar",
+        "form": "unhyphenated",
+        "baseline_only": [
+          "2607.10700",
+          "2607.11024",
+          "2607.11165",
+          "2607.11482",
+          "2607.11957",
+          "2607.12159",
+          "2607.12857",
+          "2607.13406",
+          "2607.13776",
+          "2607.14388",
+          "2607.15256",
+          "2607.15635",
+          "2607.15743",
+          "2607.16064",
+          "2607.16149",
+          "2607.16490",
+          "2607.16733",
+          "2607.16785",
+          "2607.17483",
+          "2607.17815",
+          "2607.18648",
+          "2607.19027",
+          "2607.19324",
+          "2607.19700",
+          "2607.19762",
+          "2607.19785",
+          "2607.19813",
+          "2607.20976",
+          "2607.21206",
+          "2607.21374",
+          "2607.22001",
+          "2607.23210",
+          "2607.24530",
+          "2607.25411",
+          "2607.25644",
+          "2607.26127",
+          "2607.26400",
+          "2607.26896",
+          "2607.26948",
+          "2607.27072",
+          "2607.27343",
+          "2607.27796",
+          "2607.27873",
+          "2607.28192",
+          "2607.28793",
+          "2608.00127",
+          "2608.00430",
+          "2608.00960",
+          "2608.01580",
+          "2608.02307",
+          "2608.02482",
+          "2608.03332",
+          "2608.03947",
+          "2608.04157",
+          "2608.04447",
+          "2608.05679",
+          "2608.06619",
+          "2608.06716",
+          "2608.08410",
+          "2608.09719"
+        ],
+        "variant_only": [
+          "1202.5689",
+          "1203.5834",
+          "1204.5897",
+          "1205.3482",
+          "1206.5458",
+          "1207.2450",
+          "1207.3478",
+          "1207.3619",
+          "1208.1107",
+          "1210.0482",
+          "1211.0959",
+          "1305.1188",
+          "1305.4384",
+          "1312.0818",
+          "1403.0696",
+          "1407.3774",
+          "1407.8354",
+          "1410.0511",
+          "1410.2727",
+          "1412.8319",
+          "1506.00615",
+          "1602.08375",
+          "1603.03569",
+          "1606.08490",
+          "1701.08447",
+          "1710.01470",
+          "1711.00387",
+          "1802.06276",
+          "1905.13507",
+          "1908.01731",
+          "1909.01029",
+          "1910.02341",
+          "1911.04341",
+          "1912.00097",
+          "1912.12190",
+          "2002.00528",
+          "2002.01386",
+          "2007.03084",
+          "2012.01680",
+          "2012.03791",
+          "2111.05127",
+          "2202.04597",
+          "2202.06185",
+          "2202.11848",
+          "2207.12365",
+          "2209.04931",
+          "2210.02931",
+          "2212.12581",
+          "2212.13413",
+          "2309.11882",
+          "2310.06620",
+          "2311.03247",
+          "2403.20070",
+          "2501.06542",
+          "2501.07160",
+          "2509.06020",
+          "2601.09441",
+          "2604.22592",
+          "2605.25213",
+          "2607.07410"
+        ]
+      },
+      {
+        "term": "computer-assisted",
+        "form": "unhyphenated",
+        "baseline_only": [
+          "2605.23593",
+          "2605.27515",
+          "2606.00109",
+          "2606.00247",
+          "2606.05519",
+          "2606.05569",
+          "2606.12794",
+          "2606.13488",
+          "2606.13962",
+          "2606.14399",
+          "2606.14625",
+          "2606.19596",
+          "2606.19908",
+          "2606.21699",
+          "2606.23373",
+          "2606.26077",
+          "2606.27131",
+          "2606.28041",
+          "2606.28394",
+          "2606.28908",
+          "2606.29744",
+          "2606.30588",
+          "2607.01061",
+          "2607.06515",
+          "2607.10704",
+          "2607.11010",
+          "2607.11318",
+          "2607.12572",
+          "2607.13567",
+          "2607.13762",
+          "2607.15256",
+          "2607.16787",
+          "2607.19148",
+          "2607.21579",
+          "2607.23101",
+          "2607.23611",
+          "2607.24691",
+          "2607.25958",
+          "2607.26363",
+          "2607.27072",
+          "2607.27229",
+          "2607.27829",
+          "2607.28194",
+          "2607.28653",
+          "2607.28711",
+          "2607.28858",
+          "2607.29305",
+          "2608.00095",
+          "2608.05335",
+          "2608.05400",
+          "2608.06226",
+          "2608.07199",
+          "2608.07604",
+          "2608.08001",
+          "2608.08059",
+          "2608.08154",
+          "2608.08844",
+          "2608.09092",
+          "2608.09302",
+          "2608.09332"
+        ],
+        "variant_only": [
+          "1911.10095",
+          "2109.14818"
+        ]
+      },
+      {
+        "term": "blow-up",
+        "form": "unhyphenated",
+        "baseline_only": [
+          "2607.14576",
+          "2607.14716",
+          "2607.15334",
+          "2607.17580",
+          "2607.18035",
+          "2607.18442",
+          "2607.18952",
+          "2607.19748",
+          "2607.21335",
+          "2607.22046",
+          "2607.22057",
+          "2607.22073",
+          "2607.22128",
+          "2607.23450",
+          "2607.23674",
+          "2607.23720",
+          "2607.24019",
+          "2607.24204",
+          "2607.24281",
+          "2607.24346",
+          "2607.24830",
+          "2607.24920",
+          "2607.24949",
+          "2607.25293",
+          "2607.25571",
+          "2607.25759",
+          "2607.25906",
+          "2607.27407",
+          "2607.28192",
+          "2607.28194",
+          "2607.28697",
+          "2607.28860",
+          "2607.29097",
+          "2607.29318",
+          "2607.29332",
+          "2607.29345",
+          "2607.29379",
+          "2608.01065",
+          "2608.01132",
+          "2608.01580",
+          "2608.01658",
+          "2608.02198",
+          "2608.02278",
+          "2608.02288",
+          "2608.03713",
+          "2608.04280",
+          "2608.05334",
+          "2608.05696",
+          "2608.06585",
+          "2608.07248",
+          "2608.07675",
+          "2608.07973",
+          "2608.07983",
+          "2608.08134",
+          "2608.08533",
+          "2608.08573",
+          "2608.08593",
+          "2608.09760",
+          "2608.09843"
+        ],
+        "variant_only": [
+          "2604.17285",
+          "2604.19389",
+          "2604.19475",
+          "2604.20073",
+          "2604.20171",
+          "2604.22073",
+          "2604.23159",
+          "2604.23591",
+          "2605.00407",
+          "2605.00566",
+          "2605.12539",
+          "2605.15130",
+          "2605.15149",
+          "2605.15552",
+          "2605.20045",
+          "2605.20426",
+          "2605.20715",
+          "2605.21142",
+          "2605.23017",
+          "2605.23301",
+          "2605.24278",
+          "2605.26598",
+          "2605.27152",
+          "2606.03484",
+          "2606.05211",
+          "2606.06202",
+          "2606.17884",
+          "2606.22815",
+          "2606.23996",
+          "2606.24452",
+          "2606.24562",
+          "2606.26658",
+          "2606.26665",
+          "2606.28375",
+          "2606.29454",
+          "2606.29468",
+          "2606.31173",
+          "2607.01154",
+          "2607.03035",
+          "2607.04575",
+          "2607.05474",
+          "2607.05624",
+          "2607.05664",
+          "2607.07628",
+          "2607.08564",
+          "2607.12895",
+          "2607.15177",
+          "2607.18788",
+          "2607.20886",
+          "2607.22918",
+          "2607.25898",
+          "2607.26787",
+          "2608.02311",
+          "2608.02413",
+          "2608.03332",
+          "2608.03572",
+          "2608.04713",
+          "2608.05105",
+          "2608.06234"
+        ]
+      },
+      {
+        "term": "De Gregorio",
+        "form": "joined",
+        "baseline_only": [
+          "1009.1029",
+          "1610.09701",
+          "1701.04050",
+          "1707.05205",
+          "1710.02737",
+          "1811.09754",
+          "1905.06387",
+          "1908.09385",
+          "2010.12700",
+          "2107.04777",
+          "2107.11917",
+          "2209.08232",
+          "2209.09886",
+          "2303.14528",
+          "2306.04146",
+          "2308.12197",
+          "2311.11511",
+          "2503.01008",
+          "2506.02800",
+          "2510.03108",
+          "2602.13995"
+        ],
+        "variant_only": [
+          "2603.06182"
+        ]
+      }
+    ]
+  },
+  "compound_rerun_deltas": [
+    {
+      "channel": "C1",
+      "base_query": "abs:\"computer-assisted\" AND abs:\"self-similar\" AND abs:blowup",
+      "variant_query": "abs:\"computer-assisted\" AND abs:\"self-similar\" AND abs:blowup",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C1",
+      "base_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"fractional dissipation\"",
+      "variant_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"fractional dissipation\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C1",
+      "base_query": "abs:\"Ginzburg-Landau\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+      "variant_query": "abs:\"Ginzburg-Landau\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C1",
+      "base_query": "abs:\"nonlinear heat equation\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+      "variant_query": "abs:\"nonlinear heat equation\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C1",
+      "base_query": "abs:\"branches\" AND abs:\"self-similar\" AND abs:\"Ginzburg-Landau\"",
+      "variant_query": "abs:\"branches\" AND abs:\"self-similar\" AND abs:\"Ginzburg-Landau\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C1",
+      "base_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
+      "variant_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C1",
+      "base_query": "abs:\"self-similar\" AND abs:\"blow-up\" AND abs:\"validated numerics\"",
+      "variant_query": "abs:\"self-similar\" AND abs:\"blow-up\" AND abs:\"validated numerics\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C1",
+      "base_query": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer-assisted\"",
+      "variant_query": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer-assisted\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C1",
+      "base_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"computer-assisted proof\" AND abs:viscosity",
+      "variant_query": "abs:\"self-similar\" AND abs:blowup AND abs:\"computer-assisted proof\" AND abs:viscosity",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C1",
+      "base_query": "abs:\"blowup\" AND abs:\"viscous\" AND abs:\"rigorous\" AND abs:\"continuation\"",
+      "variant_query": "abs:\"blowup\" AND abs:\"viscous\" AND abs:\"rigorous\" AND abs:\"continuation\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C1",
+      "base_query": "abs:\"hypodissipative\" AND abs:\"Navier-Stokes\" AND abs:blowup",
+      "variant_query": "abs:\"hypodissipative\" AND abs:\"Navier-Stokes\" AND abs:blowup",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C1",
+      "base_query": "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\"",
+      "variant_query": "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C2",
+      "base_query": "abs:\"imploding\" AND abs:\"computer-assisted\"",
+      "variant_query": "abs:\"imploding\" AND abs:\"computer-assisted\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C2",
+      "base_query": "abs:\"implosion\" AND abs:\"self-similar\" AND abs:\"Navier-Stokes\"",
+      "variant_query": "abs:\"implosion\" AND abs:\"self-similar\" AND abs:\"Navier-Stokes\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C2",
+      "base_query": "abs:\"compressible\" AND abs:\"singularity\" AND abs:\"computer-assisted\"",
+      "variant_query": "abs:\"compressible\" AND abs:\"singularity\" AND abs:\"computer-assisted\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C2",
+      "base_query": "abs:\"compressible Navier-Stokes\" AND abs:\"self-similar\" AND abs:\"blow-up\"",
+      "variant_query": "abs:\"compressible Navier-Stokes\" AND abs:\"self-similar\" AND abs:\"blow-up\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C3",
+      "base_query": "abs:\"radii polynomial\" AND abs:\"blow-up\"",
+      "variant_query": "abs:\"radii polynomial\" AND abs:\"blow-up\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C3",
+      "base_query": "abs:\"radii polynomial\" AND abs:\"self-similar\"",
+      "variant_query": "abs:\"radii polynomial\" AND abs:\"self-similar\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C3",
+      "base_query": "abs:\"Newton-Kantorovich\" AND abs:\"blow-up\"",
+      "variant_query": "abs:\"Newton-Kantorovich\" AND abs:\"blow-up\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C3",
+      "base_query": "abs:\"validated numerics\" AND abs:\"dissipative\" AND abs:\"singularity\"",
+      "variant_query": "abs:\"validated numerics\" AND abs:\"dissipative\" AND abs:\"singularity\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C3",
+      "base_query": "abs:\"interval arithmetic\" AND abs:\"viscous\"",
+      "variant_query": "abs:\"interval arithmetic\" AND abs:\"viscous\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C3",
+      "base_query": "abs:\"computer-assisted proof\" AND abs:\"parabolic\" AND abs:\"blow-up\"",
+      "variant_query": "abs:\"computer-assisted proof\" AND abs:\"parabolic\" AND abs:\"blow-up\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C3",
+      "base_query": "abs:\"rigorous numerics\" AND abs:\"blow-up\"",
+      "variant_query": "abs:\"rigorous numerics\" AND abs:\"blow-up\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C4",
+      "base_query": "abs:\"De Gregorio\" AND abs:\"dissipation\"",
+      "variant_query": "abs:\"De Gregorio\" AND abs:\"dissipation\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C4",
+      "base_query": "abs:\"Constantin-Lax-Majda\" AND abs:\"dissipation\"",
+      "variant_query": "abs:\"Constantin-Lax-Majda\" AND abs:\"dissipation\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C4",
+      "base_query": "abs:\"Hou-Luo\" AND abs:\"viscous\"",
+      "variant_query": "abs:\"Hou-Luo\" AND abs:\"viscous\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C4",
+      "base_query": "abs:\"Boussinesq\" AND abs:\"computer-assisted\"",
+      "variant_query": "abs:\"Boussinesq\" AND abs:\"computer-assisted\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C4",
+      "base_query": "abs:\"surface quasi-geostrophic\" AND abs:\"computer-assisted\"",
+      "variant_query": "abs:\"surface quasi-geostrophic\" AND abs:\"computer-assisted\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C4",
+      "base_query": "abs:\"Navier-Stokes\" AND abs:\"computer-assisted proof\" AND abs:\"singularity\"",
+      "variant_query": "abs:\"Navier-Stokes\" AND abs:\"computer-assisted proof\" AND abs:\"singularity\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C4",
+      "base_query": "abs:\"Euler equations\" AND abs:\"computer-assisted\" AND abs:\"viscosity\"",
+      "variant_query": "abs:\"Euler equations\" AND abs:\"computer-assisted\" AND abs:\"viscosity\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C5",
+      "base_query": "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\"",
+      "variant_query": "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C5",
+      "base_query": "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"",
+      "variant_query": "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C5",
+      "base_query": "abs:\"Leray\" AND abs:\"self-similar\" AND abs:\"nonexistence\"",
+      "variant_query": "abs:\"Leray\" AND abs:\"self-similar\" AND abs:\"nonexistence\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C5",
+      "base_query": "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\"",
+      "variant_query": "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    },
+    {
+      "channel": "C5",
+      "base_query": "abs:\"local energy\" AND abs:\"Navier-Stokes\" AND abs:\"self-similar\"",
+      "variant_query": "abs:\"local energy\" AND abs:\"Navier-Stokes\" AND abs:\"self-similar\"",
+      "n_delta_vs_this_session_baseline": 0,
+      "delta_links": [],
+      "genuinely_new_candidates": []
+    }
+  ],
+  "genuinely_new_candidates": [],
+  "step_c_author_census": [
+    {
+      "group": "Breden-Chu",
+      "query_string": "Breden-Chu",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Breden-Chu%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 0,
+      "links": []
+    },
+    {
+      "group": "Breden-Chu",
+      "query_string": "Breden--Chu",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Breden--Chu%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 0,
+      "links": []
+    },
+    {
+      "group": "Breden-Chu",
+      "query_string": "BredenChu",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22BredenChu%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 0,
+      "links": []
+    },
+    {
+      "group": "Dahne-Figueras",
+      "query_string": "Dahne-Figueras",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Dahne-Figueras%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 0,
+      "links": []
+    },
+    {
+      "group": "Dahne-Figueras",
+      "query_string": "Dahne--Figueras",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Dahne--Figueras%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 0,
+      "links": []
+    },
+    {
+      "group": "Dahne-Figueras",
+      "query_string": "DahneFigueras",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22DahneFigueras%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 0,
+      "links": []
+    },
+    {
+      "group": "Dahne-Figueras",
+      "query_string": "D\u00e4hne-Figueras",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22D%C3%A4hne-Figueras%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 0,
+      "links": []
+    },
+    {
+      "group": "Cao-Labora",
+      "query_string": "Cao-Labora",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Cao-Labora%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 11,
+      "links": [
+        "https://arxiv.org/abs/2608.05114",
+        "https://arxiv.org/abs/2601.23040",
+        "https://arxiv.org/abs/2510.05732",
+        "https://arxiv.org/abs/2509.14185",
+        "https://arxiv.org/abs/2503.16813",
+        "https://arxiv.org/abs/2502.01818",
+        "https://arxiv.org/abs/2410.04532",
+        "https://arxiv.org/abs/2310.05325",
+        "https://arxiv.org/abs/2301.10101",
+        "https://arxiv.org/abs/2208.09445",
+        "https://arxiv.org/abs/1911.12313"
+      ]
+    },
+    {
+      "group": "Cao-Labora",
+      "query_string": "Cao--Labora",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Cao--Labora%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 0,
+      "links": []
+    },
+    {
+      "group": "Cao-Labora",
+      "query_string": "CaoLabora",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22CaoLabora%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "ERROR",
+      "error": "HTTPError: HTTP Error 429: Unknown Error",
+      "n": null,
+      "links": []
+    },
+    {
+      "group": "Gomez-Serrano",
+      "query_string": "Gomez-Serrano",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Gomez-Serrano%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "ERROR",
+      "error": "HTTPError: HTTP Error 429: Unknown Error",
+      "n": null,
+      "links": []
+    },
+    {
+      "group": "Gomez-Serrano",
+      "query_string": "Gomez--Serrano",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Gomez--Serrano%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 0,
+      "links": []
+    },
+    {
+      "group": "Gomez-Serrano",
+      "query_string": "GomezSerrano",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22GomezSerrano%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 0,
+      "links": []
+    },
+    {
+      "group": "Gomez-Serrano",
+      "query_string": "G\u00f3mez-Serrano",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22G%C3%B3mez-Serrano%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 47,
+      "links": [
+        "https://arxiv.org/abs/2608.06226",
+        "https://arxiv.org/abs/2605.18699",
+        "https://arxiv.org/abs/2605.03920",
+        "https://arxiv.org/abs/2601.16285",
+        "https://arxiv.org/abs/2511.02864",
+        "https://arxiv.org/abs/2510.03009",
+        "https://arxiv.org/abs/2509.14185",
+        "https://arxiv.org/abs/2503.16813",
+        "https://arxiv.org/abs/2411.12958",
+        "https://arxiv.org/abs/2411.00280",
+        "https://arxiv.org/abs/2410.04532",
+        "https://arxiv.org/abs/2310.05325",
+        "https://arxiv.org/abs/2305.05046",
+        "https://arxiv.org/abs/2303.03992",
+        "https://arxiv.org/abs/2301.10101",
+        "https://arxiv.org/abs/2208.09445",
+        "https://arxiv.org/abs/2207.12363",
+        "https://arxiv.org/abs/2205.00802",
+        "https://arxiv.org/abs/2201.06780",
+        "https://arxiv.org/abs/2112.03821",
+        "https://arxiv.org/abs/2109.02565",
+        "https://arxiv.org/abs/2108.11284",
+        "https://arxiv.org/abs/2103.02276",
+        "https://arxiv.org/abs/2012.08709",
+        "https://arxiv.org/abs/2012.04548",
+        "https://arxiv.org/abs/1911.06758",
+        "https://arxiv.org/abs/1908.01722",
+        "https://arxiv.org/abs/1810.10935",
+        "https://arxiv.org/abs/1810.00745",
+        "https://arxiv.org/abs/1807.07021",
+        "https://arxiv.org/abs/1709.05960",
+        "https://arxiv.org/abs/1705.10842",
+        "https://arxiv.org/abs/1612.08964",
+        "https://arxiv.org/abs/1603.03325",
+        "https://arxiv.org/abs/1512.02564",
+        "https://arxiv.org/abs/1508.01655",
+        "https://arxiv.org/abs/1504.02775",
+        "https://arxiv.org/abs/1501.02694",
+        "https://arxiv.org/abs/1409.7040",
+        "https://arxiv.org/abs/1401.6419",
+        "https://arxiv.org/abs/1401.5376",
+        "https://arxiv.org/abs/1311.0430",
+        "https://arxiv.org/abs/1204.6633",
+        "https://arxiv.org/abs/1201.1789",
+        "https://arxiv.org/abs/1112.2170",
+        "https://arxiv.org/abs/1106.2120",
+        "https://arxiv.org/abs/1006.3798"
+      ]
+    },
+    {
+      "group": "ALS",
+      "query_string": "Ambrose Lushnikov Siegel Silantyev",
+      "url": "https://export.arxiv.org/api/query?search_query=au%3A%22Ambrose+Lushnikov+Siegel+Silantyev%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
+      "status": "OK",
+      "error": null,
+      "n": 0,
+      "links": []
+    }
+  ],
+  "step_b_baseline_replication_check": [
+    {
+      "channel": "C1",
+      "query": "abs:\"computer-assisted\" AND abs:\"self-similar\" AND abs:blowup",
+      "n": 2,
+      "links": [
+        "https://arxiv.org/abs/2308.01528",
+        "https://arxiv.org/abs/2305.05660"
+      ]
+    },
+    {
+      "channel": "C1",
+      "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"fractional dissipation\"",
+      "n": 1,
+      "links": [
+        "https://arxiv.org/abs/2509.10806"
+      ]
+    },
+    {
+      "channel": "C1",
+      "query": "abs:\"Ginzburg-Landau\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+      "n": 1,
+      "links": [
+        "https://arxiv.org/abs/2410.05480"
+      ]
+    },
+    {
+      "channel": "C1",
+      "query": "abs:\"nonlinear heat equation\" AND abs:\"self-similar\" AND abs:\"computer-assisted\"",
+      "n": 1,
+      "links": [
+        "https://arxiv.org/abs/2404.04054"
+      ]
+    },
+    {
+      "channel": "C1",
+      "query": "abs:\"branches\" AND abs:\"self-similar\" AND abs:\"Ginzburg-Landau\"",
+      "n": 1,
+      "links": [
+        "https://arxiv.org/abs/2410.05480"
+      ]
+    },
+    {
+      "channel": "C1",
+      "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"interval arithmetic\"",
+      "n": 0,
+      "links": []
+    },
+    {
+      "channel": "C1",
+      "query": "abs:\"self-similar\" AND abs:\"blow-up\" AND abs:\"validated numerics\"",
+      "n": 0,
+      "links": []
+    },
+    {
+      "channel": "C1",
+      "query": "abs:\"Boussinesq\" AND abs:blowup AND abs:viscosity AND abs:\"computer-assisted\"",
+      "n": null,
+      "links": []
+    },
+    {
+      "channel": "C1",
+      "query": "abs:\"self-similar\" AND abs:blowup AND abs:\"computer-assisted proof\" AND abs:viscosity",
+      "n": null,
+      "links": []
+    },
+    {
+      "channel": "C1",
+      "query": "abs:\"blowup\" AND abs:\"viscous\" AND abs:\"rigorous\" AND abs:\"continuation\"",
+      "n": null,
+      "links": []
+    },
+    {
+      "channel": "C1",
+      "query": "abs:\"hypodissipative\" AND abs:\"Navier-Stokes\" AND abs:blowup",
+      "n": 1,
+      "links": [
+        "https://arxiv.org/abs/2307.03434"
+      ]
+    },
+    {
+      "channel": "C1",
+      "query": "abs:\"self-similar\" AND abs:\"Navier-Stokes\" AND abs:\"computer-assisted\"",
+      "n": 3,
+      "links": [
+        "https://arxiv.org/abs/2604.09949",
+        "https://arxiv.org/abs/2509.25116",
+        "https://arxiv.org/abs/2509.14185"
+      ]
+    },
+    {
+      "channel": "C2",
+      "query": "abs:\"imploding\" AND abs:\"computer-assisted\"",
+      "n": null,
+      "links": []
+    },
+    {
+      "channel": "C2",
+      "query": "abs:\"implosion\" AND abs:\"self-similar\" AND abs:\"Navier-Stokes\"",
+      "n": null,
+      "links": []
+    },
+    {
+      "channel": "C2",
+      "query": "abs:\"compressible\" AND abs:\"singularity\" AND abs:\"computer-assisted\"",
+      "n": null,
+      "links": []
+    },
+    {
+      "channel": "C2",
+      "query": "abs:\"compressible Navier-Stokes\" AND abs:\"self-similar\" AND abs:\"blow-up\"",
+      "n": null,
+      "links": []
+    },
+    {
+      "channel": "C3",
+      "query": "abs:\"radii polynomial\" AND abs:\"blow-up\"",
+      "n": 0,
+      "links": []
+    },
+    {
+      "channel": "C3",
+      "query": "abs:\"radii polynomial\" AND abs:\"self-similar\"",
+      "n": 0,
+      "links": []
+    },
+    {
+      "channel": "C3",
+      "query": "abs:\"Newton-Kantorovich\" AND abs:\"blow-up\"",
+      "n": 0,
+      "links": []
+    },
+    {
+      "channel": "C3",
+      "query": "abs:\"validated numerics\" AND abs:\"dissipative\" AND abs:\"singularity\"",
+      "n": 0,
+      "links": []
+    },
+    {
+      "channel": "C3",
+      "query": "abs:\"interval arithmetic\" AND abs:\"viscous\"",
+      "n": 1,
+      "links": [
+        "https://arxiv.org/abs/1401.5371"
+      ]
+    },
+    {
+      "channel": "C3",
+      "query": "abs:\"computer-assisted proof\" AND abs:\"parabolic\" AND abs:\"blow-up\"",
+      "n": 0,
+      "links": []
+    },
+    {
+      "channel": "C3",
+      "query": "abs:\"rigorous numerics\" AND abs:\"blow-up\"",
+      "n": 5,
+      "links": [
+        "https://arxiv.org/abs/2305.05915",
+        "https://arxiv.org/abs/2008.06903",
+        "https://arxiv.org/abs/1711.01911",
+        "https://arxiv.org/abs/1707.05936",
+        "https://arxiv.org/abs/1401.7553"
+      ]
+    },
+    {
+      "channel": "C4",
+      "query": "abs:\"De Gregorio\" AND abs:\"dissipation\"",
+      "n": 1,
+      "links": [
+        "https://arxiv.org/abs/1908.09385"
+      ]
+    },
+    {
+      "channel": "C4",
+      "query": "abs:\"Constantin-Lax-Majda\" AND abs:\"dissipation\"",
+      "n": 5,
+      "links": [
+        "https://arxiv.org/abs/2607.19762",
+        "https://arxiv.org/abs/2504.14346",
+        "https://arxiv.org/abs/2411.01891",
+        "https://arxiv.org/abs/2207.07548",
+        "https://arxiv.org/abs/1908.09385"
+      ]
+    },
+    {
+      "channel": "C4",
+      "query": "abs:\"Hou-Luo\" AND abs:\"viscous\"",
+      "n": 0,
+      "links": []
+    },
+    {
+      "channel": "C4",
+      "query": "abs:\"Boussinesq\" AND abs:\"computer-assisted\"",
+      "n": null,
+      "links": []
+    },
+    {
+      "channel": "C4",
+      "query": "abs:\"surface quasi-geostrophic\" AND abs:\"computer-assisted\"",
+      "n": 0,
+      "links": []
+    },
+    {
+      "channel": "C4",
+      "query": "abs:\"Navier-Stokes\" AND abs:\"computer-assisted proof\" AND abs:\"singularity\"",
+      "n": 4,
+      "links": [
+        "https://arxiv.org/abs/2604.09949",
+        "https://arxiv.org/abs/2509.14185",
+        "https://arxiv.org/abs/2506.19243",
+        "https://arxiv.org/abs/1704.00560"
+      ]
+    },
+    {
+      "channel": "C4",
+      "query": "abs:\"Euler equations\" AND abs:\"computer-assisted\" AND abs:\"viscosity\"",
+      "n": 0,
+      "links": []
+    },
+    {
+      "channel": "C5",
+      "query": "abs:\"backward self-similar\" AND abs:\"Navier-Stokes\"",
+      "n": 7,
+      "links": [
+        "https://arxiv.org/abs/2006.15776",
+        "https://arxiv.org/abs/1911.00339",
+        "https://arxiv.org/abs/1901.01510",
+        "https://arxiv.org/abs/1812.00957",
+        "https://arxiv.org/abs/1807.10341",
+        "https://arxiv.org/abs/1509.08177",
+        "https://arxiv.org/abs/1306.0305"
+      ]
+    },
+    {
+      "channel": "C5",
+      "query": "abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"",
+      "n": null,
+      "links": []
+    },
+    {
+      "channel": "C5",
+      "query": "abs:\"Leray\" AND abs:\"self-similar\" AND abs:\"nonexistence\"",
+      "n": 1,
+      "links": [
+        "https://arxiv.org/abs/1110.0054"
+      ]
+    },
+    {
+      "channel": "C5",
+      "query": "abs:\"Type I\" AND abs:\"Navier-Stokes\" AND abs:\"blow-up\"",
+      "n": 9,
+      "links": [
+        "https://arxiv.org/abs/2604.07785",
+        "https://arxiv.org/abs/2511.09556",
+        "https://arxiv.org/abs/2410.07816",
+        "https://arxiv.org/abs/2112.10705",
+        "https://arxiv.org/abs/2111.14776",
+        "https://arxiv.org/abs/2003.06717",
+        "https://arxiv.org/abs/1906.08225",
+        "https://arxiv.org/abs/1812.09115",
+        "https://arxiv.org/abs/1608.06680"
+      ]
+    },
+    {
+      "channel": "C5",
+      "query": "abs:\"local energy\" AND abs:\"Navier-Stokes\" AND abs:\"self-similar\"",
+      "n": 5,
+      "links": [
+        "https://arxiv.org/abs/2601.03833",
+        "https://arxiv.org/abs/2202.08352",
+        "https://arxiv.org/abs/2006.13145",
+        "https://arxiv.org/abs/1907.00256",
+        "https://arxiv.org/abs/1801.08060"
+      ]
+    }
+  ],
+  "excluded_from_gate_count": [
+    "2604.09949 (leg 309's territory, recorded not adjudicated)"
+  ],
+  "clay_odds_note": "unchanged, ~0.05%; this leg is an instrument fix, not a chain move."
+}
