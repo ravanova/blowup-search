@@ -163,6 +163,17 @@ counts** (leg 53 logged counts, could not be audited, and was withdrawn).
 > happened on ACTIVE ground — if your leg's cell is active, the recency check stays at full
 > weight.
 
+**Assess before you run anything long** (user instruction, 2026-08-11, binding on every agent).
+**Before running a script you expect to take longer than 10 minutes, assess it for performance
+and try to improve it first.** Estimate the runtime before you launch. If the estimate exceeds
+~10 minutes, find the hot path and cut it down before running — vectorise, cache, reuse what
+`capabilities.py` already provides, and shrink the grid or the sweep to the smallest size that
+still answers your gate in its pre-committed wording. Record in your journal: the estimate, what
+you changed, and the achieved runtime. If a long run is genuinely unavoidable to answer the
+gate, **say so explicitly with the reason and the measured cost** rather than silently spending
+the time. This is not a licence to weaken a gate to make it cheap — if the cheap version cannot
+answer the gate as written, the run is unavoidable and you say so.
+
 **The full quartet, negative results included** (`ORCHESTRATION.md` §6). Runner, curated JSON
 with every number the prose quotes, BLOG **and** TECHNICAL, registered figure. Three of the
 last four legs answered NO and all four shipped the same artifact. That is the point.
