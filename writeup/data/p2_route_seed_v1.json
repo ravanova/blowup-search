@@ -1,0 +1,115 @@
+{
+  "leg": 342,
+  "route": "SEED",
+  "branch": "leg/342-seed-v1",
+  "thesis": "Seeded DSS needs a seed; leg 313 measured the seed set EMPTY (Hou 2405.10916 fails the screen three ways); leg 334 hard-depends on an answer for its plan clause (c).",
+  "screened_object": {
+    "name": "NS3D-DSS-NONAXI-LAMBDA-LARGE",
+    "source": "leg 251, carried by leg 313 sec 2",
+    "description": "3D incompressible NS, non-axisymmetric backward DSS, lambda significantly larger than 1, profile outside L^inf_t L^3; search target is a periodic orbit of the dynamically rescaled flow with period T = 2 log(lambda)."
+  },
+  "screen_313_three_ways_hou_2405_10916_fails": [
+    {
+      "n": 1,
+      "name": "Axisymmetric",
+      "statement": "Leg 253's composition (Chae-Wolf Thm 1.1 with the axisymmetric Type-I exclusion) kills axisymmetric DSS outright; Hou 2405.10916 is axisymmetric with swirl."
+    },
+    {
+      "n": 2,
+      "name": "Generalized, not NS",
+      "statement": "Solution-dependent viscosity, effective dimension approx 3.188 (trending to 3 as background viscosity falls). Phase 0's target is standard-viscosity 3D NS."
+    },
+    {
+      "n": 3,
+      "name": "Stationary, not time-periodic",
+      "statement": "It is a nearly self-similar profile -- a fixed point of the rescaled flow -- not a DSS orbit (time-periodic in the rescaled time variable s)."
+    }
+  ],
+  "seed_set_empty_finding": "THE SEED SET FOR THE SCREENED OBJECT IS EMPTY (leg 313 sec 2): no published numerical DSS candidate for 3D NS survives the NRS/Tsai + axisymmetric screen. Re-confirmed, not re-derived, this leg (writeup/novelty/leg_342.md sec 3): an independent literature pass located no source computing a genuinely time-periodic 3D NS blow-up profile.",
+  "cheap_entrance_ban": {
+    "source": "plan_of_record.py BANNED list, entry 3 (verbatim, read via Read tool at plan_of_record.py:807-808, not via a Bash print which this session measured lossy on long strings)",
+    "text": "another DSS CHEAP-ENTRANCE re-ask -- any attempt to obtain a DSS orbit by BIFURCATION OFF A FIXED POINT of a rescaled flow (Hopf or otherwise), inviscid or viscous",
+    "lift_condition": "never -- three independent measured spectral reasons at the fixed point of the gCLM rescaled flow",
+    "scope_note_from_leg_313": "Leg 313 sec 5 flagged, escalated but did not resolve, whether a search SEEDED FROM a known numerical DSS candidate is covered by Entry A (bifurcation off a fixed point) or Entry B (a global search with no fixed point nearby). This leg does not re-litigate that wording question; it applies the ban's literal text -- BIFURCATION OFF A FIXED POINT -- to each candidate's METHOD OF CONSTRUCTION, which is a narrower, uncontested reading that binds regardless of how the wording question resolves."
+  },
+  "candidate_seed_sources": [
+    {
+      "id": "C1",
+      "name": "Hou 2405.10916 (generalized axisymmetric NS, nearly self-similar blowup)",
+      "arxiv_id": "2405.10916",
+      "already_screened_by": "leg 313",
+      "re_confirmed_this_leg": true,
+      "screen": {"axisymmetric": true, "equation": "NS (generalized, solution-dependent viscosity, dim~3.188)", "temporal_structure": "stationary / nearly self-similar, not time-periodic"},
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "time-marching adaptive-mesh simulation with soft far-field cutoff and viscosity continuation -- not a bifurcation off a fixed point",
+      "verdict": "FAILS SCREEN, all three ways"
+    },
+    {
+      "id": "C2",
+      "name": "Luo-Hou 2013 near-singular 3D Euler",
+      "arxiv_id": "1310.0497",
+      "screen": {"axisymmetric": true, "equation": "Euler (inviscid, not NS)", "temporal_structure": "transient approach to a self-similar singularity, not time-periodic"},
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "high-order adaptive-mesh time-marching simulation -- not a bifurcation off a fixed point",
+      "verdict": "FAILS SCREEN: wrong equation (Euler not NS) in addition to axisymmetric and stationary"
+    },
+    {
+      "id": "C3",
+      "name": "Chen 2026 asymptotically self-similar 3D Euler, C^{1,1/3-} velocity (I and II)",
+      "arxiv_id": "2605.15149 / 2605.15130",
+      "already_flagged_by": "leg 313 sec 2 (as one of two 'manufacture rather than find' recipes)",
+      "screen": {"axisymmetric": "true (no swirl, near the axis)", "equation": "Euler (not NS)", "temporal_structure": "self-similar, not time-periodic"},
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "a fixed-point (Newton-Kantorovich/contraction) argument around a numerically constructed approximate profile -- read past the search snippet this leg to confirm this is a CERTIFICATION fixed point, not a DYNAMICAL bifurcation off a fixed point of a rescaled flow; the two senses of 'fixed point' are distinct and this one does not trip the ban's literal wording",
+      "verdict": "FAILS SCREEN: wrong equation, axisymmetric, stationary not time-periodic. Its METHOD is reusable as a certification recipe once a genuine DSS approximate profile exists, but it does not itself supply one."
+    },
+    {
+      "id": "C4",
+      "name": "Kwon-Tsai 2020, bifurcation of self-similar solutions of stationary NS",
+      "arxiv_id": "2011.02800",
+      "located_this_leg": true,
+      "screen": {"axisymmetric": true, "equation": "NS (stationary equations, not the blowup/dynamically-rescaled system)", "temporal_structure": "seeks discretely-self-similar STEADY solutions via bifurcation from Landau solutions; numerically finds NO bifurcation"},
+      "cheap_entrance_shaped": true,
+      "method_of_construction": "BIFURCATION FROM LANDAU SOLUTIONS, which are exact stationary (fixed-point) solutions of the similarity system -- this is the literal shape the cheap-entrance ban forbids",
+      "verdict": "TRIPLE-DISQUALIFIED: wrong object (steady solutions, not blowup orbits), axisymmetric, AND its method is the exact banned entrance. Recorded as an adverse/cautionary find, not proposed as a route."
+    },
+    {
+      "id": "C5",
+      "name": "Hou et al 2025 high-precision PINNs in unbounded domains",
+      "arxiv_id": "2506.19243",
+      "located_this_leg": true,
+      "load_bearing": true,
+      "screen": {"axisymmetric": "not applicable / not stated (2D Boussinesq proxy)", "equation": "1D Burgers and 2D Boussinesq -- a PROXY for 3D Euler/NS, not NS itself", "temporal_structure": "stationary self-similar profile, same family as arXiv:2210.07191/2305.05660 already in this repo's own grounding papers"},
+      "cheap_entrance_shaped": false,
+      "method_of_construction": "physics-informed neural network trained directly on the PDE residual in an unbounded domain -- not a dynamical-systems bifurcation at all",
+      "verdict": "FAILS SCREEN: wrong equation (proxy model), stationary not time-periodic. Not a seed today, but the MACHINERY is a genuine, demonstrated, working tool, and is the basis for creation path P2 below."
+    }
+  ],
+  "creation_paths": [
+    {
+      "id": "P1",
+      "name": "Complete Hou's own nu_0-continuation plan (drive c_l(nu_0) -> 1/2, n(nu_0) -> 3)",
+      "named_in": "arXiv:2405.10916, proposed but not executed there",
+      "status": "BLOCKED, not merely costly",
+      "reasoning": "Hou's generalized-dimension machinery is built axisymmetric from the start; the continuation is in viscosity/dimension, not in symmetry-breaking, so completing it clears NONE of screen ways 1 or 3 -- at best it approaches screen way 2 (dimension -> 3). Its natural completion is a stationary axisymmetric fixed point of the true-viscosity rescaled NS flow. The obvious next step -- perturb that fixed point to find a nearby DSS orbit -- is BIFURCATION OFF A FIXED POINT OF A RESCALED FLOW, the cheap-entrance ban's own literal text. This path is a dead end whose most natural continuation is banned outright, not a costable route.",
+      "cost_legs": null,
+      "cost_note": "Not costed: the path does not terminate at a screen-passing seed, and its natural next move is pre-banned."
+    },
+    {
+      "id": "P2",
+      "name": "Retarget Hou's own PINN/KAN machinery (arXiv:2506.19243) from the 2D Boussinesq proxy to the genuine non-axisymmetric 3D NS DSS ansatz",
+      "status": "OPEN -- the only creation path this leg finds that is not structurally blocked",
+      "reasoning": "Reuses leg 313/260's five-module cost floor. Four of the five required modules (3D non-axisymmetric NS solver in similarity variables; 3D Leray/Biot-Savart, formulation-specific per leg 332's finding; unbounded-domain discretisation carrying leg 313's measured algebraic far-field + log-periodic block, 1414.9x radial resolution penalty; phase/gauge bordering condition per leg 260/313's lineage) are UNCHANGED by the seeding choice. The fifth module (periodic-orbit search) is REPLACED, not added: a PINN/KAN training loop enforcing V(y,s) = V(y,s+S_0), S_0 = 2 log(lambda), lambda trainable/output, adapted from 2506.19243's unbounded-domain sampling and optimization techniques, in place of a from-scratch global search or a local Newton-Krylov continuation. This is a genuinely new construction -- no located paper trains a PINN against a time-periodicity constraint for NS or Euler -- but it reuses published, demonstrated unbounded-domain PINN techniques rather than inventing them.",
+      "cost_legs_estimate": 35,
+      "cost_method": "five-module floor at this leg's live legs/module rate (342 legs / 49 modules indexed by capabilities.py = 6.98 legs/module; 5 x 6.98 = 34.9, same order as leg 313's ~33-leg estimate for the seeded Newton-Krylov route)",
+      "cost_note": "The floor barely moves with the seeding CHOICE (Hou's late-stage-mesh cutoff vs PINN pretraining): it is set by the four modules unaffected by seeding, not by the seed mechanism itself. This is a shape-of-price finding, not a claim of accuracy on the 35."
+    }
+  ],
+  "gate_answer": "yes",
+  "gate_branch": "ii",
+  "gate_branch_text": "the measured statement that none exists today plus what would create one, named and costed",
+  "consequence_for_leg_334": "334's plan clause (c) asks for a concrete non-empty seeding strategy OR the measured statement that none exists yet and what would create one -- this leg supplies exactly the second branch, with P1 explicitly ruled out (not merely priced) and P2 named and costed at ~35 legs, same order as the route's other build-floor estimates.",
+  "no_ban_touched": true,
+  "no_ban_lifted": true,
+  "plan_of_record_edited": false
+}
