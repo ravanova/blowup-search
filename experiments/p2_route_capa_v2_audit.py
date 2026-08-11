@@ -6,7 +6,7 @@ since.  This runner re-asks the same question at the current HEAD and adds the a
 leg 71 flagged but did not systematise: the **known-answer-gate presence** encoded in
 each row's `validated` field.
 
-WHAT THIS MEASURES (four axes, each reported as a COUNT, never a boolean)
+WHAT THIS MEASURES (eight axes, each reported as a COUNT, never a boolean)
 
   S1  module completeness, both directions
         - solver/*.py on disk with no row  ("missing")
@@ -19,10 +19,14 @@ WHAT THIS MEASURES (four axes, each reported as a COUNT, never a boolean)
         EXISTS and that `validated` is longer than 20 characters, never that the test
         runs, passes, or has anything to do with the module citing it.
   S5  RELEVANCE -- does the cited test file actually LOAD the module citing it?  Leg 71
-        named this gap in words ("existence is checked; greenness and relevance are
-        not") and found one instance by hand (solver/ga_search.py cited test_ga.py,
-        which imports only the `ga/` package and never touches the module).  It never
-        systematised the check.  This runner does: for each row, the cited test file is
+        DID measure this (its curated JSON carries per-row test_imports_module /
+        test_mentions_module) and flagged the same single row this runner flags; it
+        repaired a different instance by hand (solver/ga_search.py cited test_ga.py,
+        which imports only the `ga/` package and never touches the module) and could
+        NOT repair the remaining one, because at e203b52 no test in the repository
+        loaded that module.  What was missing was not the check but a standing one:
+        it lived in leg 71's runner, so nothing re-asked it for ~220 legs, during
+        which leg 124 wrote the very test the broken row needed.  Here: the cited file is
         scanned -- and so are the local test-side helpers it imports -- for any
         `solver.<name>` / `solver/<name>.py` reference.  A row whose test never mentions
         its own module is a confidently-worded pointer at a test that cannot fail when
@@ -52,6 +56,23 @@ USAGE
     .venv/bin/python experiments/p2_route_capa_v2_audit.py --workers 1
     .venv/bin/python experiments/p2_route_capa_v2_audit.py --static-only   # S1/S2/S4
     .venv/bin/python experiments/p2_route_capa_v2_audit.py --recheck test_x.py
+    .venv/bin/python experiments/p2_route_capa_v2_audit.py --only test_x.py    # merge 1
+    .venv/bin/python experiments/p2_route_capa_v2_audit.py --ingest-sweep-log sweep.log
+    .venv/bin/python experiments/p2_route_capa_v2_audit.py --record-detached ...
+
+S6/S7/S8 (added by this leg, all static and cheap): S6 resolves every repository path
+cited inside row prose; S7 counts modules that scripts/merge_gate.sh's
+solver/<n>.py -> test_<n>.py filename mapping cannot reach; S8 classifies how each cited
+test invokes its checks, so a test that is green because nothing runs is caught.
+
+COST, and why it is unavoidable (standing performance rule, 2026-08-11): the sweep costs
+~5400 s cumulative, 47% of it a single genuinely-slow test (test_advection_scope.py,
+2512 s; leg 71 measured the same file at 2364-3046 s).  The gate this runner answers asks
+for PASS STATUS, which is not statically derivable -- the only way to know a cited test
+passes at HEAD is to run it.  So the sweep is memoised instead: the JSON is re-entrant,
+--only merges single verdicts, --static-only re-runs the eight cheap axes in seconds, and
+--ingest-sweep-log recovers verdicts already printed if the driver dies.  A killed sweep
+is recovered, never repeated.
     .venv/bin/python experiments/p2_route_capa_v2_audit.py --figure        # fig only
 
 Writes writeup/data/p2_route_capa_v2_audit.json and, with --figure,
@@ -458,17 +479,23 @@ def make_figure(payload: dict) -> None:
     fig, (ax0, ax1) = plt.subplots(1, 2, figsize=(12.5, 5.4))
 
     # left: the five audit axes, as counts of clean vs. flagged
+    S5_AS_FOUND = 1   # measured pre-repair; see the comment on the `flagged` list below
     axes = ["S1 completeness\nmissing + ghost rows",
             "S2 cited test\nfile absent",
             "S3 greenness\nred at HEAD",
             "S4 `validated`\nnames no magnitude",
-            "S5 relevance\ntest never loads module"]
+            "S5 relevance\ntest never loads module\n(as found; repaired)"]
     flagged = [
         len(st["S1_missing_rows"]) + len(st["S1_ghost_rows"]),
         len(st["S2_rows_with_absent_test_file"]) + len(st["S2_rows_with_no_test_field"]),
         sum(1 for r in runs if not r["green"]),
         st["S4_gate_class_counts"]["prose-without-magnitude"],
-        len(st.get("S5_rows_whose_test_never_loads_the_module", [])),
+        # S5 is plotted AS FOUND, not as it now reads. The audit repaired the one
+        # defect it found, so a post-repair re-run reports 0 -- and a figure showing
+        # 0 would silently erase this leg's only finding. S5_AS_FOUND is the measured
+        # pre-repair count; the live value is asserted to be 0 so that if a SECOND
+        # relevance defect ever appears the figure shows it instead of the constant.
+        S5_AS_FOUND + len(st.get("S5_rows_whose_test_never_loads_the_module", [])),
     ]
     totals = [st["n_rows"], st["n_rows"], len(runs) or 1, st["n_rows"], st["n_rows"]]
     clean = [t - f for t, f in zip(totals, flagged)]
@@ -479,13 +506,14 @@ def make_figure(payload: dict) -> None:
     ax0.set_yticklabels(axes, fontsize=8.5)
     ax0.invert_yaxis()
     ax0.set_xlabel("rows (S1/S2/S4/S5) or distinct cited tests (S3)")
-    ax0.set_title("the five freshness axes  (S3 and S5 are the two the\n"
-                  "drift detector structurally cannot check)", fontsize=10)
+    ax0.set_title("five of the eight freshness axes  (S3 and S5 are the two\n"
+                  "the drift detector structurally cannot check)", fontsize=10)
     for i, (c, f) in enumerate(zip(clean, flagged)):
         ax0.text(c + f + 0.6, i, f"{f} flagged / {c + f}", va="center", fontsize=9,
                  color=("#c1512b" if f else "#333333"),
                  fontweight=("bold" if f else "normal"))
-    ax0.legend(loc="center right", fontsize=9, framealpha=0.95)
+    ax0.legend(loc="lower left", fontsize=9, framealpha=0.95,
+               bbox_to_anchor=(0.015, 0.015))
     ax0.set_xlim(0, max(totals) * 1.42)
 
     # right: the cost distribution -- what an executable index costs to keep honest
@@ -536,6 +564,15 @@ def main() -> int:
     ap.add_argument("--figure", action="store_true", help="rebuild the figure from JSON")
     ap.add_argument("--ingest-sweep-log", type=str, default=None,
                     help="reconstruct sweep verdicts from a killed run's progress log")
+    ap.add_argument("--record-detached", nargs=4, default=None,
+                    metavar=("TEST", "LOGFILE", "WALL_S", "BANNER"),
+                    help="record a test run OUTSIDE this runner (nohup, detached), whose "
+                         "stdout was captured but whose exit status was not. The record is "
+                         "stamped source='detached-run' and returncode=None, and its green "
+                         "verdict is justified ONLY by the test's own terminal success "
+                         "banner appearing as the last line with no traceback. Weaker "
+                         "evidence than a captured rc, labelled as such in the JSON so no "
+                         "reader can mistake the two.")
     ap.add_argument("--only", nargs="*", default=None,
                     help="sweep only these tests and MERGE them into the banked sweep "
                          "(used to finish a sweep whose driver was interrupted)")
@@ -606,6 +643,38 @@ def main() -> int:
         print(f"[ingest] {len(got)} verdicts from log; sweep now "
               f"{len(payload['sweep'])} of {st['n_distinct_cited_tests']}; "
               f"still missing: {missing}")
+    elif args.record_detached:
+        test, logfile, wall_s, banner = args.record_detached
+        text = Path(logfile).read_text(errors="replace")
+        lines = [l for l in text.splitlines() if l.strip()]
+        last = lines[-1] if lines else ""
+        has_tb = "Traceback (most recent call last)" in text
+        green = (banner in last) and not has_tb
+        rec = {
+            "test": test,
+            "returncode": None,
+            "timed_out": False,
+            "green": green,
+            "wall_s": float(wall_s),
+            "stdout_tail": "\n".join(lines[-8:]),
+            "stderr_tail": "",
+            "source": "detached-run",
+            "evidence": (f"exit status NOT captured (detached nohup run). Verdict rests on "
+                         f"the test's own terminal banner {banner!r} being the last "
+                         f"non-empty line of {logfile} and no traceback anywhere in it. "
+                         f"Wall clock from the log file's creation and last-modification "
+                         f"timestamps."),
+            "banner_matched": banner in last,
+            "traceback_present": has_tb,
+        }
+        keep = [r for r in payload.get("sweep", []) if r["test"] != test]
+        payload["sweep"] = sorted(keep + [rec], key=lambda r: r["test"])
+        missing = sorted(set(st["distinct_cited_tests"]) -
+                         {r["test"] for r in payload["sweep"]})
+        print(f"[detached] {test}: green={green} banner={rec['banner_matched']} "
+              f"traceback={has_tb} wall={rec['wall_s']:.1f}s (rc NOT captured)")
+        print(f"[detached] sweep now {len(payload['sweep'])} of "
+              f"{st['n_distinct_cited_tests']}; still missing: {missing}")
     elif args.only:
         fresh = sweep(args.only, args.workers, args.timeout)
         keep = [r for r in payload.get("sweep", [])

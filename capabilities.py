@@ -47,7 +47,11 @@ axes, every count in writeup/data/p2_route_capa_v2_audit.json.
   S1 completeness  48 rows / 48 distinct modules / 48 solver/*.py on disk; 0 missing,
                    0 ghost, 0 duplicate.  The append-only convention holds over ~220 legs.
   S2 test presence 0 rows citing an absent file; 0 rows with an empty `test`.
-  S3 greenness     <S3LINE>
+  S3 greenness     47 of 47 distinct cited tests EXECUTED and green at 80c0cc4;
+                   0 red, 0 timed out, 5396.5 s cumulative (47% of it one test,
+                   test_advection_scope.py at 2512.2 s).  Leg 71's two reds
+                   (test_fractional_boussinesq.py, test_profile_newton.py) are both
+                   green now -- fixed by their owning legs, unrecorded until here.
   S4 gate prose    33 rows name a magnitude, 3 say "no known-answer gate" plainly, 12
                    claim validation with no number -- so the contract above is met in the
                    letter by 36/48 (75%).  The 12 are NAMED in the journal and were

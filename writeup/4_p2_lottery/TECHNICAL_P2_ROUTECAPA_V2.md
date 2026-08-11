@@ -46,10 +46,14 @@ verbatim today:
 > It does not check that the cited test **runs, passes, or has anything to do with the
 > module citing it.** Existence is checked; greenness and relevance are not.
 
-Leg 71 closed the *greenness* half by hand, once, ~220 legs ago. This leg re-asks it and
-closes the *relevance* half as a standing, executable check.
+Leg 71 answered **both** halves by hand, once, ~220 legs ago — including relevance, which
+its own curated JSON records per row. What it could not do was leave either answer
+standing: the checks lived in its runner, not in the detector or the merge gate, so
+nothing re-asked them. This leg re-asks all of them, adds three axes leg 71 did not have
+(S6, S7, S8), and — the part leg 71 was unable to reach — *repairs* the single relevance
+defect, which only became repairable 53 legs after it was found.
 
-## 2. Method: five axes, each reported as a count
+## 2. Method: eight axes, each reported as a count
 
 | axis | question | how measured |
 |---|---|---|
@@ -58,9 +62,13 @@ closes the *relevance* half as a standing, executable check.
 | **S3** | **greenness at HEAD** | every distinct cited test file *executed*, `rc == 0` recorded with wall time |
 | **S4** | known-answer-gate presence | `validated` classified: names a magnitude / says "no known-answer gate" / prose with no number |
 | **S5** | **relevance** | does the cited test's source (plus any sibling helper it imports, one hop) reference `solver.<stem>` at all |
+| **S6** | reference integrity | every repo path cited inside row prose resolved against the tree |
+| **S7** | merge-gate coverage | which modules `scripts/merge_gate.sh`'s `solver/<n>.py` -> `test_<n>.py` mapping cannot reach |
+| **S8** | vacuity | is any cited test green because nothing in it actually runs |
 
 S3 and S5 are the two the drift detector structurally cannot do; S1, S2 and S4 are
-re-measurements of things it does partially.
+re-measurements of things it does partially; S6, S7 and S8 are new here. Leg 71 had S1-S5
+and S7; S6 and S8 are leg 292's additions.
 
 ### 2.1 Operational note carried forward from leg 71, and it was earned
 
@@ -86,7 +94,39 @@ sweep verdict rather than replacing it — the two disagreeing is itself the fin
 flake), not an inconvenience to be smoothed away. This is the discipline that produced
 `94bde64` ("Newton item (6) RECONCILED: not red, not green, FLAKY").
 
-<!--S3RESULTS-->
+**Result: 47 of 47 cited tests green at `80c0cc4`. Zero red, zero timed out.**
+
+| | count | cumulative wall |
+|---|---|---|
+| distinct cited tests executed | **47** | **5396.5 s** |
+| green | **47** | |
+| red at HEAD | **0** | |
+| timed out (5400 s cap) | **0** | |
+
+Slowest five: `test_advection_scope.py` **2512.2 s**, `test_marginal_flow.py` **556.0 s**,
+`test_viscous_novelty.py` **310.3 s**, `test_spectral_certificate.py` **308.2 s**,
+`test_fractional_boussinesq.py` **222.0 s**.
+
+**Leg 71's two reds are both green now**, which is the comparison that matters, since a
+first-generation audit's red entries are exactly what a second generation exists to
+re-measure: `test_fractional_boussinesq.py` **222.0 s green** and `test_profile_newton.py`
+**160.5 s green**. Neither was repaired by this leg; both were fixed by their owning legs
+in the intervening ~220 legs and nothing recorded that they had been. So the index's
+*pass-status* dimension has not decayed — it has improved, and silently.
+
+`test_advection_scope.py` deserves its own line. Leg 71 measured it at **PASS 2363.7 s**
+clean and **3045.6 s** under load, and hit the 3600 s cap when it ran with 6 workers. Here
+it took **2512.2 s** — squarely inside leg 71's band, so it is genuinely slow rather than
+hung or degraded. It is the single dominant cost of this axis: 2512.2 of 5396.5 s, i.e.
+**47% of the entire sweep is one test**.
+
+**Provenance of each verdict, stated because they are not all of equal strength:**
+
+| source | n | what it means |
+|---|---|---|
+| `log-ingest` | 45 | real subprocess exit statuses, printed by this runner, recovered from its own progress log after the driver process was killed at 45/46 before serialising. The measurements are real; only the write-out was lost. |
+| `direct` | 1 | `test_finite_support_adversarial.py`, exit status captured in-process (33.4 s) |
+| `detached-run` | 1 | `test_advection_scope.py`. Run under `nohup` so the 42-minute cost could overlap other work; **its exit status was not captured.** Its green verdict rests on the test's own terminal banner `ALL ADVECTION-SCOPE TESTS PASSED` being the last non-empty line of the log with no traceback anywhere in it, plus all six of its `[ok]` gate lines. That is weaker evidence than a captured `rc`, it is labelled `source: "detached-run"` with `returncode: null` in the JSON, and it is stated here rather than smoothed over. Re-running it purely to convert a banner into an exit code costs another 2512 s and changes no conclusion. |
 
 ## 3. S1 — module completeness
 

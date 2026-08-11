@@ -1,5 +1,5 @@
 {
-  "head": "ec6a4faee5545c34b1b6e304a3df561b0796d5ad",
+  "head": "9acbfdccd43f2c230829d4bdc8e3b0fe955afa37",
   "python": "/home/andy/projects/Unsolved/.venv/bin/python",
   "static": {
     "S5_relevance": [
@@ -1923,8 +1923,8 @@
     "S1_missing": 0,
     "S1_ghost": 0,
     "S2_absent_test_files": 0,
-    "S3_executed": 46,
-    "S3_green_in_sweep": 46,
+    "S3_executed": 47,
+    "S3_green_in_sweep": 47,
     "S3_nongreen_in_sweep": 0,
     "S3_red_after_solo_recheck": 0,
     "S3_red_after_solo_recheck_names": [],
@@ -1938,6 +1938,19 @@
     "count_claims_disagreeing": 0
   },
   "sweep": [
+    {
+      "test": "test_advection_scope.py",
+      "returncode": null,
+      "timed_out": false,
+      "green": true,
+      "wall_s": 2512.2,
+      "stdout_tail": "[ok] (1) U ~ (M/pi) log X: a=0.0: -0.9970 vs -0.9969; a=0.3: -0.7544 vs -0.7540; a=0.5: -0.6862 vs -0.6870\n[ok] (2) two-scale split: a=0.3: transport +0.317 (pred +0.318), grid-spread 0.4% vs stretch 5%; a=0.5: transport +0.480 (pred +0.567), grid-spread 2.6% vs stretch 99%\n[ok] (3) a = 0 control: both advection pieces identically 0, and c_eff never changes sign\n[ok] (4) one-scale grading fixes it: a=0.3: rate +0.317 -> -0.010, at X=1e4 3.11 -> 3.1e-04; a=0.5: rate +0.480 -> -0.016, at X=1e4 4.79 -> 4.8e-04\n[ok] (5) stagnation point: a=0.3: X* = 7.16 (spread 0.7% over 3 grids); a=0.5: X* = 3.10 (spread 1.1% over 3 grids)\n[ok] (6) inputs sane: relres 2.91e-14, d/dX matches the exact derivative to 4.8e-09 (it already carries 1/X_rho)\nALL ADVECTION-SCOPE TESTS PASSED",
+      "stderr_tail": "",
+      "source": "detached-run",
+      "evidence": "exit status NOT captured (detached nohup run). Verdict rests on the test's own terminal banner 'ALL ADVECTION-SCOPE TESTS PASSED' being the last non-empty line of /tmp/claude-1001/-home-andy-projects-Unsolved/090bf745-3560-4741-bb93-541e3b60669e/scratchpad/adv.log and no traceback anywhere in it. Wall clock from the log file's creation and last-modification timestamps.",
+      "banner_matched": true,
+      "traceback_present": false
+    },
     {
       "test": "test_bc_weighted_sobolev.py",
       "returncode": 0,
