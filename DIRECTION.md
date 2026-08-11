@@ -33,7 +33,7 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 334 | DSSP | yes |
+| A | 335 | S1GR | no |
 | B | 342 | SEED | yes |
 | C | 341 | ALGW | yes |
 | D | 340 | EGRB | yes |
@@ -65,7 +65,8 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig88 | 335 | reserved (S1GR, in reserve; only if the reproducibility comparison warrants) |
 | fig89 | 340 | live, slot D (only if the ladder comparison warrants) |
 | fig90 | 341 | live, slot C (only if the scoping warrants) |
-| fig91+ | — | next free |
+| fig91 | 343 | reserved (DSSP-B1, gated on 341; only if warranted) |
+| fig92+ | — | next free |
 <!-- FIG-TABLE-END -->
 
 (Current snapshot, DM update of 2026-08-11 cycle 8 — B/221 landed YES (both
@@ -199,15 +200,32 @@ no exceptions without a user steer. On 341's landing, its consequence work
 (the S1 lift-condition user packet; the §3 build draft if and only if the user
 so rules) outranks the whole reserve the same way.**
 
-**Reserve queue: 20 undispatched legs (335, 336, 337, 338, 307, 328,
-324, 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234), plus
-306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 14
-(335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 —
-rank order as listed, §3a pre-authorised except where a spec says otherwise,
-and ALL subordinate to the ceiling-gate priority above). 310 on 287+298; 325
+Cycle 9e: A/334 landed YES on all four clauses at a89d8b3 — the route-4
+programme plan: nine bricks (eight dispatchable, B9 STRUCK as superseded by
+the §3 gating — endorsed), clause (a) recorded OWNED-BY-341-PENDING with the
+programme robust to either branch, clause (c) re-measured the seed set EMPTY
+with cost bracketed 34-370 legs and S1 rejected on the cheap-entrance ban
+(strategy dropped, ban untouched — correct). The DM's yes-branch obligation
+executed: **leg 343 = brick B1 (DSSP-SPACE), drafted BY REFERENCE to the
+plan's own §5.1 gate, PRECONDITION: 341 reported — it consumes 341's verdict,
+never re-litigates.** On 341's landing the order is: 341's consequence work
+(ceiling-gate priority) first, then 343/B1 — both ahead of the entire
+reserve. NO mid-flight briefing of 341 with 334's clause-(a) cross-checks
+(the leg-312 discipline: a live leg is not told which derivations agree);
+334's record is on main for 341's own staleness pass to read. **The critical
+path now runs through C/341** (the ceiling gate) with A refilled by 335 S1GR
+(corrections rank 1). Floor 3/4 (342, 341, 340).
+
+**Reserve queue: 20 undispatched legs (336, 337, 338, 307, 328,
+324, 322, 327, 287, 229, 293, 298, 299, 343, 310, 325, 231, 232, 233, 234),
+plus 306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately
+dispatchable: 13 (336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298,
+299 — rank order as listed, §3a pre-authorised except where a spec says
+otherwise, and ALL subordinate to the ceiling-gate priority above). 343 on
+341 (fires directly behind 341's consequence work); 310 on 287+298; 325
 USER-GATED; 231-234 blocked on repairs 217/219/225 (221's landed). Next fresh
-leg number: **343**. Full specs and this cycle's rulings are in the cycle-8
-through 9d entries at the end of this file.)
+leg number: **344**. Full specs and this cycle's rulings are in the cycle-8
+through 9e entries at the end of this file.)
 
 ---
 
@@ -16922,3 +16940,112 @@ of this; 341 produces the evidence the stage-V ban's lift condition asks for
 and the ruling stays the user's; the Tier-2 ceiling stands in every route-4
 gate until the §3 build lands, which is not drafted. No roster change, no
 reserve change, no new leg this cycle. No L1-L4 link moved; Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 9e) — 334 YES ABSORBED (THE ROUTE-4 PROGRAMME
+PLAN LANDS, TIER-2 CEILING INTACT, B9 STRUCK); BRICK 1 DRAFTED AS LEG 343 PER
+THE PRE-COMMITTED YES-BRANCH, GATED ON 341; NO MID-FLIGHT BRIEFING OF 341;
+A ← 335 S1GR; THE CRITICAL PATH MOVES TO 341
+
+Written from the same detached lineage, resynced to origin/main = a89d8b3.
+
+### 334 DSSP gate YES on all four clauses, absorbed at full strength
+
+Endorsed without amendment, with four particulars called out:
+- **Clause (a) handled exactly right under a mid-flight narrowing:** the leg
+  re-labelled its pre-ruling analysis as context OFFERED to 341 (recorded
+  OWNED-BY-341-PENDING, both branches named, programme robust to either)
+  instead of deleting it or quietly asserting a conclusion. Its own caveat is
+  the load-bearing one: target-integrability is necessary, nowhere near
+  sufficient — nothing pre-decides 341's three-realization-death or
+  CAP-formulation screens.
+- **Clause (c) is the honest empty:** the seed set re-measured EMPTY
+  independently; S1 (Hou-continuation) REJECTED because its
+  stationary→time-periodic step is Entry A's banned bifurcation — the
+  strategy dropped, the ban untouched, exactly the right shape. Cost
+  bracketed 34-370 legs with the factor-11 spread FLAGGED, not smoothed.
+  This is leg 342's starting point (in flight, slot B) — 342 consumes the
+  landed record directly; no relay needed, it is on main.
+- **B9 struck, not merely unscheduled** — endorsed: the §3 build is DM-owned
+  and user-gated, and two owners of one question is exactly the defect the
+  strike prevents.
+- **The vacuous checker self-catch** (regex fix killed the brick-header
+  match; "every gate states the ceiling" validated an empty set; caught by
+  the empty printed list; fixed with an assert) is lesson-90 class inside the
+  leg's own tooling, banked where it belongs. A control that can pass on an
+  empty set is the same defect as a control that cannot fail — noted beside
+  337's `not X or True` finding as the same family.
+
+### Ruling — the yes-branch obligation, executed: leg 343 = brick B1
+
+334's gate pre-committed: yes → the DM drafts brick 1 from the plan. Done
+now, deliberately BY REFERENCE — the plan already drafts every brick's gate
+with the Tier-2 ceiling in its own text, and duplicating it here would create
+a second divergent copy:
+
+```
+### 343 — ROUTE-DSSP-B1: BRICK B1 (DSSP-SPACE) — EXACTLY AS DRAFTED AT
+TECHNICAL_P2_ROUTEDSSP_V1.md §5.1
+[FLOOR-ELIGIBLE: math]
+**Thesis and gate.** The spec IS the plan's §5.1 B1 entry, verbatim,
+including its drafted gate and the TIER-2 ceiling stated there: does the
+targeted space hold the object operator (weight-tolerance reproducing 313's
+s=1 crossing and 331's measured exponents; the planted-eigenvalue control);
+1 leg, no new solver/ module. If (i)/(ii) fail, STOP — that failure is
+route-4-halting information and the plan's own no-branch governs.
+**Territory.** As the plan's B1 entry states, plus writeup/novelty/leg_343.md
+and experiments/journal/leg_343.md. fig91 reserved (only if warranted).
+**Difficulty.** standard
+**Preconditions:** LEG 341 (ROUTE-ALGW) HAS REPORTED — hard, the plan's own
+words: B1 consumes 341's verdict and never re-litigates it (§2.0); B1's first
+action is reading 341's verdict record and branching §2.9's programme in.
+Dispatch order at 341's landing: 341's consequence work first (CEILING-GATE
+PRIORITY), then 343 — both ahead of the entire reserve.
+```
+
+B2-B8 are NOT given leg numbers now — they are numbered as their turns
+arrive, informed by B1's answer, per the plan's own sizing through four
+slots. B6's precondition (the user's ban-wording ruling) is noted as standing
+with the 313-packet item already before the user.
+
+### Ruling — no mid-flight briefing of 341
+
+334 flagged its 2p+s>d criterion cross-checks (313's s=1 shell ratio
+1.000216 unfitted; 331's divergence 100% weight-driven) as "worth flagging to
+341's leg once it's further along." **Ruled: NO.** The leg-312 discipline
+governs: a live leg is not told which derivations agree or what result would
+be tidy — that is how anchoring enters a gate. 334's landed record sits on
+main; 341's own staleness/context pass may read it unprompted, and 341's two
+clauses answer to measurements, not to a sibling's cross-check. The flag
+itself (three not-obviously-independent derivations, not three
+confirmations) is honest and stays in 334's record where it belongs.
+
+### Refill — slot A ← 335 S1GR; the critical path moves to 341
+
+343/B1 is precondition-blocked and no 341-consequence work exists yet (341
+in flight, no stall), so the ceiling-gate priority binds nothing today and
+slot A takes the corrections queue's rank 1: **335 S1GR** (the
+spike1_stepC_gate.json reproducibility gap — two flipped gate predicates,
+claim-bearing; spec at cycle 8; fig88 conditionally allocated). With 334
+landed, **the critical path runs through C/341** — the ceiling gate — until
+B1 takes it over at 341's landing. Floor 3/4 (342, 341, 340) — above §3b's
+2-of-4, the non-eligible slot being the verification leg itself. FLOOR-TABLE
+synced (A 334→335).
+
+### Owed items, given a concrete trigger instead of another "next pass"
+
+The §0c/PUB census-spine draft and the lane-6 second-entry selection
+(unblocked at cycle 9b) are still owed. Named commitment: **both are drafted
+in the DM cycle that dispatches 337 C318 or earlier** — before the
+corrections queue is half consumed — so the drift from "next pass" to "next
+pass" ends here with a checkable deadline.
+
+**Reserve queue: 20 undispatched legs (336, 337, 338, 307, 328, 324, 322,
+327, 287, 229, 293, 298, 299, 343, 310, 325, 231, 232, 233, 234).**
+Immediately dispatchable: **13**. Next fresh leg number: **344.**
+
+Nothing in this update lifts a ban: B1 waits on 341; B6 waits on the user;
+the §3 build stays undrafted; S1's rejection under the cheap-entrance ban is
+the ban working, not moving. A landed programme plan is a plan — no L1-L4
+link moved; Clay stays ~0.05%.
