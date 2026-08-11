@@ -36,7 +36,7 @@ prose as before.
 | A | 335 | S1GR | no |
 | B | 348 | POCP | yes |
 | C | 350 | DSSP-B2 | yes |
-| D | 338 | LCB1 | no |
+| D | 307 | TSCX | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -17804,10 +17804,72 @@ LCB1. 349 on 348; 345 on 328; next vacancy: 307 TSCX. With the user:
 cycle-10 packet (complete), C4/escalation-#3, 313 packet + ban-wording, 320
 packet.
 
-**Reserve queue: 19 undispatched legs (349, 307, 328, 345, 346, 324, 322,
+**Reserve queue: 18 undispatched legs (349, 328, 345, 346, 324, 322,
 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
-dispatchable: **11**. Next fresh leg number: **351.**
+dispatchable: **10**. Next fresh leg number: **351.**
+
+**LCB2 accumulator (micro-corrections awaiting a batch leg; drafted when it
+holds 2-3 items):** (1) writeup/data/p2_route_fus_v1.json
+sources.USC2.cite — same "Leger"→"Gomez-Serrano" typo 338 fixed in
+sources.USC.cite, flagged by 338 outside its territory (source:
+CORRECTIONS.md §20).
 
 Nothing in this update lifts a ban. B1's YES pins a search space under the
 Tier-2 ceiling — apparatus, not movement; B2 is a basis study; no L1-L4
 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10f) — 338 YES ABSORBED (ALL FOUR SITES,
+ZERO RESISTERS; THE LINE-NUMBER LESSON DEMONSTRATED TWICE OVER); THE LCB2
+ACCUMULATOR OPENED; D ← 307 TSCX
+
+Written from the same detached lineage, resynced to origin/main = b396c64.
+
+### 338 LCB1 gate YES, absorbed at full strength
+
+All four sites corrected to their source values with markers, one batched
+CORRECTIONS §20 entry, zero resisters: the 314 cite verified against the
+paper's own live-fetched author list; the 321 pointers replaced with text
+anchors after being found drifted TWICE more since the finding (a direct
+demonstration of the instability the fix addresses); 312's timing prose
+corrected to the JSON's authoritative fields (the old "346s" summed to
+334.9 from its own addends — the prose was wrong twice over); item (iv)'s
+two repeat sites corrected in place to 336's banked measurement. Endorsed
+without amendment.
+
+### The LCB2 accumulator — a standing mechanism, opened at the head
+
+338 flagged sources.USC2.cite carrying the same typo, correctly outside its
+territory. Rather than a one-field leg or a silent orchestrator edit
+(cite fields are claim-adjacent — they stay legs' work), a standing
+**LCB2 accumulator** now sits beside the reserve line at the head of this
+file: micro-corrections append there as flagged, and a batch leg in 338's
+exact shape is drafted when the accumulator holds 2-3 items. Item 1 is the
+USC2 cite.
+
+### Refill — slot D ← 307 TSCX (reserve rank 1, executed)
+
+Spec at its original entry, unchanged; 221's landed diagnosis
+(window-cap/outer-scale mechanism, 4.44x separation) is INPUT to 307, not a
+substitute for its independent reproduction — restated from cycle 8b.
+Standard; verification, not floor-eligible. Territory disjoint from A/B/C —
+checked. **Floor 2/4 (348, 350) — §3b's minimum, unchanged.** FLOOR-TABLE
+synced (D 338→307).
+
+### Standing state
+
+A/335 mid-diagnosis (its background diagnostic continues; if the
+orchestrator's stall criteria fire, the §9g handling applies — no stall
+called yet); B/348 POCP; C/350 DSSP-B2 (critical path). 349 on 348; 345 on
+328; next vacancy: 328 ORC5 (which fires 345's precondition when it lands).
+With the user: cycle-10 packet (complete), C4/escalation-#3, 313 packet +
+ban-wording, 320 packet.
+
+**Reserve queue: 18 undispatched legs (349, 328, 345, 346, 324, 322, 327,
+287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **10**. Next fresh leg number: **351.**
+
+Nothing in this update lifts a ban. Four prose/cite sites now match their
+banked sources — record hygiene; no L1-L4 link moved; Clay stays ~0.05%.
