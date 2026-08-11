@@ -1,0 +1,550 @@
+{
+  "head": "a7a9aba85db706b7f23c915e5d368c98d021ec8d",
+  "python": "/home/andy/projects/Unsolved/.venv/bin/python",
+  "static": {
+    "n_rows": 48,
+    "n_distinct_modules": 48,
+    "n_modules_on_disk": 48,
+    "duplicate_module_rows": [],
+    "S1_missing_rows": [],
+    "S1_ghost_rows": [],
+    "S2_rows_with_absent_test_file": [],
+    "S2_rows_with_no_test_field": [],
+    "n_distinct_cited_tests": 46,
+    "distinct_cited_tests": [
+      "test_advection_scope.py",
+      "test_bc_weighted_sobolev.py",
+      "test_bordered_hl.py",
+      "test_boussinesq_dedicated.py",
+      "test_boussinesq_rescaled.py",
+      "test_boussinesq_velocity.py",
+      "test_certificate_shapes.py",
+      "test_chen_inviscid_certificate.py",
+      "test_collocation_newton.py",
+      "test_critical_dissipation.py",
+      "test_decay_collocation.py",
+      "test_decay_grading.py",
+      "test_dissipative_profile.py",
+      "test_energy_coercivity.py",
+      "test_first_integral.py",
+      "test_fractional_boussinesq.py",
+      "test_fractional_gclm.py",
+      "test_gclm_dedicated.py",
+      "test_gclm_family.py",
+      "test_gclm_rescaled.py",
+      "test_hl_rescaled.py",
+      "test_holder_norms.py",
+      "test_interval.py",
+      "test_interval_certificate.py",
+      "test_line_hilbert.py",
+      "test_literature_gates.py",
+      "test_marginal_flow.py",
+      "test_nk_bounds.py",
+      "test_nk_bounds_adversarial.py",
+      "test_nk_fourier.py",
+      "test_nk_hilbert_holder.py",
+      "test_nk_hilbert_pointwise.py",
+      "test_nk_seminorm.py",
+      "test_op_lower.py",
+      "test_origin_h2_certificate.py",
+      "test_port_certification.py",
+      "test_profile_newton.py",
+      "test_reduced_certificate.py",
+      "test_rescaled_spectrum.py",
+      "test_spectral_certificate.py",
+      "test_spectral_utils_dedicated.py",
+      "test_target_norm.py",
+      "test_target_selection.py",
+      "test_turning_point.py",
+      "test_viscous_novelty.py",
+      "test_weight_search.py"
+    ],
+    "S4_gate_class_counts": {
+      "magnitude": 33,
+      "declared-absent": 3,
+      "prose-without-magnitude": 12
+    },
+    "rows": [
+      {
+        "module": "solver/hl_rescaled.py",
+        "object": "1D Hou-Luo model, dynamic rescaling",
+        "tests": [
+          "test_hl_rescaled.py"
+        ],
+        "validated_chars": 475,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/line_hilbert.py",
+        "object": "Hilbert transform on the whole line",
+        "tests": [
+          "test_line_hilbert.py"
+        ],
+        "validated_chars": 103,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/gclm_family.py",
+        "object": "gCLM a-family, rescaled steady residual",
+        "tests": [
+          "test_gclm_family.py"
+        ],
+        "validated_chars": 56,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/gclm_rescaled.py",
+        "object": "1D CLM (a=0), dynamic rescaling",
+        "tests": [
+          "test_gclm_rescaled.py"
+        ],
+        "validated_chars": 637,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/rescaled_spectrum.py",
+        "object": "gCLM rescaled linearization, spectrum",
+        "tests": [
+          "test_rescaled_spectrum.py"
+        ],
+        "validated_chars": 135,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/origin_h2_certificate.py",
+        "object": "the a=0 CLM linearisation on the odd origin-H^2 space X -- the STRICT realization, the one WITH the spectral gap (Route-H2C, leg 176)",
+        "tests": [
+          "test_origin_h2_certificate.py"
+        ],
+        "validated_chars": 578,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/fractional_gclm.py",
+        "object": "gCLM with fractional dissipation",
+        "tests": [
+          "test_fractional_gclm.py"
+        ],
+        "validated_chars": 66,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/critical_dissipation.py",
+        "object": "gCLM at exactly critical dissipation",
+        "tests": [
+          "test_critical_dissipation.py"
+        ],
+        "validated_chars": 363,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/dissipative_profile.py",
+        "object": "Chen arXiv:1908.09385's gamma=2 (full-Laplacian) gCLM candidate",
+        "tests": [
+          "test_dissipative_profile.py"
+        ],
+        "validated_chars": 824,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/chen_inviscid_certificate.py",
+        "object": "Object A -- Chen arXiv:1908.09385 eq (2.2)'s INVISCID (nu=0) a=1/2 gCLM profile -- against EVERY radii-polynomial hypothesis, not just the budget",
+        "tests": [
+          "test_chen_inviscid_certificate.py"
+        ],
+        "validated_chars": 1139,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/marginal_flow.py",
+        "object": "the augmented (Omega, mu) flow, driven",
+        "tests": [
+          "test_marginal_flow.py"
+        ],
+        "validated_chars": 130,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/boussinesq_velocity.py",
+        "object": "2D Boussinesq velocity (Biot-Savart)",
+        "tests": [
+          "test_boussinesq_velocity.py"
+        ],
+        "validated_chars": 484,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/boussinesq_rescaled.py",
+        "object": "2D Boussinesq, rescaled RHS",
+        "tests": [
+          "test_boussinesq_rescaled.py"
+        ],
+        "validated_chars": 177,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/port_certification.py",
+        "object": "the L1->L2 certification port",
+        "tests": [
+          "test_port_certification.py"
+        ],
+        "validated_chars": 704,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/fractional_boussinesq.py",
+        "object": "2D Boussinesq, fractional dissipation",
+        "tests": [
+          "test_fractional_boussinesq.py"
+        ],
+        "validated_chars": 392,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/interval.py",
+        "object": "rigorous interval arithmetic",
+        "tests": [
+          "test_interval.py"
+        ],
+        "validated_chars": 1439,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/interval_certificate.py",
+        "object": "the certificate constants as RIGOROUS BOUNDS (Route-L1 step one, leg 50)",
+        "tests": [
+          "test_interval_certificate.py"
+        ],
+        "validated_chars": 955,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/spectral_certificate.py",
+        "object": "the certificate in the COMPACTIFIED basis, where the operators are exact (Route-L1 step two, leg 51)",
+        "tests": [
+          "test_spectral_certificate.py"
+        ],
+        "validated_chars": 1514,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/energy_coercivity.py",
+        "object": "the WEIGHTED-ENERGY (Chen-Hou-shaped) coercivity form of the a=0 CLM linearisation -- the THIRD realization (Route-WE, leg 111)",
+        "tests": [
+          "test_energy_coercivity.py"
+        ],
+        "validated_chars": 1921,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/certificate_guards.py",
+        "object": "radii polynomial hypotheses, the ONE shared guard",
+        "tests": [
+          "test_nk_bounds_adversarial.py"
+        ],
+        "validated_chars": 1324,
+        "gate_class": "declared-absent",
+        "superseded": false
+      },
+      {
+        "module": "solver/nk_bounds.py",
+        "object": "Newton-Kantorovich constants, upper bounds",
+        "tests": [
+          "test_nk_bounds.py"
+        ],
+        "validated_chars": 1409,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/op_lower.py",
+        "object": "a LOWER bound on ||A||",
+        "tests": [
+          "test_op_lower.py"
+        ],
+        "validated_chars": 91,
+        "gate_class": "prose-without-magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/holder_norms.py",
+        "object": "weighted-Holder spaces (two gradings)",
+        "tests": [
+          "test_holder_norms.py"
+        ],
+        "validated_chars": 1174,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/decay_grading.py",
+        "object": "decay-graded function spaces",
+        "tests": [
+          "test_decay_grading.py"
+        ],
+        "validated_chars": 125,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/decay_collocation.py",
+        "object": "collocation in decay-graded sup norms",
+        "tests": [
+          "test_decay_collocation.py"
+        ],
+        "validated_chars": 90,
+        "gate_class": "prose-without-magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/collocation_newton.py",
+        "object": "Newton in the bounds' own basis",
+        "tests": [
+          "test_collocation_newton.py"
+        ],
+        "validated_chars": 113,
+        "gate_class": "prose-without-magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/reduced_certificate.py",
+        "object": "the float rehearsal of the certificate",
+        "tests": [
+          "test_reduced_certificate.py"
+        ],
+        "validated_chars": 116,
+        "gate_class": "prose-without-magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/nk_fourier.py",
+        "object": "Fourier (circle) form of the two-scale operator",
+        "tests": [
+          "test_nk_fourier.py"
+        ],
+        "validated_chars": 104,
+        "gate_class": "prose-without-magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/nk_seminorm.py",
+        "object": "domain seminorm of ||A||",
+        "tests": [
+          "test_nk_seminorm.py"
+        ],
+        "validated_chars": 100,
+        "gate_class": "prose-without-magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/hilbert_holder.py",
+        "object": "codomain seminorm: H in weighted Holder",
+        "tests": [
+          "test_nk_hilbert_holder.py"
+        ],
+        "validated_chars": 59,
+        "gate_class": "declared-absent",
+        "superseded": false
+      },
+      {
+        "module": "solver/hilbert_pointwise.py",
+        "object": "pointwise |H(h)| bound",
+        "tests": [
+          "test_nk_hilbert_pointwise.py"
+        ],
+        "validated_chars": 29,
+        "gate_class": "declared-absent",
+        "superseded": false
+      },
+      {
+        "module": "solver/first_integral.py",
+        "object": "first integral of the two-scale equation",
+        "tests": [
+          "test_first_integral.py"
+        ],
+        "validated_chars": 74,
+        "gate_class": "magnitude",
+        "superseded": true
+      },
+      {
+        "module": "solver/turning_point.py",
+        "object": "the turning point at X_c",
+        "tests": [
+          "test_turning_point.py"
+        ],
+        "validated_chars": 64,
+        "gate_class": "prose-without-magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/profile_newton.py",
+        "object": "Newton on the two-scale profile equation",
+        "tests": [
+          "test_profile_newton.py"
+        ],
+        "validated_chars": 99,
+        "gate_class": "prose-without-magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/advection_scope.py",
+        "object": "where the advection term lives in a",
+        "tests": [
+          "test_advection_scope.py"
+        ],
+        "validated_chars": 99,
+        "gate_class": "prose-without-magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/target_norm.py",
+        "object": "whether the TARGET is in the certificate's space at all -- the compactified-basis coefficient decay of HL_S2_nonsymmetric (Route-NB, leg 55)",
+        "tests": [
+          "test_target_norm.py"
+        ],
+        "validated_chars": 1812,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/bc_weighted_sobolev.py",
+        "object": "Breden-Chu weighted-Sobolev setting H^2(mu), mu = e^{|x|^2/4}/Z",
+        "tests": [
+          "test_bc_weighted_sobolev.py"
+        ],
+        "validated_chars": 810,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/literature_gates.py",
+        "object": "published results as executable gates",
+        "tests": [
+          "test_literature_gates.py"
+        ],
+        "validated_chars": 113,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/certificate_shapes.py",
+        "object": "the SHAPE dichotomy (Route-XS, leg 57): published CAP certificates classified",
+        "tests": [
+          "test_certificate_shapes.py"
+        ],
+        "validated_chars": 1150,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/bordered_hl.py",
+        "object": "HL_S2_nonsymmetric -- the BORDERED steady system (Route-PORT, legs 46/47)",
+        "tests": [
+          "test_bordered_hl.py"
+        ],
+        "validated_chars": 394,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/viscous_novelty.py",
+        "object": "certification UNDER DISSIPATION -- stage V's novelty gate (Route-V v0)",
+        "tests": [
+          "test_viscous_novelty.py"
+        ],
+        "validated_chars": 340,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/weight_search.py",
+        "object": "SEARCHING the certificate's function space (Route-C-PILOT, leg 49)",
+        "tests": [
+          "test_weight_search.py"
+        ],
+        "validated_chars": 537,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/target_selection.py",
+        "object": "which object to certify (Route-M)",
+        "tests": [
+          "test_target_selection.py"
+        ],
+        "validated_chars": 125,
+        "gate_class": "prose-without-magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/ga_search.py",
+        "object": "generic real-coded genetic algorithm",
+        "tests": [
+          "test_gclm_family.py"
+        ],
+        "validated_chars": 69,
+        "gate_class": "prose-without-magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/boussinesq.py",
+        "object": "2D Boussinesq, physical space",
+        "tests": [
+          "test_boussinesq_dedicated.py"
+        ],
+        "validated_chars": 1279,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/gclm.py",
+        "object": "gCLM, physical space",
+        "tests": [
+          "test_gclm_dedicated.py"
+        ],
+        "validated_chars": 128,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/spectral_utils.py",
+        "object": "spectral helpers",
+        "tests": [
+          "test_spectral_utils_dedicated.py"
+        ],
+        "validated_chars": 178,
+        "gate_class": "magnitude",
+        "superseded": false
+      },
+      {
+        "module": "solver/finite_support.py",
+        "object": "SUPERSEDED -- do not use",
+        "tests": [
+          "test_first_integral.py"
+        ],
+        "validated_chars": 88,
+        "gate_class": "prose-without-magnitude",
+        "superseded": true
+      }
+    ]
+  }
+}
