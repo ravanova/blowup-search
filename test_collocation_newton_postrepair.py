@@ -561,10 +561,20 @@ def check_LEG286_no_clean_solve_is_suppressed_by_the_repair():
     to catch.  Every clean solve must stay converged, and the check records how
     far below `gauge_tol` its gauge defect actually sits -- a boolean here would
     hide a repair that only just missed.
+
+    ON THE BATTERY'S SHAPE, measured and not guessed.  A first draft of this
+    check swept J in (60, 100, 200) x a in (0, 0.15, 0.3) and demanded 6 clean
+    solves; it found 4 and FAILED, which is a fact about where
+    `ACollocation.newton` is relres-clean, not about leg 248's repair.  Leg
+    286's runner swept 20 (J, a) pairs and measured 8 clean: relres cleanliness
+    needs BOTH enough resolution and a small enough a -- a = 0.3 is clean at no
+    J in the sweep, and a = 0.15 only from J = 160 up.  The battery below is the
+    measured clean regime, so the check exercises overcorrection rather than
+    re-measuring convergence.
     """
     worst_gd, n_clean, n_suppressed = 0.0, 0, 0
-    for Jl in (60, 100, 200):
-        for a in (0.0, 0.15, 0.3):
+    for Jl in (60, 100, 160, 200):
+        for a in (0.0, 0.15):
             col = _col(a=a, Jl=Jl)
             r = col.newton(max_iter=60)
             if not r["converged_relres_only"]:

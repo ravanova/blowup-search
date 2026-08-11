@@ -1,0 +1,2565 @@
+{
+ "leg": 286,
+ "route": "CNRV",
+ "subject": "independent post-repair verification of leg 248's repair to solver/collocation_newton.py (ACollocation.newton's verdict and continuation's three branch decisions)",
+ "module_under_test": "solver/collocation_newton.py (read-only)",
+ "pre_repair_rev": "1ea4ecd",
+ "gate": "Does an independent re-run confirm (a) all 41 of leg 237's reachability-battery cases now correctly reject/flag, (b) the 2 cases reproducing leg 202's banked numbers remain correctly flagged as genuine (no overcorrection), and (c) no collocation_newton.py-dependent banked value moved (robustness sweep over dependents)?",
+ "A_battery_41": {
+  "J": 200,
+  "seeds": 20,
+  "seed": 0,
+  "reference_c": 0.4960883500887549,
+  "n_cases": 41,
+  "n_converged": 17,
+  "n_unconverged": 24,
+  "n_escaped": 0,
+  "n_verdict_mismatches": 0,
+  "mismatched_cases": [],
+  "n_gauge_defect_field_bit_identical": 41,
+  "worst_gauge_defect_field_rel_error": 0.0,
+  "worst_relres_field_rel_error": 0.0,
+  "n_verdicts_changed_by_repair": 0,
+  "worst_gauge_defect_among_converged": 1.1102230246251565e-15,
+  "worst_c_relative_error_among_converged": 9.735100927597661e-15,
+  "best_gauge_defect_among_unconverged": 5.551115123125783e-16,
+  "rows": [
+   {
+    "route": "A_lambda_start",
+    "case": "lam=0.01",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 5.551115123125783e-16,
+    "module_relres": 6.620936805938037e-14,
+    "c": 0.496088350088751,
+    "independent_gauge_defect": 5.551115123125783e-16,
+    "independent_relres": 6.620936805938037e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 7.832839826802715e-15,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=0.1",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 8.881784197001252e-16,
+    "module_relres": 6.98535474630316e-14,
+    "c": 0.4960883500887508,
+    "independent_gauge_defect": 8.881784197001252e-16,
+    "independent_relres": 6.98535474630316e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 8.280430674048584e-15,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=1.5",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 1.1102230246251565e-16,
+    "module_relres": 7.956581146522046e-14,
+    "c": 0.49608835008875196,
+    "independent_gauge_defect": 1.1102230246251565e-16,
+    "independent_relres": 7.956581146522046e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 5.93057872600777e-15,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=2",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 1.1102230246251565e-16,
+    "module_relres": 7.89909748630508e-14,
+    "c": 0.49608835008875274,
+    "independent_gauge_defect": 1.1102230246251565e-16,
+    "independent_relres": 7.89909748630508e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 4.3640107606472276e-15,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=5",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 4.440892098500626e-16,
+    "module_relres": 9.275865129838681e-14,
+    "c": 0.4960883500887525,
+    "independent_gauge_defect": 4.440892098500626e-16,
+    "independent_relres": 9.275865129838681e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 4.811601607893097e-15,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=10",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 4.440892098500626e-16,
+    "module_relres": 8.68056493382462e-14,
+    "c": 0.4960883500887532,
+    "independent_gauge_defect": 4.440892098500626e-16,
+    "independent_relres": 8.68056493382462e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 3.4688290661554885e-15,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=100",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 5.551115123125783e-16,
+    "module_relres": 8.148491990436658e-14,
+    "c": 0.49608835008875185,
+    "independent_gauge_defect": 5.551115123125783e-16,
+    "independent_relres": 8.148491990436658e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 6.154374149630705e-15,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=1000",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 1.1102230246251565e-16,
+    "module_relres": 8.291114298345513e-14,
+    "c": 0.4960883500887502,
+    "independent_gauge_defect": 1.1102230246251565e-16,
+    "independent_relres": 8.291114298345513e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 9.511305503974727e-15,
+    "escaped": false
+   },
+   {
+    "route": "B_small_amplitude",
+    "case": "eps=1e-06",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 2.220446049250313e-16,
+    "module_relres": 7.156771947882218e-14,
+    "c": 0.4960883500887551,
+    "independent_gauge_defect": 2.220446049250313e-16,
+    "independent_relres": 7.156771947882218e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 4.475908472458694e-16,
+    "escaped": false
+   },
+   {
+    "route": "B_small_amplitude",
+    "case": "eps=1e-08",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.24999999996593836,
+    "module_relres": 15712.191647862652,
+    "c": -6151.331376758454,
+    "independent_gauge_defect": 0.24999999996593836,
+    "independent_relres": 15712.191647862652,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 12400.669082448565,
+    "escaped": false
+   },
+   {
+    "route": "B_small_amplitude",
+    "case": "eps=1e-10",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.24999999999998934,
+    "module_relres": 1957605.3460084177,
+    "c": -307591.0749330141,
+    "independent_gauge_defect": 0.24999999999998934,
+    "independent_relres": 1957605.3460084177,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 620033.8527730658,
+    "escaped": false
+   },
+   {
+    "route": "C_dilation",
+    "case": "mu=1.2",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 1.1102230246251565e-15,
+    "module_relres": 7.484499279320106e-14,
+    "c": 0.49608835008875557,
+    "independent_gauge_defect": 1.1102230246251565e-15,
+    "independent_relres": 7.484499279320106e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 1.3427725417376084e-15,
+    "escaped": false
+   },
+   {
+    "route": "C_dilation",
+    "case": "mu=2",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 1.1102230246251565e-16,
+    "module_relres": 7.879553496123215e-14,
+    "c": 0.4960883500887517,
+    "independent_gauge_defect": 1.1102230246251565e-16,
+    "independent_relres": 7.879553496123215e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 6.490067285065107e-15,
+    "escaped": false
+   },
+   {
+    "route": "C_dilation",
+    "case": "mu=5",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 4.440892098500626e-16,
+    "module_relres": 8.906544805450256e-14,
+    "c": 0.4960883500887516,
+    "independent_gauge_defect": 4.440892098500626e-16,
+    "independent_relres": 8.906544805450256e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 6.7138627086880416e-15,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=0",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 1.152766167922259e-05,
+    "module_relres": 0.0056273882005741524,
+    "c": 0.003719016402900589,
+    "independent_gauge_defect": 1.152766167922259e-05,
+    "independent_relres": 0.0056273882005741524,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9925033184064186,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=1",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.0006416674404877698,
+    "module_relres": 0.017039901443644364,
+    "c": 0.0031495637435738277,
+    "independent_gauge_defect": 0.0006416674404877698,
+    "independent_relres": 0.017039901443644364,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9936512039780608,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=2",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 5.5982251945252415e-08,
+    "module_relres": 5.4769108938884217e-05,
+    "c": 0.0036378168161366998,
+    "independent_gauge_defect": 5.5982251945252415e-08,
+    "independent_relres": 5.4769108938884217e-05,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9926669980952267,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=3",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.033195278965353736,
+    "module_relres": 0.03619120168349243,
+    "c": 0.0015005806973706526,
+    "independent_gauge_defect": 0.033195278965353736,
+    "independent_relres": 0.03619120168349243,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9969751744883706,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=4",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.012192930465466378,
+    "module_relres": 0.021213220186850974,
+    "c": 0.2627008522017668,
+    "independent_gauge_defect": 0.012192930465466378,
+    "independent_relres": 0.021213220186850974,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.47045551028407107,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=5",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 8.577748089599879e-08,
+    "module_relres": 0.07653483063231951,
+    "c": 0.002269426443450898,
+    "independent_gauge_defect": 8.577748089599879e-08,
+    "independent_relres": 0.07653483063231951,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9954253583196524,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=6",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.2506117048951184,
+    "module_relres": 0.0027838796463229955,
+    "c": -4.1431865051832615,
+    "independent_gauge_defect": 0.2506117048951184,
+    "independent_relres": 0.0027838796463229955,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 9.351710949152517,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=7",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.0001831638638612465,
+    "module_relres": 0.005111610935922731,
+    "c": 0.004683353537661666,
+    "independent_gauge_defect": 0.0001831638638612465,
+    "independent_relres": 0.005111610935922731,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9905594365664427,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=8",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 7.167077288405821e-05,
+    "module_relres": 0.0017465644650473942,
+    "c": 0.015328308322527831,
+    "independent_gauge_defect": 7.167077288405821e-05,
+    "independent_relres": 0.0017465644650473942,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9691016563485406,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=9",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.0002621585893078926,
+    "module_relres": 0.00423158935828512,
+    "c": 0.1024439626030499,
+    "independent_gauge_defect": 0.0002621585893078926,
+    "independent_relres": 0.00423158935828512,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.7934965362828583,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=10",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.0006915101574964666,
+    "module_relres": 0.009190365888670535,
+    "c": 0.19446080199514187,
+    "independent_gauge_defect": 0.0006915101574964666,
+    "independent_relres": 0.009190365888670535,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.6080117544377912,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=11",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.006182974832684596,
+    "module_relres": 0.009508941457090818,
+    "c": 0.0014717788943073573,
+    "independent_gauge_defect": 0.006182974832684596,
+    "independent_relres": 0.009508941457090818,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9970332322981501,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=12",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.0005828915737754459,
+    "module_relres": 0.04468884391758975,
+    "c": 0.001700372405548594,
+    "independent_gauge_defect": 0.0005828915737754459,
+    "independent_relres": 0.04468884391758975,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9965724403621968,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=13",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 2.7240862222721596e-05,
+    "module_relres": 0.0006396712113003184,
+    "c": 0.485405482431454,
+    "independent_gauge_defect": 2.7240862222721596e-05,
+    "independent_relres": 0.0006396712113003184,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.021534203847741344,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=14",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 2.165537082987612e-08,
+    "module_relres": 0.01525220733702676,
+    "c": 0.0021156668241602682,
+    "independent_gauge_defect": 2.165537082987612e-08,
+    "independent_relres": 0.01525220733702676,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9957353023432586,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=15",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.03344019683222138,
+    "module_relres": 0.021308548761278683,
+    "c": 0.3470208001591953,
+    "independent_gauge_defect": 0.03344019683222138,
+    "independent_relres": 0.021308548761278683,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.3004858910774462,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=16",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 0.007272525878268432,
+    "module_relres": 0.022981993358356368,
+    "c": 0.0018271286578910584,
+    "independent_gauge_defect": 0.007272525878268432,
+    "independent_relres": 0.022981993358356368,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9963169289148511,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=17",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 1.7574424857715334,
+    "module_relres": 0.004202165176035143,
+    "c": 0.007551212524777813,
+    "independent_gauge_defect": 1.7574424857715334,
+    "independent_relres": 0.004202165176035143,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9847784925337859,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=18",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 1.955198838488048e-05,
+    "module_relres": 0.007947883245195197,
+    "c": 0.005646396446586123,
+    "independent_gauge_defect": 1.955198838488048e-05,
+    "independent_relres": 0.007947883245195197,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9886181635880466,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=19",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": false,
+    "module_gauge_defect": 4.416296824294452e-05,
+    "module_relres": 0.0044973146074876805,
+    "c": 0.0034048782002941784,
+    "independent_gauge_defect": 4.416296824294452e-05,
+    "independent_relres": 0.0044973146074876805,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 0.9931365487625642,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=1",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 1.5920598173124745e-13,
+    "module_relres": 5.738282323538626e-05,
+    "c": 0.4960728073116307,
+    "independent_gauge_defect": 1.5920598173124745e-13,
+    "independent_relres": 5.738282323538626e-05,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 3.133066342194307e-05,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=2",
+    "module_converged": false,
+    "module_converged_relres_only": false,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 5.551115123125783e-16,
+    "module_relres": 1.6364183944275747e-09,
+    "c": 0.4960883496929835,
+    "independent_gauge_defect": 5.551115123125783e-16,
+    "independent_relres": 1.6364183944275747e-09,
+    "independent_correct_verdict": false,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": false,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 7.977841357676488e-10,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=3",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 4.440892098500626e-16,
+    "module_relres": 1.35582726458077e-13,
+    "c": 0.4960883500887541,
+    "independent_gauge_defect": 4.440892098500626e-16,
+    "independent_relres": 1.35582726458077e-13,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 1.566567965360543e-15,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=5",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 2.220446049250313e-16,
+    "module_relres": 9.372866219743232e-14,
+    "c": 0.4960883500887501,
+    "independent_gauge_defect": 2.220446049250313e-16,
+    "independent_relres": 9.372866219743232e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 9.735100927597661e-15,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=10",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 4.440892098500626e-16,
+    "module_relres": 8.68056493382462e-14,
+    "c": 0.4960883500887532,
+    "independent_gauge_defect": 4.440892098500626e-16,
+    "independent_relres": 8.68056493382462e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 3.4688290661554885e-15,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=20",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 4.440892098500626e-16,
+    "module_relres": 8.68056493382462e-14,
+    "c": 0.4960883500887532,
+    "independent_gauge_defect": 4.440892098500626e-16,
+    "independent_relres": 8.68056493382462e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 3.4688290661554885e-15,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=60",
+    "module_converged": true,
+    "module_converged_relres_only": true,
+    "module_gauge_ok": true,
+    "module_gauge_defect": 4.440892098500626e-16,
+    "module_relres": 8.68056493382462e-14,
+    "c": 0.4960883500887532,
+    "independent_gauge_defect": 4.440892098500626e-16,
+    "independent_relres": 8.68056493382462e-14,
+    "independent_correct_verdict": true,
+    "verdict_matches": true,
+    "gauge_defect_field_bit_identical": true,
+    "gauge_defect_field_rel_error": 0.0,
+    "relres_field_rel_error": 0.0,
+    "pre_repair_converged": true,
+    "verdict_changed_by_repair": false,
+    "c_relative_error": 3.4688290661554885e-15,
+    "escaped": false
+   }
+  ],
+  "reading": "clause (a) is CORRECT VERDICT, not all-False: the converged members must survive and the unconverged must stay rejected, with the verdict recomputed here from (Omega, c) alone."
+ },
+ "A_prime_leg237_replication": {
+  "available": true,
+  "n_cases": 41,
+  "n_converged": 17,
+  "n_escaped": 0,
+  "reference_c": 0.4960883500887549,
+  "worst_gauge_defect_among_converged": 1.1102230246251565e-15,
+  "worst_c_relative_error_among_converged": 9.735100927597661e-15,
+  "n_ladder_converged_off_anchor": 0,
+  "rows": [
+   {
+    "route": "A_lambda_start",
+    "case": "lam=0.01",
+    "converged": true,
+    "gauge_defect_sup": 5.551115123125783e-16,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=0.1",
+    "converged": true,
+    "gauge_defect_sup": 8.881784197001252e-16,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=1.5",
+    "converged": true,
+    "gauge_defect_sup": 1.1102230246251565e-16,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=2",
+    "converged": true,
+    "gauge_defect_sup": 1.1102230246251565e-16,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=5",
+    "converged": true,
+    "gauge_defect_sup": 4.440892098500626e-16,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=10",
+    "converged": true,
+    "gauge_defect_sup": 4.440892098500626e-16,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=100",
+    "converged": true,
+    "gauge_defect_sup": 5.551115123125783e-16,
+    "escaped": false
+   },
+   {
+    "route": "A_lambda_start",
+    "case": "lam=1000",
+    "converged": true,
+    "gauge_defect_sup": 1.1102230246251565e-16,
+    "escaped": false
+   },
+   {
+    "route": "B_small_amplitude",
+    "case": "eps=1e-06",
+    "converged": true,
+    "gauge_defect_sup": 2.220446049250313e-16,
+    "escaped": false
+   },
+   {
+    "route": "B_small_amplitude",
+    "case": "eps=1e-08",
+    "converged": false,
+    "gauge_defect_sup": 0.24999999996593836,
+    "escaped": false
+   },
+   {
+    "route": "B_small_amplitude",
+    "case": "eps=1e-10",
+    "converged": false,
+    "gauge_defect_sup": 0.24999999999998934,
+    "escaped": false
+   },
+   {
+    "route": "C_dilation",
+    "case": "mu=1.2",
+    "converged": true,
+    "gauge_defect_sup": 1.1102230246251565e-15,
+    "escaped": false
+   },
+   {
+    "route": "C_dilation",
+    "case": "mu=2",
+    "converged": true,
+    "gauge_defect_sup": 1.1102230246251565e-16,
+    "escaped": false
+   },
+   {
+    "route": "C_dilation",
+    "case": "mu=5",
+    "converged": true,
+    "gauge_defect_sup": 4.440892098500626e-16,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=0",
+    "converged": false,
+    "gauge_defect_sup": 1.152766167922259e-05,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=1",
+    "converged": false,
+    "gauge_defect_sup": 0.0006416674404877698,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=2",
+    "converged": false,
+    "gauge_defect_sup": 5.5982251945252415e-08,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=3",
+    "converged": false,
+    "gauge_defect_sup": 0.033195278965353736,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=4",
+    "converged": false,
+    "gauge_defect_sup": 0.012192930465466378,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=5",
+    "converged": false,
+    "gauge_defect_sup": 8.577748089599879e-08,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=6",
+    "converged": false,
+    "gauge_defect_sup": 0.2506117048951184,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=7",
+    "converged": false,
+    "gauge_defect_sup": 0.0001831638638612465,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=8",
+    "converged": false,
+    "gauge_defect_sup": 7.167077288405821e-05,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=9",
+    "converged": false,
+    "gauge_defect_sup": 0.0002621585893078926,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=10",
+    "converged": false,
+    "gauge_defect_sup": 0.0006915101574964666,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=11",
+    "converged": false,
+    "gauge_defect_sup": 0.006182974832684596,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=12",
+    "converged": false,
+    "gauge_defect_sup": 0.0005828915737754459,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=13",
+    "converged": false,
+    "gauge_defect_sup": 2.7240862222721596e-05,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=14",
+    "converged": false,
+    "gauge_defect_sup": 2.165537082987612e-08,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=15",
+    "converged": false,
+    "gauge_defect_sup": 0.03344019683222138,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=16",
+    "converged": false,
+    "gauge_defect_sup": 0.007272525878268432,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=17",
+    "converged": false,
+    "gauge_defect_sup": 1.7574424857715334,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=18",
+    "converged": false,
+    "gauge_defect_sup": 1.955198838488048e-05,
+    "escaped": false
+   },
+   {
+    "route": "D_random",
+    "case": "seed=19",
+    "converged": false,
+    "gauge_defect_sup": 4.416296824294452e-05,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=1",
+    "converged": false,
+    "gauge_defect_sup": 1.5920598173124745e-13,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=2",
+    "converged": false,
+    "gauge_defect_sup": 5.551115123125783e-16,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=3",
+    "converged": true,
+    "gauge_defect_sup": 4.440892098500626e-16,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=5",
+    "converged": true,
+    "gauge_defect_sup": 2.220446049250313e-16,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=10",
+    "converged": true,
+    "gauge_defect_sup": 4.440892098500626e-16,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=20",
+    "converged": true,
+    "gauge_defect_sup": 4.440892098500626e-16,
+    "escaped": false
+   },
+   {
+    "route": "E_budget",
+    "case": "max_iter=60",
+    "converged": true,
+    "gauge_defect_sup": 4.440892098500626e-16,
+    "escaped": false
+   }
+  ]
+ },
+ "A_vs_A_prime": {
+  "available": true,
+  "n_keys": 41,
+  "n_mismatches": 0,
+  "mismatches": [],
+  "reading": "this leg's re-derived trial space and leg 237's own function are the same 41 cases producing the same verdicts and the same gauge defects, bitwise."
+ },
+ "B_leg202_calibration": {
+  "module": "solver/profile_newton.py (NOT the repaired module)",
+  "n": 201,
+  "rows": [
+   {
+    "eps": 1e-08,
+    "converged": true,
+    "relres": 5.370738930452209e-06,
+    "c": -6127.935060523046,
+    "c_reference": 0.4979748119516761,
+    "c_relative_error": 12306.712886373269,
+    "gauge_defect_sup": 0.25000002828269086,
+    "escaped": true,
+    "leg202_banked_c": -6127.94,
+    "agreement_with_banked_c": 8.060583089831757e-07
+   },
+   {
+    "eps": 1e-10,
+    "converged": true,
+    "relres": 1.1093694372210476e-07,
+    "c": -306421.25916095346,
+    "c_reference": 0.4979748119516761,
+    "c_relative_error": 615335.8559137341,
+    "gauge_defect_sup": 0.25000000067216566,
+    "escaped": true,
+    "leg202_banked_c": -306421.26,
+    "agreement_with_banked_c": 2.7382125895767407e-09
+   }
+  ],
+  "reference_c": 0.4979748119516761,
+  "n_cases": 2,
+  "n_escaped": 2,
+  "n_still_flagged": 2,
+  "worst_agreement_with_banked_c": 8.060583089831757e-07,
+  "reading": "re-derived from profile_newton.TwoScaleNewton directly -- not read from leg 202's, leg 237's or leg 248's JSON."
+ },
+ "B_overcorrection_check": {
+  "n_cases": 20,
+  "n_relres_clean": 8,
+  "n_suppressed_by_repair": 0,
+  "worst_gauge_defect_on_clean_solve": 6.661338147750939e-16,
+  "min_margin_decades_below_tol": 7.17643851980736,
+  "rows": [
+   {
+    "J": 60,
+    "a": 0.0,
+    "converged": true,
+    "converged_relres_only": true,
+    "gauge_defect": 3.3306690738754696e-16,
+    "relres": 3.8737278531529295e-14,
+    "margin_decades_below_tol": 7.477468515471341,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 60,
+    "a": 0.15,
+    "converged": false,
+    "converged_relres_only": false,
+    "gauge_defect": 1.627031842588167e-13,
+    "relres": 6.59684206681108e-08,
+    "margin_decades_below_tol": 4.788603947416549,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 60,
+    "a": 0.3,
+    "converged": false,
+    "converged_relres_only": false,
+    "gauge_defect": 1.5487278126613546e-11,
+    "relres": 5.668979957415588e-07,
+    "margin_decades_below_tol": 2.8100249023480925,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 60,
+    "a": 0.5,
+    "converged": false,
+    "converged_relres_only": false,
+    "gauge_defect": 1.5843630962741884e-08,
+    "relres": 2.1249400897447593e-05,
+    "margin_decades_below_tol": -0.19985471805999105,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 100,
+    "a": 0.0,
+    "converged": true,
+    "converged_relres_only": true,
+    "gauge_defect": 2.220446049250313e-16,
+    "relres": 3.383885694883919e-14,
+    "margin_decades_below_tol": 7.6535597745270225,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 100,
+    "a": 0.15,
+    "converged": false,
+    "converged_relres_only": false,
+    "gauge_defect": 9.992007221626409e-16,
+    "relres": 5.2971403154589265e-09,
+    "margin_decades_below_tol": 7.000347260751679,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 100,
+    "a": 0.3,
+    "converged": false,
+    "converged_relres_only": false,
+    "gauge_defect": 7.357447984190912e-13,
+    "relres": 5.2329940767737905e-08,
+    "margin_decades_below_tol": 4.133272799599906,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 100,
+    "a": 0.5,
+    "converged": false,
+    "converged_relres_only": false,
+    "gauge_defect": 1.4705873685461057e-08,
+    "relres": 6.844046198888589e-06,
+    "margin_decades_below_tol": -0.16749083132545065,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 160,
+    "a": 0.0,
+    "converged": true,
+    "converged_relres_only": true,
+    "gauge_defect": 0.0,
+    "relres": 6.864473332572149e-14,
+    "margin_decades_below_tol": Infinity,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 160,
+    "a": 0.15,
+    "converged": true,
+    "converged_relres_only": true,
+    "gauge_defect": 2.220446049250313e-16,
+    "relres": 3.125985827384387e-10,
+    "margin_decades_below_tol": 7.6535597745270225,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 160,
+    "a": 0.3,
+    "converged": false,
+    "converged_relres_only": false,
+    "gauge_defect": 2.0761170560490427e-14,
+    "relres": 1.5192226250953304e-08,
+    "margin_decades_below_tol": 5.682748163654504,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 160,
+    "a": 0.5,
+    "converged": false,
+    "converged_relres_only": false,
+    "gauge_defect": 2.8523212680653387e-09,
+    "relres": 2.412225480713508e-06,
+    "margin_decades_below_tol": 0.5448015597843818,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 200,
+    "a": 0.0,
+    "converged": true,
+    "converged_relres_only": true,
+    "gauge_defect": 6.661338147750939e-16,
+    "relres": 8.781192584286564e-14,
+    "margin_decades_below_tol": 7.17643851980736,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 200,
+    "a": 0.15,
+    "converged": true,
+    "converged_relres_only": true,
+    "gauge_defect": 3.3306690738754696e-16,
+    "relres": 1.0127021764670636e-11,
+    "margin_decades_below_tol": 7.477468515471341,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 200,
+    "a": 0.3,
+    "converged": false,
+    "converged_relres_only": false,
+    "gauge_defect": 8.992806499463768e-15,
+    "relres": 1.782586052470339e-09,
+    "margin_decades_below_tol": 6.046104751312353,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 200,
+    "a": 0.5,
+    "converged": false,
+    "converged_relres_only": false,
+    "gauge_defect": 1.0592821064747682e-09,
+    "relres": 1.4558899980485592e-06,
+    "margin_decades_below_tol": 0.974988363811741,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 240,
+    "a": 0.0,
+    "converged": true,
+    "converged_relres_only": true,
+    "gauge_defect": 0.0,
+    "relres": 9.037947618997507e-14,
+    "margin_decades_below_tol": Infinity,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 240,
+    "a": 0.15,
+    "converged": true,
+    "converged_relres_only": true,
+    "gauge_defect": 4.440892098500626e-16,
+    "relres": 2.1957970127697777e-11,
+    "margin_decades_below_tol": 7.352529778863041,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 240,
+    "a": 0.3,
+    "converged": false,
+    "converged_relres_only": false,
+    "gauge_defect": 5.440092820663267e-15,
+    "relres": 2.9254660278381156e-09,
+    "margin_decades_below_tol": 6.26439369016249,
+    "suppressed_by_repair": false
+   },
+   {
+    "J": 240,
+    "a": 0.5,
+    "converged": false,
+    "converged_relres_only": false,
+    "gauge_defect": 3.5422459410128226e-10,
+    "relres": 9.525284548236794e-07,
+    "margin_decades_below_tol": 1.4507212886804794,
+    "suppressed_by_repair": false
+   }
+  ],
+  "reading": "no clean solve is suppressed, and the margin says by how much -- a boolean here would hide how close the repair came."
+ },
+ "C_dependent_sweep": {
+  "pre_repair_rev": "1ea4ecd",
+  "n_float_comparisons": 12356,
+  "n_floats_moved": 0,
+  "moved": [],
+  "n_verdicts_changed_newton": 0,
+  "n_verdicts_changed_continuation": 0,
+  "untouched_functions": {
+   "newton_gauged": {
+    "present_both": true,
+    "byte_identical": true
+   },
+   "critical_radius": {
+    "present_both": true,
+    "byte_identical": true
+   },
+   "zero_order": {
+    "present_both": true,
+    "byte_identical": true
+   },
+   "weighted_defect": {
+    "present_both": true,
+    "byte_identical": true
+   },
+   "residual_a": {
+    "present_both": true,
+    "byte_identical": true
+   },
+   "jacobian_a": {
+    "present_both": true,
+    "byte_identical": true
+   },
+   "interpolant_residual": {
+    "present_both": true,
+    "byte_identical": true
+   },
+   "velocity_integrals": {
+    "present_both": true,
+    "byte_identical": true
+   },
+   "effective_speed": {
+    "present_both": true,
+    "byte_identical": true
+   }
+  },
+  "n_untouched_byte_identical": 9,
+  "n_untouched_checked": 9,
+  "newton_rows": [
+   {
+    "where": "newton(J=40,a=0.0,c0=0.25)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 0.0,
+    "relres": 1.2040492580434788e-14
+   },
+   {
+    "where": "newton(J=40,a=0.0,c0=0.5)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.220446049250313e-16,
+    "relres": 8.969499498470883e-15
+   },
+   {
+    "where": "newton(J=40,a=0.0,c0=1.0)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.220446049250313e-16,
+    "relres": 2.6931039193685305e-14
+   },
+   {
+    "where": "newton(J=40,a=0.15,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.5790480862042386e-12,
+    "relres": 5.723072473549308e-07
+   },
+   {
+    "where": "newton(J=40,a=0.15,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.7980395778115508e-12,
+    "relres": 5.723073406969804e-07
+   },
+   {
+    "where": "newton(J=40,a=0.15,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.5514590440423035e-12,
+    "relres": 5.948855769964072e-07
+   },
+   {
+    "where": "newton(J=40,a=0.3,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.2038964269933672e-10,
+    "relres": 1.2406294877435073e-06
+   },
+   {
+    "where": "newton(J=40,a=0.3,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.1943046551721181e-10,
+    "relres": 1.2402187589535233e-06
+   },
+   {
+    "where": "newton(J=40,a=0.3,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.1943046551721181e-10,
+    "relres": 1.2402187589496976e-06
+   },
+   {
+    "where": "newton(J=40,a=0.5,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.2850566139265283e-07,
+    "relres": 5.089157191489621e-05
+   },
+   {
+    "where": "newton(J=40,a=0.5,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 5.617479942321424e-08,
+    "relres": 5.097618398580043e-05
+   },
+   {
+    "where": "newton(J=40,a=0.5,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.2635530050330033e-07,
+    "relres": 5.089158060974184e-05
+   },
+   {
+    "where": "newton(J=60,a=0.0,c0=0.25)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 3.3306690738754696e-16,
+    "relres": 2.6233459882384948e-14
+   },
+   {
+    "where": "newton(J=60,a=0.0,c0=0.5)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 3.3306690738754696e-16,
+    "relres": 3.8737278531529295e-14
+   },
+   {
+    "where": "newton(J=60,a=0.0,c0=1.0)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.220446049250313e-16,
+    "relres": 1.5788639156100875e-14
+   },
+   {
+    "where": "newton(J=60,a=0.15,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.628142065612792e-13,
+    "relres": 6.596842120525251e-08
+   },
+   {
+    "where": "newton(J=60,a=0.15,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.627031842588167e-13,
+    "relres": 6.59684206681108e-08
+   },
+   {
+    "where": "newton(J=60,a=0.15,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.627031842588167e-13,
+    "relres": 6.596842066085354e-08
+   },
+   {
+    "where": "newton(J=60,a=0.3,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.564232077200245e-11,
+    "relres": 5.708051415332058e-07
+   },
+   {
+    "where": "newton(J=60,a=0.3,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.5487278126613546e-11,
+    "relres": 5.668979957415588e-07
+   },
+   {
+    "where": "newton(J=60,a=0.3,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.548350336832982e-11,
+    "relres": 5.668979957317708e-07
+   },
+   {
+    "where": "newton(J=60,a=0.5,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 7.097673165867846e-08,
+    "relres": 2.1071113305498304e-05
+   },
+   {
+    "where": "newton(J=60,a=0.5,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.5843630962741884e-08,
+    "relres": 2.1249400897447593e-05
+   },
+   {
+    "where": "newton(J=60,a=0.5,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 6.946025971066305e-08,
+    "relres": 2.1071119159445784e-05
+   },
+   {
+    "where": "newton(J=80,a=0.0,c0=0.25)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.220446049250313e-16,
+    "relres": 4.0900346524966374e-14
+   },
+   {
+    "where": "newton(J=80,a=0.0,c0=0.5)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 4.440892098500626e-16,
+    "relres": 2.922480732664819e-14
+   },
+   {
+    "where": "newton(J=80,a=0.0,c0=1.0)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 8.881784197001252e-16,
+    "relres": 2.7812881337259414e-14
+   },
+   {
+    "where": "newton(J=80,a=0.15,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.887379141862766e-15,
+    "relres": 6.351415786817256e-09
+   },
+   {
+    "where": "newton(J=80,a=0.15,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.887379141862766e-15,
+    "relres": 6.351398743813343e-09
+   },
+   {
+    "where": "newton(J=80,a=0.15,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.887379141862766e-15,
+    "relres": 6.351398743550016e-09
+   },
+   {
+    "where": "newton(J=80,a=0.3,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 8.977263377119016e-13,
+    "relres": 2.2518643366165052e-07
+   },
+   {
+    "where": "newton(J=80,a=0.3,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 6.968869925572108e-13,
+    "relres": 2.039845224809175e-07
+   },
+   {
+    "where": "newton(J=80,a=0.3,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 7.045475314271243e-13,
+    "relres": 2.0398452245832378e-07
+   },
+   {
+    "where": "newton(J=80,a=0.5,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.9947206547920047e-08,
+    "relres": 1.1194339609192593e-05
+   },
+   {
+    "where": "newton(J=80,a=0.5,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 3.276659665818471e-09,
+    "relres": 1.1286362229482547e-05
+   },
+   {
+    "where": "newton(J=80,a=0.5,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.885688532572317e-08,
+    "relres": 1.1194344404561038e-05
+   },
+   {
+    "where": "newton(J=100,a=0.0,c0=0.25)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.220446049250313e-16,
+    "relres": 3.427720101652172e-14
+   },
+   {
+    "where": "newton(J=100,a=0.0,c0=0.5)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.220446049250313e-16,
+    "relres": 3.383885694883919e-14
+   },
+   {
+    "where": "newton(J=100,a=0.0,c0=1.0)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 4.440892098500626e-16,
+    "relres": 7.180140536961746e-14
+   },
+   {
+    "where": "newton(J=100,a=0.15,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 9.992007221626409e-16,
+    "relres": 5.29714031014188e-09
+   },
+   {
+    "where": "newton(J=100,a=0.15,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 9.992007221626409e-16,
+    "relres": 5.2971403154589265e-09
+   },
+   {
+    "where": "newton(J=100,a=0.15,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 9.43689570931383e-16,
+    "relres": 5.2971403897972916e-09
+   },
+   {
+    "where": "newton(J=100,a=0.3,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 8.274492202531292e-13,
+    "relres": 1.290125722823421e-07
+   },
+   {
+    "where": "newton(J=100,a=0.3,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 7.357447984190912e-13,
+    "relres": 5.2329940767737905e-08
+   },
+   {
+    "where": "newton(J=100,a=0.3,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 7.382983113757291e-13,
+    "relres": 5.232994074234689e-08
+   },
+   {
+    "where": "newton(J=100,a=0.5,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.4908592083084926e-08,
+    "relres": 6.844045635026787e-06
+   },
+   {
+    "where": "newton(J=100,a=0.5,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.4705873685461057e-08,
+    "relres": 6.844046198888589e-06
+   },
+   {
+    "where": "newton(J=100,a=0.5,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.4107052248579777e-08,
+    "relres": 6.844049855620039e-06
+   },
+   {
+    "where": "newton(J=120,a=0.0,c0=0.25)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 0.0,
+    "relres": 4.858657040924621e-14
+   },
+   {
+    "where": "newton(J=120,a=0.0,c0=0.5)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 0.0,
+    "relres": 5.1219477351804134e-14
+   },
+   {
+    "where": "newton(J=120,a=0.0,c0=1.0)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.220446049250313e-16,
+    "relres": 6.761838848269154e-14
+   },
+   {
+    "where": "newton(J=120,a=0.15,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.6653345369377348e-16,
+    "relres": 1.0849372587036578e-09
+   },
+   {
+    "where": "newton(J=120,a=0.15,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.220446049250313e-16,
+    "relres": 1.0849372619080728e-09
+   },
+   {
+    "where": "newton(J=120,a=0.15,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 6.661338147750939e-16,
+    "relres": 1.0849372529739421e-09
+   },
+   {
+    "where": "newton(J=120,a=0.3,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 5.040412531798211e-14,
+    "relres": 3.712036631941525e-09
+   },
+   {
+    "where": "newton(J=120,a=0.3,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 5.040412531798211e-14,
+    "relres": 3.7120366345929005e-09
+   },
+   {
+    "where": "newton(J=120,a=0.3,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 5.040412531798211e-14,
+    "relres": 3.712036627363036e-09
+   },
+   {
+    "where": "newton(J=120,a=0.5,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 8.190798206353378e-09,
+    "relres": 4.57433873910484e-06
+   },
+   {
+    "where": "newton(J=120,a=0.5,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 8.07716354911392e-09,
+    "relres": 4.574338888821829e-06
+   },
+   {
+    "where": "newton(J=120,a=0.5,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 7.577717120454963e-09,
+    "relres": 4.574342562382467e-06
+   },
+   {
+    "where": "newton(J=160,a=0.0,c0=0.25)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 0.0,
+    "relres": 7.758593140776802e-14
+   },
+   {
+    "where": "newton(J=160,a=0.0,c0=0.5)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 0.0,
+    "relres": 6.864473332572149e-14
+   },
+   {
+    "where": "newton(J=160,a=0.0,c0=1.0)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 0.0,
+    "relres": 9.011356530494753e-14
+   },
+   {
+    "where": "newton(J=160,a=0.15,c0=0.25)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 4.440892098500626e-16,
+    "relres": 3.1259857913318055e-10
+   },
+   {
+    "where": "newton(J=160,a=0.15,c0=0.5)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.220446049250313e-16,
+    "relres": 3.125985827384387e-10
+   },
+   {
+    "where": "newton(J=160,a=0.15,c0=1.0)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 4.440892098500626e-16,
+    "relres": 3.125985761895299e-10
+   },
+   {
+    "where": "newton(J=160,a=0.3,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.0650148258027912e-14,
+    "relres": 1.5192226251777192e-08
+   },
+   {
+    "where": "newton(J=160,a=0.3,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.0761170560490427e-14,
+    "relres": 1.5192226250953304e-08
+   },
+   {
+    "where": "newton(J=160,a=0.3,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.0650148258027912e-14,
+    "relres": 1.5192226259994547e-08
+   },
+   {
+    "where": "newton(J=160,a=0.5,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.889729899813176e-09,
+    "relres": 2.41222545479431e-06
+   },
+   {
+    "where": "newton(J=160,a=0.5,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.8523212680653387e-09,
+    "relres": 2.412225480713508e-06
+   },
+   {
+    "where": "newton(J=160,a=0.5,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.8892078729469972e-09,
+    "relres": 2.412225454187215e-06
+   },
+   {
+    "where": "newton(J=200,a=0.0,c0=0.25)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.1102230246251565e-16,
+    "relres": 9.145576141309887e-14
+   },
+   {
+    "where": "newton(J=200,a=0.0,c0=0.5)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 6.661338147750939e-16,
+    "relres": 8.781192584286564e-14
+   },
+   {
+    "where": "newton(J=200,a=0.0,c0=1.0)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 4.440892098500626e-16,
+    "relres": 9.374186686696586e-14
+   },
+   {
+    "where": "newton(J=200,a=0.15,c0=0.25)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 2.220446049250313e-16,
+    "relres": 1.0126933070915005e-11
+   },
+   {
+    "where": "newton(J=200,a=0.15,c0=0.5)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 3.3306690738754696e-16,
+    "relres": 1.0127021764670636e-11
+   },
+   {
+    "where": "newton(J=200,a=0.15,c0=1.0)",
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "post_gauge_defect": 3.3306690738754696e-16,
+    "relres": 1.0126863781625813e-11
+   },
+   {
+    "where": "newton(J=200,a=0.3,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 8.992806499463768e-15,
+    "relres": 1.7825860437676237e-09
+   },
+   {
+    "where": "newton(J=200,a=0.3,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 8.992806499463768e-15,
+    "relres": 1.782586052470339e-09
+   },
+   {
+    "where": "newton(J=200,a=0.3,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 9.547918011776346e-15,
+    "relres": 1.7825862355103649e-09
+   },
+   {
+    "where": "newton(J=200,a=0.5,c0=0.25)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.0831021080015546e-09,
+    "relres": 1.45588997346313e-06
+   },
+   {
+    "where": "newton(J=200,a=0.5,c0=0.5)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.0592821064747682e-09,
+    "relres": 1.4558899980485592e-06
+   },
+   {
+    "where": "newton(J=200,a=0.5,c0=1.0)",
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "post_gauge_defect": 1.0827909679989034e-09,
+    "relres": 1.4558899732663877e-06
+   }
+  ],
+  "continuation_rows": [
+   {
+    "where": "continuation(J=60)[0]",
+    "a": 0.0,
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "c": 0.4870784354608422,
+    "gauge_defect": 3.3306690738754696e-16
+   },
+   {
+    "where": "continuation(J=60)[1]",
+    "a": 0.3,
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "c": 0.5653535947097392,
+    "gauge_defect": 1.5496604000020398e-11
+   },
+   {
+    "where": "continuation(J=60)[2]",
+    "a": 0.6,
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "c": 0.6515563339280462,
+    "gauge_defect": 1.1994474143905975e-06
+   },
+   {
+    "where": "continuation(J=60)[3]",
+    "a": 0.8999999999999999,
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "c": 0.6377457623854484,
+    "gauge_defect": 3.514899255308013e-05
+   },
+   {
+    "where": "continuation(J=60)[4]",
+    "a": 1.2,
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "c": 0.9148326341340127,
+    "gauge_defect": 0.0014008523153835606
+   },
+   {
+    "where": "continuation(J=60)[5]",
+    "a": 1.5,
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "c": 0.6800027991039148,
+    "gauge_defect": 0.00044933045861583754
+   },
+   {
+    "where": "continuation(J=200)[0]",
+    "a": 0.0,
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "c": 0.4960883500887549,
+    "gauge_defect": 6.661338147750939e-16
+   },
+   {
+    "where": "continuation(J=200)[1]",
+    "a": 0.1,
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "c": 0.521642084809205,
+    "gauge_defect": 2.220446049250313e-16
+   },
+   {
+    "where": "continuation(J=200)[2]",
+    "a": 0.2,
+    "pre_converged": true,
+    "post_converged": true,
+    "verdict_changed": false,
+    "c": 0.5482350746089244,
+    "gauge_defect": 6.661338147750939e-16
+   },
+   {
+    "where": "continuation(J=200)[3]",
+    "a": 0.30000000000000004,
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "c": 0.5758115502733497,
+    "gauge_defect": 8.992806499463768e-15
+   },
+   {
+    "where": "continuation(J=200)[4]",
+    "a": 0.4,
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "c": 0.6043031686557101,
+    "gauge_defect": 1.0347389611808921e-11
+   },
+   {
+    "where": "continuation(J=200)[5]",
+    "a": 0.5,
+    "pre_converged": false,
+    "post_converged": false,
+    "verdict_changed": false,
+    "c": 0.6336411376135568,
+    "gauge_defect": 1.0829871444073547e-09
+   }
+  ],
+  "reading": "gate clause (c): the differential is against the genuine pre-repair SOURCE at 1ea4ecd, not against the post-repair module's own gauge_tol=inf self-description."
+ },
+ "C_dependent_tests": {
+  "n_files": 6,
+  "n_present": 6,
+  "n_passed": 6,
+  "n_failed": 0,
+  "failing_files": [],
+  "rows": [
+   {
+    "file": "test_collocation_newton.py",
+    "present": true,
+    "returncode": 0,
+    "passed": true,
+    "last_line": "6/6 gates passed.",
+    "stderr_tail": []
+   },
+   {
+    "file": "test_collocation_newton_adversarial.py",
+    "present": true,
+    "returncode": 0,
+    "passed": true,
+    "last_line": " ** On entry to DLASCL parameter number  4 had an illegal value",
+    "stderr_tail": []
+   },
+   {
+    "file": "test_collocation_newton_postrepair.py",
+    "present": true,
+    "returncode": 0,
+    "passed": true,
+    "last_line": "Leg 150's repair holds on everything it tested and moves nothing clean. Leg 114's `pure_sign_noise` -- one of the 3 of its 8 that leg 150's arm A never re-ran -- is now REPAIRED (leg 0/BENCH): a node-count isolation predicate, orthogonal to the scale-invariant relative-depth guard, closes it without moving a single clean-input float. One smaller, separately-tracked gap (non-finite E disables the magnitude test) remains open on purpose, out of this repair's territory.",
+    "stderr_tail": []
+   },
+   {
+    "file": "test_turning_point.py",
+    "present": true,
+    "returncode": 0,
+    "passed": true,
+    "last_line": "6/6 gates passed.",
+    "stderr_tail": []
+   },
+   {
+    "file": "test_turning_point_adversarial.py",
+    "present": true,
+    "returncode": 0,
+    "passed": true,
+    "last_line": " ** On entry to DLASCL parameter number  4 had an illegal value",
+    "stderr_tail": []
+   },
+   {
+    "file": "test_first_integral.py",
+    "present": true,
+    "returncode": 0,
+    "passed": true,
+    "last_line": "11/11 passed",
+    "stderr_tail": []
+   }
+  ]
+ },
+ "D_repair_bites": {
+  "J": 200,
+  "rows": [
+   {
+    "lam": 0.5,
+    "relres": 8.781192584286564e-14,
+    "residual_rms": 4.331991397892248e-15,
+    "c": 0.24804417504437745,
+    "gauge_defect": 0.49999999999999967,
+    "gauge_defect_over_abs_lam_minus_1": 0.9999999999999993,
+    "pre_repair_converged": true,
+    "post_repair_converged": false,
+    "verdict_changed": true
+   },
+   {
+    "lam": 1.0,
+    "relres": 8.781192584286564e-14,
+    "residual_rms": 1.7327965591568993e-14,
+    "c": 0.4960883500887549,
+    "gauge_defect": 6.661338147750939e-16,
+    "gauge_defect_over_abs_lam_minus_1": null,
+    "pre_repair_converged": true,
+    "post_repair_converged": true,
+    "verdict_changed": false
+   },
+   {
+    "lam": 2.0,
+    "relres": 8.781192584286564e-14,
+    "residual_rms": 6.931186236627597e-14,
+    "c": 0.9921767001775098,
+    "gauge_defect": 1.0000000000000013,
+    "gauge_defect_over_abs_lam_minus_1": 1.0000000000000013,
+    "pre_repair_converged": true,
+    "post_repair_converged": false,
+    "verdict_changed": true
+   },
+   {
+    "lam": 5.0,
+    "relres": 1.5698027260877732e-13,
+    "residual_rms": 7.744246399935365e-13,
+    "c": 2.4804417504437746,
+    "gauge_defect": 4.000000000000001,
+    "gauge_defect_over_abs_lam_minus_1": 1.0000000000000002,
+    "pre_repair_converged": true,
+    "post_repair_converged": false,
+    "verdict_changed": true
+   },
+   {
+    "lam": 10.0,
+    "relres": 1.5698027260877732e-13,
+    "residual_rms": 3.097698559974146e-12,
+    "c": 4.960883500887549,
+    "gauge_defect": 9.000000000000002,
+    "gauge_defect_over_abs_lam_minus_1": 1.0000000000000002,
+    "pre_repair_converged": true,
+    "post_repair_converged": false,
+    "verdict_changed": true
+   },
+   {
+    "lam": 100.0,
+    "relres": 1.205918399671948e-13,
+    "residual_rms": 2.379644032992494e-10,
+    "c": 49.60883500887549,
+    "gauge_defect": 98.99999999999996,
+    "gauge_defect_over_abs_lam_minus_1": 0.9999999999999996,
+    "pre_repair_converged": true,
+    "post_repair_converged": false,
+    "verdict_changed": true
+   },
+   {
+    "lam": 1000.0,
+    "relres": 1.4750827771619505e-13,
+    "residual_rms": 2.9107872720063996e-08,
+    "c": 496.0883500887549,
+    "gauge_defect": 999.0000000000009,
+    "gauge_defect_over_abs_lam_minus_1": 1.0000000000000009,
+    "pre_repair_converged": true,
+    "post_repair_converged": false,
+    "verdict_changed": true
+   }
+  ],
+  "relres_spread_absolute": 6.916834676591168e-14,
+  "relres_dynamic_range": 1.787687391000676,
+  "residual_rms_dynamic_range": 6719282.206845234,
+  "c_dynamic_range": 2000.0,
+  "n_off_gauge_members": 6,
+  "n_true_with_broken_gauge_before": 6,
+  "n_true_with_broken_gauge_after": 0,
+  "smallest_off_gauge_defect": 0.49999999999999967,
+  "reading": "relres is flat to the quoted absolute spread across a dynamic range of c and of absolute residual that is many decades wide -- the exact degeneracy the repair's affine companion was added to see."
+ },
+ "E_threshold_sensitivity": {
+  "J": 200,
+  "rows": [
+   {
+    "gauge_tol": 1e-14,
+    "n_battery_correct": 41,
+    "n_battery": 41,
+    "clause_a_holds": true,
+    "n_off_gauge_accepted_before": 4,
+    "n_off_gauge_accepted_after": 0,
+    "repair_bites": true
+   },
+   {
+    "gauge_tol": 1e-12,
+    "n_battery_correct": 41,
+    "n_battery": 41,
+    "clause_a_holds": true,
+    "n_off_gauge_accepted_before": 4,
+    "n_off_gauge_accepted_after": 0,
+    "repair_bites": true
+   },
+   {
+    "gauge_tol": 1e-10,
+    "n_battery_correct": 41,
+    "n_battery": 41,
+    "clause_a_holds": true,
+    "n_off_gauge_accepted_before": 4,
+    "n_off_gauge_accepted_after": 0,
+    "repair_bites": true
+   },
+   {
+    "gauge_tol": 1e-08,
+    "n_battery_correct": 41,
+    "n_battery": 41,
+    "clause_a_holds": true,
+    "n_off_gauge_accepted_before": 4,
+    "n_off_gauge_accepted_after": 0,
+    "repair_bites": true
+   },
+   {
+    "gauge_tol": 1e-06,
+    "n_battery_correct": 41,
+    "n_battery": 41,
+    "clause_a_holds": true,
+    "n_off_gauge_accepted_before": 4,
+    "n_off_gauge_accepted_after": 0,
+    "repair_bites": true
+   },
+   {
+    "gauge_tol": 0.0001,
+    "n_battery_correct": 41,
+    "n_battery": 41,
+    "clause_a_holds": true,
+    "n_off_gauge_accepted_before": 4,
+    "n_off_gauge_accepted_after": 0,
+    "repair_bites": true
+   },
+   {
+    "gauge_tol": 0.01,
+    "n_battery_correct": 41,
+    "n_battery": 41,
+    "clause_a_holds": true,
+    "n_off_gauge_accepted_before": 4,
+    "n_off_gauge_accepted_after": 0,
+    "repair_bites": true
+   },
+   {
+    "gauge_tol": 0.5,
+    "n_battery_correct": 41,
+    "n_battery": 41,
+    "clause_a_holds": true,
+    "n_off_gauge_accepted_before": 4,
+    "n_off_gauge_accepted_after": 0,
+    "repair_bites": true
+   }
+  ],
+  "n_tolerances": 8,
+  "n_tolerances_where_both_hold": 8,
+  "indifference_band": [
+   1e-14,
+   0.5
+  ],
+  "n_decades_of_indifference": 13.698970004336019,
+  "reading": "the choice of gauge_tol inside the indifference band is not load-bearing; the band's width says how much room there was."
+ },
+ "G_comparator_selftest": {
+  "checks": [
+   {
+    "shape": "scalar field, 1 ulp apart",
+    "detector_fired": true,
+    "reported_rel": 2.220446049250313e-16
+   },
+   {
+    "shape": "Omega array, one entry at 1e-300",
+    "detector_fired": true,
+    "reported_rel": 1e-300
+   },
+   {
+    "shape": "nan vs nan (must NOT fire)",
+    "detector_fired": false,
+    "expected_fire": false,
+    "reported_rel": null
+   },
+   {
+    "shape": "verdict comparator against an absurd gauge_tol=0.0",
+    "detector_fired": true,
+    "expected_fire": true,
+    "reported_rel": null,
+    "note": "a clean solve has gauge_defect > 0, so the specification at gauge_tol = 0 says REJECT while the module says accept -- the comparator must notice"
+   }
+  ],
+  "n_checks": 4,
+  "n_behaved_as_specified": 4,
+  "reading": "every zero this runner reports is a zero the detector was capable of reporting as non-zero."
+ },
+ "gate_clause_a_all_41_correct": {
+  "answer": true,
+  "n_cases": 41,
+  "n_correct": 41,
+  "failing_cases": [],
+  "n_converged": 17,
+  "worst_gauge_defect_among_converged": 1.1102230246251565e-15,
+  "best_gauge_defect_among_unconverged": 5.551115123125783e-16
+ },
+ "gate_clause_b_leg202_pair_still_flagged": {
+  "answer": true,
+  "n_still_flagged": 2,
+  "worst_agreement_with_banked_c": 8.060583089831757e-07,
+  "n_clean_solves_suppressed": 0,
+  "min_margin_decades_below_tol": 7.17643851980736
+ },
+ "gate_clause_c_no_dependent_moved": {
+  "answer": true,
+  "n_float_comparisons": 12356,
+  "n_floats_moved": 0,
+  "n_dependent_suites_run": 6,
+  "n_dependent_suites_failed": 0,
+  "failing_files": []
+ },
+ "gate_answer": "YES",
+ "clay_odds": "~0.05%, unmoved: this is a regression verification of a solver-hygiene repair on a latent defect in a module with no claim-bearing call site. No link of the L1->L4 chain is touched."
+}
