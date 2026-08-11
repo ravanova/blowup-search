@@ -257,15 +257,34 @@ DSSC (fresh eligible draft: screen 2509.14185's objects against 313's screen
 PUB0C and 346 CAPR2 (lane-6 second entry = Breden-Chu viscous Burgers)
 drafted this cycle. Floor 2/4 (343, 347) — §3b minimum, stated.
 
-**Reserve queue: 19 undispatched legs (338, 307, 328, 345, 346,
+Cycle 10b: THE USER'S POST-S1 REFRAMING EXECUTED (verified first: 315's
+blocker wording confirmed at novelty/leg_315.md:156 + journal:73 — the
+dissipative-hypotheses mismatch is BCG-specific and does not transfer to NS
+on its face; 2305.08221 confirmed in the ledger; ZERO in-repo prior art on
+Zgliczyński/Kuramoto/Arioli outside 315's record). What died four times is
+PROFILE-IN-A-FUNCTION-SPACE certification, not certification itself; route
+4's object is a periodic orbit of a dissipative PDE, and periodic-orbit CAP
+is mature external technology never touched here. **Leg 348 POCP drafted —
+RESERVE RANK 1** (reason stated: post-S1 it decides whether ANY certification
+route exists — the same class of question the ceiling-gate priority
+protected; the user says draft first; scoping only, the build is the next
+ruling, never this leg's). **Leg 349 GAFV drafted, gated on 348's report**
+(the NK-convergence fitness's viability against the GA ban's six-property
+gate; NO GA compute on either branch). The reverse-engineered-fitness design
+is recorded BLOCKED-ON-348, not refuted — auto-pickup if 348 opens a route
+and a certificate later closes somewhere. Cycle-10 refills (343 C, 347 B,
+337 D) proceed unchanged — B1 is apparatus work under the landed plan, not
+in conflict.
+
+**Reserve queue: 21 undispatched legs (348, 349, 338, 307, 328, 345, 346,
 324, 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234),
 plus 306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately
-dispatchable: 12 (338, 307, 328, 346, 324, 322, 327, 287, 229, 293, 298,
-299 — rank order as listed, §3a pre-authorised except where a spec says
-otherwise). 345 on 328 (its spine cites 328's closure-#5 CORRECTIONS entry);
-310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs 217/219/225
-(221's landed). Next fresh leg number: **348**. Full specs and this cycle's
-rulings are in the cycle-8 through 10 entries at the end of this file.)
+dispatchable: 13 (348, 338, 307, 328, 346, 324, 322, 327, 287, 229, 293,
+298, 299 — rank order as listed, §3a pre-authorised except where a spec says
+otherwise). 349 on 348; 345 on 328; 310 on 287+298; 325 USER-GATED; 231-234
+blocked on repairs 217/219/225 (221's landed). Next fresh leg number:
+**350**. Full specs and this cycle's rulings are in the cycle-8 through 10b
+entries at the end of this file.)
 
 ---
 
@@ -17423,4 +17442,140 @@ UNMET — the ban's evidence went the other way and is banked at full
 strength; the Tier-2 ceiling stands in every route-4 gate; the 35-leg buy
 and the C4/escalation-#3 identity question are the user's. A ceiling
 measured lower is a sharper map, not movement; no L1-L4 link moved; Clay
+stays ~0.05%.
+
+---
+
+## DM update, 2026-08-12 (cycle 10b) — THE USER'S POST-S1 REFRAMING EXECUTED:
+§0 VERIFIED, LEG 348 POCP DRAFTED AT RANK 1 (does periodic-orbit CAP reach
+route 4's object?), LEG 349 GAFV DRAFTED GATED ON 348, THE §3 DESIGN RECORDED
+BLOCKED-ON-348; CYCLE-10 DISPATCHES PROCEED UNCHANGED
+
+**Provenance.** The user's packet arrived verbatim via the orchestrator while
+cycle 10's refills were mid-dispatch. Ruled: 343/347/337 proceed — B1 is
+apparatus work under 334's landed plan and the reframing names a parallel
+question, not a conflict.
+
+### §0 — verified before drafting, per the standing practice
+
+- **315's blocker is BCG-specific, confirmed verbatim:** novelty/leg_315.md
+  :156 ("which BCG's quasilinear hyperbolic compressible system does not
+  have") and journal/leg_315.md:73 — Zgliczyński's self-consistent a-priori
+  bounds (math/0005247) have DISSIPATIVE hypotheses; "that mismatch is a
+  theorem nobody has proved, not a package nobody installed." NS is
+  dissipative: the property that stopped 315 is the property NS has. Whether
+  the Galerkin-plus-tail bridge closes for the rescaled parabolic system is
+  exactly the open question, and it is 348's gate.
+- **2305.08221 confirmed in the ledger** (banked by 315 as refuting "NK
+  cannot reach time").
+- **Zero in-repo prior art confirmed by grep:** Zgliczyński / Kuramoto /
+  Arioli appear nowhere outside 315's own record — this is mature external
+  ground where the novelty pass should expect to LOCATE others' work.
+- The S1/S2 characterization matches cycle 10's absorption: four lanes died
+  certifying a profile in a function space; S2 removed the ansatz wall
+  (Gaussian-witness artifact; NRS/Tsai pinned to exactly-backward-SS by 253).
+
+### New legs
+
+```
+### 348 — ROUTE-POCP: DOES PERIODIC-ORBIT CAP FOR DISSIPATIVE PDEs REACH
+ROUTE 4's OBJECT? (user reframing §1 — the certification question re-asked on
+the object's ACTUAL shape, not on a function space)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** Four lanes died certifying a PROFILE as an element of a FUNCTION
+SPACE (Route-D collocation Z₁ ≥ 6.0424; ℓ¹_w with no window at any exponent;
+Mellin a=0-only; Gaussian H²(μ) shells 26.6→1.3e83). Route 4's object is
+none of those things: it is a periodic orbit of period 2 log λ of a
+dissipative PDE (leg 260's own words; RDSS the strictly-costlier superset).
+Certifying periodic orbits of dissipative PDEs is a mature, separate
+technology — Zgliczyński's self-consistent a-priori bounds (math/0005247,
+canonical application Kuramoto-Sivashinsky), the Arioli-Koch line, and
+validated time integration (2305.08221, already banked as refuting the naive
+"NK cannot reach time") — and this repository has ZERO prior art on any of
+it (verified cycle 10b). 315 named the property that matters (Taylor-model
+flow-map enclosure "needing NO function space") and 315's blocker does not
+transfer (dissipative hypotheses vs BCG's hyperbolic system; NS is
+dissipative). NOVELTY PASS FIRST AND GENUINELY — expect to locate others'
+work rather than find a gap; MF1-MF4 throughout; links not counts.
+**Gate.** Does the scoping produce a DEFINITE classification, in leg 314's
+shape: (i) REACHES — the technology's hypotheses cover an object of route
+4's shape (rescaled vorticity system in similarity variables, period
+2 log λ), with the Galerkin-plus-tail bridge closing for a parabolic system
+where 315 found no form for a hyperbolic one; (ii) OPEN-AND-REACHABLE — the
+obstruction named and cost-classed; or (iii) DOES-NOT-REACH — the failing
+hypothesis named?
+  yes (any definite class) -> Bank at full strength. IF (i) or (ii): THE
+        BUILD IS THE NEXT RULING, NOT THIS LEG'S — nothing is constructed,
+        no build spec is drafted by this leg, and the classification routes
+        to the DM and the user.
+  no  -> The literature genuinely underdetermines after a full read: quote
+        the underdetermining clauses; that is the banked answer.
+**Territory.** writeup/data/p2_route_pocp_v1.json, writeup/novelty/
+               leg_348.md, experiments/journal/leg_348.md. Reads legs
+               315/260/341's banked records; edits none. No figure.
+**Difficulty.** heavy
+**Preconditions:** None. (§3a rule 4: certification-ban-adjacent ground —
+pre-authorised as written; scoping only, lifts nothing.)
+```
+
+```
+### 349 — ROUTE-GAFV: IS "RPO NEWTON-KRYLOV CONVERGES FROM THIS GUESS" A
+VIABLE GA FITNESS? (user reframing §2 — viability ONLY; no GA compute on
+either branch)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** 342 measured route 4 seedless (0/5). A GA could create the seed,
+and the proposed fitness is, for the first time in this project's history,
+NOT a Tier-1/2 blow-up proxy: "does the RPO Newton-Krylov converge from this
+initial guess" — well-behaved, directly verifiable, not fakeable by an
+under-resolved run. It must clear the standing GA ban's six-property gate AS
+A NEW FITNESS — leg 160's bar is real (three definitions failed; "P3 is not
+measuring the fitness").
+**Gate.** Does the proposed fitness clear ALL SIX properties of the standing
+gate, each checked against the actual NK-convergence predicate (never a
+paraphrase), with the failing property named and measured if any fails?
+  yes -> Viability banked. Whether any GA RUNS is a separate ruling, gated
+        on 348's classification and the user's seed decision — nothing
+        dispatches from this leg, and no GA compute occurs in it.
+  no  -> Banked at full strength: the GA path closes for this fitness and
+        the ban stands unquestioned.
+**Territory.** writeup/data/p2_route_gafv_v1.json, writeup/novelty/
+               leg_349.md, experiments/journal/leg_349.md. NO GA compute on
+               either branch. No figure.
+**Difficulty.** standard
+**Preconditions:** LEG 348 HAS REPORTED — the user's sequencing, verbatim in
+force: a seed for an uncertifiable programme buys nothing.
+```
+
+### §3 — recorded exactly as the user frames it
+
+**REVERSE-ENGINEERED-FITNESS (score candidates against a certificate's pass
+conditions, not a blow-up proxy): BLOCKED-ON-348, NOT REFUTED.** The design
+is right — it is the one fitness an under-resolved run cannot fake — and it
+needs a certificate that closes somewhere to derive conditions from, which
+S1 says does not exist yet. Auto-pickup clause: if 348 classifies (i) or
+(ii) AND a certificate later closes anywhere, this design is drafted THEN
+without a new steer being needed.
+
+### Ranking
+
+1. **348 POCP** — rank 1, reason stated: post-S1 it decides whether ANY
+   certification route exists, the same class of question the ceiling-gate
+   priority protected, and the user says draft it first. Next vacancy takes
+   it. 2. **338 LCB1** 3. **307 TSCX** 4. **328 ORC5** 5. **346 CAPR2** 6.
+   **324 P2SPF** 7. **322 F70** 8. **327 P2T1E** 9. **287 EPA** 10. **229
+   PNRV** 11. **293 JFA** 12. **298 CORRX** 13. **299 TESTA**. 349 on 348;
+   345 on 328; then 310, 325 (USER-GATED), 231-234. SUSPENDED: 306, 308.
+   B2-B8 numbered as their turns arrive.
+
+**Reserve queue: 21 undispatched legs (348, 349, 338, 307, 328, 345, 346,
+324, 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).**
+Immediately dispatchable: **13**. Next fresh leg number: **350.**
+
+§4 standing, restated as the user restated it: the Tier-2 ceiling stays in
+every route-4 gate until a certification route EXISTS (348 asks; it does not
+create); 334's plan stands as landed; escalation #3 stays parked on 340's
+identity; no ban is lifted by anything here; plan_of_record.py untouched;
+four slots, floor, lesson 91, no outreach, all unchanged. The honest frame
+is carried verbatim: §1 is not a repair of S1 — it is a different question,
+cheap to ask, about the object's actual shape. No L1-L4 link moved; Clay
 stays ~0.05%.
