@@ -24,7 +24,7 @@
    "./writeup/3_spikes/spike1_stepB_evidence.py"
   ],
   "grep_pattern": "odd_field_x_slope|boussinesq_rescaled import|import boussinesq_rescaled|RescaledBoussinesq|modulation\\(",
-  "n_hit_lines": 72,
+  "n_hit_lines": 77,
   "test_callers": [
    "test_boussinesq_rescaled.py",
    "test_boussinesq_transport.py",
@@ -805,9 +805,504 @@
    "RETURNED": 9,
    "SILENT_WRONG": 18
   },
-  "wall_seconds": 29.38
+  "wall_seconds": 10.04
  },
  "clause_b": {
+  "artifacts_moved_but_unattributed": [],
+  "artifacts_whose_script_is_nondeterministic_today": [],
+  "artifacts_with_baseline_drift_not_caused_by_this_repair": [
+   "spike1_stepC_gate"
+  ],
+  "attribution": {
+   "spike1_stepC_gate": {
+    "baseline_drift_leaves_moved": 525,
+    "committed_vs_pre_repair_baseline_drift": {
+     "keys_only_in_committed": [],
+     "keys_only_in_regenerated": [],
+     "leaves_compared": 1028,
+     "leaves_identical": 503,
+     "leaves_moved": 525,
+     "moved_detail": [
+      {
+       "committed": true,
+       "leaf": ".predicate_checks.1_alpha_within_5pct",
+       "regenerated": false
+      },
+      {
+       "committed": true,
+       "leaf": ".predicate_checks.4_resolution_stable_alpha",
+       "regenerated": false
+      },
+      {
+       "committed": -0.3350763095343765,
+       "leaf": ".runs[0].alpha",
+       "regenerated": -0.37935637310385306,
+       "rel_diff": 0.1321491920184042
+      },
+      {
+       "committed": -0.32256185019658257,
+       "leaf": ".runs[0].alpha_far",
+       "regenerated": -0.45613812051639147,
+       "rel_diff": 0.4141105658911678
+      },
+      {
+       "committed": 0.02631688835591782,
+       "leaf": ".runs[0].anisotropy_median",
+       "regenerated": 0.02559043445181232,
+       "rel_diff": 0.02760409567729707
+      },
+      {
+       "committed": 0.09451199101749669,
+       "leaf": ".runs[0].anisotropy_p90",
+       "regenerated": 0.09512477500252793,
+       "rel_diff": 0.006483663907977562
+      },
+      {
+       "committed": 3.0636748831963683,
+       "leaf": ".runs[0].c_l",
+       "regenerated": 3.0636748831963687,
+       "rel_diff": 1.449531124486483e-16
+      },
+      {
+       "committed": -1.0265648734746011,
+       "leaf": ".runs[0].c_omega",
+       "regenerated": -1.162224592058745,
+       "rel_diff": 0.13214919201840425
+      },
+      {
+       "committed": -0.0015479325344973176,
+       "leaf": ".runs[0].cut_omega[0]",
+       "regenerated": 0.0001467065560560652,
+       "rel_diff": 1.0947758075927434
+      },
+      {
+       "committed": 0.08895335515326779,
+       "leaf": ".runs[0].cut_omega[100]",
+       "regenerated": 0.06386814212062654,
+       "rel_diff": 0.2820041244022679
+      },
+      {
+       "committed": 0.08551818636082323,
+       "leaf": ".runs[0].cut_omega[101]",
+       "regenerated": 0.06073638650613588,
+       "rel_diff": 0.28978397355302365
+      },
+      {
+       "committed": 0.08062353394840044,
+       "leaf": ".runs[0].cut_omega[102]",
+       "regenerated": 0.05635506216447942,
+       "rel_diff": 0.3010097746329625
+      },
+      {
+       "committed": 0.07752450357827326,
+       "leaf": ".runs[0].cut_omega[103]",
+       "regenerated": 0.053630084043154114,
+       "rel_diff": 0.3082176400006734
+      },
+      {
+       "committed": 0.07310898621404499,
+       "leaf": ".runs[0].cut_omega[104]",
+       "regenerated": 0.049812954069731664,
+       "rel_diff": 0.31864799870303656
+      },
+      {
+       "committed": 0.07031338436226725,
+       "leaf": ".runs[0].cut_omega[105]",
+       "regenerated": 0.04743584979669405,
+       "rel_diff": 0.3253652881747806
+      },
+      {
+       "committed": 0.06633020528410245,
+       "leaf": ".runs[0].cut_omega[106]",
+       "regenerated": 0.044101892275055524,
+       "rel_diff": 0.3351159990209536
+      },
+      {
+       "committed": 0.06380829195778505,
+       "leaf": ".runs[0].cut_omega[107]",
+       "regenerated": 0.04202313725176409,
+       "rel_diff": 0.34141573199348146
+      },
+      {
+       "committed": 0.06021493669394713,
+       "leaf": ".runs[0].cut_omega[108]",
+       "regenerated": 0.039104171649496054,
+       "rel_diff": 0.35059017253061653
+      },
+      {
+       "committed": 0.057939713665059185,
+       "leaf": ".runs[0].cut_omega[109]",
+       "regenerated": 0.03728204719229131,
+       "rel_diff": 0.3565372551232607
+      },
+      {
+       "committed": 0.0006067096606704859,
+       "leaf": ".runs[0].cut_omega[10]",
+       "regenerated": 0.0033198271026192907,
+       "rel_diff": 4.471854690677728
+      },
+      {
+       "committed": 0.054697613907638706,
+       "leaf": ".runs[0].cut_omega[110]",
+       "regenerated": 0.03472057175611919,
+       "rel_diff": 0.3652269399768032
+      },
+      {
+       "committed": 0.05264460426998141,
+       "leaf": ".runs[0].cut_omega[111]",
+       "regenerated": 0.033119847674268545,
+       "rel_diff": 0.37087858986616257
+      },
+      {
+       "committed": 0.04971881112561899,
+       "leaf": ".runs[0].cut_omega[112]",
+       "regenerated": 0.030867236858197207,
+       "rel_diff": 0.37916381829387685
+      },
+      {
+       "committed": 0.0478658424886895,
+       "leaf": ".runs[0].cut_omega[113]",
+       "regenerated": 0.029458077891106195,
+       "rel_diff": 0.38456994885095735
+      },
+      {
+       "committed": 0.04522469825626176,
+       "leaf": ".runs[0].cut_omega[114]",
+       "regenerated": 0.02747309195622309,
+       "rel_diff": 0.39252017115627313
+      },
+      {
+       "committed": 0.04355167762756266,
+       "leaf": ".runs[0].cut_omega[115]",
+       "regenerated": 0.026230157750970533,
+       "rel_diff": 0.3977233672768971
+      },
+      {
+       "committed": 0.04116645715213914,
+       "leaf": ".runs[0].cut_omega[116]",
+       "regenerated": 0.024477724295641254,
+       "rel_diff": 0.40539638363391894
+      },
+      {
+       "committed": 0.03965510825587492,
+       "leaf": ".runs[0].cut_omega[117]",
+       "regenerated": 0.023379441327502377,
+       "rel_diff": 0.4104305257056333
+      },
+      {
+       "committed": 0.03749958234143919,
+       "leaf": ".runs[0].cut_omega[118]",
+       "regenerated": 0.021829683617628215,
+       "rel_diff": 0.4178686200057978
+      },
+      {
+       "committed": 0.03546993259001229,
+       "leaf": ".runs[0].cut_omega[119]",
+       "regenerated": 0.020389112713623106,
+       "rel_diff": 0.42517193507820983
+      },
+      {
+       "committed": 0.0012341989186237133,
+       "leaf": ".runs[0].cut_omega[11]",
+       "regenerated": 0.003754717506936838,
+       "rel_diff": 2.04223043002162
+      },
+      {
+       "committed": 0.002428312756820047,
+       "leaf": ".runs[0].cut_omega[12]",
+       "regenerated": 0.004514970291901732,
+       "rel_diff": 0.859303452251443
+      },
+      {
+       "committed": 0.0034051338049774682,
+       "leaf": ".runs[0].cut_omega[13]",
+       "regenerated": 0.005104966816266053,
+       "rel_diff": 0.4991971266456099
+      },
+      {
+       "committed": 0.005098111516002121,
+       "leaf": ".runs[0].cut_omega[14]",
+       "regenerated": 0.006136964451708485,
+       "rel_diff": 0.20377210903401738
+      },
+      {
+       "committed": 0.006324904011738951,
+       "leaf": ".runs[0].cut_omega[15]",
+       "regenerated": 0.006938033824943228,
+       "rel_diff": 0.09693899102125737
+      },
+      {
+       "committed": 0.008225664209398366,
+       "leaf": ".runs[0].cut_omega[16]",
+       "regenerated": 0.008339272758349931,
+       "rel_diff": 0.013811474193386186
+      },
+      {
+       "committed": 0.009525182676132503,
+       "leaf": ".runs[0].cut_omega[17]",
+       "regenerated": 0.009426868862536578,
+       "rel_diff": 0.010321462268883478
+      },
+      {
+       "committed": 0.01160940812606867,
+       "leaf": ".runs[0].cut_omega[18]",
+       "regenerated": 0.011328964118378783,
+       "rel_diff": 0.024156615448823405
+      },
+      {
+       "committed": 0.013160898378475906,
+       "leaf": ".runs[0].cut_omega[19]",
+       "regenerated": 0.0128049523528205,
+       "rel_diff": 0.027045724039442526
+      },
+      {
+       "committed": -0.0015520718279344362,
+       "leaf": ".runs[0].cut_omega[1]",
+       "regenerated": 0.0002773929771990739,
+       "rel_diff": 1.1787243168818033
+      },
+      {
+       "committed": 0.015825516752652563,
+       "leaf": ".runs[0].cut_omega[20]",
+       "regenerated": 0.01538547682340192,
+       "rel_diff": 0.027805722626838503
+      },
+      {
+       "committed": 0.01786871279419969,
+       "leaf": ".runs[0].cut_omega[21]",
+       "regenerated": 0.01738714463277414,
+       "rel_diff": 0.026950355460515996
+      },
+      {
+       "committed": 0.02140941692497389,
+       "leaf": ".runs[0].cut_omega[22]",
+       "regenerated": 0.02088504304036197,
+       "rel_diff": 0.024492674716434834
+      },
+      {
+       "committed": 0.02413768746412644,
+       "leaf": ".runs[0].cut_omega[23]",
+       "regenerated": 0.023596765034542604,
+       "rel_diff": 0.022409869644213362
+      },
+      {
+       "committed": 0.028879505046191637,
+       "leaf": ".runs[0].cut_omega[24]",
+       "regenerated": 0.02833212110443799,
+       "rel_diff": 0.01895406243556206
+      },
+      {
+       "committed": 0.03253815049231671,
+       "leaf": ".runs[0].cut_omega[25]",
+       "regenerated": 0.0320001286653635,
+       "rel_diff": 0.016535107829200403
+      },
+      {
+       "committed": 0.03889818872150871,
+       "leaf": ".runs[0].cut_omega[26]",
+       "regenerated": 0.038398749098178,
+       "rel_diff": 0.012839662712997722
+      },
+      {
+       "committed": 0.04380325890159433,
+       "leaf": ".runs[0].cut_omega[27]",
+       "regenerated": 0.04334907737943641,
+       "rel_diff": 0.010368669673145892
+      },
+      {
+       "committed": 0.05232160895441564,
+       "leaf": ".runs[0].cut_omega[28]",
+       "regenerated": 0.05197140508607182,
+       "rel_diff": 0.00669329317928526
+      },
+      {
+       "committed": 0.05888219389173578,
+       "leaf": ".runs[0].cut_omega[29]",
+       "regenerated": 0.05863009014291486,
+       "rel_diff": 0.004281493812619331
+      },
+      {
+       "committed": -0.0015799635649528007,
+       "leaf": ".runs[0].cut_omega[2]",
+       "regenerated": 0.0005527951411558456,
+       "rel_diff": 1.349878410754592
+      },
+      {
+       "committed": 0.07025403860233417,
+       "leaf": ".runs[0].cut_omega[30]",
+       "regenerated": 0.07020165623402061,
+       "rel_diff": 0.0007456136238667909
+      },
+      {
+       "committed": 0.0789919189743987,
+       "leaf": ".runs[0].cut_omega[31]",
+       "regenerated": 0.07911398924189017,
+       "rel_diff": 0.00154535133563521
+      },
+      {
+       "committed": 0.09409184566618374,
+       "leaf": ".runs[0].cut_omega[32]",
+       "regenerated": 0.09454969058690797,
+       "rel_diff": 0.00486593622946414
+      },
+      {
+       "committed": 0.10565162643864125,
+       "leaf": ".runs[0].cut_omega[33]",
+       "regenerated": 0.1063907340751225,
+       "rel_diff": 0.006995705238011712
+      },
+      {
+       "committed": 0.1255328086180034,
+       "leaf": ".runs[0].cut_omega[34]",
+       "regenerated": 0.12679575407265334,
+       "rel_diff": 0.01006068029986559
+      },
+      {
+       "committed": 0.14066485783174015,
+       "leaf": ".runs[0].cut_omega[35]",
+       "regenerated": 0.14235596761841318,
+       "rel_diff": 0.012022262082658147
+      },
+      {
+       "committed": 0.1664947232540505,
+       "leaf": ".runs[0].cut_omega[36]",
+       "regenerated": 0.16897017684777765,
+       "rel_diff": 0.014868060352579038
+      },
+      {
+       "committed": 0.18597561255674505,
+       "leaf": ".runs[0].cut_omega[37]",
+       "regenerated": 0.18908712279870776,
+       "rel_diff": 0.016730743344175434
+      },
+      {
+       "committed": 0.21883814158105946,
+       "leaf": ".runs[0].cut_omega[38]",
+       "regenerated": 0.22311833265318476,
+       "rel_diff": 0.01955870691096998
+      }
+     ],
+     "n_keys_only_in_committed": 0,
+     "n_keys_only_in_regenerated": 0,
+     "provenance_keys_not_counted": [
+      "created",
+      "created_at",
+      "date",
+      "generated",
+      "generated_at",
+      "run_date",
+      "timestamp",
+      "today",
+      "when"
+     ],
+     "provenance_leaves_moved": 0,
+     "provenance_moved_detail": [],
+     "timing_keys_excluded": [
+      "elapsed",
+      "elapsed_s",
+      "minutes",
+      "runtime_s",
+      "seconds",
+      "wall_clock_seconds",
+      "wall_minutes",
+      "wall_s",
+      "wall_seconds"
+     ]
+    },
+    "key": "spike1_stepC_gate",
+    "pre_vs_post_repair": {
+     "keys_only_in_committed": [],
+     "keys_only_in_regenerated": [],
+     "leaves_compared": 1028,
+     "leaves_identical": 1028,
+     "leaves_moved": 0,
+     "moved_detail": [],
+     "n_keys_only_in_committed": 0,
+     "n_keys_only_in_regenerated": 0,
+     "provenance_keys_not_counted": [
+      "created",
+      "created_at",
+      "date",
+      "generated",
+      "generated_at",
+      "run_date",
+      "timestamp",
+      "today",
+      "when"
+     ],
+     "provenance_leaves_moved": 0,
+     "provenance_moved_detail": [],
+     "timing_keys_excluded": [
+      "elapsed",
+      "elapsed_s",
+      "minutes",
+      "runtime_s",
+      "seconds",
+      "wall_clock_seconds",
+      "wall_minutes",
+      "wall_s",
+      "wall_seconds"
+     ]
+    },
+    "pre_vs_pre_determinism": {
+     "keys_only_in_committed": [],
+     "keys_only_in_regenerated": [],
+     "leaves_compared": 1028,
+     "leaves_identical": 1028,
+     "leaves_moved": 0,
+     "moved_detail": [],
+     "n_keys_only_in_committed": 0,
+     "n_keys_only_in_regenerated": 0,
+     "provenance_keys_not_counted": [
+      "created",
+      "created_at",
+      "date",
+      "generated",
+      "generated_at",
+      "run_date",
+      "timestamp",
+      "today",
+      "when"
+     ],
+     "provenance_leaves_moved": 0,
+     "provenance_moved_detail": [],
+     "timing_keys_excluded": [
+      "elapsed",
+      "elapsed_s",
+      "minutes",
+      "runtime_s",
+      "seconds",
+      "wall_clock_seconds",
+      "wall_minutes",
+      "wall_s",
+      "wall_seconds"
+     ]
+    },
+    "repair_attributable_leaves_moved": 0,
+    "runs": [
+     {
+      "returncode": 0,
+      "stderr_tail": null,
+      "wall_seconds": 482.7,
+      "which": "pre"
+     },
+     {
+      "returncode": 0,
+      "stderr_tail": null,
+      "wall_seconds": 994.2,
+      "which": "pre"
+     },
+     {
+      "returncode": 0,
+      "stderr_tail": null,
+      "wall_seconds": 1187.8,
+      "which": "post"
+     }
+    ],
+    "script_is_deterministic_today": true,
+    "verdict": "BASELINE_DRIFT_NOT_THIS_LEG"
+   }
+  },
   "banked_runs": [
    {
     "argv": [
@@ -823,6 +1318,19 @@
      "moved_detail": [],
      "n_keys_only_in_committed": 0,
      "n_keys_only_in_regenerated": 0,
+     "provenance_keys_not_counted": [
+      "created",
+      "created_at",
+      "date",
+      "generated",
+      "generated_at",
+      "run_date",
+      "timestamp",
+      "today",
+      "when"
+     ],
+     "provenance_leaves_moved": 0,
+     "provenance_moved_detail": [],
      "timing_keys_excluded": [
       "elapsed",
       "elapsed_s",
@@ -836,6 +1344,7 @@
      ]
     },
     "artifact_leaves_moved": 0,
+    "artifact_provenance_leaves_moved": 0,
     "calls": "odd_field_x_slope directly (spike1_stepB_evidence.py:84-85)",
     "calls_bit_identical": 2,
     "calls_compared": 2,
@@ -854,7 +1363,7 @@
     },
     "returncode": 0,
     "script": "writeup/3_spikes/spike1_stepB_evidence.py",
-    "wall_seconds": 22.4
+    "wall_seconds": 4.3
    },
    {
     "argv": [],
@@ -863,11 +1372,30 @@
      "keys_only_in_committed": [],
      "keys_only_in_regenerated": [],
      "leaves_compared": 451,
-     "leaves_identical": 451,
+     "leaves_identical": 450,
      "leaves_moved": 0,
      "moved_detail": [],
      "n_keys_only_in_committed": 0,
      "n_keys_only_in_regenerated": 0,
+     "provenance_keys_not_counted": [
+      "created",
+      "created_at",
+      "date",
+      "generated",
+      "generated_at",
+      "run_date",
+      "timestamp",
+      "today",
+      "when"
+     ],
+     "provenance_leaves_moved": 1,
+     "provenance_moved_detail": [
+      {
+       "committed": "2026-08-06",
+       "leaf": ".generated",
+       "regenerated": "2026-08-11"
+      }
+     ],
      "timing_keys_excluded": [
       "elapsed",
       "elapsed_s",
@@ -881,6 +1409,7 @@
      ]
     },
     "artifact_leaves_moved": 0,
+    "artifact_provenance_leaves_moved": 1,
     "calls": "RescaledBoussinesq.run via a ScriptedRelaxation subclass",
     "calls_bit_identical": 62,
     "calls_compared": 62,
@@ -899,50 +1428,925 @@
     },
     "returncode": 0,
     "script": "experiments/p2_route_brs_v1_status_audit.py",
-    "wall_seconds": 1.8
-   }
-  ],
-  "comparison": "== on float64 per call (NaN==NaN identical) and per artifact leaf",
-  "n_banked_artifacts_rerun": 2,
-  "skipped_slow": true,
-  "test_runs": [
-   {
-    "calls_bit_identical": 4999,
-    "calls_compared": 4999,
-    "calls_moved": 0,
-    "returncode": 0,
-    "stderr_tail": null,
-    "test": "test_boussinesq_rescaled.py",
-    "wall_seconds": 389.2
+    "wall_seconds": 0.4
    },
    {
-    "calls_bit_identical": 0,
-    "calls_compared": 0,
+    "argv": [
+     "--logged"
+    ],
+    "artifact": "writeup/data/spike1_stepC_gate.json",
+    "artifact_comparison": {
+     "keys_only_in_committed": [],
+     "keys_only_in_regenerated": [],
+     "leaves_compared": 1028,
+     "leaves_identical": 503,
+     "leaves_moved": 525,
+     "moved_detail": [
+      {
+       "committed": true,
+       "leaf": ".predicate_checks.1_alpha_within_5pct",
+       "regenerated": false
+      },
+      {
+       "committed": true,
+       "leaf": ".predicate_checks.4_resolution_stable_alpha",
+       "regenerated": false
+      },
+      {
+       "committed": -0.3350763095343765,
+       "leaf": ".runs[0].alpha",
+       "regenerated": -0.37935637310385306,
+       "rel_diff": 0.1321491920184042
+      },
+      {
+       "committed": -0.32256185019658257,
+       "leaf": ".runs[0].alpha_far",
+       "regenerated": -0.45613812051639147,
+       "rel_diff": 0.4141105658911678
+      },
+      {
+       "committed": 0.02631688835591782,
+       "leaf": ".runs[0].anisotropy_median",
+       "regenerated": 0.02559043445181232,
+       "rel_diff": 0.02760409567729707
+      },
+      {
+       "committed": 0.09451199101749669,
+       "leaf": ".runs[0].anisotropy_p90",
+       "regenerated": 0.09512477500252793,
+       "rel_diff": 0.006483663907977562
+      },
+      {
+       "committed": 3.0636748831963683,
+       "leaf": ".runs[0].c_l",
+       "regenerated": 3.0636748831963687,
+       "rel_diff": 1.449531124486483e-16
+      },
+      {
+       "committed": -1.0265648734746011,
+       "leaf": ".runs[0].c_omega",
+       "regenerated": -1.162224592058745,
+       "rel_diff": 0.13214919201840425
+      },
+      {
+       "committed": -0.0015479325344973176,
+       "leaf": ".runs[0].cut_omega[0]",
+       "regenerated": 0.0001467065560560652,
+       "rel_diff": 1.0947758075927434
+      },
+      {
+       "committed": 0.08895335515326779,
+       "leaf": ".runs[0].cut_omega[100]",
+       "regenerated": 0.06386814212062654,
+       "rel_diff": 0.2820041244022679
+      },
+      {
+       "committed": 0.08551818636082323,
+       "leaf": ".runs[0].cut_omega[101]",
+       "regenerated": 0.06073638650613588,
+       "rel_diff": 0.28978397355302365
+      },
+      {
+       "committed": 0.08062353394840044,
+       "leaf": ".runs[0].cut_omega[102]",
+       "regenerated": 0.05635506216447942,
+       "rel_diff": 0.3010097746329625
+      },
+      {
+       "committed": 0.07752450357827326,
+       "leaf": ".runs[0].cut_omega[103]",
+       "regenerated": 0.053630084043154114,
+       "rel_diff": 0.3082176400006734
+      },
+      {
+       "committed": 0.07310898621404499,
+       "leaf": ".runs[0].cut_omega[104]",
+       "regenerated": 0.049812954069731664,
+       "rel_diff": 0.31864799870303656
+      },
+      {
+       "committed": 0.07031338436226725,
+       "leaf": ".runs[0].cut_omega[105]",
+       "regenerated": 0.04743584979669405,
+       "rel_diff": 0.3253652881747806
+      },
+      {
+       "committed": 0.06633020528410245,
+       "leaf": ".runs[0].cut_omega[106]",
+       "regenerated": 0.044101892275055524,
+       "rel_diff": 0.3351159990209536
+      },
+      {
+       "committed": 0.06380829195778505,
+       "leaf": ".runs[0].cut_omega[107]",
+       "regenerated": 0.04202313725176409,
+       "rel_diff": 0.34141573199348146
+      },
+      {
+       "committed": 0.06021493669394713,
+       "leaf": ".runs[0].cut_omega[108]",
+       "regenerated": 0.039104171649496054,
+       "rel_diff": 0.35059017253061653
+      },
+      {
+       "committed": 0.057939713665059185,
+       "leaf": ".runs[0].cut_omega[109]",
+       "regenerated": 0.03728204719229131,
+       "rel_diff": 0.3565372551232607
+      },
+      {
+       "committed": 0.0006067096606704859,
+       "leaf": ".runs[0].cut_omega[10]",
+       "regenerated": 0.0033198271026192907,
+       "rel_diff": 4.471854690677728
+      },
+      {
+       "committed": 0.054697613907638706,
+       "leaf": ".runs[0].cut_omega[110]",
+       "regenerated": 0.03472057175611919,
+       "rel_diff": 0.3652269399768032
+      },
+      {
+       "committed": 0.05264460426998141,
+       "leaf": ".runs[0].cut_omega[111]",
+       "regenerated": 0.033119847674268545,
+       "rel_diff": 0.37087858986616257
+      },
+      {
+       "committed": 0.04971881112561899,
+       "leaf": ".runs[0].cut_omega[112]",
+       "regenerated": 0.030867236858197207,
+       "rel_diff": 0.37916381829387685
+      },
+      {
+       "committed": 0.0478658424886895,
+       "leaf": ".runs[0].cut_omega[113]",
+       "regenerated": 0.029458077891106195,
+       "rel_diff": 0.38456994885095735
+      },
+      {
+       "committed": 0.04522469825626176,
+       "leaf": ".runs[0].cut_omega[114]",
+       "regenerated": 0.02747309195622309,
+       "rel_diff": 0.39252017115627313
+      },
+      {
+       "committed": 0.04355167762756266,
+       "leaf": ".runs[0].cut_omega[115]",
+       "regenerated": 0.026230157750970533,
+       "rel_diff": 0.3977233672768971
+      },
+      {
+       "committed": 0.04116645715213914,
+       "leaf": ".runs[0].cut_omega[116]",
+       "regenerated": 0.024477724295641254,
+       "rel_diff": 0.40539638363391894
+      },
+      {
+       "committed": 0.03965510825587492,
+       "leaf": ".runs[0].cut_omega[117]",
+       "regenerated": 0.023379441327502377,
+       "rel_diff": 0.4104305257056333
+      },
+      {
+       "committed": 0.03749958234143919,
+       "leaf": ".runs[0].cut_omega[118]",
+       "regenerated": 0.021829683617628215,
+       "rel_diff": 0.4178686200057978
+      },
+      {
+       "committed": 0.03546993259001229,
+       "leaf": ".runs[0].cut_omega[119]",
+       "regenerated": 0.020389112713623106,
+       "rel_diff": 0.42517193507820983
+      },
+      {
+       "committed": 0.0012341989186237133,
+       "leaf": ".runs[0].cut_omega[11]",
+       "regenerated": 0.003754717506936838,
+       "rel_diff": 2.04223043002162
+      },
+      {
+       "committed": 0.002428312756820047,
+       "leaf": ".runs[0].cut_omega[12]",
+       "regenerated": 0.004514970291901732,
+       "rel_diff": 0.859303452251443
+      },
+      {
+       "committed": 0.0034051338049774682,
+       "leaf": ".runs[0].cut_omega[13]",
+       "regenerated": 0.005104966816266053,
+       "rel_diff": 0.4991971266456099
+      },
+      {
+       "committed": 0.005098111516002121,
+       "leaf": ".runs[0].cut_omega[14]",
+       "regenerated": 0.006136964451708485,
+       "rel_diff": 0.20377210903401738
+      },
+      {
+       "committed": 0.006324904011738951,
+       "leaf": ".runs[0].cut_omega[15]",
+       "regenerated": 0.006938033824943228,
+       "rel_diff": 0.09693899102125737
+      },
+      {
+       "committed": 0.008225664209398366,
+       "leaf": ".runs[0].cut_omega[16]",
+       "regenerated": 0.008339272758349931,
+       "rel_diff": 0.013811474193386186
+      },
+      {
+       "committed": 0.009525182676132503,
+       "leaf": ".runs[0].cut_omega[17]",
+       "regenerated": 0.009426868862536578,
+       "rel_diff": 0.010321462268883478
+      },
+      {
+       "committed": 0.01160940812606867,
+       "leaf": ".runs[0].cut_omega[18]",
+       "regenerated": 0.011328964118378783,
+       "rel_diff": 0.024156615448823405
+      },
+      {
+       "committed": 0.013160898378475906,
+       "leaf": ".runs[0].cut_omega[19]",
+       "regenerated": 0.0128049523528205,
+       "rel_diff": 0.027045724039442526
+      },
+      {
+       "committed": -0.0015520718279344362,
+       "leaf": ".runs[0].cut_omega[1]",
+       "regenerated": 0.0002773929771990739,
+       "rel_diff": 1.1787243168818033
+      },
+      {
+       "committed": 0.015825516752652563,
+       "leaf": ".runs[0].cut_omega[20]",
+       "regenerated": 0.01538547682340192,
+       "rel_diff": 0.027805722626838503
+      },
+      {
+       "committed": 0.01786871279419969,
+       "leaf": ".runs[0].cut_omega[21]",
+       "regenerated": 0.01738714463277414,
+       "rel_diff": 0.026950355460515996
+      },
+      {
+       "committed": 0.02140941692497389,
+       "leaf": ".runs[0].cut_omega[22]",
+       "regenerated": 0.02088504304036197,
+       "rel_diff": 0.024492674716434834
+      },
+      {
+       "committed": 0.02413768746412644,
+       "leaf": ".runs[0].cut_omega[23]",
+       "regenerated": 0.023596765034542604,
+       "rel_diff": 0.022409869644213362
+      },
+      {
+       "committed": 0.028879505046191637,
+       "leaf": ".runs[0].cut_omega[24]",
+       "regenerated": 0.02833212110443799,
+       "rel_diff": 0.01895406243556206
+      },
+      {
+       "committed": 0.03253815049231671,
+       "leaf": ".runs[0].cut_omega[25]",
+       "regenerated": 0.0320001286653635,
+       "rel_diff": 0.016535107829200403
+      },
+      {
+       "committed": 0.03889818872150871,
+       "leaf": ".runs[0].cut_omega[26]",
+       "regenerated": 0.038398749098178,
+       "rel_diff": 0.012839662712997722
+      },
+      {
+       "committed": 0.04380325890159433,
+       "leaf": ".runs[0].cut_omega[27]",
+       "regenerated": 0.04334907737943641,
+       "rel_diff": 0.010368669673145892
+      },
+      {
+       "committed": 0.05232160895441564,
+       "leaf": ".runs[0].cut_omega[28]",
+       "regenerated": 0.05197140508607182,
+       "rel_diff": 0.00669329317928526
+      },
+      {
+       "committed": 0.05888219389173578,
+       "leaf": ".runs[0].cut_omega[29]",
+       "regenerated": 0.05863009014291486,
+       "rel_diff": 0.004281493812619331
+      },
+      {
+       "committed": -0.0015799635649528007,
+       "leaf": ".runs[0].cut_omega[2]",
+       "regenerated": 0.0005527951411558456,
+       "rel_diff": 1.349878410754592
+      },
+      {
+       "committed": 0.07025403860233417,
+       "leaf": ".runs[0].cut_omega[30]",
+       "regenerated": 0.07020165623402061,
+       "rel_diff": 0.0007456136238667909
+      },
+      {
+       "committed": 0.0789919189743987,
+       "leaf": ".runs[0].cut_omega[31]",
+       "regenerated": 0.07911398924189017,
+       "rel_diff": 0.00154535133563521
+      },
+      {
+       "committed": 0.09409184566618374,
+       "leaf": ".runs[0].cut_omega[32]",
+       "regenerated": 0.09454969058690797,
+       "rel_diff": 0.00486593622946414
+      },
+      {
+       "committed": 0.10565162643864125,
+       "leaf": ".runs[0].cut_omega[33]",
+       "regenerated": 0.1063907340751225,
+       "rel_diff": 0.006995705238011712
+      },
+      {
+       "committed": 0.1255328086180034,
+       "leaf": ".runs[0].cut_omega[34]",
+       "regenerated": 0.12679575407265334,
+       "rel_diff": 0.01006068029986559
+      },
+      {
+       "committed": 0.14066485783174015,
+       "leaf": ".runs[0].cut_omega[35]",
+       "regenerated": 0.14235596761841318,
+       "rel_diff": 0.012022262082658147
+      },
+      {
+       "committed": 0.1664947232540505,
+       "leaf": ".runs[0].cut_omega[36]",
+       "regenerated": 0.16897017684777765,
+       "rel_diff": 0.014868060352579038
+      },
+      {
+       "committed": 0.18597561255674505,
+       "leaf": ".runs[0].cut_omega[37]",
+       "regenerated": 0.18908712279870776,
+       "rel_diff": 0.016730743344175434
+      },
+      {
+       "committed": 0.21883814158105946,
+       "leaf": ".runs[0].cut_omega[38]",
+       "regenerated": 0.22311833265318476,
+       "rel_diff": 0.01955870691096998
+      }
+     ],
+     "n_keys_only_in_committed": 0,
+     "n_keys_only_in_regenerated": 0,
+     "provenance_keys_not_counted": [
+      "created",
+      "created_at",
+      "date",
+      "generated",
+      "generated_at",
+      "run_date",
+      "timestamp",
+      "today",
+      "when"
+     ],
+     "provenance_leaves_moved": 0,
+     "provenance_moved_detail": [],
+     "timing_keys_excluded": [
+      "elapsed",
+      "elapsed_s",
+      "minutes",
+      "runtime_s",
+      "seconds",
+      "wall_clock_seconds",
+      "wall_minutes",
+      "wall_s",
+      "wall_seconds"
+     ]
+    },
+    "artifact_leaves_moved": 525,
+    "artifact_provenance_leaves_moved": 0,
+    "attribution": {
+     "baseline_drift_leaves_moved": 525,
+     "committed_vs_pre_repair_baseline_drift": {
+      "keys_only_in_committed": [],
+      "keys_only_in_regenerated": [],
+      "leaves_compared": 1028,
+      "leaves_identical": 503,
+      "leaves_moved": 525,
+      "moved_detail": [
+       {
+        "committed": true,
+        "leaf": ".predicate_checks.1_alpha_within_5pct",
+        "regenerated": false
+       },
+       {
+        "committed": true,
+        "leaf": ".predicate_checks.4_resolution_stable_alpha",
+        "regenerated": false
+       },
+       {
+        "committed": -0.3350763095343765,
+        "leaf": ".runs[0].alpha",
+        "regenerated": -0.37935637310385306,
+        "rel_diff": 0.1321491920184042
+       },
+       {
+        "committed": -0.32256185019658257,
+        "leaf": ".runs[0].alpha_far",
+        "regenerated": -0.45613812051639147,
+        "rel_diff": 0.4141105658911678
+       },
+       {
+        "committed": 0.02631688835591782,
+        "leaf": ".runs[0].anisotropy_median",
+        "regenerated": 0.02559043445181232,
+        "rel_diff": 0.02760409567729707
+       },
+       {
+        "committed": 0.09451199101749669,
+        "leaf": ".runs[0].anisotropy_p90",
+        "regenerated": 0.09512477500252793,
+        "rel_diff": 0.006483663907977562
+       },
+       {
+        "committed": 3.0636748831963683,
+        "leaf": ".runs[0].c_l",
+        "regenerated": 3.0636748831963687,
+        "rel_diff": 1.449531124486483e-16
+       },
+       {
+        "committed": -1.0265648734746011,
+        "leaf": ".runs[0].c_omega",
+        "regenerated": -1.162224592058745,
+        "rel_diff": 0.13214919201840425
+       },
+       {
+        "committed": -0.0015479325344973176,
+        "leaf": ".runs[0].cut_omega[0]",
+        "regenerated": 0.0001467065560560652,
+        "rel_diff": 1.0947758075927434
+       },
+       {
+        "committed": 0.08895335515326779,
+        "leaf": ".runs[0].cut_omega[100]",
+        "regenerated": 0.06386814212062654,
+        "rel_diff": 0.2820041244022679
+       },
+       {
+        "committed": 0.08551818636082323,
+        "leaf": ".runs[0].cut_omega[101]",
+        "regenerated": 0.06073638650613588,
+        "rel_diff": 0.28978397355302365
+       },
+       {
+        "committed": 0.08062353394840044,
+        "leaf": ".runs[0].cut_omega[102]",
+        "regenerated": 0.05635506216447942,
+        "rel_diff": 0.3010097746329625
+       },
+       {
+        "committed": 0.07752450357827326,
+        "leaf": ".runs[0].cut_omega[103]",
+        "regenerated": 0.053630084043154114,
+        "rel_diff": 0.3082176400006734
+       },
+       {
+        "committed": 0.07310898621404499,
+        "leaf": ".runs[0].cut_omega[104]",
+        "regenerated": 0.049812954069731664,
+        "rel_diff": 0.31864799870303656
+       },
+       {
+        "committed": 0.07031338436226725,
+        "leaf": ".runs[0].cut_omega[105]",
+        "regenerated": 0.04743584979669405,
+        "rel_diff": 0.3253652881747806
+       },
+       {
+        "committed": 0.06633020528410245,
+        "leaf": ".runs[0].cut_omega[106]",
+        "regenerated": 0.044101892275055524,
+        "rel_diff": 0.3351159990209536
+       },
+       {
+        "committed": 0.06380829195778505,
+        "leaf": ".runs[0].cut_omega[107]",
+        "regenerated": 0.04202313725176409,
+        "rel_diff": 0.34141573199348146
+       },
+       {
+        "committed": 0.06021493669394713,
+        "leaf": ".runs[0].cut_omega[108]",
+        "regenerated": 0.039104171649496054,
+        "rel_diff": 0.35059017253061653
+       },
+       {
+        "committed": 0.057939713665059185,
+        "leaf": ".runs[0].cut_omega[109]",
+        "regenerated": 0.03728204719229131,
+        "rel_diff": 0.3565372551232607
+       },
+       {
+        "committed": 0.0006067096606704859,
+        "leaf": ".runs[0].cut_omega[10]",
+        "regenerated": 0.0033198271026192907,
+        "rel_diff": 4.471854690677728
+       },
+       {
+        "committed": 0.054697613907638706,
+        "leaf": ".runs[0].cut_omega[110]",
+        "regenerated": 0.03472057175611919,
+        "rel_diff": 0.3652269399768032
+       },
+       {
+        "committed": 0.05264460426998141,
+        "leaf": ".runs[0].cut_omega[111]",
+        "regenerated": 0.033119847674268545,
+        "rel_diff": 0.37087858986616257
+       },
+       {
+        "committed": 0.04971881112561899,
+        "leaf": ".runs[0].cut_omega[112]",
+        "regenerated": 0.030867236858197207,
+        "rel_diff": 0.37916381829387685
+       },
+       {
+        "committed": 0.0478658424886895,
+        "leaf": ".runs[0].cut_omega[113]",
+        "regenerated": 0.029458077891106195,
+        "rel_diff": 0.38456994885095735
+       },
+       {
+        "committed": 0.04522469825626176,
+        "leaf": ".runs[0].cut_omega[114]",
+        "regenerated": 0.02747309195622309,
+        "rel_diff": 0.39252017115627313
+       },
+       {
+        "committed": 0.04355167762756266,
+        "leaf": ".runs[0].cut_omega[115]",
+        "regenerated": 0.026230157750970533,
+        "rel_diff": 0.3977233672768971
+       },
+       {
+        "committed": 0.04116645715213914,
+        "leaf": ".runs[0].cut_omega[116]",
+        "regenerated": 0.024477724295641254,
+        "rel_diff": 0.40539638363391894
+       },
+       {
+        "committed": 0.03965510825587492,
+        "leaf": ".runs[0].cut_omega[117]",
+        "regenerated": 0.023379441327502377,
+        "rel_diff": 0.4104305257056333
+       },
+       {
+        "committed": 0.03749958234143919,
+        "leaf": ".runs[0].cut_omega[118]",
+        "regenerated": 0.021829683617628215,
+        "rel_diff": 0.4178686200057978
+       },
+       {
+        "committed": 0.03546993259001229,
+        "leaf": ".runs[0].cut_omega[119]",
+        "regenerated": 0.020389112713623106,
+        "rel_diff": 0.42517193507820983
+       },
+       {
+        "committed": 0.0012341989186237133,
+        "leaf": ".runs[0].cut_omega[11]",
+        "regenerated": 0.003754717506936838,
+        "rel_diff": 2.04223043002162
+       },
+       {
+        "committed": 0.002428312756820047,
+        "leaf": ".runs[0].cut_omega[12]",
+        "regenerated": 0.004514970291901732,
+        "rel_diff": 0.859303452251443
+       },
+       {
+        "committed": 0.0034051338049774682,
+        "leaf": ".runs[0].cut_omega[13]",
+        "regenerated": 0.005104966816266053,
+        "rel_diff": 0.4991971266456099
+       },
+       {
+        "committed": 0.005098111516002121,
+        "leaf": ".runs[0].cut_omega[14]",
+        "regenerated": 0.006136964451708485,
+        "rel_diff": 0.20377210903401738
+       },
+       {
+        "committed": 0.006324904011738951,
+        "leaf": ".runs[0].cut_omega[15]",
+        "regenerated": 0.006938033824943228,
+        "rel_diff": 0.09693899102125737
+       },
+       {
+        "committed": 0.008225664209398366,
+        "leaf": ".runs[0].cut_omega[16]",
+        "regenerated": 0.008339272758349931,
+        "rel_diff": 0.013811474193386186
+       },
+       {
+        "committed": 0.009525182676132503,
+        "leaf": ".runs[0].cut_omega[17]",
+        "regenerated": 0.009426868862536578,
+        "rel_diff": 0.010321462268883478
+       },
+       {
+        "committed": 0.01160940812606867,
+        "leaf": ".runs[0].cut_omega[18]",
+        "regenerated": 0.011328964118378783,
+        "rel_diff": 0.024156615448823405
+       },
+       {
+        "committed": 0.013160898378475906,
+        "leaf": ".runs[0].cut_omega[19]",
+        "regenerated": 0.0128049523528205,
+        "rel_diff": 0.027045724039442526
+       },
+       {
+        "committed": -0.0015520718279344362,
+        "leaf": ".runs[0].cut_omega[1]",
+        "regenerated": 0.0002773929771990739,
+        "rel_diff": 1.1787243168818033
+       },
+       {
+        "committed": 0.015825516752652563,
+        "leaf": ".runs[0].cut_omega[20]",
+        "regenerated": 0.01538547682340192,
+        "rel_diff": 0.027805722626838503
+       },
+       {
+        "committed": 0.01786871279419969,
+        "leaf": ".runs[0].cut_omega[21]",
+        "regenerated": 0.01738714463277414,
+        "rel_diff": 0.026950355460515996
+       },
+       {
+        "committed": 0.02140941692497389,
+        "leaf": ".runs[0].cut_omega[22]",
+        "regenerated": 0.02088504304036197,
+        "rel_diff": 0.024492674716434834
+       },
+       {
+        "committed": 0.02413768746412644,
+        "leaf": ".runs[0].cut_omega[23]",
+        "regenerated": 0.023596765034542604,
+        "rel_diff": 0.022409869644213362
+       },
+       {
+        "committed": 0.028879505046191637,
+        "leaf": ".runs[0].cut_omega[24]",
+        "regenerated": 0.02833212110443799,
+        "rel_diff": 0.01895406243556206
+       },
+       {
+        "committed": 0.03253815049231671,
+        "leaf": ".runs[0].cut_omega[25]",
+        "regenerated": 0.0320001286653635,
+        "rel_diff": 0.016535107829200403
+       },
+       {
+        "committed": 0.03889818872150871,
+        "leaf": ".runs[0].cut_omega[26]",
+        "regenerated": 0.038398749098178,
+        "rel_diff": 0.012839662712997722
+       },
+       {
+        "committed": 0.04380325890159433,
+        "leaf": ".runs[0].cut_omega[27]",
+        "regenerated": 0.04334907737943641,
+        "rel_diff": 0.010368669673145892
+       },
+       {
+        "committed": 0.05232160895441564,
+        "leaf": ".runs[0].cut_omega[28]",
+        "regenerated": 0.05197140508607182,
+        "rel_diff": 0.00669329317928526
+       },
+       {
+        "committed": 0.05888219389173578,
+        "leaf": ".runs[0].cut_omega[29]",
+        "regenerated": 0.05863009014291486,
+        "rel_diff": 0.004281493812619331
+       },
+       {
+        "committed": -0.0015799635649528007,
+        "leaf": ".runs[0].cut_omega[2]",
+        "regenerated": 0.0005527951411558456,
+        "rel_diff": 1.349878410754592
+       },
+       {
+        "committed": 0.07025403860233417,
+        "leaf": ".runs[0].cut_omega[30]",
+        "regenerated": 0.07020165623402061,
+        "rel_diff": 0.0007456136238667909
+       },
+       {
+        "committed": 0.0789919189743987,
+        "leaf": ".runs[0].cut_omega[31]",
+        "regenerated": 0.07911398924189017,
+        "rel_diff": 0.00154535133563521
+       },
+       {
+        "committed": 0.09409184566618374,
+        "leaf": ".runs[0].cut_omega[32]",
+        "regenerated": 0.09454969058690797,
+        "rel_diff": 0.00486593622946414
+       },
+       {
+        "committed": 0.10565162643864125,
+        "leaf": ".runs[0].cut_omega[33]",
+        "regenerated": 0.1063907340751225,
+        "rel_diff": 0.006995705238011712
+       },
+       {
+        "committed": 0.1255328086180034,
+        "leaf": ".runs[0].cut_omega[34]",
+        "regenerated": 0.12679575407265334,
+        "rel_diff": 0.01006068029986559
+       },
+       {
+        "committed": 0.14066485783174015,
+        "leaf": ".runs[0].cut_omega[35]",
+        "regenerated": 0.14235596761841318,
+        "rel_diff": 0.012022262082658147
+       },
+       {
+        "committed": 0.1664947232540505,
+        "leaf": ".runs[0].cut_omega[36]",
+        "regenerated": 0.16897017684777765,
+        "rel_diff": 0.014868060352579038
+       },
+       {
+        "committed": 0.18597561255674505,
+        "leaf": ".runs[0].cut_omega[37]",
+        "regenerated": 0.18908712279870776,
+        "rel_diff": 0.016730743344175434
+       },
+       {
+        "committed": 0.21883814158105946,
+        "leaf": ".runs[0].cut_omega[38]",
+        "regenerated": 0.22311833265318476,
+        "rel_diff": 0.01955870691096998
+       }
+      ],
+      "n_keys_only_in_committed": 0,
+      "n_keys_only_in_regenerated": 0,
+      "provenance_keys_not_counted": [
+       "created",
+       "created_at",
+       "date",
+       "generated",
+       "generated_at",
+       "run_date",
+       "timestamp",
+       "today",
+       "when"
+      ],
+      "provenance_leaves_moved": 0,
+      "provenance_moved_detail": [],
+      "timing_keys_excluded": [
+       "elapsed",
+       "elapsed_s",
+       "minutes",
+       "runtime_s",
+       "seconds",
+       "wall_clock_seconds",
+       "wall_minutes",
+       "wall_s",
+       "wall_seconds"
+      ]
+     },
+     "key": "spike1_stepC_gate",
+     "pre_vs_post_repair": {
+      "keys_only_in_committed": [],
+      "keys_only_in_regenerated": [],
+      "leaves_compared": 1028,
+      "leaves_identical": 1028,
+      "leaves_moved": 0,
+      "moved_detail": [],
+      "n_keys_only_in_committed": 0,
+      "n_keys_only_in_regenerated": 0,
+      "provenance_keys_not_counted": [
+       "created",
+       "created_at",
+       "date",
+       "generated",
+       "generated_at",
+       "run_date",
+       "timestamp",
+       "today",
+       "when"
+      ],
+      "provenance_leaves_moved": 0,
+      "provenance_moved_detail": [],
+      "timing_keys_excluded": [
+       "elapsed",
+       "elapsed_s",
+       "minutes",
+       "runtime_s",
+       "seconds",
+       "wall_clock_seconds",
+       "wall_minutes",
+       "wall_s",
+       "wall_seconds"
+      ]
+     },
+     "pre_vs_pre_determinism": {
+      "keys_only_in_committed": [],
+      "keys_only_in_regenerated": [],
+      "leaves_compared": 1028,
+      "leaves_identical": 1028,
+      "leaves_moved": 0,
+      "moved_detail": [],
+      "n_keys_only_in_committed": 0,
+      "n_keys_only_in_regenerated": 0,
+      "provenance_keys_not_counted": [
+       "created",
+       "created_at",
+       "date",
+       "generated",
+       "generated_at",
+       "run_date",
+       "timestamp",
+       "today",
+       "when"
+      ],
+      "provenance_leaves_moved": 0,
+      "provenance_moved_detail": [],
+      "timing_keys_excluded": [
+       "elapsed",
+       "elapsed_s",
+       "minutes",
+       "runtime_s",
+       "seconds",
+       "wall_clock_seconds",
+       "wall_minutes",
+       "wall_s",
+       "wall_seconds"
+      ]
+     },
+     "repair_attributable_leaves_moved": 0,
+     "runs": [
+      {
+       "returncode": 0,
+       "stderr_tail": null,
+       "wall_seconds": 482.7,
+       "which": "pre"
+      },
+      {
+       "returncode": 0,
+       "stderr_tail": null,
+       "wall_seconds": 994.2,
+       "which": "pre"
+      },
+      {
+       "returncode": 0,
+       "stderr_tail": null,
+       "wall_seconds": 1187.8,
+       "which": "post"
+      }
+     ],
+     "script_is_deterministic_today": true,
+     "verdict": "BASELINE_DRIFT_NOT_THIS_LEG"
+    },
+    "calls": "RescaledBoussinesq.run(renorm=True), 4 resolution rungs",
+    "calls_bit_identical": 16008,
+    "calls_compared": 16008,
     "calls_moved": 0,
+    "contamination": true,
+    "key": "spike1_stepC_gate",
+    "per_call_differential": {
+     "both_raise": 0,
+     "moved": [],
+     "n": 16008,
+     "n_moved": 0,
+     "n_win_capped": 0,
+     "raise_post": 0,
+     "raise_pre": 0,
+     "same": 16008
+    },
     "returncode": 0,
-    "stderr_tail": null,
-    "test": "test_boussinesq_transport.py",
-    "wall_seconds": 1.6
-   },
-   {
-    "calls_bit_identical": 142,
-    "calls_compared": 142,
-    "calls_moved": 0,
-    "returncode": 0,
-    "stderr_tail": null,
-    "test": "test_boussinesq_rescaled_status.py",
-    "wall_seconds": 2.1
+    "script": "experiments/spike1_stepC_gate.py",
+    "wall_seconds": 1086.1
    }
   ],
-  "total_artifact_leaves_that_moved": 0,
-  "total_calls_that_moved": 0,
-  "total_odd_field_x_slope_calls_compared": 5205,
-  "zero_contamination": true
+  "checkpoint": true,
+  "covers_every_banked_artifact": false,
+  "n_banked_artifacts_rerun": 3,
+  "test_runs": [],
+  "total_repair_attributable_leaves_that_moved": 0,
+  "zero_contamination": false
  },
  "escalating_leg": 205,
- "gate_answer": "YES",
- "gate_clause_a_every_adversarial_case_now_rejects": true,
- "gate_clause_b_zero_contamination_bit_identical": true,
  "leg": 221,
  "lesson_90_control": {
   "distinct_module_objects": true,
@@ -967,6 +2371,68 @@
  "module": "solver/boussinesq_rescaled.py",
  "pre_repair_n_lines": 280,
  "pre_repair_ref": "1a3e63c",
- "route": "ROUTE-BVRR",
- "wall_seconds": 447.0
+ "residual_margin_probe": {
+  "landed_max_rel_residual": 0.5,
+  "note": "The landed max_rel_residual=0.5 does NOT catch the two-scale field. A threshold anywhere in the open interval (worst_legitimate, tightest_bad) would, with the stated separation ratio of margin. Changing it is a behaviour change this leg's gate did not scope -- clause (b)'s bit-identical sweep was run at 0.5 -- so it is REPORTED with its magnitude and handed to the postrepair-verification leg, not tuned in silently here.",
+  "rows": [
+   {
+    "exception": null,
+    "field": "module's own validated field: 2 r cos(b) exp(-r^2) (lam=1)",
+    "is_legitimate_in_repository_field": true,
+    "rel_err": 0.0004697718660302552,
+    "rel_residual": 1.1981138868577546e-05,
+    "returned": 2.0009395437320605,
+    "truth": 2.0
+   },
+   {
+    "exception": null,
+    "field": "Step-C profile_ansatz omega (every banked relaxation runs on this)",
+    "is_legitimate_in_repository_field": true,
+    "rel_err": null,
+    "rel_residual": 0.004300770322970493,
+    "returned": 0.9759190838422931,
+    "truth": null
+   },
+   {
+    "exception": null,
+    "field": "Step-C profile_ansatz eta",
+    "is_legitimate_in_repository_field": true,
+    "rel_err": null,
+    "rel_residual": 0.001310995263793302,
+    "returned": 1.4942554774229813,
+    "truth": null
+   },
+   {
+    "exception": null,
+    "field": "leg 205's headline defect-B field: lam=400, field scale 0.05",
+    "is_legitimate_in_repository_field": false,
+    "rel_err": 0.00038797614956775917,
+    "rel_residual": 4.631729962056852e-05,
+    "returned": 2.0007759522991355,
+    "truth": 2.0
+   },
+   {
+    "exception": null,
+    "field": "TWO-SCALE, not in leg 205's battery: r cos(b) [exp(-r^2) + exp(-400 r^2)]",
+    "is_legitimate_in_repository_field": false,
+    "rel_err": 0.4324395482757989,
+    "rel_residual": 0.08124691655893912,
+    "returned": 1.1351209034484022,
+    "truth": 2.0
+   },
+   {
+    "exception": null,
+    "field": "TWO-SCALE, wider separation: r cos(b) [exp(-r^2) + exp(-1e4 r^2)]",
+    "is_legitimate_in_repository_field": false,
+    "rel_err": 0.4969016374035242,
+    "rel_residual": 0.019097033060916146,
+    "returned": 1.0061967251929516,
+    "truth": 2.0
+   }
+  ],
+  "separation_ratio": 4.440375008848657,
+  "tightest_uncaught_bad_rel_residual": 0.019097033060916146,
+  "worst_legitimate_rel_residual": 0.004300770322970493
+ },
+ "route": "ROUTE-BVRR"
 }
