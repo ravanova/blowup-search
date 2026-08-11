@@ -743,9 +743,12 @@ def main(argv=None):
     # leg's declared file territory, so the runner records the intended path and the one command
     # that emits it; placement is an orchestrator integration note (journal leg_302 §5).
     results["figure"] = {
-        "registered_path": "writeup/figures/fig68_route_p2t1_v1_sensitivity.png",
+        "registered_path": "writeup/figures/fig69_route_p2t1_v1_sensitivity.png",
+        "index_caveat": ("fig69 was the next free index at this leg's rebase (fig68 was taken by "
+                         "leg 303 mid-run); the orchestrator should use whatever index is free at "
+                         "integration time -- the number is not load-bearing."),
         "command": (".venv/bin/python experiments/p2_route_p2t1_v1.py "
-                    "--figure writeup/figures/fig68_route_p2t1_v1_sensitivity.png"),
+                    "--figure writeup/figures/fig69_route_p2t1_v1_sensitivity.png"),
         "panels": ["(a) delta_dis(r) with the gamma=7/5 dominance window",
                    "(b) probe x plant detection-threshold matrix, BLIND cells marked",
                    "(c) double vs 60-digit k(1+h): the KA8 conditioning defect"],
