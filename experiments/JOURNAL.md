@@ -4469,3 +4469,22 @@ figure numbers independently; the standing instruction to claim provisionally an
 integration register the number is now in every dispatch brief.
 
 **No link of the L1-L4 chain moved. Clay odds remain ~0.05%.**
+
+**Leg 311 (Route-IVAX) landed, gate YES.** Full entry: `experiments/journal/leg_311.md`.
+Steer item 4, chosen as the cheapest leg with the highest information per token. Measured
+directly on `fractional_gclm.py`, `critical_dissipation.py` and `fractional_boussinesq.py`,
+read-only, no solver built: **3 of 3 killed by Remark 40's stated reach** -- the same clause
+leg 261 measured killing 18/18 fluid rows -- because each carries a nonlocal operator Remark
+40 does not name (Hilbert transform in both gCLM variants, Biot-Savart-type inversion in
+Boussinesq), plus fractional dissipation Lambda^{2s} / (-Delta)^s in all three. A liveness
+self-test (3 checks, all passed) confirms the result is not vacuous: **stripping the
+dissipation term still kills all three via the nonlinearity operator alone**, and a
+local-polynomial positive control (viscous Burgers) correctly passes. **Mechanism named per
+lesson 91: the reach failure is NONLOCALITY GENERALLY, not incompressibility specifically** --
+leg 261's Leray-projection finding was one instance of it, not the whole story. **The
+non-fluid candidate pool is NOT materially larger than leg 261 implied**, so the steer's
+hypothesis behind item 4 is answered in the negative and Phase-0 target selection gains no new
+admissible candidates from this direction. Escalated nothing, lifted nothing, exactly as its
+no-branch pre-committed. Figure fig70, registered.
+
+**No link of the L1-L4 chain moved. Clay odds remain ~0.05%.**
