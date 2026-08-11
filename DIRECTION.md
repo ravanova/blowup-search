@@ -36,7 +36,7 @@ prose as before.
 | A | 335 | S1GR | no |
 | B | 348 | POCP | yes |
 | C | 343 | DSSP-B1 | yes |
-| D | 337 | C318 | no |
+| D | 338 | LCB1 | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -290,14 +290,26 @@ and RELEASED** (ceiling answer S1-DIES + seed option at ≈35 legs on the
 -Tier-2 under standing authority). B ← 348 POCP (reserve rank 1 — the
 certification question on the object's actual shape). Floor 2/4 (348, 343).
 
-**Reserve queue: 20 undispatched legs (349, 338, 307, 328, 345, 346,
+Cycle 10d: D/337 landed YES at ce0e485 — 318's float64 mechanism CORRECTED
+with the deciding ulp accounting quoted: alpha_of carries ZERO rounding error
+(exact by Sterbenz's lemma), r_crit carries ≈0.88 ulp, amplified by δ_dis's
+own 1/alpha ≈ 26.667 sensitivity, reconstructing the observed residual
+(-5.424e-15 vs -5.329e-15); the "leg 302's failure mode" (catastrophic
+cancellation) label is RETRACTED as inapplicable — a prior lesson's name was
+carried onto a mechanism it does not describe, which is itself the
+mechanism-drift failure closure #6 just documented. The tautological control
+rewritten falsifiable, re-run, passing for a real reason; the banked JSON
+byte-identical. D ← 338 LCB1 (as amended, item (iv) included). Floor 2/4
+(348, 343).
+
+**Reserve queue: 19 undispatched legs (349, 307, 328, 345, 346,
 324, 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234),
 plus 306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately
-dispatchable: 12 (338, 307, 328, 346, 324, 322, 327, 287, 229, 293,
+dispatchable: 11 (307, 328, 346, 324, 322, 327, 287, 229, 293,
 298, 299 — rank order as listed, §3a pre-authorised except where a spec says
 otherwise). 349 on 348; 345 on 328; 310 on 287+298; 325 USER-GATED; 231-234
 blocked on repairs 217/219/225 (221's landed). Next fresh leg number:
-**350**. Full specs and this cycle's rulings are in the cycle-8 through 10c
+**350**. Full specs and this cycle's rulings are in the cycle-8 through 10d
 entries at the end of this file.)
 
 ---
@@ -17660,3 +17672,56 @@ Nothing in this update lifts a ban. 347's 0/12 is a screen doing its job on
 a new candidate source; the packet ships with its risks stated at measured
 width; 348 asks whether a certification route exists and creates nothing.
 No L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10d) — 337 YES ABSORBED (318's MECHANISM
+CORRECTED, THE MIS-APPLIED LESSON LABEL RETRACTED, THE CONTROL MADE REAL);
+D ← 338 LCB1
+
+Written from the same detached lineage, resynced to origin/main.
+
+### 337 C318 gate YES, absorbed at full strength
+
+Both halves delivered with the deciding evidence quoted: (a) the mechanism
+is 1 ulp of pre-existing rounding error in r_crit (≈0.88 ulp; alpha_of is
+EXACT by Sterbenz's lemma) amplified by δ_dis's own 1/alpha ≈ 26.667
+sensitivity — the reconstruction matches the observed residual to the third
+significant figure — and NOT catastrophic cancellation between ~1-sized
+operands; the "leg 302's failure mode" label is retracted as inapplicable.
+(b) The `not shallow_water_supercritical or True` control is rewritten
+falsifiable, re-run, and passes for a real reason matching FT4's own report.
+The banked JSON regenerates byte-identical — FT1's exact-arithmetic verdict
+untouched, exactly as the gate required. Endorsed without amendment.
+
+**One lesson noted where future legs will see it:** carrying a prior
+lesson's NAME onto a mechanism it does not describe is the same
+mechanism-drift failure closure #6 documented on (iv_a)
+(incompressibility → nonlocality → weight-vs-tail) — a lesson label is a
+claim about mechanism and gets re-measured like one. 337 and 339 now jointly
+witness it; no new standing rule is minted (lesson 91 + the closure
+discipline already cover it), but the pair is cross-referenced in the
+CORRECTIONS record for whoever next reaches for a label.
+
+### Refill — slot D ← 338 LCB1 (corrections rank 1, as amended)
+
+Spec at cycle 8 with the cycle-10 amendment (item (iv): 336's two flagged
+repeat sites, text-anchored). Light; not floor-eligible. Territory disjoint
+from A/B/C — checked. **Floor 2/4 (348, 343) — §3b's minimum, unchanged by
+this fill.** FLOOR-TABLE synced (D 337→338).
+
+### Standing state
+
+A/335 mid-diagnosis (background diagnostic; no stall called); B/348 POCP
+dispatched (the certification-shape question); C/343 DSSP-B1 (critical
+path). With the user: the completed cycle-10 packet, C4/escalation-#3, the
+313 packet + ban-wording, the 320 packet. Next vacancy: 307 TSCX.
+
+**Reserve queue: 19 undispatched legs (349, 307, 328, 345, 346, 324, 322,
+327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **11**. Next fresh leg number: **350.**
+
+Nothing in this update lifts a ban. A corrected mechanism narrates the same
+unchanged verdict more truthfully — record hygiene, not movement; no L1-L4
+link moved; Clay stays ~0.05%.
