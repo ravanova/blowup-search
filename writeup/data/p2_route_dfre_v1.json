@@ -1,0 +1,108 @@
+{
+  "leg": 316,
+  "route": "DFRE",
+  "paper": "arXiv:2410.05480 (Dahne-Figueras)",
+  "pdf_sha256": "d95df28d2d741b42315b11b0afe3e3cebe5fab6f7561559913e55fd2d749d4ac",
+  "repo_url": "https://github.com/Joel-Dahne/CGL.jl.git",
+  "pinned_commit": "be034923c0b63e3103a9b2cb030a02699d05625e",
+  "branch_target": "Case I, d=1, j=1",
+  "gate_question": "Does DF-CGL's published verification package reproduce the paper's own corollary from its published constants, in this environment?",
+  "gate_answer": "YES",
+  "decoder_sanity_check": {
+    "row0_sweep_interval_eps": [
+      0.0,
+      4.419417382415922e-06
+    ],
+    "decoded_mu_exists_mid": 1.2320381643118439,
+    "decoded_mu_exists_rad": 1.2711862034109345e-06,
+    "paper_mu1_section6": 1.23203752321003,
+    "abs_diff_mu": 6.411018138585689e-07,
+    "decoded_kappa_exists_mid": 0.8531036243056758,
+    "decoded_kappa_exists_rad": 8.693102913071016e-06,
+    "paper_kappa1_section6": 0.8531088807225934,
+    "abs_diff_kappa": 5.256416917620577e-06,
+    "tolerance": 2e-05,
+    "pass": true
+  },
+  "segments": {
+    "top": {
+      "segment": "top",
+      "n_rows": 6588,
+      "strict_exists_in_uniq_ok": 6588,
+      "strict_exists_in_uniq_fail_rows": [],
+      "strict_exists_in_uniq_fail_count": 0,
+      "chain_exists_in_prev_uniq_ok": 6587,
+      "chain_exists_in_prev_uniq_fail_rows": [],
+      "chain_exists_in_prev_uniq_fail_count": 0,
+      "chain_checked": 6587,
+      "coverage_gap_count": 0,
+      "num_critical_points_values": [
+        0
+      ],
+      "all_pass": true
+    },
+    "turn": {
+      "segment": "turn",
+      "n_rows": 33281,
+      "strict_exists_in_uniq_ok": 33281,
+      "strict_exists_in_uniq_fail_rows": [],
+      "strict_exists_in_uniq_fail_count": 0,
+      "chain_exists_in_prev_uniq_ok": 33280,
+      "chain_exists_in_prev_uniq_fail_rows": [],
+      "chain_exists_in_prev_uniq_fail_count": 0,
+      "chain_checked": 33280,
+      "coverage_gap_count": 0,
+      "num_critical_points_values": [
+        0
+      ],
+      "all_pass": true
+    },
+    "bottom": {
+      "segment": "bottom",
+      "n_rows": 9596,
+      "strict_exists_in_uniq_ok": 9596,
+      "strict_exists_in_uniq_fail_rows": [],
+      "strict_exists_in_uniq_fail_count": 0,
+      "chain_exists_in_prev_uniq_ok": 9595,
+      "chain_exists_in_prev_uniq_fail_rows": [],
+      "chain_exists_in_prev_uniq_fail_count": 0,
+      "chain_checked": 9595,
+      "coverage_gap_count": 0,
+      "num_critical_points_values": [
+        0
+      ],
+      "all_pass": true
+    }
+  },
+  "connection_points": {
+    "header": [
+      "\u03f5_dump",
+      "\u03bc_uniq_dump",
+      "\u03b3_uniq_dump_real",
+      "\u03b3_uniq_dump_imag",
+      "\u03ba_uniq_dump",
+      "\u03bc_exists_dump",
+      "\u03b3_exists_dump_real",
+      "\u03b3_exists_dump_imag",
+      "\u03ba_exists_dump"
+    ],
+    "n_rows": 2,
+    "rows": [
+      {
+        "eps_mid": 0.030486661173846245,
+        "own_exists_in_own_uniq": true
+      },
+      {
+        "eps_mid": 0.0404029865868112,
+        "own_exists_in_own_uniq": true
+      }
+    ],
+    "all_own_boxes_ok": true
+  },
+  "elapsed_seconds": 26.794349583011353,
+  "row_totals": {
+    "top": 6588,
+    "turn": 33281,
+    "bottom": 9596
+  }
+}
