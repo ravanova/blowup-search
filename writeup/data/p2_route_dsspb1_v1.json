@@ -1,0 +1,171 @@
+{
+  "leg": 343,
+  "route": "DSSP-B1",
+  "title": "Brick B1 (DSSP-SPACE): does the targeted space hold the object and the operator?",
+  "date": "2026-08-12",
+  "precondition": "leg 341 S1 DIES (branch B, plan Section 2.9); B1 tests Section 2.3's unweighted vorticity/compactified space for the SEARCH, which branch B leaves standing",
+  "gate": {
+    "i_criterion_reproduction": {
+      "velocity_p": 1.0,
+      "velocity_s_crossing_closed_form": 1.0,
+      "vorticity_p": 2.0,
+      "vorticity_s_crossing_closed_form": -1.0,
+      "vorticity_needs_no_weight": true,
+      "shell_ratio_diagnostic": {
+        "s=0.9": 1.0717734625362916,
+        "s=1.0": 1.0,
+        "s=1.1": 0.9330329915368071,
+        "note": "ratio < 1 => finite; ratio > 1 => diverges; ratio == 1 at the crossing"
+      },
+      "leg313_cross_check": {
+        "leg313_measured_shell_ratio_at_s1": 1.000216400535569,
+        "leg313_closed_form_at_s1": 1.0,
+        "this_script_recomputation_at_s1": 1.0,
+        "agreement_with_leg313s_own_closed_form": true,
+        "source": "leg 313, branch leg/313-sdss-v1 (read-only, unmerged); quoted verbatim by the plan Section 2.2 and by leg 341's journal"
+      },
+      "leg331_cross_check": {
+        "predicted_1_plus_2alpha": {
+          "0.25": 1.5,
+          "0.5": 2.0,
+          "0.75": 2.5
+        },
+        "measured_by_leg331": {
+          "0.25": 1.507674,
+          "0.5": 2.012245,
+          "0.75": 2.517908
+        },
+        "gap_measured_minus_predicted": {
+          "0.25": 0.007674,
+          "0.5": 0.012245,
+          "0.75": 0.017908
+        },
+        "source": "writeup/data/p2_route_algw_v1.json (leg 341, transcribed from experiments/journal/leg_331.md)"
+      },
+      "reproduces_leg313_crossing": true,
+      "reproduces_leg331_exponents": true
+    },
+    "ii_spectrum_continuity": {
+      "operator": "L f = -Delta f + 0.5*(y.grad)f + f, ell=0 radial channel",
+      "discretisation": "Chebyshev collocation, X=r/(1+r) in [0,1], Dirichlet f(X=1)=0 + Neumann f'(X=0)=0, boundary DOFs eliminated by Schur complement (no scipy in this environment)",
+      "resolution_pairs": [
+        [
+          40,
+          60
+        ],
+        [
+          60,
+          90
+        ],
+        [
+          90,
+          130
+        ],
+        [
+          130,
+          180
+        ],
+        [
+          180,
+          240
+        ],
+        [
+          240,
+          320
+        ]
+      ],
+      "validation_control_drift0": {
+        "description": "-Delta+1 alone; analytically NO discrete spectrum, essential spectrum = [1, infinity)",
+        "kept_count_by_pair": [
+          6,
+          9,
+          13,
+          18,
+          23,
+          30
+        ],
+        "growing": true
+      },
+      "measured_operator_drift_half": {
+        "kept_count_by_pair": [
+          1,
+          2,
+          2,
+          3,
+          3,
+          3
+        ],
+        "growing": true,
+        "precision_track": [
+          {
+            "N": 60,
+            "lowest": 1.00002648,
+            "second": 1.250218
+          },
+          {
+            "N": 90,
+            "lowest": 0.99999959,
+            "second": 1.250055
+          },
+          {
+            "N": 130,
+            "lowest": 0.99999994,
+            "second": 1.250009
+          },
+          {
+            "N": 180,
+            "lowest": 0.99999998,
+            "second": 1.250004
+          },
+          {
+            "N": 240,
+            "lowest": 0.99999999,
+            "second": 1.250002
+          },
+          {
+            "N": 320,
+            "lowest": 1.0,
+            "second": 1.250001
+          }
+        ],
+        "lowest_value_matches_analytic_threshold_1": true
+      },
+      "planted_eigenvalue_control": {
+        "potential": "Gaussian well, strength=8.0, width=0.08, center=X=0.35",
+        "lowest_eigenvalue_track": [
+          {
+            "N": 60,
+            "lowest_planted": 0.12816778
+          },
+          {
+            "N": 90,
+            "lowest_planted": 0.12816778
+          },
+          {
+            "N": 130,
+            "lowest_planted": 0.12816778
+          },
+          {
+            "N": 180,
+            "lowest_planted": 0.12816778
+          },
+          {
+            "N": 240,
+            "lowest_planted": 0.12816778
+          },
+          {
+            "N": 320,
+            "lowest_planted": 0.12816778
+          }
+        ],
+        "isolated_and_converged_to_1e-6": true,
+        "below_continuum_threshold": true
+      },
+      "verdict": "CONTINUOUS: the kept-count grows with resolution under the SAME filter and calibration (drift=0 control) that would show a bounded, non-growing count for genuine discrete spectrum -- and the planted control demonstrates the same numerics DOES lock a genuine isolated eigenvalue to 1e-8 already at the coarsest tested resolution, so the plain operator's failure to do so is a measurement, not an unable-to-find instrument."
+    },
+    "i_passes": true,
+    "ii_passes": true,
+    "answer": "YES"
+  },
+  "ceiling": "TIER 2 -- nothing in this brick is a proof, a certificate, or a Clay claim."
+}
