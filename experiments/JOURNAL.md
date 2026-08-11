@@ -5015,8 +5015,12 @@ have talked itself into "slack" even had it wanted to.
 
 **Named realization (lesson 91): the deficit is the distance between a derivative count and a
 discriminant.** The costliest constant is `C1_c_lap = 2` — the Laplacian's own derivative
-count — with the largest elasticity (−13.708% of window per 1%) and the smallest move to
-close, **−42.705%**, to `(9−3√5)/2 = 1.145898`. But `r*` is *exactly* the smaller root of
+count — with **[CORRECTED 2026-08-12, leg 338 — Route-LCB1, per `CORRECTIONS.md` §18.1 /
+leg 336: this sentence originally read "the largest elasticity (−13.708% of window per 1%)".
+That is false against the ledger's own `M2_pct_of_window_per_1pct` field — `C9_a1`'s elasticity,
+`−31.058%`, is `2.27×` larger in magnitude. `C1_c_lap`'s `−13.708%` remains correct as its own
+value and as the smallest move to close (a different metric), quoted below unchanged]** the
+smallest move to close, **−42.705%**, to `(9−3√5)/2 = 1.145898`. But `r*` is *exactly* the smaller root of
 BCG's `R₁` radicand, the `P_s`/`P̄_s` saddle-node. So closing the deficit means replacing
 `νΔ` with `ν(−Δ)^0.5729490169`: **a different PDE, not a sharper proof.** Seven of the eleven
 (the `D_{Z,1}`/`R₂` constants) are **unreachable at any cost**, because `r*` sits at a

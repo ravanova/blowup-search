@@ -1088,17 +1088,25 @@ not re-derive the closed form independently. Clay stays **~0.05%**.
 
 ### 16.1 The two immutable gate-text sites
 
-`DIRECTION.md:13330` and `DIRECTION.md:13338` still read `6.855x wider` and `6.855x width
-ratio` respectively — leg 300's own pre-committed gate thesis and question — and **must stay
-that way** by standing rule: editing a dispatched gate after the fact would corrupt the audit
-trail that caught the wrong digit in the first place (leg 319's §2/§15.3 reasoning, adopted
-here as the rule rather than re-argued). This entry is the pointer *beside* the record: the
-width ratio quoted at those two lines as `6.855` re-derives as the closed form
-`(7+3√5)/2 = 6.8541019662496845...`, i.e. `6.854` at the quoted precision — a slipped final
-digit, relative error `1.310e-04` — see `experiments/journal/leg_300.md` §3 (the
-re-derivation) and `experiments/journal/leg_319.md` §2 (why these two surfaces resist
-correction). `DIRECTION.md` is not touched by this entry; no digit at those two lines is
-changed.
+**[ANCHOR CORRECTED 2026-08-12, leg 338 — Route-LCB1.]** This entry originally pointed at
+`DIRECTION.md:13330` and `DIRECTION.md:13338` by line number. Those line numbers were already
+stale at this file's own merge base (leg 338 finds the same quoted text now sitting at
+`DIRECTION.md:13614` and `:13622`, having moved under unrelated edits) and would go stale
+again with every further edit to `DIRECTION.md`. Per the verifier's own prescription, the
+pointer is replaced below with grep-stable **text anchors** — the quoted phrases themselves,
+not their line numbers.
+
+The DIRECTION.md site quoting `6.855x wider` and the DIRECTION.md site quoting `6.855x width
+ratio` (`grep -n "6.855x wider\|6.855x width ratio" DIRECTION.md` locates both at any commit)
+— leg 300's own pre-committed gate thesis and question — **must stay that way** by standing
+rule: editing a dispatched gate after the fact would corrupt the audit trail that caught the
+wrong digit in the first place (leg 319's §2/§15.3 reasoning, adopted here as the rule rather
+than re-argued). This entry is the pointer *beside* the record: the width ratio quoted at
+those two sites as `6.855` re-derives as the closed form `(7+3√5)/2 = 6.8541019662496845...`,
+i.e. `6.854` at the quoted precision — a slipped final digit, relative error `1.310e-04` — see
+`experiments/journal/leg_300.md` §3 (the re-derivation) and `experiments/journal/leg_319.md`
+§2 (why these two surfaces resist correction). `DIRECTION.md` is not touched by this entry; no
+digit at either site is changed.
 
 ### 16.2 `writeup/4_p2_lottery/BLOG_P2_PUB2_V1.md:102,108`
 
@@ -1403,3 +1411,33 @@ scoping script. **0 gate answers changed** — FT1's verdict and the leg 318 gat
 `ENCLOSURE IS CRITICALITY`, not a lane) are untouched. `writeup/data/p2_route_decr_v1.json`
 read, never edited (regenerates byte-identical). `plan_of_record.py` and `DIRECTION.md`
 untouched. No link of the `L1 → L4` chain moved. Clay odds stay **~0.05%**.
+
+## §20 — leg 338, Route-LCB1: four light non-structural corrections, batched
+
+**Dispatch: leg 338 (Route-LCB1), amended before dispatch to add item (iv).** Four unrelated
+verifier findings, each already located and each corrected to an already-banked source value —
+no number is re-derived by this leg. All four are diff-checked to touch nothing beyond the
+named site.
+
+| # | site | before | after | source |
+|---|---|---|---|---|
+| (i) | `writeup/data/p2_route_fus_v1.json`, `sources.USC.cite` | `"Wang, Lai, Leger, Buckmaster …"` | `"Wang, Lai, Gomez-Serrano, Buckmaster …"` | arXiv:2509.14185's own author list (fetched directly): Javier Gómez-Serrano is a co-author; there is no author named "Leger" on the paper. `sources.USC2.cite` (a sibling field, `"Wang, Leger, Lai, Buckmaster …"`, arXiv:2511.22819) carries the same misspelling and is **flagged here, not corrected** — outside this leg's territory, which names "the one cite field" only. |
+| (ii) | `writeup/CORRECTIONS.md` §16.1, and `experiments/journal/leg_321.md`'s citation of it | pointer by line number: `DIRECTION.md:13330` / `:13338` | pointer by grep-stable text anchor: the sites quoting `6.855x wider` / `6.855x width ratio` | Directly re-grepped: those two line numbers were already stale at this file's own merge base — the quoted phrases now sit at `DIRECTION.md:13614`/`:13622`. `DIRECTION.md` itself is untouched by this correction, per the standing immutable-gate-text rule (§16.1, leg 319's §2/§15.3 reasoning). |
+| (iii) | `writeup/4_p2_lottery/TECHNICAL_P2_APIA_V1.md` §5 (leg 312's landed timing prose) | `117s` / `48s` / combined `346s` (`25.9s + 309.0s`, which does not itself sum to `346`) | `100.553s` / `35.515s` / combined `345.478s` (`36.480s + 308.998s`) | `writeup/data/p2_route_apia_v1.json`'s own `N1024_seconds` (`100.55331301689148`), `N512_seconds` (`35.51472449302673`), and the two `total_seconds` fields (`36.47977542877197` for leg 178's re-measurement, `308.99795627593994` for leg 176's), all already banked, none re-derived here. Non-claim-bearing prose; no gate answer touches this leg's timing. |
+| (iv) | `experiments/JOURNAL.md:5018` and `writeup/INDEX.md:124` | "largest elasticity (−13.708% of window per 1%)" for `C1_c_lap` | inline `[CORRECTED …]` marker: `C9_a1`'s elasticity, `−31.058%`, is `2.27×` larger in magnitude; `C1_c_lap`'s `−13.708%` stands unchanged as its own value and as the smallest `move_to_close` | `writeup/CORRECTIONS.md` §18.1 / leg 336, which measured this directly against `writeup/data/p2_route_dwm_v1.json`'s `ledger[]`, `M2_pct_of_window_per_1pct` field. These two sites are exactly the ones leg 336 flagged, at §18.4, as outside its own declared territory (integration ledgers, not leg 336's to edit) — this leg applies the same correction leg 336 already measured, with no new measurement of its own. |
+
+**Amendment note.** Item (iv) was added to this leg's dispatch at DM cycle 10, before dispatch
+(`DIRECTION.md`, the `[AMENDED 2026-08-12, cycle 10, before dispatch: …]` note following the
+§338 spec) — it is part of the pre-committed gate, not a widening performed by the leg itself.
+
+### The ceiling
+
+**0 numbers re-derived** — every value in the table above is quoted from an already-banked
+source (arXiv:2509.14185's own author list for (i); `DIRECTION.md`'s own live text for (ii);
+`writeup/data/p2_route_apia_v1.json` for (iii); `writeup/CORRECTIONS.md` §18.1 / leg 336 for
+(iv)). **4 sites corrected, 1 batched entry** (this one). **0 gate answers changed** anywhere —
+leg 314's classification, leg 312's `YES`, and leg 305's `SHARP` verdict are all untouched;
+this leg's own corrections are non-claim-bearing (a citation spelling, two stale pointers, a
+timing-prose arithmetic slip, and an already-adjudicated elasticity superlative). **0 bans
+touched**, `plan_of_record.py` and `DIRECTION.md` byte-identical, untouched by this leg. No
+link of the `L1 → L4` chain moved. Clay odds stay **~0.05%**.

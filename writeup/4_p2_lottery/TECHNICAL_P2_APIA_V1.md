@@ -219,11 +219,20 @@ Both re-measurements were assessed for cost before the long combined run, per
   basis columns) by exploiting that `theta ~ 3e-31` needs only ONE Taylor term at
   120 digits, not the fixed conservative count.
 - Leg 176: profiled at `N=64/128/256` first (`0.14s/1.2s/6.5s`) to extrapolate
-  before committing to `N=1024`; measured `N=1024` cost was `117s`, `N=512`
-  cross-check `48s`.
-- Combined total measured wall time: `346s` (`25.9s + 309.0s` including both
-  N=512/1024 leg-176 runs and leg-178), well under the 10-minute budget — no
-  long run was needed to answer the gate.
+  before committing to `N=1024`; measured `N=1024` cost was
+  **[CORRECTED 2026-08-12, leg 338 — Route-LCB1: originally read `117s`; the
+  banked JSON is authoritative and is cited directly below]**
+  `100.553s` (`N1024_seconds` in `writeup/data/p2_route_apia_v1.json`), `N=512`
+  cross-check **[CORRECTED 2026-08-12, leg 338: originally read `48s`]**
+  `35.515s` (`N512_seconds`, same file).
+- Combined total measured wall time **[CORRECTED 2026-08-12, leg 338: this
+  paragraph originally reported `346s` (`25.9s + 309.0s`), a sum that does not
+  itself add up (`25.9 + 309.0 = 334.9`, not `346`), and is non-claim-bearing
+  prose — recorded here rather than re-derived]**: `345.478s`
+  (`total_seconds` fields in `writeup/data/p2_route_apia_v1.json` — leg-178's
+  `36.480s` plus leg-176's `308.998s`, both fields already in the JSON and
+  unchanged by this correction), well under the 10-minute budget — no long run
+  was needed to answer the gate.
 
 ## 6. Integration note (no dependency change proposed)
 

@@ -40,7 +40,7 @@
   "USC": {
    "arxiv": "2509.14185",
    "url": "https://arxiv.org/abs/2509.14185",
-   "cite": "Wang, Lai, Leger, Buckmaster -- unstable self-similar singularities via PINNs",
+   "cite": "Wang, Lai, Gomez-Serrano, Buckmaster -- unstable self-similar singularities via PINNs",
    "role": "ASSUMES the condition; the paper this leg is about"
   },
   "USC2": {
