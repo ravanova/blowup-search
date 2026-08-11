@@ -1,0 +1,113 @@
+{
+  "environment": {
+    "numpy": "2.5.1",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]"
+  },
+  "escalating_leg": 221,
+  "leg": 307,
+  "mechanism": {
+    "cap_non_binding": true,
+    "description": "odd_field_x_slope's window-cap guard sizes its fit window from the radius at which |d1(r)| PEAKS (r_scale = sqrt(2)*r_peak), one-sided (can only shrink the caller's r_win, never widen it). For this two-scale field the peak of |d1| sits at the OUTER scale's own single-field peak radius, not the inner one, so the cap computes r_scale close to the outer envelope scale (1.0) and the resulting r_win_eff = min(0.4, 0.5*r_scale) equals the DEFAULT r_win = 0.4 exactly -- the cap is measured NON-BINDING, identical to having no cap at all. The (r, r^3, r^5) fit over r<0.4 then straddles both scales without isolating either, and the 3-parameter truncation cannot represent the inner-scale (lam=400) contribution, producing the systematic 43.2% error at a fitted residual (~8.1e-2) that sits under the module's own max_rel_residual=0.5 backstop, so nothing raises.",
+    "i_peak": 192,
+    "inner_envelope_scale": 0.05,
+    "outer_envelope_scale": 1.0,
+    "r_peak_expected_from_outer_scale_alone": 0.7071067811865475,
+    "r_peak_matches_outer_scale_alone": true,
+    "r_peak_measured": 0.7073332279644463,
+    "r_scale_measured": 1.0003202441044603,
+    "r_win_default": 0.4,
+    "r_win_eff_measured": 0.4,
+    "scale_separation": 20.0
+  },
+  "module": "solver.boussinesq_rescaled",
+  "module_git_ref_note": "read-only; module not edited by this leg",
+  "reachability": {
+    "all_real_fields_examined_are_single_scale": true,
+    "leg_221_own_census_cited_not_rerun": {
+      "calls_compared": 256233,
+      "calls_moved": 0,
+      "note": "Every odd_field_x_slope call made by every banked artifact and test suite that reaches this module (13 files: 6 banked artifacts, 2 unbanked callers, 3 test suites) was compared bitwise pre/post-repair on the actual banked trajectory; 0 of 256,233 moved. Since the window cap is the ONLY behavioural difference the repair introduces beyond defect A's refusal guard, 0 moved implies the cap never bound differently on any banked call -- i.e. no banked call encountered a two-scale-shaped input the cap could mis-resolve. This leg treats that count as leg 221's own input (per this leg's own thesis) and does not re-run it; the fresh checks above are this leg's own independent corroboration at smaller scale.",
+      "source": "experiments/journal/leg_221.md section 2, table in section 2"
+    },
+    "none_of_the_real_fields_examined_bind_the_window_cap": true,
+    "real_field_checks": [
+      {
+        "cap_binds": false,
+        "field": "profile_ansatz omega",
+        "n_local_maxima_in_abs_d1": 1,
+        "r_peak": 2.2432475028984236,
+        "r_win_eff": 0.4,
+        "single_scale": true
+      },
+      {
+        "cap_binds": false,
+        "field": "profile_ansatz eta",
+        "n_local_maxima_in_abs_d1": 1,
+        "r_peak": 1.2309079138896046,
+        "r_win_eff": 0.4,
+        "single_scale": true
+      }
+    ],
+    "transient_sample": {
+      "c_l_first": 3.062252807968351,
+      "c_l_last": 3.044162707706202,
+      "final_residual_finite": true,
+      "n_steps": 30,
+      "note": "30-step live transient of RescaledBoussinesq.run() from Step-C's profile_ansatz, routed through the unmodified odd_field_x_slope at every step (init reads + 3 RHS evals/step): no exception, no NaN/Inf. Sample, not a census -- corroborates leg 221's own 256,233-call finding without re-running its 34h sweep.",
+      "raised": false,
+      "wall_seconds": 1.5742018222808838
+    }
+  },
+  "reproduction": {
+    "banked_rel_err_pct": 43.2,
+    "banked_returned": 1.135121,
+    "field": "r*cos(beta) * (exp(-r**2) + exp(-400*r**2))",
+    "grid": {
+      "n_beta": 16,
+      "n_r": 400,
+      "r_max": 10000.0,
+      "r_min": 0.0001
+    },
+    "matches_banked_rel_err_pct_to_1dp": true,
+    "matches_banked_returned_to_6dp": true,
+    "rel_err": 0.4324395482757989,
+    "rel_err_pct": 43.244,
+    "rel_residual_bisected": 0.08124691655884764,
+    "returned": 1.1351209034484022,
+    "truth": 2.0
+  },
+  "route": "ROUTE-TSCX",
+  "tolerance_arithmetic_note": {
+    "acceptance_tolerance": 0.0005,
+    "finding": "The other three call-outs in the same passage all divide rel_err by the module's 5e-4 acceptance tolerance and land within rounding of the stated multiplier. The two-scale case's own stated '86x' does not: rel_err/5e-4 computes to 864.9x here, an order of magnitude off. This reads as an arithmetic/transcription slip carried identically into both leg 221's journal (experiments/journal/leg_221.md:162) and the module's own docstring (solver/boussinesq_rescaled.py, DEFECT B paragraph) -- the two sources agree with EACH OTHER, not with the tolerance basis used three lines earlier in the same passage. It does not change this leg's gate answer: the returned value (1.135121), the percent error (43.2%) and the fitted residual (~8.1e-2) all reproduce exactly, independent of this multiplier.",
+    "journal_and_docstring_state": "86x",
+    "other_call_outs_in_same_passage_checked": [
+      {
+        "computed_multiplier": 2000.0,
+        "desc": "defect A, fabricated 0.0 vs truth 2.0",
+        "rel_err": 1.0,
+        "stated_multiplier": "2000x"
+      },
+      {
+        "computed_multiplier": 93.88000000000001,
+        "desc": "defect A, one-node minimum-norm fabrication",
+        "rel_err": 0.04694,
+        "stated_multiplier": "93.9x"
+      },
+      {
+        "computed_multiplier": 1730.0,
+        "desc": "defect B, leg 205 headline lam=400 field",
+        "rel_err": 0.865,
+        "stated_multiplier": "1731x"
+      }
+    ],
+    "rel_err_over_5e4": 864.8790965515977
+  },
+  "verdict": {
+    "gate_answer": "yes-artifact",
+    "genuine_or_artifact": "artifact",
+    "reasoning": "The 43.2%/86x case reproduces EXACTLY (returned 1.135121..., rel_err 43.24%, fitted residual ~8.12e-2, all matching leg 221's banked figures). The mechanism -- the peak-based window-cap heuristic resolving to the OUTER scale on a two-scale field, leaving the cap non-binding and the inner scale unresolved -- is independently re-derived here (section 3 above), not merely cited. But the REALIZATION that exercises this mechanism is a hand-constructed synthetic two-scale field, not a shape this repository's own physics produces: every real field actually banked or evolved through this guarded function (Step-C's converged profile_ansatz omega and eta -- the fields every banked relaxation run rests on) has exactly ONE local maximum in |d1(r)| (single-scale), a fresh 30-step live transient from that same initial condition raises no exception, and leg 221's own full per-call census (256,233 calls across every banked artifact and test suite) found 0 calls where the repair's only behavioural addition -- the window cap -- moved a value. So the mechanism sits in the PROBE's realization (a field built specifically to defeat the peak heuristic), not in the banked result's own reachability: this is 'yes-artifact' per the gate's own vocabulary. Leg 221's flag closes: the mechanism is real and now doubly measured (leg 221 + this leg, independently), but it has not contaminated, and on the evidence gathered by both legs is not reachable from, any banked number.",
+    "reproduced": true
+  },
+  "wall_seconds": 1.5918526649475098
+}
