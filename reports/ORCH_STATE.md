@@ -19,45 +19,56 @@ legs that lose their slot are returned to the reserve queue, not cancelled as fi
 
 ---
 
-## Status: RUNNING — same orchestrator session, 2026-08-11, cycle 8c (four-slot contract)
+## Status: RUNNING — same orchestrator session, 2026-08-11, cycle 8d + leg 329 landing (four-slot contract)
 
-`origin/main` at `d38de3f`, merge gate **PASS**. Four slots live: **A=331 NLH** (route 1,
-critical path, still running, no stall), **B=329 EGMF** (arbitrary-precision recheck,
-dispatched cycle 8, running), **C=323 CENV** (MF1 spelling-variant census resume, dispatched
-cycle 8b, running), **D=330 PVLX** (does Pineau-Vicol's Liouville theorem reach the screened
-object, dispatched cycle 8c, running). Floor 4/4. Decision Maker reachable, last three rulings
-`dedfd57` (cycle 8), `ef2c35e` (cycle 8b), `d38de3f` (cycle 8c) all integrated cleanly by
-fast-forward.
+`origin/main` at `fd43ac8`, merge gate **PASS**. Three of four slots live, one vacant:
+**A=334 DSSP** (route 4 brick 0, seeded DSS/RPO programme plan, Tier 2 ceiling, critical path,
+dispatched cycle 8d, running), **B=vacant** (329 landed, awaiting DM refill), **C=323 CENV**
+(MF1 spelling-variant census resume, dispatched cycle 8b, still running, no stall), **D=330
+PVLX** (does Pineau-Vicol's Liouville theorem reach the screened object, dispatched cycle 8c,
+still running, no stall). Decision Maker reachable, last ruling `f9321b5` (cycle 8d) integrated
+cleanly by fast-forward; a cycle-8e report (leg 329's landing, with an unadjudicated question)
+has been sent and is awaiting the DM's next ruling.
 
-**Slot D turned over twice this cycle:** leg 326 (CTRX) landed gate YES-(ii) — Chae-Tsai
-(arXiv:1304.7414v1) does NOT reach the screened Navier-Stokes object, it is an Euler-only
-theorem (all four of its theorems hypothesize its rescaled-Euler eq. 1.6; its own stated
-generalization only varies two real constants, never gaining a viscosity term). **This means
-leg 313's parked escalation packet loses its only theorem** — what remains is leg 260's
-dissolved argument and an empty seed set. Leg 326 correctly declined to adjudicate whether the
-weakened packet still supports the ban wording question, routing that to the user, and also
-flagged a new, not-yet-adjudicated candidate (arXiv:2607.09619v2, Pineau-Vicol) that might bear
-on the same object. The DM refilled slot D with leg 330 to adjudicate that candidate, jumping it
-ahead of the four drafted correction legs (335-338) on a stated three-part justification, so the
-user receives the complete, adjudicated packet update in one piece rather than in dribbles — see
-NEEDS THE USER below, refreshed per the DM's explicit cycle-8c directive.
+**Leg 331 (NLH) landed gate NO, critical path** — first measurement (not just naming) of the
+(iv_a) obstruction: an algebraic tail (measured exponent 1.507674/2.012245/2.517908 against
+predicted 1.5/2.0/2.5) meets the Gaussian weight e^{x²/4}; nonlocality is only the tail-producer,
+not the direct cause Remark 40 names. Reframing routed to, and absorbed by, the DM: leg 334's
+plan clause (a) must now resolve the collision between this finding and leg 332's vorticity-space
+finding (which lands exactly on that same Gaussian weight, since Biot-Savart is nonlocal) — or
+route the blocker to the user. DM also drafted leg 339 (ORC6, rank 1) for the closure-#6
+correction deferred to this landing (adjudicates the closed-three-ways sites on both measured
+answers). Leg 334 dispatched into slot A once both its preconditions (331 AND 332 landed) were
+satisfied.
 
-**This cycle's landings, all audited and pushed:** leg 221 (BVRR) — gate YES on the repair
-itself (0/256233 calls moved because of it), but flagged one real unresolved gap outside its
-own territory (`spike1_stepC_gate.json`'s committed artifact does not reproduce with the repair
-absent, 13.2% shift, two predicates flip) and explicitly handed it to the successor rather than
-fixing it — this is the fact behind leg 307's now-resolved precondition (see below). Leg 333
-(SHELL) — gate NO, 3D NS placed at dissipation degree α=2/5 in the Katz–Pavlovic dyadic
-hierarchy, strictly inside its undecided window. Leg 332 (VORT) — gate NO, the Leray obstruction
-of legs 257/261 does not survive re-derivation in the vorticity formulation (fails at step S4,
-tail lives in `ker(curl)`); positive content banked and bound into leg 334's plan by the DM: the
-reconstructed Biot-Savart velocity lands in L³(ℝ³), the same NRS/Tsai admissibility wall that
-killed leg 309's claimant — 334 must state its target's position relative to that wall up
-front. **307 (TSCX) is now confirmed dispatchable** (221's gate left its flag unresolved by
-name, per direct journal read, confirmed independently by the DM) — ranks after leg 338 in the
-reserve queue. Four correction legs (335 S1GR, 336 C305, 337 C318, 338 LCB1) drafted from
-verifier findings, not yet dispatched. An over-read closure (#6) correction is **deferred to
-331's landing**, so one leg can correct both measured sites rather than splitting the evidence.
+**Leg 329 (EGMF) landed gate NO.** DM's float64-artifact thesis for `clause_quad_stable`
+confirmed as arithmetic (MP repairs the pointwise contraction by 6-7 orders of magnitude), but
+two pre-registered controls able to fire against a flip both fired (C5: rcond ladder; C4: MP
+Rayleigh vs eigensolve disagreement matching `cond(G)·eps`) — obstruction moved from a pointwise
+cancellation to a float64 whitened assembly/eigensolve the patch can't reach. Escalation #3 stays
+parked. **Flagged to the DM, unadjudicated by the leg on its own authority:** C4's residual is
+actually a one-sided bound on the gap, not an agreement test as pre-registered, and the exact
+bound lands *below* 1/2 (~5.19e-18 / 1.42e-18) — read that way, clause 5 would pass and the gate
+would flip to YES, re-triggering escalation #3's yes-branch. This is the one open thread that
+could change the answer; the DM's call, not the orchestrator's or the leg's.
+
+**Housekeeping fixed directly by the orchestrator, not leg territory:** leg 329 self-caught a
+`.venv` symlink landing on `main` by accident (`.gitignore`'s `.venv/`/`venv/` patterns, trailing
+slash, don't match symlinks) and removed it in a follow-up commit; the orchestrator then fixed
+the root cause at `fd43ac8` by adding slash-less pattern variants.
+
+**Prior-cycle landings (8/8b), all audited and pushed:** leg 221 (BVRR) — gate YES on the repair
+itself (0/256233 calls moved), flagged one real unresolved gap outside its own territory
+(`spike1_stepC_gate.json` artifact doesn't reproduce with the repair absent, 13.2% shift, two
+predicates flip), handed to the successor — this resolved leg 307 (TSCX)'s precondition to
+dispatchable. Leg 333 (SHELL) — gate NO, 3D NS at dissipation degree α=2/5 in the Katz–Pavlovic
+hierarchy, inside its undecided window. Leg 332 (VORT) — gate NO, the Leray obstruction of legs
+257/261 fails to survive re-derivation in the vorticity formulation (fails at step S4, tail lives
+in `ker(curl)`); positive content (reconstructed Biot-Savart velocity lands in L³(ℝ³), the
+NRS/Tsai admissibility wall) bound into leg 334's plan. Leg 326 (CTRX) — gate YES-(ii), Chae-Tsai
+does not reach the screened object — see NEEDS THE USER below. Four correction legs (335 S1GR,
+336 C305, 337 C318, 338 LCB1) drafted, not yet dispatched; leg 339 (ORC6) now drafted at rank 1
+ahead of them.
 
 **NEEDS THE USER — packet content changed this cycle, not yet final:** leg 313's escalation
 packet + the DSS ban-wording question remain bundled and explicitly routed to the user by the

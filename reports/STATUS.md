@@ -1,7 +1,7 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-11 — same orchestrator session, cycle 8c, four-slot contract.
-`origin/main` at `d38de3f`, merge gate green. Full detail in `PROGRESS.md`
+*Refreshed 2026-08-11 — same orchestrator session, cycle 8d + leg 329 landing.
+`origin/main` at `fd43ac8`, merge gate green. Full detail in `PROGRESS.md`
 (git-ignored, more current), `reports/ORCH_STATE.md` (full handoff detail and
 institutional memory), and `experiments/JOURNAL.md` (the durable ledger).*
 
@@ -35,7 +35,51 @@ institutional memory), and `experiments/JOURNAL.md` (the durable ledger).*
 Phase-1 construction-decision packet — have since been resolved/absorbed in
 earlier cycles; see `experiments/JOURNAL.md` if you need that history.)
 
-## This cycle (8 and 8b) — what landed, what's running
+## This cycle (8d) — what landed, what's running
+
+- **Leg 331 (NLH)** — gate **NO**, critical path. For the first time the
+  (iv_a) obstruction is **measured**, not just named, and its mechanism is
+  **reframed**: Breden-Chu's machinery breaks against an algebraic tail
+  (predicted exponent 1+2a+2m, measured 1.507674/2.012245/2.517908 against
+  1.5/2.0/2.5) meeting a Gaussian weight e^{x²/4} — nonlocality only enters as
+  the tail-producer, not the direct cause Remark 40 names. Z1<1 crossing
+  bisected to width 6.1e-06 (t*≈0.30–0.52 depending on n, α). Two of the leg's
+  own five pre-registered predictions were refuted and recorded as such.
+  Reframing routed to the DM, not adjudicated by the leg itself.
+- **Leg 329 (EGMF)** — gate **NO**. The DM's thesis (float64
+  catastrophic-cancellation artifact in `clause_quad_stable`) is confirmed as
+  arithmetic — MP repairs the pointwise contraction by 6.1e+06/4.4e+06 and
+  both `B4_egm`/`E_egm` pass `clause_quad_stable` naively — but two
+  pre-registered controls able to fire against a flip both fired (C5: rcond
+  ladder moves the gap against tolerance; C4: MP Rayleigh disagrees with the
+  eigensolve at exactly the magnitude `cond(G)·eps` predicts). The obstruction
+  moved, from a pointwise cancellation to a float64 whitened
+  assembly/eigensolve the patch can't reach. Escalation #3 stays parked.
+  **Unadjudicated by the leg, flagged to the DM**: C4's residual is actually a
+  one-sided bound, not an agreement test, and the exact bound lands *below*
+  1/2 (by ~5.19e-18 / 1.42e-18) — read that way clause 5 would pass and the
+  gate would flip to YES, re-triggering escalation #3's yes-branch. DM
+  adjudication pending; not yet ruled on.
+- **Housekeeping**: `.gitignore`'s `.venv/`/`venv/` patterns (trailing slash)
+  didn't match a *symlink* named `.venv`, so one landed on `main` by accident
+  during leg 329's run (self-caught and removed by the leg). Fixed directly by
+  the orchestrator at `fd43ac8` (added slash-less variants).
+
+**DM ruling, integrated by fast-forward, no unintended deletions confirmed by
+diff:**
+
+- **Cycle 8d** (`f9321b5`): absorbed 331 NO, folded the tail/weight reframing
+  into leg 334's plan clause (a) as a collision it must resolve or route to
+  the user (leg 332's vorticity lane lands exactly on the Gaussian weight;
+  leg 331 shows that weight intolerant of the tails nonlocal operators
+  produce); drafted leg 339 (ORC6, gated adjudication of the closed-three-ways
+  sites, rank 1) for the deferred closure-#6 correction; refilled slot A←334
+  DSSP now that both its preconditions (331 AND 332 landed) are satisfied.
+
+**Slot B now vacant** (329 landed) — awaiting DM's cycle-8e ruling, which also
+needs to adjudicate the C4 pre-registration-defect question above.
+
+## Prior cycle (8 and 8b) — what landed, what's running
 
 **Landed and audited clean, all pushed to `main`:**
 
@@ -101,18 +145,18 @@ confirmed by diff:**
 at `c541cdb`. See NEEDS-YOU above for the full Chae-Tsai finding; territory
 audited clean (exactly its 3 declared files).
 
-**Currently running, all four slots:**
+**Currently running, three of four slots (B vacant):**
 
 | Slot | Leg | Route | Dispatched |
 |---|---|---|---|
-| A | 331 | NLH — nonlocal machinery test (critical path) | cycle 7, still running, no stall |
-| B | 329 | EGMF — arbitrary-precision recheck of B4_egm/E_egm rows | cycle 8 |
-| C | 323 | CENV — MF1 spelling-variant census resume (real WIP from spend-limit kill, branch `leg/323-cenv-v1`) | cycle 8b |
-| D | 330 | PVLX — does Pineau-Vicol's Liouville theorem reach the screened object? Feeds directly into the NEEDS-YOU packet update above. | cycle 8c |
+| A | 334 | DSSP — route-4 seeded DSS/RPO programme plan (Tier 2 ceiling; critical path) | cycle 8d |
+| B | — | vacant, awaiting DM refill | — |
+| C | 323 | CENV — MF1 spelling-variant census resume (real WIP from spend-limit kill, branch `leg/323-cenv-v1`) | cycle 8b, still running, no stall |
+| D | 330 | PVLX — does Pineau-Vicol's Liouville theorem reach the screened object? Feeds directly into the NEEDS-YOU packet update above. | cycle 8c, still running, no stall |
 
-Reserve: 21 undispatched, 14 immediately dispatchable (335, 336, 337, 338, 307,
-328, 324, 322, 327, 287, 229, 293, 298, 299 in rank order — corrections
-335-338 hold ranks 1-4 for the next vacancy). Next fresh leg number: **339**.
+Reserve: 22 undispatched (including newly drafted 339 ORC6, rank 1), 15
+immediately dispatchable (339, 335, 336, 337, 338, 307, 328, 324, 322, 327,
+287, 229, 293, 298, 299 in rank order). Next fresh leg number: **340**.
 No ban lifted this cycle; no L1→L4 link moved.
 
 ## Context — the ten-to-four downsize and the spend-limit kill
