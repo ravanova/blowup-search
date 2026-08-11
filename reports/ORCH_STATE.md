@@ -19,7 +19,36 @@ legs that lose their slot are returned to the reserve queue, not cancelled as fi
 
 ---
 
-## Status: RUNNING — same orchestrator session, 2026-08-11 ~17:50 UTC, **cycle 4** (§9d handoff)
+## Status: RUNNING — resume-session, 2026-08-11, later cycle (four-slot contract, post
+strategic re-prioritization)
+
+`origin/main` at `6f80830`, merge gate **PASS**. **Four** slots live under the user's
+ten-to-four downsize (this supersedes every ten-slot block below, all left intact as history).
+Roster: **A=331 NLH** (route 1, critical path), **B=221 BVRR** (resume), **C=332 VORT**
+(route 2), **D=333 SHELL** (route 5). Three paired verifiers also live, reviewing legs
+312+305, 314+321, 318+326 (claim-bearing landings that had none yet). Decision Maker reachable,
+last commit `6f80830` integrated cleanly.
+
+**NEEDS THE USER:** leg 313's escalation packet + the DSS ban-wording question are bundled and
+explicitly routed to the user by the DM's own text ("the DM does not rule on ban scope") — see
+`PROGRESS.md`'s NEEDS YOU section for the full summary. No ban touched, `plan_of_record.py`
+untouched. `leg/313-sdss-v1` and `leg/320-mtsc-v1` remain parked, not merged — confirmed
+correct this cycle after nearly merging a fully-prepared integration of both by mistake (see
+Incidents below); do not merge them without the user's ruling.
+
+**Heartbeat armed:** `CronCreate` recurring job, every 25 min, session-only (no `send_later` in
+this environment — see Environment notes). A fresh orchestrator session must re-arm its own
+heartbeat; cron jobs do not survive a session boundary.
+
+**A fresh orchestrator reading this at Step 0b:** read this block, then the Environment notes,
+Known flakes and Incidents sections at the bottom of this file (in particular the two most
+recent leg-221-worktree and near-miss-parked-merge incidents), then `PROGRESS.md`. Do not
+dispatch before Step 0b's own liveness sweep for unpushed local work.
+
+---
+
+## Superseded status: RUNNING — same orchestrator session, 2026-08-11 ~17:50 UTC, **cycle 4**
+(§9d handoff)
 
 `main` at `63d973a`, merge gate **PASS**. Ten slots live, Decision Maker live and reachable.
 This block supersedes the cycle-1 roster below; the cycle-1 block is left intact as history.
@@ -366,3 +395,29 @@ One short paragraph each: what happened, how it was diagnosed, what changed as a
   Every renumber re-runs the leg's evidence script afterwards so the figure and its checks
   agree. The durable fix is to allocate figure numbers **at dispatch**, from the orchestrator,
   and to state the number in the brief — which is now done, but only from cycle 4 onward.
+
+- **2026-08-11, resume-session cycle 1 — orchestrator force-removed a worktree without
+  checking `git status` first, in direct violation of the standing safety rule, and lost
+  uncommitted work.** While salvaging leg 221 (BVRR)'s WIP after a second monthly spend-limit
+  kill, five stale worktrees were found across three branches of that leg's lineage. The
+  orchestrator correctly salvaged and pushed real uncommitted WIP from the first
+  `leg/221-bvrr-v1-resume` worktree it inspected (`agent-af848d3928da9762c`, committed at
+  `281647e`), then ran `git worktree remove --force` on a **second** worktree on the same
+  branch (`agent-a1932a3521e22b4a6`) without checking its status first. That worktree also
+  held real uncommitted changes (`experiments/journal/leg_221.md`,
+  `writeup/novelty/leg_221.md`, and a new `writeup/data/p2_route_g_v1_g2.json.bvrr_attr_backup`
+  file) — content that was never staged, so it was never written to the git object database,
+  so it is **not recoverable**: confirmed via `git reflog show leg/221-bvrr-v1-resume` (shows
+  only real commits) and `git fsck --no-reflog --unreachable --dangling` (no matching dangling
+  blob), and the worktree directory itself no longer exists on disk. Practical impact is likely
+  bounded — the sibling worktree's salvaged WIP had overlapping file-level footprint with this
+  one and was already pushed — but the loss itself is real and disclosed here rather than
+  assumed harmless. **Fix, applied for the rest of this session**: before removing either of
+  the two remaining leg-221 worktrees, `git status` was checked first; both turned out to hold
+  real uncommitted content and were salvaged via defensive WIP-preservation commits before
+  removal (`ea77e0f` on `leg/221-bvrr-v1`, `5cf4dcf` on `leg/221-bvrr-v1-wip2`). **Rule
+  restated, this time as a hard precondition, not a preference: `git worktree remove --force`
+  is never issued without a `git status --short` on that exact worktree path immediately
+  before it, in the same tool call sequence, no exceptions** — "I already checked a sibling
+  worktree on the same branch" is not a substitute, since sibling worktrees on the same branch
+  can hold independent uncommitted diffs.
