@@ -1,0 +1,266 @@
+{
+  "leg": 333,
+  "route": "Route-SHELL",
+  "title": "Where does 3D Navier-Stokes sit in the dyadic/shell-model hierarchy?",
+  "date": "2026-08-11",
+  "kind": "novelty/placement pass — NO CONSTRUCTION",
+  "construction_performed": false,
+  "solver_code_touched": false,
+  "figure": null,
+  "figure_note": "fig87 was reserved conditionally by the leg spec and is deliberately UNUSED, returned to the pool. The gate answered NO, nothing was constructed, and the only drawable object (the alpha axis with 1/3, 2/5, 1/2 marked) would be a picture of three numbers read out of another author's 2006 introduction. Drawing it would dress a citation as a result.",
+
+  "gate": {
+    "wording_precommitted": "Does the novelty pass establish that the literature does NOT already answer the placement question (which structural feature of the hierarchy flips blow-up on, and where 3D NS sits relative to that flip)?",
+    "answer": "NO",
+    "branch_fired": "no -> Report the literature's answer, links not counts, and STOP. This closes route 5 at the placement-question level; no construction warranted.",
+    "realization_named_per_lesson_91": "The Katz-Pavlovic / Friedlander-Pavlovic dyadic system in the reduced form given by Cheskidov arXiv:math/0601074 eq. (1.1): d/dt u_n + nu*lambda^(2*alpha*n)*u_n - lambda^n*u_{n-1}^2 + lambda^(n+1)*u_n*u_{n+1} = g_n, u_0 = 0, lambda > 1, with alpha the dissipation degree; together with the sabra shell model in Constantin-Levant-Titi's realization and the Fourier-restricted models in Miller's. This is a statement about the published literature on those named models, NOT about 3D Navier-Stokes."
+  },
+
+  "placement_of_3D_NS": {
+    "headline": "3D Navier-Stokes sits at dissipation degree alpha = 2/5 in the Katz-Pavlovic dyadic hierarchy, strictly inside the hierarchy's own undecided window (1/3, 1/2).",
+    "source": "arXiv:math/0601074",
+    "source_read_from": "e-print LaTeX source (dyadic1.tex, dated 2006-06-08), NOT the abstract — the abstract does not contain the alpha = 2/5 calibration at all",
+    "calibration_quote_verbatim": "Note that for $\\alpha=2/5$ the following are sharp estimates on the inertial term: $|(B(u,u),Au)| \\lesssim |Au|^{3/2}|A^{1/2}u|^{3/2}$, where $(\\cdot,\\cdot)$ and $|\\cdot|$ are the $l^2$-inner product and norm respectively. The best known estimates on the inertial term of the 3D NSE are the same, with $(\\cdot,\\cdot)$ and $|\\cdot|$ being the $L^2$-inner product and norm.",
+    "dimension_axis_quote_verbatim": "It is remarkable that in the critical case $\\alpha =1/3$ the following are sharp estimates on the nonlinear term: $|(B(u,u),Au)| \\lesssim |Au|^{2}|A^{1/2}u|$. Note that the best known estimates on the nonlinear term of the 4D NSE are exactly the same.",
+    "openness_quote_verbatim": "Note that there is still a gap between the regions of global regularity and blow-up in finite time, which means that the developed technique is not sharp enough to separate these two behaviors.",
+    "same_open_question_quote_verbatim": "In this paper we study a dyadic model, which has similar properties to the 3D NSE, the same estimates on the inertial term, and the same open question concerning the regularity of the solutions.",
+
+    "alpha_axis": [
+      {"alpha": "< 1/4", "status": "finite-time blow-up", "attribution": "Katz-Pavlovic (original), as reported by Cheskidov math/0601074 abstract and introduction"},
+      {"alpha": "< 1/3", "status": "finite-time blow-up", "attribution": "Cheskidov arXiv:math/0601074, main theorem (sharpening of Katz-Pavlovic)"},
+      {"alpha": "= 1/3", "status": "critical; sharp nonlinear estimate identical to 4D NSE's best known", "attribution": "Cheskidov arXiv:math/0601074, Introduction"},
+      {"alpha": "= 2/5", "status": "3D NSE CALIBRATION POINT — sharp inertial-term estimate identical to 3D NSE's best known; status UNDECIDED", "attribution": "Cheskidov arXiv:math/0601074, Introduction"},
+      {"alpha": "> 1/3", "status": "local regularity", "attribution": "Cheskidov arXiv:math/0601074"},
+      {"alpha": ">= 1/2", "status": "global regularity; weak global attractor becomes a strong global attractor", "attribution": "Cheskidov arXiv:math/0601074"}
+    ],
+
+    "numbers": {
+      "alpha_blowup_threshold": {"exact": "1/3", "float": 0.3333333333333333},
+      "alpha_3D_NS": {"exact": "2/5", "float": 0.4},
+      "alpha_4D_NS": {"exact": "1/3", "float": 0.3333333333333333},
+      "alpha_global_regularity_threshold": {"exact": "1/2", "float": 0.5},
+      "distance_above_blowup_threshold": {"exact": "1/15", "float": 0.06666666666666667},
+      "distance_below_global_regularity_threshold": {"exact": "1/10", "float": 0.1},
+      "undecided_window_width": {"exact": "1/6", "float": 0.16666666666666666},
+      "fraction_of_window_traversed_by_3D_NS": {"exact": "2/5", "float": 0.4},
+      "strict_containment_check": "1/3 < 2/5 < 1/2 — TRUE, in exact rational arithmetic"
+    }
+  },
+
+  "structural_knobs_that_flip_blowup": [
+    {
+      "knob": "dissipation degree alpha",
+      "flip_location": "somewhere in [1/3, 1/2)",
+      "arxiv": "math/0601074",
+      "authors": ["Alexey Cheskidov"],
+      "title": "Blow-up in finite time for the dyadic model of the Navier-Stokes equations",
+      "date": "2006-01-04",
+      "v2": "2006-06-08"
+    },
+    {
+      "knob": "sign structure / existence of backward energy transfer",
+      "direction": "NS-like sign structure with a second quadratic invariant turns blow-up OFF",
+      "evidence": [
+        {
+          "arxiv": "physics/0511075",
+          "authors": ["Peter Constantin", "Boris Levant", "Edriss S. Titi"],
+          "title": "Analytic Study of Shell Models of Turbulence",
+          "date": "2005-11-09", "v2": "2006-07-04",
+          "finding": "GLOBAL REGULARITY for the viscous sabra shell model, plus a finite dimensional global attractor and globally invariant inertial manifolds",
+          "quote_verbatim": "We prove the global regularity of solutions and show that the shell model has finitely many asymptotic degrees of freedom, specifically: a finite dimensional global attractor and globally invariant inertial manifolds."
+        },
+        {
+          "arxiv": "physics/0607060",
+          "authors": ["Peter Constantin", "Boris Levant", "Edriss S. Titi"],
+          "title": "A Note on the Regularity of Inviscid Shell Model of Turbulence",
+          "date": "2006-07-07",
+          "finding": "inviscid sabra: global weak solutions, short-time uniqueness, BKM-type blow-up criterion, Onsager analogue under |u_n| <= C k_n^(-1/3) (sqrt(n) log(n+1))^(-1), and GLOBAL REGULARITY in the 'two-dimensional' parameter regime"
+        },
+        {
+          "arxiv": "1310.7612",
+          "authors": ["Alexey Cheskidov", "Karen Zaya"],
+          "title": "Regularizing Effect of the Forward Energy Cascade in the Inviscid Dyadic Model",
+          "date": "2013-10-28", "v4": "2014-02-28",
+          "finding": "forward energy cascade REGULARIZES: every solution must have 3/5 L^2-based (or 1/10 L^3-based) regularity for all positive time; conjectured up to Onsager's 5/6 (L^2-based) and 1/3 (L^3-based)",
+          "numbers": {"L2_based_exponent_proved": 0.6, "L3_based_exponent_proved": 0.1, "L2_based_onsager_conjectured": 0.8333333333333334, "L3_based_onsager_conjectured": 0.3333333333333333}
+        },
+        {
+          "arxiv": "math/0610814",
+          "authors": ["Alexey Cheskidov", "Susan Friedlander", "Natasa Pavlovic"],
+          "title": "An inviscid dyadic model of turbulence: the fixed point and Onsager's conjecture",
+          "date": "2006-10-26", "v2": "2006-12-31",
+          "finding": "unique equilibrium; EVERY forced solution blows up in finite time in H^{5/6}; Onsager's conjecture confirmed for the model"
+        },
+        {
+          "arxiv": "math/0610815",
+          "authors": ["Alexey Cheskidov", "Susan Friedlander", "Natasa Pavlovic"],
+          "title": "An inviscid dyadic model of turbulence: the global attractor",
+          "date": "2006-10-26",
+          "finding": "SELF-DISSIPATION: after the blow-up time all solutions stay in H^s, s < 5/6, for almost all time and the energy dissipates; the unique equilibrium is an exponential global attractor"
+        }
+      ]
+    },
+    {
+      "knob": "retention of the enstrophy-growth identity",
+      "direction": "retaining MORE genuine NS structure pushes the blow-up threshold AWAY from NS",
+      "arxiv": "2307.03434",
+      "authors": ["Evan Miller"],
+      "title": "Finite-time blowup for the Fourier-restricted Euler and hypodissipative Navier-Stokes model equations",
+      "date": "2023-07-07", "v5": "2025-08-28",
+      "quote_verbatim": "The Fourier-restricted Euler and hypodissipative Navier--Stokes equations respect both the energy equality and the identity for enstrophy growth from the full Euler and hypodissipative Navier--Stokes equations respectively, which is a substantial advance over the previous literature on Euler and Navier--Stokes model equations.",
+      "structural_note": "the (u.grad)u nonlinearity is UNCHANGED; only the Helmholtz projection is replaced by projection onto a more restrictive constraint space with a dyadic shell structure built iteratively using permutations",
+      "numbers": {
+        "blowup_hypodissipation_threshold_exact": "log(3)/(6*log(2))",
+        "blowup_hypodissipation_threshold_float": 0.2641604167868594,
+        "alpha_of_true_3D_NS": 1.0,
+        "gap_between_threshold_and_3D_NS": 0.7358395832131406
+      }
+    },
+    {
+      "knob": "the cascade-regularization vs artificial-interaction dichotomy, stated outright",
+      "arxiv": "2605.13827",
+      "authors": ["Stan Palasek"],
+      "title": "Finite-time blow-up in an elementary model of the 3D Navier-Stokes equations",
+      "date": "2026-05-13",
+      "pages": 20,
+      "quote_verbatim": "Previously studied models either exhibit a turbulent cascade that regularizes the three-dimensional viscous dynamics, or rely on highly artificial interactions not transparently realized in the true Euler nonlinearity.",
+      "forward_agenda_quote_verbatim": "We conclude with a discussion of the prospects for embedding the behavior of the dyadic model into the full Euler and Navier-Stokes equations.",
+      "repo_prior_contact": "already banked as a census row by leg 172 (writeup/novelty/leg_172.md:69) and leg 174 (:138) and screened by leg 255 (Q8) — but never before read for its PLACEMENT content"
+    }
+  ],
+
+  "independent_corroboration": [
+    {
+      "arxiv": "2009.01583",
+      "authors": ["Dario Vincenzi", "John D. Gibbon"],
+      "title": "How close are shell models to the 3D Navier-Stokes equations?",
+      "date": "2020-09-03",
+      "pages": 22,
+      "note": "the title is this leg's gate question verbatim",
+      "method": "Reynolds-number dependence of velocity and derivative estimates",
+      "quote_verbatim": "It turns out that only the estimate of the mean energy dissipation rate is the same in both systems. The estimates of the velocity and its higher-order derivatives display a weaker Reynolds number dependence for shell models than for the 3D NSEs. Indeed, the velocity-derivative estimates for shell models are found to be equivalent to those corresponding to a velocity gradient averaged version of the 3D Navier-Stokes equations (VGA-NSEs), while the velocity estimates are even milder.",
+      "placement_verdict": "shell models are STRICTLY WEAKER than 3D NS; their exact equivalent is named as a velocity-gradient-averaged NS"
+    },
+    {
+      "arxiv": "2412.07064",
+      "authors": ["John D. Gibbon", "Dario Vincenzi"],
+      "title": "Dynamics of vorticity moments in shell models of turbulence: A comparison with the Navier-Stokes equations",
+      "date": "2024-12-10",
+      "pages": 17,
+      "method": "differential inequalities for vorticity moments / L^{2m} norms",
+      "quote_verbatim": "The contribution of the nonlinear term turns out to be much weaker than its equivalent for the three-dimensional Navier-Stokes equations. Consequently, pointwise-in-time estimates are shown to exist for the vorticity moments for shell models of any order. ... it is shown that the estimates for shell models formally correspond to those for the Navier-Stokes equations 'on a point'.",
+      "placement_verdict": "shell nonlinearity WEAKER than 3D NS's; correspondence is to NS 'on a point'"
+    },
+    {
+      "arxiv": "2209.10203",
+      "authors": ["Alexey Cheskidov", "Mimi Dai", "Susan Friedlander"],
+      "title": "Dyadic models for fluid equations: a survey",
+      "date": "2022-09-21",
+      "v2": "2023-04-12",
+      "note": "a DEDICATED SURVEY of the hierarchy, by two of the three author names the leg spec asked to be searched for"
+    }
+  ],
+  "corroboration_note": "Three independent methods — sharp nonlinear estimates (Cheskidov 2006), Reynolds scaling of derivative estimates (Vincenzi-Gibbon 2020), vorticity moments (Gibbon-Vincenzi 2024) — each place 3D NS relative to the shell hierarchy, and none contradicts another. The placement question is answered three times over and cross-checked.",
+
+  "supporting_map": [
+    {"arxiv": "math/0410380", "authors": ["Fabian Waleffe"], "title": "On some dyadic models of the Euler equations", "date": "2004-10-17", "v2": "2004-10-19", "content": "reduces Katz-Pavlovic to the dyadic inviscid Burgers equation; blow-up in H^alpha for ANY alpha > 0 vs Burgers' alpha >= 1/2 — 'its dyadic restriction is even more singular'; also outlines 'some inconsistent assumptions' in the Friedlander-Pavlovic construction"},
+    {"arxiv": "math/0507129", "authors": ["Alexander Kiselev", "Andrej Zlatos"], "title": "On Discrete Models of the Euler Equation", "date": "2005-07-06", "content": "sharpens the dyadic blow-up result; proves GLOBAL REGULARITY of every solution with regular initial data for the Obukhov model (as reported in Cheskidov math/0601074's introduction)"},
+    {"arxiv": "1007.3401", "authors": ["David Barbato", "Francesco Morandin", "Marco Romito"], "title": "Smooth solutions for the dyadic model", "date": "2010-07-20", "content": "well-posedness of positive solutions of the VISCOUS problem in the relevant scaling range which corresponds to Navier-Stokes; likewise for the inviscid problem at the strongest-transport parameter"},
+    {"arxiv": "1403.2852", "authors": ["David Barbato", "Francesco Morandin", "Marco Romito"], "title": "Global regularity for a logarithmically supercritical hyperdissipative dyadic equation", "date": "2014-03-12", "content": "critical viscosity exponent plus a supercritical correction; 'catches for the dyadic a conjecture that for Navier-Stokes equations was formulated by Tao [2009]'"},
+    {"arxiv": "1406.2423", "authors": ["In-Jee Jeong", "Dong Li"], "title": "A Blow-Up Result for Dyadic Models of the Euler Equations", "date": "2014-06-10", "content": "H^{1/3+delta} blow-up in the generalized dyadic model; partially answers a question of Kiselev-Zlatos"},
+    {"arxiv": "1705.01456", "authors": ["In-Jee Jeong"], "title": "Self-similar solutions for dyadic models of the Euler equations", "date": "2017-05-03", "content": "self-similar solutions satisfying Kolmogorov's scaling exist for generalized dyadic Euler models, extending Barbato-Flandoli-Morandin"},
+    {"arxiv": "0810.3718", "authors": ["Alexey Cheskidov", "Susan Friedlander"], "title": "The vanishing viscosity limit for a dyadic model", "date": "2008-10-21", "content": "DISSIPATION ANOMALY reproduced: the viscous attractor converges to the inviscid attractor and the average dissipation rate converges to the positive anomalous rate as viscosity -> 0"},
+    {"arxiv": "2102.03498", "authors": ["Mimi Dai"], "title": "Blow-up of dyadic MHD models with forward energy cascade", "date": "2021-02-06", "content": "the same flip carried onto MHD and Hall-MHD, keyed to an intermittency dimension delta: blow-up for small delta with large positive initial data"},
+    {"arxiv": "2407.06179", "authors": ["Stan Palasek"], "title": "Non-uniqueness in the Leray-Hopf class for a dyadic Navier-Stokes model", "date": "2024-07-08", "pages": 32, "content": "two distinct Leray-Hopf solutions from critical-regularity data for the Obukhov model at d > 2; solutions are APPROXIMATELY DISCRETELY SELF-SIMILAR with non-uniqueness from partial breaking of the scaling symmetry; dynamics reduce to weakly coupled finite-dimensional systems; 'the predominant nonlinear interactions are identical to those arising in convex integration, suggesting the possibility of a similar construction in the full PDE setting'"},
+    {"arxiv": "1402.0290", "authors": ["Terence Tao"], "title": "Finite time blowup for an averaged three-dimensional Navier-Stokes equation", "date": "2014-02-03", "content": "the adjacent (averaged, not dyadic) hierarchy and the supercriticality barrier this repository already treats as closing direction (a)"},
+    {"arxiv": "2307.15986", "authors": ["Matei P. Coiculescu"], "title": "Partial Regularity and Blowup for an Averaged Three-Dimensional Navier-Stokes Equation", "date": "2023-07-29", "content": "CKN-type partial regularity carried into the averaged model"},
+    {"arxiv": "2008.03747", "authors": ["Carlo Metta"], "title": "Stationary solutions for dyadic mixed model of the Euler equation. A complete spectrum", "date": "2020-08-09", "content": "the only hit of the abs:dyadic AND abs:self-similar AND abs:blow-up conjunction"}
+  ],
+
+  "wall_1_reading": {
+    "wall_1_statement": "A search can only argue FOR blow-up, never for regularity (plan_of_record.py:75, CLAY_ROADMAP.md:32, README.md:86).",
+    "finding_direction": "NEGATIVE for the programme, reported against interest",
+    "points": [
+      "At 3D NS's own calibration point alpha = 2/5 the dyadic hierarchy is UNDECIDED — it supplies no blow-up evidence for 3D NS.",
+      "Every step toward retaining more genuine NS structure moves the blow-up threshold AWAY from NS: sabra (NS-like sign structure) is globally regular; Miller's enstrophy-respecting model blows up only at alpha < 0.26416 against NS's alpha = 1; forward cascade is itself regularizing; the inviscid dyadic model self-dissipates past its own blow-up time.",
+      "Vincenzi-Gibbon and Gibbon-Vincenzi both measure the shell nonlinearity as WEAKER than 3D NS's, with the shell correspondence being NS 'on a point'.",
+      "Conclusion: the hierarchy's blow-up results have consistently come from the structure the models DISCARD, not the structure they KEEP — which is why the hierarchy has never transferred to the real equations, and why Palasek's newest paper must spend its conclusion on the embedding question."
+    ]
+  },
+
+  "instrument_control": {
+    "endpoint": "https://export.arxiv.org/api/query (https)",
+    "positive_control": {"query": "all:electron", "result": "non-empty", "verdict": "instrument alive"},
+    "compound_quoted_phrase_control": {
+      "query": "all:\"dyadic model\" AND all:\"Navier-Stokes\"",
+      "entries_returned": 12,
+      "verdict": "ANDed quoted phrases DO return results on this endpoint — a THIRD independent refutation of the struck 'ANDed quoted phrases return zero' clause, after legs 314 and 326"
+    },
+    "second_compound_control": {"query": "all:\"self-similar\" AND all:\"blow-up\"", "result": "non-empty (20 entries)", "verdict": "confirms the above"},
+    "refusals_to_measure": {
+      "description": "HTTP 429 on every retry for three battery-2 queries and for chunk 0 of the id_list abstract fetch",
+      "action_taken": "NOTHING BANKED from any of them; all re-run with exponential backoff (20s -> 120s) and only the re-run results are used",
+      "precedent": "leg 326 — a 429 is a refusal to measure, not an absence"
+    },
+    "false_negatives_diagnosed_not_banked": [
+      {"query": "au:Katz_N AND au:Pavlovic_N", "returned": 0, "diagnosis": "BROKEN INSTRUMENT — the Katz-Pavlovic dyadic-model paper exists and is cited by name in the e-print source quoted above. The au: conjunction form is the broken part, not the literature.", "banked_as_absence": false},
+      {"query": "au:Miller_E AND all:\"Fourier-restricted\"", "returned": 0, "diagnosis": "BROKEN INSTRUMENT — arXiv:2307.03434 by Evan Miller was retrieved successfully by id_list moments later. Same fault class: au: conjunctions are unreliable on this endpoint.", "banked_as_absence": false}
+    ],
+    "mf1_spelling_variants": "queries issued in hyphenated Navier-Stokes form; the LaTeX double-hyphen variant 'Navier--Stokes' is confirmed present in this leg's own target cell (Miller arXiv:2307.03434's abstract), reached via id_list rather than string match",
+    "mf2_links_not_counts": "every claim carries an arXiv identifier, title, author list and date; no count anywhere in this leg is load-bearing",
+    "eprint_source_fetches": [
+      {"arxiv": "math/0601074", "file": "dyadic1.tex", "gzipped_bytes": 16101, "source_date": "2006-06-08", "reason": "the alpha = 2/5 calibration is NOT in the abstract; it is in the Introduction, and only a source read finds it"}
+    ]
+  },
+
+  "ban_and_escalation_check": {
+    "bans_in_force_at_run": 11,
+    "bans_contacted": "none",
+    "bans_lifted_narrowed_or_reposed": "none",
+    "dss_ban_proximity_note": "Palasek arXiv:2407.06179 produces APPROXIMATELY DISCRETELY SELF-SIMILAR objects in weakly coupled finite-dimensional systems. This is recorded because an honest novelty pass reports what it found, and so a later leg does not mistake it for a lift condition. The cheap-entrance ban forbids obtaining a DSS orbit by bifurcation off a fixed point of a rescaled flow (not done, and this leg performs no computation of any kind); the expensive-entrance ban forbids a global periodic-orbit search of a rescaled flow (not done) and its lift clause requires a scoping leg to answer (a) the function space, (b) the object, (c) a price in leg-hours — THIS LEG ANSWERS NONE OF THE THREE AND DOES NOT ATTEMPT TO. The bans stand unchanged.",
+    "escalations": {
+      "1_plan_of_record_change": "none — not touched, not proposed",
+      "2_ban_lift_or_weakening": "none",
+      "3_clay_movement_claim": "NONE. 'alpha = 2/5 lies strictly inside the dyadic model's undecided window' is a statement about A MODEL, calibrated to NS by a matching-estimates argument. It is not a statement about 3D NS. No link of the L1-L4 chain moved.",
+      "4_rewriting_banked_results": "none — nothing in writeup/ was edited; leg 172/174/255's rows are ADDED TO, not altered"
+    },
+    "verdict": "not an escalation; pushes to main under the normal protocol"
+  },
+
+  "repository_prior_contact": {
+    "summary": "the hierarchy has been brushed five times and read for placement ZERO times — every prior contact is a census row",
+    "locations": [
+      "writeup/novelty/leg_172.md:69 — Palasek 2605.13827 as a shell-model blow-up row",
+      "writeup/novelty/leg_174.md:112 — Katz-Pavlovic cited by bare institutional URL (an MF2 hazard; flagged for integration, NOT edited by this leg)",
+      "writeup/novelty/leg_174.md:138 — Palasek 2605.13827 in the occupancy census",
+      "writeup/novelty/leg_255.md Q2 and Q8 — dyadic self-similar solutions and the Palasek row, screened for screen (ii) only",
+      "experiments/p2_route_vbs_v1_scoping.py:390-392 — 'a shell model IS a countable ODE system, which is the setting rigorous numerics is strongest in', with the caveat that 'a shell model discards the geometry of the nonlinearity entirely; it is fluid-adjacent by scaling and energy structure, not by transport'",
+      "experiments/journal/leg_172.md:121 — Palasek listed beside Tao's averaged NS"
+    ],
+    "verdict": "the placement content of this leg is genuinely NEW TO THIS REPOSITORY and simultaneously NOT NEW TO THE LITERATURE — exactly the outcome a hard novelty gate exists to produce"
+  },
+
+  "located_not_adjudicated_routed_to_DM": {
+    "note": "The gate answered NO, so its yes-branch (draft a follow-on placement spec) DOES NOT FIRE and none was drafted. What is routed to the DM is only the open prospect the same literature leaves visible, stated by its own authors, NOT adjudicated here.",
+    "items": [
+      "Palasek arXiv:2605.13827 (May 2026) ends on 'the prospects for embedding the behavior of the dyadic model into the full Euler and Navier-Stokes equations'.",
+      "Palasek arXiv:2407.06179 (Jul 2024) ends on the predominant nonlinear interactions being 'identical to those arising in convex integration, suggesting the possibility of a similar construction in the full PDE setting'."
+    ],
+    "unsettled_preconditions_not_measured_here": [
+      "(a) whether an embedding question is even certificate-shaped, or pure soft analysis with nothing for rigorous numerics to enclose",
+      "(b) whether it collides with the re-posed 2026-08-06 ban on the ell^1-Fourier/collocation machinery, which binds on ANY model, fluid or otherwise — a dyadic model is a countable ODE system and leg 174's own scoping remark already called that 'the setting rigorous numerics is strongest in', which is either an opportunity or a fourth re-run of the same death, and this leg did NOT determine which",
+      "(c) whether the Wall-1 reading above — that the hierarchy's blow-up comes from what the models discard — kills the value of an embedding before it starts"
+    ],
+    "status": "not a spec, not a recommendation, not dispatchable as written"
+  },
+
+  "cost": {
+    "computation_performed": "none",
+    "arxiv_api_calls_approx": 30,
+    "eprint_source_fetches": 1,
+    "repo_scripts_executed": ["plan_of_record.py"],
+    "long_run_threshold_reached": false
+  },
+
+  "standing_statement": "Wall 1 and Wall 2 stand. No link of the L1-L4 chain moved. Clay odds remain ~0.05%. No ban was lifted, narrowed, or re-posed by this leg."
+}
