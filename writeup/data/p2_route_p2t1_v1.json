@@ -5,7 +5,7 @@
  "term": {
   "id": "A4",
   "name": "adiabatic / gamma-law pressure",
-  "module": "solver/p2_apparatus_term1.py",
+  "module": "inlined in experiments/p2_route_p2t1_v1.py; deliberately NOT banked as solver/p2_apparatus_term1.py, because banking a module is the gate's YES-branch action and this gate came out NO (journal leg_302.md Part 4 and Part 8)",
   "spec_source": "leg 285, writeup/data/p2_route_p2s_v1_spec.json",
   "why_this_term": "cheapest LOAD-BEARING term: A15a is 285's cheapest overall but its substrate solver/interval.py already exists and it sits off the critical path; A4 is the head of 285's critical path A4->A1->A2->A9->A8->A13->A14 (depth 7) and the only in-degree-0 term on it",
   "not_built": [
