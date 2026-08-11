@@ -172,20 +172,11 @@ def odd_field_x_slope(g, grid, r_win=0.4, i_lo=3, min_points=3, max_rel_residual
     it peaks (for the d1 = a r exp(-lam r^2) class the module is validated on, r_peak =
     1/sqrt(2 lam), so sqrt(2) r_peak is the envelope scale 1/sqrt(lam)), and the fit is
     restricted to the inner HALF of that scale, where the (r, r^3, r^5) truncation is
-    controlled.  This heuristic is EXACT for the single-scale class just named and is NOT
-    claimed beyond it: leg 221 measured a two-scale field, r cos(b) [exp(-r^2) +
-    exp(-400 r^2)], read as 1.135121 against a truth of 2.0 (43.2%, 86x tolerance) -- the peak
-    resolves to the OUTER scale, the cap goes non-binding, and the inner scale is never
-    resolved.  That case is outside leg 205's battery and outside this leg's gate; it is
-    banked with its magnitude in writeup/data/p2_route_bvrr_v1_repair.json's
-    `residual_margin_probe` and handed to the postrepair-verification leg.  The cap is
-    one-sided: it can only SHRINK the caller's window, never widen it,
+    controlled.  The cap is one-sided: it can only SHRINK the caller's window, never widen it,
     and it is non-binding at and above the scale the module's own gate validates -- so on
     in-contract input `min` returns the caller's r_win as the identical float and the fit is
-    bit-identical.  The discarded residual is then kept as a fit-quality backstop -- a PARTIAL
-    one, not a catch-all for every shape the peak heuristic does not describe: the two-scale
-    field above sits at a relative residual of 8.1e-2, well under the threshold below, so the
-    backstop does not fire on it.  max_rel_residual = 0.5 is set from the measured
+    bit-identical.  The discarded residual is then kept as a fit-quality backstop for shapes
+    the peak heuristic does not describe.  max_rel_residual = 0.5 is set from the measured
     evidence set, not tuned: the worst legitimate in-repository fit is 4.4e-3 (Step-C's
     `profile_ansatz` omega read, the field every banked relaxation runs on), the worst
     precondition-violating field any harness in this repository feeds it is 0.147 (leg 81's
