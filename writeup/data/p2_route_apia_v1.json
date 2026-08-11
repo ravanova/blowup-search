@@ -1,0 +1,136 @@
+{
+  "leg_312_route_apia": {
+    "leg178": {
+      "config": {
+        "n": 128,
+        "class": "T2_egm",
+        "family": "E",
+        "gamma": 4.0,
+        "n_unif": 512,
+        "order": 12,
+        "n_grade_banked": 96,
+        "n_grade_clean_crosscheck": 48,
+        "unsafe_theta_threshold": 0.001,
+        "mp_working_precision_digits": 120,
+        "n_quadrature_nodes": 7824,
+        "n_unsafe_nodes_patched": 1640
+      },
+      "before_banked_n_grade_96": {
+        "gap": -230.7108027866136,
+        "contamination": 3066.38495045281
+      },
+      "before_banked_n_grade_48_crosscheck": {
+        "gap": 0.49999975272293995,
+        "contamination": 1.7304865803142353e-10
+      },
+      "float64_reproduction_check_n_grade_96": {
+        "gap": -230.7108027866136,
+        "contamination": 3066.38495045281,
+        "dim_kept": 122,
+        "dropped": 4,
+        "n_grade": 96
+      },
+      "after_mp_patched_n_grade_96": {
+        "gap": 0.4999999874556027,
+        "contamination": 48708.86698995336,
+        "dim_kept": 126,
+        "dropped": 0,
+        "n_grade": 96
+      },
+      "spot_check_vs_rigorous_mpinterval": {
+        "rows": [
+          {
+            "theta": "0.0008552316132252705009261783964",
+            "sin_width": "1E-123",
+            "cos_width": "1E-120",
+            "sin_contained": true,
+            "cos_contained": true,
+            "sin_plain_minus_mid": "5E-124",
+            "cos_plain_minus_mid": "-5E-121"
+          },
+          {
+            "theta": "0.0009252519763502387029063811497",
+            "sin_width": "1E-123",
+            "cos_width": "1E-120",
+            "sin_contained": true,
+            "cos_contained": true,
+            "sin_plain_minus_mid": "5E-124",
+            "cos_plain_minus_mid": "5E-121"
+          },
+          {
+            "theta": "0.0009252519763500721694526873762",
+            "sin_width": "1E-123",
+            "cos_width": "1E-120",
+            "sin_contained": true,
+            "cos_contained": true,
+            "sin_plain_minus_mid": "-5E-124",
+            "cos_plain_minus_mid": "5E-121"
+          },
+          {
+            "theta": "0",
+            "sin_width": "0E-56185",
+            "cos_width": "0E-119",
+            "sin_contained": true,
+            "cos_contained": true,
+            "sin_plain_minus_mid": "0E-56185",
+            "cos_plain_minus_mid": "0E-119"
+          },
+          {
+            "theta": "0",
+            "sin_width": "0E-56185",
+            "cos_width": "0E-119",
+            "sin_contained": true,
+            "cos_contained": true,
+            "sin_plain_minus_mid": "0E-56185",
+            "cos_plain_minus_mid": "0E-119"
+          },
+          {
+            "theta": "0",
+            "sin_width": "0E-56185",
+            "cos_width": "0E-119",
+            "sin_contained": true,
+            "cos_contained": true,
+            "sin_plain_minus_mid": "0E-56185",
+            "cos_plain_minus_mid": "0E-119"
+          }
+        ],
+        "all_contained": true
+      },
+      "performance": {
+        "total_seconds": 36.47977542877197,
+        "mp_patch_seconds": 25.848279237747192,
+        "nodes_patched": 1640,
+        "seconds_per_patched_node": 0.01576114587667512
+      }
+    },
+    "leg176": {
+      "config": {
+        "N": 1024,
+        "N_crosscheck": 512,
+        "bandwidth": 4,
+        "mp_working_precision_digits": 60
+      },
+      "before_banked_N1024": {
+        "sigma_min": 0.09093626075500859,
+        "sigma_max": 1007.795055096516
+      },
+      "before_banked_N512_crosscheck": {
+        "sigma_min": 0.09080465147034879,
+        "sigma_max": 499.64096369153697
+      },
+      "after_mp_N1024": {
+        "sigma_min": 0.09079112560266907,
+        "sigma_max": 1007.7946255377568
+      },
+      "after_mp_N512_crosscheck": {
+        "sigma_min": 0.0908041438359524,
+        "sigma_max": 499.6409638299371
+      },
+      "performance": {
+        "total_seconds": 308.99795627593994,
+        "N1024_seconds": 100.55331301689148,
+        "N512_seconds": 35.51472449302673
+      }
+    }
+  }
+}
