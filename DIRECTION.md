@@ -188,14 +188,26 @@ this same edit. The A-vs-B triple ambiguity is reported, not resolved; the
 correction is right under either reading. B ← 342 SEED (programme rank 1).
 Pattern count: SIX.
 
+**CEILING-GATE PRIORITY (cycle 9d, user-confirmed, binding until 341
+resolves): leg 341 ALGW is the leg that decides whether the programme's
+ceiling reaches Clay or stays Tier 2 — 334's Tier-2 ceiling is lifted only by
+the §3 build, and the §3 build is gated entirely on 341's answer. 341 is LIVE
+in slot C (dispatched cycle 9b, one rank ahead of the asked confirmation) and
+CANNOT drift: if it stalls, parks, or needs a follow-on, that
+resume/consequence work takes ANY next vacancy ahead of every reserve entry,
+no exceptions without a user steer. On 341's landing, its consequence work
+(the S1 lift-condition user packet; the §3 build draft if and only if the user
+so rules) outranks the whole reserve the same way.**
+
 **Reserve queue: 20 undispatched legs (335, 336, 337, 338, 307, 328,
 324, 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234), plus
 306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 14
 (335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 —
-rank order as listed, §3a pre-authorised except where a spec says otherwise).
-310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs 217/219/225 (221's
-landed). Next fresh leg number: **343**. Full specs and this cycle's rulings
-are in the cycle-8 through 9c entries at the end of this file.)
+rank order as listed, §3a pre-authorised except where a spec says otherwise,
+and ALL subordinate to the ceiling-gate priority above). 310 on 287+298; 325
+USER-GATED; 231-234 blocked on repairs 217/219/225 (221's landed). Next fresh
+leg number: **343**. Full specs and this cycle's rulings are in the cycle-8
+through 9d entries at the end of this file.)
 
 ---
 
@@ -16868,3 +16880,45 @@ Nothing in this update lifts a ban. Closure #6 NARROWS grounds to their
 measured width while the width itself stands — the opposite of movement,
 recorded at the same prominence as the claim it corrects; no L1-L4 link moved;
 Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 9d) — THE USER'S RANKING CONFIRMATION,
+ANSWERED AND MADE EXPLICIT: 341 IS ALREADY LIVE (one rank ahead of the ask),
+AND THE CEILING-GATE PRIORITY IS NOW STANDING QUEUE TEXT
+
+**The user's ask, answered directly.** Confirm 341 takes the next vacancy
+immediately after 340, with the reason attached, no drift possible. **Answer:
+confirmed, and the state is one rank BETTER than the ask** — 341 ALGW was
+dispatched into slot C at cycle 9b (branch leg/341-algw-v1, in flight now),
+because 323's landing freed C before 340's D-slot dispatch settled the
+ordering question. Nothing waited; no slot was spent elsewhere while 341 sat
+in reserve. 340 keeping its earlier dispatch is exactly the user's stated
+preference (cheap, bears on escalation #3).
+
+**What this cycle adds is the EXPLICITNESS the user asked for**, written as
+standing queue text at the head of this file (the CEILING-GATE PRIORITY
+block, beside the reserve line where every refill decision reads it):
+
+> Leg 341 decides whether the programme's ceiling reaches Clay or stays Tier
+> 2. Leg 334 is on the critical path with a Tier-2 ceiling written into every
+> gate by design; the §3 build is the only thing that lifts it, and §3 is
+> gated entirely on 341's answer. A slot spent elsewhere while 341 waits is a
+> window in which the programme provably cannot reach Clay.
+
+Binding consequences, so the ordering cannot decay back to implicit:
+1. **While 341 is in flight:** if it stalls, parks, or surfaces follow-on
+   work, that resume/consequence takes ANY next vacancy ahead of every
+   reserve entry — no exceptions without a user steer.
+2. **On 341's landing:** its consequence work — the S1 lift-condition user
+   packet (assembled either way, since the no-branch's "dies the same death"
+   is equally a user-facing answer on the ceiling), and the §3 build draft IF
+   AND ONLY IF the user so rules — outranks the whole reserve identically.
+3. **The reserve's own rank text now says it is subordinate** to this block,
+   so a future refill written from the reserve line alone inherits the rule.
+
+**Unchanged, restated because the user restated it:** no ban is lifted by any
+of this; 341 produces the evidence the stage-V ban's lift condition asks for
+and the ruling stays the user's; the Tier-2 ceiling stands in every route-4
+gate until the §3 build lands, which is not drafted. No roster change, no
+reserve change, no new leg this cycle. No L1-L4 link moved; Clay stays ~0.05%.
