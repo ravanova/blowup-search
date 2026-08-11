@@ -435,6 +435,28 @@ def main():
                                  "branch, by its own pre-committed contract.",
     }}
 
+    # RESUME.  The measurement arms cost hours on a loaded machine and the run
+    # can be killed under it (this leg's first full run was, at 2752 s, with
+    # every earlier leg's process on the box dying in the same minute).  With
+    # PNRV_RESUME=1 an arm already present in the banked JSON is not recomputed
+    # -- and, because every arm is a deterministic cold solve or a
+    # deterministic continuation, a resumed run reports exactly what an
+    # uninterrupted one would.  The JSON records which arms were resumed.
+    resumed = []
+    if os.environ.get("PNRV_RESUME") == "1" and OUT.exists():
+        prior = json.loads(OUT.read_text())
+        for key in ("provenance", "v11_definitions_extracted", "leg226_reported",
+                    "banked_v11_headlines", "bit_identity_checks",
+                    "m1_a_1p50_three_grids", "m2_v3_last_machine_precision_a",
+                    "m3_v2_a_max_machine", "m4_v4_grid_converged_a_max",
+                    "m3_partial_v2_pre", "m4_partial_rows"):
+            if key in prior:
+                data[key] = prior[key]
+                resumed.append(key)
+        data["meta"]["resumed_arms"] = resumed
+        data["meta"]["resumed_from_elapsed_s"] = prior["meta"].get("elapsed_s")
+        print("[resume] reusing banked arms: %s" % ", ".join(resumed), flush=True)
+
     def checkpoint(stage):
         data["meta"]["last_stage_completed"] = stage
         data["meta"]["elapsed_s"] = time.time() - t_start
@@ -495,235 +517,261 @@ def main():
     # Leg 226 verified this at ONE point (a=0.5, n=801).  A single point is a
     # weak check for a claim the whole measurement shortcut rests on, so this
     # leg checks a spread of points, including the cheap end of every grid.
-    pts = [(0.2, 401), (0.5, 801), (0.72, 801), (0.0, 1601)]
-    if FAST:
-        pts = [(0.2, 101), (0.5, 201)]
-    bits = []
-    for a, n in pts:
-        rp = cold_row(pre, a, n, post)
-        rq = cold_row(post, a, n, post)
-        bits.append({
-            "a": a, "n": n,
-            "c_pre": rp["c"], "c_post": rq["c"],
-            "c_delta": abs(rp["c"] - rq["c"]),
-            "relres_pre": rp["relres"], "relres_post": rq["relres"],
-            "relres_delta": abs(rp["relres"] - rq["relres"]),
-            "iterations_pre": rp["iterations"],
-            "iterations_post": rq["iterations"],
-            "bit_identical": (rp["c"] == rq["c"]
-                              and rp["relres"] == rq["relres"]
-                              and rp["iterations"] == rq["iterations"])})
-    data["bit_identity_checks"] = {
-        "rows": bits,
-        "all_bit_identical": all(b["bit_identical"] for b in bits),
-        "leg226_checked_only": {"a": rep_d["bit_identical_check"]["a"],
-                                "n": rep_d["bit_identical_check"]["n"]},
-        "reading": "The repair changes the returned dict, not the Newton loop. "
-                   "If any row here were NOT bit-identical, every 'cold solves "
-                   "are unchanged' shortcut -- leg 226's and this leg's -- "
-                   "would be invalid, so it is checked at four points spanning "
-                   "three grids rather than at one.",
-    }
-    checkpoint("bit_identity")
+    if "bit_identity_checks" not in data:
+        pts = [(0.2, 401), (0.5, 801), (0.72, 801), (0.0, 1601)]
+        if FAST:
+            pts = [(0.2, 101), (0.5, 201)]
+        bits = []
+        for a, n in pts:
+            rp = cold_row(pre, a, n, post)
+            rq = cold_row(post, a, n, post)
+            bits.append({
+                "a": a, "n": n,
+                "c_pre": rp["c"], "c_post": rq["c"],
+                "c_delta": abs(rp["c"] - rq["c"]),
+                "relres_pre": rp["relres"], "relres_post": rq["relres"],
+                "relres_delta": abs(rp["relres"] - rq["relres"]),
+                "iterations_pre": rp["iterations"],
+                "iterations_post": rq["iterations"],
+                "bit_identical": (rp["c"] == rq["c"]
+                                  and rp["relres"] == rq["relres"]
+                                  and rp["iterations"] == rq["iterations"])})
+        data["bit_identity_checks"] = {
+            "rows": bits,
+            "all_bit_identical": all(b["bit_identical"] for b in bits),
+            "leg226_checked_only": {"a": rep_d["bit_identical_check"]["a"],
+                                    "n": rep_d["bit_identical_check"]["n"]},
+            "reading": "The repair changes the returned dict, not the Newton loop. "
+                       "If any row here were NOT bit-identical, every 'cold solves "
+                       "are unchanged' shortcut -- leg 226's and this leg's -- "
+                       "would be invalid, so it is checked at four points spanning "
+                       "three grids rather than at one.",
+        }
+        checkpoint("bit_identity")
 
     # -- M1: the a = 1.50 three-grid case ------------------------------------
     # The ladder is leg 226's PROTOCOL choice, re-derived here and asserted
     # against its literal rather than copied.
-    ladder = [float(v) for v in np.round(np.arange(0.0, 1.51, 0.15), 10)]
-    ladder_226 = None
-    try:
-        rsrc = git_show("%s:experiments/p2_route_pnr_v1_repair.py" % REPAIR_REF)
-        for node in ast.walk(ast.parse(rsrc)):
-            if (isinstance(node, ast.Assign)
-                    and isinstance(node.targets[0], ast.Name)
-                    and node.targets[0].id == "LADDER_A"):
-                ladder_226 = [float(v) for v in ast.literal_eval(node.value)]
-    except Exception as exc:                                  # pragma: no cover
-        ladder_226 = "unavailable: %s" % exc
-    ladder_matches = (isinstance(ladder_226, list)
-                      and len(ladder_226) == len(ladder)
-                      and all(abs(x - y) < 1e-12
-                              for x, y in zip(ladder, ladder_226)))
+    if "m1_a_1p50_three_grids" not in data:
+        ladder = [float(v) for v in np.round(np.arange(0.0, 1.51, 0.15), 10)]
+        ladder_226 = None
+        try:
+            rsrc = git_show("%s:experiments/p2_route_pnr_v1_repair.py" % REPAIR_REF)
+            for node in ast.walk(ast.parse(rsrc)):
+                if (isinstance(node, ast.Assign)
+                        and isinstance(node.targets[0], ast.Name)
+                        and node.targets[0].id == "LADDER_A"):
+                    ladder_226 = [float(v) for v in ast.literal_eval(node.value)]
+        except Exception as exc:                                  # pragma: no cover
+            ladder_226 = "unavailable: %s" % exc
+        ladder_matches = (isinstance(ladder_226, list)
+                          and len(ladder_226) == len(ladder)
+                          and all(abs(x - y) < 1e-12
+                                  for x, y in zip(ladder, ladder_226)))
 
-    grids150 = (101, 201, 301) if not FAST else (101,)
-    rows150 = []
-    for n in grids150:
-        t0 = time.time()
-        rp = pre.continuation(ladder, n=n)
-        rq = post.continuation(ladder, n=n)
-        p = [r for r in rp if abs(r["a"] - 1.5) < 1e-12][0]
-        q = [r for r in rq if abs(r["a"] - 1.5) < 1e-12][0]
-        rows150.append({
-            "n": n,
-            "pre_c": float(p["c"]), "pre_converged": bool(p["converged"]),
-            "pre_relres": float(p["relres"]),
-            "post_c": float(q["c"]), "post_converged": bool(q["converged"]),
-            "post_relres": float(q["relres"]),
-            "D3": float(q["farfield_inflation"]),
-            "D2_gauge_residual": float(q["gauge_residual"]),
-            "post_reason": q.get("reason"), "secs": time.time() - t0})
-    pre_c150 = [r["pre_c"] for r in rows150]
-    acc150 = [r["post_c"] for r in rows150 if r["post_converged"]]
-    mine150 = {
-        "ladder_rederived": ladder, "ladder_matches_leg226_literal": ladder_matches,
-        "rows": rows150, "pre_repair_c_values": pre_c150,
-        "pre_repair_relative_spread": ((max(pre_c150) - min(pre_c150))
-                                       / abs(float(np.mean(pre_c150)))
-                                       if pre_c150 else None),
-        "n_grids_accepted_post_repair": len(acc150),
-        "post_repair_accepted_c_values": acc150,
-    }
-    data["m1_a_1p50_three_grids"] = mine150
-    checkpoint("a_1p50_rows_measured")
-    t150 = rep_d["a_1p50_three_grids"]
-    mine150["comparison_to_leg226"] = safely(lambda: {
-        "pre_repair_relative_spread": {
-            "mine": mine150["pre_repair_relative_spread"],
-            "leg226": t150["pre_repair_relative_spread"],
-            "rel_err": rel_err(mine150["pre_repair_relative_spread"],
-                               t150["pre_repair_relative_spread"])},
-        "n_grids_accepted_post_repair": {
-            "mine": len(acc150), "leg226": t150["n_grids_accepted_post_repair"]},
-        "per_grid": [
-            {"n": m["n"],
-             "pre_c_mine": m["pre_c"], "pre_c_leg226": t.get("pre_c"),
-             "pre_c_rel_err": rel_err(m["pre_c"], t.get("pre_c")),
-             "post_c_mine": m["post_c"], "post_c_leg226": t.get("post_c"),
-             "post_c_rel_err": rel_err(m["post_c"], t.get("post_c")),
-             "D3_mine": m["D3"], "D3_leg226": t.get("D3"),
-             "D3_rel_err": rel_err(m["D3"], t.get("D3")),
-             "post_converged_mine": m["post_converged"],
-             "post_converged_leg226": t.get("post_converged")}
-            for m, t in zip(rows150, t150["rows"])],
-    })
-    checkpoint("a_1p50")
+        grids150 = (101, 201, 301) if not FAST else (101,)
+        rows150 = []
+        for n in grids150:
+            t0 = time.time()
+            rp = pre.continuation(ladder, n=n)
+            rq = post.continuation(ladder, n=n)
+            p = [r for r in rp if abs(r["a"] - 1.5) < 1e-12][0]
+            q = [r for r in rq if abs(r["a"] - 1.5) < 1e-12][0]
+            rows150.append({
+                "n": n,
+                "pre_c": float(p["c"]), "pre_converged": bool(p["converged"]),
+                "pre_relres": float(p["relres"]),
+                "post_c": float(q["c"]), "post_converged": bool(q["converged"]),
+                "post_relres": float(q["relres"]),
+                "D3": float(q["farfield_inflation"]),
+                "D2_gauge_residual": float(q["gauge_residual"]),
+                "post_reason": q.get("reason"), "secs": time.time() - t0})
+        pre_c150 = [r["pre_c"] for r in rows150]
+        acc150 = [r["post_c"] for r in rows150 if r["post_converged"]]
+        mine150 = {
+            "ladder_rederived": ladder, "ladder_matches_leg226_literal": ladder_matches,
+            "rows": rows150, "pre_repair_c_values": pre_c150,
+            "pre_repair_relative_spread": ((max(pre_c150) - min(pre_c150))
+                                           / abs(float(np.mean(pre_c150)))
+                                           if pre_c150 else None),
+            "n_grids_accepted_post_repair": len(acc150),
+            "post_repair_accepted_c_values": acc150,
+        }
+        data["m1_a_1p50_three_grids"] = mine150
+        checkpoint("a_1p50_rows_measured")
+        t150 = rep_d["a_1p50_three_grids"]
+        mine150["comparison_to_leg226"] = safely(lambda: {
+            "pre_repair_relative_spread": {
+                "mine": mine150["pre_repair_relative_spread"],
+                "leg226": t150["pre_repair_relative_spread"],
+                "rel_err": rel_err(mine150["pre_repair_relative_spread"],
+                                   t150["pre_repair_relative_spread"])},
+            "n_grids_accepted_post_repair": {
+                "mine": len(acc150), "leg226": t150["n_grids_accepted_post_repair"]},
+            "per_grid": [
+                {"n": m["n"],
+                 "pre_c_mine": m["pre_c"], "pre_c_leg226": t.get("pre_c"),
+                 "pre_c_rel_err": rel_err(m["pre_c"], t.get("pre_c")),
+                 "post_c_mine": m["post_c"], "post_c_leg226": t.get("post_c"),
+                 "post_c_rel_err": rel_err(m["post_c"], t.get("post_c")),
+                 "D3_mine": m["D3"], "D3_leg226": t.get("D3"),
+                 "D3_rel_err": rel_err(m["D3"], t.get("D3")),
+                 "post_converged_mine": m["post_converged"],
+                 "post_converged_leg226": t.get("post_converged")}
+                for m, t in zip(rows150, t150["rows"])],
+        })
+        checkpoint("a_1p50")
 
     # -- M2: V3, last_machine_precision_a ------------------------------------
-    v3_as = defs["v3_a_values"] if not FAST else defs["v3_a_values"][:2]
-    v3_rows = [cold_row(post, a, defs["N"] if not FAST else 201, post)
-               for a in v3_as]
-    mine3 = v3_last_machine_precision_a(v3_rows, defs)
-    data["m2_v3_last_machine_precision_a"] = mine3
-    checkpoint("v3_rows_measured")
-    t3 = rep_d["last_machine_precision_a"]
-    mine3["comparison_to_leg226"] = safely(lambda: {
-        "banked": {"mine_reads": data["banked_v11_headlines"][
-            "last_machine_precision_a"], "leg226": t3["banked"]},
-        "v11_own_test": {"mine": mine3["last_machine_precision_a_v11_own_test"],
-                         "leg226": t3["post_repair_v11_own_relres_test"],
-                         "rel_err": rel_err(
-                             mine3["last_machine_precision_a_v11_own_test"],
-                             t3["post_repair_v11_own_relres_test"])},
-        "repaired_verdict": {
-            "mine": mine3["last_machine_precision_a_repaired_verdict"],
-            "leg226": t3["post_repair_repaired_verdict"],
-            "rel_err": rel_err(
-                mine3["last_machine_precision_a_repaired_verdict"],
-                t3["post_repair_repaired_verdict"])},
-        "per_row": [
-            {"a": m["a"], "relres_mine": m["relres"],
-             "relres_leg226": t.get("relres"),
-             "relres_rel_err": rel_err(m["relres"], t.get("relres")),
-             "c_mine": m["c"], "c_leg226": t.get("c"),
-             "c_rel_err": rel_err(m["c"], t.get("c")),
-             "D3_mine": m["D3_farfield_inflation"], "D3_leg226": t.get("D3"),
-             "D3_rel_err": rel_err(m["D3_farfield_inflation"], t.get("D3")),
-             "v11_own_test_mine": m["relres"] < defs["relres_threshold"],
-             "v11_own_test_leg226": t.get("v11_own_test"),
-             "repaired_verdict_mine": bool(
-                 m["relres"] < defs["relres_threshold"]
-                 and m["repaired_converged"]),
-             "repaired_verdict_leg226": t.get("repaired_verdict")}
-            for m, t in zip(v3_rows, t3["rows"])] if not FAST else "skipped(FAST)",
-    })
-    checkpoint("v3_boundary")
+    if "m2_v3_last_machine_precision_a" not in data:
+        v3_as = defs["v3_a_values"] if not FAST else defs["v3_a_values"][:2]
+        v3_rows = [cold_row(post, a, defs["N"] if not FAST else 201, post)
+                   for a in v3_as]
+        mine3 = v3_last_machine_precision_a(v3_rows, defs)
+        data["m2_v3_last_machine_precision_a"] = mine3
+        checkpoint("v3_rows_measured")
+        t3 = rep_d["last_machine_precision_a"]
+        mine3["comparison_to_leg226"] = safely(lambda: {
+            "banked": {"mine_reads": data["banked_v11_headlines"][
+                "last_machine_precision_a"], "leg226": t3["banked"]},
+            "v11_own_test": {"mine": mine3["last_machine_precision_a_v11_own_test"],
+                             "leg226": t3["post_repair_v11_own_relres_test"],
+                             "rel_err": rel_err(
+                                 mine3["last_machine_precision_a_v11_own_test"],
+                                 t3["post_repair_v11_own_relres_test"])},
+            "repaired_verdict": {
+                "mine": mine3["last_machine_precision_a_repaired_verdict"],
+                "leg226": t3["post_repair_repaired_verdict"],
+                "rel_err": rel_err(
+                    mine3["last_machine_precision_a_repaired_verdict"],
+                    t3["post_repair_repaired_verdict"])},
+            "per_row": [
+                {"a": m["a"], "relres_mine": m["relres"],
+                 "relres_leg226": t.get("relres"),
+                 "relres_rel_err": rel_err(m["relres"], t.get("relres")),
+                 "c_mine": m["c"], "c_leg226": t.get("c"),
+                 "c_rel_err": rel_err(m["c"], t.get("c")),
+                 "D3_mine": m["D3_farfield_inflation"], "D3_leg226": t.get("D3"),
+                 "D3_rel_err": rel_err(m["D3_farfield_inflation"], t.get("D3")),
+                 "v11_own_test_mine": m["relres"] < defs["relres_threshold"],
+                 "v11_own_test_leg226": t.get("v11_own_test"),
+                 "repaired_verdict_mine": bool(
+                     m["relres"] < defs["relres_threshold"]
+                     and m["repaired_converged"]),
+                 "repaired_verdict_leg226": t.get("repaired_verdict")}
+                for m, t in zip(v3_rows, t3["rows"])] if not FAST else "skipped(FAST)",
+        })
+        checkpoint("v3_boundary")
 
     # -- M3: V2, a_max_machine (continuation -- the function the repair changed)
-    v2_pre = v2_a_max_machine(pre, defs, post)
-    checkpoint("v2_pre")
-    v2_post = v2_a_max_machine(post, defs, post)
-    data["m3_v2_a_max_machine"] = {"pre_repair": v2_pre, "post_repair": v2_post}
-    checkpoint("v2_rows_measured")
-    t2 = rep_d["a_max_machine"]
-    data["m3_v2_a_max_machine"]["comparison_to_leg226"] = safely(lambda: {
-            "banked": {"mine_reads": data["banked_v11_headlines"]["a_max_machine"],
-                       "leg226": t2["banked"]},
-            "pre_repair_rerun": {
-                "mine": v2_pre["a_max_machine_v11_own_test"],
-                "leg226": t2["pre_repair_rerun_here"],
-                "rel_err": rel_err(v2_pre["a_max_machine_v11_own_test"],
-                                   t2["pre_repair_rerun_here"])},
-            "post_repair_v11_own_test": {
-                "mine": v2_post["a_max_machine_v11_own_test"],
-                "leg226": t2["post_repair_v11_own_relres_test"],
-                "rel_err": rel_err(v2_post["a_max_machine_v11_own_test"],
-                                   t2["post_repair_v11_own_relres_test"])},
-            "post_repair_repaired_verdict": {
-                "mine": v2_post["a_max_machine_repaired_verdict"],
-                "leg226": t2["post_repair_repaired_verdict"],
-                "rel_err": rel_err(v2_post["a_max_machine_repaired_verdict"],
-                                   t2["post_repair_repaired_verdict"])},
-        })
-    checkpoint("v2_post")
+    if "m3_v2_a_max_machine" not in data:
+        if "m3_partial_v2_pre" in data:
+            v2_pre = data["m3_partial_v2_pre"]
+            print("[resume] v2: pre-repair sweep re-used", flush=True)
+        else:
+            v2_pre = v2_a_max_machine(pre, defs, post)
+            data["m3_partial_v2_pre"] = v2_pre
+        checkpoint("v2_pre")
+        v2_post = v2_a_max_machine(post, defs, post)
+        data["m3_v2_a_max_machine"] = {"pre_repair": v2_pre, "post_repair": v2_post}
+        data.pop("m3_partial_v2_pre", None)
+        checkpoint("v2_rows_measured")
+        t2 = rep_d["a_max_machine"]
+        data["m3_v2_a_max_machine"]["comparison_to_leg226"] = safely(lambda: {
+                "banked": {"mine_reads": data["banked_v11_headlines"]["a_max_machine"],
+                           "leg226": t2["banked"]},
+                "pre_repair_rerun": {
+                    "mine": v2_pre["a_max_machine_v11_own_test"],
+                    "leg226": t2["pre_repair_rerun_here"],
+                    "rel_err": rel_err(v2_pre["a_max_machine_v11_own_test"],
+                                       t2["pre_repair_rerun_here"])},
+                "post_repair_v11_own_test": {
+                    "mine": v2_post["a_max_machine_v11_own_test"],
+                    "leg226": t2["post_repair_v11_own_relres_test"],
+                    "rel_err": rel_err(v2_post["a_max_machine_v11_own_test"],
+                                       t2["post_repair_v11_own_relres_test"])},
+                "post_repair_repaired_verdict": {
+                    "mine": v2_post["a_max_machine_repaired_verdict"],
+                    "leg226": t2["post_repair_repaired_verdict"],
+                    "rel_err": rel_err(v2_post["a_max_machine_repaired_verdict"],
+                                       t2["post_repair_repaired_verdict"])},
+            })
+        checkpoint("v2_post")
 
     # -- M4: V4, grid_converged_a_max ----------------------------------------
-    v4_ns = defs["v4_ns"] if not FAST else [101]
-    v4_rows = []
-    for n in v4_ns:
-        for a in defs["v4_a_values"]:
-            v4_rows.append(cold_row(post, a, n, post))
-            print("   [v4] n=%d a=%.2f  relres %.3e  c %.16f  %.1f s"
-                  % (n, a, v4_rows[-1]["relres"], v4_rows[-1]["c"],
-                     v4_rows[-1]["secs"]), flush=True)
-        checkpoint("v4_grids_n%d" % n)
-    thr = defs["relres_threshold"]
-    mine4 = {"rows": v4_rows}
-    mine4["v11_own_test"] = v4_verdicts(
-        v4_rows, defs, lambda r: r["relres"] < thr)
-    mine4["repaired_verdict"] = v4_verdicts(
-        v4_rows, defs, lambda r: r["relres"] < thr and r["repaired_converged"])
-    data["m4_v4_grid_converged_a_max"] = mine4
-    checkpoint("v4_rows_measured")
-    t4 = rep_d["grid_converged_a_max"]
-    mine4["comparison_to_leg226"] = safely(lambda: {
-        "banked": {"mine_reads": data["banked_v11_headlines"][
-            "grid_converged_a_max"], "leg226": t4["banked"]},
-        "pre_repair_rerun_accepted_only_convention": {
-            "mine": mine4["v11_own_test"]["grid_converged_a_max_accepted_only"],
-            "leg226": t4["pre_repair_rerun_here"],
-            "rel_err": rel_err(
-                mine4["v11_own_test"]["grid_converged_a_max_accepted_only"],
-                t4["pre_repair_rerun_here"])},
-        "post_repair_v11_own_test_accepted_only_convention": {
-            "mine": mine4["v11_own_test"]["grid_converged_a_max_accepted_only"],
-            "leg226": t4["post_repair_v11_own_relres_test"],
-            "rel_err": rel_err(
-                mine4["v11_own_test"]["grid_converged_a_max_accepted_only"],
-                t4["post_repair_v11_own_relres_test"])},
-        "post_repair_repaired_verdict_accepted_only_convention": {
-            "mine": mine4["repaired_verdict"][
-                "grid_converged_a_max_accepted_only"],
-            "leg226": t4["post_repair_repaired_verdict"],
-            "rel_err": rel_err(
-                mine4["repaired_verdict"]["grid_converged_a_max_accepted_only"],
-                t4["post_repair_repaired_verdict"])},
-        "v11_LITERAL_convention_not_used_by_leg226": {
-            "v11_own_test": mine4["v11_own_test"]["grid_converged_a_max_v11_literal"],
-            "repaired_verdict": mine4["repaired_verdict"][
-                "grid_converged_a_max_v11_literal"],
-            "note": "v11's own code spreads over ALL grids and counts only the "
-                    "converged ones; leg 226 took both over the accepted rows. "
-                    "Both are reported because they are different statistics."},
-        "per_row": [
-            {"n": m["n"], "a": m["a"], "relres_mine": m["relres"],
-             "relres_leg226": t.get("relres"),
-             "relres_rel_err": rel_err(m["relres"], t.get("relres")),
-             "c_mine": m["c"], "c_leg226": t.get("c"),
-             "c_rel_err": rel_err(m["c"], t.get("c")),
-             "D3_mine": m["D3_farfield_inflation"], "D3_leg226": t.get("D3")}
-            for m, t in zip(v4_rows, t4["rows"])] if not FAST else "skipped(FAST)",
-    })
-    checkpoint("v4_grids")
+    if "m4_v4_grid_converged_a_max" not in data:
+        v4_ns = defs["v4_ns"] if not FAST else [101]
+        # Row-level resume: V4 is the longest arm (3 grids up to n=1601), so
+        # rows are banked as they land and re-used verbatim on a restart.
+        v4_rows = data.get("m4_partial_rows", [])
+        done = {(r["n"], r["a"]) for r in v4_rows}
+        if v4_rows:
+            print("[resume] v4: %d rows already banked" % len(v4_rows),
+                  flush=True)
+        for n in v4_ns:
+            for a in defs["v4_a_values"]:
+                if (n, a) in done:
+                    continue
+                v4_rows.append(cold_row(post, a, n, post))
+                print("   [v4] n=%d a=%.2f  relres %.3e  c %.16f  %.1f s"
+                      % (n, a, v4_rows[-1]["relres"], v4_rows[-1]["c"],
+                         v4_rows[-1]["secs"]), flush=True)
+                data["m4_partial_rows"] = v4_rows
+            checkpoint("v4_grids_n%d" % n)
+        # rows must be in v11's own (n outer, a inner) order for the row-wise
+        # comparison against leg 226's table to line up.
+        order = {(n, a): i for i, (n, a) in enumerate(
+            [(n, a) for n in v4_ns for a in defs["v4_a_values"]])}
+        v4_rows.sort(key=lambda r: order[(r["n"], r["a"])])
+        thr = defs["relres_threshold"]
+        mine4 = {"rows": v4_rows}
+        mine4["v11_own_test"] = v4_verdicts(
+            v4_rows, defs, lambda r: r["relres"] < thr)
+        mine4["repaired_verdict"] = v4_verdicts(
+            v4_rows, defs, lambda r: r["relres"] < thr and r["repaired_converged"])
+        data["m4_v4_grid_converged_a_max"] = mine4
+        data.pop("m4_partial_rows", None)
+        checkpoint("v4_rows_measured")
+        t4 = rep_d["grid_converged_a_max"]
+        mine4["comparison_to_leg226"] = safely(lambda: {
+            "banked": {"mine_reads": data["banked_v11_headlines"][
+                "grid_converged_a_max"], "leg226": t4["banked"]},
+            "pre_repair_rerun_accepted_only_convention": {
+                "mine": mine4["v11_own_test"]["grid_converged_a_max_accepted_only"],
+                "leg226": t4["pre_repair_rerun_here"],
+                "rel_err": rel_err(
+                    mine4["v11_own_test"]["grid_converged_a_max_accepted_only"],
+                    t4["pre_repair_rerun_here"])},
+            "post_repair_v11_own_test_accepted_only_convention": {
+                "mine": mine4["v11_own_test"]["grid_converged_a_max_accepted_only"],
+                "leg226": t4["post_repair_v11_own_relres_test"],
+                "rel_err": rel_err(
+                    mine4["v11_own_test"]["grid_converged_a_max_accepted_only"],
+                    t4["post_repair_v11_own_relres_test"])},
+            "post_repair_repaired_verdict_accepted_only_convention": {
+                "mine": mine4["repaired_verdict"][
+                    "grid_converged_a_max_accepted_only"],
+                "leg226": t4["post_repair_repaired_verdict"],
+                "rel_err": rel_err(
+                    mine4["repaired_verdict"]["grid_converged_a_max_accepted_only"],
+                    t4["post_repair_repaired_verdict"])},
+            "v11_LITERAL_convention_not_used_by_leg226": {
+                "v11_own_test": mine4["v11_own_test"]["grid_converged_a_max_v11_literal"],
+                "repaired_verdict": mine4["repaired_verdict"][
+                    "grid_converged_a_max_v11_literal"],
+                "note": "v11's own code spreads over ALL grids and counts only the "
+                        "converged ones; leg 226 took both over the accepted rows. "
+                        "Both are reported because they are different statistics."},
+            "per_row": [
+                {"n": m["n"], "a": m["a"], "relres_mine": m["relres"],
+                 "relres_leg226": t.get("relres"),
+                 "relres_rel_err": rel_err(m["relres"], t.get("relres")),
+                 "c_mine": m["c"], "c_leg226": t.get("c"),
+                 "c_rel_err": rel_err(m["c"], t.get("c")),
+                 "D3_mine": m["D3_farfield_inflation"], "D3_leg226": t.get("D3")}
+                for m, t in zip(v4_rows, t4["rows"])] if not FAST else "skipped(FAST)",
+        })
+        checkpoint("v4_grids")
 
     # -- M5: GA_boundary, the headline that cannot move ----------------------
     data["m5_GA_boundary"] = {
@@ -743,6 +791,14 @@ def main():
     checkpoint("GA_boundary")
 
     # -- the gate ------------------------------------------------------------
+    # Read every arm back out of `data`, not out of the locals that produced
+    # it: under PNRV_RESUME=1 some arms were measured in an earlier process and
+    # their locals do not exist here.  The banked JSON is the single source.
+    mine150 = data["m1_a_1p50_three_grids"]
+    rows150 = mine150["rows"]
+    t150 = rep_d["a_1p50_three_grids"]
+    mine3 = data["m2_v3_last_machine_precision_a"]
+    mine4 = data["m4_v4_grid_converged_a_max"]
     headline = {
         "a_max_machine": data["m3_v2_a_max_machine"]["comparison_to_leg226"],
         "last_machine_precision_a": mine3["comparison_to_leg226"],
