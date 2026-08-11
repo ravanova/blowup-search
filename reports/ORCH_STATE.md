@@ -19,7 +19,99 @@ legs that lose their slot are returned to the reserve queue, not cancelled as fi
 
 ---
 
-## Status: RUNNING — same orchestrator session, 2026-08-12, cycle 9f (four-slot contract,
+## Status: RUNNING — same orchestrator session, 2026-08-12, cycle 10d (four-slot contract,
+cycle-10 user decision packet COMPLETE AND RELEASED; user's post-S1 certification reframing
+executed as legs 348/349; leg 343 critical-path landing YES, B2 now dispatchable)
+
+`origin/main` at `0f6acf7` (leg 343's landing; the DM's cycle-10d ruling is at `5ff9bfd`), merge
+gate **PASS**. Roster: **A=335 S1GR** (still running, mid-diagnosis, waiting on a background
+diagnostic script — confirmed via its own transcript, not a stale "completed" task wrapper).
+**B=348 POCP** (dispatched, running in an isolated worktree — the user's §1 reframing leg: does
+periodic-orbit CAP for dissipative PDEs reach route 4's object). **C vacant** (343 DSSP-B1 landed
+`0f6acf7`, reported to the DM, awaiting refill ruling — B2 is expected next per the plan's own
+branching). **D=338 LCB1** (dispatched, running in an isolated worktree — light corrections batch,
+four named sites including the amended item (iv) covering 336's two flagged repeat sites).
+
+**Sequence since cycle 9f (all integrated cleanly, no conflicts, `origin/main` unmoved between
+integration and push each time):**
+- **DM cycle 10 (`ec462ee`)** absorbed 341/344/336, ruled ONE consolidated user decision packet
+  (ceiling S1-DIES answer + 342/344's ≈35-leg seed option on the corrected literature base +
+  route-4-continues-Tier-2 under standing authority), with leg 347 (DSSC) named as the packet's
+  final scheduled input. Refilled C←343 (critical path, precondition fired), B←347 (DSSC),
+  D←337 (C318) — firing the cycle-9e deadline. Requested isolated-worktree-per-leg as standard
+  practice, in direct response to leg 341's HEAD-move near miss; adopted immediately for all
+  dispatches from 343 onward.
+- **Leg 347 (DSSC) landed gate YES (`fb6bd4d`)** — screened all 12 objects arXiv:2509.14185
+  reports (3 CCF, 4 IPM, 5 Boussinesq) against leg 313's three-way screen object by object: 0/12
+  pass, 11/12 fail with named clauses, the 12th (unresolved 4th Boussinesq candidate) honestly
+  flagged incomplete/no-verdict. Zero cheap-entrance-shaped objects. The ≈35-leg creation-path
+  cost is unmoved; the risk record sharpens with object-level evidence of a
+  convergence-degrades-with-instability-order gradient, including one demonstrated
+  non-convergence case inside the module a DSS retarget would inherit from. Audited clean.
+- **The user's own message arrived mid-window: "AFTER S1's DEATH: the certification route,
+  reframed"** (2026-08-11, addressed to the DM). Reframes route 4's object as "not a profile in a
+  space" but "a periodic orbit of a dissipative PDE" (leg 260's own framing), naming mature,
+  never-touched-by-this-repo certification technology (Zgliczyński's self-consistent a-priori
+  bounds, Kuramoto-Sivashinsky/Arioli-Koch lines, Taylor-model flow-map enclosure, validated time
+  integration via arXiv:2305.08221) and asking whether it reaches route 4's actual object where
+  four profile-in-a-space certifications already died. Explicit guard: "the build is the next
+  ruling, not this leg's to start." Also proposes a non-blow-up GA fitness (NK-convergence) gated
+  entirely on the certification question, and records a reverse-engineered-fitness design as
+  blocked-on-348 with auto-pickup. Relayed to the DM in full; judged the DM's separately-requested
+  "one packet to the user" superseded by this message (it already showed full awareness of the
+  S1-DIES/seed-decision content), so no redundant packet was sent — explained transparently to the
+  user instead.
+- **DM cycle 10b (`67b108a`)** verified §0's factual claims first (leg 315's blocker confirmed
+  verbatim BCG-specific/hyperbolic-only; arXiv:2305.08221 confirmed already in the ledger; zero
+  in-repo prior art on Zgliczyński/Kuramoto/Arioli confirmed by grep) before drafting leg 348
+  (POCP, reserve rank 1, scoping-only, the user's "build is the next ruling" guard written
+  directly into the gate text) and leg 349 (GAFV, hard-gated on 348's report, NK-convergence
+  fitness-viability only, no GA compute on either branch).
+- **Leg 337 (C318) landed gate YES (`ce0e485`)** — re-measured leg 318's float64 mechanism
+  directly on the live scoping functions: `alpha_of` carries zero rounding error (exact by
+  Sterbenz's lemma), `r_crit` carries ≈0.88 ulp, amplified by δ_dis's sensitivity (1/alpha ≈
+  26.667), reproducing the observed residual. Corrected mechanism: 1 ulp amplified by 1/alpha —
+  NOT catastrophic cancellation; "leg 302's failure mode" label retracted as inapplicable. The
+  tautological control was rewritten falsifiable and re-run: passes for a real reason now.
+  Audited clean.
+- **DM cycle 10c (`7fcb66b`)** absorbed 347's YES without amendment and declared **THE CYCLE-10
+  USER DECISION PACKET COMPLETE AND RELEASED** — 347 was its final scheduled input. Drew an
+  explicit boundary: leg 348's future answer is a NEW decision item, not a late edit to this
+  packet. Refilled B←348 POCP (dispatched by the orchestrator immediately after integration).
+  Floor landed at 2/4 (348, 343) for a third consecutive cycle — noted openly by the DM as the
+  §3b minimum, the right shape while the corrections queue drains.
+- **Leg 337 (C318) audit reported to the DM; DM cycle 10d (`5ff9bfd`) absorbed it without
+  amendment** — the corrected ulp mechanism, the retracted "catastrophic cancellation"/leg-302
+  label, and the now-falsifiable-and-passing control all banked as reported. Cross-referenced one
+  lesson without minting a new rule: carrying a prior lesson's name onto a mechanism it doesn't
+  describe is the same mechanism-drift failure as closure #6 (leg 337 and leg 339 now jointly
+  witness it in the CORRECTIONS record). Refilled D←338 (LCB1, corrections rank 1, the cycle-10
+  item-(iv) amendment covering 336's two flagged repeat sites), dispatched by the orchestrator
+  immediately after integration. Floor restored to 4/4.
+- **Leg 343 (DSSP-B1, critical path) landed gate YES on both clauses (`0f6acf7`)** — "the space is
+  pinned, B2 proceeds." Consumed leg 341's S1-DIES verdict without re-litigating it, per the plan's
+  §2.9 branch B: the algebraically-weighted certificate space is dead, but §2.3's unweighted
+  vorticity/compactified-X space still stands for the search, and that is what B1 tested on its
+  own terms. Measured: the `2p+s>d` criterion made executable reproduces leg 313's s=1 crossing
+  and leg 331's measured tail exponents (all gaps <2%); the spectrum of `-Δ + ½(y·∇) + 1` on the
+  ℓ=0 radial channel, Chebyshev-collocated on leg 313's compactified variable, is measured
+  continuous — validated against a drift-0 analytic-null control and a planted Gaussian-well
+  positive control that converges a genuine isolated eigenvalue to 8 digits, proving the filter
+  can detect discrete spectrum. New figure fig91 shipped (genuine new measurement). Audited clean
+  (6 declared files, 778 insertions, 0 deletions). Reported to the DM; slot C now vacant, B2
+  expected next per the plan's own branching.
+
+**A fresh orchestrator reading this at Step 0b:** read this block, then the Environment notes,
+Known flakes and Incidents sections at the bottom of this file, then `PROGRESS.md`. Do not
+dispatch before Step 0b's own liveness sweep for unpushed local work. Check the DM for its refill ruling on slot C (343 landed; B2 is expected next per the plan's
+own branching) before dispatching into it yourself. Continue isolated-worktree-per-leg for every
+new dispatch. Watch for leg 335's actual completion — it has repeatedly emitted "completed"
+task-status wrappers while its own transcript shows it still mid-diagnosis waiting on a background
+script; do not treat the wrapper alone as a landing.
+
+---
+
+## Superseded status: RUNNING — same orchestrator session, 2026-08-12, cycle 9f (four-slot contract,
 user's ceiling-raising programme ANSWERED)
 
 `origin/main` at `30e376d`, merge gate **PASS**. **A=335 S1GR** (resolves the leg-221 flag/repair
