@@ -83,55 +83,92 @@
     "compactified_finite": true
   },
   "s3_regularity_of_the_far_field_block": {
+    "cost_scaling_exponent_q": 0.9540143412913629,
+    "cost_scaling_prefactor_C": 790.7087311475026,
+    "cost_scaling_max_rel_residual": 0.03923604963851447,
+    "EXTRAPOLATION_ONLY_modes_at_gclm_leading_kappa": 257466.25201502471,
+    "EXTRAPOLATION_CAVEAT": "430.35 is Route-I's leading |Im| in gCLM. Clause (b) of the ban's own lift condition states the gCLM reasons do NOT transfer to NS ('Nothing about NS. gCLM's scaling structure is not NS's'). This row is reported to show the cost of an import that is NOT licensed, and must not be quoted as an NS resolution requirement. The NS log-periodic frequency is UNKNOWN -- it is an output of the very search being scoped.",
     "physical_far_field_block": "r^{-1+i*kappa}",
     "compactified_far_field_block": "(1-X)^{1-i*kappa}",
     "identical_in_form_to_clause_a_difficulty": "X^{1-iy} (Route-E sec 4.1 / sec 26)",
-    "N_modes_used": 16384,
+    "N_modes_used": 1048576,
     "positive_control_smooth_modes_to_1e-13": 17,
     "positive_control_smooth_modes_to_1e-6": 10,
     "kappa0_control_terminates": true,
     "rows": {
       "kappa=0.0": {
-        "fitted_algebraic_rate_p": -0.0005012040944543575,
+        "fitted_algebraic_rate_p": 0.2749212354025368,
         "modes_for_rel_trunc_1e-6": 2,
         "modes_for_rel_trunc_1e-8": 2,
-        "rel_trunc_at_n=32": 7.209068345745446e-15,
-        "rel_trunc_at_n=256": 7.094815843297238e-15
+        "rel_trunc_at_n=32": 5.6094344058454313e-14,
+        "rel_trunc_at_n=256": 5.6046407845267825e-14
       },
       "kappa=1.0": {
-        "fitted_algebraic_rate_p": 2.999971575156412,
-        "modes_for_rel_trunc_1e-6": 822,
-        "modes_for_rel_trunc_1e-8": 7537,
-        "rel_trunc_at_n=32": 0.0006809377797361729,
-        "rel_trunc_at_n=256": 1.0353240174705957e-05
+        "fitted_algebraic_rate_p": 2.999980603112819,
+        "modes_for_rel_trunc_1e-6": 823,
+        "modes_for_rel_trunc_1e-8": "NOT QUOTED -- at N = 2^14 this column saturated against the array (n = 16332 of N = 16384); it is a statement about the array, not the object",
+        "rel_trunc_at_n=32": 0.0006809398614811502,
+        "rel_trunc_at_n=256": 1.0355323961715733e-05,
+        "modes_for_rel_trunc_1e-6_at_coarse_level": 823
       },
       "kappa=2.0": {
-        "fitted_algebraic_rate_p": 2.999811199816463,
-        "modes_for_rel_trunc_1e-6": 1477,
-        "modes_for_rel_trunc_1e-8": 11531,
-        "rel_trunc_at_n=32": 0.0022034418989819674,
-        "rel_trunc_at_n=256": 3.357653345064119e-05
+        "fitted_algebraic_rate_p": 2.999806117708522,
+        "modes_for_rel_trunc_1e-6": 1482,
+        "modes_for_rel_trunc_1e-8": "NOT QUOTED -- at N = 2^14 this column saturated against the array (n = 16332 of N = 16384); it is a statement about the array, not the object",
+        "rel_trunc_at_n=32": 0.002203448885950052,
+        "rel_trunc_at_n=256": 3.358353227960866e-05,
+        "modes_for_rel_trunc_1e-6_at_coarse_level": 1482
       },
       "kappa=5.0": {
-        "fitted_algebraic_rate_p": 2.998590578617194,
-        "modes_for_rel_trunc_1e-6": 3489,
-        "modes_for_rel_trunc_1e-8": 15475,
-        "rel_trunc_at_n=32": 0.012563886924209115,
-        "rel_trunc_at_n=256": 0.0001944263244120651
+        "fitted_algebraic_rate_p": 2.998586552001962,
+        "modes_for_rel_trunc_1e-6": 3564,
+        "modes_for_rel_trunc_1e-8": "NOT QUOTED -- at N = 2^14 this column saturated against the array (n = 16332 of N = 16384); it is a statement about the array, not the object",
+        "rel_trunc_at_n=32": 0.012563930162561805,
+        "rel_trunc_at_n=256": 0.00019447014516869662,
+        "modes_for_rel_trunc_1e-6_at_coarse_level": 3563
       },
       "kappa=10.0": {
-        "fitted_algebraic_rate_p": 2.9942569954133447,
-        "modes_for_rel_trunc_1e-6": 6534,
-        "modes_for_rel_trunc_1e-8": 16156,
-        "rel_trunc_at_n=32": 0.047071777945072224,
-        "rel_trunc_at_n=256": 0.0007679315437559126
+        "fitted_algebraic_rate_p": 2.9942568444699535,
+        "modes_for_rel_trunc_1e-6": 7086,
+        "modes_for_rel_trunc_1e-8": "NOT QUOTED -- at N = 2^14 this column saturated against the array (n = 16332 of N = 16384); it is a statement about the array, not the object",
+        "rel_trunc_at_n=32": 0.047071945719743574,
+        "rel_trunc_at_n=256": 0.0007681074588434422,
+        "modes_for_rel_trunc_1e-6_at_coarse_level": 7076
       },
       "kappa=20.0": {
-        "fitted_algebraic_rate_p": 2.9773263605696356,
-        "modes_for_rel_trunc_1e-6": 10841,
-        "modes_for_rel_trunc_1e-8": 16332,
-        "rel_trunc_at_n=32": 0.1559557196062254,
-        "rel_trunc_at_n=256": 0.0030520656138781775
+        "fitted_algebraic_rate_p": 2.97732620483335,
+        "modes_for_rel_trunc_1e-6": 14149,
+        "modes_for_rel_trunc_1e-8": "NOT QUOTED -- at N = 2^14 this column saturated against the array (n = 16332 of N = 16384); it is a statement about the array, not the object",
+        "rel_trunc_at_n=32": 0.15595631208384594,
+        "rel_trunc_at_n=256": 0.003052765479092975,
+        "modes_for_rel_trunc_1e-6_at_coarse_level": 14073
+      }
+    },
+    "resolution_study_1e-6_stability": {
+      "kappa=1.0": {
+        "modes_at_N_131072": 823,
+        "modes_at_N_1048576": 823,
+        "rel_change": 0.0
+      },
+      "kappa=2.0": {
+        "modes_at_N_131072": 1482,
+        "modes_at_N_1048576": 1482,
+        "rel_change": 0.0
+      },
+      "kappa=5.0": {
+        "modes_at_N_131072": 3563,
+        "modes_at_N_1048576": 3564,
+        "rel_change": 0.0002805836139169473
+      },
+      "kappa=10.0": {
+        "modes_at_N_131072": 7076,
+        "modes_at_N_1048576": 7086,
+        "rel_change": 0.0014112334180073384
+      },
+      "kappa=20.0": {
+        "modes_at_N_131072": 14073,
+        "modes_at_N_1048576": 14149,
+        "rel_change": 0.005371404339529295
       }
     },
     "route_I_leading_abs_imag": 430.35
@@ -145,15 +182,15 @@
     "leg260_rate": 5.416666666666667,
     "leg260_floor_legs": 27,
     "floor_moved_direction": "UP",
-    "far_field_modes_to_1e-6_worst_kappa": 10841,
+    "far_field_modes_to_1e-6_worst_kappa": 14149,
     "smooth_control_modes": 10,
-    "radial_resolution_penalty": 1084.1,
+    "radial_resolution_penalty": 1414.9,
     "dof_uniform_128cubed_x2": 4194304,
-    "dof_with_measured_far_field_radial": 355237888,
-    "dof_ratio_vs_uniform": 84.6953125,
+    "dof_with_measured_far_field_radial": 463634432,
+    "dof_ratio_vs_uniform": 110.5390625,
     "phase1_viscous_rung_dof": 20000,
     "phase1_viscous_rung_hours_single_cpu": 14.0,
-    "dof_ratio_vs_phase1": 17761.8944
+    "dof_ratio_vs_phase1": 23181.7216
   },
   "named_mechanism": "THE LOG-PERIODIC BLOCK'S REGULARITY DEFECT IS AN INVARIANT OF THE ENTRANCE, NOT A PROPERTY OF THE DOMAIN'S FAR END. The compactification X = |y|/(1+|y|) that makes the Type-I profile's norm FINITE carries the far-field block r^{-1+i*kappa} to (1-X)^{1-i*kappa} -- the identical functional form to clause (a)'s recorded gCLM difficulty X^{1-iy}, at the opposite end of the domain. Seeding dissolves all four of leg 260's sec 3.4 reasons; it does not dissolve this, because this is not a statement about the seed.",
   "walls": {
@@ -261,12 +298,17 @@
     {
       "name": "S3.1b the discarded symmetric control is retained and shown to be degenerate: its odd coefficients vanish for a SYMMETRY reason, not a smoothness one",
       "pass": true,
-      "detail": "max odd |a_n| of exp(-8(X-1/2)^2) over n<200 is 4.205e-17 -- this is why it was not usable as the control"
+      "detail": "max odd |a_n| of exp(-8(X-1/2)^2) over n<200 is 4.234e-17 -- this is why it was not usable as the control"
     },
     {
       "name": "S3.2 kappa=0 control terminates (the exponent 1-i*kappa is a polynomial at kappa=0, so the defect must vanish there -- and it does)",
       "pass": true,
-      "detail": "max|a_n| for n>=3 is 2.082e-17"
+      "detail": "max|a_n| for n>=3 is 5.551e-17"
+    },
+    {
+      "name": "S3.7 resolution study: at the chosen N = 2^20 the 1e-6 mode counts are stable to <5% against the 8x-coarser N = 2^17 level, so they measure the OBJECT and not the array (they were NOT at N = 2^14 -- see the docstring)",
+      "pass": true,
+      "detail": "kappa=1.0: 823->823 (0.0%); kappa=2.0: 1482->1482 (0.0%); kappa=5.0: 3563->3564 (0.0%); kappa=10.0: 7076->7086 (0.1%); kappa=20.0: 14073->14149 (0.5%)"
     },
     {
       "name": "S3.3 every kappa != 0 decays ALGEBRAICALLY, fitted rate in (2, 4) -- not geometrically, unlike the smooth control",
@@ -276,12 +318,17 @@
     {
       "name": "S3.4 the cost to 1e-6 is monotone increasing in kappa (the defect gets WORSE as the log-periodic frequency rises)",
       "pass": true,
-      "detail": "modes 822, 1477, 3489, 6534, 10841"
+      "detail": "modes 823, 1482, 3564, 7086, 14149"
     },
     {
       "name": "S3.5 at the SAME 1e-6 tolerance on the SAME instrument, the smooth control is >= 10x cheaper than the cheapest kappa != 0 case",
       "pass": true,
-      "detail": "control needs n=10 for 1e-6; cheapest kappa!=0 needs n=822, worst n=10841 -- separation 82.2x"
+      "detail": "control needs n=10 for 1e-6; cheapest kappa!=0 needs n=823, worst n=14149 -- separation 82.3x"
+    },
+    {
+      "name": "S3.6 the cost-to-1e-6 follows a clean power law in kappa across the measured rows (max rel residual < 0.15) -- a SHAPE, not an endpoint (lesson 72)",
+      "pass": true,
+      "detail": "n(kappa) ~ 791 * kappa^0.954, max rel residual 0.039"
     },
     {
       "name": "S4.1 capabilities.py index read live, not hardcoded",
@@ -296,8 +343,8 @@
     {
       "name": "S4.3 the far-field resolution penalty is a real multiplier, not a rounding",
       "pass": true,
-      "detail": "1084.10x modes vs the smooth control"
+      "detail": "1414.90x modes vs the smooth control"
     }
   ],
-  "selftests_passed": "27/27"
+  "selftests_passed": "29/29"
 }

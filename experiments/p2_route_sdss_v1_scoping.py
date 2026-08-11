@@ -262,7 +262,9 @@ def tail_truncation_error(absc):
 
 
 def s3_regularity() -> dict:
-    N = 1 << 14                                    # 16384 modes; seconds to compute
+    N = 1 << 20        # 1,048,576 modes.  Chosen by the resolution study below:
+                       # at N = 2^14 the kappa = 20 row moved 29.8% under an 8x
+                       # refinement, i.e. it was measuring the ARRAY, not the object.
     results = {}
 
     # POSITIVE CONTROL: a smooth (entire) function must show geometric decay.
@@ -324,6 +326,38 @@ def s3_regularity() -> dict:
             "rel_trunc_at_n=256": float(rel[256]),
         }
 
+    # RESOLUTION STUDY.  The truncation tails are computed from a finite coefficient
+    # array, so a reported "modes for 1e-8" that sits near N is measuring the ARRAY, not
+    # the object (this leg's first draft quoted a 1e-8 column that saturated at
+    # n = 16332 with N = 16384 -- discarded, and the reason kept here).  The 1e-6 column
+    # is re-measured at 8x the resolution and required to be stable.
+    N2 = 1 << 17   # the COARSE level, compared against the N = 2^20 primary
+    stability = {}
+    for kap in kappas:
+        if kap == 0.0:
+            continue
+        f = lambda X, kap=kap: np.exp((1.0 - 1j * kap) * np.log(np.maximum(1.0 - X, 1e-300)))
+        a2 = cheb_coeffs(f, N2)
+        rel2 = tail_truncation_error(a2) / float(tail_truncation_error(a2)[0])
+        idx = np.argmax(rel2 < 1e-6)
+        n2 = int(idx) if rel2[idx] < 1e-6 else -1
+        n1 = results[f"kappa={kap}"]["modes_for_rel_trunc_1e-6"]
+        stability[f"kappa={kap}"] = {
+            "modes_at_N_131072": n2, "modes_at_N_1048576": n1,
+            "rel_change": abs(n2 - n1) / float(n1) if n1 > 0 else float("nan"),
+        }
+        results[f"kappa={kap}"]["modes_for_rel_trunc_1e-6_at_coarse_level"] = n2
+        # The 1e-8 column saturated against N and is NOT reported as a resolved number.
+        results[f"kappa={kap}"]["modes_for_rel_trunc_1e-8"] = (
+            "NOT QUOTED -- at N = 2^14 this column saturated against the array "
+            "(n = 16332 of N = 16384); it is a statement about the array, not the object")
+    check("S3.7 resolution study: at the chosen N = 2^20 the 1e-6 mode counts are "
+          "stable to <5% against the 8x-coarser N = 2^17 level, so they measure the "
+          "OBJECT and not the array (they were NOT at N = 2^14 -- see the docstring)",
+          all(v["rel_change"] < 0.05 for v in stability.values()),
+          "; ".join(f"{k}: {v['modes_at_N_131072']}->{v['modes_at_N_1048576']} "
+                    f"({100 * v['rel_change']:.1f}%)" for k, v in stability.items()))
+
     nonzero = [v for k, v in results.items() if k != "kappa=0.0"]
     rates = [v["fitted_algebraic_rate_p"] for v in nonzero]
     check("S3.3 every kappa != 0 decays ALGEBRAICALLY, fitted rate in (2, 4) -- not "
@@ -348,7 +382,37 @@ def s3_regularity() -> dict:
           f"control needs n={n_ctrl_6} for 1e-6; cheapest kappa!=0 needs n={min(n6)}, "
           f"worst n={max(n6)} -- separation {sep:.1f}x")
 
+    # How the cost scales in the log-periodic frequency.  Fitted on the MEASURED rows
+    # only (kappa = 1..20); anything beyond is labelled an extrapolation and is NOT an
+    # NS number -- clause (b) forbids importing gCLM's frequency into NS, and the
+    # extrapolation below is reported precisely to show what such an import would cost
+    # if it were legitimate, which it is not.
+    ks = np.array([k for k in kappas if k > 0.0])
+    ns = np.array([results[f"kappa={k}"]["modes_for_rel_trunc_1e-6"] for k in ks],
+                  dtype=float)
+    q, logC = np.polyfit(np.log(ks), np.log(ns), 1)
+    fit_pred = np.exp(logC) * ks ** q
+    fit_relerr = float(np.max(np.abs(fit_pred - ns) / ns))
+    check("S3.6 the cost-to-1e-6 follows a clean power law in kappa across the measured "
+          "rows (max rel residual < 0.15) -- a SHAPE, not an endpoint (lesson 72)",
+          fit_relerr < 0.15,
+          f"n(kappa) ~ {np.exp(logC):.0f} * kappa^{q:.3f}, max rel residual "
+          f"{fit_relerr:.3f}")
+    kappa_gclm = 430.35
+    extrap = float(np.exp(logC) * kappa_gclm ** q)
+
     return {
+        "cost_scaling_exponent_q": float(q),
+        "cost_scaling_prefactor_C": float(np.exp(logC)),
+        "cost_scaling_max_rel_residual": fit_relerr,
+        "EXTRAPOLATION_ONLY_modes_at_gclm_leading_kappa": extrap,
+        "EXTRAPOLATION_CAVEAT": (
+            "430.35 is Route-I's leading |Im| in gCLM. Clause (b) of the ban's own lift "
+            "condition states the gCLM reasons do NOT transfer to NS ('Nothing about NS. "
+            "gCLM's scaling structure is not NS's'). This row is reported to show the "
+            "cost of an import that is NOT licensed, and must not be quoted as an NS "
+            "resolution requirement. The NS log-periodic frequency is UNKNOWN -- it is "
+            "an output of the very search being scoped."),
         "physical_far_field_block": "r^{-1+i*kappa}",
         "compactified_far_field_block": "(1-X)^{1-i*kappa}",
         "identical_in_form_to_clause_a_difficulty": "X^{1-iy} (Route-E sec 4.1 / sec 26)",
@@ -357,6 +421,7 @@ def s3_regularity() -> dict:
         "positive_control_smooth_modes_to_1e-6": n_ctrl_6,
         "kappa0_control_terminates": terminates,
         "rows": results,
+        "resolution_study_1e-6_stability": stability,
         "route_I_leading_abs_imag": 430.35,
     }
 

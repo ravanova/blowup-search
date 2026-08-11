@@ -317,6 +317,7 @@ P2_EVIDENCE = [
     "../experiments/p2_route_cadx_v1_scope.py",                 # fig67 -- Route-CADX v1 (leg 304)
     "../experiments/p2_route_gaf_v1_sweep_evidence.py",         # fig71 -- Route-GAF v1 (leg 303), renumbered from fig68
     "../experiments/p2_route_dfre_v1_evidence.py",              # fig74 -- Route-DFRE v1 (leg 316), renumbered from fig71
+    "../experiments/p2_route_sdss_v1_evidence.py",              # fig76 -- Route-SDSS v1 (leg 313)
 ]
 
 
