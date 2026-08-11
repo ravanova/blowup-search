@@ -115,9 +115,23 @@ Naming the constant is not the realization; naming *why* it is the one is. At `�
 lower endpoint is the root of `2 − r + (1/α)(1−r)`, and `c_lap = 2` is the `2` in that
 expression. It is not an estimate, a Sobolev constant, or a bookkeeping convenience. It is the
 number of spatial derivatives in `νΔ`, entering through the parabolic scaling of the
-Laplacian under BCG's self-similar change of variables. Its width elasticity is the largest of
-any constant — `−13.708%` of the window per `1%` move — precisely because it is the additive
-constant term of the exponent rather than a coefficient of `r`.
+Laplacian under BCG's self-similar change of variables. Its width elasticity is `−13.708%` of
+the window per `1%` move, precisely because it is the additive constant term of the exponent
+rather than a coefficient of `r`.
+
+**[CORRECTED 2026-08-12, leg 336, measured against this leg's own ledger JSON
+(`writeup/data/p2_route_dwm_v1.json`, `ledger[]`, field `M2_pct_of_window_per_1pct`).]** The
+sentence originally read *"Its width elasticity is the largest of any constant — `−13.708%` of
+the window per `1%` move"*. That is **false on the ledger's own metric**: `C9_a1`'s elasticity is
+`M2_pct_of_window_per_1pct = −31.058%`, `2.27×` larger in magnitude than `C1`'s `−13.708%`. The
+table above prints `—` for `C5`–`C11` because their *reachable* `move_to_close` is undefined
+(their far side is capped) — but the JSON still computes a one-sided `M2` elasticity for every
+row from whichever perturbation direction is non-flat, and on that column `C1` is not the
+largest; `C9_a1` is (`|−31.058|`), ahead of `C1` (`|−13.708|`), `C8_a2`'s and `C10_a0`'s and
+`C6_c_lin`'s and `C5_c4`'s and `C7_R2scale`'s rows (all smaller in magnitude). `C1_c_lap` remains
+the costliest constant **only under the pre-registered rule stated above (smallest
+`|move_to_close|`), which is a narrower and different metric than elasticity** — see §6 for
+whether the SHARP verdict depends on either claim.
 
 Its `move_to_close` has a closed form, and the runner's bisected value agrees with it to `1e-40`:
 
@@ -153,23 +167,50 @@ maximum of every one of these seven one-parameter families.**
 The measurement that establishes this, rather than asserting it, is the response exponent. The
 runner perturbs by `ε = 1e-5` and `1e-6` and fits `|ΔW| ∼ ε^p`:
 
-* all seven capped rows: `p = 1.996…–1.9996`, i.e. **`p = 2`** — a *stationary* maximum, not a
-  kink;
+* six of the seven capped rows (`C5`–`C10`): `p = 1.996…–1.9996`, i.e. **`p = 2`** — a
+  *stationary* maximum, not a kink;
 * the four uncapped rows: `p = 0.9999…–1.0`, i.e. `p = 1`, as an ordinary derivative should be.
+
+**[CORRECTED 2026-08-12, leg 336, measured against `ledger[]` fields `scaling_exponent_up` /
+`scaling_exponent_dn` in `writeup/data/p2_route_dwm_v1.json`.]** The bullet originally read *"all
+seven capped rows"*. `C11_aR1` is capped (`capped_r_star_at_a_maximum: true`) but reports
+`scaling_exponent_up = scaling_exponent_dn = "flat"` — **neither** side shows the `p ≈ 2`
+response; both are identically flat. `C11_aR1` is not a seventh instance of the `p = 2`
+phenomenon; see the T6 correction below for the adjudication (inert-by-construction, not missing
+data).
 
 `p = 2` is forced by the geometry: `D_{Z,1}` meets zero at the edge with a **vertical** tangent,
 because `R₁ ∼ √(edge − r)` there, so an `O(ε)` perturbation of any constant inside `D_{Z,1}`
-moves the endpoint only by `O(ε²)`.
+moves the endpoint only by `O(ε²)`. `C11_aR1`'s row multiplies `R₁` itself, which **is** the
+quantity that vanishes at `r*` (`R₁_radicand_at_r_star ≈ 0`, `structural_findings` in the JSON);
+its term is `R₁ × (polynomial)`, and `R₁ = 0` at the evaluation point regardless of how the
+polynomial factor is perturbed, so the row measures a derivative of a term that is identically
+zero at `r*` — a different, degenerate case from the six genuine `p = 2` rows, not a data gap.
 
 ### A pre-registered tolerance that failed, reported rather than smoothed
 
 Tolerance **T6** (elasticity linearity: the central-difference `dW/dln c` at `ε = 1e-5` versus
 `ε = 1e-6`, relative deviation `≤ 1e-4`) **FAILS**, and it is reported as failing. T6 was
-pre-registered as a non-gate-triggering diagnostic, and the diagnosis is exact: for the seven
-capped rows, the central difference is itself `O(ε)` because one side is flat and the other is
-quadratic, so halving `ε` halves it and the relative deviation is exactly `0.9`. Measured:
-`0.8991`–`0.8999` for all seven. An additional check declared as additional, **T6b**, applies
-the same test to the four uncapped rows and passes at `~9e-15`.
+pre-registered as a non-gate-triggering diagnostic, and the diagnosis is exact: for six of the
+seven capped rows, the central difference is itself `O(ε)` because one side is flat and the
+other is quadratic, so halving `ε` halves it and the relative deviation is exactly `0.9`.
+Measured: `0.8991`–`0.8999` for those six. An additional check declared as additional, **T6b**,
+applies the same test to the four uncapped rows and passes at `~9e-15`.
+
+**[CORRECTED 2026-08-12, leg 336, measured against `ledger[]` field `M1_linearity_rel_dev` in
+`writeup/data/p2_route_dwm_v1.json`.]** The passage originally read *"for the seven capped rows
+… Measured: `0.8991`–`0.8999` for all seven"*. `C11_aR1`'s `M1_linearity_rel_dev` is `0E-54` —
+exactly zero, not `≈0.899` — because both its one-sided derivatives (`M1_one_sided_up`,
+`M1_one_sided_dn`) are themselves exactly `0`, not merely small. **Adjudication: this is
+inert-by-construction, not missing or broken data.** `C11_aR1`'s row is `R₁ × (9(γ−2)γ +
+((2−3γ)γ+5)r + 5)`, and `R₁ = 0` at `r = r*` by the structural finding above (`R₁` radicand
+`≈ 3E-59`, i.e. `R₁` itself vanishes there — this is the same fact that *defines* `r*` as the
+saddle-node). Perturbing the polynomial factor by `±ε` multiplies a zero by `(1±ε)`, which stays
+exactly zero to the runner's precision; there is no missing measurement, no broken perturbation,
+and no undetected response — the term genuinely contributes nothing to `dW` at `r*`, unlike the
+other six capped rows, whose one-sided derivatives are small but nonzero (Lesson 90 tell: `C11`
+is a control that structurally cannot come out differently, which is exactly why it does not
+belong to the "seven" count).
 
 So T6's failure is not an arithmetic defect. It is the numerical signature of BCG's constants
 sitting at a stationary maximum of `r*` — the same finding as the previous subsection, arriving
@@ -214,6 +255,15 @@ constant *in this argument*. It does **not** say the deficit is irreducible: a d
 argument — one that does not route the viscous term through pointwise domination by the
 self-similar profile at all — is untouched by this ledger. Measuring the shape of an obligation
 is not discharging it.
+
+**[ADDED 2026-08-12, leg 336.]** The verdict above depends only on the `M4_class` field of all
+eleven rows (`EXACT_IDENTITY`, unanimous) and on `move_to_close`. **Neither correction in §4
+touches either input.** The elasticity correction (`C9_a1` at `−31.058%`, not `C1` at `−13.708%`,
+is the largest-magnitude `M2_pct_of_window_per_1pct`) does not change any row's `M4_class`, and
+`C1_c_lap` is unaffected as *costliest-by-`move_to_close`* because that metric was never
+elasticity to begin with. The `C11_aR1` all-zero-row adjudication (inert-by-construction, not
+missing data) removes one row from the "seven capped `p ≈ 2` / T6 `≈0.899`" count but changes no
+row's `M4_class` and adds no `ESTIMATE`. **The SHARP verdict is UNMOVED by both corrections.**
 
 ## 7. Relation to leg 315 (Route-TMS)
 

@@ -1224,3 +1224,100 @@ locator; if either is wrong, this entry inherits the error. **1 prose site corre
 touched**, `plan_of_record.py` byte-identical and staying so, `DIRECTION.md` not edited. No link
 of the `L1 → L4` chain moved. Clay stays **~0.05%**. The net effect is that one fewer thing is
 believed than yesterday, which is the only kind of progress this register records.
+
+## §18 — leg 305's landed prose: two claim-bearing corrections, measured against its own ledger JSON
+
+**Dispatch: leg 336 (Route-C305).** Territory: the named claim sites in
+`writeup/4_p2_lottery/TECHNICAL_P2_ROUTEDWM_V1.md` and `BLOG_P2_ROUTEDWM_V1.md`, this entry, and
+an appended note in `experiments/journal/leg_305.md`. `writeup/data/p2_route_dwm_v1.json` was
+read, never edited.
+
+### 18.1 Claim A — "C1 has the largest elasticity" (false)
+
+Both landed surfaces (`TECHNICAL_P2_ROUTEDWM_V1.md` §4, `BLOG_P2_ROUTEDWM_V1.md`, and leg 305's
+own journal §13) asserted that `C1_c_lap`'s elasticity, `−13.708%` of the window per `1%` move,
+was the **largest** of any constant in the ledger. Measured directly against the ledger's own
+`M2_pct_of_window_per_1pct` field (`writeup/data/p2_route_dwm_v1.json`, `ledger[]`):
+
+| constant | `M2_pct_of_window_per_1pct` | `|·|` |
+|---|---|---|
+| `C9_a1` | `−31.058%` | **largest** |
+| `C1_c_lap` | `−13.708%` | second |
+| `C4_alpha` | `−5.702%` | |
+| `C7_R2scale` | `−4.588%` | |
+| `C2_c_r` | `+7.983%` | |
+| `C3_c_dens` | `+5.665%` | |
+| `C6_c_lin` | `−1.172%` | |
+| `C5,C8,C10` | `0%` (flat side, per how `M2` is defined) | |
+| `C11_aR1` | `0%` (see §18.2 — degenerate, not a genuine flat) | |
+
+`C9_a1` is `2.27×` `C1_c_lap`'s magnitude. **`C1_c_lap` remains "the costliest constant" only
+under leg 305's separately pre-registered rule — smallest `|move_to_close|` — which is a
+different metric than elasticity and was never claimed to be the same thing; the two rows'
+prose conflated the two by calling `C1` both "costliest" and "the single most sensitive knob" /
+"largest elasticity" in the same breath.** The `move_to_close` ranking is unaffected: `C1` at
+`−42.705%` is still the smallest-magnitude reachable move, ahead of `C2` (`+83.383%`), `C4`
+(`−87.539%`), `C3` (`+702.492%`), with `C5`–`C11` unreachable.
+
+### 18.2 Claim B — "all seven capped rows" (holds for six)
+
+The same three surfaces asserted the `p ≈ 2` stationary-maximum response exponent and the T6
+linearity-tolerance failure (`relative deviation ≈ 0.899`) held for **all seven** capped rows
+(`C5`–`C11`). Measured against `scaling_exponent_up`/`_dn` and `M1_linearity_rel_dev`:
+
+* `C5_c4`, `C6_c_lin`, `C7_R2scale`, `C8_a2`, `C9_a1`, `C10_a0` — genuine: one-sided exponent
+  `≈ 1.996`–`1.9996` ("`p ≈ 2`"), `M1_linearity_rel_dev` `0.8991`–`0.8999`.
+* `C11_aR1` — **not** genuine: both `scaling_exponent_up` and `scaling_exponent_dn` are `"flat"`,
+  and `M1_linearity_rel_dev = 0E-54` exactly (not `≈0.899`), because both one-sided derivatives
+  (`M1_one_sided_up`, `M1_one_sided_dn`) are exactly `0`.
+
+**Adjudication: `C11_aR1` is inert-by-construction, not missing or broken data.** `C11_aR1`'s
+row is the term `R₁ × (9(γ−2)γ + ((2−3γ)γ+5)r + 5)` in BCG's `R₂` (`eq:def_R2` l.550). The JSON's
+own `structural_findings.R1_radicand_at_r_star ≈ 3E-59` records that `R₁` itself vanishes at
+`r = r*` — the same fact that makes `r*` the `P_s`/`P̄_s` saddle-node in the first place (§4/§14
+of the technical companion and journal). Perturbing the polynomial factor multiplying `R₁` by
+`(1 ± ε)` multiplies an exact zero, which stays exactly zero; there is no undetected response to
+measure, no broken perturbation script, and no data the runner failed to collect. This is
+distinct from the six genuine capped rows, whose one-sided derivatives are small (`1e-4`–`1e-6`
+scale) but strictly nonzero — a real, measured cap, not an identity. Lesson 90 applies directly:
+a row whose both perturbation directions report bit-identical zero is a control that cannot come
+out differently, and the tell (an exact `0` rather than a decaying-but-present quantity)
+distinguishes "the geometry forces this to vanish" from "the instrument never fired."
+
+### 18.3 SHARP verdict: dependence stated explicitly, UNMOVED by both
+
+The SHARP_FOR_BCG_ARGUMENT_AS_STATED verdict (leg 305, banked, fig82) rests on two facts alone:
+(i) every one of the eleven ledger rows classifies `M4_class = EXACT_IDENTITY`, and (ii) the
+smallest-`|move_to_close|` rule names `C1_c_lap` as costliest, with no row classified
+`ESTIMATE`. **Neither correction above touches `M4_class` for any row, introduces an `ESTIMATE`,
+or changes which constant has the smallest `|move_to_close|`.** Claim A corrects which constant
+is *most elastic* — a quantity the sharp/slack rule never used. Claim B corrects a count from
+seven to six and adjudicates the seventh — a diagnostic (T6) that was pre-registered as
+non-gate-triggering in leg 305's own text and stayed non-gate-triggering. **The SHARP verdict is
+UNMOVED.**
+
+### 18.4 Downstream consumers flagged
+
+`writeup/4_p2_lottery/TECHNICAL_P2_ROUTEDWM_V1.md` §7 (leg 315 cross-reference) and any future
+leg quoting "the costliest constant" or "the largest elasticity" from leg 305 should read `C1`
+as costliest **by `move_to_close` only**; the elasticity superlative belongs to `C9_a1`. A sweep
+(`grep -rln "largest elasticity\|most sensitive knob\|all seven capped\|0.899.*all seven"`,
+excluding worktrees) found the "largest elasticity" clause repeated at two further sites outside
+this leg's declared territory: `experiments/JOURNAL.md:5018` and `writeup/INDEX.md:124` (both
+integration ledgers, not this leg's to edit — same discipline as leg 339's flag-not-prescribe
+treatment of `DIRECTION.md` sites in §17.4). **Flagged here, not corrected**: both repeat "largest
+elasticity (`−13.708%` window per 1%)" for `C1_c_lap`, which this entry's §18.1 has now measured
+false against the source ledger. Neither site repeats the "all seven capped" wording verbatim
+(`INDEX.md`'s summary omits the T6 detail entirely). Whoever owns `experiments/JOURNAL.md` and
+`writeup/INDEX.md` should apply the same correction: `C9_a1` at `−31.058%`, not `C1` at
+`−13.708%`, is the largest-magnitude elasticity in the ledger.
+
+### The ceiling
+
+**0 numbers re-derived** — every value above is quoted from `writeup/data/p2_route_dwm_v1.json`,
+which this leg read and did not edit. **5 prose sites corrected in place** (`TECHNICAL_P2_ROUTEDWM_V1.md`
+§4 ×2, §6 ×1 addition; `BLOG_P2_ROUTEDWM_V1.md` ×2; `experiments/journal/leg_305.md` §22
+appended), **0 gate answers changed**, **0 bans touched**, `plan_of_record.py` and `DIRECTION.md`
+untouched, `writeup/data/p2_route_dwm_v1.json` untouched. No link of the `L1 → L4` chain moved.
+Clay odds stay **~0.05%**. The SHARP verdict for leg 305's argument stands, now resting on the
+same two facts it always rested on, described correctly.

@@ -61,9 +61,17 @@ banked values, and against the paper's closed form to **exactly zero** across tw
 derivative counts, the ideal-gas exponent, and polynomial coefficients of a discriminant. There
 is no padding to squeeze, because there is nothing in the derivation that was ever a choice.
 
-**The costliest constant is the `2` in the Laplacian.** It is the single most sensitive knob —
-each 1% you move it changes the band by 13.7% — and it needs the smallest move to close the gap:
-**−42.7%**, from `2` down to `1.145898`, which is exactly `(9 − 3√5)/2`.
+**The costliest constant is the `2` in the Laplacian.** Each 1% you move it changes the band by
+13.7%, and it needs the smallest move of any constant to close the gap: **−42.7%**, from `2`
+down to `1.145898`, which is exactly `(9 − 3√5)/2`.
+
+**[CORRECTED 2026-08-12, leg 336, measured against the ledger JSON.]** This paragraph originally
+called `c_lap` "the single most sensitive knob." It is not: another constant in the ledger,
+`a₁` (the radicand's `r`-coefficient in the upper-endpoint machinery), moves the band `31.058%`
+per `1%` move — more than double `c_lap`'s `13.708%`. `c_lap` is still the constant that needs
+the *smallest* move to close the gap, which is a different measurement (see the technical
+companion, §4, for both numbers and why "costliest" was always defined by that one, not by
+sensitivity).
 
 And that is the punchline, because `2` is *the number of spatial derivatives in `Δ`*. Moving it
 to `1.145898` means replacing viscosity `νΔ` with **hypodissipation** `ν(−Δ)^s` at
@@ -75,7 +83,13 @@ machinery came back *unreachable*, and the reason turned out to be geometric: `r
 where two points of the phase portrait collide and stop existing. It is a discriminant, not an
 estimate of a threshold. You can push the upper endpoint down; nothing pushes it up. We measured
 this rather than assumed it — perturb by `ε` and the endpoint moves by `ε²`, the signature of
-sitting exactly at a stationary maximum, and it came out at `p = 2.00` on all seven.
+sitting exactly at a stationary maximum, and it came out at `p = 2.00` on six of the seven.
+
+**[CORRECTED 2026-08-12, leg 336.]** The seventh, a composite term that multiplies the very
+quantity (`R₁`) that vanishes at the endpoint, measured *identically* zero on both sides — not
+approximately flat like the other six, but exactly zero, because zero times any perturbed factor
+is still zero. That is a different, degenerate case (adjudicated in the technical companion, §4,
+as inert-by-construction, not a data gap), so "all seven" is corrected to "six of the seven."
 
 There is also a counting version of the same gap. The paper's admissible speeds are not a
 continuum — they are a discrete list `r₃, r₅, r₇, …`. Sixteen of them fall below the dominance
@@ -90,7 +104,8 @@ easy to quietly restrict it to the constants where it worked.
 Instead we chased it, and it turned out to be the finding arriving a second time by a different
 route. When a quantity sits at a stationary maximum, its two-sided derivative is proportional to
 your step size, so halving the step halves the answer and the "relative deviation" is exactly
-`0.9`. We measured `0.899` on all seven affected constants. The failing tolerance was reporting
+`0.9`. We measured `0.899` on six of the seven affected constants — the seventh reported exactly
+`0`, the exact-zero row described above, not a near-miss. The failing tolerance was reporting
 the flatness we had just discovered. We left it recorded as failed, added a separate check
 *declared as separate*, and wrote down why.
 
