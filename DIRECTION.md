@@ -31,8 +31,8 @@ prose as before.
 | C | 323 | CENV | yes |
 | D | 313 | SDSS | yes |
 | E | 314 | FUS | yes |
-| F | 317 | SFTX | yes |
-| G | 320 | MTSC | yes |
+| F | 315 | TMS | yes |
+| G | 305 | DWM | yes |
 | H | 229 | PNRV | no |
 | I | 292 | CAPA | no |
 | J | 287 | EPA | no |
@@ -44,10 +44,14 @@ C/323/CENV, D/313/SDSS, E/314/FUS, F/317/SFTX, G/320/MTSC. Cycle-4 headline: 309
 own eq. 18 construction); the Grade-A/fluid cell STAYS EMPTY, Phase 1's premise
 stands, no L1-L4 link moved. 302 NO: A4 transcription proven right, IEEE-double
 ill-conditioned (KA8 129x) — 308 re-scoped onto 312's capability, 285 spec flagged
-(addendum leg 324). §0c still gated on 323 (live, slot C). Reserve count 17: 315,
-318, 322, 324, 293, 298, 299 dispatchable now (7 total); 321/305/306 on 319's
-merge; 308 on 312; 307 on 221; 310 on 287+298; 231-234 blocked. Next fresh leg
-number: 325.)
+(addendum leg 324). §0c still gated on 323 (live, slot C). Cycle 4c: 320 YES
+escalated (leg/320-mtsc-v1 at 79fea23, unmerged — MT evades all three deaths on
+paper; user's ruling pending; ban untouched); 317 NO (folklore — lane 7 CLOSED,
+PUB must cite not claim); G now 305 DWM. MT build brick 1 drafted as USER-GATED
+reserve leg 325 (dispatches only on the user's 320 ruling + 312 landed). Reserve
+count 15: 306, 318, 324, 322, 293, 298, 299 dispatchable now (7, rank order as
+listed, all §3a pre-authorised); 325 user-gated; 307 on 221; 308 on 312; 310 on
+287+298; 231-234 blocked. Next fresh leg number: 326.)
 
 ---
 
@@ -14406,3 +14410,151 @@ Next fresh leg number: **325.**
 Nothing here lifts a ban. The refutation is not movement toward Clay — no L1→L4
 link moved; the cell staying empty preserves Phase 1's premise, it does not advance
 it. Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 4b) — 315 DISPATCH CONFIRMED; 319's MERGE FIRES
+305/306; NEXT NAMES IN RANK, ALL §3a PRE-AUTHORISED
+
+**Absorbed:** 319 landed f213be7 (5/7 complete per the immutable-gate ruling); 321
+YES landed cc1c98d (L102 0.0420→0.057643, L108 convention-free to 1.87e-16, the two
+gate-text sites confirmed UNEDITED, diff-check delivered: 9/3 confined, CORRECTIONS
+§16 after checking §15). F←321→landed→F←315 TMS: **the 315 dispatch was exactly the
+contingency this DM pre-ruled — confirmed, no disagreement.** The
+verify-section-number-first habit (three legs running) is endorsed as practice.
+
+**Queue consequence of 319's merge, stated because nobody should infer it: 305 DWM
+and 306 SSE's preconditions are now TRUE.** Both dispatch as written — 305 under its
+cycle-2 amendment (6.854 closed form, (7+3√5)/2; endpoints unchanged; amended
+no-branch) which IS the operative spec.
+
+### Next names in rank (all §3a pre-authorised — preconditions read entirely true,
+no ban contact, no broken assumptions; dispatch as written without a round trip):
+
+1. **305 DWM** (per-constant width ledger; math, floor-eligible, standard) — cycle-2
+   ruling placed it directly behind the MT work once unblocked.
+2. **306 SSE** (F_dis term ledger; math, floor-eligible, heavy) — territory disjoint
+   from 305, they may run concurrently.
+3. **318 DECR** (one killable slot; math, floor-eligible, standard).
+4. **324 P2SPF** (285 addendum; light, NOT floor-eligible).
+5. **322 F70** (produce-or-correct; light, NOT floor-eligible).
+6-8. 293 JFA, 298 CORRX, 299 TESTA.
+
+At floor 6/10 by this file's table, ranks 4-5 are dispatchable without floor risk;
+§3b is checked at dispatch as always.
+
+**Two notes for the orchestrator's ledger, flagged not assumed:** (i) the roster
+shows 317 SFTX no longer in F, but no landing/gate answer for 317 has been reported
+to the DM — please include its disposition in the next cycle note (if it parked or
+escalated rather than landed, that may bear on the §0c-adjacent queue). (ii) Your
+floor line says "7/10" but names six eligible (312, 323, 313, 314, 315, 320); this
+file's FLOOR-TABLE says 6/10 — a count slip somewhere, harmless at these margins,
+recorded so the numbers reconcile.
+
+**FLOOR-TABLE synced in this same edit** (F 317→315). Floor 6/10 (312, 323, 313,
+314, 315, 320).
+
+**Canonical reserve line: reserve count 15 — legs 305, 306, 318, 324, 322, 293, 298,
+299, 307, 308, 310, 231, 232, 233, 234.** Effective immediately-dispatchable: **8
+(305, 306, 318, 324, 322, 293, 298, 299)**. 307 on 221; 308 on 312; 310 on 287+298;
+231-234 blocked. Next fresh leg number: **325** (unchanged).
+
+Nothing here lifts a ban; no L1-L4 link moved; Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 4c) — 320 YES ABSORBED (packet with the user; ban
+untouched); MT BUILD BRICK 1 DRAFTED NOW AS USER-GATED RESERVE LEG 325; LANE 7
+CLOSED BY 317's NO (folklore — PUB must cite, not claim); 306 CONFIRMED
+
+**Absorbed:** 320 MTSC YES on all four clauses, `leg/320-mtsc-v1` at 79fea23, pushed
+unmerged — correct handling; only the user rules on the ℓ¹/radii-polynomial ban and
+NOTHING here lifts it. Measured on the real target's coupled operator: (a) M1 no
+recurrence (l_min flat 0.4773, σ_min 0.025-0.031 over 8× truncation; 301's own kill
+condition untriggered); (b) M2 no recurrence (skew-Hermitian error exactly 0.0);
+(c) M3 no recurrence, nonlinearity measured for the first time (‖Q(v,v)‖/‖v‖²
+0.34-1.37, bandwidth 32×→3× in-window); (d) build cost floored 6-9 legs / ~40-65
+leg-hours, lowered by arXiv:1904.10755 (classical, NON-interval convergence theory
+for the matching structure) — and no validated MT transform exists anywhere, so
+301's hardest counterweight stands. **Ledger, per the orchestrator's request:** the
+false σ_min=1e-17 collapse was caught by the Gram-matrix control as
+quadrature-under-resolution (fix: n ≥ 6×(2M+1), n=801) — had it gone unchecked it
+would have killed the last surviving space on an instrument defect; and the n=64
+top test point coincides with the projection window's cap and is REPORTED
+UNRESOLVED. **The escalation packet the user sees must carry both of those facts
+alongside the four YES clauses** — the honesty is load-bearing for the ruling.
+
+### Ruling — the MT build enters the reserve NOW, as ONE drafted, user-gated brick
+
+Drafting is the DM's job, so the orchestrator was right not to. Precedent: 280 sat
+in reserve user-gated and converted instantly on approval. Same shape here — one
+brick, not the 6-9-leg programme:
+
+```
+### 325 — ROUTE-MTB1: THE VALIDATED MT TRANSFORM — FIRST BRICK OF THE MT BUILD
+(USER-GATED: exists so the user's ruling on 320's packet converts to dispatch
+without a drafting round trip; dispatches ONLY on that ruling)
+[FLOOR-ELIGIBLE: construction]
+**Thesis.** 320's packet establishes on paper that MT evades all three death
+mechanisms; the hardest counterweight is that no validated (interval/CAP) MT
+transform exists anywhere. Build exactly that: the MT analysis/synthesis transform
+with rigorous error enclosure, on 312's arbitrary-precision interval capability,
+validated against 1904.10755's classical convergence theory as the known-answer
+frame (their non-interval results become planted controls with windows), plus a
+perturbable must-fail plant. First brick only; bricks 2+ are drafted after its gate
+answers, informed by its measured cost against 320's 40-65 leg-hour floor.
+**Gate.** Does the transform enclose its own error rigorously on the pre-registered
+control set (1904.10755-derived knowns within windows; plants failing as planted),
+at cost consistent with 320's floor?
+  yes -> Bank the capability + battery; brick 2 drafted then. Still no certificate
+         claim — a transform is apparatus, not a result about the equations.
+  no  -> Name the mechanism and whether it is conditioning, quadrature (the
+         n ≥ 6×(2M+1) lesson pre-loaded), or structural; if structural, that is
+         evidence AGAINST the MT route the user's ruling should see — escalate the
+         update, do not bury it.
+**Territory.** solver/mt_transform.py (NEW), test_mt_transform.py (NEW),
+               solver/capabilities.py + test_capabilities.py (additive registration,
+               per the cycle-4 territory rule), experiments/p2_route_mtb1_v1.py,
+               writeup/data/p2_route_mtb1_v1.json, writeup/novelty/leg_325.md,
+               experiments/journal/leg_325.md.
+**Difficulty.** heavy
+**Preconditions:** (1) THE USER'S AFFIRMATIVE RULING on 320's packet — this leg
+never dispatches on DM or orchestrator authority, and its existence lifts nothing;
+(2) leg 312 landed (its capability is the substrate — the cycle-2 sequencing rule).
+Both must hold; neither is waivable.
+```
+
+**Does 320's YES re-rank anything else? Answered directly:** 312 APIA (live) gains
+stakes — it is now the substrate of a possible user-approved build — but it was
+already dispatched and needs no change. 313 SDSS is independent (different ban,
+different object). 301's parked branch travels with the user's same ruling. No
+reserve re-rank beyond inserting 325 as drafted.
+
+### Lane 7 is CLOSED by 317's NO, and the PUB consequence is ruled now
+
+317 landed NO (1bc3977): both silent-failure families are folklore — Family B is
+the named justification for an existing methodology (Beyn-Thümmler 2004 freezing,
+pseudo-arclength continuation, dynamic-rescaling normalization), older and broader
+than the steer anticipated. **Ruling: lane 7 (steer item 7) is closed, no second
+entry; the taxonomy is never drafted as a novelty claim.** §0c's census spine is
+structurally unchanged (it never rested on the taxonomy) but loses that plank —
+**the eventual PUB leg MUST cite 317's prior-art map and present the 202/237
+mechanism as known methodology applied, never as a discovery.** Orchestrator:
+please carry exactly that into the PUB-track notes. §0c drafting remains gated on
+323 (whose stall-and-resume is noted; the gate held).
+
+**306 SSE into the next vacancy: CONFIRMED, dispatch as written** (pre-authorised,
+rank 2, no round trip needed).
+
+**FLOOR-TABLE synced in this same edit** (G 320→305). Floor 6/10 (312, 323, 313,
+314, 315, 305) — reconciled with the orchestrator's correction.
+
+**Canonical reserve line: reserve count 15 — legs 306, 318, 324, 322, 293, 298,
+299, 325, 307, 308, 310, 231, 232, 233, 234.** Effective immediately-dispatchable:
+**7 (306, 318, 324, 322, 293, 298, 299)**. 325 USER-GATED (+ on 312); 307 on 221;
+308 on 312; 310 on 287+298; 231-234 blocked. Next fresh leg number: **326.**
+
+Nothing here lifts a ban — 325's existence is a drafted contingency, not a lift;
+its precondition (1) is the user's ruling and only that. No L1-L4 link moved; a
+surviving basis is a candidate space, not a result about the equations. Clay stays
+~0.05%.
