@@ -5,7 +5,53 @@ session reads this at Step 0b before dispatching anything.
 
 ---
 
-## Status: PAUSED — SESSION-WIDE USAGE LIMIT HIT (2026-08-07, ~00:03 UTC / ~01:03 BST)
+## Status: RUNNING — fresh orchestrator session, 2026-08-11 ~15:30 UTC, cycle 1
+
+`main` at `3ff808b`, merge gate **PASS**. Ten leg agents dispatched, heartbeat armed. The
+Decision Maker (Fable 5) is live and reachable for the duration of this session.
+
+**What this session did at Step 0, before dispatching anything:** acting on environment note 3
+below, it cross-checked this file's live state against `git log` and found it stale by four
+days. It then swept every local branch for commits that existed nowhere on `origin` — the
+2026-08-11 incident class — and found **17**: `leg/266-p0tc-v1` (a *finished, unpushed GATE
+YES*), `leg/221-bvrr-v1-resume` (real WIP), `leg-275-work`, and 14 anonymous
+`worktree-agent-*` branches. All 17 are now on `origin` (the two named branches under their
+own names; the rest under a `snapshot/` prefix). Nothing was lost, but leg 266's finished
+result had been sitting unpushed since 2026-08-07.
+
+### Live-slot roster, cycle 1 (dispatched 2026-08-11 ~15:25 UTC)
+
+| Slot | Leg | Route | Branch | Fresh/resume | Floor-eligible |
+|---|---|---|---|---|---|
+| A | 300 | P0TCV — **critical path (P0)** | `leg/300-p0tcv-v1` | fresh | no |
+| B | 221 | BVRR | `leg/221-bvrr-v1-resume` | resume (3 commits WIP) | no |
+| C | 301 | FSB | `leg/301-fsb-v1` | fresh | **yes** |
+| D | 302 | P2T1 | `leg/302-p2t1-v1` | fresh | **yes** |
+| E | 303 | GAF | `leg/303-gaf-v1` | fresh | **yes** |
+| F | 304 | CADX | `leg/304-cadx-v1` | fresh | **yes** |
+| G | 286 | CNRV | `leg/286-cnrv-v1` | resume (novelty pass only) | no |
+| H | 229 | PNRV | `leg/229-pnrv-v1` | resume (novelty pass only) | no |
+| I | 292 | CAPA | `leg/292-capa-v2` | resume (novelty pass only) | no |
+| J | 287 | EPA | `leg/287-epa-v1` | fresh (no branch ever existed) | no |
+
+Floor 4/10, above §3b's floor of 3. Territories verified disjoint at dispatch: no two legs
+name the same `solver/` module or the same `writeup/data/*.json`.
+
+**Reserve (DM's canonical line): count 14** — 293, 298, 299, 305, 306, 307, 308, 309, 310,
+280, 231, 232, 233, 234. Immediately dispatchable: 3 (293, 298, 299). **Next fresh leg
+number: 311.**
+
+**Open with the user, carried forward unchanged, none re-raised by this session:** leg 297
+(anchor-JSON re-bank ruling), leg 280 (sign-off), the leg-251 Phase-1 packet, leg 257
+(stage-V ban-lift recommendation), leg 129/188 (Bowman dealiasing rule).
+
+**No verifiers or support agents are live yet** — verifiers are spawned per §4's trigger (a
+leg about to consume a prior headline, or a claim-bearing leg that has landed), not
+idle-run, and nothing has landed yet this session.
+
+---
+
+## Superseded status: PAUSED — SESSION-WIDE USAGE LIMIT HIT (2026-08-07, ~00:03 UTC / ~01:03 BST)
 
 **Five background agents failed simultaneously** (legs 236, 226, 248, verify-256, and leg 261's
 sibling checks) with the identical error: `"You've hit your session limit · resets 1am
@@ -140,7 +186,23 @@ provably obsolete. (Added 2026-08-11, ported from the Project Building Engine.)
    time has passed, and salvage worktrees first (finished work can be gated and landed on the
    agent's behalf; partial work is pushed as raw WIP branches, never merged) — see the
    2026-08-07 incident below.
-3. **This file's live state can lag the true latest handoff.** At least one handoff
+3. **`send_later` does not exist in this environment; the §9f heartbeat has no true
+   out-of-session waker.** `ToolSearch` for it returns nothing. The closest available tools
+   are `CronCreate` (cron-style, **session-only, in-memory, dies with the session**) and
+   `ScheduleWakeup` (only valid inside `/loop` dynamic mode). This session armed a recurring
+   `CronCreate` every 7 minutes, which does re-invoke an *idle-but-alive* session — but it
+   **cannot wake a suspended or reclaimed one**, which is the exact failure mode of the
+   2026-08-06 incident. Treat the heartbeat as partial cover: it catches an orchestrator that
+   has gone quiet, not a container that has been reclaimed. Nothing better is currently
+   available; do not spend a cycle re-searching for `send_later`.
+4. **The Headroom MCP compression proxy rewrites large tool outputs.** Long `Bash` output and
+   long subagent replies come back **lossily summarised** — sentences with words dropped, and
+   a trailing `[N items compressed to M ...]` marker. Consequences: never trust a long piped
+   `bash` result for exact values; read files with the `Read` tool (which is not compressed)
+   when precision matters; and ask subagents for **short** replies, putting the detail in a
+   committed file you read yourself. A DM reply of ~120 lines came back with three roster
+   rows mangled this session and had to be re-read from `DIRECTION.md`.
+5. **This file's live state can lag the true latest handoff.** At least one handoff
    (2026-08-11, commit `c14b9c5`) recorded its actual state in the commit message while this
    file still showed an older pause. Cross-check `git log -- reports/ORCH_STATE.md` against
    `git log` on `main` before trusting the header above.
@@ -172,3 +234,15 @@ One short paragraph each: what happened, how it was diagnosed, what changed as a
   on origin, including live-leg WIP the 2026-08-11 handoff had described as committed locally.
   All were pushed (diverged same-name branches under `-local-snapshot` suffixes). Result: the
   §7b leg liveness rules and the §9g liveness sweep were adopted the same day.
+- **2026-08-11 (second occurrence, same day) — 17 more unpushed local branches, including a
+  finished result.** The next orchestrator session ran the same sweep at Step 0 and found 17
+  branches with commits absent from `origin`, hours after the first sweep was supposed to have
+  closed this. The serious one was `leg/266-p0tc-v1`: a **completed GATE YES** — the correction
+  to leg 251's certificate obligation #1, the item blocking the user-facing Phase-1 packet —
+  finished on 2026-08-07 in a session that died before its finish protocol ran, and invisible
+  to every session since because it existed only on local disk. Diagnosis: the §7b rules bind
+  the *leg agent*, and a leg agent that dies cannot obey them; nothing bound the orchestrator
+  to sweep for orphans. Result: **the unpushed-branch sweep is now a Step 0 action for every
+  session, not a post-handoff check** — run it before dispatching, not after, because a
+  finished-but-unpushed result changes what the next roster should contain. Leg 266 is now
+  pushed, and slot A's leg 300 was cut to verify it before it lands.

@@ -152,6 +152,17 @@ in its pre-committed wording. A leg that discovers its gate along the way has no
 **The novelty pass first, and the log committed** — `writeup/novelty/leg_<N>.md`, **links, not
 counts** (leg 53 logged counts, could not be audited, and was withdrawn).
 
+> **Novelty-pass calibration (user steer 2026-08-07 §0a, recorded by the DM 2026-08-11,
+> propagated here by the orchestrator).** On this project's measured-vacated ground (four
+> author groups censused: Breden–Chu, Dähne–Figueras, BCG, ALS — each has either left the
+> object or stayed and left certification; nobody is in the cell), pre-emption risk is
+> measurably low. The pass stays MANDATORY — review its record: what it actually caught was
+> prior art, mostly years old (Gallay's Handbook, EGM Prop 2.1, HQWW24's first integral). So
+> on vacated cells, weight queries toward locating OLD prior art and stop spending cycles on
+> "has anyone done this in the last six months." The one true scooping (Route-F, eleven days)
+> happened on ACTIVE ground — if your leg's cell is active, the recency check stays at full
+> weight.
+
 **The full quartet, negative results included** (`ORCHESTRATION.md` §6). Runner, curated JSON
 with every number the prose quotes, BLOG **and** TECHNICAL, registered figure. Three of the
 last four legs answered NO and all four shipped the same artifact. That is the point.
