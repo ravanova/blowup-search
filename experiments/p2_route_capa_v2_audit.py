@@ -195,6 +195,48 @@ def check_count_claims(rows: list[dict]) -> list[dict]:
     return out
 
 
+def artifact_references(rows: list[dict]) -> list[dict]:
+    """S6: `validated`/`holds` prose that cites a repo PATH -- does the path still exist?
+
+    Several rows point at their evidence by filename (writeup/data/*.json,
+    experiments/*.py, test_*.py named inside the prose rather than in the `test` field).
+    Those are load-bearing citations -- a reader follows them to check the claim -- and
+    nothing in the repository checks them.  A moved or deleted artifact leaves the claim
+    unfalsifiable while still reading as evidenced.
+    """
+    pat = re.compile(
+        r"\b((?:writeup|experiments|solver|reports|docs|ga)/[\w./-]+\.\w+"
+        r"|test_[\w]+\.py"
+        r"|[\w]+\.(?:json|md|py))\b")
+    # A bare filename in the prose is written the way a reader would say it out loud
+    # ("port_certification.py 11/25"), not as a path from the repo root, so a bare name
+    # is resolved against the directories this repository actually keeps things in
+    # before it is called dangling.
+    roots = ["", "solver/", "writeup/data/", "experiments/", "ga/", "reports/", "docs/"]
+    seen, out = set(), []
+    for r in rows:
+        prose = (r.get("validated", "") or "") + " " + (r.get("holds", "") or "")
+        # Reflow: the prose is hard-wrapped with embedded newlines and padding spaces.
+        # Collapse to a SINGLE space -- deleting the whitespace outright welds the last
+        # word of one line onto the first of the next and manufactures fake filenames.
+        prose = re.sub(r"\s*\n\s*", " ", prose)
+        for m in pat.finditer(prose):
+            path = m.group(1)
+            key = (r["module"], path)
+            if key in seen:
+                continue
+            seen.add(key)
+            hit = next((f"{root}{path}" for root in roots
+                        if (ROOT / f"{root}{path}").exists()), None)
+            out.append({
+                "module": r["module"],
+                "cited_path": path,
+                "resolved_as": hit,
+                "exists": hit is not None,
+            })
+    return out
+
+
 def static_axes() -> dict:
     rows = list(CAPABILITIES)
     mods = [r.get("module", "") for r in rows]
@@ -237,6 +279,9 @@ def static_axes() -> dict:
             [r["module"] for r in rel if not r["loads_module"]],
         "count_claims": counts,
         "count_claims_disagreeing": [c for c in counts if not c["agrees"]],
+        "S6_artifact_references": (refs := artifact_references(rows)),
+        "S6_n_cited_paths": len(refs),
+        "S6_dangling_paths": [r for r in refs if not r["exists"]],
         "n_rows": len(rows),
         "n_distinct_modules": len(set(mods)),
         "n_modules_on_disk": len(on_disk),
@@ -409,6 +454,10 @@ def main() -> int:
           f"{st['S5_rows_whose_test_never_loads_the_module']}")
     print(f"    `(N checks)` prose claims: {len(st['count_claims'])}, "
           f"disagreeing: {st['count_claims_disagreeing']}")
+    print(f"S6  repo paths cited in row prose: {st['S6_n_cited_paths']}, "
+          f"dangling: {len(st['S6_dangling_paths'])}")
+    for d in st["S6_dangling_paths"]:
+        print(f"      DANGLING  {d['module']} -> {d['cited_path']}")
     print(f"S3  distinct cited tests to execute: {st['n_distinct_cited_tests']}")
 
     if args.recheck is not None:

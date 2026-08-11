@@ -1,5 +1,5 @@
 {
-  "head": "bc4bfc15841bbcbd9eb8be1b6f730e5b43911e9e",
+  "head": "9f4c8e9efbeb70841b1a87506d882f13dff48be5",
   "python": "/home/andy/projects/Unsolved/.venv/bin/python",
   "static": {
     "S5_relevance": [
@@ -608,17 +608,18 @@
       {
         "module": "solver/finite_support.py",
         "tests": [
-          "test_first_integral.py"
+          "test_finite_support_adversarial.py"
         ],
-        "loads_module": false,
+        "loads_module": true,
         "per_test": {
-          "test_first_integral.py": []
+          "test_finite_support_adversarial.py": [
+            "solver.finite_support",
+            "solver/finite_support.py"
+          ]
         }
       }
     ],
-    "S5_rows_whose_test_never_loads_the_module": [
-      "solver/finite_support.py"
-    ],
+    "S5_rows_whose_test_never_loads_the_module": [],
     "count_claims": [
       {
         "module": "solver/boussinesq.py",
@@ -643,6 +644,124 @@
       }
     ],
     "count_claims_disagreeing": [],
+    "S6_artifact_references": [
+      {
+        "module": "solver/chen_inviscid_certificate.py",
+        "cited_path": "solver/dissipative_profile.py",
+        "resolved_as": "solver/dissipative_profile.py",
+        "exists": true
+      },
+      {
+        "module": "solver/port_certification.py",
+        "cited_path": "test_port_certification_regression.py",
+        "resolved_as": "test_port_certification_regression.py",
+        "exists": true
+      },
+      {
+        "module": "solver/interval.py",
+        "cited_path": "test_interval_stress.py",
+        "resolved_as": "test_interval_stress.py",
+        "exists": true
+      },
+      {
+        "module": "solver/spectral_certificate.py",
+        "cited_path": "experiments/p2_route_tc_v1_assemble.py",
+        "resolved_as": "experiments/p2_route_tc_v1_assemble.py",
+        "exists": true
+      },
+      {
+        "module": "solver/certificate_guards.py",
+        "cited_path": "port_certification.py",
+        "resolved_as": "solver/port_certification.py",
+        "exists": true
+      },
+      {
+        "module": "solver/certificate_guards.py",
+        "cited_path": "interval_certificate.py",
+        "resolved_as": "solver/interval_certificate.py",
+        "exists": true
+      },
+      {
+        "module": "solver/certificate_guards.py",
+        "cited_path": "nk_bounds.py",
+        "resolved_as": "solver/nk_bounds.py",
+        "exists": true
+      },
+      {
+        "module": "solver/nk_bounds.py",
+        "cited_path": "solver/certificate_guards.py",
+        "resolved_as": "solver/certificate_guards.py",
+        "exists": true
+      },
+      {
+        "module": "solver/first_integral.py",
+        "cited_path": "solver/finite_support.py",
+        "resolved_as": "solver/finite_support.py",
+        "exists": true
+      },
+      {
+        "module": "solver/certificate_shapes.py",
+        "cited_path": "solver/spectral_certificate.py",
+        "resolved_as": "solver/spectral_certificate.py",
+        "exists": true
+      },
+      {
+        "module": "solver/boussinesq.py",
+        "cited_path": "test_boussinesq_dedicated.py",
+        "resolved_as": "test_boussinesq_dedicated.py",
+        "exists": true
+      },
+      {
+        "module": "solver/boussinesq.py",
+        "cited_path": "test_solver_boussinesq.py",
+        "resolved_as": "test_solver_boussinesq.py",
+        "exists": true
+      },
+      {
+        "module": "solver/boussinesq.py",
+        "cited_path": "phase1_spike.json",
+        "resolved_as": "writeup/data/phase1_spike.json",
+        "exists": true
+      },
+      {
+        "module": "solver/boussinesq.py",
+        "cited_path": "writeup/data/bench_boussinesq_silent_corruption_check.json",
+        "resolved_as": "writeup/data/bench_boussinesq_silent_corruption_check.json",
+        "exists": true
+      },
+      {
+        "module": "solver/boussinesq.py",
+        "cited_path": "test_boussinesq_adversarial.py",
+        "resolved_as": "test_boussinesq_adversarial.py",
+        "exists": true
+      },
+      {
+        "module": "solver/gclm.py",
+        "cited_path": "test_gclm_dedicated.py",
+        "resolved_as": "test_gclm_dedicated.py",
+        "exists": true
+      },
+      {
+        "module": "solver/gclm.py",
+        "cited_path": "test_solver_clm.py",
+        "resolved_as": "test_solver_clm.py",
+        "exists": true
+      },
+      {
+        "module": "solver/spectral_utils.py",
+        "cited_path": "test_spectral_utils_dedicated.py",
+        "resolved_as": "test_spectral_utils_dedicated.py",
+        "exists": true
+      },
+      {
+        "module": "solver/finite_support.py",
+        "cited_path": "solver/first_integral.py",
+        "resolved_as": "solver/first_integral.py",
+        "exists": true
+      }
+    ],
+    "S6_n_cited_paths": 19,
+    "S6_dangling_paths": [],
     "n_rows": 48,
     "n_distinct_modules": 48,
     "n_modules_on_disk": 48,
@@ -651,7 +770,7 @@
     "S1_ghost_rows": [],
     "S2_rows_with_absent_test_file": [],
     "S2_rows_with_no_test_field": [],
-    "n_distinct_cited_tests": 46,
+    "n_distinct_cited_tests": 47,
     "distinct_cited_tests": [
       "test_advection_scope.py",
       "test_bc_weighted_sobolev.py",
@@ -667,6 +786,7 @@
       "test_decay_grading.py",
       "test_dissipative_profile.py",
       "test_energy_coercivity.py",
+      "test_finite_support_adversarial.py",
       "test_first_integral.py",
       "test_fractional_boussinesq.py",
       "test_fractional_gclm.py",
@@ -1180,7 +1300,7 @@
         "module": "solver/finite_support.py",
         "object": "SUPERSEDED -- do not use",
         "tests": [
-          "test_first_integral.py"
+          "test_finite_support_adversarial.py"
         ],
         "validated_chars": 88,
         "gate_class": "prose-without-magnitude",
