@@ -310,29 +310,36 @@ def make_figure(payload: dict) -> None:
     runs = payload.get("sweep", []) or []
     fig, (ax0, ax1) = plt.subplots(1, 2, figsize=(12.5, 5.4))
 
-    # left: the four audit axes, as counts of clean vs. flagged
-    axes = ["S1 modules\n(missing+ghost)", "S2 cited tests\n(absent)",
-            "S3 greenness\n(red at HEAD)", "S4 gate prose\n(no magnitude)"]
+    # left: the five audit axes, as counts of clean vs. flagged
+    axes = ["S1 completeness\nmissing + ghost rows",
+            "S2 cited test\nfile absent",
+            "S3 greenness\nred at HEAD",
+            "S4 `validated`\nnames no magnitude",
+            "S5 relevance\ntest never loads module"]
     flagged = [
         len(st["S1_missing_rows"]) + len(st["S1_ghost_rows"]),
         len(st["S2_rows_with_absent_test_file"]) + len(st["S2_rows_with_no_test_field"]),
         sum(1 for r in runs if not r["green"]),
         st["S4_gate_class_counts"]["prose-without-magnitude"],
+        len(st.get("S5_rows_whose_test_never_loads_the_module", [])),
     ]
-    totals = [st["n_rows"], st["n_rows"], len(runs) or 1, st["n_rows"]]
+    totals = [st["n_rows"], st["n_rows"], len(runs) or 1, st["n_rows"], st["n_rows"]]
     clean = [t - f for t, f in zip(totals, flagged)]
     y = range(len(axes))
     ax0.barh(list(y), clean, color="#3b6ea5", label="clean")
     ax0.barh(list(y), flagged, left=clean, color="#c1512b", label="flagged")
     ax0.set_yticks(list(y))
-    ax0.set_yticklabels(axes, fontsize=9)
+    ax0.set_yticklabels(axes, fontsize=8.5)
     ax0.invert_yaxis()
-    ax0.set_xlabel("rows (S1/S2/S4) or distinct cited tests (S3)")
-    ax0.set_title("Route-CAPA v2: the four freshness axes", fontsize=11)
+    ax0.set_xlabel("rows (S1/S2/S4/S5) or distinct cited tests (S3)")
+    ax0.set_title("the five freshness axes  (S3 and S5 are the two the\n"
+                  "drift detector structurally cannot check)", fontsize=10)
     for i, (c, f) in enumerate(zip(clean, flagged)):
-        ax0.text(c + f + 0.4, i, f"{f} flagged / {c + f}", va="center", fontsize=9)
-    ax0.legend(loc="lower right", fontsize=9)
-    ax0.set_xlim(0, max(totals) * 1.35)
+        ax0.text(c + f + 0.6, i, f"{f} flagged / {c + f}", va="center", fontsize=9,
+                 color=("#c1512b" if f else "#333333"),
+                 fontweight=("bold" if f else "normal"))
+    ax0.legend(loc="center right", fontsize=9, framealpha=0.95)
+    ax0.set_xlim(0, max(totals) * 1.42)
 
     # right: the cost distribution -- what an executable index costs to keep honest
     if runs:
