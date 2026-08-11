@@ -222,20 +222,69 @@ confirmed by diff:**
 at `c541cdb`. See NEEDS-YOU above for the full Chae-Tsai finding; territory
 audited clean (exactly its 3 declared files).
 
-**Currently running, two of four slots (B, D vacant):**
+## Cycle 9–9d — the user's ceiling-raising programme, and three more landings
+
+**A new standing priority arrived from the user directly (2026-08-11, "THE
+CEILING-RAISING PROGRAMME"): leg 334 was the only Clay-directed route in the
+queue and its ceiling is Tier 2 by design — a route that cannot produce a
+proof cannot produce a Clay solve. The programme adds "the missing half":**
+leg 341 (ALGW) scopes whether leg 260's algebraically-weighted space is the
+"namable fourth space" the stage-V ban's own lift condition asks for — if it
+escapes the three-realization death AND the CAP apparatus has a coherent
+formulation there, the evidence packet goes to the user for a ruling (the leg
+itself lifts nothing). A deferred §3 "build" is gated entirely on 341's
+report and the user's ruling; if it lands, route 4's ceiling moves Tier 2 →
+Tier 3 — the sole justification for the programme. Leg 342 (SEED) scopes
+route 4's seeding problem independently. §5 ownership is ruled: leg 341 owns
+the Gaussian-weight-vs-algebraic-tail question; leg 334's clause (a) narrows
+to consuming 341's answer.
+
+**Leg 339 (ORC6) landed gate YES** — the "closed three ways" claim is
+adjudicated on both measured candidate triples (the record never enumerated
+which triple it meant): width STANDS (the Grade-A/fluid cell is still empty,
+on leg 174's target-absence ground — neither leg 331 nor 332 measures width),
+but the GROUNDS are over-read: (iv_a) MISATTRIBUTES (the kill survives, but
+its stated mechanism has drifted twice under a fixed verdict) and the Leray
+obstruction OVERSTATES (leg 332 measured it velocity-formulation-specific,
+failing at step S4). Corrected in place in `JOURNAL.md` and banked as
+over-read closure #6 in `CORRECTIONS.md`. DM cycle 9c absorbed this in full,
+including applying the two `DIRECTION.md` site corrections itself.
+
+**Leg 323 (CENV) landed gate NO, and this time it's earned** — the pre-kill
+NO was not: the DM's cycle-8b re-check condition caught that the pre-kill
+rows were mislabelled (a runner bug built each variant job's id from the
+BASE query while submitting the variant), not stale. Fixed structurally
+(`query_sent` parsed from the actual URL, curation refused on any mismatch).
+Clean re-run: hyphen-variant spelling is robust on `abs:` (16/16) but NOT on
+`au:` (a new instrument finding, MF4, now standing text in
+`CONTINUATION_PROMPT.md` — compound author-name queries are a false-negative
+generator, confirmed three independent times). Census screen: 0 of 51 novel
+ids clear all four of leg 303's clauses; §0c UNBLOCKS on the corrected
+instrument.
+
+**Leg 334 (DSSP) landed gate YES on all four clauses** — the route-4
+programme plan itself, Tier 2 ceiling stated and mechanically checked in
+every one of nine drafted bricks. Clause (a) was drafted before the user's
+§5 ruling reached it; once relayed, the leg retained and re-labelled its own
+weight-collision analysis as context offered to leg 341 (OWNED-BY-341-
+PENDING, both branches named) rather than asserting a conclusion. Clause (c)
+(seeding) re-measured independently, still empty — this is now leg 342's
+starting point. Independent gain: vorticity of a Type-I profile lands in
+*unweighted* L²(ℝ³), a second argument for the vorticity formulation
+alongside leg 332's.
+
+**Currently running, all four slots (A vacant, just freed by 334):**
 
 | Slot | Leg | Route | Dispatched |
 |---|---|---|---|
-| A | 334 | DSSP — route-4 seeded DSS/RPO programme plan (Tier 2 ceiling; critical path) | cycle 8d, still running, no stall |
-| B | 339 | ORC6 — gated adjudication of the "closed three ways" sites against legs 331/332's measured answers | cycle 8e |
-| C | 323 | CENV — MF1 spelling-variant census resume (real WIP from spend-limit kill, branch `leg/323-cenv-v1`) | cycle 8b, still running, no stall |
-| D | — | vacant, awaiting DM refill (330 landed) | — |
+| A | — | vacant, awaiting DM refill (334 landed YES on all four clauses) | — |
+| B | 342 | SEED — route-4's seeding problem, scoped independently (user programme §4) | cycle 9c, running |
+| C | 341 | ALGW — the fourth-space scoping leg (user programme §1+§2 merged); the DM's cycle-9d ruling made this leg's priority standing text in `DIRECTION.md` (a CEILING-GATE PRIORITY block — while 341 is in flight, its consequence work takes any vacancy ahead of the entire reserve) | cycle 9b, running |
+| D | 340 | EGRB — truncation-controlled re-derivation of the C4 bound (feeds the user's NEEDS-YOU item #2 below) | cycle 8e, running |
 
-Reserve: 22 undispatched (including leg 340 EGRB, rank 1 — the
-truncation-controlled bound question left open by 329/cycle-8e), 14
-immediately dispatchable (340, 335, 336, 337, 338, 307, 328, 324, 322, 327,
-287, 229, 293, 298, 299 in rank order). Next fresh leg number: **341**.
-No ban lifted this cycle; no L1→L4 link moved.
+Reserve: 20 undispatched, 14 immediately dispatchable (335 S1GR next in rank
+order). Next fresh leg number: **343**. No ban lifted this cycle; no L1→L4
+link moved.
 
 ## Context — the ten-to-four downsize and the spend-limit kill
 
