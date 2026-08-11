@@ -33,10 +33,10 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 306 | SSE | yes |
+| A | 331 | NLH | yes |
 | B | 221 | BVRR | no |
-| C | 323 | CENV | yes |
-| D | 329 | EGMF | yes |
+| C | 332 | VORT | yes |
+| D | 333 | SHELL | yes |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -52,38 +52,50 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig75 | 301 | reserved, parked branch |
 | fig76 | 313 | reserved, parked branch |
 | fig77 | 314 | landed |
-| fig78 | 326 | reserved (326 in reserve rank 1, resumes; allocation stands) |
+| fig78 | 326 | reserved (326 in reserve, resumes; allocation stands) |
 | fig79 | 315 | landed |
 | fig80 | 292 | landed |
-| fig81 | 329 | live, slot D |
+| fig81 | 329 | reserved (329 reserve rank 1; allocation stands) |
 | fig82 | 305 | landed |
-| fig83 | 306 | live, slot A |
+| fig83 | 306 | held (306 SUSPENDED, route-6 drop, cycle 7b) |
 | fig84 | 318 | landed |
-| fig85+ | — | next free |
+| fig85 | 331 | live, slot A |
+| fig86 | 332 | live, slot C |
+| fig87 | 333 | live, slot D (only if its map warrants a figure) |
+| fig88+ | — | next free |
 <!-- FIG-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-11 cycle 7 — FIRST CYCLE UNDER THE FOUR-SLOT
-CONTRACT. Live roster: A/306/SSE (CRITICAL PATH, P0-proximate: the F_dis term ledger
-for corrected obligation #1), B/221/BVRR (resume `leg/221-bvrr-v1-resume`),
-C/323/CENV (resume `leg/323-cenv-v1`; §0c stays gated on it), D/329/EGMF (fires per
-the cycle-6 pre-commitment — 312 landed YES, both banked headlines corrected: 178's
-contamination was a float64 artifact, 176's N=1024 row restored monotone). Floor 3/4
-(306, 323, 329) — above §3b's 2-of-4. Landed since cycle 6b: 312 APIA YES (full
-quartet, d89bedd), 318 DECR YES (ENCLOSURE IS CRITICALITY, fig84, salvaged +
-completed at e81a6ea/c79e145), 305 DWM YES (SHARP_FOR_BCG_ARGUMENT_AS_STATED,
-fig82), 292 CAPA NO (41169e0). Escalations WITH THE USER, unchanged: 313's DSS
-packet + ban-wording question (326 resolves its one unknown, reserve rank 1,
-resumes with novelty log already on main at 806d4bd); 320's MT packet (325 stays
-user-gated, its 312-precondition now satisfied); the 304/ℓ¹ lift-clause wording;
-parked escalation #3 (which live leg 329 may resolve).
+(Current snapshot, DM update of 2026-08-11 cycle 7b — THE USER'S STRATEGIC
+RE-PRIORITISATION UNDER THE CLAY GOAL, executed the same cycle it arrived
+(supersedes cycle 7's roster before that roster was ever integrated). Live roster:
+A/331/NLH (route 1 — does Breden-Chu's machinery hold a nonlocal operator?
+CRITICAL PATH: it gatekeeps route 4's certification step), B/221/BVRR (resume
+`leg/221-bvrr-v1-resume`), C/332/VORT (route 2 — does the Leray obstruction apply
+to the vorticity formulation?), D/333/SHELL (route 5 — where does 3D NS sit in the
+dyadic/shell hierarchy; HARD novelty gate before any construction). Floor 3/4
+(331, 332, 333) — above §3b's 2-of-4. §0's motivating finding was VERIFIED BY THE
+DM before drafting (p2_route_ivax_v1.json read directly: every kill carries
+n_unnamed_by_remark_40 with exactly the two nonlocality classes; verdict code
+SCREEN_IV_A_BITES_OFF_AXIS_MECHANISM_NONLOCALITY_NOT_INCOMPRESSIBILITY — (iv_a)
+is a silence-of-the-source screen). No over-read closure #6 is recorded: whether
+"closed three ways" (two sites, lines noted in the cycle-7b entry) overstates is
+exactly what 331/332 measure first. Route 4 (seeded DSS/RPO, ceiling TIER 2 in
+every gate) is the programme: brick 0 = reserve leg 334, preconditioned on 331 AND
+332 landing, sized through FOUR slots over cycles. Route 6 (BCG/compressible) is
+DROPPED: legs 306 and 308 SUSPENDED, 305/315 stay banked. The user's steer is
+treated as the ruling on 313's escalation packet (seeded route pursued); the DM
+lifts no ban text — plan_of_record.py's amendment is integration's, flagged.
+Landed since cycle 6b: 312 APIA YES, 318 DECR YES, 305 DWM YES, 292 CAPA NO.
+Still owed and top of reserve: 329 EGMF (the 312→178 gate-flip check).
 
-**Reserve queue: 19 undispatched legs (326, 308, 328, 324, 322, 327, 287, 229, 293,
-298, 299, 330, 325, 307, 310, 231, 232, 233, 234).** Immediately dispatchable: 11
-(326, 308, 328, 324, 322, 327, 287, 229, 293, 298, 299 — rank order as listed, §3a
-pre-authorised except where a spec says otherwise). 330 on 326's landing; 325
-USER-GATED; 307 on 221; 310 on 287+298; 231-234 blocked on repairs 217/219/221/225.
-Next fresh leg number: **331**. Full per-leg status and the desync verification are
-in the cycle-7 entry at the end of this file.)
+**Reserve queue: 21 undispatched legs (329, 326, 323, 328, 324, 322, 327, 287,
+229, 293, 298, 299, 334, 330, 307, 310, 325, 231, 232, 233, 234), plus 306 and
+308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 12 (329,
+326, 323, 328, 324, 322, 327, 287, 229, 293, 298, 299 — rank order as listed, §3a
+pre-authorised except where a spec says otherwise). 334 on 331+332; 330 on 326;
+307 on 221; 310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs
+217/219/221/225. Next fresh leg number: **335**. Full specs and the steer
+execution are in the cycle-7b entry at the end of this file.)
 
 ---
 
@@ -15243,3 +15255,307 @@ converts only on the user's ruling. The 313 packet, the DSS ban-wording question
 the 304/ℓ¹ lift-clause wording, and parked escalation #3 all remain the user's,
 untouched. No L1-L4 link moved — 312/318/305 are capability, criterion, and
 sharpness results, not movement; Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 7b) — USER STRATEGIC RE-PRIORITISATION EXECUTED:
+routes 1/2/5 dispatched (legs 331/332/333), route 4 planned as the programme
+(brick 0 = leg 334, ceiling TIER 2), route 6 DROPPED (306/308 suspended); §0
+VERIFIED BY THE DM BEFORE ACTING; cycle 7's roster superseded before integration
+
+**Provenance.** The user's steer arrived verbatim via the orchestrator (§3) while
+cycle 7 (cdd8555) awaited integration. Per the steer's own §5 instruction the
+old-item mapping was read first, and per §0's instruction the motivating finding
+was verified by this DM directly before any drafting. This entry supersedes cycle
+7's roster; cycle 7's desync verification, landing absorptions, resume rulings for
+B/221 and C/323's disposition, and leg 330's draft all stand except as amended
+here.
+
+### §0 — verified directly, stated precisely, and NOT overstated
+
+Checked, not assumed (writeup/data/p2_route_ivax_v1.json read in full):
+- Every killed row carries `n_unnamed_by_remark_40` and an
+  `unnamed_operator_classes` list containing ONLY the two cited reasons: nonlocal
+  dissipation ((-Δ)^α / Λ^γ, non-even γ) and a nonlocal operator in the
+  nonlinearity (Hilbert transform or Biot-Savart-type inversion). The leg's own
+  verdict code says it in as many words:
+  `SCREEN_IV_A_BITES_OFF_AXIS_MECHANISM_NONLOCALITY_NOT_INCOMPRESSIBILITY`.
+- **(iv_a) therefore tests what Breden-Chu's Remark 40 NAMES, not what their
+  machinery DOES — a silence-of-the-source screen.** Nobody has measured whether
+  the machinery handles a nonlocal operator. That is route 1's question.
+- Leg 257's Leray obstruction is genuinely measured (quadrupole = energy tensor,
+  exponent −4.0000, cross-checked to 3.0e-14) AND genuinely recorded NOT REACHED
+  for C4 (experiments/journal/leg_261.md:154, "Inside a product → not reached
+  (C4, C5)"). Leg 261's novelty §3 carries the Gallay Handbook find verbatim:
+  ρ_∞(r) = e^{r²/4} — Breden-Chu's weight exactly — holds the VORTICITY, velocity
+  is recovered by Biot-Savart and "never asked to lie in L²(∞)". That is route
+  2's question.
+- "Closed three ways" appears at two sites in this file (the over-read-closure-#5
+  correction block, currently lines ~9621 and ~14830, both about the
+  Grade-A/fluid cell). **No over-read closure #6 is recorded now.** Whether any
+  of the three ways rests on the (iv_a) silence screen is exactly what legs 331
+  and 332 measure; the pre-committed handling is written into their gates — a
+  correction is drafted on a measured answer, never on this reading.
+
+### §5 old-item mapping, answered (including the requested status report)
+
+1 arb-precision: DONE (leg 312, both headlines changed) — confirmed cycle 7.
+2 validated integration/TM: FOLDED into route 4's build, pulled by need; 315's
+banked scoping is the input; no speculative TM leg exists or will be drafted.
+3 seeded DSS: PROMOTED to route 4 — see the ban-handling ruling below.
+4 (iv_a) off-axis: DONE (leg 311) and §0 above is its verified consequence.
+5 finite-unstable-spectrum: DONE (leg 314, (iii) OPEN).
+6 CAP-reproduction lane: first entry landed (316, 49,465/49,465); second-entry
+selection stays deferred pending 323's corrected census (unchanged).
+7 taxonomy: KILLED (317, folklore; lane closed; cite-don't-claim binds PUB).
+8 dominated→enclosed: **STATUS: DISPATCHED AND LANDED, GATE YES** — leg 318,
+Route-DECR, criterion ENCLOSURE IS CRITICALITY with five named falsification
+tests, none refuted; fig84 shipped; salvaged and completed at e81a6ea/c79e145
+after the spend-limit termination. Per its own drafting it never becomes a lane.
+
+Also owed from the last packet, both answered: the 312→178 gate-flip check is
+drafted as leg 329 (EGMF, cycle 6) — its result lands as this leg's own record
+plus integration notes flagging downstream consumers; leg 178's gate text is
+never edited (319's ruling stands, restated in 329's spec). It sits at reserve
+rank 1, dispatchable, fires into the first vacancy. Figure discipline: the
+FIG-TABLE instituted at cycle 6 is live at the head of this file, allocations
+made in the same edit as every draft (331→fig85, 332→fig86, 333→fig87 this
+cycle); INDEX.md remains the dispatch-time mirror.
+
+### Ban handling under route 4 — stated exactly, because nothing here may blur it
+
+- **The user's steer is the ruling on 313's escalation packet**: the seeded
+  DSS/RPO route is pursued, with leg 260's kill honoured as verbatim scoped to
+  UNSEEDED and RDSS's "strictly-costlier" recognised as a cost word. The
+  DSS ban-wording question that travelled in 313's packet is thereby answered in
+  effect by the user.
+- **The DM edits no ban text.** The expensive-entrance ban's standing text lives
+  in plan_of_record.py, which is not this file: its amendment under the user's
+  words is an INTEGRATION action — flagged to the orchestrator here. Until that
+  edit lands, route-4 legs cite this entry plus the user's verbatim steer as
+  their authority, and every route-4 spec carries §3a rule-4 pre-authorisation
+  notes as usual.
+- **The CHEAP-entrance ban (DSS by bifurcation off a fixed point) is untouched
+  and stays in force** — route 4 is an orbit search seeded from a candidate, not
+  a bifurcation construction, and no route-4 leg may drift into the banned
+  entrance.
+- **Ceiling, in every route-4 gate: TIER 2.** Success is a numerical DSS blow-up
+  candidate; WIN_CONDITION.md is unambiguous that Tier 2 is never called a
+  proof; conversion to a Clay answer needs certification machinery that does not
+  yet exist — which is why routes 1 and 2 run first. Any route-4 leg whose prose
+  blurs that fails its own gate.
+
+### Route 6 DROPPED — consequences drawn honestly
+
+Legs 305 and 315 stay banked, untouched. **Leg 306 (SSE) is SUSPENDED** — pulled
+from cycle 7's slot A before it was ever dispatched; its spec stays in this file
+but it is not in the reserve count and may not be dispatched without a user
+reversal. **Leg 308 (P2T2R) is SUSPENDED** on the same ground (285's apparatus is
+capability-building on the compressible target). Retained as ordinary record
+debts on ALREADY-LANDED work, not new capability on the dropped target: 324
+(285's precision addendum — documents a measured omission), 322 (fig70
+produce-or-correct), 327 (fig69 evidence script), 328 (over-read-closure-#5
+sites). The P0 critical path moves with the user's ruling: **route 1 (leg 331,
+slot A) is the critical-path leg** — it gatekeeps whether the certification step
+route 4 will eventually need is reachable at all, and the user ordered it first.
+
+### Re-aimed under route 4 (no spec text changed)
+
+326 CTRX (resume; novelty log on main at 806d4bd) and 330 PVLX are now ALSO
+route-4 de-risk legs: each adjudicates a theorem (Chae-Tsai 1304.7414;
+Pineau-Vicol 2607.09619's Type-I/λ-near-1 Liouville) that could exclude or spare
+route 4's target class. They should land before heavy route-4 capacity commits;
+ranked accordingly. Their gates are unchanged — they read and report; 313's
+packet record is updated by 326 first, then 330 (330's precondition already
+sequences this).
+
+### Ten-slot sizing note — read as the orchestrator reads it
+
+"Most of ten slots for many cycles" is a sizing statement about route 4's
+eventual scope, not a re-authorisation of ten concurrent slots. The live
+contract is FOUR slots (user directive, earlier the same day); route 4's bricks
+are scheduled through four slots over more cycles, and leg 334's gate clause (d)
+requires the brick sequence to be sized exactly that way. No flag back needed —
+both readings agree.
+
+### New legs, drafted now
+
+```
+### 331 — ROUTE-NLH: DOES BREDEN-CHU'S MACHINERY HOLD A NONLOCAL OPERATOR?
+(route 1 — cheap, run immediately; CRITICAL PATH)
+[FLOOR-ELIGIBLE: construction + math]
+**Thesis.** Verified this cycle (§0): screen (iv_a) killed 18/18 fluid rows (leg
+261) and 3/3 non-fluid rows (leg 311) on what Remark 40 NAMES, not on what the
+machinery DOES — every kill carries only the two nonlocality reasons, and nobody
+has measured whether the machinery handles a nonlocal operator. Point leg 256's
+working solver/bc_weighted_sobolev.py at a nonlocal operator directly (the
+Hilbert transform on the weighted space, and/or (-Δ)^α) and measure whether the
+bounds the machinery actually computes close on it. solver/interval_mp.py (leg
+312) is available if precision binds. Every fluid object is nonlocal —
+Biot-Savart IS the nonlocality — so this question stands between this repository
+and certifying anything fluid, whatever route 4 produces.
+**Gate.** Does bc_weighted_sobolev.py's machinery, pointed at a named nonlocal
+operator on its own weighted space, produce finite, closing bounds of the same
+kind it produces for the local operators it was built on — magnitudes, not
+booleans, realization named per lesson 91?
+  yes -> The killed rows become re-screenable: report which of the 21 (iv_a)
+         kills return, and bank the certification path for fluid objects as
+         measured OPEN at this step; feeds leg 334 directly. If the measured
+         answer contradicts a "closed three ways" site, over-read closure #6 is
+         drafted THEN, on the measured basis — never before.
+  no  -> Bank the field's first MEASURED obstruction, replacing an inferred one
+         — the failing bound and mechanism named; (iv_a) gains the measured
+         footing it never had. Full strength either way.
+**Territory.** experiments/p2_route_nlh_v1.py, writeup/data/p2_route_nlh_v1.json,
+               writeup/figures/fig85*, writeup/novelty/leg_331.md,
+               experiments/journal/leg_331.md. Reads solver/bc_weighted_sobolev.py
+               and solver/interval_mp.py; edits neither.
+**Difficulty.** standard
+**Preconditions:** None (§0 verified by the DM this cycle, above).
+```
+
+```
+### 332 — ROUTE-VORT: DOES THE LERAY OBSTRUCTION APPLY TO THE VORTICITY
+FORMULATION? (route 2 — cheap, runs alongside route 1)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** Leg 257's obstruction is genuinely measured for velocity-pressure
+(quadrupole = energy tensor, exponent −4.0000, cross-checked to 3.0e-14) and
+genuinely recorded NOT REACHED for C4, the vorticity formulation
+(experiments/journal/leg_261.md:154). Gallay's Handbook (leg 261 novelty §3):
+the standard vorticity space IS the Gaussian weight ρ_∞ = e^{r²/4} —
+Breden-Chu's weight exactly — with velocity recovered by Biot-Savart and never
+asked to lie in the space. Ask directly: does the Leray obstruction apply to the
+vorticity formulation, or was it a fact about velocity-pressure only? This is
+the formulation any fluid certification would actually use.
+**Gate.** Re-derived in the vorticity formulation on the Gaussian-weight space
+(velocity reconstructed by Biot-Savart, outside the space), does the Leray
+obstruction still force the target out of the space — the forcing term and its
+exponent measured, either way?
+  yes -> Bank: the obstruction is formulation-independent; C4's NOT-REACHED
+         closes as reached-and-killed, full strength.
+  no  -> Bank: the obstruction was velocity-pressure-specific; the vorticity
+         formulation is the open lane — feeds leg 334. Same closure-#6
+         discipline as 331: any correction to "closed three ways" is drafted on
+         the measured answer, never before.
+**Territory.** experiments/p2_route_vort_v1.py, writeup/data/p2_route_vort_v1.json,
+               writeup/figures/fig86*, writeup/novelty/leg_332.md,
+               experiments/journal/leg_332.md. Reads legs 257/261's banked
+               artifacts; edits none.
+**Difficulty.** standard
+**Preconditions:** None.
+```
+
+```
+### 333 — ROUTE-SHELL: WHERE DOES 3D NS SIT IN THE DYADIC/SHELL-MODEL HIERARCHY?
+(route 5 — the only route touching Wall 1; HARD NOVELTY GATE BEFORE ANY
+CONSTRUCTION)
+[FLOOR-ELIGIBLE: external literature + math]
+**Thesis.** Reformulated by the user from the under-specified "interpolate
+toward Tao's averaged NS" (bespoke construction, possibly ill-defined): use the
+existing dyadic/shell-model hierarchy (Katz-Pavlović and successors), which
+genuinely interpolates how much of NS's structure is retained. Where does 3D NS
+sit in it, and which structural feature flips blow-up on? This is well-trodden
+ground — leg 172 already recorded Palasek arXiv:2605.13827 as a shell-model
+blow-up — so the novelty gate is HARD and comes first; if the literature already
+answers the placement question, the report IS the deliverable.
+**Gate.** Does the novelty pass establish that the literature does NOT already
+answer the placement question (which structural feature of the hierarchy flips
+blow-up on, and where 3D NS sits relative to that flip)?
+  yes -> Draft (do not build) the placement study as its own follow-on spec,
+         routed to the DM; nothing is constructed this leg.
+  no  -> Report the literature's answer, links not counts, and STOP — evidence
+         about direction (b) itself, which no amount of certification work
+         supplies; banked at full strength.
+**Territory.** writeup/data/p2_route_shell_v1.json, writeup/figures/fig87* (only
+               if the map warrants one), writeup/novelty/leg_333.md,
+               experiments/journal/leg_333.md.
+**Difficulty.** standard
+**Preconditions:** None.
+```
+
+```
+### 334 — ROUTE-DSSP: THE SEEDED-DSS/RPO PROGRAMME PLAN — brick 0 of route 4
+(CEILING: TIER 2, stated here and in every brick this plan produces)
+[FLOOR-ELIGIBLE: math + construction]
+**Thesis.** The user's ruling promotes seeded DSS/RPO to the programme: a 3D NS
+solver in similarity variables, RPO Newton-Krylov extraction (mature engineering
+in the turbulence community — leg 260 cites Lucas-Kerswell), and a solution to
+the seeding problem leg 313 measured EMPTY (Hou 2405.10916 fails the screen
+three ways). The object is a periodic orbit of period 2 log λ with λ an output.
+Plan before building: this leg produces the programme plan, informed by 331/332's
+answers on whether the eventual certification step is reachable. The
+validated-integration/Taylor-model item folds in here, built only when the
+certification step pulls it (315's banked scoping consulted, its sequence-space
+re-entry guard carried). CEILING: TIER 2 — success is a numerical DSS blow-up
+candidate; WIN_CONDITION.md is unambiguous that Tier 2 is never called a proof;
+converting it to a Clay answer requires certification machinery that does not
+yet exist. Any prose here or in any brick that blurs that fails its own gate.
+**Gate.** Does the plan name (a) the function space, carrying 313's (a) answer
+and §26/4.1's limited-regularity difficulty; (b) the solver architecture and RPO
+extraction design, with build costs in legs; (c) a concrete, non-empty seeding
+strategy — or the measured statement that none exists yet and what would create
+one; and (d) the brick sequence sized through FOUR slots over cycles — with the
+Tier-2 ceiling stated in the plan and in every brick's drafted gate?
+  yes -> The DM drafts brick 1 from the plan; nothing is built this leg.
+  no  -> Name which of (a)-(d) cannot be answered on paper; that blocker routes
+         to the user before any capacity is committed.
+**Territory.** writeup/data/p2_route_dssp_v1.json, a new TECHNICAL file of its
+               own naming, writeup/novelty/leg_334.md,
+               experiments/journal/leg_334.md. Reads leg/313-sdss-v1, 315's
+               banked scoping, leg 260's record; edits none.
+**Difficulty.** heavy
+**Preconditions:** Legs 331 AND 332 landed (the user's ordering: route 4 begins
+once routes 1 and 2 report). (§3a rule 4: subject matter touches the DSS bans —
+dispatch AS WRITTEN is pre-authorised under the user's route-4 ruling recorded
+this cycle; the plan builds nothing itself; the cheap-entrance ban binds every
+brick.)
+```
+
+### Roster (supersedes cycle 7's; FLOOR-TABLE and FIG-TABLE synced at the head
+in this same edit)
+
+- **A = 331 NLH (CRITICAL PATH)** — route 1; standard; construction+math.
+- **B = 221 BVRR** — resume `leg/221-bvrr-v1-resume`, exactly as ruled at cycle
+  7 (rebase first; §9g flake-diagnosis on the 43.2%/86x counterexample).
+- **C = 332 VORT** — route 2; standard; math.
+- **D = 333 SHELL** — route 5; standard; external literature+math.
+
+Floor 3/4 (331, 332, 333) — above §3b's 2-of-4. Territory disjointness checked
+directly: 331/332/333 are all-new files with no shared module; 221 lives in the
+boussinesq repair territory; no two slots name the same file. 323 CENV moves to
+the reserve as a RESUME (its branch and spec unchanged; §0c stays gated on it —
+displaced by the user's three immediate routes, not demoted on merit).
+
+### Reserve queue, rebuilt (rank order for vacancies)
+
+1. **329 EGMF** — the owed 312→178 check; resume its landed novelty pass; on 312
+   (TRUE). Dispatchable.
+2. **326 CTRX** — RESUME; route-4 de-risk (Chae-Tsai reach). Dispatchable.
+3. **323 CENV** — RESUME `leg/323-cenv-v1`; census instrument; gates §0c.
+   Dispatchable.
+4. **328 ORC5** 5. **324 P2SPF** 6. **322 F70** 7. **327 P2T1E** — record debts,
+   all light, specs unchanged. Dispatchable.
+8. **287 EPA** — RESUME `leg/287-epa-v1`. 9. **229 PNRV** — RESUME
+   `leg/229-pnrv-v1` (+`-wip-salvage`). Dispatchable.
+10. **293 JFA** 11. **298 CORRX** 12. **299 TESTA** — dispatchable.
+13. **334 DSSP** — route 4 brick 0; on 331+332.
+14. **330 PVLX** — route-4 de-risk (Pineau-Vicol); on 326.
+Then: **307 TSCX** (on 221's flag state), **310 EPAP** (on 287+298), **325 MTB1**
+(USER-GATED on the 320 ruling; when the user rules, its value is ALSO weighed
+against what route 4's certification step actually needs, per the fold-by-pull
+principle), **231-234** (blocked on repairs 217/219/221/225).
+SUSPENDED, not counted, route-6 drop: **306 SSE, 308 P2T2R** (specs retained;
+user reversal required to dispatch).
+
+**Reserve queue: 21 undispatched legs (329, 326, 323, 328, 324, 322, 327, 287,
+229, 293, 298, 299, 334, 330, 307, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **12**. Next fresh leg number: **335.**
+
+Nothing in this update lifts a ban by DM authority: route 4 proceeds on the
+user's ruling, recorded verbatim in effect; plan_of_record.py's ban-text
+amendment is flagged to integration, not performed; the cheap-entrance ban is
+explicitly restated in force. Route 4's ceiling is Tier 2 and is stated in its
+gate and required of every brick. No L1-L4 link moved — §0 is a re-reading of
+what was measured, and the three dispatched routes are questions, not results.
+Clay stays ~0.05%, and under a Clay-directed programme the no-movement
+discipline binds harder, exactly as the user says.
