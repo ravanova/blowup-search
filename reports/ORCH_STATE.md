@@ -19,22 +19,36 @@ legs that lose their slot are returned to the reserve queue, not cancelled as fi
 
 ---
 
-## Status: RUNNING — resume-session, 2026-08-11, later cycle (four-slot contract, post
-strategic re-prioritization)
+## Status: RUNNING — same orchestrator session, 2026-08-11, cycle 8b (four-slot contract)
 
-`origin/main` at `6f80830`, merge gate **PASS**. **Four** slots live under the user's
-ten-to-four downsize (this supersedes every ten-slot block below, all left intact as history).
-Roster: **A=331 NLH** (route 1, critical path), **B=221 BVRR** (resume), **C=332 VORT**
-(route 2), **D=333 SHELL** (route 5). Three paired verifiers also live, reviewing legs
-312+305, 314+321, 318+326 (claim-bearing landings that had none yet). Decision Maker reachable,
-last commit `6f80830` integrated cleanly.
+`origin/main` at `ef2c35e`, merge gate **PASS**. Four slots live: **A=331 NLH** (route 1,
+critical path, still running, no stall), **B=329 EGMF** (arbitrary-precision recheck,
+dispatched cycle 8, running), **C=323 CENV** (MF1 spelling-variant census resume, dispatched
+cycle 8b, running), **D=326 CTRX** (resume, GAP-326-A first, dispatched cycle 8, running).
+Floor 4/4. Decision Maker reachable, last two rulings `dedfd57` (cycle 8) and `ef2c35e`
+(cycle 8b) both integrated cleanly by fast-forward.
 
-**NEEDS THE USER:** leg 313's escalation packet + the DSS ban-wording question are bundled and
-explicitly routed to the user by the DM's own text ("the DM does not rule on ban scope") — see
-`PROGRESS.md`'s NEEDS YOU section for the full summary. No ban touched, `plan_of_record.py`
-untouched. `leg/313-sdss-v1` and `leg/320-mtsc-v1` remain parked, not merged — confirmed
-correct this cycle after nearly merging a fully-prepared integration of both by mistake (see
-Incidents below); do not merge them without the user's ruling.
+**This cycle's landings, all audited and pushed:** leg 221 (BVRR) — gate YES on the repair
+itself (0/256233 calls moved because of it), but flagged one real unresolved gap outside its
+own territory (`spike1_stepC_gate.json`'s committed artifact does not reproduce with the repair
+absent, 13.2% shift, two predicates flip) and explicitly handed it to the successor rather than
+fixing it — this is the fact behind leg 307's now-resolved precondition (see below). Leg 333
+(SHELL) — gate NO, 3D NS placed at dissipation degree α=2/5 in the Katz–Pavlovic dyadic
+hierarchy, strictly inside its undecided window. Leg 332 (VORT) — gate NO, the Leray obstruction
+of legs 257/261 does not survive re-derivation in the vorticity formulation (fails at step S4,
+tail lives in `ker(curl)`); positive content banked and bound into leg 334's plan by the DM: the
+reconstructed Biot-Savart velocity lands in L³(ℝ³), the same NRS/Tsai admissibility wall that
+killed leg 309's claimant — 334 must state its target's position relative to that wall up
+front. **307 (TSCX) is now confirmed dispatchable** (221's gate left its flag unresolved by
+name, per direct journal read, confirmed independently by the DM) — ranks after leg 338 in the
+reserve queue. Four correction legs (335 S1GR, 336 C305, 337 C318, 338 LCB1) drafted from
+verifier findings, not yet dispatched. An over-read closure (#6) correction is **deferred to
+331's landing**, so one leg can correct both measured sites rather than splitting the evidence.
+
+**NEEDS THE USER:** unchanged — leg 313's escalation packet + the DSS ban-wording question
+remain bundled and explicitly routed to the user by the DM's own text. No ban touched,
+`plan_of_record.py` untouched. `leg/313-sdss-v1` and `leg/320-mtsc-v1` remain parked, not
+merged — do not merge them without the user's ruling.
 
 **Heartbeat armed:** `CronCreate` recurring job, every 25 min, session-only (no `send_later` in
 this environment — see Environment notes). A fresh orchestrator session must re-arm its own
