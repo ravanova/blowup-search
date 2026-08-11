@@ -337,28 +337,119 @@
    "channel": "C3",
    "query": "abs:\"rigorous numerics\" AND abs:\"blow-up\"",
    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22rigorous+numerics%22+AND+abs%3A%22blow-up%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
-   "status": "UNAVAILABLE",
-   "error": "HTTPError: HTTP Error 429: Unknown Error",
-   "entries": [],
-   "n": null
+   "status": "OK",
+   "entries": [
+    {
+     "arxiv_id": "2305.05915",
+     "link": "https://arxiv.org/abs/2305.05915",
+     "title": "A synchronization-capturing multi-scale solver to the noisy integrate-and-fire neuron networks",
+     "published": "2023-05-10T05:58:57Z",
+     "updated": "2023-05-10T05:58:57Z",
+     "summary": "The noisy leaky integrate-and-fire (NLIF) model describes the voltage configurations of neuron networks with an interacting many-particles system at a microscopic level. When simulating neuron networks of large sizes, computing a coarse-grained mean-field Fokker-Planck equation solving the voltage densities of the networks at a macroscopic level practically serves as a feasible alternative in its high efficiency and credible accuracy. However, the macroscopic model fails to yield valid results of the networks when simulating considerably synchronous networks with active firing events. In this paper, we propose a multi-scale solver for the NLIF networks, which inherits the low cost of the macroscopic solver and the high reliability of the microscopic solver. For each temporal step, the multi-scale solver uses the macroscopic solver when the firing rate of the simulated network is low, while it switches to the microscopic solver when the firing rate tends to blow up. Moreover, the macroscopic and microscopic solvers are integrated with a high-precision switching algorithm to ensure the accuracy of the multi-scale solver. The validity of the multi-scale solver is analyzed from two perspectives: firstly, we provide practically sufficient conditions that guarantee the mean-field approximation of the macroscopic model and present rigorous numerical analysis on simulation errors when coupling the two solvers; secondly, the numerical performance of the multi-scale solver is validated through simulating several large neuron networks, including networks with either instantaneous or periodic input currents which prompt active firing events over a period of time."
+    },
+    {
+     "arxiv_id": "2008.06903",
+     "link": "https://arxiv.org/abs/2008.06903",
+     "title": "Structure-Preserving Numerical Methods for Nonlinear Fokker--Planck Equations with Nonlocal Interactions by an Energetic Variational Approach",
+     "published": "2020-08-16T13:10:08Z",
+     "updated": "2020-08-16T13:10:08Z",
+     "summary": "In this work, we develop novel structure-preserving numerical schemes for a class of nonlinear Fokker--Planck equations with nonlocal interactions. Such equations can cover many cases of importance, such as porous medium equations with external potentials, optimal transport problems, and aggregation-diffusion models. Based on the Energetic Variational Approach, a trajectory equation is first derived by using the balance between the maximal dissipation principle and least action principle. By a convex-splitting technique, we propose energy dissipating numerical schemes for the trajectory equation. Rigorous numerical analysis reveals that the nonlinear numerical schemes are uniquely solvable, naturally respect mass conservation and positivity at fully discrete level, and preserve steady states. Under certain smoothness assumptions, the numerical schemes are shown to be second order accurate in space and first order accurate in time. Extensive numerical simulations are performed to demonstrate several valuable features of the proposed schemes. In addition to the preservation of physical structures, such as positivity, mass conservation, discrete energy dissipation, blue and steady states, numerical simulations further reveal that our numerical schemes are capable of solving \\emph{degenerate} cases of the Fokker--Planck equations effectively and robustly. It is shown that the developed numerical schemes have convergence order even in degenerate cases with the presence of solutions having compact support, can accurately and robustly compute the waiting time of free boundaries without any oscillation, and can approximate blow-up singularity up to machine precision."
+    },
+    {
+     "arxiv_id": "1711.01911",
+     "link": "https://arxiv.org/abs/1711.01911",
+     "title": "Rigorous numerics of finite-time singularities in dynamical systems - methodology and applications",
+     "published": "2017-11-06T14:43:19Z",
+     "updated": "2017-11-06T14:43:19Z",
+     "summary": "This paper aims at providing rigorous numerical computation procedure for finite-time singularities in dynamical systems. Combination of time-scale desingularization as well as Lyapunov functions validation on stable manifolds of invariant sets for desingularized vector fields with standard integration procedure for ordinary differential equations give us validated trajectories of dynamical systems involving finite-time singularities. Our focus includes finite-time extinction, traveling wave solutions with half-line or compact support, and singular canards in fast-slow systems, including rigorous validations of enclosures of extinction, finite-passage times or size of supports for compactons. Such validated solutions lead to a plenty of composite wave solutions for degenerate parabolic equations, for example, with concrete information of profiles and evolutions. The present procedure also provides a universal aspect of finite-time singularities with rigorous numerics, combining with rigorous numerics of blow-up solutions in preceding works."
+    },
+    {
+     "arxiv_id": "1707.05936",
+     "link": "https://arxiv.org/abs/1707.05936",
+     "title": "Numerical validation of blow-up solutions with quasi-homogeneous compactifications",
+     "published": "2017-07-19T04:49:17Z",
+     "updated": "2017-07-19T04:49:17Z",
+     "summary": "We provide a numerical validation method of blow-up solutions for finite dimensional vector fields admitting asymptotic quasi-homogeneity at infinity. Our methodology is based on quasi-homogeneous compactifications containing a new compactification, which shall be called a quasi-parabolic compactification. Divergent solutions including blow-up solutions then correspond to global trajectories of associated vector fields with appropriate time-variable transformation tending to equilibria on invariant manifolds representing infinity. We combine standard methodology of rigorous numerical integration of differential equations with Lyapunov function validations around equilibria corresponding to divergent directions, which yields rigorous upper and lower bounds of blow-up times as well as rigorous profile enclosures of blow-up solutions."
+    },
+    {
+     "arxiv_id": "1401.7553",
+     "link": "https://arxiv.org/abs/1401.7553",
+     "title": "Numerical Solutions to Singular Reaction-Diffusion Equation over Elliptical Domains",
+     "published": "2014-01-28T14:16:29Z",
+     "updated": "2014-01-28T14:16:29Z",
+     "summary": "Solid fuel ignition models, for which the dynamics of the temperature is independent of the single-species mass fraction, attempt to follow the dynamics of an explosive event. Such models may take the form of singular, degenerate, reaction-diffusion equations of the quenching type, that is, the temporal derivative blows up in finite time while the solution remains bounded. Theoretical and numerical investigations have proved difficult for even the simplest of geometries and mathematical degeneracies. Quenching domains are known to exist for piecewise smooth boundaries, but often lack theoretical estimates. Rectangular geometries have been primarily studied. Here, this acquired knowledge is utilized to determine new theoretical estimates to quenching domains for arbitrary piecewise, smooth, connected geometries. Elliptical domains are of primary interest and a Peaceman-Rachford splitting algorithm is then developed that employs temporal adaptation and nonuniform grids. Rigorous numerical analysis ensures numerical solution monotonicity, positivity, and linear stability of the proposed algorithm. Simulation experiments are provided to illustrate the accomplishments."
+    }
+   ],
+   "n": 5,
+   "retried": true
   },
   {
    "channel": "C4",
    "query": "abs:\"De Gregorio\" AND abs:\"dissipation\"",
    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22De+Gregorio%22+AND+abs%3A%22dissipation%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
-   "status": "UNAVAILABLE",
-   "error": "HTTPError: HTTP Error 429: Unknown Error",
-   "entries": [],
-   "n": null
+   "status": "OK",
+   "entries": [
+    {
+     "arxiv_id": "1908.09385",
+     "link": "https://arxiv.org/abs/1908.09385",
+     "title": "Singularity Formation and Global Well-Posedness for the Generalized Constantin-Lax-Majda Equation with Dissipation",
+     "published": "2019-08-25T20:06:07Z",
+     "updated": "2019-08-25T20:06:07Z",
+     "summary": "We study a generalization due to De Gregorio and Wunsch et.al. of the Constantin-Lax-Majda equation (gCLM) on the real line \\[ \u03c9_t + a u \u03c9_x = u_x \u03c9- \u03bd\u039b^\u03b3 \u03c9, \\quad u_x = H \u03c9, \\] where $H$ is the Hilbert transform and $\u039b= (-\\partial_{xx})^{1/2}$. We use the method in \\cite{chen2019finite} to prove finite time self-similar blowup for $a$ close to $\\frac{1}{2}$ and $\u03b3=2$ by establishing nonlinear stability of an approximate self-similar profile. For $a>-1$, we discuss several classes of initial data and establish global well-posedness and an one-point blowup criterion for different initial data. For $a\\leq-1$, we prove global well-posedness for gCLM with critical and supercritical dissipation."
+    }
+   ],
+   "n": 1,
+   "retried": true
   },
   {
    "channel": "C4",
    "query": "abs:\"Constantin-Lax-Majda\" AND abs:\"dissipation\"",
    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Constantin-Lax-Majda%22+AND+abs%3A%22dissipation%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
-   "status": "UNAVAILABLE",
-   "error": "HTTPError: HTTP Error 429: Unknown Error",
-   "entries": [],
-   "n": null
+   "status": "OK",
+   "entries": [
+    {
+     "arxiv_id": "2607.19762",
+     "link": "https://arxiv.org/abs/2607.19762",
+     "title": "The spectral picture of self-similar collapse in the Constantin-Lax-Majda equation",
+     "published": "2026-07-22T05:12:31Z",
+     "updated": "2026-07-22T05:12:31Z",
+     "summary": "We give a spectral description of the self-similar collapse profile of the Constantin-Lax-Majda (CLM) equation, the $a=0$ anchor of the generalized family $w_t + a\\,u\\,w_x = u_x\\,w$, $u_x = Hw$. Linearizing about the exact profile $\u03a9(y) = -y/(y^2+1/4)$ and realizing $L_0$ as a closed operator on the origin-$H^2$ space, we prove three things at $a=0$. Its essential spectrum meets the closed half-plane $\\{\\mathrm{Re}\\,\u03bb\\ge -1/2\\}$ in the single vertical line $\\{\\mathrm{Re}\\,\u03bb= -1/2\\}$: the line is placed by a log-widening Weyl sequence, and an explicit Hardy-Mellin resolvent bound constructively empties the rest of the half-plane apart from $0$ and $1$. Its full point spectrum over $\\mathbb{C}$, on the odd realization, is exactly $\\{0,1\\}$, the scaling and time-shift symmetry modes, with no embedded eigenvalues; removing these by the standard modulation leaves a spectral gap of $1/2$ on $X$. The linear semigroup and its exact decay rate $e^{-\u03c4/2}$ are computed in closed form, but on a weighted space of the conjugated variable reached from $X$ by a bounded transfer map; we keep the two separate, since $L_0$ is non-normal and a spectral gap does not by itself give a decay rate in the $X$ norm. A realization dichotomy identifies the in-strip smear of generic discretizations as the faithful spectrum of the maximal $L^2$ realization, which origin-$H^2$ removes. For $a>0$ we prove a conditional two-line inclusion for each admissible smooth focusing profile, recompute the branch $c_l(a)$ of Lushnikov, Silantyev, and Siegel as a cross-check, and record the formal scaling-relevance exponent $s^*(a) = 1/c_l(a)$, below which fractional dissipation is asymptotically subdominant in self-similar variables for fixed sufficiently regular data. The contribution is the realization-dependent spectral picture of the collapse profile itself."
+    },
+    {
+     "arxiv_id": "2504.14346",
+     "link": "https://arxiv.org/abs/2504.14346",
+     "title": "Existence and analyticity of solutions of nonlinear parabolic model equations with singular data",
+     "published": "2025-04-19T16:26:20Z",
+     "updated": "2025-04-19T16:26:20Z",
+     "summary": "We explore two approaches to proving existence and analyticity of solutions to nonlinear parabolic differential equations. One of these methods works well for more general nonlinearities, while the second method gives stronger results when the nonlinearity is simpler. The first approach uses the exponentially weighted Wiener algebra, and is related to prior work of Duchon and Robert for vortex sheets. The second approach uses two norms, one with a supremum in time and one with an integral in time, with the integral norm representing the parabolic gain of regularity. As an example of the first approach we prove analyticity of small solutions of a class of generalized one-dimensional Kuramoto-Sivashinsky equations, which model the motion of flame fronts and other phenomena. To illustrate the second approach, we prove existence and analyticity of solutions of the dissipative Constantin-Lax-Majda equation (which models vortex stretching), with and without added advection, with two classes of rough data. The classes of data treated include both data in the Wiener algebra with negative-power weights, as well as data in pseudomeasure spaces with negative-power weights."
+    },
+    {
+     "arxiv_id": "2411.01891",
+     "link": "https://arxiv.org/abs/2411.01891",
+     "title": "Exact periodic solutions of the generalized Constantin-Lax-Majda equation with dissipation",
+     "published": "2024-11-04T08:43:37Z",
+     "updated": "2025-11-03T18:46:07Z",
+     "summary": "We present exact pole dynamics solutions to the generalized Constantin-Lax-Majda (gCLM) equation in a periodic geometry with dissipation $-\u039b^\u03c3$, where its spatial Fourier transform is $\\widehat{\u039b^\u03c3}=|k|^\u03c3$. The gCLM equation is a simplified model for singularity formation in the 3D incompressible Euler equations. It includes an advection term with parameter $a$, which allows different relative weights for advection and vortex stretching. There has been intense interest in the gCLM equation, and it has served as a proving ground for the development of methods to study singularity formation in the 3D Euler equations. Several exact solutions for the problem on the real line have been previously found by the method of pole dynamics, but only one such solution has been reported for the periodic geometry. We derive new periodic solutions for $a=0$ and $1/2$ and $\u03c3=0$ and $1$, for which a closed collection of (periodically repeated) poles evolve in the complex plane. Self-similar finite-time blow-up of the solutions is analyzed and compared for the different values of $\u03c3$, and to a global-in-time well-posedness theory for solutions with small data presented in a previous paper of the authors. Motivated by the exact solutions, the well-posedness theory is extended to include the case $a=0$, $\u03c3\\geq 0$. Several interesting features of the solutions are discussed."
+    },
+    {
+     "arxiv_id": "2207.07548",
+     "link": "https://arxiv.org/abs/2207.07548",
+     "title": "Global existence and singularity formation for the generalized Constantin-Lax-Majda equation with dissipation: The real line vs. periodic domains",
+     "published": "2022-07-15T15:42:46Z",
+     "updated": "2022-07-15T15:42:46Z",
+     "summary": "The question of global existence versus finite-time singularity formation is considered for the generalized Constantin-Lax-Majda equation with dissipation $-\u039b^\u03c3$, where $\\widehat {\u039b^\u03c3}=|k|^\u03c3$, both for the problem on the circle $x \\in [-\u03c0,\u03c0]$ and the real line. In the periodic geometry, two complementary approaches are used to prove global-in-time existence of solutions for $\u03c3\\geq 1$ and all real values of an advection parameter $a$ when the data is small. We also derive new analytical solutions in both geometries when $a=0$, and on the real line when $a=1/2$, for various values of $ \u03c3$. These solutions exhibit self-similar finite-time singularity formation, and the similarity exponents and conditions for singularity formation are fully characterized. We revisit an analytical solution on the real line due to Schochet for $a=0$ and $\u03c3=2$, and reinterpret it terms of self-similar finite-time collapse. The analytical solutions on the real line allow finite-time singularity formation for arbitrarily small data, even for values of $\u03c3$ that are greater than or equal to one, thereby illustrating a critical difference between the problems on the real line and the circle. The analysis is complemented by accurate numerical simulations, which are able to track the formation and motion singularities in the complex plane. The computations validate and extend the analytical theory."
+    },
+    {
+     "arxiv_id": "1908.09385",
+     "link": "https://arxiv.org/abs/1908.09385",
+     "title": "Singularity Formation and Global Well-Posedness for the Generalized Constantin-Lax-Majda Equation with Dissipation",
+     "published": "2019-08-25T20:06:07Z",
+     "updated": "2019-08-25T20:06:07Z",
+     "summary": "We study a generalization due to De Gregorio and Wunsch et.al. of the Constantin-Lax-Majda equation (gCLM) on the real line \\[ \u03c9_t + a u \u03c9_x = u_x \u03c9- \u03bd\u039b^\u03b3 \u03c9, \\quad u_x = H \u03c9, \\] where $H$ is the Hilbert transform and $\u039b= (-\\partial_{xx})^{1/2}$. We use the method in \\cite{chen2019finite} to prove finite time self-similar blowup for $a$ close to $\\frac{1}{2}$ and $\u03b3=2$ by establishing nonlinear stability of an approximate self-similar profile. For $a>-1$, we discuss several classes of initial data and establish global well-posedness and an one-point blowup criterion for different initial data. For $a\\leq-1$, we prove global well-posedness for gCLM with critical and supercritical dissipation."
+    }
+   ],
+   "n": 5,
+   "retried": true
   },
   {
    "channel": "C4",
@@ -372,28 +463,118 @@
    "channel": "C4",
    "query": "abs:\"Boussinesq\" AND abs:\"computer-assisted\"",
    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Boussinesq%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
-   "status": "UNAVAILABLE",
-   "error": "HTTPError: HTTP Error 503: Service Unavailable",
-   "entries": [],
-   "n": null
+   "status": "OK",
+   "entries": [
+    {
+     "arxiv_id": "2607.15256",
+     "link": "https://arxiv.org/abs/2607.15256",
+     "title": "Analytic finite-rank corrections for singularly weighted estimates in a computer-assisted proof of 3D Euler singularity",
+     "published": "2026-07-16T17:51:23Z",
+     "updated": "2026-07-16T17:51:23Z",
+     "summary": "Computer-assisted proofs of self-similar singularity formation for fluid equations often rely on numerically constructed approximate profiles. One effective approach to establishing stability of perturbations around a numerically constructed profile is to perform weighted energy estimates with singular weights near the singularity. However, the weighted norms require exact local vanishing conditions that are not automatically preserved by the equations nor the numerical construction. In this paper, we review an analytic low-rank correction method first developed in [ChenHou2023a,ChenHou2023b] to overcome this difficulty. The numerical step determines coefficients, rigorous bounds, and low-order defect modes in explicit global basis representations, while the required vanishing conditions are enforced analytically through low-rank corrections derived from Taylor expansions of the relevant quantities represented in a smooth basis. For completeness, we briefly review the singularly weighted estimates and a quantitative finite-rank perturbation method in the 2D Boussinesq / 3D Euler stability argument, where singular weights and the required vanishing order arise. Against this background, we formulate the local correction principle in a simplified setting, explain the correction of the residual error in numerical constructions of approximate space-time solutions and the stream function, and discuss its broader applicability to computer-assisted stability analysis for nonlocal PDEs."
+    },
+    {
+     "arxiv_id": "2511.22819",
+     "link": "https://arxiv.org/abs/2511.22819",
+     "title": "Resolving Sharp Gradients of Unstable Singularities to Machine Precision via Neural Networks",
+     "published": "2025-11-28T00:42:21Z",
+     "updated": "2025-11-28T00:42:21Z",
+     "summary": "Recent work introduced a robust computational framework combining embedded mathematical structures, advanced optimization, and neural network architecture, leading to the discovery of multiple unstable self-similar solutions for key fluid dynamics equations, including the Incompressible Porous Media (IPM) and 2D Boussinesq systems. While this framework confirmed the existence of these singularities, an accuracy level approaching double-float machine precision was only achieved for stable and 1st unstable solutions of the 1D C\u00f3rdoba-C\u00f3rdoba-Fontelos model. For highly unstable solutions characterized by extreme gradients, the accuracy remained insufficient for validation. The primary obstacle is the presence of sharp solution gradients. Those gradients tend to induce large, localized PDE residuals during training, which not only hinder convergence, but also obscure the subtle signals near the origin required to identify the correct self-similar scaling parameter lambda of the solutions. In this work, we introduce a gradient-normalized PDE residual re-weighting scheme to resolve the high-gradient challenge while amplifying the critical residual signals at the origin for lambda identification. Coupled with the multi-stage neural network architecture, the PDE residuals are reduced to the level of round-off error across a wide spectrum of unstable self-similar singularities previously discovered. Furthermore, our method enables the discovery of new highly unstable singularities, i.e. the 4th unstable solution for IPM equations and a novel family of highly unstable solitons for the Nonlinear Schr\u00f6dinger equations. This results in achieving high-gradient solutions with high precision, providing an important ingredient for bridging the gap between numerical discovery and computer-assisted proofs for unstable phenomena in nonlinear PDEs."
+    },
+    {
+     "arxiv_id": "2506.19243",
+     "link": "https://arxiv.org/abs/2506.19243",
+     "title": "High precision PINNs in unbounded domains: application to singularity formulation in PDEs",
+     "published": "2025-06-24T02:01:44Z",
+     "updated": "2025-06-24T02:01:44Z",
+     "summary": "We investigate the high-precision training of Physics-Informed Neural Networks (PINNs) in unbounded domains, with a special focus on applications to singularity formulation in PDEs. We propose a modularized approach and study the choices of neural network ansatz, sampling strategy, and optimization algorithm. When combined with rigorous computer-assisted proofs and PDE analysis, the numerical solutions identified by PINNs, provided they are of high precision, can serve as a powerful tool for studying singularities in PDEs. For 1D Burgers equation, our framework can lead to a solution with very high precision, and for the 2D Boussinesq equation, which is directly related to the singularity formulation in 3D Euler and Navier-Stokes equations, we obtain a solution whose loss is $4$ digits smaller than that obtained in \\cite{wang2023asymptotic} with fewer training steps. We also discuss potential directions for pushing towards machine precision for higher-dimensional problems."
+    },
+    {
+     "arxiv_id": "2310.19781",
+     "link": "https://arxiv.org/abs/2310.19781",
+     "title": "Invertibility of a linearized Boussinesq flow: a symbolic approach",
+     "published": "2023-10-30T17:48:21Z",
+     "updated": "2025-04-08T11:54:01Z",
+     "summary": "We develop a computer-assisted symbolic method to show that a linearized Boussinesq flow in self-similar coordinates gives rise to an invertible operator."
+    },
+    {
+     "arxiv_id": "2305.05660",
+     "link": "https://arxiv.org/abs/2305.05660",
+     "title": "Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations with smooth data II: Rigorous Numerics",
+     "published": "2023-05-09T17:55:02Z",
+     "updated": "2024-06-17T04:01:06Z",
+     "summary": "This is Part II of our paper in which we prove finite time blowup of the 2D Boussinesq and 3D axisymmetric Euler equations with smooth initial data of finite energy and boundary. In Part I of our paper [ChenHou2023a], we establish an analytic framework to prove stability of an approximate self-similar blowup profile by a combination of a weighted $L^\\infty$ norm and a weighted $C^{1/2}$ norm. Under the assumption that the stability constants, which depend on the approximate steady state, satisfy certain inequalities stated in our stability lemma, we prove stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations with smooth initial data and boundary. In Part II of our paper, we provide sharp stability estimates of the linearized operator by constructing space-time solutions with rigorous error control. We also obtain sharp estimates of the velocity in the regular case using computer assistance. These results enable us to verify that the stability constants obtained in Part I [ChenHou2023a] indeed satisfy the inequalities in our stability lemma. This completes the analysis of the finite time singularity of the axisymmetric Euler equations with smooth initial data and boundary."
+    },
+    {
+     "arxiv_id": "2201.06780",
+     "link": "https://arxiv.org/abs/2201.06780",
+     "title": "Asymptotic self-similar blow-up profile for three-dimensional axisymmetric Euler equations using neural networks",
+     "published": "2022-01-18T07:21:31Z",
+     "updated": "2023-05-07T23:57:49Z",
+     "summary": "Whether there exist finite time blow-up solutions for the 2-D Boussinesq and the 3-D Euler equations are of fundamental importance to the field of fluid mechanics. We develop a new numerical framework, employing physics-informed neural networks (PINNs), that discover, for the first time, a smooth self-similar blow-up profile for both equations. The solution itself could form the basis of a future computer-assisted proof of blow-up for both equations. In addition, we demonstrate PINNs could be successfully applied to find unstable self-similar solutions to fluid equations by constructing the first example of an unstable self-similar solution to the C\u00f3rdoba-C\u00f3rdoba-Fontelos equation. We show that our numerical framework is both robust and adaptable to various other equations."
+    },
+    {
+     "arxiv_id": "1509.08648",
+     "link": "https://arxiv.org/abs/1509.08648",
+     "title": "Rigorous numerics for ill-posed PDEs: periodic orbits in the Boussinesq equation",
+     "published": "2015-09-29T09:08:00Z",
+     "updated": "2015-09-29T09:08:00Z",
+     "summary": "In this paper, we develop computer-assisted techniques for the analysis of periodic orbits of ill-posed partial differential equations. As a case study, our proposed method is applied to the Boussinesq equation, which has been investigated extensively because of its role in the theory of shallow water waves. The idea is to use the symmetry of the solutions and a Newton-Kantorovich type argument (the radii polynomial approach), to obtain rigorous proofs of existence of the periodic orbits in a weighted $\\ell^1$ Banach space of space-time Fourier coefficients with geometric decay. We present several computer-assisted proofs of existence of periodic orbits at different parameter values."
+    }
+   ],
+   "n": 7,
+   "retried": true
   },
   {
    "channel": "C4",
    "query": "abs:\"surface quasi-geostrophic\" AND abs:\"computer-assisted\"",
    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22surface+quasi-geostrophic%22+AND+abs%3A%22computer-assisted%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
-   "status": "UNAVAILABLE",
-   "error": "TimeoutError: The read operation timed out",
+   "status": "OK",
    "entries": [],
-   "n": null
+   "n": 0,
+   "retried": true
   },
   {
    "channel": "C4",
    "query": "abs:\"Navier-Stokes\" AND abs:\"computer-assisted proof\" AND abs:\"singularity\"",
    "url": "https://export.arxiv.org/api/query?search_query=abs%3A%22Navier-Stokes%22+AND+abs%3A%22computer-assisted+proof%22+AND+abs%3A%22singularity%22&max_results=60&sortBy=submittedDate&sortOrder=descending",
-   "status": "UNAVAILABLE",
-   "error": "TimeoutError: The read operation timed out",
-   "entries": [],
-   "n": null
+   "status": "OK",
+   "entries": [
+    {
+     "arxiv_id": "2604.09949",
+     "link": "https://arxiv.org/abs/2604.09949",
+     "title": "Stable Finite-Time Singularity Formation for 3D Navier--Stokes via 5D-Lifted Axisymmetric Reductions",
+     "published": "2026-04-10T23:03:18Z",
+     "updated": "2026-04-10T23:03:18Z",
+     "summary": "We present a 5D-lifted analytic-profile program for finite-time singularity formation in the 3D incompressible Navier--Stokes equations on the periodic torus $\\T^3$. The core of the construction is a stationary rescaled profile $\\Ombar$ satisfying a nonlinear elliptic fixed-point equation in an analytically weighted Hilbert space $\\Xspace$, together with a computer-assisted Newton--Kantorovich validation based on interval arithmetic. The profile is reconstructed into a nearly self-similar singular evolution and then transferred to $\\T^3$ by periodic extension and exact Leray projection. The manuscript is organized in the style of a computer-assisted proof paper, with theorem statements, proof packages, and explicit validation constants for the residual, inverse stability, and Lipschitz bounds."
+    },
+    {
+     "arxiv_id": "2509.14185",
+     "link": "https://arxiv.org/abs/2509.14185",
+     "title": "Discovery of Unstable Singularities",
+     "published": "2025-09-17T17:18:10Z",
+     "updated": "2025-09-17T17:18:10Z",
+     "summary": "Whether singularities can form in fluids remains a foundational unanswered question in mathematics. This phenomenon occurs when solutions to governing equations, such as the 3D Euler equations, develop infinite gradients from smooth initial conditions. Historically, numerical approaches have primarily identified stable singularities. However, these are not expected to exist for key open problems, such as the boundary-free Euler and Navier-Stokes cases, where unstable singularities are hypothesized to play a crucial role. Here, we present the first systematic discovery of new families of unstable singularities. A stable singularity is a robust outcome, forming even if the initial state is slightly perturbed. In contrast, unstable singularities are exceptionally elusive; they require initial conditions tuned with infinite precision, being in a state of instability whereby infinitesimal perturbations immediately divert the solution from its blow-up trajectory. In particular, we present multiple new, unstable self-similar solutions for the incompressible porous media equation and the 3D Euler equation with boundary, revealing a simple empirical asymptotic formula relating the blow-up rate to the order of instability. Our approach combines curated machine learning architectures and training schemes with a high-precision Gauss-Newton optimizer, achieving accuracies that significantly surpass previous work across all discovered solutions. For specific solutions, we reach near double-float machine precision, attaining a level of accuracy constrained only by the round-off errors of the GPU hardware. This level of precision meets the requirements for rigorous mathematical validation via computer-assisted proofs. This work provides a new playbook for exploring the complex landscape of nonlinear partial differential equations (PDEs) and tackling long-standing challenges in mathematical physics."
+    },
+    {
+     "arxiv_id": "2506.19243",
+     "link": "https://arxiv.org/abs/2506.19243",
+     "title": "High precision PINNs in unbounded domains: application to singularity formulation in PDEs",
+     "published": "2025-06-24T02:01:44Z",
+     "updated": "2025-06-24T02:01:44Z",
+     "summary": "We investigate the high-precision training of Physics-Informed Neural Networks (PINNs) in unbounded domains, with a special focus on applications to singularity formulation in PDEs. We propose a modularized approach and study the choices of neural network ansatz, sampling strategy, and optimization algorithm. When combined with rigorous computer-assisted proofs and PDE analysis, the numerical solutions identified by PINNs, provided they are of high precision, can serve as a powerful tool for studying singularities in PDEs. For 1D Burgers equation, our framework can lead to a solution with very high precision, and for the 2D Boussinesq equation, which is directly related to the singularity formulation in 3D Euler and Navier-Stokes equations, we obtain a solution whose loss is $4$ digits smaller than that obtained in \\cite{wang2023asymptotic} with fewer training steps. We also discuss potential directions for pushing towards machine precision for higher-dimensional problems."
+    },
+    {
+     "arxiv_id": "1704.00560",
+     "link": "https://arxiv.org/abs/1704.00560",
+     "title": "Numerical investigations of non-uniqueness for the Navier-Stokes initial value problem in borderline spaces",
+     "published": "2017-04-03T13:04:37Z",
+     "updated": "2017-04-03T13:04:37Z",
+     "summary": "We consider the Cauchy problem for the incompressible Navier-Stokes equations in $\\mathbb{R}^3$ for a one-parameter family of explicit scale-invariant axi-symmetric initial data, which is smooth away from the origin and invariant under the reflection with respect to the $xy$-plane. Working in the class of axi-symmetric fields, we calculate numerically scale-invariant solutions of the Cauchy problem in terms of their profile functions, which are smooth. The solutions are necessarily unique for small data, but for large data we observe a breaking of the reflection symmetry of the initial data through a pitchfork-type bifurcation. By a variation of previous results by Jia & \u0160ver\u00e1k (2013) it is known rigorously that if the behavior seen here numerically can be proved, optimal non-uniqueness examples for the Cauchy problem can be established, and two different solutions can exists for the same initial datum which is divergence-free, smooth away from the origin, compactly supported, and locally $(-1)$-homogeneous near the origin. In particular, assuming our (finite-dimensional) numerics represents faithfully the behavior of the full (infinite-dimensional) system, the problem of uniqueness of the Leray-Hopf solutions (with non-smooth initial data) has a negative answer and, in addition, the perturbative arguments such those by Kato (1984) and Koch & Tataru (2001), or the weak-strong uniqueness results by Leray, Prodi, Serrin, Ladyzhenskaya and others, already give essentially optimal results. There are no singularities involved in the numerics, as we work only with smooth profile functions. It is conceivable that our calculations could be upgraded to a computer-assisted proof, although this would involve a substantial amount of additional work and calculations, including a much more detailed analysis of the asymptotic expansions of the solutions at large distances."
+    }
+   ],
+   "n": 4,
+   "retried": true
   },
   {
    "channel": "C4",
@@ -808,5 +989,6 @@
    ],
    "status": "OK"
   }
- ]
+ ],
+ "retry_utc": "2026-08-11T15:53:52Z"
 }

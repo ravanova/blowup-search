@@ -225,12 +225,8 @@ def screen(entry):
 # quietly changed after the fact.  Anything not listed keeps its mechanical
 # verdict.  Key = arXiv id (no version).
 # --------------------------------------------------------------------------
-ADJUDICATIONS = {}
-try:
-    from p2_route_gaf_v1_adjudications import ADJUDICATIONS as _ADJ  # optional sidecar
-    ADJUDICATIONS = _ADJ
-except Exception:
-    pass
+from p2_route_gaf_v1_adjudications import (  # noqa: E402
+    ADJUDICATIONS, SCREEN_BOUNDARY, METHOD_FINDINGS)
 
 
 def ledger_ids():
@@ -247,6 +243,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--offline", action="store_true",
                     help="re-curate from the committed raw log instead of querying")
+    ap.add_argument("--retry-unavailable", action="store_true",
+                    help="re-query only the rows the last run could not reach (arXiv "
+                         "rate-limits at ~3s spacing; this retries them slowly). An "
+                         "UNAVAILABLE row is NOT a zero -- leg-123 precedent.")
     args = ap.parse_args()
 
     known, vn = ledger_ids()
@@ -255,12 +255,31 @@ def main():
     WINDOW["gap_days_since_last_broad_sweep"] = round(
         (datetime.now(timezone.utc) - t0).total_seconds() / 86400.0, 2)
 
-    if args.offline:
+    if args.offline or args.retry_unavailable:
         with open(RAW) as fh:
             raw = json.load(fh)
         run_utc = raw["run_utc"]
         WINDOW["gap_days_since_last_broad_sweep"] = raw["window"]["gap_days_since_last_broad_sweep"]
-    else:
+
+    if args.retry_unavailable:
+        for rec in raw["queries"]:
+            if rec["status"] == "OK":
+                continue
+            url, entries, err = arxiv_query(rec["query"], retries=5)
+            if err is None:
+                rec.update(status="OK", n=len(entries), entries=entries, url=url)
+                rec.pop("error", None)
+                rec["retried"] = True
+            else:
+                rec["error"] = err
+            print(f"  retry {rec['channel']} n={rec['n']!s:>4} {rec['status']:<12} "
+                  f"{rec['query']}", flush=True)
+            time.sleep(25)
+        raw["retry_utc"] = datetime.now(timezone.utc).replace(
+            microsecond=0).isoformat().replace("+00:00", "Z")
+        with open(RAW, "w") as fh:
+            json.dump(raw, fh, indent=1, sort_keys=False)
+    elif not args.offline:
         raw = {"run_utc": run_utc, "window": WINDOW, "queries": []}
         for cid, cdesc, queries in CHANNELS:
             for q in queries:
@@ -311,6 +330,10 @@ def main():
         if adj:
             row["adjudication"] = adj.get("why", "")
             row["failing_clause"] = adj.get("failing_clause")
+            for k in ("overrides_mechanical", "metadata", "what_this_leg_does_with_it",
+                      "credibility_flags_visible_at_abstract_level"):
+                if k in adj:
+                    row[k] = adj[k]
         if verdict == "HIT":
             hits.append(row)
         elif verdict == "NEAR":
@@ -326,6 +349,10 @@ def main():
 
     new_hits = [h for h in hits if not h["already_in_PRECEDENTS"]]
     gate_answer = "YES" if new_hits else "NO"
+
+    n_overridden = sum(1 for r in hits + nears if r.get("overrides_mechanical"))
+    leg174_unrecorded_links = sum(n for _, n in C1_LEG174)
+    c1_identical = all(g["delta"] == 0 for g in growth) if growth else None
 
     curated = {
         "leg": 303,
@@ -358,14 +385,28 @@ def main():
                      "new hit would be"),
             "rows": growth,
             "n_grown": sum(1 for g in growth if (g["delta"] or 0) > 0),
+            "all_counts_identical_to_leg174": c1_identical,
+            "leg174_links_never_recorded": leg174_unrecorded_links,
+            "consequence": ("identical counts prove leg 174's net saw the same result sets; "
+                            "because SEARCH_LOG banked counts and not links, WHICH of those "
+                            "papers leg 174 read and rejected is unrecoverable (see MF2)"),
         },
         "cell_state": {
             "grade_A_fluid_occupants_before": 0,
-            "grade_A_fluid_occupants_after": len(new_hits),
+            "grade_A_fluid_occupants_claimed_after": len(new_hits),
+            "grade_A_fluid_occupants_ESTABLISHED_after": 0,
+            "why_claimed_not_established": (
+                "the one HIT is adjudicated from title+abstract, the depth this leg is scoped "
+                "to; establishing occupancy needs the adversarial full-text read, which is "
+                "reserve leg 309 by explicit dispatch. The cell is recorded as CLAIMED, not "
+                "FILLED, and Phase 1's premise is NOT recorded as broken by this leg."),
             "n_hits_new_to_ledger": len(new_hits),
             "n_near_misses_recorded": len(nears),
+            "n_mechanical_verdicts_overridden": n_overridden,
             "ledger_ids_known": sorted(known),
         },
+        "screen_boundary_NRS_Tsai": SCREEN_BOUNDARY,
+        "method_findings": METHOD_FINDINGS,
         "hits": hits,
         "near_misses": nears,
         "query_log": [{"channel": r["channel"], "query": r["query"], "url": r["url"],
@@ -373,8 +414,14 @@ def main():
                        "links": [e["link"] for e in (r.get("entries") or [])]}
                       for r in raw["queries"]],
         "escalation": ("none" if not new_hits else
-                       "a hit new to the ledger -- pointer only; adversarial full-text read "
-                       "is reserve leg 309, and a cell-FILLING hit is the user's to weigh"),
+                       "ESCALATION-CANDIDATE, not an escalation as landed: arXiv:2604.09949 "
+                       "CLAIMS the Grade-A/fluid cell. This leg lands normally because none of "
+                       "the four escalations (ORCHESTRATION.md sec 8) is triggered -- no "
+                       "plan_of_record change, no ban lifted, no Clay-chain movement claimed, "
+                       "no banked result rewritten -- and because 'actually FILLS the cell' "
+                       "cannot be established at abstract depth. Leg 309 is now load-bearing: "
+                       "if its read holds the claim up, Phase 1's premise falls, and THAT is "
+                       "the user's to weigh."),
         "clay_odds_note": ("unchanged at ~0.05%: a freshness re-check of a literature cell "
                            "moves no link of the L1->L4 chain"),
     }
