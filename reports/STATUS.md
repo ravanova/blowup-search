@@ -1,8 +1,8 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-11 — same orchestrator session, cycle 9 (user's ceiling-raising
-programme executed).
-`origin/main` at `a17554c`, merge gate green. Full detail in `PROGRESS.md`
+*Refreshed 2026-08-12 — same orchestrator session, cycle 9f (user's
+ceiling-raising programme ANSWERED: S1 DIES, ceiling stays Tier 2).
+`origin/main` at `d0248c6`, merge gate green. Full detail in `PROGRESS.md`
 (git-ignored, more current), `reports/ORCH_STATE.md` (full handoff detail and
 institutional memory), and `experiments/JOURNAL.md` (the durable ledger).*
 
@@ -46,43 +46,74 @@ institutional memory), and `experiments/JOURNAL.md` (the durable ledger).*
    ruling on the DSS ban-wording question is the only thing this is waiting
    on.**
 
-2. **NEW — leg 329's C4 pre-registration defect, a reading question, routed to
-   you directly per your own ceiling-raising-programme directive (the DM's
-   cycle-8e ruling on this is now withdrawn of force; its content is attached
-   below as analysis only, not a decision).** Leg 329 (arbitrary-precision
-   recheck of `B4_egm`/`E_egm`) found that its control C4 was pre-registered
-   as an agreement test (does an MP Rayleigh quotient match the eigensolve),
-   but is actually a one-sided upper bound on the gap the eigensolve measures.
-   The question, in the leg's own terms: **is −R(x) an agreement test, or the
-   bound it actually computes?**
-   - Read as pre-registered (agreement test): C4 fires (disagrees at
-     8.69e-06/1.18e-05, four orders above its 1e-9 slack) → the gate is
-     **NO**, consistent with leg 178's original finding, escalation #3 stays
-     parked.
-   - Read as what it computes (a one-sided bound): the bound lands *below*
-     1/2 by 5.19e-18/1.42e-18 → clause 5 ("gap ≤ 1/2 + 1e-9") is **established
-     more firmly than the eigensolve ever could**, the gate flips to **YES**,
-     and escalation #3's parked yes-branch fires (report-and-escalate,
-     leg 178's gate text stays byte-identical).
-   - Magnitudes on equal footing: bound margin 5.19e-18 (`B4_egm`) /
-     1.42e-18 (`E_egm`); measured truncation sensitivity under leg 329's own
-     C5 rcond ladder 3.85e-05 / 5.39e-05 (thirteen orders larger);
-     `cond(G) = 2.554e+11`. The leg's own ground for not resolving this
-     itself: novelty §7d forbids overriding a fired control in the direction
-     everyone hopes the answer moves, so it reported literally and escalated.
-   - **DM analysis, attached without force, for your consideration only**: the
-     margin is thirteen orders smaller than C5's measured truncation
-     sensitivity; a Rayleigh quotient one-sides the *truncated matrix's*
-     eigenvalue rather than the operator clause 5 names; these rows sit at
-     EGM's published +1/2, a knife edge, and this repo's standing 318/302
-     lesson is that knife edges are decided in exact/enclosed arithmetic, not
-     by which side a float lands on.
-   - **Independent of your ruling here**, leg 340 (EGRB, running in slot D)
-     is separately re-deriving the bound with the truncation explicitly
-     controlled at every C5 ladder rung — that measurement is useful input to
-     this question under either reading and will report on its own schedule.
-   Files: `writeup/data/p2_route_egmf_v1.json`
-   (`gate_answer.C4_pre_registration_defect`), `experiments/journal/leg_329.md` §4d.
+2. **RESOLVED BY MEASUREMENT — leg 340 (EGRB) answered leg 329's C4 reading
+   question, and the answer is an identity, not a measurement.** Leg 340
+   re-derived the bound with truncation fully controlled, in exact
+   rational+π arithmetic (substitution X=tan(θ/2): every relevant integral
+   collapses to R=(r1+q1π)/(r2+q2π) exactly, no floats in the exact path).
+   At all 19 ladder rungs, for both `B4_egm` and `E_egm`, R = −1/2 EXACTLY:
+   bound=1/2, margin=exactly 1e-9, dependence on the truncation parameter=
+   exactly 0, enclosure width 1.4e-59 — against a measured eigensolve spread
+   of 1.927e-05/2.697e-05, reproducing leg 329's own banked
+   3.853e-05/5.394e-05 relative spreads. Structural cause: `Sym(B) = -G/2`
+   entry-by-entry, because the nonlocal Hilbert term vanishes identically on
+   `T2_egm` while `D_φ ≡ -1/2`. Eleven controls pass; six able to fire
+   against, notably `A4_chen_hou` (non-constant `D_φ`) gives -0.5001506 and
+   FAILS the ceiling — the instrument is not a tautology of the code itself.
+   **The gate answers YES on this bound.**
+   - **MANDATORY SECOND READING, pre-registered before the run (novelty
+     §7e), and this is the part that needs your ruling**: since R=-1/2 is an
+     identity, clause 5 is a TAUTOLOGY on this class and cannot come out
+     otherwise. A flip of leg 178's original NO would be a flip ON AN
+     IDENTITY, not a measurement. The question for you: does a tautological
+     pass flip 178's substance (escalation #3's parked yes-branch fires,
+     report-and-escalate), or does the fact that clause 5 cannot fail on this
+     class void the clause's evidential weight here entirely, leaving 178's
+     NO standing on other grounds?
+   - The leg explicitly declined to adjudicate this itself, deferring to you
+     per the standing cycle-8e ruling that this class of call is yours, not
+     the DM's or the leg's. The DM's cycle-9f ruling adds nothing decisional
+     either, endorsing the orchestrator's direct escalation and noting only
+     that exact arithmetic decided the knife edge at exactly 1/2 — neither
+     prior reading's naive victory, since the "bound" margin was real but is
+     the slack itself, and the original "agreement test" fired on eigensolve
+     float noise.
+   Files: `experiments/journal/leg_340.md`, `writeup/novelty/leg_340.md`,
+   `writeup/data/p2_route_egrb_v1.json`. Landed `165a402`.
+
+3. **NEW — the ceiling-raising programme's answer: S1 DIES, route 4's ceiling
+   stays Tier 2. A resource-commitment decision now sits on top of this,
+   yours to make.** Leg 341 (ALGW) found that leg 260's algebraically
+   weighted space — the "namable fourth space" the stage-V ban's lift
+   condition asks for — has already been realized in three independent
+   lanes, each already dead by a different mechanism (sup-norm/collocation:
+   6.04x short at theoretical optimum; coefficient/ℓ¹-weighted: no window at
+   any exponent, re-attempt already banned; origin-conjugated/Mellin: dies
+   orthogonally, no transfer). No lift-condition packet was assembled; the
+   deferred §3 build is never drafted; leg 334's clause (a) closes
+   CLOSED-NO. **No ban is lifted or touched by this — that ruling stays
+   yours regardless, per your own directive.**
+   - Leg 342 (SEED) separately found route 4 has no screen-passing seed
+     today, but named one creation path: retargeting PINN/KAN machinery at
+     the true 3D NS DSS ansatz, costed at ≈35 legs.
+   - Leg 344 (PKLR) sharpened that estimate's inputs with a controlled
+     literature inventory: the "Hou PINN/KAN machinery" label was a
+     mislabel (KAN was never demonstrated on NS/Euler anywhere), and named a
+     stronger retarget base (arXiv:2509.14185, DeepMind+Buckmaster+
+     Gómez-Serrano, Sept 2025) whose own authors name boundary-free 3D Euler
+     as their next open problem. The ≈35-leg estimate is unmoved
+     numerically but its largest risk (the DSS/time-periodic gap) is now
+     confirmed against two independent literature lines instead of one.
+   - **The decision for you**: 342/344's 35-leg creation path is now costed
+     against a route whose parent lift condition already failed (S1 dies).
+     Spending those 35 legs would raise route 4's *seeding* completeness,
+     not its Tier-2 ceiling — the ceiling stays Tier 2 regardless, per 341's
+     finding, unless a different lift condition is found. Is that 35-leg
+     spend still worth it under this programme, or should it be shelved?
+   Files: `experiments/journal/leg_341.md`, `writeup/data/p2_route_algw_v1.json`,
+   `experiments/journal/leg_342.md`, `writeup/data/p2_route_seed_v1.json`,
+   `experiments/journal/leg_344.md`, `writeup/data/p2_route_pklr_v1.json`.
+   Landed `782a310`, `fc65c1e`, `3ec2516`.
 
 (Older NEEDS-YOU items — leg 297's anchor-JSON fix, leg 280's sign-off, the
 Phase-1 construction-decision packet — have since been resolved/absorbed in
@@ -273,18 +304,41 @@ starting point. Independent gain: vorticity of a Type-I profile lands in
 *unweighted* L²(ℝ³), a second argument for the vorticity formulation
 alongside leg 332's.
 
-**Currently running, all four slots (A vacant, just freed by 334):**
+## Cycle 9e-9f — four more landings, three of four slots freed then refilled
 
-| Slot | Leg | Route | Dispatched |
+**340 (EGRB), 342 (SEED), 341 (ALGW), and 344 (PKLR) all landed this window
+— see NEEDS-YOU items 2 and 3 above for the findings.** All four audited
+clean (territory diffs exactly the declared files, no ban/DM/sibling-leg
+files touched) and independently merge-gate re-verified PASS before being
+reported to the DM. DM cycle 9f absorbed 340 and 342 (340's user escalation
+endorsed, 342's 35-leg path recorded and routed into the same decision
+packet, not drafted on DM authority) and refilled under a stated §3b floor
+bind — the entire dispatchable reserve was non-eligible corrections/audit
+work, so filling both vacancies from it would have put the floor at 1/4,
+below §3b's hard 2-of-4. Slot D got leg 336 (C305, corrections rank 1); slot
+B got a fresh floor-eligible leg 344 (PKLR) drafted specifically to feed the
+same 341-landing decision packet.
+
+**Leg 336 (C305) landed gate YES** — two claim-bearing corrections to leg
+305's prose (elasticity ranking corrected, one of seven "capped rows"
+adjudicated inert-by-construction rather than genuinely capped), SHARP
+verdict unmoved by either. Two downstream repeat-sites flagged
+(`experiments/JOURNAL.md:5018`, `writeup/INDEX.md:124`), not edited
+(out of leg 336's territory).
+
+**Currently running (three of four slots vacant, awaiting DM refill):**
+
+| Slot | Leg | Route | Status |
 |---|---|---|---|
-| A | — | vacant, awaiting DM refill (334 landed YES on all four clauses) | — |
-| B | 342 | SEED — route-4's seeding problem, scoped independently (user programme §4) | cycle 9c, running |
-| C | 341 | ALGW — the fourth-space scoping leg (user programme §1+§2 merged); the DM's cycle-9d ruling made this leg's priority standing text in `DIRECTION.md` (a CEILING-GATE PRIORITY block — while 341 is in flight, its consequence work takes any vacancy ahead of the entire reserve) | cycle 9b, running |
-| D | 340 | EGRB — truncation-controlled re-derivation of the C4 bound (feeds the user's NEEDS-YOU item #2 below) | cycle 8e, running |
+| A | 335 | S1GR — resolves the 221 flag/repair gap | cycle 9e, running |
+| B | — | vacant (344 PKLR landed `3ec2516`) | — |
+| C | — | vacant (341 ALGW landed `782a310`) | — |
+| D | — | vacant (336 C305 landed `d0248c6`) | — |
 
-Reserve: 20 undispatched, 14 immediately dispatchable (335 S1GR next in rank
-order). Next fresh leg number: **343**. No ban lifted this cycle; no L1→L4
-link moved.
+Reserve and next fresh leg number as of the DM's cycle 9f ruling: 19
+undispatched, 12 dispatchable, next fresh number **345**. No ban lifted this
+window; no L1→L4 link moved. Awaiting the DM's next refill ruling for
+slots B/C/D.
 
 ## Context — the ten-to-four downsize and the spend-limit kill
 
