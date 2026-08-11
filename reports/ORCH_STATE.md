@@ -5,7 +5,70 @@ session reads this at Step 0b before dispatching anything.
 
 ---
 
-## Status: RUNNING — fresh orchestrator session, 2026-08-11 ~15:30 UTC, cycle 1
+## Status: RUNNING — same orchestrator session, 2026-08-11 ~17:50 UTC, **cycle 4** (§9d handoff)
+
+`main` at `63d973a`, merge gate **PASS**. Ten slots live, Decision Maker live and reachable.
+This block supersedes the cycle-1 roster below; the cycle-1 block is left intact as history.
+
+**A fresh orchestrator reading this at Step 0b: read this block, then the Environment notes,
+Known flakes and Incidents sections at the bottom of this file, then `PROGRESS.md`. Do not
+dispatch before Step 0b's own liveness sweep — environment note 3 says this file has been
+stale by days before.**
+
+### Live-slot roster, cycle 4
+
+| Slot | Leg | Route | Dispatched | Floor-eligible |
+|---|---|---|---|---|
+| A | 312 | APIA — arbitrary-precision interval arithmetic (steer item 1) | cycle 3 | **yes** |
+| B | 221 | BVRR — `boussinesq_rescaled.py` repair (long-lived, resumed on 3 WIP commits) | cycle 1 | no |
+| C | 323 | CENV — census variant re-run under MF1 | cycle 3 | **yes** |
+| D | 313 | SDSS — does leg 260's obstruction survive seeding? (steer item 3) | cycle 4 | **yes** |
+| E | 314 | FUS — finite-unstable-spectrum classification (steer item 5) | cycle 4 | **yes** |
+| F | 321 | BLCX — blog L102/L108 + two gate-text pointers | cycle 4 | no |
+| G | 320 | MTSC — Malmquist–Takenaka scoping (from escalation #8) | cycle 3 | **yes** |
+| H | 229 | PNRV — post-repair verification of leg 226 | cycle 1 | no |
+| I | 292 | CAPA — `capabilities.py` freshness audit | cycle 1 | no |
+| J | 287 | EPA — environment-portability census | cycle 1 | no |
+
+Floor **6/10**, well above §3b's minimum of 3. **Reserve 17** — 315, 318, 322, 324, 293, 298,
+299, 321, 305, 306, 307, 308, 310, 231–234; immediately dispatchable **7**. Blocked with known
+triggers: 308 on 312, 307 on 221, 310 on 287+298. **Next fresh leg number: 325.**
+
+**Legs closed this session (10):** 297 (`b2d750b`), 304 CADX YES(i) (`b319449`), 300 P0TCV NO
+(`5e30bf3`), 311 IVAX YES (`2a3dcbe`), 301 FSB YES = **escalation #8, parked**, 286 CNRV YES
+(`fe5e84d`), 303 GAF YES (`fc8bb1f`), 280 PUB2X YES (`fec7b4c`), 316 DFRE YES (`a863de2`),
+302 P2T1 NO (`55166b8`), 309 GAF2 NO (`5145002`), 317 SFTX NO (`1bc3977`), 319 P0TCR NO
+(`f213be7`, landed by a landing agent after the DM's ruling).
+
+**The one result a successor must not mis-carry:** leg 309 refuted arXiv:2604.09949, the only
+claimant ever found in the Grade-A/fluid cell. The cell **stays empty** and Phase 1's premise
+**stands**. That is a restored assumption, **not** a moved link — do not let it be written up
+as progress.
+
+**Standing rules adopted this session, binding on every future leg:**
+1. **Dispatched gate text is immutable** (from leg 319's NO, adopted by the DM). A
+   pre-committed gate records what was *asked*; editing it corrupts the audit trail. Wrong
+   values in gate text get `CORRECTIONS.md` **pointers**, never edits.
+2. **Apparatus specs must grant `capabilities.py` + `test_capabilities.py` territory
+   explicitly** if the leg is expected to bank a `solver/*.py` module — `test_capabilities.py`'s
+   index gate has teeth, so a leg without that territory cannot land a module (leg 302's
+   process note, adopted by the DM).
+3. **Assess before running anything long** (the user's instruction, 2026-08-11): estimate
+   runtime, improve the hot path if over ~10 minutes, record estimate/change/achieved. Not a
+   licence to weaken a gate to make it cheap. Now in `CONTINUATION_PROMPT.md`.
+4. **Search with spelling variants** — `Navier--Stokes` (LaTeX double hyphen), unhyphenated,
+   `self similar`. See method finding MF1 under Incidents.
+
+**Open with the user, none of them blocking (see `PROGRESS.md` for the full statements):**
+the Cadiot ban-wording question (leg 304 ran the lift clause's named pass and its result
+*confirmed* the ban's justification — **not lifted**), leg 301's Malmquist–Takenaka fourth
+space (escalation #8, branch `leg/301-fsb-v1`, never merged), the leg-251 Phase-1 packet
+(PR #20, now also gating leg 266), leg 257's stage-V ban-lift recommendation, leg 129/188's
+Bowman dealiasing rule.
+
+---
+
+## Superseded status: RUNNING — fresh orchestrator session, 2026-08-11 ~15:30 UTC, cycle 1
 
 `main` at `3ff808b`, merge gate **PASS**. Ten leg agents dispatched, heartbeat armed. The
 Decision Maker (Fable 5) is live and reachable for the duration of this session.
