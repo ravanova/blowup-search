@@ -326,6 +326,7 @@ P2_EVIDENCE = [
     # 13 of writeup/INDEX.md. Writing one is a claim-bearing choice about what to plot, so
     # it belongs to a leg, not to integration.
     "../experiments/p2_route_fus_v1_scoping_evidence.py",       # fig77 -- Route-FUS v1 (leg 314); brief recorded fig69-fig76 as taken/reserved, so this leg took fig77
+    "../experiments/p2_route_apia_v1_evidence.py",              # fig73 -- Route-APIA v1 (leg 312)
 ]
 
 
