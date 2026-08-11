@@ -1321,3 +1321,85 @@ appended), **0 gate answers changed**, **0 bans touched**, `plan_of_record.py` a
 untouched, `writeup/data/p2_route_dwm_v1.json` untouched. No link of the `L1 → L4` chain moved.
 Clay odds stay **~0.05%**. The SHARP verdict for leg 305's argument stands, now resting on the
 same two facts it always rested on, described correctly.
+
+## §19 — leg 318's FT1 mechanism re-measured (r carries the ulp, not cancellation), and one
+tautological control made falsifiable
+
+Two independent, narrow findings against leg 318's landed Route-DECR criterion
+(`ENCLOSURE IS CRITICALITY`, `writeup/data/p2_route_decr_v1.json`, `experiments/
+p2_route_decr_v1_scoping.py`). **FT1's own verdict — decided in exact rational arithmetic,
+residual identically `0` — is unchanged by either finding**, byte-for-byte, throughout.
+
+### 19.1 The float64 mechanism, re-measured
+
+Leg 318 banked FT1's float64 diagnostic residual (`5.329070518200751e-15` at the worst
+γ = 1.075) as "~25 ulp of catastrophic cancellation between two `≈1`-sized operands,
+`(r−1)/α` and `(r−2)`" — leg 302's failure mode, verbatim. **Directly re-measured (script and
+full 45-γ grid in `experiments/journal/leg_337.md`), that story is wrong about the mechanism:**
+
+* `α_of(γ) = (γ−1)/2` is computed with **zero** rounding error at the worst γ (and at every
+  γ on the grid): `γ − 1.0` is exact under Sterbenz's lemma, and halving in binary floating
+  point is always exact. α never carries any ulp error at any grid point.
+* `r_crit(γ) = 2γ/(γ+1)` carries essentially all of it: its float64 value differs from the
+  exact rational `2γ/(γ+1)` by `−0.88 ulp(r)` (≈ 1 ulp) at γ = 1.075, from the addition and
+  division inside the formula.
+* That single sub-ulp error in `r` is then **amplified** by δ_dis's own sensitivity to `r` at
+  the root, `d(δ_dis)/dr = 1/α + 1 = 27.667` at this γ (dominated by `1/α = 26.667`).
+  Substituting the exact rational `r`, `α` into δ_dis gives exactly `0`. Substituting the
+  actual float64 `r` (with its `−0.88 ulp` error) and the actual float64 `α` (0 error) into
+  δ_dis, evaluated in exact rational arithmetic, reproduces `−5.424e-15` — matching the
+  observed float64 residual `−5.329e-15` to within the small extra rounding of δ_dis's own
+  float ops.
+
+**Corrected mechanism: 1 ulp of pre-existing rounding error in one operand (`r`), amplified by
+the other operand's reciprocal (`1/α`) — not cancellation between two `≈1`-sized operands.**
+"Leg 302's failure mode" as a category label is retracted along with it: this is
+ill-conditioning under amplification near a root, not a subtraction-of-near-equal-terms
+precision loss. **FT1's verdict is byte-unchanged**: decided in exact rational arithmetic,
+residual identically `0`, either way — the mechanism correction does not touch the gate.
+
+Corrected with inline strikethrough/correction markers in
+`writeup/4_p2_lottery/TECHNICAL_P2_ROUTEDECR_V1.md` §5 and
+`writeup/4_p2_lottery/BLOG_P2_ROUTEDECR_V1.md` ("The test that nearly killed it"), plus
+correction comments (code comments only — no dict/string content banked into the JSON was
+touched) in `experiments/p2_route_decr_v1_scoping.py` around FT1's instrument note and the
+headline string.
+
+### 19.2 The tautological control, made falsifiable and re-run
+
+`experiments/p2_route_decr_v1_scoping.py`'s control `"adverse__criterion_makes_a_prediction_it_
+could_lose"` read
+
+```python
+not shallow_water_supercritical or True,  # recorded explicitly below
+```
+
+which is `True` for **every** possible value of `shallow_water_supercritical` — a control that
+can never fail is not a control (standing discipline, lesson 90: negative controls must be able
+to come out FALSE). **Corrected to assert the sign-test result itself:**
+
+```python
+shallow_water_supercritical,
+```
+
+which genuinely can be `False` (if FT4's θ = 1 sign test had come out non-supercritical on the
+window, this control would FAIL). **Re-run after the fix: `shallow_water_supercritical` measures
+`True` (unchanged from FT4's own report), so the corrected, now-genuinely-falsifiable control
+PASSES.** Not a smoothed-over result — the corrected control's pass/fail was checked, and it
+passes for a real reason now instead of by construction. Running the corrected script reproduces
+`writeup/data/p2_route_decr_v1.json` byte-identical to the version already banked (the "why"
+text and the boolean's truth value are both unchanged; only the expression that could no longer
+fail can now fail), so the banked JSON was read for comparison and left untouched, per this
+leg's territory.
+
+### The ceiling
+
+**0 numbers re-derived** beyond the ulp-accounting values quoted above, all newly measured
+directly against the live functions in `experiments/p2_route_decr_v1_scoping.py` (script in
+`experiments/journal/leg_337.md`). **1 control expression corrected and re-run** (still PASSES,
+now for a real reason). **2 writeup prose sites corrected in place**
+(`TECHNICAL_P2_ROUTEDECR_V1.md` §5, `BLOG_P2_ROUTEDECR_V1.md`), plus comment-only markers in the
+scoping script. **0 gate answers changed** — FT1's verdict and the leg 318 gate answer (`yes`,
+`ENCLOSURE IS CRITICALITY`, not a lane) are untouched. `writeup/data/p2_route_decr_v1.json`
+read, never edited (regenerates byte-identical). `plan_of_record.py` and `DIRECTION.md`
+untouched. No link of the `L1 → L4` chain moved. Clay odds stay **~0.05%**.

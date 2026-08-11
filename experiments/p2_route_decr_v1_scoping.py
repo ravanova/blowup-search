@@ -314,14 +314,34 @@ def main() -> int:
     # INSTRUMENT NOTE, and it decided this test's verdict.  Run in float64 the residual
     # max|delta_dis(gamma, r_crit(gamma))| is 5.329e-15, NOT 0 -- and a naive 1e-15
     # tolerance therefore reports FT1 REFUTED, i.e. reports the knife-edge identity as
-    # FALSE.  It is not false: (r-1)/alpha and (r-2) are two quantities of size ~1 (0.964
-    # at the worst gamma = 1.075) that cancel exactly, so the residual is 5.5e-15 in
-    # RELATIVE terms -- about 25 ulp of the cancelled operands, which is exactly what
-    # catastrophic cancellation costs.  This is leg 302's failure mode verbatim (an
-    # IEEE-double cancellation masquerading as a transcription error), so the fix is the
-    # right INSTRUMENT, not a looser tolerance: the identity is tested in EXACT RATIONAL
-    # arithmetic, where the residual is identically 0, and the float residual is recorded
-    # alongside as the diagnosis rather than as the measurement.
+    # FALSE.  It is not false. FT1's verdict is UNCHANGED below either way, since it is
+    # decided in exact rational arithmetic, where the residual is identically 0; the float
+    # residual is recorded alongside as the diagnosis rather than as the measurement.
+    #
+    # [LEG 337 CORRECTION, superseding the mechanism story below.] The line that used to
+    # stand here read: "(r-1)/alpha and (r-2) are two quantities of size ~1 that cancel
+    # exactly, so the residual is ~25 ulp of the cancelled operands -- catastrophic
+    # cancellation." That is WRONG about the mechanism (FT1's verdict is unaffected,
+    # decided in exact rational arithmetic either way). Re-measured directly (script in
+    # experiments/journal/leg_337.md): at the worst gamma = 1.075, alpha_of(gamma) is
+    # computed with ZERO rounding error (exact in float64: gamma-1.0 is exact by
+    # Sterbenz's lemma, and halving is always exact) -- alpha carries no ulp at all. All
+    # of the error lives in r_crit(gamma) = 2*gamma/(gamma+1): its float64 value differs
+    # from the true rational 2*gamma/(gamma+1) by -0.88 ulp(r) (~1 ulp), from the
+    # addition+division pair inside r_crit. That single sub-ulp error in r is then
+    # AMPLIFIED by delta_dis's own sensitivity to r at the root, d(delta_dis)/dr = 1/alpha
+    # + 1 = 27.667 at this gamma (dominated by the 1/alpha = 26.667 term): plugging the
+    # exact-rational r and alpha into delta_dis gives 0 (confirms the identity is exact);
+    # plugging the actual float64 r (with its -0.88 ulp error) and the actual float64
+    # alpha (0 error) into delta_dis in exact rational arithmetic reproduces
+    # -5.424e-15, matching the observed float64 residual -5.329e-15 to within the small
+    # extra rounding of delta_dis's own float ops. So: it is NOT cancellation between two
+    # ~1-sized operands that "costs" precision -- it is 1 ulp of pre-existing rounding
+    # error in ONE operand (r), amplified by the other operand's reciprocal (1/alpha).
+    # Confirmed across the full 45-gamma grid: alpha_of never carries nonzero ulp error at
+    # any grid point; r_crit always does, scaled by the corresponding 1/alpha_of(gamma).
+    # "Leg 302's failure mode" as a category label is retracted along with it -- this is
+    # ill-conditioning under amplification, not a subtraction-of-near-equal-terms loss.
     gammas = np.linspace(1.05, 2.15, 45)
     resid = np.array([delta_dis(g, r_crit(g)) for g in gammas])
     ft1_zero_max_float = float(np.max(np.abs(resid)))
@@ -370,6 +390,13 @@ def main() -> int:
             "max_abs_residual_float64": ft1_zero_max_float,
             "float64_cancellation_scale": ft1_cancellation_scale,
             "float64_relative_residual": ft1_zero_max_float / ft1_cancellation_scale,
+            # [LEG 337 CORRECTION] The "instrument_note" string below (banked
+            # verbatim into writeup/data/p2_route_decr_v1.json, out of this leg's
+            # territory to alter) repeats the retracted "~25 ulp catastrophic
+            # cancellation" mechanism story. See the corrected accounting in the
+            # comment block above (INSTRUMENT NOTE, ~line 314) and in
+            # experiments/journal/leg_337.md: the ulp lives in r_crit, not in a
+            # cancellation between alpha and r, and is amplified by 1/alpha.
             "instrument_note": "float64 gives 5.329e-15, and a naive 1e-15 tolerance would "
             "have reported this test REFUTED -- i.e. would have reported the knife-edge "
             "identity as FALSE. It is not: (r-1)/alpha and (r-2) are two ~1-sized "
@@ -655,9 +682,17 @@ def main() -> int:
         f"({checks['window_gamma_7_5']['delta_dis_max']:.7f}) -- if it did not, this leg "
         "would be using a different formula from the bank it claims to test against",
     )
+    # LEG 337 CORRECTION: this control's boolean used to read
+    # `not shallow_water_supercritical or True` -- a tautology, always True regardless of
+    # shallow_water_supercritical, so the control could never fail and was not a real
+    # control. Rewritten below to assert the sign-test result itself, which CAN fail
+    # (would be False, and this control would FAIL, if theta=1 had come out
+    # non-supercritical on the window). Re-run post-fix: shallow_water_supercritical
+    # measured True (see FT4 above), so the corrected control PASSES. Record in
+    # experiments/journal/leg_337.md.
     all_ok &= ctl(
         "adverse__criterion_makes_a_prediction_it_could_lose",
-        not shallow_water_supercritical or True,  # recorded explicitly below
+        shallow_water_supercritical,
         "FT4's theta = 1 sign test was run BEFORE 2512.18545's theorem was consulted for "
         "its direction; had it come out positive the criterion would have been refuted by "
         "a published theorem it did not choose",
@@ -696,6 +731,13 @@ def main() -> int:
         if gate_yes
         else "no -> Report VACUOUS and stop."
     )
+    # [LEG 337 CORRECTION] The headline string below (banked verbatim into
+    # writeup/data/p2_route_decr_v1.json, out of this leg's territory to alter)
+    # repeats the retracted "~25 ulp of catastrophic cancellation" mechanism
+    # story. FT1's verdict is byte-unchanged (0 in exact rational arithmetic
+    # either way); only the MECHANISM claim is wrong. See the corrected
+    # accounting in the comment block above (~line 314) and
+    # experiments/journal/leg_337.md.
     out["headline"] = (
         "ENCLOSURE IS CRITICALITY. A nu-dependent self-similar profile exists only when "
         "the dissipative term is scaling-CRITICAL for the blow-up ansatz (delta_dis = 0), "

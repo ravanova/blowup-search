@@ -232,11 +232,33 @@ threshold-value test NAMED AND NOT YET RUN)"* and the leg does not claim the mat
 tolerance therefore reported the knife-edge identity as **FALSE** — the leg's central claim,
 killed by its own test.
 
-Diagnosis before belief (leg 302's lesson, and this is the same failure mode verbatim — *an
+~~Diagnosis before belief (leg 302's lesson, and this is the same failure mode verbatim — *an
 IEEE-double cancellation masquerading as a transcription error*): `(r−1)/α` and `(r−2)` are two
 quantities of size `≈ 0.9756` at the worst γ that cancel **exactly**, so the residual is
 **`5.462e-15` relative**, about 25 ulp of the cancelled operands. That is what catastrophic
-cancellation costs; it is not evidence about the identity.
+cancellation costs; it is not evidence about the identity.~~
+
+**[LEG 337 CORRECTION — mechanism re-measured, FT1's verdict unchanged.]** The paragraph above
+is struck: it named the wrong mechanism. Directly re-measuring which operand carries the
+rounding error (`experiments/journal/leg_337.md` has the full script and grid): at the worst
+γ = 1.075, `α_of(γ)` is computed with **zero** rounding error in float64 — `γ − 1.0` is exact by
+Sterbenz's lemma and the following halving is always exact, so α carries no ulp at all. All of
+the error lives in `r_crit(γ) = 2γ/(γ+1)`, whose float64 value differs from the true rational
+`2γ/(γ+1)` by **`−0.88 ulp(r)`** (≈ 1 ulp), from the addition-then-division inside `r_crit`.
+That single sub-ulp error in `r` is then **amplified** by δ_dis's own sensitivity to `r` at the
+root, `d(δ_dis)/dr = 1/α + 1 = 27.667` at this γ (dominated by the `1/α = 26.667` term):
+substituting the *exact* rational `r` and `α` into δ_dis gives exactly `0`; substituting the
+*actual* float64 `r` (with its `−0.88 ulp` error) and the *actual* float64 `α` (0 error) into
+δ_dis, evaluated in exact rational arithmetic, reproduces `−5.424e-15` — matching the observed
+float64 residual `−5.329e-15` to within the small extra rounding of δ_dis's own float ops. So
+it is **not** cancellation between two `≈1`-sized operands that costs precision; it is **1 ulp
+of pre-existing rounding error in one operand (r), amplified by the other operand's reciprocal
+(1/α)**. Confirmed across the full 45-γ grid: `α_of` never carries nonzero ulp error at any
+grid point; `r_crit` always does, and the residual scales with `1/α_of(γ)` accordingly. "Leg
+302's failure mode" as a category label is retracted with it — this is ill-conditioning under
+amplification near a root, not a subtraction-of-near-equal-terms precision loss. **FT1's
+verdict is byte-unchanged**: decided in exact rational arithmetic, residual identically `0`,
+either way.
 
 **The fix is the right instrument, not a looser threshold.** FT1's verdict is now decided in
 **exact rational arithmetic** (`fractions.Fraction`), where the residual over the same 45 γ is

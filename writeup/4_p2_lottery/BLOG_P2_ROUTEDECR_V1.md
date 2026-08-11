@@ -107,13 +107,21 @@ first checked in ordinary floating-point arithmetic. It failed. The residual cam
 `5.3e-15` against a tolerance of `1e-15`, and the leg's own test declared its own headline
 false.
 
-It wasn't false. The two quantities being compared are each about `1` and cancel exactly, so
+It wasn't false. ~~The two quantities being compared are each about `1` and cancel exactly, so
 `5.3e-15` is roughly twenty-five units in the last place of the things that cancelled — the
-standard price of catastrophic cancellation, and no evidence whatever about the identity. This
-project has been bitten by precisely this before, and the lesson from that occasion was not "use
-a looser tolerance". It was "fix the instrument". So the test now runs in exact rational
-arithmetic, where the residual is `0` — not "0.000000", actually zero — and the floating-point
-number is kept alongside as a diagnosis rather than a measurement.
+standard price of catastrophic cancellation, and no evidence whatever about the identity.~~
+**[LEG 337 CORRECTION: that mechanism sentence was wrong.]** Re-measured directly: one of the
+two operands, `α`, is computed with *zero* rounding error at the worst point on the grid — it
+isn't cancellation at all. The error lives entirely in the other operand, `r`, which the
+formula `2γ/(γ+1)` rounds by about 1 ulp; that single ulp then gets amplified roughly `1/α`
+times by how steeply the identity's residual responds to `r` near its own root. Same
+`5.3e-15`, different story: 1 ulp in one input, amplified by the other input's reciprocal — not
+two `≈1`-sized numbers cancelling against each other. (Full accounting in
+`experiments/journal/leg_337.md`.) This project has been bitten by a version of this before,
+and the lesson from that occasion was not "use a looser tolerance". It was "fix the
+instrument". So the test now runs in exact rational arithmetic, where the residual is `0` — not
+"0.000000", actually zero — and the floating-point number is kept alongside as a diagnosis
+rather than a measurement.
 
 Loosening the tolerance to `1e-14` would have passed the test for the wrong reason and left it
 unable to detect a real error of that size.
