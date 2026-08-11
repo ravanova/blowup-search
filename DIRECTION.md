@@ -43,8 +43,9 @@ vacant at session start): 4/10 floor-eligible -- C/301/FSB, D/302/P2T1, E/303/GA
 F/304/CADX. A/300 is the critical path (stage P0: verify-then-land 266's correction).
 Resumes from prior-session branches: B/221 (leg/221-bvrr-v1-resume), G/286
 (leg/286-cnrv-v1), H/229 (leg/229-pnrv-v1), I/292 (leg/292-capa-v2); J/287 fresh.
-Reserve count 14: 293, 298, 299 dispatchable now; 305-310 preconditioned; 280
-user-gated; 231-234 blocked. Next fresh leg number: 311.)
+Reserve count 21 (DM update 2, same day: steer folded in, 297/280 approved, 280
+removed from reserve): 311-318 (new, all floor-eligible), 293, 298, 299 dispatchable
+now (11 total); 305-310 preconditioned; 231-234 blocked. Next fresh leg number: 319.)
 
 ---
 
@@ -13622,3 +13623,354 @@ parked packet self-consistent without re-raising it. Clay stays ~0.05%; no link 
 L1-L4 chain has moved, and ranking by chain proximity is a choice of what to try. No
 new direction question surfaced — the standing directive answered every call this
 update needed.
+
+---
+
+## DM update, 2026-08-11 (second update this session; recreated DM) — TWO USER APPROVALS
+RECORDED (297, 280) + THE 2026-08-07 CONSOLIDATED FORWARD PROGRAMME FOLDED INTO THE
+QUEUE: eight new legs 311-318 drafted in the steer's own ordering, reserve re-ranked,
+§0a novelty-pass calibration recorded, 3D-solver standing-rule correction recorded as a
+user ruling
+
+**Session facts:** `main` = 3ff808b, merge gate PASS, zero commits since the reroster.
+All ten slots live since ~15:25 UTC today, every leg in its novelty phase: A/300 P0TCV
+(critical path), B/221 BVRR, C/301 FSB, D/302 P2T1, E/303 GAF, F/304 CADX, G/286 CNRV,
+H/229 PNRV, I/292 CAPA, J/287 EPA. Floor 4/10.
+
+### Ruling 1 — legs 297 and 280 are APPROVED by the user (verbatim: "Please also let
+the DM know that I approve 297 and 280")
+
+- **297 (Route-D11ANCHOR)**: the anchor-JSON re-bank (Option 3 of leg 252's three, the
+  environment-pinned re-bank) is approved; escalation #4's parked status ends. The
+  orchestrator lands its branch. Queue consequence: 297 leaves the parked list.
+- **280 (Route-PUB2X)**: the user-gated eighth pass is approved; the orchestrator
+  actions it. Queue consequence: **280 leaves the reserve** — it is no longer a gated
+  reserve item but an orchestrator-actioned approval.
+- **Preconditions audit under the approvals:** grep-verified — no reserve leg carries a
+  `Preconditions:` line naming 297 or 280, so nothing else unblocks. All other
+  preconditions re-verified unchanged (nothing has landed since the reroster):
+  305/306 still on 300; 307 still on 221's flag state; 308 still on 302; 309 still on
+  303; 310 still on 287+298 sequencing; 231-234 still blocked on 217/219/221/225;
+  293/298/299 still dispatchable-now.
+
+### Ruling 2 — CORRECTION TO A STANDING RULE, recorded as a user ruling (steer §,
+verbatim effect): "Do not build the 3D solver" is amended: do not build it to produce
+Tier-2 candidates, which the win condition says answer nothing; DO build it if a
+specific unexcluded route requires it. Item 3's answer (leg 313 below) decides.
+PLAN.md Stage 4 stays unscheduled — the reason is now "no route needs it yet," not
+"too expensive." This is the user's amendment, not the DM's; it lifts no ban and
+schedules nothing by itself.
+
+### Steer premise re-verification (steer dated 2026-08-07; checked against main today)
+
+- All files the steer names exist on main: solver/interval.py, fractional_gclm.py,
+  critical_dissipation.py, fractional_boussinesq.py, rescaled_spectrum.py,
+  spectral_certificate.py, op_lower.py. requirements.txt is confirmed numpy-only with
+  scipy explicitly excluded ("no adaptive ODE integrators are used" — a policy line,
+  as the steer says).
+- "Whatever is already top of the queue stays top — the C4 vorticity thread and the
+  DF-CGL reproduction": STALE as named. No queue item called the C4 vorticity thread
+  exists today (grep: zero hits); the DF-CGL reproduction was never drafted as a leg.
+  The premise's *intent* survives re-verification and is honoured as: the live roster
+  (300 critical path first) stays top, and the DF-CGL reproduction enters the queue
+  now, ranked at the top of the new items (leg 316).
+- The DSS ban structure the steer's item 3 touches is unchanged since 08-07: the
+  cheap-entrance ban (lifted by: never) and the split-out expensive-entrance ban
+  (leg 254, user-approved split; lift condition = a scoping leg answering (a) function
+  space, (b) object, (c) price). Leg 260's kill of Entry B is verbatim scoped to
+  UNSEEDED, as the steer quotes. Leg 313 is drafted to answer 260's seeded question
+  AND the (a)/(b)/(c) triple in one pass, and to report — never to lift.
+
+### §0a — novelty-pass calibration (recorded here; propagation target named in my
+reply to the orchestrator)
+
+> **Novelty-pass calibration (user steer 2026-08-07 §0a, recorded by the DM
+> 2026-08-11).** On this project's measured-vacated ground (four author groups
+> censused: Breden-Chu, Dähne-Figueras, BCG, ALS — each has either left the object or
+> stayed and left certification; nobody is in the cell), pre-emption risk is
+> measurably low. The pass stays MANDATORY — review its record: what it actually
+> caught was prior art, mostly years old (Gallay's Handbook, EGM Prop 2.1, HQWW24's
+> first integral). So on vacated cells, weight queries toward locating OLD prior art
+> and stop spending cycles on "has anyone done this in the last six months." The one
+> true scooping (Route-F, eleven days) happened on ACTIVE ground — if your leg's cell
+> is active, the recency check stays at full weight.
+
+### §0c — publication-track reframe (direction note, schedule unchanged)
+
+The vacancy census becomes the spine of the publication track: "here is an empty
+cell; measured evidence four groups walked away; the three obstructions that explain
+why; what filling it would require" replaces the bundle-of-results frame. This binds
+the next PUB-lineage leg and the leg-256 note when either is next touched; it changes
+the frame, not the schedule. §0d (no outreach) is restated: unchanged, the user's
+decision alone, now with a measured reason.
+
+### Not-authorized list, recorded
+
+Lean/Coq formal verification: not authorized. GA revival: not authorized (leg 160's
+measurement stands). ML/PINN discovery: deferred, not refused — ranks behind items
+1-5, revisit if leg 313 opens the seeded-DSS route.
+
+### New legs, drafted now, in the steer's own ordering (4 -> 1 -> 3 -> 5 -> 2; lanes
+6 and 7 wait on nothing; 8 is one killable slot)
+
+```
+### 311 — ROUTE-IVAX: DOES SCREEN (iv_a) APPLY OFF THE FLUID AXIS? (steer item 4 —
+cheapest, highest information per token)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** Leg 261's kill of all 18 fluid rows under screen (iv_a) was structural to
+incompressibility being nonlocal. Fractional and other non-incompressible dissipative
+models carry no such constraint, so the screen may not bite there at all. Measure
+directly against fractional_gclm.py, critical_dissipation.py, fractional_boussinesq.py
+— with leg 273's duplicate-occupant finding (a Keller-Segel certificate would be
+redundant) checked in the same leg as the counterweight.
+**Gate.** Does (iv_a), measured directly on the three non-incompressible models,
+exclude candidates the way it excluded the 18 fluid rows?
+  yes -> Bank: the screen bites off-axis too; the non-fluid pool is NOT materially
+         larger than leg 261 implies; mechanism named per lesson 91.
+  no  -> Bank: the pool IS materially larger; enumerate the newly-admissible
+         candidates NET of 273's redundancy finding, feed Phase-0 target selection.
+         Escalates nothing; lifts nothing.
+**Territory.** experiments/p2_route_ivax_v1.py, writeup/data/p2_route_ivax_v1.json,
+               writeup/novelty/leg_311.md, experiments/journal/leg_311.md.
+               Reads the three solver models; edits none.
+**Difficulty.** light
+**Preconditions:** None.
+```
+
+```
+### 312 — ROUTE-APIA: ARBITRARY-PRECISION INTERVAL ARITHMETIC — SCOPED AS "WHICH
+BANKED RESULTS CHANGE" (steer item 1 — retroactive value across four banked results)
+[FLOOR-ELIGIBLE: construction]
+**Thesis.** Four banked results were degraded or destroyed by float64: leg 178's
+entire escalation was a float64 artifact (θ ~ 3e-31 at n_grade = 96, order-θ³
+cancellation unrepresentable, contamination 3.1e+03); leg 176 lost its N=1024 row to
+a Gram float floor ~1e12; leg 289's exact law is capped at 1.11e-16; leg 256 needed
+log-space quadrature for factors e^{-1.8e4} × 1e1220. Build arbitrary-precision
+interval arithmetic from the tree's own precedent (fractions.Fraction in
+spectral_certificate.py — stdlib, no dependency change), integrated at
+solver/interval.py's interface with its adversarial battery extended. Scope is "which
+banked results change," with legs 178 and 176 as the two PRE-REGISTERED
+re-measurements — not an open-ended library port. Any requirements.txt change is
+proposed via integration note to the orchestrator, never edited in-leg; prefer stdlib.
+**Gate.** Do the two pre-registered re-measurements, run at arbitrary precision,
+change the banked headline of leg 178 (the 3.1e+03 contamination) or leg 176 (the
+lost N=1024 row) — magnitudes, not booleans?
+  yes -> Bank corrected magnitudes; flag every downstream consumer via a
+         CORRECTIONS-pointer integration note; the capability + battery stay banked.
+  no  -> Bank at full strength: float64 was NOT the binding constraint for 178/176 —
+         the artifact explanations get re-examined (reported, not repaired here); the
+         capability + battery still stay banked.
+**Territory.** solver/interval_mp.py (NEW), test_interval_mp.py (NEW),
+               experiments/p2_route_apia_v1.py, writeup/data/p2_route_apia_v1.json,
+               writeup/novelty/leg_312.md, experiments/journal/leg_312.md.
+               Reads solver/interval.py, spectral_certificate.py; edits neither.
+**Difficulty.** heavy
+**Preconditions:** None.
+```
+
+```
+### 313 — ROUTE-SDSS: DOES LEG 260's SUBSTANTIVE OBSTRUCTION SURVIVE A SEEDED SEARCH?
+(steer item 3 — may reopen a route closed for the wrong reason; ANSWERS AND REPORTS,
+NEVER LIFTS)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** Leg 260's kill is verbatim scoped to one word: "Entry B's defining
+adjective UNSEEDED is incompatible with its object's only function space." The
+substantive argument — infinite energy in the similarity variable puts the target
+outside the state space of an unseeded trawl — does not obviously apply to a search
+SEEDED from a known numerical DSS candidate; RDSS is described by a cost word, not an
+obstruction. This leg asks exactly one question: does 260's substantive obstruction
+survive when the search is seeded rather than trawled? Because the expensive-entrance
+ban's own lift condition names three questions, the leg answers those IN THE SAME
+PASS: (a) the function space, carrying §26/4.1's limited-regularity difficulty
+(X^{1-iy} at X=0; the viscous gCLM band absent entirely, max Re = -1e-13 at mu=0.05);
+(b) the object — all three ban reasons hold only in gCLM while Phase 0's target is
+NS; (c) a price in leg-hours against Phase 1's viscous rung. Paper scoping only, no
+construction, no search run.
+**Gate.** Does leg 260's substantive obstruction survive seeding, with the (a)/(b)/(c)
+triple answered either way?
+  yes -> Bank: the ban stands on better ground — itself a finding, full strength.
+  no  -> REPORT AND ESCALATE to the user with (a)/(b)/(c) attached: an unexcluded
+         route whose infrastructure cost is now authorized. The ruling is the user's.
+         This leg does not lift the ban — the steer says this explicitly and this
+         gate honours it. (The 3D-solver amendment above keys off this same answer —
+         also the user's to action, not this leg's.)
+**Territory.** writeup/data/p2_route_sdss_v1.json, a new TECHNICAL file of its own
+               naming, writeup/novelty/leg_313.md, experiments/journal/leg_313.md.
+**Difficulty.** standard
+**Preconditions:** None. (§3a rule 4: subject matter touches a ban — the DM hereby
+pre-authorises dispatch AS WRITTEN; the ban question itself routes to the user at
+gate time, per the gate.)
+```
+
+```
+### 314 — ROUTE-FUS: THE FINITE-UNSTABLE-SPECTRUM CONDITION — PROVABLE, NUMERICALLY
+CHECKABLE, OR OPEN? (steer item 5 — strongest genuinely-new mathematics available)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** Leg 175 banked that the unstable-singularity programme's CAP requires a
+finite unstable spectrum, "called 'desirable' and assumed, which no residual
+reduction discharges." Neither arXiv:2509.14185 nor 2511.22819's precision fix
+touches it — it is spectral, not a precision question. Scoping leg first, NOT
+construction. Grep capabilities.py for the object first (the standing ban requires
+it); rescaled_spectrum.py, spectral_certificate.py, op_lower.py and the Route-E
+spectral work all bear on it. A certified count of unstable modes in a bounded
+region, or a rigorous lower bound, both count as outcomes.
+**Gate.** Does the scoping produce a definite classification — finiteness for these
+profiles is (i) provable, with the argument sketched and its load-bearing step named;
+(ii) checkable only numerically, with a named certified-count/lower-bound route this
+repository's spectral tools bear on; or (iii) open, with the obstruction named?
+  yes -> Bank the classification; if (ii), the construction leg is drafted separately
+         by the DM, not begun here.
+  no  -> Name exactly what blocks classification (which profile, which operator
+         property) — recorded at full strength; no construction.
+**Territory.** writeup/data/p2_route_fus_v1.json, a new TECHNICAL file of its own
+               naming, writeup/novelty/leg_314.md, experiments/journal/leg_314.md.
+               Reads the spectral modules; edits none.
+**Difficulty.** standard
+**Preconditions:** None.
+```
+
+```
+### 315 — ROUTE-TMS: VALIDATED INTEGRATION AND TAYLOR MODELS — SCOPE WHAT BECOMES
+REACHABLE (steer item 2)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** requirements.txt's "no adaptive ODE integrators are used" is a policy,
+not a finding, and it excludes the field's standard enclosure toolkit. Every
+certificate here is radii-polynomial / Newton-Kantorovich; Taylor-model arithmetic
+reaches objects those cannot, and leg 256 hand-rolled Gauss-Laguerre nodes by Sturm
+bisection because nothing was available. Scope what becomes reachable that is not now
+— particularly the compressible-NS stability step (leg 251's γ=7/5 BCG profile,
+where the verifier established the gap is NOT a profile enclosure). Scoping only;
+the build (authorized) is a separate leg drafted on YES.
+**Gate.** Does the scoping name at least one concrete object currently unreachable by
+the radii-polynomial/NK apparatus that Taylor-model arithmetic reaches, with the
+reaching mechanism stated and its build cost classed?
+  yes -> Bank the scoping; DM drafts the build leg; any requirements/policy change
+         routes via integration note, never in-leg.
+  no  -> Bank "nothing in reach changes": the policy becomes finding-backed. Full
+         strength either way.
+**Territory.** writeup/data/p2_route_tms_v1.json, a new TECHNICAL file of its own
+               naming, writeup/novelty/leg_315.md, experiments/journal/leg_315.md.
+**Difficulty.** standard
+**Preconditions:** None.
+```
+
+```
+### 316 — ROUTE-DFRE: DF-CGL REPRODUCTION — FIRST ENTRY OF THE STANDING
+CAP-REPRODUCTION LANE (steer item 6, gated per §0b)
+[FLOOR-ELIGIBLE: external literature + construction]
+**Thesis.** Legs 61 (Cadiot-Lessard-Nave Kawahara) and 256 (Breden-Chu) are two for
+two at finding real issues in published verification packages; the steer makes it a
+lane — one published CAP reproduced per cycle, in leg 256's shape, under leg 256's
+attribution rule. First entry: DF-CGL (arXiv:2410.05480). Value per §0b: with DF
+dissolved and moved on (one joint work ever, "Submitted" 668 days, 0/7 fluid-adjacent
+since), reproducing DF-CGL is not about supporting its authors — it is independently
+validating the field's ONLY Grade-A dissipative certificate, which measurably nobody
+else is going to do. Ban check, explicit: this does NOT re-open stage V as posed —
+stage V asked whether THIS repository's certificate margin survives dissipation;
+reproducing DF's own published package is external validation. The novelty pass must
+state that distinction in its log.
+**Gate.** Does DF-CGL's published verification package reproduce the paper's own
+corollary from its published constants, in this environment?
+  yes -> Bank the validation at full strength (§0b's framing recorded verbatim in the
+         write-up); the lane's second entry becomes dispatchable, selected by the DM
+         at landing.
+  no  -> Classify under leg 256's attribution rule: published constants failing the
+         paper's OWN corollary -> potential challenge, ESCALATE to the user before
+         any write-up frames it as such; package drift alone -> bank as a finding,
+         not a refutation. The lane continues either way.
+**Territory.** experiments/p2_route_dfre_v1.py, writeup/data/p2_route_dfre_v1.json,
+               a new TECHNICAL file of its own naming, writeup/novelty/leg_316.md,
+               experiments/journal/leg_316.md.
+**Difficulty.** heavy
+**Preconditions:** None. LANE: recurs one entry per cycle; waits on nothing.
+```
+
+```
+### 317 — ROUTE-SFTX: THE CAP SILENT-FAILURE TAXONOMY — NOVELTY PASS FIRST, THEN
+WRITE UP WHAT SURVIVES (steer item 7)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** Legs 79, 98, 116, 128, 140, 142, 202 and 237 measured a systematic defect
+class in certificate machinery, and 202/237's mechanism generalises past this
+repository: a scale-invariant convergence test cannot detect an escape from the
+scaling family — a hazard for anyone doing validated numerics with a gauge or scaling
+degeneracy, which is most self-similar blow-up work. Novelty pass FIRST under the §0a
+calibration above (some is likely folklore — weight toward old prior art); draft only
+what survives, with the measured magnitudes from the source legs.
+**Gate.** Does the novelty pass leave at least one taxonomy entry not already in the
+literature or folklore, stated with its measured magnitude?
+  yes -> Bank the draft (it feeds the publication track under §0c's vacancy-census
+         spine).
+  no  -> Bank the prior-art map, links not counts — the write-up is not drafted, and
+         that is the finding, full strength.
+**Territory.** writeup/CAP_SILENT_FAILURES.md (NEW), writeup/data/p2_route_sftx_v1.json,
+               writeup/novelty/leg_317.md, experiments/journal/leg_317.md.
+**Difficulty.** standard
+**Preconditions:** None. LANE: continuous alongside the publication track; waits on
+nothing.
+```
+
+```
+### 318 — ROUTE-DECR: "DOMINATED -> ENCLOSED" — ONE SCOPING SLOT, PRE-COMMITTED KILL
+(steer item 8)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** Leg 240 measured that no BCG follow-up upgrades the viscous term from
+DOMINATED to ENCLOSED. Ask whether a general structural criterion exists for when
+enclosure is possible. The kill is pre-committed in the steer's own words and is this
+gate's no-branch.
+**Gate.** Does the leg state a general structural criterion for viscous-term
+enclosure that is falsifiable on at least one banked model of this repository?
+  yes -> Bank the criterion together with the named falsification test. This still
+         does not become a lane.
+  no  -> Report VACUOUS and stop. The route dies; it is never redrafted and never
+         becomes a lane.
+**Territory.** writeup/data/p2_route_decr_v1.json, a new TECHNICAL file of its own
+               naming, writeup/novelty/leg_318.md, experiments/journal/leg_318.md.
+**Difficulty.** standard
+**Preconditions:** None.
+```
+
+### Re-ranked reserve (refill order for the next vacancies)
+
+All eight new legs are floor-eligible, so every refill from this band raises the
+floor, honouring the constraint that this steer makes §3b easier, not harder.
+Ordering honours the steer (4 -> 1 -> 3 -> 5 -> 2; lanes early because they wait on
+nothing and the steer named DF-CGL as staying top):
+
+1. **311 IVAX** (light, cheapest, highest information/token) 2. **316 DFRE** (lane 6
+first entry; the steer's named top item) 3. **312 APIA** (retroactive value across
+four banked results) 4. **317 SFTX** (lane 7) 5. **313 SDSS** (may reopen a closed
+route; reports, never lifts) 6. **314 FUS** (strongest new mathematics) 7. **315
+TMS** 8. **318 DECR** (one slot, killable) 9. 293 JFA 10. 298 CORRX 11. 299 TESTA —
+then preconditioned: 305/306 (on 300 — when 300 lands YES they slot between 316 and
+312 by chain proximity, not at the back), 307 (on 221's flag state), 308 (on 302),
+309 (on 303), 310 (on 287+298) — then blocked: 231-234 (on repairs 217/219/221/225).
+280 is REMOVED from the reserve (approved and orchestrator-actioned). Territory
+disjointness across 311-318 and all live slots checked directly: no shared file.
+
+### Pre-emption determination
+
+**None recommended.** All ten live legs were dispatched ~90 minutes ago and are in
+their novelty phases; the steer's own ordering rule keeps the current top on top, and
+the critical path (300) plus the chain-proximate live legs (301, 302, 304) outrank
+every steer item on the §3 ranking criteria. The steer's items enter at natural
+vacancies — 303 (light) will vacate soonest and 311 (light) takes it. Pre-empting
+would burn committed novelty-pass work to save at most hours. If the user wants a
+steer item live TODAY regardless, the one slot I would surrender is I/292 CAPA
+(lowest sunk cost — resumed with only a novelty pass committed — and
+verification-typed, so replacing it with any of 311-318 raises the floor); that is an
+offer, not a recommendation.
+
+**FLOOR-TABLE block: unchanged this update** (no live slot changed). Floor status:
+4/10 strictly — every queued refill candidate in the top band is floor-eligible.
+
+**Canonical reserve line: reserve count 21 — legs 311, 316, 312, 317, 313, 314, 315,
+318, 293, 298, 299, 305, 306, 307, 308, 309, 310, 231, 232, 233, 234.** Effective
+immediately-dispatchable: **11 (311-318, 293, 298, 299)**. 305-310 preconditioned as
+listed; 231-234 blocked. 280 removed (approved, orchestrator-actioned). Next fresh
+leg number: **319.**
+
+Nothing in this update lifts a ban — 313 runs the scoping the expensive-entrance
+ban's own lift condition names and is gated to escalate, never to lift; the 3D-solver
+amendment is the user's ruling, recorded verbatim in effect, and schedules nothing.
+Clay stays ~0.05%; no link of the L1-L4 chain has moved; ranking by chain proximity
+remains a choice of what to try. No new direction question surfaced.
