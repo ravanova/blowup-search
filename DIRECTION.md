@@ -34,9 +34,9 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 335 | S1GR | no |
-| B | 348 | POCP | yes |
+| B | 349 | GAFV | yes |
 | C | 351 | DSSP-B3 | yes |
-| D | 307 | TSCX | no |
+| D | 328 | ORC5 | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -17819,11 +17819,13 @@ per-brick leg counts are UPPER BOUNDS, not floors — a brick that lands in
 one principled leg reports, never pads (350's recommendation, adopted).
 Floor 2/4 (348, 351).
 
-**LCB2 accumulator (micro-corrections awaiting a batch leg; drafted when it
-holds 2-3 items):** (1) writeup/data/p2_route_fus_v1.json
-sources.USC2.cite — same "Leger"→"Gomez-Serrano" typo 338 fixed in
-sources.USC.cite, flagged by 338 outside its territory (source:
-CORRECTIONS.md §20).
+**LCB2 accumulator — THRESHOLD REACHED at 2 items, batch leg 352 DRAFTED
+(cycle 10h):** (1) writeup/data/p2_route_fus_v1.json sources.USC2.cite —
+"Leger"→"Gomez-Serrano" (source: CORRECTIONS.md §20); (2) leg 221's "86x
+tolerance" phrasing (journal + module docstring, identical wording) —
+arithmetically inconsistent with its own 5e-4 basis, should read ~865x
+(source: leg 307's secondary erratum; the passage's other three magnitudes
+check out). Accumulator resets empty; future items open item (3).
 
 Nothing in this update lifts a ban. B1's YES pins a search space under the
 Tier-2 ceiling — apparatus, not movement; B2 is a basis study; no L1-L4
@@ -17955,10 +17957,135 @@ bounded ETA would be welcome in the next report); B/348 POCP; D/307 TSCX.
 349 on 348; 345 on 328; next vacancy: 328 ORC5. With the user: cycle-10
 packet (complete), C4/escalation-#3, 313 packet + ban-wording, 320 packet.
 
-**Reserve queue: 18 undispatched legs (349, 328, 345, 346, 324, 322, 327,
+Cycle 10h: B/348 landed (ii) OPEN-AND-REACHABLE at 3b75842 (315's blocker
+adjudicated NON-TRANSFERRING — rescaled 3D NS stays genuinely parabolic; six
+prior-art closures all on COMPACT domains; the named obstruction is the
+domain-shape/spectral-basis mismatch on unbounded R³ in an algebraic weight,
+cost class C; no build proposed — the hard constraint honoured). **The POCP
+answer is a NEW user decision item, assembled and released: classification
+(ii) + named obstruction + cost class + prior-art map; the build remains
+undrafted on DM authority.** D/307 landed yes-artifact at 401a5f7 — **leg
+221's flag CLOSES** (probe-realization artifact: the synthetic two-scale
+field; every banked field single-scale; 0/256,233 calls moved; fresh
+transient clean); the 86x→~865x erratum goes to the accumulator, which hits
+threshold — **leg 352 LCB2 drafted**. Refills: B ← 349 GAFV (precondition
+FIRED by 348's report; the fitness-viability answer informs the same user
+decision), D ← 328 ORC5 (reserve rank 1; its landing fires 345). Floor 2/4
+(349, 351).
+
+**Reserve queue: 17 undispatched legs (345, 346, 352, 324, 322, 327,
 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
-dispatchable: **10**. Next fresh leg number: **352.**
+dispatchable: **10** (346, 352, 324, 322, 327, 287, 229, 293, 298, 299 —
+rank order: 346, 352, then as listed). 345 on 328 (live in D). Next fresh
+leg number: **353.**
 
 Nothing in this update lifts a ban. B2's enrichment is resolution
 apparatus under the Tier-2 ceiling; B3 asks whether the nonlocal step stays
 safe; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10h) — 348 (ii) OPEN-AND-REACHABLE ABSORBED
+AND RELEASED AS A NEW USER DECISION ITEM; 307 YES-ARTIFACT ABSORBED (221's
+FLAG CLOSES); LEG 352 LCB2 DRAFTED AT ACCUMULATOR THRESHOLD; B ← 349 GAFV
+(PRECONDITION FIRED), D ← 328 ORC5
+
+Written from the same detached lineage, resynced to origin/main = f29b386.
+
+### 348 POCP — classification (ii), absorbed at full strength
+
+The scoping did exactly what it was drafted to do: adjudicated (not
+carried) that 315's blocker does not transfer — the rescaled 3D NS system
+keeps the viscous Laplacian as principal part and is genuinely parabolic,
+so Zgliczyński's dissipative hypotheses are not the mismatch here; found
+the REAL obstruction in the prior art's shape — all six periodic-orbit CAP
+closures live on COMPACT domains (torus / box+BC / minimal cell), while
+route 4's object needs unbounded R³ in an algebraically-weighted space, and
+the one unbounded+algebraic result (2308.01528) is a stationary 1D profile
+via different apparatus. Named obstruction: domain-shape/spectral-basis
+mismatch. Cost class C on 315's own rubric. (i) ruled out by absence of any
+positive instance; (iii) ruled out because no failing hypothesis is PROVEN
+— 343's continuous-spectrum finding carried as risk factor only, correctly
+not transferred as proof across operators. Two already-banked links caught
+mid-draft and corrected — MF2 discipline live. No build proposed. Endorsed
+without amendment.
+
+**Ruling — the (ii) answer is a NEW user decision item, released now:**
+classification, named obstruction, cost class, and the prior-art map, with
+the boundary drawn at cycle 10c restated: this is NOT an edit to the
+completed cycle-10 packet. The question for the user is whether cost-class-C
+research capacity goes toward the domain-shape/spectral-basis mismatch —
+the one named thing standing between route 4's object and a mature
+certification technology. The DM drafts no build and no research leg on its
+own authority; §3's reverse-engineered-fitness design stays BLOCKED (an
+open route is not a closed certificate — its auto-pickup clause is not
+triggered).
+
+### 307 TSCX — yes-artifact, absorbed; 221's flag CLOSES
+
+Independent reproduction bit-for-bit fresh (no leg-221 code imported), the
+mechanism re-derived independently (the cap resolves the outer scale,
+r_peak matching 1/√2 to 0.03%, cap non-binding), and genuine-vs-artifact
+decided by MEASUREMENT: every banked field is single-scale (one local
+maximum in |d1(r)|), a fresh 30-step transient raises nothing, and 221's
+own 256,233-call census stands cited. The effect lives in the hand-built
+synthetic probe's realization. **Per 307's own pre-committed yes-artifact
+branch: the mechanism is banked and leg 221's flag CLOSES.** No escalation.
+The secondary erratum (the "86x" phrasing, arithmetically ~865x on its own
+5e-4 basis while the passage's other three magnitudes check out) is
+accumulator material, not re-litigation — item (2), below. Endorsed without
+amendment.
+
+### Leg 352 LCB2 — drafted at the accumulator's threshold
+
+```
+### 352 — ROUTE-LCB2: LIGHT CORRECTIONS BATCH 2 (the accumulator's first
+harvest; 338's exact shape)
+[FLOOR-ELIGIBLE: no — correction/record]
+**Thesis.** Two accumulated micro-corrections, each flagged by a landed leg
+outside its own territory: (i) writeup/data/p2_route_fus_v1.json
+sources.USC2.cite "Leger" → "Gomez-Serrano" (same fix 338 made to
+sources.USC.cite, verified there against the paper's live author list);
+(ii) leg 221's "86x tolerance" phrasing at its two identical sites (journal
++ module docstring) → ~865x, the value consistent with the passage's own
+5e-4 basis (307's arithmetic; the other three magnitudes 2000x/93.9x/1731x
+check out and are untouched).
+**Gate.** Both sites corrected to their source-derived values with inline
+markers and ONE batched CORRECTIONS entry, zero other content changed
+(diff-checked)?
+  yes -> Bank; the accumulator's items (1)-(2) close.
+  no  -> A site resists without touching an argument or gate text: report
+        the resister verbatim, land the other, never widen.
+**Territory.** writeup/data/p2_route_fus_v1.json (the one cite field),
+               experiments/journal/leg_221.md + the module docstring site
+               (markers only), writeup/CORRECTIONS.md (append),
+               writeup/novelty/leg_352.md, experiments/journal/leg_352.md.
+**Difficulty.** light
+**Preconditions:** None.
+```
+
+### Refills
+
+- **Slot B ← 349 GAFV** — its precondition (348 reported) FIRED this cycle.
+  The user's sequencing is satisfied by the letter and the spirit: 348
+  answered (ii), and the fitness-viability answer now feeds the SAME user
+  decision (seed creation + certification spend are one portfolio choice).
+  No GA compute on either branch, restated. Math, floor-eligible.
+- **Slot D ← 328 ORC5** — reserve rank 1; closure #5's CORRECTIONS entry,
+  owed since cycle 6 and flagged missing by 339; its landing FIRES 345
+  PUB0C's precondition.
+
+**Floor 2/4 (349, 351) — §3b's minimum.** FLOOR-TABLE synced; the
+accumulator reset. 335: the orchestrator's watch (genuine long computation,
+rows still accumulating, no stall symptom) is accepted — no §9g action.
+
+**Reserve queue: 17 undispatched legs (345, 346, 352, 324, 322, 327, 287,
+229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **10** (rank order: 346, 352, 324, 322, 327, 287, 229, 293,
+298, 299). 345 on 328 (live). Next fresh leg number: **353.**
+
+Nothing in this update lifts a ban. 348's (ii) names an obstruction and a
+cost — the spend is the user's; 307 closes a flag by measurement; 349
+checks a fitness against a ban's own gate and runs nothing. No L1-L4 link
+moved; Clay stays ~0.05%.
