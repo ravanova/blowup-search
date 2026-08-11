@@ -34,8 +34,9 @@ one.
 Usage:
     .venv/bin/python experiments/p2_route_p0tcv_v1_verify.py [--tex PATH] [--no-fetch]
 
-Writes `writeup/data/p2_route_p0tcv_v1_verify.json` and the registered figure
-`writeup/figures/fig_p0tcv_window.png`.
+Writes `writeup/data/p2_route_p0tcv_v1_verify.json`.  The registered figure
+`writeup/figures/fig67_route_p0tcv_v1_verify.png` is rebuilt from that JSON alone by
+`experiments/p2_route_p0tcv_v1_verify_evidence.py`.
 """
 
 from __future__ import annotations
@@ -57,7 +58,6 @@ getcontext().prec = 60
 
 REPO = Path(__file__).resolve().parent.parent
 OUT_JSON = REPO / "writeup" / "data" / "p2_route_p0tcv_v1_verify.json"
-OUT_FIG = REPO / "writeup" / "figures" / "fig_p0tcv_window.png"
 
 # ---------------------------------------------------------------------------
 # Pins.  These are the objects under verification; every one is re-checked, not
@@ -486,6 +486,53 @@ def audit_diff(before_json: dict | None = None, after_json: dict | None = None) 
 # Clause (a): architecture, read off the confirmed locators
 # ---------------------------------------------------------------------------
 
+def propagation_census() -> dict:
+    """Where has the failing figure already been restated?  A wrong number that has
+    escaped its source leg is a different (and larger) repair than one that has not, so
+    this is measured rather than assumed.  `main` is searched, plus the two branch tips.
+    """
+    needle = CLAIMED["width_ratio"]
+    surfaces = []
+    for rev, label in ((REV_AFTER, "leg/266-p0tc-v1"), (REV_275, "leg/251-p0t-v1 tip"),
+                       ("origin/main", "origin/main")):
+        try:
+            out = git("grep", "-n", "-F", needle, rev, "--",
+                      "*.md", "*.py", "*.json")
+        except subprocess.CalledProcessError:
+            out = ""  # git grep exits 1 on no match
+        for line in out.splitlines():
+            path = line.split(":", 2)[1] if line.count(":") >= 2 else line
+            lineno = line.split(":", 2)[2].split(":", 1)[0] if line.count(":") >= 3 else ""
+            if path.endswith(".json") and "p0t_v1_targetselection" not in path:
+                continue  # skip incidental float substrings in bulk data
+            surfaces.append({"rev": label, "path": path, "line": lineno})
+    # de-duplicate on (path, line): the same blob appears under several revs
+    seen, uniq = set(), []
+    for s in surfaces:
+        k = (s["path"], s["line"])
+        if k in seen:
+            continue
+        seen.add(k)
+        uniq.append(s)
+    on_main = [s for s in uniq if s["rev"] == "origin/main"]
+    ledgers = {"experiments/JOURNAL.md", "LITERATURE_CHECK.md", "plan_of_record.py",
+               "CONTINUATION_PROMPT.md", "PHASE2_P2_NOTES.md"}
+    return {
+        "needle": needle,
+        "surfaces": uniq,
+        "n_surfaces": len(uniq),
+        "n_on_main": len(on_main),
+        "on_main_paths": sorted({s["path"] for s in on_main}),
+        "outside_leg_300_territory": sorted(
+            {s["path"] for s in on_main
+             if s["path"] in ledgers or s["path"] == "DIRECTION.md"}),
+        "note": ("Two of these are on main and outside leg 300's territory "
+                 "(experiments/JOURNAL.md is integration-owned; DIRECTION.md is DM-owned), "
+                 "which is why the gate's no-branch prescribes a rework leg rather than an "
+                 "in-place fix."),
+    }
+
+
 def clause_a(loc: dict, win: dict) -> dict:
     """The three sub-claims of the re-posed obligation, each tied to a confirmed line."""
     by_line = {L["line"]: L["confirmed"] for L in loc["locators"]}
@@ -585,66 +632,6 @@ def negative_controls(tex: Path, win: dict) -> dict:
 # figure
 # ---------------------------------------------------------------------------
 
-def make_figure(win: dict, cmp_: dict) -> None:
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-
-    r_res = float(win["_r_res"])
-    r_star = float(win["_r_star"])
-    ratio = float(win["_ratio"])
-    claimed_ratio = float(CLAIMED["width_ratio"])
-
-    fig, (ax, ax2) = plt.subplots(
-        2, 1, figsize=(9.0, 5.2), gridspec_kw={"height_ratios": [2.0, 1.0]})
-
-    # --- top: the two r-windows, to scale ---
-    ax.axhspan(0.55, 0.95, xmin=0.0, xmax=1.0, color="none")
-    ax.barh(0.75, r_res - 1.0, left=1.0, height=0.26,
-            color="#3B7EA1", edgecolor="black", linewidth=0.8,
-            label=f"target window $(1,\\,7/6]$ — width {r_res-1.0:.7f}")
-    ax.barh(0.35, r_star - r_res, left=r_res, height=0.26,
-            color="#C4622D", edgecolor="black", linewidth=0.8,
-            label=f"BCG dominance window $(7/6,\\,r^*)$ — width {r_star-r_res:.7f}")
-    for x, lab, va in ((1.0, "1", "top"),
-                       (r_res, f"$7/6$ = {r_res:.7f}", "top"),
-                       (r_star, f"$r^*$ = {r_star:.7f}", "top")):
-        ax.axvline(x, color="0.35", linewidth=0.8, linestyle=":")
-        ax.text(x, 0.06, lab, ha="center", va=va, fontsize=8.5)
-    ax.set_xlim(0.99, 1.20)
-    ax.set_ylim(0.0, 1.05)
-    ax.set_yticks([])
-    ax.set_xlabel("similarity exponent $r$   (BCG arXiv:2208.09445, $\\gamma=7/5$)")
-    ax.legend(loc="upper left", fontsize=8.5, framealpha=0.95)
-    ax.set_title("Leg 300 / Route-P0TCV — leg 266's window, re-derived from BCG's own\n"
-                 "(eq:r:restriction) and (eq:rstar) at 60-digit precision",
-                 fontsize=10.5)
-
-    # --- bottom: the one magnitude that does not reproduce ---
-    labels = [r["quantity"] for r in cmp_["rows"]]
-    rels = [max(r["rel_error_float"], 1e-12) for r in cmp_["rows"]]
-    cols = ["#4C9A6A" if r["agrees_at_quoted_precision"] else "#B3202C"
-            for r in cmp_["rows"]]
-    ax2.bar(labels, rels, color=cols, edgecolor="black", linewidth=0.7)
-    ax2.set_yscale("log")
-    ax2.set_ylabel("rel. error of\nleg 266's figure", fontsize=8.5)
-    ax2.tick_params(axis="x", labelsize=8)
-    ax2.axhline(5e-8, color="0.4", linewidth=0.8, linestyle="--")
-    ax2.text(0.02, 5e-8, " rounding floor at 7 d.p.", fontsize=7.5,
-             va="bottom", transform=ax2.get_yaxis_transform())
-    ax2.annotate(f"claimed {claimed_ratio}\nre-derives {ratio:.7f}",
-                 xy=(4, rels[4]), xytext=(3.05, rels[4] * 40),
-                 fontsize=8, ha="center",
-                 arrowprops=dict(arrowstyle="->", linewidth=0.8))
-    ax2.set_title(f"{cmp_['n_agree']}/{cmp_['n_total']} of leg 266's quoted magnitudes "
-                  f"reproduce at the precision it quoted", fontsize=9.5)
-
-    fig.tight_layout()
-    OUT_FIG.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT_FIG, dpi=160)
-    plt.close(fig)
-
-
 # ---------------------------------------------------------------------------
 # main
 # ---------------------------------------------------------------------------
@@ -665,6 +652,7 @@ def main() -> int:
     a = clause_a(loc, win)
     b = audit_diff()
     nc = negative_controls(tex, win)
+    prop = propagation_census()
 
     c_pass = cmp_["all_agree"] and loc["all_confirmed"] and loc["tex_lines_agree"]
 
@@ -692,6 +680,7 @@ def main() -> int:
         "clause_c_pass": c_pass,
         "claimed_by_leg_266": CLAIMED,
         "negative_controls": nc,
+        "propagation_of_the_failing_figure": prop,
         "stacked_successor_note": (
             f"leg 275 ({REV_275}) is stacked on top of {REV_AFTER}, i.e. on top of the "
             "commit this leg verifies; leg/251-p0t-v1's tip is 275, not 266."),
@@ -718,7 +707,6 @@ def main() -> int:
 
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUT_JSON.write_text(json.dumps(rec, indent=1, sort_keys=False) + "\n")
-    make_figure(win, cmp_)
 
     # ---- console report: magnitudes, never booleans ----
     print("=" * 78)
@@ -756,9 +744,11 @@ def main() -> int:
           f"{dg['formula_is_sound']}  closed form: {dg['closed_form']}")
     print()
     print(f"negative controls    : {nc['n_behaved_as_required']}/{nc['n']} behaved")
+    print(f"6.855 propagation    : {prop['n_surfaces']} surfaces, "
+          f"{prop['n_on_main']} on main ({', '.join(prop['on_main_paths'])})")
     print(f"GATE ANSWER          : {gate}")
     print(f"wrote {OUT_JSON.relative_to(REPO)}")
-    print(f"wrote {OUT_FIG.relative_to(REPO)}")
+    print("figure: experiments/p2_route_p0tcv_v1_verify_evidence.py rebuilds fig67 from this JSON")
 
     if not nc["all_behaved"]:
         print("NEGATIVE CONTROL FAILED — the checkers cannot be trusted; run is void.")

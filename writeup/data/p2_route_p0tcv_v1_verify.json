@@ -330,6 +330,62 @@
   "n_behaved_as_required": 5,
   "all_behaved": true
  },
+ "propagation_of_the_failing_figure": {
+  "needle": "6.855",
+  "surfaces": [
+   {
+    "rev": "leg/266-p0tc-v1",
+    "path": "experiments/journal/leg_266.md",
+    "line": "70"
+   },
+   {
+    "rev": "origin/main",
+    "path": "DIRECTION.md",
+    "line": "11155"
+   },
+   {
+    "rev": "origin/main",
+    "path": "DIRECTION.md",
+    "line": "13288"
+   },
+   {
+    "rev": "origin/main",
+    "path": "DIRECTION.md",
+    "line": "13327"
+   },
+   {
+    "rev": "origin/main",
+    "path": "DIRECTION.md",
+    "line": "13335"
+   },
+   {
+    "rev": "origin/main",
+    "path": "DIRECTION.md",
+    "line": "13473"
+   },
+   {
+    "rev": "origin/main",
+    "path": "DIRECTION.md",
+    "line": "13478"
+   },
+   {
+    "rev": "origin/main",
+    "path": "experiments/JOURNAL.md",
+    "line": "3730"
+   }
+  ],
+  "n_surfaces": 8,
+  "n_on_main": 7,
+  "on_main_paths": [
+   "DIRECTION.md",
+   "experiments/JOURNAL.md"
+  ],
+  "outside_leg_300_territory": [
+   "DIRECTION.md",
+   "experiments/JOURNAL.md"
+  ],
+  "note": "Two of these are on main and outside leg 300's territory (experiments/JOURNAL.md is integration-owned; DIRECTION.md is DM-owned), which is why the gate's no-branch prescribes a rework leg rather than an in-place fix."
+ },
  "stacked_successor_note": "leg 275 (2aac47a) is stacked on top of 873a15f, i.e. on top of the commit this leg verifies; leg/251-p0t-v1's tip is 275, not 266.",
  "clay": {
   "odds": "~0.05%",
