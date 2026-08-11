@@ -118,3 +118,57 @@ Two more major escalations, both still parked pending the user's ruling:
 | Highest leg number drafted | 267 (leg 268 next) |
 | Stop reason | External, hard usage limit (account-wide, not context or user-requested) — resets ~1am Europe/London |
 | Self-chain scheduled? | No — this is a pause expecting the same session (or a manually-restarted one) to resume once capacity returns, not a context-exhaustion handoff |
+
+---
+
+# Accumulating sections — carried forward verbatim across every handoff
+
+Everything below this line is the run's institutional memory ([ORCHESTRATION.md](../ORCHESTRATION.md)
+§9d): things a session learned by losing time to them. A handoff rewrites the live state
+*above*; it carries these sections forward, adds to them, and deletes an entry only when it is
+provably obsolete. (Added 2026-08-11, ported from the Project Building Engine.)
+
+## Environment notes (carry forward every session)
+
+1. **The orchestrator session itself can be suspended for going quiet**, taking every
+   dispatched background agent and all `TaskOutput`/`SendMessage` handles with it, while the
+   git worktrees survive on disk. Keep a `send_later` heartbeat armed whenever agents run
+   unattended (ORCHESTRATION.md §9f); it fires from outside the container and can wake a
+   suspended session, which a completion notification cannot.
+2. **Account-wide usage limits kill all agents simultaneously** with a "session limit" error
+   naming a reset time. This is not an agent failure: do not re-dispatch until the named reset
+   time has passed, and salvage worktrees first (finished work can be gated and landed on the
+   agent's behalf; partial work is pushed as raw WIP branches, never merged) — see the
+   2026-08-07 incident below.
+3. **This file's live state can lag the true latest handoff.** At least one handoff
+   (2026-08-11, commit `c14b9c5`) recorded its actual state in the commit message while this
+   file still showed an older pause. Cross-check `git log -- reports/ORCH_STATE.md` against
+   `git log` on `main` before trusting the header above.
+
+## Known flakes
+
+Tests confirmed to fail under load (many worktrees gating at once) and pass in isolation —
+re-run alone under low load before treating one as a regression (ORCHESTRATION.md §9g).
+
+| Test | Trigger | Times re-confirmed clean |
+|---|---|---|
+| — | | |
+
+## Incidents and root causes
+
+One short paragraph each: what happened, how it was diagnosed, what changed as a result.
+
+- **2026-08-06 — 13 agents lost simultaneously.** All stopped mid-novelty-pass ~10 minutes
+  after dispatch, with the orchestrator's tracking of all 13 breaking at the same moment;
+  diagnosed as the orchestrating session (and its container) being judged idle and suspended,
+  not 13 independent failures. Worktrees survived; commits were recovered by hand. Result:
+  the §9f heartbeat contract.
+- **2026-08-07 — account-wide usage limit hit mid-run.** Five agents died with the identical
+  "session limit" error. One leg (261) was actually finished and was gated and landed on its
+  behalf; three were salvaged as raw WIP branches; one had nothing to salvage. Result:
+  environment note 2 above.
+- **2026-08-11 — unpushed local work found across ~21 branches.** A post-handoff check found
+  17 leg/verify branches plus 4 worktree-agent branches holding commits that existed nowhere
+  on origin, including live-leg WIP the 2026-08-11 handoff had described as committed locally.
+  All were pushed (diverged same-name branches under `-local-snapshot` suffixes). Result: the
+  §7b leg liveness rules and the §9g liveness sweep were adopted the same day.

@@ -143,6 +143,25 @@ orchestrator happens to ask, is exactly the failure this fixes. If the orchestra
 the line is missing, stale, or already at/below the watermark, it asks the DM for a refresh
 in the same message as its next refill request (§4a) rather than waiting for a dedicated cycle.
 
+**Preconditions and pre-authorised dispatch (ported 2026-08-11 from the Project Building
+Engine's first external run).** Every reserve leg carries, in its DIRECTION.md entry, an
+explicit **`Preconditions:` line** — what must have landed first, which territory must be
+free, any merge-order constraint. "None" is a valid value and must be written, not implied.
+**The orchestrator may dispatch, without a live DM round-trip, the highest-ranked reserve leg
+whose `Preconditions:` line reads entirely true at dispatch time** — this is what makes a
+drafted reserve leg a *ready* reserve rather than a suggestion. Rules:
+
+1. All preconditions true → dispatch the leg **as written**. Any one false or ambiguous →
+   skip to the next-ranked reserve leg. **Never improvise a variant** to make a leg
+   dispatchable — that is inventing a leg, which the orchestrator does not do.
+2. The per-vacancy DM ping (§4a) still happens — it is how the DM re-ranks and refills the
+   reserve — it is simply no longer a *blocking* dependency for filling the slot.
+3. The composition floor (§3b) and territory disjointness (§5b) are still checked at
+   dispatch, exactly as for a DM-assigned leg.
+4. Two classes still require the DM before dispatch regardless of preconditions: a leg whose
+   stated assumptions have been broken by something that landed after it was drafted, and a
+   leg whose subject matter touches a §8 escalation.
+
 ### 3b. The composition floor — a quota, not a preference
 
 **Diagnosed 2026-08-06, by external review.** The §3a watermark trigger refills the reserve
@@ -324,6 +343,34 @@ An outcome that falls under an escalation (§8) is the one exception: the agent 
 a landing does, and it still refills immediately (§4a) — the escalation is a property of the
 *finding*, not a reason to leave the *slot* empty.
 
+**Liveness — the two ways a leg silently stalls (ported 2026-08-11 from the Project Building
+Engine's first external run; this repo has paid for both — the 2026-08-06 incident in §9f, and
+the 2026-08-11 handoff that found five legs holding WIP nobody had pushed).** The largest
+source of lost wall-clock is not failure, it is **silence**: an agent that has neither
+finished nor failed, holding a slot, with nothing scheduled to wake it. Both known variants
+are the leg's own bug to prevent, and both belong in every leg's brief:
+
+1. **The push-rejection stall.** Step 5 above is a retry loop, and a loop that waits on an
+   external signal can wait forever. After a non-fast-forward rejection, **never wait
+   passively to be re-prompted** — re-fetch and check whether `main` has caught up to your
+   rebase; if your commit is now a clean fast-forward, push it immediately. An idle leg whose
+   commit already fast-forwards `main` is a bug in that leg's own loop, not a scheduling
+   matter.
+2. **Idling between iterations.** At every iteration boundary exactly one of these holds:
+   (a) a process you launched is running *and* you have a wakeup that reliably resumes you
+   when it completes; (b) you are actively working; (c) the leg is finished and pushed. If
+   none holds — uncommitted work, an unfixed failing test, a gate run you lost track of —
+   **the next action is yours, right now.** Being between iterations is not a stopping state.
+
+**In support of both: commit local work-in-progress checkpoints as you go** (after the
+novelty pass, after construction, after measurement — restating §9f's hardening as the leg's
+own duty, not just the orchestrator's insurance). A stall that gets nudged back to life must
+never find hours of uncommitted work, and a replaced leg must leave its partial work
+recoverable on its branch.
+
+The orchestrator's backstop for a leg that breaks these rules anyway is the liveness sweep,
+§9g — a backstop, not a substitute.
+
 **Claim-bearing legs land without pre-push review; the compensating control is post-landing
 verification.** Every landing that touches a mathematical claim, a gate answer, or any number
 in prose gets its paired verifier's line-by-line review on `main`, after the fact, plus a
@@ -438,6 +485,16 @@ agent with its leg number and branch, the queue, in-flight PRs, open escalations
 ledger, and what the next orchestrator must do first), refresh `PROGRESS.md`, **schedule the
 successor session** (below), tell the user, and exit.
 
+**Two kinds of content live in `ORCH_STATE.md` and they age differently (ported 2026-08-11
+from the Project Building Engine).** The live state above is rewritten at every handoff — it
+describes *now*. The **`## Environment notes`, `## Known flakes`, and `## Incidents and root
+causes` sections accumulate**: they are the run's institutional memory, things a session
+learned by losing time to them (host-specific gotchas, specs that fail under load and pass in
+isolation, incident root causes). Every handoff **carries them forward verbatim**, adds to
+them, and deletes an entry only when it is provably obsolete — a handoff that rewrites the
+file from scratch and drops them has destroyed the only mechanism that stops the next session
+re-diagnosing the same incident.
+
 **Be honest about what a handoff costs.** Subagent handles do not survive the session that
 spawned them — a fresh orchestrator cannot `SendMessage` the old agents. That is exactly why
 `ORCH_STATE.md` records **branches, not handles**: the new session gates and merges whatever
@@ -540,6 +597,39 @@ arrive.
   (§4a)** — requesting the DM's next brief and spawning the replacement agent for a vacated slot
   happens the same turn regardless; only "how many fresh agents get launched in the same breath"
   is what this bullet paces.
+
+### 9g. Standing orchestrator practices — the liveness sweep, flakes, worktree hygiene
+
+**Ported 2026-08-11 from the Project Building Engine's first external run.** Three disciplines
+that run every cycle, not only when something looks wrong — each learned by losing time to its
+absence.
+
+**1. The idle-worktree liveness sweep.** Once per cycle (fold it into the §9f heartbeat's
+progress poll), for every live leg answer two questions: *is a process actually running in its
+worktree* (`ps aux` filtered to that path) and *how does its HEAD relate to `main`'s tip*. The
+diagnostic:
+
+| Live process? | Commit vs `main` | Reading |
+|---|---|---|
+| yes | anything | Working. Leave it. |
+| no | behind / diverged | Stalled mid-rebase or mid-fix. Nudge with the specific state observed. |
+| no | **clean fast-forward of `main`** | **Stalled in the finish protocol (§7b liveness rule 1).** Nudge to push now — this one is pure lost time; the work is done. |
+
+Nudge directly (`SendMessage`) with what you observed; do not replace an agent that only needs
+waking. This is a *scheduled* sweep, not a reaction to noticing something — the whole failure
+mode is that a silent stall draws no attention to itself.
+
+**2. Flakes are diagnosed before they are believed.** A test that fails while many worktrees
+gate at once on a loaded host, and passes in isolation, is a flake, not a regression — and
+treating it as a regression burns a bench agent on nothing. Before attributing a `main`
+failure to whatever just landed, **re-run that test alone, under low load.** Confirmed flake
+patterns are recorded in `reports/ORCH_STATE.md`'s `## Known flakes` table (which test, what
+load it flakes under, how many times re-confirmed clean) so the next session recognises it
+instead of re-diagnosing it.
+
+**3. Clean up worktrees once landed and audited.** `git worktree remove <path> --force` after
+the post-landing audit passes. Stale worktrees accumulate, hold obsolete configs, and make the
+sweep in practice 1 read a stalled agent that no longer exists.
 
 ## 10. The sharding experiment (run it once, then stop)
 

@@ -37,9 +37,12 @@ ToolSearch: "select:SendMessage,TaskOutput,TaskStop,Monitor,TodoWrite,send_later
    line (§3a) — read that line directly rather than re-deriving the count from per-leg tags.
    **If it is a seed
    with no queue yet, Step 1 fills it.**
-5. `reports/ORCH_STATE.md` — if it exists and is non-empty, **you are resuming**. Read it
-   first: it names live branches, interrupted legs, and what to do first. Gate and merge what
-   the abandoned branches contain before dispatching anything new.
+5. `reports/ORCH_STATE.md` — **always read it**, resume or not: its `## Environment notes`,
+   `## Known flakes`, and `## Incidents and root causes` sections are things earlier sessions
+   paid for once so you don't pay again, and they bind you from Step 0 onward. If its live
+   state describes an interrupted or handed-off run, **you are resuming** — it names live
+   branches, interrupted legs, and what to do first. Gate and merge what the abandoned
+   branches contain before dispatching anything new.
 6. The latest `reports/REPORT_*.md`, for context on what just landed.
 
 **0c. Establish the leg number.** Find the highest leg number used so far (`git log --oneline`
@@ -87,7 +90,12 @@ it owns `DIRECTION.md` and no other file; and this task —
 > edit that adds, promotes, or dispatches any leg, rather than leaving the count to be
 > hand-derived from per-leg `(RESERVE)` tags that go stale on promotion. The moment that count
 > is at or below 3, draft at least 8 more fully-specified candidate legs immediately,
-> unprompted — do not wait to be asked, and do not wait for the count to reach 0.
+> unprompted — do not wait to be asked, and do not wait for the count to reach 0. **Every
+> reserve leg carries an explicit `Preconditions:` line** ("None" written out when there are
+> none) — what must have landed first, which territory must be free, any merge-order
+> constraint — so the orchestrator can dispatch it without a round-trip to you
+> (`ORCHESTRATION.md` §3a); re-verify every reserve leg's `Preconditions:` line against what
+> has actually landed each time you refresh the queue.
 
 Keep the DM alive for the whole run and reach it with `SendMessage`. When the user hands you a
 steer, forward it **verbatim** and ask for a revised queue — do not interpret it yourself.
@@ -152,6 +160,15 @@ Every agent brief must contain, verbatim:
 > nothing you leave unpushed survives you. **Exception:** if your outcome falls under one of
 > the four escalations (`ORCHESTRATION.md` §8), push your *branch* only — never `main` — and
 > report it as parked.
+>
+> **Liveness — you are responsible for never going quietly idle** (`ORCHESTRATION.md` §7b).
+> After a push rejection, never wait passively to be re-prompted: re-fetch, and if your
+> commit is now a clean fast-forward of `main`, push it immediately. At every iteration
+> boundary exactly one of these must be true — a launched process is running and has a wakeup
+> that reliably resumes you, you are actively working, or you are finished and pushed; if
+> none holds, the next action is yours right now. Being between iterations is not a stopping
+> state. **Commit work-in-progress checkpoints as you go** (after the novelty pass, after
+> construction, after measurement) so a stall never strands uncommitted work.
 
 **Verifiers** (`model: "opus"`, `isolation: "worktree"`): spawn one per leg **when that leg has
 something to verify** — not idle-running. Two triggers: (a) the leg is about to consume a prior
@@ -195,11 +212,17 @@ Sequencing you must enforce:
 Repeat until stopped. One pass through this list is **one cycle**; number them from 1.
 
 1. **Stop files.** `ls STOP-NOW STOP PAUSE 2>/dev/null`. Any hit → §4.
-2. **Heartbeat.** If a heartbeat you armed (`ORCHESTRATION.md` §9f) is what woke this cycle,
-   or if any agents are running unattended and no heartbeat is currently armed, poll for real
-   progress (new commits in each agent's worktree or branch, not just elapsed time) and
-   re-arm the next `send_later` heartbeat before doing anything else this cycle. Do not let a
-   cycle end with agents in flight and no heartbeat armed.
+2. **Heartbeat and liveness sweep.** If a heartbeat you armed (`ORCHESTRATION.md` §9f) is
+   what woke this cycle, or if any agents are running unattended and no heartbeat is currently
+   armed, poll for real progress (new commits in each agent's worktree or branch, not just
+   elapsed time) and re-arm the next `send_later` heartbeat before doing anything else this
+   cycle. Do not let a cycle end with agents in flight and no heartbeat armed. **Fold in the
+   liveness sweep (`ORCHESTRATION.md` §9g):** for every live leg, check whether a process is
+   actually running in its worktree and how its HEAD relates to `main`. No process + a commit
+   that cleanly fast-forwards `main` = a leg stalled in its finish protocol with the work
+   done — `SendMessage` it to push now. No process + behind/diverged = stalled mid-work —
+   nudge with the specific state you observed. Nudge before you replace; do not re-spawn an
+   agent that only needs waking.
 3. **Collect.** `TaskOutput` on finished background agents; `git branch -a` and `gh pr list`
    for pushed work. **A leg reporting an escalation (§8) is collected here too** — its pushed
    branch (never `main`) is a vacancy signal exactly like a landing, not a "wait and see."
@@ -227,6 +250,10 @@ Repeat until stopped. One pass through this list is **one cycle**; number them f
      branch and the gate output.
 6. **Fix what is broken.** A red test on `main`, a bug an agent tripped over, a missing
    evidence script: spawn a bench agent and get it done. Do not queue it and move on.
+   **Diagnose flakes before believing them** (`ORCHESTRATION.md` §9g): a test that failed
+   while many worktrees were gating at once and passes when re-run alone under low load is a
+   flake, not a regression — record it in `reports/ORCH_STATE.md`'s `## Known flakes` table
+   instead of spawning a bench agent at whatever just landed.
 7. **Terminate and refill.** The moment a slot vacates — a leg's push lands on `main`, **or a
    leg escalates and parks its branch instead (§8) — both count, identically** (`ORCHESTRATION.md`
    §4a) — `TaskStop` its agent if it has not already stopped: **a finished leg agent is never
@@ -242,7 +269,14 @@ Repeat until stopped. One pass through this list is **one cycle**; number them f
    same `SendMessage` to the DM, check `DIRECTION.md`'s reserve-count line (`ORCHESTRATION.md`
    §3a):** if it is missing, stale, or already at or below 3, say so explicitly and ask for a
    fresh batch of at least 8 — do not wait for the reserve to hit 0 or for a dedicated cycle to
-   ask. Arm or refresh the heartbeat (step 2 above) for the refilled slot.
+   ask. **You need not wait for the DM's reply to refill:** dispatch the highest-ranked
+   reserve leg whose `Preconditions:` line reads entirely true (`ORCHESTRATION.md` §3a),
+   checking the composition floor (§3b) and territory disjointness as for any dispatch — any
+   precondition false or ambiguous means skip to the next-ranked leg, never improvise a
+   variant. Arm or refresh the heartbeat (step 2 above) for the refilled slot. **Once a
+   landed leg's audit and post-landing review are done, remove its worktree**
+   (`git worktree remove <path> --force`, `ORCHESTRATION.md` §9g) so the liveness sweep
+   never reads a dead worktree as a stalled agent.
 8. **Integration commit.** Once per cycle, in one commit
    (`Leg 0: ORCH — integration cycle <n>, …`): apply the pre-committed plan branch for any gate
    that answered, add the one-line pointers into `experiments/JOURNAL.md`,
@@ -291,7 +325,10 @@ At cycle 12, or the first time you notice your context has been summarised:
 
 1. Write and commit `reports/ORCH_STATE.md`: cycle count, `main` SHA, every live agent with its
    leg number **and branch**, the queue, in-flight PRs, open escalations, the sharding ledger,
-   and what the next orchestrator must do first. Push it and confirm the push landed (`git log
+   and what the next orchestrator must do first. **Carry forward its `## Environment notes`,
+   `## Known flakes`, and `## Incidents and root causes` sections verbatim** — they accumulate
+   across sessions and are never dropped by a rewrite (`ORCHESTRATION.md` §9d); add what this
+   session learned. Push it and confirm the push landed (`git log
    -1 origin/main` shows your commit) before continuing to step 2 — your successor clones the
    repo fresh and must see this commit.
 2. Refresh `PROGRESS.md`.
