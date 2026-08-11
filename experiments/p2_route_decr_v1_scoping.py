@@ -725,11 +725,11 @@ def main() -> int:
     print(f"  {out['gate_answer_verbatim']}")
     print("=" * 78)
 
+    make_figure(checks, out)
+
     dest = REPO / "writeup" / "data" / "p2_route_decr_v1.json"
     dest.write_text(json.dumps(out, indent=2) + "\n")
     print(f"\nwritten: {dest}")
-
-    make_figure(checks, out)
     return 0 if all_ok else 1
 
 

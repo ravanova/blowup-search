@@ -261,5 +261,6 @@
   "headline": "ENCLOSURE IS CRITICALITY. A nu-dependent self-similar profile exists only when the dissipative term is scaling-CRITICAL for the blow-up ansatz (delta_dis = 0), so DOMINATED is not a weakness of anyone's method but the signature of a SUBCRITICAL dissipative term -- you cannot enclose an object that does not exist. THE KNIFE-EDGE: for BCG's compressible implosion delta_dis(gamma, r) vanishes exactly at r = 2 gamma/(gamma+1), which IS the excluded left endpoint of leg 240's banked domination window: agreement 0.0 at gamma = 7/5 and 5/3, and the residual over 45 gammas is IDENTICALLY ZERO in exact rational arithmetic (the float64 value 5.329e-15 is ~25 ulp of catastrophic cancellation and would have reported the identity FALSE under a naive 1e-15 tolerance -- leg 302's failure mode, caught here). Domination owns the open window; enclosure could only live at the one point the window excludes, and there it is blocked by C2 (first-order Euler profile ODE becomes second order when nu*Laplacian is admitted: a singular perturbation, not a continuation) and by C3 (leg 315: the validated ODE->PDE bridge is dissipative-hypothesis-only, BCG's rescaled system is quasilinear hyperbolic). Five named falsification tests, none refuted; the strongest is out-of-sample and half-unrun by design. NOT A LANE, per the gate's own yes-branch. No L1->L4 link moved; Clay ~0.05%.",
   "all_controls_passed": true,
   "n_falsification_tests": 5,
-  "n_not_refuted": 5
+  "n_not_refuted": 5,
+  "figure": "writeup/figures/fig84_route_decr_v1_knife_edge.png"
 }
