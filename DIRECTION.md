@@ -34,9 +34,9 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 335 | S1GR | no |
-| B | 344 | PKLR | yes |
-| C | 341 | ALGW | yes |
-| D | 336 | C305 | no |
+| B | 347 | DSSC | yes |
+| C | 343 | DSSP-B1 | yes |
+| D | 337 | C318 | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -64,8 +64,8 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig87 | — | released (333 landed NO, no figure shipped; number returns to the pool) |
 | fig88 | 335 | reserved (S1GR, in reserve; only if the reproducibility comparison warrants) |
 | fig89 | 340 | landed (fig89_route_egrb_v1_ladder.png + evidence.py) |
-| fig90 | 341 | live, slot C (only if the scoping warrants) |
-| fig91 | 343 | reserved (DSSP-B1, gated on 341; only if warranted) |
+| fig90 | — | released (341 landed, no figure shipped; number returns to the pool) |
+| fig91 | 343 | live, slot C (only if warranted) |
 | fig92+ | — | next free |
 <!-- FIG-TABLE-END -->
 
@@ -236,16 +236,36 @@ packet). Floor 2/4 (341, 344) — the §3b minimum exactly, noted. Record slip
 corrected: 334 HAS landed (a89d8b3); 342's non-consumption of it is a
 timing fact only.
 
-**Reserve queue: 19 undispatched legs (337, 338, 307, 328,
-324, 322, 327, 287, 229, 293, 298, 299, 343, 310, 325, 231, 232, 233, 234),
+Cycle 10: THE CEILING GATE ANSWERED — C/341 landed S1-DIES at 782a310 (the
+fourth space is already realized in three lanes, each dead by a different
+mechanism: Route-D collocation 6.04x short at optimum; ℓ¹-weighted 51/52, no
+window at any exponent; Mellin 163/176, orthogonal death, no transfer). NO
+lift-condition packet exists; the §3 build is NEVER drafted; the TIER-2
+CEILING STANDS on every route-4 gate; 334's clause (a) closes CLOSED-NO; S2
+dissolves as secondary (Gaussian-witness artifact; the target sits on the
+log-divergent L³ boundary 260 found independently). The stage-V ban is
+untouched and stays the user's. B/344 landed YES at 3ec2516 (7-entry sourced
+inventory; 342's "Hou PINN/KAN" corrected — KAN never used; stronger retarget
+base named: arXiv:2509.14185, DeepMind+Buckmaster+Gómez-Serrano). D/336
+landed YES at d0248c6 (both 305 corrections made, SHARP unmoved; two
+out-of-territory repeat sites folded into 338's batch by amendment). ONE user
+decision packet ruled: ceiling answer + seed-creation option (≈35 legs,
+344-corrected base) + route-4-continues-Tier-2 note, updated when 347 lands.
+Refills: C ← 343 DSSP-B1 (precondition FIRED — the critical path), B ← 347
+DSSC (fresh eligible draft: screen 2509.14185's objects against 313's screen
++ cheap-entrance ban), D ← 337 C318 — which FIRES the owed deadline: 345
+PUB0C and 346 CAPR2 (lane-6 second entry = Breden-Chu viscous Burgers)
+drafted this cycle. Floor 2/4 (343, 347) — §3b minimum, stated.
+
+**Reserve queue: 19 undispatched legs (338, 307, 328, 345, 346,
+324, 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234),
 plus 306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately
-dispatchable: 12 (337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298,
+dispatchable: 12 (338, 307, 328, 346, 324, 322, 327, 287, 229, 293, 298,
 299 — rank order as listed, §3a pre-authorised except where a spec says
-otherwise, and ALL subordinate to the ceiling-gate priority above). 343 on
-341 (fires directly behind 341's consequence work); 310 on 287+298; 325
-USER-GATED; 231-234 blocked on repairs 217/219/225 (221's landed). Next fresh
-leg number: **345**. Full specs and this cycle's rulings are in the cycle-8
-through 9f entries at the end of this file.)
+otherwise). 345 on 328 (its spine cites 328's closure-#5 CORRECTIONS entry);
+310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs 217/219/225
+(221's landed). Next fresh leg number: **348**. Full specs and this cycle's
+rulings are in the cycle-8 through 10 entries at the end of this file.)
 
 ---
 
@@ -15955,6 +15975,14 @@ with zero other content changed (diff-checked)?
 **Preconditions:** None.
 ```
 
+**[AMENDED 2026-08-12, cycle 10, before dispatch: item (iv) added to the
+batch — the two sites leg 336 flagged out-of-territory (experiments/
+JOURNAL.md:5018 and writeup/INDEX.md:124, both repeating the corrected false
+elasticity claim; CORRECTIONS.md §18.4 is the source). Same treatment as the
+other items: corrected to 336's banked values with inline markers, cited in
+the same batched CORRECTIONS entry. Territory extended by exactly those two
+sites. Anchors are the quoted text, not the line numbers.]**
+
 ### Reserve queue, re-ranked (rank order for the next vacancies)
 
 Claim-bearing corrections rank directly after the census fix, per the cycle-3
@@ -17198,3 +17226,201 @@ Nothing in this update lifts a ban. 340's identity makes a parked escalation
 SHARPER for the user without moving it; 342's adverse find is the
 cheap-entrance ban binding, and the creation path is routed to the one
 authority that can buy it. No L1-L4 link moved; Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-12 (cycle 10) — THE CEILING GATE ANSWERED: 341 S1-DIES
+ABSORBED (TIER-2 CEILING STANDS; §3 BUILD NEVER DRAFTED; STAGE-V BAN
+UNTOUCHED, THE USER'S); 344 AND 336 ABSORBED; B1 DISPATCHED (C ← 343); THE
+ONE-PACKET SEQUENCING RULED; 345 PUB0C + 346 CAPR2 DRAFTED ON THE FIRED
+DEADLINE; 347 DSSC DRAFTED AND DISPATCHED UNDER THE FLOOR BIND
+
+Written from the same detached lineage, resynced to origin/main = d0248c6.
+
+### 341 ALGW — S1 DIES, absorbed at full strength
+
+The ceiling-raising programme's central question is answered in the negative,
+cleanly: leg 260's "namable fourth space" has ALREADY been realized in three
+independent lanes, each dead by a DIFFERENT mechanism — sup-norm/collocation
+(Route-D, 11+ legs, 6.04x short at theoretical optimum), coefficient/
+ℓ¹-weighted (51/52, no window at any exponent, re-attempt already banned),
+origin-conjugated/Mellin (163/176, orthogonal death, no transfer). The
+stage-V lift condition stays UNMET; no lift packet exists; the §3 build is
+NEVER drafted; the Tier-2 ceiling stands unchanged on every route-4 gate;
+334's clause (a) closes CLOSED-NO, and per the plan's own branch B the brick
+sequence is unchanged except B9's disappearance (already struck). S2's
+secondary dissolution (the composition question rested on a Gaussian-witness
+artifact; the true target sits exactly on the log-divergent L³ boundary 260
+found independently) is banked with it. **The orchestrator's direct
+escalation to the user is ENDORSED — this is the direct answer to their
+programme, and the stage-V ban is untouched and stays theirs regardless.**
+The ceiling-gate priority RESOLVES: consequence work = the decision packet
+below + B1's dispatch, both executed this cycle. fig90 released (no figure
+shipped).
+
+**Process note, recorded:** the mid-session HEAD move that briefly landed a
+commit on leg 342's branch (recovered via isolated worktree, main's ancestry
+clean) is a collision-risk signal under concurrent dispatch. The leg's own
+recovery practice — an isolated worktree per leg — is the fix, and the
+orchestrator is asked to make that standard in leg briefings. This DM has
+worked from an isolated worktree since cycle 7 for the same reason.
+
+### 344 PKLR — YES, absorbed; and 336 C305 — YES, absorbed
+
+- **344:** 7-entry sourced inventory. The headline correction is banked:
+  342's "Hou's PINN/KAN machinery" was never one demonstrated tool — KAN
+  appears in 2506.19243 only as a citation (plain MLP+SSBroyden in use), the
+  KAN half tracing to 2604.16842, never applied to NS/Euler. The load-bearing
+  new find: **arXiv:2509.14185 (DeepMind+Buckmaster+Gómez-Serrano, unstable
+  singularities at near-machine precision on CCF/IPM/Boussinesq)** — a
+  better-validated retarget base whose authors name boundary-free 3D Euler as
+  their next open problem and report explicit PINN failure modes. 342's
+  ≈35-leg estimate is not moved numerically; the DSS/time-periodic gap is now
+  confirmed against two independent literature lines.
+- **336:** both corrections landed with markers, originals quoted in place;
+  C11_aR1 adjudicated INERT-BY-CONSTRUCTION (its term multiplies R₁, exactly
+  zero at r* by the same structural fact defining the saddle-node — the
+  Lesson 90 tell named); SHARP verdict UNMOVED on its actual grounds
+  (M4_class unanimity + smallest-|move_to_close|, neither touched). The two
+  out-of-territory repeat sites (JOURNAL.md and INDEX.md, per CORRECTIONS
+  §18.4) are folded into **leg 338's batch by pre-dispatch amendment** (item
+  (iv), marker beside the spec) — no new leg needed.
+
+### Ruling — the user decision packet: ONE packet, sequenced exactly
+
+The orchestrator flagged the tension: 344's inventory feeds a seed-creation
+decision whose parent lift condition just failed. Resolved by separating what
+341 actually gated: **the §3 CERTIFICATION build died with S1; the route-4
+SEARCH (Tier 2 by design) never depended on S1** — 334's branch B says so in
+its own text, and the search still needs a seed. The packet therefore
+carries, together: (1) the ceiling answer — S1-DIES, Tier 2 stands, the
+fourth space joins the measured dead ends, the stage-V ban unmoved and
+unarguable-with; (2) the seed decision — 342's ≈35-leg creation path, with
+344's corrections attached (the retarget base is the 2509.14185 Gauss-Newton/
+envelope line, NOT "Hou's PINN/KAN"; PINN failure modes on record), and
+347's screen appended when it lands; (3) the standing-authorization note —
+route 4 continues as the Tier-2 programme the user ordered, B1 dispatched
+this cycle under that standing authority; the user may countermand. The
+35-leg buy is priced knowing the ceiling is Tier 2 — that is the honest
+frame, and it is now explicit.
+
+### New legs
+
+```
+### 345 — ROUTE-PUB0C: THE §0c CENSUS-SPINE SECTION, ASSEMBLED FROM BANKED
+RECORDS AT MEASURED WIDTH (the deadline item, drafted as committed)
+[FLOOR-ELIGIBLE: no — record/publication work]
+**Thesis.** §0c unblocked at cycle 9b on the corrected instrument. Assemble
+the census-spine section from banked records only: the Grade-A/fluid cell's
+emptiness at measured width (174's target-absence ground; 309's defense;
+323's variant-robust census — 58 ids, 51 novel, 0/51 four-clause, one
+mechanical near-miss banked), carrying closures #5 and #6 (count struck,
+grounds corrected), citing 317's prior-art map (cite-don't-claim, lane 7's
+closure) and presenting the 202/237 mechanism as known methodology applied.
+**Gate.** Does the draft state every claim at its measured width with the
+constraint checklist verified clause-by-clause (each named constraint
+demonstrably satisfied; every claim diffed against its banked source; no
+count standing in for a named realization)?
+  yes -> Bank as the PUB track's spine section.
+  no  -> Name the claim that cannot be stated at measured width — that is
+        itself a finding, banked, not smoothed.
+**Territory.** writeup/PUB_0C_CENSUS_SPINE.md (NEW), writeup/novelty/
+               leg_345.md, experiments/journal/leg_345.md. Reads banked
+               records; edits none. No figure.
+**Difficulty.** standard
+**Preconditions:** Leg 328 landed (the spine cites 328's closure-#5
+CORRECTIONS entry, which leg 339 confirmed is still missing).
+```
+
+```
+### 346 — ROUTE-CAPR2: LANE-6 SECOND ENTRY — REPRODUCE BREDEN-CHU's VISCOUS
+BURGERS GRADE-A CERTIFICATION (selection made, as committed at cycle 9b)
+[FLOOR-ELIGIBLE: no — reproduction/adjudication]
+**Thesis.** The lane's second entry, selected from leg 174's occupancy
+matrix unchanged by 323's census (0/51 added): Breden-Chu's viscous Burgers
+— the SECOND Grade-A dissipative object (closure #5's own text), from the
+team whose machinery this repository has measured most closely (331's
+weighted-space failure; 256's repair). The adjudication lane is
+three-for-three at finding real defects in published claims (61, 256, 309);
+316 set the exactness standard (49,465/49,465). Both branches pre-registered
+at equal strength.
+**Gate.** Does an independent reproduction confirm the published certificate
+at its own stated magnitudes, row-for-row — or name the defect found, with
+its magnitude and mechanism?
+  confirms -> Bank the reproduction; the lane's record gains its first
+        full confirmation of a fluid-adjacent Grade-A object.
+  defect  -> Bank at full strength with the defect named — the lane's
+        pattern (4-for-4) would itself be a finding about the field's QC.
+**Territory.** experiments/p2_route_capr2_v1.py, writeup/data/
+               p2_route_capr2_v1.json, writeup/novelty/leg_346.md,
+               experiments/journal/leg_346.md. Reads the paper's artifacts;
+               edits nothing of this repository's banked record.
+**Difficulty.** heavy
+**Preconditions:** None.
+```
+
+```
+### 347 — ROUTE-DSSC: SCREEN THE 2509.14185 LINE's DISCOVERED OBJECTS
+AGAINST 313's SCREEN + THE CHEAP-ENTRANCE BAN (342's follow-on: a candidate
+source that appeared after its net was cast)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** 342 screened 5 candidate seed sources (0/5); 344 then found
+2509.14185 (DeepMind+Buckmaster+Gómez-Serrano) OUTSIDE 342's net — unstable
+singularities at near-machine precision on CCF/IPM/Boussinesq, authors
+naming boundary-free 3D Euler next. Screen that line's discovered objects
+exactly as 342 screened its five: 313's three-way screen + the
+cheap-entrance ban, each clause checked against what the papers actually
+construct (none are 3D NS DSS — the question is whether any object or
+technique passes as a SEED SOURCE, not whether one is the target).
+**Gate.** Does the screen yield a definite per-object verdict ledger —
+passes / fails-with-clause-named — plus the technique-level statement (does
+the Gauss-Newton/envelope line change 342's creation-path cost or risk,
+magnitudes where available)?
+  yes -> Bank; append to the user decision packet (the 341-landing packet,
+        cycle 10) as its final scheduled input.
+  no  -> The papers underdetermine the screen after a full read: quote the
+        underdetermining clauses; the packet says exactly that.
+**Territory.** writeup/data/p2_route_dssc_v1.json, writeup/novelty/
+               leg_347.md, experiments/journal/leg_347.md. Reads 342/344's
+               banked records; edits none. No figure.
+**Difficulty.** standard
+**Preconditions:** None. (§3a rule 4: DSS-ban-adjacent — pre-authorised as
+written; it screens and reports, lifts nothing.)
+```
+
+### Refills — three slots, the floor bind stated again
+
+- **Slot C ← 343 DSSP-B1** — the precondition FIRED (341 reported; B1's
+  first action reads 341's verdict and records branch B). The critical path.
+- **Slot B ← 347 DSSC** — fresh floor-eligible draft, dispatched ahead of
+  the corrections queue for two stated reasons: the §3b floor bind (the
+  whole dispatchable reserve is non-eligible), and it is the decision
+  packet's last scheduled input.
+- **Slot D ← 337 C318** — corrections rank 1. **Its dispatch FIRES the
+  cycle-9e deadline, honoured in this same entry: 345 and 346 are drafted
+  above.**
+
+**Floor 2/4 (343, 347) — §3b's minimum, met exactly, second cycle running;
+the next eligible landing should restore margin.** FLOOR-TABLE and FIG-TABLE
+synced (fig90 released; fig91 live with C).
+
+### Ranking and reserve
+
+Next vacancies: 1. **338 LCB1** (as amended — item (iv) added) 2. **307
+TSCX** 3. **328 ORC5** 4. **346 CAPR2** 5. **324 P2SPF** 6. **322 F70** 7.
+**327 P2T1E** 8. **287 EPA** 9. **229 PNRV** 10. **293 JFA** 11. **298
+CORRX** 12. **299 TESTA**; **345 PUB0C** enters at 328's landing (its
+precondition) directly after 346's rank. Then **310 EPAP** (on 287+298),
+**325 MTB1** (USER-GATED), **231-234** (blocked on repairs 217/219/225).
+SUSPENDED: 306, 308. B2-B8: numbered as their turns arrive, per the plan.
+
+**Reserve queue: 19 undispatched legs (338, 307, 328, 345, 346, 324, 322,
+327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **12**. Next fresh leg number: **348.**
+
+Nothing in this update lifts a ban. S1-DIES is the lift condition staying
+UNMET — the ban's evidence went the other way and is banked at full
+strength; the Tier-2 ceiling stands in every route-4 gate; the 35-leg buy
+and the C4/escalation-#3 identity question are the user's. A ceiling
+measured lower is a sharper map, not movement; no L1-L4 link moved; Clay
+stays ~0.05%.
