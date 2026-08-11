@@ -630,7 +630,16 @@ CAPABILITIES = [
      "holds": "replaced by solver/first_integral.py (Route-D v14)",
      "validated": ("nothing -- SUPERSEDED, kept only so the name resolves to a warning "
                    "instead of to nothing"),
-     "test": "test_first_integral.py"},
+     # Leg 292 (Route-CAPA, the second-generation self-audit): was `test_first_integral.py`,
+     # which contains zero occurrences of the string `finite_support` and never imports the
+     # module -- the same defect leg 71 found on solver/ga_search.py, second instance, and
+     # the only one of 48 rows where the cited test cannot fail when the module breaks.
+     # test_finite_support_adversarial.py (leg 124) is what actually exercises it
+     # (`from solver.finite_support import ...`), it is green at HEAD, and its gate S10
+     # re-checks the exact property this `validated` field claims -- "zero importers, and
+     # the SUPERSEDED / DO NOT USE banner is intact". It was on disk and cited by NO row.
+     # Factual `test`-field correction only; `validated` left frozen.
+     "test": "test_finite_support_adversarial.py"},
 ]
 
 

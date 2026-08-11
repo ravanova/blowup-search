@@ -1,7 +1,648 @@
 {
-  "head": "a7a9aba85db706b7f23c915e5d368c98d021ec8d",
+  "head": "bc4bfc15841bbcbd9eb8be1b6f730e5b43911e9e",
   "python": "/home/andy/projects/Unsolved/.venv/bin/python",
   "static": {
+    "S5_relevance": [
+      {
+        "module": "solver/hl_rescaled.py",
+        "tests": [
+          "test_hl_rescaled.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_hl_rescaled.py": [
+            "solver.hl_rescaled"
+          ]
+        }
+      },
+      {
+        "module": "solver/line_hilbert.py",
+        "tests": [
+          "test_line_hilbert.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_line_hilbert.py": [
+            "solver.line_hilbert"
+          ]
+        }
+      },
+      {
+        "module": "solver/gclm_family.py",
+        "tests": [
+          "test_gclm_family.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_gclm_family.py": [
+            "solver.gclm_family"
+          ]
+        }
+      },
+      {
+        "module": "solver/gclm_rescaled.py",
+        "tests": [
+          "test_gclm_rescaled.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_gclm_rescaled.py": [
+            "solver.gclm_rescaled"
+          ]
+        }
+      },
+      {
+        "module": "solver/rescaled_spectrum.py",
+        "tests": [
+          "test_rescaled_spectrum.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_rescaled_spectrum.py": [
+            "solver.rescaled_spectrum",
+            "solver/rescaled_spectrum.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/origin_h2_certificate.py",
+        "tests": [
+          "test_origin_h2_certificate.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_origin_h2_certificate.py": [
+            "solver.origin_h2_certificate",
+            "solver/origin_h2_certificate.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/fractional_gclm.py",
+        "tests": [
+          "test_fractional_gclm.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_fractional_gclm.py": [
+            "solver.fractional_gclm",
+            "solver/fractional_gclm.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/critical_dissipation.py",
+        "tests": [
+          "test_critical_dissipation.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_critical_dissipation.py": [
+            "solver.critical_dissipation",
+            "solver/critical_dissipation.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/dissipative_profile.py",
+        "tests": [
+          "test_dissipative_profile.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_dissipative_profile.py": [
+            "solver.dissipative_profile",
+            "solver/dissipative_profile.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/chen_inviscid_certificate.py",
+        "tests": [
+          "test_chen_inviscid_certificate.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_chen_inviscid_certificate.py": [
+            "solver.chen_inviscid_certificate",
+            "solver/chen_inviscid_certificate.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/marginal_flow.py",
+        "tests": [
+          "test_marginal_flow.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_marginal_flow.py": [
+            "solver.marginal_flow",
+            "solver/marginal_flow.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/boussinesq_velocity.py",
+        "tests": [
+          "test_boussinesq_velocity.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_boussinesq_velocity.py": [
+            "solver.boussinesq_velocity"
+          ]
+        }
+      },
+      {
+        "module": "solver/boussinesq_rescaled.py",
+        "tests": [
+          "test_boussinesq_rescaled.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_boussinesq_rescaled.py": [
+            "solver.boussinesq_rescaled"
+          ]
+        }
+      },
+      {
+        "module": "solver/port_certification.py",
+        "tests": [
+          "test_port_certification.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_port_certification.py": [
+            "solver.port_certification",
+            "solver/port_certification.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/fractional_boussinesq.py",
+        "tests": [
+          "test_fractional_boussinesq.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_fractional_boussinesq.py": [
+            "solver.fractional_boussinesq",
+            "solver/fractional_boussinesq.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/interval.py",
+        "tests": [
+          "test_interval.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_interval.py": [
+            "solver.interval"
+          ]
+        }
+      },
+      {
+        "module": "solver/interval_certificate.py",
+        "tests": [
+          "test_interval_certificate.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_interval_certificate.py": [
+            "solver.interval_certificate",
+            "solver/interval_certificate.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/spectral_certificate.py",
+        "tests": [
+          "test_spectral_certificate.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_spectral_certificate.py": [
+            "solver.spectral_certificate",
+            "solver/spectral_certificate.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/energy_coercivity.py",
+        "tests": [
+          "test_energy_coercivity.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_energy_coercivity.py": [
+            "solver.energy_coercivity",
+            "solver/energy_coercivity.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/certificate_guards.py",
+        "tests": [
+          "test_nk_bounds_adversarial.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_nk_bounds_adversarial.py": [
+            "solver.certificate_guards",
+            "solver/certificate_guards.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/nk_bounds.py",
+        "tests": [
+          "test_nk_bounds.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_nk_bounds.py": [
+            "solver.nk_bounds",
+            "solver/nk_bounds.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/op_lower.py",
+        "tests": [
+          "test_op_lower.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_op_lower.py": [
+            "solver.op_lower",
+            "solver/op_lower.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/holder_norms.py",
+        "tests": [
+          "test_holder_norms.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_holder_norms.py": [
+            "solver.holder_norms",
+            "solver/holder_norms.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/decay_grading.py",
+        "tests": [
+          "test_decay_grading.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_decay_grading.py": [
+            "solver.decay_grading",
+            "solver/decay_grading.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/decay_collocation.py",
+        "tests": [
+          "test_decay_collocation.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_decay_collocation.py": [
+            "solver.decay_collocation",
+            "solver/decay_collocation.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/collocation_newton.py",
+        "tests": [
+          "test_collocation_newton.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_collocation_newton.py": [
+            "solver.collocation_newton",
+            "solver/collocation_newton.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/reduced_certificate.py",
+        "tests": [
+          "test_reduced_certificate.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_reduced_certificate.py": [
+            "solver.reduced_certificate",
+            "solver/reduced_certificate.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/nk_fourier.py",
+        "tests": [
+          "test_nk_fourier.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_nk_fourier.py": [
+            "solver.nk_fourier",
+            "solver/nk_fourier.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/nk_seminorm.py",
+        "tests": [
+          "test_nk_seminorm.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_nk_seminorm.py": [
+            "solver.nk_seminorm",
+            "solver/nk_seminorm.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/hilbert_holder.py",
+        "tests": [
+          "test_nk_hilbert_holder.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_nk_hilbert_holder.py": [
+            "solver.hilbert_holder",
+            "solver/hilbert_holder.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/hilbert_pointwise.py",
+        "tests": [
+          "test_nk_hilbert_pointwise.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_nk_hilbert_pointwise.py": [
+            "solver.hilbert_pointwise",
+            "solver/hilbert_pointwise.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/first_integral.py",
+        "tests": [
+          "test_first_integral.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_first_integral.py": [
+            "solver.first_integral",
+            "solver/first_integral.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/turning_point.py",
+        "tests": [
+          "test_turning_point.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_turning_point.py": [
+            "solver.turning_point",
+            "solver/turning_point.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/profile_newton.py",
+        "tests": [
+          "test_profile_newton.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_profile_newton.py": [
+            "solver.profile_newton",
+            "solver/profile_newton.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/advection_scope.py",
+        "tests": [
+          "test_advection_scope.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_advection_scope.py": [
+            "solver.advection_scope"
+          ]
+        }
+      },
+      {
+        "module": "solver/target_norm.py",
+        "tests": [
+          "test_target_norm.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_target_norm.py": [
+            "solver.target_norm",
+            "solver/target_norm.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/bc_weighted_sobolev.py",
+        "tests": [
+          "test_bc_weighted_sobolev.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_bc_weighted_sobolev.py": [
+            "solver/bc_weighted_sobolev.py",
+            "import bc_weighted_sobolev"
+          ]
+        }
+      },
+      {
+        "module": "solver/literature_gates.py",
+        "tests": [
+          "test_literature_gates.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_literature_gates.py": [
+            "solver.literature_gates",
+            "solver/literature_gates.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/certificate_shapes.py",
+        "tests": [
+          "test_certificate_shapes.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_certificate_shapes.py": [
+            "solver.certificate_shapes",
+            "solver/certificate_shapes.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/bordered_hl.py",
+        "tests": [
+          "test_bordered_hl.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_bordered_hl.py": [
+            "solver.bordered_hl",
+            "solver/bordered_hl.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/viscous_novelty.py",
+        "tests": [
+          "test_viscous_novelty.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_viscous_novelty.py": [
+            "solver.viscous_novelty",
+            "solver/viscous_novelty.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/weight_search.py",
+        "tests": [
+          "test_weight_search.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_weight_search.py": [
+            "solver.weight_search",
+            "solver/weight_search.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/target_selection.py",
+        "tests": [
+          "test_target_selection.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_target_selection.py": [
+            "solver.target_selection",
+            "solver/target_selection.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/ga_search.py",
+        "tests": [
+          "test_gclm_family.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_gclm_family.py": [
+            "solver.ga_search"
+          ]
+        }
+      },
+      {
+        "module": "solver/boussinesq.py",
+        "tests": [
+          "test_boussinesq_dedicated.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_boussinesq_dedicated.py": [
+            "solver.boussinesq",
+            "solver/boussinesq.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/gclm.py",
+        "tests": [
+          "test_gclm_dedicated.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_gclm_dedicated.py": [
+            "solver.gclm",
+            "solver/gclm.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/spectral_utils.py",
+        "tests": [
+          "test_spectral_utils_dedicated.py"
+        ],
+        "loads_module": true,
+        "per_test": {
+          "test_spectral_utils_dedicated.py": [
+            "solver.spectral_utils",
+            "solver/spectral_utils.py"
+          ]
+        }
+      },
+      {
+        "module": "solver/finite_support.py",
+        "tests": [
+          "test_first_integral.py"
+        ],
+        "loads_module": false,
+        "per_test": {
+          "test_first_integral.py": []
+        }
+      }
+    ],
+    "S5_rows_whose_test_never_loads_the_module": [
+      "solver/finite_support.py"
+    ],
+    "count_claims": [
+      {
+        "module": "solver/boussinesq.py",
+        "file": "test_boussinesq_dedicated.py",
+        "claimed_checks": 17,
+        "actual_test_defs": 17,
+        "agrees": true
+      },
+      {
+        "module": "solver/gclm.py",
+        "file": "test_gclm_dedicated.py",
+        "claimed_checks": 14,
+        "actual_test_defs": 14,
+        "agrees": true
+      },
+      {
+        "module": "solver/spectral_utils.py",
+        "file": "test_spectral_utils_dedicated.py",
+        "claimed_checks": 10,
+        "actual_test_defs": 10,
+        "agrees": true
+      }
+    ],
+    "count_claims_disagreeing": [],
     "n_rows": 48,
     "n_distinct_modules": 48,
     "n_modules_on_disk": 48,

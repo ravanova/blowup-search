@@ -18,6 +18,15 @@ WHAT THIS MEASURES (four axes, each reported as a COUNT, never a boolean)
         `test_capabilities.py` does NOT do: the drift detector asserts the cited path
         EXISTS and that `validated` is longer than 20 characters, never that the test
         runs, passes, or has anything to do with the module citing it.
+  S5  RELEVANCE -- does the cited test file actually LOAD the module citing it?  Leg 71
+        named this gap in words ("existence is checked; greenness and relevance are
+        not") and found one instance by hand (solver/ga_search.py cited test_ga.py,
+        which imports only the `ga/` package and never touches the module).  It never
+        systematised the check.  This runner does: for each row, the cited test file is
+        scanned -- and so are the local test-side helpers it imports -- for any
+        `solver.<name>` / `solver/<name>.py` reference.  A row whose test never mentions
+        its own module is a confidently-worded pointer at a test that cannot fail when
+        the module breaks, which is strictly worse than an empty field.
   S4  known-answer-gate presence -- does the `validated` field state a gate with a
         MAGNITUDE, or does it say "no known-answer gate" plainly (which the file's own
         header declares to be an acceptable, honest value), or is it prose that claims
@@ -119,6 +128,73 @@ def cited_test_files(entry: dict) -> list[str]:
     return [tok for tok in re.split(r"[\s,;]+", raw) if tok.endswith(".py")]
 
 
+def _test_text_with_local_imports(test: str, depth: int = 1) -> str:
+    """The test's own source, plus the source of any sibling test_*/helper it imports.
+
+    A row is not stale merely because the loading happens one file away (a dedicated
+    test importing a shared harness), so the scan follows local imports one hop.
+    """
+    p = ROOT / test
+    if not p.exists():
+        return ""
+    text = p.read_text(errors="replace")
+    if depth <= 0:
+        return text
+    for m in re.finditer(r"^\s*(?:from|import)\s+([A-Za-z_][\w]*)", text, re.M):
+        name = m.group(1)
+        if name in ("solver", "ga"):
+            continue
+        sib = ROOT / f"{name}.py"
+        if sib.exists() and sib != p:
+            text += "\n" + sib.read_text(errors="replace")
+    return text
+
+
+def relevance_axis(rows: list[dict]) -> list[dict]:
+    """S5: for every row, does any cited test actually reference the module?"""
+    out = []
+    for r in rows:
+        mod = r.get("module", "")
+        stem = Path(mod).stem                      # e.g. "ga_search"
+        pats = [f"solver.{stem}", f"solver/{stem}.py", f"import {stem}"]
+        hits, per_test = [], {}
+        for t in cited_test_files(r):
+            text = _test_text_with_local_imports(t)
+            found = [pat for pat in pats if pat in text]
+            per_test[t] = found
+            hits += found
+        out.append({
+            "module": mod,
+            "tests": cited_test_files(r),
+            "loads_module": bool(hits),
+            "per_test": per_test,
+        })
+    return out
+
+
+def check_count_claims(rows: list[dict]) -> list[dict]:
+    """Rows whose `validated` prose claims 'test_x.py (N checks)' -- verify N.
+
+    A count is the most falsifiable thing a `validated` field can say, so it is the
+    cheapest place to catch prose that a later leg overtook without correcting the row.
+    N is compared against the number of `def test_*` functions in the named file.
+    """
+    out = []
+    pat = re.compile(r"(test_[\w]+\.py)\s*\((\d+)\s+checks?\)")
+    for r in rows:
+        for m in pat.finditer(r.get("validated", "") or ""):
+            fname, claimed = m.group(1), int(m.group(2))
+            f = ROOT / fname
+            actual = (len(re.findall(r"^def test_", f.read_text(errors="replace"), re.M))
+                      if f.exists() else None)
+            out.append({
+                "module": r["module"], "file": fname,
+                "claimed_checks": claimed, "actual_test_defs": actual,
+                "agrees": (actual == claimed),
+            })
+    return out
+
+
 def static_axes() -> dict:
     rows = list(CAPABILITIES)
     mods = [r.get("module", "") for r in rows]
@@ -153,7 +229,14 @@ def static_axes() -> dict:
         })
 
     distinct = sorted({f for r in rows for f in cited_test_files(r)})
+    rel = relevance_axis(rows)
+    counts = check_count_claims(rows)
     return {
+        "S5_relevance": rel,
+        "S5_rows_whose_test_never_loads_the_module":
+            [r["module"] for r in rel if not r["loads_module"]],
+        "count_claims": counts,
+        "count_claims_disagreeing": [c for c in counts if not c["agrees"]],
         "n_rows": len(rows),
         "n_distinct_modules": len(set(mods)),
         "n_modules_on_disk": len(on_disk),
@@ -315,6 +398,10 @@ def main() -> int:
           f"{len(st['S2_rows_with_absent_test_file'])}; with no test field: "
           f"{len(st['S2_rows_with_no_test_field'])}")
     print(f"S4  gate classes: {st['S4_gate_class_counts']}")
+    print(f"S5  rows whose cited test never loads the module: "
+          f"{st['S5_rows_whose_test_never_loads_the_module']}")
+    print(f"    `(N checks)` prose claims: {len(st['count_claims'])}, "
+          f"disagreeing: {st['count_claims_disagreeing']}")
     print(f"S3  distinct cited tests to execute: {st['n_distinct_cited_tests']}")
 
     if args.recheck is not None:
