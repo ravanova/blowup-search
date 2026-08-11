@@ -728,17 +728,99 @@ def caller_census():
                 unbanked_callers=UNBANKED_CALLERS, test_callers=TEST_CALLERS)
 
 
+def _recompute_clause_b_gate(cb):
+    """Recompute clause (b)'s verdict from its runs after an attribution is merged in."""
+    runs, tests = cb["banked_runs"], cb["test_runs"]
+    attributed = {r["key"]: r["attribution"] for r in runs if "attribution" in r}
+    tot_moved = sum(r.get("calls_moved") or 0 for r in runs) \
+        + sum(t.get("calls_moved") or 0 for t in tests)
+    tot_repair = sum((a.get("repair_attributable_leaves_moved") or 0)
+                     for a in attributed.values())
+    unattributed = [r["key"] for r in runs
+                    if (r.get("artifact_leaves_moved") or 0) > 0 and "attribution" not in r]
+    cb["attribution"] = attributed
+    cb["total_repair_attributable_leaves_that_moved"] = tot_repair
+    cb["artifacts_moved_but_unattributed"] = unattributed
+    cb["artifacts_with_baseline_drift_not_caused_by_this_repair"] = sorted(
+        k for k, a in attributed.items() if a.get("verdict") == "BASELINE_DRIFT_NOT_THIS_LEG")
+    cb["artifacts_whose_script_is_nondeterministic_today"] = sorted(
+        k for k, a in attributed.items() if a.get("script_is_deterministic_today") is False)
+    cb["zero_contamination"] = bool(
+        tot_moved == 0 and tot_repair == 0 and not unattributed
+        and all(r.get("returncode") == 0 for r in runs)
+        and all(t.get("returncode") == 0 for t in tests)
+        and len(runs) == len(BANKED))
+    return cb
+
+
+def attribute_only(key, pre_path, t_all):
+    """Stage 2: attribute one artifact's movement and merge it into the banked JSON."""
+    spec_ = next((s for s in BANKED if s["key"] == key), None)
+    assert spec_ is not None, "unknown banked key %r; known: %r" % (
+        key, [s["key"] for s in BANKED])
+    payload = json.load(open(OUT))
+    assert "clause_b" in payload, "no clause_b in %s to attribute against" % OUT
+    rec = next((r for r in payload["clause_b"]["banked_runs"] if r["key"] == key), None)
+    assert rec is not None, "%s was not run in the banked sweep" % key
+    print("ATTRIBUTING %s: %s artifact leaves moved in the sweep, %s/%s calls bit-identical"
+          % (key, rec["artifact_leaves_moved"], rec["calls_bit_identical"],
+             rec["calls_compared"]), flush=True)
+
+    att = attribute_movement(spec_, pre_path)
+    rec["attribution"] = att
+    print("  verdict %s | repair-attributable leaves %s | baseline drift leaves %s | "
+          "script deterministic today: %s"
+          % (att.get("verdict"), att.get("repair_attributable_leaves_moved"),
+             att.get("baseline_drift_leaves_moved"),
+             att.get("script_is_deterministic_today")))
+
+    _recompute_clause_b_gate(payload["clause_b"])
+    payload["gate_clause_b_zero_contamination_bit_identical"] = bool(
+        payload["clause_b"]["zero_contamination"])
+    payload["gate_answer"] = "YES" if (
+        payload.get("gate_clause_a_every_adversarial_case_now_rejects")
+        and payload["gate_clause_b_zero_contamination_bit_identical"]) else "NO"
+    drift = payload["clause_b"]["artifacts_with_baseline_drift_not_caused_by_this_repair"]
+    payload["banked_artifacts_that_no_longer_reproduce_independently_of_this_repair"] = drift
+    payload["escalation_required"] = bool(drift)
+    payload.setdefault("assembly", []).append(
+        dict(stage="attribute", key=key, wall_seconds=round(time.time() - t_all, 1)))
+    with open(OUT, "w") as f:
+        json.dump(payload, f, indent=1, default=str, sort_keys=True)
+    print("merged into %s -> gate %s, escalation_required %s"
+          % (OUT, payload["gate_answer"], payload["escalation_required"]))
+    return payload
+
+
 # ---------------------------------------------------------------------------
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", default="ab")
     ap.add_argument("--skip-slow", action="store_true")
+    ap.add_argument("--keys", default=None,
+                    help="Comma-separated banked keys to (re-)run, merging into whatever "
+                         "clause (b) results are already banked in the JSON. Clause (b) "
+                         "costs hours of relaxation; a sweep that is interrupted must not "
+                         "have to start over, and one that is resumed must not silently "
+                         "mix stale rows -- so every row records the wall clock and stage "
+                         "that produced it, and `covers_every_banked_artifact` still "
+                         "requires all six to be present.")
+    ap.add_argument("--attribute", default=None, metavar="KEY",
+                    help="Run ONLY the attribution control for one banked artifact and "
+                         "merge it into the existing JSON, recomputing the gate. Exists "
+                         "because attribution costs three full regenerations of a slow "
+                         "artifact and the sweep that discovered the movement should not "
+                         "have to be repeated to explain it. The merge is recorded in the "
+                         "JSON as a two-stage assembly, with both stages' wall clocks.")
     args = ap.parse_args()
 
     t_all = time.time()
     import solver.boussinesq_rescaled as POST
     pre, n_lines = load_pre_repair()
     pre_path = pre.__file__
+
+    if args.attribute:
+        return attribute_only(args.attribute, pre_path, t_all)
 
     ok, control, mags = control_two_modules_really_differ(pre, POST)
     print("LESSON-90 CONTROL (the differential must be able to report the other answer):")
@@ -797,8 +879,49 @@ def main():
               "callers, %d test suites"
               % (len(cen["files"]), len(BANKED), len(UNBANKED_CALLERS),
                  len(TEST_CALLERS)))
+        # Resume support.  Clause (b) is hours of relaxation; an interrupted sweep that
+        # loses every completed artifact is an availability defect in the verification
+        # apparatus, and this leg has already lost one 40-minute sweep to it.  Rows already
+        # banked in the JSON are carried forward BY KEY and each new row is checkpointed to
+        # disk the moment it completes.
+        prior = {}
+        if args.keys:
+            try:
+                _old = json.load(open(OUT))
+                prior = {r["key"]: r for r in _old.get("clause_b", {})
+                         .get("banked_runs", [])}
+                if "clause_a" not in payload and "clause_a" in _old:
+                    payload["clause_a"] = _old["clause_a"]
+                print("    resuming: %d row(s) carried forward from the banked JSON (%s)"
+                      % (len(prior), ", ".join(sorted(prior)) or "none"))
+            except (OSError, ValueError):
+                print("    resuming: no readable prior JSON; starting clause (b) fresh")
+        wanted = set(args.keys.split(",")) if args.keys else None
+        if wanted:
+            unknown = wanted - {s["key"] for s in BANKED}
+            assert not unknown, "unknown --keys %r" % sorted(unknown)
+
         runs = []
+
+        def _checkpoint():
+            """Write what clause (b) knows SO FAR, after every artifact."""
+            merged = dict(prior)
+            for r in runs:
+                merged[r["key"]] = r
+            ordered = [merged[s["key"]] for s in BANKED if s["key"] in merged]
+            snap = dict(payload)
+            snap["clause_b"] = _recompute_clause_b_gate(
+                dict(banked_runs=ordered, test_runs=payload.get("_tests_so_far", []),
+                     n_banked_artifacts_rerun=len(ordered),
+                     checkpoint=True,
+                     covers_every_banked_artifact=bool(len(ordered) == len(BANKED))))
+            with open(OUT, "w") as f:
+                json.dump(snap, f, indent=1, default=str, sort_keys=True)
+
         for spec_ in BANKED:
+            if wanted and spec_["key"] not in wanted:
+                print("    [not in --keys, carried forward] %s" % spec_["key"])
+                continue
             if args.skip_slow and spec_["slow"]:
                 print("    [skipped --skip-slow] %s" % spec_["key"])
                 continue
@@ -827,18 +950,29 @@ def main():
                       % (att.get("verdict"), att.get("repair_attributable_leaves_moved"),
                          att.get("baseline_drift_leaves_moved"),
                          att.get("script_is_deterministic_today")), flush=True)
+            _checkpoint()
+            print("      [checkpointed %d row(s) to the JSON]" % (len(prior) + len(runs)),
+                  flush=True)
         print("    running the module's own correctness suites ...", flush=True)
         tests = run_tests(pre_path)
         for t in tests:
             print("      %-40s rc=%d  calls %s/%s bit-identical"
                   % (t["test"], t["returncode"], t["calls_bit_identical"],
                      t["calls_compared"]), flush=True)
-        tot_calls = sum(r["calls_compared"] or 0 for r in runs) \
-            + sum(t["calls_compared"] or 0 for t in tests)
-        tot_moved = sum(r["calls_moved"] or 0 for r in runs) \
-            + sum(t["calls_moved"] or 0 for t in tests)
-        tot_leaves = sum((r["artifact_leaves_moved"] or 0) for r in runs)
-        tot_prov = sum((r["artifact_provenance_leaves_moved"] or 0) for r in runs)
+        # Carried-forward rows are part of the sweep's evidence and are counted with the
+        # rows measured in this process; the JSON records which stage produced each.
+        _merged = dict(prior)
+        for r in runs:
+            _merged[r["key"]] = r
+        runs = [_merged[s["key"]] for s in BANKED if s["key"] in _merged]
+        tot_calls = sum(r.get("calls_compared") or 0 for r in runs) \
+            + sum(t.get("calls_compared") or 0 for t in tests)
+        tot_moved = sum(r.get("calls_moved") or 0 for r in runs) \
+            + sum(t.get("calls_moved") or 0 for t in tests)
+        # .get, not [] -- a row carried forward from an earlier stage of this sweep predates
+        # the provenance channel, and a resume must not die on the older schema.
+        tot_leaves = sum((r.get("artifact_leaves_moved") or 0) for r in runs)
+        tot_prov = sum((r.get("artifact_provenance_leaves_moved") or 0) for r in runs)
         # Movement, split by WHOSE it is.  An artifact that moved but whose attribution
         # control shows the repair absent from the cause is NOT contamination by this leg --
         # and it is NOT quietly dropped either: it gets its own counter, its own list, and
@@ -868,8 +1002,8 @@ def main():
             # assumption-of-dormancy error one level up again -- hence `unattributed`.
             zero_contamination=bool(tot_moved == 0 and tot_repair_leaves == 0
                                     and not unattributed
-                                    and all(r["returncode"] == 0 for r in runs)
-                                    and all(t["returncode"] == 0 for t in tests)
+                                    and all(r.get("returncode") == 0 for r in runs)
+                                    and all(t.get("returncode") == 0 for t in tests)
                                     and len(runs) == len(BANKED)),
             total_repair_attributable_leaves_that_moved=tot_repair_leaves,
             attribution=attributed,
