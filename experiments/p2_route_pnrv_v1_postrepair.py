@@ -337,6 +337,89 @@ def rel_err(mine, theirs):
     return abs(float(mine) - float(theirs)) / abs(float(theirs))
 
 
+def addendum():
+    """M6, run separately after the main arm: the width-gauge substrate finding.
+
+    This costs seconds and reuses the main arm's banked rows, so it is a second
+    pass over the existing JSON rather than a reason to re-run three hours of
+    solves.  It exists because this leg's own D2 control failed in a way that
+    turned out not to be a defect of leg 226's repair at all:
+
+    `i1 = argmin|X - 1|` selects the SAME node at n = 101 and n = 1601 -- the
+    rho-grids are nested and no refinement puts a node closer to X = 1 -- so
+    gauge 2 pins Omega = -1/2 at X = 0.99594..., while -1/2 is the anchor's
+    value at X = 1 exactly.  The discrete a = 0 traveling wave is therefore
+    slightly narrower than the continuum anchor and travels at X[i1]/2, not
+    1/2, at EVERY resolution.  v11 reads its a = 0 speed as 0.49797 and treats
+    the residual spread across grids as discretization; part of it is not.
+
+    Nothing is corrected here.  This leg reports the magnitude and stops.
+    """
+    from solver.gclm_family import GCLMResidual                      # noqa: E402
+    data = json.loads(OUT.read_text())
+    grid = []
+    for n in (101, 201, 401, 801, 1601):
+        f = GCLMResidual(a=0.0, n=int(n))
+        X = f.X
+        i1 = int(np.argmin(np.abs(X - 1.0)))
+        anc = -1.0 / (1.0 + X ** 2)
+        grid.append({"n": int(n), "drho": float(f.drho), "i1": i1,
+                     "X_at_i1": float(X[i1]),
+                     "anchor_gauge2_miss": float(abs(anc[i1] + 0.5)),
+                     "predicted_discrete_a0_speed": float(X[i1] / 2.0)})
+    xs = sorted({r["X_at_i1"] for r in grid})
+    pred = grid[0]["predicted_discrete_a0_speed"]
+
+    # measured a = 0 speeds, taken from the main arm's own V4 rows
+    meas = [{"n": r["n"], "c": r["c"],
+             "rel_err_vs_X1_over_2": rel_err(r["c"], pred)}
+            for r in data.get("m4_v4_grid_converged_a_max", {}).get("rows", [])
+            if r["a"] == 0.0]
+
+    # D3 is ONE-SIDED by construction: it rejects fat far fields and never thin
+    # ones.  That is leg 226's stated design (the true branch decays FASTER
+    # than the anchor), but the magnitude it lets through is worth recording.
+    d3 = [r["D3_farfield_inflation"]
+          for r in data.get("m4_v4_grid_converged_a_max", {}).get("rows", [])
+          if r.get("repaired_converged")]
+
+    data["m6_width_gauge_substrate"] = {
+        "grid": grid,
+        "gauge_node_is_grid_independent": len(xs) == 1,
+        "X_at_i1": xs[0] if len(xs) == 1 else xs,
+        "refinement_factor_101_to_1601": grid[0]["drho"] / grid[-1]["drho"],
+        "anchor_gauge2_miss": grid[0]["anchor_gauge2_miss"],
+        "predicted_discrete_a0_speed_X1_over_2": pred,
+        "measured_a0_speeds": meas,
+        "D3_on_accepted_rows_min": min(d3) if d3 else None,
+        "D3_on_accepted_rows_max": max(d3) if d3 else None,
+        "reading": "The width gauge does not move under refinement: X[i1] is "
+                   "identical at n = 101 and n = 1601 across a 16x change of "
+                   "drho, so the exact anchor misses gauge 2 by 2.033109e-03 "
+                   "at EVERY resolution and the discrete a = 0 speed is "
+                   "X[i1]/2, not 1/2. Four identical numbers are usually the "
+                   "tell for a control that cannot come out differently "
+                   "(lesson 90); here the grid-independence IS the finding, "
+                   "and it is asserted executably in "
+                   "test_profile_newton_postrepair.py. This is a property of "
+                   "gclm_family's grid and v11's gauge choice, NOT a defect of "
+                   "leg 226's repair, and it does not move this leg's gate. "
+                   "D3's one-sidedness is recorded with it: it rejects fat far "
+                   "fields only, so a profile whose far field is orders BELOW "
+                   "the anchor's passes -- by design (the genuine branch "
+                   "decays faster), but the passing magnitudes are banked here "
+                   "rather than left implicit.",
+    }
+    data["meta"]["addendum_completed"] = True
+    OUT.write_text(json.dumps(data, indent=2))
+    print("[addendum] X[i1] = %.16f at every n (drho 16x), anchor gauge-2 miss "
+          "%.6e, predicted a=0 speed %.17f" % (xs[0], grid[0]["anchor_gauge2_miss"],
+                                               pred))
+    for m in meas:
+        print("           measured a=0 c at n=%-5d %.16f  rel err vs X1/2 %.3e"
+              % (m["n"], m["c"], m["rel_err_vs_X1_over_2"]))
+
+
 def main():
     t_start = time.time()
     data = {"meta": {
@@ -743,4 +826,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if os.environ.get("PNRV_ADDENDUM") == "1":
+        addendum()
+    else:
+        main()
