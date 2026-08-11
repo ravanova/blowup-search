@@ -71,12 +71,18 @@ CONTROLS
   the falsifiability check leg 252 used, and it is what makes a PORTABLE
   verdict mean something (lesson 90: a control that cannot come out differently
   is not a control).
-* DETERMINISM CONTROL: each family is regenerated TWICE, in two independent
-  processes in two independent temp copies.  Run-to-run disagreement inside one
-  environment is *nondeterminism*, which is a different defect from
+* DETERMINISM CONTROL: a family that MOVED is regenerated a second time, in an
+  independent process in an independent temp copy.  Run-to-run disagreement
+  inside one environment is *nondeterminism*, which is a different defect from
   *environment non-portability*; conflating them would misattribute the cause.
-  Only leaves that are stable across the two repeats are attributed to the
-  environment.
+  A family that reproduced the banked bytes exactly does not need it -- it has
+  already agreed with a run made in a different environment months earlier.
+
+CHECKPOINTING
+-------------
+Each regeneration costs 20-50 minutes and the full census is several hours, so
+every family's record is written to a checkpoint directory (outside the repo)
+the moment it completes, and a restart resumes rather than recomputing.
 
 CLASSIFICATION (thresholds fixed before the run, matching the novelty pass)
 --------------------------------------------------------------------------
@@ -158,6 +164,37 @@ VOLATILE_TOKENS = (
     "tmpdir", "tempdir", "pid", "git_head", "git_commit", "commit_hash",
     "run_at", "created", "machine_id", "uuid",
 )
+
+# Leaves that RECORD THE ENVIRONMENT rather than measure anything: the
+# interpreter path, the git HEAD the runner saw, the repo root.  These move by
+# construction and carry no portability information about the artifact's
+# CONTENT.  They are bucketed separately and reported IN FULL (never silently
+# dropped), because deciding that a differing leaf "doesn't count" is exactly
+# the kind of judgement that has to be auditable.
+#
+# Note on `head` specifically: a `git archive` copy has no `.git`, so a runner
+# that records git HEAD records the empty string there.  That is an artifact of
+# THIS leg's method, not a property of the censused family, and is disclosed as
+# such.
+PROVENANCE_KEYS = {
+    "head", "interpreter", "python", "executable", "repo_root", "root",
+    "cwd", "git_head", "commit", "venv",
+}
+_SHA_HEX = set("0123456789abcdef")
+
+
+def is_provenance(path: str, banked, regen) -> bool:
+    leaf = path.rsplit(".", 1)[-1].split("[")[0].lower()
+    if leaf in PROVENANCE_KEYS:
+        return True
+    for v in (banked, regen):
+        if isinstance(v, str):
+            if len(v) == 40 and set(v.lower()) <= _SHA_HEX:
+                return True          # a git object id
+            if v.startswith("/") and ("/.venv/" in v or v.endswith("/python")):
+                return True          # an absolute interpreter path
+    return False
+
 
 REL_PORTABLE = 1e-9
 REL_DRIFT = 1e-3
@@ -305,6 +342,7 @@ def compare(banked: dict, regen: dict) -> dict:
     flag_flips = []
     volatile_moves = []
     string_moves = []
+    provenance_moves = []
 
     for p in shared:
         a, b = banked[p], regen[p]
@@ -325,7 +363,9 @@ def compare(banked: dict, regen: dict) -> dict:
         else:
             if a != b:
                 rec = {"path": p, "banked": a, "regenerated": b}
-                if is_verdict(p):
+                if is_provenance(p, a, b):
+                    provenance_moves.append(rec)
+                elif is_verdict(p):
                     rec["kind"] = "verdict-flip"
                     flag_flips.append(rec)
                 else:
@@ -369,6 +409,13 @@ def compare(banked: dict, regen: dict) -> dict:
         "string_moves_sample": string_moves[:15],
         "n_volatile_moves": len(volatile_moves),
         "volatile_moves_sample": volatile_moves[:10],
+        # environment-recording leaves: listed IN FULL, excluded from the verdict
+        "n_provenance_moves": len(provenance_moves),
+        "provenance_moves": provenance_moves,
+        "provenance_moves_note": (
+            "these leaves RECORD the environment (interpreter path, git HEAD, "
+            "repo root) rather than measure anything; they are excluded from the "
+            "classification and listed here in full so the exclusion is auditable"),
     }
 
 
@@ -577,6 +624,11 @@ def main() -> int:
     ap.add_argument("--families", type=str, default="")
     ap.add_argument("--repeats", type=int, default=2)
     ap.add_argument("--out", type=str, default=str(OUT))
+    ap.add_argument("--partial-dir", type=str, default="",
+                    help="where per-family checkpoints live (default: a temp dir "
+                         "OUTSIDE the repository)")
+    ap.add_argument("--no-resume", action="store_true",
+                    help="recompute every family even if a checkpoint exists")
     args = ap.parse_args()
 
     census = CENSUS
@@ -593,9 +645,34 @@ def main() -> int:
     env = environment_fingerprint()
 
     workroot = Path(tempfile.mkdtemp(prefix="epa_census_"))
+    # Per-family checkpointing.  These regenerations cost 20-50 minutes each and
+    # the whole census is many hours, so a single interruption must never
+    # discard completed families: every family's record is written to
+    # `partial_dir` the moment it finishes, and a restart skips any family whose
+    # checkpoint already exists.  (This repository has been bitten by exactly
+    # this before -- p2_route_cvf_v1_classify carries the same note about a
+    # crash discarding finished sections.)
+    # Default lives OUTSIDE the repository, so checkpointing never puts a file
+    # in this leg's declared territory (or anyone else's).
+    partial_dir = Path(args.partial_dir) if args.partial_dir else (
+        Path(tempfile.gettempdir()) / "epa_census_partials")
+    partial_dir.mkdir(parents=True, exist_ok=True)
+
     results = []
     try:
         for fam, genre, why in census:
+            ckpt = partial_dir / f"{fam}.json"
+            if ckpt.exists() and not args.no_resume:
+                try:
+                    rec = json.loads(ckpt.read_text())
+                    results.append(rec)
+                    print(f"[{fam}] resumed from checkpoint -> "
+                          f"{rec.get('classification')}", flush=True)
+                    continue
+                except Exception as exc:
+                    print(f"[{fam}] checkpoint unreadable ({exc!r}), recomputing",
+                          flush=True)
+
             banked_path = ROOT / "writeup" / "data" / f"{fam}.json"
             runner_path = ROOT / "experiments" / f"{fam}.py"
             rec = {"family": fam, "genre": genre, "why_chosen": why,
@@ -610,6 +687,7 @@ def main() -> int:
                 rec["irreproducible_reason"] = (
                     "missing runner" if not runner_path.exists() else "missing banked JSON")
                 results.append(rec)
+                (partial_dir / f"{fam}.json").write_text(json.dumps(rec, indent=1) + "\n")
                 print(f"[{fam}] IRREPRODUCIBLE: {rec['irreproducible_reason']}", flush=True)
                 continue
 
@@ -677,6 +755,7 @@ def main() -> int:
                 rec["irreproducible_reason"] = first["status"]
                 rec["irreproducible_detail"] = first["stderr_tail"]
                 results.append(rec)
+                (partial_dir / f"{fam}.json").write_text(json.dumps(rec, indent=1) + "\n")
                 print(f"[{fam}] -> IRREPRODUCIBLE-AS-BANKED ({first['status']})", flush=True)
                 for r in runs + head_runs:
                     shutil.rmtree(r["workdir"], ignore_errors=True)
@@ -747,6 +826,7 @@ def main() -> int:
 
             rec["positive_control"] = positive_control(regen_flat)
             results.append(rec)
+            (partial_dir / f"{fam}.json").write_text(json.dumps(rec, indent=1) + "\n")
             print(f"[{fam}] -> {rec['classification']} (env-isolated)  "
                   f"max_rel={cmp_res['max_rel_move']:.3e}  "
                   f">10%={cmp_res['n_leaves_over_10pct']}  "
