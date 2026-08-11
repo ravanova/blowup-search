@@ -1,0 +1,52 @@
+{
+  "leg": 317,
+  "route": "Route-SFTX",
+  "gate_answer": "NO",
+  "gate_text_no": "Bank the prior-art map, links not counts -- the write-up is not drafted, and that is the finding, full strength.",
+  "note": "Per the NO branch, writeup/CAP_SILENT_FAILURES.md is NOT created. This JSON is the prior-art map with source-leg measured magnitudes, links not counts.",
+  "families": [
+    {
+      "name": "Family A: hypothesis-violation / fabrication-acceptance in radii-polynomial certificate constants (Y0/Z0/Z1/Z2)",
+      "source_legs": [79, 98, 116, 128, 140, 142],
+      "measured_magnitudes": [
+        {"leg": 79, "module": "solver/port_certification.py", "magnitude": "11/25 (44.0%) hypothesis-violating cases falsely closes=True; sharpest: radii_polynomial_status(-1.0,0.9,1e4)=True vs (+1.0,0.9,1e4)=False", "status": "repaired 2026-08-06, 11/25 -> 0/25"},
+        {"leg": 98, "module": "solver/interval_certificate.py", "magnitude": "12/36 (33.3%) false accepts, 8 load-bearing; case A6: honest enclosure scaled x1e-8 still closes; post-fix containment slack 1e4", "status": "repaired 2026-08-06, 12/36 -> 0/36"},
+        {"leg": 116, "module": "solver/nk_bounds.py", "magnitude": "21/52 false accepts (19 load-bearing); Z0=-1 gives closes=True with certified ball missing sqrt(2) by 1.161 ball radii; supremum-via-truncated-max under-report up to 9.99916e7x", "status": "no banked Route-D number affected, 3.49 decades margin"},
+        {"leg": 128, "module": "solver/certificate_guards.py (new, shared guard)", "magnitude": "gate(a) NO: 17/21 repaired, 4 survive as distinct 'fabricated MAGNITUDE' class (Y0=0.0, Y0=1e-300, Z2=1e-6) undetectable by any hypothesis guard; gate(b) 4626/4626 bit-identical; gate(c) shared guard confirmed", "status": "landed on main"},
+        {"leg": 140, "module": "solver/nk_fourier.py", "magnitude": "same guard class (r_min=-706.93 at Y0=-1e6, 361x budget inflation); weighted_ell1_op_norm returns negative norms (7.0 -> -1.251); ell1_op_norm up to 1024x under-report; chained fabricated ball misses true zero by 1.990 ball radii", "status": "ALL LATENT, 0/3 callers reach any gap"},
+        {"leg": 142, "module": "solver/nk_seminorm.py", "magnitude": "V2: negative anchor speed -> 12.4904x understatement (A_upper=5.554300 vs honest 69.375617); V1/V4 chained fabricates a complete certificate", "status": "ALL LATENT, distinct guard shape from leg 128's, not yet built"}
+      ],
+      "prior_art": [
+        {"source": "van den Berg-Lessard, AMS Notices 62(9):1057 (2015)", "point": "Y0/Z1/Z2 are upper bounds on norms within the hypotheses of the imported theorem", "cited_by": "leg 79 novelty pass"},
+        {"source": "Hungria-Lessard-Mireles James, Math. Comp.", "point": "same hypothesis structure for the radii-polynomial theorem", "cited_by": "leg 79 novelty pass"},
+        {"source": "Verifying Floating-Point Programs in Stainless, arXiv:2601.14059", "point": "NaN-bypasses-a-comparison-guard hazard documented", "cited_by": "leg 79 novelty pass"},
+        {"source": "QED at Large, arXiv:2003.06458", "point": "adversarial batteries against trusted-base components is the routine method", "cited_by": "leg 79 novelty pass"},
+        {"source": "Rigorous numerics for analytic solutions of differential equations: the radii polynomial approach, https://www.math.mcgill.ca/jplessard/ODEs_files/final_draft.pdf", "point": "Y,Z0,Z1,Z2 are norms/suprema of norms, hence automatically nonnegative -- non-negativity is a hypothesis of the theorem statement, not an assumable output property", "cited_by": "leg 317 (this leg)"},
+        {"source": "IEEE 1788-2015 interval arithmetic standard, https://inria.hal.science/hal-01559955/document", "point": "decoration system exists because an enclosure f(x) subset x alone does not establish a fixed point unless hypotheses (continuity, everywhere-defined) are checked", "cited_by": "leg 98 novelty pass, reinforced by leg 317"},
+        {"source": "Validated numerics (orientation), https://en.wikipedia.org/wiki/Validated_numerics", "point": "general framing", "cited_by": "leg 317 (this leg)"}
+      ],
+      "verdict": "folklore, no surviving taxonomy entry"
+    },
+    {
+      "name": "Family B: scale-invariant convergence/closure test cannot detect escape from a scaling family",
+      "source_legs": [202, 237],
+      "measured_magnitudes": [
+        {"leg": 202, "module": "solver/profile_newton.py", "magnitude": "M1: continuation returns off-branch grid-scale roots as converged=True at machine-zero relres; c(a=1.50)=0.20427/0.23717/0.97282 at n=101/201/301, all three 'converged' at machine precision, 376% apart; M2: small-amplitude start escapes scaling family, c off by 6.15e5x, sign flipped (reported c=-306421.259 at eps=1e-10 vs true c=0.49797)", "status": "MATERIALLY EXPOSED -- Route-D v11's banked a_max_machine/GA_boundary claims trust this flag; branch-jump signature already visible in their own JSON (weighted_defect 0.50/4788/73372 at a=0.5/0.8/1.0); escalated, parked, not merged"},
+        {"leg": 237, "module": "solver/collocation_newton.py::ACollocation (census of 47 files, 20 verdict sites)", "magnitude": "exactly one other hit besides profile_newton.py; G1: rel spread 8.725e-14 (constant) vs c spanning 1.000e6x vs absolute residual spanning 1.128e12x across lambda; G2: gauge defect up to 999.0, reported c wrong up to 1000x, verdict True on all synthetic escapes; reachability negative: 41 real cases, 17 converged, 0 escaped (worst gauge defect 8.882e-16)", "status": "LATENT and NOT_CLAIM_ADJACENT -- 14 external call sites, 0 in claim-bearing runners"}
+      ],
+      "prior_art": [
+        {"source": "Dickson-Kelley-Ipsen-Kevrekidis, Condition Estimates for Pseudo-Arclength Continuation, arXiv:math/0603716", "point": "pseudo-arclength's extra equation removes only the fold degeneracy, not continuous-symmetry (incl. scaling) degeneracies; each symmetry generator needs its own phase constraint; rank-deficiency equal to group dimension is diagnostic", "cited_by": "leg 317 (this leg)"},
+        {"source": "Beyn & Thuemmler, Freezing solutions of equivariant evolution equations, SIAM J. Appl. Dynam. Syst. 3(2):85-116 (2004)", "point": "phase conditions required for any Lie-group action (translation, rotation, or scaling) or Newton converges to an arbitrary group-orbit member -- the exact 202/237 mechanism, 2 decades old", "cited_by": "leg 317 (this leg)"},
+        {"source": "Beyn & Thuemmler, Phase Conditions, Symmetries and PDE Continuation", "point": "same, abstract Lie-group framework", "cited_by": "leg 317 (this leg)"},
+        {"source": "Dynamic rescaling / modulation technique, Merle-Raphael-Martel-Zaag-Soffer-Weinstein lineage; recent instances arXiv:2603.25104, arXiv:2604.01868", "point": "self-similar-blowup-specific instance: scaling parameters must be fixed by normalization conditions that remove the scale-invariance degeneracy of the profile equation; stability heavily depends on the normalization choice", "cited_by": "leg 317 (this leg)"},
+        {"source": "Sverak, On scale-invariant solutions of the Navier-Stokes equations, https://www-users.cse.umn.edu/~sverak/Krakow-6ECM.pdf", "point": "Navier-Stokes-specific scale-invariance context", "cited_by": "leg 317 (this leg)"},
+        {"source": "Forward self-similar solutions to the 2D Navier-Stokes equations, arXiv:2601.03161", "point": "continuation strategy tracks linearization eigenvalues explicitly because a scale-invariant residual cannot alone distinguish branches", "cited_by": "leg 317 (this leg)"},
+        {"source": "General numerical-solver literature (MOOSE, OpenMDAO, ADMM/Wohlberg arXiv:1704.06209)", "point": "a relative residual criterion answers whether the residual shrank relative to the start, not whether the solution is the intended one; a converged solution may still be on the wrong branch", "cited_by": "leg 317 (this leg)"}
+      ],
+      "verdict": "folklore, older and broader than expected -- named justification for an existing standard methodology (phase conditions / freezing method / dynamic rescaling), not a new hazard class"
+    }
+  ],
+  "clay_chain_note": "Nothing in this leg moves a link of the L1->L4 (Clay) chain. Clay odds stay ~0.05%.",
+  "spelling_variants_run": ["Navier-Stokes", "Navier--Stokes", "self-similar", "self similar"],
+  "leg_303_addendum_addressed": true
+}
