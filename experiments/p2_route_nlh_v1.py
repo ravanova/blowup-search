@@ -767,9 +767,140 @@ def run(ns=(100, 200), alphas=(0.25, 0.5, 0.75), headline_n=200, headline_alpha=
     return res
 
 
+# ===========================================================================
+# 5.  fig85 -- allocated to this leg at dispatch; rebuilt from the curated JSON
+# ===========================================================================
+
+FIG = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                   "writeup", "figures", "fig85_route_nlh_v1_nonlocal.png")
+
+
+def make_figure(data=None):
+    """Four panels, each one a MAGNITUDE and each one carrying its own control."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    if data is None:
+        with open(OUT_JSON) as fh:
+            data = json.load(fh)
+
+    fig, ax = plt.subplots(2, 2, figsize=(13.6, 10.0))
+    cols = {"0.25": "#1f77b4", "0.5": "#d62728", "0.75": "#2ca02c"}
+    styles = {"100": ":", "200": "-"}
+
+    # -- A: the gate quantity.  Z1 must stay below 1 --------------------
+    a0 = ax[0][0]
+    for n, entry in sorted(data["by_n"].items(), key=lambda kv: int(kv[0])):
+        for al, h in sorted(entry["homotopy"].items()):
+            live = [s for s in h["steps"] if s["verdict_is_meaningful"]]
+            a0.plot([s["t"] for s in live], [s["bounds"]["Z1"] for s in live],
+                    styles[n], color=cols[al], marker="o", ms=3.4, lw=1.6,
+                    label=r"$n=%s,\ \alpha=%s$" % (n, al))
+            c = h.get("Z1_crossing", {})
+            if c.get("crossed") and c.get("t_star") is not None:
+                a0.plot([c["t_star"]], [1.0], "*", color=cols[al], ms=15,
+                        mec="k", mew=0.6, zorder=5)
+    a0.axhline(1.0, color="k", lw=1.3)
+    a0.axhspan(1.0, 1e10, color="0.85", alpha=0.55, zorder=0)
+    a0.text(0.015, 1.35, "Breden-Chu need $Z_1<1$:\nno positive root above this line",
+            fontsize=8.5, va="bottom")
+    a0.set_yscale("log")
+    a0.set_ylim(0.12, 1e9)
+    a0.set_xlabel(r"$t$   (nonlocality:  $W_t=(1-t)\partial_x + t\,\Lambda^{2\alpha}$)")
+    a0.set_ylabel(r"$Z_1$")
+    a0.set_title("A.  The contraction constant leaves the admissible region\n"
+                 "BEFORE the operator is fully nonlocal  ($\\star$ = crossing)",
+                 fontsize=11)
+    a0.legend(fontsize=7.5, ncol=1, loc="upper left", framealpha=0.95)
+    a0.grid(alpha=0.25)
+
+    # -- B: the image is not in the space -------------------------------
+    a1 = ax[0][1]
+    m1 = data["M1_image_in_space"]
+    R = m1["radii"]
+    for mm, marker in zip(("0", "1", "2"), ("o", "s", "^")):
+        rec = m1["modes"][mm]
+        a1.plot(R, rec["nonlocal_sq"], "-", marker=marker, color="#d62728",
+                label=r"$\|\Lambda^{2\alpha}\psi_%s\|^2_{L^2(\mu),\,|x|<R}$" % mm)
+        a1.plot(R, rec["local_control_sq"], "--", marker=marker, color="#1f77b4",
+                label=r"control  $\|\partial_x\psi_%s\|^2$" % mm)
+    a1.set_yscale("log")
+    a1.set_xlabel(r"truncation radius $R$")
+    a1.set_ylabel(r"truncated weighted norm$^2$")
+    a1.set_title("B.  MEASURED obstruction: the nonlocal image is not in the space.\n"
+                 r"$\alpha=%s$; the control saturates, the nonlocal one diverges"
+                 % m1["alpha"], fontsize=11)
+    a1.legend(fontsize=7.5, ncol=2, loc="upper left")
+    a1.grid(alpha=0.25)
+
+    # -- C: the machinery's own quadrature stops being exact -------------
+    a2 = ax[1][0]
+    for n, entry in sorted(data["by_n"].items(), key=lambda kv: int(kv[0])):
+        for al, h in sorted(entry["homotopy"].items()):
+            pts = [(s["t"], s["M3_quadrature"]) for s in h["steps"]
+                   if "M3_quadrature" in s]
+            if not pts:
+                continue
+            a2.plot([p[0] for p in pts], [max(p[1]["nonlocal_rel_error"], 1e-16)
+                                          for p in pts],
+                    styles[n], color=cols[al], marker="o", ms=4, lw=1.5,
+                    label=r"$n=%s,\ \alpha=%s$" % (n, al))
+            a2.plot([p[0] for p in pts], [max(p[1]["local_control_rel_error"], 1e-16)
+                                          for p in pts],
+                    styles[n], color="0.55", marker="x", ms=4, lw=1.0)
+    a2.axhline(1.0, color="k", lw=0.9, ls="--")
+    a2.set_yscale("log")
+    a2.set_xlabel(r"$t$")
+    a2.set_ylabel("relative error of Breden-Chu's product rule")
+    a2.set_title("C.  Mechanism: the K-product Gauss-Laguerre rule is exact only for\n"
+                 "polynomial$\\times$Gaussian.  Grey $\\times$ = local control (exact to "
+                 "$10^{-12}$)", fontsize=11)
+    a2.set_ylim(1e-16, 1e3)
+    a2.legend(fontsize=7.5, ncol=1, loc="center right", framealpha=0.95)
+    a2.grid(alpha=0.25)
+
+    # -- D: WHICH bound fails --------------------------------------------
+    a3 = ax[1][1]
+    hn, ha = str(data["headline_n"]), str(data["headline_alpha"])
+    steps = [s for s in data["by_n"][hn]["homotopy"][ha]["steps"]
+             if s["verdict_is_meaningful"]]
+    ts = [s["t"] for s in steps]
+    labs = [(r"$\bar Z_{11}$  (derivation-free)", "Zbar11", "#1f77b4", "--"),
+            (r"$\bar Z_{21}$  (derivation-free)", "Zbar21", "#17becf", "--"),
+            (r"$\bar Z_{12}$  (TRANSCRIBED)", "Zbar12", "#d62728", "-"),
+            (r"$\bar Z_{22}$  (TRANSCRIBED)", "Zbar22", "#ff7f0e", "-")]
+    for lab, key, c, ls in labs:
+        a3.plot(ts, [max(s["bounds"][key], 1e-17) for s in steps], ls, color=c,
+                marker="o", ms=3.6, lw=1.7, label=lab)
+    a3.set_yscale("log")
+    a3.set_xlabel(r"$t$")
+    a3.set_ylabel("component bound")
+    a3.set_title("D.  The two bounds that blow up are exactly the two whose\n"
+                 r"derivations used locality  ($n=%s,\ \alpha=%s$)" % (hn, ha),
+                 fontsize=11)
+    a3.set_ylim(1e-17, 1e6)
+    a3.legend(fontsize=8, loc="upper left", framealpha=0.95)
+    a3.grid(alpha=0.25)
+
+    fig.suptitle("fig85 -- Leg 331 (Route-NLH): does Breden-Chu's machinery hold a "
+                 "nonlocal operator?  Measured, not inferred.\n"
+                 "float64, NOT interval arithmetic -- these are magnitudes, not "
+                 "enclosures.", fontsize=12.5)
+    fig.tight_layout(rect=(0, 0, 1, 0.945))
+    os.makedirs(os.path.dirname(FIG), exist_ok=True)
+    fig.savefig(FIG, dpi=145)
+    print("written:", FIG)
+    return FIG
+
+
 if __name__ == "__main__":
-    out = run()
-    os.makedirs(os.path.dirname(OUT_JSON), exist_ok=True)
-    with open(OUT_JSON, "w") as fh:
-        json.dump(out, fh, indent=1, sort_keys=True)
-    print("wrote", OUT_JSON)
+    if "--figure" in sys.argv:
+        make_figure()
+    else:
+        out = run()
+        os.makedirs(os.path.dirname(OUT_JSON), exist_ok=True)
+        with open(OUT_JSON, "w") as fh:
+            json.dump(out, fh, indent=1, sort_keys=True)
+        print("wrote", OUT_JSON)
+        make_figure(out)
