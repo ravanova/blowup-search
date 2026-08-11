@@ -1,0 +1,75 @@
+{
+  "census": {
+    "all_unnamed_operator_classes": [
+      "nonlocal dissipation ((-Delta)^alpha / Lambda^gamma, non-even gamma)",
+      "nonlocal operator in the nonlinearity (Biot-Savart-type inversion)",
+      "nonlocal operator in the nonlinearity (Hilbert transform)"
+    ],
+    "gate_yes_screen_bites_off_axis_too": true,
+    "leg_261_reference_fluid_kill_count": "18 of 18",
+    "leg_261_reference_screen_locator": "experiments/journal/leg_261.md screen (iv_a) table",
+    "n_fluid_adjacent_models": 1,
+    "n_killed_by_iv_a": 3,
+    "n_non_fluid_killed_by_iv_a": 2,
+    "n_non_fluid_models": 2,
+    "n_total": 3,
+    "rows": [
+      {
+        "fluid_adjacent": false,
+        "key": "FRAC-GCLM",
+        "killed_by_iv_a": true,
+        "n_operators": 2,
+        "n_unnamed_by_remark_40": 2,
+        "passes_iv_a": false,
+        "unnamed_operator_classes": [
+          "nonlocal dissipation ((-Delta)^alpha / Lambda^gamma, non-even gamma)",
+          "nonlocal operator in the nonlinearity (Hilbert transform)"
+        ]
+      },
+      {
+        "fluid_adjacent": false,
+        "key": "CRIT-DISS-GCLM",
+        "killed_by_iv_a": true,
+        "n_operators": 2,
+        "n_unnamed_by_remark_40": 2,
+        "passes_iv_a": false,
+        "unnamed_operator_classes": [
+          "nonlocal dissipation ((-Delta)^alpha / Lambda^gamma, non-even gamma)",
+          "nonlocal operator in the nonlinearity (Hilbert transform)"
+        ]
+      },
+      {
+        "fluid_adjacent": true,
+        "key": "FRAC-BOUSSINESQ",
+        "killed_by_iv_a": true,
+        "n_operators": 2,
+        "n_unnamed_by_remark_40": 2,
+        "passes_iv_a": false,
+        "unnamed_operator_classes": [
+          "nonlocal dissipation ((-Delta)^alpha / Lambda^gamma, non-even gamma)",
+          "nonlocal operator in the nonlinearity (Biot-Savart-type inversion)"
+        ]
+      }
+    ]
+  },
+  "counterweight_273": {
+    "leg_174_matrix_cell_fluid_false_grade_A": "OCCUPIED (DF-CGL arXiv:2410.05480, Biernat-Donninger arXiv:1610.09496, per leg 273) -- a THIRD occupant is leg 273's finding of redundancy, not this leg's to re-derive",
+    "leg_174_matrix_cell_fluid_true_grade_A": "EMPTY per leg 174/255 (still empty; this leg's models are, per Part B, killed by (iv_a) before grade is reached)",
+    "note": "counted, not re-litigated -- leg 273's own gate (BOTH_CONJUNCTS_FAIL_DUPLICATION_AND_DEFICIENCY) stands untouched; this is a read of its verdict, not a repeat of its computation",
+    "this_leg_models_fluid_adjacent_flags": {
+      "CRIT-DISS-GCLM": false,
+      "FRAC-BOUSSINESQ": true,
+      "FRAC-GCLM": false
+    }
+  },
+  "gate_question": "Does (iv_a), measured directly on the three non-incompressible models, exclude candidates the way it excluded the 18 fluid rows?",
+  "leg": 311,
+  "liveness": {
+    "all_passed": true,
+    "baseline_all_killed": true,
+    "positive_control_passes": true,
+    "still_killed_with_dissipation_stripped": true
+  },
+  "route": "Route-IVAX",
+  "verdict_code": "SCREEN_IV_A_BITES_OFF_AXIS_MECHANISM_NONLOCALITY_NOT_INCOMPRESSIBILITY"
+}
