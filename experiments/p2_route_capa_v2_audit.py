@@ -439,6 +439,29 @@ def main() -> int:
         return 0
 
     payload = json.loads(DATA.read_text()) if DATA.exists() else {}
+    # Metadata keys mirror leg 71's writeup/data/p2_route_cap_v1_audit.json so the two
+    # generations of this audit can be diffed directly rather than read side by side.
+    payload["leg"] = 292
+    payload["route"] = "CAPA"
+    payload["generation"] = 2
+    payload["predecessor"] = {"leg": 71, "route": "CAP",
+                              "data": "writeup/data/p2_route_cap_v1_audit.json",
+                              "rows": 42, "distinct_tests": 40}
+    payload["convention"] = (
+        "no pytest in this repo; every test_*.py is a self-running script run as "
+        "`<python> test_x.py` (scripts/merge_gate.sh)")
+    payload["gate"] = (
+        "Does a fresh audit find every solver/*.py module represented by an accurate "
+        "capability line (test presence, pass status, known-answer gate presence), "
+        "with zero modules missing and zero stale entries?")
+    payload["axes"] = {
+        "S1": "module completeness, both directions",
+        "S2": "cited-test existence",
+        "S3": "greenness at HEAD -- every distinct cited test actually executed",
+        "S4": "known-answer-gate presence in the `validated` field",
+        "S5": "relevance -- does the cited test actually load the module citing it",
+        "S6": "artifact-reference integrity -- do repo paths cited in row prose exist",
+    }
     payload["head"] = git_head()
     payload["python"] = python_exe()
     payload["static"] = static_axes()
@@ -482,6 +505,28 @@ def main() -> int:
               f"cumulative test time "
               f"{sum(r['wall_s'] for r in payload['sweep']):.0f}s")
 
+    runs = payload.get("sweep", []) or []
+    solo = payload.get("recheck_solo", []) or []
+    solo_red = [r["test"] for r in solo if not r["green"]]
+    payload["summary"] = {
+        "n_rows": st["n_rows"],
+        "S1_missing": len(st["S1_missing_rows"]),
+        "S1_ghost": len(st["S1_ghost_rows"]),
+        "S2_absent_test_files": len(st["S2_rows_with_absent_test_file"]),
+        "S3_executed": len(runs),
+        "S3_green_in_sweep": sum(1 for r in runs if r["green"]),
+        "S3_nongreen_in_sweep": sum(1 for r in runs if not r["green"]),
+        "S3_red_after_solo_recheck": len(solo_red),
+        "S3_red_after_solo_recheck_names": solo_red,
+        "S4_magnitude": st["S4_gate_class_counts"]["magnitude"],
+        "S4_declared_absent": st["S4_gate_class_counts"]["declared-absent"],
+        "S4_prose_without_magnitude": st["S4_gate_class_counts"]["prose-without-magnitude"],
+        "S5_irrelevant_pointers": len(st["S5_rows_whose_test_never_loads_the_module"]),
+        "S6_cited_paths": st["S6_n_cited_paths"],
+        "S6_dangling": len(st["S6_dangling_paths"]),
+        "count_claims_checked": len(st["count_claims"]),
+        "count_claims_disagreeing": len(st["count_claims_disagreeing"]),
+    }
     DATA.parent.mkdir(parents=True, exist_ok=True)
     DATA.write_text(json.dumps(payload, indent=2) + "\n")
     print(f"[data] {DATA}")

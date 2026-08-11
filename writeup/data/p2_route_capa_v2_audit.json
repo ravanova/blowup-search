@@ -1,5 +1,5 @@
 {
-  "head": "9f4c8e9efbeb70841b1a87506d882f13dff48be5",
+  "head": "c17afc457403818d6d9a1df08a5c583047e9556c",
   "python": "/home/andy/projects/Unsolved/.venv/bin/python",
   "static": {
     "S5_relevance": [
@@ -1307,5 +1307,44 @@
         "superseded": true
       }
     ]
+  },
+  "leg": 292,
+  "route": "CAPA",
+  "generation": 2,
+  "predecessor": {
+    "leg": 71,
+    "route": "CAP",
+    "data": "writeup/data/p2_route_cap_v1_audit.json",
+    "rows": 42,
+    "distinct_tests": 40
+  },
+  "convention": "no pytest in this repo; every test_*.py is a self-running script run as `<python> test_x.py` (scripts/merge_gate.sh)",
+  "gate": "Does a fresh audit find every solver/*.py module represented by an accurate capability line (test presence, pass status, known-answer gate presence), with zero modules missing and zero stale entries?",
+  "axes": {
+    "S1": "module completeness, both directions",
+    "S2": "cited-test existence",
+    "S3": "greenness at HEAD -- every distinct cited test actually executed",
+    "S4": "known-answer-gate presence in the `validated` field",
+    "S5": "relevance -- does the cited test actually load the module citing it",
+    "S6": "artifact-reference integrity -- do repo paths cited in row prose exist"
+  },
+  "summary": {
+    "n_rows": 48,
+    "S1_missing": 0,
+    "S1_ghost": 0,
+    "S2_absent_test_files": 0,
+    "S3_executed": 0,
+    "S3_green_in_sweep": 0,
+    "S3_nongreen_in_sweep": 0,
+    "S3_red_after_solo_recheck": 0,
+    "S3_red_after_solo_recheck_names": [],
+    "S4_magnitude": 33,
+    "S4_declared_absent": 3,
+    "S4_prose_without_magnitude": 12,
+    "S5_irrelevant_pointers": 0,
+    "S6_cited_paths": 19,
+    "S6_dangling": 0,
+    "count_claims_checked": 3,
+    "count_claims_disagreeing": 0
   }
 }
