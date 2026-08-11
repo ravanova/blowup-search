@@ -55,7 +55,7 @@ USAGE
     .venv/bin/python experiments/p2_route_capa_v2_audit.py --figure        # fig only
 
 Writes writeup/data/p2_route_capa_v2_audit.json and, with --figure,
-writeup/figures/fig67_route_capa_v2_audit.png.
+writeup/figures/fig80_route_capa_v2_audit.png.
 """
 
 from __future__ import annotations
@@ -76,7 +76,7 @@ sys.path.insert(0, str(ROOT))
 from capabilities import CAPABILITIES  # noqa: E402
 
 DATA = ROOT / "writeup" / "data" / "p2_route_capa_v2_audit.json"
-FIG = ROOT / "writeup" / "figures" / "fig67_route_capa_v2_audit.png"
+FIG = ROOT / "writeup" / "figures" / "fig80_route_capa_v2_audit.png"
 
 # Pinned so a parallel sweep cannot oversubscribe the BLAS pool (leg 71's 32x blowup).
 PINNED_ENV = {

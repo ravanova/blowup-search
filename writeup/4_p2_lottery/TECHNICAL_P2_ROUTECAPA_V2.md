@@ -3,7 +3,7 @@
 **Leg.** 292. **Branch.** `leg/292-capa-v2`. **Base.** `80c0cc4`.
 **Runner.** `experiments/p2_route_capa_v2_audit.py`
 **Data.** `writeup/data/p2_route_capa_v2_audit.json`
-**Figure.** `writeup/figures/fig67_route_capa_v2_audit.png`
+**Figure.** `writeup/figures/fig80_route_capa_v2_audit.png`
 **Predecessor.** Leg 71 (Route-CAP), first generation, 42 rows / 40 tests at `e203b52`.
 
 ---
@@ -214,6 +214,13 @@ substring `import`. The **explanatory comment this leg had just written into
 `capabilities.py`** — prose about the fact that a test imports the module — satisfies that
 pattern on three lines. A documentation comment is indistinguishable from an importer to a
 substring scan.
+
+Stated at full strength, because it is a result about the gate rather than an anecdote
+about this leg: **leg 124's S10 gate can be turned red by prose anywhere in the
+repository.** Any `*.py` in the tree that places the module stem and `import` on one line
+— comment, docstring, or string literal in an unrelated file — fails the assertion, while
+`solver/finite_support.py` remains byte-identical and correct. The gate is conservative by
+design; the price is that the index cannot describe in words the relationship it documents.
 
 The comment was reworded so that no line outside leg 124's own two files carries both
 tokens, and the test is **green again at 33.4 s**. Two things are worth banking. First,

@@ -1,7 +1,7 @@
 # The index that stops us rebuilding what we already built — audited a second time
 
 *Leg 292, Route-CAPA. Companion: `TECHNICAL_P2_ROUTECAPA_V2.md`.
-Figure: `writeup/figures/fig67_route_capa_v2_audit.png`.*
+Figure: `writeup/figures/fig80_route_capa_v2_audit.png`.*
 
 ---
 
