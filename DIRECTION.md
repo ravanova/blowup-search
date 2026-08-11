@@ -34,7 +34,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 334 | DSSP | yes |
-| B | 329 | EGMF | yes |
+| B | 339 | ORC6 | no |
 | C | 323 | CENV | yes |
 | D | 330 | PVLX | yes |
 <!-- FLOOR-TABLE-END -->
@@ -55,7 +55,7 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig78 | — | released (326 landed YES-(ii), no figure shipped; number returns to the pool) |
 | fig79 | 315 | landed |
 | fig80 | 292 | landed |
-| fig81 | 329 | live, slot B |
+| fig81 | 329 | landed (fig81_route_egmf_v1_precision.png + evidence.py) |
 | fig82 | 305 | landed |
 | fig83 | 306 | held (306 SUSPENDED, route-6 drop, cycle 7b) |
 | fig84 | 318 | landed |
@@ -63,7 +63,8 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig86 | 332 | landed (fig86_route_vort_v1_formulation.png) |
 | fig87 | — | released (333 landed NO, no figure shipped; number returns to the pool) |
 | fig88 | 335 | reserved (S1GR, in reserve; only if the reproducibility comparison warrants) |
-| fig89+ | — | next free |
+| fig89 | 340 | reserved (EGRB, in reserve; only if the ladder comparison warrants) |
+| fig90+ | — | next free |
 <!-- FIG-TABLE-END -->
 
 (Current snapshot, DM update of 2026-08-11 cycle 8 — B/221 landed YES (both
@@ -109,9 +110,22 @@ clause (a), where it collides head-on with 332's opened lane (the standard
 vorticity space IS the Gaussian weight, and Biot-Savart is nonlocal). A ← 334
 DSSP (CRITICAL PATH — route-4 brick 0, both preconditions landed, the cycle-7b
 pre-commitment); leg 339 ORC6 drafted (the closure-#6 adjudication on both
-measured answers, rank 1 with the reason stated). Live roster: A/334/DSSP
-(CRITICAL PATH), B/329/EGMF, C/323/CENV, D/330/PVLX. Floor 4/4 — above §3b's
-2-of-4. This cycle's verifier
+measured answers, rank 1 with the reason stated). Cycle 8e: B/329 landed NO at
+dc0ad14 — the cancellation artifact confirmed and MP-repaired (6.1e+06/4.4e+06)
+but the obstruction MOVED into the whitened assembly/eigensolve (C5: rcond
+ladder moves the gap 3.85e-05 vs 1e-6 tol; C4: Rayleigh-eigensolve disagreement
+at cond(G)·eps). **C4 pre-registration defect RULED: the literal
+pre-registration GOVERNS — the NO stands.** The bound reading's 5.19e-18/
+1.42e-18 margin below 1/2 is THIRTEEN orders of magnitude smaller than the
+measured truncation sensitivity C5 banked, on rows sitting at EGM's published
++1/2 — a knife edge, decided by exact/enclosed arithmetic or not at all (318's
+FT1 lesson); overriding a fired control in the expected direction is the exact
+failure §7d names. The bound reading is preserved as drafted leg 340 EGRB with
+its own pre-committed gate (bound must survive the truncation ladder), rank 1
+of reserve per the cycle-6 escalation-#3 precedent. Escalation #3 stays parked.
+B ← 339 ORC6. Live roster: A/334/DSSP (CRITICAL PATH), B/339/ORC6, C/323/CENV,
+D/330/PVLX. Floor 3/4 (334, 323, 330) — above §3b's 2-of-4. This cycle's
+verifier
 findings became four drafted correction legs: 335 S1GR (the pre-existing
 spike1_stepC_gate.json reproducibility gap 221's verifier surfaced — 13.2% alpha
 shift, two flipped gate predicates, present with and without 221's repair), 336
@@ -124,14 +138,14 @@ orchestrator's report on whether 221's landed record resolves the 43.2%/86x flag
 (resolved → struck per its own spec). Route 4 unchanged: brick 0 = 334 on
 331+332, ceiling TIER 2. Route 6 still DROPPED (306/308 suspended).
 
-**Reserve queue: 21 undispatched legs (339, 335, 336, 337, 338, 307, 328, 324,
+**Reserve queue: 21 undispatched legs (340, 335, 336, 337, 338, 307, 328, 324,
 322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234), plus
 306 and 308 SUSPENDED (route-6 drop, not counted).** Immediately dispatchable: 15
-(339, 335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 —
+(340, 335, 336, 337, 338, 307, 328, 324, 322, 327, 287, 229, 293, 298, 299 —
 rank order as listed, §3a pre-authorised except where a spec says otherwise).
 310 on 287+298; 325 USER-GATED; 231-234 blocked on repairs 217/219/225 (221's
-landed). Next fresh leg number: **340**. Full specs and this cycle's rulings are
-in the cycle-8 through 8d entries at the end of this file.)
+landed). Next fresh leg number: **341**. Full specs and this cycle's rulings are
+in the cycle-8 through 8e entries at the end of this file.)
 
 ---
 
@@ -16154,3 +16168,138 @@ at this step, in this weight; route 4 proceeds as a Tier-2 programme whose plan
 must now carry that obstruction, the NRS/Tsai wall, and the weight collision
 explicitly. A measured obstruction replacing an inferred one is a sharper map,
 not movement; no L1-L4 link moved; Clay stays ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 8e) — 329 NO ABSORBED (the artifact confirmed,
+the obstruction MOVED); THE C4 PRE-REGISTRATION DEFECT RULED: LITERAL
+PRE-REGISTRATION GOVERNS, THE NO STANDS; THE BOUND READING PRESERVED AS LEG 340
+EGRB (rank 1); B ← 339 ORC6; .gitignore FIX ENDORSED TO THE ORCHESTRATOR
+
+Written from the same detached lineage, resynced to origin/main = dc0ad14.
+
+### 329 EGMF gate NO, absorbed at full strength
+
+The cycle-6 thesis is CONFIRMED as arithmetic: clause_quad_stable's failure on
+B4_egm/E_egm was float64 catastrophic cancellation, and the MP patch repairs the
+pointwise contraction by 6.1e+06/4.4e+06 — both rows pass that clause naively.
+But two pre-registered controls able to fire against a flip both fired, so the
+obstruction MOVED rather than vanished: C5 (the rcond ladder moves the gap
+3.85e-05/5.39e-05 against 1e-6 tolerance — a property of TRUNCATION, not noise)
+and C4 (MP Rayleigh disagrees with the eigensolve by 8.69e-06/1.18e-05, four
+orders above slack, matching the cond(G)·eps prediction at cond(G)=2.554e+11).
+From a pointwise cancellation the patch fixes, to a float64 whitened
+assembly/eigensolve the patch structurally cannot touch. C2's literal failure
+banked un-argued-away; the adversarial controls held; D1 sized inside noise.
+Leg 178's gate text untouched; escalation #3 stays parked. Endorsed. The
+.venv-symlink self-catch is noted approvingly (hazard landed, found, removed by
+its own leg); **the one-character .gitignore fix is the orchestrator's to apply
+directly — housekeeping in an integration-owned file, correctly not leg
+territory. Endorsed as proposed.**
+
+### Ruling — C4: the LITERAL PRE-REGISTRATION GOVERNS this leg's gate; the NO
+stands as reported
+
+The leg pre-registered C4 as an agreement test. It fired. The gate is NO. The
+alternative reading — that the quantity C4 computes is actually a one-sided
+upper bound landing below 1/2, establishing clause 5 outright — is rejected AS
+A GOVERNING READING OF THIS LEG, on three grounds, each independent:
+
+1. **The margin cannot carry the claim.** The bound lands below 1/2 by
+   5.19e-18/1.42e-18 while C5 measured the gap MOVING by 3.85e-05/5.39e-05
+   under the truncation ladder — the proposed margin is THIRTEEN orders of
+   magnitude smaller than the measured truncation sensitivity of the very
+   quantity it bounds. A Rayleigh quotient one-sides the eigenvalue of the
+   truncated matrix; clause 5 is about the operator; the distance between those
+   two is exactly what C5 just measured, and it dwarfs the margin.
+2. **These rows sit at a knife edge, and this repository has a rule for knife
+   edges.** B4_egm/E_egm are ≈ EGM's published +1/2 — the plausible truth is
+   gap = 1/2 EXACTLY, where any finite-precision computation will land a few
+   attounits to one side by rounding alone. 318's FT1 lesson (echoing 302): a
+   knife-edge identity is decided in exact or enclosed arithmetic, or it is not
+   decided — never by which side of the edge a float lands on.
+3. **Process is load-bearing.** Re-reading a fired control post hoc so that it
+   flips NO→YES in the direction everyone hoped for is precisely what novelty
+   §7d prohibits, and the leg's refusal to do it on its own authority was
+   correct and is endorsed by name. The DM does not do on review what the leg
+   rightly refused to do in flight.
+
+**What the mathematical content earns is a new leg with its own pre-committed
+gate — not a reinterpretation of a landed one.** Drafted below as 340. If C4's
+computation genuinely is a bound and genuinely survives truncation control,
+340's yes-branch fires the same report-and-escalate path 329's would have — and
+the user rules on escalation #3 on evidence that cannot be argued with, instead
+of on a 5e-18 float margin. Until then escalation #3 stays parked and 178's NO
+stands unflipped.
+
+### New leg, drafted now
+
+```
+### 340 — ROUTE-EGRB: IS THE RAYLEIGH QUANTITY A TRUNCATION-SURVIVING BOUND?
+(the C4 bound reading, given its own gate instead of overriding 329's)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** 329 banked (gate_answer.C4_pre_registration_defect, journal §4d)
+that its C4 quantity, read as what it computes rather than as pre-registered,
+is a one-sided upper bound on the B4_egm/E_egm gap landing below 1/2 — by
+5.19e-18/1.42e-18, at cond(G)=2.554e+11, against a measured truncation
+sensitivity of 3.85e-05/5.39e-05 (C5). The DM ruled that margin cannot carry
+clause 5 and the reading must earn its own gate. Ask it directly: computed at
+arbitrary precision with truncation CONTROLLED — the bound re-derived at every
+rung of C5's rcond/truncation ladder, and/or with an explicit truncation-error
+enclosure — is the one-sided bound (i) valid as a bound on the OPERATOR
+quantity clause 5 names, and (ii) below 1/2 + 1e-9 with a margin that survives
+the ladder?
+**Gate.** Does the truncation-controlled one-sided bound hold gap ≤ 1/2 + 1e-9
+at every ladder rung, with the margin's dependence on the truncation parameter
+measured and reported (magnitudes, not booleans)?
+  yes -> The substance of 178's NO is measured to flip ON A BOUND, not an
+        eigensolve: REPORT AND ESCALATE to the user — parked escalation #3's
+        resolution is the user's; 178's gate text stays byte-identical; the
+        flip lives in this leg's own record (329's yes-branch path, inherited).
+  no  -> Bank the classification at measured width: TRUNCATION-LIMITED (the
+        bound moves off 1/2 under the ladder — name the rung and magnitude) or
+        KNIFE-EDGE (the margin shrinks toward 0 with precision/truncation — the
+        gap is consistent with exactly 1/2, and deciding it is an exact-
+        arithmetic identity or a theorem obligation, per the 318/314
+        precedents; state which). Escalation #3 stays parked; the artifact
+        explanation stands refined, not overturned.
+**Territory.** experiments/p2_route_egrb_v1.py, writeup/data/p2_route_egrb_v1
+               .json, writeup/figures/fig89* (only if the ladder comparison
+               warrants), writeup/novelty/leg_340.md, experiments/journal/
+               leg_340.md. Reads 329's JSON, p2_route_wes_v1_space.json, and
+               312's landed module; edits none. Leg 178's files untouched.
+**Difficulty.** standard
+**Preconditions:** None (329 landed at dc0ad14).
+```
+
+### Refill — slot B ← 339 ORC6 (rank 1 as ruled at cycle 8d, dispatched now)
+
+The cycle-8d reason is time-coupled and stands: 334 is in flight in A, and the
+premise sites it will cite should be adjudicated within this leg-cycle. 340
+takes rank 1 of the reserve INSTEAD of jumping into B, by the same clock logic
+inverted: escalation #3 has been parked safely for many cycles and its
+resolution now rides on a careful truncation-controlled derivation, not on
+speed. The cycle-6 precedent (a possible escalation-#3 resolution outranks
+apparatus work) is honoured at rank 1 for the next vacancy. Floor after this
+fill: 3/4 (334, 323, 330) — above §3b's 2-of-4, the one non-eligible slot being
+the correction leg itself.
+
+### Ranking and reserve
+
+Rank order for the next vacancies: 1. **340 EGRB** (escalation-#3 potential,
+cycle-6 precedent) 2. **335 S1GR** 3. **336 C305** 4. **337 C318** 5. **338
+LCB1** 6. **307 TSCX** 7. **328 ORC5** 8. **324 P2SPF** 9. **322 F70** 10.
+**327 P2T1E** 11. **287 EPA** 12. **229 PNRV** 13. **293 JFA** 14. **298
+CORRX** 15. **299 TESTA**. Then **310 EPAP** (on 287+298), **325 MTB1**
+(USER-GATED), **231-234** (blocked on repairs 217/219/225). SUSPENDED: 306,
+308.
+
+**Reserve queue: 21 undispatched legs (340, 335, 336, 337, 338, 307, 328, 324,
+322, 327, 287, 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
+dispatchable: **15**. Next fresh leg number: **341.**
+
+Nothing in this update lifts a ban. The C4 ruling REFUSES a flip that a float
+margin cannot support — the opposite of movement; 340 asks the question with an
+instrument that could answer either way; escalation #3, the 313/320 packets,
+and every parked user item remain exactly where they were. No L1-L4 link moved;
+Clay stays ~0.05%.
