@@ -1,0 +1,98 @@
+{
+  "leg": 344,
+  "route": "PKLR",
+  "branch": "leg/344-pklr-v1",
+  "thesis": "Leg 342 costed the only named seed-creation path at ≈35 legs: retargeting Hou's PINN machinery (2506.19243) at the true non-axisymmetric 3D NS DSS ansatz, labelling the source 'PINN/KAN machinery'. This leg controls that label against the literature and sharpens the inputs to the 35-leg estimate: what PINN/KAN-discovered self-similar or DSS profiles actually exist, at what validation discipline, and which components a retarget would inherit vs rebuild.",
+  "instrument": {
+    "used": "arxiv.org/search web UI (WebFetch), Instrument 2 in leg 342/leg 326 numbering",
+    "export_api_used_this_leg": false,
+    "controls": [
+      {"query": "physics-informed neural network Navier-Stokes (leg 342 positive control, reconfirmed context)", "note": "not rerun this leg; leg 342 established Instrument 2 alive with 195 results same session window"},
+      {"query": "Kolmogorov-Arnold network PDE", "count": 59, "role": "positive control for KAN-specific searches"},
+      {"query": "Kolmogorov-Arnold network self-similar", "count": 3, "role": "non-empty but off-topic (matched 'structural similarity', not fluid self-similarity) -- recall artefact noted, not banked as a KAN-fluid finding"},
+      {"query": "physics-informed Kolmogorov-Arnold singularity", "count": 4, "role": "clean, on-topic, positive"},
+      {"query": "Kolmogorov-Arnold network blowup fluid", "count": 0, "role": "narrow AND-term zero, flagged WEAK per leg 342's recall-drops-with-AND-term-count pattern, NOT banked as absence"},
+      {"query": "neural network discover self-similar blowup profile", "count": 0, "role": "same WEAK flag, not banked"},
+      {"query": "machine learning singular solutions fluid equations", "count": 4, "role": "positive, surfaced arXiv:2509.14185"},
+      {"query": "Gomez-Serrano Buckmaster unstable singularities Navier-Stokes", "count": 1, "role": "confirms 2509.14185 is currently isolated -- no companion/follow-up paper by the same author line yet"},
+      {"query": "neural network self-similar 3D Euler boundary-free", "count": 0, "role": "WEAK, narrow AND, not banked"},
+      {"query": "PINN failure singularity PDE optimization", "count": 0, "role": "WEAK, narrow AND, not banked -- failure-mode evidence instead sourced directly from 2509.14185's own full text, a stronger form of the same claim per leg 342 sec 4 precedent"}
+    ],
+    "refusals_this_leg": "none recorded -- WebFetch/arxiv search UI returned cleanly on every query attempted; no 429s or timeouts encountered"
+  },
+  "inventory": [
+    {
+      "arxiv_id": "2506.19243",
+      "title": "High precision PINNs in unbounded domains: application to singularity formulation in PDEs",
+      "authors": "Wang, Liu, Li, Anandkumar, Hou",
+      "date": "2025-06-24, v1 only",
+      "discovered": "Re-solves the known Chen-Hou 2D Boussinesq self-similar profile (same family as arXiv:2210.07191/2305.05660) to 4 digits higher precision than prior work, plus a 1D Burgers benchmark. 2D Boussinesq is stated by the authors as a proxy 'directly related to' 3D Euler/NS singularity formulation, not 3D NS/Euler itself.",
+      "architecture_verified_by_full_text_read": "Standard MLP (tanh, 4x20 for Burgers; 7x30 SiLU for Boussinesq) with hard-constrained parity, trained with Adam then self-scaled BFGS (SSBroyden1). KAN appears ONLY in the Related Works section as a citation to other authors' work ('Kolmogorov-Arnold Networks (KANs) [29,28] that leverage nonlinear learnable activation functions'); KAN is NOT used anywhere in this paper's own experiments.",
+      "correction_to_342": "Leg 342 labelled this paper 'Hou's own PINN/KAN machinery'. Full-text read (not abstract-only) shows the KAN half of that label is not supported by this source -- the demonstrated machinery here is PINN-only.",
+      "validation_status_as_authors_state_it": "Loss-based comparison only (residual loss '4 digits smaller' than prior work); no independent certification or rigorous computer-assisted-proof step performed in this paper itself.",
+      "inherit_vs_rebuild": "PARTIAL INHERIT -- the unbounded-domain compactification/hard-constraint-parity technique and the Adam-then-SSBroyden training schedule are directly reusable recipes at the module level. Does NOT supply: 3D structure, non-axisymmetry, time-periodicity (DSS), or a KAN component."
+    },
+    {
+      "arxiv_id": "2210.07191 / 2305.05660",
+      "title": "Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations with smooth data I (Analysis) / II (Rigorous Numerics)",
+      "authors": "Chen, Hou",
+      "date": "2022-10-13 (v3 2023-05-09) / 2023-05-09 (v2 2024-06-17)",
+      "discovered": "Rigorous proof of finite-time blowup for 2D Boussinesq / 3D axisymmetric Euler (with boundary) around an approximate self-similar profile, built via functional-analytic estimates plus computer-assisted rigorous numerics -- not PINN/KAN, not machine learning at all.",
+      "validation_status_as_authors_state_it": "Rigorous (weighted L-infinity / weighted C^{1/2} norm stability estimates, computer-assisted sharp velocity bounds) -- the certification-grade endpoint that 2506.19243's PINN profile feeds into as a higher-precision input.",
+      "inherit_vs_rebuild": "REBUILD (not ML at all; this is the certification layer downstream of a PINN-produced profile, relevant only as evidence of what validation discipline a completed retarget would eventually need to meet, not as a component of the PINN/KAN retarget itself)."
+    },
+    {
+      "arxiv_id": "2604.16842",
+      "title": "Singularity Formation: Synergy in Theoretical, Numerical and Machine Learning Approaches (Y. Wang PhD thesis)",
+      "date": "2026-04-18",
+      "discovered": "Introduces a KAN architecture as 'a novel machine learning paradigm' and improves existing PINN/Neural-Operator frameworks, but the thesis's own concrete demonstrations are on the Nonlinear Heat equation, Complex Ginzburg-Landau equation, and 3D Keller-Segel with logistic damping. Navier-Stokes is named only as motivating context ('one of the seven Clay Prize problems'); Euler is not mentioned anywhere in the abstract.",
+      "validation_status_as_authors_state_it": "'High precision' claimed generically in the abstract; no quantitative metric given for any system, and none of the concrete demonstrated systems is NS or Euler.",
+      "inherit_vs_rebuild": "REBUILD -- confirms leg 342's read (located, not a candidate) with a full-text-level detail: this is the ONE place in the literature where KAN is actually demonstrated on a blowup problem by anyone in Hou's line, and it is demonstrated on NLH/CGL/KS, never NS/Euler. A KAN-for-fluid-singularity component does not exist anywhere in this literature and would have to be built from scratch if the retarget wants it."
+    },
+    {
+      "arxiv_id": "2509.14185",
+      "title": "Discovery of Unstable Singularities",
+      "authors": "Wang, Bennani, Martens, Racaniere, Blackwell, Matthews, Nikolov, Cao-Labora, Park, Arjovsky, Worrall, Qin, Alet, Kozlovskii, Tomasev, Davies, Kohli, Buckmaster, Georgiev, Gomez-Serrano, Jiang, Lai (Google DeepMind + Buckmaster + Gomez-Serrano + Cao-Labora)",
+      "date": "2025-09-17, v1 only (no v2 found; 2509.14185v2 returns HTTP 404)",
+      "load_bearing": true,
+      "discovered": "NEW SUCCESSOR/COMPETITOR LINE, not previously in 342's net. First systematic discovery of families of UNSTABLE self-similar singularities (not just stable ones) for: (1) CCF model (1D, whole-space, proxy for 3D Euler/NS), (2) 2D IPM equation with boundary, (3) 2D Boussinesq with boundary -- stated by the authors as 'mathematically analogous to the incompressible 3D Euler equations under the assumption of axial symmetry'. An empirical asymptotic formula relating blow-up rate to instability order is reported for IPM/Boussinesq (not yet extractable for CCF).",
+      "architecture_verified_by_full_text_read": "Small MLPs (tanh, thousands-tens of thousands of params) with an exponential final layer, compactified (q, beta) coordinates mapping the infinite domain to a bounded one, and 'solution envelopes' hand-structured to enforce symmetry/asymptotic decay/origin behaviour. Optimizer is a full-matrix Gauss-Newton method (via kfac-jax), NOT Adam/L-BFGS; multi-stage training adds a second Fourier-feature network to correct residual high-frequency error. No KAN component anywhere.",
+      "precision_reported": "Stable and first unstable CCF solutions reach residuals O(1e-13) (near double-float machine precision, authors state accuracy is 'constrained only by round-off errors of the GPU hardware'); IPM/Boussinesq range O(1e-11) to O(1e-7) depending on solution and instability order; a 4th unstable Boussinesq candidate is explicitly flagged by the authors as UNRESOLVED ('we do not yet have a reliable evaluation of the accuracy of its corresponding lambda value').",
+      "failure_modes_on_record_authors_own_words": [
+        "Standard optimizers (Adam, L-BFGS) explicitly stated 'insufficient for producing high quality solutions to the self-similar equations'",
+        "Gradient-based training of the eigenvalue lambda is 'unreliable for discovering unstable, high-order solutions'",
+        "CCF higher-order profiles have 'extremely sharp gradients', suspected to trap optimization in local minima; no clean asymptotic lambda-scaling formula could be extrapolated for CCF (unlike IPM/Boussinesq)",
+        "Authors explicitly caution against 'overoptimism in using PINNs as general-purpose PDE solvers'",
+        "Adding artificial viscosity (Hou's prior stabilization technique) raises unresolved questions about whether the regularized solution still relates to the original equation"
+      ],
+      "explicit_stated_open_problem": "The paper itself names 'discover self-similar solutions to the incompressible 3D Euler equations (or similar equations such as IPM) in the absence of boundary' as the KEY remaining challenge, stating this requires better qualitative understanding to guide future PINN/network design. Boundary-free 3D Euler/NS, non-axisymmetric geometry, and time-periodic/DSS structure are named as unattempted, open future work -- not attempted or claimed as solved anywhere in this paper.",
+      "inherit_vs_rebuild": "INHERIT (architecture + optimizer discipline) -- this is the most recent (Sept 2025), most credentialed (DeepMind + two of the field's leading rigorous-PDE authors), and most validated (explicit machine-precision residuals, explicit failure-mode reporting) PINN-adjacent line in the literature, and its Gauss-Newton + envelope-structuring + multi-stage-Fourier-correction training discipline is reported by the authors themselves as superior to the Adam/SSBroyden discipline used in 2506.19243. REBUILD (everything else) -- 3D whole-space, non-axisymmetric geometry, and DSS/time-periodicity are all absent from every system this paper touches, and boundary-free 3D Euler is explicitly the open problem the authors themselves point at next."
+    },
+    {
+      "arxiv_id": "2410.04096",
+      "title": "Sinc Kolmogorov-Arnold network and its application for solving PDEs with singularities",
+      "date": "2024-10-05, revised 2026-05-27",
+      "discovered": "General-purpose KAN variant using Sinc-interpolation basis functions, chosen because Sinc interpolation is 'known in numerical analysis to effectively represent both smooth functions and functions with singularities.' Not fluid-dynamics-specific -- no NS/Euler/Boussinesq test case found in the abstract; subject classes are cs.LG/cs.AI/cs.NE/math.NA/physics.comp-ph, not physics.flu-dyn.",
+      "inherit_vs_rebuild": "TANGENTIAL, UNVERIFIED FOR FLUIDS -- a candidate off-the-shelf singularity-representation basis if the retarget wants a genuine KAN component, but its applicability to the NS/Euler DSS ansatz specifically is untested anywhere in the literature found this leg. Not counted toward the module floor either way; flagged as a build-time option, not existing art."
+    },
+    {
+      "arxiv_id": "2406.11045",
+      "title": "Kolmogorov Arnold Informed neural network (KINN)",
+      "date": "2024-06-16, revised 2024-08-04",
+      "discovered": "General physics-informed KAN framework ('KINN significantly outperforms MLP regarding accuracy and convergence speed' across several PDE problem types tested). Not fluid-singularity-specific in the search snippet; located, not fetched to full text this leg (background context only, not load-bearing).",
+      "inherit_vs_rebuild": "NOT CLASSIFIED -- background context only, insufficient reading this leg to place it either way; flagged for a future leg if the KAN-component question becomes live."
+    }
+  ],
+  "sharpening_of_342s_35_leg_estimate": {
+    "342s_module_floor": "5 modules total, 4 gap modules at leg-342's live rate legs/module = 342/49 ≈ 6.98, giving ≈35 legs. capabilities.py reconfirmed live this leg at 49 modules (unchanged).",
+    "correction_1": "The label '342's PINN/KAN machinery' single source does not exist as one paper. Full-text reads this leg show PINN (2506.19243, Hou) and KAN (2604.16842, Y. Wang thesis) are two DIFFERENT papers, and neither combines both tools on a fluid-singularity problem. The retarget's KAN component, if wanted, has ZERO existing art on this problem class anywhere in the literature found (both instrument passes) -- it would be a from-scratch build, not a retarget of demonstrated KAN-for-fluid machinery, because no such machinery has been demonstrated by anyone.",
+    "correction_2": "A stronger, more recent, better-validated PINN-adjacent base than 2506.19243 exists: arXiv:2509.14185 (Sept 2025, DeepMind + Buckmaster + Gomez-Serrano). Its Gauss-Newton optimizer + solution-envelope architecture is reported by its own authors as superior to the Adam/SSBroyden discipline in 2506.19243, and it additionally supplies the field's first documented UNSTABLE self-similar profiles and the field's most explicit, most detailed failure-mode record for PINN-style singularity search. If a retarget happens, 2509.14185's line is the stronger base to inherit optimizer/architecture technique from, not 2506.19243's.",
+    "correction_3": "Both instrument-2 lines confirm the DSS/time-periodic gap is total: no paper found by either PINN or KAN lines, from Hou's group or the DeepMind/Buckmaster/Gomez-Serrano group, addresses time-periodic self-similar (DSS) profiles at all -- every hit found is stationary self-similar. The retarget's DSS-specific training module has no partial art anywhere to discount its cost against; this is unchanged from 342's read, now confirmed against a second, independent, more recent literature line.",
+    "net_effect_on_the_35_leg_number": "The floor arithmetic (5 modules, 4 gap, ~35 legs) is not moved by this pass -- no new module was removed from the gap and no existing module was found fully pre-built. What changes is WHICH base to retarget (2509.14185's Gauss-Newton/envelope line, not 2506.19243's Adam/SSBroyden line, is now the better-evidenced starting point) and an explicit correction that the 'KAN' half of 342's label was not literature-grounded -- if the retarget drops KAN and uses plain PINN/Gauss-Newton machinery instead, the module count and cost estimate are UNCHANGED, since KAN was never actually available to inherit in either scenario."
+  },
+  "gate_answer": "yes",
+  "gate_text": "sourced inventory produced: each entry carries an arXiv id, what was discovered, validation status as the authors state it, and an inherit-vs-rebuild classification, sufficient for the user packet to state what the 35 legs buy (a from-scratch build of 3D non-axisymmetric, boundary-free, DSS-specific PINN machinery, informed by two independently-evolved but neither-sufficient prior lines) and what they risk (both source lines' own authors flag standard-optimizer failure and un-validated high-order solutions as live hazards; nobody has attempted the boundary-free 3D non-axisymmetric case; the DSS/time-periodic structure has zero existing art in either line).",
+  "no_ban_touched": true,
+  "no_ban_lifted": true,
+  "plan_of_record_edited": false
+}
