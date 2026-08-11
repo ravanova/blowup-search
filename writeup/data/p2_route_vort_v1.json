@@ -1,0 +1,394 @@
+{
+ "closed_form_residuals": {
+  "div_U_max": 3.885780586188048e-11,
+  "omegaA_vs_curlU_max": 3.8237280008956986e-10,
+  "FA_vs_UgradU_max": 1.174973451867345e-10,
+  "S_vs_divFA_max": 1.4691199368144225e-09,
+  "GA_vs_curlFA_max": 2.1057955379433224e-10,
+  "GA_vs_vorticity_nonlinearity_max": 1.6519519085989032e-10,
+  "FA_unit_vs_direct_max": 0.0,
+  "GA_unit_vs_direct_max": 0.0,
+  "GB_unit_vs_direct_max": 7.077469832495768e-17,
+  "divergence_uB_max": 1.1102230246251565e-16,
+  "curl_uB_vs_omegaB_max": 3.3306690738754696e-16,
+  "grad_uB_vs_fd_max": 6.356226656123454e-11,
+  "grad_omegaB_vs_fd_max": 1.9127499584215002e-10
+ },
+ "leray_poisson_residual": 8.908861128809065e-07,
+ "energy_and_quadrupole": {
+  "T_energy_closed_form": 3.9374024864306048,
+  "T_energy_quadrature": 3.937402486430679,
+  "T_closed_vs_quadrature_abs": 7.416289804496046e-14,
+  "T_vs_leg257_abs": 1.1679546219056647e-13,
+  "T_vs_leg261_abs": 1.4699352846037073e-13,
+  "monopole_of_S": -1.1342575845031874e-16,
+  "quadrupole_33_identity_residual": 3.341771304121454e-14
+ },
+ "velocity_formulation": {
+  "rows": [
+   {
+    "r": 10.0,
+    "v_on_axis_this_leg": 0.00031332853432887914,
+    "v_on_axis_leg257": 0.00031332853433,
+    "abs_diff": 1.1208482059155145e-15,
+    "rel_diff": 3.5772299140014762e-12,
+    "coefficient_v_r3": 0.31332853432887914
+   },
+   {
+    "r": 20.0,
+    "v_on_axis_this_leg": 3.9166066791115055e-05,
+    "v_on_axis_leg257": 3.9166066791e-05,
+    "abs_diff": 1.1505417929144612e-16,
+    "rel_diff": 2.9375985060078716e-12,
+    "coefficient_v_r3": 0.31332853432892044
+   },
+   {
+    "r": 40.0,
+    "v_on_axis_this_leg": 4.895758348891509e-06,
+    "v_on_axis_leg257": 4.8957583489e-06,
+    "abs_diff": 8.491505296224361e-18,
+    "rel_diff": 1.7344616892972807e-12,
+    "coefficient_v_r3": 0.31332853432905655
+   },
+   {
+    "r": 80.0,
+    "v_on_axis_this_leg": 6.11969793612502e-07,
+    "v_on_axis_leg257": 6.1196979361e-07,
+    "abs_diff": 2.5019235679523896e-18,
+    "rel_diff": 4.088312191347848e-12,
+    "coefficient_v_r3": 0.313328534329601
+   }
+  ],
+  "fitted_exponent_of_v": -2.999999999998944,
+  "predicted_exponent": -3.0,
+  "tail_coefficient_measured": 0.313328534329601,
+  "tail_coefficient_is_T_over_4pi": 0.3133285343288751,
+  "coefficient_identity_rel_residual": 2.3167992861104092e-12
+ },
+ "density_ladder": {
+  "C0_velocity_unprojected_FA": {
+   "5.0": -37.4932589288135,
+   "10.0": -158.43446198144716,
+   "20.0": -645.8116341399494,
+   "40.0": -2598.932682721927,
+   "80.0": -10415.029236997803
+  },
+  "C1_velocity_projected_PFA": {
+   "5.0": -2.612418356354857,
+   "10.0": 3.724423205347227,
+   "20.0": 34.490329374107226,
+   "40.0": 162.97249397109888,
+   "80.0": 682.3196922810172
+  },
+  "C4_vorticity_nonlinearity_GA": {
+   "5.0": -35.59016894182156,
+   "10.0": -155.92931200312725,
+   "20.0": -642.7044241703016,
+   "40.0": -2595.223412760951,
+   "80.0": -10410.7179070455
+  },
+  "B_velocity_reconstructed_uB": {
+   "5.0": -1.0895396122782093,
+   "10.0": 5.849361941955526,
+   "20.0": 37.21732810204349,
+   "40.0": 166.3015526903631,
+   "80.0": 686.2508109916093
+  },
+  "B_vorticity_nonlinearity_GB": {
+   "5.0": -19.37829497403423,
+   "10.0": -76.37944572376665,
+   "20.0": -304.3840487229739,
+   "40.0": -1216.4024607198028,
+   "80.0": -4864.476108707118
+  }
+ },
+ "vorticity_norms": {
+  "ladder": [
+   {
+    "R": 8.0,
+    "n_r": 200,
+    "n_c": 32,
+    "n_phi": 8,
+    "GA_sq": 0.13885306999296376,
+    "GB_sq": 0.01027480170190837,
+    "omegaA_sq": 0.5156270863625083,
+    "omegaB_sq": 0.10937544256174411
+   },
+   {
+    "R": 10.0,
+    "n_r": 300,
+    "n_c": 48,
+    "n_phi": 16,
+    "GA_sq": 0.1388530699929639,
+    "GB_sq": 0.010274801701908382,
+    "omegaA_sq": 0.5156270863625109,
+    "omegaB_sq": 0.10937544256174427
+   },
+   {
+    "R": 12.0,
+    "n_r": 400,
+    "n_c": 64,
+    "n_phi": 24,
+    "GA_sq": 0.13885306999296618,
+    "GB_sq": 0.010274801701908559,
+    "omegaA_sq": 0.5156270863625148,
+    "omegaB_sq": 0.10937544256174617
+   }
+  ],
+  "GA_sq_closed_form": 0.1388530699929629,
+  "GA_norm_closed_form": 0.3726299370594946,
+  "GA_quadrature_vs_closed_rel": 2.358722009394677e-14,
+  "GB_norm": 0.10136469652649564,
+  "GB_ladder_rel_change_last_step": 1.7220944956705794e-14,
+  "omegaA_norm": 0.7180717835721682,
+  "omegaB_norm": 0.33071958297286563
+ },
+ "mapping_bound": {
+  "witness_A": {
+   "sup_u": 0.857463503507019,
+   "sup_grad_u": 2.8284270913264624,
+   "omega_L2mu": 0.7180717835721682,
+   "grad_omega_L2mu": 1.9364955907311967,
+   "bound": 3.691487979926899,
+   "actual": 0.372629937024487,
+   "actual_over_bound": 0.10094301784286618
+  },
+  "witness_B": {
+   "sup_u": 0.6666666619804034,
+   "sup_grad_u": 0.6885983964106729,
+   "omega_L2mu": 0.33071958297286563,
+   "grad_omega_L2mu": 0.7551919012035218,
+   "bound": 0.731194238426708,
+   "actual": 0.10136469652649564,
+   "actual_over_bound": 0.13862895958343363
+  }
+ },
+ "replacement_wall": {
+  "uB_L3_R3": 0.7307683991070311,
+  "uB_decay_exponent_fitted": -3.0000000000000027,
+  "uB_decay_exponent_predicted": -3.0,
+  "uB_L3_integrand_converged_R": 60.0,
+  "note": "u in L^3(R^3) is exactly NRS/Tsai's hypothesis, so the vorticity formulation buys admissibility into the space and hands the target straight to the ansatz constraint that already binds the velocity form (leg 261 recorded this composition; here it carries a number)."
+ },
+ "drift_sign_rider": {
+  "rayleigh_forward_generator": 7.272727248462516,
+  "rayleigh_backward_generator": 6.454545430469985,
+  "both_map_into_L2mu": true,
+  "Lforward_omega_L2mu": 5.716528960333894,
+  "Lbackward_omega_L2mu": 6.041350443296389
+ },
+ "step_audit": [
+  {
+   "step": "S1",
+   "statement": "witness U is divergence-free and Gaussian, so U in H^2(mu)",
+   "carries_over": "YES",
+   "magnitude": "div U max residual 8th-order FD; omega = curl U is Gaussian too, ||omega_A||_{L2(mu)} = 0.718072",
+   "why": "the witness is a legitimate member of both formulations' spaces"
+  },
+  {
+   "step": "S2",
+   "statement": "P[F] = F - grad v with Laplace v = div F",
+   "carries_over": "VACUOUS",
+   "magnitude": "curl P[F] = curl F identically; measured residual 0 by construction",
+   "why": "the vorticity formulation has NO Leray projector: taking curl of the momentum equation removes the pressure BEFORE any projection is needed, so this step has no counterpart to carry over"
+  },
+  {
+   "step": "S3",
+   "statement": "the multipole tail of v is set by the lowest non-vanishing moment of div F; monopole and dipole vanish, quadrupole does not",
+   "carries_over": "YES, and it is still true",
+   "magnitude": "monopole of S = -1.134e-16 (vanishes identically); the quadrupole identity Int y_k y_l div F = 2 Int U_k U_l holds to 3.342e-14, and Q_33 = 0 because U_3 == 0, so 3Q_33 - tr Q = -2T",
+   "why": "nothing about the multipole computation changes; it is just no longer used"
+  },
+  {
+   "step": "S4",
+   "statement": "|grad v| ~ C r^{-4} with C proportional to T = Int |U|^2 > 0, so the tail coefficient CANNOT vanish",
+   "carries_over": "**NO -- THIS IS THE STEP THAT FAILS**",
+   "magnitude": "v's fitted exponent -3.000000, tail coefficient 0.3133285343 = T/(4 pi) to relative 2.32e-12 -- and curl of that entire term is ZERO, because grad v is a GRADIENT and gradients are in ker(curl)",
+   "why": "the non-vanishing coefficient is REAL and is reproduced here to 12 digits -- but it is carried entirely by the pressure gradient, which is exactly the part the vorticity formulation deletes. The obstruction's engine is the one term curl annihilates."
+  },
+  {
+   "step": "S5",
+   "statement": "Int_{|x|>R} r^{-8} e^{r^2/4} r^2 dr = +infinity",
+   "carries_over": "YES for the velocity arm, VACUOUS for the vorticity arm",
+   "magnitude": "log10 weighted density of P[F] rises 3.7 -> 682.3 over r = 10 -> 80, while the vorticity nonlinearity falls -155.9 -> -10410.7 over the same radii, SAME code path",
+   "why": "the integrand the divergence is computed from does not exist here"
+  },
+  {
+   "step": "S6",
+   "statement": "hence the nonlinearity is not a map H^2(mu) -> L^2(mu) and the target is forced OUT of the space",
+   "carries_over": "**NO**",
+   "magnitude": "the vorticity nonlinearity IS such a map, with an explicit finite bound: ||G||_{L2(mu)} <= ||grad u||_inf ||omega||_{L2(mu)} + ||u||_inf ||grad omega||_{L2(mu)} = 0.731194 on the reconstructed witness, attained at ratio 0.1386",
+   "why": "every term of the vorticity nonlinearity carries a factor of omega or grad omega, which is Gaussian; the nonlocal output u never stands alone.  Leg 261 observed this discriminator; here it is the derivation."
+  }
+ ],
+ "liveness_checks": [
+  {
+   "check": "closed_form:FA_unit_vs_direct_max",
+   "passed": true,
+   "detail": "0.000e+00"
+  },
+  {
+   "check": "closed_form:FA_vs_UgradU_max",
+   "passed": true,
+   "detail": "1.175e-10"
+  },
+  {
+   "check": "closed_form:GA_unit_vs_direct_max",
+   "passed": true,
+   "detail": "0.000e+00"
+  },
+  {
+   "check": "closed_form:GA_vs_curlFA_max",
+   "passed": true,
+   "detail": "2.106e-10"
+  },
+  {
+   "check": "closed_form:GA_vs_vorticity_nonlinearity_max",
+   "passed": true,
+   "detail": "1.652e-10"
+  },
+  {
+   "check": "closed_form:GB_unit_vs_direct_max",
+   "passed": true,
+   "detail": "7.077e-17"
+  },
+  {
+   "check": "closed_form:S_vs_divFA_max",
+   "passed": true,
+   "detail": "1.469e-09"
+  },
+  {
+   "check": "closed_form:curl_uB_vs_omegaB_max",
+   "passed": true,
+   "detail": "3.331e-16"
+  },
+  {
+   "check": "closed_form:div_U_max",
+   "passed": true,
+   "detail": "3.886e-11"
+  },
+  {
+   "check": "closed_form:divergence_uB_max",
+   "passed": true,
+   "detail": "1.110e-16"
+  },
+  {
+   "check": "closed_form:grad_omegaB_vs_fd_max",
+   "passed": true,
+   "detail": "1.913e-10"
+  },
+  {
+   "check": "closed_form:grad_uB_vs_fd_max",
+   "passed": true,
+   "detail": "6.356e-11"
+  },
+  {
+   "check": "closed_form:omegaA_vs_curlU_max",
+   "passed": true,
+   "detail": "3.824e-10"
+  },
+  {
+   "check": "leray_potential_solves_Poisson",
+   "passed": true,
+   "detail": "8.909e-07"
+  },
+  {
+   "check": "T_matches_leg257",
+   "passed": true,
+   "detail": "1.168e-13"
+  },
+  {
+   "check": "T_matches_leg261",
+   "passed": true,
+   "detail": "1.470e-13"
+  },
+  {
+   "check": "monopole_of_S_vanishes",
+   "passed": true,
+   "detail": "-1.134e-16"
+  },
+  {
+   "check": "quadrupole_identity",
+   "passed": true,
+   "detail": "3.342e-14"
+  },
+  {
+   "check": "FT1_reproduces_leg257_v",
+   "passed": true,
+   "detail": "max rel diff 4.088e-12"
+  },
+  {
+   "check": "FT1_exponent_minus3",
+   "passed": true,
+   "detail": "-3.00000000"
+  },
+  {
+   "check": "coefficient_is_the_energy",
+   "passed": true,
+   "detail": "2.317e-12"
+  },
+  {
+   "check": "FT5_arm_diverges",
+   "passed": true,
+   "detail": "3.7 -> 682.3"
+  },
+  {
+   "check": "FT5_arm_converges",
+   "passed": true,
+   "detail": "-155.9 -> -10410.7"
+  },
+  {
+   "check": "FT4_reconstructed_velocity_leaves_space",
+   "passed": true,
+   "detail": "5.8 -> 686.3"
+  },
+  {
+   "check": "FT4_but_its_nonlinearity_does_not",
+   "passed": true,
+   "detail": "-76.4 -> -4864.5"
+  },
+  {
+   "check": "FT3_GA_quadrature_matches_closed_form",
+   "passed": true,
+   "detail": "2.359e-14"
+  },
+  {
+   "check": "FT3_GB_converged_on_ladder",
+   "passed": true,
+   "detail": "1.722e-14"
+  },
+  {
+   "check": "mapping_bound_holds:witness_A",
+   "passed": true,
+   "detail": "0.100943"
+  },
+  {
+   "check": "mapping_bound_nontrivial:witness_A",
+   "passed": true,
+   "detail": "0.100943"
+  },
+  {
+   "check": "mapping_bound_holds:witness_B",
+   "passed": true,
+   "detail": "0.138629"
+  },
+  {
+   "check": "mapping_bound_nontrivial:witness_B",
+   "passed": true,
+   "detail": "0.138629"
+  },
+  {
+   "check": "uB_decay_exponent_minus3",
+   "passed": true,
+   "detail": "-3.000000"
+  },
+  {
+   "check": "uB_in_L3_finite",
+   "passed": true,
+   "detail": "0.73076840"
+  }
+ ],
+ "gate_answer": "NO",
+ "gate_answer_wording": "The Leray obstruction does NOT force the target out of the space when re-derived in the vorticity formulation on the Gaussian-weight space H^2(mu), mu = e^{|x|^2/4}/Z, with the velocity reconstructed by Biot-Savart.  REALIZATION (lesson 91): two exactly-divergence-free Gaussian witnesses on R^3 -- leg 257's U = curl(e^{-|x|^2}e_3) in its velocity role, and the SAME field in its vorticity role with the velocity reconstructed in closed form by the l=1 radial Biot-Savart ODE -- with the Leray potential obtained exactly by l=0/l=2 radial Green's functions, and all weighted norms taken as CONVERGED integrals over all of R^3 (Gauss-Legendre in r x cos(theta) x phi), not as ray densities.  The step that fails is S4.",
+ "runtime_seconds": 18.891628742218018
+}
