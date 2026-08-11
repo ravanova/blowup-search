@@ -171,6 +171,14 @@
         "rel_change": 0.005371404339529295
       }
     },
+    "superseded_N_16384_level_RE_MEASURED": {
+      "N": 16384,
+      "kappa20_modes_for_1e-6_at_N_16384": 10841,
+      "kappa20_modes_for_1e-6_at_N_131072": 14073,
+      "pct_change_under_8x_refinement": 29.812747901485103,
+      "kappa20_modes_for_1e-8_at_N_16384_SATURATED": 16332,
+      "why_withdrawn": "the 1e-8 index sits at n = 16332 of N = 16384, i.e. hard against the array bound -- a statement about the array, not the object. Quoted nowhere."
+    },
     "route_I_leading_abs_imag": 430.35
   },
   "s4_price": {
@@ -306,6 +314,11 @@
       "detail": "max|a_n| for n>=3 is 5.551e-17"
     },
     {
+      "name": "S3.8 the superseded N=2^14 level is RE-MEASURED, not transcribed, and shows both defects: a >25% shift in the kappa=20 cost under refinement, and a 1e-8 index saturating against the array",
+      "pass": true,
+      "detail": "kappa=20 at 1e-6: 10841 -> 14073 (29.8%); 1e-8 index 16332 of N=16384"
+    },
+    {
       "name": "S3.7 resolution study: at the chosen N = 2^20 the 1e-6 mode counts are stable to <5% against the 8x-coarser N = 2^17 level, so they measure the OBJECT and not the array (they were NOT at N = 2^14 -- see the docstring)",
       "pass": true,
       "detail": "kappa=1.0: 823->823 (0.0%); kappa=2.0: 1482->1482 (0.0%); kappa=5.0: 3563->3564 (0.0%); kappa=10.0: 7076->7086 (0.1%); kappa=20.0: 14073->14149 (0.5%)"
@@ -346,5 +359,5 @@
       "detail": "1414.90x modes vs the smooth control"
     }
   ],
-  "selftests_passed": "29/29"
+  "selftests_passed": "30/30"
 }

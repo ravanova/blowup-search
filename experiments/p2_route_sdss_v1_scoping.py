@@ -351,6 +351,33 @@ def s3_regularity() -> dict:
         results[f"kappa={kap}"]["modes_for_rel_trunc_1e-8"] = (
             "NOT QUOTED -- at N = 2^14 this column saturated against the array "
             "(n = 16332 of N = 16384); it is a statement about the array, not the object")
+    # The SUPERSEDED first-draft level, RE-MEASURED rather than transcribed, so that the
+    # withdrawn numbers quoted in this leg's prose are auditable against this ledger.
+    N0 = 1 << 14
+    f20 = lambda X: np.exp((1.0 - 1j * 20.0) * np.log(np.maximum(1.0 - X, 1e-300)))
+    rel0 = tail_truncation_error(cheb_coeffs(f20, N0))
+    rel0 = rel0 / float(rel0[0])
+    n0_6 = int(np.argmax(rel0 < 1e-6))
+    n0_8 = int(np.argmax(rel0 < 1e-8))
+    n_ref = stability["kappa=20.0"]["modes_at_N_131072"]
+    superseded = {
+        "N": N0,
+        "kappa20_modes_for_1e-6_at_N_16384": n0_6,
+        "kappa20_modes_for_1e-6_at_N_131072": n_ref,
+        "pct_change_under_8x_refinement": 100.0 * abs(n_ref - n0_6) / n0_6,
+        "kappa20_modes_for_1e-8_at_N_16384_SATURATED": n0_8,
+        "why_withdrawn": (
+            f"the 1e-8 index sits at n = {n0_8} of N = {N0}, i.e. hard against the array "
+            f"bound -- a statement about the array, not the object. Quoted nowhere."),
+    }
+    check("S3.8 the superseded N=2^14 level is RE-MEASURED, not transcribed, and shows "
+          "both defects: a >25% shift in the kappa=20 cost under refinement, and a 1e-8 "
+          "index saturating against the array",
+          superseded["pct_change_under_8x_refinement"] > 25.0 and n0_8 > 0.95 * N0,
+          f"kappa=20 at 1e-6: {n0_6} -> {n_ref} "
+          f"({superseded['pct_change_under_8x_refinement']:.1f}%); "
+          f"1e-8 index {n0_8} of N={N0}")
+
     check("S3.7 resolution study: at the chosen N = 2^20 the 1e-6 mode counts are "
           "stable to <5% against the 8x-coarser N = 2^17 level, so they measure the "
           "OBJECT and not the array (they were NOT at N = 2^14 -- see the docstring)",
@@ -422,6 +449,7 @@ def s3_regularity() -> dict:
         "kappa0_control_terminates": terminates,
         "rows": results,
         "resolution_study_1e-6_stability": stability,
+        "superseded_N_16384_level_RE_MEASURED": superseded,
         "route_I_leading_abs_imag": 430.35,
     }
 
