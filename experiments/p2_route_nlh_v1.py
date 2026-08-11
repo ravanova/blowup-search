@@ -362,7 +362,11 @@ def m3_quadrature_exactness(problem, a, panels=4000, k=16, R=48.0):
     P, D = bc.psi_values(problem.n, x)
     img = FractionalBasisImages(problem.n, problem.alpha, R)
     u = P @ a
-    lu = img.apply(a, x)
+    du = D @ a
+    # the reference carries the SAME homotopy mixture as the rule it is judging, so at
+    # t = 0 this comparison reduces to the local one and MUST read ~0: M3 contains its
+    # own control, and the ramp in t is the measurement.
+    lu = (1.0 - problem.t) * du + problem.t * img.apply(a, x)
     # NO factor 2 for evenness: Breden-Chu's product rules are half-line rules.  That
     # convention was not assumed, it was MEASURED by the local control below, which
     # came out at exactly 0.5 with a factor 2 present and ~0 without it.
@@ -375,11 +379,10 @@ def m3_quadrature_exactness(problem, a, panels=4000, k=16, R=48.0):
     DV6 = problem.rules["six"].DV
     du6 = DV6 @ a
     loc_rule_sq = float(np.sum(u6 ** 4 * du6 ** 2))
-    du = D @ a
     loc_ref_sq = float(np.sum(w * wt * (u * u * du) ** 2))
 
     return {
-        "R_reference": R, "panels": panels, "k": k,
+        "t": problem.t, "R_reference": R, "panels": panels, "k": k,
         "nonlocal_rule_full_sq": rule_full_sq,
         "nonlocal_reference_full_sq": ref_full_sq,
         "nonlocal_rel_error": abs(rule_full_sq / ref_full_sq - 1.0) if ref_full_sq else float("nan"),
@@ -507,7 +510,8 @@ def m5_bounds(problem, a, sup_psi=None, sup_dpsi=None):
 # 4.  THE RUN
 # ===========================================================================
 
-TS = (0.0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1.0)
+TS = tuple(round(0.1 * i, 3) for i in range(11))
+M3_AT = (0.0, 0.2, 0.4, 0.6, 0.8, 1.0)
 
 
 def bc_seed(n, coarse=None, coarse_n=None):
@@ -526,7 +530,7 @@ def bc_seed(n, coarse=None, coarse_n=None):
     return bc.project_profile(xs, us, n)
 
 
-def homotopy(n, alpha, rules, seed, ts=TS, m3_at=(1.0,), sup_psi=None, sup_dpsi=None):
+def homotopy(n, alpha, rules, seed, ts=TS, m3_at=M3_AT, sup_psi=None, sup_dpsi=None):
     """Continue from t=0 (Breden-Chu eq. 54, exactly) to t=1 (fully nonlocal).
 
     Newton at each t starts from the previous t's solution, so the ladder in t is the
@@ -536,6 +540,7 @@ def homotopy(n, alpha, rules, seed, ts=TS, m3_at=(1.0,), sup_psi=None, sup_dpsi=
     steps, a = [], np.array(seed, dtype=float)
     lam = bc.eigenvalues(n)
     a_local = None
+    ctx = {"LV": LV, "a_last_good": None, "t_last_good": None}
     for t in ts:
         prob = NonlocalSelfSimilar(n, alpha, rules, t=t, LV=LV)
         a, hist = prob.newton(a)
@@ -557,6 +562,8 @@ def homotopy(n, alpha, rules, seed, ts=TS, m3_at=(1.0,), sup_psi=None, sup_dpsi=
                 "profile_distance_from_t0_H2": (
                     float(np.linalg.norm(lam * (a - a_local))) if a_local is not None
                     else float("nan"))}
+        if conv and not trivial:
+            ctx["a_last_good"], ctx["t_last_good"] = a.copy(), t
         if t in m3_at and conv and not trivial:
             step["M3_quadrature"] = m3_quadrature_exactness(prob, a)
         steps.append(step)
@@ -565,7 +572,99 @@ def homotopy(n, alpha, rules, seed, ts=TS, m3_at=(1.0,), sup_psi=None, sup_dpsi=
               % (n, alpha, t, hist[-1], b["sup_ubar"], b["Y"], b["Z1"], b["Z2"],
                  b["Z3"], v["closes"], b["tail_sq_negative"], trivial))
         sys.stdout.flush()
-    return steps
+    return steps, ctx
+
+
+def locate_z1_crossing(n, alpha, rules, steps, ctx, iters=14,
+                       sup_psi=None, sup_dpsi=None):
+    """The t at which Zbar/Z1 leaves Breden-Chu's admissible region Z1 < 1.
+
+    This, not the fold, is the GATE quantity: the radii polynomial has no positive root
+    at all once Z1 >= 1, whatever Y does.  Reported as the fraction of nonlocality the
+    machinery's own contraction constant tolerates.
+    """
+    alive = [s for s in steps if s["verdict_is_meaningful"]]
+    if not alive:
+        return {"crossed": None, "note": "no meaningful step"}
+    if all(s["bounds"]["Z1"] >= 1.0 for s in alive):
+        return {"crossed": True, "t_star": 0.0,
+                "note": "Z1 >= 1 already at t = 0; the LOCAL control is not admissible "
+                        "at this n, so the crossing carries no nonlocal information"}
+    below = [s for s in alive if s["bounds"]["Z1"] < 1.0]
+    above = [s for s in alive if s["bounds"]["Z1"] >= 1.0]
+    t_lo = max(s["t"] for s in below)
+    if not above:
+        return {"crossed": False, "t_last_below": t_lo,
+                "Z1_max_on_grid": max(s["bounds"]["Z1"] for s in alive),
+                "note": "Z1 < 1 wherever the branch was tracked"}
+    t_hi = min(s["t"] for s in above if s["t"] > t_lo)
+    LV, a = ctx["LV"], ctx["a_last_good"]
+    a_lo = a
+    trail = []
+    for _ in range(iters):
+        t_mid = 0.5 * (t_lo + t_hi)
+        prob = NonlocalSelfSimilar(n, alpha, rules, t=t_mid, LV=LV)
+        a_mid, hist = prob.newton(a_lo)
+        b = m5_bounds(prob, a_mid, sup_psi, sup_dpsi)
+        ok = bool(np.isfinite(hist[-1]) and hist[-1] < 1e-9 and b["sup_ubar"] > 1e-8)
+        trail.append({"t": t_mid, "Z1": b["Z1"], "Y": b["Y"], "sup_ubar": b["sup_ubar"],
+                      "meaningful": ok})
+        if ok and b["Z1"] < 1.0:
+            t_lo, a_lo = t_mid, a_mid
+        else:
+            t_hi = t_mid
+    return {"crossed": True, "t_star": 0.5 * (t_lo + t_hi),
+            "t_last_below": t_lo, "t_first_at_or_above": t_hi,
+            "bracket_width": t_hi - t_lo, "bisection_trail": trail,
+            "Z1_at_t0": steps[0]["bounds"]["Z1"],
+            "nonlocal_fraction_tolerated": 0.5 * (t_lo + t_hi)}
+
+
+def locate_fold(n, alpha, rules, steps, ctx, iters=12, sup_psi=None, sup_dpsi=None):
+    """Bisect the last t whose Newton keeps a NONTRIVIAL profile.
+
+    The continuation loses the branch between two grid t's; this reports where, and the
+    sup-norm it has reached there, so the loss is a magnitude and not a bracket.  u == 0
+    is a solution at every t, so 'lost' means 'the nontrivial branch was not found from
+    the previous solution', which is a statement about the branch AND the solver.
+    """
+    good = [s for s in steps if s["verdict_is_meaningful"]]
+    bad = [s for s in steps if not s["verdict_is_meaningful"]]
+    if not bad or not good:
+        return {"branch_lost": False, "note": "no loss on the t-grid"}
+    t_lo = max(s["t"] for s in good)
+    t_hi = min((s["t"] for s in bad if s["t"] > t_lo), default=None)
+    if t_hi is None:
+        return {"branch_lost": False, "note": "all losses precede the last good t"}
+    LV = ctx["LV"]
+    a_lo = ctx["a_last_good"]
+    if a_lo is None:
+        return {"branch_lost": True, "note": "no good step to continue from"}
+    t_lo = ctx["t_last_good"]
+    t_hi = min((s["t"] for s in steps
+                if not s["verdict_is_meaningful"] and s["t"] > t_lo), default=None)
+    if t_hi is None:
+        return {"branch_lost": False, "note": "all losses precede the last good t"}
+    trail = []
+    for _ in range(iters):
+        t_mid = 0.5 * (t_lo + t_hi)
+        prob = NonlocalSelfSimilar(n, alpha, rules, t=t_mid, LV=LV)
+        a_mid, hist = prob.newton(a_lo)
+        b = m5_bounds(prob, a_mid, sup_psi, sup_dpsi)
+        ok = bool(np.isfinite(hist[-1]) and hist[-1] < 1e-9 and b["sup_ubar"] > 1e-8)
+        trail.append({"t": t_mid, "kept_branch": ok, "sup_ubar": b["sup_ubar"],
+                      "Z1": b["Z1"], "Y": b["Y"], "residual": hist[-1]})
+        if ok:
+            t_lo, a_lo = t_mid, a_mid
+        else:
+            t_hi = t_mid
+    last = trail[-1]
+    return {"branch_lost": True, "t_last_kept": t_lo, "t_first_lost": t_hi,
+            "bracket_width": t_hi - t_lo, "bisection_trail": trail,
+            "sup_ubar_at_last_kept": max(
+                (s["sup_ubar"] for s in trail if s["kept_branch"]), default=last["sup_ubar"]),
+            "Z1_at_last_kept": max(
+                (s["Z1"] for s in trail if s["kept_branch"]), default=last["Z1"])}
 
 
 def run(ns=(100, 200), alphas=(0.25, 0.5, 0.75), headline_n=200, headline_alpha=0.5):
@@ -629,8 +728,17 @@ def run(ns=(100, 200), alphas=(0.25, 0.5, 0.75), headline_n=200, headline_alpha=
                  "homotopy": {}}
 
         for alpha in alphas:
-            steps = homotopy(n, alpha, rules, a_loc,
-                             sup_psi=sup_psi, sup_dpsi=sup_dpsi)
+            steps, ctx = homotopy(n, alpha, rules, a_loc,
+                                  sup_psi=sup_psi, sup_dpsi=sup_dpsi)
+            fold = locate_fold(n, alpha, rules, steps, ctx,
+                               sup_psi=sup_psi, sup_dpsi=sup_dpsi)
+            cross = locate_z1_crossing(n, alpha, rules, steps, ctx,
+                                       sup_psi=sup_psi, sup_dpsi=sup_dpsi)
+            print("   -> Z1<1 crossing: %s" % {k: v for k, v in cross.items()
+                                               if k != "bisection_trail"})
+            print("   -> fold: %s" % {k: v for k, v in fold.items()
+                                      if k != "bisection_trail"})
+            sys.stdout.flush()
             # -- the t = 0 REGRESSION CONTROL: must reproduce bc.bounds exactly
             b0 = steps[0]["bounds"]
             keys = ("Y", "Z1", "Z2", "Z3", "Zbar11", "Zbar12", "Zbar21", "Zbar22")
@@ -638,7 +746,7 @@ def run(ns=(100, 200), alphas=(0.25, 0.5, 0.75), headline_n=200, headline_alpha=
                        if loc_bounds.get(k) else float("nan")) for k in keys
                    if k in loc_bounds}
             entry["homotopy"][str(alpha)] = {
-                "steps": steps,
+                "steps": steps, "fold": fold, "Z1_crossing": cross,
                 "t0_regression_control": {
                     "max_rel_diff_vs_bc_bounds": max(
                         v for v in rel.values() if math.isfinite(v)),
