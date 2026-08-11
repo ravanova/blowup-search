@@ -42,6 +42,8 @@ lesson 35). This file is the index, not the substitute.
 | 9 | leg 185's `a = 1/2` `ν` **magnitudes** (`−0.00817525` / `−0.00895316`), banked in a table beside a refined `a = 0.30` number and read downstream as measurements; and its `a* = 0.3865` **cross-check**, banked as *"two different calculations agreeing on the same number"* | **leg 210** (2026-08-07, Route-M2SV, parked branch `leg/210-m2sv-v1` @ `6e06880`, independently discretized re-derivation) → **leg 283** (this entry; swept the record and carried both halves to every site) | **SPLIT, and both halves matter.** UP: `ν = +0.01799364` at `a = 0.30` is **independently confirmed to 1.198e-06 relative (~5.9 digits)**, and the sign law is **strengthened to gauge-independence** (`ν → μ²ν` under dilation, `μ² > 0`, so no gauge can flip it). DOWN: the `a = 1/2` magnitudes are **sign-only** — leg 210's independent value is `−0.00082927`, a **10.33×** gap, and **neither scheme is grid-converged there** (leg 185's own ladder spans **62.2%** non-monotonically; leg 210's spans **119.2%** with amplitude collapsing toward the trivial null). The `a*` cross-check is **UNPINNED** by leg 185's own data — its two starts **straddle zero** at `a = 0.3865` (`+0.00000035` / `−0.00425080`). **Leg 125's own `a*` value is untouched.** §10 below |
 | 10 | Whether `a*` itself (as opposed to leg 185's flawed corroboration of it) is a real, locatable feature of Object B — left an open, un-adjudicated three/four-way contradiction after §10/leg 283: leg 210's independent bracket `[0.36, 0.37]` **excludes** leg 125's `a* = 0.3864963972206034` | **leg 284** (2026-08-07, Route-NU12, pseudo-arclength continuation — a third, independent method) → **leg 296** (this entry; read all four reports method-by-method and reconciled) | **`a* ≈ 0.386` IS PINNED**, by two mutually independent methods agreeing to ~2e-3: leg 125's algebraic `Δ(a) = 0` crossing (`ν = 0`, residual `1.933e-15`) and leg 284's grid-converged pseudo-arclength turning point (`0.3857 ± 0.004`, monotone over 4 grids). Leg 210's exclusion bracket is **explained, not outvoted**: it used the same fixed-`a` Newton-restart method leg 284 showed (Findings 2 and 4) folds and develops a singular Jacobian (`σ_min/σ_max = 3.454e-19` at `n = 1601`) in exactly this neighborhood — and leg 210's own report already recorded the predicted symptom (non-convergence at `a = 0.3865`, residual `6.0e-03`; amplitude collapse toward the trivial null beyond it) independently of anything leg 284 later found. Leg 185's specific corroboration claim **stays refuted** — its two starts still straddle zero at `a = 0.3865`. §11 below |
 | 11 | PUB3's `a_max_machine` exposure row (`writeup/4_p2_lottery/TECHNICAL_P2_PUB3_V1.md`, the Route-D v11 "Exposure" table) named the scalar as materially exposed but never carried a resolution once one existed; leg 294's own flag additionally mis-cited the site as line 134 quoting the literal `a_max_machine=1.0` — checked directly, no such literal string exists anywhere in the file (line 134 is unrelated prose; the actual site is the table row at line 148, which names the scalar without printing a value) | **leg 236** (row-exclusion) + **leg 226** (D2/D3 repair), reconciled by **leg 294** → **leg 295** (this entry; located the true site, found leg 294's line/citation imprecise, appended the resolution) | `a_max_machine`'s corrected value **0.55** (confirmed by two independent methods from the stale `1.0`) is now recorded at the site as a dated, additive footnote — **zero** existing sentence reworded. §12 below |
+| 12 | PUB2's caveat family printed a single Xu-normalization digit, `0.0420`, at four sites (§0, §3.2, the §4.5 sign-correction paragraph, §7) as if it were the unambiguous conversion of `0.0908` into “Xu's own normalization” | **leg 277** (2026-08-07, Route-XUN, branch `leg/277-xun-v1`, never merged) → **leg 280** (this entry; applied the correction to the two sites that state it independently, §0 and §7 — the other two are backreferences to §0 and needed no separate edit) | Xu's Definition 4.1 names **two** norms: the *displayed* half-line definition (4.2), constant `π`, and the *equivalent* full-line norm, constant `2π`. `0.0420` is the **full-line** reading (`κ = 2π`); under the **displayed** definition the value is **`0.057643`** (`‖R‖_X = 17.348`, not `23.792`) — **`1.37×`** larger. §13 below |
+| 13 | (a) PUB2 §4.5 stated that “any claim that the digits `0.0908` and `0.71465` are convention-independent” does not survive; (b) the same paragraph's “optimistic by `7.9×`” factor was printed with no convention caveat anywhere in the document | **leg 281** (drafted 2026-08-07, Route-CVF, branch `leg/281-cvf-v1`, never dispatched) → **leg 280** (this entry; corrected (a), flagged (b), both in place, 2026-08-11) | (a) is **backwards for `0.71465`**: it is convention-**free** to `1.87e−16` (a ratio of `X`-norms with no border coordinate, so the weight cancels) — only `0.0908` is convention-relative. (b) the `7.9×` factor **is** convention-relative and unflagged: it ranges `5.265 … 656.95` (`124.8×`) over the same weight sweep §0 names. §14 below |
 
 **The process pattern, which is the reason for the register.** In #1 the repository *had the
 reference in hand before it drew the conclusion* — leg 111's own novelty log §2 recorded the
@@ -912,3 +914,113 @@ current, uncorrected value. No sibling document needed a fix.
 does not touch `writeup/data/p2_route_d_v11_anchor.json` on `main` (still stale by ~6.55e+11x on
 `margin` — leg 252's own integration decision, unmade, reserved as leg 297) and does not touch
 any argument's meaning beyond adding the resolved scalar. Clay stays **~0.05%**.
+
+
+---
+
+## §13 — Xu's `0.0420` was the wrong constant among two, and the right one is `0.057643`
+
+### What over-read what
+
+Leg 249 §10 (W5) computed exactly one converted `σ_min` digit, `0.0420303`, under "Xu's own
+`y`-space normalization." Leg 270 (E1) found PUB2 disclosed nowhere that this digit was
+convention-relative and named `0.0420` as the Xu reading. Leg 276 disclosed it, at four sites
+of `TECHNICAL_P2_PUB2_V1.md`: §0 (the convention note), §3.2 (the space-axis contrast table),
+the §4.5 sign-correction paragraph, and §7 (Ceiling). **None of the four asked which of Xu's
+two named norms `0.0420` actually was.**
+
+Leg 277 (Route-XUN, 2026-08-07) read Xu's Definition 4.1 at primary source and found it names
+**two** norms in consecutive sentences: eq. (4.2), the *displayed* definition, `‖φ‖²_X = ‖φ‖²_{L²(0,∞)} + ‖φ″‖²_{L²(0,∞)}`
+(half-line, constant `π`), and the next sentence, which calls the odd part of `H²(ℝ)` an
+*"equivalent"* — i.e. different — norm (full-line, constant `2π`). `solver/origin_h2_certificate.py`'s
+`x_norm_y`/`x_norm` compute the **second** one, which is what leg 249's `0.0420` is. Leg 277
+measured the half-line Gram independently (a double-exponential quadrature at both endpoints)
+and found the two norms are **not proportional as Hermitian forms**: `H = πG + iS`, with `S`
+real, antisymmetric, exact-integer-valued, and contributing exactly zero only on the real
+coefficient subspace the certificate actually lives on (checked to `2.20e−14`).
+
+### What was actually true
+
+Under Definition 4.1's own **displayed** half-line norm (constant `π`, not `2π`),
+`σ_min = 0.057643` (`‖R‖_X = 17.348`), **not** `0.0420` (`‖R‖_X = 23.792`) — a factor **`1.3715`**.
+Both are legitimate readings of "Xu's own normalization"; PUB2 named only one, without saying
+which, and the leg that produced the digit (249) never distinguished them either.
+
+### Where carried
+
+Applied 2026-08-11 (leg 280) to `TECHNICAL_P2_PUB2_V1.md` §0 (the convention note, where
+`0.0420` is first printed) and §7 (Ceiling, the other site that states the figure independently
+rather than pointing back to §0). §3.2 and the §4.5 sign-correction paragraph both already read
+"§0's `0.0420`" / reference the convention note rather than asserting the digit independently,
+so they carry the correction by reference and needed no separate edit — consistent with §6's own
+design ("every later printing... points back to this paragraph rather than repeating it").
+**`writeup/4_p2_lottery/BLOG_P2_PUB2_V1.md`** also prints `0.0420` (its own §-equivalent of the
+convention note) — **outside this leg's declared territory** (the dispatch names "the four named
+TECHNICAL sites" only); flagged here, not edited, for whoever holds that path.
+
+### What does not change
+
+Leg 176's gate answer is untouched — it turns on `σ_min` being bounded away from zero uniformly
+in the truncation, a property invariant under every positive weight, `π` or `2π` alike. No
+conclusion in §§3–5 depended on which Xu constant was named; only the printed digit did.
+
+### Ceiling
+
+**0 numbers re-measured** (leg 277's measurement is reused, not repeated). **0 arguments
+changed.** `a = 0` only, float64. No link of the `L1 → L4` chain moved. Clay stays `~0.05%`.
+
+---
+
+## §14 — `0.71465`'s convention-dependence claim was backwards, and its `7.9×` companion was unflagged
+
+### What over-read what
+
+`TECHNICAL_P2_PUB2_V1.md` §4.5, in the paragraph correcting the sign of leg 163's witness bound,
+stated: *"Nor — per §0's convention note — any claim that the digits `0.0908` and `0.71465` are
+convention-independent [survives]."* The same paragraph's antecedent sentence quotes leg 176's
+own characterization of leg 163's witness as **"optimistic by `7.9×`"**, printed with no
+convention caveat anywhere in the document.
+
+Leg 281 (Route-CVF, drafted 2026-08-07, never dispatched) enumerated all 32 quantities the
+certificate forms or quotes and classified each as convention-free (no border coordinate, so
+the weight cancels between domain and range Grams) or convention-relative (mixes an `X`-norm
+with a border amplitude carrying a different weight), measured over an eleven-point weight sweep
+spanning `κ ∈ [10⁻⁴, 10⁴]`. Two of its rows bear on §4.5's sentence directly: `E5` (`0.71465`
+itself) and `E6` (the `7.9×`/`7.87×` factor).
+
+### What was actually true
+
+`0.71465` is `1/max(‖u‖_X/‖f‖_X)` over leg 163's finite data family — a ratio of `X`-norms with
+**no border coordinate** — and is measured **convention-free to `1.87e−16`** across the full
+sweep. §4.5's sentence is right about `0.0908` (convention-relative, factor `12.5` over the
+named sweep, up to `17321×` for the ladder-flattening digit measured separately) and **wrong
+about `0.71465`**, which needs no convention caveat at all.
+
+The `7.9×`/`7.87×` "optimistic by" factor is the **opposite** case: it divides a convention-free
+quantity by a convention-relative one and is therefore fully convention-relative, ranging
+**`5.265 … 656.95`** (**`124.8×`**) over the same weight sweep §0 already names — and carried no
+flag anywhere in the document before this entry.
+
+### Where carried
+
+Applied 2026-08-11 (leg 280) to `TECHNICAL_P2_PUB2_V1.md` §4.5: the sentence about `0.71465`'s
+convention-independence is corrected to apply to `0.0908` only, with `0.71465`'s convention-free
+status and its `1.87e−16` measurement named; the `7.9×` factor is flagged with its measured
+range in place immediately after it. Both edits are additive — no existing wording asserting a
+conclusion in §§3–5 was reworded.
+
+### What does not change
+
+The reconciliation `0.0908 ≤ 0.71465` (§4.5's actual purpose in printing both digits) is
+unaffected — it mixes a convention-relative quantity with a convention-free one and, per leg
+281's 61-point fine sweep over twelve decades, **holds at every point tested**, with headroom
+`5.26×` at the global `σ_min` maximum. Leg 176's gate answer and leg 249's verification are
+untouched.
+
+### Ceiling
+
+**0 numbers re-measured** (leg 281's measurements are reused, not repeated). **0 arguments
+changed.** `a = 0` only, float64, nothing interval-enclosed. `writeup/data/p2_route_cvf_v1_classify.json`
+(leg 281, never merged to `main`) is not banked by this entry — this leg reads it, does not
+publish it as a `main`-resident artifact, and leg 281's branch remains undispatched. No link of
+the `L1 → L4` chain moved. Clay stays `~0.05%`. No ban lifted. No route promoted. No GA compute.

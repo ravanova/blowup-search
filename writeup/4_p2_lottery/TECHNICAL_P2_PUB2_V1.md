@@ -53,7 +53,13 @@ That question has an axis, and the axis now has four points on it, all measured,
 > amplitude while the `X` block carries the bare Laguerre normalization (no `2π`, no half-line
 > `½`). That is a **choice**. Sweeping that weight over `10⁻² … 10²` moves `σ_min` across
 > **0.01086 … 0.13580 — a factor of 12.5** — and adopting Xu's own `y`-space normalization for
-> the `X` block (i.e. carrying the `2π`) gives **0.0420** instead of **0.0908**. **In the same
+> the `X` block (i.e. carrying the `2π`) gives **0.0420** instead of **0.0908**.
+> **[CORRECTED 2026-08-11, leg 280, per leg 277's verified finding.]** `0.0420` is Xu's
+> Definition 4.1 *equivalent* full-line norm (`κ = 2π`); Definition 4.1's own *displayed*
+> half-line definition (4.2) carries `π`, not `2π`, and gives **`0.057643`** instead
+> (`‖R‖_X = 17.348`, not `23.792`) — **`1.37×` larger than `0.0420`**. Both are Xu-normalization
+> readings; which one "Xu's own normalization" means was previously unresolved and is now named.
+> **In the same
 > breath, because it is what keeps this from touching any conclusion below:** the property leg
 > 176's gate turns on — `σ_min` **bounded away from zero uniformly in the truncation** — **is
 > invariant** under that weight, since a positive weight cannot send a positive limit to zero;
@@ -417,7 +423,10 @@ useful output and the reason both numbers are reported with neither standing for
 **One correction this construction makes to §3.2's, §4.5's and §5(3)'s witness — now applied at
 all three sites, and it turns out to be a sign, not a magnitude.** Earlier drafts quoted
 `σ_min ≥ 0.71465` in §3.2, §4.5 and §5(3). That is **leg 163's three-datum witness**, and leg 176
-states plainly that it was **optimistic by 7.9×**: *"That is a witness, not a bound. The measured
+states plainly that it was **optimistic by 7.9×**
+**[FLAGGED 2026-08-11, leg 280, per leg 281's finding E6: this factor is convention-relative,
+ranging `5.265 … 656.95` over the same weight sweep §0 names, a `124.8×` swing — the factor
+`7.9×` holds only in the repo's own fixed weight convention]**: *"That is a witness, not a bound. The measured
 value is 0.0908."* Reproducing leg 163's own quantity from the closed form gives 0.8681539 over four
 data while the operator norm is 11.0 — i.e. **random low-mode data does not find the worst
 direction.** Tracing it further: `0.71465` is the five-decimal rounding of leg 163's banked
@@ -439,10 +448,14 @@ full 16-fold range) together with two controls that report the other answer — 
 the analogous ladder **decays** like `M^{−(1−s)}`. That contrast is a contrast of ladder behaviour
 in both spaces, which is all §3–§5 ever use it for, and it survives the correction intact. What
 does not survive, and is not written anywhere in this note, is any claim to a *proved* floor.
-Nor — per §0's convention note — any claim that the digits `0.0908` and `0.71465` are
-convention-independent: the first moves by a factor of **12.5** under the border weight and
-becomes `0.0420` in Xu's own `y`-space normalization, and both are quoted here in one fixed
-convention. The flatten-versus-decay contrast just described is what survives that freedom, and
+Nor — per §0's convention note — any claim that the digit `0.0908` is
+convention-independent: it moves by a factor of **12.5** under the border weight and
+becomes `0.0420` in Xu's own `y`-space normalization (`0.057643` under Definition 4.1's own
+displayed norm — §0), quoted here in one fixed convention.
+**[CORRECTED 2026-08-11, leg 280, per leg 281's finding E5/E4: `0.71465`, by contrast, IS
+convention-free, to `1.87e−16` — it is `1/max(‖u‖_X/‖f‖_X)` over a finite family, a ratio of
+X-norms with no border coordinate, so the weight cancels between numerator and denominator. The
+convention-dependence claim above applies to `0.0908` only, not to `0.71465`.]** The flatten-versus-decay contrast just described is what survives that freedom, and
 it is the only thing §3–§5 use.
 
 **What this does and does not change in §3.3's ceiling — nothing is lifted.** Leg 176 restates
@@ -696,7 +709,9 @@ The object throughout is the `a = 0` CLM steady linearisation. **No dynamics wer
 Nothing is claimed about this project's nominal target profile beyond its banked coefficient
 exponent `α = 0.39735311167782`. **Every `σ_min` digit in this note is stated in one fixed
 weight convention and is relative to it by a factor of 12.5** — §0's convention note gives the
-sweep (`0.01086 … 0.13580`) and Xu's own `y`-space figure (`0.0420` rather than `0.0908`); what
+sweep (`0.01086 … 0.13580`) and Xu's own `y`-space figure (`0.0420` rather than `0.0908`
+under Xu's *equivalent* full-line norm; **`0.057643` under Definition 4.1's own displayed
+half-line norm — see §0, corrected 2026-08-11 per leg 277**); what
 is invariant under that freedom, and what §§3–5 argue from, is the ladder's *behaviour*, not its
 digits. Every number is float64 at a stated truncation; **nothing here
 is interval-enclosed or rigorous** in the computer-assisted-proof sense, including §2, whose
