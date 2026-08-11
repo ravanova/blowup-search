@@ -4823,3 +4823,119 @@ rather than the system Clay asks about; not by leg 313, which dissolved a reason
 looking somewhere and found the seed set for looking there empty; not by leg 320, which
 found a candidate space and no transform to validate it with; not by leg 321, which
 corrected digits. Dissolving an obstruction is not the same as making progress through it.
+
+## Cycle 5 (continued), 2026-08-11 — legs 314, 292, and a correction the orchestrator owes
+
+**314 (Route-FUS) — gate yes, classification (iii) OPEN, landed c3aedff.** Steer item 5, and
+the DM's pick for the strongest genuinely-new mathematics on the board. The answer is that
+the finite-unstable-spectrum condition cannot presently be checked, and the reason comes in
+two parts. First, the condition is NOT realization-invariant and arXiv:2509.14185 names no
+realization -- so as written it has no truth value to prove, disprove or check. Xu
+arXiv:2607.19762's published dichotomy makes the point concrete and is cited, not claimed:
+the same CLM profile under a maximal-L2 smear versus an origin-H2 one gives essential
+spectrum {Re = -1/2} and point spectrum exactly {0,1}. Second, once a realization IS fixed,
+what remains is a high-frequency resolvent bound on |Im mu| -> infinity -- Hardy-Mellin, or
+maximal dissipativity plus a relatively compact perturbation. That is a theorem, not a
+computation, and no certified eigenvalue count on a bounded box supplies it.
+
+Named mechanism (lesson 91): FOR THIS CONDITION, NUMERICS IS A REFUTER, NOT A VERIFIER. The
+leg corroborated that across four literatures instead of asserting it. Barker-Zumbrun's
+certified count runs inside a winding radius R = (sqrt(gamma) + 1/2)^2 that is derived
+ANALYTICALLY -- the computer works inside the disc, and the disc is a theorem. Gallay-Wayne
+buy finiteness by raising the weight. Chen-Hou sidestep the condition entirely.
+
+Two disciplines worth recording. The gCLM measurement ban was walked term by term, found
+BINDING, and the leg redesigned itself around it -- arithmetic on banked numbers only,
+enforced by an AST self-guard, with its single 4.7 s cost probe declared and nothing from it
+banked. And because the classification came out (iii) rather than (ii), the DM's construction
+clause is not triggered; nothing was built, and the construction route is named only.
+
+**292 (Route-CAPA v2) — gate NO, landed 41169e0.** The audit found one stale entry in 48,
+fixed it, and reported the count: 48 rows, 48 distinct modules, 48 solver/*.py, zero missing,
+zero ghost, 47/47 cited tests green over a 5396.5 s sweep, known-answer-gate presence 36/48.
+
+The repair is not the result. Leg 71 measured this same defect about 220 legs ago and could
+not fix it, because no test then loaded the module. Leg 124 wrote exactly that test 53 legs
+later. The fix then sat on disk, unused, for the remaining ~167 legs. What that measures is
+this repository's AUDIT-LOOP LATENCY, not capabilities.py: leg 71's check lived inside leg
+71's runner, so nothing ever re-asked the question. A finding that cannot be re-asked decays
+into a fact nobody acts on.
+
+Three things the leg did right and that are worth copying. It named the 12 magnitude-free
+rows rather than rewriting them -- supplying another leg's number from an audit chair is
+precisely the fabrication that field exists to prevent. It plotted S5 AS FOUND (1) rather
+than post-repair (0), so its own repair cannot erase the finding. And it revalidated at
+landing by measurement rather than assumption: main had advanced ~30 commits underneath it,
+but git diff 80c0cc4..origin/main over solver/ and capabilities.py is empty, so the sweep
+carries over.
+
+Secondary finding, and it is a live trap: leg 124's S10 gate can be turned red by PROSE
+anywhere in the tree -- any *.py line carrying both the module stem and the word import,
+comments and docstrings included -- while the module itself stays byte-identical. The leg's
+own explanatory comment tripped it. A CAUTION note now sits beside the row.
+
+**MF3 IS WITHDRAWN. The orchestrator got it wrong and this is the correction.**
+
+Last cycle this journal recorded MF3 as a measured instrument defect: that the arXiv search
+endpoint returns zero for ANY two ANDed quoted phrases, and that such zeros must be
+discarded. The orchestrator relayed that to four live legs as a binding search constraint and
+briefed it into two dispatches. IT IS FALSE AS STATED. Leg 314 failed to reproduce it and the
+orchestrator then tested the export API directly:
+
+    all:"self-similar"                                    8472
+    all:"blow-up"                                         6938
+    all:"self-similar" AND all:"blow-up"                   251
+    all:"Taylor model"                                      84
+    all:"interval arithmetic"                              222
+    all:"Taylor model" AND all:"interval arithmetic"         3
+    all:"validated numerics" AND all:"Navier-Stokes"         3
+
+ANDed quoted phrases work. The narrow pairs return 3, not 0. "Taylor model" -> 84 reproduces
+leg 315's own singly-queried number exactly, so the same corpus is being hit; leg 315's six
+zeros came from its own query path -- syntax, or the HTTP 429 rate-limiting it had already
+met on that lane -- and not from a general endpoint defect. What leg 315 did was still right:
+it distrusted an implausible zero and discarded rather than banked. The error was the
+orchestrator's generalisation from six zeros to a universal rule.
+
+The correction was propagated to legs 323, 305, 306 and 318, and to the Decision Maker with a
+request to strike MF3 from DIRECTION.md, where the ruling of 19a2365 had just installed it as
+standing text. Stated honestly and no wider than measured: "ANDed quoted phrases are broken"
+is REFUTED for the export API and UNTESTED for the web search endpoint. Either way the rule
+is a test, never a prohibition -- query each phrase singly, confirm both non-empty, check the
+ANDed form against a control pair known to intersect, and if the controls pass, the zero is a
+measurement and gets banked as absence.
+
+Why this mattered enough to correct inside the hour: this project's Phase 1 premise IS an
+absence claim about a cell. A standing instruction that forbids measuring absences would have
+made every future leg discard real zeros, silently, since a leg that throws away a zero
+reports nothing unusual. It would have been a worse defect than the one it was meant to fix.
+
+MF1 and MF2 are unaffected and stand. MF1 is a verified spelling fact; MF2 is leg 174's ten
+permanently unrecoverable links. What also stands, strengthened, is the rule underneath them:
+control your instrument before you trust it -- INCLUDING when the instrument is an
+instruction from the orchestrator or the Decision Maker. Leg 314 ran the control on the
+orchestrator's claim rather than taking it on authority, and that is the only reason this was
+caught in one cycle rather than propagating through a dozen legs' novelty passes.
+
+**Over-read closure #5, corrected in plan_of_record.py.** Per the user's external-review
+packet of 2026-08-11: the sentence "No certified viscous blow-up exists in any model, in any
+dimension, today" is false, and it was load-bearing in the file that states the plan. Leg
+174's own banked data refutes it in its own words -- the empty cell means no published work
+applies interval arithmetic to a dissipative FLUID equation's own self-similar object, which
+is narrower than "a viscous certified blow-up". The occupancy matrix has fluid=False, grade=A
+OCCUPIED by DF-CGL (arXiv:2410.05480), which leg 316 has now reproduced row-for-row, and
+Breden-Chu's viscous Burgers is a second Grade-A dissipative object.
+
+The Grade-A/fluid cell really is empty, closed three ways, and leg 309 defended it against a
+claimant last cycle. What was wrong is the claim's WIDTH: a generalisation from one cell to
+every model in every dimension. That is exactly what lesson 91 exists to catch. Phase 1's
+target is unchanged and its rationale does not depend on the wider claim. Corrected at
+plan_of_record.py:47 by integration, which owns that file; the DIRECTION.md sites are the
+DM's, and CLAY_ROADMAP.md:343 and CONTINUATION_PROMPT.md:70 are routed as stated in the
+packet. No ban was touched; test_plan_of_record.py exits 0.
+
+**No link of the L1-L4 chain moved. Clay odds remain ~0.05%.** Not by leg 314, which
+established that a condition cannot presently be checked and named the theorem that would be
+needed; not by leg 292, which measured how long this repository takes to act on its own
+findings. Learning that an instrument cannot verify something is not the same as verifying
+it.

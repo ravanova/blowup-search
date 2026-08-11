@@ -44,8 +44,16 @@ The programme is sequenced deliberately, per this repository's own Route-A disci
 unknowns are never debugged simultaneously): Phase 0 (target selection under the Clay goal,
 constrained by Necas-Ruzicka-Sverak and Tsai's exclusion of nontrivial exactly-backward-
 self-similar 3D NS blow-up) before Phase 1 (the viscous rung -- can ANY model's viscous
-blow-up be certified? No certified viscous blow-up exists in any model, in any dimension,
-today; if it cannot be done in 1D, 3D NS is not a question of compute) before Phase 2 (the
+blow-up be certified? The Grade-A/fluid cell is empty -- no published work applies interval
+arithmetic to a dissipative FLUID equation's own self-similar object -- but Grade-A
+dissipative certification DOES exist off the fluid axis: Dahne-Figueras CGL
+(arXiv:2410.05480), reproduced row-for-row by leg 316, and Breden-Chu's viscous Burgers.
+Corrected from "no certified viscous blow-up exists in any model, in any dimension" per the
+user's external-review packet of 2026-08-11: the cell is empty, the generalisation from that
+cell to every model in every dimension was an over-read (over-read closure #5, after 165,
+180, 185, 178). The Phase-1 rationale is unchanged and does not depend on the wider claim; if
+it cannot be done for a dissipative FLUID equation in 1D, 3D NS is not a question of compute)
+before Phase 2 (the
 3D near-singular viscous solver, `PLAN.md` Stage 4, user-authorized but unscheduled until
 Phase 1 reports -- a 3D candidate with no certification story reproduces Hou-Luo 2013 and
 answers nothing).

@@ -67,8 +67,17 @@ harder, and it does not relax.
   happens when this is missed.
 - **The missing rung is viscous certification, strictly on the Clay path.** Leg 174's own
   occupancy matrix has the Grade-A/fluid cell empty "for want of a target, not a method"; leg
-  242 confirms nobody has filled it since. No certified viscous blow-up exists in any model,
-  in any dimension, today. If it cannot be done in 1D, 3D NS is not a question of compute.
+  242 confirms nobody has filled it since, and leg 309 defended the cell against a claimant
+  (`arXiv:2604.09949`, refuted). **State the gap at its measured width, not wider.** What is
+  empty is the Grade-A/**fluid** cell: no published work applies interval arithmetic to a
+  dissipative *fluid* equation's own self-similar object. Grade-A dissipative certification
+  **does** exist off the fluid axis — Dähne–Figueras CGL (`arXiv:2410.05480`), reproduced
+  row-for-row by leg 316, and Breden–Chu's viscous Burgers. The older phrasing here — "no
+  certified viscous blow-up exists in any model, in any dimension" — was an **over-read
+  (closure #5)** and was corrected on 2026-08-11 per the user's external-review packet;
+  leg 174's own banked data refutes it in leg 174's own words. **The Phase-1 rationale is
+  unchanged and never depended on the wider claim:** if it cannot be done for a dissipative
+  fluid equation in 1D, 3D NS is not a question of compute.
 
 ## What this leg does, and the sequencing that binds every leg after it
 
@@ -162,6 +171,30 @@ counts** (leg 53 logged counts, could not be audited, and was withdrawn).
 > "has anyone done this in the last six months." The one true scooping (Route-F, eleven days)
 > happened on ACTIVE ground — if your leg's cell is active, the recency check stays at full
 > weight.
+
+> **Control your instrument before you trust it** (measured on this run; propagated here by
+> the orchestrator, 2026-08-11). Search tools on this project have lied in three measured
+> ways, and an absence claim is only as good as the instrument that produced it.
+> - **MF1 — spelling variants.** A paper sitting in this project's target cell spells itself
+>   `Navier--Stokes` with a **LaTeX double hyphen**, so a plain search string silently misses
+>   it. Search hyphenated, double-hyphenated and unhyphenated forms, and `self similar`
+>   alongside `self-similar`.
+> - **MF2 — bank links, not counts.** Leg 174 banked counts; **ten of its links are now
+>   permanently unrecoverable.** Bank identifiers.
+> - **An implausible zero is a broken instrument until proven otherwise — but the rule is a
+>   TEST, never a prohibition.** Run a positive control (a query that must return results)
+>   and a negative one. For a suspicious zero from a compound query, query each phrase singly,
+>   confirm both are non-empty, then check the compound form against a control pair you know
+>   intersects. **If the controls pass, the zero is a MEASUREMENT and you bank it as absence.**
+>   Do not discard zeros by rule: this project's Phase-1 premise *is* an absence claim about a
+>   cell, so a habit of throwing zeros away corrupts the record in the direction that matters
+>   most, and silently — a leg that discards a zero reports nothing unusual.
+> - **This applies when the instrument is an INSTRUCTION, including one from the orchestrator
+>   or the Decision Maker.** On 2026-08-11 the orchestrator relayed a rule ("the arXiv
+>   endpoint returns zero for any two ANDed quoted phrases") that was a false generalisation
+>   from one leg's six zeros. **Leg 314 ran the control instead of taking it on authority**
+>   (`"self-similar" AND "blow-up"` → 251 results) and the error was retracted within the
+>   cycle. You have that licence; use it.
 
 **Assess before you run anything long** (user instruction, 2026-08-11, binding on every agent).
 **Before running a script you expect to take longer than 10 minutes, assess it for performance
