@@ -38,8 +38,8 @@ prose as before.
 | J | 287 | EPA | no |
 <!-- FLOOR-TABLE-END -->
 
-(Current snapshot, DM update of 2026-08-11 cycle 4: 6/10 floor-eligible -- A/312/APIA,
-C/323/CENV, D/313/SDSS, E/314/FUS, F/317/SFTX, G/320/MTSC. Cycle-4 headline: 309 NO
+(Current snapshot, DM update of 2026-08-11 cycle 4d: 6/10 floor-eligible -- A/312/APIA,
+C/323/CENV, D/313/SDSS, E/314/FUS, F/315/TMS, G/305/DWM. Cycle-4 headline: 309 NO
 — the claimant (arXiv:2604.09949) is ADJUDICATED-AND-REFUTED (NRS/Tsai excludes its
 own eq. 18 construction); the Grade-A/fluid cell STAYS EMPTY, Phase 1's premise
 stands, no L1-L4 link moved. 302 NO: A4 transcription proven right, IEEE-double
@@ -14558,3 +14558,36 @@ Nothing here lifts a ban — 325's existence is a drafted contingency, not a lif
 its precondition (1) is the user's ruling and only that. No L1-L4 link moved; a
 surviving basis is a candidate space, not a result about the equations. Clay stays
 ~0.05%.
+
+---
+
+## DM update, 2026-08-11 (cycle 4d) — STALE-BASE NEAR MISS ACKNOWLEDGED; REBASE
+PRACTICE ADOPTED AS DM STANDING RULE; SNAPSHOT GLOSS CORRECTED
+
+**Incident acknowledged (orchestrator's catch, filed at c671b70):** the DM's cycle-4c
+commit was written against a base predating leg 319's landing; applied verbatim it
+would have reverted four corrected 6.854 surfaces to the known-wrong 6.855 —
+including live leg 305's own operative spec — with nothing downstream able to catch
+it. The orchestrator's pre-push diff caught it; the two immutable gate-text sites
+were untouched throughout.
+
+**Ruling on the two options — the REBASE, adopted as a DM standing rule:**
+`git fetch origin` + sync to `origin/main` in this checkout BEFORE writing each
+cycle's ruling commit, every cycle, no exceptions. Executed for the first time this
+cycle (checkout verified clean of leg WIP first, then synced to c671b70 exactly —
+all prior DM commits confirmed landed as amended, so nothing was replayed).
+The orchestrator's pre-push diff STAYS as the second layer — a mechanical hazard
+deserves two independent checks, and the human-in-the-loop one just proved it can
+catch what the merge gate cannot. Recorded here so a recreated DM inherits the rule
+with the file rather than re-earning it against live-leg contamination.
+
+**Snapshot gloss corrected in this same edit** (F/315/TMS, G/305/DWM — the prose now
+matches the FLOOR-TABLE and the cycle-4c prose; the machine-readable block was
+already right). Figure-allocation-at-dispatch and the stalled-by-waiting rule noted
+with agreement; 306 into the next vacancy as confirmed.
+
+**Canonical reserve line: unchanged from cycle 4c — reserve count 15 (306, 318, 324,
+322, 293, 298, 299 dispatchable now; 325 user-gated + on 312; 307 on 221; 308 on
+312; 310 on 287+298; 231-234 blocked). Next fresh leg number: 326.**
+
+Nothing here lifts a ban; no L1-L4 link moved; Clay stays ~0.05%.
