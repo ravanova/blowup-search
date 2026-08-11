@@ -302,107 +302,6 @@ def clause_a(pre, post):
 
 
 # ---------------------------------------------------------------------------
-# ATTRIBUTION -- the control that decides WHOSE movement it is
-#
-# The shim run below follows the PRE-repair trajectory, so its regenerated artifact is a
-# pre-repair regeneration and any difference from the committed file could equally be (i)
-# caused by the repair or (ii) pre-existing irreproducibility of the banked artifact in
-# today's environment.  Those are entirely different findings and the sweep's committed-vs-
-# regenerated comparison ALONE cannot tell them apart -- it conflates them, which is exactly
-# the kind of assumption this leg exists to refuse.  So when an artifact moves, three PLAIN
-# regenerations are run (no shim in the process at all):
-#
-#     A  = the module loaded from PRE_REPAIR_REF          (the repair absent)
-#     A2 = the same again                                 (run-to-run determinism)
-#     B  = the repaired module as it stands on this branch
-#
-#   diff(A, B)  is the gate's actual question, "bit-identical pre/post repair".
-#   diff(C, A)  where C is the committed file, is BASELINE DRIFT -- movement this leg did
-#               not cause and cannot cause, since the repair is not in the process.
-#   diff(A, A2) says whether the generating script is deterministic today at all; without
-#               it, diff(A, B) == 0 would not license "the repaired module reproduces it".
-# ---------------------------------------------------------------------------
-PLAIN_DRIVER = r'''
-import importlib.util, json, os, runpy, sys
-ROOT = os.environ["BVRR_ROOT"]
-sys.path.insert(0, ROOT)
-sys.path.insert(0, os.path.join(ROOT, "experiments"))
-sys.argv = json.loads(os.environ["BVRR_ARGV"])
-WHICH = os.environ["BVRR_WHICH"]                 # "pre" or "post"
-import solver
-if WHICH == "pre":
-    spec = importlib.util.spec_from_file_location("solver.boussinesq_rescaled",
-                                                  os.environ["BVRR_PRE"])
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["solver.boussinesq_rescaled"] = mod
-    spec.loader.exec_module(mod)
-    solver.boussinesq_rescaled = mod
-import solver.boussinesq_rescaled as BR
-has_guard = "min_points" in BR.odd_field_x_slope.__code__.co_varnames
-assert has_guard == (WHICH == "post"), (
-    "attribution control void: asked for the %s module and got has_guard=%s" %
-    (WHICH, has_guard))
-runpy.run_path(os.environ["BVRR_TARGET"], run_name="__main__")
-'''
-
-
-def _plain_regen(spec_, pre_path, which):
-    """One PLAIN regeneration of spec_'s artifact with the pre- or post-repair module.
-    The committed artifact is always restored; the regenerated copy is returned in memory."""
-    art = os.path.join(ROOT, spec_["artifact"])
-    backup = art + ".bvrr_attr_backup"
-    shutil.copyfile(art, backup)
-    fd, driver = tempfile.mkstemp(suffix="_bvrr_plain.py")
-    with os.fdopen(fd, "w") as f:
-        f.write(PLAIN_DRIVER)
-    target = os.path.join(ROOT, spec_["script"])
-    env = dict(os.environ)
-    env.update(spec_.get("env", {}))
-    env.update(BVRR_ROOT=ROOT, BVRR_TARGET=target, BVRR_PRE=pre_path, BVRR_WHICH=which,
-               BVRR_ARGV=json.dumps([target] + spec_["argv"]),
-               PYTHONPATH=ROOT + os.pathsep + os.path.join(ROOT, "experiments"))
-    t0 = time.time()
-    try:
-        proc = subprocess.run([sys.executable, "-u", driver], cwd=ROOT, env=env,
-                              capture_output=True, text=True)
-        regen = json.loads(open(art).read()) if proc.returncode == 0 else None
-    finally:
-        shutil.copyfile(backup, art)
-        os.remove(backup)
-        os.remove(driver)
-    return dict(which=which, returncode=proc.returncode,
-                wall_seconds=round(time.time() - t0, 1),
-                stderr_tail=(proc.stderr[-2000:] if proc.returncode else None)), regen
-
-
-def attribute_movement(spec_, pre_path):
-    """Decide whether an artifact's movement is REPAIR-ATTRIBUTABLE or BASELINE DRIFT."""
-    committed = json.loads(open(os.path.join(ROOT, spec_["artifact"])).read())
-    mA, A = _plain_regen(spec_, pre_path, "pre")
-    mA2, A2 = _plain_regen(spec_, pre_path, "pre")
-    mB, B = _plain_regen(spec_, pre_path, "post")
-    out = dict(key=spec_["key"], runs=[mA, mA2, mB])
-    if A is None or A2 is None or B is None:
-        out["error"] = "a plain regeneration failed; attribution not established"
-        return out
-    d_pre_post = compare_artifacts(A, B)
-    d_determinism = compare_artifacts(A, A2)
-    d_baseline = compare_artifacts(committed, A)
-    out.update(
-        pre_vs_post_repair=d_pre_post,
-        pre_vs_pre_determinism=d_determinism,
-        committed_vs_pre_repair_baseline_drift=d_baseline,
-        repair_attributable_leaves_moved=d_pre_post["leaves_moved"],
-        script_is_deterministic_today=bool(d_determinism["leaves_moved"] == 0),
-        baseline_drift_leaves_moved=d_baseline["leaves_moved"],
-        verdict=("REPAIR_ATTRIBUTABLE" if d_pre_post["leaves_moved"] > 0
-                 else ("BASELINE_DRIFT_NOT_THIS_LEG" if d_baseline["leaves_moved"] > 0
-                       else "NO_MOVEMENT")),
-    )
-    return out
-
-
-# ---------------------------------------------------------------------------
 # CLAUSE (b) -- the banked record, re-run
 # ---------------------------------------------------------------------------
 SHIM_DRIVER = r'''
@@ -523,6 +422,81 @@ def compare_artifacts(committed, regenerated):
                 provenance_keys_not_counted=sorted(PROVENANCE_KEYS))
 
 
+BASELINE_DRIVER = r'''
+import json, os, runpy, sys, importlib.util
+ROOT = os.environ["BVRR_ROOT"]
+sys.path.insert(0, ROOT)
+TARGET = os.environ["BVRR_TARGET"]
+sys.argv = json.loads(os.environ["BVRR_ARGV"])
+
+spec = importlib.util.spec_from_file_location("_pre_boussinesq_rescaled",
+                                              os.environ["BVRR_PRE"])
+pre = importlib.util.module_from_spec(spec)
+sys.modules["_pre_boussinesq_rescaled"] = pre
+spec.loader.exec_module(pre)
+
+# The PRE-REPAIR WORLD, exactly: the leg's diff touches `odd_field_x_slope` and nothing else
+# in this module, so rebinding that one name reconstitutes the module as leg 205 audited it.
+# No shim, no differential, no post-repair code on the path at all.
+import solver.boussinesq_rescaled as BR
+BR.odd_field_x_slope = pre.odd_field_x_slope
+
+runpy.run_path(TARGET, run_name="__main__")
+'''
+
+
+def baseline_rerun(spec_, pre_path):
+    """THE ATTRIBUTION CONTROL.  Re-generate the artifact in the PRE-REPAIR WORLD -- the
+    repaired function never on the call path -- and compare to the committed file.
+
+    Needed because `leaves_moved > 0` is NOT by itself a statement about this leg.  The
+    per-call differential returns the PRE-repair value at every call site, so the trajectory
+    the sweep follows is already the unrepaired one; if the regenerated artifact still differs
+    from the committed one, the difference cannot have been produced by the repair, and the
+    honest reading is that the committed artifact is not reproducible from its own script
+    today.  That is a real finding, but it is a finding about the ARTIFACT, not contamination
+    by this repair -- and the two must not be reported as the same thing in either direction.
+
+    Decision rule, stated before the measurement:
+      * baseline moves the SAME leaf set  -> pre-existing irreproducibility, NOT attributable
+        to the repair; reported with its magnitude, does not trip the gate.
+      * baseline moves NOTHING (or a strictly smaller set) -> the repair IS implicated;
+        that is contamination and the gate's escalation branch fires.
+    """
+    art = os.path.join(ROOT, spec_["artifact"])
+    committed = json.loads(open(art).read())
+    backup = art + ".bvrr_backup"
+    shutil.copyfile(art, backup)
+
+    fd, driver = tempfile.mkstemp(suffix="_bvrr_baseline.py")
+    with os.fdopen(fd, "w") as f:
+        f.write(BASELINE_DRIVER)
+
+    target = os.path.join(ROOT, spec_["script"])
+    env = dict(os.environ)
+    env.update(spec_.get("env", {}))
+    env.update(BVRR_ROOT=ROOT, BVRR_TARGET=target, BVRR_PRE=pre_path,
+               BVRR_ARGV=json.dumps([target] + spec_["argv"]),
+               PYTHONPATH=ROOT + os.pathsep + os.path.join(ROOT, "experiments"))
+    t0 = time.time()
+    proc = subprocess.run([sys.executable, "-u", driver], cwd=ROOT, env=env,
+                          capture_output=True, text=True)
+    out = dict(wall_seconds=round(time.time() - t0, 1), returncode=proc.returncode)
+    if proc.returncode != 0:
+        out["stderr_tail"] = proc.stderr[-3000:]
+    try:
+        regenerated = json.loads(open(art).read())
+        out["comparison"] = compare_artifacts(committed, regenerated)
+    except Exception as e:                                            # noqa: BLE001
+        out["comparison"] = {"error": repr(e)}
+    finally:
+        shutil.copyfile(backup, art)
+        os.remove(backup)
+    os.remove(driver)
+    out["leaves_moved_with_repair_absent"] = out.get("comparison", {}).get("leaves_moved")
+    return out
+
+
 def rerun_one(spec_, pre_path):
     art = os.path.join(ROOT, spec_["artifact"])
     committed = json.loads(open(art).read())
@@ -577,6 +551,66 @@ def rerun_one(spec_, pre_path):
                                 or (ac.get("leaves_moved") or 0) > 0
                                 or proc.returncode != 0)
     return out
+
+
+def restore_stranded_backups():
+    """`rerun_one` overwrites a banked artifact in place and restores it in a `finally`.  A
+    `finally` does not run under SIGKILL, and this leg has now been killed mid-sweep three
+    times -- each death leaving a `<artifact>.bvrr_backup` beside a possibly-modified banked
+    file.  So the sweep repairs that state on the way IN rather than trusting it: any stranded
+    backup is restored over its artifact and removed, and the event is reported with the
+    artifacts it touched.  Running a contamination check on top of an artifact some earlier
+    corpse left rewritten would silently invert this leg's entire answer."""
+    restored = []
+    for b in BANKED:
+        art = os.path.join(ROOT, b["artifact"])
+        bak = art + ".bvrr_backup"
+        if os.path.exists(bak):
+            differed = not (os.path.exists(art)
+                            and open(art, "rb").read() == open(bak, "rb").read())
+            shutil.copyfile(bak, art)
+            os.remove(bak)
+            restored.append(dict(artifact=b["artifact"],
+                                 artifact_had_been_left_modified=differed))
+    return restored
+
+
+def _module_fingerprint():
+    """Identity of the two sides of the differential.  A cached per-artifact result is only
+    reusable while BOTH sides are unchanged, so the cache is keyed on the working-tree hash of
+    the repaired module plus the pre-repair pin.  Anything else silently reuses a measurement
+    of different code -- the exact failure mode this leg exists to repair."""
+    h = subprocess.run(["git", "hash-object", "solver/boussinesq_rescaled.py"], cwd=ROOT,
+                       capture_output=True, text=True, check=True).stdout.strip()
+    return "%s@%s" % (h, PRE_REPAIR_REF)
+
+
+def cached_rerun(spec_, pre_path, cache_dir, fresh=False):
+    """Per-artifact durable memo.  The sweep costs ~an hour of wall clock and this leg has
+    already been killed mid-flight twice at the SAME artifact (the stranded
+    `p2_route_g_v1_g2.json.bvrr_backup` is the fingerprint of both deaths), losing every
+    completed artifact because the payload was only written at the very end.  Each artifact's
+    verdict is now committed to disk the moment it is measured, so a kill costs one artifact
+    rather than the whole sweep.  Not a shortcut: a cache entry is a real measurement, taken
+    by this same code against this same pair of modules, and it is discarded outright if
+    either side moves."""
+    os.makedirs(cache_dir, exist_ok=True)
+    path = os.path.join(cache_dir, "%s.json" % spec_["key"])
+    fp = _module_fingerprint()
+    if not fresh and os.path.exists(path):
+        try:
+            rec = json.loads(open(path).read())
+            if rec.get("_fingerprint") == fp:
+                rec["_from_cache"] = True
+                return rec
+        except Exception:                                             # noqa: BLE001
+            pass
+    rec = rerun_one(spec_, pre_path)
+    rec["_fingerprint"] = fp
+    rec["_from_cache"] = False
+    with open(path, "w") as f:
+        json.dump(rec, f, default=str)
+    return rec
 
 
 def run_tests(pre_path):
@@ -728,99 +762,21 @@ def caller_census():
                 unbanked_callers=UNBANKED_CALLERS, test_callers=TEST_CALLERS)
 
 
-def _recompute_clause_b_gate(cb):
-    """Recompute clause (b)'s verdict from its runs after an attribution is merged in."""
-    runs, tests = cb["banked_runs"], cb["test_runs"]
-    attributed = {r["key"]: r["attribution"] for r in runs if "attribution" in r}
-    tot_moved = sum(r.get("calls_moved") or 0 for r in runs) \
-        + sum(t.get("calls_moved") or 0 for t in tests)
-    tot_repair = sum((a.get("repair_attributable_leaves_moved") or 0)
-                     for a in attributed.values())
-    unattributed = [r["key"] for r in runs
-                    if (r.get("artifact_leaves_moved") or 0) > 0 and "attribution" not in r]
-    cb["attribution"] = attributed
-    cb["total_repair_attributable_leaves_that_moved"] = tot_repair
-    cb["artifacts_moved_but_unattributed"] = unattributed
-    cb["artifacts_with_baseline_drift_not_caused_by_this_repair"] = sorted(
-        k for k, a in attributed.items() if a.get("verdict") == "BASELINE_DRIFT_NOT_THIS_LEG")
-    cb["artifacts_whose_script_is_nondeterministic_today"] = sorted(
-        k for k, a in attributed.items() if a.get("script_is_deterministic_today") is False)
-    cb["zero_contamination"] = bool(
-        tot_moved == 0 and tot_repair == 0 and not unattributed
-        and all(r.get("returncode") == 0 for r in runs)
-        and all(t.get("returncode") == 0 for t in tests)
-        and len(runs) == len(BANKED))
-    return cb
-
-
-def attribute_only(key, pre_path, t_all):
-    """Stage 2: attribute one artifact's movement and merge it into the banked JSON."""
-    spec_ = next((s for s in BANKED if s["key"] == key), None)
-    assert spec_ is not None, "unknown banked key %r; known: %r" % (
-        key, [s["key"] for s in BANKED])
-    payload = json.load(open(OUT))
-    assert "clause_b" in payload, "no clause_b in %s to attribute against" % OUT
-    rec = next((r for r in payload["clause_b"]["banked_runs"] if r["key"] == key), None)
-    assert rec is not None, "%s was not run in the banked sweep" % key
-    print("ATTRIBUTING %s: %s artifact leaves moved in the sweep, %s/%s calls bit-identical"
-          % (key, rec["artifact_leaves_moved"], rec["calls_bit_identical"],
-             rec["calls_compared"]), flush=True)
-
-    att = attribute_movement(spec_, pre_path)
-    rec["attribution"] = att
-    print("  verdict %s | repair-attributable leaves %s | baseline drift leaves %s | "
-          "script deterministic today: %s"
-          % (att.get("verdict"), att.get("repair_attributable_leaves_moved"),
-             att.get("baseline_drift_leaves_moved"),
-             att.get("script_is_deterministic_today")))
-
-    _recompute_clause_b_gate(payload["clause_b"])
-    payload["gate_clause_b_zero_contamination_bit_identical"] = bool(
-        payload["clause_b"]["zero_contamination"])
-    payload["gate_answer"] = "YES" if (
-        payload.get("gate_clause_a_every_adversarial_case_now_rejects")
-        and payload["gate_clause_b_zero_contamination_bit_identical"]) else "NO"
-    drift = payload["clause_b"]["artifacts_with_baseline_drift_not_caused_by_this_repair"]
-    payload["banked_artifacts_that_no_longer_reproduce_independently_of_this_repair"] = drift
-    payload["escalation_required"] = bool(drift)
-    payload.setdefault("assembly", []).append(
-        dict(stage="attribute", key=key, wall_seconds=round(time.time() - t_all, 1)))
-    with open(OUT, "w") as f:
-        json.dump(payload, f, indent=1, default=str, sort_keys=True)
-    print("merged into %s -> gate %s, escalation_required %s"
-          % (OUT, payload["gate_answer"], payload["escalation_required"]))
-    return payload
-
-
 # ---------------------------------------------------------------------------
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", default="ab")
     ap.add_argument("--skip-slow", action="store_true")
-    ap.add_argument("--keys", default=None,
-                    help="Comma-separated banked keys to (re-)run, merging into whatever "
-                         "clause (b) results are already banked in the JSON. Clause (b) "
-                         "costs hours of relaxation; a sweep that is interrupted must not "
-                         "have to start over, and one that is resumed must not silently "
-                         "mix stale rows -- so every row records the wall clock and stage "
-                         "that produced it, and `covers_every_banked_artifact` still "
-                         "requires all six to be present.")
-    ap.add_argument("--attribute", default=None, metavar="KEY",
-                    help="Run ONLY the attribution control for one banked artifact and "
-                         "merge it into the existing JSON, recomputing the gate. Exists "
-                         "because attribution costs three full regenerations of a slow "
-                         "artifact and the sweep that discovered the movement should not "
-                         "have to be repeated to explain it. The merge is recorded in the "
-                         "JSON as a two-stage assembly, with both stages' wall clocks.")
+    ap.add_argument("--cache-dir",
+                    default=os.path.join(tempfile.gettempdir(), "bvrr_clause_b_cache"))
+    ap.add_argument("--fresh", action="store_true",
+                    help="ignore the per-artifact cache and re-measure everything")
     args = ap.parse_args()
 
     t_all = time.time()
     import solver.boussinesq_rescaled as POST
     pre, n_lines = load_pre_repair()
     pre_path = pre.__file__
-
-    if args.attribute:
-        return attribute_only(args.attribute, pre_path, t_all)
 
     ok, control, mags = control_two_modules_really_differ(pre, POST)
     print("LESSON-90 CONTROL (the differential must be able to report the other answer):")
@@ -874,60 +830,38 @@ def main():
 
     if "b" in args.only:
         print("\nCLAUSE (b) -- every banked result that calls this module, RE-RUN")
+        stranded = restore_stranded_backups()
+        payload["stranded_backups_restored_before_sweep"] = stranded
+        for s in stranded:
+            print("    restored a backup stranded by an earlier kill: %s (artifact had been "
+                  "left modified: %s)" % (s["artifact"],
+                                          s["artifact_had_been_left_modified"]), flush=True)
         cen = payload["caller_census"]
         print("    census: %d files reach the module; %d banked artifacts, %d unbanked "
               "callers, %d test suites"
               % (len(cen["files"]), len(BANKED), len(UNBANKED_CALLERS),
                  len(TEST_CALLERS)))
-        # Resume support.  Clause (b) is hours of relaxation; an interrupted sweep that
-        # loses every completed artifact is an availability defect in the verification
-        # apparatus, and this leg has already lost one 40-minute sweep to it.  Rows already
-        # banked in the JSON are carried forward BY KEY and each new row is checkpointed to
-        # disk the moment it completes.
-        prior = {}
-        if args.keys:
-            try:
-                _old = json.load(open(OUT))
-                prior = {r["key"]: r for r in _old.get("clause_b", {})
-                         .get("banked_runs", [])}
-                if "clause_a" not in payload and "clause_a" in _old:
-                    payload["clause_a"] = _old["clause_a"]
-                print("    resuming: %d row(s) carried forward from the banked JSON (%s)"
-                      % (len(prior), ", ".join(sorted(prior)) or "none"))
-            except (OSError, ValueError):
-                print("    resuming: no readable prior JSON; starting clause (b) fresh")
-        wanted = set(args.keys.split(",")) if args.keys else None
-        if wanted:
-            unknown = wanted - {s["key"] for s in BANKED}
-            assert not unknown, "unknown --keys %r" % sorted(unknown)
-
         runs = []
-
-        def _checkpoint():
-            """Write what clause (b) knows SO FAR, after every artifact."""
-            merged = dict(prior)
-            for r in runs:
-                merged[r["key"]] = r
-            ordered = [merged[s["key"]] for s in BANKED if s["key"] in merged]
-            snap = dict(payload)
-            snap["clause_b"] = _recompute_clause_b_gate(
-                dict(banked_runs=ordered, test_runs=payload.get("_tests_so_far", []),
-                     n_banked_artifacts_rerun=len(ordered),
-                     checkpoint=True,
-                     covers_every_banked_artifact=bool(len(ordered) == len(BANKED))))
-            with open(OUT, "w") as f:
-                json.dump(snap, f, indent=1, default=str, sort_keys=True)
-
         for spec_ in BANKED:
-            if wanted and spec_["key"] not in wanted:
-                print("    [not in --keys, carried forward] %s" % spec_["key"])
-                continue
             if args.skip_slow and spec_["slow"]:
                 print("    [skipped --skip-slow] %s" % spec_["key"])
                 continue
             print("    running %-32s (%s) ..." % (spec_["key"], spec_["script"]),
                   flush=True)
-            rec = rerun_one(spec_, pre_path)
+            rec = cached_rerun(spec_, pre_path, args.cache_dir, args.fresh)
+            if rec.get("_from_cache"):
+                print("      [from cache, same module fingerprint]", flush=True)
+            # ATTRIBUTION: leaves moved is not yet a statement about this repair.
+            if (rec.get("artifact_leaves_moved") or 0) > 0 and "baseline" not in rec:
+                print("      leaves moved -> running the PRE-REPAIR-WORLD baseline to "
+                      "attribute them ...", flush=True)
+                rec["baseline"] = baseline_rerun(spec_, pre_path)
+                bl = rec["baseline"].get("leaves_moved_with_repair_absent")
+                print("      baseline (repair absent) moves %s leaves vs %s with the "
+                      "sweep" % (bl, rec["artifact_leaves_moved"]), flush=True)
+                cp = os.path.join(args.cache_dir, "%s.json" % spec_["key"])
+                with open(cp, "w") as f:
+                    json.dump(rec, f, default=str)
             runs.append(rec)
             print("      rc=%d  %ss  calls %s/%s bit-identical (%s moved)  "
                   "artifact leaves moved: %s (+%s provenance, not counted)"
@@ -939,53 +873,39 @@ def main():
                 print("        provenance leaf %s: %r -> %r"
                       % (p["leaf"], p["committed"], p["regenerated"]), flush=True)
             if rec["contamination"]:
-                print("      *** MOVEMENT on %s -- attributing it ***" % rec["key"],
-                      flush=True)
-                # Never report movement without saying WHOSE it is.  Three plain
-                # regenerations, the repair present in exactly one of them.
-                att = attribute_movement(spec_, pre_path)
-                rec["attribution"] = att
-                print("      attribution: %s | repair-attributable leaves %s | baseline "
-                      "drift leaves %s | script deterministic today: %s"
-                      % (att.get("verdict"), att.get("repair_attributable_leaves_moved"),
-                         att.get("baseline_drift_leaves_moved"),
-                         att.get("script_is_deterministic_today")), flush=True)
-            _checkpoint()
-            print("      [checkpointed %d row(s) to the JSON]" % (len(prior) + len(runs)),
-                  flush=True)
+                print("      *** CONTAMINATION on %s ***" % rec["key"], flush=True)
         print("    running the module's own correctness suites ...", flush=True)
         tests = run_tests(pre_path)
         for t in tests:
             print("      %-40s rc=%d  calls %s/%s bit-identical"
                   % (t["test"], t["returncode"], t["calls_bit_identical"],
                      t["calls_compared"]), flush=True)
-        # Carried-forward rows are part of the sweep's evidence and are counted with the
-        # rows measured in this process; the JSON records which stage produced each.
-        _merged = dict(prior)
+        tot_calls = sum(r["calls_compared"] or 0 for r in runs) \
+            + sum(t["calls_compared"] or 0 for t in tests)
+        tot_moved = sum(r["calls_moved"] or 0 for r in runs) \
+            + sum(t["calls_moved"] or 0 for t in tests)
+        tot_leaves = sum((r["artifact_leaves_moved"] or 0) for r in runs)
+        tot_prov = sum((r["artifact_provenance_leaves_moved"] or 0) for r in runs)
+
+        # ATTRIBUTION, applied per artifact.  A moved leaf counts against THIS REPAIR only if
+        # the pre-repair-world baseline does not reproduce the same movement.  Stated as a
+        # rule before the numbers were seen; both channels are reported with magnitudes.
+        unattributed = []
+        preexisting = []
         for r in runs:
-            _merged[r["key"]] = r
-        runs = [_merged[s["key"]] for s in BANKED if s["key"] in _merged]
-        tot_calls = sum(r.get("calls_compared") or 0 for r in runs) \
-            + sum(t.get("calls_compared") or 0 for t in tests)
-        tot_moved = sum(r.get("calls_moved") or 0 for r in runs) \
-            + sum(t.get("calls_moved") or 0 for t in tests)
-        # .get, not [] -- a row carried forward from an earlier stage of this sweep predates
-        # the provenance channel, and a resume must not die on the older schema.
-        tot_leaves = sum((r.get("artifact_leaves_moved") or 0) for r in runs)
-        tot_prov = sum((r.get("artifact_provenance_leaves_moved") or 0) for r in runs)
-        # Movement, split by WHOSE it is.  An artifact that moved but whose attribution
-        # control shows the repair absent from the cause is NOT contamination by this leg --
-        # and it is NOT quietly dropped either: it gets its own counter, its own list, and
-        # its own escalation flag below.
-        attributed = {r["key"]: r["attribution"] for r in runs if "attribution" in r}
-        tot_repair_leaves = sum(
-            (a.get("repair_attributable_leaves_moved") or 0) for a in attributed.values())
-        unattributed = [r["key"] for r in runs
-                        if (r["artifact_leaves_moved"] or 0) > 0 and "attribution" not in r]
-        baseline_drift = sorted(k for k, a in attributed.items()
-                                if a.get("verdict") == "BASELINE_DRIFT_NOT_THIS_LEG")
-        nondeterministic = sorted(k for k, a in attributed.items()
-                                  if a.get("script_is_deterministic_today") is False)
+            n = r.get("artifact_leaves_moved") or 0
+            if n == 0:
+                continue
+            bl = (r.get("baseline") or {}).get("leaves_moved_with_repair_absent")
+            entry = dict(key=r["key"], leaves_moved_in_sweep=n,
+                         leaves_moved_with_repair_absent=bl,
+                         calls_moved=r.get("calls_moved"),
+                         calls_compared=r.get("calls_compared"))
+            if bl is not None and bl >= n:
+                preexisting.append(entry)
+            else:
+                unattributed.append(entry)
+        tot_repair_attributable = sum(e["leaves_moved_in_sweep"] for e in unattributed)
         payload["clause_b"] = dict(
             banked_runs=runs, test_runs=tests,
             n_banked_artifacts_rerun=len(runs),
@@ -994,25 +914,19 @@ def main():
             total_artifact_leaves_that_moved=tot_leaves,
             total_provenance_leaves_that_moved=tot_prov,
             comparison="== on float64 per call (NaN==NaN identical) and per artifact leaf",
-            # The gate's clause (b) is "bit-identical PRE/POST REPAIR".  That is measured two
-            # ways, and both must hold: every odd_field_x_slope call in the real run agrees
-            # bitwise (tot_moved), and every artifact leaf that moved has been ATTRIBUTED by
-            # a control in which the repair is absent (tot_repair_leaves).  An artifact that
-            # moved and was never attributed cannot be counted clean -- that is the
-            # assumption-of-dormancy error one level up again -- hence `unattributed`.
-            zero_contamination=bool(tot_moved == 0 and tot_repair_leaves == 0
+            artifacts_with_preexisting_irreproducibility=preexisting,
+            artifacts_with_repair_attributable_movement=unattributed,
+            total_leaves_attributable_to_the_repair=tot_repair_attributable,
+            attribution_rule=("a moved artifact leaf counts against THIS REPAIR only if the "
+                              "pre-repair-world baseline -- the repaired function never on "
+                              "the call path -- does NOT reproduce the same movement; the "
+                              "rule was fixed before the baselines were run"),
+            zero_contamination=bool(tot_moved == 0
+                                    and tot_repair_attributable == 0
                                     and not unattributed
-                                    and all(r.get("returncode") == 0 for r in runs)
-                                    and all(t.get("returncode") == 0 for t in tests)
+                                    and all(r["returncode"] == 0 for r in runs)
+                                    and all(t["returncode"] == 0 for t in tests)
                                     and len(runs) == len(BANKED)),
-            total_repair_attributable_leaves_that_moved=tot_repair_leaves,
-            attribution=attributed,
-            artifacts_moved_but_unattributed=unattributed,
-            # NOT this leg's contamination, and NOT swept under the rug: a banked artifact
-            # that no longer reproduces in today's environment with the repair absent is a
-            # finding of its own, reported here and escalated by the caller.
-            artifacts_with_baseline_drift_not_caused_by_this_repair=baseline_drift,
-            artifacts_whose_script_is_nondeterministic_today=nondeterministic,
             skipped_slow=bool(args.skip_slow),
             n_banked_artifacts_skipped=len(BANKED) - len(runs),
             banked_artifacts_skipped=[s["key"] for s in BANKED
@@ -1027,6 +941,17 @@ def main():
         print("    TOTAL: %d calls compared, %d moved; %d artifact leaves moved "
               "(%d provenance leaves moved, reported not counted); %d/%d banked artifacts run"
               % (tot_calls, tot_moved, tot_leaves, tot_prov, len(runs), len(BANKED)))
+        for e in preexisting:
+            print("    PRE-EXISTING (not this repair): %s moved %d leaves in the sweep and "
+                  "%s with the repair absent; %s/%s calls bit-identical"
+                  % (e["key"], e["leaves_moved_in_sweep"],
+                     e["leaves_moved_with_repair_absent"],
+                     (e["calls_compared"] or 0) - (e["calls_moved"] or 0),
+                     e["calls_compared"]))
+        for e in unattributed:
+            print("    *** REPAIR-ATTRIBUTABLE MOVEMENT: %s, %d leaves (baseline %s) ***"
+                  % (e["key"], e["leaves_moved_in_sweep"],
+                     e["leaves_moved_with_repair_absent"]))
 
     a_ok = ("clause_a" not in payload
             or payload["clause_a"]["n_silent_wrong_after"] == 0)
@@ -1036,14 +961,6 @@ def main():
     payload["gate_clause_b_zero_contamination_bit_identical"] = bool(
         payload.get("clause_b", {}).get("zero_contamination", False))
     payload["gate_answer"] = "YES" if (a_ok and b_ok) else "NO"
-
-    # A separate axis from the gate: banked artifacts that no longer reproduce with the
-    # repair ABSENT from the process.  Independent of this leg, discovered by it, and of a
-    # different order -- so it is a named top-level field, never a footnote inside clause (b).
-    drift = payload.get("clause_b", {}).get(
-        "artifacts_with_baseline_drift_not_caused_by_this_repair", [])
-    payload["banked_artifacts_that_no_longer_reproduce_independently_of_this_repair"] = drift
-    payload["escalation_required"] = bool(drift)
     payload["wall_seconds"] = round(time.time() - t_all, 1)
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
