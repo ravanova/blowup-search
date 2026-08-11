@@ -4560,3 +4560,130 @@ with integration registering is the rule in every dispatch brief from here.
 **No link of the L1-L4 chain moved. Clay odds remain ~0.05%** — and note explicitly that
 arXiv:2604.09949, if it holds, would be someone else's result and still not this
 repository moving a link.
+
+## Cycle 4, 2026-08-11 — legs 302, 309, 316, 317, 319
+
+Five legs closed. One of them answered the question that had been hanging over the whole
+programme since cycle 3, and it answered it against the claimant.
+
+**Leg 309 (Route-GAF2) — gate NO. The claimant in the empty cell breaks.** Landed at
+`5145002`. Leg 303 found arXiv:2604.09949 claiming a computer-assisted Newton-Kantorovich +
+interval-arithmetic validation on 3D INCOMPRESSIBLE Navier-Stokes on T^3 -- the exact cell
+this repository's Phase 1 records as empty. Leg 309 read the full text adversarially, under
+an explicit instruction that it was not permitted to want either answer, and that if the
+paper held, that was the correct answer and not a defeat. It does not hold.
+
+The method matters as much as the verdict: the leg enumerated 14 load-bearing items FIRST
+and adjudicated them afterwards, so the finding could not be assembled backwards from a
+conclusion. Every independently recomputable constant CHECKS OUT -- K, C_rec^map, and the NK
+closure product all reproduce. The break is structural, not arithmetic. The breaking
+hypothesis is quoted verbatim (Theorem 12.1, eq. 18, Son.tex l.523-535, cross-checked
+pixel-for-pixel against the official rendered PDF page 9):
+
+    u(x,t) = (1/sqrt(T*-t)) * ubar(x/sqrt(T*-t))
+
+That is an exact backward self-similar 3D NS solution with a smooth, Gevrey-decaying (hence
+L^3(R^3)) nontrivial profile -- precisely the class Necas-Ruzicka-Sverak (1996) and Tsai
+(1998) prove must be trivial. The paper never cites either result and never addresses the
+obstruction. Independently confirmed by a full-text read this repository had ALREADY done in
+an earlier leg, which the mandatory novelty pass surfaced from solver/target_selection.py --
+the novelty pass earning its place again. Three secondary non-load-bearing breaks also found.
+Leg 309 rates its own confidence high and says why: a decades-old classical exclusion theorem
+applied to a construction that is, by the paper's own equations, squarely inside the excluded
+class.
+
+Consequences, recorded at the strength they were measured: the Grade-A/fluid cell STAYS
+EMPTY; Phase 1's premise is unchanged and was never recorded as broken; leg 303's row
+resolves from `claimed 1, ESTABLISHED 0` to `claimed 1, established 0,
+adjudicated-and-refuted`. The reproduction/adjudication lane is now three-for-three (legs 61,
+256, 309). And the thing that must be said plainly: refuting somebody else's claim is not
+this repository moving a link. The cell being empty is the state the programme already
+assumed.
+
+**Leg 302 (Route-P2T1) — gate NO.** Landed at `55166b8`. Built BCG term A4 (adiabatic/gamma-law
+pressure), chosen from leg 285's own banked fields rather than judgement: A15a is 285's
+explicitly cheapest term but is OFF the critical path, so the cheapest LOAD-BEARING term is
+A4, the head of 285's measured path A4->A1->A2->A9->A8->A13->A14 and its only in-degree-0
+term. Gate NO with both halves pre-registered: 10/11 known-answer probes pass, KA8 fails at
+129.048x its 1e-9 tolerance (|k(1)-1| = 1.29e-07); negative controls 5/5, self-tests 14/14,
+and every must-fail plant probe failed at its pre-stated magnitude.
+
+The failure was DIAGNOSED BEFORE IT WAS BELIEVED, which is now this repository's habit and
+not its exception. Mechanism named (lesson 91): transcription correct, evaluation
+ill-conditioned. At 60 digits k(1)=1 exactly and k(7/6)=16.347921051661395 reproduces legs
+265/266 -- so the transcription is PROVEN right, not assumed right. In IEEE double, BCG's R2
+radicand is a sum of terms of magnitude up to 24.5280 that cancels to exactly zero at r=1
+(BCG say so in words at l.603), so it evaluates to 1.22e-14 of rounding dust and the square
+root turns that into ~1e-7 in k -- half the digits, lost to conditioning. The defect decays
+to 5.15e-14 relative by r=7/6.
+
+The consequence is a re-ranking of the apparatus programme, not a null result: A15a (ball
+arithmetic) is a PREREQUISITE of 285's critical path near r=1, not the off-path convenience
+285 ranked it as. The DM has re-scoped leg 308 accordingly, with A4's KA8 as its
+pre-registered acceptance case. A rework flag on 285's spec (its I/O contracts carry no
+precision/conditioning column) was recommended and never applied by the leg; the DM applied
+it as append-only addendum leg 324, leaving 285's existing text byte-intact. New artifact: a
+probe x plant detection-threshold ledger spanning 5.55e-16 (one ULP) to 8.32e-03 -- ten and a
+half orders of magnitude, with every blind cell named rather than hidden.
+
+**Leg 316 (Route-DFRE) — gate YES.** Landed at `a863de2`. The standing CAP-reproduction lane's
+first entry: DF-CGL (arXiv:2410.05480) reproduced not from its equations but from its OWN
+RELEASED PROOF-WITNESS DATA (CGL.jl @ be034923, pinned to the paper's own bibliography
+commit), decoded from arb_dump_str in exact dyadic-rational arithmetic and checked against
+the paper's own Thm 4.1/Sec.6 box-chaining corollary. YES on all 49,465 rows of branch Case I
+j=1 plus both connection points, with the decoder cross-checked against the paper's own
+printed Sec.6 starting point. This is a reproduction: it says their proof data is
+self-consistent under their own stated criterion. It is not this repository proving anything
+about Navier-Stokes.
+
+**Leg 317 (Route-SFTX) — gate NO, and the NO is the finding.** Landed at `1bc3977`. Asked
+whether this repository's two measured silent-failure families are literature-novel enough to
+warrant a taxonomy write-up. They are not, so the write-up was NOT drafted and the prior-art
+map was banked instead -- the correct action on a NO, and worth recording because the
+tempting action was to write the document anyway. Family A (legs 79/98/116/128/140/142) was
+already settled folklore per leg 79's own pass. Family B is the sharper result and cuts
+against the assignment's own framing: legs 202/237's "scale-invariant test blind to
+scaling-family escape" is not an unnoticed defect, it is the NAMED JUSTIFICATION for an
+entire existing methodology -- Beyn-Thummler 2004 freezing/phase-condition, pseudo-arclength
+continuation, and the dynamic-rescaling normalization literature. Older and broader than the
+brief anticipated. Magnitudes carried with their locators: leg 202 M1 c(a=1.5) =
+0.20427/0.23717/0.97282 at n=101/201/301 -- 376% apart, every one of them "converged" at
+machine precision. Ran with spelling variants per MF1, banked links not counts per MF2.
+
+**Leg 319 (Route-P0TCR) — gate NO, and it set a standing rule.** Landed at `f213be7` via a
+landing agent after the DM's ruling. Corrected 5 of 7 landed surfaces carrying the wrong
+width ratio 6.855 (correct: the closed form (7+3sqrt(5))/2 = 6.854, per leg 300), found no
+8th, and DECLINED to correct the remaining 2 because they are leg 300's own dispatched gate
+text. Its reasoning -- a pre-committed gate records what was ASKED, and editing it would
+corrupt the audit trail that caught the wrong digit in the first place -- has been adopted by
+the DM as a standing rule binding every leg: DISPATCHED GATE TEXT IS IMMUTABLE. The two sites
+get CORRECTIONS.md pointers from leg 321, never edits. The 5/7 banks as complete.
+
+The landing itself produced a second small lesson. The landing agent was instructed to
+renumber leg 319's CORRECTIONS.md section from Sec.13 to Sec.14 for the collision with leg
+280. It checked main first, found 280 in fact occupies BOTH Sec.13 and Sec.14, and took
+Sec.15 rather than recreate the exact collision the renumbering exists to prevent -- then
+recorded the deviation explicitly in its own commit message rather than silently complying.
+That is the behaviour the contract wants from an instruction that turns out to be wrong on
+contact with the repository.
+
+**Figure hygiene: the sixth and seventh independent collisions, one of them the
+orchestrator's own error.** Leg 316 landed claiming fig71, which leg 303 already held -- and
+that collision is mine: I told 316 mid-run to move off fig70 onto fig71, having myself
+renumbered 303's collided fig68 into fig71 the same cycle. 303 landed first and keeps fig71;
+316 moves to fig74, evidence script re-run, 16/16 checks OK. Leg 302 landed on fig69, which
+was RESERVED to parked leg 301 -- a landed artifact takes precedence over a reservation held
+by a branch with no files on main and no certainty of ever merging, so 302 keeps fig69 and
+301's reservation moves to fig75. Leg 302's quartet gap (a --figure flag but no file) was
+closed by integration re-running the runner with the flag: the only JSON delta is
+emitted_this_run_to, gate unchanged at NO, self-tests still 14/14. Leg 311's fig70 gap is NOT
+closed -- it has no emitter at all, and leg 322 is drafted to produce-or-correct it.
+
+Seven collisions in three cycles is an instrument finding about this orchestration and not
+about the mathematics: legs choose figure numbers in parallel from a shared list they have no
+way to lock. Filed to reports/ORCH_STATE.md.
+
+**No link of the L1-L4 chain moved. Clay odds remain ~0.05%.** Not by leg 309's refutation,
+which restores an assumption rather than advancing one; not by leg 316's reproduction, which
+is someone else's proof checked against someone else's data; not by leg 302's diagnosis,
+which re-ranks apparatus that has not been built.
