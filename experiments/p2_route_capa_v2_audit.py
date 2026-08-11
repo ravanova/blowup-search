@@ -237,6 +237,63 @@ def artifact_references(rows: list[dict]) -> list[dict]:
     return out
 
 
+def vacuity_axis(tests: list[str]) -> list[dict]:
+    """S8: is a GREEN result meaningful, or did the file exit 0 having run nothing?
+
+    This repo runs `<python> test_x.py` -- there is no pytest.  A file written in the
+    pytest style (`def test_*` functions, no `__main__` block, no module-level calls)
+    therefore imports cleanly, defines some functions, and exits 0 WITHOUT EXECUTING A
+    SINGLE ASSERTION.  It is green, it is worthless, and every existence-based check in
+    the repository passes it.  Leg 71 tracked this as `S2_runtime_noop`.
+
+    Classification:
+      "main-block"      has `if __name__ == "__main__":` -> the calls happen there
+      "module-level"    no main block, but 0 `def test_` and real top-level statements
+                        (the `gate(...)`/`sys.exit(n_fail)` script style this repo uses)
+      "VACUOUS"         `def test_` functions AND no main block -> nothing runs
+    """
+    out = []
+    for t in tests:
+        p = ROOT / t
+        if not p.exists():
+            out.append({"test": t, "style": "missing", "n_test_defs": 0})
+            continue
+        src = p.read_text(errors="replace")
+        n_defs = len(re.findall(r"^def test_", src, re.M))
+        has_main = "__main__" in src
+        if has_main:
+            style = "main-block"
+        elif n_defs == 0:
+            style = "module-level"
+        else:
+            style = "VACUOUS"
+        out.append({"test": t, "style": style, "n_test_defs": n_defs,
+                    "has_main_block": has_main})
+    return out
+
+
+def merge_gate_coverage(rows: list[dict]) -> list[dict]:
+    """S7: does scripts/merge_gate.sh's OWN name mapping resolve for each module?
+
+    The merge gate maps a changed `solver/<name>.py` to `test_<name>.py` at the repo
+    root and runs it only IF that file exists.  A module whose test is named anything
+    else is therefore ungated: editing it triggers no test at merge time, however good
+    the test cited in this index is.  Leg 71 measured this and flagged 6 of 42 rows
+    `S4_ungated_by_merge_gate`; re-measured here at HEAD for the cross-generation delta.
+    """
+    out = []
+    for r in rows:
+        stem = Path(r["module"]).stem
+        implied = f"test_{stem}.py"
+        out.append({
+            "module": r["module"],
+            "merge_gate_implied_test": implied,
+            "exists": (ROOT / implied).exists(),
+            "index_cites": r.get("test", ""),
+        })
+    return out
+
+
 def static_axes() -> dict:
     rows = list(CAPABILITIES)
     mods = [r.get("module", "") for r in rows]
@@ -279,6 +336,12 @@ def static_axes() -> dict:
             [r["module"] for r in rel if not r["loads_module"]],
         "count_claims": counts,
         "count_claims_disagreeing": [c for c in counts if not c["agrees"]],
+        "S8_vacuity": (vac := vacuity_axis(distinct)),
+        "S8_vacuous_tests": [v["test"] for v in vac if v["style"] == "VACUOUS"],
+        "S8_style_counts": {k: sum(1 for v in vac if v["style"] == k)
+                            for k in ("main-block", "module-level", "VACUOUS")},
+        "S7_merge_gate_coverage": (mg := merge_gate_coverage(rows)),
+        "S7_modules_ungated_by_merge_gate": [m["module"] for m in mg if not m["exists"]],
         "S6_artifact_references": (refs := artifact_references(rows)),
         "S6_n_cited_paths": len(refs),
         "S6_dangling_paths": [r for r in refs if not r["exists"]],
@@ -479,6 +542,11 @@ def main() -> int:
           f"disagreeing: {st['count_claims_disagreeing']}")
     print(f"S6  repo paths cited in row prose: {st['S6_n_cited_paths']}, "
           f"dangling: {len(st['S6_dangling_paths'])}")
+    print(f"S7  modules ungated by merge_gate.sh's name mapping: "
+          f"{len(st['S7_modules_ungated_by_merge_gate'])} "
+          f"{st['S7_modules_ungated_by_merge_gate']}")
+    print(f"S8  run styles {st['S8_style_counts']}; VACUOUS (green but nothing runs): "
+          f"{st['S8_vacuous_tests']}")
     for d in st["S6_dangling_paths"]:
         print(f"      DANGLING  {d['module']} -> {d['cited_path']}")
     print(f"S3  distinct cited tests to execute: {st['n_distinct_cited_tests']}")

@@ -1,5 +1,5 @@
 {
-  "head": "c17afc457403818d6d9a1df08a5c583047e9556c",
+  "head": "23335b96161710b138a66ff0bd68d39f25eef15b",
   "python": "/home/andy/projects/Unsolved/.venv/bin/python",
   "static": {
     "S5_relevance": [
@@ -644,6 +644,596 @@
       }
     ],
     "count_claims_disagreeing": [],
+    "S8_vacuity": [
+      {
+        "test": "test_advection_scope.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_bc_weighted_sobolev.py",
+        "style": "main-block",
+        "n_test_defs": 8,
+        "has_main_block": true
+      },
+      {
+        "test": "test_bordered_hl.py",
+        "style": "main-block",
+        "n_test_defs": 11,
+        "has_main_block": true
+      },
+      {
+        "test": "test_boussinesq_dedicated.py",
+        "style": "main-block",
+        "n_test_defs": 17,
+        "has_main_block": true
+      },
+      {
+        "test": "test_boussinesq_rescaled.py",
+        "style": "main-block",
+        "n_test_defs": 8,
+        "has_main_block": true
+      },
+      {
+        "test": "test_boussinesq_velocity.py",
+        "style": "main-block",
+        "n_test_defs": 5,
+        "has_main_block": true
+      },
+      {
+        "test": "test_certificate_shapes.py",
+        "style": "main-block",
+        "n_test_defs": 25,
+        "has_main_block": true
+      },
+      {
+        "test": "test_chen_inviscid_certificate.py",
+        "style": "main-block",
+        "n_test_defs": 13,
+        "has_main_block": true
+      },
+      {
+        "test": "test_collocation_newton.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_critical_dissipation.py",
+        "style": "main-block",
+        "n_test_defs": 10,
+        "has_main_block": true
+      },
+      {
+        "test": "test_decay_collocation.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_decay_grading.py",
+        "style": "main-block",
+        "n_test_defs": 7,
+        "has_main_block": true
+      },
+      {
+        "test": "test_dissipative_profile.py",
+        "style": "main-block",
+        "n_test_defs": 20,
+        "has_main_block": true
+      },
+      {
+        "test": "test_energy_coercivity.py",
+        "style": "module-level",
+        "n_test_defs": 0,
+        "has_main_block": false
+      },
+      {
+        "test": "test_finite_support_adversarial.py",
+        "style": "main-block",
+        "n_test_defs": 10,
+        "has_main_block": true
+      },
+      {
+        "test": "test_first_integral.py",
+        "style": "main-block",
+        "n_test_defs": 7,
+        "has_main_block": true
+      },
+      {
+        "test": "test_fractional_boussinesq.py",
+        "style": "main-block",
+        "n_test_defs": 0,
+        "has_main_block": true
+      },
+      {
+        "test": "test_fractional_gclm.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_gclm_dedicated.py",
+        "style": "main-block",
+        "n_test_defs": 14,
+        "has_main_block": true
+      },
+      {
+        "test": "test_gclm_family.py",
+        "style": "main-block",
+        "n_test_defs": 12,
+        "has_main_block": true
+      },
+      {
+        "test": "test_gclm_rescaled.py",
+        "style": "main-block",
+        "n_test_defs": 5,
+        "has_main_block": true
+      },
+      {
+        "test": "test_hl_rescaled.py",
+        "style": "main-block",
+        "n_test_defs": 9,
+        "has_main_block": true
+      },
+      {
+        "test": "test_holder_norms.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_interval.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_interval_certificate.py",
+        "style": "main-block",
+        "n_test_defs": 18,
+        "has_main_block": true
+      },
+      {
+        "test": "test_line_hilbert.py",
+        "style": "main-block",
+        "n_test_defs": 7,
+        "has_main_block": true
+      },
+      {
+        "test": "test_literature_gates.py",
+        "style": "main-block",
+        "n_test_defs": 9,
+        "has_main_block": true
+      },
+      {
+        "test": "test_marginal_flow.py",
+        "style": "main-block",
+        "n_test_defs": 11,
+        "has_main_block": true
+      },
+      {
+        "test": "test_nk_bounds.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_nk_bounds_adversarial.py",
+        "style": "main-block",
+        "n_test_defs": 18,
+        "has_main_block": true
+      },
+      {
+        "test": "test_nk_fourier.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_nk_hilbert_holder.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_nk_hilbert_pointwise.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_nk_seminorm.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_op_lower.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_origin_h2_certificate.py",
+        "style": "main-block",
+        "n_test_defs": 10,
+        "has_main_block": true
+      },
+      {
+        "test": "test_port_certification.py",
+        "style": "main-block",
+        "n_test_defs": 10,
+        "has_main_block": true
+      },
+      {
+        "test": "test_profile_newton.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_reduced_certificate.py",
+        "style": "main-block",
+        "n_test_defs": 7,
+        "has_main_block": true
+      },
+      {
+        "test": "test_rescaled_spectrum.py",
+        "style": "main-block",
+        "n_test_defs": 8,
+        "has_main_block": true
+      },
+      {
+        "test": "test_spectral_certificate.py",
+        "style": "module-level",
+        "n_test_defs": 0,
+        "has_main_block": false
+      },
+      {
+        "test": "test_spectral_utils_dedicated.py",
+        "style": "main-block",
+        "n_test_defs": 10,
+        "has_main_block": true
+      },
+      {
+        "test": "test_target_norm.py",
+        "style": "module-level",
+        "n_test_defs": 0,
+        "has_main_block": false
+      },
+      {
+        "test": "test_target_selection.py",
+        "style": "main-block",
+        "n_test_defs": 9,
+        "has_main_block": true
+      },
+      {
+        "test": "test_turning_point.py",
+        "style": "main-block",
+        "n_test_defs": 6,
+        "has_main_block": true
+      },
+      {
+        "test": "test_viscous_novelty.py",
+        "style": "main-block",
+        "n_test_defs": 8,
+        "has_main_block": true
+      },
+      {
+        "test": "test_weight_search.py",
+        "style": "main-block",
+        "n_test_defs": 12,
+        "has_main_block": true
+      }
+    ],
+    "S8_vacuous_tests": [],
+    "S8_style_counts": {
+      "main-block": 44,
+      "module-level": 3,
+      "VACUOUS": 0
+    },
+    "S7_merge_gate_coverage": [
+      {
+        "module": "solver/hl_rescaled.py",
+        "merge_gate_implied_test": "test_hl_rescaled.py",
+        "exists": true,
+        "index_cites": "test_hl_rescaled.py"
+      },
+      {
+        "module": "solver/line_hilbert.py",
+        "merge_gate_implied_test": "test_line_hilbert.py",
+        "exists": true,
+        "index_cites": "test_line_hilbert.py"
+      },
+      {
+        "module": "solver/gclm_family.py",
+        "merge_gate_implied_test": "test_gclm_family.py",
+        "exists": true,
+        "index_cites": "test_gclm_family.py"
+      },
+      {
+        "module": "solver/gclm_rescaled.py",
+        "merge_gate_implied_test": "test_gclm_rescaled.py",
+        "exists": true,
+        "index_cites": "test_gclm_rescaled.py"
+      },
+      {
+        "module": "solver/rescaled_spectrum.py",
+        "merge_gate_implied_test": "test_rescaled_spectrum.py",
+        "exists": true,
+        "index_cites": "test_rescaled_spectrum.py"
+      },
+      {
+        "module": "solver/origin_h2_certificate.py",
+        "merge_gate_implied_test": "test_origin_h2_certificate.py",
+        "exists": true,
+        "index_cites": "test_origin_h2_certificate.py"
+      },
+      {
+        "module": "solver/fractional_gclm.py",
+        "merge_gate_implied_test": "test_fractional_gclm.py",
+        "exists": true,
+        "index_cites": "test_fractional_gclm.py"
+      },
+      {
+        "module": "solver/critical_dissipation.py",
+        "merge_gate_implied_test": "test_critical_dissipation.py",
+        "exists": true,
+        "index_cites": "test_critical_dissipation.py"
+      },
+      {
+        "module": "solver/dissipative_profile.py",
+        "merge_gate_implied_test": "test_dissipative_profile.py",
+        "exists": true,
+        "index_cites": "test_dissipative_profile.py"
+      },
+      {
+        "module": "solver/chen_inviscid_certificate.py",
+        "merge_gate_implied_test": "test_chen_inviscid_certificate.py",
+        "exists": true,
+        "index_cites": "test_chen_inviscid_certificate.py"
+      },
+      {
+        "module": "solver/marginal_flow.py",
+        "merge_gate_implied_test": "test_marginal_flow.py",
+        "exists": true,
+        "index_cites": "test_marginal_flow.py"
+      },
+      {
+        "module": "solver/boussinesq_velocity.py",
+        "merge_gate_implied_test": "test_boussinesq_velocity.py",
+        "exists": true,
+        "index_cites": "test_boussinesq_velocity.py"
+      },
+      {
+        "module": "solver/boussinesq_rescaled.py",
+        "merge_gate_implied_test": "test_boussinesq_rescaled.py",
+        "exists": true,
+        "index_cites": "test_boussinesq_rescaled.py"
+      },
+      {
+        "module": "solver/port_certification.py",
+        "merge_gate_implied_test": "test_port_certification.py",
+        "exists": true,
+        "index_cites": "test_port_certification.py"
+      },
+      {
+        "module": "solver/fractional_boussinesq.py",
+        "merge_gate_implied_test": "test_fractional_boussinesq.py",
+        "exists": true,
+        "index_cites": "test_fractional_boussinesq.py"
+      },
+      {
+        "module": "solver/interval.py",
+        "merge_gate_implied_test": "test_interval.py",
+        "exists": true,
+        "index_cites": "test_interval.py"
+      },
+      {
+        "module": "solver/interval_certificate.py",
+        "merge_gate_implied_test": "test_interval_certificate.py",
+        "exists": true,
+        "index_cites": "test_interval_certificate.py"
+      },
+      {
+        "module": "solver/spectral_certificate.py",
+        "merge_gate_implied_test": "test_spectral_certificate.py",
+        "exists": true,
+        "index_cites": "test_spectral_certificate.py"
+      },
+      {
+        "module": "solver/energy_coercivity.py",
+        "merge_gate_implied_test": "test_energy_coercivity.py",
+        "exists": true,
+        "index_cites": "test_energy_coercivity.py"
+      },
+      {
+        "module": "solver/certificate_guards.py",
+        "merge_gate_implied_test": "test_certificate_guards.py",
+        "exists": false,
+        "index_cites": "test_nk_bounds_adversarial.py"
+      },
+      {
+        "module": "solver/nk_bounds.py",
+        "merge_gate_implied_test": "test_nk_bounds.py",
+        "exists": true,
+        "index_cites": "test_nk_bounds.py"
+      },
+      {
+        "module": "solver/op_lower.py",
+        "merge_gate_implied_test": "test_op_lower.py",
+        "exists": true,
+        "index_cites": "test_op_lower.py"
+      },
+      {
+        "module": "solver/holder_norms.py",
+        "merge_gate_implied_test": "test_holder_norms.py",
+        "exists": true,
+        "index_cites": "test_holder_norms.py"
+      },
+      {
+        "module": "solver/decay_grading.py",
+        "merge_gate_implied_test": "test_decay_grading.py",
+        "exists": true,
+        "index_cites": "test_decay_grading.py"
+      },
+      {
+        "module": "solver/decay_collocation.py",
+        "merge_gate_implied_test": "test_decay_collocation.py",
+        "exists": true,
+        "index_cites": "test_decay_collocation.py"
+      },
+      {
+        "module": "solver/collocation_newton.py",
+        "merge_gate_implied_test": "test_collocation_newton.py",
+        "exists": true,
+        "index_cites": "test_collocation_newton.py"
+      },
+      {
+        "module": "solver/reduced_certificate.py",
+        "merge_gate_implied_test": "test_reduced_certificate.py",
+        "exists": true,
+        "index_cites": "test_reduced_certificate.py"
+      },
+      {
+        "module": "solver/nk_fourier.py",
+        "merge_gate_implied_test": "test_nk_fourier.py",
+        "exists": true,
+        "index_cites": "test_nk_fourier.py"
+      },
+      {
+        "module": "solver/nk_seminorm.py",
+        "merge_gate_implied_test": "test_nk_seminorm.py",
+        "exists": true,
+        "index_cites": "test_nk_seminorm.py"
+      },
+      {
+        "module": "solver/hilbert_holder.py",
+        "merge_gate_implied_test": "test_hilbert_holder.py",
+        "exists": false,
+        "index_cites": "test_nk_hilbert_holder.py"
+      },
+      {
+        "module": "solver/hilbert_pointwise.py",
+        "merge_gate_implied_test": "test_hilbert_pointwise.py",
+        "exists": false,
+        "index_cites": "test_nk_hilbert_pointwise.py"
+      },
+      {
+        "module": "solver/first_integral.py",
+        "merge_gate_implied_test": "test_first_integral.py",
+        "exists": true,
+        "index_cites": "test_first_integral.py"
+      },
+      {
+        "module": "solver/turning_point.py",
+        "merge_gate_implied_test": "test_turning_point.py",
+        "exists": true,
+        "index_cites": "test_turning_point.py"
+      },
+      {
+        "module": "solver/profile_newton.py",
+        "merge_gate_implied_test": "test_profile_newton.py",
+        "exists": true,
+        "index_cites": "test_profile_newton.py"
+      },
+      {
+        "module": "solver/advection_scope.py",
+        "merge_gate_implied_test": "test_advection_scope.py",
+        "exists": true,
+        "index_cites": "test_advection_scope.py"
+      },
+      {
+        "module": "solver/target_norm.py",
+        "merge_gate_implied_test": "test_target_norm.py",
+        "exists": true,
+        "index_cites": "test_target_norm.py"
+      },
+      {
+        "module": "solver/bc_weighted_sobolev.py",
+        "merge_gate_implied_test": "test_bc_weighted_sobolev.py",
+        "exists": true,
+        "index_cites": "test_bc_weighted_sobolev.py"
+      },
+      {
+        "module": "solver/literature_gates.py",
+        "merge_gate_implied_test": "test_literature_gates.py",
+        "exists": true,
+        "index_cites": "test_literature_gates.py"
+      },
+      {
+        "module": "solver/certificate_shapes.py",
+        "merge_gate_implied_test": "test_certificate_shapes.py",
+        "exists": true,
+        "index_cites": "test_certificate_shapes.py"
+      },
+      {
+        "module": "solver/bordered_hl.py",
+        "merge_gate_implied_test": "test_bordered_hl.py",
+        "exists": true,
+        "index_cites": "test_bordered_hl.py"
+      },
+      {
+        "module": "solver/viscous_novelty.py",
+        "merge_gate_implied_test": "test_viscous_novelty.py",
+        "exists": true,
+        "index_cites": "test_viscous_novelty.py"
+      },
+      {
+        "module": "solver/weight_search.py",
+        "merge_gate_implied_test": "test_weight_search.py",
+        "exists": true,
+        "index_cites": "test_weight_search.py"
+      },
+      {
+        "module": "solver/target_selection.py",
+        "merge_gate_implied_test": "test_target_selection.py",
+        "exists": true,
+        "index_cites": "test_target_selection.py"
+      },
+      {
+        "module": "solver/ga_search.py",
+        "merge_gate_implied_test": "test_ga_search.py",
+        "exists": false,
+        "index_cites": "test_gclm_family.py"
+      },
+      {
+        "module": "solver/boussinesq.py",
+        "merge_gate_implied_test": "test_boussinesq.py",
+        "exists": false,
+        "index_cites": "test_boussinesq_dedicated.py"
+      },
+      {
+        "module": "solver/gclm.py",
+        "merge_gate_implied_test": "test_gclm.py",
+        "exists": false,
+        "index_cites": "test_gclm_dedicated.py"
+      },
+      {
+        "module": "solver/spectral_utils.py",
+        "merge_gate_implied_test": "test_spectral_utils.py",
+        "exists": false,
+        "index_cites": "test_spectral_utils_dedicated.py"
+      },
+      {
+        "module": "solver/finite_support.py",
+        "merge_gate_implied_test": "test_finite_support.py",
+        "exists": false,
+        "index_cites": "test_finite_support_adversarial.py"
+      }
+    ],
+    "S7_modules_ungated_by_merge_gate": [
+      "solver/certificate_guards.py",
+      "solver/hilbert_holder.py",
+      "solver/hilbert_pointwise.py",
+      "solver/ga_search.py",
+      "solver/boussinesq.py",
+      "solver/gclm.py",
+      "solver/spectral_utils.py",
+      "solver/finite_support.py"
+    ],
     "S6_artifact_references": [
       {
         "module": "solver/chen_inviscid_certificate.py",
