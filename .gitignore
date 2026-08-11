@@ -5,6 +5,13 @@ __pycache__/
 .venv/
 venv/
 
+# Headroom MCP server venv (dev tooling, rebuildable — see docs/HEADROOM.md)
+.headroom-venv/
+# Machine-local MCP registration — points at the uncommitted venv above; copy
+# from .mcp.json.example instead of committing (a live .mcp.json would break
+# every fresh/cloud clone)
+.mcp.json
+
 # Experiment outputs (see LOGGING.md) — logs/series/checkpoints are regenerated,
 # not source. Tracked candidates get promoted explicitly, not via git.
 experiments/run_logs/
