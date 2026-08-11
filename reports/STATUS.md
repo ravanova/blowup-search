@@ -1,7 +1,7 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-11 — same orchestrator session, cycle 8d + leg 329 landing.
-`origin/main` at `fd43ac8`, merge gate green. Full detail in `PROGRESS.md`
+*Refreshed 2026-08-11 — same orchestrator session, cycle 8e.
+`origin/main` at `476e794`, merge gate green. Full detail in `PROGRESS.md`
 (git-ignored, more current), `reports/ORCH_STATE.md` (full handoff detail and
 institutional memory), and `experiments/JOURNAL.md` (the durable ledger).*
 
@@ -55,18 +55,17 @@ earlier cycles; see `experiments/JOURNAL.md` if you need that history.)
   eigensolve at exactly the magnitude `cond(G)·eps` predicts). The obstruction
   moved, from a pointwise cancellation to a float64 whitened
   assembly/eigensolve the patch can't reach. Escalation #3 stays parked.
-  **Unadjudicated by the leg, flagged to the DM**: C4's residual is actually a
-  one-sided bound, not an agreement test, and the exact bound lands *below*
-  1/2 (by ~5.19e-18 / 1.42e-18) — read that way clause 5 would pass and the
-  gate would flip to YES, re-triggering escalation #3's yes-branch. DM
-  adjudication pending; not yet ruled on.
+  **C4's disposition was flagged unadjudicated, now RULED (cycle 8e, see
+  below): the literal pre-registration governs, 329's NO stands.**
 - **Housekeeping**: `.gitignore`'s `.venv/`/`venv/` patterns (trailing slash)
   didn't match a *symlink* named `.venv`, so one landed on `main` by accident
   during leg 329's run (self-caught and removed by the leg). Fixed directly by
-  the orchestrator at `fd43ac8` (added slash-less variants).
+  the orchestrator at `fd43ac8` (added slash-less variants); endorsed by the
+  DM at cycle 8e.
 
-**DM ruling, integrated by fast-forward, no unintended deletions confirmed by
-diff:**
+**DM rulings, both integrated (cycle 8d by fast-forward, cycle 8e by rebase
+onto the intervening `.gitignore` commit — clean, no conflicts), no
+unintended deletions confirmed by diff both times:**
 
 - **Cycle 8d** (`f9321b5`): absorbed 331 NO, folded the tail/weight reframing
   into leg 334's plan clause (a) as a collision it must resolve or route to
@@ -75,9 +74,27 @@ diff:**
   produce); drafted leg 339 (ORC6, gated adjudication of the closed-three-ways
   sites, rank 1) for the deferred closure-#6 correction; refilled slot A←334
   DSSP now that both its preconditions (331 AND 332 landed) are satisfied.
-
-**Slot B now vacant** (329 landed) — awaiting DM's cycle-8e ruling, which also
-needs to adjudicate the C4 pre-registration-defect question above.
+- **Cycle 8e** (`476e794`, rebased from `dm/cycle8e-direction` at `b4eb03f`):
+  **ruled the C4 pre-registration defect — the literal pre-registration
+  governs, 329's NO stands**, on three stated grounds: (a) the margin can't
+  carry the claim — the 5.19e-18/1.42e-18 bound is thirteen orders of
+  magnitude smaller than the 3.85e-05/5.39e-05 truncation sensitivity C5
+  itself measured, and a Rayleigh quotient one-sides the *truncated matrix's*
+  eigenvalue, not the operator clause 5 is actually about; (b) these rows sit
+  at EGM's published +1/2, a knife edge, and the standing 318/302 lesson is
+  that knife edges are decided in exact/enclosed arithmetic, never by which
+  side a float lands on; (c) overriding a fired control in the hoped-for
+  direction is exactly what novelty §7d forbids — the leg's refusal to do so
+  is endorsed by name. The bound reading isn't discarded: it earns its own
+  gate as **leg 340 (EGRB), drafted at reserve rank 1** — does a
+  truncation-controlled version of the bound (re-derived at every C5
+  ladder rung and/or with an explicit truncation-error enclosure) hold
+  clause 5 with a margin that survives the ladder? Yes-branch inherits 329's
+  report-and-escalate path; no-branch classifies TRUNCATION-LIMITED vs
+  KNIFE-EDGE at measured width. Escalation #3 stays parked until 340 answers.
+  Refilled slot B←339 ORC6 (rank 1 per cycle 8d, dispatched now, per the
+  reason that 334 is in flight in slot A this leg-cycle and shouldn't be
+  written against sites whose adjudication is left pending).
 
 ## Prior cycle (8 and 8b) — what landed, what's running
 
