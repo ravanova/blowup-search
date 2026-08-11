@@ -134,7 +134,7 @@ class MPInterval:
 
     @classmethod
     def from_mid_rad(cls, mid, rad, prec):
-        mid, rad = Decimal(mid), abs(Decimal(rad))
+        mid, rad = Decimal(mid), Decimal(rad).copy_abs()
         lo = _floor_ctx(prec).subtract(mid, rad)
         hi = _ceil_ctx(prec).add(mid, rad)
         return cls(lo, hi)
@@ -197,7 +197,7 @@ def mp_div(a, b, prec):
 
 def mp_neg(a):
     a = MPInterval._coerce(a)
-    return MPInterval(-a.hi, -a.lo)
+    return MPInterval(a.hi.copy_negate(), a.lo.copy_negate())
 
 
 def mp_isum(ivs, prec):
@@ -255,7 +255,7 @@ def dcos(theta, prec):
 
 def _sin_cos_series(theta, prec, want_sin):
     theta = Decimal(theta)
-    if abs(theta) > Decimal("3.15"):
+    if theta.copy_abs() > Decimal("3.15"):
         raise ValueError("dsin/dcos: |theta| > pi + slack, outside the proved range")
     work = prec + 20   # guard digits for the internal accumulation
     n = _series_terms_for(prec)
@@ -270,13 +270,13 @@ def _sin_cos_series(theta, prec, want_sin):
         # term_k = term_{k-1} * (-theta^2) / ((2k)(2k-1))  [cos]  or
         #          term_{k-1} * (-theta^2) / ((2k)(2k+1))  [sin]
         denom = (2 * k) * (2 * k - 1) if not want_sin else (2 * k) * (2 * k + 1)
-        num = mp_mul(term, MPInterval.point(-theta2), work)
+        num = mp_mul(term, MPInterval.point(theta2.copy_negate()), work)
         term = mp_div(num, MPInterval.point(Decimal(denom)), work)
         acc = mp_add(acc, term, work)
     # remainder: alternating, decreasing (true once k >= 1 for |theta|<=pi),
     # so |error| <= |first omitted term|'s magnitude. Bound term's own width-
     # inflated magnitude from above and widen both endpoints by it.
-    rem = max(abs(term.lo), abs(term.hi))
+    rem = max(term.lo.copy_abs(), term.hi.copy_abs())
     rem = cc.add(rem, Decimal(0))  # re-round into the guard context, defensive
     lo = fc.subtract(acc.lo, rem)
     hi = cc.add(acc.hi, rem)
@@ -305,10 +305,23 @@ def mp_pi(prec):
     """Rigorous MPInterval enclosure of pi via Machin's formula
     pi = 16 atan(1/5) - 4 atan(1/239), each atan by its alternating Taylor
     series (|x| < 1/5, converges fast, proved remainder = first omitted
-    term -- same pattern as solver/interval.py's `_atanh_series`)."""
+    term -- same pattern as solver/interval.py's `_atanh_series`).
+
+    NOTE ON A BUG THIS CAUGHT ITS OWN SELF: 1/5 terminates exactly in
+    decimal, but 1/239 does NOT -- `Decimal(1) / Decimal(239)` computed with
+    no explicit context silently rounds to the ambient THREAD-LOCAL default
+    (28 digits) rather than to `work` digits, which then gets treated as an
+    EXACT input by a series that assumes exact inputs, corrupting the result
+    from around the 28th digit on regardless of how many working digits the
+    series itself uses. Fixed by enclosing 1/239 in a rigorous MPInterval
+    (via `mp_div`, which uses an explicit floor/ceil context and is honest
+    about the result not being exact) and propagating that interval through
+    the whole series, rather than assuming a Decimal scalar is exact."""
     work = prec + 20
-    a5 = _atan_small(Decimal(1) / Decimal(5), work)
-    a239 = _atan_small(Decimal(1) / Decimal(239), work)
+    fifth_iv = mp_div(MPInterval.point(1), MPInterval.point(5), work)  # exact anyway
+    inv239_iv = mp_div(MPInterval.point(1), MPInterval.point(239), work)  # NOT exact
+    a5 = _atan_small(fifth_iv, work)
+    a239 = _atan_small(inv239_iv, work)
     sixteen_a5 = mp_mul(MPInterval.point(16), a5, work)
     four_a239 = mp_mul(MPInterval.point(4), a239, work)
     pi_iv = mp_sub(sixteen_a5, four_a239, work)
@@ -317,18 +330,28 @@ def mp_pi(prec):
 
 
 def _atan_small(x, prec):
-    """atan(x) = sum_{k>=0} (-1)^k x^(2k+1)/(2k+1), |x| < 1, alternating."""
-    x = Decimal(x)
-    fc, cc = _floor_ctx(prec), _ceil_ctx(prec)
-    x2 = fc.multiply(x, x)
+    """atan(x) = sum_{k>=0} (-1)^k x^(2k+1)/(2k+1), |x| < 1, alternating.
+
+    `x` may be a Decimal (treated as an EXACT point, correct only when it
+    truly is exact -- e.g. a terminating decimal like 1/5) or an MPInterval
+    (the general, honest case, needed for anything -- like 1/239 -- whose
+    decimal expansion does not terminate). Passing a non-terminating
+    quotient as a bare Decimal here was leg 312's own first bug (see
+    `mp_pi`'s docstring)."""
+    x = x if isinstance(x, MPInterval) else MPInterval.point(x)
+    x2 = mp_mul(x, x, prec)   # x^2 >= 0 regardless of x's own sign
     n = _series_terms_for(prec) + 40  # x is small but be generous regardless
-    acc = MPInterval.point(x)
-    term = MPInterval.point(x)
+    acc = x
+    term = x
     for k in range(1, n + 1):
-        num = mp_mul(term, MPInterval.point(-x2), prec)
+        # term_k = term_{k-1} * (-x^2) * (2k-1) / (2k+1)   [atan(x) = sum (-1)^k x^(2k+1)/(2k+1)]
+        neg_x2 = MPInterval(x2.hi.copy_negate(), x2.lo.copy_negate())
+        num = mp_mul(term, neg_x2, prec)
+        num = mp_mul(num, MPInterval.point(Decimal(2 * k - 1)), prec)
         term = mp_div(num, MPInterval.point(Decimal(2 * k + 1)), prec)
         acc = mp_add(acc, term, prec)
-    rem = max(abs(term.lo), abs(term.hi))
+    rem = max(term.lo.copy_abs(), term.hi.copy_abs())
+    fc, cc = _floor_ctx(prec), _ceil_ctx(prec)
     return MPInterval(fc.subtract(acc.lo, rem), cc.add(acc.hi, rem))
 
 
