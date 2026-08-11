@@ -1,35 +1,49 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-11 — same orchestrator session, cycle 8e.
-`origin/main` at `476e794`, merge gate green. Full detail in `PROGRESS.md`
+*Refreshed 2026-08-11 — same orchestrator session, cycle 8e + leg 330 landing.
+`origin/main` at `5496bbc`, merge gate green. Full detail in `PROGRESS.md`
 (git-ignored, more current), `reports/ORCH_STATE.md` (full handoff detail and
 institutional memory), and `experiments/JOURNAL.md` (the durable ledger).*
 
 ## ⚠ NEEDS YOU
 
 1. **Leg 313 (SDSS) + leg 320 (MTSC) — bundled escalation packet, parked —
-   packet content UPDATED this cycle, ruling still needed, not yet final.**
-   The DM's own text routes the DSS ban-wording question to you rather than
-   ruling on it ("the DM does not rule on ban scope"). What changed: **leg
-   326 read Chae-Tsai (arXiv:1304.7414v1) in full and found it does NOT reach
-   the screened Navier-Stokes object — the packet's only theorem is shown
-   silent.** Deciding clause: all four of Chae-Tsai's theorems hypothesize a
-   solution of their eq. (1.6), the rescaled **Euler** system (no Laplacian);
-   the paper displays the Navier-Stokes rescaled equation separately and
-   proves nothing about it, and the authors' own stated generalization (eq.
-   2.9) only varies two real constants, never gaining a viscosity term. What
-   remains in the packet: leg 260's dissolved argument, plus an empty seed
-   set that leg 313 itself called "an availability fact, not an
-   impossibility." **This is not yet the final packet update** — leg 326 also
-   located a new, not-yet-adjudicated candidate (arXiv:2607.09619v2,
-   Pineau-Vicol) that might bear on the same object; leg 330 (dispatched this
-   cycle, in flight) is reading it in full to determine whether it reaches
-   the screened object. The DM's directive: the complete packet — Chae-Tsai
-   out, Pineau-Vicol adjudicated — should reach you together once 330
-   answers, not in dribbles. **Do not rule yet on the strength of this
-   partial update; a follow-up will land once 330 completes.** Both branches
-   (`leg/313-sdss-v1`, `leg/320-mtsc-v1`) remain unmerged, untouched. No ban
-   touched, `plan_of_record.py` untouched.
+   packet update now COMPLETE, ready for your ruling.** The DM's own text
+   routes the DSS ban-wording question to you rather than ruling on it
+   itself ("the DM does not rule on ban scope"). Both threads that were open
+   are now closed:
+   - **Leg 326** read Chae-Tsai (arXiv:1304.7414v1) in full and found it does
+     NOT reach the screened Navier-Stokes object — the packet's only theorem
+     is shown silent. Deciding clause: all four of Chae-Tsai's theorems
+     hypothesize a solution of their eq. (1.6), the rescaled **Euler** system
+     (no Laplacian); the paper displays the Navier-Stokes rescaled equation
+     separately and proves nothing about it, and the authors' own stated
+     generalization (eq. 2.9) only varies two real constants, never gaining a
+     viscosity term.
+   - **Leg 330** read the candidate leg 326 flagged, Pineau-Vicol
+     (arXiv:2607.09619v2), in full and found it ALSO does not reach the
+     screened object. Deciding clause, verbatim: "There exists λ̲ =
+     λ̲(C_U,0) > 1, such that if 1 < λ < λ̲, then U ≡ 0" — the paper's own
+     proof caps that window near 1 (WLOG λ̲ ≤ e^{1/2} ≈ 1.6487, smallness
+     requirement (1+α²)S < 2 log λ̲ ≪ 1, final choice "sufficiently close to
+     1"), while the screened object is specified with λ significantly larger
+     than 1. Two independent reinforcements: Pineau-Vicol's own text says
+     this DSS theorem restates Chae-Wolf's (already screened via leg 253);
+     and their weak-L³-at-every-phase bound carries its own open conditions
+     (non-explicit constant, unclosed pressure-decay positivity), recorded
+     honestly rather than suppressed. One genuine corner where the paper
+     touches large λ exists (an RSS sub-locus reachable only above λ ≥
+     10^21935.3 under leg 262's most favorable constants) — recorded as
+     indicative, not certified, and does not change the verdict.
+
+   **What remains in the packet, now final:** leg 260's dissolved argument,
+   plus an empty seed set that leg 313 itself called "an availability fact,
+   not an impossibility" — no theorem in the literature searched so far
+   reaches the screened object. Both branches (`leg/313-sdss-v1`,
+   `leg/320-mtsc-v1`) remain unmerged, untouched. No ban touched,
+   `plan_of_record.py` untouched. **This is the complete packet — your
+   ruling on the DSS ban-wording question is the only thing this is waiting
+   on.**
 
 (Older NEEDS-YOU items — leg 297's anchor-JSON fix, leg 280's sign-off, the
 Phase-1 construction-decision packet — have since been resolved/absorbed in
@@ -95,6 +109,13 @@ unintended deletions confirmed by diff both times:**
   Refilled slot B←339 ORC6 (rank 1 per cycle 8d, dispatched now, per the
   reason that 334 is in flight in slot A this leg-cycle and shouldn't be
   written against sites whose adjudication is left pending).
+- **Leg 330 (PVLX)** — gate **YES-(ii)**: Pineau-Vicol's theorem does not
+  reach the screened object. See the completed NEEDS-YOU packet above for the
+  full finding. Landed at `5496bbc`; territory audited clean (exactly its 3
+  declared files, leg 313's packet file/branch untouched). **This closes out
+  the last open thread in the NEEDS-YOU packet — ready for your ruling now.**
+
+**Slot D now vacant** (330 landed) — awaiting DM's next ruling.
 
 ## Prior cycle (8 and 8b) — what landed, what's running
 
@@ -162,18 +183,19 @@ confirmed by diff:**
 at `c541cdb`. See NEEDS-YOU above for the full Chae-Tsai finding; territory
 audited clean (exactly its 3 declared files).
 
-**Currently running, three of four slots (B vacant):**
+**Currently running, two of four slots (B, D vacant):**
 
 | Slot | Leg | Route | Dispatched |
 |---|---|---|---|
-| A | 334 | DSSP — route-4 seeded DSS/RPO programme plan (Tier 2 ceiling; critical path) | cycle 8d |
-| B | — | vacant, awaiting DM refill | — |
+| A | 334 | DSSP — route-4 seeded DSS/RPO programme plan (Tier 2 ceiling; critical path) | cycle 8d, still running, no stall |
+| B | 339 | ORC6 — gated adjudication of the "closed three ways" sites against legs 331/332's measured answers | cycle 8e |
 | C | 323 | CENV — MF1 spelling-variant census resume (real WIP from spend-limit kill, branch `leg/323-cenv-v1`) | cycle 8b, still running, no stall |
-| D | 330 | PVLX — does Pineau-Vicol's Liouville theorem reach the screened object? Feeds directly into the NEEDS-YOU packet update above. | cycle 8c, still running, no stall |
+| D | — | vacant, awaiting DM refill (330 landed) | — |
 
-Reserve: 22 undispatched (including newly drafted 339 ORC6, rank 1), 15
-immediately dispatchable (339, 335, 336, 337, 338, 307, 328, 324, 322, 327,
-287, 229, 293, 298, 299 in rank order). Next fresh leg number: **340**.
+Reserve: 22 undispatched (including leg 340 EGRB, rank 1 — the
+truncation-controlled bound question left open by 329/cycle-8e), 14
+immediately dispatchable (340, 335, 336, 337, 338, 307, 328, 324, 322, 327,
+287, 229, 293, 298, 299 in rank order). Next fresh leg number: **341**.
 No ban lifted this cycle; no L1→L4 link moved.
 
 ## Context — the ten-to-four downsize and the spend-limit kill

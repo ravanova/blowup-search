@@ -19,16 +19,41 @@ legs that lose their slot are returned to the reserve queue, not cancelled as fi
 
 ---
 
-## Status: RUNNING — same orchestrator session, 2026-08-11, cycle 8d + leg 329 landing (four-slot contract)
+## Status: RUNNING — same orchestrator session, 2026-08-11, cycle 8e + leg 330 landing (four-slot contract)
 
-`origin/main` at `fd43ac8`, merge gate **PASS**. Three of four slots live, one vacant:
+`origin/main` at `5496bbc`, merge gate **PASS**. Two of four slots live, two vacant:
 **A=334 DSSP** (route 4 brick 0, seeded DSS/RPO programme plan, Tier 2 ceiling, critical path,
-dispatched cycle 8d, running), **B=vacant** (329 landed, awaiting DM refill), **C=323 CENV**
-(MF1 spelling-variant census resume, dispatched cycle 8b, still running, no stall), **D=330
-PVLX** (does Pineau-Vicol's Liouville theorem reach the screened object, dispatched cycle 8c,
-still running, no stall). Decision Maker reachable, last ruling `f9321b5` (cycle 8d) integrated
-cleanly by fast-forward; a cycle-8e report (leg 329's landing, with an unadjudicated question)
-has been sent and is awaiting the DM's next ruling.
+dispatched cycle 8d, still running, no stall), **B=339 ORC6** (gated adjudication of the "closed
+three ways" sites against legs 331/332's measured answers, dispatched cycle 8e), **C=323 CENV**
+(MF1 spelling-variant census resume, dispatched cycle 8b, still running, no stall), **D=vacant**
+(330 landed, awaiting DM refill). Decision Maker reachable, last ruling `476e794` (cycle 8e)
+integrated by rebase (clean, no conflicts, onto the intervening `.gitignore` commit) — a leg-330
+report has been sent and is awaiting the DM's next ruling.
+
+**Cycle 8e ruling (`476e794`): the C4 pre-registration defect flagged by leg 329 is RULED — the
+literal pre-registration governs, 329's NO stands.** Three grounds: (a) the 5.19e-18/1.42e-18
+bound margin is thirteen orders smaller than the 3.85e-05/5.39e-05 truncation sensitivity C5
+itself measured, and a Rayleigh quotient one-sides the *truncated matrix's* eigenvalue, not the
+operator clause 5 is about; (b) these rows sit at EGM's published +1/2, a knife edge, and the
+standing 318/302 lesson is that knife edges are decided in exact/enclosed arithmetic, never by
+which side a float lands on; (c) overriding a fired control in the hoped-for direction is exactly
+what novelty §7d forbids — the leg's refusal to do so is endorsed by name. The bound reading
+earns its own gate instead: **leg 340 (EGRB) drafted at reserve rank 1** — does a
+truncation-controlled bound (re-derived at every C5 ladder rung / with an explicit
+truncation-error enclosure) hold clause 5 with a margin that survives the ladder? Escalation #3
+stays parked until 340 answers. Slot B refilled with leg 339 ORC6. `.gitignore` fix endorsed.
+
+**Leg 330 (PVLX) landed gate YES-(ii): Pineau-Vicol does NOT reach the screened object** —
+`5496bbc`, territory audited clean (its 3 declared files only). Deciding clause quoted verbatim:
+"There exists λ̲ = λ̲(C_U,0) > 1, such that if 1 < λ < λ̲, then U ≡ 0" — the paper's own proof
+caps that window near 1 (WLOG λ̲ ≤ e^{1/2} ≈ 1.6487, smallness requirement (1+α²)S < 2 log λ̲ ≪
+1, final choice "sufficiently close to 1"), against the screened object's λ specified
+significantly larger than 1. Two independent reinforcements (their own DSS theorem restates
+Chae-Wolf's, already screened via leg 253; their weak-L³-at-every-phase bound carries its own
+open, non-explicit conditions, recorded honestly). One genuine large-λ corner exists (RSS
+sub-locus, λ ≥ 10^21935.3 under leg 262's most favorable constants) — recorded as indicative,
+not certified, verdict unchanged. **This closes the last open thread in the leg 313/320
+NEEDS-YOU packet — see NEEDS THE USER below, now complete and ready for the user's ruling.**
 
 **Leg 331 (NLH) landed gate NO, critical path** — first measurement (not just naming) of the
 (iv_a) obstruction: an algebraic tail (measured exponent 1.507674/2.012245/2.517908 against
@@ -70,15 +95,18 @@ does not reach the screened object — see NEEDS THE USER below. Four correction
 336 C305, 337 C318, 338 LCB1) drafted, not yet dispatched; leg 339 (ORC6) now drafted at rank 1
 ahead of them.
 
-**NEEDS THE USER — packet content changed this cycle, not yet final:** leg 313's escalation
-packet + the DSS ban-wording question remain bundled and explicitly routed to the user by the
-DM's own text ("the DM does not rule on ban scope"). The packet's only theorem (Chae-Tsai) is
-now shown not to bite (see above) — this is new evidence appended to the existing parked item,
-not a fresh escalation. **Do not treat this as ready for a final ruling yet**: leg 330 is in
-flight adjudicating a second candidate theorem (Pineau-Vicol) that could also bear on the same
-object, and the DM's directive is for the complete, adjudicated packet to reach the user in one
-piece once 330 answers. No ban touched, `plan_of_record.py` untouched. `leg/313-sdss-v1` and
-`leg/320-mtsc-v1` remain parked, not merged — do not merge them without the user's ruling.
+**NEEDS THE USER — packet update now COMPLETE, ready for ruling:** leg 313's escalation packet +
+the DSS ban-wording question remain bundled and explicitly routed to the user by the DM's own
+text ("the DM does not rule on ban scope"). Both threads that were open are now closed: leg 326
+found the packet's only theorem (Chae-Tsai) does not bite (Euler-only, no viscosity term), and
+leg 330 found the second candidate it flagged (Pineau-Vicol) also does not reach the screened
+object (λ-window caps near 1 against an object specified with λ significantly larger — see
+cycle 8e/leg-330 status above for the full finding). What remains in the packet: leg 260's
+dissolved argument plus an empty seed set leg 313 itself called "an availability fact, not an
+impossibility" — no theorem in the literature searched so far reaches the screened object. No
+ban touched, `plan_of_record.py` untouched. `leg/313-sdss-v1` and `leg/320-mtsc-v1` remain
+parked, not merged — do not merge them without the user's ruling. **This is the complete packet;
+nothing further is pending on the orchestrator's or DM's side.**
 
 **Heartbeat armed:** `CronCreate` recurring job, every 25 min, session-only (no `send_later` in
 this environment — see Environment notes). A fresh orchestrator session must re-arm its own
