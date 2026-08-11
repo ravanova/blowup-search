@@ -60,7 +60,7 @@ solver and the GA itself were future milestones — not yet built.)
 - [CLAY_ROADMAP.md](CLAY_ROADMAP.md) — forward strategic plan for continuing the
   Clay pursuit (the two structural walls, ranked routes A–D, go/no-go criteria).
 - [ORCHESTRATION.md](ORCHESTRATION.md) — the multi-agent contract for continuous
-  ten-leg-parallel operation: the 32-slot roster, the Decision Maker (Fable 5),
+  four-leg-parallel operation: the 20-slot roster, the Decision Maker (Fable 5),
   file ownership and leg territories, the documentation quartet, the hands-off
   landing policy — each leg pushes its own finished work to `main` through
   [scripts/merge_gate.sh](scripts/merge_gate.sh) — the live progress file, and

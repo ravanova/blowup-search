@@ -1,10 +1,10 @@
-# Orchestration playbook — continuous ten-leg operation
+# Orchestration playbook — continuous four-leg operation
 
 ## How to start a run
 
 **Paste the full text of [ORCHESTRATOR_PROMPT.md](ORCHESTRATOR_PROMPT.md) — and nothing else —
 into a fresh Claude Code session set to Sonnet 5, in this repository.** That session becomes
-the **orchestrator**: it dispatches the agents defined here, keeps ten legs running in
+the **orchestrator**: it dispatches the agents defined here, keeps four legs running in
 parallel, audits the legs' own pushes to `main` and merges the support work unattended,
 writes a live progress file the user can read at any time, and hands off to a fresh
 orchestrator session before its own context runs out.
@@ -64,7 +64,7 @@ user stops it (§9) or the direction genuinely runs out.
    by the lift condition it names, never by an agent's judgement, never by the Decision Maker.
 3. **Exactly one stage is `NEXT`, and that invariant is load-bearing.** Parallel legs do
    **not** each claim a stage. One leg is the critical path (the stage marked `NEXT`); the
-   other nine are exploration legs from the Decision Maker's queue in `DIRECTION.md`. Only
+   other three are exploration legs from the Decision Maker's queue in `DIRECTION.md`. Only
    promoting a route into `plan_of_record.py`'s committed sequence touches the plan, and that
    is an escalation (§8).
 4. **The standing discipline in CONTINUATION_PROMPT.md** (gate the operator, magnitudes not
@@ -77,13 +77,13 @@ user stops it (§9) or the direction genuinely runs out.
 
 ## 2. Shape of the run
 
-Ten legs live at all times. Each leg is **one Opus 5 agent, end to end** — its own novelty
+Four legs live at all times. Each leg is **one Opus 5 agent, end to end** — its own novelty
 pass, its own construction, its own measurement, its own gate answer, its own quartet (§6),
 and **its own push to `main`** (§7b). When its push lands the agent is terminated and a
-fresh agent spawns into the slot on the next brief, so ten legs are always in progress.
-One verifier is paired to each leg. Everything else is repo-wide support that serves all ten.
+fresh agent spawns into the slot on the next brief, so four legs are always in progress.
+One verifier is paired to each leg. Everything else is repo-wide support that serves all four.
 
-The ten legs must pursue **different ideas or different directions**, chosen so they do not
+The four legs must pursue **different ideas or different directions**, chosen so they do not
 depend on each other's results and do not touch each other's files. That independence is the
 Decision Maker's responsibility to design and the orchestrator's to enforce (§5).
 
@@ -93,7 +93,7 @@ default; the one deliberate exception is the sharding control arm in §10.
 
 ## 3. The Decision Maker (DM)
 
-**One extra agent, Fable 5, outside the 32-slot pool.** The DM decides *what to work on*; the
+**One extra agent, Fable 5, outside the 20-slot pool.** The DM decides *what to work on*; the
 orchestrator decides *how it lands*. The orchestrator never invents a leg — and when the plan
 and the queue leave the next leg genuinely unclear, **the DM chooses the work**. That mandate
 is the DM's alone; an empty leg slot is never the answer.
@@ -103,7 +103,7 @@ a bloated DM can be discarded and recreated cheaply from it. DIRECTION.md carrie
 
 - **the leg queue** — ranked candidate legs, each with a route name, a one-paragraph thesis,
   a **pre-committed gate naming both branches**, and its **file territory** (§5);
-- **live assignments** — which leg number and route each of the ten leg slots holds;
+- **live assignments** — which leg number and route each of the four leg slots holds;
 - **the ranking rationale** — why this order, refreshed whenever a gate answers;
 - **open direction questions** — resolved by the DM itself under the standing directive
   (§8) wherever possible; only a question the directive genuinely cannot answer surfaces
@@ -111,7 +111,7 @@ a bloated DM can be discarded and recreated cheaply from it. DIRECTION.md carrie
 
 **Queue ranking.** Prefer, in this order: (a) a leg that could actually move a link of the
 L1→L4 chain; (b) a leg whose gate can answer either way within a leg's work; (c) a leg
-independent of the other nine. A leg with no pre-committed failure branch is not a leg.
+independent of the other three. A leg with no pre-committed failure branch is not a leg.
 
 **Steering.** When the user gives the orchestrator input — a change of direction, a review of
 goals, a new priority — the orchestrator forwards it **verbatim** to the DM via `SendMessage`
@@ -135,7 +135,7 @@ it touches the file, in the same edit that adds or promotes a leg. This is addit
 existing queue entries and ranking rationale, not a replacement for them; it exists so the
 count can be read in one line instead of re-derived by hand.
 
-**Watermark.** The moment that count is **at or below 3**, the DM drafts at least 8 more
+**Watermark.** The moment that count is **at or below 2**, the DM drafts at least 4 more
 candidate legs — fully specified, same rigor as the initial queue (§3 above: thesis,
 pre-committed gate naming both branches, disjoint file territory, difficulty class) —
 **immediately, unprompted.** Waiting for the count to reach 0, or for the next time the
@@ -169,12 +169,12 @@ on demand, and an audit/repair/verify leg is the cheapest kind to draft — ever
 `solver/` can support one. Left unconstrained, the reserve refills with audits by default and
 the live roster inherits that composition: one review found leg 0 (orchestrator integration
 commits) at 57% of the last 60 commits on `main`, up from 25/60 and 9/60 in the two reviews
-before it, and a ten-slot roster with seven audit/repair/verify legs and zero math, literature,
+before it, and a full roster of audit/repair/verify legs with zero math, literature,
 or construction legs. A prior "math-over-review" standing preference did not survive an
 orchestrator restart, because a preference recorded only in prose is exactly the kind of rule
 lesson 68 warns decays at the rate of memory.
 
-**The rule, executable, not a preference:** **at least 3 of the 10 live slots must at all
+**The rule, executable, not a preference:** **at least 2 of the 4 live slots must at all
 times hold a leg whose primary output is mathematics, external literature, or construction**
 (not an adversarial audit, a repair, or a post-construction verification). The §3a watermark
 trigger **may not** fill a slot with an audit/repair/verify leg while the roster is below this
@@ -185,7 +185,7 @@ rather than filling it with whatever cheap audit is sitting in reserve.
 
 **The orchestrator checks the floor at every refill** (`ORCHESTRATION.md` §4a's per-slot
 refill step): before dispatching a leg into a newly-vacated slot, count how many of the
-remaining nine live slots are math/literature/construction-typed; if the floor would be
+remaining three live slots are math/literature/construction-typed; if the floor would be
 breached by filling this slot with an audit/repair/verify candidate, request an eligible
 candidate from the DM instead, even if that means a slot sits briefly unfilled rather than
 filled with an ineligible type. `test_plan_of_record.py` or the merge gate should assert this
@@ -194,8 +194,8 @@ an unenforced rule is a rule that will drift again.
 
 | Band | Slots | Model | Lane | Branch prefix | Role |
 |---|---|---|---|---|---|
-| **LEG-A…J** | 10 | Opus, high effort | local worktree | `leg/<N>-<slug>` | One whole leg each, end to end: novelty pass → construction → measurement → gate answer → full quartet → **its own rebase, gate, and push to `main`** (§7b). Owns only its own files (§5). Terminated once its push lands; the slot refills with a fresh agent. |
-| **VER-A…J** | 10 | Opus, high effort | local worktree | `verify/<N>-<slug>` | Paired 1:1 to a leg. Re-measure any prior headline that leg *consumes* (lesson 85) **before** it builds on it; then line-by-line review of the leg's landing on `main`, after the fact. **Reports gaps, does not repair.** Spawned when its leg has something to verify, not idle-running. |
+| **LEG-A…D** | 4 | Opus, high effort | local worktree | `leg/<N>-<slug>` | One whole leg each, end to end: novelty pass → construction → measurement → gate answer → full quartet → **its own rebase, gate, and push to `main`** (§7b). Owns only its own files (§5). Terminated once its push lands; the slot refills with a fresh agent. |
+| **VER-A…D** | 4 | Opus, high effort | local worktree | `verify/<N>-<slug>` | Paired 1:1 to a leg. Re-measure any prior headline that leg *consumes* (lesson 85) **before** it builds on it; then line-by-line review of the leg's landing on `main`, after the fact. **Reports gaps, does not repair.** Spawned when its leg has something to verify, not idle-running. |
 | **LIT-1,2** | 2 | Sonnet | cloud or local | `lit/<N>-<slug>` | Standing literature flags, and deep dives a leg requests. A leg's *own* novelty pass stays with the leg — LIT does not replace it. |
 | **REPRO-1,2** | 2 | Sonnet | cloud or local | `repro/<N>-<slug>` | Mechanical reproducibility: every root `test_*.py` **with `.venv/bin/python`**, raw per-file pass/fail counts (never a rolled-up summary); figures via `writeup/build_figures.py`; `*_evidence.py` scripts rebuild without re-runs. Fixes *scripts*; a prose/JSON discrepancy is reported, never repaired. |
 | **DOCS-1,2** | 2 | Sonnet | cloud or local | `docs/<N>-<slug>` | `writeup/INDEX.md`, quartet-completeness audit, dead links, `README.md`, `writeup/README.md` index. Checks each leg's BLOG/TECHNICAL against the docs contract before merge. |
@@ -203,12 +203,12 @@ an unenforced rule is a rule that will drift again.
 | **BENCH** | 4 | assigned | assigned | assigned | Unassigned capacity. |
 
 **Bench priority, in this order:**
-1. **Refill a leg slot the moment one vacates** (§4a) — ten legs live is the target, not a
+1. **Refill a leg slot the moment one vacates** (§4a) — four legs live is the target, not a
    ceiling reached once. Refill is per-slot and immediate: terminate the finished agent, get
    the next brief from the DM, spawn fresh.
 2. **Repair work integration found.** A failing gate, a broken test on `main`, a bug an agent
    tripped over: spawn a bench agent to fix it. Issues get *worked*, not queued.
-3. **An eleventh+ parallel route** from the DM's queue, if every other slot is saturated and
+3. **A fifth+ parallel route** from the DM's queue, if every other slot is saturated and
    the queue has a ready, independent item.
 
 ### 4a. Refill is triggered by vacancy, not only by landing on `main`
@@ -234,7 +234,7 @@ landed leg has been audited and every support branch merged. Detecting a vacancy
 its replacement from the DM is one action, not two steps apart in the loop; do not let "audit
 what landed" finish for the whole batch before the first refill request goes out.
 
-Never exceed 32 concurrent workers plus the DM. Steady state is ~16–24; the headroom is what
+Never exceed 20 concurrent workers plus the DM. Steady state is ~10–15; the headroom is what
 makes "assign an idle agent to a new leg" possible without starving verification.
 
 **Context hygiene.** Agents are cheap to recreate and expensive to keep talking to.
@@ -245,7 +245,7 @@ makes "assign an idle agent to a new leg" possible without starving verification
 - **Support agents are recreated per cycle**, not continued; their tasks are independent.
 - Subagents cannot be `/clear`ed. Recreating *is* the clear.
 
-## 5. Collision avoidance under ten parallel legs
+## 5. Collision avoidance under four parallel legs
 
 Parallel agents never edit the same file. Two mechanisms:
 
@@ -262,7 +262,7 @@ cycle. No leg, no verifier, no support agent touches them:
 | `PHASE2_P2_NOTES.md` | Frozen for agents. Orchestrator appends one pointer block per merged leg. |
 | `LITERATURE_CHECK.md` | Each leg/LIT writes `writeup/novelty/leg_<N>.md`; the orchestrator adds a one-line pointer. |
 
-This is what makes ten-way parallelism possible at all: the shared files that every leg used
+This is what makes four-way parallelism possible at all: the shared files that every leg used
 to want to append to are now written once, by one writer, after the landings.
 
 `capabilities.py` is the exception agents may touch: **append** an entry at the end of your
@@ -336,7 +336,7 @@ merge. A leg's finish protocol, in order, none skippable:
 5. push to `main`; on a non-fast-forward rejection (another leg landed first), re-fetch,
    re-rebase, re-gate, and push again until it lands;
 6. report the one-line finding and stop. The agent is terminated once its push lands and the
-   slot refills with a fresh agent on a fresh brief — ten legs stay live.
+   slot refills with a fresh agent on a fresh brief — four legs stay live.
 
 An outcome that falls under an escalation (§8) is the one exception: the agent pushes its
 *branch* only, never `main`, and reports it as parked. This still vacates the slot exactly like
@@ -438,7 +438,7 @@ it at any time without asking. Sections, in this order:
    Say "nothing" when there is nothing; never omit the heading. With the standing directive
    (§8) in force this section normally holds the four escalations or "nothing" — a question
    here means the directive could not decide it, and the entry says why.
-2. `## Now` — timestamp, cycle number, `main` SHA, stop-file status, agents live / 32.
+2. `## Now` — timestamp, cycle number, `main` SHA, stop-file status, agents live / 20.
 3. `## Legs` — one row per live leg: number, route, agent, branch, phase
    (`novelty` → `build` → `measure` → `writeup` → `verify` → `gating` → `merged`), started,
    last event.
@@ -514,7 +514,7 @@ standing configuration, which is orchestrator-owned (agents don't touch it).
 **Why this is safe against the collision problem a periodic cron would have.** A cron fires on
 a wall-clock schedule regardless of whether the previous run is still going — with this run's
 actual cadence (single sessions running for hours), a cron would very likely fire mid-run and
-create two orchestrators dispatching against the same `DIRECTION.md` and the same ten leg
+create two orchestrators dispatching against the same `DIRECTION.md` and the same four leg
 slots. Self-chaining doesn't have this failure mode **by construction**: a session only ever
 creates its successor at the moment it has already decided to stop, so there is never more
 than one link of the chain live. No lock file is needed for this path.
@@ -562,7 +562,7 @@ failures.
 
 **The fix: never let the orchestrator's own turn go quiet for long stretches while agents are
 in flight.** Immediately after any dispatch that leaves agents running unattended for more
-than a few minutes — the initial ten-leg dispatch in Step 2, and every refill in Step 3's
+than a few minutes — the initial four-leg dispatch in Step 2, and every refill in Step 3's
 Terminate-and-refill step — arm a short heartbeat:
 
 ```
@@ -590,7 +590,7 @@ arrive.
   the finish protocol — cheap insurance if a worktree is ever actually lost, not just its live
   process.
 - Don't fill every slot immediately just because it's empty if doing so means a large batch of
-  agents will all run unattended for a long stretch at once — ten legs plus a handful of
+  agents will all run unattended for a long stretch at once — four legs plus a handful of
   support/bench agents is the designed ceiling, not an instruction to always dispatch that many
   in one go regardless of how long they'll run before the next heartbeat or notification. **This
   is a caution about the size of one dispatch batch, not license to defer the refill itself
@@ -651,7 +651,7 @@ on the first four parallel legs rather than arguing about it:
 
 ## 11. The maintenance sweep (periodic tech debt)
 
-**User directive (2026-08-05):** the ten leg slots stay Opus and stay research. Tech debt is
+**User directive (2026-08-05, count revised 2026-08-11):** the four leg slots stay Opus and stay research. Tech debt is
 handled by **Sonnet support agents, at most five live at once**, and the sweep is **kicked
 off by the orchestrator periodically** — it is not a standing lane and it never displaces a
 leg slot.

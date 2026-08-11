@@ -18,7 +18,7 @@ the most important thing to do.  Prose did not stop it.  These gates are the exe
   (6) THE HONESTY INVARIANTS ARE STILL THERE. Both walls, the odds, and the statement that
       this plan does not move Clay. If a future session quietly deletes those, this fails.
   (7) THE COMPOSITION FLOOR IS CODE, NOT A PREFERENCE (leg 258, ORCHESTRATION.md §3b). At
-      least 3 of the 10 live slots must be floor-eligible (math/literature/construction, not
+      least 2 of the 4 live slots must be floor-eligible (math/literature/construction, not
       audit/repair/verify), read from DIRECTION.md's own <!-- FLOOR-TABLE-START/END --> marker
       -- a small, DM-maintained snapshot, not a parse of the file's prose.
 
@@ -183,6 +183,11 @@ def test_7_status_report_renders():
 # --- leg 258: the composition floor (ORCHESTRATION.md §3b), read from a small,
 # DM-maintained marker in DIRECTION.md rather than the file's ~10,000 lines of prose. ---
 
+# The contract's live-slot count and floor, in one place (ORCHESTRATION.md sections 2 and 3b).
+# Dropped from 10/3 to 4/2 by user directive, 2026-08-11.
+LIVE_SLOTS = 4
+FLOOR = 2
+
 FLOOR_TABLE_START = "<!-- FLOOR-TABLE-START -->"
 FLOOR_TABLE_END = "<!-- FLOOR-TABLE-END -->"
 
@@ -217,24 +222,24 @@ def parse_floor_table(text):
 
 
 def test_9_composition_floor_is_met():
-    """ORCHESTRATION.md §3b: at least 3 of the 10 live slots must be floor-eligible
+    """ORCHESTRATION.md §3b: at least FLOOR of the LIVE_SLOTS live slots must be floor-eligible
     (mathematics, external literature, or construction -- not audit, repair, or verify).
     Landed leg 258, while the floor is met (a floor that is breached invites an
     exception), from DIRECTION.md's own <!-- FLOOR-TABLE-START/END --> marker.
     """
     t = (ROOT / "DIRECTION.md").read_text()
     total, eligible = parse_floor_table(t)
-    assert total == 10, f"floor table has {total} slots, expected 10"
-    assert eligible >= 3, (
+    assert total == LIVE_SLOTS, f"floor table has {total} slots, expected {LIVE_SLOTS}"
+    assert eligible >= FLOOR, (
         f"composition floor breached: only {eligible}/{total} live slots are "
-        f"floor-eligible; ORCHESTRATION.md section 3b requires >= 3")
-    print(f"  composition floor: {eligible}/{total} live slots floor-eligible (>= 3 "
+        f"floor-eligible; ORCHESTRATION.md section 3b requires >= {FLOOR}")
+    print(f"  composition floor: {eligible}/{total} live slots floor-eligible (>= {FLOOR} "
           f"required)  OK")
 
 
 def test_10_composition_floor_parser_rejects_a_breached_fixture():
-    """Deliberate FIXTURE, not the real roster: prove the >= 3 check actually
-    discriminates by feeding the same parser a hand-built 2/10-eligible table and
+    """Deliberate FIXTURE, not the real roster: prove the >= FLOOR check actually
+    discriminates by feeding the same parser a hand-built 1/4-eligible table and
     confirming it reads as breached. This does not touch the real roster.
     """
     fixture = FLOOR_TABLE_START + "\n" + (
@@ -244,18 +249,12 @@ def test_10_composition_floor_parser_rejects_a_breached_fixture():
         "| B | 902 | BBB | no |\n"
         "| C | 903 | CCC | yes |\n"
         "| D | 904 | DDD | no |\n"
-        "| E | 905 | EEE | no |\n"
-        "| F | 906 | FFF | yes |\n"
-        "| G | 907 | GGG | no |\n"
-        "| H | 908 | HHH | no |\n"
-        "| I | 909 | III | no |\n"
-        "| J | 910 | JJJ | no |\n"
     ) + FLOOR_TABLE_END
     total, eligible = parse_floor_table(fixture)
-    assert (total, eligible) == (10, 2), (total, eligible)
-    assert eligible < 3, "fixture must represent a breached floor to prove the check discriminates"
+    assert (total, eligible) == (LIVE_SLOTS, 1), (total, eligible)
+    assert eligible < FLOOR, "fixture must represent a breached floor to prove the check discriminates"
     print(f"  fixture with {eligible}/{total} floor-eligible correctly reads as BREACHED "
-          f"(< 3)  OK")
+          f"(< {FLOOR})  OK")
 
 
 if __name__ == "__main__":

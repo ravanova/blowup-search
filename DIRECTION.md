@@ -15,9 +15,16 @@ and needs the user.
 ## Composition floor roster (machine-readable, DM-maintained)
 
 Leg 258 (ROUTE-FLOCK) added this marker so `test_plan_of_record.py` can check
-ORCHESTRATION.md §3b's composition floor (>= 3 of the 10 live slots floor-eligible: primary
+ORCHESTRATION.md §3b's composition floor (>= 2 of the 4 live slots floor-eligible: primary
 output is mathematics, external literature, or construction -- not audit, repair, or verify)
-without parsing this file's prose. **The DM keeps this block in sync with the "Live-slot
+without parsing this file's prose.
+
+**User directive, 2026-08-11: the contract dropped from ten parallel legs to four.** Slots are
+now LEG-A...D only; ORCHESTRATION.md and ORCHESTRATOR_PROMPT.md are updated and are the
+authority. This block was truncated to the four A-D letters mechanically, to keep the merge
+gate green -- it is NOT a ranking. **The DM re-ranks which four routes hold the four letters**
+on its next cycle; the legs that lost slots E-J (326, 306, 305, 229, 292, 287) return to the
+reserve queue as undispatched, not as findings. **The DM keeps this block in sync with the "Live-slot
 roster" table below on every refill/promotion that changes a slot's occupant or type** --
 it is a snapshot of the same facts already stated in prose, not a new source of truth. Only
 the block between the two HTML comments is parsed; everything else in this file is free-form
@@ -30,12 +37,6 @@ prose as before.
 | B | 221 | BVRR | no |
 | C | 323 | CENV | yes |
 | D | 318 | DECR | yes |
-| E | 326 | CTRX | yes |
-| F | 306 | SSE | yes |
-| G | 305 | DWM | yes |
-| H | 229 | PNRV | no |
-| I | 292 | CAPA | no |
-| J | 287 | EPA | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted

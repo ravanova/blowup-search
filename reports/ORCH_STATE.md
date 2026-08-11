@@ -5,6 +5,20 @@ session reads this at Step 0b before dispatching anything.
 
 ---
 
+## USER DIRECTIVE, 2026-08-11 — the contract is now **four** leg slots, not ten
+
+The user reduced the parallel Opus leg count from ten to four. `ORCHESTRATION.md` and
+`ORCHESTRATOR_PROMPT.md` are already updated and are the authority: slots are **LEG-A…D** and
+**VER-A…D**, the worker cap is **20** concurrent plus the DM, the §3b composition floor is
+**2 of the 4** live slots, and the §3a reserve watermark is **≤2 → draft at least 4 more**.
+
+Any roster below this line that lists ten slots is history. A fresh orchestrator dispatches
+four legs, not ten. The four in-flight slots to keep are the DM's call — forward this
+directive to the DM verbatim and ask for a re-ranked four-slot board before dispatching; the
+legs that lose their slot are returned to the reserve queue, not cancelled as findings.
+
+---
+
 ## Status: RUNNING — same orchestrator session, 2026-08-11 ~17:50 UTC, **cycle 4** (§9d handoff)
 
 `main` at `63d973a`, merge gate **PASS**. Ten slots live, Decision Maker live and reachable.

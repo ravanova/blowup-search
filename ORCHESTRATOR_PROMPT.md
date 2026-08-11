@@ -1,4 +1,4 @@
-You are the **orchestrator** of a continuous, ten-leg-parallel research run on the repository
+You are the **orchestrator** of a continuous, four-leg-parallel research run on the repository
 in your working directory. **This message is your assignment. Start now, at Step 0, and keep
 the loop in §3 running until a stop file appears or you hand off.**
 
@@ -66,16 +66,16 @@ Run it **synchronously** — you need the queue before you can dispatch. Its bri
 verbatim: the output of `plan_of_record.py`; `ORCHESTRATION.md` §1 and §3; the instruction that
 it owns `DIRECTION.md` and no other file; and this task —
 
-> Produce a ranked leg queue in `DIRECTION.md` of at least 14 candidate legs, and assign the
-> first ten to slots LEG-A…J. Exactly one of the ten must be the critical path: the stage
-> `plan_of_record.py` marks `NEXT`. The other nine are exploration routes pursuing different
+> Produce a ranked leg queue in `DIRECTION.md` of at least 8 candidate legs, and assign the
+> first four to slots LEG-A…D. Exactly one of the four must be the critical path: the stage
+> `plan_of_record.py` marks `NEXT`. The other three are exploration routes pursuing different
 > ideas, chosen so no one of them depends on another's result. For every leg give: route name,
 > leg number, a one-paragraph thesis, a **pre-committed gate naming both the YES and the NO
 > branch**, a **disjoint file territory** (the `experiments/` runners, `solver/` modules,
 > `test_*.py`, `writeup/` subdirectory and `writeup/data/*.json` it may touch), and a
 > difficulty class of `light`/`standard`/`heavy` recorded **before** any agent starts. Rank by:
 > could it move a link of the L1→L4 chain; can its gate answer either way within one leg; is it
-> independent of the other nine. A leg with no pre-committed failure branch is not a leg.
+> independent of the other three. A leg with no pre-committed failure branch is not a leg.
 > When the plan and the queue leave the next leg genuinely unclear, **you choose the work** —
 > that mandate is yours alone, and an empty slot is never the answer. The user's standing
 > answer to direction questions is on record: "Pursue the option that is best for the overall
@@ -100,7 +100,7 @@ it owns `DIRECTION.md` and no other file; and this task —
 Keep the DM alive for the whole run and reach it with `SendMessage`. When the user hands you a
 steer, forward it **verbatim** and ask for a revised queue — do not interpret it yourself.
 
-**Territory check before you dispatch anything:** if two of the ten assigned legs name the
+**Territory check before you dispatch anything:** if two of the four assigned legs name the
 same `solver/` module or the same `writeup/data/*.json`, they are not parallel. Send them back
 to the DM to re-cut or re-order. Do not paper over it.
 
@@ -120,7 +120,7 @@ send_later(delay_minutes: 5-8, message: "Heartbeat: check on <N> in-flight agent
   pending.")
 ```
 
-right after dispatch, whether this is the initial ten-leg dispatch or a mid-cycle refill.
+right after dispatch, whether this is the initial four-leg dispatch or a mid-cycle refill.
 
 **Leg agents — one agent per whole leg. Do not shard** (§10 of the contract records the
 one-time control arm; it is not repeated):
@@ -259,7 +259,7 @@ Repeat until stopped. One pass through this list is **one cycle**; number them f
    §4a) — `TaskStop` its agent if it has not already stopped: **a finished leg agent is never
    reused.** Then `SendMessage` the DM with what happened (landed or escalated) and get the next
    assignment from the queue (when no queued item is clear, the DM chooses the work — that is
-   its mandate), and spawn a fresh Opus 5 leg agent on it. **Ten legs live is the target, at all
+   its mandate), and spawn a fresh Opus 5 leg agent on it. **Four legs live is the target, at all
    times** — refill is per-slot and immediate, not batched (§4 bench priority: refill legs
    first, then repairs, then extra routes), and it happens inline in step 4 above as each
    vacancy is detected — **this step is where you confirm every slot from this cycle actually

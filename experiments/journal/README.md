@@ -1,6 +1,6 @@
 # Per-leg journal entries
 
-`experiments/JOURNAL.md` is append-only and was written by one leg per day. With ten legs
+`experiments/JOURNAL.md` is append-only and was written by one leg per day. With several legs
 running in parallel (see `ORCHESTRATION.md` §2) it became the single worst merge-conflict
 point in the repo.
 

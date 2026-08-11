@@ -286,7 +286,7 @@ Most of this is model-agnostic and outlives whatever happens to the Clay attempt
   Boussinesq Biot–Savart, fractional dissipation, interval arithmetic and
   Newton–Kantorovich certificate machinery.
 - **A multi-agent operating contract** ([`ORCHESTRATION.md`](ORCHESTRATION.md)):
-  ten parallel legs with disjoint file territories, a Decision Maker that plans
+  four parallel legs with disjoint file territories, a Decision Maker that plans
   every leg, paired verifiers that re-measure headline numbers before anyone
   builds on them, an executable merge gate every landing must pass, and a short
   list of things that are *never* pushed without a human.
