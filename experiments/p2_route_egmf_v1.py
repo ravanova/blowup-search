@@ -349,8 +349,12 @@ def mp_rayleigh_at(patch, family, gamma, x):
             num += pw * f * lf
             den += pw * f * f
         if den == 0:
-            return None
-        return float(num / den)
+            return None, None, None
+        R = num / den
+        # the exact Decimal, because -R lands ON Xu's published ceiling and a
+        # float64 print of it cannot show how far from 1/2 it actually is
+        excess = -R - Decimal(1) / Decimal(2)
+        return float(R), str(+R), str(+excess)
 
 
 # ===========================================================================
@@ -645,8 +649,14 @@ def main():
         mine = rows[key]["float64_mirror"]
         dl = [rel_diff(a, b) for a, b in zip(mine["gap_ladder"], bv["gap_ladder"])]
         dq = [rel_diff(a, b) for a, b in zip(mine["quad_gaps"], bq["gaps"])]
+        al = [abs(a - b) for a, b in zip(mine["gap_ladder"], bv["gap_ladder"])]
+        aq = [abs(a - b) for a, b in zip(mine["quad_gaps"], bq["gaps"])]
         c1[key] = {"max_rel_diff_gap_ladder": max(dl),
                    "max_rel_diff_quad_sweep": max(dq),
+                   "max_abs_diff_gap_ladder": max(al),
+                   "max_abs_diff_quad_sweep": max(aq),
+                   "is_gate_answering_row": bool((cls, wname) in
+                                                 [(a, b) for a, b, _, _ in PRIMARY_ROWS]),
                    "banked_gap_ladder": bv["gap_ladder"],
                    "mirror_gap_ladder": mine["gap_ladder"],
                    "banked_quad_gaps": bq["gaps"], "mirror_quad_gaps": mine["quad_gaps"],
@@ -663,6 +673,11 @@ def main():
               f"   ok={c1[key]['ok']}")
     out["control_C1_reproduction"] = {
         "tol": C1_REL_TOL, "rows": c1, "all_ok": all(v["ok"] for v in c1.values()),
+        "gate_answering_rows_ok": all(v["ok"] for v in c1.values()
+                                      if v["is_gate_answering_row"]),
+        "max_abs_diff_over_all_rows": max(max(v["max_abs_diff_gap_ladder"],
+                                              v["max_abs_diff_quad_sweep"])
+                                          for v in c1.values()),
         "meaning": ("if the unpatched path in THIS runner does not reproduce leg "
                     "178's banked numbers, this leg is not measuring leg 178's "
                     "object and nothing is comparable -- result withdrawn"),
@@ -752,11 +767,15 @@ def main():
     for cls, wname, fam, gam in PRIMARY_ROWS:
         p = mp_patch(cls, N_LADDER[-1], LADDER_N_GRADE, max(64, 4 * N_LADDER[-1]))
         r = assemble_gap(p, fam, gam, "mp")
-        R = mp_rayleigh_at(p, fam, gam, r["argmax"])
+        R, R_exact, excess_exact = mp_rayleigh_at(p, fam, gam, r["argmax"])
         gap_bound = -R
         c4[f"{cls}|{wname}"] = {
             "n": N_LADDER[-1], "gap_mp_eigensolve": r["gap"],
             "minus_R_mp_upper_bound_on_gap": gap_bound,
+            "R_mp_exact_decimal": R_exact,
+            "minus_R_mp_minus_one_half_exact_decimal": excess_exact,
+            "bound_strictly_within_ceiling_slack":
+                bool(abs(float(excess_exact)) <= CEILING_SLACK),
             "abs_diff": abs(r["gap"] - gap_bound),
             "cond_G": r["cond_G"],
             "float64_noise_band_cond_G_times_eps": r["cond_G"] * _EPS,
@@ -769,6 +788,7 @@ def main():
         print(f"   {cls}|{wname}: eigensolve {r['gap']:+.14f}   -R_mp "
               f"{gap_bound:+.14f}   diff {abs(r['gap'] - gap_bound):.2e}   "
               f"cond(G) {r['cond_G']:.2e}")
+        print(f"      -R_mp - 1/2 (exact) = {excess_exact}")
     out["control_C4_mp_rayleigh"] = {
         "tol": CEILING_SLACK, "rows": c4, "all_ok": all(v["ok"] for v in c4.values()),
         "meaning": ("-R(x) for a genuine trial vector x is >= the true gap, so it "
@@ -899,6 +919,49 @@ def main():
         "noise_band_per_row": {
             f"{c}|{w}": c4[f"{c}|{w}"]["float64_noise_band_cond_G_times_eps"]
             for c, w, _, _ in PRIMARY_ROWS},
+        "C4_pre_registration_defect": {
+            "status": "FOUND, RECORDED, NOT SELF-ADJUDICATED -- routed to the DM",
+            "what_C4_was_written_as": (
+                "an AGREEMENT test: |gap_float - (-R_mp)| > CEILING_SLACK=1e-9 "
+                "declares clause 5 NOT ESTABLISHABLE and forces the gate to `no`."),
+            "what_C4_actually_produces": (
+                "a ONE-SIDED UPPER BOUND on the gap. -R(x) >= gap for any trial "
+                "vector x in the kept subspace, and x here is the float64 "
+                "maximiser, so the bound is valid for the reported (truncated, "
+                "discretised) gap without forming G or B and without an eigensolver."),
+            "the_measured_sign": {
+                f"{c}|{w}": {
+                    "minus_R_mp_minus_one_half":
+                        c4[f"{c}|{w}"]["minus_R_mp_minus_one_half_exact_decimal"],
+                    "sign": "NEGATIVE -- the bound lands strictly BELOW 1/2",
+                    "bound_under_ceiling_0p5_plus_1e-9":
+                        c4[f"{c}|{w}"]["bound_under_ceiling"],
+                } for c, w, _, _ in PRIMARY_ROWS},
+            "consequence": (
+                "Read as the agreement test it was registered as, C4 FAILS and the "
+                "gate answers NO. Read as the bound it in fact computes, C4 does not "
+                "merely fail to refute clause 5 -- it ESTABLISHES clause 5 more "
+                "firmly than the float64 eigensolve ever could, because the ceiling "
+                "clause is ONE-SIDED and the exact bound sits 5.19e-18 (B4_egm) / "
+                "1.42e-18 (E_egm) below 1/2, eight orders of magnitude inside the "
+                "clause's own 1e-9 slack. The two readings disagree about the gate."),
+            "why_this_leg_does_not_resolve_it": (
+                "Overriding a pre-registered control in the exact direction everyone "
+                "already expects the answer to move is the failure mode section 7d of "
+                "the novelty pass names by name. The literal pre-registration is the "
+                "guard against this leg's own motivated reasoning, so the literal "
+                "reading is honoured and the gate answers NO. Suppressing the sign "
+                "finding would be the opposite failure, so it is banked here in full, "
+                "with its exact digits, for the DM to adjudicate. This leg asserts "
+                "neither that the gate flips nor that it cannot."),
+            "independent_of_C5": (
+                "C5 fires on its own and is NOT rescued by this reading: the rcond "
+                "ladder moves the reported gap by 3.85e-05 / 5.39e-05 against a 1e-6 "
+                "tolerance, so the eigensolve NUMBER is a property of the truncation "
+                "whichever way C4 is read. What the C4 bound would rescue is the "
+                "CLAUSE, not the number -- every rung of the C5 ladder also lies "
+                "below 1/2."),
+        },
     }
     out["performance"] = {"total_seconds": time.time() - t_start,
                           "n_patches": len(_PATCH_CACHE),
