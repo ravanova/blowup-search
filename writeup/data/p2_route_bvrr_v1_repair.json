@@ -805,7 +805,7 @@
    "RETURNED": 9,
    "SILENT_WRONG": 18
   },
-  "wall_seconds": 21.93
+  "wall_seconds": 3.67
  },
  "clause_b": {
   "artifacts_with_preexisting_irreproducibility": [
@@ -974,7 +974,7 @@
    },
    {
     "_fingerprint": "525dd1f55e78826d029a6efa80be1e4474a08e1a@1a3e63c",
-    "_from_cache": false,
+    "_from_cache": true,
     "argv": [
      "--logged"
     ],
@@ -1794,7 +1794,7 @@
    },
    {
     "_fingerprint": "525dd1f55e78826d029a6efa80be1e4474a08e1a@1a3e63c",
-    "_from_cache": false,
+    "_from_cache": true,
     "argv": [
      "--only",
      "g2",
@@ -2621,7 +2621,7 @@
    },
    {
     "_fingerprint": "525dd1f55e78826d029a6efa80be1e4474a08e1a@1a3e63c",
-    "_from_cache": false,
+    "_from_cache": true,
     "argv": [],
     "artifact": "writeup/data/p2_route_k_v1_port.json",
     "artifact_comparison": {
@@ -3455,7 +3455,7 @@
    },
    {
     "_fingerprint": "525dd1f55e78826d029a6efa80be1e4474a08e1a@1a3e63c",
-    "_from_cache": false,
+    "_from_cache": true,
     "argv": [],
     "artifact": "writeup/data/p2_route_l_v1_precond.json",
     "artifact_comparison": {
@@ -4301,7 +4301,7 @@
     "returncode": 0,
     "stderr_tail": null,
     "test": "test_boussinesq_rescaled.py",
-    "wall_seconds": 36.1
+    "wall_seconds": 61.8
    },
    {
     "calls_bit_identical": 0,
@@ -4422,5 +4422,5 @@
  },
  "route": "ROUTE-BVRR",
  "stranded_backups_restored_before_sweep": [],
- "wall_seconds": 122588.5
+ "wall_seconds": 66.1
 }
