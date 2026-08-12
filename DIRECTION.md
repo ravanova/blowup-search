@@ -36,7 +36,7 @@ prose as before.
 | A | 299 | TESTA | no |
 | B | 373 | HSFM | yes |
 | C | 374 | SBIV | yes |
-| D | 372 | IDXB | no |
+| D | 375 | PBLG | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -20569,8 +20569,21 @@ authorize §9 wind-down — the contract's own terminal clause ("the
 direction genuinely runs out") is otherwise in play.** Floor 2/4
 (373, 374).
 
+Cycle 10kk: D/372 landed at d72017b — all three gap-list items
+dispositioned per the gate: item 9 CLOSED-WITH-CITATION (leg 138's
+existing closer cited, not duplicated — the 310 lesson working); item
+10 CLOSED-WITH-NEW-ARTIFACT (8/8 checks) + a false-GAP corrected per
+the document's own header + ONE HONEST OPEN CLAUSE (the BLOG prose,
+correctly out of a scripts-only remit); item 13 CLOSED on both halves
+(fig61 byte-identical from banked JSON). No banked JSON touched. D ←
+**leg 375 PBLG** — the genuine fill 372's own open clause hands over:
+BLOG_P2_ROUTEPORT_V2.md, the gap list's OLDEST surviving item
+(claim-bearing prose owed since leg 60 narrowed the gap; every other
+clause of items 1-13 now closed or design-adjudicated), written from
+the landed TECHNICAL + banked data only. Floor 2/4 (373, 374).
+
 **Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
-Immediately dispatchable: **0**. Next fresh leg number: **375.**
+Immediately dispatchable: **0**. Next fresh leg number: **376.**
 
 Nothing in this update lifts a ban. An audited register and a
 verification leg taking its fired turn; no L1-L4 link moved; Clay
@@ -20954,3 +20967,80 @@ Immediately dispatchable: **0**. Next fresh leg number: **375.**
 Nothing in this update lifts a ban. A gate that catches its own DM,
 two decision-support reads, and an exhaustion statement the user can
 act on; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10kk) — 372 ABSORBED (ALL THREE ITEMS
+DISPOSITIONED, NONE DUPLICATED, ONE HONESTLY LEFT OPEN); D ← 375 PBLG
+(THE GAP LIST's OLDEST DEBT, HANDED OVER BY 372's OWN OPEN CLAUSE)
+
+Written from the same detached lineage, resynced to origin/main =
+d72017b.
+
+### 372 IDXB — absorbed at full strength
+
+Every item dispositioned, exactly per the gate's three allowed
+outcomes, with the discipline visible in each: item 9 verified
+ALREADY-CLOSED by leg 138 and cited rather than rebuilt (the 310
+lesson, one week old, working as briefed); item 10 closed with a new
+evidence script (8/8 self-checks) PLUS a false-GAP annotation corrected
+on the document's own header authority PLUS the BLOG clause honestly
+left open as out of a scripts-only remit; item 13 closed on both halves
+with fig61 rebuilt byte-identically from the banked JSON and the
+no-figure convention respected where it applied. build_figures.py
+registration additive per convention; CORRECTIONS §29 filed; no banked
+JSON touched (independently confirmed). Endorsed without amendment.
+
+### Refill — D ← leg 375 PBLG (genuine owed work, not manufacture)
+
+372's open clause is the fill's own provenance: the INDEX gap list has
+carried "only the BLOG is still owed" for Route-PORT v2 since leg 60
+narrowed the original item — the oldest surviving debt in the quartet
+record, claim-bearing prose that a scripts-remit leg correctly refused
+to write. With items 1-13 otherwise closed or design-adjudicated, this
+is the record's last named gap.
+
+```
+### 375 — ROUTE-PBLG: WRITE BLOG_P2_ROUTEPORT_V2.md — THE GAP LIST's
+OLDEST SURVIVING DEBT (from the landed record only)
+[FLOOR-ELIGIBLE: no — record/prose work]
+**Thesis.** Route-PORT v2's quartet lacks only its BLOG.
+TECHNICAL_P2_ROUTEPORT_V2.md, the evidence script, and fig60 are all
+landed; the finding is banked (reach makes the truncation gap WORSE,
++0.47 dec/unit ρ — the tail lemma forced). Write the BLOG in the
+banked convention: every number from the landed TECHNICAL/data JSON,
+none re-derived; the adverse finding stated at full strength (it is
+the headline, not a caveat); no claim the TECHNICAL does not carry.
+**Gate.** Does the BLOG exist with every numeric claim traceable to
+the landed record (checked by script or explicit table in the
+journal), the adverse headline unsoftened, the INDEX row and gap-list
+item 2/10-clause closed — and zero edits to any landed file beyond
+the INDEX/gap-list annotations?
+  yes -> Bank; the quartet-gap list reaches ZERO open clauses.
+  no  -> A claim cannot be written without exceeding the banked
+        record: name it; the clause stays open and honest.
+**Territory.** writeup/4_p2_lottery/BLOG_P2_ROUTEPORT_V2.md (NEW),
+writeup/INDEX.md (the row + gap-list annotation),
+writeup/novelty/leg_375.md, experiments/journal/leg_375.md. Reads the
+landed TECHNICAL and banked data; edits neither. No figure (fig60
+exists).
+**Difficulty.** light
+**Preconditions:** None.
+```
+
+Legal fill: B/373 + C/374 carry §3b. **Floor 2/4 (373, 374).**
+FLOOR-TABLE synced (D 372→375).
+
+### Standing state
+
+A/299 TESTA; B/373 HSFM; C/374 SBIV. Route 4: stopped. With the user:
+seven items + the upgraded exhaustion text (the orchestrator's item-6
+edit pending its quiet moment). After 375, the gap list is empty and
+the exhaustion statement is complete in every register.
+
+**Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
+Immediately dispatchable: **0**. Next fresh leg number: **376.**
+
+Nothing in this update lifts a ban. Three old gaps dispositioned and
+the last one dispatched; no L1-L4 link moved; Clay stays ~0.05%.
