@@ -1,0 +1,67 @@
+{
+  "leg": 367,
+  "route": "E5P",
+  "title": "Does leg 356's asserted ground -- the discretized essential/continuum spectrum of the E5 sweep operator is theoretically pinned to Re(lambda) = 0 exactly -- have a located theorem or a checkable derivation, or must it be downgraded to an unverified assumption?",
+  "date": "2026-08-12",
+  "precondition": "leg 356 (experiments/journal/leg_356.md, writeup/CORRECTIONS.md Sec.25) repaired experiments/p2_route_e_v1_spectrum.py's canonical_order() on the stated ground that the E5 family's discretized essential spectrum sits at Re(lambda)=0 in exact arithmetic. No leg had located or derived that claim before this one.",
+  "gate": {
+    "operator_and_domain_identified": {
+      "file": "solver/rescaled_spectrum.py",
+      "class": "RescaledFlow.generator (= S^{-1} d(residual)/db, K x K dense real matrix)",
+      "basis": "OddCompactBasis -- odd sine collocation on theta in (-pi,pi), X = tan(theta/2) (whole real line, compactified, no truncation)",
+      "closed_form_object_at_a0": "L s = w s - ((w^2-1)/2) s_w - s(w=1)(1+w), w = e^{-i theta}, s = delta Z, Z = H(Omega) + i Omega -- the a=0 linearization of gCLM's dynamically-rescaled flow (F) around the CLM self-similar profile Omega_0 = -sin(theta)",
+      "note": "This is NOT the same operator as leg 343's B1 measurement. Leg 343 (experiments/journal/leg_343.md) measured L f = -Delta f + (1/2)(y . grad) f + f restricted to the ell=0 radial channel of the BACKWARD-rescaled Navier-Stokes/heat operator on a compactified [0,1] domain, whose continuous-spectrum band edge sits at Re(lambda) = 1.0 (not 0) and whose discretized eigenvalue COUNT grows without bound under refinement (6,9,13,18,23,30 across six resolution pairs) rather than converging -- a materially different discretization signature from what leg 356 reports for E5. The two are adjacent (same OddCompactBasis machinery pattern, same match_filter import) but distinct operators on distinct domains; conflating them would be a citation error."
+    },
+    "theorem_search": {
+      "candidates_checked": [
+        {
+          "source": "solver/rescaled_spectrum.py module docstring itself (landed at commit cd43893, 2026-08-02, single-commit file history, never touched since)",
+          "claim": "closed-form admissibility analysis: eigenfunctions s = (w-1)^{1-lambda}(w+1)^{1+lambda}; vanishing at w=-1 (X=infinity) and bounded at w=1 (X=0) gives a CONTINUUM filling the STRIP -1 < Re(lambda) < 1 (both signs, not just Re=0); requiring ADDITIONAL analyticity at X=0 (compatible with the sine trial space) collapses admissibility to 1-lambda a non-negative integer, leaving EXACTLY {lambda=0, lambda=-1} and nothing else",
+          "verdict": "PROVES a different, narrower statement than the one leg 356 needs. It proves that the exact operator's spectrum restricted to eigenfunctions analytic at X=0 is exactly the two structural points -- it does not address, and cannot by itself explain, why a FINITE K-dimensional matrix truncation (which cannot represent the branch-cut continuum eigenfunctions at all, since sin(k theta) is entire in theta) produces K-2 residual numerical eigenvalues clustered at Re=0 rather than scattered across the strip or elsewhere. Hypotheses do not match: the module's own theorem is about the EXACT infinite-dimensional operator's analytic-at-origin subspace, not about the K x K discretization's numerical artifact eigenvalues."
+        },
+        {
+          "source": "experiments/journal/leg_70.md (Route-RC realization audit, docs-only)",
+          "claim": "for Route-I's CriticalDissipativeFlow (a different subclass sharing the same OddCompactBasis), the count of eigenvalues on the 'unstable' (Re>0-ish) side of a mu=0 threshold is exactly K-3 at K=48,96,144 -- the standard signature of a discretized CONTINUOUS spectrum for the maximal L^2 realization (no origin condition imposed), confirmed four independent ways including AST-level code inspection",
+          "verdict": "CORROBORATES the phenomenon (via a different diagnostic -- eigenvalue-count scaling, not a direct Re(lambda) measurement) but does not prove Re(lambda)=0 exactly; a K-3-sized cluster of eigenvalues whose sign is decided by numerical noise is CONSISTENT WITH but does not on its own IMPLY exact Re=0 (it is equally consistent with a narrow band straddling 0)."
+        },
+        {
+          "source": "Papers (Xu, arXiv:2607.19762, fetched and read by legs 111/127/141/163/173) -- the paper this module's own realization-audit precedent (leg 70) cites for the maximal-L^2 dichotomy, and whose Hardy-space linearization L0 is the evident ancestor of this module's closed-form a=0 operator",
+          "claim": "leg 163's reading reports Xu's own abstract explicitly declining to extend the closed-form semigroup decay rate from the transfer-mapped variable to a norm-level statement in X, BECAUSE L0 is NON-NORMAL: 'a spectral gap does not by itself give a decay rate in the X norm.'",
+          "verdict": "Non-normality is the opposite of what a clean 'pinned to Re=0' derivation would want (spectral information on a non-normal operator constrains eigenvalues, not the finite-matrix truncation's behavior). No proposition in the legs that read Xu's paper is quoted as proving the discretized (finite-K, sine-basis) spectrum's real part is exactly zero; the paper's own stated position is one of not deriving norm-level consequences from spectral location. Not a match."
+        }
+      ],
+      "conclusion": "No theorem located, in this repo's own record or in the literature this project has already fetched, whose hypotheses match the specific object (the K x K sine-collocation generator matrix of the a=0 gCLM linearization) and specific claim (its non-structural eigenvalues have Re(lambda) EXACTLY 0, for every finite K) that leg 356 needs."
+    },
+    "derivation_attempt": {
+      "method": "search for an algebraic mechanism (skew-symmetry of the discretized generator under a natural weighted inner product) that would force the non-structural eigenvalues onto the imaginary axis EXACTLY, for every finite K, independent of any continuum limit",
+      "checks_run": [
+        "S (sine collocation matrix) is discretely orthogonal: S^T S off-diagonal / diagonal Frobenius ratio = 5.5e-15 at K=48 (confirms the natural weight candidate G = S^T S is honestly diagonal, not an artifact)",
+        "plain jacobian J: symmetric-part / total Frobenius ratio = 0.891 (full rank symmetric part, not low-rank) -- J itself is far from skew-symmetric",
+        "generator A = S^{-1} J, Gram-weighted skew defect (A^T G + G A) / (G A) Frobenius ratio = 0.477 (full rank, not low-rank) -- A is not skew-adjoint under the natural L^2(d theta) inner product either",
+        "five diagonal reweightings of A (by 1, k, k^2, 1/k, 1/k^2, the natural mode-dependent scalings for a sine/derivative operator) all leave a symmetric part between 13.5% and 71.4% of the matrix's Frobenius norm, full rank in every case -- none isolates a low-rank symmetric residual that could be attributed to the two structural directions alone"
+      ],
+      "conclusion": "No elementary skew-symmetrization mechanism (diagonal weight or the operator's own discrete-orthogonality Gram matrix) explains the observed Re(lambda) pinning. The matrix A is genuinely non-normal and not close to skew-adjoint under any of the tested weights, yet its non-structural eigenvalues still cluster at machine-noise-level real parts. This is a striking, reproducible numerical fact but NOT one this leg could reduce to a checkable linear-algebra identity in the time available. Flagged as open for a future leg with more room, not resolved here."
+    },
+    "empirical_corroboration": {
+      "method": "direct measurement of max|Re(lambda)| over the non-structural eigenvalues (excluding the isolated eigenvalue near -1) of the a=0 generator, at four resolutions, independently of leg 356's own K=96/144 run",
+      "results_by_K": [
+        {"K": 48,  "n_nonstructural": 47,  "max_abs_re": 1.8138268664813495e-14, "max_abs_re_over_K_times_machine_eps": 1.70},
+        {"K": 96,  "n_nonstructural": 95,  "max_abs_re": 8.604228440844963e-14,  "max_abs_re_over_K_times_machine_eps": 4.04},
+        {"K": 144, "n_nonstructural": 143, "max_abs_re": 1.8829382497642655e-13, "max_abs_re_over_K_times_machine_eps": 5.89},
+        {"K": 192, "n_nonstructural": 191, "max_abs_re": 3.481659405224491e-13,  "max_abs_re_over_K_times_machine_eps": 8.17}
+      ],
+      "interpretation": "max|Re(lambda)| grows roughly linearly in K and stays within single-digit multiples of K*machine_epsilon at every resolution tested (not O(1) and not even O(1/K) -- it tracks accumulated float64 roundoff, not a genuine O(1)-scale real part). This is consistent with EXACT Re(lambda)=0 in infinite-precision arithmetic for every finite K tested, not merely an asymptotic K->infinity statement -- but 'consistent with' is not 'proven'.",
+      "leg356_repro": {
+        "K_coarse": 96, "K_fine": 144, "tol": 0.1, "n_kept": 16,
+        "re_range": [-0.9999999999999957, 6.271372310351353e-14],
+        "abs_im_multiset": [0.0, 0.27101893258070425, 0.8397161688663871, 7.156330962366153, 8.134856362628973, 14.827656238000083, 23.007542948426913, 45.17367544516702],
+        "note": "each value appears twice (conjugate pair); independently reproduces leg 356's own bit-for-bit multiset finding at K=96/K=144, tol=0.1"
+      }
+    },
+    "classification": "iii_UNVERIFIED_ASSUMPTION_EMPIRICALLY_CORROBORATED",
+    "classification_detail": "No theorem located whose hypotheses match this specific finite discretization. No checkable derivation constructed (the obvious skew-symmetry mechanisms were tested and ruled out). The claim IS, however, robustly and reproducibly corroborated empirically: leg 356's own K=96/144 measurement, leg 70's independent K-3-scaling diagnostic on a related subclass, and this leg's fresh four-resolution direct measurement (K=48,96,144,192) all agree that the non-structural real parts sit at a noise floor tracking K*machine_epsilon, six or more orders of magnitude below any threshold that has ever mattered to a consumer of this module.",
+    "consequence_for_leg356_ordering_scheme": "HOLDS, with a caveat, not undermined. canonical_order()'s correctness (experiments/p2_route_e_v1_spectrum.py, round_dp=6, i.e. a 1e-6 rounding threshold on Re(lambda) before sorting by Im(lambda)) does NOT logically require the strong claim 'Re(lambda)=0 exactly' -- it only requires the strictly weaker, now independently re-confirmed practical fact that the noise floor sits far below the 1e-6 rounding threshold and far below the smallest genuine isolated real part this module has ever reported (the module's own docstring: 'a would-be Hopf pair's Re > 1e-3'). Margin measured directly: max noise floor over K=48..192 is 3.48e-13, i.e. 1e-6 / 3.48e-13 = 2.87e6, roughly 6.5 orders of magnitude of headroom. That margin holds regardless of whether the pinning is exact or merely extremely small, so the repair is not at risk. The caveat: leg 356's own prose (journal + CORRECTIONS.md Sec.25) states the ground as 'sits on the imaginary axis in exact arithmetic (Re lambda = 0)' -- this leg could not verify that as a theorem or derive it, and it should be read as an unverified (though heavily corroborated) empirical regularity rather than a proven fact, until a future leg either finds the missing algebraic mechanism or locates a citable source.",
+    "marker_for_leg356": "Flagged in writeup/novelty/leg_367.md and this file only -- leg 356's own files (experiments/p2_route_e_v1_spectrum.py, solver/rescaled_spectrum.py, experiments/journal/leg_356.md, writeup/CORRECTIONS.md Sec.25) are read-only for this leg and were not edited."
+  },
+  "ceiling": "TIER 2 -- read-and-report leg. No proof, no certificate, no Clay claim. No repair, no ordering scheme changed. Clay stays ~0.05%."
+}
