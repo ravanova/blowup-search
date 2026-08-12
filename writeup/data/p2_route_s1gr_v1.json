@@ -1,0 +1,199 @@
+{
+ "targets": {
+  "c_l": 3.00649898,
+  "c_omega": -1.02942516,
+  "alpha": -0.3423999698147245
+ },
+ "cause_confirmation": {
+  "harness_argv": [
+   "--logged"
+  ],
+  "harness_default_steps": 400,
+  "banked_artifact_steps_field": [
+   2500,
+   2500,
+   2500,
+   2500
+  ],
+  "rerun_at_400_steps": {
+   "n_r": 300,
+   "n_beta": 48,
+   "r_min": 0.001,
+   "r_max": 100000.0,
+   "steps": 400,
+   "residual": 1.1358928437403324,
+   "c_l": 3.0636748831963687,
+   "c_omega": -1.162224592058745,
+   "alpha": -0.37935637310385306,
+   "alpha_far": -0.45613812051639147,
+   "wall_seconds": 40.75902986526489,
+   "anisotropy_median": 0.02559043445181232,
+   "anisotropy_p90": 0.09512477500252793,
+   "omega_frac_positive_nearfield": 1.0,
+   "omega_min": -0.0029846906403813126,
+   "omega_max": 0.864016759291367
+  },
+  "leg221_reported_regenerated_alpha_run0": -0.3793563731,
+  "rel_diff_vs_leg221_report": 1.0156899399439237e-11
+ },
+ "reruns_at_banked_step_count": [
+  {
+   "n_r": 300,
+   "n_beta": 48,
+   "r_min": 0.001,
+   "r_max": 100000.0,
+   "steps": 2500,
+   "residual": 0.016714825166156966,
+   "c_l": 3.0636748831963674,
+   "c_omega": -1.0265648734746056,
+   "alpha": -0.33507630953437806,
+   "alpha_far": -0.32256185019657985,
+   "wall_seconds": 253.1008529663086,
+   "anisotropy_median": 0.026316888355907057,
+   "anisotropy_p90": 0.09451199101749498,
+   "omega_frac_positive_nearfield": 0.9961734693877551,
+   "omega_min": -0.0016811201631200482,
+   "omega_max": 0.7088991698559732
+  },
+  {
+   "n_r": 450,
+   "n_beta": 48,
+   "r_min": 0.001,
+   "r_max": 100000.0,
+   "steps": 2500,
+   "residual": 0.07707544272113134,
+   "c_l": 3.06417167497102,
+   "c_omega": -1.0233124110839291,
+   "alpha": -0.33396053473198667,
+   "alpha_far": -0.31139625972039325,
+   "wall_seconds": 433.47211718559265,
+   "anisotropy_median": 0.026652408444112475,
+   "anisotropy_p90": 0.09527429139673034,
+   "omega_frac_positive_nearfield": 0.9991438356164384,
+   "omega_min": -0.0018858928208206232,
+   "omega_max": 0.7061911383432117
+  },
+  {
+   "n_r": 600,
+   "n_beta": 48,
+   "r_min": 0.001,
+   "r_max": 100000.0,
+   "steps": 2500,
+   "residual": 0.26665869800197917,
+   "c_l": 3.0621685635001055,
+   "c_omega": -1.0312023842802802,
+   "alpha": -0.3367555909794855,
+   "alpha_far": -0.29916354502450637,
+   "wall_seconds": 701.2254960536957,
+   "anisotropy_median": 0.026646403606011677,
+   "anisotropy_p90": 0.09453320416230487,
+   "omega_frac_positive_nearfield": 1.0,
+   "omega_min": -0.0013656403418837542,
+   "omega_max": 0.6996131477152983
+  },
+  {
+   "n_r": 450,
+   "n_beta": 48,
+   "r_min": 0.001,
+   "r_max": 1000000.0,
+   "steps": 2500,
+   "residual": 0.11607349306073117,
+   "c_l": 3.061732152122591,
+   "c_omega": -1.0293287425623112,
+   "alpha": -0.33619163643975647,
+   "alpha_far": -0.314614230457371,
+   "wall_seconds": 416.1576564311981,
+   "anisotropy_median": 0.02622528515517276,
+   "anisotropy_p90": 0.09356492829408183,
+   "omega_frac_positive_nearfield": 0.9983974358974359,
+   "omega_min": -0.0019104294477655577,
+   "omega_max": 0.7004350165170645
+  }
+ ],
+ "rel_diff_vs_banked": [
+  {
+   "field": "alpha",
+   "run_index": 0,
+   "rerun": -0.33507630953437806,
+   "banked": -0.3350763095343765,
+   "rel_diff": 4.638681369730669e-15
+  },
+  {
+   "field": "alpha",
+   "run_index": 1,
+   "rerun": -0.33396053473198667,
+   "banked": -0.33396053473198634,
+   "rel_diff": 9.973241528519034e-16
+  },
+  {
+   "field": "alpha",
+   "run_index": 2,
+   "rerun": -0.3367555909794855,
+   "banked": -0.3367555909794855,
+   "rel_diff": 0.0
+  },
+  {
+   "field": "alpha",
+   "run_index": 3,
+   "rerun": -0.33619163643975647,
+   "banked": -0.33619163643975625,
+   "rel_diff": 6.604703414887614e-16
+  }
+ ],
+ "thread_control": {
+  "runs": [
+   {
+    "alpha": -0.3350763095343765,
+    "residual": 0.01671482516623468,
+    "c_l": 3.0636748831963683,
+    "c_omega": -1.0265648734746011,
+    "threads": 1,
+    "wall_seconds": 274.2584300041199
+   },
+   {
+    "alpha": -0.33507630953437806,
+    "residual": 0.016714825166156966,
+    "c_l": 3.0636748831963674,
+    "c_omega": -1.0265648734746056,
+    "threads": 2,
+    "wall_seconds": 292.56186509132385
+   },
+   {
+    "alpha": -0.33507630953437806,
+    "residual": 0.016714825166156966,
+    "c_l": 3.0636748831963674,
+    "c_omega": -1.0265648734746056,
+    "threads": 4,
+    "wall_seconds": 290.26288533210754
+   }
+  ],
+  "max_abs_diff": 1.5543122344752192e-15,
+  "max_rel_diff": 4.638681369730647e-15
+ },
+ "predicate_reeval": {
+  "checks": {
+   "1_alpha_within_5pct": true,
+   "2_alpha_far_within_10pct": false,
+   "3_anisotropy_below_0p23": true,
+   "4_resolution_stable_alpha": true
+  },
+  "pass": false,
+  "banked_checks": {
+   "1_alpha_within_5pct": true,
+   "2_alpha_far_within_10pct": false,
+   "3_anisotropy_below_0p23": true,
+   "4_resolution_stable_alpha": true
+  },
+  "banked_pass": false,
+  "flipped_vs_banked": {
+   "1_alpha_within_5pct": false,
+   "2_alpha_far_within_10pct": false,
+   "3_anisotropy_below_0p23": false,
+   "4_resolution_stable_alpha": false
+  }
+ },
+ "adjudication": {
+  "status": "REPRODUCIBLE_AS_BANKED",
+  "named_mechanism": "experiments/p2_route_bvrr_v1_repair.py's BANKED registry entry for spike1_stepC_gate invokes the generating script with argv=['--logged'] only, omitting the '--steps 2500' flag the banked artifact's own runs[*].steps field shows was used originally; the script's CLI default (400) was silently substituted, producing a materially shorter, unconverged trajectory rather than a differently-computed one. This is a harness bug in the regeneration argv list, not code drift in solver/boussinesq_rescaled.py or solver/boussinesq_velocity.py (both are byte-identical on the relevant path for well-posed grids since 51b63b2 -- 26e6bd3 only added raise-guards that never trigger on this gate's configs) and not environment sensitivity (see thread_control above)."
+ }
+}
