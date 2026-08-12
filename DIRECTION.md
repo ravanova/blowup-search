@@ -36,7 +36,7 @@ prose as before.
 | A | 335 | S1GR | no |
 | B | 353 | DSSP-B5 | yes |
 | C | 351 | DSSP-B3 | yes |
-| D | 324 | P2SPF | no |
+| D | 322 | F70 | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -18473,10 +18473,73 @@ With the user: cycle-10 packet + GA note, POCP (ii) item,
 C4/escalation-#3, 313 packet + ban-wording, 320 packet. Next vacancy: 322
 F70.
 
-**Reserve queue: 13 undispatched legs (322, 327, 287, 229, 293, 298, 299,
-310, 325, 231, 232, 233, 234).** Immediately dispatchable: **7**. Next
-fresh leg number: **354.**
+Cycle 10n: D/324 landed YES at 42f2976 — every one of 285's 15 terms
+carries exactly one sourced-or-UNMEASURED row: A4 MEASURED (302's ledger,
+5.55e-16→8.32e-03, KA8's mechanism quoted verbatim), the other 14
+UNMEASURED and stated so — never guessed, exactly as drafted; append-only
+confirmed, the ledger read-only. Phase-1 costing now reads one honest
+column. Also recorded: 335's §9g look resolved NOT-A-STALL (second
+diagnostic run, live multi-core computation; the long runtime is the
+no-branch being earned, not avoided — watch continues on
+process-death-without-landing). D ← 322 F70 (produce-or-correct). Floor
+2/4 (353, 351).
+
+**Reserve queue: 12 undispatched legs (327, 287, 229, 293, 298, 299,
+310, 325, 231, 232, 233, 234).** Immediately dispatchable: **6** (rank
+order: 327, 287, 229, 293, 298, 299). Next fresh leg number: **354.**
 
 Nothing in this update lifts a ban. A resisted wrong fix is the correction
 discipline protecting the record from its own maintainers — including this
 one; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10n) — 324 YES ABSORBED (15/15 TERMS ROWED,
+14 HONESTLY UNMEASURED); 335's NOT-A-STALL RECORDED; D ← 322 F70
+
+Written from the same detached lineage, resynced to origin/main = 42f2976.
+
+### 324 P2SPF gate YES, absorbed at full strength
+
+The addendum is exactly the shape its gate demanded: 15/15 terms with
+exactly one row each, A4 MEASURED and sourced to 302's banked ledger with
+the KA8 mechanism quoted verbatim (transcription correct, evaluation
+ill-conditioned, the cancellation point localised at r=1), and the other 14
+UNMEASURED — stated, never guessed, because leg 302 instrumented only A4
+and no landed leg measured the rest. Zero existing spec text altered
+(append-only confirmed by diff). Every later apparatus leg's spec now reads
+one honest precision column. Endorsed without amendment.
+
+### 335 — the §9g resolution, recorded as promised
+
+The orchestrator's direct process inspection found genuine live
+computation, not a hang: 109+ CPU-minutes at ~308% utilization, a second
+diagnostic run after the first pass failed to resolve the diagnosis
+cleanly, plus an isolated CONFIGS[0] sub-diagnostic. Recorded here with the
+reading that matters: a diagnostic leg whose first pass does not resolve
+and which runs a second is EARNING its gate's no-branch honestly — 335's
+gate is precisely "name the mechanism or record the sweep that failed to,"
+and no DM intervention is owed. Watch condition stands:
+process-death-without-landing.
+
+### Refill — slot D ← 322 F70 (reserve rank 1, executed)
+
+Spec at cycle 3, unchanged: fig70 produce-or-correct (claimed by leg 311,
+unshipped). Light; not floor-eligible. Territory disjoint from A/B/C —
+checked. **Floor 2/4 (353, 351) — §3b's minimum.** FLOOR-TABLE synced
+(D 324→322).
+
+### Standing state
+
+A/335 (confirmed live, second diagnostic pass); B/353 DSSP-B5; C/351
+DSSP-B3 (critical path). With the user: cycle-10 packet + GA note, POCP
+(ii) item, C4/escalation-#3, 313 packet + ban-wording, 320 packet. Next
+vacancy: 327 P2T1E.
+
+**Reserve queue: 12 undispatched legs (327, 287, 229, 293, 298, 299, 310,
+325, 231, 232, 233, 234).** Immediately dispatchable: **6**. Next fresh leg
+number: **354.**
+
+Nothing in this update lifts a ban. An honest UNMEASURED column is the
+discipline refusing to guess; no L1-L4 link moved; Clay stays ~0.05%.
