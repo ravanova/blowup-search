@@ -1,0 +1,58 @@
+{
+  "leg": 373,
+  "codename": "ROUTE-HSFM",
+  "purpose": "Full-text adjudication of arXiv:1308.3356, the paper leg 358 cited SECONDHAND for its stop-packet risk #2 (hookstep non-universality). Determine exactly what fails, in which regime, and whether that regime intersects leg 358's minimum-viable retry target (T=1e5, N=24, Re=60, Lucas-Kerswell Table IV orbit classes -- UPO37 etc., square torus alpha=1).",
+  "predecessor": {
+    "leg": 358,
+    "citation_as_banked": "\"1308.3356 reports the SAME Newton-GMRES-hookstep code FAILING to converge at the two endpoints of a continuation branch (Re=15.03, Re=26.68) -- a correctly implemented hookstep is a substantially better globalization, not a convergence guarantee.\" (experiments/journal/leg_358.md sec 2, and writeup/data/p2_route_rpol_v1.json residual_risk_named[1])",
+    "verification_status_before_this_leg": "1308.3356's PDF had been fetched (HTTP 200, confirmed in leg 358's data JSON) but the text was never read for the failure mechanism/regime -- the Re=15.03/26.68 numbers were the only content actually extracted, with no domain, orbit-class, or Re-range comparison performed against leg 358's own target regime. That comparison is this leg's job."
+  },
+  "target_regime_leg358": {
+    "source_paper": "Lucas & Kerswell 2015, Phys. Fluids 27, 045106 (arXiv:1406.1820v2)",
+    "domain": "SQUARE TORUS, alpha = 1 -- \"III. RESULTS: SQUARE TORUS (alpha = 1) AT Re = 60\" (1406.1820 section header, verbatim after de-ligaturing the extracted text)",
+    "Re": 60,
+    "orbit_class_example": "UPO37, T = 19.334, s = 0.375 (a genuine RELATIVE periodic orbit, nonzero shift) -- \"a 2D relative periodic orbit with T = 19.33 (UPO 37 in Table IV) is a typical example\" (1406.1820, discussion around Table IV/Fig. 4)",
+    "resolution": "Nx=Ny=128 for alpha=1 in 1406.1820's own 'full' recurrence check (\"(Nx , Ny ) = (128, 128) for alpha = 1 and (Nx , Ny ) = (512, 128) for alpha = 1/4\"); leg 353/358's own N=24 is coarser but SAME alpha=1 square domain",
+    "task_type": "single-Re Newton-GMRES-hookstep convergence attempts seeded from DNS near-recurrence guesses at FIXED Re=60 -- NOT parameter continuation (leg 358's costed retry spec never proposes tracing a solution branch across Re; it proposes ~100 independent Newton attempts at the one target Re)"
+  },
+  "paper_read": {
+    "arxiv_id": "1308.3356v3",
+    "title": "Spatiotemporal dynamics in 2D Kolmogorov flow over large domains",
+    "authors": "Dan Lucas & Rich R. Kerswell",
+    "journal": "J. Fluid Mech. (submitted/under consideration per the header; published as JFM 750, 2014, doi:10.1017/jfm.2014.270)",
+    "fetch_method": "direct PDF: https://arxiv.org/pdf/1308.3356 -> HTTP 200, 4.82MB, 2 nominal PDF pages (dense two-column typesetting), pdftotext -layout extraction -> 2068 lines",
+    "fetch_note": "same paper leg 358 had already fetched; this leg re-fetched independently (fresh curl, HTTP 200) and produced its own pdftotext extraction rather than trusting the prior leg's unread copy",
+    "read_scope": "full text scanned via grep for hookstep/Newton/GMRES/continuation/converge hits (23 source lines matched), all matched regions read in full context (not snippet-only)"
+  },
+  "hookstep_failure_instances_found": [
+    {
+      "instance": "P1 continuation-branch endpoints",
+      "location_in_paper": "section 4.4 'P1: a disconnected solution', p.16 of the PDF",
+      "quote": "\"Once converged, P1 could be traced using arc-length continuation over the range 15.03 <= Re <= 26.68 (at either end the Newton-GMRES-hookstep algorithm fails to converge).\"",
+      "solution_identity": "P1 is a genuine relative periodic orbit (\"A 'relative' periodic orbit is a flow which repeats after a period T and a drift in any homogeneous direction of the system\") discovered by randomly-seeded DNS at Re=20, period T=20.61, x-shift -0.0002",
+      "domain_and_Re_context": "section 4 is explicitly the EXTENDED-DOMAIN regime: \"the aspect ratio of the domain with alpha = 1 in section III and alpha = 1/4 in section IV\" (1406.1820's own methods section, describing this same paper pair's domain convention) -- P1's continuation is run at alpha = 1/4 (figure 15's spatial axis runs x in [0, 8*pi], consistent with Lx = 2*pi/alpha = 8*pi at alpha=1/4), Re in [15.03, 26.68]",
+      "failure_mechanism": "the branch terminates at each end because P1 is \"born in a saddle node bifurcation\" (explicitly stated a few lines above the quoted failure sentence) -- this is a FOLD/TURNING-POINT failure: the Jacobian of the Newton-GMRES system becomes singular as the branch's tangent direction rotates through the parameter axis at a saddle-node, which is the generic, well-understood reason ANY Newton-type continuation method (hookstep included) loses convergence at a fold, independent of which globalization is used inside the Newton loop",
+      "task_type_match": "MISMATCH against leg 358's target task: this is a CONTINUATION failure (tracking one solution across a parameter sweep, losing convergence at the sweep's turning points), not a single-shot convergence failure from an independent DNS-recurrence guess at one fixed Re. Leg 358's minimum-viable retry never proposes continuation."
+    },
+    {
+      "instance": "long-period orbit at alpha=1/8, Re=22",
+      "location_in_paper": "section 4 (kink/antikink interaction discussion), p.~23-24 of the PDF, near figure 24",
+      "quote": "\"...repeats periodically in time, due to the periodic boundary conditions. The period was too large to converge using the Newton-GMRES-hookstep method.\"",
+      "domain_and_Re_context": "alpha = 1/8 (figure 24 caption: \"DNS calculation for randomised initial condition in alpha = 1/8, Re = 22\"), an even more extended domain than the P1 case",
+      "failure_mechanism": "convergence failure attributed explicitly and solely to the PERIOD being too large -- no continuation, no bifurcation-proximity language used here; this is a single-shot Newton-hookstep attempt from one DNS-derived guess that simply did not converge because the target period was long",
+      "task_type_match": "closer in TASK TYPE to leg 358's retry (single-shot attempt, no continuation) but the paper gives no period value for this failed case to compare against UPO37's T=19.33 (leg 358's own target orbit's period, a SHORT period well inside the range 1406.1820's own 81 converged solutions successfully handled at Re=60) -- and it occurs in the alpha=1/8 extended domain at Re=22, not the alpha=1 square domain at Re=60"
+    }
+  ],
+  "regime_boundary": {
+    "domain_axis": "leg 358 target = alpha=1 (square torus); both 1308.3356 failure instances occur in EXTENDED domains, alpha=1/4 (P1) and alpha=1/8 (long-period case) -- 1308.3356's own methods description (shared with 1406.1820, same author pair, same code) explicitly separates alpha=1 (section III of the companion 1406.1820) from the extended-domain sections (alpha<=1/4) where 1308.3356's own material lives",
+    "Re_axis": "leg 358 target = Re=60; both 1308.3356 failure instances sit at Re=15.03-26.68 (P1) and Re=22 (long-period case) -- neither overlaps Re=60",
+    "task_type_axis": "the P1 failure is a CONTINUATION-endpoint/saddle-node failure, a mechanism leg 358's retry spec cannot even encounter because the retry performs no parameter continuation at all; the long-period failure is task-type-matched (single-shot Newton-hookstep, no continuation) but gives no period number to compare, and UPO37 (leg 358's own named target) has a short, already-known-convergeable period class within 1406.1820's own alpha=1/Re=60 dataset (81 converged orbits found by the SAME code at that exact Re/domain)",
+    "orbit_class_axis": "both P1 and UPO37 are genuine relative periodic orbits (nonzero drift/shift) -- this ONE axis DOES match leg 358's target class, and is the only point of contact found"
+  },
+  "classification": "DISJOINT",
+  "classification_reasoning": "Of the three regime axes that jointly define leg 358's target (domain alpha=1, Re=60, single-shot fixed-Re search), the concretely-quoted, mechanism-explained failure (P1's continuation-branch endpoints) fails on all three: it occurs at alpha=1/4 (not alpha=1), at Re=15.03/26.68 (not Re=60), and via a continuation-endpoint/saddle-node mechanism leg 358's retry cannot structurally trigger (no continuation is proposed). The second, task-type-closer failure (long-period non-convergence at alpha=1/8, Re=22) also fails the domain and Re axes and additionally supplies no period number, so it cannot even be compared against UPO37's known T=19.33. The single point of contact -- both are genuine relative periodic orbits, the same orbit CLASS as leg 358's target -- is not sufficient on its own to intersect the regime, because 1406.1820's own alpha=1/Re=60 dataset (the actual target regime) already contains 81 solutions the SAME hookstep code converged successfully, UPO37 among the RPO-class subset at a reported 4.3% per-attempt success rate (per leg 358's own banked Chandler & Kerswell 1207.4682 extraction) -- i.e. the target regime's own success/failure statistics are already sourced from within-regime data, and 1308.3356 adds no additional within-regime failure evidence.",
+  "recommended_amendment_to_risk_2": "NARROW: risk #2 as currently banked (\"hookstep is not universally convergent even in the source's own hands\") is TRUE but its cited evidence (1308.3356, Re=15.03/26.68 branch endpoints) is regime-disjoint from leg 358's own retry target and should not be read as evidence that hookstep is expected to fail AT Re=60 in the alpha=1 square domain on RPO-class targets like UPO37. The correctly-scoped version of risk #2 is: (a) hookstep is provably not a convergence guarantee in general (both 1308.3356 instances demonstrate this, in a different regime, via saddle-node-proximity and long-period mechanisms respectively -- neither of which the minimum-viable retry's task structure (fixed-Re, no continuation, short-period target) is positioned to encounter), and (b) the WITHIN-REGIME evidence that actually bears on leg 358's retry is Chandler & Kerswell 2013's own reported 4.3% RPO-class success rate at Re=60 alpha=1 (already banked by leg 358 as its residual risk #1, sample-size risk) -- risk #2 and risk #1 should not be read as independent risks stacking multiplicatively; risk #2's OWN best evidence, once regime-checked, collapses into (is subsumed by) risk #1's already-sourced number rather than adding a new, distinct failure mode at the target regime.",
+  "refusals_to_measure": [],
+  "gate_answer": "yes",
+  "gate_reasoning": "A definite classification (DISJOINT) was reached with the deciding clauses quoted directly from 1308.3356's full text (not paraphrased from memory or secondhand summary), cross-checked against leg 358's own banked target-regime specification and against 1406.1820's own domain/Re/period numbers for UPO37. The regime boundary (domain alpha, Re, task-type/continuation-vs-single-shot, and period) is stated explicitly with quotes on both sides of the comparison."
+}
