@@ -293,6 +293,56 @@ def fig_phase1_axis_screen():
     plt.close(fig)
 
 
+def fig_route_ivax_v1():
+    """fig70 -- Route-IVAX v1 (leg 311): does screen (iv_a) bite off the fluid axis?
+    Plots directly from the banked census in p2_route_ivax_v1.json -- no re-measurement.
+    Left: kill-rate comparison, the fluid pool (leg 261, 18/18) vs the non-fluid pool this
+    leg measured (3/3). Right: per-model count of operator classes Remark 40 leaves
+    unnamed, the mechanism (nonlocality) the gate actually tracks."""
+    d = load("p2_route_ivax_v1.json")
+    census = d["census"]
+    rows = census["rows"]
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4.2))
+
+    # left: fluid pool (leg 261) vs non-fluid pool (this leg), killed vs total
+    pools = ["fluid pool\n(leg 261)", "non-fluid pool\n(leg 311)"]
+    killed = [18, census["n_killed_by_iv_a"]]
+    total = [18, census["n_total"]]
+    x = range(len(pools))
+    ax1.bar(x, total, 0.5, color="#e5e7eb", label="total models")
+    ax1.bar(x, killed, 0.5, color="#dc2626", label="killed by (iv_a)")
+    for i, (k, n) in enumerate(zip(killed, total)):
+        ax1.text(i, n + 0.4, f"{k}/{n}", ha="center", fontsize=10, fontweight="bold")
+    ax1.set_xticks(list(x)); ax1.set_xticklabels(pools)
+    ax1.set_ylabel("models")
+    ax1.set_ylim(0, 21)
+    ax1.set_title("(iv_a) kill rate: same clause, both pools", fontsize=10)
+    ax1.legend(fontsize=8.5, loc="upper right")
+
+    # right: per-model count of operator classes unnamed by Remark 40
+    keys = [r["key"] for r in rows]
+    n_unnamed = [r["n_unnamed_by_remark_40"] for r in rows]
+    fluid_adj = [r["fluid_adjacent"] for r in rows]
+    colors = ["#d97706" if fa else "#2563eb" for fa in fluid_adj]
+    y = range(len(keys))
+    ax2.barh(y, n_unnamed, color=colors)
+    ax2.set_yticks(list(y)); ax2.set_yticklabels(keys, fontsize=8.5)
+    ax2.set_xlabel("operator classes unnamed by Remark 40")
+    ax2.set_xlim(0, max(n_unnamed) + 1)
+    ax2.set_title("Mechanism: nonlocality, not incompressibility", fontsize=10)
+    ax2.invert_yaxis()
+    from matplotlib.patches import Patch
+    ax2.legend(handles=[Patch(color="#2563eb", label="non-fluid"),
+                        Patch(color="#d97706", label="fluid-adjacent")],
+               fontsize=8.5, loc="lower right")
+
+    fig.suptitle("Route-IVAX v1 (leg 311): screen (iv_a) bites off the fluid axis too "
+                 f"-- verdict: {d['verdict_code']}", fontweight="bold", y=1.04, fontsize=10.5)
+    fig.tight_layout()
+    fig.savefig(FIGS / "fig70_route_ivax_v1.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 # Phase-2 per-leg figures live in their own *_evidence.py next to their writeups, so that
 # each one rebuilds from its own curated JSON with no re-run. Registered here so that
 # `build_figures.py` rebuilds the whole figure set rather than only the Phase-1 half.
@@ -356,4 +406,5 @@ if __name__ == "__main__":
     fig_rough_rails(); print("fig5_rough_rails.png")
     fig_phase1_spike(); print("fig6_phase1_spike.png")
     fig_phase1_axis_screen(); print("fig7_phase1_axis_screen.png")
+    fig_route_ivax_v1(); print("fig70_route_ivax_v1.png")
     build_p2_evidence_figures()
