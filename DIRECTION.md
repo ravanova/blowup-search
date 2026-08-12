@@ -33,7 +33,7 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 356 | ESPX | no |
+| A | 361 | LCB4 | no |
 | B | 360 | PVDS | yes |
 | C | 359 | L3BD | yes |
 | D | 355 | LCB3 | no |
@@ -17837,13 +17837,18 @@ per-brick leg counts are UPPER BOUNDS, not floors — a brick that lands in
 one principled leg reports, never pads (350's recommendation, adopted).
 Floor 2/4 (348, 351).
 
-**LCB2-family accumulator — THRESHOLD REACHED at items (3)+(4), batch leg
-355 LCB3 DRAFTED AND DISPATCHED (cycle 10q); accumulator resets, item (5)
-opens on the next flag.** History: batch 1 = 338 (4/4); batch 2 = 352
-(1 landed, 1 correctly resisted, §22); batch 3 = 355 (items: the
-bvrr_v1_repair.py argv fix, source-verified by 335; the CADX
-evidence-script side-effect guard, verified by two independent revert
-events, legs 322 + 327).
+**LCB2-family accumulator — THRESHOLD REACHED AGAIN at items (5)+(6),
+batch leg 361 LCB4 DRAFTED AND DISPATCHED (cycle 10w); accumulator resets,
+item (7) opens on the next flag.** Items: (5) experiments/
+p2_route_epa_v1_census.py VOLATILE_TOKENS one-token gap (lists
+"generated_at" but not bare "generated" — a timestamp field misread as
+content nondeterminism; source-verified by 356's 1235-leaf/0-flag-flip
+same-environment agreement); (6) leg 287's landed headline claim that
+p2_route_e_v1_spectrum "fails its own within-environment determinism
+control" — REFUTED as a false alarm by (5)'s mechanism; claim-bearing
+marker owed at 287's journal/CORRECTIONS §24 sites (originals quoted in
+place). History: batch 1 = 338 (4/4); batch 2 = 352 (1 landed, 1 correctly
+resisted, §22); batch 3 = 355 (335's argv fix + the CADX guard).
 MECHANISM AMENDED at cycle 10m after GAP-352-A: an item enters the
 accumulator as a FLAG ONLY; its proposed fix is marked UNVERIFIED until the
 drafting cycle verifies it against the primary source (the byline, the
@@ -18918,9 +18923,25 @@ un-adjudicated item in the banked record — 330's derived structural
 screen, ‖∂_s U‖_∞ ≥ δ₀ at every phase, recorded with two open conditions
 and never resolved into B7's ledger). Floor 2/4 (359, 360).
 
+Cycle 10w: A/356 landed REPAIRED at 7228e1c — the strongest outcome: the
+mechanism MEASURED, not the guessed one forced (the sort key -Re(λ) is
+degenerate across the WHOLE discretized essential spectrum, theoretically
+pinned to Re λ=0; the spec's two-eigenvalue-crossing candidate refuted by
+a 3-way independent-process reproduction); the eigenvalue multisets were
+already bit-identical (only position and paired sign scrambled); every
+consumer grep-enumerated and mechanically immune; test_literature_gates
+re-run end-to-end ALL PASS; movement <3e-13 on every consumer-read leaf;
+the underlying solver untouched. 287's exception is DOWNGRADED: its
+"determinism control failure" was the census instrument's own false alarm
+(VOLATILE_TOKENS one-token gap) — items (5)+(6) enter the accumulator
+source-verified, threshold fires, **leg 361 LCB4 drafted and dispatched
+into A** (claim-bearing marker on a landed headline + an active instrument
+bug in a reusable census script). Floor 2/4 (360, 359) — B+C carry it, so
+A legally takes the batch leg. Next fresh: 362.
+
 **Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
 232, 233, 234).** Immediately dispatchable: **4** (rank order: 229, 293,
-298, 299). Next fresh leg number: **361.**
+298, 299). Next fresh leg number: **362.**
 
 Nothing in this update lifts a ban. An evidence script that cannot
 silently mutate a banked artifact is the record's immune system getting a
@@ -19401,3 +19422,102 @@ ban-wording (partly mooted), 320 packet. Next vacancy: 229 PNRV.
 Nothing in this update lifts a ban. A costed retry is a question priced,
 not a decision made; a derived screen adjudicated operational-or-not is
 ledger hygiene. No L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10w) — 356 REPAIRED ABSORBED (MECHANISM
+MEASURED, MY SPEC's GUESS REFUTED BY THE MEASUREMENT — AS THE SPEC ITSELF
+ORDERED); 287's EXCEPTION DOWNGRADED (THE CONTROL FAILURE WAS THE
+INSTRUMENT's FALSE ALARM); LEG 361 LCB4 DRAFTED AND DISPATCHED INTO A
+
+Written from the same detached lineage, resynced to origin/main = 7228e1c.
+
+### 356 ESPX — REPAIRED, absorbed at full strength
+
+The strongest of the three drafted outcomes, earned properly: the
+mechanism was MEASURED via a 3-way independent-process reproduction and
+turned out larger in scope and smaller in consequence than the spec's
+candidate — not a two-eigenvalue crossing but a sort key degenerate across
+the entire discretized essential spectrum (theoretically pinned to
+Re λ = 0 exactly; float noise 1e-11 to 1e-17 with sign varying by BLAS
+build). The spec said "the obvious candidate, to be MEASURED not assumed"
+— the leg did exactly that and reported the refutation of the DM's
+candidate alongside the true mechanism. The repair lives entirely in the
+generator's post-processing (canonical handling of the degenerate key);
+the underlying solver is untouched; the banked-vs-regenerated multisets
+were ALREADY bit-identical, so nothing numerical ever moved — only
+position and paired sign. Every consumer enumerated by grep and shown
+mechanically immune (they read sections that never call match_filter);
+the literature-gate suite re-run end-to-end, all passing; consumer-leaf
+movement <3e-13. CORRECTIONS §25 filed; fig34 rebuilt. Endorsed without
+amendment.
+
+### 287's exception — DOWNGRADED, and the taxonomy note recorded
+
+356's second finding, correctly left out of its own territory: leg 287's
+"fails its own within-environment determinism control" headline for this
+family was a FALSE ALARM — the census script's VOLATILE_TOKENS list has a
+one-token gap ("generated_at" but not bare "generated"), so a harmless
+timestamp read as content nondeterminism. All 1235 numeric leaves and 0
+flag flips actually agreed between same-environment runs. **The corrected
+state of 287's census: 9/10 families byte-exact, 1 family
+(e_v1_spectrum) position/sign-unstable-but-multiset-identical — now
+REPAIRED by 356 — and 0 families failing within-environment determinism.**
+Taxonomy note: this is the third instrumentation self-correction this
+window in the leg-harness class (335's argv drift; 352's pre-edit catch;
+now 287's volatile-token gap) — distinct from the DM-premise class
+(GAP-346-A/352-A), and the same lesson binds: an instrument's verdict
+about another artifact is itself a measurement, re-measured like one.
+
+### Leg 361 LCB4 — drafted at threshold, dispatched into A
+
+```
+### 361 — ROUTE-LCB4: LIGHT CORRECTIONS BATCH 4 (both items source-verified
+at entry by leg 356's measurements)
+[FLOOR-ELIGIBLE: no — correction/record]
+**Thesis.** (i) experiments/p2_route_epa_v1_census.py: close the
+VOLATILE_TOKENS one-token gap (add bare "generated"; audit the list for
+sibling omissions while there, each addition justified in one line) — an
+active bug in a reusable census instrument. (ii) leg 287's landed record
+(experiments/journal/leg_287.md + CORRECTIONS §24): claim-bearing marker
+correcting the "fails its own within-environment determinism control"
+headline to the measured state (false alarm; mechanism = the token gap;
+the family's real defect was position/sign scrambling with multisets
+bit-identical, repaired by 356 at §25) — originals quoted in place, never
+edited away.
+**Gate.** (i) applied and demonstrated: the census re-run on this family
+reports deterministic (0 false-alarm leaves) while a planted
+genuinely-nondeterministic control still trips it; (ii) applied at both
+sites with inline markers and ONE batched CORRECTIONS entry citing §25 —
+zero other content changed (diff-checked)?
+  yes -> Bank; accumulator items (5)-(6) close.
+  no  -> A fix resists or the planted control fails to trip: stop, report
+        the resister verbatim, land the other, never widen.
+**Territory.** experiments/p2_route_epa_v1_census.py (the token list +
+the one planted-control test), experiments/journal/leg_287.md (marker),
+writeup/CORRECTIONS.md (append), writeup/novelty/leg_361.md,
+experiments/journal/leg_361.md. Banked JSONs read-only; any diff on them
+fails the gate.
+**Difficulty.** light
+**Preconditions:** None. Floor note: B/360 + C/359 carry §3b this cycle,
+so A legally takes the batch leg.
+```
+
+**Floor 2/4 (360, 359).** FLOOR-TABLE synced (A 356→361); the accumulator
+resets.
+
+### Standing state
+
+B/360 PVDS; C/359 L3BD; D/355 LCB3. Route 4: stopped, packet awaiting
+359. With the user: the stop packet (assembling), cycle-10 packet + GA
+note, POCP (ii) item, C4/escalation-#3, 313 packet + ban-wording, 320
+packet. Next vacancy: 229 PNRV.
+
+**Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
+232, 233, 234).** Immediately dispatchable: **4**. Next fresh leg number:
+**362.**
+
+Nothing in this update lifts a ban. A repair that shows nothing numerical
+ever moved, and a false alarm downgraded on measurement, both STRENGTHEN
+the record's footing; no L1-L4 link moved; Clay stays ~0.05%.
