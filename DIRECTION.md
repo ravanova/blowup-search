@@ -36,7 +36,7 @@ prose as before.
 | A | 287 | EPA | no |
 | B | 353 | DSSP-B5 | yes |
 | C | 354 | DSSP-B4 | yes |
-| D | 327 | P2T1E | no |
+| D | 355 | LCB3 | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -46,7 +46,7 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 <!-- FIG-TABLE-START -->
 | Fig | Leg | Status |
 |---|---|---|
-| fig69 | 302 | landed; evidence script owed (leg 327) |
+| fig69 | 302 | landed; evidence script SHIPPED (leg 327, byte-stable, KA8 at 129.048x) |
 | fig70 | 322 | landed (produced from 311's banked JSON; INDEX row closed) |
 | fig72 | 320 | reserved, parked branch |
 | fig75 | 301 | reserved, parked branch |
@@ -17837,14 +17837,13 @@ per-brick leg counts are UPPER BOUNDS, not floors — a brick that lands in
 one principled leg reports, never pads (350's recommendation, adopted).
 Floor 2/4 (348, 351).
 
-**LCB2-family accumulator — item (3) OPEN: experiments/
-p2_route_bvrr_v1_repair.py's BANKED registry entry for spike1_stepC_gate
-must add "--steps","2500" to its argv (currently omits it; CLI default 400
-runs an unconverged trajectory). Fix basis ALREADY SOURCE-VERIFIED by leg
-335's own measurements (the artifact's runs[*].steps field = 2500 in all
-four entries; short-run reproduces the spurious alpha to 1.02e-11; correct
-steps reproduce every banked alpha to ≤4.6e-15) — satisfies the cycle-10m
-verification requirement at entry. Batch leg drafts at 2-3 items.
+**LCB2-family accumulator — THRESHOLD REACHED at items (3)+(4), batch leg
+355 LCB3 DRAFTED AND DISPATCHED (cycle 10q); accumulator resets, item (5)
+opens on the next flag.** History: batch 1 = 338 (4/4); batch 2 = 352
+(1 landed, 1 correctly resisted, §22); batch 3 = 355 (items: the
+bvrr_v1_repair.py argv fix, source-verified by 335; the CADX
+evidence-script side-effect guard, verified by two independent revert
+events, legs 322 + 327).
 MECHANISM AMENDED at cycle 10m after GAP-352-A: an item enters the
 accumulator as a FLAG ONLY; its proposed fix is marked UNVERIFIED until the
 drafting cycle verifies it against the primary source (the byline, the
@@ -18729,10 +18728,111 @@ B1-B3 ✓, B4/B5 live, B6 user-gated, B9 struck. With the user: cycle-10
 packet + GA note, POCP (ii) item, C4/escalation-#3, 313 packet +
 ban-wording, 320 packet. Next vacancy: 229 PNRV.
 
+Cycle 10q: D/327 landed YES at da128ef — fig69 rebuild-stable from 302's
+curated JSON alone, KA8's failure plotted at its measured 129.048x, five
+self-checks, byte-identical PNG across independent runs; the disclosed
+build_figures.py judgment call (closing a debt the file's own comment
+earmarked, existing convention followed, orchestrator-verified) is
+ENDORSED as the right shape for a territory edge case: disclosed, minimal,
+convention-bound. **The CADX evidence-script side-effect recurred (322,
+now 327 — same mechanism: rewrites banked JSON when a gitignored Papers/
+PDF is absent): an ACTIVE hazard, accumulator item (4), verified by two
+independent revert events.** Items (3)+(4) reach threshold: **leg 355 LCB3
+drafted and dispatched into D** (stated reason for outranking 229: item
+(4) bites every future leg that smoke-tests the shared figure suite until
+guarded). Floor 2/4 (353, 354).
+
 **Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
-232, 233, 234).** Immediately dispatchable: **4**. Next fresh leg number:
-**355.**
+232, 233, 234).** Immediately dispatchable: **4** (rank order: 229, 293,
+298, 299). Next fresh leg number: **356.**
 
 Nothing in this update lifts a ban. REPRODUCIBLE_AS_BANKED is the record
 defending itself — the gap was in the tooling, the banked numbers stand,
 and the fix is one argv token. No L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10q) — 327 YES ABSORBED (fig69 EVIDENCE
+SHIPPED; THE DISCLOSED TERRITORY CALL ENDORSED); THE RECURRING CADX
+SIDE-EFFECT PROMOTED TO A FIX; LEG 355 LCB3 DRAFTED AND DISPATCHED INTO D
+
+Written from the same detached lineage, resynced to origin/main = da128ef.
+
+### 327 P2T1E gate YES, absorbed at full strength
+
+fig69 rebuilds byte-stably from 302's curated JSON alone; KA8's failure is
+PLOTTED at its measured 129.048x, not smoothed — the gate's whole point;
+five self-checks including exact recomputation of the residual and the
+closed-form window endpoints. The build_figures.py touch beyond the
+literal territory list is ENDORSED as handled: disclosed in the leg's own
+record, minimal, following the file's existing additive-registration
+convention, closing a debt the file's own comment block earmarked, and
+verified consistent by the orchestrator. That is what a territory edge
+case should look like — disclosure plus convention, never silent judgment.
+Endorsed without amendment.
+
+### The CADX side-effect — two strikes makes it a fix, not a note
+
+Leg 304's CADX evidence script rewrites writeup/data/p2_route_cadx_v1.json
+when smoke-tested with the gitignored Papers/ PDF absent — caught and
+reverted by leg 322, and now AGAIN by leg 327, same mechanism, both
+reverts independently verified byte-identical. A banked-artifact-mutating
+side-effect triggered by a routine smoke test is an active hazard for
+every future leg touching the shared figure suite. It enters the
+accumulator as item (4) with its basis verified by the two revert events —
+and with item (3) (335's source-verified argv fix) the accumulator reaches
+threshold.
+
+### Leg 355 LCB3 — drafted and dispatched into D
+
+```
+### 355 — ROUTE-LCB3: LIGHT CORRECTIONS BATCH 3 (both items source-verified
+at entry, per the cycle-10m mechanism)
+[FLOOR-ELIGIBLE: no — correction/tooling]
+**Thesis.** (i) experiments/p2_route_bvrr_v1_repair.py's BANKED registry
+entry for spike1_stepC_gate: add "--steps","2500" to its argv — basis: the
+banked artifact's own runs[*].steps field and leg 335's two-sided
+reproduction (spurious alpha at 400 steps to 1.02e-11; all banked alphas
+at 2500 to ≤4.6e-15). (ii) leg 304's CADX evidence script: guard the
+Papers/-PDF-absent path so it FAILS LOUDLY (or no-ops read-only) instead
+of rewriting writeup/data/p2_route_cadx_v1.json — basis: two independent
+revert events (legs 322, 327), same mechanism both times. The guard
+changes behavior ONLY on the missing-input path; the normal path's output
+must be shown byte-identical before/after.
+**Gate.** (i) applied and the registry regeneration re-run reproduces the
+banked artifact (alphas to float64 precision, per 335's baseline); (ii)
+applied and demonstrated: missing-PDF invocation no longer writes the
+banked JSON (test shown), normal invocation byte-identical output —
+with one batched CORRECTIONS entry covering both?
+  yes -> Bank; accumulator items (3)-(4) close.
+  no  -> A fix resists or the normal path moves: stop, report the resister
+        verbatim, land the other, never widen.
+**Territory.** experiments/p2_route_bvrr_v1_repair.py (the one argv list),
+               the CADX evidence script (the one guard path),
+               writeup/CORRECTIONS.md (append), writeup/novelty/leg_355.md,
+               experiments/journal/leg_355.md. Banked JSONs read-only;
+               any diff on them fails the gate.
+**Difficulty.** light
+**Preconditions:** None. Stated reason for outranking 229 PNRV: item (ii)
+is an ACTIVE hazard that has bitten two legs' smoke tests this window and
+bites every future figure-suite user until guarded.
+```
+
+**Floor 2/4 (353, 354) — §3b's minimum.** FLOOR-TABLE synced (D 327→355);
+fig69's row updated to shipped; the accumulator resets.
+
+### Standing state
+
+A/287 EPA (resumed); B/353 DSSP-B5; C/354 DSSP-B4 (critical path). Brick
+ledger: B1-B3 ✓, B4/B5 live, B6 user-gated, B9 struck. With the user:
+cycle-10 packet + GA note, POCP (ii) item, C4/escalation-#3, 313 packet +
+ban-wording, 320 packet. Next vacancy: 229 PNRV.
+
+**Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
+232, 233, 234).** Immediately dispatchable: **4**. Next fresh leg number:
+**356.**
+
+Nothing in this update lifts a ban. An evidence script that cannot
+silently mutate a banked artifact is the record's immune system getting a
+missing antibody; no L1-L4 link moved; Clay stays ~0.05%.
