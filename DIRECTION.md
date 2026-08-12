@@ -20650,6 +20650,30 @@ both). The run's honest shape: two live research legs closing the
 window's last threads, two lawfully empty slots, all direction with
 the user. Floor 2/4 (376, 377).
 
+Cycle 10pp — THE WINDOW-CLOSING ENTRY. B/376 landed at e97d9b9 (ℓ=1
+and ℓ=2 both CONTINUOUS on the compactified basis; the preserved WIP
+re-verified not trusted — the numerical wall real, fixed in closed
+form; a latent drift-0 control-inversion bug found and fixed; ℓ=2's
+N=60 marginality reported honestly, clean at N=90 on two bases).
+C/377 landed ADEQUATE at bc807ca (the Gegenbauer equivalence measured;
+geometric coefficient decay at matched γ=s; the Hu-Yu definitional
+mismatch flagged, not papered over). **The POCP item's inputs are
+COMPLETE and cut both ways, stated so: the spectrum side HARDENS the
+obstruction (no discrete anchors in any measured channel — ℓ=0,1,2 all
+continuous), while the basis side yields exactly ONE viable candidate
+(generalized Hermite, coefficient decay adequate at the matched
+exponent).** Every thread this window opened is CLOSED or USER-PARKED.
+**TERMINAL-STATE NOTE, with a documented table divergence: the true
+roster is ALL FOUR SLOTS VACANT with direction exhausted — but
+test_9's machine floor cannot represent that state (0/4 eligible
+fails), so the B/C rows below are RETAINED as the machine-required
+representation while THIS PROSE is the truth. The divergence is
+deliberate, documented here at higher prominence than the table, and
+the inexpressibility itself is escalated: amending §3b/test_9 to
+admit a wind-down state is integration/user territory, flagged as
+NEEDS-YOU item 8.** The run sits at ORCHESTRATION.md's own terminal
+clause: the user rules on the items, or the run winds down.
+
 **Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
 Immediately dispatchable: **0**. Next fresh leg number: **380.**
 
@@ -21477,3 +21501,82 @@ Immediately dispatchable: **0**. Next fresh leg number: **380.**
 Nothing in this update lifts a ban. Two instruments fixed without
 being blinded, and a second slot that tells the truth lawfully; no
 L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10pp) — THE WINDOW CLOSES: 376 AND 377
+ABSORBED (THE POCP INPUTS COMPLETE, CUTTING BOTH WAYS); ALL FOUR SLOTS
+TRULY VACANT; THE TABLE's MACHINE-FORCED DIVERGENCE DOCUMENTED; THE
+RUN AT ITS TERMINAL CLAUSE
+
+Written from the same detached lineage, resynced to origin/main.
+
+### 376 R3SP — absorbed at full strength
+
+Both channels measured CONTINUOUS, and the resume discipline earned
+its keep twice: the preserved WIP's "numerical wall" was RE-VERIFIED
+(real — Chebyshev-Lobatto clustering driving the log-Boyd map past
+float64 underflow at N=60, fixed via closed-form weighted combinations
+rather than a naive reciprocal), and the re-verification surfaced a
+previously-latent drift-0 control-inversion bug that a trusting resume
+would have inherited silently. ℓ=2's verdict carried at its honest
+strength (CONTINUOUS-BUT-PLANTED-CONTROL-CONVERGENCE-MARGINAL at N=60;
+clean at N=90 on two bases) rather than silently upgraded. Endorsed
+without amendment.
+
+### 377 HCDX — ADEQUATE, absorbed at full strength
+
+The coefficient-decay concern resolves FOR the surviving candidate:
+the weight (1+x²)^-γ orthogonal family is measured Gegenbauer under
+t = x/√(1+x²), with geometric decay confirmed when γ matches route
+4's known decay exponent and Boyd's algebraic mechanism confirmed when
+mismatched — the concern was real and is now bounded to the mismatch
+case. The definitional trap (Hu-Yu's "generalized Hermite" is a
+DIFFERENT object than 374's candidate) flagged rather than papered
+over. The basis thread closes by its own gate. Endorsed.
+
+### The POCP item — inputs complete, and they cut both ways
+
+Stated for the user exactly: (a) the SPECTRUM side hardens 348's
+obstruction — every measured channel of the rescaled operator
+(ℓ=0 by 343, ℓ=1/ℓ=2 by 376) is continuous, so a Galerkin-plus-tail
+bridge has NO discrete anchors on the object's own operator; (b) the
+BASIS side yields exactly one viable candidate — generalized Hermite
+survives 374's four-requirement inventory with 377's decay adequacy
+at the matched exponent. Cost-class C now has a precise shape: the
+research would have to close the bridge on a continuous spectrum
+using the one surviving basis. Orchestrator: update the POCP item
+with both pointers; no recommendation attaches — the spend is the
+user's.
+
+### The terminal state, and the table that cannot say it
+
+All four slots are truly vacant; direction is exhausted; every thread
+is closed or user-parked (gap list zero, accumulator empty, register
+audited, suite green, screen complete on three routes, stop packet
+complete with its risk table sharpened, POCP inputs complete). The
+FLOOR-TABLE cannot represent this — test_9 fails any table with fewer
+than 2 eligible live rows — so the B/C rows stand as the
+machine-required representation while this prose is the truth, the
+divergence deliberate and documented at higher prominence. **NEEDS-YOU
+item 8 (new): the contract cannot express a wind-down state; amending
+ORCHESTRATION.md §3b / test_plan_of_record.py test_9 to admit one is
+integration/user territory.** No leg is dispatched by this entry; no
+successor session should "fix" the vacancies by drafting
+(ORCH_STATE.md carries the instruction).
+
+### The window, squared — the closing inventory
+
+Landed and absorbed this window: 221, 333, 332, 326, 331, 329, 330,
+323, 339, 334-345, 346-379 (with 313/320's packets and escalation #3
+parked with the user throughout). Standing with the user: the
+route-4 stop packet (complete), the cycle-10 packet + GA note, the
+POCP (ii) item (inputs complete), the C4/escalation-#3 identity, the
+313 packet + ban-wording, the 320 packet, the exhaustion note (item
+6, upgraded), and now item 8. Nothing in this window moved an L1-L4
+link; two walls were mapped more sharply (the ansatz protection
+load-bearing; the certification routes' funnel through Tsai); the
+programme's ceiling stands at Tier 2 by its own measured gates; and
+the record ends the window telling the truth in every register it
+has. Clay stays ~0.05%.
