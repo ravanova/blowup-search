@@ -35,8 +35,8 @@ prose as before.
 |---|---|---|---|
 | A | 335 | S1GR | no |
 | B | 353 | DSSP-B5 | yes |
-| C | 351 | DSSP-B3 | yes |
-| D | 322 | F70 | no |
+| C | 354 | DSSP-B4 | yes |
+| D | 327 | P2T1E | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -47,7 +47,7 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | Fig | Leg | Status |
 |---|---|---|
 | fig69 | 302 | landed; evidence script owed (leg 327) |
-| fig70 | 311 | claimed, unshipped; produce-or-correct (leg 322) |
+| fig70 | 322 | landed (produced from 311's banked JSON; INDEX row closed) |
 | fig72 | 320 | reserved, parked branch |
 | fig75 | 301 | reserved, parked branch |
 | fig76 | 313 | reserved, parked branch |
@@ -67,9 +67,10 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig90 | — | released (341 landed, no figure shipped; number returns to the pool) |
 | fig91 | 343 | landed (fig91_route_dsspb1_v1 — genuine new measurement) |
 | fig92 | 350 | landed with B2 (or released if unshipped — orchestrator mirrors at INDEX) |
-| fig93 | 351 | live, slot C (B3 mapping-bound study; only if warranted) |
+| fig93 | — | released (351 landed YES, figure judged unwarranted; number returns to the pool) |
 | fig94 | 353 | live, slot B (B5 basin-radius study; only if warranted) |
-| fig95+ | — | next free |
+| fig95 | 354 | live, slot C (B4 known-answer probe; only if warranted) |
+| fig96+ | — | next free |
 <!-- FIG-TABLE-END -->
 
 (Current snapshot, DM update of 2026-08-11 cycle 8 — B/221 landed YES (both
@@ -18537,9 +18538,114 @@ DSSP-B3 (critical path). With the user: cycle-10 packet + GA note, POCP
 (ii) item, C4/escalation-#3, 313 packet + ban-wording, 320 packet. Next
 vacancy: 327 P2T1E.
 
-**Reserve queue: 12 undispatched legs (327, 287, 229, 293, 298, 299, 310,
-325, 231, 232, 233, 234).** Immediately dispatchable: **6**. Next fresh leg
-number: **354.**
+Cycle 10o: C/351 landed YES at ea2913e — Biot-Savart STAYS ON THE
+MULTIPLIER SIDE: the swirl potential in EXACT elementary closed form (no
+quadrature or table survives in the module; three numeric prototypes
+cross-validated then discarded), a(0) = -2/3 exactly, u_B ~ 1/r arrived at
+by SOLVING; div/curl checked analytically with a planted wrong-vorticity
+control failing by 7.6e-3; mapping-bound ratio 0.195204 stable to 5 sig
+figs across resolution AND domain ladders; closed within the 2-leg upper
+bound. D/322 landed YES at 93ef9cb — fig70 produced from 311's banked JSON,
+INDEX row closed, the stray side-effect edit reverted and verified empty.
+**B3's YES fires B4 per the plan's own branch: leg 354 = brick B4
+(DSSP-STEP), C ← 354 — the critical path** (the rescaled-vorticity
+time-stepper against a KNOWN answer with a pre-stated window, planted
+non-trivial control must fail; repair the stepper, never the tolerance).
+D ← 327 P2T1E. Floor 2/4 (353, 354).
+
+**Reserve queue: 11 undispatched legs (287, 229, 293, 298, 299, 310,
+325, 231, 232, 233, 234).** Immediately dispatchable: **5** (rank order:
+287, 229, 293, 298, 299). Next fresh leg number: **355.**
 
 Nothing in this update lifts a ban. An honest UNMEASURED column is the
 discipline refusing to guess; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10o) — 351/B3 YES ABSORBED (MULTIPLIER-SIDE
+CONFIRMED, WITH AN EXACT CLOSED FORM WHERE A QUADRATURE TABLE WAS EXPECTED);
+322 YES ABSORBED (fig70 SHIPPED); C ← LEG 354 = BRICK B4 (CRITICAL PATH),
+D ← 327 P2T1E
+
+Written from the same detached lineage, resynced to origin/main = 93ef9cb.
+
+### 351 DSSP-B3 gate YES, absorbed at full strength
+
+The nonlocal step is measured safe, and the construction exceeded its own
+spec's expectations: the swirl potential for the algebraic witness has an
+EXACT elementary closed form (a(r) = -2G4(r)/(3r^3) - (2/3)/sqrt(1+r^2)),
+so no quadrature or interpolation table survives in the final module —
+three numeric prototypes were built, cross-validated against the closed
+form, then discarded, which is the right order. a(0) = -2/3 exactly;
+u_B ~ 1/r (the Type-I envelope) arrived at by solving, not assumed; div and
+curl verified analytically with a planted wrong-vorticity control failing
+by 7.6e-3 (the check can fail); the mapping-bound ratio 0.195204 in
+unweighted L², stable to 5 significant figures across BOTH ladders — the
+domain ladder to R=1e5 being exactly the diligence an algebraic tail
+demands where 332's Gaussian did not. Comparable magnitude to 332's own
+ratios. Closed within the 2-leg upper bound; fig93 correctly judged
+unwarranted and released. Endorsed without amendment.
+
+### 322 F70 gate YES, absorbed
+
+fig70 produced from 311's banked JSON with no re-measurement — the
+produce-branch, cleanly. The INDEX row closes. The stray side-effect edit
+to p2_route_cadx_v1.json (from smoke-testing the shared figure suite) was
+reverted before commit and the orchestrator independently verified the
+diff empty — noted approvingly; a build-suite smoke test that touches
+sibling outputs is a known hazard shape, and the leg handled it correctly.
+
+### Refill — C ← leg 354 = brick B4 (DSSP-STEP), the critical path
+
+B3's YES fires B4 per the plan's own branching ("yes → the nonlocal step is
+safe and B4 proceeds"):
+
+```
+### 354 — ROUTE-DSSP-B4: BRICK B4 (DSSP-STEP) — EXACTLY AS DRAFTED AT
+TECHNICAL_P2_ROUTEDSSP_V1.md §5.1
+[FLOOR-ELIGIBLE: construction]
+**Thesis and gate.** The spec IS the plan's §5.1 B4 entry, verbatim,
+including its drafted gate and the TIER-2 ceiling stated there: does the
+rescaled-vorticity time-stepper reproduce a KNOWN answer inside a STATED
+window (lesson 84 — the window declared before running: a decaying Leray
+solution must relax to the trivial state at a measured rate), with a
+planted non-trivial control that must fail? yes → B5/B6 proceed (B5
+already live in slot B; B6 stays user-gated). no → report the defect's
+magnitude and REPAIR THE STEPPER, NOT THE TOLERANCE (leg 318's lesson,
+written into the plan's own no-branch).
+**Territory.** As the plan's B4 entry states (new solver/ module + runner +
+data JSON), PLUS solver/capabilities.py + test_capabilities.py (additive
+registration, the cycle-4 rule), writeup/figures/fig95* (only if
+warranted), writeup/novelty/leg_354.md, experiments/journal/leg_354.md.
+Reads 350/351's landed modules (the enriched basis and the closed-form
+Biot-Savart); edits neither.
+**Difficulty.** heavy (plan sizing 2 legs — an upper bound per cycle 10g;
+overruns stop and report)
+**Preconditions:** Leg 351/B3 landed YES (TRUE, ea2913e).
+```
+
+### Refill — D ← 327 P2T1E (reserve rank 1, executed)
+
+Spec at cycle 5, unchanged: the fig69 evidence script redrawn from 302's
+curated JSON, KA8's failure plotted at its measured magnitude, byte-stable.
+Light; not floor-eligible. Territory disjoint from A/B/C — checked.
+**Floor 2/4 (353, 354) — §3b's minimum.** FLOOR-TABLE and FIG-TABLE synced
+(fig70 landed; fig93 released; fig95 conditionally to 354).
+
+### Standing state
+
+A/335 (second diagnostic pass, watched); B/353 DSSP-B5. The route-4 brick
+ledger now reads: B1 ✓, B2 ✓ (25.7-28.5x), B3 ✓ (multiplier-side,
+0.195204), B4 live (C), B5 live (B), B6 user-gated, B7 next in sequence
+after B4/B5 report, B8 behind it, B9 struck. With the user: cycle-10
+packet + GA note, POCP (ii) item, C4/escalation-#3, 313 packet +
+ban-wording, 320 packet. Next vacancy: 287 EPA.
+
+**Reserve queue: 11 undispatched legs (287, 229, 293, 298, 299, 310, 325,
+231, 232, 233, 234).** Immediately dispatchable: **5**. Next fresh leg
+number: **355.**
+
+Nothing in this update lifts a ban. B3's multiplier-side answer and B4's
+known-answer probe are apparatus under the Tier-2 ceiling; a figure shipped
+from banked data moves nothing. No L1-L4 link moved; Clay stays ~0.05%.
