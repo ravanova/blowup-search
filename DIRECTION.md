@@ -36,7 +36,7 @@ prose as before.
 | A | 366 | LCB5 | no |
 | B | 368 | MRYX | yes |
 | C | 367 | E5P | yes |
-| D | 293 | JFA | no |
+| D | 298 | CORRX | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -20244,11 +20244,85 @@ A/366 LCB5; C/367 E5P; D/293 JFA. Route 4: stopped; the stop packet
 (item 5) gains 365's part-3 completion. With the user: seven items
 including the exhaustion note. Next vacancies: 298 CORRX, 299 TESTA.
 
-**Reserve queue: 8 undispatched legs (298, 299, 310, 325, 231, 232,
-233, 234).** Immediately dispatchable: **2**. Next fresh leg number:
-**369.**
+Cycle 10dd: D/293 landed NO-fixed at 8cb2944 — 64 orphaned legs (102
+through the tip, including 365 caught mid-rebase) found by TWO
+independent instruments and repointed with one pointer-only entry each,
+summaries copied from landed gate verdicts never re-derived;
+additions-only confirmed; zero broken links among existing entries
+(301's apparent exception correctly adjudicated a self-captioned
+non-landing, not a bug). Floor-line slip corrected: A/366 is NOT
+eligible — §3b rides on B/368 + C/367 (the 10cc dispatch crossed the
+293 report; the standing crossing-handling applies). D ← 298 CORRX (the
+CORRECTIONS.md freshness audit — apt timing, the register having gained
+§§21-27 this window). 310's precondition arithmetic pre-noted: it fires
+on 298's landing (287 already landed). Floor 2/4 (368, 367).
+
+**Reserve queue: 7 undispatched legs (299, 310, 325, 231, 232, 233,
+234).** Immediately dispatchable: **1** (299 TESTA). Next fresh leg
+number: **369.**
 
 Nothing in this update lifts a ban. A confinement explained is a
 sharper map of why the object is unreached — which cuts both ways and
 is stated both ways in the packet; no L1-L4 link moved; Clay stays
 ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10dd) — 293 NO-FIXED ABSORBED (64
+ORPHANS REPOINTED ON TWO INSTRUMENTS); THE FLOOR-LINE SLIP CORRECTED;
+D ← 298 CORRX
+
+Written stacked on the cycle-10cc tip (f5f16ff, pushed and awaiting
+integration when 293 landed to main at 8cb2944 — the orchestrator
+integrates the 10cc+10dd stack as one fast-forward, the 9c/9d
+precedent).
+
+### 293 JFA gate NO (fixed), absorbed at full strength
+
+The third-generation freshness audit earned its number: 64 orphaned
+legs found and repointed — including 365, caught mid-rebase and handled
+in a clean addendum commit rather than silently folded — with the
+discipline in the details: TWO independent instruments (file-existence
+census and full-text mention census) agreeing; each appended pointer's
+summary COPIED from the leg's own landed gate verdict, never
+re-derived; additions-only confirmed by diff; and the one apparent
+broken link (301) adjudicated a correctly-self-captioned non-landing
+rather than patched into a bug it wasn't. The JOURNAL's index is whole
+again through the current tip. Endorsed without amendment.
+
+### The floor line, corrected before it propagates
+
+The orchestrator's report read "floor 2/4 via A+C" — A/366 is LCB5,
+correction work, NOT floor-eligible. The floor rides on **B/368 MRYX +
+C/367 E5P** (the cycle-10cc dispatch of 368 crossed the 293 report in
+flight — the same crossing family as 339/348/364, same handling: the
+DM's table is authoritative and the slip is corrected here, no harm
+landed).
+
+### Refill — D ← 298 CORRX (reserve rank 1, executed)
+
+The CORRECTIONS.md freshness audit, spec at its original entry — apt
+timing rather than accident: the register has gained §§21-27 in this
+window alone (closures #5/#6 filed, three LCB batches, the S1GR and
+ESPX repairs), and an audit of the register itself now has real
+material. Audit; not floor-eligible; legal with B+C carrying §3b.
+Territory disjoint from A/B/C — checked. **Floor 2/4 (368, 367).**
+FLOOR-TABLE synced (D 293→298). **310's precondition arithmetic
+pre-noted: 310 EPAP fires on 298's landing (287 landed at b0cf565)** —
+so 298's landing report can fire it without a round trip.
+
+### Standing state
+
+A/366 LCB5; B/368 MRYX; C/367 E5P. Route 4: stopped; the stop packet
+(item 5) carries 365's part-3 completion. With the user: seven items.
+The reserve is nearly drained: after 298, only 299 TESTA is
+immediately dispatchable; 310 on 298; 325 USER-GATED; 231-234 blocked.
+
+**Reserve queue: 7 undispatched legs (299, 310, 325, 231, 232, 233,
+234).** Immediately dispatchable: **1** (299 TESTA). Next fresh leg
+number: **369.**
+
+Nothing in this update lifts a ban. A whole index and an audited
+register are the record keeping itself honest; no L1-L4 link moved;
+Clay stays ~0.05%.
