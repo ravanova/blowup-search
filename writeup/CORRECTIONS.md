@@ -44,6 +44,7 @@ lesson 35). This file is the index, not the substitute.
 | 11 | PUB3's `a_max_machine` exposure row (`writeup/4_p2_lottery/TECHNICAL_P2_PUB3_V1.md`, the Route-D v11 "Exposure" table) named the scalar as materially exposed but never carried a resolution once one existed; leg 294's own flag additionally mis-cited the site as line 134 quoting the literal `a_max_machine=1.0` — checked directly, no such literal string exists anywhere in the file (line 134 is unrelated prose; the actual site is the table row at line 148, which names the scalar without printing a value) | **leg 236** (row-exclusion) + **leg 226** (D2/D3 repair), reconciled by **leg 294** → **leg 295** (this entry; located the true site, found leg 294's line/citation imprecise, appended the resolution) | `a_max_machine`'s corrected value **0.55** (confirmed by two independent methods from the stale `1.0`) is now recorded at the site as a dated, additive footnote — **zero** existing sentence reworded. §12 below |
 | 12 | PUB2's caveat family printed a single Xu-normalization digit, `0.0420`, at four sites (§0, §3.2, the §4.5 sign-correction paragraph, §7) as if it were the unambiguous conversion of `0.0908` into “Xu's own normalization” | **leg 277** (2026-08-07, Route-XUN, branch `leg/277-xun-v1`, never merged) → **leg 280** (this entry; applied the correction to the two sites that state it independently, §0 and §7 — the other two are backreferences to §0 and needed no separate edit) | Xu's Definition 4.1 names **two** norms: the *displayed* half-line definition (4.2), constant `π`, and the *equivalent* full-line norm, constant `2π`. `0.0420` is the **full-line** reading (`κ = 2π`); under the **displayed** definition the value is **`0.057643`** (`‖R‖_X = 17.348`, not `23.792`) — **`1.37×`** larger. §13 below |
 | 13 | (a) PUB2 §4.5 stated that “any claim that the digits `0.0908` and `0.71465` are convention-independent” does not survive; (b) the same paragraph's “optimistic by `7.9×`” factor was printed with no convention caveat anywhere in the document | **leg 281** (drafted 2026-08-07, Route-CVF, branch `leg/281-cvf-v1`, never dispatched) → **leg 280** (this entry; corrected (a), flagged (b), both in place, 2026-08-11) | (a) is **backwards for `0.71465`**: it is convention-**free** to `1.87e−16` (a ratio of `X`-norms with no border coordinate, so the weight cancels) — only `0.0908` is convention-relative. (b) the `7.9×` factor **is** convention-relative and unflagged: it ranges `5.265 … 656.95` (`124.8×`) over the same weight sweep §0 names. §14 below |
+| 14 | leg 221's own repair-verification sweep found `writeup/data/spike1_stepC_gate.json` does not reproduce (`.runs[0].alpha` moves `13.2%`, two of four `predicate_checks` flip), identically with and without its own repair; declined to adjudicate, flagged forward as possible staleness or environment sensitivity | **leg 335** (2026-08-12, Route-S1GR) | **neither.** `experiments/p2_route_bvrr_v1_repair.py`'s `BANKED` registry entry for this artifact invokes the generator with `argv=["--logged"]` only, omitting the `--steps 2500` flag the banked artifact's own `runs[*].steps` field proves was used originally, silently falling back to the CLI default of `400` — a harness bug, not code drift or environment sensitivity (BLAS-thread control: `alpha` spread `1.55e-15` across `1/2/4` threads). All four resolution rungs reproduce the banked `alpha` to float64 precision when re-run at the correct `steps=2500`, and `0` of `4` `predicate_checks` actually differ. **REPRODUCIBLE_AS_BANKED.** §23 below |
 
 **The process pattern, which is the reason for the register.** In #1 the repository *had the
 reference in hand before it drew the conclusion* — leg 111's own novelty log §2 recorded the
@@ -1540,3 +1541,116 @@ classification, and leg 307's own verdict are all untouched; this leg's correcti
 non-claim-bearing (a tolerance-multiplier arithmetic slip). **0 bans touched**,
 `plan_of_record.py` and `DIRECTION.md` byte-identical, untouched by this leg. No link of the
 `L1 → L4` chain moved. Clay odds stay **~0.05%**.
+
+## §23 — the spike1_stepC_gate.json reproducibility gap: not staleness, not environment — a missing `--steps 2500` in the regeneration harness
+
+**Dispatch: leg 335 (Route-S1GR).** Territory: `experiments/p2_route_s1gr_v1.py` (new
+diagnostic), `writeup/data/p2_route_s1gr_v1.json`, this entry, `writeup/novelty/leg_335.md`,
+`experiments/journal/leg_335.md`. `experiments/spike1_stepC_gate.py` and
+`writeup/data/spike1_stepC_gate.json` were read, never edited.
+
+### 23.1 The claim, as banked
+
+Leg 221's repair-verification sweep (`experiments/journal/leg_221.md` §2b,
+`writeup/data/p2_route_bvrr_v1_repair.json`) regenerated `writeup/data/spike1_stepC_gate.json` by
+shelling out to `experiments/spike1_stepC_gate.py --logged` and found it did **not** reproduce:
+`.runs[0].alpha` moved from `-0.3350763095` to `-0.3793563731` (**13.2%**), and two of the four
+`predicate_checks` flipped, `1_alpha_within_5pct` and `4_resolution_stable_alpha`, both
+`true → false`. This reproduced identically whether leg 221's own repair (two guards in
+`odd_field_x_slope`) was present or absent, so leg 221 could not attribute the movement to
+itself, and — correctly, per its own stated discipline of not clearing what it cannot measure —
+declined to adjudicate, flagging it forward as either staleness (code drift since the artifact
+was banked at `51b63b2`) or genuine environment sensitivity.
+
+### 23.2 What was actually true
+
+**Neither.** The banked artifact's own `runs[i].steps` field reads **2500** in all four
+resolution rungs — meaning the original run was invoked with an explicit `--steps 2500` flag,
+since `experiments/spike1_stepC_gate.py`'s own CLI default is `400`
+(`ap.add_argument("--steps", type=int, default=400)`). `experiments/p2_route_bvrr_v1_repair.py`'s
+own `BANKED` registry entry for this artifact reads:
+
+```python
+dict(key="spike1_stepC_gate", artifact="writeup/data/spike1_stepC_gate.json",
+     script="experiments/spike1_stepC_gate.py", argv=["--logged"], slow=True,
+     calls="RescaledBoussinesq.run(renorm=True), 4 resolution rungs"),
+```
+
+`argv` carries no `--steps`, so leg 221's regeneration silently fell back to the CLI default of
+`400` steps — an entirely different, far-less-relaxed trajectory, not a differently *computed*
+one. This is a harness bug in the regeneration `argv` list, named in the source line quoted
+above, not code drift and not environment sensitivity.
+
+**Proven two independent ways, both measured this leg:**
+
+* Re-running config 0 (`n_r=300, n_beta=48, r_min=1e-3, r_max=1e5, renorm=True, tol=1e-9`) at
+  `max_steps=400` — the harness's actual, un-overridden invocation — reproduces leg 221's exact
+  "regenerated" alpha: `-0.37935637310385306` vs. leg 221's reported `-0.3793563731`, `rel_diff =
+  1.0157e-11`. This confirms the **cause**, not just the symptom.
+* Re-running all four resolution rungs at `max_steps=2500` — the banked artifact's own recorded
+  step count — reproduces every banked value to float64 precision:
+
+  | run | banked `alpha` | rerun `alpha` | `rel_diff` |
+  |---|---|---|---|
+  | 0 (`n_r=300, r_max=1e5`) | `-0.3350763095343765` | `-0.33507630953437806` | `4.64e-15` |
+  | 1 (`n_r=450, r_max=1e5`) | `-0.33396053473198634` | `-0.33396053473198667` | `9.97e-16` |
+  | 2 (`n_r=600, r_max=1e5`) | `-0.3367555909794855` | `-0.3367555909794855` | `0.0` |
+  | 3 (`n_r=450, r_max=1e6`) | `-0.33619163643975625` | `-0.33619163643975647` | `6.60e-16` |
+
+  All four are float64-identical (a few ULP of accumulated-order-of-operations noise at worst).
+
+* A BLAS-thread control (`OMP_NUM_THREADS`/`OPENBLAS_NUM_THREADS`/`MKL_NUM_THREADS` in `{1, 2,
+  4}`, three separate subprocess invocations, config 0 at `max_steps=2500`, following this repo's
+  own precedent `experiments/leg_0_bench_newton_threads.sh`) shows `alpha` moves by **`1.55e-15`**
+  across the sweep — no environment/thread sensitivity. This rules out the second alternative
+  leg 221's thesis left open.
+* Re-evaluating the four gate `predicate_checks` against the correctly re-run values (all four
+  resolution rungs at `steps=2500`) reproduces the banked `predicate_checks` **exactly** — `0 of
+  4` actually differ. `1_alpha_within_5pct` and `4_resolution_stable_alpha` are `true` in both
+  the banked record and this leg's correct re-run; the two "flips" leg 221 reported were a
+  property of its own regeneration harness's missing `--steps` flag, not of the banked artifact
+  or the code that produced it.
+
+`solver/boussinesq_rescaled.py` and `solver/boussinesq_velocity.py` (the only two solver files on
+this gate's call path) are byte-identical on the relevant well-posed-grid code path since
+`51b63b2` except for leg 221's own repair (measured `0` of `256,233` calls moved) and commit
+`26e6bd3` (adds raise-guards in `u_x_at_origin`/`PolarGrid.__init__` for empty/rank-deficient
+windows and reversed intervals, which never trigger on this gate's well-posed configs,
+`r_min=1e-3 ≪ r_window=0.1`). So there is no code-drift candidate either.
+
+### 23.3 Adjudication
+
+**REPRODUCIBLE_AS_BANKED.** `writeup/data/spike1_stepC_gate.json` needs no correction to any of
+its numbers — the re-run harness (`experiments/p2_route_bvrr_v1_repair.py`'s `BANKED` registry
+entry for `spike1_stepC_gate`) was at fault, shown above with the deciding evidence quoted. The
+banked artifact's own `predicate_checks` (`1_alpha_within_5pct: true`,
+`2_alpha_far_within_10pct: false`, `3_anisotropy_below_0p23: true`,
+`4_resolution_stable_alpha: true`, overall `predicate_pass: false` on clause 2 alone) stand
+unmoved.
+
+### 23.4 Downstream consumers flagged
+
+`experiments/journal/leg_221.md` §2b's language ("does not reproduce today... two gate predicates
+flip") should be read alongside this entry: the non-reproduction was leg 221's own regeneration
+harness's artifact, not a property of `writeup/data/spike1_stepC_gate.json` or the solver code.
+`writeup/data/p2_route_bvrr_v1_repair.json`'s `clause_b.banked_runs` entry for `spike1_stepC_gate`
+(`moved_detail`, e.g. `.runs[0].alpha` moving `0.1321`) records a real measurement of what its own
+`argv=["--logged"]` invocation produced, and is **not corrected** here (append-only discipline;
+the number it reports is accurate for the harness it actually ran) — but any future leg reading
+that `moved_detail` list as evidence of drift in the banked artifact itself should read this
+entry first. `experiments/p2_route_bvrr_v1_repair.py`'s `BANKED` registry entry is not this leg's
+territory to edit (reads only, per dispatch) and is flagged, not corrected, for whoever owns that
+file to add `"--steps", "2500"` to `argv` if the intent is a faithful regeneration.
+
+### The ceiling
+
+**0 numbers changed** in `writeup/data/spike1_stepC_gate.json` — every value in it was
+independently re-derived, not re-read, and matched to float64 precision. **1 mechanism named**
+with source-line evidence quoted (`argv=["--logged"]` in `experiments/p2_route_bvrr_v1_repair.py`,
+missing `--steps 2500`). **0 gate answers changed** (the gate's own `predicate_pass: false` — on
+clause 2, `alpha_far` — is unmoved). **0 bans touched**, `plan_of_record.py` untouched,
+`writeup/data/spike1_stepC_gate.json` and `experiments/spike1_stepC_gate.py` untouched (read-only
+per territory). No link of the `L1 → L4` chain moved. Clay odds stay **~0.05%**. What changes is
+that leg 221's honest, undischarged flag now has a name and a closed status: **harness bug, not
+staleness, not environment** — and the two "flipped" predicates never actually flipped against a
+correctly re-run gate.
