@@ -1806,6 +1806,15 @@ banked files touched. 0 consumer gate answers changed (`test_literature_gates.py
 passes). This closes 287's exception with a named mechanism and a repair rather than leaving it
 as a standing re-solve-not-bytes warning. Clay stays **~0.05%**.
 
+> **Cross-reference annotation (leg 378, ROUTE-LCB6, 2026-08-12) — not a rewrite of this section.**
+> §25(a)'s phrase above, "sits on the imaginary axis in exact arithmetic (`Re lambda = 0`)," is the
+> theorem-level claim the 367/369/371 trilogy subsequently investigated and downgraded (367:
+> UNVERIFIED for the full truncation; 369: not derivable from generic backward-error theory,
+> foreclosed; 371, terminal: derivable, but only from LAPACK's specific real-Schur structure, not
+> from any generic argument — matches leg 367's four measured points to within 0.93-1.68x via a
+> second driver, `scipy`'s `dgees`). `canonical_order()`'s repair itself is UNAFFECTED — see this
+> file's new entry below and the inline marker at `experiments/journal/leg_356.md` §2.
+
 ---
 
 ## §26 — leg 361 (ROUTE-LCB4), 2026-08-12: §25's `VOLATILE_TOKENS` diagnosis fixed at the
@@ -2176,3 +2185,40 @@ plus their gap-list annotations updated, this entry. **0 gate answers changed an
 route's own YES/NO verdict is read verbatim from its existing banked JSON and reproduces
 unmoved. **0 bans touched**, `plan_of_record.py` and `DIRECTION.md` untouched. No link of the
 `L1 → L4` chain moved. Clay odds stay **~0.05%**.
+
+---
+
+## §30 — leg 378 (ROUTE-LCB6), 2026-08-12: accumulator item (10) applied — leg 356's
+`Re(lambda)=0` claim corrected to its earned status, per the 367/369/371 trilogy
+
+**Dispatch.** The DM's accumulator normally batches 2-3 finalized items before applying them
+together; this cycle it was amended for the empty-queue case — when the accumulator holds at
+least one finalized item and nothing else is dispatchable, the batch fires early rather than
+waiting for company (a finalized correction sitting idle is staleness by policy, not discipline).
+Item (10), finalized by leg 371 (`experiments/journal/leg_371.md` §7), is the only item in the
+queue this cycle. Leg 378 applies it. **Text-only: nothing re-derived or re-measured here.**
+
+**What was corrected, and where.** `experiments/journal/leg_356.md` §2 (and, identically in
+substance, `writeup/CORRECTIONS.md` §25(a) — annotated above, not rewritten) stated the
+discretized essential/continuum spectrum's pinning to `Re(lambda) = 0` as settled fact ("in exact
+arithmetic"). An inline `[CORRECTED 2026-08-12 by leg 378 …]` marker was inserted directly after
+the original sentence in `experiments/journal/leg_356.md` §2, quoting that original wording in
+place (not deleted), recording the corrected status: **UNVERIFIED as a theorem for the full
+truncated matrix (leg 367) — NOT derivable from generic backward-error theory, that route tried
+and foreclosed (leg 369) — but IS derivable from LAPACK's specific real-Schur numerical structure
+(`dlanv2.f`'s shared 2x2-block half-trace plus the Ahues-Tisseur local deflation criterion), NOT
+from any generic argument, independently reproduced via a second driver (`scipy.linalg.schur` /
+LAPACK `dgees`) matching leg 367's four measured points to within a factor of 0.93-1.68x (leg
+371, terminal).** `canonical_order()`'s repair itself needs only the empirical floor below
+`1e-6`, which the trilogy leaves untouched and re-confirmed — no gate answer, no repair, and no
+consumer verdict for the E5 family moves as a result of this correction.
+
+### The ceiling
+
+**One marker inserted at one site (`experiments/journal/leg_356.md` §2, inline, non-deleting),
+one non-destructive cross-reference annotation added to §25 above (its own content untouched),
+this one batched entry appended to `writeup/CORRECTIONS.md`.** 0 other files touched. 0 banked
+JSON files touched or read-write (all read-only throughout). `plan_of_record.py` and
+`DIRECTION.md` untouched (off-limits to this leg). This closes the accumulator: item (10) is
+applied: item (11) opens only whenever a future leg flags the next correction — not this leg's
+concern. Clay stays **~0.05%**.
