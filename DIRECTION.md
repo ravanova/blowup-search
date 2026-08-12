@@ -33,7 +33,7 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 361 | LCB4 | no |
+| A | 229 | PNRV | no |
 | B | 362 | B7X | yes |
 | C | 363 | CKNQ | yes |
 | D | 355 | LCB3 | no |
@@ -18961,9 +18961,21 @@ check, planted SS/DSS controls both ways, existing verdicts unmoved).
 regularity literature supply explicit CKN ε_*/Harnack values — testing
 360's non-operational verdict's own contingency). Floor 2/4 (362, 363).
 
-**Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
-232, 233, 234).** Immediately dispatchable: **4** (rank order: 229, 293,
-298, 299). Next fresh leg number: **364.**
+Cycle 10y: A/361 landed PASS-both at f11a559 — the VOLATILE_TOKENS gap
+closed PLUS a second genuinely analogous gap found and fixed while
+auditing the list (bare "seconds" — real wall-clock leaves had been
+escaping volatile classification); the dual-demonstration gate satisfied
+(the planted nondeterminism control still trips post-fix; 287's
+false-alarm artifact now reads PORTABLE); 287's record marked at §25/§26,
+originals intact. Accumulator items (5)-(6) close; item (7) stands open
+(341's S2 grounds marker). The route-4 stop packet is LIVE as NEEDS-YOU
+item 5 (846727e) — recorded here for the file's user-item inventory.
+A ← 229 PNRV (resume; the audits queue finally legal — B/362 + C/363
+carry §3b). Floor 2/4 (362, 363).
+
+**Reserve queue: 9 undispatched legs (293, 298, 299, 310, 325, 231,
+232, 233, 234).** Immediately dispatchable: **3** (rank order: 293, 298,
+299). Next fresh leg number: **364.**
 
 Nothing in this update lifts a ban. An evidence script that cannot
 silently mutate a banked artifact is the record's immune system getting a
@@ -19682,3 +19694,58 @@ Nothing in this update lifts a ban. A screen corrected to under-fire less
 is honesty toward candidates that do not yet exist; a constants question
 tests a verdict's own stated contingency; the stop stands pending the
 user. No L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10y) — 361 PASS-BOTH ABSORBED (THE
+INSTRUMENT FIXED WITHOUT BEING BLINDED, AND A SIBLING GAP CAUGHT IN THE
+SAME PASS); A ← 229 PNRV
+
+Written from the same detached lineage, resynced to origin/main = f11a559.
+
+### 361 LCB4 — PASS on both items, absorbed at full strength
+
+Item (i) exceeded its drafting: the bare-"generated" gap closed AND the
+audit-the-list-while-there instruction surfaced a second genuinely
+analogous omission (bare "seconds", which had let p2_route_cap_v1_audit's
+real wall-clock leaves escape volatile classification) — each addition
+justified in one line, as the spec demanded. The dual-demonstration gate
+is the load-bearing part and it held: the planted genuinely-
+nondeterministic control STILL TRIPS post-fix, so the instrument was
+fixed without being blinded — the failure mode the gate existed to
+prevent. Item (ii): three inline block-quote markers at 287's sites,
+originals left intact, CORRECTIONS §25/§26 filed. Accumulator items
+(5)-(6) close; item (7) (341's S2 grounds marker, source-verified by 359)
+stands open below threshold. Endorsed without amendment.
+
+### Refill — A ← 229 PNRV (reserve rank 1, and finally legal)
+
+RESUME leg/229-pnrv-v1 (+ its -wip-salvage branch), spec at its original
+entry — the post-repair verification the reserve has carried since the
+leg-225 era. The floor bind that deferred the audits queue for six
+consecutive refills has lifted naturally: B/362 and C/363 (both eligible)
+carry §3b, so A takes the audit without a fresh draft. Resume condition:
+rebase onto main first; re-check any committed rows for staleness before
+extending (the standing resume discipline). Territory disjoint from
+B/C/D — checked. **Floor 2/4 (362, 363).** FLOOR-TABLE synced (A
+361→229).
+
+### Standing state
+
+B/362 B7X (the screen extension); C/363 CKNQ (the constants question);
+D/355 LCB3 (the longest-running slot — dispatched cycle 10q; no stall
+symptom reported, but orchestrator: a one-line status in the next report
+would be welcome, same shape as the 335 ask). Route 4: stopped, packet
+LIVE as item 5. With the user: six open items (stop packet, cycle-10
+packet + GA note, POCP (ii), C4/escalation-#3, 313 + ban-wording, 320) —
+the cascade note stands: a ruling on any one likely reshapes the others,
+and it routes to the DM verbatim for a one-cycle cascade execution.
+
+**Reserve queue: 9 undispatched legs (293, 298, 299, 310, 325, 231, 232,
+233, 234).** Immediately dispatchable: **3** (293 JFA, 298 CORRX, 299
+TESTA). Next fresh leg number: **364.**
+
+Nothing in this update lifts a ban. An instrument fixed without being
+blinded and a verification leg finally taking its turn are record
+hygiene; no L1-L4 link moved; Clay stays ~0.05%.
