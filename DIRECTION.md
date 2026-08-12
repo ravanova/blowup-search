@@ -34,7 +34,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 380 | PROG-R4 (§3c programme, construction — the critical path; slot OCCUPIED for the programme's duration, produces no refill events: three-plus-one rule, cycle 11d) | yes |
-| B | 381 | CLAY-LOC LANDED 7aecf78 — slot vacant pending refill; nominated refill: 386 DTOL (cycle 11d) | no |
+| B | 386 | DTOL (construction — dispatched per §3a pre-authorisation on 381's vacancy, matching the cycle-11d nomination; fig99) | yes |
 | C | 385 | SCEL (construction — 383 landed fd833d2, C refilled per §4a) | yes |
 | D | 233 | BVRRV (post-repair verification) | no |
 <!-- FLOOR-TABLE-END -->
@@ -22762,3 +22762,228 @@ verdicts verbatim), and its not-yet-landed branch will not fire.
 pass plus pre-registration, committed before any construction,
 exactly as §1 above records it. No ranking, nomination, or
 FLOOR-TABLE row changes on either landing.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 11e) — 381 CLAY-LOC ABSORBED AT FULL
+STRENGTH (GATE YES WITH ONE REFUTED SIDE-CLAUSE, ONE LABELLING
+CORRECTION, ONE REPAIRED DERIVATION STEP); ITS TWO OPEN CLAUSES
+RULED (§7 → ASSIGNED TO 384; STATEMENT (D) → YES-WITH-A-SPEC, LEG
+390 DTOR DRAFTED); 384's RE-SPEC CONFIRMED AGAINST THE LANDED TEXT;
+B ← 386 ENDORSED; RESERVE RE-RANKED AGAINST C AND D ONLY
+
+Written on `dm/cycle-11e` off origin/main = 26d25e9 (contains
+d65419c, the cycle-11d merge; base verified current). A §4a
+absorption-plus-rulings record.
+
+### 1. 381 CLAY-LOC — absorbed at full strength, endorsed without
+amendment
+
+Gate answer in its own wording: **YES, with one refuted
+side-clause, one labelling correction, and one repaired derivation
+step.** The magnitudes, carried into this file's standing record:
+
+- DSS energy exponent with the log-periodic modulation HANDLED:
+  0.499999942 vs exact-SS 0.500000000 — ratio 0.9999998844, no
+  factor. Structural reason: λ^ℤ is a subgroup of the same scaling
+  group that fixes the SS exponents, so DSS can only turn the
+  constant ∫|U|²dy into a log-periodic G(s). Handling it was
+  load-bearing, not bookkeeping: G swings 2.99× within one period,
+  and a fit that drops it returns 0.4876, biased 2.47%. Residual
+  period 1.0574 vs 2 log λ = 1.0613 (0.36%).
+- A step of the reviewer's arithmetic was INVALID AS WRITTEN: when
+  U ∉ L² — precisely §4's case — both sides read +∞. Repaired with
+  the truncated law E_ρ(t) ≍ ρ^{3−2α}(T*−t)^{α−1}, verified to
+  2.6e-5. Same conclusion, valid derivation.
+- L² needs α > 3/2; the banked Type-I object gives α = 1 — deficit
+  0.5, ratio 1.5×. Fixed-ball energy exponent at α = 1: −0.00026
+  against a predicted 0. The divergence is PURELY FAR-FIELD;
+  nothing concentrates.
+- Ledger against Fefferman's text: 4 CONFIRMED / 1 CORRECTED / 1
+  REFUTED. Bounded energy = condition (7) verbatim. 'f ≡ 0' REFUTED
+  (existence statements (A),(B) only; breakdown statement (C)
+  permits a smooth forcing satisfying (4),(5)) — and the leg
+  recorded why the f-allowance is a real relaxation but NOT a
+  shortcut: the forcing must itself satisfy (4),(5), so it buys no
+  escape from the decay and bounded-energy obligations. The
+  breakdown-on-ℝ³ statement is (C), not "(b)".
+- The cutoff bill, all ≤0.1% against closed forms: nonlinear
+  ρ^{−1.4993}, viscous ρ^{−1.4999} (identical scaling exactly at
+  α=1), divergence defect ρ^{−0.4996}, pressure perturbation at the
+  origin ρ^{−1.9997} — pressure non-locality is NOT the
+  obstruction. What does not shrink: the critical L³ tail, 326.875
+  per decade of window, constant to 7.4e-10 — log-divergent, never
+  small however far out the cut. No localisation attempted; §4's
+  transfer of the obligation to §5 verified correct.
+
+**The audit finding is endorsed, not waived: 381 drew no figure, so
+its documentation quartet is incomplete on the figure limb** (that
+is what lawfully freed fig99). Enforcement of §6's quartet is the
+orchestrator's contract, not this file's to rewrite; the DM's note
+is only this: the fig-table carries precedent for landed legs whose
+figure number returned to the pool, and whether 381's record
+warranted a figure is the orchestrator's §6 call — if a repair is
+wanted, it is a DOCS-lane item drawing from the banked
+`p2_route_cloc_v1.json`, not a new DM leg. The incompleteness does
+not change the gate answer or this absorption's strength, and it
+stays on the record rather than being tidied away.
+
+### 2. Ruling on 381's first open clause — §7 (prize rules):
+ASSIGNED, not re-drafted
+
+§7 stands STILL UNCHECKED in the landed document — 381 read the
+problem statement, not the prize rules, and said so. **Ruling: no
+new leg. The check is already owned by 384 COBV**, whose drafted
+scope (cycle 11a, re-specced cycle 11d) explicitly includes §7's
+prize-rules clauses (refereed publication, two-year clock, general
+acceptance) against the Clay Institute's own published rules — and
+384 is immediately dispatchable. The open clause closes by
+assignment to a queued owner, which is what a queue is for.
+
+### 3. Ruling on 381's second open clause — statement (D):
+YES-WITH-A-SPEC, drafted as leg 390, scoping only
+
+The tension, stated once so the ruling is legible: statement (D)
+(torus breakdown) carries NO decay and NO bounded-energy condition,
+which would make §4 — a no-method obligation, the ledger's hardest
+priced item — VACUOUS BY CONSTRUCTION. Against that: the DSS object
+is posed on ℝ³ and anchored to a scaling group that does not act on
+T³, so targeting (D) is not a relabelling — the object would have
+to be periodized, and periodization plausibly re-purchases the very
+obligation (D) deletes, as a §5-class perturbation problem; and
+§2's rigidity screen rows were verified against ℝ³ hypotheses, so
+the screen re-opens. **Whether (D) eliminates §4 or merely re-prices
+it is a cheap, readable, arithmetic question — exactly the kind of
+decision information the obligations track exists to buy — so the
+ruling is YES, with the spec below, as SCOPING ONLY: no retarget,
+no build authority, any retarget decision returns to the user.**
+
+**Reserve — 390 ROUTE-DTOR** [FLOOR-ELIGIBLE: mathematics]
+```
+### 390 — ROUTE-DTOR: DOES STATEMENT (D) DELETE §4 OR RE-PRICE IT?
+(381's named-not-authorised clause, ruled a scoping leg at cycle
+11e; authorises nothing)
+**Thesis.** Under (D)'s own text (data conditions (8),(9), solution
+conditions (10),(11) — no decay, no bounded energy), re-derive the
+obligations ledger for a torus target: name where each of §1–§5
+lands, price the periodization/embedding cost of the ℝ³-anchored
+DSS object as a magnitude (the analogue of 381's cutoff bill — e.g.
+the image-interaction size at λ ≫ 1), and enumerate which of §2's
+four screen rows are ℝ³-only versus carrying to T³ (machine-read
+against their named landed records, not transcribed). Reading and
+arithmetic; no outreach; edits no obligations file — corrections
+route to integration verbatim.
+**Gate.** Does the (D)-variant ledger re-derive with every §1–§5
+obligation either named-as-vacated or priced-as-transferred, AND
+does the §2 enumeration close with each row's ℝ³-only/carries-to-T³
+verdict tied to its landed record?
+  yes -> The ledger has a priced (D)-variant: report whether §4's
+         deletion is or is not repurchased by periodization, as a
+         magnitude; which §2 rows re-open; the retarget decision is
+         the USER's and this leg makes none. CEILING TIER 2; §6's
+         open items unchanged by a scoping answer.
+  no  -> A step cannot be priced (e.g. no coherent periodization of
+         the DSS ansatz exists): the incoherence is the deliverable,
+         banked verbatim; (D) is recorded CLOSED-AS-INCOHERENT
+         rather than named a third time.
+**Territory.** experiments/p2_route_dtor_v1.py,
+               writeup/data/p2_route_dtor_v1.json,
+               writeup/novelty/leg_390.md, experiments/journal/leg_390.md.
+               No solver edits; CLAY_OBLIGATIONS.md read, never edited.
+**Difficulty.** standard
+**Preconditions:** the leg-381 corrections landed in
+CLAY_OBLIGATIONS.md (a962e4a, on main) — TRUE;
+writeup/data/p2_route_cloc_v1.json on main — TRUE.
+```
+
+### 4. 384 COBV's re-spec — CONFIRMED against the landed text, read
+not inferred
+
+The landed document (a962e4a, in d65419c) was read directly this
+cycle and matches 381's verdicts verbatim: 'with f ≡ 0' excised
+from the target paragraph; the 4 CONFIRMED / 1 CORRECTED / 1
+REFUTED ledger block present with the (C) labelling fix and the
+not-a-shortcut clause; §4 alone carrying the VERIFIED header with
+the three amendments (DSS-costs-nothing-extra, the truncated-law
+repair, the measured 1.5× deficit); the cutoff bill priced; the
+§4-stays-open-until-DTOL rule with the composed constraint stated
+as a formula (δ < (α_centre − 1)/0.434 against δ* up to 3.35,
+settled by neither leg — exactly what 386's second gate clause now
+answers); §7 marked STILL UNCHECKED; §8 ask #1 recorded SATISFIED;
+(D) named-but-not-authorised. **384's cycle-11d re-spec SURVIVES
+with its tenses resolved: the not-yet-landed branch of its added
+check is dead (the edit is landed), so 384's scope is — (i) the
+mechanical verbatim-match check of the landed block against
+`p2_route_cloc_v1.json` check_D (the DM's visual read above is not
+a substitute for the leg's programmatic one); (ii) §2's four screen
+rows against their named landed records, machine-read; (iii) §7's
+prize-rules clauses against the Clay Institute's published rules
+(the §2 assignment above).** Preconditions unchanged-TRUE; still
+verification-class, NOT floor-eligible.
+
+### 5. B ← 386 DTOL — endorsed; the board and the floor
+
+The orchestrator's dispatch of 386 into B on 381's confirmed
+vacancy was the cycle-11d nomination executed under §3a
+pre-authorisation, with both preconditions re-verified at dispatch
+and territory re-checked (385 reads `solver/dssp_decay_enclosure.py`,
+edits it nowhere; 386 is sole editor). fig99 to 386. **The user's
+second gate clause, carried in 386's dispatched spec with its own
+two branches, is endorsed verbatim: `admissible` names
+[δ_min, δ_max] with its α_centre and α-sensitivity; `empty` says so
+plainly and is treated as first-order decision information; the two
+clauses are reported side by side, never netted into one word.**
+FLOOR-TABLE re-synced in this edit: A/380 PROG-R4 (construction,
+U0 landed dd35bbf), B/386 DTOL (construction), C/385 SCEL
+(construction), D/233 BVRRV (verification) — 3/4 eligible ≥ §3b's
+2; test_9 passes on the true roster.
+
+### 6. The reserve, re-ranked against C AND D ONLY
+
+A does not vacate (three-plus-one, standing since 11d); B is spoken
+for the length of 386. The ranking universe is C and D. Floor
+arithmetic first: A/380 and B/386 are both construction-class, so
+the floor reads 2/4 before C or D contributes — C and D may
+lawfully take non-eligible units; the rank below spends that slack
+on the obligations track.
+
+1. **384 COBV** — §4 above; owner of the §7 check; preconditions
+   TRUE. (NOT floor-eligible: verification.)
+2. **390 DTOR** — §3 above; preconditions TRUE. [FLOOR-ELIGIBLE:
+   mathematics]
+3. **387 DXNV** — as drafted 11b. (NOT floor-eligible while the
+   programme is live: literature, §3c rule 4.)
+4. **388 CRVB** — as drafted 11b. (NOT floor-eligible:
+   verification.)
+5. **389 CT2C** — as drafted 11c; waits on 386, which now runs in
+   B. [FLOOR-ELIGIBLE: construction]
+6. **325 MTB1** — user-gated, unchanged.
+7–9. **231, 232, 234** — blocked on 217/219/225, unchanged.
+
+**Reserve queue: 9 undispatched legs (384, 390, 387, 388, 389,
+325, 231, 232, 234 — 386 out to slot B, 390 new this cycle).** Immediately
+dispatchable: **4** (384, 390, 387, 388; 389 waits on 386; 325
+user-gated; 231/232/234 blocked). Above the watermark; no fresh
+drafting owed. Next fresh leg number: **391.**
+
+### 7. Standing state
+
+A/380 PROG-R4 (running; U0 landed dd35bbf — the critical path; slot
+occupied, no refill events); B/386 DTOL (running, fig99); C/385
+SCEL (running); D/233 BVRRV (running). Floor 3/4 (380, 386, 385),
+table re-synced in this edit. With the user, still: the POCP spend
+(inputs complete; nothing here presumes it) and item 8's contract
+question (moot in fact while the programme runs).
+
+Nothing in this update lifts a ban. A verification leg absorbed at
+the strength of its own measured record, including the clause it
+refuted and the figure it did not draw; two open clauses ruled
+rather than re-named — one assigned to its existing owner, one
+drafted as a scoping question that authorises nothing; a re-spec
+confirmed against landed text instead of inference; a reserve
+ranked against the two slots that can actually vacate.
+CLAY_OBLIGATIONS §4 OPEN in every route-4 gate until 386 lands its
+pre-registered δ mode; §6's two no-method obligations OPEN in every
+branch; Tier-2 ceiling throughout; no external outreach; no L1→L4
+link moved; the POCP spend stays the user's. Clay stays ~0.05%.
