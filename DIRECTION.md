@@ -35,7 +35,7 @@ prose as before.
 |---|---|---|---|
 | A | 380 | PROG-R4 (§3c programme, construction — the critical path; slot OCCUPIED for the programme's duration, produces no refill events: three-plus-one rule, cycle 11d) | yes |
 | B | 386 | DTOL (construction — dispatched per §3a pre-authorisation on 381's vacancy, matching the cycle-11d nomination; fig99) | yes |
-| C | 385 | SCEL (construction — 383 landed fd833d2, C refilled per §4a) | yes |
+| C | 390 | DTOR (mathematics — 385 landed 05acf52, C refilled per §3a/§4a; fig106) | yes |
 | D | 384 | COBV (verification — 233 landed 43dce32, D refilled per §3a/§4a; fig105) | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -23190,3 +23190,173 @@ route-4 gate until 386 lands its pre-registered δ mode; §6's two
 no-method obligations OPEN in every branch; Tier-2 ceiling
 throughout; no external outreach; no L1→L4 link moved; the POCP
 spend stays the user's. Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 11g) — 385 SCEL ABSORBED (GATE YES;
+THE X3 FALSE-CERTIFICATE FINDING GIVEN ITS DURABLE LINE); PROG-R4
+AT U1 (M1 LANDED, NO GATE, BY DESIGN); C ← 390 ENDORSED; THE
+FALSIFIABLE-GREEN RULE MADE A STANDING CLAUSE ON FOUR INSTANCES IN
+ONE CYCLE
+
+Written on `dm/cycle-11g` off origin/main = 25331dc (base verified
+current). A §4a absorption-plus-rulings record.
+
+### 1. 385 SCEL — absorbed at full strength, endorsed without
+amendment
+
+Gate YES in its own pre-committed wording (05acf52). The
+magnitudes, carried:
+
+- **Reproduction not merely within but AT 382's banked widths:
+  difference exactly 0.0** against all four knowns
+  (7.438494264988549e-15, 1.5987211554602254e-14,
+  1.9984014443252818e-14, 1.554312234475219e-14 at p = 1, 2, 2.5,
+  3), truth inside every interval — and the rows were deliberately
+  aligned to 382's OWN planted K1–K4, so the comparison is against
+  banked numbers, not fresh ones.
+- **Conjunct 1 credited to PATH A only.** PATH B (modulus,
+  ω(h)=L·h^α, absolute and log-log kinds, closed exp-free) is
+  SOUND BUT NOT TIGHT: 2.1046e-3 at N=1000, slope −1.0068, needing
+  N ~ 1e14 — and that failure was PRE-REGISTERED as P2/P3 before
+  the path was built, then allowed to fail rather than amended.
+  The pre-registered-failure discipline is exactly what cycle 11b
+  demanded of 382's successors; recorded as met.
+- **Five controls, five fired, none widened:** X1/X2/X4 refuse
+  (cell 499 at +1.3615e-3; ratio 19.99999999994); X3/X5 accepted
+  as they must be and caught by the audit at +5.1420e-2 relative
+  in 1000/1000 cells and +4.7721e-2 in log f.
+- 17/17 tests; 11 of 12 predictions confirmed. **P11 REFUTED, not
+  amended, with its mechanism named:** a shifted grid does NOT
+  detect the node-aligned wiggle — a uniform shift multiplies
+  every sample by one constant, so detection is a COMMENSURABILITY
+  effect (N=1100/1500 refuse; N=500/997/1001/1010/2000 do not). A
+  violating profile can hide from any FIXED grid. Also banked: a
+  globally-stated absolute modulus is unusable across three
+  decades (341/1000 cells non-positive from r=207.97) — state it
+  in log–log.
+- **Ceiling, in the leg's own words: planted knowns only.** No
+  profile of the object exists; the first real consumer is a
+  future unit and the leg claims nothing about one. §6 items 1 and
+  2 OPEN, item 1's admissible-cutoff half untouched. 382's
+  arXiv-429 novelty hole re-hit and still open — 387 still owns it.
+
+**The durable line the finding earns, standing from this entry:**
+**X3's certificate has width 7.438494264988549e-15 —
+bit-indistinguishable from K1's true one, and false about its
+profile. Only the recorded hypothesis field separates them.** A
+certificate is therefore never evidence apart from its recorded
+hypothesis: any future consumer of the §4 instrument chain
+(386's δ-mode, 389's certified column, any profile unit) must
+carry the hypothesis field through to its own output rows and
+treat a certificate-without-hypothesis as no certificate at all.
+This is the measured form of "the certificate is conditional on
+what you assumed", and it is now a standing requirement on every
+spec that consumes an enclosure.
+
+### 2. PROG-R4 at U1 — milestone M1 landed (703b616), no gate, by
+design
+
+The hookstep/trust-region globalisation layer exists and
+reproduces leg 353's laminar control through the new layer.
+Build-only unit, reported against its declared milestone, no gate
+manufactured — §3c rule 2 working as written. Slot A does not
+vacate; the critical path advances U1 → U2 (compliant-scale DNS).
+Nothing to rule; recorded so the programme's ledger in this file
+stays current.
+
+### 3. C ← 390 DTOR — endorsed, including the brief's framing
+
+Dispatched per §3a pre-authorisation on 385's vacancy, carrying
+the cycle-11e spec verbatim, fig106, with the no-retarget
+constraint written into the leg's own gate text rather than left
+as framing. The orchestrator's added framing — (D) looks like a
+free lunch, free lunches here have a history of being repurchased
+at a worse rate, and the reader must finish the report knowing the
+magnitudes and still facing the choice — is endorsed as exactly
+the register this file wants scoping legs briefed in.
+
+### 4. The FALSIFIABLE-GREEN rule — a standing clause, on the
+cycle's own evidence
+
+Four instances in one cycle of a green light that could not (or
+did not need to) go red, two of them in the run's own machinery:
+(1) leg 233's fabricated zero — max_rel_residual_seen initialised
+0.0 and never written, in the very failure class it was auditing;
+(2) the planted-mismatch requirement's occasion — a checker able
+to report "0 mismatches" with no demonstration it could report
+anything else; (3) integration's piped-git instance — a printed
+MERGE GATE: FAIL masked by tail's exit status, pushed on a red
+tree; (4) leg 385's piped-git instance — a stopped rebase masked
+the same way, a mid-rebase HEAD published, 3 of 4 commits landing
+and reddening main for every agent (the gate had passed on the
+complete branch and was never run on the state that reached main).
+
+The mechanics are the orchestrator's and are handled — the three
+standing rules live in reports/ORCH_STATE.md and in every dispatch
+brief; this file does not restate them. **What is the DM's, and is
+now a standing clause on every future spec drafted here: NO GREEN
+WITHOUT A DEMONSTRATED RED PATH. Every gate clause, checker,
+control, and pipeline step a spec relies on must be shown able to
+fire — a planted failure, a control that fires, or an exit status
+that propagates — in the leg's own record, not assumed from the
+tool's reputation. The planted-mismatch rule (11f §3) and the
+hypothesis-field rule (§1 above) are instances of this clause, not
+separate rules.** Specs 387/388/389/391 predate it; their
+dispatch briefs already carry the planted-control discipline, and
+each of their gates names controls able to fail — no redrafting
+owed. No scientific record was affected by either piped-git
+instance; the record says so because the audit trail supports it,
+not because it was assumed.
+
+### 5. FLOOR-TABLE re-synced; the reserve
+
+C: 385 → 390. A/380 PROG-R4 (construction, U1), B/386 DTOL
+(construction), C/390 DTOR (mathematics), D/384 COBV
+(verification). 3/4 eligible ≥ §3b's 2; test_9 passes on the true
+roster. Floor arithmetic: A + B construction-class → 2/4 met
+before C or D contributes; C's mathematics row is the slack spent
+on the obligations track, as the standing rule directs.
+
+Ranked against C and D only (A does not vacate; B mid-flight; next
+vacancy unpredictable — 386, 390, 384 all mid-flight):
+
+1. **387 DXNV** — as drafted 11b; owns the 429 hole 385 just
+   re-hit, which nudges nothing (it was already the owed work).
+   (NOT floor-eligible while the programme is live: literature.)
+2. **388 CRVB** — as drafted 11b. (NOT floor-eligible:
+   verification.)
+3. **391 MVLD** — as drafted 11f. (NOT floor-eligible:
+   verification.)
+4. **389 CT2C** — as drafted 11c; waits on 386 (live in B).
+5. **325 MTB1** — user-gated, unchanged.
+6–8. **231, 232, 234** — blocked on 217/219/225, unchanged.
+
+**Reserve queue: 8 undispatched legs (387, 388, 391, 389, 325,
+231, 232, 234 — 390 out to slot C).** Immediately dispatchable:
+**3** (387, 388, 391; 389 waits on 386; 325 user-gated;
+231/232/234 blocked). Above the watermark (3 > 2); no fresh
+drafting owed. Next fresh leg number: **392.**
+
+### 6. Standing state
+
+A/380 PROG-R4 (running, U1 landed — the critical path; slot
+occupied, no refill events); B/386 DTOL (running, fig99); C/390
+DTOR (running, fig106); D/384 COBV (running, fig105). Support: one
+DOCS unit open on 233's quartet (381's fig104 landed and merged);
+one bench unit on the caller-census repair. With the user: the
+POCP spend (unchanged), item 8 (moot in fact), item 9 (the gate's
+§6 blind spot — timing the user's; the DOCS rework and the
+named-quartet spec rule continue meanwhile).
+
+Nothing in this update lifts a ban. An adapter absorbed at the
+strength of a record that let two of its own predictions fail
+rather than amend them; a false certificate bit-identical to a
+true one made into a standing hypothesis-field requirement; a
+milestone recorded as a milestone; four cannot-go-red instances
+made one clause instead of four anecdotes. CLAY_OBLIGATIONS §4
+OPEN in every route-4 gate until 386 lands its pre-registered δ
+mode; §6's two no-method obligations OPEN in every branch; Tier-2
+ceiling throughout; no external outreach; no L1→L4 link moved; the
+POCP spend stays the user's. Clay stays ~0.05%.
