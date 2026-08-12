@@ -1,0 +1,153 @@
+{
+  "leg": 363,
+  "route": "CKNQ",
+  "title": "Route-CKNQ: does explicit-constant literature (quantitative CKN, Vasseur-type, quantitative Harnack) reach the two non-effective ingredients of leg 360's delta_0 formula?",
+  "date": "2026-08-12",
+  "branch": "leg363/work (isolated worktree, detached at origin/main dbfe7f1)",
+  "role": "LEG, floor-eligible READ-AND-REPORT (pure math + external literature, no construction, no screen code)",
+  "dispatched_by": "orchestrator dispatch text, slot C of a four-leg-parallel roster, building on leg 360's adjudication (e30297f) of leg 330's derived T4 screen from arXiv:2607.09619v2 (Pineau-Vicol)",
+  "territory": [
+    "writeup/data/p2_route_cknq_v1.json",
+    "writeup/novelty/leg_363.md",
+    "experiments/journal/leg_363.md"
+  ],
+  "files_read_only_never_edited": [
+    "experiments/journal/leg_360.md",
+    "writeup/data/p2_route_pvds_v1.json",
+    "writeup/novelty/leg_360.md",
+    "arXiv:2607.09619v2 Liouvillev2.tex (re-downloaded, sha256 re-verified against leg 360's/leg 330's pin)"
+  ],
+  "figures_assigned": 0,
+  "gate": {
+    "gate_text": "For BOTH of leg 360's two non-effective ingredients in delta_0 = K_H^{-1} K_2^{-1} * theta_*^2/8 (CKN's epsilon_*, and the Harnack constant K_H cited to Gilbarg-Trudinger Corollary 9.25), does a literature search locate a published source with an explicit numeric or formula-level value, checked clause-by-clause for reach into Pineau-Vicol's actual usage context?",
+    "answer": "YES, both constants adjudicated to a definite per-constant verdict: NO-EXPLICIT-VALUE-LOCATED for epsilon_*, NO-EXPLICIT-VALUE-LOCATED for K_H. The search is recorded honestly with links (not counts) for what was found that did not reach, and refusals (empty-result searches) banked as refusals, not silently omitted.",
+    "consequence_for_delta0": "BLOCKED (not COMPUTABLE, not BOUNDABLE-ONLY-beyond-leg-360's-formula) -- no new numeric or closed-form reduction was located beyond leg 360's formula-level dependency chain. delta_0 remains exactly where leg 360 left it: a formula, one link short of a number, for both of its non-constructive ingredients.",
+    "independent_second_blocker_restated": "Regardless of this leg's findings on delta_0, leg 360 separately found (its Condition 1 / Section 3) that the pressure-decay hypothesis eq:local:pbound does NOT close under Pineau-Vicol's own class-wide pressure-decay estimate substituted via their own change of variables: |p(x,t)| <~ C_{P,0}(sigma)*(-t)^{-sigma/2}, which DIVERGES as t -> 0- for every sigma > 0 the paper's estimate ever attains (sigma=0 is never reached). This is a SEPARATE, INDEPENDENT gap from delta_0's non-explicitness. Even if delta_0 became fully numerically computable, the screen would still be blocked by this pressure-decay divergence unless that is separately resolved -- which is not this leg's task and was not attempted here."
+  },
+  "constant_1_epsilon_star": {
+    "role": "Caffarelli-Kohn-Nirenberg epsilon-regularity threshold constant, cited by Pineau-Vicol at Liouvillev2.tex l.1994-1995 to [CKN82, Lin98, LadySeregin99, Kukavica09]",
+    "pv_usage_context_quoted": "\"there exists a universal constant $\\eps_*>0$ such that if $\\limsup_{r\\to 0^+} \\frac 1r \\int_{Q_r}\\|\\nabla u\\|^2 \\leq \\eps_*$, then $(0,0)$ is a regular point\" -- l.1994-1995, re-verified this leg by re-downloading and grepping Liouvillev2.tex (sha256 matched leg 360's pin exactly)",
+    "usage_class": "the classical Caffarelli-Kohn-Nirenberg local energy epsilon-regularity criterion for suitable weak solutions of the 3D incompressible Navier-Stokes equations (not a CKN functional/interpolation inequality -- a distinct, commonly confused body of literature under the same author-triple name, screened out of this search)",
+    "search_performed": [
+      "arXiv API abs-field queries for 'Caffarelli-Kohn-Nirenberg' + 'explicit' (20 hits, all either CKN functional/interpolation inequalities -- a different literature under the same name -- or irrelevant)",
+      "arXiv API abs-field queries for 'quantitative partial regularity' + 'Navier-Stokes' (2 hits)",
+      "arXiv API abs-field queries for 'epsilon-regularity' + 'constructive' (2 hits, both irrelevant, off-topic)",
+      "arXiv API abs-field queries for 'effective' + 'Caffarelli-Kohn-Nirenberg' (multiple hits, none on the NS partial-regularity constant)",
+      "arXiv API author search for Vasseur + 'Navier-Stokes' (found unrelated Vasseur papers; Vasseur's 2007 NoDEA paper 'A new proof of partial regularity of solutions to Navier-Stokes equations' is NOT on arXiv -- confirmed absent by direct title search 'A new proof of partial regularity', zero hits, and by full author listing scan)"
+      ],
+    "load_bearing_find": {
+      "paper": "Zhen Lei, Xiao Ren, \"Quantitative partial regularity of the Navier-Stokes equations and applications\", arXiv:2210.01783v1 (4 Oct 2022)",
+      "arxiv_url": "https://arxiv.org/abs/2210.01783v1",
+      "pdf_url": "https://arxiv.org/pdf/2210.01783v1",
+      "fetched_and_read": "PDF fetched, converted with pdftotext, 4155 lines, grepped for 'explicit'/'numerical value'/'effective constant'",
+      "what_it_actually_shows_quoted": "\"Note that the methods in [20, 17] rely on certain (non-quantitative) compactness arguments, while the method in [35] based on the De Giorgi iteration is quantitative.\" [35] = Alexis F. Vasseur, \"A new proof of partial regularity of solutions to Navier-Stokes equations\", NoDEA Nonlinear Differential Equations Appl. 14(5-6):753-785, 2007 (not on arXiv). [20] = Fanghua Lin's proof, [17] = Ladyzhenskaya-Seregin's proof -- both cited generically and non-quantitatively.",
+      "key_negative_finding": "\"We point out that the proof of Theorem 4 in [3] is still non-quantitative, essentially because the absolute continuity of the dissipation energy is a non-quantitative fact. ... it is clearly impossible to give an explicit dependence of delta on epsilon unless higher integrability of g is assumed.\" ([3] = the original 1982 Caffarelli-Kohn-Nirenberg paper)",
+      "lei_ren_s_own_theorem_6_quoted": "\"Theorem 6 (CKN criterion). Let v be a local suitable weak solution to the Navier-Stokes equations in Q(1). There exists a universal positive constant epsilon** such that limsup(1/r) int_{Q(r)} |grad v|^2 dxdt <= epsilon** implies (0,0) not in S[v].\"",
+      "verdict_on_this_source": "even Lei-Ren 2022 -- the most recent, most directly relevant paper located, explicitly built on the ONE 'quantitative' (non-compactness) proof route that exists in this literature (Vasseur's De Giorgi iteration) -- states only EXISTENCE of a 'universal positive constant epsilon**'. No numeric value, no closed-form formula in terms of any base quantities, is ever written down. 'Quantitative' here is used by the authors to mean the DERIVATION avoids non-constructive compactness/contradiction steps, not that a number is supplied."
+    },
+    "reach_check_clause_by_clause": {
+      "equation_class_matches": "YES -- suitable weak solutions of 3D incompressible Navier-Stokes, same theorem family PV cite (Lin98, LadySeregin99 are literally two of the four PV citations; Lei-Ren's [20],[17] are the same works)",
+      "quantitative_route_cited_by_PV": "NO -- PV's own citation list at l.1994-1995 is exactly [CKN82, Lin98, LadySeregin99, Kukavica09] -- all four are non-quantitative/compactness-based in Lei-Ren's own classification. PV do not cite Vasseur or any De Giorgi-iteration-based (quantitative-route) proof at all.",
+      "does_a_number_exist_anywhere_in_the_quantitative_route": "NO, as far as this leg's search reached -- not in Vasseur's paper itself (not accessible on arXiv to re-verify directly, but its own status as merely 'quantitative-in-derivation' rather than 'numerically explicit' is independently confirmed by Lei-Ren's own reading and by Lei-Ren's own inheritance of a bare-existence Theorem 6), and not in Lei-Ren's 2022 paper, its most recent published descendant."
+    },
+    "verdict": "NO-EXPLICIT-VALUE-LOCATED",
+    "consequence": "Even setting aside that PV do not cite the (only) quantitative-derivation route, that route's own literature -- checked to its most recent 2022 representative -- has never itself produced a number. This constant remains a bare existence statement everywhere this leg searched."
+  },
+  "constant_2_K_H_harnack": {
+    "role": "Harnack constant for the uniformly elliptic (non-divergence-form) operator L_bar* - lambda_Rbar, cited by Pineau-Vicol at Liouvillev2.tex l.2063-2065 to Gilbarg-Trudinger Corollary 9.25",
+    "pv_usage_context_quoted": "\"By Harnack's inequality for the uniformly elliptic operator $\\bar L^*-\\lambda_{\\bar R}$ (see e.g. [Corollary 9.25]{GilbargTrudinger98}), there exists a constant $K_H = K_H(R_{**},C_u)>0$\" -- l.2063-2065, re-verified this leg by re-downloading and grepping Liouvillev2.tex (sha256 matched leg 360's pin exactly)",
+    "operator_form_traced_this_leg": "PV define their operator earlier (l.720) as $\\mathcal{L} := -a^{ij}\\partial_{ij} + b^i\\partial_i + c$ -- an explicitly NON-DIVERGENCE-FORM operator (second derivative acted on directly, not $\\partial_i(a^{ij}\\partial_j \\cdot)$) with smooth symmetric coefficients $a^{ij}$, smooth bounded drift $b^i$, and a potential $c \\geq 0$ -- this is the setting of Gilbarg-Trudinger's Chapter 9 ('Strong Solutions', the Krylov-Safonov / Aleksandrov-Bakelman-Pucci circle of results for non-divergence-form operators), consistent with the citation to a Chapter-9 corollary rather than a Chapter-8 (divergence-form, De Giorgi-Nash-Moser) result",
+    "search_performed": [
+      "arXiv abs-field queries: 'explicit' + 'Harnack' + 'elliptic' (6 hits, none on non-divergence explicit constants)",
+      "arXiv abs-field queries: 'quantitative Harnack' (2 hits, both off-topic: JKO scheme, quasiregular mappings)",
+      "arXiv abs-field queries: 'explicit Harnack constant' -- ZERO hits, banked as a refusal-to-locate (search executed, genuinely empty, not a fetch failure)",
+      "arXiv abs-field queries: 'Krylov-Safonov' + 'explicit' -- ZERO hits, banked as a refusal-to-locate",
+      "arXiv abs-field queries: 'Krylov--Safonov' (em-dash variant, broader) -- 15 hits located, scanned by title; closest is arXiv:2512.21025",
+      "arXiv abs-field queries: 'Harnack constant' + 'non-divergence' + 'explicit' -- ZERO hits, banked as a refusal-to-locate",
+      "arXiv abs-field queries: 'Harnack inequality' + 'explicit dependence' -- ZERO hits, banked as a refusal-to-locate",
+      "arXiv abs-field queries: 'Krylov-Safonov' + 'ellipticity ratio' -- 2 hits, load-bearing one below"
+    ],
+    "closest_find": {
+      "paper": "\"Quantitative bounds for Holder exponents in the Krylov-Safonov and Evans-Krylov theories\", arXiv:2512.21025v1",
+      "arxiv_url": "https://arxiv.org/abs/2512.21025v1",
+      "abstract_quoted": "\"We establish quantitative bounds for Holder exponents in the Krylov-Safonov and Evans-Krylov theories when the ellipticity ratio is close to one. Our analysis relies on the Ishii-Lions method for the Krylov-Safonov theory and a Schauder-type perturbation argument for the Evans-Krylov theory.\"",
+      "reach_check_clause_by_clause": {
+        "equation_class": "matches (non-divergence-form uniformly elliptic, Krylov-Safonov setting) -- PARTIAL match",
+        "target_quantity": "bounds a Holder exponent, NOT the Harnack constant K_H itself -- DOES NOT REACH (PV need K_H, the multiplicative constant in the Harnack inequality inf >= K_H^{-1} sup, not a Holder-continuity exponent)",
+        "ellipticity_regime": "restricted to 'ellipticity ratio close to one' -- PV's operator $\\bar L^* - \\lambda_{\\bar R}$ has coefficients $a^{ij}$ built from the rescaled/rotated velocity field with no stipulated near-isotropic ellipticity ratio in the proof (leg 360's read of the surrounding text, re-checked this leg, gives no such restriction) -- DOES NOT REACH",
+        "verdict_on_this_source": "does not reach PV's usage on two independent clauses (wrong target quantity, and a restricted ellipticity regime not established for PV's operator); recorded as a near-miss, not counted toward EXPLICIT-VALUE-EXISTS"
+      }
+    },
+    "gilbarg_trudinger_own_proof_note": "Not independently re-verified against a physical copy of Gilbarg-Trudinger (out of scope -- textbook, not on arXiv); leg 360's citation-tracing already established PV cite it 'generically', i.e. without extracting or restating any constant from it themselves. This leg's literature search did not locate any arXiv paper that extracts an explicit numeric or closed-form K_H from GT Corollary 9.25 (or the underlying Krylov-Safonov theory) in a form that would plug into PV's dependency chain (K_H = K_H(R_**, C_u) for their specific non-divergence operator with drift and potential on a ball domain of radius R_**).",
+    "verdict": "NO-EXPLICIT-VALUE-LOCATED",
+    "consequence": "The one closest-matching paper located targets a different quantity (Holder exponent, not the Harnack constant) under a restricted ellipticity regime not established for Pineau-Vicol's operator; every more direct query ('explicit Harnack constant', 'Krylov-Safonov'+'explicit', 'Harnack constant'+'non-divergence'+'explicit', 'Harnack inequality'+'explicit dependence') returned zero results, each banked as a refusal-to-locate rather than silently treated as evidence of anything beyond 'not found by this instrument on this pass'."
+  },
+  "delta0_consequence": {
+    "classification": "BLOCKED",
+    "reasoning": "Neither of the two non-constructive ingredients identified by leg 360 (epsilon_* from CKN, K_H from Gilbarg-Trudinger Corollary 9.25 / Krylov-Safonov) was found, after a genuine search pass, to have a published explicit numeric or closed-form value reaching Pineau-Vicol's exact usage context. delta_0's status is therefore unchanged from leg 360's finding at the FORMULA level (a route exists, precisely laid out, per leg 360's Section 2) but is BLOCKED at the NUMERIC level -- no source located by this leg supplies the missing links. This is a confirmation/deepening of leg 360's NON-OPERATIONAL verdict, not a contradiction of it: leg 360 already correctly anticipated that 'producing an explicit numeric epsilon_* or K_H is a well-known, nontrivial undertaking in its own right ... but PV neither cite nor derive one here, and doing so is well outside a read-and-report leg' -- this leg performed exactly that literature search and confirms the undertaking remains unresolved in the searched literature as of this leg's pass."
+  },
+  "independent_pressure_decay_blocker": {
+    "status": "RESTATED, NOT RE-DERIVED, NOT RE-CHECKED (out of this leg's task) -- leg 360's own finding, quoted for completeness so it is not lost when this leg's delta_0-specific findings are read on their own",
+    "finding": "leg 360's Condition 1 (Section 3 of experiments/journal/leg_360.md) found that Pineau-Vicol's own class-wide, uniform-in-time DSS/RDSS pressure-decay estimate, substituted into their local theorem's annulus-boundedness pressure hypothesis via their own change of variables, gives |p(x,t)| <~ C_{P,0}(sigma) * (-t)^{-sigma/2} -- DIVERGENT as t -> 0- for every sigma > 0 the paper's estimate ever attains (sigma=0, the only value that would keep the bound finite, is never reached; the paper's decay lemma is quantified over the strict open interval sigma in (0,1)).",
+    "why_it_matters_here": "this is a SEPARATE, INDEPENDENT open condition from delta_0's non-explicitness -- the two conditions are logically AND'd in T4's hypotheses. Even in a counterfactual world where this leg (or a future leg) located fully explicit numeric values for BOTH epsilon_* and K_H, making delta_0 COMPUTABLE, the T4-derived screen would STILL be blocked by the pressure-decay divergence, unless that is separately resolved. This leg does not attempt that separate resolution; it is flagged here only so the two blockers are not conflated or one mistaken for having been cleared when the other was addressed."
+  },
+  "recommendation_for_dm": {
+    "note": "This leg does NOT edit leg 360's banked record or solver/dssp_screen.py. Flagged here as a pointer/update for the DM.",
+    "recommendation": "Leg 360's NON-OPERATIONAL verdict for the T4-derived screen stands, now with an adjudicated literature-search contingency attached: a direct search specifically for explicit-constant CKN and quantitative-Harnack literature was performed and did not locate values reaching Pineau-Vicol's usage for either of delta_0's two non-constructive ingredients. This closes the open question leg 360 left implicit ('effective versions ... exist in the literature in some contexts, but PV neither cite nor derive one here') with an actual, sourced, honest search result rather than leaving it as an unexamined possibility. No change to the recommendation against adding a fourth machine-readable ledger entry for this screen."
+  },
+  "sources": {
+    "primary_re_verified": {
+      "title": "On rotated backwards self-similar solutions of the incompressible 3D Navier-Stokes equations",
+      "authors": "Ben Pineau, Vlad Vicol",
+      "arxiv_id": "2607.09619v2",
+      "src_url_used_this_leg": "https://arxiv.org/src/2607.09619v2",
+      "sha256_tex": "898a1e1061a52a3edecae1013a3fa8f4a835cb2d21d482a32f3cf650e7599c0b",
+      "sha256_tarball": "8028df65146f445755c9fb32cd9663e4a4a8b2819f6f8ce6c212d5803c71737d",
+      "re_verification": "both hashes re-downloaded independently this leg, matched leg 330's and leg 360's pinned values exactly, byte for byte"
+    },
+    "load_bearing_new_source": {
+      "title": "Quantitative partial regularity of the Navier-Stokes equations and applications",
+      "authors": "Zhen Lei, Xiao Ren",
+      "arxiv_id": "2210.01783v1",
+      "url": "https://arxiv.org/abs/2210.01783v1",
+      "fetched": "PDF, converted to text, 4155 lines, read for the specific quoted passages above"
+    },
+    "near_miss_source": {
+      "title": "Quantitative bounds for Holder exponents in the Krylov-Safonov and Evans-Krylov theories",
+      "arxiv_id": "2512.21025v1",
+      "url": "https://arxiv.org/abs/2512.21025v1",
+      "fetched": "abstract only (via arXiv API), did not reach PV's usage on two clauses, not fetched in full"
+    },
+    "absent_source_confirmed": {
+      "title": "A new proof of partial regularity of solutions to Navier-Stokes equations",
+      "author": "Alexis F. Vasseur",
+      "venue": "NoDEA Nonlinear Differential Equations Appl. 14(5-6):753-785, 2007",
+      "arxiv_status": "NOT FOUND on arXiv -- confirmed by direct title search (zero hits) and by a full scan of Vasseur's arXiv-listed papers (none match); referenced only via Lei-Ren 2022's citation [35] and its characterization there"
+    },
+    "consumed_records": [
+      {"leg": 360, "files": ["experiments/journal/leg_360.md", "writeup/data/p2_route_pvds_v1.json", "writeup/novelty/leg_360.md"], "read_only": true}
+    ]
+  },
+  "refusals_to_measure_banked": [
+    "arXiv abs-field query 'explicit Harnack constant' -- zero results, genuine empty search, not a fetch error",
+    "arXiv abs-field query 'Krylov-Safonov' + 'explicit' -- zero results, genuine empty search",
+    "arXiv abs-field query 'Harnack constant' + 'non-divergence' + 'explicit' -- zero results, genuine empty search",
+    "arXiv abs-field query 'Harnack inequality' + 'explicit dependence' -- zero results, genuine empty search",
+    "arXiv title search 'A new proof of partial regularity' -- zero results (Vasseur's 2007 paper confirmed absent from arXiv, not merely unindexed under this phrase -- corroborated by full author-listing scan)"
+  ],
+  "magnitudes": {
+    "arxiv_api_queries_run": 13,
+    "queries_returning_zero_results": 5,
+    "papers_fetched_and_read_in_full_or_substantial_part": 1,
+    "papers_checked_by_abstract_only": 1,
+    "constants_adjudicated": 2,
+    "constants_reaching_EXPLICIT_VALUE_EXISTS": 0,
+    "constants_reaching_NO_EXPLICIT_VALUE_LOCATED": 2,
+    "new_computation_this_leg": 0,
+    "figures_assigned": 0,
+    "bans_touched_lifted_or_argued": 0,
+    "screen_code_edited": false,
+    "leg_360_record_edited": false
+  },
+  "what_this_leg_is_not": "A construction, a certificate, or a new derivation of any constant. It is a literature-search adjudication of two named open questions from leg 360's record: whether published explicit-constant CKN or quantitative-Harnack literature reaches Pineau-Vicol's actual usage. It performed a genuine search, quoted what it found (both the closest matches and the honest misses), and reports a definite per-constant verdict rather than assuming either constant's fate. It does not touch solver/dssp_screen.py, plan_of_record.py, DIRECTION.md, leg 360's banked files, or any file outside this leg's three-file territory."
+}
