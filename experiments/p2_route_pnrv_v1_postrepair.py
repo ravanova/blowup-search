@@ -762,6 +762,19 @@ def main():
                 "note": "v11's own code spreads over ALL grids and counts only the "
                         "converged ones; leg 226 took both over the accepted rows. "
                         "Both are reported because they are different statistics."},
+            # NOTE (leg 366, Route-LCB5, source: leg 229's own journal
+            # experiments/journal/leg_229.md sec 5a, "A real bug this leg's
+            # own code shipped with"): this per_row diagnostic used to zip
+            # v4_rows against t4["rows"] in ITERATION ORDER. v4_rows is
+            # ordered n-outer/a-inner (this runner's own convention, see the
+            # `order` dict above); leg 226's banked t4["rows"] table turns
+            # out to be ordered a-outer/n-inner. The two orderings coincide
+            # only at index 0, so positional zip silently misaligned rows
+            # from index 1 on, producing spurious-looking c/relres
+            # mismatches that leg 229 confirmed were a display bug only --
+            # re-keying both tables on (n, a) instead of position, all 15
+            # rows are bit-identical. Fixed here by keying t4["rows"] on
+            # (n, a) explicitly rather than trusting position.
             "per_row": [
                 {"n": m["n"], "a": m["a"], "relres_mine": m["relres"],
                  "relres_leg226": t.get("relres"),
@@ -769,7 +782,12 @@ def main():
                  "c_mine": m["c"], "c_leg226": t.get("c"),
                  "c_rel_err": rel_err(m["c"], t.get("c")),
                  "D3_mine": m["D3_farfield_inflation"], "D3_leg226": t.get("D3")}
-                for m, t in zip(v4_rows, t4["rows"])] if not FAST else "skipped(FAST)",
+                for m, t in (
+                    lambda t4_by_na: (
+                        (m, t4_by_na.get((m["n"], m["a"]), {}))
+                        for m in v4_rows)
+                )({(row["n"], row["a"]): row for row in t4["rows"]})
+            ] if not FAST else "skipped(FAST)",
         })
         checkpoint("v4_grids")
 

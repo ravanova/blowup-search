@@ -1972,3 +1972,105 @@ are both unmoved; neither banked JSON's contents changed, both confirmed byte-id
 before and after this leg's runs. **0 bans touched**, `plan_of_record.py` and `DIRECTION.md`
 byte-identical, untouched by this leg. No link of the `L1 → L4` chain moved. Clay odds stay
 **~0.05%**.
+
+## §28 — leg 366, Route-LCB5: three light corrections, each source-verified at entry, all landed
+
+**Dispatch: leg 366 (Route-LCB5).** Three independently source-verified items, applied as
+markers/citation-text corrections (not new derivations). Territory:
+`experiments/journal/leg_341.md` (marker only, append), `experiments/p2_route_pnrv_v1_postrepair.py`
+(the one diagnostic `zip`, nothing else in that file), `solver/dssp_screen.py` (citation text
+only, two named locations) plus a re-run of `test_dssp_screen.py`, this entry,
+`writeup/novelty/leg_366.md`, `experiments/journal/leg_366.md`.
+
+### 28.1 Item (i) — leg 341's S2 site: grounds correction, width unchanged
+
+Leg 341's S2 discussion (`experiments/journal/leg_341.md`, "the NRS/Tsai composition DISSOLVES")
+argued the `u ∈ L³` hypothesis fails at the target's own decay rate, citing that as one of "two
+independent grounds" alongside an ansatz (SS-vs-DSS) finding. Leg 359's adjudication
+(`experiments/journal/leg_359.md`, `writeup/data/p2_route_l3bd_v1.json`), reading Tsai 1998's
+Theorem 2 (the local-energy-estimates route) at full primary text, found Theorem 2's finishing
+step needs no `L^q` integrability at all (only `U → 0 at infinity`) and that Tsai's own headline
+motivating example (eq. 1.5, p.31) is essentially this repo's target's exact decay rate — i.e.
+Theorem 2 **reaches** exactly the decay class leg 341's decay-insufficiency argument relied on.
+The decay-based ground is therefore incomplete as stated; per leg 359, the SOLE surviving ground
+is the ansatz clause (both Theorem 1 and Theorem 2 are stated only for Leray's exact, continuous
+backward self-similar form `(1.2)`, and the screened object is DISCRETELY self-similar).
+
+**A grounds-vs-width correction: the conclusion (`NOT EXCLUDED` / DISSOLVES) does not change,
+only which clause supports it.** A blockquote marker was inserted immediately after leg 341's
+`**Verdict: DISSOLVES.**` paragraph, citing leg 359's finding verbatim-sourced and pointing to the
+ansatz subsection immediately following as the sole surviving ground. Leg 341's original
+decay-based paragraph is left **fully intact**, not edited out — the marker is additive only.
+
+**Disposition: CORRECTED (grounds only).**
+
+### 28.2 Item (ii) — `experiments/p2_route_pnrv_v1_postrepair.py`'s `per_row` diagnostic zip:
+row-ordering bug fixed, cosmetic-only status demonstrated live
+
+Leg 229 (`experiments/journal/leg_229.md` §5a) flagged but did not fix (out of its own territory)
+that `m4_v4_grid_converged_a_max.comparison_to_leg226.per_row` was built by
+`zip(v4_rows, t4["rows"])` — pairing this leg's rows (ordered `n` outer / `a` inner) against leg
+226's banked table (ordered `a` outer / `n` inner) by **position**, not by key. The two orderings
+coincide only at index 0. Fixed here by keying `t4["rows"]` on `(n, a)` explicitly:
+
+```python
+"per_row": [
+    {"n": m["n"], "a": m["a"], ... }
+    for m, t in (
+        lambda t4_by_na: ((m, t4_by_na.get((m["n"], m["a"]), {})) for m in v4_rows)
+    )({(row["n"], row["a"]): row for row in t4["rows"]})
+] if not FAST else "skipped(FAST)",
+```
+
+**Demonstrated live, not merely argued**, using the already-banked `v4_rows` (from
+`writeup/data/p2_route_pnrv_v1_postrepair.json`) and leg 226's own banked table (fetched via
+`git show leg/226-pnr-v1-resume:writeup/data/p2_route_pnr_v1_repair.json`, exactly as the runner
+does): the OLD positional zip produces **12 of 15** spurious mismatches (`c_rel_err > 1e-9`); the
+NEW keyed-on-`(n,a)` version produces **0 of 15** — matching leg 229's own finding that all 15
+`(n,a)` pairs are bit-identical once correctly keyed. The gate's actual verdict/output is
+unchanged before and after: `m4_v4_grid_converged_a_max["v11_own_test"]` and `["repaired_verdict"]`
+(what `data["gate"]`'s `answer: "YES"` is built from) are computed by `v4_verdicts()` directly off
+`v4_rows`, keyed by `r["a"] == a`, and never read `per_row` at all — confirmed identical
+regardless of which zip version ran. Only the diagnostic *display* was broken, exactly as leg 229
+reported; the banked `writeup/data/p2_route_pnrv_v1_postrepair.json` is left untouched by this
+leg (this leg's territory is the script only, not a re-run of the ~40-minute solve).
+
+**Disposition: CORRECTED (the one zip); demonstrated cosmetic, not claim-bearing.**
+
+### 28.3 Item (iii) — `solver/dssp_screen.py`'s T1 citation: re-attributed to NRS 1996
+
+Leg 364 (`experiments/journal/leg_364.md`, `writeup/data/p2_route_nrsv_v1.json`) found that the
+module's `deciding_clause` string in `_ledger_nrs_tsai_three_way()`'s `EXCLUDED-BY-T1` branch
+(then lines 534–539) and the identical header-comment quote (then lines 364–367) cited Tsai 1998's
+Theorem 1 (`q ∈ (3,∞]`, which is **open at 3** and explicitly excludes `q=3`) to justify the exact
+`q=3` (`L³`) test the ledger actually runs — but the `q=3` case is NRS 1996's own, earlier,
+disjoint result, attested secondhand (NRS 1996 itself remains paywalled/unobtainable after three
+independent refusal-to-obtain attempts: legs 253, 359, 364) at two independent obtainable
+sources: Tsai 1998, p.30 ("The main result of [NRS] is that the only weak solution of (1.3)
+belonging to L³(R³) is U ≡ 0.") and the Bradshaw & Tsai survey, arXiv:1802.00038, p.3 ("...was
+excluded in Nečas, Růžička, and Šverák in [35].").
+
+**Both cited locations re-attributed to NRS 1996 with the provenance caveat, citation text
+only** — `l3_norm_ladder()`'s operational logic (the exact-cube-norm computation) and every
+verdict/reason string were left untouched. Re-ran the full battery after the change:
+`python test_dssp_screen.py` → **ALL DSSP-SCREEN TESTS PASSED** (every one of the 19 checks,
+including the `EXCLUDED-BY-T1`/`EXCLUDED-BY-T2`/`NOT-REACHED-BY-ANSATZ` three-way controls).
+`git status`/`git diff --stat` confirm **no diff on any banked JSON**
+(`writeup/data/p2_route_dsspb7_v1.json`, `writeup/data/p2_route_b7x_v1.json`, or any other file
+under `writeup/data/`) — only `solver/dssp_screen.py` itself changed, and only at the two named
+citation sites.
+
+**Disposition: CORRECTED (citation text only); verdict battery reproduces unmoved.**
+
+### The ceiling
+
+**0 numbers re-derived** — items (i) and (iii) are citation/grounds corrections sourced verbatim
+from legs 359/364's own quoted primary-text locators; item (ii)'s demonstration re-derives
+`per_row` from already-banked `v4_rows` and leg 226's own already-banked table, live, both ways,
+to show the mismatch count collapses from 12/15 to 0/15. **3 sites edited** (one blockquote
+marker, one `zip` call, two citation strings in one file), **1 batched entry** (this one). **0
+gate answers changed anywhere** — leg 341's `DISSOLVES`/`NOT EXCLUDED` verdict, leg 229's `YES`
+gate, and every one of `test_dssp_screen.py`'s 19 checks are all unmoved; every banked JSON this
+leg's territory touches is confirmed byte-unchanged (`git diff --stat` empty on all of them). **0
+bans touched**, `plan_of_record.py` and `DIRECTION.md` untouched. No link of the `L1 → L4` chain
+moved. Clay odds stay **~0.05%**.

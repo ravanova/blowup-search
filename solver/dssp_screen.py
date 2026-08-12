@@ -361,7 +361,29 @@ def ledger_nrs_tsai(l3_result, decay_result=None, ansatz_result=None):
 # writeup/data/p2_route_l3bd_v1.json), quoted verbatim at the cited primary-
 # text locators, never paraphrased or re-derived here:
 #
-#   Theorem 1 (Tsai 1998, p.30, restating/generalising NRS 1996):
+#   NRS 1996 -- the q=3 exact-L^3 result the l3_norm_ladder() test below
+#   actually implements. RE-ATTRIBUTED here (leg 366, Route-LCB5, source:
+#   leg 364's citation-verification finding, experiments/journal/leg_364.md
+#   and writeup/data/p2_route_nrsv_v1.json): this was previously captioned
+#   as "Tsai 1998 Theorem 1", but Theorem 1's own stated hypothesis range
+#   q in (3,infinity] is OPEN AT 3 and explicitly excludes q=3 -- the q=3
+#   case is NRS 1996's own, earlier, disjoint result, which Tsai's Theorem 1
+#   deliberately does NOT re-prove. NRS 1996 itself (Necas, J., Ruzicka, M.
+#   & Sverak, V., "On Leray's self-similar solutions of the Navier-Stokes
+#   equations," Acta Math. 176 (1996) 283-294) remains genuinely paywalled/
+#   unobtainable (three independent refusal-to-obtain attempts: legs 253,
+#   359, 364) -- this attribution is attested SECONDHAND at two independent
+#   obtainable sources:
+#     "The main result of [NRS] is that the only weak solution of (1.3)
+#     belonging to L^3(R^3) is U == 0." (Tsai 1998, p.30, restating NRS
+#     1996's own result, immediately before stating his own disjoint
+#     Theorem 1)
+#     "His original problem ... was excluded in Necas, Ruzicka, and Sverak
+#     in [35]. ... Tsai proved a localized non-existence result in [38] for
+#     solutions v satisfying v(t) in L^q(R^3), 3 < q <= infinity ..."
+#     (Bradshaw & Tsai survey, arXiv:1802.00038, p.3)
+#   Tsai's OWN Theorem 1 (Tsai 1998, p.30), quoted here for contrast since
+#   it is the theorem the ledger used to (mis-)cite for this test:
 #     "Theorem 1. If a weak solution U of (1.3) belongs to L^q(R^3), for
 #     some q in (3,infinity], then it must be constant (and hence
 #     identically zero if q < infinity)."
@@ -532,10 +554,24 @@ def _ledger_nrs_tsai_three_way(l3_result, decay_result, ansatz_result):
                 "self-similar."
             ),
             "deciding_clause": (
-                "Tsai 1998, p.30 (restating/generalising NRS 1996): "
-                "\"Theorem 1. If a weak solution U of (1.3) belongs to "
-                "L^q(R^3), for some q in (3,infinity], then it must be "
-                "constant (and hence identically zero if q < infinity).\""
+                # RE-ATTRIBUTED (leg 366, Route-LCB5, source: leg 364's
+                # citation-verification finding, experiments/journal/
+                # leg_364.md and writeup/data/p2_route_nrsv_v1.json): this
+                # q=3 exact-L^3 test is NRS 1996's own result, not Tsai
+                # 1998 Theorem 1 (whose stated range q in (3,infinity]
+                # excludes q=3). NRS 1996 itself remains genuinely
+                # paywalled/unobtainable; attested secondhand at two
+                # independent obtainable sources (see the header comment
+                # above for both quotes in full).
+                "NRS 1996 (Necas, Ruzicka & Sverak, Acta Math. 176 (1996) "
+                "283-294) -- the q=3 exact-L^3 result, attested secondhand "
+                "(NRS 1996 itself unobtainable) via Tsai 1998, p.30: \"The "
+                "main result of [NRS] is that the only weak solution of "
+                "(1.3) belonging to L^3(R^3) is U == 0.\"; and Bradshaw & "
+                "Tsai survey, arXiv:1802.00038, p.3: \"...was excluded in "
+                "Necas, Ruzicka, and Sverak in [35].\" NOT Tsai 1998's own "
+                "Theorem 1, whose stated range q in (3,infinity] excludes "
+                "q=3."
             ),
             "ansatz_detail": ansatz_result,
         }
