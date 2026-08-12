@@ -35,7 +35,7 @@ prose as before.
 |---|---|---|---|
 | A | 356 | ESPX | no |
 | B | 353 | DSSP-B5 | yes |
-| C | 354 | DSSP-B4 | yes |
+| C | 357 | DSSP-B7 | yes |
 | D | 355 | LCB3 | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -69,7 +69,7 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig92 | 350 | landed with B2 (or released if unshipped — orchestrator mirrors at INDEX) |
 | fig93 | — | released (351 landed YES, figure judged unwarranted; number returns to the pool) |
 | fig94 | 353 | live, slot B (B5 basin-radius study; only if warranted) |
-| fig95 | 354 | live, slot C (B4 known-answer probe; only if warranted) |
+| fig95 | — | released (354 landed YES, no figure shipped; number returns to the pool) |
 | fig96+ | — | next free |
 <!-- FIG-TABLE-END -->
 
@@ -18847,9 +18847,24 @@ failing its own determinism control has unknown claim-bearing consumers
 until enumerated — repair to canonical ordering or quarantine with every
 consumer named, never left silently unstable). Floor 2/4 (353, 354).
 
+Cycle 10s: C/354 landed YES at 8cd5a0c — the rescaled-vorticity stepper
+reproduces the KNOWN answer inside its pre-stated window: single-mode
+Galerkin on 351's closed-form witness gives c' = αc + βc² with α → the
+EXACT RATIONAL -19/16 (<7e-15 rel across 4 settings) and β = 0 by an
+x3-parity ARGUMENT, not numerics; RK4 vs closed form 3.85e-12 against 1e-6;
+the planted sign-bug control flips α to +13/16 and fails at 58.12x growth
+as required; the divergence-stop fires within one step-width of a known
+blowup time. arXiv 429s banked as refusals; PROCEED on the
+network-independent grep. Closed in ONE leg (upper-bound rule). **B4's YES
+fires the sequence: C ← leg 357 = brick B7 (DSSP-SCREEN)** — 1 leg,
+parallel-B6 by the plan's own designation, no B5 dependency; its
+machine-read rigidity ledger CONSUMES 330's landed verdict (Pineau-Vicol
+adjudicated out — the plan's "PENDING" is stale by a landed fact, not by
+amendment). Floor 2/4 (353, 357).
+
 **Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
 232, 233, 234).** Immediately dispatchable: **4** (rank order: 229, 293,
-298, 299). Next fresh leg number: **357.**
+298, 299). Next fresh leg number: **358.**
 
 Nothing in this update lifts a ban. An evidence script that cannot
 silently mutate a banked artifact is the record's immune system getting a
@@ -18947,3 +18962,92 @@ Nothing in this update lifts a ban. A census that finds the norm is exact
 reproduction STRENGTHENS the record's footing; the one unstable family is
 being run to ground rather than averaged away. No L1-L4 link moved; Clay
 stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10s) — 354/B4 YES ABSORBED (THE STEPPER
+EARNS ITS KNOWN ANSWER, WITH AN EXACT RATIONAL AND A PARITY ARGUMENT WHERE
+NUMBERS WERE EXPECTED); C ← LEG 357 = BRICK B7 (DSSP-SCREEN), THE CRITICAL
+PATH
+
+Written from the same detached lineage, resynced to origin/main = 8cd5a0c.
+
+### 354 DSSP-B4 gate YES, absorbed at full strength
+
+Everything the plan's gate demanded, delivered above its weight class: the
+known-answer probe's window stated BEFORE running (lesson 84 honoured:
+S_max=5.0, n_steps=2000, c0=0.01); the single-mode Galerkin reduction
+landing on a scalar ODE whose linear coefficient converges to the exact
+rational -19/16 (stable <7e-15 across four resolution/domain settings) and
+whose quadratic coefficient vanishes by an x3-PARITY ARGUMENT rather than
+numerically; the RK4 stepper matching closed form to 3.85e-12 against the
+1e-6 threshold; the planted sign-bug control (confinement +Ω→-Ω) flipping
+α to +13/16 and failing at 58.12x — a control that visibly could fail and
+did; and the divergence-stop verified against a synthetic finite-blowup
+ODE to one step-width. The novelty caveat is handled exactly per MF
+discipline: ~20 arXiv refusals over ~25 minutes banked as REFUSALS TO
+MEASURE with the positive control succeeding in isolation, and the PROCEED
+verdict resting on the network-independent capabilities grep (M1 absent,
+reconfirming 334). Closed within the upper bound in a single leg; TIER-2
+ceiling stated in the leg's own words. Endorsed without amendment.
+
+### Refill — C ← leg 357 = brick B7 (DSSP-SCREEN), the critical path
+
+B4's YES fires the sequence; B5 is live in B; B6 stays user-gated; B7 is
+the plan's own parallel-B6 brick with no B5 dependency:
+
+```
+### 357 — ROUTE-DSSP-B7: BRICK B7 (DSSP-SCREEN) — EXACTLY AS DRAFTED AT
+TECHNICAL_P2_ROUTEDSSP_V1.md §5.1
+[FLOOR-ELIGIBLE: construction]
+**Thesis and gate.** The spec IS the plan's §5.1 B7 entry, verbatim,
+including its drafted gate and the TIER-2 ceiling stated there: does every
+candidate carry its admissibility screen, computed AT THE NEWTON STEP —
+‖V‖_{L³(ℝ³)}, fitted far-field decay exponent, λ, axisymmetry diagnostic —
+and does the rigidity ledger (NRS/Tsai; Chae-Tsai, MEASURED SILENT by leg
+326; Pineau-Vicol) get MACHINE-READ rather than transcribed? The plan's
+no-branch stands verbatim: without the screen no candidate may be reported
+at all — leg 332 measured ‖u_B‖_L³ = 0.7307683991070311 on a well-behaved
+witness, so landing in L³ is the DEFAULT, not the exception. CEILING TIER
+2: surviving the screen means "not already excluded by a published
+theorem" — never evidence of existence.
+**Dispatch note (a landed fact, not an amendment):** the plan's ledger
+entry lists Pineau-Vicol as "PENDING leg 330"; leg 330 has since LANDED
+YES-(ii) (does not reach the screened object; the λ clause decides alone,
+deciding clause quoted at 5496bbc). B7's machine-read ledger consumes that
+landed verdict — the entry reads 330's record, not the plan's stale
+PENDING.
+**Territory.** As the plan's B7 entry states (screen module + runner +
+data JSON), PLUS solver/capabilities.py + test_capabilities.py (additive
+registration, the cycle-4 rule), writeup/novelty/leg_357.md,
+experiments/journal/leg_357.md. Reads legs 326/330/332's banked records
+and 351/354's landed modules; edits none. No figure unless warranted
+(none allocated).
+**Difficulty.** standard (plan sizing 1 leg)
+**Preconditions:** Leg 354/B4 landed YES (TRUE, 8cd5a0c). B6's user-gate
+untouched by this dispatch; B8 remains gated on B6 returning a candidate.
+```
+
+**Floor 2/4 (353, 357) — §3b's minimum.** FLOOR-TABLE synced (C 354→357);
+fig95 released (354 shipped no figure).
+
+### Standing state
+
+A/356 ESPX (determinism repair-or-quarantine); B/353 DSSP-B5 (running —
+the orchestrator notes it self-caught and fixed a sign bug in
+optimal_shift_residual mid-run, pipeline still executing; noted, no
+action); D/355 LCB3. Brick ledger: B1-B4 ✓, B5 live, B7 live, B6
+user-gated, B8 on B6, B9 struck. With the user: cycle-10 packet + GA note,
+POCP (ii) item, C4/escalation-#3, 313 packet + ban-wording, 320 packet.
+Next vacancy: 229 PNRV.
+
+**Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
+232, 233, 234).** Immediately dispatchable: **4**. Next fresh leg number:
+**358.**
+
+Nothing in this update lifts a ban. A stepper that earns a known answer
+and a screen that machine-reads exclusion theorems are apparatus under the
+Tier-2 ceiling — B8's own drafted gate already names escalation #3's
+discipline for anything that ever reads like movement. No L1-L4 link
+moved; Clay stays ~0.05%.
