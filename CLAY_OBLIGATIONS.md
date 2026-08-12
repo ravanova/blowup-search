@@ -1,11 +1,18 @@
 # Clay obligations — what a Tier-2 DSS candidate still owes
 
-> **STATUS: DRAFT, UNVERIFIED. Written by the external reviewer, 2026-08-11, at the user's
-> instruction, and NOT banked as an established result.** Every clause below needs this
-> repository's own verification pass before anything is built against it. Where a clause
-> rests on a landed leg it is cited; where it rests on the reviewer's reading of the Clay
-> problem statement or the literature it says so, and those are the clauses most likely to
-> be wrong. Nothing here moves a link of the `L1 → L4` chain. Clay odds unchanged, ~0.05%.
+> **STATUS: VERIFIED CLAUSE BY CLAUSE, with six corrections landed. Written by the external
+> reviewer, 2026-08-11, at the user's instruction; NOT banked as an established mathematical
+> result — verified as a *specification*, which is a different and lesser thing.**
+> The verification pass is leg 384 (`a029565`, gate YES): **23 clauses checked mechanically
+> against their landed sources, 17 MATCH / 6 MISMATCH / 0 UNVERIFIED**, with **23 of 23 planted
+> controls firing in both directions** (a corrupt-plant forced MATCH→MISMATCH and a repair-plant
+> forced MISMATCH→MATCH on every row), so the counts are measurements and not a checker that
+> could only say yes. All six mismatches are repaired in place below and each repair names its
+> finding (I8, I10, I15, II1, III1/III3/III4). §4 additionally carries leg 381's own
+> specification-level verification at its section header.
+> **What this does NOT mean.** No clause here is a theorem, no obligation is discharged by being
+> correctly stated, and §6's two no-method obligations remain **OPEN**. The ceiling stays
+> **Tier 2**. Nothing here moves a link of the `L1 → L4` chain. Clay odds unchanged, ~0.05%.
 
 ## Why this document exists, and why it exists *now*
 
@@ -36,8 +43,11 @@ italicised word is an obligation below.
 > The reviewer's reading was checked clause by clause against Fefferman's official problem
 > statement: **4 clauses CONFIRMED, 1 CORRECTED, 1 REFUTED.**
 > - **CONFIRMED, verbatim:** *bounded energy* is Fefferman's condition **(7)**, and it is the
->   condition §4 and §5 are about. Smoothness, divergence-free, and faster-than-polynomial
->   decay all stand as stated.
+>   condition §4 and §5 are about. Smoothness and divergence-free stand as stated.
+>   **Decay is confirmed and strengthened** (leg 384, I15 — a leg-381 JSON verdict this document
+>   had not carried): condition **(4)** bounds *every derivative*,
+>   `|∂ₓ^α u°(x)| ≤ C_{αK}(1+|x|)^{−K}` for **any** `α` and `K`, so "faster-than-polynomial
+>   decay" understates what the statement requires.
 > - **CORRECTED (labelling):** the breakdown statement on `ℝ³` is **(C)**, not "(b)". All
 >   references to "direction (b)" in this document mean statement **(C)**.
 > - **REFUTED:** *"with `f ≡ 0`"* is **wrong**. `f ≡ 0` appears only in the *existence*
@@ -83,7 +93,9 @@ repository has an executable screen (`solver/dssp_screen.py`) encoding the exclu
 the object clearing each:
 
 - **NRS 1996 / Tsai (T1/T2)** — bind *exactly-backward-self-similar* profiles only; DSS at
-  `λ ≫ 1` is outside the hypothesis (legs 253, 341).
+  `λ ≫ 1` is outside the hypothesis (leg 341's landed record; encoded operatively in
+  `solver/dssp_screen.py` by legs 357/359/362 — leg 253 is cited from narrative only and has
+  no landed JSON, per leg 384's II1).
 - **Chae–Wolf / Pineau–Vicol** — the DSS rigidity route caps its `λ` window near 1
   (`λ̲ ≤ e^{1/2} ≈ 1.6487`, "sufficiently close to 1") against an object specified at
   `λ ≫ 1` (leg 330, full text).
@@ -113,7 +125,8 @@ form this obligation wants.
 ## §4 — Finite energy, and the localisation problem
 
 > **VERIFIED AS A SPECIFICATION — leg 381 (`7aecf78`), gate YES.** §4 alone carries this
-> header; §1/§2/§3/§5/§6/§7 remain **DRAFT, UNVERIFIED**. Three findings amend the text below
+> header at *problem-statement* depth; the rest of the document is verified at the shallower
+> clause-against-landed-source depth of leg 384 (see the STATUS block). Three findings amend the text below
 > and are integrated into it:
 > 1. **The DSS case costs nothing extra.** The DSS energy exponent, with the log-periodic
 >    modulation of period `2 log λ` *handled* rather than dropped, is **0.499999942** against
@@ -125,8 +138,11 @@ form this obligation wants.
 >    period **1.0574** against `2 log λ = 1.0613` (0.36%).
 > 2. **One step of the arithmetic below is not valid as written.** When `U ∉ L²` — which is
 >    precisely the case §4 is about — *both sides* of the scaling identity are `+∞`. Leg 381
->    repaired it with the truncated law `E_ρ(t) ≍ ρ^{3−2α}(T*−t)^{α−1}`, verified to `2.6e-5`.
->    **Same conclusion, valid derivation.**
+>    repaired it with the truncated law `E_ρ(t) ≍ ρ^{3−2α}(T*−t)^{α−1}`, verified across four
+>    exponents to a worst-case absolute error of `2.57e-2` (at `α = 1.4`); at `α = 1` — the
+>    exponent §4 is about — the error is `2.65e-4`. (Leg 384, I8: this document previously quoted
+>    `2.6e-5`, which is the single best row, α = 0.8, not the verification's worst case — a
+>    factor of **988.05** between the two.) **Same conclusion, valid derivation.**
 > 3. **The gap is measured, not asserted.** `L²` needs `α > 3/2`; the banked Type-I object
 >    gives `α = 1` — **deficit 0.5, ratio 1.5×**. At `α = 1` the fixed-ball energy exponent is
 >    **−0.00026** against a predicted 0: **the divergence is purely far-field. Nothing
@@ -155,8 +171,11 @@ far-field decay exponent per candidate; **fitted is not sufficient here.**
 shrinks: nonlinear residual `ρ^{−1.4993}`, viscous `ρ^{−1.4999}` (**identical scaling exactly
 at `α = 1`**), divergence defect `ρ^{−0.4996}`, and the pressure perturbation at the origin
 `ρ^{−1.9997}` — vanishing relative to `(T*−t)^{−1}`, so **pressure non-locality is not the
-obstruction**. What does **not** shrink: the critical `L³` tail grows **326.875 per decade of
-window, constant to 7.4e-10** — log-divergent, and **never small however far out you cut.**
+obstruction**. What does **not** shrink: the **cube** of the critical `L³` tail grows **326.875
+per decade of window, constant to 7.4e-10** — the norm itself running `8.679 → 14.841` across
+the banked 2→10 decades — log-divergent, and **never small however far out you cut.** (Leg 384,
+I10: the increment was previously attached to the norm rather than to its cube; the conclusion
+is unaffected, the quantity was misnamed.)
 Leg 381 attempted no localisation; §4's transfer of the obligation to §5 is verified correct.
 
 **§4 IS NOT DISCHARGED BY A δ = 0 CERTIFICATION (user ruling, 2026-08-11).** The admissible
@@ -206,14 +225,35 @@ document should describe it otherwise.
 
 ## §7 — Non-mathematical obligations
 
-The Millennium Prize rules require, on the reviewer's reading: publication in a **refereed
-journal of worldwide repute**, a **two-year waiting period** following publication, and
-**general acceptance in the mathematics community**. These are listed so that "the obligations
-are discharged" is never read as "the problem is solved", and because the two-year clock is a
-planning fact. *Check against the Clay Institute's own published rules before relying on it.*
+The Millennium Prize rules (CMI, 2018 revision) impose **four** conditions in their Section 4,
+not three:
 
-> **STILL UNCHECKED.** Leg 381 read the *problem statement*, not the *prize rules*, and said
-> so explicitly. §7's own "check before relying on it" stands undischarged.
+1. **Publication in a qualifying outlet** — Section 6(a)(i), *"a refereed mathematics
+   **publication** of worldwide repute meeting the conditions in Section 6(e)"*; Section
+   6(a)(ii) admits a second route, *"a publication meeting a relaxed set of conditions
+   approved by the BOD following a recommendation from the SAB"*. Section 6(e)'s conditions
+   include *"inclusion in the list of publications maintained by MathSciNet"*.
+2. **At least two (2) years** elapsed since publication in a qualifying outlet.
+3. **General acceptance in the global mathematics community, as determined in the sole
+   discretion of CMI** — Section 4(c). It is a CMI determination, not a community fact;
+   Section 7(a)(i)(4) enumerates what CMI may consider.
+4. **The Proposed Solution has satisfactorily answered the questions raised by the Problem's
+   official description, as determined in the sole discretion of CMI** — Section 4(d),
+   sharpened by Section 5(d).
+
+Two further facts of planning relevance: Section 5(e) — *"CMI will not accept Proposed
+Solutions submitted directly to CMI"*; and Section 5(b) — for the Navier–Stokes Problem
+*"a resolution in either direction will be evaluated by the standard evaluation procedure set
+forth in Section 7"*, so the breakdown direction this repository pursues is explicitly in
+scope. These are listed so that "the obligations are discharged" is never read as "the problem
+is solved", and because the two-year clock is a planning fact.
+
+> **CHECKED AGAINST THE PUBLISHED RULES — leg 384 (`a029565`), gate YES, HTTP 200**
+> (`millennium_prize_rules_0.pdf`, sha256 `9b500374…`). §7's own "check before relying on it"
+> is discharged. The reviewer's three-condition reading was wrong in three ways, all repaired
+> above: "journal" for **publication** (III1, and it dropped route 6(a)(ii) entirely), the
+> omission of *global* and of *sole discretion of CMI* (III3), and a missing fourth condition
+> (III4).
 
 ## §8 — What this document asks of the build
 
