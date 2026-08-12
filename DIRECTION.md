@@ -36,7 +36,7 @@ prose as before.
 | A | 299 | TESTA | no |
 | B | 368 | MRYX | yes |
 | C | 369 | BSE | yes |
-| D | 298 | CORRX | no |
+| D | 310 | EPAP | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -20436,9 +20436,71 @@ or left against §3's no-empty-slot rule — and the well of genuine
 eligible questions is, as item 6 already says, nearly dry. The seven
 NEEDS-YOU items are now the programme's entire forward direction.
 
-**Reserve queue: 6 undispatched legs (310, 325, 231, 232, 233, 234).**
-Immediately dispatchable: **0**. Next fresh leg number: **370.**
+Cycle 10ff: D/298 landed at e0ae59a — the register audited whole: 28
+sections + the 14-row table, ~91 locators extracted, ~50 verified live,
+~15 claims cross-checked to source; exactly 2 defects, both minor and
+of one kind (§21.2's line-number citations drifted 1 and 7 lines — the
+line-number lesson AGAIN, now witnessed in the register itself), fixed
+with grep-stable text anchors per the §16.1 precedent,
+locator-precision-only; no duplicates, no mischaracterized summaries.
+**310 EPAP's precondition FIRES (287 + 298 both landed): D ← 310** —
+the reserve's brief single restoration, consumed immediately at the
+standing rank. Floor 2/4 (368, 369).
+
+**Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
+Immediately dispatchable: **0** — 325 USER-GATED; 231-234 blocked on
+repairs 217/219/225. Next fresh leg number: **370.**
 
 Nothing in this update lifts a ban. A repair's ground honestly
 downgraded while the repair holds, and a derivation leg to earn back
 what the assertion claimed; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10ff) — 298 ABSORBED (THE REGISTER
+AUDITED WHOLE; THE LINE-NUMBER LESSON WITNESSED IN THE REGISTER
+ITSELF); D ← 310 EPAP (THE FIRED PRECONDITION, CONSUMED AT RANK)
+
+Written from the same detached lineage, resynced to origin/main =
+e0ae59a.
+
+### 298 CORRX absorbed at full strength
+
+The register — the file the whole correction discipline hangs on — is
+audited whole: every section legs 263-366, the register table, ~91
+locators extracted with ~50 verified against the live worktree and ~15
+claims cross-checked to their source JSON/journals, extra scrutiny on
+the two newest sections as dispatched. The two defects found are the
+smallest possible kind and the most instructive: §21.2's line-number
+citations had drifted (1 and 7 lines) under unrelated same-day edits —
+the line-number lesson (321 → 338 → now the register itself) witnessed
+one more time, fixed the standing way (text anchors, §16.1 precedent),
+and confirmed by the orchestrator's own diff as locator-precision-only.
+No duplicates, no mischaracterized summaries. The correction record's
+integrity is now itself a measured fact. Endorsed without amendment.
+
+### Refill — D ← 310 EPAP (the fired precondition, no round trip —
+exactly as pre-noted at cycle 10dd)
+
+310's precondition (287 + 298 both landed) completed with this landing;
+it takes slot D at its standing rank, and the reserve's brief
+restoration to one dispatchable is consumed in the same cycle. Spec at
+its original entry; audit-family, not floor-eligible; legal with B/368
++ C/369 carrying §3b. Territory disjoint from A/B/C — checked. **Floor
+2/4 (368, 369).** FLOOR-TABLE synced (D 298→310).
+
+### Standing state
+
+A/299 TESTA; B/368 MRYX; C/369 BSE. Route 4: stopped. With the user:
+seven items. **The reserve now holds only user-gated and blocked
+entries (325; 231-234)** — zero dispatchable, none pending any
+mechanical trigger; the next vacancy after this cycle is a fresh DM
+draft or waits on the user.
+
+**Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
+Immediately dispatchable: **0**. Next fresh leg number: **370.**
+
+Nothing in this update lifts a ban. An audited register and a
+verification leg taking its fired turn; no L1-L4 link moved; Clay
+stays ~0.05%.
