@@ -4,7 +4,7 @@
 `CLAY_OBLIGATIONS.md` §6's two no-method obligations stay **OPEN**; **Clay stays ~0.05%.**
 
 - Runner: `experiments/p2_route_cobv_v1.py`
-- Curated data: `writeup/data/p2_route_cobv_v1.json` (`self_hash` `c52d812f…`)
+- Curated data: `writeup/data/p2_route_cobv_v1.json`
 - Evidence / figure: `experiments/p2_route_cobv_v1_evidence.py` → **fig105**
   (`writeup/figures/fig105_route_cobv_v1.png`), rebuilt from the JSON alone
 - Document under audit: `CLAY_OBLIGATIONS.md`, sha256
@@ -27,9 +27,16 @@
 
 **The gate answers YES.** 23 checks ran; **17 MATCH, 6 MISMATCH, 0 UNVERIFIED**; the
 `unverifiable_clauses` list is empty. The Clay Institute's rules were reachable — **HTTP 200**
-on both the rules page (79 319 bytes, sha256 `0a6f68d5…`) and the 2018-revision PDF
+on both the rules page (79 319 bytes) and the 2018-revision PDF
 (43 263 bytes, sha256 `9b5003745c0ae7268dc7769f83e1c61eaca674f28631f1df2cd8400976640b2a`) —
 so the `no` branch never engaged and **no refusal needed banking**.
+
+*Reproducibility note.* Re-running the fetch reproduces every verdict, every count and the
+document digest exactly, but the **rules page's HTML byte-digest changes between fetches**
+(cache-busting markup); its *extracted text* is invariant at 4 040 characters, and the PDF's
+digest above is stable. The PDF digest is therefore the load-bearing one, and the JSON's
+`self_hash` — which covers the volatile page digest — is deliberately not quoted as a fixed
+value anywhere in this write-up.
 
 ## 2. The instrument control: proving the counts are measurements
 
