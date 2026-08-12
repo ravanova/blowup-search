@@ -340,8 +340,13 @@ happens when this is missed.
 **The missing rung is viscous certification, strictly on the Clay path.** Leg 174's own
 occupancy matrix has the Grade-A/fluid cell empty "for want of a target, not a method"; leg
 242 confirms nobody has filled it since (via the one precedent flagged closest, Dahne &
-Figueras). No certified viscous blow-up exists in any model, in any dimension, today. If it
-cannot be done in 1D, 3D NS is not a question of compute.
+Figueras). **[CORRECTED 2026-08-12, over-read closure #5, leg 328: the sentence here — "No
+certified viscous blow-up exists in any model, in any dimension, today" — was wider than leg
+174's own measurement (writeup/CORRECTIONS.md §21). What stands, at measured width: the
+Grade-A/fluid cell is empty; Grade-A dissipative certification exists off the fluid axis —
+Dahne-Figueras CGL (arXiv:2410.05480), reproduced row-for-row by leg 316, and Breden-Chu's
+viscous Burgers.]** If it cannot be done for a dissipative fluid equation in 1D, 3D NS is not
+a question of compute.
 
 **Programme, sequenced (do not build the 3D solver first — this repository's own Route-A
 discipline against debugging two unknowns at once applies with more force here):**

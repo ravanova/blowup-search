@@ -1441,3 +1441,75 @@ this leg's own corrections are non-claim-bearing (a citation spelling, two stale
 timing-prose arithmetic slip, and an already-adjudicated elasticity superlative). **0 bans
 touched**, `plan_of_record.py` and `DIRECTION.md` byte-identical, untouched by this leg. No
 link of the `L1 → L4` chain moved. Clay odds stay **~0.05%**.
+
+## §21 — over-read closure #5, the register entry (six sites, four already fixed elsewhere)
+
+**Dispatch: leg 328 (Route-ORC5), amended cycle 6b** (`CONTINUATION_PROMPT.md` removed from
+territory — see 21.5). `grep -c "closure #5" writeup/CORRECTIONS.md` returned **0** before
+this entry (recorded by leg 339 at §17.5); this section is the entry closure #5 was owed.
+
+### 21.1 The claim, and why it was wrong
+
+Load-bearing in `plan_of_record.py` (the file that states the plan): *"No certified viscous
+blow-up exists in any model, in any dimension, today."* Per the user's external-review packet
+of 2026-08-11, this is FALSE, and refuted by this repository's own banked data in leg 174's
+own words: the occupancy matrix has `fluid=False, grade=A` OCCUPIED by DF-CGL
+(`arXiv:2410.05480`), reproduced row-for-row by leg 316 (49,465/49,465 rows), and Breden-Chu's
+viscous Burgers is a second Grade-A dissipative object. What is actually empty, at measured
+width, is narrower: **the Grade-A/fluid cell** — no published work applies interval
+arithmetic to a dissipative *fluid* equation's own self-similar object. Phase 1's rationale is
+unchanged and never depended on the wider claim: if it cannot be done for a dissipative fluid
+equation in 1D, 3D NS is not a question of compute. This is lesson 91's catch (a count/claim
+standing in for a named realization) applied to width rather than a count.
+
+### 21.2 The six sites
+
+| # | site | fixer | status | wording now |
+|---|---|---|---|---|
+| 1 | `DIRECTION.md:9856` (directive sentence, DM's own Phase-1 prose block) | the DM, cycle 6 | **fixed** | inline `[CORRECTED 2026-08-11, user steer item 1, over-read closure #5: …]` marker; original sentence left standing, corrected wording follows it in the same block |
+| 2 | `DIRECTION.md:13722` area, leg 303's (`ROUTE-GAF`) dispatched thesis | the DM, cycle 6 | **fixed** | inline `[CORRECTED 2026-08-11, user steer item 1, over-read closure #5: …]` marker pointing to site 1 and this leg |
+| 3 | `plan_of_record.py:47` | the orchestrator, commit `ce74d6b` | **fixed** | `"Grade-A/fluid cell is empty -- no published work applies interval arithmetic to a dissipative FLUID equation's own self-similar object -- but Grade-A dissipative certification DOES exist off the fluid axis: Dahne-Figueras CGL (arXiv:2410.05480) … and Breden-Chu's viscous Burgers"` — verified present, byte-diff confirmed zero against this leg's pre-edit checkout (§21.4) |
+| 4 | `CONTINUATION_PROMPT.md:68-80` | the orchestrator, commit `ce74d6b` | **fixed** | same measured wording as site 3; **NOT this leg's territory** (amended cycle 6b — §6 of that file reserves it to integration; this leg cites `ce74d6b` rather than re-editing it, per the DM's own amendment) |
+| 5 | `CLAY_ROADMAP.md:343` | **this leg** | **fixed in this commit** | inline `[CORRECTED 2026-08-12, over-read closure #5, leg 328: …]` marker, same measured wording (Grade-A/fluid cell empty; Grade-A dissipative certification off the fluid axis, DF-CGL + Breden-Chu Burgers), pointing to this section |
+| 6 | `DIRECTION.md`, the leg-294-era consolidation gate, `6.5457e+11` label | none — **gate text, immutable** | **pointer only** | see 21.3; the DM's own ruling (cycle 6, Item 3) holds this site is dispatched gate text and out of reach of any correction leg, itself included |
+
+### 21.3 Item 3 — the `6.5457e+11` label, gate-text pointer
+
+The DM's cycle-6 ruling (`DIRECTION.md`, "Item 3"): the one in-file site is a dispatched,
+immutable gate (the leg-294-era consolidation gate), so the fix is carried as a standing
+pointer rather than an edit. Recorded here per that ruling, verbatim in substance: the label
+"stale-vs-regenerated" misattributes the whole `6.5457e+11` factor to staleness. Measured
+decomposition: total stale/regen `6.5457e+11` = selection-repair alone `6.4926e+11`
+(99.99%+ of the factor, leg 247's repair) × provenance drift `1.008188` (0.82%). The
+consolidated JSON's own note already warned against exactly this misattribution.
+`experiments/journal/leg_294.md` and `leg_297.md` are their owners' territory, not this
+leg's or the DM's — flagged for those journals' integration notes, not edited here.
+
+### 21.4 Verification that sites 3 and 4 needed no edit
+
+`plan_of_record.py` before and after this leg's work is byte-identical (md5
+`a4ece173c3eb890043332127a7d4d900`, confirmed both at worktree checkout and at push time) —
+this leg never opened the file for editing, only read it to confirm the fix already present
+and quote it above. `CONTINUATION_PROMPT.md` was read, not edited, and its current wording
+(lines 68-80) matches the measured claim; the ban on editing it (§6, integration-reserved,
+`ce74d6b`) is honoured.
+
+### 21.5 Why `CONTINUATION_PROMPT.md` is not in this entry's "this-leg" column
+
+The original spec (`DIRECTION.md`, leg 328's dispatch, drafted DM cycle 6) named
+`CONTINUATION_PROMPT.md:70` as a second this-leg site alongside `CLAY_ROADMAP.md:343`. Cycle
+6b amended the spec before this leg ran: the orchestrator had already corrected that site at
+`ce74d6b`, and `CONTINUATION_PROMPT.md` §6 reserves the file to integration, not to leg
+territory — a conflict the orchestrator surfaced rather than resolved silently. This leg
+honours the amendment: site 4 above is recorded as orchestrator-fixed, cited, not re-edited.
+
+### The ceiling
+
+**0 numbers re-derived** — the DF-CGL/Breden-Chu occupancy facts are leg 174's and leg 316's,
+quoted; the `6.5457e+11` decomposition is the DM's own cycle-6 Item 3 arithmetic, quoted. **1
+site edited by this leg** (`CLAY_ROADMAP.md:343`, one inline marker, diff-checked to touch
+nothing else). **4 sites verified already fixed, 0 re-edited** (two DM, one orchestrator on
+`plan_of_record.py`, one orchestrator on `CONTINUATION_PROMPT.md`). **1 site is an immutable
+gate, carried as a pointer only, no edit attempted.** `plan_of_record.py` byte-identical
+before and after (§21.4); the live bans are untouched. No gate answer anywhere changes; no
+link of the `L1 → L4` chain moves. Clay odds stay **~0.05%**.
