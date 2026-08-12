@@ -1,0 +1,77 @@
+{
+  "programme": "PROG-R4",
+  "leg": 380,
+  "lane": "ORCHESTRATION.md 3c PROGRAMME (slot A, long-lived, state persists across units)",
+  "spec": "DIRECTION.md cycle-11a section 4 (immutable)",
+  "base_sha": "104f5b3",
+  "ceiling": "TIER 2",
+  "clay_odds": "~0.05% (unmoved; no L1->L4 link moved by any unit)",
+  "open_obligations_carried_in_every_gate": {
+    "CLAY_OBLIGATIONS_6_item1": "OPEN - certified far-field decay + admissible cutoff; the cutoff half entirely unattempted",
+    "CLAY_OBLIGATIONS_6_item2": "OPEN - persistence/stability under localisation",
+    "CLAY_OBLIGATIONS_4": "OPEN and NOT discharged by leg 382 (user ruling 2026-08-12); stays open in every route-4 gate until leg 386 (ROUTE-DTOL) lands with a pre-registered delta mode"
+  },
+  "seed": {
+    "source": "Lucas & Kerswell 2015, arXiv:1406.1820v2, Table IV",
+    "primary_identifier": "UPO37 (T=19.334, s=0.375, m=0)",
+    "pool": "the eight named Table IV rows pre-registered by leg 353 (UPO37, UPO35, UPO34, UPO32, UPO22, UPO20, UPO17, UPO9)",
+    "recorded_in": "writeup/data/p2_route_dsspb5_v1.json",
+    "ban2_screen": "PASS - named, published, search initialised from it, not a global unseeded trawl",
+    "ban1_screen": "PASS - no step of any unit continues a fixed point into an orbit (re-applied per unit)"
+  },
+  "compliant_scale_preregistered": {
+    "T_dns": 100000.0,
+    "N": 24,
+    "globalisation": "genuine hookstep/trust-region",
+    "n_attempts": 100,
+    "P_zero_successes_at_ChandlerKerswell_4.3pct": 0.012,
+    "P_zero_successes_at_LucasKerswell_10pct": 3e-05,
+    "escalation_option_not_assumed": "T=5e6, ~10.2 GPU-days; authorised in kind, hardware not present; reported WITH G1 numbers"
+  },
+  "units": [
+    {
+      "unit": "U0",
+      "kind": "novelty",
+      "status": "LANDED",
+      "verdict": "PROCEED",
+      "artifacts": [
+        "writeup/novelty/prog_r4.md",
+        "experiments/journal/prog_r4_prereg.md"
+      ],
+      "named_neighbours": [
+        "arXiv:2108.12219 Parker & Schneider 2022 - same flow, gamma-sweep runs on variational methods only, Newton absent from that figure",
+        "arXiv:2306.00165 Ashtari & Schneider 2023 - 'suggesting a larger convergence radius', no metric, different flow",
+        "arXiv:2408.05079 Page et al. 2024 - hookstep on 2D turbulence, diversity not basin"
+      ],
+      "instrument_note": "export.arxiv.org API returned HTTP 429 persistently (reproduced from an independent network path); pass run on arxiv.org/search, which is measured to be abstract-level not full text (counterexample: all:hookstep = 7 papers, excluding both 1207.4682 and 1406.1820 which use the method)"
+    },
+    {
+      "unit": "U1",
+      "kind": "build",
+      "target": "MILESTONE M1 - genuine hookstep/trust-region globalisation layer; laminar control reproduces leg 353's 99.3% reduction THROUGH the new layer; per-iteration ledger persisted",
+      "status": "NOT STARTED"
+    },
+    {
+      "unit": "U2",
+      "kind": "build",
+      "target": "MILESTONE M2 - T=1e5 DNS at N=24 + recurrence-candidate library with thresholds stated",
+      "status": "NOT STARTED"
+    },
+    {
+      "unit": "U3",
+      "kind": "claim",
+      "target": "GATE G1 - does at least one named Table-IV RPO recover to tol=1e-8?",
+      "status": "NOT STARTED"
+    },
+    {
+      "unit": "U4",
+      "kind": "claim",
+      "target": "GATE G2 - is a radius measured with a coherent (monotone) failure boundary, control firing as planted?",
+      "status": "NOT STARTED"
+    }
+  ],
+  "figure_allocation": ["fig97", "fig98"],
+  "costs_measured": {
+    "u0_wall_seconds_note": "novelty pass dominated by arXiv rate-limit backoff, not compute"
+  }
+}
