@@ -33,9 +33,9 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 229 | PNRV | no |
+| A | 366 | LCB5 | no |
 | B | 365 | DSSR | yes |
-| C | 364 | NRSV | yes |
+| C | 367 | E5P | yes |
 | D | 293 | JFA | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -19971,10 +19971,159 @@ rulings, and the DM prefers saying so to inventing work. Orchestrator:
 carry this note into the progress file's user-facing section beside the
 six items.
 
+Cycle 10bb: A/229 landed YES at a15bb21 — the SECOND genuinely
+independent confirmation of leg 226's headline moves (all nine headlines
+at rel error 0.0 plus the a=1.50 pair; resumed-not-restarted from the
+salvage checkpoint with the staleness re-check clean; the width-gauge-node
+finding re-verified live; no correction applied under its own authority,
+correctly). C/364 landed (ii) DISCREPANCY-FOUND at 75b07b1 — a
+CITATION/ATTRIBUTION discrepancy, not computational: the operational L³
+test is CORRECT, but the screen's deciding_clause and header comment
+mis-cite Tsai T1 (q∈(3,∞], excluding q=3) as authority for a q=3 test
+that NRS 1996's own result covers (attested at two independent obtainable
+sources; the paywall refusal reproduced a third time, never
+circumvented). **Accumulator items (8) (229's row-ordering zip bug) and
+(9) (the screen's T1 citation fix, source-verified by 364's quoted
+sources) join item (7) — THRESHOLD at three: leg 366 LCB5 drafted and
+dispatched into A.** C ← **leg 367 E5P** (fresh eligible draft: verify
+356's asserted "theoretically pinned to Re λ=0 exactly" — the repair's
+canonical ordering rests on that pinning being a theorem, and no leg has
+located or derived it). Floor 2/4 (365, 367).
+
 **Reserve queue: 8 undispatched legs (298, 299, 310, 325, 231, 232, 233,
 234).** Immediately dispatchable: **2** (298 CORRX, 299 TESTA). Next
-fresh leg number: **366.**
+fresh leg number: **368.**
 
 Nothing in this update lifts a ban. A screen matching its adjudicated
 mathematics, two tooling fixes verified on both branches, and an honest
 statement of queue exhaustion; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10bb) — 229 YES AND 364 (ii) ABSORBED;
+LEG 366 LCB5 DRAFTED AT THRESHOLD (THREE ITEMS, ALL SOURCE-VERIFIED);
+LEG 367 E5P DRAFTED (356's PINNING ASSERTION, VERIFIED OR DOWNGRADED);
+A ← 366, C ← 367
+
+Written from the same detached lineage, resynced to origin/main = 7c9cab5
+(229's a15bb21 and 364's 75b07b1 in ancestry; 364's discrepancy read from
+its landed journal directly — the report text crossed in flight, the
+third crossing this window, and the landed record is authoritative).
+
+### 229 PNRV gate YES, absorbed at full strength
+
+The second genuinely independent confirmation of leg 226's repair
+headlines (after 236's dependency-trace exclusion): all nine headline
+comparisons at relative error 0.0, the a=1.50 spread/count pair matching,
+via a fresh independent runner against v11's own inputs with
+profile_newton.py read-only. The resume discipline was exemplary:
+resumed from the salvage checkpoint via the prior instance's own
+PNRV_RESUME support, staleness re-check clean on all three watched
+surfaces, and the width-gauge-node finding RE-VERIFIED live rather than
+copied forward. No correction applied under its own authority, per its
+own escalation clause — nothing here changes any banked headline, and
+none needs to. The row-ordering bug in its own diagnostic zip, flagged
+not silently patched, is accumulator item (8). Endorsed without
+amendment.
+
+### 364 NRSV — (ii) DISCREPANCY-FOUND, absorbed at full strength
+
+Exactly what provenance verification is for: the operational test and its
+plain-English description are CORRECT against both obtainable sources;
+what is wrong is the ATTRIBUTION — the deciding_clause (lines 534-539)
+and the header quote (364-367) cite Tsai's Theorem 1, whose own stated
+range q ∈ (3,∞] excludes the q=3 case the test actually measures; the
+q=3 exclusion is NRS 1996's own result, reliably attested at two
+independent obtainable sources (NRS itself unobtainable — the refusal
+reproduced a third time across legs 253/359/364 and never circumvented).
+A deciding_clause is what every future candidate report will quote, so
+the mis-citation is worth fixing precisely — and it is a text fix, the
+operational semantics untouched. Accumulator item (9), source-verified at
+entry by 364's quoted sources. The leg's territory restraint
+(dssp_screen.py untouched, the fix routed) is endorsed.
+
+### Leg 366 LCB5 — drafted at threshold, dispatched into A
+
+```
+### 366 — ROUTE-LCB5: LIGHT CORRECTIONS BATCH 5 (three items, all
+source-verified at entry)
+[FLOOR-ELIGIBLE: no — correction/record]
+**Thesis.** (i) Marker at leg 341's S2 site: the "dissolves" GROUNDS were
+incomplete — Theorem 2 reaches that decay class; the conclusion stands on
+the ANSATZ clause (source: 359's adjudication, deciding clauses quoted;
+grounds-vs-width, the closure-#6 family; original text quoted in place).
+(ii) leg 229's diagnostic zip row-ordering bug (its own flagged site;
+fix + the one-line demonstration that ordering was cosmetic, not
+claim-bearing). (iii) solver/dssp_screen.py's T1 attribution: the
+deciding_clause (534-539) and header quote (364-367) re-attributed per
+364's verified sources — the q=3 exclusion is NRS 1996's result
+(attested secondhand, provenance caveat carried), Tsai T1 covers
+q ∈ (3,∞]; the OPERATIONAL test is untouched, and the existing banked
+verdicts must reproduce unmoved (diff-checked) since only citation text
+changes.
+**Gate.** All three applied with inline markers/comments citing their
+sources, ONE batched CORRECTIONS entry, banked JSONs read-only (any diff
+fails the gate), and the screen's verdict battery re-run unmoved?
+  yes -> Bank; accumulator items (7)-(9) close.
+  no  -> A site resists or a verdict moves: stop, report the resister
+        verbatim, land the others, never widen.
+**Territory.** experiments/journal/leg_341.md (marker), leg 229's
+diagnostic script (the one zip), solver/dssp_screen.py (citation text
+only) + its test battery re-run, writeup/CORRECTIONS.md (append),
+writeup/novelty/leg_366.md, experiments/journal/leg_366.md.
+**Difficulty.** light
+**Preconditions:** None.
+```
+
+### Leg 367 E5P — drafted, dispatched into C, with the reason stated
+
+356's repair rests on an ASSERTED theorem: "theoretically pinned to
+Re λ = 0 exactly." No leg has located or derived that pinning; if it is
+folklore or wrong, the canonical ordering's well-definedness at the
+degenerate key needs re-examination. The floor needs a second eligible
+leg, and this is the genuine one:
+
+```
+### 367 — ROUTE-E5P: IS THE Re λ = 0 PINNING A THEOREM? (356's asserted
+ground, verified or downgraded)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** 356 repaired the e_v1_spectrum family on the ground that the
+discretized essential/continuum spectrum in the E5 sweep is
+"theoretically pinned to Re λ = 0 exactly." Verify that ground: locate
+the theorem (the continuous-spectrum statement for the E5 family's
+operator on its domain — 343/B1's ℓ=0 continuity measurement is
+adjacent, a different operator), or derive it at the level of a
+documented argument, or DOWNGRADE the assertion to
+unverified-assumption with a marker flagged to 356's record.
+**Gate.** A definite classification — THEOREM-LOCATED (source quoted,
+hypotheses checked against the E5 operator), DERIVED (the argument
+documented and checkable), or UNVERIFIED-ASSUMPTION (the search recorded;
+the marker flagged to 356's owner, never edited in by this leg) — with
+the consequence for 356's canonical ordering stated either way?
+  yes (any definite class) -> Bank; 356's repair gains a verified ground
+        or an honest caveat.
+  no  -> The question resists classification after a full pass: recorded
+        as exactly that, with the candidate sources quoted.
+**Territory.** writeup/data/p2_route_e5p_v1.json, writeup/novelty/
+leg_367.md, experiments/journal/leg_367.md. Reads 356/343's banked
+records; edits nothing. No figure.
+**Difficulty.** standard
+**Preconditions:** Leg 356 landed (TRUE).
+```
+
+**Floor 2/4 (365, 367).** FLOOR-TABLE synced (A 229→366, C 364→367);
+the accumulator resets on 366's landing.
+
+### Standing state
+
+B/365 DSSR; D/293 JFA. Route 4: stopped, packet live (item 5). With the
+user: six items + the exhaustion note (item 6). Next vacancies: 298
+CORRX, 299 TESTA.
+
+**Reserve queue: 8 undispatched legs (298, 299, 310, 325, 231, 232, 233,
+234).** Immediately dispatchable: **2**. Next fresh leg number: **368.**
+
+Nothing in this update lifts a ban. A confirmation confirmed, a citation
+corrected to its true source, and an asserted theorem sent to be earned;
+no L1-L4 link moved; Clay stays ~0.05%.
