@@ -1,0 +1,6 @@
+probe DNS T=2000.0 in 189.6s (0.9480 ms/step)
+2 anchored probe seeds (COST ONLY -- T=2000 is leg 353's under-resourced scale; not evidence on G1)
+krylov dims: median 19, p95 20, max 20, 0 epochs hit the cap
+epochs: median 2, max 2; reasons {'max_newton_hit': 2}
+cost: 66.1 s/epoch median, 2.35 s per Jacobian action
+wrote /home/andy/projects/Unsolved/experiments/programme_r4/u3_cost_probe.json

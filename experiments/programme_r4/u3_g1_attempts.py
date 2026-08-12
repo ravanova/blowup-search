@@ -97,6 +97,7 @@ from solver.kolmogorov2d_nkbasin import (  # noqa: E402
 from experiments.programme_r4.u2_m2_dns_recurrence import (  # noqa: E402
     CKPT, DT, DT_SAVE, LIB, META, N_FORCING, N_GRID, RE, regenerate,
 )
+from experiments.programme_r4 import u3_controls  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -269,16 +270,55 @@ def main():
     ledgers = [{"attempt": r["attempt"], "anchor": r["anchor"],
                 "ledger": r.pop("_ledger")} for r in results]
     saved = {}
+    # Keep every converged state, not only the matched ones: control R needs an
+    # orbit that reached tol to perturb, and a solve can reach tol without
+    # matching a named row (the realization offset in the addendum section 1
+    # makes that a real possibility, not a hypothetical).
+    orbit_states = {}
     for r in results:
         w = r.pop("_w0")
+        if r["success"]:
+            orbit_states[r["attempt"]] = w
         if r["recovered_named_orbit"]:
             saved[f"attempt{r['attempt']:03d}_{r['anchor']}"] = w
     if saved:
         np.savez_compressed(ORBITS, **saved)
         print(f"saved {len(saved)} recovered orbit states to {ORBITS}")
 
+    # ---- the planted controls on G1 -------------------------------------
+    # Pre-registered in experiments/journal/prog_r4_u2u3_prereg_addendum.md
+    # section 3, before the recurrence stage and before any attempt. They run
+    # AFTER the attempts only because control R needs a converged orbit to
+    # perturb; P and N do not depend on any outcome.
+    print("running the planted controls on G1 ...")
+    t0 = time.time()
+    ctrl_P = u3_controls.control_P(solver, TOL, MAX_NEWTON, MAX_GMRES,
+                                   GMRES_RTOL)
+    # N is seeded from a REAL candidate's amplitude spectrum and a REAL
+    # anchor's published period, so the negative control is as close to the
+    # positive case as a non-orbit can be.
+    n_w0, n_meta = jobs[0][1], jobs[0][4]
+    ctrl_N = u3_controls.control_N(
+        solver, n_w0, n_meta["T_published"], n_meta["s_published"], TOL,
+        MAX_NEWTON, MAX_GMRES, GMRES_RTOL, MATCH_T_TOL, MATCH_S_TOL, TABLE_IV)
+
     recovered = [r for r in results if r["recovered_named_orbit"]]
     converged = [r for r in results if r["success"]]
+
+    ctrl_R = None
+    if converged:
+        best = min(converged, key=lambda r: r["final_residual"])
+        ctrl_R = u3_controls.control_R(
+            solver, orbit_states[best["attempt"]], best["T_converged"],
+            best["s_converged"], best["anchor"], TOL, MAX_NEWTON, MAX_GMRES,
+            GMRES_RTOL)
+    controls_fired, control_failures = u3_controls.verdict(
+        ctrl_P, ctrl_N, ctrl_R)
+    controls_wall = time.time() - t0
+    print(f"controls: P recovered={ctrl_P['recovered']}, "
+          f"N recovered={ctrl_N['recovered']} (must be False), "
+          f"R={'not run -- nothing converged' if ctrl_R is None else ctrl_R['recovered']}"
+          f" -> FIRED AS PLANTED = {controls_fired}")
     by_anchor = {}
     for r in results:
         by_anchor.setdefault(r["anchor"], []).append(r["final_residual"])
@@ -289,10 +329,71 @@ def main():
         gate=dict(
             question="G1: DOES AT LEAST ONE NAMED TABLE-IV RPO RECOVER TO "
                      "tol=1e-8?",
-            answer="YES" if recovered else "NO",
+            # THE OVERRIDE, pre-registered in the addendum section 3. A `no` at
+            # G1 is a RESOURCED null: section 3d's stop fires on it and route 4
+            # stops. That is only permitted on an instrument shown IN THIS RUN
+            # to be able to say `yes`. If the controls did not fire as planted,
+            # "no orbit recovered" and "the machinery cannot recover anything"
+            # are indistinguishable, and the honest answer is neither YES nor
+            # NO but UNANSWERED.
+            answer=("YES" if recovered else "NO") if controls_fired
+                   else "UNANSWERED",
+            answer_without_controls="YES" if recovered else "NO",
+            controls_fired_as_planted=controls_fired,
+            control_failures=control_failures,
+            # Reported SEPARATELY and never substituted for one another: the
+            # realization is first-order in time (addendum section 1), so a
+            # solve can reach tol on a genuine orbit of THIS discrete map and
+            # still miss a published (T, s) by more than the match tolerance.
             n_recovered=len(recovered),
             n_converged_to_tol=len(converged),
-            n_attempts=len(results)),
+            n_attempts=len(results),
+            unverified=("SOLO MODE (ORCHESTRATION.md section 3f): this gate "
+                        "was answered by the session that built the runner. "
+                        "No fresh session re-derived it from banked JSON, so "
+                        "the answer is UNVERIFIED in section 3f's sense. The "
+                        "planted controls and the merge gate are the whole "
+                        "defence.")),
+        controls=dict(
+            preregistered="experiments/journal/prog_r4_u2u3_prereg_addendum.md "
+                          "section 3, before the recurrence stage and before "
+                          "any attempt",
+            rule="FIRED AS PLANTED := P recovered AND N did not recover AND "
+                 "(R recovered, if R ran)",
+            fired_as_planted=controls_fired,
+            failures=control_failures,
+            P=ctrl_P, N=ctrl_N,
+            R=ctrl_R if ctrl_R is not None else
+              "NOT RUN -- no attempt converged to tol, so there was no orbit "
+              "to perturb. Its non-running is reported, not hidden.",
+            wall_seconds=controls_wall),
+        realization=dict(
+            finding=("the stepper is a Lie-Trotter split (RK4 on the nonstiff "
+                     "part, then the exact viscous factor), so it is FIRST "
+                     "order in time, not fourth; measured against an exact "
+                     "solution, local error ratio 4.00 per halving and global "
+                     "ratio 2.00, on laminar and turbulent states alike"),
+            relative_error_per_orbit_period_at_dt_0p01=1.3242e-3,
+            corrects=("MILESTONE M1 recorded its residual floor 0.0794 as 'RK4 "
+                      "truncation'. The number reproduces exactly; the "
+                      "attribution is wrong -- RK4 truncation where the RHS "
+                      "vanishes identically is zero. M1's milestone answer is "
+                      "unaffected and is NOT re-opened."),
+            bearing_on_this_gate=("tol=1e-8 is on the DISCRETE residual and "
+                                  "stays reachable, so this does not block a "
+                                  "YES; but MATCH_T_TOL=0.05 is 0.26% on "
+                                  "T~19.334 against a 0.13% systematic "
+                                  "offset, covered by only ~2x"),
+            lesson_91="a negative names its realization; this is that name"),
+        conditioning=dict(
+            attractor_lyapunov=0.35,
+            attractor_amplification_over_T_19p33=8.73e2,
+            equilibrium_lyapunov=2.88,
+            note=("measured in the linear regime before the run. The targets "
+                  "sit at an amplification of ~870 over one Table IV period, "
+                  "which Newton-GMRES-hookstep can carry; the discrete "
+                  "relative equilibrium sits at ~1e24 over the same period, "
+                  "which is why control P is planted at T=2.65 instead")),
         resourcing=dict(
             T_dns=dns_meta["T_recorded"], N=N_GRID, Re=RE,
             globalisation="genuine Newton-GMRES-hookstep trust region (U1)",
@@ -356,6 +457,11 @@ def main():
     print(f"G1 = {record['gate']['answer']}: {len(recovered)} recovered, "
           f"{len(converged)} converged to tol, {len(results)} attempts, "
           f"{wall/3600:.2f} h")
+    if not controls_fired:
+        print("CONTROLS DID NOT FIRE AS PLANTED -- G1 is UNANSWERED, not NO. "
+              "Section 3d's stop does NOT fire and route 4 is NOT stopped.")
+        for f in control_failures:
+            print(f"  - {f}")
     print(f"best final |R| = {finals[0]:.6e}, median = "
           f"{np.median(finals):.6e}")
     print(f"reasons: {record['magnitudes']['reasons']}")

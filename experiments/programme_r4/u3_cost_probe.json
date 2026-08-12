@@ -1,0 +1,88 @@
+{
+  "what": "PROG-R4 U3 COST PROBE -- cost measurement only",
+  "not_evidence": "seeds mined from a T=2000 DNS, which is leg 353's under-resourced scale; no count here is evidence on gate G1 in either direction, and none is carried into a gate answer",
+  "cap_rule_source": "experiments/journal/prog_r4_u2u3_prereg_addendum.md section 2",
+  "probe_config": {
+    "T_dns": 2000.0,
+    "n_seeds": 2,
+    "max_newton": 3,
+    "max_gmres": 200,
+    "gmres_rtol": 0.001,
+    "tol": 1e-08,
+    "workers": 8,
+    "N": 24,
+    "Re": 60.0
+  },
+  "dns": {
+    "wall_seconds": 189.59487915039062,
+    "ms_per_step": 0.9479743957519531
+  },
+  "krylov_dims": {
+    "n": 6,
+    "mean": 18.833333333333332,
+    "median": 19.0,
+    "p95": 20.0,
+    "max": 20.0,
+    "hit_cap": 0,
+    "note": "dimensions actually consumed with the rtol=1e-3 early exit active; hit_cap counts epochs stopped by the CAP rather than by the residual test"
+  },
+  "epochs": {
+    "median": 2.0,
+    "max": 2.0,
+    "reasons": {
+      "max_newton_hit": 2
+    }
+  },
+  "cost": {
+    "wall_seconds_total": 136.7646462917328,
+    "seconds_per_epoch_median": 66.12864363193512,
+    "seconds_per_epoch_max": 68.36728250980377,
+    "seconds_per_jacobian_action_median": 2.3489422237281894,
+    "jac_evals_median": 56.5,
+    "workers": 8,
+    "parallel_note": "measured with the T=1e5 DNS running concurrently on one further core; contention inflates these seconds, so pricing from them is conservative"
+  },
+  "per_seed": [
+    {
+      "idx": 0,
+      "wall_seconds": 136.73456501960754,
+      "n_epochs": 2,
+      "reason": "max_newton_hit",
+      "success": false,
+      "final_residual": 17.302302345948913,
+      "n_jac_evals": 54,
+      "n_residual_evals": 66,
+      "krylov_dims": [
+        19,
+        17,
+        18
+      ],
+      "radius_trials": [
+        6,
+        2,
+        1
+      ]
+    },
+    {
+      "idx": 1,
+      "wall_seconds": 127.78000950813293,
+      "n_epochs": 2,
+      "reason": "max_newton_hit",
+      "success": false,
+      "final_residual": 16.66797892044438,
+      "n_jac_evals": 59,
+      "n_residual_evals": 71,
+      "krylov_dims": [
+        20,
+        19,
+        20
+      ],
+      "radius_trials": [
+        6,
+        2,
+        1
+      ]
+    }
+  ],
+  "clay_movement": "none -- a cost probe moves no link"
+}
