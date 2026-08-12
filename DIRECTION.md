@@ -33,7 +33,7 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 379 | LCB7 | no |
+| A | — | HELD-OPEN (cycle 10oo, joins D's formal exception) | no |
 | B | 376 | R3SP | yes |
 | C | 377 | HCDX | yes |
 | D | — | HELD-OPEN (cycle 10nn formal exception, machine-lawful) | no |
@@ -20635,6 +20635,21 @@ machine-lawful** (eligible 2/4 via B+C passes test_9; the 10jj
 grounds stand: nothing dispatchable, owed books empty, manufacture
 refused; any user ruling refills it). Floor 2/4 (376, 377).
 
+Cycle 10oo: A/379 landed at 1613d0a — both corrections closed as
+gated: the Boussinesq check narrowed to an EXACT excused set (185's
+diagnostic + 284's continuation JSONs, grep-verified non-solver
+producers; "exact, not at-least"); the gCLM pin replaced with
+ULP_TOLERANCE=25 against a measured 12-ULP FFT-kernel worst
+(thread-nondeterminism ruled out); BOTH planted controls confirmed to
+trip, none widened after failing; suites 16/16 and 9/9 green; §31
+filed. **Items (11)-(12) CLOSE; the accumulator is empty.** A ← HELD
+OPEN, joining D's formal exception on identical grounds
+(machine-lawful: B/376 + C/377 keep the floor at 2/4; the books are
+empty, the reserve zero, manufacture refused; any user ruling refills
+both). The run's honest shape: two live research legs closing the
+window's last threads, two lawfully empty slots, all direction with
+the user. Floor 2/4 (376, 377).
+
 **Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
 Immediately dispatchable: **0**. Next fresh leg number: **380.**
 
@@ -21408,3 +21423,57 @@ Nothing in this update lifts a ban. A healthy test suite measured
 honestly, a fleet kill absorbed by the playbook, and an empty slot
 that finally tells the truth lawfully; no L1-L4 link moved; Clay
 stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10oo) — 379 ABSORBED (BOTH CONTROLS
+TRIP, NOTHING WIDENED); A JOINS THE HELD-OPEN EXCEPTION
+
+Written from the same detached lineage, resynced to origin/main =
+1613d0a.
+
+### 379 LCB7 — absorbed at full strength
+
+Both items closed exactly as the gate demanded, with the teeth intact:
+the Boussinesq assertion narrowed to an excused set asserted EXACT
+(two named files, their producing runners grep-verified never to call
+solve_boussinesq — the excuse is provenance-scoped, not loosened), and
+the gCLM bit-identity pin replaced with a documented tolerance
+(ULP_TOLERANCE=25, >=2x the measured 12-ULP numpy-FFT worst, the
+thread-nondeterminism alternative ruled out by measurement) — and in
+both cases the planted failure control CONFIRMED TO TRIP after the
+change, with the orchestrator verifying no control was widened after
+failing to trip. The 361 lesson held: the instruments were fixed
+without being blinded. CORRECTIONS §31; suites green. Items (11)-(12)
+close; the accumulator is empty. Endorsed without amendment.
+
+### A joins the held-open exception
+
+Identical grounds to D's at cycle 10nn, identical machine check: with
+B/376 and C/377 both floor-eligible, test_9 reads 2/4 and passes; the
+owed-work books are empty (10ii, re-confirmed each cycle since), the
+accumulator is empty (this cycle), the reserve holds only user-gated
+and blocked entries, and manufacture stays refused. **A is HELD OPEN,
+joining D.** The trigger inventory covers both slots; any single user
+ruling refills them mechanically. Orchestrator: extend the
+ORCH_STATE.md held-open note to cover A alongside D (your territory,
+one line).
+
+### Standing state
+
+B/376 R3SP (resumed measurement); C/377 HCDX (the basis thread's
+terminal read). When both land: every thread this window opened is
+closed or user-parked, the record squared in every register — the
+gap list zero, the accumulator empty, the register audited, the suite
+green, the screen complete, the stop packet complete with its risk
+table sharpened. The seven-plus-one user items remain the whole of
+forward direction; ORCHESTRATION.md's terminal clause remains in play
+absent a ruling.
+
+**Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
+Immediately dispatchable: **0**. Next fresh leg number: **380.**
+
+Nothing in this update lifts a ban. Two instruments fixed without
+being blinded, and a second slot that tells the truth lawfully; no
+L1-L4 link moved; Clay stays ~0.05%.
