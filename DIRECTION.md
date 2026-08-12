@@ -35,8 +35,8 @@ prose as before.
 |---|---|---|---|
 | A | 299 | TESTA | no |
 | B | 376 | R3SP | yes |
-| C | 374 | SBIV | yes |
-| D | 375 | PBLG | no |
+| C | 377 | HCDX | yes |
+| D | 378 | LCB6 | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -20597,8 +20597,27 @@ hardens or softens the POCP obstruction for the same user decision 374
 feeds, with 343's planted-eigenvalue control pattern ready for reuse).
 Floor 2/4 (374, 376).
 
+Cycle 10mm: C/374 landed at 215b45a — the inventory's headline: NO
+candidate spectral basis on unbounded R³ with algebraic weight meets
+all four of 348's bridge requirements simultaneously; every genuinely
+spectral candidate located is 1D/scalar in published form;
+generalized-algebraic-weight Hermite is the CLOSEST match with one
+unresolved coefficient-decay concern (Boyd 1980 + 334's own internal
+flag); mapped Laguerre banked uninventoriable. D/375 landed YES at
+5db0ae9 (absorbed from the landed record per the standing practice —
+the report never arrived): the BLOG written with a full traceability
+table, the +0.4703 adverse slope as the unsoftened headline, gap-list
+item 2 closed — **THE QUARTET-GAP LIST STANDS AT ZERO OPEN ITEMS.**
+Refills: C ← **leg 377 HCDX** (the SBIV thread's terminal question:
+does the coefficient-decay concern kill the one closest basis
+candidate, closing 348's obstruction at inventory level, or is it
+resolvable — the POCP item's last scheduled input); D ← **leg 378
+LCB6** (the accumulator's finalized item (10) applied — mechanism
+amended: the batch fires EARLY at one item when nothing else is
+dispatchable; 356's marker citing 367+369+371). Floor 2/4 (376, 377).
+
 **Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
-Immediately dispatchable: **0**. Next fresh leg number: **377.**
+Immediately dispatchable: **0**. Next fresh leg number: **379.**
 
 Nothing in this update lifts a ban. An audited register and a
 verification leg taking its fired turn; no L1-L4 link moved; Clay
@@ -21150,3 +21169,125 @@ Immediately dispatchable: **0**. Next fresh leg number: **377.**
 Nothing in this update lifts a ban. A risk narrowed by reading, and a
 refusal-to-assume converted into a measurement; no L1-L4 link moved;
 Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10mm) — 374 AND 375 ABSORBED (THE
+BASIS INVENTORY LANDS ADVERSE; THE QUARTET-GAP LIST REACHES ZERO);
+C ← 377 HCDX (THE INVENTORY's TERMINAL CLAUSE), D ← 378 LCB6 (ITEM
+(10) APPLIED)
+
+Written from the same detached lineage, resynced to origin/main =
+9c52715 (374's 215b45a and 375's 5db0ae9 in ancestry).
+
+### 374 SBIV — absorbed at full strength
+
+The inventory the POCP spend decision lacked, and it lands ADVERSE
+with precision: no located candidate meets all four Galerkin-plus-tail
+bridge requirements at once; the genuinely spectral candidates are
+published only in 1D/scalar form; the closest match
+(generalized-algebraic-weight Hermite) carries exactly one unresolved
+concern — coefficient decay under the algebraic weight (Boyd 1980,
+independently flagged by 334's own plan) — and mapped Laguerre is
+banked as uninventoriable rather than silently omitted. The user's
+cost-class-C ruling now has its table; one clause remains open and is
+dispatched below rather than left dangling. Endorsed without
+amendment.
+
+### 375 PBLG — YES, absorbed from the landed record
+
+The report never arrived (the standing crossing pattern); the landed
+record is authoritative and complete: BLOG_P2_ROUTEPORT_V2.md written
+with a numeric-traceability table tying every claim to the landed
+TECHNICAL and banked JSON (the +0.4703 dec/unit-ρ adverse slope as the
+unsoftened headline; the tail-lemma-forced verdict carried), the INDEX
+row and gap-list item 2 closed. **The quartet-gap list — carried since
+the DOCS era — stands at ZERO open items.** Endorsed.
+
+### Refills
+
+```
+### 377 — ROUTE-HCDX: DOES THE COEFFICIENT-DECAY CONCERN KILL THE
+HERMITE CANDIDATE? (374's one unresolved clause — the POCP item's
+last scheduled input, and this thread's terminal leg)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** 374's inventory leaves exactly one candidate basis
+standing (generalized-algebraic-weight Hermite) with exactly one
+unresolved concern: coefficient decay under algebraic weights (Boyd
+1980's classical warning; 334's internal flag). Resolve it at the
+inventory's own level: does the published theory (Boyd's own analysis
+and its successors) show coefficient decay adequate for the
+Galerkin-plus-tail bridge's truncation requirement on the Type-I decay
+class, or inadequate — with the deciding estimates quoted, and a small
+numerical check on a Type-I-enveloped witness ONLY if the literature
+underdetermines (350's basis machinery reusable read-only)?
+**Gate.** A definite classification — ADEQUATE (the estimate quoted;
+the POCP item records ONE viable basis candidate surviving inventory),
+INADEQUATE (the estimate quoted; 348's obstruction CLOSES at inventory
+level: no viable basis is known, and cost-class C means basis-building
+research, priced as such), or UNDERDETERMINED-THEN-MEASURED (the
+witness check's magnitudes reported, classified by them) — with the
+POCP decision item updated by pointer either way, and THIS THREAD
+DECLARED CLOSED in all branches (no further basis-inventory legs)?
+  yes (any class) -> Bank; the POCP item's inputs are complete.
+  no  -> The sources and the witness both resist: recorded exactly so;
+        the thread closes anyway.
+**Territory.** writeup/data/p2_route_hcdx_v1.json, writeup/novelty/
+leg_377.md, experiments/journal/leg_377.md, plus (only if the measured
+branch fires) experiments/p2_route_hcdx_v1.py. Reads 374/348/350's
+banked records; edits nothing. No figure unless the measured branch
+warrants (none allocated).
+**Difficulty.** standard
+**Preconditions:** Leg 374 landed (TRUE, 215b45a).
+```
+
+```
+### 378 — ROUTE-LCB6: APPLY ITEM (10) — 356's GROUND MARKER, TEXT
+FINALIZED BY THE 367/369/371 TRILOGY (the accumulator's early fire,
+mechanism amended)
+[FLOOR-ELIGIBLE: no — correction/record]
+**Thesis.** The accumulator mechanism fires at 2-3 items; AMENDED this
+cycle for the empty-queue case: when the accumulator holds >=1
+finalized item AND nothing else is dispatchable, the batch fires
+early — a finalized correction waiting on arbitrary company is staleness
+by policy. Item (10): the marker at leg 356's record correcting
+"theoretically pinned to Re λ=0 exactly" to its earned status —
+UNVERIFIED as a theorem for the full truncation (367), underivable
+from generic backward-error theory (369), and DERIVED instead from
+LAPACK's real-Schur structure (371, second-driver reproduction within
+0.93-1.68x) — original wording quoted in place, the trilogy cited.
+**Gate.** The marker applied at 356's journal site (and its
+CORRECTIONS §25 cross-reference annotated) with one batched
+CORRECTIONS entry, zero other content changed (diff-checked), banked
+JSONs read-only?
+  yes -> Bank; the accumulator empties; item (11) opens on the next
+        flag.
+  no  -> The site resists without touching an argument: report
+        verbatim, never widen.
+**Territory.** experiments/journal/leg_356.md (marker),
+writeup/CORRECTIONS.md (append + the §25 annotation),
+writeup/novelty/leg_378.md, experiments/journal/leg_378.md.
+**Difficulty.** light
+**Preconditions:** Leg 371 landed (TRUE — the text it applies is
+371's finalized wording).
+```
+
+Legal fills: B/376 + C/377 carry §3b. **Floor 2/4 (376, 377).**
+FLOOR-TABLE synced (C 374→377, D 375→378).
+
+### Standing state
+
+A/299 TESTA (the window's longest-running leg — orchestrator: a
+one-line status in the next report, the standing shape); B/376 R3SP.
+Route 4: stopped. With the user: seven items + upgraded item 6. After
+299/376/377/378: the POCP item's inputs complete, the accumulator
+empty, the gap list zero, the stop packet complete — the record fully
+squared for either a ruling or wind-down.
+
+**Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
+Immediately dispatchable: **0**. Next fresh leg number: **379.**
+
+Nothing in this update lifts a ban. An adverse inventory stated
+precisely, a zero-item gap list, and one finalized correction applied
+rather than aged; no L1-L4 link moved; Clay stays ~0.05%.
