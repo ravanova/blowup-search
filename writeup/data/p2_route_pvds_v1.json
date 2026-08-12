@@ -1,0 +1,130 @@
+{
+  "leg": 360,
+  "route": "PVDS",
+  "title": "Route-PVDS: adjudicate leg 330's derived T4 screen (two open conditions) operational-or-not for B7's rigidity ledger",
+  "date": "2026-08-12",
+  "branch": "leg/360-pvds-v1",
+  "role": "LEG, literature-typed (math + external literature, floor-eligible), difficulty standard",
+  "dispatched_by": "DM cycle 10v (8e36dd0), adjudicating leg 330's derived structural screen from arXiv:2607.09619v2 Theorem 'Approximately self-similar Type I solutions are regular' (T4), which has never been adjudicated into or out of B7's machine-read ledger (solver/dssp_screen.py)",
+  "territory": [
+    "writeup/data/p2_route_pvds_v1.json",
+    "writeup/novelty/leg_360.md",
+    "experiments/journal/leg_360.md"
+  ],
+  "files_read_only_never_edited": [
+    "experiments/journal/leg_330.md",
+    "writeup/novelty/leg_330.md",
+    "writeup/data/p2_route_pvlx_v1.json",
+    "solver/dssp_screen.py",
+    "experiments/journal/leg_326.md",
+    "writeup/novelty/leg_326.md",
+    "arXiv:2607.09619v2 Liouvillev2.tex (re-downloaded, sha256 re-verified against leg 330's pin)"
+  ],
+  "figures_assigned": 0,
+  "gate": {
+    "gate_text": "Does a full read of the primary source yield a definite answer on (a) whether delta_0 can be made explicit/bounded for the screened class, and (b) whether the pressure-decay condition closes on the paper's own hypotheses for that class, in one of three classes: (i) OPERATIONAL, (ii) NON-OPERATIONAL, (iii) underdetermined?",
+    "answer": "YES -- definite, class (ii) NON-OPERATIONAL",
+    "class": "ii",
+    "summary": "Both of leg 330's open conditions are read to a definite, quoted conclusion: delta_0 has an explicit dependency-chain FORMULA, not a bare existence statement, but the chain bottoms out in two classically non-effective ingredients cited by the paper itself (Caffarelli-Kohn-Nirenberg's epsilon-regularity constant and a Harnack-inequality constant from Gilbarg-Trudinger), so it is not computable from the text as given. The pressure-decay condition does NOT close on the paper's own hypotheses for the screened (global DSS/RDSS Type-I) class: the paper's own uniform-in-time pressure-decay estimate, substituted into the local theorem's annulus-boundedness hypothesis via the self-similar change of variables, gives a bound that PROVABLY DIVERGES as t -> 0- for every fixed loss sigma > 0 that the paper's estimate ever attains (sigma = 0 is never reached). This sharpens leg 330's 'left open' to 'the paper's own generic estimate does not guarantee it and actively points at failure', without claiming every conceivable candidate's pressure must diverge (the estimate is an upper bound, not sharp; leg 330's language 'not verified from the paper's own decay estimates' is confirmed rather than contradicted)."
+  },
+  "condition_a_delta0_explicitness": {
+    "question": "Can delta_0 be made explicit or bounded for Type-I/DSSP candidates?",
+    "answer": "NOT numerically explicit, but NOT a bare existence statement either -- an intermediate result: a closed dependency-chain FORMULA is given in the proof, bottoming out in two non-constructive cited results.",
+    "the_formula_quoted": "\"Upon letting $\\delta_0 = K_H^{-1} K_2^{-1} \\cdot \\frac 18 \\theta_*^2$ (a constant that only depends on $C_u$) ...\"",
+    "formula_locator": "Liouvillev2.tex, l.2072-2075 (end of \\S9.2, proof of Theorem 1.9 / thm:local:theorem)",
+    "dependency_chain": [
+      {
+        "symbol": "epsilon_*",
+        "role": "universal Caffarelli-Kohn-Nirenberg epsilon-regularity threshold",
+        "quote": "\"there exists a universal constant $\\eps_*>0$ such that if $\\limsup_{r\\to 0^+} \\frac{1}{r} \\int_{Q_r} |\\nabla u|^2 \\leq \\eps_*$, then $(0,0)$ is a regular point\"",
+        "locator": "l.1994-1995, citing CKN82, Lin98, LadySeregin99, Kukavica09",
+        "explicit_or_not": "NOT given a numeric value in this paper; the classical eps-regularity constant is not computed here"
+      },
+      {
+        "symbol": "theta_*",
+        "role": "universal threshold with 10*theta_*^2 <= epsilon_*, fixed at end of proof of Proposition (one time slice)",
+        "quote": "\"we pick $\\theta_* \\in (0,1]$ to be small enough to ensure $10 \\, \\theta_*^2 \\leq \\eps_*$\"",
+        "locator": "l.2075 region (end of \\S9.2, proof of Prop one:time)",
+        "explicit_or_not": "formula-level (theta_* ~ sqrt(eps_*/10)) but inherits epsilon_*'s non-explicitness"
+      },
+      {
+        "symbol": "K_H = K_H(R_**, C_u)",
+        "role": "Harnack constant for the uniformly elliptic operator L*-lambda_Rbar",
+        "quote": "\"By Harnack's inequality for the uniformly elliptic operator $\\bar L^* - \\lambda_{\\bar R}$ (see e.g.~[Corollary 9.25]{GilbargTrudinger98}), there exists a constant $K_H = K_H(R_{**},C_u )>0$\"",
+        "locator": "l.2063-2065",
+        "explicit_or_not": "cited generically to Gilbarg-Trudinger's general elliptic theory; NO formula or numeric bound is derived or given for K_H in this paper"
+      },
+      {
+        "symbol": "K_2 = K_2(C_u)",
+        "role": "constant multiplying delta_0 in the enstrophy bound (eq:goodie:4), inherits M(eps,C_u) from the Gaussian eigenfunction upper bound (Lemma Gaussian:upper)",
+        "quote": "\"there exist constants $K_1 = K_1(C_u ,C_p)\\geq 1$ and $K_2 = K_2(C_u )\\geq 1$ such that $\\int_{B_{\\bar R}} |\\Omega(\\cdot,\\bar s)|^2 w_{\\bar R} dy \\leq K_1 \\bar R^{-2} + K_2 \\delta_0$\"",
+        "locator": "l.2054-2058",
+        "explicit_or_not": "traceable to a barrier-argument construction (Lemma lambda:conv / Lemma Gaussian:upper), not reduced to a closed-form number"
+      },
+      {
+        "symbol": "R_*, R_**",
+        "role": "radius thresholds in the vorticity-propagation lemma and one-time-slice proposition",
+        "quote": "\"$R_* := \\min \\{R\\geq 2 \\colon K^2 R^{-\\frac 52} + 8 C_{\\mathcal{E}} K^3 R^{-1} \\leq \\tfrac 14 \\theta_*^2 \\}$\"",
+        "locator": "l.1893-1895 (proof of Lemma local:propagation)",
+        "explicit_or_not": "this piece IS a genuinely explicit (computable, inverse-function) definition given theta_*, K, C_E -- the one link in the chain that is not a black box"
+      }
+    ],
+    "conclusion": "delta_0's formula is explicit CONDITIONAL on epsilon_* (CKN) and K_H (Harnack/Gilbarg-Trudinger), neither of which the paper reduces to a number. Both are results whose EXISTENCE is classical but whose effective/explicit versions are a separate (nontrivial, not attempted here) undertaking. Verdict: delta_0 is boundable ONLY as a formula-level dependency chain, not as a computable number, from this paper alone."
+  },
+  "condition_b_pressure_decay_closure": {
+    "question": "Does the strictly-positive pressure-decay loss the paper leaves open actually close for Type-I self-similar/DSS profiles, by some other part of the paper or known auxiliary results, or does it remain open / does it fail?",
+    "answer": "It does NOT close. Substituting the paper's OWN uniform-in-time DSS/RDSS pressure-decay estimate into the local theorem's pressure hypothesis produces a bound that diverges as t -> 0-, for every fixed sigma > 0 the paper's estimate ever attains. This is a computed consequence of the paper's own two displayed estimates, not an inference beyond the text.",
+    "hypothesis_being_tested_quoted": "\"assume there exists a constant $C_p>0$ such that the pressure satisfies the bound $|p(x,t)|\\leq C_p,\\qquad (x,t)\\in A\\times [-1,0)$\"",
+    "hypothesis_locator": "eq:local:pbound, l.396-399",
+    "source_decay_estimate_quoted": "\"any $\\sigma \\in (0,1)$, [there] exists an $\\alpha$-independent constant $C_{P,0} = C_{P,0}(C_{U,0},\\sigma) > 0$ [such that] $|P(y)|\\le \\frac{C_{P,0}}{1+|y|^{2-\\sigma}}$\"",
+    "source_decay_estimate_locator": "eq:decay:pressure, l.447-449 (Lemma gradient), extended UNIFORMLY IN TIME over the whole period for RDSS/DSS profiles at l.1389-1392: \"the pressure $P(\\cdot,s)$ obeys estimate~\\eqref{eq:decay:pressure} for every $s\\in[0,S]$, with the same $(\\alpha,S)$-independent constants ... $C_{P,0}$\"",
+    "higher_derivative_form_also_quoted": "\"$|\\nabla_y^k P(y,s)| \\leq \\frac{C_{P,k}}{(1+|y|)^{\\,2-\\sigma+k}}$ ... where $C_{P,k}$ depends on $C_{U,0}$, $k$, and $\\sigma >0$\"",
+    "higher_derivative_locator": "eq:decay:pressure:k, l.1416-1420 -- this is the exact clause leg 330 cited",
+    "the_computation": {
+      "setup": "p(x,t) = (-t)^{-1} P(y,s), y = x/sqrt(-t), s = -log(-t) [l.1730-1733]. For x fixed in the annulus A = {1/2<|x|<3/4}, |y| ~ |x|/sqrt(-t) -> infinity as t -> 0-, and |y| is comparable to 1/sqrt(-t).",
+      "substitution": "|p(x,t)| = (-t)^{-1}|P(y,s)| <= (-t)^{-1} * C_{P,0}(sigma) / (1+|y|)^{2-sigma} ~ (-t)^{-1} * C_{P,0}(sigma) * (-t)^{(2-sigma)/2} = C_{P,0}(sigma) * (-t)^{-sigma/2}",
+      "result": "|p(x,t)| <~ C_{P,0}(sigma) * (-t)^{-sigma/2} on the fixed annulus A, for a global DSS/RDSS Type-I profile, using ONLY the paper's own uniform-in-time estimate.",
+      "consequence": "This diverges as t -> 0- for EVERY fixed sigma > 0 -- the only value of sigma that would keep the bound finite is sigma = 0 exactly, which the paper's decay lemma (quantified over 'any sigma in (0,1)', a strict open interval) never attains. So the general/generic bound the paper proves for this exact class does NOT establish hypothesis eq:local:pbound; it is consistent with -- and mildly suggestive of -- its failure, without proving failure for every conceivable candidate (the estimate is an upper bound derived from a singular-integral/Riesz-transform representation, not claimed sharp)."
+    },
+    "conclusion": "The pressure-decay condition is a GENUINE, CONFIRMED open gap for the screened class, sharpened from leg 330's 'not verified' to a computed near-failure: the paper's own quantitative machinery, applied to exactly the DSS/RDSS Type-I class the screen targets, produces a divergent (not merely unbounded-but-unknown) estimate at t -> 0-. Closing it would require either (i) an explicit sigma = 0 version of eq:decay:pressure (not proved anywhere in the paper -- the sigma-loss is inherent to the Calderon-Zygmund/Riesz-transform argument cited, 'the bound ... follows [from the] singular integral kernel representation $P = R_i R_j (U^i U^j)$', l.468) or (ii) an independent argument specific to a numerically constructed candidate, which does not exist in this repository or (as far as this leg's read reaches) in the cited literature."
+  },
+  "why_this_is_class_ii_not_iii": "Both sub-questions were read to a definite, quoted, computed conclusion rather than to competing plausible readings -- delta_0's formula and its two non-constructive ingredients are named and located precisely; the pressure-decay divergence is a direct algebraic consequence of two displayed estimates in the paper, not a judgment call. Nothing here is 'could go either way' -- the deciding clauses are quoted and the arithmetic is shown. This is why the verdict lands at (ii) NON-OPERATIONAL rather than (iii) underdetermined.",
+  "recommendation_for_dm": {
+    "note": "This leg does NOT edit solver/dssp_screen.py. Flagged here for B7's ledger owner (the DM).",
+    "recommendation": "Do NOT add a fourth machine-readable ledger entry for the T4-derived screen at this time. Both of leg 330's open conditions were checked against the primary source and remain blocking: delta_0 is formula-bounded but not numerically computable from the paper (Harnack/CKN black boxes), and the pressure-decay hypothesis is now shown to be DIVERGENT under the paper's own general estimate for exactly the DSS/RDSS Type-I class the screen would apply to. A fourth ledger entry built on this screen would either (a) be permanently NOT APPLICABLE (since hypothesis (ii) cannot be machine-verified as satisfied, only as generically failing) or (b) require new mathematics (an explicit sigma=0 pressure estimate and an explicit Harnack/CKN constant) that is out of scope for a read-and-report leg.",
+    "status_of_leg_330s_two_open_conditions": "CONFIRMED, both, and sharpened with quoted/computed detail rather than merely re-stated."
+  },
+  "sources": {
+    "primary": {
+      "title": "On rotated backwards self-similar solutions of the incompressible 3D Navier-Stokes equations",
+      "authors": "Ben Pineau, Vlad Vicol",
+      "arxiv_id": "2607.09619v2",
+      "e_print_url": "https://arxiv.org/e-print/2607.09619v2",
+      "src_url_used_this_leg": "https://arxiv.org/src/2607.09619v2",
+      "tex_file": "Liouvillev2.tex",
+      "sha256_tex": "898a1e1061a52a3edecae1013a3fa8f4a835cb2d21d482a32f3cf650e7599c0b",
+      "sha256_tarball": "8028df65146f445755c9fb32cd9663e4a4a8b2819f6f8ce6c212d5803c71737d",
+      "re_verification": "both hashes re-downloaded independently this leg and matched leg 330's pinned values exactly, byte for byte",
+      "lines_read": 2405,
+      "refusal_to_measure_banked": "first fetch of https://arxiv.org/e-print/2607.09619v2 returned an HTML redirect page, not gzip data (arXiv redirecting e-print to /src/ for this id); worked around by fetching https://arxiv.org/src/2607.09619v2 directly per leg 358's precedent, which returned the correct gzip payload on the first attempt with the expected hash"
+    },
+    "consumed_records": [
+      {"leg": 330, "files": ["experiments/journal/leg_330.md", "writeup/novelty/leg_330.md", "writeup/data/p2_route_pvlx_v1.json"], "read_only": true},
+      {"leg": 357, "files": ["solver/dssp_screen.py"], "read_only": true},
+      {"leg": 326, "files": ["experiments/journal/leg_326.md", "writeup/novelty/leg_326.md"], "read_only": true, "note": "format precedent for novelty log; content not adjudicated by this leg"}
+    ],
+    "leg_359_status": "not landed at time of this leg's read (no experiments/journal/leg_359.md or writeup/novelty/leg_359.md found in the worktree); this leg proceeds without it as the dispatch anticipated"
+  },
+  "magnitudes": {
+    "primary_source_lines_read": 2405,
+    "displayed_estimates_used_in_the_computation": 2,
+    "pins_re_verified": 2,
+    "pins_matched": 2,
+    "new_derivation_this_leg": "1 (the t -> 0- divergence rate (-t)^{-sigma/2} of |p(x,t)| on the fixed annulus, obtained by substituting eq:decay:pressure:k into p(x,t)=(-t)^{-1}P(y,s))",
+    "figures_assigned": 0,
+    "bans_touched_lifted_or_argued": 0,
+    "links_of_L1_L4_chain_moved": 0,
+    "screen_code_edited": false
+  },
+  "what_this_leg_is_not": "A construction, a certificate, or a claim that the screened object does or does not exist. It is a literature adjudication of a derived (not paper-asserted) screen: it reads two of the paper's own displayed estimates, substitutes them into each other, and reports the resulting formula/divergence. It does not touch solver/dssp_screen.py, plan_of_record.py, DIRECTION.md, or any file outside this leg's three-file territory."
+}
