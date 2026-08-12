@@ -1,0 +1,61 @@
+{
+  "object": "Breden-Chu Theorem 42 (arXiv:2404.04054v2), viscous Burgers self-similar profile, n=1500",
+  "source_pin": {
+    "arxiv_id": "2404.04054v2",
+    "pdf_md5": "ff7a34b776bfe5edf97397e5eabdbb7a",
+    "pdftotext_layout_md5": "4e7f064859e924244ad19b5bb0888a67",
+    "pdftotext_line_count": 2060,
+    "matches_leg_256_and_verify_256_pin": true
+  },
+  "published": {
+    "Y": 0.00075636391,
+    "Z1": 0.065135932,
+    "Z2": 343.3917,
+    "Z3": 556.478,
+    "delta_bar": 0.00271646316,
+    "enclosure_radius": 0.001,
+    "n": 1500
+  },
+  "computed": {
+    "P_at_published_enclosure": -6.711561666666749e-06,
+    "delta_min": 0.0009886846932845362,
+    "margin_enclosure_over_delta_min": 1.011444808230896,
+    "delta_bar_mine": 0.0027164631369048634,
+    "delta_bar_rel_err_vs_published": 8.501914114059914e-09,
+    "Q_at_delta_bar_mine": 1.2978333685520482e-14,
+    "delta_bar_over_enclosure": 2.7164631369048635
+  },
+  "reading_a_certificate_closes_and_contains_published_enclosure": true,
+  "released_notebook_stale_multiplier": {
+    "cell": "Burger/proof.ipynb cell 35, github.com/Huggzz/Hermite-Laguerre_proofs @ 7acaac71c84147d745cc959fbd97b548dc12372c",
+    "released_multiplier": 1.17163,
+    "delta_lo_as_released": 0.0009479224608227214,
+    "P_at_delta_lo": 2.454276643088208e-05,
+    "delta_lo_validates_as_released": false,
+    "needed_multiplier": 1.2220120263714247,
+    "shortfall_factor": 1.0430016527158101,
+    "attribution": "not a Theorem-42 defect -- the published constants pass Corollary 21 at face value; the multiplier is stale in the RELEASED ARTIFACT only"
+  },
+  "theorem_42_itself_fails": false,
+  "gate_answer": "confirms",
+  "gate_answer_full": "confirms, with a named non-load-bearing defect: the released verification notebook's delta_lo validation multiplier (1.17163) is stale, short by a factor of 1.0430016527x relative to what the paper's own printed Y,Z1,Z2,Z3 need (1.22201...), mechanism = an unupdated hard-coded constant in Burger/proof.ipynb cell 35 relative to the paper's printed constants. This does not touch Theorem 42, which is carried by its own printed numbers (P(1e-3) = -6.711562e-06 < 0, margin over the smallest root = 1.0114448082x).",
+  "cross_check_against_prior_independent_in_repo_reproductions": {
+    "leg_256_banked": {
+      "margin_1e-3_over_delta_min": 1.0114448082308967,
+      "delta_bar_rel_err": 8.501914e-09,
+      "shortfall_factor": 1.043
+    },
+    "verify_256_rederived": {
+      "margin_1e-3_over_delta_min": 1.0114448082309,
+      "delta_bar_rel_err": 8.501914e-09,
+      "shortfall_factor": 1.0430016527158101
+    },
+    "this_leg_agrees_to_sig_figs": {
+      "margin": 13,
+      "delta_bar_rel_err": 6,
+      "shortfall_factor": 10
+    }
+  },
+  "note_on_scope": "This runner does NOT rebuild the weighted-Sobolev machinery (basis, operator, quadrature, approximate solution) that leg 256 and verify_256 already built independently and cross-confirmed. See writeup/novelty/leg_346.md for the reasoning. This runner is a third, from-scratch, paper-constants-only check of the attribution-rule arithmetic and the stale-multiplier finding, which is the part of the gate answerable without re-deriving the certificate's own bounds from the operator.",
+  "total_seconds": 0.09406638145446777
+}
