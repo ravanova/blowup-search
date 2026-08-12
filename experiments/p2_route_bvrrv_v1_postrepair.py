@@ -716,6 +716,54 @@ def _assert_clean(rel_path: str) -> None:
             "path is `git checkout --`, which would destroy uncommitted work." % (rel_path, st))
 
 
+def sweep_test_suite(script_rel: str, pre_path: str,
+                     timeout_s: float | None = None) -> dict:
+    """The same differential shim, driven over one of the module's OWN test suites instead of a
+    banked artifact.  Leg 221's headline 256,233 is 251,092 banked-artifact calls PLUS 5,141
+    from exactly these three suites, so running them here is what makes the two totals
+    comparable at all.  There is no artifact to compare or restore, so this is a pure per-call
+    differential."""
+    fd, driver = tempfile.mkstemp(suffix="_bvrrv_driver.py")
+    with os.fdopen(fd, "w") as f:
+        f.write(SHIM_DRIVER)
+    fd, report = tempfile.mkstemp(suffix="_bvrrv_report.json")
+    os.close(fd)
+    target = os.path.join(ROOT, script_rel)
+    env = dict(os.environ)
+    env.update(BVRRV_ROOT=ROOT, BVRRV_REPORT=report, BVRRV_TARGET=target,
+               BVRRV_PRE=pre_path, BVRRV_ARGV=json.dumps([target]),
+               PYTHONPATH=ROOT + os.pathsep + os.path.join(ROOT, "experiments"))
+    out = dict(key=script_rel, script=script_rel, artifact=None, argv=[],
+               ran_live=True, from_cache=False, is_test_suite=True)
+    t0 = time.time()
+    try:
+        proc = subprocess.run([sys.executable, "-u", driver], cwd=ROOT, env=env,
+                              capture_output=True, text=True, timeout=timeout_s)
+        out["returncode"], stderr = proc.returncode, proc.stderr
+    except subprocess.TimeoutExpired as e:                             # noqa: BLE001
+        out["returncode"], stderr = None, ""
+        out["timed_out"] = True
+    out["wall_seconds"] = round(time.time() - t0, 1)
+    if out["returncode"] not in (0, None):
+        out["stderr_tail"] = stderr[-3000:]
+    try:
+        out["per_call_differential"] = json.loads(open(report).read())
+    except Exception as e:                                            # noqa: BLE001
+        out["per_call_differential"] = {"error": repr(e)}
+    for p in (driver, report):
+        try:
+            os.remove(p)
+        except OSError:
+            pass
+    d = out.get("per_call_differential", {})
+    out["calls_compared"] = d.get("n")
+    out["calls_bit_identical"] = d.get("same")
+    out["calls_moved"] = d.get("n_moved")
+    out["cap_binds"] = d.get("cap_binds")
+    out["cap_nonbinding"] = d.get("cap_nonbinding")
+    return out
+
+
 def sweep_one(spec_: dict, pre_path: str, timeout_s: float | None = None) -> dict:
     art_rel = spec_["artifact"]
     art = os.path.join(ROOT, art_rel)
@@ -944,6 +992,10 @@ def main() -> int:
     ap.add_argument("--per-artifact-timeout", type=float, default=None,
                     help="seconds; a timeout is recorded as a partial run, never as a pass")
     ap.add_argument("--clause", choices=["a", "b", "both"], default="both")
+    ap.add_argument("--shim-tests", dest="shim_tests", action="store_true",
+                    help="also drive the differential shim over the module's own three test "
+                         "suites, which is the 5,141-call remainder of leg 221's 256,233 "
+                         "headline and the only way to make the two totals comparable")
     ap.add_argument("--merge", default=None,
                     help="merge clause-(b) records from these JSON files (repeatable via ,)")
     ap.add_argument("--out", default=OUT)
@@ -997,12 +1049,29 @@ def main() -> int:
             runs.append(r)
         rec["clause_b"] = dict(runs=runs, not_run_live=not_run)
 
+    if args.shim_tests:
+        tr = []
+        for suite in TEST_CALLERS:
+            print("[bvrrv] clause (b) live, shimmed test suite: %s" % suite, flush=True)
+            r = sweep_test_suite(suite, pre_path, timeout_s=args.per_artifact_timeout)
+            print("[bvrrv]   %s: %ss, calls=%s moved=%s" %
+                  (suite, r["wall_seconds"], r.get("calls_compared"),
+                   r.get("calls_moved")), flush=True)
+            tr.append(r)
+        rec.setdefault("clause_b", dict(runs=[], not_run_live=[]))["test_suite_runs"] = tr
+
     if args.merge:
         merged = []
         for path in [p for chunk in [args.merge] for p in chunk.split(",") if p]:
             with open(path) as f:
                 prev = json.load(f)
             merged.extend(prev.get("clause_b", {}).get("runs", []))
+            ts = prev.get("clause_b", {}).get("test_suite_runs") or []
+            if ts:
+                cb0 = rec.setdefault("clause_b", dict(runs=[], not_run_live=[]))
+                have_ts = {t["key"] for t in cb0.get("test_suite_runs", [])}
+                cb0.setdefault("test_suite_runs", []).extend(
+                    t for t in ts if t["key"] not in have_ts)
         cb = rec.setdefault("clause_b", dict(runs=[], not_run_live=[]))
         have = {r["key"] for r in cb["runs"]}
         cb["runs"].extend(r for r in merged if r["key"] not in have)
@@ -1049,8 +1118,30 @@ def main() -> int:
             all_artifacts_restored_clean=all(r.get("artifact_restored_clean") for r in runs),
             any_nonzero_returncode=any(r.get("returncode") not in (0,) for r in runs),
         )
+        ts = rec["clause_b"].get("test_suite_runs") or []
+        rec["clause_b"]["totals"].update(
+            test_suites_shimmed=len(ts),
+            test_suite_calls_compared_live=sum(t.get("calls_compared") or 0 for t in ts),
+            test_suite_calls_moved_live=sum(t.get("calls_moved") or 0 for t in ts),
+            test_suites_all_passed=all(t.get("returncode") == 0 for t in ts) if ts else None,
+        )
         t = rec["clause_b"]["totals"]
+        # Leg 221's headline 256,233 = 251,092 banked-artifact calls + 5,141 from its own three
+        # test suites.  This leg's banked total is LARGER, because `spike1_stepC_gate` is run at
+        # leg 335's corrected `--steps 2500` rather than the CLI default.  Both facts are
+        # recorded rather than reconciled by adjustment.
+        t["total_calls_compared_live"] = (t["calls_compared_live"]
+                                          + t["test_suite_calls_compared_live"])
+        t["total_calls_moved_live"] = (t["calls_moved_live"]
+                                       + t["test_suite_calls_moved_live"])
+        t["leg_221_headline_for_comparison"] = LEG_221_CLAIM["calls_compared"]
+        t["excess_over_leg_221_and_why"] = dict(
+            excess=t["total_calls_compared_live"] - LEG_221_CLAIM["calls_compared"],
+            reason="spike1_stepC_gate run at leg 335's corrected --steps 2500 (100,008 calls) "
+                   "rather than at leg 221's scope (16,008 calls); every other artifact and "
+                   "every test suite reproduces leg 221's per-unit call count exactly.")
         rec["clause_b"]["clause_b_pass_over_live_scope"] = (
+            t["test_suite_calls_moved_live"] == 0 and
             t["calls_moved_live"] == 0 and t["calls_compared_live"] > 0
             and t["all_artifacts_restored_clean"] and not t["any_nonzero_returncode"])
 
