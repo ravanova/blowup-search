@@ -303,6 +303,65 @@ try:
     ok12 = False
 except ValueError:
     ok12 = True
+#
+# 11b-11e. The GMRES residual early exit. This is a COST control, not a
+# mathematical one: it must stop the Arnoldi build early without changing the
+# answer the build would have produced. In the RPO application one matvec is a
+# full nonlinear integration over the orbit period, so a nominal max_gmres of
+# 200 is only affordable if the build actually stops when the linear model is
+# already solved well enough.
+
+n_rt = 60
+rng_rt = np.random.default_rng(21)
+# A clustered spectrum (identity plus a small perturbation), which is the
+# regime the early exit exists for and the regime a Newton-Krylov solve is
+# usually in. A DENSE RANDOM matrix would be the wrong test: GMRES is known to
+# stagnate on those until the space is essentially full, so no stopping rule
+# could fire and the check would pass or fail for reasons unrelated to the
+# code. Measured directly: on a random matrix with the same size and
+# conditioning the build ran the full 60 iterations either way.
+A_rt = np.eye(n_rt) + 0.15 * rng_rt.standard_normal((n_rt, n_rt)) / np.sqrt(n_rt)
+b_rt = rng_rt.standard_normal(n_rt)
+calls_full = [0]
+calls_rtol = [0]
+
+
+def mv_full(v):
+    calls_full[0] += 1
+    return A_rt @ v
+
+
+def mv_rtol(v):
+    calls_rtol[0] += 1
+    return A_rt @ v
+
+
+Qf2, Hf2, kf2, bf2 = arnoldi(mv_full, b_rt, maxiter=n_rt)
+Qr2, Hr2, kr2, br2 = arnoldi(mv_rtol, b_rt, maxiter=n_rt, rtol=1e-6)
+
+
+def gmres_resid(H, beta):
+    rhs = np.zeros(H.shape[0])
+    rhs[0] = beta
+    y, *_ = np.linalg.lstsq(H, rhs, rcond=None)
+    return float(np.linalg.norm(H @ y - rhs)) / beta
+
+
+check("11b. rtol stops the Arnoldi build strictly early",
+      kr2 < kf2,
+      f"rtol=1e-6 built k={kr2}, unrestricted built k={kf2}")
+check("11c. and it stops only once the GMRES residual is actually below rtol "
+      "(it is a stopping test, not a truncation)",
+      gmres_resid(Hr2, br2) <= 1e-6,
+      f"relative GMRES residual at stop = {gmres_resid(Hr2, br2):.3e}")
+check("11d. the saving is in MATVECS, the currency that matters here",
+      calls_rtol[0] < calls_full[0],
+      f"{calls_rtol[0]} matvecs with rtol vs {calls_full[0]} without")
+check("11e. rtol=None reproduces the unrestricted build exactly (the default "
+      "path the other 28 checks pin down is untouched)",
+      arnoldi(lambda v: A_rt @ v, b_rt, maxiter=n_rt)[2] == kf2,
+      f"k = {kf2} both ways")
+
 check("12. matvec returning the wrong shape raises", ok12)
 
 try:

@@ -422,8 +422,8 @@ def newton_krylov_rpo(w0_guess, T_guess, s_guess, solver,
 
 def newton_hookstep_rpo(w0_guess, T_guess, s_guess, solver,
                         tol=1e-9, max_newton=25, max_gmres=40,
-                        fd_eps=1e-6, delta0=None, delta_max=None,
-                        verbose=False):
+                        gmres_rtol=None, fd_eps=1e-6, delta0=None,
+                        delta_max=None, verbose=False):
     """As newton_krylov_rpo, but the step is globalised by a genuine
     trust-region hookstep (Viswanath 2007) instead of step-halving: the
     correction is constrained INSIDE the Krylov subspace, so shrinking the
@@ -496,7 +496,8 @@ def newton_hookstep_rpo(w0_guess, T_guess, s_guess, solver,
 
         out = newton_hookstep(resid, pack(w0, T, s), jac_matvec=jac_mv,
                               tol=tol, max_newton=1,
-                              max_gmres=max_gmres, fd_eps=fd_eps,
+                              max_gmres=max_gmres, gmres_rtol=gmres_rtol,
+                              fd_eps=fd_eps,
                               delta0=delta, delta_max=delta_max)
         n_jac += out["n_jac_evals"]
         r = float(out["residual_history"][0])
