@@ -105,7 +105,9 @@ def main(figure_only=False):
 
     # -- 1.  PATH A: reproduction of leg 382's exact-power widths, from SAMPLES ----------
     reproduction = []
-    for C, p in ((3.0, 1.0), (1.0, 2.0), (1.0, 2.5), (1.0, 3.0)):
+    # leg 382's OWN planted knowns K1-K4, amplitudes included, so the comparison is against
+    # its banked rows and not against a re-parameterised look-alike.
+    for C, p in ((3.0, 1.0), (1.0, 2.0), (0.25, 2.5), (7.0, 3.0)):
         f_lo, f_hi, true_fn = planted_sampled_power_law(C, p, GRID)
         got = certified_decay_from_samples(GRID, f_lo=f_lo, f_hi=f_hi,
                                            monotone="nonincreasing")
@@ -116,6 +118,9 @@ def main(figure_only=False):
         reproduction.append({
             "id": f"S1/p={p}",
             "profile": f"f = {C} r^-{p}",
+            "leg_382_row": {1.0: "K1", 2.0: "K2", 2.5: "K3", 3.0: "K4"}[p],
+            "leg_382_banked_width": {1.0: 7.438494264988549e-15, 2.0: 1.5987211554602254e-14,
+                                     2.5: 1.9984014443252818e-14, 3.0: 1.554312234475219e-14}[p],
             "truth_exponent": p,
             "hypothesis": got["hypothesis"],
             "hypothesis_detail": got["hypothesis_detail"],

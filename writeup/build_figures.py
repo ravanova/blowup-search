@@ -393,6 +393,7 @@ P2_EVIDENCE = [
     "../experiments/p2_route_dexc_v1_evidence.py",              # fig100 -- Route-DEXC v1 (leg 382); fig100 assigned at dispatch, fig96 being the highest then in use
     "../experiments/p2_route_st2g_v1_evidence.py",              # fig102 -- Route-ST2G v1 (leg 383); fig102 assigned at dispatch (fig100 and fig101 already allocated this cycle to legs 382 and 233)
     "../experiments/p2_route_cloc_v1_evidence.py",              # fig104 -- Route-CLOC v1 (leg 381), evidence script by the DOCS-lane closure of leg 381's missing-figure audit finding; fig104 (NOT fig99, which leg 381's omission freed and which is now leg 386's)
+    ("../experiments/p2_route_scel_v1.py", ["--figure"]),       # fig103 -- Route-SCEL v1 (leg 385); fig103 assigned at dispatch. The runner IS the evidence script under --figure: it redraws fig103 from writeup/data/p2_route_scel_v1.json alone and re-runs no interval arithmetic (leg 385's territory listed one experiments/ file, so the rebuild path lives in it rather than in a separate *_evidence.py)
 ]
 
 
