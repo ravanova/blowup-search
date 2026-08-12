@@ -299,9 +299,11 @@ remain open pending your ruling as previously described.*
      decision sits on. File: `writeup/data/p2_route_dssr_v1.json`. Landed
      `bfef885`.
 
-6. **The reserve's eligible research work is largely exhausted, pending your
-   rulings on items above.** Surfaced by the Decision Maker at cycle 10aa,
-   carried here verbatim in substance:
+6. **UPGRADED at DM cycle 10jj: the reserve's eligible research work,
+   including the decision-support class, is now exhausted. Rule on the
+   seven items above, or authorize §9 wind-down.** Surfaced by the Decision
+   Maker at cycle 10aa, carried here verbatim in substance, and escalated
+   again at cycle 10jj:
    - Seven of the last nine slot refills this run required a FRESH
      floor-eligible leg to be drafted from scratch, rather than pulling one
      from a pre-existing reserve queue — because every standing research
@@ -317,15 +319,37 @@ remain open pending your ruling as previously described.*
      blunt: continuing to draft fresh work indefinitely, rather than
      naming the exhaustion, would eventually mean inventing work to look
      occupied. The DM prefers saying so now.
+   - **Cycle 10jj: even the decision-support class is now exhausted.** At
+     cycle 10jj the DM's first ruling tried to leave two slots formally
+     held open on direction exhaustion — and the merge gate itself failed
+     that ruling (`test_9_composition_floor_is_met` machine-enforces the
+     2-of-4 floor; held-open rows read 0/4). The DM revised the ruling on
+     the record and filled the two slots with what it named "the two
+     least-manufactured eligible fills": leg 373 (HSFM, reading 1308.3356 at
+     full text to sharpen the stop packet's risk #2) and leg 374 (SBIV,
+     building the sourced spectral-basis inventory the POCP spend ruling
+     lacks). Both are genuine decision support for items already open below
+     — neither is new programme direction. **After 373/374 land, there is no
+     further eligible work of any class without a ruling from you.**
+   - **Trigger inventory — what each ruling unfreezes**, as recorded at
+     cycle 10jj: the item-1 (leg 313/320) ruling unfreezes the ban-wording
+     item; the item-2 (C4/escalation-#3) ruling resolves that escalation;
+     the item-5 (route-4 stop) ruling unfreezes B6/B8 plus the costed retry
+     plus the seed option plus item-3's λ-threshold entry; a ruling on the
+     POCP (item 4) spend question funds or declines the mismatch research;
+     and item-1's leg 320 thread separately unfreezes leg 325 (currently
+     held in reserve, blocked on it).
    - **What this means practically:** the four-slot contract can keep
      running on freshly-drafted literature/verification/audit-class legs
-     for a while longer (the reserve still has 8 undispatched legs, 2
-     immediately dispatchable without further drafting), but the
-     PROGRAMME's forward motion — as opposed to its housekeeping — is
-     now substantially gated on the decisions listed above, not on
-     leg-dispatch bandwidth. Ruling on any of items 1-5 above is likely to
-     re-open several fresh research directions at once, not just resolve
-     that one item.
+     for a while longer (the reserve holds 5 undispatched legs — 325 is
+     user-gated per the above, 231-234 are blocked — 0 immediately
+     dispatchable without a ruling), but the PROGRAMME's forward motion —
+     as opposed to its housekeeping — is now entirely gated on the
+     decisions listed above, not on leg-dispatch bandwidth. Ruling on any of
+     items 1-5 above is likely to re-open several fresh research directions
+     at once, not just resolve that one item. Per `ORCHESTRATION.md`'s own
+     terminal clause, the run's contract now genuinely turns on either a
+     ruling from you or an explicit authorization to begin §9 wind-down.
 
 (Older NEEDS-YOU items — leg 297's anchor-JSON fix, leg 280's sign-off, the
 Phase-1 construction-decision packet — have since been resolved/absorbed in
