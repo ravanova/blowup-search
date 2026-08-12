@@ -33,7 +33,7 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 287 | EPA | no |
+| A | 356 | ESPX | no |
 | B | 353 | DSSP-B5 | yes |
 | C | 354 | DSSP-B4 | yes |
 | D | 355 | LCB3 | no |
@@ -18829,10 +18829,121 @@ ledger: B1-B3 ✓, B4/B5 live, B6 user-gated, B9 struck. With the user:
 cycle-10 packet + GA note, POCP (ii) item, C4/escalation-#3, 313 packet +
 ban-wording, 320 packet. Next vacancy: 229 PNRV.
 
+Cycle 10r: A/287 landed YES at b0cf565 — **252's finding does NOT
+generalize**: 9/10 census families reproduce banked bytes EXACTLY at the
+env-isolated primary measurement (zero flag flips across all 10; P3
+refuted), SHA-256 manifest clean across 23 hashed files. The exception is
+WORSE than 252's case: p2_route_e_v1_spectrum (max_rel_move 1.880, 62
+leaves >10%, an index-level sign/ordering swap in an E5 spectral sweep
+near a degeneracy) FAILS ITS OWN WITHIN-ENVIRONMENT DETERMINISM CONTROL —
+a banked family not even stable run-to-run. A THIRD regeneration-failure
+class named and correctly attributed (validity-boundary drift:
+nk_bounds.py tightened later, one adversarial case landing exactly on the
+new boundary; banked IRREPRODUCIBLE-AT-HEAD, not misfiled). The runner's
+own false positive caught pre-banking and generalized to an
+is_provenance() bucket — disclosed, endorsed. **Leg 356 ESPX drafted and
+dispatched into A** (stated reason for outranking 229: a banked family
+failing its own determinism control has unknown claim-bearing consumers
+until enumerated — repair to canonical ordering or quarantine with every
+consumer named, never left silently unstable). Floor 2/4 (353, 354).
+
 **Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
-232, 233, 234).** Immediately dispatchable: **4**. Next fresh leg number:
-**356.**
+232, 233, 234).** Immediately dispatchable: **4** (rank order: 229, 293,
+298, 299). Next fresh leg number: **357.**
 
 Nothing in this update lifts a ban. An evidence script that cannot
 silently mutate a banked artifact is the record's immune system getting a
 missing antibody; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10r) — 287 YES ABSORBED (252 IS THE
+OUTLIER, NOT THE NORM — BUT THE ONE EXCEPTION IS WORSE: A BANKED FAMILY
+FAILING ITS OWN DETERMINISM CONTROL); LEG 356 ESPX DRAFTED AND DISPATCHED
+INTO A; THE THIRD FAILURE CLASS RECORDED
+
+Written from the same detached lineage, resynced to origin/main = b0cf565.
+
+### 287 EPA gate YES, absorbed at full strength
+
+The census answers the question 252 posed: the norm is EXACT byte
+reproduction (9/10 families, max_rel_move 0.0, zero flag flips at the
+primary measurement — P3 refuted; 252's flip does not generalize). Three
+things earn separate mention:
+1. **The exception is a different and worse disease:** p2_route_e_v1_
+   spectrum moves 62 leaves >10% with an index-level sign/ordering swap
+   near an E5 degeneracy AND fails within-environment determinism — this
+   is not portability drift, it is a generator that does not produce the
+   same answer twice anywhere. Ruled below.
+2. **The taxonomy now has THREE named regeneration-failure classes**, each
+   with a witness: environment drift (252), harness argv drift (335), and
+   validity-boundary drift (287's nka_v1_adversarial case — an unrelated
+   later tightening of solver/nk_bounds.py landing one adversarial case
+   exactly on the new boundary; correctly banked IRREPRODUCIBLE-AT-HEAD
+   with that attribution rather than misfiled). 287 checked the new case
+   against both prior classes before declaring a third — exactly right.
+3. **The runner's own false positive** (a provenance-recording cache-hit
+   boolean misclassified as NON-PORTABLE) was caught pre-banking,
+   generalized to an is_provenance() bucket, and disclosed. Endorsed.
+
+No action on the nka_v1_adversarial case beyond 287's banking: the
+attribution is complete, and whether to re-bank at the new boundary is its
+owner's question if a consumer ever needs it — recorded, not queued.
+
+### Leg 356 ESPX — drafted and dispatched into A
+
+```
+### 356 — ROUTE-ESPX: THE p2_route_e_v1_spectrum FAMILY — REPAIR TO
+DETERMINISM OR QUARANTINE WITH CONSUMERS NAMED (287's exception, run to
+ground)
+[FLOOR-ELIGIBLE: no — repair/verification]
+**Thesis.** 287 measured the family failing its own within-environment
+determinism control (max_rel_move 1.880; 62 leaves >10%; mechanism
+localized to an index-level sign/ordering swap in the E5 spectral sweep
+near a degeneracy — eigenpair ordering instability is the obvious
+candidate, to be MEASURED not assumed). A banked family that cannot
+reproduce itself has unknown claim-bearing reach until its consumers are
+enumerated.
+**Gate.** Does the leg (a) name the instability's mechanism with the
+deciding evidence (which degeneracy, which ordering rule, why it swaps);
+(b) enumerate EVERY consumer of the banked family (grep the repo, list
+each with what it consumes); and (c) EITHER repair the generator to a
+canonical deterministic ordering (sorted eigenpairs with a stated
+tie-break) and show every consumer's banked verdict unmoved (diff-checked)
+OR, if repair cannot leave verdicts unmoved, QUARANTINE: mark the family
+UNSTABLE with an inline marker, flag every consumer in CORRECTIONS, and
+report what re-banking would take?
+  yes (either branch) -> Bank; 287's exception closes with a named
+        disposition.
+  no  -> The mechanism resists diagnosis after a full sweep: record the
+        sweep; the family carries an UNRESOLVED-DETERMINISM marker; every
+        consumer flagged regardless — never left silently unstable.
+**Territory.** The family's generator script + its banked JSON (marker
+only unless the repair branch lands), writeup/CORRECTIONS.md (append),
+writeup/novelty/leg_356.md, experiments/journal/leg_356.md. Reads 287's
+census JSON; edits it never. Any diff on OTHER banked files fails the
+gate.
+**Difficulty.** standard
+**Preconditions:** None. Stated reason for outranking 229 PNRV: unknown
+claim-bearing consumers of an unstable family are a live record hazard;
+229 verifies a repair whose scope is already known.
+```
+
+**Floor 2/4 (353, 354) — §3b's minimum.** FLOOR-TABLE synced (A 287→356).
+
+### Standing state
+
+B/353 DSSP-B5; C/354 DSSP-B4 (critical path); D/355 LCB3. Brick ledger:
+B1-B3 ✓, B4/B5 live, B6 user-gated, B9 struck. With the user: cycle-10
+packet + GA note, POCP (ii) item, C4/escalation-#3, 313 packet +
+ban-wording, 320 packet. Next vacancy: 229 PNRV.
+
+**Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
+232, 233, 234).** Immediately dispatchable: **4**. Next fresh leg number:
+**357.**
+
+Nothing in this update lifts a ban. A census that finds the norm is exact
+reproduction STRENGTHENS the record's footing; the one unstable family is
+being run to ground rather than averaged away. No L1-L4 link moved; Clay
+stays ~0.05%.
