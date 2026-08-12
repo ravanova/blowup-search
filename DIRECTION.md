@@ -34,8 +34,8 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 361 | LCB4 | no |
-| B | 360 | PVDS | yes |
-| C | 359 | L3BD | yes |
+| B | 362 | B7X | yes |
+| C | 363 | CKNQ | yes |
 | D | 355 | LCB3 | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -17838,8 +17838,12 @@ one principled leg reports, never pads (350's recommendation, adopted).
 Floor 2/4 (348, 351).
 
 **LCB2-family accumulator — THRESHOLD REACHED AGAIN at items (5)+(6),
-batch leg 361 LCB4 DRAFTED AND DISPATCHED (cycle 10w); accumulator resets,
-item (7) opens on the next flag.** Items: (5) experiments/
+batch leg 361 LCB4 DRAFTED AND DISPATCHED (cycle 10w); accumulator resets.
+Item (7) OPEN (cycle 10x): marker at leg 341's S2 site — the "dissolves"
+GROUNDS were incomplete (Theorem 2 does reach that decay rate); the
+conclusion stands on the ANSATZ clause instead (source-verified by 359's
+adjudication, deciding clauses quoted). Grounds-vs-width, the closure-#6
+family. Batch drafts at 2-3 items.** Items: (5) experiments/
 p2_route_epa_v1_census.py VOLATILE_TOKENS one-token gap (lists
 "generated_at" but not bare "generated" — a timestamp field misread as
 content nondeterminism; source-verified by 356's 1235-leaf/0-flag-flip
@@ -18939,9 +18943,27 @@ into A** (claim-bearing marker on a landed headline + an active instrument
 bug in a reusable census script). Floor 2/4 (360, 359) — B+C carry it, so
 A legally takes the batch leg. Next fresh: 362.
 
+Cycle 10x: B/360 landed NON-OPERATIONAL at e30297f (δ₀ boundable as a
+formula, not computable — CKN's ε_* and a Harnack constant cited without
+values; the pressure-decay condition COMPUTES as a near-failure on the
+paper's own estimates, sharpening 330's "not verified"; the
+no-fourth-ledger-entry recommendation ENDORSED). C/359 landed YES at
+a048de7 — the three-part boundary answer: Theorem 1 does NOT reach the
+log-divergent boundary; **Theorem 2 DECISIVELY DOES** (needs only U→0 —
+the repo's measured -0.9971 decay is Tsai's own eq. 1.5 corollary forcing
+U≡0); the actual DSS object stays unreached BUT on the ANSATZ clause, not
+decay — 341's S2 grounds sharpened (accumulator item (7)); **the route-4
+stop packet is COMPLETE and released to assembly.** 359's ledger-gap flag
+ruled a claim-bearing screen defect: **leg 362 B7X drafted and dispatched
+into B** (extend ledger_nrs_tsai() with Theorem 2's route + the ansatz
+check, planted SS/DSS controls both ways, existing verdicts unmoved).
+**Leg 363 CKNQ drafted and dispatched into C** (does the quantitative-
+regularity literature supply explicit CKN ε_*/Harnack values — testing
+360's non-operational verdict's own contingency). Floor 2/4 (362, 363).
+
 **Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
 232, 233, 234).** Immediately dispatchable: **4** (rank order: 229, 293,
-298, 299). Next fresh leg number: **362.**
+298, 299). Next fresh leg number: **364.**
 
 Nothing in this update lifts a ban. An evidence script that cannot
 silently mutate a banked artifact is the record's immune system getting a
@@ -19521,3 +19543,142 @@ packet. Next vacancy: 229 PNRV.
 Nothing in this update lifts a ban. A repair that shows nothing numerical
 ever moved, and a false alarm downgraded on measurement, both STRENGTHEN
 the record's footing; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10x) — 360 NON-OPERATIONAL AND 359's
+THREE-PART YES ABSORBED; THE STOP PACKET COMPLETE; THE SCREEN's LEDGER GAP
+RULED A DEFECT AND DISPATCHED (LEG 362 B7X); THE CONSTANTS QUESTION
+DISPATCHED (LEG 363 CKNQ); 341's S2 GROUNDS TO THE ACCUMULATOR
+
+Written from the same detached lineage, resynced to origin/main = a048de7.
+
+### 360 PVDS — NON-OPERATIONAL, absorbed at full strength
+
+Both open conditions checked against the previously-unread §9 proof with
+deciding clauses quoted: δ₀ = K_H⁻¹K_2⁻¹·θ_*²/8 exists as a FORMULA but
+bottoms out in CKN's ε_* and a generically-cited Harnack constant —
+boundable, not computable; and the pressure-decay hypothesis COMPUTES as a
+near-failure under the paper's own uniform-in-time estimate (divergent as
+t→0⁻ for every attainable σ), sharpening 330's "not verified" into a
+measured obstruction. The recommendation NOT to add a permanently-
+NOT-APPLICABLE fourth ledger entry is ENDORSED — a ledger row that can
+never fire is clutter pretending to be caution. The refusal-to-measure
+workaround (358's src/ URL route, sha256 matching 330's pin) noted
+approvingly. Endorsed without amendment.
+
+### 359 L3BD — YES, absorbed at full strength; the stop packet completes
+
+The three-part answer is definite in every part and it CORRECTS THE MAP:
+1. Theorem 1 (U ∈ L^q, q ∈ (3,∞]) does not reach the boundary — strict
+   membership, no near-miss allowance.
+2. **Theorem 2 reaches it decisively** — its finishing step needs only
+   U → 0 at infinity, and Tsai's own motivating example (eq. 1.5,
+   U ~ A(y/|y|)/|y|) is this repository's measured decay (-0.9971 vs the
+   exact -1), stated by Tsai as a corollary forcing U ≡ 0.
+3. The repo's DSS object remains unreached — but by the EXACT-SELF-SIMILAR
+   ANSATZ clause ("u is of the form (1.2)"), not by any decay/integrability
+   clause. 341's S2 conclusion STANDS; its decay-based grounds were
+   incomplete — accumulator item (7), grounds-vs-width, the closure-#6
+   family (marker at 341's site when the batch fires; conclusion untouched).
+The independent re-verification discipline (Tsai 1998 re-downloaded and
+sha256-cross-checked against the parked 253 branch; NRS 1996's paywall gap
+disclosed rather than papered over) is endorsed. **The route-4 stop packet
+is COMPLETE** — 358's costed retry + 359's boundary adjudication, with
+part 3 carried at its corrected grounds: the object is protected by
+ansatz mismatch, which a DSS-at-λ≫1 search RELIES ON and a certification
+step must one day confront. Orchestrator: assemble and post, per the
+standing instruction; flag me when it is on the NEEDS-YOU surface.
+
+### Ruling — 357's ledger gap is a claim-bearing screen defect: leg 362
+
+ledger_nrs_tsai() tests only L³ convergence. Per 359's adjudication that
+is not conservative — it is WRONG in one direction: a genuinely-SS
+candidate at this repo's own decay rate would read excluded-by-neither
+when Theorem 2 excludes it. A screen whose EXCLUDED verdict under-fires
+misreports candidates. Dispatched now, ahead of the audits, reason stated:
+the screen is landed apparatus that any future candidate report reads.
+
+```
+### 362 — ROUTE-B7X: EXTEND THE SCREEN's NRS/TSAI LEDGER ENTRY WITH
+THEOREM 2's ROUTE AND THE ANSATZ CHECK (359's flag, implemented per its
+quoted clauses)
+[FLOOR-ELIGIBLE: construction]
+**Thesis.** Implement 359's adjudication into solver/dssp_screen.py's
+machine-read ledger: Theorem 2's route (decay-at-infinity test, U → 0,
+per the quoted finishing step) and an SS/DSS ansatz classifier (exact-SS
+vs DSS-at-λ>1), so the ledger's verdict distinguishes EXCLUDED-BY-T1 /
+EXCLUDED-BY-T2 / NOT-REACHED-BY-ANSATZ. 359's record is the source of
+truth; its quoted clauses are cited in code comments, never paraphrased.
+**Gate.** Planted controls both ways: a synthetic exact-SS profile at
+decay -1 reads EXCLUDED via Theorem 2 (would have read excluded-by-neither
+before — the gap demonstrated, then closed); the repo's DSS object reads
+NOT-REACHED-BY-ANSATZ with the deciding clause cited; every EXISTING
+banked verdict from 357's landed run reproduces unmoved (diff-checked) —
+all three, or the extension does not land?
+  yes -> Bank; the screen's semantics match the adjudicated mathematics.
+  no  -> Name which control fails; the screen keeps its old conservative
+        reading WITH an inline known-gap marker citing 359 — never a
+        silent half-extension.
+**Territory.** solver/dssp_screen.py + test_dssp_screen.py (additive),
+solver/capabilities.py + test_capabilities.py (additive registration),
+writeup/data/p2_route_b7x_v1.json, writeup/novelty/leg_362.md,
+experiments/journal/leg_362.md. Reads 359/357's banked records; edits
+neither. No figure.
+**Difficulty.** standard
+**Preconditions:** Legs 359 and 357 landed (TRUE). Route 4's stop is
+untouched: the screen is landed apparatus, not new 3-D cost.
+```
+
+### Leg 363 CKNQ — the constants question, dispatched with it
+
+```
+### 363 — ROUTE-CKNQ: DOES THE QUANTITATIVE-REGULARITY LITERATURE SUPPLY
+EXPLICIT VALUES FOR CKN's ε_* AND THE HARNACK CONSTANT? (360's
+non-operational verdict, tested at its own stated contingency)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** 360 found δ₀ boundable as a formula whose only blockers are
+two classically non-constructive cited constants. A quantitative
+partial-regularity literature exists (explicit-constant CKN proofs,
+Vasseur-type arguments, quantitative Harnack for parabolic equations).
+Ask directly: does any published source supply explicit (or explicitly
+boundable) values reaching Pineau-Vicol's usage, making δ₀ computable
+after all — or is non-constructiveness essential at the cited steps?
+**Gate.** A sourced per-constant verdict — EXPLICIT-VALUE-EXISTS (source
+and value quoted, with the reach to PV's usage checked clause-by-clause)
+or NO-EXPLICIT-VALUE-LOCATED (the search recorded, links not counts) —
+for both constants, plus the consequence stated: δ₀ computable /
+boundable-only / blocked, with 360's verdict updated-or-confirmed by
+pointer?
+  yes (either verdict per constant) -> Bank; 360's record gains the
+        adjudicated contingency; the pressure-decay condition stays an
+        INDEPENDENT blocker either way and is restated as such.
+  no  -> The literature underdetermines after a full pass: recorded as
+        exactly that.
+**Territory.** writeup/data/p2_route_cknq_v1.json, writeup/novelty/
+leg_363.md, experiments/journal/leg_363.md. Reads 360's banked record;
+edits nothing. No figure.
+**Difficulty.** standard
+**Preconditions:** Leg 360 landed (TRUE, e30297f).
+```
+
+**Floor 2/4 (362, 363) — §3b's minimum.** FLOOR-TABLE synced (B 360→362,
+C 359→363); accumulator holds item (7).
+
+### Standing state
+
+A/361 LCB4; D/355 LCB3. Route 4: stopped, B6/B8 frozen; **the stop packet
+complete and with the orchestrator for assembly.** With the user: the stop
+packet (posting), cycle-10 packet + GA note, POCP (ii) item,
+C4/escalation-#3, 313 packet + ban-wording, 320 packet. Next vacancy: 229
+PNRV.
+
+**Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
+232, 233, 234).** Immediately dispatchable: **4**. Next fresh leg number:
+**364.**
+
+Nothing in this update lifts a ban. A screen corrected to under-fire less
+is honesty toward candidates that do not yet exist; a constants question
+tests a verdict's own stated contingency; the stop stands pending the
+user. No L1-L4 link moved; Clay stays ~0.05%.
