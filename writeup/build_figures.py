@@ -390,6 +390,7 @@ P2_EVIDENCE = [
     "../experiments/p2_route_dwm_v1_evidence.py",               # fig82 -- Route-DWM v1 (leg 305)
     "../experiments/p2_route_m2p_v1_promotion_evidence.py",     # fig61 -- Route-M2P v1 (leg 125), evidence script by leg 372, item 13
     "../experiments/p2_route_sdss_v1_evidence.py",              # fig76 -- Route-SDSS v1 (leg 313), landed late under the cycle-11a caveat
+    "../experiments/p2_route_dexc_v1_evidence.py",              # fig100 -- Route-DEXC v1 (leg 382); fig100 assigned at dispatch, fig96 being the highest then in use
 ]
 
 

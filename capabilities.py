@@ -911,6 +911,42 @@ CAPABILITIES = [
                    "genuine at-resolution numerical test, not an "
                    "exhaustive one"),
      "test": "test_dssp_screen.py"},
+    {"module": "solver/dssp_decay_enclosure.py",
+     "object": ("CERTIFIED far-field decay exponent enclosure (leg 382, Route-DEXC) -- "
+                "the instrument CLAY_OBLIGATIONS.md §4 asks for and §6 item 1 records "
+                "as missing; does NOT replace dssp_screen's fitted column, which is "
+                "left in place and recorded alongside"),
+     "holds": ("an OUTER enclosure of P_cert = { p >= 0 : exists C > 0 with "
+               "C r^-p = f(r) for ALL r in [R0,R1] }, computed by exact "
+               "Fourier-Motzkin elimination of the amplitude from an interval-enclosed "
+               "log-log tube, on solver/interval.py's Interval/ilog substrate (the one "
+               "new primitive is isqrt, used only by the planted-profile generator). "
+               "Three verdicts: INTERVAL, EMPTY (a PROOF that no exponent in the search "
+               "bracket fits), INCAPACITY (bracket-limited, or profile enclosure touching "
+               "zero). Two modes: 'cells' (whole-cell interval evaluation, statement "
+               "covers the entire window) and 'nodes' (STRICTLY WEAKER, node-consistency "
+               "only, reference use). Optional rel_tolerance delta relaxes to "
+               "consistency within a stated relative accuracy the CALLER owes"),
+     "validated": ("test_dssp_decay_enclosure.py, 12/12. Exact power laws p0 = 0.5, 1, "
+                   "2, 2.5, 3 enclosed at N = 17/50/200/1000 in both modes; at the "
+                   "leg-382 window [10,1000] and N=1000 the certified widths are "
+                   "7.44e-15 (p0=1), 1.60e-14 (2), 2.00e-14 (2.5), 1.55e-14 (3), all "
+                   "containing the exact truth, none reaching the [0,12] bracket. "
+                   "Planted mismatches certified EMPTY with contradiction gaps: "
+                   "two-power r^-2+0.01r^-1 (crossover INSIDE the window) 0.8174, "
+                   "rational cutoff r^-2/(1+(r/300)^4) 3.9670, log correction 0.2448, "
+                   "curvature kappa=1e-4 8.79e-4. MEASURED LIMIT, not hidden: at "
+                   "delta=0 the set is EMPTY for ANY perturbation down to eps=1e-12 "
+                   "(correct -- a perturbed power law has no exact exponent -- but it "
+                   "means the zero-tolerance instrument cannot be applied to numerical "
+                   "data). Under tolerance the width obeys ~= 0.8686*delta and the "
+                   "critical tolerances separating mismatch from known are delta* = "
+                   "0.3157 (two-power), 3.353 (cutoff), 0.0697 (log), 0 (exact). "
+                   "p0=13 under bracket [0,12] returns INCAPACITY, not EMPTY. CEILING: "
+                   "validated on PLANTED ANALYTIC KNOWNS ONLY -- no profile of route 4's "
+                   "object exists, and the admissible-cutoff half of §4 is untouched, so "
+                   "CLAY_OBLIGATIONS §6 item 1 does NOT close"),
+     "test": "test_dssp_decay_enclosure.py"},
 ]
 
 

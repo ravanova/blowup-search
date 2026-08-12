@@ -1,0 +1,650 @@
+{
+  "leg": 382,
+  "route": "DEXC",
+  "version": "v1",
+  "preregistration_commit": "ddb60a4",
+  "novelty_commit": "dfe6aa9",
+  "window": {
+    "R0": 10.0,
+    "R1": 1000.0,
+    "leverage_W_log_ratio": 4.605170185988092,
+    "provenance": "the span of dssp_screen's own fitted ladder np.logspace(1.0, 3.0, 12); NOT moved during this leg"
+  },
+  "gate_cell_count": 1000,
+  "p_bracket": [
+    0.0,
+    12.0
+  ],
+  "ceiling": "TIER 2",
+  "clay_odds": "~0.05%, unmoved; no L1->L4 link moved by this leg",
+  "obligations_still_open": [
+    "CLAY_OBLIGATIONS.md \u00a76 item 1 \u2014 the ADMISSIBLE CUTOFF half is untouched; this leg supplies only the certified exponent, one of the three things \u00a74 asks for",
+    "CLAY_OBLIGATIONS.md \u00a76 item 2 \u2014 \u00a75 persistence/stability under localisation, untouched"
+  ],
+  "planted_knowns": [
+    {
+      "id": "K1",
+      "profile": "f = 3.0 r^-1",
+      "truth_exponent": 1.0,
+      "certified_cells": {
+        "verdict": "INTERVAL",
+        "p_lo": 0.9999999999999963,
+        "p_hi": 1.0000000000000038,
+        "width": 7.438494264988549e-15,
+        "max_log_tube_width": 0.0046051701860099215,
+        "n_cells": 1000,
+        "n_constraints": 2000,
+        "n_pairs": 4000000,
+        "n_dropped": 0,
+        "mode": "cells",
+        "rel_tolerance": 0.0,
+        "reason": "",
+        "contains_truth": true,
+        "truth": 1.0
+      },
+      "certified_nodes_reference_only": {
+        "verdict": "INTERVAL",
+        "p_lo": 0.9999999999999963,
+        "p_hi": 1.0000000000000038,
+        "width": 7.438494264988549e-15,
+        "max_log_tube_width": 2.220446049250313e-14,
+        "n_cells": 1001,
+        "n_constraints": 2002,
+        "n_pairs": 4008004,
+        "n_dropped": 0,
+        "mode": "nodes",
+        "rel_tolerance": 0.0,
+        "reason": "",
+        "contains_truth": true,
+        "truth": 1.0
+      },
+      "fitted": {
+        "fitted_slope": -1.0000000000000007,
+        "fitted_p": 1.0000000000000007,
+        "fitted_log_intercept": 1.0986122886681102,
+        "n_fit_points": 12,
+        "fit_ray": [
+          0.4,
+          0.5,
+          0.7681145747868608
+        ]
+      },
+      "fitted_minus_truth": 6.661338147750939e-16
+    },
+    {
+      "id": "K2",
+      "profile": "f = 1.0 r^-2",
+      "truth_exponent": 2.0,
+      "certified_cells": {
+        "verdict": "INTERVAL",
+        "p_lo": 1.999999999999992,
+        "p_hi": 2.000000000000008,
+        "width": 1.5987211554602254e-14,
+        "max_log_tube_width": 0.009210340372005632,
+        "n_cells": 1000,
+        "n_constraints": 2000,
+        "n_pairs": 4000000,
+        "n_dropped": 0,
+        "mode": "cells",
+        "rel_tolerance": 0.0,
+        "reason": "",
+        "contains_truth": true,
+        "truth": 2.0
+      },
+      "certified_nodes_reference_only": {
+        "verdict": "INTERVAL",
+        "p_lo": 1.999999999999992,
+        "p_hi": 2.000000000000008,
+        "width": 1.5987211554602254e-14,
+        "max_log_tube_width": 2.842170943040401e-14,
+        "n_cells": 1001,
+        "n_constraints": 2002,
+        "n_pairs": 4008004,
+        "n_dropped": 0,
+        "mode": "nodes",
+        "rel_tolerance": 0.0,
+        "reason": "",
+        "contains_truth": true,
+        "truth": 2.0
+      },
+      "fitted": {
+        "fitted_slope": -2.0000000000000004,
+        "fitted_p": 2.0000000000000004,
+        "fitted_log_intercept": -2.773371794146676e-15,
+        "n_fit_points": 12,
+        "fit_ray": [
+          0.4,
+          0.5,
+          0.7681145747868608
+        ]
+      },
+      "fitted_minus_truth": 4.440892098500626e-16
+    },
+    {
+      "id": "K3",
+      "profile": "f = 0.25 r^-5/2",
+      "truth_exponent": 2.5,
+      "certified_cells": {
+        "verdict": "INTERVAL",
+        "p_lo": 2.49999999999999,
+        "p_hi": 2.5000000000000098,
+        "width": 1.9984014443252818e-14,
+        "max_log_tube_width": 0.01151292546500926,
+        "n_cells": 1000,
+        "n_constraints": 2000,
+        "n_pairs": 4000000,
+        "n_dropped": 0,
+        "mode": "cells",
+        "rel_tolerance": 0.0,
+        "reason": "",
+        "contains_truth": true,
+        "truth": 2.5
+      },
+      "certified_nodes_reference_only": {
+        "verdict": "INTERVAL",
+        "p_lo": 2.49999999999999,
+        "p_hi": 2.5000000000000098,
+        "width": 1.9984014443252818e-14,
+        "max_log_tube_width": 3.907985046680551e-14,
+        "n_cells": 1001,
+        "n_constraints": 2002,
+        "n_pairs": 4008004,
+        "n_dropped": 0,
+        "mode": "nodes",
+        "rel_tolerance": 0.0,
+        "reason": "",
+        "contains_truth": true,
+        "truth": 2.5
+      },
+      "fitted": {
+        "fitted_slope": -2.5,
+        "fitted_p": 2.5,
+        "fitted_log_intercept": -1.3862943611198901,
+        "n_fit_points": 12,
+        "fit_ray": [
+          0.4,
+          0.5,
+          0.7681145747868608
+        ]
+      },
+      "fitted_minus_truth": 0.0
+    },
+    {
+      "id": "K4",
+      "profile": "f = 7.0 r^-3",
+      "truth_exponent": 3.0,
+      "certified_cells": {
+        "verdict": "INTERVAL",
+        "p_lo": 2.9999999999999916,
+        "p_hi": 3.000000000000007,
+        "width": 1.554312234475219e-14,
+        "max_log_tube_width": 0.013815510558004007,
+        "n_cells": 1000,
+        "n_constraints": 2000,
+        "n_pairs": 4000000,
+        "n_dropped": 0,
+        "mode": "cells",
+        "rel_tolerance": 0.0,
+        "reason": "",
+        "contains_truth": true,
+        "truth": 3.0
+      },
+      "certified_nodes_reference_only": {
+        "verdict": "INTERVAL",
+        "p_lo": 2.999999999999992,
+        "p_hi": 3.000000000000007,
+        "width": 1.509903313490213e-14,
+        "max_log_tube_width": 3.907985046680551e-14,
+        "n_cells": 1001,
+        "n_constraints": 2002,
+        "n_pairs": 4008004,
+        "n_dropped": 0,
+        "mode": "nodes",
+        "rel_tolerance": 0.0,
+        "reason": "",
+        "contains_truth": true,
+        "truth": 3.0
+      },
+      "fitted": {
+        "fitted_slope": -3.0000000000000013,
+        "fitted_p": 3.0000000000000013,
+        "fitted_log_intercept": 1.9459101490553123,
+        "n_fit_points": 12,
+        "fit_ray": [
+          0.4,
+          0.5,
+          0.7681145747868608
+        ]
+      },
+      "fitted_minus_truth": 1.3322676295501878e-15
+    }
+  ],
+  "gate_controls": [
+    {
+      "id": "C1",
+      "profile": "f = r^-2 + 0.01 r^-1 (two-power, crossover r*=100 INSIDE the window)",
+      "claimed_exponent": 2.0,
+      "gate_deciding": true,
+      "certified_cells": {
+        "verdict": "EMPTY",
+        "p_lo": 1.9085183446473455,
+        "p_hi": 1.0910996263767394,
+        "width": -0.8174187182706061,
+        "max_log_tube_width": 0.008790811088672967,
+        "n_cells": 1000,
+        "n_constraints": 2000,
+        "n_pairs": 4000000,
+        "n_dropped": 0,
+        "mode": "cells",
+        "rel_tolerance": 0.0,
+        "reason": "no exponent in the search bracket is consistent with the profile on this window: the Fourier-Motzkin projection is empty (p_lo 1.9085183446473455 > p_hi 1.0910996263767394)",
+        "contains_truth": false,
+        "truth": 2.0
+      },
+      "certified_nodes_reference_only": {
+        "verdict": "EMPTY",
+        "p_lo": 1.9089003736203767,
+        "p_hi": 1.0910996263767394,
+        "width": -0.8178007472436373,
+        "max_log_tube_width": 2.842170943040401e-14,
+        "n_cells": 1001,
+        "n_constraints": 2002,
+        "n_pairs": 4008004,
+        "n_dropped": 0,
+        "mode": "nodes",
+        "rel_tolerance": 0.0,
+        "reason": "no exponent in the search bracket is consistent with the profile on this window: the Fourier-Motzkin projection is empty (p_lo 1.9089003736203767 > p_hi 1.0910996263767394)",
+        "contains_truth": false,
+        "truth": 2.0
+      },
+      "fitted": {
+        "fitted_slope": -1.5000000000000009,
+        "fitted_p": 1.5000000000000009,
+        "fitted_log_intercept": -1.3800760740907798,
+        "n_fit_points": 12,
+        "fit_ray": [
+          0.4,
+          0.5,
+          0.7681145747868608
+        ]
+      },
+      "fired": true,
+      "contradiction_gap_p_lo_minus_p_hi": 0.8174187182706061
+    },
+    {
+      "id": "C2",
+      "profile": "f = r^-2 / (1 + (r/300)^4) (rational far cutoff)",
+      "claimed_exponent": 2.0,
+      "gate_deciding": true,
+      "certified_cells": {
+        "verdict": "EMPTY",
+        "p_lo": 5.966966877174562,
+        "p_hi": 2.0000049840383727,
+        "width": -3.966961893136189,
+        "max_log_tube_width": 0.027481652008980006,
+        "n_cells": 1000,
+        "n_constraints": 2000,
+        "n_pairs": 4000000,
+        "n_dropped": 0,
+        "mode": "cells",
+        "rel_tolerance": 0.0,
+        "reason": "no exponent in the search bracket is consistent with the profile on this window: the Fourier-Motzkin projection is empty (p_lo 5.9669668771745616 > p_hi 2.0000049840383727)",
+        "contains_truth": false,
+        "truth": 2.0
+      },
+      "certified_nodes_reference_only": {
+        "verdict": "EMPTY",
+        "p_lo": 5.967564910517398,
+        "p_hi": 2.0000049840383727,
+        "width": -3.967559926479025,
+        "max_log_tube_width": 4.263256414560601e-14,
+        "n_cells": 1001,
+        "n_constraints": 2002,
+        "n_pairs": 4008004,
+        "n_dropped": 0,
+        "mode": "nodes",
+        "rel_tolerance": 0.0,
+        "reason": "no exponent in the search bracket is consistent with the profile on this window: the Fourier-Motzkin projection is empty (p_lo 5.9675649105173978 > p_hi 2.0000049840383727)",
+        "contains_truth": false,
+        "truth": 2.0
+      },
+      "fitted": {
+        "fitted_slope": -2.8088916652973106,
+        "fitted_p": 2.8088916652973106,
+        "fitted_log_intercept": 2.8540213902897125,
+        "n_fit_points": 12,
+        "fit_ray": [
+          0.4,
+          0.5,
+          0.7681145747868608
+        ]
+      },
+      "fired": true,
+      "contradiction_gap_p_lo_minus_p_hi": 3.966961893136189
+    }
+  ],
+  "all_gate_controls_fired": true,
+  "resolving_power_probes": {
+    "probes": [
+      {
+        "id": "C3",
+        "profile": "f = r^-2 log r",
+        "claimed_exponent": 2.0,
+        "gate_deciding": false,
+        "certified_cells": {
+          "verdict": "EMPTY",
+          "p_lo": 1.8474242735239161,
+          "p_hi": 1.6026072676864302,
+          "width": -0.2448170058374859,
+          "max_log_tube_width": 0.011208343034666335,
+          "n_cells": 1000,
+          "n_constraints": 2000,
+          "n_pairs": 4000000,
+          "n_dropped": 0,
+          "mode": "cells",
+          "rel_tolerance": 0.0,
+          "reason": "no exponent in the search bracket is consistent with the profile on this window: the Fourier-Motzkin projection is empty (p_lo 1.8474242735239161 > p_hi 1.6026072676864302)",
+          "contains_truth": false,
+          "truth": 2.0
+        },
+        "fitted": {
+          "fitted_slope": -1.7682521533478661,
+          "fitted_p": 1.7682521533478661,
+          "fitted_log_intercept": 0.40565448963423456,
+          "n_fit_points": 12,
+          "fit_ray": [
+            0.4,
+            0.5,
+            0.7681145747868608
+          ]
+        },
+        "fired": true,
+        "contradiction_gap_p_lo_minus_p_hi": 0.2448170058374859
+      }
+    ],
+    "curvature_ladder": [
+      {
+        "kappa": 0.0,
+        "verdict": "INTERVAL",
+        "p_lo": 1.999999999999992,
+        "p_hi": 2.0000000000000084,
+        "signed_width": 1.6431300764452317e-14
+      },
+      {
+        "kappa": 1e-06,
+        "verdict": "EMPTY",
+        "p_lo": 2.0000045913212166,
+        "p_hi": 1.9999957975469114,
+        "signed_width": -8.793774305182467e-06
+      },
+      {
+        "kappa": 1e-05,
+        "verdict": "EMPTY",
+        "p_lo": 2.0000459111178515,
+        "p_hi": 1.9999579772999283,
+        "signed_width": -8.793381792315813e-05
+      },
+      {
+        "kappa": 0.0001,
+        "verdict": "EMPTY",
+        "p_lo": 2.000458893615067,
+        "p_hi": 1.999579956158624,
+        "signed_width": -0.000878937456442852
+      },
+      {
+        "kappa": 0.001,
+        "verdict": "EMPTY",
+        "p_lo": 2.004567284438964,
+        "p_hi": 1.9958177900229273,
+        "signed_width": -0.008749494416036896
+      },
+      {
+        "kappa": 0.01,
+        "verdict": "EMPTY",
+        "p_lo": 2.043614976680046,
+        "p_hi": 1.9599145204069879,
+        "signed_width": -0.08370045627305811
+      },
+      {
+        "kappa": 0.1,
+        "verdict": "EMPTY",
+        "p_lo": 2.300675402242961,
+        "p_hi": 1.7150348643332487,
+        "signed_width": -0.5856405379097125
+      }
+    ],
+    "t_mid": 4.605170185988092,
+    "smallest_kappa_certified_empty": 1e-06,
+    "note": "declared NON-gate-deciding in the pre-registration, before the run, so that a null here could not be reinterpreted as a gate outcome"
+  },
+  "cell_count_ladder": {
+    "rows": [
+      {
+        "n_cells": 50,
+        "width": 1.7541523789077473e-14,
+        "verdict": "INTERVAL",
+        "max_log_tube_width": 0.18420680743954954,
+        "n_pairs": 10000,
+        "n_dropped": 0
+      },
+      {
+        "n_cells": 100,
+        "width": 1.687538997430238e-14,
+        "verdict": "INTERVAL",
+        "max_log_tube_width": 0.09210340371978987,
+        "n_pairs": 40000,
+        "n_dropped": 0
+      },
+      {
+        "n_cells": 200,
+        "width": 1.6653345369377348e-14,
+        "verdict": "INTERVAL",
+        "max_log_tube_width": 0.046051701859909144,
+        "n_pairs": 160000,
+        "n_dropped": 0
+      },
+      {
+        "n_cells": 500,
+        "width": 1.6431300764452317e-14,
+        "verdict": "INTERVAL",
+        "max_log_tube_width": 0.018420680743982842,
+        "n_pairs": 1000000,
+        "n_dropped": 0
+      },
+      {
+        "n_cells": 1000,
+        "width": 1.5987211554602254e-14,
+        "verdict": "INTERVAL",
+        "max_log_tube_width": 0.009210340372005632,
+        "n_pairs": 4000000,
+        "n_dropped": 0
+      },
+      {
+        "n_cells": 2000,
+        "width": 1.554312234475219e-14,
+        "verdict": "INTERVAL",
+        "max_log_tube_width": 0.004605170186017915,
+        "n_pairs": 16000000,
+        "n_dropped": 0
+      }
+    ],
+    "prediction_preregistered": "width ~ 2*p0/N, i.e. 4.0e-3 at N=1000; log-log slope -1.00 +/- 0.05",
+    "measured_loglog_slope": -0.029518657467638793,
+    "prediction_verdict": "REFUTED \u2014 the measured certified width is at the rounding floor (~1.6e-14) and essentially INDEPENDENT of N (measured log-log slope -0.0295, predicted -1.00). The mechanism: for a monotone profile the cell enclosure's endpoints coincide with the EXACT pointwise values at the cell edges, so the binding Fourier-Motzkin pairs are sharp and no cell-width penalty is paid. The instrument is better than the pre-registration predicted, and the prediction is recorded as wrong rather than amended."
+  },
+  "perturbation_ladder_zero_tolerance": {
+    "rows": [
+      {
+        "eps": 0.0,
+        "verdict": "INTERVAL",
+        "signed_width": 1.6431300764452317e-14,
+        "contains_truth": true
+      },
+      {
+        "eps": 1e-12,
+        "verdict": "EMPTY",
+        "signed_width": -6.674660824046441e-13,
+        "contains_truth": false
+      },
+      {
+        "eps": 1e-09,
+        "verdict": "EMPTY",
+        "signed_width": -8.596769962565531e-10,
+        "contains_truth": false
+      },
+      {
+        "eps": 1e-06,
+        "verdict": "EMPTY",
+        "signed_width": -8.601932297569448e-07,
+        "contains_truth": false
+      },
+      {
+        "eps": 0.001,
+        "verdict": "EMPTY",
+        "signed_width": -0.0008598110975863715,
+        "contains_truth": false
+      },
+      {
+        "eps": 0.01,
+        "verdict": "EMPTY",
+        "signed_width": -0.008563780649589736,
+        "contains_truth": false
+      }
+    ],
+    "finding": "at delta = 0 the certified set is EMPTY for EVERY eps > 0, down to 1e-12: an exactly-power-law profile plus any perturbation has no exact exponent, so EMPTY is mathematically CORRECT and is not an instrument defect \u2014 but it means the zero-tolerance instrument cannot be applied to numerical data. This is the finding that forced the post-hoc delta extension below.",
+    "preregistered_expectation_was_wrong": "the pre-registration called 'truth stays inside for every eps' a SOUNDNESS requirement whose violation would be an instrument defect. That was a mis-statement of the certified object, not a defect: P_cert of a perturbed profile is genuinely empty. Recorded rather than quietly amended."
+  },
+  "post_hoc_tolerance_extension": {
+    "status": "NOT PRE-REGISTERED. Added after the run in response to the \u00a76 finding. Decides nothing about the gate, which was answered on the zero-tolerance runs in \u00a72 and \u00a73.",
+    "n_cells_used": 200,
+    "definition": "P_cert^delta = { p >= 0 : exists C > 0 with f(r)/(1+delta) <= C r^-p <= f(r)(1+delta) for all r in window }",
+    "width_vs_delta_K2": [
+      {
+        "delta": 0.0,
+        "verdict": "INTERVAL",
+        "width": 1.6653345369377348e-14,
+        "contains_truth": true
+      },
+      {
+        "delta": 1e-12,
+        "verdict": "INTERVAL",
+        "width": 8.928413564035509e-13,
+        "contains_truth": true
+      },
+      {
+        "delta": 1e-09,
+        "verdict": "INTERVAL",
+        "width": 8.729961198383762e-10,
+        "contains_truth": true
+      },
+      {
+        "delta": 1e-06,
+        "verdict": "INTERVAL",
+        "width": 8.729753600000834e-07,
+        "contains_truth": true
+      },
+      {
+        "delta": 0.001,
+        "verdict": "INTERVAL",
+        "width": 0.0008725395796602697,
+        "contains_truth": true
+      },
+      {
+        "delta": 0.01,
+        "verdict": "INTERVAL",
+        "width": 0.008686397805533375,
+        "contains_truth": true
+      },
+      {
+        "delta": 0.1,
+        "verdict": "INTERVAL",
+        "width": 0.08320347824735963,
+        "contains_truth": true
+      }
+    ],
+    "perturbed_with_delta_matched_to_eps": [
+      {
+        "eps": 1e-12,
+        "delta": 1e-12,
+        "verdict": "INTERVAL",
+        "width": 8.86846152070575e-13,
+        "contains_truth": true
+      },
+      {
+        "eps": 1e-09,
+        "delta": 1e-09,
+        "verdict": "INTERVAL",
+        "width": 8.638052495513193e-10,
+        "contains_truth": true
+      },
+      {
+        "eps": 1e-06,
+        "delta": 1e-06,
+        "verdict": "INTERVAL",
+        "width": 8.637810797740286e-07,
+        "contains_truth": true
+      },
+      {
+        "eps": 0.001,
+        "delta": 0.001,
+        "verdict": "INTERVAL",
+        "width": 0.000863347258482916,
+        "contains_truth": true
+      },
+      {
+        "eps": 0.01,
+        "delta": 0.01,
+        "verdict": "INTERVAL",
+        "width": 0.008594655396710005,
+        "contains_truth": true
+      }
+    ],
+    "critical_tolerances": [
+      {
+        "id": "C1",
+        "profile": "two-power mixture",
+        "delta_star_lo": 0.3156969982848068,
+        "delta_star_hi": 0.315696998285091,
+        "excluded_at_every_delta_tried": false
+      },
+      {
+        "id": "C2",
+        "profile": "rational far cutoff",
+        "delta_star_lo": 3.352868184122144,
+        "delta_star_hi": 3.3528681841224284,
+        "excluded_at_every_delta_tried": false
+      },
+      {
+        "id": "C3",
+        "profile": "log correction",
+        "delta_star_lo": 0.06973929323834227,
+        "delta_star_hi": 0.06973929323862649,
+        "excluded_at_every_delta_tried": false
+      },
+      {
+        "id": "K2",
+        "profile": "EXACT power law (direction-sensitivity check)",
+        "delta_star_lo": 0.0,
+        "delta_star_hi": 0.0,
+        "excluded_at_every_delta_tried": false
+      }
+    ],
+    "consumer_rule_of_thumb": "measured width ~= (4/W) * delta = 0.8686 * delta, so a profile certified to relative accuracy delta yields a certified exponent of HALF-WIDTH ~ 0.434*delta"
+  },
+  "anti_tautology_checks": {
+    "1_no_planted_known_returns_the_full_search_bracket": true,
+    "2_no_gate_control_returns_a_nonempty_interval": true,
+    "3_emptiness_is_direction_sensitive_no_known_certified_empty": true,
+    "4_nodes_mode_reported_for_every_row_even_where_it_disagrees": true
+  },
+  "gate": {
+    "question": "Does the enclosure reproduce a planted profile's EXACT known exponent within its certified interval on the pre-registered window, AND fail (interval excludes truth or reports incapacity) on a planted mismatched control \u2014 with the fitted column left in place and the certified column recorded ALONGSIDE it, never replacing it?",
+    "knowns_reproduced": true,
+    "controls_fired": true,
+    "fitted_column_left_in_place_and_recorded_alongside": true,
+    "dssp_screen_edited": false,
+    "answer": "YES",
+    "yes_branch_text": "The \u00a74 obligation has a named instrument; its first real consumer is whatever future unit produces a profile \u2014 none exists yet and this leg claims nothing about one."
+  },
+  "runtime_seconds": 28.815393209457397
+}
