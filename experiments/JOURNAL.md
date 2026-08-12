@@ -5256,3 +5256,14 @@ No link of the L1->L4 chain moved by adding any of these 63 pointers. Clay odds 
 ~206 legs landed in this window are missing a pointer in this file, and the one standing gap
 predates this window (leg 60/`leg/pq-v1`, noted at leg 102's own audit block, unmerged and
 therefore correctly absent from `main`'s `experiments/journal/`). Zero broken links were found.
+
+Addendum, added after `main` moved during this leg's own rebase: **leg 365 (Route-DSSR) —
+class (iii), PARTIAL RESULT:** Chae-Wolf's Theorem 1.3 (arXiv:1610.09464v2) — the theorem
+Pineau-Vicol's DSS Liouville result restates, already adjudicated NOT-REACHING by leg 330 — is
+read at primary-text depth for the first time; it reaches genuine DSS solutions only via a
+compactness argument (`lambda_j -> 1`) that degenerates the limit to the exact-SS ansatz before
+invoking Tsai's Theorem 2, so it satisfies the dispatch's first disjunct (DSS rigidity ending in
+Tsai's mechanism) but not the second (no direct extension of Theorem 2 to a fixed-`lambda` DSS
+profile). Leg 330's verdict against the screened object stands, now mechanistically explained.
+Flags delivered to `solver/dssp_screen.py`'s owner and the route-4 stop packet's owner via JSON,
+neither file touched by this leg. No figure, no ban touched, no L1->L4 link moved.
