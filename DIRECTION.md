@@ -36,7 +36,7 @@ prose as before.
 | A | 335 | S1GR | no |
 | B | 353 | DSSP-B5 | yes |
 | C | 351 | DSSP-B3 | yes |
-| D | 345 | PUB0C | no |
+| D | 352 | LCB2 | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -18255,9 +18255,19 @@ radius MEASURED — which is precisely 349's P4-unmeasured hole and 334's
 (c-iii) number, and it restores the floor without a fresh draft. Floor 2/4
 (353, 351).
 
-**Reserve queue: 15 undispatched legs (352, 324, 322, 327, 287, 229, 293,
-298, 299, 310, 325, 231, 232, 233, 234).** Immediately dispatchable: **9**
-(rank order: 352, 324, 322, 327, 287, 229, 293, 298, 299). Next fresh leg
+Cycle 10l: D/345 landed YES at 70c2493 — writeup/PUB_0C_CENSUS_SPINE.md
+assembled from banked records only, every claim at measured width, the
+12-item constraint checklist verified clause-by-clause: 174's
+target-absence ground; 309's theorem-level defense; 323's variant-robust
+census (58/51/0-of-51, the near-miss's failing clause named); closures #5
+(§21) and #6 (§17) carried with the struck count never re-invoked; 317
+cited by pointer, no new taxonomy claim; 202/237 presented as known
+methodology applied. The PUB track's spine section EXISTS on honest
+footing. D ← 352 LCB2 (the accumulator's harvest). Floor 2/4 (353, 351).
+
+**Reserve queue: 14 undispatched legs (324, 322, 327, 287, 229, 293,
+298, 299, 310, 325, 231, 232, 233, 234).** Immediately dispatchable: **8**
+(rank order: 324, 322, 327, 287, 229, 293, 298, 299). Next fresh leg
 number: **354.**
 
 Nothing in this update lifts a ban. A third confirmation tightens a banked
@@ -18345,3 +18355,47 @@ Next fresh leg number: **354.**
 Nothing in this update lifts a ban — 349's NO is the ban's own gate doing
 its work, and B5 recovers a KNOWN 2-D orbit under the Tier-2 ceiling. No
 L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10l) — 345 YES ABSORBED (THE §0c CENSUS
+SPINE EXISTS, EVERY CLAIM AT MEASURED WIDTH); D ← 352 LCB2
+
+Written from the same detached lineage, resynced to origin/main = 70c2493.
+
+### 345 PUB0C gate YES, absorbed at full strength
+
+The spine section is exactly what the cycle-10 draft asked for and what two
+closures' worth of discipline earned: assembled from banked records only,
+nothing computed, nothing softened; the emptiness claim carried on 174's
+target-absence ground with the corrected-not-re-invoked count; 309's
+defense stated as the theorem-level break it was; 323's census with the
+near-miss's failing clause named rather than rounded away; 317 pointed to,
+never re-claimed; 202/237 as known methodology per the Family-B folklore
+verdict. The publication track now has its spine on footing every clause of
+which traces to a banked measurement. Endorsed without amendment.
+
+### Refill — slot D ← 352 LCB2 (reserve rank 1, executed)
+
+The accumulator's first harvest, spec at cycle 10h: the USC2 cite field and
+the 86x→~865x phrasing at its two sites, one batched CORRECTIONS entry,
+diff-checked. Light; not floor-eligible. Territory disjoint from A/B/C —
+checked. **Floor 2/4 (353, 351) — §3b's minimum.** FLOOR-TABLE synced
+(D 345→352); the accumulator stays empty (items (1)-(2) close on 352's
+landing; item (3) opens on the next flag).
+
+### Standing state
+
+A/335 mid-diagnosis (watched); B/353 DSSP-B5 (basin measurement); C/351
+DSSP-B3 (critical path). With the user: cycle-10 packet + GA-note, POCP
+(ii) item, C4/escalation-#3, 313 packet + ban-wording, 320 packet. Next
+vacancy: 324 P2SPF.
+
+**Reserve queue: 14 undispatched legs (324, 322, 327, 287, 229, 293, 298,
+299, 310, 325, 231, 232, 233, 234).** Immediately dispatchable: **8**.
+Next fresh leg number: **354.**
+
+Nothing in this update lifts a ban. A publication spine stating measured
+widths is the no-movement discipline in document form; no L1-L4 link moved;
+Clay stays ~0.05%.
