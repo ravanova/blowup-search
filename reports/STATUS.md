@@ -281,6 +281,23 @@ remain open pending your ruling as previously described.*
    `writeup/data/p2_route_l3bd_v1.json` (leg 359, boundary adjudication),
    `writeup/data/p2_route_dsspb7_v1.json` (leg 357, the screen). Landed
    `e9c3ae8` (353), `3ea215c` (358), `a048de7` (359), `3f614d7` (357).
+   - **Part 3, added at DM cycle 10cc: the ansatz protection above is now
+     load-bearing, not just observed.** Leg 365 (ROUTE-DSSR) read
+     Chae-Wolf (arXiv:1610.09464v2) at primary text for the first time in
+     this repo and traced their Theorem 1.3 — the theorem Pineau-Vicol
+     restate as their own DSS Liouville result — and found it reaches
+     genuine DSS solutions only via a compactness argument that first
+     forces the profile to degenerate to the exact-SS ansatz, and only
+     THEN invokes Tsai's Theorem 2 unchanged on that SS limit. So the
+     only known route into DSS rigidity is confined to λ near 1 by
+     mechanism, not by a loose constant a sharper proof could plausibly
+     widen — leg 359/341's ansatz-mismatch finding is mechanistically
+     explained, and this program's own DSS object (λ significantly larger
+     than 1) is confirmed genuinely out of reach of every currently known
+     route, not merely untested against one. Does not itself change the
+     stop/retry decision above; completes the boundary/ledger picture the
+     decision sits on. File: `writeup/data/p2_route_dssr_v1.json`. Landed
+     `bfef885`.
 
 6. **The reserve's eligible research work is largely exhausted, pending your
    rulings on items above.** Surfaced by the Decision Maker at cycle 10aa,
