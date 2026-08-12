@@ -36,7 +36,7 @@ prose as before.
 | A | 335 | S1GR | no |
 | B | 353 | DSSP-B5 | yes |
 | C | 351 | DSSP-B3 | yes |
-| D | 352 | LCB2 | no |
+| D | 324 | P2SPF | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -17836,13 +17836,17 @@ per-brick leg counts are UPPER BOUNDS, not floors — a brick that lands in
 one principled leg reports, never pads (350's recommendation, adopted).
 Floor 2/4 (348, 351).
 
-**LCB2 accumulator — THRESHOLD REACHED at 2 items, batch leg 352 DRAFTED
-(cycle 10h):** (1) writeup/data/p2_route_fus_v1.json sources.USC2.cite —
-"Leger"→"Gomez-Serrano" (source: CORRECTIONS.md §20); (2) leg 221's "86x
-tolerance" phrasing (journal + module docstring, identical wording) —
-arithmetically inconsistent with its own 5e-4 basis, should read ~865x
-(source: leg 307's secondary erratum; the passage's other three magnitudes
-check out). Accumulator resets empty; future items open item (3).
+**LCB2-family accumulator (empty; item (3) opens on the next flag).
+MECHANISM AMENDED at cycle 10m after GAP-352-A: an item enters the
+accumulator as a FLAG ONLY; its proposed fix is marked UNVERIFIED until the
+drafting cycle verifies it against the primary source (the byline, the
+JSON, the banked record — whatever the fix asserts about). A batch leg's
+own pre-edit verification remains the second layer — it just caught what
+the first layer missed (352's site (i): USC2's paper 2511.22819 genuinely
+has Tristan Léger as coauthor; the "same typo as 338 fixed" premise was
+FALSE for that pair of papers, and the leg reverted before commit, zero net
+diff). History: batch 1 = leg 338 (4/4 landed); batch 2 = leg 352 (site
+(ii) landed — 86x→~865x; site (i) correctly resisted, CORRECTIONS §22).**
 
 Nothing in this update lifts a ban. B1's YES pins a search space under the
 Tier-2 ceiling — apparatus, not movement; B2 is a basis study; no L1-L4
@@ -18392,10 +18396,87 @@ DSSP-B3 (critical path). With the user: cycle-10 packet + GA-note, POCP
 (ii) item, C4/escalation-#3, 313 packet + ban-wording, 320 packet. Next
 vacancy: 324 P2SPF.
 
-**Reserve queue: 14 undispatched legs (324, 322, 327, 287, 229, 293, 298,
-299, 310, 325, 231, 232, 233, 234).** Immediately dispatchable: **8**.
-Next fresh leg number: **354.**
+Cycle 10m: D/352 landed SPLIT at aa9c5cd — site (ii) YES (86x→~865x at
+both sites, 307's arithmetic reproduced independently, the passage's other
+three magnitudes untouched); site (i) NO via the resister branch, and the
+resistance was CORRECT: **the DM's accumulator item was wrong** (GAP-352-A
+— USC2's paper 2511.22819 genuinely has Tristan Léger as coauthor; the
+same-shape-as-338 assumption was never verified against the byline). The
+leg's pre-edit verification caught it, reverted to zero net diff, and
+documented both outcomes in CORRECTIONS §22 — endorsed by name; the second
+leg this window to self-correct a DM-drafted premise (cf. GAP-346-A).
+Accumulator mechanism AMENDED (flags enter UNVERIFIED; the drafting cycle
+verifies against primary source; the batch leg's check stays as layer two).
+D ← 324 P2SPF. Floor 2/4 (353, 351).
+
+**Reserve queue: 13 undispatched legs (322, 327, 287, 229, 293, 298,
+299, 310, 325, 231, 232, 233, 234).** Immediately dispatchable: **7**
+(rank order: 322, 327, 287, 229, 293, 298, 299). Next fresh leg number:
+**354.**
 
 Nothing in this update lifts a ban. A publication spine stating measured
 widths is the no-movement discipline in document form; no L1-L4 link moved;
 Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10m) — 352 SPLIT ABSORBED (THE RESISTER WAS
+RIGHT AND THE DM's PREMISE WAS WRONG — GAP-352-A OWNED; THE ACCUMULATOR
+MECHANISM AMENDED); D ← 324 P2SPF
+
+Written from the same detached lineage, resynced to origin/main = aa9c5cd.
+
+### 352 LCB2 — split outcome, absorbed at full strength
+
+Site (ii) landed cleanly: ~865x at both identical sites, 307's arithmetic
+reproduced by the leg itself before applying, the neighboring magnitudes
+confirmed untouched. Site (i) fired the resister branch, and **the
+resistance was correct: the DM's accumulator item asserted a typo that was
+not one.** arXiv:2511.22819's byline genuinely includes Tristan Léger — a
+real coauthor, a different paper and person situation than 338's USC fix —
+and applying the drafted fix would have swapped a correct name for a wrong
+one. The leg made the edit, checked the live byline per its mandated
+pre-edit verification, caught the discrepancy, and REVERTED before commit
+(zero net diff on the JSON), documenting both outcomes in CORRECTIONS §22.
+Endorsed by name.
+
+### GAP-352-A — owned, and the mechanism fixed where the failure lived
+
+The accumulator item was built on an unverified same-shape-as-338
+assumption: two fields, same surname string, therefore same typo. FALSE for
+this pair of papers — and it is the second DM-drafted premise this window
+that a leg caught before it could land (GAP-346-A: the unchecked
+already-reproduced record; GAP-352-A: the unchecked byline). The common
+mechanism is the DM asserting a fact-shaped premise without touching the
+primary source. **Accumulator mechanism amended at the head block: items
+enter as FLAGS with their proposed fix marked UNVERIFIED; the drafting
+cycle verifies the fix against the primary source before the batch leg is
+drafted; the batch leg's own pre-edit verification stays as the second
+layer** — two independent checks, the same shape as the cycle-4d rule for
+DM commits, because the same hazard class keeps proving it deserves two.
+
+### Refill — slot D ← 324 P2SPF (reserve rank 1, executed)
+
+Spec at cycle 4, unchanged: the precision/conditioning addendum to 285's
+15-term spec, sourced from 302's banked ledger, appended with zero existing
+spec text altered. Light; not floor-eligible. Territory disjoint from A/B/C
+— checked. **Floor 2/4 (353, 351) — §3b's minimum.** FLOOR-TABLE synced
+(D 352→324).
+
+### Standing state
+
+A/335 mid-diagnosis (watched — the ETA it gave has elapsed; orchestrator:
+if the output file exists but the leg has not moved, that is a stall
+symptom worth a §9g look); B/353 DSSP-B5; C/351 DSSP-B3 (critical path).
+With the user: cycle-10 packet + GA note, POCP (ii) item,
+C4/escalation-#3, 313 packet + ban-wording, 320 packet. Next vacancy: 322
+F70.
+
+**Reserve queue: 13 undispatched legs (322, 327, 287, 229, 293, 298, 299,
+310, 325, 231, 232, 233, 234).** Immediately dispatchable: **7**. Next
+fresh leg number: **354.**
+
+Nothing in this update lifts a ban. A resisted wrong fix is the correction
+discipline protecting the record from its own maintainers — including this
+one; no L1-L4 link moved; Clay stays ~0.05%.
