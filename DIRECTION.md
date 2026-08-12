@@ -36,7 +36,7 @@ prose as before.
 | A | 380 | PROG-R4 (§3c programme, construction — the critical path; slot OCCUPIED for the programme's duration, produces no refill events: three-plus-one rule, cycle 11d) | yes |
 | B | 386 | DTOL (construction — dispatched per §3a pre-authorisation on 381's vacancy, matching the cycle-11d nomination; fig99) | yes |
 | C | 385 | SCEL (construction — 383 landed fd833d2, C refilled per §4a) | yes |
-| D | 233 | BVRRV (post-repair verification) | no |
+| D | 384 | COBV (verification — 233 landed 43dce32, D refilled per §3a/§4a; fig105) | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -22987,3 +22987,206 @@ CLAY_OBLIGATIONS §4 OPEN in every route-4 gate until 386 lands its
 pre-registered δ mode; §6's two no-method obligations OPEN in every
 branch; Tier-2 ceiling throughout; no external outreach; no L1→L4
 link moved; the POCP spend stays the user's. Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 11f) — 233 BVRRV ABSORBED (GATE YES
+BOTH CLAUSES; THE 20-CYCLE STALE-PRECONDITION LEG CLOSES ON FULLY
+INDEPENDENT FOOTING); ITS THREE SUCCESSOR ITEMS RULED (ONE DRAFTED
+AS 391, ONE DECLINED-WITH-TRIGGER, ONE ROUTED TO BENCH); D ← 384
+ENDORSED; THE QUARTET FINDING CHANGES HOW SPECS ARE WRITTEN HERE
+
+Written on `dm/cycle-11f` off origin/main = 15c365a (base verified
+current). A §4a absorption-plus-rulings record.
+
+### 1. 233 BVRRV — absorbed at full strength, endorsed without
+amendment
+
+Gate YES in its own pre-committed wording, both clauses: banked as
+closing leg 205's finding on fully independently-confirmed footing.
+This is the leg cycle 11a ruled dispatchable after ~20 cycles of a
+wrong roll-up line; its work is now done, and the correction's
+value is measured in its own record. The magnitudes, carried:
+
+- **(a)** SILENT_WRONG 18 → 0; the pre-repair column reproduces leg
+  205 case by case, 0 of 81 verdicts mismatched; the 18 split
+  13→OK, 5→RAISED. Three OK→RAISED transitions leg 221 never
+  reported were adjudicated against the module's own precondition:
+  3 JUSTIFIED_REFUSAL, 0 UNJUSTIFIED_REGRESSION — two were
+  accidental passes on rank-2-of-3 design matrices scoring OK by
+  0.056% of tolerance.
+- **(b)** 340,233 calls compared, 340,233 bit-identical, 0 moved,
+  6/6 artifacts — and the zero is EXPLAINED, not merely observed:
+  cap_binds = 0, minimum window occupancy 4 nodes against a floor
+  of 3, so no banked call comes near either guard.
+- **All live, nothing from cache** (ran_live true, from_cache
+  false, no cache-read path in the runner). It refused leg 221's
+  route deliberately — 221's re-confirmation replayed cache in
+  66.1 s against a ~34 h original; these sweeps cost ~1.9 h wall,
+  four-way parallel. That refusal is the lesson-85 discipline
+  executed, and it is why clause (b) means something.
+- **Strict superset of 221's scope:** per-unit counts reproduce 221
+  exactly (2 / 62 / 52,516 / 42,488 / 140,016 plus 4,999 / 0 / 142;
+  221's 256,233 reconciles as 251,092 + 5,141), with one
+  divergence — spike1_stepC_gate at leg 335's corrected
+  --steps 2500: 100,008 instead of 16,008, +84,000.
+- **Leg 335 independently confirmed as a side effect:** 221's
+  sharpest mover (alpha 13.2%, cut_omega[10] rel 4.47) moves
+  9.03e-12 at the corrected step count — eleven orders down.
+- **It found a fabricated zero in its OWN instrument** —
+  max_rel_residual_seen initialised 0.0, never written, the same
+  failure class it was auditing — repaired and re-measured live
+  (1.296e-05 and 1.469e-01, the latter within 3.4× of the 0.5
+  backstop); the merge step STRIPS the fake zero from four
+  in-flight sweeps and marks them residual_instrumented: false
+  rather than rolling it up. Recorded at the same prominence as the
+  gate answer: an auditor that catches its own instrument in the
+  audited failure class is the audit working.
+
+### 2. 233's three successor items — ruled, not re-named
+
+**Item: the 700 moving artifact leaves, cause undiagnosed — DRAFTED
+as leg 391.** 233 measured them non-attributable to the repair,
+which bounds the risk but does not name the mechanism, and
+undiagnosed movement in banked artifacts is evidence-integrity
+territory (lesson 85's substrate). Verification-class; ranked in §4
+below.
+
+**Reserve — 391 ROUTE-MVLD** (NOT floor-eligible: verification)
+```
+### 391 — ROUTE-MVLD: THE 700 MOVING ARTIFACT LEAVES — NAME THE
+MECHANISM (233's undiagnosed successor item, ruled a leg at cycle
+11f)
+**Thesis.** Leg 233's sweep (43dce32) measured 700 artifact leaves
+that move across re-runs and showed the movement NON-ATTRIBUTABLE
+to the repair — but the cause is undiagnosed. Diagnose it: classify
+the 700 by artifact and by leaf path, reproduce the movement on a
+minimal subset (re-run twice, diff), and name the mechanism per
+class (nondeterministic reduction order, timestamp/environment
+leakage, parallelism, genuine sensitivity) with at least one class
+pinned by a controlled toggle (fix the suspected source, show the
+leaf freezes).
+**Gate.** Is every one of the 700 leaves assigned a named mechanism
+class, with at least one class CONFIRMED by a controlled toggle
+(movement stops when the named source is pinned), and the count per
+class reported as magnitudes?
+  yes -> Banked-artifact drift has a named cause map; any class that
+         is genuine-sensitivity is flagged to the artifacts' owners
+         (routed, not repaired, per §7b); no banked value is edited.
+  no  -> A class resists diagnosis under toggle: report the
+         resisting subset's size and the toggles tried; an
+         undiagnosable class is itself decision information on how
+         much weight re-run bit-identity claims can carry.
+**Territory.** experiments/p2_route_mvld_v1.py,
+               writeup/data/p2_route_mvld_v1.json,
+               writeup/novelty/leg_391.md, experiments/journal/leg_391.md,
+               plus the full §6 quartet (BLOG/TECHNICAL pair,
+               *_evidence.py, figure or a recorded
+               released-with-reason). Edits no banked artifact, no
+               solver module.
+**Difficulty.** standard
+**Preconditions:** 43dce32 on main (233's sweep artifacts and the
+700-leaf measurement banked) — TRUE.
+```
+
+**Item: residual instrumentation at 2/6 artifacts, 64 of 340,233
+calls — DECLINED as its own leg, with a named trigger.** The
+uninstrumented remainder is covered by raise_post = 0, a valid
+guard-covering argument; extending direct measurement with no
+consumer is manufactured work. The trigger, recorded so this is a
+ruling and not a shrug: **whichever future leg first CONSUMES
+residual magnitudes from those artifacts must instrument them in
+its own scope first** — the coverage gap travels with the record
+(residual_instrumented: false is already marked on the four
+in-flight sweeps) and may not be silently treated as measurement.
+
+**Item: caller-census drift in p2_route_tscx_v1.py and
+p2_route_s1gr_v1.py — ROUTED TO BENCH, not a DM leg.** This is
+repair work integration found, exactly ORCHESTRATION §3's bench
+priority 2; a DM leg for a two-file census fix would be
+manufactured structure. The orchestrator's lane; noted here so the
+report's routing is on the DM record too.
+
+### 3. D ← 384 COBV — endorsed; the planted-mismatch requirement
+endorsed with it
+
+The §3a pre-authorised dispatch carries the cycle-11e resolution
+verbatim (mechanical verbatim-match check against
+p2_route_cloc_v1.json check_D with the DM's visual read explicitly
+not a substitute; §2's four rows machine-read; §7's prize rules
+with 429-refusals banked as refusals). fig105. **The added
+requirement — a checker that can report "0 mismatches" must PLANT a
+mismatch and show the check fires — is endorsed as standing
+practice for every zero-reporting checker in every future spec: a
+green light that cannot go red is not evidence.** (233's planted
+controls and 382/385's fail-able controls are the same discipline;
+this names it once, generally.)
+
+### 4. The reserve, ranked against C and D only (unchanged rule)
+
+A does not vacate; B is spoken for the length of 386. Floor: A/380
++ B/386 construction-class → 2/4 met before C or D contributes.
+
+1. **390 DTOR** — as drafted 11e. [FLOOR-ELIGIBLE: mathematics]
+2. **387 DXNV** — as drafted 11b. (NOT floor-eligible while the
+   programme is live: literature.)
+3. **388 CRVB** — as drafted 11b. (NOT floor-eligible:
+   verification.)
+4. **391 MVLD** — §2 above. (NOT floor-eligible: verification.)
+5. **389 CT2C** — as drafted 11c; waits on 386 (live in B).
+6. **325 MTB1** — user-gated, unchanged.
+7–9. **231, 232, 234** — blocked on 217/219/225, unchanged.
+
+391 sits below 388 deliberately: 233 bounded the risk (movement
+non-attributable to the repair, bit-identity holding on all 340,233
+compared calls), so the diagnosis is owed but not urgent, and the
+obligations-track and instrument-limit items above it were ranked
+by the user's standing direction.
+
+**Reserve queue: 9 undispatched legs (390, 387, 388, 391, 389,
+325, 231, 232, 234 — 384 out to slot D, 391 new this cycle).**
+Immediately dispatchable: **4** (390, 387, 388, 391; 389 waits on
+386; 325 user-gated; 231/232/234 blocked). Above the watermark; no
+fresh drafting owed. Next fresh leg number: **392.**
+
+### 5. The quartet finding — answering the orchestrator's question:
+YES, it changes how specs are written here
+
+STATUS item 9 (the merge gate passes when both BLOG/TECHNICAL are
+absent and never checks figure or evidence script; legs 381 and 233
+landed incomplete and clean, both honestly disclosed) is the
+USER's timing decision and this file does not rule on the gate.
+**What is the DM's: from this entry forward, every spec drafted in
+this file names the FULL §6 quartet explicitly in its Territory
+block — BLOG/TECHNICAL pair, *_evidence.py, and figure (or a
+recorded released-with-reason decision at landing, the fig-table's
+existing precedent) — so no future leg can read quartet-completeness
+as whatever the gate happens to check.** Leg 391 above is the first
+spec written to this rule; 390/387/388/389 predate it and their
+dispatch briefs already carry §6 named explicitly per the
+orchestrator, which covers them without redrafting. The DOCS-lane
+rework units (fig104 for 381, fig101 for 233) are §6's own
+"a confirmed gap becomes a rework leg" clause executing — endorsed,
+nothing further owed from the DM.
+
+### 6. Standing state
+
+A/380 PROG-R4 (running; U0 landed — the critical path; slot
+occupied, no refill events); B/386 DTOL (running, fig99); C/385
+SCEL (running); D/384 COBV (running, fig105). Floor 3/4 (380, 386,
+385), table re-synced in this edit; test_9 passes on the true
+roster. Two DOCS support units live on 381/233 quartet rework. With
+the user: the POCP spend (unchanged), item 8 (moot in fact), and
+now item 9 (the gate's §6 blind spot — timing the user's).
+
+Nothing in this update lifts a ban. A 20-cycle-stale leg closed on
+work that refused the cheap replay and caught its own instrument
+lying; three successor items given three different answers instead
+of three new legs; a checker discipline named once, generally; a
+spec-writing rule tightened in response to a gate blind spot
+without touching the gate. CLAY_OBLIGATIONS §4 OPEN in every
+route-4 gate until 386 lands its pre-registered δ mode; §6's two
+no-method obligations OPEN in every branch; Tier-2 ceiling
+throughout; no external outreach; no L1→L4 link moved; the POCP
+spend stays the user's. Clay stays ~0.05%.
