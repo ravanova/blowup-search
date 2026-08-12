@@ -34,7 +34,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 335 | S1GR | no |
-| B | 349 | GAFV | yes |
+| B | 353 | DSSP-B5 | yes |
 | C | 351 | DSSP-B3 | yes |
 | D | 345 | PUB0C | no |
 <!-- FLOOR-TABLE-END -->
@@ -68,7 +68,8 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig91 | 343 | landed (fig91_route_dsspb1_v1 — genuine new measurement) |
 | fig92 | 350 | landed with B2 (or released if unshipped — orchestrator mirrors at INDEX) |
 | fig93 | 351 | live, slot C (B3 mapping-bound study; only if warranted) |
-| fig94+ | — | next free |
+| fig94 | 353 | live, slot B (B5 basin-radius study; only if warranted) |
+| fig95+ | — | next free |
 <!-- FIG-TABLE-END -->
 
 (Current snapshot, DM update of 2026-08-11 cycle 8 — B/221 landed YES (both
@@ -18238,11 +18239,109 @@ C/351 DSSP-B3 (critical path). With the user: cycle-10 packet, POCP (ii)
 item, C4/escalation-#3, 313 packet + ban-wording, 320 packet. Next
 vacancy: 352 LCB2.
 
+Cycle 10k: B/349 landed NO at 5c83f7e — 0 of 6 standing GA-ban properties
+clear for the NK-convergence fitness (boolean-vs-decades category error on
+P1/P5; P2 measurement-grounded on 342's 0/5 + 334's unmeasured-basin
+admission; P3/P6 type mismatches against a fractal, plateau-with-holes
+landscape; P4 UNMEASURED and correctly not treated as disproof — the gate
+requires a measured pass). **The GA path CLOSES for this fitness; the ban
+stands unquestioned; no GA compute ran on either branch (grep-clean).** The
+user's portfolio note updates: the seed-creation option's GA sub-path is
+closed, leaving the ≈35-leg retarget as the only named creation path. B ←
+**leg 353 = brick B5 (DSSP-NKBASIN)** — the plan's own PARALLEL-SLOT brick
+(shares no module with B2-B4, no precondition on B3/B4): NK +
+phase-condition recovering a PUBLISHED 2-D Kolmogorov RPO with the basin
+radius MEASURED — which is precisely 349's P4-unmeasured hole and 334's
+(c-iii) number, and it restores the floor without a fresh draft. Floor 2/4
+(353, 351).
+
 **Reserve queue: 15 undispatched legs (352, 324, 322, 327, 287, 229, 293,
-298, 299, 310, 325, 231, 232, 233, 234).** Immediately dispatchable: **9**.
-Next fresh leg number: **353.**
+298, 299, 310, 325, 231, 232, 233, 234).** Immediately dispatchable: **9**
+(rank order: 352, 324, 322, 327, 287, 229, 293, 298, 299). Next fresh leg
+number: **354.**
 
 Nothing in this update lifts a ban. A third confirmation tightens a banked
 reproduction; a corrected credit line is record hygiene pointing at the
 DM's own miss; the notebook defect is a fact about a released artifact.
 No L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10k) — 349 NO ABSORBED (THE GA PATH CLOSES
+FOR THE NK-CONVERGENCE FITNESS; THE BAN STANDS UNQUESTIONED); B ← LEG 353 =
+BRICK B5 (THE PLAN's OWN PARALLEL SLOT), WHICH MEASURES EXACTLY THE
+P4-UNMEASURED HOLE
+
+Written from the same detached lineage, resynced to origin/main = 5c83f7e.
+
+### 349 GAFV gate NO, absorbed at full strength
+
+A clean structural kill, measurement-grounded where measurements existed:
+P1/P5 fail on a category error (a boolean convergence indicator cannot
+produce decades of log-scaled spread, and Newton's own quadratic rate
+compresses iteration counts); P2 fails on 342's measured 0/5 plus 334's own
+unmeasured-basin admission; P3 and P6 fail on type mismatches the
+Newton-fractal literature makes principled (generically fractal basin
+boundaries against a monotone defect ladder; a plateau-with-holes landscape
+against an interior-optimum wall test); P4 is UNMEASURED and the leg
+correctly refused to convert absence-of-disproof into a pass. Zero GA
+compute on either branch, grep-confirmed; the novelty zero controlled both
+ways. **The GA path closes for this fitness; the standing ban is untouched
+and unquestioned.** Endorsed without amendment. Portfolio consequence,
+noted for the user's open seed decision: with the GA sub-path closed, the
+≈35-leg PINN/KAN-line retarget remains the ONLY named seed-creation path.
+
+### Refill — slot B ← leg 353 = brick B5 (DSSP-NKBASIN), the plan's own
+answer to both the floor bind and 349's P4 hole
+
+The plan's §5.1 designates B5 a PARALLEL-SLOT brick: 2-D, shares no module
+with B2-B4, no precondition on B3/B4 (only B6 waits on the user). So it is
+dispatchable now, it is construction (floor-eligible), and its gate is the
+measured answer to what 349 just named unmeasured:
+
+```
+### 353 — ROUTE-DSSP-B5: BRICK B5 (DSSP-NKBASIN) — EXACTLY AS DRAFTED AT
+TECHNICAL_P2_ROUTEDSSP_V1.md §5.1
+[FLOOR-ELIGIBLE: construction]
+**Thesis and gate.** The spec IS the plan's §5.1 B5 entry, verbatim,
+including its drafted gate and the TIER-2 ceiling stated there: does a
+Newton-Krylov + phase-condition layer recover a PUBLISHED relative periodic
+orbit of 2-D Kolmogorov flow, and what is the MEASURED radius of its basin
+(how far can the published initial guess be perturbed before Newton
+fails)? yes → 334's clause (c-iii) becomes a number and S4 becomes
+assessable — and 349's P4 gains its first measurement on a known object.
+no → the extraction layer fails where the answer is KNOWN: that refutes
+the "mature engineering" premise of 334's clause (b) on this repository's
+realization and STOPS route 4 before any 3-D cost is committed — full
+strength, exactly as the plan drafted it.
+**Territory.** As the plan's B5 entry states (new solver/ module + runner +
+data JSON — 2-D, disjoint from B2-B4's modules), PLUS solver/capabilities
+.py + test_capabilities.py (additive registration, the cycle-4 rule),
+writeup/figures/fig94* (only if warranted), writeup/novelty/leg_353.md,
+experiments/journal/leg_353.md. Reads the published RPO's data; edits
+nothing banked.
+**Difficulty.** heavy (plan sizing 2 legs — an upper bound per cycle 10g;
+overruns stop and report)
+**Preconditions:** None (the plan's own parallel-slot designation; B6's
+user-gate is untouched by this dispatch).
+```
+
+**Floor 2/4 (353, 351) — §3b's minimum, met by the plan's own brick rather
+than a fresh draft this time.** FLOOR-TABLE synced (B 349→353); fig94
+conditionally allocated.
+
+### Standing state
+
+A/335 mid-diagnosis (bounded ETA reported; watched); C/351 DSSP-B3
+(critical path); D/345 PUB0C. With the user: cycle-10 packet + the
+GA-sub-path-closed note, POCP (ii) item, C4/escalation-#3, 313 packet +
+ban-wording, 320 packet. Next vacancy: 352 LCB2.
+
+**Reserve queue: 15 undispatched legs (352, 324, 322, 327, 287, 229, 293,
+298, 299, 310, 325, 231, 232, 233, 234).** Immediately dispatchable: **9**.
+Next fresh leg number: **354.**
+
+Nothing in this update lifts a ban — 349's NO is the ban's own gate doing
+its work, and B5 recovers a KNOWN 2-D orbit under the Tier-2 ceiling. No
+L1-L4 link moved; Clay stays ~0.05%.
