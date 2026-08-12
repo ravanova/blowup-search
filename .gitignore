@@ -50,3 +50,4 @@ reports/legs_over_time.html
 
 # Agent worktrees created by subagent isolation
 .claude/worktrees/
+.leg*-work/
