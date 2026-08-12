@@ -1,0 +1,328 @@
+{
+  "leg": 357,
+  "route": "DSSP",
+  "brick": "B7",
+  "brick_name": "DSSP-SCREEN",
+  "ceiling": "TIER 2",
+  "gate_text": "Does every candidate carry its admissibility screen, computed at every step -- ||V||_L3(R^3), the fitted far-field decay exponent, lambda, and an axisymmetry diagnostic -- and does the rigidity ledger (NRS/Tsai; Chae-Tsai; Pineau-Vicol) get machine-read rather than transcribed?",
+  "what_this_leg_screens": "B6 (the layer that would produce a genuine periodic-orbit candidate) is user-gated and has not landed; B5's construction leg has not landed either (leg 353 ran only its novelty pass). This runner exercises the screen on leg 351's closed-form Type-I witness and leg 354's Galerkin trajectory built on it, at a ladder of checkpoints, plus a read-only contrast against leg 332's own landed L3 measurement.",
+  "step0_static_witness": {
+    "scale": 1.0,
+    "l3_norm": {
+      "ladder": [
+        {
+          "R_hi": 10.0,
+          "shell_integral_cube": 67.99824644450295,
+          "cumulative_cube": 67.99824644450295
+        },
+        {
+          "R_hi": 100.0,
+          "shell_integral_cube": 86.91762826983512,
+          "cumulative_cube": 154.9158747143381
+        },
+        {
+          "R_hi": 1000.0,
+          "shell_integral_cube": 87.8067904745301,
+          "cumulative_cube": 242.72266518886818
+        },
+        {
+          "R_hi": 10000.0,
+          "shell_integral_cube": 87.82168672958747,
+          "cumulative_cube": 330.5443519184556
+        },
+        {
+          "R_hi": 100000.0,
+          "shell_integral_cube": 87.8218943652279,
+          "cumulative_cube": 418.3662462836835
+        },
+        {
+          "R_hi": 1000000.0,
+          "shell_integral_cube": 87.82189702782016,
+          "cumulative_cube": 506.18814331150367
+        }
+      ],
+      "L3_cubed": 506.18814331150367,
+      "L3_norm": 7.969614650511688,
+      "rel_change_last_step": 0.17349655101221,
+      "rel_tol": 0.0001,
+      "converged": false
+    },
+    "far_field_decay_exponent": -0.997134373688964,
+    "axisymmetry_max_rel_residual": 7.886223200839965e-16
+  },
+  "trajectory_checkpoints": [
+    {
+      "scale": 0.01,
+      "l3_norm": {
+        "ladder": [
+          {
+            "R_hi": 10.0,
+            "shell_integral_cube": 6.799824644450296e-05,
+            "cumulative_cube": 6.799824644450296e-05
+          },
+          {
+            "R_hi": 100.0,
+            "shell_integral_cube": 8.691762826983512e-05,
+            "cumulative_cube": 0.00015491587471433806
+          },
+          {
+            "R_hi": 1000.0,
+            "shell_integral_cube": 8.78067904745301e-05,
+            "cumulative_cube": 0.00024272266518886816
+          },
+          {
+            "R_hi": 10000.0,
+            "shell_integral_cube": 8.782168672958746e-05,
+            "cumulative_cube": 0.00033054435191845564
+          }
+        ],
+        "L3_cubed": 0.00033054435191845564,
+        "L3_norm": 0.06914220841791484,
+        "rel_change_last_step": 0.2656880573510838,
+        "rel_tol": 0.0001,
+        "converged": false
+      },
+      "far_field_decay_exponent": -0.9971343736889637,
+      "axisymmetry_max_rel_residual": 8.214815834208297e-16,
+      "s": 0.0,
+      "step_index": 0
+    },
+    {
+      "scale": 0.0047607136953146546,
+      "l3_norm": {
+        "ladder": [
+          {
+            "R_hi": 10.0,
+            "shell_integral_cube": 7.336922063368745e-06,
+            "cumulative_cube": 7.336922063368745e-06
+          },
+          {
+            "R_hi": 100.0,
+            "shell_integral_cube": 9.378298675232808e-06,
+            "cumulative_cube": 1.6715220738601553e-05
+          },
+          {
+            "R_hi": 1000.0,
+            "shell_integral_cube": 9.474238116889804e-06,
+            "cumulative_cube": 2.6189458855491356e-05
+          },
+          {
+            "R_hi": 10000.0,
+            "shell_integral_cube": 9.475845403373008e-06,
+            "cumulative_cube": 3.5665304258864365e-05
+          }
+        ],
+        "L3_cubed": 3.5665304258864365e-05,
+        "L3_norm": 0.03291662585394674,
+        "rel_change_last_step": 0.2656880573510838,
+        "rel_tol": 0.0001,
+        "converged": false
+      },
+      "far_field_decay_exponent": -0.9971343736889634,
+      "axisymmetry_max_rel_residual": 6.470785968204512e-16,
+      "s": 0.625,
+      "step_index": 250
+    },
+    {
+      "scale": 0.0022664394888756486,
+      "l3_norm": {
+        "ladder": [
+          {
+            "R_hi": 10.0,
+            "shell_integral_cube": 7.916443170028038e-07,
+            "cumulative_cube": 7.916443170028038e-07
+          },
+          {
+            "R_hi": 100.0,
+            "shell_integral_cube": 1.011906189718216e-06,
+            "cumulative_cube": 1.8035505067210199e-06
+          },
+          {
+            "R_hi": 1000.0,
+            "shell_integral_cube": 1.0222579302857461e-06,
+            "cumulative_cube": 2.8258084370067662e-06
+          },
+          {
+            "R_hi": 10000.0,
+            "shell_integral_cube": 1.0224313544000047e-06,
+            "cumulative_cube": 3.8482397914067705e-06
+          }
+        ],
+        "L3_cubed": 3.8482397914067705e-06,
+        "L3_norm": 0.01567066315064325,
+        "rel_change_last_step": 0.26568805735108364,
+        "rel_tol": 0.0001,
+        "converged": false
+      },
+      "far_field_decay_exponent": -0.9971343736889637,
+      "axisymmetry_max_rel_residual": 7.92869596807338e-16,
+      "s": 1.25,
+      "step_index": 500
+    },
+    {
+      "scale": 0.0005136747956734912,
+      "l3_norm": {
+        "ladder": [
+          {
+            "R_hi": 10.0,
+            "shell_integral_cube": 9.216424796400012e-09,
+            "cumulative_cube": 9.216424796400012e-09
+          },
+          {
+            "R_hi": 100.0,
+            "shell_integral_cube": 1.1780741803160811e-08,
+            "cumulative_cube": 2.0997166599560823e-08
+          },
+          {
+            "R_hi": 1000.0,
+            "shell_integral_cube": 1.19012580961517e-08,
+            "cumulative_cube": 3.289842469571252e-08
+          },
+          {
+            "R_hi": 10000.0,
+            "shell_integral_cube": 1.190327712195991e-08,
+            "cumulative_cube": 4.480170181767243e-08
+          }
+        ],
+        "L3_cubed": 4.480170181767243e-08,
+        "L3_norm": 0.003551660978148635,
+        "rel_change_last_step": 0.26568805735108386,
+        "rel_tol": 0.0001,
+        "converged": false
+      },
+      "far_field_decay_exponent": -0.997134373688964,
+      "axisymmetry_max_rel_residual": 7.496367263331272e-16,
+      "s": 2.5,
+      "step_index": 1000
+    },
+    {
+      "scale": 2.6386179571020296e-05,
+      "l3_norm": {
+        "ladder": [
+          {
+            "R_hi": 10.0,
+            "shell_integral_cube": 1.2491864197854456e-12,
+            "cumulative_cube": 1.2491864197854456e-12
+          },
+          {
+            "R_hi": 100.0,
+            "shell_integral_cube": 1.5967517774631519e-12,
+            "cumulative_cube": 2.8459381972485974e-12
+          },
+          {
+            "R_hi": 1000.0,
+            "shell_integral_cube": 1.6130864538580499e-12,
+            "cumulative_cube": 4.459024651106647e-12
+          },
+          {
+            "R_hi": 10000.0,
+            "shell_integral_cube": 1.613360110907993e-12,
+            "cumulative_cube": 6.07238476201464e-12
+          }
+        ],
+        "L3_cubed": 6.07238476201464e-12,
+        "L3_norm": 0.00018243987272520125,
+        "rel_change_last_step": 0.26568805735108375,
+        "rel_tol": 0.0001,
+        "converged": false
+      },
+      "far_field_decay_exponent": -0.9971343736889636,
+      "axisymmetry_max_rel_residual": 7.600836137059454e-16,
+      "s": 5.0,
+      "step_index": 2000
+    }
+  ],
+  "trajectory_alpha": -1.1875000000000049,
+  "trajectory_beta": 8.355800358799227e-19,
+  "trajectory_stopped_early": false,
+  "lambda_diagnostic_on_landed_trajectory": {
+    "lambda": null,
+    "S0": null,
+    "measured": false,
+    "final_ratio_c_over_c0": 0.0026386179571020294,
+    "relaxes_monotonically_to_trivial": true,
+    "reason": "trajectory relaxes toward the trivial state Omega=0 rather than returning to a non-trivial periodic value (matches leg 354's landed B4 gate finding); no non-trivial period S0 was found, so lambda is UNDEFINED for this candidate"
+  },
+  "axisymmetry_planted_control_max_rel_residual": 1.0040039696073884,
+  "axisymmetry_control_is_nonzero_as_required": true,
+  "ledger_this_candidate_final_checkpoint": {
+    "NRS_Tsai": {
+      "excludes": false,
+      "verdict": "NOT EXCLUDED",
+      "reason": "||V||_L3(R^3) did NOT converge over the measured ladder (rel_change_last_step=0.1734965510122099 > tol 0.0001) -- the candidate is outside NRS/Tsai's hypothesis; the theorem is silent on it."
+    },
+    "Chae_Tsai": {
+      "excludes": false,
+      "verdict": "CHAE-TSAI DOES NOT BITE. The theorem is SILENT on NS3D-DSS-NONAXI-LAMBDA-LARGE.",
+      "branch": "(ii)",
+      "clause_alpha_equation_verdict": "FAILS_HYPOTHESIS",
+      "clause_alpha_equation_reason": "Every theorem hypothesises 'a time periodic solution of (1.6)', and (1.6) is the rescaled EULER system. The screened object solves Navier-Stokes. The authors' own reach remark extends the proof to arbitrary real constants a, b with b != 0, and NOT to the addition of -Laplacian V.",
+      "consumed_from": "/home/andy/projects/Unsolved/.leg357-work/writeup/data/p2_route_ctrx_v1.json",
+      "consumed_leg": 326
+    },
+    "Pineau_Vicol": {
+      "excludes": false,
+      "verdict": "NOT APPLICABLE",
+      "reason": "no lambda was measured for this candidate (trajectory relaxes toward the trivial state Omega=0 rather than returning to a non-trivial periodic value (matches leg 354's landed B4 gate finding); no non-trivial period S0 was found, so lambda is UNDEFINED for this candidate); Pineau-Vicol's H5 hypothesis (1 < lambda < lambda_underline) cannot be evaluated without a measured lambda",
+      "lambda_ceiling_from_source": 1.6487212707001282,
+      "deciding_clause_h5": {
+        "id": "H5",
+        "hypothesis_quote": "if 1 < lambda < \\underline{\\lambda}",
+        "locator": "l.298, with l.1382 and l.1715",
+        "object": "lambda significantly larger than 1; 'lambda not near 1' is one of the three defining structural conditions",
+        "verdict": "FAILS -- THIS IS THE DECIDING CLAUSE"
+      },
+      "consumed_from": "/home/andy/projects/Unsolved/.leg357-work/writeup/data/p2_route_pvlx_v1.json",
+      "consumed_leg": 330
+    },
+    "reportable": true
+  },
+  "leg332_contrast": {
+    "description": "leg 332's own landed L3/decay-exponent measurement on a DIFFERENT (Gaussian-vorticity) witness, read from writeup/data/p2_route_vort_v1.json's replacement_wall field and run through this leg's OWN ledger_nrs_tsai()",
+    "L3_norm_landed": 0.7307683991070311,
+    "decay_exponent_landed": -3.0000000000000027,
+    "converged_R_landed": 60.0,
+    "ledger_verdict": {
+      "excludes": true,
+      "verdict": "EXCLUDED",
+      "reason": "||V||_L3(R^3) converged to 0.7307683991070311 (rel_change_last_step=0.0 < tol 0.0001) -- the candidate lands inside NRS/Tsai's hypothesis; if it is genuinely backward self-similar it must be trivial."
+    }
+  },
+  "pineau_vicol_contrast_synthetic_lambdas": {
+    "lambda_1p2_inside_ceiling": {
+      "excludes": null,
+      "verdict": "INSIDE the WLOG lambda ceiling -- re-adjudication needed",
+      "reason": "measured lambda=1.2 is inside (1, 1.6487212707001282); lambda_underline's EXACT value is data-dependent (a function of C_{U,0}, leg 330's GAP-330-B/GAP-330-C corrections), so this module does not auto-exclude -- it flags for the next adjudicating leg rather than guessing",
+      "measured_lambda": 1.2,
+      "lambda_ceiling_from_source": 1.6487212707001282,
+      "deciding_clause_h5": {
+        "id": "H5",
+        "hypothesis_quote": "if 1 < lambda < \\underline{\\lambda}",
+        "locator": "l.298, with l.1382 and l.1715",
+        "object": "lambda significantly larger than 1; 'lambda not near 1' is one of the three defining structural conditions",
+        "verdict": "FAILS -- THIS IS THE DECIDING CLAUSE"
+      },
+      "consumed_from": "/home/andy/projects/Unsolved/.leg357-work/writeup/data/p2_route_pvlx_v1.json",
+      "consumed_leg": 330
+    },
+    "lambda_5p0_outside_ceiling": {
+      "excludes": false,
+      "verdict": "OUTSIDE Pineau-Vicol's lambda window -- theorem silent",
+      "reason": "measured lambda=5.0 is outside (1, 1.6487212707001282), the paper's own WLOG ceiling on lambda_underline; H5's hypothesis fails for this candidate exactly as leg 330 found for NS3D-DSS-NONAXI-LAMBDA-LARGE",
+      "measured_lambda": 5.0,
+      "lambda_ceiling_from_source": 1.6487212707001282,
+      "deciding_clause_h5": {
+        "id": "H5",
+        "hypothesis_quote": "if 1 < lambda < \\underline{\\lambda}",
+        "locator": "l.298, with l.1382 and l.1715",
+        "object": "lambda significantly larger than 1; 'lambda not near 1' is one of the three defining structural conditions",
+        "verdict": "FAILS -- THIS IS THE DECIDING CLAUSE"
+      },
+      "consumed_from": "/home/andy/projects/Unsolved/.leg357-work/writeup/data/p2_route_pvlx_v1.json",
+      "consumed_leg": 330
+    }
+  },
+  "gate_answer": "yes",
+  "gate_answer_reasoning": "Every screened candidate (both the static witness and every checkpoint of the trajectory) carries all four quantities, and machine_read_ledger() reads its exclusion status programmatically from legs 326/330's landed JSON records plus this leg's own L3/lambda measurements -- no ledger entry is a transcribed sentence. This is the yes-branch: candidates are reportable with their exclusion status attached.",
+  "runtime_seconds": 46.02638125419617
+}

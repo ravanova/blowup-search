@@ -809,6 +809,46 @@ CAPABILITIES = [
                    "fig94_route_dsspb5_v1_stall.png, experiments/journal/"
                    "leg_353.md"),
      "test": "test_kolmogorov2d_nkbasin.py"},
+    {"module": "solver/dssp_screen.py",
+     "object": "admissibility screen for DSSP candidates: L3(R^3) norm, "
+               "fitted far-field decay exponent, lambda-from-trajectory, "
+               "axisymmetry diagnostic, and a machine-read rigidity "
+               "ledger (leg 357, Route-DSSP brick B7)",
+     "holds": ("l3_norm_ladder (spherical-quadrature shell ladder in R_hi, "
+               "converged flag on relative change of the last step); "
+               "fitted_far_field_decay_exponent (log-log fit on a generic "
+               "off-axis ray); lambda_from_trajectory (S0=2*log(lambda) "
+               "period detection on a c(s) trajectory, or UNDEFINED if the "
+               "trajectory relaxes to the trivial state); "
+               "axisymmetry_residual (cylindrical-component spread over "
+               "phi, normalised by the ring's own field magnitude); "
+               "ledger_nrs_tsai/ledger_chae_tsai/ledger_pineau_vicol/"
+               "machine_read_ledger (parse legs 326/330's landed JSON "
+               "clause fields programmatically, not transcribed prose); "
+               "screen_candidate (end-to-end orchestration)"),
+     "validated": ("leg 351's Type-I witness (u_B ~ C/|x|) correctly "
+                   "diverges under l3_norm_ladder (shells stay ~constant "
+                   "per decade, not shrinking -- log-divergence "
+                   "signature) and fits to decay exponent -0.997 "
+                   "(expected -1); its swirl-ansatz axisymmetry residual "
+                   "is 7.9e-16, and a PLANTED non-axisymmetric control "
+                   "(explicit x1-term) is detected at residual 1.0 -- "
+                   "diagnostic is not vacuous; a normalisation bug caught "
+                   "during construction (dividing near-zero V_phi "
+                   "roundoff by its own near-zero scale gave a false-"
+                   "positive residual of 2.0) is fixed and pinned by a "
+                   "regression test; lambda_from_trajectory correctly "
+                   "reports UNDEFINED on leg 354's own landed decaying "
+                   "trajectory and correctly detects a synthetic periodic "
+                   "control's lambda to within 3.2% of exp(S0/2); "
+                   "ledger_chae_tsai/ledger_pineau_vicol reproduce legs "
+                   "326/330's landed verdicts (SILENT; lambda ceiling "
+                   "1.6487212707001282) by JSON parse; ledger_nrs_tsai "
+                   "correctly EXCLUDES leg 332's own landed L3=0.7307683991070311 "
+                   "measurement (read from its JSON, not retyped) while "
+                   "NOT excluding this family's divergent witness -- the "
+                   "gate's own no-branch warning, demonstrated concretely"),
+     "test": "test_dssp_screen.py"},
 ]
 
 
