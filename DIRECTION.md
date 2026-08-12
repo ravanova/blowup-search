@@ -34,7 +34,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 299 | TESTA | no |
-| B | 368 | MRYX | yes |
+| B | 370 | B7M | yes |
 | C | 369 | BSE | yes |
 | D | 310 | EPAP | no |
 <!-- FLOOR-TABLE-END -->
@@ -20498,9 +20498,114 @@ entries (325; 231-234)** — zero dispatchable, none pending any
 mechanical trigger; the next vacancy after this cycle is a fresh DM
 draft or waits on the user.
 
+Cycle 10gg: B/368 landed WIDENS at 0d4d3de — Theorem 1.2's ball-averaged
+Morrey condition (Ṁq,1, 3/2<q<6 ⟹ U≡0) is STRICTLY broader than both
+encoded exact-SS tests (broader than T1 by the paper's own embedding
+chain L^q ↪ L^{q,∞} ↪ Ṁq,l ↪ Ṁq,1; broader than T2 because Morrey
+membership needs no pointwise ray-monotone decay — Sawano's non-density
+cited by the paper itself); NO DSS content in the primary text, so the
+widening is confined to the exact-SS class the ansatz gate separates;
+365's framing corrected by POINTER (mixed mechanism: Theorem 1.2's own
+§4 proof terminates by reconstructing Tsai's T2). **The owner's
+disposition on the WIDENS flag, ruled: implement it — leg 370 B7M
+dispatched into B** (a third exact-SS ledger entry; same justification
+class as 362: an exact-SS candidate with non-monotone decay could evade
+T2's fitted-ray proxy yet fall to Morrey — an under-firing screen
+misreports). D ← 310 stands as ruled at 10ff (pending integration).
+Floor 2/4 (370, 369).
+
 **Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
-Immediately dispatchable: **0**. Next fresh leg number: **370.**
+Immediately dispatchable: **0**. Next fresh leg number: **371.**
 
 Nothing in this update lifts a ban. An audited register and a
 verification leg taking its fired turn; no L1-L4 link moved; Clay
 stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10gg) — 368 WIDENS ABSORBED (THE MORREY
+CRITERION STRICTLY WIDENS THE EXACT-SS EXCLUSION; THE DSS OBJECT STAYS
+ANSATZ-SEPARATED); THE OWNER's DISPOSITION RULED: LEG 370 B7M
+IMPLEMENTS IT; B ← 370
+
+Written stacked on the cycle-10ff tip (448bfb1, awaiting integration
+when 368's report arrived — the standing stack handling).
+
+### 368 MRYX — WIDENS, absorbed at full strength
+
+Full-text depth did what abstract depth could not: Theorem 1.2's
+condition is a ball-averaged scaling criterion strictly broader than
+BOTH encoded tests — the embedding chain (quoted from the paper) makes
+it broader than T1's L³ membership, and Sawano's non-density result
+(cited by the paper itself) makes it broader than T2's
+single-generic-ray fitted-decay proxy, since Morrey membership needs no
+pointwise decay along any ray. The confinement is equally definite: no
+DSS content anywhere in the primary text (the single grep hit an
+undiscussed reference title), so the repo's DSS-large-λ object stays
+separated by the ansatz gate exactly as legs 359/362 established. And
+the correction to 365 is by pointer, precisely scoped: the stated
+genealogy (T1-family) was right; the §4 proof mechanism is mixed,
+terminating in a reconstruction of Tsai's T2 — one more entry in the
+now-familiar pattern that this literature's exclusions all funnel
+through Tsai's two theorems. Access confirmed live before concluding;
+hashed; territory exact. Endorsed without amendment.
+
+### The owner's disposition — ruled: implement the widening
+
+368's WIDENS flag lands with the screen's owner, which is this desk.
+The justification is 362's, one step over: the screen's exact-SS
+verdict currently under-fires on profiles with non-monotone decay
+(inside Morrey, invisible to T2's ray proxy, outside L³) — and an
+under-firing screen misreports candidates to whoever eventually reads
+it. The DSS object's own status is untouched (ansatz-separated); this
+is coverage for the exact-SS class only, stated as such in the gate.
+
+```
+### 370 — ROUTE-B7M: THE MORREY LEDGER ENTRY — IMPLEMENT 368's WIDENS
+VERDICT INTO THE SCREEN (the third exact-SS entry, per the quoted
+embedding chain)
+[FLOOR-ELIGIBLE: construction]
+**Thesis.** Implement Theorem 1.2's criterion (U ∈ Ṁq,1(R³), 3/2<q<6 ⟹
+U≡0, exact-SS ansatz only) as a machine-read ledger entry in
+solver/dssp_screen.py: a ball-averaged Morrey test at the candidate's
+own resolution, wired into the existing EXCLUDED-BY-* verdict set as
+EXCLUDED-BY-MORREY, with 368's quoted clauses cited in comments (never
+paraphrased) and the ansatz gate applied BEFORE it exactly as for
+T1/T2.
+**Gate.** Planted controls both ways, plus invariance: (a) a synthetic
+exact-SS profile with NON-MONOTONE decay inside Ṁq,1 but evading the
+T2 ray proxy and L³ reads EXCLUDED-BY-MORREY (the widening
+demonstrated, then closed); (b) the repo's DSS object still reads
+NOT-REACHED-BY-ANSATZ; (c) every existing banked verdict reproduces
+unmoved (diff-checked) — all three, or the entry does not land?
+  yes -> Bank; the screen's exact-SS coverage matches the adjudicated
+        literature on all three known routes.
+  no  -> Name which control fails; the screen keeps its two-entry
+        coverage WITH an inline known-gap marker citing 368 — never a
+        silent half-entry.
+**Territory.** solver/dssp_screen.py + test_dssp_screen.py (additive),
+solver/capabilities.py + test_capabilities.py (additive registration),
+writeup/data/p2_route_b7m_v1.json, writeup/novelty/leg_370.md,
+experiments/journal/leg_370.md. Reads 368/362/357's banked records;
+edits none. No figure.
+**Difficulty.** standard
+**Preconditions:** Legs 368 and 362 landed (TRUE). Route 4's stop is
+untouched: landed-apparatus coverage, not new 3-D cost.
+```
+
+**Floor 2/4 (370, 369).** FLOOR-TABLE synced (B 368→370). D ← 310
+stands as ruled at cycle 10ff, pending the stack's integration.
+
+### Standing state
+
+A/299 TESTA; C/369 BSE; D/310 EPAP (10ff). Route 4: stopped. With the
+user: seven items. Reserve: user-gated and blocked only.
+
+**Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
+Immediately dispatchable: **0**. Next fresh leg number: **371.**
+
+Nothing in this update lifts a ban. A screen widened to match the
+literature it machine-reads is apparatus honesty; the DSS object's
+separation is restated, not weakened. No L1-L4 link moved; Clay stays
+~0.05%.
