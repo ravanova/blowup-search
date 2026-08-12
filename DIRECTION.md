@@ -23360,3 +23360,340 @@ OPEN in every route-4 gate until 386 lands its pre-registered δ
 mode; §6's two no-method obligations OPEN in every branch; Tier-2
 ceiling throughout; no external outreach; no L1→L4 link moved; the
 POCP spend stays the user's. Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 11h) — WIP, RUN STOOD DOWN
+MID-CYCLE BY USER INSTRUCTION. FIVE LANDINGS ABSORBED AT FULL
+(384: THE OBLIGATIONS DOCUMENT NOW A VERIFIED SPECIFICATION; 386:
+THE δ QUESTION CLOSED, ANSWER EMPTY; 390: (D) DELETES THE
+ACCEPTANCE TEST, NOT THE WORK — NO RETARGET; THE CENSUS REPAIR
+AND TWO DOCS CLOSURES NOTED). ALL THREE ROUTED RULINGS MADE: THE
+§4 QUESTION'S CHANGED SHAPE (TURN TOWARD THE OBJECT), THE
+LESSON-90 PAIR (JSON PRECEDENCE, ROUTED TO 391'S DOCKET),
+RED-BEFORE-GREEN (AN ORDERING AMENDMENT ON SEVEN INSTANCES). NO
+DRAFTING: THE §3a REFILL WAS WITHDRAWN WITH THE STOP.
+
+Written on `dm/cycle-11h`, begun off origin/main = 1df7d8f and
+rebased onto 1edb8f4 (390's landing e89cdbd plus integration's
+absorption) after the coordinator's mid-cycle update. **Status of
+this entry: WIP.** The run was stood down by the user before the
+cycle completed. What this entry contains is finished work —
+five absorptions complete, three rulings made; what it does NOT
+contain, deliberately, is the reserve refill my dispatch
+originally owed (§3a, at least four fresh drafts from 392) and
+the floor-eligible draft the coordinator's mid-cycle message
+asked for: **both requests were withdrawn in the stand-down
+instruction, and no leg 392+ exists.** A successor drafting for a
+resumed run starts from the direction ruling in §6 and the
+named-successor items in §3, not from any spec — none was
+written. Next fresh leg number remains **392**.
+
+### 1. 384 COBV — absorbed at full strength (COMPLETE)
+
+Gate YES (a029565): 23 checks, **17 MATCH / 6 MISMATCH / 0
+UNVERIFIED**, with **23 of 23 planted controls firing in both
+directions** and the Clay rules answering HTTP 200 — no clause
+unverifiable, the 429-refusal contingency unneeded this time. The
+six mismatches landed in the leg's own proposed wording, and the
+document's STATUS graduated from DRAFT-UNVERIFIED to **verified
+as a specification — explicitly a lesser thing than a theorem**,
+a distinction this file adopts verbatim: nothing about that
+graduation moves any link of the L1→L4 chain, and no register of
+this file may describe it as if it did.
+
+The substantive corrections, carried as magnitudes:
+
+- `2.6e-5` was the BEST verification row, not the worst — factor
+  **988.05** — so the document had been understating its own
+  margin in the honest direction; corrected, not celebrated.
+- `326.875 per decade` belongs to the **cube** of the `L³` tail,
+  not the norm. A units-of-what error in a specification is
+  exactly the class a clause-by-clause check exists to catch.
+- Decay is **confirmed AND strengthened**: condition (4) bounds
+  every derivative. A verification that returns MORE than the
+  clause claimed is recorded at the same temperature as one that
+  returns less.
+- Leg 253 is cited in §2 with **no landed JSON** behind it. The
+  disclosure now lives in the document itself, which is the right
+  fix at a specification's tier. **Standing trigger, same form as
+  11f's instrumentation ruling: whichever future leg first
+  DEPENDS on 253's number must land its JSON in its own scope
+  first.** No leg is drafted for a citation nobody yet consumes.
+- The prize rules impose **four** conditions, not three, with
+  §5(b) putting the breakdown direction explicitly in scope. This
+  widens what a Tier-3 claim would owe; at Tier 2 it changes no
+  live work and is banked so nobody rediscovers it at the worst
+  moment.
+
+Three of 384's own planted controls failed to fire first time and
+each exposed a checker defect — one because the banked rows step
+**2 decades, not 1**, which had manufactured a false MATCH. Those
+three are counted in §5 below, not here: they are instances of
+the pattern, and the pattern gets one ruling, not three
+anecdotes.
+
+### 2. 386 DTOL — absorbed at full strength (COMPLETE); the §4
+gate wording updated to match what is now true
+
+CLAUSE 1 YES, CLAUSE 2 EMPTY (0ecaeee), **reported side by side
+and not netted — endorsed exactly so.** A YES on the instrument
+and an EMPTY on the object are two facts; a single netted verdict
+would have been the false summary this file exists to prevent.
+
+The magnitudes, carried:
+
+- **Zero threshold headroom: 30 rows, 0 exceptions to
+  `admissible ⟺ α_centre > threshold`, crossover at the realised
+  centre to 1e-6 — a step and not a slope.** Tolerance buys
+  nothing at the boundary; only the object can.
+- The width law `4·log(1+δ)/log(R₁/R₀)` derived; 382's `0.8686`
+  is `4/log 100` — **a window property**, not a constant of the
+  problem.
+- Leg 381's implied demand `α_centre > 2.456` is **REFUTED; the
+  real requirement is `α_centre > 1`.** The target the missing
+  profile must certify against is now the honest one, and it is
+  lower — which changes the search box, not the odds.
+- The **nominal-vs-realised trap** disclosed: a nominal reading
+  would have said ADMISSIBLE where the realised `α_centre` says
+  EMPTY. Caught by the pre-registration, not by a control —
+  counted in §5.
+
+**Standing wording, from this entry, for every route-4 gate:**
+the clause "§4 OPEN until 386 lands its pre-registered δ mode" is
+satisfied on its own terms and retired. What replaces it, and
+what every route-4 gate must carry: **§4 stays OPEN on the
+admissible-cutoff half and on the absent profile — the δ
+sub-question is CLOSED and its answer is EMPTY at the α in
+play.** Satisfied is not closed; a gate that writes "§4 closed"
+cites this paragraph as refuted by it.
+
+### 3. 390 DTOR — absorbed at full strength, mid-cycle
+(COMPLETE); the no-retarget endorsed and made a ruling
+
+Gate YES (e89cdbd), and the leg **makes no retarget
+recommendation** — endorsed, and made this file's own ruling in
+§6 below rather than left as the leg's restraint. The magnitudes,
+carried:
+
+- **(D) deletes the acceptance test, not the work.**
+  Machine-parsed against the banked primary text: (C)'s solution
+  conditions are {1,2,3,6,7}, (D)'s are {1,2,3,10,11}, (6) and
+  (11) are the same text — so exactly one condition leaves, **(7)
+  bounded energy**, and exactly one arrives, (10) periodicity.
+- **A non-constant exactly-λ-DSS field does not exist on `T³`:**
+  at λ = 1.7 one DSS step leaves 342 modes in a 64-band and two
+  steps leave **0**; the λ = 1 control leaves 2,146,688 and never
+  annihilates. (D) is reachable only by periodizing the `ℝ³`
+  object, at one of two prices: wrapping the uncut profile needs
+  `α > 2.996995` against §4's `α > 1.5`, both against the same
+  a-priori `α = 1.0` — a **3.993989× repurchase in deficit**,
+  torus size a prefactor only; or cut off first, wrapping bill
+  exactly 0.0 at `L > 2ρ`, inheriting **leg 381's entire cutoff
+  bill unchanged**.
+- **0 of 4 rigidity clearances carry to `T³`** — §2 re-opens in
+  full on that target, two of the four `ℝ³`-only via the ansatz
+  class rather than the ambient space.
+- The §1 POCP census credit is real — 6 compact/periodic, 1
+  unbounded (stationary, 1D), **0 unbounded periodic-orbit** —
+  and collectable only by an object that lives on the torus,
+  which does not exist. A credit payable only in a currency
+  nobody holds is priced, not banked as progress.
+- **Three corrections routed to integration, none self-applied —
+  one against its own convenience** ((D)'s data conditions
+  (8),(9) are not in this repository in verbatim form, so the
+  obligations file now claims nothing about them). Routing over
+  repairing, at the leg's own expense, is the discipline at full
+  strength; endorsed by name.
+
+390's successor items, dispositioned without drafting (the run is
+stood down; these are for a successor DM, and none is a spec):
+**the approximate-DSS pricing** (margin decaying at exponent
+−0.99057) is genuinely mathematics and is the natural first
+floor-eligible draft of a resumed run — recorded as a named
+successor, NOT drafted; **the periodic-rigidity literature
+search** (never searched here) belongs to the literature lane —
+the first lit draft after 387's territory closes owns it;
+**the verbatim read of (8),(9)** gets the same standing trigger
+as 253's JSON: whichever leg first makes a claim about (D)'s data
+conditions must land the verbatim text in its own scope first.
+The POCP torus-ansatz credit stays priced-and-unclaimed.
+
+### 4. The census repair and the two DOCS closures — noted on the
+DM record (COMPLETE)
+
+The bench caller-census unit (0b1f893, after integration's FAIL
+return): its green was ambient-dependent — same commit, two
+directories, two verdicts, because it walked ten ignored
+`.leg*-work/` worktrees. Now scoped to `git ls-files`, 233's
+exclusions subsumed and measured, and a second red path that
+manufactures the untracked-copy condition. The mechanics are
+integration's; the instance is counted in §5. The two DOCS
+closures (`docs/leg233-quartet`, `docs/index-rows`) are endorsed
+with one sentence of emphasis: an INDEX row that states **inside
+itself** that its evidence was earned by a later hand is the
+honest form, and it is what keeps STATUS item 9 (the gate's §6
+blind spot — timing the user's) from silently costing anything
+while it waits. 52/52 from banked JSON alone, ~1.9 h of sweeps
+not re-run, is §6's rework clause working at its intended price.
+
+### 4a. The lesson-90 pair — RULED, not parked
+
+The finding: leg 233's journal §4.1/§8 quotes the DEFECT-B
+recovery as `2.0007346` (rel err 3.673e-4); the banked
+`lesson_90_control.magnitudes` holds `2.0007759522991355`
+(3.8798e-4). Both inside the module's 5e-4 tolerance; no verdict
+depends on either. The DOCS unit quoted the JSON and recorded the
+journal figure without choosing — correctly, because choosing is
+this file's job. The ruling, in three parts:
+
+1. **Precedence: the banked JSON is the value of record.** §6
+   clause 2 already says every number quoted in prose must be in
+   the JSON; where prose and JSON disagree, the JSON governs and
+   the prose is the anomaly. Any future consumer cites
+   `2.0007759522991355`.
+2. **Neither number is edited.** The journal is the leg's
+   territory and the JSON is banked; a silent harmonisation would
+   destroy the very discrepancy that carries the information.
+3. **The discrepancy is routed to leg 391 MVLD's docket as a
+   named input.** `2.0007346` is NOT a rounding of
+   `2.00077595…` — rounding the banked value at the journal's
+   displayed precision gives `2.0007760`, not `2.0007346`; the
+   two differ by 4.14e-5 absolute, 2.07e-5 relative. Two distinct
+   measured values from what should be one measurement is exactly
+   the moving-artifact class 391 exists to diagnose. 391's spec
+   (11f) is hereby amended in place: the lesson-90 pair is on its
+   docket as a candidate drift instance, both values and both rel
+   errs of record. **Wind-down note: 391 will not be dispatched
+   in this run; the docket amendment stands for any successor,
+   and until 391 or an equivalent runs, the pair remains an OPEN
+   discrepancy with JSON precedence — not a resolved one.**
+
+Deliberately NOT ruled: which value is "right". That is a
+measurement question and the DM does not measure.
+
+### 5. Seven instances in two cycles — the judgement asked for,
+and an ordering amendment, not a new clause (RULED)
+
+The 11g clause (NO GREEN WITHOUT A DEMONSTRATED RED PATH) stood
+on four instances; this cycle adds three: 384's control that
+could not fire because the ladder stepped 2 decades not 1; the
+census whose answer depended on untracked files; 386's
+nominal-vs-realised trap. Is seven-in-two-cycles an immune system
+working or specs inviting the failure? **Both, and the split says
+which part needs amending.** Sort the seven by where the catch
+happened:
+
+- **Caught by the leg's own pre-committed machinery** (386's
+  pre-registration; 385's controls; 384's both-direction firings
+  once repaired): the immune system working as specced.
+- **Caught by a second, later hand** — a subsequent unit,
+  integration's gate, or a repair pass (233's fabricated zero,
+  the 2-decade ladder step, the ambient census, both piped-git
+  instances): NOT the immune system working. Those greens shipped
+  structurally unable to go red, and survived until someone
+  else's red found them.
+
+The second class has a common shape: **the green-side machinery
+is built first and the red path retrofitted** — the checker
+exists and reports 0 before anyone has shown it can report
+anything else. So the amendment, executable and small: **RED
+BEFORE GREEN. From this entry, every spec's demonstrated-red
+requirement is an ORDERING requirement: the leg's journal must
+show each red path firing BEFORE the first green from that
+instrument is claimed. A green reported ahead of its instrument's
+demonstrated red is treated at gate time as a green with no red
+path — i.e., not evidence.** This amends the 11g clause; it is
+not a new rule. No spec is drafted to it in this entry — the run
+was stood down mid-cycle and the refill withdrawn — but it binds
+every spec any successor drafts from this file. One deliberate
+non-action: no meta-audit leg for the checkers-of-checkers. If a
+resumed run's instance rate holds at 3–4/cycle, that base rate
+reopens the question; manufacturing the leg now would be the
+audit-reflex §3b exists to cap.
+
+### 6. Direction — the ruling on (b), with 390's second face
+(RULED; execution belongs to a resumed run)
+
+Legs 382/385/386/389 have built a certified-enclosure chain of
+real quality — reproduction at 0.0 against banked widths, a
+step-sharp threshold, a refuted over-demand — **and it has never
+been fed anything but planted knowns.** And 390 has now priced
+the alternative target: (D) swaps bounded energy for periodicity,
+the exactly-DSS torus object does not exist, and reaching (D)
+costs either a 3.993989× deficit repurchase or 381's full cutoff
+bill, with 0 of 4 rigidity clearances carrying. **Both faces
+point at the same hole: no profile of the object exists in this
+repository, on `ℝ³` or on `T³`.**
+
+The rulings, which stand for any successor:
+
+1. **No retarget.** (C) remains the target; 390's pricing is the
+   reason on the record, not a door left ajar.
+2. **The next tranche turns toward the object, not the
+   instrument.** Without new compute, the work that is owed:
+   feed the chain the profile-shaped artifacts this repo has
+   already banked and demand a certified verdict on a REAL input
+   (a certified EMPTY on a real banked object is a full answer,
+   not a failure); and derive the necessary-conditions box any
+   `α_centre > 1` profile must sit in, so the search has a target
+   instead of a hope. Instrument work continues only where it is
+   free and changes a decision — the one such question left is
+   whether ANY window of the width law buys nonzero threshold
+   headroom, where zero-everywhere retires tolerance arguments
+   for good. **None of these is drafted as a leg here** (the
+   refill was withdrawn with the stop); this paragraph is the
+   direction a successor executes, and any spec it produces is
+   bound by RED BEFORE GREEN, the hypothesis-field rule, the full
+   §6 quartet in its Territory block, and §3d.
+3. **What would need the spend, marked plainly:** producing a
+   genuinely new candidate profile at the scale the question is
+   posed at — the compliant-scale route the programme's U2 and
+   the POCP line describe. Per §3d any under-resourced attempt
+   returns the named cost of the compliant attempt and answers
+   UNDER-RESOURCED, never NO. **The POCP spend stays the user's
+   and nothing in this entry leans on it, recommends it, or
+   pre-empts it.**
+
+### 7. Wind-down state — stated in prose, tables honestly stale
+
+The run was stood down by the user mid-cycle. Consequences,
+recorded so a successor reads them here and not from a
+transcript:
+
+- **The §3a refill this cycle owed is WITHDRAWN, not forgotten.**
+  At stand-down the immediately-dispatchable reserve was **391
+  MVLD alone** — below the watermark — with 395 (nonexistent),
+  325 (user-gated) and 231/232/234 (blocked on 217/219/225)
+  unchanged. A resumed run owes the watermark drafts before
+  dispatching anything, and §6 above is the direction they are
+  drafted under. Next fresh leg number: **392.**
+- **Slot C stays vacant** (390 landed and vacated it); the board
+  is being stood down, not rebalanced. No dispatch
+  recommendation is made for a stopped run.
+- **The FLOOR-TABLE and slot ledger in cycle 11g's entry are
+  STALE as of this entry** — B now holds 389, D holds 388, C is
+  vacant, 387 sits on the bench — and they are left stale
+  deliberately: `test_9` and §3b cannot represent a terminal
+  state (already escalated to the user as a standing item), and
+  a table edited to fake a wind-down would be worse than one
+  that is honestly stale. This prose paragraph is the current
+  truth.
+- All provisional content in this entry is labelled where it
+  sits: §3's successor items and §6's tranche description are
+  direction, not specs; §4a's discrepancy is OPEN with JSON
+  precedence, not resolved.
+
+Nothing in this update lifts a ban. Five landings absorbed at the
+strength they earned; a (D) target priced at 3.993989× or 381's
+full bill and NOT retargeted to; a two-value discrepancy given a
+precedence rule and a diagnosis docket instead of a shrug; seven
+cannot-go-red instances split by who caught them and answered
+with an ordering amendment; a refill withdrawn honestly rather
+than half-drafted. CLAY_OBLIGATIONS **§4 OPEN in every route-4
+gate on the admissible-cutoff half and the absent profile** (the
+δ sub-question CLOSED, answer EMPTY — §2's standing wording);
+§6's two no-method obligations OPEN in every branch; Tier-2
+ceiling throughout; no external outreach; no L1→L4 link moved;
+the POCP spend stays the user's. Clay stays ~0.05%.
