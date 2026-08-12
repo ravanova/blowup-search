@@ -1,0 +1,79 @@
+{
+  "leg": 368,
+  "route": "MRYX",
+  "title": "Does the Morrey-axis generalization (arXiv:2006.15776, Jiu-Wang-Wei) widen the exact-SS exclusion class beyond the screen's encoded T1/T2 tests?",
+  "date": "2026-08-12",
+  "role": "LEG, floor-eligible, read-and-report, literature-typed, full-text depth",
+  "dispatched_by": "orchestrator, following leg 365's abstract-depth location of arXiv:2006.15776 while working a different, adjacent task (leg 365's own ruling: \"Morrey-space generalization of Tsai's Theorem 1, not Theorem 2, exact-SS ansatz only\" -- preliminary, not adjudicated at full text)",
+  "territory": [
+    "writeup/data/p2_route_mryx_v1.json",
+    "writeup/novelty/leg_368.md",
+    "experiments/journal/leg_368.md"
+  ],
+  "files_read_only_never_edited": [
+    "solver/dssp_screen.py",
+    "experiments/journal/leg_365.md",
+    "writeup/data/p2_route_dssr_v1.json",
+    "experiments/journal/leg_364.md",
+    "writeup/data/p2_route_nrsv_v1.json",
+    "experiments/journal/leg_359.md",
+    "writeup/data/p2_route_l3bd_v1.json",
+    "writeup/novelty/leg_366.md"
+  ],
+  "figures_assigned": 0,
+  "primary_source": {
+    "citation": "Jiu, Q., Wang, Y. & Wei, W., \"Leray's backward self-similar solutions to the 3D Navier-Stokes equations in Morrey spaces\", arXiv:2006.15776v1 [math.AP], 29 Jun 2020",
+    "url": "https://arxiv.org/pdf/2006.15776",
+    "sha256": "dc4fe65753e19da9dd454d97ba7e25b8e45c4f7fe99e7341c78cad0bd512e2f3",
+    "fetch_confirmation": "https://arxiv.org/abs/2006.15776 returned HTTP 200 (checked independently of the PDF fetch, which also returned HTTP 200) -- access confirmed live, no outage-vs-zero ambiguity; only v1 exists (single version on arXiv)",
+    "extraction": "pdftotext (both -layout and plain-flow modes cross-checked), 1670 / 1650 lines respectively; read in full"
+  },
+  "screen_encoding_read_first": {
+    "T1_as_encoded": "solver/dssp_screen.py _ledger_nrs_tsai_three_way(): EXCLUDED-BY-T1 fires iff ansatz_ok is True (exact-SS, via classify_ss_ansatz()) AND l3_result['converged'] is True and finite -- i.e. global L^3(R^3) convergence of the l3_norm_ladder(). Per leg 366's re-attribution (sourced from leg 364), this operational test is NRS 1996's own q=3 result, not Tsai 1998's Theorem 1 (whose stated range q in (3,infinity] excludes q=3).",
+    "T2_as_encoded": "EXCLUDED-BY-T2 fires iff ansatz_ok is True AND decays_to_zero_at_infinity() returns decays_to_zero=True, which requires BOTH a strictly negative least-squares-fitted exponent along ONE sampled generic (non-axis-aligned) ray AND mags[-1] < mags[0] (monotonic decrease between the first and last sampled radius on that single ray) -- Tsai 1998 Theorem 2's finishing-step hypothesis 'U -> 0 at infinity' (p.49), reused via the headline corollary decay (1.5): U(y) = A(y/|y|)*1/|y| + o(1/|y|).",
+    "ansatz_gate_common_to_both": "classify_ss_ansatz(): both T1 and T2 require exact-SS (a static/non-periodic candidate, or explicitly no measured period); a candidate with a measured non-trivial period at lambda>1 is DSS and is NOT-REACHED-BY-ANSATZ regardless of decay or L^q status -- this gate is checked first and is dispositive on its own (leg 359/362's finding)."
+  },
+  "paper_theorems_read_at_primary_text": {
+    "morrey_norm_definition": "||f||_{M(dot)p,l(Omega)} = sup_{R>0} sup_{x in Omega} [ R^{3(1/p - 1/l)} * integral_{B_x(R) intersect Omega} |f(y)|^l dy ]^{1/l}  (Sec 2.1, l.591-604 of pdftotext plain-flow extraction) -- a purely averaged, ball-integral (Lebesgue-measure) scaling condition, NOT a pointwise asymptotic condition.",
+    "embedding_chain_eq_1_6": "L^q(R^3) -> L^{q,infinity}(R^3) -> M(dot)q,l(R^3) -> M(dot)q,1(R^3), for 1 <= l < q  (eq (1.6)). Quoted directly: 'Notice that we hold the following embedding relation ... This fact can be found in [5].' M(dot)q,1 is the LARGEST (weakest-hypothesis) space in the whole chain for fixed q.",
+    "sawano_non_density": "'It is worth pointing out that Sawano [21] showed that M(dot)q,l2(R^n) is not dense in M(dot)q,l1(R^n) if 1 < l1 < l2 <= q.' (l.115-116) -- cited by the paper itself as the reason these Morrey classes at different l are genuinely, strictly distinct populated spaces, not merely nested containers of the same functions.",
+    "theorem_1_1": "Let U in W^{1,2}_loc(R^3) be a weak solution of (1.3). If U in M(dot)q,l(R^3) with 2 < l <= q < infinity, (1.7), then U = 0.",
+    "theorem_1_2": "Let U in W^{1,2}_loc(R^3) be a weak solution of (1.3). If U in M(dot)q,1(R^3) with 3/2 < q < 6, (1.10), then U = 0.",
+    "remarks_1_1_1_2": "Remark 1.1: 'This theorem extends all the known results involving non-existence of Leray's backward self-similar non-trivial solutions of 3D Navier-Stokes equations in [3, 11, 19, 25]' -- i.e. Chae-Wolf (Lorentz L^{q,infinity}), Guevara-Phuc (a narrower Morrey range), NRS (L^3), and Tsai's FIRST result (L^p, p in (3,infinity)). Remark 1.2 (via eq (1.6)): 'this theorem is an improvement of corresponding results in [3, 11, 19, 25]' -- the SAME four citations, i.e. Theorem 1.2 is explicitly positioned by the authors as generalizing the L^q/Lorentz/narrower-Morrey route (T1's family), not as generalizing Tsai's Theorem 2 (local-energy route) as a class of hypothesis.",
+    "proof_mechanism_theorem_1_2": "Read at Sec 4 (l.361-385 plain-flow): from the M(dot)q,1 hypothesis and a new Caccioppoli-type inequality (1.11), the proof derives local decay bounds ||grad U||_{L^2(B_{y0}(1))} = o(|y0|^{1/2}) and ||U||_{L^3(B_{y0}(1))} = o(|y0|^{2/3}) as |y0| -> infinity. Quoted verbatim: 'However, in light of (1.5), this is not enough to show that U = 0.' [paper's own (1.5) here is Chae-Wolf's condition, not Tsai's -- see paper_local_eq_1_5_is_chae_wolf_not_tsai below]. The paper then closes the gap by constructing the pressure via A_p-weighted singular-integral inequalities, 'a similar argument has been used by Tsai in [25, 26] for the proof of his second result (1.4)' -- i.e. the proof TERMINATES by reconstructing and invoking exactly the local-energy-estimates mechanism of Tsai's Theorem 2 (his '(1.4)', the local energy inequality), the same finishing move Chae-Wolf's DSS paper (leg 365's Theorem 1.3 read) also terminates in.",
+    "paper_local_eq_1_5_is_chae_wolf_not_tsai": "This paper's own numbered (1.5) (l.~78-84, plain-flow) is Chae-Wolf's condition: ||U||_{L^q(B_{y0}(1))} + ||grad U||_{L^2(B_{y0}(1))} = o(|y0|^{1/2}) as |y0| -> infinity -- a LOCAL-NORM decay-rate condition, distinct from Tsai's own local-energy hypothesis (1.4) and distinct from the screen's decays_to_zero_at_infinity() pointwise generic-ray test. All three are different operationalizations of 'decay at infinity'; none is a strict subset/superset of another by inspection alone, but Theorem 1.2's own hypothesis (Morrey membership, ball-integral) is what the theorem is STATED against, and it is a weaker (broader) global condition than any of the three.",
+    "dss_check": "grep of full extracted text for 'discretely' / 'DSS': the ONLY hit is in a reference-list title (Chae & Wolf, 'Removing discretely self-similar singularities...', item [4], never cited or discussed in the body). The entire body text -- Theorems 1.1, 1.2, and every proof step -- is stated 'If u is of the form (1.2)' (l.60-61, Leray's exact backward self-similar ansatz, u(x,t) = ... single stationary profile), the SAME ansatz gate as Tsai/NRS/Chae-Wolf's exact-SS work. No DSS statement, no DSS-adjacent argument, anywhere in the primary text."
+  },
+  "classification": {
+    "verdict": "WIDENS",
+    "scope": "Strictly within the exact-SS ansatz class that both T1 and T2 already require (classify_ss_ansatz() == EXACT-SS); this leg does not claim any reach into DSS.",
+    "evading_profile_class": "An exact-SS profile U (weak solution of (1.3), form (1.2)) that is (a) NOT in L^3(R^3) -- i.e. l3_norm_ladder() does NOT converge, so T1 as encoded reads NOT-EXCLUDED -- AND (b) does NOT satisfy the screen's decays_to_zero_at_infinity() test -- i.e. the fitted exponent along the ONE sampled generic ray is not both strictly negative AND monotonically decreasing between the first and last sampled radius (e.g. a transient bump, anisotropic decay concentrated off the sampled ray, or genuine local oscillation/concentration on small-measure sets) -- so T2 as encoded also reads NOT-EXCLUDED, the theorems 'silent' branch -- BUT whose ball-averaged (Lebesgue-integral) mass on growing balls B_x(R) is nonetheless controlled at the critical scaling rate, i.e. U in M(dot)q,1(R^3) for some q in (3/2, 6). Such a profile IS excluded by Theorem 1.2. This class is non-empty in principle because M(dot)q,1 membership is a purely averaged/scale-invariant condition (sup over balls of an L^l-integral, no pointwise structure required at all), strictly larger than L^q (embedding (1.6)) and, per the authors' own citation of Sawano's non-density result, strictly larger than the narrower Morrey classes M(dot)q,l (l>1) too -- it therefore does not require the uniform pointwise asymptotic decay (Chae-Wolf's (1.5), or the screen's single-generic-ray fitted-exponent-and-monotonic-decrease proxy for Tsai's Theorem 2 hypothesis) that T2 as encoded demands.",
+    "deciding_clauses_quoted": [
+      "Embedding (1.6): 'L^q(R^3) -> L^{q,infinity}(R^3) -> M(dot)q,l(R^3) -> M(dot)q,1(R^3), 1 <= l < q' -- M(dot)q,1 strictly contains L^q for every q in its range, so Theorem 1.2 (hypothesis M(dot)q,1, 3/2<q<6) necessarily excludes profiles L^3-membership-based T1 cannot reach.",
+      "Theorem 1.2: 'Let U in W^{1,2}_loc(R^3) be a weak solution of (1.3). If U in M(dot)q,1(R^3) with 3/2 < q < 6, then U = 0.' -- the hypothesis is a ball-averaged scaling bound, not a pointwise decay-to-zero-along-a-ray statement, so it is not implied by (and does not imply) the screen's decays_to_zero_at_infinity() test in either direction.",
+      "'It is worth pointing out that Sawano [21] showed that M(dot)q,l2(R^n) is not dense in M(dot)q,l1(R^n) if 1 < l1 < l2 <= q.' -- the authors' own justification that these are genuinely distinct, not merely technically-larger, function classes."
+    ]
+  },
+  "leg_365_pointer": {
+    "leg_365_ruling": "'Morrey-space generalization of Tsai's Theorem 1, not Theorem 2, exact-SS ansatz only' (abstract-depth, banked in writeup/data/p2_route_dssr_v1.json and experiments/journal/leg_365.md as an aside while working Route-DSSR)",
+    "confirmed_or_corrected": "CONFIRMED on the ansatz axis (exact-SS only, no DSS anywhere in the body text) and CONFIRMED on the authors' own self-positioning (Remarks 1.1/1.2 cite exactly the Theorem-1/L^q/Lorentz/narrower-Morrey family [3,11,19,25], not Tsai's Theorem 2, as what is being generalized). CORRECTED BY POINTER on mechanism and reach: full-text reading of Theorem 1.2's proof (Sec 4) shows it does not stop at a Theorem-1-style L^q argument -- it derives local decay from the Morrey hypothesis and then explicitly reconstructs and invokes Tsai's Theorem 2 local-energy-estimates finishing move ('a similar argument has been used by Tsai in [25, 26] for the proof of his second result (1.4)') to close the proof. So while the paper's stated GENEALOGY (Remarks 1.1/1.2) points at Theorem 1's family, the PROOF MECHANISM for Theorem 1.2 is a hybrid that terminates in Theorem 2's own machinery -- and, independent of both theorems' individual reach, the M(dot)q,1 HYPOTHESIS itself is strictly broader than either T1's L^q test or T2's decay-based test as separately encoded on the screen, which is what produces the WIDENS verdict above."
+  },
+  "flag_for_screens_owner": {
+    "not_a_fix_implemented": "solver/dssp_screen.py is read-only in this leg's territory; no code change made.",
+    "flag_text": "The screen's rigidity ledger currently encodes T1 (L^3/NRS 1996 exact convergence) and T2 (Tsai 1998 Theorem 2's local-energy route, operationalized as a single-generic-ray fitted-exponent-and-monotonic-decrease proxy for decay-to-zero) as the complete exact-SS exclusion battery. Full-text reading of arXiv:2006.15776 (Jiu-Wang-Wei) Theorem 1.2 shows a THIRD, genuinely broader exact-SS exclusion criterion exists in the literature: U in Morrey space M(dot)q,1(R^3), 3/2<q<6 (a purely ball-averaged scaling condition) implies U=0. This is not contained in T1 (M(dot)q,1 strictly contains L^q by embedding (1.6)) nor guaranteed by T2 as currently operationalized (M(dot)q,1 membership does not require the pointwise, single-generic-ray, monotonically-decreasing decay that decays_to_zero_at_infinity() tests for). If the screen's owner wants completeness on the exact-SS axis, a third ledger entry (ledger_morrey_jiuwangwei(), operationalizing M(dot)q,1 membership via a ball-sup of scaled L^1 integrals over a shell/ball ladder, analogous to l3_norm_ladder()'s existing quadrature machinery) would close this gap. This leg does not implement it -- flagged only, per territory and per this repo's standing practice that a leg finding a gap in the screen routes the fix to the screen's owner rather than editing solver/dssp_screen.py directly.",
+    "operational_reach_on_repos_own_object_unchanged": "This WIDENS finding is scoped to the exact-SS ansatz class in the abstract. It does NOT change this repository's operational conclusion for its own screened object (NS3D-DSS-NONAXI-LAMBDA-LARGE): that object is DISCRETELY self-similar (lambda significantly larger than 1, leg 313's search target), and arXiv:2006.15776's Theorems 1.1/1.2 are stated and proved exclusively for the exact-SS ansatz (1.2) -- confirmed above, no DSS statement anywhere in the primary text. So the same ansatz gate that already blocks T1 and T2 from reaching the repo's own object (leg 359/362's finding) also blocks this Morrey generalization from reaching it. The WIDENS verdict is a genuine, load-bearing correction to the screen's completeness claim on the exact-SS axis, not a new reach into the repo's screened DSS regime."
+  },
+  "clay_odds_and_ledger_impact": {
+    "clay_odds_changed": false,
+    "clay_odds_value": "~0.05% (unchanged)",
+    "l1_l4_link_moved": false,
+    "ban_lifted": false,
+    "note": "Pre-authorised per dispatch's Preconditions clause 4 ('you read and report, you lift nothing -- no ban is yours to lift')."
+  },
+  "reproduction": {
+    "type": "primary-text literature read, not computational",
+    "paper_pdf": "https://arxiv.org/pdf/2006.15776, sha256 dc4fe65753e19da9dd454d97ba7e25b8e45c4f7fe99e7341c78cad0bd512e2f3",
+    "extraction_tool": "pdftotext (poppler-utils), both -layout and default flow modes, cross-checked",
+    "no_new_search": "No arXiv export-API search performed this leg (the paper was already located by leg 365; this leg's task is full-text adjudication of that one paper against the screen's own encoded tests, not a fresh literature search)."
+  }
+}
