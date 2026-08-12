@@ -19,7 +19,49 @@ legs that lose their slot are returned to the reserve queue, not cancelled as fi
 
 ---
 
-## Status: RUNNING — same orchestrator session, 2026-08-12, cycle 10d (four-slot contract,
+## Status: RUNNING — same orchestrator session, 2026-08-12, cycle 10nn (four-slot contract;
+DM ruling chain 10jj through 10nn integrated; spend-limit fleet-kill of legs 376/377/378
+absorbed per the `ae7ca2c` playbook; slot D formally HELD OPEN by DM ruling, not vacant by
+oversight)
+
+`origin/main` at `8c1e2b4` (DM cycle 10nn integration), merge gate **PASS**. Roster:
+**A=379 LCB7** (dispatched, isolated worktree — light corrections batch closing leg 299's two
+flagged test issues, each gated on a planted still-fails control per "the 361 lesson"; items
+(11)-(12)). **B=376 R3SP** (RESUMED under its own number from the preserved WIP-preservation
+commit `57aff39` — the killed leg's uncommitted script salvaged, never credited as a landing;
+the resumed leg is instructed to re-verify the "numerical wall" lead, not inherit it as fact).
+**C=377 HCDX** (REDISPATCHED from scratch, spec unchanged from the original attempt killed by
+the spend limit — its worktree was clean, nothing to resume). **D=HELD OPEN** — the DM's
+explicit, machine-lawful exception (cycle 10nn): with B and C eligible, `test_9` reads 2/4 and
+PASSES; the reserve is genuinely exhausted (0 immediately dispatchable of 5 queued: 325, 231,
+232, 233, 234) and drafting a fourth leg now would mean manufacturing work rather than
+measuring something real. **This is not an oversight — do not "fix" it by drafting a D leg.**
+D refills mechanically the moment any of the seven-plus-one pending user rulings on
+`reports/STATUS.md` lands (see that file's trigger inventory for which ruling unfreezes which
+downstream item). A prior DM attempt (cycle 10jj) to hold open TWO slots at once failed the
+merge gate's 2-of-4 floor check outright and was publicly revised; one held-open slot beside
+two eligible live legs is the only lawful form of this.
+
+**Sequence since cycle 10d (all integrated cleanly via the standard detached-checkout /
+worktree-rebase-gate sequence; two mid-integration `origin/main` moves were caught and
+resolved by re-fetching and re-rebasing before the final push, no bad pushes):** legs 370
+(B7M), 371 (SFX), 372 (IDXB), 373 (HSFM), 374 (SBIV), 375 (PBLG), and 299 (TESTA) all landed
+and were independently audited (territory diff, `plan_of_record.py`/`DIRECTION.md` byte-
+identity confirmed empty every time, fresh detached-worktree gate re-run) before being
+reported to the DM. DM cycles 10jj/10kk/10ll/10mm/10nn integrated in sequence. Legs 376, 377,
+378 were then killed simultaneously by an API monthly-spend-limit fleet-kill; leg 378's
+complete-but-unpushed local commit was verified and pushed on its behalf (`1ba84bc`); leg
+376's genuine partial WIP was preserved under an explicit, honestly-labeled orchestrator
+commit (`57aff39`), never presented as a finished result; leg 377 had nothing captured
+(clean worktree, reported as zero progress). `reports/STATUS.md` item 6 was separately
+rewritten (`5d1321a`) to reflect decision-support exhaustion, the trigger inventory, and the
+standing wind-down clause. Full narrative detail lives in DM cycle-10jj through 10nn commit
+messages and the corresponding leg journal files — this block is a pointer, not a
+duplicate.
+
+---
+
+## Superseded status: RUNNING — same orchestrator session, 2026-08-12, cycle 10d (four-slot contract,
 cycle-10 user decision packet COMPLETE AND RELEASED; user's post-S1 certification reframing
 executed as legs 348/349; leg 343 critical-path landing YES, B2 now dispatchable)
 
