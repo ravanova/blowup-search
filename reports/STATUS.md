@@ -30,6 +30,63 @@ ledger). Note: items 1-5 below are unchanged from cycle 10w and have not
 been re-verified against current `origin/main` state this pass — they
 remain open pending your ruling as previously described.*
 
+## RULINGS LANDED — consolidated direction of 2026-08-11, received 2026-08-12
+
+*The terminal state is lifted by these rulings. They supersede all prior
+review packets. Read them in full in the DM's cycle-11 `DIRECTION.md` entry;
+what follows is only their effect on the items below.*
+
+- **§1 DSS ban scope.** Neither ban is lifted; both stand in full. Ban 2's
+  OBJECT is scoped to its own wording — a search with no fixed point nearby
+  to seed it — so a SEEDED search is outside it and route 4 is such a
+  search. Any leg claiming the scope must name its seed (source, identifier,
+  why it is not a cheap-entrance construction) in its own pre-registration;
+  absent a named seed the ban applies in full. The unseeded global trawl
+  stays banned on measurement. Annotated into `plan_of_record.py` by
+  integration at `bb00a0d`; the ban's lift condition is unchanged.
+  **→ CLOSES item 1's ruling question.** Disposition of the two parked
+  branches is with the DM (see item 1).
+- **§2 Screening stops** as a unit of work while the programme is live
+  (reading inside the programme is unaffected). `ORCHESTRATION.md` §3c makes
+  literature legs stop counting toward the composition floor; the DM
+  re-syncs the FLOOR-TABLE under that rule. **→ bears on item 8**: the table
+  now has a programme state to represent instead of a wind-down.
+- **§3 Route 4 IS the programme, at literature scale**, dispatched under
+  §3c as a PROGRAMME (long-lived worker, persistent state, milestones,
+  gates only where a claim is made, one programme-level novelty pass) rather
+  than as a sequence of legs. Leg 358's costed retry (~10.2 GPU-days at
+  literature scale; minimum-viable 2 legs / ~22-33h) proceeds. Leg 353's NO
+  is re-read under §3d as **UNDER-RESOURCED, not NO** — T_total=2000 against
+  a literature scale of T~1e4-1e6, two to three orders short, with its
+  control converging at 99.3% residual reduction, which proves the
+  extraction layer sound; an under-resourced null returns a cost, never a
+  verdict. Route 4 is not to be re-litigated on it; leg 353's sign-bug fix
+  in `optimal_shift_residual` stands. **→ CLOSES item 5.**
+- **§4 `CLAY_OBLIGATIONS.md` binds the build**, as a specification to check
+  rather than a banked result. Four asks, all enforced in gates: decide the
+  certification route before the compute runs (the only open route is POCP);
+  far-field decay must be a certified enclosure, not the fitted exponent
+  `solver/dssp_screen.py` currently records; §6's two no-method obligations
+  stay OPEN in every route-4 gate so the Tier-2 ceiling is never relaxed by
+  a leg that discharged only §1-§3; re-run the §2 exclusion screen before
+  publication, not only before the build. Highest-value item to verify
+  first is §4's localisation problem — leg 260 banked infinite energy in the
+  similarity variable, the Clay statement requires bounded energy, the gap
+  is unattempted here.
+- **§5 The POCP spend stays with the user**, informed by the obligations
+  document; nothing is to be drafted that presumes it either way.
+  **→ item 4 stays open, deliberately, and is not to be pre-empted.**
+- **§6 Unchanged and more load-bearing:** Tier-2 ceiling in every route-4
+  gate until a certification route lands; three-tier win condition; lesson
+  91; pre-committed gates; territory discipline; merge gate; no external
+  outreach; and no output described as movement toward Clay unless a link of
+  the chain actually moved. **Clay stays ~0.05%.**
+
+**Not touched by these rulings, and therefore still open below: item 2**
+(leg 340's tautological pass — escalation #3) **and item 3's 35-leg
+seed-creation spend.** Item 6 (reserve exhaustion) is dissolved by §3: the
+programme replaces the empty reserve as the source of work.
+
 ## ⚠ NEEDS YOU
 
 1. **Leg 313 (SDSS) + leg 320 (MTSC) — bundled escalation packet, parked —
