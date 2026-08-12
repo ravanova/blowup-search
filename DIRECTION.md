@@ -34,8 +34,8 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 299 | TESTA | no |
-| B | 370 | B7M | yes |
-| C | 371 | SFX | yes |
+| B | 373 | HSFM | yes |
+| C | 374 | SBIV | yes |
 | D | 372 | IDXB | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -20545,8 +20545,32 @@ for "after 322/327 land" — both landed long ago), drafted BY REFERENCE
 to the gap list itself so no DM transcription can drift. Floor 2/4
 (370, 371).
 
+Cycle 10jj (REVISED IN COMMIT — see the entry): B/370 landed YES at
+9a3dd41 (EXCLUDED-BY-MORREY banked; the screen complete on all three
+adjudicated routes; byte-identity independently confirmed). C/371
+landed STRUCTURE-DERIVED at 7c57195 (the K·ε floor FORCED by LAPACK's
+real-Schur path — dlanv2 shared-real-part + ULP-relative deflation —
+second-driver reproduction within 0.93-1.68x vs the generic route's
+~19-order miss; item (10) finalized citing 367+369+371; **the E5
+thread CLOSED by its own gate**). **The DM's first ruling this cycle —
+slots B/C HELD OPEN on direction exhaustion — FAILED THE MACHINE FLOOR
+(test_9: 0/4 eligible) and was REVISED, recorded here because the gate
+catching the DM is the discipline working.** Revised fills, both
+genuine decision-support for pending user items (the 344/358 class):
+B ← 373 HSFM (full-text adjudication of 1308.3356's hookstep failure
+mode against the costed retry's own regime — stop-packet risk #2
+sharpened from secondhand to read); C ← 374 SBIV (sourced inventory of
+spectral bases for unbounded R³ + algebraic weight in the
+periodic-orbit-CAP literature — the POCP spend's cost estimate
+grounded without committing the spend). **The exhaustion escalation
+STANDS as record text: these are floor-compliance fills, the well is
+at its bottom, and the user should either rule on the seven items or
+authorize §9 wind-down — the contract's own terminal clause ("the
+direction genuinely runs out") is otherwise in play.** Floor 2/4
+(373, 374).
+
 **Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
-Immediately dispatchable: **0**. Next fresh leg number: **373.**
+Immediately dispatchable: **0**. Next fresh leg number: **375.**
 
 Nothing in this update lifts a ban. An audited register and a
 verification leg taking its fired turn; no L1-L4 link moved; Clay
@@ -20807,3 +20831,126 @@ Immediately dispatchable: **0**. Next fresh leg number: **373.**
 
 Nothing in this update lifts a ban. A refused duplicate and an old debt
 paid; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10jj, revised) — 370 AND 371 ABSORBED
+(THE SCREEN COMPLETE; THE E5 THREAD CLOSED); THE HELD-OPEN RULING
+FAILED THE MACHINE FLOOR AND IS REVISED, ON THE RECORD; B ← 373 HSFM,
+C ← 374 SBIV; THE EXHAUSTION ESCALATION STANDS AS TEXT
+
+### 370 B7M gate YES, absorbed at full strength
+
+The third exact-SS ledger entry lands exactly as gated: the planted
+non-monotone-decay profile flipped to EXCLUDED-BY-MORREY, the DSS
+object unmoved at NOT-REACHED-BY-ANSATZ, 357/362's banked verdicts
+byte-identical (independently re-confirmed by the orchestrator). The
+screen machine-reads every exclusion route the adjudicated literature
+contains — T1/NRS, T2/Tsai, Morrey — each attributed to its verified
+source, each behind the ansatz gate. Endorsed without amendment.
+
+### 371 SFX — STRUCTURE-DERIVED; the thread closes
+
+The K·ε floor is FORCED by LAPACK's real-Schur structure (dlanv2's
+shared-real-part construction for conjugate pairs; dlahqr/dlaqr3's
+ULP-relative local deflation, Ahues-Tisseur LAWN 122), reproduced
+independently through a second driver matching 367's four points
+within 0.93-1.68x where the generic route missed by ~19 orders. 356's
+canonical_order() rests on a derived mechanism; item (10)'s marker
+text is finalized citing 367+369+371; per the gate's own text the
+thread is CLOSED — no further E5-floor legs. Endorsed.
+
+### The failed ruling, recorded at the same prominence as a landed one
+
+This cycle's FIRST ruling held slots B and C open on formal direction
+exhaustion. **It failed the merge gate: test_9_composition_floor_is_met
+parses the FLOOR-TABLE and asserts >= 2 of 4 eligible; held-open rows
+read 0/4.** The contract does not permit empty slots, by machine, and
+the gate enforcing that against the DM is exactly what it is for. The
+ruling is REVISED, not resented: the fills below are the two least-
+manufactured eligible legs available — both genuine decision-support
+for pending user items, the same class as 344/358 — and the exhaustion
+finding travels as record text instead of empty slots.
+
+### Refills — B ← 373 HSFM, C ← 374 SBIV
+
+```
+### 373 — ROUTE-HSFM: 1308.3356's HOOKSTEP FAILURE MODE, READ AT FULL
+TEXT AGAINST THE COSTED RETRY's OWN REGIME (stop-packet risk #2,
+sharpened from secondhand)
+[FLOOR-ELIGIBLE: external literature]
+**Thesis.** 358's costed retry carries four named residual risks; risk
+#2 (hookstep non-universality) rests on a secondhand citation — a
+paper reporting the same code failing at continuation-branch endpoints
+(1308.3356), never read here. Read it at full text: what exactly fails,
+in which regime, and does the minimum-viable retry's target regime
+(T=1e5, N=24, the Lucas-Kerswell orbit classes) intersect the failure
+regime — with the deciding clauses quoted?
+**Gate.** A definite classification — INTERSECTS (the retry's risk #2
+upgraded with the quoted mechanism; the stop packet amended by
+pointer), DISJOINT (the risk narrowed, with the regime boundary
+quoted), or UNDERDETERMINED (the clauses quoted, banked as such)?
+  yes (any class) -> Bank; the stop packet's risk table cites this leg.
+  no  -> The text resists after a full read: recorded exactly so.
+**Territory.** writeup/data/p2_route_hsfm_v1.json, writeup/novelty/
+leg_373.md, experiments/journal/leg_373.md. Reads 358/353's banked
+records; edits nothing. No figure.
+**Difficulty.** standard
+**Preconditions:** None.
+```
+
+```
+### 374 — ROUTE-SBIV: SPECTRAL BASES FOR UNBOUNDED R³ WITH ALGEBRAIC
+WEIGHT — THE SOURCED INVENTORY THE POCP SPEND DECISION LACKS
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** 348 named route-4-certification's obstruction: every
+periodic-orbit CAP closure in the located literature uses a compact
+domain's discrete spectral basis; the object needs unbounded R³ in an
+algebraically-weighted space; cost class C. The user's spend ruling
+lacks the inventory under that cost: which candidate bases exist
+(Hermite, rational Chebyshev / mapped-Laguerre, Boyd-map families —
+350's own log-Boyd composition included), what tail/completeness
+results are PUBLISHED for each on R³ with algebraic weights, and which
+specific gap each leaves against the Galerkin-plus-tail bridge — an
+inventory that sharpens the cost estimate WITHOUT committing the
+research.
+**Gate.** A sourced per-basis table — published result, its reach, the
+named gap against the bridge — sufficient for the user's ruling to
+state what cost-class C would actually buy first, with nothing
+constructed and no gap-closing attempted?
+  yes -> Bank; the POCP decision item cites this leg.
+  no  -> The literature underdetermines a row: recorded exactly so;
+        an uninventoriable basis is itself decision information.
+**Territory.** writeup/data/p2_route_sbiv_v1.json, writeup/novelty/
+leg_374.md, experiments/journal/leg_374.md. Reads 348/350's banked
+records; edits nothing. No figure.
+**Difficulty.** standard
+**Preconditions:** None. (Scoping only; the §3 build discipline's
+analogue binds: nothing here commits or begins the cost-class-C
+research.)
+```
+
+**Floor 2/4 (373, 374) — restored lawfully.** FLOOR-TABLE synced.
+
+### The exhaustion escalation — standing, as text
+
+The finding is unchanged by the revision: the reserve's dispatchable
+count is zero, the owed-work books are empty, and after 373/374 the
+decision-support class is also exhausted — every next fill would be
+manufactured. **The user should either rule on the seven NEEDS-YOU
+items or authorize §9 wind-down; ORCHESTRATION.md's own terminal
+clause ("the run ends when the user stops it or the direction
+genuinely runs out") is otherwise in play.** Orchestrator: carry this
+into the NEEDS-YOU surface as the upgraded item 6, with the trigger
+inventory (each ruling's unfreeze list) from this cycle's first
+draft: the stop packet unfreezes B6/B8 + retry + seed + 330's
+λ-threshold entry; POCP funds the mismatch research; 320 unfreezes
+325; C4 resolves escalation #3; the ban-wording item closes 313's.
+
+**Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
+Immediately dispatchable: **0**. Next fresh leg number: **375.**
+
+Nothing in this update lifts a ban. A gate that catches its own DM,
+two decision-support reads, and an exhaustion statement the user can
+act on; no L1-L4 link moved; Clay stays ~0.05%.
