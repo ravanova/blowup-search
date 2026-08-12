@@ -743,6 +743,35 @@ CAPABILITIES = [
                    "wrong vorticity (Omega_B*1.01) fails the curl check by "
                    "~7.6e-3, confirming the check is not vacuous"),
      "test": "test_dssp_biot_savart.py"},
+    {"module": "solver/dssp_step.py",
+     "object": "rescaled-vorticity time-stepper, single-mode Galerkin "
+               "truncation onto leg 351's closed-form witness (leg 354, "
+               "Route-DSSP brick B4)",
+     "holds": ("Galerkin projection of the true rescaled vorticity equation "
+               "d_sOmega+Omega+(1/2)(y.grad)Omega+(V.grad)Omega-(Omega.grad)V"
+               "=DeltaOmega onto Omega=c(s)*Omega_B, V=c(s)*u_B, giving the "
+               "scalar ODE c'=alpha*c+beta*c^2 with alpha=-(1/4+G/M), "
+               "beta=-N/M computed by 3D spherical quadrature; "
+               "galerkin_coefficients, rk4_step/integrate_rk4 (the actual "
+               "stepper), closed_form_c/blowup_time (the Riccati exact "
+               "solution used to verify the stepper)"),
+     "validated": ("quadrature M matches leg 351's OWN independent closed "
+                   "form ||Omega_B||_L2^2=2*pi^2 to <1e-8 relative; alpha "
+                   "converges to the exact rational -19/16 across 4 "
+                   "resolution/domain settings (rel spread <1e-7); N/M is "
+                   "machine-zero (~1e-15, an exact y3-parity identity, not "
+                   "an accident) so beta=0 and the mode decays exactly "
+                   "linearly; RK4 stepper reproduces the closed-form decay "
+                   "c(s)=c0*exp(alpha*s) to <1e-6 rel inside the PRE-STATED "
+                   "window S_max=5, n_steps=2000, decaying to 0.26% of c0; "
+                   "FALSIFICATION CONTROL: a planted confinement-sign-flip "
+                   "bug (alpha_bug=13/16>0, same c0, same window) makes the "
+                   "identical initial data GROW 58x instead of decaying, "
+                   "confirming the relaxation-to-trivial check is not "
+                   "vacuous; a second synthetic-ODE control confirms the "
+                   "integrator's own divergence-stop fires within one "
+                   "step-width of a known finite blowup time"),
+     "test": "test_dssp_step.py"},
 ]
 
 

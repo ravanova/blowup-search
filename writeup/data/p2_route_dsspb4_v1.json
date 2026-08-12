@@ -1,0 +1,107 @@
+{
+  "leg": 354,
+  "route": "DSSP",
+  "brick": "B4",
+  "brick_name": "DSSP-STEP",
+  "ceiling": "TIER 2",
+  "gate_text": "Does the rescaled-vorticity time-stepper reproduce a KNOWN answer inside a stated window? The probe is a decaying Leray solution, which in these rescaled variables must relax to the trivial state at a measured rate; a planted non-trivial control must fail.",
+  "stated_window_fixed_before_running": {
+    "S_max": 5.0,
+    "n_steps": 2000,
+    "tol_reproduce_rel": 1e-06,
+    "tol_decay_ratio": 0.01,
+    "c0": 0.01,
+    "general_energy_bound_W1": "alpha_f <= -1/4 for ANY decaying vector field f"
+  },
+  "construction": "Single-mode Galerkin truncation Omega=c(s)*Omega_B, V=c(s)*u_B onto leg 351's closed-form Type-I witness (solver/dssp_biot_savart.py, read-only). Galerkin-orthogonal projection of the true rescaled vorticity equation gives c'=alpha*c+beta*c^2 with alpha=-(1/4+G/M), beta=-N/M.",
+  "quadrature_convergence_ladder": [
+    {
+      "M": 19.739208802178542,
+      "G": 18.50550825204247,
+      "N": -5.745551536168007e-17,
+      "alpha": -1.1875000000000044,
+      "beta": 2.9107304116129985e-18,
+      "alpha_bug": 0.8124999999999956,
+      "n_v": 60,
+      "n_theta": 40,
+      "n_phi": 48,
+      "L": 8.0
+    },
+    {
+      "M": 19.739208802178602,
+      "G": 18.505508252042535,
+      "N": -1.649368879916568e-17,
+      "alpha": -1.1875000000000049,
+      "beta": 8.355800358799227e-19,
+      "alpha_bug": 0.8124999999999951,
+      "n_v": 80,
+      "n_theta": 60,
+      "n_phi": 64,
+      "L": 10.0
+    },
+    {
+      "M": 19.739208802178734,
+      "G": 18.5055082520425,
+      "N": 6.757279452104066e-17,
+      "alpha": -1.187499999999997,
+      "beta": -3.423277761446155e-18,
+      "alpha_bug": 0.8125000000000032,
+      "n_v": 100,
+      "n_theta": 70,
+      "n_phi": 80,
+      "L": 12.0
+    },
+    {
+      "M": 19.739208802178595,
+      "G": 18.505508252042418,
+      "N": -1.7372688761577553e-17,
+      "alpha": -1.1874999999999991,
+      "beta": 8.801106941864938e-19,
+      "alpha_bug": 0.8125000000000008,
+      "n_v": 120,
+      "n_theta": 80,
+      "n_phi": 96,
+      "L": 14.0
+    }
+  ],
+  "M_closed_form": 19.739208802178716,
+  "M_numeric_finest": 19.739208802178595,
+  "M_rel_diff_vs_closed_form": 6.1194076363326466e-15,
+  "alpha_rel_change_finest_vs_prev": 1.869849304631844e-15,
+  "G": 18.505508252042418,
+  "N": -1.7372688761577553e-17,
+  "N_over_M": -8.801106941864938e-19,
+  "alpha": -1.1874999999999991,
+  "beta": 8.801106941864938e-19,
+  "alpha_exact_rational_note": "alpha measured to converge to -19/16 = -1.1875",
+  "alpha_bug": 0.8125000000000008,
+  "alpha_bug_exact_rational_note": "alpha_bug measured to converge to 13/16 = 0.8125",
+  "known_answer_reproduction": {
+    "description": "correctly-signed stepper vs closed-form c(s)=c0*exp(alpha*s)",
+    "max_rel_err_stepper_vs_closed_form": 3.851781156949351e-12,
+    "decay_ratio_c_of_Smax_over_c0": 0.0026386179571020966,
+    "stopped_early": false,
+    "PASS": true
+  },
+  "planted_control_sign_bug": {
+    "description": "confinement term +Omega implemented as -Omega (a realistic sign-convention bug on the term the plan's own Sec 3.1 names with coefficient 1); identical c0, identical window",
+    "alpha_bug": 0.8125000000000008,
+    "max_rel_err_stepper_vs_closed_form": 5.773011131986353e-13,
+    "growth_ratio_c_of_Smax_over_c0": 58.119428177414676,
+    "stopped_early": false,
+    "FAILS_AS_REQUIRED": true
+  },
+  "planted_control_finite_time_blowup_stress_test": {
+    "description": "synthetic (non-physical) alpha=-1,beta=1,c0=2 > equilibrium c*=1 -- a KNOWN finite blowup time s*, used only to confirm integrate_rk4's divergence-stop machinery fires within one step-width of the closed-form singularity, not silently past it",
+    "alpha": -1.0,
+    "beta": 1.0,
+    "c0": 2.0,
+    "s_star_closed_form": 0.6931471805599453,
+    "s_last_integrated": 0.6934937541502253,
+    "c_last": 291439114999282.2,
+    "stopped_early": true,
+    "detected_near_closed_form_singularity": true
+  },
+  "gate_answer": "yes",
+  "runtime_seconds": 8.035459041595459
+}
