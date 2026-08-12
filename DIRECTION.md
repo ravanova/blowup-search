@@ -36,7 +36,7 @@ prose as before.
 | A | 299 | TESTA | no |
 | B | 370 | B7M | yes |
 | C | 371 | SFX | yes |
-| D | 310 | EPAP | no |
+| D | 372 | IDXB | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -20532,8 +20532,21 @@ so something structural constrains it (realness/conjugate-pairing is
 the candidate); either answer closes this thread for good, and this is
 the last draft the thread earns. Floor 2/4 (370, 371).
 
+Cycle 10ii: D/310 landed at 6d5f6a6 (report crossed in flight, now in) —
+VERIFICATION-ONLY, and the discipline is the finding: 287's yes-branch
+instruction was ALREADY fully executed by 287 itself (§24, exactly one
+pointer for its one non-portable family), so 310 correctly appended
+NOTHING — a second entry would have been a forbidden duplicate — and
+banked the verification; CORRECTIONS.md byte-identical by the
+orchestrator's direct check. D ← **leg 372 IDXB** — the genuinely owed
+item from cycle 5, finally picked up: the batched follow-up for INDEX
+gap-list items 9/10/13 (the same evidence-script class as 322/327, left
+for "after 322/327 land" — both landed long ago), drafted BY REFERENCE
+to the gap list itself so no DM transcription can drift. Floor 2/4
+(370, 371).
+
 **Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
-Immediately dispatchable: **0**. Next fresh leg number: **372.**
+Immediately dispatchable: **0**. Next fresh leg number: **373.**
 
 Nothing in this update lifts a ban. An audited register and a
 verification leg taking its fired turn; no L1-L4 link moved; Clay
@@ -20716,3 +20729,81 @@ Immediately dispatchable: **0**. Next fresh leg number: **372.**
 Nothing in this update lifts a ban. A foreclosed derivation honestly
 recorded, and one terminal draft with its thinness admitted; no L1-L4
 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10ii) — 310 ABSORBED (VERIFICATION-ONLY;
+THE REFUSED DUPLICATE IS THE DISCIPLINE); D ← 372 IDXB (CYCLE 5's OWED
+BATCH, FINALLY PICKED UP)
+
+Written from the same detached lineage, resynced to origin/main =
+41db575's tip.
+
+### 310 EPAP — verification-only, absorbed at full strength
+
+The leg found its own yes-branch instruction already executed: leg 287's
+landing commit carried the CORRECTIONS §24 pointer for its one
+non-portable family, exactly as 287's own gate required — so 310
+appended nothing, because a second entry would have been a duplicate the
+register forbids, and banked verification-only output (two new files,
+the register byte-identical, confirmed directly by the orchestrator).
+Refusing to add is sometimes the whole job; done correctly here.
+Endorsed without amendment. The report-crossing is the standing pattern,
+handled the standing way.
+
+### Refill — D ← leg 372 IDXB (the owed batch from cycle 5)
+
+The reserve holds nothing dispatchable, but this vacancy's fill is not a
+fresh invention — it is a debt on the books since cycle 5: "INDEX items
+9/10/13 are the same class [as 322/327] but NOT scooped in — a batched
+follow-up leg after 322/327 land." Both landed (322 at 93ef9cb, 327 at
+da128ef); the batch was never drafted. Drafted now, by reference:
+
+```
+### 372 — ROUTE-IDXB: CLOSE INDEX GAP-LIST ITEMS 9, 10, AND 13 — THE
+BATCHED EVIDENCE FOLLOW-UP CYCLE 5 RESERVED (322/327's exact shape)
+[FLOOR-ELIGIBLE: no — record/figure work]
+**Thesis.** writeup/INDEX.md's quartet-gap list is the authoritative
+statement of items 9, 10, and 13 (the same
+evidence-script/produce-or-correct class as legs 322 and 327). The spec
+is BY REFERENCE: each item exactly as the gap list states it, in
+322/327's shape — rebuilt from banked/curated data only, no
+re-measurement, claim-bearing magnitudes plotted at their banked values,
+never smoothed. If an item's gap has ALREADY been closed by an
+intervening leg (the 310 lesson, one cycle old), verify and record that
+with the closing commit cited — a duplicate is a fail, not a
+completion.
+**Gate.** Per item: either the gap-list item's named artifact exists
+byte-stably from banked data with the INDEX row updated, OR the item is
+verified already-closed with the closer cited, OR the item resists (the
+banked data cannot support it without re-measurement) and is reported
+exactly so with the row left open and honest — every item dispositioned,
+none skipped, one batched CORRECTIONS/INDEX note?
+  yes -> Bank; the gap list's 9/10/13 close or stand honestly.
+  no  -> An item cannot even be dispositioned: name why, land the
+        others, never widen.
+**Territory.** The artifacts the gap list names for items 9/10/13
+(scripts/figures under writeup/), writeup/INDEX.md (the three rows +
+gap-list annotations), writeup/novelty/leg_372.md,
+experiments/journal/leg_372.md. Reads banked/curated data only; edits
+no banked JSON (any diff fails the gate).
+**Difficulty.** light
+**Preconditions:** Legs 322 and 327 landed (TRUE, long since).
+```
+
+Legal fill: B/370 + C/371 carry §3b. **Floor 2/4 (370, 371).**
+FLOOR-TABLE synced (D 310→372).
+
+### Standing state
+
+A/299 TESTA; B/370 B7M; C/371 SFX (terminal thread leg). Route 4:
+stopped. With the user: seven items. Reserve: user-gated and blocked
+only; after 372, the books hold no known owed work that is not
+user-gated — stated so the next vacancy's context is on record.
+
+**Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
+Immediately dispatchable: **0**. Next fresh leg number: **373.**
+
+Nothing in this update lifts a ban. A refused duplicate and an old debt
+paid; no L1-L4 link moved; Clay stays ~0.05%.
