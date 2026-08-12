@@ -372,13 +372,23 @@ P2_EVIDENCE = [
     # runner only emits the figure under --figure and exits nonzero because its gate answers
     # NO, which would fail an unconditional rebuild. Leg 327 wrote a standalone
     # p2_route_p2t1_v1_evidence.py that redraws fig69 from the curated JSON alone (no
-    # re-run); it is registered below. Items 9, 10 and 13 of writeup/INDEX.md are the same
-    # class of debt and remain unregistered, reserved for a later batched follow-up leg.
+    # re-run); it is registered below. Items 9, 10 and 13 of writeup/INDEX.md used to be the
+    # same class of debt, reserved for a batched follow-up leg -- leg 372 closed that batch:
+    # item 9 (Weight-repairs v1) turned out already closed by leg 138 (evidence.py landed in
+    # 9d9b7ea, predating leg 108's own pass; not re-touched here, a duplicate would have been
+    # a fail per leg 372's own gate). Item 10 (Route-KA v1) and the NKR half of item 13 are
+    # known-answer/repair audits whose own TECHNICAL headers declare "no figure, established
+    # convention" (the same class as Route-D's advection/literature-scope legs) -- their
+    # p2_route_ka_v1_kawahara_evidence.py and p2_route_nkr_v1_repair_evidence.py exist,
+    # verify their banked numbers from JSON alone, and are intentionally NOT registered here
+    # because this list is specifically for rebuilding figures. Only the M2P half of item 13
+    # produces a figure and is registered below.
     "../experiments/p2_route_p2t1_v1_evidence.py",              # fig69 -- Route-P2T1 v1 (leg 302), evidence script by leg 327
     "../experiments/p2_route_capa_v2_audit_evidence.py",        # fig80 -- Route-CAPA v2 (leg 292)
     "../experiments/p2_route_fus_v1_scoping_evidence.py",       # fig77 -- Route-FUS v1 (leg 314); brief recorded fig69-fig76 as taken/reserved, so this leg took fig77
     "../experiments/p2_route_apia_v1_evidence.py",              # fig73 -- Route-APIA v1 (leg 312)
     "../experiments/p2_route_dwm_v1_evidence.py",               # fig82 -- Route-DWM v1 (leg 305)
+    "../experiments/p2_route_m2p_v1_promotion_evidence.py",     # fig61 -- Route-M2P v1 (leg 125), evidence script by leg 372, item 13
 ]
 
 

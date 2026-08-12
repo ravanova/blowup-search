@@ -92,13 +92,13 @@ data JSON, B/T = BLOG/TECHNICAL pair, E = `*_evidence.py`, F = figure present in
 | Route-XS v1 | The shape dichotomy against published certificates — gate answered **NO** | Y | Y | Y | Y† | fig52 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEXS_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEXS_V1.md) |
 | Weight-repairs v1 | Named P2/P3 repairs to the certificate-weight fitness; six-property gate still FAILs | Y | Y | Y | Y | fig48 (**duplicated number** — see gap list item 8) | [T](4_p2_lottery/TECHNICAL_P2_WEIGHT_REPAIRS_V1.md) · [B](4_p2_lottery/BLOG_P2_WEIGHT_REPAIRS_V1.md) — row added by leg 108; its `E` mark **corrected by leg 138**, see gap list item 9 |
 | Weight-repairs v2 (leg 59) | The conditioning wall modelled in both weight factors; frozen six-property gate re-run still FAILs | Y | Y | Y | Y† | fig58 | [T](4_p2_lottery/TECHNICAL_P2_WEIGHT_REPAIRS_V2.md) · [B](4_p2_lottery/BLOG_P2_WEIGHT_REPAIRS_V2.md) |
-| Route-KA v1 (leg 61) | The interval pipeline reproduces CLN's published Kawahara radius end to end | Y | Y | **GAP: T only, no BLOG** | **GAP: none** | **GAP: none** | [T](4_p2_lottery/TECHNICAL_P2_ROUTEKA_V1.md) — see gap list item 10 |
+| Route-KA v1 (leg 61) | The interval pipeline reproduces CLN's published Kawahara radius end to end | Y | Y | **GAP: T only, no BLOG** | Y | not a gap — no figure by design, matching this route's own header | [T](4_p2_lottery/TECHNICAL_P2_ROUTEKA_V1.md) — `E` closed leg 372 (`experiments/p2_route_ka_v1_kawahara_evidence.py`, 8/8 checks pass, reads only the banked JSON); `F` was never a real gap — TECHNICAL_P2_ROUTEKA_V1.md's own header says "No figure ... established convention" (same class as the NKR row below); BLOG stays open, out of a scripts/figures-only remit — gap list item 10 |
 | Route-NG v1 (leg 58) | Stage `NG`: the no-go stated as a theorem on the class `A21 = 0` — gate answered **YES**; publication scoping **escalated and parked**, the route itself merged | Y | Y | Y | Y† | fig55 | [T](4_p2_lottery/TECHNICAL_P2_ROUTENG_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTENG_V1.md) — added by leg 138 |
 | Route-CP v1 (leg 62) | Cadiot arXiv:2505.03091's scope settled from the full text — gate answered **NO** | Y | Y | Y | Y† | fig56 | [T](4_p2_lottery/TECHNICAL_P2_ROUTECP_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTECP_V1.md) — added by leg 138 |
 | Route-BX v1 (leg 126) | Stage `B` answered from the banked record, the closure audit — gate answered **NO** | Y | Y | Y | Y† | none | [T](4_p2_lottery/TECHNICAL_P2_ROUTEBX_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEBX_V1.md) — **explicitly no figure by design**: the yes-branch would have registered `fig62`, the no-branch measures nothing (see file header). Added by leg 138 |
-| Route-M2P v1 (leg 125) | Chen's γ=2 dissipative gCLM candidate: full text, constants, first `Y₀` — gate answered **NO** on both clauses | Y | Y | Y | **GAP: none** | fig61 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEM2P_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEM2P_V1.md) — added by leg 156; the missing `*_evidence.py` is gap list item 13 |
+| Route-M2P v1 (leg 125) | Chen's γ=2 dissipative gCLM candidate: full text, constants, first `Y₀` — gate answered **NO** on both clauses | Y | Y | Y | Y | fig61 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEM2P_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEM2P_V1.md) — added by leg 156; `E` closed leg 372: `experiments/p2_route_m2p_v1_promotion_evidence.py` rebuilds `fig61` from the banked JSON alone (no solver import, byte-identical across two reruns), registered in `build_figures.py`'s `P2_EVIDENCE` list — gap list item 13 |
 | Route-NGX v1 (leg 127) | The general class `A₂₁ ≠ 0`, decided: `Z₁ ≥ 1` for every bounded `A` — gate answered **YES (i)** | Y | Y | Y | Y† | fig63 | [T](4_p2_lottery/TECHNICAL_P2_ROUTENGX_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTENGX_V1.md) — added by leg 156 |
-| Route-NKR v1 (leg 128) | One guard for three pipelines: the `Y₀`/`Z₀`/`Z₁` fabrication-acceptance gap, closed as a class — gate answered **YES on (b) and (c), NO on (a)** | Y | Y | Y | **GAP: none** | none | [T](4_p2_lottery/TECHNICAL_P2_ROUTENKR_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTENKR_V1.md) — **explicitly no figure by design**: "a repair leg with no curve to plot" (see file header). Added by leg 156; the missing `*_evidence.py` is gap list item 13 |
+| Route-NKR v1 (leg 128) | One guard for three pipelines: the `Y₀`/`Z₀`/`Z₁` fabrication-acceptance gap, closed as a class — gate answered **YES on (b) and (c), NO on (a)** | Y | Y | Y | Y | none | [T](4_p2_lottery/TECHNICAL_P2_ROUTENKR_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTENKR_V1.md) — **explicitly no figure by design**: "a repair leg with no curve to plot" (see file header). Added by leg 156; `E` closed leg 372: `experiments/p2_route_nkr_v1_repair_evidence.py` (6/6 checks pass, reads only the banked JSON, no solver import, no figure produced — matching this row's own by-design convention) — gap list item 13 |
 | Route-M2 v1 (leg 63) — **PARKED, NOT LANDED** | Target reselection under the multiplier/shift screen — gate answered **YES**, and that answer is **escalation #1**: parked on branch `leg/m2-v1`, never merged | — | — | — | — | `fig57` **reserved** | **No files on `main`.** Read the branch with `git show`; do not merge or build on it. Territory and finding: [DIRECTION.md](../DIRECTION.md) §63. Row added by leg 138 |
 | Route-CADX v1 (leg 304) | Does Cadiot arXiv:2505.03091 cover a zero diagonal? Answered **NO — excluded by hypothesis**, Assumption 1 p.6 (`\|l(ξ)\| ≥ l_min > 0`), load-bearing at 8 of 12 located clauses; `l_min = µ` exactly on his leading Swift-Hohenberg example, published runs 0.28/0.32 from the excluded case; a zero *eigenvalue* **is** covered, a zero *diagonal* is not — gate answered **YES (i)** | Y | Y | Y | Y | fig67 | Registered by integration (leg 0). The leg claimed the number provisionally; it landed first and keeps it. **The ban this bears on is NOT lifted** — see the escalation in `reports/ORCH_STATE.md` |
 | Route-P0TCV v1 (leg 300) | Independent verification of leg 266's GATE-YES correction to leg 251's certificate obligation #1 — gate answered **NO**: architecture PASS (3/3 sub-claims, 10/10 BCG locators), byte-untouchedness PASS (29/29 claims identical), **magnitudes FAIL 4/5** — the width ratio quoted `6.855` re-derives as the closed form `(7+3√5)/2 = 6.854`, rel. err `1.310e-04`. Leg 266 stays unmerged | Y | Y | Y | Y | fig68 | Renumbered `fig67 → fig68` by integration (leg 0): legs 300 and 304 both claimed `fig67` independently while parallel: 304 landed first and keeps it. Evidence script re-run after the rename, 29/29 checks pass |
@@ -348,12 +348,33 @@ returns `MISSING` for the three rows above, which is how legs 125/127/128 were f
    **5 of 5** quartet pieces, not 4, and the `E` mark in its row is corrected to `Y`. The rest
    of item 9 (why leg 68's by-number pass missed the route) stands. This is the only claim in
    the file that failed for this reason rather than by going stale.
+   **Re-verified by leg 372 (Route-IDXB), item CLOSED-WITH-CITATION, not re-touched.**
+   `writeup/4_p2_lottery/p2_weight_repairs_v1_evidence.py` is confirmed present on disk and
+   runnable, landed in `9d9b7ea` and re-confirmed correct by leg 138. Item 9 was already fully
+   closed before this leg started; per this leg's own gate, recreating it would be a duplicate
+   and a FAIL, so nothing was written. Bank the citation and move on.
 10. **Route-KA v1 (leg 61) has TECHNICAL but no BLOG, no `*_evidence.py` and no figure** (found
    by leg 108). Runner `experiments/p2_route_ka_v1_kawahara.py` and curated data
    `writeup/data/p2_route_ka_v1_kawahara.json` are both present, and this is the leg that
    reproduced a *published* radius end to end — the repository's one external known-answer check
    of the interval pipeline, so per lesson 76 it earns the same care as a headline result. 3 of
    5 quartet pieces present. Not fixed here: BLOG prose and figure selection are claim-bearing.
+   **`E` closed by leg 372 (Route-IDXB): `experiments/p2_route_ka_v1_kawahara_evidence.py`
+   reads only `writeup/data/p2_route_ka_v1_kawahara.json` (no solver import, no re-run) and
+   asserts 8/8 checks — Reading A (CLN's `r0` is a certified radius of ours, YES), Reading B
+   (the pre-committed window's shortfall, `3.3531x`/`0.5254` decades, NOT smoothed away), both
+   nominated explanations for that shortfall FALSIFIED at their banked magnitudes (trace
+   projection `1.0252x` of the needed `3.3387x`; the discarded tail `2.978` decades short),
+   the resolution sweep (`Y0` flat, `r_min_Hl` tracking `sqrt(2N+1)`), and the poisoning
+   control (linear across 8 decades, fails to close at the largest kick).**
+   **`F` was never a genuine gap: `TECHNICAL_P2_ROUTEKA_V1.md`'s own header says, verbatim,
+   "No figure: this is a known-answer audit and the established convention is that such legs
+   register none" — the same by-design class item 6 already records for Route-D's
+   advection/literature-scope legs, and the same class the NKR half of item 13 records below.
+   Leg 372 does not claim a new figure number for this route: this repo's own standing
+   practice ("legs must not pick their own numbers; integration allocates") is respected, and
+   no allocation was owed to a route whose own header declares none needed. Item 10 now
+   stands for the BLOG clause alone — prose, outside a scripts/figures-only remit.**
 11. **`writeup/README.md`'s numbered index is now stale by a further 30 legs** — item 4 recorded
    it stopping at entry #47; leg 108 confirms it has received no entry for any leg in the
    58–102 window either. Same reason as item 4 (numeric-prose paragraphs, out of remit), same
@@ -397,6 +418,25 @@ returns `MISSING` for the three rows above, which is how legs 125/127/128 were f
    (leg 127), has all 6 and is the contrast case. Not fixed here, same reason as items 9 and 10:
    writing an `evidence.py` is a claim-bearing choice about what to rebuild and plot, outside a
    links-and-labels remit.
+   **Both halves CLOSED by leg 372 (Route-IDXB), in 322/327's shape.**
+   **M2P**: `experiments/p2_route_m2p_v1_promotion_evidence.py` imports no solver module and
+   reads only `writeup/data/p2_route_m2p_v1_promotion.json`, rebuilding `fig61` byte-identical
+   across two reruns (`sha256sum` match). Its one deviation from the original `build_figure()`
+   is deliberate: the original's panel (a) re-solves a Newton iterate for its dashed line — a
+   fresh solve, which this evidence script must not do because the raw coefficient array is
+   not itself banked. Leg 372's panel (a) instead plots ONLY Chen's closed form
+   `Omega(x) = -2bx/(x^2+b^2)^2` (evaluating a fixed analytic formula at the banked constant
+   `b`, not solving anything) and annotates it with the banked `n=1201` Newton-reconstruction
+   numbers (`c_l -> 0.333333435`, abs err `1.02e-07`) as text rather than a re-solved curve.
+   Registered in `writeup/build_figures.py`'s `P2_EVIDENCE` list.
+   **NKR**: `experiments/p2_route_nkr_v1_repair_evidence.py` reads only
+   `writeup/data/p2_route_nkr_v1_repair.json`, no solver import, and asserts 6/6 checks —
+   gate (a)'s false-accept count (`21/105` pre-repair to `4/105` post, `17` rejected, `0`
+   clean-input outcomes moved, the `4` residual named not dropped), gate (b)'s zero regression
+   (`4626/4626` comparisons bit-identical, `worst_ulps=0`), gate (c)'s shared-guard agreement,
+   and the overall answer (`YES` on (b) and (c), `NO` on (a)). No figure is produced, matching
+   the route's own by-design "no curve to plot" header — not registered in `P2_EVIDENCE` for
+   that reason, same as the Route-KA v1 script above.
 
 Route-TC is no longer in progress: it landed as leg 53 and has a complete quartet, indexed in
 the Arc 4 table above.

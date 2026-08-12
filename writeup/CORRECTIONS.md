@@ -2074,3 +2074,105 @@ gate, and every one of `test_dssp_screen.py`'s 19 checks are all unmoved; every 
 leg's territory touches is confirmed byte-unchanged (`git diff --stat` empty on all of them). **0
 bans touched**, `plan_of_record.py` and `DIRECTION.md` untouched. No link of the `L1 → L4` chain
 moved. Clay odds stay **~0.05%**.
+
+## §29 — leg 372, Route-IDXB: the cycle-5 batched evidence follow-up — items 9, 10, 13 dispositioned
+
+`writeup/INDEX.md`'s quartet-gap list carried three items reserved by leg 327's own comment in
+`writeup/build_figures.py` for "a later batched follow-up leg": items 9 (Weight-repairs v1), 10
+(Route-KA v1), and 13 (Route-M2P v1 + Route-NKR v1). All three are dispositioned here, in
+322/327's shape — rebuilt from banked/curated data only, no fresh solves, no banked JSON
+touched.
+
+### 29.1 Item 9 (Weight-repairs v1) — ALREADY CLOSED, verified and cited, not re-touched
+
+`experiments/journal/leg_138.md` and `writeup/INDEX.md`'s own item-9 text already record that
+leg 138 found `writeup/4_p2_lottery/p2_weight_repairs_v1_evidence.py` landed in commit `9d9b7ea`
+(the same commit that created the route, pre-dating leg 108's own pass) — the route has 5 of 5
+quartet pieces, not 4. Leg 372 re-confirmed the file is present on disk and runs. Per this leg's
+own gate, recreating an already-closed artifact is a duplicate and a FAIL — nothing was written
+for item 9 beyond this citation.
+
+**Disposition: CLOSED-WITH-CITATION-TO-EXISTING-CLOSER (leg 138, commit `9d9b7ea`).**
+
+### 29.2 Item 10 (Route-KA v1, leg 61) — E closed with a new artifact; F was never a real gap; BLOG stays open
+
+`writeup/4_p2_lottery/TECHNICAL_P2_ROUTEKA_V1.md`'s own header states, verbatim: "No figure:
+this is a known-answer audit and the established convention is that such legs register none."
+The gap list's own item 6 already records the same by-design "no measurement, no figure"
+convention for Route-D's advection/literature-scope legs, and item 13 below records it again for
+Route-NKR v1 — this is the third confirmed instance, not an isolated inconsistency. Leg 372
+therefore does not claim a new figure number for this route: this repository's own standing
+practice ("legs must not pick their own numbers; integration allocates," `writeup/INDEX.md`'s
+in-flight figure-allocation section) is respected, and this leg's dispatch carried no figure
+reservation. The `F` cell's `**GAP: none**` mark is corrected to "not a gap — by design."
+
+What IS built: `experiments/p2_route_ka_v1_kawahara_evidence.py` reads only
+`writeup/data/p2_route_ka_v1_kawahara.json` (no solver import, no re-run) and asserts 8/8
+checks, run live:
+
+```
+8/8 checks pass -- Route-KA v1's magnitudes reproduce from
+writeup/data/p2_route_ka_v1_kawahara.json alone, no re-run.
+```
+
+covering Reading A (CLN's published `r0` is a certified radius of ours — YES), Reading B (the
+pre-committed window's shortfall, `3.3531x` / `0.5254` decades, reported at its banked magnitude,
+not smoothed), both nominated explanations for that shortfall FALSIFIED at their banked
+magnitudes (trace projection explains `1.0252x` of the needed `3.3387x`; the discarded tail is
+`2.978` decades short), the resolution sweep (`Y0` flat across `N=60..300`, `r_min_Hl` tracking
+`sqrt(2N+1)` almost exactly), and the poisoning control (linear across 8 decades of displacement
+scale, fails to close at the largest tested kick).
+
+The BLOG piece remains genuinely owed and is NOT written here: prose is a claim-bearing
+write-up, outside this leg's scripts/figures-only remit.
+
+**Disposition: NARROWED (same shape as gap-list item 2/Route-PORT v2) — `E` closed with a new
+artifact, `F` corrected from a false gap to "not a gap, by design," `B/T`'s BLOG clause left
+honestly open.**
+
+### 29.3 Item 13 (Route-M2P v1, leg 125 + Route-NKR v1, leg 128) — both halves CLOSED with new artifacts
+
+**M2P.** `experiments/p2_route_m2p_v1_promotion_evidence.py` imports no solver module and reads
+only `writeup/data/p2_route_m2p_v1_promotion.json`, rebuilding the already-registered `fig61`
+byte-identical across two reruns (`sha256sum` match:
+`0c44b3554dce1b7da98fc73c70435f3f67cc8c6359cbe842ba5082df5577e6dc` both times). The one
+deliberate deviation from the original `build_figure()` (in
+`experiments/p2_route_m2p_v1_promotion.py`, which re-solves a Newton iterate live for panel
+(a)'s dashed line, because the raw coefficient array is not itself banked in the JSON — only
+summary scalars are): leg 372's panel (a) plots ONLY Chen's closed form
+`Omega(x) = -2 b x / (x^2+b^2)^2`, evaluating a fixed analytic formula at the banked constant
+`b` — not a solve — and annotates it with the banked `n=1201` Newton-reconstruction numbers
+(`c_l -> 0.333333435`, abs err `1.02e-07`) as text rather than a re-solved curve. Registered
+additively in `writeup/build_figures.py`'s `P2_EVIDENCE` list.
+
+**NKR.** `experiments/p2_route_nkr_v1_repair_evidence.py` reads only
+`writeup/data/p2_route_nkr_v1_repair.json`, no solver import, and asserts 6/6 checks, run live:
+
+```
+6/6 checks pass -- Route-NKR v1's magnitudes reproduce from
+writeup/data/p2_route_nkr_v1_repair.json alone, no solver import, no re-run. No figure
+produced, matching the route's own declared 'no curve to plot' convention.
+```
+
+covering gate (a)'s false-accept count (`21/105` pre-repair to `4/105` post, `17` rejected by
+the repair, `0` clean-input outcomes moved, the remaining `4` a named residual class rather
+than a leftover), gate (b)'s zero regression (`4626/4626` comparisons bit-identical,
+`worst_ulps=0`, sibling suites all pass), gate (c)'s shared-guard agreement across all three
+certificate-assembly modules, and the overall pre-committed answer (`YES` on (b) and (c), `NO`
+on (a)). No figure is produced, per the route's own by-design "no curve to plot" header — the
+script is therefore NOT registered in `P2_EVIDENCE`, same reasoning as the Route-KA v1 script.
+
+**Disposition: CLOSED-WITH-NEW-ARTIFACT (both halves).**
+
+### The ceiling
+
+**0 banked JSON files touched** anywhere (`git diff --stat` on `writeup/data/*.json` is empty).
+3 new evidence scripts (`experiments/p2_route_ka_v1_kawahara_evidence.py`,
+`experiments/p2_route_m2p_v1_promotion_evidence.py`,
+`experiments/p2_route_nkr_v1_repair_evidence.py`), 1 figure regenerated
+(`writeup/figures/fig61_route_m2p_v1_promotion.png`, byte-identical across reruns), 1 additive
+line in `writeup/build_figures.py`'s `P2_EVIDENCE` list, `writeup/INDEX.md`'s three named rows
+plus their gap-list annotations updated, this entry. **0 gate answers changed anywhere** — every
+route's own YES/NO verdict is read verbatim from its existing banked JSON and reproduces
+unmoved. **0 bans touched**, `plan_of_record.py` and `DIRECTION.md` untouched. No link of the
+`L1 → L4` chain moved. Clay odds stay **~0.05%**.
