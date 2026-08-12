@@ -19,10 +19,44 @@ legs that lose their slot are returned to the reserve queue, not cancelled as fi
 
 ---
 
-## Status: TERMINAL — same orchestrator session, 2026-08-12, cycle 10pp (four-slot
-contract; ALL FOUR SLOTS genuinely vacant of dispatchable work — direction itself is
-exhausted, not a drafting failure; the loop is HELD pending a user ruling on items 1-8 of
-`reports/STATUS.md` or an explicit §9 wind-down authorization)
+## Status: RESUMED — new orchestrator session, 2026-08-12, cycle 11 (four-slot contract;
+the TERMINAL state below is LIFTED by the user's consolidated rulings of 2026-08-11,
+received 2026-08-12)
+
+`origin/main` at `11f73a9`, merge gate **PASS**. The precondition the terminal block itself
+named — "check whether any user ruling has landed since this was written, and if so, execute
+it" — is now met. What has been executed so far, in order:
+
+1. **`plan_of_record.py` annotated** with §1's DSS scope ruling (`bb00a0d`). Neither ban
+   lifted; Ban 2's object scoped to its own wording; named-seed pre-registration required;
+   absent a named seed the ban applies in full; lift condition unchanged. This was routed to
+   integration by the ruling itself — the ban text is not the DM's.
+2. **`reports/STATUS.md` NEEDS-YOU re-headed** (`11f73a9`) with each item's new state named
+   individually, including the two items the rulings did NOT touch (item 2's tautological
+   pass; item 3's 35-leg spend) and the one that stays open by instruction (item 4, §5).
+3. **DM spawned** on branch `dm/cycle-11a` with the rulings verbatim, to produce the cycle-11
+   entry: the §1 record, the §2 screening stop with the FLOOR-TABLE re-synced under §3c, the
+   §3d re-reading of leg 353 as UNDER-RESOURCED-not-NO, the route-4 PROGRAMME spec under §3c,
+   the §4 verification work, and a ranked queue of ≥8 filling four slots.
+
+**Slots at this write: all four still vacant, nothing dispatched.** The DM's slot assignments
+will be cycle 11's first dispatch. Two items are parked on the DM's ruling rather than on the
+user: the disposition of `leg/313-sdss-v1` and `leg/320-mtsc-v1` (finished screening work in
+hand vs §2's stop on screening as a unit of work — figure numbers 72 and 76 are both free on
+main, so the recurring collision does not apply), and a stale reserve precondition the
+orchestrator found and did not act on unilaterally — the DM's roll-up has read "231-234
+(blocked on repairs 217/219/225)" for ~20 cycles, four legs against three repairs, and leg
+233's actual blocker is leg 221, which LANDED (`d19614a`, `3ff62f4`, `a2f1c8a`). No
+`p2_route_bvrrv_v1_postrepair.json` and no leg 233 commit exist, so its precondition now reads
+TRUE on its face; adjacent work has landed since (leg 307 adjudicated 221's two-scale
+counterexample yes-artifact, leg 335 adjudicated the `spike1_stepC_gate.json` gap
+REPRODUCIBLE_AS_BANKED) but 233's clause (b) appears unconsumed.
+
+---
+
+### Superseded status: TERMINAL — 2026-08-12, cycle 10pp (retained verbatim; its
+do-not-draft instruction is DISCHARGED by the rulings above, not overridden — the condition
+it set for lifting is the one that fired)
 
 **DO NOT DRAFT A LEG INTO ANY SLOT.** A successor session reading this file should not treat
 four vacant slots as an oversight to fix. Every standing research direction in this repo is
