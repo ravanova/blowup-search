@@ -33,10 +33,10 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | — | HELD-OPEN (cycle 10oo, joins D's formal exception) | no |
-| B | 376 | R3SP | yes |
-| C | 377 | HCDX | yes |
-| D | — | HELD-OPEN (cycle 10nn formal exception, machine-lawful) | no |
+| A | 380 | PROG-R4 (§3c programme, construction — the critical path) | yes |
+| B | 381 | CLAY-LOC (mathematics) | yes |
+| C | 382 | DECY-ENCL (construction) | yes |
+| D | 233 | BVRRV (post-repair verification) | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -21580,3 +21580,511 @@ load-bearing; the certification routes' funnel through Tsai); the
 programme's ceiling stands at Tier 2 by its own measured gates; and
 the record ends the window telling the truth in every register it
 has. Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 11a) — THE RULINGS LAND; THE TERMINAL
+STATE IS LIFTED; ROUTE 4 BECOMES THE PROGRAMME (PROG-R4, §3c); FOUR
+SLOTS ASSIGNED; 233 RULED DISPATCHABLE; 313/320 RULED LAND-WITH-CAVEAT
+
+Written on `dm/cycle-11a` off origin/main = bb00a0d (base verified
+current before work began — the stale-base incident's discipline).
+The user's consolidated direction of 2026-08-11 is received verbatim
+and supersedes all prior review packets. Every parked NEEDS-YOU item
+this window turned on is now ruled. The cycle-10pp terminal state is
+lifted by those rulings, not by drafting — the do-not-draft
+instruction held until they arrived.
+
+### 1. The §1 scope ruling, recorded — NEITHER BAN IS LIFTED
+
+**Ban 1 (cheap entrance) is unchanged and binds seed selection
+exactly as before.** Legs continue to screen candidate seeds against
+its literal wording, as leg 342 did when it triple-disqualified
+Kwon–Tsai arXiv:2011.02800 for bifurcating off Landau solutions. Its
+three measured spectral reasons are untouched.
+
+**Ban 2 (expensive entrance) is SCOPED, not lifted.** Its object, in
+its own text, is "a GLOBAL periodic-orbit search of a rescaled flow
+with no fixed point nearby to seed it." A SEEDED search — one
+initialised from a named, published orbit or an equivalently
+specified starting point — is outside that object, and route 4 is
+such a search. Leg 260's substantive kill of the UNSEEDED variant
+("Entry B's defining adjective UNSEEDED is incompatible with its
+object's only function space") is untouched: the unseeded global
+trawl remains banned on measurement, not price.
+
+**Two reasons this is a scope ruling and not a lift, both the
+user's, both recorded here because they are the ruling's load-bearing
+content:**
+1. Lifting Ban 2 would also release the unseeded trawl that leg 260
+   genuinely killed — the scope ruling keeps that kill in full force
+   while placing the seeded search outside the banned object.
+2. Entry B's lift condition can no longer be met on leg 260's own
+   answer: the algebraically weighted space it gave for clause (a) is
+   the space leg 341 later measured dead in three lanes (sup-norm/
+   collocation 6.04x short at theoretical optimum; coefficient/ℓ¹_w
+   no window at any exponent; origin-H²/Mellin dies orthogonally).
+   A lift whose own clause-(a) answer is measured dead is not a lift
+   path; a scope ruling is the only honest instrument left.
+
+**The enforcement clause, binding on every leg and every programme
+unit claiming this scope:** the claiming unit must name its seed in
+its own pre-registration — SOURCE, IDENTIFIER, and WHY IT IS NOT A
+CHEAP-ENTRANCE CONSTRUCTION (i.e. not obtained by bifurcation off a
+fixed point of a rescaled flow). **Absent a named seed, Ban 2 applies
+in full.** PROG-R4's own §1 compliance is in its spec below.
+
+**Routing:** the ban-text annotation in `plan_of_record.py` is
+integration's, not the DM's, and integration has already landed it —
+commit **bb00a0d**, which this entry cites and does not restate. The
+ruling bound immediately on receipt regardless of that annotation.
+
+### 2. The §2 screening stop, and the FLOOR-TABLE re-synced under §3c
+
+**No new literature or screening legs while the programme is live.**
+This is not a ban on reading — external reading happens inside the
+programme when the build needs it. It is a ban on screening as a
+UNIT OF WORK. The last wave ran 50 legs and produced no novelty,
+which is the expected output of screening, not a failure of it, and
+is why it stops.
+
+**FLOOR-TABLE re-synced in this same edit** (the marker block at the
+top of this file): A/380 PROG-R4 (construction, §3c programme),
+B/381 CLAY-LOC (mathematics), C/382 DECY-ENCL (construction), D/233
+BVRRV (verification, not floor-eligible). 3/4 eligible ≥ §3b's 2-of-4;
+`test_9_composition_floor_is_met` passes on the real roster. Per §3c
+rule 4, a literature leg would now read `no` in the Eligible column
+while PROG-R4 is live — none of the four is literature-typed, so the
+rule binds nothing today but is recorded as governing every future
+sync until the programme ends.
+
+**How §3c bears on STATUS item 8:** item 8 escalated that the table
+could not represent a wind-down — test_9 fails any table with fewer
+than 2 eligible rows, so the 10pp terminal state had to be carried as
+prose while the table held landed legs' rows as a legal fiction. That
+divergence is now MOOT IN FACT though not in contract: the table has
+a genuine programme state to represent and represents it truthfully.
+Item 8's underlying question (whether the contract should be able to
+express an honest all-vacant state) remains integration/user
+territory and is not resolved by this entry — it has simply stopped
+binding, because the state it could not express no longer obtains.
+
+### 3. The §3d re-reading of leg 353's NO — recorded as
+UNDER-RESOURCED, not NO
+
+Re-read as directed, and recorded: leg 353's gate fired on an attempt
+its own text calls under-resourced — **T_total=2000 DNS against a
+literature scale of T~1e4–1e6, two to three orders of magnitude
+short** — while its control (the same code from a 1%-perturbed exact
+laminar fixed point) **converged cleanly at 99.3% monotone residual
+reduction, proving the extraction layer sound**. The five failures
+sat at final residual [22.5, 29.5] against tol=1e-8, in exactly the
+regime where the source literature's own success curves predict
+mostly failure at that sample size (Lucas–Kerswell's own ~10% at
+residual ≥0.2 gives P(0 in 5)=59%). Under §3d that verdict is
+**UNDER-RESOURCED**: an under-resourced null returns a cost, never a
+verdict. **Route 4 is not to be re-litigated on leg 353's NO — by
+me, by any leg, or by any successor DM.** What carries forward at
+full strength: leg 353's sign-bug fix in `optimal_shift_residual`
+(`solver/kolmogorov2d_nkbasin.py`), and its control's proof that the
+apparatus works.
+
+### 4. THE PROGRAMME — PROG-R4 (leg 380), dispatched under §3c
+
+Authorised by the user's §3: leg 358's costed spec-compliant retry
+(minimum-viable 2 legs / ~22–33h compute at T=1e5; literature-scale
+option ~10.2 GPU-days at T=5e6) proceeds under the §1 ruling. This is
+a PROGRAMME, not a sequence of legs: **one long-lived worker in slot
+A, state persisting across units, not terminated on unit landings; it
+occupies the slot until the programme completes, stops on its own
+rule, or the user ends it.**
+
+**Object.** Recover published relative periodic orbits of 2-D
+Kolmogorov flow at the scale the question is posed at, then measure
+the Newton basin radius — completing brick B5's original deliverable
+(clause (c-iii): "converts S4 from a hope into a number") at
+spec-compliant resourcing. This is the route-4 critical path.
+
+**Seed, named per §1 (the programme's own pre-registration must
+carry this verbatim and re-screen it).** SOURCE: Lucas & Kerswell
+2015, arXiv:1406.1820v2, Table IV. IDENTIFIERS: the five published
+RPOs leg 353 pre-registered (including UPO37, shift s=0.375), as
+recorded in `writeup/data/p2_route_dsspb5_v1.json`. WHY NOT A
+CHEAP-ENTRANCE CONSTRUCTION: these orbits were obtained in the
+source by recurrent-flow analysis of turbulent DNS trajectories
+converged with hookstep-Newton — not by bifurcation off a fixed
+point of a rescaled flow, Hopf or otherwise; and the present search
+is INITIALISED from that published data, which is exactly the
+seeded shape the §1 ruling places outside Ban 2's object. Screened
+against Ban 1's literal wording: no step of any unit continues a
+fixed point into an orbit.
+
+**One novelty pass, programme-level (U0).** Run once, at programme
+start, in full: scope = spec-compliant hookstep RPO recovery plus
+basin-radius measurement on the named seeds. It binds the whole
+programme; no per-unit novelty asks. A unit that later makes a
+novelty CLAIM still runs its own pass (§3c rule 3).
+
+**Units, milestones, and gates — gates ONLY where a claim is made:**
+
+- **U1 (build → MILESTONE M1): the globalisation layer.** Genuine
+  hookstep/trust-region on top of the existing Newton–Krylov
+  apparatus (Viswanath 2007's diagnosis, quoted in 358's record:
+  plain and damped Newton steps are ineffective on this problem
+  class). Milestone, not gate: layer exists; the laminar-fixed-point
+  control reproduces 353's clean convergence (99.3% baseline) through
+  the new layer; per-iteration ledger persisted. No claim is made.
+- **U2 (build → MILESTONE M2): DNS at compliant scale.** T=1e5 at
+  N=24 with recurrence-candidate extraction, thresholds taken from
+  the sources as banked in `p2_route_rpol_v1.json`. Milestone:
+  trajectory archive + near-recurrence library persisted with their
+  thresholds stated. No claim is made.
+- **U3 (claim → GATE G1): the recovery attempts.** ~100 seeded
+  hookstep-Newton attempts at the pre-registered compliant scale.
+  §3d pre-registration, stated now so the gate cannot fire on a
+  budget: the compliant scale IS T=1e5 / genuine hookstep / ~100
+  attempts / N=24 (358's minimum-viable spec). At the sources' own
+  success rates this sample is resourced: P(0 successes in 100) ≈
+  1.2% at Chandler–Kerswell's 4.3% (7/163, nonzero-shift RPO class),
+  ≈ 3e-5 at Lucas–Kerswell's ~10%.
+  **G1: does at least one named Table-IV RPO recover to tol=1e-8?**
+    yes → the extraction premise is re-established on this
+          realization at compliant scale; U4 proceeds. CEILING: TIER
+          2. CLAY_OBLIGATIONS §6's two no-method obligations —
+          (i) certified far-field decay + admissible cutoff,
+          (ii) persistence/stability under localisation — are OPEN
+          and unrelaxed by this branch.
+    no  → a RESOURCED null: §3d's stop genuinely fires this time, on
+          measurement, and route 4 stops — the programme ends and
+          reports per-attempt residuals, condition numbers, and the
+          comparison against the sources' own success curves as
+          magnitudes. The same two §6 obligations are recorded OPEN;
+          CEILING: TIER 2. The stop packet goes to the user; nothing
+          is retried on DM authority.
+- **U4 (claim → GATE G2): the basin radius.** Perturb the recovered
+  orbit's initial data, measure the perturbation radius at which
+  hookstep-Newton fails, with a planted control on the failure side.
+  **G2: is a radius measured with a coherent (monotone) failure
+  boundary, control firing as planted?**
+    yes → clause (c-iii) becomes a number; S4's cold-start
+          assessability is reported as a magnitude; the programme's
+          2-D object is complete and the next route-4 decision
+          returns to the DM and the user. CEILING: TIER 2; §6's two
+          obligations OPEN.
+    no  → the boundary is incoherent or below the perturbation
+          floor: report the magnitudes and the mechanism; a
+          non-boundary is the deliverable, not a defect to tune
+          away. CEILING: TIER 2; §6's two obligations OPEN.
+
+**Persistent state (what survives across units):** an
+`experiments/programme_r4/` directory holding `state.json` (the unit
+ledger: milestones reached, gate answers, costs measured), the DNS
+trajectory archive, the recurrence-candidate library, and the
+per-attempt convergence ledger — plus the worker itself, which is
+not terminated between units.
+
+**What the programme does NOT contain, stated to keep §5 honest:**
+no 3-D search unit exists in this spec. B6 (the 3-D seeded search)
+requires a NAMED 3-D seed under §1, and the 3-D seed set is measured
+EMPTY, twice, with controls (leg 313; re-measured at leg 334 §4.1).
+Absent a named seed Ban 2 applies in full, so nothing 3-D can
+dispatch from this programme as it stands. Before any 3-D profile
+compute could ever be dispatched, CLAY_OBLIGATIONS §8.1's
+certification-route decision point returns to the user. **Nothing in
+this entry or this programme presumes the POCP spend either way —
+that decision is the user's (§5), and no unit drafted here prepares
+for it or against it.**
+
+**Escalation to literature scale (T=5e6, ~10.2 GPU-days):**
+authorised in kind by the user's §3, but GPU-dependent in the source
+papers' own hands and this repo's compute does not currently have
+it. The programme runs minimum-viable first and reports the
+escalation question WITH G1's numbers rather than assuming hardware.
+
+**Programme territory (exclusive to PROG-R4):**
+`solver/kolmogorov2d_nkbasin.py`, `solver/hookstep_newton.py` (NEW),
+`test_kolmogorov2d_nkbasin.py`, `test_hookstep_newton.py` (NEW),
+`experiments/programme_r4/**`, `writeup/data/p2_prog_r4_*.json`,
+`writeup/novelty/prog_r4.md`, `experiments/journal/prog_r4_*.md`.
+Figure allocation at dispatch by the orchestrator if a unit warrants
+one. Difficulty: heavy (the programme as a whole; U1 standard, U3
+compute-bound).
+**Preconditions:** bb00a0d on main (Ban-2 scope annotation present in
+`plan_of_record.py`); `solver/kolmogorov2d_nkbasin.py` carries 353's
+sign-fixed `optimal_shift_residual`; `writeup/data/p2_route_rpol_v1.json`
+and `writeup/data/p2_route_dsspb5_v1.json` present on main. All four
+checkable by reading main; all four TRUE at this writing.
+
+### 5. The §4 verification work — CLAY_OBLIGATIONS is a specification
+to check, not a banked result
+
+The document (332cc2a) binds the build; its own header says every
+clause needs this repository's verification pass. §8's four asks are
+enforced as follows: (1) certification-route-before-compute — the
+only open route is POCP (leg 348, class C); the spend stays with the
+user and nothing here presumes it; no 3-D compute exists in PROG-R4
+to outrun that decision. (2) certified-enclosure-not-fit — leg 382
+below builds the instrument. (3) §6's two no-method obligations are
+carried OPEN in both branches of both programme gates above, so the
+Tier-2 ceiling cannot be relaxed by a unit that only discharged
+§1–§3. (4) the §2 exclusion screen re-runs before any publication —
+recorded as a standing obligation on whatever leg ever drafts
+publication material, not as work now.
+
+**The highest-value item, verified FIRST (leg 381): the localisation
+problem.** The juxtaposition this repository never made before
+CLAY_OBLIGATIONS made it: leg 260 banked that the target has
+INFINITE ENERGY IN THE SIMILARITY VARIABLE, and the Clay statement
+requires BOUNDED ENERGY. On the reviewer's arithmetic
+`∫|u|²dx ~ (T*−t)^{1/2}∫|U|²dy`, so bounded energy needs
+`U ∈ L²(ℝ³)`, which the specification does not give. The gap is the
+localisation problem — cutting off changes the solution, so the
+obligation transfers to §5's persistence question rather than being
+discharged by the cutoff. It is unattempted here and is where
+comparable programmes spent their hardest years. Leg 381 verifies
+the arithmetic and the reading; it does not attempt localisation.
+
+**The certified-enclosure requirement (leg 382):**
+`solver/dssp_screen.py` currently records a FITTED far-field decay
+exponent per candidate; CLAY_OBLIGATIONS §4 is explicit that fitted
+is not sufficient — the admissible cutoff radius and the size of the
+perturbation the cutoff introduces are both functions of the
+CERTIFIED exponent. Leg 382 builds an enclosure-based decay bound as
+a new module and proves it on planted knowns; the fitted column is
+never silently replaced.
+
+### 6. The ranked queue, and the four slot assignments
+
+Exactly one leg on the critical path: A/380. All territories
+disjoint by construction (the programme owns its list above; 381
+touches no solver module; 382 creates new modules and reads
+`dssp_screen.py` without editing it; 233 creates only its own
+postrepair files; 383, when dispatched, is the only entry that edits
+`solver/dssp_screen.py` itself).
+
+**SLOT A ← 380 PROG-R4** — the programme, spec in §4 above.
+CRITICAL PATH. [FLOOR-ELIGIBLE: construction]
+
+**SLOT B ← 381 CLAY-LOC — verify CLAY_OBLIGATIONS §4's localisation
+juxtaposition** [FLOOR-ELIGIBLE: mathematics]
+```
+### 381 — ROUTE-CLOC: IS THE LOCALISATION GAP EXACTLY AS THE
+OBLIGATIONS DOCUMENT STATES IT? (the §4-bullet-1 verification, ruled
+highest-value by the user)
+**Thesis.** CLAY_OBLIGATIONS §4 rests on a reviewer's arithmetic and
+a reviewer's reading of the official problem statement, both flagged
+in its own header as the clauses most likely to be wrong. Verify:
+(i) re-derive the energy scaling ∫|u|²dx at time t against leg 260's
+banked λ-DSS framing (period 2 log λ in s) — does (T*−t)^{1/2}
+survive an independent derivation for DSS (not just exact-SS), with
+the log-periodic modulation handled rather than dropped? (ii) check
+the bounded-energy requirement and the smooth/divergence-free/
+faster-than-polynomial-decay data clauses against the official Clay
+statement's own text (fetch permitted: verification reading inside a
+programme window, not screening). (iii) state, as magnitudes, what
+the admissible-cutoff analysis would consume: the certified decay
+exponent (leg 382's instrument) and the perturbation size as a
+function of cutoff radius.
+**Gate.** Does the reviewer's arithmetic survive (i) with the DSS
+modulation handled, AND does (ii) confirm the bounded-energy reading
+against the primary text?
+  yes -> CLAY_OBLIGATIONS §4 is verified as a specification; the
+         localisation problem is confirmed load-bearing, its inputs
+         named; report routed to integration for the document's
+         DRAFT-UNVERIFIED header to be updated (integration's edit,
+         not this leg's).
+  no  -> Report exactly which step fails and by what factor (e.g.
+         the DSS exponent differs from the SS one) — a corrected
+         obligation is MORE valuable than a confirmed one; route the
+         correction to integration verbatim.
+**Territory.** experiments/p2_route_cloc_v1.py,
+               writeup/data/p2_route_cloc_v1.json,
+               writeup/novelty/leg_381.md, experiments/journal/leg_381.md.
+               Edits no solver module, no obligations file.
+**Difficulty.** standard
+**Preconditions:** CLAY_OBLIGATIONS.md on main (332cc2a); leg 260's
+banked infinite-energy statement on main. Both TRUE.
+```
+
+**SLOT C ← 382 DECY-ENCL — the certified decay enclosure
+instrument** [FLOOR-ELIGIBLE: construction]
+```
+### 382 — ROUTE-DEXC: A CERTIFIED FAR-FIELD DECAY ENCLOSURE, NOT A
+FIT (CLAY_OBLIGATIONS §8 bullet 2, enforced as a build)
+**Thesis.** dssp_screen.py records a FITTED far-field exponent;
+§4's admissible cutoff depends on a CERTIFIED one. Build
+solver/dssp_decay_enclosure.py: an interval/enclosure-based decay
+bound (existing interval capability as substrate — grep
+capabilities.py FIRST, per the standing ban) that returns a
+certified interval for the decay exponent of a supplied profile on
+a stated radial window, validated on planted analytic knowns.
+**Gate.** Does the enclosure reproduce a planted profile's EXACT
+known exponent within its certified interval on the pre-registered
+window, AND fail (interval excludes truth or reports incapacity) on
+a planted mismatched control — with the fitted column left in place
+and the certified column recorded ALONGSIDE it, never replacing it?
+  yes -> The §4 obligation has a named instrument; its first real
+         consumer is whatever future unit produces a profile — none
+         exists yet and this leg claims nothing about one.
+  no  -> Report the mechanism (conditioning, window, structural);
+         "no known method" (§6 item 1) then stands CONFIRMED at one
+         attempted realization, which is decision information, and
+         the fitted column stays flagged non-sufficient.
+**Territory.** solver/dssp_decay_enclosure.py (NEW),
+               test_dssp_decay_enclosure.py (NEW),
+               experiments/p2_route_dexc_v1.py,
+               writeup/data/p2_route_dexc_v1.json,
+               writeup/novelty/leg_382.md, experiments/journal/leg_382.md.
+               READS solver/dssp_screen.py; edits it nowhere.
+**Difficulty.** heavy
+**Preconditions:** solver/dssp_screen.py on main with the fitted
+exponent column; the interval capability registered in
+capabilities.py. Both TRUE.
+```
+
+**SLOT D ← 233 ROUTE-BVRRV** — as drafted at cycle 5 (this file,
+§"233 — ROUTE-BVRRV", spec unchanged, both clauses (a) and (b)).
+Not floor-eligible (verification); lawful in D with A/B/C all
+eligible (3/4 ≥ 2). **Preconditions:** leg 221 landed on main
+(d19614a, 3ff62f4, a2f1c8a) — TRUE; no
+`p2_route_bvrrv_v1_postrepair.json` exists on main — TRUE.
+
+**Reserve, ranked below the slots:**
+
+**5. 383 — ROUTE-ST2G: repair leg 357's screen gap (leg 359's
+flag).** [FLOOR-ELIGIBLE: construction]
+```
+### 383 — ROUTE-ST2G: THE SCREEN LEARNS TSAI'S THEOREM 2 AND AN
+ANSATZ CHECK (leg 359's flagged gap, owned by the DM's ledger)
+**Thesis.** Leg 359 found (a048de7) that leg 357's B7 screen tests
+only L³ convergence — it misses Tsai Theorem 2's local-energy route
+and any SS/DSS ansatz check, so it would misclassify a genuinely
+self-similar candidate at this repo's measured decay rate. Add both
+routes to solver/dssp_screen.py.
+**Gate.** Does the upgraded screen classify (i) Tsai's own headline
+example as REACHED by Theorem 2 (the source's decay exponent
+matching this repo's measured one, per 359), and (ii) this
+programme's DSS object as NOT REACHED with the deciding clause
+recorded as the exact-SS ansatz hypothesis — with planted controls
+able to fail in both directions?
+  yes -> The screen stops under-warning; every future candidate
+         report carries the two new columns. CEILING: TIER 2 —
+         surviving a screen is not evidence for existence.
+  no  -> A planted control fails to fire: stop, report verbatim,
+         never widen (the 361 lesson).
+**Territory.** solver/dssp_screen.py, test_dssp_screen_t2.py (NEW),
+               experiments/p2_route_st2g_v1.py,
+               writeup/data/p2_route_st2g_v1.json,
+               writeup/novelty/leg_383.md, experiments/journal/leg_383.md.
+**Difficulty.** standard
+**Preconditions:** a048de7 (leg 359) and 3f614d7 (leg 357) on main —
+TRUE; no live leg editing solver/dssp_screen.py (382 reads only) —
+TRUE at this writing; checkable at dispatch.
+```
+
+**6. 384 — ROUTE-COBV: verify CLAY_OBLIGATIONS' remaining
+reviewer-read clauses** (verification class, NOT floor-eligible).
+```
+### 384 — ROUTE-COBV: THE OBLIGATIONS DOCUMENT'S OTHER
+REVIEWER-READ CLAUSES, CHECKED AGAINST PRIMARY TEXT AND THE REPO'S
+OWN LEDGER
+**Thesis.** After 381 verifies §4, the document's remaining
+unverified clauses are: the "target, as specified" paragraph's
+reading of the official statement (load-bearing for §5), §2's four
+screen rows (cross-check each against its named landed record,
+machine-read not transcribed), and §7's prize-rules clauses
+(refereed publication, two-year clock, general acceptance) against
+the Clay Institute's own published rules. Reading, not screening;
+no outreach.
+**Gate.** Does every checked clause either verify against its
+primary source/landed record, or get reported with the exact
+discrepancy verbatim (routed to integration — the document is not
+this leg's to edit)?
+  yes -> The obligations document graduates from DRAFT-UNVERIFIED
+         clause by clause, on integration's edit.
+  no  -> A source is unreachable: bank the refusal as a refusal;
+         an unverifiable clause is recorded as exactly that.
+**Territory.** experiments/p2_route_cobv_v1.py,
+               writeup/data/p2_route_cobv_v1.json,
+               writeup/novelty/leg_384.md, experiments/journal/leg_384.md.
+**Difficulty.** standard
+**Preconditions:** leg 381 landed (its §4 verification is consumed,
+not repeated) — FALSE until B lands; then checkable on main.
+```
+
+**7. 231 — ROUTE-PCRV** (as drafted): **Preconditions:** leg 217
+landed — FALSE. Stays reserve, blocked.
+**8. 232 — ROUTE-ICRV** (as drafted): **Preconditions:** leg 219
+landed — FALSE. Stays reserve, blocked.
+**9. 234 — ROUTE-RSRV** (as drafted): **Preconditions:** leg 225
+landed — FALSE. Stays reserve, blocked.
+**10. 325 — ROUTE-MTB1** (as drafted): **Preconditions:** the
+user's AFFIRMATIVE ruling on 320's packet SUBSTANCE (fund the MT
+build) — NOT satisfied by the §1 ban-scope ruling, which resolved a
+different question; plus leg 312 landed. Stays user-gated. Ruled
+explicitly so nobody reads the consolidated direction as funding MT.
+
+### 7. Rulings on the orchestrator's two findings
+
+**Leg 233: DISPATCHABLE, as written — and it is dispatched, to slot
+D, this cycle.** The finding is correct and the roll-up line was
+wrong for ~20 cycles: 233's precondition is leg 221, not repairs
+217/219/225; leg 221 LANDED (d19614a, 3ff62f4, a2f1c8a); no
+`p2_route_bvrrv_v1_postrepair.json` and no leg-233 commit exist, so
+its stated precondition reads TRUE and its work is undone. The
+partially-adjacent landings do not consume it: leg 307 adjudicated
+221's two-scale counterexample yes-artifact and leg 335 adjudicated
+the spike1_stepC_gate.json gap — neither is an independent re-run of
+the two repaired mechanisms (clause a) nor of the 256233-call
+zero-contamination sweep (clause b), which is the leg's core. Not
+superseded, not retired. **Corrected roll-up, effective now: "231,
+232, 234 blocked (repairs 217/219/225 unlanded); 233 UNBLOCKED (221
+landed) and dispatched to D at cycle 11a."**
+
+**The parked branches leg/313-sdss-v1 and leg/320-mtsc-v1: LAND
+BOTH, with this recorded caveat.** They were parked solely pending
+the DSS ban-wording ruling, which §1 has now made; the orchestrator
+measured both complete (full quartets, gate answers, territories
+disjoint from each other and from main, no ban file touched, figure
+numbers 72/76 both free on main). §2 stops NEW screening as a unit
+of work; it does not unwrite finished, gate-answered screening
+already in hand — and retiring these branches would delete measured
+evidence, most sharply leg 313's controlled EMPTY-seed measurement,
+which is the exact evidence base any §1 named-seed pre-registration
+(including PROG-R4's own) must argue past. THE CAVEAT, recorded:
+they land as the closing record of the screening era, not as new
+direction; under §3c neither counts toward the composition floor
+while PROG-R4 is live; their landing unfreezes nothing by itself —
+specifically, leg 325 stays user-gated per ruling 10 above. The
+orchestrator merges both through the standard gate; the DM does not
+merge.
+
+### 8. Standing state
+
+A/380 PROG-R4 (the critical path — the only leg on it); B/381
+CLAY-LOC; C/382 DECY-ENCL; D/233 BVRRV. Floor 3/4 (380, 381, 382),
+table synced in this edit, test_9 passes on the real roster. Brick
+ledger: B1–B4 ✓, B5 re-opened as PROG-R4 U1–U4 under the §3d
+re-reading, B6 has no named 3-D seed and cannot dispatch (§1), B7 ✓
+(357; upgrade queued as 383), B8 fires only on a candidate, B9
+struck. With the user, still: the POCP spend (item 4 — inputs
+complete, nothing here presumes it), and item 8's contract question
+(moot in fact while the programme runs). Items 1, 2, 3, 5, 6 are
+ruled by the consolidated direction and closed on this entry's
+recording of them.
+
+**Reserve queue: 6 undispatched legs (383, 384, 325, 231, 232,
+234).** Immediately dispatchable: **1** (383; 384 waits on 381; 325
+user-gated; 231/232/234 blocked). Next fresh leg number: **385.**
+
+Nothing in this update lifts a ban — the §1 ruling is recorded as
+SCOPE, both bans stand in full, and the ban text's annotation is
+integration's landed commit bb00a0d, cited not restated. A programme
+is a change to the unit of work, never to the standard of evidence:
+Tier-2 ceiling in every gate above, §6's two no-method obligations
+OPEN in every branch, lesson 91, the merge gate, territory
+discipline, no external outreach — all unchanged and more
+load-bearing now. No output here is movement toward Clay: no link of
+the L1→L4 chain moved; a re-opened 2-D dress rehearsal at honest
+scale is exactly that. Clay stays ~0.05%.
