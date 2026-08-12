@@ -1805,3 +1805,51 @@ and `writeup/figures/fig34_p2_route_e_v1_spectrum.png` regenerated and re-banked
 banked files touched. 0 consumer gate answers changed (`test_literature_gates.py` re-run in full,
 passes). This closes 287's exception with a named mechanism and a repair rather than leaving it
 as a standing re-solve-not-bytes warning. Clay stays **~0.05%**.
+
+---
+
+## §26 — leg 361 (ROUTE-LCB4), 2026-08-12: §25's `VOLATILE_TOKENS` diagnosis fixed at the
+instrument; §24's "within-environment nondeterminism" clause corrected
+
+§25 diagnosed, but did not fix (out of that leg's territory), a one-token gap in leg 287's own
+census instrument, `experiments/p2_route_epa_v1_census.py`: its `VOLATILE_TOKENS` list contained
+`"generated_at"` but not the bare substring `"generated"`, so the single leaf leg 287's
+`determinism_control` found differing between two same-environment regenerations — a timestamp
+field named `generated` — was misread as content nondeterminism rather than correctly bucketed as
+volatile. Leg 361 closed that gap directly: `"generated"` added to `VOLATILE_TOKENS`, confirmed
+live against `experiments/p2_route_e_v1_spectrum.json`'s own `generated` leaf (the exact field
+§25 traced the false alarm to). While auditing the rest of the list for the same shape of gap
+(a suffixed/underscore-bounded token present without its bare root, checked against every
+CENSUS family's actual leaf names, not guessed), one genuine sibling surfaced: bare `"seconds"`
+was likewise missing (only `"seconds_"`/`"_seconds"` were present), which left
+`p2_route_cap_v1_audit`'s own `rows[*].run.seconds` wall-clock leaves — real per-test runtimes in
+a NEGATIVE CONTROL family that is supposed to classify PORTABLE — outside volatile
+classification; added for the same reason. A planted-control test
+(`planted_nondeterminism_control()`, run via `--self-test`) constructs a synthetic pair of "runs"
+that differ in BOTH a bare `generated` timestamp AND a genuinely content-bearing numeric leaf, and
+confirms the comparator, post-fix, stays silent on the timestamp while still correctly flagging
+the real numeric movement (`n_numeric_leaves_moved == 1`, the moved leaf named, not swallowed) —
+so the fix closes the false-alarm gap without blinding the instrument to real content
+nondeterminism, which was checked, not assumed.
+
+This corrects two pieces of standing prose without deleting them: `experiments/journal/leg_287.md`
+carries inline markers, at every site asserting "within-environment nondeterminism" or a "strictly
+worse defect than leg 252's," pointing to §25 and to this entry — the original text is left
+visible and unedited. §24 above (leg 287's landed CORRECTIONS entry) is qualified by this same
+correction: its generalization was framed correctly as applying only to `p2_route_e_v1_spectrum`,
+but the mechanism it pointed at for that family included a within-environment nondeterminism
+claim that does not hold; §25 already named and repaired the family's REAL defect (eigenvalue
+position/sign scrambling under a degenerate `match_filter` sort key, value multisets bit-identical
+across regenerations), so no live claim in this repository still rests on the false alarm this
+entry closes.
+
+### The ceiling
+
+**One file touched for the fix (`experiments/p2_route_epa_v1_census.py`: two `VOLATILE_TOKENS`
+additions plus one new planted-control test, nothing else in the file changed). Zero banked JSONs
+touched — no census run, no `writeup/data/*.json` diff.** Re-running the census's own comparator
+logic against the banked `p2_route_e_v1_spectrum.json` confirms 0 false-alarm leaves post-fix,
+while the planted control confirms the same fixed comparator still trips on genuine content
+nondeterminism. `experiments/journal/leg_287.md` corrected in place (inline markers only, no
+deletion); this entry is purely additive to `writeup/CORRECTIONS.md`. No solver file touched, no
+gate answer changed, no proof or certificate claimed. Clay stays **~0.05%**.

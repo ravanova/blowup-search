@@ -159,11 +159,34 @@ VERDICT_TOKENS = (
 # Leaf keys that are EXPECTED to move between runs and carry no portability
 # information.  Counted and reported separately; never used as evidence.
 VOLATILE_TOKENS = (
-    "timestamp", "generated_at", "date", "elapsed", "runtime", "wall",
-    "duration", "seconds_", "_seconds", "hostname", "host", "cwd", "abspath",
-    "tmpdir", "tempdir", "pid", "git_head", "git_commit", "commit_hash",
-    "run_at", "created", "machine_id", "uuid",
+    "timestamp", "generated", "generated_at", "date", "elapsed", "runtime",
+    "wall", "duration", "seconds", "seconds_", "_seconds", "hostname", "host",
+    "cwd", "abspath", "tmpdir", "tempdir", "pid", "git_head", "git_commit",
+    "commit_hash", "run_at", "created", "machine_id", "uuid",
 )
+# NOTE on the pattern above, found and fixed by leg 361 (LCB4): several
+# entries here were SUFFIXED/UNDERSCORE-BOUNDED forms ("generated_at",
+# "seconds_"/"_seconds") without their BARE ROOT ("generated", "seconds").
+# Substring matching is one-directional -- a bare root is a substring of its
+# suffixed form, but not vice versa -- so a family that wrote the bare field
+# name (e.g. ``"generated": "2026-..."`` in p2_route_e_v1_spectrum.json, or
+# ``run.seconds`` -- real wall-clock time -- in the p2_route_cap_v1_audit
+# NEGATIVE CONTROL) fell straight through undetected as volatile and got
+# treated as content.  ``generated`` is the leg-356-diagnosed gap that
+# produced leg 287's false "fails its own determinism control" headline for
+# p2_route_e_v1_spectrum (see writeup/CORRECTIONS.md §25, §26).  ``seconds`` is
+# a sibling of the exact same shape, found by auditing the other
+# suffix-only entries in this list against every CENSUS family's actual
+# leaf names: with the bare root missing, a negative control's own runtime
+# column could have manufactured a false NON-PORTABLE/DRIFT verdict on
+# nothing but CPU-speed noise.  Checked and NOT bare-rooted because no
+# family leaf actually needs it: "host" (already bare and a substring of
+# "hostname"), "created" (already bare and a substring of "created_at"),
+# "run_at" (no family writes a bare "run" timestamp leaf; over-widening to
+# bare "run" would blind the comparator to real content like
+# ``rungs``/``run.seconds`` themselves, which must stay numerically visible
+# via other tokens, not swallowed by a stray "run").
+
 
 # Leaves that RECORD THE ENVIRONMENT rather than measure anything: the
 # interpreter path, the git HEAD the runner saw, the repo root.  These move by
@@ -608,6 +631,63 @@ def positive_control(regen_flat: dict) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# planted nondeterminism control (leg 361 / LCB4)
+# ---------------------------------------------------------------------------
+def planted_nondeterminism_control(banked_flat: dict) -> dict:
+    """Confirm the VOLATILE_TOKENS fix does not blind the comparator to REAL
+    content nondeterminism -- only to harmless timestamp/runtime noise.
+
+    Leg 356 found leg 287's "fails its own within-environment determinism
+    control" headline for p2_route_e_v1_spectrum was a false alarm: a
+    one-token gap (``generated_at`` present, bare ``generated`` absent) in
+    VOLATILE_TOKENS made a harmless timestamp field read as content movement.
+    Fixing that gap (this leg) must not overcorrect into silence on a leaf
+    that genuinely differs between two runs of the SAME family in the SAME
+    environment -- that would trade one false alarm for a false negative,
+    which is strictly worse (a real defect going unflagged).
+
+    This constructs two "runs" of a synthetic artifact that differ in BOTH a
+    volatile leaf (a bare ``generated`` timestamp, deliberately made to move
+    only along the fixed gap) AND a genuinely content-bearing numeric leaf
+    (a computed residual), and asserts the comparator:
+      * does NOT flag the ``generated`` move (it is volatile, correctly so
+        post-fix -- this is the fix under test, not the control target), and
+      * DOES flag the residual move as real nondeterminism (n_numeric_leaves
+        moved >= 1, that leaf named, not swallowed as volatile).
+    ``banked_flat`` is unused; the control is self-contained by design (lesson
+    90: it must not be compared against a family that could already be
+    expected to move for other reasons).
+    """
+    run_a = {
+        "generated": "2026-08-11T00:00:00Z",
+        "family": "PLANTED_CONTROL_synthetic",
+        "residual": 1.0000000123,   # differs run-to-run: genuine content drift
+        "gate.verdict": "hold",
+    }
+    run_b = {
+        "generated": "2026-08-11T00:00:07Z",   # differs: timestamp only, must NOT count
+        "family": "PLANTED_CONTROL_synthetic",
+        "residual": 1.0007654321,               # differs: real numeric content, MUST count
+        "gate.verdict": "hold",
+    }
+    res = compare(run_a, run_b)
+    generated_move_reported = any(
+        m["path"] == "generated" for m in res["volatile_moves_sample"])
+    residual_seen = res["max_rel_move"] > 0.0 and res["worst_mover"] is not None \
+        and res["worst_mover"]["path"] == "residual"
+    trips = (res["n_numeric_leaves_moved"] >= 1) and residual_seen
+    stays_silent_on_generated = is_volatile("generated") and generated_move_reported
+    return {
+        "trips_on_real_nondeterminism": bool(trips),
+        "stays_silent_on_generated_timestamp": bool(stays_silent_on_generated),
+        "n_numeric_leaves_moved": res["n_numeric_leaves_moved"],
+        "worst_mover": res["worst_mover"],
+        "n_volatile_moves": res["n_volatile_moves"],
+        "pass": bool(trips and stays_silent_on_generated),
+    }
+
+
+# ---------------------------------------------------------------------------
 # read-only guarantee
 # ---------------------------------------------------------------------------
 def sha256(p: Path) -> str:
@@ -644,7 +724,22 @@ def main() -> int:
                          "OUTSIDE the repository)")
     ap.add_argument("--no-resume", action="store_true",
                     help="recompute every family even if a checkpoint exists")
+    ap.add_argument("--self-test", action="store_true",
+                    help="run the planted-nondeterminism control (leg 361) and "
+                         "exit; does not touch any banked JSON or run a census")
     args = ap.parse_args()
+
+    if args.self_test:
+        r = planted_nondeterminism_control({})
+        print(json.dumps(r, indent=2))
+        if not r["pass"]:
+            print("SELF-TEST FAIL: planted nondeterminism control did not pass "
+                  "-- either it failed to trip on real content movement, or it "
+                  "wrongly flagged the volatile 'generated' timestamp.")
+            return 1
+        print("SELF-TEST PASS: comparator still trips on genuine content "
+              "nondeterminism and stays silent on the 'generated' timestamp.")
+        return 0
 
     census = CENSUS
     if args.families:
