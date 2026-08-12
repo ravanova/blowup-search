@@ -1,0 +1,98 @@
+{
+  "leg": 359,
+  "route": "L3BD",
+  "title": "Does NRS/Tsai's exclusion reach a log-divergent-at-infinity (not-in-L3) object, as opposed to a polynomially/exponentially divergent one -- and does it reach this repository's actual screened DSS object?",
+  "date": "2026-08-12",
+  "branch": "leg/359-l3bd-v1 (worktree .leg359-work)",
+  "role": "LEG, floor-eligible, read-and-report, literature-typed",
+  "dispatched_by": "route-4 stop-packet preparation (parent orchestrator), flag for leg 357's ledger owner (the DM)",
+  "territory": [
+    "writeup/data/p2_route_l3bd_v1.json",
+    "writeup/novelty/leg_359.md",
+    "experiments/journal/leg_359.md"
+  ],
+  "files_read_only_never_edited": [
+    "solver/dssp_screen.py (leg 357)",
+    "writeup/data/p2_route_dsspb7_v1.json (leg 357)",
+    "experiments/journal/leg_357.md",
+    "experiments/journal/leg_341.md",
+    "experiments/journal/leg_330.md",
+    "experiments/journal/leg_261.md",
+    "experiments/journal/leg_260.md",
+    "leg/253-nrsx-v1:experiments/journal/leg_253.md (parked, unmerged, read-only)",
+    "leg/253-nrsx-v1:writeup/novelty/leg_253.md",
+    "plan_of_record.py",
+    "DIRECTION.md"
+  ],
+  "figures_assigned": 0,
+  "primary_sources": [
+    {
+      "citation": "Tsai, T.-P., \"On Leray's Self-Similar Solutions of the Navier-Stokes Equations Satisfying Local Energy Estimates\", Arch. Rational Mech. Anal. 143 (1998) 29-51",
+      "url": "https://personal.math.ubc.ca/~ttsai/publications/leray.pdf",
+      "obtained": "full text, re-downloaded independently this leg (not inherited from leg 253's cached copy)",
+      "sha256_this_leg": "6d3182d53806ce82fa0a2d834b31b758f22399ff625b8c8d7025a65f83fb8182",
+      "pdftotext_line_count_this_leg": 1258,
+      "cross_check": "byte-identical (diff empty) against leg 253's cached extraction at Papers/tsai-leray.txt for the first 50 lines spot-checked, and identical line numbers for every theorem/equation/remark cited below -- genuine independent re-verification, not inherited trust",
+      "erratum_checked": {
+        "citation": "Tsai, Arch. Rational Mech. Anal. 147 (1999) 363",
+        "url": "https://personal.math.ubc.ca/~ttsai/publications/leray-erratum.pdf",
+        "sha256_this_leg": "a4fb5549d63d6bc0783440e24c6d87889829aaddad49bf30fb7ab9905ad8f593",
+        "content": "inserts a factor s^{-2} inside one integral on p.47, 'Everything else remains the same' -- no hypothesis changes, per leg 253's prior read, not re-litigated"
+      }
+    },
+    {
+      "citation": "Necas, Ruzicka & Sverak, Acta Math. 176 (1996) 283-294 (NRS)",
+      "obtained": "NOT obtained -- refusal to measure, banked",
+      "attempts_this_leg": [
+        {"url": "https://link.springer.com/content/pdf/10.1007/BF02551584.pdf", "result": "HTTP 303 redirect to paywall landing page"},
+        {"url": "https://projecteuclid.org/journals/acta-mathematica/volume-176/issue-2/On-Leray-self-similar-solutions-of-the-Navier-Stokes-equations/10.1007/BF02551584.full", "result": "HTTP 200 but a 1162-byte paywalled landing stub, not the article"}
+      ],
+      "same_gap_as": "leg 253 (4 routes tried, none succeeded); leg 253's route -- reading Tsai's own restatement of NRS's theorem, acknowledged by Tsai at full text as a restatement -- is used here too, and is now independently re-verified since Tsai's own PDF is independently re-downloaded and re-extracted this leg. This gap is NOT load-bearing for this leg's finding: the finding turns on Tsai's Theorem 2, which this leg read at full, independently-verified primary text."
+    },
+    {
+      "citation": "Pineau, B. & Vicol, V., 'On rotated backwards self-similar solutions of the incompressible 3D Navier-Stokes equations', arXiv:2607.09619",
+      "status": "already fully adjudicated by leg 330 at pinned hashes; NOT re-read at primary text by this leg -- consumed here only as leg 330's landed record, per the dispatch's instruction to keep it distinct and not conflated with the NRS/Tsai question"
+    }
+  ],
+  "screened_object": {
+    "name": "NS3D-DSS-NONAXI-LAMBDA-LARGE (leg 251/leg 260/leg 313's specification, leg 357's DSSP-SCREEN candidate family)",
+    "ansatz": "backward DISCRETELY self-similar (DSS): a periodic orbit of the dynamically rescaled flow, period T = 2 log(lambda), lambda an OUTPUT of the search significantly larger than 1 -- NOT a single stationary profile",
+    "decay": "|U(y)| <= C/(1+|y|), i.e. exponent -1 (Chae-Wolf Type I bound for DSS solutions, arXiv:1610.09464 Thm 1.1, carried via leg 253 -> leg 260); leg 357's own measurement on leg 351's Biot-Savart witness fits the far-field decay exponent at -0.9971",
+    "L3_status": "measured NOT in L3(R^3): leg 357's l3_norm_ladder() does not converge -- successive shells stay roughly constant per decade (87.82, 87.82, 87.82 across the last three decades measured), the textbook signature of a LOGARITHMIC divergence (integral(1/r) dr for a 1/r tail), not a polynomial or exponential divergence"
+  },
+  "adjudication": {
+    "sub_question_1": {
+      "question": "Does NRS's theorem / Tsai's Theorem 1 (the L^q-membership route) reach a log-divergent (not-in-L3, but only logarithmically so) object?",
+      "class": "(ii) DOES NOT REACH -- genuinely outside the hypothesis, no allowance for a near-miss",
+      "deciding_clause": "\"Theorem 1. If a weak solution U of (1.3) belongs to L^q(R^3), for some q in (3,infinity], then it must be constant (and hence identically zero if q < infinity).\" (Tsai 1998, p.30, restating and generalizing NRS 1996's U in L^3 hypothesis)",
+      "reasoning": "This is a strict Lebesgue-membership hypothesis, not a decay-rate or growth condition. A profile whose L^q norm diverges -- however slowly, logarithmically or otherwise -- simply does not satisfy 'U belongs to L^q(R^3)'. There is no sliding scale in the hypothesis's own wording; membership is a yes/no predicate. The theorem's CONCLUSION mechanism (see sub_question_2) turns out to be much more permissive than this hypothesis, but Theorem 1's own stated route to that mechanism is exactly integrability, and integrability is what the log-divergent object lacks."
+    },
+    "sub_question_2": {
+      "question": "Does the proof TECHNIQUE underlying NRS/Tsai (as opposed to Theorem 1's specific hypothesis) actually extend to reach the log-divergent boundary case, via a different route in the same paper?",
+      "class": "(i) REACHES the boundary case -- decisively, and the paper's own worked example is essentially this exact decay rate",
+      "deciding_clause": "\"Theorem 2. Suppose u is a weak solution of (1.1) satisfying the local energy estimates (1.4) in the cylinder Q_1(0,T). If u is of the form (1.2)_1, then u is identically zero.\" ... \"A particular corollary of these results is that a weak solution U of (1.3) with the decay (1.5) must be zero,\" where (1.5) is \"U(y) = A(y/|y|) * 1/|y| + o(1/|y|) as y -> infinity\" (Tsai 1998, p.31, the paper's own headline motivating example for Theorem 2)",
+      "mechanism": "Both Theorem 1 and Theorem 2 are proved via the SAME two-step chain (Tsai 1998 Section 5, p.48-49): (1) establish the growth estimate U(y) = o(|y|), Pi(y) = O(|y|^N) for some finite N -- vastly weaker than L^q membership, a sub-linear-growth condition, not an integrability condition; (2) apply the Liouville-type comparison Lemma 5.1, which needs ONLY |U(y)| <= b|y| for some b < a, to conclude the Bernoulli pressure Pi is constant; then finish via the classical Liouville theorem, invoking EITHER 'U in L^q(R^3)' (Theorem 1's finish) OR 'U -> 0 at infinity' (Theorem 2's finish, p.49: \"Since U in L^q(R^3) in Theorem 1 and U -> 0 at infinity in Theorem 2, the usual Liouville theorem implies that the U_i are 0\"). A profile decaying like 1/|y| trivially satisfies 'U -> 0 at infinity' and trivially satisfies the sublinear-growth hypothesis of Lemma 5.1 -- it needs NO integrability at all for Theorem 2's finishing step. Theorem 2 establishes step (1)'s growth estimate via the LOCAL ENERGY ESTIMATES (1.4) instead of via L^q membership (Section 4, using A_p weights and a CKN-type partial-regularity result), which is exactly why it can reach decay (1.5) -- a rate for which the L^3 norm diverges (|u|^3 r^2 ~ r^{-1}, logarithmically non-integrable at infinity, the exact boundary this leg was asked to test)."
+    },
+    "sub_question_3_the_gate_for_the_actual_repo_object": {
+      "question": "Does Theorem 2's reach (sub_question_2) actually bind this repository's screened DSS object, given that its decay matches (1.5) almost exactly (measured exponent -0.9971 vs Tsai's exact -1)?",
+      "class": "(ii) DOES NOT REACH -- but for a DIFFERENT deciding clause than the L3/decay one, and this is the actual reason the object survives",
+      "deciding_clause": "\"Leray's (backward) self-similar solutions are of the form u(x,t) = lambda(t) U(lambda(t) x), p(x,t) = lambda^2(t) P(lambda(t) x), with lambda(t) = 1/sqrt(2a(T-t))\" (Tsai 1998, eq. 1.2, p.29-30) -- Theorem 2's own hypothesis is stated as 'If u is of the form (1.2)_1'. This is EXACT (continuous) backward self-similarity: a single stationary profile U under one parameter a. The screened object is DISCRETELY self-similar: a genuinely periodic-in-log-time orbit of period T = 2 log(lambda), NOT a fixed point of the rescaled flow and not expressible as (1.2) for any single a. Both Theorem 1 and Theorem 2 require the SS ansatz (1.2); neither is stated for, nor (from reading the proof, which relies throughout on U being a single time-independent profile solving the elliptic system (1.3)) obviously extends to, the DSS ansatz.",
+      "reasoning": "This is the SAME ansatz-class finding leg 253 and leg 341 already established for the L^q route (Theorem 1/NRS) -- this leg confirms, by reading Theorem 2 at full primary text, that the SAME ansatz gate blocks the local-energy-estimates route too. The decay-boundary question (sub_question_2) is genuinely and separately resolved as REACHES; what protects THIS repository's object is not its decay rate (which sits exactly inside Tsai's own motivating example for Theorem 2) but its DSS-not-SS ansatz."
+    }
+  },
+  "combined_verdict_for_this_repos_object": {
+    "verdict": "NOT EXCLUDED",
+    "confirms": "leg 357's screen's existing binary output (ledger_nrs_tsai returns NOT EXCLUDED on this object's non-convergent L3 ladder)",
+    "but": "the screen's own mechanism (L3-convergence test) happens to agree with the correct answer for THIS object only because BOTH grounds (L3-divergence and ansatz-mismatch) independently give NOT EXCLUDED here. They are not interchangeable in general -- see the flag below.",
+    "the_flag_for_leg_357s_ledger_owner_the_DM": "leg 357's ledger_nrs_tsai() implements only Theorem 1 / NRS's L^q-membership route. It does NOT implement Theorem 2's local-energy-estimates route. This matters because Theorem 2 reaches FURTHER than Theorem 1 on decay grounds (down to log-divergent, non-L3 profiles like (1.5)) provided the candidate is exactly self-similar (SS) rather than discretely self-similar (DSS). If the DSSP program ever produces or screens a genuinely-SS (not DSS) candidate with this repository's Type-I decay rate, the CURRENT ledger would test only L3-convergence, find it non-convergent, and report NOT EXCLUDED -- which would be WRONG, because Tsai's Theorem 2 excludes exactly that case via local energy estimates, independent of L3 membership. This leg does NOT edit solver/dssp_screen.py (out of territory); it flags the gap for the DM to decide whether to extend the ledger with a Theorem-2-style local-energy-estimate check (which would require checking hypothesis (1.4), not just L3 convergence, and would still need an ansatz check -- SS vs DSS -- gating it, which the current ledger also does not implement for ANY of its three entries)."
+  },
+  "pineau_vicol_secondary_note": {
+    "kept_distinct_per_dispatch_instruction": true,
+    "status": "already fully adjudicated by leg 330 (5496bbc), not re-adjudicated here",
+    "deciding_clause_from_leg_330": "\"There exists lambda-bar = lambda-bar(C_{U,0}) > 1, such that if 1 < lambda < lambda-bar, then U = 0\" -- a lambda-NEAR-1 window (hard ceiling lambda-bar <= e^{1/2} = 1.6487...), unrelated to the L3/log-divergence question this leg adjudicates. The screened object's lambda is significantly LARGER than 1 (an output of the search), so Pineau-Vicol's DSS theorem (T2 in leg 330's numbering) is silent on it for a lambda reason, not an L3/decay reason. leg 330 also found the object SATISFIES Pineau-Vicol's Type I bound (their own equivalence, 'the constants are the same') -- so Type I/decay does not exclude it there either, for the same qualitative reason this leg finds for Tsai's Theorem 2: decay is not the obstruction; a different structural clause (lambda-window there, SS-ansatz here) is."
+  },
+  "gate_answer": "YES -- a definite per-theorem answer was reached in all three sub-questions, none underdetermined. Banked as a flag for the DM per the dispatch; leg 357's screen code and JSON are untouched.",
+  "no_ban_touched": true,
+  "no_link_of_L1_to_L4_chain_moved": true,
+  "clay_odds": "~0.05%, unchanged"
+}
