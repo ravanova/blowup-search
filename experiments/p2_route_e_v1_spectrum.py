@@ -55,6 +55,38 @@ def jl(x):
     return [[float(np.real(z)), float(np.imag(z))] for z in np.atleast_1d(x)]
 
 
+def canonical_order(kept, dist, round_dp=6):
+    """Re-sort `match_filter`'s output onto a library/environment-INDEPENDENT key.
+
+    `match_filter` (solver/rescaled_spectrum.py) sorts by `-Re(lambda)`, which is
+    the right key for the two isolated structural modes (0 and -1) but a BROKEN
+    one for the discretized essential spectrum: those eigenvalues are pinned to
+    the imaginary axis in exact arithmetic (Re lambda = 0), so their numerically
+    computed real parts are pure floating-point noise at the 1e-11 .. 1e-17
+    level, with a sign that flips between LAPACK/BLAS builds -- leg 356 (ROUTE-
+    ESPX) measured exactly this: the multiset of eigenvalues found is bit-for-bit
+    identical between two environments, but sorting on that noise permutes WHICH
+    array index each conjugate pair lands at, which is why leg 287's census read
+    a same-content spectrum as a `max_rel_move = 1.880` disagreement.
+
+    The fix stays entirely at the array-ordering step (no change to the filter's
+    admission rule, no change to which eigenvalues are kept): round the real part
+    to `round_dp` decimals -- far coarser than the noise floor, far finer than
+    any genuine isolated real part this module has ever measured (0, -1, or a
+    would-be Hopf pair's Re > 1e-3) -- and break ties on the SIGNED imaginary
+    part, which is not noise (it is the content itself for the essential
+    spectrum).  A rounded real part of 0 with no genuine content there sorts
+    purely by Im, so conjugate pairs land in a fixed +Im-before--Im order
+    regardless of which environment computed them.
+    """
+    order = sorted(range(len(kept)),
+                    key=lambda i: (-round(float(kept[i].real), round_dp),
+                                    -float(kept[i].imag)))
+    kept2 = np.array([kept[i] for i in order]) if len(kept) else np.array([], complex)
+    dist2 = np.array([dist[i] for i in order]) if len(dist) else np.array([])
+    return kept2, dist2
+
+
 # --------------------------------------------------------------------------
 def e1_anchor():
     """E1: the exact a = 0 fixed point, and the two analytically known eigenvalues."""
@@ -166,9 +198,11 @@ def e5_sweep(a_values, K_coarse=96, K_fine=144, tols=(1e-4, 1e-3, 1e-2, 1e-1),
         counts, keeps = {}, {}
         for t in tols:
             kept, dist = match_filter(ev_c, ev_f, t)
+            kept, dist = canonical_order(kept, dist)
             counts["%g" % t] = int(kept.size)
             keeps["%g" % t] = jl(kept)
         kept_ref, dist_ref = match_filter(ev_c, ev_f, 1e-2)
+        kept_ref, dist_ref = canonical_order(kept_ref, dist_ref)
         n_unstable = int(np.sum(np.real(kept_ref) > 1e-3))
         rows.append({"a": float(a), "counts": counts, "kept": keeps,
                      "kept_ref": jl(kept_ref),

@@ -1706,3 +1706,102 @@ identical over all 23 hashed files;** `writeup/data/p2_route_epa_v1_census.json`
 adds a re-solve-not-bytes pointer for exactly one family and explicitly withholds it from the
 other eight measured; it does not touch `writeup/data/p2_route_d_v11_anchor.json` or any of its
 own consolidation work. Clay stays **~0.05%**.
+
+---
+
+## §25 — leg 356 (ROUTE-ESPX), 2026-08-12: §24's exception REPAIRED, not just re-solved.
+Mechanism named and measured; every consumer diff-checked and unmoved
+
+287 (§24) left `p2_route_e_v1_spectrum` in a specific, uncomfortable state: NON-PORTABLE (`max_rel_move
+= 1.880`, 62 leaves >10%) AND (its own `determinism_control`) apparently failing to reproduce
+itself even in ONE environment. Leg 356 was dispatched to name the mechanism, enumerate every
+consumer, and either repair to canonical determinism or quarantine with consumers flagged.
+
+**(a) Mechanism, measured directly, twice.** `solver/rescaled_spectrum.py`'s `match_filter()`
+sorts kept eigenvalues by `-Re(lambda)` descending. That is the right key for the two isolated
+STRUCTURAL modes (exactly 0 and -1, present at every `a`) but a broken one for the discretized
+ESSENTIAL/continuum spectrum, which sits on the imaginary axis in exact arithmetic (`Re
+lambda = 0`) and therefore has a computed real part that is pure floating-point noise at the
+1e-11 .. 1e-17 level with a build-dependent sign. A direct repro (calling `spectrum(0.0, 96)` /
+`spectrum(0.0, 144)` and `match_filter(..., tol=0.1)` in this environment, bypassing the
+41-minute full pipeline) reproduced the SAME multiset of eigenvalue magnitudes leg 287's `E5_sweep[0]`
+banked at commit `c45e81890a` — `{0, ±0.271, ±0.840, ±7.156, ±8.135, ±14.828, ±23.008, ±45.174,
+-1}` — bit-for-bit, just at different array positions with the paired sign swapped, because the
+sort key that placed them is noise. This is the SAME mechanism the dispatch text guessed
+("eigenpair ordering/sign instability... near a degeneracy"), now pinned to one line
+(`match_filter`'s `np.argsort(-np.real(kept))`) with a measured, reproduced witness rather than
+assumed. **A second, distinct finding: 287's `determinism_control.
+two_processes_agree_on_nonvolatile_leaves: false` is itself a FALSE ALARM.** Its
+`string_moves_sample` (visible on the main `comparison`, not overwritten by the determinism
+block, but the two share the one and only non-volatile string leaf in this document) names the
+single differing leaf as `generated` (a timestamp) — which 287's own `VOLATILE_TOKENS` list
+contains as `"generated_at"` but not bare `"generated"`, a one-token near-miss that let a
+harmless timestamp masquerade as a content disagreement. All 1235 numeric leaves and 0 flag
+flips agree between two independent same-environment regenerations. So: the cross-ENVIRONMENT
+failure (banked-2026-08-02 vs regenerated-today) is real and is the ordering bug above; the
+within-one-environment "determinism failure" 287 read off its own control was an instrumentation
+gap in the census script, not a defect in this family's generator. (No fix to 287's census script
+is made here — out of this leg's territory — this is recorded as a finding, not a repair of that
+file.)
+
+**(b) Every consumer, enumerated by repo-wide grep for `p2_route_e_v1_spectrum` / `fig34`:**
+1. `experiments/p2_route_f_v1_viscosity.py` (Route-F) reads `E2_branch` -> `{a: alpha}` only.
+2. `experiments/p2_route_j_v1_literature.py` (Route-J) reads `E7_end.a_c_linear_extrapolation`
+   and (indirectly, via Route-F's own banked JSON) `E2_branch`.
+3. `test_literature_gates.py::test_7_branch_against_xu` reads
+   `E7_end.a_c_linear_extrapolation` directly and gates on it (`ours_err < 0.02`,
+   `ours_err > xu_err`).
+4. `writeup/4_p2_lottery/p2_route_e_v1_evidence.py` builds `fig34_p2_route_e_v1_spectrum.png`
+   from `E1_anchor`, `E2_branch`, `E3_resonance`, `E5_sweep[*].kept_ref` (NOT the unstable
+   `kept["0.1"]`), `E8_third_mode`, `E9_essential_edges`.
+5. `writeup/README.md`, `PHASE2_P2_NOTES.md` §26, `writeup/data/p2_route_dssx_v1_scoping.json`,
+   `writeup/data/bench_boussinesq_silent_corruption_check.json`, `experiments/JOURNAL.md`,
+   `DIRECTION.md` — name-only mentions / provenance-index entries; no numeric leaf is extracted.
+6. `experiments/journal/leg_254.md`, `writeup/novelty/leg_254.md`, `experiments/journal/leg_287.md`,
+   `writeup/novelty/leg_287.md` — historical narrative, not live consumers.
+None of these read `E5_sweep[*].kept["<loose tol>"]` (the leaf family that actually reordered)
+except `E6_control`'s internal `plain`/`planted` lists, which call the SAME `match_filter` inside
+`solver/rescaled_spectrum.py` (out of this leg's territory to touch) at a tight `tol=1e-3` that in
+practice admits only the well-separated structural/planted modes — the census recorded no `E6`
+mover over 10%, and this leg's regeneration confirms `E6` unmoved beyond noise level. Flagged here
+as a residual, out-of-territory risk for a future leg, not evidenced as broken.
+
+**(c) REPAIRED**, inside `experiments/p2_route_e_v1_spectrum.py` only (the allowed generator
+file; `solver/rescaled_spectrum.py`'s `match_filter` itself is untouched). A new `canonical_order()`
+helper re-sorts `match_filter`'s output by `(round(Re(lambda), 6), -Im(lambda))` instead of trusting
+its raw noise-level real part: 1e-6 is far above the observed 1e-11..1e-17 noise floor and far
+below any genuine isolated real part this module has ever measured, so the entire noisy continuum
+collapses onto one rounded bucket and is ordered purely by (signed) imaginary part — content, not
+noise. Applied at both `match_filter` call sites in `e5_sweep()` (the per-tolerance `keeps` dict
+and `kept_ref`). Verified deterministic THREE independent ways in this environment: two standalone
+`e5_sweep()`-only runs (bypassing the 41-minute pipeline, ~150s and ~132s) plus the full
+41-minute regeneration, all three giving the IDENTICAL `E5_sweep[0].kept["0.1"]` array
+byte-for-byte. Cross-environment stability is not directly re-testable here (one environment
+available) but is the fix's explicit design goal (rounding two orders of magnitude coarser than
+the widest noise observed) rather than an untested hope.
+
+**Every consumer's read leaf, diff-checked banked-vs-repaired:**
+- `E2_branch` alpha at every `a` moved by <3e-13 relative (float noise from the environment's
+  different numpy/OpenBLAS build vs the 2026-08-02 banking environment — same order of magnitude
+  as the 287 census's own noise-level movers, nowhere near test_7's `5e-3`/`0.02` tolerances).
+- `E7_end.a_c_linear_extrapolation`: `0.6934927291222032` (old) -> `0.6934927291222008` (new),
+  2.4e-15 relative.
+- `test_literature_gates.py` run end to end against the repaired banked JSON: **`ALL GATES PASS
+  (4s)`**, all nine tests, including `test_7_branch_against_xu` and `test_9_artifact_matches_the_
+  module`.
+- `fig34`'s only touch on the formerly-unstable leaf family is `E5_sweep[0].kept_ref` (the
+  `tol=1e-2` list), which both before and after contains exactly the two structural eigenvalues
+  `{~0, -1}` in the same order (0 > -1 is never ambiguous) — unaffected by construction, confirmed
+  by inspection of both banked files. Rebuilt anyway
+  (`writeup/figures/fig34_p2_route_e_v1_spectrum.png`) since the JSON it is nominally built from
+  changed, even though no rendered pixel depends on the repaired leaves.
+No consumer's verdict, gate, or plotted content moved.
+
+### The ceiling
+
+**Repaired, not merely re-solved: `experiments/p2_route_e_v1_spectrum.py` changed (canonical
+ordering, `solver/rescaled_spectrum.py` untouched); `writeup/data/p2_route_e_v1_spectrum.json`
+and `writeup/figures/fig34_p2_route_e_v1_spectrum.png` regenerated and re-banked.** 0 other
+banked files touched. 0 consumer gate answers changed (`test_literature_gates.py` re-run in full,
+passes). This closes 287's exception with a named mechanism and a repair rather than leaving it
+as a standing re-solve-not-bytes warning. Clay stays **~0.05%**.
