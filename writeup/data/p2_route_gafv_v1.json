@@ -1,0 +1,89 @@
+{
+  "leg": 349,
+  "route": "ROUTE-GAFV",
+  "title": "Is \"RPO Newton-Krylov converges from this guess\" a viable GA fitness?",
+  "role": "gate-check only; NO GA compute run, on either branch of the gate; nothing built; no figure",
+  "precondition": {
+    "leg_348_landed": true,
+    "commit": "3b758426d21584703d06de6a70ab0de6e745135d",
+    "classification": "ii_OPEN_AND_REACHABLE"
+  },
+  "gate_question": "Does the proposed fitness clear ALL SIX properties of the standing gate (solver/weight_search.py::six_property_gate, verdict = PASS iff all(p['pass'] for p in props.values())), each checked against the actual NK-convergence predicate, never a paraphrase?",
+  "gate_answer": "no",
+  "gate_branch": "no -> the GA path closes for this fitness and the ban stands unquestioned, banked at full strength",
+  "verdict_semantics": {
+    "source": "solver/weight_search.py, six_property_gate(), verdict line",
+    "quote": "verdict = \"PASS\" if all(p[\"pass\"] for p in props.values()) else \"FAIL\"",
+    "reading": "ALL SIX must pass; leg 49's own 4/6 was a NO on this same all-or-nothing rule"
+  },
+  "predicate_examined": {
+    "name": "NK-convergence fitness",
+    "definition_as_stated_by_thesis": "does the RPO Newton-Krylov iteration converge from this initial guess (genome)",
+    "distinguishing_claim": "not a Tier-1/2 blow-up proxy; well-behaved, directly verifiable, not fakeable by an under-resolved run",
+    "apparatus": "uncertified/float NK iteration (distinct from leg 348's certified Zgliczynski-style Galerkin-plus-tail apparatus -- a DIFFERENT technology, confirmed by leg 348's own territory statement)",
+    "code_in_repo": "NONE -- grep-confirmed 0 occurrences of a periodic-orbit/NK solver in solver/; independently corroborated by leg 334's own census (TECHNICAL_P2_ROUTEDSSP_V1.md:547: '0 occurrences of periodic orbit or Newton-Krylov in the index')",
+    "consequence_for_this_leg": "all six properties are checked analytically/structurally against the predicate as literally defined, because there is no implementation to instrument even if compute were permitted (which it is not)"
+  },
+  "six_property_analysis": [
+    {
+      "property": "P1_nonzero (spread >= 1.0 decades)",
+      "gate_code_meaning": "log10 range of finite fitness values across a 32-genome roster must span >= 1 decade; 'not dead flat'",
+      "verdict": "fail",
+      "grounds": "type_mismatch_plus_degenerate_range",
+      "reasoning": "The natural realizations of the predicate are: (a) a boolean convergence indicator {0,1} -- not a quantity on a log/decade scale at all, spread is undefined/zero by construction, a category error against a threshold stated in DECADES; (b) iteration-count-to-convergence or terminal-residual-norm, each defined ONLY on the convergent subset of the roster. Realization (b) inherits P2's expected near-total non-finiteness (see P2 below), so the roster subset available to measure spread on is itself expected to be tiny and unrepresentative; and even restricted to that subset, Newton's method has locally quadratic convergence once inside a basin, which compresses iteration counts into a narrow range (few iterations, regardless of how close to the basin boundary the guess sits) rather than producing the wide dynamic range the threshold demands. Neither realization plausibly clears 1.0 decades."
+    },
+    {
+      "property": "P2_finite (finite_fraction >= 0.90)",
+      "gate_code_meaning": "fraction of the 32-genome roster returning a finite fitness value",
+      "verdict": "fail",
+      "grounds": "measurement_grounded",
+      "reasoning": "For a convergence-indicator/iteration-count fitness, 'finite' means 'NK converged'. This is exactly what leg 342 measured for the seed-search problem this fitness would serve: 0 of 5 known, hand-selected, literature-sourced candidate profiles survived route 4's screen (experiments/journal/leg_342.md, 'THE SEED SET FOR THE SCREENED OBJECT IS EMPTY', re-confirming leg 313). A random 32-genome roster drawn from a 5-gene box -- with no hand-curation, no prior literature vetting -- has no basis in this record for expecting a HIGHER convergence rate than the curated candidate set that returned 0/5. Independently, leg 334's own plan document (TECHNICAL_P2_ROUTEDSSP_V1.md:722-724) states the basin volume for exactly this kind of ansatz-driven guess is 'UNMEASURED, and there is no reason on this record to believe it is non-empty' for a single O(10^8)-DOF cold start -- let alone that >=90% of an arbitrary roster would land inside it. 0.90 is far out of reach on every piece of evidence this repository currently holds."
+    },
+    {
+      "property": "P3_monotone (0 violations, slope error <= 0.05, injected defect ladder down to eps=1e-11)",
+      "gate_code_meaning": "at the CONVERGED state of the fitness engine, inject a synthetic defect of size eps and require the fitness response to fall monotonically and track slope 1 in log-log, down to eps=1e-11 -- a probe of the fitness FUNCTION's own smoothness/correctness near an optimum",
+      "verdict": "fail",
+      "grounds": "type_mismatch",
+      "reasoning": "P3 presupposes a smooth, pointwise-evaluable residual functional defined in a neighbourhood of a FIXED converged state, into which an eps-sized perturbation can be injected and its response measured. 'Did NK converge from this guess' has no such state: it is a GLOBAL, discrete outcome (converged / did not) of a multi-step iterative process, and the object being varied across the roster is the INITIAL GUESS itself, not a state near the fitness's own optimum. There is no natural eps-defect to inject that is analogous to the gate's construction. Independently of the type mismatch, basin-of-attraction membership as a function of the initial guess is a standard, well-established numerical-analysis fact (the 'Newton fractal' phenomenon): basin boundaries are generically fractal and everywhere discontinuous, so arbitrarily small (eps as small as 1e-11) perturbations of a guess sitting near a basin boundary can flip the convergence outcome discontinuously. This is the diametric opposite of 'falls every step, zero violations, exact linearity to eps=1e-11' -- and basin-boundary proximity cannot be excluded a priori for an unscreened roster, because no positive measurement of a wide interior-only basin exists in this repository (see P2)."
+    },
+    {
+      "property": "P4_resolution_stable (Spearman rho >= 0.90, top-3 overlap >= 2, across coarse/fine resolution)",
+      "gate_code_meaning": "the roster's fitness RANKING must be stable when the same 32 genomes are re-scored at a finer numerical resolution",
+      "verdict": "unmeasured_but_gate_requires_a_positive_pass_not_absence_of_disproof",
+      "grounds": "structural_plausibility_plus_explicit_repo_admission_of_absence_of_measurement",
+      "reasoning": "This property tests the thesis's own central claim ('not fakeable by an under-resolved run') directly. It is NOT possible to certify a positive answer analytically: whether NK-convergence rankings are resolution-stable is an empirical question about a specific discretisation this repository has not built (0 NK/RPO code in-repo, confirmed above). What CAN be stated: (i) as general numerical-analysis background, Newton-Krylov convergence basins are known to be discretisation-sensitive -- refinement changes the linearised operator's conditioning, can create or remove spurious/discretisation-only roots, and the inner Krylov (GMRES) solve's own behaviour is itself resolution-dependent -- so a-priori stability is not a safe default assumption; (ii) this repository's OWN plan explicitly flags the underlying basin geometry as unmeasured and drafts a dedicated brick (B5, DSSP-NKBASIN, TECHNICAL_P2_ROUTEDSSP_V1.md:852-859) whose entire purpose is to measure basin radius against a KNOWN published 2-D orbit before any 3-D commitment is made -- i.e. this repository has already recognised, independently of this leg, that this exact property cannot be assumed. Because the six-property gate requires a MEASURED PASS (not an absence of a measured failure), and no such measurement exists or is permitted to be produced by this leg, P4 cannot be banked as passing. This is recorded honestly as the WEAKEST of the six findings -- a plausibility argument plus an explicit admission of missing evidence, not a proof of failure -- but it does not change the overall gate answer, since P1/P2/P3/P5/P6 already fail on independently sufficient grounds."
+    },
+    {
+      "property": "P5_wide_band (spread >= 2.0 decades, same 'spread' quantity as P1 at a stricter threshold)",
+      "gate_code_meaning": "band_decades uses the identical 'spread' variable as P1, at a stricter (2.0 vs 1.0 decade) threshold",
+      "verdict": "fail",
+      "grounds": "same_as_P1_at_stricter_threshold",
+      "reasoning": "P5 fails for exactly the reasons P1 fails (the gate code computes P5's band_decades from the same spread value as P1 -- see solver/weight_search.py props dict, P5_wide_band.band_decades = spread), at a threshold twice as demanding. Anything that does not clear 1.0 decades cannot clear 2.0."
+    },
+    {
+      "property": "P6_nontrivial_optimum (interior_margin >= 0.05, wall_gain <= 0.05, far_field_power < WALL_POWER)",
+      "gate_code_meaning": "a grid-search hill-climb over the 5-gene box must land its optimum in the INTERIOR (not pinned at a box wall), and moving to the unconstrained (box-free) optimum must not improve fitness by more than a small margin",
+      "verdict": "fail",
+      "grounds": "type_mismatch",
+      "reasoning": "P6 presupposes a continuous fitness SURFACE over the gene box that a grid-search hill-climb can meaningfully explore and that has a well-defined interior optimum. A convergence-indicator fitness (realization (a) above) is a plateau-with-holes landscape -- constant 0 almost everywhere by P2's own finding, with isolated convergent islands whose fractal boundary (P3) defeats any notion of a smooth hill to climb toward an interior optimum; grid search over such a landscape does not measure an 'optimum' in the sense P6's margin/wall-gain arithmetic assumes, it measures which grid cell happened to land inside a convergent island, which is a sampling accident, not an optimization result. The property is inapplicable to this predicate's actual shape, and inapplicability is scored here as a failure to clear the gate (the gate does not have a category for 'not applicable, therefore passes')."
+    }
+  ],
+  "count_passing": 0,
+  "count_failing_or_unresolved": 6,
+  "overall_verdict": "FAIL -- 0 of 6 clear, 5 of 6 (P1,P2,P3,P5,P6) fail on independently sufficient structural/type-mismatch or measurement-grounded reasons, P4 is unmeasured with a plausibility argument against it and an explicit repo admission (brick B5, not yet run) that the property cannot currently be certified as passing",
+  "comparison_to_leg_49_and_leg_160_precedent": {
+    "leg_49": "4/6, quoted from plan_of_record.py: P2 finite 0.775 < 0.90; P3 max|slope-1| = 0.092 > 0.05 -- a fitness that WAS implemented and measured, still failed",
+    "leg_160": "two new fitness DEFINITIONS (WVR-1, WVR-2) through the same frozen gate, both answered NO, both making P3 worse; key finding quoted: 'P3 is not measuring the fitness' and a structural tension (leg_160.md) between P1/P5 (require spread at the converged state) and P3 (requires the fitness to VANISH at the converged state, positively homogeneous of degree 1 in the injected defect) -- any fitness satisfying P1/P5's nonzero-floor requirement costs P3's small-eps linearity, and vice versa",
+    "this_leg": "unlike legs 49 and 160, the NK-convergence predicate is not even IMPLEMENTED (0 lines of NK/RPO solver code in this repository) -- this leg's failure is established by structural/type-mismatch argument and measurement carried from legs 342/334, not by running the gate's actual roster/defect-ladder/grid-search machinery, which would itself be GA-adjacent compute and is banned by this leg's own territory constraint"
+  },
+  "ban_status": {
+    "ga_ban_touched": false,
+    "ga_ban_text_re_read_verbatim": "any GA compute on an unvalidated fitness -- C-PILOT's gate ANSWERED NO at leg 49 (4/6), so this ban did NOT lift when the stage closed / never -- only a re-run of the six-property gate that PASSES on a repaired fitness AT THE PINNED FROZEN RESOLUTION n=201 coarse/401 fine (wall_model '2d', seed 0, per_gene 9, refine 4), or at a strictly FINER grid; a pass at any COARSER grid does NOT lift this ban",
+    "consequence": "this leg's NO verdict does not touch, narrow, widen, or re-word the ban; the ban was already in force for the C-PILOT fitness and remains in force; this leg additionally finds that a SECOND, structurally distinct fitness (NK-convergence) also fails the same gate on independent grounds, so no new fitness clears the lift condition and the ban's scope is unchanged",
+    "plan_of_record_edited": false
+  },
+  "ga_compute_run": false,
+  "figure": null,
+  "no_build_proposed": true,
+  "whether_ga_runs_is_separate": "explicitly out of scope per this leg's own gate consequence: whether any GA actually runs is gated on leg 348's classification and the user's seed decision -- nothing dispatches from this leg"
+}
