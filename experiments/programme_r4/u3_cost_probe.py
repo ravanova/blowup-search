@@ -124,10 +124,14 @@ def mine(feat, n_snap, ckpt, solver, sps, n_take):
 
 
 def probe_attempt(job):
-    idx, w0, T0, s0, max_newton, max_gmres = job
+    # `verbose` streams one line per epoch. The probe's whole output is a wall
+    # time, and a probe whose answer only arrives at the end is a probe whose
+    # answer cannot be read while it is still worth reading -- the per-epoch
+    # rate is the quantity the cap rule's envelope arithmetic actually needs.
+    idx, w0, T0, s0, max_newton, max_gmres, verbose = job
     solver = Kolmogorov2D(N=N_GRID, Re=RE, n_forcing=N_FORCING, dt=DT)
     t0 = time.time()
-    out = newton_hookstep_rpo(w0, T0, s0, solver, tol=TOL,
+    out = newton_hookstep_rpo(w0, T0, s0, solver, tol=TOL, verbose=verbose,
                               max_newton=max_newton, max_gmres=max_gmres,
                               gmres_rtol=GMRES_RTOL, fd_eps=1e-6)
     wall = time.time() - t0
@@ -146,6 +150,7 @@ def main():
     ap.add_argument("--max-newton", type=int, default=3)
     ap.add_argument("--max-gmres", type=int, default=200)
     ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--verbose", action="store_true")
     args = ap.parse_args()
 
     solver, ckpt, feat, n_snap, sps, dns_wall = short_dns(T_PROBE)
@@ -164,7 +169,7 @@ def main():
         rp = seed_residual(w0, c["T"], c["s"], solver)
         rm = seed_residual(w0, c["T"], -c["s"], solver)
         jobs.append((i, w0, c["T"], c["s"] if rp <= rm else -c["s"],
-                     args.max_newton, args.max_gmres))
+                     args.max_newton, args.max_gmres, args.verbose))
 
     t0 = time.time()
     with mp.Pool(args.workers) as p:
