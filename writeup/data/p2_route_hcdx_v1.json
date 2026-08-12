@@ -1,0 +1,58 @@
+{
+  "leg": 377,
+  "route": "ROUTE-HCDX",
+  "title": "Does Boyd (1980)'s coefficient-decay concern kill leg 374's surviving generalized-Hermite basis candidate?",
+  "role": "resolves an open question left by leg 374's basis inventory; reading pass first, then a numerical measurement (UNDERDETERMINED-THEN-MEASURED) because the exact target paper's own theorem statement was unreachable behind paywalls",
+  "reads_not_edits": [
+    "writeup/novelty/leg_374.md, experiments/journal/leg_374.md, writeup/data/p2_route_sbiv_v1.json -- leg 374's per-basis inventory; the generalized-Hermite row (weight (1+x^2)^{-gamma}, citing Xiang-Wang 2010, Zhang-Guo 2014, Guo-Zhang 2015, Guo 1999) is the closest published weight-match to route 4's own algebraic weight rho=(1+|y|)^{-s}, s>1, flagged with an unresolved concern sourced to Boyd (1980)'s dependence-on-'a' (real-axis decay exponent) result",
+    "experiments/journal/leg_348.md, experiments/journal/leg_260.md -- read via leg 374's own citation chain for the bridge's four asks and route 4's sharp function-space thresholds (s>1, p>3); not independently re-read in full this leg beyond what leg 374 already quoted"
+  ],
+  "gate_question": "Does Boyd (1980)'s coefficient-decay concern (convergence rate of a Hermite-family series depends jointly on the target's analyticity AND on the target's own real-axis decay exponent, not on analyticity alone) actually disqualify the generalized-Hermite candidate (weight (1+x^2)^{-gamma}) for route 4's Galerkin-plus-tail bridge (leg 348's ask (iv): geometric/exponential-in-truncation tail decay)?",
+  "classification": "ADEQUATE",
+  "classification_meaning": "The concern does NOT kill the candidate. Boyd (1980)'s dependence-on-'a' finding is real, but for the algebraically-weighted generalized-Hermite family it is a solvable matching condition, not a structural wall: when the basis weight exponent gamma is tuned to equal the target's own decay exponent s (which route 4's own object already fixes structurally at s>1, per leg 260's sharp threshold), the coefficient decay is measured GEOMETRIC (exponential-in-n), not algebraic. Boyd's own concern (as leg 374 correctly flagged it) is confirmed to bite ONLY in the mismatched case (gamma != s), which is avoidable by construction here because route 4's target decay class is already known.",
+  "why_reading_alone_could_not_resolve_this": {
+    "the_actual_candidate_papers_are_paywalled": "Every route to Zhang-Guo (2014, J. Comput. Appl. Math. 255) or Guo-Zhang (2015, J. Sci. Comput. 65(2))'s own theorem statement returned HTTP 403 this leg: ScienceDirect (S0377042713003166), Springer (10.1007/s10915-014-9981-3, both the direct PDF and the IdP-authorize redirect), ResearchGate (publication/276255005), and the authors' own faculty mirror at maths.jsnu.edu.cn (connection refused over https, HTTP 403 over http). This matches leg 374's own disclosed experience with the same URLs.",
+    "the_closest_reachable_open_access_literature_is_a_different_basis_despite_the_same_name": "The most current, directly-on-topic, fully-reachable literature (Hu & Yu, arXiv:2412.08044v3 'Scaling Optimized Hermite Approximation Methods', Oct 2025, and its Feb 2026 companion arXiv:2602.03083 'Scaling Optimized Spectral Approximations on Unbounded Domains: The Generalized Hermite and Laguerre Methods') was read in full (both PDFs fetched directly from arxiv.org, no paywall). On full read, section 2.2 of the 2026 paper defines its own 'generalized Hermite functions' with weight omega_mu(x) = |x|^{2mu} e^{-x^2} -- STILL Gaussian-enveloped, with an added power singularity at the origin (parameter mu), not Zhang-Guo's algebraically-enveloped (1+x^2)^{-gamma} construction. This is a genuine naming collision, not the same basis. Hu-Yu's own headline finding -- that even with optimal scaling, Hermite-family approximation of algebraically-decaying smooth targets achieves only an algebraic (not geometric) convergence rate, e.g. their quoted N^{-alpha}-up-to-log-factor result for Kazashi et al.'s alpha-order-smooth functions, and their own statement that geometric convergence is recovered only for a DIFFERENT class (exp(-C|x|^rho)-decaying targets) -- is real, current (page 3 of arXiv:2412.08044v3), and load-bearing background on why plain/Gaussian-enveloped Hermite functions face this obstruction (an approximate Fourier self-duality: Hermite functions cannot be simultaneously localized in space and frequency, so an algebraically-decaying-in-space target, which generically has a non-fast-decaying-in-frequency transform, cannot be captured geometrically). But this mechanism is specific to the GAUSSIAN envelope and does not automatically transfer to Zhang-Guo's algebraic envelope, which has no such Fourier self-duality. Conflating the two would have been the error leg 374's own §0 explicitly warned against repeating (its caution about leg 334's continuous-vs-discrete-spectrum flag for a different operator, generalized here to a second instance of the same discipline: read the actual object, don't assume a same-named object shares its obstruction)."
+  },
+  "measurement": {
+    "why_this_construction_is_a_faithful_proxy": "Polynomials orthogonal on R w.r.t. weight (1+x^2)^{-gamma} are, under the algebraic bijection t = x/sqrt(1+x^2) mapping R onto (-1,1), exactly Gegenbauer/ultraspherical polynomials C_n^{(gamma-1)}(t), orthogonal w.r.t. the classical weight (1-t^2)^{alpha-1/2}, alpha=gamma-1 -- an elementary, independently-checkable change of variables (worked out in experiments/p2_route_hcdx_v1.py's module docstring: dx=(1+x^2)dtheta under x=tan(theta), t=sin(theta)), not an approximation or a different basis family invented for convenience. This is the actual mathematical content of 'generalized Hermite functions matching algebraic decay' up to a normalization constant that does not affect the decay RATE measured here (only the amplitude).",
+    "target_function": "u(x) = 1/(4+x^2)^(s/2) -- analytic on all of R (poles at x=+-2i, off the real axis), decaying at exactly route 4's own algebraic rate class |x|^{-s}, s>1 (leg 260's sharp threshold).",
+    "instrument": "c_n = generalized-Hermite-function expansion coefficient of u under basis weight (1+x^2)^{-gamma_w}, computed via scipy.integrate.quad on the equivalent Gegenbauer integral (tight tolerance 1e-13), for even n=0..60 (odd coefficients vanish identically by symmetry). Both a geometric model (log|c_n| linear in n) and an algebraic model (log|c_n| linear in log n) are fit by least squares and scored by R^2 -- an instrument built to be able to report EITHER regime, not one rigged to always find geometric decay.",
+    "matched_case_gamma_w_equals_s": {
+      "prediction": "g(t) = u(x(t))*(1+x(t)^2)^(gamma_w/2) is then analytic on the CLOSED interval [-1,1] (no branch point at t=+-1, the images of x=+-infinity) -- classical spectral theory (Bernstein-ellipse argument) predicts geometric coefficient decay.",
+      "measured": [
+        {"s": 1.1, "geo_slope": -0.4755244401562878, "geo_R2": 0.9754090653856056, "alg_R2": 0.8630246228631147},
+        {"s": 1.5, "geo_slope": -0.5397217971234594, "geo_R2": 0.9998282075837359, "alg_R2": 0.8392589079012525},
+        {"s": 2.0, "geo_slope": -0.5492136608716705, "geo_R2": 0.9999997905243969, "alg_R2": 0.8476712229432473},
+        {"s": 3.0, "geo_slope": -0.5710104700923023, "geo_R2": 0.9997699115361576, "alg_R2": 0.8583246634772345}
+      ],
+      "verdict": "GEOMETRIC dominates in all four tested s (geo_R2 in [0.975, 1.000], strictly greater than alg_R2 in [0.839, 0.863] in every case). Prediction confirmed."
+    },
+    "mismatched_case_gamma_w_equals_s_plus_delta": {
+      "s_fixed": 1.5,
+      "prediction": "g(t) then carries an explicit (1-t^2)^{(s-gamma_w)/2} factor -- a genuine non-integer-power branch point exactly at t=+-1 unless delta is an even integer -- classical theory predicts only algebraic decay, with order growing with |delta|.",
+      "measured": [
+        {"delta": 0.25, "alg_slope": -1.3927581439970393, "alg_R2": 0.9957350481205033, "geo_R2": 0.8101170503076183},
+        {"delta": 0.5, "alg_slope": -1.4883283817762483, "alg_R2": 0.998474311664114, "geo_R2": 0.8521071943289076},
+        {"delta": 1.0, "alg_slope": -1.7932637638495526, "alg_R2": 0.9950709523040135, "geo_R2": 0.8835699606644657},
+        {"delta": 2.0, "alg_slope": -2.4389349426426516, "alg_R2": 0.9892697050396817, "geo_R2": 0.9056384119667226}
+      ],
+      "verdict": "ALGEBRAIC dominates in all four tested delta (alg_R2 in [0.989, 0.996], strictly greater than geo_R2 in [0.810, 0.906] in every case), and the fitted algebraic slope grows steeper (more negative) monotonically with delta (-1.39 to -2.44), consistent with the branch-point-order mechanism named in the prediction. Prediction confirmed."
+    },
+    "runtime": "1.1s wall (experiments/p2_route_hcdx_v1.py), N=60, 8 parameter combinations, quad-based quadrature, no long computation",
+    "reproduce": "python3 experiments/p2_route_hcdx_v1.py"
+  },
+  "reasoning_to_classification": [
+    "Boyd (1980)'s finding (Hermite-family convergence rate depends on the target's own real-axis decay exponent, not analyticity alone) is real and this leg's measurement corroborates its mechanism directly: mismatching the basis weight to the target's decay exponent (delta != 0) provably degrades coefficient decay from geometric to algebraic, with severity scaling in the mismatch.",
+    "But route 4's object is NOT a generic target with an unknown decay exponent -- leg 260 already pins the exponent structurally: rho = (1+|y|)^{-s}, s>1, a sharp, MEASURED threshold, not a free parameter to be guessed. A basis builder choosing gamma = s (the matched case) is not an aspirational hope, it is a known, available choice.",
+    "In the matched case, this leg's own measurement shows GEOMETRIC coefficient decay, robustly across four tested values of s spanning route 4's s>1 class (1.1, 1.5, 2.0, 3.0), for an analytic target with the correct algebraic decay order. This directly satisfies leg 348's ask (iv) (geometric/exponential-in-truncation-order tail decay) for THIS scalar 1D instance.",
+    "This does not resolve leg 374's other, separate gaps for this same row (fails (i) R^3/dimension, ambiguous-to-unaddressed on (ii) vector/Leray-projected state space, fails (iii) CAP-grade validated rather than asymptotic numerical-analysis convergence) -- those are untouched by this leg and remain open per leg 374's own table. This leg's gate is narrower and specific: it resolves ONLY whether Boyd (1980)'s coefficient-decay concern, specifically, disqualifies the candidate. It does not.",
+    "The basis-inventory thread leg 374 left open on this specific question is CLOSED by this leg, in the ADEQUATE direction, with a reproducible measurement banked."
+  ],
+  "what_this_leg_does_not_do": [
+    "Does not claim the generalized-Hermite candidate is now a certified route-4 basis -- leg 374's other three gaps ((i) dimension, (ii) state space, (iii) rigor grade) are untouched and remain open.",
+    "Does not construct route 4's actual R^3 vector-valued basis, does not touch solver/, capabilities.py, test_*.py, or plan_of_record.py.",
+    "Does not re-litigate leg 334's own continuous-vs-discrete-spectrum internal risk factor for the linearized-stability operator -- that is a different operator, per leg 374's own caution, repeated and honoured here.",
+    "Does not claim to have read Zhang-Guo (2014) or Guo-Zhang (2015) in full -- both remained paywalled this leg, same as leg 374. This leg's ADEQUATE classification rests on its own independent, checkable numerical construction and measurement, not on those papers' unread text."
+  ]
+}
