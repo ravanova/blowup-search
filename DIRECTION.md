@@ -34,9 +34,9 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 229 | PNRV | no |
-| B | 362 | B7X | yes |
+| B | 365 | DSSR | yes |
 | C | 364 | NRSV | yes |
-| D | 355 | LCB3 | no |
+| D | 293 | JFA | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -19854,10 +19854,127 @@ resume-or-restart decision correctly left to the leg with the staleness
 re-check mandated); B/362 B7X; D: 355 landed, awaiting report. With the
 user: six items, cascade note standing. Next vacancy after D: 293 JFA.
 
-**Reserve queue: 9 undispatched legs (293, 298, 299, 310, 325, 231, 232,
-233, 234).** Immediately dispatchable: **3**. Next fresh leg number:
-**365.**
+Cycle 10aa: B/362 landed YES at ec48622 (reports crossed in flight —
+absorbed on the orchestrator's clarified report: all three gate controls
+passed — the planted exact-SS profile at decay -1 FLIPPED from
+excluded-by-neither to EXCLUDED-BY-T2, demonstrating 359's gap then
+closing it; the DSS object reads NOT-REACHED-BY-ANSATZ; every existing
+banked verdict reproduced unmoved; audit clean). D/355 landed YES-both at
+8541182 (the argv fix reproducing 335's table to the digit with the
+banked sha256 unchanged; the CADX guard verified on BOTH branches —
+absent aborts nonzero with no write, present field-identical and figure
+byte-identical; §27 filed; accumulator items (3)-(4) CLOSED). Refills:
+B ← **leg 365 DSSR** (fresh eligible draft: does the literature contain a
+DSS extension of Tsai's Theorem-2 LOCAL-ENERGY rigidity route — the
+unasked half of 359's part 3; a different query shape than 326's census,
+MF1 per-query); D ← 293 JFA. Floor 2/4 (364, 365). **Surfaced to the
+user via the progress file: the reserve's floor-eligible research work is
+EXHAUSTED pending the six open user rulings — 7 of the last 9 refills
+required fresh eligible drafts; resolution of any pending item (stop
+packet, POCP spend, seed decision) replenishes direction.**
+
+**Reserve queue: 8 undispatched legs (298, 299, 310, 325, 231, 232,
+233, 234).** Immediately dispatchable: **2** (298 CORRX, 299 TESTA).
+Next fresh leg number: **366.**
 
 Nothing in this update lifts a ban. A confirmed non-operational verdict
 and a provenance verification are ledger hygiene; no L1-L4 link moved;
 Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10aa) — 362 AND 355 ABSORBED (BOTH YES;
+THE SCREEN's GAP DEMONSTRATED-THEN-CLOSED; THE TOOLING FIXES VERIFIED ON
+BOTH BRANCHES); B ← 365 DSSR, D ← 293 JFA; THE ELIGIBLE-WORK EXHAUSTION
+SURFACED TO THE USER
+
+Written from the same detached lineage, resynced to origin/main = 7bb30ad
+(with 362's ec48622 and 355's 8541182 in ancestry).
+
+### 362 B7X gate YES, absorbed at full strength
+
+Absorbed on the orchestrator's clarified report (the original crossed in
+flight with cycle 10z — the second crossing this window; the correction
+discipline on both sides worked). All three gate controls passed: the
+planted synthetic exact-SS profile at decay -1 FLIPPED from
+excluded-by-neither to EXCLUDED-BY-T2 — the gap 359 named, demonstrated
+live and then closed; the repo's DSS object reads NOT-REACHED-BY-ANSATZ
+with the deciding clause cited; and every existing banked verdict from
+357's landed run reproduced unmoved. The screen's semantics now match the
+adjudicated mathematics: EXCLUDED-BY-T1 / EXCLUDED-BY-T2 /
+NOT-REACHED-BY-ANSATZ. Endorsed.
+
+### 355 LCB3 gate YES on both items, absorbed at full strength
+
+(i) The argv fix reproduces 335's table to the same digit (rel_diffs
+4.64e-15 / 9.97e-16 / 0.0 / 6.60e-16), banked JSON sha256 unchanged
+before and after — the regeneration registry now regenerates what was
+banked. (ii) The CADX guard verified on BOTH branches: PDF-absent aborts
+nonzero with zero diff on the banked JSON; PDF-present output
+field-for-field identical (excl. the non-claim-bearing elapsed_s) with
+the figure byte-identical via cmp. CORRECTIONS §27 filed (renumbered
+honestly during rebase). **Accumulator items (3)-(4) CLOSE; item (7)
+stands open below threshold.** Endorsed without amendment.
+
+### Refills — B ← 365 DSSR (drafted), D ← 293 JFA
+
+```
+### 365 — ROUTE-DSSR: DOES THE LITERATURE CONTAIN A DSS EXTENSION OF
+TSAI's THEOREM-2 LOCAL-ENERGY RIGIDITY ROUTE? (the unasked half of 359's
+part 3 — is the ansatz protection load-bearing or merely unexamined?)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** 359 established the repo's DSS object is protected from
+NRS/Tsai ONLY by the exact-self-similar ansatz clause — Theorem 2's
+local-energy mechanism reaches the object's decay class and needs no
+integrability. The two known DSS-rigidity results are adjudicated out
+(326: Chae-Tsai Euler-only; 330: PV's λ-window), but BOTH were found by
+existence/rigidity query shapes; nobody has searched for a DSS extension
+of the LOCAL-ENERGY route specifically (MF1 is per-query — a different
+shape is a different measurement). If such an extension exists, the DSS
+search's target class shrinks by theorem; if absent, that absence
+completes the stop packet's part 3 at measured width.
+**Gate.** A definite answer — (i) an extension EXISTS (paper, theorem,
+hypotheses checked clause-by-clause against the screened object, exactly
+as 326/330 did; flagged to the screen's owner and the stop packet
+immediately), (ii) NO extension located (controlled searches recorded,
+links not counts, controls run both directions per MF1-MF4; the absence
+banked at measured width), or (iii) a partial result located (its reach
+quoted and classified)?
+  yes (any definite class) -> Bank; the stop packet and the screen's
+        ledger both note the answer.
+  no  -> The literature underdetermines after a full pass: recorded as
+        exactly that.
+**Territory.** writeup/data/p2_route_dssr_v1.json, writeup/novelty/
+leg_365.md, experiments/journal/leg_365.md. Reads 359/326/330's banked
+records; edits nothing. No figure.
+**Difficulty.** standard
+**Preconditions:** None. (§3a rule 4: rigidity-ledger-adjacent —
+pre-authorised as written; reads and reports, lifts nothing.)
+```
+
+D ← 293 JFA (reserve rank 1): the JOURNAL.md freshness audit, third
+generation, spec at its original entry. Legal: B/365 + C/364 carry §3b.
+**Floor 2/4 (364, 365).** FLOOR-TABLE synced.
+
+### Surfaced to the user — the eligible-work exhaustion, stated plainly
+
+Seven of the last nine refills required FRESH floor-eligible drafts
+because the reserve's research work is exhausted and every standing
+research direction now waits on a user ruling: the route-4 stop packet
+(retry or accept), the POCP (ii) spend (cost-class C), the seed-creation
+option, the C4/escalation-#3 identity, the 313 ban-wording, the 320
+packet. The fresh drafts have been genuine (each tied to a live decision
+or a named record gap), but the well is visibly shallower each cycle —
+the honest statement is that DIRECTION is nearly consumed pending those
+rulings, and the DM prefers saying so to inventing work. Orchestrator:
+carry this note into the progress file's user-facing section beside the
+six items.
+
+**Reserve queue: 8 undispatched legs (298, 299, 310, 325, 231, 232, 233,
+234).** Immediately dispatchable: **2** (298 CORRX, 299 TESTA). Next
+fresh leg number: **366.**
+
+Nothing in this update lifts a ban. A screen matching its adjudicated
+mathematics, two tooling fixes verified on both branches, and an honest
+statement of queue exhaustion; no L1-L4 link moved; Clay stays ~0.05%.
