@@ -529,7 +529,9 @@ _pre = pre.odd_field_x_slope
 
 S = {"n": 0, "same": 0, "moved": [], "n_moved": 0, "raise_pre": 0, "raise_post": 0,
      "both_raise": 0, "cap_binds": 0, "cap_nonbinding": 0, "cap_undefined": 0,
-     "min_window_nodes": None, "max_rel_residual_seen": 0.0,
+     "min_window_nodes": None, "max_rel_residual_seen": None,
+     "n_residual_measured": 0, "n_residual_over_backstop": 0,
+     "residual_instrumented": True,
      "cap_ratio_min": None, "n_window_below_3": 0}
 
 
@@ -559,8 +561,22 @@ def _probe(g, grid, r_win, i_lo):
         defined = True
     else:
         r_scale, r_win_eff, defined = float("inf"), float(r_win), False
-    n_in = int((live & (r < r_win_eff)).sum())
-    return defined, float(r_win), r_win_eff, n_in
+    m = live & (r < r_win_eff)
+    n_in = int(m.sum())
+    # The module's OTHER post-repair backstop is `max_rel_residual=0.5` on the (r, r^3, r^5)
+    # fit. Measure it here too, re-derived the same way, so its reachability is a magnitude
+    # rather than an assumption. Undefined (None) when the window cannot support a fit.
+    rel_resid = None
+    if n_in >= 3:
+        rr = r[m]
+        A = np.stack([rr, rr ** 3, rr ** 5], axis=1)
+        y = d1[m]
+        sol, res, rank, _sv = np.linalg.lstsq(A, y, rcond=None)
+        denom = float(np.linalg.norm(y))
+        if denom > 0.0:
+            resid = float(np.linalg.norm(A @ sol - y))
+            rel_resid = resid / denom
+    return defined, float(r_win), r_win_eff, n_in, rel_resid
 
 
 def _call(fn, g, grid, a, kw):
@@ -585,7 +601,14 @@ def shim(g, grid, *a, **kw):
     try:
         r_win = kw.get("r_win", a[0] if len(a) >= 1 else 0.4)
         i_lo = kw.get("i_lo", a[1] if len(a) >= 2 else 3)
-        defined, rw, rw_eff, n_in = _probe(g, grid, r_win, i_lo)
+        defined, rw, rw_eff, n_in, rel_resid = _probe(g, grid, r_win, i_lo)
+        if rel_resid is not None:
+            S["n_residual_measured"] += 1
+            if (S["max_rel_residual_seen"] is None
+                    or rel_resid > S["max_rel_residual_seen"]):
+                S["max_rel_residual_seen"] = rel_resid
+            if rel_resid > 0.5:
+                S["n_residual_over_backstop"] += 1
         if not defined:
             S["cap_undefined"] += 1
         elif rw_eff < rw:
@@ -985,6 +1008,21 @@ def main() -> int:
         cb["runs"].extend(r for r in merged if r["key"] not in have)
         cb["not_run_live"] = [n for n in cb.get("not_run_live", [])
                               if n["key"] not in {r["key"] for r in cb["runs"]}]
+        # A record produced before this leg's residual instrument was repaired carries a
+        # `max_rel_residual_seen` of 0.0 that was never written to. That is a fabricated zero of
+        # exactly the kind this leg exists to catch, so it is stripped rather than rolled up.
+        for r in cb["runs"]:
+            d = r.get("per_call_differential") or {}
+            if "n_residual_measured" not in d:
+                d["max_rel_residual_seen"] = None
+                d["residual_instrumented"] = False
+                d["residual_note"] = (
+                    "NOT MEASURED: this record predates the repair of this leg's own residual "
+                    "probe. Covered by raise_post==0 -- the residual backstop can only manifest "
+                    "as a refusal, and this artifact produced none.")
+                r["residual_instrumented"] = False
+            else:
+                r["residual_instrumented"] = True
 
     if "clause_b" in rec:
         runs = rec["clause_b"]["runs"]
@@ -998,6 +1036,16 @@ def main() -> int:
             cap_binds_live=sum(r.get("cap_binds") or 0 for r in runs),
             cap_nonbinding_live=sum(r.get("cap_nonbinding") or 0 for r in runs),
             artifact_leaves_moved_live=sum(r.get("artifact_leaves_moved") or 0 for r in runs),
+            raise_post_live=sum((r.get("per_call_differential") or {}).get("raise_post") or 0
+                                for r in runs),
+            artifacts_with_residual_instrumented=sum(
+                1 for r in runs if r.get("residual_instrumented")),
+            calls_with_residual_measured=sum(
+                (r.get("per_call_differential") or {}).get("n_residual_measured") or 0
+                for r in runs),
+            residual_over_backstop_live=sum(
+                (r.get("per_call_differential") or {}).get("n_residual_over_backstop") or 0
+                for r in runs),
             all_artifacts_restored_clean=all(r.get("artifact_restored_clean") for r in runs),
             any_nonzero_returncode=any(r.get("returncode") not in (0,) for r in runs),
         )
