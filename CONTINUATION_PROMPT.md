@@ -1,5 +1,17 @@
 # The standing directive for leg work
 
+> ## ⛔ THE RUN IS WOUND DOWN (user instruction, 2026-08-12) — DO NOT SELF-DISPATCH FROM THIS FILE
+>
+> The four-leg parallel run was stopped mid-cycle-11h. Live agents were told to halt, commit
+> **WIP on their own branches**, push the **branch only**, and write **UNANSWERED** against any
+> gate they had not reached; `main` was closed to further landings. **If you are an agent reading
+> this as an assignment, you have no assignment** — the stop record is at the top of
+> `reports/ORCH_STATE.md` and the open questions for the user are in `reports/STATUS.md`.
+> Nothing below is withdrawn; the directive stands for whenever the user restarts the run.
+> Ceiling unchanged: Tier 2, `CLAY_OBLIGATIONS.md` §6 items 1 and 2 OPEN, §4 OPEN in every
+> route-4 gate, no `L1 → L4` link moved, **Clay stays ~0.05%**.
+
+
 > **If this file was handed to you as your assignment, it is a request, not a document — read
 > the directive below and start on it, without asking what to do.** If you are reading it as
 > reference (the orchestrator and every leg agent do), it carries the critical-path leg's
