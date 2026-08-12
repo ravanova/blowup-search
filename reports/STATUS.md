@@ -89,6 +89,26 @@ programme replaces the empty reserve as the source of work.
 
 ## ⚠ NEEDS YOU
 
+0. **NEW, item 9 — the merge gate does not enforce §6's quartet, and two legs landed
+   incomplete in one cycle. A timing decision is yours.** `ORCHESTRATION.md` §6 requires all
+   four limbs of every finding, *especially* negative ones. The gate enforces the
+   BLOG/TECHNICAL pair only **as a pair** — it rejects one without the other and therefore
+   **passes cleanly when both are absent** — and it never checks for a registered figure or an
+   `*_evidence.py` at all. **Leg 381** landed with no figure; **leg 233** landed with no BLOG,
+   no TECHNICAL, no evidence script and no figure. Both printed `MERGE GATE: PASS`. Neither leg
+   was dishonest — both disclosed exactly what they had not produced; the failure is in the
+   enforcement.
+   **Not repaired unilaterally, and this is the part that needs you:** tightening the gate now
+   would fail in-flight legs at their landing push against a contract they were dispatched
+   under — 386, 385, PROG-R4 and 384 are all live. So the question is *when* to tighten, not
+   whether: (a) tighten immediately and accept that a live leg may have to add documentation
+   before it can land, (b) tighten at the next clean board, or (c) leave the gate and enforce
+   §6 by audit at dispatch and landing, as is being done now. **Nothing is blocked on your
+   answer** — the two existing gaps are being closed by DOCS-lane rework units off the banked
+   JSON (per §6's "a confirmed gap becomes a rework leg, not a user question"), and every leg
+   dispatched since carries the §6 requirement and the gate's blind spot named explicitly in
+   its brief.
+
 1. **Leg 313 (SDSS) + leg 320 (MTSC) — bundled escalation packet, parked —
    packet update now COMPLETE, ready for your ruling.** The DM's own text
    routes the DSS ban-wording question to you rather than ruling on it
