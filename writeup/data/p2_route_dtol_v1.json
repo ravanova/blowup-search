@@ -1,0 +1,2048 @@
+{
+  "leg": 386,
+  "route": "DTOL",
+  "version": 1,
+  "generated_utc": "2026-08-12T10:14:44Z",
+  "preregistration": "experiments/journal/leg_386.md PART I, commit caf48e8 (immutable)",
+  "novelty_pass": "writeup/novelty/leg_386.md, commit 36d01c7 (before construction)",
+  "ceiling": "TIER 2 in every branch of both clauses; CLAY_OBLIGATIONS \u00a76 items 1 and 2 OPEN",
+  "clay": "~0.05%, unmoved; no L1 -> L4 link moved",
+  "config": {
+    "window": [
+      10.0,
+      1000.0
+    ],
+    "secondary_window": [
+      10.0,
+      100.0
+    ],
+    "n_cells_gate": 1000,
+    "n_cells_delta": 200,
+    "bisection_iters": 60,
+    "p_bracket": [
+      0.0,
+      12.0
+    ],
+    "mode": "cells"
+  },
+  "leg382_leads_recorded_for_comparison_never_used_as_input": {
+    "width_coefficient": 0.8686,
+    "delta_star": {
+      "C1": 0.315697,
+      "C2": 3.352868,
+      "C3": 0.069739,
+      "K2": 0.0
+    },
+    "delta0_widths": {
+      "K1": 7.438e-15,
+      "K2": 1.599e-14,
+      "K3": 1.998e-14,
+      "K4": 1.554e-14
+    }
+  },
+  "clause1_a_width_law": {
+    "rows": [
+      {
+        "window": "primary_10_1000",
+        "delta": 1e-09,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 1e-09,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "width_measured": 8.729961198383762e-10,
+        "width_predicted_closed_form": 8.685889633722091e-10,
+        "ratio_measured_over_predicted": 1.0050739263932813,
+        "contains_truth_p0_2": true
+      },
+      {
+        "window": "primary_10_1000",
+        "delta": 1e-06,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 1e-06,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "width_measured": 8.729753600000834e-07,
+        "width_predicted_closed_form": 8.685885295123112e-07,
+        "ratio_measured_over_predicted": 1.0050505277685802,
+        "contains_truth_p0_2": true
+      },
+      {
+        "window": "primary_10_1000",
+        "delta": 0.001,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 0.001,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "width_measured": 0.0008725395796602697,
+        "width_predicted_closed_form": 0.0008681549586372812,
+        "ratio_measured_over_predicted": 1.0050505050732774,
+        "contains_truth_p0_2": true
+      },
+      {
+        "window": "primary_10_1000",
+        "delta": 0.01,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 0.01,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "width_measured": 0.008686397805533375,
+        "width_predicted_closed_form": 0.008642747565285148,
+        "ratio_measured_over_predicted": 1.005050505052763,
+        "contains_truth_p0_2": true
+      },
+      {
+        "window": "primary_10_1000",
+        "delta": 0.1,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 0.1,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "width_measured": 0.08320347824735963,
+        "width_predicted_closed_form": 0.08278537031645007,
+        "ratio_measured_over_predicted": 1.0050505050507272,
+        "contains_truth_p0_2": true
+      },
+      {
+        "window": "secondary_10_100",
+        "delta": 1e-09,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 1e-09,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "width_measured": 1.7459893530968884e-09,
+        "width_predicted_closed_form": 1.7371779267444182e-09,
+        "ratio_measured_over_predicted": 1.0050722647443393,
+        "contains_truth_p0_2": true
+      },
+      {
+        "window": "secondary_10_100",
+        "delta": 1e-06,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 1e-06,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "width_measured": 1.745950718667899e-06,
+        "width_predicted_closed_form": 1.7371770590246224e-06,
+        "ratio_measured_over_predicted": 1.005050527001665,
+        "contains_truth_p0_2": true
+      },
+      {
+        "window": "secondary_10_100",
+        "delta": 0.001,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 0.001,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "width_measured": 0.0017450791593189852,
+        "width_predicted_closed_form": 0.0017363099172745624,
+        "ratio_measured_over_predicted": 1.0050505050723821,
+        "contains_truth_p0_2": true
+      },
+      {
+        "window": "secondary_10_100",
+        "delta": 0.01,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 0.01,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "width_measured": 0.017372795611066305,
+        "width_predicted_closed_form": 0.017285495130570296,
+        "ratio_measured_over_predicted": 1.0050505050527372,
+        "contains_truth_p0_2": true
+      },
+      {
+        "window": "secondary_10_100",
+        "delta": 0.1,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 0.1,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "width_measured": 0.1664069564947206,
+        "width_predicted_closed_form": 0.16557074063290014,
+        "ratio_measured_over_predicted": 1.0050505050507352,
+        "contains_truth_p0_2": true
+      }
+    ],
+    "measured_small_delta_coefficient_primary": 0.8728370198329097,
+    "measured_small_delta_coefficient_secondary": 1.7456730770279243,
+    "closed_form_coefficient_primary_4_over_log100": 0.8685889638065035,
+    "closed_form_coefficient_secondary_4_over_log10": 1.737177927613007,
+    "secondary_over_primary_measured": 1.9999988971161016,
+    "secondary_over_primary_predicted": 2.0,
+    "ratio_min": 1.0050505050507272,
+    "ratio_max": 1.0050739263932813,
+    "pass_band": [
+      0.95,
+      1.05
+    ],
+    "PASS_1a": true,
+    "disagreement_with_leg382_lead": {
+      "leg382_lead_coefficient": 0.8686,
+      "measured_coefficient": 0.8728370198329097,
+      "relative_difference": 0.004877987373831161,
+      "note": "leg 382's 0.8686 is 4/log(100): a property of the WINDOW, not of the instrument. The closed form predicts it and predicts that it DOUBLES on [10, 100] \u2014 a window-dependence leg 382 never tested."
+    }
+  },
+  "clause1_delta_star_fresh": {
+    "C1": {
+      "profile": "f = r^-2 + 0.01 r^-1 (two-power, crossover r* = 100 INSIDE the window)",
+      "delta_star_lo": 0.3156969982849221,
+      "delta_star_hi": 0.31569699828492215,
+      "predicted_closed_form": 0.318807,
+      "ratio_measured_over_predicted": 0.9902448763199116,
+      "within_20pc_pass_band": true,
+      "leg382_lead": 0.315697,
+      "relative_difference_vs_leg382_lead": -5.432670979743648e-09
+    },
+    "C2": {
+      "profile": "f = r^-2 / (1 + (r/300)^4) (rational far cutoff)",
+      "delta_star_lo": 3.3528681841223986,
+      "delta_star_hi": 3.352868184122399,
+      "predicted_closed_form": 3.454378,
+      "ratio_measured_over_predicted": 0.9706141551742161,
+      "within_20pc_pass_band": true,
+      "leg382_lead": 3.352868,
+      "relative_difference_vs_leg382_lead": 5.4914896407964875e-08
+    },
+    "C3": {
+      "profile": "f = r^-2 log r (log correction)",
+      "delta_star_lo": 0.06973929323837501,
+      "delta_star_hi": 0.06973929323837502,
+      "predicted_closed_form": 0.077025,
+      "ratio_measured_over_predicted": 0.9054111423352809,
+      "within_20pc_pass_band": true,
+      "leg382_lead": 0.069739,
+      "relative_difference_vs_leg382_lead": 4.204797531048854e-06
+    }
+  },
+  "clause1_b_certify_at_delta_star": {
+    "rows": [
+      {
+        "id": "C1",
+        "profile": "f = r^-2 + 0.01 r^-1 (two-power, crossover r* = 100 INSIDE the window)",
+        "delta_used": 0.31569699828492215,
+        "rel_tolerance_recorded_in_row": 0.31569699828492215,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "verdict": "INTERVAL",
+        "p_lo": 1.497949078234362,
+        "p_hi": 1.4979490782343623,
+        "width": 2.220446049250313e-16,
+        "exact_local_slope_range_float_reference": [
+          1.0909128969360609,
+          1.909087103078491
+        ],
+        "interval_inside_local_slope_range": true,
+        "predicted_transition_exponent_p_c": 1.5,
+        "p_c_measured_centre": 1.4979490782343623,
+        "contains_nominal_p0_2": false,
+        "note": "nominal-p0 containment is RECORDED, not required: a profile that is not a power law has no true exponent, and PART I \u00a72.3 predicted in advance that p0 = 2 is NOT contained at delta*."
+      },
+      {
+        "id": "C2",
+        "profile": "f = r^-2 / (1 + (r/300)^4) (rational far cutoff)",
+        "delta_used": 3.352868184122399,
+        "rel_tolerance_recorded_in_row": 3.352868184122399,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "verdict": "INTERVAL",
+        "p_lo": 3.03284150346203,
+        "p_hi": 3.0328415034620315,
+        "width": 1.3322676295501878e-15,
+        "exact_local_slope_range_float_reference": [
+          2.000004939181963,
+          5.967854457965586
+        ],
+        "interval_inside_local_slope_range": true,
+        "predicted_transition_exponent_p_c": 3.047509,
+        "p_c_measured_centre": 3.0328415034620306,
+        "contains_nominal_p0_2": false,
+        "note": "nominal-p0 containment is RECORDED, not required: a profile that is not a power law has no true exponent, and PART I \u00a72.3 predicted in advance that p0 = 2 is NOT contained at delta*."
+      },
+      {
+        "id": "C3",
+        "profile": "f = r^-2 log r (log correction)",
+        "delta_used": 0.06973929323837502,
+        "rel_tolerance_recorded_in_row": 0.06973929323837502,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "verdict": "INTERVAL",
+        "p_lo": 1.76241212013215,
+        "p_hi": 1.7624121201321503,
+        "width": 2.220446049250313e-16,
+        "exact_local_slope_range_float_reference": [
+          1.565714203796233,
+          1.855234207585454
+        ],
+        "interval_inside_local_slope_range": true,
+        "predicted_transition_exponent_p_c": 1.761439,
+        "p_c_measured_centre": 1.7624121201321503,
+        "contains_nominal_p0_2": false,
+        "note": "nominal-p0 containment is RECORDED, not required: a profile that is not a power law has no true exponent, and PART I \u00a72.3 predicted in advance that p0 = 2 is NOT contained at delta*."
+      }
+    ],
+    "PASS_1b": true
+  },
+  "clause1_c_delta_zero_knowns": {
+    "rows": [
+      {
+        "id": "K1",
+        "C": 3.0,
+        "p0": 1.0,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 0.0,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "p_lo": 0.9999999999999963,
+        "p_hi": 1.0000000000000038,
+        "width": 7.438494264988549e-15,
+        "contains_truth": true,
+        "leg382_lead_width": 7.438e-15,
+        "ratio_to_leg382_lead": 1.0000664513294635,
+        "within_factor_10_of_lead": true
+      },
+      {
+        "id": "K2",
+        "C": 1.0,
+        "p0": 2.0,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 0.0,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "p_lo": 1.999999999999992,
+        "p_hi": 2.000000000000008,
+        "width": 1.5987211554602254e-14,
+        "contains_truth": true,
+        "leg382_lead_width": 1.599e-14,
+        "ratio_to_leg382_lead": 0.9998256131708727,
+        "within_factor_10_of_lead": true
+      },
+      {
+        "id": "K3",
+        "C": 0.25,
+        "p0": 2.5,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 0.0,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "p_lo": 2.49999999999999,
+        "p_hi": 2.5000000000000098,
+        "width": 1.9984014443252818e-14,
+        "contains_truth": true,
+        "leg382_lead_width": 1.998e-14,
+        "ratio_to_leg382_lead": 1.0002009230857265,
+        "within_factor_10_of_lead": true
+      },
+      {
+        "id": "K4",
+        "C": 7.0,
+        "p0": 3.0,
+        "verdict": "INTERVAL",
+        "rel_tolerance_recorded_in_row": 0.0,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "p_lo": 2.9999999999999916,
+        "p_hi": 3.000000000000007,
+        "width": 1.554312234475219e-14,
+        "contains_truth": true,
+        "leg382_lead_width": 1.554e-14,
+        "ratio_to_leg382_lead": 1.0002009230857267,
+        "within_factor_10_of_lead": true
+      }
+    ],
+    "PASS_1c": true
+  },
+  "clause1_d_sub_delta_star_empty": {
+    "rows": [
+      {
+        "id": "C1",
+        "fraction_of_delta_star": 0.9,
+        "delta": 0.28412729845642987,
+        "rel_tolerance_recorded_in_row": 0.28412729845642987,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "verdict": "EMPTY",
+        "contradiction_gap_p_lo_minus_p_hi": 0.043221236603883995
+      },
+      {
+        "id": "C1",
+        "fraction_of_delta_star": 0.5,
+        "delta": 0.15784849914246105,
+        "rel_tolerance_recorded_in_row": 0.15784849914246105,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "verdict": "EMPTY",
+        "contradiction_gap_p_lo_minus_p_hi": 0.2509113473414404
+      },
+      {
+        "id": "C2",
+        "fraction_of_delta_star": 0.9,
+        "delta": 3.017581365710159,
+        "rel_tolerance_recorded_in_row": 3.017581365710159,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "verdict": "EMPTY",
+        "contradiction_gap_p_lo_minus_p_hi": 0.16355620398164072
+      },
+      {
+        "id": "C2",
+        "fraction_of_delta_star": 0.5,
+        "delta": 1.6764340920611993,
+        "rel_tolerance_recorded_in_row": 1.6764340920611993,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "verdict": "EMPTY",
+        "contradiction_gap_p_lo_minus_p_hi": 1.0422047465012918
+      },
+      {
+        "id": "C3",
+        "fraction_of_delta_star": 0.9,
+        "delta": 0.0627653639145375,
+        "rel_tolerance_recorded_in_row": 0.0627653639145375,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "verdict": "EMPTY",
+        "contradiction_gap_p_lo_minus_p_hi": 0.012015584089404951
+      },
+      {
+        "id": "C3",
+        "fraction_of_delta_star": 0.5,
+        "delta": 0.034869646619187504,
+        "rel_tolerance_recorded_in_row": 0.034869646619187504,
+        "hypothesis_recorded_in_row": "EXACT-INTERVAL-EVALUATION",
+        "verdict": "EMPTY",
+        "contradiction_gap_p_lo_minus_p_hi": 0.06919875657706309
+      }
+    ],
+    "PASS_1d": true
+  },
+  "clause2_halfwidth_law_discriminant": {
+    "rows": [
+      {
+        "id": "C1",
+        "multiple_of_delta_star": 1.1,
+        "delta": 0.3472666981134144,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.02033475674898766,
+        "H381_prediction_0p434_delta": 0.15081601073941822,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 0.013710546430856207,
+        "measured_over_H381": 0.13483155169859457,
+        "measured_over_Hshift": 1.4831470686845396
+      },
+      {
+        "id": "C1",
+        "multiple_of_delta_star": 1.5,
+        "delta": 0.4735454974273832,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.09155226679033068,
+        "H381_prediction_0p434_delta": 0.20565819646284303,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 0.06855273215428101,
+        "measured_over_H381": 0.44516711886497434,
+        "measured_over_Hshift": 1.335501356594923
+      },
+      {
+        "id": "C1",
+        "multiple_of_delta_star": 2.0,
+        "delta": 0.6313939965698443,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.16386255938426808,
+        "H381_prediction_0p434_delta": 0.27421092861712404,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 0.13710546430856202,
+        "measured_over_H381": 0.5975785145057677,
+        "measured_over_Hshift": 1.1951570290115354
+      },
+      {
+        "id": "C1",
+        "multiple_of_delta_star": 4.0,
+        "delta": 1.2627879931396886,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.3530053480325025,
+        "H381_prediction_0p434_delta": 0.5484218572342481,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 0.41131639292568606,
+        "measured_over_H381": 0.6436748342101961,
+        "measured_over_Hshift": 0.8582331122802616
+      },
+      {
+        "id": "C1",
+        "multiple_of_delta_star": 10.0,
+        "delta": 3.1569699828492217,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.6219020243120746,
+        "H381_prediction_0p434_delta": 1.3710546430856203,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 1.2339491787770582,
+        "measured_over_H381": 0.45359390119744325,
+        "measured_over_Hshift": 0.5039932235527147
+      },
+      {
+        "id": "C2",
+        "multiple_of_delta_star": 1.1,
+        "delta": 3.6881550025346392,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.0743486778527005,
+        "H381_prediction_0p434_delta": 1.6017453660046674,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 0.1456132150913335,
+        "measured_over_H381": 0.04641728918383139,
+        "measured_over_Hshift": 0.5105901810221449
+      },
+      {
+        "id": "C2",
+        "multiple_of_delta_star": 1.5,
+        "delta": 5.029302276183598,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.3166926022741079,
+        "H381_prediction_0p434_delta": 2.1841982263700004,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 0.7280660754566667,
+        "measured_over_H381": 0.14499261030919844,
+        "measured_over_Hshift": 0.4349778309275954
+      },
+      {
+        "id": "C2",
+        "multiple_of_delta_star": 2.0,
+        "delta": 6.705736368244798,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.5375562650571177,
+        "H381_prediction_0p434_delta": 2.9122643018266676,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 1.4561321509133338,
+        "measured_over_H381": 0.1845836123870848,
+        "measured_over_Hshift": 0.3691672247741696
+      },
+      {
+        "id": "C2",
+        "multiple_of_delta_star": 4.0,
+        "delta": 13.411472736489596,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.9515505269034983,
+        "H381_prediction_0p434_delta": 5.824528603653335,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 4.368396452740001,
+        "measured_over_H381": 0.1633695345416717,
+        "measured_over_Hshift": 0.21782604605556227
+      },
+      {
+        "id": "C2",
+        "multiple_of_delta_star": 10.0,
+        "delta": 33.52868184122399,
+        "verdict": "INTERVAL",
+        "half_width_measured": 1.3995867094785288,
+        "H381_prediction_0p434_delta": 14.56132150913334,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 13.105189358220004,
+        "measured_over_H381": 0.09611673697340327,
+        "measured_over_Hshift": 0.10679637441489254
+      },
+      {
+        "id": "C3",
+        "multiple_of_delta_star": 1.1,
+        "delta": 0.07671322256221252,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.00567911739591398,
+        "H381_prediction_0p434_delta": 0.03331612924778493,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 0.003028739022525903,
+        "measured_over_H381": 0.17046150090474763,
+        "measured_over_Hshift": 1.8750765099522237
+      },
+      {
+        "id": "C3",
+        "multiple_of_delta_star": 1.5,
+        "delta": 0.10460893985756253,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.0258072354295229,
+        "H381_prediction_0p434_delta": 0.045431085337888547,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 0.015143695112629514,
+        "measured_over_H381": 0.5680523640935389,
+        "measured_over_Hshift": 1.7041570922806168
+      },
+      {
+        "id": "C3",
+        "multiple_of_delta_star": 2.0,
+        "delta": 0.13947858647675004,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.04678811576045061,
+        "H381_prediction_0p434_delta": 0.060574780450518055,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 0.030287390225259028,
+        "measured_over_H381": 0.7724025644413287,
+        "measured_over_Hshift": 1.5448051288826574
+      },
+      {
+        "id": "C3",
+        "multiple_of_delta_star": 4.0,
+        "delta": 0.2789571729535001,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.10723661101171433,
+        "H381_prediction_0p434_delta": 0.12114956090103611,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 0.09086217067577709,
+        "measured_over_H381": 0.885158891325352,
+        "measured_over_Hshift": 1.1802118551004692
+      },
+      {
+        "id": "C3",
+        "multiple_of_delta_star": 10.0,
+        "delta": 0.6973929323837502,
+        "verdict": "INTERVAL",
+        "half_width_measured": 0.2335906183427069,
+        "H381_prediction_0p434_delta": 0.3028739022525903,
+        "Hshift_prediction_0p434_delta_minus_delta_star": 0.27258651202733125,
+        "measured_over_H381": 0.7712470985628116,
+        "measured_over_Hshift": 0.8569412206253463
+      }
+    ],
+    "decision_rule": "H-shift favoured if measured half-width at 1.1*delta* is below HALF of the H-381 value; H-381 favoured if within +/-10% of it; anything else reported as 'neither law fits'",
+    "H_shift_favoured": true,
+    "H_381_favoured": false,
+    "verdict": "H-shift"
+  },
+  "clause2_delta_windows": {
+    "rows": [
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 0.31569699828493114,
+        "delta_star_hi": 0.31569699828494,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 0.4979490782343632,
+        "p_lo_at_delta_min": 0.49794907823436096,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": false,
+        "delta_min": null,
+        "delta_max": null,
+        "width": null,
+        "reason": "at the smallest admissible tolerance delta_min = 0.31569699828494002 the certified lower endpoint is p_lo = 0.49794907823436096, which does NOT exceed the threshold 1; since p_lo is non-increasing in delta, no larger tolerance can help and the window is EMPTY",
+        "shape": "two_power",
+        "shape_formula": "f = r^-p0 + 0.01 r^-(p0-1)",
+        "p0": 1.0,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          0.09091289692150895,
+          0.909087103093043
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": -1.1560149683814753,
+        "measured_over_leg381_delta_max": null
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 0.31569699828493114,
+        "delta_star_hi": 0.31569699828494,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 0.4979490782343632,
+        "p_lo_at_delta_min": 0.49794907823436096,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": false,
+        "delta_min": null,
+        "delta_max": null,
+        "width": null,
+        "reason": "at the smallest admissible tolerance delta_min = 0.31569699828494002 the certified lower endpoint is p_lo = 0.49794907823436096, which does NOT exceed the threshold 1.5; since p_lo is non-increasing in delta, no larger tolerance can help and the window is EMPTY",
+        "shape": "two_power",
+        "shape_formula": "f = r^-p0 + 0.01 r^-(p0-1)",
+        "p0": 1.0,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          0.09091289692150895,
+          0.909087103093043
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": -2.3073075148784983,
+        "measured_over_leg381_delta_max": null
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 0.31569699828492226,
+        "delta_star_hi": 0.31569699828493114,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 0.9979490782343636,
+        "p_lo_at_delta_min": 0.9979490782343629,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": false,
+        "delta_min": null,
+        "delta_max": null,
+        "width": null,
+        "reason": "at the smallest admissible tolerance delta_min = 0.31569699828493114 the certified lower endpoint is p_lo = 0.9979490782343629, which does NOT exceed the threshold 1; since p_lo is non-increasing in delta, no larger tolerance can help and the window is EMPTY",
+        "shape": "two_power",
+        "shape_formula": "f = r^-p0 + 0.01 r^-(p0-1)",
+        "p0": 1.5,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          0.590912896906957,
+          1.409087103078491
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": -0.004722421884451336,
+        "measured_over_leg381_delta_max": null
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 0.31569699828492226,
+        "delta_star_hi": 0.31569699828493114,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 0.9979490782343636,
+        "p_lo_at_delta_min": 0.9979490782343629,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": false,
+        "delta_min": null,
+        "delta_max": null,
+        "width": null,
+        "reason": "at the smallest admissible tolerance delta_min = 0.31569699828493114 the certified lower endpoint is p_lo = 0.9979490782343629, which does NOT exceed the threshold 1.5; since p_lo is non-increasing in delta, no larger tolerance can help and the window is EMPTY",
+        "shape": "two_power",
+        "shape_formula": "f = r^-p0 + 0.01 r^-(p0-1)",
+        "p0": 1.5,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          0.590912896906957,
+          1.409087103078491
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": -1.1560149683814744,
+        "measured_over_leg381_delta_max": null
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 0.3156969982849134,
+        "delta_star_hi": 0.31569699828492226,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 1.4979490782343623,
+        "p_lo_at_delta_min": 1.497949078234362,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 0.31569699828492226,
+        "delta_max": 2.1260793671239036,
+        "width": 1.8103823688389813,
+        "capped": false,
+        "reason": "",
+        "shape": "two_power",
+        "shape_formula": "f = r^-p0 + 0.01 r^-(p0-1)",
+        "p0": 2.0,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          1.0909128969360609,
+          1.909087103078491
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 1.1465701246125686,
+        "measured_over_leg381_delta_max": 1.8542951028331702
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 0.3156969982849134,
+        "delta_star_hi": 0.31569699828492226,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 1.4979490782343623,
+        "p_lo_at_delta_min": 1.497949078234362,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": false,
+        "delta_min": null,
+        "delta_max": null,
+        "width": null,
+        "reason": "at the smallest admissible tolerance delta_min = 0.31569699828492226 the certified lower endpoint is p_lo = 1.497949078234362, which does NOT exceed the threshold 1.5; since p_lo is non-increasing in delta, no larger tolerance can help and the window is EMPTY",
+        "shape": "two_power",
+        "shape_formula": "f = r^-p0 + 0.01 r^-(p0-1)",
+        "p0": 2.0,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          1.0909128969360609,
+          1.909087103078491
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": -0.004722421884454404,
+        "measured_over_leg381_delta_max": null
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 0.3156969982849134,
+        "delta_star_hi": 0.31569699828492226,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 1.9979490782343623,
+        "p_lo_at_delta_min": 1.9979490782343616,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 0.31569699828492226,
+        "delta_max": 8.772372209557972,
+        "width": 8.45667521127305,
+        "capped": false,
+        "reason": "",
+        "shape": "two_power",
+        "shape_formula": "f = r^-p0 + 0.01 r^-(p0-1)",
+        "p0": 2.5,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          1.5909128968487494,
+          2.409087103093043
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 2.2978626711095917,
+        "measured_over_leg381_delta_max": 3.8176224888678703
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 0.3156969982849134,
+        "delta_star_hi": 0.31569699828492226,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 1.9979490782343623,
+        "p_lo_at_delta_min": 1.9979490782343616,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 0.31569699828492226,
+        "delta_max": 2.1260793671238862,
+        "width": 1.810382368838964,
+        "capped": false,
+        "reason": "",
+        "shape": "two_power",
+        "shape_formula": "f = r^-p0 + 0.01 r^-(p0-1)",
+        "p0": 2.5,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          1.5909128968487494,
+          2.409087103093043
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 1.1465701246125686,
+        "measured_over_leg381_delta_max": 1.8542951028331551
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 0.3156969982849134,
+        "delta_star_hi": 0.31569699828492226,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 2.497949078234363,
+        "p_lo_at_delta_min": 2.4979490782343587,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 0.31569699828492226,
+        "delta_max": 10.0,
+        "width": 9.684303001715078,
+        "capped": true,
+        "reason": "",
+        "shape": "two_power",
+        "shape_formula": "f = r^-p0 + 0.01 r^-(p0-1)",
+        "p0": 3.0,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          2.0909128969651647,
+          2.909087103093043
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 3.4491552176066165,
+        "measured_over_leg381_delta_max": 2.8992606505366387
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 0.3156969982849134,
+        "delta_star_hi": 0.31569699828492226,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 2.497949078234363,
+        "p_lo_at_delta_min": 2.4979490782343587,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 0.31569699828492226,
+        "delta_max": 8.772372209557938,
+        "width": 8.456675211273016,
+        "capped": false,
+        "reason": "",
+        "shape": "two_power",
+        "shape_formula": "f = r^-p0 + 0.01 r^-(p0-1)",
+        "p0": 3.0,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          2.0909128969651647,
+          2.909087103093043
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 2.2978626711095935,
+        "measured_over_leg381_delta_max": 3.8176224888678525
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 3.3528681841224284,
+        "delta_star_hi": 3.3528681841224373,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 2.03284150346203,
+        "p_lo_at_delta_min": 2.032841503462029,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 3.3528681841224373,
+        "delta_max": 9.658038141019084,
+        "width": 6.305169956896647,
+        "capped": false,
+        "reason": "",
+        "shape": "rational_cutoff",
+        "shape_formula": "f = r^-p0 / (1 + (r/300)^4)",
+        "p0": 1.0,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          1.000004939181963,
+          4.967854457965586
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 2.378205449297229,
+        "measured_over_leg381_delta_max": 4.061061311533484
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 3.3528681841224284,
+        "delta_star_hi": 3.3528681841224373,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 2.03284150346203,
+        "p_lo_at_delta_min": 2.032841503462029,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 3.3528681841224373,
+        "delta_max": 5.570913240122865,
+        "width": 2.2180450560004275,
+        "capped": false,
+        "reason": "",
+        "shape": "rational_cutoff",
+        "shape_formula": "f = r^-p0 / (1 + (r/300)^4)",
+        "p0": 1.0,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          1.000004939181963,
+          4.967854457965586
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 1.2269129028002062,
+        "measured_over_leg381_delta_max": 4.540593898237002
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 3.3528681841224106,
+        "delta_star_hi": 3.3528681841224195,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 2.532841503462032,
+        "p_lo_at_delta_min": 2.532841503462031,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 3.3528681841224195,
+        "delta_max": 10.0,
+        "width": 6.6471318158775805,
+        "capped": true,
+        "reason": "",
+        "shape": "rational_cutoff",
+        "shape_formula": "f = r^-p0 / (1 + (r/300)^4)",
+        "p0": 1.5,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          1.500004939181963,
+          5.467854458023794
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 3.529497995794256,
+        "measured_over_leg381_delta_max": 2.8332641106230922
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 3.3528681841224106,
+        "delta_star_hi": 3.3528681841224195,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 2.532841503462032,
+        "p_lo_at_delta_min": 2.532841503462031,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 3.3528681841224195,
+        "delta_max": 9.658038141019079,
+        "width": 6.305169956896659,
+        "capped": false,
+        "reason": "",
+        "shape": "rational_cutoff",
+        "shape_formula": "f = r^-p0 / (1 + (r/300)^4)",
+        "p0": 1.5,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          1.500004939181963,
+          5.467854458023794
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 2.378205449297233,
+        "measured_over_leg381_delta_max": 4.061061311533475
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 3.352868184122393,
+        "delta_star_hi": 3.3528681841224017,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 3.0328415034620306,
+        "p_lo_at_delta_min": 3.03284150346203,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 3.3528681841224017,
+        "delta_max": 10.0,
+        "width": 6.647131815877598,
+        "capped": true,
+        "reason": "",
+        "shape": "rational_cutoff",
+        "shape_formula": "f = r^-p0 / (1 + (r/300)^4)",
+        "p0": 2.0,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          2.000004939181963,
+          5.967854457965586
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 4.680790542291276,
+        "measured_over_leg381_delta_max": 2.13639125905107
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 3.352868184122393,
+        "delta_star_hi": 3.3528681841224017,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 3.0328415034620306,
+        "p_lo_at_delta_min": 3.03284150346203,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 3.3528681841224017,
+        "delta_max": 10.0,
+        "width": 6.647131815877598,
+        "capped": true,
+        "reason": "",
+        "shape": "rational_cutoff",
+        "shape_formula": "f = r^-p0 / (1 + (r/300)^4)",
+        "p0": 2.0,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          2.000004939181963,
+          5.967854457965586
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 3.529497995794253,
+        "measured_over_leg381_delta_max": 2.833264110623095
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 3.352868184122393,
+        "delta_star_hi": 3.3528681841224017,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 3.5328415034620315,
+        "p_lo_at_delta_min": 3.5328415034620293,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 3.3528681841224017,
+        "delta_max": 10.0,
+        "width": 6.647131815877598,
+        "capped": true,
+        "reason": "",
+        "shape": "rational_cutoff",
+        "shape_formula": "f = r^-p0 / (1 + (r/300)^4)",
+        "p0": 2.5,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          2.500004939196515,
+          6.467854458023794
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 5.832083088788301,
+        "measured_over_leg381_delta_max": 1.7146532118556705
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 3.352868184122393,
+        "delta_star_hi": 3.3528681841224017,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 3.5328415034620315,
+        "p_lo_at_delta_min": 3.5328415034620293,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 3.3528681841224017,
+        "delta_max": 10.0,
+        "width": 6.647131815877598,
+        "capped": true,
+        "reason": "",
+        "shape": "rational_cutoff",
+        "shape_formula": "f = r^-p0 / (1 + (r/300)^4)",
+        "p0": 2.5,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          2.500004939196515,
+          6.467854458023794
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 4.6807905422912786,
+        "measured_over_leg381_delta_max": 2.1363912590510687
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 3.352868184122366,
+        "delta_star_hi": 3.352868184122375,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 4.032841503462032,
+        "p_lo_at_delta_min": 4.032841503462031,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 3.352868184122375,
+        "delta_max": 10.0,
+        "width": 6.647131815877625,
+        "capped": true,
+        "reason": "",
+        "shape": "rational_cutoff",
+        "shape_formula": "f = r^-p0 / (1 + (r/300)^4)",
+        "p0": 3.0,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          3.000004939181963,
+          6.967854457907379
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 6.983375635285326,
+        "measured_over_leg381_delta_max": 1.431972232665302
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 3.352868184122366,
+        "delta_star_hi": 3.352868184122375,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 4.032841503462032,
+        "p_lo_at_delta_min": 4.032841503462031,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 3.352868184122375,
+        "delta_max": 10.0,
+        "width": 6.647131815877625,
+        "capped": true,
+        "reason": "",
+        "shape": "rational_cutoff",
+        "shape_formula": "f = r^-p0 / (1 + (r/300)^4)",
+        "p0": 3.0,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          3.000004939181963,
+          6.967854457907379
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 5.832083088788303,
+        "measured_over_leg381_delta_max": 1.7146532118556699
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 0.06973929323838668,
+        "delta_star_hi": 0.06973929323839556,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 0.7624121201321522,
+        "p_lo_at_delta_min": 0.7624121201321457,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": false,
+        "delta_min": null,
+        "delta_max": null,
+        "width": null,
+        "reason": "at the smallest admissible tolerance delta_min = 0.069739293238395561 the certified lower endpoint is p_lo = 0.7624121201321457, which does NOT exceed the threshold 1; since p_lo is non-increasing in delta, no larger tolerance can help and the window is EMPTY",
+        "shape": "log_corrected",
+        "shape_formula": "f = r^-p0 log r",
+        "p0": 1.0,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          0.565714203796233,
+          0.855234207585454
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": -0.5470663104597665,
+        "measured_over_leg381_delta_max": null
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 0.06973929323838668,
+        "delta_star_hi": 0.06973929323839556,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 0.7624121201321522,
+        "p_lo_at_delta_min": 0.7624121201321457,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": false,
+        "delta_min": null,
+        "delta_max": null,
+        "width": null,
+        "reason": "at the smallest admissible tolerance delta_min = 0.069739293238395561 the certified lower endpoint is p_lo = 0.7624121201321457, which does NOT exceed the threshold 1.5; since p_lo is non-increasing in delta, no larger tolerance can help and the window is EMPTY",
+        "shape": "log_corrected",
+        "shape_formula": "f = r^-p0 log r",
+        "p0": 1.0,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          0.565714203796233,
+          0.855234207585454
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": -1.6983588569567896,
+        "measured_over_leg381_delta_max": null
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 0.0697392932383778,
+        "delta_star_hi": 0.06973929323838668,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 1.2624121201321534,
+        "p_lo_at_delta_min": 1.2624121201321477,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 0.06973929323838668,
+        "delta_max": 0.8048427641171187,
+        "width": 0.7351034708787321,
+        "capped": false,
+        "reason": "",
+        "shape": "log_corrected",
+        "shape_formula": "f = r^-p0 log r",
+        "p0": 1.5,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          1.065714203803509,
+          1.355234207585454
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 0.6042262360372592,
+        "measured_over_leg381_delta_max": 1.3320222064430327
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 0.0697392932383778,
+        "delta_star_hi": 0.06973929323838668,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 1.2624121201321534,
+        "p_lo_at_delta_min": 1.2624121201321477,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": false,
+        "delta_min": null,
+        "delta_max": null,
+        "width": null,
+        "reason": "at the smallest admissible tolerance delta_min = 0.069739293238386679 the certified lower endpoint is p_lo = 1.2624121201321477, which does NOT exceed the threshold 1.5; since p_lo is non-increasing in delta, no larger tolerance can help and the window is EMPTY",
+        "shape": "log_corrected",
+        "shape_formula": "f = r^-p0 log r",
+        "p0": 1.5,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          1.065714203803509,
+          1.355234207585454
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": -0.5470663104597637,
+        "measured_over_leg381_delta_max": null
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 0.06973929323836892,
+        "delta_star_hi": 0.0697392932383778,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 1.7624121201321505,
+        "p_lo_at_delta_min": 1.7624121201321479,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 0.0697392932383778,
+        "delta_max": 4.642081725809495,
+        "width": 4.5723424325711175,
+        "capped": false,
+        "reason": "",
+        "shape": "log_corrected",
+        "shape_formula": "f = r^-p0 log r",
+        "p0": 2.0,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          1.565714203796233,
+          1.855234207585454
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 1.7555187825342757,
+        "measured_over_leg381_delta_max": 2.6442791566765025
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 0.06973929323836892,
+        "delta_star_hi": 0.0697392932383778,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 1.7624121201321505,
+        "p_lo_at_delta_min": 1.7624121201321479,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 0.0697392932383778,
+        "delta_max": 0.8048427641171105,
+        "width": 0.7351034708787327,
+        "capped": false,
+        "reason": "",
+        "shape": "log_corrected",
+        "shape_formula": "f = r^-p0 log r",
+        "p0": 2.0,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          1.565714203796233,
+          1.855234207585454
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 0.6042262360372527,
+        "measured_over_leg381_delta_max": 1.3320222064430336
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 0.06973929323836003,
+        "delta_star_hi": 0.06973929323836892,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 2.2624121201321516,
+        "p_lo_at_delta_min": 2.26241212013215,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 0.06973929323836892,
+        "delta_max": 10.0,
+        "width": 9.930260706761631,
+        "capped": true,
+        "reason": "",
+        "shape": "log_corrected",
+        "shape_formula": "f = r^-p0 log r",
+        "p0": 2.5,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          2.065714203796233,
+          2.3552342076436616
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 2.906811329031301,
+        "measured_over_leg381_delta_max": 3.440195756816633
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 0.06973929323836003,
+        "delta_star_hi": 0.06973929323836892,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 2.2624121201321516,
+        "p_lo_at_delta_min": 2.26241212013215,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 0.06973929323836892,
+        "delta_max": 4.642081725809474,
+        "width": 4.572342432571105,
+        "capped": false,
+        "reason": "",
+        "shape": "log_corrected",
+        "shape_formula": "f = r^-p0 log r",
+        "p0": 2.5,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          2.065714203796233,
+          2.3552342076436616
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 1.7555187825342782,
+        "measured_over_leg381_delta_max": 2.644279156676487
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.0,
+        "delta_star_lo": 0.06973929323836003,
+        "delta_star_hi": 0.06973929323836892,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 2.7624121201321508,
+        "p_lo_at_delta_min": 2.7624121201321454,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 0.06973929323836892,
+        "delta_max": 10.0,
+        "width": 9.930260706761631,
+        "capped": true,
+        "reason": "",
+        "shape": "log_corrected",
+        "shape_formula": "f = r^-p0 log r",
+        "p0": 3.0,
+        "threshold_name": "fixed_ball_energy_and_critical_L3",
+        "exact_local_slope_range_float_reference": [
+          2.565714203810785,
+          2.855234207585454
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 4.058103875528322,
+        "measured_over_leg381_delta_max": 2.464205034351938
+      },
+      {
+        "hypothesis": "EXACT-INTERVAL-EVALUATION",
+        "hypothesis_detail": "composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "conditional_on": "The cell enclosures were produced by outward-rounded interval evaluation of a closed-form profile over each whole cell, so the enclosure hypothesis is DISCHARGED here rather than declared: f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction. composed from certified_decay_interval rows in cells mode at 200 cells; the window D = { delta >= 0 : INTERVAL and p_lo > 1.5 } is as conditional as those rows and no more",
+        "alpha_threshold": 1.5,
+        "delta_star_lo": 0.06973929323836003,
+        "delta_star_hi": 0.06973929323836892,
+        "n_cells": 200,
+        "window_radii": [
+          10.0,
+          1000.0
+        ],
+        "delta_cap": 10.0,
+        "p_bracket": [
+          0.0,
+          12.0
+        ],
+        "alpha_centre": 2.7624121201321508,
+        "p_lo_at_delta_min": 2.7624121201321454,
+        "verdict_at_delta_min": "INTERVAL",
+        "admissible": true,
+        "delta_min": 0.06973929323836892,
+        "delta_max": 10.0,
+        "width": 9.930260706761631,
+        "capped": true,
+        "reason": "",
+        "shape": "log_corrected",
+        "shape_formula": "f = r^-p0 log r",
+        "p0": 3.0,
+        "threshold_name": "global_L2",
+        "exact_local_slope_range_float_reference": [
+          2.565714203810785,
+          2.855234207585454
+        ],
+        "leg381_law_delta_max_alpha_centre_minus_thr_over_0p434": 2.9068113290312994,
+        "measured_over_leg381_delta_max": 3.4401957568166353
+      }
+    ],
+    "alpha_in_play_preregistered": 1.0,
+    "alpha_in_play_source": "CLAY_OBLIGATIONS.md \u00a74 amendment 3: 'L^2 needs alpha > 3/2; the banked Type-I object gives alpha = 1 \u2014 deficit 0.5, ratio 1.5x'",
+    "nominal_p0_reading": {
+      "n_admissible": 1,
+      "shapes": [
+        "rational_cutoff"
+      ],
+      "why_not_operative": "the rational cutoff carries nominal p0 = 1 but REALISES alpha_centre = 2.032842, because the measurement window contains its cutoff; PART I \u00a74 fixed the decision at the realised alpha, not the nominal one"
+    },
+    "realised_alpha_reading_OPERATIVE": {
+      "dichotomy_rows": [
+        {
+          "shape": "two_power",
+          "p0": 1.0,
+          "threshold": 1.0,
+          "alpha_centre": 0.4979490782343632,
+          "admissible": false,
+          "predicted_by_alpha_centre_gt_threshold": false,
+          "agrees": true
+        },
+        {
+          "shape": "two_power",
+          "p0": 1.0,
+          "threshold": 1.5,
+          "alpha_centre": 0.4979490782343632,
+          "admissible": false,
+          "predicted_by_alpha_centre_gt_threshold": false,
+          "agrees": true
+        },
+        {
+          "shape": "two_power",
+          "p0": 1.5,
+          "threshold": 1.0,
+          "alpha_centre": 0.9979490782343636,
+          "admissible": false,
+          "predicted_by_alpha_centre_gt_threshold": false,
+          "agrees": true
+        },
+        {
+          "shape": "two_power",
+          "p0": 1.5,
+          "threshold": 1.5,
+          "alpha_centre": 0.9979490782343636,
+          "admissible": false,
+          "predicted_by_alpha_centre_gt_threshold": false,
+          "agrees": true
+        },
+        {
+          "shape": "two_power",
+          "p0": 2.0,
+          "threshold": 1.0,
+          "alpha_centre": 1.4979490782343623,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "two_power",
+          "p0": 2.0,
+          "threshold": 1.5,
+          "alpha_centre": 1.4979490782343623,
+          "admissible": false,
+          "predicted_by_alpha_centre_gt_threshold": false,
+          "agrees": true
+        },
+        {
+          "shape": "two_power",
+          "p0": 2.5,
+          "threshold": 1.0,
+          "alpha_centre": 1.9979490782343623,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "two_power",
+          "p0": 2.5,
+          "threshold": 1.5,
+          "alpha_centre": 1.9979490782343623,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "two_power",
+          "p0": 3.0,
+          "threshold": 1.0,
+          "alpha_centre": 2.497949078234363,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "two_power",
+          "p0": 3.0,
+          "threshold": 1.5,
+          "alpha_centre": 2.497949078234363,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "rational_cutoff",
+          "p0": 1.0,
+          "threshold": 1.0,
+          "alpha_centre": 2.03284150346203,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "rational_cutoff",
+          "p0": 1.0,
+          "threshold": 1.5,
+          "alpha_centre": 2.03284150346203,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "rational_cutoff",
+          "p0": 1.5,
+          "threshold": 1.0,
+          "alpha_centre": 2.532841503462032,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "rational_cutoff",
+          "p0": 1.5,
+          "threshold": 1.5,
+          "alpha_centre": 2.532841503462032,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "rational_cutoff",
+          "p0": 2.0,
+          "threshold": 1.0,
+          "alpha_centre": 3.0328415034620306,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "rational_cutoff",
+          "p0": 2.0,
+          "threshold": 1.5,
+          "alpha_centre": 3.0328415034620306,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "rational_cutoff",
+          "p0": 2.5,
+          "threshold": 1.0,
+          "alpha_centre": 3.5328415034620315,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "rational_cutoff",
+          "p0": 2.5,
+          "threshold": 1.5,
+          "alpha_centre": 3.5328415034620315,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "rational_cutoff",
+          "p0": 3.0,
+          "threshold": 1.0,
+          "alpha_centre": 4.032841503462032,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "rational_cutoff",
+          "p0": 3.0,
+          "threshold": 1.5,
+          "alpha_centre": 4.032841503462032,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "log_corrected",
+          "p0": 1.0,
+          "threshold": 1.0,
+          "alpha_centre": 0.7624121201321522,
+          "admissible": false,
+          "predicted_by_alpha_centre_gt_threshold": false,
+          "agrees": true
+        },
+        {
+          "shape": "log_corrected",
+          "p0": 1.0,
+          "threshold": 1.5,
+          "alpha_centre": 0.7624121201321522,
+          "admissible": false,
+          "predicted_by_alpha_centre_gt_threshold": false,
+          "agrees": true
+        },
+        {
+          "shape": "log_corrected",
+          "p0": 1.5,
+          "threshold": 1.0,
+          "alpha_centre": 1.2624121201321534,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "log_corrected",
+          "p0": 1.5,
+          "threshold": 1.5,
+          "alpha_centre": 1.2624121201321534,
+          "admissible": false,
+          "predicted_by_alpha_centre_gt_threshold": false,
+          "agrees": true
+        },
+        {
+          "shape": "log_corrected",
+          "p0": 2.0,
+          "threshold": 1.0,
+          "alpha_centre": 1.7624121201321505,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "log_corrected",
+          "p0": 2.0,
+          "threshold": 1.5,
+          "alpha_centre": 1.7624121201321505,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "log_corrected",
+          "p0": 2.5,
+          "threshold": 1.0,
+          "alpha_centre": 2.2624121201321516,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "log_corrected",
+          "p0": 2.5,
+          "threshold": 1.5,
+          "alpha_centre": 2.2624121201321516,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "log_corrected",
+          "p0": 3.0,
+          "threshold": 1.0,
+          "alpha_centre": 2.7624121201321508,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        },
+        {
+          "shape": "log_corrected",
+          "p0": 3.0,
+          "threshold": 1.5,
+          "alpha_centre": 2.7624121201321508,
+          "admissible": true,
+          "predicted_by_alpha_centre_gt_threshold": true,
+          "agrees": true
+        }
+      ],
+      "n_rows": 30,
+      "n_exceptions_to_admissible_iff_alpha_centre_gt_threshold": 0,
+      "exceptions": [],
+      "headroom_probe": [
+        {
+          "shape": "two_power",
+          "p0": 1.5,
+          "alpha_centre": 0.9979490782343636,
+          "admissible_at_threshold_just_BELOW_centre": true,
+          "admissible_at_threshold_just_ABOVE_centre": false,
+          "window_width_just_below_centre": 1.4965282741918884e-06,
+          "crossover_threshold_is_the_centre": true
+        },
+        {
+          "shape": "two_power",
+          "p0": 2.5,
+          "alpha_centre": 1.9979490782343623,
+          "admissible_at_threshold_just_BELOW_centre": true,
+          "admissible_at_threshold_just_ABOVE_centre": false,
+          "window_width_just_below_centre": 2.9961304782721854e-06,
+          "crossover_threshold_is_the_centre": true
+        },
+        {
+          "shape": "rational_cutoff",
+          "p0": 1.5,
+          "alpha_centre": 2.532841503462032,
+          "admissible_at_threshold_just_BELOW_centre": true,
+          "admissible_at_threshold_just_ABOVE_centre": false,
+          "window_width_just_below_centre": 7.996677989563494e-06,
+          "crossover_threshold_is_the_centre": true
+        },
+        {
+          "shape": "rational_cutoff",
+          "p0": 2.5,
+          "alpha_centre": 3.5328415034620315,
+          "admissible_at_threshold_just_BELOW_centre": true,
+          "admissible_at_threshold_just_ABOVE_centre": false,
+          "window_width_just_below_centre": 1.1153884095449484e-05,
+          "crossover_threshold_is_the_centre": true
+        },
+        {
+          "shape": "log_corrected",
+          "p0": 1.5,
+          "alpha_centre": 1.2624121201321534,
+          "admissible_at_threshold_just_BELOW_centre": true,
+          "admissible_at_threshold_just_ABOVE_centre": false,
+          "window_width_just_below_centre": 1.787978946926616e-06,
+          "crossover_threshold_is_the_centre": true
+        },
+        {
+          "shape": "log_corrected",
+          "p0": 2.5,
+          "alpha_centre": 2.2624121201321516,
+          "admissible_at_threshold_just_BELOW_centre": true,
+          "admissible_at_threshold_just_ABOVE_centre": false,
+          "window_width_just_below_centre": 3.2043018349248165e-06,
+          "crossover_threshold_is_the_centre": true
+        }
+      ],
+      "delta_buys_zero_threshold_headroom": true,
+      "n_admissible_rows_with_realised_alpha_centre_le_1": 0
+    },
+    "CLAUSE2_ADMISSIBLE_AT_ALPHA_IN_PLAY": false
+  },
+  "anti_tautology": {
+    "1_no_known_returns_full_bracket_at_any_delta": true,
+    "2_no_exact_power_law_ever_certified_EMPTY": true,
+    "3_every_mismatch_EMPTY_at_delta_zero": true,
+    "4_delta_recorded_in_every_row": true,
+    "4b_delta_recorded_on_the_INCAPACITY_zero_crossing_path": true,
+    "6_hypothesis_recorded_in_every_row": true,
+    "6b_hypothesis_separates_what_the_width_cannot": true,
+    "6c_composed_window_carries_the_hypothesis_it_was_composed_from": true,
+    "5_widths_non_decreasing_in_delta": true
+  },
+  "GATE": {
+    "clause1_wording": "At the freshly-measured delta*: do the three non-power planted cases certify with contained truth and reported widths, does the exact power law still certify at delta = 0 with 382's widths reproduced, AND does a sub-delta* control remain EMPTY?",
+    "clause1_answer": "YES",
+    "clause1_subconditions": {
+      "1a_width_law": true,
+      "1b_certify_at_delta_star": true,
+      "1c_delta_zero_knowns": true,
+      "1d_sub_delta_star_empty": true
+    },
+    "clause2_wording": "Does the admissible-cutoff analysis tolerate delta > 0 AT ALL?",
+    "clause2_answer": "EMPTY",
+    "not_netted": "The two clauses are reported side by side and are NOT combined into one word.",
+    "ceiling": "TIER 2 in both branches of both clauses",
+    "clay_obligations_6_items_1_and_2": "OPEN in every branch"
+  },
+  "runtime_seconds": 61.668686389923096
+}

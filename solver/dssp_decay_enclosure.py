@@ -64,6 +64,68 @@ TWO MODES, AND THEY ANSWER DIFFERENT QUESTIONS.
     caller can see how much of a certified width is cell coverage and how much is
     floating point.  Never quote a `nodes` width as a certified decay bound.
 
+EVERY OUTPUT ROW CARRIES THE HYPOTHESIS IN FORCE (standing rule, DM cycle 11g; leg 386
+implements it here).  ``hypothesis`` / ``hypothesis_detail`` / ``conditional_on`` are
+present on EVERY return path of every function in this module, beside ``rel_tolerance``,
+and an omitted hypothesis is recorded as ``UNDECLARED`` rather than silently forgiven.
+The reason is measured, not hygienic: leg 385's control X3, carrying a SECRET monotonicity
+violation, produced a certificate of width 7.438494264988549e-15 -- bit-indistinguishable
+from the true certificate of the genuine known K1.  A false certificate can be identical
+to a true one; only the recorded hypothesis separates them.  Read ``hypothesis`` before
+``width``.  See section 0a.
+
+THE TOLERANCE MODE ``rel_tolerance = delta``, PRE-REGISTERED (leg 386, Route-DTOL).
+Leg 382 added this argument AFTER its run and labelled it post-hoc and not gate-deciding.
+Leg 386 pre-registered its behaviour (`experiments/journal/leg_386.md` Part I, committed in
+caf48e8 before any leg-386 measurement) and measured it fresh.  What it does:
+
+    P_cert^delta := { p >= 0 : there is C > 0 with
+                      f(r)/(1+delta) <= C r**(-p) <= f(r)*(1+delta) for ALL r in [R0, R1] }
+
+``delta = 0`` recovers the exact set and REMAINS THE DEFAULT, deliberately: the exact
+statement is the one the module is named for, and leg 382's finding that it answers EMPTY on
+every real input is a regression test, not a bug to be defaulted away.
+
+The width law is a CLOSED FORM, and it is a property of the WINDOW, not of the instrument.
+For an exact power law the affine functions inside a tube of log-half-height
+``h = log(1+delta)`` are exactly those with ``|p - p0| <= 2h/(t1 - t0)``, so
+
+    width(delta) = 4 * log(1 + delta) / log(R1 / R0)          [`predicted_width`]
+
+-- which is where leg 382's measured ``0.8686`` comes from: it is ``4/log(100)`` for the
+window ``[10, 1000]``, and it DOUBLES on ``[10, 100]``.  Leg 386 measured both: the
+measured/closed-form ratio is 1.005051 to 1.005074 across delta = 1e-9 .. 1e-1 on BOTH
+windows (a uniform +0.51 %, the cell discretisation's own contribution), and the measured
+window ratio is 1.9999989 against the predicted exactly 2.
+Consequence a consumer must not miss: **a longer window buys a narrower certified interval at
+the same delta**, so any threshold quoted "at 0.434 per unit delta" is quoted at a window.
+
+The critical tolerance ``delta*`` below which a given mismatch is still certified EMPTY is
+likewise closed-form, ``delta* = exp(E_inf(phi)) - 1`` with ``E_inf`` the Chebyshev
+best-affine error of the profile's departure ``phi`` from a power law in the log-log plane;
+leg 386 predicted 0.318807 / 3.454378 / 0.077025 for its three controls before running and
+measured 0.315697 / 3.352868 / 0.069739 -- below the continuum value in all three cases, by
+0.98 % / 2.94 % / 9.46 %, and below is the direction predicted in advance (the cell
+enclosure is slightly wider than the exact tube, so feasibility arrives slightly early).
+Those measurements also reproduce leg 382's post-hoc leads to 5e-9 / 5e-8 / 4e-6 relative.
+
+WHAT THE TOLERANCE DOES NOT BUY, measured (leg 386 clause 2, `cutoff_admissible_delta_window`).
+It buys NO headroom whatsoever on the exponent threshold a cutoff analysis needs.  Across 30
+measured rows there are ZERO exceptions to
+
+    the admissible-delta window is non-empty  <==>  alpha_centre > threshold,
+
+and six crossover probes put the crossover threshold at the realised centre itself.  Widening
+delta moves the LEFT edge of what can be certified, never the centre; so a profile whose
+certified centre sits at or below the threshold cannot be rescued by any tolerance.
+
+DELTA IS NOT A FITTING KNOB.  It is an INPUT the caller owes: the relative accuracy to which
+the caller's own profile is itself certified.  Two guards, both tested: widening delta only
+ENLARGES the feasible set (so EMPTY is downward-closed in delta), and every enclosure is
+quoted with the ``delta*`` of the mismatches it would stop excluding.  ``delta`` is recorded
+in EVERY returned row, on EVERY code path including the incapacity paths -- leg 389 consumes
+these rows and must never be handed one whose tolerance is implicit.
+
 DOMAIN RESTRICTION, DECLARED NOT HIDDEN.  The search runs over ``p in [0, 12]`` by
 default.  Fixing ``p >= 0`` is what makes ``max_{t in T} (p t)`` attain at a fixed
 endpoint, hence every constraint linear in ``p``; it also requires ``R0 > 1`` so that
@@ -100,8 +162,10 @@ __all__ = [
     "planted_log_corrected", "planted_perturbed", "planted_curvature",
     "radial_field_fn",
     "certified_decay_interval", "certified_decay_from_cell_enclosures",
-    "critical_tolerance",
+    "critical_tolerance", "predicted_width", "cutoff_admissible_delta_window",
     "VERDICT_INTERVAL", "VERDICT_EMPTY", "VERDICT_INCAPACITY",
+    "HYP_UNDECLARED", "HYP_EXACT_INTERVAL", "HYP_NODES_ONLY",
+    "HYP_MONOTONE", "HYP_MODULUS", "HYP_BOTH",
 ]
 
 VERDICT_INTERVAL = "INTERVAL"
@@ -109,6 +173,71 @@ VERDICT_EMPTY = "EMPTY"
 VERDICT_INCAPACITY = "INCAPACITY"
 
 DEFAULT_P_BRACKET = (0.0, 12.0)
+
+# ---------------------------------------------------------------------------
+# 0a.  THE HYPOTHESIS FIELD  (standing rule, DM cycle 11g)
+#
+# EVERY OUTPUT ROW CARRIES THE HYPOTHESIS IN FORCE.  A CERTIFICATE-WITHOUT-
+# HYPOTHESIS IS NO CERTIFICATE.
+#
+# The rule is not bookkeeping.  Leg 385's control X3 planted a SECRET monotonicity
+# violation and was accepted -- as it must be, since the hypothesis is declared by the
+# caller and cannot be verified from samples -- and the certificate it produced had
+# width 7.438494264988549e-15, **bit-indistinguishable from the true certificate of the
+# genuine planted known K1**.  Same width, false about its profile.  Nothing inside the
+# certificate separates them; only the recorded hypothesis does.  (Leg 385's downstream
+# audit caught X3 at +5.1420e-2 relative in 1000/1000 cells, but the certificate itself
+# was indistinguishable.)
+#
+# So a consumer of a row here must read `hypothesis` BEFORE it reads `width`.  A narrow
+# width under HYP_UNDECLARED is worth less than a wide one under a declared, checked
+# hypothesis, and this module now says so in the row rather than in prose.
+#
+# The three MONOTONE/MODULUS/BOTH strings are byte-identical to
+# solver/dssp_decay_samples.py's (leg 385, the samples->cells adapter upstream of this
+# module) so that an adapter row's hypothesis passes through unmodified and un-restated.
+# They are duplicated rather than imported to keep the dependency pointing one way
+# (adapter -> enclosure, never back); test_hypothesis_strings_match_the_adapter pins the
+# duplication against drift and will fail if leg 385's module renames one.
+# ---------------------------------------------------------------------------
+HYP_UNDECLARED = "UNDECLARED"
+HYP_EXACT_INTERVAL = "EXACT-INTERVAL-EVALUATION"
+HYP_NODES_ONLY = "NODES-ONLY"
+HYP_MONOTONE = "MONOTONE"
+HYP_MODULUS = "MODULUS"
+HYP_BOTH = "MONOTONE+MODULUS"
+
+
+def _hypothesis_fields(hypothesis, hypothesis_detail):
+    """The three fields every row of this module carries, assembled in one place.
+
+    ``conditional_on`` is the one sentence a downstream reader must be able to put next
+    to any number derived from the row.  It is assembled, never abbreviated, and for an
+    undeclared hypothesis it says plainly that the row is not a certificate about any
+    profile at all."""
+    h = HYP_UNDECLARED if hypothesis is None else str(hypothesis)
+    d = None if hypothesis_detail is None else str(hypothesis_detail)
+    if h == HYP_UNDECLARED:
+        cond = ("NO HYPOTHESIS DECLARED. This row is a statement about the SUPPLIED "
+                "NUMBERS ONLY and is not a certificate about any profile: nothing here "
+                "establishes that the cell enclosures bound a function. A "
+                "certificate-without-hypothesis is no certificate.")
+    elif h == HYP_EXACT_INTERVAL:
+        cond = ("The cell enclosures were produced by outward-rounded interval "
+                "evaluation of a closed-form profile over each whole cell, so the "
+                "enclosure hypothesis is DISCHARGED here rather than declared: "
+                "f_lo[i] <= f(r) <= f_hi[i] holds for every r in cell i by construction.")
+    elif h == HYP_NODES_ONLY:
+        cond = ("NO CELL HYPOTHESIS. The enclosures were evaluated at exact NODES, so "
+                "the statement covers those nodes and NOT the window between them; it is "
+                "strictly weaker than a cells-mode row and must never be quoted as a "
+                "statement about the window.")
+    else:
+        cond = ("These conclusions hold CONDITIONALLY on the caller-declared hypothesis "
+                f"{h}, which was declared upstream and is NOT verified here.")
+    if d:
+        cond = cond + " " + d
+    return {"hypothesis": h, "hypothesis_detail": d, "conditional_on": cond}
 
 
 # ---------------------------------------------------------------------------
@@ -342,9 +471,26 @@ def _fourier_motzkin_p_range(t_lo, t_hi, g_lo, g_hi, p_bracket, block=256):
     return p_lo, p_hi, n_dropped, n_pairs
 
 
+def predicted_width(delta, r0, r1):
+    """The closed-form certified width for an EXACT power law at tolerance ``delta``.
+
+        width = 4 * log(1 + delta) / log(r1 / r0)
+
+    Derivation (leg 386 pre-registration §2.1, committed before measurement): with
+    ``t = log r`` and tube log-half-height ``h = log(1+delta)``, an affine ``c - p t`` lies
+    within the tube iff ``|Delta_c - Delta_p t| <= h`` at both endpoints, and the extreme tilt
+    takes ``+h`` at one end and ``-h`` at the other, giving ``|Delta_p| <= 2h/(t1 - t0)``.
+
+    This is a float REFERENCE VALUE, not a certified bound -- it is reported alongside each
+    row so a consumer can see at a glance how much of a measured width is tolerance and how
+    much is the profile's own departure from a power law.  Never quote it as the bound."""
+    return float(4.0 * np.log1p(float(delta)) / np.log(float(r1) / float(r0)))
+
+
 def certified_decay_from_cell_enclosures(r_lo, r_hi, f_lo, f_hi,
                                          p_bracket=DEFAULT_P_BRACKET,
-                                         rel_tolerance=0.0):
+                                         rel_tolerance=0.0,
+                                         hypothesis=None, hypothesis_detail=None):
     """The entry point a future profile-producing unit should call.
 
     Inputs are CERTIFIED CELL ENCLOSURES: cell ``i`` spans radii ``[r_lo[i], r_hi[i]]``
@@ -372,6 +518,15 @@ def certified_decay_from_cell_enclosures(r_lo, r_hi, f_lo, f_hi,
     enclosure, the CRITICAL TOLERANCE at which a known mismatch would stop being
     excluded; leg 382 measures those for its controls.
 
+    ``hypothesis`` / ``hypothesis_detail`` record WHICH obligation the caller
+    discharged to make those cell enclosures true -- pass through unmodified whatever
+    the samples->cells adapter (solver/dssp_decay_samples.py, leg 385) recorded on its
+    own row.  Omitting them is allowed and is NOT silently forgiven: the row then
+    carries ``hypothesis = "UNDECLARED"`` and a ``conditional_on`` sentence stating that
+    it is not a certificate about any profile.  See section 0a -- a certificate whose
+    hypothesis is false can be bit-identical to a true one, so the field is the only
+    thing that separates them.
+
     Returns a dict; see `certified_decay_interval` for the fields."""
     r_lo = np.asarray(r_lo, dtype=float)
     r_hi = np.asarray(r_hi, dtype=float)
@@ -380,18 +535,33 @@ def certified_decay_from_cell_enclosures(r_lo, r_hi, f_lo, f_hi,
     if np.any(r_lo <= 1.0):
         raise ValueError("certified_decay: the window must satisfy r > 1 (log r > 0), "
                          "which is what fixes the sign in the p >= 0 relaxation")
-    if np.any(f_lo <= 0.0):
-        return {"verdict": VERDICT_INCAPACITY,
-                "reason": "profile enclosure touches or crosses zero; log is undefined",
-                "p_lo": None, "p_hi": None, "width": None,
-                "n_cells": int(len(r_lo)), "n_constraints": 0,
-                "n_pairs": 0, "n_dropped": 0,
-                "max_log_tube_width": None,
-                "p_bracket": [float(p_bracket[0]), float(p_bracket[1])]}
 
+    # delta is validated and bound BEFORE any early return, so that no code path can
+    # emit a row whose tolerance is implicit (leg 386 §5; leg 389 consumes these rows).
     delta = float(rel_tolerance)
     if delta < 0.0:
         raise ValueError("rel_tolerance must be >= 0")
+
+    # The hypothesis fields are bound in the same breath as delta and for the same
+    # reason: no code path may emit a row whose tolerance OR whose hypothesis is
+    # implicit (leg 386 §5; standing rule of DM cycle 11g; leg 389 consumes these rows).
+    hyp = _hypothesis_fields(hypothesis, hypothesis_detail)
+
+    if np.any(f_lo <= 0.0):
+        out = {"verdict": VERDICT_INCAPACITY,
+               "reason": "profile enclosure touches or crosses zero; log is undefined",
+               "p_lo": None, "p_hi": None, "width": None,
+               "n_cells": int(len(r_lo)), "n_constraints": 0,
+               "n_pairs": 0, "n_dropped": 0,
+               "max_log_tube_width": None,
+               "rel_tolerance": delta,
+               "tolerance_mode": ("exact" if delta == 0.0 else "relative"),
+               "window": [float(np.min(r_lo)), float(np.max(r_hi))],
+               "leverage_log_ratio": float(np.log(np.max(r_hi) / np.min(r_lo))),
+               "p_bracket": [float(p_bracket[0]), float(p_bracket[1])]}
+        out.update(hyp)
+        return out
+
     if delta > 0.0:
         one_plus = Interval.point(np.asarray(1.0 + delta))
         f_lo_new = (Interval(f_lo, f_lo) / one_plus).lo
@@ -416,8 +586,12 @@ def certified_decay_from_cell_enclosures(r_lo, r_hi, f_lo, f_hi,
            "max_log_tube_width": float(np.max(G.hi - G.lo)),
            "p_bracket": [float(p_bracket[0]), float(p_bracket[1])],
            "rel_tolerance": delta,
+           "tolerance_mode": ("exact" if delta == 0.0 else "relative"),
+           "predicted_width_exact_power_law": predicted_width(
+               delta, float(np.min(r_lo)), float(np.max(r_hi))),
            "window": [float(np.min(r_lo)), float(np.max(r_hi))],
            "leverage_log_ratio": float(np.log(np.max(r_hi) / np.min(r_lo)))}
+    out.update(hyp)
 
     # A profile whose exponent lies OUTSIDE the search bracket also drives p_lo past
     # p_hi, and calling that EMPTY would be a lie of exactly the kind this module
@@ -475,19 +649,40 @@ def certified_decay_interval(profile_iv_fn, r0, r1, n_cells=1000, mode="cells",
     its far narrower answer is a strictly WEAKER statement -- see the module
     docstring.  Returns a dict with keys ``verdict`` (INTERVAL / EMPTY / INCAPACITY),
     ``p_lo``, ``p_hi``, ``width``, ``max_log_tube_width``, ``n_cells``,
-    ``n_constraints``, ``n_pairs``, ``n_dropped``, ``leverage_log_ratio``, ``mode``."""
+    ``n_constraints``, ``n_pairs``, ``n_dropped``, ``leverage_log_ratio``, ``mode``,
+    and the three hypothesis fields ``hypothesis`` / ``hypothesis_detail`` /
+    ``conditional_on``.
+
+    THE HYPOTHESIS ON THIS PATH IS DISCHARGED, NOT DECLARED, and the two modes discharge
+    different things -- which is why the mode's weakness is now stated inside the row
+    instead of only in the docstring:
+
+      * ``mode="cells"`` evaluates ``profile_iv_fn`` over WHOLE CELLS with outward
+        rounding, so the cell-enclosure obligation is met by construction and the row
+        carries ``hypothesis = HYP_EXACT_INTERVAL``.
+      * ``mode="nodes"`` evaluates at exact nodes and establishes NOTHING between them,
+        so the row carries ``hypothesis = HYP_NODES_ONLY`` and any consumer reading the
+        hypothesis field before the width will see that it is not a window statement."""
     if mode not in ("cells", "nodes"):
         raise ValueError("mode must be 'cells' or 'nodes'")
     edges = np.geomspace(float(r0), float(r1), int(n_cells) + 1)
     if mode == "cells":
         lo, hi = edges[:-1], edges[1:]
         F = profile_iv_fn(Interval(lo, hi))
-        res = certified_decay_from_cell_enclosures(lo, hi, F.lo, F.hi, p_bracket,
-                                                   rel_tolerance)
+        res = certified_decay_from_cell_enclosures(
+            lo, hi, F.lo, F.hi, p_bracket, rel_tolerance,
+            hypothesis=HYP_EXACT_INTERVAL,
+            hypothesis_detail=("cells mode: %d geometric cells on [%.17g, %.17g], "
+                               "profile_iv_fn evaluated over each whole cell"
+                               % (int(n_cells), float(r0), float(r1))))
     else:
         F = profile_iv_fn(Interval.point(edges))
-        res = certified_decay_from_cell_enclosures(edges, edges, F.lo, F.hi, p_bracket,
-                                                   rel_tolerance)
+        res = certified_decay_from_cell_enclosures(
+            edges, edges, F.lo, F.hi, p_bracket, rel_tolerance,
+            hypothesis=HYP_NODES_ONLY,
+            hypothesis_detail=("nodes mode: %d exact nodes on [%.17g, %.17g]; STRICTLY "
+                               "WEAKER than cells mode, reference use only"
+                               % (int(n_cells) + 1, float(r0), float(r1))))
     res["mode"] = mode
     return res
 
@@ -524,3 +719,111 @@ def critical_tolerance(profile_iv_fn, r0, r1, n_cells=1000, mode="cells",
         else:
             b = m
     return (a, b)
+
+
+def cutoff_admissible_delta_window(profile_iv_fn, r0, r1, alpha_threshold,
+                                   n_cells=200, p_bracket=DEFAULT_P_BRACKET,
+                                   delta_cap=10.0, iters=60):
+    """The composed condition `CLAY_OBLIGATIONS.md` §4 imposes on the tolerance, MEASURED.
+
+    §4's admissible cutoff radius is a function of the CERTIFIED exponent, and every bound in
+    leg 381's priced cutoff bill depends on the enclosure's LOWER endpoint ``p_lo``, not on
+    its centre.  So the tolerance is squeezed from both sides at once:
+
+      * from BELOW by the profile itself -- under ``delta*`` the verdict is EMPTY and there
+        is no ``p_lo`` at all;
+      * from ABOVE by §4 -- widening ``delta`` drags ``p_lo`` down, and once
+        ``p_lo <= alpha_threshold`` the certification no longer entails the property the
+        cutoff analysis needs (``alpha_threshold = 1`` for fixed-ball energy and the critical
+        ``L^3`` tail, ``3/2`` for global ``L^2``).
+
+    Whether those two demands can hold AT ONCE was settled by neither leg 381 nor leg 382.
+    This routine settles it for a given profile BY DIRECT MEASUREMENT rather than by composing
+    the two legs' laws: it returns the window
+
+        D = { delta >= 0 : verdict == INTERVAL and p_lo > alpha_threshold }
+
+    as ``[delta_min, delta_max]``, or reports it EMPTY.  ``D`` is an interval because
+    ``p_lo`` is non-increasing in ``delta`` (widening the tube only enlarges the feasible
+    set), so both endpoints are located by plain bisection.
+
+    ``delta_max`` returned equal to ``delta_cap`` with ``capped=True`` means ``p_lo`` still
+    clears the threshold at the largest tolerance searched; that is a statement about the
+    search, not about the profile.
+
+    Returns a dict with ``admissible`` (bool), ``delta_min``, ``delta_max``, ``width``,
+    ``alpha_threshold``, ``alpha_centre`` and ``p_lo`` at ``delta_min``, ``delta_star``, the
+    reason when empty, and the configuration.  Every field is a magnitude; nothing is a bare
+    boolean without the numbers that produced it."""
+    thr = float(alpha_threshold)
+
+    def row(d):
+        return certified_decay_interval(profile_iv_fn, r0, r1, n_cells, "cells",
+                                        p_bracket, d)
+
+    def ok(d):
+        r = row(d)
+        return bool(r["verdict"] == VERDICT_INTERVAL and r["p_lo"] > thr)
+
+    d_lo, d_hi = critical_tolerance(profile_iv_fn, r0, r1, n_cells, "cells",
+                                    p_bracket, hi=delta_cap, iters=iters)
+    # This row is derived from certified_decay_interval rows in "cells" mode, so it
+    # inherits their discharged hypothesis and says so -- a composed window is exactly
+    # as conditional as the certifications it was composed from, and must not launder
+    # that away by being one level further from the arithmetic.
+    out = dict(_hypothesis_fields(
+        HYP_EXACT_INTERVAL,
+        "composed from certified_decay_interval rows in cells mode at %d cells; the "
+        "window D = { delta >= 0 : INTERVAL and p_lo > %g } is as conditional as those "
+        "rows and no more" % (int(n_cells), thr)))
+    out.update({"alpha_threshold": thr,
+           "delta_star_lo": float(d_lo),
+           "delta_star_hi": (None if d_hi == float("inf") else float(d_hi)),
+           "n_cells": int(n_cells),
+           "window_radii": [float(r0), float(r1)],
+           "delta_cap": float(delta_cap),
+           "p_bracket": [float(p_bracket[0]), float(p_bracket[1])]})
+
+    if d_hi == float("inf"):
+        out.update({"admissible": False, "delta_min": None, "delta_max": None,
+                    "width": None, "alpha_centre": None, "p_lo_at_delta_min": None,
+                    "reason": ("the profile is certified EMPTY at every tolerance up to the "
+                               "cap %g: its departure from a power law exceeds anything the "
+                               "mode can absorb, so no delta admits a certification at all"
+                               % delta_cap)})
+        return out
+
+    # delta_min: the smallest tolerance at which a certification exists at all.  For an exact
+    # power law that is 0; otherwise it is the upper bracket of delta*, where EMPTY first fails.
+    d_min = 0.0 if d_lo == 0.0 and d_hi == 0.0 else float(d_hi)
+    r_min = row(d_min)
+    out["alpha_centre"] = (None if r_min["p_lo"] is None
+                           else float(0.5 * (r_min["p_lo"] + r_min["p_hi"])))
+    out["p_lo_at_delta_min"] = (None if r_min["p_lo"] is None else float(r_min["p_lo"]))
+    out["verdict_at_delta_min"] = r_min["verdict"]
+
+    if not ok(d_min):
+        out.update({"admissible": False, "delta_min": None, "delta_max": None,
+                    "width": None,
+                    "reason": ("at the smallest admissible tolerance delta_min = %.17g the "
+                               "certified lower endpoint is p_lo = %s, which does NOT exceed "
+                               "the threshold %g; since p_lo is non-increasing in delta, no "
+                               "larger tolerance can help and the window is EMPTY"
+                               % (d_min, out["p_lo_at_delta_min"], thr))})
+        return out
+
+    if ok(delta_cap):
+        d_max, capped = float(delta_cap), True
+    else:
+        a, b = d_min, float(delta_cap)
+        for _ in range(int(iters)):
+            m = 0.5 * (a + b)
+            if ok(m):
+                a = m
+            else:
+                b = m
+        d_max, capped = a, False
+
+    out.update({"admissible": True, "delta_min": float(d_min), "delta_max": d_max,
+                "width": float(d_max - d_min), "capped": capped, "reason": ""})
+    return out
