@@ -155,6 +155,19 @@ change the answer are `α_lo > 1` (fixed-ball energy decays; critical `L³` tail
 per-candidate exponent from `solver/dssp_screen.py::fitted_far_field_decay_exponent` — and
 `CLAY_OBLIGATIONS` §8 bullet 2 is right that fitted is not sufficient.
 
+**Added after rebase (leg 382 landed while this leg ran; conclusions unchanged, pointer recorded).**
+Leg 382's instrument certifies the *exact* power-law exponent set and therefore answers **EMPTY on
+every real input** — no real profile is an exact power law — so it carries a tolerance `δ` and
+returns a certified enclosure of **width ≈ 0.8686·δ (half-width ≈ 0.434·δ)**. Composing that with
+the thresholds above gives the requirement this leg's magnitudes actually impose on slot C's
+instrument: the usable quantity is `α_lo = α_centre − 0.434·δ`, so **`δ` must satisfy
+`δ < (α_centre − 1)/0.434` for the fixed-ball-energy and critical-`L³` thresholds, and
+`δ < (α_centre − 3/2)/0.434` for global `L²`** — while `δ` must simultaneously exceed the profile's
+own departure from an exact power law on the window (leg 382 measured critical tolerances `δ*` of
+`0.0697`, `0.3157`, `3.3529` on its three controls). Whether those two demands on `δ` are
+simultaneously satisfiable for the real candidate is **not** settled by either leg, and is named
+here as the composed open question rather than assumed away.
+
 ### 3.2 Input 2 — the perturbation size as a function of cutoff radius `ρ`
 
 Cutoff `χ_ρ`: 1 on `|x| ≤ ρ`, 0 on `|x| ≥ 2ρ`, quintic transition. All exponents below are
