@@ -35,7 +35,7 @@ prose as before.
 |---|---|---|---|
 | A | 380 | PROG-R4 (§3c programme, construction — the critical path) | yes |
 | B | 381 | CLAY-LOC (mathematics) | yes |
-| C | 383 | ST2G (construction — 382 landed 104f5b3, C refilled per §4a) | yes |
+| C | 385 | SCEL (construction — 383 landed fd833d2, C refilled per §4a) | yes |
 | D | 233 | BVRRV (post-repair verification) | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -22325,3 +22325,154 @@ data; a refill by the book; four drafts that make the instrument's
 limits into queued questions. CLAY_OBLIGATIONS §6 items 1 and 2
 OPEN throughout; nothing presumes the POCP spend; no L1→L4 link
 moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 11c) — 383 ST2G ABSORBED (GATE YES,
+AND THE LEDGER CORRECTED: THE GAP WAS THE REPORT PATH, NARROWER THAN
+359's FLAG); C ← 385 ENDORSED; 383's SUCCESSOR ITEM (1) DRAFTED AS
+389, GATED BEHIND 386
+
+Written on `dm/cycle-11c` off origin/main = fd833d2. Cycle 11b
+merged at bc50b55. A §4a landing-plus-refill record; no watermark
+owed (3 dispatchable > 2).
+
+### 383 ST2G — absorbed, with the ledger corrected on the record
+
+Gate YES in its own pre-committed wording, both classification
+clauses answered and all controls behaving: C1 → EXCLUDED-BY-T2 on
+the planted Tsai eq (1.5) field (|diff| vs the source's exact −1 =
+2.22e-16, clause "U → 0 at infinity", Tsai 1998 p.49) where the old
+report path said NOT EXCLUDED on the same field (fitted exponent
+−1.0000000000000002, L³ ladder converged=False at rel_change 0.1305
+vs tol 1e-4 — the misclassification leg 359 predicted, now measured
+firing); C2 → NOT-REACHED-BY-ANSATZ at λ = 2.691234472349262 with
+the deciding clause checked programmatically to be eq (1.2)₁,
+reproducing 359's banked −0.9971 (repo-vs-Tsai exponent gap
+2.87e-03); C3 → EXCLUDED-BY-T1 distinguishable from T2; C4/C5/C6
+required silent and silent — C5 in particular proves C2 non-vacuous
+(a static candidate classifies EXACT-SS rather than being
+deflected). Eight checks first-run; no control widened;
+`machine_read_ledger()`'s signature untouched so 362/370's
+compatibility holds.
+
+**The ledger correction, recorded so this file does not overstate
+the closure:** leg 359's flag was ALREADY PARTIALLY DISCHARGED when
+383 dispatched — leg 362 (ec48622) had landed
+`decays_to_zero_at_infinity()` and `classify_ss_ansatz()`, and leg
+370 (9a3dd41) had added Morrey, both after 359's flag, both
+strictly opt-in. The gap genuinely open at 104f5b3 was the REPORT
+PATH: `screen_candidate()` computed the decay exponent, dropped it,
+called the ledger with two positional args, and never ran the
+ansatz classification — the gate's yes-branch was FALSE there and
+is now true. 383 found this in its own novelty pass and closed the
+narrower gap instead of rewriting leg 362; that is lesson-91
+discipline working, and the correction travels with the record: the
+flag's remaining open half was the report path, and it is now
+closed. CEILING TIER 2 — surviving a screen is not evidence for
+existence; §6's two no-method obligations OPEN. Endorsed without
+amendment.
+
+### C ← 385 SCEL — refill endorsed
+
+Reserve rank 1, both preconditions verified TRUE at dispatch
+(104f5b3 on main; `solver/dssp_decay_enclosure.py` territory free —
+383 finished, read-only; 386 undispatched). The briefing additions
+(refusal-not-guess on both hypothesis paths, hypothesis recorded in
+every output row, 382's refuted-prediction precedent named) are
+endorsed as restatements of the drafted spec, not scope changes.
+fig103 allocated.
+
+### FLOOR-TABLE re-synced (this edit)
+
+C: 383 → 385. A/380 PROG-R4 (construction, U0), B/381 CLAY-LOC
+(mathematics), C/385 SCEL (construction), D/233 BVRRV
+(verification). 3/4 eligible ≥ §3b's 2; test_9 passes on the real
+roster.
+
+### 383's two successor items, ranked now as asked
+
+**Item (1) — the certified T2 column — is drafted as leg 389, and
+deliberately GATED BEHIND 386.** The reasoning, so it is not
+re-derived: wiring 382's enclosure into `screen_candidate()` today
+would wire in an instrument that answers EMPTY on every real input
+(382's own measured finding — no numerical profile is exactly a
+power law at δ=0). A certified T2 column only becomes non-vacuous
+once the δ-tolerance mode exists as a gated instrument, which is
+exactly leg 386. Sequencing it behind 386 also keeps three legs
+from circling one module: 385 (live, reads only), 386 (edits it),
+389 (consumes it). It is NOT folded into 386's own spec — 386 is an
+instrument leg and 389 is a consumer leg, and merging them would
+manufacture a two-question gate.
+
+**Item (2) — promoting Morrey into `screen_candidate()` — is NOTED,
+not drafted.** Morrey's opt-in status is leg 370's deliberate,
+landed design, and promoting it requires editing leg 357's landed
+ledger-key-set assertion. No consumer needs the promotion today; a
+leg for it now would be manufactured work. It is recorded as an
+option that whichever future leg first NEEDS Morrey in the default
+path must draft, with 357's assertion edit named in its territory.
+
+**Reserve rank 4 (after 386, 387, 388) — 389 ROUTE-CT2C**
+[FLOOR-ELIGIBLE: construction]
+```
+### 389 — ROUTE-CT2C: THE SCREEN'S SECOND T2 COLUMN — CERTIFIED,
+DRIVEN BY THE ENCLOSURE, ALONGSIDE THE FITTED ONE (383's successor
+item 1; consumer of 382's instrument in 386's δ-mode)
+**Thesis.** 383 closed the report path with the FITTED exponent per
+its dispatch and deliberately did not wire in 382's enclosure. Add
+a second, CERTIFIED T2 column to screen_candidate(): the enclosure
+in 386's δ-mode, δ and the hypothesis in force recorded in the
+row, the fitted column left in place (CLAY_OBLIGATIONS §8 bullet
+2's alongside-never-replacing rule). Where the input is sampled
+rather than analytic, consume 385's adapter if landed; if 385 is
+not landed, analytic-input scope only, stated in the row.
+**Gate.** On 383's own six planted fields, does the certified
+column agree with the fitted column's verdict wherever the
+enclosure certifies, REFUSE (INCAPACITY/EMPTY recorded, never a
+guess) wherever δ-mode cannot certify, and fire C1/C3 with
+certified intervals containing 383's banked exponents — with 383's
+eight checks still passing unchanged (the fitted path untouched)?
+  yes -> The screen's T2 verdict can cite a certificate instead of
+         a fit for any candidate the enclosure reaches; the fitted
+         column remains for the rest. CEILING TIER 2; §6 items 1
+         and 2 stay OPEN (this is the exponent half of item 1, not
+         the cutoff half, which remains unattempted).
+  no  -> Report which field the certified column loses and the
+         magnitude; a certified column that cannot match the fitted
+         one on planted knowns is decision information on §6 item
+         1, banked, not wired in.
+**Territory.** solver/dssp_screen.py, test_dssp_screen_t2.py
+               (additive), experiments/p2_route_ct2c_v1.py,
+               writeup/data/p2_route_ct2c_v1.json,
+               writeup/novelty/leg_389.md, experiments/journal/leg_389.md.
+               READS solver/dssp_decay_enclosure.py (and
+               solver/dssp_decay_samples.py if landed); edits
+               neither.
+**Difficulty.** standard
+**Preconditions:** 386 landed on main (the δ-mode is the
+non-vacuity condition) — FALSE today; no live leg editing
+solver/dssp_screen.py — checkable at dispatch. 385's landing is
+NOT a precondition (scope narrows honestly without it).
+```
+
+### Standing state
+
+A/380 PROG-R4 (running, U0 — the critical path); B/381 CLAY-LOC
+(running); C/385 SCEL (dispatched this turn); D/233 BVRRV (running).
+Floor 3/4 (380, 381, 385), table synced in this edit.
+
+**Reserve queue: 9 undispatched legs (386, 387, 388, 389, 384, 325,
+231, 232, 234).** Immediately dispatchable: **3** (386, 387, 388;
+389 waits on 386; 384 waits on 381; 325 user-gated; 231/232/234
+blocked on 217/219/225). Above the watermark; no fresh drafting
+owed. Next fresh leg number: **390.**
+
+Nothing in this update lifts a ban. A screen whose report path now
+tells the truth it already computed, a ledger correction recorded
+at the same prominence as the win, and a consumer leg sequenced so
+an instrument is never wired in while it still answers EMPTY on
+everything real. CLAY_OBLIGATIONS §6 items 1 and 2 OPEN throughout;
+nothing presumes the POCP spend; no L1→L4 link moved; Clay stays
+~0.05%.
