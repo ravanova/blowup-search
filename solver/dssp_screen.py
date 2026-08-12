@@ -964,9 +964,521 @@ def machine_read_ledger(l3_result, lambda_result, decay_result=None,
     return ledger
 
 
+# =============================================================================
+# !!! LEG 389 -- UNFINISHED WORK IN PROGRESS. NOT VALIDATED. NOT WIRED IN. !!!
+# =============================================================================
+#
+# THE RUN WAS WOUND DOWN BY USER INSTRUCTION PART-WAY THROUGH THIS SECTION.
+# LEG 389'S GATE IS **UNANSWERED**.  Read this block before reading a line below
+# it, and do not quote any number produced by anything in this section.
+#
+# WHAT IS TRUE OF THIS SECTION AS IT STANDS:
+#
+#   * The four functions below (`certified_far_field_decay`,
+#     `certified_decays_to_zero_at_infinity`, `ledger_certified_nrs_tsai`,
+#     `compare_certified_to_fitted`) are WRITTEN BUT NEVER EXECUTED.  Not once.
+#     No test exercises them, no runner calls them, and no measurement of any
+#     kind was taken with them.  They are unvalidated source text, and their
+#     control flow, their refusal branches and their string formatting have never
+#     been run even once.
+#   * THEY ARE NOT WIRED INTO `screen_candidate()`.  `screen_candidate()` gained
+#     the parameters `certified_input`, `certified_delta` and `banked_exponent`
+#     in its SIGNATURE, and its BODY WAS NEVER UPDATED TO USE THEM.  **Passing
+#     any of those three arguments today does nothing and is SILENTLY IGNORED.**
+#     That is a trap, and it is named here rather than left to be discovered: a
+#     successor must either finish the wiring or delete the three parameters.
+#   * The certified column has therefore NOT been shown to agree with, refuse
+#     beside, or lose to the fitted column on any field.  Any partial impression
+#     to the contrary is not a result.
+#
+# WHAT *IS* TRUSTWORTHY HERE, and it is a narrow list:
+#
+#   * THE FITTED PATH IS UNDISTURBED, DEMONSTRATED AND NOT ASSERTED.  Leg 383's
+#     eight checks (`test_dssp_screen_t2.py`) were run against this file in
+#     exactly this state and all eight pass, with the same magnitudes leg 383
+#     banked: C1 fitted exponent -1.0000000000 (|diff| 2.220e-16 from Tsai 1998
+#     eq (1.5)'s exact -1), C3 -2.0000000000 with the L^3 ladder converged
+#     (rel_change_last_step 0.000e+00), C4 +0.008377, C6 +1.0000000000, C2
+#     lambda 2.691234472349262 -> NOT-REACHED-BY-ANSATZ, and all four verdicts
+#     still reachable through the report path.  `machine_read_ledger()`'s
+#     two-positional-argument form and `screen_candidate()`'s `ledger` key set
+#     are unmoved.
+#   * Nothing above this banner was edited by leg 389.
+#
+# WHAT A SUCCESSOR MUST REDO BEFORE BELIEVING ANYTHING BELOW:
+#
+#   1. Execute these four functions at all -- they have never run.
+#   2. Finish or remove the `screen_candidate()` wiring (the silently-ignored
+#      parameters above).
+#   3. Build the additive battery in `test_dssp_screen_t2.py`, INCLUDING the
+#      three planted RED paths pre-registered in `experiments/journal/leg_389.md`
+#      §I.6 (impostor-from-fitted, mismatched profile, false declared
+#      hypothesis).  NO GREEN WITHOUT A DEMONSTRATED RED PATH: the
+#      certified-vs-fitted agreement check passes VACUOUSLY if the certified
+#      column silently returns the fitted value, which is precisely the failure
+#      mode R1 exists to catch and which has NOT been ruled out here.
+#   4. Re-run leg 383's eight checks after the wiring, not before it as here.
+#
+# The pre-registration in `experiments/journal/leg_389.md` was committed at
+# cc72f47 BEFORE any measurement, and the novelty pass at 8f495b7 BEFORE any
+# construction, so a successor inherits predictions that genuinely predate the
+# (non-existent) numbers.  The per-field predictions in §I.5 are PREDICTIONS.
+# None of them has been checked.
+#
+# CEILING: TIER 2.  `CLAY_OBLIGATIONS.md` §6 items 1 and 2 stay OPEN; §4 stays
+# OPEN on the admissible-cutoff half and the absent profile.  No L1->L4 link
+# moved.  Clay stays ~0.05%.
+# =============================================================================
+
+# =============================================================================
+# Leg 389 extension: THE SECOND, CERTIFIED T2 COLUMN -- alongside the fitted one,
+# never replacing it  [DESIGN INTENT ONLY -- SEE THE WIP BANNER ABOVE]
+# =============================================================================
+#
+# WHY THIS EXISTS.  `fitted_far_field_decay_exponent()` above is a bare
+# `np.polyfit` of log|V| against log r on 12 radii.  `CLAY_OBLIGATIONS.md` §4 is
+# explicit that a residual is not an error bar: "the admissible cutoff radius and
+# the size of the perturbation the cutoff introduces are both functions of it".
+# Leg 382 built the certified instrument (`solver/dssp_decay_enclosure.py`), leg
+# 386 pre-registered and measured its tolerance mode, leg 385 built the
+# samples->cells adapter (`solver/dssp_decay_samples.py`) -- and until this leg
+# NOTHING in the report path called any of them (leg 389's novelty sweep: zero
+# hits for `certified_decay_*` in this file or either of its batteries).  Leg 383
+# closed the report path with the FITTED exponent per its dispatch and
+# deliberately did not wire the enclosure in.  This section wires it in as a
+# SECOND column.
+#
+# THE FITTED COLUMN IS UNTOUCHED.  `CLAY_OBLIGATIONS.md` §8 bullet 2's
+# alongside-never-replacing rule: `fitted_far_field_decay_exponent`,
+# `decays_to_zero_at_infinity`, `classify_ss_ansatz`, `machine_read_ledger`'s
+# signature and defaults, and the KEY SET of `screen_candidate()`'s `ledger` dict
+# are all exactly as leg 383 left them.  The certified rows are new TOP-LEVEL keys
+# and the certified ledger reading is a top-level key, never a key inside
+# `ledger`.  `screen_candidate()` called with no new arguments behaves exactly as
+# it did at 1df7d8f.
+#
+# TWO THINGS THE CERTIFIED COLUMN DOES NOT CLAIM, declared here in the code and
+# not only in prose (leg 389 pre-registration §I.3, committed at cc72f47 before
+# any measurement):
+#
+#   1. A NONEMPTY ENCLOSURE IS NOT A PROOF THAT THE PROFILE IS A POWER LAW.  It is
+#      an OUTER bound on P_cert: no exponent OUTSIDE it can be one.  So a
+#      CERTIFIED-DECAYS reading is CONDITIONAL on the power-law-on-window-within-δ
+#      hypothesis, and that conditionality is appended to -- never substituted
+#      for -- the enclosure row's own `conditional_on` sentence.
+#   2. THE WINDOW IS BOUNDED, SO NEITHER COLUMN CERTIFIES A LIMIT AT INFINITY.
+#      The certified statement is about [R0, R1].  "U -> 0 at infinity" (Tsai
+#      1998 p.49) is an extrapolation off the end of the window.  THE FITTED
+#      COLUMN HAS EXACTLY THE SAME LIMITATION AND DOES NOT SAY SO; this one says
+#      so, in the row.
+#
+# EVERY OUTPUT ROW CARRIES THE HYPOTHESIS FIELD (standing rule, DM cycle 11g),
+# bound before any early return, on every return path -- the shape leg 386
+# implemented in `solver/dssp_decay_enclosure.py`.  The reason is measured, not
+# hygienic: leg 385's control X3 planted a SECRET monotonicity violation and
+# produced a certificate of width 7.438494264988549e-15, bit-indistinguishable
+# from the true certificate of a genuine planted known, and false about its
+# profile.  Only the recorded hypothesis separates them.  Where the certified
+# column reports a verdict, THAT VERDICT INHERITS THE HYPOTHESIS OF THE ENCLOSURE
+# ROW THAT PRODUCED IT, passed through unmodified and un-restated.
+#
+# REFUSAL IS A FIRST-CLASS OUTCOME.  Where the enclosure answers EMPTY or
+# INCAPACITY, or where no certified input was supplied at all, this column
+# REFUSES: it records the refusal and its reason and returns
+# `decays_to_zero = None`.  `None` means NOT DECIDED.  It never means "certified
+# not to decay", and it is never a guess.  The certified ledger reading likewise
+# returns its own verdict string INCAPACITY-NO-CERTIFIED-DECAY rather than
+# borrowing "NOT EXCLUDED" from the fitted path -- reporting "NOT EXCLUDED" off
+# the back of an absent certificate would be exactly the laundering this module
+# exists to prevent.
+# =============================================================================
+
+CERT_DECAYS = "CERTIFIED-DECAYS"
+CERT_REFUSE = "REFUSE"
+
+CERT_REASON_NO_INPUT = "NO-CERTIFIED-INPUT"
+CERT_REASON_EMPTY = "EMPTY"
+CERT_REASON_INCAPACITY = "INCAPACITY"
+CERT_REASON_NONPOSITIVE = "NON-POSITIVE-CERTIFIED-LOWER-ENDPOINT"
+CERT_REASON_ADAPTER = "ADAPTER-REFUSED"
+
+CERT_LEDGER_NO_CERTIFICATE = "INCAPACITY-NO-CERTIFIED-DECAY"
+
+# Byte-identical to solver/dssp_decay_enclosure.py's and
+# solver/dssp_decay_samples.py's own string.  Duplicated rather than imported at
+# module scope so this module keeps NO hard import dependency on the enclosure
+# (the enclosure is imported lazily, inside the one function that needs it, so
+# every existing caller of dssp_screen.py is unaffected even if the enclosure
+# module is absent); test_dssp_screen_t2.py pins the duplication against drift.
+CERT_HYP_UNDECLARED = "UNDECLARED"
+
+
+def _certified_hypothesis_fields(row):
+    """Normalise the three hypothesis fields of a row coming back from the
+    enclosure or the adapter, WITHOUT restating them.
+
+    Leg 386's `certified_decay_*` paths already carry all three on every return
+    path.  Leg 385's adapter REFUSAL path (`_incapacity`) carries
+    ``conditional_on = None`` and may carry ``hypothesis = None``.  A missing
+    field is filled with UNDECLARED and a sentence saying plainly that the row is
+    not a certificate about any profile -- never silently forgiven.  A field that
+    IS present is passed through byte-for-byte."""
+    h = row.get("hypothesis")
+    d = row.get("hypothesis_detail")
+    c = row.get("conditional_on")
+    if h is None:
+        h = CERT_HYP_UNDECLARED
+    if c is None:
+        c = ("NO HYPOTHESIS DECLARED ON THE ROW THIS COLUMN CONSUMED. It is a "
+             "statement about the supplied numbers only and is not a certificate "
+             "about any profile. A certificate-without-hypothesis is no certificate.")
+    return {"hypothesis": h, "hypothesis_detail": d, "conditional_on": c}
+
+
+def certified_far_field_decay(certified_input=None, rel_tolerance=0.0):
+    """The certified far-field decay enclosure for one candidate, or a REFUSAL.
+
+    This function computes NO arithmetic of its own.  It selects a path into
+    leg 382/386's `solver/dssp_decay_enclosure.py` or leg 385's
+    `solver/dssp_decay_samples.py`, both imported READ-ONLY and edited nowhere,
+    records provenance, and passes the hypothesis through unmodified.
+
+    ``certified_input`` is a dict naming the input the CALLER owes:
+
+      * ``{"kind": "analytic", "profile_iv_fn": fn, "r0": R0, "r1": R1,
+           "n_cells": N, "label": str}`` -- an interval-valued radial profile
+        magnitude, evaluated over WHOLE CELLS (leg 382's "cells" mode, the only
+        mode whose statement covers the window).  The enclosure hypothesis is
+        DISCHARGED on this path and the row records EXACT-INTERVAL-EVALUATION.
+      * ``{"kind": "samples", "r": radii, "f_lo": .., "f_hi": .., "monotone": ..,
+           "modulus": .., "label": str}`` -- point samples, converted by leg 385's
+        adapter under a CALLER-DECLARED hypothesis which is NOT verified here.
+      * ``None`` -- no certified input.  REFUSE, hypothesis UNDECLARED.
+
+    ``rel_tolerance`` is leg 386's δ.  It is bound and recorded BEFORE any early
+    return, on every path, so no row this function emits can have an implicit
+    tolerance.  **δ is not a fitting knob**: it is the relative accuracy to which
+    the caller's own profile is itself certified, and it is never tuned until
+    something passes."""
+    delta = float(rel_tolerance)
+    if delta < 0.0:
+        raise ValueError("rel_tolerance (delta) must be >= 0")
+
+    if certified_input is None:
+        out = {"certified": False,
+               "verdict": CERT_REASON_NO_INPUT,
+               "reason": ("no certified input was supplied for this candidate, so "
+                          "there is nothing to certify: the fitted column stands "
+                          "alone here and this column REFUSES rather than echoing "
+                          "it"),
+               "p_lo": None, "p_hi": None, "width": None, "centre": None,
+               "rel_tolerance": delta,
+               "tolerance_mode": ("exact" if delta == 0.0 else "relative"),
+               "input_kind": None, "label": None, "window": None,
+               "predicted_width_exact_power_law": None}
+        out.update(_certified_hypothesis_fields({}))
+        return out
+
+    kind = certified_input.get("kind")
+    label = certified_input.get("label")
+
+    if kind == "analytic":
+        from solver.dssp_decay_enclosure import certified_decay_interval
+        r0 = float(certified_input["r0"])
+        r1 = float(certified_input["r1"])
+        row = certified_decay_interval(certified_input["profile_iv_fn"], r0, r1,
+                                       n_cells=int(certified_input.get("n_cells", 1000)),
+                                       mode="cells",
+                                       rel_tolerance=delta)
+        row = dict(row)
+    elif kind == "samples":
+        from solver.dssp_decay_samples import certified_decay_from_samples
+        row = dict(certified_decay_from_samples(
+            certified_input["r"],
+            f=certified_input.get("f"),
+            f_lo=certified_input.get("f_lo"),
+            f_hi=certified_input.get("f_hi"),
+            monotone=certified_input.get("monotone"),
+            modulus=certified_input.get("modulus"),
+            rel_tolerance=delta))
+        # The adapter's refusal path never calls the enclosure and carries no
+        # tolerance field of its own; δ is re-asserted here so the rule "every row
+        # records its δ" holds on the refusal path too.
+        row.setdefault("rel_tolerance", delta)
+        row.setdefault("tolerance_mode", "exact" if delta == 0.0 else "relative")
+        row.setdefault("predicted_width_exact_power_law", None)
+        row.setdefault("window", None)
+    else:
+        raise ValueError("certified_input['kind'] must be 'analytic' or 'samples'; "
+                         f"got {kind!r}")
+
+    verdict = row.get("verdict")
+    p_lo, p_hi = row.get("p_lo"), row.get("p_hi")
+    row["certified"] = bool(verdict == "INTERVAL")
+    row["centre"] = (None if (p_lo is None or p_hi is None)
+                     else float(0.5 * (p_lo + p_hi)))
+    row["input_kind"] = kind
+    row["label"] = label
+    row.update(_certified_hypothesis_fields(row))
+    return row
+
+
+def certified_decays_to_zero_at_infinity(cert_row):
+    """THE CERTIFIED T2 COLUMN -- the certified analogue of leg 362's
+    `decays_to_zero_at_infinity`, driven by the enclosure instead of by a fit.
+
+    Returns a dict shaped so it can be handed to `_ledger_nrs_tsai_three_way()`
+    in place of the fitted decay row, with ONE deliberate difference:
+    ``decays_to_zero`` is ``True`` or ``None`` and NEVER ``False``.  ``None``
+    means REFUSED -- not decided.  It never means "certified not to decay".
+
+    The reading, pre-registered before any measurement (leg 389 §I.3):
+
+        INTERVAL with p_lo > 0   ->  CERTIFIED-DECAYS
+        INTERVAL with p_lo <= 0  ->  REFUSE (non-positive certified lower endpoint)
+        EMPTY                    ->  REFUSE (a PROOF that no exponent in the
+                                     bracket fits, which is NOT a decay verdict)
+        INCAPACITY               ->  REFUSE
+        no certified input       ->  REFUSE
+
+    A CERTIFIED-DECAYS reading is conditional twice over and says so in its own
+    ``conditional_on``: on the enclosure row's declared hypothesis, and on the
+    profile being a power law within δ on the window (the enclosure bounds
+    P_cert from OUTSIDE; it does not prove membership)."""
+    hyp = _certified_hypothesis_fields(cert_row)
+    base = {"rel_tolerance": cert_row.get("rel_tolerance"),
+            "tolerance_mode": cert_row.get("tolerance_mode"),
+            "enclosure_verdict": cert_row.get("verdict"),
+            "enclosure_reason": cert_row.get("reason"),
+            "p_lo": cert_row.get("p_lo"), "p_hi": cert_row.get("p_hi"),
+            "width": cert_row.get("width"), "centre": cert_row.get("centre"),
+            "predicted_width_exact_power_law_NOMINAL":
+                cert_row.get("predicted_width_exact_power_law"),
+            "window": cert_row.get("window"),
+            "input_kind": cert_row.get("input_kind"),
+            "label": cert_row.get("label")}
+    base.update(hyp)
+
+    verdict = cert_row.get("verdict")
+    if verdict == "INTERVAL" and cert_row.get("p_lo") is not None \
+            and cert_row["p_lo"] > 0.0:
+        base.update({
+            "certified_verdict": CERT_DECAYS,
+            "decays_to_zero": True,
+            "refusal_reason": None,
+            "reason": (
+                "CERTIFIED on the window %s at delta=%r: the enclosure of "
+                "P_cert is [%.17g, %.17g] (width %.17g) and its LOWER endpoint "
+                "%.17g is strictly positive, so no power law consistent with "
+                "this profile on this window has a non-positive exponent -- "
+                "Theorem 2's finishing-step hypothesis \"U -> 0 at infinity\" "
+                "(Tsai 1998, p.49) is met by a CERTIFICATE rather than by a "
+                "least-squares slope. TWO DECLARED LIMITS, neither of which the "
+                "fitted column states about itself: (1) a nonempty enclosure is "
+                "an OUTER bound on P_cert and is NOT a proof that the profile is "
+                "a power law, so this reading is conditional on the "
+                "power-law-on-window-within-delta hypothesis; (2) the window is "
+                "BOUNDED, so this certifies the exponent on the window and NOT a "
+                "limit at infinity -- the extrapolation off the end of the window "
+                "is declared, not proved."
+                % (cert_row.get("window"), cert_row.get("rel_tolerance"),
+                   cert_row["p_lo"], cert_row["p_hi"], cert_row["width"],
+                   cert_row["p_lo"])),
+        })
+        base["conditional_on"] = (
+            hyp["conditional_on"]
+            + " AND, ADDITIONALLY, on the profile being a power law to within "
+              "the stated relative tolerance on the stated window: the enclosure "
+              "bounds P_cert from OUTSIDE and does not establish membership. The "
+              "certified statement is about the window [%s], not about the limit "
+              "at infinity." % (cert_row.get("window"),))
+        return base
+
+    if verdict == "EMPTY":
+        why, sentence = CERT_REASON_EMPTY, (
+            "REFUSED. The enclosure certifies EMPTY at delta=%r: no exponent in "
+            "the search bracket is consistent with this profile on this window. "
+            "That is a PROOF of a negative about POWER LAWS and it is NOT a decay "
+            "verdict, so this column reports no reading rather than guessing one. "
+            "%s" % (cert_row.get("rel_tolerance"), cert_row.get("reason") or ""))
+    elif verdict == "INCAPACITY":
+        why, sentence = CERT_REASON_INCAPACITY, (
+            "REFUSED. The enclosure reports INCAPACITY at delta=%r: %s"
+            % (cert_row.get("rel_tolerance"), cert_row.get("reason") or ""))
+    elif verdict == CERT_REASON_NO_INPUT:
+        why, sentence = CERT_REASON_NO_INPUT, (
+            "REFUSED. %s" % (cert_row.get("reason") or ""))
+    elif verdict == "INTERVAL":
+        why, sentence = CERT_REASON_NONPOSITIVE, (
+            "REFUSED. The enclosure is nonempty -- [%r, %r] at delta=%r -- but its "
+            "LOWER endpoint is not strictly positive, so a constant or growing "
+            "power law is not excluded and no decay is certified."
+            % (cert_row.get("p_lo"), cert_row.get("p_hi"),
+               cert_row.get("rel_tolerance")))
+    else:
+        why, sentence = CERT_REASON_ADAPTER, (
+            "REFUSED. The samples->cells adapter refused before the enclosure was "
+            "called (verdict %r): %s"
+            % (verdict, cert_row.get("reason") or ""))
+
+    base.update({"certified_verdict": CERT_REFUSE,
+                 "decays_to_zero": None,
+                 "refusal_reason": why,
+                 "reason": sentence})
+    return base
+
+
+def ledger_certified_nrs_tsai(l3_result, certified_t2_result, ansatz_result):
+    """The NRS/Tsai ledger row read against the CERTIFIED T2 column.
+
+    Delegates to `_ledger_nrs_tsai_three_way()` -- the SAME adjudication order
+    leg 362/366 landed, not a second one -- in exactly the three cases where that
+    order does not need the decay reading, or where the certified decay reading
+    exists:
+
+      * ansatz fails            -> NOT-REACHED-BY-ANSATZ (dispositive on its own;
+                                   no decay reading of either kind is consulted)
+      * L^3 converged           -> EXCLUDED-BY-T1 (checked before T2; the L^q
+                                   route does not consult decay either)
+      * certified decay present -> EXCLUDED-BY-T2, on the certificate
+
+    In the ONE remaining case -- the verdict would have to rest on the decay
+    reading and the certified column REFUSED -- this returns its own verdict
+    string INCAPACITY-NO-CERTIFIED-DECAY, with ``excludes = None`` meaning NOT
+    DECIDED (distinct from the fitted path's ``False``, which means "the theorems
+    are silent"), and NO ``deciding_clause``, because nothing was decided.
+    Borrowing "NOT EXCLUDED" from the fitted path here would be reporting a
+    verdict off the back of an absent certificate."""
+    if ansatz_result.get("satisfies_theorem_ansatz") is not True:
+        return _ledger_nrs_tsai_three_way(l3_result, certified_t2_result, ansatz_result)
+    if bool(l3_result["converged"] and np.isfinite(l3_result["L3_norm"])):
+        return _ledger_nrs_tsai_three_way(l3_result, certified_t2_result, ansatz_result)
+    if certified_t2_result.get("decays_to_zero") is True:
+        return _ledger_nrs_tsai_three_way(l3_result, certified_t2_result, ansatz_result)
+    return {
+        "excludes": None,
+        "verdict": CERT_LEDGER_NO_CERTIFICATE,
+        "reason": (
+            "the candidate satisfies the exact-SS ansatz and is outside Theorem "
+            "1's hypothesis, so the verdict would have to rest on the decay "
+            "reading -- and the CERTIFIED decay column refused (%s). This row "
+            "records the refusal rather than borrowing the fitted column's "
+            "verdict: excludes is None, meaning NOT DECIDED, which is not the "
+            "same as the fitted path's False, meaning the theorems are silent. "
+            "%s" % (certified_t2_result.get("refusal_reason"),
+                    certified_t2_result.get("reason"))),
+        "certified_detail": certified_t2_result,
+        "ansatz_detail": ansatz_result,
+        "hypothesis": certified_t2_result.get("hypothesis"),
+        "hypothesis_detail": certified_t2_result.get("hypothesis_detail"),
+        "conditional_on": certified_t2_result.get("conditional_on"),
+    }
+
+
+def compare_certified_to_fitted(certified_t2_result, fitted_decay_result,
+                                 fitted_ledger_row, certified_ledger_row,
+                                 banked_exponent=None):
+    """The agreement / refusal / loss row, in MAGNITUDES, never booleans alone.
+
+    ``status`` is one of:
+
+      * ``REFUSE`` -- the certified column refused; there is no verdict to
+        compare and none is manufactured.  This is the pre-registered SUCCESS
+        condition wherever δ-mode cannot certify, not a shortfall.
+      * ``AGREE``  -- the certified column certified, and BOTH the decay reading
+        and the ledger verdict match the fitted column's.
+      * ``LOSE``   -- the certified column certified and disagrees.  The
+        magnitude of the disagreement is reported, never a bare flag.
+
+    The fitted column reports a SLOPE ``s`` of log|V| against log r; the
+    enclosure reports a decay exponent ``p`` with ``f ~ C r**(-p)``.  The two are
+    related by ``p = -s``, and ``fitted_implied_p`` below is that conversion,
+    stated so the comparison is not made between quantities of opposite sign.
+
+    ``banked_exponent`` is leg 383's own banked value for the field (1.0 for C1,
+    2.0 for C3, from the SOURCE, not from the fit); when supplied, containment of
+    it in the certified interval is reported separately from containment of the
+    fitted value."""
+    s = float(fitted_decay_result["fitted_exponent"])
+    implied_p = -s
+    p_lo, p_hi = certified_t2_result.get("p_lo"), certified_t2_result.get("p_hi")
+    centre = certified_t2_result.get("centre")
+
+    def _gap(x):
+        if x is None or p_lo is None or p_hi is None:
+            return None
+        return float(max(p_lo - x, x - p_hi, 0.0))
+
+    out = {"fitted_exponent_slope": s,
+           "fitted_implied_p": float(implied_p),
+           "fitted_decays_to_zero": bool(fitted_decay_result.get("decays_to_zero"))
+                                    if "decays_to_zero" in fitted_decay_result else None,
+           "certified_p_lo": p_lo, "certified_p_hi": p_hi,
+           "certified_centre": centre,
+           "certified_width": certified_t2_result.get("width"),
+           "certified_verdict": certified_t2_result.get("certified_verdict"),
+           "enclosure_verdict": certified_t2_result.get("enclosure_verdict"),
+           "refusal_reason": certified_t2_result.get("refusal_reason"),
+           "rel_tolerance": certified_t2_result.get("rel_tolerance"),
+           "window": certified_t2_result.get("window"),
+           "fitted_ledger_verdict": fitted_ledger_row.get("verdict"),
+           "certified_ledger_verdict": certified_ledger_row.get("verdict"),
+           "banked_exponent": (None if banked_exponent is None
+                               else float(banked_exponent)),
+           "contains_fitted_implied_p": (None if p_lo is None
+                                         else bool(p_lo <= implied_p <= p_hi)),
+           "gap_fitted_implied_p_to_interval": _gap(implied_p),
+           "contains_banked_exponent": (None if (p_lo is None or banked_exponent is None)
+                                        else bool(p_lo <= float(banked_exponent) <= p_hi)),
+           "gap_banked_to_interval": _gap(None if banked_exponent is None
+                                          else float(banked_exponent)),
+           "abs_centre_minus_fitted_implied_p": (None if centre is None
+                                                 else float(abs(centre - implied_p)))}
+    out.update(_certified_hypothesis_fields(certified_t2_result))
+
+    if certified_t2_result.get("certified_verdict") != CERT_DECAYS:
+        out["status"] = CERT_REFUSE
+        out["detail"] = (
+            "the certified column REFUSED (%s), so no certified verdict exists to "
+            "compare with the fitted one and none is manufactured. The fitted "
+            "column's own verdict %r stands alone on this field."
+            % (certified_t2_result.get("refusal_reason"),
+               fitted_ledger_row.get("verdict")))
+        return out
+
+    decay_agrees = (out["fitted_decays_to_zero"] is True)
+    ledger_agrees = (out["fitted_ledger_verdict"] == out["certified_ledger_verdict"])
+    if decay_agrees and ledger_agrees:
+        out["status"] = "AGREE"
+        out["detail"] = (
+            "certified [%.17g, %.17g] (width %.17g, centre %.17g) at delta=%r on "
+            "window %s; the fitted slope %.17g implies p = %.17g, |centre - "
+            "implied p| = %.3e, and the ledger verdict is %r on BOTH paths."
+            % (p_lo, p_hi, out["certified_width"], centre,
+               out["rel_tolerance"], out["window"], s, implied_p,
+               out["abs_centre_minus_fitted_implied_p"],
+               out["fitted_ledger_verdict"]))
+        return out
+
+    out["status"] = "LOSE"
+    out["detail"] = (
+        "DISAGREEMENT. certified [%.17g, %.17g] (centre %.17g) vs fitted slope "
+        "%.17g (implied p %.17g): decay readings %s, ledger verdicts fitted=%r "
+        "certified=%r. |centre - implied p| = %s; distance of the implied p to "
+        "the certified interval = %s."
+        % (p_lo, p_hi, centre, s, implied_p,
+           "agree" if decay_agrees else "DISAGREE",
+           out["fitted_ledger_verdict"], out["certified_ledger_verdict"],
+           out["abs_centre_minus_fitted_implied_p"],
+           out["gap_fitted_implied_p_to_interval"]))
+    return out
+
+
 def screen_candidate(field_fn, s_vals=None, c_vals=None,
                       R_hi_ladder=(10.0, 100.0, 1e3, 1e4, 1e5, 1e6),
-                      n_r=300, n_c=48, n_phi=16):
+                      n_r=300, n_c=48, n_phi=16,
+                      certified_input=None, certified_delta=0.0,
+                      banked_exponent=None):
     """Runs all four screen quantities on one candidate field and machine-
     reads the ledger against them. If s_vals/c_vals are not given (a static
     field with no trajectory), lambda is reported as undefined -- exactly
