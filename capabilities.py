@@ -992,6 +992,59 @@ CAPABILITIES = [
                    "object exists, and the admissible-cutoff half of §4 is untouched, so "
                    "CLAY_OBLIGATIONS §6 item 1 does NOT close"),
      "test": "test_dssp_decay_enclosure.py"},
+
+    {"module": "solver/dssp_decay_samples.py",
+     "object": ("SAMPLES -> CERTIFIED CELL ENCLOSURES (leg 385, Route-SCEL) -- the input "
+                "contract solver/dssp_decay_enclosure.py:354 NAMES and does not supply, so "
+                "that a unit holding point samples can reach the §4 certified-decay "
+                "instrument at all. Reads leg 382's module; edits it nowhere"),
+     "holds": ("samples_to_cells(r, f | f_lo/f_hi, monotone=, modulus=) returning cell "
+               "enclosures valid for EVERY r in each cell under a NAMED hypothesis, plus "
+               "certified_decay_from_samples() which composes with leg 382's "
+               "certified_decay_from_cell_enclosures and MERGES the hypothesis into its "
+               "output row. Two paths: MONOTONE (declared nonincreasing/nondecreasing; the "
+               "sample pair IS the enclosure, exact) and MODULUS (caller-certified "
+               "omega(h)=L*h^alpha, alpha in {1/2,1}, kind 'absolute' or 'loglog', scalar or "
+               "per-sample L; enclosure = sample hull inflated by omega(h/2)). Both may be "
+               "declared and are then INTERSECTED. The loglog kind needs no iexp: it closes "
+               "with e^-x >= 1-x and e^x <= 1/(1-x), outward, refusing omega >= 1. An input "
+               "carrying NEITHER hypothesis returns INCAPACITY and leg 382's routine is "
+               "never called -- there is no code path producing an exponent without a "
+               "hypothesis attached. Necessary conditions (monotone samples; "
+               "|delta| <= omega(h)) are checked and a CERTAIN violation refuses naming the "
+               "cell. containment_audit() is a float64 VALIDATION device for planted knowns "
+               "only, never part of a certificate"),
+     "validated": ("test_dssp_decay_samples.py, 17/17; experiments/p2_route_scel_v1.py, "
+                   "fig103, writeup/data/p2_route_scel_v1.json. PATH A reproduces leg 382's "
+                   "four banked exact-power widths BIT-IDENTICALLY on [10,1000] N=1000 "
+                   "(difference exactly 0.0 at K1 7.438494264988549e-15, K2 "
+                   "1.5987211554602254e-14, K3 1.9984014443252818e-14, K4 "
+                   "1.554312234475219e-14), truth inside every interval, because a monotone "
+                   "profile's cell extremes sit at the sampled edges. PATH B is SOUND BUT "
+                   "NOT TIGHT: loglog L=1.05 gives width 2.1046e-3 at N=1000 containing the "
+                   "truth, slope -1.0068 (PATH A -0.0118), so matching PATH A would need "
+                   "N ~ 2.83e14 -- THE MODULUS PATH CANNOT REPRODUCE 382's WIDTHS AT ANY "
+                   "FEASIBLE DENSITY, predicted before the run. A GLOBALLY stated 'absolute' "
+                   "modulus is useless on a 3-decade window: L=0.03 (the true global "
+                   "Lipschitz constant) drives the lower enclosure non-positive from "
+                   "r=207.97 in 341/1000 cells and leg 382 then answers INCAPACITY. Five "
+                   "controls all fired, none widened: X1 no-hypothesis and X2 visible "
+                   "non-monotonicity (cell 499, +1.3615e-3) and X4 modulus understated at "
+                   "the samples (ratio 20.0) REFUSE; X3 secretly non-monotone (node-aligned "
+                   "wiggle A=0.05) and X5 undetectably understated modulus are ACCEPTED AS "
+                   "THEY MUST BE and caught by containment failures of +5.1420e-2 relative "
+                   "(1000/1000 cells) and +4.7721e-2 in log f. X3's certificate is width "
+                   "7.438494264988549e-15 -- numerically indistinguishable from K1's TRUE "
+                   "one and FALSE about its profile; only the recorded hypothesis separates "
+                   "them. Pre-registered P11 (a shifted grid detects the wiggle) was "
+                   "REFUTED and recorded: a uniform shift multiplies every sample by one "
+                   "constant, so detection is a COMMENSURABILITY effect (N=1100/1500 refuse, "
+                   "N=500/997/1001/1010/2000 do not). CEILING: validated on PLANTED ANALYTIC "
+                   "KNOWNS ONLY -- no profile of route 4's object exists, every certificate "
+                   "is CONDITIONAL on a declared and unverifiable hypothesis, and "
+                   "CLAY_OBLIGATIONS §6 items 1 and 2 stay OPEN with item 1's "
+                   "admissible-cutoff half untouched"),
+     "test": "test_dssp_decay_samples.py"},
 ]
 
 

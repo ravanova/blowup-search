@@ -23,6 +23,8 @@
     {
       "id": "S1/p=1.0",
       "profile": "f = 3.0 r^-1.0",
+      "leg_382_row": "K1",
+      "leg_382_banked_width": 7.438494264988549e-15,
       "truth_exponent": 1.0,
       "hypothesis": "MONOTONE",
       "hypothesis_detail": {
@@ -61,6 +63,8 @@
     {
       "id": "S1/p=2.0",
       "profile": "f = 1.0 r^-2.0",
+      "leg_382_row": "K2",
+      "leg_382_banked_width": 1.5987211554602254e-14,
       "truth_exponent": 2.0,
       "hypothesis": "MONOTONE",
       "hypothesis_detail": {
@@ -98,7 +102,9 @@
     },
     {
       "id": "S1/p=2.5",
-      "profile": "f = 1.0 r^-2.5",
+      "profile": "f = 0.25 r^-2.5",
+      "leg_382_row": "K3",
+      "leg_382_banked_width": 1.9984014443252818e-14,
       "truth_exponent": 2.5,
       "hypothesis": "MONOTONE",
       "hypothesis_detail": {
@@ -109,23 +115,23 @@
       "conditional_on": "These cell enclosures, and every certificate derived from them, hold CONDITIONALLY on: f is nonincreasing on the whole window (declared by the caller, NOT verified -- agreement of the samples with that direction is a necessary condition only); the supplied per-sample intervals enclose f at the sample radii.",
       "sampled": {
         "verdict": "INTERVAL",
-        "p_lo": 2.4999999999999902,
+        "p_lo": 2.49999999999999,
         "p_hi": 2.5000000000000098,
-        "width": 1.9539925233402755e-14,
+        "width": 1.9984014443252818e-14,
         "contains_truth": true,
-        "containment_margin_below": 9.769962616701378e-15,
+        "containment_margin_below": 1.021405182655144e-14,
         "containment_margin_above": 9.769962616701378e-15
       },
       "leg_382_recomputed": {
         "verdict": "INTERVAL",
-        "width": 1.9539925233402755e-14
+        "width": 1.9984014443252818e-14
       },
       "width_difference": 0.0,
       "bit_identical_to_leg_382": true,
       "containment_audit": {
         "audited": true,
         "n_probe_per_cell": 17,
-        "worst_signed_excess": -1.3234889800848443e-23,
+        "worst_signed_excess": -3.308722450212111e-24,
         "worst_signed_relative_excess": -2.9310301523743488e-16,
         "worst_signed_log_excess": 0.0,
         "worst_cell_index": 980,
@@ -136,7 +142,9 @@
     },
     {
       "id": "S1/p=3.0",
-      "profile": "f = 1.0 r^-3.0",
+      "profile": "f = 7.0 r^-3.0",
+      "leg_382_row": "K4",
+      "leg_382_banked_width": 1.554312234475219e-14,
       "truth_exponent": 3.0,
       "hypothesis": "MONOTONE",
       "hypothesis_detail": {
@@ -147,27 +155,27 @@
       "conditional_on": "These cell enclosures, and every certificate derived from them, hold CONDITIONALLY on: f is nonincreasing on the whole window (declared by the caller, NOT verified -- agreement of the samples with that direction is a necessary condition only); the supplied per-sample intervals enclose f at the sample radii.",
       "sampled": {
         "verdict": "INTERVAL",
-        "p_lo": 2.99999999999999,
-        "p_hi": 3.000000000000011,
-        "width": 2.1316282072803006e-14,
+        "p_lo": 2.9999999999999916,
+        "p_hi": 3.000000000000007,
+        "width": 1.554312234475219e-14,
         "contains_truth": true,
-        "containment_margin_below": 1.021405182655144e-14,
-        "containment_margin_above": 1.1102230246251565e-14
+        "containment_margin_below": 8.43769498715119e-15,
+        "containment_margin_above": 7.105427357601002e-15
       },
       "leg_382_recomputed": {
         "verdict": "INTERVAL",
-        "width": 2.1316282072803006e-14
+        "width": 1.554312234475219e-14
       },
       "width_difference": 0.0,
       "bit_identical_to_leg_382": true,
       "containment_audit": {
         "audited": true,
         "n_probe_per_cell": 17,
-        "worst_signed_excess": 0.0,
-        "worst_signed_relative_excess": 0.0,
+        "worst_signed_excess": -1.6543612251060553e-24,
+        "worst_signed_relative_excess": -1.1793759984713538e-16,
         "worst_signed_log_excess": 0.0,
-        "worst_cell_index": 433,
-        "worst_radius": 73.7904230129101,
+        "worst_cell_index": 987,
+        "worst_radius": 946.2371613657931,
         "n_cells_violated": 0,
         "contained": true
       }
@@ -874,5 +882,5 @@
     "yes_branch_meaning": "Real sampled profiles become admissible input to the \u00a74 instrument, CONDITIONAL ON A NAMED HYPOTHESIS. The first real consumer remains whatever future unit produces a profile, and this leg claims nothing about one. CEILING TIER 2; CLAY_OBLIGATIONS \u00a76 items 1 and 2 stay OPEN, the cutoff half untouched.",
     "which_path_each_result_is_conditional_on": "The reproduction rows are conditional on MONOTONICITY (declared 'nonincreasing', never verified). The PATH B rows are conditional on a caller-certified modulus. No row here is unconditional, and every row says so in its own conditional_on field."
   },
-  "runtime_seconds": 8.450256586074829
+  "runtime_seconds": 8.09481930732727
 }

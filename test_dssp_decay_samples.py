@@ -121,8 +121,9 @@ def test_loglog_modulus_too_coarse_for_the_exp_free_bound_refuses():
 # ---------------------------------------------------------------------------
 
 def test_path_A_reproduces_leg_382_exact_power_widths():
-    for C, p, ref in ((3.0, 1.0, 7.44e-15), (1.0, 2.0, 1.60e-14),
-                      (1.0, 2.5, 2.00e-14), (1.0, 3.0, 1.55e-14)):
+    #  leg 382's own planted knowns K1-K4, and its own banked widths.
+    for C, p, ref in ((3.0, 1.0, 7.438494264988549e-15), (1.0, 2.0, 1.5987211554602254e-14),
+                      (0.25, 2.5, 1.9984014443252818e-14), (7.0, 3.0, 1.554312234475219e-14)):
         f_lo, f_hi, _ = _s1_samples(C, p)
         got = certified_decay_from_samples(GRID, f_lo=f_lo, f_hi=f_hi,
                                            monotone="nonincreasing")
@@ -132,7 +133,8 @@ def test_path_A_reproduces_leg_382_exact_power_widths():
         assert got["p_lo"] <= p <= got["p_hi"], "truth escaped the certified interval"
         assert got["width"] == base["width"], (
             f"p={p}: sampled width {got['width']!r} != leg 382's {base['width']!r}")
-        assert abs(got["width"] - ref) < 5e-14
+        assert got["width"] == ref, \
+            f"p={p}: width {got['width']!r} != leg 382's BANKED row {ref!r}"
     print("[ok] PATH A reproduces leg 382's exact-power widths BIT-IDENTICALLY (p = 1, 2, 2.5, 3)")
 
 
