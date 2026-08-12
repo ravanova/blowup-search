@@ -11,6 +11,7 @@ from solver.kolmogorov2d_nkbasin import (
     extended_residual,
     gmres_matrix_free,
     grid2d,
+    newton_hookstep_rpo,
     newton_krylov_rpo,
     optimal_shift_residual,
     pack,
@@ -182,6 +183,101 @@ def test_newton_krylov_reduces_residual_substantially_near_a_true_solution():
     monotone = all(hist[i + 1] <= hist[i] + 1e-9 for i in range(len(hist) - 1))
     assert monotone, "control residual history was not monotone decreasing"
     print(f"[ok] laminar-control Newton reduced |R| by {100*reduction:.1f}%, monotone")
+
+
+def test_hookstep_rpo_reproduces_the_laminar_control_through_the_new_layer():
+    """PROG-R4 U1 / MILESTONE M1. The same control as the test above, run
+    through the trust-region hookstep layer instead of step-halving, must
+    still cut the residual by at least as much as leg 353 recorded
+    (99.3426310647174%, monotone). This is the milestone's whole content: it
+    shows the new globalisation has not broken the solver on a problem whose
+    answer is known analytically. It says NOTHING about whether the hookstep
+    helps on real RPOs -- that is gate G1's pre-registered question."""
+    solver = Kolmogorov2D(N=24, Re=60.0, n_forcing=4, dt=0.01)
+    _, Y = grid2d(24)
+    w_lam = -(solver.Re / solver.n_forcing) * np.cos(solver.n_forcing * Y)
+    rng = np.random.default_rng(0)
+    d = rng.standard_normal(w_lam.shape)
+    d /= np.linalg.norm(d)
+    w0_guess = w_lam + 0.01 * np.linalg.norm(w_lam) * d
+    out = newton_hookstep_rpo(w0_guess, 1.0, 0.1, solver, tol=1e-8,
+                              max_newton=8, max_gmres=15, fd_eps=1e-6)
+    hist = out["residual_history"]
+    reduction = 1.0 - hist[-1] / hist[0]
+    leg353 = 0.993426310647174
+    assert reduction >= leg353, (
+        f"hookstep layer reduced |R| by only {100*reduction:.4f}%, below leg "
+        f"353's recorded {100*leg353:.4f}%")
+    monotone = all(hist[i + 1] <= hist[i] + 1e-9 for i in range(len(hist) - 1))
+    assert monotone, "hookstep control residual history was not monotone"
+    assert out["reason"] != "nonpositive_period", (
+        "the period left the domain: the trust region is not honouring T > 0")
+    print(f"[ok] hookstep layer reduced |R| by {100*reduction:.4f}% "
+          f"(leg 353 baseline {100*leg353:.4f}%), monotone, "
+          f"reason={out['reason']}")
+
+
+def test_hookstep_rpo_ledger_carries_the_per_iteration_magnitudes():
+    """M1's second deliverable: a per-iteration convergence ledger, persisted.
+    The ledger has to carry the trust-region magnitudes (radius, multiplier,
+    step norm, ratio) and not merely a residual history, because U4's basin
+    measurement reports the FAILURE side and needs the mechanism, not a
+    boolean."""
+    solver = Kolmogorov2D(N=16, Re=60.0, n_forcing=4, dt=0.02)
+    _, Y = grid2d(16)
+    w_lam = -(solver.Re / solver.n_forcing) * np.cos(solver.n_forcing * Y)
+    rng = np.random.default_rng(1)
+    d = rng.standard_normal(w_lam.shape)
+    d /= np.linalg.norm(d)
+    out = newton_hookstep_rpo(w_lam + 0.01 * np.linalg.norm(w_lam) * d,
+                              1.0, 0.1, solver, tol=1e-8, max_newton=3,
+                              max_gmres=8, fd_eps=1e-6)
+    assert out["ledger"], "hookstep RPO driver produced an empty ledger"
+    need = {"iteration", "residual_before", "residual_after", "krylov_dim",
+            "n_radius_trials", "accepted", "trials", "delta_after",
+            "T_before", "s_before"}
+    missing = need - set(out["ledger"][0])
+    assert not missing, f"ledger entry missing fields: {sorted(missing)}"
+    tneed = {"delta", "mu", "step_norm", "on_boundary", "rho",
+             "predicted_reduction", "actual_reduction", "residual_after"}
+    tmissing = tneed - set(out["ledger"][0]["trials"][0])
+    assert not tmissing, f"trial record missing fields: {sorted(tmissing)}"
+    # Every finite-difference probe is a full nonlinear integration over the
+    # orbit period, so the counts are the real cost currency of U3 and must be
+    # reported rather than inferred.
+    assert out["n_jac_evals"] > 0 and out["n_residual_evals"] > 0, (
+        "driver did not count its Jacobian actions / residual evaluations")
+    print(f"[ok] hookstep RPO ledger complete over {len(out['ledger'])} "
+          f"iterations, {out['n_jac_evals']} Jacobian actions, "
+          f"{out['n_residual_evals']} residual evaluations")
+
+
+def test_hookstep_rpo_keeps_the_period_strictly_positive():
+    """T <= 0 is meaningless for an orbit and the residual map is not even
+    defined there. Started from a deliberately bad period, the driver must
+    never RETURN a non-positive period -- the trust region has to reject
+    those trials rather than integrate a penalised surrogate."""
+    solver = Kolmogorov2D(N=16, Re=60.0, n_forcing=4, dt=0.02)
+    _, Y = grid2d(16)
+    w_lam = -(solver.Re / solver.n_forcing) * np.cos(solver.n_forcing * Y)
+    rng = np.random.default_rng(2)
+    d = rng.standard_normal(w_lam.shape)
+    d /= np.linalg.norm(d)
+    out = newton_hookstep_rpo(w_lam + 0.05 * np.linalg.norm(w_lam) * d,
+                              0.05, 0.3, solver, tol=1e-8, max_newton=5,
+                              max_gmres=8, fd_eps=1e-6)
+    assert out["T"] > 0.0, f"driver returned a non-positive period T={out['T']}"
+    for e in out["ledger"]:
+        assert e["T_before"] > 0.0, (
+            f"iteration {e['iteration']} began at T={e['T_before']}")
+    # NOTE, recorded rather than tuned away: T collapses towards the boundary
+    # on THIS control because the laminar point is a fixed point, where
+    # Phi_T(w) = w for every T and the period is an exact null direction (U1's
+    # ledger measures ||dR/dT|| = 0.0212 against 9.775 for a state direction).
+    # For a genuine RPO seed the period is a real direction and no such
+    # collapse is expected; if one is seen in U3 it is a finding, not a bug.
+    print(f"[ok] period stayed positive from a bad start: T={out['T']:.3e} "
+          f"over {len(out['ledger'])} iterations, reason={out['reason']}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,368 @@
+{
+  "unit": "U1",
+  "milestone": "M1",
+  "kind": "MILESTONE (build unit -- no claim, no gate)",
+  "programme": "PROG-R4",
+  "solver": {
+    "N": 24,
+    "Re": 60.0,
+    "n_forcing": 4,
+    "dt": 0.01,
+    "state_dim": 576,
+    "unknowns": 578
+  },
+  "control": {
+    "description": "perturbed laminar fixed point, leg 353's exact setup",
+    "perturbation_relative": 0.01,
+    "rng_seed": 0,
+    "T_guess": 1.0,
+    "s_guess": 0.1,
+    "tol": 1e-08,
+    "max_newton": 8,
+    "max_gmres": 15,
+    "fd_eps": 1e-06,
+    "fixed_point_drift_relative_over_T1": 0.00031195683972116137
+  },
+  "hookstep": {
+    "reason": "max_newton_hit",
+    "success": false,
+    "n_iters": 7,
+    "residual_history": [
+      19.1100429639095,
+      7.497006963151895,
+      3.6135581019683776,
+      2.268397469234205,
+      1.7002176681100674,
+      0.6575588404445669,
+      0.13726905915041715,
+      0.02752669444168617
+    ],
+    "final_residual": 0.02752669444168617,
+    "monotone_decrease": true,
+    "fractional_reduction": 0.9985595692017191,
+    "T": 2.6506517876388047e-09,
+    "s": 7.281541314960494e-09,
+    "n_residual_evals": 136,
+    "n_jac_evals": 120,
+    "wall_seconds": 4.891402721405029,
+    "ledger": [
+      {
+        "iteration": 0,
+        "residual_before": 19.1100429639095,
+        "krylov_dim": 15,
+        "gmres_step_norm": 0.8551550233003545,
+        "n_radius_trials": 1,
+        "accepted": true,
+        "trials": [
+          {
+            "delta": 0.8551550233003545,
+            "mu": 0.0,
+            "step_norm": 0.8551550233003544,
+            "on_boundary": false,
+            "predicted_reduction": 346.61080125674107,
+            "actual_reduction": 308.74835047579757,
+            "rho": 0.890763788538436,
+            "residual_after": 7.513014814751096
+          }
+        ],
+        "delta_after": 0.8551550233003545,
+        "residual_after": 7.513014814751096,
+        "T_before": 1.0,
+        "s_before": 0.1
+      },
+      {
+        "iteration": 1,
+        "residual_before": 7.497006963151895,
+        "krylov_dim": 15,
+        "gmres_step_norm": 0.9716392541397848,
+        "n_radius_trials": 1,
+        "accepted": true,
+        "trials": [
+          {
+            "delta": 0.8551550233003545,
+            "mu": 0.7763645316502563,
+            "step_norm": 0.8551550233011458,
+            "on_boundary": true,
+            "predicted_reduction": 45.28258956290791,
+            "actual_reduction": 42.98758962372338,
+            "rho": 0.9493182708555957,
+            "residual_after": 3.6355912561541643
+          }
+        ],
+        "delta_after": 1.710310046600709,
+        "residual_after": 3.6355912561541643,
+        "T_before": 0.7014598476358018,
+        "s_before": 0.1008045928599131
+      },
+      {
+        "iteration": 2,
+        "residual_before": 3.6135581019683776,
+        "krylov_dim": 15,
+        "gmres_step_norm": 1.130246634124221,
+        "n_radius_trials": 1,
+        "accepted": true,
+        "trials": [
+          {
+            "delta": 1.710310046600709,
+            "mu": 0.0,
+            "step_norm": 1.1302466341242208,
+            "on_boundary": false,
+            "predicted_reduction": 7.940601751959624,
+            "actual_reduction": 7.6339124467573205,
+            "rho": 0.9613770700530829,
+            "residual_after": 2.3289245821932454
+          }
+        ],
+        "delta_after": 1.710310046600709,
+        "residual_after": 2.3289245821932454,
+        "T_before": 0.4475549648639301,
+        "s_before": 0.0979713150957951
+      },
+      {
+        "iteration": 3,
+        "residual_before": 2.268397469234205,
+        "krylov_dim": 15,
+        "gmres_step_norm": 1.1087601686920041,
+        "n_radius_trials": 1,
+        "accepted": true,
+        "trials": [
+          {
+            "delta": 1.710310046600709,
+            "mu": 0.0,
+            "step_norm": 1.1087601686920041,
+            "on_boundary": false,
+            "predicted_reduction": 2.1695153465990353,
+            "actual_reduction": 2.183415395926787,
+            "rho": 1.0064069836378626,
+            "residual_after": 1.721107690559007
+          }
+        ],
+        "delta_after": 1.710310046600709,
+        "residual_after": 1.721107690559007,
+        "T_before": 0.2513438805978332,
+        "s_before": 0.084006713144131
+      },
+      {
+        "iteration": 4,
+        "residual_before": 1.7002176681100674,
+        "krylov_dim": 15,
+        "gmres_step_norm": 1.631912963541239,
+        "n_radius_trials": 1,
+        "accepted": true,
+        "trials": [
+          {
+            "delta": 1.710310046600709,
+            "mu": 0.0,
+            "step_norm": 1.6319129635412393,
+            "on_boundary": false,
+            "predicted_reduction": 1.8599185507425358,
+            "actual_reduction": 2.448030799883303,
+            "rho": 1.3162032277735898,
+            "residual_after": 0.665364050028503
+          }
+        ],
+        "delta_after": 1.710310046600709,
+        "residual_after": 0.665364050028503,
+        "T_before": 0.17801641886076636,
+        "s_before": -0.0026743980744102502
+      },
+      {
+        "iteration": 5,
+        "residual_before": 0.6575588404445669,
+        "krylov_dim": 15,
+        "gmres_step_norm": 0.44962274938473823,
+        "n_radius_trials": 4,
+        "accepted": true,
+        "trials": [
+          {
+            "delta": 1.710310046600709,
+            "mu": 0.0,
+            "step_norm": 0.44962274938473823,
+            "on_boundary": false,
+            "predicted_reduction": 0.42299669872426005,
+            "actual_reduction": -Infinity,
+            "rho": null,
+            "residual_after": Infinity
+          },
+          {
+            "delta": 0.8551550233003545,
+            "mu": 0.0,
+            "step_norm": 0.44962274938473823,
+            "on_boundary": false,
+            "predicted_reduction": 0.42299669872426005,
+            "actual_reduction": -Infinity,
+            "rho": null,
+            "residual_after": Infinity
+          },
+          {
+            "delta": 0.42757751165017727,
+            "mu": 0.007892860294107035,
+            "step_norm": 0.42757751165012314,
+            "on_boundary": true,
+            "predicted_reduction": 0.4229261241719742,
+            "actual_reduction": -Infinity,
+            "rho": null,
+            "residual_after": Infinity
+          },
+          {
+            "delta": 0.21378875582508863,
+            "mu": 0.7268158974415653,
+            "step_norm": 0.21378875582496662,
+            "on_boundary": true,
+            "predicted_reduction": 0.3970507698419033,
+            "actual_reduction": 0.41346695087809654,
+            "rho": 1.041345294564546,
+            "residual_after": 0.13753791393178408
+          }
+        ],
+        "delta_after": 0.42757751165017727,
+        "residual_after": 0.13753791393178408,
+        "T_before": 0.049008890221504786,
+        "s_before": 0.05056735876417246
+      },
+      {
+        "iteration": 6,
+        "residual_before": 0.13726905915041715,
+        "krylov_dim": 15,
+        "gmres_step_norm": 0.1348747181639386,
+        "n_radius_trials": 3,
+        "accepted": true,
+        "trials": [
+          {
+            "delta": 0.42757751165017727,
+            "mu": 0.0,
+            "step_norm": 0.13487471816393862,
+            "on_boundary": false,
+            "predicted_reduction": 0.018842768856685097,
+            "actual_reduction": -Infinity,
+            "rho": null,
+            "residual_after": Infinity
+          },
+          {
+            "delta": 0.21378875582508863,
+            "mu": 0.0,
+            "step_norm": 0.13487471816393862,
+            "on_boundary": false,
+            "predicted_reduction": 0.018842768856685097,
+            "actual_reduction": -Infinity,
+            "rho": null,
+            "residual_after": Infinity
+          },
+          {
+            "delta": 0.10689437791254432,
+            "mu": 0.2576566141765064,
+            "step_norm": 0.10689437791249483,
+            "on_boundary": true,
+            "predicted_reduction": 0.018084904617541156,
+            "actual_reduction": 0.018085075690466475,
+            "rho": 1.0000094594319924,
+            "residual_after": 0.02752669449051678
+          }
+        ],
+        "delta_after": 0.21378875582508863,
+        "residual_after": 0.02752669449051678,
+        "T_before": 0.002139277240329883,
+        "s_before": 0.002901917358652334
+      },
+      {
+        "iteration": 7,
+        "residual_before": 0.02752669444168617,
+        "krylov_dim": 15,
+        "gmres_step_norm": 0.027529525110911064,
+        "n_radius_trials": 4,
+        "accepted": true,
+        "trials": [
+          {
+            "delta": 0.21378875582508863,
+            "mu": 0.0,
+            "step_norm": 0.02752952511091106,
+            "on_boundary": false,
+            "predicted_reduction": 0.0007577189068855695,
+            "actual_reduction": -Infinity,
+            "rho": null,
+            "residual_after": Infinity
+          },
+          {
+            "delta": 0.10689437791254432,
+            "mu": 0.0,
+            "step_norm": 0.02752952511091106,
+            "on_boundary": false,
+            "predicted_reduction": 0.0007577189068855695,
+            "actual_reduction": -Infinity,
+            "rho": null,
+            "residual_after": Infinity
+          },
+          {
+            "delta": 0.05344718895627216,
+            "mu": 0.0,
+            "step_norm": 0.02752952511091106,
+            "on_boundary": false,
+            "predicted_reduction": 0.0007577189068855695,
+            "actual_reduction": -Infinity,
+            "rho": null,
+            "residual_after": Infinity
+          },
+          {
+            "delta": 0.02672359447813608,
+            "mu": 0.03004521158055278,
+            "step_norm": 0.026723594478154568,
+            "on_boundary": true,
+            "predicted_reduction": 0.0007570742328725985,
+            "actual_reduction": 0.0007570742328737217,
+            "rho": 1.0000000000014835,
+            "residual_after": 0.0008029159434427745
+          }
+        ],
+        "delta_after": 0.05344718895627216,
+        "residual_after": 0.0008029159434427745,
+        "T_before": 6.289072132977577e-06,
+        "s_before": 1.2411990952449804e-05
+      }
+    ]
+  },
+  "line_search_reference": {
+    "note": "leg 353's step-halving layer on the SAME inputs. Recorded as magnitudes for the ledger; this unit makes no claim about which globalisation is better on RPOs -- that is gate G1's question and is not answered here.",
+    "reason": "max_newton_hit",
+    "success": false,
+    "n_iters": 8,
+    "residual_history": [
+      19.1100429639095,
+      7.497006963151887,
+      3.5930758273755172,
+      2.2748598838744716,
+      1.7174524481041216,
+      0.9735102933544358,
+      0.5090882923521366,
+      0.25234344468214137,
+      0.1256234859638997
+    ],
+    "final_residual": 0.1256234859638997,
+    "monotone_decrease": true,
+    "fractional_reduction": 0.993426310647174,
+    "wall_seconds": 5.939770221710205
+  },
+  "leg353_baseline": {
+    "fractional_reduction": 0.993426310647174,
+    "monotone_decrease": true,
+    "source": "writeup/data/p2_route_dsspb5_v1.json (laminar_control)"
+  },
+  "milestone_check": {
+    "question": "does the laminar-fixed-point control reproduce leg 353's 99.3% monotone reduction THROUGH the new layer?",
+    "hookstep_fractional_reduction": 0.9985595692017191,
+    "leg353_fractional_reduction": 0.993426310647174,
+    "reproduced": true
+  },
+  "open_obligations_carried": [
+    "CLAY_OBLIGATIONS section 6, obligation 1 (no method) -- OPEN",
+    "CLAY_OBLIGATIONS section 6, obligation 2 (no method) -- OPEN",
+    "CLAY_OBLIGATIONS section 4 (finite energy / localisation) -- OPEN and NOT discharged; stays open in every route-4 gate until leg 386 (ROUTE-DTOL) lands with a pre-registered delta mode (user ruling, 2026-08-12)"
+  ],
+  "degeneracy": {
+    "note": "directional derivatives of the extended residual at the exact laminar fixed point; the T and s columns are null by construction, so the control probes the state block only",
+    "norm_dR_dT": 0.021167285638734643,
+    "norm_dR_ds": 0.0,
+    "norm_dR_dstate_unit_random_direction": 9.775074684715527,
+    "residual_at_exact_fixed_point": 0.07941124684965498
+  },
+  "clay_movement": "none -- no L1-L4 link moved by this unit"
+}
