@@ -37,14 +37,27 @@ is **computed, never transcribed** -- nobody re-types a list that a grep can pro
 `test_boussinesq_rescaled_caller_census.py` fails loudly when a live importer appears that no
 scope claims.  That test is the mechanism; the lists here are only its bookkeeping.
 
-SCOPE OF THE GREP
------------------
-Deliberately identical to leg 233's `census()`
+SCOPE OF THE GREP -- TRACKED FILES, NOT THE FILESYSTEM
+------------------------------------------------------
+The census enumerates **`git ls-files`**, not an `os.walk` of the checkout.  That is not a
+detail: the first version of this module walked the filesystem, which made its answer a
+statement about *the checkout it happened to run in* rather than about *the repository* --
+and it passed here while failing the integration gate (exit 1), because the integration tree
+carries ten ignored leg worktrees (`.leg229-work/`, `.leg293-work/`, `.leg364-work/` ...,
+matched by `.gitignore`'s `.leg*-work/`), each a full copy of the repo, so every importer was
+counted eleven times.  A repository is its tracked contents; anything else makes green depend
+on the integrator's untracked debris, which is precisely the failure mode this module exists
+to abolish.  Skipping hidden directories would have silenced that symptom and left the
+dependence in place.
+
+Otherwise deliberately identical to leg 233's `census()`
 (`experiments/p2_route_bvrrv_v1_postrepair.py`), so the two numbers are comparable rather
-than merely similar: the same import regex, the same directory exclusions, the module itself
-excluded, paths relative to the repo root, sorted.  Do not "improve" the pattern without
-saying so in a journal -- a silently widened scope makes every historical comparison below a
-lie.
+than merely similar: the same import regex, the module itself excluded, paths relative to the
+repo root, sorted.  (Leg 233's directory exclusions -- `.git`, `.venv`, `__pycache__`,
+`Papers`, `.claude` -- are subsumed: 0 tracked `.py` files live under any of them, so the
+tracked scope is neither wider nor narrower on a clean checkout, and the count is still 15.)
+Do not "improve" the pattern or the enumeration without saying so in a journal -- a silently
+widened scope makes every historical comparison below a lie.
 
 The scope excludes files that NAME the module in a string without importing it.  That
 exclusion is not incidental, it is a correctness property: `solver/target_selection.py`,
@@ -84,7 +97,11 @@ IMPORT_PATTERN = re.compile(
     r"^\s*(from\s+solver\.boussinesq_rescaled\s+import|import\s+solver\.boussinesq_rescaled)",
     re.M,
 )
-SKIP_DIRS = {".git", ".venv", "__pycache__", "Papers", ".claude"}
+# Leg 233's directory exclusions, kept ONLY so the two scopes can be shown equivalent on a
+# clean checkout.  They are not applied: `git ls-files` never reports a path under any of
+# them, and a test asserts that (0 tracked `.py` files under any).  Named rather than deleted
+# because "the scopes match" is a claim someone will want to re-check.
+LEG_233_SKIP_DIRS = (".git", ".venv", "__pycache__", "Papers", ".claude")
 
 
 # ---------------------------------------------------------------------------
@@ -202,30 +219,45 @@ LEG_233_LIVE_CENSUS = (
 
 
 # ---------------------------------------------------------------------------
-def live_importers(root: str = ROOT) -> list:
-    """Every `.py` file under `root` that imports `solver.boussinesq_rescaled`, sorted.
+def tracked_python_files(root: str = ROOT) -> list:
+    """Every `.py` path GIT TRACKS, repo-root-relative, sorted.
 
-    COMPUTED, NEVER TRANSCRIBED.  Scope identical to leg 233's `census()` so the counts are
-    comparable: same regex, same excluded directories, module itself excluded, paths relative
-    to `root`.
+    This is the census's denominator, and it is deliberately not `os.walk`.  See the module
+    docstring: a filesystem walk answers a question about the checkout (including any ignored
+    leg worktree sitting beside it), while the question leg 233 asked is about the repository.
+
+    A failure here RAISES.  A silent fallback to walking the disk would restore exactly the
+    bug this replaced, at the moment it is least likely to be noticed.
+    """
+    proc = subprocess.run(["git", "ls-files", "-z", "--full-name", "--", "*.py"],
+                          cwd=root, capture_output=True, text=True)
+    if proc.returncode != 0:
+        raise RuntimeError(
+            "git ls-files failed in %s (exit %d): %s -- the caller census cannot be computed "
+            "without a tracked-file list, and will not guess by walking the filesystem."
+            % (root, proc.returncode, proc.stderr.strip()))
+    return sorted(p for p in proc.stdout.split("\0") if p)
+
+
+def live_importers(root: str = ROOT) -> list:
+    """Every TRACKED `.py` file that imports `solver.boussinesq_rescaled`, sorted.
+
+    COMPUTED, NEVER TRANSCRIBED.  Same regex as leg 233's `census()`, module itself excluded,
+    paths repo-root-relative -- but enumerated from `git ls-files` rather than from the disk,
+    so an untracked or ignored copy of a caller (a stale `.leg*-work/` worktree, a scratch
+    directory, an editor backup) is not a caller.
     """
     found = []
-    for dirpath, dirnames, filenames in os.walk(root):
-        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
-        for fn in filenames:
-            if not fn.endswith(".py"):
-                continue
-            path = os.path.join(dirpath, fn)
-            rel = os.path.relpath(path, root)
-            if rel == MODULE_PATH:
-                continue
-            try:
-                with open(path, errors="replace") as fh:
-                    src = fh.read()
-            except OSError:
-                continue
-            if IMPORT_PATTERN.search(src):
-                found.append(rel)
+    for rel in tracked_python_files(root):
+        if rel == MODULE_PATH:
+            continue
+        try:
+            with open(os.path.join(root, rel), errors="replace") as fh:
+                src = fh.read()
+        except OSError:
+            continue  # tracked but not on disk (staged deletion); nothing to grep
+        if IMPORT_PATTERN.search(src):
+            found.append(rel)
     return sorted(found)
 
 
@@ -300,6 +332,11 @@ def report(root: str = ROOT) -> dict:
     return dict(
         module=MODULE_PATH,
         repair_commit=REPAIR_REF,
+        enumeration=dict(
+            source="git ls-files -- '*.py'",
+            n_tracked_py_files=len(tracked_python_files(root)),
+            why=("tracked files, not os.walk: a filesystem walk answers a question about the "
+                 "checkout (ignored .leg*-work/ worktrees and all), not about the repository")),
         scope_labels=SCOPE_LABELS,
         frozen_pre_repair_banked=dict(
             n=len(FROZEN_PREREPAIR_BANKED),

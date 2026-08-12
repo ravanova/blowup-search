@@ -21,12 +21,22 @@ claims fails the suite by name, and the failure message says which scope it need
 into.  It was demonstrated red on a planted importer before this file was pushed -- a test
 that cannot go red is not a test.
 
+TWO DEMONSTRATED RED PATHS, because the first version of this unit had only one and the gap
+cost an integration gate.  The second is tests (12)-(14): the census enumerates `git ls-files`
+rather than the filesystem, so an untracked or ignored copy of a caller is not a caller.  The
+os.walk version passed in the bench worktree and failed integration at exit 1, because the
+integration checkout carries ten ignored `.leg*-work/` leg worktrees -- each a full copy of the
+repo -- and counted every importer eleven times.  Test (13) plants real importers in untracked
+directories, one of them mimicking that exact layout, and was itself demonstrated red against
+the walking version before the fix landed.
+
 No scientific claim, no measurement, no figure; Clay stays ~0.05%.
 
 Run:  python test_boussinesq_rescaled_caller_census.py
 """
 
 import json
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -37,9 +47,12 @@ sys.path.insert(0, str(ROOT / "experiments"))
 
 from bench_boussinesq_rescaled_caller_census import (                 # noqa: E402
     CLASSIFICATION, FROZEN_PREREPAIR_BANKED, IMPORT_PATTERN, LEG_233_LIVE_CENSUS,
-    LEG_233_REF, MODULE_PATH, NAMED_BUT_NOT_IMPORTING, REPAIR_REF, SCOPE_LABELS,
-    classified_importers, drift, first_commit, live_importers, postdates_repair, report,
+    LEG_233_REF, LEG_233_SKIP_DIRS, MODULE_PATH, NAMED_BUT_NOT_IMPORTING, REPAIR_REF,
+    SCOPE_LABELS, classified_importers, drift, first_commit, live_importers,
+    postdates_repair, report, tracked_python_files,
 )
+
+REAL_IMPORT = "from solver.boussinesq_rescaled import RescaledBoussinesq\n"
 
 LEG_233_JSON = ROOT / "writeup" / "data" / "p2_route_bvrrv_v1_postrepair.json"
 
@@ -280,6 +293,81 @@ def test_leg_233_live_census_is_still_fully_classified():
           f"{r['live_importers']['counts_by_scope']}")
 
 
+# ---------------------------------------------------------------------------------------
+# (12) THE SECOND ALARM.  The census is scoped to what git TRACKS, so untracked and ignored
+#      copies of a caller are not callers.  This is the test that would have caught the
+#      integration-gate failure of 64420ab: the integration checkout carries ten ignored
+#      `.leg*-work/` worktrees, each a full copy of the repo, and an os.walk census counted
+#      every importer eleven times.
+# ---------------------------------------------------------------------------------------
+
+def test_census_is_a_subset_of_tracked_files():
+    tracked = set(tracked_python_files())
+    live = live_importers()
+    stray = sorted(set(live) - tracked)
+    assert not stray, (
+        "the census counted %d path(s) git does not track:\n    %s\n"
+        "The census must enumerate `git ls-files`, not the filesystem -- otherwise its answer "
+        "describes whatever checkout it ran in (ignored .leg*-work/ worktrees, scratch dirs, "
+        "editor backups) rather than the repository."
+        % (len(stray), "\n    ".join(stray)))
+    print(f"[ok] (12) all {len(live)} counted importers are tracked files "
+          f"({len(tracked)} tracked .py files in the repo)")
+
+
+def test_an_untracked_copy_of_a_caller_is_not_counted():
+    """Plant real importers in untracked directories -- one plain, one mimicking the ignored
+    `.leg*-work/` layout that actually broke the integration gate -- and require the census to
+    be indifferent to both.  Nothing pre-existing is touched: only directories this test
+    creates are removed, and it refuses to run if either name is already present."""
+    before = live_importers()
+    plain = ROOT / "_census_untracked_probe"
+    ignored = ROOT / ".leg999999-work"
+    for d in (plain, ignored):
+        assert not d.exists(), (
+            f"{d.name} already exists; refusing to run so this test can never delete "
+            f"anything it did not create")
+    made = []
+    try:
+        for d, sub in ((plain, "experiments"), (ignored, "experiments")):
+            (d / sub).mkdir(parents=True)
+            made.append(d)
+            (d / sub / "p2_route_tscx_v1.py").write_text(REAL_IMPORT)
+            (d / "test_boussinesq_rescaled.py").write_text(REAL_IMPORT)
+        after = live_importers()
+        counted = sorted(set(after) - set(before))
+        assert not counted, (
+            "the census counted %d untracked planted file(s): %s -- an untracked or ignored "
+            "copy of a caller is not a caller." % (len(counted), counted))
+        assert after == before, (
+            f"the census moved from {len(before)} to {len(after)} entries when untracked "
+            f"copies appeared beside it")
+        # And the planted files really are importers, so the test is not passing vacuously.
+        assert IMPORT_PATTERN.search(
+            (ignored / "experiments" / "p2_route_tscx_v1.py").read_text()), (
+            "the planted file is not a real importer; this test would pass for free")
+    finally:
+        for d in made:
+            shutil.rmtree(d, ignore_errors=True)
+    assert not plain.exists() and not ignored.exists(), "planted probe directories not cleaned"
+    print(f"[ok] (13) 4 real importers planted in 2 untracked dirs (one mimicking the ignored "
+          f".leg*-work/ layout): census stayed at {len(before)}, 0 counted, both dirs removed")
+
+
+def test_leg_233_directory_exclusions_are_subsumed_by_tracking():
+    """Leg 233 skipped five directories by name.  Tracked-file scoping must be equivalent on a
+    clean checkout, not merely similar -- otherwise the comparison to its grep is meaningless."""
+    tracked = tracked_python_files()
+    leaked = sorted(p for p in tracked
+                    if p.split("/")[0] in set(LEG_233_SKIP_DIRS))
+    assert not leaked, (
+        f"tracked .py files exist under leg 233's excluded directories {LEG_233_SKIP_DIRS}: "
+        f"{leaked} -- the tracked scope is WIDER than leg 233's and the counts are no longer "
+        f"comparable")
+    print(f"[ok] (14) 0 of {len(tracked)} tracked .py files live under any of leg 233's "
+          f"excluded dirs {LEG_233_SKIP_DIRS}; the two scopes agree on a clean checkout")
+
+
 def test_report_is_json_serialisable():
     blob = json.dumps(report())
     assert len(blob) > 500, "the report collapsed to something trivially small"
@@ -298,5 +386,8 @@ if __name__ == "__main__":
     test_post_repair_entries_really_post_date_the_repair()
     test_leg_233_two_drifted_entries_are_classified_post_repair()
     test_leg_233_live_census_is_still_fully_classified()
+    test_census_is_a_subset_of_tracked_files()
+    test_an_untracked_copy_of_a_caller_is_not_counted()
+    test_leg_233_directory_exclusions_are_subsumed_by_tracking()
     test_report_is_json_serialisable()
     print("\nALL BOUSSINESQ-RESCALED CALLER-CENSUS TESTS PASSED")
