@@ -1,5 +1,18 @@
 """PROG-R4 unit U4 -- CLAIM, gate G2.
 
+  ############################################################
+  ##  STATUS 2026-08-12: GATE G2 IS **UNANSWERED**.         ##
+  ##  THIS RUNNER HAS NEVER BEEN RUN, NOT EVEN ONCE, NOT    ##
+  ##  EVEN ON SYNTHETIC DATA. It is unvalidated code.       ##
+  ##  It cannot have been run: its input is an orbit that   ##
+  ##  U3 recovers, U3 never ran, and G1 is UNANSWERED. No   ##
+  ##  basin radius has been measured by this programme, and ##
+  ##  brick B5 clause (c-iii) is NOT a number.              ##
+  ##  A successor must treat every line below as untested,  ##
+  ##  and must land G1 = YES before this file is even       ##
+  ##  eligible to run.                                      ##
+  ############################################################
+
   G2: IS A RADIUS MEASURED WITH A COHERENT (MONOTONE) FAILURE BOUNDARY,
       CONTROL FIRING AS PLANTED?
 

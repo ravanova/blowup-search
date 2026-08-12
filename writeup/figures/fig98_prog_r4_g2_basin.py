@@ -12,6 +12,11 @@ from "Newton succeeded onto something else".
 Checks assert the banked JSON supports every claim. Non-zero exit on any
 failure.
 
+STATUS 2026-08-12: gate G2 is UNANSWERED and this script HAS NEVER SEEN REAL
+DATA -- the programme was wound down mid-U2, U4 never ran, and
+writeup/data/p2_prog_r4_g2_v1.json does not exist. No basin radius has been
+measured by this programme. Smoke-tested only against synthetic records.
+
 Data: writeup/data/p2_prog_r4_g2_v1.json
 """
 import json

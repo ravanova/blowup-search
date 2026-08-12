@@ -12,6 +12,12 @@ deliverable of a resourced null rather than a defect.
 Checks assert that the banked JSON supports every claim the panels make. The
 script exits non-zero if any check fails.
 
+STATUS 2026-08-12: gate G1 is UNANSWERED and this script HAS NEVER SEEN REAL
+DATA -- the programme was wound down mid-U2 and writeup/data/p2_prog_r4_g1_v1
+.json does not exist. Running this now will fail on a missing file, which is
+the correct behaviour. It has been smoke-tested only against synthetic records
+in both gate branches plus two doctored records its checks correctly reject.
+
 Data: writeup/data/p2_prog_r4_g1_v1.json
 """
 import json

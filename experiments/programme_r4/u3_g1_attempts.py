@@ -1,5 +1,23 @@
 """PROG-R4, unit U3 -- CLAIM unit, GATE G1.
 
+  ############################################################
+  ##  STATUS 2026-08-12: GATE G1 IS **UNANSWERED**.         ##
+  ##  THIS RUNNER HAS NEVER BEEN RUN ON REAL DATA.          ##
+  ##  The programme was wound down by user instruction      ##
+  ##  during unit U2, before the T=1e5 DNS finished, so the ##
+  ##  recurrence library this runner consumes DOES NOT      ##
+  ##  EXIST. No G1 verdict has been produced by anyone. Do  ##
+  ##  not read a number out of this file or infer one from  ##
+  ##  its presence. Before any output of this code is       ##
+  ##  believed, a successor must: (1) run U2 to completion  ##
+  ##  at T=1e5 and land MILESTONE M2 against its own        ##
+  ##  checks, (2) fix the iteration caps from a MEASURED    ##
+  ##  per-epoch cost, (3) run this end to end. Only the     ##
+  ##  seeding/anchoring logic below has been exercised, and ##
+  ##  only on a partial 9500-time-unit prefix in a scratch  ##
+  ##  dry run whose outputs were discarded.                 ##
+  ############################################################
+
 THE GATE, in its pre-committed wording (experiments/journal/prog_r4_prereg.md):
 
     G1: DOES AT LEAST ONE NAMED TABLE-IV RPO RECOVER TO tol=1e-8?
@@ -218,12 +236,22 @@ def build_jobs(args, solver):
 
 
 def main():
+    global MAX_NEWTON, MAX_GMRES
     ap = argparse.ArgumentParser()
     ap.add_argument("--n-attempts", type=int, default=100)
     ap.add_argument("--workers", type=int, default=10)
     ap.add_argument("--out", default=CURATED)
     ap.add_argument("--ledger-out", default=LEDGER)
+    # Iteration caps are a COST setting, not part of the pre-registered
+    # compliant scale (which is T=1e5 / genuine hookstep / ~100 attempts /
+    # N=24). They are fixed from the measured per-epoch wall time BEFORE the
+    # attempts are run, never adjusted after seeing an outcome; whatever is
+    # used is banked in resourcing{} and reported against Chandler & Kerswell's
+    # nominal 75/500.
+    ap.add_argument("--max-newton", type=int, default=MAX_NEWTON)
+    ap.add_argument("--max-gmres", type=int, default=MAX_GMRES)
     args = ap.parse_args()
+    MAX_NEWTON, MAX_GMRES = args.max_newton, args.max_gmres
 
     solver = Kolmogorov2D(N=N_GRID, Re=RE, n_forcing=N_FORCING, dt=DT)
     jobs, dropped_m, sign_tally, lib, dns_meta = build_jobs(args, solver)
