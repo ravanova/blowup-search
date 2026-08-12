@@ -772,6 +772,43 @@ CAPABILITIES = [
                    "integrator's own divergence-stop fires within one "
                    "step-width of a known finite blowup time"),
      "test": "test_dssp_step.py"},
+    {"module": "solver/kolmogorov2d_nkbasin.py",
+     "object": "2D Kolmogorov flow: pseudospectral DNS + matrix-free Newton-Krylov "
+               "RPO solver (leg 353, Route-DSSP brick B5)",
+     "holds": ("Kolmogorov2D (vorticity-streamfunction pseudospectral DNS, RK4 + "
+               "exact viscous integrating factor, 2/3-rule dealiasing); shift_x "
+               "and optimal_shift_residual (FFT cross-correlation recurrence-flow "
+               "search, x-translation symmetry); a from-scratch matrix-free GMRES "
+               "(gmres_matrix_free, no scipy); newton_krylov_rpo (Newton + "
+               "phase-condition moving Poincare section, plain-Newton line search, "
+               "NOT the paper's hookstep); measure_basin_radius"),
+     "validated": ("laminar profile w_lam=-(Re/n)cos(n y) is an exact fixed point "
+                   "of rhs_physical to ~7e-15 and integration-invariant to <1e-3 "
+                   "relative drift over T=1; energy-balance dE/dt vs I-D matches to "
+                   "1.4%; shift_x is a group action (identity at s=0, band-limited "
+                   "field, avoids a Nyquist aliasing artefact under full-band "
+                   "noise); optimal_shift_residual recovers a synthetic shift_x-"
+                   "constructed pair to rel=3.4e-3 -- catching and fixing a genuine "
+                   "SIGN BUG (the FFT cross-correlation peak sits at j=-s, not "
+                   "+s; every recurrence-search candidate before this fix carried "
+                   "a wrong-signed shift guess); gmres_matrix_free matches "
+                   "np.linalg.solve on a small dense system to 2.9e-16 relative; "
+                   "newton_krylov_rpo reduces the extended residual 99.3%, "
+                   "monotonically, from a 1% perturbation of the exact laminar "
+                   "fixed point (the control leg 353's gate verdict rests on: the "
+                   "solver itself is not broken). GATE RESULT (leg 353, sign-"
+                   "corrected run, T_total=2000 DNS, N=24, Re=60, n=4): all 5 "
+                   "Newton-Krylov attempts at Lucas-Kerswell 2015 (arXiv:1406.1820) "
+                   "Table IV published RPOs (UPO37 x2, UPO35, UPO9, UPO22), seeded "
+                   "from the best recurrence-search candidates (relative seed "
+                   "residual 0.18-0.26), FAILED to converge (reason="
+                   "line_search_failed in every case, final |R| in [22.5, 29.5], "
+                   "no attempt got within two orders of magnitude of tol=1e-8) -- "
+                   "basin radius NOT MEASURED (nothing converged to perturb). See "
+                   "writeup/data/p2_route_dsspb5_v1.json, writeup/figures/"
+                   "fig94_route_dsspb5_v1_stall.png, experiments/journal/"
+                   "leg_353.md"),
+     "test": "test_kolmogorov2d_nkbasin.py"},
 ]
 
 
