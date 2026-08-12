@@ -1,0 +1,899 @@
+{
+ "leg": 390,
+ "route": "DTOR",
+ "title": "Does Fefferman statement (D) (breakdown on R^3/Z^3) delete CLAY_OBLIGATIONS \u00a74, or re-price it?",
+ "kind": "scoping / arithmetic. Reading and arithmetic; no outreach; edits no obligations file, no solver module, no capabilities row.",
+ "ceiling": "TIER 2 in both gate branches. \u00a76's two no-method obligations stay OPEN. No link of the L1 -> L4 chain moved. Clay stays ~0.05%.",
+ "THE_RETARGET_DECISION_IS_THE_USERS_AND_THIS_LEG_MAKES_NONE": true,
+ "no_recommendation_is_written_anywhere_in_this_artifact": true,
+ "novelty_log": "writeup/novelty/leg_390.md (committed before the runner existed)",
+ "journal": "experiments/journal/leg_390.md (gate pre-committed, immutable)",
+ "figure": "fig106 (allocated at dispatch; rebuilt by experiments/p2_route_dtor_v1_evidence.py from this JSON alone)",
+ "check_A_acceptance_condition_diff": {
+  "source_record": "writeup/data/p2_route_cloc_v1.json (leg 381, 7aecf78)",
+  "source_of_the_verbatim_text": "Charles L. Fefferman, 'Existence and smoothness of the Navier-Stokes equation', official Clay Mathematics Institute problem description, https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf (TeX creation date 2006-08-04, last modified 2013-02-05); fetched and its text layer extracted by this leg, 2026-08-12",
+  "statement_C": {
+   "data_conditions": [
+    4,
+    5
+   ],
+   "solution_conditions": [
+    1,
+    2,
+    3,
+    6,
+    7
+   ]
+  },
+  "statement_D": {
+   "data_conditions": [
+    8,
+    9
+   ],
+   "solution_conditions": [
+    1,
+    2,
+    3,
+    10,
+    11
+   ]
+  },
+  "seven_is_bounded_energy_confirmed_from_its_own_text": true,
+  "ten_is_periodicity_confirmed_from_its_own_text": true,
+  "six_and_eleven_are_the_same_text": true,
+  "solution_conditions_dropped_going_C_to_D": [
+   6,
+   7
+  ],
+  "solution_conditions_added_going_C_to_D": [
+   10,
+   11
+  ],
+  "bounded_energy_in_C": true,
+  "bounded_energy_in_D": false,
+  "acceptance_diff_in_one_line": "exactly one condition is dropped and exactly one is added: (7) bounded energy OUT, (10) periodicity IN; (6) and (11) are the same smoothness condition under two numbers. \u00a74's premise is therefore ABSENT from (D)'s own text.",
+  "data_conditions_of_D_are_not_in_this_repository": [
+   "(8)",
+   "(9)"
+  ],
+  "gap_note": "(8) and (9) -- (D)'s DATA conditions -- were never banked verbatim by leg 381 and no outreach is permitted to this leg, so they are treated as UNREAD-IN-REPOSITORY. Nothing below is priced from them. Routed to integration as a correction to be banked by a leg with outreach; this leg edits no obligations file.",
+  "can_fail_planted_seven_back_into_D": {
+   "what_was_planted": "the string '(7),' inserted into (D)'s solution-condition list",
+   "parser_reports_bounded_energy_in_D": true,
+   "fired": true
+  }
+ },
+ "check_B_dss_and_periodicity_are_incompatible": {
+  "statement": "If u(.,t) is L-periodic for every t and u is exactly lambda-DSS with lambda > 1, then u(.,t) is L/lambda^n-periodic for every n, hence (letting n -> infinity) constant in x. A NON-CONSTANT exactly-DSS field on T^3 does not exist.",
+  "why_it_decides_the_shape_of_this_leg": "(D) cannot be targeted by a NATIVE torus DSS object. It can only be targeted by periodizing/localising an R^3-anchored one, which is why the price below is a periodization price and not a relabelling.",
+  "cases": {
+   "lambda_banked_1.7_rational_17_over_10": {
+    "lambda": 1.7,
+    "band_M": 64,
+    "rows": [
+     {
+      "n_dss_steps": 1,
+      "implied_period_over_L": 0.5882352941176471,
+      "surviving_1d_indices": [
+       -51,
+       -34,
+       -17,
+       0,
+       17,
+       34,
+       51
+      ],
+      "surviving_nonzero_3d_modes": 342
+     },
+     {
+      "n_dss_steps": 2,
+      "implied_period_over_L": 0.34602076124567477,
+      "surviving_1d_indices": [
+       0
+      ],
+      "surviving_nonzero_3d_modes": 0
+     },
+     {
+      "n_dss_steps": 3,
+      "implied_period_over_L": 0.20354162426216163,
+      "surviving_1d_indices": [
+       0
+      ],
+      "surviving_nonzero_3d_modes": 0
+     }
+    ],
+    "n_steps_to_annihilate_the_band": 2,
+    "one_step_worst_case_margin_min_over_modes_of_abs_exp_minus_1": 2.4492935982947065e-15
+   },
+   "lambda_PV_ceiling_e_to_the_half_irrational": {
+    "lambda": 1.6487212707001282,
+    "band_M": 64,
+    "rows": [
+     {
+      "n_dss_steps": 1,
+      "implied_period_over_L": 0.6065306597126334,
+      "surviving_1d_indices": [
+       0
+      ],
+      "surviving_nonzero_3d_modes": 0
+     },
+     {
+      "n_dss_steps": 2,
+      "implied_period_over_L": 0.3678794411714423,
+      "surviving_1d_indices": [
+       0
+      ],
+      "surviving_nonzero_3d_modes": 0
+     },
+     {
+      "n_dss_steps": 3,
+      "implied_period_over_L": 0.22313016014842982,
+      "surviving_1d_indices": [
+       0
+      ],
+      "surviving_nonzero_3d_modes": 0
+     }
+    ],
+    "n_steps_to_annihilate_the_band": 1,
+    "one_step_worst_case_margin_min_over_modes_of_abs_exp_minus_1": 0.010240023822699186
+   }
+  },
+  "one_step_margin_decay_with_band_width": {
+   "band_widths_M": [
+    8,
+    16,
+    32,
+    64,
+    128,
+    256,
+    512,
+    1024,
+    2048
+   ],
+   "worst_case_margins": [
+    0.20480707496625425,
+    0.20480707496625425,
+    0.10765134797099579,
+    0.010240023822670766,
+    0.010240023822670766,
+    0.010240023822670766,
+    0.010240023822670766,
+    0.004937352012510473,
+    0.0003653545058128606
+   ],
+   "fitted_exponent_in_M": -0.9905719146289446,
+   "predicted_exponent": -1.0,
+   "abs_error": 0.009428085371055439,
+   "reading": "the incompatibility is EXACT for every lambda > 1, but its quantitative margin is not uniform: it decays like M^{-1} in the resolved band, so a field that is DSS only to a tolerance can be periodic to that tolerance provided its content above wavenumber ~ 1/tolerance is negligible. That is a statement about APPROXIMATE objects and it does not soften the exact one."
+  },
+  "can_fail_lambda_equals_one_control": {
+   "what_was_planted": "lambda = 1, i.e. no dilation at all",
+   "n_steps_to_annihilate_the_band": null,
+   "surviving_nonzero_3d_modes_at_n_1": 2146688,
+   "fired": true
+  }
+ },
+ "check_C_periodization_bill": {
+  "what_is_being_priced": "the direct periodization u_per(x) = sum_{k in Z^3} u(x + Lk) of the R^3-anchored profile onto a torus of side L. This is the cheapest conceivable way to put the existing object on T^3: no cutoff, no modification, just wrap it.",
+  "rows": [
+   {
+    "alpha": 0.5,
+    "partial_sums_by_R": {
+     "12.0": 2481.1259714620064,
+     "24.0": 14156.021783752465,
+     "48.0": 80167.77567111744,
+     "96.0": 453795.6477868261
+    },
+    "shell_increments": [
+     11674.895812290459,
+     66011.75388736498,
+     373627.87211570865
+    ],
+    "measured_increment_exponent_in_R": 2.500060250856044,
+    "predicted_increment_exponent_3_minus_alpha": 2.5,
+    "abs_error": 6.025085604388636e-05,
+    "converges": false
+   },
+   {
+    "alpha": 1.0,
+    "partial_sums_by_R": {
+     "12.0": 894.8598057911391,
+     "24.0": 3610.9287271822745,
+     "48.0": 14463.92398717988,
+     "96.0": 57893.82919990469
+    },
+    "shell_increments": [
+     2716.0689213911355,
+     10852.995259997606,
+     43429.905212724814
+    ],
+    "measured_increment_exponent_in_R": 1.999548404955043,
+    "predicted_increment_exponent_3_minus_alpha": 2.0,
+    "abs_error": 0.00045159504495706493,
+    "converges": false
+   },
+   {
+    "alpha": 1.5,
+    "partial_sums_by_R": {
+     "12.0": 341.3856225843269,
+     "24.0": 979.0857517052509,
+     "48.0": 2779.773668269385,
+     "96.0": 7874.227726662245
+    },
+    "shell_increments": [
+     637.700129120924,
+     1800.687916564134,
+     5094.45405839286
+    ],
+    "measured_increment_exponent_in_R": 1.4989887357049014,
+    "predicted_increment_exponent_3_minus_alpha": 1.5,
+    "abs_error": 0.0010112642950985684,
+    "converges": false
+   },
+   {
+    "alpha": 2.0,
+    "partial_sums_by_R": {
+     "12.0": 141.2945206083457,
+     "24.0": 292.4572192390657,
+     "48.0": 594.0702093830635,
+     "96.0": 1197.3624585785833
+    },
+    "shell_increments": [
+     151.16269863072,
+     301.61299014399776,
+     603.2922491955198
+    ],
+    "measured_increment_exponent_in_R": 0.9983774339003932,
+    "predicted_increment_exponent_3_minus_alpha": 1.0,
+    "abs_error": 0.0016225660996067592,
+    "converges": false
+   },
+   {
+    "alpha": 2.5,
+    "partial_sums_by_R": {
+     "12.0": 65.50128543252757,
+     "24.0": 101.68800985432753,
+     "48.0": 152.70406268456975,
+     "96.0": 224.8482889734152
+    },
+    "shell_increments": [
+     36.186724421799966,
+     51.01605283024222,
+     72.14422628884546
+    ],
+    "measured_increment_exponent_in_R": 0.4977117088271531,
+    "predicted_increment_exponent_3_minus_alpha": 0.5,
+    "abs_error": 0.0022882911728469013,
+    "converges": false
+   },
+   {
+    "alpha": 3.0,
+    "partial_sums_by_R": {
+     "12.0": 34.99931820714245,
+     "24.0": 43.749308600571545,
+     "48.0": 52.46466474580042,
+     "96.0": 61.17822010163853
+    },
+    "shell_increments": [
+     8.749990393429094,
+     8.715356145228874,
+     8.71355535583811
+    ],
+    "measured_increment_exponent_in_R": -0.0030099685980538708,
+    "predicted_increment_exponent_3_minus_alpha": 0.0,
+    "abs_error": 0.0030099685980538708,
+    "converges": false
+   },
+   {
+    "alpha": 3.5,
+    "partial_sums_by_R": {
+     "12.0": 21.759862097037708,
+     "24.0": 23.89706378879031,
+     "48.0": 25.40093540333435,
+     "96.0": 26.463939855936104
+    },
+    "shell_increments": [
+     2.137201691752601,
+     1.5038716145440425,
+     1.0630044526017528
+    ],
+    "measured_increment_exponent_in_R": -0.5037877121907938,
+    "predicted_increment_exponent_3_minus_alpha": -0.5,
+    "abs_error": 0.0037877121907937683,
+    "converges": true
+   },
+   {
+    "alpha": 4.0,
+    "partial_sums_by_R": {
+     "12.0": 15.48106058692831,
+     "24.0": 16.00833459493965,
+     "48.0": 16.270428998887944,
+     "96.0": 16.401405910486996
+    },
+    "shell_increments": [
+     0.5272740080113412,
+     0.26209440394829286,
+     0.13097691159905267
+    ],
+    "measured_increment_exponent_in_R": -1.004620181288816,
+    "predicted_increment_exponent_3_minus_alpha": -1.0,
+    "abs_error": 0.004620181288816028,
+    "converges": true
+   }
+  ],
+  "alpha_3_is_the_logarithmic_boundary": {
+   "R_ladder": [
+    12.0,
+    24.0,
+    48.0,
+    96.0
+   ],
+   "partial_sums": [
+    34.99931820714245,
+    43.749308600571545,
+    52.46466474580042,
+    61.17822010163853
+   ],
+   "increment_per_doubling_of_R": [
+    8.749990393429094,
+    8.715356145228874,
+    8.71355535583811
+   ],
+   "increment_spread": 0.036435037590983654,
+   "reading": "constant increment per doubling of the image window, i.e. logarithmic divergence -- the same signature leg 381 measured for the critical L^3 tail (326.875 per decade, spread 7.4e-10)."
+  },
+  "torus_size_is_a_prefactor_not_a_cure": {
+   "L_ladder": [
+    1.0,
+    3.0,
+    10.0,
+    30.0
+   ],
+   "S_at_alpha_1_R_24": [
+    3610.9287271822745,
+    1203.642909060758,
+    361.09287271822745,
+    120.36429090607582
+   ],
+   "measured_L_exponent": -1.0000000000000002,
+   "predicted_L_exponent": -1.0,
+   "abs_error": 2.220446049250313e-16,
+   "reading": "S_N(alpha, L) = L^{-alpha} S_N(alpha, 1): enlarging the torus buys a constant prefactor and does not change the N-divergence. No torus size makes the image sum converge at alpha <= 3."
+  },
+  "convergence_threshold_located_by_bisection_on_measured_exponents": 2.9969945549964905,
+  "THE_BILL": {
+   "alpha_required_for_periodization_to_converge": 2.9969945549964905,
+   "alpha_required_by_section_4_bounded_energy_L2": 1.5,
+   "alpha_available_a_priori_Type_I_Chae_Wolf": 1.0,
+   "deficit_periodization": 1.9969945549964905,
+   "deficit_section_4": 0.5,
+   "ratio_periodization_required_over_available": 2.9969945549964905,
+   "ratio_section_4_required_over_available": 1.5,
+   "REPURCHASE_FACTOR_IN_DEFICIT": 3.993989109992981,
+   "REPURCHASE_FACTOR_IN_RATIO": 1.9979963699976604,
+   "currency_note": "both bills are quoted in the SAME currency -- the far-field decay exponent alpha of the profile -- so they are directly comparable. \u00a74's numbers are machine-read from writeup/data/p2_route_cloc_v1.json check_B3, not retyped."
+  },
+  "can_fail_wrong_prediction_planted": {
+   "what_was_planted": "predicted exponent 2.25 instead of 2.0 at alpha = 1.0",
+   "measured": 1.999548404955043,
+   "abs_error_against_planted_prediction": 0.25045159504495706,
+   "tolerance": 0.02,
+   "fired": true
+  }
+ },
+ "check_D_cut_then_periodize": {
+  "route": "cut off at radius rho first, then periodize on a torus of side L > 2 rho",
+  "inherited_cutoff_bill_from_leg_381": {
+   "nonlinear_residual_L2_rho_exponent": -1.4992557222696912,
+   "viscous_residual_L2_rho_exponent": -1.499882432289736,
+   "divergence_defect_L2_rho_exponent": -0.4995840292998001,
+   "pressure_perturbation_at_origin_rho_exponent": -1.9996966410059376,
+   "critical_L3_tail_increment_per_decade": 326.87521405120924,
+   "critical_L3_tail_increment_spread": 7.393926228758692e-10,
+   "machine_read_from": "writeup/data/p2_route_cloc_v1.json (leg 381)",
+   "reading": "UNCHANGED BY (D), every number. If the object is cut off before it is wrapped -- and check_B says it must be, since a non-constant exactly-DSS torus field does not exist -- then leg 381's entire cutoff bill is paid in full, including the critical L^3 tail that never gets small. What (D) deletes is the ACCEPTANCE TEST (7), not the cutoff analysis that \u00a74 transferred to \u00a75."
+  },
+  "image_overlap_of_the_cut_field": {
+   "field": "u = curl(psi e_z), psi = exp(-2/(1-|x|^2/rho^2)) x y, supported in |x| <= rho",
+   "divergence_refinement_ladder": [
+    {
+     "n_per_axis": 41,
+     "h": 0.050000000000000044,
+     "max_abs_divergence_fd2": 0.009208311689413693,
+     "field_sup": 0.03885333737996394
+    },
+    {
+     "n_per_axis": 81,
+     "h": 0.025000000000000022,
+     "max_abs_divergence_fd2": 0.0029779408398606932,
+     "field_sup": 0.03923677876545081
+    },
+    {
+     "n_per_axis": 161,
+     "h": 0.012499999999999956,
+     "max_abs_divergence_fd2": 0.0007951066143034365,
+     "field_sup": 0.0392817888697801
+    },
+    {
+     "n_per_axis": 321,
+     "h": 0.006249999999999978,
+     "max_abs_divergence_fd2": 0.00020259737521079874,
+     "field_sup": 0.0392817888697801
+    }
+   ],
+   "divergence_error_ratios_per_halving": [
+    3.0921741513993455,
+    3.745335262327753,
+    3.9245652293182136
+   ],
+   "divergence_reading": "the residual falls by ~4 per halving of h, i.e. it is second-order TRUNCATION error of the difference stencil and not a non-solenoidal field: u is a curl and div u = 0 identically",
+   "measured_max_abs_divergence_fd2_finest": 0.00020259737521079874,
+   "field_sup": 0.0392817888697801,
+   "rows": [
+    {
+     "L_over_rho": 3.0,
+     "sup_image_velocity_contamination_in_the_cell": 0.0,
+     "relative_to_the_cell_field_sup": 0.0,
+     "images_disjoint_predicted": true
+    },
+    {
+     "L_over_rho": 2.5,
+     "sup_image_velocity_contamination_in_the_cell": 0.0,
+     "relative_to_the_cell_field_sup": 0.0,
+     "images_disjoint_predicted": true
+    },
+    {
+     "L_over_rho": 2.0001,
+     "sup_image_velocity_contamination_in_the_cell": 0.0,
+     "relative_to_the_cell_field_sup": 0.0,
+     "images_disjoint_predicted": true
+    },
+    {
+     "L_over_rho": 1.5,
+     "sup_image_velocity_contamination_in_the_cell": 0.03885333737996394,
+     "relative_to_the_cell_field_sup": 0.9890928722407096,
+     "images_disjoint_predicted": false
+    },
+    {
+     "L_over_rho": 1.0,
+     "sup_image_velocity_contamination_in_the_cell": 0.15541334951985575,
+     "relative_to_the_cell_field_sup": 3.9563714889628385,
+     "images_disjoint_predicted": false
+    }
+   ],
+   "reading": "with L > 2 rho the images have disjoint support and the DIRECT image contamination of the cell is exactly zero. The cut-then-wrap route pays no direct image term at all -- this is a CREDIT on (D)'s side."
+  },
+  "image_pressure_interaction_leading_multipole": {
+   "model": "p_image(0) ~ sum_{k != 0} T_ij(Lk) M_ij, T_ij = (3 k_i k_j/|k|^2 - d_ij)/(4 pi L^3 |k|^3); leading multipole of the nonlocal pressure only, not the full field",
+   "shells": [
+    {
+     "shell_N": 1,
+     "shell_signed_tensor_max_abs": 8.673617379884035e-18,
+     "cumulative_signed_tensor_max_abs": 8.673617379884035e-18,
+     "cumulative_magnitude_sum": 0.9376009801505546
+    },
+    {
+     "shell_N": 2,
+     "shell_signed_tensor_max_abs": 2.2768245622195593e-17,
+     "cumulative_signed_tensor_max_abs": 2.710505431213761e-17,
+     "cumulative_magnitude_sum": 1.4263091102248404
+    },
+    {
+     "shell_N": 3,
+     "shell_signed_tensor_max_abs": 1.9081958235744878e-17,
+     "cumulative_signed_tensor_max_abs": 2.677979366039196e-17,
+     "cumulative_magnitude_sum": 1.7562610390172528
+    },
+    {
+     "shell_N": 4,
+     "shell_signed_tensor_max_abs": 1.3877787807814457e-17,
+     "cumulative_signed_tensor_max_abs": 2.837899186480808e-17,
+     "cumulative_magnitude_sum": 2.0048303832291987
+    },
+    {
+     "shell_N": 5,
+     "shell_signed_tensor_max_abs": 6.938893903907228e-18,
+     "cumulative_signed_tensor_max_abs": 2.78911008871896e-17,
+     "cumulative_magnitude_sum": 2.2040969350089745
+    },
+    {
+     "shell_N": 6,
+     "shell_signed_tensor_max_abs": 6.938893903907228e-18,
+     "cumulative_signed_tensor_max_abs": 2.734899980094685e-17,
+     "cumulative_magnitude_sum": 2.370338856613541
+    },
+    {
+     "shell_N": 7,
+     "shell_signed_tensor_max_abs": 3.469446951953614e-18,
+     "cumulative_signed_tensor_max_abs": 2.711860683929368e-17,
+     "cumulative_magnitude_sum": 2.512928409953915
+    },
+    {
+     "shell_N": 8,
+     "shell_signed_tensor_max_abs": 1.734723475976807e-18,
+     "cumulative_signed_tensor_max_abs": 2.6955976513420854e-17,
+     "cumulative_magnitude_sum": 2.637749097576003
+    },
+    {
+     "shell_N": 9,
+     "shell_signed_tensor_max_abs": 1.734723475976807e-18,
+     "cumulative_signed_tensor_max_abs": 2.7037291676357267e-17,
+     "cumulative_magnitude_sum": 2.7487342486786015
+    },
+    {
+     "shell_N": 10,
+     "shell_signed_tensor_max_abs": 3.469446951953614e-18,
+     "cumulative_signed_tensor_max_abs": 2.701018662204513e-17,
+     "cumulative_magnitude_sum": 2.848642411761831
+    },
+    {
+     "shell_N": 11,
+     "shell_signed_tensor_max_abs": 1.734723475976807e-18,
+     "cumulative_signed_tensor_max_abs": 2.6955976513420854e-17,
+     "cumulative_magnitude_sum": 2.939482497535946
+    },
+    {
+     "shell_N": 12,
+     "shell_signed_tensor_max_abs": 3.469446951953614e-18,
+     "cumulative_signed_tensor_max_abs": 2.709488991677056e-17,
+     "cumulative_magnitude_sum": 3.022762675423652
+    },
+    {
+     "shell_N": 13,
+     "shell_signed_tensor_max_abs": 1.734723475976807e-18,
+     "cumulative_signed_tensor_max_abs": 2.7108442443926628e-17,
+     "cumulative_magnitude_sum": 3.0996439417511565
+    },
+    {
+     "shell_N": 14,
+     "shell_signed_tensor_max_abs": 1.734723475976807e-18,
+     "cumulative_signed_tensor_max_abs": 2.7000022226678078e-17,
+     "cumulative_magnitude_sum": 3.1710390357540517
+    },
+    {
+     "shell_N": 15,
+     "shell_signed_tensor_max_abs": 3.469446951953614e-18,
+     "cumulative_signed_tensor_max_abs": 2.6952588381631837e-17,
+     "cumulative_magnitude_sum": 3.2376784830356695
+    },
+    {
+     "shell_N": 16,
+     "shell_signed_tensor_max_abs": 1.734723475976807e-18,
+     "cumulative_signed_tensor_max_abs": 2.694920024984282e-17,
+     "cumulative_magnitude_sum": 3.300156054280734
+    },
+    {
+     "shell_N": 17,
+     "shell_signed_tensor_max_abs": 8.673617379884035e-19,
+     "cumulative_signed_tensor_max_abs": 2.6928871459108716e-17,
+     "cumulative_magnitude_sum": 3.3589608842291874
+    },
+    {
+     "shell_N": 18,
+     "shell_signed_tensor_max_abs": 8.131516293641283e-19,
+     "cumulative_signed_tensor_max_abs": 2.6903460470691087e-17,
+     "cumulative_magnitude_sum": 3.41450068663387
+    },
+    {
+     "shell_N": 19,
+     "shell_signed_tensor_max_abs": 7.589415207398531e-19,
+     "cumulative_signed_tensor_max_abs": 2.6872967284589933e-17,
+     "cumulative_magnitude_sum": 3.4671188709181453
+    },
+    {
+     "shell_N": 20,
+     "shell_signed_tensor_max_abs": 8.673617379884035e-19,
+     "cumulative_signed_tensor_max_abs": 2.6918707063741665e-17,
+     "cumulative_magnitude_sum": 3.5171073864962055
+    },
+    {
+     "shell_N": 21,
+     "shell_signed_tensor_max_abs": 1.734723475976807e-18,
+     "cumulative_signed_tensor_max_abs": 2.6940729920370277e-17,
+     "cumulative_magnitude_sum": 3.564716513311445
+    },
+    {
+     "shell_N": 22,
+     "shell_signed_tensor_max_abs": 1.734723475976807e-18,
+     "cumulative_signed_tensor_max_abs": 2.6896684207113053e-17,
+     "cumulative_magnitude_sum": 3.6101624301414517
+    },
+    {
+     "shell_N": 23,
+     "shell_signed_tensor_max_abs": 1.734723475976807e-18,
+     "cumulative_signed_tensor_max_abs": 2.688821387764051e-17,
+     "cumulative_magnitude_sum": 3.653633139560981
+    },
+    {
+     "shell_N": 24,
+     "shell_signed_tensor_max_abs": 8.673617379884035e-19,
+     "cumulative_signed_tensor_max_abs": 2.7755575615628914e-17,
+     "cumulative_magnitude_sum": 3.6952931598676195
+    },
+    {
+     "shell_N": 25,
+     "shell_signed_tensor_max_abs": 8.673617379884035e-19,
+     "cumulative_signed_tensor_max_abs": 2.7755575615628914e-17,
+     "cumulative_magnitude_sum": 3.7352872795491106
+    },
+    {
+     "shell_N": 26,
+     "shell_signed_tensor_max_abs": 1.3010426069826053e-18,
+     "cumulative_signed_tensor_max_abs": 2.7755575615628914e-17,
+     "cumulative_magnitude_sum": 3.773743590393808
+    },
+    {
+     "shell_N": 27,
+     "shell_signed_tensor_max_abs": 1.734723475976807e-18,
+     "cumulative_signed_tensor_max_abs": 2.7755575615628914e-17,
+     "cumulative_magnitude_sum": 3.810775959385162
+    },
+    {
+     "shell_N": 28,
+     "shell_signed_tensor_max_abs": 4.336808689942018e-19,
+     "cumulative_signed_tensor_max_abs": 2.7321894746634712e-17,
+     "cumulative_magnitude_sum": 3.8464860595293446
+    },
+    {
+     "shell_N": 29,
+     "shell_signed_tensor_max_abs": 8.673617379884035e-19,
+     "cumulative_signed_tensor_max_abs": 2.7321894746634712e-17,
+     "cumulative_magnitude_sum": 3.880965050792758
+    },
+    {
+     "shell_N": 30,
+     "shell_signed_tensor_max_abs": 8.673617379884035e-19,
+     "cumulative_signed_tensor_max_abs": 2.7755575615628914e-17,
+     "cumulative_magnitude_sum": 3.914294981071467
+    },
+    {
+     "shell_N": 31,
+     "shell_signed_tensor_max_abs": 8.673617379884035e-19,
+     "cumulative_signed_tensor_max_abs": 2.7321894746634712e-17,
+     "cumulative_magnitude_sum": 3.946549961339495
+    },
+    {
+     "shell_N": 32,
+     "shell_signed_tensor_max_abs": 8.673617379884035e-19,
+     "cumulative_signed_tensor_max_abs": 2.8189256484623115e-17,
+     "cumulative_magnitude_sum": 3.977797157287913
+    }
+   ],
+   "cumulative_signed_tensor_max_abs_at_N_32": 2.8189256484623115e-17,
+   "cumulative_magnitude_sum_at_N_32": 3.977797157287913,
+   "magnitude_increment_per_doubling_of_N": [
+    0.5785212730043583,
+    0.6329187143468045,
+    0.6624069567047308,
+    0.6776411030071792
+   ],
+   "magnitude_increment_per_doubling_predicted_log2": 0.6931471805599453,
+   "magnitude_increment_relative_error_at_top_rung": 0.022370541189015353,
+   "reading": "the MAGNITUDE sum is logarithmically divergent (constant increment per doubling -- the third appearance of that signature in this ledger), but the SIGNED sum cancels shell by shell on the cubic lattice to machine precision. The pressure non-locality is therefore NOT the obstruction on T^3 either -- which is the same verdict leg 381 reached on R^3, by a different mechanism. CREDIT on (D)'s side.",
+   "can_fail_cubic_symmetry_broken": {
+    "what_was_planted": "sum over the half-lattice k_x > 0 only, destroying the cubic symmetry that does the cancelling",
+    "signed_sum_N_8": 0.3329944721488523,
+    "signed_sum_N_16": 0.34580044190298914,
+    "fired": true
+   }
+  }
+ },
+ "check_E_section_2_four_rows": {
+  "rule_applied": "PRE-REGISTERED (journal \u00a70 rule 2): a row is R3-ONLY if the hypothesis text in its landed record invokes whole-space structure T^3 does not carry, OR if the object class it constrains is defined by the dilation action check_B shows does not act on T^3. Both sub-verdicts are reported separately and never netted into one word.",
+  "markers_r3": [
+   "R\\^3",
+   "R\\^n",
+   "\\bR3\\b",
+   "L\\^3\\(R\\^3\\)",
+   "L\\^q\\(R\\^3",
+   "M\\(dot\\)q",
+   "sup_\\{?R>0\\}?",
+   "Morrey",
+   "\\(1\\+\\|y\\|\\)",
+   "decay",
+   "infinity"
+  ],
+  "markers_ansatz": [
+   "self-similar",
+   "self similar",
+   "discretely self",
+   "DSS",
+   "rescaled",
+   "1\\.6",
+   "lambda"
+  ],
+  "rows": [
+   {
+    "row": "NRS 1996 / Tsai (T1/T2)",
+    "landed_record": "solver/dssp_screen.py (legs 357/362/370), ledger_nrs_tsai()",
+    "field_read": "the verbatim NRS quotation carried in the module source",
+    "hypothesis_text_machine_read": "main result of [NRS] is that the only weak solution of ",
+    "ledger_text_in_obligations": "bind exactly-backward-self-similar profiles only; DSS at lambda >> 1 is outside the hypothesis (legs 253, 341)",
+    "r3_markers_hit": [],
+    "ansatz_markers_hit": [
+     "self-similar",
+     "DSS"
+    ],
+    "marker_verdict": "CARRIES-TO-T3",
+    "ansatz_class_verdict": "R3-ONLY",
+    "combined_verdict": "R3-ONLY"
+   },
+   {
+    "row": "Chae-Wolf / Pineau-Vicol",
+    "landed_record": "writeup/data/p2_route_pvlx_v1.json (leg 330, 5496bbc)",
+    "field_read": "clause_by_clause[H1,H2,H5] and magnitudes_of_near_1[M1].value_lambda_ceiling",
+    "hypothesis_text_machine_read": "a solution of the 3D incompressible Navier-Stokes equations on R^3 x [-1,0) | satisfies the Type I upper bound (1.7) |u(x,t)| <= C_{U,0}/(|x|+sqrt(-t))",
+    "deciding_clause_id": "H4",
+    "deciding_clause_quote": "U in C^2(R^3 x [0,S])",
+    "lambda_ceiling_machine_read": 1.6487212707001282,
+    "r3_markers_hit": [
+     "R\\^3"
+    ],
+    "ansatz_markers_hit": [
+     "self-similar",
+     "discretely self",
+     "DSS",
+     "lambda"
+    ],
+    "marker_verdict": "R3-ONLY",
+    "ansatz_class_verdict": "R3-ONLY",
+    "combined_verdict": "R3-ONLY"
+   },
+   {
+    "row": "Chae-Tsai",
+    "landed_record": "writeup/data/p2_route_ctrx_v1.json (leg 326, c541cdb)",
+    "field_read": "gate.clause_ledger.alpha_equation.verdict and theorem_read.equation_1_6_*",
+    "hypothesis_text_machine_read": "d_s V + (alpha/(alpha+1)) V + (1/(alpha+1)) (y . grad) V + (V . grad) V = -grad P, div V = 0 | the self-similar transform of (E), the EULER equations; there is no Laplacian term",
+    "decisive_clause": "alpha_equation",
+    "decisive_clause_verdict": "FAILS_HYPOTHESIS",
+    "gate_branch": "(ii)",
+    "r3_markers_hit": [],
+    "ansatz_markers_hit": [
+     "self-similar",
+     "1\\.6"
+    ],
+    "marker_verdict": "CARRIES-TO-T3",
+    "ansatz_class_verdict": "R3-ONLY",
+    "combined_verdict": "R3-ONLY"
+   },
+   {
+    "row": "Morrey (Jiu-Wang-Wei arXiv:2006.15776)",
+    "landed_record": "writeup/data/p2_route_mryx_v1.json (leg 368) + writeup/data/p2_route_b7m_v1.json (leg 370 screen extension)",
+    "field_read": "paper_theorems_read_at_primary_text.theorem_1_2 and .morrey_norm_definition",
+    "hypothesis_text_machine_read": "Let U in W^{1,2}_loc(R^3) be a weak solution of (1.3). If U in M(dot)q,1(R^3) with 3/2 < q < 6, (1.10), then U = 0. | ||f||_{M(dot)p,l(Omega)} = sup_{R>0} sup_{x in Omega} [ R^{3(1/p - 1/l)} * integral_{B_x(R) intersect Omega} |f(y)|^l dy ]^{1/l}  (Sec 2.1, l.591-604 of pdftotext plain-flow extraction) -- a purely averaged, ball-integral (Lebesgue-measure) scaling condition, NOT a pointwise asymptotic condition.",
+    "classification_verdict": "WIDENS",
+    "classification_scope": "Strictly within the exact-SS ansatz class that both T1 and T2 already require (classify_ss_ansatz() == EXACT-SS); this leg does not claim any reach into DSS.",
+    "r3_markers_hit": [
+     "R\\^3",
+     "M\\(dot\\)q",
+     "sup_\\{?R>0\\}?"
+    ],
+    "ansatz_markers_hit": [
+     "DSS"
+    ],
+    "marker_verdict": "R3-ONLY",
+    "ansatz_class_verdict": "R3-ONLY",
+    "combined_verdict": "R3-ONLY"
+   }
+  ],
+  "tally": {
+   "rows_total": 4,
+   "R3_ONLY": 4,
+   "CARRIES_TO_T3": 0,
+   "clearances_that_carry_to_T3": 0
+  },
+  "what_the_tally_means": "\u00a72 is described in CLAY_OBLIGATIONS.md as 'LARGELY DISCHARGED, and this is the programme's strongest position'. Under (D) that position does not transfer: the screen's clearances were secured against R^3 hypotheses about an R^3 object. A torus screen would have to be rebuilt against the PERIODIC rigidity literature, which this repository has never searched. This is the known cost side and it is reported as a count, not as a word.",
+  "can_fail_planted_control_rows": {
+   "positive_control_no_markers_expected_CARRIES": "CARRIES-TO-T3",
+   "negative_control_full_markers_expected_R3_ONLY": "R3-ONLY",
+   "fired": true
+  }
+ },
+ "check_F_section_1_to_5_disposition": {
+  "obligations_file_sha256_READ_ONLY": "f47a73ac27903d79f63435ba8f4726245059e0c09f931e15cb9c0ed7a2923bde",
+  "table": [
+   {
+    "section": "\u00a71 \u2014 the profile exists (rigorous enclosure)",
+    "disposition": "UNCHANGED",
+    "magnitude_or_pointer": {
+     "why_unchanged": "the enclosure problem is a statement about a profile equation and its linearisation; (D) changes the ACCEPTANCE conditions of the assembled solution, not the enclosure.",
+     "credit_on_D_side": "leg 348's obstruction for \u00a71 is that every located periodic-orbit certification instance closes its tail estimate against a COMPACT domain. A torus IS that domain.",
+     "located_instances_compact_or_periodic": 6,
+     "located_instances_unbounded_with_algebraic_decay": 1,
+     "located_instances_unbounded_periodic_orbit_any_weight": 0,
+     "record": "writeup/data/p2_route_pocp_v1.json (leg 348), domain_census",
+     "the_catch_stated_plainly": "that credit is only collectable by an object that LIVES on the torus, and check_B measures that a non-constant exactly-DSS torus field does not exist. The credit and the obstruction are about different objects and this leg does not net them."
+    }
+   },
+   {
+    "section": "\u00a72 \u2014 the profile is admissible (rigidity screen)",
+    "disposition": "TRANSFERRED",
+    "magnitude_or_pointer": {
+     "rows_total": 4,
+     "rows_that_carry_to_T3_as_clearances": 0,
+     "rows_R3_only": 4,
+     "transferred_to": "a torus rigidity screen against the periodic literature, which this repository has never searched (novelty pass \u00a71)",
+     "record": "per-row landed records listed in check_E.rows[*].landed_record"
+    }
+   },
+   {
+    "section": "\u00a73 \u2014 the profile generates a genuine NS solution",
+    "disposition": "TRANSFERRED",
+    "magnitude_or_pointer": {
+     "what_transfers": "the Biot-Savart / pressure reconstruction must be redone with the PERIODIC Green's function; leg 351's closed-form R^3 swirl potential is not the torus one.",
+     "image_pressure_magnitude_sum_is_log_divergent_increment_per_doubling": [
+      0.5785212730043583,
+      0.6329187143468045,
+      0.6624069567047308,
+      0.6776411030071792
+     ],
+     "but_signed_sum_cancels_cumulative_max_abs_at_N_32": 2.8189256484623115e-17,
+     "direct_image_contamination_when_L_exceeds_2rho": 0.0,
+     "reading": "the periodization terms \u00a73 must absorb are measured SMALL or exactly zero at leading multipole order. \u00a73 is the cheap transfer."
+    }
+   },
+   {
+    "section": "\u00a74 \u2014 finite energy and the localisation problem",
+    "disposition": "VACATED-AS-AN-ACCEPTANCE-TEST, TRANSFERRED-AS-WORK",
+    "magnitude_or_pointer": {
+     "vacated_part": "condition (7) does not appear in (D)'s own text -- machine-read, check_A: exactly one condition dropped going (C) -> (D), and it is (7) bounded energy.",
+     "transferred_part_route_1_wrap_the_uncut_profile": {
+      "alpha_required": 2.9969945549964905,
+      "alpha_required_by_section_4": 1.5,
+      "alpha_available": 1.0,
+      "deficit_periodization": 1.9969945549964905,
+      "deficit_section_4": 0.5,
+      "REPURCHASE_FACTOR_IN_DEFICIT": 3.993989109992981
+     },
+     "transferred_part_route_2_cut_then_wrap": {
+      "inherits": "leg 381's cutoff bill in full and unchanged",
+      "critical_L3_tail_increment_per_decade": 326.87521405120924,
+      "note": "the cutoff analysis \u00a74 transferred to \u00a75 is performed IDENTICALLY under (D); only the final acceptance test changes."
+     },
+     "why_a_route_must_be_chosen": "check_B: a non-constant exactly-DSS field on T^3 does not exist, so route 1 is not available to an exactly-DSS object at all -- it is priced here because it is the cheapest conceivable wrap and the number is what makes the comparison legible."
+    }
+   },
+   {
+    "section": "\u00a75 \u2014 stability / persistence under localisation",
+    "disposition": "UNCHANGED",
+    "magnitude_or_pointer": {
+     "why_unchanged": "leg 314's residual obligation is a high-frequency resolvent bound on |Im mu| -> infinity -- a statement about the linearisation's spectrum at large frequency, not about the ambient domain.",
+     "r3_markers_in_section_5_text": [],
+     "record": "CLAY_OBLIGATIONS.md \u00a75 (read, never edited), sha256 below",
+     "note": "under route 2 the perturbation \u00a75 must survive is the SAME cutoff perturbation, so \u00a75's content is untouched; under route 1 it would be a periodization perturbation instead, but route 1 has no object."
+    }
+   }
+  ],
+  "gate_clause_1_every_section_named_or_priced": true,
+  "section_6_status": {
+   "item_1_certified_far_field_decay_and_admissible_cutoff": "OPEN",
+   "item_2_persistence_stability_under_localisation": "OPEN",
+   "unchanged_by_this_leg": true,
+   "note": "and \u00a76 item 1 is if anything MORE load-bearing under (D): the certified far-field exponent alpha is the currency of the periodization bill too."
+  }
+ },
+ "gate": {
+  "question": "Does the (D)-variant ledger re-derive with every \u00a71-\u00a75 obligation either named-as-vacated or priced-as-transferred, AND does the \u00a72 enumeration close with each row's R^3-only / carries-to-T^3 verdict tied to its landed record?",
+  "clause_1_ledger_rederives": true,
+  "clause_2_section_2_enumeration_closes": true,
+  "answer": "yes",
+  "yes_branch_deliverable": {
+   "is_section_4_deletion_repurchased_by_periodization": "The DELETION IS REAL AND THE WORK IS NOT DELETED. (7) is absent from (D)'s own text, so bounded energy stops being an acceptance test. But the object is R^3-anchored and cannot be made exactly DSS on T^3 at all, so it must still be localised -- and leg 381's cutoff bill is then paid in full and unchanged, critical L^3 tail included. Priced as a magnitude: wrapping the UNCUT profile needs alpha > 2.9970 against \u00a74's alpha > 1.5 on the same a-priori alpha = 1.0: deficit 1.9970 against 0.5, a repurchase factor of 3.9940 in deficit and 1.9980 in ratio.",
+   "which_section_2_rows_re_open": "4 of 4 rows are R^3-only, so 0 clearances carry to T^3. \u00a72's screen re-opens in full and would have to be rebuilt against a periodic rigidity literature this repository has never searched.",
+   "the_other_direction_reported_at_the_same_strength": "\u00a71's named obstruction (leg 348) is that 6 of the located periodic-orbit certification instances close against a COMPACT domain and 0 against an unbounded one. A torus target sits on the right side of that census. This leg reports it and nets it against nothing."
+  },
+  "clay_movement": "none. Clay stays ~0.05%."
+ },
+ "can_fail_summary": {
+  "check_A_planted_seven_back_into_D": true,
+  "check_B_lambda_equals_one_control": true,
+  "check_C_wrong_prediction_planted": true,
+  "check_D_cubic_symmetry_broken": true,
+  "check_E_planted_control_rows": true
+ },
+ "corrections_routed_to_integration_verbatim_not_applied_here": [
+  "CLAY_OBLIGATIONS.md's (D) paragraph says (D) 'carries no decay condition and no bounded-energy condition'. Machine-read against (D)'s own banked text, the precise statement is narrower and should be recorded as such: (D)'s SOLUTION conditions are (1),(2),(3),(10),(11) and contain no (7); its DATA conditions are (8),(9), whose verbatim text is NOT in this repository, so no claim about what they do or do not require is supportable here.",
+  "writeup/data/p2_route_cloc_v1.json check_D_clay_primary_text.verbatim_conditions banks (4),(5),(6),(7),(10),(11),(A),(C),(D) but not (8),(9). A leg with outreach should close that gap.",
+  "CLAY_OBLIGATIONS.md \u00a72 calls the screen 'the programme's strongest position'. That is true of the R^3 target and, per check_E, of no torus target: the sentence is correct as written and would need a scope word if (D) were ever adopted."
+ ]
+}
