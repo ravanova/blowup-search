@@ -36,7 +36,7 @@ prose as before.
 | A | 335 | S1GR | no |
 | B | 349 | GAFV | yes |
 | C | 351 | DSSP-B3 | yes |
-| D | 328 | ORC5 | no |
+| D | 346 | CAPR2 | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -18080,12 +18080,75 @@ markers and ONE batched CORRECTIONS entry, zero other content changed
 accumulator reset. 335: the orchestrator's watch (genuine long computation,
 rows still accumulating, no stall symptom) is accepted — no §9g action.
 
-**Reserve queue: 17 undispatched legs (345, 346, 352, 324, 322, 327, 287,
+Cycle 10i: D/328 landed YES at fa1ab94 — closure #5 FULLY EXECUTED across
+all six sites (most verified-already-fixed with md5 confirmation rather than
+re-edited; CLAY_ROADMAP.md:343 corrected with a dated marker, original
+preserved; the Item-3 gate-text site correctly carried as a pointer;
+CORRECTIONS §21 supplies the register entry 339 flagged missing, with the
+6.5457e+11 = 6.4926e+11 × 1.008188 decomposition recorded). **345 PUB0C's
+precondition FIRES** — it enters the ranking directly after 346, per cycle
+10. D ← 346 CAPR2 (lane-6 second entry: Breden-Chu viscous Burgers,
+reproduction at 316's exactness standard, both branches pre-registered).
+Floor 2/4 (349, 351).
+
+**Reserve queue: 16 undispatched legs (345, 352, 324, 322, 327, 287,
 229, 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately
-dispatchable: **10** (rank order: 346, 352, 324, 322, 327, 287, 229, 293,
-298, 299). 345 on 328 (live). Next fresh leg number: **353.**
+dispatchable: **10** (rank order: 345, 352, 324, 322, 327, 287, 229, 293,
+298, 299). Next fresh leg number: **353.**
 
 Nothing in this update lifts a ban. 348's (ii) names an obstruction and a
 cost — the spend is the user's; 307 closes a flag by measurement; 349
 checks a fitness against a ban's own gate and runs nothing. No L1-L4 link
 moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10i) — 328 YES ABSORBED (CLOSURE #5 FULLY
+EXECUTED; THE REGISTER DEBT PAID); 345 PUB0C's PRECONDITION FIRES; D ← 346
+CAPR2
+
+Written from the same detached lineage, resynced to origin/main = fa1ab94.
+
+### 328 ORC5 gate YES, absorbed at full strength
+
+The execution discipline is called out approvingly: four of six sites were
+VERIFIED already fixed (md5 before/after on the two integration-owned files;
+the DM's own two sites checked, not touched), the one live site
+(CLAY_ROADMAP.md:343) corrected to the measured wording with a dated inline
+marker and the original preserved, and the Item-3 6.5457e+11 site correctly
+carried as a pointer to immutable gate text rather than edited. CORRECTIONS
+§21 pays the register debt leg 339 flagged (zero dedicated closure-#5
+entries existed): all six sites, their fixers, and the decomposition
+(6.5457e+11 = 6.4926e+11 selection-repair × 1.008188 provenance drift) now
+sit in the register itself. Closure #5 is COMPLETE end-to-end — claim
+narrowed, sites fixed, register entry filed. Endorsed without amendment.
+
+### Refill — slot D ← 346 CAPR2 (reserve rank 1, executed); 345 unblocked
+
+346: lane-6's second entry as selected at cycle 10 — reproduce Breden-Chu's
+viscous Burgers Grade-A certification row-for-row at 316's exactness
+standard, both branches pre-registered at equal strength (a confirmation is
+the lane's first on a fluid-adjacent object; a defect would make the lane
+4-for-4, itself a finding about the field's QC). Heavy; reproduction, not
+floor-eligible. Territory disjoint from A/B/C — checked. **345 PUB0C's
+precondition fired with 328's landing** — it takes the next vacancy (rank
+1), and its spine now has the complete correction chain to cite: closure #5
+(§21) AND closure #6 (§17), both in the register. **Floor 2/4 (349, 351) —
+§3b's minimum.** FLOOR-TABLE synced (D 328→346).
+
+### Standing state
+
+A/335 mid-diagnosis (watched, no stall); B/349 GAFV; C/351 DSSP-B3
+(critical path). With the user: the cycle-10 packet (complete), the POCP
+(ii) decision item, C4/escalation-#3, 313 packet + ban-wording, 320 packet.
+Next vacancy: 345 PUB0C.
+
+**Reserve queue: 16 undispatched legs (345, 352, 324, 322, 327, 287, 229,
+293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately dispatchable:
+**10** (rank order: 345, 352, 324, 322, 327, 287, 229, 293, 298, 299).
+Next fresh leg number: **353.**
+
+Nothing in this update lifts a ban. Closure #5's completion narrows a claim
+to its measured width and files the paperwork — the opposite of movement;
+no L1-L4 link moved; Clay stays ~0.05%.
