@@ -191,6 +191,15 @@ def control_P(solver, tol, max_newton, max_gmres, gmres_rtol):
         reason=out["reason"], converged_to_tol=bool(out["success"]),
         relative_error_to_w_star=err, recovered=recovered,
         wall_seconds=out["wall_seconds"],
+        max_newton_used=max_newton, max_gmres_used=max_gmres,
+        # P runs at the SAME caps as the real attempts, so it doubles as the
+        # cap-adequacy test: if P cannot recover an exact planted solution at
+        # the caps the attempts use, those caps are too small and a `no` at G1
+        # would be an artefact of the budget rather than a fact about orbits.
+        krylov_dims=[e["krylov_dim"] for e in out["ledger"]],
+        krylov_hit_cap=int(sum(1 for e in out["ledger"]
+                               if e["krylov_dim"] >= max_gmres)),
+        radius_trials=[e["n_radius_trials"] for e in out["ledger"]],
         residual_history=[float(v) for v in out["residual_history"]])
 
 

@@ -130,6 +130,62 @@ Mirrors U4's `controls_fired` construction in `u4_g2_basin.py`.
 > consequences for all of route 4 (§3d), and it is only permitted to fire on an instrument
 > that has been shown, in the same run, to be able to say `yes`.
 
+## 3a. AMENDMENT 1 — control P was run as pre-registered, FAILED, and is re-scaled
+
+**Recorded after the fact, openly, with the original result kept.** This is the amendment §3f
+requires be visible rather than silent, and the rule it changes is fixed by a property of the
+*target*, not by whether the control passes.
+
+**What happened.** P as pre-registered above used `T_CONTROL = 19.33`. Run at that value it did
+not recover: it stalled on the **first** epoch at `reason=trust_region_collapsed`, residual
+`236 → 223`, having moved the state not at all — the relative error to `w*` was still `1.0e-3`,
+exactly the perturbation it started with.
+
+**Why that failure indicts the control and not the instrument — measured, not argued.** In the
+linear regime (`eps = 1e-13` relative) the discrete relative equilibrium amplifies by:
+
+| `T` | 0.5 | 1.0 | 2.0 | 3.0 | 4.0 |
+|---|---|---|---|---|---|
+| amplification | 1.91 | 6.09 | 99.9 | 2.81e3 | 1.02e5 |
+| implied `λ` | 1.29 | 1.81 | 2.30 | 2.65 | 2.88 |
+
+`λ` rises to **2.88**, which extrapolates to `exp(54) ≈ 1e24` over `T=19.33`. Double precision
+carries ~`1e16` of dynamic range, so that shooting Jacobian is not merely ill-conditioned but
+**numerically empty**: no Newton method can solve it, and P's failure there says only that.
+
+**The targets are nothing like that.** The same measurement on the turbulent attractor, where
+the Table IV orbits live, gives **`λ = 0.35`** and an amplification of **`8.73e2`** over
+`T=19.33` — about `1e21` times gentler. The equilibrium is simply a far more unstable object
+than the orbits being sought, and planting a control on it at a full Table IV period was a
+mis-specification.
+
+**The amendment.** `T_P` := the exact multiple of `dt` at which the equilibrium's amplification
+equals the **attractor's** amplification over one Table IV period (`8.73e2`). Log-interpolating
+the measured table between `T=2` and `T=3` gives **`T_P = 2.65`**. This makes P exactly as hard,
+in conditioning, as the real problem — neither easier nor harder — and the number comes from a
+property of the attractor measured *before* P was re-run. **It is not tuned to make P pass.**
+
+**Verified after the change.** The plant is still exact at the new period
+(`||Φ_T(w*) − w*|| = 8.03e-14`) and its amplification is `8.35e2` against the `8.73e2` target.
+
+**P is CONSERVATIVE, and this is the reason to trust a pass and not over-read a fail.** At a
+relative equilibrium `T` and `s` are degenerate (M1's rank deficiency of 2), so P's Jacobian is
+*worse* conditioned in those two directions than a genuine RPO's, where neither is degenerate.
+P therefore over-states the difficulty of the (T, s) block and matches it on amplification. A
+pass is strong evidence; a fail should be read together with control R, which tests the real
+regime exactly.
+
+**P doubles as the cap-adequacy test, and this is now part of the cap rule.** P runs at the
+**same** caps as the real attempts. If P cannot recover an exact planted solution at those
+caps, the caps are too small and a `no` at G1 would be an artefact of the budget rather than a
+fact about orbits. Measured while setting them: P recovers at `max_gmres=120` (residual
+`195 → 2.16e-5` in 19 epochs, state error `1e-3 → 3.1e-6`, stopped only by `max_newton_hit`)
+but **collapses at `max_gmres=50`** (`trust_region_collapsed` at epoch 15). This exposed a real
+defect in the cost probe's first pass: its `p95` of ~20 Krylov dimensions was measured over
+only 3 epochs, all far from the solution where GMRES converges easily, and it **systematically
+under-states** what the hard late epochs need. Clause (a) is therefore read against P's
+measured floor, not against that `p95` alone.
+
 ## 4. What this addendum does not do
 
 It does not restate, soften or re-scope G1. It does not touch the compliant scale. It does not

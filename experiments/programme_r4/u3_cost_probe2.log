@@ -1,0 +1,2 @@
+probe DNS T=2000.0 in 331.1s (1.6553 ms/step)
+2 anchored probe seeds (COST ONLY -- T=2000 is leg 353's under-resourced scale; not evidence on G1)

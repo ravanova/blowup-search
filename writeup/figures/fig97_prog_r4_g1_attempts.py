@@ -59,11 +59,34 @@ def main():
     answer = d["gate"]["answer"]
 
     # ---- checks on the banked record -----------------------------------
-    check("gate answer is one of the two pre-committed branches",
-          answer in ("YES", "NO"), f"answer={answer}")
-    check("gate answer agrees with the per-attempt recovery flags",
-          (answer == "YES") == bool(recovered.any()),
+    # UNANSWERED is a THIRD admissible branch, added when the planted controls
+    # were wired in (addendum section 3). It is not a softening of the gate: it
+    # fires only when the controls did not fire as planted, and it is STRICTER
+    # than NO, because a NO is a resourced null that stops route 4 under section
+    # 3d and may only be recorded on an instrument shown able to say YES.
+    check("gate answer is one of the three pre-committed branches",
+          answer in ("YES", "NO", "UNANSWERED"), f"answer={answer}")
+    ctrl = d["gate"].get("controls_fired_as_planted")
+    raw = d["gate"].get("answer_without_controls")
+    check("the controls verdict is banked with the gate",
+          ctrl is not None and raw in ("YES", "NO"),
+          f"controls_fired={ctrl}, answer_without_controls={raw}")
+    check("raw answer agrees with the per-attempt recovery flags",
+          (raw == "YES") == bool(recovered.any()),
           f"n_recovered={int(recovered.sum())}")
+    check("the controls override is applied exactly as pre-registered",
+          answer == (raw if ctrl else "UNANSWERED"),
+          f"answer={answer} from raw={raw} with controls_fired={ctrl}")
+    # The controls must be able to fire in BOTH directions, so both the
+    # positive and the negative must be present and must carry their outcome.
+    cb = d.get("controls", {})
+    check("planted controls P and N both recorded with outcomes",
+          isinstance(cb.get("P"), dict) and isinstance(cb.get("N"), dict)
+          and "recovered" in cb.get("P", {}) and "recovered" in cb.get("N", {}),
+          f"P.recovered={cb.get('P', {}).get('recovered')}, "
+          f"N.recovered={cb.get('N', {}).get('recovered')} (N must be False)")
+    check("a NO is never recorded on controls that did not fire",
+          not (answer == "NO" and not ctrl))
     check("gate n_recovered matches the attempt rows",
           d["gate"]["n_recovered"] == int(recovered.sum()))
     check("every attempt carries a named Table IV anchor (Ban 2)",
