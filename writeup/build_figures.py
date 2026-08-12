@@ -368,13 +368,14 @@ P2_EVIDENCE = [
     "../experiments/p2_route_gaf_v1_sweep_evidence.py",         # fig71 -- Route-GAF v1 (leg 303), renumbered from fig68
     "../experiments/p2_route_dfre_v1_evidence.py",              # fig74 -- Route-DFRE v1 (leg 316), renumbered from fig71
     "../experiments/p2_route_tms_v1_scoping.py",                # fig79 -- Route-TMS v1 (leg 315)
-    # fig69 (Route-P2T1 v1, leg 302) is deliberately NOT registered here. Its runner emits
-    # the figure only under --figure, and it exits nonzero because its gate answers NO --
-    # a correct leg outcome, but one that would fail this rebuild. It owes a
-    # p2_route_p2t1_v1_evidence.py that redraws from the curated JSON, like items 9, 10 and
+    # fig69 (Route-P2T1 v1, leg 302) used to be deliberately absent from this list: its own
+    # runner only emits the figure under --figure and exits nonzero because its gate answers
+    # NO, which would fail an unconditional rebuild. Leg 327 wrote a standalone
+    # p2_route_p2t1_v1_evidence.py that redraws fig69 from the curated JSON alone (no
+    # re-run); it is registered below. Items 9, 10 and 13 of writeup/INDEX.md are the same
+    # class of debt and remain unregistered, reserved for a later batched follow-up leg.
+    "../experiments/p2_route_p2t1_v1_evidence.py",              # fig69 -- Route-P2T1 v1 (leg 302), evidence script by leg 327
     "../experiments/p2_route_capa_v2_audit_evidence.py",        # fig80 -- Route-CAPA v2 (leg 292)
-    # 13 of writeup/INDEX.md. Writing one is a claim-bearing choice about what to plot, so
-    # it belongs to a leg, not to integration.
     "../experiments/p2_route_fus_v1_scoping_evidence.py",       # fig77 -- Route-FUS v1 (leg 314); brief recorded fig69-fig76 as taken/reserved, so this leg took fig77
     "../experiments/p2_route_apia_v1_evidence.py",              # fig73 -- Route-APIA v1 (leg 312)
     "../experiments/p2_route_dwm_v1_evidence.py",               # fig82 -- Route-DWM v1 (leg 305)
