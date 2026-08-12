@@ -34,7 +34,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 366 | LCB5 | no |
-| B | 365 | DSSR | yes |
+| B | 368 | MRYX | yes |
 | C | 367 | E5P | yes |
 | D | 293 | JFA | no |
 <!-- FLOOR-TABLE-END -->
@@ -19990,9 +19990,30 @@ dispatched into A.** C ← **leg 367 E5P** (fresh eligible draft: verify
 canonical ordering rests on that pinning being a theorem, and no leg has
 located or derived it). Floor 2/4 (365, 367).
 
+Cycle 10cc: B/365 landed (iii) PARTIAL RESULT at bfef885 — a genuinely
+new mechanistic finding: Chae-Wolf 1610.09464v2 Theorem 1.3 (the very
+theorem PV restates, adjudicated out by 330) IS a DSS Liouville theorem
+whose proof terminates by invoking Tsai's Theorem 2 — but only after a
+compactness/degeneration argument valid ONLY as λ→1 collapses the DSS
+solution to the exact-SS ansatz; Theorem 2's machinery is applied
+UNCHANGED to the SS limit, never extended to fixed-λ>1 DSS profiles.
+**330's λ-near-1 verdict is now mechanistically EXPLAINED, not merely
+observed: the confinement is structurally required. The ansatz
+protection is LOAD-BEARING — every known DSS rigidity route degenerates
+to exact-SS before invoking Tsai, and at λ≫1 no known theorem reaches
+the object.** Stop-packet part 3 completes at that strength
+(orchestrator: append the note to item 5). The screen flag is ruled: NO
+new ledger entry now — 365's own analysis shows a hypothetical
+Chae-Wolf/PV entry reduces to 330's λ-threshold check, which becomes
+operational only if route 4 unfreezes; RECORDED as a stop-ruling-gated
+enhancement, not dispatched. 2006.15776 (Morrey-axis generalization,
+exact-SS only) ruled out at abstract depth — its full-text
+screen-completeness question is B's refill: **leg 368 MRYX**. Floor 2/4
+(367, 368).
+
 **Reserve queue: 8 undispatched legs (298, 299, 310, 325, 231, 232, 233,
 234).** Immediately dispatchable: **2** (298 CORRX, 299 TESTA). Next
-fresh leg number: **368.**
+fresh leg number: **369.**
 
 Nothing in this update lifts a ban. A screen matching its adjudicated
 mathematics, two tooling fixes verified on both branches, and an honest
@@ -20127,3 +20148,107 @@ CORRX, 299 TESTA.
 Nothing in this update lifts a ban. A confirmation confirmed, a citation
 corrected to its true source, and an asserted theorem sent to be earned;
 no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10cc) — 365 (iii) ABSORBED: THE ANSATZ
+PROTECTION IS LOAD-BEARING, AND 330's λ-CONFINEMENT IS NOW MECHANISTIC;
+THE STOP PACKET's PART 3 COMPLETES AT FULL STRENGTH; B ← LEG 368 MRYX
+
+Written from the same detached lineage, resynced to origin/main =
+bfef885.
+
+### 365 DSSR — (iii) PARTIAL RESULT, absorbed at full strength
+
+The first close read of Chae-Wolf's primary text in this repository
+(every prior mention traveled through PV's or Bradshaw-Tsai's
+restatements) found the mechanism the dispatch asked about: Theorem 1.3
+IS a DSS rigidity theorem ending in Tsai's Theorem 2 — satisfying the
+gate's first disjunct — but the route runs through a
+compactness/degeneration argument (λ_j → 1) that collapses the DSS
+object to the exact-SS ansatz BEFORE Tsai's machinery is invoked,
+unchanged, on the limit ("Thus, in position to apply Tsai's result [15,
+Theorem 2], u [is] identically zero" — quoted verbatim). No direct
+extension of the local-energy machinery to fixed-λ>1 DSS profiles
+exists in the located literature. Consequences, each ruled:
+1. **330's verdict upgrades from empirical to mechanistic:** the
+   λ-near-1 confinement is not an artifact of PV's write-up — it is
+   structurally required by the only known proof route. Banked at that
+   strength.
+2. **The stop packet's part 3 completes:** the ansatz protection the
+   DSS-at-λ≫1 search relies on is LOAD-BEARING — every known rigidity
+   route degenerates to exact-SS first, and at λ≫1 no known theorem
+   reaches the object. Orchestrator: append this to NEEDS-YOU item 5;
+   it is the honest completion of the clause 359 opened.
+3. **The screen flag is ruled — no new ledger entry now:** 365's own
+   analysis shows a hypothetical Chae-Wolf/PV entry reduces to leg
+   330's λ-threshold check (the proof's confinement means there is
+   nothing else to encode), and that check is operational only when
+   candidates with measured λ exist — i.e., only if the user unfreezes
+   route 4. Recorded as a stop-ruling-gated enhancement beside B6/B8's
+   freeze; nothing dispatched.
+4. The instrument-scope limits (two 429s; the abstract-depth read of
+   2006.15776) are banked as recorded — and the one located adjacent
+   paper becomes B's refill below rather than an untested assumption.
+
+### Refill — B ← leg 368 MRYX, with the reasons stated
+
+The floor needs a second eligible live leg, and 365's own net supplies
+the genuine question: 2006.15776 (Jiu-Wang-Wei) generalizes NRS/Tsai's
+Theorem 1 on a DIFFERENT axis (Morrey spaces, exact-SS only) and was
+ruled out for DSS at abstract depth — correct for 365's gate, but it
+leaves a screen-completeness question unasked: could an exact-SS
+candidate evade the ledger's T1 (L³) and T2 (decay) tests while the
+Morrey generalization catches it?
+
+```
+### 368 — ROUTE-MRYX: DOES THE MORREY-AXIS GENERALIZATION WIDEN THE
+EXACT-SS EXCLUSION CLASS BEYOND THE SCREEN's ENCODED TESTS? (365's
+located-adjacent paper, adjudicated at full text instead of abstract
+depth)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** The screen's exact-SS exclusions are encoded as T1 (L³
+membership, attributed per 364/366 to NRS 1996) and T2 (local-energy +
+U→0 decay, Tsai). 2006.15776 generalizes the T1 route to Morrey spaces,
+exact-SS only. Read the full text and check its hypotheses against the
+screen's encoded tests: does any exact-SS profile class pass BOTH
+encoded tests yet fall to the Morrey criterion (WIDENS — a candidate
+gap in the screen), or is the Morrey class contained in what T1/T2
+already exclude on the screen's own decay assumptions (DUPLICATE /
+NOT-APPLICABLE, clause quoted)?
+**Gate.** A definite classification — WIDENS (the evading profile class
+characterized, the Morrey clause quoted; flagged to the screen's owner,
+never edited in), CONTAINED (the containment argument documented with
+clauses quoted), or NOT-APPLICABLE (the failing hypothesis named) — at
+FULL-TEXT depth, with 365's abstract-depth ruling either confirmed or
+corrected by pointer?
+  yes (any definite class) -> Bank; the screen's exclusion completeness
+        is settled on this axis.
+  no  -> The text underdetermines after a full read: quote the
+        candidate clauses; banked as exactly that.
+**Territory.** writeup/data/p2_route_mryx_v1.json, writeup/novelty/
+leg_368.md, experiments/journal/leg_368.md. Reads 365/364/359's banked
+records and the paper's text; edits nothing. No figure.
+**Difficulty.** standard
+**Preconditions:** Leg 365 landed (TRUE, bfef885). (§3a rule 4:
+rigidity-ledger-adjacent — pre-authorised as written; reads and
+reports, lifts nothing.)
+```
+
+**Floor 2/4 (367, 368).** FLOOR-TABLE synced (B 365→368).
+
+### Standing state
+
+A/366 LCB5; C/367 E5P; D/293 JFA. Route 4: stopped; the stop packet
+(item 5) gains 365's part-3 completion. With the user: seven items
+including the exhaustion note. Next vacancies: 298 CORRX, 299 TESTA.
+
+**Reserve queue: 8 undispatched legs (298, 299, 310, 325, 231, 232,
+233, 234).** Immediately dispatchable: **2**. Next fresh leg number:
+**369.**
+
+Nothing in this update lifts a ban. A confinement explained is a
+sharper map of why the object is unreached — which cuts both ways and
+is stated both ways in the packet; no L1-L4 link moved; Clay stays
+~0.05%.
