@@ -1,21 +1,34 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-12 — same orchestrator session, cycle 10w+. Since the
-cycle-10h header above was last written, legs 352, 324, 322, 351, 335, 327,
-287, 353, 354, 356, 357, 358, 359, 360 have all landed (cycles 10l-10w),
-and the DSSP route (bricks B1-B4, B7) plus the ROUTE-4 STOP fired on brick
-B5's NO — leg 353 failed to recover any of 5 published RPOs on a known 2-D
-object, the plan's own pre-committed branch stopped route 4 (B6/B8 frozen)
-before any 3-D cost. The stop packet is now COMPLETE (legs 358's costed
-retry + 359's L³-boundary adjudication both landed) and is added below as a
-NEW NEEDS-YOU item (item 5). Current roster: A/361 (LCB4, light correction
-batch), B and C open for refill (DM ruling on cycle 10x pending), D/355
-(LCB3, still running). `origin/main` at `a048de7`, merge gate green. Full
-detail in `PROGRESS.md` (git-ignored, more current), `reports/ORCH_STATE.md`
-(full handoff detail and institutional memory), and `experiments/JOURNAL.md`
-(the durable ledger). Note: items 1-4 below are unchanged from cycle 10h and
-have not been re-verified against current `origin/main` state this pass —
-they remain open pending your ruling as previously described.*
+*Refreshed 2026-08-12 — same orchestrator session, cycle 10aa+. Since the
+cycle-10w header above was last written, legs 361, 355, 363, 362, 364, 229
+have all landed (cycles 10x-10aa), closing out the PVDS/CKNQ rigidity-ledger
+thread (leg 360's non-operational verdict on Pineau-Vicol's derived screen
+confirmed at its own contingency by 363 — the two blocking CKN/Harnack
+constants are NO-EXPLICIT-VALUE-LOCATED in the obtainable literature),
+extending the NRS/Tsai ledger to Theorem 2's local-energy route plus an
+SS/DSS ansatz classifier (leg 362, all three required controls passed), and
+flagging a citation/attribution discrepancy in that same ledger's T1 clause
+(leg 364 — the code's operational L³ test is mathematically correct; only
+the deciding-clause text cites the wrong Tsai theorem for the case it's
+attached to). Leg 229 independently re-confirmed leg 226's profile_newton.py
+repair against Route-D v11's own inputs (relative error 0.0 on all nine
+headline comparisons, a genuinely independent second method after leg 236's
+dependency-trace exclusion) — no correction applied under its own authority,
+per its gate's own escalation clause; nothing here changes any banked
+headline. Added below as a NEW NEEDS-YOU item (item 6): the DM's own
+observation that the reserve's eligible research work is now largely
+exhausted — most refills this window required freshly-drafted floor-eligible
+legs because every standing research direction is waiting on one of the
+open decisions below. Current roster: A/229 (PNRV, landed gate YES, audit clean, DM report pending
+as of this write), B/365 (DSSR, running), C/364 (NRSV, landed, absorbed),
+D/293 (JFA, running).
+`origin/main` at `bb5bad9`, merge gate green. Full detail in `PROGRESS.md`
+(git-ignored, more current), `reports/ORCH_STATE.md` (full handoff detail
+and institutional memory), and `experiments/JOURNAL.md` (the durable
+ledger). Note: items 1-5 below are unchanged from cycle 10w and have not
+been re-verified against current `origin/main` state this pass — they
+remain open pending your ruling as previously described.*
 
 ## ⚠ NEEDS YOU
 
@@ -268,6 +281,34 @@ they remain open pending your ruling as previously described.*
    `writeup/data/p2_route_l3bd_v1.json` (leg 359, boundary adjudication),
    `writeup/data/p2_route_dsspb7_v1.json` (leg 357, the screen). Landed
    `e9c3ae8` (353), `3ea215c` (358), `a048de7` (359), `3f614d7` (357).
+
+6. **The reserve's eligible research work is largely exhausted, pending your
+   rulings on items above.** Surfaced by the Decision Maker at cycle 10aa,
+   carried here verbatim in substance:
+   - Seven of the last nine slot refills this run required a FRESH
+     floor-eligible leg to be drafted from scratch, rather than pulling one
+     from a pre-existing reserve queue — because every standing research
+     direction currently in flight is blocked on one of the open decisions
+     above: the route-4 stop (item 5), the POCP (ii) spend decision, the
+     seed-creation option, the C4/escalation-#3 identity question, the leg
+     313 ban-wording question, and the leg 320 packet.
+   - **This is not a quality problem** — each fresh draft has been a
+     genuine, load-bearing measurement (e.g. leg 365's DSSR search for a
+     DSS extension of Tsai's local-energy route, leg 364's NRS/Tsai
+     provenance check), not busywork invented to fill a slot. But the well
+     is visibly shallower each cycle, and the DM's own assessment is
+     blunt: continuing to draft fresh work indefinitely, rather than
+     naming the exhaustion, would eventually mean inventing work to look
+     occupied. The DM prefers saying so now.
+   - **What this means practically:** the four-slot contract can keep
+     running on freshly-drafted literature/verification/audit-class legs
+     for a while longer (the reserve still has 8 undispatched legs, 2
+     immediately dispatchable without further drafting), but the
+     PROGRAMME's forward motion — as opposed to its housekeeping — is
+     now substantially gated on the decisions listed above, not on
+     leg-dispatch bandwidth. Ruling on any of items 1-5 above is likely to
+     re-open several fresh research directions at once, not just resolve
+     that one item.
 
 (Older NEEDS-YOU items — leg 297's anchor-JSON fix, leg 280's sign-off, the
 Phase-1 construction-decision packet — have since been resolved/absorbed in
