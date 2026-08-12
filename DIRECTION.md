@@ -36,7 +36,7 @@ prose as before.
 | A | 335 | S1GR | no |
 | B | 349 | GAFV | yes |
 | C | 351 | DSSP-B3 | yes |
-| D | 346 | CAPR2 | no |
+| D | 345 | PUB0C | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -17419,6 +17419,22 @@ its magnitude and mechanism?
 **Preconditions:** None.
 ```
 
+**[CORRECTED 2026-08-12, cycle 10j, on leg 346's landed record (b2c4334) —
+the spec above is dispatched text and stands unedited; its framing carried a
+DM selection error, corrected HERE: (GAP-346-A) Breden-Chu's Theorem 42 was
+ALREADY independently reproduced twice in this repository — leg 256 (own
+module, own Newton-solved approximation, gate YES) and verify_256.md
+(from-scratch re-derivation + the authors' own package, CONFIRMED/no gap).
+**Leg 256 holds the lane's first-confirmation credit for this object; leg
+346 is the THIRD independent confirmation, via a genuinely distinct
+paper-constants-only route (agreement to 10+ significant figures), plus the
+released-notebook defect finding (proof.ipynb cell 35's hard-coded
+multiplier 1.0430x stale against the paper's own printed constants).** The
+selection error was the DM's: the lane-entry pick did not grep the repo's
+own reproduction record first. Practice adopted at cycle 10j: every future
+lane-entry selection verifies the target is not already reproduced in-repo
+BEFORE drafting.]**
+
 ```
 ### 347 — ROUTE-DSSC: SCREEN THE 2509.14185 LINE's DISCOVERED OBJECTS
 AGAINST 313's SCREEN + THE CHEAP-ENTRANCE BAN (342's follow-on: a candidate
@@ -18144,11 +18160,89 @@ A/335 mid-diagnosis (watched, no stall); B/349 GAFV; C/351 DSSP-B3
 (ii) decision item, C4/escalation-#3, 313 packet + ban-wording, 320 packet.
 Next vacancy: 345 PUB0C.
 
-**Reserve queue: 16 undispatched legs (345, 352, 324, 322, 327, 287, 229,
+Cycle 10j: D/346 landed CONFIRMS at b2c4334 — as the THIRD independent
+confirmation of Breden-Chu Theorem 42 (paper-constants-only route, 10+
+sig-fig agreement with 256/verify_256; source re-pinned byte-identical a
+third time), NOT the first: the DM's selection missed two in-repo
+reproductions, caught by the leg's own novelty pass (GAP-346-A, corrected
+by marker beside the spec; leg 256 holds first credit). The genuine new
+find is banked: the authors' RELEASED notebook hard-codes a validation
+multiplier 1.0430x stale against the paper's own printed constants — an
+artifact defect, not a paper gap; recorded, no outreach per standing rule.
+Selection practice adopted: lane-entry picks grep the repo's own
+reproduction record BEFORE drafting. D ← 345 PUB0C (rank 1, precondition
+fired at 328's landing). Floor 2/4 (349, 351).
+
+**Reserve queue: 15 undispatched legs (352, 324, 322, 327, 287, 229,
 293, 298, 299, 310, 325, 231, 232, 233, 234).** Immediately dispatchable:
-**10** (rank order: 345, 352, 324, 322, 327, 287, 229, 293, 298, 299).
+**9** (rank order: 352, 324, 322, 327, 287, 229, 293, 298, 299).
 Next fresh leg number: **353.**
 
 Nothing in this update lifts a ban. Closure #5's completion narrows a claim
 to its measured width and files the paperwork — the opposite of movement;
 no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10j) — 346 CONFIRMS ABSORBED AS THE THIRD
+CONFIRMATION, NOT THE FIRST (THE DM's SELECTION ERROR OWNED AND CORRECTED:
+LEG 256 HOLDS FIRST CREDIT); THE RELEASED-NOTEBOOK DEFECT BANKED; SELECTION
+PRACTICE ADOPTED; D ← 345 PUB0C
+
+Written from the same detached lineage, resynced to origin/main = b2c4334.
+
+### 346 CAPR2 — confirms, absorbed at full strength, with the record
+corrected where the error actually lived
+
+The leg did everything right: the mandatory novelty pass found, BEFORE any
+construction, that Theorem 42 was already reproduced twice in this
+repository (leg 256; verify_256.md), pivoted away from a duplicate heavy
+rebuild, and banked what was genuinely new — a THIRD confirmation via a
+route neither prior effort used (paper-constants-only arithmetic, no
+imported code: P(1e-3) = -6.7116e-06 < 0, margin 1.01144x, delta-bar rel.
+err 8.50e-09, all agreeing with both prior records to 10+ significant
+figures; the source re-pinned byte-identical a third time), PLUS a named
+defect in the authors' released artifact: proof.ipynb cell 35 (pinned
+commit 7acaac71) hard-codes a validation multiplier 1.0430x short of what
+the paper's own printed constants require — an unupdated constant in the
+released notebook, explicitly NOT a gap in the paper or the theorem.
+Recorded; no outreach, per the standing rule.
+
+**The error was the DM's, and the correction sits where the error lived:**
+the cycle-10 draft's yes-branch called this "the lane's first full
+confirmation of a fluid-adjacent Grade-A object" — false when written; leg
+256 held that credit already, twice over. GAP-346-A is corrected by marker
+beside the dispatched spec (gate text unedited); the marker names the
+mechanism (the lane-entry selection never grepped the repo's own
+reproduction record) and the fix. **Practice adopted: every future
+lane-entry selection verifies the target is not already reproduced in-repo
+BEFORE drafting** — the same class of check the novelty pass performs, done
+one step earlier, by the selector.
+
+### Refill — slot D ← 345 PUB0C (rank 1, precondition fired)
+
+Spec at cycle 10, unchanged: assemble the §0c census-spine section from
+banked records at measured width, the constraint checklist verified
+clause-by-clause (317 cited not claimed; 202/237 as known methodology;
+closures #5 (§21) and #6 (§17) carried — both now in the register; no count
+standing in for a named realization). Standard; record work, not
+floor-eligible. Territory disjoint from A/B/C — checked. **Floor 2/4 (349,
+351) — §3b's minimum.** FLOOR-TABLE synced (D 346→345).
+
+### Standing state
+
+A/335 mid-diagnosis (its own estimate: 35-40 minutes to
+p2_route_s1gr_v1.json — the first bounded ETA; accepted); B/349 GAFV;
+C/351 DSSP-B3 (critical path). With the user: cycle-10 packet, POCP (ii)
+item, C4/escalation-#3, 313 packet + ban-wording, 320 packet. Next
+vacancy: 352 LCB2.
+
+**Reserve queue: 15 undispatched legs (352, 324, 322, 327, 287, 229, 293,
+298, 299, 310, 325, 231, 232, 233, 234).** Immediately dispatchable: **9**.
+Next fresh leg number: **353.**
+
+Nothing in this update lifts a ban. A third confirmation tightens a banked
+reproduction; a corrected credit line is record hygiene pointing at the
+DM's own miss; the notebook defect is a fact about a released artifact.
+No L1-L4 link moved; Clay stays ~0.05%.
