@@ -1,0 +1,703 @@
+{
+ "leg": 384,
+ "route": "COBV",
+ "what": "CLAY_OBLIGATIONS.md's remaining reviewer-read clauses, checked mechanically against leg 381's banked check_D verdicts, against §2's four named landed records, and against the Clay Institute's own published prize rules",
+ "ceiling": "TIER 2. No link of the L1->L4 chain moved. CLAY_OBLIGATIONS §6's two no-method obligations stay OPEN. Clay stays ~0.05%.",
+ "does_not": [
+  "edits no obligations file (CLAY_OBLIGATIONS.md read-only)",
+  "writes no leg-381 artifact (p2_route_cloc_v1.json read, never written)",
+  "edits no solver module (solver/dssp_screen.py imported and EXECUTED, never modified)",
+  "performs no outreach of any kind",
+  "repairs nothing: every discrepancy is routed to integration as text"
+ ],
+ "landed_edit_under_test": "a962e4a (merged in d65419c)",
+ "source_of_truth_item_i": "writeup/data/p2_route_cloc_v1.json (leg 381, 7aecf78) -- READ ONLY",
+ "document_sha256": "f47a73ac27903d79f63435ba8f4726245059e0c09f931e15cb9c0ed7a2923bde",
+ "document_bytes": 15353,
+ "clay_rules_fetch": {
+  "page_url": "https://www.claymath.org/millennium-problems/rules/",
+  "pdf_url": "https://www.claymath.org/wp-content/uploads/2022/03/millennium_prize_rules_0.pdf",
+  "attempts": [
+   {
+    "target": "rules_page_html",
+    "url": "https://www.claymath.org/millennium-problems/rules/",
+    "http_status": 200,
+    "bytes": 79319,
+    "sha256": "0a6f68d57597b06998c752f182be2fdd319d469e36fe9de492f7333ed3ad8c8e",
+    "extracted_chars": 4040
+   },
+   {
+    "target": "rules_pdf",
+    "url": "https://www.claymath.org/wp-content/uploads/2022/03/millennium_prize_rules_0.pdf",
+    "http_status": 200,
+    "bytes": 43263,
+    "sha256": "9b5003745c0ae7268dc7769f83e1c61eaca674f28631f1df2cd8400976640b2a",
+    "cached_at": "Papers/clay_millennium_prize_rules_2018.pdf (gitignored, never committed)",
+    "pdftotext_returncode": 0,
+    "extracted_chars": 16664
+   }
+  ],
+  "reachable": true,
+  "refusal_verbatim": null,
+  "http_status": 200,
+  "page_text": " Rules for the Millennium Prize Problems - Clay Mathematics Institute Search Clay Mathematics Institute Search Clay Mathematics Institute About About About History Principal Activities Who’s Who CMI Logo Policies Programs &#038; Awards Programs & Awards Programs & Awards Funded programs Fellowship Nominations Clay Research Award Dissemination Award People The Millennium Prize Problems The Millennium Prize Problems The Millennium Prize Problems Birch and Swinnerton-Dyer Conjecture Hodge Conjecture Navier-Stokes Equation P vs NP Poincaré Conjecture Riemann Hypothesis Yang-Mills &#038; the Mass Gap Rules for the Millennium Prize Problems Online resources Online resources Online resources Books Video Library Lecture notes Collections Collections Collections Euclid&#8217;s Elements Ada Lovelace’s Mathematical Papers Collected Works of James G. Arthur Klein Protokolle Notes of the talks at the I.M.Gelfand Seminar Quillen Notebooks Riemann’s 1859 Manuscript Events News --> Home — The Millennium Prize Problems — Rules for the Millennium Prize Problems Rules for the Millennium Prize Problems The revised&nbsp; rules for the Millennium Prize Problems &nbsp;were adopted by the Board of Directors of the Clay Mathematics Institute on 26 September, 2018.&nbsp; Please read this document carefully before contacting CMI about a proposed solution.&nbsp; In particular, please note that: CMI does not accept direct submission of proposed solutions. The document is a complete statement of the rules and procedures: CMI will not offer any further guidance or advice. Before CMI will consider a proposed solution, all three of the following conditions must be satisfied: (i) the proposed solution must be published in a Qualifying Outlet (see §6),&nbsp; and&nbsp; (ii) at least two years must have passed since publication,&nbsp; and&nbsp; (iii) the proposed solution must have received general acceptance in the global mathematics community Privacy Policy Contact CMI &copy; 2026 Clay Mathematics Institute Site by One ",
+  "rules_text_chars": 16664,
+  "rules_text_sha256": "e7218df6e9fd1fa8f1e90701b94a1da65de407f4ccd4b275b71c8023386cdb48"
+ },
+ "checks_registered": 23,
+ "checks_run": 23,
+ "counts": {
+  "MATCH": 17,
+  "MISMATCH": 6,
+  "UNVERIFIED": 0
+ },
+ "instrument_control": {
+  "why": "the headline is a mismatch count, and a count of zero is the same failure shape as the fabricated zero found in another leg's instrument this cycle: a variable initialised to 0.0 and never written. So every non-UNVERIFIED check carries its own targeted plant, by name.",
+  "controls_run": 23,
+  "controls_fired": 23,
+  "controls_failed": [],
+  "corrupt_plants": [
+   "I1",
+   "I2",
+   "I3",
+   "I4",
+   "I5",
+   "I6",
+   "I7",
+   "I9",
+   "I11",
+   "I12",
+   "I13",
+   "I14",
+   "II1",
+   "II2",
+   "II3",
+   "II4",
+   "III2"
+  ],
+  "repair_plants": [
+   "I8",
+   "I10",
+   "I15",
+   "III1",
+   "III3",
+   "III4"
+  ],
+  "reading": "a MATCH is only reported for a check whose corrupt-plant made it read MISMATCH; a MISMATCH is only reported for a check whose repair-plant made it read MATCH. Both directions are exercised per row."
+ },
+ "checks": [
+  {
+   "id": "I1",
+   "item": "(i)",
+   "claim": "'with f = 0' is EXCISED from the 'target, as specified' paragraph",
+   "verdict": "MATCH",
+   "detail": "excised: 0 occurrences of an 'f = 0' clause in the target paragraph, against JSON verdict REFUTED",
+   "doc_occurrences": 0,
+   "record_verdict": "REFUTED",
+   "record_primary_text": "(C) permits 'a smooth f (x, t) on R3 × [0, ∞), satisfying (4), (5)'. 'Take f (x, t) to be identically zero' appears in (A) and (B) -- the two EXISTENCE statements -- and in neither breakdown statement.",
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "the REFUTED clause survives in the target paragraph"
+   }
+  },
+  {
+   "id": "I2",
+   "item": "(i)",
+   "claim": "the REFUTED verdict on 'f = 0' is recorded in the landed ledger block",
+   "verdict": "MATCH",
+   "detail": "REFUTED recorded, with the (A)/(B)-existence reason the JSON gives",
+   "record_verdict": "REFUTED",
+   "record_primary_text": "(C) permits 'a smooth f (x, t) on R3 × [0, ∞), satisfying (4), (5)'. 'Take f (x, t) to be identically zero' appears in (A) and (B) -- the two EXISTENCE statements -- and in neither breakdown statement.",
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "the ledger block does not carry the REFUTED f-clause"
+   }
+  },
+  {
+   "id": "I3",
+   "item": "(i)",
+   "claim": "the 4 CONFIRMED / 1 CORRECTED / 1 REFUTED counts block",
+   "verdict": "MATCH",
+   "detail": "document counts == JSON counts field == counts recomputed from the 6 ledger rows",
+   "doc_counts": {
+    "confirmed": 4,
+    "corrected": 1,
+    "refuted": 1
+   },
+   "json_counts_field": {
+    "confirmed": 4,
+    "corrected": 1,
+    "refuted": 1
+   },
+   "recomputed_from_ledger_rows": {
+    "confirmed": 4,
+    "corrected": 1,
+    "refuted": 1
+   },
+   "ledger_rows_seen": 6,
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "counts disagree"
+   }
+  },
+  {
+   "id": "I4",
+   "item": "(i)",
+   "claim": "the (b) -> (C) labelling fix",
+   "verdict": "MATCH",
+   "detail": "(C)-not-(b) stated and scoped over the whole document",
+   "record_verdict": "CORRECTED (labelling)",
+   "record_primary_text": "The breakdown statement on R3 is labelled (C); (D) is the torus breakdown; (B) is EXISTENCE on R3/Z3, not a breakdown statement at all.",
+   "occurrences_of_direction_b_in_doc": 1,
+   "note": "the sole remaining 'direction (b)' occurrence is the scoping sentence itself",
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "the document does not state the (b) -> (C) correction"
+   }
+  },
+  {
+   "id": "I5",
+   "item": "(i)",
+   "claim": "the not-a-shortcut clause",
+   "verdict": "MATCH",
+   "detail": "not-a-shortcut clause present and resting on (4),(5) as the JSON does",
+   "record_why": "The obligation is WEAKER than the document states: a breakdown candidate may carry a forcing, provided f is smooth and satisfies (5), i.e. decays faster than any polynomial in (1+|x|+t) with all x- and t-derivatives. This is a real relaxation and it is the correction most likely to change how a build is scoped. It is NOT a shortcut -- see 'f_allowance_is_not_a_shortcut' in the payload.",
+   "record_payload_chars": 586,
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "the document does not carry the not-a-shortcut clause"
+   }
+  },
+  {
+   "id": "I6",
+   "item": "(i)",
+   "claim": "§4 alone carries the VERIFIED header",
+   "verdict": "MATCH",
+   "detail": "exactly 1 VERIFIED header, inside §4, with the other sections scoped DRAFT/UNVERIFIED, against JSON gate answer",
+   "occurrences": 1,
+   "gate_answer": "YES, WITH ONE REFUTED SIDE-CLAUSE AND ONE REPAIRED DERIVATION STEP",
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "expected exactly one VERIFIED header in the document"
+   }
+  },
+  {
+   "id": "I7",
+   "item": "(i)",
+   "claim": "§4 amendment 1 (the DSS case costs nothing extra): every number",
+   "verdict": "MATCH",
+   "detail": "all 9 amendment-1 literals reproduce their JSON values at the document's own printed precision",
+   "rows_compared": 9,
+   "rows": [
+    {
+     "doc_literal": "0.499999942",
+     "record_key": "DSS_exponent",
+     "record_value": 0.49999994221049004,
+     "present_in_doc": true,
+     "agrees_at_doc_precision": true
+    },
+    {
+     "doc_literal": "0.500000000",
+     "record_key": "SS_exponent",
+     "record_value": 0.49999999999999994,
+     "present_in_doc": true,
+     "agrees_at_doc_precision": true
+    },
+    {
+     "doc_literal": "0.9999998844",
+     "record_key": "DSS_over_SS_exponent_ratio",
+     "record_value": 0.9999998844209802,
+     "present_in_doc": true,
+     "agrees_at_doc_precision": true
+    },
+    {
+     "doc_literal": "2.99",
+     "record_key": "DSS_G_oscillation_relative_amplitude",
+     "record_value": 2.986129041866346,
+     "present_in_doc": true,
+     "agrees_at_doc_precision": true
+    },
+    {
+     "doc_literal": "0.4876",
+     "record_key": "DSS_exponent_naive_fit_modulation_DROPPED",
+     "record_value": 0.48762826200326764,
+     "present_in_doc": true,
+     "agrees_at_doc_precision": true
+    },
+    {
+     "doc_literal": "2.47",
+     "record_key": "naive_fit_bias_percent",
+     "record_value": 2.4743475993464714,
+     "present_in_doc": true,
+     "agrees_at_doc_precision": true
+    },
+    {
+     "doc_literal": "1.0574",
+     "record_key": "DSS_residual_best_fit_period_in_s",
+     "record_value": 1.0574359787166934,
+     "present_in_doc": true,
+     "agrees_at_doc_precision": true
+    },
+    {
+     "doc_literal": "1.0613",
+     "record_key": "predicted_period_2_log_lambda",
+     "record_value": 1.0612565021243408,
+     "present_in_doc": true,
+     "agrees_at_doc_precision": true
+    },
+    {
+     "doc_literal": "0.36",
+     "record_key": "100 * period_relative_error",
+     "record_value": 0.3599999999999768,
+     "present_in_doc": true,
+     "agrees_at_doc_precision": true
+    }
+   ],
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "amendment-1 literals disagree with the JSON"
+   }
+  },
+  {
+   "id": "I8",
+   "item": "(i)",
+   "claim": "§4 amendment 2 (the truncated-law repair): 'verified to 2.6e-5'",
+   "verdict": "MISMATCH",
+   "detail": "the document quotes a tolerance that is NOT the JSON's verification tolerance: `2.6e-5` is the abs_error of the SINGLE BEST row (alpha=0.8), while the JSON's own max_abs_error over the 4 banked rows is 0.0256893924479335 at alpha=1.4 -- larger by a factor 988.1. At alpha = 1, the exponent §4 is actually about, the abs_error is 0.000264923221459137.",
+   "doc_literal": "2.6e-5",
+   "doc_literal_value": 2.6e-05,
+   "record_max_abs_error": 0.0256893924479335,
+   "record_row_matching_doc_literal": {
+    "alpha": 0.8,
+    "abs_error": 2.577133230399764e-05
+   },
+   "record_row_at_alpha_1": {
+    "alpha": 1.0,
+    "abs_error": 0.000264923221459137
+   },
+   "ratio_max_over_doc": 988.05355568975,
+   "rows": [
+    {
+     "alpha": 0.8,
+     "abs_error": 2.577133230399764e-05
+    },
+    {
+     "alpha": 1.0,
+     "abs_error": 0.000264923221459137
+    },
+    {
+     "alpha": 1.2,
+     "abs_error": 0.002866962841209353
+    },
+    {
+     "alpha": 1.4,
+     "abs_error": 0.0256893924479335
+    }
+   ],
+   "control": {
+    "plant_kind": "repair",
+    "planted": true,
+    "clean_verdict": "MISMATCH",
+    "planted_verdict": "MATCH",
+    "expected_planted_verdict": "MATCH",
+    "fired": true,
+    "planted_detail": "the document's tolerance is the JSON's max_abs_error"
+   }
+  },
+  {
+   "id": "I9",
+   "item": "(i)",
+   "claim": "§4 amendment 3 (the gap is measured): 1.5x deficit and -0.00026",
+   "verdict": "MATCH",
+   "detail": "deficit 0.5, ratio 1.5x, L^2 threshold 3/2, Type-I alpha 1, and the -0.00026 fixed-ball exponent at alpha=1 all reproduce",
+   "rows_compared": 5,
+   "record_fixed_ball_exponent_at_alpha_1": -0.000264923221459137,
+   "record_predicted": 0.0,
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "threshold literals disagree"
+   }
+  },
+  {
+   "id": "I10",
+   "item": "(i)",
+   "claim": "the priced cutoff bill: 5 shrinking exponents + the L^3 tail",
+   "verdict": "MISMATCH",
+   "detail": "the 326.875-per-decade figure is the increment of the CUBE of the critical tail (JSON tail_L3_cubed: [653.7456, 1307.496, 1961.2465, 2614.9969, 3268.7473]), not of the L^3 NORM itself (JSON tail_L3_norm: [8.679, 10.9349, 12.5173, 13.7771, 14.8409], which grows 8.679 -> 14.841 over the same 5 rows). The document says 'the critical `L3` tail grows 326.875 per decade of window', dropping the JSON reading's own words 'the cube of'.",
+   "record_reading": "the cube of the critical-norm tail grows by a CONSTANT amount per decade of window, i.e. logarithmically without bound: at the banked Type-I exponent the discarded far field is not small in L^3 no matter how far out the cutoff is put.",
+   "record_tail_L3_cubed": [
+    653.7455950041326,
+    1307.496023106551,
+    1961.2464516922942,
+    2614.9968802780904,
+    3268.747308863887
+   ],
+   "record_tail_L3_norm": [
+    8.678998071314405,
+    10.93486583547042,
+    12.517301804366227,
+    13.777076133292976,
+    14.840907203374448
+   ],
+   "record_increment_per_decade": [
+    326.87521405120924,
+    326.87521429287153,
+    326.87521429289814,
+    326.87521429289836
+   ],
+   "control": {
+    "plant_kind": "repair",
+    "planted": true,
+    "clean_verdict": "MISMATCH",
+    "planted_verdict": "MATCH",
+    "expected_planted_verdict": "MATCH",
+    "fired": true,
+    "planted_detail": "all 4 shrinking exponents, the <=0.1% claim, and the L^3 tail growth reproduce"
+   }
+  },
+  {
+   "id": "I11",
+   "item": "(i)",
+   "claim": "the §4-stays-open-until-DTOL rule, and its provenance",
+   "verdict": "MATCH",
+   "detail": "the rule, the composed constraint delta < (alpha_centre-1)/0.434, delta* up to 3.35 and the 0.8686*delta enclosure width are all present",
+   "provenance": "leg 382 (DEXC) + the user's 2026-08-11 ruling; these four numbers are NOT in p2_route_cloc_v1.json and are therefore OUTSIDE this leg's comparison source -- recorded as unchecked-here, not as verified",
+   "numbers_found_in_cloc_json": false,
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "the DTOL rule is not fully stated"
+   }
+  },
+  {
+   "id": "I12",
+   "item": "(i)",
+   "claim": "§7 is marked STILL UNCHECKED",
+   "verdict": "MATCH",
+   "detail": "§7 marked STILL UNCHECKED, with leg 381's own scope recorded; the JSON's clay_source is indeed the problem-statement PDF, not the rules",
+   "clay_source": "Charles L. Fefferman, 'Existence and smoothness of the Navier-Stokes equation', official Clay Mathematics Institute problem description, https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf (TeX creation date 2006-08-04, last modified 2013-02-05); fetched and its text layer extracted by this leg, 2026-08-12",
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "§7 is not marked STILL UNCHECKED"
+   }
+  },
+  {
+   "id": "I13",
+   "item": "(i)",
+   "claim": "§8 ask #1 is recorded SATISFIED",
+   "verdict": "MATCH",
+   "detail": "ask #1 recorded SATISFIED on the POCP-is-the-only-open-route ground, with the parallel-running consequence",
+   "provenance": "user ruling 2026-08-11 + leg 348; NOT in p2_route_cloc_v1.json, so outside this leg's comparison source -- recorded as unchecked-here, not as verified",
+   "satisfied_string_in_cloc_json": false,
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "§8 ask #1 is not recorded SATISFIED"
+   }
+  },
+  {
+   "id": "I14",
+   "item": "(i)",
+   "claim": "statement (D) named-but-not-authorised, against (D)'s own text",
+   "verdict": "MATCH",
+   "detail": "(D) named, not authorised; and (D)'s OWN primary text confirms the reading -- its condition set is ['1', '10', '11', '2', '3', '8', '9'] (no (4)/(5) decay, no (7) bounded energy), against (C)'s ['1', '2', '3', '4', '5', '6', '7']",
+   "D_condition_numbers": [
+    "1",
+    "10",
+    "11",
+    "2",
+    "3",
+    "8",
+    "9"
+   ],
+   "C_condition_numbers": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7"
+   ],
+   "D_verbatim": "Breakdown of Navier-Stokes Solutions on R3/Z3. Take ν > 0 and n = 3. Then there exist a smooth, divergence-free vector field u◦ (x) on R3 and a smooth f (x, t) on R3 × [0, ∞), satisfying (8), (9), for which there exist no solutions (p, u) of (1), (2), (3), (10), (11) on R3 × [0, ∞).",
+   "record_note_chars": 459,
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "(D)'s own text does not support the document's reading"
+   }
+  },
+  {
+   "id": "I15",
+   "item": "(i)",
+   "claim": "REVERSE DIRECTION: every JSON ledger verdict is reflected in the doc",
+   "verdict": "MISMATCH",
+   "detail": "JSON verdicts absent from the landed document block",
+   "missing": [
+    {
+     "reviewer_clause": "decaying faster than any polynomial",
+     "json_verdict": "CONFIRMED AND STRENGTHENED",
+     "json_why": "The official condition binds EVERY DERIVATIVE ∂xα, not the field alone. The reviewer's phrase understates it: a cutoff construction owes faster-than-polynomial decay of all derivatives of the DATA, which a compactly-supported cutoff supplies trivially -- so this clause is confirmed and is NOT the binding difficulty.",
+     "json_primary_text": "(4): '|∂xα u◦(x)| ≤ CαK (1+|x|)^{-K} ... for any α and K'."
+    }
+   ],
+   "rows_compared": 6,
+   "control": {
+    "plant_kind": "repair",
+    "planted": true,
+    "clean_verdict": "MISMATCH",
+    "planted_verdict": "MATCH",
+    "expected_planted_verdict": "MATCH",
+    "fired": true,
+    "planted_detail": "all 6 JSON ledger verdicts are reflected in the document block"
+   }
+  },
+  {
+   "id": "II1",
+   "item": "(ii)",
+   "claim": "§2 row 1 (NRS 1996 / Tsai T1/T2) against its landed records",
+   "verdict": "MATCH",
+   "detail": "row 1 verified three ways: leg 341's landed JSON carries the claim verbatim; solver/dssp_screen.py::classify_ss_ansatz EXECUTED on a measured lambda=1.7 returns ansatz=DSS / satisfies_theorem_ansatz=False; and _ledger_nrs_tsai_three_way EXECUTED returns NOT-REACHED-BY-ANSATZ",
+   "executed_ansatz": "DSS",
+   "executed_satisfies_theorem_ansatz": false,
+   "executed_ledger_verdict": "NOT-REACHED-BY-ANSATZ",
+   "record_key_found_in_leg_341_json": "NRS/Tsai's own theorems bind exactly-backward-self-similar (SS) profiles",
+   "doc_claim_outside_hypothesis_present": true,
+   "citation_provenance": "the row cites 'legs 253, 341'. Leg 341's record is writeup/data/p2_route_algw_v1.json and carries the claim. NO writeup/data/*.json declares leg 253, so leg 253's half of the citation has no machine-readable landed record; the OPERATIVE encoding is solver/dssp_screen.py (legs 357/359/362).",
+   "leg_253_json_records_found": [],
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "the landed ansatz classifier does not put a lambda>1 DSS object outside Tsai's ansatz"
+   }
+  },
+  {
+   "id": "II2",
+   "item": "(ii)",
+   "claim": "§2 row 2 (Chae-Wolf / Pineau-Vicol) against leg 330's record",
+   "verdict": "MATCH",
+   "detail": "row 2 verified: doc literal 1.6487 == leg 330's value_lambda_ceiling 1.6487212707001282 == exp(1/2) to 1e-15; the 'sufficiently close to 1' phrase is in leg 330's record; and ledger_pineau_vicol EXECUTED against that file at lambda=1.7 returns 'OUTSIDE Pineau-Vicol's lambda window -- theorem silent'",
+   "doc_literal": "1.6487",
+   "record_value_lambda_ceiling": 1.6487212707001282,
+   "exp_half": 1.6487212707001282,
+   "record_T2_lambda_window_hard_ceiling": [
+    1.0,
+    1.6487212707001282
+   ],
+   "executed_verdict": "OUTSIDE Pineau-Vicol's lambda window -- theorem silent",
+   "executed_lambda_ceiling_from_source": 1.6487212707001282,
+   "record_gate_verdict": "PINEAU-VICOL DOES NOT REACH THE SCREENED OBJECT. The theorem is silent on NS3D-DSS-NONAXI-LAMBDA-LARGE.",
+   "chae_wolf_named_in_record": true,
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "the document's lambda ceiling disagrees with leg 330's record"
+   }
+  },
+  {
+   "id": "II3",
+   "item": "(ii)",
+   "claim": "§2 row 3 (Chae-Tsai) against leg 326's record",
+   "verdict": "MATCH",
+   "detail": "row 3 verified: leg 326's record carries exactly 4 theorems (Theorem 2.1 (the one leg 313 carried at summary level) + ['Theorem 2.2', 'Theorem 3.1', 'Theorem 3.2']), all hypothesising (1.6) = the self-similar transform of (E), the EULER equations; there is no Laplacian term, with (1.10) = the Navier-Stokes rescaled (time-dependent Leray) equation, displayed separately in subsection 1.1 'Related results for Navier-Stokes equations'; NO theorem in the paper is stated for it displayed separately; ledger_chae_tsai EXECUTED returns branch (ii) / clause verdict FAILS_HYPOTHESIS",
+   "record_theorem_count": 4,
+   "record_all_theorems_hypothesise": "(1.6)",
+   "record_equation_1_6_is": "the self-similar transform of (E), the EULER equations; there is no Laplacian term",
+   "record_equation_1_10_is": "the Navier-Stokes rescaled (time-dependent Leray) equation, displayed separately in subsection 1.1 'Related results for Navier-Stokes equations'; NO theorem in the paper is stated for it",
+   "executed_branch": "(ii)",
+   "executed_verdict": "CHAE-TSAI DOES NOT BITE. The theorem is SILENT on NS3D-DSS-NONAXI-LAMBDA-LARGE.",
+   "executed_consumed_leg": 326,
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "leg 326's record does not carry four theorems"
+   }
+  },
+  {
+   "id": "II4",
+   "item": "(ii)",
+   "claim": "§2 row 4 (Morrey / Jiu-Wang-Wei) against legs 368/370's records",
+   "verdict": "MATCH",
+   "detail": "row 4 verified: leg 368 classification=WIDENS on arXiv:2006.15776 (Jiu-Wang-Wei); leg 370's landed control shows a planted exact-SS profile reading 'NOT EXCLUDED' under T1/T2 alone and 'EXCLUDED-BY-MORREY' once Morrey is wired in (the widening, demonstrated); the literal EXCLUDED-BY-MORREY is in solver/dssp_screen.py; and ledger_morrey EXECUTED on the DSS object returns NOT-REACHED-BY-ANSATZ -- i.e. it still does not reach DSS",
+   "record_classification": "WIDENS",
+   "record_leg_368": 368,
+   "record_leg_370": 370,
+   "record_citation": "Jiu, Q., Wang, Y. & Wei, W., \"Leray's backward self-similar solutions to the 3D Navier-Stokes equations in Morrey spaces\", arXiv:2006.15776v1 [math.AP], 29 Jun 2020",
+   "executed_verdict": "NOT-REACHED-BY-ANSATZ",
+   "control_t1_t2": "NOT EXCLUDED",
+   "control_morrey": "EXCLUDED-BY-MORREY",
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "leg 368's record does not classify the result as WIDENS"
+   }
+  },
+  {
+   "id": "III1",
+   "item": "(iii)",
+   "claim": "§7 clause 1: 'refereed journal of worldwide repute'",
+   "verdict": "MISMATCH",
+   "detail": "the document says 'refereed **journal** of worldwide repute'; the rules say Section 6(a)(i) 'a refereed mathematics PUBLICATION of worldwide repute meeting the conditions in Section 6(e)' -- and Section 6(a)(ii) gives a SECOND qualifying route the document does not mention: 'a publication meeting a relaxed set of conditions approved by the BOD following a recommendation of the SAB'. The document's clause is NARROWER than the rules. Section 6(e) then lists four characteristics whose absence disqualifies an outlet, one of which is 'inclusion in the list of publications maintained by MathSciNet'.",
+   "doc_wording": "refereed\njournal of worldwide repute",
+   "doc_wording_occurs_in_rules": false,
+   "rules_wording_6a_i": "a refereed mathematics publication of worldwide repute meeting the conditions in Section 6(e)",
+   "rules_6a_i_present": true,
+   "rules_6a_ii_relaxed_route_present": true,
+   "rules_6e_mathscinet_condition": true,
+   "control": {
+    "plant_kind": "repair",
+    "planted": true,
+    "clean_verdict": "MISMATCH",
+    "planted_verdict": "MATCH",
+    "expected_planted_verdict": "MATCH",
+    "fired": true,
+    "planted_detail": "the document's own §7 wording ('refereed mathematics publication of worldwide repute meeting the conditions in Section 6(e)') occurs verbatim in the rules"
+   }
+  },
+  {
+   "id": "III2",
+   "item": "(iii)",
+   "claim": "§7 clause 2: the two-year waiting period",
+   "verdict": "MATCH",
+   "detail": "CONFIRMED against Section 4(b), and the rules are STRICTER than the document's one-line summary: Section 7(a)(i)(2) additionally requires the solution to SURVIVE RIGOROUS EXAMINATION by the global mathematics community for a minimum of two (2) years [located], and Section 8(c) imposes a FURTHER two-year wait before CMI may reconsider a negative decision [located]. The two stages of Section 7(a) must be satisfied SEQUENTIALLY.",
+   "rules_4b_present": true,
+   "rules_7a_i_2_present": true,
+   "rules_8c_present": true,
+   "rules_sequential": true,
+   "control": {
+    "plant_kind": "corrupt",
+    "planted": true,
+    "clean_verdict": "MATCH",
+    "planted_verdict": "MISMATCH",
+    "expected_planted_verdict": "MISMATCH",
+    "fired": true,
+    "planted_detail": "the rules do not carry the two-year condition in Section 4(b)"
+   }
+  },
+  {
+   "id": "III3",
+   "item": "(iii)",
+   "claim": "§7 clause 3: general acceptance in the mathematics community",
+   "verdict": "MISMATCH",
+   "detail": "the document says 'general acceptance in the **mathematics community**'; the rules say 'general acceptance in the **GLOBAL** mathematics community, as determined in the sole discretion of CMI' (Section 4(c), repeated at Section 7(a)(i)). Two words are dropped: 'global', and the fact that the determination is CMI's SOLE DISCRETION, not a community fact. Section 7(a)(i)(4) enumerates what CMI may consider (independent journal articles, international conferences, awards, and any other factors).",
+   "doc_wording": "general acceptance in the mathematics community",
+   "doc_wording_present": true,
+   "rules_wording": "general acceptance in the global mathematics community, as determined in the sole discretion of CMI",
+   "rules_sole_discretion_present": true,
+   "control": {
+    "plant_kind": "repair",
+    "planted": true,
+    "clean_verdict": "MISMATCH",
+    "planted_verdict": "MATCH",
+    "expected_planted_verdict": "MATCH",
+    "fired": true,
+    "planted_detail": "the document already carries the rules' own wording"
+   }
+  },
+  {
+   "id": "III4",
+   "item": "(iii)",
+   "claim": "§7 completeness: does it list every condition the rules impose?",
+   "verdict": "MISMATCH",
+   "detail": "§7 lists THREE conditions; the rules' Section 4 imposes FOUR. The missing one is Section 4(d): the Proposed Solution must have 'satisfactorily answered the questions raised by the Problem's official description, as determined in the sole discretion of CMI' -- which is the condition that binds this repository's own target choice, and it is the one Section 5(d) sharpens: 'a paper that does not address or refer to the specific mathematical questions set out in detail in the official Problem description will not be considered a Potential Solution'. Also absent from §7, and a planning fact of the same kind as the two-year clock: CMI 'will not accept Proposed Solutions submitted directly to CMI'. Directly relevant to the route-4 target: Section 5(b) states that for the Navier-Stokes Problem a resolution IN EITHER DIRECTION is evaluated by the standard Section 7 procedure -- so the breakdown direction this repository pursues is explicitly in scope.",
+   "doc_condition_count": 3,
+   "rules_section4_condition_count": 4,
+   "missing_condition": "Section 4(d)",
+   "rules_4d_present": true,
+   "rules_5d_present": true,
+   "rules_no_direct_submission_present": true,
+   "rules_navier_stokes_either_direction_present": true,
+   "control": {
+    "plant_kind": "repair",
+    "planted": true,
+    "clean_verdict": "MISMATCH",
+    "planted_verdict": "MATCH",
+    "expected_planted_verdict": "MATCH",
+    "fired": true,
+    "planted_detail": "§7 lists all four Section-4 conditions and the no-direct-submission fact"
+   }
+  }
+ ],
+ "gate": {
+  "question": "Does every checked clause either verify against its primary source / landed record, or get reported with the exact discrepancy verbatim?",
+  "pre_committed_yes": "The obligations document graduates from DRAFT-UNVERIFIED clause by clause, on integration's edit.",
+  "pre_committed_no": "A source is unreachable: bank the refusal as a refusal; an unverifiable clause is recorded as exactly that.",
+  "answer": "YES",
+  "unverifiable_clauses": [],
+  "clay_movement": "none. Clay stays ~0.05%."
+ },
+ "self_hash": "c52d812f8f91d9371c49a9de94e7c4a47c65d9d642e303313dd2b1cb7a78274b"
+}
