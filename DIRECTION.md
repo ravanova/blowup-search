@@ -35,7 +35,7 @@ prose as before.
 |---|---|---|---|
 | A | 299 | TESTA | no |
 | B | 370 | B7M | yes |
-| C | 369 | BSE | yes |
+| C | 371 | SFX | yes |
 | D | 310 | EPAP | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -20514,8 +20514,26 @@ T2's fitted-ray proxy yet fall to Morrey — an under-firing screen
 misreports). D ← 310 stands as ruled at 10ff (pending integration).
 Floor 2/4 (370, 369).
 
+Cycle 10hh: C/369 landed GAP-NAMED at ccb57a5 — generic non-normal
+backward-error theory does NOT derive the K·ε floor, and the resistance
+is named at theorem-clause precision: the asymptotic bound requires
+per-eigenvalue condition numbers (sᵢ measured ~1.0-1.6e-15, condition
+~6-9.5e14, via greedy eigenvector pairing) that the solver's dgeev path
+NEVER COMPUTES (rescaled_spectrum.py:333 — no RCONDE); Table 4.6's
+guaranteed-bound precondition is VIOLATED by 4-5 orders (still 22-77x
+at the most favorable p(K)=1); the unconditional Gershgorin/Bauer-Fike
+bounds hold but sit 11-13 orders above the 1e-6 threshold — vacuous.
+The LAPACK Users' Guide fetched live, not from memory. **356's ground
+stays EMPIRICAL, stated honestly; item (10)'s marker text now cites
+367+369 jointly (measured floor + foreclosed generic derivation).**
+C ← **leg 371 SFX** — drafted with its MARGINALITY STATED OPENLY: the
+measured floor sits 6-9 orders below what worst-case theory allows,
+so something structural constrains it (realness/conjugate-pairing is
+the candidate); either answer closes this thread for good, and this is
+the last draft the thread earns. Floor 2/4 (370, 371).
+
 **Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
-Immediately dispatchable: **0**. Next fresh leg number: **371.**
+Immediately dispatchable: **0**. Next fresh leg number: **372.**
 
 Nothing in this update lifts a ban. An audited register and a
 verification leg taking its fired turn; no L1-L4 link moved; Clay
@@ -20609,3 +20627,92 @@ Nothing in this update lifts a ban. A screen widened to match the
 literature it machine-reads is apparatus honesty; the DSS object's
 separation is restated, not weakened. No L1-L4 link moved; Clay stays
 ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10hh) — 369 GAP-NAMED ABSORBED (THE
+GENERIC DERIVATION ROUTE FORECLOSED AT THEOREM-CLAUSE PRECISION); C ←
+371 SFX, THE THREAD's LAST DRAFT, MARGINALITY STATED
+
+Written from the same detached lineage, resynced to origin/main =
+ccb57a5.
+
+### 369 BSE — GAP-NAMED, absorbed at full strength
+
+The classification is exactly what the gate's no-branch drafted for,
+delivered at unusual precision: the solver path identified to the line
+(np.linalg.eigvals → LAPACK dgeev, Hessenberg+QR, no RCONDE output);
+the two resisting theorem clauses named and quoted from a live-fetched
+source (the asymptotic bound's small-‖E‖ requirement; the guaranteed
+bound's ‖E‖_F < sᵢ·sepᵢ/4 precondition, violated 4-5 orders at the
+standard constant and still 22-77x at the most favorable); the
+per-eigenvalue condition numbers actually COMPUTED for all four of
+367's K values rather than assumed; and the unconditional bounds
+checked and found vacuous rather than silently omitted. The
+consequence is stated with the right sign in both directions: the
+generic derivation route is FORECLOSED, and 356's repair is UNAFFECTED
+(it needs only the empirical floor, which stands at ~6.5 orders of
+margin). Item (10)'s eventual marker text now cites 367+369 jointly.
+Endorsed without amendment.
+
+### Refill — C ← leg 371 SFX, the thread's last draft, with the
+marginality stated rather than dressed up
+
+The reserve holds nothing dispatchable and the floor requires an
+eligible leg in C. The one remaining genuine question in this thread:
+369 measured the floor sitting 6-9 ORDERS below what the (vacuous)
+unconditional bounds allow and below what the (unlicensed) tight
+bounds would give — so something STRUCTURAL constrains the E5
+family's Re λ perturbations, and realness/conjugate-pairing of the
+discretization matrix is the obvious candidate. This is real
+mathematics tied to a banked measurement — and it is also the
+thinnest draft this desk has issued; both facts are stated. Either
+answer closes the thread: no further E5-floor legs will be drafted.
+
+```
+### 371 — ROUTE-SFX: DOES REALNESS/CONJUGATE-PAIRING STRUCTURE FORCE
+THE E5 Re λ FLOOR? (the specific route, after 369 foreclosed the
+generic one; the thread's terminal leg)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** 367 measured the floor tracking K·ε; 369 proved generic
+non-normal theory cannot license that (conditions ~1e15). The specific
+structure is unexamined: is the discretized E5 operator REAL (its
+spectrum in conjugate pairs), and does that pairing — or any other
+verifiable structure of the actual matrix (checked, not assumed) —
+constrain first-order Re λ perturbations of the imaginary-axis
+spectrum to the observed O(K·ε) scale? Derive it at checkable
+precision against 367's four measured points, or refute the candidate
+and name what remains unexplained.
+**Gate.** A definite classification — STRUCTURE-DERIVED (the mechanism
+documented, the four points inside its predicted envelope, margins
+stated) or CANDIDATE-REFUTED (the failed derivation recorded; the
+floor stays empirical-with-margin, period) — with item (10)'s marker
+text finalized either way (citing 367+369+371) and THE THREAD DECLARED
+CLOSED in both branches?
+  yes (either class) -> Bank; no further E5-floor legs are drafted, by
+        this gate's own text.
+  no  -> The matrix's structure resists even classification: record
+        it; the thread closes anyway.
+**Territory.** writeup/data/p2_route_sfx_v1.json, writeup/novelty/
+leg_371.md, experiments/journal/leg_371.md. Reads 367/369/356's banked
+records and solver/rescaled_spectrum.py read-only; edits nothing. No
+figure.
+**Difficulty.** standard
+**Preconditions:** Leg 369 landed (TRUE, ccb57a5).
+```
+
+**Floor 2/4 (370, 371).** FLOOR-TABLE synced (C 369→371).
+
+### Standing state
+
+A/299 TESTA; B/370 B7M; D/310 EPAP. Route 4: stopped. With the user:
+seven items — still the programme's entire forward direction. The
+reserve: user-gated and blocked only.
+
+**Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
+Immediately dispatchable: **0**. Next fresh leg number: **372.**
+
+Nothing in this update lifts a ban. A foreclosed derivation honestly
+recorded, and one terminal draft with its thinness admitted; no L1-L4
+link moved; Clay stays ~0.05%.
