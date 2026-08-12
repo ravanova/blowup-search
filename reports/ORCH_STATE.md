@@ -19,28 +19,34 @@ legs that lose their slot are returned to the reserve queue, not cancelled as fi
 
 ---
 
-## Status: RUNNING — same orchestrator session, 2026-08-12, cycle 10nn (four-slot contract;
-DM ruling chain 10jj through 10nn integrated; spend-limit fleet-kill of legs 376/377/378
-absorbed per the `ae7ca2c` playbook; slot D formally HELD OPEN by DM ruling, not vacant by
-oversight)
+## Status: RUNNING — same orchestrator session, 2026-08-12, cycle 10oo (four-slot contract;
+DM ruling chain 10jj through 10oo integrated; 379 LCB7 and 377 HCDX landed and audited clean;
+slots A and D BOTH formally HELD OPEN by DM ruling, not vacant by oversight)
 
-`origin/main` at `8c1e2b4` (DM cycle 10nn integration), merge gate **PASS**. Roster:
-**A=379 LCB7** (dispatched, isolated worktree — light corrections batch closing leg 299's two
-flagged test issues, each gated on a planted still-fails control per "the 361 lesson"; items
-(11)-(12)). **B=376 R3SP** (RESUMED under its own number from the preserved WIP-preservation
-commit `57aff39` — the killed leg's uncommitted script salvaged, never credited as a landing;
-the resumed leg is instructed to re-verify the "numerical wall" lead, not inherit it as fact).
-**C=377 HCDX** (REDISPATCHED from scratch, spec unchanged from the original attempt killed by
-the spend limit — its worktree was clean, nothing to resume). **D=HELD OPEN** — the DM's
-explicit, machine-lawful exception (cycle 10nn): with B and C eligible, `test_9` reads 2/4 and
-PASSES; the reserve is genuinely exhausted (0 immediately dispatchable of 5 queued: 325, 231,
-232, 233, 234) and drafting a fourth leg now would mean manufacturing work rather than
-measuring something real. **This is not an oversight — do not "fix" it by drafting a D leg.**
-D refills mechanically the moment any of the seven-plus-one pending user rulings on
+`origin/main` at `e97d9b9` (leg 376 R3SP landing), merge gate **PASS**. Roster:
+**A=HELD OPEN** and **D=HELD OPEN** — the DM's explicit, machine-lawful exception, extended to
+A in cycle 10oo on identical grounds to D's cycle-10nn original: with B/376 and C/377 eligible,
+`test_9` reads 2/4 and PASSES; the owed-work books and the accumulator are both empty; the
+reserve holds only user-gated and blocked entries (5 undispatched: 325, 231, 232, 233, 234, 0
+immediately dispatchable); drafting either slot now would mean manufacturing work rather than
+measuring something real. **Neither is an oversight — do not "fix" either by drafting a leg.**
+Both refill mechanically the moment any of the seven-plus-one pending user rulings on
 `reports/STATUS.md` lands (see that file's trigger inventory for which ruling unfreezes which
 downstream item). A prior DM attempt (cycle 10jj) to hold open TWO slots at once failed the
-merge gate's 2-of-4 floor check outright and was publicly revised; one held-open slot beside
-two eligible live legs is the only lawful form of this.
+merge gate's 2-of-4 floor check outright and was publicly revised; two held-open slots beside
+two eligible live legs (the current shape) is the lawful form of this, distinct from 10jj's
+failed attempt which held TWO open while only TWO were eligible (0/4). **B=376 R3SP LANDED**
+(`e97d9b9`) — resumed from the spend-limit-preserved WIP, re-verified rather than trusted: the
+"numerical wall" lead was real (Chebyshev-Lobatto clustering pushing leg 350's log-Boyd map
+past float64 underflow at N=60, fixed via closed-form weighted combinations) plus one
+independent, previously-unexercised drift-0 control-inversion bug found and fixed; both ℓ=1
+and ℓ=2 channels measured CONTINUOUS (ℓ=2 reported honestly as
+CONTINUOUS-BUT-PLANTED-CONTROL-CONVERGENCE-MARGINAL at N=60, clean from N=90). **C=377 HCDX
+LANDED** (`bc807ca`) — Boyd (1980) coefficient-decay concern resolved ADEQUATE for leg 374's
+surviving generalized-Hermite candidate via a measured Gegenbauer-equivalence argument (reading
+alone was insufficient — the literature stayed paywalled). Both landings independently audited
+(territory diff, `plan_of_record.py`/`DIRECTION.md` byte-identity confirmed empty, fresh
+detached-worktree gate re-run) before being reported to the DM.
 
 **Sequence since cycle 10d (all integrated cleanly via the standard detached-checkout /
 worktree-rebase-gate sequence; two mid-integration `origin/main` moves were caught and
