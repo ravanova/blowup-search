@@ -52,6 +52,38 @@ TRUE on its face; adjacent work has landed since (leg 307 adjudicated 221's two-
 counterexample yes-artifact, leg 335 adjudicated the `spike1_stepC_gate.json` gap
 REPRODUCIBLE_AS_BANKED) but 233's clause (b) appears unconsumed.
 
+### Board as of `d65419c` — all four slots live, and the roster is THREE-PLUS-ONE
+
+| Slot | # | State |
+|---|---|---|
+| A | 380 PROG-R4 | running; **U0 landed `dd35bbf`** (the one programme-level novelty pass + pre-registration, committed before construction). **Does not vacate on landing.** |
+| B | 386 DTOL | dispatched (refill for 381), `fig99` |
+| C | 385 SCEL | running |
+| D | 233 BVRRV | running |
+
+**STANDING RULE — user, 2026-08-11: the programme occupies a slot that does not vacate on
+landing, so the four-slot roster is effectively THREE-PLUS-ONE while it runs. Refills are
+planned against B/C/D only, and slot A's non-vacancy is never read as a stall.** Its floor
+consequence: PROG-R4 is construction-class and permanently eligible, so §3b needs only ONE
+more eligible leg among B/C/D to read 2/4. That slack is to be spent on the ranked obligations
+work — it is not a licence to fill B/C/D with non-eligible units.
+
+**Landed by integration this cycle beyond the merges:** `e2cfd94` — `CLAY_OBLIGATIONS.md`
+carries a **§4-scoped VERIFIED header** on leg 381's pass (§1/§2/§3/§5/§6/§7 stay DRAFT,
+UNVERIFIED), the `f ≡ 0` **refutation** and the (b)→**(C)** labelling fix, the priced cutoff
+bill, the **§4-stays-open-until-DTOL** rule, §7 marked still-unchecked, and §8 ask #1 recorded
+**SATISFIED** by POCP being the only open route. Leg 381 was correctly forbidden from editing
+that document and did not; these are integration's edits, landed on its report.
+
+**Audit gap recorded, not waived:** leg 381 landed with **no figure**, so its documentation
+quartet is incomplete on the figure limb. Territory was otherwise clean (novelty pass first,
+then only its own CLOC files). This is the second contract deviation of the cycle and is
+carried openly rather than dropped.
+
+**Housekeeping:** an orchestrator `git add -A` swept the ten stale `.legNNN-work` worktree
+directories in as embedded gitlinks; caught before push, dropped from the commit, and
+`.gitignore` extended so it cannot recur.
+
 ---
 
 ### Superseded status: TERMINAL — 2026-08-12, cycle 10pp (retained verbatim; its
