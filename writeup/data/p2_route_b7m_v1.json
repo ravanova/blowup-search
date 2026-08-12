@@ -1,0 +1,1006 @@
+{
+  "leg": 370,
+  "route": "B7M",
+  "brick": "B7 (extension)",
+  "brick_name": "DSSP-SCREEN Morrey (Theorem 1.2) third exact-SS entry",
+  "ceiling": "TIER 2",
+  "dispatched_by": "leg 368's WIDENS finding, flagged (not implemented) for the screen's owner in writeup/data/p2_route_mryx_v1.json's flag_for_screens_owner field: arXiv:2006.15776 (Jiu-Wang-Wei) Theorem 1.2's M-dot_{q,1}(R^3), 3/2<q<6 hypothesis strictly widens the exact-SS exclusion class beyond both T1 (L^3/NRS 1996) and T2 (local-energy/Tsai Theorem 2)",
+  "source_of_truth": "experiments/journal/leg_368.md, writeup/novelty/leg_368.md, writeup/data/p2_route_mryx_v1.json (read-only, quoted verbatim in solver/dssp_screen.py, never re-derived)",
+  "gate_text": "Does a machine-read EXCLUDED-BY-MORREY ledger entry, gated by the exact-SS ansatz exactly as T1/T2 already are, pass all three controls: (a) a planted non-monotone-decay control that evades T1/T2 but is caught by Morrey, (b) the repo's DSS object still reads NOT-REACHED-BY-ANSATZ, (c) every existing banked verdict reproduces unmoved?",
+  "control_a_planted_widen_then_close": {
+    "description": "synthetic U(y) = (y/|y|)/|y| base (Tsai's own decay-1 headline example) plus a narrow angular*radial bump concentrated on the fitted_far_field_decay_exponent() sampled ray at r~1000",
+    "l3_result": {
+      "ladder": [
+        {
+          "R_hi": 10.0,
+          "shell_integral_cube": 147.63025028410394,
+          "cumulative_cube": 147.63025028410394
+        },
+        {
+          "R_hi": 100.0,
+          "shell_integral_cube": 28.935137649661662,
+          "cumulative_cube": 176.5653879337656
+        },
+        {
+          "R_hi": 1000.0,
+          "shell_integral_cube": 7177.5208684974805,
+          "cumulative_cube": 7354.0862564312465
+        },
+        {
+          "R_hi": 10000.0,
+          "shell_integral_cube": 7177.52086849076,
+          "cumulative_cube": 14531.607124922008
+        },
+        {
+          "R_hi": 100000.0,
+          "shell_integral_cube": 28.93513764966167,
+          "cumulative_cube": 14560.54226257167
+        },
+        {
+          "R_hi": 1000000.0,
+          "shell_integral_cube": 28.93513764966167,
+          "cumulative_cube": 14589.47740022133
+        }
+      ],
+      "L3_cubed": 14589.47740022133,
+      "L3_norm": 24.43505074071469,
+      "rel_change_last_step": 0.001983288150487323,
+      "rel_tol": 0.0001,
+      "converged": false
+    },
+    "decay_result": {
+      "direction": [
+        0.4,
+        0.5,
+        0.7681145747868608
+      ],
+      "r_values": [
+        10.0,
+        15.199110829529339,
+        23.101297000831604,
+        35.11191734215131,
+        53.3669923120631,
+        81.11308307896873,
+        123.28467394420659,
+        187.3817422860383,
+        284.8035868435802,
+        432.87612810830615,
+        657.9332246575682,
+        1000.0
+      ],
+      "magnitudes": [
+        0.1,
+        0.0657933224657568,
+        0.04328761281083057,
+        0.028480358684358022,
+        0.018738174228603844,
+        0.01232846739442066,
+        0.008111308307896872,
+        0.0053366992312063105,
+        0.003511191734215131,
+        0.0023101297000831574,
+        0.0015199110829529332,
+        0.30099999999999993
+      ],
+      "fitted_exponent": -0.4756878567013024,
+      "fitted_log_intercept": -1.938954128408272
+    },
+    "decay_test": {
+      "decays_to_zero": false,
+      "fitted_exponent": -0.4756878567013024,
+      "magnitude_first_sample": 0.1,
+      "magnitude_last_sample": 0.30099999999999993,
+      "reason": "fitted far-field exponent -0.4756878567013024 < 0 and sampled |V| does NOT decrease from 0.1 (r_min) to 0.30099999999999993 (r_max) -- Theorem 2's finishing-step hypothesis \"U -> 0 at infinity\" (Tsai 1998, p.49) is NOT confirmed by this measurement"
+    },
+    "ansatz_result": {
+      "ansatz": "EXACT-SS",
+      "satisfies_theorem_ansatz": true,
+      "measured_lambda": null,
+      "reason": "no non-trivial period was measured for this candidate (static synthetic candidate, no trajectory supplied); Tsai 1998's ansatz (1.2)_1 describes a SINGLE stationary profile U under one rescaling parameter a, exactly what a static (or non-periodic) candidate with no measured periodic orbit represents"
+    },
+    "t1_t2_verdict": {
+      "excludes": false,
+      "verdict": "NOT EXCLUDED",
+      "reason": "the candidate satisfies the exact-SS ansatz but neither Theorem 1 (L^q) nor Theorem 2 (decays_to_zero_at_infinity) fired on this measurement -- the theorems are silent on it",
+      "ansatz_detail": {
+        "ansatz": "EXACT-SS",
+        "satisfies_theorem_ansatz": true,
+        "measured_lambda": null,
+        "reason": "no non-trivial period was measured for this candidate (static synthetic candidate, no trajectory supplied); Tsai 1998's ansatz (1.2)_1 describes a SINGLE stationary profile U under one rescaling parameter a, exactly what a static (or non-periodic) candidate with no measured periodic orbit represents"
+      },
+      "decay_detail": {
+        "decays_to_zero": false,
+        "fitted_exponent": -0.4756878567013024,
+        "magnitude_first_sample": 0.1,
+        "magnitude_last_sample": 0.30099999999999993,
+        "reason": "fitted far-field exponent -0.4756878567013024 < 0 and sampled |V| does NOT decrease from 0.1 (r_min) to 0.30099999999999993 (r_max) -- Theorem 2's finishing-step hypothesis \"U -> 0 at infinity\" (Tsai 1998, p.49) is NOT confirmed by this measurement"
+      }
+    },
+    "morrey_result": {
+      "in_morrey_class": true,
+      "witnessing_q": 3.12,
+      "witnessing_slope": -0.038554482928609364,
+      "q_values_swept": [
+        1.68,
+        1.8599999999999999,
+        2.04,
+        2.2199999999999998,
+        2.4,
+        2.58,
+        2.76,
+        2.94,
+        3.12,
+        3.3,
+        3.48,
+        3.66,
+        3.84,
+        4.02,
+        4.199999999999999,
+        4.38,
+        4.5600000000000005,
+        4.74,
+        4.92,
+        5.1,
+        5.279999999999999,
+        5.46,
+        5.64,
+        5.82
+      ],
+      "per_q": [
+        {
+          "q": 1.68,
+          "morrey_exponent_e_q": -1.2142857142857144,
+          "morrey_values_over_ladder": [
+            38.36137400432503,
+            234.211620946177,
+            1440.949732751232,
+            8731.882800095666,
+            53303.043346615355,
+            325435.99734683044
+          ],
+          "fitted_loglog_slope": 0.7856213412472143,
+          "bounded": false
+        },
+        {
+          "q": 1.8599999999999999,
+          "morrey_exponent_e_q": -1.387096774193548,
+          "morrey_values_over_ladder": [
+            25.76814135256415,
+            105.67842205879438,
+            436.73264016368233,
+            1777.721227593532,
+            7289.4826449835,
+            29895.046294157644
+          ],
+          "fitted_loglog_slope": 0.6128102813393808,
+          "bounded": false
+        },
+        {
+          "q": 2.04,
+          "morrey_exponent_e_q": -1.5294117647058822,
+          "morrey_values_over_ladder": [
+            18.568127246268016,
+            54.87270111859415,
+            163.40700854681472,
+            479.29588047369003,
+            1416.1907510884782,
+            4185.133223095841
+          ],
+          "fitted_loglog_slope": 0.4704952908270467,
+          "bounded": false
+        },
+        {
+          "q": 2.2199999999999998,
+          "morrey_exponent_e_q": -1.6486486486486485,
+          "morrey_values_over_ladder": [
+            14.110136649938019,
+            31.68710559155844,
+            71.7067481019604,
+            159.8292128169256,
+            358.8701482050083,
+            805.9126700984314
+          ],
+          "fitted_loglog_slope": 0.3512584068842804,
+          "bounded": false
+        },
+        {
+          "q": 2.4,
+          "morrey_exponent_e_q": -1.7499999999999998,
+          "morrey_values_over_ladder": [
+            11.173259061216433,
+            19.869176531592213,
+            35.60458873617884,
+            62.842109495540534,
+            111.73277300003733,
+            198.6917685592885
+          ],
+          "fitted_loglog_slope": 0.24990705553292922,
+          "bounded": false
+        },
+        {
+          "q": 2.58,
+          "morrey_exponent_e_q": -1.8372093023255813,
+          "morrey_values_over_ladder": [
+            9.1405129026251,
+            13.297232540251358,
+            19.492972346377535,
+            28.14579666108394,
+            40.93870170066248,
+            59.555799820646534
+          ],
+          "fitted_loglog_slope": 0.16269775320734758,
+          "bounded": false
+        },
+        {
+          "q": 2.76,
+          "morrey_exponent_e_q": -1.9130434782608694,
+          "morrey_values_over_ladder": [
+            7.676025169330675,
+            9.377626079700647,
+            11.54451091992569,
+            13.99834980955757,
+            17.098703676517513,
+            20.8890652213093
+          ],
+          "fitted_loglog_slope": 0.0868635772720595,
+          "bounded": false
+        },
+        {
+          "q": 2.94,
+          "morrey_exponent_e_q": -1.979591836734694,
+          "morrey_values_over_ladder": [
+            6.585489044782597,
+            6.9023375626685,
+            7.290049268897302,
+            7.58373952614689,
+            7.947332687145705,
+            8.329690309807306
+          ],
+          "fitted_loglog_slope": 0.020315218798234874,
+          "bounded": false
+        },
+        {
+          "q": 3.12,
+          "morrey_exponent_e_q": -2.0384615384615383,
+          "morrey_values_over_ladder": [
+            5.75066845614038,
+            5.263283840229962,
+            4.854241270375697,
+            4.409654883474418,
+            4.035272660096845,
+            3.693266482355748
+          ],
+          "fitted_loglog_slope": -0.038554482928609364,
+          "bounded": true
+        },
+        {
+          "q": 3.3,
+          "morrey_exponent_e_q": -2.090909090909091,
+          "morrey_values_over_ladder": [
+            5.096485318218082,
+            4.133916370273717,
+            3.3789261579071166,
+            2.720284904058775,
+            2.2061504327381214,
+            1.789473741498292
+          ],
+          "fitted_loglog_slope": -0.09100203537616186,
+          "bounded": true
+        },
+        {
+          "q": 3.48,
+          "morrey_exponent_e_q": -2.137931034482759,
+          "morrey_values_over_ladder": [
+            4.57350158441528,
+            3.329030693834294,
+            2.4418156350254723,
+            1.764113880657263,
+            1.2838828714084447,
+            0.934530905969828
+          ],
+          "fitted_loglog_slope": -0.13802397894982985,
+          "bounded": true
+        },
+        {
+          "q": 3.66,
+          "morrey_exponent_e_q": -2.180327868852459,
+          "morrey_values_over_ladder": [
+            4.148126571393945,
+            2.738571792979434,
+            1.8218909019768825,
+            1.193821180235181,
+            0.7880272452065592,
+            0.5202506869463569
+          ],
+          "fitted_loglog_slope": -0.18042081331952992,
+          "bounded": true
+        },
+        {
+          "q": 3.84,
+          "morrey_exponent_e_q": -2.21875,
+          "morrey_values_over_ladder": [
+            3.7969062003258585,
+            2.294456710929724,
+            1.3971916247356666,
+            0.8380129985465746,
+            0.5063264059107343,
+            0.30597072491412075
+          ],
+          "fitted_loglog_slope": -0.21884294446707095,
+          "bounded": true
+        },
+        {
+          "q": 4.02,
+          "morrey_exponent_e_q": -2.253731343283582,
+          "morrey_values_over_ladder": [
+            3.5030676559273966,
+            1.9530671788372527,
+            1.0972660543037016,
+            0.6071910786955763,
+            0.3384728676205996,
+            0.1887086534746565
+          ],
+          "fitted_loglog_slope": -0.25382428775065313,
+          "bounded": true
+        },
+        {
+          "q": 4.199999999999999,
+          "morrey_exponent_e_q": -2.2857142857142856,
+          "morrey_values_over_ladder": [
+            3.2543599203453923,
+            1.685587480453403,
+            0.8797577807603403,
+            0.45226565865110135,
+            0.23421200326398495,
+            0.12130931800744789
+          ],
+          "fitted_loglog_slope": -0.2858072301813566,
+          "bounded": true
+        },
+        {
+          "q": 4.38,
+          "morrey_exponent_e_q": -2.315068493150685,
+          "morrey_values_over_ladder": [
+            3.0416649633582233,
+            1.472457885135033,
+            0.7182911146756232,
+            0.34512528834166756,
+            0.1670467811351414,
+            0.08086655024042808
+          ],
+          "fitted_loglog_slope": -0.31516143761775584,
+          "bounded": true
+        },
+        {
+          "q": 4.5600000000000005,
+          "morrey_exponent_e_q": -2.3421052631578947,
+          "morrey_values_over_ladder": [
+            2.8580814762236364,
+            1.3000777989786205,
+            0.5959230501988236,
+            0.26904795938712894,
+            0.12236416796547427,
+            0.05566065292481221
+          ],
+          "fitted_loglog_slope": -0.3421982076249656,
+          "bounded": true
+        },
+        {
+          "q": 4.74,
+          "morrey_exponent_e_q": -2.367088607594937,
+          "morrey_values_over_ladder": [
+            2.698306383301969,
+            1.1587844353163843,
+            0.5014644506781005,
+            0.21374517735906667,
+            0.0917777780793335,
+            0.039413792865802634
+          ],
+          "fitted_loglog_slope": -0.3671815520620078,
+          "bounded": true
+        },
+        {
+          "q": 4.92,
+          "morrey_exponent_e_q": -2.3902439024390243,
+          "morrey_values_over_ladder": [
+            2.558208666782516,
+            1.041578636129545,
+            0.4273407091256544,
+            0.1726931635328394,
+            0.07030092916085144,
+            0.02862308635428291
+          ],
+          "fitted_loglog_slope": -0.39033684690609516,
+          "bounded": true
+        },
+        {
+          "q": 5.1,
+          "morrey_exponent_e_q": -2.4117647058823533,
+          "morrey_values_over_ladder": [
+            2.434530178694399,
+            0.9433013513386892,
+            0.3683085968349523,
+            0.14164196123705425,
+            0.05487279069062581,
+            0.021261389328706623
+          ],
+          "fitted_loglog_slope": -0.4118576503494241,
+          "bounded": true
+        },
+        {
+          "q": 5.279999999999999,
+          "morrey_exponent_e_q": -2.4318181818181817,
+          "morrey_values_over_ladder": [
+            2.3246720098857767,
+            0.8600892205696052,
+            0.32066490263901526,
+            0.11775463966204376,
+            0.04356018025140203,
+            0.016116501930256776
+          ],
+          "fitted_loglog_slope": -0.4319111262852526,
+          "bounded": true
+        },
+        {
+          "q": 5.46,
+          "morrey_exponent_e_q": -2.4505494505494507,
+          "morrey_values_over_ladder": [
+            2.2265395700166373,
+            0.7890072016792544,
+            0.2817459111261431,
+            0.09909527629508849,
+            0.035110201711434724,
+            0.012441798748188227
+          ],
+          "fitted_loglog_slope": -0.4506423950165217,
+          "bounded": true
+        },
+        {
+          "q": 5.64,
+          "morrey_exponent_e_q": -2.4680851063829787,
+          "morrey_values_over_ladder": [
+            2.1384286384075146,
+            0.7277959853159567,
+            0.24960349061714324,
+            0.0843160649188006,
+            0.028691618354081322,
+            0.009764932310490582
+          ],
+          "fitted_loglog_slope": -0.4681780508500496,
+          "bounded": true
+        },
+        {
+          "q": 5.82,
+          "morrey_exponent_e_q": -2.484536082474227,
+          "morrey_values_over_ladder": [
+            2.0589404501353554,
+            0.674695328873976,
+            0.2227910427845474,
+            0.07246135070794206,
+            0.023741063242374134,
+            0.007779709503237971
+          ],
+          "fitted_loglog_slope": -0.4846290269412978,
+          "bounded": true
+        }
+      ],
+      "R_hi_ladder": [
+        10.0,
+        100.0,
+        1000.0,
+        10000.0,
+        100000.0,
+        1000000.0
+      ],
+      "ball_integral_ladder": [
+        {
+          "R_hi": 10.0,
+          "shell_integral_l1": 628.3185307179522,
+          "cumulative_l1": 628.3185307179522
+        },
+        {
+          "R_hi": 100.0,
+          "shell_integral_l1": 62203.53454107788,
+          "cumulative_l1": 62831.853071795835
+        },
+        {
+          "R_hi": 1000.0,
+          "shell_integral_l1": 6268658.852173253,
+          "cumulative_l1": 6331490.705245049
+        },
+        {
+          "R_hi": 10000.0,
+          "shell_integral_l1": 622089604.250159,
+          "cumulative_l1": 628421094.955404
+        },
+        {
+          "R_hi": 100000.0,
+          "shell_integral_l1": 62203534541.07788,
+          "cumulative_l1": 62831955636.03329
+        },
+        {
+          "R_hi": 1000000.0,
+          "shell_integral_l1": 6220353454107.787,
+          "cumulative_l1": 6283185409743.82
+        }
+      ],
+      "reason": "swept 24 q values in the open interval (3/2, 6) at x=0; q=3.12 gives a bounded ball-averaged \u1e40q,1 seminorm over the ladder (fitted log-log slope -0.038554482928609364 <= tol 0.01)"
+    },
+    "morrey_verdict": {
+      "excludes": true,
+      "verdict": "EXCLUDED-BY-MORREY",
+      "reason": "the candidate satisfies the exact-SS ansatz and its ball-averaged L^1 mass over growing balls is bounded at the \u1e40q,1 scaling rate for q=3.12 -- swept 24 q values in the open interval (3/2, 6) at x=0; q=3.12 gives a bounded ball-averaged \u1e40q,1 seminorm over the ladder (fitted log-log slope -0.038554482928609364 <= tol 0.01)",
+      "deciding_clause": "leg 368 (experiments/journal/leg_368.md), quoting arXiv:2006.15776 (Jiu-Wang-Wei) verbatim -- Theorem 1.2: \"Let U \u2208 W^{1,2}_loc(R\u00b3) be a weak solution of (1.3). If U \u2208 \u1e40q,1(R\u00b3) with 3/2 < q < 6, (1.10), then U \u2261 0.\" Embedding chain (eq 1.6): \"we hold the following embedding relation L^q(R\u00b3) \u21aa L^{q,\u221e}(R\u00b3) \u21aa \u1e40q,l(R\u00b3) \u21aa \u1e40q,1(R\u00b3), 1 \u2264 l < q. This fact can be found in [5].\" \u1e40q,1 definition (Sec 2.1, l=1 specialization): \"||f||_{\u1e40p,l(\u03a9)} = sup_{R>0} sup_{x\u2208\u03a9} [ R^{3(1/p\u22121/l)} \u222b_{Bx(R)\u2229\u03a9} |f(y)|^l dy ]^{1/l}\".",
+      "ansatz_detail": {
+        "ansatz": "EXACT-SS",
+        "satisfies_theorem_ansatz": true,
+        "measured_lambda": null,
+        "reason": "no non-trivial period was measured for this candidate (static synthetic candidate, no trajectory supplied); Tsai 1998's ansatz (1.2)_1 describes a SINGLE stationary profile U under one rescaling parameter a, exactly what a static (or non-periodic) candidate with no measured periodic orbit represents"
+      },
+      "morrey_detail": {
+        "in_morrey_class": true,
+        "witnessing_q": 3.12,
+        "witnessing_slope": -0.038554482928609364,
+        "q_values_swept": [
+          1.68,
+          1.8599999999999999,
+          2.04,
+          2.2199999999999998,
+          2.4,
+          2.58,
+          2.76,
+          2.94,
+          3.12,
+          3.3,
+          3.48,
+          3.66,
+          3.84,
+          4.02,
+          4.199999999999999,
+          4.38,
+          4.5600000000000005,
+          4.74,
+          4.92,
+          5.1,
+          5.279999999999999,
+          5.46,
+          5.64,
+          5.82
+        ],
+        "per_q": [
+          {
+            "q": 1.68,
+            "morrey_exponent_e_q": -1.2142857142857144,
+            "morrey_values_over_ladder": [
+              38.36137400432503,
+              234.211620946177,
+              1440.949732751232,
+              8731.882800095666,
+              53303.043346615355,
+              325435.99734683044
+            ],
+            "fitted_loglog_slope": 0.7856213412472143,
+            "bounded": false
+          },
+          {
+            "q": 1.8599999999999999,
+            "morrey_exponent_e_q": -1.387096774193548,
+            "morrey_values_over_ladder": [
+              25.76814135256415,
+              105.67842205879438,
+              436.73264016368233,
+              1777.721227593532,
+              7289.4826449835,
+              29895.046294157644
+            ],
+            "fitted_loglog_slope": 0.6128102813393808,
+            "bounded": false
+          },
+          {
+            "q": 2.04,
+            "morrey_exponent_e_q": -1.5294117647058822,
+            "morrey_values_over_ladder": [
+              18.568127246268016,
+              54.87270111859415,
+              163.40700854681472,
+              479.29588047369003,
+              1416.1907510884782,
+              4185.133223095841
+            ],
+            "fitted_loglog_slope": 0.4704952908270467,
+            "bounded": false
+          },
+          {
+            "q": 2.2199999999999998,
+            "morrey_exponent_e_q": -1.6486486486486485,
+            "morrey_values_over_ladder": [
+              14.110136649938019,
+              31.68710559155844,
+              71.7067481019604,
+              159.8292128169256,
+              358.8701482050083,
+              805.9126700984314
+            ],
+            "fitted_loglog_slope": 0.3512584068842804,
+            "bounded": false
+          },
+          {
+            "q": 2.4,
+            "morrey_exponent_e_q": -1.7499999999999998,
+            "morrey_values_over_ladder": [
+              11.173259061216433,
+              19.869176531592213,
+              35.60458873617884,
+              62.842109495540534,
+              111.73277300003733,
+              198.6917685592885
+            ],
+            "fitted_loglog_slope": 0.24990705553292922,
+            "bounded": false
+          },
+          {
+            "q": 2.58,
+            "morrey_exponent_e_q": -1.8372093023255813,
+            "morrey_values_over_ladder": [
+              9.1405129026251,
+              13.297232540251358,
+              19.492972346377535,
+              28.14579666108394,
+              40.93870170066248,
+              59.555799820646534
+            ],
+            "fitted_loglog_slope": 0.16269775320734758,
+            "bounded": false
+          },
+          {
+            "q": 2.76,
+            "morrey_exponent_e_q": -1.9130434782608694,
+            "morrey_values_over_ladder": [
+              7.676025169330675,
+              9.377626079700647,
+              11.54451091992569,
+              13.99834980955757,
+              17.098703676517513,
+              20.8890652213093
+            ],
+            "fitted_loglog_slope": 0.0868635772720595,
+            "bounded": false
+          },
+          {
+            "q": 2.94,
+            "morrey_exponent_e_q": -1.979591836734694,
+            "morrey_values_over_ladder": [
+              6.585489044782597,
+              6.9023375626685,
+              7.290049268897302,
+              7.58373952614689,
+              7.947332687145705,
+              8.329690309807306
+            ],
+            "fitted_loglog_slope": 0.020315218798234874,
+            "bounded": false
+          },
+          {
+            "q": 3.12,
+            "morrey_exponent_e_q": -2.0384615384615383,
+            "morrey_values_over_ladder": [
+              5.75066845614038,
+              5.263283840229962,
+              4.854241270375697,
+              4.409654883474418,
+              4.035272660096845,
+              3.693266482355748
+            ],
+            "fitted_loglog_slope": -0.038554482928609364,
+            "bounded": true
+          },
+          {
+            "q": 3.3,
+            "morrey_exponent_e_q": -2.090909090909091,
+            "morrey_values_over_ladder": [
+              5.096485318218082,
+              4.133916370273717,
+              3.3789261579071166,
+              2.720284904058775,
+              2.2061504327381214,
+              1.789473741498292
+            ],
+            "fitted_loglog_slope": -0.09100203537616186,
+            "bounded": true
+          },
+          {
+            "q": 3.48,
+            "morrey_exponent_e_q": -2.137931034482759,
+            "morrey_values_over_ladder": [
+              4.57350158441528,
+              3.329030693834294,
+              2.4418156350254723,
+              1.764113880657263,
+              1.2838828714084447,
+              0.934530905969828
+            ],
+            "fitted_loglog_slope": -0.13802397894982985,
+            "bounded": true
+          },
+          {
+            "q": 3.66,
+            "morrey_exponent_e_q": -2.180327868852459,
+            "morrey_values_over_ladder": [
+              4.148126571393945,
+              2.738571792979434,
+              1.8218909019768825,
+              1.193821180235181,
+              0.7880272452065592,
+              0.5202506869463569
+            ],
+            "fitted_loglog_slope": -0.18042081331952992,
+            "bounded": true
+          },
+          {
+            "q": 3.84,
+            "morrey_exponent_e_q": -2.21875,
+            "morrey_values_over_ladder": [
+              3.7969062003258585,
+              2.294456710929724,
+              1.3971916247356666,
+              0.8380129985465746,
+              0.5063264059107343,
+              0.30597072491412075
+            ],
+            "fitted_loglog_slope": -0.21884294446707095,
+            "bounded": true
+          },
+          {
+            "q": 4.02,
+            "morrey_exponent_e_q": -2.253731343283582,
+            "morrey_values_over_ladder": [
+              3.5030676559273966,
+              1.9530671788372527,
+              1.0972660543037016,
+              0.6071910786955763,
+              0.3384728676205996,
+              0.1887086534746565
+            ],
+            "fitted_loglog_slope": -0.25382428775065313,
+            "bounded": true
+          },
+          {
+            "q": 4.199999999999999,
+            "morrey_exponent_e_q": -2.2857142857142856,
+            "morrey_values_over_ladder": [
+              3.2543599203453923,
+              1.685587480453403,
+              0.8797577807603403,
+              0.45226565865110135,
+              0.23421200326398495,
+              0.12130931800744789
+            ],
+            "fitted_loglog_slope": -0.2858072301813566,
+            "bounded": true
+          },
+          {
+            "q": 4.38,
+            "morrey_exponent_e_q": -2.315068493150685,
+            "morrey_values_over_ladder": [
+              3.0416649633582233,
+              1.472457885135033,
+              0.7182911146756232,
+              0.34512528834166756,
+              0.1670467811351414,
+              0.08086655024042808
+            ],
+            "fitted_loglog_slope": -0.31516143761775584,
+            "bounded": true
+          },
+          {
+            "q": 4.5600000000000005,
+            "morrey_exponent_e_q": -2.3421052631578947,
+            "morrey_values_over_ladder": [
+              2.8580814762236364,
+              1.3000777989786205,
+              0.5959230501988236,
+              0.26904795938712894,
+              0.12236416796547427,
+              0.05566065292481221
+            ],
+            "fitted_loglog_slope": -0.3421982076249656,
+            "bounded": true
+          },
+          {
+            "q": 4.74,
+            "morrey_exponent_e_q": -2.367088607594937,
+            "morrey_values_over_ladder": [
+              2.698306383301969,
+              1.1587844353163843,
+              0.5014644506781005,
+              0.21374517735906667,
+              0.0917777780793335,
+              0.039413792865802634
+            ],
+            "fitted_loglog_slope": -0.3671815520620078,
+            "bounded": true
+          },
+          {
+            "q": 4.92,
+            "morrey_exponent_e_q": -2.3902439024390243,
+            "morrey_values_over_ladder": [
+              2.558208666782516,
+              1.041578636129545,
+              0.4273407091256544,
+              0.1726931635328394,
+              0.07030092916085144,
+              0.02862308635428291
+            ],
+            "fitted_loglog_slope": -0.39033684690609516,
+            "bounded": true
+          },
+          {
+            "q": 5.1,
+            "morrey_exponent_e_q": -2.4117647058823533,
+            "morrey_values_over_ladder": [
+              2.434530178694399,
+              0.9433013513386892,
+              0.3683085968349523,
+              0.14164196123705425,
+              0.05487279069062581,
+              0.021261389328706623
+            ],
+            "fitted_loglog_slope": -0.4118576503494241,
+            "bounded": true
+          },
+          {
+            "q": 5.279999999999999,
+            "morrey_exponent_e_q": -2.4318181818181817,
+            "morrey_values_over_ladder": [
+              2.3246720098857767,
+              0.8600892205696052,
+              0.32066490263901526,
+              0.11775463966204376,
+              0.04356018025140203,
+              0.016116501930256776
+            ],
+            "fitted_loglog_slope": -0.4319111262852526,
+            "bounded": true
+          },
+          {
+            "q": 5.46,
+            "morrey_exponent_e_q": -2.4505494505494507,
+            "morrey_values_over_ladder": [
+              2.2265395700166373,
+              0.7890072016792544,
+              0.2817459111261431,
+              0.09909527629508849,
+              0.035110201711434724,
+              0.012441798748188227
+            ],
+            "fitted_loglog_slope": -0.4506423950165217,
+            "bounded": true
+          },
+          {
+            "q": 5.64,
+            "morrey_exponent_e_q": -2.4680851063829787,
+            "morrey_values_over_ladder": [
+              2.1384286384075146,
+              0.7277959853159567,
+              0.24960349061714324,
+              0.0843160649188006,
+              0.028691618354081322,
+              0.009764932310490582
+            ],
+            "fitted_loglog_slope": -0.4681780508500496,
+            "bounded": true
+          },
+          {
+            "q": 5.82,
+            "morrey_exponent_e_q": -2.484536082474227,
+            "morrey_values_over_ladder": [
+              2.0589404501353554,
+              0.674695328873976,
+              0.2227910427845474,
+              0.07246135070794206,
+              0.023741063242374134,
+              0.007779709503237971
+            ],
+            "fitted_loglog_slope": -0.4846290269412978,
+            "bounded": true
+          }
+        ],
+        "R_hi_ladder": [
+          10.0,
+          100.0,
+          1000.0,
+          10000.0,
+          100000.0,
+          1000000.0
+        ],
+        "ball_integral_ladder": [
+          {
+            "R_hi": 10.0,
+            "shell_integral_l1": 628.3185307179522,
+            "cumulative_l1": 628.3185307179522
+          },
+          {
+            "R_hi": 100.0,
+            "shell_integral_l1": 62203.53454107788,
+            "cumulative_l1": 62831.853071795835
+          },
+          {
+            "R_hi": 1000.0,
+            "shell_integral_l1": 6268658.852173253,
+            "cumulative_l1": 6331490.705245049
+          },
+          {
+            "R_hi": 10000.0,
+            "shell_integral_l1": 622089604.250159,
+            "cumulative_l1": 628421094.955404
+          },
+          {
+            "R_hi": 100000.0,
+            "shell_integral_l1": 62203534541.07788,
+            "cumulative_l1": 62831955636.03329
+          },
+          {
+            "R_hi": 1000000.0,
+            "shell_integral_l1": 6220353454107.787,
+            "cumulative_l1": 6283185409743.82
+          }
+        ],
+        "reason": "swept 24 q values in the open interval (3/2, 6) at x=0; q=3.12 gives a bounded ball-averaged \u1e40q,1 seminorm over the ladder (fitted log-log slope -0.038554482928609364 <= tol 0.01)"
+      }
+    },
+    "evades_t1_l3_not_converged": true,
+    "evades_t2_not_decays_to_zero": true,
+    "caught_by_morrey": true,
+    "control_passes": true
+  },
+  "control_b_real_dss_object_not_reached": {
+    "description": "leg 351's Type-I Biot-Savart witness (field_uB) combined with a genuinely periodic lambda>1 trajectory (S0_true=2.0, same construction as legs 357/362's own landed periodic-detector control), tagging this as a DISCRETELY self-similar object",
+    "lambda_result": {
+      "lambda": 2.6339905088693505,
+      "S0": 1.937,
+      "measured": true,
+      "reason": "a non-trivial return to |c|/|c0| within tolerance was found"
+    },
+    "ansatz_result": {
+      "ansatz": "DSS",
+      "satisfies_theorem_ansatz": false,
+      "measured_lambda": 2.6339905088693505,
+      "reason": "a non-trivial return to the initial amplitude was measured (S0=1.937, lambda=2.6339905088693505 > 1) -- a genuinely DISCRETELY self-similar, periodic-in-log-time orbit, NOT a fixed point of the rescaled flow, so NOT expressible as Tsai 1998's ansatz (1.2)_1's single stationary profile U under one parameter a; both Theorem 1 and Theorem 2 require this ansatz (leg 359's confirmed reading of Tsai 1998 Sections 4-5), so NEITHER theorem's hypothesis is met, regardless of decay or L^q status"
+    },
+    "t1_t2_verdict": {
+      "excludes": false,
+      "verdict": "NOT-REACHED-BY-ANSATZ",
+      "reason": "neither theorem's hypothesis is met: a non-trivial return to the initial amplitude was measured (S0=1.937, lambda=2.6339905088693505 > 1) -- a genuinely DISCRETELY self-similar, periodic-in-log-time orbit, NOT a fixed point of the rescaled flow, so NOT expressible as Tsai 1998's ansatz (1.2)_1's single stationary profile U under one parameter a; both Theorem 1 and Theorem 2 require this ansatz (leg 359's confirmed reading of Tsai 1998 Sections 4-5), so NEITHER theorem's hypothesis is met, regardless of decay or L^q status",
+      "deciding_clause": "Tsai 1998, eq (1.2), p.29-30: both Theorem 1 and Theorem 2 are stated \"If u is of the form (1.2)_1\" -- Leray's EXACT (continuous) backward self-similar ansatz",
+      "ansatz_detail": {
+        "ansatz": "DSS",
+        "satisfies_theorem_ansatz": false,
+        "measured_lambda": 2.6339905088693505,
+        "reason": "a non-trivial return to the initial amplitude was measured (S0=1.937, lambda=2.6339905088693505 > 1) -- a genuinely DISCRETELY self-similar, periodic-in-log-time orbit, NOT a fixed point of the rescaled flow, so NOT expressible as Tsai 1998's ansatz (1.2)_1's single stationary profile U under one parameter a; both Theorem 1 and Theorem 2 require this ansatz (leg 359's confirmed reading of Tsai 1998 Sections 4-5), so NEITHER theorem's hypothesis is met, regardless of decay or L^q status"
+      }
+    },
+    "morrey_verdict": {
+      "excludes": false,
+      "verdict": "NOT-REACHED-BY-ANSATZ",
+      "reason": "Theorem 1.2's hypothesis is not met: a non-trivial return to the initial amplitude was measured (S0=1.937, lambda=2.6339905088693505 > 1) -- a genuinely DISCRETELY self-similar, periodic-in-log-time orbit, NOT a fixed point of the rescaled flow, so NOT expressible as Tsai 1998's ansatz (1.2)_1's single stationary profile U under one parameter a; both Theorem 1 and Theorem 2 require this ansatz (leg 359's confirmed reading of Tsai 1998 Sections 4-5), so NEITHER theorem's hypothesis is met, regardless of decay or L^q status",
+      "deciding_clause": "leg 368 (experiments/journal/leg_368.md), quoted verbatim: \"Every theorem and every proof step is stated 'If u is of the form (1.2)' -- Leray's exact backward self-similar ansatz, the same gate as Tsai/NRS/Chae-Wolf's exact-SS work. No DSS content anywhere in the primary text.\"",
+      "ansatz_detail": {
+        "ansatz": "DSS",
+        "satisfies_theorem_ansatz": false,
+        "measured_lambda": 2.6339905088693505,
+        "reason": "a non-trivial return to the initial amplitude was measured (S0=1.937, lambda=2.6339905088693505 > 1) -- a genuinely DISCRETELY self-similar, periodic-in-log-time orbit, NOT a fixed point of the rescaled flow, so NOT expressible as Tsai 1998's ansatz (1.2)_1's single stationary profile U under one parameter a; both Theorem 1 and Theorem 2 require this ansatz (leg 359's confirmed reading of Tsai 1998 Sections 4-5), so NEITHER theorem's hypothesis is met, regardless of decay or L^q status"
+      }
+    },
+    "control_passes": true
+  },
+  "control_c_regression_unmoved": {
+    "description": "byte-hash of the two banked files (untouched by this leg's territory) plus an in-process re-derivation of both their ledger-bearing verdict fields, diffed against the banked values -- no file is written or overwritten by this function",
+    "sha256_p2_route_dsspb7_v1_json": "31d3a04e85e2a4940d6818c7b3641135181f4dafdbebaa1fb0e8f85c938935a8",
+    "sha256_p2_route_b7x_v1_json": "6558a7d3c3b192895af1bed302bfc84883034c7121e461486ef806c35be2aff9",
+    "mismatches": [],
+    "control_passes": true
+  },
+  "gate_answer": "yes",
+  "gate_answer_reasoning": "All three controls pass: (a) the synthetic non-monotone-decay candidate evades T1 (l3 converged=False) and T2 (decays_to_zero=False), reading 'NOT EXCLUDED' under T1/T2 alone, and is then caught as 'EXCLUDED-BY-MORREY' by the new Morrey entry -- the WIDENS gap demonstrated, then closed; (b) the real DSS object (field_uB + periodic lambda=2.6339905088693505>1 trajectory) reads 'NOT-REACHED-BY-ANSATZ' under T1/T2 and 'NOT-REACHED-BY-ANSATZ' under Morrey, both citing the exact-SS ansatz failure; (c) leg 357's and leg 362's banked verdicts reproduce with 0 mismatches.",
+  "runtime_seconds": 7.296948194503784
+}

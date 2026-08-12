@@ -614,6 +614,238 @@ def _ledger_nrs_tsai_three_way(l3_result, decay_result, ansatz_result):
     }
 
 
+# =============================================================================
+# Leg 370 extension: Theorem 1.2 (Morrey space Ṁq,1) -- the third exact-SS
+# ledger entry
+# =============================================================================
+#
+# Leg 368's WIDENS finding (experiments/journal/leg_368.md, writeup/data/
+# p2_route_mryx_v1.json), full-text-read against arXiv:2006.15776 (Jiu-Wang-
+# Wei, "Leray's backward self-similar solutions to the 3D Navier-Stokes
+# equations in Morrey spaces"), quoted verbatim at the cited primary-text
+# locators, never paraphrased or re-derived here:
+#
+#   Morrey norm (Sec 2.1), quoted verbatim: "||f||_{Ṁp,l(Ω)} = sup_{R>0}
+#   sup_{x∈Ω} [ R^{3(1/p−1/l)} ∫_{Bx(R)∩Ω} |f(y)|^l dy ]^{1/l}". This is a
+#   purely averaged, ball-integral (Lebesgue-measure) scaling condition -- it
+#   has NO pointwise-decay content at all. For l=1 (the case Theorem 1.2
+#   uses): ||f||_{Ṁq,1} = sup_{R>0} sup_x [ R^{3(1/q−1)} ∫_{Bx(R)} |f(y)| dy ].
+#
+#   Embedding chain (eq 1.6), quoted verbatim: "we hold the following
+#   embedding relation L^q(R³) ↪ L^{q,∞}(R³) ↪ Ṁq,l(R³) ↪ Ṁq,1(R³), 1 ≤ l <
+#   q. This fact can be found in [5]." Ṁq,1 is the LARGEST (weakest-
+#   hypothesis) space in the entire chain for fixed q, strictly containing
+#   L^q.
+#
+#   Theorem 1.2, quoted verbatim: "Let U ∈ W^{1,2}_loc(R³) be a weak solution
+#   of (1.3). If U ∈ Ṁq,1(R³) with 3/2 < q < 6, (1.10), then U ≡ 0."
+#
+#   Ansatz check, quoted verbatim (leg 368): "Every theorem and every proof
+#   step is stated 'If u is of the form (1.2)' -- Leray's exact backward
+#   self-similar ansatz, the same gate as Tsai/NRS/Chae-Wolf's exact-SS
+#   work. No DSS content anywhere in the primary text." Theorem 1.2's
+#   hypothesis, like T1's and T2's, therefore requires the exact-SS ansatz
+#   (1.2)_1 -- the SAME gate applied to T1/T2 above applies here, checked
+#   FIRST, exactly as for T1/T2.
+#
+#   Leg 368's own scoping (quoted): "an exact-SS weak solution U that is (a)
+#   NOT in L³(R³) (T1 reads NOT-EXCLUDED) AND (b) fails the screen's single-
+#   generic-ray fitted-exponent-and-monotonic-decrease test (T2 reads NOT-
+#   EXCLUDED ...) BUT whose ball-averaged mass on growing balls is
+#   nonetheless controlled at the critical Ṁq,1 scaling rate ... is excluded
+#   by Theorem 1.2 and evades both of the screen's current encoded tests."
+#   This is the WIDENS gap this extension operationalizes.
+# =============================================================================
+
+def _l1_ball_integral_ladder(field_fn, R_hi_ladder, inner_R=1e-6,
+                              n_r=300, n_c=48, n_phi=16):
+    """Cumulative Int_{B_R(0)} |V(y)| dy over the SAME shell ladder and the
+    SAME quadrature convention l3_norm_ladder() already uses (reuses
+    _spherical_shell_nodes() directly) -- power 1 (|V|, an L^1-type
+    integrand), not power 3 (|V|^3, l3_norm_shell()'s integrand). This is
+    the ball-integral half of the Ṁq,1 seminorm's sup_R [...] bracket,
+    R^{3(1/q-1)} Int_{B_R(0)} |f(y)| dy, evaluated at x=0 -- the candidate's
+    own natural center, the same convention l3_norm_ladder() uses for its
+    R^3 quadrature (see morrey_ball_average_sweep()'s docstring for the
+    resulting, STATED scope limitation: x=0 only, not the theorem's literal
+    sup over all x in R^3)."""
+    rows = []
+    cum = 0.0
+    prev_R = inner_R
+    for R in R_hi_ladder:
+        pts, w = _spherical_shell_nodes(prev_R, R, n_r, n_c, n_phi)
+        V = field_fn(pts)
+        mag1 = np.linalg.norm(V, axis=-1)
+        shell = float(np.sum(w * mag1))
+        cum += shell
+        rows.append({"R_hi": R, "shell_integral_l1": shell, "cumulative_l1": cum})
+        prev_R = R
+    return rows
+
+
+def morrey_ball_average_sweep(field_fn, q_values=None,
+                               R_hi_ladder=(10.0, 100.0, 1e3, 1e4, 1e5, 1e6),
+                               inner_R=1e-6, rel_tol=1e-2,
+                               n_r=300, n_c=48, n_phi=16):
+    """Operationalizes Theorem 1.2's hypothesis U in Ṁq,1(R^3), 3/2 < q < 6
+    (quoted verbatim in the module comment above) as a genuine numerical
+    test, at the candidate's own resolution -- REUSING l3_norm_ladder()'s
+    own shell-ladder machinery (_spherical_shell_nodes(), the same R_hi
+    ladder and n_r/n_c/n_phi quadrature resolution) rather than inventing a
+    second discretization convention.
+
+    ||f||_{Ṁq,1} = sup_{R>0} sup_x [ R^{3(1/q-1)} Int_{B_x(R)} |f(y)| dy ]
+    (l=1 specialization of the module comment's quoted Sec 2.1 definition).
+    This ball-averaged seminorm has NO pointwise-decay requirement -- it is
+    a purely Lebesgue-integral quantity, unlike T2's single-ray fitted-decay
+    proxy, and it is a strictly weaker (larger-class) membership test than
+    T1's global L^3 convergence by the quoted embedding chain (eq 1.6).
+
+    Operationally: sup_x is evaluated at x=0 ONLY (the candidate's own
+    natural center -- the SAME scope l3_norm_ladder() already uses for its
+    quadrature, not the theorem's literal sup over uncountably many x in
+    R^3), and sup_R is evaluated over the SAME finite R ladder
+    l3_norm_ladder() uses, for a finite sweep of q values densely sampled
+    across the OPEN interval (3/2, 6) (excluding both endpoints, matching
+    the theorem's own strict range). Membership is reported TRUE iff ANY
+    swept q gives a ladder that does not diverge (a non-increasing log-log
+    trend over the ladder, the same "measurement, not an error" convention
+    l3_norm_ladder()'s own convergence check uses).
+
+    THIS IS A GENUINE AT-RESOLUTION NUMERICAL TEST, NOT A PLACEHOLDER, BUT
+    IT IS NOT A LITERAL, EXHAUSTIVE COMPUTATION OF THE THEOREM'S HYPOTHESIS
+    SPACE: a candidate could in principle be excluded by Theorem 1.2 at some
+    off-origin x this sweep never samples, or at some q value strictly
+    between the swept grid points. This is a KNOWN, STATED limitation of
+    this specific operationalization -- not a claim that surviving this
+    sweep proves the candidate is genuinely outside Ṁq,1 for every q and
+    every x."""
+    ball_ladder = _l1_ball_integral_ladder(field_fn, R_hi_ladder, inner_R,
+                                            n_r, n_c, n_phi)
+    R_arr = np.array([row["R_hi"] for row in ball_ladder], dtype=float)
+    I_arr = np.array([row["cumulative_l1"] for row in ball_ladder], dtype=float)
+    if q_values is None:
+        # densely sampled OPEN interval (3/2, 6), endpoints excluded to
+        # match the theorem's own strict range "3/2 < q < 6"
+        q_values = np.linspace(1.5, 6.0, 26)[1:-1]
+    else:
+        q_values = np.asarray(q_values, dtype=float)
+
+    per_q = []
+    any_bounded = False
+    best_q = None
+    best_slope = None
+    for q in q_values:
+        e_q = 3.0 * (1.0 / q - 1.0)
+        morrey_vals = (R_arr ** e_q) * I_arr
+        safe = np.maximum(morrey_vals, 1e-300)
+        slope, _ = np.polyfit(np.log(R_arr), np.log(safe), 1)
+        # a non-increasing (or flat) trend across the ladder means the
+        # ball-averaged seminorm is NOT diverging as R grows -- a bounded
+        # sup, i.e. Theorem 1.2's Ṁq,1 membership condition at this q. The
+        # SAME rel_tol-on-the-tail convention l3_norm_ladder()'s own
+        # `converged` flag uses (relative change of the LAST step), applied
+        # to the boundedness direction instead of the convergence direction.
+        last_vs_first = bool(morrey_vals[-1] <= morrey_vals[0] * (1.0 + rel_tol))
+        bounded = bool(slope <= rel_tol and last_vs_first
+                        and np.all(np.isfinite(morrey_vals)))
+        per_q.append({
+            "q": float(q),
+            "morrey_exponent_e_q": float(e_q),
+            "morrey_values_over_ladder": morrey_vals.tolist(),
+            "fitted_loglog_slope": float(slope),
+            "bounded": bounded,
+        })
+        if bounded and not any_bounded:
+            any_bounded = True
+            best_q = float(q)
+            best_slope = float(slope)
+
+    return {
+        "in_morrey_class": any_bounded,
+        "witnessing_q": best_q,
+        "witnessing_slope": best_slope,
+        "q_values_swept": [float(q) for q in q_values],
+        "per_q": per_q,
+        "R_hi_ladder": list(R_hi_ladder),
+        "ball_integral_ladder": ball_ladder,
+        "reason": (
+            f"swept {len(q_values)} q values in the open interval (3/2, 6) "
+            "at x=0; "
+            + (f"q={best_q!r} gives a bounded ball-averaged Ṁq,1 seminorm "
+               f"over the ladder (fitted log-log slope {best_slope!r} <= "
+               f"tol {rel_tol!r})" if any_bounded else
+               "no swept q gave a bounded ladder over this ball ladder "
+               "(fitted log-log slope stayed positive / the seminorm grew "
+               "for every sampled q)")
+        ),
+    }
+
+
+def ledger_morrey(morrey_result, ansatz_result):
+    """The third exact-SS ledger entry: Theorem 1.2 (Jiu-Wang-Wei,
+    arXiv:2006.15776), operationalized above. The ansatz gate is checked
+    FIRST and is dispositive on its own, EXACTLY as _ledger_nrs_tsai_
+    three_way() already does for T1/T2 -- per leg 368's confirmed reading,
+    Theorem 1.2 is likewise stated only "If u is of the form (1.2)" (quoted
+    in the module comment above), so a candidate that fails the exact-SS
+    ansatz is not reached by this theorem either, regardless of its Ṁq,1
+    membership."""
+    ansatz_ok = ansatz_result.get("satisfies_theorem_ansatz")
+    if ansatz_ok is not True:
+        return {
+            "excludes": False,
+            "verdict": "NOT-REACHED-BY-ANSATZ",
+            "reason": (
+                "Theorem 1.2's hypothesis is not met: " + ansatz_result["reason"]
+            ),
+            "deciding_clause": (
+                "leg 368 (experiments/journal/leg_368.md), quoted verbatim: "
+                "\"Every theorem and every proof step is stated 'If u is of "
+                "the form (1.2)' -- Leray's exact backward self-similar "
+                "ansatz, the same gate as Tsai/NRS/Chae-Wolf's exact-SS "
+                "work. No DSS content anywhere in the primary text.\""
+            ),
+            "ansatz_detail": ansatz_result,
+        }
+    if morrey_result["in_morrey_class"]:
+        return {
+            "excludes": True,
+            "verdict": "EXCLUDED-BY-MORREY",
+            "reason": (
+                "the candidate satisfies the exact-SS ansatz and its "
+                "ball-averaged L^1 mass over growing balls is bounded at "
+                f"the Ṁq,1 scaling rate for q={morrey_result['witnessing_q']!r} "
+                "-- " + morrey_result["reason"]
+            ),
+            "deciding_clause": (
+                "leg 368 (experiments/journal/leg_368.md), quoting "
+                "arXiv:2006.15776 (Jiu-Wang-Wei) verbatim -- Theorem 1.2: "
+                "\"Let U ∈ W^{1,2}_loc(R³) be a weak solution of (1.3). If "
+                "U ∈ Ṁq,1(R³) with 3/2 < q < 6, (1.10), then U ≡ 0.\" "
+                "Embedding chain (eq 1.6): \"we hold the following "
+                "embedding relation L^q(R³) ↪ L^{q,∞}(R³) ↪ Ṁq,l(R³) ↪ "
+                "Ṁq,1(R³), 1 ≤ l < q. This fact can be found in [5].\" "
+                "Ṁq,1 definition (Sec 2.1, l=1 specialization): "
+                "\"||f||_{Ṁp,l(Ω)} = sup_{R>0} sup_{x∈Ω} [ R^{3(1/p−1/l)} "
+                "∫_{Bx(R)∩Ω} |f(y)|^l dy ]^{1/l}\"."
+            ),
+            "ansatz_detail": ansatz_result,
+            "morrey_detail": morrey_result,
+        }
+    return {
+        "excludes": False,
+        "verdict": "NOT EXCLUDED",
+        "reason": (
+            "the candidate satisfies the exact-SS ansatz but no swept q in "
+            "(3/2, 6) gave a bounded Ṁq,1 seminorm over the measured "
+            "ladder -- " + morrey_result["reason"]
+        ),
+        "ansatz_detail": ansatz_result,
+        "morrey_detail": morrey_result,
+    }
+
+
 def ledger_chae_tsai(ctrx_path=CTRX_JSON):
     """Parses leg 326's landed record (writeup/data/p2_route_ctrx_v1.json)
     programmatically. Chae-Tsai's hypothesis is the rescaled EULER system
@@ -698,25 +930,38 @@ def ledger_pineau_vicol(lambda_result, pvlx_path=PVLX_JSON):
     }
 
 
-def machine_read_ledger(l3_result, lambda_result, decay_result=None, ansatz_result=None):
-    """The full three-entry rigidity ledger for one candidate, machine-read
-    against its own measurements (l3_result, lambda_result) and against
-    legs 326/330's landed JSON records. `reportable` is the B7 yes-branch
-    consequence: every candidate that reaches this function carries its
-    exclusion status attached, whatever that status is.
+def machine_read_ledger(l3_result, lambda_result, decay_result=None,
+                         ansatz_result=None, morrey_result=None):
+    """The full rigidity ledger for one candidate, machine-read against its
+    own measurements (l3_result, lambda_result) and against legs 326/330's
+    landed JSON records. `reportable` is the B7 yes-branch consequence:
+    every candidate that reaches this function carries its exclusion status
+    attached, whatever that status is.
 
     decay_result/ansatz_result are OPTIONAL (default None): omitting them
     (every existing call site does) reproduces leg 357's original
     NRS_Tsai reading byte-for-byte via ledger_nrs_tsai()'s own
     backward-compatible branch. Passing both (leg 362's extension) upgrades
     NRS_Tsai to the three-way EXCLUDED-BY-T1/EXCLUDED-BY-T2/
-    NOT-REACHED-BY-ANSATZ reading -- see _ledger_nrs_tsai_three_way()."""
-    return {
+    NOT-REACHED-BY-ANSATZ reading -- see _ledger_nrs_tsai_three_way().
+
+    morrey_result is ALSO OPTIONAL (default None), leg 370's extension:
+    omitting it (every existing call site does) reproduces the exact same
+    dict shape as before this leg -- no "Morrey" key at all, so
+    set(ledger.keys()) is UNCHANGED for every existing caller. Passing it
+    (requires ansatz_result to also be supplied, since ledger_morrey() gates
+    on the ansatz exactly as NRS_Tsai's three-way reading does) adds a
+    "Morrey" key carrying ledger_morrey()'s EXCLUDED-BY-MORREY / NOT
+    EXCLUDED / NOT-REACHED-BY-ANSATZ verdict, additively."""
+    ledger = {
         "NRS_Tsai": ledger_nrs_tsai(l3_result, decay_result, ansatz_result),
         "Chae_Tsai": ledger_chae_tsai(),
         "Pineau_Vicol": ledger_pineau_vicol(lambda_result),
         "reportable": True,
     }
+    if morrey_result is not None and ansatz_result is not None:
+        ledger["Morrey"] = ledger_morrey(morrey_result, ansatz_result)
+    return ledger
 
 
 def screen_candidate(field_fn, s_vals=None, c_vals=None,

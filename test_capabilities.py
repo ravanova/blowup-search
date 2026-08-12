@@ -94,6 +94,21 @@ def test_leg_362_dssp_screen_extension_is_findable():
     print("[ok] leg 362's extension is registered additively, no duplicate module entry")
 
 
+def test_leg_370_dssp_screen_morrey_extension_is_findable():
+    """Leg 370's third exact-SS ledger entry (EXCLUDED-BY-MORREY, Theorem
+    1.2 / arXiv:2006.15776) must be described in the SAME dssp_screen.py
+    entry it extends, not a duplicate/ghost entry -- same additive
+    convention leg 362's own registration test checks."""
+    hits = find("EXCLUDED-BY-MORREY")
+    assert hits, "leg 370's Morrey extension is not findable via capabilities.find()"
+    assert all(c["module"] == "solver/dssp_screen.py" for c in hits), \
+        "leg 370's extension should live in the existing dssp_screen.py entry, not a new module"
+    assert find("morrey_ball_average_sweep"), "leg 370's sweep function is not findable"
+    assert find("Jiu-Wang-Wei"), "leg 370's source citation is not findable"
+    print(f"    'EXCLUDED-BY-MORREY' -> {len(hits)} entr(ies), same module as legs 357/362's")
+    print("[ok] leg 370's Morrey extension is registered additively, no duplicate module entry")
+
+
 if __name__ == "__main__":
     test_every_solver_module_is_indexed()
     test_entries_are_complete_and_point_at_real_files()
@@ -101,4 +116,5 @@ if __name__ == "__main__":
     test_the_search_finds_the_thing_route_m_nearly_rebuilt()
     test_superseded_modules_say_so()
     test_leg_362_dssp_screen_extension_is_findable()
+    test_leg_370_dssp_screen_morrey_extension_is_findable()
     print("\nALL CAPABILITY-INDEX TESTS PASSED")

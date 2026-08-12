@@ -6,16 +6,19 @@ import numpy as np
 
 from solver.dssp_biot_savart import field_uB
 from solver.dssp_screen import (
+    _ledger_nrs_tsai_three_way,
     axisymmetry_residual,
     classify_ss_ansatz,
     decays_to_zero_at_infinity,
     fitted_far_field_decay_exponent,
     l3_norm_ladder,
     ledger_chae_tsai,
+    ledger_morrey,
     ledger_nrs_tsai,
     ledger_pineau_vicol,
     lambda_from_trajectory,
     machine_read_ledger,
+    morrey_ball_average_sweep,
     screen_candidate,
 )
 
@@ -312,6 +315,123 @@ def test_machine_read_ledger_optional_args_default_to_original_behaviour():
     print("[ok] machine_read_ledger() with two args reproduces leg 357's original shape")
 
 
+_RAY_DIRECTION = np.array([0.4, 0.5, np.sqrt(1.0 - 0.4 ** 2 - 0.5 ** 2)])
+_RAY_DIRECTION = _RAY_DIRECTION / np.linalg.norm(_RAY_DIRECTION)
+
+
+def _nonmonotone_morrey_field(x):
+    """Leg 370's planted control field: a synthetic exact-SS profile with
+    base decay U(y) ~ (y/|y|)/|y| plus a narrow angular*radial bump
+    concentrated on the SAME sampled ray fitted_far_field_decay_exponent()
+    uses, at r~1000 -- pushes the LAST sampled magnitude above the FIRST
+    (evading T2's monotonic-decrease-between-first-and-last proxy) while
+    staying angularly narrow enough that the full-solid-angle L^3 shell
+    integral is still genuinely log-divergent (evading T1). See
+    experiments/p2_route_b7m_v1.py's own fuller docstring for the same
+    construction (this is the identical field, duplicated here so this
+    test file does not import a runner script)."""
+    x = np.asarray(x, dtype=float)
+    r = np.linalg.norm(x, axis=-1, keepdims=True)
+    r = np.maximum(r, 1e-9)
+    base = 1.0 / r
+    direction = x / r
+    cosang = np.clip(np.sum(direction * _RAY_DIRECTION, axis=-1, keepdims=True), -1.0, 1.0)
+    ang = np.arccos(cosang)
+    angular_bump = np.exp(-(ang ** 2) / 0.01)
+    radial_bump = np.exp(-((np.log10(r) - 3.0) ** 2) / 0.0005)
+    bump = 300.0 * angular_bump * radial_bump
+    amp = base * (1.0 + bump)
+    return direction * amp
+
+
+def test_morrey_ball_average_sweep_finds_membership_for_type_i_decay():
+    """A plain 1/|x| exact-SS profile's ball-averaged L^1 mass grows like
+    R^2 (Int_{B_R} |V| dy ~ Int r^2 dr / r ~ R^2), which IS bounded at the
+    M-dot_{q,1} scaling rate for q near 3 (inside the open (3/2,6) range) --
+    the sweep must find a witnessing q and report in_morrey_class True."""
+    def field_type_i(x):
+        x = np.asarray(x, dtype=float)
+        r = np.linalg.norm(x, axis=-1, keepdims=True)
+        r = np.maximum(r, 1e-9)
+        return x / (r * r)
+    m = morrey_ball_average_sweep(field_type_i, n_r=100, n_c=16, n_phi=8)
+    assert m["in_morrey_class"] is True
+    assert 1.5 < m["witnessing_q"] < 6.0
+    print(f"[ok] Type-I 1/|x| profile: in_morrey_class=True, witnessing_q={m['witnessing_q']:.3f}")
+
+
+def test_ledger_morrey_not_reached_by_ansatz_on_dss():
+    """A candidate classified DSS (via a genuinely periodic lambda>1
+    trajectory) must read NOT-REACHED-BY-ANSATZ under the Morrey entry,
+    exactly as T1/T2 already do -- the ansatz gate applies to Theorem 1.2
+    too, per leg 368's confirmed reading (no DSS content anywhere in the
+    primary text)."""
+    S0_true = 2.0
+    s = np.linspace(0.0, 3.0, 3001)
+    c = 0.5 * np.cos(2.0 * np.pi * s / S0_true) + 0.5000001
+    c[0] = 1.0000001
+    lam_result = lambda_from_trajectory(s, c, return_tol=1e-2)
+    ansatz = classify_ss_ansatz(lam_result)
+    assert ansatz["ansatz"] == "DSS"
+
+    morrey = morrey_ball_average_sweep(field_uB, n_r=100, n_c=16, n_phi=8)
+    verdict = ledger_morrey(morrey, ansatz)
+    assert verdict["verdict"] == "NOT-REACHED-BY-ANSATZ"
+    assert "(1.2)" in verdict["deciding_clause"] or "ansatz" in verdict["deciding_clause"].lower()
+    print(f"[ok] Morrey entry on DSS object: {verdict['verdict']!r}, ansatz-gated exactly like T1/T2")
+
+
+def test_gate_control_a_planted_widen_then_close():
+    """Leg 370's gate control (a): the planted non-monotone-decay control
+    must evade BOTH T1 (L^3 does not converge) and T2 (does not read
+    decays-to-zero) while the new Morrey entry catches it as
+    EXCLUDED-BY-MORREY -- demonstrating leg 368's WIDENS finding
+    concretely, then closing it."""
+    field = _nonmonotone_morrey_field
+    l3 = l3_norm_ladder(field, R_hi_ladder=(10.0, 100.0, 1e3, 1e4, 1e5, 1e6),
+                         n_r=200, n_c=32, n_phi=16)
+    decay = fitted_far_field_decay_exponent(field)
+    decay_test = decays_to_zero_at_infinity(decay)
+    lam_none = {"lambda": None, "S0": None, "measured": False,
+                "reason": "static synthetic candidate, no trajectory supplied"}
+    ansatz = classify_ss_ansatz(lam_none)
+
+    t1_t2 = _ledger_nrs_tsai_three_way(l3, decay_test, ansatz)
+    assert t1_t2["verdict"] == "NOT EXCLUDED", \
+        f"planted control should evade T1/T2, got {t1_t2['verdict']!r}"
+
+    morrey = morrey_ball_average_sweep(field, n_r=100, n_c=16, n_phi=8)
+    morrey_verdict = ledger_morrey(morrey, ansatz)
+    assert morrey_verdict["verdict"] == "EXCLUDED-BY-MORREY", \
+        f"planted control should be caught by Morrey, got {morrey_verdict['verdict']!r}"
+    print(f"[ok] control (a): T1/T2={t1_t2['verdict']!r} -> Morrey={morrey_verdict['verdict']!r}")
+
+
+def test_machine_read_ledger_morrey_key_is_opt_in():
+    """machine_read_ledger()'s new morrey_result parameter must be
+    backward compatible: omitting it (every pre-existing call site) must
+    NOT add a 'Morrey' key, so set(ledger.keys()) is UNCHANGED for every
+    caller that predates this leg -- this is what makes leg 357's and leg
+    362's banked JSON reproduce unmoved."""
+    l3 = l3_norm_ladder(field_uB, R_hi_ladder=(10.0, 100.0, 1e3, 1e4),
+                         n_r=150, n_c=24, n_phi=12)
+    lam = {"lambda": None, "S0": None, "measured": False, "reason": "no trajectory"}
+
+    ledger_default = machine_read_ledger(l3, lam)
+    assert set(ledger_default.keys()) == {"NRS_Tsai", "Chae_Tsai", "Pineau_Vicol", "reportable"}, \
+        "machine_read_ledger()'s default key set changed -- breaks backward compatibility"
+
+    decay = fitted_far_field_decay_exponent(field_uB)
+    decay_test = decays_to_zero_at_infinity(decay)
+    ansatz = classify_ss_ansatz(lam)
+    morrey = morrey_ball_average_sweep(field_uB, n_r=80, n_c=12, n_phi=8,
+                                        R_hi_ladder=(10.0, 100.0, 1e3, 1e4))
+    ledger_with_morrey = machine_read_ledger(l3, lam, decay_test, ansatz, morrey)
+    assert set(ledger_with_morrey.keys()) == {"NRS_Tsai", "Chae_Tsai", "Pineau_Vicol",
+                                               "Morrey", "reportable"}
+    print("[ok] machine_read_ledger()'s Morrey key is opt-in (backward compatible by default)")
+
+
 if __name__ == "__main__":
     test_l3_norm_diverges_on_type_i_witness()
     test_fitted_decay_exponent_matches_type_i_envelope()
@@ -332,4 +452,8 @@ if __name__ == "__main__":
     test_gate_control_1_planted_synthetic_exact_ss_gap_then_closure()
     test_gate_control_2_real_dss_object_not_reached_by_ansatz()
     test_machine_read_ledger_optional_args_default_to_original_behaviour()
+    test_morrey_ball_average_sweep_finds_membership_for_type_i_decay()
+    test_ledger_morrey_not_reached_by_ansatz_on_dss()
+    test_gate_control_a_planted_widen_then_close()
+    test_machine_read_ledger_morrey_key_is_opt_in()
     print("\nALL DSSP-SCREEN TESTS PASSED")
