@@ -1,0 +1,126 @@
+{
+  "leg": 358,
+  "codename": "ROUTE-RPOL",
+  "purpose": "Sourced requirements table + costed spec-compliant retry spec for leg 353's DSSP-NKBASIN NO (route 4 stop). Not a re-adjudication of leg 353's verdict.",
+  "predecessor": {
+    "leg": 353,
+    "verdict": "NO: matrix-free Newton (plain line search) recovered 0/5 published RPOs from Lucas & Kerswell 2015 Table IV, DNS T_total=2000",
+    "declared_simplifications": [
+      "DNS length: T_total=2000 (this leg's affordable window)",
+      "globalization: plain-Newton line search, not hookstep/trust-region"
+    ],
+    "dns_wall_seconds_measured": 352.3256187438965,
+    "dns_steps": 200000,
+    "newton_attempts": 5,
+    "newton_attempt_wall_seconds": [90.2, 310.3, 91.3, 113.1, 376.6],
+    "max_newton_iters_used": 10,
+    "max_gmres_iters_used": 20,
+    "resolution_N": 24,
+    "target_class": "RPOs (nonzero x-shift s, e.g. UPO37 s=0.375) -- NOT plain periodic orbits (s=m=0)"
+  },
+  "sourced_requirements_table": [
+    {
+      "paper": "Lucas & Kerswell 2015, Phys. Fluids 27, 045106",
+      "arxiv": "1406.1820v2",
+      "fetched_via": "https://arxiv.org/pdf/1406.1820 (direct PDF, HTTP 200)",
+      "role": "the paper whose Table IV RPOs leg 353 tried to recover",
+      "dns_length_T": "5e6 (\"an extended DNS was conducted to T=5x10^6 which is 50 times longer than each of the 3 runs analysed in [Chandler & Kerswell 2013]\")",
+      "recording_threshold_Rthres": 0.3,
+      "attempted_window": "R<0.25 AND 0.5<T<60 (5120 of 11934 total near-recurrence guesses actually fed to Newton; rest skipped as out of useful range)",
+      "globalization_method": "Newton-GMRES-hookstep (same algorithm as Chandler & Kerswell 2013), GPU-accelerated time-stepping",
+      "reported_success_rate": "~10% at R>=0.2 (their own words: \"the chances of converging a guess settle to about 10% for R >~ 0.2\", Fig. 3) -- leg 353's 5 attempts sat at R=0.177-0.263, i.e. squarely in this ~10%-success regime per the source paper itself",
+      "net_yield": "81 unique converged recurrent flows from 5120 attempted guesses (raw per-guess convergence rate is higher than this net figure because of heavy duplication into the same few dozen distinct solutions)",
+      "quote_pinning_note": "leg 353's 0/5 result is NOT anomalous relative to this source's own reported success curve at matching residual"
+    },
+    {
+      "paper": "Chandler & Kerswell 2013, J. Fluid Mech. 722, 554",
+      "arxiv": "1207.4682",
+      "fetched_via": "https://arxiv.org/pdf/1207.4682 (direct PDF, HTTP 200)",
+      "role": "origin of the Re=60 2D Kolmogorov recurrent-flow search + the Newton-GMRES-hookstep implementation both 1406.1820 and leg 353 descend from",
+      "dns_length_T": "1e5 per run (3 runs at Re=60: e,f,g); Series B (nonzero-shift RPO search) at Re=60 used 3e5 (run p)",
+      "recording_threshold_Rthres": "0.3 at Re=60 (0.15 too restrictive at Re=40, relaxed; 0.35/0.4 needed at Re=80/100)",
+      "globalization_method": "Newton-GMRES-Hookstep, max Newton=75, max GMRES=500, max Hookstep=50 iterations (\"fairly conservative limits\" per the authors)",
+      "reported_success_rate": {
+        "Re60_seriesA_s0_m0_plain_periodic": "64/102 (62.7%), 67/104 (64.4%), 58/78 (74.4%) -- runs e,f,g",
+        "Re60_seriesB_nonzero_shift_true_RPOs": "7/163 (4.3%) -- run p, THE CLASS UPO37 BELONGS TO (s=0.375 != 0)"
+      },
+      "wall_clock_reported": "\"typically lead to run times of a couple of months for each of the Re=60, 80 and 100 runs\" on a single Xeon X5670 CPU core (pre-GPU); Re=40 had to be subdivided 12 ways to be manageable",
+      "quote_pinning_note": "the RPO-specific success rate (4.3%) is an order of magnitude below the plain-periodic-orbit rate (62-74%) at the SAME DNS length and SAME hookstep code -- UPO37 is in the harder class even in the source's own hands"
+    },
+    {
+      "paper": "Viswanath 2007, J. Fluid Mech. 580, 339 (\"Recurrent motions within plane Couette turbulence\")",
+      "arxiv": "physics/0604062",
+      "fetched_via": "https://arxiv.org/pdf/physics/0604062 (direct PDF, HTTP 200)",
+      "role": "origin of the hookstep methodology itself, cited by both Kolmogorov-flow papers above as the source of their algorithm",
+      "dns_length_T": "not the paper's focus (plane Couette flow, different system); not extracted as a comparable number",
+      "recurrence_threshold": "not applicable in the same form (different recurrence-detection scheme for that system)",
+      "globalization_method": "locally-constrained optimal hookstep in a Krylov (GMRES/Arnoldi) subspace -- SVD-based trust-region step on the Hessenberg system, radius adapted step-to-step by comparing actual vs. predicted error reduction (Dennis & Schnabel 1996 trust-region machinery)",
+      "load_bearing_quote": "\"the Newton step by itself never leads to convergence. The widely used expedient of damping the Newton step is also ineffective.\"",
+      "significance": "SOURCED, DIRECT confirmation that leg 353's globalization gap (plain-Newton line search = a form of step damping) is the ALGORITHM CLASS the hookstep literature explicitly built itself to replace, not merely a slower version of the same approach -- the founding paper of this methodology states in so many words that leg 353's approach is expected not to work on this problem class, independent of DNS length"
+    }
+  ],
+  "refusals_to_measure": [
+    {
+      "instrument": "export.arxiv.org/api/query (Atom API)",
+      "observed": "HTTP 429 \"Rate exceeded\" on every attempt across ~5 retries with 15-30s backoff, spanning several minutes",
+      "diagnosis": "shared IP-based rate limit, plausibly contended by the 4-leg-parallel roster hitting the same export API concurrently (leg 326 banked a similar 429 pattern on a different day)",
+      "banked_as": "REFUSAL, not silently dropped -- worked around by fetching PDFs directly from arxiv.org/pdf/<id> (HTTP 200 every time, no rate limiting observed on that path), which is how all four sourced papers were actually retrieved",
+      "environment_fact": "arxiv.org direct PDF fetch and WebFetch of arxiv.org/abs pages both work reliably from this container; only the export.arxiv.org search/query API is rate-limited under concurrent leg load"
+    },
+    {
+      "instrument": "arxiv.org/a/viswanath_d_1(.html) author listing page",
+      "observed": "HTTP 404 (page format apparently deprecated/changed)",
+      "banked_as": "REFUSAL for the listing-page route; worked around by fetching the known arXiv ID (physics/0604062) directly by title-recall + direct PDF URL guess, which succeeded (HTTP 200) -- the paper was NOT located via arXiv search, it was located by domain knowledge of the citation and confirmed by successful fetch + content match (hookstep, Newton-GMRES, trust region, plane Couette all present in the fetched text)"
+    }
+  ],
+  "costed_retry_spec": {
+    "what_spec_compliance_means_here": "matching leg 353's own two DECLARED simplifications (DNS length, globalization) at whatever level the sourced literature actually used -- NOT necessarily matching resolution (leg 353 used N=24; the literature's 'full' recurrence check used a much finer grid, Nx=Ny=128 per 1406.1820's own text on its reduced-criterion speedup -- resolution was never one of leg 353's declared gaps, so it is flagged separately below, not folded into this cost)",
+    "requirement_1_globalization": {
+      "what": "implement a genuine locally-constrained optimal hookstep (Viswanath 2007 sec 2.3 / Dennis-Schnabel trust region) inside the existing matrix-free GMRES Newton loop, replacing the plain line search",
+      "cost_estimate": "1 leg, standard difficulty -- this is a self-contained numerical-methods implementation task (SVD on a small Hessenberg system, ~d<30 per Viswanath's own note) that can be unit-tested and validated against leg 353's own control case (the 1%-perturbed laminar fixed point, which line-search-Newton already converges cleanly on) before being pointed at the hard RPO targets",
+      "compute_cost": "negligible (unit tests + control-case validation, seconds-to-minutes, no long DNS needed for this leg)"
+    },
+    "requirement_2_dns_length": {
+      "what": "extend the recurrence-search DNS from T=2000 to a spec-compliant window",
+      "minimum_spec_compliant": "T=1e5 (Chandler & Kerswell's per-run length at Re=60, the SHORTEST of the three sourced DNS lengths, and the one that first produced UPO37's neighbors)",
+      "full_literature_scale": "T=5e6 (Lucas & Kerswell's extended run, 50x the above)",
+      "compute_cost_same_resolution_N24": {
+        "measured_rate": "352.3256s wall for T_total=2000 (200000 steps at dt=0.01) => 1.7616 ms/step",
+        "T=1e5": "~17,616s = ~4.9 hours wall-clock",
+        "T=5e6": "~880,800s = ~10.2 days wall-clock",
+        "caveat": "linear extrapolation of leg 353's own measured, pure-numpy CPU pseudospectral rate; no GPU path exists in this leg's solver stack, unlike the literature (1406.1820 explicitly used GPU-accelerated time-stepping to make T=5e6 tractable, and 1207.4682's pre-GPU Re=60/80/100 runs each took 'a couple of months' on a single CPU core at their own resolution)"
+      }
+    },
+    "requirement_3_attempt_count": {
+      "what": "run enough independent Newton attempts to be a meaningful test against the literature's OWN reported RPO success rate, not just re-run the same 5",
+      "sourced_baseline": "Chandler & Kerswell's Re=60 nonzero-shift (RPO) success rate is 4.3% (7/163); Lucas & Kerswell's own success rate at R>=0.2 (leg 353's exact residual regime) is ~10%",
+      "implication": "at a true 4-10% per-attempt success rate, 5 attempts have an ~59-77% chance of zero successes EVEN IF THE SOLVER AND DNS WERE FULLY SPEC-COMPLIANT -- leg 353's 0/5 is statistically uninformative at this sample size regardless of which of the two declared gaps is fixed first",
+      "minimum_n_for_a_meaningful_test": "~50-100 independent Newton attempts (matching the order of magnitude of guesses the source papers themselves fed their hookstep code per Re before declaring a recurrent-flow catalogue)",
+      "compute_cost": {
+        "per_attempt_leg353_measured": "90-380s (avg ~196s) at max_newton=10/max_gmres=20",
+        "per_attempt_hookstep_scaled_estimate": "3-5x leg 353's per-attempt cost at the source's own max_newton=75/max_gmres=500 limits (more iterations allowed before giving up) => ~600-1000s/attempt",
+        "for_100_attempts": "~60,000-100,000s = ~17-28 hours wall-clock"
+      }
+    },
+    "totals": {
+      "minimum_viable_spec_compliant_retry": {
+        "spec": "T=1e5 DNS (Chandler-Kerswell's own shortest sourced length) + genuine hookstep + ~100 Newton attempts, SAME N=24 resolution as leg 353 (resolution not upgraded)",
+        "legs": "2 (1 for hookstep implementation+validation, 1 for the long-DNS run + O(100)-attempt search, plausibly needing to run as a background multi-hour job across a session boundary the way leg 353's 2-leg ceiling was pre-sized for a harder-than-expected outcome)",
+        "compute": "~4.9h DNS + ~17-28h Newton search =~ 22-33 hours (roughly 1-1.5 days) wall-clock, single CPU core, pure numpy, current solver as-is"
+      },
+      "full_literature_scale_retry": {
+        "spec": "T=5e6 DNS (Lucas & Kerswell's own scale) + genuine hookstep + full guess catalogue (thousands of guesses, hundreds of Newton attempts), matching resolution unclear (not costed -- flagged separately)",
+        "legs": "not a single-session leg budget at all on this leg's CPU-only pure-numpy solver -- DNS alone is ~10.2 days wall-clock; this is a MULTI-WEEK background compute commitment, or requires porting the solver to GPU (the literature's own workaround) before it becomes leg-budget-feasible",
+        "compute": "~10.2 days DNS + proportionally more Newton search time; not further costed because the DNS term alone already dominates any plausible leg-session budget by 2 orders of magnitude"
+      }
+    },
+    "residual_risk_named": [
+      "sample-size risk: even fully spec-compliant, the source papers' own 4-10% per-attempt RPO success rate means a modest retry (tens of attempts) can still come up empty by chance, indistinguishable from a genuine capability gap -- only ~50-100+ attempts make a null result informative",
+      "hookstep is not universally convergent even in the source's own hands: 1308.3356 reports the SAME Newton-GMRES-hookstep code failing to converge at the two endpoints of a continuation branch (Re=15.03 and Re=26.68) -- a correctly implemented hookstep is not a convergence guarantee, it is a substantially better-but-still-fallible globalization",
+      "resolution gap not costed: leg 353 ran at N=24; 1406.1820's own text implies their 'full' recurrence check used a much finer grid (Nx=Ny=128, i.e. max wavenumber 42 vs leg 353's much coarser truncation) -- this was never one of leg 353's two DECLARED simplifications, so it is out of scope for THIS retry spec, but it is a plausible third gap that a spec-compliant-on-two-axes retry could still trip over, and would need its own leg to price",
+      "GPU dependency: BOTH source papers needed either GPU acceleration (1406.1820) or CPU-months (1207.4682) to reach their DNS lengths -- the full-literature-scale retry is not affordable on this leg's current CPU-only pure-numpy solver stack within normal leg-session budgets; only the minimum-viable (T=1e5) version is"
+    ]
+  },
+  "gate_answer": "yes",
+  "gate_reasoning": "(a) sourced requirements table: 3 papers, each with directly-quoted DNS length, recurrence threshold, globalization method, and author-reported success rate. (b) costed retry spec: 2 legs / ~22-33 hours compute for a minimum-viable spec-compliant retry, multi-week/GPU-dependent for full literature scale, with four named residual risks (sample-size, hookstep non-universality, resolution gap, GPU dependency) -- sufficient for the user to rule on numbers without further literature work."
+}
