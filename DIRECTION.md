@@ -33,8 +33,8 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 380 | PROG-R4 (§3c programme, construction — the critical path) | yes |
-| B | 381 | CLAY-LOC (mathematics) | yes |
+| A | 380 | PROG-R4 (§3c programme, construction — the critical path; slot OCCUPIED for the programme's duration, produces no refill events: three-plus-one rule, cycle 11d) | yes |
+| B | 381 | CLAY-LOC LANDED 7aecf78 — slot vacant pending refill; nominated refill: 386 DTOL (cycle 11d) | no |
 | C | 385 | SCEL (construction — 383 landed fd833d2, C refilled per §4a) | yes |
 | D | 233 | BVRRV (post-repair verification) | no |
 <!-- FLOOR-TABLE-END -->
@@ -22476,3 +22476,289 @@ an instrument is never wired in while it still answers EMPTY on
 everything real. CLAY_OBLIGATIONS §6 items 1 and 2 OPEN throughout;
 nothing presumes the POCP spend; no L1→L4 link moved; Clay stays
 ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 11d) — THE USER'S §1–§4 RULING
+RECORDED (§1 CONFIRMED-ALREADY-EXECUTED); THE §4-STAYS-OPEN
+AMENDMENT WRITTEN INTO 386 AND INTO EVERY ROUTE-4 GATE; THE
+THREE-PLUS-ONE REFILL RULE MADE STANDING; 381 LANDED — B ← 386 DTOL
+NOMINATED; 384 COBV RE-SPECCED ON 381's REFUTED 'f=0' CLAUSE
+
+Written on `dm/cycle-11d` off origin/main = b7c9e77 (base verified
+current before work began — the stale-base incident's discipline).
+A user ruling of 2026-08-11 addressed to the DM, plus a second
+standing structural correction on refill planning, are received and
+recorded here. The ruling ADDS; it does not redirect. ORCHESTRATION
+§3c read in full before this entry: confirmed.
+
+### 1. The §1 ruling — CONFIRMED-ALREADY-EXECUTED, not a new dispatch
+
+The ruling directs: dispatch route 4 as a PROGRAMME under §3c (not
+ordinary legs, so the worker is not terminated on first landing per
+§7b and the build keeps its memory), scope = leg 358's costed retry
+at literature scale (~10.2 GPU-days), Ban 1 binding seed selection,
+the seed named in programme-level pre-registration per the §1 scope
+ruling.
+
+**STATE FACT, recorded plainly: this is ALREADY EXECUTED.** The
+ruling's premise that the build "has not been dispatched" was true
+when the ruling was written and is not true now. PROG-R4 (leg 380)
+was dispatched under §3c at the top of cycle 11, from the
+predecessor's cycle-11a spec (this file, cycle 11a §4), and is
+running now in slot A at U0 — the single programme-level novelty
+pass, committed before construction. Its worker is long-lived and
+not terminated on landing; state persists in
+`experiments/programme_r4/`; U1/U2 are milestones and only U3/U4
+carry gates (G1/G2); one novelty pass binds the whole programme
+(§3c rule 3). The seed is named per the §1 ruling, in the
+programme's own pre-registration: SOURCE Lucas & Kerswell 2015,
+arXiv:1406.1820v2, Table IV; IDENTIFIERS the five published RPOs
+leg 353 pre-registered, including UPO37 (shift s=0.375); WHY NOT A
+CHEAP-ENTRANCE CONSTRUCTION: the source obtained them by
+recurrent-flow analysis of turbulent DNS converged with
+hookstep-Newton — not by bifurcation off a fixed point of a
+rescaled flow — and the present search is INITIALISED from that
+published data, the seeded shape the §1 scope ruling places outside
+Ban 2's object. **Verdict on the ruling's §1: CONFIRMED-ALREADY-
+EXECUTED, with these specifics. No second dispatch occurs; drafting
+a duplicate programme would be the error.**
+
+Leg 353's null stands recorded UNDER-RESOURCED under §3d, not NO
+(cycle 11a §3); the route is not re-litigated on it, by anyone; its
+`optimal_shift_residual` sign fix carries forward inside PROG-R4's
+apparatus. Literature legs do not count toward the composition
+floor while the programme is live (§3c rule 4) — the FLOOR-TABLE
+carries that rule and was re-synced in this edit (see §5 below).
+
+### 2. WHY PARALLEL, NOT RE-SEQUENCED — recorded so it is never
+re-opened
+
+CLAY_OBLIGATIONS §4 and §5 have NO KNOWN METHOD (§6 of that
+document names both). If Tier 2 is where NS sits, no amount of
+instrument work produces a solve in isolation — so the obligations
+track and the route-4 build run AT THE SAME TIME. **CLAY_OBLIGATIONS
+§8 ask #1 ("decide the certification route before the compute runs")
+is SATISFIED by POCP being the only open route (leg 348, classified
+(ii) OPEN-AND-REACHABLE, cost class C; the function-space route dead
+in four lanes per leg 341). It is NOT waiting on a report.** A
+sequential reading of the consolidated direction — instruments
+first, build after — was wrong and is closed here. Nothing in this
+recording presumes the POCP spend; that decision stays the user's.
+
+### 3. The §3 amendment — §4 STAYS OPEN; 386 DTOL must answer the
+δ>0 question; written into the queue AND the standing route-4 gates
+
+**The question leg 382 left unnamed, now named and assigned to leg
+386 (DTOL): does the admissible-cutoff analysis tolerate δ > 0 AT
+ALL?** CLAY_OBLIGATIONS §4's admissible cutoff radius is a function
+of the CERTIFIED exponent; if the certification carries a tolerance,
+the cutoff bound inherits it. Leg 382's measured critical tolerances
+span TWO ORDERS OF MAGNITUDE — δ* = 3.352868 (C2 cutoff case),
+0.315697 (C1 two-power), 0.069739 (C3 log), exactly 0 for an exact
+power law — and that range is the difference between a usable
+instrument and a relabelled one.
+
+**Recorded as binding interpretation: §4 IS NOT DISCHARGED BY 382's
+YES.** 382's gated δ=0 form answers EMPTY on every real input (its
+own measured finding), and its usable δ-mode is post-hoc and not
+gate-deciding. **§4 STAYS OPEN IN EVERY ROUTE-4 GATE UNTIL DTOL
+LANDS WITH A PRE-REGISTERED δ MODE.**
+
+**Amendment to 386's spec (additive to the cycle-11b draft, which
+is not rewritten):** 386's gate must ALSO answer, as a named
+clause, whether the composed δ question closes — i.e. whether the
+admissible-cutoff analysis tolerates δ > 0 at all, measured against
+381's landed α thresholds (7aecf78 recorded 382's enclosure width
+0.8686·δ, EMPTY at δ=0, against them). A 386 that ships a δ-mode
+without answering the composed question has not discharged this
+amendment and does not close §4's stays-open status.
+
+**Standing route-4 gate requirement (this file's standing rules,
+effective immediately):** every route-4 unit gate — PROG-R4's G1
+and G2 today, and any future route-4 gate — carries, in both
+branches, alongside the Tier-2 ceiling and §6's two no-method
+obligations: "CLAY_OBLIGATIONS §4 OPEN until leg 386 (DTOL) lands
+with a pre-registered δ mode." The orchestrator has already relayed
+this amendment directly to the PROG-R4 worker, so G1/G2 text
+carries it now; this entry makes it standing law so no future unit
+drops it.
+
+### 4. The second user message — the THREE-PLUS-ONE refill rule,
+standing practice
+
+Recorded as standing practice, verbatim in substance: **the
+programme occupies a slot that does not vacate on landing, so the
+four-slot roster is effectively three-plus-one while it runs.**
+Slot A is OCCUPIED for PROG-R4's duration and produces NO refill
+events; the refillable board is B, C, D only. The reserve is ranked
+against THREE refillable slots, not four, from this entry forward.
+A non-vacating slot A is not a stall and must never be planned
+around as one.
+
+**The floor consequence, stated explicitly:** PROG-R4 is
+construction-class and permanently floor-eligible, so §3b's 2-of-4
+floor needs only ONE more eligible leg among B/C/D to read 2/4.
+That is SLACK TO SPEND on the ranked obligations work — it is NOT a
+licence to fill B/C/D with non-eligible units. Today's table shows
+the consequence live: with B vacant (381 landed) the floor reads
+2/4 (380, 385) and passes.
+
+### 5. Leg 381 CLAY-LOC — landed; noted now at commit strength, full
+absorption when the §4a report arrives
+
+381's commits are on main (fa69d6d novelty → 17f8e81 construction →
+7aecf78 follow-up); its formal report has not yet reached the
+orchestrator, so per §4a the leg is not CLOSED, but its slot is
+vacant and this entry notes the landed record now rather than
+letting the queue rank against stale state. From the landed
+artifacts (`writeup/data/p2_route_cloc_v1.json`, verified directly
+this cycle):
+
+- **Gate: YES, WITH ONE REFUTED SIDE-CLAUSE AND ONE REPAIRED
+  DERIVATION STEP** — CLAY_OBLIGATIONS §4 VERIFIED AS A
+  SPECIFICATION; the localisation problem confirmed load-bearing,
+  its inputs named.
+- The DSS energy exponent is IDENTICAL to the SS one (measured
+  ratio 0.9999998844, no factor); the log-periodic modulation
+  enters as a bounded periodic prefactor G(s), period 2 log λ, not
+  an exponent shift. The reviewer's identity was vacuous exactly in
+  the case of interest (both sides +∞ when U ∉ L²) and was replaced
+  by the truncated law E_ρ(t) ~ ρ^{3−2α}(T*−t)^{α−1} — same
+  conclusion, valid where it matters.
+- Bounded energy CONFIRMED verbatim as Clay condition (7); cutoff
+  magnitudes priced.
+- **The clause 'with f = 0' is REFUTED against breakdown statement
+  (C)**: f = 0 is NOT in (C) — f may be any smooth forcing
+  satisfying conditions (4),(5); f ≡ 0 belongs to the EXISTENCE
+  statements (A),(B). Plus a labelling correction: the breakdown-
+  on-ℝ³ statement is (C), not the reviewer's "(b)".
+- 7aecf78 recorded leg 382's enclosure width (0.8686·δ, EMPTY at
+  δ=0) against this leg's α thresholds — naming the composed δ
+  question §3 above assigns to 386, not assuming it away.
+
+**Routing, noted NOW: the refuted 'f=0' clause is a CORRECTION to
+CLAY_OBLIGATIONS.md ("The target, as specified": "with f ≡ 0") that
+INTEGRATION must land in the document — the leg was correctly
+forbidden from editing it, and the DM does not edit it either.** The
+document's obligation gets structurally WEAKER on this correction
+(a smooth admissible forcing is available to a breakdown exhibit),
+which no leg may treat as licence until integration lands the edit.
+Full absorption of 381 — endorsement or amendment — happens when
+the orchestrator relays the formal report per §4a; nothing here
+pre-empts that.
+
+### 6. Slot B nomination — 386 DTOL, the moment the vacancy is
+confirmed
+
+**B ← 386 ROUTE-DTOL** (reserve rank 1 of the refillable board;
+spec = cycle 11b's draft PLUS the §3 amendment above)
+[FLOOR-ELIGIBLE: construction]. The ranking reason, stated once:
+the §4-stays-open rule makes 386 the one queued item that UNBLOCKS
+a standing obligation (it is the named closer of §4's stays-open
+status and the non-vacuity condition for 389 CT2C) rather than
+merely adding one. **Preconditions (checkable by reading main):**
+104f5b3 on main — `solver/dssp_decay_enclosure.py` and
+`test_dssp_decay_enclosure.py` both present — TRUE; no live leg
+editing `solver/dssp_decay_enclosure.py` or its test file (385
+reads only; 383 landed) — TRUE at this writing, re-checkable at
+dispatch.
+
+### 7. Leg 384 COBV — re-specced, because a queued leg may not rest
+on a clause a landed leg just refuted
+
+384's drafted thesis (cycle 11a) directs it to check "the 'target,
+as specified' paragraph's reading of the official statement" as if
+undecided. 381 has now checked that paragraph clause by clause
+against the primary text (Fefferman, official Clay problem
+description, fetched text banked in `p2_route_cloc_v1.json`
+check_D), CONFIRMED most clauses, REFUTED 'f=0', and CORRECTED the
+'(b)' labelling. **Spec adjustment, effective now (the cycle-11a
+draft is amended, not rewritten):**
+
+- 384 CONSUMES 381's check_D verdicts as landed record; it does NOT
+  re-derive the "target, as specified" paragraph's clauses, and it
+  does NOT treat 'with f ≡ 0' as a clause to verify — that clause
+  is REFUTED (7aecf78 lineage) and pending integration's document
+  edit.
+- 384's remaining scope: §2's four screen rows cross-checked against
+  their named landed records (machine-read, not transcribed); §7's
+  prize-rules clauses against the Clay Institute's own published
+  rules; AND one added check — that integration's CLAY_OBLIGATIONS
+  edit, once landed, matches 381's verdicts verbatim (the f=0
+  refutation and the (C) labelling included). If the edit has not
+  landed when 384 runs, 384 reports the document/record divergence
+  as an open discrepancy, routed to integration — the document is
+  not 384's to edit.
+- **Preconditions (updated): leg 381 landed on main (fa69d6d,
+  17f8e81, 7aecf78) — TRUE.** 384 is now immediately dispatchable.
+  Still verification-class, NOT floor-eligible.
+
+### 8. The reserve, ranked against THREE refillable slots (B, C, D)
+
+Per §4's standing rule, ranked for B/C/D only; slot A is not in the
+ranking universe while PROG-R4 runs.
+
+1. **386 DTOL** — nominated to B (§6 above; spec = 11b draft + §3
+   amendment). [FLOOR-ELIGIBLE: construction]
+2. **384 COBV** — re-specced §7 above, preconditions now TRUE.
+   (NOT floor-eligible: verification.)
+3. **387 DXNV** — owed novelty completion, as drafted 11b. (NOT
+   floor-eligible while the programme is live: literature, §3c
+   rule 4.)
+4. **388 CRVB** — as drafted 11b. (NOT floor-eligible:
+   verification.)
+5. **389 CT2C** — as drafted 11c; waits on 386 (the δ-mode is its
+   non-vacuity condition). [FLOOR-ELIGIBLE: construction]
+6. **325 MTB1** — user-gated, unchanged.
+7–9. **231, 232, 234** — blocked on 217/219/225, unchanged.
+
+Floor arithmetic for the next refills: A/380 eligible always; C/385
+eligible while live; so B and D may lawfully take non-eligible
+units today — but rank order above spends that slack on the
+obligations track (384's document-integrity check), not on cheap
+audits; §3b's fail-loudly clause governs if C ever vacates into a
+reserve with no eligible candidate.
+
+**Reserve queue: 9 undispatched legs (386, 384, 387, 388, 389, 325,
+231, 232, 234).** Immediately dispatchable: **4** (386, 384, 387,
+388; 389 waits on 386; 325 user-gated; 231/232/234 blocked). Above
+the watermark; no fresh drafting owed. Next fresh leg number:
+**390.**
+
+### 9. Standing state
+
+A/380 PROG-R4 (running, U0 — the critical path; slot occupied, no
+refill events); B VACANT (381 landed 7aecf78; ← 386 DTOL on
+confirmation); C/385 SCEL (running); D/233 BVRRV (running). Floor
+2/4 (380, 385), table re-synced in this edit, test_9 passes on the
+true roster. With the user, still: the POCP spend (inputs complete;
+nothing here presumes it) and item 8's contract question (moot in
+fact while the programme runs).
+
+Nothing in this update lifts a ban — the §1 recording is a
+state-fact confirmation of an already-executed dispatch, not a new
+one; the §3 amendment tightens gates, never relaxes them; the f=0
+correction is integration's edit, not the DM's. Tier-2 ceiling in
+every route-4 gate; CLAY_OBLIGATIONS §6's two no-method obligations
+OPEN in every branch, and §4 now explicitly OPEN in every route-4
+gate until DTOL lands with a pre-registered δ mode; lesson 91;
+territory discipline; no external outreach; no output here is
+movement toward Clay — no link of the L1→L4 chain moved; the POCP
+spend stays the user's. Clay stays ~0.05%.
+
+**Concurrency postscript (added on rebase to e2cfd94, same cycle,
+before push).** Two landings arrived on main while this entry was
+being written, and they change tense, not substance: (i)
+integration has ALREADY landed the CLAY_OBLIGATIONS edit this
+entry's §5 and §7 described as pending — a962e4a carries the
+'f≡0' REFUTED correction against statement (C), the (b)→(C)
+labelling fix, the truncated-law repair, the §4-stays-open-until-
+DTOL rule, and §8 ask #1 recorded SATISFIED by POCP. So 384's
+added check runs against the LANDED edit (verify it matches 381's
+verdicts verbatim), and its not-yet-landed branch will not fire.
+(ii) PROG-R4's U0 landed (dd35bbf) — the programme-level novelty
+pass plus pre-registration, committed before any construction,
+exactly as §1 above records it. No ranking, nomination, or
+FLOOR-TABLE row changes on either landing.
