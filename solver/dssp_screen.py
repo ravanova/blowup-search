@@ -971,7 +971,40 @@ def screen_candidate(field_fn, s_vals=None, c_vals=None,
     reads the ledger against them. If s_vals/c_vals are not given (a static
     field with no trajectory), lambda is reported as undefined -- exactly
     what lambda_from_trajectory(None-case) would say, made explicit here so
-    a caller cannot forget to think about it."""
+    a caller cannot forget to think about it.
+
+    LEG 383 (Route-ST2G) -- THE TWO COLUMNS ARE UNCONDITIONAL HERE.
+    Legs 362 and 370 landed Theorem 2's decay-only route
+    (decays_to_zero_at_infinity()) and the SS/DSS ansatz classifier
+    (classify_ss_ansatz()) as strictly OPT-IN arguments to
+    machine_read_ledger(), deliberately, so that no existing call site's
+    return-dict key set moved. The side effect was that THIS function -- the
+    single end-to-end path through which a candidate report is produced --
+    computed `decay` and then dropped it, called machine_read_ledger(l3, lam)
+    with two positional arguments, and never computed the ansatz
+    classification at all. Leg 359's flagged mis-classification therefore
+    stayed live in the report path after legs 362/370: measured on this
+    module at 104f5b3, a planted exact-SS field with fitted exponent
+    -1.0000000000000002 and a genuinely log-divergent L^3 ladder
+    (rel_change_last_step 0.1305, converged False) was reported
+    "NOT EXCLUDED", via leg 357's backward-compatible L^3-only branch, while
+    Tsai 1998's Theorem 2 excludes it outright.
+
+    So `theorem2_decay_to_zero` and `ss_ansatz` are now computed on EVERY
+    call and passed into machine_read_ledger() on EVERY call, and they are
+    returned as their own top-level report columns. machine_read_ledger()'s
+    own signature and defaults are UNTOUCHED -- legs 362's and 370's
+    backward-compatibility guarantees for direct callers still hold, and the
+    ledger key set returned here is unchanged (no "Morrey" key: leg 370's
+    Morrey sweep is a separate, much more expensive ball-average pass and
+    stays opt-in at its own call site).
+
+    Consequence, which is the whole point: this function can now return
+    EXCLUDED-BY-T1, EXCLUDED-BY-T2, NOT-REACHED-BY-ANSATZ, or NOT EXCLUDED,
+    and it will name the deciding clause in each case. CEILING: TIER 2 --
+    a candidate that survives this screen is only "not already excluded by a
+    published theorem reachable on this repository's record". That is not
+    evidence for existence."""
     l3 = l3_norm_ladder(field_fn, R_hi_ladder=R_hi_ladder, n_r=n_r, n_c=n_c, n_phi=n_phi)
     decay = fitted_far_field_decay_exponent(field_fn)
     axisym = axisymmetry_residual(field_fn)
@@ -980,11 +1013,16 @@ def screen_candidate(field_fn, s_vals=None, c_vals=None,
                "reason": "static candidate, no trajectory supplied"}
     else:
         lam = lambda_from_trajectory(s_vals, c_vals)
-    ledger = machine_read_ledger(l3, lam)
+    theorem2 = decays_to_zero_at_infinity(decay)
+    ansatz = classify_ss_ansatz(lam)
+    ledger = machine_read_ledger(l3, lam, decay_result=theorem2,
+                                  ansatz_result=ansatz)
     return {
         "l3_norm": l3,
         "far_field_decay": decay,
         "axisymmetry": axisym,
         "lambda": lam,
+        "theorem2_decay_to_zero": theorem2,
+        "ss_ansatz": ansatz,
         "ledger": ledger,
     }
