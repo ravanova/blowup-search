@@ -178,15 +178,36 @@ I10: the increment was previously attached to the norm rather than to its cube; 
 is unaffected, the quantity was misnamed.)
 Leg 381 attempted no localisation; §4's transfer of the obligation to §5 is verified correct.
 
-**§4 IS NOT DISCHARGED BY A δ = 0 CERTIFICATION (user ruling, 2026-08-11).** The admissible
-cutoff radius is a function of the *certified* exponent, so a certification carrying a
-tolerance `δ` passes that tolerance into the cutoff bound. Leg 382's enclosure landed at width
-`≈ 0.8686·δ`, which is **EMPTY at δ = 0** — and δ = 0 is the only gated mode it has, so it
-answers EMPTY on every real sampled profile. Composing it with leg 381's thresholds requires
-`δ < (α_centre − 1)/0.434` while `δ` must simultaneously exceed the profile's own departure
-from an exact power law (leg 382 measured `δ*` up to **3.35**). **Whether both can hold is
-settled by neither leg.** Leg 386 (DTOL) must answer it with a *pre-registered* δ mode.
-**Until DTOL lands, §4 stays OPEN in every route-4 gate.**
+**§4 IS NOT DISCHARGED BY A δ = 0 CERTIFICATION (user ruling, 2026-08-11); THE δ QUESTION IS
+NOW ANSWERED, AND THE ANSWER IS EMPTY AT THE α IN PLAY (leg 386, DTOL, `0ecaeee`).** The
+admissible cutoff radius is a function of the *certified* exponent, so a certification carrying
+a tolerance `δ` passes that tolerance into the cutoff bound. Leg 386 pre-registered the δ mode
+before running and measured the composition directly rather than composing two legs' laws.
+**Three corrections to what was written here.** (i) The width law is
+`width = 4·log(1+δ)/log(R₁/R₀)`; leg 382's `0.8686` is `4/log 100`, **a property of the
+window**, doubling to `1.7457` on `[10,100]` — any half-width quoted at `0.434` per unit δ is
+quoted at a window. (ii) Leg 381's `δ < (α_centre − 1)/0.434` is **conservative by
+`1.33×`–`4.06×`** on every measured row and never optimistic; its implied demand
+`α_centre > 1 + 0.434·δ*` (≈ `2.456` at `δ* = 3.35`) is **REFUTED** — the certified half-width
+vanishes at `δ*`, not at `δ = 0`, so the requirement is just `α_centre > 1`. (iii) **The
+tolerance buys ZERO headroom on the threshold.** Over 30 measured configurations (3 mismatch
+shapes × 5 exponents × thresholds `{1, 3/2}`) the admissible window
+`D = { δ ≥ 0 : INTERVAL and p_lo > α_threshold }` is non-empty **if and only if** the realised
+certified centre already exceeds the threshold — **0 exceptions**, crossover located at the
+centre to `1e-6`. The dependence on `α_centre` is **a step, not a slope**; once open the
+window is wide (`0.735` to `≥ 9.93` in δ). **The banked Type-I object carries `α = 1`, so its
+composed δ window is EMPTY** — and would be at any `α_centre ≤ 1`. The load-bearing question
+for §4 is therefore **not** the certification tolerance but whether a certified `α_centre`
+exceeding `1` (or `3/2`) can be produced at all; **no profile of route 4's object exists in
+this repository**, and leg 386 contributes nothing to that question. **§4's δ sub-question is
+CLOSED (answer: EMPTY at α = 1). §4 itself remains OPEN**, on the admissible-cutoff half and
+on the missing profile. **Method status: NO KNOWN METHOD IN THIS REPOSITORY.** Named in §6.
+
+> **Integration note on the standing route-4 gate clause.** "Until DTOL lands, §4 stays OPEN in
+> every route-4 gate" is satisfied on its own terms — DTOL has landed with a pre-registered δ
+> mode — but **§4 does not thereby close**, and every route-4 gate must keep it open on the two
+> grounds in the paragraph above (the admissible-cutoff half, and the absent profile), *not* on
+> leg 386's account. §6 items 1 and 2 stay OPEN in every branch.
 
 **Method status: NO KNOWN METHOD IN THIS REPOSITORY.** Named in §6.
 
