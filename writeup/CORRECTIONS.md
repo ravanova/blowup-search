@@ -1853,3 +1853,122 @@ while the planted control confirms the same fixed comparator still trips on genu
 nondeterminism. `experiments/journal/leg_287.md` corrected in place (inline markers only, no
 deletion); this entry is purely additive to `writeup/CORRECTIONS.md`. No solver file touched, no
 gate answer changed, no proof or certificate claimed. Clay stays **~0.05%**.
+## §27 — leg 355, Route-LCB3: two light corrections, both source-verified at entry, both landed
+
+**Dispatch: leg 355 (Route-LCB3), the accumulator's items (3)-(4).** Both items were
+source-verified before this leg was drafted; this leg re-verified both independently rather than
+trusting the dispatch. Territory: `experiments/p2_route_bvrr_v1_repair.py` (the one argv list),
+`experiments/p2_route_cadx_v1_scope.py` (the one guard path), this entry,
+`writeup/novelty/leg_355.md`, `experiments/journal/leg_355.md`.
+
+### 27.1 Item (i) — `experiments/p2_route_bvrr_v1_repair.py`'s `BANKED` registry entry for
+`spike1_stepC_gate`: applied leg 335's own flagged fix
+
+Leg 335 (`CORRECTIONS.md` §23) diagnosed but did not itself fix (outside its own territory) that
+this registry entry's `argv=["--logged"]` omits `--steps 2500`, silently falling back to
+`experiments/spike1_stepC_gate.py`'s CLI default of `400` and producing a spurious "does not
+reproduce" reading. This leg applies the one-line fix it flagged:
+
+```python
+# before
+dict(key="spike1_stepC_gate", artifact="writeup/data/spike1_stepC_gate.json",
+     script="experiments/spike1_stepC_gate.py", argv=["--logged"], slow=True,
+     calls="RescaledBoussinesq.run(renorm=True), 4 resolution rungs"),
+
+# after
+dict(key="spike1_stepC_gate", artifact="writeup/data/spike1_stepC_gate.json",
+     script="experiments/spike1_stepC_gate.py", argv=["--logged", "--steps", "2500"],
+     slow=True,
+     calls="RescaledBoussinesq.run(renorm=True), 4 resolution rungs"),
+```
+
+**Verified two ways, both against the untouched banked `writeup/data/spike1_stepC_gate.json`:**
+
+1. The real registry entry, with the fix applied, run through
+   `experiments/p2_route_bvrr_v1_repair.py`'s own `rerun_one()` (the per-call differential
+   apparatus, pre-repair vs. post-repair `odd_field_x_slope`, backs up and restores the artifact
+   itself): completed with `returncode=0`; every compared leaf (`c_l`, `c_omega`, `alpha`,
+   `residual`, `cut_omega[*]`, `anisotropy_p90`, …) differs at `rel_diff` in the `1e-13`-`1e-16`
+   range, i.e. float64 noise, not divergence. The banked file's sha256
+   (`dfe4433cdd54891e3e3bc45b915440b6cc7c573b715f1e1d9e7d1fce150718f4`) is identical before and
+   after this run.
+2. A direct, lighter re-run — `experiments/spike1_stepC_gate.py --logged --steps 2500` (exactly
+   the fixed argv, single implementation, no differential doubling), artifact backed up first and
+   restored after diffing — reproduces every one of the four `alpha` values leg 335 already
+   reported, to the same digit:
+
+   | run | config | banked `alpha` | this leg's re-run `alpha` | `rel_diff` |
+   |---|---|---|---|---|
+   | 0 | `n_r=300, r_max=1e5` | `-0.3350763095343765` | `-0.33507630953437806` | `4.64e-15` |
+   | 1 | `n_r=450, r_max=1e5` | `-0.33396053473198634` | `-0.33396053473198667` | `9.97e-16` |
+   | 2 | `n_r=600, r_max=1e5` | `-0.3367555909794855` | `-0.3367555909794855` | `0.0` (exact) |
+   | 3 | `n_r=450, r_max=1e6` | `-0.33619163643975625` | `-0.33619163643975647` | `6.60e-16` |
+
+   `predicate_checks` reproduce exactly: `1_alpha_within_5pct: true`,
+   `2_alpha_far_within_10pct: false`, `3_anisotropy_below_0p23: true`,
+   `4_resolution_stable_alpha: true`, overall `predicate_pass: false` (on clause 2 alone) — same
+   as banked, same as leg 335's own re-derivation. `writeup/data/spike1_stepC_gate.json` was
+   copied back from a pre-run reference immediately after diffing; sha256 confirmed identical
+   before and after (`dfe4433c…`), `git status`/`git diff` on the file empty throughout.
+
+**Disposition: CORRECTED.** The registry regeneration now reproduces the banked artifact to
+float64 precision, both via the harness's own differential apparatus and via a direct re-run.
+
+### 27.2 Item (ii) — `experiments/p2_route_cadx_v1_scope.py`: missing-PDF guard added
+
+Leg 304's evidence script (`experiments/p2_route_cadx_v1_scope.py`) unconditionally computed and
+wrote `writeup/data/p2_route_cadx_v1.json` even when `Papers/2505.03091.pdf` (gitignored) was
+absent — in that case `verify_quotes()` correctly reported `NOT_AVAILABLE`, but `main()` still
+wrote a diminished artifact (`quote_verification.status: NOT_AVAILABLE` vs. the banked
+`VERIFIED`) over the real one. Two independent legs' smoke tests (322, 327) hit this and reverted
+the accidental rewrite by hand before committing; this leg adds a guard so a third occurrence
+fails loudly instead:
+
+```python
+def main():
+    t0 = time.time()
+    if not PDF.is_file():
+        sys.exit(
+            "[CADX] ABORTING, NOT WRITING %s: %s is absent.  Papers/ is gitignored on "
+            "purpose; re-fetch with `bash Papers/fetch.sh 2505.03091` and re-run to "
+            "regenerate the artifact for real.  Refusing to overwrite the banked, "
+            "quote-verified JSON with a diminished (NOT_AVAILABLE quote-check) rerun."
+            % (OUT.relative_to(ROOT), PDF)
+        )
+    res = { ... unchanged ... }
+```
+
+**Demonstrated both branches, per the gate's own requirement:**
+
+* **(a) PDF absent** (this leg's default container state — `Papers/*.pdf` is gitignored and was
+  not present at leg start): `PYTHONPATH=. .venv/bin/python experiments/p2_route_cadx_v1_scope.py`
+  now exits `1` with the message above, printed to stderr via `sys.exit(str)`. The banked
+  `writeup/data/p2_route_cadx_v1.json`'s sha256
+  (`75fab364a3b79ecc58129563d12e734810fb10cb54409760cb5d7025e9758e1d`) is identical
+  before and after the run; `git diff` on the file is empty. Before this leg's guard, the same
+  invocation would have exited `0` and silently overwritten that file with
+  `quote_verification.status: NOT_AVAILABLE` in place of the banked `VERIFIED`.
+* **(b) PDF present** (normal path — fetched via `bash Papers/fetch.sh 2505.03091`, egress `HTTP
+  200`, sha256 `0f1bc6181ce0d4375df3a012846d851c366cfc768b73fbfa3e2f7b6631f8081d`, matching
+  `PDF_SHA256` in the script): the guarded script produces output **identical to before this
+  leg's change** field-for-field, excluding only the `elapsed_s` wall-clock key (before
+  `6.138346195220947`, after `1.1012506484985352` — both real, non-cached runs; not a result).
+  `writeup/figures/fig67_route_cadx_v1_zero_diagonal.png` is **byte-identical** (`cmp` clean).
+  Both banked files were then restored from the pre-run reference and confirmed byte-identical
+  by sha256 and empty `git diff` before this leg's own commit.
+
+**Disposition: CORRECTED.** No regression on the normal path; the hazard that bit legs 322 and
+327 now fails loudly instead of silently rewriting the banked artifact.
+
+### The ceiling
+
+**0 numbers re-derived beyond direct reproduction of already-banked/already-flagged facts** — the
+`alpha` values are leg 335's own quoted table, independently re-derived to the same digit, not
+copied; the CADX guard's evidence is this leg's own fresh runs, diffed against a pre-run
+reference. **2 sites edited by this leg** (the one `argv` list, the one `main()` guard), **1
+batched entry** (this one). **0 gate answers changed anywhere** — leg 335's
+`REPRODUCIBLE_AS_BANKED` verdict and leg 304's `CADIOT_DOES_NOT_COVER_A_ZERO_DIAGONAL` verdict
+are both unmoved; neither banked JSON's contents changed, both confirmed byte-identical by sha256
+before and after this leg's runs. **0 bans touched**, `plan_of_record.py` and `DIRECTION.md`
+byte-identical, untouched by this leg. No link of the `L1 → L4` chain moved. Clay odds stay
+**~0.05%**.

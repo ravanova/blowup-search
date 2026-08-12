@@ -515,6 +515,20 @@ def make_figure(mu_rows, adm, whit):
 
 def main():
     t0 = time.time()
+    if not PDF.is_file():
+        # Leg 355 guard.  Without the e-print present this run cannot re-verify the
+        # quoted clauses (CADX1) and its output would silently differ from the banked
+        # artifact (quote_verification.status VERIFIED -> NOT_AVAILABLE) if allowed to
+        # write -- exactly the mistake two prior legs' smoke tests (322, 327) caught and
+        # reverted by hand.  FAIL LOUDLY instead of writing a diminished artifact over
+        # the banked one.
+        sys.exit(
+            "[CADX] ABORTING, NOT WRITING %s: %s is absent.  Papers/ is gitignored on "
+            "purpose; re-fetch with `bash Papers/fetch.sh 2505.03091` and re-run to "
+            "regenerate the artifact for real.  Refusing to overwrite the banked, "
+            "quote-verified JSON with a diminished (NOT_AVAILABLE quote-check) rerun."
+            % (OUT.relative_to(ROOT), PDF)
+        )
     res = {
         "leg": 304,
         "route": "CADX",
