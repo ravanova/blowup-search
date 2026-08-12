@@ -1,0 +1,640 @@
+{
+  "leg": 381,
+  "route": "CLOC",
+  "what": "verification of CLAY_OBLIGATIONS.md \u00a74 (the localisation clause): the reviewer's energy arithmetic under DSS modulation, and the reviewer's reading of the official Clay problem statement",
+  "ceiling": "TIER 2. No link of the L1->L4 chain moved. Clay stays ~0.05%. Verifying an obligation is not such a link.",
+  "does_not": [
+    "attempts no localisation",
+    "builds no certified decay enclosure (leg 382, slot C)",
+    "edits no solver module",
+    "edits no obligations file"
+  ],
+  "clay_source": "Charles L. Fefferman, 'Existence and smoothness of the Navier-Stokes equation', official Clay Mathematics Institute problem description, https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf (TeX creation date 2006-08-04, last modified 2013-02-05); fetched and its text layer extracted by this leg, 2026-08-12",
+  "check_A_field_is_what_it_claims": {
+    "dss_symmetry_max_rel_error": 1.1380795944685018e-15,
+    "dss_symmetry_tolerance": 1e-12,
+    "divergence_max_abs_fd4": 2.4448221225270572e-12,
+    "divergence_max_relative_to_field_over_r": 8.869432364696958e-12,
+    "divergence_tolerance_relative": 1e-06,
+    "lambda": 1.7,
+    "period_in_s": 1.0612565021243408,
+    "can_fail": "a wrong similarity convention (exponent or the s -> s + 2 log lambda shift) breaks the DSS identity immediately; a non-solenoidal field breaks the second."
+  },
+  "check_B0_identity_in_physical_space": {
+    "alpha_used": 1.2,
+    "ball_radius_in_x": 5.0,
+    "rows": [
+      {
+        "T_star_minus_t": 0.25,
+        "physical_space_quadrature": 46.13929954088714,
+        "similarity_variable_prediction": 46.13929954088714,
+        "rel_disagreement": 0.0
+      },
+      {
+        "T_star_minus_t": 0.05,
+        "physical_space_quadrature": 45.78467204635245,
+        "similarity_variable_prediction": 45.78467204635264,
+        "rel_disagreement": 4.190191391149436e-15
+      },
+      {
+        "T_star_minus_t": 0.01,
+        "physical_space_quadrature": 25.046737799380473,
+        "similarity_variable_prediction": 25.04673779938047,
+        "rel_disagreement": 1.4184336927455588e-16
+      },
+      {
+        "T_star_minus_t": 0.002,
+        "physical_space_quadrature": 30.005793004317447,
+        "similarity_variable_prediction": 30.00579300431744,
+        "rel_disagreement": 2.368018521149774e-16
+      }
+    ],
+    "max_rel_disagreement": 4.190191391149436e-15,
+    "statement_checked": "int_{|x|<=X} |u|^2 dx == (T*-t)^{1/2} int_{|y| <= X/sqrt(T*-t)} |U|^2 dy",
+    "can_fail": "any error in the (T*-t)^{-1/2} amplitude or the (T*-t)^{3/2} Jacobian shows up as a dt-dependent disagreement."
+  },
+  "check_B_energy_exponent_SS_vs_DSS": {
+    "alpha_used": 2.5,
+    "DSS_exponent_naive_fit_modulation_DROPPED": 0.48762826200326764,
+    "naive_fit_bias_percent": 2.4743475993464714,
+    "modulation_handled_fit_max_log_residual": 1.584193303075243e-05,
+    "DSS_exponent_note": "the period-locked figure below is the one that answers the gate: a fit over a whole number of DSS periods averages the log-periodic factor out exactly, so a surviving departure from 1/2 would be a real exponent shift. The naive fit's departure is a windowing artifact of the modulation, and its size is a measure of how badly one is misled by dropping the modulation instead of handling it.",
+    "SS_exponent": 0.49999999999999994,
+    "DSS_exponent": 0.49999994221049004,
+    "predicted_exponent": 0.5,
+    "DSS_over_SS_exponent_ratio": 0.9999998844209802,
+    "SS_max_rel_residual": 8.881784197001256e-16,
+    "DSS_max_rel_residual": 0.9179305416210044,
+    "DSS_G_oscillation_relative_amplitude": 2.986129041866346,
+    "DSS_residual_best_fit_period_in_s": 1.0574359787166934,
+    "predicted_period_2_log_lambda": 1.0612565021243408,
+    "period_relative_error": 0.003599999999999768,
+    "reading": "The DSS exponent equals the SS exponent EXACTLY: ratio 1 to fit precision, no factor. The modulation does not move the exponent -- it converts the constant int|U|^2 dy into a log-periodic G(s) of period 2 log lambda, which shows up as a residual around the pure power law, not as a different power.",
+    "can_fail": "if the DSS exponent differed from 1/2 the ratio would not be 1; if the modulation were merely noise the residual period would not land on 2 log lambda."
+  },
+  "check_B2_truncated_energy_law": {
+    "rho": 1.0,
+    "rows": [
+      {
+        "alpha": 0.8,
+        "fixed_ball_energy_exponent_measured": -0.20002577133230395,
+        "predicted_alpha_minus_1": -0.19999999999999996,
+        "abs_error": 2.577133230399764e-05
+      },
+      {
+        "alpha": 1.0,
+        "fixed_ball_energy_exponent_measured": -0.000264923221459137,
+        "predicted_alpha_minus_1": 0.0,
+        "abs_error": 0.000264923221459137
+      },
+      {
+        "alpha": 1.2,
+        "fixed_ball_energy_exponent_measured": 0.1971330371587906,
+        "predicted_alpha_minus_1": 0.19999999999999996,
+        "abs_error": 0.002866962841209353
+      },
+      {
+        "alpha": 1.4,
+        "fixed_ball_energy_exponent_measured": 0.3743106075520664,
+        "predicted_alpha_minus_1": 0.3999999999999999,
+        "abs_error": 0.0256893924479335
+      }
+    ],
+    "max_abs_error": 0.0256893924479335,
+    "reading": "E_rho(t) ~ rho^{3-2alpha} (T*-t)^{alpha-1}. At the banked Type-I exponent alpha = 1 the fixed-ball energy is TIME-INDEPENDENT -- the critical case -- so the divergence of the total energy is a pure far-field statement, not a concentration statement.",
+    "why_this_matters": "The reviewer's identity is between two infinities when U is not in L^2, so as written it cannot carry the conditional. The truncated law is finite for every alpha and reduces to the reviewer's statement when both sides are finite. Same conclusion, valid derivation."
+  },
+  "check_B3_Lp_thresholds": {
+    "rows": [
+      {
+        "p": 2.0,
+        "alpha": 0.9,
+        "shell_1_to_1e3": 259174.1361644943,
+        "shell_1e3_to_1e6": 1031901180.3467687,
+        "ratio_far_over_near": 3981.4975198444768,
+        "converges_predicted": false
+      },
+      {
+        "p": 2.0,
+        "alpha": 1.0,
+        "shell_1_to_1e3": 60281.49006131185,
+        "shell_1e3_to_1e6": 60301039.520654045,
+        "ratio_far_over_near": 1000.3243028551933,
+        "converges_predicted": false
+      },
+      {
+        "p": 2.0,
+        "alpha": 1.1,
+        "shell_1_to_1e3": 14308.127794451637,
+        "shell_1e3_to_1e6": 3597551.330878141,
+        "ratio_far_over_near": 251.4341067231164,
+        "converges_predicted": false
+      },
+      {
+        "p": 2.0,
+        "alpha": 1.4,
+        "shell_1_to_1e3": 249.90226124228008,
+        "shell_1e3_to_1e6": 1014.3666812924948,
+        "ratio_far_over_near": 4.059053632608258,
+        "converges_predicted": false
+      },
+      {
+        "p": 2.0,
+        "alpha": 1.5,
+        "shell_1_to_1e3": 74.93636004821138,
+        "shell_1e3_to_1e6": 78.18033015960351,
+        "ratio_far_over_near": 1.043289667516611,
+        "converges_predicted": false
+      },
+      {
+        "p": 2.0,
+        "alpha": 1.6,
+        "shell_1_to_1e3": 24.028048784708346,
+        "shell_1e3_to_1e6": 6.539644850645819,
+        "ratio_far_over_near": 0.2721671205698444,
+        "converges_predicted": true
+      },
+      {
+        "p": 2.0,
+        "alpha": 2.2,
+        "shell_1_to_1e3": 0.6755684465753222,
+        "shell_1e3_to_1e6": 7.398987704736029e-05,
+        "ratio_far_over_near": 0.00010952239913281802,
+        "converges_predicted": true
+      },
+      {
+        "p": 3.0,
+        "alpha": 0.9,
+        "shell_1_to_1e3": 4701.943677815862,
+        "shell_1e3_to_1e6": 37808.95986188617,
+        "ratio_far_over_near": 8.041134146347137,
+        "converges_predicted": false
+      },
+      {
+        "p": 3.0,
+        "alpha": 1.0,
+        "shell_1_to_1e3": 942.3902191272176,
+        "shell_1e3_to_1e6": 980.6255945364508,
+        "ratio_far_over_near": 1.0405727634192175,
+        "converges_predicted": false
+      },
+      {
+        "p": 3.0,
+        "alpha": 1.1,
+        "shell_1_to_1e3": 253.76676591072257,
+        "shell_1e3_to_1e6": 35.08782324606089,
+        "ratio_far_over_near": 0.13826800022507715,
+        "converges_predicted": true
+      },
+      {
+        "p": 3.0,
+        "alpha": 1.4,
+        "shell_1_to_1e3": 13.763504887695307,
+        "shell_1e3_to_1e6": 0.00490021926280054,
+        "ratio_far_over_near": 0.00035602989956296514,
+        "converges_predicted": true
+      },
+      {
+        "p": 3.0,
+        "alpha": 1.5,
+        "shell_1_to_1e3": 5.5021408616087655,
+        "shell_1e3_to_1e6": 0.0002726917011074179,
+        "ratio_far_over_near": 4.9561017786753985e-05,
+        "converges_predicted": true
+      },
+      {
+        "p": 3.0,
+        "alpha": 1.6,
+        "shell_1_to_1e3": 2.0314943271073003,
+        "shell_1e3_to_1e6": 1.410992916109145e-05,
+        "ratio_far_over_near": 6.945591219633362e-06,
+        "converges_predicted": true
+      },
+      {
+        "p": 3.0,
+        "alpha": 2.2,
+        "shell_1_to_1e3": 0.055920713800678014,
+        "shell_1e3_to_1e6": 3.3455273331342686e-12,
+        "ratio_far_over_near": 5.982626303839679e-11,
+        "converges_predicted": true
+      }
+    ],
+    "L2_threshold_alpha": 1.5,
+    "L3_threshold_alpha": 1.0,
+    "banked_type_I_alpha": 1.0,
+    "type_I_source": "Chae-Wolf arXiv:1610.09464 Thm 1.1, carried by leg 253's full-text read and banked in leg 260: |U(y)| <= C/(1+|y|) for every lambda-DSS solution",
+    "deficit_to_L2_in_exponent": 0.5,
+    "required_over_available_exponent_ratio": 1.5,
+    "reading": "L^2 needs alpha > 3/2; the a-priori Type-I bound gives alpha = 1 exactly. The certified exponent would have to be 1.5x the a-priori one. At alpha = 1 the critical L^3 tail is log-divergent, so the discarded tail is not small in ANY critical norm."
+  },
+  "check_C2_critical_L3_tail_is_log_divergent_at_alpha_1": {
+    "rows": [
+      {
+        "decades_of_window": 2,
+        "tail_L3_cubed": 653.7455950041326,
+        "tail_L3_norm": 8.678998071314405
+      },
+      {
+        "decades_of_window": 4,
+        "tail_L3_cubed": 1307.496023106551,
+        "tail_L3_norm": 10.93486583547042
+      },
+      {
+        "decades_of_window": 6,
+        "tail_L3_cubed": 1961.2464516922942,
+        "tail_L3_norm": 12.517301804366227
+      },
+      {
+        "decades_of_window": 8,
+        "tail_L3_cubed": 2614.9968802780904,
+        "tail_L3_norm": 13.777076133292976
+      },
+      {
+        "decades_of_window": 10,
+        "tail_L3_cubed": 3268.747308863887,
+        "tail_L3_norm": 14.840907203374448
+      }
+    ],
+    "increment_per_decade": [
+      326.87521405120924,
+      326.87521429287153,
+      326.87521429289814,
+      326.87521429289836
+    ],
+    "increment_per_decade_spread": 7.393926228758692e-10,
+    "reading": "the cube of the critical-norm tail grows by a CONSTANT amount per decade of window, i.e. logarithmically without bound: at the banked Type-I exponent the discarded far field is not small in L^3 no matter how far out the cutoff is put."
+  },
+  "check_C_cutoff_magnitudes": {
+    "by_alpha": {
+      "alpha=1.0": {
+        "rows": [
+          {
+            "rho": 10.0,
+            "tail_energy_L2_sq": 6036139488.543552,
+            "tail_L2_norm": 77692.5960986216,
+            "tail_L3_norm": 13.176382458081395,
+            "tail_sup_at_rho": 0.30839799621702496,
+            "nonlinear_residual_L2": 0.4193008087898586,
+            "viscous_residual_L2": 1.0165776174729273,
+            "divergence_defect_L2": 2.392168771768797,
+            "bogovskii_corrector_H1_scale": 2.392168771768797,
+            "bogovskii_corrector_L2_scale": 23.921687717687973,
+            "pressure_perturbation_at_origin": 0.07193102984380413
+          },
+          {
+            "rho": 30.0,
+            "tail_energy_L2_sq": 18108418470.99612,
+            "tail_L2_norm": 134567.5238346761,
+            "tail_L3_norm": 13.177204317288629,
+            "tail_sup_at_rho": 0.10325467766322151,
+            "nonlinear_residual_L2": 0.08098843012502852,
+            "viscous_residual_L2": 0.1957528651221355,
+            "divergence_defect_L2": 1.3839289042901142,
+            "bogovskii_corrector_H1_scale": 1.3839289042901142,
+            "bogovskii_corrector_L2_scale": 41.51786712870342,
+            "pressure_perturbation_at_origin": 0.00800419690994819
+          },
+          {
+            "rho": 100.0,
+            "tail_energy_L2_sq": 60361394905.35481,
+            "tail_L2_norm": 245685.56104369424,
+            "tail_L3_norm": 13.177298111428112,
+            "tail_sup_at_rho": 0.03099205722378258,
+            "nonlinear_residual_L2": 0.013313276370571694,
+            "viscous_residual_L2": 0.03216758410973825,
+            "divergence_defect_L2": 0.7581847581389863,
+            "bogovskii_corrector_H1_scale": 0.7581847581389863,
+            "bogovskii_corrector_L2_scale": 75.81847581389863,
+            "pressure_perturbation_at_origin": 0.0007204991413668196
+          },
+          {
+            "rho": 300.0,
+            "tail_energy_L2_sq": 181084184716.60092,
+            "tail_L2_norm": 425539.87441437365,
+            "tail_L3_norm": 13.177306360100454,
+            "tail_sup_at_rho": 0.010331144842730417,
+            "nonlinear_residual_L2": 0.0025622346596479383,
+            "viscous_residual_L2": 0.006190690091081868,
+            "divergence_defect_L2": 0.43774709456594674,
+            "bogovskii_corrector_H1_scale": 0.43774709456594674,
+            "bogovskii_corrector_L2_scale": 131.32412836978403,
+            "pressure_perturbation_at_origin": 8.0056646178453e-05
+          },
+          {
+            "rho": 1000.0,
+            "tail_energy_L2_sq": 603613949055.5398,
+            "tail_L2_norm": 776925.9611156908,
+            "tail_L3_norm": 13.177307298418024,
+            "tail_sup_at_rho": 0.003099359120820004,
+            "nonlinear_residual_L2": 0.00042101986255004687,
+            "viscous_residual_L2": 0.0010172348490393914,
+            "divergence_defect_L2": 0.2397645139651979,
+            "bogovskii_corrector_H1_scale": 0.2397645139651979,
+            "bogovskii_corrector_L2_scale": 239.7645139651979,
+            "pressure_perturbation_at_origin": 7.205110298007931e-06
+          }
+        ],
+        "measured_rho_exponents": {
+          "tail_L2_norm": 0.5000000000303114,
+          "tail_L3_norm": 1.2768224253058113e-05,
+          "tail_sup_at_rho": -0.9990949951645193,
+          "nonlinear_residual_L2": -1.4992557222696912,
+          "viscous_residual_L2": -1.499882432289736,
+          "divergence_defect_L2": -0.4995840292998001,
+          "bogovskii_corrector_L2_scale": 0.5004159707002005,
+          "pressure_perturbation_at_origin": -1.9996966410059376
+        },
+        "predicted_rho_exponents": {
+          "tail_L2_norm": 0.5,
+          "tail_L3_norm": 0.0,
+          "tail_sup_at_rho": -1.0,
+          "nonlinear_residual_L2": -1.5,
+          "viscous_residual_L2": -1.5,
+          "divergence_defect_L2": -0.5,
+          "bogovskii_corrector_L2_scale": 0.5,
+          "pressure_perturbation_at_origin": -2.0
+        }
+      },
+      "alpha=1.25": {
+        "rows": [
+          {
+            "rho": 10.0,
+            "tail_energy_L2_sq": 579851.5979604669,
+            "tail_L2_norm": 761.4798736411008,
+            "tail_L3_norm": 2.2757653073876143,
+            "tail_sup_at_rho": 0.12990625563858937,
+            "nonlinear_residual_L2": 0.05982463092495972,
+            "viscous_residual_L2": 0.35702511369104206,
+            "divergence_defect_L2": 0.9128629842007754,
+            "bogovskii_corrector_H1_scale": 0.9128629842007754,
+            "bogovskii_corrector_L2_scale": 9.128629842007754,
+            "pressure_perturbation_at_origin": 0.008732721585697156
+          },
+          {
+            "rho": 30.0,
+            "tail_energy_L2_sq": 1004332.9147677931,
+            "tail_L2_norm": 1002.1641156855463,
+            "tail_L3_norm": 1.7307026172304436,
+            "tail_sup_at_rho": 0.03308474804708913,
+            "nonlinear_residual_L2": 0.006679153518115089,
+            "viscous_residual_L2": 0.05225639099164461,
+            "divergence_defect_L2": 0.40149447674670846,
+            "bogovskii_corrector_H1_scale": 0.40149447674670846,
+            "bogovskii_corrector_L2_scale": 12.044834302401254,
+            "pressure_perturbation_at_origin": 0.0005616345425630871
+          },
+          {
+            "rho": 100.0,
+            "tail_energy_L2_sq": 1833652.7434961218,
+            "tail_L2_norm": 1354.1243456551992,
+            "tail_L3_norm": 1.2809898797252808,
+            "tail_sup_at_rho": 0.0073502764381291425,
+            "nonlinear_residual_L2": 0.000601452956393173,
+            "viscous_residual_L2": 0.006355469694298464,
+            "divergence_defect_L2": 0.16279747235702804,
+            "bogovskii_corrector_H1_scale": 0.16279747235702804,
+            "bogovskii_corrector_L2_scale": 16.279747235702803,
+            "pressure_perturbation_at_origin": 2.76938499224135e-05
+          },
+          {
+            "rho": 300.0,
+            "tail_energy_L2_sq": 3175979.7306010625,
+            "tail_L2_norm": 1782.1278659515604,
+            "tail_L3_norm": 0.9733502883874233,
+            "tail_sup_at_rho": 0.00186177086460198,
+            "nonlinear_residual_L2": 6.683132329777887e-05,
+            "viscous_residual_L2": 0.0009293718340062447,
+            "divergence_defect_L2": 0.07141967950580239,
+            "bogovskii_corrector_H1_scale": 0.07141967950580239,
+            "bogovskii_corrector_L2_scale": 21.425903851740717,
+            "pressure_perturbation_at_origin": 1.7766067702138577e-06
+          },
+          {
+            "rho": 1000.0,
+            "tail_energy_L2_sq": 5798519.13863537,
+            "tail_L2_norm": 2408.011449024977,
+            "tail_L3_norm": 0.7203605238332185,
+            "tail_sup_at_rho": 0.00041336199292718833,
+            "nonlinear_residual_L2": 6.014852033000047e-06,
+            "viscous_residual_L2": 0.00011301918283211773,
+            "divergence_defect_L2": 0.028950769381609776,
+            "bogovskii_corrector_H1_scale": 0.028950769381609776,
+            "bogovskii_corrector_L2_scale": 28.950769381609778,
+            "pressure_perturbation_at_origin": 8.757813932092316e-08
+          }
+        ],
+        "measured_rho_exponents": {
+          "tail_L2_norm": 0.25000004955373917,
+          "tail_L3_norm": -0.24982302967188863,
+          "tail_sup_at_rho": -1.2488687288139766,
+          "nonlinear_residual_L2": -1.9990177746039859,
+          "viscous_residual_L2": -1.7498100663434166,
+          "divergence_defect_L2": -0.7494745269814114,
+          "bogovskii_corrector_L2_scale": 0.2505254730185888,
+          "pressure_perturbation_at_origin": -2.499478028752303
+        },
+        "predicted_rho_exponents": {
+          "tail_L2_norm": 0.25,
+          "tail_L3_norm": -0.25,
+          "tail_sup_at_rho": -1.25,
+          "nonlinear_residual_L2": -2.0,
+          "viscous_residual_L2": -1.75,
+          "divergence_defect_L2": -0.75,
+          "bogovskii_corrector_L2_scale": 0.25,
+          "pressure_perturbation_at_origin": -2.5
+        }
+      },
+      "alpha=1.6": {
+        "rows": [
+          {
+            "rho": 10.0,
+            "tail_energy_L2_sq": 21.04398011847108,
+            "tail_L2_norm": 4.58737180948646,
+            "tail_L3_norm": 0.38185723708206953,
+            "tail_sup_at_rho": 0.030893716482247993,
+            "nonlinear_residual_L2": 0.0025498831381448555,
+            "viscous_residual_L2": 0.06799264493784,
+            "divergence_defect_L2": 0.18946187239125303,
+            "bogovskii_corrector_H1_scale": 0.18946187239125303,
+            "bogovskii_corrector_L2_scale": 1.8946187239125303,
+            "pressure_perturbation_at_origin": 0.0003253159367853401
+          },
+          {
+            "rho": 30.0,
+            "tail_energy_L2_sq": 16.907072525088697,
+            "tail_L2_norm": 4.111821071628567,
+            "tail_L3_norm": 0.1980433480162486,
+            "tail_sup_at_rho": 0.0053647236508463534,
+            "nonlinear_residual_L2": 0.0001321888783667046,
+            "viscous_residual_L2": 0.00678164801521283,
+            "divergence_defect_L2": 0.05677236109988627,
+            "bogovskii_corrector_H1_scale": 0.05677236109988627,
+            "bogovskii_corrector_L2_scale": 1.7031708329965882,
+            "pressure_perturbation_at_origin": 9.724926807343343e-06
+          },
+          {
+            "rho": 100.0,
+            "tail_energy_L2_sq": 13.290291503619747,
+            "tail_L2_norm": 3.6455852072911075,
+            "tail_L3_norm": 0.09619728200332944,
+            "tail_sup_at_rho": 0.0007821543026965726,
+            "nonlinear_residual_L2": 5.1257042681536625e-06,
+            "viscous_residual_L2": 0.0005412336984403767,
+            "divergence_defect_L2": 0.015105514851240757,
+            "bogovskii_corrector_H1_scale": 0.015105514851240757,
+            "bogovskii_corrector_L2_scale": 1.5105514851240758,
+            "pressure_perturbation_at_origin": 2.0651246996071893e-07
+          },
+          {
+            "rho": 300.0,
+            "tail_energy_L2_sq": 10.668759800708976,
+            "tail_L2_norm": 3.2663067523900717,
+            "tail_L3_norm": 0.04976241729583182,
+            "tail_sup_at_rho": 0.00013487433362243005,
+            "nonlinear_residual_L2": 2.639704355552485e-07,
+            "viscous_residual_L2": 5.388135997029971e-05,
+            "divergence_defect_L2": 0.004511455509924253,
+            "bogovskii_corrector_H1_scale": 0.004511455509924253,
+            "bogovskii_corrector_L2_scale": 1.353436652977276,
+            "pressure_perturbation_at_origin": 6.1401954532816804e-09
+          },
+          {
+            "rho": 1000.0,
+            "tail_energy_L2_sq": 8.385686209864586,
+            "tail_L2_norm": 2.8958049329788405,
+            "tail_L3_norm": 0.02416437243947888,
+            "tail_sup_at_rho": 1.9648383781059177e-05,
+            "nonlinear_residual_L2": 1.022788863308425e-08,
+            "viscous_residual_L2": 4.299264198060154e-06,
+            "divergence_defect_L2": 0.0011999183959765707,
+            "bogovskii_corrector_H1_scale": 0.0011999183959765707,
+            "bogovskii_corrector_L2_scale": 1.1999183959765707,
+            "pressure_perturbation_at_origin": 1.3030855625909787e-10
+          }
+        ],
+        "measured_rho_exponents": {
+          "tail_L2_norm": -0.09991395654193555,
+          "tail_L3_norm": -0.5994660167302504,
+          "tail_sup_at_rho": -1.598551945747067,
+          "nonlinear_residual_L2": -2.6986320420983554,
+          "viscous_residual_L2": -2.099609426791459,
+          "divergence_defect_L2": -1.0993172930081652,
+          "bogovskii_corrector_L2_scale": -0.09931729300816505,
+          "pressure_perturbation_at_origin": -3.198882280595436
+        },
+        "predicted_rho_exponents": {
+          "tail_L2_norm": null,
+          "tail_L3_norm": -0.6000000000000001,
+          "tail_sup_at_rho": -1.6,
+          "nonlinear_residual_L2": -2.7,
+          "viscous_residual_L2": -2.1,
+          "divergence_defect_L2": -1.1,
+          "bogovskii_corrector_L2_scale": -0.10000000000000009,
+          "pressure_perturbation_at_origin": -3.2
+        }
+      }
+    },
+    "what_the_analysis_consumes": {
+      "input_1_certified_decay_exponent": {
+        "who_builds_it": "leg 382 (slot C), Route-DEXC -- NOT this leg",
+        "form_needed": "a two-sided enclosure [alpha_lo, alpha_hi]; every magnitude below depends only on alpha_lo",
+        "thresholds_that_matter": {
+          "fixed_ball_energy_decays": "alpha_lo > 1",
+          "critical_L3_tail_finite": "alpha_lo > 1",
+          "global_L2_finite": "alpha_lo > 1.5"
+        },
+        "currently_available": "alpha = 1 a priori (Type-I, Chae-Wolf), fitted per candidate by solver/dssp_screen.py::fitted_far_field_decay_exponent; fitted is not sufficient (CLAY_OBLIGATIONS \u00a78 bullet 2)"
+      },
+      "input_2_perturbation_size_vs_cutoff_radius": {
+        "nonlinear_cutoff_residual_L2": "~ C^2 rho^{1/2 - 2 alpha}",
+        "viscous_cutoff_residual_L2": "~ nu C rho^{-alpha - 1/2}",
+        "divergence_defect_L2": "~ C rho^{1/2 - alpha} (Bogovskii source; corrector H^1 the same size, corrector L^2 ~ C rho^{3/2 - alpha})",
+        "discarded_tail_L2": "~ C rho^{3/2 - alpha}, DIVERGENT for alpha <= 3/2",
+        "discarded_tail_L3_critical": "~ C rho^{1 - alpha}, log-divergent at alpha = 1",
+        "pressure_perturbation_at_origin": "~ C^2 rho^{-2 alpha}, to be compared with the profile's own pressure scale (T*-t)^{-1}: ratio rho^{-2 alpha}(T*-t) -> 0, so the pressure non-locality is NOT the obstruction",
+        "coincidence_at_alpha_1": "at exactly the Type-I exponent the nonlinear and viscous cutoff residuals scale identically, both rho^{-3/2}; for alpha > 1 the nonlinear one is the smaller of the two"
+      }
+    },
+    "the_obligation_is_not_discharged_by_this": "The residuals go to zero with rho, but smallness of a residual is not persistence of a blow-up. What must be shown is that the localised solution still loses smoothness at a finite time, over a time interval of length ~T*, with the cutoff sitting at similarity radius rho/sqrt(T*-t) -> infinity. That is \u00a75, and this leg does not attempt it."
+  },
+  "check_D_clay_primary_text": {
+    "source": "Charles L. Fefferman, 'Existence and smoothness of the Navier-Stokes equation', official Clay Mathematics Institute problem description, https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf (TeX creation date 2006-08-04, last modified 2013-02-05); fetched and its text layer extracted by this leg, 2026-08-12",
+    "verbatim_conditions": {
+      "(4)": "|\u2202x\u03b1 u\u25e6 (x)| \u2264 C\u03b1K (1 + |x|)\u2212K on Rn , for any \u03b1 and K",
+      "(5)": "|\u2202x\u03b1 \u2202tm f (x, t)| \u2264 C\u03b1mK (1 + |x| + t)\u2212K on Rn \u00d7 [0, \u221e), for any \u03b1, m, K",
+      "(6)": "p, u \u2208 C \u221e (Rn \u00d7 [0, \u221e))",
+      "(7)": "\u222b_{Rn} |u(x, t)|2 dx < C for all t \u2265 0 (bounded energy)",
+      "(10)": "u(x, t) = u(x + ej , t) on R3 \u00d7 [0, \u221e) for 1 \u2264 j \u2264 n",
+      "(11)": "p, u \u2208 C \u221e (Rn \u00d7 [0, \u221e))",
+      "(A)": "Existence and smoothness of Navier-Stokes solutions on R3. Take \u03bd > 0 and n = 3. Let u\u25e6 (x) be any smooth, divergence-free vector field satisfying (4). Take f (x, t) to be identically zero. Then there exist smooth functions p(x, t), ui (x, t) on R3 \u00d7 [0, \u221e) that satisfy (1), (2), (3), (6), (7).",
+      "(C)": "Breakdown of Navier-Stokes solutions on R3. Take \u03bd > 0 and n = 3. Then there exist a smooth, divergence-free vector field u\u25e6 (x) on R3 and a smooth f (x, t) on R3 \u00d7 [0, \u221e), satisfying (4), (5), for which there exist no solutions (p, u) of (1), (2), (3), (6), (7) on R3 \u00d7 [0, \u221e).",
+      "(D)": "Breakdown of Navier-Stokes Solutions on R3/Z3. Take \u03bd > 0 and n = 3. Then there exist a smooth, divergence-free vector field u\u25e6 (x) on R3 and a smooth f (x, t) on R3 \u00d7 [0, \u221e), satisfying (8), (9), for which there exist no solutions (p, u) of (1), (2), (3), (10), (11) on R3 \u00d7 [0, \u221e)."
+    },
+    "reviewer_paragraph_clause_ledger": [
+      {
+        "reviewer_clause": "the Clay statement being answered is direction (b) - exhibit a breakdown",
+        "verdict": "CORRECTED (labelling)",
+        "primary_text": "The breakdown statement on R3 is labelled (C); (D) is the torus breakdown; (B) is EXISTENCE on R3/Z3, not a breakdown statement at all.",
+        "load_bearing": false,
+        "why": "Pure labelling. It matters only because a reader chasing '(b)' in the official text lands on an existence statement and could mis-transcribe the hypotheses."
+      },
+      {
+        "reviewer_clause": "initial data u0 on R^3 that is smooth",
+        "verdict": "CONFIRMED",
+        "primary_text": "(C): 'a smooth, divergence-free vector field u\u25e6 (x) on R3'.",
+        "load_bearing": true,
+        "why": "Verbatim in (C)."
+      },
+      {
+        "reviewer_clause": "divergence-free",
+        "verdict": "CONFIRMED",
+        "primary_text": "(C): 'smooth, divergence-free vector field'.",
+        "load_bearing": true,
+        "why": "Verbatim in (C)."
+      },
+      {
+        "reviewer_clause": "decaying faster than any polynomial",
+        "verdict": "CONFIRMED AND STRENGTHENED",
+        "primary_text": "(4): '|\u2202x\u03b1 u\u25e6(x)| \u2264 C\u03b1K (1+|x|)^{-K} ... for any \u03b1 and K'.",
+        "load_bearing": true,
+        "why": "The official condition binds EVERY DERIVATIVE \u2202x\u03b1, not the field alone. The reviewer's phrase understates it: a cutoff construction owes faster-than-polynomial decay of all derivatives of the DATA, which a compactly-supported cutoff supplies trivially -- so this clause is confirmed and is NOT the binding difficulty."
+      },
+      {
+        "reviewer_clause": "with f = 0",
+        "verdict": "REFUTED",
+        "primary_text": "(C) permits 'a smooth f (x, t) on R3 \u00d7 [0, \u221e), satisfying (4), (5)'. 'Take f (x, t) to be identically zero' appears in (A) and (B) -- the two EXISTENCE statements -- and in neither breakdown statement.",
+        "load_bearing": true,
+        "why": "The obligation is WEAKER than the document states: a breakdown candidate may carry a forcing, provided f is smooth and satisfies (5), i.e. decays faster than any polynomial in (1+|x|+t) with all x- and t-derivatives. This is a real relaxation and it is the correction most likely to change how a build is scoped. It is NOT a shortcut -- see 'f_allowance_is_not_a_shortcut' in the payload."
+      },
+      {
+        "reviewer_clause": "such that no smooth solution exists for all time with bounded energy",
+        "verdict": "CONFIRMED",
+        "primary_text": "(C): 'for which there exist no solutions (p, u) of (1), (2), (3), (6), (7) on R3 \u00d7 [0, \u221e)', with (6) smoothness and (7) '\u222b|u(x,t)|^2 dx < C for all t \u2265 0 (bounded energy)'.",
+        "load_bearing": true,
+        "why": "The bounded-energy requirement CLAY_OBLIGATIONS \u00a74 rests on is verbatim in the official text, as numbered condition (7), with a single constant C uniform in t. \u00a74's premise is verified."
+      }
+    ],
+    "counts": {
+      "confirmed": 4,
+      "corrected": 1,
+      "refuted": 1,
+      "total": 6
+    },
+    "bounded_energy_premise_of_section_4": "VERIFIED -- condition (7) verbatim, uniform in t.",
+    "f_allowance_is_not_a_shortcut": "(C) permitting a forcing does NOT let the cutoff residual be absorbed into f and the obligation declared discharged. To do that one would DEFINE f as the residual of the truncated field, but (C) requires f smooth on R3 x [0, infinity) satisfying (5) while requiring that NO smooth bounded-energy solution exists on [0, infinity) -- so f must be specified past T*, where the candidate field does not exist, and cutting f off in time before T* removes exactly the forcing that was making the field a solution. The relaxation is real and should be recorded; it does not discharge \u00a74 or \u00a75.",
+    "alternative_target_noted": "(D), the R3/Z3 breakdown statement, carries NO decay condition and NO bounded-energy condition -- its acceptance conditions are (10) periodicity and (11) smoothness only. A torus target would make \u00a74 vacuous by construction. This is recorded as an OPTION WITH ITS OWN COST, not a recommendation: the route-4 object is a DSS profile on R3 and is not periodic, and re-targeting would re-open \u00a72's rigidity screen from scratch. No leg is authorised by this note."
+  },
+  "gate": {
+    "question": "Does the reviewer's arithmetic survive (i) with the DSS modulation handled, AND does (ii) confirm the bounded-energy reading against the primary text?",
+    "answer": "YES, WITH ONE REFUTED SIDE-CLAUSE AND ONE REPAIRED DERIVATION STEP",
+    "i_arithmetic_survives": true,
+    "i_dss_exponent_vs_ss_exponent": "IDENTICAL, ratio 1 (no factor). The log-periodic modulation enters as a bounded periodic prefactor G(s), period 2 log lambda, not as an exponent shift.",
+    "i_repair_required": "The reviewer's identity is vacuous exactly in the case of interest (both sides +infinity when U is not in L^2). Replace it with the truncated law E_rho(t) ~ rho^{3-2alpha}(T*-t)^{alpha-1}. Same conclusion, valid in the case that matters.",
+    "ii_bounded_energy_confirmed": true,
+    "ii_refuted_clause": "'with f = 0' is NOT in the breakdown statement (C); f may be any smooth forcing satisfying (4),(5). f = 0 belongs to the EXISTENCE statements (A),(B).",
+    "ii_labelling_correction": "the breakdown-on-R3 statement is (C), not '(b)'.",
+    "consequence": "CLAY_OBLIGATIONS \u00a74 is VERIFIED AS A SPECIFICATION: the localisation problem is confirmed load-bearing and its inputs are named. Routed to integration for the DRAFT-UNVERIFIED header (integration's edit, not this leg's), together with the two corrections above.",
+    "clay_movement": "none. Clay stays ~0.05%."
+  },
+  "self_hash": "58c57b62c0cbc80d"
+}
