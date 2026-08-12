@@ -1,0 +1,663 @@
+{
+  "leg": 387,
+  "route": "ROUTE-DXNV",
+  "title": "completion of leg 382's refused external novelty pass (arXiv + Semantic Scholar, HTTP 429)",
+  "status": "WIP -- WOUND DOWN MID-LEG on coordinator instruction; branch only, main closed",
+  "ceiling": "TIER 2",
+  "clay": "no L1->L4 link moved; Clay stays ~0.05%",
+  "floor_eligible": false,
+  "floor_note": "literature-typed; \u00a73c rule 4 excludes literature work from the floor",
+  "gate_verdict": {
+    "wording": "Do the named queries return an answer (hits, or a controlled zero), each banked verbatim, with an assessment of whether any hit predates and duplicates the enclosure instrument?",
+    "arxiv_channel": "YES-NO-HIT (both disclosed queries returned a CONTROLLED-ZERO)",
+    "semantic_scholar_channel": "NO (still refused) -- 429 on 9 of 10 attempts across three runs; the one HTTP 200 is banked below and its single hit assessed",
+    "overall": "UNANSWERED AS A WHOLE",
+    "overall_reason": "the arXiv half is complete and control-validated, but the Semantic Scholar half could not be completed: its positive control never returned HTTP 200 in any run, so that channel is a banked REFUSAL and not a controlled zero. Per the leg's own pre-registration and the wind-down instruction, leg 382's external novelty obligation therefore stays OPEN and RE-QUEUED, not discharged.",
+    "obligation_state": "OPEN -- re-queued for a successor"
+  },
+  "three_states_are_distinct": {
+    "HITS": "HTTP 200, result container located, total > 0",
+    "CONTROLLED-ZERO": "HTTP 200, result container located, and it explicitly says 0",
+    "REFUSED": "non-200, transport error, empty body, unparseable body, or a 200 with no locatable result container",
+    "NOT-ATTEMPTED": "never issued -- appears nowhere below as a zero",
+    "why": "'no hits', 'the endpoint refused' and 'I did not get to it' are three different states; an errored query must never read as absence of prior art"
+  },
+  "red_path": {
+    "note": "demonstrated BEFORE any live verdict was reported, and re-demonstrated after the parser fix; both directions shown -- REFUSED reachable AND CONTROLLED-ZERO/HITS reachable, so the harness is not a REFUSED-generator",
+    "synthetic_cases": [
+      {
+        "case": "arxiv_200_empty_body",
+        "hypothesis": "leg 382 saw 'curl returned empty'; an empty body is not evidence of no prior art",
+        "required_verdict": "REFUSED",
+        "observed_verdict": "REFUSED",
+        "observed_total": null,
+        "parse_note": "HTTP 200 with EMPTY body -- not a controlled zero",
+        "PASS": true
+      },
+      {
+        "case": "s2_200_empty_body",
+        "hypothesis": "same trap on the JSON channel",
+        "required_verdict": "REFUSED",
+        "observed_verdict": "REFUSED",
+        "observed_total": null,
+        "parse_note": "HTTP 200 with EMPTY body -- not a controlled zero",
+        "PASS": true
+      },
+      {
+        "case": "arxiv_429",
+        "hypothesis": "the literal leg-382 refusal: rate-limited must never read as zero",
+        "required_verdict": "REFUSED",
+        "observed_verdict": "REFUSED",
+        "observed_total": null,
+        "parse_note": "HTTP 429 (non-200)",
+        "PASS": true
+      },
+      {
+        "case": "arxiv_200_no_container",
+        "hypothesis": "well-formed XML with no opensearch:totalResults cannot be read as zero",
+        "required_verdict": "REFUSED",
+        "observed_verdict": "REFUSED",
+        "observed_total": null,
+        "parse_note": "HTTP 200, parsed, but NO opensearch:totalResults container -- cannot distinguish zero from malformed",
+        "PASS": true
+      },
+      {
+        "case": "s2_200_no_container",
+        "hypothesis": "well-formed JSON with no {total,data} cannot be read as zero",
+        "required_verdict": "REFUSED",
+        "observed_verdict": "REFUSED",
+        "observed_total": null,
+        "parse_note": "HTTP 200, parsed, but no {total,data} result container -- cannot distinguish zero from malformed",
+        "PASS": true
+      },
+      {
+        "case": "arxiv_transport_error",
+        "hypothesis": "DNS/transport death must not be laundered into a zero",
+        "required_verdict": "REFUSED",
+        "observed_verdict": "REFUSED",
+        "observed_total": null,
+        "parse_note": "transport error: URLError: [Errno -3] Temporary failure in name resolution",
+        "PASS": true
+      },
+      {
+        "case": "arxiv_true_zero",
+        "hypothesis": "a genuine zero container must be reachable, or CONTROLLED-ZERO is dead code",
+        "required_verdict": "CONTROLLED-ZERO",
+        "observed_verdict": "CONTROLLED-ZERO",
+        "observed_total": 0,
+        "parse_note": "opensearch:totalResults present and equal to 0",
+        "PASS": true
+      },
+      {
+        "case": "s2_true_zero",
+        "hypothesis": "same on the JSON channel",
+        "required_verdict": "CONTROLLED-ZERO",
+        "observed_verdict": "CONTROLLED-ZERO",
+        "observed_total": 0,
+        "parse_note": "JSON 'total' present and equal to 0",
+        "PASS": true
+      },
+      {
+        "case": "arxiv_true_hit",
+        "hypothesis": "a hit must be reachable, or a zero verdict is vacuous",
+        "required_verdict": "HITS",
+        "observed_verdict": "HITS",
+        "observed_total": 2,
+        "parse_note": "opensearch:totalResults = 2",
+        "PASS": true
+      }
+    ],
+    "live_bad_endpoint": {
+      "case": "live_bad_endpoint",
+      "hypothesis": "a real request to a nonexistent path must be REFUSED, not zero",
+      "url_sent": "https://export.arxiv.org/api/THIS-ENDPOINT-DOES-NOT-EXIST-leg387?q=1",
+      "utc": "2026-08-12T10:29:42.914216+00:00",
+      "http_status": 503,
+      "transport_error": null,
+      "body_bytes": 126,
+      "body_head_verbatim": "<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>503</title>\n  </head>\n  <body>\n    503\n  </body>\n</html>",
+      "required_verdict": "REFUSED",
+      "observed_verdict": "REFUSED",
+      "parse_note": "HTTP 503 (non-200)",
+      "PASS": true
+    },
+    "all_passed": true
+  },
+  "harness_bug_caught_by_the_red_path": {
+    "what": "run 1 of the live harness returned REFUSED for EVERY arXiv response, including a 37201-byte positive control that plainly contained results",
+    "cause": "the parser listed only opensearch namespace 1.0; arXiv serves 1.1, so opensearch:totalResults was never located",
+    "why_it_matters": "the strict tri-state refused to call an unparseable 200 a zero. A harness that counted len(entries) would have reported '0 results, no prior art' for all four arXiv queries -- a fabricated controlled zero, and exactly the failure mode this cycle's standing rule was written against",
+    "fix": "accept 1.1 and 1.0; red path re-run after the fix, still 9/9"
+  },
+  "live_named_queries": [
+    {
+      "key": "arxiv_q1",
+      "role": "leg-382 disclosed query 1 (verbatim)",
+      "endpoint": "export.arxiv.org/api/query",
+      "verbatim_382": "\"interval arithmetic\" AND \"decay rate\" AND \"self-similar\"",
+      "wire": "all:\"interval arithmetic\" AND all:\"decay rate\" AND all:\"self-similar\"",
+      "parser": "arxiv",
+      "url_sent": "https://export.arxiv.org/api/query?search_query=all%3A%22interval+arithmetic%22+AND+all%3A%22decay+rate%22+AND+all%3A%22self-similar%22&start=0&max_results=20&sortBy=relevance",
+      "attempts": [
+        {
+          "attempt": 1,
+          "utc": "2026-08-12T10:29:54.090153+00:00",
+          "http_status": 200,
+          "transport_error": null,
+          "body_bytes": 826,
+          "body_head_verbatim": "<?xml version='1.0' encoding='UTF-8'?>\n<feed xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:arxiv=\"http://arxiv.org/schemas/atom\" xmlns=\"http://www.w3.org/2005/Atom\">\n  <id>https://arxiv.org/api/d8BlDgXD0eT37H7jC9aAI3guSw0</id>\n  <title>arXiv Query: search_query=all:\"interval arithmetic\" AND all:\"decay rate\" AND all:\"self-similar\"&amp;id_list=&amp;start=0&amp;max_results=20</title>\n  <updated>2026-08-12T10:23:58Z</updated>\n  <link href=\"https://arxiv.org/api/query?search_query=all:%22interval+arithmetic%22+AND+(all:%22decay+rate%22+AND+all:%22self-similar%22)&amp;start=0&amp;max",
+          "verdict": "CONTROLLED-ZERO",
+          "total_results": 0,
+          "parse_note": "opensearch:totalResults present and equal to 0",
+          "entries": []
+        }
+      ],
+      "final_verdict": "CONTROLLED-ZERO"
+    },
+    {
+      "key": "arxiv_q2",
+      "role": "leg-382 disclosed query 2 (verbatim)",
+      "endpoint": "export.arxiv.org/api/query",
+      "verbatim_382": "\"computer-assisted proof\" AND \"asymptotic decay\" AND \"far-field\"",
+      "wire": "all:\"computer-assisted proof\" AND all:\"asymptotic decay\" AND all:\"far-field\"",
+      "parser": "arxiv",
+      "url_sent": "https://export.arxiv.org/api/query?search_query=all%3A%22computer-assisted+proof%22+AND+all%3A%22asymptotic+decay%22+AND+all%3A%22far-field%22&start=0&max_results=20&sortBy=relevance",
+      "attempts": [
+        {
+          "attempt": 1,
+          "utc": "2026-08-12T10:29:54.172129+00:00",
+          "http_status": 200,
+          "transport_error": null,
+          "body_bytes": 840,
+          "body_head_verbatim": "<?xml version='1.0' encoding='UTF-8'?>\n<feed xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:arxiv=\"http://arxiv.org/schemas/atom\" xmlns=\"http://www.w3.org/2005/Atom\">\n  <id>https://arxiv.org/api/OPCI9CR+UwC9pf4mRYhyusDTKCM</id>\n  <title>arXiv Query: search_query=all:\"computer-assisted proof\" AND all:\"asymptotic decay\" AND all:\"far-field\"&amp;id_list=&amp;start=0&amp;max_results=20</title>\n  <updated>2026-08-12T10:25:52Z</updated>\n  <link href=\"https://arxiv.org/api/query?search_query=all:%22computer-assisted+proof%22+AND+(all:%22asymptotic+decay%22+AND+all:%22far-field%22)&amp;s",
+          "verdict": "CONTROLLED-ZERO",
+          "total_results": 0,
+          "parse_note": "opensearch:totalResults present and equal to 0",
+          "entries": []
+        }
+      ],
+      "final_verdict": "CONTROLLED-ZERO"
+    },
+    {
+      "key": "s2_q3",
+      "role": "leg-382 disclosed query 3 (verbatim)",
+      "endpoint": "api.semanticscholar.org/graph/v1/paper/search",
+      "verbatim_382": "rigorous enclosure far-field decay exponent computer-assisted proof",
+      "wire": "rigorous enclosure far-field decay exponent computer-assisted proof",
+      "parser": "s2",
+      "url_sent": "https://api.semanticscholar.org/graph/v1/paper/search?query=rigorous+enclosure+far-field+decay+exponent+computer-assisted+proof&limit=20&fields=title%2Cyear%2CexternalIds",
+      "attempts": [
+        {
+          "attempt": 1,
+          "utc": "2026-08-12T10:29:54.227754+00:00",
+          "http_status": 429,
+          "transport_error": null,
+          "body_bytes": 174,
+          "body_head_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+          "verdict": "REFUSED",
+          "total_results": null,
+          "parse_note": "HTTP 429 (non-200)",
+          "entries": []
+        },
+        {
+          "attempt": 2,
+          "utc": "2026-08-12T10:30:19.793703+00:00",
+          "http_status": 429,
+          "transport_error": null,
+          "body_bytes": 174,
+          "body_head_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+          "verdict": "REFUSED",
+          "total_results": null,
+          "parse_note": "HTTP 429 (non-200)",
+          "entries": []
+        },
+        {
+          "attempt": 3,
+          "utc": "2026-08-12T10:30:45.393198+00:00",
+          "http_status": 429,
+          "transport_error": null,
+          "body_bytes": 174,
+          "body_head_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+          "verdict": "REFUSED",
+          "total_results": null,
+          "parse_note": "HTTP 429 (non-200)",
+          "entries": []
+        },
+        {
+          "attempt": 4,
+          "utc": "2026-08-12T10:31:10.686400+00:00",
+          "http_status": 429,
+          "transport_error": null,
+          "body_bytes": 174,
+          "body_head_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+          "verdict": "REFUSED",
+          "total_results": null,
+          "parse_note": "HTTP 429 (non-200)",
+          "entries": []
+        }
+      ],
+      "final_verdict": "REFUSED"
+    },
+    {
+      "key": "arxiv_ctrl_pos",
+      "role": "POSITIVE CONTROL -- must return HITS or the whole run is REFUSED",
+      "endpoint": "export.arxiv.org/api/query",
+      "verbatim_382": null,
+      "wire": "all:\"Navier-Stokes\"",
+      "parser": "arxiv",
+      "url_sent": "https://export.arxiv.org/api/query?search_query=all%3A%22Navier-Stokes%22&start=0&max_results=20&sortBy=relevance",
+      "attempts": [
+        {
+          "attempt": 1,
+          "utc": "2026-08-12T10:31:10.923425+00:00",
+          "http_status": 200,
+          "transport_error": null,
+          "body_bytes": 37201,
+          "body_head_verbatim": "<?xml version='1.0' encoding='UTF-8'?>\n<feed xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:arxiv=\"http://arxiv.org/schemas/atom\" xmlns=\"http://www.w3.org/2005/Atom\">\n  <id>https://arxiv.org/api/IcB2YdlYw/eyUq/UinLFfNdEYoM</id>\n  <title>arXiv Query: search_query=all:\"Navier-Stokes\"&amp;id_list=&amp;start=0&amp;max_results=20</title>\n  <updated>2026-08-12T10:26:54Z</updated>\n  <link href=\"https://arxiv.org/api/query?search_query=all:%22Navier-Stokes%22&amp;start=0&amp;max_results=20&amp;id_list=\" type=\"application/atom+xml\"/>\n  <opensearch:itemsPerPage>20</opensearch:itemsPerPage",
+          "verdict": "HITS",
+          "total_results": 10756,
+          "parse_note": "opensearch:totalResults = 10756",
+          "entries": [
+            {
+              "id": "http://arxiv.org/abs/1105.0582v2",
+              "title": "Drifting Solutions with Elliptic Symmetry for the Compressible Navier-Stokes Equations with Density-dependent Viscosity",
+              "published": "2011-05-03T13:41:21Z",
+              "updated": "2014-05-09T15:47:04Z"
+            },
+            {
+              "id": "http://arxiv.org/abs/1806.10081v10",
+              "title": "Existence and Smoothness of Navier-Stokes Equations",
+              "published": "2018-06-21T09:45:10Z",
+              "updated": "2021-01-18T21:00:07Z"
+            },
+            {
+              "id": "http://arxiv.org/abs/1803.06056v2",
+              "title": "Between homogeneous and inhomogeneous Navier-Stokes systems: the issue of stability",
+              "published": "2018-03-16T02:17:59Z",
+              "updated": "2019-01-28T08:11:52Z"
+            },
+            {
+              "id": "http://arxiv.org/abs/1210.1981v4",
+              "title": "A model for singularity formation in three-dimensional Euler and Navier-Stokes flows",
+              "published": "2012-10-06T17:43:33Z",
+              "updated": "2012-10-26T11:55:14Z"
+            },
+            {
+              "id": "http://arxiv.org/abs/2505.13816v3",
+              "title": "Smooth Solutions of the Navier-Stokes Equation",
+              "published": "2025-05-20T01:54:56Z",
+              "updated": "2025-07-23T13:40:34Z"
+            },
+            {
+              "id": "http://arxiv.org/abs/1505.02628v2",
+              "title": "Criticality of the Axially Symmetric Navier-Stokes Equations",
+              "published": "2015-05-11T14:06:47Z",
+              "updated": "2015-05-28T07:33:43Z"
+            },
+            {
+              "id": "http://arxiv.org/abs/math/0409057v1",
+              "title": "Malliavin calculus and ergodic properties of highly degenerate 2D stochastic Navier--Stokes equation",
+              "published": "2004-09-03T23:26:52Z",
+              "updated": "2004-09-03T23:26:52Z"
+            },
+            {
+              "id": "http://arxiv.org/abs/1503.03063v2",
+              "title": "Lower bounds for possible singular solutions for the Navier--Stokes and Euler equations revisited",
+              "published": "2015-03-10T16:15:31Z",
+              "updated": "2016-09-02T20:46:07Z"
+            },
+            {
+              "id": "http://arxiv.org/abs/1104.3687v1",
+              "title": "Self-Similar Solutions with Elliptic Symmetry for the Compressible Euler and Navier-Stokes Equations in R^{N}",
+              "published": "2011-04-19T09:50:44Z",
+              "updated": "2011-04-19T09:50:44Z"
+            },
+            {
+              "id": "http://arxiv.org/abs/2506.23697v1",
+              "title": "A note on N-soliton solutions for the viscid incompressible Navier-Stokes differential equation",
+              "published": "2025-06-30T10:18:20Z",
+              "updated": "2025-06-30T10:18:20Z"
+            }
+          ]
+        }
+      ],
+      "final_verdict": "HITS"
+    },
+    {
+      "key": "arxiv_ctrl_zero",
+      "role": "NEGATIVE CONTROL -- a nonsense phrase that SHOULD produce a genuine controlled zero, proving the harness can reach CONTROLLED-ZERO at all",
+      "endpoint": "export.arxiv.org/api/query",
+      "verbatim_382": null,
+      "wire": "all:\"zzqx interval arithmetic unicorn far-field zzqx\"",
+      "parser": "arxiv",
+      "url_sent": "https://export.arxiv.org/api/query?search_query=all%3A%22zzqx+interval+arithmetic+unicorn+far-field+zzqx%22&start=0&max_results=20&sortBy=relevance",
+      "attempts": [
+        {
+          "attempt": 1,
+          "utc": "2026-08-12T10:31:10.979960+00:00",
+          "http_status": 200,
+          "transport_error": null,
+          "body_bytes": 784,
+          "body_head_verbatim": "<?xml version='1.0' encoding='UTF-8'?>\n<feed xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:arxiv=\"http://arxiv.org/schemas/atom\" xmlns=\"http://www.w3.org/2005/Atom\">\n  <id>https://arxiv.org/api/XE7DDL2XQEciCadQrVFTR6Z9G6o</id>\n  <title>arXiv Query: search_query=all:\"zzqx interval arithmetic unicorn far-field zzqx\"&amp;id_list=&amp;start=0&amp;max_results=20</title>\n  <updated>2026-08-12T10:27:34Z</updated>\n  <link href=\"https://arxiv.org/api/query?search_query=all:%22zzqx+interval+arithmetic+unicorn+far-field+zzqx%22&amp;start=0&amp;max_results=20&amp;id_list=\" type=\"applicatio",
+          "verdict": "CONTROLLED-ZERO",
+          "total_results": 0,
+          "parse_note": "opensearch:totalResults present and equal to 0",
+          "entries": []
+        }
+      ],
+      "final_verdict": "CONTROLLED-ZERO"
+    },
+    {
+      "key": "s2_ctrl_pos",
+      "role": "POSITIVE CONTROL -- must return HITS or the S2 channel is REFUSED",
+      "endpoint": "api.semanticscholar.org/graph/v1/paper/search",
+      "verbatim_382": null,
+      "wire": "Navier-Stokes regularity",
+      "parser": "s2",
+      "url_sent": "https://api.semanticscholar.org/graph/v1/paper/search?query=Navier-Stokes+regularity&limit=20&fields=title%2Cyear%2CexternalIds",
+      "attempts": [
+        {
+          "attempt": 1,
+          "utc": "2026-08-12T10:31:11.030434+00:00",
+          "http_status": 429,
+          "transport_error": null,
+          "body_bytes": 174,
+          "body_head_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+          "verdict": "REFUSED",
+          "total_results": null,
+          "parse_note": "HTTP 429 (non-200)",
+          "entries": []
+        },
+        {
+          "attempt": 2,
+          "utc": "2026-08-12T10:31:36.236825+00:00",
+          "http_status": 429,
+          "transport_error": null,
+          "body_bytes": 174,
+          "body_head_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+          "verdict": "REFUSED",
+          "total_results": null,
+          "parse_note": "HTTP 429 (non-200)",
+          "entries": []
+        },
+        {
+          "attempt": 3,
+          "utc": "2026-08-12T10:32:01.477407+00:00",
+          "http_status": 429,
+          "transport_error": null,
+          "body_bytes": 174,
+          "body_head_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+          "verdict": "REFUSED",
+          "total_results": null,
+          "parse_note": "HTTP 429 (non-200)",
+          "entries": []
+        },
+        {
+          "attempt": 4,
+          "utc": "2026-08-12T10:32:26.874370+00:00",
+          "http_status": 429,
+          "transport_error": null,
+          "body_bytes": 174,
+          "body_head_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+          "verdict": "REFUSED",
+          "total_results": null,
+          "parse_note": "HTTP 429 (non-200)",
+          "entries": []
+        }
+      ],
+      "final_verdict": "REFUSED"
+    }
+  ],
+  "semantic_scholar_run1_successful_response": {
+    "key": "s2_q3",
+    "run": "run 1 (2026-08-12, before the opensearch-namespace fix)",
+    "attempt": 3,
+    "http_status": 200,
+    "verdict": "HITS",
+    "total_results": 1,
+    "body_verbatim": "{\"total\":1,\"offset\":0,\"data\":[{\"paperId\":\"0fdb571ea5a885d9a84330596b1f45318b91ec72\",\"externalIds\":{\"ArXiv\":\"2308.01528\",\"DOI\":\"10.1007/s00220-025-05429-9\",\"CorpusId\":260438366},\"title\":\"Exact Self-Similar Finite-Time Blowup of the Hou\u2013Luo Model with Smooth Profiles\",\"year\":2023}]}",
+    "provenance_note": "attempts 1 and 2 of the same run returned HTTP 429; attempt 3 returned HTTP 200 with this body. The S2 POSITIVE CONTROL never returned 200 in any run, so this channel has NO validated zero -- but a HIT does not need a zero-control to be credible, and it is banked as an observation."
+  },
+  "completion_scoped_followups": [
+    {
+      "wire_query": "all:\"computer-assisted proof\" AND all:\"decay exponent\"",
+      "hypothesis": "does any CAP enclose a decay EXPONENT at all?",
+      "url_sent": "https://export.arxiv.org/api/query?search_query=all%3A%22computer-assisted+proof%22+AND+all%3A%22decay+exponent%22&start=0&max_results=20&sortBy=relevance",
+      "utc": "2026-08-12T10:33:26.442133+00:00",
+      "http_status": 200,
+      "transport_error": null,
+      "body_bytes": 790,
+      "verdict": "CONTROLLED-ZERO",
+      "total_results": 0,
+      "parse_note": "opensearch:totalResults present and equal to 0",
+      "entries": []
+    },
+    {
+      "wire_query": "all:\"interval arithmetic\" AND all:\"far-field\"",
+      "hypothesis": "interval arithmetic applied to a far field, any object",
+      "url_sent": "https://export.arxiv.org/api/query?search_query=all%3A%22interval+arithmetic%22+AND+all%3A%22far-field%22&start=0&max_results=20&sortBy=relevance",
+      "utc": "2026-08-12T10:33:30.764859+00:00",
+      "http_status": 200,
+      "transport_error": null,
+      "body_bytes": 772,
+      "verdict": "CONTROLLED-ZERO",
+      "total_results": 0,
+      "parse_note": "opensearch:totalResults present and equal to 0",
+      "entries": []
+    },
+    {
+      "wire_query": "all:\"validated numerics\" AND all:\"decay rate\"",
+      "hypothesis": "the other standard name for the same technique",
+      "url_sent": "https://export.arxiv.org/api/query?search_query=all%3A%22validated+numerics%22+AND+all%3A%22decay+rate%22&start=0&max_results=20&sortBy=relevance",
+      "utc": "2026-08-12T10:33:50.429497+00:00",
+      "http_status": 200,
+      "transport_error": null,
+      "body_bytes": 772,
+      "verdict": "CONTROLLED-ZERO",
+      "total_results": 0,
+      "parse_note": "opensearch:totalResults present and equal to 0",
+      "entries": []
+    },
+    {
+      "wire_query": "all:\"rigorous\" AND all:\"enclosure\" AND all:\"decay\"",
+      "hypothesis": "the instrument's own three words, loosened from exact phrases",
+      "url_sent": "https://export.arxiv.org/api/query?search_query=all%3A%22rigorous%22+AND+all%3A%22enclosure%22+AND+all%3A%22decay%22&start=0&max_results=20&sortBy=relevance",
+      "utc": "2026-08-12T10:33:54.823140+00:00",
+      "http_status": 200,
+      "transport_error": null,
+      "body_bytes": 788,
+      "verdict": "CONTROLLED-ZERO",
+      "total_results": 0,
+      "parse_note": "opensearch:totalResults present and equal to 0",
+      "entries": []
+    },
+    {
+      "wire_query": "all:\"computer-assisted\" AND all:\"self-similar\" AND all:\"Navier-Stokes\"",
+      "hypothesis": "CAP + self-similar + the actual target equation",
+      "url_sent": "https://export.arxiv.org/api/query?search_query=all%3A%22computer-assisted%22+AND+all%3A%22self-similar%22+AND+all%3A%22Navier-Stokes%22&start=0&max_results=20&sortBy=relevance",
+      "utc": "2026-08-12T10:33:59.178365+00:00",
+      "http_status": 200,
+      "transport_error": null,
+      "body_bytes": 8393,
+      "verdict": "HITS",
+      "total_results": 3,
+      "parse_note": "opensearch:totalResults = 3",
+      "entries": [
+        {
+          "id": "http://arxiv.org/abs/2509.25116v2",
+          "title": "Nonuniqueness of Leray-Hopf solutions to the unforced incompressible 3D Navier-Stokes Equation",
+          "published": "2025-09-29T17:41:55Z",
+          "updated": "2026-03-19T00:11:47Z"
+        },
+        {
+          "id": "http://arxiv.org/abs/2604.09949v1",
+          "title": "Stable Finite-Time Singularity Formation for 3D Navier--Stokes via 5D-Lifted Axisymmetric Reductions",
+          "published": "2026-04-10T23:03:18Z",
+          "updated": "2026-04-10T23:03:18Z"
+        },
+        {
+          "id": "http://arxiv.org/abs/2509.14185v1",
+          "title": "Discovery of Unstable Singularities",
+          "published": "2025-09-17T17:18:10Z",
+          "updated": "2025-09-17T17:18:10Z"
+        }
+      ]
+    },
+    {
+      "wire_query": "all:\"certified\" AND all:\"asymptotic expansion\" AND all:\"far field\"",
+      "hypothesis": "the adjacent instrument: certifying a far-field expansion",
+      "url_sent": "https://export.arxiv.org/api/query?search_query=all%3A%22certified%22+AND+all%3A%22asymptotic+expansion%22+AND+all%3A%22far+field%22&start=0&max_results=20&sortBy=relevance",
+      "utc": "2026-08-12T10:34:03.471759+00:00",
+      "http_status": 200,
+      "transport_error": null,
+      "body_bytes": 820,
+      "verdict": "CONTROLLED-ZERO",
+      "total_results": 0,
+      "parse_note": "opensearch:totalResults present and equal to 0",
+      "entries": []
+    }
+  ],
+  "semantic_scholar_bounded_retry": [
+    {
+      "key": "s2_ctrl_pos",
+      "attempt": 1,
+      "wire_query": "Navier-Stokes regularity",
+      "url_sent": "https://api.semanticscholar.org/graph/v1/paper/search?query=Navier-Stokes+regularity&limit=20&fields=title%2Cyear%2CexternalIds",
+      "utc": "2026-08-12T10:34:07.702716+00:00",
+      "http_status": 429,
+      "transport_error": null,
+      "body_bytes": 174,
+      "body_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+      "verdict": "REFUSED",
+      "total_results": null,
+      "parse_note": "HTTP 429 (non-200)",
+      "entries": []
+    },
+    {
+      "key": "s2_ctrl_pos",
+      "attempt": 2,
+      "wire_query": "Navier-Stokes regularity",
+      "url_sent": "https://api.semanticscholar.org/graph/v1/paper/search?query=Navier-Stokes+regularity&limit=20&fields=title%2Cyear%2CexternalIds",
+      "utc": "2026-08-12T10:35:07.916902+00:00",
+      "http_status": 429,
+      "transport_error": null,
+      "body_bytes": 174,
+      "body_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+      "verdict": "REFUSED",
+      "total_results": null,
+      "parse_note": "HTTP 429 (non-200)",
+      "entries": []
+    },
+    {
+      "key": "s2_ctrl_pos",
+      "attempt": 3,
+      "wire_query": "Navier-Stokes regularity",
+      "url_sent": "https://api.semanticscholar.org/graph/v1/paper/search?query=Navier-Stokes+regularity&limit=20&fields=title%2Cyear%2CexternalIds",
+      "utc": "2026-08-12T10:36:08.457458+00:00",
+      "http_status": 429,
+      "transport_error": null,
+      "body_bytes": 174,
+      "body_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+      "verdict": "REFUSED",
+      "total_results": null,
+      "parse_note": "HTTP 429 (non-200)",
+      "entries": []
+    },
+    {
+      "key": "s2_q3",
+      "attempt": 1,
+      "wire_query": "rigorous enclosure far-field decay exponent computer-assisted proof",
+      "url_sent": "https://api.semanticscholar.org/graph/v1/paper/search?query=rigorous+enclosure+far-field+decay+exponent+computer-assisted+proof&limit=20&fields=title%2Cyear%2CexternalIds",
+      "utc": "2026-08-12T10:36:08.944547+00:00",
+      "http_status": 429,
+      "transport_error": null,
+      "body_bytes": 174,
+      "body_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+      "verdict": "REFUSED",
+      "total_results": null,
+      "parse_note": "HTTP 429 (non-200)",
+      "entries": []
+    },
+    {
+      "key": "s2_q3",
+      "attempt": 2,
+      "wire_query": "rigorous enclosure far-field decay exponent computer-assisted proof",
+      "url_sent": "https://api.semanticscholar.org/graph/v1/paper/search?query=rigorous+enclosure+far-field+decay+exponent+computer-assisted+proof&limit=20&fields=title%2Cyear%2CexternalIds",
+      "utc": "2026-08-12T10:37:09.449609+00:00",
+      "http_status": 429,
+      "transport_error": null,
+      "body_bytes": 174,
+      "body_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+      "verdict": "REFUSED",
+      "total_results": null,
+      "parse_note": "HTTP 429 (non-200)",
+      "entries": []
+    },
+    {
+      "key": "s2_q3",
+      "attempt": 3,
+      "wire_query": "rigorous enclosure far-field decay exponent computer-assisted proof",
+      "url_sent": "https://api.semanticscholar.org/graph/v1/paper/search?query=rigorous+enclosure+far-field+decay+exponent+computer-assisted+proof&limit=20&fields=title%2Cyear%2CexternalIds",
+      "utc": "2026-08-12T10:38:09.961377+00:00",
+      "http_status": 429,
+      "transport_error": null,
+      "body_bytes": 174,
+      "body_verbatim": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}",
+      "verdict": "REFUSED",
+      "total_results": null,
+      "parse_note": "HTTP 429 (non-200)",
+      "entries": []
+    }
+  ],
+  "hit_assessment": {
+    "hits_found_total": 1,
+    "from": "Semantic Scholar q3, run 1, HTTP 200, total=1",
+    "identifier": {
+      "arxiv": "2308.01528",
+      "version_seen": "v3",
+      "doi": "10.1007/s00220-025-05429-9",
+      "s2_paperId": "0fdb571ea5a885d9a84330596b1f45318b91ec72",
+      "corpus_id": 260438366
+    },
+    "title": "Exact self-similar finite-time blowup of the Hou-Luo model with smooth profiles",
+    "published_utc": "2023-08-03T04:07:36Z",
+    "updated_utc": "2025-08-15T05:55:04Z",
+    "abstract_verbatim": "We show that the 1D Hou-Luo model on the real line admits exact self-similar finite-time blowup solutions with smooth self-similar profiles. The existence of these profiles is established via a fixed-point method that is purely analytic. We also prove that the profiles satisfy some monotonicity and convexity properties that were unknown before, and we give rigorous estimates on the algebraic decay rates of the profiles in the far field. Our result supplements the previous computer-assisted proof of self-similar finite-time blowup for the Hou-Luo model with finer characterizations of the profiles.",
+    "predates_the_instrument": true,
+    "predates_note": "2023-08-03 vs leg 382's landing in 2026-08; it predates plainly",
+    "duplicates_the_instrument": false,
+    "duplication_assessment": "NOT a duplicate, on two independent grounds, both read off the abstract. (1) OBJECT: the 1D Hou-Luo model on the real line, not a 3D NS DSS radial profile. (2) METHOD: the abstract states the existence is established 'via a fixed-point method' that is 'purely analytic', and the far-field decay result is a set of hand-proved 'rigorous estimates on the algebraic decay rates'. Leg 382's instrument is the opposite construction: it CONSUMES a given, computed profile and eliminates an unknown amplitude from a log-log tube by Fourier-Motzkin over interval arithmetic. An analytic theorem about a profile one has constructed by hand does not duplicate an interval-arithmetic measurement instrument that reads an exponent off supplied data.",
+    "relevance_flag": "HIGH -- routed to integration, NOT actioned by this leg",
+    "why_flagged": "the abstract contains the phrase 'rigorous estimates on the algebraic decay rates of the profiles in the far field'. That is materially adjacent to CLAY_OBLIGATIONS.md \u00a76 item 1, and it shows there is an ANALYTIC route to rigorous far-field algebraic decay for a blowup profile in a related model. Integration may want this in view; it does not change any leg-382 measurement.",
+    "confidence": "ABSTRACT-LEVEL ONLY",
+    "confidence_caveat": "the full text was NOT read -- the wind-down landed before a PDF fetch. A successor must read 2308.01528 \u00a7far-field before treating this assessment as settled. Stated as a limit, not smoothed over.",
+    "action_routed_to_integration": "NONE REQUIRED for leg 382's novelty record on this hit, because the hit does not duplicate. This leg edits no landed novelty file, as its territory forbids."
+  },
+  "what_was_never_attempted": [
+    "full text of arXiv:2308.01528 -- never fetched; assessment is abstract-level",
+    "a Semantic Scholar response for the positive control -- 429 on all 7 attempts across three runs, so the S2 channel has no validated zero",
+    "any re-attempt of S2 q3 after the wind-down instruction -- deliberately stopped, not exhausted",
+    "Google Scholar / MathSciNet / zbMATH -- out of scope for this leg, never issued",
+    "any widening into general prior-art screening -- forbidden by the dispatch; \u00a72's stop was not reopened"
+  ],
+  "what_a_successor_must_redo": [
+    "the Semantic Scholar channel end to end, WITH its positive control passing in the same run -- an API key lifts the 429 (the 429 body itself points at https://www.semanticscholar.org/product/api#api-key-form)",
+    "read arXiv:2308.01528 full text and settle the abstract-level assessment",
+    "nothing on the arXiv channel: both named queries are complete, control-validated, and banked verbatim below"
+  ],
+  "inheritance_note": "leg 382's external novelty hole is inherited by leg 385 (journal :281 quotes it) and was re-hit by leg 386. It remains OPEN after this leg. What is NEW is that the arXiv half is now discharged with control-validated controlled zeros, so a successor need only redo Semantic Scholar.",
+  "provenance": {
+    "novelty_pass_commit": "22ca0ee",
+    "novelty_pass_note": "committed before any construction, per the dispatch",
+    "branch_point": "3f5b1da",
+    "harness_source_banked_in": "experiments/journal/leg_387.md (territory forbids a runner in experiments/)",
+    "run_utc_live": [
+      "2026-08-12T10:29:54.090047+00:00",
+      "2026-08-12T10:32:27.165656+00:00"
+    ],
+    "run_utc_followups": [
+      "2026-08-12T10:33:26.031511+00:00",
+      "2026-08-12T10:38:10.317141+00:00"
+    ]
+  }
+}
