@@ -35,7 +35,7 @@ prose as before.
 |---|---|---|---|
 | A | 356 | ESPX | no |
 | B | 358 | RPOL | yes |
-| C | 357 | DSSP-B7 | yes |
+| C | 359 | L3BD | yes |
 | D | 355 | LCB3 | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -18883,9 +18883,26 @@ does the published recurrence-flow pipeline actually require, and what
 would a spec-compliant B5 retry cost — the stop decision's missing
 number). Floor 2/4 (357, 358).
 
+Cycle 10u: C/357 landed YES at 3f614d7 — the screen is REAL: four-part
+admissibility computed per Newton step; the rigidity ledger MACHINE-READ
+from 326/330's landed JSON clause fields; both landed DSSP objects
+screened correctly (351's witness: L³ log-divergent, decay exponent -0.997
+matching Type-I, axisymmetry 7.9e-16 with the planted control at 1.0;
+354's trajectory: λ correctly UNDEFINED with the synthetic periodic
+control detected); the no-branch warning demonstrated live (332's banked
+0.7307683991070311 reads EXCLUDED; the divergent witness NOT EXCLUDED); a
+normalization false-positive self-caught and pinned with a regression
+test. **Route 4's committed work is COMPLETE under the stop** (B1-B4+B7 ✓,
+B5 NO, B6/B8 frozen pending the user). C ← **leg 359 L3BD** (fresh
+floor-eligible draft, reasons stated: the §3b bind — the reserve is all
+non-eligible audits — and a genuine question two landed legs point at:
+341's S2 and B7's measurement BOTH place the Type-I object exactly on the
+log-divergent L³ boundary, and whether NRS/Tsai's hypothesis reaches that
+boundary is the screen's deciding-clause semantics). Floor 2/4 (358, 359).
+
 **Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
 232, 233, 234).** Immediately dispatchable: **4** (rank order: 229, 293,
-298, 299). Next fresh leg number: **359.**
+298, 299). Next fresh leg number: **360.**
 
 Nothing in this update lifts a ban. An evidence script that cannot
 silently mutate a banked artifact is the record's immune system getting a
@@ -19179,3 +19196,97 @@ Nothing in this update lifts a ban. A pre-committed stop firing on a
 measured NO is the discipline at its best — the programme halts on its own
 terms, the user rules on numbers, and nothing is retried by default. No
 L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10u) — 357/B7 YES ABSORBED (THE SCREEN IS
+REAL, AND ROUTE 4's COMMITTED WORK IS COMPLETE UNDER THE STOP); C ← LEG
+359 L3BD (THE L³-BOUNDARY QUESTION TWO LANDED LEGS POINT AT)
+
+Written from the same detached lineage, resynced to origin/main = 3f614d7.
+
+### 357 DSSP-B7 gate YES, absorbed at full strength
+
+The screen does what the plan drafted and proves it on real objects: the
+four-part admissibility screen per Newton step; the rigidity ledger parsed
+programmatically from legs 326/330's landed JSON clause fields (the
+machine-read requirement, met literally); 351's witness and 354's
+trajectory screened with the right answers AND the planted controls
+registering (non-axisymmetric control at 1.0; synthetic periodic control
+detected — the detectors demonstrably not always-refusing); the gate's own
+no-branch warning demonstrated on a real code path (332's banked L³ value
+reads EXCLUDED while the divergent witness reads NOT EXCLUDED — landing
+in L³ is the default, exactly as the plan warned); and a
+near-zero-over-near-zero normalization false positive self-caught, fixed,
+and pinned with a regression test. Tier-2 ceiling stated in the leg's own
+words. Endorsed without amendment. **The brick ledger closes its committed
+portion: B1-B4 ✓, B7 ✓, B5 NO (the stop), B6/B8 frozen pending the user,
+B9 struck.**
+
+### Refill — C ← leg 359 L3BD, with the reasons stated
+
+The floor bind stands (the remaining reserve — 229, 293, 298, 299 — is
+audits, none eligible), and this time the eligible question is not
+invented for the floor but pointed at by two landed measurements: 341's S2
+found the true target sits exactly on the log-divergent L³ boundary, and
+B7 just measured 351's Type-I witness with the log-divergence signature
+across decades. The screen's strongest ledger entry (NRS/Tsai) keys on
+u ∈ L³ — so the boundary case is not a corner, it is the object's actual
+home, and the screen's EXCLUDED/NOT-EXCLUDED semantics there are currently
+un-adjudicated.
+
+```
+### 359 — ROUTE-L3BD: DOES NRS/TSAI's HYPOTHESIS REACH THE LOG-DIVERGENT
+L³ BOUNDARY? (the screen's deciding-clause semantics at the object's
+actual home; read-and-report in the 326/330 shape)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** Two landed legs place the Type-I object exactly on the
+log-divergent L³ boundary (341's S2 re-derivation on 260's own rate; B7's
+measured log-divergence signature on 351's witness, exponent -0.997). The
+NRS/Tsai exclusion — the ledger's strongest entry, the theorem that killed
+the leg-309 claimant — hypothesizes u ∈ L³(ℝ³) (and 330 recorded
+Pineau-Vicol's weak-L³ variant with its own open conditions). Read the
+theorems' hypotheses precisely and adjudicate: does the exclusion reach an
+object AT the boundary (u ∉ L³ but log-divergently so; weak-L³ status
+stated separately), with the deciding clauses quoted?
+**Gate.** Does the full read yield a definite per-theorem answer — (i)
+reaches the boundary case (the screen's EXCLUDED verdict extends; quoted
+clause), (ii) does not reach it (boundary objects are genuinely outside
+the hypothesis; the screen gains a three-state answer:
+EXCLUDED / NOT-EXCLUDED / BOUNDARY-OUTSIDE-HYPOTHESIS), or (iii)
+underdetermined after a full read (candidate clauses quoted, recorded as
+exactly that)?
+  yes (any definite class per theorem) -> Bank; B7's ledger semantics
+        gain the adjudicated boundary rule (a flag for its owner, not an
+        edit by this leg); the route-4 stop packet notes the answer.
+  no  -> The texts genuinely underdetermine: quote the clauses, bank the
+        underdetermination — the screen keeps its conservative reading
+        and says so.
+**Territory.** writeup/data/p2_route_l3bd_v1.json, writeup/novelty/
+               leg_359.md, experiments/journal/leg_359.md. Reads legs
+               341/357/330/261's banked records and the papers' texts;
+               edits none. No figure.
+**Difficulty.** standard
+**Preconditions:** None. (§3a rule 4: rigidity-ledger-adjacent —
+pre-authorised as written; it reads and reports, lifts nothing.)
+```
+
+**Floor 2/4 (358, 359) — §3b's minimum.** FLOOR-TABLE synced (C 357→359).
+
+### Standing state
+
+A/356 ESPX; B/358 RPOL (the stop packet's number); D/355 LCB3. With the
+user: the ROUTE-4 STOP PACKET (assembling — 358's cost + 359's boundary
+answer both note into it), cycle-10 packet + GA note, POCP (ii) item,
+C4/escalation-#3, 313 packet + ban-wording (partly mooted by the stop),
+320 packet. Next vacancy: 229 PNRV.
+
+**Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
+232, 233, 234).** Immediately dispatchable: **4**. Next fresh leg number:
+**360.**
+
+Nothing in this update lifts a ban. A screen that machine-reads its
+theorems and a boundary question read from the theorems' own texts are
+map work; route 4 stays stopped pending the user. No L1-L4 link moved;
+Clay stays ~0.05%.
