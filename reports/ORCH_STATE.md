@@ -53,6 +53,26 @@ repository, on `ℝ³` or on `T³`** — the certified-enclosure chain (382 → 
 as it got) has no real input, and that is the hole the whole cycle circled. **No `L1 → L4` link
 moved. Clay stays ~0.05%.**
 
+**THE WIP LEDGER — every branch, its tip, and what on it is worth trusting.** All five units
+reported. Nothing below is merged; integration merged **no leg branch** at the stop, because that
+rule does not relax for a wind-down.
+
+| unit | branch | WIP tip | trustworthy on it | must be redone |
+|---|---|---|---|---|
+| PROG-R4 (A) | `prog/r4-programme` | `70ad21f` | one genuine bug fix (`run_recur` now honours the declared `n_snapshots` instead of differencing against a preallocated zero tail — that path was **silently wrong on any partial or resumed trajectory**); `fig97`/`fig98` evidence scripts, smoke-tested in both branches of each gate plus two doctored records they correctly reject | the entire `T=1e5` DNS from scratch (~2.8 h at the measured 0.92–1.08 ms/step); recurrence at full length; **a measured per-epoch cost before fixing U3's iteration caps** — never taken, and at current defaults the worst case is ~4 h per attempt, which does **not** fit 100 attempts; then U3 and U4 end to end. `u4_g2_basin.py` was written and **never run, not once, not even on synthetic data** |
+| 389 CT2C (B) | `leg/389-ct2c` | `9021fdd` | novelty (`8f495b7`) and pre-registration (`cc72f47`), both before construction; a *demonstrated* 8/8 showing leg 383's fitted path undisturbed | all four new functions, never executed once; all three pre-registered red paths, never started. **Live trap: `screen_candidate()` gained `certified_input`/`certified_delta`/`banked_exponent` in its SIGNATURE ONLY — passing them today is silently ignored.** Finish the wiring or delete the parameters |
+| 388 CRVB (D) | `leg/388-crvb-v1` | `fddcccd` | novelty (`5cbe659`) and pre-registration (`f2084ae`), in that order, both before any measurement. Its capabilities grep caught a real near-duplication: **`solver/interval_mp.py` (leg 312) already holds rigorous arbitrary-precision directed-rounded intervals** — import it, never build one — and it has **no logarithm**, so a high-precision arm must plant curvature *additively* in the log-log plane | **all measurement — zero ladder rungs were run at any precision.** The runner was never imported and never executed, so assume it is broken; its ZC/ZC-RED control pair has never fired in either direction, so the demonstrated red path its own pre-registration requires **does not exist**. Every number on the branch (`κ* = 8·h_eff/W²`, float64 `≈5.8e-16`, predicted bracket `[1e-16,1e-15]`, `−1.00`/digit slope, tolerance coefficient `0.377435` on `[10,1000]` only) is a labelled untested prediction |
+| 387 DXNV (bench) | `leg/387-route-dxnv` | `5305458` | the **arXiv half is discharged** — two CONTROLLED-ZEROs, control-validated in the same run; the namespace fix; the single hit assessed *predates-but-does-not-duplicate* | the Semantic Scholar half: **no validated zero**, its positive control never once returned 200. Leg 382's obligation stays **OPEN and re-queued**. `fig107` allocated but never drawn, so it is **free for reallocation** — as is `fig108`, which 388 never registered |
+| DM | `dm/cycle-11h` | `bee8dfa` | **merged to `main` at `c9d9aa1`** — the one exception to the landing freeze, because finished rulings are not WIP | nothing. Its five drafted specs (392–396) died in scratch and were deliberately not let into `DIRECTION.md` |
+
+**Two things on that table matter more than the rest, and both are corrections to beliefs this
+repository was holding.** First, **arXiv never refused once — 13 of 13 HTTP 200** — against
+eighteen journals recording arXiv and Semantic Scholar as a single 429 wall; legs may have been
+treating a live channel as dead. Second, **PROG-R4's stop is explicitly NOT a resourced null**:
+the DNS died at t=16,000 of 100,000 (16%), so §3d's stop did **not** fire and **route 4 has not
+been stopped on measurement**. Anyone reading the three UNANSWERED gates as a verdict on route 4
+would be reading them exactly backwards.
+
 **FOR WHOEVER PICKS THIS UP.** Read the WIP branches before believing anything on them; each was
 told to label untrusted numbers *inside the files*, not only in commit messages, and to write the
 word UNANSWERED against any gate it did not reach. `test_9`/§3b still cannot represent a
