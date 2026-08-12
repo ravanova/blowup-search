@@ -33,7 +33,7 @@ for p in (ROOT, os.path.join(ROOT, "experiments")):
 
 from p2_route_bvrrv_v1_postrepair import (            # noqa: E402
     LEG_205_TOTALS, clause_a, load_pre_repair, module_staleness,
-    two_modules_really_differ,
+    probe_liveness_selftest, two_modules_really_differ,
 )
 from solver.boussinesq_velocity import PolarGrid      # noqa: E402
 import solver.boussinesq_rescaled as POST             # noqa: E402
@@ -104,6 +104,22 @@ def test_lesson_90_the_two_modules_really_differ():
     # DEFECT A: pre returns exactly 0.0 against a truth of 2.0; post raises.
     assert m["defect_A_pre"] == 0.0
     assert str(m["defect_A_post"]).startswith("ValueError")
+
+
+def test_guard_reachability_probe_can_report_both_outcomes():
+    """LESSON 90, applied to leg 233's own instrument. Clause (b)'s sharpest number is
+    `cap_binds` -- how often the DEFECT-B window cap actually BINDS across the banked corpus.
+    A zero there is only informative if the probe can report non-zero, so it is exercised on
+    two fields with known, opposite answers: lam=400 (scale 0.05, inside r_win) must bind, and
+    lam=1 (scale 1.0, outside r_win) must not."""
+    s = probe_liveness_selftest(POST)
+    assert s["probe_can_report_both_outcomes"], s
+    for k, v in s.items():
+        if isinstance(v, dict):
+            assert v["probe_agrees_with_expectation"], (k, v)
+    # magnitudes, not booleans: the cap shrinks the window to ~6.2% of r_win on lam=400
+    assert s["lam=400 (scale 0.05, INSIDE r_win)"]["cap_shrink_factor"] < 0.1
+    assert s["lam=1 (scale 1.0, OUTSIDE r_win)"]["cap_shrink_factor"] == 1.0
 
 
 # ---------------------------------------------------------------------------
@@ -240,6 +256,7 @@ def test_two_scale_counterexample_is_pinned_where_leg_307_left_it():
 TESTS = [
     test_module_semantics_are_still_the_repaired_ones,
     test_lesson_90_the_two_modules_really_differ,
+    test_guard_reachability_probe_can_report_both_outcomes,
     test_pre_repair_side_reproduces_leg_205s_committed_battery,
     test_defect_A_empty_window_is_refused_not_fabricated,
     test_defect_A_under_determined_window_is_refused,

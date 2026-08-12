@@ -739,8 +739,20 @@ def sweep_one(spec_: dict, pre_path: str, timeout_s: float | None = None) -> dic
     except Exception as e:                                            # noqa: BLE001
         out["artifact_comparison"] = {"error": repr(e)}
     finally:
-        # git, not a sidecar: survives SIGKILL because the restore state is in the index
-        _git("checkout", "--", art_rel)
+        # git, not a sidecar: survives SIGKILL because the restore state is in the index.
+        # Retried, because this sweep is run four-ways-parallel (one process per artifact) and
+        # two `git checkout` calls landing together contend on index.lock.  A failed restore
+        # would leave a banked artifact rewritten, which is exactly the state leg 221 was left
+        # in three times, so it is worth the loop.
+        for attempt in range(6):
+            try:
+                _git("checkout", "--", art_rel)
+                break
+            except subprocess.CalledProcessError:
+                if attempt == 5:
+                    out["restore_failed_after_retries"] = True
+                    raise
+                time.sleep(1.0 + attempt)
         out["artifact_restored_clean"] = (_git("status", "--porcelain", "--",
                                                art_rel).strip() == "")
     for p in (driver, report):
@@ -762,17 +774,84 @@ def sweep_one(spec_: dict, pre_path: str, timeout_s: float | None = None) -> dic
     return out
 
 
+def probe_liveness_selftest(post) -> dict:
+    """LESSON 90, APPLIED TO THIS LEG'S OWN NEW INSTRUMENT.
+
+    The sweep's headline guard-reachability number is `cap_binds`. If it comes back 0 across the
+    whole banked corpus, that reading is only worth something if the probe CAN report non-zero
+    -- otherwise "the cap never binds" and "the probe is broken" are the same observation. So
+    the probe is exercised here on two fields whose answers are known in advance and OPPOSITE:
+
+      * `lam=400` (radial scale 0.05, well inside r_win=0.4): the cap MUST bind. This is leg
+        205's DEFECT-B headline field, and the cap binding on it is the whole repair.
+      * `lam=1` (radial scale 1.0, outside r_win=0.4): the cap MUST NOT bind, and the repaired
+        read must be bit-identical to the pre-repair one.
+
+    The probe used here is the same re-derivation the shim uses, so this is a check on the
+    instrument the sweep actually runs, not on a second copy of it.
+    """
+    from solver.boussinesq_velocity import PolarGrid
+
+    def _probe(g, grid, r_win, i_lo):
+        beta = grid.beta
+        dbeta = beta[1] - beta[0]
+        cb = np.cos(beta)
+        g_wall = 2 * g[:, 0] - g[:, 1]
+        integrand = g * cb[None, :]
+        interior = np.trapezoid(integrand, beta, axis=1)
+        d1 = (4.0 / np.pi) * (interior + 0.5 * dbeta * (g_wall + integrand[:, 0])
+                              + 0.5 * dbeta * integrand[:, -1])
+        r = grid.r
+        live = np.arange(len(r)) >= i_lo
+        a1 = np.where(live, np.abs(d1), 0.0)
+        peak = float(np.max(a1)) if a1.size else 0.0
+        if np.isfinite(peak) and peak > 0.0:
+            i_peak = int(len(a1) - 1 - np.argmax(a1[::-1]))
+            r_scale = np.sqrt(2.0) * float(r[i_peak])
+            return min(float(r_win), 0.5 * r_scale), float(r_win), True
+        return float(r_win), float(r_win), False
+
+    grid = PolarGrid(n_r=400, n_beta=16, r_min=1e-4, r_max=1e4)
+    out = {}
+    for label, lam, expect_bind in (("lam=400 (scale 0.05, INSIDE r_win)", 400.0, True),
+                                    ("lam=1 (scale 1.0, OUTSIDE r_win)", 1.0, False)):
+        g = 2.0 * grid.R * np.cos(grid.B) * np.exp(-lam * grid.R ** 2)
+        eff, rw, defined = _probe(g, grid, 0.4, 3)
+        out[label] = dict(r_win=rw, r_win_eff=eff, scale_defined=defined,
+                          cap_binds=bool(eff < rw), cap_shrink_factor=(eff / rw if rw else None),
+                          expected_cap_binds=expect_bind,
+                          probe_agrees_with_expectation=(bool(eff < rw) == expect_bind))
+    out["probe_can_report_both_outcomes"] = (
+        out["lam=400 (scale 0.05, INSIDE r_win)"]["cap_binds"] is True
+        and out["lam=1 (scale 1.0, OUTSIDE r_win)"]["cap_binds"] is False)
+    out["reading"] = ("A cap_binds=0 total over the banked corpus is therefore a statement "
+                      "about the corpus, not about the instrument.")
+    return out
+
+
 def run_tests(pre_path: str) -> dict:
     """The module's own three suites, run against `main`'s module as it stands.  Not a
     differential -- a live check that the repaired module still passes the gates that were
-    written for it before the repair existed."""
+    written for it BEFORE the repair existed, which is the cheapest possible way to catch a
+    repair that fixed robustness by breaking correctness.
+
+    Test convention in this repo is a SELF-RUNNING SCRIPT per file (`scripts/merge_gate.sh`
+    lines 17-19: "every test_*.py is a self-running script ... no pytest"), and pytest is not
+    installed in `.venv`.  Invoking it would have produced a silent skip dressed as a pass."""
+    results = []
     t0 = time.time()
-    proc = subprocess.run([sys.executable, "-m", "pytest", "-q", *TEST_CALLERS],
-                          cwd=ROOT, capture_output=True, text=True)
-    tail = proc.stdout.strip().splitlines()[-6:] if proc.stdout else []
-    return dict(suites=TEST_CALLERS, returncode=proc.returncode,
-                wall_seconds=round(time.time() - t0, 1), stdout_tail=tail,
-                all_passed=(proc.returncode == 0))
+    for suite in TEST_CALLERS:
+        s0 = time.time()
+        proc = subprocess.run([sys.executable, suite], cwd=ROOT, capture_output=True, text=True)
+        rec = dict(suite=suite, returncode=proc.returncode,
+                   wall_seconds=round(time.time() - s0, 1),
+                   last_line=(proc.stdout.strip().splitlines() or [""])[-1][:200])
+        if proc.returncode != 0:
+            rec["stderr_tail"] = proc.stderr[-2000:]
+        results.append(rec)
+    return dict(suites=results, wall_seconds=round(time.time() - t0, 1),
+                n_suites=len(results),
+                all_passed=all(r["returncode"] == 0 for r in results))
 
 
 # ---------------------------------------------------------------------------
@@ -877,6 +956,7 @@ def main() -> int:
         rec["module_own_suites"] = run_tests(pre_path)
 
     if args.clause in ("b", "both"):
+        rec["probe_liveness_selftest"] = probe_liveness_selftest(post)
         keys = [b for b in BANKED
                 if (args.only is None or b["key"] in args.only) and b["key"] not in args.skip]
         runs, not_run = [], []
