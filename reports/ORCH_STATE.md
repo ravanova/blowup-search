@@ -5,6 +5,63 @@ session reads this at Step 0b before dispatching anything.
 
 ---
 
+## ⛔ STOP — RUN WOUND DOWN BY USER INSTRUCTION, 2026-08-12 (cycle 11h, incomplete)
+
+**The user stopped the run.** Every live agent was told to halt where it stood, commit its work
+as **WIP on its own branch**, push the **branch only**, and answer nothing it had not finished.
+`main` was closed to further landings at that moment. **Do not resume any of them by assumption**
+— a successor session reads this block first and dispatches nothing until the user says to.
+
+**The board at the stop.** Four leg slots plus a bench lane and the DM:
+
+| slot | unit | state at the stop |
+|---|---|---|
+| A | 380 PROG-R4 (§3c programme) | LIVE, stood down mid-programme. `703b616` (M1, hookstep/trust-region globalisation) and `396f622` (GMRES relative-residual early exit + U2/U3 runners) are **landed and safe**; a DNS was in flight and was abandoned. Everything after `396f622` is WIP by definition. |
+| B | 389 CT2C | LIVE, stood down. Gate **UNANSWERED**. Dispatched this cycle as the refill for 386 once its precondition became true. |
+| C | — | **VACANT at the stop, deliberately.** 390 landed; the only dispatchable reserve item (391 MVLD) is verification-typed and would have put the floor at 2/4. Held rather than filled. |
+| D | 388 CRVB | LIVE, stood down. Gate **UNANSWERED**. A one-sided ladder is not a bracket and must not be read as one. |
+| bench | 387 DXNV | LIVE, stood down. Gate **UNANSWERED** unless both queries came back banked. |
+| DM | cycle 11h | Stood down mid-cycle. **Its drafting request was withdrawn** — no new specs were written for a run that had ended. Absorptions and rulings were the only things worth finishing. |
+
+**What is genuinely finished and landed on `main` this cycle** (all gated by exit code, never by
+reading a printed line):
+
+- **Leg 381 (CLOC)** and **leg 385 (SCEL)** — landed earlier in the cycle, absorbed in full.
+- **Leg 233 (BVRRV)** — landed, and its §6 quartet later closed from banked JSON alone.
+- **Leg 384 (COBV), `a029565`, gate YES** — `CLAY_OBLIGATIONS.md` verified clause by clause,
+  17 MATCH / 6 MISMATCH / 0 UNVERIFIED, 23 of 23 planted controls firing in **both** directions.
+  All six corrections landed in the leg's own wording; STATUS header graduated from
+  DRAFT-UNVERIFIED to **verified as a specification** — explicitly a lesser thing than a theorem.
+- **Leg 386 (DTOL), `0ecaeee`** — CLAUSE 1 **YES**, CLAUSE 2 **EMPTY**, side by side, not netted.
+  §4's δ sub-question is **CLOSED and the answer is EMPTY at the α in play**; the tolerance buys
+  **zero** threshold headroom (30 rows, 0 exceptions, a step and not a slope).
+- **Leg 390 (DTOR), `e89cdbd`, gate YES** — **(D) deletes the acceptance test, not the work**;
+  periodization charges §4 back at **3.993989×** in deficit, or inherits leg 381's full cutoff
+  bill; **0 of 4** rigidity clearances carry to `T³`. **NO RETARGET RECOMMENDATION IS MADE**, by
+  the leg or by integration. The retarget decision is the user's.
+- **The bench caller-census unit** — gated **FAIL and returned unmerged** on its first attempt
+  (its green was ambient-dependent), then landed rescoped to `git ls-files`.
+- **Two DOCS-lane closures** — leg 233's quartet rebuilt from banked JSON (52/52, no re-run), and
+  `writeup/INDEX.md` rows for both Route-BVRRV v1 and Route-CLOC v1, each row stating **inside
+  itself** that its evidence script and figure were earned by a later hand.
+
+**WHAT THE STOP DOES NOT CHANGE.** The ceiling is **Tier 2**. `CLAY_OBLIGATIONS.md` §6 items 1
+and 2 are **OPEN** — no method exists in this repository for either. **§4 stays OPEN in every
+route-4 gate**, satisfied on its own terms by DTOL landing but *not* closed, on the
+admissible-cutoff half and on the absent profile. **No profile of route 4's object exists in this
+repository, on `ℝ³` or on `T³`** — the certified-enclosure chain (382 → 385 → 386, and 389 as far
+as it got) has no real input, and that is the hole the whole cycle circled. **No `L1 → L4` link
+moved. Clay stays ~0.05%.**
+
+**FOR WHOEVER PICKS THIS UP.** Read the WIP branches before believing anything on them; each was
+told to label untrusted numbers *inside the files*, not only in commit messages, and to write the
+word UNANSWERED against any gate it did not reach. `test_9`/§3b still cannot represent a
+wind-down state — that limitation is `reports/STATUS.md` item 8 and is the user's to rule on;
+no table was edited to fake it. The open questions for the user are in `reports/STATUS.md`, and
+the POCP spend decision remains theirs and was never pre-empted.
+
+---
+
 ## USER DIRECTIVE, 2026-08-11 — the contract is now **four** leg slots, not ten
 
 The user reduced the parallel Opus leg count from ten to four. `ORCHESTRATION.md` and

@@ -1,5 +1,30 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
+> ## ⛔ THE RUN IS WOUND DOWN — user instruction, 2026-08-12, mid-cycle-11h
+>
+> Every live agent was told to stop where it stood, commit **WIP on its own branch**, push the
+> **branch only**, and write **UNANSWERED** against any gate it had not reached. `main` was
+> closed to further landings at that moment. The full stop record — board, what is landed and
+> safe, what is WIP, what a successor must redo — is at the top of `reports/ORCH_STATE.md`.
+> **Nothing below is withdrawn by the stop**; the open questions are still open and still yours.
+> The ceiling is unchanged: **Tier 2**, §6 items 1 and 2 **OPEN**, §4 **OPEN** in every route-4
+> gate, no `L1 → L4` link moved, **Clay stays ~0.05%**.
+>
+> **What landed in the final cycle, all gated by exit code:** leg 384 (COBV) — the obligations
+> document verified clause by clause, 17 MATCH / 6 MISMATCH / 0 UNVERIFIED, 23 of 23 planted
+> controls firing both ways, its six corrections landed and its STATUS graduated to *verified as
+> a specification* (a lesser thing than a theorem); leg 386 (DTOL) — §4's δ sub-question
+> **CLOSED, answer EMPTY at the α in play**, the tolerance buying **zero** threshold headroom;
+> leg 390 (DTOR) — **(D) deletes the acceptance test, not the work**, periodization charging §4
+> back at **3.993989×** in deficit and **0 of 4** rigidity clearances carrying to `T³`, with **no
+> retarget recommendation made** by the leg or by integration; plus a bench unit that was gated
+> **FAIL and returned** before it landed, and two DOCS-lane closures.
+>
+> **The hole the whole cycle circled, stated once:** the certified-enclosure chain now works, and
+> **no profile of route 4's object exists in this repository, on `ℝ³` or on `T³`**. The chain has
+> no real input. That is not a defect in any leg; it is where the work stopped.
+
+
 *Refreshed 2026-08-12 — same orchestrator session, cycle 10aa+. Since the
 cycle-10w header above was last written, legs 361, 355, 363, 362, 364, 229
 have all landed (cycles 10x-10aa), closing out the PVDS/CKNQ rigidity-ledger
