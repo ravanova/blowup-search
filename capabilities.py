@@ -825,7 +825,20 @@ CAPABILITIES = [
                "ledger_nrs_tsai/ledger_chae_tsai/ledger_pineau_vicol/"
                "machine_read_ledger (parse legs 326/330's landed JSON "
                "clause fields programmatically, not transcribed prose); "
-               "screen_candidate (end-to-end orchestration)"),
+               "screen_candidate (end-to-end orchestration). LEG 362 "
+               "EXTENSION (backward-compatible, additive): "
+               "decays_to_zero_at_infinity (Tsai 1998 Theorem 2's "
+               "finishing-step hypothesis, 'U -> 0 at infinity', p.49, "
+               "strictly weaker than L^q membership); classify_ss_ansatz "
+               "(exact-SS vs DISCRETELY-self-similar-at-lambda>1, driven "
+               "off lambda_from_trajectory's own measurement); "
+               "ledger_nrs_tsai(l3_result, decay_result=None, "
+               "ansatz_result=None) now optionally returns a THREE-WAY "
+               "verdict -- EXCLUDED-BY-T1 / EXCLUDED-BY-T2 / "
+               "NOT-REACHED-BY-ANSATZ -- when both optional args are "
+               "supplied; omitting them (every leg-357 call site) "
+               "reproduces the original two-way EXCLUDED/NOT-EXCLUDED "
+               "reading byte-for-byte"),
      "validated": ("leg 351's Type-I witness (u_B ~ C/|x|) correctly "
                    "diverges under l3_norm_ladder (shells stay ~constant "
                    "per decade, not shrinking -- log-divergence "
@@ -847,7 +860,22 @@ CAPABILITIES = [
                    "correctly EXCLUDES leg 332's own landed L3=0.7307683991070311 "
                    "measurement (read from its JSON, not retyped) while "
                    "NOT excluding this family's divergent witness -- the "
-                   "gate's own no-branch warning, demonstrated concretely"),
+                   "gate's own no-branch warning, demonstrated concretely. "
+                   "LEG 362 (Route-B7X, closes leg 359's flagged gap, "
+                   "writeup/data/p2_route_b7x_v1.json): all three gate "
+                   "controls pass -- (1) a planted synthetic exact-SS "
+                   "decay=-1 candidate (Tsai's own headline example) reads "
+                   "NOT EXCLUDED under the old L3-only reading and "
+                   "EXCLUDED-BY-T2 under the extended reading, "
+                   "demonstrating leg 359's flagged gap then closing it; "
+                   "(2) this repo's real DSS object (field_uB + a "
+                   "genuinely periodic lambda=2.634>1 trajectory) reads "
+                   "NOT-REACHED-BY-ANSATZ, citing Tsai 1998 eq (1.2)'s "
+                   "exact-SS ansatz as the deciding clause; (3) leg 357's "
+                   "banked writeup/data/p2_route_dsspb7_v1.json verdicts "
+                   "reproduce with ZERO mismatches (diff-checked entry by "
+                   "entry, only the worktree path and runtime_seconds "
+                   "differ, both environment-dependent)"),
      "test": "test_dssp_screen.py"},
 ]
 

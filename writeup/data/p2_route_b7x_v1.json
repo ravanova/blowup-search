@@ -1,0 +1,312 @@
+{
+  "leg": 362,
+  "route": "B7X",
+  "brick": "B7 (extension)",
+  "brick_name": "DSSP-SCREEN NRS/Tsai three-way extension",
+  "ceiling": "TIER 2",
+  "dispatched_by": "leg 359's flag for leg 357's ledger owner (the DM): ledger_nrs_tsai() tests only L3 convergence and has no notion of Theorem 2 (local energy estimates) or an ansatz check -- under-fires in one direction",
+  "source_of_truth": "experiments/journal/leg_359.md, writeup/data/p2_route_l3bd_v1.json (read-only, quoted verbatim in solver/dssp_screen.py, never re-derived)",
+  "gate_text": "Does the extended NRS/Tsai ledger entry distinguish EXCLUDED-BY-T1 / EXCLUDED-BY-T2 / NOT-REACHED-BY-ANSATZ, passing all three controls (planted positive-direction gap closure, real-object ansatz classification, and a byte-level regression check against leg 357's banked verdicts)?",
+  "control_1_planted_synthetic_exact_ss": {
+    "description": "synthetic U(y) = (y/|y|)/|y|, decay exponent exactly -1, matching Tsai 1998's own headline example (1.5)",
+    "l3_result": {
+      "ladder": [
+        {
+          "R_hi": 10.0,
+          "shell_integral_cube": 147.6302502841039,
+          "cumulative_cube": 147.6302502841039
+        },
+        {
+          "R_hi": 100.0,
+          "shell_integral_cube": 28.935137649661662,
+          "cumulative_cube": 176.56538793376558
+        },
+        {
+          "R_hi": 1000.0,
+          "shell_integral_cube": 28.935137649661662,
+          "cumulative_cube": 205.50052558342725
+        },
+        {
+          "R_hi": 10000.0,
+          "shell_integral_cube": 28.935137649661662,
+          "cumulative_cube": 234.43566323308892
+        },
+        {
+          "R_hi": 100000.0,
+          "shell_integral_cube": 28.93513764966167,
+          "cumulative_cube": 263.3708008827506
+        },
+        {
+          "R_hi": 1000000.0,
+          "shell_integral_cube": 28.935137649661666,
+          "cumulative_cube": 292.30593853241226
+        }
+      ],
+      "L3_cubed": 292.30593853241226,
+      "L3_norm": 6.6366036191934255,
+      "rel_change_last_step": 0.09898922271280919,
+      "rel_tol": 0.0001,
+      "converged": false
+    },
+    "decay_result": {
+      "direction": [
+        0.4,
+        0.5,
+        0.7681145747868608
+      ],
+      "r_values": [
+        10.0,
+        15.199110829529339,
+        23.101297000831604,
+        35.11191734215131,
+        53.3669923120631,
+        81.11308307896873,
+        123.28467394420659,
+        187.3817422860383,
+        284.8035868435802,
+        432.87612810830615,
+        657.9332246575682,
+        1000.0
+      ],
+      "magnitudes": [
+        0.1,
+        0.0657933224657568,
+        0.04328761281083058,
+        0.02848035868435802,
+        0.018738174228603844,
+        0.01232846739442066,
+        0.008111308307896874,
+        0.005336699231206311,
+        0.003511191734215131,
+        0.0023101297000831574,
+        0.0015199110829529332,
+        0.0009999999999999998
+      ],
+      "fitted_exponent": -1.0000000000000002,
+      "fitted_log_intercept": -1.386685897073338e-15
+    },
+    "decay_test": {
+      "decays_to_zero": true,
+      "fitted_exponent": -1.0000000000000002,
+      "magnitude_first_sample": 0.1,
+      "magnitude_last_sample": 0.0009999999999999998,
+      "reason": "fitted far-field exponent -1.0000000000000002 < 0 and sampled |V| decreases from 0.1 (r_min) to 0.0009999999999999998 (r_max) -- Theorem 2's finishing-step hypothesis \"U -> 0 at infinity\" (Tsai 1998, p.49) is satisfied by this measurement"
+    },
+    "ansatz_result": {
+      "ansatz": "EXACT-SS",
+      "satisfies_theorem_ansatz": true,
+      "measured_lambda": null,
+      "reason": "no non-trivial period was measured for this candidate (static synthetic candidate, no trajectory supplied); Tsai 1998's ansatz (1.2)_1 describes a SINGLE stationary profile U under one rescaling parameter a, exactly what a static (or non-periodic) candidate with no measured periodic orbit represents"
+    },
+    "verdict_before_fix": "NOT EXCLUDED",
+    "verdict_after_fix": "EXCLUDED-BY-T2",
+    "before_fix_detail": {
+      "excludes": false,
+      "verdict": "NOT EXCLUDED",
+      "reason": "||V||_L3(R^3) did NOT converge over the measured ladder (rel_change_last_step=0.09898922271280919 > tol 0.0001) -- the candidate is outside NRS/Tsai's hypothesis; the theorem is silent on it."
+    },
+    "after_fix_detail": {
+      "excludes": true,
+      "verdict": "EXCLUDED-BY-T2",
+      "reason": "||V||_L3(R^3) did NOT converge (outside Theorem 1's hypothesis) but the candidate satisfies the exact-SS ansatz AND decays to 0 at infinity -- fitted far-field exponent -1.0000000000000002 < 0 and sampled |V| decreases from 0.1 (r_min) to 0.0009999999999999998 (r_max) -- Theorem 2's finishing-step hypothesis \"U -> 0 at infinity\" (Tsai 1998, p.49) is satisfied by this measurement",
+      "deciding_clause": "Tsai 1998, p.30-31: \"Theorem 2. Suppose u is a weak solution of (1.1) satisfying the local energy estimates (1.4) in the cylinder Q_1(0,T). If u is of the form (1.2)_1, then u is identically zero.\" Finishing step (p.49): \"...U -> 0 at infinity in Theorem 2, the usual Liouville theorem implies U_i = 0\" -- no L^q/integrability required. Headline corollary (p.31): \"A particular corollary of these results is that a weak solution U of (1.3) with the decay (1.5) must be zero,\" (1.5): \"U(y) = A(y/|y|) * 1/|y| + o(1/|y|) as y -> infinity.\"",
+      "ansatz_detail": {
+        "ansatz": "EXACT-SS",
+        "satisfies_theorem_ansatz": true,
+        "measured_lambda": null,
+        "reason": "no non-trivial period was measured for this candidate (static synthetic candidate, no trajectory supplied); Tsai 1998's ansatz (1.2)_1 describes a SINGLE stationary profile U under one rescaling parameter a, exactly what a static (or non-periodic) candidate with no measured periodic orbit represents"
+      },
+      "decay_detail": {
+        "decays_to_zero": true,
+        "fitted_exponent": -1.0000000000000002,
+        "magnitude_first_sample": 0.1,
+        "magnitude_last_sample": 0.0009999999999999998,
+        "reason": "fitted far-field exponent -1.0000000000000002 < 0 and sampled |V| decreases from 0.1 (r_min) to 0.0009999999999999998 (r_max) -- Theorem 2's finishing-step hypothesis \"U -> 0 at infinity\" (Tsai 1998, p.49) is satisfied by this measurement"
+      }
+    },
+    "control_passes": true
+  },
+  "control_2_real_dss_object": {
+    "description": "leg 351's Type-I Biot-Savart witness (field_uB) combined with a genuinely periodic lambda>1 trajectory (S0_true=2.0, same construction as leg 357's own landed periodic-detector control), tagging this as a DISCRETELY self-similar object",
+    "lambda_result": {
+      "lambda": 2.6339905088693505,
+      "S0": 1.937,
+      "measured": true,
+      "reason": "a non-trivial return to |c|/|c0| within tolerance was found"
+    },
+    "l3_result": {
+      "ladder": [
+        {
+          "R_hi": 10.0,
+          "shell_integral_cube": 67.99824644450464,
+          "cumulative_cube": 67.99824644450464
+        },
+        {
+          "R_hi": 100.0,
+          "shell_integral_cube": 86.91762826983489,
+          "cumulative_cube": 154.91587471433954
+        },
+        {
+          "R_hi": 1000.0,
+          "shell_integral_cube": 87.80679047452986,
+          "cumulative_cube": 242.7226651888694
+        },
+        {
+          "R_hi": 10000.0,
+          "shell_integral_cube": 87.82168672958723,
+          "cumulative_cube": 330.54435191845664
+        },
+        {
+          "R_hi": 100000.0,
+          "shell_integral_cube": 87.82189436522769,
+          "cumulative_cube": 418.36624628368435
+        },
+        {
+          "R_hi": 1000000.0,
+          "shell_integral_cube": 87.82189702781992,
+          "cumulative_cube": 506.1881433115043
+        }
+      ],
+      "L3_cubed": 506.1881433115043,
+      "L3_norm": 7.969614650511692,
+      "rel_change_last_step": 0.17349655101220934,
+      "rel_tol": 0.0001,
+      "converged": false
+    },
+    "decay_result": {
+      "direction": [
+        0.4,
+        0.5,
+        0.7681145747868608
+      ],
+      "r_values": [
+        10.0,
+        15.199110829529339,
+        23.101297000831604,
+        35.11191734215131,
+        53.3669923120631,
+        81.11308307896873,
+        123.28467394420659,
+        187.3817422860383,
+        284.8035868435802,
+        432.87612810830615,
+        657.9332246575682,
+        1000.0
+      ],
+      "magnitudes": [
+        0.1632773487407832,
+        0.10846199808720224,
+        0.07170868402800554,
+        0.047293606623747396,
+        0.031152781474177195,
+        0.02050812452512621,
+        0.01349664522223392,
+        0.008881033982715014,
+        0.005843480601105374,
+        0.0038447285746865236,
+        0.0025296078383927425,
+        0.0016643231316705955
+      ],
+      "fitted_exponent": -0.997134373688964,
+      "fitted_log_intercept": 0.4930876554690504
+    },
+    "decay_test": {
+      "decays_to_zero": true,
+      "fitted_exponent": -0.997134373688964,
+      "magnitude_first_sample": 0.1632773487407832,
+      "magnitude_last_sample": 0.0016643231316705955,
+      "reason": "fitted far-field exponent -0.997134373688964 < 0 and sampled |V| decreases from 0.1632773487407832 (r_min) to 0.0016643231316705955 (r_max) -- Theorem 2's finishing-step hypothesis \"U -> 0 at infinity\" (Tsai 1998, p.49) is satisfied by this measurement"
+    },
+    "ansatz_result": {
+      "ansatz": "DSS",
+      "satisfies_theorem_ansatz": false,
+      "measured_lambda": 2.6339905088693505,
+      "reason": "a non-trivial return to the initial amplitude was measured (S0=1.937, lambda=2.6339905088693505 > 1) -- a genuinely DISCRETELY self-similar, periodic-in-log-time orbit, NOT a fixed point of the rescaled flow, so NOT expressible as Tsai 1998's ansatz (1.2)_1's single stationary profile U under one parameter a; both Theorem 1 and Theorem 2 require this ansatz (leg 359's confirmed reading of Tsai 1998 Sections 4-5), so NEITHER theorem's hypothesis is met, regardless of decay or L^q status"
+    },
+    "ledger": {
+      "excludes": false,
+      "verdict": "NOT-REACHED-BY-ANSATZ",
+      "reason": "neither theorem's hypothesis is met: a non-trivial return to the initial amplitude was measured (S0=1.937, lambda=2.6339905088693505 > 1) -- a genuinely DISCRETELY self-similar, periodic-in-log-time orbit, NOT a fixed point of the rescaled flow, so NOT expressible as Tsai 1998's ansatz (1.2)_1's single stationary profile U under one parameter a; both Theorem 1 and Theorem 2 require this ansatz (leg 359's confirmed reading of Tsai 1998 Sections 4-5), so NEITHER theorem's hypothesis is met, regardless of decay or L^q status",
+      "deciding_clause": "Tsai 1998, eq (1.2), p.29-30: both Theorem 1 and Theorem 2 are stated \"If u is of the form (1.2)_1\" -- Leray's EXACT (continuous) backward self-similar ansatz",
+      "ansatz_detail": {
+        "ansatz": "DSS",
+        "satisfies_theorem_ansatz": false,
+        "measured_lambda": 2.6339905088693505,
+        "reason": "a non-trivial return to the initial amplitude was measured (S0=1.937, lambda=2.6339905088693505 > 1) -- a genuinely DISCRETELY self-similar, periodic-in-log-time orbit, NOT a fixed point of the rescaled flow, so NOT expressible as Tsai 1998's ansatz (1.2)_1's single stationary profile U under one parameter a; both Theorem 1 and Theorem 2 require this ansatz (leg 359's confirmed reading of Tsai 1998 Sections 4-5), so NEITHER theorem's hypothesis is met, regardless of decay or L^q status"
+      }
+    },
+    "control_passes": true
+  },
+  "control_3_regression_unmoved": {
+    "description": "re-measures leg 357's own final-checkpoint ledger in-process and diffs every verdict/excludes field against the ORIGINAL banked writeup/data/p2_route_dsspb7_v1.json (never edited by this leg)",
+    "banked_ledger": {
+      "NRS_Tsai": {
+        "excludes": false,
+        "verdict": "NOT EXCLUDED",
+        "reason": "||V||_L3(R^3) did NOT converge over the measured ladder (rel_change_last_step=0.1734965510122099 > tol 0.0001) -- the candidate is outside NRS/Tsai's hypothesis; the theorem is silent on it."
+      },
+      "Chae_Tsai": {
+        "excludes": false,
+        "verdict": "CHAE-TSAI DOES NOT BITE. The theorem is SILENT on NS3D-DSS-NONAXI-LAMBDA-LARGE.",
+        "branch": "(ii)",
+        "clause_alpha_equation_verdict": "FAILS_HYPOTHESIS",
+        "clause_alpha_equation_reason": "Every theorem hypothesises 'a time periodic solution of (1.6)', and (1.6) is the rescaled EULER system. The screened object solves Navier-Stokes. The authors' own reach remark extends the proof to arbitrary real constants a, b with b != 0, and NOT to the addition of -Laplacian V.",
+        "consumed_from": "/home/andy/projects/Unsolved/.leg357-work/writeup/data/p2_route_ctrx_v1.json",
+        "consumed_leg": 326
+      },
+      "Pineau_Vicol": {
+        "excludes": false,
+        "verdict": "NOT APPLICABLE",
+        "reason": "no lambda was measured for this candidate (trajectory relaxes toward the trivial state Omega=0 rather than returning to a non-trivial periodic value (matches leg 354's landed B4 gate finding); no non-trivial period S0 was found, so lambda is UNDEFINED for this candidate); Pineau-Vicol's H5 hypothesis (1 < lambda < lambda_underline) cannot be evaluated without a measured lambda",
+        "lambda_ceiling_from_source": 1.6487212707001282,
+        "deciding_clause_h5": {
+          "id": "H5",
+          "hypothesis_quote": "if 1 < lambda < \\underline{\\lambda}",
+          "locator": "l.298, with l.1382 and l.1715",
+          "object": "lambda significantly larger than 1; 'lambda not near 1' is one of the three defining structural conditions",
+          "verdict": "FAILS -- THIS IS THE DECIDING CLAUSE"
+        },
+        "consumed_from": "/home/andy/projects/Unsolved/.leg357-work/writeup/data/p2_route_pvlx_v1.json",
+        "consumed_leg": 330
+      },
+      "reportable": true
+    },
+    "fresh_ledger": {
+      "NRS_Tsai": {
+        "excludes": false,
+        "verdict": "NOT EXCLUDED",
+        "reason": "||V||_L3(R^3) did NOT converge over the measured ladder (rel_change_last_step=0.17349655101221 > tol 0.0001) -- the candidate is outside NRS/Tsai's hypothesis; the theorem is silent on it."
+      },
+      "Chae_Tsai": {
+        "excludes": false,
+        "verdict": "CHAE-TSAI DOES NOT BITE. The theorem is SILENT on NS3D-DSS-NONAXI-LAMBDA-LARGE.",
+        "branch": "(ii)",
+        "clause_alpha_equation_verdict": "FAILS_HYPOTHESIS",
+        "clause_alpha_equation_reason": "Every theorem hypothesises 'a time periodic solution of (1.6)', and (1.6) is the rescaled EULER system. The screened object solves Navier-Stokes. The authors' own reach remark extends the proof to arbitrary real constants a, b with b != 0, and NOT to the addition of -Laplacian V.",
+        "consumed_from": "/home/andy/projects/Unsolved/.leg362-work/writeup/data/p2_route_ctrx_v1.json",
+        "consumed_leg": 326
+      },
+      "Pineau_Vicol": {
+        "excludes": false,
+        "verdict": "NOT APPLICABLE",
+        "reason": "no lambda was measured for this candidate (trajectory relaxes toward the trivial state Omega=0 rather than returning to a non-trivial periodic value (matches leg 354's landed B4 gate finding); no non-trivial period S0 was found, so lambda is UNDEFINED for this candidate); Pineau-Vicol's H5 hypothesis (1 < lambda < lambda_underline) cannot be evaluated without a measured lambda",
+        "lambda_ceiling_from_source": 1.6487212707001282,
+        "deciding_clause_h5": {
+          "id": "H5",
+          "hypothesis_quote": "if 1 < lambda < \\underline{\\lambda}",
+          "locator": "l.298, with l.1382 and l.1715",
+          "object": "lambda significantly larger than 1; 'lambda not near 1' is one of the three defining structural conditions",
+          "verdict": "FAILS -- THIS IS THE DECIDING CLAUSE"
+        },
+        "consumed_from": "/home/andy/projects/Unsolved/.leg362-work/writeup/data/p2_route_pvlx_v1.json",
+        "consumed_leg": 330
+      },
+      "reportable": true
+    },
+    "mismatches": [],
+    "control_passes": true
+  },
+  "gate_answer": "yes",
+  "gate_answer_reasoning": "All three controls pass: (1) the synthetic exact-SS decay=-1 candidate reads 'NOT EXCLUDED' under the old L3-only reading and 'EXCLUDED-BY-T2' under the extended reading, demonstrating the gap then closing it; (2) the real DSS object (field_uB + periodic lambda=2.6339905088693505>1 trajectory) reads 'NOT-REACHED-BY-ANSATZ', citing the exact-SS ansatz failure as the deciding clause; (3) leg 357's banked ledger verdicts reproduce with zero mismatches (0 mismatches found).",
+  "runtime_seconds": 3.5092971324920654
+}

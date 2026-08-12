@@ -81,10 +81,24 @@ def test_superseded_modules_say_so():
     print("[ok] superseded modules are labelled")
 
 
+def test_leg_362_dssp_screen_extension_is_findable():
+    """Leg 362's three-way NRS/Tsai extension (EXCLUDED-BY-T1/
+    EXCLUDED-BY-T2/NOT-REACHED-BY-ANSATZ) must be described in the SAME
+    dssp_screen.py entry it extends, not a duplicate/ghost entry."""
+    hits = find("NOT-REACHED-BY-ANSATZ")
+    assert hits, "leg 362's extension is not findable via capabilities.find()"
+    assert all(c["module"] == "solver/dssp_screen.py" for c in hits), \
+        "leg 362's extension should live in the existing dssp_screen.py entry, not a new module"
+    assert find("EXCLUDED-BY-T2"), "leg 362's Theorem-2 verdict is not findable"
+    print(f"    'NOT-REACHED-BY-ANSATZ' -> {len(hits)} entr(ies), same module as leg 357's")
+    print("[ok] leg 362's extension is registered additively, no duplicate module entry")
+
+
 if __name__ == "__main__":
     test_every_solver_module_is_indexed()
     test_entries_are_complete_and_point_at_real_files()
     test_objects_are_distinct_enough_to_search_on()
     test_the_search_finds_the_thing_route_m_nearly_rebuilt()
     test_superseded_modules_say_so()
+    test_leg_362_dssp_screen_extension_is_findable()
     print("\nALL CAPABILITY-INDEX TESTS PASSED")

@@ -298,10 +298,37 @@ def _load_json(path):
         return json.load(f)
 
 
-def ledger_nrs_tsai(l3_result):
-    """NRS/Tsai: u in L^3(R^3) forces u = 0 for backward self-similar 3D
-    Navier-Stokes. Machine-read directly against THIS candidate's OWN
-    l3_norm_ladder() result -- not a transcribed summary."""
+def ledger_nrs_tsai(l3_result, decay_result=None, ansatz_result=None):
+    """NRS/Tsai, ORIGINAL (leg 357) TWO-WAY reading, UNCHANGED when called
+    the original way -- i.e. with only l3_result: u in L^3(R^3) forces
+    u = 0 for backward self-similar 3D Navier-Stokes. Machine-read directly
+    against THIS candidate's OWN l3_norm_ladder() result -- not a
+    transcribed summary. Every existing call site (test_dssp_screen.py,
+    experiments/p2_route_dsspb7_v1.py, machine_read_ledger() below) calls
+    it this way, so this branch's OUTPUT DICT IS BYTE-FOR-BYTE IDENTICAL to
+    leg 357's landed code -- this is what makes leg 357's banked verdicts
+    in writeup/data/p2_route_dsspb7_v1.json reproduce unmoved (leg 362's
+    regression control).
+
+    Leg 359 (writeup/data/p2_route_l3bd_v1.json, experiments/journal/
+    leg_359.md) adjudicated that this L3-only reading UNDER-FIRES in one
+    direction: it conflates Tsai 1998's TWO theorems (Theorem 1, the L^q
+    route this L3-only test implements; and Theorem 2, the local-energy-
+    estimates route, which needs only decay-at-infinity, no L^q membership
+    at all) into one binary EXCLUDED/NOT-EXCLUDED bit. A genuinely exact-
+    self-similar candidate at THIS repo's own measured decay rate (~-1,
+    log-divergent in L3) would read "NOT EXCLUDED" here even though Tsai's
+    Theorem 2 decisively excludes it (leg 359 sub_question_2: "(i) REACHES
+    the boundary case -- decisively, and the paper's own worked example is
+    essentially this exact decay rate").
+
+    Pass BOTH decay_result (from decays_to_zero_at_infinity()) and
+    ansatz_result (from classify_ss_ansatz()) to get the CORRECTED,
+    leg-362 three-way reading instead: EXCLUDED-BY-T1 / EXCLUDED-BY-T2 /
+    NOT-REACHED-BY-ANSATZ. See _ledger_nrs_tsai_three_way() below for the
+    quoted deciding clauses."""
+    if decay_result is not None and ansatz_result is not None:
+        return _ledger_nrs_tsai_three_way(l3_result, decay_result, ansatz_result)
     if l3_result["converged"] and np.isfinite(l3_result["L3_norm"]):
         return {
             "excludes": True,
@@ -323,6 +350,231 @@ def ledger_nrs_tsai(l3_result):
             f"> tol {l3_result['rel_tol']!r}) -- the candidate is outside "
             "NRS/Tsai's hypothesis; the theorem is silent on it."
         ),
+    }
+
+
+# =============================================================================
+# Leg 362 extension: Theorem 2 (local energy estimates) + SS/DSS ansatz
+# =============================================================================
+#
+# Leg 359's three-part finding (experiments/journal/leg_359.md,
+# writeup/data/p2_route_l3bd_v1.json), quoted verbatim at the cited primary-
+# text locators, never paraphrased or re-derived here:
+#
+#   Theorem 1 (Tsai 1998, p.30, restating/generalising NRS 1996):
+#     "Theorem 1. If a weak solution U of (1.3) belongs to L^q(R^3), for
+#     some q in (3,infinity], then it must be constant (and hence
+#     identically zero if q < infinity)."
+#
+#   Theorem 2 (Tsai 1998, p.30-31):
+#     "Theorem 2. Suppose u is a weak solution of (1.1) satisfying the
+#     local energy estimates (1.4) in the cylinder Q_1(0,T). If u is of
+#     the form (1.2)_1, then u is identically zero."
+#     -- with the headline motivating corollary, decay (1.5):
+#     "A particular corollary of these results is that a weak solution U
+#     of (1.3) with the decay (1.5) must be zero," where (1.5) is
+#     "U(y) = A(y/|y|) * 1/|y| + o(1/|y|) as y -> infinity" (p.31).
+#     The finishing step needs only "U -> 0 at infinity" (p.49: "Since
+#     U in L^q(R^3) in Theorem 1 [and] U -> 0 at infinity in Theorem 2,
+#     the usual Liouville theorem implies U_i = 0") -- NO integrability
+#     anywhere in Theorem 2's hypothesis or finish.
+#
+#   The ansatz gate, binding BOTH theorems (Tsai 1998, eq (1.2), p.29-30,
+#   Leray's backward self-similar ansatz -- "Leray's (backward) self-
+#   similar solutions are of the form u(x,t) = ..."): both Theorem 1 and
+#   Theorem 2 are stated "If u is of the form (1.2)_1" -- a SINGLE
+#   stationary profile U under one rescaling parameter a. Leg 359, reading
+#   Theorem 2's proof (Section 4-5) at primary text directly: "Both
+#   Theorem 1 and Theorem 2 require SS ansatz (1.2); neither [is] stated
+#   for, nor... obviously extends to, DSS ansatz." A candidate that is
+#   DISCRETELY self-similar (a periodic-in-log-time orbit at some lambda
+#   > 1, not a fixed point of the rescaled flow) therefore fails the
+#   hypothesis of BOTH theorems, regardless of its decay or L^q status.
+# =============================================================================
+
+def decays_to_zero_at_infinity(decay_result, tol=0.0):
+    """Tests Theorem 2's finishing-step hypothesis directly: "U -> 0 at
+    infinity" (Tsai 1998, p.49, quoted above) -- strictly weaker than any
+    L^q/integrability condition (Theorem 1's finish). Reuses
+    fitted_far_field_decay_exponent()'s own measurement rather than
+    re-sampling: a strictly negative fitted exponent, CONFIRMED by the
+    sampled magnitude actually decreasing from the first to the last
+    sampled radius (not merely a negative least-squares slope on noisy or
+    non-monotonic data), is read as U -> 0 at infinity."""
+    mags = decay_result["magnitudes"]
+    exponent = decay_result["fitted_exponent"]
+    monotonic_decrease = bool(mags[-1] < mags[0])
+    decays = bool(exponent < -tol and monotonic_decrease)
+    return {
+        "decays_to_zero": decays,
+        "fitted_exponent": exponent,
+        "magnitude_first_sample": mags[0],
+        "magnitude_last_sample": mags[-1],
+        "reason": (
+            f"fitted far-field exponent {exponent!r} "
+            f"{'< 0' if exponent < -tol else '>= 0'} and sampled |V| "
+            f"{'decreases' if monotonic_decrease else 'does NOT decrease'} "
+            f"from {mags[0]!r} (r_min) to {mags[-1]!r} (r_max) -- "
+            + ("Theorem 2's finishing-step hypothesis \"U -> 0 at "
+               "infinity\" (Tsai 1998, p.49) is satisfied by this "
+               "measurement" if decays else
+               "Theorem 2's finishing-step hypothesis \"U -> 0 at "
+               "infinity\" (Tsai 1998, p.49) is NOT confirmed by this "
+               "measurement")
+        ),
+    }
+
+
+def classify_ss_ansatz(lambda_result):
+    """Classifies whether a candidate satisfies Tsai 1998's exact
+    self-similar ansatz (1.2)_1 -- a single stationary profile U under one
+    rescaling parameter a, which BOTH Theorem 1 and Theorem 2 require --
+    or is instead DISCRETELY self-similar at some lambda > 1 (a genuinely
+    periodic-in-log-time orbit, NOT a fixed point of the rescaled flow),
+    which fails the hypothesis of both theorems regardless of decay or
+    L^q status (leg 359's confirmed reading of Tsai 1998 Sections 4-5,
+    quoted in this module's header comment above).
+
+    Driven off the SAME lambda_result that ledger_pineau_vicol() already
+    consumes (lambda_from_trajectory()'s output) -- this is the repo's
+    only landed operational signature of "periodic return under the
+    rescaled flow" (leg 330's own S0 = 2*log(lambda) convention). A
+    MEASURED non-trivial period at lambda > 1 IS the DSS-not-SS signature
+    (a fixed point of the rescaled flow has, by definition, no period to
+    find). No trajectory measured at all (a static candidate field, or one
+    that was never handed a trajectory to test) is read as the exact-SS
+    case: Tsai's ansatz (1.2)_1 literally IS "hand me a single stationary
+    profile U(y)", which is exactly what a static field represents -- this
+    module does not invent a third state for "maybe secretly DSS but never
+    measured"; if a caller wants that possibility screened, it must supply
+    s_vals/c_vals to lambda_from_trajectory() first."""
+    if not lambda_result.get("measured", False):
+        return {
+            "ansatz": "EXACT-SS",
+            "satisfies_theorem_ansatz": True,
+            "measured_lambda": None,
+            "reason": (
+                "no non-trivial period was measured for this candidate "
+                f"({lambda_result.get('reason', 'no trajectory supplied')}); "
+                "Tsai 1998's ansatz (1.2)_1 describes a SINGLE stationary "
+                "profile U under one rescaling parameter a, exactly what a "
+                "static (or non-periodic) candidate with no measured "
+                "periodic orbit represents"
+            ),
+        }
+    lam = lambda_result.get("lambda")
+    if lam is not None and lam > 1.0:
+        return {
+            "ansatz": "DSS",
+            "satisfies_theorem_ansatz": False,
+            "measured_lambda": lam,
+            "reason": (
+                f"a non-trivial return to the initial amplitude was "
+                f"measured (S0={lambda_result['S0']!r}, "
+                f"lambda={lam!r} > 1) -- a genuinely DISCRETELY "
+                "self-similar, periodic-in-log-time orbit, NOT a fixed "
+                "point of the rescaled flow, so NOT expressible as Tsai "
+                "1998's ansatz (1.2)_1's single stationary profile U "
+                "under one parameter a; both Theorem 1 and Theorem 2 "
+                "require this ansatz (leg 359's confirmed reading of "
+                "Tsai 1998 Sections 4-5), so NEITHER theorem's hypothesis "
+                "is met, regardless of decay or L^q status"
+            ),
+        }
+    return {
+        "ansatz": "UNKNOWN",
+        "satisfies_theorem_ansatz": None,
+        "measured_lambda": lam,
+        "reason": (
+            f"a period was measured but its lambda={lam!r} is outside "
+            "the expected DSS-at-lambda>1 range (or undefined); this "
+            "module does not guess, it flags for the next adjudicating "
+            "leg rather than auto-classifying"
+        ),
+    }
+
+
+def _ledger_nrs_tsai_three_way(l3_result, decay_result, ansatz_result):
+    """The leg-362 corrected reading: EXCLUDED-BY-T1 / EXCLUDED-BY-T2 /
+    NOT-REACHED-BY-ANSATZ. The ansatz gate is checked FIRST and is
+    dispositive on its own -- per leg 359's finding, BOTH theorems require
+    the exact-SS ansatz (1.2)_1, so a candidate that fails it is not
+    reached by either theorem regardless of its decay or L^q status. Only
+    a candidate that passes the ansatz gate is then checked against
+    Theorem 1's stricter L^q route, and failing that, Theorem 2's weaker
+    decay-only route."""
+    ansatz_ok = ansatz_result.get("satisfies_theorem_ansatz")
+    if ansatz_ok is not True:
+        return {
+            "excludes": False,
+            "verdict": "NOT-REACHED-BY-ANSATZ",
+            "reason": (
+                "neither theorem's hypothesis is met: " + ansatz_result["reason"]
+            ),
+            "deciding_clause": (
+                "Tsai 1998, eq (1.2), p.29-30: both Theorem 1 and Theorem 2 "
+                "are stated \"If u is of the form (1.2)_1\" -- Leray's "
+                "EXACT (continuous) backward self-similar ansatz"
+            ),
+            "ansatz_detail": ansatz_result,
+        }
+    l3_excludes = bool(l3_result["converged"] and np.isfinite(l3_result["L3_norm"]))
+    if l3_excludes:
+        return {
+            "excludes": True,
+            "verdict": "EXCLUDED-BY-T1",
+            "reason": (
+                f"||V||_L3(R^3) converged to {l3_result['L3_norm']!r} "
+                f"(rel_change_last_step={l3_result['rel_change_last_step']!r} "
+                f"< tol {l3_result['rel_tol']!r}) and the candidate "
+                "satisfies the exact-SS ansatz -- inside Theorem 1's "
+                "hypothesis, so it must be trivial if genuinely backward "
+                "self-similar."
+            ),
+            "deciding_clause": (
+                "Tsai 1998, p.30 (restating/generalising NRS 1996): "
+                "\"Theorem 1. If a weak solution U of (1.3) belongs to "
+                "L^q(R^3), for some q in (3,infinity], then it must be "
+                "constant (and hence identically zero if q < infinity).\""
+            ),
+            "ansatz_detail": ansatz_result,
+        }
+    decay_excludes = bool(decay_result["decays_to_zero"])
+    if decay_excludes:
+        return {
+            "excludes": True,
+            "verdict": "EXCLUDED-BY-T2",
+            "reason": (
+                "||V||_L3(R^3) did NOT converge (outside Theorem 1's "
+                "hypothesis) but the candidate satisfies the exact-SS "
+                "ansatz AND decays to 0 at infinity -- " + decay_result["reason"]
+            ),
+            "deciding_clause": (
+                "Tsai 1998, p.30-31: \"Theorem 2. Suppose u is a weak "
+                "solution of (1.1) satisfying the local energy estimates "
+                "(1.4) in the cylinder Q_1(0,T). If u is of the form "
+                "(1.2)_1, then u is identically zero.\" Finishing step "
+                "(p.49): \"...U -> 0 at infinity in Theorem 2, the usual "
+                "Liouville theorem implies U_i = 0\" -- no L^q/"
+                "integrability required. Headline corollary (p.31): "
+                "\"A particular corollary of these results is that a weak "
+                "solution U of (1.3) with the decay (1.5) must be zero,\" "
+                "(1.5): \"U(y) = A(y/|y|) * 1/|y| + o(1/|y|) as "
+                "y -> infinity.\""
+            ),
+            "ansatz_detail": ansatz_result,
+            "decay_detail": decay_result,
+        }
+    return {
+        "excludes": False,
+        "verdict": "NOT EXCLUDED",
+        "reason": (
+            "the candidate satisfies the exact-SS ansatz but neither "
+            "Theorem 1 (L^q) nor Theorem 2 (decays_to_zero_at_infinity) "
+            "fired on this measurement -- the theorems are silent on it"
+        ),
+        "ansatz_detail": ansatz_result,
+        "decay_detail": decay_result,
     }
 
 
@@ -410,14 +662,21 @@ def ledger_pineau_vicol(lambda_result, pvlx_path=PVLX_JSON):
     }
 
 
-def machine_read_ledger(l3_result, lambda_result):
+def machine_read_ledger(l3_result, lambda_result, decay_result=None, ansatz_result=None):
     """The full three-entry rigidity ledger for one candidate, machine-read
     against its own measurements (l3_result, lambda_result) and against
     legs 326/330's landed JSON records. `reportable` is the B7 yes-branch
     consequence: every candidate that reaches this function carries its
-    exclusion status attached, whatever that status is."""
+    exclusion status attached, whatever that status is.
+
+    decay_result/ansatz_result are OPTIONAL (default None): omitting them
+    (every existing call site does) reproduces leg 357's original
+    NRS_Tsai reading byte-for-byte via ledger_nrs_tsai()'s own
+    backward-compatible branch. Passing both (leg 362's extension) upgrades
+    NRS_Tsai to the three-way EXCLUDED-BY-T1/EXCLUDED-BY-T2/
+    NOT-REACHED-BY-ANSATZ reading -- see _ledger_nrs_tsai_three_way()."""
     return {
-        "NRS_Tsai": ledger_nrs_tsai(l3_result),
+        "NRS_Tsai": ledger_nrs_tsai(l3_result, decay_result, ansatz_result),
         "Chae_Tsai": ledger_chae_tsai(),
         "Pineau_Vicol": ledger_pineau_vicol(lambda_result),
         "reportable": True,
