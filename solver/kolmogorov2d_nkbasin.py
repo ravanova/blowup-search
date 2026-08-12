@@ -506,13 +506,13 @@ def newton_hookstep_rpo(w0_guess, T_guess, s_guess, solver,
             print(f"  hookstep epoch {epoch}: |R|={r:.6e} "
                   f"T={T:.6f} s={s:.6f} delta={delta}")
 
-        if out["reason"] == "converged":
-            reason = "converged"
-            break
         if out["reason"] == "nonfinite_residual":
             reason = "nonfinite_residual"
             break
         if not out["ledger"]:
+            # No inner iteration ran. That includes convergence AT ENTRY, in
+            # which case r above is already the converged residual and the
+            # iterate is unmoved, so out["reason"] carries straight through.
             reason = out["reason"]
             break
 
@@ -532,6 +532,21 @@ def newton_hookstep_rpo(w0_guess, T_guess, s_guess, solver,
             reason = "nonpositive_period"
             break
         w0, T, s = w0_try, T_try, s_try
+
+        if out["reason"] == "converged":
+            # The inner call ran with max_newton=1, so reaching here means it
+            # converged ON THE STEP JUST ACCEPTED: hookstep_newton upgrades
+            # "max_newton_hit" to "converged" AFTER the step, and the converged
+            # pair is (out["x"], out["final_residual"]) while
+            # residual_history[0] -- what r was read from above -- is the
+            # PRE-step value. Breaking on r would discard the solution and
+            # return success=False on a solve that reached tol. Control P
+            # caught exactly this: an exact planted fixed point reported
+            # "converged" with final_residual 1.6e-8 > tol=1e-8.
+            r = float(out["final_residual"])
+            hist.append(r)
+            reason = "converged"
+            break
 
     return dict(success=bool(r < tol), w0=w0, T=T, s=s,
                 n_iters=len(hist) - 1, residual_history=hist,

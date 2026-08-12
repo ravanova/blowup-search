@@ -186,6 +186,48 @@ only 3 epochs, all far from the solution where GMRES converges easily, and it **
 under-states** what the hard late epochs need. Clause (a) is therefore read against P's
 measured floor, not against that `p95` alone.
 
+## 3b. AMENDMENT 2 — control P caught a defect in the instrument that would have manufactured a `no`
+
+Run at the re-scaled `T=2.65` over a cap sweep, P returned the impossible pair
+`reason="converged"` with `converged_to_tol=False` at a final residual of `1.63e-8` against
+`tol=1e-8` — at both `max_gmres=80` and `max_gmres=120`. That pair cannot both be true if the
+solver's reporting is right, and it is not.
+
+`newton_hookstep_rpo` (`solver/kolmogorov2d_nkbasin.py`) drives `newton_hookstep` one inner
+iteration at a time, because the residual map is re-referenced every epoch (the moving Poincaré
+section). With `max_newton=1` the inner call can report `"converged"` from **two** places:
+
+* **at entry** — the residual at the incoming iterate is already below `tol`. `residual_history`
+  has one element, the iterate is unmoved, and the outer's `r = out["residual_history"][0]` is
+  the converged value. Correct.
+* **on the step it just took** — `hookstep_newton` upgrades `"max_newton_hit"` to `"converged"`
+  *after* appending the post-step residual. The converged pair is `(out["x"],
+  out["final_residual"])`, while `residual_history[0]` is the **pre-step** value.
+
+The outer took the second case as the first: it broke on the pre-step residual, **before** the
+block that adopts `out["x"]`, so it discarded the converged iterate and returned
+`success = bool(r < tol) = False` on a solve that had reached `tol`. **At G1 this would have
+recorded a non-recovery on an attempt that recovered** — a fabricated `no` on the one gate whose
+`no` stops route 4 under §3d. It is the exact failure P was planted to catch, and it was caught
+by an *unconditional positive* control rather than by inspection.
+
+**Fix.** The converged branch is moved after the adopt block and re-reads the converged pair.
+The change is confined to that branch, which is unreachable for any solve that never reaches
+`tol`. **M1 was re-run against it and reproduces bit-identically** — every field of
+`u1_m1_ledger.json` except wall times — so M1's validation of the globalisation layer stands and
+M1 is **not** re-opened. Under the fix P recovers: residual `1.95e2 → 7.75e-9` in 33 epochs,
+state error `1e-3 → 2.89e-6`, at `(max_newton=60, max_gmres=140)`.
+
+Two things follow for the record. First, the `max_gmres=120` sweep row now reads as a **cap**
+failure and a **reporting** failure compounded, and neither is P's own verdict; only the `140`
+row is a clean measurement of P. Second, this is the second time in this unit that a number
+taken at face value would have set the caps too low — see §3a on the cost probe's `p95` — and
+both were caught by planted controls rather than by review. Under §3f that is the whole defence,
+and it has now fired twice.
+
+**UNVERIFIED (§3f).** The diagnosis, the fix and the M1 bit-identity check were all made in the
+same session that made the change. They are labelled UNVERIFIED in G1's own answer.
+
 ## 4. What this addendum does not do
 
 It does not restate, soften or re-scope G1. It does not touch the compliant scale. It does not
