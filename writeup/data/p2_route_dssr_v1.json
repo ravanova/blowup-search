@@ -1,0 +1,121 @@
+{
+  "leg": 365,
+  "route": "DSSR",
+  "title": "Does a DSS extension of Tsai 1998's Theorem 2 (local-energy-estimates Liouville route) exist in the literature, and if so does it reach the repository's screened DSS object?",
+  "date": "2026-08-12",
+  "branch": "leg/365-dssr-v1",
+  "role": "LEG, floor-eligible, read-and-report, literature-typed",
+  "dispatched_by": "orchestrator, following leg 359's finding that Tsai's Theorem 2 (local-energy route) is stated only for the exact-SS ansatz, never checked for a DSS extension specifically",
+  "territory": [
+    "writeup/data/p2_route_dssr_v1.json",
+    "writeup/novelty/leg_365.md",
+    "experiments/journal/leg_365.md"
+  ],
+  "files_read_only_never_edited": [
+    "experiments/journal/leg_359.md",
+    "writeup/data/p2_route_l3bd_v1.json",
+    "experiments/journal/leg_326.md",
+    "writeup/novelty/leg_326.md",
+    "experiments/journal/leg_330.md",
+    "writeup/novelty/leg_330.md",
+    "experiments/journal/leg_262.md",
+    "solver/dssp_screen.py (leg 357, not touched, flag only)",
+    "reports/STATUS.md (not touched, flag only)"
+  ],
+  "figures_assigned": 0,
+  "gate_verdict": {
+    "class": "iii",
+    "label": "PARTIAL RESULT",
+    "one_line": "Chae-Wolf 2016/2017 (arXiv:1610.09464v2) Theorem 1.3 -- the very theorem Pineau-Vicol's DSS Theorem restates and leg 330 already adjudicated -- IS a Liouville-type rigidity theorem for DSS solutions whose proof terminates by literally invoking Tsai 1998's Theorem 2 (local-energy-estimates route) as its finishing move. But it does NOT extend Tsai's local-energy machinery to a genuinely periodic (fixed lambda>1) DSS profile: it reduces DSS to SS via a compactness/degeneration argument valid only as lambda -> 1, then applies Tsai's Theorem 2 UNCHANGED to the resulting SS limit object. This is a genuinely new mechanistic finding for this repository (no prior leg had read Chae-Wolf's primary text closely enough to see the Tsai-Theorem-2 citation at its finishing step) -- but it changes nothing about the bottom line already banked by leg 330: the screened object's lambda-significantly-larger-than-1 clause means the compactness argument's lambda->1 hypothesis is never met, so this partial DSS extension does not reach the screened object either."
+  },
+  "primary_sources": [
+    {
+      "citation": "Tsai, T.-P., \"On Leray's Self-Similar Solutions of the Navier-Stokes Equations Satisfying Local Energy Estimates\", Arch. Rational Mech. Anal. 143 (1998) 29-51",
+      "status": "not re-fetched this leg; consumed via leg 359's independently re-verified read (sha256 6d3182d53806ce82fa0a2d834b31b758f22399ff625b8c8d7025a65f83fb8182, pdftotext 1258 lines) -- Theorem 2's statement and mechanism (local energy estimates -> sub-linear growth -> Lemma 5.1 -> U -> 0 at infinity finish, no L^q membership needed) taken from that record, not re-derived"
+    },
+    {
+      "citation": "Chae, D. & Wolf, J., \"Removing discretely self-similar singularities for the 3D Navier-Stokes equations\", arXiv:1610.09464",
+      "url_pdf": "https://arxiv.org/pdf/1610.09464v2",
+      "url_abs": "https://arxiv.org/abs/1610.09464",
+      "obtained": "full text, freshly downloaded this leg, never previously read at primary text by any prior leg in this repository (all prior references to Chae-Wolf were via Pineau-Vicol's restatement, leg 330, or Bradshaw-Tsai's citation of it, leg 359/326)",
+      "sha256_this_leg": "1f537bc2b6b2e7752db275a1eb1c903782068510c4d7bcd68dbdd45d14c0efdc",
+      "pdftotext_layout_line_count": 1002,
+      "version_check": "abstract page lists [v1] and [v2] only; v2 (2 Jun 2017) is the version pinned here and the version cited by this leg's line numbers",
+      "note": "This is the SAME theorem Pineau-Vicol's DSS Theorem restates (leg 330 quoted PV's own words: 'a slight modification of the proof of Theorem 1.4 immediately recovers the main result in [ChaeWolf17]'). Leg 330 adjudicated it via PV's restatement and via leg 262's earlier read of PV v1; NEITHER prior leg read Chae-Wolf's own primary text. This leg is the first to do so."
+    },
+    {
+      "citation": "Pineau, B. & Vicol, V., 'On rotated backwards self-similar solutions of the incompressible 3D Navier-Stokes equations', arXiv:2607.09619v2",
+      "status": "already fully adjudicated by leg 330 (commit 5496bbc) against the screened object; NOT re-adjudicated here -- its landed clause-by-clause table (H1-H6, deciding clause H5: the lambda-near-1 window) is cited as the pre-existing verdict that this leg's mechanistic finding does not overturn"
+    },
+    {
+      "citation": "Bradshaw, Z. & Tsai, T.-P., 'Discretely self-similar solutions to the Navier-Stokes equations with data in L^2_loc satisfying the local energy inequality', arXiv:1801.08060",
+      "status": "already located and flagged by leg 359 (abstract depth only) as adjacent-but-off-gate: a forward-evolution EXISTENCE paper (constructs nontrivial DSS solutions satisfying the local energy inequality), not a Liouville/rigidity result. Re-confirmed by this leg's own MF1 controlled search (Q1 below) to still be the top hit on 'local energy'+'discretely self-similar'; not re-adjudicated further because it remains outside this leg's gate (existence, not rigidity)."
+    },
+    {
+      "citation": "Jiu, Q., Wang, Y. & Wei, W., \"Leray's backward self-similar solutions of 3D Navier-Stokes equations in Morrey spaces\", arXiv:2006.15776",
+      "status": "new to this repository's net, located this leg (Q4 below), adjudicated at abstract depth and found NOT ADVERSE / NOT RELEVANT: it generalizes NRS/Tsai's Theorem 1 (the L^q-membership route) to Morrey spaces M^{q,l}, for the EXACT (continuous) backward self-similar ansatz only. Abstract states explicitly it 'generalizes ... Necas-Ruzicka-Sverak ... Tsai ... [and Chae-Wolf's L^{p,infty} result]' -- an integrability-class generalization, not a DSS-ansatz generalization, and not the local-energy route (Theorem 2) either. Located, read, ruled out; not pursued further."
+    }
+  ],
+  "screened_object": {
+    "name": "NS3D-DSS-NONAXI-LAMBDA-LARGE (leg 251/leg 260/leg 313's specification, leg 357's DSSP-SCREEN candidate family)",
+    "ansatz": "backward DISCRETELY self-similar: periodic orbit of the dynamically rescaled flow, period T = 2 log(lambda), lambda an OUTPUT of the search, significantly larger than 1 -- not close to 1",
+    "decay": "|U(y)| <= C/(1+|y|), Chae-Wolf's own Type-I profile bound (arXiv:1610.09464 Thm 1.1), carried into the screen via leg 253 -> leg 260 -> leg 313"
+  },
+  "clause_by_clause_finding": {
+    "what_chae_wolf_theorem_1_3_actually_proves": "Verbatim (Chae-Wolf v2 l.93-100 region, pdftotext-extracted): 'Theorem 1.3. [For] every C* > 0 [there] exists lambda* > 1 depending on C* [such that for any] lambda-DSS solution [of] Navier-Stokes equations [with] lambda in (1, lambda*), [that] satisfies |u(x,t)| <= C*/sqrt(-t+|x|), then u = 0.' -- a rigidity theorem for GENUINE DSS solutions (period T = 2 log lambda, lambda>1 fixed), not the SS ansatz.",
+    "proof_mechanism_traced": "Section 3 (l.~440-680 of the pdftotext extraction). Proof by contradiction/compactness: assume a sequence of nontrivial lambda_j-DSS solutions u_j with lambda_j -> 1 as j -> infinity, each satisfying the uniform Type-I bound (so a nontrivial DSS solution exists arbitrarily close to lambda=1 despite the theorem's claim). Extract a weak limit u via Banach-Alaoglu + Calderon-Zygmund pressure estimates. Show, via an explicit epsilon/mu argument built on the discrete-self-similarity relation and Arzela-Ascoli compactness of the vorticity on compact sets away from the origin, that for EVERY mu>1, u_mu - u is a harmonic vector field (curl(u_mu - u)=0, div(u_mu-u)=0) and therefore, by the classical Liouville theorem for harmonic functions, u_mu = u identically. This forces u to be EXACTLY (continuously) self-similar for every scaling factor -- i.e. the DSS ansatz has degenerated into the ordinary SS ansatz in the limit. Verbatim, the paper's own next sentence (l.~669-676 of the extraction): 'u [is] backward self-similar ... In particular, u satisfies local energy estimate (3.4). Thus, [we are] in [a] position to apply Tsai's result [15, Theorem 2], u [is] identical[ly] zero.' This contradicts the uniform-non-triviality lower bound (3.9) established earlier in the same proof, completing the contradiction argument.",
+    "is_this_a_local_energy_estimates_mechanism_analogous_to_tsai_applied_to_DSS": "NO, not directly -- and this is the precise, load-bearing distinction. The local-energy-estimates step (Tsai's Theorem 2 itself) is invoked UNCHANGED, as a black box, and it is applied to the LIMIT profile u, which the compactness argument has already forced to be genuinely SS (not merely DSS). Nothing in Chae-Wolf's Section 3 re-derives or generalizes Tsai's A_p-weight / CKN-type partial-regularity machinery (Tsai 1998 Section 4) for a profile that is periodic-in-log-time with a FIXED lambda>1 -- i.e. for an object that stays genuinely DSS rather than degenerating to SS. The mechanism that reaches DSS solutions is the compactness/harmonic-Liouville argument (Section 3, novel to Chae-Wolf), NOT an extension of Tsai's local-energy-estimates machinery to the DSS ansatz. Tsai's Theorem 2 is consumed only at the very end, on an object that is, by that point, no longer discretely self-similar in the nontrivial sense.",
+    "why_this_forces_lambda_near_1_specifically": "The compactness argument needs lambda_j -> 1 to force k_j = k(lambda_j, mu) with lambda_j^{k_j} -> mu for EVERY fixed mu>1 (l.~600-660 of the extraction, the k_j construction) -- this is exactly what proves u_mu=u for every mu, i.e. genuine SS in the limit. For a FIXED lambda significantly larger than 1 (the screened object's regime) there is no such sequence lambda_j -> 1 to run compactness over, and the degenerate-to-SS argument has no analogue: the mechanism is structurally incapable of reaching fixed-large-lambda DSS objects, not merely failing there by a slack constant."
+  },
+  "classification_against_tsai_theorem_2s_full_hypothesis": {
+    "what_it_covers": "Liouville-type rigidity for genuinely DSS (period-T, lambda fixed) weak solutions satisfying the SAME Type-I decay bound (1.3)/(1.4) that appears in Tsai's motivating example -- but ONLY for lambda in an unspecified-but-nonempty interval (1, lambda*(C_that_0)) forced arbitrarily close to 1 by the proof's own compactness step. This is a genuine widening of Tsai's reach from the SS ansatz to a strict superset (DSS solutions with lambda near 1), and it is the closest thing in the literature to a 'DSS extension' of Tsai's Theorem 2 route -- because it terminates in an unmodified application of Tsai's Theorem 2 itself.",
+    "what_it_does_not_cover": "It does not cover DSS solutions with lambda bounded away from 1 (no version of the argument works for a fixed large lambda -- the compactness step has no lambda_j -> 1 sequence to exploit). It does not generalize Tsai's LOCAL-ENERGY-ESTIMATES MACHINERY itself (Tsai Section 4, the A_p-weight/CKN partial-regularity argument that establishes the sub-linear growth bound) to a periodic-in-s profile; that machinery is used only on the emergent SS limit. So relative to the dispatch's exact ask -- 'a theorem that proves Liouville-type rigidity for DSS ... weak solutions using a local-energy-estimates mechanism analogous to Tsai's, or that explicitly extends/generalizes Tsai's Theorem 2 to the DSS ansatz' -- Chae-Wolf's Theorem 1.3 satisfies the FIRST disjunct (DSS rigidity via a route that uses Tsai's local-energy mechanism as its finishing step) but NOT the second (it does not generalize Theorem 2's proof to the DSS ansatz; it reduces DSS to SS first and applies Theorem 2 unchanged)."
+  },
+  "reach_against_the_screened_object": {
+    "verdict": "DOES NOT REACH -- same bottom line leg 330 already banked, now explained mechanistically",
+    "deciding_clause": "screened object's lambda is 'significantly larger than 1' (leg 251/leg 260/leg 313's structural specification, an OUTPUT of the search, no number to clear); Chae-Wolf's Theorem 1.3 (= PV's DSS theorem, already quoted verbatim by leg 330: 'There exists lambda-bar = lambda-bar(C_{U,0}) > 1, such that if 1 < lambda < lambda-bar, then U = 0') only reaches lambda in a window forced near 1 by the compactness argument's own construction",
+    "cross_check_against_leg_330": "leg 330's clause-by-clause ledger (H1-H6 in writeup/novelty/leg_330.md and experiments/journal/leg_330.md section 4) is reused here without modification -- it is the identical theorem under PV's restatement -- the deciding clause H5 (the lambda-near-1 window) stands unchanged. This leg's contribution is NOT a re-adjudication of the reach question (already settled) but an identification of WHY the theorem's reach is structurally confined to lambda near 1: the mechanism is a compactness-forced degeneration to the SS ansatz, not a DSS-native local-energy argument, so there was never a route by which it could have reached fixed-large-lambda DSS objects, independent of how tightly the non-explicit constant lambda*(C_{U,0}) could in principle be bounded."
+  },
+  "controlled_searches": {
+    "instrument": "arXiv export API, https://export.arxiv.org/api/query, this leg's own session, 2026-08-12",
+    "positive_control": {"query": "all:electron", "result": "HTTP 200, totalResults=184861", "verdict": "PASSES"},
+    "negative_control": {"query": "abs:\"quixotic hyperbolic zebrafish tensor\"", "result": "HTTP 200, totalResults=0", "verdict": "PASSES"},
+    "content_queries": [
+      {"id": "Q1", "query": "abs:\"local energy\" AND abs:\"discretely self-similar\"", "totalResults": 5, "hits": ["1801.08060 Bradshaw-Tsai (existence, already flagged by leg 359, off-gate)", "2202.08352 Bradshaw-Phelps (forward DSS spatial decay rates, existence-side, off-gate)", "1907.00256 (infinite energy existence, off-gate)", "1408.6619 (Euler, not Navier-Stokes, off-gate)", "2006.13145 (epsilon-regularity criterion, not a Liouville theorem, off-gate)"], "adjudication": "zero Liouville/rigidity hits; all five are existence, decay-rate, or regularity-criterion papers, none proving DSS triviality"},
+      {"id": "Q2", "query": "abs:\"rigidity\" AND abs:\"discretely self-similar\" AND abs:\"Navier-Stokes\"", "totalResults": 0, "adjudication": "genuine zero on this exact phrase combination -- banked, not load-bearing alone (see Q1/Q3/Q5 for the same territory searched differently)"},
+      {"id": "Q3", "query": "abs:\"Liouville\" AND abs:\"local energy estimates\"", "totalResults": 0, "adjudication": "genuine zero -- no paper's abstract pairs these two exact phrases; consistent with the finding that the only paper doing this (Chae-Wolf) uses the phrase 'local energy inequality'/'local energy estimate' in its BODY, not its abstract, and does not use the word 'Liouville' in its abstract either -- an instrument-scope limit, recorded, not an absence-of-the-paper"},
+      {"id": "Q4", "query": "abs:\"Chae\" AND abs:\"Wolf\" AND abs:\"Tsai\"", "totalResults": 1, "hits": ["2006.15776 Jiu-Wang-Wei, Morrey-space generalization of NRS/Tsai's Theorem 1 (L^q route), exact-SS ansatz only -- located, read at abstract depth, ruled out (see primary_sources)"], "adjudication": "the one paper whose abstract co-mentions all three surnames is a DIFFERENT generalization axis (function space, not ansatz) of the OTHER theorem (Theorem 1, not Theorem 2)"},
+      {"id": "Q5", "query": "abs:\"discretely self-similar\" AND abs:\"Liouville\" AND abs:\"Navier-Stokes\"", "totalResults": 1, "hits": ["2607.09619v2 Pineau-Vicol, already adjudicated by leg 330"], "adjudication": "repeats leg 330's own query shape as a same-day re-check; identical result (single hit, PV), confirming no new arXiv submission has appeared in this exact slot since leg 330's 2026-08-11 measurement"}
+    ],
+    "semantic_scholar_attempt": {
+      "status": "REFUSAL TO MEASURE, banked, not treated as evidence of absence",
+      "attempts": [
+        {"endpoint": "paper/search?query=Leray+Self-Similar+Solutions+Navier-Stokes+Local+Energy+Estimates", "result": "HTTP 429 Too Many Requests", "wait_before_retry_s": 10},
+        {"endpoint": "same query, retried", "result": "HTTP 429 Too Many Requests", "wait_before_retry_s": 20}
+      ],
+      "note": "a citation-graph search (who cites Tsai 1998's Theorem 2 specifically, looking for a DSS extension outside arXiv's abs-field index) was attempted and refused twice by Semantic Scholar's rate limiter. This is a genuine instrument gap, not laundered: full-text/citation-graph coverage beyond arXiv's abstract field was NOT achieved this session. The arXiv abs-field searches above remain the load-bearing evidence for the (ii)-shaped portion of this leg's answer; the (iii) finding itself was reached by primary-text reading (Chae-Wolf), not by search, so it does not depend on this refused query."
+    }
+  },
+  "limits_of_the_absence_claim": [
+    "scoped to arXiv's abstract-field index only for the negative-result queries (Q1-Q5); a paper proving a genuine DSS-native extension of Tsai's local-energy machinery without either 'local energy', 'Liouville', 'rigidity', or 'discretely self-similar' phrasing in its abstract would be invisible to this instrument",
+    "Semantic Scholar citation-graph search (which could have surfaced a DSS extension citing Tsai 1998 without using this repository's search vocabulary in its own abstract) was refused twice (429) and not completed -- banked as a genuine gap, not treated as absence",
+    "no full-text (as opposed to abstract-field) arXiv search was run",
+    "the positive result of this leg (Chae-Wolf's mechanistic dependence on Tsai's Theorem 2) was found by primary-text reading, prompted by leg 262's prior mention of 'Chae-Wolf's compactness argument' (experiments/journal/leg_262.md l.169) and leg 330's citation of Chae-Wolf as the theorem PV restate -- not by any of the arXiv queries above, none of which surfaced Chae-Wolf directly under this leg's Tsai-Theorem-2-focused query shapes (Chae-Wolf's own abstract does not contain the words 'local energy', 'Liouville', or 'rigidity')"
+  ],
+  "flags": {
+    "for_solver_dssp_screen_py_owner": "This leg does NOT edit solver/dssp_screen.py (out of territory). Flag for the DM/screen owner, extending leg 359's flag: leg_ledger_nrs_tsai() tests only L3 convergence and has no notion of Chae-Wolf/PV's DSS theorem (lambda-window check) or Tsai's Theorem 2 (local-energy-estimates check). Leg 330 already flagged the PV/Chae-Wolf gap in its own packet append (writeup/novelty/leg_330.md section 8); this leg adds only the mechanistic detail that the PV/Chae-Wolf theorem's reach is inherently confined to lambda-near-1 BECAUSE its proof degenerates DSS to SS via compactness before invoking Tsai -- so a hypothetical future ledger entry for this theorem would need exactly leg 330's lambda-threshold check, not a separate 'DSS local-energy' check; there is no third, independent local-energy-native DSS mechanism in the literature to add.",
+    "for_route_4_stop_packet_owner": "Flag only, reports/STATUS.md not touched. This leg's finding does not change the packet's balance (leg 330's verdict on Chae-Wolf/PV stands unchanged: NOT REACHING). What is new for the packet, if its owner wants it: the packet can now state, with a primary-source citation, that the ONLY DSS-reaching rigidity result in the literature (Chae-Wolf/PV) is not an independent obstruction candidate distinct from Tsai's Theorem 2 -- it consumes Theorem 2 as a black box after a compactness reduction to the SS ansatz -- so 'has anyone extended Tsai's local-energy route to DSS' and 'does PV/Chae-Wolf reach the object' are now known to be the SAME question with the SAME answer (no), rather than two independently open questions."
+  },
+  "magnitudes": {
+    "primary_sources_read_at_full_text_this_leg": 1,
+    "primary_sources_consumed_via_prior_legs_landed_records": 3,
+    "new_papers_located_and_ruled_out_this_leg": 1,
+    "arxiv_queries_run_this_leg": 7,
+    "arxiv_queries_that_returned_genuine_zero": 2,
+    "semantic_scholar_refusals_banked": 2,
+    "figures_assigned": 0,
+    "bans_touched": 0,
+    "links_of_L1_L4_chain_moved": 0,
+    "clay_odds": "~0.05%, unchanged"
+  }
+}
