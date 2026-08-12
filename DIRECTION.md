@@ -34,7 +34,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 299 | TESTA | no |
-| B | 373 | HSFM | yes |
+| B | 376 | R3SP | yes |
 | C | 374 | SBIV | yes |
 | D | 375 | PBLG | no |
 <!-- FLOOR-TABLE-END -->
@@ -20582,8 +20582,23 @@ BLOG_P2_ROUTEPORT_V2.md, the gap list's OLDEST surviving item
 clause of items 1-13 now closed or design-adjudicated), written from
 the landed TECHNICAL + banked data only. Floor 2/4 (373, 374).
 
+Cycle 10ll: B/373 landed DISJOINT at 95cd3bd — both quoted
+hookstep-failure instances (saddle-node continuation endpoint α=1/4,
+Re 15.03-26.68; long-period non-convergence α=1/8, Re=22) are domain-
+AND Re-disjoint from 358's retry regime (α=1, Re=60, single-shot, no
+continuation — cross-checked against 1406.1820 itself); **stop-packet
+risk #2 NARROWS, subsumed into risk #1 by pointer** (the packet
+orchestrator-edited, the leg correctly not self-editing). B ← **leg
+376 R3SP** (genuine eligible work under-weighted until now: 348
+explicitly refused to transfer 343's ℓ=0 continuous-spectrum finding
+across operators — "a risk factor only, not proof" — and the full
+rescaled 3D operator's other channels were NEVER measured; the answer
+hardens or softens the POCP obstruction for the same user decision 374
+feeds, with 343's planted-eigenvalue control pattern ready for reuse).
+Floor 2/4 (374, 376).
+
 **Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
-Immediately dispatchable: **0**. Next fresh leg number: **376.**
+Immediately dispatchable: **0**. Next fresh leg number: **377.**
 
 Nothing in this update lifts a ban. An audited register and a
 verification leg taking its fired turn; no L1-L4 link moved; Clay
@@ -21044,3 +21059,94 @@ Immediately dispatchable: **0**. Next fresh leg number: **376.**
 
 Nothing in this update lifts a ban. Three old gaps dispositioned and
 the last one dispatched; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10ll) — 373 DISJOINT ABSORBED (RISK #2
+NARROWS INTO RISK #1); B ← 376 R3SP (THE UNMEASURED CHANNELS OF THE
+ACTUAL ROUTE-4 OPERATOR — THE POCP DECISION's OTHER FACE)
+
+Written from the same detached lineage, resynced to origin/main.
+
+### 373 HSFM — DISJOINT, absorbed at full strength
+
+The full-text read did what the secondhand citation could not: both
+failure instances quoted with their regimes (a saddle-node
+continuation endpoint at α=1/4, Re 15.03-26.68; a long-period
+non-convergence at α=1/8, Re=22), and both are disjoint from the
+costed retry's regime on TWO independent axes — domain parameter and
+Reynolds number — with the retry's own regime cross-checked against
+the target paper rather than assumed. Risk #2 (hookstep
+non-universality) NARROWS: what remains of it is subsumed into risk
+#1 (sample size) by pointer. The stop packet's risk table cites this
+leg; the leg correctly did not edit the packet itself. Endorsed
+without amendment.
+
+### Refill — B ← leg 376 R3SP, with the provenance of the question
+stated
+
+Not manufacture: 348's own record contains the refusal that leaves
+this measurable and unmeasured — 343's continuous-spectrum finding
+covers ONLY the ℓ=0 radial channel of a related operator, and 348
+correctly carried it as "risk factor only, not transferred as proof
+across operators" when ruling out classification (iii). The full
+rescaled 3D operator's remaining channels have never been measured on
+the compactified basis. The answer bears directly on the POCP user
+item: measured-continuous across channels HARDENS the domain-shape
+obstruction (no discrete anchors for a Galerkin-tail bridge);
+discrete components found SOFTEN it (anchors exist, and the cost-class
+C estimate changes shape). Same decision as 374 feeds, different face.
+
+```
+### 376 — ROUTE-R3SP: THE SPECTRUM OF THE RESCALED OPERATOR BEYOND
+ℓ=0 — MEASURED ON THE COMPACTIFIED BASIS WITH 343's CONTROL PATTERN
+(the transfer 348 refused to assume, measured instead)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** 343/B1 measured the ℓ=0 radial channel of
+−Δ + ½(y·∇) + 1 continuous, licensed by a planted-Gaussian-well
+positive control converging a genuine eigenvalue to 8 digits. The
+route-4 object's operator acts on more than the ℓ=0 channel, and 348
+refused (correctly) to transfer the finding. Measure the ℓ=1 and ℓ=2
+channels (and the coupled structure if the decomposition warrants) on
+leg 313's compactified variable with 350's enriched basis available:
+continuous, or discrete components — with the SAME control pattern
+(planted well must converge; drift-0 analytic null must read null)
+proving the filter can detect what it reports absent.
+**Gate.** Per channel: a definite CONTINUOUS or
+DISCRETE-COMPONENT-FOUND verdict (eigenvalue and convergence digits
+reported if found), each licensed by both planted controls — plus the
+consequence stated for the POCP item (obstruction hardened / softened
+/ unchanged, one line, no spend committed)?
+  yes (any verdicts) -> Bank; the POCP decision item cites this leg
+        beside 374's inventory.
+  no  -> A channel resists measurement at feasible resolution: report
+        the resolution wall with magnitudes; that is itself
+        cost-class information for the same decision.
+**Territory.** experiments/p2_route_r3sp_v1.py, writeup/data/
+p2_route_r3sp_v1.json, writeup/novelty/leg_376.md,
+experiments/journal/leg_376.md, writeup/figures/fig96* (only if the
+spectra warrant). Reads 343/350's landed modules read-only; edits
+neither. TIER-2 note in its own text: a spectrum is apparatus
+information, not a result about the equations.
+**Difficulty.** standard
+**Preconditions:** Legs 343 and 350 landed (TRUE, long since). Route
+4's stop is untouched: this measures landed apparatus for a USER
+decision, commits no 3-D search cost.
+```
+
+Legal and eligible: math, measured with controls. **Floor 2/4
+(374, 376).** FLOOR-TABLE synced (B 373→376).
+
+### Standing state
+
+A/299 TESTA; C/374 SBIV; D/375 PBLG. Route 4: stopped. With the user:
+seven items + upgraded item 6. After 299/374/375/376 land, the same
+statement stands: rulings or wind-down.
+
+**Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
+Immediately dispatchable: **0**. Next fresh leg number: **377.**
+
+Nothing in this update lifts a ban. A risk narrowed by reading, and a
+refusal-to-assume converted into a measurement; no L1-L4 link moved;
+Clay stays ~0.05%.
