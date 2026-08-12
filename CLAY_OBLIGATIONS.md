@@ -57,10 +57,26 @@ italicised word is an obligation below.
 >   shortcut: the forcing must itself satisfy (4),(5), so it buys no escape from the decay
 >   and bounded-energy obligations that §4 and §5 price.
 >
-> A further clause is **named but not authorised**: statement **(D)** (breakdown on the torus)
-> carries *no* decay condition and *no* bounded-energy condition, which would make §4 vacuous
-> by construction — at the cost of re-opening §2's rigidity screen. No leg is dispatched
-> against it; it is recorded so it is not rediscovered as new.
+> A further clause is **named but not authorised**: statement **(D)** (breakdown on the torus).
+> **Priced, and the price corrected, by leg 390 (DTOR, `e89cdbd`) — which makes no retarget
+> recommendation, and neither does this document.** What is supportable is narrower than what
+> was written here: machine-read against (D)'s own banked text, (D)'s **solution** conditions are
+> (1),(2),(3),(10),(11) and contain no (7), so exactly one condition leaves — **(7) bounded
+> energy** — and exactly one arrives, (10) periodicity. (D)'s **data** conditions are (8),(9),
+> **whose verbatim text is not in this repository**, so no claim about what they do or do not
+> require is supportable here and none is made. (A leg with outreach should close that gap:
+> `writeup/data/p2_route_cloc_v1.json` banks (4),(5),(6),(7),(10),(11),(A),(C),(D) but not
+> (8),(9).) **(D) deletes the acceptance test, not the work.** A non-constant exactly-λ-DSS field
+> does not exist on `T³` (measured: at λ = 1.7 one DSS step leaves 342 modes in a 64-band and two
+> steps leave 0; the λ = 1 control leaves 2,146,688 and never annihilates), so (D) is reachable
+> only by periodizing the `ℝ³` object, at one of two prices: **wrap the uncut profile** and the
+> lattice sum converges only above `α = 2.996995` against §4's `α > 1.5` — both against the same
+> a-priori `α = 1.0`, a **3.993989× repurchase in deficit** (torus size is a prefactor only,
+> measured L-exponent −1.0000000000000002); or **cut off first and then wrap**, whose wrapping
+> bill is `0.0` at `L > 2ρ` but which inherits **leg 381's entire cutoff bill unchanged**,
+> the log-divergent critical `L³` tail at 326.875 per decade included. And the cost §2 pays is
+> total: **0 of 4 rigidity clearances carry to `T³`** (all four are `ℝ³`-only, two of them via the
+> ansatz class rather than the ambient space). It is recorded so it is not rediscovered as new.
 
 ---
 
@@ -88,7 +104,9 @@ without it.
 
 **Obligation.** The profile is non-trivial and survives every published rigidity theorem.
 
-**Method status: LARGELY DISCHARGED, and this is the programme's strongest position.** The
+**Method status: LARGELY DISCHARGED, and this is the programme's strongest position *for the
+`ℝ³` target*.** (Scope word added per leg 390: **0 of these 4 clearances carry to `T³`**, so on
+the (D) variant §2 re-opens in full — the position is strong, and it is strong about `ℝ³`.) The
 repository has an executable screen (`solver/dssp_screen.py`) encoding the exclusions, with
 the object clearing each:
 
