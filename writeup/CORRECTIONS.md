@@ -1654,3 +1654,55 @@ per territory). No link of the `L1 → L4` chain moved. Clay odds stay **~0.05%*
 that leg 221's honest, undischarged flag now has a name and a closed status: **harness bug, not
 staleness, not environment** — and the two "flipped" predicates never actually flipped against a
 correctly re-run gate.
+
+---
+
+## §24 — environment-portability census (leg 287): leg 252's finding generalizes to ONE other
+family, not to the other eight numerically-live ones
+
+Leg 252 (`writeup/data/p2_route_d_v11_anchor.json`) found that regenerating one banked artifact
+family with zero code change, in a later environment, moved 202 of 359 leaves (46 by >10%, one
+`converged: True -> False` flip) — and left open whether that was an outlier or the norm across
+this repository's other banked artifact families. Leg 287 censused N=10 other families (chosen
+in advance, in `writeup/novelty/leg_287.md`, before any number was regenerated; explicitly
+excluding the v11 anchor family itself, owned by the separate 236/226/252 consolidation), banked
+in full at `writeup/data/p2_route_epa_v1_census.json`. Answer: **outlier, not the norm.** Nine of
+the ten families reproduce their own banked bytes EXACTLY (`max_rel_move = 0.0`) when regenerated
+with the same code at their own banking commit, in this environment. The exception is
+`p2_route_e_v1_spectrum` (`experiments/p2_route_e_v1_spectrum.py`): `max_rel_move = 1.880`, 62
+leaves moved by >10%, with the worst movers showing an index-level sign/ordering swap in an `E5`
+spectral sweep near a degeneracy, plus (a strictly worse finding than leg 252's) run-to-run
+disagreement between two independent regenerations made in THE SAME environment
+(`determinism_control.two_processes_agree_on_nonvolatile_leaves: false`).
+
+**The generalization, stated no further than the data supports:** for
+`writeup/data/p2_route_e_v1_spectrum.json` specifically, banked leaf values are environment-local
+and (per its own determinism control) not fully process-stable even within one environment;
+compare its findings via a fresh re-solve in the environment you are actually working in, not by
+reading the banked bytes as ground truth, exactly as leg 252 already established for the v11
+anchor family. This does NOT extend to the other eight numerically-live families the census
+measured (`p2_route_mf2_v1_residual`, `p2_route_l1rh_v1_construction`, `p2_route_hhr_v1_repair`,
+`p2_route_h2i_v1_scoping`, `p2_route_nka_v1_adversarial`, `p2_route_dpa_v1_adversarial`,
+`p2_route_cvf_v1_classify`, `p2_route_cap_v1_audit`) — the census positively confirmed those
+reproduce exactly at their own banking commit, so their banked bytes ARE a valid stand-in for a
+fresh re-solve, and this entry does not manufacture doubt about them.
+
+One further, distinct thing the census surfaced and which this pointer explicitly does NOT fold
+into the environment-portability lesson above: `p2_route_nka_v1_adversarial` fails to run at all
+at today's HEAD (`solver/nk_bounds.py` now raises inside `farfield_modelling_error_bound` because
+a later, unrelated leg tightened a validity boundary that one of `nka`'s adversarial cases now
+sits exactly on) — a source-code change, not an environment effect, and not a harness/argv bug
+either (the census's own invocation is identical at both refs; see
+`experiments/journal/leg_287.md` §4 for the full three-way distinction). Recorded as
+`classification_at_head: IRREPRODUCIBLE-AT-HEAD` in the census JSON; no CORRECTIONS pointer is
+warranted for it because it is not a claim about banked VALUES being untrustworthy, only about
+one adversarial case no longer running against current solver code.
+
+### The ceiling
+
+**0 numbers re-measured. 0 banked files modified (SHA-256 manifest before/after the census is
+identical over all 23 hashed files;** `writeup/data/p2_route_epa_v1_census.json`'s own
+`read_only_guarantee.zero_banked_files_modified: true`**). 0 gate answers changed.** This entry
+adds a re-solve-not-bytes pointer for exactly one family and explicitly withholds it from the
+other eight measured; it does not touch `writeup/data/p2_route_d_v11_anchor.json` or any of its
+own consolidation work. Clay stays **~0.05%**.

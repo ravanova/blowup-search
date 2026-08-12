@@ -1,0 +1,2871 @@
+{
+  "leg": 287,
+  "route": "ROUTE-EPA",
+  "title": "environment-portability census of banked artifact families (leg 252's finding, generalized)",
+  "purpose": "Leg 252 found one banked artifact family regenerates 202/359 leaves differently across environments with zero code change. This censuses N=10 OTHER families, enumerated in writeup/novelty/leg_287.md before any number was regenerated, to measure whether that is an outlier or the norm.",
+  "environment": {
+    "hostname": "AH01",
+    "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "cpu_model": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
+    "cpu_count": 12,
+    "python_version": "3.12.3",
+    "python_implementation": "CPython",
+    "python_executable": "/home/andy/projects/Unsolved/.venv/bin/python",
+    "libc": "glibc-2.39",
+    "float_repr_style": "short",
+    "maxsize": 9223372036854775807,
+    "byteorder": "little",
+    "thread_env": {
+      "OMP_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "NUMEXPR_NUM_THREADS": null,
+      "VECLIB_MAXIMUM_THREADS": null
+    },
+    "numpy_version": "2.5.1",
+    "blas_name": "scipy-openblas",
+    "blas_version": "0.3.33.112.0",
+    "lapack_name": "scipy-openblas",
+    "lapack_version": "0.3.33.112.0",
+    "compilers": {
+      "c": "14.2.1",
+      "cython": "3.2.8",
+      "c++": "14.2.1"
+    },
+    "simd_baseline": [
+      "X86_V2"
+    ],
+    "simd_found": [
+      "X86_V3"
+    ],
+    "scipy_import_error": "ModuleNotFoundError(\"No module named 'scipy'\")"
+  },
+  "thresholds": {
+    "PORTABLE_max_rel_move_below": 1e-09,
+    "DRIFT_max_rel_move_at_or_above": 0.001,
+    "over_10pct_threshold": 0.1,
+    "note": "fixed before the run; PORTABLE also requires zero verdict flips, zero string moves and zero structural leaf moves"
+  },
+  "verdict_key_tokens": [
+    "gate",
+    "verdict",
+    "converged",
+    "classification",
+    "decision",
+    "flag",
+    "status",
+    "pass",
+    "fail",
+    "holds",
+    "answer",
+    "conclusion",
+    "outcome",
+    "class",
+    "category",
+    "portable",
+    "admissible",
+    "refuted",
+    "confirmed"
+  ],
+  "volatile_key_tokens": [
+    "timestamp",
+    "generated_at",
+    "date",
+    "elapsed",
+    "runtime",
+    "wall",
+    "duration",
+    "seconds_",
+    "_seconds",
+    "hostname",
+    "host",
+    "cwd",
+    "abspath",
+    "tmpdir",
+    "tempdir",
+    "pid",
+    "git_head",
+    "git_commit",
+    "commit_hash",
+    "run_at",
+    "created",
+    "machine_id",
+    "uuid"
+  ],
+  "read_only_guarantee": {
+    "method": "censused runners execute inside a throwaway copytree of the repo, so their ROOT-relative writes land in the copy",
+    "banked_sha256_before": {
+      "writeup/data/p2_route_e_v1_spectrum.json": "8b2d5f5d6c2740cc269ccc44ae219f4b834e7921c8e68cd230465df89295b73a",
+      "experiments/p2_route_e_v1_spectrum.py": "8e9279649e950f673ab9c5c5338ef3957b9068da27559874c4c8236c59171507",
+      "writeup/data/p2_route_mf2_v1_residual.json": "8e9370ea5925dd5de715e40a7973fac9160f60b6b90ee272b58539b89cc9eae3",
+      "experiments/p2_route_mf2_v1_residual.py": "604e2ad47970687eaf3797aefec6fc2c2d83b86943ae12bd8926ea03302cd09b",
+      "writeup/data/p2_route_cvf_v1_classify.json": "4faaa63c002ad3d65e8b77c1cf71fa8d8f9c79919becd8b7694c752adddfc85a",
+      "experiments/p2_route_cvf_v1_classify.py": "25c738bf4ed0fa0d2792563f4d82500143ef61d84a334b212582773cab9834bb",
+      "writeup/data/p2_route_l1rh_v1_construction.json": "883ddd0aaf0f394714b5ba8dfd1a7be5c02a8497ec0e3cfb83a19da858b3aca0",
+      "experiments/p2_route_l1rh_v1_construction.py": "ccaa1fcb85b84c2af988e2867d2353bfebe11abdacb24368b305dc45b3864125",
+      "writeup/data/p2_route_hhr_v1_repair.json": "6d7d003fb2baab236970178d2d3768953ac5b8a77078952e4de041dead6d8eb6",
+      "experiments/p2_route_hhr_v1_repair.py": "9c27fa35b547f2748ba16522b0f372f404c6b531d2fa6d93cd66b62b703c4a14",
+      "writeup/data/p2_route_h2i_v1_scoping.json": "0bc700f662439a8877a316c17019fe829a30e4fb7e0b015a9a5484dc38b9d8e1",
+      "experiments/p2_route_h2i_v1_scoping.py": "260c8859926f9ccc7bd6222964c449de73179341063f4c952b105ffd9316d85c",
+      "writeup/data/p2_route_nka_v1_adversarial.json": "03a4a7449b325056453b30b4fe619ca7e07ece8d8371924089809075c7d90fc0",
+      "experiments/p2_route_nka_v1_adversarial.py": "1f17e0bbc7ffcd4ebaa1d5710f2639f9c1c493ace9d6cbb19ce9f6a30b87e6bf",
+      "writeup/data/p2_route_dpa_v1_adversarial.json": "3442c85c95258524d1a1be7e0e27b531fa5c4e6d8fbd0ab6bf61cf76cd23eda6",
+      "experiments/p2_route_dpa_v1_adversarial.py": "d92e4a7aac9d8eb2f564b3a2f1a5faa5476dca0ed89c1409e09da23f72ef2375",
+      "writeup/data/p2_route_cap_v1_audit.json": "c9440fc23dce5b0be3ea064560983d39bf3bb3b8385012166ca7a3e6d6b2388b",
+      "experiments/p2_route_cap_v1_audit.py": "50404b61619488efcc24f699c5a1d05671c48cf1ad71aaf961ec334d7952d714",
+      "writeup/data/p2_route_alsl2_v1_lit.json": "2ff20173c57bfe226d72766a39d94e92d251af96a1af8921270e88a8b248c2d6",
+      "experiments/p2_route_alsl2_v1_lit.py": "7297a86d25c433cfff9e9a776d52caaebca4ff227a761a2697fb97aa9946c35b",
+      "writeup/data/p2_route_d_v11_anchor.json": "611e4b3520602bcbba38cef93e4ccd89a1e010423e4d814c43cf8967c5e560e3",
+      "experiments/p2_route_d_v11_anchor.py": "33c329948928282838d64069a3c96392ede7b43052423100ccdae1755c9885bc",
+      "solver/profile_newton.py": "8a182e9de3f6ed1b602d9234238d375eb6029f7fee4851304af6e9cefa5a489f"
+    },
+    "banked_sha256_after": {
+      "writeup/data/p2_route_e_v1_spectrum.json": "8b2d5f5d6c2740cc269ccc44ae219f4b834e7921c8e68cd230465df89295b73a",
+      "experiments/p2_route_e_v1_spectrum.py": "8e9279649e950f673ab9c5c5338ef3957b9068da27559874c4c8236c59171507",
+      "writeup/data/p2_route_mf2_v1_residual.json": "8e9370ea5925dd5de715e40a7973fac9160f60b6b90ee272b58539b89cc9eae3",
+      "experiments/p2_route_mf2_v1_residual.py": "604e2ad47970687eaf3797aefec6fc2c2d83b86943ae12bd8926ea03302cd09b",
+      "writeup/data/p2_route_cvf_v1_classify.json": "4faaa63c002ad3d65e8b77c1cf71fa8d8f9c79919becd8b7694c752adddfc85a",
+      "experiments/p2_route_cvf_v1_classify.py": "25c738bf4ed0fa0d2792563f4d82500143ef61d84a334b212582773cab9834bb",
+      "writeup/data/p2_route_l1rh_v1_construction.json": "883ddd0aaf0f394714b5ba8dfd1a7be5c02a8497ec0e3cfb83a19da858b3aca0",
+      "experiments/p2_route_l1rh_v1_construction.py": "ccaa1fcb85b84c2af988e2867d2353bfebe11abdacb24368b305dc45b3864125",
+      "writeup/data/p2_route_hhr_v1_repair.json": "6d7d003fb2baab236970178d2d3768953ac5b8a77078952e4de041dead6d8eb6",
+      "experiments/p2_route_hhr_v1_repair.py": "9c27fa35b547f2748ba16522b0f372f404c6b531d2fa6d93cd66b62b703c4a14",
+      "writeup/data/p2_route_h2i_v1_scoping.json": "0bc700f662439a8877a316c17019fe829a30e4fb7e0b015a9a5484dc38b9d8e1",
+      "experiments/p2_route_h2i_v1_scoping.py": "260c8859926f9ccc7bd6222964c449de73179341063f4c952b105ffd9316d85c",
+      "writeup/data/p2_route_nka_v1_adversarial.json": "03a4a7449b325056453b30b4fe619ca7e07ece8d8371924089809075c7d90fc0",
+      "experiments/p2_route_nka_v1_adversarial.py": "1f17e0bbc7ffcd4ebaa1d5710f2639f9c1c493ace9d6cbb19ce9f6a30b87e6bf",
+      "writeup/data/p2_route_dpa_v1_adversarial.json": "3442c85c95258524d1a1be7e0e27b531fa5c4e6d8fbd0ab6bf61cf76cd23eda6",
+      "experiments/p2_route_dpa_v1_adversarial.py": "d92e4a7aac9d8eb2f564b3a2f1a5faa5476dca0ed89c1409e09da23f72ef2375",
+      "writeup/data/p2_route_cap_v1_audit.json": "c9440fc23dce5b0be3ea064560983d39bf3bb3b8385012166ca7a3e6d6b2388b",
+      "experiments/p2_route_cap_v1_audit.py": "50404b61619488efcc24f699c5a1d05671c48cf1ad71aaf961ec334d7952d714",
+      "writeup/data/p2_route_alsl2_v1_lit.json": "2ff20173c57bfe226d72766a39d94e92d251af96a1af8921270e88a8b248c2d6",
+      "experiments/p2_route_alsl2_v1_lit.py": "7297a86d25c433cfff9e9a776d52caaebca4ff227a761a2697fb97aa9946c35b",
+      "writeup/data/p2_route_d_v11_anchor.json": "611e4b3520602bcbba38cef93e4ccd89a1e010423e4d814c43cf8967c5e560e3",
+      "experiments/p2_route_d_v11_anchor.py": "33c329948928282838d64069a3c96392ede7b43052423100ccdae1755c9885bc",
+      "solver/profile_newton.py": "8a182e9de3f6ed1b602d9234238d375eb6029f7fee4851304af6e9cefa5a489f"
+    },
+    "zero_banked_files_modified": true
+  },
+  "summary": {
+    "n_families_censused": 10,
+    "primary_measurement": "banked bytes vs regeneration AT THE ARTIFACT'S OWN BANKING COMMIT, so the code is byte-identical to what produced the bank and every move is attributable to the environment -- the same condition leg 252 measured under",
+    "classification_counts": {
+      "NON-PORTABLE": 1,
+      "PORTABLE": 9
+    },
+    "families_by_classification": {
+      "NON-PORTABLE": [
+        "p2_route_e_v1_spectrum"
+      ],
+      "PORTABLE": [
+        "p2_route_alsl2_v1_lit",
+        "p2_route_cap_v1_audit",
+        "p2_route_cvf_v1_classify",
+        "p2_route_dpa_v1_adversarial",
+        "p2_route_h2i_v1_scoping",
+        "p2_route_hhr_v1_repair",
+        "p2_route_l1rh_v1_construction",
+        "p2_route_mf2_v1_residual",
+        "p2_route_nka_v1_adversarial"
+      ]
+    },
+    "classification_counts_at_head": {
+      "IRREPRODUCIBLE-AT-HEAD": 1,
+      "NON-PORTABLE": 2,
+      "PORTABLE": 7
+    },
+    "families_by_classification_at_head": {
+      "IRREPRODUCIBLE-AT-HEAD": [
+        "p2_route_nka_v1_adversarial"
+      ],
+      "NON-PORTABLE": [
+        "p2_route_cap_v1_audit",
+        "p2_route_e_v1_spectrum"
+      ],
+      "PORTABLE": [
+        "p2_route_alsl2_v1_lit",
+        "p2_route_cvf_v1_classify",
+        "p2_route_dpa_v1_adversarial",
+        "p2_route_h2i_v1_scoping",
+        "p2_route_hhr_v1_repair",
+        "p2_route_l1rh_v1_construction",
+        "p2_route_mf2_v1_residual"
+      ]
+    },
+    "n_families_where_source_change_also_moves_leaves": 1,
+    "families_where_source_change_also_moves_leaves": [
+      {
+        "family": "p2_route_cap_v1_audit",
+        "n_moved": 101,
+        "n_flag_flips": 58,
+        "n_structural": 384,
+        "max_rel_move": 1.0
+      }
+    ],
+    "total_banked_leaves_compared": 12143,
+    "total_numeric_leaves_moved": 822,
+    "total_leaves_over_10pct": 62,
+    "total_flag_flips": 0,
+    "worst_family_by_max_rel_move": {
+      "family": "p2_route_e_v1_spectrum",
+      "max_rel_move": 1.8797120248172916
+    },
+    "ranked_max_rel_move": [
+      {
+        "family": "p2_route_e_v1_spectrum",
+        "max_rel_move": 1.8797120248172916
+      },
+      {
+        "family": "p2_route_nka_v1_adversarial",
+        "max_rel_move": 3.847279809196043e-12
+      },
+      {
+        "family": "p2_route_mf2_v1_residual",
+        "max_rel_move": 0.0
+      },
+      {
+        "family": "p2_route_l1rh_v1_construction",
+        "max_rel_move": 0.0
+      },
+      {
+        "family": "p2_route_hhr_v1_repair",
+        "max_rel_move": 0.0
+      },
+      {
+        "family": "p2_route_h2i_v1_scoping",
+        "max_rel_move": 0.0
+      },
+      {
+        "family": "p2_route_dpa_v1_adversarial",
+        "max_rel_move": 0.0
+      },
+      {
+        "family": "p2_route_cvf_v1_classify",
+        "max_rel_move": 0.0
+      },
+      {
+        "family": "p2_route_cap_v1_audit",
+        "max_rel_move": 0.0
+      },
+      {
+        "family": "p2_route_alsl2_v1_lit",
+        "max_rel_move": 0.0
+      }
+    ],
+    "positive_control_fired_for_all_families": true,
+    "positive_control_results": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "determinism_control_all_agree": false,
+    "determinism_control_results": [
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "negative_controls_all_portable": true,
+    "negative_control_classifications": {
+      "p2_route_cap_v1_audit": "PORTABLE",
+      "p2_route_alsl2_v1_lit": "PORTABLE"
+    },
+    "newton_family_moved_leaf_fraction": 0.24689745264532986,
+    "non_newton_numeric_moved_leaf_fraction": 0.01405152224824356,
+    "zero_banked_files_modified": true,
+    "banked_files_changed": [],
+    "n_banked_files_hashed_before_and_after": 23,
+    "v11_anchor_family_excluded": [
+      "p2_route_d_v11_anchor"
+    ],
+    "elapsed_seconds": 0.1
+  },
+  "families": [
+    {
+      "family": "p2_route_e_v1_spectrum",
+      "genre": "newton-heavy",
+      "why_chosen": "4 flow.newton(...) call sites -- closest structural analogue to the v11 anchor family",
+      "is_negative_control": false,
+      "banked_json": "writeup/data/p2_route_e_v1_spectrum.json",
+      "runner": "experiments/p2_route_e_v1_spectrum.py",
+      "banked_sha256": "8b2d5f5d6c2740cc269ccc44ae219f4b834e7921c8e68cd230465df89295b73a",
+      "runner_sha256": "8e9279649e950f673ab9c5c5338ef3957b9068da27559874c4c8236c59171507",
+      "n_banked_leaves": 1370,
+      "provenance": {
+        "banked_json_path": "writeup/data/p2_route_e_v1_spectrum.json",
+        "banking_commit": "c45e81890a06467687b11d7160b98ab2991fb24f",
+        "banking_commit_short": "c45e81890a",
+        "banking_commit_date": "2026-08-02T01:00:55+00:00",
+        "banking_commit_subject": "Route-E v1 banked: notes \u00a726, journal, continuation prompt, E9 restored",
+        "runner_changed_since_banking": false,
+        "n_repo_files_changed_since_banking": 1078,
+        "n_solver_files_changed_since_banking": 37,
+        "n_commits_since_banking": 817
+      },
+      "determinism_repeat_triggered": true,
+      "determinism_repeat_policy": "a second independent regeneration at the banking commit is run IFF the first one moved at least one leaf; an exact reproduction of the banked bytes already establishes determinism",
+      "regeneration_runs_at_banking_commit": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 3086.17,
+          "copy_seconds": 0.35,
+          "stderr_tail": "",
+          "error": null,
+          "ref": "c45e81890a06467687b11d7160b98ab2991fb24f"
+        },
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 1958.48,
+          "copy_seconds": 0.1,
+          "stderr_tail": "",
+          "error": null,
+          "ref": "c45e81890a06467687b11d7160b98ab2991fb24f"
+        }
+      ],
+      "regeneration_run_at_head": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 1890.57,
+          "copy_seconds": 0.15,
+          "stderr_tail": "",
+          "error": null,
+          "ref": null
+        }
+      ],
+      "comparison": {
+        "n_leaves_banked": 1370,
+        "n_leaves_regenerated": 1370,
+        "n_leaves_shared": 1370,
+        "n_numeric_leaves_compared": 1235,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 756,
+        "n_leaves_over_10pct": 62,
+        "max_rel_move": 1.8797120248172916,
+        "worst_mover": {
+          "path": "E5_sweep[0].kept.0.1[5][1]",
+          "banked": -8.134856362628964,
+          "regenerated": 7.156330962366153,
+          "rel_move": 1.8797120248172916,
+          "is_verdict_leaf": false
+        },
+        "top_movers": [
+          {
+            "path": "E5_sweep[0].kept.0.1[5][1]",
+            "banked": -8.134856362628964,
+            "regenerated": 7.156330962366153,
+            "rel_move": 1.8797120248172916
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[10][1]",
+            "banked": 7.156330962366172,
+            "regenerated": -14.827656238000083,
+            "rel_move": 1.482633994712262
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[9][1]",
+            "banked": -7.156330962366172,
+            "regenerated": 14.827656238000083,
+            "rel_move": 1.482633994712262
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[0][1]",
+            "banked": -0.27101893258056947,
+            "regenerated": 0.8397161688663871,
+            "rel_move": 1.322750641977567
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[1][1]",
+            "banked": 0.27101893258056947,
+            "regenerated": -0.8397161688663871,
+            "rel_move": 1.322750641977567
+          },
+          {
+            "path": "E8_third_mode.rows[2].near.0[0]",
+            "banked": -3.834894148807153e-11,
+            "regenerated": 1.3209056969471872e-10,
+            "rel_move": 1.2903230834472266
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[5][0]",
+            "banked": -1.199040866595169e-14,
+            "regenerated": 2.886579864025407e-15,
+            "rel_move": 1.2407407407407407
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[13][1]",
+            "banked": -0.8397161688664991,
+            "regenerated": 8.134856362628973,
+            "rel_move": 1.1032244616787708
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[14][1]",
+            "banked": 0.8397161688664991,
+            "regenerated": -8.134856362628973,
+            "rel_move": 1.1032244616787708
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[6][0]",
+            "banked": -1.199040866595169e-14,
+            "regenerated": 8.553424954055069e-17,
+            "rel_move": 1.007133555821449
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[11][1]",
+            "banked": -45.173675445166865,
+            "regenerated": 0.27101893258070425,
+            "rel_move": 1.0059994881955017
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[12][1]",
+            "banked": 45.173675445166865,
+            "regenerated": -0.27101893258070425,
+            "rel_move": 1.0059994881955017
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[4][1]",
+            "banked": 0.0,
+            "regenerated": -7.156330962366153,
+            "rel_move": 1.0
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[6][1]",
+            "banked": 8.134856362628964,
+            "regenerated": 0.0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[2][0]",
+            "banked": 4.440892098500626e-16,
+            "regenerated": 7.549516567451064e-15,
+            "rel_move": 0.9411764705882353
+          }
+        ],
+        "over_10pct_sample": [
+          {
+            "path": "E5_sweep[0].kept.0.1[5][1]",
+            "banked": -8.134856362628964,
+            "regenerated": 7.156330962366153,
+            "rel_move": 1.8797120248172916
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[10][1]",
+            "banked": 7.156330962366172,
+            "regenerated": -14.827656238000083,
+            "rel_move": 1.482633994712262
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[9][1]",
+            "banked": -7.156330962366172,
+            "regenerated": 14.827656238000083,
+            "rel_move": 1.482633994712262
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[0][1]",
+            "banked": -0.27101893258056947,
+            "regenerated": 0.8397161688663871,
+            "rel_move": 1.322750641977567
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[1][1]",
+            "banked": 0.27101893258056947,
+            "regenerated": -0.8397161688663871,
+            "rel_move": 1.322750641977567
+          },
+          {
+            "path": "E8_third_mode.rows[2].near.0[0]",
+            "banked": -3.834894148807153e-11,
+            "regenerated": 1.3209056969471872e-10,
+            "rel_move": 1.2903230834472266
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[5][0]",
+            "banked": -1.199040866595169e-14,
+            "regenerated": 2.886579864025407e-15,
+            "rel_move": 1.2407407407407407
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[13][1]",
+            "banked": -0.8397161688664991,
+            "regenerated": 8.134856362628973,
+            "rel_move": 1.1032244616787708
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[14][1]",
+            "banked": 0.8397161688664991,
+            "regenerated": -8.134856362628973,
+            "rel_move": 1.1032244616787708
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[6][0]",
+            "banked": -1.199040866595169e-14,
+            "regenerated": 8.553424954055069e-17,
+            "rel_move": 1.007133555821449
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[11][1]",
+            "banked": -45.173675445166865,
+            "regenerated": 0.27101893258070425,
+            "rel_move": 1.0059994881955017
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[12][1]",
+            "banked": 45.173675445166865,
+            "regenerated": -0.27101893258070425,
+            "rel_move": 1.0059994881955017
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[4][1]",
+            "banked": 0.0,
+            "regenerated": -7.156330962366153,
+            "rel_move": 1.0
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[6][1]",
+            "banked": 8.134856362628964,
+            "regenerated": 0.0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[2][0]",
+            "banked": 4.440892098500626e-16,
+            "regenerated": 7.549516567451064e-15,
+            "rel_move": 0.9411764705882353
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[3][0]",
+            "banked": 4.440892098500626e-16,
+            "regenerated": 7.549516567451064e-15,
+            "rel_move": 0.9411764705882353
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[4][0]",
+            "banked": 1.942264046257635e-16,
+            "regenerated": 2.886579864025407e-15,
+            "rel_move": 0.9327140028078384
+          },
+          {
+            "path": "E1_anchor[0].dist_to_0",
+            "banked": 1.5627658642808724e-16,
+            "regenerated": 2.0534333402689852e-17,
+            "rel_move": 0.8686026238988845
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[7][0]",
+            "banked": -1.509903313490213e-14,
+            "regenerated": -2.6645352591003757e-15,
+            "rel_move": 0.8235294117647058
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[8][0]",
+            "banked": -1.509903313490213e-14,
+            "regenerated": -2.6645352591003757e-15,
+            "rel_move": 0.8235294117647058
+          },
+          {
+            "path": "E1_anchor[3].dist_to_m1",
+            "banked": 2.4424906541753444e-15,
+            "regenerated": 4.440892098500626e-16,
+            "rel_move": 0.8181818181818182
+          },
+          {
+            "path": "E1_anchor[1].dist_to_0",
+            "banked": 3.488386934973715e-17,
+            "regenerated": 1.7659982821804428e-16,
+            "rel_move": 0.8024694038395851
+          },
+          {
+            "path": "E4_structural[0].amplitude_defect",
+            "banked": 3.3306690738754696e-16,
+            "regenerated": 1.1102230246251565e-16,
+            "rel_move": 0.6666666666666666
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[13][0]",
+            "banked": -6.75848266240564e-14,
+            "regenerated": -2.2648549702353193e-14,
+            "rel_move": 0.6648870636550308
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[14][0]",
+            "banked": -6.75848266240564e-14,
+            "regenerated": -2.2648549702353193e-14,
+            "rel_move": 0.6648870636550308
+          }
+        ],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 1,
+        "string_moves_sample": [
+          {
+            "path": "generated",
+            "banked": "2026-08-02T00:17:23Z",
+            "regenerated": "2026-08-11T17:27:03Z"
+          }
+        ],
+        "n_volatile_moves": 1,
+        "volatile_moves_sample": [
+          {
+            "path": "wall_clock_seconds",
+            "banked": 1202.5407593250275,
+            "regenerated": 3085.862012863159
+          }
+        ],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification": "NON-PORTABLE",
+      "comparison_at_head": {
+        "n_leaves_banked": 1370,
+        "n_leaves_regenerated": 1370,
+        "n_leaves_shared": 1370,
+        "n_numeric_leaves_compared": 1235,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 756,
+        "n_leaves_over_10pct": 62,
+        "max_rel_move": 1.8797120248172916,
+        "worst_mover": {
+          "path": "E5_sweep[0].kept.0.1[5][1]",
+          "banked": -8.134856362628964,
+          "regenerated": 7.156330962366153,
+          "rel_move": 1.8797120248172916,
+          "is_verdict_leaf": false
+        },
+        "top_movers": [
+          {
+            "path": "E5_sweep[0].kept.0.1[5][1]",
+            "banked": -8.134856362628964,
+            "regenerated": 7.156330962366153,
+            "rel_move": 1.8797120248172916
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[10][1]",
+            "banked": 7.156330962366172,
+            "regenerated": -14.827656238000083,
+            "rel_move": 1.482633994712262
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[9][1]",
+            "banked": -7.156330962366172,
+            "regenerated": 14.827656238000083,
+            "rel_move": 1.482633994712262
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[0][1]",
+            "banked": -0.27101893258056947,
+            "regenerated": 0.8397161688663871,
+            "rel_move": 1.322750641977567
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[1][1]",
+            "banked": 0.27101893258056947,
+            "regenerated": -0.8397161688663871,
+            "rel_move": 1.322750641977567
+          },
+          {
+            "path": "E8_third_mode.rows[2].near.0[0]",
+            "banked": -3.834894148807153e-11,
+            "regenerated": 1.3209056969471872e-10,
+            "rel_move": 1.2903230834472266
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[5][0]",
+            "banked": -1.199040866595169e-14,
+            "regenerated": 2.886579864025407e-15,
+            "rel_move": 1.2407407407407407
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[13][1]",
+            "banked": -0.8397161688664991,
+            "regenerated": 8.134856362628973,
+            "rel_move": 1.1032244616787708
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[14][1]",
+            "banked": 0.8397161688664991,
+            "regenerated": -8.134856362628973,
+            "rel_move": 1.1032244616787708
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[6][0]",
+            "banked": -1.199040866595169e-14,
+            "regenerated": 8.553424954055069e-17,
+            "rel_move": 1.007133555821449
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[11][1]",
+            "banked": -45.173675445166865,
+            "regenerated": 0.27101893258070425,
+            "rel_move": 1.0059994881955017
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[12][1]",
+            "banked": 45.173675445166865,
+            "regenerated": -0.27101893258070425,
+            "rel_move": 1.0059994881955017
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[4][1]",
+            "banked": 0.0,
+            "regenerated": -7.156330962366153,
+            "rel_move": 1.0
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[6][1]",
+            "banked": 8.134856362628964,
+            "regenerated": 0.0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[2][0]",
+            "banked": 4.440892098500626e-16,
+            "regenerated": 7.549516567451064e-15,
+            "rel_move": 0.9411764705882353
+          }
+        ],
+        "over_10pct_sample": [
+          {
+            "path": "E5_sweep[0].kept.0.1[5][1]",
+            "banked": -8.134856362628964,
+            "regenerated": 7.156330962366153,
+            "rel_move": 1.8797120248172916
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[10][1]",
+            "banked": 7.156330962366172,
+            "regenerated": -14.827656238000083,
+            "rel_move": 1.482633994712262
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[9][1]",
+            "banked": -7.156330962366172,
+            "regenerated": 14.827656238000083,
+            "rel_move": 1.482633994712262
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[0][1]",
+            "banked": -0.27101893258056947,
+            "regenerated": 0.8397161688663871,
+            "rel_move": 1.322750641977567
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[1][1]",
+            "banked": 0.27101893258056947,
+            "regenerated": -0.8397161688663871,
+            "rel_move": 1.322750641977567
+          },
+          {
+            "path": "E8_third_mode.rows[2].near.0[0]",
+            "banked": -3.834894148807153e-11,
+            "regenerated": 1.3209056969471872e-10,
+            "rel_move": 1.2903230834472266
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[5][0]",
+            "banked": -1.199040866595169e-14,
+            "regenerated": 2.886579864025407e-15,
+            "rel_move": 1.2407407407407407
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[13][1]",
+            "banked": -0.8397161688664991,
+            "regenerated": 8.134856362628973,
+            "rel_move": 1.1032244616787708
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[14][1]",
+            "banked": 0.8397161688664991,
+            "regenerated": -8.134856362628973,
+            "rel_move": 1.1032244616787708
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[6][0]",
+            "banked": -1.199040866595169e-14,
+            "regenerated": 8.553424954055069e-17,
+            "rel_move": 1.007133555821449
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[11][1]",
+            "banked": -45.173675445166865,
+            "regenerated": 0.27101893258070425,
+            "rel_move": 1.0059994881955017
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[12][1]",
+            "banked": 45.173675445166865,
+            "regenerated": -0.27101893258070425,
+            "rel_move": 1.0059994881955017
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[4][1]",
+            "banked": 0.0,
+            "regenerated": -7.156330962366153,
+            "rel_move": 1.0
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[6][1]",
+            "banked": 8.134856362628964,
+            "regenerated": 0.0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[2][0]",
+            "banked": 4.440892098500626e-16,
+            "regenerated": 7.549516567451064e-15,
+            "rel_move": 0.9411764705882353
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[3][0]",
+            "banked": 4.440892098500626e-16,
+            "regenerated": 7.549516567451064e-15,
+            "rel_move": 0.9411764705882353
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[4][0]",
+            "banked": 1.942264046257635e-16,
+            "regenerated": 2.886579864025407e-15,
+            "rel_move": 0.9327140028078384
+          },
+          {
+            "path": "E1_anchor[0].dist_to_0",
+            "banked": 1.5627658642808724e-16,
+            "regenerated": 2.0534333402689852e-17,
+            "rel_move": 0.8686026238988845
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[7][0]",
+            "banked": -1.509903313490213e-14,
+            "regenerated": -2.6645352591003757e-15,
+            "rel_move": 0.8235294117647058
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[8][0]",
+            "banked": -1.509903313490213e-14,
+            "regenerated": -2.6645352591003757e-15,
+            "rel_move": 0.8235294117647058
+          },
+          {
+            "path": "E1_anchor[3].dist_to_m1",
+            "banked": 2.4424906541753444e-15,
+            "regenerated": 4.440892098500626e-16,
+            "rel_move": 0.8181818181818182
+          },
+          {
+            "path": "E1_anchor[1].dist_to_0",
+            "banked": 3.488386934973715e-17,
+            "regenerated": 1.7659982821804428e-16,
+            "rel_move": 0.8024694038395851
+          },
+          {
+            "path": "E4_structural[0].amplitude_defect",
+            "banked": 3.3306690738754696e-16,
+            "regenerated": 1.1102230246251565e-16,
+            "rel_move": 0.6666666666666666
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[13][0]",
+            "banked": -6.75848266240564e-14,
+            "regenerated": -2.2648549702353193e-14,
+            "rel_move": 0.6648870636550308
+          },
+          {
+            "path": "E5_sweep[0].kept.0.1[14][0]",
+            "banked": -6.75848266240564e-14,
+            "regenerated": -2.2648549702353193e-14,
+            "rel_move": 0.6648870636550308
+          }
+        ],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 1,
+        "string_moves_sample": [
+          {
+            "path": "generated",
+            "banked": "2026-08-02T00:17:23Z",
+            "regenerated": "2026-08-11T18:51:07Z"
+          }
+        ],
+        "n_volatile_moves": 1,
+        "volatile_moves_sample": [
+          {
+            "path": "wall_clock_seconds",
+            "banked": 1202.5407593250275,
+            "regenerated": 1890.3596413135529
+          }
+        ],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification_at_head": "NON-PORTABLE",
+      "source_change_contribution": {
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "n_flag_flips": 0,
+        "n_structural_moves": 0,
+        "worst_mover": null,
+        "note": "same environment, code at banking commit vs code at HEAD -- everything here is source change, not environment"
+      },
+      "determinism_control": {
+        "two_processes_agree_on_nonvolatile_leaves": false,
+        "n_leaves_differing_between_repeats": 1,
+        "max_rel_move_between_repeats": 0.0,
+        "worst_between_repeats": null
+      },
+      "positive_control": {
+        "fired": true,
+        "leaf": "E6_control[1].strength",
+        "unperturbed_value": 6.0,
+        "perturbed_value": 6.0000000060000005,
+        "detected_rel_move": 1.0000000817403708e-09,
+        "detected_path": "E6_control[1].strength",
+        "n_moved_leaves_reported": 1,
+        "expected_n_moved_leaves": 1
+      }
+    },
+    {
+      "family": "p2_route_mf2_v1_residual",
+      "genre": "newton-adjacent",
+      "why_chosen": "carries its own worst_newton_residual_over_floor diagnostic",
+      "is_negative_control": false,
+      "banked_json": "writeup/data/p2_route_mf2_v1_residual.json",
+      "runner": "experiments/p2_route_mf2_v1_residual.py",
+      "banked_sha256": "8e9370ea5925dd5de715e40a7973fac9160f60b6b90ee272b58539b89cc9eae3",
+      "runner_sha256": "604e2ad47970687eaf3797aefec6fc2c2d83b86943ae12bd8926ea03302cd09b",
+      "n_banked_leaves": 1894,
+      "provenance": {
+        "banked_json_path": "writeup/data/p2_route_mf2_v1_residual.json",
+        "banking_commit": "2befd22307792e31be03f6db30f1d3160bbf6c05",
+        "banking_commit_short": "2befd22307",
+        "banking_commit_date": "2026-08-06T12:47:41+01:00",
+        "banking_commit_subject": "Leg 136: LEG \u2014 Route-MF2 v1: the residual gate 11 still misses is 3 mechanisms, and 0 of 5 pre-named criteria admit a threshold (best separation 0.548x, needs >1)",
+        "runner_changed_since_banking": false,
+        "n_repo_files_changed_since_banking": 587,
+        "n_solver_files_changed_since_banking": 21,
+        "n_commits_since_banking": 465
+      },
+      "determinism_repeat_triggered": false,
+      "determinism_repeat_policy": "a second independent regeneration at the banking commit is run IFF the first one moved at least one leaf; an exact reproduction of the banked bytes already establishes determinism",
+      "regeneration_runs_at_banking_commit": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 63.69,
+          "copy_seconds": 0.32,
+          "stderr_tail": "",
+          "error": null,
+          "ref": "2befd22307792e31be03f6db30f1d3160bbf6c05"
+        }
+      ],
+      "regeneration_run_at_head": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 62.4,
+          "copy_seconds": 0.15,
+          "stderr_tail": "",
+          "error": null,
+          "ref": null
+        }
+      ],
+      "comparison": {
+        "n_leaves_banked": 1894,
+        "n_leaves_regenerated": 1894,
+        "n_leaves_shared": 1894,
+        "n_numeric_leaves_compared": 1367,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 1,
+        "volatile_moves_sample": [
+          {
+            "path": "wall_s",
+            "banked": 66.1,
+            "regenerated": 63.4
+          }
+        ],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification": "PORTABLE",
+      "comparison_at_head": {
+        "n_leaves_banked": 1894,
+        "n_leaves_regenerated": 1894,
+        "n_leaves_shared": 1894,
+        "n_numeric_leaves_compared": 1367,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 1,
+        "volatile_moves_sample": [
+          {
+            "path": "wall_s",
+            "banked": 66.1,
+            "regenerated": 62.2
+          }
+        ],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification_at_head": "PORTABLE",
+      "source_change_contribution": {
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "n_flag_flips": 0,
+        "n_structural_moves": 0,
+        "worst_mover": null,
+        "note": "same environment, code at banking commit vs code at HEAD -- everything here is source change, not environment"
+      },
+      "determinism_control": {
+        "two_processes_agree_on_nonvolatile_leaves": true,
+        "n_leaves_differing_between_repeats": 0,
+        "max_rel_move_between_repeats": 0.0,
+        "reason": "not run: the single regeneration reproduced the banked bytes exactly, which already establishes cross-process AND cross-environment agreement",
+        "established_by": "exact reproduction of the bank"
+      },
+      "positive_control": {
+        "fired": true,
+        "leaf": "wellbehaved_battery[0].criteria.0.1.C5",
+        "unperturbed_value": 1.6375789613220523e-14,
+        "perturbed_value": 1.6375789629596313e-14,
+        "detected_rel_move": 1.0000000215249175e-09,
+        "detected_path": "wellbehaved_battery[0].criteria.0.1.C5",
+        "n_moved_leaves_reported": 1,
+        "expected_n_moved_leaves": 1
+      }
+    },
+    {
+      "family": "p2_route_cvf_v1_classify",
+      "genre": "float-heavy, no Newton",
+      "why_chosen": "32-row/6-group numeric convention classification (leg 281)",
+      "is_negative_control": false,
+      "banked_json": "writeup/data/p2_route_cvf_v1_classify.json",
+      "runner": "experiments/p2_route_cvf_v1_classify.py",
+      "banked_sha256": "4faaa63c002ad3d65e8b77c1cf71fa8d8f9c79919becd8b7694c752adddfc85a",
+      "runner_sha256": "25c738bf4ed0fa0d2792563f4d82500143ef61d84a334b212582773cab9834bb",
+      "n_banked_leaves": 1238,
+      "provenance": {
+        "banked_json_path": "writeup/data/p2_route_cvf_v1_classify.json",
+        "banking_commit": "367b71fe7012dbdc0f491c20990ea0e66d7a999e",
+        "banking_commit_short": "367b71fe70",
+        "banking_commit_date": "2026-08-07T05:43:57+01:00",
+        "banking_commit_subject": "Leg 281: LEG \u2014 the classification runner and its banked table: 32 rows over 6 groups, 0 unclassified. 14 CF (tail block 2.56e-12 over 8 decades of kappa), 1 CX (dual norm fits kappa^-1/2 to 1.11e-16),",
+        "runner_changed_since_banking": false,
+        "n_repo_files_changed_since_banking": 46,
+        "n_solver_files_changed_since_banking": 0,
+        "n_commits_since_banking": 48
+      },
+      "determinism_repeat_triggered": false,
+      "determinism_repeat_policy": "a second independent regeneration at the banking commit is run IFF the first one moved at least one leaf; an exact reproduction of the banked bytes already establishes determinism",
+      "regeneration_runs_at_banking_commit": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 135.85,
+          "copy_seconds": 0.31,
+          "stderr_tail": "",
+          "error": null,
+          "ref": "367b71fe7012dbdc0f491c20990ea0e66d7a999e"
+        }
+      ],
+      "regeneration_run_at_head": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 135.26,
+          "copy_seconds": 0.17,
+          "stderr_tail": "",
+          "error": null,
+          "ref": null
+        }
+      ],
+      "comparison": {
+        "n_leaves_banked": 1238,
+        "n_leaves_regenerated": 1238,
+        "n_leaves_shared": 1238,
+        "n_numeric_leaves_compared": 959,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 1,
+        "volatile_moves_sample": [
+          {
+            "path": "runtime_seconds_this_invocation",
+            "banked": 0.044252872467041016,
+            "regenerated": 135.6562478542328
+          }
+        ],
+        "n_provenance_moves": 1,
+        "provenance_moves": [
+          {
+            "path": "sections_served_from_cache_this_invocation",
+            "banked": true,
+            "regenerated": false
+          }
+        ],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification": "PORTABLE",
+      "comparison_at_head": {
+        "n_leaves_banked": 1238,
+        "n_leaves_regenerated": 1238,
+        "n_leaves_shared": 1238,
+        "n_numeric_leaves_compared": 959,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 1,
+        "volatile_moves_sample": [
+          {
+            "path": "runtime_seconds_this_invocation",
+            "banked": 0.044252872467041016,
+            "regenerated": 135.0236692428589
+          }
+        ],
+        "n_provenance_moves": 1,
+        "provenance_moves": [
+          {
+            "path": "sections_served_from_cache_this_invocation",
+            "banked": true,
+            "regenerated": false
+          }
+        ],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification_at_head": "PORTABLE",
+      "source_change_contribution": {
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "n_flag_flips": 0,
+        "n_structural_moves": 0,
+        "worst_mover": null,
+        "note": "same environment, code at banking commit vs code at HEAD -- everything here is source change, not environment"
+      },
+      "determinism_control": {
+        "two_processes_agree_on_nonvolatile_leaves": true,
+        "n_leaves_differing_between_repeats": 0,
+        "max_rel_move_between_repeats": 0.0,
+        "reason": "not run: the single regeneration reproduced the banked bytes exactly, which already establishes cross-process AND cross-environment agreement",
+        "established_by": "exact reproduction of the bank"
+      },
+      "positive_control": {
+        "fired": true,
+        "leaf": "S3_group_C_Z_battery.C1_Z1_K2.sweep.128.6.283185307",
+        "unperturbed_value": 182.22863326378518,
+        "perturbed_value": 182.22863344601384,
+        "detected_rel_move": 1.0000001490417471e-09,
+        "detected_path": "S3_group_C_Z_battery.C1_Z1_K2.sweep.128.6.283185307",
+        "n_moved_leaves_reported": 1,
+        "expected_n_moved_leaves": 1
+      }
+    },
+    {
+      "family": "p2_route_l1rh_v1_construction",
+      "genre": "interval / L1 construction",
+      "why_chosen": "a numerical method family that is not shooting/Newton",
+      "is_negative_control": false,
+      "banked_json": "writeup/data/p2_route_l1rh_v1_construction.json",
+      "runner": "experiments/p2_route_l1rh_v1_construction.py",
+      "banked_sha256": "883ddd0aaf0f394714b5ba8dfd1a7be5c02a8497ec0e3cfb83a19da858b3aca0",
+      "runner_sha256": "ccaa1fcb85b84c2af988e2867d2353bfebe11abdacb24368b305dc45b3864125",
+      "n_banked_leaves": 811,
+      "provenance": {
+        "banked_json_path": "writeup/data/p2_route_l1rh_v1_construction.json",
+        "banking_commit": "f8cdc07e993b512635cba8e150502eb0c0d8305f",
+        "banking_commit_short": "f8cdc07e99",
+        "banking_commit_date": "2026-08-06T17:00:52+01:00",
+        "banking_commit_subject": "Leg 177: LEG \u2014 Route-L1RH: the collocation-basis L1 death is NOT a space artifact \u2014 the realization change is worth 3.70x where 1.85e+07x is needed, and it fails at BOTH ends of a 6.86-decade bracket",
+        "runner_changed_since_banking": false,
+        "n_repo_files_changed_since_banking": 287,
+        "n_solver_files_changed_since_banking": 9,
+        "n_commits_since_banking": 289
+      },
+      "determinism_repeat_triggered": false,
+      "determinism_repeat_policy": "a second independent regeneration at the banking commit is run IFF the first one moved at least one leaf; an exact reproduction of the banked bytes already establishes determinism",
+      "regeneration_runs_at_banking_commit": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 503.82,
+          "copy_seconds": 0.37,
+          "stderr_tail": "",
+          "error": null,
+          "ref": "f8cdc07e993b512635cba8e150502eb0c0d8305f"
+        }
+      ],
+      "regeneration_run_at_head": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 574.76,
+          "copy_seconds": 0.2,
+          "stderr_tail": "",
+          "error": null,
+          "ref": null
+        }
+      ],
+      "comparison": {
+        "n_leaves_banked": 811,
+        "n_leaves_regenerated": 811,
+        "n_leaves_shared": 811,
+        "n_numeric_leaves_compared": 719,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 4,
+        "volatile_moves_sample": [
+          {
+            "path": "elapsed_s",
+            "banked": 2836.7054255008698,
+            "regenerated": 503.4819293022156
+          },
+          {
+            "path": "rungs[0].wall_s",
+            "banked": 69.02251935005188,
+            "regenerated": 12.944042205810547
+          },
+          {
+            "path": "rungs[1].wall_s",
+            "banked": 391.1574420928955,
+            "regenerated": 77.33139300346375
+          },
+          {
+            "path": "rungs[2].wall_s",
+            "banked": 2376.5084280967712,
+            "regenerated": 413.20533776283264
+          }
+        ],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification": "PORTABLE",
+      "comparison_at_head": {
+        "n_leaves_banked": 811,
+        "n_leaves_regenerated": 811,
+        "n_leaves_shared": 811,
+        "n_numeric_leaves_compared": 719,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 4,
+        "volatile_moves_sample": [
+          {
+            "path": "elapsed_s",
+            "banked": 2836.7054255008698,
+            "regenerated": 574.3907525539398
+          },
+          {
+            "path": "rungs[0].wall_s",
+            "banked": 69.02251935005188,
+            "regenerated": 8.661896228790283
+          },
+          {
+            "path": "rungs[1].wall_s",
+            "banked": 391.1574420928955,
+            "regenerated": 84.19678401947021
+          },
+          {
+            "path": "rungs[2].wall_s",
+            "banked": 2376.5084280967712,
+            "regenerated": 481.5306167602539
+          }
+        ],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification_at_head": "PORTABLE",
+      "source_change_contribution": {
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "n_flag_flips": 0,
+        "n_structural_moves": 0,
+        "worst_mover": null,
+        "note": "same environment, code at banking commit vs code at HEAD -- everything here is source change, not environment"
+      },
+      "determinism_control": {
+        "two_processes_agree_on_nonvolatile_leaves": true,
+        "n_leaves_differing_between_repeats": 0,
+        "max_rel_move_between_repeats": 0.0,
+        "reason": "not run: the single regeneration reproduced the banked bytes exactly, which already establishes cross-process AND cross-environment agreement",
+        "established_by": "exact reproduction of the bank"
+      },
+      "positive_control": {
+        "fired": true,
+        "leaf": "rungs[0].ratios.X_h.worst_over_tau",
+        "unperturbed_value": 94608117210.88306,
+        "perturbed_value": 94608117305.49118,
+        "detected_rel_move": 1.0000000684275925e-09,
+        "detected_path": "rungs[0].ratios.X_h.worst_over_tau",
+        "n_moved_leaves_reported": 1,
+        "expected_n_moved_leaves": 1
+      }
+    },
+    {
+      "family": "p2_route_hhr_v1_repair",
+      "genre": "repair record, self-hashing",
+      "why_chosen": "hashes its own record, so its internal determinism check is itself censused",
+      "is_negative_control": false,
+      "banked_json": "writeup/data/p2_route_hhr_v1_repair.json",
+      "runner": "experiments/p2_route_hhr_v1_repair.py",
+      "banked_sha256": "6d7d003fb2baab236970178d2d3768953ac5b8a77078952e4de041dead6d8eb6",
+      "runner_sha256": "9c27fa35b547f2748ba16522b0f372f404c6b531d2fa6d93cd66b62b703c4a14",
+      "n_banked_leaves": 854,
+      "provenance": {
+        "banked_json_path": "writeup/data/p2_route_hhr_v1_repair.json",
+        "banking_commit": "a9eb12b28205a21b55958a2c05168ffaedc1ed64",
+        "banking_commit_short": "a9eb12b282",
+        "banking_commit_date": "2026-08-06T15:07:36+01:00",
+        "banking_commit_subject": "Leg 153: LEG \u2014 the guard lands: solver/hilbert_holder.py rejects all 8 of leg 119's failing configurations and moves NOTHING else. GATE YES on both clauses. (a) gamma <= 0 (V1 gamma=0.0, V2 gamma=-0.5",
+        "runner_changed_since_banking": false,
+        "n_repo_files_changed_since_banking": 399,
+        "n_solver_files_changed_since_banking": 11,
+        "n_commits_since_banking": 353
+      },
+      "determinism_repeat_triggered": false,
+      "determinism_repeat_policy": "a second independent regeneration at the banking commit is run IFF the first one moved at least one leaf; an exact reproduction of the banked bytes already establishes determinism",
+      "regeneration_runs_at_banking_commit": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 25.26,
+          "copy_seconds": 0.54,
+          "stderr_tail": "",
+          "error": null,
+          "ref": "a9eb12b28205a21b55958a2c05168ffaedc1ed64"
+        }
+      ],
+      "regeneration_run_at_head": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 37.15,
+          "copy_seconds": 0.21,
+          "stderr_tail": "",
+          "error": null,
+          "ref": null
+        }
+      ],
+      "comparison": {
+        "n_leaves_banked": 854,
+        "n_leaves_regenerated": 854,
+        "n_leaves_shared": 854,
+        "n_numeric_leaves_compared": 721,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 0,
+        "volatile_moves_sample": [],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification": "PORTABLE",
+      "comparison_at_head": {
+        "n_leaves_banked": 854,
+        "n_leaves_regenerated": 854,
+        "n_leaves_shared": 854,
+        "n_numeric_leaves_compared": 721,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 0,
+        "volatile_moves_sample": [],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification_at_head": "PORTABLE",
+      "source_change_contribution": {
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "n_flag_flips": 0,
+        "n_structural_moves": 0,
+        "worst_mover": null,
+        "note": "same environment, code at banking commit vs code at HEAD -- everything here is source change, not environment"
+      },
+      "determinism_control": {
+        "two_processes_agree_on_nonvolatile_leaves": true,
+        "n_leaves_differing_between_repeats": 0,
+        "max_rel_move_between_repeats": 0.0,
+        "reason": "not run: the single regeneration reproduced the banked bytes exactly, which already establishes cross-process AND cross-environment agreement",
+        "established_by": "exact reproduction of the bank"
+      },
+      "positive_control": {
+        "fired": true,
+        "leaf": "R7_blast_radius_control.by_configuration.production_1.4_0.15.rows[16].u_S",
+        "unperturbed_value": 0.16373207240618362,
+        "perturbed_value": 0.1637320725699157,
+        "detected_rel_move": 1.0000000664315316e-09,
+        "detected_path": "R7_blast_radius_control.by_configuration.production_1.4_0.15.rows[16].u_S",
+        "n_moved_leaves_reported": 1,
+        "expected_n_moved_leaves": 1
+      }
+    },
+    {
+      "family": "p2_route_h2i_v1_scoping",
+      "genre": "scoping record",
+      "why_chosen": "bordered-H2 lane, a distinct solver path from Route-D and Route-E",
+      "is_negative_control": false,
+      "banked_json": "writeup/data/p2_route_h2i_v1_scoping.json",
+      "runner": "experiments/p2_route_h2i_v1_scoping.py",
+      "banked_sha256": "0bc700f662439a8877a316c17019fe829a30e4fb7e0b015a9a5484dc38b9d8e1",
+      "runner_sha256": "260c8859926f9ccc7bd6222964c449de73179341063f4c952b105ffd9316d85c",
+      "n_banked_leaves": 1378,
+      "provenance": {
+        "banked_json_path": "writeup/data/p2_route_h2i_v1_scoping.json",
+        "banking_commit": "09e7e35832cb68d4fcae3ceaeb083be0a1fa587c",
+        "banking_commit_short": "09e7e35832",
+        "banking_commit_date": "2026-08-06T16:24:17+01:00",
+        "banking_commit_subject": "Leg 182: LEG \u2014 Route-H2I interpolation-space scoping, gate answered NO: every scale between ell^1_w and origin-H2 fails at least one check",
+        "runner_changed_since_banking": false,
+        "n_repo_files_changed_since_banking": 321,
+        "n_solver_files_changed_since_banking": 11,
+        "n_commits_since_banking": 309
+      },
+      "determinism_repeat_triggered": false,
+      "determinism_repeat_policy": "a second independent regeneration at the banking commit is run IFF the first one moved at least one leaf; an exact reproduction of the banked bytes already establishes determinism",
+      "regeneration_runs_at_banking_commit": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 21.29,
+          "copy_seconds": 0.51,
+          "stderr_tail": "",
+          "error": null,
+          "ref": "09e7e35832cb68d4fcae3ceaeb083be0a1fa587c"
+        }
+      ],
+      "regeneration_run_at_head": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 23.16,
+          "copy_seconds": 0.25,
+          "stderr_tail": "",
+          "error": null,
+          "ref": null
+        }
+      ],
+      "comparison": {
+        "n_leaves_banked": 1378,
+        "n_leaves_regenerated": 1378,
+        "n_leaves_shared": 1378,
+        "n_numeric_leaves_compared": 1033,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 0,
+        "volatile_moves_sample": [],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification": "PORTABLE",
+      "comparison_at_head": {
+        "n_leaves_banked": 1378,
+        "n_leaves_regenerated": 1378,
+        "n_leaves_shared": 1378,
+        "n_numeric_leaves_compared": 1033,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 0,
+        "volatile_moves_sample": [],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification_at_head": "PORTABLE",
+      "source_change_contribution": {
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "n_flag_flips": 0,
+        "n_structural_moves": 0,
+        "worst_mover": null,
+        "note": "same environment, code at banking commit vs code at HEAD -- everything here is source change, not environment"
+      },
+      "determinism_control": {
+        "two_processes_agree_on_nonvolatile_leaves": true,
+        "n_leaves_differing_between_repeats": 0,
+        "max_rel_move_between_repeats": 0.0,
+        "reason": "not run: the single regeneration reproduced the banked bytes exactly, which already establishes cross-process AND cross-environment agreement",
+        "established_by": "exact reproduction of the bank"
+      },
+      "positive_control": {
+        "fired": true,
+        "leaf": "G4_sigma_collapse.rows[28].dist_to_cokernel_threshold",
+        "unperturbed_value": 1.1285714285714286,
+        "perturbed_value": 1.1285714297,
+        "detected_rel_move": 1.0000000255265469e-09,
+        "detected_path": "G4_sigma_collapse.rows[28].dist_to_cokernel_threshold",
+        "n_moved_leaves_reported": 1,
+        "expected_n_moved_leaves": 1
+      }
+    },
+    {
+      "family": "p2_route_nka_v1_adversarial",
+      "genre": "adversarial battery",
+      "why_chosen": "stress-test genre",
+      "is_negative_control": false,
+      "banked_json": "writeup/data/p2_route_nka_v1_adversarial.json",
+      "runner": "experiments/p2_route_nka_v1_adversarial.py",
+      "banked_sha256": "03a4a7449b325056453b30b4fe619ca7e07ece8d8371924089809075c7d90fc0",
+      "runner_sha256": "1f17e0bbc7ffcd4ebaa1d5710f2639f9c1c493ace9d6cbb19ce9f6a30b87e6bf",
+      "n_banked_leaves": 2037,
+      "provenance": {
+        "banked_json_path": "writeup/data/p2_route_nka_v1_adversarial.json",
+        "banking_commit": "e2780e9dc1f712551cbb4524a1c29c976641f96d",
+        "banking_commit_short": "e2780e9dc1",
+        "banking_commit_date": "2026-08-06T10:16:27+00:00",
+        "banking_commit_subject": "Leg 116: LEG \u2014 GATE ANSWERS YES: a planted non-solution survives inside a certified ball from nk_bounds.py. budget() validates only Z2>0; one forbidden Z0=-1 turns an honest REFUSAL at the non-solutio",
+        "runner_changed_since_banking": false,
+        "n_repo_files_changed_since_banking": 690,
+        "n_solver_files_changed_since_banking": 25,
+        "n_commits_since_banking": 521
+      },
+      "determinism_repeat_triggered": true,
+      "determinism_repeat_policy": "a second independent regeneration at the banking commit is run IFF the first one moved at least one leaf; an exact reproduction of the banked bytes already establishes determinism",
+      "regeneration_runs_at_banking_commit": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 2.17,
+          "copy_seconds": 0.25,
+          "stderr_tail": "",
+          "error": null,
+          "ref": "e2780e9dc1f712551cbb4524a1c29c976641f96d"
+        },
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 2.29,
+          "copy_seconds": 0.36,
+          "stderr_tail": "",
+          "error": null,
+          "ref": "e2780e9dc1f712551cbb4524a1c29c976641f96d"
+        }
+      ],
+      "regeneration_run_at_head": [
+        {
+          "status": "nonzero-exit",
+          "returncode": 1,
+          "run_seconds": 1.37,
+          "copy_seconds": 0.15,
+          "stderr_tail": "Traceback (most recent call last):\n  File \"/tmp/epa_census_v7fyzvd2/copy_p2_route_nka_v1_adversarial_2273490_63260/experiments/p2_route_nka_v1_adversarial.py\", line 758, in <module>\n    run()\n  File \"/tmp/epa_census_v7fyzvd2/copy_p2_route_nka_v1_adversarial_2273490_63260/experiments/p2_route_nka_v1_adversarial.py\", line 653, in run\n    cases = family_P() + family_A() + family_B()\n                                      ^^^^^^^^^^\n  File \"/tmp/epa_census_v7fyzvd2/copy_p2_route_nka_v1_adversarial_2273490_63260/experiments/p2_route_nka_v1_adversarial.py\", line 425, in family_B\n    m = farfield_modelling_error_bound(a, LIVE_GAMMA, 1.0)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/epa_census_v7fyzvd2/copy_p2_route_nka_v1_adversarial_2273490_63260/solver/nk_bounds.py\", line 433, in farfield_modelling_error_bound\n    raise ValueError(\nValueError: farfield_modelling_error_bound: alpha is 2.0, outside the required range [-inf, 2.0). This function takes a MAX over 40 samples of the truncated window [X0, 1e+04*X0] and reports it as a supremum; that is valid only under the hypothesis this function documents -- 'for alpha < 2 both terms decay, so the supremum sits at X0'. For alpha >= 2 the Hilbert term grows and the true supremum is not in the window, so the value would be a LOWER bound reported as an upper one.\n",
+          "error": null,
+          "ref": null
+        }
+      ],
+      "comparison": {
+        "n_leaves_banked": 2037,
+        "n_leaves_regenerated": 2037,
+        "n_leaves_shared": 2037,
+        "n_numeric_leaves_compared": 1265,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 66,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 3.847279809196043e-12,
+        "worst_mover": {
+          "path": "cases[69].relative_slack",
+          "banked": 8.397939932186869e-05,
+          "regenerated": 8.397939932219179e-05,
+          "rel_move": 3.847279809196043e-12,
+          "is_verdict_leaf": false
+        },
+        "top_movers": [
+          {
+            "path": "cases[69].relative_slack",
+            "banked": 8.397939932186869e-05,
+            "regenerated": 8.397939932219179e-05,
+            "rel_move": 3.847279809196043e-12
+          },
+          {
+            "path": "cases[76].relative_slack",
+            "banked": 8.145874460849757e-05,
+            "regenerated": 8.145874460870559e-05,
+            "rel_move": 2.5536575639329087e-12
+          },
+          {
+            "path": "iout_crossover.rows[59].reference_over_module",
+            "banked": 0.36134107052808423,
+            "regenerated": 0.3613410705280844,
+            "rel_move": 4.608760732633908e-16
+          },
+          {
+            "path": "iout_crossover.rows[21].reference_over_module",
+            "banked": 1.0000453698468426,
+            "regenerated": 1.000045369846843,
+            "rel_move": 4.4406906250470906e-16
+          },
+          {
+            "path": "iout_crossover.rows[59].reference",
+            "banked": 3.7947271377898364e-13,
+            "regenerated": 3.794727137789838e-13,
+            "rel_move": 3.9913619162259405e-16
+          },
+          {
+            "path": "cases[69].reference_over_module",
+            "banked": 0.9999160276526254,
+            "regenerated": 0.9999160276526251,
+            "rel_move": 3.3309487814636335e-16
+          },
+          {
+            "path": "cases[69].module",
+            "banked": 1.638662320849087e-07,
+            "regenerated": 1.6386623208490874e-07,
+            "rel_move": 3.2306570139455376e-16
+          },
+          {
+            "path": "iout_crossover.rows[47].module",
+            "banked": 1.6372316850056486e-12,
+            "regenerated": 1.6372316850056482e-12,
+            "rel_move": 2.4669494682529586e-16
+          },
+          {
+            "path": "iout_crossover.rows[47].reference_over_module",
+            "banked": 0.9227210160153738,
+            "regenerated": 0.922721016015374,
+            "rel_move": 2.4064110502640993e-16
+          },
+          {
+            "path": "cases[86].out_part",
+            "banked": 0.11893390188713973,
+            "regenerated": 0.1189339018871397,
+            "rel_move": 2.3336975559724834e-16
+          },
+          {
+            "path": "cases[87].out_part",
+            "banked": 0.11893390188713973,
+            "regenerated": 0.1189339018871397,
+            "rel_move": 2.3336975559724834e-16
+          },
+          {
+            "path": "cases[89].out_part",
+            "banked": 0.11893390188713973,
+            "regenerated": 0.1189339018871397,
+            "rel_move": 2.3336975559724834e-16
+          },
+          {
+            "path": "cases[90].out_part",
+            "banked": 0.11893390188713973,
+            "regenerated": 0.1189339018871397,
+            "rel_move": 2.3336975559724834e-16
+          },
+          {
+            "path": "iout_crossover.rows[3].reference_over_module",
+            "banked": 0.9999162814871368,
+            "regenerated": 0.9999162814871371,
+            "rel_move": 2.2206319572553906e-16
+          },
+          {
+            "path": "iout_crossover.rows[8].reference_over_module",
+            "banked": 0.9999174995998954,
+            "regenerated": 0.9999174995998952,
+            "rel_move": 2.220629252052091e-16
+          }
+        ],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 0,
+        "volatile_moves_sample": [],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification": "PORTABLE",
+      "classification_at_head": "IRREPRODUCIBLE-AT-HEAD",
+      "head_failure_reason": "nonzero-exit",
+      "head_failure_detail": "Traceback (most recent call last):\n  File \"/tmp/epa_census_v7fyzvd2/copy_p2_route_nka_v1_adversarial_2273490_63260/experiments/p2_route_nka_v1_adversarial.py\", line 758, in <module>\n    run()\n  File \"/tmp/epa_census_v7fyzvd2/copy_p2_route_nka_v1_adversarial_2273490_63260/experiments/p2_route_nka_v1_adversarial.py\", line 653, in run\n    cases = family_P() + family_A() + family_B()\n                                      ^^^^^^^^^^\n  File \"/tmp/epa_census_v7fyzvd2/copy_p2_route_nka_v1_adversarial_2273490_63260/experiments/p2_route_nka_v1_adversarial.py\", line 425, in family_B\n    m = farfield_modelling_error_bound(a, LIVE_GAMMA, 1.0)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/epa_census_v7fyzvd2/copy_p2_route_nka_v1_adversarial_2273490_63260/solver/nk_bounds.py\", line 433, in farfield_modelling_error_bound\n    raise ValueError(\nValueError: farfield_modelling_error_bound: alpha is 2.0, outside the required range [-inf, 2.0). This function takes a MAX over 40 samples of the truncated window [X0, 1e+04*X0] and reports it as a supremum; that is valid only under the hypothesis this function documents -- 'for alpha < 2 both terms decay, so the supremum sits at X0'. For alpha >= 2 the Hilbert term grows and the true supremum is not in the window, so the value would be a LOWER bound reported as an upper one.\n",
+      "determinism_control": {
+        "two_processes_agree_on_nonvolatile_leaves": true,
+        "n_leaves_differing_between_repeats": 0,
+        "max_rel_move_between_repeats": 0.0,
+        "worst_between_repeats": null
+      },
+      "positive_control": {
+        "fired": true,
+        "leaf": "cases[89].gamma",
+        "unperturbed_value": 1.5,
+        "perturbed_value": 1.5000000015000001,
+        "detected_rel_move": 1.0000000817403708e-09,
+        "detected_path": "cases[89].gamma",
+        "n_moved_leaves_reported": 1,
+        "expected_n_moved_leaves": 1
+      }
+    },
+    {
+      "family": "p2_route_dpa_v1_adversarial",
+      "genre": "newton-adjacent adversarial",
+      "why_chosen": "built on newton_gamma2 / newton_profile, independent of Route-D and Route-E",
+      "is_negative_control": false,
+      "banked_json": "writeup/data/p2_route_dpa_v1_adversarial.json",
+      "runner": "experiments/p2_route_dpa_v1_adversarial.py",
+      "banked_sha256": "3442c85c95258524d1a1be7e0e27b531fa5c4e6d8fbd0ab6bf61cf76cd23eda6",
+      "runner_sha256": "d92e4a7aac9d8eb2f564b3a2f1a5faa5476dca0ed89c1409e09da23f72ef2375",
+      "n_banked_leaves": 691,
+      "provenance": {
+        "banked_json_path": "writeup/data/p2_route_dpa_v1_adversarial.json",
+        "banking_commit": "50cfdb160e1a8ed41147dcfdc23ec5e12e88f393",
+        "banking_commit_short": "50cfdb160e",
+        "banking_commit_date": "2026-08-06T21:41:02+01:00",
+        "banking_commit_subject": "Leg 207: LEG \u2014 Route-DPA quartet, gate YES: four silent-corruption sites in dissipative_profile.py, all LATENT, ESCALATED not patched",
+        "runner_changed_since_banking": true,
+        "n_repo_files_changed_since_banking": 232,
+        "n_solver_files_changed_since_banking": 7,
+        "n_commits_since_banking": 234
+      },
+      "determinism_repeat_triggered": false,
+      "determinism_repeat_policy": "a second independent regeneration at the banking commit is run IFF the first one moved at least one leaf; an exact reproduction of the banked bytes already establishes determinism",
+      "regeneration_runs_at_banking_commit": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 92.33,
+          "copy_seconds": 0.42,
+          "stderr_tail": "/tmp/epa_census_v7fyzvd2/copy_p2_route_dpa_v1_adversarial_2273490_65009/solver/dissipative_profile.py:298: RuntimeWarning: invalid value encountered in multiply\n  J = J + nu * self.D2\n",
+          "error": null,
+          "ref": "50cfdb160e1a8ed41147dcfdc23ec5e12e88f393"
+        }
+      ],
+      "regeneration_run_at_head": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 90.03,
+          "copy_seconds": 0.28,
+          "stderr_tail": "/tmp/epa_census_v7fyzvd2/copy_p2_route_dpa_v1_adversarial_2273490_57788/solver/dissipative_profile.py:298: RuntimeWarning: invalid value encountered in multiply\n  J = J + nu * self.D2\n",
+          "error": null,
+          "ref": null
+        }
+      ],
+      "comparison": {
+        "n_leaves_banked": 691,
+        "n_leaves_regenerated": 691,
+        "n_leaves_shared": 691,
+        "n_numeric_leaves_compared": 460,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 1,
+        "volatile_moves_sample": [
+          {
+            "path": "runtime_s",
+            "banked": 163.90937042236328,
+            "regenerated": 92.07995009422302
+          }
+        ],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification": "PORTABLE",
+      "comparison_at_head": {
+        "n_leaves_banked": 691,
+        "n_leaves_regenerated": 691,
+        "n_leaves_shared": 691,
+        "n_numeric_leaves_compared": 460,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 1,
+        "volatile_moves_sample": [
+          {
+            "path": "runtime_s",
+            "banked": 163.90937042236328,
+            "regenerated": 89.74043822288513
+          }
+        ],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification_at_head": "PORTABLE",
+      "source_change_contribution": {
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "n_flag_flips": 0,
+        "n_structural_moves": 0,
+        "worst_mover": null,
+        "note": "same environment, code at banking commit vs code at HEAD -- everything here is source change, not environment"
+      },
+      "determinism_control": {
+        "two_processes_agree_on_nonvolatile_leaves": true,
+        "n_leaves_differing_between_repeats": 0,
+        "max_rel_move_between_repeats": 0.0,
+        "reason": "not run: the single regeneration reproduced the banked bytes exactly, which already establishes cross-process AND cross-environment agreement",
+        "established_by": "exact reproduction of the bank"
+      },
+      "positive_control": {
+        "fired": true,
+        "leaf": "n_guards_that_fired_in_positive_controls",
+        "unperturbed_value": 14,
+        "perturbed_value": 14.000000014000001,
+        "detected_rel_move": 1.0000000817403708e-09,
+        "detected_path": "n_guards_that_fired_in_positive_controls",
+        "n_moved_leaves_reported": 1,
+        "expected_n_moved_leaves": 1
+      }
+    },
+    {
+      "family": "p2_route_cap_v1_audit",
+      "genre": "NEGATIVE CONTROL: structural audit",
+      "why_chosen": "AST-parses capabilities.py; essentially no floating-point content",
+      "is_negative_control": true,
+      "banked_json": "writeup/data/p2_route_cap_v1_audit.json",
+      "runner": "experiments/p2_route_cap_v1_audit.py",
+      "banked_sha256": "c9440fc23dce5b0be3ea064560983d39bf3bb3b8385012166ca7a3e6d6b2388b",
+      "runner_sha256": "50404b61619488efcc24f699c5a1d05671c48cf1ad71aaf961ec334d7952d714",
+      "n_banked_leaves": 1469,
+      "provenance": {
+        "banked_json_path": "writeup/data/p2_route_cap_v1_audit.json",
+        "banking_commit": "e742f6d291f06766b556ab6e072c3d9a2a72a3ad",
+        "banking_commit_short": "e742f6d291",
+        "banking_commit_date": "2026-08-06T04:12:51+01:00",
+        "banking_commit_subject": "Leg 71: LEG \u2014 re-audit the full suite at the rebased HEAD; both reds confirmed, worker count cut to 3",
+        "runner_changed_since_banking": false,
+        "n_repo_files_changed_since_banking": 721,
+        "n_solver_files_changed_since_banking": 26,
+        "n_commits_since_banking": 557
+      },
+      "determinism_repeat_triggered": false,
+      "determinism_repeat_policy": "a second independent regeneration at the banking commit is run IFF the first one moved at least one leaf; an exact reproduction of the banked bytes already establishes determinism",
+      "regeneration_runs_at_banking_commit": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 0.29,
+          "copy_seconds": 0.31,
+          "stderr_tail": "",
+          "error": null,
+          "ref": "e742f6d291f06766b556ab6e072c3d9a2a72a3ad"
+        }
+      ],
+      "regeneration_run_at_head": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 0.37,
+          "copy_seconds": 0.16,
+          "stderr_tail": "",
+          "error": null,
+          "ref": null
+        }
+      ],
+      "comparison": {
+        "n_leaves_banked": 1469,
+        "n_leaves_regenerated": 1469,
+        "n_leaves_shared": 1469,
+        "n_numeric_leaves_compared": 172,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 0,
+        "volatile_moves_sample": [],
+        "n_provenance_moves": 2,
+        "provenance_moves": [
+          {
+            "path": "head",
+            "banked": "10fed856da973ce97a1ab76425c63cc1ba1315e6",
+            "regenerated": ""
+          },
+          {
+            "path": "interpreter",
+            "banked": "/home/andy/projects/Unsolved/.claude/worktrees/agent-a336c9a759d91444f/.venv/bin/python",
+            "regenerated": "/home/andy/projects/Unsolved/.venv/bin/python"
+          }
+        ],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification": "PORTABLE",
+      "comparison_at_head": {
+        "n_leaves_banked": 1469,
+        "n_leaves_regenerated": 1693,
+        "n_leaves_shared": 1389,
+        "n_numeric_leaves_compared": 172,
+        "n_leaves_only_in_banked": 80,
+        "n_leaves_only_in_regenerated": 304,
+        "leaves_only_in_banked_sample": [
+          "rows[11].flags[0]",
+          "rows[11].run.stdout_tail[10]",
+          "rows[11].run.stdout_tail[11]",
+          "rows[11].run.stdout_tail[12]",
+          "rows[11].run.stdout_tail[13]",
+          "rows[11].run.stdout_tail[14]",
+          "rows[11].run.stdout_tail[7]",
+          "rows[11].run.stdout_tail[8]",
+          "rows[11].run.stdout_tail[9]",
+          "rows[12].run.stdout_tail[10]",
+          "rows[12].run.stdout_tail[11]",
+          "rows[12].run.stdout_tail[12]",
+          "rows[21].run.stdout_tail[10]",
+          "rows[21].run.stdout_tail[11]",
+          "rows[21].run.stdout_tail[12]",
+          "rows[21].run.stdout_tail[13]",
+          "rows[21].run.stdout_tail[14]",
+          "rows[21].run.stdout_tail[8]",
+          "rows[21].run.stdout_tail[9]",
+          "rows[24].flags[0]"
+        ],
+        "leaves_only_in_regenerated_sample": [
+          "rows[14].flags[0]",
+          "rows[15].run.stdout_tail[10]",
+          "rows[15].run.stdout_tail[11]",
+          "rows[15].run.stdout_tail[12]",
+          "rows[15].run.stdout_tail[8]",
+          "rows[15].run.stdout_tail[9]",
+          "rows[16].run.stdout_tail[10]",
+          "rows[16].run.stdout_tail[11]",
+          "rows[16].run.stdout_tail[12]",
+          "rows[16].run.stdout_tail[13]",
+          "rows[16].run.stdout_tail[14]",
+          "rows[16].run.stdout_tail[8]",
+          "rows[16].run.stdout_tail[9]",
+          "rows[17].run.stdout_tail[10]",
+          "rows[17].run.stdout_tail[11]",
+          "rows[17].run.stdout_tail[12]",
+          "rows[17].run.stdout_tail[13]",
+          "rows[17].run.stdout_tail[14]",
+          "rows[17].run.stdout_tail[8]",
+          "rows[17].run.stdout_tail[9]"
+        ],
+        "n_numeric_leaves_moved": 101,
+        "n_leaves_over_10pct": 99,
+        "max_rel_move": 1.0,
+        "worst_mover": {
+          "path": "rows[11].n_test_functions",
+          "banked": 0,
+          "regenerated": 5,
+          "rel_move": 1.0,
+          "is_verdict_leaf": false
+        },
+        "top_movers": [
+          {
+            "path": "rows[11].n_test_functions",
+            "banked": 0,
+            "regenerated": 5,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[11].run.returncode",
+            "banked": 1,
+            "regenerated": 0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[14].run.returncode",
+            "banked": 0,
+            "regenerated": 1,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[17].n_test_functions",
+            "banked": 6,
+            "regenerated": 0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[18].n_test_functions",
+            "banked": 7,
+            "regenerated": 0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[28].run.returncode",
+            "banked": 1,
+            "regenerated": 0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[30].n_test_functions",
+            "banked": 0,
+            "regenerated": 6,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[33].run.returncode",
+            "banked": 0,
+            "regenerated": 1,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[35].n_test_functions",
+            "banked": 12,
+            "regenerated": 0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[40].run.seconds",
+            "banked": 0.43,
+            "regenerated": 236.23,
+            "rel_move": 0.9981797400838166
+          },
+          {
+            "path": "rows[10].run.seconds",
+            "banked": 2.26,
+            "regenerated": 743.97,
+            "rel_move": 0.9969622431012003
+          },
+          {
+            "path": "rows[12].run.seconds",
+            "banked": 0.52,
+            "regenerated": 115.34,
+            "rel_move": 0.9954915900814982
+          },
+          {
+            "path": "rows[35].run.seconds",
+            "banked": 70.52,
+            "regenerated": 0.52,
+            "rel_move": 0.9926262053318208
+          },
+          {
+            "path": "rows[11].run.seconds",
+            "banked": 171.56,
+            "regenerated": 1.3,
+            "rel_move": 0.9924224761016553
+          },
+          {
+            "path": "rows[13].run.seconds",
+            "banked": 258.91,
+            "regenerated": 2.26,
+            "rel_move": 0.9912710980649647
+          }
+        ],
+        "over_10pct_sample": [
+          {
+            "path": "rows[11].n_test_functions",
+            "banked": 0,
+            "regenerated": 5,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[11].run.returncode",
+            "banked": 1,
+            "regenerated": 0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[14].run.returncode",
+            "banked": 0,
+            "regenerated": 1,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[17].n_test_functions",
+            "banked": 6,
+            "regenerated": 0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[18].n_test_functions",
+            "banked": 7,
+            "regenerated": 0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[28].run.returncode",
+            "banked": 1,
+            "regenerated": 0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[30].n_test_functions",
+            "banked": 0,
+            "regenerated": 6,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[33].run.returncode",
+            "banked": 0,
+            "regenerated": 1,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[35].n_test_functions",
+            "banked": 12,
+            "regenerated": 0,
+            "rel_move": 1.0
+          },
+          {
+            "path": "rows[40].run.seconds",
+            "banked": 0.43,
+            "regenerated": 236.23,
+            "rel_move": 0.9981797400838166
+          },
+          {
+            "path": "rows[10].run.seconds",
+            "banked": 2.26,
+            "regenerated": 743.97,
+            "rel_move": 0.9969622431012003
+          },
+          {
+            "path": "rows[12].run.seconds",
+            "banked": 0.52,
+            "regenerated": 115.34,
+            "rel_move": 0.9954915900814982
+          },
+          {
+            "path": "rows[35].run.seconds",
+            "banked": 70.52,
+            "regenerated": 0.52,
+            "rel_move": 0.9926262053318208
+          },
+          {
+            "path": "rows[11].run.seconds",
+            "banked": 171.56,
+            "regenerated": 1.3,
+            "rel_move": 0.9924224761016553
+          },
+          {
+            "path": "rows[13].run.seconds",
+            "banked": 258.91,
+            "regenerated": 2.26,
+            "rel_move": 0.9912710980649647
+          },
+          {
+            "path": "rows[36].run.seconds",
+            "banked": 0.21,
+            "regenerated": 16.44,
+            "rel_move": 0.9872262773722628
+          },
+          {
+            "path": "rows[17].run.seconds",
+            "banked": 4.35,
+            "regenerated": 324.85,
+            "rel_move": 0.9866092042481145
+          },
+          {
+            "path": "rows[31].run.seconds",
+            "banked": 14.1,
+            "regenerated": 947.92,
+            "rel_move": 0.985125327031817
+          },
+          {
+            "path": "rows[27].run.seconds",
+            "banked": 549.12,
+            "regenerated": 8.8,
+            "rel_move": 0.983974358974359
+          },
+          {
+            "path": "rows[29].run.seconds",
+            "banked": 3045.56,
+            "regenerated": 64.85,
+            "rel_move": 0.9787067074692339
+          },
+          {
+            "path": "rows[25].run.seconds",
+            "banked": 4.53,
+            "regenerated": 192.63,
+            "rel_move": 0.9764834137984737
+          },
+          {
+            "path": "rows[15].run.seconds",
+            "banked": 18.95,
+            "regenerated": 0.52,
+            "rel_move": 0.9725593667546174
+          },
+          {
+            "path": "rows[8].run.seconds",
+            "banked": 1.3,
+            "regenerated": 47.15,
+            "rel_move": 0.9724284199363733
+          },
+          {
+            "path": "rows[26].run.seconds",
+            "banked": 947.92,
+            "regenerated": 26.31,
+            "rel_move": 0.9722444932061778
+          },
+          {
+            "path": "rows[39].run.seconds",
+            "banked": 4.3,
+            "regenerated": 103.22,
+            "rel_move": 0.9583414067041272
+          }
+        ],
+        "n_flag_flips": 58,
+        "flag_flips": [
+          {
+            "path": "rows[10].merge_gate_name",
+            "banked": "test_port_certification.py",
+            "regenerated": "test_marginal_flow.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[11].merge_gate_name",
+            "banked": "test_fractional_boussinesq.py",
+            "regenerated": "test_boussinesq_velocity.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[11].passes",
+            "banked": false,
+            "regenerated": true,
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[12].merge_gate_name",
+            "banked": "test_interval.py",
+            "regenerated": "test_boussinesq_rescaled.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[13].merge_gate_name",
+            "banked": "test_interval_certificate.py",
+            "regenerated": "test_port_certification.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[14].merge_gate_name",
+            "banked": "test_spectral_certificate.py",
+            "regenerated": "test_fractional_boussinesq.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[14].passes",
+            "banked": true,
+            "regenerated": false,
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[15].merge_gate_name",
+            "banked": "test_nk_bounds.py",
+            "regenerated": "test_interval.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[16].merge_gate_name",
+            "banked": "test_op_lower.py",
+            "regenerated": "test_interval_certificate.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[17].merge_gate_name",
+            "banked": "test_holder_norms.py",
+            "regenerated": "test_spectral_certificate.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[18].merge_gate_name",
+            "banked": "test_decay_grading.py",
+            "regenerated": "test_energy_coercivity.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[19].merge_gate_name",
+            "banked": "test_decay_collocation.py",
+            "regenerated": "test_certificate_guards.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[19].merge_gate_name_exists",
+            "banked": true,
+            "regenerated": false,
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[20].merge_gate_name",
+            "banked": "test_collocation_newton.py",
+            "regenerated": "test_nk_bounds.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[21].merge_gate_name",
+            "banked": "test_reduced_certificate.py",
+            "regenerated": "test_op_lower.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[22].merge_gate_name",
+            "banked": "test_nk_fourier.py",
+            "regenerated": "test_holder_norms.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[23].merge_gate_name",
+            "banked": "test_nk_seminorm.py",
+            "regenerated": "test_decay_grading.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[24].merge_gate_name",
+            "banked": "test_hilbert_holder.py",
+            "regenerated": "test_decay_collocation.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[24].merge_gate_name_exists",
+            "banked": false,
+            "regenerated": true,
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[25].merge_gate_name",
+            "banked": "test_hilbert_pointwise.py",
+            "regenerated": "test_collocation_newton.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[25].merge_gate_name_exists",
+            "banked": false,
+            "regenerated": true,
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[26].merge_gate_name",
+            "banked": "test_first_integral.py",
+            "regenerated": "test_reduced_certificate.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[27].merge_gate_name",
+            "banked": "test_turning_point.py",
+            "regenerated": "test_nk_fourier.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[28].merge_gate_name",
+            "banked": "test_profile_newton.py",
+            "regenerated": "test_nk_seminorm.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[28].passes",
+            "banked": false,
+            "regenerated": true,
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[29].merge_gate_name",
+            "banked": "test_advection_scope.py",
+            "regenerated": "test_hilbert_holder.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[29].merge_gate_name_exists",
+            "banked": true,
+            "regenerated": false,
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[30].merge_gate_name",
+            "banked": "test_target_norm.py",
+            "regenerated": "test_hilbert_pointwise.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[30].merge_gate_name_exists",
+            "banked": true,
+            "regenerated": false,
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[31].merge_gate_name",
+            "banked": "test_literature_gates.py",
+            "regenerated": "test_first_integral.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[32].merge_gate_name",
+            "banked": "test_certificate_shapes.py",
+            "regenerated": "test_turning_point.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[33].merge_gate_name",
+            "banked": "test_bordered_hl.py",
+            "regenerated": "test_profile_newton.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[33].passes",
+            "banked": true,
+            "regenerated": false,
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[34].merge_gate_name",
+            "banked": "test_viscous_novelty.py",
+            "regenerated": "test_advection_scope.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[35].merge_gate_name",
+            "banked": "test_weight_search.py",
+            "regenerated": "test_target_norm.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[36].merge_gate_name",
+            "banked": "test_target_selection.py",
+            "regenerated": "test_bc_weighted_sobolev.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[37].merge_gate_name",
+            "banked": "test_ga_search.py",
+            "regenerated": "test_literature_gates.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[37].merge_gate_name_exists",
+            "banked": false,
+            "regenerated": true,
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[38].merge_gate_name",
+            "banked": "test_boussinesq.py",
+            "regenerated": "test_certificate_shapes.py",
+            "kind": "verdict-flip"
+          },
+          {
+            "path": "rows[38].merge_gate_name_exists",
+            "banked": false,
+            "regenerated": true,
+            "kind": "verdict-flip"
+          }
+        ],
+        "n_string_moves": 501,
+        "string_moves_sample": [
+          {
+            "path": "rows[10].cited_test",
+            "banked": "test_port_certification.py",
+            "regenerated": "test_marginal_flow.py"
+          },
+          {
+            "path": "rows[10].module",
+            "banked": "solver/port_certification.py",
+            "regenerated": "solver/marginal_flow.py"
+          },
+          {
+            "path": "rows[10].run.stdout_tail[0]",
+            "banked": "  artifact: residual non-monotone, Route-G ladder grows 16.0x while c_omega holds to 0.77%; both seeds flat, levels differ 2.7x; status BLOCKED_AT_STEP_ONE  OK",
+            "regenerated": "  (8) K=48: mu=0 -> 45 unstable (max Re +4.524), mu=1e-3 -> 0; crossover in [1e-05, 0.0001], (C) predicts 4.1e-05"
+          },
+          {
+            "path": "rows[10].run.stdout_tail[10]",
+            "banked": "",
+            "regenerated": "test_11_small_is_norm_dependent_and_divergence_is_refused"
+          },
+          {
+            "path": "rows[10].run.stdout_tail[11]",
+            "banked": "test_10_route_l_artifact",
+            "regenerated": "  (11a) coefficient-normalized perturbation is 3.6e+08x too large in the gauge functional: alpha 3.037 -> 1.171e+04 (naive) vs 3.037 (admissible)"
+          },
+          {
+            "path": "rows[10].run.stdout_tail[12]",
+            "banked": "  artifact: velocity-OFF is worse, wall fractions proportional, top ablation 'pure dilation, no angular', sweep reaches 3.3e-06, ADI worse than nothing  OK",
+            "regenerated": "  (11b) the diverged run is REFUSED (converged=False), the on-branch run is kept (mu_end=0.088780)  OK"
+          },
+          {
+            "path": "rows[10].run.stdout_tail[14]",
+            "banked": "ALL GATES PASS (2s)",
+            "regenerated": "ALL GATES PASS (744s)"
+          },
+          {
+            "path": "rows[10].run.stdout_tail[1]",
+            "banked": "",
+            "regenerated": "  (8) K=96: mu=0 -> 93 unstable (max Re +4.546), mu=1e-3 -> 0; crossover in [1e-06, 1e-05], (C) predicts 5.1e-06"
+          },
+          {
+            "path": "rows[10].run.stdout_tail[2]",
+            "banked": "test_7_line_sweep_is_an_exact_inverse",
+            "regenerated": "  (8) crossover falls by x10.0 from K=48 to K=96 ((C) predicts x8)  OK"
+          },
+          {
+            "path": "rows[10].run.stdout_tail[3]",
+            "banked": "  full transport operator applied to its own sweep returns the rhs to 9.5e-16  OK",
+            "regenerated": ""
+          },
+          {
+            "path": "rows[10].run.stdout_tail[4]",
+            "banked": "",
+            "regenerated": "test_9_nonlinear_control_matches_the_spectral_gap"
+          },
+          {
+            "path": "rows[10].run.stdout_tail[5]",
+            "banked": "test_8_outward_upwinding_is_a_magnitude_not_a_boolean",
+            "regenerated": "  (9) mu=0.05: twin-trajectory rate -1.0167 vs spectral gap -1.0114 (0.5%); mu=0: rate +1.904, kick grows x4.6e+05  OK"
+          },
+          {
+            "path": "rows[10].run.stdout_tail[6]",
+            "banked": "  the sweep's precondition reports min(s_rho), so a marginal case is visible  OK",
+            "regenerated": ""
+          },
+          {
+            "path": "rows[10].run.stdout_tail[7]",
+            "banked": "",
+            "regenerated": "test_10_refusal_predicate_and_the_lower_bound"
+          },
+          {
+            "path": "rows[10].run.stdout_tail[8]",
+            "banked": "test_9_attribution_ranks_by_shape_not_endpoint",
+            "regenerated": "  (10) signal/discretization 1604; leading inviscid eigenvalue +4.546 +430.3i, max Re at |Im|<=10 is only +1.004, measured generic rate +0.798  OK"
+          }
+        ],
+        "n_volatile_moves": 1,
+        "volatile_moves_sample": [
+          {
+            "path": "summary.total_runtime_s",
+            "banked": 8425.8,
+            "regenerated": 8755.7
+          }
+        ],
+        "n_provenance_moves": 2,
+        "provenance_moves": [
+          {
+            "path": "head",
+            "banked": "10fed856da973ce97a1ab76425c63cc1ba1315e6",
+            "regenerated": ""
+          },
+          {
+            "path": "interpreter",
+            "banked": "/home/andy/projects/Unsolved/.claude/worktrees/agent-a336c9a759d91444f/.venv/bin/python",
+            "regenerated": "/home/andy/projects/Unsolved/.venv/bin/python"
+          }
+        ],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification_at_head": "NON-PORTABLE",
+      "source_change_contribution": {
+        "n_numeric_leaves_moved": 101,
+        "n_leaves_over_10pct": 99,
+        "max_rel_move": 1.0,
+        "n_flag_flips": 58,
+        "n_structural_moves": 384,
+        "worst_mover": {
+          "path": "rows[11].n_test_functions",
+          "banked": 0,
+          "regenerated": 5,
+          "rel_move": 1.0,
+          "is_verdict_leaf": false
+        },
+        "note": "same environment, code at banking commit vs code at HEAD -- everything here is source change, not environment"
+      },
+      "determinism_control": {
+        "two_processes_agree_on_nonvolatile_leaves": true,
+        "n_leaves_differing_between_repeats": 0,
+        "max_rel_move_between_repeats": 0.0,
+        "reason": "not run: the single regeneration reproduced the banked bytes exactly, which already establishes cross-process AND cross-environment agreement",
+        "established_by": "exact reproduction of the bank"
+      },
+      "positive_control": {
+        "fired": true,
+        "leaf": "rows[29].n_test_functions",
+        "unperturbed_value": 6,
+        "perturbed_value": 6.0000000060000005,
+        "detected_rel_move": 1.0000000817403708e-09,
+        "detected_path": "rows[29].n_test_functions",
+        "n_moved_leaves_reported": 1,
+        "expected_n_moved_leaves": 1
+      }
+    },
+    {
+      "family": "p2_route_alsl2_v1_lit",
+      "genre": "NEGATIVE CONTROL: literature record",
+      "why_chosen": "no solver call at all",
+      "is_negative_control": true,
+      "banked_json": "writeup/data/p2_route_alsl2_v1_lit.json",
+      "runner": "experiments/p2_route_alsl2_v1_lit.py",
+      "banked_sha256": "2ff20173c57bfe226d72766a39d94e92d251af96a1af8921270e88a8b248c2d6",
+      "runner_sha256": "7297a86d25c433cfff9e9a776d52caaebca4ff227a761a2697fb97aa9946c35b",
+      "n_banked_leaves": 401,
+      "provenance": {
+        "banked_json_path": "writeup/data/p2_route_alsl2_v1_lit.json",
+        "banking_commit": "8814b0ba28062069cc5ab4b11dd0afb64f4c3867",
+        "banking_commit_short": "8814b0ba28",
+        "banking_commit_date": "2026-08-06T23:32:46+01:00",
+        "banking_commit_subject": "Leg 246: LIT \u2014 Route-ALSL2 gate NO, negative named in its realization: arXiv:2207.07548's four authors produced 19 distinct subsequent works over 1483 days, exactly 2 on the object, both read at md5-p",
+        "runner_changed_since_banking": false,
+        "n_repo_files_changed_since_banking": 174,
+        "n_solver_files_changed_since_banking": 3,
+        "n_commits_since_banking": 172
+      },
+      "determinism_repeat_triggered": false,
+      "determinism_repeat_policy": "a second independent regeneration at the banking commit is run IFF the first one moved at least one leaf; an exact reproduction of the banked bytes already establishes determinism",
+      "regeneration_runs_at_banking_commit": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 0.03,
+          "copy_seconds": 0.39,
+          "stderr_tail": "",
+          "error": null,
+          "ref": "8814b0ba28062069cc5ab4b11dd0afb64f4c3867"
+        }
+      ],
+      "regeneration_run_at_head": [
+        {
+          "status": "ok",
+          "returncode": 0,
+          "run_seconds": 0.04,
+          "copy_seconds": 0.21,
+          "stderr_tail": "",
+          "error": null,
+          "ref": null
+        }
+      ],
+      "comparison": {
+        "n_leaves_banked": 401,
+        "n_leaves_regenerated": 401,
+        "n_leaves_shared": 401,
+        "n_numeric_leaves_compared": 107,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 0,
+        "volatile_moves_sample": [],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification": "PORTABLE",
+      "comparison_at_head": {
+        "n_leaves_banked": 401,
+        "n_leaves_regenerated": 401,
+        "n_leaves_shared": 401,
+        "n_numeric_leaves_compared": 107,
+        "n_leaves_only_in_banked": 0,
+        "n_leaves_only_in_regenerated": 0,
+        "leaves_only_in_banked_sample": [],
+        "leaves_only_in_regenerated_sample": [],
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "worst_mover": null,
+        "top_movers": [],
+        "over_10pct_sample": [],
+        "n_flag_flips": 0,
+        "flag_flips": [],
+        "n_string_moves": 0,
+        "string_moves_sample": [],
+        "n_volatile_moves": 0,
+        "volatile_moves_sample": [],
+        "n_provenance_moves": 0,
+        "provenance_moves": [],
+        "provenance_moves_note": "these leaves RECORD the environment (interpreter path, git HEAD, repo root) rather than measure anything; they are excluded from the classification and listed here in full so the exclusion is auditable"
+      },
+      "classification_at_head": "PORTABLE",
+      "source_change_contribution": {
+        "n_numeric_leaves_moved": 0,
+        "n_leaves_over_10pct": 0,
+        "max_rel_move": 0.0,
+        "n_flag_flips": 0,
+        "n_structural_moves": 0,
+        "worst_mover": null,
+        "note": "same environment, code at banking commit vs code at HEAD -- everything here is source change, not environment"
+      },
+      "determinism_control": {
+        "two_processes_agree_on_nonvolatile_leaves": true,
+        "n_leaves_differing_between_repeats": 0,
+        "max_rel_move_between_repeats": 0.0,
+        "reason": "not run: the single regeneration reproduced the banked bytes exactly, which already establishes cross-process AND cross-environment agreement",
+        "established_by": "exact reproduction of the bank"
+      },
+      "positive_control": {
+        "fired": true,
+        "leaf": "n_independent_nets_per_author.Lushnikov",
+        "unperturbed_value": 4,
+        "perturbed_value": 4.000000004,
+        "detected_rel_move": 1.0000000817403708e-09,
+        "detected_path": "n_independent_nets_per_author.Lushnikov",
+        "n_moved_leaves_reported": 1,
+        "expected_n_moved_leaves": 1
+      }
+    }
+  ]
+}

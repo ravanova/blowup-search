@@ -182,10 +182,25 @@ PROVENANCE_KEYS = {
 }
 _SHA_HEX = set("0123456789abcdef")
 
+# Substring markers for leaves that record whether THIS PARTICULAR invocation
+# happened to hit a warm scratch cache, rather than anything about the
+# artifact's computed content.  Discovered on p2_route_cvf_v1_classify:
+# ``sections_served_from_cache_this_invocation`` is True in the banked file
+# (which was produced after earlier warm runs) and False when this census
+# regenerates it inside a fresh throwaway copy with no CVF_CACHE directory --
+# the memoisation itself was independently verified inert (12732da: unset
+# CVF_CACHE makes ``cached()`` a passthrough), so this leaf is exactly the
+# same class of false NON-PORTABLE that ``head``/``interpreter`` already were
+# for p2_route_cap_v1_audit: it records how this run was invoked, not what it
+# computed.  Bucketed the same way, not silently dropped.
+_CACHE_PROVENANCE_MARKERS = ("served_from_cache", "cache_this_invocation")
+
 
 def is_provenance(path: str, banked, regen) -> bool:
     leaf = path.rsplit(".", 1)[-1].split("[")[0].lower()
     if leaf in PROVENANCE_KEYS:
+        return True
+    if any(m in leaf for m in _CACHE_PROVENANCE_MARKERS):
         return True
     for v in (banked, regen):
         if isinstance(v, str):
