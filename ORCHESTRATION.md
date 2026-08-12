@@ -211,6 +211,60 @@ an unenforced rule is a rule that will drift again.
 3. **A fifth+ parallel route** from the DM's queue, if every other slot is saturated and
    the queue has a ready, independent item.
 
+### 3c. The PROGRAMME lane — sustained construction on one object
+
+**Adopted 2026-08-11 by user ruling: stop screening; build for one object.** Everything above
+describes a *leg* economy — short units, each a question with a pre-committed two-branch gate,
+each agent terminated on landing (§7b). That economy is correct for screening and it is
+structurally incapable of the other mode. A bespoke apparatus built for one object cannot be
+assembled in units that die on landing and restart with no memory; the comparable published
+efforts took years of sustained work on a single object, most of it unpublishable while in
+progress. Four mechanisms in this contract enforce the leg economy, and a programme suspends
+each of them **for its own units only** — every other leg on the board keeps the full contract.
+
+1. **No termination on landing.** A programme's worker is long-lived and keeps its state across
+   units. §7b's "terminated once its push lands, slot refills with a fresh agent on a fresh
+   brief" does not apply to it. The programme occupies its slot until it completes, stops on
+   its own rule, or the user ends it.
+2. **Milestones, not gates, for construction units.** Pre-committed gates stay mandatory for
+   every unit that makes a **claim** — a measurement, a verdict, a number that enters prose.
+   A unit that only *builds* reports against a declared milestone instead. Do not manufacture
+   a two-branch question for work that has no answer to give; that is how a build gets
+   deformed into a screen.
+3. **One novelty pass per programme, not per unit.** Run it at programme start, in full, and
+   it binds the whole programme. Requiring every unit to first ask "has anyone already done
+   this" is the screening reflex institutionalised, and on day nine of building a solver it
+   produces nothing. A unit that later makes a novelty *claim* still needs its own pass.
+4. **Literature legs stop counting toward §3b's composition floor while a programme is live.**
+   The floor exists to keep math/construction on the board; a literature leg satisfies it
+   while being pure screening, which is precisely the substitution that must not happen now.
+   Construction and mathematics still count; literature does not.
+
+**What does NOT change, and matters more here, not less:** the three-tier win condition,
+lesson 91 (name the realization), the merge gate, territory discipline, the honesty rules of
+§6, and the requirement that no output is described as movement toward Clay unless a link of
+the chain actually moved. A programme is a change to the *unit of work*, never to the standard
+of evidence.
+
+### 3d. Stop thresholds — a null from an under-resourced attempt is a cost, not a verdict
+
+**Diagnosed 2026-08-11.** A pre-committed stop is only as good as the attempt that fires it.
+Leg 353 fired route 4's stop on a `NO` whose own text reads *"the failure is
+seed-quality/no-hookstep-globalisation (this leg's affordable `T_total=2000` DNS vs the
+literature's `T~1e4-1e6`), NOT a broken extraction layer"* — two to three orders of magnitude
+short of the scale the question is posed at, with its own control converging cleanly at 99.3%
+residual reduction and thereby proving the apparatus sound. A route was recorded as stopped on
+evidence that measured the budget, not the route.
+
+**The rule: a stop fires only on a null from an attempt resourced at the scale the question is
+posed at.** An under-resourced attempt that fails returns **a cost estimate for the compliant
+attempt**, and its gate answers `UNDER-RESOURCED`, never `NO`. Any leg whose gate could fire on
+an attempt it already knows to be minimum-viable must say so in its own pre-registration and
+name the compliant scale — if it cannot name that scale, it is not ready to be dispatched.
+
+This is general. It applies to every route, and it is the reason a cheap first attempt must
+never be allowed to close a lane.
+
 ### 4a. Refill is triggered by vacancy, not only by landing on `main`
 
 **Diagnosed 2026-08-06.** A slot vacates in exactly two ways: a leg's push lands on `main`
