@@ -1,14 +1,15 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-12 — same orchestrator session, cycle 10b (DM
-formalized the S1-DIES/Tier-2 decision packet in cycle 10, then executed the
-user's post-S1 reframing in cycle 10b: leg 348 POCP drafted at reserve rank
-1 — does periodic-orbit CAP for dissipative PDEs reach route 4's object,
-scoping only, "the build is the next ruling"; leg 349 GAFV drafted gated on
-348). `origin/main` at `6ab40a5`, merge gate green. Full detail in
-`PROGRESS.md` (git-ignored, more current), `reports/ORCH_STATE.md` (full
-handoff detail and institutional memory), and `experiments/JOURNAL.md` (the
-durable ledger).*
+*Refreshed 2026-08-12 — same orchestrator session, cycle 10h. Legs 348
+(POCP), 307 (TSCX), 337, 343, 338, 350 have all landed since the header
+above was last written; leg 348's classification is added below as a NEW
+NEEDS-YOU item (item 4). Slots B and D refilled this cycle: B<-349 (GAFV,
+gated on 348's report, viability-only, no GA compute), D<-328 (ORC5,
+correction/record). Roster: A/335 (S1GR, still mid-diagnosis), B/349,
+C/351 (DSSP-B3, critical path), D/328. `origin/main` at `d797e44`, merge
+gate green. Full detail in `PROGRESS.md` (git-ignored, more current),
+`reports/ORCH_STATE.md` (full handoff detail and institutional memory), and
+`experiments/JOURNAL.md` (the durable ledger).*
 
 ## ⚠ NEEDS YOU
 
@@ -118,6 +119,46 @@ durable ledger).*
    `experiments/journal/leg_342.md`, `writeup/data/p2_route_seed_v1.json`,
    `experiments/journal/leg_344.md`, `writeup/data/p2_route_pklr_v1.json`.
    Landed `782a310`, `fc65c1e`, `3ec2516`.
+
+4. **NEW — leg 348 (POCP) classified route 4's periodic-orbit certification
+   question: (ii) OPEN-AND-REACHABLE, no build proposed (the leg's own hard
+   constraint — "the build is the next ruling, not this leg's"). Yours to
+   decide whether to fund that build.** Leg 315's blocker (Zgliczyński's
+   dissipative/parabolic hypotheses vs. BCG's diffusion-free quasilinear-
+   hyperbolic compressible-Euler system) does NOT transfer here: route 4's
+   rescaled 3D Navier-Stokes system keeps a viscous Laplacian as its
+   principal part, genuinely parabolic, unlike BCG's system.
+   - A fresh novelty pass found 7 papers, 6 of them prior art in exactly this
+     technology (periodic-orbit/RPO Galerkin-tail closures for dissipative
+     PDEs) — every one of the six closes its tail-domination estimate
+     against a **compact** domain (periodic torus / bounded box with
+     boundary conditions / minimal periodic cell). Route 4's object needs an
+     **unbounded** R³ domain in an algebraically-weighted space (leg 260),
+     which explicitly excludes the Gaussian weight that would supply an
+     analogous discrete spectral basis. The sole unbounded+algebraic-decay
+     rigorous result found (arXiv:2308.01528, Hou-Luo) is a stationary 1D
+     profile via a different apparatus, not a periodic-orbit closure.
+   - Named obstruction: a domain-shape/spectral-basis mismatch, costed at
+     class C (research-level) on leg 315's own A/B/C rubric — the same
+     rubric already used once on this route. No positive instance of the
+     technology closing in this unbounded setting was found (rules out
+     classification (i)); no proven-failing hypothesis was established either
+     (rules out (iii) — leg 334's related continuous-vs-discrete-spectrum
+     finding is flagged as a risk factor only, not transferred as a proof,
+     since it concerns a different specific operator).
+   - **The DM's cycle-10h ruling explicitly did not draft any build or
+     research leg on its own authority, and did not trigger the standing
+     §3 reverse-engineered-fitness auto-pickup clause** (leg 349's design is
+     BLOCKED-ON-348, not refuted — an open, unbuilt route is not a closed
+     certificate, so the auto-pickup condition "348 classifies (i) or (ii)
+     AND a certificate later closes somewhere" is only half-satisfied).
+   - **The decision for you**: does cost-class-C research capacity go toward
+     the one named obstruction standing between route 4's object and a
+     mature periodic-orbit certification technology (i.e., fund a build
+     leg/sequence to close the domain-shape/spectral-basis mismatch), or
+     does this route stay open-but-unfunded while other routes/legs proceed?
+   Files: `writeup/novelty/leg_348.md`, `writeup/data/p2_route_pocp_v1.json`,
+   `experiments/journal/leg_348.md`. Landed `3b75842`.
 
 (Older NEEDS-YOU items — leg 297's anchor-JSON fix, leg 280's sign-off, the
 Phase-1 construction-decision packet — have since been resolved/absorbed in
