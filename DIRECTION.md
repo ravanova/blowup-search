@@ -33,9 +33,9 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 366 | LCB5 | no |
+| A | 299 | TESTA | no |
 | B | 368 | MRYX | yes |
-| C | 367 | E5P | yes |
+| C | 369 | BSE | yes |
 | D | 298 | CORRX | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -20257,9 +20257,30 @@ CORRECTIONS.md freshness audit — apt timing, the register having gained
 §§21-27 this window). 310's precondition arithmetic pre-noted: it fires
 on 298's landing (287 already landed). Floor 2/4 (368, 367).
 
-**Reserve queue: 7 undispatched legs (299, 310, 325, 231, 232, 233,
-234).** Immediately dispatchable: **1** (299 TESTA). Next fresh leg
-number: **369.**
+Cycle 10ee: A/366 landed all-three at 3bfe677 (grounds marker; cosmetic
+zip fix with the gate answer byte-identical either way; the T1
+re-attribution independently diffed citation-text-only; §28 filed —
+accumulator items (7)-(9) CLOSE). C/367 landed (iii)
+UNVERIFIED-ASSUMPTION at 728e0cc, empirically corroborated: 356's
+"pinned to Re λ=0 exactly" is provable only for the analytic-at-X=0
+subclass, six candidate mechanisms failed to extend it — BUT the
+measured noise floor tracks K·ε (1e-14 to 3.5e-13 across K=48..192),
+~6.5 orders below canonical_order()'s 1e-6 threshold: **the repair
+HOLDS with wide margin; the theorem-level ground downgrades.** The
+marker at 356's record = accumulator item (10) (source-verified by
+367). Slot letters resynced: A and C were the vacancies. A ← 299 TESTA
+(the last dispatchable reserve entry); C ← **leg 369 BSE** (fresh
+eligible draft: derive the K·ε noise floor from eigensolver
+backward-stability theory — upgrading 367's empirical corroboration to
+a DERIVED floating-point ground, the honest middle between theorem and
+assumption). **After this dispatch the reserve holds ZERO immediately
+dispatchable legs** — the exhaustion (item 6) is now total pending the
+user's seven rulings; 310 fires on 298's landing. Floor 2/4 (368, 369).
+
+**Reserve queue: 6 undispatched legs (310, 325, 231, 232, 233, 234).**
+Immediately dispatchable: **0** — 310 on 298 (fires at its landing);
+325 USER-GATED; 231-234 blocked on repairs 217/219/225. Next fresh leg
+number: **370.**
 
 Nothing in this update lifts a ban. A confinement explained is a
 sharper map of why the object is unreached — which cuts both ways and
@@ -20326,3 +20347,98 @@ number: **369.**
 Nothing in this update lifts a ban. A whole index and an audited
 register are the record keeping itself honest; no L1-L4 link moved;
 Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10ee) — 366 AND 367 ABSORBED; A ← 299
+TESTA (THE RESERVE's LAST DISPATCHABLE), C ← 369 BSE; THE RESERVE IS
+NOW EMPTY OF DISPATCHABLE WORK PENDING THE USER
+
+Written from the same detached lineage, resynced to origin/main.
+
+### 366 LCB5 — all three items, absorbed at full strength
+
+None resisted: the 341 grounds marker additive; the zip fix confirmed
+cosmetic with the gate answer byte-identical either way (and the banked
+JSON correctly NOT re-run — script-only territory); the screen's T1
+re-attribution independently diffed by the orchestrator as
+citation-text-only with no branch/threshold/logic touched. CORRECTIONS
+§28 filed. Accumulator items (7)-(9) close. Endorsed without amendment.
+
+### 367 E5P — (iii) UNVERIFIED-ASSUMPTION, empirically corroborated,
+absorbed at full strength
+
+Exactly the honest middle the gate drafted for: the theorem-level claim
+("pinned to Re λ=0 exactly") is NOT provable from the module's
+closed-form derivation beyond the analytic-at-X=0 subclass, and six
+candidate skew-symmetrization mechanisms all failed to extend it — the
+assertion downgrades. AND the fresh measurement across four truncation
+sizes shows the noise floor tracking K·machine_epsilon, ~6.5 orders of
+magnitude below the 1e-6 rounding threshold — so 356's REPAIR holds
+with wide margin even as its stated ground weakens. The distinctness
+check against 343's B1 operator (different domain/edge signature) is
+the right caution. The marker owed at 356's record enters the
+accumulator as item (10), source-verified by 367's own measurements
+and failed-derivation ledger. Endorsed without amendment.
+
+### Refills — A ← 299 TESTA, C ← 369 BSE
+
+A takes the reserve's LAST immediately-dispatchable entry: 299 TESTA
+(the test-suite freshness audit, spec at its original entry; its
+standing advisory on concurrent solver repairs noted — none are live).
+C takes the one genuine eligible question 367 left behind:
+
+```
+### 369 — ROUTE-BSE: DERIVE THE K·ε NOISE FLOOR FROM BACKWARD-STABILITY
+THEORY (367's empirical corroboration upgraded to a derived ground, or
+the gap named)
+[FLOOR-ELIGIBLE: math]
+**Thesis.** 367 measured the E5 family's Re λ noise floor tracking
+K·machine_epsilon (1e-14 → 3.5e-13 across K=48/96/144/192) and
+classified 356's exact-pinning claim UNVERIFIED. Standard eigensolver
+backward-error theory predicts exactly this shape: computed eigenvalues
+are exact for A+E with ‖E‖ ≲ c(K)·ε·‖A‖, so |Re λ_computed| ≤ ‖E‖ when
+Re λ_true = 0 on the reached subclass. Document the argument at
+checkable precision: the perturbation bound, the c(K) the solver's own
+documentation/literature states, and the comparison against 367's four
+measured points — giving canonical_order()'s 1e-6 threshold a DERIVED
+floating-point ground (weaker than the exact-pinning theorem, stronger
+than an empirical observation), or naming exactly which step resists.
+**Gate.** A definite classification — DERIVED (the bound documented,
+c(K) sourced, 367's four points inside the predicted envelope with
+margins stated) or GAP-NAMED (the resisting step quoted; the ground
+stays empirical and says so) — with the consequence for 356's marker
+(item (10)) stated either way?
+  yes (either class) -> Bank; item (10)'s marker text cites this leg's
+        answer when the batch fires.
+  no  -> The theory genuinely does not apply to this solver path:
+        recorded as exactly that, with the mismatch quoted.
+**Territory.** writeup/data/p2_route_bse_v1.json, writeup/novelty/
+leg_369.md, experiments/journal/leg_369.md. Reads 367/356's banked
+records; edits nothing. No figure.
+**Difficulty.** standard
+**Preconditions:** Leg 367 landed (TRUE, 728e0cc).
+```
+
+**Floor 2/4 (368, 369).** FLOOR-TABLE synced (A 366→299 TESTA wait — A
+299, C 367→369). Slot letters resynced with the orchestrator: A and C
+were the vacancies; B/368 and D/298 as dispatched.
+
+### The reserve is now EMPTY of dispatchable work — stated at full
+prominence
+
+After this cycle's dispatches the reserve holds: 310 (fires
+mechanically on 298's landing), 325 (USER-GATED), 231-234 (blocked on
+repairs 217/219/225). ZERO immediately dispatchable. Every future
+vacancy until a user ruling arrives must be filled by a fresh DM draft
+or left against §3's no-empty-slot rule — and the well of genuine
+eligible questions is, as item 6 already says, nearly dry. The seven
+NEEDS-YOU items are now the programme's entire forward direction.
+
+**Reserve queue: 6 undispatched legs (310, 325, 231, 232, 233, 234).**
+Immediately dispatchable: **0**. Next fresh leg number: **370.**
+
+Nothing in this update lifts a ban. A repair's ground honestly
+downgraded while the repair holds, and a derivation leg to earn back
+what the assertion claimed; no L1-L4 link moved; Clay stays ~0.05%.
