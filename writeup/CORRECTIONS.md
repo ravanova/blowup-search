@@ -2222,3 +2222,67 @@ JSON files touched or read-write (all read-only throughout). `plan_of_record.py`
 `DIRECTION.md` untouched (off-limits to this leg). This closes the accumulator: item (10) is
 applied: item (11) opens only whenever a future leg flags the next correction — not this leg's
 concern. Clay stays **~0.05%**.
+
+---
+
+## §31 — leg 379 (ROUTE-LCB7), 2026-08-12: two light corrections to permanent regression
+suites, each narrowed with a planted-failure control per the 361 lesson
+
+**(i) `test_boussinesq_postrepair.py` — `check_banked_record_carries_no_out_of_domain_coefficient`
+narrowed to acknowledge leg 185's self-flagged negative-`nu` diagnostic rows.** The check scans
+every banked JSON for a key named `nu`/`kappa`/`nu_crit`/`nu0`/`nu_c` and asserted none was
+outside `[0, inf)` in a `scientific_measurement`-bucketed file. Two banked files were tripping
+it: `writeup/data/p2_route_m2sd_v1_diagnostic.json` (leg 185, Route-M2SD, 11 rows) and
+`writeup/data/p2_route_nu12_v1_converge.json` (leg 284, Route-NU12, its grid-refinement
+continuation, 284 rows) — 295 rows total, matching the check's failing `n_recorded_coefficients_
+out_of_domain`. Both files' `nu` is the recovered diffusion coefficient of a Newton continuation
+on `solver/dissipative_profile.py`'s STEADY profile equation, explicitly self-flagged in leg
+185's journal (§D5: *"The negative rows DOWNGRADED TO SIGN-ONLY... only sign banked"*) —
+**not** a `solve_boussinesq(nu=..., kappa=...)` coefficient at all; grepping both producing
+runners (`experiments/p2_route_m2sd_v1_diagnostic.py`, `experiments/p2_route_nu12_v1_converge.py`)
+for `solve_boussinesq` returns zero hits, so a negative value there cannot be defect 2's
+call-site contamination reaching a Boussinesq run. The check now re-derives the full
+out-of-domain list itself (the existing scanner in `experiments/p2_route_bob_v1_postrepair.py`
+caps its reported examples at 10 per key, too few to name and exclude by file) and asserts the
+excused set is **exactly** these two named files — no third file may silently start relying on
+the exclusion — with everything else still required clean. **Planted-failure control added and
+demonstrated to trip**: the shipped control
+(`check_CONTROL_narrowed_scan_still_catches_a_planted_out_of_domain_coefficient`) plants a
+synthetic `nu = -0.42` in a third, unexcused scratch file on every run and asserts the narrowed
+scan still reports it as unexcused — confirmed passing (see `experiments/journal/leg_379.md`).
+
+**(ii) `test_gclm_postrepair.py` — `check_banked_stage1_5_t_stars_are_unmoved` replaced its
+bit-identity (`float.hex`) pin with a documented ULP tolerance.** Under this suite's current
+environment (numpy 2.5.1), 2 of the 20 banked production T* values fail bit-identity with no
+`solver/gclm.py` change and no thread-count sensitivity (reproduced identically with
+OMP/OPENBLAS/MKL/NUMEXPR/VECLIB threads all pinned to 1): `bump(kappa=2)` moves 3 ULP and
+`bump(kappa=5)` moves 12 ULP (`np.spacing`-defined), both through `clm_analytic_blowup_time`'s
+`np.fft.rfft`/`irfft`. This is a library-version FFT-kernel drift, not a repair regression — the
+same shape as two existing precedents in this repo: leg 147 (Route-NKB) measured 20 of 22 leaves
+moving at <= 3 ULP from a numpy-version FFT/reduction-order change with banked totals otherwise
+exact (`experiments/journal/leg_147.md`), and leg 131 measured 1-2 ULP BLAS reduction-order
+drift on the same kind of re-run (`experiments/journal/leg_131.md:128`). The check now asserts
+each computed T* is within `ULP_TOLERANCE = 25` ULP of its banked literal (>= 2x the 12 ULP
+worst actually measured, and ~13 orders of magnitude tighter than G1's own real defect, which
+saturated at a *relative* 1/3). **Planted-failure control added and demonstrated to trip**:
+`check_CONTROL_ulp_tolerance_still_catches_a_planted_deviation` plants a synthetic banked value
+displaced by `2 * ULP_TOLERANCE` ULP from a live-computed T* and asserts the same
+`<= ULP_TOLERANCE` comparison used by the real check rejects it — confirmed passing.
+
+Both planted controls were run and shown to trip (see `experiments/journal/leg_379.md` for the
+verbatim failing output captured before the exclusions/tolerance were finalized). No planted
+control was widened after failing to trip; neither did.
+
+### The ceiling
+
+**2 test files edited** (`test_boussinesq_postrepair.py`, `test_gclm_postrepair.py`), both
+additively (new helper functions, new `check_CONTROL_*`/`test_CONTROL_*` entries, and one
+narrowed assertion body each — no existing check deleted or weakened beyond the documented
+narrowing/tolerance). **0 banked JSON files touched** (`git diff --stat` on `writeup/data/*.json`
+is empty; `p2_route_m2sd_v1_diagnostic.json` and `p2_route_nu12_v1_converge.json` are read-only
+citations, unedited). **0 solver files touched.** `test_boussinesq_postrepair.py`: 16/16 checks
+pass. `test_gclm_postrepair.py`: 9/9 checks pass. `test_plan_of_record.py` and
+`test_capabilities.py` (the merge gate's always-on pair) both pass unchanged. **0 gate answers
+changed anywhere** — leg 133's and leg 103's own YES verdicts are untouched; this leg only
+repairs the regression suites that bank them. `plan_of_record.py` and `DIRECTION.md` untouched.
+No link of the `L1 → L4` chain moved. Clay odds stay **~0.05%**.

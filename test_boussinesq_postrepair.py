@@ -395,25 +395,131 @@ def check_banked_phase1_n128_reproduces_on_all_six_fields():
     return out
 
 
+
+# ---------------------------------------------------------------------------
+# leg 379's narrowing of check_banked_record_carries_no_out_of_domain_coefficient.
+#
+# `bob.part4f_banked_coefficient_values()` greps every banked JSON/JSONL for a key named
+# nu/kappa/nu_crit/nu0/nu_c, ANYWHERE, regardless of whether that key was ever the
+# `solve_boussinesq(nu=..., kappa=...)` coefficient defect 2 is about. Leg 185
+# (Route-M2SD, `writeup/data/p2_route_m2sd_v1_diagnostic.json`, section "D5 -- genuine
+# profile reachable?") and its continuation leg 284 (Route-NU12,
+# `writeup/data/p2_route_nu12_v1_converge.json`) both bank a `nu` key that is NOT a
+# Boussinesq viscosity: it is the recovered diffusion coefficient of a Newton
+# continuation on `solver/dissipative_profile.py`'s STEADY profile equation (`M7`).
+# Neither runner ever imports or calls `solve_boussinesq` -- confirmed by grep of both
+# scripts for the symbol, zero hits -- so a negative value there cannot be defect 2's
+# call-site contamination reaching a Boussinesq run; it is leg 185's own, explicitly
+# self-flagged finding (its journal, section D5: "The negative rows DOWNGRADED TO
+# SIGN-ONLY... only sign banked", reaffirmed and refined by leg 284/leg 210's grid
+# ladder). `check_banked_record_carries_no_out_of_domain_coefficient` therefore excludes
+# exactly these two banked files, by relative path, from the no-out-of-domain assertion,
+# and only them -- everything else must still be clean.
+_LEG185_LINEAGE_DIAGNOSTIC_FILES = (
+    os.path.join("writeup", "data", "p2_route_m2sd_v1_diagnostic.json"),
+    os.path.join("writeup", "data", "p2_route_nu12_v1_converge.json"),
+)
+
+_COEFFICIENT_KEYS = ("nu", "kappa", "nu_crit", "nu0", "nu_c")
+
+
+def _scan_scientific_out_of_domain_coefficients(extra_roots=()):
+    """Re-derive the full (file, path, key, value) list of out-of-domain
+    nu/kappa/nu_crit/nu0/nu_c entries in files `bob._classify_artifact` buckets as
+    `scientific_measurement`, across the same roots `bob.part4f_banked_coefficient_values`
+    scans plus any `extra_roots` (used only by the planted-failure control below).
+
+    This duplicates `bob`'s walk deliberately: `bob.part4f_banked_coefficient_values`
+    caps its `out_of_domain_examples` at 10 per key, too few to name leg 185's ~295 rows
+    individually and filter them out by file; this walker returns every hit.
+    """
+    hits = []
+    roots = [os.path.join(HERE, "writeup", "data"), os.path.join(HERE, "experiments"),
+             *extra_roots]
+
+    def walk(node, path, rel):
+        if isinstance(node, dict):
+            for k, v in node.items():
+                if (k in _COEFFICIENT_KEYS and isinstance(v, (int, float))
+                        and not isinstance(v, bool)):
+                    fv = float(v)
+                    if not (np.isfinite(fv) and fv >= 0.0):
+                        hits.append((rel, f"{path}.{k}", k, fv))
+                walk(v, f"{path}.{k}", rel)
+        elif isinstance(node, list):
+            for i, v in enumerate(node):
+                walk(v, f"{path}[{i}]", rel)
+
+    for root in roots:
+        if not os.path.isdir(root):
+            continue
+        for dirpath, dirnames, filenames in os.walk(root):
+            dirnames[:] = [d for d in dirnames if d != "__pycache__"]
+            for fn in filenames:
+                if not fn.endswith((".json", ".jsonl")):
+                    continue
+                path = os.path.join(dirpath, fn)
+                rel = os.path.relpath(path, HERE)
+                if rel == os.path.join("writeup", "data",
+                                       "p2_route_bob_v1_postrepair.json"):
+                    continue
+                try:
+                    with open(path, errors="replace") as fh:
+                        text = fh.read()
+                except OSError:
+                    continue
+                bucket, _ = bob._classify_artifact(rel, text)
+                if bucket != "scientific_measurement":
+                    continue
+                try:
+                    if fn.endswith(".jsonl"):
+                        for i, line in enumerate(text.splitlines()):
+                            line = line.strip()
+                            if not line:
+                                continue
+                            try:
+                                walk(json.loads(line), f"line{i}", rel)
+                            except json.JSONDecodeError:
+                                pass
+                    else:
+                        walk(json.loads(text), "$", rel)
+                except (json.JSONDecodeError, ValueError):
+                    continue
+    return hits
+
+
 def check_banked_record_carries_no_out_of_domain_coefficient():
     """Defect 2 could only have contaminated a banked number through a call site that
-    passed an out-of-domain coefficient. Re-derived from the banked JSONs: every recorded
-    nu/kappa/nu_crit in a scientific artifact is in [0, inf).
+    passed an out-of-domain coefficient to `solve_boussinesq`. Re-derived from the banked
+    JSONs: every recorded nu/kappa/nu_crit/nu0/nu_c in a scientific artifact is in
+    [0, inf), EXCEPT leg 185's (and leg 284's continuation of leg 185's) self-flagged
+    `nu` diagnostic rows, which are not `solve_boussinesq` coefficients at all -- see the
+    module comment above `_LEG185_LINEAGE_DIAGNOSTIC_FILES`.
 
     The scan's own positive control is that it DOES find the deliberately-injected
     negative coefficients inside the adversarial-battery artifacts."""
     res = bob.part4f_banked_coefficient_values()
     sites = bob.part4a_call_sites()
+
+    all_hits = _scan_scientific_out_of_domain_coefficients()
+    excused = [h for h in all_hits if h[0] in _LEG185_LINEAGE_DIAGNOSTIC_FILES]
+    unexcused = [h for h in all_hits if h[0] not in _LEG185_LINEAGE_DIAGNOSTIC_FILES]
+
     out = {"n_files_scanned": res["n_files_scanned"],
-           "n_out_of_domain_in_scientific_artifacts":
-               res["n_recorded_coefficients_out_of_domain"],
+           "n_out_of_domain_total": len(all_hits),
+           "n_out_of_domain_excused_leg185_lineage": len(excused),
+           "n_out_of_domain_unexcused": len(unexcused),
+           "excused_files": sorted(set(h[0] for h in excused)),
            "n_out_of_domain_inside_audit_artifacts":
                res["n_out_of_domain_inside_audit_artifacts"],
            "n_production_call_sites": sites["n_production_call_sites"],
            "n_production_sites_out_of_domain":
                sites["n_production_sites_with_out_of_domain_coefficient"]}
-    assert res["n_recorded_coefficients_out_of_domain"] == 0, res[
-        "by_key_scientific_measurements"]
+    # Sanity: the excused set must be non-empty (leg 185's rows are really there) and
+    # must be EXACTLY the two named files -- no third file has quietly started relying
+    # on this exclusion.
+    assert set(h[0] for h in excused) == set(_LEG185_LINEAGE_DIAGNOSTIC_FILES), out
+    assert not unexcused, unexcused
     assert sites["n_production_sites_with_out_of_domain_coefficient"] == 0, sites[
         "out_of_domain_sites"]
     # The positive control: the scanner must be able to report a non-zero count.
@@ -422,6 +528,41 @@ def check_banked_record_carries_no_out_of_domain_coefficient():
         "adversarial artifacts that deliberately contain them -- the scanner is broken, "
         "and its zero for scientific artifacts is meaningless")
     return out
+
+
+def check_CONTROL_narrowed_scan_still_catches_a_planted_out_of_domain_coefficient():
+    """THE planted-failure control for the narrowing above (the 361 lesson): a check
+    loosened without a demonstrated still-fails control is a blinded instrument.
+
+    Plants a THIRD file, outside the two named exclusions, containing a synthetic
+    out-of-domain `nu` inside a dict with no `_AUDIT_DECL_KEYS` (so `bob._classify_artifact`
+    buckets it `scientific_measurement`, same as a real production artifact), in a
+    scratch directory added to `_scan_scientific_out_of_domain_coefficients`'s roots.
+    The narrowed scan must still report it as UNEXCUSED. If this check ever passes
+    silently on a plant that should trip it, the narrowing above is too wide and must be
+    tightened, not the other way around.
+    """
+    tmp_dir = tempfile.mkdtemp(prefix="leg379_planted_ood_")
+    try:
+        planted_rel_dir = os.path.join(tmp_dir, "writeup_data_stand_in")
+        os.makedirs(planted_rel_dir, exist_ok=True)
+        planted_path = os.path.join(planted_rel_dir, "p2_route_zzzz_v1_synthetic.json")
+        with open(planted_path, "w") as fh:
+            json.dump({"leg": "379-planted-control", "route": "ZZZZ",
+                      "some_production_run": {"nu": -0.42, "kappa": 3.0}}, fh)
+        hits = _scan_scientific_out_of_domain_coefficients(extra_roots=(tmp_dir,))
+        planted_rel = os.path.relpath(planted_path, HERE)
+        matches = [h for h in hits if h[0] == planted_rel]
+        assert matches, (
+            "planted control FAILED TO TRIP: a synthetic nu=-0.42 outside the two "
+            "excused leg-185-lineage files was not detected by the narrowed scan -- "
+            f"the narrowing is too wide. hits={hits}")
+        assert planted_rel not in _LEG185_LINEAGE_DIAGNOSTIC_FILES
+        return {"planted_file": planted_rel, "planted_hits": matches,
+               "control": "TRIPPED as required"}
+    finally:
+        import shutil
+        shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
 def check_zero_guard_refuses_no_banked_phase1_initial_condition():
@@ -454,6 +595,7 @@ CHECKS = [
     check_zero_regression_n32_hashes_are_unchanged,
     check_banked_phase1_n128_reproduces_on_all_six_fields,
     check_banked_record_carries_no_out_of_domain_coefficient,
+    check_CONTROL_narrowed_scan_still_catches_a_planted_out_of_domain_coefficient,
     check_zero_guard_refuses_no_banked_phase1_initial_condition,
 ]
 
@@ -512,6 +654,10 @@ def test_banked_phase1_n128_reproduces_on_all_six_fields():
 
 def test_banked_record_carries_no_out_of_domain_coefficient():
     check_banked_record_carries_no_out_of_domain_coefficient()
+
+
+def test_CONTROL_narrowed_scan_still_catches_a_planted_out_of_domain_coefficient():
+    check_CONTROL_narrowed_scan_still_catches_a_planted_out_of_domain_coefficient()
 
 
 def test_zero_guard_refuses_no_banked_phase1_initial_condition():

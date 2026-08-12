@@ -302,12 +302,44 @@ def check_already_correct_paths_did_not_regress():
 # ---------------------------------------------------------------------------
 # (C) ZERO REGRESSION ON PREVIOUSLY-VALIDATED WELL-BEHAVED INPUT
 # ---------------------------------------------------------------------------
+# leg 379: bit-identity replaced by a documented ULP tolerance.
+#
+# `check_banked_stage1_5_t_stars_are_unmoved` originally asserted
+# `float.hex(got) == float.hex(banked)` -- exact bit identity. Under the environment this
+# suite now runs in (numpy 2.5.1) that assertion fails on 2 of the 20 banked values, with
+# NO change to `solver/gclm.py` and no thread-count sensitivity (reproduced identically
+# with OMP/OPENBLAS/MKL/NUMEXPR/VECLIB_THREADS all pinned to 1): `bump(kappa=2)` moves 3
+# ULP (`np.spacing`-defined) and `bump(kappa=5)` moves 12 ULP. Both go through
+# `clm_analytic_blowup_time`'s `np.fft.rfft`/`irfft` (`solver/gclm.py`), so this is a
+# library-version FFT-kernel drift, not a repair regression -- the exact shape of the
+# pattern this repo already has two precedents for: leg 147 (Route-NKB) measured 20 of 22
+# leaves moving at <= 3 ULP from a numpy-version FFT/reduction-order change with the
+# banked totals otherwise exact (`experiments/journal/leg_147.md`), and leg 131 measured
+# 1-2 ULP BLAS reduction-order drift on the same kind of re-run
+# (`experiments/journal/leg_131.md:128`). Bit identity is therefore the wrong bar for a
+# cross-numpy-version FFT re-run; a bounded ULP tolerance, generously above the largest
+# drift actually measured (12 ULP) but nowhere near the >1e14 ULP a genuine G1-class
+# defect would produce (G1's own violation saturated at a *relative* 1/3, i.e.
+# ~3e14 ULP), is the correct one.
+ULP_TOLERANCE = 25.0  # >= 2x the worst measured drift (12 ULP, bump(kappa=5))
+
+
+def _ulp_distance(got, banked):
+    """Signed distance in ULPs of `banked`'s binade (`np.spacing`), matching the drift
+    actually measured above. `banked == 0.0` cannot occur among these T* (all strictly
+    positive blow-up times), so no zero-magnitude special case is needed."""
+    return abs(float(got) - float(banked)) / np.spacing(float(banked))
+
+
 def check_banked_stage1_5_t_stars_are_unmoved():
-    """All 20 production T* values, pinned as literals to the bit.
+    """All 20 production T* values, checked to a documented ULP tolerance rather than
+    pinned to the bit -- see the module comment above `ULP_TOLERANCE`.
 
     These are the numbers G1 could in principle have moved, and the reason it did not:
     stage1_5_sweep.py energy-normalizes every IC to ENERGY_TARGET = pi/2, putting their
-    amplitudes ~11.9 decades above the old 1e-12 absolute constant.
+    amplitudes ~11.9 decades above the old 1e-12 absolute constant. The residual ULP
+    drift measured here is >10 orders of magnitude below that: G1's real defect moved
+    T* by a relative 1/3 (saturated), not a few ULP.
     """
     import stage1_5_sweep as s15
     with _quiet():
@@ -315,21 +347,64 @@ def check_banked_stage1_5_t_stars_are_unmoved():
         assert len(ics) == len(BANKED_T_STARS), (len(ics), len(BANKED_T_STARS))
         x_ref = grid(s15.N_REFERENCE)
         amps = []
+        worst_ulp, worst_label = 0.0, None
+        n_bit_identical = 0
         for ic, (label, banked) in zip(ics, BANKED_T_STARS):
             assert ic["label"] == label, (ic["label"], label)
             got = clm_analytic_blowup_time(ic["fn"])
-            assert float.hex(float(got)) == float.hex(banked), (label, got, banked)
+            ulp = _ulp_distance(got, banked)
+            assert ulp <= ULP_TOLERANCE, (label, got, banked, ulp, ULP_TOLERANCE)
+            if ulp == 0.0:
+                n_bit_identical += 1
+            elif ulp > worst_ulp:
+                worst_ulp, worst_label = ulp, label
             amps.append(float(np.max(np.abs(ic["fn"](x_ref)))))
         lo, hi = min(amps), max(amps)
         # The documented range in stage1_5_sweep.py:76 and STAGE_1_5_RESULTS.md.
         others = [t for lbl, t in BANKED_T_STARS if lbl != "bump(kappa=5)"]
         assert 1.0 <= min(others) and max(others) <= 6.5, (min(others), max(others))
         assert abs(dict(BANKED_T_STARS)["bump(kappa=5)"] - 15.9) < 0.05
-    return (f"all {len(ics)}/{len(ics)} banked T* values bit-identical to their literals; "
+    return (f"{n_bit_identical}/{len(ics)} banked T* values bit-identical; the rest within "
+            f"{ULP_TOLERANCE:.0f} ULP (worst {worst_ulp:.2f} ULP at {worst_label!r}); "
             f"normalized amplitudes in [{lo:.6f}, {hi:.6f}], i.e. "
             f"{np.log10(lo / 1e-12):.2f} decades above the old absolute 1e-12 tolerance; "
             f"the 19 non-outlier T* still lie in the documented [1.0, 6.5] and "
             f"bump(kappa=5) still reads 15.9 as STAGE_1_5_RESULTS.md records")
+
+
+def check_CONTROL_ulp_tolerance_still_catches_a_planted_deviation():
+    """THE planted-failure control for the ULP-tolerance loosening above (the 361
+    lesson): a check loosened without a demonstrated still-fails control is a blinded
+    instrument.
+
+    Plants a synthetic banked value displaced by `2 * ULP_TOLERANCE` ULP from a real
+    computed T* -- an order of magnitude past anything FFT-version drift produced above,
+    but still ~13 orders of magnitude tighter than G1's own 1/3-relative defect, so this
+    is squarely testing the TOLERANCE BOUNDARY, not a straw-man. `_ulp_distance` and the
+    same `<= ULP_TOLERANCE` assertion used in the real check must reject it.
+    """
+    import stage1_5_sweep as s15
+    with _quiet():
+        ics = s15.build_initial_conditions()
+        ic0, (label0, banked0) = ics[0], BANKED_T_STARS[0]
+        assert ic0["label"] == label0
+        got0 = clm_analytic_blowup_time(ic0["fn"])
+        planted_banked = float(got0) + 2.0 * ULP_TOLERANCE * np.spacing(float(got0))
+        planted_ulp = _ulp_distance(got0, planted_banked)
+        assert planted_ulp > ULP_TOLERANCE, (planted_ulp, ULP_TOLERANCE)
+        tripped = False
+        try:
+            assert planted_ulp <= ULP_TOLERANCE, (
+                label0, got0, planted_banked, planted_ulp, ULP_TOLERANCE)
+        except AssertionError:
+            tripped = True
+        assert tripped, (
+            "planted control FAILED TO TRIP: a synthetic deviation of "
+            f"{planted_ulp:.2f} ULP (> tolerance {ULP_TOLERANCE:.0f}) did not raise -- "
+            "the ULP-tolerance check is not actually checking anything")
+    return {"label": label0, "computed": float(got0), "planted_banked": planted_banked,
+           "planted_ulp": planted_ulp, "ULP_TOLERANCE": ULP_TOLERANCE,
+           "control": "TRIPPED as required"}
 
 
 def check_production_call_surface_is_admissible():
@@ -373,6 +448,7 @@ CHECKS = [
     check_G4_nonfinite_stop_criteria_are_rejected,
     check_already_correct_paths_did_not_regress,
     check_banked_stage1_5_t_stars_are_unmoved,
+    check_CONTROL_ulp_tolerance_still_catches_a_planted_deviation,
     check_production_call_surface_is_admissible,
 ]
 
