@@ -1,0 +1,36 @@
+{
+  "unit": "U2",
+  "milestone": "M2",
+  "programme": "PROG-R4",
+  "N": 24,
+  "Re": 60.0,
+  "n_forcing": 4,
+  "dt": 0.01,
+  "T_burn": 500.0,
+  "T_recorded": 100000.0,
+  "dt_save": 0.25,
+  "n_snapshots": 400000,
+  "n_amplitude_modes": 145,
+  "burn_wall_seconds": 45.63417625427246,
+  "dns_wall_seconds": 12379.473534584045,
+  "steps": 10000000,
+  "seconds_per_step": 0.0012379473534584046,
+  "attractor_diagnostics": {
+    "note": "D/D_lam sampled every 100 time units; a sustained value well below 1 with fluctuation is the signature of the chaotic attractor rather than the laminar solution",
+    "D_over_Dlam_mean": 0.06446617480142604,
+    "D_over_Dlam_std": 0.02531758474942621,
+    "D_over_Dlam_min": 0.03329454968047421,
+    "D_over_Dlam_max": 0.17893720290997725,
+    "n_samples": 1000
+  },
+  "sourced_thresholds": {
+    "R_thres_record": 0.3,
+    "R_thres_window": 0.25,
+    "T_window": [
+      0.5,
+      60.0
+    ],
+    "source": "Chandler & Kerswell 2013 arXiv:1207.4682 (R_thres=0.3 at Re=60, T=1e5 per run) and Lucas & Kerswell 2015 arXiv:1406.1820 (R<0.25, 0.5<T<60 fed to Newton); quoted via writeup/data/p2_route_rpol_v1.json"
+  },
+  "clay_movement": "none -- no L1-L4 link moved by this unit"
+}

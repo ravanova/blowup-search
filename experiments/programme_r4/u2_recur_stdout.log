@@ -1,0 +1,4 @@
+scanned 95542640 pairs in 71.0s; 31244629 below R_thres=0.3; 913301 strict local minima; 2014 taken
+full minimisation on 2014 in 3.8s; best R = 0.016543
+579 inside L&K's Newton window R<0.25, 578 of those with nonzero shift (the RPO class)
+wrote /home/andy/projects/Unsolved/experiments/programme_r4/u2_recurrence_library.json

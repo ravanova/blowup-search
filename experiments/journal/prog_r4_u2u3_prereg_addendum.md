@@ -297,6 +297,83 @@ reads it as a verdict is reading it backwards.
 The controls still gate everything: if P does not recover, or N does recover, at the caps used,
 G1 answers `UNANSWERED` regardless of the above.
 
+## 3d. AMENDMENT 4 — the seed mining is stratified by named period. Written AFTER the shortfall was observed.
+
+This one was made in response to a measurement, and that is stated first because it is the thing
+a reader has to be able to check.
+
+U2's recurrence stage originally took the best `max_candidates=400` strict local minima of the
+prefilter `R_red` in the `(t, T)` plane, ranked globally by `R_red`, and passed them to the full
+minimisation. Run at full length on the `T=1e5` DNS that ranking produced, at the end of the
+funnel, **exactly one** seed that was simultaneously (i) inside Lucas & Kerswell's Newton window
+`R < 0.25`, (ii) free of a discrete `y`-shift (`m = 0`, the only class this realization's Newton
+solver can continue — see §1 and lesson 91), and (iii) within `T_ANCHOR_TOL = 1.0` of one of the
+eight named Table IV periods. The funnel, counted:
+
+| stage | count |
+|---|---|
+| candidates passed to full minimisation | 400 |
+| of those, `R < 0.25` (L&K's Newton window) | 260 |
+| of those, `m = 0` | 102 |
+| of those, anchored to a named Table IV period | **1** (UPO32) |
+
+One seed, not 100. The pre-registered scale was unreachable — and **not** because the flow lacks
+the orbits or because Newton is too slow. The cause is entirely in the ranking: short-period near
+recurrences at `T = 1.25 - 2.5` are far more numerous and score lower on `R_red` than anything at
+`T ~ 14.8 - 19.3`, which is the band every named orbit lives in, so a global top-400 spends its
+whole budget below the band of interest.
+
+**The amendment.** The candidate budget is stratified. The global list is kept **whole** and
+nothing is removed; *in addition*, the best `per_anchor` strict local minima within
+`T_ANCHOR_TOL = 1.0` of each named published period are taken. Added candidates face the same
+full minimisation over the continuous `x`-shift and discrete `y`-shift, the same `R < 0.25`
+window test and the same `m = 0` requirement as every other candidate.
+
+**Why this cannot bias G1 toward `YES`.** It changes which seeds are *offered* and never what
+counts as a recovery. A recovery still requires an actual hookstep-Newton convergence to
+`||R|| <= tol = 1e-8` on the extended system, whose converged `(T, s)` then has to match a named
+Table IV row within `MATCH_T_TOL = MATCH_S_TOL = 0.05`. No quantity of offered seeds can
+manufacture that; a bad seed simply fails to converge and is banked as a failed attempt. The
+direction the change *does* have teeth in is the other one: without it, U3 could only ever have
+reported a shortfall on a pool of one, which is a weaker and less informative statement than the
+`UNDER-RESOURCED` §3c already commits to.
+
+**`per_anchor` was set after seeing the funnel, and here is the rule.** At `per_anchor = 80` the
+anchored/`m=0`/in-window pool came to 30 — better than 1 by a factor of 30, still short of 100.
+The three named clusters (`~14.78`; `16.753 - 17.160`; `18.694 - 19.334`) overlap inside a
+tolerance of 1.0, so the eight bands deduplicate to far fewer than `8 x per_anchor` distinct
+cells and the pool grows sublinearly in `per_anchor`. `per_anchor` is therefore raised, **in one
+step and once**, to `500`, the value recorded in the library JSON's `prefilter.stratification`
+block along with the per-anchor availability actually realised. If the pool still falls short of
+100 at that value, U3 runs on the pool it has and reports the shortfall as a count — it does
+**not** get raised again until the number comes out, which is the researcher-degree-of-freedom
+this paragraph exists to close.
+
+**Realised at `per_anchor = 500`**, on the same `T=1e5` DNS and the same 913,301 strict local
+minima (the prefilter scan is unchanged; only the selection off it is):
+
+| stage | global-only | `per_anchor = 80` | `per_anchor = 500` |
+|---|---|---|---|
+| candidates passed to full minimisation | 400 | 634 | 2014 |
+| of those, `R < 0.25` | 260 | 333 | 579 |
+| of those, `m = 0` | 102 | 131 | 234 |
+| of those, anchored to a named period | **1** | **30** | **133** |
+
+133 ≥ 100, so U3 runs at the pre-registered count and the seed-supply shortfall does not arise.
+The pool grows sublinearly as predicted: `8 x 500 = 4000` band takes deduplicate to 1614 added
+cells. Per anchor the m=0 in-window pool is `UPO9 42, UPO32 21, UPO22 21, UPO37 20, UPO17 19,
+UPO20 6, UPO35 4, UPO34 0` — anchors are assigned by nearest named period, so UPO34 (18.878),
+sandwiched between UPO35 (18.912) and UPO32 (18.694) at a spacing far below `T_ANCHOR_TOL`, is
+never the nearest row for anything and draws zero. That is a property of the published table's
+spacing, not of the mining, and it is recorded here so a reader does not read UPO34's zero as a
+statement about UPO34.
+
+The gate is unchanged by any of this: G1 asks whether **at least one** named row recovers.
+
+The library JSON records `n_from_global_ranking`, `n_added_by_anchor_bands` and
+`per_anchor_available` so the split is auditable after the fact, and `u3_g1_attempts.py` carries
+a drift-guard assertion that its copy of the period table and of `T_ANCHOR_TOL` agrees with U2's.
+
 ## 4. What this addendum does not do
 
 It does not restate, soften or re-scope G1. It does not touch the compliant scale. It does not

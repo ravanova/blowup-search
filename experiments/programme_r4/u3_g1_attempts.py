@@ -96,6 +96,8 @@ from solver.kolmogorov2d_nkbasin import (  # noqa: E402
 )
 from experiments.programme_r4.u2_m2_dns_recurrence import (  # noqa: E402
     CKPT, DT, DT_SAVE, LIB, META, N_FORCING, N_GRID, RE, regenerate,
+    TABLE_IV_PERIODS as _U2_TABLE_IV_PERIODS,
+    T_ANCHOR_TOL as _U2_T_ANCHOR_TOL,
 )
 from experiments.programme_r4 import u3_controls  # noqa: E402
 
@@ -123,6 +125,14 @@ TABLE_IV = [
 # A candidate is anchored to a named row when its measured period is within
 # this much of the published one (~5% at T~19). Stated before the run.
 T_ANCHOR_TOL = 1.0
+
+# U2's library stratifies its candidate budget across these same published
+# periods, so it holds its own copy (it cannot import this module -- this
+# module imports it). Two copies of a published table is one more than is safe,
+# so they are checked against each other at import time rather than trusted.
+assert [(n, T) for n, T, _, _ in TABLE_IV] == _U2_TABLE_IV_PERIODS, (
+    "Table IV periods disagree between u2_m2_dns_recurrence and u3_g1_attempts")
+assert T_ANCHOR_TOL == _U2_T_ANCHOR_TOL, "anchor tolerance disagrees with U2"
 TOL = 1e-8
 MAX_NEWTON = 40
 MAX_GMRES = 200
@@ -210,6 +220,21 @@ def build_jobs(args, solver):
             continue
         pool.append((c, a))
     pool.sort(key=lambda ca: ca[0]["R"])
+    # The funnel is banked whole. Its last two numbers are what addendum
+    # section 3d exists about: a global-only ranking left n_anchored = 1, and if
+    # n_anchored is still below --n-attempts the run is short of the
+    # pre-registered scale for a SEED-SUPPLY reason, which is a different
+    # shortfall from section 3c's iteration-cap one and must not be conflated
+    # with it. Both are reported; neither licenses a `no`.
+    funnel = dict(
+        n_candidates=len(lib["candidates"]),
+        n_in_newton_window=sum(1 for c in lib["candidates"]
+                               if c["in_newton_window"]),
+        n_zero_y_shift=sum(1 for c in lib["candidates"]
+                           if c["in_newton_window"] and c["m"] == 0),
+        n_anchored=len(pool),
+        n_requested=args.n_attempts,
+        short_of_requested=max(0, args.n_attempts - len(pool)))
     pool = pool[:args.n_attempts]
 
     need = [c["snapshot_earlier"] for c, _ in pool]
@@ -233,7 +258,7 @@ def build_jobs(args, solver):
                           seed_residual_minus=r_minus,
                           seed_extended_residual=min(r_plus, r_minus),
                           snapshot_earlier=c["snapshot_earlier"])))
-    return jobs, dropped_m, sign_tally, lib, meta
+    return jobs, dropped_m, sign_tally, lib, meta, funnel
 
 
 def main():
@@ -255,7 +280,8 @@ def main():
     MAX_NEWTON, MAX_GMRES = args.max_newton, args.max_gmres
 
     solver = Kolmogorov2D(N=N_GRID, Re=RE, n_forcing=N_FORCING, dt=DT)
-    jobs, dropped_m, sign_tally, lib, dns_meta = build_jobs(args, solver)
+    jobs, dropped_m, sign_tally, lib, dns_meta, funnel = build_jobs(
+        args, solver)
     print(f"{len(jobs)} attempts queued ({dropped_m} candidates dropped for "
           f"m != 0); seed shift sign: {sign_tally}")
     if not jobs:
@@ -448,7 +474,8 @@ def main():
             ban2="PASS - every attempt anchored to a named row; an unanchored "
                  "attempt would STOP and escalate, not report",
             shift_sign_measured_not_assumed=sign_tally,
-            candidates_dropped_for_nonzero_y_shift=dropped_m),
+            candidates_dropped_for_nonzero_y_shift=dropped_m,
+            seed_supply_funnel=funnel),
         magnitudes=dict(
             final_residuals_sorted=finals,
             best_final_residual=finals[0] if finals else None,

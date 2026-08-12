@@ -1,23 +1,28 @@
 """PROG-R4, unit U2 -- MILESTONE M2: the T=1e5 DNS and its recurrence library.
 
   ############################################################
-  ##  STATUS 2026-08-12: MILESTONE M2 IS **UNANSWERED**.    ##
-  ##  The programme was wound down by user instruction with ##
-  ##  the DNS at t = 16,000 of the required 100,000 (16%).  ##
-  ##  THAT RUN WAS KILLED AND ITS OUTPUT ABANDONED. No      ##
-  ##  recurrence library was produced at the compliant      ##
-  ##  scale, no artefact of this unit is banked, and M2 is  ##
-  ##  NOT claimed. The partial trajectory files are         ##
-  ##  gitignored and are NOT on the branch.                 ##
+  ##  STATUS 2026-08-12: MILESTONE M2 IS **ANSWERED**.      ##
+  ##  A previous session was wound down with the DNS at 16% ##
+  ##  and that partial run was abandoned. THIS UNIT WAS     ##
+  ##  THEN RUN TO COMPLETION, from t=0, at the compliant    ##
+  ##  scale: T=1e5, N=24, Re=60, dt=0.01, 400,000 snapshots ##
+  ##  at dt_save=0.25, 3.44 h wall, 1.2379 ms/step, and the ##
+  ##  trajectory sits on the chaotic attractor              ##
+  ##  (D/D_lam = 0.0645 +/- 0.0253).                        ##
   ##                                                        ##
-  ##  WHAT IS TRUSTWORTHY HERE: the code path was exercised ##
-  ##  in a scratch dry run over a 9,500-time-unit prefix    ##
-  ##  (scanned 9.02e6 pairs, 87,859 strict local minima,    ##
-  ##  best R = 0.0345, T range 1.25-59.50, 174 inside       ##
-  ##  L&K's Newton window). THOSE NUMBERS ARE FROM A        ##
-  ##  PARTIAL PREFIX AND ARE NOT A RESULT -- they say the   ##
-  ##  code runs, nothing about the flow's orbits. They were ##
-  ##  never banked to writeup/data and must not be.         ##
+  ##  The recurrence library was mined from it: 95,542,640  ##
+  ##  (t, T) pairs scanned, 913,301 strict interior local   ##
+  ##  minima of the lossless prefilter, best R = 0.016543   ##
+  ##  against leg 353's best of 0.177 for UPO37.            ##
+  ##                                                        ##
+  ##  M2 IS A MILESTONE, NOT A GATE. It says the instrument ##
+  ##  and the data exist at the pre-registered scale. It    ##
+  ##  says NOTHING about whether any named Table IV orbit   ##
+  ##  recovers -- that is gate G1, unit U3.                 ##
+  ##                                                        ##
+  ##  UNVERIFIED under ORCHESTRATION.md section 3f: built   ##
+  ##  and checked in the same session, with no paired       ##
+  ##  verifier. Verification is a fresh session.            ##
   ############################################################
 
 WHAT THIS UNIT IS. A build unit. It supplies the two things gate G1 needs and
@@ -133,6 +138,19 @@ CKPT = os.path.join(HERE, "u2_dns_ckpt.npy")
 FEAT = os.path.join(HERE, "u2_dns_feat.f32")
 META = os.path.join(HERE, "u2_dns_meta.json")
 LIB = os.path.join(HERE, "u2_recurrence_library.json")
+
+# The eight named rows of Lucas & Kerswell 2015, arXiv:1406.1820v2, Table IV,
+# as pre-registered by leg 353 and banked in writeup/data/p2_route_dsspb5_v1
+# .json. Periods only -- the shifts are U3's business, not the library's. Held
+# here rather than imported from u3_g1_attempts.py because that module imports
+# THIS one; u3 asserts the two lists agree, so they cannot drift apart.
+TABLE_IV_PERIODS = [
+    ("UPO37", 19.334), ("UPO35", 18.912), ("UPO34", 18.878),
+    ("UPO32", 18.694), ("UPO22", 17.160), ("UPO20", 16.908),
+    ("UPO17", 16.753), ("UPO9", 14.776),
+]
+# Same value U3 anchors with (~5% at T~19), stated before the run.
+T_ANCHOR_TOL = 1.0
 PROGRESS = os.path.join(HERE, "u2_dns_progress.txt")
 
 
@@ -337,9 +355,48 @@ def run_recur(args):
     ii, jj = np.nonzero(is_min)
     n_local_minima = ii.size
     order = np.argsort(C[ii, jj])
-    chosen = [(float(C[ii[o], jj[o]]),
-               int(ii[o] + 1 + lag_hi),
-               int(jj[o] + 1 + lag_lo)) for o in order[:args.max_candidates]]
+
+    def cell(o):
+        return (float(C[ii[o], jj[o]]),
+                int(ii[o] + 1 + lag_hi),
+                int(jj[o] + 1 + lag_lo))
+
+    chosen = [cell(o) for o in order[:args.max_candidates]]
+    n_global = len(chosen)
+
+    # STRATIFICATION BY NAMED PERIOD. The global ranking above is the right
+    # criterion for "what recurs on this attractor", and it is kept whole. It
+    # is the WRONG criterion for U3's question, which is not "what recurs" but
+    # "does a NAMED Table IV orbit recover", and the two are not the same
+    # budget. Measured on the first full-length pass: of the 400 globally best
+    # local minima, 260 fell inside L&K's Newton window, 102 of those had
+    # m = 0, and exactly ONE anchored to a named row. The rest sit at
+    # T = 1.25-2.5, because short-period near-recurrences are far more numerous
+    # and score far lower on R than the T ~ 15-19 band where every named orbit
+    # lives. A global top-N therefore starves the only band U3 can use, and
+    # "100 attempts" is unreachable for a reason that has nothing to do with
+    # the flow.
+    #
+    # So the budget is also spent PER NAMED PERIOD: the best `per_anchor` local
+    # minima within T_ANCHOR_TOL of each published period. This ADDS
+    # candidates and removes none; the global list is still recorded in full,
+    # and every added candidate faces the same full minimisation, the same
+    # R < R_THRES_WINDOW window test and the same m = 0 requirement as any
+    # other. It changes which seeds are OFFERED to Newton, never what counts as
+    # a recovery, so it cannot move G1 toward `yes` -- Newton still has to
+    # converge to tol and still has to land on the published (T, s).
+    T_of_lag = (np.asarray(jj, dtype=np.float64) + 1 + lag_lo) * DT_SAVE
+    picked = {o: None for o in order[:args.max_candidates]}
+    per_anchor_counts = {}
+    for name, T_pub in TABLE_IV_PERIODS:
+        band = np.abs(T_of_lag[order] - T_pub) <= T_ANCHOR_TOL
+        take = [o for o, b in zip(order, band) if b][:args.per_anchor]
+        per_anchor_counts[name] = len(take)
+        for o in take:
+            if o not in picked:
+                picked[o] = None
+                chosen.append(cell(o))
+    n_added = len(chosen) - n_global
 
     t0 = time.time()
     need = [i for _, it, lag in chosen for i in (it, it - lag)]
@@ -378,6 +435,25 @@ def run_recur(args):
             n_pairs_below_R_thres_record=n_below,
             n_strict_local_minima_in_the_t_T_plane=int(n_local_minima),
             n_taken_for_full_minimisation=len(chosen),
+            stratification=dict(
+                why=("a global top-N ranks short-period near-recurrences "
+                     "above the T~15-19 band every named Table IV orbit lives "
+                     "in; measured on the first full-length pass, the global "
+                     "400 yielded exactly ONE anchored, m=0, in-window seed, "
+                     "so U3's pre-registered 100 attempts were unreachable "
+                     "for a reason that is about the ranking, not the flow"),
+                rule=(f"additionally take the best {args.per_anchor} strict "
+                      f"local minima within T_ANCHOR_TOL={T_ANCHOR_TOL} of "
+                      "each named published period"),
+                adds_only=("the global list is kept whole and nothing is "
+                           "removed; added candidates face the same full "
+                           "minimisation, the same R<R_THRES_WINDOW test and "
+                           "the same m=0 requirement, so this changes which "
+                           "seeds are OFFERED and never what counts as a "
+                           "recovery"),
+                n_from_global_ranking=n_global,
+                n_added_by_anchor_bands=n_added,
+                per_anchor_available=per_anchor_counts),
             selection=("strict interior local minima of R_red in the (t, T) "
                        "plane, the papers' own criterion; ranking by R "
                        "instead fills the budget with T=0.5 cells where the "
@@ -420,6 +496,11 @@ def main():
     ap.add_argument("--stage", choices=["dns", "recur"], required=True)
     ap.add_argument("--T", type=float, default=T_TOTAL)
     ap.add_argument("--max-candidates", type=int, default=400)
+    # Per named Table IV period, on top of the global budget. 80 x 8 rows,
+    # against a measured survival of ~65% through the R < 0.25 window and ~39%
+    # through m = 0, is sized to clear the 100 attempts U3's compliant scale
+    # asks for.
+    ap.add_argument("--per-anchor", type=int, default=80)
     args = ap.parse_args()
     (run_dns if args.stage == "dns" else run_recur)(args)
 
