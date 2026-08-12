@@ -35,7 +35,7 @@ prose as before.
 |---|---|---|---|
 | A | 229 | PNRV | no |
 | B | 362 | B7X | yes |
-| C | 363 | CKNQ | yes |
+| C | 364 | NRSV | yes |
 | D | 355 | LCB3 | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -19742,10 +19742,122 @@ packet + GA note, POCP (ii), C4/escalation-#3, 313 + ban-wording, 320) —
 the cascade note stands: a ruling on any one likely reshapes the others,
 and it routes to the DM verbatim for a one-cycle cascade execution.
 
+Cycle 10z: C/363 landed YES at 2ff1538 — both constants
+NO-EXPLICIT-VALUE-LOCATED with sourced reach-failures (Lei-Ren 2022 for
+ε_*: CKN's statement universal-but-unnumbered and PV's citations don't
+use the quantitative route; 2512.21025 for K_H: wrong target quantity,
+wrong regime); **δ₀ stays BLOCKED — 360's NON-OPERATIONAL verdict
+CONFIRMED, not reopened**; 5/13 zero-result queries individually banked
+as refusals-to-locate. **Record correction: leg 355's landing (8541182)
+remains UNABSORBED** — cycle 10y flagged it observed-but-unreported; the
+orchestrator's roster line saying "absorbed at 10y" is inaccurate; the
+landing report + audit are requested and D's refill ruling issues with
+that absorption (expected fill: 293 JFA, legal once two eligibles are
+live). C ← **leg 364 NRSV** (fresh eligible draft: verify the NRS 1996
+theorem statement from obtainable sources — the paywall gap 253 and 359
+both hit — so the screen's T1 entry rests on a verified statement, not a
+summary). Floor: 362 + 364 eligible live.
+
 **Reserve queue: 9 undispatched legs (293, 298, 299, 310, 325, 231, 232,
 233, 234).** Immediately dispatchable: **3** (293 JFA, 298 CORRX, 299
-TESTA). Next fresh leg number: **364.**
+TESTA). Next fresh leg number: **365.**
 
 Nothing in this update lifts a ban. An instrument fixed without being
 blinded and a verification leg finally taking its turn are record
 hygiene; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10z) — 363 YES ABSORBED (δ₀ BLOCKED, 360
+CONFIRMED); THE 355 MISCHARACTERIZATION CORRECTED (STILL UNABSORBED,
+REPORT REQUESTED); C ← LEG 364 NRSV
+
+Written from the same detached lineage, resynced to origin/main = 2ff1538.
+
+### 363 CKNQ gate YES, absorbed at full strength
+
+Both constants adjudicated to definite sourced verdicts, neither hedged:
+ε_* NO-EXPLICIT-VALUE-LOCATED (Lei-Ren 2022 checked — CKN's own theorem
+statement is universal-but-unnumbered, and PV's citations do not use the
+quantitative route per Lei-Ren's own classification); K_H
+NO-EXPLICIT-VALUE-LOCATED (2512.21025 checked — wrong target quantity, a
+Hölder exponent not a multiplicative Harnack constant, and a regime not
+established for PV's operator). δ₀ stays BLOCKED; 360's NON-OPERATIONAL
+verdict is CONFIRMED at its own stated contingency rather than reopened;
+the pressure-decay condition stands as the independent blocker it always
+was. Five zero-result queries banked individually as refusals-to-locate.
+Endorsed without amendment. The PVDS thread closes: the derived screen is
+non-operational on two independently-confirmed grounds.
+
+### Record correction — 355: observed, NOT absorbed
+
+Cycle 10y flagged 355's landing (8541182) as observed on main while
+syncing, explicitly unabsorbed pending the orchestrator's landing report
+and audit. The orchestrator's latest roster line ("D=355, landed,
+absorbed by you at cycle 10y") is INACCURATE and is corrected here before
+it can propagate: no gate outcome, territory audit, or independent
+merge-gate re-run for 355 has reached the DM. **Requested: the standard
+landing report. D's refill ruling issues with that absorption** —
+expected fill 293 JFA, legal once 362+364 hold the floor. Process note:
+this is the second landing this window to reach main ahead of its report
+(339 was the first); the sync-check habit caught both, and the standing
+practice stands — the DM absorbs on reports, not on commit sightings.
+
+### Refill — C ← leg 364 NRSV, with the reasons stated
+
+The floor needs a second eligible live leg alongside 362, and the record
+itself names the question: NRS 1996 is paywalled and has now been
+unobtainable twice (leg 253; leg 359, which disclosed the gap rather than
+papering over it). The screen's Theorem-1 ledger entry — and 362's
+in-flight extension — rest on 253's summary plus Tsai's restatement.
+
+```
+### 364 — ROUTE-NRSV: VERIFY THE NRS 1996 THEOREM STATEMENT FROM
+OBTAINABLE SOURCES (the twice-hit paywall gap, closed secondhand or
+declared unclosable)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** The ledger's T1 entry encodes a hypothesis whose primary
+source (Nečas-Růžička-Šverák 1996) no leg has read — 253 and 359 both hit
+the paywall. Obtainable sources exist that STATE the theorem: Tsai 1998's
+own restatement (pinned by 359), the Seregin/Šverák review literature,
+and citing texts that quote the hypothesis. Cross-check the ledger's
+encoded clause against every obtainable statement, clause-by-clause, with
+each source pinned.
+**Gate.** A definite verdict — (i) CONFIRMED-AS-ENCODED (≥2 independent
+obtainable statements agree with the ledger's clause; sources quoted and
+pinned), (ii) DISCREPANCY-FOUND (the differing clause quoted from its
+source; flagged to 362/the screen's owner, never edited in by this leg),
+or (iii) UNOBTAINABLE-EVEN-SECONDHAND (the search recorded, links not
+counts; the ledger entry gains an inline provenance caveat via a flag)?
+  yes (any definite class) -> Bank; the screen's T1 provenance is settled
+        either way.
+  no  -> Sources conflict irreconcilably: quote both sides; that conflict
+        IS the finding, banked at full strength.
+**Territory.** writeup/data/p2_route_nrsv_v1.json, writeup/novelty/
+leg_364.md, experiments/journal/leg_364.md. Reads 253/359's banked
+records and obtainable texts; edits nothing; NO paywall circumvention —
+obtainable means legitimately obtainable, and a refusal is banked as a
+refusal. No figure.
+**Difficulty.** standard
+**Preconditions:** None. (§3a rule 4: rigidity-ledger-adjacent —
+pre-authorised as written; reads and reports, lifts nothing.)
+```
+
+**Floor: 362 + 364 eligible live (2 of the currently-filled slots; D
+refills with 355's absorption).** FLOOR-TABLE synced (C 363→364).
+
+### Standing state
+
+A/229 PNRV (resumed, the dispatch brief endorsed as written — the
+resume-or-restart decision correctly left to the leg with the staleness
+re-check mandated); B/362 B7X; D: 355 landed, awaiting report. With the
+user: six items, cascade note standing. Next vacancy after D: 293 JFA.
+
+**Reserve queue: 9 undispatched legs (293, 298, 299, 310, 325, 231, 232,
+233, 234).** Immediately dispatchable: **3**. Next fresh leg number:
+**365.**
+
+Nothing in this update lifts a ban. A confirmed non-operational verdict
+and a provenance verification are ledger hygiene; no L1-L4 link moved;
+Clay stays ~0.05%.
