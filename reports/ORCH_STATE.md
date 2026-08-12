@@ -84,6 +84,37 @@ carried openly rather than dropped.
 directories in as embedded gitlinks; caught before push, dropped from the commit, and
 `.gitignore` extended so it cannot recur.
 
+### ⚠ STANDING HAZARD — `git <cmd> | tail && git push` swallows the failure
+
+**This defect occurred TWICE in one hour, independently, in two different agents (one of them
+integration itself), and it is the reason `main` went red on 2026-08-12.** In a shell pipeline
+the exit status is the **last** command's, so an `&&` guard reads `tail`'s success and proceeds
+no matter what the git command actually did.
+
+- **Integration's instance:** `scripts/merge_gate.sh origin/main | tail -2` masked a printed
+  `MERGE GATE: FAIL`, and the `&&` chain pushed on top of a red tree. The contract's "a FAIL is
+  fixed in your worktree and never pushed" was defeated by the checking method, not by a
+  judgement call.
+- **Leg 385's instance:** `git rebase origin/main 2>&1 | tail -3 && git push origin HEAD:main`
+  masked a **stopped rebase** — a conflict in `writeup/build_figures.py`, leg 381's fig104 line
+  against leg 385's fig103 line, both wanted and both ultimately kept. `HEAD` was parked
+  mid-rebase on commit 3 of 4, so the push landed **3 of 4 commits**: the new solver module
+  `solver/dssp_decay_samples.py` **without** the `capabilities.py` row that lived in commit 4.
+  That fails `test_every_solver_module_is_indexed` and therefore fails the merge gate **for
+  every agent in the run**. Leg 385's own gate had passed on its complete branch; the gate was
+  never run on the state that reached `main`.
+
+**Standing rules, now written into every dispatch brief:**
+1. **Never chain a push behind a piped git command.** Redirect to a file and test `$?`.
+2. **A mid-rebase `HEAD` is a publishable-looking pointer at an unpublishable state.**
+3. **Every new module under `solver/` is indexed in `capabilities.py` in the same commit**, or
+   the gate goes red for everyone.
+
+Both are the **"green light that cannot go red"** pattern — the same failure class as leg 233's
+fabricated zero and the planted-mismatch requirement integration wrote into leg 384's brief.
+**Four instances this cycle, two of them in the run's own machinery rather than in the
+science.** No scientific record was affected in either case.
+
 ---
 
 ### Superseded status: TERMINAL — 2026-08-12, cycle 10pp (retained verbatim; its
