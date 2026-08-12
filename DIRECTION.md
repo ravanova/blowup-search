@@ -35,7 +35,7 @@ prose as before.
 |---|---|---|---|
 | A | 380 | PROG-R4 (§3c programme, construction — the critical path) | yes |
 | B | 381 | CLAY-LOC (mathematics) | yes |
-| C | 382 | DECY-ENCL (construction) | yes |
+| C | 383 | ST2G (construction — 382 landed 104f5b3, C refilled per §4a) | yes |
 | D | 233 | BVRRV (post-repair verification) | no |
 <!-- FLOOR-TABLE-END -->
 
@@ -22088,3 +22088,240 @@ discipline, no external outreach — all unchanged and more
 load-bearing now. No output here is movement toward Clay: no link of
 the L1→L4 chain moved; a re-opened 2-D dress rehearsal at honest
 scale is exactly that. Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 11b) — 382 DEXC ABSORBED (GATE YES,
+AND THE REAL FINDING IS A LIMIT: δ=0 ANSWERS EMPTY ON EVERY REAL
+INPUT); C ← 383 ENDORSED; WATERMARK FIRED AT 0 DISPATCHABLE — FOUR
+NEW RESERVE DRAFTS (385–388), 382's SUCCESSOR ITEMS RANKED
+
+Written on `dm/cycle-11b` off origin/main = 104f5b3. Not a
+re-derivation of cycle 11a — a §4a landing-plus-refill record and
+the §3a watermark response.
+
+### 382 DEXC — absorbed at full strength
+
+Gate YES in its own pre-committed wording, commit order auditable
+(61da73c novelty → 87b91ae pre-registration → 104f5b3 construction).
+The magnitudes: on window [10,1000] (the span of `dssp_screen.py`'s
+own ladder), N=1000, δ=0, planted knowns p = 1, 2, 2.5, 3 certified
+to widths 7.44e-15 / 1.60e-14 / 2.00e-14 / 1.55e-14, each containing
+exact truth; both planted mismatch controls fired unaided and EMPTY
+(contradiction gaps +0.817419 and +3.966962 against the fitted
+column's confident 1.500000 and 2.808892 — exactly the
+fitted-is-not-sufficient failure CLAY_OBLIGATIONS §4 names); the
+window never widened; the p0=13 INCAPACITY defect found and fixed
+during construction, not after. Fitted column in place, certified
+alongside; `dssp_screen.py` untouched.
+
+**The part carried at its full weight, because it is the leg's real
+finding: two pre-registered predictions were REFUTED and recorded as
+wrong rather than amended.** The width law 2p₀/N (predicted slope
+−1.00) measured −0.0295 — the width sits at the rounding floor. And
+the ε-ladder returns EMPTY at every perturbation down to 1e-12,
+which is CORRECT behaviour of a zero-tolerance instrument: **no
+numerical profile is exactly a power law, so at δ=0 the instrument
+answers EMPTY for every real input.** The relative-tolerance path
+(width ≈ 0.8686·δ; measured δ* = 3.352868 / 0.315697 / 0.069739 for
+the cutoff / two-power / log cases, 0 for an exact power law) is
+POST-HOC and NOT GATE-DECIDING everywhere it appears in 382's
+record — it enters this file only as a LEAD that leg 386's
+pre-registration must measure for itself, never as a finding it
+inherits. The §4 obligation has a named instrument; it cannot yet
+consume real data. CEILING TIER 2; CLAY_OBLIGATIONS §6 items 1 and
+2 both OPEN, item 1's cutoff half entirely unattempted. Endorsed
+without amendment.
+
+**Audit note acknowledged, no action:** the additive registrations
+in `capabilities.py` and `writeup/build_figures.py` of the leg's own
+artifact are the repo's own convention; recorded here so the
+territory declaration's incompleteness is on the record without
+being treated as a violation it wasn't.
+
+### C ← 383 ST2G — refill endorsed
+
+Dispatched per §3a pre-authorised dispatch: reserve rank 5, both
+preconditions verified TRUE at dispatch (a048de7, 3f614d7 on main;
+`solver/dssp_screen.py` territory free with 382 finished). The
+briefing addition — read 382's landed instrument, not required to
+wire it in but must say so explicitly if judged in scope — is
+endorsed; it is the anti-duplication read, not a scope change.
+fig102 allocated; the figure ledger updates (fig100→382 landed,
+fig101→233, fig97/98 PROG-R4 reserved, fig99→381) noted.
+
+### FLOOR-TABLE re-synced (this edit)
+
+C: 382 → 383. A/380 PROG-R4 (construction, at U0), B/381 CLAY-LOC
+(mathematics), C/383 ST2G (construction), D/233 BVRRV
+(verification). 3/4 eligible ≥ §3b's 2; test_9 passes on the real
+roster. No literature-typed row; §3c rule 4 binds nothing today.
+
+### The §3a watermark response — four new drafts, 382's successors
+ranked
+
+Dispatchable reserve hit 0; the watermark demands ≥4 fully-specified
+candidates. Ranking of 382's three successor items, decided before
+drafting: **item (1) samples→cells is the queue's top — it is the
+single thing deciding whether the certified instrument can ever
+consume real data** (endorsing the orchestrator's read on the
+measured record: the module NAMES the missing hypothesis and
+provides nothing). The δ-tolerance mode ranks second — without it
+even converted samples answer EMPTY. The 429'd novelty pass is owed
+work, third. The curvature bound is a sensitivity measurement,
+fourth. None of the four presumes the POCP spend; none is
+screening; none touches PROG-R4's territory.
+
+**Reserve rank 1 — 385 ROUTE-SCEL** [FLOOR-ELIGIBLE: construction]
+```
+### 385 — ROUTE-SCEL: SAMPLES→CELLS — THE CONVERSION THAT LETS THE
+CERTIFIED DECAY INSTRUMENT EAT REAL DATA (382's successor item 1,
+ranked top)
+**Thesis.** 382's module names its own missing input contract: a
+certified modulus of continuity, or a stated monotonicity
+hypothesis, converting point samples to cell enclosures. Build that
+adapter as its own module: both hypothesis paths, each REFUSING
+(INCAPACITY, never a silent guess) an input that carries neither,
+with the hypothesis recorded in the output row so a downstream
+consumer can see what the certificate is conditional on.
+**Gate.** Does the adapter convert a planted sampled profile with a
+stated true hypothesis into cell enclosures whose certification
+reproduces 382's exact-power result within its measured widths, AND
+does a planted hypothesis-VIOLATING input (samples secretly
+non-monotone / modulus understated) fire the refusal or a
+containment failure — controls able to fail, neither widened?
+  yes -> Real sampled profiles become admissible input to the §4
+         instrument, conditional on a named hypothesis; the first
+         real consumer remains whatever future unit produces a
+         profile, and this leg claims nothing about one. CEILING
+         TIER 2; CLAY_OBLIGATIONS §6 items 1 and 2 stay OPEN (the
+         cutoff half untouched).
+  no  -> Report which hypothesis path fails and its mechanism; an
+         adapter that cannot be built honestly is decision
+         information on §6 item 1, banked as such.
+**Territory.** solver/dssp_decay_samples.py (NEW),
+               test_dssp_decay_samples.py (NEW),
+               experiments/p2_route_scel_v1.py,
+               writeup/data/p2_route_scel_v1.json,
+               writeup/novelty/leg_385.md, experiments/journal/leg_385.md.
+               READS solver/dssp_decay_enclosure.py; edits it nowhere.
+**Difficulty.** heavy
+**Preconditions:** 104f5b3 on main — TRUE. No live leg editing
+solver/dssp_decay_enclosure.py (383 reads only; 386 undispatched) —
+checkable at dispatch.
+```
+
+**Reserve rank 2 — 386 ROUTE-DTOL** [FLOOR-ELIGIBLE: construction]
+```
+### 386 — ROUTE-DTOL: THE δ-TOLERANCE MODE, PRE-REGISTERED AND
+GATED (382's refuted-prediction finding made usable; its post-hoc
+numbers are LEADS here, never inherited)
+**Thesis.** 382 proved δ=0 answers EMPTY on every real input, and
+flagged a relative-tolerance fix POST-HOC and NOT GATE-DECIDING.
+Promote it honestly: pre-register the δ-mode (width law, δ*
+thresholds) BEFORE running, measuring 382's post-hoc numbers
+(width ≈ 0.8686·δ; δ* 3.352868 / 0.315697 / 0.069739 / 0) fresh
+rather than importing them; implement δ as an explicit argument
+recorded in every output row.
+**Gate.** At the freshly-measured δ*, do the three non-power planted
+cases certify with contained truth and reported widths, does the
+exact power law still certify at δ=0 with 382's widths reproduced,
+AND does a sub-δ* control remain EMPTY (the mode must not turn the
+instrument into a fit with extra steps)?
+  yes -> The instrument gains a usable mode whose looseness is a
+         declared magnitude, never silent; certified-vs-fitted
+         remains a distinction with teeth. CEILING TIER 2; §6 items
+         1 and 2 OPEN.
+  no  -> The width law or a δ* fails out-of-registration: report
+         the measured law verbatim; a δ-mode that cannot be
+         pre-registered is not an instrument and is not shipped.
+**Territory.** solver/dssp_decay_enclosure.py (the δ argument),
+               test_dssp_decay_enclosure.py (additive),
+               experiments/p2_route_dtol_v1.py,
+               writeup/data/p2_route_dtol_v1.json,
+               writeup/novelty/leg_386.md, experiments/journal/leg_386.md.
+**Difficulty.** standard
+**Preconditions:** 104f5b3 on main — TRUE. No live leg editing
+solver/dssp_decay_enclosure.py or its test file — checkable at
+dispatch (385 reads only).
+```
+
+**Reserve rank 3 — 387 ROUTE-DXNV** (owed novelty completion; NOT
+floor-eligible — literature-typed, and §3c rule 4 excludes it from
+the floor while PROG-R4 is live)
+```
+### 387 — ROUTE-DXNV: 382's PRIOR-ART QUESTION, STILL UNANSWERED
+(HTTP 429 both endpoints, disclosed at novelty §3 — owed work, not
+new screening)
+**Thesis.** A landed instrument carries an undischarged novelty
+obligation: arXiv and Semantic Scholar both refused 382's external
+pass. Re-run the two disclosed queries (and only completion-scoped
+follow-ups); bank responses verbatim; if refusals persist, bank the
+refusals as refusals with their codes. This is completion of a
+landed leg's own §7e obligation, not a screening unit — §2's stop
+is not touched.
+**Gate.** Do the named queries return an answer (hits or controlled
+zero), each banked verbatim with an assessment of whether any hit
+predates or duplicates the enclosure instrument?
+  yes-with-hit -> Record honestly: the instrument is a
+         reimplementation, its measured results stand but its
+         novelty record is corrected; routed to integration for
+         382's novelty file annotation.
+  yes-no-hit -> 382's novelty record completes; nothing else
+         changes.
+  no (still refused) -> Bank the refusal; the obligation stays
+         open and is re-queued, not silently dropped.
+**Territory.** writeup/data/p2_route_dxnv_v1.json,
+               writeup/novelty/leg_387.md, experiments/journal/leg_387.md.
+               Edits no solver module and no landed novelty file.
+**Difficulty.** light
+**Preconditions:** None (retry semantics are the leg's own).
+```
+
+**Reserve rank 4 — 388 ROUTE-CRVB** (instrument-sensitivity
+measurement; NOT floor-eligible — verification-typed)
+```
+### 388 — ROUTE-CRVB: BOUND THE CURVATURE-DETECTION THRESHOLD FROM
+BOTH SIDES (382's successor item 2 — the ladder bottomed out at
+≤1e-6)
+**Thesis.** 382 bounded the enclosure's curvature detection only
+from above (≤1e-6); the instrument's blind spot has a ceiling but
+no floor. Extend the planted-curvature ladder below 1e-6 at higher
+working precision (the repo's interval/mp capability — grep
+capabilities.py first, per the standing ban) until detection fails,
+and report the threshold as a two-sided bracket, a magnitude not a
+boolean.
+**Gate.** Is a two-sided bracket [fail, detect] measured with at
+least one decade's separation ruled out or confirmed, with a
+planted zero-curvature control staying EMPTY-free at every rung?
+  yes -> The blind spot is a stated magnitude every future consumer
+         (385/386, any profile unit) inherits explicitly.
+  no  -> Precision or conditioning caps the ladder above any
+         failure: report the cap and its mechanism; an unbounded
+         blind spot is itself the recorded answer.
+**Territory.** experiments/p2_route_crvb_v1.py,
+               writeup/data/p2_route_crvb_v1.json,
+               writeup/novelty/leg_388.md, experiments/journal/leg_388.md.
+               READS solver/dssp_decay_enclosure.py; edits nothing.
+**Difficulty.** standard
+**Preconditions:** 104f5b3 on main — TRUE.
+```
+
+### Standing state
+
+A/380 PROG-R4 (running, U0 — the critical path); B/381 CLAY-LOC
+(running); C/383 ST2G (dispatched this turn); D/233 BVRRV (running).
+Floor 3/4 (380, 381, 383), table synced in this edit.
+
+**Reserve queue: 9 undispatched legs (385, 386, 387, 388, 384, 325,
+231, 232, 234).** Immediately dispatchable: **4** (385, 386, 387,
+388 — 384 waits on 381; 325 user-gated; 231/232/234 blocked on
+217/219/225). Watermark satisfied. Next fresh leg number: **389.**
+
+Nothing in this update lifts a ban. An instrument that certified
+its planted knowns and honestly reported it cannot yet eat real
+data; a refill by the book; four drafts that make the instrument's
+limits into queued questions. CLAY_OBLIGATIONS §6 items 1 and 2
+OPEN throughout; nothing presumes the POCP spend; no L1→L4 link
+moved; Clay stays ~0.05%.
