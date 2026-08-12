@@ -33,10 +33,10 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 299 | TESTA | no |
+| A | 379 | LCB7 | no |
 | B | 376 | R3SP | yes |
 | C | 377 | HCDX | yes |
-| D | 378 | LCB6 | no |
+| D | — | HELD-OPEN (cycle 10nn formal exception, machine-lawful) | no |
 <!-- FLOOR-TABLE-END -->
 
 ## Figure reservation table (draft-time authoritative, DM-maintained; instituted
@@ -20616,8 +20616,27 @@ LCB6** (the accumulator's finalized item (10) applied — mechanism
 amended: the batch fires EARLY at one item when nothing else is
 dispatchable; 356's marker citing 367+369+371). Floor 2/4 (376, 377).
 
+Cycle 10nn: THE SPEND LIMIT HIT THE FLEET AGAIN (the ae7ca2c incident's
+shape). A/299 landed NO at afc34cc — the suite HEALTHY (126/126 run,
+124 clean, the timeout a contention artifact, one documented skip);
+two rework flags, correctly not edited in place: (11) the stale
+pre-185 assertion, (12) the 3-ULP FFT-backend drift (the documented
+BLAS-pattern class) — accumulator items, source-verified, THRESHOLD:
+**leg 379 LCB7 drafted, A ← 379**. D/378 landed at 1ba84bc — the
+orchestrator-completed push of the leg's own complete in-spec
+deliverable, ENDORSED (item (10) applied; the accumulator emptied and
+immediately refilled by 299's flags). 376: WIP preserved at 57aff39
+(no verdict — a draft, not a landing); **B ← 376 RESUMED under its own
+number**, standing resume discipline (the WIP re-verified, never
+copied; its numerical-wall observation is a lead, not a finding). 377:
+clean tree, zero progress; **C ← 377 REDISPATCHED from scratch**, spec
+unchanged. **D ← HELD OPEN — the formal exception, now
+machine-lawful** (eligible 2/4 via B+C passes test_9; the 10jj
+grounds stand: nothing dispatchable, owed books empty, manufacture
+refused; any user ruling refills it). Floor 2/4 (376, 377).
+
 **Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
-Immediately dispatchable: **0**. Next fresh leg number: **379.**
+Immediately dispatchable: **0**. Next fresh leg number: **380.**
 
 Nothing in this update lifts a ban. An audited register and a
 verification leg taking its fired turn; no L1-L4 link moved; Clay
@@ -21291,3 +21310,101 @@ Immediately dispatchable: **0**. Next fresh leg number: **379.**
 Nothing in this update lifts a ban. An adverse inventory stated
 precisely, a zero-item gap list, and one finalized correction applied
 rather than aged; no L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10nn) — THE SPEND-LIMIT KILL ABSORBED
+(299 NO + 378 ORCHESTRATOR-COMPLETED; 376 WIP PRESERVED; 377 CLEAN);
+A ← 379 LCB7, B ← 376 RESUME, C ← 377 REDISPATCH, D ← HELD OPEN
+(MACHINE-LAWFUL THIS TIME)
+
+Written from the same detached lineage, resynced to origin/main.
+
+### 299 TESTA gate NO, absorbed at full strength
+
+The suite is measured healthy: 126/126 files actually run, 124 pass
+clean, the single first-pass timeout reproduced as a CPU-contention
+harness artifact, exactly one documented skip in the corpus. The two
+genuine findings were flagged, not patched — correct, both are
+claim-adjacent: (11) test_boussinesq_postrepair.py's no-out-of-domain
+assertion predates leg 185's legitimately self-flagged negative-nu
+diagnostic rows (stale, not defective — the fix is acknowledging
+185's data, not loosening the check); (12) test_gclm_postrepair.py's
+bit-identity check fails by 3 ULP on FFT-backend drift, the same
+documented class as the BLAS pattern (the fix is a documented ULP
+tolerance with the pattern cited, not a silent widen). Both enter the
+accumulator source-verified; threshold fires. Endorsed.
+
+### 378 LCB6 — landed, orchestrator-completed; the salvage triage
+endorsed in all three cases
+
+378's deliverable was complete and in-spec, committed, unpushed when
+the API died: the orchestrator verified the diff against the spec,
+rebased, independently gated, and pushed on the leg's behalf — a real
+landing with the completion honestly attributed. Item (10) is applied;
+356's ground marker carries the trilogy. 376's mid-measurement WIP
+(479 lines, no verdict) preserved under an explicit WIP-PRESERVATION
+commit that claims nothing. 377's clean tree recorded as zero
+progress. All three dispositions are exactly the ae7ca2c playbook,
+executed better for having precedent. Endorsed.
+
+### Refills — three dispatches and one lawful exception
+
+```
+### 379 — ROUTE-LCB7: LIGHT CORRECTIONS BATCH 7 (299's two flags, both
+source-verified at entry)
+[FLOOR-ELIGIBLE: no — correction/test-hygiene]
+**Thesis.** (i) test_boussinesq_postrepair.py: update the
+no-out-of-domain assertion to acknowledge leg 185's self-flagged
+negative-nu diagnostic rows (the assertion narrows to non-diagnostic
+data; 185's rows cited) — the check must still FAIL on a planted
+genuinely-out-of-domain coefficient. (ii) test_gclm_postrepair.py:
+replace the bit-identity check with a documented ULP tolerance (the
+measured 3-ULP FFT drift cited alongside the BLAS-pattern precedent) —
+the check must still FAIL on a planted >tolerance deviation. Both
+planted controls are the gate's teeth: a test loosened without a
+still-fails demonstration is a blinded instrument (the 361 lesson).
+**Gate.** Both tests updated, both planted controls demonstrated to
+still trip, the suite green end-to-end, one batched CORRECTIONS entry,
+zero banked JSON diffs?
+  yes -> Bank; items (11)-(12) close.
+  no  -> A control fails to trip: stop, report verbatim, never widen.
+**Territory.** the two named test files, writeup/CORRECTIONS.md
+(append), writeup/novelty/leg_379.md, experiments/journal/leg_379.md.
+**Difficulty.** light
+**Preconditions:** None.
+```
+
+- **B ← 376 R3SP, RESUMED under its own number** from the preserved
+  WIP (57aff39): spec unchanged (cycle 10ll); standing resume
+  discipline — staleness re-check first, the draft RE-VERIFIED never
+  copied; its last visible thought (a numerical wall in 350's basis
+  reused as a differentiation matrix) is a LEAD the resumed leg
+  measures, not a finding it inherits.
+- **C ← 377 HCDX, REDISPATCHED from scratch**: spec unchanged (cycle
+  10mm); nothing to resume.
+- **D ← HELD OPEN — the formal exception, machine-lawful this time:**
+  with B and C eligible, test_9 reads 2/4 and PASSES; the 10jj grounds
+  stand unchanged (reserve zero, owed books empty, manufacture
+  refused); the trigger inventory stands (any of the user's rulings
+  refills D mechanically). The 10jj first attempt failed because it
+  emptied TWO eligible slots at once — one held-open slot alongside
+  two eligible live legs is the lawful form of the same honesty.
+
+**Floor 2/4 (376, 377).** FLOOR-TABLE carries the held-open row
+explicitly and passes the machine check.
+
+### Standing state
+
+Route 4: stopped. With the user: seven items + upgraded item 6. In
+flight: one corrections batch, one resumed measurement, one
+redispatched read, one lawfully empty slot that any ruling refills.
+
+**Reserve queue: 5 undispatched legs (325, 231, 232, 233, 234).**
+Immediately dispatchable: **0**. Next fresh leg number: **380.**
+
+Nothing in this update lifts a ban. A healthy test suite measured
+honestly, a fleet kill absorbed by the playbook, and an empty slot
+that finally tells the truth lawfully; no L1-L4 link moved; Clay
+stays ~0.05%.
