@@ -1,0 +1,118 @@
+{
+  "grid_n": 801,
+  "target_converged": true,
+  "target_residual_final": 2.275957200481571e-14,
+  "target_c_l": 1.5764682141465645,
+  "target_c_omega": -0.620463622656844,
+  "target_c_r": 0.4376656355527975,
+  "target_tail_exponent_Omega": -0.36546887978066694,
+  "self_tests": {
+    "skew_hermitian_err": 0.0,
+    "hilbert_diag_relerr_mean": 0.0362838323176421,
+    "hilbert_diag_relerr_max": 0.036330340754652864,
+    "note": "relerr is finite because line_hilbert_matrix is a NATURAL-SPLINE DISCRETISATION of the continuous Hilbert transform on a FINITE grid; the continuous MT construction is exactly diagonal by Hardy-space theory (Cayley transform to the disk), this is a consistency check on the code, not a re-derivation of the theorem"
+  },
+  "M_ladder": [
+    {
+      "M": 8,
+      "modes": 17,
+      "n_total": 34,
+      "lmin_diag": 0.4773163517072677,
+      "diag_growth_exponent": null,
+      "delta_median": 1.4495650984029593,
+      "delta_max": 5.054482932480461,
+      "sigma_min": 0.03141446360538797,
+      "sigma_max": 12.224072498645576,
+      "gram_control_sigma_min": 0.9928042078411682,
+      "gram_control_trustworthy": true,
+      "wall_s": 0.15863680839538574
+    },
+    {
+      "M": 16,
+      "modes": 33,
+      "n_total": 66,
+      "lmin_diag": 0.4773163517072677,
+      "diag_growth_exponent": 0.9974359686796874,
+      "delta_median": 1.339293536871711,
+      "delta_max": 5.721113188926669,
+      "sigma_min": 0.025494307051536866,
+      "sigma_max": 24.947712752169238,
+      "gram_control_sigma_min": 0.9859695155416168,
+      "gram_control_trustworthy": true,
+      "wall_s": 0.237274169921875
+    },
+    {
+      "M": 32,
+      "modes": 65,
+      "n_total": 130,
+      "lmin_diag": 0.4773163517072677,
+      "diag_growth_exponent": 0.9923314373178875,
+      "delta_median": 1.2593908195651542,
+      "delta_max": 6.305455334750211,
+      "sigma_min": 0.029177132069227153,
+      "sigma_max": 50.739021674301085,
+      "gram_control_sigma_min": 0.9723039059703568,
+      "gram_control_trustworthy": true,
+      "wall_s": 0.2885143756866455
+    },
+    {
+      "M": 64,
+      "modes": 129,
+      "n_total": 258,
+      "lmin_diag": 0.4773163517072677,
+      "diag_growth_exponent": 0.8946191508966435,
+      "delta_median": 1.2199844344160589,
+      "delta_max": 6.770891948621308,
+      "sigma_min": 0.03137753620438021,
+      "sigma_max": 76.295948283005,
+      "gram_control_sigma_min": 0.9450024694669042,
+      "gram_control_trustworthy": true,
+      "wall_s": 0.5209622383117676
+    }
+  ],
+  "nonlinearity_probe": [
+    {
+      "n_test": 1,
+      "eps": 0.0001,
+      "output_bandwidth_modes": 32,
+      "input_mode_abs": 1,
+      "bandwidth_ratio": 32.0,
+      "q_sup_norm": 5.90425061873304e-09,
+      "q_over_v_norm_sq": 0.590425061873304
+    },
+    {
+      "n_test": 4,
+      "eps": 0.0001,
+      "output_bandwidth_modes": 29,
+      "input_mode_abs": 4,
+      "bandwidth_ratio": 7.25,
+      "q_sup_norm": 1.2900515368306851e-08,
+      "q_over_v_norm_sq": 1.290051536830685
+    },
+    {
+      "n_test": 16,
+      "eps": 0.0001,
+      "output_bandwidth_modes": 49,
+      "input_mode_abs": 16,
+      "bandwidth_ratio": 3.0625,
+      "q_sup_norm": 1.367076497055674e-08,
+      "q_over_v_norm_sq": 1.367076497055674
+    },
+    {
+      "n_test": 64,
+      "eps": 0.0001,
+      "output_bandwidth_modes": 64,
+      "input_mode_abs": 64,
+      "bandwidth_ratio": 1.0,
+      "q_sup_norm": 3.446479819474106e-09,
+      "q_over_v_norm_sq": 0.3446479819474106
+    }
+  ],
+  "M_project_nonlinearity": 64,
+  "nonlinearity_gram_control": {
+    "sigma_min": 0.9450024694669042,
+    "sigma_max": 1.0000666680011656,
+    "max_abs_offdiag_or_1": 0.00042720956702598715
+  },
+  "wall_total_s": 144.43329095840454
+}
