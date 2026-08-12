@@ -10,6 +10,24 @@ obligation is not such a link. This leg builds no certificate, no enclosure, and
 localisation.
 
 * Runner: `experiments/p2_route_cloc_v1.py` (self-tests: **ALL PASS**)
+* Figure: **`fig104`** — `writeup/figures/fig104_route_cloc_v1.png`, rebuilt by
+  `experiments/p2_route_cloc_v1_evidence.py` from the curated JSON alone (nothing recomputed),
+  registered in `writeup/build_figures.py`. Added by a later DOCS-lane pass that closes this
+  leg's missing-figure audit finding; it plots this leg's banked numbers and changes none of
+  them. **Caption:** *fig104 — Route-CLOC (leg 381). Panel A, the cutoff bill at the banked
+  Type-I exponent `α = 1`: the nonlinear residual (`ρ^{−1.4993}`), the viscous residual
+  (`ρ^{−1.4999}` — identical scaling to the nonlinear one at exactly `α = 1`), the divergence
+  defect (`ρ^{−0.4996}`) and the pressure perturbation at the origin (`ρ^{−1.9997}`) all shrink
+  with the cutoff radius over `ρ = 10 … 1000`, while the critical `L³` tail stays flat
+  (`13.1764 → 13.1773`, exponent `1.28e−05`). Panel B, the term that never gets cheap: the cube
+  of the discarded `L³` tail grows by a constant **326.875 per decade** of window, constant to
+  `7.4e−10` across four increments — log-divergent, so no cutoff radius makes it small. Panel C,
+  the DSS exponent equals the SS exponent: `0.499999942` vs `0.500000000`, ratio `0.9999998844`
+  (no factor), while dropping the log-periodic modulation — which swings `G` by `2.99×` within
+  one period — biases the fit to `0.4876`, `2.47 %` off. This is a **Tier-2-ceiling verification
+  result: no `L1 → L4` link moved, Clay stays ~0.05 %.* Panel C shows the banked scalars: the
+  per-sample energy series `E(s)` and the factor `G(s)` are not in the curated JSON, so no
+  fit-through-data overlay is drawn.
 * Curated data: `writeup/data/p2_route_cloc_v1.json` — every number below is in it
 * Novelty pass: `writeup/novelty/leg_381.md`, committed before the runner existed
 * Journal: `experiments/journal/leg_381.md`

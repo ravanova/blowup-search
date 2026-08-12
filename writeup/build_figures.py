@@ -392,6 +392,7 @@ P2_EVIDENCE = [
     "../experiments/p2_route_sdss_v1_evidence.py",              # fig76 -- Route-SDSS v1 (leg 313), landed late under the cycle-11a caveat
     "../experiments/p2_route_dexc_v1_evidence.py",              # fig100 -- Route-DEXC v1 (leg 382); fig100 assigned at dispatch, fig96 being the highest then in use
     "../experiments/p2_route_st2g_v1_evidence.py",              # fig102 -- Route-ST2G v1 (leg 383); fig102 assigned at dispatch (fig100 and fig101 already allocated this cycle to legs 382 and 233)
+    "../experiments/p2_route_cloc_v1_evidence.py",              # fig104 -- Route-CLOC v1 (leg 381), evidence script by the DOCS-lane closure of leg 381's missing-figure audit finding; fig104 (NOT fig99, which leg 381's omission freed and which is now leg 386's)
 ]
 
 
