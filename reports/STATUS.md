@@ -1,15 +1,21 @@
 # STATUS — committed snapshot (sections 1-3 of PROGRESS.md)
 
-*Refreshed 2026-08-12 — same orchestrator session, cycle 10h. Legs 348
-(POCP), 307 (TSCX), 337, 343, 338, 350 have all landed since the header
-above was last written; leg 348's classification is added below as a NEW
-NEEDS-YOU item (item 4). Slots B and D refilled this cycle: B<-349 (GAFV,
-gated on 348's report, viability-only, no GA compute), D<-328 (ORC5,
-correction/record). Roster: A/335 (S1GR, still mid-diagnosis), B/349,
-C/351 (DSSP-B3, critical path), D/328. `origin/main` at `d797e44`, merge
-gate green. Full detail in `PROGRESS.md` (git-ignored, more current),
-`reports/ORCH_STATE.md` (full handoff detail and institutional memory), and
-`experiments/JOURNAL.md` (the durable ledger).*
+*Refreshed 2026-08-12 — same orchestrator session, cycle 10w+. Since the
+cycle-10h header above was last written, legs 352, 324, 322, 351, 335, 327,
+287, 353, 354, 356, 357, 358, 359, 360 have all landed (cycles 10l-10w),
+and the DSSP route (bricks B1-B4, B7) plus the ROUTE-4 STOP fired on brick
+B5's NO — leg 353 failed to recover any of 5 published RPOs on a known 2-D
+object, the plan's own pre-committed branch stopped route 4 (B6/B8 frozen)
+before any 3-D cost. The stop packet is now COMPLETE (legs 358's costed
+retry + 359's L³-boundary adjudication both landed) and is added below as a
+NEW NEEDS-YOU item (item 5). Current roster: A/361 (LCB4, light correction
+batch), B and C open for refill (DM ruling on cycle 10x pending), D/355
+(LCB3, still running). `origin/main` at `a048de7`, merge gate green. Full
+detail in `PROGRESS.md` (git-ignored, more current), `reports/ORCH_STATE.md`
+(full handoff detail and institutional memory), and `experiments/JOURNAL.md`
+(the durable ledger). Note: items 1-4 below are unchanged from cycle 10h and
+have not been re-verified against current `origin/main` state this pass —
+they remain open pending your ruling as previously described.*
 
 ## ⚠ NEEDS YOU
 
@@ -159,6 +165,109 @@ gate green. Full detail in `PROGRESS.md` (git-ignored, more current),
      does this route stay open-but-unfunded while other routes/legs proceed?
    Files: `writeup/novelty/leg_348.md`, `writeup/data/p2_route_pocp_v1.json`,
    `experiments/journal/leg_348.md`. Landed `3b75842`.
+
+5. **NEW — THE ROUTE-4 STOP FIRED. The plan's own pre-committed branch
+   halted route 4 (basin-radius / periodic-orbit construction) on a
+   measured NO. A retry is costed and priced; whether to fund it is yours
+   to rule on — the default, per the plan's own text, is that the stop
+   stands and nothing is retried.**
+   - **What happened:** leg 353 (brick B5, DSSP-NKBASIN) built an
+     independently-written matrix-free Newton-Krylov solver (2-D
+     Kolmogorov-flow pseudospectral DNS, homemade GMRES, no scipy) and
+     tried to recover 5 independently-selected, PUBLISHED recurrent
+     periodic orbits (RPOs) from Lucas & Kerswell 2015 (arXiv:1406.1820v2,
+     Table IV) — a known 2-D object, not this program's own construction.
+     All 5 attempts failed (`line_search_failed`, final residual in
+     [22.5, 29.5], none within two orders of magnitude of `tol=1e-8`).
+     A dedicated control — the same code, started from a 1%-perturbed
+     EXACT laminar fixed point — converged cleanly (99.3% monotone
+     residual reduction), ruling out a broken solver and pinning the
+     failure to two DECLARED simplifications: DNS length (T~2000 vs the
+     literature's T~1e4-1e6) and globalization (plain-Newton line search
+     vs the literature's hookstep/trust-region methods). Basin radius was
+     NOT MEASURED (nothing converged to perturb).
+   - **The plan's own no-branch, quoted:** a failure on a KNOWN 2-D object
+     refutes leg 334's "mature engineering works out of the box on this
+     realization" premise and stops route 4 before any 3-D cost is
+     committed. This was executed exactly: B6 and B8 are now
+     UNDISPATCHABLE (nothing 3-D dispatches); B7 (the admissibility
+     screen, generic apparatus independent of route 4's fate) was allowed
+     to complete and did, landing YES.
+   - **The retry is now costed (leg 358, ROUTE-RPOL), sourced from the
+     published pipeline's own literature, not re-argued against 353's
+     verdict:**
+     - Lucas & Kerswell 2015 itself (leg 353's own target paper) reports a
+       success rate of **~10% at residual ≥0.2** — exactly the regime
+       leg 353's 5 attempts sat in (residual 0.177-0.263).
+       P(0 successes in 5 | p=0.10) = 59% — **leg 353's null result is NOT
+       anomalous against the source paper's own success curve**; it is
+       consistent with an underpowered sample, not evidence the method
+       doesn't work on this object.
+     - Chandler & Kerswell 2013 (origin of the search+hookstep code): success
+       splits sharply by orbit class — 62-74% for plain periodic orbits vs.
+       only **4.3% (7/163) for genuine nonzero-shift RPOs**, the exact class
+       leg 353's target (UPO37, shift s=0.375) belongs to.
+     - Viswanath 2007 (the founding hookstep paper), quoted directly: "the
+       Newton step by itself never leads to convergence. The widely used
+       expedient of damping the Newton step is also ineffective" —
+       confirms leg 353's globalization diagnosis independent of sample size.
+     - **Both facts travel together, per the DM's binding cycle-10v
+       framing, neither softened:** the stop gate fired exactly as drafted
+       (the "mature engineering out of the box" premise is refuted on this
+       realization), AND the literature's own numbers say 353's attempt was
+       underpowered by the source's own standards. Neither fact cancels
+       the other; you rule on numbers, not on which framing to prefer.
+     - **Costed options:** minimum-viable spec-compliant retry (T=1e5 DNS,
+       genuine hookstep, ~100 Newton attempts, same N=24 resolution) =
+       **2 legs, ~22-33 hours compute**, linearly extrapolated from leg
+       353's own measured wall-clock rates. Full literature-scale retry
+       (T=5e6, matching Lucas & Kerswell's own DNS length) = **~10.2 days
+       of DNS alone**, GPU-dependent in the source papers' own hands — not
+       a single-leg budget. Four named residual risks even if fully
+       spec-compliant: sample-size (10% success still means most attempts
+       fail), hookstep non-universality (a cited paper reports the same
+       hookstep code failing at continuation-branch endpoints), an
+       uncosted resolution gap, and GPU dependency this repo's compute
+       does not currently have.
+   - **The boundary/ledger question is answered (leg 359, ROUTE-L3BD) —
+     informational, does not bear on the stop/retry decision directly, but
+     completes the packet:** two landed legs place this program's OWN
+     Type-I object (leg 351's witness) exactly on the log-divergent L³
+     boundary. Leg 359 read NRS/Tsai's primary text and found a compound
+     three-part answer: Theorem 1 (the L^q route) does NOT reach a
+     log-divergent boundary object; Theorem 2 (local energy estimates)
+     DECISIVELY DOES reach it (Tsai's own headline example matches this
+     repo's measured decay exponent almost exactly); but this program's
+     actual DSS object is STILL NOT REACHED by either — the deciding
+     clause is the exact-self-similar ansatz hypothesis, not any L³/decay
+     clause. This sharpens leg 341's earlier finding: the object is
+     protected by ansatz mismatch, not by decay rate. Leg 359 also flagged
+     (not implemented — out of its territory) a real gap in leg 357's
+     screen: it only tests L³ convergence, missing Theorem 2's route and
+     any SS/DSS ansatz check, so it would currently misclassify a
+     genuinely-self-similar candidate at this repo's decay rate. This is
+     noted for B7's ledger owner (the DM), not something requiring your
+     ruling.
+   - **Interacts with the parked ≈35-leg 3-D-seed-creation decision as ONE
+     portfolio question, per the DM's ruling:** a 3-D seed buys nothing
+     while the 2-D extraction premise (the basin-radius/RPO-recovery
+     machinery this route needs) stands refuted on the known-object test.
+     The two decisions should be considered together, not separately.
+   - **Honesty boundary, carried verbatim from the DM's ruling:** the stop
+     firing is the plan working as designed, not the programme failing
+     silently — and equally, a retry is not owed. "Stops route 4" is the
+     default that stands unless you affirmatively fund the gap.
+   - **The decision for you:** stop route 4 here (default, per the plan's
+     own text), or fund a spec-compliant retry — minimum-viable at 2 legs
+     / ~22-33h compute, or literature-scale at ~10.2 GPU-days (compute
+     this repo does not currently have) — with the four named residual
+     risks understood going in. This decision is coupled to the parked
+     ≈35-leg 3-D-seed question above.
+   Files: `writeup/data/p2_route_dsspb5_v1.json` (leg 353, NO verdict),
+   `writeup/data/p2_route_rpol_v1.json` (leg 358, costed retry),
+   `writeup/data/p2_route_l3bd_v1.json` (leg 359, boundary adjudication),
+   `writeup/data/p2_route_dsspb7_v1.json` (leg 357, the screen). Landed
+   `e9c3ae8` (353), `3ea215c` (358), `a048de7` (359), `3f614d7` (357).
 
 (Older NEEDS-YOU items — leg 297's anchor-JSON fix, leg 280's sign-off, the
 Phase-1 construction-decision packet — have since been resolved/absorbed in
