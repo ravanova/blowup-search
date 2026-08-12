@@ -5078,3 +5078,181 @@ corrected two numbers on exploratory routes and said so itself; and emphatically
 **compressible** route that is not the system Clay asks about. Establishing that a gap is
 unbridgeable is useful — it stops future legs spending on it — but it is the search space
 shrinking, not a proof advancing.
+
+## Legs 109-364 — 63 orphaned pointers, third freshness audit (leg 293, Route-JFA)
+
+Third freshness audit (leg 293, Route-JFA), following legs 72 (Route-JR) and 102
+(Route-JR2). Scope: every leg landed on `main` since leg 102's audit window closed
+(leg 102 through the tip of `main` at dispatch, leg 364), checked by cross-referencing
+`git log --diff-filter=A` against every `**Leg N**`-style pointer already in this file,
+not by trusting this file's own prior contents. Full detail and the audit's own counts:
+`writeup/novelty/leg_293.md`, `experiments/journal/leg_293.md`.
+
+**Result: 63 of ~206 legs in the leg-102-to-364 window had landed a
+`experiments/journal/leg_N.md` file with zero pointer anywhere in this file** — not even an
+incidental mention. Zero broken links were found (every explicit `experiments/journal/leg_N.md`
+reference in this file that predates this audit points to a file that exists on `main`, with
+one correctly-caveated exception: leg 301, explicitly described as "on `leg/301...` branch,
+`main` untouched," which is accurate — leg 301 never landed). The 63 gaps are pointers only,
+added below; every headline is copied from that leg's own landed
+`experiments/journal/leg_N.md`, not re-derived.
+
+- **Leg 109 (Route-RCA) — YES:** three independent silent-corruption sites in
+  `solver/reduced_certificate.py` under adversarial audit; module left byte-identical to
+  `origin/main`; escalated, not patched.
+- **Leg 118 (Route-TPA) — YES:** a silent-corruption gap on two independent sites in
+  `solver/turning_point.py`; read-only module; escalated, not patched.
+- **Leg 130 (Route-HPR) — YES on both clauses:** post-repair regression check confirms leg
+  106's `hilbert_pointwise.py` repair holds and nothing previously-passing moved.
+- **Leg 143 (Route-VNA) — YES:** four independent silent-corruption sites (plus one
+  non-termination hazard) in `solver/viscous_novelty.py`, all latent (0 live call sites hit);
+  escalated, not patched.
+- **Leg 151 (Route-DCR) — YES on both clauses:** the repair of `solver/decay_collocation.py`
+  (leg 115's finding) — 19/19, 31/31, 7/7 refused; 1672/1672 quantities bit-identical elsewhere.
+- **Leg 152 (Route-HRR) — YES:** the repair of `solver/hl_rescaled.py` (leg 117's finding).
+- **Leg 153 (Route-HHR) — YES on both clauses:** the domain guard lands on
+  `solver/hilbert_holder.py` (leg 119's finding), PIN inverted.
+- **Leg 156 (Route-IX4) — NO:** fourth freshness audit of `writeup/INDEX.md` finds it stale;
+  fixed directly, all 7 rows corrected.
+- **Leg 159 (Route-WEX) — YES:** a different weighted-energy functional located (Lei-Liu-Ren
+  extended by J. Chen), recorded verbatim with hypotheses and escalated as a candidate for a
+  leg-111-v2 construction, not computed here.
+- **Leg 160 (Route-WVR v1) — NO:** an alternate fitness definition fails the frozen
+  six-property viability gate.
+- **Leg 164 (Route-CSD) — NO:** the `a = 0` CLM linearization does not admit a compact-support
+  representation; the linearization ejects every compactly supported `h`.
+- **Leg 165 (Route-SDM) — YES, at one row of four:** which of this repository's dead findings
+  belong to the operator versus the realization, from banked data only.
+- **Leg 166 (Route-CNB) — NO on clause (a) (7 of 8, not 8 of 8), YES on clause (b):** the
+  independent post-repair regression check of `solver/collocation_newton.py`.
+- **Leg 167 (Route-DCB) — YES on both clauses:** independent post-repair regression check of
+  `solver/decay_collocation.py`, 76/76 of leg 115's cases refused.
+- **Leg 168 (Route-HRB) — YES on both clauses (13/13, 8/8):** post-repair regression check on
+  `solver/hl_rescaled.py`.
+- **Leg 169 (Route-HHB) — YES on both clauses:** independent post-repair regression check on
+  `solver/hilbert_holder.py`.
+- **Leg 171 (Route-XUL) — YES:** Xu arXiv:2607.19762, at full-text depth, characterizes
+  operator invertibility/certificate-buildability on spaces beyond origin-H² and `ell^1_w`.
+- **Leg 173 (Route-XUM) — NO:** Xu's own certification method does not already close this
+  repository's open certificate work; the gap is not quantifiable from the paper alone.
+- **Leg 177 (Route-L1RH) — NO** (the formulation conjunct answers YES, the diagnostic
+  conjunct answers NO): origin-H² does not fix the collocation-basis realization of `L1`'s
+  death.
+- **Leg 179 (Route-PUB1) — YES:** the combined publication-scoping note banked as the current
+  draft, flagged to the user as ready for their own review — landing does not approve it.
+- **Leg 180 (Route-TSR) — YES:** the two-scale `a*` scope-line correction, in-repo half,
+  prose-only.
+- **Leg 181 (Route-MOD) — YES**, in a stronger sense than the gate anticipated: Xu's
+  modulation technique does not merely apply, it is essentially already what is built.
+- **Leg 182 (Route-H2I) — NO:** no interpolation scale between `ell^1_w` and origin-H²
+  satisfies both required conditions; scoping only, nothing built.
+- **Leg 184 (Route-GBW v1) — YES:** `plan_of_record.py`'s GA-ban lift condition, after this
+  leg's edit, requires the six-property gate to pass at a PINNED resolution, closing a
+  coarsening loophole.
+- **Leg 186 (Route-PUB2) — YES:** the space-axis synthesis note states all three results
+  accurately; synthesis only, no new measurement.
+- **Leg 189 (Route-XUTRI) — NO, a null result:** Xu's spectral-picture framework does not
+  reproduce `a_c`/`alpha(1/2)` to precision comparable to this repository's existing
+  re-derivations.
+- **Leg 221 (Route-BVRR) — YES on both clauses:** the repair of
+  `boussinesq_rescaled.py`'s two fabrication mechanisms, with this leg's own
+  zero-contamination re-confirmation.
+- **Leg 229 (Route-PNRV) — YES:** independent post-repair verification of leg 226's
+  `profile_newton.py` repair, reproduced to relative error 0.0.
+- **Leg 287 (Route-EPA) — YES:** reproducibility census of ten banked artifact families; nine
+  PORTABLE, one NON-PORTABLE (`p2_route_e_v1_spectrum`, later repaired by leg 356); zero
+  banked files modified. [Its own §3 determinism-control finding was later corrected by leg
+  356 as a false alarm — see that entry.]
+- **Leg 307 (Route-TSCX) — yes-artifact:** leg 221's flagged two-scale counterexample (43.2%
+  error, "86x tolerance") reproduces exactly; the mechanism sits in the probe's own
+  realization, not in any banked result's reachability. Closes leg 221's flag.
+- **Leg 318 (Route-DECR) — YES:** "ENCLOSURE IS CRITICALITY" criterion, five named
+  falsification tests, none refuted, all controls pass. Scoping leg, nothing built.
+- **Leg 327 (Route-P2T1E) — GATE: YES:** an evidence script for leg 302's `fig69` produced
+  from leg 302's own curated JSON, no re-measurement (leg 302's own gate answered NO, so its
+  runner needs a `--figure PATH` flag to emit the figure).
+- **Leg 328 (Route-ORC5) — YES:** over-read closure #5 executed across all six sites; no ban
+  touched, no gate answer elsewhere changes.
+- **Leg 330 (Route-PVLX) — YES, definite answer (ii):** Pineau-Vicol's Liouville theorem does
+  NOT reach the screened object — the deciding clause is the `lambda`-regime hypothesis, not
+  the Type-I/RDSS clause.
+- **Leg 333 (Route-SHELL) — NO:** the literature already answers the placement question (which
+  structural feature flips blow-up on, and where 3D NS sits), at three levels; hard novelty
+  gate, no construction.
+- **Leg 334 (Route-DSSP plan) — YES**, clause (c) on its second branch: the seeded-DSS/RPO
+  programme's seed set is empty. Planning leg, nothing built; ceiling Tier 2.
+- **Leg 335 (Route-S1GR) — YES:** the `spike1_stepC_gate.json` reproducibility gap (`alpha`
+  moved 13.2%, two of four predicate checks flipped) diagnosed and adjudicated.
+- **Leg 337 (Route-C318) — YES:** leg 318's float64 mechanism re-measured with the deciding
+  ulp accounting quoted; the control rewritten falsifiable; FT1's exact-arithmetic verdict
+  unchanged.
+- **Leg 340 (Route-EGRB) — YES:** the truncation-controlled bound holds exactly at `1/2` (an
+  exact matrix identity, neither TRUNCATION-LIMITED nor KNIFE-EDGE); reported and escalated
+  per the pre-committed yes-branch (a flip on an identity, not a construction).
+- **Leg 341 (Route-ALGW) — S1 DIES, S2 DISSOLVES:** the algebraically weighted space fails
+  the stage-V ban's three-realization test, and leg 261's NRS/Tsai `L³` composition dissolves
+  under re-derivation; neither carries the other. Nothing built, no search run.
+- **Leg 342 (Route-SEED) — YES, via branch (ii):** no screen-passing seed exists today (0 of 5
+  candidates survive); a concrete seeding strategy (P2) is named and costed at ~35 legs.
+- **Leg 343 (Route-DSSP brick B1, DSSP-SPACE) — YES on both (i) and (ii):** the targeted space
+  holds the object (weight-tolerance criterion reproduces leg 313's/331's measured crossings)
+  and the operator's spectrum on the compactified basis is continuous.
+- **Leg 344 (Route-PKLR) — YES:** a sourced 7-entry PINN/KAN-for-self-similar-profiles
+  literature inventory, informing the ~35-leg from-scratch build decision.
+- **Leg 345 (Route-PUB0C):** writeup assembly leg, no formal gate — the §0c census-spine
+  section assembled from already-banked records only; no new measurement.
+- **Leg 346 (Route-CAPR2) — CONFIRMS, at full strength:** a third independent confirmation of
+  Breden-Chu's Theorem 42, plus a queue-bookkeeping correction.
+- **Leg 347 (Route-DSSC) — YES:** a definite per-object verdict ledger for 12 screened objects
+  (11 given pass/fail with failing clause named, 0 passes; 1 flagged incomplete); leg 342's
+  ~35-leg creation-path cost estimate unmoved.
+- **Leg 348 (Route-POCP) — YES, classification (ii) OPEN-AND-REACHABLE:** does periodic-orbit
+  CAP for dissipative PDEs reach route 4's object; scoping only, nothing constructed.
+- **Leg 349 (Route-GAFV) — NO:** 0 of 6 six-property gate checks clear for "RPO Newton-Krylov
+  converges from this guess" as a GA fitness; no GA compute run.
+- **Leg 350 (Route-DSSP brick B2, DSSP-BASIS) — YES:** an enriched compactified basis resolves
+  the boundary block at a lower mode count than leg 313's plain-Chebyshev baseline, at the
+  same truncation.
+- **Leg 351 (Route-DSSP brick B3, DSSP-BS) — YES:** Biot-Savart in the compactified variable
+  stays on the multiplier side of the nonlocal-output rule.
+- **Leg 352 (Route-LCB2) — mixed, per-site (i) NO/resister-not-forced, (ii) YES/landed:**
+  light corrections batch 2; one batched `writeup/CORRECTIONS.md` entry added, zero other
+  content changed.
+- **Leg 353 (Route-DSSP brick B5, DSSP-NKBASIN) — NO:** 0 of 5 published RPOs recovered by a
+  matrix-free Newton-Krylov solver; all attempts `line_search_failed`; control converged
+  cleanly.
+- **Leg 354 (Route-DSSP brick B4, DSSP-STEP) — YES:** the rescaled-vorticity time-stepper
+  reproduces a known answer inside a pre-stated window, and a planted non-trivial control
+  fails, both fixed before the run.
+- **Leg 355 (Route-LCB3) — YES, both items:** light corrections batch 3; accumulator items 3-4
+  close.
+- **Leg 356 (Route-ESPX):** repair leg — diagnoses and repairs leg 287's
+  determinism-control false-alarm mechanism (`VOLATILE_TOKENS` matched `"generated_at"` but
+  not the bare substring `"generated"`); `solver/rescaled_spectrum.py` deliberately untouched,
+  fix lives in the generator's post-processing step.
+- **Leg 357 (Route-DSSP brick B7, DSSP-SCREEN) — YES:** the screen is built and exercised on
+  the two DSSP objects that have landed (legs 351/354); TIER 2 ceiling stated explicitly, not
+  evidence for a genuine DSS blow-up profile.
+- **Leg 358 (Route-RPOL) — gate verdict YES:** a costed, spec-compliant retry spec for leg
+  353's route-4 stop (2 legs / ~22-33 hours minimum-viable, multi-week/GPU-dependent for full
+  literature scale), 4 named residual risks.
+- **Leg 359 (Route-L3BD) — YES:** a definite class reached for all three sub-questions on
+  NRS/Tsai's exclusion versus a log-divergent object; this repo's actual DSS target does not
+  reach it, but the deciding clause is the SS-ansatz hypothesis, not any `L³`/decay clause.
+- **Leg 360 (Route-PVDS) — class (ii) NON-OPERATIONAL:** leg 330's derived T4 screen from
+  Pineau-Vicol v2's local theorem is not operational for B7's machine-read ledger.
+- **Leg 361 (Route-LCB4) — YES, on both:** light corrections batch 4, off leg 356's landed
+  work.
+- **Leg 362 (Route-B7X) — YES:** closes leg 359's flagged gap in the NRS/Tsai ledger entry; an
+  additive extension to `solver/dssp_screen.py`, banked.
+- **Leg 363 (Route-CKNQ) — NO-EXPLICIT-VALUE-LOCATED** (both sub-questions): explicit-constant
+  literature does not reach leg 360's two non-effective ingredients of `delta_0`.
+- **Leg 364 (Route-NRSV) — (ii) DISCREPANCY-FOUND:** the ledger's quoted NRS 1996 Theorem-1
+  range `q ∈ (3, ∞]` excludes `q = 3`, confirmed at two independent obtainable sources; NRS
+  1996 itself remains unobtainable (paywalled, attempted a third time, never circumvented).
+
+No link of the L1->L4 chain moved by adding any of these 63 pointers. Clay odds unchanged at
+~0.05%. Per-leg file coverage inside the leg-102-to-364 window is now complete: 0 of the
+~206 legs landed in this window are missing a pointer in this file, and the one standing gap
+predates this window (leg 60/`leg/pq-v1`, noted at leg 102's own audit block, unmerged and
+therefore correctly absent from `main`'s `experiments/journal/`). Zero broken links were found.
