@@ -83,7 +83,7 @@ data JSON, B/T = BLOG/TECHNICAL pair, E = `*_evidence.py`, F = figure present in
 | Route-C-PILOT v0 | Certificate-weight fitness on a known-answer object — gate answered **NO** (4/6); GA not run | Y | Y | Y | Y | fig44 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEC_PILOT_V0.md) · [B](4_p2_lottery/BLOG_P2_ROUTEC_PILOT_V0.md) |
 | Route-L1 v1 | Certificate stops being a rehearsal: constants become interval bounds | Y | Y | Y | Y | fig45 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEL1_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEL1_V1.md) |
 | Route-L1 v2 | Certificate rebuilt where operators are exact; one term left over (weight class) | Y | Y | Y | Y | fig46 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEL1_V2.md) · [B](4_p2_lottery/BLOG_P2_ROUTEL1_V2.md) |
-| Route-PORT v2 | Reach makes the truncation gap WORSE (+0.47 dec/unit ρ) — tail lemma forced | Y | Y | **GAP: T only, no BLOG** | Y† | fig60 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V2.md) — E and F **added by leg 60**; only the BLOG is still owed, see gap list item 2 |
+| Route-PORT v2 | Reach makes the truncation gap WORSE (+0.47 dec/unit ρ) — tail lemma forced | Y | Y | Y | Y† | fig60 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEPORT_V2.md) · [B](4_p2_lottery/BLOG_P2_ROUTEPORT_V2.md) — **quartet completed by leg 375**, gap-list item 2 now closed |
 | Route-T v1 | Bordering restores a bounded tail; works where the failure curve was worst | Y | Y | Y | Y | fig47 | [T](4_p2_lottery/TECHNICAL_P2_ROUTET_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTET_V1.md) |
 | Route-TC v1 | Assembling the bordered certificate: four terms in one polynomial; the term that ran out is Z₁'s block coupling | Y | Y | Y | Y | fig48 | [T](4_p2_lottery/TECHNICAL_P2_ROUTETC_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTETC_V1.md) |
 | Route-MM v1 | The shape of the approximate inverse, spent — gate answered **NO** | Y | Y | Y | Y† | fig49 | [T](4_p2_lottery/TECHNICAL_P2_ROUTEMM_V1.md) · [B](4_p2_lottery/BLOG_P2_ROUTEMM_V1.md) |
@@ -299,8 +299,13 @@ returns `MISSING` for the three rows above, which is how legs 125/127/128 were f
    figure should show is a claim-bearing decision, out of DOCS's mechanical-only remit.
    **◐ NARROWED by leg 60, recorded by leg 138: 2 of the 3 named pieces now exist**
    (`experiments/p2_route_port_v2_reach_evidence.py` and
-   `writeup/figures/fig60_route_port_v2.png`). **`BLOG_P2_ROUTEPORT_V2.md` is still absent**
-   and this item now stands for that one clause alone.
+   `writeup/figures/fig60_route_port_v2.png`). **✅ CLOSED by leg 375**:
+   `writeup/4_p2_lottery/BLOG_P2_ROUTEPORT_V2.md` now exists, every numeric claim in it
+   traced directly to `TECHNICAL_P2_ROUTEPORT_V2.md` and
+   `writeup/data/p2_route_port_v2_reach.json` with no new measurement or re-derivation, and
+   the adverse finding (+0.47 dec/unit ρ, 63× worse at `ρ=10` vs `ρ=6`) stated as the
+   headline, unsoftened. The quartet-gap list's last open clause is now closed — the list
+   stands at **0 open items**. The row above reads `Y` / `[T]·[B]`.
 3. **fig42 (Route-M v1)** — `p2_route_m_v1_evidence.py` references
    `writeup/figures/fig42_route_m_v1_targets.png`, which was absent from the repo (all other
    `fig1..fig47` present, fig42 was the one gap). **Fixed this session**: ran
