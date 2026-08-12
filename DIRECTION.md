@@ -33,7 +33,7 @@ prose as before.
 <!-- FLOOR-TABLE-START -->
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
-| A | 335 | S1GR | no |
+| A | 287 | EPA | no |
 | B | 353 | DSSP-B5 | yes |
 | C | 354 | DSSP-B4 | yes |
 | D | 327 | P2T1E | no |
@@ -62,7 +62,7 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig85 | 331 | landed (fig85, registered) |
 | fig86 | 332 | landed (fig86_route_vort_v1_formulation.png) |
 | fig87 | — | released (333 landed NO, no figure shipped; number returns to the pool) |
-| fig88 | 335 | reserved (S1GR, in reserve; only if the reproducibility comparison warrants) |
+| fig88 | — | released (335 landed YES, findings fully numeric, no figure) |
 | fig89 | 340 | landed (fig89_route_egrb_v1_ladder.png + evidence.py) |
 | fig90 | — | released (341 landed, no figure shipped; number returns to the pool) |
 | fig91 | 343 | landed (fig91_route_dsspb1_v1 — genuine new measurement) |
@@ -17837,7 +17837,14 @@ per-brick leg counts are UPPER BOUNDS, not floors — a brick that lands in
 one principled leg reports, never pads (350's recommendation, adopted).
 Floor 2/4 (348, 351).
 
-**LCB2-family accumulator (empty; item (3) opens on the next flag).
+**LCB2-family accumulator — item (3) OPEN: experiments/
+p2_route_bvrr_v1_repair.py's BANKED registry entry for spike1_stepC_gate
+must add "--steps","2500" to its argv (currently omits it; CLI default 400
+runs an unconverged trajectory). Fix basis ALREADY SOURCE-VERIFIED by leg
+335's own measurements (the artifact's runs[*].steps field = 2500 in all
+four entries; short-run reproduces the spurious alpha to 1.02e-11; correct
+steps reproduce every banked alpha to ≤4.6e-15) — satisfies the cycle-10m
+verification requirement at entry. Batch leg drafts at 2-3 items.
 MECHANISM AMENDED at cycle 10m after GAP-352-A: an item enters the
 accumulator as a FLAG ONLY; its proposed fix is marked UNVERIFIED until the
 drafting cycle verifies it against the primary source (the byline, the
@@ -18642,10 +18649,90 @@ after B4/B5 report, B8 behind it, B9 struck. With the user: cycle-10
 packet + GA note, POCP (ii) item, C4/escalation-#3, 313 packet +
 ban-wording, 320 packet. Next vacancy: 287 EPA.
 
-**Reserve queue: 11 undispatched legs (287, 229, 293, 298, 299, 310, 325,
-231, 232, 233, 234).** Immediately dispatchable: **5**. Next fresh leg
-number: **355.**
+Cycle 10p: A/335 landed YES at 2868f15 — **REPRODUCIBLE_AS_BANKED**: the
+spike1_stepC_gate "13.2% shift + two flipped predicates" was leg 221's
+regeneration harness omitting --steps 2500 (CLI default 400, silently
+unconverged), PROVEN both directions (short run reproduces the spurious
+alpha to 1.02e-11; correct steps reproduce all four banked alphas to
+≤4.6e-15; BLAS-thread spread 1.55e-15 rules out environment). 0 of 4
+predicates move; no banked verdict changes; CORRECTIONS §23 + register row
+14 filed; fig88 released. The one-line registry fix enters the accumulator
+as item (3), source-verified at entry. A ← 287 EPA (resume
+leg/287-epa-v1; 252's environment-portability census). Floor 2/4 (353,
+354).
+
+**Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325,
+231, 232, 233, 234).** Immediately dispatchable: **4** (rank order: 229,
+293, 298, 299). Next fresh leg number: **355.**
 
 Nothing in this update lifts a ban. B3's multiplier-side answer and B4's
 known-answer probe are apparatus under the Tier-2 ceiling; a figure shipped
 from banked data moves nothing. No L1-L4 link moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10p) — 335 YES ABSORBED
+(REPRODUCIBLE_AS_BANKED: THE GAP WAS THE REGENERATION HARNESS's OWN ARGV
+BUG; ZERO BANKED VERDICTS MOVE); THE REGISTRY FIX ENTERS THE ACCUMULATOR
+SOURCE-VERIFIED; A ← 287 EPA
+
+Written from the same detached lineage, resynced to origin/main = 2868f15.
+
+### 335 S1GR gate YES, absorbed at full strength
+
+The long watch paid for a real diagnosis: the reproducibility gap 221's
+verifier surfaced was never in the banked record — it was in the
+REGENERATION HARNESS, whose BANKED registry entry invokes the generator
+with argv=["--logged"] only, omitting --steps 2500, so the CLI default 400
+silently ran a materially shorter, unconverged trajectory. The proof is
+two-sided and airtight: re-running at the harness's actual 400 steps
+reproduces the SPURIOUS "regenerated" alpha to rel_diff 1.02e-11 (the bug
+recreates the gap), and re-running all four rungs at the artifact's own
+recorded steps=2500 reproduces every banked alpha to float64 precision
+(0 to 4.6e-15), with a BLAS-thread control (spread 1.55e-15) ruling out
+environment sensitivity. **The two "flipped" predicates do not differ from
+banked once evaluated correctly; 0 of 4 predicates move; no banked verdict
+changes.** CORRECTIONS §23 + register row 14 filed; downstream consumers
+flagged, not edited; fig88 released (findings fully numeric). The second
+diagnostic pass this DM watched was exactly the no-branch being earned —
+and it converted the no-branch into a clean yes-branch with the mechanism
+named. Endorsed without amendment.
+
+### The registry fix — accumulator item (3), source-verified at entry
+
+The flagged one-line fix (add "--steps","2500" to bvrr_v1_repair.py's
+BANKED registry entry for spike1_stepC_gate) enters the LCB-family
+accumulator satisfying the cycle-10m verification requirement ALREADY: the
+fix's basis is the artifact's own runs[*].steps field and 335's two-sided
+reproduction — this is what a verified flag looks like, in contrast to
+GAP-352-A's unverified same-shape assumption. Batch leg drafts when the
+accumulator holds 2-3 items, as standing.
+
+### Refill — slot A ← 287 EPA (reserve rank 1, executed)
+
+RESUME leg/287-epa-v1, spec at its original entry: the
+environment-portability census of the OTHER banked artifact families
+(252's meta-finding — one family regenerates 202/359 leaves differently
+across environments with zero code change; outlier or norm?). Notably
+sharpened by this very cycle: 335 just demonstrated a second
+regeneration-fidelity failure mode (harness argv drift, distinct from
+252's environment drift) — 287's census should expect BOTH classes, and
+its novelty pass reads 335's record first. Audit; not floor-eligible.
+Territory disjoint from B/C/D — checked. **Floor 2/4 (353, 354) — §3b's
+minimum.** FLOOR-TABLE synced (A 335→287); fig88 released.
+
+### Standing state
+
+B/353 DSSP-B5; C/354 DSSP-B4 (critical path); D/327 P2T1E. Brick ledger:
+B1-B3 ✓, B4/B5 live, B6 user-gated, B9 struck. With the user: cycle-10
+packet + GA note, POCP (ii) item, C4/escalation-#3, 313 packet +
+ban-wording, 320 packet. Next vacancy: 229 PNRV.
+
+**Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
+232, 233, 234).** Immediately dispatchable: **4**. Next fresh leg number:
+**355.**
+
+Nothing in this update lifts a ban. REPRODUCIBLE_AS_BANKED is the record
+defending itself — the gap was in the tooling, the banked numbers stand,
+and the fix is one argv token. No L1-L4 link moved; Clay stays ~0.05%.
