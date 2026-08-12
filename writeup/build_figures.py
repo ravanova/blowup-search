@@ -396,6 +396,7 @@ P2_EVIDENCE = [
     ("../experiments/p2_route_scel_v1.py", ["--figure"]),       # fig103 -- Route-SCEL v1 (leg 385); fig103 assigned at dispatch. The runner IS the evidence script under --figure: it redraws fig103 from writeup/data/p2_route_scel_v1.json alone and re-runs no interval arithmetic (leg 385's territory listed one experiments/ file, so the rebuild path lives in it rather than in a separate *_evidence.py)
     "../experiments/p2_route_bvrrv_v1_postrepair_evidence.py",  # fig101 -- Route-BVRRV v1 (leg 233); fig101 allocated at dispatch, quartet closed later by a DOCS rework unit
     "../experiments/p2_route_cobv_v1_evidence.py",              # fig105 -- Route-COBV v1 (leg 384); fig105 assigned at dispatch (fig103 to leg 385, fig104 to a DOCS unit)
+    "../experiments/p2_route_dtol_v1_evidence.py",              # fig99 -- Route-DTOL v1 (leg 386); fig99 was reserved for leg 381, which drew no figure and left it unused, and was re-allocated to this leg at dispatch
 ]
 
 

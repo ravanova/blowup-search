@@ -16,8 +16,11 @@ import numpy as np
 
 from solver.dssp_decay_enclosure import (
     VERDICT_EMPTY, VERDICT_INCAPACITY, VERDICT_INTERVAL,
+    HYP_BOTH, HYP_EXACT_INTERVAL, HYP_MODULUS, HYP_MONOTONE,
+    HYP_NODES_ONLY, HYP_UNDECLARED,
     certified_decay_from_cell_enclosures, certified_decay_interval,
-    critical_tolerance, ipow_half_integer, isqrt,
+    critical_tolerance, cutoff_admissible_delta_window,
+    ipow_half_integer, isqrt, predicted_width,
     planted_curvature, planted_log_corrected, planted_perturbed,
     planted_power_law, planted_rational_cutoff, planted_two_power,
     radial_field_fn,
@@ -238,6 +241,174 @@ def test_radial_field_lift_matches_the_scalar_profile():
         "the 3D lift does not reproduce the scalar magnitude"
     print("[ok] the 3D field lift has |V| = f(r) to 1e-14, so fitted and certified "
           "see one profile")
+
+
+# ---------------------------------------------------------------------------
+# leg 386 (Route-DTOL) additions — ADDITIVE ONLY.  Nothing above is weakened or
+# removed; in particular `test_zero_tolerance_rejects_any_perturbation` is a correct
+# pinned finding of leg 382 and must keep passing exactly as written.
+# ---------------------------------------------------------------------------
+
+def test_delta_is_recorded_on_every_code_path():
+    """Leg 389 consumes these rows.  A row whose tolerance is implicit is a trap, so
+    `rel_tolerance` must appear on EVERY return path — including the incapacity paths,
+    where leg 382's version silently dropped it."""
+    iv_fn, _ = planted_power_law(1.0, 2.0)
+    for d in (0.0, 1e-6, 1e-1):
+        for mode in ("cells", "nodes"):
+            r = certified_decay_interval(iv_fn, R0, R1, 50, mode, (0.0, 12.0), d)
+            assert r["rel_tolerance"] == d, f"{mode} at delta={d}: tolerance not recorded"
+            assert r["tolerance_mode"] == ("exact" if d == 0.0 else "relative")
+
+    # (a) incapacity by an enclosure that reaches zero
+    zero_fn = lambda R: iv_fn(R) - iv_fn(R)          # noqa: E731
+    r = certified_decay_interval(zero_fn, R0, R1, 20, "cells", (0.0, 12.0), 3e-3)
+    assert r["verdict"] == VERDICT_INCAPACITY and r["rel_tolerance"] == 3e-3, \
+        "the zero-crossing INCAPACITY path dropped the tolerance"
+    # (b) incapacity by an exponent outside the search bracket
+    out_fn, _ = planted_power_law(1.0, 13.0)
+    r = certified_decay_interval(out_fn, R0, R1, 50, "cells", (0.0, 12.0), 1e-3)
+    assert r["verdict"] == VERDICT_INCAPACITY and r["rel_tolerance"] == 1e-3, \
+        "the out-of-bracket INCAPACITY path dropped the tolerance"
+    # (c) the EMPTY path
+    r = certified_decay_interval(planted_log_corrected(1.0, 2.0)[0], R0, R1, 50,
+                                 "cells", (0.0, 12.0), 1e-3)
+    assert r["verdict"] == VERDICT_EMPTY and r["rel_tolerance"] == 1e-3, \
+        "the EMPTY path dropped the tolerance"
+    print("[ok] delta is recorded on every path: interval, empty, and both incapacities")
+
+
+def test_width_law_matches_the_closed_form_and_is_a_window_property():
+    """PRE-REGISTERED (leg 386 PART I §2.1): width = 4 log(1+delta)/log(R1/R0).
+
+    The consequence a consumer must not miss is that the coefficient belongs to the
+    WINDOW: halving the log-window in decades DOUBLES the certified width at the same
+    tolerance.  Leg 382's measured 0.8686 is 4/log(100), not an instrument constant."""
+    iv_fn, _ = planted_power_law(1.0, 2.0)
+    for r0, r1 in ((10.0, 1000.0), (10.0, 100.0)):
+        for d in (1e-9, 1e-6, 1e-3, 1e-1):
+            r = certified_decay_interval(iv_fn, r0, r1, 200, "cells", (0.0, 12.0), d)
+            pred = predicted_width(d, r0, r1)
+            assert r["verdict"] == VERDICT_INTERVAL
+            assert 0.95 <= r["width"] / pred <= 1.05, \
+                f"width law off band on [{r0},{r1}] at delta={d}: {r['width']/pred}"
+            assert abs(r["predicted_width_exact_power_law"] - pred) < 1e-18
+    w_long = certified_decay_interval(iv_fn, 10.0, 1000.0, 200, "cells", (0.0, 12.0), 1e-3)["width"]
+    w_short = certified_decay_interval(iv_fn, 10.0, 100.0, 200, "cells", (0.0, 12.0), 1e-3)["width"]
+    assert abs(w_short / w_long - 2.0) < 0.01, \
+        f"the window-doubling prediction failed: ratio {w_short/w_long}"
+    print(f"[ok] width law = 4 log(1+d)/log(R1/R0); shortening the window doubles it "
+          f"({w_short/w_long:.6f}x, predicted 2)")
+
+
+def test_delta_star_matches_the_chebyshev_closed_form():
+    """PRE-REGISTERED (leg 386 PART I §2.2): delta* = exp(E_inf(phi)) - 1, with E_inf the
+    Chebyshev best-affine error of the profile's departure from a power law in the log-log
+    plane.  Measured delta* must sit within 20% and BELOW the continuum value, because the
+    cell enclosure is slightly wider than the exact tube."""
+    for name, pair, pred in (
+            ("two-power", planted_two_power(1.0, 2.0, 0.01, 1.0), 0.318807),
+            ("rational cutoff", planted_rational_cutoff(1.0, 2.0, 300.0, 4), 3.454378),
+            ("log correction", planted_log_corrected(1.0, 2.0), 0.077025)):
+        lo, hi = critical_tolerance(pair[0], R0, R1, 200, "cells", (0.0, 12.0), iters=45)
+        assert 0.80 <= lo / pred <= 1.0, f"{name}: delta* {lo} off the closed form {pred}"
+    print("[ok] delta* matches exp(E_inf(phi)) - 1 within 20%, and from below")
+
+
+def test_cutoff_window_is_empty_exactly_when_the_centre_fails_the_threshold():
+    """CLAY_OBLIGATIONS §4's composed condition, as a property rather than a table.
+
+    The tolerance buys ZERO headroom on the alpha threshold: the window is non-empty iff
+    the realised certified centre exceeds the threshold.  Checked in both directions on a
+    profile whose centre is strictly between the two thresholds §4 cares about."""
+    iv_fn, _ = planted_log_corrected(1.0, 1.5)          # realised centre ~ 1.2624
+    lo = cutoff_admissible_delta_window(iv_fn, R0, R1, 1.0, n_cells=200, iters=35)
+    assert lo["admissible"] and lo["width"] > 0.5, \
+        f"expected a window above threshold 1: {lo}"
+    assert lo["alpha_centre"] > 1.0
+    hi = cutoff_admissible_delta_window(iv_fn, R0, R1, 1.5, n_cells=200, iters=35)
+    assert not hi["admissible"] and hi["delta_min"] is None, \
+        f"expected EMPTY above threshold 3/2: {hi}"
+    ac = lo["alpha_centre"]
+    just_above = cutoff_admissible_delta_window(iv_fn, R0, R1, ac * (1 + 1e-6),
+                                                n_cells=200, iters=35)
+    assert not just_above["admissible"], \
+        "a threshold just above the realised centre must give an EMPTY window"
+    print(f"[ok] cutoff window non-empty iff centre ({ac:.6f}) exceeds the threshold; "
+          f"width {lo['width']:.6f} at threshold 1, EMPTY at 3/2")
+
+
+def test_hypothesis_is_recorded_on_every_code_path():
+    """STANDING RULE (DM cycle 11g): every output row carries the hypothesis in force.
+
+    A certificate-without-hypothesis is no certificate -- leg 385's control X3 planted a
+    SECRET monotonicity violation and produced a certificate of width
+    7.438494264988549e-15, bit-indistinguishable from the true certificate of the genuine
+    known K1.  Nothing inside the certificate separates them; only this field does.  So
+    it is checked on the SAME four code paths delta is checked on, plus the composed
+    window, and an omitted hypothesis must come back UNDECLARED rather than absent."""
+    fields = ("hypothesis", "hypothesis_detail", "conditional_on")
+    iv_fn, _ = planted_power_law(1.0, 2.0)
+
+    # 1. interval, 2. empty, 3. incapacity (bracket), all via the cells path
+    rows = [certified_decay_interval(iv_fn, R0, R1, 100, "cells", (0.0, 12.0), 0.0),
+            certified_decay_interval(planted_log_corrected(1.0, 2.0)[0], R0, R1, 100,
+                                     "cells", (0.0, 12.0), 0.0),
+            certified_decay_interval(iv_fn, R0, R1, 100, "cells", (5.0, 12.0), 0.0)]
+    for r in rows:
+        for f in fields:
+            assert f in r, f"{f} missing from a {r['verdict']} row"
+        assert r["hypothesis"] == HYP_EXACT_INTERVAL, r["hypothesis"]
+        assert r["conditional_on"] and "DISCHARGED" in r["conditional_on"]
+
+    # 4. the nodes mode must SAY it is nodes-only, in the row and not just the docstring
+    nodes = certified_decay_interval(iv_fn, R0, R1, 100, "nodes", (0.0, 12.0), 0.0)
+    assert nodes["hypothesis"] == HYP_NODES_ONLY, nodes["hypothesis"]
+    assert "NO CELL HYPOTHESIS" in nodes["conditional_on"]
+
+    # 5. the zero-crossing incapacity path, which is the one that dropped rel_tolerance
+    zero = certified_decay_from_cell_enclosures([10.0, 20.0], [20.0, 40.0],
+                                                [0.0, 1.0], [1.0, 2.0])
+    assert zero["verdict"] == VERDICT_INCAPACITY
+    assert zero["hypothesis"] == HYP_UNDECLARED, zero["hypothesis"]
+
+    # 6. an omitted hypothesis is recorded as UNDECLARED and SAYS it is not a certificate
+    bare = certified_decay_from_cell_enclosures([10.0, 20.0], [20.0, 40.0],
+                                                [1.0, 0.25], [1.0, 0.25])
+    assert bare["hypothesis"] == HYP_UNDECLARED
+    assert "no certificate" in bare["conditional_on"]
+
+    # 7. a declared upstream hypothesis passes through unmodified, detail included
+    passed = certified_decay_from_cell_enclosures(
+        [10.0, 20.0], [20.0, 40.0], [1.0, 0.25], [1.0, 0.25],
+        hypothesis=HYP_BOTH, hypothesis_detail="declared by the adapter under test")
+    assert passed["hypothesis"] == HYP_BOTH
+    assert "declared by the adapter under test" in passed["conditional_on"]
+    assert "NOT verified here" in passed["conditional_on"]
+
+    # 8. the composed window is exactly as conditional as the rows it composes
+    win = cutoff_admissible_delta_window(iv_fn, R0, R1, 1.0, n_cells=100, iters=25)
+    for f in fields:
+        assert f in win, f"{f} missing from a composed-window row"
+    assert win["hypothesis"] == HYP_EXACT_INTERVAL
+    print("[ok] hypothesis recorded on all 8 paths; omitted -> UNDECLARED, never absent")
+
+
+def test_hypothesis_strings_match_the_adapter():
+    """The MONOTONE / MODULUS / BOTH strings are duplicated from leg 385's samples->cells
+    adapter so the dependency points one way (adapter -> enclosure).  Duplication drifts;
+    this pins it, and fails loudly if leg 385's module renames one."""
+    try:
+        from solver import dssp_decay_samples as adapter
+    except ImportError:                                  # pragma: no cover
+        print("[skip] solver/dssp_decay_samples.py absent; nothing to pin against")
+        return
+    for ours, theirs in ((HYP_MONOTONE, "HYP_MONOTONE"),
+                         (HYP_MODULUS, "HYP_MODULUS"),
+                         (HYP_BOTH, "HYP_BOTH")):
+        assert ours == getattr(adapter, theirs), \
+            f"hypothesis string drift: ours {ours!r} vs adapter's {getattr(adapter, theirs)!r}"
+    print("[ok] hypothesis strings byte-identical to the leg-385 adapter's")
 
 
 def main():
