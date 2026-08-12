@@ -1,0 +1,81 @@
+{
+  "leg": 364,
+  "route": "NRSV",
+  "title": "Cross-check the rigidity ledger's encoded NRS 1996 Theorem-1 clause (solver/dssp_screen.py) against every legitimately obtainable statement of NRS 1996's actual hypothesis, clause-by-clause, pinned",
+  "date": "2026-08-12",
+  "branch": "leg/364-nrsv-v1",
+  "role": "LEG, floor-eligible, read-and-report, literature-typed, verification-only",
+  "dispatched_by": "DM cycle 10z (commit 7bb30ad): \"verify the NRS 1996 theorem statement from obtainable sources (the paywall gap 253 and 359 both hit) so the screen's T1 entry rests on a verified statement -- no paywall circumvention, refusals banked as refusals\"",
+  "territory": [
+    "writeup/data/p2_route_nrsv_v1.json",
+    "writeup/novelty/leg_364.md",
+    "experiments/journal/leg_364.md"
+  ],
+  "files_read_only_never_edited": [
+    "solver/dssp_screen.py (legs 357, 362)",
+    "experiments/journal/leg_357.md",
+    "experiments/journal/leg_359.md",
+    "experiments/journal/leg_362.md",
+    "writeup/data/p2_route_l3bd_v1.json (leg 359)",
+    "leg/253-nrsx-v1:experiments/journal/leg_253.md (parked, unmerged, read via git cat-file -p, never checked out)",
+    ".claude/worktrees/agent-ae9dc3e919e0abed6/Papers/tsai-leray.txt, survey.txt, rotated.txt (a still-present stale worktree from a prior leg, read-only, outside this leg's own worktree)",
+    "plan_of_record.py",
+    "DIRECTION.md",
+    "capabilities.py"
+  ],
+  "figures_assigned": 0,
+  "the_ledger_clause_under_review": {
+    "location": "solver/dssp_screen.py, two places, identical quote",
+    "location_1": "module header comment, lines 364-367 (leg 362)",
+    "location_2": "_ledger_nrs_tsai_three_way()'s EXCLUDED-BY-T1 branch, deciding_clause, lines 534-539 (leg 362)",
+    "quoted_text_verbatim_from_code": "Tsai 1998, p.30 (restating/generalising NRS 1996): \"Theorem 1. If a weak solution U of (1.3) belongs to L^q(R^3), for some q in (3,infinity], then it must be constant (and hence identically zero if q < infinity).\"",
+    "what_it_gates": "fires (verdict EXCLUDED-BY-T1) whenever l3_norm_ladder()'s output converges -- and l3_norm_ladder() (lines 141-171) hardcodes the EXACT cube norm, i.e. q=3 precisely (variable names L3_cubed, cube ** (1.0/3.0); no other exponent appears anywhere in the function). There is no general-q L^q norm computed anywhere in this module -- the operational test is always, only, exactly q=3."
+  },
+  "obtainable_sources_consulted": [
+    {
+      "source_id": 1,
+      "citation": "Tsai, T.-P., \"On Leray's Self-Similar Solutions of the Navier-Stokes Equations Satisfying Local Energy Estimates\", Arch. Rational Mech. Anal. 143 (1998) 29-51",
+      "url": "https://personal.math.ubc.ca/~ttsai/publications/leray.pdf",
+      "obtained": "full text, independently re-downloaded this leg (not merely re-reading the cached extraction)",
+      "sha256_this_leg": "6d3182d53806ce82fa0a2d834b31b758f22399ff625b8c8d7025a65f83fb8182",
+      "cross_check": "byte-identical to leg 359's own independently-recorded pin of the same URL -- three separate download sessions (legs 253 via cached copy, 359, 364) now agree on this file's identity",
+      "quote_re_NRS": "p.30 (pdftotext -layout line 79-80, both cached and this leg's fresh extraction): \"The main result of [NRS] is that the only weak solution of (1.3) belonging to L3(R3) is U ≡ 0.\"",
+      "quote_re_theorem_1": "p.30 (line 128): \"Theorem 1. If a weak solution U of (1.3) belongs to Lq(R3), for some q in (3, infinity], then it must be constant (and hence identically zero if q < infinity).\"",
+      "reading": "Tsai states NRS's own result (U in L^3(R^3) exactly) explicitly on the same page, immediately before stating his own new Theorem 1, and frames Theorem 1 as excluding a case NRS's method could NOT reach (see the paper's own worked example (1.5) and 'This seems to be a serious obstacle for generalizing the method used in [NRS] to q>3', p.32) -- Theorem 1 is presented as a genuinely NEW, disjoint-in-q result, not a restatement of the q=3 case."
+    },
+    {
+      "source_id": 2,
+      "citation": "Bradshaw, Z. & Tsai, T.-P., \"Self-similar solutions to the Navier-Stokes equations\" (survey), arXiv:1802.00038",
+      "url": "https://arxiv.org/pdf/1802.00038",
+      "obtained": "full text, independently downloaded this leg -- first sha256 recorded for this file anywhere in repo history (leg 253 read it and cited line locators but recorded no hash)",
+      "sha256_this_leg": "2f5cda6a6bc63e100d30673a2051860c8aff0c1bac79376c2535e02134fb07a0",
+      "quote": "p.3 of the PDF, this leg's fresh pdftotext -layout extraction: \"His original problem on the existence of a nontrivial solution v(.,t) in W^{1,2}(R3) subset L3(R3) for every t<0 was excluded in Necas, Ruzicka, and Sverak in [35]. ... Tsai proved a localized non-existence result in [38] for solutions v satisfying v(t) in Lq(R3), 3 < q <= infinity for any t<0, or v in L^{10/3}(B1 x (-1,0)).\"",
+      "reading": "A second, fully independent obtainable source -- different authorship context (survey chapter, co-authored by Tsai but not Tsai's own 1998 paper), same disjoint split: NRS 1996 = L^3 exactly (q=3); Tsai's own 1998 theorem = q strictly greater than 3."
+    },
+    {
+      "source_id": 3,
+      "citation": "Necas, J., Ruzicka, M. & Sverak, V., \"On Leray's self-similar solutions of the Navier-Stokes equations\", Acta Math. 176 (1996) 283-294",
+      "obtained": "NOT obtained -- refusal to obtain, banked, reproduced independently a third time (legs 253, 359, 364 all hit the same barrier)",
+      "attempts_this_leg": [
+        {"url": "https://link.springer.com/content/pdf/10.1007/BF02551584.pdf", "result": "HTTP 303 redirect to idp.springer.com login wall"},
+        {"url": "https://projecteuclid.org/journals/acta-mathematica/volume-176/issue-2/On-Leray-self-similar-solutions-of-the-Navier-Stokes-equations/10.1007/BF02551584.full", "result": "HTTP 200 but a 1157-byte Incapsula-gated landing stub, not the article"}
+      ],
+      "no_circumvention_attempted": true,
+      "load_bearing_for_this_legs_verdict": false,
+      "reason_not_load_bearing": "the discrepancy is established from what sources 1 and 2 BOTH say NRS 1996's hypothesis IS (U in L^3 exactly), which is sufficient on its own to show the ledger's quoted Theorem-1 range (q in (3,infinity], open at 3) is disjoint from that hypothesis -- independent of what NRS's own unobtainable text additionally contains"
+    }
+  ],
+  "clause_by_clause_cross_check": {
+    "encoded_clause": "q in (3, infinity] (Tsai 1998 Theorem 1's own stated range, an interval OPEN at 3)",
+    "operationally_tested_clause": "q = 3 exactly (l3_norm_ladder()'s hardcoded cube norm)",
+    "NRS_1996s_actual_hypothesis_per_two_independent_obtainable_sources": "q = 3 exactly (U in L^3(R^3))",
+    "verdict_on_the_cross_check": "The ledger's OPERATIONAL test (q=3) correctly matches NRS 1996's actual hypothesis, per two independent obtainable sources agreeing exactly. The ledger's quoted DECIDING-CLAUSE TEXT (Tsai's Theorem 1, q in (3,infinity]) does NOT match NRS 1996's hypothesis -- it is a disjoint, non-overlapping range (open at exactly the value being tested), attributed by the ledger's own caption as 'restating/generalising NRS 1996' when in fact Tsai's Theorem 1 explicitly does NOT restate the q=3 case (already proved by NRS, not re-proved), and instead proves a new, harder, strictly-greater-than-3 case."
+  },
+  "gate_verdict": "(ii) DISCREPANCY-FOUND",
+  "verdict_caveat": "This is a citation/attribution discrepancy, not a computational or logical bug: the code's actual math (exact L3 convergence test) is correct and matches NRS 1996's real hypothesis per two independent obtainable sources, and the module's plain-English header (lines 64-68: 'u in L^3(R^3) forces u=0... Machine-read directly against THIS candidate's OWN l3_norm_ladder() result') already states this correctly without over-claiming Tsai's Theorem 1. The mismatch is localized to the deciding_clause TEXT leg 362 attached to the EXCLUDED-BY-T1 verdict (lines 534-539) and the identical header-comment quote (lines 364-367): both quote Tsai's Theorem 1 verbatim and caption it as restating NRS 1996, when the quoted range literally excludes the q=3 case being tested, and NRS 1996's own (separately, reliably attested) result is the theorem that actually covers that case.",
+  "flag_for_the_ledgers_owner_legs_357_362_routed_to_the_DM": "Consider re-pointing the EXCLUDED-BY-T1 deciding_clause (and the matching header comment) to cite NRS 1996 directly for the q=3 case -- e.g. via Tsai 1998's own restatement ('The main result of [NRS] is that the only weak solution of (1.3) belonging to L3(R3) is U ≡ 0', p.30) or the Bradshaw-Tsai survey's restatement -- rather than quoting Tsai's Theorem 1 (q in (3,infinity]), whose own stated hypothesis does not cover q=3. This leg does NOT implement the fix -- solver/dssp_screen.py is out of this leg's territory and is left untouched.",
+  "no_ban_touched": true,
+  "no_link_of_L1_to_L4_chain_moved": true,
+  "clay_odds": "~0.05%, unchanged",
+  "figure": "none required per dispatch (verification/literature leg, not a construction or plotting leg)"
+}
