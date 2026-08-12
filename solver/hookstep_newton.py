@@ -70,7 +70,7 @@ import numpy as np
 # Arnoldi: build the Krylov basis ONCE, keep H for repeated hookstep solves
 # --------------------------------------------------------------------------
 
-def arnoldi(matvec, b, maxiter=40, breakdown_tol=1e-14):
+def arnoldi(matvec, b, maxiter=40, breakdown_tol=1e-14, rtol=None):
     """Arnoldi process on the Krylov space K_k(J, b), starting from b/||b||.
 
     Returns (Q, H, k, beta) where Q is (n, k+1) with orthonormal columns, H is
@@ -81,6 +81,17 @@ def arnoldi(matvec, b, maxiter=40, breakdown_tol=1e-14):
     Unlike a GMRES driver, this returns the RAW H -- no Givens rotations are
     applied -- because the hookstep subproblem needs the full matrix to form
     its SVD at many trust-region radii.
+
+    `rtol`, if given, stops the build as soon as the UNCONSTRAINED GMRES
+    residual min||H y - beta e1|| falls below rtol * beta. This is what makes a
+    large `maxiter` affordable rather than merely permitted: in this
+    application one matvec is a full nonlinear time integration over the orbit
+    period (seconds), so running a nominal 200-dimensional space to completion
+    when 30 vectors already solve the linear model to 1e-3 wastes almost all of
+    the budget. The stopping test itself is free by comparison -- a least
+    squares on a (k+1) x k Hessenberg costs O(k^3) flops against O(k) full
+    time integrations. The default stays None so the behaviour without it is
+    exactly the fixed-dimension build the module's tests pin down.
     """
     b = np.asarray(b, dtype=float).ravel()
     n = b.shape[0]
@@ -117,6 +128,12 @@ def arnoldi(matvec, b, maxiter=40, breakdown_tol=1e-14):
         if hk <= breakdown_tol * max(1.0, abs(H[k, k])):
             break  # happy breakdown: the solution lies in this subspace
         Q[:, k + 1] = v / hk
+        if rtol is not None:
+            rhs = np.zeros(k_built + 1)
+            rhs[0] = beta
+            y, *_ = np.linalg.lstsq(H[:k_built + 1, :k_built], rhs, rcond=None)
+            if np.linalg.norm(H[:k_built + 1, :k_built] @ y - rhs) <= rtol * beta:
+                break
     return Q[:, :k_built + 1], H[:k_built + 1, :k_built], k_built, beta
 
 
@@ -214,7 +231,8 @@ def hookstep_subproblem(H, beta, delta, mu_tol=1e-12, max_bisect=200):
 # --------------------------------------------------------------------------
 
 def newton_hookstep(residual, x0, jac_matvec=None, tol=1e-9, max_newton=25,
-                    max_gmres=40, fd_eps=1e-7, delta0=None, delta_max=None,
+                    max_gmres=40, gmres_rtol=None,
+                    fd_eps=1e-7, delta0=None, delta_max=None,
                     delta_min_rel=1e-10, eta_accept=1e-4, shrink=0.5,
                     expand=2.0, rho_shrink=0.25, rho_expand=0.75,
                     max_radius_trials=20, verbose=False, callback=None):
@@ -281,7 +299,8 @@ def newton_hookstep(residual, x0, jac_matvec=None, tol=1e-9, max_newton=25,
 
         # ONE Arnoldi build per Newton iteration; every trust-region radius
         # below re-uses it, so shrinking the radius costs no Jacobian actions.
-        Q, H, k, beta = arnoldi(matvec, -F, maxiter=max_gmres)
+        Q, H, k, beta = arnoldi(matvec, -F, maxiter=max_gmres,
+                                rtol=gmres_rtol)
         if k == 0:
             reason = "krylov_breakdown"
             break
