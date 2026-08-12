@@ -174,7 +174,9 @@ def odd_field_x_slope(g, grid, r_win=0.4, i_lo=3, min_points=3, max_rel_residual
     restricted to the inner HALF of that scale, where the (r, r^3, r^5) truncation is
     controlled.  This heuristic is EXACT for the single-scale class just named and is NOT
     claimed beyond it: leg 221 measured a two-scale field, r cos(b) [exp(-r^2) +
-    exp(-400 r^2)], read as 1.135121 against a truth of 2.0 (43.2%, 86x tolerance) -- the peak
+    exp(-400 r^2)], read as 1.135121 against a truth of 2.0 (43.2%, 86x [CORRECTED 2026-08-12,
+    leg 307's arithmetic finding, batched at leg 352: 0.4324/5e-4 = 864.9, i.e. ~865x, not 86x]
+    tolerance) -- the peak
     resolves to the OUTER scale, the cap goes non-binding, and the inner scale is never
     resolved.  That case is outside leg 205's battery and outside this leg's gate; it is
     banked with its magnitude in writeup/data/p2_route_bvrr_v1_repair.json's

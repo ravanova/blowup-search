@@ -1513,3 +1513,30 @@ nothing else). **4 sites verified already fixed, 0 re-edited** (two DM, one orch
 gate, carried as a pointer only, no edit attempted.** `plan_of_record.py` byte-identical
 before and after (§21.4); the live bans are untouched. No gate answer anywhere changes; no
 link of the `L1 → L4` chain moves. Clay odds stay **~0.05%**.
+
+## §22 — leg 352, Route-LCB2: one corrected, one resister found and NOT forced
+
+**Dispatch: leg 352 (Route-LCB2), the accumulator's first harvest, leg 338's exact shape.** Two
+proposed corrections were dispatched; the leg's own verification step (mandatory before
+applying either) found site (i)'s premise **false** and did not apply it. Site (ii) is
+corrected. One diff-checked site edited, one resister reported verbatim, per the gate's NO
+branch ("a site resists... report the resister verbatim, land the other site... do not widen
+scope to compensate").
+
+| # | site | dispatched claim | verification result | disposition |
+|---|---|---|---|---|
+| (i) | `writeup/data/p2_route_fus_v1.json`, `sources.USC2.cite` (`"Wang, Leger, Lai, Buckmaster …"`, arXiv:2511.22819) | dispatched as "the same fix leg 338 made to `sources.USC.cite`" — i.e. that "Leger" is a misspelling of "Gomez-Serrano" here too | **FALSE.** arXiv:2511.22819's own live byline (fetched directly this leg) is "Yongji Wang, Tristan Léger, Ching-Yao Lai, Tristan Buckmaster" — four authors, no Gómez-Serrano at all. `Leger` is the ASCII form of the real coauthor **Tristan Léger**, a different person from **Javier Gómez-Serrano** (the coauthor on the sibling paper, 2509.14185, that leg 338 correctly fixed). The two papers have different, non-overlapping-in-this-name author lists; leg 338's fix does not generalize to this field. | **RESISTER, not forced.** `sources.USC2.cite` is left exactly as it was — its "Leger" is correct as written. Reported here so no future leg re-attempts this specific "fix" on the mistaken premise that it mirrors leg 338's. |
+| (ii) | `experiments/journal/leg_221.md` and `solver/boussinesq_rescaled.py`'s module docstring (the two identical "86x the module's own tolerance" / "86x tolerance" sites describing the two-scale counterexample) | leg 307's arithmetic finding: the passage's own `5e-4` basis implies `~865x`, not `86x` | **Confirmed by direct re-computation:** `(2.0-1.135121)/2.0 = 0.4324395`; `0.4324395/5e-4 = 864.879`, i.e. `~865x`. The passage's other three magnitudes (`2000x`, `93.9x`, `1731x`) were checked by leg 307 and found consistent with their own bases; untouched by this leg. | **Corrected**, both sites, inline `[CORRECTED 2026-08-12, leg 307's arithmetic finding, batched at leg 352: 0.4324/5e-4 = 864.9, i.e. ~865x, not 86x]`, original `86x` wording left standing alongside the marker. |
+
+### The ceiling
+
+**0 numbers re-derived beyond direct reproduction** — the author-list fact for (i) is
+arXiv:2511.22819's own live text, fetched directly by this leg, and refutes the dispatched
+premise rather than confirming it; the arithmetic for (ii) reproduces leg 307's own quoted
+figure. **2 sites edited by this leg** (the two identical "86x" sites only — `USC2.cite` is
+byte-identical, untouched), **1 batched entry** (this one, recording both the fix and the
+resister). **0 gate answers changed** anywhere — leg 221's two-scale-gap finding, leg 314's
+classification, and leg 307's own verdict are all untouched; this leg's correction is
+non-claim-bearing (a tolerance-multiplier arithmetic slip). **0 bans touched**,
+`plan_of_record.py` and `DIRECTION.md` byte-identical, untouched by this leg. No link of the
+`L1 → L4` chain moved. Clay odds stay **~0.05%**.
