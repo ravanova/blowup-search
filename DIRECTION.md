@@ -34,7 +34,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 356 | ESPX | no |
-| B | 358 | RPOL | yes |
+| B | 360 | PVDS | yes |
 | C | 359 | L3BD | yes |
 | D | 355 | LCB3 | no |
 <!-- FLOOR-TABLE-END -->
@@ -18900,9 +18900,27 @@ non-eligible audits — and a genuine question two landed legs point at:
 log-divergent L³ boundary, and whether NRS/Tsai's hypothesis reaches that
 boundary is the screen's deciding-clause semantics). Floor 2/4 (358, 359).
 
+Cycle 10v: B/358 landed YES at 3ea215c — the stop packet's number is in,
+WITH A LOAD-BEARING RECALIBRATION the packet must carry: 353's 0/5 is
+statistically CONSISTENT with the source paper's own success curve
+(Lucas-Kerswell report ~10% at R≥0.2 — P(0/5|p=0.10)=59%; genuine
+nonzero-shift RPOs succeed at 4.3% even in Chandler-Kerswell's hands;
+Viswanath states plain Newton "never leads to convergence" — 353's
+globalization diagnosis confirmed independent of sample size). BOTH facts
+are true and travel together: the plan's stop gate FIRED AS DRAFTED, and
+the literature says the attempt was underpowered by its own standards.
+Costed: minimum-viable retry 2 legs / ~22-33h compute at N=24;
+literature-scale ~10.2 GPU-days DNS alone; four residual risks named
+(sample size, hookstep non-universality per 1308.3356, resolution gap,
+GPU dependency). The stop packet awaits only 359. B ← **leg 360 PVDS**
+(fresh floor-eligible draft, reasons stated: the §3b bind, and a genuine
+un-adjudicated item in the banked record — 330's derived structural
+screen, ‖∂_s U‖_∞ ≥ δ₀ at every phase, recorded with two open conditions
+and never resolved into B7's ledger). Floor 2/4 (359, 360).
+
 **Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
 232, 233, 234).** Immediately dispatchable: **4** (rank order: 229, 293,
-298, 299). Next fresh leg number: **360.**
+298, 299). Next fresh leg number: **361.**
 
 Nothing in this update lifts a ban. An evidence script that cannot
 silently mutate a banked artifact is the record's immune system getting a
@@ -19290,3 +19308,96 @@ Nothing in this update lifts a ban. A screen that machine-reads its
 theorems and a boundary question read from the theorems' own texts are
 map work; route 4 stays stopped pending the user. No L1-L4 link moved;
 Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10v) — 358 YES ABSORBED (THE RETRY IS
+COSTED, AND THE NULL IS RECALIBRATED AGAINST THE SOURCE's OWN SUCCESS
+CURVE — BOTH FACTS TRAVEL IN THE STOP PACKET); B ← LEG 360 PVDS
+
+Written from the same detached lineage, resynced to origin/main = 3ea215c.
+
+### 358 RPOL gate YES, absorbed at full strength
+
+The requirements table is sourced from the three primary papers (PDFs
+fetched directly after the search API's ~5-retry refusal — banked as a
+refusal, worked around), and it does something better than cost the retry:
+it RECALIBRATES the null. Lucas-Kerswell's own success rate at R≥0.2 is
+~10%, putting P(0/5) at 59% — 353's null is exactly what the source
+predicts for five attempts; genuine nonzero-shift RPOs (353's own UPO37
+class) succeed at 4.3% (7/163) even with the full pipeline; and
+Viswanath's founding paper states plain-Newton damping "is also
+ineffective," confirming 353's globalization diagnosis independent of
+sample size. **Ruling on framing, binding for the stop packet: both facts
+travel together, neither softened — the plan's stop gate fired exactly as
+drafted (the premise "mature engineering works out of the box on this
+repository's realization" is refuted), AND the literature's own numbers
+say the attempt was underpowered by the source's standards (so the NO is
+not evidence the method fails at spec).** The costed options land with
+their four named risks: minimum-viable 2 legs / ~22-33h; literature-scale
+~10.2 GPU-days DNS alone, GPU-dependent in the sources' own hands. The
+user rules on numbers, which is what cycle 10t asked for. Endorsed without
+amendment. The packet awaits only 359's boundary answer — orchestrator's
+assembly plan confirmed.
+
+### Refill — B ← leg 360 PVDS, with the reasons stated
+
+The §3b bind stands (the reserve's remaining four are audits), and the
+eligible item is not invented: leg 330's landed record carries a DERIVED
+STRUCTURAL SCREEN (Pineau-Vicol v2's new local theorem, contrapositive
+applied at every phase of a periodic orbit: a nontrivial profile must
+satisfy ‖∂_s U‖_{L∞} ≥ δ₀ at EVERY phase) recorded honestly with two open
+conditions attached — a strictly positive pressure-decay loss the paper
+leaves open, and a non-explicit constant — and it has never been
+adjudicated into or out of B7's machine-read ledger.
+
+```
+### 360 — ROUTE-PVDS: CAN 330's DERIVED STRUCTURAL SCREEN BE MADE
+OPERATIONAL? (the recorded-but-unadjudicated fourth ledger candidate;
+read-and-report in the 326/330/359 shape)
+[FLOOR-ELIGIBLE: math + external literature]
+**Thesis.** 330 recorded the derived screen with BOTH its conditions
+attached rather than suppressed. B7's ledger machine-reads three theorems;
+a fourth entry exists on paper iff the two open conditions can be resolved
+or bounded from the source's own text: (1) the strictly positive
+pressure-decay loss Pineau-Vicol leave open, (2) the non-explicit δ₀.
+Read the proof's actual dependence: can δ₀ be made explicit (or bounded)
+for the screened class, and does the pressure-decay condition close on
+the paper's own hypotheses — or do the open conditions keep the screen
+NON-OPERATIONAL (recorded as such, at full strength)?
+**Gate.** Does the full read yield a definite answer — (i) OPERATIONAL
+(both conditions resolved/bounded, deciding clauses quoted; the screen
+becomes a machine-readable ledger candidate, flagged to B7's owner, never
+edited in by this leg), (ii) NON-OPERATIONAL (the blocking condition
+named and quoted; the record's honest "recorded with conditions" status
+is confirmed and sharpened), or (iii) underdetermined after a full read
+(candidate clauses quoted, banked as exactly that)?
+  yes (any definite class) -> Bank; the route-4 stop packet and B7's
+        owner both note the answer.
+  no  -> The text genuinely underdetermines: quote the clauses; the
+        screen stays recorded-not-operational and says why.
+**Territory.** writeup/data/p2_route_pvds_v1.json, writeup/novelty/
+               leg_360.md, experiments/journal/leg_360.md. Reads leg 330's
+               banked record and the paper's text; edits none. No figure.
+**Difficulty.** standard
+**Preconditions:** None. (§3a rule 4: rigidity-ledger-adjacent —
+pre-authorised as written; reads and reports, lifts nothing.)
+```
+
+**Floor 2/4 (359, 360) — §3b's minimum.** FLOOR-TABLE synced (B 358→360).
+
+### Standing state
+
+A/356 ESPX; C/359 L3BD; D/355 LCB3. Route 4: stopped, B6/B8 frozen, the
+stop packet awaiting 359. With the user: the stop packet (assembling),
+cycle-10 packet + GA note, POCP (ii) item, C4/escalation-#3, 313 packet +
+ban-wording (partly mooted), 320 packet. Next vacancy: 229 PNRV.
+
+**Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
+232, 233, 234).** Immediately dispatchable: **4**. Next fresh leg number:
+**361.**
+
+Nothing in this update lifts a ban. A costed retry is a question priced,
+not a decision made; a derived screen adjudicated operational-or-not is
+ledger hygiene. No L1-L4 link moved; Clay stays ~0.05%.
