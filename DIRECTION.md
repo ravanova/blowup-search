@@ -34,7 +34,7 @@ prose as before.
 | Slot | Leg | Route | Eligible |
 |---|---|---|---|
 | A | 356 | ESPX | no |
-| B | 353 | DSSP-B5 | yes |
+| B | 358 | RPOL | yes |
 | C | 357 | DSSP-B7 | yes |
 | D | 355 | LCB3 | no |
 <!-- FLOOR-TABLE-END -->
@@ -68,7 +68,7 @@ dispatch-time mirror; the orchestrator allocates there at dispatch and mirrors h
 | fig91 | 343 | landed (fig91_route_dsspb1_v1 — genuine new measurement) |
 | fig92 | 350 | landed with B2 (or released if unshipped — orchestrator mirrors at INDEX) |
 | fig93 | — | released (351 landed YES, figure judged unwarranted; number returns to the pool) |
-| fig94 | 353 | live, slot B (B5 basin-radius study; only if warranted) |
+| fig94 | 353 | landed (fig94_route_dsspb5_v1_stall — the Newton stall record) |
 | fig95 | — | released (354 landed YES, no figure shipped; number returns to the pool) |
 | fig96+ | — | next free |
 <!-- FIG-TABLE-END -->
@@ -18862,9 +18862,30 @@ machine-read rigidity ledger CONSUMES 330's landed verdict (Pineau-Vicol
 adjudicated out — the plan's "PENDING" is stale by a landed fact, not by
 amendment). Floor 2/4 (353, 357).
 
+Cycle 10t: B/353 landed NO at e9c3ae8 — **THE ROUTE-4 STOP FIRED, per the
+plan's own pre-committed no-branch**: the NK + phase-condition layer failed
+on all 5 independently-selected published Lucas-Kerswell RPOs
+(line_search_failed, residuals 22.5-29.5 vs 1e-8), refuting 334's clause
+(b) "mature engineering" premise ON THIS REPOSITORY'S REALIZATION and
+stopping route 4 before any 3-D cost is committed. The mechanism is
+honestly narrower than the headline: the laminar-fixed-point control
+converged cleanly (99.3% monotone), pinning failure to SEED QUALITY (DNS
+T~2000 vs the literature's T~1e4-1e6) and simplified globalization (plain
+line search vs the paper's hookstep) — both declared up front. **STOP
+semantics ruled: no NEW route-4 cost — B6 and B8 are UNDISPATCHABLE
+regardless of the ban-wording ruling until the user rules on the stop; B7
+(in flight, 1 leg, generic screen machinery) COMPLETES. The route-4 stop
+packet goes to the user**: the NO + its measured mechanism + the costed
+retry option (leg 358, below) + the interaction with the parked ≈35-leg
+seed decision (a seed buys nothing while the extraction premise is
+unrepaired). B ← **leg 358 RPOL** (fresh floor-eligible LIT draft: what
+does the published recurrence-flow pipeline actually require, and what
+would a spec-compliant B5 retry cost — the stop decision's missing
+number). Floor 2/4 (357, 358).
+
 **Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
 232, 233, 234).** Immediately dispatchable: **4** (rank order: 229, 293,
-298, 299). Next fresh leg number: **358.**
+298, 299). Next fresh leg number: **359.**
 
 Nothing in this update lifts a ban. An evidence script that cannot
 silently mutate a banked artifact is the record's immune system getting a
@@ -19051,3 +19072,110 @@ and a screen that machine-reads exclusion theorems are apparatus under the
 Tier-2 ceiling — B8's own drafted gate already names escalation #3's
 discipline for anything that ever reads like movement. No L1-L4 link
 moved; Clay stays ~0.05%.
+
+
+---
+
+## DM update, 2026-08-12 (cycle 10t) — 353/B5 NO ABSORBED: THE ROUTE-4 STOP
+FIRED ON THE PLAN's OWN BRANCH; STOP SEMANTICS RULED (B6/B8 FROZEN, B7
+COMPLETES); THE STOP PACKET GOES TO THE USER; LEG 358 RPOL DRAFTED AND
+DISPATCHED TO COST THE RETRY
+
+Written from the same detached lineage, resynced to origin/main = e9c3ae8.
+
+### 353 DSSP-B5 gate NO, absorbed at full strength
+
+The leg is endorsed without amendment, and three disciplines deserve
+naming: the laminar-fixed-point CONTROL that converged cleanly (99.3%
+monotone reduction) — so the NO is pinned to seed quality and
+globalization, not a broken layer; the two simplifications (affordable DNS
+T~2000 vs the literature's T~1e4-1e6; plain line search vs hookstep)
+DECLARED UP FRONT rather than discovered post hoc; and the self-caught
+optimal_shift_residual sign bug (FFT peak at j=-s) fixed with the verdict
+resting entirely on the corrected run, disclosed explicitly. Basin radius
+NOT MEASURED per the plan's own conditional — nothing converged to
+perturb. fig94 landed as the stall record.
+
+### Ruling — the stop, taken seriously and exactly
+
+The plan's no-branch pre-committed this: a failure on a KNOWN 2-D object
+refutes clause (b)'s "mature engineering" premise on this repository's
+realization and stops route 4 before any 3-D cost. **Executed:**
+1. **B6 and B8 are UNDISPATCHABLE** — B6's user-ban-wording precondition
+   is now moot until the stop itself is ruled on; nothing 3-D dispatches.
+2. **B7 completes** — in flight, 1 leg, and its screen machinery is
+   generic admissibility apparatus with value independent of route 4's
+   fate; killing it mid-flight buys nothing.
+3. **The stop packet goes to the user** (orchestrator: NEEDS-YOU item),
+   containing: the NO with its measured mechanism (control clean, seed
+   quality + globalization named); the plan's own stop text quoted; the
+   retry option AS A QUESTION — the failure mechanism is a resource and
+   engineering gap with a literature-stated remedy (longer DNS, hookstep),
+   NOT a mathematical obstruction, and leg 358 is costing it now so the
+   user rules on numbers; and the interaction with the parked ≈35-leg
+   seed-creation decision — a 3-D seed buys nothing while the 2-D
+   extraction premise stands refuted, so the two decisions are ONE
+   portfolio question and should be presented together.
+4. **Honesty boundary carried into the packet verbatim: the stop firing is
+   the plan working, not the programme failing silently** — and equally, a
+   retry is not owed; "stops route 4" is the default that stands unless
+   the user affirmatively funds the gap.
+
+### Leg 358 RPOL — drafted and dispatched into B
+
+```
+### 358 — ROUTE-RPOL: WHAT DOES THE PUBLISHED RECURRENCE-FLOW PIPELINE
+ACTUALLY REQUIRE, AND WHAT WOULD A SPEC-COMPLIANT B5 RETRY COST? (the stop
+decision's missing number; feeds the route-4 stop packet)
+[FLOOR-ELIGIBLE: external literature]
+**Thesis.** 353's NO is pinned to two declared simplifications: DNS length
+(T~2000 vs the literature's T~1e4-1e6) and globalization (plain line
+search vs hookstep/trust-region). The user's stop-or-fund ruling should
+rest on what the published pipeline ACTUALLY requires, sourced: DNS
+lengths, recurrence thresholds, hookstep implementations and their
+reported success rates (Lucas-Kerswell 1406.1820 itself; Chandler-Kerswell
+and the recurrent-flow-analysis line; Viswanath's hookstep lineage), and a
+costed spec-compliant retry (in legs and compute) with its residual risk
+stated — sharpening 353's own diagnosis into a decision number, not
+re-arguing its verdict. MF1-MF4 throughout; links not counts; refusals
+banked as refusals; no outreach.
+**Gate.** Does the pass produce a sourced requirements table (per-paper:
+DNS length, threshold, globalization, success rate as the AUTHORS report
+it) AND a costed retry spec (legs + compute + the named residual risk —
+what could still fail even spec-compliant), sufficient for the user to
+rule on numbers?
+  yes -> Bank; the retry spec rides in the route-4 stop packet. The DM
+        drafts nothing from it without the user's ruling.
+  no  -> The literature underdetermines a requirement (or is unreachable —
+        refusals recorded): report exactly which requirement and why; an
+        uncostable retry is itself decision information, banked.
+**Territory.** writeup/data/p2_route_rpol_v1.json, writeup/novelty/
+               leg_358.md, experiments/journal/leg_358.md. Reads 353's
+               banked record; edits nothing. No figure.
+**Difficulty.** standard
+**Preconditions:** None. Stated reasons for outranking 229: the §3b floor
+bind (the dispatchable reserve is all non-eligible), and the user's stop
+ruling is live NOW and missing exactly this number.
+```
+
+**Floor 2/4 (357, 358) — §3b's minimum.** FLOOR-TABLE synced (B 353→358);
+fig94 landed.
+
+### Standing state
+
+A/356 ESPX; C/357 DSSP-B7 (completes; the critical path's last committed
+brick under the stop); D/355 LCB3. Brick ledger: B1-B4 ✓, B5 NO (stop
+fired), B7 completing, **B6/B8 FROZEN pending the user's stop ruling**, B9
+struck. With the user: the ROUTE-4 STOP PACKET (new, assembling — 358's
+number completes it), cycle-10 packet + GA note, POCP (ii) item,
+C4/escalation-#3, 313 packet + ban-wording (now partly mooted by the
+stop), 320 packet. Next vacancy: 229 PNRV.
+
+**Reserve queue: 10 undispatched legs (229, 293, 298, 299, 310, 325, 231,
+232, 233, 234).** Immediately dispatchable: **4**. Next fresh leg number:
+**359.**
+
+Nothing in this update lifts a ban. A pre-committed stop firing on a
+measured NO is the discipline at its best — the programme halts on its own
+terms, the user rules on numbers, and nothing is retried by default. No
+L1-L4 link moved; Clay stays ~0.05%.
