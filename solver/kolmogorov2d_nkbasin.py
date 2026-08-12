@@ -69,6 +69,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from solver.hookstep_newton import newton_hookstep
+
 TWO_PI = 2.0 * np.pi
 
 
@@ -412,6 +414,128 @@ def newton_krylov_rpo(w0_guess, T_guess, s_guess, solver,
     return dict(success=r_final < tol, w0=w0, T=T, s=s, n_iters=max_newton,
                 residual_history=hist, final_residual=r_final,
                 reason="converged" if r_final < tol else "max_newton_hit")
+
+
+# --------------------------------------------------------------------------
+# Newton-GMRES-hookstep RPO solver (PROG-R4 U1 / milestone M1)
+# --------------------------------------------------------------------------
+
+def newton_hookstep_rpo(w0_guess, T_guess, s_guess, solver,
+                        tol=1e-9, max_newton=25, max_gmres=40,
+                        fd_eps=1e-6, delta0=None, delta_max=None,
+                        verbose=False):
+    """As newton_krylov_rpo, but the step is globalised by a genuine
+    trust-region hookstep (Viswanath 2007) instead of step-halving: the
+    correction is constrained INSIDE the Krylov subspace, so shrinking the
+    radius ROTATES the step rather than merely rescaling it.
+
+    Structure. The residual's two phase rows are evaluated against a FIXED
+    reference (the current outer iterate), so the residual MAP changes
+    whenever the iterate is accepted. One "epoch" below is therefore one
+    outer Newton step at one fixed reference -- exactly the moving Poincare
+    section newton_krylov_rpo already uses. The trust-region radius is
+    THREADED across epochs (a trust region that reset every step would not be
+    a trust region), and the per-epoch ledger is concatenated so the caller
+    sees one continuous per-iteration record.
+
+    Returns a dict: success, w0, T, s, n_iters, residual_history,
+    final_residual, reason, ledger, n_residual_evals, n_jac_evals.
+    """
+    N = solver.N
+    w0 = np.array(w0_guess, dtype=float)
+    T, s = float(T_guess), float(s_guess)
+    hist = []
+    ledger = []
+    delta = delta0
+    n_jac = 0
+    r = float("nan")
+    reason = "max_newton_hit"
+    # Every finite-difference probe is a full nonlinear integration over the
+    # orbit period, so it is counted as a residual evaluation wherever it is
+    # issued from -- including the domain-safe action below, which calls the
+    # residual directly and so bypasses the generic counter.
+    probe_count = [0]
+
+    for epoch in range(max_newton):
+        ref_rhs = solver.rhs_physical(w0)
+        w0_hat = np.fft.fft2(w0) * solver.mask
+        ref_dwdx = np.fft.ifft2(1j * solver.KX * w0_hat).real
+        ref_w0 = w0
+
+        def resid(xx, ref_w0=ref_w0, ref_rhs=ref_rhs, ref_dwdx=ref_dwdx):
+            # T > 0 is a DOMAIN constraint, and the trust region is the right
+            # place to enforce it: returning a non-finite residual makes the
+            # radius loop reject the trial and shrink, which is exactly the
+            # behaviour wanted, and it costs no time integration. The
+            # alternative (extended_residual's T_eff floor) silently evaluates
+            # a DIFFERENT problem at negative T and would corrupt the ratio
+            # test. Note this leaves extended_residual itself untouched, so
+            # leg 353's line-search path is bit-for-bit unchanged.
+            if xx[-2] <= 0.0:
+                return np.full(xx.shape[0], np.inf)
+            probe_count[0] += 1
+            return extended_residual(xx, solver, ref_w0, ref_rhs, ref_dwdx)
+
+        def jac_mv(xx, Fx, v, scale_ref=None):
+            # The generic finite-difference action in hookstep_newton probes
+            # xx + eps*v with eps set only by ||v||, which can step THROUGH
+            # T = 0 and hand the Arnoldi a non-finite column. The domain
+            # constraint therefore has to be honoured by the probe as well as
+            # by the trial step, so this RPO-specific action shrinks eps until
+            # the probe stays inside T > 0 (at worst halving the current T).
+            # A directional difference over a shorter baseline is still a
+            # consistent one-sided approximation of the same derivative.
+            nv = float(np.linalg.norm(v))
+            if nv == 0.0:
+                return np.zeros(xx.shape[0])
+            sc = max(1.0, float(np.linalg.norm(xx)))
+            eps = fd_eps * sc / nv
+            if v[-2] < 0.0:
+                eps = min(eps, 0.5 * xx[-2] / (-v[-2]))
+            return (resid(xx + eps * v) - Fx) / eps
+
+        out = newton_hookstep(resid, pack(w0, T, s), jac_matvec=jac_mv,
+                              tol=tol, max_newton=1,
+                              max_gmres=max_gmres, fd_eps=fd_eps,
+                              delta0=delta, delta_max=delta_max)
+        n_jac += out["n_jac_evals"]
+        r = float(out["residual_history"][0])
+        hist.append(r)
+        if verbose:
+            print(f"  hookstep epoch {epoch}: |R|={r:.6e} "
+                  f"T={T:.6f} s={s:.6f} delta={delta}")
+
+        if out["reason"] == "converged":
+            reason = "converged"
+            break
+        if out["reason"] == "nonfinite_residual":
+            reason = "nonfinite_residual"
+            break
+        if not out["ledger"]:
+            reason = out["reason"]
+            break
+
+        entry = dict(out["ledger"][-1])
+        entry["iteration"] = epoch
+        entry["T_before"] = T
+        entry["s_before"] = s
+        ledger.append(entry)
+        delta = entry["delta_after"]
+
+        if not entry["accepted"]:
+            reason = "trust_region_collapsed"
+            break
+
+        w0_try, T_try, s_try = unpack(out["x"], N)
+        if T_try <= 0:
+            reason = "nonpositive_period"
+            break
+        w0, T, s = w0_try, T_try, s_try
+
+    return dict(success=bool(r < tol), w0=w0, T=T, s=s,
+                n_iters=len(hist) - 1, residual_history=hist,
+                final_residual=r, reason=reason, ledger=ledger,
+                n_residual_evals=probe_count[0], n_jac_evals=n_jac)
 
 
 # --------------------------------------------------------------------------

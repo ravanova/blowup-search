@@ -49,7 +49,33 @@
       "unit": "U1",
       "kind": "build",
       "target": "MILESTONE M1 - genuine hookstep/trust-region globalisation layer; laminar control reproduces leg 353's 99.3% reduction THROUGH the new layer; per-iteration ledger persisted",
-      "status": "NOT STARTED"
+      "status": "LANDED",
+      "milestone_answer": "REPRODUCED - laminar control through the new layer reduced |R| 19.1100 -> 2.753e-2, i.e. 99.8560% monotone, at or above leg 353's recorded 99.3426310647174%",
+      "replication_control": "the line-search column on the SAME inputs reproduces leg 353's recorded fractional reduction to every stored digit (0.993426310647174), so the comparison is against the right baseline",
+      "hookstep_separated_from_line_search_by": [
+        "delta -> 0 rotates the step onto -J^T F, cos = 1.00000000 (full Krylov space; on a truncated space the limit is that gradient PROJECTED onto span(Q_k), measured cos = 0.73, which is why the check is run at full dimension)",
+        "the constrained step is not parallel to the GMRES step, cos = 0.8896 (a line search gives exactly 1)",
+        "on F(x)=A(x+10x^3), cond(A)=1e3, dim 6, Krylov 5 -- where J = A diag(1+30x^2) is nonsingular everywhere so ||F|| provably has no spurious local minimum -- leg 353's own 8-halving line search returns line_search_failed at |F|=5.030 and STILL stalls at |F|=3.967 with 200 halvings, while the hookstep converges to |F|=1.95e-10 in 51 iterations: the deficit is the DIRECTION, not the halving budget"
+      ],
+      "measured_limits_recorded_not_tuned_away": {
+        "control_is_rank_deficient_by_2": "at an x-independent fixed point ||dR/ds|| = 0 EXACTLY and ||dR/dT|| = 0.0212 against 9.775 for a unit state direction",
+        "residual_floor": "||R(w_lam)|| = 0.0794, set by RK4 at dt=0.01 (laminar profile drifts 3.12e-4 relative over T=1), so NEITHER globalisation can reach tol=1e-8 on this control",
+        "consequence": "the milestone is stated as a reduction against leg 353's recorded reduction, not as a convergence; the control probes the state block and never exercised (T, s)",
+        "flagged_forward": "from a deliberately bad T=0.05 the period collapses to 1.42e-7 (positive, as required) because T carries no information at a fixed point; for a genuine RPO seed T is a real direction, so the same collapse in U3 would be a finding about the seed, not a bug in the layer"
+      },
+      "cost_measured": {"jacobian_actions": 120, "residual_evaluations": 136, "wall_seconds": 4.89},
+      "does_not_establish": "nothing here bears on G1 or G2; the hookstep's advantage on a 6-dimensional cubic says nothing about a 578-unknown chaotic-attractor seed, and U2's T=1e5 DNS must still supply the recurrence library before G1 can be asked at the scale the question is posed at",
+      "artifacts": [
+        "solver/hookstep_newton.py",
+        "test_hookstep_newton.py (28/28)",
+        "solver/kolmogorov2d_nkbasin.py (newton_hookstep_rpo)",
+        "test_kolmogorov2d_nkbasin.py (12/12, 3 new)",
+        "experiments/programme_r4/u1_m1_globalisation.py",
+        "experiments/programme_r4/u1_m1_ledger.json",
+        "experiments/journal/prog_r4_u1.md",
+        "capabilities.py (one appended entry)"
+      ],
+      "figures_spent": "none - fig97 and fig98 remain reserved for the two claim units"
     },
     {
       "unit": "U2",
