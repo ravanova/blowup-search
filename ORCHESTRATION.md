@@ -265,6 +265,69 @@ name the compliant scale — if it cannot name that scale, it is not ready to be
 This is general. It applies to every route, and it is the reason a cheap first attempt must
 never be allowed to close a lane.
 
+### 3e. The READ SURFACE — `STATE.md` first, archives only by pointer
+
+**Adopted 2026-08-12. This binds BOTH modes and it is the single largest cost in the run.**
+`DIRECTION.md` is **23,699 lines / 1.5 MB (~380k tokens)**; with `plan_of_record.py`,
+`capabilities.py`, `CONTINUATION_PROMPT.md`, `STATUS.md` and `ORCH_STATE.md` the mandatory read
+surface is **~480k tokens** — paid by *every agent* in orchestrated mode and on *every task* in
+solo mode. Almost all of it is accumulated cycle history that the task at hand does not need.
+
+**The rule.** `STATE.md` is the read surface. It carries the mode, the goal and ceiling, what is
+in flight, the pre-committed next tasks, the open user decisions, the 19 live bans one line
+each, the standing discipline, and a pointer table. **Read it instead of `DIRECTION.md`.**
+Consult an archive only when `STATE.md` names the specific entry you need, and read **that
+entry**, not the file.
+
+- `DIRECTION.md` — a task's own spec, that entry only. **Never read whole.**
+- `plan_of_record.py`, `capabilities.py` — **execute them**, do not read them. `capabilities.py`
+  takes a substring argument; that is the grep the standing ban requires.
+- `writeup/data/*.json` — the banked numbers. **Re-derive from these, never from prose.**
+
+**`STATE.md` is regenerated as part of finishing a task**, in the same commit, the way
+`JOURNAL.md` pointers are. A stale `STATE.md` is worse than none: it is the one file every
+agent trusts without checking. If it disagrees with an archive, **the archive wins and
+`STATE.md` is repaired in the same turn**.
+
+### 3f. SOLO mode — one instance, one task at a time
+
+**Adopted 2026-08-12 by user ruling** (usage constraints). The four-slot contract, the DM, the
+orchestrator, the paired verifiers and the composition floor are all **suspended**. What
+replaces them is not a smaller version of the same thing, and the difference must be stated
+honestly rather than assumed away.
+
+**What survives the collapse, because it is mechanical:** pre-committed gates; the novelty pass
+before construction; **planted controls that must fire in both directions**; `merge_gate.sh`;
+re-derivation from banked JSON; exact/rational arithmetic where the problem admits it. These
+work regardless of who runs them, and in solo mode they are the *whole* defence — weight them
+accordingly, not less.
+
+**What does NOT survive, because it depended on independence:** a paired verifier re-measuring a
+headline; the DM ranking against the record rather than the worker's preference; the
+orchestrator auditing landings. A large fraction of this repository's caught defects came from a
+*different* agent re-running the work — legs 233, 286, 300, 310, 384, 212, 193 and 229 among
+them. That capability is gone, and three rules replace it:
+
+1. **VERIFICATION IS A FRESH SESSION OR IT IS NOT VERIFICATION.** A result may be recorded as
+   verified only if the check was run in a session with **no memory of the construction**,
+   re-deriving from banked JSON alone. Otherwise the result is labelled **`UNVERIFIED`** and
+   says so in its own gate answer. **Self-checking is never silently recorded as verification** —
+   that substitution is the single way solo mode goes wrong, and it is invisible afterwards.
+2. **Pre-commit the NEXT task, not only the gate.** The sharpest solo drift is choosing what to
+   do next based on how the last one went. `STATE.md` carries the next three; re-ranking them
+   requires its own commit stating why, held to the same standard as a gate.
+3. **No more than two consecutive audit / repair / regression tasks** before a mathematics or
+   construction task. The composition floor is meaningless without slots; the audit-loop drift
+   it defended against is not, and it recurred three times with a Decision Maker watching.
+
+**Task size goes up, not down.** Under a usage constraint the saving is in *fewer context
+loads*, not cheaper tokens: one larger task carrying its state through a single context beats
+several small ones that each re-read the surface.
+
+**Unchanged in solo mode:** the three-tier win condition, lesson 91, §3d's stop threshold,
+territory discipline where it still applies, the merge gate, no external outreach, and the rule
+that no output is described as movement toward Clay unless a link actually moved.
+
 ### 4a. Refill is triggered by vacancy, not only by landing on `main`
 
 **Diagnosed 2026-08-06.** A slot vacates in exactly two ways: a leg's push lands on `main`
