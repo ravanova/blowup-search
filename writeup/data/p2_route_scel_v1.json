@@ -1,0 +1,878 @@
+{
+  "leg": 385,
+  "route": "SCEL",
+  "version": "v1",
+  "novelty_commit": "00d8e4e",
+  "preregistration_commit": "353cbf1",
+  "reads_but_does_not_edit": "solver/dssp_decay_enclosure.py (leg 382, 104f5b3)",
+  "window": {
+    "R0": 10.0,
+    "R1": 1000.0,
+    "leverage_W_log_ratio": 4.605170185988092,
+    "provenance": "leg 382's window and cell count, unmoved by this leg"
+  },
+  "gate_cell_count": 1000,
+  "ceiling": "TIER 2",
+  "clay_odds": "~0.05%, unmoved; no L1->L4 link moved by this leg",
+  "obligations_still_open": [
+    "CLAY_OBLIGATIONS.md \u00a76 item 1 \u2014 the ADMISSIBLE CUTOFF half is untouched by this leg, which supplies only the input contract of the certified-exponent third",
+    "CLAY_OBLIGATIONS.md \u00a76 item 2 \u2014 untouched"
+  ],
+  "no_profile_exists": "No profile of route 4's object exists in this repository. Every input below is a planted analytic known. The first real consumer remains whatever future unit produces a profile, and this leg claims nothing about one.",
+  "path_A_reproduction": [
+    {
+      "id": "S1/p=1.0",
+      "profile": "f = 3.0 r^-1.0",
+      "truth_exponent": 1.0,
+      "hypothesis": "MONOTONE",
+      "hypothesis_detail": {
+        "monotone": "nonincreasing",
+        "modulus": null
+      },
+      "sample_exactness": "enclosed",
+      "conditional_on": "These cell enclosures, and every certificate derived from them, hold CONDITIONALLY on: f is nonincreasing on the whole window (declared by the caller, NOT verified -- agreement of the samples with that direction is a necessary condition only); the supplied per-sample intervals enclose f at the sample radii.",
+      "sampled": {
+        "verdict": "INTERVAL",
+        "p_lo": 0.9999999999999963,
+        "p_hi": 1.0000000000000038,
+        "width": 7.438494264988549e-15,
+        "contains_truth": true,
+        "containment_margin_below": 3.6637359812630166e-15,
+        "containment_margin_above": 3.774758283725532e-15
+      },
+      "leg_382_recomputed": {
+        "verdict": "INTERVAL",
+        "width": 7.438494264988549e-15
+      },
+      "width_difference": 0.0,
+      "bit_identical_to_leg_382": true,
+      "containment_audit": {
+        "audited": true,
+        "n_probe_per_cell": 17,
+        "worst_signed_excess": -8.673617379884035e-19,
+        "worst_signed_relative_excess": -1.7067463880367252e-16,
+        "worst_signed_log_excess": 0.0,
+        "worst_cell_index": 918,
+        "worst_radius": 688.6522963442764,
+        "n_cells_violated": 0,
+        "contained": true
+      }
+    },
+    {
+      "id": "S1/p=2.0",
+      "profile": "f = 1.0 r^-2.0",
+      "truth_exponent": 2.0,
+      "hypothesis": "MONOTONE",
+      "hypothesis_detail": {
+        "monotone": "nonincreasing",
+        "modulus": null
+      },
+      "sample_exactness": "enclosed",
+      "conditional_on": "These cell enclosures, and every certificate derived from them, hold CONDITIONALLY on: f is nonincreasing on the whole window (declared by the caller, NOT verified -- agreement of the samples with that direction is a necessary condition only); the supplied per-sample intervals enclose f at the sample radii.",
+      "sampled": {
+        "verdict": "INTERVAL",
+        "p_lo": 1.999999999999992,
+        "p_hi": 2.000000000000008,
+        "width": 1.5987211554602254e-14,
+        "contains_truth": true,
+        "containment_margin_below": 7.993605777301127e-15,
+        "containment_margin_above": 7.993605777301127e-15
+      },
+      "leg_382_recomputed": {
+        "verdict": "INTERVAL",
+        "width": 1.5987211554602254e-14
+      },
+      "width_difference": 0.0,
+      "bit_identical_to_leg_382": true,
+      "containment_audit": {
+        "audited": true,
+        "n_probe_per_cell": 17,
+        "worst_signed_excess": -2.117582368135751e-22,
+        "worst_signed_relative_excess": -1.2793527014525252e-16,
+        "worst_signed_log_excess": 0.0,
+        "worst_cell_index": 967,
+        "worst_radius": 862.9785477669703,
+        "n_cells_violated": 0,
+        "contained": true
+      }
+    },
+    {
+      "id": "S1/p=2.5",
+      "profile": "f = 1.0 r^-2.5",
+      "truth_exponent": 2.5,
+      "hypothesis": "MONOTONE",
+      "hypothesis_detail": {
+        "monotone": "nonincreasing",
+        "modulus": null
+      },
+      "sample_exactness": "enclosed",
+      "conditional_on": "These cell enclosures, and every certificate derived from them, hold CONDITIONALLY on: f is nonincreasing on the whole window (declared by the caller, NOT verified -- agreement of the samples with that direction is a necessary condition only); the supplied per-sample intervals enclose f at the sample radii.",
+      "sampled": {
+        "verdict": "INTERVAL",
+        "p_lo": 2.4999999999999902,
+        "p_hi": 2.5000000000000098,
+        "width": 1.9539925233402755e-14,
+        "contains_truth": true,
+        "containment_margin_below": 9.769962616701378e-15,
+        "containment_margin_above": 9.769962616701378e-15
+      },
+      "leg_382_recomputed": {
+        "verdict": "INTERVAL",
+        "width": 1.9539925233402755e-14
+      },
+      "width_difference": 0.0,
+      "bit_identical_to_leg_382": true,
+      "containment_audit": {
+        "audited": true,
+        "n_probe_per_cell": 17,
+        "worst_signed_excess": -1.3234889800848443e-23,
+        "worst_signed_relative_excess": -2.9310301523743488e-16,
+        "worst_signed_log_excess": 0.0,
+        "worst_cell_index": 980,
+        "worst_radius": 916.2204901219993,
+        "n_cells_violated": 0,
+        "contained": true
+      }
+    },
+    {
+      "id": "S1/p=3.0",
+      "profile": "f = 1.0 r^-3.0",
+      "truth_exponent": 3.0,
+      "hypothesis": "MONOTONE",
+      "hypothesis_detail": {
+        "monotone": "nonincreasing",
+        "modulus": null
+      },
+      "sample_exactness": "enclosed",
+      "conditional_on": "These cell enclosures, and every certificate derived from them, hold CONDITIONALLY on: f is nonincreasing on the whole window (declared by the caller, NOT verified -- agreement of the samples with that direction is a necessary condition only); the supplied per-sample intervals enclose f at the sample radii.",
+      "sampled": {
+        "verdict": "INTERVAL",
+        "p_lo": 2.99999999999999,
+        "p_hi": 3.000000000000011,
+        "width": 2.1316282072803006e-14,
+        "contains_truth": true,
+        "containment_margin_below": 1.021405182655144e-14,
+        "containment_margin_above": 1.1102230246251565e-14
+      },
+      "leg_382_recomputed": {
+        "verdict": "INTERVAL",
+        "width": 2.1316282072803006e-14
+      },
+      "width_difference": 0.0,
+      "bit_identical_to_leg_382": true,
+      "containment_audit": {
+        "audited": true,
+        "n_probe_per_cell": 17,
+        "worst_signed_excess": 0.0,
+        "worst_signed_relative_excess": 0.0,
+        "worst_signed_log_excess": 0.0,
+        "worst_cell_index": 433,
+        "worst_radius": 73.7904230129101,
+        "n_cells_violated": 0,
+        "contained": true
+      }
+    }
+  ],
+  "path_B_loglog": {
+    "id": "S2",
+    "profile": "f = 3.0 r^-1",
+    "truth_exponent": 1.0,
+    "declared_modulus": {
+      "kind": "loglog",
+      "alpha": 1.0,
+      "L": 1.05,
+      "L_min": 1.05,
+      "L_max": 1.05,
+      "form": "|log f(r)-log f(s)| <= L*|log r-log s|**alpha"
+    },
+    "true_loglog_lipschitz_constant": 1.0,
+    "hypothesis": "MODULUS",
+    "conditional_on": "These cell enclosures, and every certificate derived from them, hold CONDITIONALLY on: f obeys the caller-certified modulus |log f(r)-log f(s)| <= L*|log r-log s|**alpha with alpha = 1.0 and L in [1.05, 1.05] (loglog coordinates); the supplied per-sample intervals enclose f at the sample radii.",
+    "verdict": "INTERVAL",
+    "p_lo": 0.9989466218941611,
+    "p_hi": 1.0010512713496271,
+    "width": 0.0021046494554660677,
+    "contains_truth": true,
+    "omega_half_cell": 0.0024177143476547445,
+    "max_relative_inflation": 0.0024235738569415854,
+    "width_ratio_to_path_A": 282940253832.3134,
+    "containment_audit": {
+      "audited": true,
+      "n_probe_per_cell": 17,
+      "worst_signed_excess": -7.253143042942976e-06,
+      "worst_signed_relative_excess": -0.0024177143476456645,
+      "worst_signed_log_excess": -0.002420641738327234,
+      "worst_cell_index": 999,
+      "worst_radius": 999.9999999999999,
+      "n_cells_violated": 0,
+      "contained": true
+    }
+  },
+  "cell_count_ladder": {
+    "rows": [
+      {
+        "N": 100,
+        "path_A_width": 7.66053886991358e-15,
+        "path_A_verdict": "INTERVAL",
+        "path_B_width": 0.021474946052902677,
+        "path_B_verdict": "INTERVAL",
+        "path_B_contains_truth": true
+      },
+      {
+        "N": 250,
+        "path_A_width": 7.66053886991358e-15,
+        "path_A_verdict": "INTERVAL",
+        "path_B_width": 0.008474917198654897,
+        "path_B_verdict": "INTERVAL",
+        "path_B_contains_truth": true
+      },
+      {
+        "N": 1000,
+        "path_A_width": 7.438494264988549e-15,
+        "path_A_verdict": "INTERVAL",
+        "path_B_width": 0.0021046494554660677,
+        "path_B_verdict": "INTERVAL",
+        "path_B_contains_truth": true
+      },
+      {
+        "N": 2000,
+        "path_A_width": 7.438494264988549e-15,
+        "path_A_verdict": "INTERVAL",
+        "path_B_width": 0.001051161005387713,
+        "path_B_verdict": "INTERVAL",
+        "path_B_contains_truth": true
+      }
+    ],
+    "path_A_loglog_slope": -0.011802124992307927,
+    "path_B_loglog_slope": -1.0068044195617623,
+    "N_for_PATH_B_to_reach_PATH_A_width": 282940253832313.44,
+    "reading": "PATH A's width sits on the rounding floor and does not scale with N (leg 382 measured the same, slope -0.0295). PATH B's width is set by omega(dt/2) and falls exactly like 1/N, so reaching PATH A's width would need N ~ 2.83e+14 samples. THE MODULUS PATH CANNOT REPRODUCE LEG 382's EXACT-POWER WIDTHS AT ANY FEASIBLE SAMPLING DENSITY; it is sound, not tight, and this was predicted before the run (P3), not discovered and rationalised after it."
+  },
+  "path_B_absolute": {
+    "id": "S3",
+    "profile": "f = 3.0 r^-1",
+    "declared_modulus": {
+      "kind": "absolute",
+      "alpha": 1.0,
+      "L": 0.03,
+      "L_min": 0.03,
+      "L_max": 0.03,
+      "form": "|f(r)-f(s)| <= L*|r-s|**alpha"
+    },
+    "true_global_lipschitz_constant": 0.03,
+    "hypothesis": "MODULUS",
+    "conditional_on": "These cell enclosures, and every certificate derived from them, hold CONDITIONALLY on: f obeys the caller-certified modulus |f(r)-f(s)| <= L*|r-s|**alpha with alpha = 1.0 and L in [0.03, 0.03] (absolute coordinates); the supplied per-sample intervals enclose f at the sample radii.",
+    "adapter_verdict": "CELLS",
+    "n_cells_nonpositive_lower": 341,
+    "first_nonpositive_radius": 207.9696687103696,
+    "downstream_verdict": "INCAPACITY",
+    "downstream_reason": "profile enclosure touches or crosses zero; log is undefined",
+    "containment_audit": {
+      "audited": true,
+      "n_probe_per_cell": 17,
+      "worst_signed_excess": -0.0006923685417594139,
+      "worst_signed_relative_excess": -0.002307895139198046,
+      "worst_signed_log_excess": -0.002305236039707337,
+      "worst_cell_index": 0,
+      "worst_radius": 10.0,
+      "n_cells_violated": 0,
+      "contained": true
+    },
+    "curve": {
+      "r": [
+        10.0,
+        10.471285480508996,
+        10.964781961431852,
+        11.481536214968829,
+        12.02264434617413,
+        12.589254117941675,
+        13.182567385564074,
+        13.803842646028853,
+        14.454397707459272,
+        15.13561248436208,
+        15.848931924611133,
+        16.595869074375607,
+        17.378008287493753,
+        18.197008586099834,
+        19.054607179632473,
+        19.952623149688797,
+        20.892961308540396,
+        21.87761623949553,
+        22.908676527677724,
+        23.9883291901949,
+        25.118864315095795,
+        26.302679918953814,
+        27.542287033381662,
+        28.84031503126606,
+        30.19951720402016,
+        31.622776601683793,
+        33.11311214825911,
+        34.673685045253166,
+        36.30780547701014,
+        38.018939632056124,
+        39.810717055349734,
+        41.68693834703355,
+        43.65158322401661,
+        45.708818961487516,
+        47.86300923226385,
+        50.11872336272725,
+        52.48074602497726,
+        54.954087385762456,
+        57.543993733715695,
+        60.25595860743578,
+        63.09573444801933,
+        66.06934480075961,
+        69.18309709189363,
+        72.44359600749898,
+        75.85775750291836,
+        79.43282347242814,
+        83.17637711026708,
+        87.09635899560806,
+        91.20108393559097,
+        95.49925860214358,
+        100.0,
+        104.71285480508996,
+        109.64781961431851,
+        114.81536214968828,
+        120.22644346174131,
+        125.89254117941675,
+        131.82567385564073,
+        138.03842646028852,
+        144.5439770745928,
+        151.3561248436207,
+        158.48931924611142,
+        165.95869074375597,
+        173.78008287493762,
+        181.97008586099827,
+        190.54607179632484,
+        199.52623149688787,
+        208.92961308540407,
+        218.77616239495518,
+        229.08676527677747,
+        239.88329190194898,
+        251.18864315095823,
+        263.02679918953817,
+        275.4228703338166,
+        288.40315031266056,
+        301.9951720402016,
+        316.22776601683796,
+        331.1311214825911,
+        346.73685045253166,
+        363.0780547701014,
+        380.1893963205613,
+        398.1071705534973,
+        416.8693834703355,
+        436.5158322401661,
+        457.0881896148752,
+        478.630092322638,
+        501.18723362727246,
+        524.8074602497722,
+        549.5408738576248,
+        575.4399373371566,
+        602.5595860743581,
+        630.957344480193,
+        660.6934480075964,
+        691.8309709189363,
+        724.4359600749906,
+        758.5775750291835,
+        794.3282347242822,
+        831.7637711026708,
+        870.9635899560806,
+        912.0108393559096,
+        954.992586021436
+      ],
+      "f_lo": [
+        0.2979292566636986,
+        0.28445643923103575,
+        0.271586992043721,
+        0.2592936172788334,
+        0.247550239040295,
+        0.2363319480483997,
+        0.22561494880389157,
+        0.21537650911451933,
+        0.20559491187701048,
+        0.19624940901218293,
+        0.1873201774554868,
+        0.17878827710962744,
+        0.17063561067007943,
+        0.16284488523827748,
+        0.15539957564106002,
+        0.1482838893785613,
+        0.14148273312620183,
+        0.13498168071972358,
+        0.12876694255536084,
+        0.12282533634024298,
+        0.11714425913098234,
+        0.11171166060114328,
+        0.1065160174808822,
+        0.10154630911454932,
+        0.09679199408439912,
+        0.09224298785083071,
+        0.08788964136172672,
+        0.08372272058552047,
+        0.0797333869245768,
+        0.07591317846734172,
+        0.07225399203949288,
+        0.06874806601602121,
+        0.06538796385778327,
+        0.0621665583376047,
+        0.05907701642247591,
+        0.0561127847797728,
+        0.053267575876759114,
+        0.050535354643888836,
+        0.04791032567361133,
+        0.04538692092753672,
+        0.042959787925879796,
+        0.04062377839413286,
+        0.03837393734288433,
+        0.0362054925576239,
+        0.03411384447623317,
+        0.032094556432699275,
+        0.030143345246351035,
+        0.02825607213665939,
+        0.02642873394432777,
+        0.024657454640053252,
+        0.022938477102953863,
+        0.021268155151202575,
+        0.01964294580800151,
+        0.018059401786431225,
+        0.016514164177319934,
+        0.015003955324517603,
+        0.01352557187257743,
+        0.012075877971980249,
+        0.010651798627606943,
+        0.009250313176229938,
+        0.007868448879316006,
+        0.006503274617410852,
+        0.005151894672883263,
+        0.003811442587679205,
+        0.002479075083217152,
+        0.0011519660293762607,
+        -0.00017269955006315316,
+        -0.0014977314484089356,
+        -0.0028259402359540665,
+        -0.004160143221627845,
+        -0.005503170428826453,
+        -0.006857870598331727,
+        -0.00822711723083178,
+        -0.00961381468199796,
+        -0.011020904323059598,
+        -0.012451370779780509,
+        -0.013908248263319505,
+        -0.015394627006126014,
+        -0.016913659816815845,
+        -0.018468568767620406,
+        -0.020062652028917785,
+        -0.021699290865002045,
+        -0.023381956806297774,
+        -0.025114219012840628,
+        -0.026899751845046425,
+        -0.02874234265741228,
+        -0.03064589983212414,
+        -0.032614461069128964,
+        -0.03465220195077686,
+        -0.036763444798645094,
+        -0.03895266784191141,
+        -0.04122451471612657,
+        -0.043583804313141544,
+        -0.046035541002467525,
+        -0.04858492524637266,
+        -0.05123736463059506,
+        -0.053998485334727765,
+        -0.05687414406596753,
+        -0.05987044048199731,
+        -0.0629937301292846
+      ],
+      "f_true": [
+        0.30000000000000004,
+        0.28649777580643077,
+        0.27360325180677286,
+        0.26128907698682413,
+        0.24952913133080123,
+        0.2382984704172844,
+        0.2275732725087551,
+        0.21733078802249695,
+        0.20754929127568097,
+        0.19820803440227885,
+        0.189287203344058,
+        0.18076787582230733,
+        0.1726319812011471,
+        0.16486226215728736,
+        0.15744223807493177,
+        0.1503561700881817,
+        0.1435890276967915,
+        0.13712645688446248,
+        0.13095474967204984,
+        0.12506081504110064,
+        0.1194321511660492,
+        0.11405681889616837,
+        0.10892341643103041,
+        0.10402105513575949,
+        0.09933933644477734,
+        0.09486832980505137,
+        0.09059855161206049,
+        0.08652094509379818,
+        0.08262686110014497,
+        0.07890803975686145,
+        0.07535659294528738,
+        0.0719649875705847,
+        0.06872602958303317,
+        0.06563284871848656,
+        0.06267888392562117,
+        0.05985786944906636,
+        0.057163821538897416,
+        0.054591025758299494,
+        0.05213402486248127,
+        0.04978760722312682,
+        0.0475467957738334,
+        0.04540683745308624,
+        0.04336319312237784,
+        0.041411527938086556,
+        0.039547702156692226,
+        0.03776776235382502,
+        0.0360679330385224,
+        0.034444608644906484,
+        0.03289434588429555,
+        0.031413856441526986,
+        0.03,
+        0.028649777580643077,
+        0.02736032518067729,
+        0.026128907698682417,
+        0.024952913133080127,
+        0.02382984704172844,
+        0.02275732725087551,
+        0.021733078802249697,
+        0.020754929127568086,
+        0.019820803440227894,
+        0.018928720334405787,
+        0.018076787582230743,
+        0.0172631981201147,
+        0.016486226215728744,
+        0.015744223807493168,
+        0.015035617008818173,
+        0.014358902769679143,
+        0.013712645688446257,
+        0.01309547496720497,
+        0.012506081504110065,
+        0.011943215116604906,
+        0.011405681889616836,
+        0.010892341643103043,
+        0.010402105513575951,
+        0.009933933644477732,
+        0.009486832980505136,
+        0.009059855161206049,
+        0.008652094509379819,
+        0.008262686110014498,
+        0.007890803975686145,
+        0.007535659294528738,
+        0.00719649875705847,
+        0.006872602958303317,
+        0.006563284871848655,
+        0.006267888392562123,
+        0.005985786944906637,
+        0.0057163821538897455,
+        0.005459102575829948,
+        0.005213402486248129,
+        0.004978760722312679,
+        0.004754679577383342,
+        0.0045406837453086215,
+        0.004336319312237784,
+        0.004141152793808651,
+        0.003954770215669223,
+        0.0037767762353824986,
+        0.00360679330385224,
+        0.0034444608644906487,
+        0.0032894345884295554,
+        0.003141385644152699
+      ]
+    },
+    "mechanism": "omega(h/2) grows with r on a geometric grid while f decays, so the additive inflation overtakes the profile itself. A GLOBALLY stated absolute modulus is useless on a multi-decade window; the loglog kind or per-sample local constants are what such a window admits."
+  },
+  "both_hypotheses": {
+    "id": "S4",
+    "hypothesis": "MONOTONE+MODULUS",
+    "verdict": "INTERVAL",
+    "width": 7.438494264988549e-15,
+    "difference_from_path_A": 0.0,
+    "conditional_on": "These cell enclosures, and every certificate derived from them, hold CONDITIONALLY on: f is nonincreasing on the whole window (declared by the caller, NOT verified -- agreement of the samples with that direction is a necessary condition only); f obeys the caller-certified modulus |log f(r)-log f(s)| <= L*|log r-log s|**alpha with alpha = 1.0 and L in [1.05, 1.05] (loglog coordinates); the supplied per-sample intervals enclose f at the sample radii.",
+    "reading": "the enclosures are intersected; the tighter (monotone) statement dominates"
+  },
+  "gate_controls": [
+    {
+      "id": "X1",
+      "kind": "NO HYPOTHESIS",
+      "expected": "refusal",
+      "verdict": "INCAPACITY",
+      "enclosure_called": false,
+      "exponent_returned": null,
+      "reason": "NO HYPOTHESIS SUPPLIED. Point samples alone determine no enclosure: with no regularity hypothesis every superinterval of the range is consistent with the data, so any returned cell enclosure would be fabricated. Supply monotone= (one of ('nonincreasing', 'nondecreasing')) or modulus=Modulus(...), or both.",
+      "fired": true
+    },
+    {
+      "id": "X2",
+      "kind": "MONOTONICITY VIOLATED, VISIBLY (one sample raised 5%)",
+      "expected": "refusal",
+      "verdict": "INCAPACITY",
+      "offending_cell": 499,
+      "violation_magnitude": 0.0013615262916481204,
+      "reason": "DECLARED nonincreasing IS CONTRADICTED BY THE SAMPLES THEMSELVES at cell 499 (radii 99.540541735152701 -> 100): the sample enclosures are disjoint in the wrong order by 0.00136153. This is a necessary condition of the declared hypothesis, so the hypothesis is false and no enclosure is returned.",
+      "fired": true
+    },
+    {
+      "id": "X3",
+      "kind": "MONOTONICITY VIOLATED, SECRETLY (node-aligned wiggle, A = 0.05)",
+      "expected": "containment failure (the adapter provably cannot see this)",
+      "adapter_verdict": "CELLS",
+      "certified_verdict": "INTERVAL",
+      "certified_width": 7.438494264988549e-15,
+      "certified_interval_contains_1": true,
+      "containment_audit": {
+        "audited": true,
+        "n_probe_per_cell": 17,
+        "worst_signed_excess": 0.01463755152999896,
+        "worst_signed_relative_excess": 0.051420389406847594,
+        "worst_signed_log_excess": 0.05014200184105366,
+        "worst_cell_index": 0,
+        "worst_radius": 10.011519555381689,
+        "n_cells_violated": 1000,
+        "contained": false
+      },
+      "fired": true,
+      "reading": "The certificate is VALID under the declared hypothesis and FALSE about the true profile, which leaves the claimed enclosure in every one of 1000 cells by up to 0.0514 relative. This is the whole argument for recording conditionality in the row: the number 7.44e-15 is indistinguishable from S1's, and only the hypothesis field separates a true certificate from a false one."
+    },
+    {
+      "id": "X4",
+      "kind": "MODULUS UNDERSTATED, DETECTABLY (L = 0.1 declared, truth 2.0)",
+      "expected": "refusal",
+      "verdict": "INCAPACITY",
+      "worst_ratio": 19.999999999942126,
+      "worst_jump": 0.009210340371969215,
+      "worst_omega": 0.00046051701859979333,
+      "reason": "DECLARED MODULUS IS UNDERSTATED, PROVABLY, AT THE SAMPLES THEMSELVES: at cell 29 (radii 11.428783347897719 -> 11.481536214968829) adjacent samples differ by at least 0.00921034 in log f, while the declared omega(h) allows at most 0.000460517 -- a factor 20. This is a necessary condition of the declared hypothesis, so the hypothesis is false and no enclosure is returned.",
+      "fired": true
+    },
+    {
+      "id": "X5",
+      "kind": "MODULUS UNDERSTATED, UNDETECTABLY (node increments obey L = 1.05; within-cell variation does not)",
+      "expected": "containment failure",
+      "adapter_verdict": "CELLS",
+      "declared_omega_half_cell": 0.0024177143476547445,
+      "containment_audit": {
+        "audited": true,
+        "n_probe_per_cell": 17,
+        "worst_signed_excess": 0.013910479372917617,
+        "worst_signed_relative_excess": 0.04887835524597152,
+        "worst_signed_log_excess": 0.04772136010272643,
+        "worst_cell_index": 0,
+        "worst_radius": 10.011519555381689,
+        "n_cells_violated": 1000,
+        "contained": false
+      },
+      "fired": true,
+      "reading": "The node-to-node increments satisfy the declared modulus exactly (|dg| = dt <= 1.05 dt), so the necessary condition passes; the true within-cell excursion 0.05 dwarfs the inflation 2.4177e-03 and the truth escapes by 0.04772 in log f."
+    }
+  ],
+  "all_gate_controls_fired": true,
+  "grid_shift_probe": {
+    "prediction_P11": "REFUTED. Pre-registration \u00a75 predicted that X3's true profile, re-sampled on the HALF-CELL-SHIFTED grid, would be visibly non-monotone and refused. It is not: the adapter returns CELLS.",
+    "half_shift_verdict": "CELLS",
+    "quarter_shift_verdict": "CELLS",
+    "mechanism": "The planted wiggle has period exactly one cell in t = log r, so a UNIFORM shift by s cells multiplies EVERY sample by the same constant (1 + A sin(2 pi s)). A constant multiple of a monotone sequence is monotone, and its log-increments are unchanged, so BOTH necessary conditions pass at every uniform shift -- the half-shift is doubly invisible because sin(pi) = 0 as well. The pre-registration's reasoning was wrong about which grids can see the wiggle: the answer is not 'shifted' but 'INCOMMENSURATE'.",
+    "post_hoc_incommensurate_resampling": {
+      "status": "NOT PRE-REGISTERED. Added after P11 failed, to locate the correct statement. Decides nothing about the gate, which is answered by X1-X5.",
+      "rows": [
+        {
+          "N_resample": 500,
+          "spacing_ratio_dt_over_dt0": 2.0000000000001625,
+          "verdict": "CELLS",
+          "monotone_worst_violation": -2.775865823069794e-05
+        },
+        {
+          "N_resample": 997,
+          "spacing_ratio_dt_over_dt0": 1.0030090270813254,
+          "verdict": "CELLS",
+          "monotone_worst_violation": -1.1040233182371772e-05
+        },
+        {
+          "N_resample": 1001,
+          "spacing_ratio_dt_over_dt0": 0.9990009990010803,
+          "verdict": "CELLS",
+          "monotone_worst_violation": -1.4779377083656757e-05
+        },
+        {
+          "N_resample": 1010,
+          "spacing_ratio_dt_over_dt0": 0.9900990099010707,
+          "verdict": "CELLS",
+          "monotone_worst_violation": -5.4688508599361205e-06
+        },
+        {
+          "N_resample": 1100,
+          "spacing_ratio_dt_over_dt0": 0.9090909090909831,
+          "verdict": "INCAPACITY",
+          "monotone_worst_violation": 0.007032236958719961
+        },
+        {
+          "N_resample": 1500,
+          "spacing_ratio_dt_over_dt0": 0.6666666666667209,
+          "verdict": "INCAPACITY",
+          "monotone_worst_violation": 0.02494461919436974
+        },
+        {
+          "N_resample": 2000,
+          "spacing_ratio_dt_over_dt0": 0.5000000000000406,
+          "verdict": "CELLS",
+          "monotone_worst_violation": -6.915714080559574e-06
+        }
+      ],
+      "reading": "Detection is a commensurability phenomenon: grids whose spacing ratio to the wiggle period is near an integer (N = 500, 1000, 2000) or near 1 (N = 997, 1001, 1010, where the phase drifts too slowly) see nothing, while N = 1100 and N = 1500 refuse. A hypothesis-violating profile can therefore hide from any FIXED grid, which strengthens rather than weakens the leg's conclusion: the hypothesis is doing the work, not the sampling."
+    }
+  },
+  "anti_tautology_checks": {
+    "1_the_containment_audit_can_report_CLEAN": {
+      "S1": -1.7067463880367252e-16,
+      "S2": -0.0024177143476456645,
+      "S3": -0.002307895139198046
+    },
+    "1_all_negative": true,
+    "2_no_row_returns_the_full_search_bracket": true,
+    "3_the_refusals_are_not_universal": "S1, S2, S3 and S4 are all ACCEPTED by the same code path that refuses X1, X2, X4",
+    "4_every_accepted_row_carries_a_hypothesis": true,
+    "5_leg_382_numbers_recomputed_not_transcribed": "every leg_382_recomputed field above is a call to certified_decay_interval in this run"
+  },
+  "prediction_ledger": {
+    "P1": {
+      "statement": "PATH A reproduces leg 382's exact-power widths within 5e-14, truth inside",
+      "predicted": "|width - width_382| < 5e-14 for p = 1, 2, 2.5, 3",
+      "measured": {
+        "S1/p=1.0": 0.0,
+        "S1/p=2.0": 0.0,
+        "S1/p=2.5": 0.0,
+        "S1/p=3.0": 0.0
+      },
+      "status": "CONFIRMED"
+    },
+    "P2": {
+      "statement": "PATH B width at N=1000 lands in [7e-4, 6e-3] and contains the truth",
+      "predicted": "\u22482.0e-3, band [7e-4, 6e-3]",
+      "measured": 0.0021046494554660677,
+      "status": "CONFIRMED"
+    },
+    "P3": {
+      "statement": "PATH B width slope -1.00\u00b10.05; PATH A slope |.|<0.2",
+      "predicted": {
+        "path_B": "-1.00 \u00b1 0.05",
+        "path_A": "|slope| < 0.2"
+      },
+      "measured": {
+        "path_B": -1.0068044195617623,
+        "path_A": -0.011802124992307927
+      },
+      "status": "CONFIRMED"
+    },
+    "P4": {
+      "statement": "S3 goes non-positive from r \u2248 208 in \u2265250 cells and the downstream answers INCAPACITY",
+      "predicted": {
+        "first_nonpositive_radius": "\u2248208, band [100,420]",
+        "n_cells": "\u2265250",
+        "downstream": "INCAPACITY"
+      },
+      "measured": {
+        "first_nonpositive_radius": 207.9696687103696,
+        "n_cells": 341,
+        "downstream": "INCAPACITY"
+      },
+      "status": "CONFIRMED"
+    },
+    "P12": {
+      "statement": "declaring both hypotheses gives PATH A's width to within 1e-15",
+      "predicted": "|difference| < 1e-15",
+      "measured": 0.0,
+      "status": "CONFIRMED"
+    },
+    "P5": {
+      "statement": "control X1 fires (refusal)",
+      "predicted": "fires",
+      "measured": {
+        "verdict": "INCAPACITY"
+      },
+      "status": "CONFIRMED"
+    },
+    "P6": {
+      "statement": "control X2 fires (refusal)",
+      "predicted": "fires",
+      "measured": {
+        "verdict": "INCAPACITY",
+        "violation_magnitude": 0.0013615262916481204
+      },
+      "status": "CONFIRMED"
+    },
+    "P7": {
+      "statement": "control X3 fires (containment failure (the adapter provably cannot see this))",
+      "predicted": "fires",
+      "measured": {
+        "adapter_verdict": "CELLS"
+      },
+      "status": "CONFIRMED"
+    },
+    "P8": {
+      "statement": "control X4 fires (refusal)",
+      "predicted": "fires",
+      "measured": {
+        "verdict": "INCAPACITY",
+        "worst_ratio": 19.999999999942126
+      },
+      "status": "CONFIRMED"
+    },
+    "P9": {
+      "statement": "control X5 fires (containment failure)",
+      "predicted": "fires",
+      "measured": {
+        "adapter_verdict": "CELLS"
+      },
+      "status": "CONFIRMED"
+    },
+    "P11": {
+      "statement": "X3's profile is REFUSED on the half-cell-shifted grid",
+      "predicted": "INCAPACITY on the shifted grid",
+      "measured": "CELLS",
+      "status": "REFUTED"
+    },
+    "P10": {
+      "statement": "the containment audit reports CLEAN (strictly negative) on S1, S2, S3",
+      "predicted": "all worst margins < 0",
+      "measured": {
+        "S1": -1.7067463880367252e-16,
+        "S2": -0.0024177143476456645,
+        "S3": -0.002307895139198046
+      },
+      "status": "CONFIRMED"
+    }
+  },
+  "predictions_confirmed": [
+    "P1",
+    "P10",
+    "P12",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P6",
+    "P7",
+    "P8",
+    "P9"
+  ],
+  "predictions_refuted": [
+    "P11"
+  ],
+  "gate": {
+    "question": "Does the adapter convert a planted sampled profile with a stated true hypothesis into cell enclosures whose certification reproduces 382's exact-power result within its measured widths, AND does a planted hypothesis-VIOLATING input (samples secretly non-monotone / modulus understated) fire the refusal or a containment failure \u2014 controls able to fail, neither widened?",
+    "conjunct_1_reproduction": true,
+    "conjunct_1_evidence": "PATH A (MONOTONE) reproduces leg 382's exact-power certified widths BIT-IDENTICALLY at p = 1, 2, 2.5, 3 (width difference exactly 0.0), truth inside every interval. PATH B (MODULUS) does NOT and CANNOT: sound, contains the truth, but width 2.10e-3 at N = 1000 falling like 1/N, so leg 382's 7.44e-15 would need N ~ 2.83e+14. This was PREDICTED (P2, P3) before the run.",
+    "conjunct_2_controls": true,
+    "conjunct_2_evidence": "X1 (no hypothesis) and X2 (visible non-monotonicity) and X4 (modulus understated at the samples) fire the REFUSAL; X3 (secretly non-monotone) and X5 (modulus understated invisibly) are accepted, as they must be, and fire CONTAINMENT FAILURES of +5.14e-2 relative and +4.77e-2 in log f. No control was widened; P11 failed and is recorded as failed rather than amended.",
+    "answer": "YES",
+    "yes_branch_meaning": "Real sampled profiles become admissible input to the \u00a74 instrument, CONDITIONAL ON A NAMED HYPOTHESIS. The first real consumer remains whatever future unit produces a profile, and this leg claims nothing about one. CEILING TIER 2; CLAY_OBLIGATIONS \u00a76 items 1 and 2 stay OPEN, the cutoff half untouched.",
+    "which_path_each_result_is_conditional_on": "The reproduction rows are conditional on MONOTONICITY (declared 'nonincreasing', never verified). The PATH B rows are conditional on a caller-certified modulus. No row here is unconditional, and every row says so in its own conditional_on field."
+  },
+  "runtime_seconds": 8.450256586074829
+}
