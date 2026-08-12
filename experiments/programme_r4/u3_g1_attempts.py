@@ -329,16 +329,45 @@ def main():
         gate=dict(
             question="G1: DOES AT LEAST ONE NAMED TABLE-IV RPO RECOVER TO "
                      "tol=1e-8?",
-            # THE OVERRIDE, pre-registered in the addendum section 3. A `no` at
-            # G1 is a RESOURCED null: section 3d's stop fires on it and route 4
-            # stops. That is only permitted on an instrument shown IN THIS RUN
-            # to be able to say `yes`. If the controls did not fire as planted,
-            # "no orbit recovered" and "the machinery cannot recover anything"
-            # are indistinguishable, and the honest answer is neither YES nor
-            # NO but UNANSWERED.
-            answer=("YES" if recovered else "NO") if controls_fired
-                   else "UNANSWERED",
-            answer_without_controls="YES" if recovered else "NO",
+            # TWO pre-registered overrides sit on this answer, and the raw
+            # "did anything recover" flag passes through NEITHER of them
+            # untouched.
+            #
+            # (1) THE CONTROLS OVERRIDE (addendum section 3). A negative at G1
+            # is only permitted on an instrument shown IN THIS RUN to be able
+            # to say `yes`. If the controls did not fire as planted, "no orbit
+            # recovered" and "the machinery cannot recover anything" are
+            # indistinguishable, and the honest answer is UNANSWERED.
+            #
+            # (2) THE RESOURCING OVERRIDE (addendum section 3c, AMENDMENT 3,
+            # fixed BEFORE this run). The cost probe measured a median of 119
+            # epochs to convergence-or-stall -- CENSORED at its cap of 120, so
+            # a lower bound -- against which the cap rule's clause (b) demands
+            # max_newton >= 238. At the measured 54.7 s/epoch that is >= 36.2 h
+            # at 10 workers, which does not fit the 8 h envelope. The rule's
+            # escape clause therefore fires and `NO` is NOT an available answer
+            # to G1 in this run. The branches are asymmetric under a truncated
+            # budget and that asymmetry is the whole justification for running
+            # anyway: a recovery inside the budget is a FULL answer, because no
+            # larger budget could unmake a recovery; a non-recovery inside a
+            # budget known to be ~4.5x too small is not evidence of absence.
+            answer=(("YES" if recovered else "UNDER-RESOURCED")
+                    if controls_fired else "UNANSWERED"),
+            answer_without_controls="YES" if recovered else "UNDER-RESOURCED",
+            no_is_not_available=(
+                "`NO` is not an available answer to G1 in this run, fixed in "
+                "the pre-registration BEFORE the run (addendum section 3c). "
+                "ORCHESTRATION.md section 3d's stop does NOT fire and route 4 "
+                "is NOT stopped on measurement. Reading UNDER-RESOURCED as a "
+                "verdict on the orbits is reading it backwards."),
+            compliant_cost_named=dict(
+                max_newton_required=238,
+                basis="2x the probe's median epochs to convergence-or-stall "
+                      "(119), itself CENSORED at the probe's cap of 120, so "
+                      "every figure here is a LOWER BOUND",
+                seconds_per_epoch_measured=54.7,
+                hours_at_10_workers=36.2,
+                core_days=15.1),
             controls_fired_as_planted=controls_fired,
             control_failures=control_failures,
             # Reported SEPARATELY and never substituted for one another: the

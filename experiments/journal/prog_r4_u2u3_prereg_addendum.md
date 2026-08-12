@@ -228,6 +228,75 @@ and it has now fired twice.
 **UNVERIFIED (§3f).** The diagnosis, the fix and the M1 bit-identity check were all made in the
 same session that made the change. They are labelled UNVERIFIED in G1's own answer.
 
+## 3c. AMENDMENT 3 — the CAP RULE's escape clause FIRES. Written BEFORE U3 runs.
+
+The cost probe has reported at the fixed `max_gmres=140`, on two seeds anchored to named Table
+IV periods (`T ≈ 14.75` and `17.0`), run concurrently with the T=1e5 DNS. This amendment records
+what the pre-registered rule does with those numbers, and it is written **before U3 is run** so
+that the branch G1 lands in is not chosen after seeing G1's outcome.
+
+**Measured.**
+
+| quantity | value |
+|---|---|
+| Krylov dimensions consumed, real anchored seeds | median 22, **p95 26**, max 28, cap hit in **0** of 240 epochs |
+| Krylov dimensions consumed, control P at `T_P` | **p95 65.8**, max 88, cap hit in 0 of 33 epochs |
+| epochs to convergence-or-stall | **median 119, max 119** — both attempts exited `max_newton_hit` |
+| wall cost | **54.7 s/epoch** median, **2.37 s per Jacobian action**, 2760 Jacobian actions median |
+| outcome | neither probe attempt converged; final `‖R‖` = 1.10 and 2.29 |
+
+**Clause (a) is MET at `max_gmres = 140`, under both readings.** The literal reading requires
+`≥ 2 × 26 = 52`. The §3a reading — clause (a) is also read against P's measured floor, because P
+doubles as the cap-adequacy test — requires `≥ 2 × 65.8 = 131.6`, and P only recovers at 140.
+140 satisfies both, and GMRES is stopped by its `rtol=1e-3` early exit in every epoch measured,
+never by the cap. Note the direction of the surprise: **P is harder in the linear solve than the
+real seeds are**, which is the conservative direction for a positive control to err in.
+
+**Clause (b) is NOT MET, and cannot be met inside the envelope.** It requires
+`max_newton ≥ 2 ×` the median epochs to convergence-or-stall, i.e. `≥ 238`. That figure is a
+**lower bound**: both probe attempts hit the cap of 120 without either converging or stalling,
+so the median 119 is **censored** and the true median is unknown and `≥ 119`. Pricing a
+compliant run at `max_newton = 238`, `max_gmres = 140`, 100 attempts:
+
+```
+per attempt      238 epochs x 54.7 s            =  13,019 s  =  3.6 h
+total core cost  100 x 13,019 s                 = 361.6 core-hours = 15.1 core-days
+at 10 workers    ceil(100/10) x 13,019 s        = 130,186 s = 36.2 h
+```
+
+against the pre-registered **8 h** envelope. It does not fit, by a factor of **4.5**. Because
+the median is censored, every one of those figures is a lower bound.
+
+**What the rule therefore requires**, quoted from §2 above:
+
+> If (a) and (b) cannot BOTH be met inside the envelope, U3 does not report a `no`. It reports
+> the shortfall as a cost and **G1 answers `UNDER-RESOURCED`** per `ORCHESTRATION.md` §3d, naming
+> the wall time a compliant attempt would need.
+
+**The compliant wall time, named:** `>= 36.2 h at 10 workers`, `>= 15.1 core-days`, at
+`(max_newton >= 238, max_gmres = 140)`, on the measured 54.7 s/epoch.
+
+**U3 is still run, and here is the asymmetry that justifies running it.** U3 will run at the
+largest `max_newton` that fits the 8 h envelope: `28800 s / 10 rounds / 54.7 s = 52.6`, so
+**`max_newton = 52`, `max_gmres = 140`, 100 attempts, 10 workers**. The two branches are **not**
+symmetric under a truncated budget:
+
+* **A recovery is not budget-limited.** If any attempt reaches `tol=1e-8` on a named Table IV
+  orbit within 52 epochs, that orbit *is* recoverable, and no larger budget could unmake the
+  fact. **G1 answers `YES`** — a full, compliant answer.
+* **A non-recovery IS budget-limited**, and at 52 epochs against a censored requirement of ≥238
+  it is budget-limited by construction. It is therefore **not** evidence of absence. **G1
+  answers `UNDER-RESOURCED`**, carrying the wall time above.
+
+**`no` is not an available answer to G1 in this session, and this is fixed now, before the run.**
+Not because a `no` would be unwelcome, but because the instrument has been measured and is
+demonstrably too small to license one. §3d's stop does not fire. Route 4 is **not** stopped on
+measurement, and any later reader who finds `UNDER-RESOURCED` in `p2_prog_r4_g1_v1.json` and
+reads it as a verdict is reading it backwards.
+
+The controls still gate everything: if P does not recover, or N does recover, at the caps used,
+G1 answers `UNANSWERED` regardless of the above.
+
 ## 4. What this addendum does not do
 
 It does not restate, soften or re-scope G1. It does not touch the compliant scale. It does not

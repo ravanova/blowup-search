@@ -64,16 +64,38 @@ def main():
     # fires only when the controls did not fire as planted, and it is STRICTER
     # than NO, because a NO is a resourced null that stops route 4 under section
     # 3d and may only be recorded on an instrument shown able to say YES.
-    check("gate answer is one of the three pre-committed branches",
-          answer in ("YES", "NO", "UNANSWERED"), f"answer={answer}")
+    check("gate answer is one of the four pre-committed branches",
+          answer in ("YES", "NO", "UNDER-RESOURCED", "UNANSWERED"),
+          f"answer={answer}")
     ctrl = d["gate"].get("controls_fired_as_planted")
     raw = d["gate"].get("answer_without_controls")
     check("the controls verdict is banked with the gate",
-          ctrl is not None and raw in ("YES", "NO"),
+          ctrl is not None and raw in ("YES", "NO", "UNDER-RESOURCED"),
           f"controls_fired={ctrl}, answer_without_controls={raw}")
     check("raw answer agrees with the per-attempt recovery flags",
           (raw == "YES") == bool(recovered.any()),
           f"n_recovered={int(recovered.sum())}")
+    # AMENDMENT 3 (addendum section 3c): the cap rule's escape clause fired
+    # before the run, so a negative here is UNDER-RESOURCED and NOT a resourced
+    # null. section 3d's stop must not be readable off this record, and a
+    # negative must carry the wall time a compliant attempt would need --
+    # otherwise "we could not afford to ask" decays into "the answer is no".
+    if answer == "UNDER-RESOURCED":
+        cc = d["gate"].get("compliant_cost_named", {})
+        check("an UNDER-RESOURCED gate names the compliant cost it fell short of",
+              float(cc.get("hours_at_10_workers", 0)) > 0
+              and int(cc.get("max_newton_required", 0)) > 0
+              and "LOWER BOUND" in cc.get("basis", ""),
+              f"needs max_newton>={cc.get('max_newton_required')}, "
+              f"{cc.get('hours_at_10_workers')} h at 10 workers")
+        check("an UNDER-RESOURCED gate states that section 3d's stop did NOT fire",
+              "not stopped" in d["gate"].get("no_is_not_available", "").lower()
+              or "does NOT fire" in d["gate"].get("no_is_not_available", ""))
+        check("the run really was below the compliant budget it claims",
+              int(d["resourcing"]["max_newton"])
+              < int(cc.get("max_newton_required", 0)),
+              f"ran max_newton={d['resourcing']['max_newton']} against "
+              f"{cc.get('max_newton_required')} required")
     check("the controls override is applied exactly as pre-registered",
           answer == (raw if ctrl else "UNANSWERED"),
           f"answer={answer} from raw={raw} with controls_fired={ctrl}")
@@ -87,6 +109,8 @@ def main():
           f"N.recovered={cb.get('N', {}).get('recovered')} (N must be False)")
     check("a NO is never recorded on controls that did not fire",
           not (answer == "NO" and not ctrl))
+    check("a NO is never recorded once the cap rule's escape clause has fired",
+          not (answer == "NO" and d["gate"].get("compliant_cost_named")))
     check("gate n_recovered matches the attempt rows",
           d["gate"]["n_recovered"] == int(recovered.sum()))
     check("every attempt carries a named Table IV anchor (Ban 2)",
