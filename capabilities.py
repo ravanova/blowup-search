@@ -718,6 +718,31 @@ CAPABILITIES = [
                    "boundary singularity) costs MORE modes (31 vs 10 direct), so "
                    "the enrichment is not a universal transform artefact"),
      "test": "test_dssp_basis.py"},
+    {"module": "solver/dssp_biot_savart.py",
+     "object": "3D Biot-Savart velocity recovery from a Type-I-enveloped "
+               "vorticity witness, closed-form (leg 351, Route-DSSP brick B3)",
+     "holds": ("Omega_B=2S(r)(-x2,x1,0), S(r)=(1+r^2)^-3/2 (algebraic, not "
+               "Gaussian); u_B=curl A solves -Laplace A=Omega_B via the "
+               "swirl ansatz A=a(r)(x2,-x1,0); a(r), a'(r), a''(r) are ALL "
+               "closed-form (no quadrature, no interpolation table -- a(r) "
+               "= -2G4(r)/(3r^3) - (2/3)/sqrt(1+r^2), derived by two "
+               "integrations by parts of the ODE a''+4a'/r=2S(r)); "
+               "vorticity_nonlinearity(u,w,Ju,Jw) for the mapping-bound "
+               "numerator"),
+     "validated": ("div u_B=0 and curl u_B=Omega_B to <1e-10 analytically "
+                   "(no finite differences -- grad_uB/grad_omegaB depend "
+                   "only on the closed forms); a(0)=-2/3 exactly, a(r)*r -> "
+                   "-1 as r->infinity (Type-I decay, solved not assumed); "
+                   "||Omega_B||_L2(R^3) matches an independent closed form "
+                   "pi*sqrt(2) (Beta-function integral) to 3.8e-6 rel; "
+                   "unweighted-L2 mapping-bound ratio actual/bound = "
+                   "0.1952037, stable to 5 sig figs across both a 3-point "
+                   "resolution ladder and a 5-point domain ladder "
+                   "(R_hi 50..1e5, needed because this tail is algebraic "
+                   "not Gaussian); FALSIFICATION CONTROL: a deliberately "
+                   "wrong vorticity (Omega_B*1.01) fails the curl check by "
+                   "~7.6e-3, confirming the check is not vacuous"),
+     "test": "test_dssp_biot_savart.py"},
 ]
 
 

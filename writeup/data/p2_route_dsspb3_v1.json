@@ -1,0 +1,193 @@
+{
+  "leg": 351,
+  "route": "DSSP",
+  "brick": "B3",
+  "brick_name": "DSSP-BS",
+  "ceiling": "TIER 2",
+  "gate_text": "Does Biot-Savart in the compactified variable stay on the MULTIPLIER side of the nonlocal-output rule? Specifically: are ||V||_inf and ||grad V||_inf finite and measured on a Type-I-enveloped Omega, and is leg 332's mapping bound ||(V.grad)Omega-(Omega.grad)V|| <= ||V||_inf||grad Omega|| + ||grad V||_inf||Omega|| non-vacuous in the CHOSEN unweighted space (ratio strictly inside (0,1))?",
+  "compactified_variable_roundtrip": {
+    "n_nodes": 4000,
+    "v_roundtrip_max_abs_err": 3.893702591462045e-07,
+    "r_range": [
+      0.0,
+      1000022122208.5028
+    ],
+    "a_of_r_finite_everywhere": true
+  },
+  "closed_form_identity_checks": {
+    "divergence_uB_max_abs": 1.1102230246251565e-16,
+    "curl_uB_vs_omegaB_max_abs": 2.220446049250313e-16,
+    "planted_wrong_vorticity_control_max_abs": 0.007563331683160479,
+    "planted_control_is_large": true,
+    "grad_uB_vs_fd_max_abs": 2.1159530074754684e-06,
+    "grad_omegaB_vs_fd_max_abs": 2.8899904691570555e-10,
+    "G4_branch_continuity_at_0p6": {
+      "r_0598": 0.010952964326327466,
+      "r_0600": 0.011115521019873342,
+      "r_0602": 0.011279824088665236
+    },
+    "a_of_r_times_r_large_r": {
+      "100.0": -0.9995201645135013,
+      "10000.0": -0.9999999059651244,
+      "1000000.0": -0.9999999999859913,
+      "100000000.0": -0.999999999999998
+    },
+    "a_of_r_times_r_limit_is_minus_1": true,
+    "a_of_0": -0.6666666666666666,
+    "a_of_0_is_minus_two_thirds": true
+  },
+  "om_n_closed_form_derivation": "|Omega_B|^2 = 4 S(r)^2 (x1^2+x2^2); angular integral of sin^2(theta) over S^2 is 8*pi/3; Int_0^inf r^4(1+r^2)^-3 dr = 3*pi/16 (Beta function); product gives Int|Omega_B|^2 dx = 2*pi^2 exactly, om_n = pi*sqrt(2).",
+  "om_n_closed_form": 4.442882938158366,
+  "om_n_numeric_at_finest_ladder_point": 4.442845225636652,
+  "om_n_closed_vs_numeric_rel_diff": 8.488299655717195e-06,
+  "resolution_ladder": [
+    {
+      "r_lo": 0.0001,
+      "r_hi": 100000.0,
+      "n_panels": 40,
+      "n_c": 32,
+      "n_phi": 8,
+      "n_r_gl": 40,
+      "sup_u": 1.3333333293066616,
+      "sup_grad_u": 0.6160599925457827,
+      "omega_L2": 4.442845225636647,
+      "grad_omega_L2": 4.301802907155205,
+      "actual": 1.6541473189245834,
+      "bound": 8.472796388806103,
+      "ratio": 0.19523038711398427
+    },
+    {
+      "r_lo": 0.0001,
+      "r_hi": 100000.0,
+      "n_panels": 60,
+      "n_c": 48,
+      "n_phi": 16,
+      "n_r_gl": 40,
+      "sup_u": 1.3333333293205918,
+      "sup_grad_u": 0.6162552864382389,
+      "omega_L2": 4.44284522563664,
+      "grad_omega_L2": 4.301802907155205,
+      "actual": 1.6541473189257108,
+      "bound": 8.47366404940372,
+      "ratio": 0.1952103965039906
+    },
+    {
+      "r_lo": 0.0001,
+      "r_hi": 100000.0,
+      "n_panels": 90,
+      "n_c": 64,
+      "n_phi": 24,
+      "n_r_gl": 40,
+      "sup_u": 1.3333333293259477,
+      "sup_grad_u": 0.6163205319203076,
+      "omega_L2": 4.442845225636652,
+      "grad_omega_L2": 4.301802907155205,
+      "actual": 1.6541473189252727,
+      "bound": 8.47395392500527,
+      "ratio": 0.1952037187792762
+    }
+  ],
+  "domain_ladder": [
+    {
+      "r_lo": 0.0001,
+      "r_hi": 50.0,
+      "n_panels": 60,
+      "n_c": 48,
+      "n_phi": 16,
+      "n_r_gl": 40,
+      "sup_u": 1.3333333293217797,
+      "sup_grad_u": 0.6162514940643056,
+      "omega_L2": 4.366837565489188,
+      "grad_omega_L2": 4.301740662765663,
+      "actual": 1.6541472724295778,
+      "bound": 8.426724373833068,
+      "ratio": 0.19629777824062794
+    },
+    {
+      "r_lo": 0.0001,
+      "r_hi": 200.0,
+      "n_panels": 60,
+      "n_c": 48,
+      "n_phi": 16,
+      "n_r_gl": 40,
+      "sup_u": 1.3333333293215741,
+      "sup_grad_u": 0.6162553019412694,
+      "omega_L2": 4.423987045940768,
+      "grad_omega_L2": 4.301801933499138,
+      "actual": 1.6541472933118133,
+      "bound": 8.462041366854882,
+      "ratio": 0.19547851654223433
+    },
+    {
+      "r_lo": 0.0001,
+      "r_hi": 1000.0,
+      "n_panels": 60,
+      "n_c": 48,
+      "n_phi": 16,
+      "n_r_gl": 40,
+      "sup_u": 1.3333333293213294,
+      "sup_grad_u": 0.6162513544583585,
+      "omega_L2": 4.439110103844083,
+      "grad_omega_L2": 4.301802899365405,
+      "actual": 1.6541473189253582,
+      "bound": 8.471344795978723,
+      "ratio": 0.19526384048381173
+    },
+    {
+      "r_lo": 0.0001,
+      "r_hi": 10000.0,
+      "n_panels": 60,
+      "n_c": 48,
+      "n_phi": 16,
+      "n_r_gl": 40,
+      "sup_u": 1.3333333293209675,
+      "sup_grad_u": 0.616248805933972,
+      "omega_L2": 4.442505798538513,
+      "grad_omega_L2": 4.301802907147422,
+      "actual": 1.6541473189248803,
+      "bound": 8.473426085973596,
+      "ratio": 0.19521587869434032
+    },
+    {
+      "r_lo": 0.0001,
+      "r_hi": 100000.0,
+      "n_panels": 60,
+      "n_c": 48,
+      "n_phi": 16,
+      "n_r_gl": 40,
+      "sup_u": 1.3333333293205918,
+      "sup_grad_u": 0.6162552864382389,
+      "omega_L2": 4.44284522563664,
+      "grad_omega_L2": 4.301802907155205,
+      "actual": 1.6541473189257108,
+      "bound": 8.47366404940372,
+      "ratio": 0.1952103965039906
+    }
+  ],
+  "resolution_ladder_last_step_rel_change_ratio": 3.420900357928541e-05,
+  "dedicated_sup_norm_search": {
+    "n_r": 3000,
+    "n_c": 48,
+    "n_phi": 24,
+    "sup_u": 1.3333333333333333,
+    "sup_u_at_r": 1e-08,
+    "sup_u_matches_4_over_3": true,
+    "sup_grad_u": 0.6162533331653254,
+    "sup_grad_u_at_r": 0.6812048937442047
+  },
+  "sup_u_dedicated_vs_ladder_rel_diff": 3.0055391599242335e-09,
+  "sup_grad_u_dedicated_vs_ladder_rel_diff": 0.00010903215372819587,
+  "final": {
+    "sup_u": 1.3333333293259477,
+    "sup_grad_u": 0.6163205319203076,
+    "omega_L2": 4.442845225636652,
+    "grad_omega_L2": 4.301802907155205,
+    "actual": 1.6541473189252727,
+    "bound": 8.47395392500527,
+    "ratio": 0.1952037187792762
+  },
+  "leg332_witness_A_ratio": 0.10094301784286618,
+  "leg332_witness_B_ratio": 0.13862895958343363,
+  "gate_answer": "yes",
+  "runtime_seconds": 76.39832091331482
+}
