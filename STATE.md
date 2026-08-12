@@ -37,11 +37,28 @@ rest of this file is identical in both modes.)*
 
 ## Next tasks — pre-committed, in order
 
-Re-ranking requires its own commit stating why (`ORCHESTRATION.md` §3e).
+Re-ranking requires its own commit stating why (`ORCHESTRATION.md` §3f). Ordering respects
+§3f's cap: no more than two consecutive audit/repair/instrument tasks before construction.
 
-1. *(empty — populate before starting work)*
-2. *(empty)*
-3. *(empty)*
+1. **`PROG-R4` U2/U3 — continue the programme.** *Construction, critical path.* M1 (the
+   hookstep/trust-region globalisation layer) is landed and reproduced against leg 353's
+   laminar control; U2/U3 runners are built and DNS is in flight. This is a **programme**
+   under §3c — one novelty pass already committed at U0, milestones not gates for build
+   units, and the worker is **not** terminated on landing. Tier-2 ceiling in every gate.
+2. **Leg 389 (CT2C) — wire 382's certified enclosure into the screen's second T2 column**,
+   alongside the fitted one, consuming 386's δ-mode. *Instrument.* Leg 383 closed the report
+   path with the **fitted** exponent per its dispatch and deliberately did not wire in the
+   enclosure; `CLAY_OBLIGATIONS.md` §8 ask 2 requires certified, not fitted. Note 386's
+   clause 2 first: **the δ-window is EMPTY at every `α_centre ≤ 1`**, and the banked object
+   carries `α = 1`, so this task wires the path and reports the empty window honestly — it
+   does not manufacture headroom.
+3. **Leg 387 (DXNV) — discharge 382's owed novelty obligation.** *Literature, owed work.*
+   arXiv and Semantic Scholar both returned HTTP 429 on 382's external pass; the refusal is
+   disclosed at its novelty §3 and is **owed work, not new screening**, so it does not
+   violate the standing stop on screening as a unit of work.
+
+**Held behind these:** leg 388 (CRVB, bound 382's curvature-detection threshold from below —
+the ladder bottomed out at ≤1e-6 and is currently one-sided).
 
 ## Open — needs the user, not a task
 
