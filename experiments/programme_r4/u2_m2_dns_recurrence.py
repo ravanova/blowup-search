@@ -1,5 +1,25 @@
 """PROG-R4, unit U2 -- MILESTONE M2: the T=1e5 DNS and its recurrence library.
 
+  ############################################################
+  ##  STATUS 2026-08-12: MILESTONE M2 IS **UNANSWERED**.    ##
+  ##  The programme was wound down by user instruction with ##
+  ##  the DNS at t = 16,000 of the required 100,000 (16%).  ##
+  ##  THAT RUN WAS KILLED AND ITS OUTPUT ABANDONED. No      ##
+  ##  recurrence library was produced at the compliant      ##
+  ##  scale, no artefact of this unit is banked, and M2 is  ##
+  ##  NOT claimed. The partial trajectory files are         ##
+  ##  gitignored and are NOT on the branch.                 ##
+  ##                                                        ##
+  ##  WHAT IS TRUSTWORTHY HERE: the code path was exercised ##
+  ##  in a scratch dry run over a 9,500-time-unit prefix    ##
+  ##  (scanned 9.02e6 pairs, 87,859 strict local minima,    ##
+  ##  best R = 0.0345, T range 1.25-59.50, 174 inside       ##
+  ##  L&K's Newton window). THOSE NUMBERS ARE FROM A        ##
+  ##  PARTIAL PREFIX AND ARE NOT A RESULT -- they say the   ##
+  ##  code runs, nothing about the flow's orbits. They were ##
+  ##  never banked to writeup/data and must not be.         ##
+  ############################################################
+
 WHAT THIS UNIT IS. A build unit. It supplies the two things gate G1 needs and
 leg 353 did not have: a DNS at the length the question is posed at, and a
 recurrence-candidate library mined from it with thresholds taken from the
@@ -278,7 +298,11 @@ def run_recur(args):
     # thresholding R_red at R_THRES_RECORD cannot discard a true recurrence.
     # The whole (t, lag) plane is built, because the SELECTION criterion below
     # is a local-minimum test and that needs neighbours in both directions.
-    F = np.asarray(feat, dtype=np.float32)
+    # Honour the DECLARED snapshot count, not the file length: the feature file
+    # is preallocated to its final size, so its tail is zeros until the DNS
+    # reaches it. Slicing here makes the stage correct on a partial or resumed
+    # trajectory instead of silently differencing against zero rows.
+    F = np.asarray(feat[:n_snap], dtype=np.float32)
     den = np.maximum(np.einsum("ij,ij->i", F, F), 1e-30)
     n_t = n_snap - lag_hi
     n_lag = lag_hi - lag_lo + 1

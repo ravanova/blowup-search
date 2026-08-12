@@ -63,7 +63,11 @@
         "consequence": "the milestone is stated as a reduction against leg 353's recorded reduction, not as a convergence; the control probes the state block and never exercised (T, s)",
         "flagged_forward": "from a deliberately bad T=0.05 the period collapses to 1.42e-7 (positive, as required) because T carries no information at a fixed point; for a genuine RPO seed T is a real direction, so the same collapse in U3 would be a finding about the seed, not a bug in the layer"
       },
-      "cost_measured": {"jacobian_actions": 120, "residual_evaluations": 136, "wall_seconds": 4.89},
+      "cost_measured": {
+        "jacobian_actions": 120,
+        "residual_evaluations": 136,
+        "wall_seconds": 4.89
+      },
       "does_not_establish": "nothing here bears on G1 or G2; the hookstep's advantage on a 6-dimensional cubic says nothing about a 578-unknown chaotic-attractor seed, and U2's T=1e5 DNS must still supply the recurrence library before G1 can be asked at the scale the question is posed at",
       "artifacts": [
         "solver/hookstep_newton.py",
@@ -81,23 +85,50 @@
       "unit": "U2",
       "kind": "build",
       "target": "MILESTONE M2 - T=1e5 DNS at N=24 + recurrence-candidate library with thresholds stated",
-      "status": "NOT STARTED"
+      "status": "ABANDONED IN FLIGHT (wind-down 2026-08-12)",
+      "milestone_answer": "UNANSWERED -- DNS killed at 16% of the required T=1e5; no artefact banked"
     },
     {
       "unit": "U3",
       "kind": "claim",
       "target": "GATE G1 - does at least one named Table-IV RPO recover to tol=1e-8?",
-      "status": "NOT STARTED"
+      "status": "NOT RUN (wind-down 2026-08-12)",
+      "gate_answer": "UNANSWERED -- this gate was never opened; do not infer a verdict from the presence of its runner"
     },
     {
       "unit": "U4",
       "kind": "claim",
       "target": "GATE G2 - is a radius measured with a coherent (monotone) failure boundary, control firing as planted?",
-      "status": "NOT STARTED"
+      "status": "NOT RUN (wind-down 2026-08-12)",
+      "gate_answer": "UNANSWERED -- this gate was never opened; do not infer a verdict from the presence of its runner"
     }
   ],
-  "figure_allocation": ["fig97", "fig98"],
+  "figure_allocation": [
+    "fig97",
+    "fig98"
+  ],
   "costs_measured": {
     "u0_wall_seconds_note": "novelty pass dominated by arXiv rate-limit backoff, not compute"
+  },
+  "WIND_DOWN": {
+    "date": "2026-08-12",
+    "instruction": "user instruction relayed by the orchestrator: wind down now, the whole run is stopping",
+    "state_at_stop": "inside unit U2 (MILESTONE M2), DNS at t=16000 of the required 100000 (16%); the run was killed and its output abandoned",
+    "READ_THIS_FIRST": "U0 and U1 are LANDED on main and are the only trustworthy results of this programme. M2, G1 and G2 are all UNANSWERED. No relative periodic orbit was recovered. No basin radius was measured. Brick B5 clause (c-iii) is NOT a number. Nothing here is a null result either: a null requires an attempt resourced at the scale the question is posed at (ORCHESTRATION section 3d), and no such attempt was ever made.",
+    "milestone_M2": "UNANSWERED",
+    "gate_G1": "UNANSWERED",
+    "gate_G2": "UNANSWERED",
+    "what_a_successor_must_redo": [
+      "the whole T=1e5 DNS from scratch (~2.8 h at the measured rate, 0.92-1.08 ms/step at N=24); the partial trajectory is gitignored and is not on the branch",
+      "the recurrence stage at full length; it has only ever run on a 9500-time-unit scratch prefix",
+      "fix U3's Newton/GMRES iteration caps from a MEASURED per-epoch wall time -- that measurement was never taken, and the worst case at the current defaults (40 Newton x 200 Krylov x ~1.9 s per Jacobian action) is roughly 4 h PER ATTEMPT, which does not fit 100 attempts",
+      "run U3 end to end (never run), then U4 (never run at all, not even on synthetic data)"
+    ],
+    "what_is_trustworthy_on_the_branch": [
+      "fig97/fig98 evidence scripts: smoke-tested against synthetic records in both branches of each gate, plus two doctored records the checks correctly reject. They have never seen real data.",
+      "one genuine bug fix in u2_m2_dns_recurrence.py: run_recur now honours the declared n_snapshots instead of reading the preallocated file's zero tail",
+      "U3's seeding/anchoring logic, exercised once on the partial prefix in a scratch dry run whose outputs were discarded"
+    ],
+    "clay": "unchanged, ~0.05%. No L1-L4 link moved by this programme or by stopping it."
   }
 }

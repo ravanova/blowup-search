@@ -1,5 +1,23 @@
 """PROG-R4, unit U3 -- CLAIM unit, GATE G1.
 
+  ############################################################
+  ##  STATUS 2026-08-12: GATE G1 IS **UNANSWERED**.         ##
+  ##  THIS RUNNER HAS NEVER BEEN RUN ON REAL DATA.          ##
+  ##  The programme was wound down by user instruction      ##
+  ##  during unit U2, before the T=1e5 DNS finished, so the ##
+  ##  recurrence library this runner consumes DOES NOT      ##
+  ##  EXIST. No G1 verdict has been produced by anyone. Do  ##
+  ##  not read a number out of this file or infer one from  ##
+  ##  its presence. Before any output of this code is       ##
+  ##  believed, a successor must: (1) run U2 to completion  ##
+  ##  at T=1e5 and land MILESTONE M2 against its own        ##
+  ##  checks, (2) fix the iteration caps from a MEASURED    ##
+  ##  per-epoch cost, (3) run this end to end. Only the     ##
+  ##  seeding/anchoring logic below has been exercised, and ##
+  ##  only on a partial 9500-time-unit prefix in a scratch  ##
+  ##  dry run whose outputs were discarded.                 ##
+  ############################################################
+
 THE GATE, in its pre-committed wording (experiments/journal/prog_r4_prereg.md):
 
     G1: DOES AT LEAST ONE NAMED TABLE-IV RPO RECOVER TO tol=1e-8?
@@ -81,7 +99,17 @@ from experiments.programme_r4.u2_m2_dns_recurrence import (  # noqa: E402
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "u3_g1_attempts.json")
+ROOT = os.path.dirname(os.path.dirname(HERE))
+# Two files on purpose. The CURATED one is the unit's landing artefact and is
+# what the figure script asserts against; the LEDGER keeps the full
+# per-iteration record, which is bulky and is what a successor re-deriving the
+# mechanism would need.
+CURATED = os.path.join(ROOT, "writeup", "data", "p2_prog_r4_g1_v1.json")
+LEDGER = os.path.join(HERE, "u3_g1_ledger.json")
+# Converged states for attempts that recovered a named orbit. U4 needs the
+# actual field, not a summary of it, and 24x24 floats are small enough to keep
+# in the programme's persistent state.
+ORBITS = os.path.join(HERE, "u3_g1_recovered_orbits.npz")
 
 # The eight named Lucas & Kerswell Table IV rows, exactly as leg 353
 # pre-registered them: (identifier, T_published, s_published, m_published).
@@ -149,6 +177,10 @@ def run_attempt(job):
         krylov_dims=[e["krylov_dim"] for e in out["ledger"]],
         radius_trials=[e["n_radius_trials"] for e in out["ledger"]],
         wall_seconds=wall)
+    # Full per-iteration record travels separately: it is what a successor
+    # re-deriving the mechanism needs, and it is too bulky for the curated file.
+    rec["_ledger"] = out["ledger"]
+    rec["_w0"] = out["w0"]
     return rec
 
 
@@ -204,11 +236,22 @@ def build_jobs(args, solver):
 
 
 def main():
+    global MAX_NEWTON, MAX_GMRES
     ap = argparse.ArgumentParser()
     ap.add_argument("--n-attempts", type=int, default=100)
     ap.add_argument("--workers", type=int, default=10)
-    ap.add_argument("--out", default=OUT)
+    ap.add_argument("--out", default=CURATED)
+    ap.add_argument("--ledger-out", default=LEDGER)
+    # Iteration caps are a COST setting, not part of the pre-registered
+    # compliant scale (which is T=1e5 / genuine hookstep / ~100 attempts /
+    # N=24). They are fixed from the measured per-epoch wall time BEFORE the
+    # attempts are run, never adjusted after seeing an outcome; whatever is
+    # used is banked in resourcing{} and reported against Chandler & Kerswell's
+    # nominal 75/500.
+    ap.add_argument("--max-newton", type=int, default=MAX_NEWTON)
+    ap.add_argument("--max-gmres", type=int, default=MAX_GMRES)
     args = ap.parse_args()
+    MAX_NEWTON, MAX_GMRES = args.max_newton, args.max_gmres
 
     solver = Kolmogorov2D(N=N_GRID, Re=RE, n_forcing=N_FORCING, dt=DT)
     jobs, dropped_m, sign_tally, lib, dns_meta = build_jobs(args, solver)
@@ -222,6 +265,17 @@ def main():
     with mp.Pool(args.workers) as p:
         results = p.map(run_attempt, jobs)
     wall = time.time() - t0
+
+    ledgers = [{"attempt": r["attempt"], "anchor": r["anchor"],
+                "ledger": r.pop("_ledger")} for r in results]
+    saved = {}
+    for r in results:
+        w = r.pop("_w0")
+        if r["recovered_named_orbit"]:
+            saved[f"attempt{r['attempt']:03d}_{r['anchor']}"] = w
+    if saved:
+        np.savez_compressed(ORBITS, **saved)
+        print(f"saved {len(saved)} recovered orbit states to {ORBITS}")
 
     recovered = [r for r in results if r["recovered_named_orbit"]]
     converged = [r for r in results if r["success"]]
@@ -293,6 +347,11 @@ def main():
     )
     with open(args.out, "w") as f:
         json.dump(record, f, indent=2)
+    with open(args.ledger_out, "w") as f:
+        json.dump(dict(unit="U3", programme="PROG-R4",
+                       note=("per-Newton-iteration ledger for every attempt "
+                             "in " + os.path.basename(args.out)),
+                       attempts=ledgers), f, indent=2)
 
     print(f"G1 = {record['gate']['answer']}: {len(recovered)} recovered, "
           f"{len(converged)} converged to tol, {len(results)} attempts, "
@@ -300,7 +359,7 @@ def main():
     print(f"best final |R| = {finals[0]:.6e}, median = "
           f"{np.median(finals):.6e}")
     print(f"reasons: {record['magnitudes']['reasons']}")
-    print(f"wrote {args.out}")
+    print(f"wrote {args.out} and {args.ledger_out}")
 
 
 if __name__ == "__main__":
