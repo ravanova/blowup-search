@@ -42,7 +42,7 @@ what a wall-breaking mandate does and does not license.
 | **T — TORUS** | W2, W4, W6 | **Priority 1, the breakthrough candidate.** POCP's only named obstruction is *domain shape*; `T³` is that domain; `arXiv:1902.00384` already certifies a viscous 3D-NS periodic orbit there; leg 390 flagged the credit **unclaimed**. Needs a **non-DSS** ansatz and a rigidity screen rebuilt from zero. |
 | **V — VISCOUS RUNG** | W3 | Fill the Grade-A × fluid cell in the lowest dimension admitting fluid structure. Empty **"for want of a target, not a method"**. Both branches valuable — that is what makes it cheap. |
 | **L — LOCALISATION** | W4 on `ℝ³` | §4's "no known method" is the one load-bearing roadmap claim never checked to this repo's own standard. Price it; it may also break. |
-| **R — REFORMULATION** | W7 | Runs continuously, inside every other unit's pre-registration: *what makes this answerable an order of magnitude cheaper?* Bought the compliant scale twice already. |
+| **R — REFORMULATION + SOLVER COMPETITIVENESS** | W7 | **Promoted 2026-08-13: raise the recovery rate until this machinery is best-in-field.** Runs continuously inside every unit's pre-registration (*what makes this answerable an order of magnitude cheaper?*) **and** as its own units R0–R5. Every factor removed is permanent and transfers to Lane T unchanged. |
 
 ## In flight
 
@@ -55,7 +55,7 @@ what a wall-breaking mandate does and does not license.
 Re-ranking requires its own commit stating why (`ORCHESTRATION.md` §3f/§3g). In CONDUCTOR mode
 these are drawn into waves of 2–4 from **different lanes**, so one stalled lane cannot sink a wave.
 
-**Wave 1 — dispatch these three together. Two are cheap and can kill or unblock a lane.**
+**Wave 1 — dispatch these four together. Two are cheap and can kill or unblock a lane.**
 
 1. **`T1` — the ban-scope reading. ESCALATION, NOT A LEG'S CALL.** *Lane T, blocking the whole
    lane.* Does the ℓ¹-Fourier/radii-polynomial ban reach a Zgliczyński-style **Galerkin-plus-tail
@@ -86,18 +86,47 @@ these are drawn into waves of 2–4 from **different lanes**, so one stalled lan
    epochs, the other 86 ran to the cap and were flat there — so more iterations is the *lowest*-
    yield spend. Options (b) and (c) stay unqueued. Tier-2 ceiling in every gate.
 
+   **PRE-COMMITTED READING, fixed 2026-08-13 while U5 was mid-run and BEFORE its numbers were
+   seen.** Two things follow from U3's own measurements and must not be discovered afterwards:
+   (a) **A LOWER per-attempt convergence rate is the PREDICTED COST of stratification, not a
+   failure.** U3 measured median `R` at 0.32 for `|s|<0.15` against 0.83 in the published band, so
+   large-shift candidates are worse seeds *by the score's own metric* and U5 admits them on
+   purpose. A rate at or above U3's 14% would suggest the stratification did not bind. (b) **What
+   decides U5 is where the converged orbits sit in `|s|`, not how many there are.** U3's fourteen
+   ran 0.073–0.317, twelve below 0.14; the published rows live at 0.295–0.707. **If the rate falls
+   AND the converged orbits still cluster at small `|s|` despite a stratified pool, the bias is not
+   (only) in the seed supply — it is in the BASIN STRUCTURE, i.e. large-shift orbits have
+   intrinsically smaller Newton basins.** That is a genuine finding rather than a null, it explains
+   U3 without the selection-bias account carrying all the weight, it points at `R3`/`R5` rather
+   than at more seeds, and it makes U4/G2 (the basin radius) the interesting unit rather than a
+   formality. Record whichever of these fires; do not construct a third reading after the fact.
+
+4. **`R0` + `R1` — the metric, then early abort on flatness.** *Lane R, competitiveness, and R1 is
+   the cheapest measured win in the repository.* **R0 first and it is not optional:** per-attempt
+   convergence rate is inflatable by feeding easier seeds and counts re-finds as successes, so the
+   reported metric is **distinct orbits per core-hour**, baselined at U3's **0.0595** (8 distinct /
+   134.45 core-hours) — *after* reconciling U3 §4's table, which accounts for 10 convergences over
+   3 solutions and cannot then yield 5 more distinct from 4 remaining. Then **R1**: U3 measured
+   convergence bimodal (all 14 finished ≤29 epochs; 86 ran flat to the 52-epoch cap, 53% moving
+   `‖R‖` <1% over their final 10 epochs). Kill flat attempts, recycle the budget into fresh seeds.
+   Plant a control that the criterion never kills an attempt U3's ledger shows would have
+   converged. No realization change, so no milestone re-run.
+
 **Wave 2 — plan after wave 1 lands and is audited. Expected shape:**
 
-4. **`V1` — Lane V's opening escalation + target selection.** The stage-V ban's lift condition
+5. **`R2` — deflation.** 10 of 14 convergences landed on three solutions; Newton keeps re-finding
+   what it has found. Deflated continuation (Farrell–Birkisson–Funke) removes located solutions
+   from the residual. Improves the R0 metric directly rather than by making attempts cheaper.
+6. **`V1` — Lane V's opening escalation + target selection.** The stage-V ban's lift condition
    (*"unless the question is re-posed for a FLUID transport model, which needs L1 first"*) is
    **unliftable as written** — L1 has three dead attempts and no fourth candidate. Escalate the
    wording (bundle with T1's), and *in parallel* do the part that needs no ruling: **name the
    target.** Leg 174 says the cell is empty for want of one.
-5. **`T4` — reproduce `arXiv:1902.00384` row for row**, the way leg 316 reproduced Dahne–Figueras.
+7. **`T4` — reproduce `arXiv:1902.00384` row for row**, the way leg 316 reproduced Dahne–Figueras.
    Until reproduced here it is a citation, not a capability. Fires only if T1 rules Lane T open.
-6. **The verifier for wave 1.** §3g: dispatched in the *following* wave so it cannot be briefed by
+8. **The verifier for wave 1.** §3g: dispatched in the *following* wave so it cannot be briefed by
    the construction it checks. Targets whichever wave-1 unit made a claim.
-7. **Discharge `PROG-R4` U3's two owed novelty questions.** *Literature, owed work on the run's own
+9. **Discharge `PROG-R4` U3's two owed novelty questions.** *Literature, owed work on the run's own
    output — NOT screening.* (i) Are the eight recovered RPOs known at all? None is a named Table IV
    row — **that verdict does not change here**; the unasked question is whether they are in the
    literature. (ii) Is the selection-bias caveat in `BLOG_P2_PROGR4_MINING_BAND.md` already

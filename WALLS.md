@@ -275,13 +275,84 @@ self-similar profile to finite energy and states, per attempt, the named hypothe
 DSS converts an assumption into a measurement. It may also find the method — the claim has never
 been tested.
 
-## LANE R — REFORMULATION FOR SCALE. *Priority 4, and it runs continuously.*
+## LANE R — REFORMULATION FOR SCALE, AND SOLVER COMPETITIVENESS. *Runs continuously; R1–R2 are wave-1 priority.*
 
-**Attacks W7 by mathematics rather than hardware.** Every unit in every lane asks, as a standing
-question in its pre-registration: *what would make this question answerable an order of magnitude
-cheaper?* `PROG-R4` U5's shift stratification is exactly this move — it buys the compliant scale by
-fixing a selection bias rather than by buying compute, and it is the second time (after AMENDMENT
-4's period stratification) that the same reformulation paid.
+**Attacks W7 by mathematics and engineering rather than hardware.** Every unit in every lane asks,
+as a standing question in its pre-registration: *what would make this question answerable an order
+of magnitude cheaper?* `PROG-R4` U5's shift stratification is exactly this move — it buys compliant
+scale by fixing a selection bias rather than by buying compute, and it is the second time (after
+AMENDMENT 4's period stratification) that the same reformulation paid.
+
+**Promoted 2026-08-13 by user ruling: raise the recovery rate until this repository's orbit-finding
+machinery is the best in the field, not merely adequate.** This is not vanity. W7 says an
+under-resourced programme returns `UNDER-RESOURCED` forever; every factor taken out of the cost of
+an answer is permanent, transfers to Lane T's torus search unchanged, and is the difference between
+a programme that can pose the compliant question and one that cannot.
+
+### R0 — the metric, pre-committed BEFORE any optimisation
+
+**Per-attempt convergence rate is the wrong headline and must not be the reported one.** It is
+trivially inflated by feeding the solver easier seeds — which is precisely what U5 deliberately
+stops doing — and it counts a re-find of a known orbit as a success. **U3's own numbers show the
+problem: 14 convergences, but 10 of them landed on just three solutions.**
+
+**The reported metric is `DISTINCT ORBITS PER CORE-HOUR`,** with per-attempt rate retained as a
+secondary diagnostic and always alongside it.
+
+**The baseline to beat, banked now so it cannot be re-chosen later:** U3 delivered **8 distinct
+orbits / 134.45 core-hours = 0.0595 distinct orbits per core-hour**, at a 14% per-attempt rate
+against Chandler–Kerswell's 4.3% and Lucas–Kerswell's ~10%. *(Reconcile first: U3 §4's table
+accounts for 10 convergences over 3 replicated solutions, and 4 remaining convergences cannot yield
+5 further distinct solutions. Either the table omits a replicated row or the count is 7. Fix the
+number before using it as a baseline — a baseline nobody checked is how a later "improvement"
+becomes unfalsifiable.)*
+
+### R1 — early abort on flatness. *Cheapest competitive win in the repository, and it is measured.*
+
+U3 measured convergence as **bimodal**: all 14 convergences finished in **≤29 epochs** (median 16),
+while the 86 non-convergences ran to the 52-epoch cap and were **flat there** — 53% reduced `‖R‖`
+by <1% over their final 10 epochs, 83% by <10%, only 3% still halving. **Those epochs are pure
+waste and they are the majority of the run.** A flatness criterion that kills an attempt and
+recycles its budget into a fresh seed converts wasted compute directly into extra attempts, with no
+change to the per-attempt rate and no change to the realization. Estimate the recoverable fraction
+from U3's banked ledger *before* building it, and plant a control that the criterion never kills an
+attempt that U3's ledger shows would have converged.
+
+### R2 — deflation. *Attacks the largest measured waste after R1.*
+
+10 of 14 convergences landed on three solutions. Newton keeps finding what it has already found.
+**Deflated continuation (Farrell–Birkisson–Funke) removes located solutions from the residual so
+the same Newton cannot reconverge to them**, which converts re-finds into new orbits and improves
+the R0 metric directly rather than by making attempts cheaper. It is a well-established technique,
+this repository does not have it, and it is exactly matched to the measured failure.
+
+### R3 — multiple shooting. *Standard in this field and absent here.*
+
+Route-DSSP brick **B6's own spec already names it** — *"the seeded Newton–Krylov / multiple-shooting
+layer"* — and U1 built the hookstep/trust-region globalisation without it. Splitting the period into
+segments is the standard conditioning fix for long orbits in the Kerswell line, and long orbits are
+where the published targets live. A build unit with its own milestone.
+
+### R4 — a second-order-in-time stepper. *Realization change; needs its own milestone.*
+
+Lesson 91 forced U3 to disclose that its stepper is **Lie–Trotter, globally first order** (measured:
+local ratio 4.00, global ratio 2.00), so its periodic orbits are `O(dt)` perturbations of the true
+flow's. The published rates being competed against come from higher-order codes. Strang splitting or
+an IMEX-RK scheme moves the discrete orbits closer to the true ones — which raises the chance a
+named orbit *is* a solution of the discrete map at achievable tolerance. **This invalidates M1's
+reproduction and must re-run it**, which is why it is a milestone and not a tuning.
+
+### R5 — carry the `m` unknown in the residual. *U3's option (c). Realization change.*
+
+U3's extended residual carries a continuous `x`-shift only, so **345 in-window candidates could not
+be expressed as seeds at all**. All eight named rows have `m_published = 0`, so nothing named is
+lost — but the seed pool is roughly tripled, and every negative this repository states about orbit
+recovery currently has to carry the clause *"with a residual that cannot represent one of the two
+shift classes."* Removing that clause is worth more than the seeds.
+
+**A ban that binds this lane: leg 349's GA gate answered NO (0 of 6 properties cleared), so
+`GA compute on an unvalidated fitness` is live.** A *learned* or *evolved* seed-scoring function is
+banned territory. R1–R5 are all deterministic and none of them touch it — keep it that way.
 
 ---
 
