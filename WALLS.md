@@ -175,7 +175,7 @@ bounds at all.
 ## W7 — Compute
 
 **Statement.** `ORCHESTRATION.md` §3d says a stop fires only on a null from an attempt resourced at
-the scale the question is posed at. `PROG-R4` U3 spent **134.45 core-hours**; the source papers use
+the scale the question is posed at. `PROG-R4` U3 spent **134.45 core-hours of attempt CPU** (convention label added 2026-08-13 by R0; the same run reserved **144.69** worker-hours of pool, 92.92% utilised — both are real measurements of different quantities, see §R0); the source papers use
 **~10.2 GPU-days** for the *2D* problem, and `PROG-R4`'s own pre-registration records that the
 literature-scale escalation "is GPU-dependent in the source papers' own hands and this repository
 does not currently have that compute."
@@ -330,7 +330,10 @@ a programme that can pose the compliant question and one that cannot.
 **Per-attempt convergence rate is the wrong headline and must not be the reported one.** It is
 trivially inflated by feeding the solver easier seeds — which is precisely what U5 deliberately
 stops doing — and it counts a re-find of a known orbit as a success. **U3's own numbers show the
-problem: 14 convergences, but 10 of them landed on just three solutions.**
+problem: 14 convergences, but NINE of them landed on just three solutions** (cluster sizes 4+3+2,
+leaving 5 singletons; 3+5 = 8 and the arithmetic closes). **Corrected from "10" 2026-08-13 by R0**,
+measured under `p2_prog_r4_m3_evidence.py` §5's own rule and re-derived independently by the
+Conductor before landing. R2's conclusion is unaffected — 9 of 14 is still the majority.
 
 **The reported metric is `DISTINCT ORBITS PER CORE-HOUR`,** with per-attempt rate retained as a
 secondary diagnostic and always alongside it.
@@ -339,8 +342,21 @@ secondary diagnostic and always alongside it.
 U5 (2026-08-13) already found **two defects in the baseline as first written here**, which is
 exactly why R0 exists:
 
-- **Core-hours.** This file first quoted **134.45** for U3. `p2_prog_r4_g1_v1.json` gives
-  52,087.95 s × 10 workers = **144.69**. Reconcile against the JSON, not against prose.
+- **Core-hours — RESOLVED 2026-08-13 by R0, and this file's framing was the thing that was wrong.**
+  Both numbers are correct measurements of **different quantities**, and *neither came from prose*:
+  **144.69** = `magnitudes.wall_seconds` × `workers` / 3600 (pool reservation) and **134.45** =
+  `Σ attempts[].wall_seconds / 3600` (attempt CPU) — the latter straight from the same JSON, and
+  already the figure U3's own `writeup/INDEX.md` row reports. The gap is U3's **92.92%** pool
+  utilisation against U5's **98.20%**. This file's original instruction, *"reconcile against the
+  JSON, not against prose"*, **mislabelled a real second measurement as a defect**; what these
+  figures needed was a **convention label**, not a replacement. Standing convention: **pool
+  reservation (`wall × workers`)**, stated as such wherever quoted. §W7's "U3 spent 134.45
+  core-hours" is correct under the attempt-CPU convention and is labelled there rather than changed.
+- **The denominator is WORKER-hours, not machine-core-hours** (U3 reserved 10, U5 reserved 8). The
+  physical core count is in **no numeric field** of either JSON — it exists only inside the prose
+  string `resourcing.workers_note`, which §3e forbids using as a number, and **R0 did not estimate
+  it**. A future unit must bank `magnitudes.physical_cores` and per-attempt `time.process_time` to
+  make a true core-hour figure derivable. Until then the honest axis label is **worker-hours**.
 - **The distinct count.** This file first argued U3's 8 was unreconcilable with its §4 table
   (10 convergences over 3 replicated solutions, then 4 remaining cannot yield 5 more). **U5
   measured it instead of arguing it:** clustering U3's 14 convergences at the matching predicate's
@@ -349,19 +365,57 @@ exactly why R0 exists:
   rows. **R0 reconciles against that script, not against this paragraph** — and the lesson is the
   one this repository already knows: a count derived from prose is not a measurement.
 
-**Current standing, provisional until R0 lands** (U5 §9.2, attempts stage, like for like):
+**LANDED 2026-08-13 by R0. The count did NOT resolve down — U3 = 8, U5 = 5, confirmed** under the
+arbiter's exact rule (greedy leader clustering on `(T_converged, wrap_abs(s))`, `TOL = 0.05`),
+re-derived independently by the Conductor. Robust: greedy = single = complete linkage, invariant
+over 20,000 orderings, stable for `TOL` 0.05–0.10.
 
-| | distinct | core-hours | **distinct / core-hour** |
+| | distinct | worker-hours | **distinct / worker-hour** |
 |---|---|---|---|
-| U3 | 8 (7 if the count resolves down) | 144.69 | 0.0553 (0.0484) |
+| U3 | 8 | 144.69 | 0.0553 |
 | **U5** | **5** | **57.04** | **0.0877** |
 
-**U5 is above U3 on every variant** — Lane R's first measured improvement, and it came from a
-seed-supply change, not from the solver. Including U5's mining and control stages (68.91
-core-hours) it is 0.0726, still above. Per-attempt rate over the same period went **down**, 14% →
-9%, which is precisely why it is not the headline.
+**THE INFERENCE FROM THIS TABLE IS RETRACTED. This file previously read "U5 is above U3 on every
+variant — Lane R's first measured improvement." That claim is WITHDRAWN.** The per-run arithmetic
+(1.27×–1.59×) is confirmed and is not in dispute; **the inference from it is not supportable**,
+because the metric counts **cross-run** re-finds as successes — the exact defect it was introduced
+to remove, one level up. Measured by R0:
 
-### R1 — early abort on flatness. *Cheapest competitive win in the repository, and it is measured.*
+- **57 of U5's 100 seeds were already spent by U3** (matched on `(T_seed, s_seed, R_seed)`).
+- **5 of U5's 9 convergences are bit-identical re-executions** of U3 attempts.
+- **4 of U5's 5 distinct solutions are re-finds of U3's. U5's contribution NEW TO THE PROGRAMME IS ONE ORBIT.**
+- On U5-only seeds the distinct count is **4, not 5**.
+
+**Cumulative reading: U5 = 1 / 57.04 = 0.0175 against U3's 0.0553 — 3.15× WORSE.** Report **both**
+rows from here on. **The standing cross-unit metric is `ORBITS NEW TO THE PROGRAMME PER
+WORKER-HOUR`**; the per-run figure is retained as a within-unit diagnostic only.
+
+**This does not by itself retract `MILESTONE M3 = DELIVERED`** — M3's gate was about the seed budget
+being stratified by shift, which it was. But **57% seed overlap means U5's 9/100 against U3's 14/100
+is partly a re-run rather than an independent comparison, and that bears on how M3 is read.** The
+Conductor planned this wave and therefore **may not adjudicate it (§3f rule 1); the wave-2 verifier
+is instructed to.**
+
+**Instrument limit, recorded rather than glossed:** U3's converged states are **banked nowhere** —
+only U5's are. The headline numerator 8 can therefore only ever be tested in the `(T, |s|)` pair,
+and the pair that decides it sits at **1.288 × TOL**. U5's own `.npz` banks one snapshot per attempt
+at an **unspecified orbital phase**, so it cannot validate the rule either (measured: a same-cluster
+distance of 0.1992 exceeds a cross-cluster 0.0888). Settling it needs U3's 14 states plus a
+phase-aligned distance — i.e. new compute — and **is not proposed here**.
+
+### R1 — early abort on flatness. **CLOSED 2026-08-13 — the win was already collected, and R1 closes against itself.**
+
+**This heading previously read *"Cheapest competitive win in the repository, and it is measured."*
+That is withdrawn.** R1's own numbers below are **CONFIRMED exactly** — but the win they describe
+**U5 had already collected**: `resourcing.stall_exit` in `p2_prog_r4_m3_v1.json` **is** this
+criterion, deployed. Measured remaining headroom, over 12,597 deterministic rules (9,760
+admissible), for the best rule that does not degrade the deployed safety margin: **+0.45 percentage
+points = +0.48 worker-hours.** The 65%-recovery rules sit at a 1.09× margin and are rejected, and
+**hold-out shows a rule selected on U5's 9 convergences KILLS one of U3's 14.** Deployed rule: 55.00%
+of U3's 4,629 epochs (→ 2,083) = 74.87 of its 134.45 attempt-CPU hours, **zero false kills over 23
+banked convergences, 6.90× safety margin. Spend no further compute on this family.** (Criterion is
+three fixed constants and a residual comparison — deterministic, never touches seed selection, so
+leg 349's ban is respected.)
 
 U3 measured convergence as **bimodal**: all 14 convergences finished in **≤29 epochs** (median 16),
 while the 86 non-convergences ran to the 52-epoch cap and were **flat there** — 53% reduced `‖R‖`
@@ -374,7 +428,7 @@ attempt that U3's ledger shows would have converged.
 
 ### R2 — deflation. *Attacks the largest measured waste after R1.*
 
-10 of U3's 14 convergences landed on three solutions. **U5 made this worse and made it
+**NINE** of U3's 14 convergences landed on three solutions (corrected from "10" 2026-08-13 by R0; still the majority, so R2's conclusion is unaffected). **U5 made this worse and made it
 cross-unit: 4 of U5's 5 distinct solutions were already in U3's set, so a second 100-attempt
 budget at 57 core-hours bought exactly ONE solution the first run had not reached.** Newton keeps
 finding what it has already found, across runs, from an entirely different seed pool.
