@@ -77,7 +77,7 @@ naming requirement. Lane V is therefore **deferred by the user's Lane T priority
 | What | State |
 |---|---|
 | **WAVE 1** (`T1`, `T2`, `R0+R1`, `E`) | **PLANNED AND COMMITTED 2026-08-13, before dispatch**, per §3g step 1. Gates in final wording and pre-committed readings are below. Composition floor met by **two** Lane T units, not one. **No verifier in this wave** — §3g forbids the Conductor verifying a wave it planned; wave 2 carries it. |
-| **`T1` / leg 391** (Lane T) | **LANDED 2026-08-13** (`829c8db`), **GATE = `yes`**. The ban-wording escalation packet is at `writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md` and is **OPEN ON THE USER'S DESK**. Four items: (a) Cadiot, (b) stage V's *"needs L1 first"*, (c) **the apparatus question — which blocks the whole of Lane T**, (d) the outreach hold, raised rather than routed around. Pre-committed reading honoured exactly: (a)'s scoping precedent recorded as **available in shape and NOT exercised**; under C2 Lane T is blocked on a **lift, not a scope — a materially worse position**, reported unsoftened; the **fourth-space/basis vs fourth-*apparatus*** mismatch surfaced as a defect and **left unresolved**. **`BUILD NOTHING IN LANE T` until the user rules.** No `L1→L4` link moved. |
+| **`T1` / leg 391** (Lane T) | **LANDED 2026-08-13** (`829c8db`), **GATE = `yes`**. The ban-wording escalation packet is at `writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md` and is **OPEN ON THE USER'S DESK**. Four items: (a) Cadiot, (b) stage V's *"needs L1 first"*, (c) **the apparatus question — which blocks the whole of Lane T**, (d) the outreach hold, raised rather than routed around. Pre-committed reading honoured exactly: (a)'s scoping precedent recorded as **available in shape and NOT exercised**; under C2 Lane T is blocked on a **lift, not a scope — a materially worse position**, reported unsoftened; the **fourth-space/basis vs fourth-*apparatus*** mismatch surfaced as a defect and **left unresolved**. *(The row's `BUILD NOTHING IN LANE T` hold is **RESCINDED 2026-08-13** — the user ruled C1 and Lane T is unblocked by SCOPE. See "Open" item 2.)* No `L1→L4` link moved. |
 | **`R0`+`R1`** (Lane R) | **LANDED 2026-08-13** (`ba512e0`), **BOTH GATES = `yes`** — and the headline claim is **RETRACTED**. Core-hours and distinct count re-derived from the banked artefacts and **independently re-derived again by the Conductor before landing**: U3 **8 / 144.69 = 0.0553**, U5 **5 / 57.04 = 0.0877**, both AGREE with `WALLS.md`. **But `WALLS.md`'s framing was itself wrong on core-hours**: 134.45 was never prose — it is `Σ attempts[].wall_seconds/3600` (attempt CPU) from the same JSON, against 144.69 (pool reservation); both are real, the gap is 92.92% utilisation, and what they needed was a **convention label**, not a replacement. **`Lane R's first measured win` is WITHDRAWN as an inference.** The per-run arithmetic (1.27×–1.59×) stands; the inference does not, because the metric counts **cross-run** re-finds as successes — the defect it was introduced to remove, one level up. Measured: **57 of U5's 100 seeds were already spent by U3**, **5 of 9 convergences are bit-identical re-executions**, **4 of 5 distinct solutions are re-finds**, and **U5's contribution new to the programme is ONE orbit** → cumulative **0.0175 vs U3's 0.0553, 3.15× WORSE**. **`R1` = CLOSED, against itself**: the "cheapest competitive win in the repository" was **already collected** — U5's deployed `resourcing.stall_exit` *is* the criterion — and the remaining headroom is **+0.45 pp**, with hold-out showing a rule tuned on U5's 9 convergences **kills one of U3's 14**. Spend no more compute on the family. Denominator is **worker-hours**; physical cores are in no numeric field and were **not estimated**. Deterministic throughout (leg 349's ban respected). Evidence 68/68. **UNVERIFIED** under §3f — wave 2 carries it. |
 | **`T2` / leg 392** (Lane T) | **LANDED 2026-08-13** (`b5f8bac`), **GATE = no theorem located → returned `UNDER-RESOURCED`, NOT `no`** (§3d). **Branch (b) fired**: torus/periodic *global-regularity* theorems do exist under scaling-invariant smallness / LPS hypotheses (`1909.09125`, `math/9811161`, `0710.1604`) — real in shape, thin in substance, since every clause is somewhere a blow-up ansatz would already be. **A CONTROLLED ZERO IS NOT A CLEARANCE**, and this one is not even fully controlled: NRS 1996 / Tsai 1998 are **pre-arXiv** and were declared unreachable in advance, Semantic Scholar was **throttled on 5 of 6** substantive queries, and one battery **failed its own domain control** (`1304.7414` not re-found). arXiv itself was clean — **32/32 MEASURED**, served namespace banked as **1.1** on every query, **zero** non-MEASURED records carrying a total, negative control 0 in both instruments. Evidence 41/41. **Compliant search costed at ≈1.2–1.7 h plus one user ruling.** **THE ADVERSE FINDING, now in `WALLS.md`:** "0 of 4 clearances carry to `T³`" does **not** mean the `ℝ³` *exclusions* stop applying — **they still reach a `T³` object built by periodic extension of an `ℝ³` self-similar core.** Leg 309 read `2604.09949` at full text and hit **GATE NO at H11** on exactly that ground. **The one previous attempt at Lane T's target, by anyone, died this way.** **De novo item named:** a **Type-I rigidity theorem on `T³`** — a *rate* condition needs no dilation symmetry, so it carries to the torus intact as a question. **UNVERIFIED** under §3f. |
 | **`plan_of_record.py` posture** | **LANDED 2026-08-13** (`1ca9e91`), the Conductor's first act under §3g. Additive only — 75 insertions, 0 deletions: `POSTURE`, `MODE`, `BLOCKERS_FILE` → `WALLS.md`, `LANES` (T/V/L/R with the walls each attacks), `POSTURE_LIMITS` (§3h restated executably). **No ban lifted, narrowed, reworded or re-read**; the `BANNED` table is byte-identical and `test_plan_of_record.py` still reports 26 bans / 19 in force, ALL GATES PASS. |
@@ -441,11 +441,37 @@ discharge 382's owed novelty obligation after arXiv/Semantic Scholar returned HT
    per-stratum Wilson interval overlaps its U3 counterpart; the in-band rise 3.2%→8.3% is **not**
    significant and is reported as a magnitude only.
 
-2. **Three ban-wording escalations — PACKET DELIVERED 2026-08-13, AWAITING THE USER'S RULING.**
+2. **Three ban-wording escalations — RULED 2026-08-13, DISCHARGED, AND TRANSCRIBED.**
+   The user's ruling is at **`writeup/escalations/RULING_BAN_WORDING_2026-08-13.md`** (`e2f618d`).
+   **(c) RULED C1 — the ℓ¹-Fourier/radii-polynomial ban names an APPARATUS, so a Zgliczyński-style
+   Galerkin-plus-tail DYNAMICAL closure is outside its object. LANE T IS UNBLOCKED BY SCOPE, NOT BY
+   A LIFT: `T3` and `T4` are OPEN and *"BUILD NOTHING IN LANE T"* is RESCINDED.** No measurement is
+   superseded — the three dead realizations stay dead, Theorem NGX stays true, leg 341 stays true.
+   **The naming requirement binds every unit:** any unit claiming this scope must, in its own
+   pre-registration, both **name its apparatus** (with a citation) and **show it does not construct
+   a single bounded approximate inverse uniform in `M`**. Absent both, the ban applies in full; a
+   unit reaching for a `Y₀/Z₀/Z₁/Z₂` contraction in **any** space is inside it whatever it calls
+   itself. **(a) RULED A2 — the Cadiot ban STANDS**, its lift clause is **CLOSED**, not open.
+   **(b) RULED B1 — *"which needs L1 first"* is STRUCK** as an editorial correction. **(b) and (c)
+   together open Lane V**, which is therefore **DEFERRED BY PRIORITY, NOT BLOCKED** (`OPTIONS.md`
+   §C). **(d) the outreach hold is NARROWED: reading any published document is authorised;
+   contacting an author, group, maintainer or list is still held.**
+   Transcribed one commit per item — (c) `42b2c45`, (a) `cc0f036`, (b) `1f2d00c`, (d) `8654fca` —
+   with `test_plan_of_record.py` ALL GATES PASS after each. **No ban lifted, ban counts unchanged.**
+   **Two units are now obligations, not options** (`OPTIONS.md` §E): **`T5`**, the C1 sweep of the
+   landed record for refusals that cited this ban and were apparatus-based, which is the price of
+   narrowing a ban; and **`T6`**, discharging leg 348's own ceiling — it read its seven papers at
+   **abstract level only** and flagged that full text could strengthen **or undercut** the
+   classification the whole lane rests on. Full text is now readable.
+   **One known live defect, not repaired:** the lift clause still names a *"FOURTH space/basis"*,
+   the wrong kind of object for an apparatus candidate. Moot for Lane T; recorded, not ruled.
+
+   *What the packet itself did, retained because the audit is on it:* **PACKET DELIVERED
+   2026-08-13.**
    `T1`/leg 391 landed it at **`writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md`**, gate
    `yes`, audited by the Conductor against the wording pre-committed at `a384d92`. It states **both**
    supportable readings for each question and **rules none**; a ruling-language sweep found only its
-   own disclaimers. **`BUILD NOTHING IN LANE T` — `T3` and `T4` included — until the user rules (c).**
+   own disclaimers. *(Its `BUILD NOTHING IN LANE T` hold is **RESCINDED** by C1 above.)*
    All 19 bans stand in force, unchanged.
    What the packet *measured* rather than argued, on (b): `git log -S "which needs L1 first" --
    plan_of_record.py` returns **exactly one commit**, `561bb68` (2026-08-05). The 2026-08-06 ban
@@ -474,10 +500,13 @@ discharge 382's owed novelty obligation after arXiv/Semantic Scholar returned HT
    pivot exists to relieve. And
    **no discrete spectral anchors** on `ℝ³` (leg 376, both channels continuous) — the second of
    which is exactly what `T³` supplies and `ℝ³` does not.
-4. **Statement (D)'s data conditions (8) and (9) require OUTREACH to read verbatim** (leg 390 §4).
-   Until read, `CLAY_OBLIGATIONS.md`'s "(D) carries no decay condition" is narrowed to (D)'s
-   **solution** conditions. **No external outreach is authorised** — this is a standing user hold,
-   and it now sits on Lane T's critical path.
+4. **Statement (D)'s data conditions (8) and (9) are UNREAD — but they are now READABLE** (leg
+   390 §4; outreach narrowing, 2026-08-13). Fefferman's official problem description may be
+   fetched and (8),(9) read verbatim. Until that runs, `CLAY_OBLIGATIONS.md`'s "(D) carries no
+   decay condition" stays narrowed to (D)'s **solution** conditions, and **leg 390 §5 item 1 owes
+   the re-run of `check_A` against them — the §4 disposition MAY CHANGE** if either condition
+   carries a data-side decay or regularity requirement. This is no longer blocked on a ruling; it
+   is an ordinary literature unit sitting on Lane T's critical path.
 5. **The DSS escalation packet** (legs 313/320, branches unmerged). Complete: both candidate
    theorems read at full text and neither reaches the screened object.
 
@@ -504,7 +533,8 @@ novelty pass before construction (**once per programme**, not per unit, under §
 **lesson 91**: a negative names its realization/trial-space/basis · **§3d**: a stop fires only
 on a null from an attempt resourced at the scale the question is posed at — an under-resourced
 null returns a cost and answers `UNDER-RESOURCED` · planted controls that can fire both ways ·
-`scripts/merge_gate.sh origin/main` must PASS · **no external outreach** · no output described
+`scripts/merge_gate.sh origin/main` must PASS · **reading published material is authorised;
+CONTACTING an author, group, maintainer or list is HELD** (narrowed 2026-08-13) · no output described
 as movement toward Clay unless a link actually moved · **§3h rule 2: scale is not evidence** —
 a large build is not a result, and the gate is the deliverable.
 
