@@ -461,6 +461,271 @@ never stratified that way.
 new build unit with its own cost, and choosing it here would be choosing my own next task. It
 goes to the successor as the top item, ahead of buying iterations.
 
+## 3g. AMENDMENT 5 — the seed budget is stratified by SHIFT. Written BEFORE unit U5 runs.
+
+This amendment pre-registers unit **U5**. Nothing below has been run: the U5 mining pass, the
+U5 attempts and the U5 controls are all downstream of this text, and it is committed before
+any of them execute. What HAS been run at the time of writing is stated explicitly in §3g.2
+(three read-only measurements off already-banked artefacts, with their numbers), because a
+pre-registration that hides its inputs is not one.
+
+### 3g.1 What U5 is, and the two things it is NOT
+
+U5 does for **shift** exactly what AMENDMENT 4 did for **period**: it stops ranking the seed
+budget by a scalar score that is confounded with the coordinate the targets are selected on,
+and stratifies it instead. §3f measured the confound (rank correlation between `|s|` and `R` =
+0.50; admission by `R < 0.25` falling monotonically 44% → 20% → 11% → 3% across the `|s|`
+bands) and named this the top successor item.
+
+**U5 is a §3c BUILD unit.** It reports against a MILESTONE, not a gate.
+
+**U5 does NOT re-answer G1.** G1 stays `UNDER-RESOURCED` as banked in
+`writeup/data/p2_prog_r4_g1_v1.json`, and U5 does not write to that file. If a U5 attempt
+recovers a named Table IV row, that is a milestone result and a **candidate G1 re-open** to be
+raised to the user — U5 does not re-open the gate on its own authority and does not rewrite
+the banked answer.
+
+**U5 does NOT take U3 §8's options (b), (c) or (d).** These are not queued and U5 must not
+slide into any of them:
+
+- **(b) relax or replace the `R < 0.25` admission test** — NOT taken. `R_THRES_WINDOW` stays at
+  Lucas & Kerswell's sourced 0.25, and every U5 seed passes exactly the test every U3 seed
+  passed.
+- **(c) extend the residual to carry an `m` unknown** — NOT taken. It would change the
+  realization and invalidate M1's reproduction. The `m = 0` requirement stands and U5's
+  realization is bit-for-bit U3's.
+- **(d) buy iterations** — NOT taken. `max_newton`, `max_gmres`, `gmres_rtol` and `tol` are
+  **identical to U3's** (52, 140, 1e-3, 1e-8). U5 spends *fewer* epochs than U3, not more
+  (§3g.5), and it spends them on a different seed pool. That is the whole intervention.
+
+So the single manipulated variable is **which seeds are offered**, and every downstream test —
+window, `m = 0`, anchoring, `tol`, the matching predicate — is held fixed at U3's values.
+
+### 3g.2 The baseline this amendment must confront, re-derived from banked JSON
+
+Three measurements were run before writing this, all read-only, all off already-banked
+artefacts, and all re-derived from `writeup/data/p2_prog_r4_g1_v1.json` and
+`experiments/programme_r4/u2_recurrence_library.json` rather than from U3's prose. They are
+recorded here because two of them **cut against** the hypothesis U5 is built on, and a
+pre-registration that reports only the supporting measurement is worthless.
+
+**(i) U3's budget was already 31% in-band, and that is not what U3's prose says.** U3 §5 reads
+as though the shift bias starved the *attempt* budget. It did not. Of U3's 100 attempts,
+**31 carried a seed with `|s|` inside the published band `[0.295, 0.707]`** — and their yield
+was:
+
+| seed stratum | attempts | converged to `tol` | rate | median seed `R` |
+|---|---|---|---|---|
+| `\|s\|` **in** published band | 31 | **1** | **3.2%** | 0.1897 |
+| `\|s\|` **outside** published band | 69 | **13** | **18.8%** | 0.1838 |
+
+Seed quality is matched (median seed `R` 0.190 vs 0.184; all 100 seeds sat at `R ≤ 0.2237`), so
+this is not a residual-quality artefact. Sharper still: the 20 attempts whose seed `|s|` lay
+within 0.1 of *their own anchor's* published `|s|` returned **0** convergences. And of the 14
+convergences, **13 moved `|s|` toward zero or stayed there**; the one in-band seed that
+converged (`|s| = 0.425`) landed at `|s| = 0.100`.
+
+So the measured cause has two candidate mechanisms and U3's data does not separate them:
+
+- **H-supply** — the *library* is starved in-band (35 of the 133 anchored, `m = 0`, in-window
+  candidates), so the budget could never be pushed past ~31 in-band seeds and 31 is simply too
+  few. More in-band seeds → recovery.
+- **H-hard** — in-band seeds are genuinely harder for this realization to converge, at
+  3.2% against 18.8%, and stratifying multiplies attempts into a stratum with a **measured low
+  yield**.
+
+**U5 is the experiment that separates them**, and it is worth running under either. Under
+H-supply it is the cheapest route to a recovery. Under H-hard it converts a 31-attempt
+observation into a 60-attempt one and turns "the seeds were biased" into a measured statement
+about the *solver's* behaviour in the band — which is a different and more useful negative, and
+which is where U3's realization clauses (first order in time; blind to `m ≠ 0`) start to bite.
+**Both outcomes are named in the milestone below and neither is the one U5 is trying to get.**
+
+**(ii) The anchored reservoir is 64x larger than what U2 mined.** The prefilter scan (rebuilt
+read-only from `u2_dns_feat.f32`, 49 s, identical code path to U2's) yields **913,301** strict
+local minima in the `(t, T)` plane, of which **103,844 are anchored** — within
+`T_ANCHOR_TOL = 1.0` of a named Table IV period. U2 took 1,614 of them (AMENDMENT 4's
+`per_anchor = 500`). The in-band supply is therefore **not** reservoir-limited; it is limited by
+the depth of the take, which is exactly the AMENDMENT 4 situation one dimension over.
+
+**(iii) The in-band yield per taken cell does not fall with depth, over the depth U2 sampled.**
+Binned by `R_red` decile over U2's 1,649 anchored candidates, the fraction that is in-window,
+`m = 0` **and** in-band runs 0.61%, 4.85%, 1.21%, 1.21%, 3.03%, 4.85%, 1.82%, 1.82%, 0.00%,
+1.82% — noisy, no trend. This is the number the mining depth below is sized on, and it is an
+extrapolation off a range (`R_red ≤ 0.078`) far shallower than the take (`R_red < 0.25`).
+**If the realised in-band supply falls short of the quota, that is a supply finding and it is
+reported as one**, per the milestone's NOT-DELIVERED branch.
+
+### 3g.3 MILESTONE M3, in its own wording
+
+> **M3: THE SEED BUDGET IS STRATIFIED BY SHIFT — the anchored reservoir is exhausted, the
+> published `|s|` band is filled to a pre-committed quota, and the per-stratum yield is
+> measured against U3's banked baseline.**
+>
+> **DELIVERED** iff all five hold:
+>
+> 1. the mining pass takes **every** anchored strict local minimum not provably excluded by the
+>    Newton window (§3g.4), and reports the realised counts;
+> 2. the 100-attempt budget is allocated by the §3g.4 quota, with **at least 50** attempts
+>    seeded in the published band `|s| ∈ [0.295, 0.707]` against U3's 31;
+> 3. the run completes at U3's caps, `tol`, admission test, `m = 0` requirement, anchor rule and
+>    matching predicate, with **none of them changed** and no iterations bought;
+> 4. the per-stratum convergence yield is reported against U3's banked baseline, with the
+>    in-band rate stated as a magnitude either way;
+> 5. the planted controls fire as planted.
+>
+> **NOT DELIVERED** otherwise, and the reason is named as exactly one of:
+>
+> - **SUPPLY** — the whole anchored reservoir cannot fill the in-band quota to 50. A measured
+>   statement about the flow and the window, and it would make H-supply the operative
+>   explanation of U3's miss without any further run.
+> - **INSTRUMENT** — the controls did not fire as planted. Then nothing else in the unit is
+>   admissible, exactly as at G1.
+> - **BUDGET** — the run did not complete at the pre-registered scale. Then U5 reports a cost,
+>   per §3d, and answers nothing else.
+
+**M3 makes no claim about the named orbits and is not a gate.** `n_recovered` is reported as a
+count. `n_recovered > 0` would be a candidate G1 re-open raised to the user; `n_recovered = 0`
+re-answers nothing, and in particular is **not** a `no` at G1 — `no` is still not an available
+branch there.
+
+### 3g.4 The stratification rule, fixed before the mining pass runs
+
+**Mining (the supply side).** Shift is **not observable at the prefilter**: `R_red` is built
+from amplitude spectra and is shift-invariant by construction, which is precisely why AMENDMENT
+4 could stratify on period (observable in the `(t, T)` plane) and this amendment cannot
+stratify on shift at the same stage. So the mining does not stratify — it **exhausts**:
+
+> **MINING RULE.** Take every anchored strict local minimum of `R_red` in the `(t, T)` plane
+> with `R_red < R_THRES_WINDOW = 0.25`. Nothing is ranked and nothing is truncated, so there is
+> no `per_anchor` and no researcher degree of freedom left in the take.
+
+The `R_red < 0.25` cut is **lossless, not a tuning**: the prefilter's own recorded statement is
+`R_red ≤ R` pointwise, so a cell with `R_red ≥ 0.25` cannot have `R < 0.25` and is provably
+outside the Newton window already. Realised take: **75,873** candidates, 98,413 snapshots,
+3,980 of the trajectory's 3,997 checkpoint blocks. Every one faces the same full minimisation
+over the continuous `x`-shift and discrete `y`-shift, the same `R < 0.25` window test, the same
+`m = 0` requirement and the same anchor rule as every U2 and U3 candidate.
+
+**Budget (the allocation side).** `|s|` is measured by the full minimisation, so the
+stratification is applied at the only stage where the coordinate exists:
+
+> **QUOTA RULE.** The 100 attempts are allocated across four `|s|` strata, `|s|` being the
+> shift wrapped to `(-π, π]` and taken in absolute value, as everywhere else in this programme:
+>
+> | stratum | `\|s\|` | quota | what it is for |
+> |---|---|---|---|
+> | **P** — published | `[0.295, 0.707]` | **60** | the band all eight named rows live in |
+> | **L** — low | `[0.000, 0.150)` | **20** | replication arm: U3's convergences came from here |
+> | **M** — mid | `[0.150, 0.295)` | **10** | the gap between them |
+> | **H** — high | `(0.707, π]` | **10** | beyond-band arm |
+>
+> Within a stratum, candidates are ranked by `R` ascending — U3's own criterion, applied
+> *within* stratum instead of globally, which is the entire AMENDMENT 4 move. Stratum P is
+> filled per named row first: up to `ceil(60/8) = 8` per row, taking the in-band candidates
+> anchored to that row with the lowest `R`, so no single row can absorb the band's budget; any
+> residue is filled from the remaining in-band pool by lowest `R`.
+>
+> **DIVERSITY.** Within a stratum a candidate is skipped if an already-selected candidate has
+> `|Δ snapshot_earlier| ≤ 4` **and** `|ΔT| ≤ 0.5` — the deep take admits near-duplicate cells
+> that U2's shallow one could not, and 100 attempts on the same recurrence is not 100 attempts.
+> Skips are counted and reported.
+>
+> **SHORTFALL.** If a stratum cannot be filled, its shortfall is redistributed **P → L → M → H**
+> in that order, and the realised per-stratum counts are banked. A shortfall in **P** below 50
+> fires the milestone's SUPPLY branch.
+
+**Why this cannot bias M3 toward DELIVERED, and why it cannot manufacture a recovery.** It
+changes which seeds are *offered* and nothing else. A recovery still requires an actual
+hookstep-Newton convergence to `‖R‖ ≤ 1e-8` on the same extended system, whose converged
+`(T, s)` must then match a named row within `MATCH_T_TOL = MATCH_S_TOL = 0.05`. No allocation of
+seeds can manufacture that; a bad seed fails to converge and is banked as a failed attempt. The
+direction the rule *does* have teeth in is the reporting one: it guarantees the in-band arm is
+large enough that its yield is a measurement rather than the 31-attempt observation §3g.2(i)
+had to make.
+
+### 3g.5 Cost settings, all fixed before the run, none of them an iteration purchase
+
+**Caps: unchanged from U3.** `max_newton = 52`, `max_gmres = 140`, `gmres_rtol = 1e-3`,
+`tol = 1e-8`. Erratum (iii) established that neither cap bound any attempt that converged (all
+14 finished in ≤ 29 epochs against 52; max Krylov dimension 25 against 140), so raising them
+buys nothing and lowering the *nominal* cap would invite exactly the misreading that U5 spent
+less. They are held at U3's values so the per-stratum yields are comparable attempt for attempt.
+
+**STALL EXIT — the saving, and it is validated against U3's banked ledger.**
+
+> **STALL RULE.** From epoch `K = 20` onward, an attempt stops if `‖R‖` has not at least
+> **halved** over the preceding `W = 10` epochs (`‖R‖_k > 0.5·‖R‖_{k-10}`). `reason` is recorded
+> as `stalled`, distinct from `max_newton_reached`.
+
+Validated by replaying the rule over all 100 of U3's banked `residual_history` arrays in
+`p2_prog_r4_g1_v1.json`, which is the only reason it is admissible:
+
+- it stops **0 of 14** convergences early;
+- the **worst** 10-epoch ratio any convergence ever exhibited at `k ≥ 20` is **0.0724**, against
+  the rule's 0.50 threshold — a factor of **6.9** of margin, i.e. a U5 convergence would have to
+  decelerate ~7x relative to every U3 convergence before this rule could cut it;
+- total epochs fall to **45.0%** of U3's 4,629.
+
+This is a *reduction* in spend justified by a measurement, not a purchase, and it is the direct
+consequence of erratum (iii): 53% of U3's non-convergences moved `‖R‖` by <1% over their final
+10 epochs. Any attempt still descending is never cut.
+
+**Workers: 8, not U3's 10, and this is measured.** A read-only contention probe timed one
+`T = 19` extended-residual evaluation at 1/4/6/8/10/12 concurrent workers on this 6-core
+machine: per-eval 1.697 / 1.756 / 1.932 / 2.486 / 3.434 / 4.364 s, i.e. throughput 0.59 / 2.28 /
+3.11 / **3.22** / 2.91 / 2.75 eval/s. **U3's 10 workers sat past the optimum**, which is the
+mechanism erratum (ii) suspected but did not localise. 8 workers is the measured maximum.
+
+**Scheduling: `imap_unordered` at `chunksize = 1`.** This repairs erratum (i) — `Pool.map`'s
+chunking sent 34 chunks of 3 to 10 workers and left the tail worker 12 attempts — and it is
+what makes per-attempt progress reporting possible while the run is in flight.
+
+**Projected cost, stated before the run so the estimate can be wrong in public.** 42.70
+evals/epoch measured over U3's whole run (92,951 Jacobian + 104,713 residual evaluations over
+4,629 epochs); 2.635 s/eval implied at U3's 10 workers, scaling to ~1.91 s/eval at 8 by the
+probe's ratio; 45.0% of 4,629 epochs ≈ 2,083. **≈ 5.9 h for the attempts, ~0.5 h for the
+controls, ~0.6 h for the mining pass, ≈ 7 h total.** Cost the epochs at **95 s** (erratum (ii)),
+never at the probe's 54.7.
+
+### 3g.6 The planted controls on M3 — the three from §3, plus two the design itself plants
+
+**Controls P, N and R are re-run unchanged**, from `u3_controls.py`, and **FIRED AS PLANTED :=
+P recovered AND N did not recover AND (R recovered, if R ran)**, exactly as at G1. If they do
+not fire, M3 is NOT DELIVERED for reason INSTRUMENT and no per-stratum yield is admissible.
+
+Two further controls are structural — they are strata of the run itself, and both can fire in
+either direction:
+
+- **Stratum L is a positive control on the seed pipeline.** U3 converged 13 of 69 out-of-band
+  seeds. If U5's 20 low-`|s|` attempts converge at a comparable rate, the deeper mining and the
+  new allocation did not break the pipeline. **If L converges at ~0%, the pipeline is broken and
+  the in-band arm's result is uninterpretable** — and that is a failure this unit can report
+  against itself.
+- **Stratum H is a negative-side control on the monotone-in-`|s|` story.** If yield simply falls
+  with `|s|`, H should be the worst arm. If H converges *better* than P, the "large shift is
+  hard" reading is wrong and must be withdrawn.
+
+**Additionally, the parallel snapshot regeneration U5 introduces for cost is checked against
+U2's serial `regenerate` on a sample of indices and must agree BIT FOR BIT** — the block walks
+are deterministic replays from the same checkpoints, so anything short of exact equality is a
+defect, not a tolerance question. A mismatch aborts the mining pass.
+
+### 3g.7 Ceiling, obligations, and what U5 cannot be read as
+
+**Ceiling TIER 2**, stated in the milestone answer as everywhere else. `CLAY_OBLIGATIONS` §6's
+two no-method obligations stay **OPEN**; §4 stays **OPEN and NOT discharged**. **No `L1 → L4`
+link is moved by U5 on either branch**, and nothing in it is described as movement toward Clay.
+Clay stays ~0.05%.
+
+**Solo mode.** There is no paired verifier. Everything U5 produces is **`UNVERIFIED`** in §3f's
+sense and says so in its own milestone answer, in the journal and in `STATE.md`. The planted
+controls, the bit-for-bit regeneration check, the figure's own checks and the merge gate are the
+whole defence.
+
+**U0's novelty pass binds and no fresh one is run** (§3c: one novelty pass per programme). U5
+makes no novelty claim.
+
 ## 4. What this addendum does not do
 
 It does not restate, soften or re-scope G1. It does not touch the compliant scale. It does not
