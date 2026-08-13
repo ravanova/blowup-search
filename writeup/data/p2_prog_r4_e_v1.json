@@ -1,0 +1,241 @@
+{
+ "unit": "E",
+ "kind": "INSTRUMENT / DIAGNOSTIC -- answers a gate about whether three diagnostics RETURN, not about convergence",
+ "programme": "PROG-R4 (leg 380), Lane R, wave 1 item 4",
+ "gate": {
+  "wording": "On the 200 banked attempts, do all three named diagnostics return, each with a planted control demonstrated firing in BOTH directions: (1) the converged-|s| distribution against seed |s|; (2) whether the low-|s| solutions are attractors of the HOOKSTEP ITERATION or of the MINIMISATION; and (3) whether the named Table IV rows are reachable AT ALL when seeded directly at their published (T, s)?",
+  "note": "the gate is about the diagnostics RETURNING, not about convergence; a clean non-convergence with working controls is a PASS"
+ },
+ "prior_leg_353": {
+  "attempts": "UPO37 x2, UPO35, UPO9, UPO22 -- ALL FIVE FAILED",
+  "reason": "line_search_failed",
+  "final_residual_range": [
+   22.5,
+   29.5
+  ],
+  "basin_radius": "never measured",
+  "why_this_is_a_new_measurement": [
+   "leg 353 ran on a T_total = 2000 DNS; the fields here come from U2's T = 1e5 DNS (MILESTONE M2), 50x longer",
+   "leg 353 used plain-Newton line search (newton_krylov_rpo); this unit uses the genuine Viswanath trust-region hookstep U1 built as MILESTONE M1 (newton_hookstep_rpo)"
+  ]
+ },
+ "seed": {
+  "source": "Lucas & Kerswell 2015, arXiv:1406.1820v2, Table IV",
+  "rows": [
+   "UPO37",
+   "UPO35",
+   "UPO34",
+   "UPO32",
+   "UPO22",
+   "UPO20",
+   "UPO17",
+   "UPO9"
+  ],
+  "transcription": "taken from experiments/programme_r4/u3_g1_attempts.py and asserted equal to it at import; NOT re-transcribed from the paper",
+  "what_a_published_row_determines": "(T, s, m) ONLY -- NOT a field",
+  "what_was_planted": "a 24x24 real vorticity field from U2's T = 1e5 DNS (exact bit-for-bit regeneration) together with T and s PINNED at the published values; this is a field-plus-pinned-(T,s) seed and is never described as seeding at the published orbit",
+  "ban1": "PASS -- no step continues a fixed point into an orbit",
+  "ban2": "PASS -- every attempt is anchored to a named row by construction",
+  "ban_leg349": "COMPLIANT -- every score used is deterministic and pre-existing (U2's recurrence score R, the solver's extended residual). Nothing learned or evolved is used or proposed."
+ },
+ "realization": {
+  "grid": "N = 24",
+  "Re": 60.0,
+  "n_forcing": 4,
+  "dt": 0.01,
+  "stepper": "Lie-Trotter split, globally FIRST order (U3's lesson-91 disclosure, measured global ratio 2.00)",
+  "globalisation": "Newton-GMRES-hookstep (MILESTONE M1)",
+  "residual": "extended residual with a CONTINUOUS x-shift only; m is not carried, so the m != 0 class cannot be expressed",
+  "dns": "T = 1e5 (MILESTONE M2)"
+ },
+ "open_obligations_carried": {
+  "clay_obligations_6i": "OPEN, no known method",
+  "clay_obligations_6ii": "OPEN, no known method",
+  "clay_obligations_4": "OPEN and NOT discharged"
+ },
+ "clay_movement": {
+  "links_moved": 0,
+  "ceiling": "TIER 2",
+  "clay_odds": "~0.05%, unmoved",
+  "note": "a best-in-field orbit finder makes the questions affordable; it does not move an L1 -> L4 link, and nothing in this unit does"
+ },
+ "diagnostic_1": {
+  "verdict": "PULL_TO_LOW_S",
+  "n": 23,
+  "median_drift": -0.032018195004447136,
+  "mean_drift": -0.06880225317113108,
+  "n_drift_negative": 17,
+  "n_drift_positive": 6,
+  "sign_test_p": 0.03468966484069824,
+  "frac_converged_below_0p15": 0.9130434782608695,
+  "spearman_seed_vs_converged": 0.320455671124319,
+  "seed_abs_range": [
+   0.00609499431252436,
+   0.6186878801571751
+  ],
+  "conv_abs_range": [
+   0.07293778217462554,
+   0.586669685152728
+  ],
+  "n_attempts_total": 200,
+  "by_unit": {
+   "U3": 14,
+   "U5": 9
+  },
+  "in_band_seeds_converged": 6,
+  "in_band_seeds_that_left_the_band": 5,
+  "secondary_all_200_attempts": {
+   "verdict": "NO_PULL",
+   "n": 200,
+   "median_drift": -0.023892273011824283,
+   "mean_drift": -0.03880142428133924,
+   "n_drift_negative": 120,
+   "n_drift_positive": 80,
+   "sign_test_p": 0.005685155996750305,
+   "frac_converged_below_0p15": 0.385,
+   "spearman_seed_vs_converged": 0.7928707561647368,
+   "seed_abs_range": [
+    0.0036912503531336682,
+    1.6570745228067603
+   ],
+   "conv_abs_range": [
+    0.0031928835964953883,
+    1.801571634007864
+   ]
+  },
+  "controls": {
+   "positive": {
+    "verdict": "PULL_TO_LOW_S",
+    "n": 23,
+    "median_drift": -0.016428412358176464,
+    "mean_drift": -0.0964990237028501,
+    "n_drift_negative": 17,
+    "n_drift_positive": 6,
+    "sign_test_p": 0.03468966484069824,
+    "frac_converged_below_0p15": 1.0,
+    "spearman_seed_vs_converged": -0.04668588486092903,
+    "seed_abs_range": [
+     0.00609499431252436,
+     0.6186878801571751
+    ],
+    "conv_abs_range": [
+     0.1,
+     0.10200000000000001
+    ]
+   },
+   "negative": {
+    "verdict": "NO_PULL",
+    "n": 23,
+    "median_drift": -0.001,
+    "mean_drift": -4.347826086956522e-05,
+    "n_drift_negative": 12,
+    "n_drift_positive": 11,
+    "sign_test_p": 1.0,
+    "frac_converged_below_0p15": 0.5652173913043478,
+    "spearman_seed_vs_converged": 0.9985149738401916,
+    "seed_abs_range": [
+     0.00609499431252436,
+     0.6186878801571751
+    ],
+    "conv_abs_range": [
+     0.00509499431252436,
+     0.6176878801571751
+    ]
+   },
+   "fired_both_ways": true,
+   "planted_positive": "converged |s| := 0.10 for every attempt",
+   "planted_negative": "converged |s| := seed |s| +/- 0.001"
+  }
+ },
+ "diagnostic_2": {
+  "verdict": "MIXED",
+  "n_constrained": 2131,
+  "n_unconstrained": 64,
+  "mean_d_abs_s_constrained": -0.0026950230353645515,
+  "mean_d_abs_s_unconstrained": -0.0018423888842588054,
+  "net_d_abs_s_constrained": -5.743094088361859,
+  "net_d_abs_s_unconstrained": -0.11791288859256355,
+  "observed_difference": -0.0008526341511057461,
+  "permutation_p": 0.9316534173291335,
+  "n_perm": 20000,
+  "coverage": {
+   "n_attempts_with_epoch_path": 100,
+   "n_banked_attempts": 200,
+   "missing": "U3's banked ledger records no T_before / s_before, so the per-epoch |s| path exists for U5's 100 attempts only. The fields were added to the solver's hookstep ledger after U3 ran.",
+   "cost_to_close": "re-running U3's 100 attempts under the current ledger: 4,629 epochs at the measured 95 s/epoch = 122.1 core-hours, 15.3 h wall at 8 workers. Not bought here and not needed for this gate."
+  },
+  "correlation_dR_vs_dabs_s": 0.1953783015318738,
+  "n_epochs": 2195,
+  "score_bias": {
+   "n_m0": 1153,
+   "spearman_absS_vs_R": 0.5012339945451622,
+   "by_band": [
+    {
+     "band": [
+      0.0,
+      0.15
+     ],
+     "n": 322,
+     "median_R": 0.3204877157246059,
+     "admitted_fraction": 0.43788819875776397
+    },
+    {
+     "band": [
+      0.15,
+      0.295
+     ],
+     "n": 213,
+     "median_R": 0.5066610027950125,
+     "admitted_fraction": 0.20187793427230047
+    },
+    {
+     "band": [
+      0.295,
+      0.707
+     ],
+     "n": 373,
+     "median_R": 0.7887727136611279,
+     "admitted_fraction": 0.11528150134048257
+    },
+    {
+     "band": [
+      0.707,
+      3.141592653589793
+     ],
+     "n": 245,
+     "median_R": 1.125916072929571,
+     "admitted_fraction": 0.02857142857142857
+    }
+   ],
+   "note": "deterministic, pre-existing score; leg 349's ban on a learned or evolved seed-scoring fitness is not approached, and this unit proposes no learned score"
+  },
+  "controls": {
+   "planted_minimisation": {
+    "verdict": "MINIMISATION_ATTRACTOR",
+    "n_constrained": 100,
+    "n_unconstrained": 100,
+    "mean_d_abs_s_constrained": -0.019999999999999997,
+    "mean_d_abs_s_unconstrained": 0.0,
+    "net_d_abs_s_constrained": -1.9999999999999998,
+    "net_d_abs_s_unconstrained": 0.0,
+    "observed_difference": -0.019999999999999997,
+    "permutation_p": 0.0004997501249375312,
+    "n_perm": 2000
+   },
+   "planted_iteration": {
+    "verdict": "ITERATION_ATTRACTOR",
+    "n_constrained": 100,
+    "n_unconstrained": 100,
+    "mean_d_abs_s_constrained": 0.0,
+    "mean_d_abs_s_unconstrained": -0.019999999999999997,
+    "net_d_abs_s_constrained": 0.0,
+    "net_d_abs_s_unconstrained": -1.9999999999999998,
+    "observed_difference": 0.019999999999999997,
+    "permutation_p": 0.0004997501249375312,
+    "n_perm": 2000
+   },
+   "fired_both_ways": true,
+   "planted": "d|s| = -0.02 on one epoch class only, 0.0 on the other"
+  }
+ }
+}

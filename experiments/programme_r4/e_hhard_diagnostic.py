@@ -90,6 +90,7 @@ import json
 import math
 import multiprocessing as mp
 import os
+import pickle
 import sys
 import time
 from collections import Counter
@@ -119,6 +120,13 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 CURATED = os.path.join(ROOT, "writeup", "data", "p2_prog_r4_e_v1.json")
 LEDGER = os.path.join(HERE, "e_hhard_ledger.json")
 ORBITS = os.path.join(HERE, "e_hhard_converged_orbits.npz")
+# Per-attempt checkpoint directory. Diagnostic (3)'s first launch was killed by
+# the host after ~2 h of an unattended multi-hour run, losing 16 completed-or-
+# in-flight attempts because results were only assembled at the end. The solve
+# is deterministic and per-attempt independent, so each finished attempt is now
+# written out the moment it returns and a relaunch skips it. THIS CHANGES NO
+# ALGORITHM AND NO SEED: same fields, same (T, s), same caps, same stall rule.
+PARTIAL = os.path.join(HERE, "e_hhard_partial")
 U3_BANKED = os.path.join(ROOT, "writeup", "data", "p2_prog_r4_g1_v1.json")
 U5_BANKED = os.path.join(ROOT, "writeup", "data", "p2_prog_r4_m3_v1.json")
 U5_LEDGER = os.path.join(HERE, "u5_m3_ledger.json")
@@ -503,8 +511,30 @@ def match_named_abs(T, s, success):
     return None
 
 
+def _partial_path(idx):
+    return os.path.join(PARTIAL, f"attempt{idx:03d}.pkl")
+
+
 def run_attempt(job):
+    """Run one direct-seed attempt, or return the banked one if it already ran.
+
+    The checkpoint is keyed on the attempt index AND on the seed it was built
+    from, so a stale partial from a different seed selection can never be
+    silently reused."""
     idx, w0, T0, s0, meta = job
+    path = _partial_path(idx)
+    if os.path.exists(path):
+        with open(path, "rb") as f:
+            rec = pickle.load(f)
+        if (rec["row"] == meta["row"] and rec["arm"] == meta["arm"]
+                and rec["snapshot_earlier"] == meta["snapshot_earlier"]
+                and rec["T_seeded"] == T0 and rec["s_seeded"] == s0):
+            print(f"  attempt {idx:2d} {meta['row']:6s} arm {meta['arm']}: "
+                  f"reused from checkpoint", flush=True)
+            return rec
+        raise SystemExit(
+            f"stale checkpoint at {path}: it was written for a different "
+            "seed. Delete the e_hhard_partial directory and re-run.")
     solver = Kolmogorov2D(N=N_GRID, Re=RE, n_forcing=N_FORCING, dt=DT)
     t0 = time.time()
     out = solve_with_stall_exit(w0, T0, s0, solver)
@@ -532,6 +562,14 @@ def run_attempt(job):
         wall_seconds=wall)
     rec["_ledger"] = out["ledger"]
     rec["_w0"] = out["w0"]
+    os.makedirs(PARTIAL, exist_ok=True)
+    tmp = path + ".tmp"
+    with open(tmp, "wb") as f:
+        pickle.dump(rec, f)
+    os.replace(tmp, path)
+    print(f"  attempt {idx:2d} {meta['row']:6s} arm {meta['arm']}: "
+          f"{out['reason']}, final ||R|| = {out['final_residual']:.4g}, "
+          f"{out['n_iters']} epochs, {wall / 3600:.2f} h", flush=True)
     return rec
 
 
@@ -607,7 +645,11 @@ def stage_3(args):
 
     t0 = time.time()
     with mp.Pool(args.workers) as p:
-        results = p.map(run_attempt, jobs)
+        # imap_unordered with chunksize 1: every finished attempt is banked to
+        # its own checkpoint the moment it returns, so a host kill costs at
+        # most the attempts still in flight.
+        results = sorted(p.imap_unordered(run_attempt, jobs, chunksize=1),
+                         key=lambda r: r["attempt"])
     wall = time.time() - t0
 
     ledgers = [{"attempt": r["attempt"], "row": r["row"], "arm": r["arm"],
@@ -853,7 +895,13 @@ def main():
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--ckpt", default=None,
                     help="path to U2's gitignored DNS checkpoint archive")
+    ap.add_argument("--partial-dir", default=None,
+                    help="per-attempt checkpoint directory; a relaunch reuses "
+                         "any attempt already banked there. Deterministic, so "
+                         "reuse is identical to re-running")
     args = ap.parse_args()
+    if args.partial_dir:
+        globals()["PARTIAL"] = os.path.abspath(args.partial_dir)
     if args.stage == "12":
         stage_12(args)
     else:

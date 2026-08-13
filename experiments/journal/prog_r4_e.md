@@ -154,3 +154,89 @@ rests on it.**
 - **No external outreach** (standing user hold). **`DIRECTION.md` was not read** (§3e).
 
 ---
+## 5. DIAGNOSTIC (1) — WHERE THE CONVERGED `|s|` SITS AGAINST THE SEED `|s|`
+
+**RETURNED. Verdict: `PULL_TO_LOW_S`. Controls fired BOTH ways.**
+
+Over the **200 banked attempts** (U3's 100 and U5's 100, read and never edited), **23 reached
+`tol = 1e-8`** — 14 in U3, 9 in U5. The pre-registered classifier fires `PULL_TO_LOW_S` only if
+**all three** of its clauses hold, and all three do:
+
+| clause | measured |
+|---|---|
+| median drift `|s|_conv − |s|_seed` **< 0** | **−0.03202** (mean −0.06880) |
+| at least half of convergences finish below `|s| = 0.15` | **21 of 23 = 91.3%** |
+| exact two-sided sign test on the drift, `p < 0.05` | **17 down / 6 up, p = 0.0347** |
+
+Seed `|s|` of those 23 spans `[0.0061, 0.6187]`; converged `|s|` spans `[0.0729, 0.5867]`.
+Spearman(seed `|s|`, converged `|s|`) = **0.3205** — the seed shift explains rather little of
+where the solve lands. **6 in-band seeds converged and 5 of them left the band**, which is U5 §9's
+band-exit count reproduced here from the pooled record.
+
+**The SECONDARY reading over all 200 attempts** — counting the terminal `|s|` of the 177 attempts
+that never reached `tol` — returns **`NO_PULL`**, and it is reported because it is the honest
+counterweight: the drift is still negative (median −0.0239, 120 down / 80 up, `p = 0.0057`) but
+only **38.5%** of attempts finish below `|s| = 0.15` and Spearman rises to **0.793**. **A
+non-converged attempt has not landed anywhere**, so its terminal `|s|` is mostly its seed `|s|`;
+that is exactly what the higher Spearman says. **The pull is a property of the solutions this
+realization actually reaches, not of the trajectory of every attempt.** Neither reading is
+suppressed.
+
+**Controls (planted, fired both ways).** Positive: converged `|s| := 0.10` for every attempt →
+`PULL_TO_LOW_S` (100% below 0.15). Negative: converged `|s| := ` seed `|s| ± 0.001` → `NO_PULL`
+(`p = 1.0`, Spearman 0.9985). `fired_both_ways = true`. **The classifier can say both words**, so
+its saying `PULL_TO_LOW_S` here is a measurement and not a foregone conclusion.
+
+## 6. DIAGNOSTIC (2) — ITERATION OR MINIMISATION?
+
+**RETURNED. Verdict: `MIXED`. Controls fired BOTH ways.**
+
+The pre-registered split: an accepted Newton epoch is **`constrained`** if its accepted hookstep
+trial sits **on the trust-region boundary** (`on_boundary = True`, i.e. the *minimisation* chose
+the step) and **`unconstrained`** if the full Newton step was taken (`on_boundary = False`, i.e.
+the *iteration* chose it). Over **2,195 accepted epochs**:
+
+| | constrained | unconstrained |
+|---|---|---|
+| **epochs** | **2,131 (97.1%)** | **64 (2.9%)** |
+| **mean per-epoch `d|s|`** | −0.002695 | −0.001842 |
+| **net `Σ d|s|`** | **−5.7431 (98.0% of the total descent)** | −0.1179 |
+
+**The observed difference in per-epoch rate is −0.000853 with a within-attempt label permutation
+`p = 0.9317`** (20,000 permutations, `PERM_SEED = 380`). **The rates are statistically
+indistinguishable**, so the pre-registered rule returns **`MIXED`** and this unit does not get to
+say "the minimisation is dragging the solve to low `|s|`."
+
+**What the numbers do say, stated carefully.** 98.0% of the total `|s|` descent happens on
+constrained epochs **because 97.1% of accepted steps are constrained at all**, not because a
+constrained step descends in `|s|` faster than an unconstrained one. **In this realization the
+full Newton step is almost never taken** — the trust region binds on 29 accepted steps out of
+every 30. The per-epoch correlation between `Δ‖R‖` and `d|s|` is **+0.1954**: epochs that descend
+in residual tend, weakly, to descend in `|s|` as well.
+
+**THE BAN, CONFIRMED.** Because diagnostic (2) did **NOT** return `MINIMISATION_ATTRACTOR`, the
+commissioned conditional — "if the score is the attractor, the fix is in the SCORE" — **does not
+fire**, and nothing is proposed. Independently: **leg 349's ban is COMPLIANT and was never
+approached.** Every score this unit touched is deterministic and pre-existing (U2's recurrence
+score `R`; the solver's extended residual `‖R‖`). **Nothing was fitted, learned, evolved or tuned
+to an outcome, and this unit proposes no learned or evolved seed-scoring fitness.**
+
+**The score's own `|s|` bias, re-derived here independently** from U2's library (1,153 `m = 0`
+candidates), because it is the standing context for both diagnostics: **Spearman(`|s|`, `R`) =
+0.5012**, and the fraction admitted by the `R < 0.25` window falls monotonically across the four
+`|s|` bands — **43.79% / 20.19% / 11.53% / 2.86%** for `|s| ∈ [0, 0.15) / [0.15, 0.295) /
+[0.295, 0.707) / [0.707, π]`. That reproduces U3 §5's 0.50 and 44/20/11/3 from the library rather
+than from U3's table. **The published band is the third of those four cells.**
+
+**Coverage limit, declared in the pre-registration and not discovered afterwards.** The per-epoch
+`|s|` path exists for **U5's 100 attempts only**: U3's banked ledger records no `T_before` /
+`s_before`, because those fields were added to the solver's hookstep ledger after U3 ran. **Cost
+to close: re-running U3's 100 attempts under the current ledger = 4,629 epochs × 95 s = 122.1
+core-hours, 15.3 h wall at 8 workers.** Not bought here, not needed for this gate, and named
+rather than hidden.
+
+**Controls (planted, fired both ways).** A synthetic run with `d|s| = −0.02` on constrained
+epochs only → **`MINIMISATION_ATTRACTOR`** (`p = 0.0005`); the same with the labels swapped →
+**`ITERATION_ATTRACTOR`** (`p = 0.0005`). `fired_both_ways = true`. **The classifier can say
+either word**, which is what makes `MIXED` a reading rather than a shrug.
+
