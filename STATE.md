@@ -49,6 +49,7 @@ what a wall-breaking mandate does and does not license.
 | What | State |
 |---|---|
 | **WAVE 1** (`T1`, `T2`, `R0+R1`, `E`) | **PLANNED AND COMMITTED 2026-08-13, before dispatch**, per §3g step 1. Gates in final wording and pre-committed readings are below. Composition floor met by **two** Lane T units, not one. **No verifier in this wave** — §3g forbids the Conductor verifying a wave it planned; wave 2 carries it. |
+| **`T1` / leg 391** (Lane T) | **LANDED 2026-08-13** (`829c8db`), **GATE = `yes`**. The ban-wording escalation packet is at `writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md` and is **OPEN ON THE USER'S DESK**. Four items: (a) Cadiot, (b) stage V's *"needs L1 first"*, (c) **the apparatus question — which blocks the whole of Lane T**, (d) the outreach hold, raised rather than routed around. Pre-committed reading honoured exactly: (a)'s scoping precedent recorded as **available in shape and NOT exercised**; under C2 Lane T is blocked on a **lift, not a scope — a materially worse position**, reported unsoftened; the **fourth-space/basis vs fourth-*apparatus*** mismatch surfaced as a defect and **left unresolved**. **`BUILD NOTHING IN LANE T` until the user rules.** No `L1→L4` link moved. |
 | **`plan_of_record.py` posture** | **LANDED 2026-08-13** (`1ca9e91`), the Conductor's first act under §3g. Additive only — 75 insertions, 0 deletions: `POSTURE`, `MODE`, `BLOCKERS_FILE` → `WALLS.md`, `LANES` (T/V/L/R with the walls each attacks), `POSTURE_LIMITS` (§3h restated executably). **No ban lifted, narrowed, reworded or re-read**; the `BANNED` table is byte-identical and `test_plan_of_record.py` still reports 26 bans / 19 in force, ALL GATES PASS. |
 | **`PROG-R4`** (route-4 DSS programme, leg 380) | **U0–U3, U5 LANDED. U4 BLOCKED — but now *interesting*, see below.** U2 answered **MILESTONE M2** (T=1e5 DNS on the attractor, `D/D_lam`=0.0645±0.0253). U3 answered **GATE G1 = `UNDER-RESOURCED`**, controls fired as planted — 0 of 100 recovered a named orbit, 14 of 100 converged onto eight *other* RPOs. **U5 answered `MILESTONE M3 = DELIVERED`** (2026-08-13): the budget is now stratified by SHIFT — exhaustive re-mine 2,014 → **75,873** candidates, in-band admissible supply 35 → **72**, in-band spend 31 → **60**, controls fired as planted, **2,104 epochs against U3's 4,629 (no iterations bought)**. **9 of 100 converged, 0 recovered a named row**, and **U5's pre-committed reading fired on branch (b) — the bias is in BASIN STRUCTURE, not only seed supply.** **§3d's stop did NOT fire; route 4 is NOT stopped.** **G1 is untouched and stays `UNDER-RESOURCED`** — `n_recovered=0` is a count, not a `no`, and no G1 re-open is raised. U4 (G2, basin radius) still cannot open — it needs a recovered **named** orbit — but the pre-committed reading makes it the interesting unit rather than a formality. Tier-2 ceiling; Clay unmoved. **UNVERIFIED** under §3f. |
 
@@ -410,15 +411,37 @@ discharge 382's owed novelty obligation after arXiv/Semantic Scholar returned HT
    per-stratum Wilson interval overlaps its U3 counterpart; the in-band rise 3.2%→8.3% is **not**
    significant and is reported as a magnitude only.
 
-2. **Three ban-wording escalations, to be bundled by `T1`.** (a) **Cadiot** — pending since
+2. **Three ban-wording escalations — PACKET DELIVERED 2026-08-13, AWAITING THE USER'S RULING.**
+   `T1`/leg 391 landed it at **`writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md`**, gate
+   `yes`, audited by the Conductor against the wording pre-committed at `a384d92`. It states **both**
+   supportable readings for each question and **rules none**; a ruling-language sweep found only its
+   own disclaimers. **`BUILD NOTHING IN LANE T` — `T3` and `T4` included — until the user rules (c).**
+   All 19 bans stand in force, unchanged.
+   What the packet *measured* rather than argued, on (b): `git log -S "which needs L1 first" --
+   plan_of_record.py` returns **exactly one commit**, `561bb68` (2026-08-05). The 2026-08-06 ban
+   review `4ff544a` **does not appear** — it deleted the *V-rigorous* entry, whose lift field was the
+   bare string `"L1"` and which never contained the phrase. So that review's **declared** act and its
+   **actual** edit do not coincide, and **both** readings of (b) survive rather than one.
+   Disclosed limit: `DIRECTION.md` was not read (§3e). Text bearing on (b) sits at lines **755, 2262,
+   2275, 9798, 9997**, located by grep and named as unread artefacts for whoever rules (b).
+   The three questions, unchanged: (a) **Cadiot** — pending since
    2026-08-11; leg 304 resolved the open question and the resolution *confirmed* the ban's
    justification, so the lift clause's literal reading and its evident purpose now disagree.
    (b) **Stage V's "needs L1 first"** — unliftable as written. (c) **The apparatus question** —
    does the ℓ¹-Fourier ban reach a dynamical Galerkin-plus-tail closure? All three are wording
    questions, and `ORCHESTRATION.md` §3h rule 1 forbids an agent from ruling them.
 3. **The POCP spend — SUPERSEDED 2026-08-13, now Lane T.** Leg 348: **(ii) OPEN-AND-REACHABLE**,
-   cost class C. Retained here because its two adverse inputs still bind Lane T: exactly one
-   viable basis (leg 374 ADVERSE, Hermite sole survivor, decay concern cleared by leg 377) and
+   cost class C. Retained here because its two adverse inputs still bind Lane T: **ZERO fully
+   viable bases — corrected 2026-08-13 by leg 391, which found the prior wording overstated.**
+   Leg 374's own headline is *"no row publishes a result meeting all four of the bridge's asks
+   simultaneously"*; every genuinely spectral candidate located is **1D/scalar in its published
+   form, with no `ℝ³` or vector/Leray-projected extension located for any of them.** Generalized
+   Hermite is the **closest weight-match, not a survivor**: leg 377 cleared *only* Boyd (1980)'s
+   decay concern (ADEQUATE, `γ=s` against leg 260's measured `s>1`) and states in terms that the
+   row still **fails (i) `ℝ³` dimension, is ambiguous-to-unaddressed on (ii) vector/Leray state
+   space, and fails (iii) CAP-grade rigor**. The prior line implied one basis survived; none did.
+   This makes the `ℝ³` basis position **worse**, not better — which is the premise Lane T's `T³`
+   pivot exists to relieve. And
    **no discrete spectral anchors** on `ℝ³` (leg 376, both channels continuous) — the second of
    which is exactly what `T³` supplies and `ℝ³` does not.
 4. **Statement (D)'s data conditions (8) and (9) require OUTREACH to read verbatim** (leg 390 §4).
