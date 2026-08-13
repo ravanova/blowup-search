@@ -224,8 +224,33 @@ The four results:
 
 **The price, stated first, because free lunches here get repurchased.**
 - **0 of 4 rigidity clearances carry to `T³`** (leg 390, machine-applied domain-marker rule). The
-  §2 screen must be rebuilt from scratch, and **this repository has never searched the periodic
-  rigidity literature** (leg 390 §5 item 2).
+  §2 screen must be rebuilt from scratch. **Searched 2026-08-13 by T2 / leg 392 — see below.**
+- **THE CONVERSE, WHICH THIS FILE WAS MISSING AND WHICH IS LOAD-BEARING** (routed by T2, applied
+  2026-08-13). "0 of 4 clearances carry to `T³`" says the `ℝ³` screen does not *help* on the torus.
+  It does **not** say the `ℝ³` *exclusions* stop applying — **and they do not. An `ℝ³` exclusion
+  still reaches a `T³` object built by periodic extension of an `ℝ³` self-similar core.** This is
+  not hypothetical: `2604.09949` was read at **full text** by leg 309 and reached **GATE NO, broken
+  at H11**, on exactly that ground — its `T³` object is a periodized `ℝ³` **backward self-similar**
+  core, killed by the very NRS/Tsai row whose periodic analogue leg 392 went looking for. **The one
+  previous attempt at Lane T's target, by anyone, died this way.** So the torus does not buy an
+  escape from `ℝ³` rigidity *by construction*; it buys one only for an ansatz that is **natively
+  periodic**, which compounds with the item below.
+- **NO PERIODIC ANALOGUE OF NRS/TSAI WAS LOCATED — and that is NOT a clearance** (leg 392, gate
+  returned `UNDER-RESOURCED` under §3d, not `no`). Coverage holes, stated: NRS 1996 (Acta Math.) and
+  Tsai 1998 (ARMA) are **pre-arXiv** and were declared unreachable in advance; Semantic Scholar, the
+  instrument for exactly that gap, was **throttled on 5 of 6** substantive queries; and one battery
+  **failed its own domain control** (`1304.7414` Chae–Tsai not re-found), so that row's null is
+  under-resourced by the leg's own rule. arXiv coverage was clean — **32/32 MEASURED**, served
+  namespace banked as 1.1 on every query, no throttled query recorded as a zero. **What DOES exist**
+  are torus/periodic *global-regularity* theorems under scaling-invariant smallness / LPS hypotheses
+  (`1909.09125`, `math/9811161`, `0710.1604`); they bite in shape but thinly, since every clause is
+  somewhere a blow-up ansatz would already be. **Compliant search costed at ≈1.2–1.7 h plus one user
+  ruling** (an S2 key, the battery repair, a forward-citation pass on NRS/Tsai, depth beyond top-8).
+- **DE NOVO ITEM LANE T MUST ESTABLISH, named by leg 392: a TYPE-I RIGIDITY THEOREM ON `T³`.** A
+  *rate* condition needs no dilation symmetry, so it carries to the torus intact **as a question**,
+  and nothing located proves it. Row 1's object is **vacuous** on `T³` (no dilation action). Row 4's
+  Morrey `sup_{R>0}` partly degenerates on a compact torus (recorded as an observation, not a
+  result).
 - **The DSS ansatz does not survive periodization.** 342 modes survive one DSS step at `λ = 1.7`;
   **0 survive two.** So Lane T needs a **non-DSS** blow-up ansatz on `T³`, and identifying one is
   open work, not a lookup.
