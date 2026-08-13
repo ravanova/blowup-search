@@ -40,19 +40,46 @@ rest of this file is identical in both modes.)*
 Re-ranking requires its own commit stating why (`ORCHESTRATION.md` §3f). Ordering respects
 §3f's cap: no more than two consecutive audit/repair/instrument tasks before construction.
 
-*(Former item 1, `PROG-R4` U2/U3, is **LANDED** — M2 answered, G1 answered `UNDER-RESOURCED`.
-The programme's continuation is **not** re-ranked into this list by the unit that finished it;
-it is raised under "Open — needs the user" below, because U4 is blocked and every way forward is
-a new build unit.)*
+*(`PROG-R4` U2/U3 **LANDED** — M2 answered, G1 answered `UNDER-RESOURCED`. The finishing unit
+correctly declined to re-rank its own continuation and raised it for the user instead; the user
+**ruled on 2026-08-12: take option (a)**, and it is now item 1 below.)*
 
-1. **Leg 389 (CT2C) — wire 382's certified enclosure into the screen's second T2 column**,
+1. **`PROG-R4` U5 — stratify the seed budget by SHIFT.** *Construction, critical path, and the
+   programme continues under §3c* (worker not terminated on landing, milestones not gates for
+   build units, U0's novelty pass binds). This is **option (a)** of U3's own ordered four, ruled
+   by the user: it is the cheapest untried action and it targets the cause U3 *measured* rather
+   than a guess. The measurement that justifies it: admission by the Newton window `R < 0.25`
+   falls monotonically with shift — **44% for `|s|<0.15`, then 20%, 11% in the published band,
+   3% above 0.75** — while **395 `m=0` candidates already lie in the published `|s|` band and
+   11% are already inside the window.** Do for shift exactly what AMENDMENT 4 did for period.
+   **Do NOT take option (d)** (buy iterations): U3 measured convergence as bimodal — all 14
+   finished in ≤29 epochs, the other 86 ran to the cap and were flat there — so more iterations
+   is the *lowest*-yield spend and contradicts the compliant cost AMENDMENT 3 named. Options
+   (b) and (c) stay unqueued. Tier-2 ceiling in every gate.
+
+2. **Discharge `PROG-R4` U3's two owed novelty questions.** *Literature, owed work on the run's
+   own output — NOT screening, so the standing stop does not bite.* Two questions, reported
+   independently, neither carrying the other:
+   - **(i) Are the eight recovered RPOs known?** U3 converged onto eight distinct relative
+     periodic orbits, three replicated from independent seeds and different anchors
+     (`T=16.53/|s|=0.100` four times, agreeing to `0.012` in `T` and `0.002` in `|s|`). None is
+     a named Table IV row — that is why G1 is unmoved and **that verdict does not change here**.
+     Unasked: are they in the literature at all? If not, it is a small genuine result; if so, it
+     is a validation of the solver. **Claim neither outcome before measuring it.**
+   - **(ii) Is the selection-bias caveat already published?** `BLOG_P2_PROGR4_MINING_BAND.md`
+     states that a scalar score used as an admission filter biases the recovered set along any
+     coordinate it is monotone in. Recurrence mining is a mature field (Chandler–Kerswell,
+     Lucas–Kerswell, Cvitanović). The writeup is externally-facing and the caveat is
+     **unchecked**.
+
+3. **Leg 389 (CT2C) — wire 382's certified enclosure into the screen's second T2 column**,
    alongside the fitted one, consuming 386's δ-mode. *Instrument.* Leg 383 closed the report
    path with the **fitted** exponent per its dispatch and deliberately did not wire in the
    enclosure; `CLAY_OBLIGATIONS.md` §8 ask 2 requires certified, not fitted. Note 386's
    clause 2 first: **the δ-window is EMPTY at every `α_centre ≤ 1`**, and the banked object
    carries `α = 1`, so this task wires the path and reports the empty window honestly — it
    does not manufacture headroom.
-2. **Leg 387 (DXNV) — discharge 382's owed novelty obligation.** *Literature, owed work.*
+4. **Leg 387 (DXNV) — discharge 382's owed novelty obligation.** *Literature, owed work.*
    arXiv and Semantic Scholar both returned HTTP 429 on 382's external pass; the refusal is
    disclosed at its novelty §3 and is **owed work, not new screening**, so it does not
    violate the standing stop on screening as a unit of work.
@@ -62,17 +89,11 @@ the ladder bottomed out at ≤1e-6 and is currently one-sided).
 
 ## Open — needs the user, not a task
 
-1. **What `PROG-R4` does next.** U4/G2 is blocked — it needs a recovered **named** orbit and U3
-   produced none. Every route forward is a **new build unit**, so picking one is a re-ranking and
-   is not the finishing unit's call. U3 measured the cause and ordered the options
-   (`experiments/journal/prog_r4_u3.md` §8): **(a)** stratify the seed budget by **shift**, as
-   AMENDMENT 4 did for period — 395 `m=0` candidates already lie in the published `|s|` band and
-   11% are already inside the Newton window, so this is the cheapest untried action and it targets
-   the measured cause; **(b)** replace the `R < 0.25` admission test, which is confounded with
-   `|s|` (rank correlation 0.50); **(c)** add an `m` unknown to the residual — a realization change
-   that would invalidate M1's reproduction; **(d)** buy iterations, which the measured bimodality
-   makes the **lowest**-yield spend, contradicting the compliant cost AMENDMENT 3 named. Or stop
-   the programme. Tier-2 either way — none of these moves an `L1 → L4` link.
+1. **RULED 2026-08-12 — `PROG-R4` takes option (a), stratify by shift.** Moved to task 1
+   above. Options (b)/(c)/(d) stay unqueued and the programme is **not** stopped; U3's
+   ordering and its four options are preserved at `experiments/journal/prog_r4_u3.md` §8 if
+   the ruling is ever revisited.
+
 2. **The POCP spend.** Periodic-orbit/flow-map certification is the *only* open route for
    `CLAY_OBLIGATIONS.md` §1. Leg 348: **(ii) OPEN-AND-REACHABLE**, cost class C. Inputs cut
    both ways — exactly one viable basis (leg 374 ADVERSE, Hermite sole survivor, decay concern
