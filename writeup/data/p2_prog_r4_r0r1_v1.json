@@ -1,0 +1,817 @@
+{
+ "clay_movement": "none -- no L1-L4 link moved by this unit",
+ "kind": "MEASUREMENT (metric reconciliation + flatness abort)",
+ "lane": "R",
+ "programme": "PROG-R4",
+ "r0": {
+  "cluster_rule_verbatim": "# experiments/p2_prog_r4_m3_evidence.py, lines 35-53 and 70-81, verbatim:\n\n# Lucas & Kerswell 2015 Table IV: the |s| band the eight named rows live in.\nBAND = (0.295, 0.707)\n# The matching predicate of record (Ban 2): a convergence is a recovery only if\n# it matches a named row on BOTH T and s to within this. Reused here as the\n# clustering tolerance, so \"distinct\" is never finer than \"recovered\".\nTOL = 0.05\n\ndef wrap_abs(s):\n    \"\"\"|s| on the circle: the domain is 2*pi periodic, so |s|=6.18 is 0.10.\"\"\"\n    a = abs(float(s)) % (2.0 * math.pi)\n    return min(a, 2.0 * math.pi - a)\n\ndef cluster(attempts):\n    \"\"\"Group convergences into distinct solutions at the matching tolerance.\"\"\"\n    out = []\n    for a in sorted(attempts, key=lambda a: a[\"T_converged\"]):\n        for c in out:\n            if (abs(c[0][\"T_converged\"] - a[\"T_converged\"]) <= TOL\n                    and abs(c[0][\"S\"] - a[\"S\"]) <= TOL):\n                c.append(a)\n                break\n        else:\n            out.append([a])\n    return out\n",
+  "core_hours": {
+   "U3": {
+    "attempt_cpu_core_hours": 134.44748337037032,
+    "attempt_cpu_seconds": 484010.9401333332,
+    "fields": {
+     "attempt_cpu": "sum(attempts[].wall_seconds) / 3600",
+     "elapsed": "magnitudes.wall_seconds / 3600",
+     "pool_reservation": "magnitudes.wall_seconds * magnitudes.workers / 3600"
+    },
+    "pool_reservation_core_hours": 144.6887551440133,
+    "pool_utilisation": 0.9292186060799991,
+    "stage_elapsed_hours": 14.46887551440133,
+    "stage_elapsed_seconds": 52087.95185184479,
+    "workers": 10
+   },
+   "U5": {
+    "attempt_cpu_core_hours": 56.00936743630303,
+    "attempt_cpu_seconds": 201633.72277069092,
+    "fields": {
+     "attempt_cpu": "sum(attempts[].wall_seconds) / 3600",
+     "elapsed": "magnitudes.wall_seconds / 3600",
+     "pool_reservation": "magnitudes.wall_seconds * magnitudes.workers / 3600"
+    },
+    "pool_reservation_core_hours": 57.035181064605716,
+    "pool_utilisation": 0.9820143706190622,
+    "stage_elapsed_hours": 7.1293976330757145,
+    "stage_elapsed_seconds": 25665.83147907257,
+    "workers": 8
+   }
+  },
+  "distinct": {
+   "U3": {
+    "cluster_sizes": [
+     4,
+     3,
+     2,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "clusters": [
+     {
+      "T": 16.524063207485558,
+      "abs_s": 0.10186293048138072,
+      "anchors": [
+       "UPO17",
+       "UPO9"
+      ],
+      "attempts": [
+       20,
+       78,
+       80,
+       44
+      ],
+      "n": 4
+     },
+     {
+      "T": 16.810007291763345,
+      "abs_s": 0.0730090348366276,
+      "anchors": [
+       "UPO17"
+      ],
+      "attempts": [
+       99
+      ],
+      "n": 1
+     },
+     {
+      "T": 16.874421192979728,
+      "abs_s": 0.07293778217462553,
+      "anchors": [
+       "UPO9"
+      ],
+      "attempts": [
+       12,
+       84,
+       43
+      ],
+      "n": 3
+     },
+     {
+      "T": 17.16501800493759,
+      "abs_s": 0.0740732813497258,
+      "anchors": [
+       "UPO9"
+      ],
+      "attempts": [
+       98
+      ],
+      "n": 1
+     },
+     {
+      "T": 17.349198127014038,
+      "abs_s": 0.31737116587467273,
+      "anchors": [
+       "UPO22"
+      ],
+      "attempts": [
+       61
+      ],
+      "n": 1
+     },
+     {
+      "T": 19.284819745823583,
+      "abs_s": 0.11776971669820692,
+      "anchors": [
+       "UPO32"
+      ],
+      "attempts": [
+       76,
+       95
+      ],
+      "n": 2
+     },
+     {
+      "T": 19.678709805818503,
+      "abs_s": 0.08514148870565119,
+      "anchors": [
+       "UPO22"
+      ],
+      "attempts": [
+       47
+      ],
+      "n": 1
+     },
+     {
+      "T": 22.038919676496395,
+      "abs_s": 0.13471969812837198,
+      "anchors": [
+       "UPO37"
+      ],
+      "attempts": [
+       39
+      ],
+      "n": 1
+     }
+    ],
+    "counts_over_20000_random_orderings": [
+     8
+    ],
+    "n_convergences": 14,
+    "n_convergences_on_replicated_solutions": 9,
+    "n_distinct_complete_linkage": 8,
+    "n_distinct_leader_greedy_implemented": 8,
+    "n_distinct_single_linkage": 8,
+    "n_replicated_solutions": 3,
+    "n_singleton_solutions": 5,
+    "narrowest_failed_merge": {
+     "T": [
+      16.874421192979728,
+      16.810007291763345
+     ],
+     "abs_s": [
+      0.07293778217462553,
+      0.0730090348366276
+     ],
+     "as_multiple_of_tol": 1.288278024327667,
+     "chebyshev_distance": 0.06441390121638335,
+     "dT": 0.06441390121638335,
+     "d_abs_s": 7.125266200207203e-05,
+     "pair": [
+      12,
+      99
+     ]
+    },
+    "tolerance_sweep": {
+     "0.010": 11,
+     "0.020": 9,
+     "0.030": 9,
+     "0.040": 9,
+     "0.050": 8,
+     "0.060": 8,
+     "0.070": 8,
+     "0.080": 8,
+     "0.100": 8,
+     "0.150": 7,
+     "0.200": 7,
+     "0.300": 6
+    },
+    "widest_accepted_merge": {
+     "as_multiple_of_tol": 0.959388516325177,
+     "chebyshev_distance": 0.04796942581625885,
+     "dT": 0.04796942581625885,
+     "d_abs_s": 0.0008832842460973489,
+     "pair": [
+      12,
+      43
+     ]
+    }
+   },
+   "U5": {
+    "cluster_sizes": [
+     3,
+     2,
+     2,
+     1,
+     1
+    ],
+    "clusters": [
+     {
+      "T": 16.530515642610993,
+      "abs_s": 0.10082407591379015,
+      "anchors": [
+       "UPO17",
+       "UPO9"
+      ],
+      "attempts": [
+       52,
+       40,
+       77
+      ],
+      "n": 3
+     },
+     {
+      "T": 16.874421192979728,
+      "abs_s": 0.07293778217462553,
+      "anchors": [
+       "UPO9"
+      ],
+      "attempts": [
+       64,
+       76
+      ],
+      "n": 2
+     },
+     {
+      "T": 19.287195120608924,
+      "abs_s": 0.11725380818789226,
+      "anchors": [
+       "UPO22"
+      ],
+      "attempts": [
+       26
+      ],
+      "n": 1
+     },
+     {
+      "T": 20.41751140125702,
+      "abs_s": 0.5866696851527289,
+      "anchors": [
+       "UPO37"
+      ],
+      "attempts": [
+       7
+      ],
+      "n": 1
+     },
+     {
+      "T": 22.038919676496395,
+      "abs_s": 0.13471969812837198,
+      "anchors": [
+       "UPO37"
+      ],
+      "attempts": [
+       74,
+       45
+      ],
+      "n": 2
+     }
+    ],
+    "counts_over_20000_random_orderings": [
+     5
+    ],
+    "n_convergences": 9,
+    "n_convergences_on_replicated_solutions": 7,
+    "n_distinct_complete_linkage": 5,
+    "n_distinct_leader_greedy_implemented": 5,
+    "n_distinct_single_linkage": 5,
+    "n_replicated_solutions": 3,
+    "n_singleton_solutions": 2,
+    "narrowest_failed_merge": {
+     "T": [
+      16.874421192979728,
+      16.535837863119433
+     ],
+     "abs_s": [
+      0.07293778217462553,
+      0.09968647246005106
+     ],
+     "as_multiple_of_tol": 6.771666597205908,
+     "chebyshev_distance": 0.3385833298602954,
+     "dT": 0.3385833298602954,
+     "d_abs_s": 0.026748690285425536,
+     "pair": [
+      64,
+      77
+     ]
+    },
+    "tolerance_sweep": {
+     "0.010": 6,
+     "0.020": 6,
+     "0.030": 6,
+     "0.040": 6,
+     "0.050": 5,
+     "0.060": 5,
+     "0.070": 5,
+     "0.080": 5,
+     "0.100": 5,
+     "0.150": 5,
+     "0.200": 5,
+     "0.300": 5
+    },
+    "widest_accepted_merge": {
+     "as_multiple_of_tol": 0.959388516325177,
+     "chebyshev_distance": 0.04796942581625885,
+     "dT": 0.04796942581625885,
+     "d_abs_s": 0.0008832842460973489,
+     "pair": [
+      64,
+      76
+     ]
+    }
+   }
+  },
+  "lane": "R",
+  "metric": {
+   "cumulative_reading": {
+    "U3": {
+     "n": 8,
+     "per_core_hour": 0.05529109703126098
+    },
+    "U5": {
+     "n": 1,
+     "per_core_hour": 0.01753303805360529,
+     "the_one_new_solution": {
+      "T": 20.41751140125702,
+      "abs_s": 0.5866696851527289,
+      "anchor": "UPO37",
+      "attempt": 7
+     }
+    },
+    "U5_over_U3": 0.3171041812335954,
+    "what_it_counts": "orbits NEW TO THE PROGRAMME, not new to the run"
+   },
+   "headline": {
+    "U3": {
+     "denominator": 144.6887551440133,
+     "denominator_field": "magnitudes.wall_seconds (52087.95185184479) * magnitudes.workers (10) / 3600",
+     "distinct_orbits_per_core_hour": 0.05529109703126098,
+     "numerator": 8,
+     "numerator_field": "clusters of attempts[].{T_converged, s_converged} at TOL=0.05"
+    },
+    "U5": {
+     "denominator": 57.035181064605716,
+     "denominator_field": "magnitudes.wall_seconds (25665.83147907257) * magnitudes.workers (8) / 3600",
+     "distinct_orbits_per_core_hour": 0.08766519026802647,
+     "numerator": 5,
+     "numerator_field": "clusters of attempts[].{T_converged, s_converged} at TOL=0.05"
+    },
+    "convention": "pool_reservation (WALLS.md's own, and U5's own)"
+   },
+   "variants": {
+    "attempt_cpu": {
+     "U3": 0.05950278725531763,
+     "U5": 0.0892707814578745,
+     "U5_over_U3": 1.500278988189693,
+     "denominator_field": "sum(attempts[].wall_seconds) / 3600"
+    },
+    "elapsed_wall_hours": {
+     "U3": 0.5529109703126098,
+     "U5": 0.7013215221442117,
+     "U5_over_U3": 1.2684167249343818,
+     "denominator_field": "magnitudes.wall_seconds / 3600"
+    },
+    "pool_reservation": {
+     "U3": 0.05529109703126098,
+     "U5": 0.08766519026802647,
+     "U5_over_U3": 1.5855209061679774,
+     "denominator_field": "magnitudes.wall_seconds * magnitudes.workers / 3600"
+    }
+   }
+  },
+  "programme": "PROG-R4",
+  "provenance": {
+   "arbiter_of_the_equivalence_rule": "experiments/p2_prog_r4_m3_evidence.py section 5",
+   "nothing_rerun": "no DNS, no mining, no Newton step; read-only",
+   "u3_json": {
+    "path": "writeup/data/p2_prog_r4_g1_v1.json",
+    "sha256": "2c5bb9503eaa991abaec8eb60eb4e7fb4fc9fe1e3814c4f9503b6fb58311c96d"
+   },
+   "u5_json": {
+    "path": "writeup/data/p2_prog_r4_m3_v1.json",
+    "sha256": "d21ac785ff502bb98c07bb445fa85031f550499891ef6e931eaf735af4e552fd"
+   },
+   "u5_npz": {
+    "path": "experiments/programme_r4/u5_m3_converged_orbits.npz",
+    "sha256": "ef521b0ad75ed8202d74995ba47e0152aa47dff3879bf8664d405e5fb50f1f86"
+   }
+  },
+  "seed_overlap": {
+   "bit_identical_re_executions": 5,
+   "detail": [
+    {
+     "T_converged": 16.53580475981305,
+     "bit_identical_output": true,
+     "u3_also_converged": true,
+     "u3_attempt": 80,
+     "u5_attempt": 40
+    },
+    {
+     "T_converged": 16.874421192979728,
+     "bit_identical_output": true,
+     "u3_also_converged": true,
+     "u3_attempt": 12,
+     "u5_attempt": 64
+    },
+    {
+     "T_converged": 22.038919676496395,
+     "bit_identical_output": true,
+     "u3_also_converged": true,
+     "u3_attempt": 39,
+     "u5_attempt": 74
+    },
+    {
+     "T_converged": 16.922390618795987,
+     "bit_identical_output": true,
+     "u3_also_converged": true,
+     "u3_attempt": 43,
+     "u5_attempt": 76
+    },
+    {
+     "T_converged": 16.535837863119433,
+     "bit_identical_output": true,
+     "u3_also_converged": true,
+     "u3_attempt": 44,
+     "u5_attempt": 77
+    }
+   ],
+   "matching_key": "(T_seed, s_seed, R_seed) at full float precision",
+   "u5_attempts": 100,
+   "u5_convergences": 9,
+   "u5_convergences_on_a_shared_seed": 5,
+   "u5_distinct_from_seeds_u3_had_not_spent": 4,
+   "u5_seeds_already_spent_by_u3": 57
+  },
+  "state_space_limit": {
+   "consequence": "U3's distinct count of 8 is the headline numerator, and U3's converged STATES are not banked anywhere in this repository -- only U5's are (u5_m3_converged_orbits.npz, 9 fields). So the count can be tested only in the (T, |s|) invariant pair, never in state space. The narrowest failed merge sits at 1.288x the tolerance, in T alone, and nothing banked can adjudicate it.",
+   "measured_spectral_distances": {
+    "att40_att52_same_cluster": 0.1992186542306245,
+    "att52_att45_different_clusters": 0.08878070984354071,
+    "att64_att76_same_cluster": 0.0013753427843027197
+   },
+   "second_limit": "Even for U5, the npz banks ONE snapshot per converged attempt at an unspecified phase along the orbit, so two snapshots of the SAME orbit need not be close in state space. Measured: attempts 64 and 76 (one cluster) agree to 0.0014 in shift-invariant spectrum, while attempts 40 and 52 (also one cluster) differ by 0.199 -- more than attempts 52 and 45, which the rule separates. The snapshots therefore CANNOT validate the equivalence rule, and are reported as an instrument limit rather than as support.",
+   "u3_states_banked": false,
+   "u5_states_banked": true,
+   "what_would_have_to_be_banked": "U3's 14 converged states, plus a phase-aligned distance (minimise over the continuous x-shift and over time-translation along the orbit). That needs the stepper, i.e. new compute, and is NOT estimated here."
+  },
+  "unit": "R0",
+  "verdict": {
+   "ceiling": "TIER 2. No L1->L4 link moved. A best-in-field orbit finder does not move a Clay link -- it makes the questions affordable, which is a DIFFERENT AND LESSER THING. Clay stays ~0.05%.",
+   "core_hours": "AGREE with WALLS.md's 144.69 for U3 and 57.04 for U5, and DISAGREE with WALLS.md's account of why 134.45 arose. 134.45 is not prose: it is sum(attempts[].wall_seconds)/3600 = 134.4475, from the same JSON, and it is the figure U3's own INDEX row reports. The two numbers are the pool reservation and the attempt CPU time; U3's pool utilisation was 0.9292 and U5's 0.9820, which is the whole of the difference.",
+   "distinct_count": "AGREE with WALLS.md's 8 for U3 and 5 for U5, re-derived independently under the arbiter's own rule, and robust to linkage convention, to 20,000 orderings, and to the tolerance over 0.05-0.10. DISAGREE with the prose input WALLS.md's original argument used: '10 of 14 on three solutions' is measured as 9.",
+   "retraction": "'Lane R's first measured win' is RETRACTED AS AN INFERENCE. The arithmetic stands: U5 is above U3 under all three derivable core-hour conventions, by 1.27x to 1.59x. What does not stand is reading that as Lane R's machinery having improved. The metric is per-run, the two runs are not independent samples, and on the only reading that tracks what the programme actually gained U5 is 3.15x worse. Lane R may claim a cheaper run; it may not claim a better orbit finder on this evidence.",
+   "the_finding": "The metric is confirmed and its INFERENCE is not. Per-run distinct-orbits-per-core-hour still counts a CROSS-RUN re-find as a success -- the same defect it was introduced to remove, one level up. 57 of U5's 100 seeds had already been spent by U3, 5 of U5's 9 convergences are bit-identical re-executions of U3 attempts, and one of U5's five distinct solutions was reached ONLY by re-running U3's seeds. Under the cumulative reading -- orbits new to the programme -- U5 is 0.0175 against U3's 0.0553."
+  },
+  "wall": "W7",
+  "walls_md_prose_argument": {
+   "measured_convergences_on_replicated_solutions": 9,
+   "measured_replicated_solutions": 3,
+   "measured_singletons": 5,
+   "walls_md_claim": "10 of U3's 14 convergences landed on three solutions",
+   "why_the_prose_argument_failed": "WALLS.md argued 10 convergences over 3 replicated solutions leaves 4, which cannot yield 5 more, so 8 was unreconcilable. The premise is off by one: the measured figure is 9 over 3 (cluster sizes 4+3+2), leaving 5 singletons, and 3+5 = 8 exactly. The count was never in doubt; the prose's own input number was wrong."
+  }
+ },
+ "r1": {
+  "criterion_family": "abort at epoch k iff k >= K and ||R||_k > theta * ||R||_{k-W}",
+  "deliverable_kind": "COMPUTE SAVING (epochs and core-hours), not orbits",
+  "determinism": "LEG 349 COMPLIANT. Three fixed parameters and a comparison of two banked residuals. No learned or evolved fitness, no scoring of seeds, no stochastic component; the rule does not touch seed selection at all, only the stopping time of an already-launched attempt. Replaying it on the ledger is exactly reproducible.",
+  "filename_note": "WALLS.md calls R1 'early abort on flatness', so the commissioned filename r1_flatness.py already matches and was NOT renamed.",
+  "flatness_premise": {
+   "all_ran_to_the_cap": [
+    51
+   ],
+   "n_non_convergences": 86,
+   "pct_reduced_under_10_pct": 82.55813953488372,
+   "pct_reduced_under_1_pct": 53.48837209302326,
+   "pct_still_halving": 3.488372093023256,
+   "verdict": "CONFIRMED to the reported precision",
+   "walls_md_claim": "53% reduced ||R|| by <1% over their final 10 epochs, 83% by <10%, only 3% still halving"
+  },
+  "headroom": {
+   "best_admissible_rule": {
+    "K": 21,
+    "W": 10,
+    "theta": 0.1
+   },
+   "best_admissible_u3_recovery": 0.554547418448909,
+   "headroom_core_hours_u3": 0.48401587272780794,
+   "headroom_percentage_points": 0.4536616979909258,
+   "incumbent_u3_recovery": 0.5500108014689997,
+   "margin_factor": 9.954346932182423,
+   "question": "At no loss of safety margin against the deployed rule, how much more of U3's compute is recoverable?"
+  },
+  "holdout": {
+   "fit_on_u3_scored_on_u5": {
+    "fit_fraction_recovered": 0.559300064808814,
+    "fit_margin_factor": 7.13127516824498,
+    "heldout_false_kills": 0,
+    "heldout_fraction_recovered": 0.021387832699619747,
+    "rule": {
+     "K": 20,
+     "W": 8,
+     "theta": 0.55
+    },
+    "verdict": "PASSES the false-kill control on unseen data"
+   },
+   "fit_on_u5_scored_on_u3": {
+    "fit_fraction_recovered": 0.17015209125475284,
+    "fit_margin_factor": 7.035221314159304,
+    "heldout_false_kills": 1,
+    "heldout_fraction_recovered": 0.6156837329876863,
+    "rule": {
+     "K": 17,
+     "W": 13,
+     "theta": 0.15
+    },
+    "verdict": "FAILS the false-kill control on unseen data: it aborts an attempt U3's ledger shows converged"
+   },
+   "reading": "The control is asymmetric and that asymmetry is the result. A rule selected on U3's 14 convergences transfers to U5 with zero false kills; a rule selected on U5's 9 transfers to U3 and kills one. Nine convergences are not enough to fix a stopping rule, and the direction that fails is the one with the smaller fitting set. Any future tuning of this criterion must be selected on the LARGER ledger and scored on the smaller, never the reverse."
+  },
+  "incumbent": {
+   "U3": {
+    "attempts_aborted": 86,
+    "core_hours_saved": 74.87390920548138,
+    "epochs_baseline": 4629,
+    "epochs_under_rule": 2083,
+    "false_kills": 0,
+    "fraction_of_epochs_recovered": 0.5500108014689997
+   },
+   "U5": {
+    "attempts_aborted": 0,
+    "core_hours_saved": 0.0,
+    "epochs_baseline": 2104,
+    "epochs_under_rule": 2104,
+    "false_kills": 0,
+    "fraction_of_epochs_recovered": 0.0
+   },
+   "banked_as": "from epoch 20, stop if ||R||_k > 0.5 * ||R||_(k-10)",
+   "margin_factor_pooled": 6.901609656627281,
+   "margin_factor_u3_only": 6.901609656627281,
+   "rule": {
+    "K": 20,
+    "W": 10,
+    "theta": 0.5
+   },
+   "who_deployed_it": "U5, before this unit existed",
+   "worst_window_ratio_pooled": 0.07244686745212753
+  },
+  "lane": "R",
+  "ledger": {
+   "U3": {
+    "attempt_cpu_core_hours": 134.44748337037032,
+    "attempts": 100,
+    "convergence_n_iters_max": 29,
+    "convergence_n_iters_median": 16.0,
+    "convergence_n_iters_sorted": [
+     10,
+     10,
+     10,
+     10,
+     12,
+     14,
+     15,
+     17,
+     17,
+     22,
+     23,
+     26,
+     28,
+     29
+    ],
+    "convergences": 14,
+    "epochs_in_convergences": 243,
+    "epochs_in_non_convergences": 4386,
+    "epochs_total": 4629,
+    "mean_seconds_per_epoch": 104.56058330812988
+   },
+   "U5": {
+    "attempt_cpu_core_hours": 56.00936743630303,
+    "attempts": 100,
+    "convergence_n_iters_max": 24,
+    "convergence_n_iters_median": 16,
+    "convergence_n_iters_sorted": [
+     10,
+     10,
+     10,
+     15,
+     16,
+     17,
+     20,
+     22,
+     24
+    ],
+    "convergences": 9,
+    "epochs_in_convergences": 144,
+    "epochs_in_non_convergences": 1960,
+    "epochs_total": 2104,
+    "mean_seconds_per_epoch": 95.83351842713446
+   }
+  },
+  "programme": "PROG-R4",
+  "projection": {
+   "LABEL": "PROJECTED",
+   "PROJECTED_distinct_orbits_per_core_hour_attempt_cpu": 0.13428772928509272,
+   "PROJECTED_factor": 2.256830906237787,
+   "measured_distinct_orbits_per_core_hour_attempt_cpu": 0.05950278725531763,
+   "what_it_assumes": "that U3 replayed under the rule finds the SAME 8 distinct orbits in 59.57 rather than 134.45 core-hours. The zero-false-kill control supports this for the 14 convergences; it is still a replay, not a run.",
+   "what_it_does_NOT_claim": "It does NOT claim the recovered 74.87 core-hours would convert into further orbits at the observed rate. R0 measured that U5 spent 57.04 core-hours to gain ONE orbit new to the programme, so the conversion assumption is optimistic and is not made here. A recycled-budget yield is NOT reported."
+  },
+  "saving": {
+   "core_hours_after_attempt_cpu": 59.57357416488894,
+   "core_hours_before_attempt_cpu": 134.44748337037032,
+   "core_hours_saved_attempt_cpu": 74.87390920548138,
+   "epochs_after": 2083,
+   "epochs_before": 4629,
+   "false_kills": 0,
+   "fraction_of_core_hours_saved": 0.5569007863034658,
+   "fraction_of_epochs_recovered": 0.5500108014689997,
+   "margin_factor": 6.901609656627281,
+   "measured_on": "U3's banked ledger, writeup/data/p2_prog_r4_g1_v1.json, 100 attempts x residual_history, replayed",
+   "rule": "from epoch 20, stop if ||R||_k > 0.5 * ||R||_(k-10)",
+   "whose_saving_it_is": "U5's, not R1's. The rule was built and deployed by U5 before this unit was commissioned. R1's own measurement is the HEADROOM above it, which is +0.5 percentage points."
+  },
+  "sweep": {
+   "frontier_best_u3_recovery_at_min_margin": [
+    {
+     "core_hours_saved_u3": 89.27448824882246,
+     "core_hours_saved_u5": 16.78448981454405,
+     "margin_factor": 1.0936554213570588,
+     "min_margin_factor": 0.0,
+     "pooled_fraction_recovered": 0.5409178672211495,
+     "rule": {
+      "K": 2,
+      "W": 9,
+      "theta": 0.45
+     },
+     "u3_fraction_recovered": 0.6534888744869303,
+     "u5_fraction_recovered": 0.29325095057034223
+    },
+    {
+     "core_hours_saved_u3": 83.18683020384094,
+     "core_hours_saved_u5": 10.2795239586146,
+     "margin_factor": 1.5144703702569637,
+     "min_margin_factor": 1.5,
+     "pooled_fraction_recovered": 0.47393435318580124,
+     "rule": {
+      "K": 2,
+      "W": 13,
+      "theta": 0.3
+     },
+     "u3_fraction_recovered": 0.6085547634478289,
+     "u5_fraction_recovered": 0.17775665399239549
+    },
+    {
+     "core_hours_saved_u3": 80.1605995784697,
+     "core_hours_saved_u5": 7.563755668395816,
+     "margin_factor": 2.3315709982745174,
+     "min_margin_factor": 2.0,
+     "pooled_fraction_recovered": 0.4455666122085252,
+     "rule": {
+      "K": 17,
+      "W": 16,
+      "theta": 0.15
+     },
+     "u3_fraction_recovered": 0.5875999135882479,
+     "u5_fraction_recovered": 0.13307984790874527
+    },
+    {
+     "core_hours_saved_u3": 78.00136619305168,
+     "core_hours_saved_u5": 5.434755235212942,
+     "margin_factor": 3.10876133103269,
+     "min_margin_factor": 3.0,
+     "pooled_fraction_recovered": 0.42210010396554287,
+     "rule": {
+      "K": 17,
+      "W": 16,
+      "theta": 0.2
+     },
+     "u3_fraction_recovered": 0.5711816807085763,
+     "u5_fraction_recovered": 0.094106463878327
+    },
+    {
+     "core_hours_saved_u3": 77.13275966940233,
+     "core_hours_saved_u5": 2.3977394718512186,
+     "margin_factor": 5.3215537499153465,
+     "min_margin_factor": 5.0,
+     "pooled_fraction_recovered": 0.40323778404871524,
+     "rule": {
+      "K": 20,
+      "W": 8,
+      "theta": 0.45
+     },
+     "u3_fraction_recovered": 0.5670771224886584,
+     "u5_fraction_recovered": 0.04277566539923949
+    },
+    {
+     "core_hours_saved_u3": 75.35792507820919,
+     "core_hours_saved_u5": 2.665058005410276,
+     "margin_factor": 9.954346932182423,
+     "min_margin_factor": 6.901609656627281,
+     "pooled_fraction_recovered": 0.39640576266151795,
+     "rule": {
+      "K": 21,
+      "W": 10,
+      "theta": 0.1
+     },
+     "u3_fraction_recovered": 0.554547418448909,
+     "u5_fraction_recovered": 0.048479087452471537
+    },
+    {
+     "core_hours_saved_u3": 75.35792507820919,
+     "core_hours_saved_u5": 2.665058005410276,
+     "margin_factor": 9.954346932182423,
+     "min_margin_factor": 8.0,
+     "pooled_fraction_recovered": 0.39640576266151795,
+     "rule": {
+      "K": 21,
+      "W": 10,
+      "theta": 0.1
+     },
+     "u3_fraction_recovered": 0.554547418448909,
+     "u5_fraction_recovered": 0.048479087452471537
+    },
+    {
+     "core_hours_saved_u3": 75.35792507820919,
+     "core_hours_saved_u5": 2.6360412830645776,
+     "margin_factor": 14.931520398273632,
+     "min_margin_factor": 10.0,
+     "pooled_fraction_recovered": 0.39625724045744837,
+     "rule": {
+      "K": 21,
+      "W": 10,
+      "theta": 0.15
+     },
+     "u3_fraction_recovered": 0.554547418448909,
+     "u5_fraction_recovered": 0.0480038022813688
+    },
+    {
+     "core_hours_saved_u3": 75.30327311254666,
+     "core_hours_saved_u5": 2.4397722897023453,
+     "margin_factor": 19.908693864364846,
+     "min_margin_factor": 15.0,
+     "pooled_fraction_recovered": 0.3946234962126838,
+     "rule": {
+      "K": 21,
+      "W": 10,
+      "theta": 0.2
+     },
+     "u3_fraction_recovered": 0.5541153596889177,
+     "u5_fraction_recovered": 0.04372623574144485
+    }
+   ],
+   "grid": {
+    "K": [
+     2,
+     40
+    ],
+    "W": [
+     2,
+     20
+    ],
+    "n_rules": 12597,
+    "theta": [
+     0.05,
+     0.1,
+     0.15,
+     0.2,
+     0.25,
+     0.3,
+     0.35,
+     0.4,
+     0.45,
+     0.5,
+     0.55,
+     0.6,
+     0.7,
+     0.8,
+     0.9,
+     0.95,
+     0.99
+    ]
+   },
+   "n_zero_false_kill": 9760,
+   "scored_on": "the pooled banked residual_history of 200 attempts (U3 100 + U5 100), replayed; no attempt re-run",
+   "unconstrained_optimum": {
+    "core_hours_saved_u3": 89.27448824882246,
+    "margin_factor": 1.0936554213570588,
+    "rule": {
+     "K": 2,
+     "W": 9,
+     "theta": 0.45
+    },
+    "u3_fraction_recovered": 0.6534888744869303,
+    "why_rejected": "zero false kills but a margin factor of 1.09x: a future convergence behaving 9% worse than the worst banked one dies under it. Selecting the maximum of a statistic over 12,597 rules on 23 convergences is exactly how one overfits a stopping rule. NOT ADOPTED."
+   }
+  },
+  "unit": "R1",
+  "verdict": {
+   "ceiling": "TIER 2. A cheaper solver does not move an L1->L4 link. It makes the questions affordable, which is a DIFFERENT AND LESSER THING than progress on the Clay statement. Clay stays ~0.05%.",
+   "gate": "YES. R1 is executed to a measured number on the banked data and its saving is expressed as compute. The criterion recovers 55.0% of U3's 4,629 epochs = 74.87 of its 134.45 attempt-CPU core-hours, with zero false kills over 23 banked convergences and a 6.90x safety margin.",
+   "the_correction": "That saving is NOT new. U5 built and deployed exactly this rule before R1 was commissioned, and WALLS.md's 'cheapest competitive win in the repository' has therefore already been collected. R1's own contribution is the search that shows there is almost nothing left in it: over 12,597 deterministic rules, 9760 of them killing no banked convergence, the best rule that does not degrade the deployed safety margin recovers +0.5 percentage points more of U3's epochs -- +0.48 core-hours on a 134-core-hour run.",
+   "what_closes": "R1 CLOSES. The apparent 65%-recovery rules exist but sit at a 1.09x margin, and the hold-out shows a rule selected on the smaller ledger already kills a real convergence on the larger. No further compute should be spent tuning this criterion family."
+  },
+  "walls_md_name": "R1 -- early abort on flatness"
+ },
+ "unit": "R0+R1",
+ "wall": "W7"
+}
