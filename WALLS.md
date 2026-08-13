@@ -299,13 +299,31 @@ problem: 14 convergences, but 10 of them landed on just three solutions.**
 **The reported metric is `DISTINCT ORBITS PER CORE-HOUR`,** with per-attempt rate retained as a
 secondary diagnostic and always alongside it.
 
-**The baseline to beat, banked now so it cannot be re-chosen later:** U3 delivered **8 distinct
-orbits / 134.45 core-hours = 0.0595 distinct orbits per core-hour**, at a 14% per-attempt rate
-against Chandler–Kerswell's 4.3% and Lucas–Kerswell's ~10%. *(Reconcile first: U3 §4's table
-accounts for 10 convergences over 3 replicated solutions, and 4 remaining convergences cannot yield
-5 further distinct solutions. Either the table omits a replicated row or the count is 7. Fix the
-number before using it as a baseline — a baseline nobody checked is how a later "improvement"
-becomes unfalsifiable.)*
+**The baseline to beat, and R0 must reconcile it before anything is measured against it.**
+U5 (2026-08-13) already found **two defects in the baseline as first written here**, which is
+exactly why R0 exists:
+
+- **Core-hours.** This file first quoted **134.45** for U3. `p2_prog_r4_g1_v1.json` gives
+  52,087.95 s × 10 workers = **144.69**. Reconcile against the JSON, not against prose.
+- **The distinct count.** This file first argued U3's 8 was unreconcilable with its §4 table
+  (10 convergences over 3 replicated solutions, then 4 remaining cannot yield 5 more). **U5
+  measured it instead of arguing it:** clustering U3's 14 convergences at the matching predicate's
+  own 0.05 tolerance, with `s` wrapped to `(-π, π]`, **reproduces 8**
+  (`experiments/p2_prog_r4_m3_evidence.py` §5). The table almost certainly lists only replicated
+  rows. **R0 reconciles against that script, not against this paragraph** — and the lesson is the
+  one this repository already knows: a count derived from prose is not a measurement.
+
+**Current standing, provisional until R0 lands** (U5 §9.2, attempts stage, like for like):
+
+| | distinct | core-hours | **distinct / core-hour** |
+|---|---|---|---|
+| U3 | 8 (7 if the count resolves down) | 144.69 | 0.0553 (0.0484) |
+| **U5** | **5** | **57.04** | **0.0877** |
+
+**U5 is above U3 on every variant** — Lane R's first measured improvement, and it came from a
+seed-supply change, not from the solver. Including U5's mining and control stages (68.91
+core-hours) it is 0.0726, still above. Per-attempt rate over the same period went **down**, 14% →
+9%, which is precisely why it is not the headline.
 
 ### R1 — early abort on flatness. *Cheapest competitive win in the repository, and it is measured.*
 
@@ -320,11 +338,16 @@ attempt that U3's ledger shows would have converged.
 
 ### R2 — deflation. *Attacks the largest measured waste after R1.*
 
-10 of 14 convergences landed on three solutions. Newton keeps finding what it has already found.
+10 of U3's 14 convergences landed on three solutions. **U5 made this worse and made it
+cross-unit: 4 of U5's 5 distinct solutions were already in U3's set, so a second 100-attempt
+budget at 57 core-hours bought exactly ONE solution the first run had not reached.** Newton keeps
+finding what it has already found, across runs, from an entirely different seed pool.
+
 **Deflated continuation (Farrell–Birkisson–Funke) removes located solutions from the residual so
 the same Newton cannot reconverge to them**, which converts re-finds into new orbits and improves
 the R0 metric directly rather than by making attempts cheaper. It is a well-established technique,
-this repository does not have it, and it is exactly matched to the measured failure.
+this repository does not have it, and after U5 it is matched to the largest measured waste in the
+programme. **Deflate against the union of both runs' solutions**, not just the current one's.
 
 ### R3 — multiple shooting. *Standard in this field and absent here.*
 
@@ -344,11 +367,22 @@ reproduction and must re-run it**, which is why it is a milestone and not a tuni
 
 ### R5 — carry the `m` unknown in the residual. *U3's option (c). Realization change.*
 
-U3's extended residual carries a continuous `x`-shift only, so **345 in-window candidates could not
-be expressed as seeds at all**. All eight named rows have `m_published = 0`, so nothing named is
-lost — but the seed pool is roughly tripled, and every negative this repository states about orbit
+U3's extended residual carries a continuous `x`-shift only, so a large block of in-window
+candidates cannot be expressed as seeds at all. Every negative this repository states about orbit
 recovery currently has to carry the clause *"with a residual that cannot represent one of the two
-shift classes."* Removing that clause is worth more than the seeds.
+shift classes"*, and removing that clause is worth more than the seeds.
+
+**CORRECTED 2026-08-13 by U5's measurement — this file previously implied R5 helps the band, and
+it does not.** U5 priced it: carrying `m` unlocks **334 anchored in-window candidates, 58.1% of the
+window, but only 1 of the 334 lies in the published `|s|` band.** So **R5 is not a fix for the
+named rows.** It is the fix for `|s| > 0.9`, where the `m = 0` rate collapses to 0.02%/0.01% while
+the window rate recovers. Do it as the largest measured hole in the trial space — and do not let it
+be sold as a route to the published targets, which is how the earlier wording read.
+
+**Consequence for the basin-structure finding's pointer.** U5's pre-committed reading said branch
+(b) "points at `R3`/`R5`". Given the count above, the live pointers are **`R3` (multiple shooting)**
+and **`U4`/`G2` (the basin radius)** and the H-hard diagnostic; `R5` stays valuable for a different
+reason than the one the pointer implied.
 
 **A ban that binds this lane: leg 349's GA gate answered NO (0 of 6 properties cleared), so
 `GA compute on an unvalidated fitness` is live.** A *learned* or *evolved* seed-scoring function is
