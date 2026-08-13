@@ -398,6 +398,7 @@ P2_EVIDENCE = [
     "../experiments/p2_route_cobv_v1_evidence.py",              # fig105 -- Route-COBV v1 (leg 384); fig105 assigned at dispatch (fig103 to leg 385, fig104 to a DOCS unit)
     "../experiments/p2_route_dtol_v1_evidence.py",              # fig99 -- Route-DTOL v1 (leg 386); fig99 was reserved for leg 381, which drew no figure and left it unused, and was re-allocated to this leg at dispatch
     "../experiments/p2_route_dtor_v1_evidence.py",              # fig106 -- Route-DTOR v1 (leg 390); fig106 assigned at dispatch (fig105 to leg 384, fig103 to leg 385, fig99 to leg 386, fig97/98 to PROG-R4, fig101/104 to the DOCS units)
+    "figures/fig108_prog_r4_r0r1.py",                           # fig108 -- PROG-R4 R0+R1, Lane R metric reconciliation and flatness abort; fig108 assigned at dispatch (fig107 to U5, fig109 to another worker in the same wave). The drawing script IS the rebuild path: it redraws from writeup/data/p2_prog_r4_r0r1_v1.json alone and re-runs no solver
 ]
 
 
