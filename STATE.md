@@ -125,6 +125,10 @@ these are drawn into waves of 2–4 from **different lanes**, so one stalled lan
    **144.69** — R0 should reconcile the figure it baselines on; (ii) R0 already flags U3's distinct
    count of 8 as unreconcilable with its own §4 table, and at 7 the baseline is 0.0484. U5's number
    is above U3's on every variant, but the comparison stays **provisional until R0 lands**.
+   *Datum for R0:* clustering U3's 14 convergences independently, at the matching predicate's own
+   0.05 tolerance and with `s` wrapped to `(-π, π]`, reproduces **8** — see
+   `experiments/p2_prog_r4_m3_evidence.py` §5. R0 should reconcile against that rather than against
+   prose.
 
 4. **`R0` + `R1` — the metric, then early abort on flatness.** *Lane R, competitiveness, and R1 is
    the cheapest measured win in the repository.* **R0 first and it is not optional:** per-attempt
@@ -140,7 +144,9 @@ these are drawn into waves of 2–4 from **different lanes**, so one stalled lan
 **Wave 2 — plan after wave 1 lands and is audited. Expected shape:**
 
 5. **`R2` — deflation.** 10 of 14 convergences landed on three solutions; Newton keeps re-finding
-   what it has found. Deflated continuation (Farrell–Birkisson–Funke) removes located solutions
+   what it has found. **U5 makes this worse than it looked, and cross-unit**: 4 of U5's 5 distinct
+   solutions were already in U3's set, so a second 100-attempt budget at 57 core-hours bought
+   **one** solution the first had not reached. Deflated continuation (Farrell–Birkisson–Funke) removes located solutions
    from the residual. Improves the R0 metric directly rather than by making attempts cheaper.
 6. **`V1` — Lane V's opening escalation + target selection.** The stage-V ban's lift condition
    (*"unless the question is re-posed for a FLUID transport model, which needs L1 first"*) is
@@ -154,9 +160,14 @@ these are drawn into waves of 2–4 from **different lanes**, so one stalled lan
 9. **Discharge `PROG-R4` U3's two owed novelty questions.** *Literature, owed work on the run's own
    output — NOT screening.* (i) Are the recovered RPOs known at all? None is a named Table IV
    row — **that verdict does not change here**; the unasked question is whether they are in the
-   literature. **U5 enlarges the target set**: it independently re-found U3's most-replicated
-   solution (`T=16.5305/|s|=0.1008`, three attempts, two strata, anchors UPO9 and UPO17) plus four
-   more distinct ones, states in `experiments/programme_r4/u5_m3_converged_orbits.npz`. (ii) Is the
+   literature. **U5 enlarges the target set by exactly one.** Measured, not asserted
+   (`experiments/p2_prog_r4_m3_evidence.py` §5): U5's 9 convergences give 5 distinct solutions, of
+   which **4 are re-finds of U3's 8** — including U3's most-replicated
+   (`T=16.5305/|s|=0.1008`, three attempts, two strata, anchors UPO9 and UPO17) — and **one is new**,
+   `T=20.4175/|s|=0.5867`, stratum P, anchor UPO37. The new one is the only solution either run has
+   found **inside the published band**. So the literature question is asked of **9 distinct
+   solutions across both units**, states in `experiments/programme_r4/u5_m3_converged_orbits.npz`
+   and U3's counterpart. (ii) Is the
    selection-bias caveat in `BLOG_P2_PROGR4_MINING_BAND.md` already published? It is
    externally-facing and unchecked. Claim neither outcome before measuring it.
 

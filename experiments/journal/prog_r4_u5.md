@@ -291,6 +291,36 @@ attempts exited `stalled`** and 9 converged; U3's corresponding split was 86 `ma
 any U3 convergence exhibited at `k ≥ 20` was 0.0724 against the rule's 0.50 threshold, a factor
 of 6.9. **U5 spent fewer iterations than U3 and bought none.**
 
+### 6.6 What the stratification actually bought, against U3's solution set
+
+*Measured after the run, not pre-registered. It is a comparison of two banked ledgers, it changes
+no milestone clause, and it is reported because the milestone is DELIVERED with zero recoveries
+and the honest question is then whether a stratified budget found anything a globally-ranked one
+had not.*
+
+Clustering U3's 14 convergences at the same tolerance gives **8 distinct solutions**. Of U5's five,
+**four are re-finds of solutions U3 already had**, and exactly **one is new**:
+
+| `T` | `\|s\|` | in U3's set? |
+|---|---|---|
+| 16.5305 | 0.1008 | yes |
+| 16.8744 | 0.0729 | yes |
+| 19.2872 | 0.1173 | yes |
+| **20.4175** | **0.5867** | **no — U3 never found it** |
+| 22.0389 | 0.1347 | yes |
+
+The new one is the only U5 solution **inside the published band**, it came from stratum `P`, and it
+is the single in-band convergence that did not leave the band (§6.4's table, first row). That is
+the narrowest possible positive result and it should be read narrowly: stratifying by shift bought
+**one** solution a globally-ranked budget did not reach, at 57 core-hours. It is not a named Table
+IV row, `n_recovered` is still 0, and **G1 is still UNDER-RESOURCED**.
+
+It also sharpens the case for `R2` (deflation): the re-finding is not merely within-run — 4 of 5 of
+this unit's distinct solutions were already in the previous unit's set, so a budget that does not
+subtract known solutions spends most of itself re-deriving them **across** units too.
+
+Re-derivable: `.venv/bin/python experiments/p2_prog_r4_m3_evidence.py`, §5.
+
 ## 7. Errata and departures against my own pre-registration
 
 **(i) The pre-registration's "before either stage ran" is imprecise, and here is exactly what had
@@ -514,7 +544,9 @@ way rather than claimed.
 | curated record | `writeup/data/p2_prog_r4_m3_v1.json` |
 | per-iteration ledger | `experiments/programme_r4/u5_m3_ledger.json` |
 | committed seed library | `experiments/programme_r4/u5_shift_library_admissible.json` |
+| evidence, re-derives every quoted number from the banked JSONs | `experiments/p2_prog_r4_m3_evidence.py` (27/27) |
 | figure | `writeup/figures/fig107_prog_r4_m3_shift_strata.py` / `.png` |
+| write-ups | `writeup/4_p2_lottery/BLOG_P2_PROGR4_SHIFT_STRATA.md`, `TECHNICAL_P2_PROGR4_SHIFT_STRATA.md` |
 | run logs | `experiments/programme_r4/u5_mining_stdout.log`, `u5_attempts_stdout.log` |
 
 The full 18 MB mined take is a **regenerable intermediate** and is gitignored beside the DNS
