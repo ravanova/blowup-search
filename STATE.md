@@ -48,31 +48,88 @@ what a wall-breaking mandate does and does not license.
 
 | What | State |
 |---|---|
+| **WAVE 1** (`T1`, `T2`, `R0+R1`, `E`) | **PLANNED AND COMMITTED 2026-08-13, before dispatch**, per §3g step 1. Gates in final wording and pre-committed readings are below. Composition floor met by **two** Lane T units, not one. **No verifier in this wave** — §3g forbids the Conductor verifying a wave it planned; wave 2 carries it. |
+| **`plan_of_record.py` posture** | **LANDED 2026-08-13** (`1ca9e91`), the Conductor's first act under §3g. Additive only — 75 insertions, 0 deletions: `POSTURE`, `MODE`, `BLOCKERS_FILE` → `WALLS.md`, `LANES` (T/V/L/R with the walls each attacks), `POSTURE_LIMITS` (§3h restated executably). **No ban lifted, narrowed, reworded or re-read**; the `BANNED` table is byte-identical and `test_plan_of_record.py` still reports 26 bans / 19 in force, ALL GATES PASS. |
 | **`PROG-R4`** (route-4 DSS programme, leg 380) | **U0–U3, U5 LANDED. U4 BLOCKED — but now *interesting*, see below.** U2 answered **MILESTONE M2** (T=1e5 DNS on the attractor, `D/D_lam`=0.0645±0.0253). U3 answered **GATE G1 = `UNDER-RESOURCED`**, controls fired as planted — 0 of 100 recovered a named orbit, 14 of 100 converged onto eight *other* RPOs. **U5 answered `MILESTONE M3 = DELIVERED`** (2026-08-13): the budget is now stratified by SHIFT — exhaustive re-mine 2,014 → **75,873** candidates, in-band admissible supply 35 → **72**, in-band spend 31 → **60**, controls fired as planted, **2,104 epochs against U3's 4,629 (no iterations bought)**. **9 of 100 converged, 0 recovered a named row**, and **U5's pre-committed reading fired on branch (b) — the bias is in BASIN STRUCTURE, not only seed supply.** **§3d's stop did NOT fire; route 4 is NOT stopped.** **G1 is untouched and stays `UNDER-RESOURCED`** — `n_recovered=0` is a count, not a `no`, and no G1 re-open is raised. U4 (G2, basin radius) still cannot open — it needs a recovered **named** orbit — but the pre-committed reading makes it the interesting unit rather than a formality. Tier-2 ceiling; Clay unmoved. **UNVERIFIED** under §3f. |
 
-## Next tasks — pre-committed, in order
+## WAVE 1 — PLANNED AND COMMITTED 2026-08-13, BEFORE DISPATCH
 
 Re-ranking requires its own commit stating why (`ORCHESTRATION.md` §3f/§3g). In CONDUCTOR mode
 these are drawn into waves of 2–4 from **different lanes**, so one stalled lane cannot sink a wave.
 
-**Wave 1 — dispatch these four together. Two are cheap and can kill or unblock a lane.**
+**Composition floor (§3g, per-wave):** four units — **T1 and T2 are Lane T**, attacking W2/W6 and
+W4 on the Clay chain directly. **The floor is met by two units, not one.** A wave of pure Lane R
+would be out of contract, and so would a wave whose only non-Lane-R unit is an audit; neither
+applies here. **No verifier in this wave** — §3g forbids the Conductor verifying waves it planned,
+so wave 2 carries the verifier for whichever wave-1 unit makes a claim.
 
-1. **`T1` — the ban-scope reading. ESCALATION, NOT A LEG'S CALL.** *Lane T, blocking the whole
-   lane.* Does the ℓ¹-Fourier/radii-polynomial ban reach a Zgliczyński-style **Galerkin-plus-tail
-   dynamical closure**, which is a different apparatus (dynamical closure, not a
-   Newton–Kantorovich contraction in a function space)? Leg 348 raised this precise question and
-   **correctly refused to answer it**: *"I make no claim about whether that apparatus distinction
-   matters to the ban's scope; that reading is for the DM/user."* Prepare both readings with the
-   evidence for each and **escalate to the user (§8)**. Do **not** rule it inside the lane, and do
-   **not** build anything in Lane T until it is ruled. Note this is the *third* pending ban-wording
-   escalation (Cadiot; stage V's "needs L1 first") — bundle all three.
+**Every gate below is in FINAL WORDING and every unit carries a PRE-COMMITTED READING** — what each
+branch of the outcome *means* — fixed here, before any worker is dispatched and before any number
+exists. This is not ceremony: on 2026-08-13 a reading committed to `main` while U5 was mid-run bound
+that unit's interpretation, and U5 honoured it rather than working around it, which is the only
+reason the basin-structure result is a **finding** rather than a story assembled after the numbers.
 
-2. **`T2` — search the periodic-rigidity literature.** *Lane T, literature, never done.* Leg 390
-   §5 item 2: the §2 screen's four rows are **ℝ³-only, 0 of 4 carry to `T³`**, and this repository
-   has never searched the `T³` rigidity literature at all. This decides whether a torus blow-up
-   target is already excluded by a published theorem **before anything is built**. Run it early
-   precisely because it can kill Lane T cheaply. Full novelty-pass instrument discipline, controls
-   both ways.
+---
+
+### 1. `T1` — the ban-wording escalation packet. *Lane T. ESCALATION, NOT A LEG'S CALL.* leg 391
+
+*Blocks the whole of Lane T.* Does the ℓ¹-Fourier/radii-polynomial ban reach a Zgliczyński-style
+**Galerkin-plus-tail dynamical closure** — a different apparatus (a dynamical closure, not a
+Newton–Kantorovich contraction in a function space)? Leg 348 raised this precise question and
+**correctly refused to answer it**: *"I make no claim about whether that apparatus distinction
+matters to the ban's scope; that reading is for the DM/user."* **The Conductor refuses too:** §3h
+rule 1 makes a defective ban *wording* a user escalation, and §3g notes that an entity which both
+raises and rules an escalation has defeated the mechanism. **Bundle all three pending wording
+escalations** (Cadiot; stage V's "needs L1 first"; the apparatus question).
+
+> **GATE (final wording).** Does the packet state, for **each** of the three pending ban-wording
+> questions, **both** supportable readings with the evidence for each drawn from the ban's own text
+> and the landed record — **without the packet itself ruling any of them**?
+> **yes →** the packet escalates to the user under §8; Lane T stays blocked until the user rules.
+> **no →** name which question could not be given two supportable readings and why; that question
+> is then not a wording defect and is withdrawn from the escalation rather than carried.
+
+**PRE-COMMITTED READING.** **(a)** If the ℓ¹-Fourier ban's own text names an **apparatus** (an NK
+contraction / radii-polynomial bounds in a function space) and not a dynamical Galerkin-plus-tail
+closure, then the 2026-08-11 *scoping* precedent is available **in shape** — and availability is not
+exercise. T1 records that it is available and **does not exercise it**. **(b)** If the ban's text
+names the **conclusion** (a certificate for this object class) rather than the apparatus, then T3/T4
+are inside the ban whatever the apparatus, and Lane T is blocked on a *lift*, not a *scope* — a
+materially worse position that must be reported as such and not softened. **(c)** Either way, the
+lift clause reads *"a namable **FOURTH space/basis**"*, and a fourth **apparatus** is not literally a
+fourth space or basis: T1 must surface that mismatch as part of the defect rather than resolve it.
+**BUILD NOTHING IN LANE T UNTIL THE USER RULES** — that includes T3 and T4.
+
+### 2. `T2` — search the periodic-rigidity literature. *Lane T, literature, never done here.* leg 392
+
+Leg 390 §5 item 2: the §2 screen's four rows are **ℝ³-only, 0 of 4 carry to `T³`**, and this
+repository has **never searched the `T³` rigidity literature at all.** This decides whether a torus
+blow-up target is already excluded by a published theorem **before anything is built**. It runs
+early precisely because it can kill Lane T cheaply, and a kill is a landable, valuable answer.
+
+> **GATE (final wording).** Does the search locate a **published theorem** excluding a finite-time
+> singularity for 3D Navier–Stokes on `T³` of the shape Lane T would need — a periodic/torus
+> analogue of the Nečas–Růžička–Šverák / Tsai rigidity results?
+> **yes →** name the theorem, its hypotheses **verbatim**, and which hypothesis a Lane T ansatz
+> would have to violate. Lane T is killed or narrowed accordingly.
+> **no →** report a **controlled** negative with full novelty-pass instrument discipline (positive
+> and negative controls, both firing), **and** state which of the §2 screen's four rows have no
+> periodic counterpart in the literature at all — i.e. what Lane T would have to establish de novo.
+
+**PRE-COMMITTED READING.** **(a)** A located `T³` theorem covering only **self-similar or
+asymptotically self-similar** objects does **NOT** kill Lane T — the lane needs a **non-DSS** ansatz
+anyway, because the DSS ansatz does not survive periodization (342 modes survive one step at
+`λ=1.7`, **zero** survive two). Record it as *narrowing*, not killing, and say exactly what is left.
+**(b)** A located theorem covering a **broader** class (any bounded-energy periodic solution under a
+scaling-invariant smallness or regularity hypothesis) **bites Lane T directly**, and the lane must
+state what object class survives before anything is built. **(c) A controlled zero is NOT evidence
+Lane T is clear.** Leg 348's own ceiling clause governs: absence of an instance is not a theorem of
+impossibility. Report it as *"not excluded by anything located, with the search's coverage stated"* —
+never as *"clear"*, and never as a result that advances Lane T. **(d)** **No external outreach**
+(standing user hold): arXiv / Semantic Scholar APIs only, and (D)'s data conditions **(8)** and **(9)**
+stay unread — they need outreach, the hold sits on Lane T's critical path, and T2 raises that rather
+than routing around it. Leg 387 hit HTTP 429; handle rate limits and **report a throttled query as
+throttled, never as a zero** (leg 387's own namespace bug fabricated a controlled zero once already).
 
 3. **~~`PROG-R4` U5 — stratify the seed budget by SHIFT.~~ LANDED 2026-08-13, `M3 = DELIVERED`.**
    *Lane R + construction, §3c.* Journal `experiments/journal/prog_r4_u5.md`, data
@@ -130,28 +187,140 @@ these are drawn into waves of 2–4 from **different lanes**, so one stalled lan
    `experiments/p2_prog_r4_m3_evidence.py` §5. R0 should reconcile against that rather than against
    prose.
 
-4. **`R0` + `R1` — the metric, then early abort on flatness.** *Lane R, competitiveness, and R1 is
-   the cheapest measured win in the repository.* **R0 first and it is not optional:** per-attempt
-   convergence rate is inflatable by feeding easier seeds and counts re-finds as successes, so the
-   reported metric is **distinct orbits per core-hour**, baselined at U3's **0.0595** (8 distinct /
-   134.45 core-hours) — *after* reconciling U3 §4's table, which accounts for 10 convergences over
-   3 solutions and cannot then yield 5 more distinct from 4 remaining. Then **R1**: U3 measured
-   convergence bimodal (all 14 finished ≤29 epochs; 86 ran flat to the 52-epoch cap, 53% moving
-   `‖R‖` <1% over their final 10 epochs). Kill flat attempts, recycle the budget into fresh seeds.
-   Plant a control that the criterion never kills an attempt U3's ledger shows would have
-   converged. No realization change, so no milestone re-run.
+### 3. `R0` + `R1` — the metric with its two reconciliations, then early abort on flatness. *Lane R.*
 
-4. **`E` — the H-hard diagnostic, on the 200 attempts ALREADY ON DISK.** *Lane R / instrument,
-   **RULED BY THE USER 2026-08-13**, and the cheapest item on the board by an order of magnitude.*
-   No new DNS, no new solver, no new mining — U3's 100 and U5's 100 attempts are banked. Three
-   questions, from U5 §9 option E: the converged-`|s|` distribution against seed `|s|`; whether the
-   low-`|s|` solutions are attractors of the **hookstep iteration** or of the **minimisation**; and
-   **whether the named rows are reachable at all by seeding directly at their published `(T, s)`** —
-   which is the sharpest single test of H-hard available and has never been run. ≈0.5–1 h.
-   **§3f rule 3: this is an instrument task, permitted here because U5 was construction, and IT
-   CANNOT BE FOLLOWED BY ANOTHER ONE.** Pre-commit both branches before running it.
+**R0 first and it is not optional.** Per-attempt convergence rate is inflatable by feeding easier
+seeds — exactly what U5 deliberately stops doing — and it counts a **re-find** as a success, so the
+reported metric is **distinct orbits per core-hour**. **R0's two reconciliations are corrections to
+`WALLS.md` itself**, and both are to be settled against *artefacts*, never against prose:
 
-**Wave 2 — plan after wave 1 lands and is audited. Expected shape:**
+- **(i) Core-hours.** `WALLS.md` §R0 first quoted **134.45** for U3;
+  `writeup/data/p2_prog_r4_g1_v1.json` gives 52,087.95 s × 10 workers = **144.69**.
+  **Reconcile against the JSON.**
+- **(ii) The distinct count.** `WALLS.md` **argued from prose** that U3's 8 was unreconcilable with
+  its §4 table. U5 **measured** it instead: clustering U3's 14 convergences at the matching
+  predicate's own 0.05 tolerance with `s` wrapped to `(-π, π]` reproduces **8**
+  (`experiments/p2_prog_r4_m3_evidence.py` §5). **Reconcile against that script.**
+  **The lesson generalises and is the reason this unit is ranked here:** a count derived from prose
+  is not a measurement, and this repository's own strategy file made that mistake **twice in one
+  paragraph, one day after being written.**
+
+> **WHAT CHANGED UNDER R0 WHILE THIS WAVE WAS BEING PLANNED, AND WHY IT SHARPENS THE UNIT RATHER
+> THAN RETIRING IT.** A concurrent session landed `5c6d495`, which **wrote both corrections into
+> `WALLS.md`'s prose** and banked the standing table (U3 144.69 / 8 / 0.0553, U5 57.04 / 5 /
+> 0.0877). **That is a transcription of U5's numbers, not an independent measurement**, and it is
+> the *same* move the unit exists to catch — U5 measured its own metric, and no second agent has
+> re-derived it from the artefacts. **R0's job is therefore now the harder one: re-derive both
+> figures from `p2_prog_r4_g1_v1.json` and `p2_prog_r4_m3_evidence.py` §5 independently, and report
+> agreement or disagreement with `WALLS.md`'s current numbers.** Agreement is a real result and
+> makes the baseline usable; disagreement is a bigger one. **R0 may not simply cite `WALLS.md`.**
+
+Then **`R1`**: U3 measured convergence **bimodal** — all 14 convergences finished in **≤29 epochs**
+(median 16) while **86 ran flat to the 52-epoch cap**, 53% moving `‖R‖` <1% over their final 10
+epochs, 83% by <10%, only 3% still halving. Those epochs are the majority of the run and are pure
+waste. No realization change, so **no milestone re-run**.
+
+> **GATE (final wording), R0.** Does the metric land with **both** reconciliations closed against
+> the artefacts named — core-hours against `p2_prog_r4_g1_v1.json`, and the distinct count against
+> `p2_prog_r4_m3_evidence.py` §5 — yielding a single banked baseline figure for U3 and for U5?
+> **yes →** bank both; route the `WALLS.md` corrections to the Conductor **verbatim**.
+> **no →** name which reconciliation could not be closed and exactly which artefact is missing.
+>
+> **GATE (final wording), R1.** On U3's and U5's banked ledgers, does a **deterministic** flatness
+> abort criterion exist that (α) kills **zero** attempts the ledgers show converged, and (β)
+> recovers a stated fraction of the epochs actually spent?
+> **yes →** report the criterion in final form, the recovered epoch fraction, and the **projected**
+> distinct-orbits-per-core-hour under it, labelled PROJECTED and never as measured.
+> **no →** report the epoch fraction recoverable at **zero** false kills even if it is small. A
+> small number is the answer, not a failure — U5 already measured the margin as wide (the worst
+> 10-epoch ratio any U3 convergence exhibited at `k ≥ 20` was 0.0724 against a 0.50 threshold, a
+> factor of 6.9), so a null here would itself be informative.
+
+**PRE-COMMITTED READING.** **(a)** If the reconciliation moves U3's baseline **down** — fewer
+core-hours or more distinct orbits — **U5's margin narrows or vanishes, and R0 is licensed to
+retract "Lane R's first measured win" outright.** `WALLS.md`'s 0.0595 and STATE's 0.0553 / 0.0877 are
+all **provisional** and any of them may fall. A metric unit that cannot retract the claim that
+motivated it is not a metric unit. **(b)** If the count resolves to **7**, U3's baseline is 0.0484
+and U5's margin *widens* — **do not report that as strengthening Lane R.** It is the same
+measurement read against a corrected denominator, and saying otherwise would be the exact move R0
+exists to prevent. **(c)** R1's saving is **compute, not orbits.** A recovered-epoch fraction moves
+distinct-orbits-per-core-hour only if the recycled budget converts at the *observed* rate; R1 must
+state that assumption explicitly and must not report a projection as a measured improvement
+(§3h rule 2 — scale is not evidence). **(d) Ceiling.** Nothing in R0 or R1 moves an `L1 → L4` link.
+Lane R makes the questions **affordable**, which is a different and lesser thing, and the writeup
+must say so. **(e)** Leg 349's ban binds: the criterion stays **deterministic** — no learned or
+evolved scoring, and R1 does not touch seed selection at all.
+
+### 4. `E` — THE H-HARD DIAGNOSTIC. *Lane R, instrument. RULED BY THE USER 2026-08-13, run it.*
+
+U5 §9 option **E**, reinforced by the pre-committed reading that fired on branch (b). On the **200
+attempts already on disk** (U3's 100 + U5's 100): no new DNS, no new mining, no new solver, ≈0.5–1 h.
+**§3f rule 3: this is an instrument task, permitted here because U5 was construction, and IT CANNOT
+BE FOLLOWED BY ANOTHER ONE** — wave 2 may not queue a second instrument/audit/repair unit before a
+mathematics or construction unit. Recorded here so wave 2 cannot forget it.
+
+> **GATE (final wording).** On the 200 banked attempts, do all three named diagnostics return, each
+> with a planted control demonstrated firing in **both** directions: **(1)** the converged-`|s|`
+> distribution against seed `|s|`; **(2)** whether the low-`|s|` solutions are attractors of the
+> **hookstep iteration** or of the **minimisation**; and **(3)** whether the named Table IV rows are
+> reachable **at all** when seeded directly at their published `(T, s)`?
+> **yes →** report all three. **(3) is the sharpest single test of H-hard available and has never
+> been run at this realization.**
+> **no →** name which diagnostic the banked data cannot support, and what it would take — a cost,
+> not a verdict (§3d).
+
+**PRE-COMMITTED READING — all four branches fixed before the run, and no fifth is constructed after.**
+
+- **(E-i) Direct seeding CONVERGES to the named row** (within the matching predicate's own 0.05
+  tolerance): the named rows **are** solutions of this discrete map at achievable tolerance, and the
+  failure is one of **basin size / seed reachability**. This **refutes the strong form of H-hard**
+  ("the named rows are not solutions of our realization at all"), promotes **`R3`** (multiple
+  shooting) and **`U4`/`G2`** (basin radius) to the operative work. **`G1` stays `UNDER-RESOURCED`
+  and does NOT become a recovery** — a hand-placed seed at published coordinates is not a mined seed
+  and does not answer the question G1 asks.
+- **(E-ii) It does NOT converge:** the rows are unreachable even from their own published
+  coordinates, so the obstruction is in the **REALIZATION, not the search.** That points at **`R4`**
+  — U3's stepper is **Lie–Trotter, globally first order** (measured global ratio 2.00), so its
+  periodic orbits are `O(dt)` perturbations of the true flow's — and would make R4, not R2, the
+  highest-value Lane R unit. It would be the **first evidence in this programme that the realization
+  rather than the budget is what G1 has been measuring.** It still does **not** make G1 a `no`
+  (§3d), but it changes *what* would have to be resourced.
+- **(E-iii) It converges to something ELSE** — a different orbit, or drifts to `|s| < 0.15`: that is
+  the basin-structure finding reproduced **at the strongest possible seed quality**, the sharpest
+  available form of U5's result, and it means no amount of seed quality fixes this. Points at
+  `R3`/`R2`.
+- **(E-iv) The instrument limit, named in advance so it is not discovered afterwards.** A published
+  row supplies `(T, s)` but **NOT a field.** E must state exactly what it seeded, and **must not
+  describe a field-plus-pinned-`(T,s)` seed as "seeding at the published orbit."** If the published
+  `(T, s)` cannot be expressed as a seed under the `m = 0` residual at all, that is an **instrument
+  limit** (and `R5` prices it: 334 candidates unlocked, but only **1 of the 334 in the published
+  band**), reported as a limit and never as a null.
+- **On diagnostic (2):** if the low-`|s|` solutions are attractors of the **minimisation** rather
+  than of the hookstep, the fix is in the **score**, not the solver — and leg 349's ban binds the
+  repair to stay **deterministic**. Name it; do not build it.
+- **THE PRIOR THAT MUST BE STATED, NOT REDISCOVERED.** **Leg 353 already attempted all five of
+  UPO37 ×2 / UPO35 / UPO9 / UPO22 and all five failed** (`line_search_failed`, final `‖R‖` 22.5–29.5,
+  basin radius never measured). E is **not** re-walking that: leg 353 ran at `T_total = 2000` DNS
+  against U2's `T = 1e5`, and with **plain-Newton line search, not the hookstep** U1 later built. E
+  must say so explicitly and must report leg 353 as the prior its own result agrees or disagrees
+  with. U5's closest approach on record is attempt 0 (UPO37): `ΔT = 0.127`, `Δ|s| = 0.0099` — inside
+  tolerance on `s`, outside on `T`, final `‖R‖ 2.20`.
+
+---
+
+**Wave 2 — planned only after wave 1 lands and is audited. `WAVE 2 SHOULD OPEN LANE L`,** which
+touches `CLAY_OBLIGATIONS.md` §6's two no-method obligations and **has zero units run in 390 legs.**
+**L1** prices §4 on `ℝ³` — read the published attempts to localise a self-similar profile to finite
+energy and state, **per attempt, the named hypothesis that fails for DSS**. **L2** attacks §6(i),
+where leg 381 banked the bill (critical `L³` tail **326.875 per decade**; `α > 1.5` required against
+`α = 1.0` available) — **a deficit of 0.5 in a decay exponent is a NUMBER, not an impossibility**,
+and no unit has ever asked what would supply it. **L3** attacks §6(ii) against the
+nonlinear-stability-with-finite-unstable-spectrum literature, never read against this object.
+**A measured "still no method, and here is precisely which hypothesis fails" is a real result** — it
+is the one that tells the user whether the Tier-2 ceiling is permanent. Wave 2 also carries **the
+verifier for wave 1** (§3g: dispatched in the following wave so it cannot be briefed by the
+construction it checks) and is bound by §3f rule 3 not to open with a second instrument task after
+`E`. Further expected shape:
 
 5. **`R2` — deflation.** 10 of 14 convergences landed on three solutions; Newton keeps re-finding
    what it has found. **U5 makes this worse than it looked, and cross-unit**: 4 of U5's 5 distinct
