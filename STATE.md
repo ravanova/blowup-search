@@ -41,11 +41,29 @@ what a wall-breaking mandate does and does not license.
 deferred option is recorded with its cost and its re-open condition in **`OPTIONS.md`** — read that
 file alongside this one when planning a wave. Nothing is dropped because a lane was not chosen.
 
-**Lane T is currently BLOCKED** on escalation item (c) (`BUILD NOTHING IN LANE T`, `T3`/`T4`
-included). Two Lane T units are **not** blocked because neither builds a certificate: **`T2′`** (the
-compliant rigidity search, ≈1.2–1.7 h) and **`T2″`** (the Type-I rigidity question on `T³`). If the
-ruling is outstanding when a wave is planned, those are Lane T's available work, and
-`ORCHESTRATION.md` §3g's composition floor is met from `OPTIONS.md` §C/§D if they are not.
+**LANE T IS UNBLOCKED — the user ruled all four escalation items on 2026-08-13.** The ruling is
+authoritative at **`writeup/escalations/RULING_BAN_WORDING_2026-08-13.md`** and is **transcription
+work for the Conductor**, which applies it to `plan_of_record.py` in one commit per item:
+
+- **(c) RULED C1 — the ℓ¹-Fourier/radii-polynomial ban names an APPARATUS.** A Zgliczyński-style
+  Galerkin-plus-tail **dynamical closure** is a different apparatus and is outside it. **SCOPE, not
+  a lift.** `T3` and `T4` **OPEN**. Nothing measured is superseded: the three dead realizations stay
+  dead, Theorem NGX stays true, leg 341 stays true. **NAMING REQUIREMENT — binds every unit:** any
+  unit claiming this scope must, in its own pre-registration, **name its apparatus** *and* **show it
+  does not construct a single bounded approximate inverse uniform in `M`** (the precise quantity NGX
+  excludes). **Absent both, the ban applies in full.** **SWEEP OWED:** C1 makes this ban narrower
+  than the record has been treating it, so a unit must grep the landed record for legs that declined
+  work citing it and report which refusals C1 now permits.
+- **(a) RULED A2 — the Cadiot ban STANDS**, lift clause marked **CLOSED**, 2026-08-11 escalation
+  **DISCHARGED**.
+- **(b) RULED B1 — editorial.** *"which needs L1 first"* is **STRUCK** from stage V's lift clause.
+- **(d) OUTREACH HOLD NARROWED — reading is authorised, contacting is not.** Any published document
+  may be fetched and read. **Contacting an author, group, maintainer or list remains held.**
+
+**COMPOUND CONSEQUENCE, recorded because neither item carries it alone: (b) + (c) also open Lane V.**
+A fluid transport target attacked with a dynamical closure is outside both bans, subject to (c)'s
+naming requirement. Lane V is therefore **deferred by the user's Lane T priority, NOT blocked** —
+`OPTIONS.md` §C is updated to say so.
 
 | lane | attacks | one line |
 |---|---|---|

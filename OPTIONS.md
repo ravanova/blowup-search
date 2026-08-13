@@ -72,11 +72,18 @@ because it is the only lane whose *negative branch* is as valuable as its positi
 blow-up cannot be certified for a dissipative fluid equation in **one** dimension, then 3D
 Navier–Stokes is not a question of compute and the honest ceiling of the whole programme is Tier 2.
 
-**`V1`, the opening unit, has two halves and only one of them needs a ruling:**
-- **Needs a ruling:** the stage-V ban's lift condition is *"unless the question is re-posed for a
-  FLUID transport model, which needs L1 first"* — and L1 has three dead attempts and no fourth
-  candidate, so the precondition is **unliftable as written**. This is escalation item **(b)**, on
-  the user's desk.
+**STATUS CORRECTED 2026-08-13: DEFERRED BY PRIORITY, NOT BLOCKED.** Both halves of `V1` are now
+open. The user ruled **(b) = B1**, striking *"which needs L1 first"* from stage V's lift clause, and
+**(c) = C1**, putting a Galerkin-plus-tail dynamical closure outside the ℓ¹-Fourier/radii-polynomial
+ban. **A fluid transport target attacked with a dynamical closure is outside both bans** — subject in
+full to C1's naming requirement (name the apparatus; show it does not construct a single bounded
+approximate inverse uniform in `M`). See `writeup/escalations/RULING_BAN_WORDING_2026-08-13.md`.
+
+**`V1`, the opening unit, has two halves and NEITHER is now blocked:**
+- **Was blocked, now open:** the stage-V ban's lift condition read *"unless the question is re-posed
+  for a FLUID transport model, which needs L1 first"* — and L1 has three dead attempts and no fourth
+  candidate, so the precondition was **unliftable as written**. **RULED B1 2026-08-13: the clause is
+  editorial and the precondition is STRUCK.**
 - **Needs no ruling:** **name the target.** Leg 174 says the cell is empty for want of one, so
   supplying a named dissipative fluid target — 1D, any model, dissipative term inside the certified
   equation — is unblocked work that can proceed while (b) is pending.
@@ -113,8 +120,10 @@ result** — it is the one that would tell the user whether the Tier-2 ceiling i
 | **T2** | periodic-rigidity literature search | **TAKEN**, wave 1, gate = no theorem located → **`UNDER-RESOURCED`, not `no`**. Not a clearance. |
 | **T2′** | the **compliant** rigidity search | **DEFERRED, costed at ≈1.2–1.7 h plus one user ruling.** Closes T2's three coverage holes: NRS 1996 / Tsai 1998 are pre-arXiv (needs a forward-citation pass), Semantic Scholar was throttled on 5 of 6 substantive queries (needs an S2 key), and battery `E` failed its own domain control (needs repair). |
 | **T2″** | **the Type-I rigidity question on `T³`** | **DEFERRED — and it is the sharpest item Lane T owns.** A Type-I condition is a *rate* condition (`\|u\| ≲ (T−t)^{−1/2}`), needs **no dilation symmetry**, and so carries to the torus intact **as a question**. Measured: `"Type I blowup" AND "periodic"` = **0**. Nothing located proves it. This is what a Lane T ansatz must survive or evade. |
-| **T3** | the non-DSS `T³` ansatz | **BLOCKED** by escalation item (c). The lane's real mathematical content. |
-| **T4** | reproduce `arXiv:1902.00384` row for row | **BLOCKED** by escalation item (c) — and under reading C2 it is inside the ban too. Precedent the user should weigh: leg 316 reproduced Dahne–Figueras row-for-row **while this ban was in force**, clearing it by individuating on the three realizations. |
+| **T3** | the non-DSS `T³` ansatz | **OPEN — RULED C1 2026-08-13.** The lane's real mathematical content, and the priority unit. Binds: C1's naming requirement. |
+| **T4** | reproduce `arXiv:1902.00384` row for row | **OPEN — RULED C1 2026-08-13.** Precedent: leg 316 reproduced Dahne–Figueras row-for-row **while this ban was in force**, clearing it by individuating on the three realizations. |
+| **T5** | **THE C1 SWEEP — an obligation of the ruling, not an option** | Grep the landed record for legs that declined, deferred or narrowed work citing the ℓ¹-Fourier/radii-polynomial ban, and report which of those refusals were **apparatus-based** and are now permitted under C1. The honest price of narrowing a ban, and it has never been paid for any ban here. |
+| **T6** | **discharge leg 348's own recorded ceiling** | Leg 348 read its seven papers **at abstract level only** and flagged that a full-text pass could strengthen *or undercut* its classification. Lane T rests entirely on that classification, and the 2026-08-13 narrowing of the outreach hold makes full text readable. Cheap, and it can undercut the lane. |
 
 ## F. Other standing options, recorded so they are not lost
 
