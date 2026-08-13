@@ -384,9 +384,43 @@ units are not. A programme can spend a year becoming excellent at finding orbits
 to certify. **A wave of pure Lane R units is out of contract**, and so is a wave whose only
 non-Lane-R unit is an audit.
 
-**Self-chaining.** §9e applies unchanged: the Conductor continues into the next wave without a
-human re-pasting the prompt, and hands off per §9d before its own context runs out. A handoff
-writes `STATE.md` and pushes first; a handoff that loses the plan loses the wave.
+**Self-chaining and handoff state.** §9e applies unchanged: the Conductor continues into the next
+wave without a human re-pasting the prompt, and hands off per §9d before its own context runs out.
+A handoff writes `STATE.md` and pushes first; a handoff that loses the plan loses the wave.
+
+**`reports/ORCH_STATE.md` is written AT EVERY WAVE BOUNDARY, not only at handoff (added
+2026-08-13, closing a defect in this section's first draft).** §9d's trigger — hand off after 12
+cycles or on noticing a summarisation — is a *handoff* trigger, and §9e is explicit that **a session
+which dies before reaching it never schedules a successor and the chain stops silently**. For the
+old four-slot orchestrator that cost one cycle. For a Conductor it costs the whole wave plan, the
+pre-committed readings, and the audit state, because one entity holds all of it. **So the Conductor
+refreshes `ORCH_STATE.md` in the same commit as the wave plan (§3g step 1) and again in the same
+commit as the wave's integration (step 4).** Two extra writes per wave against losing a wave.
+
+**What a Conductor's live block carries** — §9d's list was written for a role that no longer exists
+in this mode, so it is restated rather than reinterpreted:
+
+- the **wave number** and its **units**, each with its gate in final wording and its **pre-committed
+  reading**, because a reading that survives only in the Conductor's context is not pre-committed;
+- **every live worker: its unit, its branch, and how far it got** — branches, never handles.
+  Subagent handles do not survive the session that spawned them (§9d), so a successor gates and
+  merges whatever the abandoned branches contain and re-spawns for anything mid-flight;
+- **`main`'s SHA**, the units landed this wave, and any unit **audited but not yet landed**;
+- **open escalations** and whether each is awaiting the user;
+- **which lane the composition floor was met from**, so a successor does not have to re-derive it;
+- **what the next Conductor must do first**, in one imperative sentence.
+
+**The accumulating sections are carried forward VERBATIM** — `## Environment notes`,
+`## Known flakes`, `## Incidents and root causes`. §9d's rule is unchanged and binds a Conductor
+identically: a handoff that rewrites the file from scratch and drops them has destroyed the only
+mechanism stopping the next session from re-diagnosing the same incident. Add to them; delete an
+entry only when it is provably obsolete.
+
+**A superseded stop block is marked superseded, never deleted.** If `ORCH_STATE.md` opens with a
+`⛔ STOP` block from an earlier run, the Conductor does not remove it — it prepends its own live
+block and annotates the old one with the ruling that superseded it and the date. The stop happened;
+the record of it is history, and a successor reading a silently-deleted stop learns nothing about
+why the board looks the way it does.
 
 **Inherited unchanged:** §3c (the PROGRAMME lane — `PROG-R4` keeps its exemptions), §3d (stop
 thresholds), §3e (the read surface), §5a/§5b (territory), §7 (commits, branches, merge policy),
