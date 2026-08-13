@@ -94,6 +94,67 @@ WALLS = [
 CLAY_ODDS = 0.0005
 
 # --------------------------------------------------------------------------
+# the posture, adopted 2026-08-13 -- THE WALLS ARE THE WORK
+# --------------------------------------------------------------------------
+# User ruling 2026-08-13, recorded in CLAY_ROADMAP.md sec 7.6 and ORCHESTRATION.md sec 3g/3h.
+# NOTHING BELOW LIFTS, NARROWS OR REWORDS A BAN.  This block is additive: it records the mode,
+# points at the blocker enumeration, and names the lanes, so that a task consulting this file
+# executably learns where the work is ranked -- lesson 68 again, a check that is not executable
+# decays at the rate of memory.
+#
+# The two-item WALLS list above is CLAY_ROADMAP.md sec 2's pair of STRUCTURAL walls and is
+# unchanged.  WALLS.md is a different and larger object: SEVEN blockers between here and a Clay
+# answer, each with its evidence separated from its assumption and each with a PRE-COMMITTED
+# statement of what breaking it consists of.  Read that file whole before working in a lane.
+
+POSTURE = "the walls are the work (user ruling 2026-08-13)"
+POSTURE_ADOPTED = "2026-08-13"
+BLOCKERS_FILE = "WALLS.md"          # 7 walls (W1-W7), 4 lanes -- read whole, never paraphrased
+MODE = "CONDUCTOR"                  # ORCHESTRATION.md sec 3g; direction and integration are one entity
+
+# lane id -> (walls attacked, one line).  Ranking is the Conductor's and is stated in STATE.md;
+# this table exists so a worker can see which wall its unit is against without reading DIRECTION.md.
+LANES = [
+    ("T", "W2, W4, W6", "TORUS -- priority 1. POCP's only named obstruction (leg 348) is DOMAIN "
+                        "SHAPE; T^3 is that domain; arXiv:1902.00384 already certifies a viscous "
+                        "3D-NS periodic orbit there; leg 390 sec 5 item 4 records the credit "
+                        "UNCLAIMED. Price: 0 of 4 rigidity clearances carry to T^3, the periodic "
+                        "rigidity literature has never been searched here, and the DSS ansatz does "
+                        "NOT survive periodization (342 modes survive one step at lambda=1.7, 0 "
+                        "survive two) -- so the lane needs a NON-DSS ansatz that does not exist yet. "
+                        "Lane T does NOT retire CLAY_OBLIGATIONS.md sec 6's two obligations."),
+    ("V", "W3",         "VISCOUS RUNG -- fill the Grade-A x fluid cell in the lowest dimension "
+                        "admitting fluid structure. Leg 174: empty FOR WANT OF A TARGET, not a "
+                        "method. Both branches valuable, which is what makes it cheap."),
+    ("L", "W4, W5",     "LOCALISATION, PRICED -- sec 4's 'no known method' is the one load-bearing "
+                        "roadmap claim never checked to this repository's own standard, and "
+                        "CLAY_OBLIGATIONS.md sec 6's TWO no-method obligations (certified far-field "
+                        "decay with an admissible cutoff; persistence under that localisation) live "
+                        "here. NO UNIT IN 390 LEGS HAS ATTACKED EITHER."),
+    ("R", "W7",         "REFORMULATION FOR SCALE + SOLVER COMPETITIVENESS -- attack the compute wall "
+                        "by mathematics, not procurement; every factor removed is permanent and "
+                        "transfers to Lane T unchanged. REPORTED METRIC IS DISTINCT ORBITS PER "
+                        "CORE-HOUR, not per-attempt convergence rate (R0). A best-in-field orbit "
+                        "finder makes questions affordable; it does NOT move a Clay link."),
+]
+
+# What the posture does NOT license -- ORCHESTRATION.md sec 3h, restated executably.
+POSTURE_LIMITS = [
+    "A ban is superseded by a MEASUREMENT, never by a decision. The permitted move is the "
+    "2026-08-11 SCOPING of the DSS expensive-entrance ban: read the ban's own text, find an "
+    "object it does not name, open that lane while the measurement stays true.",
+    "A ban whose WORDING has become defective is a USER ESCALATION (sec 8), not an agent's "
+    "reading. Three are pending: Cadiot; stage V's 'needs L1 first'; and whether the "
+    "ell^1-Fourier/radii-polynomial ban reaches a Galerkin-plus-tail DYNAMICAL closure.",
+    "Scale is not evidence. A large build is not a result; the gate is the deliverable.",
+    "The ceiling clause survives the ambition. Tier 2 is never called a proof, and no output is "
+    "described as movement toward Clay unless a link of the L1->L4 chain actually moved. Clay "
+    "stays ~0.05%.",
+    "A wall may be reported as UNBROKEN. sec 3d still governs: an under-resourced attempt returns "
+    "UNDER-RESOURCED and a cost estimate, never NO.",
+]
+
+# --------------------------------------------------------------------------
 # the committed sequence
 # --------------------------------------------------------------------------
 # status: DONE | NEXT | QUEUED
@@ -1019,6 +1080,20 @@ def status_report():
         f"  adopted   {ADOPTED} ({ADOPTED_BY})",
         f"  prize     {PRIZE}",
         f"  Clay      {CLAY_ODDS:.2%} -- behind Walls 1 and 2, unmoved by this plan",
+        f"  posture   {POSTURE}",
+        f"  mode      {MODE} (ORCHESTRATION.md 3g) -- blockers enumerated in {BLOCKERS_FILE}, READ IT WHOLE",
+        "",
+        "LANES (WALLS.md) -- every wave carries at least one unit attacking a wall on the Clay chain",
+    ]
+    for lane, walls, one_line in LANES:
+        lines.append(f"  {lane}  [{walls}]  {one_line[:96]}...")
+    lines += [
+        "",
+        "WHAT THE POSTURE DOES NOT LICENSE (ORCHESTRATION.md 3h)",
+    ]
+    for lim in POSTURE_LIMITS:
+        lines.append(f"  - {lim[:120]}...")
+    lines += [
         "",
         "SEQUENCE",
     ]
