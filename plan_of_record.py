@@ -391,7 +391,13 @@ STAGES = [
     {
         "id": "L1",
         "name": ("Certify HL_S2_nonsymmetric FOR REAL: interval arithmetic + an analytic "
-                 "far-field enclosure"),
+                 "far-field enclosure "
+                 "[NOTE 2026-08-13, user ruling B1: this stage is marked DONE because the "
+                 "STAGE RAN TO ITS GATE and the gate answered NO -- a completed stage, not a "
+                 "successful one. That is NOT in conflict with the ban review's description "
+                 "of L1 as dead in THREE REALIZATIONS; the two statements are about "
+                 "different things, the stage's completion marker versus its realizations. "
+                 "The [x] is deliberately UNCHANGED.]"),
         "status": "DONE",
         "outcome": (
             "GATE ANSWERED **NO** AT LEG 51, AND THE TERM THAT RAN OUT IS THE WEIGHT CLASS "
@@ -939,7 +945,12 @@ BANNED = [
     ("re-opening stage V as posed -- the novelty gate answered YES on 2026-08-04 "
      "(arXiv:2410.05480 verifies CGL branches in the dissipation parameter, in interval "
      "arithmetic), and leg 48 re-derived their zeros, branch and fold to confirm it",
-     "never -- unless the question is re-posed for a FLUID transport model, which needs L1 first"),
+     "never -- unless the question is re-posed for a FLUID transport model. "
+     "('which needs L1 first' STRUCK 2026-08-13, user ruling B1: the 2026-08-06 ban review "
+     "retired that wording in the re-posed entry's own prose and never applied it to this "
+     "field. The retirement is an editorial correction, not a new decision, and the ban's "
+     "own justification -- the novelty gate of 2026-08-04 on arXiv:2410.05480, re-derived "
+     "by leg 48 -- is untouched.)"),
     ("RE-POSED 2026-08-06 (ban review, user ruling 2): re-attempting the ell^1-Fourier/"
      "radii-polynomial machinery this repository has measured DEAD in three realizations "
      "(ell^1_w coefficient basis leg 54, collocation basis leg 56, origin-H^2 capped at "
