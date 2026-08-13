@@ -365,3 +365,49 @@ discipline against debugging two unknowns at once applies with more force here):
 The machine-readable form of this addendum is `plan_of_record.py`'s `P0` stage; the ban
 review that accompanied this ruling (the DSS ban kept as-is, Stage V's ban re-posed since its
 own "needs L1 first" lift condition had become unliftable) is recorded there directly.
+
+## 7.6 Addendum (2026-08-13) — the walls are the work
+
+**Status: ADOPTED 2026-08-13 by user ruling.** *"The most important thing here is to solve Clay.
+If we can break through walls and blockers then we should be doing that."* This addendum
+**re-prioritises §7.5's programme without contradicting it**: §7.5's sequencing rule (do not build
+the 3D solver before the certification rung reports) stands, and the certification rung is
+promoted from a phase to a **standing lane** that runs alongside the search rather than behind it.
+
+**The blockers are now enumerated, individually, in `WALLS.md`** — seven walls, each with its
+evidence separated from its assumption and each with a *pre-committed statement of what breaking
+it consists of*. Four lanes attack them: **T** (torus / periodic-orbit certification), **V** (the
+viscous rung), **L** (localisation, priced), **R** (reformulation for scale). Every lane is
+authorised to build whatever it needs, at whatever size, without a further ruling.
+
+**The decision this addendum records, and its evidence.** Lane T is priority 1 because four
+separately-measured results in this repository point the same way and **no leg has ever been in a
+position to put them side by side** — each was explicitly out of scope for the leg that found it:
+
+1. Leg 348 classified periodic-orbit certification **(ii) OPEN-AND-REACHABLE, cost class C**, and
+   named its *only* obstruction as **domain shape** — the Galerkin-plus-tail bridge closes against
+   a compact domain with a discrete spectral basis.
+2. `T³` is that domain. Leg 390's census: **6 compact/periodic instances, 0 unbounded.**
+3. `arXiv:1902.00384` certifies a periodic orbit of **3D Navier–Stokes on `T³` with the viscous
+   term inside the certified equation** — natively 3D, natively time-dependent, genuinely viscous.
+   That clears **Wall 2's** bar with the target, not the method, missing.
+4. Leg 390 §5 item 4, verbatim: ***"§1's POCP credit is unclaimed. Whether any non-DSS torus
+   blow-up ansatz could collect that credit is outside this leg's scope entirely."***
+
+**The price is recorded in the same paragraph as the opportunity**, per §7.5's own discipline:
+**0 of 4 rigidity clearances carry to `T³`**; the periodic-rigidity literature has **never been
+searched** here; the DSS ansatz **does not survive periodization** (342 modes survive one step at
+`λ = 1.7`, **0 survive two**), so Lane T needs a **non-DSS** ansatz that does not yet exist; and
+(D)'s data conditions (8) and (9) cannot be read without outreach.
+
+**What "break through the walls" does NOT authorise, stated because the erosion risk rises with
+ambition, not falls.** A ban in `plan_of_record.py` records a measurement, and **a measurement is
+superseded by another measurement, never by a decision** — the model to copy is the 2026-08-11
+*scoping* of the DSS expensive-entrance ban, which left the measurement true and opened the lane by
+observing the ban's own text named a different object. Two ban-wording defects are known and both
+are **user escalations, not agent readings**: the Cadiot clause (pending since 2026-08-11) and
+stage V's unliftable "needs L1 first". Unchanged in full: the three-tier win condition (**Tier 2 is
+never called a proof**), pre-committed gates, the novelty pass, lesson 91, planted controls,
+`merge_gate.sh`, and the rule that **no output is described as movement toward Clay unless a link
+of the `L1 → L4` chain actually moves. Clay stays ~0.05%** — recorded here, in this paragraph,
+under a ruling that raises the ambition rather than in spite of it.

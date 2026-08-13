@@ -328,6 +328,87 @@ several small ones that each re-read the surface.
 territory discipline where it still applies, the merge gate, no external outreach, and the rule
 that no output is described as movement toward Clay unless a link actually moved.
 
+### 3g. CONDUCTOR mode — the Decision Maker and the orchestrator are one entity
+
+**Adopted 2026-08-13 by user ruling**, together with `CLAY_ROADMAP.md` §7.6 and `WALLS.md`. This
+is the mode the wall programme runs in. It sits between §3f solo (one instance, no parallelism)
+and the four-slot contract of §§2–5 (two roles, four long-lived legs, a composition floor).
+
+**The single role.** One long-lived entity — the **Conductor** — owns *both* direction and
+integration. It ranks the work, dispatches workers, audits what they return, lands it on `main`,
+and re-ranks against what it just learned. It owns `STATE.md`, `WALLS.md`, `DIRECTION.md` and
+`plan_of_record.py`.
+
+**Why the merge is safe, when the two roles were split deliberately.** The split existed to stop
+the orchestrator from re-ranking the queue to suit its own integration convenience. That failure
+needs an *integration pressure* to act on — a slot to fill, a leg mid-flight to keep fed. The wave
+model below removes it: workers are dispatched in a batch, they self-terminate, and the Conductor
+does not re-rank until the batch is complete and audited. There is nothing to be convenient about.
+**§4a's notification contract is discharged structurally** — the entity that learns the finding is
+the entity that ranks the queue, so the gap it defended against cannot open.
+
+**The wave, which is the unit of work in this mode.**
+
+1. **PLAN.** Read `STATE.md` and `WALLS.md`. Choose the next 2–4 units, from *different lanes*
+   where possible so a single wave cannot be sunk by one lane stalling. Write them into `STATE.md`
+   with their gates pre-committed, and **commit that before dispatching** — the ranking is on
+   record before any result can influence it.
+2. **DISPATCH.** One worker per unit, each with a written brief carrying: its unit, its gate in
+   final wording, its file territory (§5b), its lane, and the §3d resourcing statement. Workers do
+   **not** read `DIRECTION.md` (§3e). Territories must not overlap.
+3. **WORK.** Workers run to their gate and **self-terminate**. A worker never picks its own next
+   unit and never re-scopes its gate. If it finishes early it reports early; it does not find more
+   to do.
+4. **INTEGRATE.** The Conductor audits each return against the pre-committed gate, lands it,
+   regenerates `STATE.md`, and **pushes to `main`**. Do this per wave at minimum — more often if a
+   unit lands cleanly on its own.
+5. **RE-PLAN.** Only now. Re-ranking states its reason in the commit message.
+
+**The one thing the Conductor may not do: verify its own waves.** It planned them, so it is not
+independent of them — §3f rule 1 applies to it with more force, not less, because it has more
+context to be biased by. **Verification is a worker with no memory of the construction,
+re-deriving from banked JSON.** Budget one verifier per wave, dispatched in the *following* wave
+so it cannot be briefed by the construction it is checking. Anything not so verified is labelled
+**`UNVERIFIED`** and says so in its own gate answer.
+
+**Wave sizing.** 2–4 workers. Below 2 this is §3f solo with extra ceremony; above 4 the audit
+becomes the bottleneck and the Conductor's context becomes the constraint the whole mode exists to
+protect. Prefer fewer, larger units — §3f's "task size goes up, not down" holds here.
+
+**Self-chaining.** §9e applies unchanged: the Conductor continues into the next wave without a
+human re-pasting the prompt, and hands off per §9d before its own context runs out. A handoff
+writes `STATE.md` and pushes first; a handoff that loses the plan loses the wave.
+
+**Inherited unchanged:** §3c (the PROGRAMME lane — `PROG-R4` keeps its exemptions), §3d (stop
+thresholds), §3e (the read surface), §5a/§5b (territory), §7 (commits, branches, merge policy),
+§8 (the four escalations — a Conductor that both raises and rules an escalation has defeated the
+mechanism; escalations still go to the **user**), and the composition floor of §3b **as a
+per-wave rather than per-cycle quota**.
+
+### 3h. Attacking a wall — what ambition does and does not license
+
+**Adopted 2026-08-13 with §3g.** `WALLS.md` authorises building whatever a lane needs, at any
+size, without a further ruling. That authorisation is real, and these four rules are what keep it
+from becoming the failure mode it most resembles.
+
+1. **A ban is superseded by a measurement, never by a decision.** The permitted move is the
+   2026-08-11 *scoping* of the DSS expensive-entrance ban: read the ban's own text, identify an
+   object it does not name, and open that lane while the measurement stays true. The forbidden
+   move is deciding a ban is obsolete because the goal got more ambitious. **A ban whose wording
+   has become defective is a USER ESCALATION** (§8), not an agent's reading — two are already
+   pending (Cadiot, and stage V's unliftable "needs L1 first").
+2. **Scale is not evidence.** A large build is not a result. The gate is the deliverable and the
+   pre-committed wording is unchanged by how much was constructed to reach it. This matters most
+   exactly when a lane has been expensive.
+3. **The ceiling clause survives the ambition.** Every gate answer in every lane carries its Tier
+   statement, and **no output is described as movement toward Clay unless a link of the `L1 → L4`
+   chain actually moved.** Under a wall-breaking mandate this rule is easier to erode, not harder —
+   §7.5 said so, and it is repeated here for the same reason.
+4. **A wall may be reported as unbroken.** Every wall in `WALLS.md` carries a pre-committed
+   statement of what breaking it consists of, precisely so that "we did not break it" is a
+   reportable, landable, valuable answer rather than a failure to be worked around. §3d still
+   governs: an under-resourced attempt returns `UNDER-RESOURCED` and a cost, never `NO`.
+
 ### 4a. Refill is triggered by vacancy, not only by landing on `main`
 
 **Diagnosed 2026-08-06.** A slot vacates in exactly two ways: a leg's push lands on `main`
