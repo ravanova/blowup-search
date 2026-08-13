@@ -1034,8 +1034,14 @@ BANNED = [
      "clause is worded as 'unless a pass resolves whether', and a pass has now resolved it, "
      "so the clause's literal reading and its evident purpose now disagree. That is a "
      "wording question, not a judgement call an agent may make: ESCALATED TO THE USER "
-     "2026-08-11 and pending. Until the user rules, the ban stands in force, unchanged, "
-     "and binds every leg"),
+     "2026-08-11. "
+     "RULED A2 BY THE USER 2026-08-13 (writeup/escalations/"
+     "RULING_BAN_WORDING_2026-08-13.md): THE BAN STANDS. The lift condition's pass HAS RUN "
+     "(leg 304, Route-CADX, gate YES(i), landed b319449) and RESOLVED THE QUESTION AGAINST "
+     "LIFTING -- Cadiot does not cover a zero diagonal, and the exclusion is BY HYPOTHESIS "
+     "(Assumption 1, p.6). Lifting a ban because its own justification was validated "
+     "inverts sec 3h rule 1. THE CLAUSE IS CLOSED, NOT OPEN. THE 2026-08-11 ESCALATION IS "
+     "DISCHARGED. The ban stands in force, unchanged, and binds every leg"),
     ("reading leg 51's exactly-zero Y_0 as progress toward the target -- it is exactly zero "
      "because the a=0 CLM profile IS one basis mode; the non-symmetric Hou-Luo profile is "
      "not. NARROWED at leg 55 (measured, not asserted): the target DOES have finite ell^1_w "
