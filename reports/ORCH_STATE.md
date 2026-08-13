@@ -7,17 +7,28 @@ every stop. A fresh session reads this at Step 0b before dispatching anything.
 
 ---
 
-## LIVE — CONDUCTOR mode, wave 2 DISPATCHING, 2026-08-14
+## LIVE — CONDUCTOR mode, wave 2 IN FLIGHT, 2026-08-14
 
 **Read this block, not the ⛔ STOP block below it.** That stop is real history and is retained, but
 it was **superseded by the user's CONDUCTOR-mode restart of 2026-08-13**. There are no longer four
 leg slots, no bench, and no separate Decision Maker: one entity ranks, dispatches, audits, lands
 and re-ranks, in waves of 2–4 self-terminating workers.
 
-**`main` = `3e90d25`** (`origin/main`, 2026-08-14). The four ruling-transcription commits, the
-`ORCH_STATE` refresh and the `STATE.md` transcription are all **pushed**. This commit carries the
-wave-2 plan and this block together, per §3g step 1, and is pushed **before any wave-2 worker is
+**`main` = `c1a8d5e`** (`origin/main`, 2026-08-14). The four ruling-transcription commits, the
+`ORCH_STATE` refresh and the `STATE.md` transcription are all **pushed**. `c1a8d5e` carried the
+wave-2 plan and this block together, per §3g step 1, and was pushed **before any wave-2 worker was
 dispatched**.
+
+**DISPATCHED 2026-08-14, after `c1a8d5e` was pushed.** All four wave-2 workers are live on the
+branches named in the table below. Each carries a written brief with its unit, its gate in the
+final wording committed at `c1a8d5e`, its §5b territory, its lane and the §3d resourcing statement.
+None was given `DIRECTION.md` (§3e). `T4` and `T6` additionally carry **C1's naming requirement**
+verbatim — name the apparatus, and show it does not construct a single bounded approximate inverse
+uniform in `M`; absent both, the ban applies in full. `V1` additionally carries its forbidden-read
+list (`WALLS.md`, `STATE.md`, `OPTIONS.md`, this file, the wave-1 briefs, and the wave-1 journals'
+reasoning) — that narrowness **is** the unit. Figure **`fig110`** was allocated to `T4` at dispatch
+and to no one else; `T6`, `T5` and `V1` were allocated no figure. Every brief instructs: **push the
+branch only, never merge or push to `main`** — the Conductor gates and merges.
 
 ### Wave 2 — PLANNED AND COMMITTED 2026-08-14, BEFORE DISPATCH
 
