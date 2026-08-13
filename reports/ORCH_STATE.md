@@ -7,16 +7,45 @@ every stop. A fresh session reads this at Step 0b before dispatching anything.
 
 ---
 
-## LIVE — CONDUCTOR mode, wave 1 INTEGRATING, 2026-08-14
+## LIVE — CONDUCTOR mode, wave 2 DISPATCHING, 2026-08-14
 
 **Read this block, not the ⛔ STOP block below it.** That stop is real history and is retained, but
 it was **superseded by the user's CONDUCTOR-mode restart of 2026-08-13**. There are no longer four
 leg slots, no bench, and no separate Decision Maker: one entity ranks, dispatches, audits, lands
 and re-ranks, in waves of 2–4 self-terminating workers.
 
-**`main` = `7083787`** (`origin/main`, fetched 2026-08-14). The Conductor's working checkout is
-**ahead by the four ruling-transcription commits plus this one and is NOT YET PUSHED** — see "what
-the next Conductor must do first".
+**`main` = `3e90d25`** (`origin/main`, 2026-08-14). The four ruling-transcription commits, the
+`ORCH_STATE` refresh and the `STATE.md` transcription are all **pushed**. This commit carries the
+wave-2 plan and this block together, per §3g step 1, and is pushed **before any wave-2 worker is
+dispatched**.
+
+### Wave 2 — PLANNED AND COMMITTED 2026-08-14, BEFORE DISPATCH
+
+Full gate texts and pre-committed readings are in `STATE.md` §"WAVE 2". Abbreviated here so a
+successor that has lost `STATE.md` still holds the pre-commitments; **`STATE.md` is authoritative**.
+
+| unit | lane | branch | gate (final wording, abbreviated) | pre-committed reading | state |
+|---|---|---|---|---|---|
+| `T4` / leg 393 | **T**, CONSTRUCTION | `leg/393-t4-repro` | Does the unit reproduce at least one published enclosure row of `arXiv:1902.00384` — quantity, interval, and the paper's own certification criterion — to the paper's stated precision, **using an apparatus named and shown C1-compliant in its own pre-registration**? | (a) success is a **CAPABILITY, NOT a Clay-chain result**, no `L1→L4` link moves; (b) the object is a **periodic orbit, NOT a blow-up** — W3 untouched; (c) if the apparatus turns out to need a bounded approximate inverse uniform in `M`, **STOP and say so** — that is more valuable than the reproduction; (d) right shape + wrong interval is **`no`**, quantified | DISPATCHED |
+| `T6` / leg 394 | **T**, literature | `leg/394-t6-fulltext` | At **full text**, does each of leg 348's seven papers **confirm**, **strengthen**, or **UNDERCUT** its abstract-level classification? Table, deciding sentence quoted and located. Unobtainable = **`UNREACHABLE`**, never a confirmation. | (a) **an undercut is the valuable branch and is reported first**; if it hits `1902.00384` it lands on `T4` immediately; (b) consistency is **not** strengthening; (c) `UNREACHABLE` ≠ zero; (d) **READ, do not CONTACT**; (e) no S2 key — **`THROTTLED`, never zero** | DISPATCHED |
+| `V1` | verification | `verify/wave1` | Re-deriving **from banked JSON and landed evidence scripts alone**, do all five claims reproduce exactly: R0's metric + the 134.45/144.69 reconciliation; the retraction (57/100, 5/9, 4/5, **ONE** new orbit, 0.0175 vs 0.0553); R1's +0.45 pp and the hold-out kill; T2's 32/32 MEASURED / namespace `1.1` / 5-of-6 THROTTLED; T1 ruling none of the three questions. **Plus: does `M3 = DELIVERED` survive the 57% seed overlap, on M3's own wording?** | (a) agreement is expected and worth little; the value is in (3),(4),(5) and M3; (b) **a disagreement is BANKED, not reconciled** by the verifier; (c) missing field = `UNVERIFIABLE`, not `no`; (d) **must not read** `WALLS.md`, `STATE.md`, `DIRECTION.md`, the briefs, or the wave-1 reasoning | DISPATCHED |
+| `T5` / leg 395 | **T** | `leg/395-t5-sweep` | Grep the landed record for every leg that declined/deferred/narrowed work citing the ℓ¹-Fourier/radii-polynomial ban. For each: **apparatus-based** or **realization-based**? Name which C1 now permits to be re-opened. A zero is instrumented like any other zero. | (a) permitted ≠ recommended — **`T5` ranks nothing and re-opens nothing**; (b) **realization-based refusals stay refused** — C1 supersedes no measurement; (c) if nothing is found, say C1 cost nothing; (d) "both" is filed as realization-based | DISPATCHED |
+
+**Composition floor (§3g):** met from **Lane T, by three units** (`T4`, `T6`, `T5`).
+**§3f rule 3:** `E` was an instrument task; `T4` is the construction unit that discharges the rule.
+**Verifier:** `V1`, discharging the debt on `T1`, `T2` and `R0`+`R1`.
+
+**Not taken this wave, and why** — `T3` (deferred by SEQUENCING, first unit ranked for wave 3;
+`T6` can undercut its premise and `T4` builds its apparatus), `T2′` (now cheaper than costed — the
+ruling it needed has landed), `T2″` Type-I on `T³` (sharpest item the lane owns; wants `T4`'s
+apparatus; wave 3), **Lane V** (**deferred by PRIORITY, NOT blocked**), **Lane L** `L1`/`L2`/`L3`
+(the most valuable lane by leg 390's measurement, and no unit in 390 legs has attacked §6(i) or
+§6(ii); excluded only because a fifth unit exceeds §3g's cap — **wave 3**), `R2`–`R5` (`E` reopens
+this ranking, not this wave), PROG-R4 A/B/D (demoted by the basin-structure reading), U3's owed
+novelty questions, legs 387/388/389, and (D)'s conditions (8),(9) (**now unblocked**, wave 3).
+Full table with reasons in `STATE.md` §"WAVE 2".
+
+---
 
 ### Wave 1 — units, gates in FINAL WORDING, pre-committed readings
 
@@ -59,12 +88,18 @@ refusals that cited the ℓ¹-Fourier ban and were apparatus-based, which C1 now
 
 ### What the next Conductor must do first
 
-**Push:** run `scripts/merge_gate.sh origin/main`, confirm `MERGE GATE: PASS`, push the ruling
-transcription and this file to `main`, then plan wave 2 — carrying the wave-1 verifier, `T5` and
-`T6` — and commit that plan **with a refreshed copy of this block** before dispatching anything.
+**Gate and merge whatever `prog-r4/e-hhard` and the four wave-2 branches contain, land what passes
+its pre-committed gate, and push** — then plan wave 3 with `T3`, `T2″` and Lane L ranked first,
+refreshing this block in the same commit as the plan.
 
-**Binding on wave 2's composition:** `E` was an instrument task, so **§3f rule 3 forbids opening
-wave 2 with a second instrument/audit/repair unit** before a mathematics or construction unit.
+**If `E` has not returned:** its branch tip already holds a landed pre-registration and diagnostics
+(1) and (2) with controls firing both ways. **Diagnostic (3) — are the named Table IV rows
+reachable at all when seeded directly at their published `(T, s)` — is the sharpest single test of
+H-hard available and has never been run at this realization.** Do not discard the branch; re-spawn
+for (3) if it is missing, and land (1) and (2) either way.
+
+**Do not verify wave 2.** The Conductor that planned it cannot check it; wave 3 carries that
+verifier, exactly as `V1` carries wave 1's.
 
 ---
 

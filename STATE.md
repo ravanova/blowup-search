@@ -76,12 +76,240 @@ naming requirement. Lane V is therefore **deferred by the user's Lane T priority
 
 | What | State |
 |---|---|
+| **WAVE 2** (`T4`, `T6`, `V1`, `T5`) | **PLANNED AND COMMITTED 2026-08-14, before dispatch**, per §3g step 1, with `reports/ORCH_STATE.md` refreshed in the same commit as §3g now requires. Gates in final wording and pre-committed readings are below. **Composition floor met by THREE Lane T units.** **`V1` is the verifier §3g owes for wave 1** — `T1`, `T2` and `R0`+`R1` are all `UNVERIFIED` and the Conductor planned them. **`T4` is the construction unit §3f rule 3 requires**, since `E` was an instrument task and a second one may not follow it. |
 | **WAVE 1** (`T1`, `T2`, `R0+R1`, `E`) | **PLANNED AND COMMITTED 2026-08-13, before dispatch**, per §3g step 1. Gates in final wording and pre-committed readings are below. Composition floor met by **two** Lane T units, not one. **No verifier in this wave** — §3g forbids the Conductor verifying a wave it planned; wave 2 carries it. |
 | **`T1` / leg 391** (Lane T) | **LANDED 2026-08-13** (`829c8db`), **GATE = `yes`**. The ban-wording escalation packet is at `writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md` and is **OPEN ON THE USER'S DESK**. Four items: (a) Cadiot, (b) stage V's *"needs L1 first"*, (c) **the apparatus question — which blocks the whole of Lane T**, (d) the outreach hold, raised rather than routed around. Pre-committed reading honoured exactly: (a)'s scoping precedent recorded as **available in shape and NOT exercised**; under C2 Lane T is blocked on a **lift, not a scope — a materially worse position**, reported unsoftened; the **fourth-space/basis vs fourth-*apparatus*** mismatch surfaced as a defect and **left unresolved**. *(The row's `BUILD NOTHING IN LANE T` hold is **RESCINDED 2026-08-13** — the user ruled C1 and Lane T is unblocked by SCOPE. See "Open" item 2.)* No `L1→L4` link moved. |
 | **`R0`+`R1`** (Lane R) | **LANDED 2026-08-13** (`ba512e0`), **BOTH GATES = `yes`** — and the headline claim is **RETRACTED**. Core-hours and distinct count re-derived from the banked artefacts and **independently re-derived again by the Conductor before landing**: U3 **8 / 144.69 = 0.0553**, U5 **5 / 57.04 = 0.0877**, both AGREE with `WALLS.md`. **But `WALLS.md`'s framing was itself wrong on core-hours**: 134.45 was never prose — it is `Σ attempts[].wall_seconds/3600` (attempt CPU) from the same JSON, against 144.69 (pool reservation); both are real, the gap is 92.92% utilisation, and what they needed was a **convention label**, not a replacement. **`Lane R's first measured win` is WITHDRAWN as an inference.** The per-run arithmetic (1.27×–1.59×) stands; the inference does not, because the metric counts **cross-run** re-finds as successes — the defect it was introduced to remove, one level up. Measured: **57 of U5's 100 seeds were already spent by U3**, **5 of 9 convergences are bit-identical re-executions**, **4 of 5 distinct solutions are re-finds**, and **U5's contribution new to the programme is ONE orbit** → cumulative **0.0175 vs U3's 0.0553, 3.15× WORSE**. **`R1` = CLOSED, against itself**: the "cheapest competitive win in the repository" was **already collected** — U5's deployed `resourcing.stall_exit` *is* the criterion — and the remaining headroom is **+0.45 pp**, with hold-out showing a rule tuned on U5's 9 convergences **kills one of U3's 14**. Spend no more compute on the family. Denominator is **worker-hours**; physical cores are in no numeric field and were **not estimated**. Deterministic throughout (leg 349's ban respected). Evidence 68/68. **UNVERIFIED** under §3f — wave 2 carries it. |
 | **`T2` / leg 392** (Lane T) | **LANDED 2026-08-13** (`b5f8bac`), **GATE = no theorem located → returned `UNDER-RESOURCED`, NOT `no`** (§3d). **Branch (b) fired**: torus/periodic *global-regularity* theorems do exist under scaling-invariant smallness / LPS hypotheses (`1909.09125`, `math/9811161`, `0710.1604`) — real in shape, thin in substance, since every clause is somewhere a blow-up ansatz would already be. **A CONTROLLED ZERO IS NOT A CLEARANCE**, and this one is not even fully controlled: NRS 1996 / Tsai 1998 are **pre-arXiv** and were declared unreachable in advance, Semantic Scholar was **throttled on 5 of 6** substantive queries, and one battery **failed its own domain control** (`1304.7414` not re-found). arXiv itself was clean — **32/32 MEASURED**, served namespace banked as **1.1** on every query, **zero** non-MEASURED records carrying a total, negative control 0 in both instruments. Evidence 41/41. **Compliant search costed at ≈1.2–1.7 h plus one user ruling.** **THE ADVERSE FINDING, now in `WALLS.md`:** "0 of 4 clearances carry to `T³`" does **not** mean the `ℝ³` *exclusions* stop applying — **they still reach a `T³` object built by periodic extension of an `ℝ³` self-similar core.** Leg 309 read `2604.09949` at full text and hit **GATE NO at H11** on exactly that ground. **The one previous attempt at Lane T's target, by anyone, died this way.** **De novo item named:** a **Type-I rigidity theorem on `T³`** — a *rate* condition needs no dilation symmetry, so it carries to the torus intact as a question. **UNVERIFIED** under §3f. |
 | **`plan_of_record.py` posture** | **LANDED 2026-08-13** (`1ca9e91`), the Conductor's first act under §3g. Additive only — 75 insertions, 0 deletions: `POSTURE`, `MODE`, `BLOCKERS_FILE` → `WALLS.md`, `LANES` (T/V/L/R with the walls each attacks), `POSTURE_LIMITS` (§3h restated executably). **No ban lifted, narrowed, reworded or re-read**; the `BANNED` table is byte-identical and `test_plan_of_record.py` still reports 26 bans / 19 in force, ALL GATES PASS. |
 | **`PROG-R4`** (route-4 DSS programme, leg 380) | **U0–U3, U5 LANDED. U4 BLOCKED — but now *interesting*, see below.** U2 answered **MILESTONE M2** (T=1e5 DNS on the attractor, `D/D_lam`=0.0645±0.0253). U3 answered **GATE G1 = `UNDER-RESOURCED`**, controls fired as planted — 0 of 100 recovered a named orbit, 14 of 100 converged onto eight *other* RPOs. **U5 answered `MILESTONE M3 = DELIVERED`** (2026-08-13): the budget is now stratified by SHIFT — exhaustive re-mine 2,014 → **75,873** candidates, in-band admissible supply 35 → **72**, in-band spend 31 → **60**, controls fired as planted, **2,104 epochs against U3's 4,629 (no iterations bought)**. **9 of 100 converged, 0 recovered a named row**, and **U5's pre-committed reading fired on branch (b) — the bias is in BASIN STRUCTURE, not only seed supply.** **§3d's stop did NOT fire; route 4 is NOT stopped.** **G1 is untouched and stays `UNDER-RESOURCED`** — `n_recovered=0` is a count, not a `no`, and no G1 re-open is raised. U4 (G2, basin radius) still cannot open — it needs a recovered **named** orbit — but the pre-committed reading makes it the interesting unit rather than a formality. Tier-2 ceiling; Clay unmoved. **UNVERIFIED** under §3f. |
+
+## WAVE 2 — PLANNED AND COMMITTED 2026-08-14, BEFORE DISPATCH
+
+**Ranked after the user's ban-wording ruling of 2026-08-13 and against `OPTIONS.md`, which §3g now
+requires be read alongside this file when planning every wave.** The ruling is the reason the
+ranking changed: Lane T is unblocked **by scope**, `T3` and `T4` are OPEN, and two units became
+obligations rather than options.
+
+**Composition floor (§3g, per-wave): met by THREE Lane T units** — `T4`, `T6`, `T5` — each
+attacking W2/W6 on the Clay chain. A wave of pure Lane R would be out of contract; this is the
+opposite failure risk (one lane carrying three of four units), and it is taken deliberately because
+Lane T is the user's priority-1 lane and has just spent two waves blocked. `V1` is the
+counterweight: it is lane-independent and audits Lane R.
+
+**§3f rule 3 is binding on this wave and was pre-committed in wave 1's own plan:** `E` was an
+instrument task, so **wave 2 may not be a second instrument/audit/repair unit before a mathematics
+or construction unit.** `T4` is that construction unit. It is dispatched first and it is the
+wave's centre of gravity.
+
+**Why `T4` and not `T3`, when `T3` is the lane's real mathematical content.** `T3` (the non-DSS
+`T³` ansatz) is the bigger prize and it stays the priority unit. It is **not** taken this wave for
+two measured reasons, not from timidity. (i) `T6` runs this wave and **can undercut the
+classification `T3` would be built on** — leg 348 read its seven papers at abstract level only,
+and the lane's whole thesis rests on that reading. Spending the lane's largest unit on a premise
+being re-tested in the same wave is the one sequencing error available here. (ii) `T4` builds the
+**apparatus** `T3` needs — a Galerkin-plus-tail dynamical closure, which is precisely the object
+ruling C1 put outside the ban — against a target whose answer is already published. `T3` without
+it is a build with no known-answer substrate, and leg 45's `M1` is the standing measurement that
+that goes badly. **`T4` de-risks `T3`; it does not replace it.** `T3` is the first unit ranked for
+wave 3.
+
+**Every gate below is in FINAL WORDING and every unit carries a PRE-COMMITTED READING**, fixed here
+before any worker is dispatched and before any number exists.
+
+**C1's naming requirement binds `T4` and `T3` and is not waivable by the Conductor:** a unit
+claiming the Galerkin-plus-tail scope must, **in its own pre-registration**, both **(1) name its
+apparatus** — the closure it uses, with a citation — and **(2) show it does not construct a single
+bounded approximate inverse uniform in `M`**. Absent both, the ℓ¹-Fourier/radii-polynomial ban
+applies in full, and a unit reaching for a `Y₀/Z₀/Z₁/Z₂` contraction **in any space** is inside the
+ban whatever it calls itself.
+
+---
+
+### 1. `T4` — REPRODUCE `arXiv:1902.00384` ROW FOR ROW. *Lane T, CONSTRUCTION. leg 393*
+
+The crack in **W2**. `arXiv:1902.00384` certifies a **periodic orbit of 3D Navier–Stokes on `T³`
+with the viscous term inside the certified equation** — natively 3D, natively time-dependent,
+genuinely viscous, genuinely fluid. Leg 348 located it; leg 390 flagged the credit **unclaimed**;
+nobody here has ever run it. The precedent is exact: **leg 316 reproduced Dahne–Figueras
+row-for-row while a ban was in force**, clearing by individuating on three realizations. This is
+the same move against a different paper, now with C1's scope ruling rather than an individuation
+argument doing the work.
+
+**Novelty is not at issue and no novelty pass is owed** — the target is a published theorem and the
+unit's entire purpose is to re-derive someone else's numbers. **This is a known-answer substrate,
+which is what makes it a legitimate first construction after two blocked waves.**
+
+> **GATE (final wording).** Does the unit reproduce at least one published enclosure row of
+> `arXiv:1902.00384` — the certified quantity, its interval, and the paper's own criterion for the
+> row being certified — to within the paper's stated precision, **using an apparatus named and
+> shown compliant with ruling C1 in the unit's own pre-registration**?
+> **yes →** name the row, the reproduced interval, the paper's interval, and the agreement; state
+> the apparatus and the C1 compliance argument; state what the reproduction does **and does not**
+> establish about Lane T's target.
+> **no →** return the **furthest point reached** — which row, which quantity, what failed, and a
+> **cost** for reaching it (§3d). **A reproduction that runs out of budget is `UNDER-RESOURCED`,
+> never `no`.**
+
+**PRE-COMMITTED READING.** **(a) A successful reproduction is a CAPABILITY, NOT A RESULT ON THE
+CLAY CHAIN.** It shows this repository can run the apparatus W2's crack is made of. It moves **no**
+link of `L1 → L4`, and the write-up must say so in its own words — §3h rule 2, scale is not
+evidence, and a reproduction of a published theorem is by construction not new mathematics.
+**(b) If the reproduction succeeds, the object reproduced is a PERIODIC ORBIT, NOT A BLOW-UP.** W2
+is about the *technology* clearing the bar, and W3 — the empty Grade-A × fluid **blow-up** cell —
+is untouched by it. Do not let a success be read as filling leg 174's cell. **(c) If the apparatus
+turns out, when actually implemented, to require a bounded approximate inverse uniform in `M`, THE
+UNIT STOPS AND SAYS SO.** That is the C1 compliance test failing in practice rather than on paper,
+it puts the unit inside the ban, and it is a **more valuable** finding than a reproduction: it
+would mean the scope ruling does not reach a real implementation, which is a fact about the ban
+nobody here has measured. Report it as a stop, not as a failure. **(d) A partial reproduction that
+gets the shape right and the interval wrong is NOT a reproduction** and is reported as `no` with
+the discrepancy quantified — leg 316's standard, applied unchanged.
+
+**Territory.** `experiments/journal/leg_393.md`, `experiments/p2_route_t4_*.py`,
+`writeup/data/p2_route_t4_v1.json`, `writeup/novelty/leg_393.md`, **figure `fig110`** (allocated
+here, at dispatch, per the figure-collision incident). **Resourcing (§3d):** this is a
+reproduction of a published computation and is resourced as a **full unit** — build whatever the
+closure needs. An under-resourced attempt returns `UNDER-RESOURCED` **and a cost**, never `no`.
+
+### 2. `T6` — DISCHARGE LEG 348'S OWN CEILING, AT FULL TEXT. *Lane T, literature. leg 394*
+
+**An obligation, not an option** (`OPTIONS.md` §E; the user, 2026-08-13). Leg 348 read its **seven
+papers at ABSTRACT LEVEL ONLY** and recorded, in its own words, that a full-text pass could
+**strengthen OR UNDERCUT** its classification. **The whole Lane T thesis rests on that
+classification**, and the 2026-08-13 narrowing of the outreach hold makes full text readable for
+the first time. **It runs early precisely because it can undercut the lane** — which is the only
+reason to run it before the lane's construction rather than after.
+
+> **GATE (final wording).** Read at **full text** each of the seven papers leg 348 classified at
+> abstract level. For **each**, does the full text **confirm**, **strengthen**, or **UNDERCUT** leg
+> 348's recorded classification of it?
+> **Answer per paper, in a table, with the deciding sentence quoted verbatim and located by section
+> or page.** A paper whose full text could not be obtained is banked as **`UNREACHABLE`** with the
+> reason, **never as a confirmation.**
+> **yes (all seven answered) →** report the table; state explicitly whether Lane T's premise
+> survives, and **name any paper whose full text moves it.**
+> **no →** name which papers could not be reached and what it would take (§3d).
+
+**PRE-COMMITTED READING.** **(a) AN UNDERCUT IS THE VALUABLE BRANCH AND IS REPORTED FIRST**, not
+buried under six confirmations. If full text contradicts leg 348 on `arXiv:1902.00384`
+specifically, that **also lands on `T4`** — the Conductor is told immediately and `T4`'s target may
+be void. **(b) A CONFIRMATION IS NOT A STRENGTHENING.** "The full text is consistent with the
+abstract" discharges the ceiling and adds nothing; only a full-text clause that leg 348 could not
+have seen counts as strengthening, and it must be quoted. **(c) `UNREACHABLE` is not a confirmation
+and not a zero** — leg 387's namespace failure fabricated exactly that once already
+(`reports/ORCH_STATE.md`, Incidents). Bank a positive datum proving the source was reached.
+**(d) This unit READS. It does not CONTACT.** Papers, problem statements, proceedings, theses,
+publisher pages, full texts: authorised. **Contacting an author, group, maintainer or mailing list:
+still held by the user, and needs its own ruling.** **(e) No Semantic Scholar key exists.** Pace
+against the unauthenticated rate limits, back off rather than assuming a key, and **bank a
+throttled query as `THROTTLED`, never as a zero.**
+
+**Territory.** `experiments/journal/leg_394.md`, `writeup/data/p2_route_t6_v1.json`,
+`writeup/novelty/leg_394.md`. No figure. **Resourcing (§3d):** seven full texts, ≈1–2 h.
+
+### 3. `V1` — THE WAVE-1 VERIFIER. *Verification. §3g's per-wave budget, owed and now paid.*
+
+**`T1`, `T2` and `R0`+`R1` are all `UNVERIFIED`, and the Conductor planned all three.** §3g is
+explicit that this is the one thing a Conductor may not do for itself, with *more* force rather
+than less because it has more context to be biased by. **`V1` is a fresh session with no memory of
+the construction, re-deriving from banked JSON**, and it is briefed on the *claims*, never on the
+reasoning that produced them.
+
+> **GATE (final wording).** Re-deriving **from the banked JSON and the landed evidence scripts
+> alone**, does each of the following claims reproduce **exactly**?
+> **(1)** `R0`'s metric: U3 = **8 distinct / 144.69 worker-hours = 0.0553**, U5 = **5 / 57.04 =
+> 0.0877**, and the **134.45 vs 144.69** reconciliation (attempt CPU `Σ attempts[].wall_seconds/3600`
+> against pool reservation `wall_seconds × workers`, 92.92% utilisation).
+> **(2)** The **retraction**: 57 of U5's 100 seeds already spent by U3; 5 of 9 convergences
+> bit-identical re-executions; 4 of 5 distinct solutions re-finds; **U5's contribution new to the
+> programme = ONE orbit**, cumulative **0.0175 vs 0.0553**.
+> **(3)** `R1`'s closure: the remaining headroom is **+0.45 pp**, and a rule tuned on U5's 9
+> convergences **kills one of U3's 14** on hold-out.
+> **(4)** `T2`'s instrument discipline: **32/32 arXiv queries MEASURED**, served namespace **1.1**
+> banked on every one, **zero** non-MEASURED records carrying a total, negative control 0 in both
+> instruments, and **5 of 6** Semantic Scholar substantive queries `THROTTLED`.
+> **(5)** `T1`'s packet **rules none of the three questions** — re-run the ruling-language sweep
+> independently.
+> **yes →** each claim reproduces; say so per claim, with the number you got.
+> **no →** name the claim, the number you got, the number claimed, and the file and line the
+> discrepancy is in. **A discrepancy is the deliverable, not a failure of the unit.**
+
+**AND ONE QUESTION THE CONDUCTOR DELIBERATELY DID NOT ANSWER, HANDED TO `V1` BECAUSE THE CONDUCTOR
+PLANNED THE WAVE THAT RAISED IT:** U5's 57/100 seed overlap with U3 was **not** known when
+`MILESTONE M3 = DELIVERED` was written. **Does `M3 = DELIVERED` survive the overlap, on M3's own
+pre-committed wording?** Answer it against the wording, not against the achievement. `yes` or `no`,
+with M3's text quoted.
+
+**PRE-COMMITTED READING.** **(a) AGREEMENT IS THE EXPECTED OUTCOME AND IS WORTH LITTLE ON ITS
+OWN.** The Conductor already re-derived (1) and (2) independently before landing them; `V1`'s value
+is concentrated in (3), (4), (5) and the M3 question, which nobody has re-derived. **(b) A
+DISAGREEMENT IS BANKED AS A DISAGREEMENT AND NOT RECONCILED BY THE VERIFIER.** `V1` reports the two
+numbers and stops; deciding which is right is the Conductor's job and doing it inside the verifier
+destroys the independence the unit exists for. **(c) If `V1` cannot re-derive a claim because the
+JSON does not carry the field, that is `UNVERIFIABLE`, not `no`** — and it is a finding about the
+banking discipline, which lesson 68 says decays at the rate of memory. **(d) `V1` MUST NOT READ**
+`WALLS.md`, `STATE.md`, `DIRECTION.md`, the wave-1 briefs, or the wave-1 journals' reasoning
+sections. It reads the **claims** listed in this gate, the **banked JSON**, and the **evidence
+scripts**. A transcription is not a measurement — `R0` proved that this wave, when `WALLS.md`'s
+prose framing of the core-hours discrepancy turned out to be wrong.
+
+**Territory.** `experiments/journal/verify_wave1.md`, `writeup/data/p2_verify_wave1_v1.json`.
+**Writes no source, no figure, and none of the Conductor-owned files.**
+
+### 4. `T5` — THE C1 SWEEP. *Lane T. AN OBLIGATION OF THE RULING, NOT AN OPTION. leg 395*
+
+**The price of narrowing a ban, and it has never been paid here.** C1 means the
+ℓ¹-Fourier/radii-polynomial ban is **narrower than the repository has been treating it**. That cuts
+both ways and the second way has never been checked: **work may have been declined, deferred, or
+never proposed on a reading the ruling now says was too wide.** The ruling calls this an obligation
+in terms — *"not an optional follow-up"*.
+
+> **GATE (final wording).** Grep the **landed record** — journals, write-ups, `plan_of_record.py`
+> annotations, `DIRECTION.md` excluded per §3e — for every leg that **declined, deferred, or
+> narrowed** work citing the ℓ¹-Fourier/radii-polynomial ban. For **each**, was the refusal
+> **apparatus-based** (it assumed the ban reaches any certification machinery) or
+> **realization-based** (it rested on one of the three dead realizations, or on Theorem NGX's
+> exclusion of a single bounded `A` uniform in `M`)?
+> **yes →** report the full list with the citation for each, **and name which refusals C1 now
+> permits to be re-opened.** Each named refusal must carry the sentence that made it, quoted.
+> **no →** state that no landed leg cites this ban as a reason not to proceed, **with the search
+> commands and their coverage shown** — a zero here is a claim about the record and must be
+> instrumented like any other zero.
+
+**PRE-COMMITTED READING.** **(a) A PERMITTED RE-OPENING IS NOT A RECOMMENDATION TO RE-OPEN.** `T5`
+lists what C1 unblocks; it **does not rank it, does not propose units, and does not re-open
+anything.** Ranking is the Conductor's and the results go to `OPTIONS.md`. **(b) A REALIZATION-BASED
+REFUSAL STAYS REFUSED.** The three dead realizations stay dead, Theorem NGX stays true, leg 341
+stays true — **C1 supersedes no measurement**, and any entry the sweep marks as newly permitted must
+survive that test explicitly or it is not listed. **(c) IF THE SWEEP FINDS NOTHING, C1 COST NOTHING
+AND BOUGHT ONLY LANE T** — report that plainly rather than manufacturing a list. **(d) The sweep may
+find refusals that were BOTH.** Those are listed under realization-based, the stricter of the two.
+
+**Territory.** `experiments/journal/leg_395.md`, `writeup/data/p2_route_t5_v1.json`. No figure.
+**Resourcing (§3d):** a record sweep, ≈0.5–1 h.
+
+---
+
+### What `OPTIONS.md` offered and was NOT taken this wave, and why
+
+§3g as amended requires `OPTIONS.md` be read alongside this file when planning every wave, and a
+deferred option that is never *said* to be deferred is an option that was silently dropped.
+
+| option | why not this wave |
+|---|---|
+| **`T3`** — the non-DSS `T³` ansatz | **Deferred by SEQUENCING, and it is the first unit ranked for wave 3.** `T6` can undercut its premise this wave, and `T4` builds the apparatus it needs against a known answer. Not deferred for size — §3h licenses building whatever the lane needs. |
+| **`T2′`** — the compliant rigidity search | **Deferred by COST-BENEFIT, and it is now cheaper than costed.** `T2` priced it at ≈1.2–1.7 h **plus one user ruling**; the ruling has landed and full text is readable, so the price is now the hours alone. It is ranked behind `T6`, which tests a premise rather than widening a search. |
+| **`T2″`** — Type-I rigidity on `T³` | **Deferred, and it is the sharpest item Lane T owns.** A *rate* condition needs no dilation symmetry, so it carries to the torus intact **as a question**, and `"Type I blowup" AND "periodic"` measured **0**. It is a de-novo mathematics unit and it wants the apparatus `T4` is building. Ranked for wave 3 alongside `T3`. |
+| **Lane V** (`OPTIONS.md` §C) | **DEFERRED BY PRIORITY, NOT BLOCKED** — rulings (b) and (c) together opened it, and this file records it as deferred, per the ruling's explicit instruction. Lane T is the user's priority 1. |
+| **Lane L** — `L1`/`L2`/`L3` (`OPTIONS.md` §D) | **Deferred, and it is the most valuable lane by leg 390's own measurement** — §6(i) and §6(ii) are the literal last blockers and **no unit in 390 legs has attacked either**. Not taken because wave 2 is already three-quarters Lane T and adding a fourth lane would put five units in a wave §3g caps at four. **Ranked for wave 3.** |
+| **`R2`–`R5`** (`OPTIONS.md` §B) | **Deferred by contract.** `R1` closed against itself and told us to spend no more compute on that family; a wave of pure Lane R is out of contract; and the basin-structure finding points at `R3`/`R5` only once `E` returns. **`E`'s result reopens this ranking, not this wave.** |
+| **`PROG-R4` options A/B/D** (`OPTIONS.md` §A) | **Demoted by the pre-committed reading**, which fired on branch (b): the bias is in **basin structure**, not seed supply, and all three buy supply. Not re-ranked here. |
+| **U3's two owed novelty questions** (`OPTIONS.md` §F) | **Deferred.** Owed novelty work on a run's own output is allowed (screening as a unit is the standing stop, and this is not that). It is small, it is real, and it loses to three Lane T obligations. |
+| **Legs 387/388/389** (`OPTIONS.md` §F) | **Deferred.** 387's cause is now known — the namespace bug is diagnosed and banked — so a re-run is cheap but buys a novelty discharge for a route the ruling did not touch. |
+| **(D)'s data conditions (8),(9)** | **Deferred by one wave, and it is now UNBLOCKED** — the outreach narrowing made it an ordinary literature unit. Leg 390 §5 item 1 owes the `check_A` re-run and **the §4 disposition may change.** It is a natural pairing with `T6` and is ranked for wave 3 unless `T6` reaches it incidentally, in which case `T6` banks it and says so. |
+
+---
 
 ## WAVE 1 — PLANNED AND COMMITTED 2026-08-13, BEFORE DISPATCH
 
