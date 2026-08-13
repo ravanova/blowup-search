@@ -1,11 +1,81 @@
 # ORCH_STATE — orchestrator handoff
 
-**Owner: the orchestrator.** Written at every handoff and at every stop. A fresh orchestrator
-session reads this at Step 0b before dispatching anything.
+**Owner: the CONDUCTOR** (`ORCHESTRATION.md` §3g; previously "the orchestrator", a role that no
+longer exists). Written **at every wave boundary** — in the same commit as the wave plan (§3g
+step 1) and again in the same commit as the wave's integration (step 4) — and at every handoff and
+every stop. A fresh session reads this at Step 0b before dispatching anything.
+
+---
+
+## LIVE — CONDUCTOR mode, wave 1 INTEGRATING, 2026-08-14
+
+**Read this block, not the ⛔ STOP block below it.** That stop is real history and is retained, but
+it was **superseded by the user's CONDUCTOR-mode restart of 2026-08-13**. There are no longer four
+leg slots, no bench, and no separate Decision Maker: one entity ranks, dispatches, audits, lands
+and re-ranks, in waves of 2–4 self-terminating workers.
+
+**`main` = `7083787`** (`origin/main`, fetched 2026-08-14). The Conductor's working checkout is
+**ahead by the four ruling-transcription commits plus this one and is NOT YET PUSHED** — see "what
+the next Conductor must do first".
+
+### Wave 1 — units, gates in FINAL WORDING, pre-committed readings
+
+The full gate texts and readings are in `STATE.md` §"WAVE 1 — PLANNED AND COMMITTED 2026-08-13,
+BEFORE DISPATCH" (lines ~86–300), committed **before** dispatch. Abbreviated here so a successor
+that has lost `STATE.md` still holds the pre-commitments; **`STATE.md` is authoritative on wording**.
+
+| unit | lane | branch | gate (final wording, abbreviated) | pre-committed reading | state |
+|---|---|---|---|---|---|
+| `T1` / leg 391 | **T** | landed `829c8db` | Does the packet state, for each of the three pending ban-wording questions, **both** supportable readings, evidence from the ban's own text and the landed record, **without ruling any of them**? | (a) apparatus-naming ban → 2026-08-11 scoping precedent available **in shape, not exercised**; (b) conclusion-naming ban → Lane T blocked on a **lift not a scope**, materially worse, report unsoftened; (c) either way surface the *fourth space/basis* vs fourth *apparatus* mismatch, do not resolve it | **LANDED, gate `yes`.** All three readings honoured. **UNVERIFIED.** |
+| `T2` / leg 392 | **T** | landed `b5f8bac` | Does the search locate a **published theorem** excluding a finite-time singularity for 3D NS on `T³` of the shape Lane T needs — a periodic analogue of NRS/Tsai? | (a) a self-similar-only `T³` theorem **narrows**, does not kill; (b) a broader bounded-energy/scaling-smallness theorem **bites directly**; (c) **a controlled zero is NOT clearance**; (d) throttled ≠ zero | **LANDED, gate = `UNDER-RESOURCED`, not `no`** (§3d). Branch (b) fired in shape. **UNVERIFIED.** |
+| `R0`+`R1` | R | `prog-r4/r0r1-metric`, landed `ba512e0` | R0: does the metric land with **both** reconciliations closed against banked JSON? R1: does a **deterministic** flatness rule beat the incumbent on held-out data? | (a) a reconciliation moving U3's baseline **down** is a correction against ourselves and lands as one, not as a better ratio | **LANDED, both gates `yes`.** Headline "Lane R's first measured win" **RETRACTED**; R1 **CLOSED against itself**. **UNVERIFIED.** |
+| `E` | R (instrument) | **`prog-r4/e-hhard`, LIVE** | On the 200 banked attempts, do all three named diagnostics return, **each with a planted control demonstrated firing in both directions**: (1) converged-`\|s\|` vs seed `\|s\|`; (2) attractor of the **hookstep** or of the **minimisation**; (3) are the named Table IV rows reachable **at all** when seeded at their published `(T, s)`? | four branches E-i/E-ii/E-iii/E-iv, fixed pre-run; **no fifth is constructed after** | **IN FLIGHT.** Branch tip `952b2cf`: pre-registration `70f3962` landed on branch **before** the first attempt; diagnostics **(1) and (2) RETURN with controls firing both ways**; **(3) not yet returned**. |
+
+**Composition floor (§3g):** met from **Lane T, by two units** (`T1`, `T2`), not one. Wave 1 was
+therefore in contract without `E` or `R0`+`R1`.
+
+**Verification debt.** `T1`, `T2` and `R0`+`R1` are **all UNVERIFIED**, and the Conductor **planned
+them and may not verify them** (§3g, §3f rule 1). **Wave 2 must carry the verifier**, dispatched as
+a worker with no memory of the construction, re-deriving from banked JSON.
+
+**Audited but not landed:** none. **Landed this wave:** `T1`, `T2`, `R0`+`R1`.
+
+### Open escalations
+
+| escalation | state |
+|---|---|
+| The ban-wording packet (`writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md`) | **RULED and DISCHARGED.** Ruling at `writeup/escalations/RULING_BAN_WORDING_2026-08-13.md` (`e2f618d`). All four items transcribed into `plan_of_record.py` / `WALLS.md` / `CLAY_OBLIGATIONS.md`, one commit per item: (c)=C1 `42b2c45`, (a)=A2 `cc0f036`, (b)=B1 `1f2d00c`, (d) `8654fca`. **No ban lifted; ban counts unchanged; `test_plan_of_record.py` ALL GATES PASS after each.** |
+| U5 §9's five costed options | **Not awaiting the user.** Superseded as a fork by the basin-structure reading, which demotes A, B and D. Ledgered in `OPTIONS.md` §A. |
+| Author contact | **Still held by the user.** Reading published material is authorised as of 2026-08-13; contacting an author, group, maintainer or list is not, and needs its own ruling. |
+
+**What the rulings changed, so a successor does not re-derive it:** Lane T is **unblocked by scope,
+not by a lift** — `T3` and `T4` are OPEN and *"BUILD NOTHING IN LANE T"* is **RESCINDED**; any unit
+claiming the scope must **name its apparatus** and **show it constructs no single bounded
+approximate inverse uniform in `M`**, or the ban applies in full. Lane V is **deferred by priority,
+NOT blocked**. Two units are **obligations, not options**: **`T5`** (sweep the landed record for
+refusals that cited the ℓ¹-Fourier ban and were apparatus-based, which C1 now permits) and **`T6`**
+(discharge leg 348's own ceiling — it read seven papers at **abstract level only**; run it early
+*because* it can undercut the lane).
+
+### What the next Conductor must do first
+
+**Push:** run `scripts/merge_gate.sh origin/main`, confirm `MERGE GATE: PASS`, push the ruling
+transcription and this file to `main`, then plan wave 2 — carrying the wave-1 verifier, `T5` and
+`T6` — and commit that plan **with a refreshed copy of this block** before dispatching anything.
+
+**Binding on wave 2's composition:** `E` was an instrument task, so **§3f rule 3 forbids opening
+wave 2 with a second instrument/audit/repair unit** before a mathematics or construction unit.
 
 ---
 
 ## ⛔ STOP — RUN WOUND DOWN BY USER INSTRUCTION, 2026-08-12 (cycle 11h, incomplete)
+
+> **SUPERSEDED 2026-08-13 by the user's CONDUCTOR-mode restart** (`ORCHESTRATION.md` §3g,
+> `WALLS.md`, `CLAY_ROADMAP.md` §7.6). **Retained, not deleted:** the stop happened, and the board
+> below explains why several branches sit where they do. The four-slot board, the bench lane and the
+> DM described in it **no longer exist**, and the instruction *"dispatches nothing until the user
+> says to"* has been discharged — the user has said to. Read the LIVE block above for the current
+> board. Everything below is history.
 
 **The user stopped the run.** Every live agent was told to halt where it stood, commit its work
 as **WIP on its own branch**, push the **branch only**, and answer nothing it had not finished.
@@ -997,3 +1067,19 @@ One short paragraph each: what happened, how it was diagnosed, what changed as a
   before it, in the same tool call sequence, no exceptions** — "I already checked a sibling
   worktree on the same branch" is not a substitute, since sibling worktrees on the same branch
   can hold independent uncommitted diffs.
+
+- **2026-08-13 (measured by leg 392, incurred by leg 387) — an XML namespace typo made a search
+  instrument report a controlled ZERO it had not measured.** arXiv's Atom responses carry the
+  opensearch namespace `http://a9.com/-/spec/opensearch/1.1/`. Leg 387's harness listed `1.0`, so
+  every response failed its own well-formedness check, every query was discarded, and the leg
+  **reported a zero** — an absence of results that was an absence of *parsing*. Nothing caught it:
+  a zero is exactly what a clean novelty pass looks like, the harness exited 0, and the negative
+  control (which also returned nothing) agreed. Diagnosed only because leg 392 re-queried the same
+  endpoint with a parser that **names no version anywhere** and banked the served namespace as a
+  field on every record: 32/32 queries MEASURED, `1.1` on all of them. **Result, and it generalises
+  past arXiv:** an instrument whose negative branch is a *zero* must bank a positive datum proving
+  it reached the service — the served namespace, a version string, a hit count on a control query —
+  and a query that fails to reach the service is banked as `THROTTLED`/`FAILED`, **never as a zero**.
+  Do not pin a version you do not control; parse namespace-agnostically and record what was served.
+  This is the second time a controlled zero has been fabricated by an instrument bug, and the first
+  time the fabrication was caught by another leg rather than by the leg that made it.
