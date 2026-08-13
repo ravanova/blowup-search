@@ -375,6 +375,15 @@ so it cannot be briefed by the construction it is checking. Anything not so veri
 becomes the bottleneck and the Conductor's context becomes the constraint the whole mode exists to
 protect. Prefer fewer, larger units — §3f's "task size goes up, not down" holds here.
 
+**Wave composition floor (adopted 2026-08-13).** **Every wave carries at least one unit attacking a
+wall on the Clay chain directly** — a Lane T, V or L unit in `WALLS.md`'s terms. This is §3b's
+composition floor re-posed for waves, and it defends against the specific drift this programme is
+now exposed to: Lane R work is real, it is currently the most productive thing in the repository,
+it always has a next increment, and it is *satisfying* in a way that literature and escalation
+units are not. A programme can spend a year becoming excellent at finding orbits it was never going
+to certify. **A wave of pure Lane R units is out of contract**, and so is a wave whose only
+non-Lane-R unit is an audit.
+
 **Self-chaining.** §9e applies unchanged: the Conductor continues into the next wave without a
 human re-pasting the prompt, and hands off per §9d before its own context runs out. A handoff
 writes `STATE.md` and pushes first; a handoff that loses the plan loses the wave.

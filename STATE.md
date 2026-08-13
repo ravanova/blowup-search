@@ -41,7 +41,7 @@ what a wall-breaking mandate does and does not license.
 |---|---|---|
 | **T — TORUS** | W2, W4, W6 | **Priority 1, the breakthrough candidate.** POCP's only named obstruction is *domain shape*; `T³` is that domain; `arXiv:1902.00384` already certifies a viscous 3D-NS periodic orbit there; leg 390 flagged the credit **unclaimed**. Needs a **non-DSS** ansatz and a rigidity screen rebuilt from zero. |
 | **V — VISCOUS RUNG** | W3 | Fill the Grade-A × fluid cell in the lowest dimension admitting fluid structure. Empty **"for want of a target, not a method"**. Both branches valuable — that is what makes it cheap. |
-| **L — LOCALISATION** | W4 on `ℝ³` | §4's "no known method" is the one load-bearing roadmap claim never checked to this repo's own standard. Price it; it may also break. |
+| **L — THE LAST OBLIGATIONS** | W4, **W5**, and `CLAY_OBLIGATIONS` **§6(i) and §6(ii)** | **Widened 2026-08-13.** The ONLY lane touching the final blockers. §6's two no-method obligations are the literal last things between a Tier-2 candidate and a Clay answer, **leg 390 confirmed the torus does NOT retire them** (open in both branches), and **no unit in 390 legs has ever attacked either.** Breaking one is the most valuable outcome available to this programme. |
 | **R — REFORMULATION + SOLVER COMPETITIVENESS** | W7 | **Promoted 2026-08-13: raise the recovery rate until this machinery is best-in-field.** Runs continuously inside every unit's pre-registration (*what makes this answerable an order of magnitude cheaper?*) **and** as its own units R0–R5. Every factor removed is permanent and transfers to Lane T unchanged. |
 
 ## In flight
@@ -141,6 +141,16 @@ these are drawn into waves of 2–4 from **different lanes**, so one stalled lan
    Plant a control that the criterion never kills an attempt U3's ledger shows would have
    converged. No realization change, so no milestone re-run.
 
+4. **`E` — the H-hard diagnostic, on the 200 attempts ALREADY ON DISK.** *Lane R / instrument,
+   **RULED BY THE USER 2026-08-13**, and the cheapest item on the board by an order of magnitude.*
+   No new DNS, no new solver, no new mining — U3's 100 and U5's 100 attempts are banked. Three
+   questions, from U5 §9 option E: the converged-`|s|` distribution against seed `|s|`; whether the
+   low-`|s|` solutions are attractors of the **hookstep iteration** or of the **minimisation**; and
+   **whether the named rows are reachable at all by seeding directly at their published `(T, s)`** —
+   which is the sharpest single test of H-hard available and has never been run. ≈0.5–1 h.
+   **§3f rule 3: this is an instrument task, permitted here because U5 was construction, and IT
+   CANNOT BE FOLLOWED BY ANOTHER ONE.** Pre-commit both branches before running it.
+
 **Wave 2 — plan after wave 1 lands and is audited. Expected shape:**
 
 5. **`R2` — deflation.** 10 of 14 convergences landed on three solutions; Newton keeps re-finding
@@ -208,6 +218,13 @@ discharge 382's owed novelty obligation after arXiv/Semantic Scholar returned HT
    **U5's recommendation, not a decision: E, then B.** A is dominated by B; C is worth its own
    milestone but aimed elsewhere; D costs most and helps least if H-hard is real.
 
+   **RULED 2026-08-13 BY THE USER: TAKE OPTION E.** It is queued as wave-1 item 4 below. A, B and
+   D stay **unqueued** — all three buy supply, the pre-committed reading points away from it, and
+   the anchored admissible pool is exhausted at `R<0.25` in any case. C stays unqueued and keeps
+   its own milestone, aimed at `|s|>0.9` rather than at the named rows. **`PROG-R4` is not
+   stopped.** U5's five options are preserved verbatim at `experiments/journal/prog_r4_u5.md` §9
+   if the ruling is ever revisited.
+
    **AMENDED BY THE PRE-COMMITTED READING, which U5 could not see when it wrote the above.**
    Branch (b) fired, so the bias is in the basin structure and the reading explicitly points
    "at `R3`/`R5` rather than at more seeds". **A, B and D all buy supply and are demoted by it;
@@ -268,6 +285,13 @@ null returns a cost and answers `UNDER-RESOURCED` · planted controls that can f
 `scripts/merge_gate.sh origin/main` must PASS · **no external outreach** · no output described
 as movement toward Clay unless a link actually moved · **§3h rule 2: scale is not evidence** —
 a large build is not a result, and the gate is the deliverable.
+
+**WAVE COMPOSITION FLOOR (adopted 2026-08-13, `ORCHESTRATION.md` §3g).** **Every wave carries at
+least one unit that attacks a wall on the Clay chain directly** — a Lane T, V or L unit. Lane R
+work is real and it is currently the most productive thing here, which is exactly why this floor
+exists: efficiency work is satisfying, it always has a next increment, and a programme can spend a
+year getting very good at finding orbits it was never going to certify. A wave of pure Lane R units
+is out of contract.
 
 ## Where the detail lives — consult by pointer, never wholesale
 

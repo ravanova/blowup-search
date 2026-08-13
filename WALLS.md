@@ -266,14 +266,50 @@ candidate, which makes that precondition unliftable **as written**. That is a wo
 same shape as the Cadiot escalation already pending. **Lane V's first unit escalates the wording to
 the user**; it does not read around it.
 
-## LANE L — LOCALISATION, PRICED. *Priority 3.*
+## LANE L — THE LAST OBLIGATIONS. *Priority 3, and it is the only lane that touches the FINAL blockers.*
 
-**Attacks W4 on `ℝ³`, in parallel with Lane T's route around it.** §4 is currently the only
-load-bearing claim in the roadmap carrying "no known method" **without having been checked to this
-repository's own standard.** A scoping unit that reads the published attempts to localise a
-self-similar profile to finite energy and states, per attempt, the named hypothesis that fails for
-DSS converts an assumption into a measurement. It may also find the method — the claim has never
-been tested.
+**Widened 2026-08-13.** This lane was drafted to price W4 on `ℝ³`. That is L1 below, and it is
+still the right first unit — but the lane's real subject is larger and nothing in this repository
+has ever attacked it.
+
+**The gap this lane exists to close.** `CLAY_OBLIGATIONS.md` §6 names **two obligations with no
+known method**, and they are the literal last things standing between a Tier-2 candidate and a
+Clay answer:
+
+- **§6(i)** — certified far-field decay together with an admissible cutoff.
+- **§6(ii)** — persistence / stability of the blow-up under that localisation.
+
+**Leg 390 checked whether the torus disposes of them and recorded that it does not:** §6's two
+obligations stay **OPEN in both branches**, and (D)'s gain on §4 is *"the acceptance test, not the
+work"* (`α > 2.996995` to wrap the uncut profile against §4's `α > 1.5`; 0.0 only if the profile is
+cut first, which inherits leg 381's entire bill unchanged). **So Lane T does not retire them, Lane
+V does not retire them, and Lane R does not touch them.** If every other lane succeeded completely,
+these two would still be the answer to "why isn't this a Clay solve yet."
+
+**Nobody here has ever spent a unit on either.** They have been carried as an assumption — "no
+known method" — through 390 legs without being checked to the standard this repository applies to
+everything else. That is the same defect `WALLS.md` was written to fix, and it sits on the most
+load-bearing claim in the whole roadmap.
+
+**L1 — price §4 on `ℝ³`.** Read the published attempts to localise a self-similar profile to finite
+energy; state, per attempt, the **named hypothesis** that fails for DSS. Converts an assumption
+into a measurement. It may also find the method — the claim has never been tested.
+
+**L2 — attack §6(i).** Is certified far-field decay plus an admissible cutoff genuinely without
+method, or without an *attempt*? Leg 381 banked the bill (`L³` tail 326.875 per decade, required
+`α > 1.5` against available `α = 1.0`). A deficit of 0.5 in a decay exponent is a *number*, not an
+impossibility — and no unit has ever asked what would supply it.
+
+**L3 — attack §6(ii).** Persistence under localisation. Downstream of L2 in logic but not in
+literature: the published techniques for persistence of singular behaviour under perturbation
+(nonlinear stability with a finite unstable spectrum, as in the Chen–Hou line) have never been
+read against *this* object.
+
+**BREAKING EITHER OF §6's OBLIGATIONS IS THE SINGLE MOST VALUABLE OUTCOME AVAILABLE TO THIS
+PROGRAMME** — more valuable than a Tier-2 candidate, because a candidate without them is what we
+already know how to produce. **A measured, honest "still no method, and here is precisely which
+hypothesis fails" is also a real result**, and it is the one that would tell the user whether the
+Tier-2 ceiling is permanent.
 
 ## LANE R — REFORMULATION FOR SCALE, AND SOLVER COMPETITIVENESS. *Runs continuously; R1–R2 are wave-1 priority.*
 
