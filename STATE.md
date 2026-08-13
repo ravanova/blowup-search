@@ -33,26 +33,26 @@ rest of this file is identical in both modes.)*
 
 | What | State |
 |---|---|
-| **`PROG-R4`** (route-4 DSS programme, leg 380) | **RUNNING** — GMRES early exit landed, U2/U3 runners, DNS in flight. Seed named per the scope ruling: Lucas–Kerswell arXiv:1406.1820v2 Table IV. Tier-2 ceiling in every gate. |
+| **`PROG-R4`** (route-4 DSS programme, leg 380) | **U0–U3 LANDED. U4 BLOCKED.** U2 answered **MILESTONE M2** (T=1e5 DNS on the attractor, `D/D_lam`=0.0645±0.0253; library best `R`=0.016543 vs leg 353's 0.177). U3 answered **GATE G1 = `UNDER-RESOURCED`**, controls fired as planted — **0 of 100 recovered a named orbit, but 14 of 100 converged to tol=1e-8** onto eight *other* RPOs, three replicated from independent seeds. **§3d's stop did NOT fire; route 4 is NOT stopped.** U4 (G2, basin radius) cannot open: it needs a recovered **named** orbit to perturb. Tier-2 ceiling; Clay unmoved. **UNVERIFIED** under §3f (one session, no paired verifier). |
 
 ## Next tasks — pre-committed, in order
 
 Re-ranking requires its own commit stating why (`ORCHESTRATION.md` §3f). Ordering respects
 §3f's cap: no more than two consecutive audit/repair/instrument tasks before construction.
 
-1. **`PROG-R4` U2/U3 — continue the programme.** *Construction, critical path.* M1 (the
-   hookstep/trust-region globalisation layer) is landed and reproduced against leg 353's
-   laminar control; U2/U3 runners are built and DNS is in flight. This is a **programme**
-   under §3c — one novelty pass already committed at U0, milestones not gates for build
-   units, and the worker is **not** terminated on landing. Tier-2 ceiling in every gate.
-2. **Leg 389 (CT2C) — wire 382's certified enclosure into the screen's second T2 column**,
+*(Former item 1, `PROG-R4` U2/U3, is **LANDED** — M2 answered, G1 answered `UNDER-RESOURCED`.
+The programme's continuation is **not** re-ranked into this list by the unit that finished it;
+it is raised under "Open — needs the user" below, because U4 is blocked and every way forward is
+a new build unit.)*
+
+1. **Leg 389 (CT2C) — wire 382's certified enclosure into the screen's second T2 column**,
    alongside the fitted one, consuming 386's δ-mode. *Instrument.* Leg 383 closed the report
    path with the **fitted** exponent per its dispatch and deliberately did not wire in the
    enclosure; `CLAY_OBLIGATIONS.md` §8 ask 2 requires certified, not fitted. Note 386's
    clause 2 first: **the δ-window is EMPTY at every `α_centre ≤ 1`**, and the banked object
    carries `α = 1`, so this task wires the path and reports the empty window honestly — it
    does not manufacture headroom.
-3. **Leg 387 (DXNV) — discharge 382's owed novelty obligation.** *Literature, owed work.*
+2. **Leg 387 (DXNV) — discharge 382's owed novelty obligation.** *Literature, owed work.*
    arXiv and Semantic Scholar both returned HTTP 429 on 382's external pass; the refusal is
    disclosed at its novelty §3 and is **owed work, not new screening**, so it does not
    violate the standing stop on screening as a unit of work.
@@ -62,15 +62,26 @@ the ladder bottomed out at ≤1e-6 and is currently one-sided).
 
 ## Open — needs the user, not a task
 
-1. **The POCP spend.** Periodic-orbit/flow-map certification is the *only* open route for
+1. **What `PROG-R4` does next.** U4/G2 is blocked — it needs a recovered **named** orbit and U3
+   produced none. Every route forward is a **new build unit**, so picking one is a re-ranking and
+   is not the finishing unit's call. U3 measured the cause and ordered the options
+   (`experiments/journal/prog_r4_u3.md` §8): **(a)** stratify the seed budget by **shift**, as
+   AMENDMENT 4 did for period — 395 `m=0` candidates already lie in the published `|s|` band and
+   11% are already inside the Newton window, so this is the cheapest untried action and it targets
+   the measured cause; **(b)** replace the `R < 0.25` admission test, which is confounded with
+   `|s|` (rank correlation 0.50); **(c)** add an `m` unknown to the residual — a realization change
+   that would invalidate M1's reproduction; **(d)** buy iterations, which the measured bimodality
+   makes the **lowest**-yield spend, contradicting the compliant cost AMENDMENT 3 named. Or stop
+   the programme. Tier-2 either way — none of these moves an `L1 → L4` link.
+2. **The POCP spend.** Periodic-orbit/flow-map certification is the *only* open route for
    `CLAY_OBLIGATIONS.md` §1. Leg 348: **(ii) OPEN-AND-REACHABLE**, cost class C. Inputs cut
    both ways — exactly one viable basis (leg 374 ADVERSE, Hermite sole survivor, decay concern
    cleared by leg 377) and **no discrete spectral anchors** (leg 376, both channels continuous).
-2. **Fefferman statement (D), the torus variant.** Priced by leg 390, *no recommendation
+3. **Fefferman statement (D), the torus variant.** Priced by leg 390, *no recommendation
    attached by design*. It drops condition (7) bounded energy — making §4 vacuous — but
    **0 of 4 rigidity clearances carry to `T³`**, and no non-constant exactly-DSS field exists
    on `T³` (342 modes survive one DSS step at `λ=1.7`, **0 survive two**).
-3. **The DSS escalation packet** (legs 313/320, branches unmerged). Complete: both candidate
+4. **The DSS escalation packet** (legs 313/320, branches unmerged). Complete: both candidate
    theorems read at full text and neither reaches the screened object.
 
 ## Live bans — 19, one line each

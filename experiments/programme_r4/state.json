@@ -85,22 +85,71 @@
       "unit": "U2",
       "kind": "build",
       "target": "MILESTONE M2 - T=1e5 DNS at N=24 + recurrence-candidate library with thresholds stated",
-      "status": "ABANDONED IN FLIGHT (wind-down 2026-08-12)",
-      "milestone_answer": "UNANSWERED -- DNS killed at 16% of the required T=1e5; no artefact banked"
+      "status": "LANDED",
+      "milestone_answer": "ANSWERED -- T=1e5 DNS complete from t=0 (400,000 snapshots, 3.44 h, 1.2379 ms/step, D/D_lam = 0.0645 +/- 0.0253, i.e. on the chaotic attractor); recurrence library mined: 95,542,640 (t,T) pairs scanned, 913,301 strict interior local minima, best R = 0.016543 against leg 353's best of 0.177 for UPO37",
+      "finding_not_asked_for": "the global candidate ranking starved the T~14.8-19.3 band every named orbit lives in: of the global top-400, exactly ONE candidate was in-window, m=0 AND anchored to a named period. Fixed by AMENDMENT 4 (stratify the budget across the named periods, additive, removes nothing): 1 -> 30 -> 133 anchored at per_anchor 80 -> 500. Amendment made AFTER observing the shortfall and labelled as such; knob closed by raising it once, in one step.",
+      "artifacts": [
+        "experiments/programme_r4/u2_m2_dns_recurrence.py",
+        "experiments/programme_r4/u2_dns_meta.json",
+        "experiments/programme_r4/u2_recurrence_library.json",
+        "experiments/journal/prog_r4_u2.md",
+        "experiments/journal/prog_r4_u2u3_prereg_addendum.md section 3d (AMENDMENT 4)",
+        "writeup/4_p2_lottery/BLOG_P2_PROGR4_MINING_BAND.md",
+        "writeup/4_p2_lottery/TECHNICAL_P2_PROGR4_MINING_BAND.md"
+      ],
+      "figures_spent": "none -- fig97 and fig98 stay reserved for the claim units",
+      "unverified": "SOLO MODE (ORCHESTRATION.md 3f): built and checked in one session, no paired verifier"
     },
     {
       "unit": "U3",
       "kind": "claim",
       "target": "GATE G1 - does at least one named Table-IV RPO recover to tol=1e-8?",
-      "status": "NOT RUN (wind-down 2026-08-12)",
-      "gate_answer": "UNANSWERED -- this gate was never opened; do not infer a verdict from the presence of its runner"
+      "status": "LANDED",
+      "gate_answer": "UNDER-RESOURCED",
+      "gate_detail": {
+        "n_recovered": 0,
+        "n_converged_to_tol": 14,
+        "n_attempts": 100,
+        "controls_fired_as_planted": true,
+        "controls": "P recovered ||R||=7.75e-9; N did NOT recover ||R||=1.75; R recovered ||R||=3.26e-9",
+        "no_is_not_available": "NO was removed from the branch set BEFORE the run by AMENDMENT 3 on measured cost. ORCHESTRATION.md 3d's stop does NOT fire and route 4 is NOT stopped on measurement. Reading UNDER-RESOURCED as a verdict on the orbits is reading it backwards.",
+        "wall": "14.47 h, 134.45 core-hours over 10 workers",
+        "caps_run": "max_newton=52, max_gmres=140, gmres_rtol=1e-3"
+      },
+      "what_the_run_found": "the solver WORKS and converges reproducibly: 14/100 attempts reached tol=1e-8 (14% per attempt, above Chandler & Kerswell 4.3% and Lucas & Kerswell ~10%), best ||R|| = 8.67e-12, onto EIGHT distinct relative periodic orbits of the discrete map, three of them replicated from independent seeds and different anchors (T=16.53/|s|=0.100 four times agreeing to 0.012 in T and 0.002 in |s|; T=16.87/|s|=0.073 four times; T=19.29/|s|=0.117 twice). NONE is a named Table IV row, so n_recovered = 0 and the gate is unmoved.",
+      "why_the_misses_are_systematic": "a SECOND selection bias, structurally identical to the one AMENDMENT 4 fixed in period, one dimension over. Converged |s| in [0.073, 0.317], 12 of 14 below 0.14; published |s| in [0.295, 0.707]. Over the library's 1153 m=0 candidates the rank correlation corr(|s|, R) = 0.50 and admission by R<0.25 falls monotonically with shift: 44% for |s|<0.15, 20%, 11% in the published band, 3% above 0.75. Admitted pool median |s| = 0.112; all candidates median |s| = 0.824. The large-shift recurrences EXIST in the DNS; the Newton window removes them. Newton converges near its seed, so the pool's shift distribution propagates to the solution set. UNFIXED -- it was not anticipated and stratifying by shift is a new build unit.",
+      "errata_against_my_own_prereg": [
+        "the envelope arithmetic ignored Pool.map chunking (chunksize 3 -> 34 chunks -> a 12-attempt tail worker, not 10 balanced rounds); errs safe, cost wall time only",
+        "per-epoch cost underestimated ~1.7x: probe 54.7 s/epoch vs ~95 s/epoch measured; probable cause is that the probe did not run at ten-way concurrency. Successors should cost at 95.",
+        "THE ONE THAT MATTERS: the cost model behind max_newton_required=238 does not describe the observed behaviour. Convergence is bimodal -- all 14 convergences finished in <=29 epochs (median 16) while the 86 non-convergences ran to the cap and were FLAT there (53% reduced ||R|| by <1% over their final 10 epochs, 83% by <10%, 3% still halving, median final ||R|| = 2.11). Max Krylov dimension over the whole run was 25 against max_gmres=140. NEITHER CAP BOUND ANY ATTEMPT THAT CONVERGED. UNDER-RESOURCED stays the correct pre-committed branch, but the named compliant cost (36.2 h, 15.1 core-days) is the WRONG PURCHASE: buying 238 epochs extends 86 already-flat sequences."
+      ],
+      "lesson_91_what_this_negative_names": "a first-order-in-time realization (Lie-Trotter, measured global ratio 2.00 not 4.00), a residual with a continuous x-shift only and no m unknown (345 in-window candidates could not be EXPRESSED as seeds; all eight named rows have m_published=0 so nothing named is lost), and a seed pool whose admission filter is monotone in |s|. NOT \"the orbits are not there\"; NOT \"Newton cannot find them\" -- it found eight others.",
+      "successor_order": [
+        "1. stratify the seed budget by SHIFT as AMENDMENT 4 did for period: 395 m=0 candidates already lie in the published band, 11% already inside the window. Cheapest untried action, targets the measured cause.",
+        "2. replace or condition the R<0.25 admission test, which is confounded with |s|",
+        "3. add an m unknown to the residual (realization change, invalidates M1's reproduction, needs its own milestone)",
+        "4. buy iterations LAST -- the bimodality makes this the lowest-yield spend"
+      ],
+      "artifacts": [
+        "experiments/programme_r4/u3_g1_attempts.py",
+        "experiments/programme_r4/u3_controls.py",
+        "writeup/data/p2_prog_r4_g1_v1.json",
+        "experiments/programme_r4/u3_g1_ledger.json",
+        "writeup/figures/fig97_prog_r4_g1_attempts.py + .png (22/22 checks)",
+        "experiments/journal/prog_r4_u3.md",
+        "experiments/journal/prog_r4_u2u3_prereg_addendum.md sections 3e (errata) and 3f (second bias)",
+        "writeup/4_p2_lottery/BLOG_P2_PROGR4_G1.md",
+        "writeup/4_p2_lottery/TECHNICAL_P2_PROGR4_G1.md"
+      ],
+      "figures_spent": "fig97",
+      "unverified": "SOLO MODE (ORCHESTRATION.md 3f): gate answered by the session that built the runner. UNVERIFIED."
     },
     {
       "unit": "U4",
       "kind": "claim",
       "target": "GATE G2 - is a radius measured with a coherent (monotone) failure boundary, control firing as planted?",
-      "status": "NOT RUN (wind-down 2026-08-12)",
-      "gate_answer": "UNANSWERED -- this gate was never opened; do not infer a verdict from the presence of its runner"
+      "status": "NOT RUN",
+      "gate_answer": "UNANSWERED -- not opened. G2 requires a recovered NAMED orbit to perturb and U3 produced none. The eight orbits U3 did converge are not named rows, so measuring a basin radius around one would answer a different question than brick B5 clause (c-iii) asks."
     }
   ],
   "figure_allocation": [
@@ -108,27 +157,12 @@
     "fig98"
   ],
   "costs_measured": {
-    "u0_wall_seconds_note": "novelty pass dominated by arXiv rate-limit backoff, not compute"
+    "u0_wall_seconds_note": "novelty pass dominated by arXiv rate-limit backoff, not compute",
+    "u2_dns": "3.44 h, 1.2379 ms/step at N=24, 400,000 snapshots",
+    "u2_recur": "71.0 s scan over 95,542,640 pairs; ~23 min end to end including feature build",
+    "u3_g1": "14.47 h wall, 134.45 core-hours over 10 workers, ~95 s per Newton epoch"
   },
   "WIND_DOWN": {
-    "date": "2026-08-12",
-    "instruction": "user instruction relayed by the orchestrator: wind down now, the whole run is stopping",
-    "state_at_stop": "inside unit U2 (MILESTONE M2), DNS at t=16000 of the required 100000 (16%); the run was killed and its output abandoned",
-    "READ_THIS_FIRST": "U0 and U1 are LANDED on main and are the only trustworthy results of this programme. M2, G1 and G2 are all UNANSWERED. No relative periodic orbit was recovered. No basin radius was measured. Brick B5 clause (c-iii) is NOT a number. Nothing here is a null result either: a null requires an attempt resourced at the scale the question is posed at (ORCHESTRATION section 3d), and no such attempt was ever made.",
-    "milestone_M2": "UNANSWERED",
-    "gate_G1": "UNANSWERED",
-    "gate_G2": "UNANSWERED",
-    "what_a_successor_must_redo": [
-      "the whole T=1e5 DNS from scratch (~2.8 h at the measured rate, 0.92-1.08 ms/step at N=24); the partial trajectory is gitignored and is not on the branch",
-      "the recurrence stage at full length; it has only ever run on a 9500-time-unit scratch prefix",
-      "fix U3's Newton/GMRES iteration caps from a MEASURED per-epoch wall time -- that measurement was never taken, and the worst case at the current defaults (40 Newton x 200 Krylov x ~1.9 s per Jacobian action) is roughly 4 h PER ATTEMPT, which does not fit 100 attempts",
-      "run U3 end to end (never run), then U4 (never run at all, not even on synthetic data)"
-    ],
-    "what_is_trustworthy_on_the_branch": [
-      "fig97/fig98 evidence scripts: smoke-tested against synthetic records in both branches of each gate, plus two doctored records the checks correctly reject. They have never seen real data.",
-      "one genuine bug fix in u2_m2_dns_recurrence.py: run_recur now honours the declared n_snapshots instead of reading the preallocated file's zero tail",
-      "U3's seeding/anchoring logic, exercised once on the partial prefix in a scratch dry run whose outputs were discarded"
-    ],
-    "clay": "unchanged, ~0.05%. No L1-L4 link moved by this programme or by stopping it."
+    "superseded": "the 2026-08-12 wind-down block is SUPERSEDED. The programme was restarted and U2 and U3 were run to completion. Its statements that M2 is UNANSWERED and that the DNS was abandoned at 16% describe the PREVIOUS session only. G2 remains UNANSWERED, as that block said."
   }
 }

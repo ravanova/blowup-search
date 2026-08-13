@@ -374,6 +374,93 @@ The library JSON records `n_from_global_ranking`, `n_added_by_anchor_bands` and
 `per_anchor_available` so the split is auditable after the fact, and `u3_g1_attempts.py` carries
 a drift-guard assertion that its copy of the period table and of `T_ANCHOR_TOL` agrees with U2's.
 
+## 3e. ERRATA against §3c, written AFTER the run, against my own pre-registration
+
+Three things §3c got wrong. None of them changes G1's answer — the branch was selected by a rule
+fixed before the run and the rule executed as written — but all three change what the answer
+*means*, and two of them make the "compliant cost" §3c names misleading as a prescription for a
+successor. They are recorded here rather than quietly corrected.
+
+**(i) The envelope arithmetic ignored scheduler chunking.** §3c sized the run as
+`ceil(100 / n_workers) = 10` balanced rounds. `multiprocessing.Pool.map` does not schedule that
+way: it chunks, at `ceil(100 / (4 x 10)) = 3` attempts per chunk, so the 100 attempts go out as 34
+chunks over 10 workers and the tail worker takes 12 attempts, not 10. Wall time is set by the
+tail. Combined with (ii), the measured run took **14.47 h against the 8 h envelope**. This errs
+in the safe direction — the run received more compute than planned, not less — and cost only wall
+time.
+
+**(ii) The per-epoch cost was underestimated by ~1.7x.** The probe measured 54.7 s/epoch. The run
+measured **134.45 core-hours over 100 attempts**, mean 1.34 h/attempt at a median of 51 epochs,
+i.e. **~95 s/epoch**. The probe did not run at ten-way concurrency; memory-bandwidth contention
+across 10 workers is the likely cause and is not otherwise diagnosed here. Any successor costing
+this work should use 95 s/epoch, not 54.7.
+
+**(iii) The cost model behind `max_newton_required = 238` does not describe the observed
+behaviour, and this is the one that matters.** §3c derived 238 from `2x` the probe's median
+epochs-to-convergence-or-stall (119, itself censored). The premise is that attempts converge
+*slowly*, so more epochs buy more convergences. The run says otherwise. Convergence is sharply
+**bimodal**:
+
+* **all 14 convergences finished in ≤ 29 epochs** (median 16, minimum 10), well inside the cap of
+  52;
+* the 86 non-convergences ran to the cap and were **flat** there — over their final 10 epochs,
+  53% reduced `‖R‖` by less than 1%, 83% by less than 10%, and only 3% were still halving. Median
+  final `‖R‖` = 2.11.
+
+The GMRES cap was not binding either: the measured maximum Krylov dimension over all attempts was
+25, against `max_gmres = 140`, with a p95 of 24. Clause (a) of the cap rule was satisfied by a
+factor of 5.8.
+
+So **neither cap was the binding constraint on any attempt that converged, and raising
+`max_newton` to 238 would extend 86 already-flat sequences.** `UNDER-RESOURCED` remains the
+correct pre-committed branch — the run genuinely ran below the budget §3c named, and a `no` was
+correctly unavailable — but a successor reading §3c's "36.2 h at 10 workers, 15.1 core-days" as
+*the thing to buy* would be buying the wrong thing. The evidence points at the **seed supply**,
+not the iteration budget: see §3f.
+
+## 3f. What the run found instead, and the second selection bias
+
+Recorded here because it is the substantive outcome of U3 and because it identifies where the
+shortfall actually is.
+
+**Fourteen of the 100 attempts converged to `tol = 1e-8`.** Best final `‖R‖ = 8.67e-12`. That is a
+per-attempt convergence rate of **14%**, above both sourced rates (Chandler & Kerswell 4.3%, Lucas
+& Kerswell ~10%). The solver works. Several solutions were recovered **independently from
+different seeds**: `T = 16.52-16.54, |s| ≈ 0.10` four times from two different anchors and four
+different snapshots, agreeing to 0.012 in `T` and 0.002 in `|s|`; `T ≈ 16.87, |s| ≈ 0.073` three
+times; `T = 19.285/19.293, |s| ≈ 0.117` twice. Those are genuine relative periodic orbits of the
+discrete map, replicated internally.
+
+**None of them is a named Table IV row.** `n_recovered = 0`, and G1 asks about the named rows, so
+the gate is unmoved by this. But the misses are **systematic, not scattered**: every converged
+solve has `|s|` between 0.073 and 0.317, twelve of the fourteen below 0.14, while the eight
+published rows have `|s|` between 0.295 and 0.707.
+
+Measured on the library, that separation is present in the **seeds**, and it comes from the
+Newton window itself. Over the 1153 `m = 0` candidates, the rank correlation between `|s|` and
+`R` is **0.50**, and the fraction admitted by `R < R_thres_window = 0.25` falls monotonically with
+shift:
+
+| `\|s\|` band | n | median `R` | fraction admitted by `R < 0.25` |
+|---|---|---|---|
+| 0.000 – 0.150 | 322 | 0.3205 | **0.44** |
+| 0.150 – 0.295 | 213 | 0.5067 | 0.20 |
+| 0.295 – 0.750 *(the published band)* | 395 | 0.8317 | **0.11** |
+| 0.750 – 3.200 | 223 | 1.1278 | 0.03 |
+
+The admitted pool has median `|s| = 0.112`; only 21% of it exceeds the *smallest* published shift.
+Across all candidates regardless of window the median `|s|` is 0.824, so the large-shift
+recurrences exist in the DNS in quantity — **the window is what removes them.**
+
+This is the **same failure mode as AMENDMENT 4, one dimension over**: a scalar score used as an
+admission filter, systematically monotone in a property the targets are selected on. AMENDMENT 4
+fixed it in period. It is unfixed in shift, and it was not anticipated, so the seed budget was
+never stratified that way.
+
+**This is recorded, not acted on.** Stratifying the seed budget by shift as well as period is a
+new build unit with its own cost, and choosing it here would be choosing my own next task. It
+goes to the successor as the top item, ahead of buying iterations.
+
 ## 4. What this addendum does not do
 
 It does not restate, soften or re-scope G1. It does not touch the compliant scale. It does not

@@ -1,0 +1,7 @@
+100 attempts queued (345 candidates dropped for m != 0); seed shift sign: {'plus': 2, 'minus': 98}
+running the planted controls on G1 ...
+controls: P recovered=True, N recovered=False (must be False), R=True -> FIRED AS PLANTED = True
+G1 = UNDER-RESOURCED: 0 recovered, 14 converged to tol, 100 attempts, 14.47 h
+best final |R| = 8.673594e-12, median = 1.531217e+00
+reasons: {'converged': 14, 'max_newton_hit': 86}
+wrote /home/andy/projects/Unsolved/writeup/data/p2_prog_r4_g1_v1.json and /home/andy/projects/Unsolved/experiments/programme_r4/u3_g1_ledger.json

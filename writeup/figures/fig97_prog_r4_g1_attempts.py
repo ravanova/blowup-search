@@ -56,6 +56,13 @@ def main():
     seeds = np.array([a["seed_extended_residual"] for a in att], float)
     anchors = [a["anchor"] for a in att]
     recovered = np.array([a["recovered_named_orbit"] for a in att], bool)
+    # The distinction the run actually turned on. `recovered` is the GATE's
+    # predicate: converged to tol AND matched a named Table IV row on (T, s).
+    # `converged` is the weaker fact that Newton reached tol at all. The two
+    # came apart -- 14 converged, 0 matched -- and a figure that plotted only
+    # `recovered` would show 100 failures and hide the fact that the solver
+    # succeeded 14 times on a different object.
+    converged = np.array([a["reason"] == "converged" for a in att], bool)
     answer = d["gate"]["answer"]
 
     # ---- checks on the banked record -----------------------------------
@@ -113,6 +120,20 @@ def main():
           not (answer == "NO" and d["gate"].get("compliant_cost_named")))
     check("gate n_recovered matches the attempt rows",
           d["gate"]["n_recovered"] == int(recovered.sum()))
+    check("gate n_converged_to_tol matches the attempt rows",
+          d["gate"].get("n_converged_to_tol") == int(converged.sum()),
+          f"{int(converged.sum())} reached tol, {int(recovered.sum())} matched "
+          f"a named row")
+    # A convergence that did NOT match a named row must never be counted toward
+    # the gate: G1 asks about the NAMED orbits. This is the check that keeps
+    # "the solver works" from being quietly upgraded into "we found them".
+    check("no attempt is marked recovered without matching a named row on BOTH "
+          "T and s",
+          all((not a["recovered_named_orbit"])
+              or (a["delta_T_from_published"] <= 0.05
+                  and a["delta_s_from_published"] <= 0.05) for a in att))
+    check("every converged-but-unmatched attempt is excluded from n_recovered",
+          int(recovered.sum()) <= int(converged.sum()))
     check("every attempt carries a named Table IV anchor (Ban 2)",
           all(a["anchor"] in d["seed"]["rows"] for a in att),
           f"{len(set(anchors))} distinct anchors over {len(att)} attempts")
@@ -143,13 +164,18 @@ def main():
                            float)
 
     # ---- figure ---------------------------------------------------------
-    fig, axes = plt.subplots(1, 3, figsize=(15.5, 4.6))
+    fig, axes = plt.subplots(1, 4, figsize=(20.5, 4.6))
 
     ax = axes[0]
     order = np.argsort(finals)
     x = np.arange(1, len(finals) + 1)
     ax.semilogy(x, finals[order], "o", ms=4, color="#2b6cb0",
                 label="this unit (seeded hookstep-Newton)")
+    if converged.any():
+        cx = np.array([i + 1 for i, j in enumerate(order) if converged[j]])
+        ax.semilogy(cx, finals[order][cx - 1], "s", ms=7, mfc="none",
+                    color="#dd6b20",
+                    label="reached tol, did NOT match a named row")
     if recovered.any():
         rx = np.array([i + 1 for i, j in enumerate(order) if recovered[j]])
         ax.semilogy(rx, finals[order][rx - 1], "*", ms=14, color="#c53030",
@@ -168,7 +194,7 @@ def main():
     for a in att:
         h = np.array(a["residual_history"], float)
         ax.semilogy(np.arange(len(h)), h, lw=0.7, alpha=0.45,
-                    color="#c53030" if a["recovered_named_orbit"] else "#2b6cb0")
+                    color="#dd6b20" if a["reason"] == "converged" else "#2b6cb0")
     ax.axhline(TOL, color="k", ls="--", lw=1.2)
     ax.set_xlabel("Newton iteration")
     ax.set_ylabel(r"$\|R\|$")
@@ -191,6 +217,40 @@ def main():
     ax.set_title("C. seed quality vs. how far Newton got")
     ax.legend(fontsize=7, ncol=2)
     ax.grid(alpha=0.3, which="both")
+
+    # D. The panel the run made necessary. Every solve that reached tol landed
+    # on a genuine relative periodic orbit of the discrete map; none of them
+    # landed on a named row. Plotting (T, |s|) for the converged solves against
+    # the eight published pairs shows WHERE they landed instead, which is the
+    # deliverable here -- a gate that asks "did we recover THESE?" and is
+    # answered "no, we recovered THOSE" owes the reader the those.
+    ax = axes[3]
+    TWO_PI = 2.0 * np.pi
+
+    def wrap(s):
+        s = s % TWO_PI
+        return s - TWO_PI if s > TWO_PI / 2 else s
+
+    cT = np.array([a["T_converged"] for a in att if a["reason"] == "converged"])
+    cS = np.array([abs(wrap(a["s_converged"])) for a in att
+                   if a["reason"] == "converged"])
+    # The published pairs are re-derived from the attempt rows, not retyped:
+    # every attempt carries the (T, s) of the row it was anchored to.
+    pub = {a["anchor"]: (a["T_published"], abs(wrap(a["s_published"])))
+           for a in att}
+    ax.plot(cT, cS, "s", ms=8, mfc="none", color="#dd6b20",
+            label=f"converged here ({len(cT)} solves)")
+    ax.plot([v[0] for v in pub.values()], [v[1] for v in pub.values()],
+            "*", ms=15, color="#2b6cb0",
+            label=f"Lucas & Kerswell Table IV ({len(pub)} named)")
+    for n, (T, s) in pub.items():
+        ax.annotate(n, (T, s), fontsize=6, xytext=(3, 4),
+                    textcoords="offset points", color="#2b6cb0")
+    ax.set_xlabel(r"converged period $T$")
+    ax.set_ylabel(r"converged shift $|s|$ (wrapped to $(-\pi, \pi]$)")
+    ax.set_title("D. what the 14 convergences actually landed on")
+    ax.legend(fontsize=7)
+    ax.grid(alpha=0.3)
 
     fig.suptitle(
         "fig97  PROG-R4 U3 / gate G1: seeded recovery of named Lucas & Kerswell "
