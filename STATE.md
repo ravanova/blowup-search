@@ -48,7 +48,7 @@ what a wall-breaking mandate does and does not license.
 
 | What | State |
 |---|---|
-| **`PROG-R4`** (route-4 DSS programme, leg 380) | **U0–U3 LANDED. U4 BLOCKED. U5 QUEUED.** U2 answered **MILESTONE M2** (T=1e5 DNS on the attractor, `D/D_lam`=0.0645±0.0253; library best `R`=0.016543 vs leg 353's 0.177). U3 answered **GATE G1 = `UNDER-RESOURCED`**, controls fired as planted — **0 of 100 recovered a named orbit, but 14 of 100 converged to tol=1e-8** onto eight *other* RPOs, three replicated from independent seeds, at a **14% per-attempt rate above both published rates**. **§3d's stop did NOT fire; route 4 is NOT stopped.** U4 (G2, basin radius) cannot open: it needs a recovered **named** orbit to perturb. Tier-2 ceiling; Clay unmoved. **UNVERIFIED** under §3f (one session, no paired verifier). |
+| **`PROG-R4`** (route-4 DSS programme, leg 380) | **U0–U3, U5 LANDED. U4 BLOCKED — but now *interesting*, see below.** U2 answered **MILESTONE M2** (T=1e5 DNS on the attractor, `D/D_lam`=0.0645±0.0253). U3 answered **GATE G1 = `UNDER-RESOURCED`**, controls fired as planted — 0 of 100 recovered a named orbit, 14 of 100 converged onto eight *other* RPOs. **U5 answered `MILESTONE M3 = DELIVERED`** (2026-08-13): the budget is now stratified by SHIFT — exhaustive re-mine 2,014 → **75,873** candidates, in-band admissible supply 35 → **72**, in-band spend 31 → **60**, controls fired as planted, **2,104 epochs against U3's 4,629 (no iterations bought)**. **9 of 100 converged, 0 recovered a named row**, and **U5's pre-committed reading fired on branch (b) — the bias is in BASIN STRUCTURE, not only seed supply.** **§3d's stop did NOT fire; route 4 is NOT stopped.** **G1 is untouched and stays `UNDER-RESOURCED`** — `n_recovered=0` is a count, not a `no`, and no G1 re-open is raised. U4 (G2, basin radius) still cannot open — it needs a recovered **named** orbit — but the pre-committed reading makes it the interesting unit rather than a formality. Tier-2 ceiling; Clay unmoved. **UNVERIFIED** under §3f. |
 
 ## Next tasks — pre-committed, in order
 
@@ -74,17 +74,14 @@ these are drawn into waves of 2–4 from **different lanes**, so one stalled lan
    precisely because it can kill Lane T cheaply. Full novelty-pass instrument discipline, controls
    both ways.
 
-3. **`PROG-R4` U5 — stratify the seed budget by SHIFT.** *Lane R + construction, continues under
-   §3c* (worker not terminated on landing, milestones not gates for build units, U0's novelty pass
-   binds). This is **option (a)** of U3's own ordered four, ruled by the user 2026-08-12, and it is
-   a **Lane R** unit — it buys compliant scale by fixing a selection bias rather than by buying
-   compute. The measurement that justifies it: admission by the Newton window `R < 0.25` falls
-   monotonically with shift — **44% for `|s|<0.15`, then 20%, 11% in the published band, 3% above
-   0.75** — while **395 `m=0` candidates already lie in the published `|s|` band and 11% are
-   already inside the window.** Do for shift exactly what AMENDMENT 4 did for period. **Do NOT take
-   option (d)** (buy iterations): U3 measured convergence as bimodal — all 14 finished in ≤29
-   epochs, the other 86 ran to the cap and were flat there — so more iterations is the *lowest*-
-   yield spend. Options (b) and (c) stay unqueued. Tier-2 ceiling in every gate.
+3. **~~`PROG-R4` U5 — stratify the seed budget by SHIFT.~~ LANDED 2026-08-13, `M3 = DELIVERED`.**
+   *Lane R + construction, §3c.* Journal `experiments/journal/prog_r4_u5.md`, data
+   `writeup/data/p2_prog_r4_m3_v1.json`, figure `fig107` (16/16 own checks). Exhaustive re-mine
+   2,014 → **75,873**; in-band admissible supply 35 → **72**; in-band spend 31 → **60** against a
+   required 50; caps/`tol`/window/`m=0`/anchor/match asserted identical to U3's; **2,104 epochs
+   against U3's 4,629 — fewer, not more**. **9/100 converged, 0 recovered a named row.**
+   **G1 untouched, still `UNDER-RESOURCED`; no re-open raised.** U5 declined to choose its own
+   continuation — five costed options at its §9, now item 1 of "Open — needs the user".
 
    **PRE-COMMITTED READING, fixed 2026-08-13 while U5 was mid-run and BEFORE its numbers were
    seen.** Two things follow from U3's own measurements and must not be discovered afterwards:
@@ -100,6 +97,34 @@ these are drawn into waves of 2–4 from **different lanes**, so one stalled lan
    U3 without the selection-bias account carrying all the weight, it points at `R3`/`R5` rather
    than at more seeds, and it makes U4/G2 (the basin radius) the interesting unit rather than a
    formality. Record whichever of these fires; do not construct a third reading after the fact.
+
+   **WHICH FIRED — recorded 2026-08-13 against the reading above, and no third reading is
+   constructed.** **(a) fired as predicted:** 9/100 against U3's 14/100. The stratification bound —
+   U5's in-band seeds are worse by the score's own metric (median `R` 0.2122 against U3's 0.1897)
+   because filling a quota of 60 from a supply of 72 reaches deeper than picking 31 off a global
+   ranking. **(b) FIRED, and it is the finding.** The rate fell **and** the converged orbits still
+   cluster at small `|s|` despite a stratified pool: **8 of 9 convergences landed at `|s| < 0.15`**,
+   and **4 of the 5 in-band convergences left the band** (seeds at 0.31–0.42 converging to
+   0.10–0.13). The 9 convergences collapse to **5 distinct solutions**, four of them at `|s|<0.14`.
+   Independent support at matched seed quality: pooling both runs' 200 attempts into common seed-`R`
+   bins, in-band converts **6/91 (6.6%)** against out-of-band **17/109 (15.6%)**, Fisher exact
+   **p = 0.073** — direction consistent, significance not reached, and reported as not reached.
+   **So the bias is in the BASIN STRUCTURE, not only in the seed supply**, exactly as pre-committed:
+   large-shift orbits appear to have intrinsically smaller Newton basins. This **points at `R3`/`R5`
+   and at `U4`/`G2`, and away from buying more seeds** — which demotes options A, B and D of U5 §9's
+   fork, all of which buy supply. U5's own §9 recommendation (E then B) was written before this
+   commit was visible; **E survives and is reinforced, B is demoted by the pre-committed reading.**
+   Note also that **H-supply is independently refuted** on its own terms: its premise (the band was
+   starved) was true and is now repaired, and its prediction ("more in-band seeds → recovery") is
+   falsified at this scale.
+
+   **On `R0`'s metric, computed for U5 since R0 fixed it before this landing.** Distinct orbits per
+   core-hour, attempts stage only, like for like: **U5 = 5 / 57.04 = 0.0877**; U3 = 8 / **144.69** =
+   0.0553. Two cautions, both owed to R0 and neither resolved here: (i) R0's baseline quotes
+   **134.45** core-hours for U3, but `p2_prog_r4_g1_v1.json` gives 52,087.95 s × 10 workers =
+   **144.69** — R0 should reconcile the figure it baselines on; (ii) R0 already flags U3's distinct
+   count of 8 as unreconcilable with its own §4 table, and at 7 the baseline is 0.0484. U5's number
+   is above U3's on every variant, but the comparison stays **provisional until R0 lands**.
 
 4. **`R0` + `R1` — the metric, then early abort on flatness.** *Lane R, competitiveness, and R1 is
    the cheapest measured win in the repository.* **R0 first and it is not optional:** per-attempt
@@ -127,10 +152,13 @@ these are drawn into waves of 2–4 from **different lanes**, so one stalled lan
 8. **The verifier for wave 1.** §3g: dispatched in the *following* wave so it cannot be briefed by
    the construction it checks. Targets whichever wave-1 unit made a claim.
 9. **Discharge `PROG-R4` U3's two owed novelty questions.** *Literature, owed work on the run's own
-   output — NOT screening.* (i) Are the eight recovered RPOs known at all? None is a named Table IV
+   output — NOT screening.* (i) Are the recovered RPOs known at all? None is a named Table IV
    row — **that verdict does not change here**; the unasked question is whether they are in the
-   literature. (ii) Is the selection-bias caveat in `BLOG_P2_PROGR4_MINING_BAND.md` already
-   published? It is externally-facing and unchecked. Claim neither outcome before measuring it.
+   literature. **U5 enlarges the target set**: it independently re-found U3's most-replicated
+   solution (`T=16.5305/|s|=0.1008`, three attempts, two strata, anchors UPO9 and UPO17) plus four
+   more distinct ones, states in `experiments/programme_r4/u5_m3_converged_orbits.npz`. (ii) Is the
+   selection-bias caveat in `BLOG_P2_PROGR4_MINING_BAND.md` already published? It is
+   externally-facing and unchecked. Claim neither outcome before measuring it.
 
 **Held:** `T3` (the non-DSS `T³` ansatz — the lane's real mathematical content, opens after T1/T2)
 · leg 389 (CT2C, wire 382's certified enclosure into the screen's second T2 column; note 386's
@@ -141,22 +169,66 @@ discharge 382's owed novelty obligation after arXiv/Semantic Scholar returned HT
 
 ## Open — needs the user, not a task
 
-1. **Three ban-wording escalations, to be bundled by `T1`.** (a) **Cadiot** — pending since
+1. **`PROG-R4` after U5 — five costed options, NOT chosen.** U5 delivered M3 and, under §3f,
+   raised its continuation rather than picking one. Full text and costs:
+   `experiments/journal/prog_r4_u5.md` §9. **The constraint shaping all of them:** the anchored
+   admissible pool is now *exhausted* at `R<0.25` — 241 exist, 100 spent, **141 left of which
+   only 12 are in-band** — so nothing that keeps the current window can push the in-band arm
+   past 72 attempts, ever.
+   - **A. Spend the rest of the pool** — 141 attempts, ≈10.7 h. Grows the in-band arm 60→72
+     only; lowest information per hour.
+   - **B. Relax the window to C&K's `R_thres=0.3`** (U3's option (b)) — ≈0.9 h re-mine + 0.071 h
+     per attempt (≈8 h for 100). The supply multiplier **cannot** be read off U5's library (it
+     was pruned at 0.25); the re-mine is what measures it. Leaves the realization intact, so the
+     U3/U5 baselines stay comparable.
+   - **C. Carry `m` as an unknown in the residual** (U3's option (c)) — a full unit, own
+     milestone, ≈10 h compute plus solver work; changes the realization, so M1's reproduction no
+     longer compares attempt for attempt. U5 now **prices it**: it unlocks 334 anchored
+     in-window candidates (58.1% of the window) **but only 1 of the 334 is in the published
+     band** — so it is *not* a band fix, it is the fix for `|s|>0.9`.
+   - **D. Raise supply at source** (longer DNS / finer `N`) — ≈3.4 h per extra `T=1e5` plus
+     ≈0.9 h re-mine, plus attempts. Does nothing about H-hard.
+   - **E. Attack H-hard from data already banked** — ≈0.5–1 h, no new DNS/solver/mining, using
+     the 200 attempts on disk. U5's sharpest unexplained result is that **seeds converge *out* of
+     the band**: 4 of 5 in-band convergences left it, 8 of 9 landed at `|s|<0.15`, and the 9
+     convergences collapse to **5 distinct solutions**. *Instrument task* — §3f rule 3 permits it
+     after U5's construction but it cannot be followed by another one.
+
+   **U5's recommendation, not a decision: E, then B.** A is dominated by B; C is worth its own
+   milestone but aimed elsewhere; D costs most and helps least if H-hard is real.
+
+   **AMENDED BY THE PRE-COMMITTED READING, which U5 could not see when it wrote the above.**
+   Branch (b) fired, so the bias is in the basin structure and the reading explicitly points
+   "at `R3`/`R5` rather than at more seeds". **A, B and D all buy supply and are demoted by it;
+   E is reinforced**, and `U4`/`G2` — the basin radius — becomes the unit this result is really
+   about. The fork is left standing as U5 wrote it because the user rules on it, but it should be
+   read with A/B/D discounted.
+
+   *What U5 settled about the earlier fork:* §3g.2 pre-named **H-supply** vs **H-hard**.
+   **H-supply is refuted** — its premise (the band was starved) was true and is now repaired
+   (35→72 supply, 31→60 spend), and its prediction ("more in-band seeds → recovery") is
+   falsified at this scale (60 in-band seeds, 0 recoveries). **H-hard is favoured but not
+   resolved:** at matched seed `R` across both runs' 200 attempts, in-band converts **6/91
+   (6.6%)** against out-of-band **17/109 (15.6%)**, Fisher exact two-sided **p = 0.073**. Every
+   per-stratum Wilson interval overlaps its U3 counterpart; the in-band rise 3.2%→8.3% is **not**
+   significant and is reported as a magnitude only.
+
+2. **Three ban-wording escalations, to be bundled by `T1`.** (a) **Cadiot** — pending since
    2026-08-11; leg 304 resolved the open question and the resolution *confirmed* the ban's
    justification, so the lift clause's literal reading and its evident purpose now disagree.
    (b) **Stage V's "needs L1 first"** — unliftable as written. (c) **The apparatus question** —
    does the ℓ¹-Fourier ban reach a dynamical Galerkin-plus-tail closure? All three are wording
    questions, and `ORCHESTRATION.md` §3h rule 1 forbids an agent from ruling them.
-2. **The POCP spend — SUPERSEDED 2026-08-13, now Lane T.** Leg 348: **(ii) OPEN-AND-REACHABLE**,
+3. **The POCP spend — SUPERSEDED 2026-08-13, now Lane T.** Leg 348: **(ii) OPEN-AND-REACHABLE**,
    cost class C. Retained here because its two adverse inputs still bind Lane T: exactly one
    viable basis (leg 374 ADVERSE, Hermite sole survivor, decay concern cleared by leg 377) and
    **no discrete spectral anchors** on `ℝ³` (leg 376, both channels continuous) — the second of
    which is exactly what `T³` supplies and `ℝ³` does not.
-3. **Statement (D)'s data conditions (8) and (9) require OUTREACH to read verbatim** (leg 390 §4).
+4. **Statement (D)'s data conditions (8) and (9) require OUTREACH to read verbatim** (leg 390 §4).
    Until read, `CLAY_OBLIGATIONS.md`'s "(D) carries no decay condition" is narrowed to (D)'s
    **solution** conditions. **No external outreach is authorised** — this is a standing user hold,
    and it now sits on Lane T's critical path.
-4. **The DSS escalation packet** (legs 313/320, branches unmerged). Complete: both candidate
+5. **The DSS escalation packet** (legs 313/320, branches unmerged). Complete: both candidate
    theorems read at full text and neither reaches the screened object.
 
 ## Live bans — 19, one line each

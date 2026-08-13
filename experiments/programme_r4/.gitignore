@@ -3,3 +3,13 @@
 u2_dns_ckpt.npy
 u2_dns_feat.f32
 u2_dns_progress.txt
+
+# 18 MB regenerable intermediate: the full mined take. Reduced to
+# u5_shift_library_admissible.json, which reproduces the allocation exactly
+# (asserted in u5_reduce_library.py). Regenerate with u5_shift_mining.py.
+u5_shift_library.json
+
+# In-flight progress tails, same rule as u2_dns_progress.txt: the stdout logs
+# beside them are the record.
+u5_mining_progress.txt
+u5_attempts_progress.txt

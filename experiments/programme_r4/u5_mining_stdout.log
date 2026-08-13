@@ -1,0 +1,31 @@
+prefilter: 913301 strict local minima in 50.3s; 103844 anchored; 75873 with R_red < 0.25 (lossless prune, R_red <= R pointwise)
+regen check: 80 snapshots, mismatched 0, max|diff| 0.000e+00, bit_for_bit=True
+banked-library check: 40 U2 candidates re-mined, mismatched 0, exact=True
+3857 checkpoint blocks to replay in 483 runs of 8, 75873 candidates, 8 workers
+mining 20/483 block-runs  3213 candidates  elapsed 2.1 min  ETA 47.7 min
+mining 40/483 block-runs  6315 candidates  elapsed 3.9 min  ETA 43.7 min
+mining 60/483 block-runs  9279 candidates  elapsed 5.9 min  ETA 41.4 min
+mining 80/483 block-runs  12129 candidates  elapsed 7.6 min  ETA 38.3 min
+mining 100/483 block-runs  15038 candidates  elapsed 9.5 min  ETA 36.2 min
+mining 120/483 block-runs  18286 candidates  elapsed 11.6 min  ETA 35.1 min
+mining 140/483 block-runs  21306 candidates  elapsed 14.2 min  ETA 34.8 min
+mining 160/483 block-runs  24362 candidates  elapsed 16.1 min  ETA 32.4 min
+mining 180/483 block-runs  27359 candidates  elapsed 18.2 min  ETA 30.6 min
+mining 200/483 block-runs  30581 candidates  elapsed 19.7 min  ETA 27.8 min
+mining 220/483 block-runs  33756 candidates  elapsed 21.6 min  ETA 25.9 min
+mining 240/483 block-runs  37308 candidates  elapsed 23.5 min  ETA 23.8 min
+mining 260/483 block-runs  40695 candidates  elapsed 25.3 min  ETA 21.7 min
+mining 280/483 block-runs  44520 candidates  elapsed 27.3 min  ETA 19.8 min
+mining 300/483 block-runs  47394 candidates  elapsed 29.5 min  ETA 18.0 min
+mining 320/483 block-runs  51145 candidates  elapsed 31.5 min  ETA 16.0 min
+mining 340/483 block-runs  54228 candidates  elapsed 33.5 min  ETA 14.1 min
+mining 360/483 block-runs  57528 candidates  elapsed 35.7 min  ETA 12.2 min
+mining 380/483 block-runs  60405 candidates  elapsed 37.9 min  ETA 10.3 min
+mining 400/483 block-runs  63585 candidates  elapsed 40.2 min  ETA 8.3 min
+mining 420/483 block-runs  66676 candidates  elapsed 42.0 min  ETA 6.3 min
+mining 440/483 block-runs  69765 candidates  elapsed 44.5 min  ETA 4.3 min
+mining 460/483 block-runs  72595 candidates  elapsed 46.3 min  ETA 2.3 min
+mining 480/483 block-runs  75472 candidates  elapsed 48.1 min  ETA 0.3 min
+mining 483/483 block-runs  75873 candidates  elapsed 48.2 min  ETA 0.0 min
+mined 75873 candidates in 48.2 min: 575 in window, 241 of those m=0, 72 of those in the published |s| band
+wrote /home/andy/projects/Unsolved/experiments/programme_r4/u5_shift_library.json

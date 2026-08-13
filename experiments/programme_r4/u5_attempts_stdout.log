@@ -1,0 +1,118 @@
+stall rule: 45.0% of U3's epochs, 0 convergences lost, margin factor 6.9x
+allocated 100 attempts; 60 in the published band (U3 had 31); by stratum {'P': 60, 'L': 20, 'M': 10, 'H': 10}
+attempts 1/100  converged 0  recovered_named 0  elapsed 0.55 h  ETA 54.80 h
+attempts 2/100  converged 0  recovered_named 0  elapsed 0.56 h  ETA 27.59 h
+attempts 3/100  converged 0  recovered_named 0  elapsed 0.59 h  ETA 18.96 h
+attempts 4/100  converged 1  recovered_named 0  elapsed 0.64 h  ETA 15.31 h
+attempts 5/100  converged 1  recovered_named 0  elapsed 0.67 h  ETA 12.68 h
+attempts 6/100  converged 1  recovered_named 0  elapsed 0.67 h  ETA 10.55 h
+attempts 7/100  converged 1  recovered_named 0  elapsed 0.71 h  ETA 9.43 h
+/home/andy/projects/Unsolved/solver/kolmogorov2d_nkbasin.py:139: RuntimeWarning: overflow encountered in multiply
+  adv_hat = np.fft.fft2(u * wx + v * wy) * self.mask
+/home/andy/projects/Unsolved/solver/kolmogorov2d_nkbasin.py:139: RuntimeWarning: invalid value encountered in add
+  adv_hat = np.fft.fft2(u * wx + v * wy) * self.mask
+/home/andy/projects/Unsolved/.venv/lib/python3.12/site-packages/numpy/fft/_pocketfft.py:101: RuntimeWarning: invalid value encountered in fft
+  return ufunc(a, fct, axes=[(axis,), (), (axis,)], out=out)
+attempts 8/100  converged 1  recovered_named 0  elapsed 0.73 h  ETA 8.41 h
+attempts 9/100  converged 1  recovered_named 0  elapsed 1.02 h  ETA 10.30 h
+attempts 10/100  converged 1  recovered_named 0  elapsed 1.13 h  ETA 10.20 h
+attempts 11/100  converged 1  recovered_named 0  elapsed 1.16 h  ETA 9.38 h
+attempts 12/100  converged 1  recovered_named 0  elapsed 1.18 h  ETA 8.64 h
+attempts 13/100  converged 1  recovered_named 0  elapsed 1.19 h  ETA 7.98 h
+attempts 14/100  converged 1  recovered_named 0  elapsed 1.27 h  ETA 7.83 h
+attempts 15/100  converged 1  recovered_named 0  elapsed 1.31 h  ETA 7.43 h
+attempts 16/100  converged 1  recovered_named 0  elapsed 1.32 h  ETA 6.93 h
+attempts 17/100  converged 1  recovered_named 0  elapsed 1.51 h  ETA 7.37 h
+attempts 18/100  converged 1  recovered_named 0  elapsed 1.60 h  ETA 7.30 h
+attempts 19/100  converged 1  recovered_named 0  elapsed 1.62 h  ETA 6.92 h
+attempts 20/100  converged 1  recovered_named 0  elapsed 1.69 h  ETA 6.77 h
+attempts 21/100  converged 1  recovered_named 0  elapsed 1.76 h  ETA 6.63 h
+attempts 22/100  converged 1  recovered_named 0  elapsed 1.79 h  ETA 6.35 h
+attempts 23/100  converged 1  recovered_named 0  elapsed 1.81 h  ETA 6.06 h
+attempts 24/100  converged 1  recovered_named 0  elapsed 1.81 h  ETA 5.73 h
+attempts 25/100  converged 1  recovered_named 0  elapsed 1.90 h  ETA 5.71 h
+attempts 26/100  converged 2  recovered_named 0  elapsed 2.07 h  ETA 5.89 h
+attempts 27/100  converged 2  recovered_named 0  elapsed 2.09 h  ETA 5.66 h
+attempts 28/100  converged 2  recovered_named 0  elapsed 2.23 h  ETA 5.73 h
+attempts 29/100  converged 2  recovered_named 0  elapsed 2.28 h  ETA 5.59 h
+attempts 30/100  converged 2  recovered_named 0  elapsed 2.33 h  ETA 5.44 h
+attempts 31/100  converged 2  recovered_named 0  elapsed 2.34 h  ETA 5.22 h
+attempts 32/100  converged 2  recovered_named 0  elapsed 2.37 h  ETA 5.03 h
+attempts 33/100  converged 2  recovered_named 0  elapsed 2.38 h  ETA 4.84 h
+attempts 34/100  converged 2  recovered_named 0  elapsed 2.51 h  ETA 4.86 h
+attempts 35/100  converged 2  recovered_named 0  elapsed 2.74 h  ETA 5.09 h
+attempts 36/100  converged 2  recovered_named 0  elapsed 2.78 h  ETA 4.94 h
+attempts 37/100  converged 3  recovered_named 0  elapsed 2.78 h  ETA 4.74 h
+attempts 38/100  converged 3  recovered_named 0  elapsed 2.81 h  ETA 4.58 h
+attempts 39/100  converged 3  recovered_named 0  elapsed 2.83 h  ETA 4.42 h
+attempts 40/100  converged 3  recovered_named 0  elapsed 2.87 h  ETA 4.30 h
+attempts 41/100  converged 3  recovered_named 0  elapsed 2.91 h  ETA 4.19 h
+attempts 42/100  converged 3  recovered_named 0  elapsed 2.98 h  ETA 4.12 h
+attempts 43/100  converged 4  recovered_named 0  elapsed 3.02 h  ETA 4.01 h
+attempts 44/100  converged 4  recovered_named 0  elapsed 3.23 h  ETA 4.11 h
+attempts 45/100  converged 4  recovered_named 0  elapsed 3.27 h  ETA 3.99 h
+attempts 46/100  converged 4  recovered_named 0  elapsed 3.37 h  ETA 3.95 h
+attempts 47/100  converged 4  recovered_named 0  elapsed 3.49 h  ETA 3.93 h
+attempts 48/100  converged 4  recovered_named 0  elapsed 3.52 h  ETA 3.81 h
+attempts 49/100  converged 4  recovered_named 0  elapsed 3.58 h  ETA 3.72 h
+attempts 50/100  converged 5  recovered_named 0  elapsed 3.62 h  ETA 3.62 h
+attempts 51/100  converged 5  recovered_named 0  elapsed 3.68 h  ETA 3.54 h
+attempts 52/100  converged 5  recovered_named 0  elapsed 3.77 h  ETA 3.48 h
+attempts 53/100  converged 5  recovered_named 0  elapsed 3.82 h  ETA 3.39 h
+attempts 54/100  converged 5  recovered_named 0  elapsed 3.97 h  ETA 3.38 h
+attempts 55/100  converged 5  recovered_named 0  elapsed 3.98 h  ETA 3.26 h
+attempts 56/100  converged 5  recovered_named 0  elapsed 4.00 h  ETA 3.14 h
+attempts 57/100  converged 5  recovered_named 0  elapsed 4.02 h  ETA 3.03 h
+attempts 58/100  converged 5  recovered_named 0  elapsed 4.10 h  ETA 2.97 h
+attempts 59/100  converged 5  recovered_named 0  elapsed 4.13 h  ETA 2.87 h
+attempts 60/100  converged 6  recovered_named 0  elapsed 4.31 h  ETA 2.87 h
+attempts 61/100  converged 6  recovered_named 0  elapsed 4.48 h  ETA 2.87 h
+attempts 62/100  converged 6  recovered_named 0  elapsed 4.51 h  ETA 2.76 h
+attempts 63/100  converged 6  recovered_named 0  elapsed 4.57 h  ETA 2.68 h
+attempts 64/100  converged 6  recovered_named 0  elapsed 4.57 h  ETA 2.57 h
+attempts 65/100  converged 6  recovered_named 0  elapsed 4.60 h  ETA 2.48 h
+attempts 66/100  converged 6  recovered_named 0  elapsed 4.70 h  ETA 2.42 h
+attempts 67/100  converged 6  recovered_named 0  elapsed 4.79 h  ETA 2.36 h
+attempts 68/100  converged 6  recovered_named 0  elapsed 4.88 h  ETA 2.30 h
+attempts 69/100  converged 6  recovered_named 0  elapsed 5.01 h  ETA 2.25 h
+attempts 70/100  converged 6  recovered_named 0  elapsed 5.04 h  ETA 2.16 h
+attempts 71/100  converged 6  recovered_named 0  elapsed 5.04 h  ETA 2.06 h
+attempts 72/100  converged 7  recovered_named 0  elapsed 5.10 h  ETA 1.98 h
+attempts 73/100  converged 7  recovered_named 0  elapsed 5.10 h  ETA 1.89 h
+attempts 74/100  converged 8  recovered_named 0  elapsed 5.30 h  ETA 1.86 h
+attempts 75/100  converged 8  recovered_named 0  elapsed 5.31 h  ETA 1.77 h
+attempts 76/100  converged 8  recovered_named 0  elapsed 5.40 h  ETA 1.70 h
+attempts 77/100  converged 9  recovered_named 0  elapsed 5.61 h  ETA 1.68 h
+attempts 78/100  converged 9  recovered_named 0  elapsed 5.62 h  ETA 1.59 h
+attempts 79/100  converged 9  recovered_named 0  elapsed 5.65 h  ETA 1.50 h
+attempts 80/100  converged 9  recovered_named 0  elapsed 5.71 h  ETA 1.43 h
+attempts 81/100  converged 9  recovered_named 0  elapsed 5.86 h  ETA 1.37 h
+attempts 82/100  converged 9  recovered_named 0  elapsed 6.00 h  ETA 1.32 h
+attempts 83/100  converged 9  recovered_named 0  elapsed 6.00 h  ETA 1.23 h
+attempts 84/100  converged 9  recovered_named 0  elapsed 6.01 h  ETA 1.15 h
+attempts 85/100  converged 9  recovered_named 0  elapsed 6.24 h  ETA 1.10 h
+attempts 86/100  converged 9  recovered_named 0  elapsed 6.26 h  ETA 1.02 h
+attempts 87/100  converged 9  recovered_named 0  elapsed 6.28 h  ETA 0.94 h
+attempts 88/100  converged 9  recovered_named 0  elapsed 6.32 h  ETA 0.86 h
+attempts 89/100  converged 9  recovered_named 0  elapsed 6.69 h  ETA 0.83 h
+attempts 90/100  converged 9  recovered_named 0  elapsed 6.70 h  ETA 0.74 h
+attempts 91/100  converged 9  recovered_named 0  elapsed 6.73 h  ETA 0.67 h
+attempts 92/100  converged 9  recovered_named 0  elapsed 6.83 h  ETA 0.59 h
+attempts 93/100  converged 9  recovered_named 0  elapsed 6.86 h  ETA 0.52 h
+attempts 94/100  converged 9  recovered_named 0  elapsed 6.89 h  ETA 0.44 h
+attempts 95/100  converged 9  recovered_named 0  elapsed 6.95 h  ETA 0.37 h
+attempts 96/100  converged 9  recovered_named 0  elapsed 7.02 h  ETA 0.29 h
+attempts 97/100  converged 9  recovered_named 0  elapsed 7.02 h  ETA 0.22 h
+attempts 98/100  converged 9  recovered_named 0  elapsed 7.06 h  ETA 0.14 h
+attempts 99/100  converged 9  recovered_named 0  elapsed 7.08 h  ETA 0.07 h
+attempts 100/100  converged 9  recovered_named 0  elapsed 7.13 h  ETA 0.00 h
+saved 9 converged states to /home/andy/projects/Unsolved/experiments/programme_r4/u5_m3_converged_orbits.npz
+running the planted controls ...
+controls: P=True N=False (must be False) R=True -> FIRED AS PLANTED = True
+M3 = DELIVERED
+  0 recovered a named row, 9 converged to tol, 100 attempts, 7.13 h, 2104 epochs (U3 spent 4629)
+  stratum P (published):   5/ 60 converged, 0 recovered  | U3: 1/31
+  stratum L (low      ):   4/ 20 converged, 0 recovered  | U3: 9/39
+  stratum M (mid      ):   0/ 10 converged, 0 recovered  | U3: 4/28
+  stratum H (high     ):   0/ 10 converged, 0 recovered  | U3: 0/2
+wrote /home/andy/projects/Unsolved/writeup/data/p2_prog_r4_m3_v1.json and /home/andy/projects/Unsolved/experiments/programme_r4/u5_m3_ledger.json
