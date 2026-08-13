@@ -254,7 +254,7 @@ The four results:
 - **The DSS ansatz does not survive periodization.** 342 modes survive one DSS step at `λ = 1.7`;
   **0 survive two.** So Lane T needs a **non-DSS** blow-up ansatz on `T³`, and identifying one is
   open work, not a lookup.
-- (D)'s data conditions **(8)** and **(9)** are not in this repository and require outreach to read
+- (D)'s data conditions **(8)** and **(9)** are not in this repository. **READABLE AS OF 2026-08-13 — the outreach hold was NARROWED to author contact only, and reading any published document is now authorised.** Fefferman's official problem description may be fetched and (8),(9) read verbatim; **leg 390 §5 item 1 owes the re-run of `check_A` against them, and the §4 disposition MAY CHANGE** if either carries a data-side decay or regularity requirement. Until that runs, the narrowing below stands. *(Superseded wording: they "require outreach to read
   verbatim (leg 390 §4). Until they are read, `CLAY_OBLIGATIONS.md`'s "(D) carries no decay
   condition" is narrowed to (D)'s **solution** conditions.
 

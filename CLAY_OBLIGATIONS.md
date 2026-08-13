@@ -64,7 +64,7 @@ italicised word is an obligation below.
 > (1),(2),(3),(10),(11) and contain no (7), so exactly one condition leaves — **(7) bounded
 > energy** — and exactly one arrives, (10) periodicity. (D)'s **data** conditions are (8),(9),
 > **whose verbatim text is not in this repository**, so no claim about what they do or do not
-> require is supportable here and none is made. (A leg with outreach should close that gap:
+> require is supportable here and none is made. **(UPDATED 2026-08-13: the outreach hold was narrowed to author contact only — READING published material is now authorised, so this gap is closable by an ordinary literature unit and no longer needs a ruling.)** (A leg with outreach should close that gap:
 > `writeup/data/p2_route_cloc_v1.json` banks (4),(5),(6),(7),(10),(11),(A),(C),(D) but not
 > (8),(9).) **(D) deletes the acceptance test, not the work.** A non-constant exactly-λ-DSS field
 > does not exist on `T³` (measured: at λ = 1.7 one DSS step leaves 342 modes in a 64-band and two

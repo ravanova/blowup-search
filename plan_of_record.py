@@ -144,8 +144,15 @@ POSTURE_LIMITS = [
     "2026-08-11 SCOPING of the DSS expensive-entrance ban: read the ban's own text, find an "
     "object it does not name, open that lane while the measurement stays true.",
     "A ban whose WORDING has become defective is a USER ESCALATION (sec 8), not an agent's "
-    "reading. Three are pending: Cadiot; stage V's 'needs L1 first'; and whether the "
-    "ell^1-Fourier/radii-polynomial ban reaches a Galerkin-plus-tail DYNAMICAL closure.",
+    "reading. The three that were pending were RULED BY THE USER 2026-08-13 (writeup/"
+    "escalations/RULING_BAN_WORDING_2026-08-13.md): Cadiot = A2, the ban STANDS and its "
+    "clause is CLOSED; stage V's 'needs L1 first' = B1, STRUCK as editorial; the apparatus "
+    "question = C1, the ell^1-Fourier/radii-polynomial ban NAMES AN APPARATUS and a "
+    "Galerkin-plus-tail DYNAMICAL closure is outside it. C1 binds every unit claiming it to "
+    "NAME ITS APPARATUS and SHOW IT BUILDS NO SINGLE BOUNDED APPROXIMATE INVERSE UNIFORM IN "
+    "M; absent both, the ban applies in full. One defect is knowingly left open: the lift "
+    "clause still names a FOURTH SPACE/BASIS, which is the wrong kind of object for a "
+    "candidate that is an APPARATUS.",
     "Scale is not evidence. A large build is not a result; the gate is the deliverable.",
     "The ceiling clause survives the ambition. Tier 2 is never called a proof, and no output is "
     "described as movement toward Clay unless a link of the L1->L4 chain actually moved. Clay "
