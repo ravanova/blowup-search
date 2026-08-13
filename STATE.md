@@ -37,6 +37,16 @@ what a wall-breaking mandate does and does not license.
 
 ## The lanes — read `WALLS.md` before working in any of them
 
+**USER RULING 2026-08-13: PURSUE LANE T.** The other lanes are **deferred, not rejected**, and every
+deferred option is recorded with its cost and its re-open condition in **`OPTIONS.md`** — read that
+file alongside this one when planning a wave. Nothing is dropped because a lane was not chosen.
+
+**Lane T is currently BLOCKED** on escalation item (c) (`BUILD NOTHING IN LANE T`, `T3`/`T4`
+included). Two Lane T units are **not** blocked because neither builds a certificate: **`T2′`** (the
+compliant rigidity search, ≈1.2–1.7 h) and **`T2″`** (the Type-I rigidity question on `T³`). If the
+ruling is outstanding when a wave is planned, those are Lane T's available work, and
+`ORCHESTRATION.md` §3g's composition floor is met from `OPTIONS.md` §C/§D if they are not.
+
 | lane | attacks | one line |
 |---|---|---|
 | **T — TORUS** | W2, W4, W6 | **Priority 1, the breakthrough candidate.** POCP's only named obstruction is *domain shape*; `T³` is that domain; `arXiv:1902.00384` already certifies a viscous 3D-NS periodic orbit there; leg 390 flagged the credit **unclaimed**. Needs a **non-DSS** ansatz and a rigidity screen rebuilt from zero. |
@@ -499,4 +509,5 @@ is out of contract.
 | The contract | `ORCHESTRATION.md` §3c–§3h | 3g = CONDUCTOR, 3h = walls |
 | What a Tier-2 candidate owes | `CLAY_OBLIGATIONS.md` | 8 sections, §4 verified |
 | Per-leg record | `experiments/journal/leg_N.md`, `writeup/novelty/leg_N.md` | one leg each |
+| **Deferred options, with costs and re-open conditions** | **`OPTIONS.md`** |
 | Banked numbers | `writeup/data/*.json` | **re-derive from these, never from prose** |
