@@ -1,0 +1,397 @@
+{
+  "apparatus_this_leg_used": {
+    "c1_compliance": "NGX excludes a single bounded A working uniformly in M. This apparatus has no A to be bounded and no M to be uniform in, so the exclusion is vacuous on it. See experiments/journal/leg_393.md Part I sec 2.",
+    "constructs_Y0_Z0_Z1_Z2": false,
+    "constructs_an_approximate_inverse": false,
+    "constructs_an_operator": false,
+    "has_an_M_indexed_family": false,
+    "name": "documentary + published-data audit (no certification apparatus)",
+    "precedent": "leg 316 (Dahne-Figueras reproduced from published constants under the same ban)"
+  },
+  "controls": {
+    "C_3D": {
+      "asserts": "Table 1 records Nx3 = 0 for BOTH certified rows",
+      "fired": true,
+      "p1_Nx3": 0,
+      "p2_Nx3": 0,
+      "two_sided": "if Nx3 > 0 for either row, W2's crack survives at full text and leg 348's classification is confirmed on its most load-bearing clause"
+    },
+    "C_dec_minus": {
+      "asserts": "the two published files do NOT decode to the same shape",
+      "fired": true,
+      "p1_shape": [
+        35,
+        35,
+        1,
+        23,
+        3
+      ],
+      "p2_shape": [
+        43,
+        43,
+        1,
+        33,
+        3
+      ],
+      "two_sided": "if they matched, the decoder is not discriminating between the two published rows and every number it produces is suspect"
+    },
+    "C_dec_plus": {
+      "asserts": "decoded array extents match Table 1's own Nrec for BOTH files (leg 316's decode discipline: check the decoder against an independent reference before trusting a number through it)",
+      "fired": true,
+      "p1": true,
+      "p2": true,
+      "two_sided": "a shape mismatch voids F1 and F2 and must be reported as a failed decode"
+    },
+    "C_minus": {
+      "asserts": "the paper does NOT state a Zgliczynski-style self-consistent a-priori-bounds / Galerkin-plus-tail DYNAMICAL closure",
+      "fired": false,
+      "galerkin_mentions": [
+        "The size of the Galerkin projection is the number of elements in Ered pN : q, which is substantially"
+      ],
+      "term_counts": {
+        "a priori bounds": 0,
+        "dynamical closure": 0,
+        "isolating": 0,
+        "logarithmic norm": 0,
+        "self-consistent": 0,
+        "trapping region": 0
+      },
+      "two_sided": "if this control HAD fired, C1's scope would cover the reproduction and V2 would govern instead of V1",
+      "zgliczynski_mentions": [
+        "[48] P. Zgliczynski. Rigorous numerics for dissipative partial differential equations II. Periodic"
+      ],
+      "zgliczynski_only_in_bibliography": true
+    },
+    "C_net": {
+      "asserts": "a positive datum that each external service was actually reached",
+      "evidence": {
+        "arxiv_pdf": {
+          "bytes": 874126,
+          "http_code": null,
+          "reached_service": null,
+          "status": "ALREADY_PRESENT",
+          "url": "https://arxiv.org/pdf/1902.00384"
+        },
+        "vu_code_zip": {
+          "bytes": 4851078,
+          "http_code": null,
+          "reached_service": null,
+          "status": "ALREADY_PRESENT",
+          "url": "https://www.math.vu.nl/~janbouwe/code/navierstokes/navierstokes-code.zip"
+        }
+      },
+      "fired": true,
+      "two_sided": "a zero with no HTTP evidence is banked as FAILED, never as a measured absence"
+    },
+    "C_plus": {
+      "asserts": "the paper's own certification apparatus is an ell^1-Fourier / radii-polynomial Newton-Kantorovich contraction built around a single bounded approximate inverse",
+      "fired": true,
+      "quotes_found": {
+        "apparatus_abstract": true,
+        "apparatus_approximate_inverse": true,
+        "apparatus_banach_space": true,
+        "twod_mechanism": true,
+        "twod_reason_is_memory": true,
+        "twod_solutions": true
+      },
+      "term_counts": {
+        "approximate inverse": 7,
+        "interval arithmetic": 5,
+        "intlab": 2,
+        "newton-kantorovich": 4
+      },
+      "two_sided": "if any term or quote were absent, H1 would be unestablished, branch (c) would NOT fire, and verdict rule V2 would send this unit into a full reproduction under C1's scope"
+    }
+  },
+  "gate_answer": "STOP (pre-committed branch (c))",
+  "lane": "T",
+  "leg": 393,
+  "network_evidence": {
+    "arxiv_pdf": {
+      "bytes": 874126,
+      "http_code": null,
+      "reached_service": null,
+      "status": "ALREADY_PRESENT",
+      "url": "https://arxiv.org/pdf/1902.00384"
+    },
+    "vu_code_zip": {
+      "bytes": 4851078,
+      "http_code": null,
+      "reached_service": null,
+      "status": "ALREADY_PRESENT",
+      "url": "https://www.math.vu.nl/~janbouwe/code/navierstokes/navierstokes-code.zip"
+    }
+  },
+  "paper_apparatus_as_measured": {
+    "approximate_inverse": "A : X_{-2,-1} -> X, section 2.3: numerical inverse A^(N_dagger) of the finite block on E_dagger, PLUS the exact diagonal lambda_n = 1/(nu*ntilde^2 + i*Omegabar*n4) off it. ONE bounded operator, acting on the whole infinite-dimensional space at once.",
+    "is_a_galerkin_plus_tail_dynamical_closure": false,
+    "is_the_banned_machinery": true,
+    "name": "Newton-Kantorovich / radii-polynomial contraction in a weighted-l1 (geometric, eta) Fourier coefficient space",
+    "theorem": "Theorem 2.15 (2.17)-(2.21); symmetry-reduced Theorem 4.23 (4.28)-(4.32)"
+  },
+  "route": "Route-T4",
+  "rows": {
+    "p1": {
+      "Omega_bar": 1.6524461221348223,
+      "array_shape_matches_Nrec": true,
+      "arxiv_theorem": "Theorem 5.1",
+      "authors_success_flags": {
+        "radiisuccess": 1,
+        "success": 1
+      },
+      "dimensionality": {
+        "max_abs_omega1": 0.0,
+        "max_abs_omega2": 0.0,
+        "max_abs_omega3": 1.6351073366158,
+        "max_abs_u3": 0.0,
+        "omega_shape": [
+          35,
+          35,
+          1,
+          23,
+          3
+        ],
+        "p_shape": [
+          69,
+          69,
+          1,
+          45
+        ],
+        "setup_field_in_authors_output": "2D",
+        "u_shape": [
+          35,
+          35,
+          1,
+          23,
+          3
+        ],
+        "x3_mode_extent": 1
+      },
+      "norm_u_X": {
+        "computed_from_published_data": 10.070710173304683,
+        "implied_by_printed_radii": null
+      },
+      "nu": 0.286,
+      "package_radsol_omega_u_p_Omega_phi": [
+        2.6314000000000003e-05,
+        2.6314000000000003e-05,
+        0.0005300000000000001,
+        2.6314000000000003e-05,
+        2.6314000000000003e-05
+      ],
+      "paper_criterion_4_32": {
+        "Z0_plus_Z1": 0.9730669503350271,
+        "Z0_plus_Z1_lt_1": true,
+        "criterion_met": true,
+        "discriminant": 0.0003516239923699713,
+        "one_minus_Z0_Z1_squared": 0.0007253891642558966,
+        "second_inequality_holds": true,
+        "two_Y0_Z2": 0.00037376517188592533
+      },
+      "published_bounds": {
+        "Y0": 6.010610515037811e-07,
+        "Z0": 7.442882613736428e-13,
+        "Z1": 0.9730669503342828,
+        "Z1finite": 0.961642799594828,
+        "Z1tail": 0.9730669503342828,
+        "Z2": 310.9211376704668
+      },
+      "r_max": {
+        "published": 8.662341154018993e-05,
+        "rel_dev": 0.0,
+        "reproduced": 8.662341154018993e-05
+      },
+      "r_min": {
+        "published": 2.631345685735309e-05,
+        "rel_dev": 2.434836388617244e-10,
+        "reproduced": 2.6313456850946193e-05
+      },
+      "r_sol_Omega": {
+        "printed_in_paper": 2.6314e-05,
+        "published_in_package": 2.6314000000000003e-05,
+        "rel_dev_vs_printed": 0.0,
+        "reproduced": 2.6314e-05
+      },
+      "r_sol_p": null,
+      "solshape_Nrec": [
+        17,
+        17,
+        0,
+        11
+      ],
+      "symbol_modulus": {
+        "N_dagger": 130,
+        "Omega_bar": 1.6524461221348223,
+        "box_half_width_scanned": 60,
+        "inf_mu_equals_nu": true,
+        "inf_mu_over_all_nonzero_modes": 0.286,
+        "min_mu_on_tail": 130.0007712577517,
+        "nu": 0.286,
+        "one_over_N_dagger": 0.007692307692307693,
+        "sup_abs_lambda_on_tail": 0.0076922620560250865
+      },
+      "table1_agrees_with_package": {
+        "Ndagger": true,
+        "Nrec": true,
+        "Ntilde": true,
+        "eta": true,
+        "nu": true
+      },
+      "table1_row": {
+        "CPU_days": 6,
+        "Ndagger": 130,
+        "Nt": 11,
+        "Ntilde": 265,
+        "Nx1": 17,
+        "Nx2": 17,
+        "Nx3": 0,
+        "RAM_GB": 10,
+        "eta": 1,
+        "nu": 0.286
+      }
+    },
+    "p2": {
+      "Omega_bar": 1.5272068702179593,
+      "array_shape_matches_Nrec": true,
+      "arxiv_theorem": "Theorem 5.2 / Theorem 1.1",
+      "authors_success_flags": {
+        "radiisuccess": 1,
+        "success": 1
+      },
+      "dimensionality": {
+        "max_abs_omega1": 0.0,
+        "max_abs_omega2": 0.0,
+        "max_abs_omega3": 1.5274264613264072,
+        "max_abs_u3": 0.0,
+        "omega_shape": [
+          43,
+          43,
+          1,
+          33,
+          3
+        ],
+        "p_shape": [
+          85,
+          85,
+          1,
+          65
+        ],
+        "setup_field_in_authors_output": "2D",
+        "u_shape": [
+          43,
+          43,
+          1,
+          33,
+          3
+        ],
+        "x3_mode_extent": 1
+      },
+      "norm_u_X": {
+        "computed_from_published_data": 12.557400068291274,
+        "implied_by_printed_radii": 12.55746630686701,
+        "rel_dev": 5.2748360311577114e-06
+      },
+      "nu": 0.265,
+      "package_radsol_omega_u_p_Omega_phi": [
+        2.2491e-06,
+        2.2491e-06,
+        5.6486e-05,
+        2.2491e-06,
+        2.2491e-06
+      ],
+      "paper_criterion_4_32": {
+        "Z0_plus_Z1": 0.9728800000004357,
+        "Z0_plus_Z1_lt_1": true,
+        "criterion_met": true,
+        "discriminant": 0.000720663327470766,
+        "one_minus_Z0_Z1_squared": 0.000735494399976366,
+        "second_inequality_holds": true,
+        "two_Y0_Z2": 1.4831072505600002e-05
+      },
+      "published_bounds": {
+        "Y0": 6.0684e-08,
+        "Z0": 4.358e-13,
+        "Z1": 0.97288,
+        "Z1finite": 0.95862,
+        "Z1tail": 0.97288,
+        "Z2": 122.1992
+      },
+      "r_max": {
+        "published": 0.00022193271314021793,
+        "rel_dev": 5.6180654069261824e-15,
+        "reproduced": 0.00022193271314021918
+      },
+      "r_min": {
+        "published": 2.249006028604332e-06,
+        "rel_dev": 8.334721598932383e-13,
+        "reproduced": 2.2490060286024575e-06
+      },
+      "r_sol_Omega": {
+        "printed_in_paper": 2.2491e-06,
+        "published_in_package": 2.2491e-06,
+        "rel_dev_vs_printed": 0.0,
+        "reproduced": 2.2491e-06
+      },
+      "r_sol_p": {
+        "note": "the residual gap is the authors' `raddevp` term of determineradii.m -- the weighted-l1 deviation between the pressure recomputed from the symmetrised divergence-free vorticity and the pressure array as stored -- which this audit does not reconstruct. It can only WIDEN their radius, never narrow it, so the reproduction is a lower bound on their published value and the sign of the gap is the right one.",
+        "printed_in_paper": 5.6486e-05,
+        "published_in_package": 5.6486e-05,
+        "rel_dev_vs_printed": 3.540700350525102e-05,
+        "reproduced": 5.6484e-05,
+        "reproduced_raw_before_ceil": 5.64833419723481e-05
+      },
+      "solshape_Nrec": [
+        21,
+        21,
+        0,
+        16
+      ],
+      "symbol_modulus": {
+        "N_dagger": 210,
+        "Omega_bar": 1.5272068702179593,
+        "box_half_width_scanned": 60,
+        "inf_mu_equals_nu": true,
+        "inf_mu_over_all_nonzero_modes": 0.265,
+        "min_mu_on_tail": 210.01683766872333,
+        "nu": 0.265,
+        "one_over_N_dagger": 0.004761904761904762,
+        "sup_abs_lambda_on_tail": 0.004761522985968303
+      },
+      "table1_agrees_with_package": {
+        "Ndagger": true,
+        "Nrec": true,
+        "Ntilde": true,
+        "eta": true,
+        "nu": true
+      },
+      "table1_row": {
+        "CPU_days": 95,
+        "Ndagger": 210,
+        "Nt": 16,
+        "Ntilde": 425,
+        "Nx1": 21,
+        "Nx2": 21,
+        "Nx3": 0,
+        "RAM_GB": 110,
+        "eta": 1,
+        "nu": 0.265
+      }
+    }
+  },
+  "target_paper": {
+    "arxiv_id": "1902.00384",
+    "authors": [
+      "J.B. van den Berg",
+      "M. Breden",
+      "J.-P. Lessard",
+      "L. van Veen"
+    ],
+    "code_url_is_paper_reference_41": "https://www.math.vu.nl/~janbouwe/code/navierstokes/navierstokes-code.zip",
+    "code_zip_sha256": "edf64bc0cf099ed6cf96cc6931da02461068f61e58cfb2ea0a804f4a20c7ac5f",
+    "date": "2019-02-01",
+    "pdf_sha256": "97e81647e108b8d73122c5e0c9fdc11da3ed291abb724519eab7f9ad74a05d29",
+    "title": "Spontaneous periodic orbits in the Navier-Stokes flow"
+  },
+  "unit": "T4",
+  "verdict_rule_fired": "V1_BRANCH_C_STOP"
+}
