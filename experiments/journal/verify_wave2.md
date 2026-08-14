@@ -162,3 +162,379 @@ I have not opened and will not open `STATE.md`, `WALLS.md`, `OPTIONS.md`, `DIREC
 `CLAY_ROADMAP.md`, `reports/ORCH_STATE.md`, any wave-2 brief, or the reasoning sections of
 `experiments/journal/leg_393.md`, `leg_394.md`, `leg_395.md`. Journal reads, if any, are
 locator-only and are declared in §5.
+
+---
+
+# §3 — WHAT I GOT
+
+*Everything below was written after the numbers existed. §§0–2 were committed at `e93ec51`,
+before the first computation.*
+
+## §3.0 How I checked, and why it is not a re-run
+
+The brief forbids reporting the units' own exit codes as verification. I did not run
+`p2_route_t4_v1_evidence.py`, `p2_route_t5_sweep.py` or `p2_route_t6_v1.py` as the check. Instead:
+
+* **The primary artefacts were re-fetched and re-measured.** `Papers/` is untracked and was
+  **empty** in this worktree, so nothing in items (1)–(3) could be measured from disk. I re-fetched
+  all three from their published endpoints (read-only; **no author, group, maintainer or list was
+  contacted**) and every digest matched the banked one **exactly**:
+
+  | artefact | HTTP | my sha256 | banked sha256 |
+  |---|---|---|---|
+  | `arxiv.org/pdf/1902.00384` | 200 | `97e81647e108b8d7…` | `97e81647e108b8d7…` ✔ |
+  | VU `navierstokes-code.zip` | 200 | `edf64bc0cf099ed6…` | `edf64bc0cf099ed6…` ✔ |
+  | `arxiv.org/pdf/2409.09234` | 200 | `7a3c8ac94b0af865…` | `7a3c8ac94b0af865…` ✔ |
+
+  **This is the part of the run that was worth doing.** Reading (a) said my value is concentrated
+  where a number was *transcribed* rather than *measured*; with the artefacts back on disk, items (1)
+  and (2) stop being transcription checks and become measurements.
+* The `.mat` arrays were decoded from scratch with `scipy.io.loadmat` — variable names discovered by
+  inspecting the files, not by reading the unit's decoder.
+* The radii were recomputed from the **paper's own (4.33)/(4.34)**, which I read off the re-fetched
+  PDF, applied to the authors' published `Y0, Z0, Z1, Z2`.
+* Every tally was recounted with `collections.Counter` from the raw `findings` / `verdicts` /
+  `fulltexts` lists — never read off a `*_counts` field.
+* `T5`'s corpus was re-enumerated with `git ls-tree` + `git cat-file` at the commit that landed the
+  artefact — not by calling the sweep's `enumerate_corpus()`.
+* The term counts were recounted with a normaliser I wrote before reading theirs.
+
+**One thing I could only check by reading the landed script, and I label it as such:** the `1e-3`
+threshold behind the norm check is a module constant of `experiments/p2_route_t4_v1_evidence.py`
+(`V4_REPRODUCED = 1e-3`, line 25). There is no independent source for it; my check asserts the
+constant is literally `1e-3` and that the measured `δ` is under it.
+
+## §3.1 ITEM (1) — `T4`'s 2D lift — **YES, reproduces exactly**
+
+Measured by me from `dataorbit{1,2}.mat` / `extraorbit{1,2}.mat` inside the re-fetched package, and
+from Table 1 of the re-fetched PDF (`pdftotext -layout`, p.46).
+
+| claim | **the number I got** | claimed | |
+|---|---|---|---|
+| `N_x3` in Table 1, p1 / p2 | **0 / 0** (read by me from the PDF table) | 0 / 0 | ✔ |
+| `N_x3` in `Nrec`, p1 / p2 | **`[17,17,0,11]` / `[21,21,0,16]`** | third entry 0 | ✔ |
+| `x₃` extent, `ω` / `u` / `p` | **1 / 1 / 1** on both rows | 1 | ✔ |
+| `max\|u⁽³⁾\|` p1, p2 | **`0.0`, `0.0`** (zero non-zero entries) | `0.0` exactly | ✔ |
+| `max\|ω⁽¹⁾\|`, `max\|ω⁽²⁾\|` | **`0.0`** on all four | `0.0` exactly | ✔ |
+| `max\|ω⁽³⁾\|` p1 | **`1.6351073366158`** → `1.6351` | `1.6351` | ✔ |
+| `max\|ω⁽³⁾\|` p2 | **`1.5274264613264072`** → `1.5274` | `1.5274` | ✔ |
+| `setup` | **`'2D'`** on both | `'2D'` | ✔ |
+
+My independent decode is **bitwise identical** to the banked row on every one of those fields —
+including `Ω̄` (`1.652446122134822` / `1.527206870217959`), the shapes, and `Nrec`. The zeros are
+structure, not an empty array: `max|ω⁽³⁾|` is non-zero on both rows.
+
+**Nothing transcribed survived unchecked here.** `table1_row` is the one thing the runner marks in a
+comment as *"transcribed from the PDF"* (`experiments/p2_route_t4_v1.py:203`) — I re-read the table
+myself and every cell of both rows agrees, including the RAM/CPU columns (`10 GB / 6 d`,
+`110 GB / 95 d`).
+
+## §3.2 ITEM (2) — the first conjunct and the negative control — **YES, reproduces exactly**
+
+### The paper's criterion (4.32), recomputed
+
+The re-fetched PDF states (4.32) as `Z0+Z1 < 1` **and** `2·Y0·Z2 < (1−(Z0+Z1))²`, with (4.33)/(4.34)
+giving `r_min = [1−(Z0+Z1) − √((1−(Z0+Z1))² − 2·Y0·Z2)] / Z2` and **`r_max = [1−(Z0+Z1)] / Z2`**.
+
+**`r_max` is the validity bound, not the larger root.** My §2.2 pre-registered the textbook
+`Z2·r² − (1−Z0−Z1)·r + Y0` and its larger root. **That was my error, and I record it as mine, not the
+record's** — under it, `p1`'s discriminant goes negative and `r_max` misses by 70 %. Under the
+paper's own (4.33)/(4.34) everything reproduces bit-for-bit. Reading (a) warned that agreement is
+cheap; this is the one place where a wrong convention would have manufactured a false discrepancy,
+and the fix came from the paper, not from the banked file.
+
+| | **my number** | banked | claimed |
+|---|---|---|---|
+| p1 `Z0+Z1` | **0.9730669503350271** < 1 | same | (4.32) met ✔ |
+| p1 `2·Y0·Z2` vs `(1−Z0−Z1)²` | **3.737652e-04 < 7.253892e-04** | same | ✔ |
+| p2 `Z0+Z1` | **0.9728800000004357** < 1 | same | ✔ |
+| p2 `2·Y0·Z2` vs `(1−Z0−Z1)²` | **1.483107e-05 < 7.354944e-04** | same | ✔ |
+| p1 `r_min` rel dev | **2.434836e-10** | 2.434836e-10 | ✔ |
+| p1 `r_max` rel dev | **0.0 (exact)** | 0.0 | ✔ |
+| p2 `r_min` rel dev | **8.334722e-13** | 8.334722e-13 | ✔ |
+| p2 `r_max` rel dev | **5.618065e-15** | 5.618065e-15 | **5.6e-15** ✔ |
+| p1, p2 `r_sol^Ω` | **`2.6314e-05`, `2.2491e-06`, rel dev `0.0`** | exact | both exact ✔ |
+| norm check `δ` | **5.2748360312e-06** → `5.3e-06` | 5.2748e-06 | **5.3e-06** ✔ |
+| threshold | **`V4_REPRODUCED = 1e-3`**, `p2_route_t4_v1_evidence.py:25` | — | **1e-3** ✔ |
+
+My roots are **bitwise identical** to the banked `reproduced` values on all four cells. The gate's
+`5.6e-15` reads as *the smallest non-zero deviation of the four*, and that is what it is.
+
+### The apparatus finding and its negative control
+
+Recounted by me over the re-fetched PDF with my own normaliser:
+
+| term | **my count** | banked | claimed |
+|---|---|---|---|
+| *approximate inverse* | **7** | 7 | 7 ✔ |
+| *Newton-Kantorovich* | **4** | 4 | 4 ✔ |
+| *interval arithmetic* | **5** | 5 | 5 ✔ |
+| *INTLAB* | **2** | 2 | 2 ✔ |
+| *self-consistent* | **0** | 0 | 0 ✔ |
+| *a priori bounds* | **0** | 0 | 0 ✔ |
+| *isolating* | **0** | 0 | 0 ✔ |
+| *trapping region* | **0** | 0 | 0 ✔ |
+| *logarithmic norm* | **0** | 0 | 0 ✔ |
+| *dynamical closure* | **0** | 0 | 0 ✔ |
+
+All six load-bearing verbatim quotes (three apparatus, three 2D) relocated by me in the re-fetched
+text. **Zgliczyński: exactly one occurrence of the name in the whole document, and it is bibliography
+item `[48]`.**
+
+**Two nuances, banked because they refine a number rather than contradict it:**
+
+1. ***approximate inverse* = 7 is normalisation-sensitive.** Without de-hyphenating a line-break the
+   count is **6**. Both the landed runner and my independently written normaliser de-hyphenate, so 7
+   stands; the other three C+ counts are insensitive. Anyone re-deriving with a naïve counter will
+   get 6 and should not read that as a discrepancy.
+2. **The *reference* `[48]` is cited once in the body**, at *"Shivashinsky PDE [1, 9, 10, 48]"* — as
+   prior work on Kuramoto–Sivashinsky, never as this paper's method. The *name* appears only in the
+   bibliography, which is what the claim says.
+
+## §3.3 ITEM (3) — `T6`'s table — **YES on every count; one wording nuance, unreconciled**
+
+| claim | **my recount** | banked | |
+|---|---|---|---|
+| full texts read | **7/7 `MEASURED`** | 7 | ✔ |
+| verdicts | **2 `UNDERCUT` / 4 strengthen / 1 confirm** | same | ✔ |
+| `UNREACHABLE` | **0** | 0 | ✔ |
+| `THROTTLED` | **0** | 0 | ✔ |
+
+Recounted with `Counter` from the raw lists, not read off `verdict_counts`; they sum to 7 and use no
+verdict outside the pre-registered vocabulary. Every full text carries PDF magic and extracted a
+non-empty text (min 30 592 chars) — a "read" that extracted nothing would not have counted.
+
+**UNDERCUT 2 = `arXiv:2409.09234`.** I re-fetched it (sha256 `7a3c8ac9…`, matching), relocated the
+banked deciding sentence and both supporting quotes **verbatim**, and read the boundary conditions
+myself at sec 2, p.4:
+
+> *"The boundary conditions at the inner and outer cylinder walls 𝑟 = 𝑟ᵢ and 𝑟 = 𝑟ₒ are
+> v = 𝑅ᵢ𝜽̂ and v = 𝑅ₒ𝜽̂. Periodicity is enforced to the rest of boundaries of the parallelogram
+> domain."*
+
+So the domain is **not** a periodic cell: rotating-wall Dirichlet conditions radially, periodicity
+only in the remaining directions. I also measured that the paper contains **zero** occurrences of
+*interval arithmetic*, *Newton-Kantorovich*, *Galerkin*, *computer-assisted*, *INTLAB*,
+*self-consistent*, *a priori bounds* and *trapping region*.
+
+**The over-count arithmetic reproduces:** `p2_route_pocp_v1.json.domain_census.compact_or_periodic_domain`
+lists **6** entries, one of which is `"arXiv:2409.09234 (minimal periodic domain)"`. **6 − 1 = 5.**
+Leg 348's record is still exactly as `T6` locked it — both lock hashes re-verified live
+(`ef1df364…`, `639e600b…`).
+
+### The nuance, reported and NOT reconciled (reading (b))
+
+**The gate and the banked record give different *grounds* for the same over-count.**
+
+* **The gate's wording:** *"`arXiv:2409.09234` carries no-slip walls, not periodicity, **so** leg
+  348's `domain_census` over-counts by one."*
+* **The record's own wording** (`p2_route_t6_v1.json`, the `2409.09234` verdict's
+  `leg348_classification_status`): the ground is that the paper *"CLOSES NO TAIL-DOMINATION ESTIMATE
+  AND IS NOT AN INSTANCE OF THAT TECHNOLOGY AT ALL. The census over-counts by one."* The
+  wall/periodicity point is filed as `u_code` **U1**, and the record labels it **"secondary"**.
+
+Both facts are in the record and **both reproduce independently**. What differs is which one carries
+the *"so"*. A second, smaller one: **the paper never uses the phrase "no-slip"** (0 occurrences) —
+`v = 𝑅ᵢ𝜽̂` at a rotating wall *is* the no-slip condition, but the phrase is the record's, not the
+paper's. **I report both readings and stop. Deciding which grounding is the operative one is the
+Conductor's job, not mine.**
+
+## §3.4 ITEM (4) — `T5`'s sweep — **YES, reproduces exactly at the landing commit**
+
+**Corpus, re-enumerated by me with `git ls-tree` + `git cat-file` at `3cab83e` (the commit that
+landed `writeup/data/p2_route_t5_v1.json`), minus the four `excluded_by_name` entries:**
+
+| | **my number** | banked | claimed |
+|---|---|---|---|
+| files | **1428** | 1428 | 1428 ✔ |
+| lines | **417 476** | 417 476 | 417,476 ✔ |
+| bytes | **23 547 210** | 23 547 210 | — ✔ |
+| `DIRECTION.md` in corpus | **False** | False | excluded ✔ |
+
+**Corpus drift, recorded so nobody re-derives at HEAD and reports a false discrepancy:** at
+`origin/main` the same enumeration gives **1440 files / 421 528 lines**. That is later legs' files,
+not a disagreement. The number is a function of the tree, and the tree has moved.
+
+**"and the exclusion asserted executably" — YES.** `experiments/p2_route_t5_sweep.py` carries, at
+`:380–381`, `if "DIRECTION.md" in corpus: fail.append("N-B: DIRECTION.md is in the corpus -- S3e
+VIOLATED")`, and `main()` ends `if fail: … return 1`. A non-empty `fail` list is a non-zero exit, so
+the exclusion is gated by **exit code**, not by a printed line or a promise in prose. The control
+`N-B` additionally re-derives the enumeration and compares it set-wise. This half of the claim is the
+one most easily satisfied by a comment instead of an assertion; it is satisfied by an assertion.
+
+**Tally, recounted from `findings` with `Counter`:**
+
+| | **my recount** | banked | claimed |
+|---|---|---|---|
+| refusals | **7** | 7 | 7 ✔ |
+| `APPARATUS` | **5** | 5 | 5 ✔ |
+| `REALIZATION` | **2** | 2 | 2 ✔ |
+| re-openable under C1 | **`['F1','F2']` — exactly 2** | `['F1','F2']` | exactly 2 ✔ |
+
+No `REALIZATION`-based refusal is marked re-openable, and the classification vocabulary is exactly
+`{APPARATUS, REALIZATION}`.
+
+**The two re-openables are the two the gate names:**
+
+* **`F1` = leg 348**, `what_was_refused` = *"Proposing the build for a periodic-orbit /
+  **Galerkin-plus-tail DYNAMICAL closure** on the T³ object class."* ✔
+* **`F2` = leg 315**, `what_was_refused` = *"Dispatching the build leg for **`O1`** — sonic-point-
+  desingularized Taylor-model stepping in the similarity parameter."* ✔
+
+**Leg 257 is NOT re-openable, and for the reason the gate states.** `F3`, leg 257, route P1C,
+`reopenable = false`. Its `c1_scope_test` reads: *"The apparatus IS radii-polynomial:
+`capabilities.py:518-522` records the module as carrying '… plus **Corollary 21's radii
+polynomial**' … **A fourth SPACE is not a fourth APPARATUS.** C1 does not reach it."* I relocated the
+`capabilities.py` quote live — *"section 6's bounds Y, Zbar11/12/21/22, Z1, Z2, Z3 plus Corollary
+21's radii polynomial"* is still there. ✔
+
+**All seven deciding sentences still sit at their recorded `file:line`** in the live tree
+(`leg_348.md:122`, `leg_315.md:150`, `JOURNAL.md:3696`, `leg_262.md:150`, `leg_273.md:257`,
+`leg_341.md:122`, `leg_315.md:51`) — under the whitespace-normalised 7-line-window rule the sweep
+itself uses. My first pass used strict whitespace and reported 0/7; that was **my** comparison being
+wrong, and is recorded here so the correction is visible rather than silent.
+
+## §3.5 The field-scoped census (reading (e)) — the filename trap, avoided
+
+Scanned **every** `writeup/data/*.json` on the top-level **fields** `leg` / `route` / `unit` only.
+Never on a filename substring.
+
+| | |
+|---|---|
+| files found / parsed | **306 / 306 — 100 % coverage, none unparseable** |
+| top-level `leg` present | **229 / 306 (75.3 %)** |
+| top-level `route` present | **225 / 306** |
+| top-level `unit` present | **9 / 306** |
+| rows with `unit ∈ {T4,T5,T6}` | `p2_route_t4_v1.json` (leg 393), `p2_route_t5_v1.json` (leg 395), `p2_route_t6_v1.json` (leg 394) |
+| rows with `leg ∈ {391,393,394,395}` | **only 393, 394, 395 — leg 391 is absent** |
+| **`p2_route_p2t1_v1.json`** | **`leg = 302`, `route = "P2T1"`, `unit = null`** — the trap, named in advance, avoided |
+
+*(Counts are taken after V-W2 added its own two files; before them the totals were 304/304, `leg`
+229, `route` 225, `unit` 8.)*
+
+**`T1` / leg 391 banked nothing**, confirmed independently by field scan at full coverage. The wave-1
+verifier's finding stands. My repair record deliberately carries **no** top-level `leg`/`unit` — it
+is a record banked *by* V-W2 *about* leg 391, not leg 391's own, and nests that under `banks_for`, so
+the census statement stays true after the repair.
+
+## §3.6 The folded-in obligation — `T1` / leg 391's missing record — **DISCHARGED**
+
+Banked: `writeup/data/p2_route_t1_packet_v1.json`, checked by
+`experiments/p2_route_t1_packet_evidence.py` (**31/31, exit 0**).
+
+The record states, **verbatim from
+`writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md` (sha256 `e73eeca8e49c443b…`, 478 lines)**:
+
+* **the packet's three ban-wording questions** —
+  **(a)** Cadiot: the lift clause's literal reading vs its evident purpose;
+  **(b)** Stage V's *"needs L1 first"* — a lift condition unliftable as written;
+  **(c)** the apparatus question — does the ℓ¹-Fourier/radii-polynomial ban reach a Zgliczyński-style
+  Galerkin-plus-tail **dynamical** closure? — each with its *pending since* and *what it blocks*;
+* the fourth item **(d)** (the outreach hold), banked **separately** because the document itself says
+  it is *"Not a ban-wording question"*;
+* **that it ruled NONE of them**: `questions_ruled = 0` of 3, backed by the document's own
+  *"**This packet rules nothing.**"* and *"**It ruled none of (a), (b), (c).**"*
+
+The script asserts each question occurs **verbatim** in the document, re-hashes the document, and
+independently regex-scans for any endorsement verb attached to the packet (none). **Per reading (f),
+the record carries no gate verdict and is explicitly marked `does_not_reopen_t1_gate_answer: true`.**
+It says what the packet **asked** and that it **ruled none**. Nothing more.
+
+**Mutation-tested, as required:**
+
+| mutation | result |
+|---|---|
+| baseline | **exit 0** |
+| corrupt question (c)'s verbatim text (`dynamical` → `DYNAMICAL`) | **exit 1**, `FAIL question (c) occurs VERBATIM…` |
+| set `questions_ruled = 1` | **exit 1**, `FAIL banked count of questions RULED is zero` |
+| bank only two questions | **exit 1**, `FAIL exactly THREE ban-wording questions are banked` |
+| restored | **exit 0** |
+
+My own gate, `experiments/p2_verify_wave2_evidence.py`, is **100/100 checks OK, exit 0**, with 2
+checks reported `skip` (see §4.2) and was mutation-tested the same way: corrupting my banked
+`max|ω⁽³⁾|` for p1 gives **exit 1**.
+
+# §4 — VERDICTS, AND WHAT I COULD NOT CHECK
+
+| item | verdict | the number that decides it |
+|---|---|---|
+| **(1)** `T4`'s 2D lift | **YES — reproduces exactly** | `max\|u⁽³⁾\| = max\|ω⁽¹⁾\| = max\|ω⁽²⁾\| = 0.0`, `max\|ω⁽³⁾\| = 1.6351 / 1.5274`, `N_x3 = 0`, extent 1, `setup='2D'` — all **bitwise identical** to a fresh decode of the re-fetched package |
+| **(2)** first conjunct + control | **YES — reproduces exactly** | `5.618065e-15` smallest non-zero; `δ = 5.2748e-06 < 1e-3`; 7 / 4 / 5 / 2 and six zeros; `[48]` |
+| **(3)** `T6`'s table | **YES on every count** | 7/7, 2/4/1, 0, 0; `6 − 1 = 5` — **plus one wording nuance banked unreconciled** |
+| **(4)** `T5`'s sweep | **YES — reproduces exactly at `3cab83e`** | 1428 / 417 476; 7, 5, 2; exactly 2; leg 257 not re-openable |
+| folded-in `T1` obligation | **DISCHARGED** | 3 questions, 0 ruled; evidence script exit-code gated and mutation-tested |
+
+## §4.1 Unreconciled — reported, not decided
+
+**One.** Item (3): the gate grounds the `domain_census` over-count in the **no-slip walls**; the
+banked record grounds it in the paper **not being an instance of the certification technology at
+all**, and files the wall point as a *secondary* `u_code`. Both facts reproduce independently. Which
+grounding is operative is **the Conductor's call, not mine** (reading (b)). See §3.3.
+
+## §4.2 `UNVERIFIABLE` / not checkable by this unit
+
+* **`corpus.DIRECTION_md_windows_forgone = 143`** (`p2_route_t5_v1.json`). Checking it requires
+  reading `DIRECTION.md`, which is on my forbidden-read list. **`UNVERIFIABLE BY THIS UNIT`** — not a
+  `no`, and not in the gate.
+* **Every "why".** The reasoning behind any wave-2 number is in files I may not open. I checked
+  *what* the numbers are and *whether they re-derive*; I did not and cannot check *whether the
+  reasoning that produced them was sound*. That is the trade the unit is for.
+* **Two live re-measurements are `skip`, not `pass`, in my evidence script.** `Papers/` is untracked,
+  so a fresh clone cannot re-decode the `.mat` files or re-count the PDF. My script reports those two
+  as `skip` with the banked sha256 rather than silently passing them. The measurement itself is
+  banked in `p2_verify_wave2_v1.json` under `independent_artefacts_refetched`, digests included.
+
+## §4.3 Two errors of mine, recorded because a verifier that hides its own misses is worthless
+
+1. **The pre-registered radii formula (§2.2) was wrong.** I fixed the convention from the paper's own
+   (4.33)/(4.34), not from the banked file, and then everything reproduced bit-for-bit. Had I
+   reported the pre-registered version, I would have banked a 70 % false discrepancy on `r_max`.
+2. **My first quote-location pass used strict whitespace and reported 0/7 for `T5`'s findings.** The
+   sweep's own rule — and the correct one — normalises whitespace over a 7-line window. All 7 verify.
+
+## §4.4 Forbidden reads — honoured
+
+I did **not** open `STATE.md`, `WALLS.md`, `OPTIONS.md`, `DIRECTION.md`, `CLAY_ROADMAP.md`,
+`reports/ORCH_STATE.md`, any wave-2 brief, or **any part** of `experiments/journal/leg_393.md`,
+`leg_394.md` or `leg_395.md` — not even for locators; I never needed one, because every discrepancy
+candidate resolved inside the JSON or the primary sources.
+
+Journal files I *did* open, locator-only, to confirm a banked quote sits at its recorded line:
+`experiments/journal/leg_348.md`, `leg_315.md`, `leg_273.md`, `leg_341.md`, `experiments/JOURNAL.md`,
+`writeup/novelty/leg_262.md`. None is a wave-2 journal.
+
+## §4.5 Outreach
+
+**Read-only.** Three HTTP GETs against published-document endpoints (`arxiv.org` ×2,
+`math.vu.nl` ×1), all HTTP 200, all digest-matched. **No author, group, maintainer or mailing list
+was contacted**; that remains HELD by the user. No source was throttled and none was unobtainable, so
+no `THROTTLED` and no `UNREACHABLE` is banked — and no zero was banked in place of either.
+
+# §5 — TERRITORY, CEILING
+
+## §5.1 What I wrote
+
+`experiments/journal/verify_wave2.md`, `writeup/data/p2_verify_wave2_v1.json`,
+`experiments/p2_verify_wave2_evidence.py`, and — for the folded-in obligation only —
+`writeup/data/p2_route_t1_packet_v1.json` and `experiments/p2_route_t1_packet_evidence.py`.
+
+**No source, no figure, no Conductor-owned file. I edited no wave-2 artefact** — not one byte of
+`p2_route_t4_v1.json`, `p2_route_t5_v1.json`, `p2_route_t6_v1.json`,
+`p2_route_t6_v1_leg348_lock.json` or their scripts. The one thing I found that differs is written
+down as a finding in §3.3, not fixed in place.
+
+*(One environment side effect, gitignored and outside the repo's tracked surface: `scipy` was
+installed into the shared `.venv`, because reading the authors' `.mat` files needs it and it was
+missing. No tracked file changed.)*
+
+## §5.2 Ceiling
+
+**TIER 2. Clay ~0.05 %, unchanged.**
+
+This unit moved **no** link of the `L1 → L4` chain, and could not have. Re-deriving four banked
+findings and repairing one missing record changes what the repository can be **trusted to have
+measured** — it does not change what the repository has **proved**. A verifier that agreed with
+everything would have been worth little (reading (a)); this one agreed with everything in the gate
+and found, on top of that, a divergence between the gate's stated ground for an over-count and the
+record's, a normalisation sensitivity in a term count, and the confirmation by field-scoped scan that
+`T1` really did bank nothing. None of that is progress toward Clay in either direction.
