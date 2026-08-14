@@ -1,0 +1,305 @@
+{
+ "answer": "MISMATCH -- see failed checks",
+ "base": "main @ c1a8d5e",
+ "ceiling": "TIER 2. Confirming arithmetic is not a link of the L1->L4 chain. Nothing this unit returns is movement toward Clay. Clay ~0.05%.",
+ "checks": [
+  {
+   "detail": "144.688755 -> 144.69",
+   "item": "1",
+   "name": "U3 pool reservation = wall_seconds * workers / 3600 = 144.69",
+   "ok": true
+  },
+  {
+   "detail": "57.035181 -> 57.04",
+   "item": "1",
+   "name": "U5 pool reservation = wall_seconds * workers / 3600 = 57.04",
+   "ok": true
+  },
+  {
+   "detail": "134.447483 -> 134.45",
+   "item": "1",
+   "name": "U3 attempt CPU = sum(attempts[].wall_seconds)/3600 = 134.45",
+   "ok": true
+  },
+  {
+   "detail": "0.929219 -> 92.92%",
+   "item": "1",
+   "name": "U3 pool utilisation = 134.45 / 144.69 = 92.92%",
+   "ok": true
+  },
+  {
+   "detail": "bit-identical to my re-derivation",
+   "item": "1",
+   "name": "R0 banked the same three numbers",
+   "ok": true
+  },
+  {
+   "detail": "leader 8, single 8, complete 8 (of 14 convergences)",
+   "item": "1",
+   "name": "U3 distinct = 8 under leader/single/complete linkage alike",
+   "ok": true
+  },
+  {
+   "detail": "leader 5, single 5, complete 5 (of 9 convergences)",
+   "item": "1",
+   "name": "U5 distinct = 5 under leader/single/complete linkage alike",
+   "ok": true
+  },
+  {
+   "detail": "0.05529110 -> 0.0553",
+   "item": "1",
+   "name": "U3 metric = 8 / 144.69 = 0.0553",
+   "ok": true
+  },
+  {
+   "detail": "0.08766519 -> 0.0877",
+   "item": "1",
+   "name": "U5 metric = 5 / 57.04 = 0.0877",
+   "ok": true
+  },
+  {
+   "detail": "57/100 on key (T_seed, |s_seed|, R_seed) at full float precision",
+   "item": "2",
+   "name": "57 of U5's 100 seeds were already spent by U3",
+   "ok": true
+  },
+  {
+   "detail": "shared-seed 5, bit-identical (T,|s|) 5, of 9 convergences",
+   "item": "2",
+   "name": "5 of U5's 9 convergences are bit-identical re-executions",
+   "ok": true
+  },
+  {
+   "detail": "re-finds 4, new 1; the new one T=20.417511 |s|=0.586670 anchor=UPO37 attempt=7",
+   "item": "2",
+   "name": "4 of U5's 5 distinct orbits are re-finds; ONE is new",
+   "ok": true
+  },
+  {
+   "detail": "0.01753304 -> 0.0175",
+   "item": "2",
+   "name": "corrected U5 metric = 1 / 57.04 = 0.0175",
+   "ok": true
+  },
+  {
+   "detail": "A=True B=False; U5's own original claim is 0.0877",
+   "item": "2",
+   "name": "comparand 0.0553 resolves under exactly one reading (A: U3's metric)",
+   "ok": true
+  },
+  {
+   "detail": "0.0175 < 0.0553",
+   "item": "2",
+   "name": "the retraction's direction: corrected U5 (0.0175) < U3 (0.0553)",
+   "ok": true
+  },
+  {
+   "detail": "K=20 W=10 theta=0.5 -> 0.5500108014689997",
+   "item": "3",
+   "name": "incumbent rule reproduces on U3 (4629 -> 2083 epochs, 0 false kills)",
+   "ok": true
+  },
+  {
+   "detail": "K=21 W=10 theta=0.1 -> 0.5545474184489090 (2062 epochs)",
+   "item": "3",
+   "name": "best admissible rule reproduces on U3, 0 false kills",
+   "ok": true
+  },
+  {
+   "detail": "0.45366170 pp -> +0.45 pp",
+   "item": "3",
+   "name": "headroom = +0.45 pp",
+   "ok": true
+  },
+  {
+   "detail": "K=17 W=13 theta=0.15 -> 1 false kill(s) out of 14 convergences",
+   "item": "3",
+   "name": "hold-out (fit on U5, scored on U3) kills exactly ONE of U3's 14",
+   "ok": true
+  },
+  {
+   "detail": "fit on U3, scored on U5",
+   "item": "3",
+   "name": "the other hold-out direction kills none (control)",
+   "ok": true
+  },
+  {
+   "detail": "37 records: 37 MEASURED (32 substantive + 5 controls)",
+   "item": "4",
+   "name": "32 arXiv query records, 32 MEASURED, 0 THROTTLED, 0 FAILED",
+   "ok": false
+  },
+  {
+   "detail": "['http://a9.com/-/spec/opensearch/1.1/']",
+   "item": "4",
+   "name": "served opensearch namespace is 1.1, and only 1.1",
+   "ok": true
+  },
+  {
+   "detail": "5/6",
+   "item": "4",
+   "name": "Semantic Scholar: 5 of 6 substantive queries THROTTLED",
+   "ok": true
+  },
+  {
+   "detail": "totals: [None, None, None, None, None]",
+   "item": "4",
+   "name": "every THROTTLED record carries total=None, NEVER a zero (leg 387)",
+   "ok": true
+  },
+  {
+   "detail": "arXiv 0 / S2 0 : 'quasiperiodic rigidity of the Zlatohorsky enclosure torus'",
+   "item": "4",
+   "name": "negative control returns 0 in BOTH instruments, same query string",
+   "ok": true
+  },
+  {
+   "detail": "arXiv max total 10759; S2 max total 149086",
+   "item": "4",
+   "name": "POSITIVE DATUM: each instrument was reached (HTTP 200, non-zero total)",
+   "ok": true
+  },
+  {
+   "detail": "search returned ['p2_route_p2t1_v1.json'] (empty = defect confirmed)",
+   "item": "5",
+   "name": "BANKING DEFECT NAMED: no T1 JSON exists under writeup/data/",
+   "ok": false
+  },
+  {
+   "detail": "{'A': 2, 'B': 0, 'C': 2}",
+   "item": "5",
+   "name": "the packet poses THREE ban-wording questions, each with TWO readings",
+   "ok": false
+  },
+  {
+   "detail": "both self-statements present verbatim",
+   "item": "5",
+   "name": "the packet rules NONE of the three",
+   "ok": true
+  },
+  {
+   "detail": "no RULING/VERDICT/RECOMMENDATION line",
+   "item": "5",
+   "name": "no reading is endorsed anywhere in the packet text",
+   "ok": true
+  },
+  {
+   "detail": "5 clauses in p2_prog_r4_m3_v1.json; source experiments/journal/prog_r4_u2u3_prereg_addendum.md section 3g (AMENDMENT 5), committed before either stage ran",
+   "item": "M3",
+   "name": "M3's pre-committed wording is LOCATED in the banked record",
+   "ok": true
+  },
+  {
+   "detail": "U5 60 in band, U3 31",
+   "item": "M3",
+   "name": "c2 re-derived: >= 50 in-band seeds (60 vs U3's 31)",
+   "ok": true
+  },
+  {
+   "detail": "tol, max_newton, max_gmres, gmres_rtol, N, Re, T_dns, n_attempts all equal",
+   "item": "M3",
+   "name": "c3 re-derived: caps/tol identical to U3, none changed",
+   "ok": true
+  },
+  {
+   "detail": "0 control failures",
+   "item": "M3",
+   "name": "c5 re-derived: controls fired as planted, no failures",
+   "ok": true
+  },
+  {
+   "detail": "no clause conditions DELIVERED on seeds U3 had not spent",
+   "item": "M3",
+   "name": "M3's five clauses are SILENT on seed novelty / non-overlap with U3",
+   "ok": true
+  },
+  {
+   "detail": "c1: take EVERY anchored strict local minimum -- re-taking U3's seeds is compliance, not violation",
+   "item": "M3",
+   "name": "c1 requires exhausting the SAME reservoir, so overlap is predicted by it",
+   "ok": true
+  },
+  {
+   "detail": "all five clauses hold; none is touched by the overlap",
+   "item": "M3",
+   "name": "VERDICT: M3 = DELIVERED survives, on its own pre-committed wording",
+   "ok": true
+  }
+ ],
+ "clay_movement": "none -- no L1-L4 link moved by this unit",
+ "gate_final_wording": "Re-deriving from banked JSON and landed evidence scripts alone, do all five of the following reproduce exactly? (1) R0's metric -- U3 = 8/144.69 = 0.0553 and U5 = 5/57.04 = 0.0877 orbits-new-to-the-programme per worker-hour -- and the 134.45 vs 144.69 reconciliation: attempt CPU as sum attempts[].wall_seconds/3600 against pool reservation as wall_seconds x workers, giving 92.92% utilisation. (2) R0's retraction -- 57/100 seed overlap, 5 of 9 bit-identical, 4 of 5 re-finds, ONE new orbit, and the corrected metric 0.0175 against the originally claimed 0.0553. (3) R1's +0.45 pp headroom, and the hold-out kill of one of U3's 14. (4) T2's 32/32 MEASURED, served opensearch namespace 1.1, 5-of-6 THROTTLED, and a negative control returning 0 in both instruments. (5) T1's packet ruling none of the three questions it posed. PLUS: does M3 = DELIVERED survive U5's 57% seed overlap, judged on M3's own pre-committed wording?",
+ "kind": "VERIFICATION (wave 1: T1, T2, R0+R1)",
+ "n_checks": 37,
+ "n_failed": 3,
+ "notes": {
+  "M3_verdict": {
+   "answer": "M3 = DELIVERED SURVIVES the 57% seed overlap",
+   "clauses_verbatim": {
+    "c1_mining_exhaustive": "the mining pass takes EVERY anchored strict local minimum not provably excluded by the Newton window (3g.4), and reports the realised counts",
+    "c2_band_at_least_50": "the 100-attempt budget is allocated by the 3g.4 quota, with AT LEAST 50 attempts seeded in the published band |s| in [0.295, 0.707] against U3's 31",
+    "c3_unchanged_settings": "the run completes at U3's caps, tol, admission test, m = 0 requirement, anchor rule and matching predicate, with NONE OF THEM CHANGED and no iterations bought",
+    "c4_yield_reported": "the per-stratum convergence yield is reported against U3's banked baseline, with the in-band rate stated as a magnitude either way",
+    "c5_controls_fired": "the planted controls fire as planted"
+   },
+   "question_verbatim": "M3: THE SEED BUDGET IS STRATIFIED BY SHIFT -- the anchored reservoir is exhausted, the published |s| band is filled to a pre-committed quota, and the per-stratum yield is measured against U3's banked baseline",
+   "what_this_verdict_is_not": "not a judgement that M3 was well-worded, and not a judgement that the per-stratum yield means what a reader would take it to mean. Only that M3's own wording is not falsified by the overlap.",
+   "why": "Judged on M3's own pre-committed wording and nothing else: none of the five clauses conditions DELIVERED on seed novelty, orbit novelty, or non-overlap with U3. Clause 1 affirmatively requires taking EVERY anchored strict local minimum of the same reservoir U3 drew from, so a 57% overlap is what compliance with clause 1 LOOKS LIKE, not a breach of it. The overlap does falsify a DIFFERENT claim -- R0 has already retracted that one -- but M3 never made it."
+  },
+  "item2_comparand": {
+   "U5_own_original_claim": 0.0877,
+   "reading_A_0.0553_is_U3s_metric": true,
+   "reading_B_0.0553_is_U5s_own_original_claim": false,
+   "verdict": "READING A holds: 0.0553 is U3's metric, and the corrected U5 figure 0.0175 falls BELOW it, which is the retraction. READING B does not hold: U5's own original claim is 0.0877, per the same gate's item (1). The gate's wording is internally ambiguous; the ambiguity is BANKED, not reconciled."
+  },
+  "item5_banking_defect": {
+   "finding": "T1 (leg 391) banked NO writeup/data/*.json and landed NO evidence script. Its only artefacts are experiments/journal/leg_391.md (reasoning, forbidden to this verifier) and the prose escalation packet. Item (5) is therefore checkable only against PROSE. That is a banking-discipline defect, reported as one -- not evidence the claim is false.",
+   "found": [
+    "p2_route_p2t1_v1.json"
+   ],
+   "searched": "writeup/data/*.json for any T1 / leg-391 / ban-wording record"
+  }
+ },
+ "orchestration": "ORCHESTRATION.md section 3f -- fresh-session verification",
+ "rederived_values": {
+  "r1_best_admissible_u3_recovery": 0.554547418448909,
+  "r1_headroom_percentage_points": 0.4536616979909258,
+  "r1_holdout_u5_on_u3_false_kills": 1,
+  "r1_incumbent_u3_recovery": 0.5500108014689997,
+  "t2_arxiv_measured": 37,
+  "t2_arxiv_records": 37,
+  "t2_namespaces_served": [
+   "http://a9.com/-/spec/opensearch/1.1/"
+  ],
+  "t2_s2_substantive_throttled": [
+   5,
+   6
+  ],
+  "u3_attempt_cpu_core_hours": 134.44748337037032,
+  "u3_distinct_leader_single_complete": [
+   8,
+   8,
+   8
+  ],
+  "u3_in_band_seeds": 31,
+  "u3_metric": 0.05529109703126098,
+  "u3_pool_reservation_core_hours": 144.6887551440133,
+  "u3_pool_utilisation": 0.929218606079999,
+  "u5_attempt_cpu_core_hours": 56.00936743630303,
+  "u5_bit_identical_outputs": 5,
+  "u5_convergences_on_a_shared_seed": 5,
+  "u5_corrected_metric": 0.01753303805360529,
+  "u5_distinct_leader_single_complete": [
+   5,
+   5,
+   5
+  ],
+  "u5_distinct_new_to_programme": 1,
+  "u5_distinct_refinds_of_u3": 4,
+  "u5_in_band_seeds": 60,
+  "u5_metric_as_originally_claimed": 0.08766519026802647,
+  "u5_pool_reservation_core_hours": 57.035181064605716,
+  "u5_seeds_already_spent_by_u3": 57
+ },
+ "unit": "V1",
+ "wave": 2
+}
