@@ -43,7 +43,7 @@ does not already hold.
 |---|---|---|---|
 | `T4` | `leg/393-t4-repro` | pre-registration `9e36e3c` — apparatus named under C1, controls planted both ways | `experiments/p2_route_t4_v1.py` |
 | `T6` | `leg/394-t6-fulltext` | pre-registration `0ee0b4c`, instrument `c113c6a` | modified `p2_route_t6_v1.py`, **partial `p2_route_t6_v1.json`** |
-| `V1` | `verify/wave1` | pre-registration `fc84241` — gate verbatim, six derivation paths | `p2_verify_wave1_v1_rederive.py`, **partial `p2_verify_wave1_v1.json`** |
+| `V1` | `verify/wave1` | pre-registration `fc84241` — gate verbatim, six derivation paths | **resumed, RAN TO GATE, LANDED `2fb399f`** |
 | `T5` | `leg/395-t5-sweep` | pre-registration `7af3f64` — gate, corpus, patterns, decision rule, both controls | `p2_route_t5_sweep.py`, **partial `p2_route_t5_v1.json`** |
 | `E` | `prog-r4/e-hhard` | pre-registration `70f3962`, diagnostics (1) and (2) at `952b2cf` | evidence script, `build_figures.py`, `fig109_prog_r4_hhard.py` |
 
@@ -58,6 +58,41 @@ successor that has lost `STATE.md` still holds the pre-commitments; **`STATE.md`
 | `T6` / leg 394 | **T**, literature | `leg/394-t6-fulltext` | At **full text**, does each of leg 348's seven papers **confirm**, **strengthen**, or **UNDERCUT** its abstract-level classification? Table, deciding sentence quoted and located. Unobtainable = **`UNREACHABLE`**, never a confirmation. | (a) **an undercut is the valuable branch and is reported first**; if it hits `1902.00384` it lands on `T4` immediately; (b) consistency is **not** strengthening; (c) `UNREACHABLE` ≠ zero; (d) **READ, do not CONTACT**; (e) no S2 key — **`THROTTLED`, never zero** | DISPATCHED |
 | `V1` | verification | `verify/wave1` | Re-deriving **from banked JSON and landed evidence scripts alone**, do all five claims reproduce exactly: R0's metric + the 134.45/144.69 reconciliation; the retraction (57/100, 5/9, 4/5, **ONE** new orbit, 0.0175 vs 0.0553); R1's +0.45 pp and the hold-out kill; T2's 32/32 MEASURED / namespace `1.1` / 5-of-6 THROTTLED; T1 ruling none of the three questions. **Plus: does `M3 = DELIVERED` survive the 57% seed overlap, on M3's own wording?** | (a) agreement is expected and worth little; the value is in (3),(4),(5) and M3; (b) **a disagreement is BANKED, not reconciled** by the verifier; (c) missing field = `UNVERIFIABLE`, not `no`; (d) **must not read** `WALLS.md`, `STATE.md`, `DIRECTION.md`, the briefs, or the wave-1 reasoning | DISPATCHED |
 | `T5` / leg 395 | **T** | `leg/395-t5-sweep` | Grep the landed record for every leg that declined/deferred/narrowed work citing the ℓ¹-Fourier/radii-polynomial ban. For each: **apparatus-based** or **realization-based**? Name which C1 now permits to be re-opened. A zero is instrumented like any other zero. | (a) permitted ≠ recommended — **`T5` ranks nothing and re-opens nothing**; (b) **realization-based refusals stay refused** — C1 supersedes no measurement; (c) if nothing is found, say C1 cost nothing; (d) "both" is filed as realization-based | DISPATCHED |
+
+### `V1` — RETURNED AND LANDED, `2fb399f`, 2026-08-14
+
+**Gate answer: all five wave-1 claims reproduce** from banked JSON and landed evidence scripts
+alone. No banked figure disagreed; distinct-orbit counts held under leader, single and complete
+linkage alike, with the arbiter rule **re-implemented rather than imported**. **The verification
+debt on `T1`, `T2` and `R0`+`R1` is DISCHARGED** — by a worker dispatched in the *following* wave,
+with no memory of the construction it checked (§3f rule 1). `U2`/`U3`/`U5` themselves are still
+`UNVERIFIED`: `V1` checked `R0`'s reading of them, not the runs.
+
+**`M3 = DELIVERED` SURVIVES**, on M3's own pre-committed wording, located in
+`p2_prog_r4_m3_v1.json` → `prog_r4_u2u3_prereg_addendum.md` §3g.3 (AMENDMENT 5) and quoted verbatim
+*before* being judged. **No clause conditions DELIVERED on seed novelty**, and clause 1 *requires*
+exhausting the same reservoir U3 drew from — so the 57% overlap is what compliance looks like. The
+overlap falsifies the per-run orbits-per-core-hour inference, which `R0` already retracted; M3 never
+made that claim. This was the question the Conductor deliberately declined to answer, and handing it
+to the verifier was the right call: the answer went **against** the direction a Conductor protecting
+its own wave would have leaned.
+
+**Two defects banked, not reconciled by the verifier** (its reading (b)):
+1. **`T1` banked NO machine record** — no JSON, no evidence script; item (5) checks out against
+   *prose* only. Reproduced independently by the Conductor with a field-scoped scan: zero hits.
+   A banking-discipline defect in a unit this Conductor landed, **not** evidence the claim is false.
+   T1's gate answer stands. Logged as an **obligation** in `OPTIONS.md` §F.
+2. **The gate's own comparand was ambiguous** — the Conductor's wording, not `V1`'s work, and `V1`
+   was right to refuse to decide it. **RULED:** reading A was meant. `0.0553` is **U3's baseline**
+   (`8/144.688755`); the retraction's point is that the corrected `0.0175` falls *below* it. Reading
+   B fails arithmetically — U5's own original is `0.0877`, as the same gate's item (1) says.
+
+**Audit trail, performed by the Conductor and not taken on report:** territory clean (exactly its
+three allocated files); pre-registration landed before the first re-derivation; **run 1 committed as
+it ran** (`0633494`, exit 1, 34/37) *before* its repair, with all three failures being defects in
+`V1`'s own script and **no wave-1 artefact adjusted to make a check pass** — the instrument was
+repaired, never the evidence; evidence script re-run from the branch by the Conductor, **exit 0,
+38/38**; both findings reproduced independently.
 
 **Composition floor (§3g):** met from **Lane T, by three units** (`T4`, `T6`, `T5`).
 **§3f rule 3:** `E` was an instrument task; `T4` is the construction unit that discharges the rule.

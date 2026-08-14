@@ -146,3 +146,20 @@ result** — it is the one that would tell the user whether the Tier-2 ceiling i
 - **The verification debt.** Every `PROG-R4` unit — U2, U3, U5 — and both wave-1 Lane R units are
   **`UNVERIFIED`** under §3f. A candidate emerging from an unverified pipeline is worth a fraction
   of one that did not.
+  **UPDATED 2026-08-14 — PARTIALLY DISCHARGED.** `V1` (`verify/wave1`, landed) verified the wave-1
+  units `T1`, `T2` and `R0`+`R1`: all five claims reproduce from banked JSON and landed evidence
+  scripts alone, and `M3 = DELIVERED` survives U5's 57% seed overlap on M3's own pre-committed
+  wording. **`U2`, `U3` and `U5` themselves remain `UNVERIFIED`** — `V1` checked `R0`'s *reading* of
+  them, not the runs. **Wave 2's own units are `UNVERIFIED` and wave 3 must carry their verifier.**
+
+- **`T1` OWES A MACHINE RECORD. Found by `V1`, 2026-08-14; an obligation, not an option.** Leg 391
+  landed **no `writeup/data/*.json` and no evidence script**. Its gate answer checks out against
+  **prose only** — `writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md`. Confirmed by a
+  field-scoped scan of every banked JSON's `leg`/`route`/`unit` fields: **zero hits**. Lesson 68
+  says a check that is not executable decays at the rate of memory, and T1's does not exist. **This
+  does not disturb T1's gate answer** and is not evidence the claim is false (`V1` reading (c)); it
+  is a banking-discipline defect in a unit this Conductor landed. Owed: a banked record of the
+  packet's three questions and the fact that it ruled none of them, with an evidence script that
+  exits non-zero if the record and the escalation document disagree. Cheap — well under an hour.
+  **Note for whoever takes it:** filename-substring search is insufficient and will mislead you —
+  `p2_route_p2t1_v1.json` is **leg 302, route P2T1**, unrelated.
