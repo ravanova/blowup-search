@@ -61,7 +61,7 @@ OUT = ROOT / "writeup" / "data" / "p2_route_t6_v1.json"
 PAPERS = ROOT / "Papers"          # gitignored on purpose; PDFs are never committed
 TEXTS = PAPERS / "t6_text"        # extracted text, also gitignored
 
-ARXIV_API = "http://export.arxiv.org/api/query?"
+ARXIV_API = "https://export.arxiv.org/api/query?"
 ARXIV_PDF = "https://arxiv.org/pdf/"
 
 DELAY_S = 12.0     # leg 348/392's spacing, kept; unauthenticated, pace politely
@@ -131,8 +131,18 @@ def _sha(b: bytes) -> str:
 # half of control K5.
 # ---------------------------------------------------------------------------
 def fetch_abstract(arxiv_id: str, tries: int = 4) -> dict:
+    # INSTRUMENT REPAIR R1, recorded not hidden (see journal sec 2.1).  The first
+    # run of this file used `search_query=id:<id>`, which returns
+    # opensearch:totalResults = 0 for OLD-STYLE arXiv ids (math/0005247) while
+    # returning 1 for new-style ids.  That is a would-be FABRICATED ZERO of exactly
+    # leg 387's kind: a well-formed HTTP 200 whose count is an artefact of the
+    # query field, not of the literature.  It was caught because the same paper's
+    # FULL TEXT fetched fine (32 pages, 91978 chars) in the same run -- an
+    # inconsistency a single-instrument leg would not have seen.  The repair is the
+    # `id_list` parameter, which is arXiv's documented id lookup and returns 1 for
+    # both id shapes; and the ARTEFACT rule below, which refuses to bank a zero.
     url = ARXIV_API + urllib.parse.urlencode(
-        {"search_query": f"id:{arxiv_id}", "max_results": 1, "start": 0}
+        {"id_list": arxiv_id, "max_results": 1, "start": 0}
     )
     rec = {
         "id": arxiv_id,
@@ -190,6 +200,17 @@ def fetch_abstract(arxiv_id: str, tries: int = 4) -> dict:
     titles = _TITLE.findall(text)
     rec["abstract"] = _clean(summ.group(1)) if summ else None
     rec["title"] = _clean(titles[1]) if len(titles) > 1 else None
+    # REPAIR R1's second half.  An id lookup of a paper this leg is simultaneously
+    # DOWNLOADING cannot honestly return zero.  A zero here is an INSTRUMENT
+    # ARTEFACT and is banked as one -- never as an absence, never as a zero.
+    if rec["total"] == 0 or rec["abstract"] is None:
+        rec["status"] = "ARTEFACT"
+        rec["note"] = (
+            "HTTP 200 and namespace served, but totalResults=0 / no summary for an id "
+            "whose full text is retrievable -- banked as an instrument artefact, NOT as "
+            "an absence and NOT as a zero"
+        )
+        return rec
     rec["status"] = "MEASURED"
     return rec
 
