@@ -1,5 +1,5 @@
 {
- "answer": "MISMATCH -- see failed checks",
+ "answer": "ALL FIVE REPRODUCE; M3 = DELIVERED SURVIVES",
  "base": "main @ c1a8d5e",
  "ceiling": "TIER 2. Confirming arithmetic is not a link of the L1->L4 chain. Nothing this unit returns is movement toward Clay. Clay ~0.05%.",
  "checks": [
@@ -124,10 +124,16 @@
    "ok": true
   },
   {
-   "detail": "37 records: 37 MEASURED (32 substantive + 5 controls)",
+   "detail": "32 substantive, 32 MEASURED",
    "item": "4",
-   "name": "32 arXiv query records, 32 MEASURED, 0 THROTTLED, 0 FAILED",
-   "ok": false
+   "name": "32/32 substantive arXiv queries MEASURED, 0 THROTTLED, 0 FAILED",
+   "ok": true
+  },
+  {
+   "detail": "5 controls, 5 MEASURED; 37 arXiv records in total",
+   "item": "4",
+   "name": "the 32 EXCLUDES controls: 5 further control records, 5/5 MEASURED",
+   "ok": true
   },
   {
    "detail": "['http://a9.com/-/spec/opensearch/1.1/']",
@@ -160,16 +166,16 @@
    "ok": true
   },
   {
-   "detail": "search returned ['p2_route_p2t1_v1.json'] (empty = defect confirmed)",
+   "detail": "search returned [] (empty = defect confirmed)",
    "item": "5",
    "name": "BANKING DEFECT NAMED: no T1 JSON exists under writeup/data/",
-   "ok": false
+   "ok": true
   },
   {
-   "detail": "{'A': 2, 'B': 0, 'C': 2}",
+   "detail": "{'A': 2, 'B': 2, 'C': 2}",
    "item": "5",
    "name": "the packet poses THREE ban-wording questions, each with TWO readings",
-   "ok": false
+   "ok": true
   },
   {
    "detail": "both self-statements present verbatim",
@@ -229,8 +235,8 @@
  "clay_movement": "none -- no L1-L4 link moved by this unit",
  "gate_final_wording": "Re-deriving from banked JSON and landed evidence scripts alone, do all five of the following reproduce exactly? (1) R0's metric -- U3 = 8/144.69 = 0.0553 and U5 = 5/57.04 = 0.0877 orbits-new-to-the-programme per worker-hour -- and the 134.45 vs 144.69 reconciliation: attempt CPU as sum attempts[].wall_seconds/3600 against pool reservation as wall_seconds x workers, giving 92.92% utilisation. (2) R0's retraction -- 57/100 seed overlap, 5 of 9 bit-identical, 4 of 5 re-finds, ONE new orbit, and the corrected metric 0.0175 against the originally claimed 0.0553. (3) R1's +0.45 pp headroom, and the hold-out kill of one of U3's 14. (4) T2's 32/32 MEASURED, served opensearch namespace 1.1, 5-of-6 THROTTLED, and a negative control returning 0 in both instruments. (5) T1's packet ruling none of the three questions it posed. PLUS: does M3 = DELIVERED survive U5's 57% seed overlap, judged on M3's own pre-committed wording?",
  "kind": "VERIFICATION (wave 1: T1, T2, R0+R1)",
- "n_checks": 37,
- "n_failed": 3,
+ "n_checks": 38,
+ "n_failed": 0,
  "notes": {
   "M3_verdict": {
    "answer": "M3 = DELIVERED SURVIVES the 57% seed overlap",
@@ -245,6 +251,14 @@
    "what_this_verdict_is_not": "not a judgement that M3 was well-worded, and not a judgement that the per-stratum yield means what a reader would take it to mean. Only that M3's own wording is not falsified by the overlap.",
    "why": "Judged on M3's own pre-committed wording and nothing else: none of the five clauses conditions DELIVERED on seed novelty, orbit novelty, or non-overlap with U3. Clause 1 affirmatively requires taking EVERY anchored strict local minimum of the same reservoir U3 drew from, so a 57% overlap is what compliance with clause 1 LOOKS LIKE, not a breach of it. The overlap does falsify a DIFFERENT claim -- R0 has already retracted that one -- but M3 never made it."
   },
+  "instrument_repairs_after_run_1": {
+   "finding": "All three run-1 FAILs were defects in THIS SCRIPT, not disagreements with wave 1. Named here so the repair is auditable and cannot be mistaken for a moved goalpost.",
+   "nothing_in_wave_1_was_adjusted": true,
+   "repair_1": "item 4: I folded T2's 5 planted controls into the 32 and got 37. The 32 are the SUBSTANTIVE queries; controls are 5 further records. My own pre-registration named 'whether controls are inside or outside the 32' as part of the check -- measured answer: OUTSIDE. Both counts now asserted separately.",
+   "repair_2": "item 5: my filename-substring search for a T1 JSON matched p2_route_p2t1_v1.json, which is leg 302 route P2T1 and unrelated. Replaced by a scan of every banked JSON's own leg/route/unit provenance fields.",
+   "repair_3": "item 5: my heading regex assumed '### READING B1'; the packet writes '### 2. READING B1'. Pattern now tolerates both.",
+   "run_1": "commit 0633494 on verify/wave1, exit 1, 34/37"
+  },
   "item2_comparand": {
    "U5_own_original_claim": 0.0877,
    "reading_A_0.0553_is_U3s_metric": true,
@@ -253,9 +267,7 @@
   },
   "item5_banking_defect": {
    "finding": "T1 (leg 391) banked NO writeup/data/*.json and landed NO evidence script. Its only artefacts are experiments/journal/leg_391.md (reasoning, forbidden to this verifier) and the prose escalation packet. Item (5) is therefore checkable only against PROSE. That is a banking-discipline defect, reported as one -- not evidence the claim is false.",
-   "found": [
-    "p2_route_p2t1_v1.json"
-   ],
+   "found": [],
    "searched": "writeup/data/*.json for any T1 / leg-391 / ban-wording record"
   }
  },

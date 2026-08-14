@@ -28,7 +28,26 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 D = os.path.join(ROOT, "writeup", "data")
 
 CHECKS = []
-NOTES = {}
+NOTES = {
+    "instrument_repairs_after_run_1": {
+        "run_1": "commit 0633494 on verify/wave1, exit 1, 34/37",
+        "finding": ("All three run-1 FAILs were defects in THIS SCRIPT, not "
+                    "disagreements with wave 1. Named here so the repair is "
+                    "auditable and cannot be mistaken for a moved goalpost."),
+        "repair_1": ("item 4: I folded T2's 5 planted controls into the 32 and got "
+                     "37. The 32 are the SUBSTANTIVE queries; controls are 5 further "
+                     "records. My own pre-registration named 'whether controls are "
+                     "inside or outside the 32' as part of the check -- measured "
+                     "answer: OUTSIDE. Both counts now asserted separately."),
+        "repair_2": ("item 5: my filename-substring search for a T1 JSON matched "
+                     "p2_route_p2t1_v1.json, which is leg 302 route P2T1 and "
+                     "unrelated. Replaced by a scan of every banked JSON's own "
+                     "leg/route/unit provenance fields."),
+        "repair_3": ("item 5: my heading regex assumed '### READING B1'; the packet "
+                     "writes '### 2. READING B1'. Pattern now tolerates both."),
+        "nothing_in_wave_1_was_adjusted": True,
+    },
+}
 
 
 def check(item, name, ok, detail=""):
@@ -287,13 +306,22 @@ for fam in trig["queries"].values():
     arx.extend(fam)
 n_meas = sum(1 for q in arx if q["status"] == "MEASURED")
 n_thr = sum(1 for q in arx if q["status"] == "THROTTLED")
-n_fail = sum(1 for q in arx if q["status"] == "FAILED")
+n_arx_fail = sum(1 for q in arx if q["status"] == "FAILED")
 subst = [q for fam in trig["queries"].values() for q in fam]
 
-check("4", "32 arXiv query records, 32 MEASURED, 0 THROTTLED, 0 FAILED",
-      len(arx) == 32 and n_meas == 32 and n_thr == 0 and n_fail == 0,
-      "%d records: %d MEASURED (%d substantive + %d controls)"
-      % (len(arx), n_meas, len(subst), len(trig["controls"])))
+# The pre-registration named "whether controls are inside or outside the 32" as
+# itself part of this check. Answer, measured: OUTSIDE. The 32 are the SUBSTANTIVE
+# queries across the six families; the 5 planted controls are a further 5 records,
+# also all MEASURED. Both counts are asserted, so neither can drift.
+n_meas_sub = sum(1 for q in subst if q["status"] == "MEASURED")
+n_meas_ctl = sum(1 for q in trig["controls"] if q["status"] == "MEASURED")
+check("4", "32/32 substantive arXiv queries MEASURED, 0 THROTTLED, 0 FAILED",
+      len(subst) == 32 and n_meas_sub == 32 and n_thr == 0 and n_arx_fail == 0,
+      "%d substantive, %d MEASURED" % (len(subst), n_meas_sub))
+check("4", "the 32 EXCLUDES controls: 5 further control records, 5/5 MEASURED",
+      len(trig["controls"]) == 5 and n_meas_ctl == 5 and len(arx) == 37,
+      "%d controls, %d MEASURED; %d arXiv records in total"
+      % (len(trig["controls"]), n_meas_ctl, len(arx)))
 
 ns = sorted({q.get("opensearch_namespace_served") for q in arx})
 check("4", "served opensearch namespace is 1.1, and only 1.1",
@@ -336,8 +364,23 @@ print("\n=== ITEM 5 -- T1's packet ===")
 PK = os.path.join(ROOT, "writeup", "escalations",
                   "ESCALATION_BAN_WORDING_2026-08-13.md")
 txt = open(PK).read()
-t1_json = [f for f in os.listdir(D)
-           if "391" in f or "t1" in f.lower() or "ban_wording" in f.lower()]
+# Precise search: a filename substring match is too loose (p2_route_p2t1_v1.json is
+# leg 302, route P2T1, unrelated). Scan every banked JSON's OWN provenance fields.
+t1_json = []
+for f in sorted(os.listdir(D)):
+    if not f.endswith(".json"):
+        continue
+    try:
+        with open(os.path.join(D, f)) as fh:
+            j = json.load(fh)
+    except Exception:
+        continue
+    if not isinstance(j, dict):
+        continue
+    if (str(j.get("leg", "")) == "391"
+            or "ban_wording" in str(j.get("route", "")).lower()
+            or re.search(r"\bT1\b.*WAVE 1", str(j.get("unit", "")))):
+        t1_json.append(f)
 NOTES["item5_banking_defect"] = {
     "searched": "writeup/data/*.json for any T1 / leg-391 / ban-wording record",
     "found": t1_json,
@@ -351,7 +394,10 @@ NOTES["item5_banking_defect"] = {
 check("5", "BANKING DEFECT NAMED: no T1 JSON exists under writeup/data/",
       t1_json == [], "search returned %r (empty = defect confirmed)" % (t1_json,))
 
-readings = {L: len(re.findall(r"^### READING %s[12]\b" % L, txt, re.M)) for L in "ABC"}
+# (b)'s reading headings carry a numbered prefix ("### 2. READING B1"), (a)'s and
+# (c)'s do not. The pattern tolerates both rather than assuming one house style.
+readings = {L: len(re.findall(r"^###\s*(?:\d+\.\s*)?READING %s[12]\b" % L, txt, re.M))
+            for L in "ABC"}
 check("5", "the packet poses THREE ban-wording questions, each with TWO readings",
       readings == {"A": 2, "B": 2, "C": 2}
       and "Not a ban-wording question" in txt, readings)
