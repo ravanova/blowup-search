@@ -172,5 +172,147 @@ returns is movement toward Clay, whatever it returns. Clay stays ~0.05%.
 
 ## §5 — RESULTS
 
-(filled in after the re-derivation script was written and run; see
-`writeup/data/p2_verify_wave1_v1.json` for the machine record)
+`experiments/p2_verify_wave1_v1_rederive.py` — **38 checks, 38 passed, EXIT 0.**
+Machine record: `writeup/data/p2_verify_wave1_v1.json`.
+
+**ANSWER TO THE GATE: all five reproduce, and `M3 = DELIVERED` survives.**
+
+Per reading (a), agreement is expected and worth little, so the reproductions are
+tabulated and not argued. The effort below is spent on the four places where something
+could have been wrong.
+
+| # | claim | re-derived | verdict |
+|---|---|---|---|
+| 1 | U3 = 8/144.69 = 0.0553 | 144.688755, 0.05529110 | reproduces |
+| 1 | U5 = 5/57.04 = 0.0877 | 57.035181, 0.08766519 | reproduces |
+| 1 | 134.45 vs 144.69 → 92.92% | 134.447483 / 144.688755 = 0.929219 | reproduces |
+| 2 | 57/100 seed overlap | 57/100 | reproduces |
+| 2 | 5 of 9 bit-identical | 5 shared-seed, 5 bit-identical of 9 | reproduces |
+| 2 | 4 of 5 re-finds, ONE new | 4 re-finds, 1 new (T=20.417511, \|s\|=0.586670, UPO37, attempt 7) | reproduces |
+| 2 | corrected 0.0175 | 1/57.035181 = 0.01753304 | reproduces |
+| 3 | +0.45 pp headroom | 0.45366170 pp | reproduces |
+| 3 | hold-out kill of one of U3's 14 | 1 false kill of 14 | reproduces |
+| 4 | 32/32 MEASURED | 32 substantive, 32 MEASURED (+5 controls, 5/5) | reproduces |
+| 4 | namespace `1.1` | `http://a9.com/-/spec/opensearch/1.1/`, sole value | reproduces |
+| 4 | 5-of-6 THROTTLED | 5/6, every one `total = None` | reproduces |
+| 4 | negative control 0 in both | arXiv 0 / S2 0, same query string | reproduces |
+| 5 | packet rules none of three | (a),(b),(c) × 2 readings, none ruled | reproduces (prose only) |
+
+### The four things worth reporting
+
+**(i) A BANKING-DISCIPLINE DEFECT, not a `no`. T1 banked no machine record.**
+Under this gate's own evidence standard — "banked JSON and landed evidence scripts
+alone" — item (5) is the one item that **cannot** be met, because T1 (leg 391) landed
+**no `writeup/data/*.json` and no evidence script**. Its artefacts are
+`experiments/journal/leg_391.md` (reasoning, forbidden to me) and the prose packet
+`writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md`.
+
+The search I ran, so the absence is auditable: every `writeup/data/*.json` was opened and
+its own `leg` / `route` / `unit` provenance fields scanned for `391`, `ban_wording`, or a
+`T1 … WAVE 1` unit string. **Zero hits.** (A filename-substring search is not sufficient
+here: it returns `p2_route_p2t1_v1.json`, which is leg **302**, route **P2T1**, and
+unrelated.)
+
+So the claim itself checks out against the landed packet — the packet states
+*"This packet rules nothing"* and *"It ruled none of (a), (b), (c). No reading is endorsed,
+preferred, ranked, or recommended"*, and structurally carries exactly two READING sections
+for each of (a), (b) and (c), with (d) explicitly labelled *"Not a ban-wording question"*.
+But it checks out **against prose, not against a machine record**. Per reading (c) this is
+reported as a defect in the banking discipline, naming the absent file. It is **not**
+evidence the claim is false. A future unit of this shape should bank the packet's
+per-question verdict as JSON so the next verifier is not reduced to grepping headings.
+
+**(ii) AN AMBIGUITY INSIDE THE GATE'S OWN WORDING. Banked, not reconciled.**
+Item (2) asks for *"the corrected metric 0.0175 against the originally claimed 0.0553."*
+Two readings of `0.0553` are available and exactly one holds:
+
+- **Reading A — `0.0553` is U3's metric.** HOLDS. `8/144.688755 = 0.05529110 → 0.0553`
+  (`writeup/data/p2_prog_r4_g1_v1.json`, `magnitudes.wall_seconds` × `magnitudes.workers`).
+  The corrected U5 figure `0.0175` falls **below** it — which is exactly the retraction.
+- **Reading B — `0.0553` is U5's own originally claimed metric.** DOES NOT HOLD. U5's own
+  original claim is `5/57.035181 = 0.08766519 → 0.0877`, as **the same gate's item (1)**
+  states (`writeup/data/p2_prog_r4_m3_v1.json`).
+
+I do not re-word the gate and I do not decide which was meant. Both numbers, both
+derivations, and both source files are stated; **the Conductor reconciles, not me.** Note
+this is an ambiguity in the *gate text*, not a disagreement with any banked figure — every
+banked figure reproduced bit-identically.
+
+**(iii) The metric re-derivation is genuinely independent, and survives its robustness
+check.** The distinct-orbit counts were not read from `R0`; they were re-clustered from
+`attempts[].{T_converged, |s_converged|}` under the rule R0 itself names as arbiter
+(`experiments/p2_prog_r4_m3_evidence.py` §§35–53, 70–81), **re-implemented here rather than
+imported**, so a bug in the arbiter would surface as a disagreement instead of being
+inherited. U3 = 8 and U5 = 5 under **leader/greedy, single-linkage and complete-linkage
+alike** — the counts are not an artefact of the greedy ordering. Likewise R1: the abort
+criterion was re-implemented from its stated family and reproduces `4629 → 2083` epochs and
+`0.5500108014689997` **to the last bit**, and the hold-out kill of one of U3's 14 lands on
+the same attempt.
+
+**(iv) Instrument honesty.** Run 1 (`0633494`, exit 1) failed three checks. All three were
+defects in **my own script**, not in wave 1; each is named in
+`notes.instrument_repairs_after_run_1` in the banked JSON, the failing run is committed
+before its repair, and no wave-1 artefact was adjusted. Recorded because a verifier that
+silently repairs itself between runs is indistinguishable from one that moved its target.
+
+### THE M3 QUESTION
+
+**Located** — M3's pre-committed wording is in the banked record twice, in agreement:
+`writeup/data/p2_prog_r4_m3_v1.json` → `milestone.question` + `milestone.clauses`, whose
+`preregistered` field points to `experiments/journal/prog_r4_u2u3_prereg_addendum.md`
+§3g.3 (AMENDMENT 5), *"committed before either stage ran"*. **Quoted verbatim from §3g.3:**
+
+> **M3: THE SEED BUDGET IS STRATIFIED BY SHIFT — the anchored reservoir is exhausted, the
+> published `|s|` band is filled to a pre-committed quota, and the per-stratum yield is
+> measured against U3's banked baseline.**
+>
+> **DELIVERED** iff all five hold:
+>
+> 1. the mining pass takes **every** anchored strict local minimum not provably excluded by
+>    the Newton window (§3g.4), and reports the realised counts;
+> 2. the 100-attempt budget is allocated by the §3g.4 quota, with **at least 50** attempts
+>    seeded in the published band `|s| ∈ [0.295, 0.707]` against U3's 31;
+> 3. the run completes at U3's caps, `tol`, admission test, `m = 0` requirement, anchor rule
+>    and matching predicate, with **none of them changed** and no iterations bought;
+> 4. the per-stratum convergence yield is reported against U3's banked baseline, with the
+>    in-band rate stated as a magnitude either way;
+> 5. the planted controls fire as planted.
+
+**ANSWER: `M3 = DELIVERED` SURVIVES the 57% seed overlap.**
+
+Judged on that wording and on nothing else, per reading (d):
+
+- **No clause conditions DELIVERED on seed novelty**, orbit novelty, or non-overlap with
+  U3. The five clauses are about *exhaustiveness of the mining*, *in-band quota*, *unchanged
+  settings*, *yield reporting*, and *controls*. Seed novelty is absent from all five.
+- **Clause 1 does more than stay silent — it predicts the overlap.** It requires taking
+  **every** anchored strict local minimum of the same anchored reservoir U3 drew from. A
+  large overlap with U3's spend is what compliance with clause 1 *looks like*; a low overlap
+  would be the thing needing explanation. The overlap is a consequence of the clause, not a
+  breach of it.
+- The clauses the overlap could conceivably touch were re-derived, not read: **clause 2** —
+  60 in-band seeds against U3's 31, ≥ 50 (re-counted from `attempts[].s_seed` under the
+  same `wrap_abs` convention); **clause 3** — `tol`, `max_newton`, `max_gmres`, `gmres_rtol`,
+  `N`, `Re`, `T_dns`, `n_attempts` all equal to U3's; **clause 5** — controls fired as
+  planted, zero failures.
+
+**What this answer is not.** It is not a finding that M3 was *well*-worded. The overlap
+does falsify a different claim — the per-run distinct-orbits-per-core-hour inference — and
+`R0` has already retracted that one. M3 simply never made it. If the programme wants a
+milestone whose DELIVERED implies novel supply, that requirement has to be *written into*
+the milestone before the run; it was not written into M3, and I decline to read it in after
+the fact.
+
+### §3d RESOURCING
+
+No item returned `UNDER-RESOURCED`. Every item was answerable at the scale posed, from
+banked artefacts, at negligible cost (the whole re-derivation runs in seconds). No stop
+fires from this unit.
+
+### CEILING
+
+**TIER 2. Not a proof, and not movement toward Clay.** Confirming arithmetic is not a link
+of the `L1 → L4` chain, and no such link moved. Clay stays ~0.05%. Five reproductions buy
+the programme almost nothing (reading (a)); what this unit actually delivers is (i) the
+named banking defect at T1 and (ii) the gate-text ambiguity at item (2), both handed to the
+Conductor un-reconciled.
