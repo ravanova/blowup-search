@@ -152,6 +152,30 @@ result** — it is the one that would tell the user whether the Tier-2 ceiling i
   wording. **`U2`, `U3` and `U5` themselves remain `UNVERIFIED`** — `V1` checked `R0`'s *reading* of
   them, not the runs. **Wave 2's own units are `UNVERIFIED` and wave 3 must carry their verifier.**
 
+- **THE CHEN–HOU THREAD — the best lead the programme now has on the compact-domain obstruction.
+  Found by `T6`, 2026-08-14, as a near-miss it recorded rather than dropped.** `arXiv:2308.01528` §1
+  describes Chen–Hou as **computer-assisted blow-up on an UNBOUNDED domain in >1D with algebraic
+  decay** — which is the exact combination leg 348's obstruction says the Galerkin-plus-tail bridge
+  cannot reach. It **does not** fire U6: the target is stationary self-similar rather than
+  time-periodic, and the apparatus is energy estimates rather than Galerkin-plus-tail. So it is not
+  a counter-instance to the obstruction as posed. **It is the sharpest available attack on the
+  obstruction itself**, and it points at Lane L / route 4's actual geometry rather than at `T³`.
+  Unranked here; ranking is done in a wave plan, not in the ledger.
+
+- **`O1`, THE TMS BUILD (leg 315) — RE-OPENABLE UNDER C1. Found by `T5`, 2026-08-14.** Sonic-point-
+  desingularized **Taylor-model flow-map enclosure**. The C1 scope test passes on leg 315's own
+  text: a flow map on a **finite-dimensional ODE**, which *"needs **no function space**."* Leg 315
+  refused it citing the ban and explicitly declined to lift it on its own reading. **This is the
+  genuinely new item C1 bought**, and note where it points — **Lane V's direction, not Lane T's.**
+  Still subject in full to C1's naming requirement. `T5` ranked nothing and neither does this entry.
+
+- **LEG 257 IS *NOT* RE-OPENABLE, and the reason is the known live defect.** `T5` measured that leg
+  257's apparatus **is** the Corollary-21 radii polynomial (`capabilities.py:518-522`) merely in a
+  **fourth space** — and C1 says a `Y₀/Z₀/Z₁/Z₂` contraction **in any space** is inside the ban.
+  **A fourth SPACE is not a fourth APPARATUS.** Legs 262 and 273 refuse *spaces*, which would need a
+  **lift**; C1 was a *scoping* and left that clause unrepaired. Recorded so no later unit mistakes
+  the fourth-space mismatch for an opening.
+
 - **`T1` OWES A MACHINE RECORD. Found by `V1`, 2026-08-14; an obligation, not an option.** Leg 391
   landed **no `writeup/data/*.json` and no evidence script**. Its gate answer checks out against
   **prose only** — `writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md`. Confirmed by a

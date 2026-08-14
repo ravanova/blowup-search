@@ -7,7 +7,30 @@ every stop. A fresh session reads this at Step 0b before dispatching anything.
 
 ---
 
-## LIVE — CONDUCTOR mode, wave 2 IN FLIGHT, 2026-08-14
+## LIVE — CONDUCTOR mode, wave 2 COMPLETE AND INTEGRATED, 2026-08-14
+
+**ALL FOUR WAVE-2 UNITS HAVE RETURNED, BEEN AUDITED AND LANDED.** `main` = pushed below. `E` (wave 1)
+is still in flight. **The wave's result is that Lane T's central premise was false**, measured twice
+by two instruments, and the record has been corrected rather than defended.
+
+| unit | gate answer | landed |
+|---|---|---|
+| `T4` | **`STOP`, pre-committed branch (c)** — `1902.00384` is certified by the BANNED apparatus and both rows are **2D lifts** | `2c87244` |
+| `T6` | **7/7 read. 2 UNDERCUT / 4 strengthen / 1 confirm.** 0 UNREACHABLE, 0 THROTTLED, 0 zeros | `e7db624` |
+| `V1` | **all five wave-1 claims reproduce; `M3 = DELIVERED` SURVIVES**; two defects banked | `2fb399f` |
+| `T5` | **7 refusals, APPARATUS 5 / REALIZATION 2, 2 re-openable and unranked** | `a6f0c38` |
+
+**OPEN ESCALATION, AWAITING THE USER:** `writeup/escalations/ESCALATION_C1_EXEMPLAR_2026-08-14.md`.
+C1's *general proposition* stands; its *exemplar* has fallen. Three questions are put; none is the
+Conductor's to answer. **Work has not stopped.**
+
+**What the next Conductor must do first:** gate and land whatever `prog-r4/e-hhard` holds, then plan
+wave 3 — which **must carry the wave-2 verifier**, since this Conductor planned `T4`, `T6`, `T5` and
+may not check them.
+
+---
+
+## Wave 2 as dispatched — CONDUCTOR mode, 2026-08-14
 
 **Read this block, not the ⛔ STOP block below it.** That stop is real history and is retained, but
 it was **superseded by the user's CONDUCTOR-mode restart of 2026-08-13**. There are no longer four
@@ -1253,3 +1276,28 @@ One short paragraph each: what happened, how it was diagnosed, what changed as a
   interruption is not a licence to re-scope, and for `V1` specifically not a licence to go looking
   for orientation in a file it was forbidden to read. Re-spawning cold would have been the expensive
   path and would have put fresh, un-pre-registered workers on gates that were already committed.
+
+- **2026-08-14 — the rule adopted from leg 387 caught leg 387's bug in a different leg, in flight.**
+  `T6`'s run 1 queried arXiv with `search_query=id:` and got `totalResults=0` for an old-style arXiv
+  id. **That is leg 387's exact failure shape**: a clean, controlled, entirely fabricated zero,
+  forming again. This time it did not land. It was caught by **endpoint disagreement** — the rule
+  that an instrument whose negative branch is a zero must bank a positive datum proving it reached
+  the service — fixed to `id_list=`, and a hard `ARTEFACT` rule was added so such a zero can never be
+  banked as an absence. The parser names no namespace version. `T6` recorded the repair as `R1`
+  rather than hiding it, and committed the failing run. **Result: the leg-387 rule is not
+  bookkeeping. It has now paid for itself once, against a different endpoint parameter than the one
+  that produced it.** Keep it in every dispatch brief whose negative branch can be a zero.
+
+- **2026-08-14 — a 45-leg-old classification was load-bearing and had never been checked, and its
+  disqualifying sentence was in the abstract the whole time.** Leg 348 classified seven papers **at
+  abstract level** and declared, in its own words, that a full-text pass could strengthen *or
+  undercut* it. That flag sat undischarged while `WALLS.md`'s W2 crack, `CLAY_ROADMAP.md` §7.6, the
+  Lane T priority-1 ranking and an escalation packet were all built on top of it. `T4` and `T6`
+  independently found the classification wrong. **The apparatus half was not even a full-text
+  finding** — `arXiv:1902.00384`'s abstract says *"a Newton-Kantorovich theorem is applied"* on *"a
+  Banach space of geometrically decaying Fourier coefficients"*, which is the banned apparatus,
+  named in the text leg 348 read. **Result:** when a leg declares its own ceiling, the ceiling is an
+  **obligation with a deadline**, not a footnote — and a classification may not become load-bearing
+  in `WALLS.md` or a lane ranking until it is discharged. The user's instruction to run `T6` **early,
+  precisely because it could undercut the lane**, is the only reason this cost one wave instead of
+  another forty-five legs.

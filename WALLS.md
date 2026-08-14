@@ -241,6 +241,15 @@ The four results:
    rescaled Navier–Stokes system is genuinely parabolic.
 2. **`T³` is exactly the domain the obstruction asks for.** Compact, discrete Fourier basis,
    exponential decay. Leg 390's census: **6 compact/periodic instances, 0 unbounded.**
+   **⚠ THE CENSUS COUNT IS SUSPECT AS OF 2026-08-14 — leg 394 / `T6` (`e7db624`).** At full text,
+   **`arXiv:2409.09234` does not belong in leg 348's `domain_census`**: its rigorous content is a
+   theorem about a 1-D map fitted to DNS data — no interval arithmetic, no Galerkin-plus-tail, no
+   tail-domination estimate — and **its domain carries no-slip walls, not periodicity**. The authors:
+   *"our results, depending on numerical approximations, do not guarantee that the Navier-Stokes
+   solutions exhibit chaotic behaviour in the sense of Devaney."* **Leg 348's census over-counts by
+   one, and leg 390's figure inherits from it. Re-check before citing this count again.** The
+   direction of the correction does not threaten item 2 — the removed instance was compact-domain
+   only by miscount — but the number is wrong and is not to be repeated as read.
 3. ~~**`arXiv:1902.00384` already certifies a periodic orbit of 3D Navier–Stokes on `T³` with the
    viscous term inside the certified equation.** The technology closes there, demonstrated, for
    exactly our equation.~~ **RETRACTED 2026-08-14 by leg 393 / `T4` (`2c87244`). Both certified rows

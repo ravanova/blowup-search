@@ -101,13 +101,34 @@ abstract the whole time — this was not even a full-text-only finding on the ap
 
 ## 6. Work has not stopped
 
-`T6` is **still running** and is independently reading all seven of leg 348's papers at full text,
-including this one. **It has NOT been told what `T4` found.** That is deliberate: it preserves an
-independent replication of this classification, and contaminating it would destroy the only
-cross-check available. If `T6` returns the same undercut without prompting, the finding is measured
-twice by two instruments.
+**UPDATE, same day — `T6` HAS RETURNED, AND IT REPLICATED THE FINDING INDEPENDENTLY** (landed
+`e7db624`). It was never told what `T4` found. It reached the same conclusion by a **different
+method** — reading the authors' prose, where `T4` reproduced from their published data package — and
+it has the sentence outright:
 
-`T5` and `E` are also still running and are unaffected.
+> *"While all of the analysis is performed in full generality on the 3-torus, the solutions we
+> present in Theorem 1.1 below are two-dimensional (in space) time-periodic solutions"* … *"they are
+> independent of `x₃` and the third component of the velocity vanishes."* — §1, p.3
+
+**Verified by the Conductor directly against the PDF, in both workers' separately fetched copies**
+(lines 118 and 132). Two independent fetches, two independent methods, one conclusion. **This is no
+longer a judgement call.** `T6` independently confirms the apparatus finding too: Theorem 2.15 (p.13)
+is literally a `Y₀/Z₀/Z₁/Z₂` radii-polynomial contraction with a bounded approximate inverse.
+
+**`T6` also found a second, separate undercut** you should know about when ruling: `arXiv:2409.09234`
+does not belong in leg 348's `domain_census` at all — 1-D map fitted to DNS data, no-slip walls, not
+periodicity — so **the census over-counts by one and leg 390's "6 compact/periodic" figure inherits
+the error.** `WALLS.md` carries the flag.
+
+**And what survives, stated plainly: the obstruction leg 348 named is NOT refuted.** No
+counter-instance appeared at full text either. **Its evidence base is thinner than the record said,
+not wrong.**
+
+`T5` has also returned (landed `a6f0c38`) and bears on question 1 below: C1's sweep found **two**
+re-openable refusals, and the genuinely new one — leg 315's Taylor-model flow-map build — points at
+**Lane V's direction, not Lane T's.**
+
+`E` is still running and is unaffected.
 
 **What the Conductor has done without a ruling:** corrected the factual claims in `WALLS.md`,
 recorded the retraction, and left every scoping question open. **What the Conductor has not done:**
