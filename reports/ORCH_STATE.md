@@ -30,6 +30,23 @@ reasoning) — that narrowness **is** the unit. Figure **`fig110`** was allocate
 and to no one else; `T6`, `T5` and `V1` were allocated no figure. Every brief instructs: **push the
 branch only, never merge or push to `main`** — the Conductor gates and merges.
 
+**INTERRUPTED AND RESUMED, 2026-08-14.** The host process exited and all five live workers stopped
+without completion records. **None had reached its gate.** Every one had landed its pre-registration
+on its branch before computing, so nothing pre-committed was lost; every one also held uncommitted
+work in its worktree, which is the part that was at risk. See `## Incidents and root causes`,
+entry 2026-08-14. All five were resumed from their saved transcripts with gates, territories and
+pre-committed readings restated **unchanged**. **The branch is the record, not the agent** — a
+successor that finds these agents gone reads the branch tips below and re-spawns only what a branch
+does not already hold.
+
+| unit | branch | landed on branch before the interruption | uncommitted, at risk |
+|---|---|---|---|
+| `T4` | `leg/393-t4-repro` | pre-registration `9e36e3c` — apparatus named under C1, controls planted both ways | `experiments/p2_route_t4_v1.py` |
+| `T6` | `leg/394-t6-fulltext` | pre-registration `0ee0b4c`, instrument `c113c6a` | modified `p2_route_t6_v1.py`, **partial `p2_route_t6_v1.json`** |
+| `V1` | `verify/wave1` | pre-registration `fc84241` — gate verbatim, six derivation paths | `p2_verify_wave1_v1_rederive.py`, **partial `p2_verify_wave1_v1.json`** |
+| `T5` | `leg/395-t5-sweep` | pre-registration `7af3f64` — gate, corpus, patterns, decision rule, both controls | `p2_route_t5_sweep.py`, **partial `p2_route_t5_v1.json`** |
+| `E` | `prog-r4/e-hhard` | pre-registration `70f3962`, diagnostics (1) and (2) at `952b2cf` | evidence script, `build_figures.py`, `fig109_prog_r4_hhard.py` |
+
 ### Wave 2 — PLANNED AND COMMITTED 2026-08-14, BEFORE DISPATCH
 
 Full gate texts and pre-committed readings are in `STATE.md` §"WAVE 2". Abbreviated here so a
@@ -1129,3 +1146,25 @@ One short paragraph each: what happened, how it was diagnosed, what changed as a
   Do not pin a version you do not control; parse namespace-agnostically and record what was served.
   This is the second time a controlled zero has been fabricated by an instrument bug, and the first
   time the fabrication was caught by another leg rather than by the leg that made it.
+
+- **2026-08-14 — the whole of wave 2 was lost to a process exit, and the pre-registration discipline
+  is the only reason it cost nothing.** All four wave-2 workers (`T4`, `T6`, `V1`, `T5`) and the
+  wave-1 unit `E` stopped without completion records when the host process exited. **Not one had
+  reached its gate.** What survived is exactly what had been committed: every one of the five had
+  **landed its pre-registration on its own branch before computing** — `9e36e3c` (`T4`), `0ee0b4c`
+  and `c113c6a` (`T6`), `fc84241` (`V1`), `7af3f64` (`T5`), `70f3962` and `952b2cf` (`E`). What was
+  at risk is exactly what had not: every worktree held uncommitted work — harnesses, sweep scripts,
+  re-derivation scripts, and in two cases **partial result JSON**. **Root cause:** briefs required
+  committing the pre-registration before the first computation but said nothing about committing
+  *during* the run, so each worker held its output in the worktree until it had a complete answer to
+  report. A worker optimising for one clean commit at the gate is a worker betting the whole unit on
+  surviving to the gate. **Result, and it is a dispatch-brief rule now:** a brief instructs
+  **COMMIT EARLY AND OFTEN on the unit's branch** — a partial table with the remainder marked
+  not-yet-attempted is a real return; an uncommitted complete one is nothing. Second rule, same
+  incident: **poll long jobs from INSIDE the turn** with a bounded check-and-sleep loop; a worker
+  that ends its turn waiting to be woken is never woken. **Recovery:** all five were resumed by
+  message from their saved transcripts, with context and worktrees intact — gates, territories,
+  pre-committed readings and `V1`'s forbidden-read list all restated **unchanged**, since an
+  interruption is not a licence to re-scope, and for `V1` specifically not a licence to go looking
+  for orientation in a file it was forbidden to read. Re-spawning cold would have been the expensive
+  path and would have put fresh, un-pre-registered workers on gates that were already committed.
