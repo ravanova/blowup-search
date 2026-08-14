@@ -240,3 +240,252 @@ epochs only → **`MINIMISATION_ATTRACTOR`** (`p = 0.0005`); the same with the l
 **`ITERATION_ATTRACTOR`** (`p = 0.0005`). `fired_both_ways = true`. **The classifier can say
 either word**, which is what makes `MIXED` a reading rather than a shrug.
 
+## 7. DIAGNOSTIC (3) — SEEDING DIRECTLY AT THE EIGHT PUBLISHED ROWS
+
+**RETURNED. 16 attempts, 2 converged, 0 recovered their own named row, 0 recovered ANY named row,
+0 secondary sign-agnostic `|s|` matches. Controls P/N/R fired as planted, with no failures.**
+
+**Read §4 first.** What was planted was a **field-plus-pinned-`(T,s)` seed**, sixteen of them, one
+per (row, arm). **No sentence below means "we seeded at the published orbit," because nothing in
+this repository can do that**: a Table IV row supplies `(T, s, m)` and no field.
+
+| row | arm | `R` seed | seed `‖R‖` | final `‖R‖` | epochs | `T` final / pub | `|s|` final / pub | exit |
+|---|---|---|---|---|---|---|---|---|
+| UPO37 | S | 0.1371 | 20.06 | 6.041 | 20 | 20.448 / 19.334 | 0.3951 / 0.3750 | stalled |
+| UPO37 | Q | 0.1108 | 33.02 | 4.355 | 20 | 19.425 / 19.334 | 0.2404 / 0.3750 | stalled |
+| UPO35 | S | 0.4780 | 38.61 | **9.669** | 20 | **18.876 / 18.912** | **0.6218 / 0.7072** | stalled |
+| UPO35 | Q | 0.0836 | 54.94 | **4.83e-09** | 22 | 22.036 / 18.912 | 0.1349 / 0.7072 | **converged** |
+| UPO34 | S | 0.1710 | 36.20 | 10.32 | 20 | 18.348 / 18.878 | 0.3183 / 0.4180 | stalled |
+| UPO34 | Q | 0.1120 | 47.80 | 1.814 | 26 | 17.440 / 18.878 | 0.1965 / 0.4180 | stalled |
+| UPO32 | S | 0.2167 | 28.86 | 5.875 | 20 | 17.900 / 18.694 | 0.6054 / 0.4340 | stalled |
+| UPO32 | Q | 0.1240 | 31.21 | 1.135 | 23 | 19.282 / 18.694 | 0.0541 / 0.4340 | stalled |
+| UPO22 | S | 0.1833 | 25.74 | 0.804 | 24 | 16.847 / 17.160 | 0.3893 / 0.3610 | stalled |
+| UPO22 | Q | 0.0866 | 47.04 | 3.272 | 25 | 16.858 / 17.160 | 0.0497 / 0.3610 | stalled |
+| UPO20 | S | 0.1362 | 23.98 | 2.668 | 20 | 17.880 / 16.908 | 0.4665 / 0.5530 | stalled |
+| UPO20 | Q | 0.1383 | 54.87 | 0.978 | 31 | 17.745 / 16.908 | 0.6150 / 0.5530 | stalled |
+| UPO17 | S | 0.1852 | 29.29 | 2.280 | 20 | 17.549 / 16.753 | **0.0032** / 0.4820 | stalled |
+| UPO17 | Q | 0.1387 | 38.08 | 1.758 | 20 | 17.617 / 16.753 | 0.3147 / 0.4820 | stalled |
+| UPO9 | S | 0.1945 | 22.19 | 3.580 | 20 | 14.466 / 14.776 | 0.4289 / 0.2950 | stalled |
+| UPO9 | Q | 0.1239 | 24.27 | **2.06e-10** | 12 | 16.537 / 14.776 | 0.0994 / 0.2950 | **converged** |
+
+Sign tally over the 16 seeds: **`{plus: 5, minus: 11}`** — the sign was measured per seed, never
+assumed. **One seed (UPO35 arm S, `R = 0.478`) sits OUTSIDE the `R < 0.25` Newton admission
+window**; that seed is exactly the point of arm S and is the one U3 and U5 were structurally
+incapable of running.
+
+**The two convergences are not recoveries and are not close to being recoveries.**
+
+- **UPO35 arm Q** → `‖R‖ = 4.827e-09` in 22 epochs at `T = 22.0358` (published 18.912, **ΔT =
+  3.124**) and `|s| = 0.1349` (published 0.7072, **Δs = 0.572**).
+- **UPO9 arm Q** → `‖R‖ = 2.055e-10` in 12 epochs at `T = 16.5369` (published 14.776, **ΔT =
+  1.761**) and `|s| = 0.0994` (published 0.295, **Δs = 0.394**).
+
+**Both landed at low `|s|`** — 0.13 and 0.099, both under diagnostic (1)'s 0.15 shelf, from seeds
+pinned at 0.707 and 0.295. **That is diagnostic (1)'s pull reappearing at the strongest seed
+quality this programme can construct**, and it is the single most informative line in this unit.
+
+**Closest approach to a published row: UPO35 arm S, `ΔT = 0.0362`, `Δs = 0.0854`, final `‖R‖ =
+9.669`.** It is inside the matching box on `T` and just under twice the tolerance out on `s` — and
+it is a **STALLED attempt with a residual of ten, not a solution.** Being near a published row in
+`(T, s)` and being a solution of this realization are, on this evidence, different things.
+
+**Exit reasons: `{stalled: 14, converged: 2}`. Not one attempt hit the iteration cap.** All 14
+stopped at U5's pre-registered stall exit, at 20–31 epochs out of 52 available. **"More Newton
+iterations" is therefore not the obviously-missing resource** — the residual stopped falling
+before the budget ran out.
+
+**Arm S starts closer and finishes further, for 8 rows out of 8.** The shift-matched field has the
+lower seed residual in every single row (that is what selecting on `|s|` buys), yet arm Q's mean
+final residual is **1.66** against arm S's **5.15**, and **both convergences are arm Q**. In this
+realization the recurrence score `R` — a quantity that knows nothing about the published rows —
+predicts Newton progress better than agreement with the published shift does.
+
+**Instrument fact for branch E-iv, stated plainly: the seed residuals are `[20.06, 54.94]`**,
+against `≈14–19` for the mined seeds U3 and U5 actually ran. **Planting at the published `(T, s)`
+produced a WORSE starting point than the repository's own mining does.** That is not a defect of
+the rows; it is the direct measurement of the fact that **the row does not supply the field**, and
+it is the cost of E-iv's honesty.
+
+**Controls (planted, fired as planted).**
+
+| control | role | result |
+|---|---|---|
+| **P** | positive, unconditional — MUST succeed. The exact relative-equilibrium fixed point in closed form (`‖Φ_dt(w*) − w*‖ = 7.6e-14`), perturbed 0.1% | **converged**, `‖R‖ = 7.75e-09`, 33 epochs |
+| **N** | negative — MUST NOT succeed. Phase-scrambled field at the same `(T, s)` | **did not converge**, `‖R‖ = 51.46`, 51 epochs, `max_newton_hit` |
+| **R** | positive, conditional — the harness must be able to say YES. A banked U5 convergence (`attempt007_P_UPO37`) perturbed and re-solved | **converged and MATCHED BACK**, `‖R‖ = 1.52e-10`, 5 epochs, `ΔT = 2.99e-07`, `Δs = 6.50e-08`, `harness_predicate_says_recovered = True` |
+
+`fired_as_planted = True`, `failures = []`. **Control R is the one that matters for this unit's
+negative**: it proves the matching predicate that returned 0 recoveries **is capable of returning
+a recovery**, on this solver, at this tolerance, in this harness. **The zero is a measurement, not
+a broken assertion.**
+
+**The stall rule was re-validated before being trusted** (§4's precondition): replayed against
+both banked ledgers it kills **zero** of U3's 14 and **zero** of U5's 9 convergences, worst
+10-epoch ratio **0.0724** (U3) and **0.0606** (U5) against the 0.5 threshold — margin factors 6.9
+and 8.2.
+
+---
+## 8. THE BRANCH THAT FIRED — E-iii
+
+**E-iii fired: "converges to something else."**
+
+Two attempts converged to genuine solutions of this realization at `‖R‖ ≈ 1e-9` and `1e-10`, and
+**neither is the row it was planted at**: `ΔT = 3.124 / Δs = 0.572` for UPO35 arm Q and `ΔT = 1.761
+/ Δs = 0.394` for UPO9 arm Q, against a matching box of `0.05 × 0.05`. **Both landed under
+diagnostic (1)'s low-`|s|` shelf.** This is **U5 §9's basin-structure finding reappearing at the
+strongest possible seed quality** — the distances are quantified above and drawn in fig109 panel
+D, where the matching box is empty.
+
+**E-ii's antecedent is also literally satisfied** — "does not converge at any published row", and
+**0 of 16 recovered any named row**. **E-iii is reported because it is the more specific of the
+two**: E-ii describes an absence, E-iii describes what happened instead, and what happened instead
+is the finding. **The E-ii reading is recorded, not suppressed**, and its consequence stands with
+it: *on this evidence, the obstruction sits in the REALIZATION rather than in the search.* **This
+is the first evidence in this programme that what G1 has been measuring is the realization rather
+than the budget** — and it is one unit's 16 attempts at one budget, which is exactly as much as it
+is.
+
+**No fifth branch is constructed.** E-i did not fire (no convergence at a published row). E-iv's
+discipline was honoured throughout rather than fired as an outcome.
+
+**`G1` STAYS `UNDER-RESOURCED`. Nothing here converts it to a recovery, a `no`, or a resolution,
+and this unit does not touch the G1 record.**
+
+---
+## 9. LEG 353 — WHERE THIS UNIT AGREES AND WHERE IT DISAGREES
+
+Leg 353 attempted UPO37 (×2), UPO35, UPO9 and UPO22 and **failed all five at `line_search_failed`
+with final `‖R‖ ∈ [22.5, 29.5]`** (`writeup/data/p2_route_dsspb5_v1.json`, read machine-readably,
+not re-transcribed).
+
+**AGREEMENT — the headline is unchanged.** Under a bigger DNS, a better solver and twice the row
+coverage, **this unit also recovered none of the named rows.** Leg 353's negative is not
+overturned by the resourced version of itself.
+
+**DISAGREEMENT — three, and they are what makes this a new measurement.**
+
+1. **The exit reason is gone.** `line_search_failed` does not appear once in these 16 attempts,
+   and it **cannot**: the hookstep's trust region always accepts a step, so plain Newton's failure
+   mode is unreachable here. Every attempt exited at the stall rule or at `tol`. **Leg 353's five
+   failures were the solver refusing to move; these fourteen are the solver moving and stopping.**
+2. **The residuals are an order of magnitude better.** Final `‖R‖` here spans **[0.80, 10.32]**
+   against leg 353's [22.5, 29.5], from seeds that were themselves **worse** (20.1–54.9). **The
+   `T = 1e5` + hookstep realization gets strictly further into the problem and still recovers no
+   named row.**
+3. **It converged at all.** Leg 353 converged nothing; this unit converged twice — **to other
+   solutions.**
+
+**Neither run's negative is about the published rows.** Lucas & Kerswell's orbits live in *their*
+discretization; **lesson 91 binds and §11 states the realization.**
+
+---
+## 10. §3d — WHAT THIS COST, AND THE SCALE AT WHICH THE QUESTION IS PROPERLY POSED
+
+**This is a measurement of THIS realization at THIS budget. It is NOT a `no` about the named rows,
+and nothing in this unit may be quoted as one.**
+
+**What was actually spent.** Diagnostic (3): `wall 0.569 h on 10 workers = 5.687 core-hours`
+banked, plus **0.806 h** of planted controls. The banked figure counts the relaunch only; the
+**sum of per-attempt wall over all 16 attempts is 9.088 core-hours**, and a first unattended launch
+was killed by the host after ~2 h with nothing banked (see §12). Diagnostics (1) and (2) were
+re-derivations of banked records and cost minutes.
+
+**The commissioned model was ~0.0713 h/attempt → ~1.14 core-hours for 16 attempts. The true figure
+is ~0.57 h/attempt, an ~8× under-estimate**, and the reason is structural rather than accidental:
+the model was calibrated on U5 attempts that stall early, while **an attempt planted at a published
+`(T, s)` runs 20–31 epochs before the stall rule fires.** A seed that is *plausible* is expensive
+exactly because it does not fail fast. **This is logged as a correction for the Conductor (§12d).**
+
+**The scale at which the question "are these rows reachable in this realization?" is properly
+posed**, priced from this unit's own measured 0.57 h/attempt:
+
+| version | what it buys | cost |
+|---|---|---|
+| **what was run** | 8 rows × 2 arms, one field each | **9.1 core-hours** |
+| **field ensemble** | 8 rows × 2 arms × **10 independent fields** — the honest fix for E-iv, since the row does not determine the field and one draw per arm measures one draw | **~91 core-hours** (~11 h wall at 8 workers) |
+| **resolution lift** | the same 160 attempts at `N = 48`, where the published rows' own discretization is approached; DNS and Newton both scale ≳ 8× | **~730 core-hours**, plus a new `T = 1e5` DNS not budgeted here |
+| **close diagnostic (2)'s gap** | re-run U3's 100 attempts under the current per-epoch ledger | **122.1 core-hours** (§6) |
+
+**None of these were bought and none are proposed as work here.** Per the dispatch: **no new DNS,
+no new seed mining, no new solver construction, no re-run of U5, and NO proposal of more seed
+supply for PROG-R4.** The numbers exist so that the next person who wants this answer knows what
+it costs instead of re-discovering it.
+
+**§3d verdict on diagnostic (3): the diagnostic RETURNED and is not `UNDER-RESOURCED`.** The gate
+asks whether the diagnostics returned, not whether anything converged. **The `0 of 16` is
+`UNDER-RESOURCED` as a claim about the rows and a clean RESULT as a claim about this realization
+at this budget**, and the two are not interchangeable.
+
+---
+## 11. LESSON 91 — WHAT THIS NEGATIVE NAMES
+
+**Realization.** 2-D Kolmogorov flow, vorticity–streamfunction pseudospectral, **`N = 24`**,
+**`Re = 60`**, forcing wavenumber **`n = 4`**, **`dt = 0.01`**, 2/3-rule dealiasing, RK4 with an
+exact viscous integrating factor in a **Lie–Trotter split that is GLOBALLY FIRST ORDER in time**.
+Fields from U2's single `T = 1e5` trajectory.
+
+**Trial space.** 16 field-plus-pinned-`(T,s)` seeds: the 8 rows UPO37/35/34/32/22/20/17/9 of
+Table IV, two arms each (shift-matched `S`, score-optimal `Q`), one field per (row, arm), drawn
+from the 1,153 `m = 0` candidates anchored by `|T_c − T_pub| ≤ 1.0`, **with the `R < 0.25`
+admission window deliberately NOT applied**.
+
+**Basis.** Real vorticity on a uniform 24 × 24 collocation grid; extended residual with a
+continuous `x`-shift `s` and period `T`, two phase rows; **`m` (discrete `y`-shift) is not carried
+and the `m ≠ 0` class cannot be expressed** — all eight rows have `m_pub = 0`, so this bites the
+generality of the instrument, not these attempts.
+
+**Solver and budget.** Newton–GMRES–hookstep, `tol = 1e-8`, `max_newton = 52`, `max_gmres = 140`,
+`gmres_rtol = 1e-3`, `fd_eps = 1e-6`, U5's stall exit (`k ≥ 20`, window 10, threshold 0.5),
+9.1 core-hours.
+
+**Determinism.** Fixed recorded seeds throughout: `PERM_SEED = 380`, `N_PERM = 20000`; every field
+is a bit-for-bit re-integration of a recorded snapshot index; the sign of `s` is measured, not
+drawn. Re-running the module reproduces the ledger.
+
+**CEILING TIER 2. Nothing in this unit is a proof, nothing is described as movement toward Clay,
+no `L1 → L4` link moves, Clay stays ~0.05%.** **Scale is not evidence** — the `T = 1e5` trajectory
+buys candidates, not truth, and this unit's own headline is that the bigger realization got
+*further* and still recovered nothing.
+
+---
+## 12. CORRECTIONS FOR THE CONDUCTOR
+
+*Routed here verbatim and applied nowhere. `STATE.md`, `WALLS.md`, `DIRECTION.md` and
+`plan_of_record.py` were not touched.*
+
+**(a) `writeup/INDEX.md` has NO row for this unit's write-ups.** `INDEX.md` is outside the granted
+territory (§5b), so no row was added. The BLOG/TECHNICAL pair and fig109 exist unindexed and need
+a Conductor-side row.
+
+**(b) fig107 is not registered in `writeup/build_figures.py`.** The dispatch named fig107 as U5's
+and fig108 as another worker's in this wave; fig107's registration line is absent from the build
+list. **fig109 was added as exactly one additive line and nothing else in that file was touched**
+(the diff is `1 insertion(+), 0 deletions(-)`). Flagging fig107 rather than fixing it, because
+that file's other lines are not mine.
+
+**(c) The granted territory omitted this unit's own data artifacts.** A diagnostic that runs
+Newton must bank a ledger and its converged fields. I created
+`experiments/programme_r4/e_hhard_ledger.json` and `e_hhard_converged_orbits.npz` **by direct
+precedent** — `u1_m1_ledger.json`, `u3_g1_ledger.json`, `u5_m3_ledger.json` and
+`u5_m3_converged_orbits.npz` are all tracked in that directory under the same naming scheme.
+**Nothing belonging to another unit was created, moved or edited.** Future briefs should list the
+unit's own artifacts explicitly.
+
+**(d) The commissioned cost model under-estimated this unit by ~8×.** `≈0.0713 h/attempt` was
+calibrated on mined-seed attempts that stall early; **direct-seed attempts measured `≈0.57
+h/attempt`** because a plausible seed runs 20–31 epochs before the stall rule fires. **A brief that
+prices direct seeding off mined-seed telemetry will under-resource it every time.**
+
+**(e) The host killed the unattended run TWICE.** The first launch died after ~2 h with **zero**
+banked results. Per-attempt pickle checkpointing plus `imap_unordered(chunksize=1)` was added to
+the unit's own module in response; the second kill then cost nothing, because all 8 completed
+attempts were reused from checkpoint. **Recommendation: any wave unit budgeted above ~1 h wall
+should be required to checkpoint per unit-of-work before it launches.**
+
+**(f) The `R < 0.25` Newton admission window is a live confound and no unit before this one could
+see past it.** U3 §5 measured it monotone in `|s|` (Spearman 0.5012 here, admission
+43.79/20.19/11.53/2.86% across the four bands); **neither U3 nor U5 ever ran a seed from outside
+it**, so every banked PROG-R4 attempt is drawn from a distribution biased toward exactly the low
+`|s|` that diagnostic (1) then observes the solves being pulled toward. This unit ran one
+out-of-window seed (UPO35 arm S). **That is not enough to separate the two effects, and this unit
+does not claim to have separated them.**
