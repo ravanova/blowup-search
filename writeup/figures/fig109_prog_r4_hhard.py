@@ -286,7 +286,7 @@ def main():
     # C. diagnostic (3): how far each of the 16 direct-seed attempts got
     ax = axes[1][0]
     ax.axhspan(LEG353[0], LEG353[1], color="#7f8c8d", alpha=0.18, zorder=0)
-    ax.text(0.015, 0.035,
+    ax.text(0.015, 0.40,
             f"leg 353's prior: five of these rows attempted, all five failed,\n"
             f"final $\\|R\\|$ in [{LEG353[0]}, {LEG353[1]}] "
             f"(shaded) at reason=line_search_failed",

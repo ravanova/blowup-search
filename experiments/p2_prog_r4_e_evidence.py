@@ -375,11 +375,22 @@ def main():
     # 5. the per-epoch ledger of this unit's own 16 attempts
     # =================================================================
     e_led = load(E_LEDGER)
-    check("this unit banked a per-epoch ledger for all 16 attempts",
+    by_att = {a["attempt"]: a for a in e_led["attempts"]}
+    # The stall exit rewinds one epoch: it detects the stall ON an epoch and
+    # reports the count BEFORE it, while the ledger keeps the triggering epoch.
+    # So len(ledger) == n_iters for a converged attempt and n_iters + 1 for a
+    # stalled one, and that is asserted here rather than papered over.
+    check("this unit banked a per-epoch ledger for all 16 attempts, and the "
+          "epoch counts reconcile with the stall exit's one-epoch rewind",
           len(e_led["attempts"]) == 16
-          and sum(len(a["ledger"]) for a in e_led["attempts"])
+          and all(len(by_att[a["attempt"]]["ledger"])
+                  == a["n_iters"] + (0 if a["success"] else 1) for a in att)
+          and sum(a["n_iters"] for a in att)
           == d3["resourcing"]["total_epochs"],
-          f"{d3['resourcing']['total_epochs']} epochs banked")
+          f"{d3['resourcing']['total_epochs']} Newton epochs charged, "
+          f"{sum(len(a['ledger']) for a in e_led['attempts'])} ledger rows "
+          f"({sum(1 for a in att if not a['success'])} stalled attempts each "
+          "keep their triggering epoch)")
     check("every attempt's banked residual history starts at its seed ||R||",
           all(close(a["residual_history"][0], a["seed_extended_residual"],
                     1e-6) for a in att))
