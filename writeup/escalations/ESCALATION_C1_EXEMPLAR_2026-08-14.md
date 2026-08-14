@@ -1,0 +1,114 @@
+# ESCALATION — C1's EXEMPLAR HAS FALLEN
+
+**Raised:** 2026-08-14, by the Conductor, on the return of leg 393 / `T4` (landed `2c87244`).
+**Class:** §8. **A ruling was made on a packet carrying a factual error, and the error is now measured.**
+**Status:** OPEN — awaiting the user. **Work has NOT stopped**; see §6.
+
+---
+
+## 1. The one-sentence version
+
+On 2026-08-13 you ruled **C1**, scoping the ℓ¹-Fourier / radii-polynomial ban to an **apparatus**
+and thereby unblocking Lane T. The paper the whole lane was built around — `arXiv:1902.00384`,
+recorded as *the crack in W2* — has now been read at full text and **is certified by exactly the
+banned apparatus**, and **both of its certified rows are 2D lifts**. C1's *general proposition*
+survives untouched. Its *exemplar* does not.
+
+## 2. What was measured, and how hard the evidence is
+
+Leg 393 was dispatched to reproduce a published enclosure row. Its brief carried your binding
+requirement — name the apparatus, and show it does not construct a single bounded approximate
+inverse uniform in `M` — and a pre-committed instruction that **if the apparatus turned out to
+require one, the unit should STOP and say so, because that would be more valuable than the
+reproduction.** That branch fired.
+
+**(a) The apparatus is the banned one.** A Newton–Kantorovich radii-polynomial contraction
+(Thm 2.15, (2.17)–(2.21); symmetry-reduced Thm 4.23, (4.28)–(4.32)) in a weighted `ℓ¹_η` Fourier
+space, built on **one bounded approximate inverse** `A : X_{−2,−1} → X` (§2.3): the numerical inverse
+of the finite block plus the exact diagonal off it — one operator acting on the whole
+infinite-dimensional space. Term counts in the full text: *approximate inverse* ×7,
+*Newton-Kantorovich* ×4, *interval arithmetic* ×5, INTLAB ×2.
+
+**This is visible in the abstract.** The Conductor confirmed it independently of the worker, from
+the arXiv abstract page: *"a Newton-Kantorovich theorem is applied to obtain the (computer-assisted)
+proofs of existence"*, posed on *"a Banach space of geometrically decaying Fourier coefficients."*
+Leg 348 classified this paper **at abstract level** — the disqualifying sentence was in the text it
+read.
+
+**(b) Both certified rows are 2D lifts.** From the authors' own published data package, not prose:
+`N_x3 = 0` in Table 1 and in `Nrec`; decoded coefficient arrays have **extent 1** in `x₃`;
+`max|u⁽³⁾| = max|ω⁽¹⁾| = max|ω⁽²⁾| = 0.0` **exactly**, while `max|ω⁽³⁾| = 1.6351 / 1.5274` — so the
+zeros are structure, not an empty array; the `setup` field reads `'2D'`. The authors state the
+reason: the memory cost of a three-dimensional solution is *"for now, prohibitive."*
+
+**W2's own pre-committed test requires showing the certified object is not a lift of a
+lower-dimensional one. It is one.** W2 stands, strengthened.
+
+**(c) The negative control could have fired and did not.** *self-consistent*, *a priori bounds*,
+*isolating*, *trapping region*, *logarithmic norm*, *dynamical closure*: **all zero**. Zgliczyński
+appears once, as bibliography item [48]. Had any of these fired, C1's scope would have covered the
+reproduction and the unit would have proceeded into it.
+
+**Audit.** The pre-registration landed **before any computation** and already contained the verdict
+rules and six two-sided controls, with `STOP` written down in advance — it was not constructed after
+the answer was seen. The evidence script was re-run by the Conductor from the branch: **exit 0,
+68/68**. The 2D shape was visible in Table 1 at pre-registration time, so nothing here is post-hoc.
+
+## 3. What falls, and what explicitly does not
+
+**FALLS.** Leg 348's classification of `1902.00384`. The claim in `WALLS.md` that W2 has a crack.
+The claim that "the technology clears W2's bar already, and only the target is missing." Item 3 of
+the four-results argument that Lane T is priority 1. All are corrected in this commit, with the
+superseded wording kept inline and struck.
+
+**DOES NOT FALL — and the Conductor is not entitled to rule otherwise:**
+- **C1's general proposition.** A Zgliczyński-style Galerkin-plus-tail dynamical closure remains a
+  different apparatus from a radii-polynomial contraction. Nothing measured here bears on that.
+- **Your ruling that Lane T is unblocked by scope.** That is a ruling. A measurement supersedes a
+  ban; it does not silently reverse a scoping.
+- **Theorem NGX, leg 341, and the three dead realizations.** Untouched, as C1 itself said.
+- **`T4`'s own numerical work.** The gate's *first* conjunct was met on both rows — criterion (4.32)
+  verified, `r_min`/`r_max` relative deviations down to `5.6e-15`, both `r_sol^Ω` exact, an
+  independent norm check at `δ = 5.3e-06` against a `1e-3` threshold. The *second* conjunct — a
+  C1-compliant apparatus — cannot be met by anything that actually certifies those rows.
+
+## 4. Why this is escalated rather than decided
+
+The standing instruction is explicit: **ruling any ban-wording question is prohibited to the
+Conductor; escalate.** Three questions here are yours and not mine:
+
+1. **Does C1 need a replacement exemplar, or none at all?** C1's proposition can be true with no
+   instance in the literature. If it has no instance, Lane T's practical content is thinner than the
+   lane was ranked on — the ban would be scoped around an apparatus nobody has yet used for this
+   class of object.
+2. **Does Lane T's priority-1 ranking survive the loss of item 3?** The remaining three results still
+   argue for it; the strongest of them argued that the technology was *demonstrated*. It is not.
+3. **Was the escalation packet's defect material to C1?** `T1` posed the questions and, correctly,
+   ruled none of them — but it inherited leg 348's classification. You ruled on a packet carrying it.
+
+## 5. The process finding, which is the more general one
+
+**Leg 348's ceiling was known, declared, and not discharged for a full lane's worth of work.** Leg
+348 said in its own words that a full-text pass could strengthen *or undercut* its classification.
+That flag sat in the record while `WALLS.md`, `CLAY_ROADMAP.md`, the lane ranking and an escalation
+packet were all built on the un-discharged classification. You ordered `T6` to discharge it and said
+to run it **early, precisely because it can undercut the lane**. That instruction was correct and it
+is the reason this was caught within one wave.
+
+**The narrower lesson: an abstract-level classification is load-bearing evidence or it is not, and
+this programme treated one as load-bearing for 45 legs.** The disqualifying sentence was in the
+abstract the whole time — this was not even a full-text-only finding on the apparatus question.
+
+## 6. Work has not stopped
+
+`T6` is **still running** and is independently reading all seven of leg 348's papers at full text,
+including this one. **It has NOT been told what `T4` found.** That is deliberate: it preserves an
+independent replication of this classification, and contaminating it would destroy the only
+cross-check available. If `T6` returns the same undercut without prompting, the finding is measured
+twice by two instruments.
+
+`T5` and `E` are also still running and are unaffected.
+
+**What the Conductor has done without a ruling:** corrected the factual claims in `WALLS.md`,
+recorded the retraction, and left every scoping question open. **What the Conductor has not done:**
+re-ranked Lane T, named a replacement exemplar, or touched C1's transcription in `plan_of_record.py`.

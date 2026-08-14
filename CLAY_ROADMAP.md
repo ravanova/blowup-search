@@ -388,9 +388,16 @@ position to put them side by side** — each was explicitly out of scope for the
    named its *only* obstruction as **domain shape** — the Galerkin-plus-tail bridge closes against
    a compact domain with a discrete spectral basis.
 2. `T³` is that domain. Leg 390's census: **6 compact/periodic instances, 0 unbounded.**
-3. `arXiv:1902.00384` certifies a periodic orbit of **3D Navier–Stokes on `T³` with the viscous
+3. ~~`arXiv:1902.00384` certifies a periodic orbit of **3D Navier–Stokes on `T³` with the viscous
    term inside the certified equation** — natively 3D, natively time-dependent, genuinely viscous.
-   That clears **Wall 2's** bar with the target, not the method, missing.
+   That clears **Wall 2's** bar with the target, not the method, missing.~~
+   **RETRACTED 2026-08-14 — leg 393 / `T4`, landed `2c87244`.** Read at full text, **both certified
+   rows are 2D LIFTS**: `N_x3 = 0` in Table 1 and in the package's `Nrec`, decoded arrays of extent
+   1 in `x₃`, `max|u⁽³⁾| = 0.0` exactly with `max|ω⁽³⁾| ≠ 0`, `setup = '2D'`; the authors call a 3D
+   solution's memory cost *"for now, prohibitive."* **Wall 2's bar is NOT cleared** — its own test
+   requires showing the object is not a lift, and it is one. The paper is additionally certified by
+   **exactly the banned apparatus**, which its own abstract states. `WALLS.md` W2 carries the
+   retraction; `ESCALATION_C1_EXEMPLAR_2026-08-14.md` is open with the user.
 4. Leg 390 §5 item 4, verbatim: ***"§1's POCP credit is unclaimed. Whether any non-DSS torus
    blow-up ansatz could collect that credit is outside this leg's scope entirely."***
 

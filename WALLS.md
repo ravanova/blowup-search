@@ -65,11 +65,37 @@ naive form of this wall (spatial dimension is *not* the barrier — van den Berg
 genuinely 3D Ohta–Kawasaki stationary states in 2019). Assumed: nothing. This is a statement about
 the literature as read, and absence of an instance is not a theorem of impossibility.
 
-**The crack.** Leg 348 located `arXiv:1902.00384` — **a certified periodic orbit of 3D
-Navier–Stokes with the viscous term inside the certified equation, on the three-torus.** That is
-natively 3D, natively time-dependent, genuinely viscous, genuinely fluid. It is not a blow-up, so
-it does not fill leg 174's Grade-A/fluid **blow-up** cell — but it means the *technology* clears
-W2's bar already, and only the *target* is missing.
+**The crack — RETRACTED 2026-08-14 BY MEASUREMENT (leg 393 / `T4`, landed `2c87244`).** The
+superseded text is kept inline below, struck, because this wall's history is the point:
+
+> ~~**The crack.** Leg 348 located `arXiv:1902.00384` — **a certified periodic orbit of 3D
+> Navier–Stokes with the viscous term inside the certified equation, on the three-torus.** That is
+> natively 3D, natively time-dependent, genuinely viscous, genuinely fluid. It is not a blow-up, so
+> it does not fill leg 174's Grade-A/fluid **blow-up** cell — but it means the *technology* clears
+> W2's bar already, and only the *target* is missing.~~
+
+**THERE IS NO CRACK. `arXiv:1902.00384` FAILS THIS WALL'S OWN PRE-COMMITTED TEST**, which requires
+showing *"the certified object is not a lift of a lower-dimensional one."* **Both certified rows are
+2D lifts.** Measured from the authors' own published data package, not from prose: `N_x3 = 0` in
+Table 1 and in the package's `Nrec`; the decoded coefficient arrays have **extent 1** in `x₃`;
+`max|u⁽³⁾| = max|ω⁽¹⁾| = max|ω⁽²⁾| = 0.0` **exactly** while `max|ω⁽³⁾| = 1.6351 / 1.5274`, so the
+zeros are structure and not an empty array; the `setup` field reads `'2D'`. The authors say why:
+the memory cost of a three-dimensional solution is *"for now, prohibitive."*
+
+**The technology does NOT clear W2's bar, and the target was never the only thing missing.** Leg 348
+read this paper **at abstract level only** and flagged that limit itself; the full text contradicts
+its classification on this wall's most load-bearing clause.
+
+**Second finding, separate and also adverse:** the paper is certified by **exactly the banned
+apparatus** — a Newton–Kantorovich radii-polynomial contraction in a weighted `ℓ¹_η` Fourier space
+built on **one bounded approximate inverse** `A : X_{−2,−1} → X`. This is visible **in the abstract**
+(*"a Newton-Kantorovich theorem is applied"*, on *"a Banach space of geometrically decaying Fourier
+coefficients"*), independently confirmed by the Conductor at the landing of `2c87244`. **Ruling C1's
+general proposition is untouched — a Galerkin-plus-tail dynamical closure remains a different
+apparatus — but its EXEMPLAR falls.** `ESCALATION_C1_EXEMPLAR_2026-08-14.md` is open with the user;
+naming a replacement exemplar, or ruling that none is needed, is not the Conductor's to decide.
+
+**W2 STANDS, AND IS STRENGTHENED**: the one instance the programme believed cleared it does not.
 
 **BREAKING W2 CONSISTS OF:** a certificate whose three-dimensionality and whose time-dependence
 both come from the certified object itself, for a dissipative fluid equation. Not a 2D reduction
@@ -215,9 +241,14 @@ The four results:
    rescaled Navier–Stokes system is genuinely parabolic.
 2. **`T³` is exactly the domain the obstruction asks for.** Compact, discrete Fourier basis,
    exponential decay. Leg 390's census: **6 compact/periodic instances, 0 unbounded.**
-3. **`arXiv:1902.00384` already certifies a periodic orbit of 3D Navier–Stokes on `T³` with the
+3. ~~**`arXiv:1902.00384` already certifies a periodic orbit of 3D Navier–Stokes on `T³` with the
    viscous term inside the certified equation.** The technology closes there, demonstrated, for
-   exactly our equation.
+   exactly our equation.~~ **RETRACTED 2026-08-14 by leg 393 / `T4` (`2c87244`). Both certified rows
+   are 2D LIFTS** (`N_x3 = 0`, decoded extent 1 in `x₃`, `max|u⁽³⁾| = 0.0` exactly, `setup = '2D'`);
+   the authors call a 3D solution's memory cost *"for now, prohibitive."* The technology is **not**
+   demonstrated to close for a genuinely 3D object. It is also certified by **exactly the banned
+   apparatus** (Newton–Kantorovich radii-polynomial, one bounded approximate inverse), which the
+   abstract itself states. **This item can no longer carry weight in this argument.** See W2.
 4. **Leg 390: statement (D) vacates §4 as an acceptance test**, and leg 390's own §5 item 4 says
    in terms: ***"§1's POCP credit is unclaimed. Whether any non-DSS torus blow-up ansatz could
    collect that credit is outside this leg's scope entirely."***

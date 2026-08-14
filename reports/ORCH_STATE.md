@@ -41,7 +41,7 @@ does not already hold.
 
 | unit | branch | landed on branch before the interruption | uncommitted, at risk |
 |---|---|---|---|
-| `T4` | `leg/393-t4-repro` | pre-registration `9e36e3c` — apparatus named under C1, controls planted both ways | `experiments/p2_route_t4_v1.py` |
+| `T4` | `leg/393-t4-repro` | pre-registration `9e36e3c` — apparatus named under C1, controls planted both ways | **resumed, RAN TO GATE, LANDED `2c87244`** |
 | `T6` | `leg/394-t6-fulltext` | pre-registration `0ee0b4c`, instrument `c113c6a` | modified `p2_route_t6_v1.py`, **partial `p2_route_t6_v1.json`** |
 | `V1` | `verify/wave1` | pre-registration `fc84241` — gate verbatim, six derivation paths | **resumed, RAN TO GATE, LANDED `2fb399f`** |
 | `T5` | `leg/395-t5-sweep` | pre-registration `7af3f64` — gate, corpus, patterns, decision rule, both controls | `p2_route_t5_sweep.py`, **partial `p2_route_t5_v1.json`** |
@@ -58,6 +58,56 @@ successor that has lost `STATE.md` still holds the pre-commitments; **`STATE.md`
 | `T6` / leg 394 | **T**, literature | `leg/394-t6-fulltext` | At **full text**, does each of leg 348's seven papers **confirm**, **strengthen**, or **UNDERCUT** its abstract-level classification? Table, deciding sentence quoted and located. Unobtainable = **`UNREACHABLE`**, never a confirmation. | (a) **an undercut is the valuable branch and is reported first**; if it hits `1902.00384` it lands on `T4` immediately; (b) consistency is **not** strengthening; (c) `UNREACHABLE` ≠ zero; (d) **READ, do not CONTACT**; (e) no S2 key — **`THROTTLED`, never zero** | DISPATCHED |
 | `V1` | verification | `verify/wave1` | Re-deriving **from banked JSON and landed evidence scripts alone**, do all five claims reproduce exactly: R0's metric + the 134.45/144.69 reconciliation; the retraction (57/100, 5/9, 4/5, **ONE** new orbit, 0.0175 vs 0.0553); R1's +0.45 pp and the hold-out kill; T2's 32/32 MEASURED / namespace `1.1` / 5-of-6 THROTTLED; T1 ruling none of the three questions. **Plus: does `M3 = DELIVERED` survive the 57% seed overlap, on M3's own wording?** | (a) agreement is expected and worth little; the value is in (3),(4),(5) and M3; (b) **a disagreement is BANKED, not reconciled** by the verifier; (c) missing field = `UNVERIFIABLE`, not `no`; (d) **must not read** `WALLS.md`, `STATE.md`, `DIRECTION.md`, the briefs, or the wave-1 reasoning | DISPATCHED |
 | `T5` / leg 395 | **T** | `leg/395-t5-sweep` | Grep the landed record for every leg that declined/deferred/narrowed work citing the ℓ¹-Fourier/radii-polynomial ban. For each: **apparatus-based** or **realization-based**? Name which C1 now permits to be re-opened. A zero is instrumented like any other zero. | (a) permitted ≠ recommended — **`T5` ranks nothing and re-opens nothing**; (b) **realization-based refusals stay refused** — C1 supersedes no measurement; (c) if nothing is found, say C1 cost nothing; (d) "both" is filed as realization-based | DISPATCHED |
+
+### `T4` — RETURNED AND LANDED, `2c87244`, 2026-08-14. **THE WAVE'S REAL RESULT.**
+
+**Gate answer: `STOP`, under pre-committed branch (c).** Not `yes`, not `no`, not `UNDER-RESOURCED`.
+The brief told this unit that if the apparatus turned out to require a bounded approximate inverse
+uniform in `M` it should stop and say so, and that this would be **more valuable than the
+reproduction**. It was.
+
+**`arXiv:1902.00384` — the crack in W2, the paper Lane T was ranked on — is certified by EXACTLY THE
+BANNED APPARATUS**, and **both its certified rows are 2D LIFTS**. See
+`writeup/escalations/ESCALATION_C1_EXEMPLAR_2026-08-14.md`, open with the user.
+
+- **Apparatus:** Newton–Kantorovich radii-polynomial contraction in a weighted `ℓ¹_η` Fourier space
+  on **one bounded approximate inverse** `A : X_{−2,−1} → X`. *approximate inverse* ×7,
+  *Newton-Kantorovich* ×4. **Stated in the abstract**, which the Conductor confirmed independently —
+  so the disqualifying sentence was in the text leg 348 read.
+- **2D:** `N_x3 = 0` in Table 1 and `Nrec`; decoded arrays of extent 1 in `x₃`;
+  `max|u⁽³⁾| = max|ω⁽¹⁾| = max|ω⁽²⁾| = 0.0` exactly while `max|ω⁽³⁾| = 1.6351 / 1.5274`, so the
+  zeros are structure; `setup = '2D'`; authors' reason — a 3D solution's memory cost is *"for now,
+  prohibitive."* **W2's own test requires showing the object is not a lift. It is one.**
+- **`C−` could have fired and did not:** *self-consistent* / *a priori bounds* / *isolating* /
+  *trapping region* / *logarithmic norm* / *dynamical closure* all **0**; Zgliczyński only as
+  bibliography item [48]. Had it fired, the unit would have proceeded into a full reproduction.
+- **W2 STANDS, STRENGTHENED. W6 UNTOUCHED** — `inf` over nonzero modes of `μ(n)` equals `ν` exactly,
+  a truncation-independent positive floor, against NGX's `σ_min(L_M) → 0`. The apparatus is bounded
+  *because* the domain is compact and the equation viscous; route 4's object has neither. **Not a
+  counterexample to NGX.** Cost of the apparatus, authors' Table 1: **95 CPU-days, 110 GB RAM — for
+  a 2D row.**
+- **The gate's FIRST conjunct was met on both rows** (criterion (4.32) verified; `r_min`/`r_max`
+  relative deviations to `5.6e-15`; both `r_sol^Ω` exact; independent norm check `δ = 5.3e-06`
+  against `1e-3`), all by arithmetic on the authors' published constants — **no operator and no
+  `Y₀/Z₀/Z₁/Z₂` computed**, leg 316's precedent. The SECOND conjunct cannot be met by anything that
+  actually certifies those rows, so `yes` was never available.
+
+**Audit, not taken on report:** territory clean (allocated files, `fig110` as allocated, the single
+permitted additive line in `build_figures.py`); **pre-registration `9e36e3c` landed before any
+computation and already contained V1–V4 and six two-sided controls with `H1 → branch (c) → STOP`
+written down in advance** — the load-bearing point, since it means the STOP was not constructed
+after the answer; evidence script re-run by the Conductor from the branch, **exit 0, 68/68**;
+apparatus claim confirmed independently against the paper's abstract; the 2D shape was already
+visible in Table 1 at pre-registration time, which strengthens the finding rather than weakening it.
+
+**Record corrected in the same commit:** `WALLS.md` W2 (crack retracted, superseded text kept inline
+and struck) and its four-results item 3; `CLAY_ROADMAP.md` §7.6 item 3. **C1's general proposition,
+your ruling that Lane T is unblocked by scope, Theorem NGX and leg 341 are ALL UNTOUCHED** — only
+the exemplar falls, and naming a replacement is not the Conductor's to decide.
+
+**`T6` HAS NOT BEEN TOLD.** It is independently reading the same seven papers at full text. Telling
+it would destroy the only available cross-check; if it returns the same undercut unprompted, the
+finding is measured twice by two instruments.
 
 ### `V1` — RETURNED AND LANDED, `2fb399f`, 2026-08-14
 
