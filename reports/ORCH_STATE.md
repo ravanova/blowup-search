@@ -37,6 +37,39 @@ INSTRUCTION, 2026-08-14"*). In short: plan wave 3 and commit the plan **before**
 not check any of them — **alongside** a real Lane T/V/L unit, since a verifier is an audit and both
 the composition floor and §3f rule 3 bite.
 
+### ⚠ READ THIS BEFORE ACTING ON ANYTHING ABOVE — A CONCURRENT CONDUCTOR SESSION EXISTS
+
+**Found on `origin` at wind-up, 2026-08-14, after this session's work was pushed.** A **second,
+concurrent CONDUCTOR session** has been running against this repository on branch
+**`claude/wave-3-conductor-dispatch-7rdhlg`** (tip `594ff89`, 2026-08-14 02:00 UTC). It branched from
+**`2928966`** — this session's wave-2 integration commit — and it is **NOT** downstream of `E`. **The
+two histories have diverged and neither contains the other.**
+
+**Established by inspection of the remote, not assumed:**
+
+| on that branch | consequence for the record above |
+|---|---|
+| `writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md` (130 lines), transcribed in 4 commits, escalation marked **DISCHARGED** | **The C1 escalation is described as OPEN throughout `main`. On that branch it is RULED.** |
+| `WAVE 3 PLANNED AND COMMITTED BEFORE DISPATCH: V2, L2, L3′, V-W2` (`42011ff`) | **Wave 3 is already planned and dispatched there.** The ranked candidates below are this session's, made without knowledge of it. |
+| `V-W2` landed (`594ff89`): *"wave 2 is VERIFIED"*, with `p2_verify_wave2_v1.json` and `p2_verify_wave2_evidence.py` | **The wave-2 verification debt asserted below may already be discharged.** |
+| `p2_route_t1_packet_v1.json` + `p2_route_t1_packet_evidence.py` | **`T1`'s missing machine record — banked as an obligation in `OPTIONS.md` §F — appears to be REPAIRED there.** |
+| `leg/397-l2-decay` (`a9a4370`), pre-registration only | A **Lane L** unit is in flight there. Lane L is described below as having zero units in 395 legs. |
+
+**WHAT THIS CONDUCTOR DID AND DID NOT DO, deliberately.** It **did not merge that branch.** Three
+reasons, each sufficient: (i) `V-W2` verifies **the wave this Conductor planned**, and blessing one's
+own verifier is exactly what §3f rule 1 exists to prevent; (ii) the ruling **was never delivered to
+this session** — transcribing a user ruling received second-hand off a branch is not transcription,
+it is inference, and ban-wording questions are prohibited to the Conductor in any case; (iii) that
+branch is **live work with a unit still in flight**, and merging it is its own session's integration
+step, not this one's. **Nothing on that branch has been read into any claim on `main`.**
+
+**THE RECONCILIATION IS THE NEXT SESSION'S FIRST TASK, BEFORE IT DISPATCHES ANYTHING.** `main` holds
+`E` and this wind-up; that branch holds the ruling, wave 3 and `V-W2`. **Neither is wrong; both are
+partial.** Do not re-dispatch a wave-3 verifier, do not re-raise the C1 escalation, and do not
+re-do `T1`'s record until that branch has been read. **Expect a real conflict in `STATE.md`** — that
+branch rewrites it heavily (+1072/−768) from a base that predates `E`, so `E`'s row and this
+wind-up block exist on **one side only.**
+
 ---
 
 ## Wave 2 as dispatched — CONDUCTOR mode, 2026-08-14

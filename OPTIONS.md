@@ -207,7 +207,15 @@ result** — it is the one that would tell the user whether the Tier-2 ceiling i
   **lift**; C1 was a *scoping* and left that clause unrepaired. Recorded so no later unit mistakes
   the fourth-space mismatch for an opening.
 
-- **`T1` OWES A MACHINE RECORD. Found by `V1`, 2026-08-14; an obligation, not an option.** Leg 391
+- **⚠ CHECK `claude/wave-3-conductor-dispatch-7rdhlg` BEFORE TAKING ANY OBLIGATION IN THIS SECTION.**
+  A **concurrent CONDUCTOR session** (branch tip `594ff89`, diverged from `2928966`, **not** merged
+  to `main`) appears to have already **repaired `T1`'s machine record** — it carries
+  `writeup/data/p2_route_t1_packet_v1.json` and `experiments/p2_route_t1_packet_evidence.py` — and
+  to have **verified wave 2** and **had the C1 escalation ruled**. Nothing from it was read into
+  this file. **Reconcile first; do not redo work that is already done on that branch.**
+
+- **`T1` OWES A MACHINE RECORD. Found by `V1`, 2026-08-14; an obligation, not an option.** *(See the
+  warning immediately above — this may ALREADY BE DISCHARGED on the concurrent branch.)* Leg 391
   landed **no `writeup/data/*.json` and no evidence script**. Its gate answer checks out against
   **prose only** — `writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md`. Confirmed by a
   field-scoped scan of every banked JSON's `leg`/`route`/`unit` fields: **zero hits**. Lesson 68

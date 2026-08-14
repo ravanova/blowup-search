@@ -38,6 +38,18 @@ what a wall-breaking mandate does and does not license.
 > `writeup/escalations/ESCALATION_C1_EXEMPLAR_2026-08-14.md`. See "Open — needs the user" item 0.
 > The full handoff — board, ranked candidates, and the four dispatch-brief rules this run paid for —
 > is in `reports/ORCH_STATE.md` under *"WOUND UP BY USER INSTRUCTION, 2026-08-14"*.
+>
+> **⚠ BUT DO NOT ACT ON THAT SENTENCE WITHOUT READING THIS ONE. A CONCURRENT CONDUCTOR SESSION
+> EXISTS**, on `origin`, branch **`claude/wave-3-conductor-dispatch-7rdhlg`** (tip `594ff89`). It
+> branched from `2928966` and is **NOT** downstream of `E`; **the histories have diverged.** On that
+> branch the **C1 escalation is RULED and DISCHARGED** (`RULING_C1_EXEMPLAR_2026-08-14.md`), **wave 3
+> is already planned and dispatched** (`V2`, `L2`, `L3′`, `V-W2`), **wave 2 is VERIFIED** by `V-W2`,
+> **`T1`'s missing machine record is repaired**, and a **Lane L** unit is in flight
+> (`leg/397-l2-decay`). **This session did not merge it and read nothing from it into any claim
+> here** — its verifier checks the wave this Conductor planned, and the ruling was never delivered to
+> this session. **Reconciling the two is the next session's first task, before it dispatches
+> anything.** Expect a genuine `STATE.md` conflict: that branch rewrites this file from a base that
+> predates `E`, so `E`'s row and this block exist on **one side only.**
 
 ## Goal, posture, odds
 
