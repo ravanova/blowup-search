@@ -279,7 +279,14 @@ as re-open condition 2.
   units `T1`, `T2` and `R0`+`R1`: all five claims reproduce from banked JSON and landed evidence
   scripts alone, and `M3 = DELIVERED` survives U5's 57% seed overlap on M3's own pre-committed
   wording. **`U2`, `U3` and `U5` themselves remain `UNVERIFIED`** — `V1` checked `R0`'s *reading* of
-  them, not the runs. **Wave 2's own units are `UNVERIFIED` and wave 3 must carry their verifier.**
+  them, not the runs. ~~**Wave 2's own units are `UNVERIFIED` and wave 3 must carry their
+  verifier.**~~ **DISCHARGED 2026-08-14 for wave 2: `V-W2` (`verify/wave2`) landed and all four
+  claims of `T4`, `T6` and `T5` reproduce** — items (1) and (2) re-measured from **re-fetched
+  primary artefacts whose SHA-256 matched the banked digests exactly**, which makes them
+  measurements rather than transcription checks. **One wording nuance banked unreconciled** and
+  ruled by the Conductor at landing **against the Conductor's own wording** (see `WALLS.md`, Lane T
+  item 2). **`U2`, `U3` and `U5` themselves remain `UNVERIFIED`. WAVE 3's OWN UNITS — `V2`, `L2`,
+  `L3′` — LAND `UNVERIFIED`, AND WAVE 4 MUST CARRY THEIR VERIFIER.**
 
 - **THE CHEN–HOU THREAD — the best lead the programme now has on the compact-domain obstruction.
   Found by `T6`, 2026-08-14, as a near-miss it recorded rather than dropped.** `arXiv:2308.01528` §1
@@ -305,7 +312,18 @@ as re-open condition 2.
   **lift**; C1 was a *scoping* and left that clause unrepaired. Recorded so no later unit mistakes
   the fourth-space mismatch for an opening.
 
-- **`T1` OWES A MACHINE RECORD. Found by `V1`, 2026-08-14; an obligation, not an option.** Leg 391
+- **`T1`'s OWED MACHINE RECORD — DISCHARGED 2026-08-14 by `V-W2`.** Banked at
+  `writeup/data/p2_route_t1_packet_v1.json` with `experiments/p2_route_t1_packet_evidence.py`
+  (**31/31, exit 0**), carrying the packet's three ban-wording questions verbatim, item (d) filed
+  separately as the document's own *"not a ban-wording question"*, and **`questions_ruled = 0`**
+  backed by the document's own sentences. **Mutation-tested four ways** — three by `V-W2` (corrupt
+  question (c); claim one was ruled; drop a question) and **once independently by the Conductor at
+  landing** (`questions_ruled` 0 → 3 ⇒ **exit 1**; restored ⇒ **exit 0**, file bit-identical).
+  Marked `does_not_reopen_t1_gate_answer: true` and carrying no gate verdict, per the obligation's
+  own terms. The filename trap was avoided and instrumented: a **field-scoped census of 306/306
+  banked JSONs** found **no record carrying leg 391 or unit `T1`**, and confirmed
+  `p2_route_p2t1_v1.json` is **leg 302, route P2T1, unit null**. *(Original entry, retained:)*
+- **`T1` OWED A MACHINE RECORD. Found by `V1`, 2026-08-14; an obligation, not an option.** Leg 391
   landed **no `writeup/data/*.json` and no evidence script**. Its gate answer checks out against
   **prose only** — `writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md`. Confirmed by a
   field-scoped scan of every banked JSON's `leg`/`route`/`unit` fields: **zero hits**. Lesson 68

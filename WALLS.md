@@ -288,10 +288,25 @@ The four results:
    rescaled Navier–Stokes system is genuinely parabolic.
 2. **`T³` is exactly the domain the obstruction asks for.** Compact, discrete Fourier basis,
    exponential decay. Leg 390's census: **6 compact/periodic instances, 0 unbounded.**
-   **⚠ THE CENSUS COUNT IS SUSPECT AS OF 2026-08-14 — leg 394 / `T6` (`e7db624`).** At full text,
-   **`arXiv:2409.09234` does not belong in leg 348's `domain_census`**: its rigorous content is a
-   theorem about a 1-D map fitted to DNS data — no interval arithmetic, no Galerkin-plus-tail, no
-   tail-domination estimate — and **its domain carries no-slip walls, not periodicity**. The authors:
+   **⚠ THE CENSUS COUNT IS WRONG AS OF 2026-08-14 — leg 394 / `T6` (`e7db624`), and the GROUND is
+   corrected here 2026-08-14 by `V-W2`, whose finding was against the Conductor's wording, not
+   against `T6`.** At full text, **`arXiv:2409.09234` does not belong in leg 348's `domain_census`**,
+   and **the record's own ground is the FIRST clause below, not the second** — this file and the
+   dispatch that quoted it had the two the wrong way round:
+   **(i) PRIMARY — it is not an instance of the technology at all.** `T6`, verbatim: *"THIS PAPER
+   CLOSES NO TAIL-DOMINATION ESTIMATE AND IS NOT AN INSTANCE OF THAT TECHNOLOGY AT ALL. The census
+   over-counts by one."* Its rigorous content is a theorem about a **1-D map fitted to DNS data** —
+   no interval arithmetic, no Galerkin projection, no tail-domination estimate, no
+   Newton–Kantorovich argument anywhere in it (`V-W2` re-measured all five term counts at **0**).
+   **(ii) SECONDARY, and it is `T6`'s own `u_code` U1** — the domain is **not a pure periodic cell**.
+   *(Superseded wording, struck: ~~"its domain carries no-slip walls, not periodicity"~~. `V-W2`
+   measured that the paper **never uses the phrase "no-slip"** — 0 occurrences. What it states is a
+   **moving-wall Dirichlet condition**, *"the boundary conditions at the inner and outer cylinder
+   walls `r = r_i` and `r = r_o` are `v = R_i θ̂` and `v = R_o θ̂`. Periodicity is enforced to the
+   rest of boundaries of the parallelogram domain"* (§2, p.4). That **is** no-slip on a rotating
+   cylinder, but the compression dropped "to the rest of boundaries", which is the substance.)*
+   **The count is unchanged: 6 entries − 1 = 5**, and `V-W2` reproduced the arithmetic and both
+   grounds independently from a re-fetched PDF whose SHA-256 matches the banked digest. The authors:
    *"our results, depending on numerical approximations, do not guarantee that the Navier-Stokes
    solutions exhibit chaotic behaviour in the sense of Devaney."* **Leg 348's census over-counts by
    one, and leg 390's figure inherits from it. Re-check before citing this count again.** The

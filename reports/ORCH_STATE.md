@@ -44,7 +44,7 @@ killed**; two re-open conditions recorded in `OPTIONS.md` §E. **Nothing measure
 | `V2` / leg 396 | **V**, CONSTRUCTION | `leg/396-v2-target` | Does the unit deliver **both** (A) a **named dissipative fluid target** in the lowest dimension admitting fluid structure, dissipative term **inside** the certified equation, with its ansatz; **and** (B) a **feasibility verdict** for a **C1-compliant** apparatus (Galerkin-plus-tail closure and/or leg 315's `O1` Taylor-model flow map), apparatus **named with a citation** and **shown to build no single bounded approximate inverse uniform in `M`**? `no` → a **measured list of candidate targets with the named property each fails**, which is landable. `UNDER-RESOURCED` + a cost, never a bare `no`. | (a) a named target is **not a certificate**; (b) a feasibility is **not a result on the Clay chain**; (c) **W3 breaks only on leg 174's own Grade-A criterion, unchanged**; (d) if the apparatus turns out to need a bounded approximate inverse uniform in `M`, **STOP and say so** — `T4`'s branch (c), more valuable than the verdict; (e) the negative branch is as valuable as the positive and is not softened; (f) novelty pass owed — if the target is already certified, **W3 is broken by someone else and that is the finding**; (g) controls that fire **both** ways (Dahne–Figueras CGL as the Grade-A-but-not-fluid positive); (h) lesson 91 | **DISPATCHED** |
 | `L2` / leg 397 | **L** | `leg/397-l2-decay` | Reading the published localisation/far-field-decay techniques against **this object** (route 4's DSS profile carrying leg 381's bill: `L³` tail **326.875/decade**, `α > 1.5` required vs `α = 1.0` available), does the unit state **per technique** the **named hypothesis** that fails — or the one that does not? Quote it and locate it. `no` → what it would take (§3d), `UNDER-RESOURCED`. | (a) a measured **"still no method, and here is precisely which hypothesis fails"** is a **real, landable result** — the answer to whether the Tier-2 ceiling is permanent — **and is not softened**; (b) a candidate is a **lead, not a broken wall**, until leg 381's bill is actually paid; (c) the deficit comes from the **artefact**, never prose; (d) **READ, do not CONTACT**; (e) instrument every zero, `THROTTLED`/`UNREACHABLE` never zeros, **no S2 key exists**; (f) lesson 91; (g) ceiling | **DISPATCHED** |
 | `L3′` / leg 398 | **L**, literature | `leg/398-l3p-chenhou` | At **full text**, `arXiv:2308.01528` + the Chen–Hou stability line: **(a)** does its unbounded-domain / algebraic-decay / computer-assisted mechanism bear on **leg 348's compact-domain obstruction — and on which side** (UNDERCUT / STRENGTHEN / DOES NOT REACH)? **(b)** does its nonlinear-stability-with-finite-unstable-spectrum technique reach **§6(ii)** for this object, and **which hypothesis** would this object have to satisfy? Deciding sentence **quoted and located**. | (a) three branches named in advance, **no fourth**; the prior is **DOES NOT REACH** (`T6`: stationary self-similar target, energy-estimate apparatus) and the unit must say whether full text **agrees or disagrees**; an undercut is the valuable branch and is **reported first**; (b) reaching §6(ii) **in shape is not a method** — **W5 stays unbroken**; (c) a confirmation is **not** a strengthening; (d) **READ, do not CONTACT** — contact is **HELD**; (e) `UNREACHABLE`/`THROTTLED` banked as such, **never zeros**; (f) ceiling | **DISPATCHED** |
-| `V-W2` | verification, **OBLIGATORY** | `verify/wave2` | From **banked JSON and landed evidence scripts alone**, do these reproduce exactly: **(1)** `T4`'s 2D-lift finding (`N_x3=0`, extent 1 in `x₃`, `max|u⁽³⁾|=max|ω⁽¹⁾|=max|ω⁽²⁾|=0.0` exactly vs `max|ω⁽³⁾|=1.6351/1.5274`, `setup='2D'`); **(2)** `T4`'s first conjunct ((4.32), `5.6e-15`, `δ=5.3e-06` vs `1e-3`) **and** the apparatus term counts (7/4/5/2) against **all six** closure terms at **zero**, Zgliczyński only as [48]; **(3)** `T6`'s **7/7, 2 UNDERCUT/4/1, 0 UNREACHABLE, 0 THROTTLED** and the `2409.09234` no-slip-walls undercut; **(4)** `T5`'s **1428 files / 417,476 lines**, **7 refusals APPARATUS 5 / REALIZATION 2**, **exactly 2** re-openable, **leg 257 not**. **PLUS the folded-in obligation: bank `T1`'s missing machine record** — the packet's three questions and the fact it **ruled none** — with an evidence script that **exits non-zero** on disagreement with the escalation document. | (a) agreement is expected and worth little; (b) **a disagreement is BANKED, not reconciled** by the verifier; (c) a claim the JSON cannot support is **`UNVERIFIABLE`, not `no`**; (d) **must not read** `STATE.md`, `WALLS.md`, `OPTIONS.md`, `DIRECTION.md`, this file, the briefs, or the wave-2 reasoning — **that narrowness IS the unit**; (e) **filename trap: `p2_route_p2t1_v1.json` is leg 302, unrelated** — scan `leg`/`route`/`unit` **fields**, not filenames; (f) banking `T1`'s record does **not** re-open its gate answer; (g) ceiling | **DISPATCHED** |
+| `V-W2` | verification, **OBLIGATORY** | `verify/wave2` | From **banked JSON and landed evidence scripts alone**, do these reproduce exactly: **(1)** `T4`'s 2D-lift finding (`N_x3=0`, extent 1 in `x₃`, `max|u⁽³⁾|=max|ω⁽¹⁾|=max|ω⁽²⁾|=0.0` exactly vs `max|ω⁽³⁾|=1.6351/1.5274`, `setup='2D'`); **(2)** `T4`'s first conjunct ((4.32), `5.6e-15`, `δ=5.3e-06` vs `1e-3`) **and** the apparatus term counts (7/4/5/2) against **all six** closure terms at **zero**, Zgliczyński only as [48]; **(3)** `T6`'s **7/7, 2 UNDERCUT/4/1, 0 UNREACHABLE, 0 THROTTLED** and the `2409.09234` no-slip-walls undercut; **(4)** `T5`'s **1428 files / 417,476 lines**, **7 refusals APPARATUS 5 / REALIZATION 2**, **exactly 2** re-openable, **leg 257 not**. **PLUS the folded-in obligation: bank `T1`'s missing machine record** — the packet's three questions and the fact it **ruled none** — with an evidence script that **exits non-zero** on disagreement with the escalation document. | (a) agreement is expected and worth little; (b) **a disagreement is BANKED, not reconciled** by the verifier; (c) a claim the JSON cannot support is **`UNVERIFIABLE`, not `no`**; (d) **must not read** `STATE.md`, `WALLS.md`, `OPTIONS.md`, `DIRECTION.md`, this file, the briefs, or the wave-2 reasoning — **that narrowness IS the unit**; (e) **filename trap: `p2_route_p2t1_v1.json` is leg 302, unrelated** — scan `leg`/`route`/`unit` **fields**, not filenames; (f) banking `T1`'s record does **not** re-open its gate answer; (g) ceiling | **RETURNED, AUDITED, LANDED** |
 
 **Figure allocation at dispatch: `fig111` → `V2`, and to no one else.** `L2`, `L3′` and `V-W2` were
 allocated **no figure** (the figure-collision incident is why this is stated at dispatch).
@@ -55,6 +55,62 @@ Conductor gates and merges. **No brief was given `DIRECTION.md`** (§3e). Territ
 > `V2`, `L2` and `L3′` land **`UNVERIFIED`** and this Conductor planned them. A wave-4 plan without
 > that verifier is **out of contract**. Written here as well as in `STATE.md` so it survives the
 > loss of either file.
+
+
+### `V-W2` — RETURNED, AUDITED AND LANDED, 2026-08-14
+
+**Gate answer: ALL FOUR ITEMS REPRODUCE**, audited by the Conductor against the gate committed at
+`42011ff` **before the unit existed**. Items (1) and (2) are **measurements, not transcription
+checks**: `Papers/` is untracked and was empty in the worker's worktree, so it **re-fetched all
+three primary artefacts read-only and every SHA-256 matched the banked digest exactly**, then
+re-derived from them. It did **not** accept a unit's own script agreeing with itself.
+
+- **(1)** `T4`'s 2D lift: bit-for-bit on every field (`N_x3 = 0`, `x₃` extent 1, the three exact
+  zeros, `max|ω⁽³⁾| = 1.6351/1.5274`, `setup = '2D'`).
+- **(2)** `T4`'s first conjunct: recomputed from the paper's own (4.33)/(4.34); smallest non-zero
+  deviation **`5.618065e-15`**, `δ = 5.2748360312e-06` vs `1e-3`. Term counts **7/4/5/2** recounted,
+  all six closure terms **0**, Zgliczyński once as **[48]**. *Refinement, not a contradiction:* the
+  bracket `[48]` is cited once in the body as prior work on Kuramoto–Sivashinsky.
+- **(3)** `T6`: **7/7, 2 UNDERCUT / 4 / 1, 0 `UNREACHABLE`, 0 `THROTTLED`** — recounted with
+  `Counter`, not read off the banked totals. Both leg-348 lock hashes still hold.
+- **(4)** `T5`: corpus re-enumerated with `git ls-tree` — **1428 files / 417,476 lines**,
+  `DIRECTION.md` absent **and the exclusion asserted executably**; **7 refusals, APPARATUS 5 /
+  REALIZATION 2**; **exactly 2** re-openable; leg 257 not. All 7 quotes still at their `file:line`.
+
+**THE ONE NUANCE, BANKED UNRECONCILED — AND IT IS A FINDING AGAINST THE CONDUCTOR'S WORDING, NOT
+AGAINST `T6`. RULED AT LANDING:** the gate said `2409.09234` *"carries no-slip walls, not
+periodicity, **so** the census over-counts by one."* `T6`'s **own** stated ground is *"THIS PAPER
+CLOSES NO TAIL-DOMINATION ESTIMATE AND IS NOT AN INSTANCE OF THAT TECHNOLOGY AT ALL"*, with the wall
+point filed as `u_code` **U1, secondary**. **Verified independently by the Conductor against
+`writeup/data/p2_route_t6_v1.json` at landing.** Both facts reproduce; **the `so` was mine.** The
+count is unchanged (**6 − 1 = 5**) and `WALLS.md` now leads with the primary ground. Also measured:
+the paper **never uses the phrase "no-slip"** (0 occurrences) — it states a **moving-wall Dirichlet
+condition** with *"periodicity … to the rest of boundaries"*. **This is the SECOND Conductor-wording
+defect a verifier has caught** (`V1` caught the first, on `R0`'s comparand). Neither was found by
+the Conductor.
+
+**`T1`'s OWED MACHINE RECORD: DISCHARGED.** `writeup/data/p2_route_t1_packet_v1.json` +
+`experiments/p2_route_t1_packet_evidence.py`, **31/31, exit 0**, `questions_ruled = 0`, carrying
+`does_not_reopen_t1_gate_answer: true`. **Mutation-tested three ways by the unit and once more
+independently by the Conductor at landing** (`questions_ruled` 0 → 3 ⇒ **exit 1**; restored ⇒
+**exit 0**, file bit-identical). The filename trap was instrumented rather than merely avoided: a
+**field-scoped census of 306/306 banked JSONs** found **no record carrying leg 391 or unit `T1`**,
+and confirmed `p2_route_p2t1_v1.json` is leg 302 / route P2T1 / unit null.
+
+**Two errors the unit found in ITSELF and recorded**, which is why its agreement is worth
+something: a wrong pre-registered radii formula (textbook quadratic instead of the paper's validity
+bound) that **would have banked a 70% false discrepancy**, and a strict-whitespace quote locator
+that reported 0/7 before repair. **Forbidden-read list honoured** and stated. Evidence **100/100,
+exit 0**, with 2 checks reporting **`skip` plus the banked SHA-256** rather than passing silently.
+
+**One banking-discipline observation the Conductor makes and does NOT edit:** the unit's
+`unreconciled_disagreements` array is **empty** while its own summary calls the nuance *"the one
+unreconciled disagreement"*. The nuance **is** banked, in `item_3`, so nothing is lost — but the
+machine-readable field and the prose disagree, and lesson 68 says the machine-readable one is what
+survives. Recorded here; **the unit's file is not edited by the Conductor.**
+
+**Environment side effect, recorded rather than glossed:** the unit installed **`scipy`** into the
+shared gitignored `.venv` to read the authors' `.mat` files. **No tracked file changed.**
 
 ### `E` (wave 1) — **DID NOT RETURN. GATE UNANSWERED. NOT LANDED, AND THAT IS A DECISION, NOT AN OVERSIGHT.**
 
@@ -1202,6 +1258,18 @@ Everything below this line is the run's institutional memory ([ORCHESTRATION.md]
 provably obsolete. (Added 2026-08-11, ported from the Project Building Engine.)
 
 ## Environment notes (carry forward every session)
+
+0. **`Papers/` IS UNTRACKED AND A FRESH CONTAINER HAS IT EMPTY**, and the same is true of every
+   gitignored working directory — `.venv/`, `experiments/programme_r4/*.npz`, per-unit checkpoint
+   directories. **Anything a unit needs across containers must be in git or re-fetchable.**
+   `V-W2` (2026-08-14) turned this into an advantage rather than a blocker: it **re-fetched all
+   three primary artefacts read-only and checked every SHA-256 against the banked digest**, which
+   made its items (1)–(2) measurements rather than transcription checks. **Copy that move** —
+   re-fetch and hash-check, and if a source cannot be reached, bank `UNREACHABLE` with the banked
+   digest, never a silent pass. Note also: **`.venv/` is gitignored, so a fresh git worktree has
+   none.** `ln -s /home/user/blowup-search/.venv .venv` inside the worktree resolves it.
+   **`scipy` was installed into that shared `.venv` on 2026-08-14** (to read the authors' `.mat`
+   files); no tracked file changed.
 
 1. **The orchestrator session itself can be suspended for going quiet**, taking every
    dispatched background agent and all `TaskOutput`/`SendMessage` handles with it, while the
