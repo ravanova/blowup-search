@@ -1,0 +1,518 @@
+{
+  "leg": 394,
+  "unit": "T6",
+  "route": "ROUTE-T6",
+  "role": "instrument only -- fetch and extract; adjudication is human, sec 0.3's fixed rules",
+  "gate_question": "Read at FULL TEXT each of the seven papers leg 348 classified at abstract level. For EACH, does the full text confirm, strengthen, or UNDERCUT leg 348's recorded classification of it? Answer per paper, in a table, with the deciding sentence quoted verbatim and located by section or page. A paper whose full text could not be obtained is banked as UNREACHABLE with the reason, never as a confirmation.",
+  "outreach": "READ ONLY. HTTP GET against published-document endpoints. No author, group, maintainer or mailing list contacted. The 2026-08-13 narrowing authorises reading, not contacting.",
+  "parser_names_no_namespace_version": true,
+  "k3_absent_probe": "zzqxjvbnmwkl",
+  "k4_probe_set": [
+    "unbounded",
+    "whole space",
+    "R^3",
+    "\\mathbb{R}^3",
+    "real line",
+    "Gaussian weight",
+    "algebraic decay",
+    "polynomial weight",
+    "inviscid",
+    "Euler equation",
+    "two-dimensional reduction",
+    "axisymmetric"
+  ],
+  "abstracts": [
+    {
+      "id": "math/0005247",
+      "endpoint": "arxiv-api",
+      "url": "https://export.arxiv.org/api/query?id_list=math%2F0005247&max_results=1&start=0",
+      "status": "MEASURED",
+      "http": 200,
+      "bytes": 2432,
+      "sha256": "4bd7b88cb8f5b7ceec9c7f91f36ced540f6403186e72e69319ab8e1323a621f6",
+      "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+      "total": 1,
+      "title": "Rigorous Numerics for Partial Differential Equations: the Kuramoto-Sivashinsky equation",
+      "abstract": "We present a new topological method for the study of the dynamics of dissipative PDE's. The method is based on the concept of the self-consistent apriori bounds, which allows to justify rigorously the Galerkin projection. As a result we obtain a low-dimensional system of ODE's subject to rigorously controlled small perturbation from the neglected modes. To this ODE's we apply the Conley index to obtain information about the dynamics of the PDE under consideration. As an application we present a computer assisted proof of the existence of fixed points for the Kuramoto-Sivashinsky equation.",
+      "note": null
+    },
+    {
+      "id": "2305.08221",
+      "endpoint": "arxiv-api",
+      "url": "https://export.arxiv.org/api/query?id_list=2305.08221&max_results=1&start=0",
+      "status": "MEASURED",
+      "http": 200,
+      "bytes": 2972,
+      "sha256": "57d86b81a8a7090b5536198b9dbfb703f24a8fd348bf43d1549ce4fd032970d5",
+      "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+      "total": 1,
+      "title": "Validated integration of semilinear parabolic PDEs",
+      "abstract": "Integrating evolutionary partial differential equations (PDEs) is an essential ingredient for studying the dynamics of the solutions. Indeed, simulations are at the core of scientific computing, but their mathematical reliability is often difficult to quantify, especially when one is interested in the output of a given simulation, rather than in the asymptotic regime where the discretization parameter tends to zero. In this paper we present a computer-assisted proof methodology to perform rigorous time integration for scalar semilinear parabolic PDEs with periodic boundary conditions. We formulate an equivalent zero-finding problem based on a variations of constants formula in Fourier space. Using Chebyshev interpolation and domain decomposition, we then finish the proof with a Newton--Kantorovich type argument. The final output of this procedure is a proof of existence of an orbit, together with guaranteed error bounds between this orbit and a numerically computed approximation. We illustrate the versatility of the approach with results for the Fisher equation, the Swift--Hohenberg equation, the Ohta--Kawasaki equation and the Kuramoto--Sivashinsky equation. We expect that this rigorous integrator can form the basis for studying boundary value problems for connecting orbits in partial differential equations.",
+      "note": null
+    },
+    {
+      "id": "1902.00384",
+      "endpoint": "arxiv-api",
+      "url": "https://export.arxiv.org/api/query?id_list=1902.00384&max_results=1&start=0",
+      "status": "MEASURED",
+      "http": 200,
+      "bytes": 2364,
+      "sha256": "16149af0c24be56afabfc0c9adb9a36a019aaaf40377b37749d063fa7caed821",
+      "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+      "total": 1,
+      "title": "Spontaneous periodic orbits in the Navier-Stokes flow",
+      "abstract": "In this paper, a general method to obtain constructive proofs of existence of periodic orbits in the forced autonomous Navier-Stokes equations on the three-torus is proposed. After introducing a zero finding problem posed on a Banach space of geometrically decaying Fourier coefficients, a Newton-Kantorovich theorem is applied to obtain the (computer-assisted) proofs of existence. The required analytic estimates to verify the contractibility of the operator are presented in full generality and symmetries from the model are used to reduce the size of the problem to be solved. As applications, we present proofs of existence of spontaneous periodic orbits in the Navier-Stokes equations with Taylor-Green forcing.",
+      "note": null
+    },
+    {
+      "id": "2409.09234",
+      "endpoint": "arxiv-api",
+      "url": "https://export.arxiv.org/api/query?id_list=2409.09234&max_results=1&start=0",
+      "status": "MEASURED",
+      "http": 200,
+      "bytes": 2512,
+      "sha256": "99a56270df7b024fa5423e9cb049ec478c75d0a008a56a3bb70621ccf3711ea8",
+      "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+      "total": 1,
+      "title": "Mathematically established chaos and forecast of statistics with recurrent patterns in Taylor-Couette flow",
+      "abstract": "The transition to chaos in the subcritical regime of counter-rotating Taylor-Couette flow is investigated using a minimal periodic domain capable of sustaining coherent structures. Following a Feigenbaum cascade, the dynamics are found to be remarkably well approximated by a simple discrete map that admits rigorous proof of its chaotic nature. The chaotic set that arises for the map features densely distributed periodic points that are in one-to-one correspondence with unstable periodic orbits (UPOs) of the Navier-Stokes system. This supports the increasingly accepted view that UPOs may serve as the backbone of turbulence and, indeed, we demonstrate that it is possible to reconstruct every statistical property of chaotic fluid flow from UPOs.",
+      "note": null
+    },
+    {
+      "id": "2105.04148",
+      "endpoint": "arxiv-api",
+      "url": "https://export.arxiv.org/api/query?id_list=2105.04148&max_results=1&start=0",
+      "status": "MEASURED",
+      "http": 200,
+      "bytes": 1965,
+      "sha256": "84076ad0440043d476cae41fc520fa524ec31b7915ae908839ee9b3ab109f574",
+      "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+      "total": 1,
+      "title": "Computer assisted proof of branches of stationary and periodic solution, and Hopf bifurcations, for dissipative PDEs",
+      "abstract": "We discuss an approach to the computer assisted proof of the existence of branches of stationary and periodic solutions for dissipative PDEs, using the Brussellator system with diffusion and Dirichlet boundary conditions as an example, We also consider the case where the branch of periodic solutions emanates from a branch of stationary solutions through a Hopf bifurcation.",
+      "note": null
+    },
+    {
+      "id": "2009.12762",
+      "endpoint": "arxiv-api",
+      "url": "https://export.arxiv.org/api/query?id_list=2009.12762&max_results=1&start=0",
+      "status": "MEASURED",
+      "http": 200,
+      "bytes": 2049,
+      "sha256": "3084f22483fff7ec80b1b6c9d5ae415233dd50ef9da7bf073fc21499e8580b5c",
+      "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+      "total": 1,
+      "title": "A Hopf bifurcation in the planar Navier-Stokes equations",
+      "abstract": "We consider the Navier-Stokes equation for an incompressible viscous fluid on a square, satisfying Navier boundary conditions and being subjected to a time-independent force. As the kinematic viscosity is varied, a branch of stationary solutions is shown to undergo a Hopf bifurcation, where a periodic cycle branches from the stationary solution. Our proof is constructive and uses computer-assisted estimates.",
+      "note": null
+    },
+    {
+      "id": "2308.01528",
+      "endpoint": "arxiv-api",
+      "url": "https://export.arxiv.org/api/query?id_list=2308.01528&max_results=1&start=0",
+      "status": "MEASURED",
+      "http": 200,
+      "bytes": 2165,
+      "sha256": "1aa6ac93af964cef4d5c1263a2bfea7d78a19bbd1f0806c82f7af817f98d4158",
+      "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+      "total": 1,
+      "title": "Exact self-similar finite-time blowup of the Hou-Luo model with smooth profiles",
+      "abstract": "We show that the 1D Hou-Luo model on the real line admits exact self-similar finite-time blowup solutions with smooth self-similar profiles. The existence of these profiles is established via a fixed-point method that is purely analytic. We also prove that the profiles satisfy some monotonicity and convexity properties that were unknown before, and we give rigorous estimates on the algebraic decay rates of the profiles in the far field. Our result supplements the previous computer-assisted proof of self-similar finite-time blowup for the Hou-Luo model with finer characterizations of the profiles.",
+      "note": null
+    }
+  ],
+  "fulltexts": [
+    {
+      "id": "math/0005247",
+      "endpoint": "arxiv-pdf",
+      "url": "https://arxiv.org/pdf/math/0005247",
+      "status": "MEASURED",
+      "http": "cached",
+      "bytes": 281308,
+      "sha256": "8a0ddcd2fdf41ba1096aec9c9d0f31b644e869bfcaa052d8463faa9876cd025c",
+      "is_pdf_magic": true,
+      "pages": 32,
+      "chars_extracted": 91978,
+      "pdf_path": "Papers/math_0005247.pdf",
+      "text_path": "Papers/t6_text/math_0005247.txt",
+      "k3_present_token": "Kuramoto",
+      "k3_present_hits": 17,
+      "k3_absent_hits": 0,
+      "k4_probes_fired": [],
+      "note": null
+    },
+    {
+      "id": "2305.08221",
+      "endpoint": "arxiv-pdf",
+      "url": "https://arxiv.org/pdf/2305.08221",
+      "status": "MEASURED",
+      "http": "cached",
+      "bytes": 3882622,
+      "sha256": "8376e82bcf85a07240fa89d0b81cf507cb1a8f7940ea86e714a4189e04720049",
+      "is_pdf_magic": true,
+      "pages": 52,
+      "chars_extracted": 224691,
+      "pdf_path": "Papers/2305.08221.pdf",
+      "text_path": "Papers/t6_text/2305.08221.txt",
+      "k3_present_token": "parabolic",
+      "k3_present_hits": 20,
+      "k3_absent_hits": 0,
+      "k4_probes_fired": [
+        "whole space"
+      ],
+      "note": null
+    },
+    {
+      "id": "1902.00384",
+      "endpoint": "arxiv-pdf",
+      "url": "https://arxiv.org/pdf/1902.00384",
+      "status": "MEASURED",
+      "http": "cached",
+      "bytes": 874126,
+      "sha256": "97e81647e108b8d73122c5e0c9fdc11da3ed291abb724519eab7f9ad74a05d29",
+      "is_pdf_magic": true,
+      "pages": 52,
+      "chars_extracted": 215300,
+      "pdf_path": "Papers/1902.00384.pdf",
+      "text_path": "Papers/t6_text/1902.00384.txt",
+      "k3_present_token": "Navier",
+      "k3_present_hits": 50,
+      "k3_absent_hits": 0,
+      "k4_probes_fired": [
+        "unbounded",
+        "whole space"
+      ],
+      "note": null
+    },
+    {
+      "id": "2409.09234",
+      "endpoint": "arxiv-pdf",
+      "url": "https://arxiv.org/pdf/2409.09234",
+      "status": "MEASURED",
+      "http": "cached",
+      "bytes": 4533748,
+      "sha256": "7a3c8ac94b0af8658d30b7f7e4185a8850427263bb44f5b4f840629d3d3042b3",
+      "is_pdf_magic": true,
+      "pages": 11,
+      "chars_extracted": 36718,
+      "pdf_path": "Papers/2409.09234.pdf",
+      "text_path": "Papers/t6_text/2409.09234.txt",
+      "k3_present_token": "Taylor",
+      "k3_present_hits": 19,
+      "k3_absent_hits": 0,
+      "k4_probes_fired": [],
+      "note": null
+    },
+    {
+      "id": "2105.04148",
+      "endpoint": "arxiv-pdf",
+      "url": "https://arxiv.org/pdf/2105.04148",
+      "status": "MEASURED",
+      "http": "cached",
+      "bytes": 692269,
+      "sha256": "2e8af8b3917baba021f35ae46287f71608a1d2c8c03e52e4a7d476027aded0ab",
+      "is_pdf_magic": true,
+      "pages": 13,
+      "chars_extracted": 30592,
+      "pdf_path": "Papers/2105.04148.pdf",
+      "text_path": "Papers/t6_text/2105.04148.txt",
+      "k3_present_token": "bifurcation",
+      "k3_present_hits": 21,
+      "k3_absent_hits": 0,
+      "k4_probes_fired": [
+        "real line"
+      ],
+      "note": null
+    },
+    {
+      "id": "2009.12762",
+      "endpoint": "arxiv-pdf",
+      "url": "https://arxiv.org/pdf/2009.12762",
+      "status": "MEASURED",
+      "http": "cached",
+      "bytes": 413848,
+      "sha256": "3ae9175fd55909762ec28269d700c5e1d101871a08c9748d560faad53a19c915",
+      "is_pdf_magic": true,
+      "pages": 16,
+      "chars_extracted": 53459,
+      "pdf_path": "Papers/2009.12762.pdf",
+      "text_path": "Papers/t6_text/2009.12762.txt",
+      "k3_present_token": "Navier",
+      "k3_present_hits": 26,
+      "k3_absent_hits": 0,
+      "k4_probes_fired": [],
+      "note": null
+    },
+    {
+      "id": "2308.01528",
+      "endpoint": "arxiv-pdf",
+      "url": "https://arxiv.org/pdf/2308.01528",
+      "status": "MEASURED",
+      "http": "cached",
+      "bytes": 812901,
+      "sha256": "dcee92d7a6fc34e54df953eb4c3669c6a22019fde22fa9d34aaf1464984862d4",
+      "is_pdf_magic": true,
+      "pages": 35,
+      "chars_extracted": 178342,
+      "pdf_path": "Papers/2308.01528.pdf",
+      "text_path": "Papers/t6_text/2308.01528.txt",
+      "k3_present_token": "Hou",
+      "k3_present_hits": 35,
+      "k3_absent_hits": 0,
+      "k4_probes_fired": [
+        "Euler equation",
+        "algebraic decay",
+        "axisymmetric",
+        "real line"
+      ],
+      "note": null
+    }
+  ],
+  "summary_fetch": {
+    "n_fulltext_MEASURED": 7,
+    "n_fulltext_UNREACHABLE": 0,
+    "n_fulltext_THROTTLED": 0,
+    "n_abstract_MEASURED": 7,
+    "namespaces_served": [
+      "http://a9.com/-/spec/opensearch/1.1/"
+    ],
+    "k4_any_probe_fired": true
+  },
+  "verdict_rules": {
+    "pre_registered_at": "experiments/journal/leg_394.md sec 0.3, committed 0ee0b4c BEFORE the first fetch",
+    "confirm": "reachable and not contradicted; CONSISTENCY IS NOT STRENGTHENING",
+    "strengthen": "confirm PLUS an S-code (S1-S4) the abstract did not carry, checked mechanically",
+    "UNDERCUT": "contradicts, materially weakens or narrows leg 348's recorded classification (U1-U6)",
+    "UNREACHABLE": "full text not obtained or not readable -- NOT a zero, NOT a confirmation"
+  },
+  "verdicts": [
+    {
+      "id": "math/0005247",
+      "paper": "P1",
+      "authors_as_served": "P. Zgliczynski, K. Mischaikow",
+      "leg348_recorded_authors": "Zgliczynski",
+      "verdict": "strengthen",
+      "s_codes": [
+        "S4"
+      ],
+      "u_codes": [],
+      "deciding_sentence": "subject to periodic and odd boundary conditions",
+      "locator": "sec 1, between eq. (1) and eq. (2), p.2",
+      "supporting": [
+        {
+          "quote": "we do not pursue these more complicated structures in this paper",
+          "locator": "sec 1, p.3",
+          "what_it_settles": "leg 348's careful reading is CORRECT and is confirmed at full text: this paper's certified objects are FIXED POINTS, not periodic orbits. The periodic-orbit extension is named as possible 'in principle' and explicitly NOT carried out here."
+        }
+      ],
+      "s_code_detail": {
+        "S4": {
+          "claim": "The full text states the domain and the boundary conditions EXPLICITLY -- KS on (-pi, pi) with periodic and odd boundary conditions, eq. (1)-(2) -- where leg 348 could only INFER them ('abstract does not state BC explicitly but ... is the standard periodic-domain Fourier-truncation construction in this line of work'). The inference is now a stated fact.",
+          "abstract_absent_tokens": [
+            "boundary condition",
+            "periodic",
+            "odd"
+          ]
+        }
+      },
+      "leg348_classification_status": "ACCURATE and now better evidenced. The domain-compactness inference leg 348 flagged as an inference is confirmed by the paper's own problem statement."
+    },
+    {
+      "id": "2305.08221",
+      "paper": "P2",
+      "verdict": "strengthen",
+      "s_codes": [
+        "S2"
+      ],
+      "u_codes": [],
+      "deciding_sentence": "we develop a rigorous computational method for validating solutions of initial value problems for scalar semilinear parabolic equations, with periodic boundary conditions, of the form",
+      "locator": "sec 1, immediately above eq. (1), p.2",
+      "supporting": [],
+      "s_code_detail": {
+        "S2": {
+          "claim": "eq. (1) fixes the spatial domain and the dimensionality explicitly -- x in [0, 2 pi], ONE space dimension -- neither of which the abstract carries ('scalar' qualifies the unknown, not the space). Leg 348 recorded the periodic BC from the abstract; the full text adds the domain itself.",
+          "abstract_absent_tokens": [
+            "2\u03c0",
+            "2 pi",
+            "one-dimensional"
+          ]
+        }
+      },
+      "k4_probe_adjudications": [
+        {
+          "probe": "whole space",
+          "hit_context": "Over the whole space, the norm",
+          "locator": "sec 3, above Lemma 3.6, p.13",
+          "adjudication": "NOT an undercut. 'whole space' here is the whole BANACH space X_nu, not a spatial domain. The probe fired and was adjudicated, which is what K4 is for."
+        }
+      ],
+      "leg348_classification_status": "ACCURATE."
+    },
+    {
+      "id": "1902.00384",
+      "paper": "P3",
+      "verdict": "UNDERCUT",
+      "s_codes": [],
+      "u_codes": [
+        "U3"
+      ],
+      "deciding_sentence": "While all of the analysis is performed in full generality on the 3-torus, the solutions we present in Theorem 1.1 below are two-dimensional (in space) time-periodic solutions.",
+      "locator": "sec 1, p.3",
+      "supporting": [
+        {
+          "quote": "Indeed, they are homogeneous in one spatial variable and can thus be interpreted as solutions on the 2-torus.",
+          "locator": "sec 1, p.3",
+          "what_it_settles": "The certified object IS a lift of a lower-dimensional one -- which is exactly the disqualifier WALLS.md's W2 pre-committed test names."
+        },
+        {
+          "quote": "they are independent of x3 and the third component of the velocity vanishes. We call such a solution an (essentially) 2D solution.",
+          "locator": "sec 1, p.3",
+          "what_it_settles": "u_3 = 0 and d/dx_3 = 0 on the certified solution. Stated by the authors."
+        },
+        {
+          "quote": "The only reason for this reduction is that the physical memory requirements",
+          "locator": "sec 1, p.3 (continues '...for a three-dimensional solution are, for now, prohibitive in our current implementation.')",
+          "what_it_settles": "THE REASON IS COST, NOT MATHEMATICS. The analytic estimates are built in full generality on T^3; what is missing is memory. That is a price, and a price is a number -- it does NOT make the 3D case impossible, and this leg does not claim it does."
+        },
+        {
+          "quote": "Theorem 2.15. Let",
+          "locator": "sec 2.4, p.13 (statement continues: 'eta > 1 ... assume there exist W in X and non-negative constants Y_0, Z_0, Z_1 and Z_2')",
+          "what_it_settles": "THE APPARATUS, READ AT FULL TEXT AND RELEVANT TO RULING C1: the paper's validation theorem is literally a Y_0 / Z_0 / Z_1 / Z_2 radii-polynomial contraction, and Z_0 = ||I - A A_dagger|| requires a BOUNDED APPROXIMATE INVERSE A. C1's own words: 'A unit that reaches for a Y_0/Z_0/Z_1/Z_2 contraction, IN ANY SPACE, is inside the ban whatever it calls itself.' This is NOT the Galerkin-plus-tail dynamical closure C1 put outside the ban. It CONFIRMS leg 348's own apparatus sorting (leg 348 called it 'the same NK-in-exponentially-decaying-coefficient-basis family already measured DEAD in this repository') -- and it is a fact unit T4 needs, because T4 is chartered to reproduce THIS paper with a C1-COMPLIANT apparatus."
+        }
+      ],
+      "what_is_NOT_undercut": "The viscous term IS inside the certified equation. Eq. (1.1) carries -nu Delta u; the zero-finding problem is derived from the vorticity form of (1.1); and the tail of the approximate inverse acts diagonally as lambda_n = 1 / (nu n^2 + i Omega n), i.e. the VISCOSITY is what makes the tail of A bounded. Leg 348's parenthetical '(viscous term inside the certified equation)' STANDS. The domain is genuinely the three-torus. What does not stand is 'genuine 3D' / 'natively 3D'.",
+      "leg348_classification_status": "SPLIT. Leg 348's QUOTE is accurate -- the abstract does say 'on the three-torus'. Leg 348's INFERENCE is not: its `relevance` field calls this 'a periodic orbit of genuine 3D NS', and WALLS.md's W2 crack calls the object 'natively 3D'. The certified solutions of Theorem 1.1 are, in the authors' own words, '(essentially) 2D'. This is precisely the failure mode W2 exists to name -- 'Every published work stating a 3D singularity theorem with a certificate obtains the 3D-ness from somewhere other than the certificate' -- and it is invisible from the abstract, which is why leg 348 could not have caught it at abstract level.",
+      "consequence_for_T4": "T4 / leg 393 is running against THIS paper in THIS wave. Two findings bear on it, and neither is this unit's to rule on. (1) The rows T4 reproduces are rows for an (essentially) 2D certified solution, so a successful reproduction does NOT demonstrate a certificate supplying its own three-dimensionality, and T4's write-up must not be read as clearing W2's pre-committed test. (2) The paper's apparatus is a Y_0/Z_0/Z_1/Z_2 contraction with a bounded approximate inverse -- which is T4's own pre-committed reading (c) firing on the paper rather than on the implementation. REPORTED, NOT RULED: the Conductor decides what happens to T4."
+    },
+    {
+      "id": "2409.09234",
+      "paper": "P4",
+      "verdict": "UNDERCUT",
+      "s_codes": [],
+      "u_codes": [
+        "U4",
+        "U1"
+      ],
+      "deciding_sentence": "our results, depending on numerical approximations, do not guarantee that the Navier-Stokes solutions exhibit chaotic behaviour in the sense of Devaney",
+      "locator": "sec 5 Conclusion, p.9",
+      "supporting": [
+        {
+          "quote": "the theorems hinge upon an imperative condition: the map must be one-dimensional and continuous",
+          "locator": "sec 3, p.5",
+          "what_it_settles": "The rigorous content (Li-Yorke / Sharkovskii) is a theorem about a ONE-DIMENSIONAL MAP fitted to DNS data, not about the Navier-Stokes system. There is no interval arithmetic, no Galerkin projection, no tail-domination estimate and no Newton-Kantorovich argument anywhere in the paper. The UPOs themselves are obtained by a (non-rigorous) Poincare-Newton-Krylov solve on DNS data."
+        },
+        {
+          "quote": "Periodicity is enforced to the rest of boundaries of the parallelogram domain",
+          "locator": "sec 2, p.4",
+          "what_it_settles": "U1, secondary: the domain is NOT a periodic cell. It carries NO-SLIP rotating-wall Dirichlet conditions at r = r_i and r = r_o and is periodic only in the remaining directions. Leg 348 filed it under 'minimal periodic domain' on the abstract's phrase alone."
+        }
+      ],
+      "leg348_classification_status": "SPLIT, and the aggregate is the part that breaks. Leg 348's per-paper `method` field -- 'rigorous chaos statement via a discrete map approximation' -- is ACCURATE. But leg 348 then used this paper as one of its seven instances of the certification technology, writing in its journal sec 3 that 'every located instance of the self-consistent-a-priori-bounds / Galerkin-plus-tail / NK-in-Fourier-space technology -- ... a Taylor-Couette UPO paper (arXiv:2409.09234 ...) -- closes its tail-domination (neglected-mode) estimate against a COMPACT domain'. THIS PAPER CLOSES NO TAIL-DOMINATION ESTIMATE AND IS NOT AN INSTANCE OF THAT TECHNOLOGY AT ALL. The census over-counts by one.",
+      "consequence": "`p2_route_pocp_v1.json.domain_census.compact_or_periodic_domain` lists six entries; one of them (this paper) is not an instance of the technology being censused, and a second (P3) is an instance whose certified object is essentially 2D. The obstruction leg 348 named is NOT thereby refuted -- no counter-instance on an unbounded, algebraically weighted domain was found at full text either -- but the evidence base for it is thinner than the record says. REPORTED, NOT RULED."
+    },
+    {
+      "id": "2105.04148",
+      "paper": "P5",
+      "verdict": "strengthen",
+      "s_codes": [
+        "S2"
+      ],
+      "u_codes": [],
+      "deciding_sentence": "This is essentially the Brussellator system with diffusion and Dirichlet boundary conditions",
+      "locator": "sec 1, immediately below eq. (1), p.2",
+      "supporting": [],
+      "s_code_detail": {
+        "S2": {
+          "claim": "eq. (1) fixes the domain and the dimensionality explicitly -- ONE space dimension, x in (0, pi), with U(0,t) = U(pi,t) = V(0,t) = V(pi,t) = 0 -- neither of which the abstract carries. The abstract names the BC type only.",
+          "abstract_absent_tokens": [
+            "\u03c0",
+            "one-dimensional",
+            "1D"
+          ]
+        }
+      },
+      "k4_probe_adjudications": [
+        {
+          "probe": "real line",
+          "hit_context": "a property that simplifies the computer assisted estimates",
+          "locator": "sec 1, p.2 (full sentence: 'This choice allows solutions admitting analytic extensions to the whole real line, a property that simplifies the computer assisted estimates')",
+          "adjudication": "NOT an undercut, and it is the closest call in the set. The 'whole real line' is the domain of ANALYTIC EXTENSION of the solutions, invoked to make the computer-assisted estimates easier; the PDE is still posed on (0, pi) with Dirichlet conditions. This is a genuine near-miss on trigger U1 and it is recorded as adjudicated, not silently dropped."
+        }
+      ],
+      "leg348_classification_status": "ACCURATE."
+    },
+    {
+      "id": "2009.12762",
+      "paper": "P6",
+      "verdict": "strengthen",
+      "s_codes": [
+        "S1"
+      ],
+      "u_codes": [],
+      "deciding_sentence": "Following [21], we impose Navier boundary conditions",
+      "locator": "sec 1, immediately above eq. (1.2), p.1",
+      "supporting": [
+        {
+          "quote": "In order to reduce the complexity of the problem, the domain",
+          "locator": "sec 1, p.1 (continues '... Omega is chosen to be as simple as possible, namely the square Omega = (0, pi)^2.')",
+          "what_it_settles": "Explicit bounded 2D domain, confirming leg 348's abstract-level read."
+        }
+      ],
+      "s_code_detail": {
+        "S1": {
+          "claim": "The abstract never exhibits the equation, so it cannot state that the viscous term is inside the certified one. The full text does: eq. (1.1) is d_t u - nu Laplacian u + (u.grad)u + grad p = f, and after the rescaling u -> nu^{-1} u it is eq. (1.4), alpha d_t u - Laplacian u + gamma (u.grad)u + grad p = f, which is the equation Theorem 1.1's certified solutions solve. The dissipative term is INSIDE the certified equation.",
+          "abstract_absent_tokens": [
+            "\u2206",
+            "\u0394",
+            "Laplac",
+            "grad p"
+          ]
+        }
+      },
+      "leg348_classification_status": "ACCURATE."
+    },
+    {
+      "id": "2308.01528",
+      "paper": "P7",
+      "verdict": "confirm",
+      "s_codes": [],
+      "u_codes": [],
+      "deciding_sentence": "denotes the Hilbert transform on the real line",
+      "locator": "sec 1, immediately below eq. (1.1), p.1",
+      "supporting": [
+        {
+          "quote": "Therefore, it would be helpful to develop pure analytic strategies to prove the existence of exact self-similar finite-time blowups",
+          "locator": "sec 1, p.2",
+          "what_it_settles": "Confirms leg 348's apparatus sorting: this paper's method is PURELY ANALYTIC and is offered as an alternative to the computer-assisted route, not as an instance of the Galerkin-plus-tail technology."
+        }
+      ],
+      "k4_probe_adjudications": [
+        {
+          "probe": "algebraic decay / axisymmetric / Euler equation / real line",
+          "hit_context": "sec 1's discussion of [CHH22] and [CH22]",
+          "locator": "sec 1, p.1-2",
+          "adjudication": "NOT an undercut of THIS paper's classification, but it is the one thing at full text that narrows leg 348's AGGREGATE claim and it is recorded rather than dropped. The full text characterises Chen-Hou [CH22] as a computer-assisted proof of asymptotically self-similar blow-up for the 2D Boussinesq / 3D Euler equations -- i.e. computer-assisted certification reaching MORE THAN 1D on an UNBOUNDED domain (the half-space R x R+) with algebraic far-field decay. It does NOT fire trigger U6, because U6 requires a TIME-PERIODIC target and CH22's target is a stationary self-similar profile, and because CH22's apparatus is energy estimates with computer-assisted constants, not a Galerkin-plus-tail dynamical closure. Recorded as a NARROWING OBSERVATION, deliberately NOT banked as a verdict."
+        }
+      ],
+      "leg348_classification_status": "ACCURATE."
+    }
+  ],
+  "verdict_counts": {
+    "confirm": 1,
+    "strengthen": 4,
+    "UNDERCUT": 2,
+    "UNREACHABLE": 0
+  },
+  "gate_answer": {
+    "answered": true,
+    "headline": "TWO UNDERCUTS. arXiv:1902.00384's certified solutions are, in the authors' own words, '(essentially) 2D' -- homogeneous in x3 with u3 = 0 -- so the certificate does NOT supply its own three-dimensionality, which is the exact thing WALLS.md's W2 crack claimed it did. arXiv:2409.09234 proves nothing rigorous about Navier-Stokes at all, by its own conclusion, so leg 348's technology census over-counts it.",
+    "table": "see `verdicts` above; one row per paper, deciding sentence verbatim, located",
+    "unreachable": 0,
+    "note_on_unreachable": "no paper was UNREACHABLE; 7/7 full texts retrieved and extracted"
+  },
+  "clay_status": {
+    "l1_l4_chain_moved": false,
+    "clay_odds": "~0.05%, unchanged",
+    "note": "A literature re-read at full text is not movement toward Clay in either direction. TIER 2 ceiling; nothing here is a proof. Both walls stand -- and W2's recorded CRACK is what this unit narrows, not W2 itself."
+  }
+}
