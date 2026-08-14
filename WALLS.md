@@ -539,6 +539,27 @@ be sold as a route to the published targets, which is how the earlier wording re
 and **`U4`/`G2` (the basin radius)** and the H-hard diagnostic; `R5` stays valuable for a different
 reason than the one the pointer implied.
 
+**THE H-HARD DIAGNOSTIC HAS NOW RUN — `E`, landed `d0d72b1`, 2026-08-14 — and this is the hardest
+number Lane R has produced about the named rows.** Seeded directly at the published `(T, s)` of all
+eight named Lucas–Kerswell Table IV rows, two arms each: **2 of 16 converged, 0 recovered their own
+row, 0 recovered ANY named row.** The two convergences are genuine solutions of this realization
+that are **not** their rows, and **both fell below the 0.15 `|s|` shelf** — the basin-structure
+finding reproduced **at the strongest seed quality this programme can construct.** The null is a
+measurement, not a broken instrument: a positive control recovered a perturbed banked orbit at
+`‖R‖ 1.5e-10`, `ΔT 3e-07`, through **this unit's own predicate**, while the phase-scrambled negative
+control failed as planted.
+
+**What this does and does not do to the wall.** It does **not** convert `G1` to a `no` — §3d holds,
+and a hand-placed seed at published coordinates is **not** a mined seed, so `G1` stays
+`UNDER-RESOURCED` and was not written to. It does **not** refute H-hard's alternatives outright: the
+`R < 0.25` admission window **remains a live confound `E` could not separate.** What it does is
+**move the suspicion from the budget to the realization**, for the first time here — `E` got
+strictly closer than leg 353 (final residuals **[0.80, 10.32]** against leg 353's **[22.5, 29.5]**)
+from strictly **worse** seeds, using a better realization, and still recovered nothing. **`E`'s
+pre-committed branch `E-ii` named `R4` — the first-order-in-time stepper — in advance as where
+exactly this outcome would point, and `E-ii`'s antecedent is satisfied.** `E-iii` also fired and
+points at `R3`/`R2`. **Both pointers are live and the re-ranking between them is not yet made.**
+
 **A ban that binds this lane: leg 349's GA gate answered NO (0 of 6 properties cleared), so
 `GA compute on an unvalidated fitness` is live.** A *learned* or *evolved* seed-scoring function is
 banned territory. R1–R5 are all deterministic and none of them touch it — keep it that way.

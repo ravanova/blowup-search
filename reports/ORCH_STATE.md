@@ -7,26 +7,35 @@ every stop. A fresh session reads this at Step 0b before dispatching anything.
 
 ---
 
-## LIVE — CONDUCTOR mode, wave 2 COMPLETE AND INTEGRATED, 2026-08-14
+## LIVE — CONDUCTOR mode, WOUND UP 2026-08-14. WAVES 1 AND 2 BOTH COMPLETE. NOTHING IN FLIGHT.
 
-**ALL FOUR WAVE-2 UNITS HAVE RETURNED, BEEN AUDITED AND LANDED.** `main` = pushed below. `E` (wave 1)
-is still in flight. **The wave's result is that Lane T's central premise was false**, measured twice
-by two instruments, and the record has been corrected rather than defended.
+**ALL NINE UNITS OF BOTH WAVES HAVE RETURNED, BEEN AUDITED AND LANDED, AND EVERYTHING IS PUSHED.**
+Wound up on the user's instruction: *"complete what is outstanding from wave 2, complete E, and then
+wind up, push all to main."* **This is a wind-up, not a stop** — no lane is held and no ban changed.
 
-| unit | gate answer | landed |
-|---|---|---|
-| `T4` | **`STOP`, pre-committed branch (c)** — `1902.00384` is certified by the BANNED apparatus and both rows are **2D lifts** | `2c87244` |
-| `T6` | **7/7 read. 2 UNDERCUT / 4 strengthen / 1 confirm.** 0 UNREACHABLE, 0 THROTTLED, 0 zeros | `e7db624` |
-| `V1` | **all five wave-1 claims reproduce; `M3 = DELIVERED` SURVIVES**; two defects banked | `2fb399f` |
-| `T5` | **7 refusals, APPARATUS 5 / REALIZATION 2, 2 re-openable and unranked** | `a6f0c38` |
+| unit | wave | gate answer | landed |
+|---|---|---|---|
+| `T4` | 2 | **`STOP`, pre-committed branch (c)** — `1902.00384` is certified by the BANNED apparatus and both rows are **2D lifts** | `2c87244` |
+| `T6` | 2 | **7/7 read. 2 UNDERCUT / 4 strengthen / 1 confirm.** 0 UNREACHABLE, 0 THROTTLED, 0 zeros | `e7db624` |
+| `V1` | 2 | **all five wave-1 claims reproduce; `M3 = DELIVERED` SURVIVES**; two defects banked | `2fb399f` |
+| `T5` | 2 | **7 refusals, APPARATUS 5 / REALIZATION 2, 2 re-openable and unranked** | `a6f0c38` |
+| `E` | 1 | **PASS** — all three diagnostics RETURN with two-sided controls; branch **`E-iii`**; **0 of 16 recovered any named row** | `d0d72b1` |
+
+**THE TWO RESULTS.** (i) **Lane T's central premise is measured FALSE** — twice, by two units, by
+two different methods — and the record has been **corrected rather than defended**. (ii) **The named
+Table IV rows are not reachable even from their own published coordinates**, with a positive control
+proving the predicate can return a recovery. **Neither is a Clay advance. Ceiling TIER 2; no
+`L1→L4` link moved; Clay stays ~0.05%.**
 
 **OPEN ESCALATION, AWAITING THE USER:** `writeup/escalations/ESCALATION_C1_EXEMPLAR_2026-08-14.md`.
 C1's *general proposition* stands; its *exemplar* has fallen. Three questions are put; none is the
-Conductor's to answer. **Work has not stopped.**
+Conductor's to answer.
 
-**What the next Conductor must do first:** gate and land whatever `prog-r4/e-hhard` holds, then plan
-wave 3 — which **must carry the wave-2 verifier**, since this Conductor planned `T4`, `T6`, `T5` and
-may not check them.
+**What the next Conductor must do first: READ THE WIND-UP BLOCK BELOW** (§ *"WOUND UP BY USER
+INSTRUCTION, 2026-08-14"*). In short: plan wave 3 and commit the plan **before** dispatching, and it
+**must carry the verifier for `T4`, `T6`, `T5` AND `E`** — this Conductor planned all four and may
+not check any of them — **alongside** a real Lane T/V/L unit, since a verifier is an audit and both
+the composition floor and §3f rule 3 bite.
 
 ---
 
@@ -224,18 +233,99 @@ refusals that cited the ℓ¹-Fourier ban and were apparatus-based, which C1 now
 
 ### What the next Conductor must do first
 
-**Gate and merge whatever `prog-r4/e-hhard` and the four wave-2 branches contain, land what passes
-its pre-committed gate, and push** — then plan wave 3 with `T3`, `T2″` and Lane L ranked first,
-refreshing this block in the same commit as the plan.
+> **DISCHARGED 2026-08-14.** All five branches — the four wave-2 units and `prog-r4/e-hhard` — were
+> gated, audited, landed and pushed. `E` returned in full; diagnostic (3) ran to its verdict and was
+> **not** `UNDER-RESOURCED`. **Wave 1 and wave 2 are both COMPLETE.** The current instruction set is
+> the WIND-UP block immediately below. The paragraphs above are kept as the record of what was owed.
 
-**If `E` has not returned:** its branch tip already holds a landed pre-registration and diagnostics
-(1) and (2) with controls firing both ways. **Diagnostic (3) — are the named Table IV rows
-reachable at all when seeded directly at their published `(T, s)` — is the sharpest single test of
-H-hard available and has never been run at this realization.** Do not discard the branch; re-spawn
-for (3) if it is missing, and land (1) and (2) either way.
+---
 
-**Do not verify wave 2.** The Conductor that planned it cannot check it; wave 3 carries that
-verifier, exactly as `V1` carries wave 1's.
+## WOUND UP BY USER INSTRUCTION, 2026-08-14 — waves 1 and 2 both complete, everything pushed
+
+**User instruction, verbatim:** *"Please complete what is outstanding from wave 2, complete E, and
+then wind up, push all to main"*. All three parts are done. **No worker is in flight. `main` is
+clean, synced and `MERGE GATE: PASS`.**
+
+**This is a wind-up, not a stop.** No hold is placed on any lane and no ban changes. The programme
+resumes by planning wave 3 under §3g step 1 — plan first, commit the plan, then dispatch.
+
+### The board at wind-up
+
+| | |
+|---|---|
+| **Wave 1** (`T1`, `T2`, `R0+R1`, `E`) | **COMPLETE.** `E` landed last, `d0d72b1`. |
+| **Wave 2** (`T4`, `T6`, `V1`, `T5`) | **COMPLETE AND INTEGRATED**, `46fe612` / `2928966`. |
+| **In flight** | **NOTHING.** |
+| **Branches on origin** | `leg/393-t4-repro`, `leg/394-t6-fulltext`, `leg/395-t5-sweep`, `verify/wave1`, `prog-r4/e-hhard` — all merged, all pushed, none deleted. |
+| **Open escalation** | **`ESCALATION_C1_EXEMPLAR_2026-08-14.md` — ON THE USER'S DESK, three questions, none the Conductor's to answer.** |
+
+### The two results a successor must not re-derive
+
+1. **Lane T's central premise is measured FALSE.** `arXiv:1902.00384` is certified by **exactly the
+   banned apparatus** and **both certified rows are 2D lifts**. Measured twice, by two units, by two
+   different methods (`T4` from the authors' data package, `T6` from their prose), verified by the
+   Conductor against both workers' separately fetched PDFs. **W2 stands, strengthened.** **C1's
+   general proposition, the scoping ruling, Theorem NGX and leg 341 are all untouched**, and **the
+   obstruction leg 348 named is NOT refuted** — its evidence base is thinner than the record said.
+2. **The named Table IV rows are not reachable even from their own published coordinates.** `E`,
+   diagnostic (3): **0 of 16**, with a positive control proving the predicate can return a recovery.
+   **`G1` stays `UNDER-RESOURCED` and was not written to** — this is not a `no` (§3d).
+
+### WHAT WAVE 3 IS OBLIGED TO CARRY, before anyone's preferences get a vote
+
+- **THE VERIFIER, AND IT IS NOW BIGGER THAN ONE WAVE'S WORTH.** This Conductor planned `T4`, `T6`,
+  `T5` **and** `E` and **may not check any of them** (§3f rule 1: verification is a fresh session or
+  it is not verification). **All four are `UNVERIFIED`.** `V1` discharged wave 1's debt for `T1`,
+  `T2` and `R0`+`R1` only — **`E` landed after `V1` ran and is not covered by it.**
+- **THE COMPOSITION FLOOR.** At least one unit attacking a wall on the Clay chain directly — Lane T,
+  V or L. **A wave of pure Lane R is out of contract, and so is a wave whose only non-Lane-R unit is
+  an audit.** Note this bites harder than usual now: the verifier is an audit, so wave 3 needs a real
+  Lane T/V/L unit *alongside* it.
+- **§3f rule 3.** No more than two consecutive audit/repair/instrument tasks. `E` was an instrument
+  and the wave-3 verifier is an audit — **wave 3 must contain a mathematics or construction unit.**
+
+### Ranked candidates for wave 3 — offered as a ranking, not a ruling
+
+**The honest caveat first: the top of this ranking depends on an answer only the user can give.**
+The C1 escalation asks whether Lane T's priority-1 standing survives the loss of item 3. Until it is
+answered, ranking `T3` first would be **assuming** the answer.
+
+1. **The wave-2 + `E` verifier.** Owed, and the largest verification debt the programme has carried.
+2. **`T3` — the non-DSS `T³` ansatz.** Still the lane's real mathematical content and the biggest
+   prize, but **re-rank it against the escalation's answer, not around it.**
+3. **THE CHEN–HOU THREAD (`arXiv:2308.01528`).** Computer-assisted blow-up on an **unbounded domain
+   in >1D with algebraic decay**. Ledgered in `OPTIONS.md` §F as **the sharpest available attack on
+   the obstruction itself**, and it does **not** fire U6.
+4. **`O1` — leg 315's Taylor-model flow-map build**, re-openable under C1, *"needs no function
+   space"* — and it points at **Lane V, not Lane T.** The genuinely new thing C1 bought.
+5. **Lane L.** Still **zero units in 395 legs**, and it is the lane that tells the user whether the
+   Tier-2 ceiling is permanent.
+6. **The cheap owed debts**, none of which is a unit on its own: `T1`'s machine record, the leg-348
+   `domain_census` re-count, **`fig107`'s missing `build_figures.py` registration**, and the
+   **INDEX.md rows for all five recent units — a Conductor-owned debt, not a worker's.**
+7. **Lane R's own re-ranking**, which `E` left genuinely open: `E-iii` fired (→ `R3`/`R2`) *and*
+   `E-ii`'s antecedent is satisfied (→ `R4`). **This Conductor did not rule between them.**
+
+### Dispatch-brief rules this run paid for — put them in every future brief
+
+1. **Commit early and often on the unit's branch.** The 2026-08-14 host process-exit destroyed four
+   workers mid-run; the briefs required a pre-registration commit but said nothing about committing
+   *during* the run.
+2. **Poll long jobs from inside the turn.** `E` did this correctly and it is why it survived.
+3. **CHECKPOINT TO DISK ABOVE ~1 h WALL, and say where.** `E` reports **the host killed its
+   unattended run twice**; rules 1 and 2 were necessary and **not sufficient** — what saved its 5.7
+   core-hours was per-attempt checkpoints it could resume from.
+4. **Cost models are floors, not estimates, when the seeds are good.** `E` measured its commissioned
+   model **wrong by ~8×** (0.0713 vs ~0.57 h/attempt) for a structural reason: **good seeds do not
+   fail fast.**
+
+### Standing, and unchanged by anything this run measured
+
+**Ceiling: TIER 2. No `L1→L4` link moved by any unit in either wave. Clay stays ~0.05%.** A
+best-in-field orbit finder does not move it — it makes the questions affordable, which is a
+different and lesser thing. **Author contact remains held**; reading published material is
+authorised. **No Semantic Scholar key is available** — pace against unauthenticated limits and bank
+a throttled query as `THROTTLED`, **never as a zero**.
 
 ---
 

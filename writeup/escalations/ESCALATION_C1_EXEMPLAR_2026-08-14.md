@@ -128,7 +128,12 @@ not wrong.**
 re-openable refusals, and the genuinely new one — leg 315's Taylor-model flow-map build — points at
 **Lane V's direction, not Lane T's.**
 
-`E` is still running and is unaffected.
+**`E` has since returned and landed (`d0d72b1`), and it is unaffected by any of this** — it is Lane
+R, it touches no ban and no wall on the Clay chain. Recorded here only so the desk sees the board is
+not idle while these three questions wait: its gate PASSED, and its diagnostic (3) — the sharpest
+test of H-hard available, seeding all eight named rows at their own published coordinates —
+**recovered none of them, 0 of 16, with a positive control proving the predicate can return a
+recovery.** **Wave 1 is now complete.** Tier 2; no `L1→L4` link moved; **Clay stays ~0.05%.**
 
 **What the Conductor has done without a ruling:** corrected the factual claims in `WALLS.md`,
 recorded the retraction, and left every scoping question open. **What the Conductor has not done:**

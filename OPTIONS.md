@@ -22,6 +22,14 @@ U5 raised five costed options at `experiments/journal/prog_r4_u5.md` §9 and dec
 **The user ruled option E on 2026-08-13** (the H-hard diagnostic, dispatched in wave 1). The other
 four are recorded here in full.
 
+**`E` HAS NOW RETURNED — landed `d0d72b1`, 2026-08-14 — and it changes the re-open conditions
+below.** Its diagnostic (3) seeded all eight named Table IV rows directly at their published
+`(T, s)` and **recovered none of them: 0 of 16, with a positive control proving the predicate can
+return a recovery.** Read against these options: **the in-band conversion penalty was NOT shown to
+be non-intrinsic, so option B's re-open condition did NOT fire** — if anything it hardened, because
+the failure now survives at seed quality no amount of supply can beat. **A, B and D all still buy
+supply, and supply is now refuted twice over.**
+
 **The constraint shaping all of them:** the anchored admissible pool is **exhausted** at `R < 0.25`
 — 241 exist, 100 spent, **141 remain of which only 12 are in-band** — so nothing that keeps the
 current window can push the in-band arm past 72 attempts, ever.
@@ -34,14 +42,25 @@ now repaired, and its prediction (more in-band seeds → recovery) is falsified 
 | id | option | cost | why deferred | re-opens if |
 |---|---|---|---|---|
 | **A** | Spend the rest of the anchored pool — 141 attempts | ≈10.7 h | Grows the in-band arm 60 → 72 only. Lowest information per hour of the five, and it buys supply. | Never on its own merits; only as a by-product of something else needing the pool spent. |
-| **B** | Relax the admission window to Chandler–Kerswell's `R_thres = 0.3` | ≈0.9 h re-mine + 0.0713 h/attempt (≈8 h for 100) | Buys supply. Leaves the realization intact, so the U3/U5 baselines stay comparable — which is why it was U5's second choice. **The supply multiplier cannot be read off U5's library** (pruned at 0.25); the re-mine is what measures it. | E's diagnostic shows the in-band conversion penalty is *not* intrinsic, i.e. H-hard weakens. |
+| **B** | Relax the admission window to Chandler–Kerswell's `R_thres = 0.3` | ≈0.9 h re-mine + 0.0713 h/attempt (≈8 h for 100) — **but see the ~8× warning below** | Buys supply. Leaves the realization intact, so the U3/U5 baselines stay comparable — which is why it was U5's second choice. **The supply multiplier cannot be read off U5's library** (pruned at 0.25); the re-mine is what measures it. | ~~E's diagnostic shows the in-band conversion penalty is *not* intrinsic, i.e. H-hard weakens.~~ **DID NOT FIRE — `E` returned 2026-08-14 and the penalty did not weaken.** One thing `E` did leave live: **the `R < 0.25` window remains a confound `E` could not separate**, and 1 of its 16 seeds deliberately sat outside it. So B re-opens only as *a measurement of that confound*, never as a supply buy. |
 | **C** | Carry `m` as an unknown in the residual (= Lane R's **R5**) | full unit, own milestone, ≈10 h compute + solver work | Changes the realization, so M1's reproduction no longer compares attempt for attempt. **U5 priced it: unlocks 334 anchored in-window candidates, 58.1% of the window, but only 1 of the 334 is in the published band.** Not a band fix — the fix for `\|s\| > 0.9`. | Taken on its own merits as the largest measured hole in the trial space, **not** as a route to the named rows. |
 | **D** | Raise supply at source — longer DNS or finer `N` | ≈3.4 h per extra `T=1e5` + ≈0.9 h re-mine, plus attempts | Most expensive, buys supply, and does nothing about H-hard. `N` refinement invalidates the banked library entirely. | Only if the object itself changes and a fresh library is needed anyway. |
 
 **Also deferred here: `U4`/`G2`, the basin radius.** Not an option — a **blocked unit**. It needs a
 recovered *named* orbit to perturb and there is not one. The pre-committed reading makes it the unit
 the basin-structure finding is really about, so it is the first thing to open if any named row is
-ever recovered.
+ever recovered. **`E` HAS MADE THIS HARDER, NOT EASIER:** direct seeding at the published `(T, s)`
+was the last cheap route to a recovered named orbit and it returned **0 of 16**. `U4` is now blocked
+behind a *realization or method* change, not behind a budget.
+
+**AND THE COST MODEL UNDER ALL FOUR OPTIONS IS WRONG BY ~8×, MEASURED.** `E` commissioned at
+`0.0713 h/attempt` and measured **≈0.57 h/attempt** — 5.687 core-hours + 0.806 h of controls for 16
+attempts, per-attempt sum 9.088 core-hours. **The reason is structural and applies to any option
+that seeds well: good seeds do not fail fast.** The `0.0713` figure came from runs dominated by
+quick rejections. **Every `h/attempt` number in the table above inherits this and should be treated
+as a floor, not an estimate**, whenever the seeds are better than U3's mined ones. Costs `E` priced
+but did not buy: **field ensemble ≈91 ch**, **`N=48` lift ≈730 ch**, **closing diagnostic (2)'s
+coverage gap 122.1 ch**.
 
 ## B. Lane R — the units not taken
 
@@ -50,12 +69,24 @@ ever recovered.
 | **R0** | the metric | **TAKEN**, wave 1, gate `yes` | Corrected `WALLS.md` twice and **retracted** "Lane R's first measured win". |
 | **R1** | early abort on flatness | **TAKEN and CLOSED AGAINST ITSELF**, wave 1 | Already collected by U5 before commissioning; remaining headroom **+0.45 pp**; hold-out shows a rule tuned on U5's 9 convergences kills one of U3's 14. **Spend no more compute on this family.** |
 | **R2** | deflation (Farrell–Birkisson–Funke) | **DEFERRED — and it is the strongest surviving Lane R item** | R0 measured the waste and it is worse than it looked: **57 of U5's 100 seeds were already spent by U3**, **5 of 9 convergences are bit-identical re-executions**, **4 of 5 distinct solutions are re-finds**, and U5's contribution new to the programme is **one orbit**. Deflate against the **union** of both runs' solutions, not just the current one's. Re-opens whenever Lane R gets a wave slot. |
-| **R3** | multiple shooting | **DEFERRED** | Brick B6's own spec names it; U1 built the globalisation without it. Standard conditioning fix for long orbits, and long orbits are where the published targets live. **The basin-structure finding points here.** |
-| **R4** | second-order-in-time stepper | **DEFERRED** | U3's is Lie–Trotter, globally **first** order (measured global ratio 2.00); the published rates being competed against come from higher-order codes. Invalidates M1's reproduction — own milestone. |
+| **R3** | multiple shooting | **DEFERRED** | Brick B6's own spec names it; U1 built the globalisation without it. Standard conditioning fix for long orbits, and long orbits are where the published targets live. **The basin-structure finding points here** — and `E`'s branch `E-iii` fired, which points here again. |
+| **R4** | second-order-in-time stepper | **DEFERRED — AND `E` HAS JUST PROMOTED IT** | U3's is Lie–Trotter, globally **first** order (measured global ratio 2.00), so its periodic orbits are `O(dt)` perturbations of the true flow's; the published rates being competed against come from higher-order codes. Invalidates M1's reproduction — own milestone. **`E`'s pre-committed branch `E-ii` named `R4` in advance as where a non-recovery would point, and `E-ii`'s antecedent IS satisfied: 0 of 16 recovered any named row, seeded at the published coordinates themselves.** `E`'s leg-353 comparison is **the first evidence in this programme pointing at the REALIZATION rather than the budget** — a strictly better realization got strictly closer (residuals [0.80, 10.32] vs [22.5, 29.5]) from strictly **worse** seeds, and still recovered nothing. |
 | **R5** | carry the `m` unknown | **DEFERRED** — same object as `PROG-R4` option **C** above | Do not double-count these: one unit, listed in both ledgers because it arrived from two directions. |
 
 **Live ban on this lane:** leg 349's GA gate answered NO (0 of 6 properties cleared). A **learned or
 evolved** seed-scoring function is banned territory. R2–R5 are all deterministic; keep it that way.
+**`E` came within one conditional of touching this and did not:** its diagnostic (2) was
+pre-committed to name a **score** fix if the low-`|s|` solutions turned out to be attractors of the
+**minimisation** rather than the hookstep. It returned **`MIXED`** (97.1% constrained, `p = 0.9317`)
+— **not `MINIMISATION_ATTRACTOR`** — so the conditional **did not fire and nothing was proposed.**
+The "trust region drags us downhill" story was **tested and declined**, not assumed away.
+
+**THE LANE-R RANKING QUESTION `E` LEAVES OPEN, AND THIS CONDUCTOR HAS NOT RULED IT.** `E-iii` fired
+(→ `R3`/`R2`) *and* `E-ii`'s antecedent is satisfied (→ `R4`). Both readings were pre-committed;
+both are honestly engaged; they point at **different** units. `E` reported `E-iii` as the more
+specific and recorded `E-ii` openly rather than suppressing it — the right call at the unit's level.
+**Which of `R2`/`R3`/`R4` is now the highest-value Lane R unit is a genuine re-ranking and it
+belongs to whoever plans wave 3, against `WALLS.md` and this file.**
 
 **A standing correction from R0 that applies to every future Lane R claim:** the metric
 `distinct orbits per core-hour` removes re-finds **within** a run and not **between** runs. Any
@@ -187,3 +218,28 @@ result** — it is the one that would tell the user whether the Tier-2 ceiling i
   exits non-zero if the record and the escalation document disagree. Cheap — well under an hour.
   **Note for whoever takes it:** filename-substring search is insufficient and will mislead you —
   `p2_route_p2t1_v1.json` is **leg 302, route P2T1**, unrelated.
+
+- **`fig107` IS NOT REGISTERED IN `build_figures.py`. Flagged by `E`, 2026-08-14; CONFIRMED BY THE
+  CONDUCTOR.** `writeup/figures/fig107_prog_r4_m3_shift_strata.py` exists (15,094 bytes, U5's M3
+  shift-strata figure) and its `.png` is banked, but the script appears in **no** entry of
+  `P2_EVIDENCE` — `build_figures.py` registers `fig108` and `fig109` and skips `fig107`. **`E`
+  flagged it and correctly did NOT fix it: `build_figures.py` was outside its territory**, and its
+  diff there is `+1/-0`. Consequence: fig107 is **not rebuilt or self-checked by the figure build**,
+  so nothing detects it going stale against `p2_prog_r4_u5_v1.json`. Trivial to repair — one line,
+  in the same list, in numeric order. **Owed, not optional; lesson 68 again.**
+
+- **`E` OWES A `writeup/INDEX.md` ROW, and so does every wave-2 unit.** `E` flagged that it landed no
+  INDEX row because `INDEX.md` was outside its territory — correct behaviour. Confirmed: `INDEX.md`
+  carries U5's fig107 row and **no row for `E`/fig109**. **This is a Conductor-owned file and
+  therefore a CONDUCTOR-OWNED DEBT**, not a worker's: `T4`, `T6`, `T5`, `V1` and `E` all landed
+  without INDEX rows because this Conductor did not put `INDEX.md` in anyone's territory and did not
+  write the rows itself. Owed: five rows, or an explicit ruling that `INDEX.md` is retired.
+
+- **A DISPATCH RULE `E` PAID FOR: MANDATORY CHECKPOINTING ABOVE ~1 h WALL.** `E` reports **the host
+  killed its unattended run twice**; it survived because it wrote per-attempt `.pkl` checkpoints and
+  resumed from them (the stage-3 log shows eight attempts *"reused from checkpoint"*). The two rules
+  already adopted after the 2026-08-14 process-exit incident — **commit early and often on the
+  unit's branch**, **poll long jobs from inside the turn** — are necessary but **were not sufficient
+  on their own**; what actually saved this unit's 5.7 core-hours was checkpointing *inside the
+  computation*. **Add to every brief whose compute exceeds ~1 h wall: the unit must checkpoint to
+  disk at a granularity it can resume from, and must say where.**
