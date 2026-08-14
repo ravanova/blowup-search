@@ -67,6 +67,22 @@ now repaired, and its prediction (more in-band seeds → recovery) is falsified 
 | **C** | Carry `m` as an unknown in the residual (= Lane R's **R5**) | full unit, own milestone, ≈10 h compute + solver work | Changes the realization, so M1's reproduction no longer compares attempt for attempt. **U5 priced it: unlocks 334 anchored in-window candidates, 58.1% of the window, but only 1 of the 334 is in the published band.** Not a band fix — the fix for `\|s\| > 0.9`. | Taken on its own merits as the largest measured hole in the trial space, **not** as a route to the named rows. |
 | **D** | Raise supply at source — longer DNS or finer `N` | ≈3.4 h per extra `T=1e5` + ≈0.9 h re-mine, plus attempts | Most expensive, buys supply, and does nothing about H-hard. `N` refinement invalidates the banked library entirely. | Only if the object itself changes and a fresh library is needed anyway. |
 
+**`E` — THE H-HARD DIAGNOSTIC. RULED AND DISPATCHED IN WAVE 1; IT DID NOT RETURN.**
+**Gate UNANSWERED, branch `prog-r4/e-hhard` on `origin` at `6a706f7`, deliberately NOT merged.**
+Diagnostics **(1) and (2) returned with controls firing both ways** — (1) `PULL_TO_LOW_S`,
+(2) `MIXED` at permutation `p = 0.9317`, so the unit does **not** get to say the minimisation drags
+the solve to low `|s|`. **Diagnostic (3) — are the named Table IV rows reachable at all when seeded
+directly at their published `(T, s)` — never completed**: the host killed it twice, 8 of 16 attempts
+reached per-attempt checkpoints, and the checkpoints and U2's gitignored `T = 1e5` DNS archive are
+both gone with the container. **NO branch of its pre-committed reading fired** — `E-i`…`E-iv` are all
+about diagnostic (3), so **none is claimed** and H-hard is exactly where wave 1 left it. Not merged
+because its evidence script and `fig109` were written for the complete unit and **fail on the partial
+JSON**, and merging would register a failing figure build on `main`; editing another unit's evidence
+script to make it pass is the move this repository refuses. **Cost to finish ≈6–7 h wall** (≈3.4 h to
+regenerate U2's DNS, then 16 attempts, ≈2.7 h wall at 8 workers). **Re-opens: ranked for wave 4.** Its
+result re-opens the rankings in this section and §B; it changed **no** wave-3 composition, which the
+user ruled.
+
 **Also deferred here: `U4`/`G2`, the basin radius.** Not an option — a **blocked unit**. It needs a
 recovered *named* orbit to perturb and there is not one. The pre-committed reading makes it the unit
 the basin-structure finding is really about, so it is the first thing to open if any named row is
@@ -82,6 +98,12 @@ ever recovered.
 | **R3** | multiple shooting | **DEFERRED** | Brick B6's own spec names it; U1 built the globalisation without it. Standard conditioning fix for long orbits, and long orbits are where the published targets live. **The basin-structure finding points here.** |
 | **R4** | second-order-in-time stepper | **DEFERRED** | U3's is Lie–Trotter, globally **first** order (measured global ratio 2.00); the published rates being competed against come from higher-order codes. Invalidates M1's reproduction — own milestone. |
 | **R5** | carry the `m` unknown | **DEFERRED** — same object as `PROG-R4` option **C** above | Do not double-count these: one unit, listed in both ledgers because it arrived from two directions. |
+
+**NOT TAKEN IN WAVE 3, and said rather than left to inference (2026-08-14):** `R2` is the strongest
+surviving Lane R item and it still lost the slot. Wave 3 carries two priority-lane units (`V2`, `L2`),
+a literature unit in the same priority lane (`L3′`) and an **obligatory** verifier (`V-W2`); there was
+no fourth slot, and **Lane R never sets a wave's direction** — §3g's floor exists precisely because it
+always has a next increment. `R3`/`R4`/`R5` unchanged. **`E`'s return re-opens this ranking** (§A).
 
 **Live ban on this lane:** leg 349's GA gate answered NO (0 of 6 properties cleared). A **learned or
 evolved** seed-scoring function is banned territory. R2–R5 are all deterministic; keep it that way.

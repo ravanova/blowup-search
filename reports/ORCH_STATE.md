@@ -7,7 +7,111 @@ every stop. A fresh session reads this at Step 0b before dispatching anything.
 
 ---
 
-## LIVE — CONDUCTOR mode, wave 2 COMPLETE AND INTEGRATED, 2026-08-14
+## LIVE — CONDUCTOR mode, **WAVE 3 PLANNED AND COMMITTED BEFORE DISPATCH**, 2026-08-14
+
+**`main` = this commit.** The user's ruling on `ESCALATION_C1_EXEMPLAR_2026-08-14.md` is transcribed
+(one commit per item, `test_plan_of_record.py` ALL GATES PASS after each), and the wave-3 plan is
+committed **before any worker is dispatched**, per §3g step 1. **`STATE.md` is authoritative on
+every gate's wording**; this block is the successor's fallback.
+
+### The ruling, transcribed 2026-08-14 — four commits, no ban touched
+
+| # | item | commit |
+|---|---|---|
+| 1 | `RULING_C1_EXEMPLAR_2026-08-14.md`; escalation **DISCHARGED** | `e60e8f4` |
+| 2 | `OPTIONS.md` — Lane T **DEFERRED** with cost + two re-open conditions; Lanes **V** and **L** **ACTIVE, PRIORITY** | `41c9f1e` |
+| 3 | `WALLS.md` lane priorities + `plan_of_record.py` `LANES`/`POSTURE_LIMITS` (**`BANNED` table byte-identical, verified mechanically: 17128 bytes before and after**) | `ff73307` |
+| 4 | `STATE.md` regenerated + this block + the wave-3 plan | this commit |
+
+**The rulings in one line each.** **(1) C1 needs NO replacement exemplar and STANDS
+EXEMPLAR-FREE** — it is an apparatus scoping, true independent of any instance; **the scope no
+longer carries any implied *"and this has been demonstrated"* and NO UNIT MAY CITE C1 AS EVIDENCE
+THE TECHNOLOGY CLOSES FOR ANY OBJECT CLASS**; the **naming requirement is unchanged and binds every
+unit**, and the Conductor may not waive it. **(2) Lane T's priority-1 ranking does NOT survive —
+DEMOTED TO DEFERRED**, kept alive only through **`T2″`**; **`T3` deferred WITH the lane, not
+killed**; two re-open conditions recorded in `OPTIONS.md` §E. **Nothing measured is superseded.**
+**(3) The packet's defect was material to the RANKING, not to the SCOPING** — C1's transcription in
+`plan_of_record.py` stands byte-unchanged; A2, B1 and the narrowed outreach hold untouched.
+**DIRECTION: the priority lanes are now V and L.** **Ban counts unchanged: 26 recorded, 19 in force.**
+
+### Wave 3 — units, branches, gates (abbreviated), pre-committed readings
+
+**Composition floor (§3g): met TWICE OVER** — `V2` attacks **W3**, `L2` attacks **W4 / §6(i)**.
+**§3f rule 3 satisfied:** the wave opens with construction (`V2`), dispatched first.
+
+| unit | lane | branch | gate (final wording, abbreviated) | pre-committed reading | state |
+|---|---|---|---|---|---|
+| `V2` / leg 396 | **V**, CONSTRUCTION | `leg/396-v2-target` | Does the unit deliver **both** (A) a **named dissipative fluid target** in the lowest dimension admitting fluid structure, dissipative term **inside** the certified equation, with its ansatz; **and** (B) a **feasibility verdict** for a **C1-compliant** apparatus (Galerkin-plus-tail closure and/or leg 315's `O1` Taylor-model flow map), apparatus **named with a citation** and **shown to build no single bounded approximate inverse uniform in `M`**? `no` → a **measured list of candidate targets with the named property each fails**, which is landable. `UNDER-RESOURCED` + a cost, never a bare `no`. | (a) a named target is **not a certificate**; (b) a feasibility is **not a result on the Clay chain**; (c) **W3 breaks only on leg 174's own Grade-A criterion, unchanged**; (d) if the apparatus turns out to need a bounded approximate inverse uniform in `M`, **STOP and say so** — `T4`'s branch (c), more valuable than the verdict; (e) the negative branch is as valuable as the positive and is not softened; (f) novelty pass owed — if the target is already certified, **W3 is broken by someone else and that is the finding**; (g) controls that fire **both** ways (Dahne–Figueras CGL as the Grade-A-but-not-fluid positive); (h) lesson 91 | **DISPATCHED** |
+| `L2` / leg 397 | **L** | `leg/397-l2-decay` | Reading the published localisation/far-field-decay techniques against **this object** (route 4's DSS profile carrying leg 381's bill: `L³` tail **326.875/decade**, `α > 1.5` required vs `α = 1.0` available), does the unit state **per technique** the **named hypothesis** that fails — or the one that does not? Quote it and locate it. `no` → what it would take (§3d), `UNDER-RESOURCED`. | (a) a measured **"still no method, and here is precisely which hypothesis fails"** is a **real, landable result** — the answer to whether the Tier-2 ceiling is permanent — **and is not softened**; (b) a candidate is a **lead, not a broken wall**, until leg 381's bill is actually paid; (c) the deficit comes from the **artefact**, never prose; (d) **READ, do not CONTACT**; (e) instrument every zero, `THROTTLED`/`UNREACHABLE` never zeros, **no S2 key exists**; (f) lesson 91; (g) ceiling | **DISPATCHED** |
+| `L3′` / leg 398 | **L**, literature | `leg/398-l3p-chenhou` | At **full text**, `arXiv:2308.01528` + the Chen–Hou stability line: **(a)** does its unbounded-domain / algebraic-decay / computer-assisted mechanism bear on **leg 348's compact-domain obstruction — and on which side** (UNDERCUT / STRENGTHEN / DOES NOT REACH)? **(b)** does its nonlinear-stability-with-finite-unstable-spectrum technique reach **§6(ii)** for this object, and **which hypothesis** would this object have to satisfy? Deciding sentence **quoted and located**. | (a) three branches named in advance, **no fourth**; the prior is **DOES NOT REACH** (`T6`: stationary self-similar target, energy-estimate apparatus) and the unit must say whether full text **agrees or disagrees**; an undercut is the valuable branch and is **reported first**; (b) reaching §6(ii) **in shape is not a method** — **W5 stays unbroken**; (c) a confirmation is **not** a strengthening; (d) **READ, do not CONTACT** — contact is **HELD**; (e) `UNREACHABLE`/`THROTTLED` banked as such, **never zeros**; (f) ceiling | **DISPATCHED** |
+| `V-W2` | verification, **OBLIGATORY** | `verify/wave2` | From **banked JSON and landed evidence scripts alone**, do these reproduce exactly: **(1)** `T4`'s 2D-lift finding (`N_x3=0`, extent 1 in `x₃`, `max|u⁽³⁾|=max|ω⁽¹⁾|=max|ω⁽²⁾|=0.0` exactly vs `max|ω⁽³⁾|=1.6351/1.5274`, `setup='2D'`); **(2)** `T4`'s first conjunct ((4.32), `5.6e-15`, `δ=5.3e-06` vs `1e-3`) **and** the apparatus term counts (7/4/5/2) against **all six** closure terms at **zero**, Zgliczyński only as [48]; **(3)** `T6`'s **7/7, 2 UNDERCUT/4/1, 0 UNREACHABLE, 0 THROTTLED** and the `2409.09234` no-slip-walls undercut; **(4)** `T5`'s **1428 files / 417,476 lines**, **7 refusals APPARATUS 5 / REALIZATION 2**, **exactly 2** re-openable, **leg 257 not**. **PLUS the folded-in obligation: bank `T1`'s missing machine record** — the packet's three questions and the fact it **ruled none** — with an evidence script that **exits non-zero** on disagreement with the escalation document. | (a) agreement is expected and worth little; (b) **a disagreement is BANKED, not reconciled** by the verifier; (c) a claim the JSON cannot support is **`UNVERIFIABLE`, not `no`**; (d) **must not read** `STATE.md`, `WALLS.md`, `OPTIONS.md`, `DIRECTION.md`, this file, the briefs, or the wave-2 reasoning — **that narrowness IS the unit**; (e) **filename trap: `p2_route_p2t1_v1.json` is leg 302, unrelated** — scan `leg`/`route`/`unit` **fields**, not filenames; (f) banking `T1`'s record does **not** re-open its gate answer; (g) ceiling | **DISPATCHED** |
+
+**Figure allocation at dispatch: `fig111` → `V2`, and to no one else.** `L2`, `L3′` and `V-W2` were
+allocated **no figure** (the figure-collision incident is why this is stated at dispatch).
+**Every brief instructs: push the branch only, never merge and never push to `main`** — the
+Conductor gates and merges. **No brief was given `DIRECTION.md`** (§3e). Territories are disjoint.
+
+> ### ⚠ WAVE 4 MUST CARRY WAVE 3's VERIFIER
+> `V2`, `L2` and `L3′` land **`UNVERIFIED`** and this Conductor planned them. A wave-4 plan without
+> that verifier is **out of contract**. Written here as well as in `STATE.md` so it survives the
+> loss of either file.
+
+### `E` (wave 1) — **DID NOT RETURN. GATE UNANSWERED. NOT LANDED, AND THAT IS A DECISION, NOT AN OVERSIGHT.**
+
+Branch `prog-r4/e-hhard` on `origin`, tip **`6a706f7`** (pre-registration `70f3962`, diagnostics
+`952b2cf`, evidence+`fig109` `6a706f7`). **Diagnostics (1) and (2) RETURNED with planted controls
+firing BOTH ways** — (1) `PULL_TO_LOW_S`, (2) `MIXED` at permutation `p = 0.9317`, so the unit does
+**not** get to say the minimisation drags the solve. **Diagnostic (3) never completed:** the host
+killed it twice; 8 of 16 attempts reached per-attempt checkpoints, and **the checkpoints and U2's
+gitignored `T = 1e5` DNS archive are both gone with the container** (verified: no `*.npz` DNS
+archive and no `e_hhard_partial/` in this checkout).
+
+**NO BRANCH OF ITS PRE-COMMITTED READING FIRED.** `E-i`…`E-iv` are **all** about diagnostic (3)'s
+outcome, so **none is claimed**, and H-hard is exactly where wave 1 left it.
+
+**Why it is NOT merged, departing from the previous block's *"land (1) and (2) either way"*:** its
+evidence script and `fig109` were written for the **complete** unit and **fail on the partial JSON**
+(`KeyError: 'diagnostic_3'`, reproduced by the Conductor), and merging also **registers `fig109` in
+`writeup/build_figures.py`**, so the merge would put a **failing figure build and a failing evidence
+script on `main`**. The alternative — editing another unit's evidence script to make it green — is
+the exact move this repository refuses (`V1` committed run 1 **as it ran**, exit 1, rather than
+adjust an artefact to pass). **The branch is on `origin` and is durable; it is the record.**
+
+**Cost to finish, from the record's own banked rates:** regenerate U2's `T = 1e5` DNS ≈**3.4 h**,
+then 16 attempts at up to the 52-epoch cap (≈1.4 h each serial) ≈**2.7 h wall at 8 workers** —
+**≈6–7 h wall in total**, and it buys **the sharpest single test of H-hard available**, never yet
+run at this realization. **Ranked for wave 4.** Its result re-opens the Lane R rankings in
+`OPTIONS.md` §A/§B; **it does not change wave 3's composition**, which the user ruled.
+
+### Open escalations
+
+| escalation | state |
+|---|---|
+| `ESCALATION_C1_EXEMPLAR_2026-08-14.md` | **RULED AND DISCHARGED 2026-08-14.** Ruling at `writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md`; transcribed in four commits, **no ban lifted, narrowed or reworded**. |
+| `ESCALATION_BAN_WORDING_2026-08-13.md` | **RULED AND DISCHARGED 2026-08-13** (`RULING_BAN_WORDING_2026-08-13.md`). A2, B1, C1 and the outreach narrowing all transcribed. |
+| Author contact | **STILL HELD BY THE USER.** Reading any published document is authorised; contacting an author, group, maintainer or list is not, and needs its own ruling. **Both `L2` and `L3′` carry this verbatim.** |
+| The *"FOURTH space/basis"* lift-clause defect | **RECORDED, NOT RULED, and deliberately not escalated** — nothing currently depends on it while Lane T is deferred, and an entity that both raises and rules an escalation has defeated the mechanism. `T5` measured that it is exactly what blocks leg 257. |
+
+### What the next Conductor must do first
+
+**Audit each wave-3 branch against the gate committed in `STATE.md` BEFORE it was dispatched, land
+what passes, regenerate `STATE.md`, refresh this block in the same commit (§3g step 4), and push.**
+Only then re-plan. **Wave 4 must carry wave 3's verifier**, and `E` and `L1` are the two units
+ranked for it.
+
+---
+
+## Superseded LIVE block — CONDUCTOR mode, wave 2 COMPLETE AND INTEGRATED, 2026-08-14
+
+> **SUPERSEDED 2026-08-14 by the wave-3 block above**, which carries the user's ruling on
+> `ESCALATION_C1_EXEMPLAR_2026-08-14.md` and the wave-3 plan. **Retained verbatim, not
+> deleted** — its wave-2 audit trail, gate texts and `E` instructions are history a successor
+> needs. Two of its statements are overtaken and are corrected in the block above rather than
+> edited here: *"plan wave 3 with `T3`, `T2″` and Lane L ranked first"* (Lane T is now
+> **DEFERRED**; the priority lanes are **V and L**), and *"land (1) and (2) either way"* for
+> `E` (not landed — its evidence script and `fig109` fail on the partial JSON, and the merge
+> would put a failing figure build on `main`).
+
 
 **ALL FOUR WAVE-2 UNITS HAVE RETURNED, BEEN AUDITED AND LANDED.** `main` = pushed below. `E` (wave 1)
 is still in flight. **The wave's result is that Lane T's central premise was false**, measured twice
@@ -1301,3 +1405,20 @@ One short paragraph each: what happened, how it was diagnosed, what changed as a
   in `WALLS.md` or a lane ranking until it is discharged. The user's instruction to run `T6` **early,
   precisely because it could undercut the lane**, is the only reason this cost one wave instead of
   another forty-five legs.
+
+- **2026-08-14 — a unit's own checkpoints did not survive the container, and a partial unit's
+  artefacts were written for the complete unit.** `E` (the H-hard diagnostic) was killed by the host
+  **twice**. After the first kill it added per-attempt checkpoints so a relaunch would skip finished
+  attempts — the right fix — and after the second kill **8 of 16 attempts were checkpointed and the
+  checkpoints were gone anyway**, because they live in a gitignored working directory and the
+  container was replaced. So did U2's gitignored `T = 1e5` DNS archive that diagnostic (3) seeds
+  from, which is why finishing the unit now costs ≈3.4 h of DNS before a single attempt runs.
+  **Second, separable finding:** `E`'s evidence script and `fig109` were both written to require
+  `diagnostic_3`, so on the partial JSON they **fail** (`KeyError`) — a correct unit whose artefacts
+  cannot be landed. **Result, two rules worth carrying:** a checkpoint that lives only in a
+  gitignored directory is a **within-run** optimisation and not a **cross-container** one, so a unit
+  expected to run for hours should bank its partial results the way it banks its final ones; and an
+  evidence script should degrade to *"this diagnostic did not return"* rather than raising, so a
+  partial unit's landed record can still be executable. Neither rule was applied retroactively by
+  the Conductor — **editing another unit's evidence script to make it pass is the move this
+  repository refuses**, and the branch was left as the record instead.
