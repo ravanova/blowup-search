@@ -398,6 +398,7 @@ P2_EVIDENCE = [
     "../experiments/p2_route_cobv_v1_evidence.py",              # fig105 -- Route-COBV v1 (leg 384); fig105 assigned at dispatch (fig103 to leg 385, fig104 to a DOCS unit)
     "../experiments/p2_route_dtol_v1_evidence.py",              # fig99 -- Route-DTOL v1 (leg 386); fig99 was reserved for leg 381, which drew no figure and left it unused, and was re-allocated to this leg at dispatch
     "../experiments/p2_route_dtor_v1_evidence.py",              # fig106 -- Route-DTOR v1 (leg 390); fig106 assigned at dispatch (fig105 to leg 384, fig103 to leg 385, fig99 to leg 386, fig97/98 to PROG-R4, fig101/104 to the DOCS units)
+    "figures/fig109_prog_r4_hhard.py",                          # fig109 -- PROG-R4 unit E, the H-hard diagnostic (leg 380, wave 1); fig109 assigned at dispatch (fig107 is U5's, fig108 another worker's in the same wave). The drawing script IS the rebuild path: it redraws from writeup/data/p2_prog_r4_e_v1.json and the two banked PROG-R4 records alone and re-runs no solve. Its 17 self-checks exit non-zero if the JSON stops supporting a panel
 ]
 
 

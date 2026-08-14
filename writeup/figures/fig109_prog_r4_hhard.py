@@ -252,6 +252,10 @@ def main():
     ax2.tick_params(axis="y", colors="#c0392b")
     tot = abs(nets[0]) + abs(nets[1])
     frac = abs(nets[0]) / tot if tot > 0 else float("nan")
+    # Both axes are given 2.6x headroom below the bars so the reading note has
+    # clear white space to sit in rather than covering the magnitudes.
+    ax.set_ylim(min(means) * 2.6, max(0.0, max(means)) + abs(min(means)) * 0.1)
+    ax2.set_ylim(min(nets) * 2.6, max(0.0, max(nets)) + abs(min(nets)) * 0.1)
     ax.text(0.02, 0.03,
             f"per-epoch RATES are statistically indistinguishable:\n"
             f"observed difference {d2['observed_difference']:+.6f}, "
@@ -282,11 +286,11 @@ def main():
     # C. diagnostic (3): how far each of the 16 direct-seed attempts got
     ax = axes[1][0]
     ax.axhspan(LEG353[0], LEG353[1], color="#7f8c8d", alpha=0.18, zorder=0)
-    ax.text(0.015, 0.965,
+    ax.text(0.015, 0.035,
             f"leg 353's prior: five of these rows attempted, all five failed,\n"
             f"final $\\|R\\|$ in [{LEG353[0]}, {LEG353[1]}] "
             f"(shaded) at reason=line_search_failed",
-            transform=ax.transAxes, fontsize=7.5, va="top",
+            transform=ax.transAxes, fontsize=7.5, va="bottom",
             bbox=dict(fc="white", ec="#7f8c8d", alpha=0.9))
     for arm, col, mk in (("S", "#c0392b", "o"), ("Q", "#2c3e50", "s")):
         sub = [a for a in att if a["arm"] == arm]
@@ -321,28 +325,31 @@ def main():
         f"exits: "
         + ", ".join(f"{k} x{v}" for k, v in sorted(d3["reasons"].items())),
         fontsize=9)
-    ax.legend(fontsize=7, loc="lower right")
+    ax.legend(fontsize=7, loc="center right")
     ax.grid(alpha=0.3, which="both")
 
     # D. diagnostic (3): distance from the published row it was planted at
     ax = axes[1][1]
-    ax.add_patch(plt.Rectangle((0, 0), MATCH_TOL, MATCH_TOL, fc="#27ae60",
+    FLOOR = 1e-4                      # log axes; exact zeros are drawn here
+    ax.add_patch(plt.Rectangle((FLOOR, FLOOR), MATCH_TOL - FLOOR,
+                               MATCH_TOL - FLOOR, fc="#27ae60",
                                alpha=0.18, ec="#27ae60", lw=1.4, zorder=1))
-    ax.text(MATCH_TOL * 1.06, MATCH_TOL * 0.5,
+    ax.text(FLOOR * 1.3, MATCH_TOL * 0.55,
             "the matching predicate of record:\n"
-            r"$|\Delta T| < 0.05$ AND $|\Delta s|_{2\pi} < 0.05$",
-            fontsize=7.5, va="center", color="#1e8449")
+            r"$|\Delta T| < 0.05$ AND $|\Delta s|_{2\pi} < 0.05$"
+            "\nnothing inside this box means no named row was recovered",
+            fontsize=7.5, va="top", color="#1e8449")
     for arm, col, mk in (("S", "#c0392b", "o"), ("Q", "#2c3e50", "s")):
         for a in [x for x in att if x["arm"] == arm]:
-            ax.scatter([max(a["delta_T_from_published"], 1e-4)],
-                       [max(a["delta_s_from_published"], 1e-4)],
+            ax.scatter([max(a["delta_T_from_published"], FLOOR)],
+                       [max(a["delta_s_from_published"], FLOOR)],
                        c=col, marker=mk, s=52 if a["success"] else 30,
                        alpha=0.9 if a["success"] else 0.45,
                        edgecolors="k" if a["success"] else "none",
                        linewidths=0.8, zorder=3)
             ax.annotate(a["row"].replace("UPO", "") + a["arm"],
-                        (max(a["delta_T_from_published"], 1e-4),
-                         max(a["delta_s_from_published"], 1e-4)),
+                        (max(a["delta_T_from_published"], FLOOR),
+                         max(a["delta_s_from_published"], FLOOR)),
                         fontsize=6, xytext=(3, 3), textcoords="offset points")
     ax.scatter([], [], c="#c0392b", marker="o", s=52, edgecolors="k",
                linewidths=0.8, label="arm S")
@@ -354,6 +361,12 @@ def main():
                linewidths=0.8, label="reached tol (outlined)")
     ax.set_xscale("log")
     ax.set_yscale("log")
+    ax.set_xlim(FLOOR * 0.7,
+                max(max(a["delta_T_from_published"] for a in att),
+                    MATCH_TOL) * 2.2)
+    ax.set_ylim(FLOOR * 0.7,
+                max(max(a["delta_s_from_published"] for a in att),
+                    MATCH_TOL) * 2.2)
     ax.set_xlabel(r"$|T_{\rm final} - T_{\rm published}|$")
     ax.set_ylabel(r"$|s_{\rm final} - s_{\rm published}|$ (mod $2\pi$)")
     ca = d3["closest_approach"]
@@ -370,16 +383,16 @@ def main():
     ax.grid(alpha=0.3, which="both")
 
     fig.suptitle(
-        "fig109  PROG-R4 unit E: the H-hard diagnostic -- "
-        "all three diagnostics RETURNED, each with a planted control that "
-        "fired BOTH ways.\n"
+        "fig109  PROG-R4 unit E: the H-hard diagnostic -- all three "
+        "diagnostics RETURNED, each with a planted control that fired BOTH "
+        "ways.\n"
         f"Re={d['realization']['Re']}, N=24, dt={d['realization']['dt']}, "
         "Lie-Trotter split (globally FIRST order), Newton-GMRES-hookstep, "
-        f"{d3['resourcing']['core_hours']:.2f} core-hours.  "
-        "G1 stays UNDER-RESOURCED; this is a measurement of THIS realization "
+        f"{d3['resourcing']['core_hours']:.1f} core-hours.\n"
+        "G1 stays UNDER-RESOURCED. This is a measurement of THIS realization "
         "at THIS budget, not a verdict about the published rows.",
         fontsize=9.5)
-    fig.tight_layout(rect=(0, 0, 1, 0.93))
+    fig.tight_layout(rect=(0, 0, 1, 0.91))
     fig.savefig(FIG, dpi=150)
     print(f"wrote {FIG}")
 

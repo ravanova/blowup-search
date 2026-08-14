@@ -112,11 +112,13 @@ def main():
           len(prior) == 5
           and all(a["reason"] == "line_search_failed" for a in prior),
           "targets " + ", ".join(a["target"] for a in prior))
-    check("leg 353's final residuals lie in the band this unit quotes",
-          d["prior_leg_353"]["final_residual_range"][0] <= min(p_res)
-          and max(p_res) <= d["prior_leg_353"]["final_residual_range"][1],
-          f"observed [{min(p_res):.2f}, {max(p_res):.2f}] inside quoted "
-          f"{d['prior_leg_353']['final_residual_range']}")
+    lo_q, hi_q = d["prior_leg_353"]["final_residual_range"]
+    check("the [22.5, 29.5] band this unit quotes IS leg 353's own spread, "
+          "rounded to 0.1",
+          close(round(min(p_res), 1), lo_q) and close(round(max(p_res), 1),
+                                                      hi_q),
+          f"observed [{min(p_res):.2f}, {max(p_res):.2f}], quoted "
+          f"[{lo_q}, {hi_q}]")
     check("leg 353 attempted UPO37 twice, and UPO35/UPO9/UPO22 once each",
           sorted(a["target"] for a in prior)
           == ["UPO22", "UPO35", "UPO37", "UPO37", "UPO9"])
@@ -193,8 +195,10 @@ def main():
     # =================================================================
     led = load(U5_LEDGER)
     flat, per_attempt = E.epoch_drifts(led, u5["attempts"])
-    con = np.array([t[2] for t in flat if t[0]], float)
-    unc = np.array([t[2] for t in flat if not t[0]], float)
+    # epoch_drifts yields (class, d|s|, d||R||) triples; "constrained" means the
+    # accepted hookstep trial sat ON the trust-region boundary.
+    con = np.array([t[1] for t in flat if t[0] == "constrained"], float)
+    unc = np.array([t[1] for t in flat if t[0] == "unconstrained"], float)
     check("epoch classes partition the accepted epochs",
           len(flat) == d2["n_epochs"]
           and len(con) == d2["n_constrained"]
