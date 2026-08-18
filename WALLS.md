@@ -271,35 +271,14 @@ inverse uniform in `M`. **Absent both, the ban applies in full.**
 
 ## LANE T — THE TORUS LANE. ~~*Priority 1.*~~ **DEFERRED 2026-08-14.**
 
-> **DEFERRED BY USER RULING 2026-08-14**, on the lane's own measurement. **Not killed, and nothing it
-> measured is superseded.** `T3` is deferred **with** the lane; **`T2″` is what keeps it alive** and is
-> re-open condition (ii). Full cost of deferring and both re-open conditions: **`OPTIONS.md` §E**.
-> The lane's opening argument rested on four results, **one of which was measured FALSE** — see
-> `## History`, "Lane T's opening argument".
-
-**Attacks W2, W4, W6.** What survives after `T4`/`T6`:
-
-1. **Leg 348's obstruction is NOT refuted, but its evidence base is thinner than the record said.**
-   The only named obstruction is **domain shape**: the Galerkin-plus-tail bridge closes against a
-   **compact domain with a discrete, geometrically decaying spectral basis**; route 4 wants unbounded
-   `ℝ³` in an algebraic weight. **Leg 348 read `arXiv:1902.00384` at ABSTRACT LEVEL ONLY and flagged
-   that limit itself** — an undischarged ceiling a lane, an escalation and a user ruling rested on
-   for 45 legs. **`T6` discharged it at full text.**
-2. **`T³` is the domain the obstruction asks for**, but **leg 348's `domain_census` OVER-COUNTS BY
-   ONE** — `arXiv:2409.09234` is not an instance of the technology at all (`T6`, verified by `V-W2`).
-   **6 − 1 = 5.** Leg 390's figure inherits the error. **Re-check before citing it.** `## History`.
-3. ~~`arXiv:1902.00384` already certifies a periodic orbit of 3D Navier–Stokes on `T³`.~~
-   **RETRACTED by `T4`: both certified rows are 2D LIFTS**, certified by **exactly the banned
-   apparatus**. **This item can no longer carry weight.** See W2.
-4. **(D) vacates §4 as an acceptance test but not the work** (W4). Leg 390 §5 item 4: ***"§1's POCP
-   credit is unclaimed."***
-
-**The price, stated first, because free lunches here get repurchased.** Full itemisation retired 2026-08-18 → `WALLS_HISTORY.md` §LANE-T-PRICE; **every number is in `OPTIONS.md` §E, which is the live ledger.** Lane T stays **DEFERRED**, alive only through **`T2″`**, and its price is the reason re-opening it needs condition (i) or (ii), **not a Conductor's preference.**
-
-**All dispatched units are TAKEN** — `T1` (ruled), `T2` (`UNDER-RESOURCED`, named `T2″`), `T4`
-(`STOP`), `T5`/`T6`. **`T3`, the non-DSS `T³` ansatz, is the lane's real mathematical content,
-deferred WITH the lane, not killed**; leg 390 §5 item 3 prices it (one-step DSS margin decays with
-band width at exponent **−0.99057**).
+**Attacks W2, W4, W6.** Body retired 2026-08-19 → `WALLS_HISTORY.md` §LANE-T (verbatim, nothing
+unstruck). **DEFERRED BY USER RULING 2026-08-14 on the lane's own measurement — not killed, and
+nothing it measured is superseded.** All dispatched units TAKEN; **`T2″` is the only thing keeping it
+alive** and is re-open condition (ii). **`T3`, the non-DSS `T³` ansatz, is the lane's real
+mathematical content, deferred WITH the lane, not killed.** Full price and both re-open conditions:
+**`OPTIONS.md` §E** (the live ledger). Two corrections it carried are recorded independently —
+item 3's retraction (`T4`: both certified rows are 2D lifts) at **W2** and `WALLS_HISTORY.md` §W2's
+crack; the `domain_census` over-count (6 − 1 = 5) at §`2409.09234`. **Re-check before citing either.**
 
 ## LANE V — THE VISCOUS RUNG. ~~*PRIORITY, ACTIVE.*~~ ~~**HELD 2026-08-18.**~~ **UN-HELD 2026-08-18 BY RULING.**
 

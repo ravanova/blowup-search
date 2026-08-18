@@ -253,3 +253,39 @@ is kept here verbatim rather than paraphrased.
 **Gates and pre-committed readings, FINAL WORDING and verbatim: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`, committed BEFORE any dispatch.** The unit descriptions are in that file and are **retired from here** under §3j — a pointer to committed text is not a summary. SHAs `036e56d` (`D-REPAIR`), `4be46ef` (`L5`), `b46ee4d` (`V-W4`); integration `e42e7ab`. **The mechanical audits, `§3i`'s seven per unit and the headroom report are in `reports/ORCH_STATE.md`.**
 
 **⚠ A PRECEDENT SET HERE: one request to change a gate mid-wave was REFUSED.** Ruling Q5 landed after dispatch asking `L5` to state what distinguishes a genuine natively-finite-energy ansatz from the same trap in a different hat. **Amending a gate after dispatch defeats pre-registration**, so it was required **at integration** instead — and `L5`'s own pre-registration `e2f13c1`, made **before the ruling existed**, already carried the discriminator: **Clay condition (7), `E(t)` bounded uniformly in `t`, measured across all three `κ` branches.**
+
+## §LANE-T — Lane T's body, retired from `WALLS.md` 2026-08-19 under §3j retirement
+
+Retired because the lane has been **DEFERRED since 2026-08-14** and every dispatched unit is TAKEN, so the body was 2.5 KB of settled record inside a file with 115 bytes free. **Verbatim, nothing unstruck.** The live pointer in `WALLS.md` keeps the deferral, `T2″` as the only thing holding the lane open, `T3` as its undone mathematical content, and both corrections.
+
+## LANE T — THE TORUS LANE. ~~*Priority 1.*~~ **DEFERRED 2026-08-14.**
+
+> **DEFERRED BY USER RULING 2026-08-14**, on the lane's own measurement. **Not killed, and nothing it
+> measured is superseded.** `T3` is deferred **with** the lane; **`T2″` is what keeps it alive** and is
+> re-open condition (ii). Full cost of deferring and both re-open conditions: **`OPTIONS.md` §E**.
+> The lane's opening argument rested on four results, **one of which was measured FALSE** — see
+> `## History`, "Lane T's opening argument".
+
+**Attacks W2, W4, W6.** What survives after `T4`/`T6`:
+
+1. **Leg 348's obstruction is NOT refuted, but its evidence base is thinner than the record said.**
+   The only named obstruction is **domain shape**: the Galerkin-plus-tail bridge closes against a
+   **compact domain with a discrete, geometrically decaying spectral basis**; route 4 wants unbounded
+   `ℝ³` in an algebraic weight. **Leg 348 read `arXiv:1902.00384` at ABSTRACT LEVEL ONLY and flagged
+   that limit itself** — an undischarged ceiling a lane, an escalation and a user ruling rested on
+   for 45 legs. **`T6` discharged it at full text.**
+2. **`T³` is the domain the obstruction asks for**, but **leg 348's `domain_census` OVER-COUNTS BY
+   ONE** — `arXiv:2409.09234` is not an instance of the technology at all (`T6`, verified by `V-W2`).
+   **6 − 1 = 5.** Leg 390's figure inherits the error. **Re-check before citing it.** `## History`.
+3. ~~`arXiv:1902.00384` already certifies a periodic orbit of 3D Navier–Stokes on `T³`.~~
+   **RETRACTED by `T4`: both certified rows are 2D LIFTS**, certified by **exactly the banned
+   apparatus**. **This item can no longer carry weight.** See W2.
+4. **(D) vacates §4 as an acceptance test but not the work** (W4). Leg 390 §5 item 4: ***"§1's POCP
+   credit is unclaimed."***
+
+**The price, stated first, because free lunches here get repurchased.** Full itemisation retired 2026-08-18 → `WALLS_HISTORY.md` §LANE-T-PRICE; **every number is in `OPTIONS.md` §E, which is the live ledger.** Lane T stays **DEFERRED**, alive only through **`T2″`**, and its price is the reason re-opening it needs condition (i) or (ii), **not a Conductor's preference.**
+
+**All dispatched units are TAKEN** — `T1` (ruled), `T2` (`UNDER-RESOURCED`, named `T2″`), `T4`
+(`STOP`), `T5`/`T6`. **`T3`, the non-DSS `T³` ansatz, is the lane's real mathematical content,
+deferred WITH the lane, not killed**; leg 390 §5 item 3 prices it (one-step DSS margin decays with
+band width at exponent **−0.99057**).
