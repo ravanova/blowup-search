@@ -390,11 +390,100 @@ banked, plus **0.806 h** of planted controls. The banked figure counts the relau
 was killed by the host after ~2 h with nothing banked (see §12). Diagnostics (1) and (2) were
 re-derivations of banked records and cost minutes.
 
+> **CORRECTION, 2026-08-18 — unit `D-REPAIR` (wave 5), discharging `V-W3`'s defect D5.**
+> D5 recorded that `diagnostic_3.resourcing.core_hours = 5.687` and
+> `sum(diagnostic_3.attempts[].wall_seconds) = 9.088` core-hours do not reconcile (**3.40
+> core-hours, 37.4% of the larger**), and that **"which subset the 5.687 covers is not
+> recoverable from the record"**. **The banked JSON is NOT edited** — reading (b), no banked
+> artefact may be rewritten to match a later finding — but **the subset IS recoverable, and here
+> it is.**
+>
+> **1. `5.687` is OCCUPANCY, not consumption.** `resourcing.core_hours` is exactly
+> `wall_seconds × workers / 3600` = `2047.4409 × 10 / 3600` — a 10-worker pool held open for the
+> relaunch window. It is not the sum of anything the attempts spent.
+>
+> **2. The relaunch's elapsed window identifies its members.** `resourcing.wall_seconds`
+> (**2047.4409 s**) equals attempt **11**'s own `wall_seconds` (**2047.4169 s**) to **0.024 s**,
+> `1.2e-5` relative: attempt 11 was the last of the relaunch to finish, so the window IS its
+> duration. **No attempt can run longer than the window that contains it**, so the eight rows
+> with `wall_seconds > 2047.4409` — attempts **0, 1, 2, 3, 4, 6, 7, 8** — **cannot** have been in
+> the relaunch. That is **exactly eight**, and §12(e) records **exactly eight** completed attempts
+> reused from checkpoint. The relaunch is therefore attempts **5, 9, 10, 11, 12, 13, 14, 15**.
+>
+> **3. The books then close, to the second.**
+>
+> | quantity | attempts | core-seconds | core-hours |
+> |---|---|---|---|
+> | relaunched, CPU actually spent | 5, 9, 10, 11, 12, 13, 14, 15 | 12,601.38 | **3.5004** |
+> | inherited from the killed launch, CPU spent | 0, 1, 2, 3, 4, 6, 7, 8 | 20,116.96 | **5.5880** |
+> | **all 16, `sum(attempts[].wall_seconds)`** | — | **32,718.33** | **9.0884** |
+> | relaunch OCCUPANCY, `= wall_seconds × workers` (the banked `core_hours`) | 8 tasks on a 10-worker pool | 20,474.41 | **5.6873** |
+> | of which BUSY / IDLE | — | 12,601.38 / 7,873.03 | 61.5% / **38.5%** |
+>
+> **The 3.40 core-hour gap is two effects, not one:** the banked figure **omits** the 5.588
+> core-hours the eight inherited attempts really cost, and **adds** 2.187 core-hours of idle pool
+> (two of ten workers were never given a task at all — 1.1375 core-hours of that on its own).
+>
+> **4. What this unit cost, stated once.** **9.0884 core-hours of attempt CPU** (`sum` over all
+> 16 rows) **plus 0.8057 h of planted controls** (`resourcing.control_wall_seconds = 2900.554 s`),
+> on top of the ~2 h first launch that banked nothing. **`5.687` is not that number and must not
+> be quoted as it.**
+>
+> **A finding about the verifier, reported not ruled.** D5's ceiling — *"the reconciliation itself
+> is beyond this artefact"* (`verify_wave3.md` §5 item 2) — **does not hold**: the provenance flag
+> D5 correctly says is missing turned out not to be needed, because the elapsed window and the
+> per-attempt walls determine the partition on their own. D5's **size** (3.40 core-hours, 37.4%)
+> is exact and stands.
+
 **The commissioned model was ~0.0713 h/attempt → ~1.14 core-hours for 16 attempts. The true figure
 is ~0.57 h/attempt, an ~8× under-estimate**, and the reason is structural rather than accidental:
 the model was calibrated on U5 attempts that stall early, while **an attempt planted at a published
 `(T, s)` runs 20–31 epochs before the stall rule fires.** A seed that is *plausible* is expensive
 exactly because it does not fail fast. **This is logged as a correction for the Conductor (§12d).**
+
+> **CORRECTION, 2026-08-18 — unit `D-REPAIR` (wave 5), discharging `V-W3`'s defect D3.**
+> Per `writeup/CORRECTIONS.md`'s convention the paragraph above stands as written; this block is
+> beside it, and it is the measurement. **D3's finding holds and its arithmetic does not.** The
+> structural explanation IS contradicted — but **not** because `E` used fewer epochs. `V-W3`
+> compared `E`'s **343** (an `n_iters` count) against U5's **2195** (a ledger-row count), and
+> those are two different conventions (see `prog_r4_u5.md` §"Cost basis", D4's correction block:
+> a non-converged attempt banks one ledger row beyond its `n_iters`, and `2195 − 2104 = 91` is
+> exactly U5's non-converged count, `357 − 343 = 14` exactly `E`'s). **Like for like, in EITHER
+> convention, `E` used slightly MORE epochs per attempt, not 2.3% fewer — and it is still nowhere
+> near a structural difference.**
+>
+> | quantity, like for like | `E` | U5 | ratio |
+> |---|---|---|---|
+> | epochs/attempt, `n_iters` convention | **21.4375** (343/16) | **21.04** (2104/100) | **1.0189** — `E` +1.9% |
+> | epochs/attempt, ledger-row convention | **22.3125** (357/16) | **21.95** (2195/100) | **1.0165** — `E` +1.7% |
+> | core-s/attempt | **2044.90** (32,718.334/16) | **2053.44** (0.0713 wall-h × 8 workers) | **0.9958** — `E` 0.4% **under** |
+> | s/epoch, `n_iters` convention | **95.389** | **97.597** | **0.9774** — `E` 2.3% cheaper |
+> | s/epoch, realised vs the **95 s** U5 banked as `seconds_per_epoch_costed_at` | **95.389** | 95 (model) | **1.0041** — 0.41% over |
+>
+> Sources, all re-derived: `writeup/data/p2_prog_r4_e_v1.json` (`diagnostic_3.attempts[].n_iters`,
+> `.wall_seconds`), `experiments/programme_r4/e_hhard_ledger.json`,
+> `writeup/data/p2_prog_r4_m3_v1.json` (`resourcing.epochs_spent`, `.seconds_per_epoch_costed_at`),
+> `experiments/programme_r4/u5_m3_ledger.json`.
+>
+> **Both factors of the cost model land within ~2% in either convention**, so there is no
+> structural over-run for the "runs 20–31 epochs before the stall rule fires" story to explain:
+> that story predicts a *multiple*, and the measurement is a couple of per cent. The same wording
+> at §12(d) carries its own correction block.
+>
+> **A finding about the verifier, reported not ruled.** `V-W3`'s D3 sentence "`E` used 2.3% fewer
+> epochs per attempt, not more" is **wrong in size and in direction** — it is +1.9% (or +1.7%),
+> not −2.3% — because it mixed the two epoch conventions. **D3's conclusion survives; its number
+> does not.** The same mixed comparison reached `STATE.md` and `OPTIONS.md` in the Conductor's D1
+> correction ("21.44 epochs/attempt vs U5's 21.95"); **those files are the Conductor's and are
+> untouched by this unit.**
+>
+> **NOT repaired here, and deliberately.** The `~8×` in the sentence above is `V-W3`'s defect
+> **D1**, which is **not in this unit's scope** — D1 was the Conductor's to rule and was
+> corrected by the Conductor in `STATE.md` and `OPTIONS.md` on 2026-08-18 (`0.0713` is
+> **wall**-h/attempt at 8 workers, `0.57` is **core**-h/attempt; like for like `E` came in 0.4%
+> *under*, and the `8×` is `core ÷ wall` = the worker count). **The residue at these lines and at
+> `writeup/4_p2_lottery/TECHNICAL_P2_PROGR4_HHARD.md:212` is FLAGGED, NOT FIXED**, and is
+> reported to the Conductor as such. A repair is a unit; this one was not commissioned to make it.
 
 **The scale at which the question "are these rows reachable in this realization?" is properly
 posed**, priced from this unit's own measured 0.57 h/attempt:
@@ -475,6 +564,18 @@ unit's own artifacts explicitly.
 calibrated on mined-seed attempts that stall early; **direct-seed attempts measured `≈0.57
 h/attempt`** because a plausible seed runs 20–31 epochs before the stall rule fires. **A brief that
 prices direct seeding off mined-seed telemetry will under-resource it every time.**
+
+> **CORRECTION, 2026-08-18 — unit `D-REPAIR` (wave 5), `V-W3` defect D3.** The wording above
+> stands; this is the measurement beside it. **The mined-seed-vs-direct-seed explanation does not
+> survive either ledger.** Like for like, `E` ran **21.44** epochs/attempt against U5's **21.04**
+> on the `n_iters` convention (**+1.9%**) and **22.31** against **21.95** on the ledger-row
+> convention (**+1.7%**), at **95.389 s/epoch** against the **95 s** U5 banked as
+> `seconds_per_epoch_costed_at` (**0.41% over**), for **2044.90** core-s/attempt against a
+> modelled **2053.44** (**0.4% under**). A structural difference is a multiple; this is a couple
+> of per cent. So the recommendation this item draws is unsupported by the numbers it draws it
+> from: **the mined-seed telemetry priced this unit correctly in both of its factors.** Full table,
+> sources, and the note on `V-W3`'s own mixed-convention arithmetic at §10. **The `~8×` here is
+> D1, not D3: flagged, not fixed.**
 
 **(e) The host killed the unattended run TWICE.** The first launch died after ~2 h with **zero**
 banked results. Per-attempt pickle checkpointing plus `imap_unordered(chunksize=1)` was added to
