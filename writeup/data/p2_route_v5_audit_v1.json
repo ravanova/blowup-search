@@ -1,0 +1,553 @@
+{
+ "artefact": "writeup/data/p2_route_v5_audit_v1.json",
+ "unit": "V5",
+ "leg": 402,
+ "wave": 6,
+ "branch": "leg/402-v5-audit-25116",
+ "date": "2026-08-18",
+ "role": "ADVERSARIAL AUDIT of the Grade-A x fluid cell of leg 174's census",
+ "target": {
+  "arxiv": "2509.25116",
+  "version": "v2",
+  "title_as_printed": "Nonuniqueness of Leray-Hopf solutions to the 3D Navier-Stokes equations",
+  "authors_as_printed": "Thomas Y. Hou, Yixuan Wang, De Huang (per the e-print front matter)",
+  "pdf_sha256": "2d369eade29bd0d5e8dfc6d7def7ed19b8282ab4450860978f3691176d9f8318",
+  "pdf_bytes": 2148337,
+  "pages": 74,
+  "latex_main_tex_lines": 4613,
+  "latex_main_tex_bytes": 315538,
+  "companion_repo": "github.com/HouGroup2026/3d-navier-stokes-nonuniqueness",
+  "note_on_author_field": "PARAPHRASE-BY-EXTRACTION, not a verbatim quote of the title page."
+ },
+ "gate_verbatim": {
+  "provenance": "writeup/waves/WAVE6_PLAN.md section V5, committed at e202653 BEFORE dispatch; NOT re-wordable by this unit.",
+  "clause_1": "Enumerate the paper's load-bearing constants BEFORE adjudicating anything; recompute every recomputable one; check the localisation step (Remark 2, SS1.3 together with SS2) at full text. Does the certificate close as claimed -- YES or NO -- and if any constant fails to recompute, name it, quote the failing clause verbatim, and give both numbers?",
+  "clause_2": "Is the certified profile genuinely 3D against W2's own pre-committed test -- YES or NO? W2's test is the arbiter and THIS ANSWER MUST NOT BE FOLDED INTO THE CLAUSE-1 VERDICT."
+ },
+ "pre_registration": {
+  "commit": "eb756b1",
+  "committed_before_the_paper_was_read": true,
+  "location": "experiments/journal/leg_402.md PART 0",
+  "branches_clause_1": {
+   "B1_YES": "every load-bearing constant either recomputes or is UNRECOMPUTABLE-BY-DESIGN, and the closure conditions hold on the RECOMPUTED numbers",
+   "B1_NO": "a closure condition FAILS on the recomputed numbers",
+   "B1_PARTIAL": "one or more printed constants disagree with recomputation, but the closure conditions still hold when the corrected values are carried through the whole chain",
+   "standing_rule": "UNRECOMPUTABLE IS NOT NO. An interval-arithmetic output this unit cannot re-run is not a defect; it is a limit of this audit, and is banked as such."
+  },
+  "branches_clause_2": {
+   "B2_YES": "W2's predicate FAILS on at least one conjunct -> genuinely 3D",
+   "B2_NO": "W2's predicate HOLDS on all three conjuncts -> a 2D LIFT",
+   "B2_UNMEASURABLE": "the certified object cannot be tied to any shipped data"
+  }
+ },
+ "CLAUSE_1": {
+  "ANSWER": "YES",
+  "branch_taken": "B1_PARTIAL",
+  "meaning": "The certificate DOES close as claimed. Four printed constants fail to recompute; carrying the corrected values through the entire chain, both closure conditions still hold.",
+  "closure_conditions": [
+   {
+    "condition": "M_4^U > 0 (the discriminant of the U-step)",
+    "recomputed": "0.002015438",
+    "holds": true
+   },
+   {
+    "condition": "M_4^v >= 0.021 (the discriminant of the v-step)",
+    "recomputed": "0.0210567838661",
+    "holds": true
+   },
+   {
+    "condition": "|lambda| <= 0.0045 (the eigenvalue perturbation bound)",
+    "recomputed": "0.00426280601272",
+    "holds": true
+   },
+   {
+    "condition": "x_1^U <= 6.2e-6 (the tightest surviving margin)",
+    "recomputed": "6.19510011291e-6",
+    "holds": true,
+    "margin_percent": 0.08,
+    "V5_note": "0.08% is LUCK, NOT MARGIN. This is the single number on which the corrected chain is thinnest, and it is stated as such rather than reported as comfortable."
+   }
+  ],
+  "constants_that_FAILED_to_recompute": [
+   {
+    "id": "H28",
+    "what": "the coefficient inside the reduced M_4^U",
+    "printed": "2.8e-6",
+    "recomputed": "2.6e-6",
+    "failing_clause_verbatim": "M_4^U = (\\frac{1}{4} - \\eta_1 - M_2^U)^2 - 4 M_3^U \\varepsilon^U > 0.",
+    "failing_clause_location": "arXiv:2509.25116v2 LaTeX e-print main.tex line 2242; the printed 2.8e-6 appears in the reduced form at lines 2247-2248, character-exact '- 2.8 \\times 10^{- 6} \\times M_3^U'",
+    "direction": "CONSERVATIVE",
+    "why_harmless": "4 eps^U = 4 x 6.5e-7 = 2.6e-6 exactly. The paper writes 2.8e-6, which is LARGER, so the subtracted term is LARGER and M_4^U comes out SMALLER than the truth. The error is in the safe direction, and the next step does not use it: it uses the certified bound 0.002.",
+    "moves_the_verdict": false
+   },
+   {
+    "id": "H30",
+    "what": "x_0^U",
+    "printed": "1.44e-5",
+    "recomputed": "1.45054706437e-5",
+    "failing_clause_verbatim": "0.25 - 0.199 - 0.005 + \\sqrt{0.002}",
+    "failing_clause_location": "arXiv:2509.25116v2 LaTeX e-print main.tex lines 2278-2280",
+    "direction": "NON-CONSERVATIVE",
+    "diagnosis": "eta_2 = 0.005 has been substituted where M_2^U <= 0.0061 belongs. eta_2 is declared at main.tex line 2255 as 'where $\\eta_2 = 0.005$ is the $L^2$ coefficient of $E$-norm in \\eqref{eq:eig M}.' and M_2^U is certified at main.tex lines 2270-2271 as <= 0.0061. The two are different objects that happen to look alike; the smaller one was used, making the denominator LARGER and x_0^U SMALLER than the truth.",
+    "with_the_papers_own_substituted_0.005": "1.432959125e-5",
+    "with_the_correct_M_2^U_bound_0.0061": "1.45054706437e-5",
+    "moves_the_verdict": false,
+    "why_not": "carried through the whole chain, every downstream closure condition still holds."
+   },
+   {
+    "id": "H32",
+    "what": "y_0^U",
+    "printed": "1.3e-7",
+    "recomputed": "1.30549235793e-7",
+    "direction": "PROPAGATED from H30",
+    "moves_the_verdict": false
+   },
+   {
+    "id": "H33",
+    "what": "y_1^U",
+    "printed": "4.8e-7",
+    "recomputed": "4.82306898903e-7",
+    "direction": "PROPAGATED from H30",
+    "moves_the_verdict": false
+   }
+  ],
+  "conservative_mismatches_recorded_but_not_counted_as_failures": [
+   {
+    "id": "O1",
+    "where": "x_1^U",
+    "what": "the paper's prefactor drops the -M_2^U term",
+    "papers_expression_verbatim": "\\sqrt{\\frac{\\frac{1}{4} - 0.199}{1 - 0.9301}}",
+    "location": "main.tex lines 2282-2284",
+    "papers_prefactor": "0.854174",
+    "correct_prefactor": "0.802283",
+    "direction": "CONSERVATIVE"
+   },
+   {
+    "id": "O2",
+    "where": "x_0^v",
+    "what": "0.18 printed where phi^v sqrt(G^v) = 0.1737",
+    "papers_expression_verbatim": "6.4 \\times (1 + 0.18) \\times 5.67 \\times 10^{- 4}",
+    "location": "main.tex line 2373",
+    "direction": "CONSERVATIVE"
+   }
+  ],
+  "localisation_step": {
+   "what_was_checked": "Remark 2 (main.tex lines 250-256), SS1.3, and SS2 at full text -- twelve links, HE-1 through HE-11 plus HH.",
+   "verdict": "NO GAP FOUND",
+   "independently_re_derived_by_V5": [
+    "the Bogovskii tail scaling int_{|x|>R}|x|^{-p} dx = 4 pi R^{3-p}/(p-3)",
+    "the heat-smoothing/similarity exponent cancellation, giving t^{1/2 - 3/(2p)} independent of k and r",
+    "alpha = 1/4 and (p-3)/(2p) = 1/8 = alpha/2, with delta ~ 0.0565 < delta_1 = 1/8",
+    "the self-map 1/4 + 1/2 < 1 and the 1/2 contraction",
+    "the t^{1/4} / t^{-1/4} scalings and int_0^1 t^{-1/2} dt = 2"
+   ],
+   "the_load_bearing_strictness": "The L^s L^q claim's inequality 3/q + 2/s > 1 is STRICT and that strictness is load-bearing: at equality the time integral diverges logarithmically. The paper claims only the strict side, and uses it correctly.",
+   "sign_convention_resolved": {
+    "apparent_problem": "the printed eigenvalue lambda-bar ~ -0.113 looks stable",
+    "resolution_verbatim": "We remark that we flip a sign of the linearized operator in the second equation of \\eqref{eq:NS eq eig} due to the convenience of elliptic estimates.",
+    "location": "main.tex line 288",
+    "consequence": "the eigenvalue of L_Utilde is -lambda-bar ~ +0.113 > 0, i.e. UNSTABLE, as the argument requires."
+   }
+  },
+  "constant_enumeration": {
+   "procedure": "frozen in PART 0 SS0.5 BEFORE the paper was read; seven steps",
+   "class_A_UNRECOMPUTABLE_BY_DESIGN": {
+    "ids": "H1-H21",
+    "what": "interval-arithmetic outputs of the authors' Julia certification; this unit cannot re-run them and does not treat them as defects",
+    "values": {
+     "epsU": "6.5e-7",
+     "eta1": "0.199",
+     "lamQ": "4.5",
+     "epsv": "1.9e-5",
+     "lambar": "-0.113",
+     "vinf": "2.52",
+     "gvinf": "3.4",
+     "M0core": "6.38",
+     "rayl": "0.1024",
+     "K6U": "0.46",
+     "K6v": "0.46",
+     "eps34": "5.3e-5",
+     "K7U": "0.0012",
+     "GU": "0.025",
+     "phiphiU": "0.12",
+     "gphiU": "1.33",
+     "phiU": "0.36",
+     "K7v": "0.004",
+     "Gv": "0.029",
+     "phiv": "1.02",
+     "eta2": "0.005",
+     "K4u": "0.091"
+    },
+    "descriptions": {
+     "epsU": "eps^U, certified residual of the profile equation",
+     "eta1": "eta_1, the coercivity deficit absorbed into 1/4",
+     "lamQ": "||lambda_max(Q)||_inf",
+     "epsv": "eps^v, certified residual of the eigenpair equation",
+     "lambar": "lambda-bar, printed eigenvalue (sign-flipped operator, see main.tex:288)",
+     "vinf": "||v||_inf",
+     "gvinf": "||grad v||_inf",
+     "M0core": "the interval-arithmetic core of M_0",
+     "rayl": "the Rayleigh-quotient factor entering K_5^U",
+     "K6U": "K_6^U",
+     "K6v": "K_6^v",
+     "eps34": "eps_3^U = eps_4^U",
+     "K7U": "K_7^U",
+     "GU": "G^U",
+     "phiphiU": "||phi phi||^U",
+     "gphiU": "||grad phi||^U",
+     "phiU": "||phi||^U",
+     "K7v": "K_7^v",
+     "Gv": "G^v",
+     "phiv": "||phi||^v",
+     "eta2": "eta_2, the L^2 coefficient of the E-norm in eq:eig M (main.tex:2255)",
+     "K4u": "the rounded K_4 the paper uses downstream"
+    }
+   },
+   "class_B_RECOMPUTABLE": {
+    "ids": "H22-H41",
+    "count_recomputed": 24,
+    "rows": [
+     {
+      "id": "H22",
+      "quantity": "K_4 = 3^{3/4}/(2^3 pi)",
+      "expr": "mpf(3)**mpf('0.75')/(8*pi)",
+      "printed": "0.0907",
+      "recomputed": "0.0906987039818",
+      "relation": "approx",
+      "agrees": true
+     },
+     {
+      "id": "H25",
+      "quantity": "K_5^U = ||lambda_max(Q)||_inf * rayleigh",
+      "expr": "lamQ*rayl",
+      "printed": "0.47",
+      "recomputed": "0.4608",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H24",
+      "quantity": "M_1^U = K_5^U + K_6^U/(1-eps_4^U)^2",
+      "expr": "p_K5U + K6U/(1-eps34)**2",
+      "printed": "0.9301",
+      "recomputed": "0.930048763877",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H26",
+      "quantity": "M_2^U = eta_2 M_1^U + eps_3^U ||lambda_max(Q)|| + K_7^U",
+      "expr": "eta2*p_M1U + eps34*lamQ + K7U",
+      "printed": "0.0061",
+      "recomputed": "0.006089",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H27",
+      "quantity": "M_3^U = sqrt(G^U) ||grad phi||^U + G^U ||phi phi||^U",
+      "expr": "sqrt(GU)*gphiU + GU*phiphiU",
+      "printed": "0.22",
+      "recomputed": "0.213291464401",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H28",
+      "quantity": "the coefficient inside the reduced M_4^U, which IS 4 eps^U",
+      "expr": "4*epsU",
+      "printed": "2.8e-6",
+      "recomputed": "2.6e-6",
+      "relation": "==",
+      "agrees": false
+     },
+     {
+      "id": "H29",
+      "quantity": "M_4^U = (1/4 - eta_1 - M_2^U)^2 - 4 M_3^U eps^U",
+      "expr": "(mpf('0.25')-eta1-p_M2U)**2 - 4*p_M3U*epsU",
+      "printed": "0.002",
+      "recomputed": "0.002015438",
+      "relation": "!>=",
+      "agrees": true
+     },
+     {
+      "id": "H30",
+      "quantity": "x_0^U = 2 eps^U / (1/4 - eta_1 - M_2^U + sqrt(M_4^U))",
+      "expr": "2*epsU/(mpf('0.25')-eta1-p_M2U+sqrt(p_M4U))",
+      "printed": "1.44e-5",
+      "recomputed": "1.45054706437e-5",
+      "relation": "<=",
+      "agrees": false
+     },
+     {
+      "id": "H31",
+      "quantity": "x_1^U = sqrt((1/4-eta_1)/(1-M_1^U)) x_0^U / 2",
+      "expr": "sqrt((mpf('0.25')-eta1)/(1-p_M1U))*H30/2",
+      "printed": "6.2e-6",
+      "recomputed": "6.19510011291e-6",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H32",
+      "quantity": "y_0^U = x_0^U G^U ||phi||^U",
+      "expr": "H30*GU*phiU",
+      "printed": "1.3e-7",
+      "recomputed": "1.30549235793e-7",
+      "relation": "<=",
+      "agrees": false
+     },
+     {
+      "id": "H33",
+      "quantity": "y_1^U = x_0^U G^U ||grad phi||^U",
+      "expr": "H30*GU*gphiU",
+      "printed": "4.8e-7",
+      "recomputed": "4.82306898903e-7",
+      "relation": "<=",
+      "agrees": false
+     },
+     {
+      "id": "H34",
+      "quantity": "|lambda^con| = x_1^U ||v||_inf + y_1^U",
+      "expr": "H31*vinf + H33",
+      "printed": "1.62e-5",
+      "recomputed": "1.60939591834e-5",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H35",
+      "quantity": "eps_5 = (x_0^U + y_0^U) ||grad v||_inf + x_1^U ||v||_inf + y_1^U",
+      "expr": "(H30+H32)*gvinf + H31*vinf + H33",
+      "printed": "6.6e-5",
+      "recomputed": "6.58564267737e-5",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H36",
+      "quantity": "M_1^v = K_5^U + K_6^v/(1-eps_4^U)^2",
+      "expr": "p_K5U + K6v/(1-eps34)**2",
+      "printed": "0.9301",
+      "recomputed": "0.930048763877",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H37",
+      "quantity": "M_2^v = eta_2 M_1^v + eps_3^U ||lambda_max(Q)|| + K_7^v",
+      "expr": "eta2*p_M1U + eps34*lamQ + K7v",
+      "printed": "0.0089",
+      "recomputed": "0.008889",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H38",
+      "quantity": "M_5 = 1/4 - eta_1 + |lambda-bar| - 2 K_4 x_1^U - y_1^U - |lambda^con| - M_2^v",
+      "expr": "mpf('0.25')-eta1-lambar-2*K4u*H31-H33-H34-p_M2v",
+      "printed": "0.155",
+      "recomputed": "0.155082296226",
+      "relation": "!>=",
+      "agrees": true
+     },
+     {
+      "id": "H39a",
+      "quantity": "M_0 = core + eps_5",
+      "expr": "M0core+H35",
+      "printed": "6.4",
+      "recomputed": "6.38006585643",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H39b",
+      "quantity": "M_3^v = M_0 (1 + ||phi||^v sqrt(G^v))^2",
+      "expr": "p_M0*(1+phiv*sqrt(Gv))**2",
+      "printed": "8.82",
+      "recomputed": "8.81645492394",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H39c",
+      "quantity": "eps^v + eps_5",
+      "expr": "epsv+H35",
+      "printed": "8.5e-5",
+      "recomputed": "8.48564267737e-5",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H39d",
+      "quantity": "M_4^v = M_5^2 - 4 M_3^v (eps^v + eps_5)",
+      "expr": "H38**2 - 4*p_M3v*H39c",
+      "printed": "0.021",
+      "recomputed": "0.0210567838661",
+      "relation": "!>=",
+      "agrees": true
+     },
+     {
+      "id": "H40a",
+      "quantity": "x_0^v = 2(eps^v+eps_5)/(M_5 + sqrt(M_4^v))",
+      "expr": "2*H39c/(H38+sqrt(H39d))",
+      "printed": "5.67e-4",
+      "recomputed": "0.000565347963559",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H40b",
+      "quantity": "x_1^v = sqrt(M_5/(1 - 2 K_4 x_1^U - M_1^v)) x_0^v / 2",
+      "expr": "sqrt(H38/(1-2*K4u*H31-p_M1U))*H40a/2",
+      "printed": "4.3e-4",
+      "recomputed": "0.000421048246141",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H41a",
+      "quantity": "|lambda^lin(v)| = M_0 (1 + ||phi||^v sqrt(G^v)) x_0^v",
+      "expr": "p_M0*(1+phiv*sqrt(Gv))*H40a",
+      "printed": "0.0044",
+      "recomputed": "0.00424671205354",
+      "relation": "<=",
+      "agrees": true
+     },
+     {
+      "id": "H41b",
+      "quantity": "|lambda| = |lambda^lin(v)| + |lambda^con|",
+      "expr": "H41a+H34",
+      "printed": "0.0045",
+      "recomputed": "0.00426280601272",
+      "relation": "<=",
+      "agrees": true
+     }
+    ]
+   },
+   "class_C_STRUCTURAL": {
+    "ids": "HA-HH",
+    "what": "exponents and structural constants of the localisation argument, checked in the localisation table"
+   },
+   "paper_rounded_values_used_downstream_by_the_paper_itself": {
+    "p_K5U": "0.47",
+    "p_M1U": "0.9301",
+    "p_M2U": "0.0061",
+    "p_M3U": "0.22",
+    "p_M4U": "0.002",
+    "p_M2v": "0.0089",
+    "p_M0": "6.4",
+    "p_M3v": "8.82"
+   },
+   "note": "The paper's chain certifies a bound at each step and then uses the ROUNDED bound downstream. The recomputation follows that same discipline, so a disagreement is the PAPER'S arithmetic, not a rounding artefact of this audit."
+  },
+  "method": "mpmath at 50 decimal digits; every Class-B row re-derived from Class-A inputs and the paper's own rounded downstream values alone.",
+  "what_a_YES_here_DOES_NOT_do": "A YES on clause 1 does not move wall W3 by itself. W3 stands against this paper on a PROSE test by user ruling, and this audit did not test the prose criterion.",
+  "what_a_NO_would_not_have_done": "A NO would not have vacated the Grade-A x fluid cell, which is occupied as a matter of GRADING, not of correctness."
+ },
+ "CLAUSE_2": {
+  "ANSWER": "YES",
+  "answered_standing_alone": true,
+  "NOT_FOLDED_INTO_CLAUSE_1": "This verdict was reached from measurements of the shipped data alone and does not depend on, and is not conditioned on, the clause-1 answer.",
+  "branch_taken": "B2_YES",
+  "meaning": "The certified profile IS genuinely 3D. W2's predicate FAILS on all three conjuncts.",
+  "W2_test_located_in_the_record": {
+   "found": true,
+   "primary": "writeup/data/p2_route_t4_v1.json :: controls.C_3D",
+   "secondary": "experiments/journal/verify_wave2.md SS2.1",
+   "predicate": "a certified profile is a 2D LIFT iff (L1) no dependence on one Cartesian coordinate (N_x3 = 0, extent 1) AND (L2) u^(3) == 0 AND (L3) omega^(1) == omega^(2) == 0 with only omega^(3) nonzero. Genuinely 3D iff the conjunction FAILS.",
+   "invented": false,
+   "note": "W2's test was located in the record and used as the arbiter. Nothing was invented."
+  },
+  "rule_R2c_pre_committed_before_reading": "axisymmetric WITH OR WITHOUT swirl counts as 3D under W2's test, because W2's test is about the LIFT STRUCTURE, not about the number of independent variables. This rule was frozen in PART 0 SS0.2.1 BEFORE the paper was opened, so that the axisymmetry the paper advertises could not be used to bend the verdict either way.",
+  "the_certified_object_tied_to_shipped_data": {
+   "files": [
+    {
+     "path": "data/UP.mat",
+     "sha256_prefix": "c654a7f3ae86446e"
+    },
+    {
+     "path": "data/up_eig.mat",
+     "sha256_prefix": "8b72114a0856615a"
+    }
+   ],
+   "how_the_tie_was_established": "up_eig.mat's stored lambda = 0.1131420327438595 matches the paper's printed eigenvalue -0.11314203274385938 to SIXTEEN significant figures. The shipped data IS the certified object, not a lookalike.",
+   "component_identification_cross_confirmed_three_ways": [
+    "My_Vector.jl line 103 comment",
+    "the SS4.6 Y/X/Z vector-spherical-harmonic basis mode counts (Y has M modes, X has M+1, Z is the free swirl family) -- u2 has shape 301 x 150 = M+1, confirming the X family",
+    "set_div_free! updates only u2, which is correct precisely because for axisymmetric flow div u involves only u_r and u_theta, leaving u_phi free"
+   ]
+  },
+  "measurements": {
+   "u1_u_r_max_abs": 15.291462690010507,
+   "u2_u_theta_max_abs": 3.036715501940647,
+   "u3_u_phi_max_abs": 8.754198315291823,
+   "u_phi_as_fraction_of_u_r": 0.5725,
+   "p_max_abs": 28.482734829516136,
+   "nonzero_coefficients": "45000 / 45150",
+   "theta_mode_extent": 150,
+   "eigenfunction_swirl_max_abs": 0.002229944469064202
+  },
+  "predicate_applied_conjunct_by_conjunct": [
+   {
+    "conjunct": "L1 -- no dependence on one Cartesian coordinate (extent 1)",
+    "holds": false,
+    "why": "theta-mode extent is 150, not 1; 45000 of 45150 coefficients are nonzero"
+   },
+   {
+    "conjunct": "L2 -- u^(3) == 0",
+    "holds": false,
+    "why": "the swirl u_phi has max|u_phi| = 8.754198315291823, which is 57% of max|u_r|. This is not a numerical residue; it is a principal component of the profile."
+   },
+   {
+    "conjunct": "L3 -- omega^(1) == omega^(2) == 0, only omega^(3) nonzero",
+    "holds": false,
+    "why": "nonzero swirl with theta-dependence generates poloidal vorticity; the meridional components do not vanish"
+   }
+  ],
+  "contrast_with_the_failure_mode_this_clause_exists_to_catch": "Wave 2 measured that two certified rows in arXiv:1902.00384 were 2D LIFTS: Vishik's unstable vortices are steady states of the 2D EULER equations, lifted to 3D axisymmetric vortex rings WITHOUT SWIRL. That is exactly the construction whose u^(3) vanishes identically. THIS paper's profile carries swirl at 57% of the radial component, so it is NOT that construction. The paper's own sentence describing the lifted case, character-exact at main.tex lines 98-99, is 'that are steady states of the 2D Euler equations, and lifted them to 3D axisymmetric vortex rings.'",
+  "axisymmetry_flagged_but_NOT_WEIGHED": "The paper states at main.tex line 2509 'We consider the axisymmetric case throughout the computations and denote the cylindrical coordinates as $(\\rho,z,\\phi)$.' and at line 2192 'leveraging axissymmetry and parities' (the misspelling is the authors'). Under pre-committed rule R2-c this observation does NOT bear on the verdict and was not allowed to.",
+  "consequence_per_pre_committed_reading_b": "Reading (b) pre-committed that a NO here would be the MORE CONSEQUENTIAL answer, and a W2 finding rather than a W3 one. The answer is YES, so that branch is NOT taken: there is no 2D lift in the Grade-A x fluid cell on this paper's account, and W2 gains nothing here."
+ },
+ "journal_ref_observation": {
+  "OBSERVED_NOT_GRADED_NOT_RULED": true,
+  "observation": "arXiv:2509.25116v2 carries NO journal-ref field in its arXiv metadata.",
+  "the_mismatch": "PUB_0C_CENSUS_SPINE.md SS1 speaks of 'any published work'. Whether an arXiv e-print with no journal-ref satisfies that wording is NOT a question this unit rules.",
+  "escalation": "writeup/escalations/ESCALATION_PUB0C_PUBLISHED_2026-08-18.md -- OPEN USER ESCALATION",
+  "per_dispatch_reading_e": "RECORD WHAT YOU OBSERVE; DO NOT GRADE THE CRITERION, DO NOT RULE IT, DO NOT STOP FOR IT. This unit recorded, did not grade, did not rule, did not stop.",
+  "adjacent_observation": {
+   "what": "main.tex line 3519 carries a COMMENTED-OUT sentence in SS7",
+   "character_exact": "%A subsequent version will report the final constants (we expect only minor adjustments) and the full error budgets from the completed verification.",
+   "V5_ruling_on_its_status": "COMMENTED-OUT TEXT IS NOT A CLAIM. It is not in the rendered paper and this unit does not treat it as one. It is recorded because it was found in the load-bearing source file, and suppressing it would be the same defect class as quoting it as though it were published."
+  }
+ },
+ "pre_committed_readings_discharged": {
+  "a": "Stated. A YES on clause 1 does not move W3; the cell stays occupied either way.",
+  "b": "Stated plainly. Clause 2 is YES, so the more-consequential NO branch is not taken.",
+  "c": "Pre-registration commit eb756b1 precedes every measurement; checkable by grep, contains NO verdict.",
+  "d": "Every quote in this artefact and in the journal was taken via the Read tool from the authors' own LaTeX source, never from compressed shell output. Paraphrases are LABELLED (see target.note_on_author_field).",
+  "e": "Journal-ref observed, recorded, NOT graded, NOT ruled, NOT stopped for.",
+  "f": "The authors were NOT contacted. Only published material was read.",
+  "g": "No ban was ruled on. No ban wording was adjudicated.",
+  "h": "Tier 2 is not a proof. NO LINK OF THE L1->L4 CHAIN MOVED. This audit is not movement toward Clay."
+ },
+ "what_this_audit_did_NOT_establish": [
+  "It did not verify the authors' interval-arithmetic outputs (Class A). Those are UNRECOMPUTABLE-BY-DESIGN here and are banked as a LIMIT OF THIS AUDIT, not as a pass.",
+  "It did not re-run the Julia certification.",
+  "It did not test W3's prose criterion, so it does not move W3.",
+  "It did not move any link of L1->L4."
+ ],
+ "second_deliverable": {
+  "files_issued": [
+   "writeup/data/p2_route_v3_gradeA_v2.json",
+   "writeup/data/p2_route_l2_decay_v2.json"
+  ],
+  "no_v1_edited": true,
+  "verified_by": "git status --porcelain showed ONLY the two new untracked _v2 files at the moment of the repair commit"
+ },
+ "evidence_script": "experiments/p2_route_v5_v1_evidence.py -- re-derives every Class-B constant from this artefact's Class-A inputs and EXITS NON-ZERO on any disagreement",
+ "journal": "experiments/journal/leg_402.md (INSERT-ONLY)",
+ "tier": 2,
+ "clay_probability_unchanged": 0.05,
+ "self_hash": "ae2b95efcbe5209b"
+}

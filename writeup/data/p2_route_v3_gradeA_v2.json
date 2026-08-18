@@ -1,0 +1,133 @@
+{
+ "issued_by": "V5",
+ "leg": 402,
+ "branch": "leg/402-v5-audit-25116",
+ "date": "2026-08-18",
+ "kind": "CORRECTION RE-ISSUE (delta document)",
+ "ruling": "Q3 -- correction RECORD, artefact UNTOUCHED. No _v1 file was edited by this unit.",
+ "scope_discipline": "This document carries ONLY the fields CORRECTIONS.md SS33 names, plus the supersedes and correction_record pointers the dispatch requires. It is a DELTA, not a re-issue of the whole artefact: every field of the _v1 not named below stands unchanged and the _v1 remains the artefact of record for them.",
+ "quoting_discipline": "Dispatch reading (d): QUOTE VERBATIM OR DO NOT QUOTE. Every corrected quote below was re-anchored by V5 against the AUTHORS' OWN LaTeX e-print source fetched today, not against pdftotext output. That choice eliminates the defect class of D3 (a pdftotext line-break hyphenation carried into an artefact as verbatim) at the root.",
+ "artefact": "writeup/data/p2_route_v3_gradeA_v2.json",
+ "supersedes": "writeup/data/p2_route_v3_gradeA_v1.json",
+ "supersedes_self_hash_of_v1": null,
+ "correction_record": "writeup/CORRECTIONS.md SS33",
+ "correction_record_items_discharged": [
+  "D1",
+  "D2",
+  "D3",
+  "D4"
+ ],
+ "sources_refetched_for_this_repair": [
+  {
+   "arxiv": "2509.14185",
+   "form": "LaTeX e-print",
+   "archive_sha256": "3088a24392ab7c970f4fc5306fdc0e67e971a64fc5c8c335ed518328924e0266",
+   "file": "main.tex"
+  },
+  {
+   "arxiv": "2208.09445",
+   "form": "LaTeX e-print",
+   "archive_sha256": "7e719ffcafef6fa0dedbde268b5493e81bf3e5fe273d93619b51448e75d56d3a",
+   "file": "RadialImplosion31_FinalArxiv.tex"
+  },
+  {
+   "arxiv": "2305.05660v3",
+   "form": "LaTeX e-print",
+   "archive_sha256": "6e622a4cae6ce79d3a60e27362dddcdb16ba760b27c9c24ac9f11c91626db95d",
+   "file": "arXiv_Euler_Part2.tex"
+  },
+  {
+   "arxiv": "2605.15149v1",
+   "form": "LaTeX e-print",
+   "archive_sha256": "3be66823d2052fa2464fe7760489c8fb546d2fa98ca83e512529f1e489c01254",
+   "file": "Axi_Euler_C13_1D.tex"
+  }
+ ],
+ "corrections": [
+  {
+   "id": "D1",
+   "row": "R7",
+   "arxiv_id": "2509.14185",
+   "field": "failing_clause_quoted",
+   "defect_per_SS33": "'stringent' dropped from a field presented as VERBATIM",
+   "was": "This level of precision meets the requirements for rigorous mathematical validation via computer-assisted proofs.",
+   "now": "This level of precision meets the stringent requirements for rigorous mathematical validation via computer-assisted proofs.",
+   "now_status": "VERBATIM, character-exact",
+   "now_location": "Abstract of arXiv:2509.14185; LaTeX e-print source main.tex line 64",
+   "re_anchored_by": "V5, against the authors' own LaTeX source",
+   "changes_the_verdict": false,
+   "verdict_unchanged": "NOT_GRADE_A",
+   "why_the_verdict_is_untouched": "The restored word STRENGTHENS the reading V3 already had. The sentence states the numerics are CAP-READY; 'stringent requirements ... via computer-assisted proofs' still describes a proof not performed. Nothing is certified."
+  },
+  {
+   "id": "D2",
+   "row": "R6",
+   "arxiv_id": "2208.09445",
+   "field": "failing_clause_second_location",
+   "defect_per_SS33": "attribution: the second failing clause is verbatim but describes PRIOR WORK [69], not the paper's own construction",
+   "was": "Section 1.1.2 'Imploding solutions', p.4",
+   "now": "Section 1.1.2 'Imploding solutions', p.4 -- ATTRIBUTION: this sentence describes PRIOR WORK, not this paper's own construction. It sits inside a paragraph whose subject is reference [69]; the paragraph opens 'In the  work \\cite{MeRaRoSz19c}, the authors used the solutions of \\cite{MeRaRoSz19a} in order to show that ...' (LaTeX source line 203). [69] = \\cite{MeRaRoSz19c} = Frank Merle, Pierre Raphaël, Igor Rodnianski, and Jeremie Szeftel, 'On the implosion of a compressible fluid II: singularity formation', Ann. of Math. (2) 196(2):779-889, 2022 (LaTeX source \\bibitem line 6738).",
+   "attribution_verified_independently_by_V5": "The bracket number was not taken on trust. V5 counted \\bibitem occurrences in the authors' own LaTeX source up to and including MeRaRoSz19c: it is bibitem number 69, matching SS33's '[69]' exactly.",
+   "changes_the_verdict": false,
+   "verdict_unchanged": "NOT_GRADE_A",
+   "why_the_verdict_is_untouched": "V3's FIRST failing clause is the paper's own voice and is character-exact as banked. V5 re-anchored it against the LaTeX source: 'In this section, we will study the linearized operator of the Euler equations around the self-similar profiles we have found. The stability for the Euler equation will follow in general, while in the Navier-Stokes case we need to restrict the parameter $r$ to a regime where the self-similar profile dominates the dissipation.' -- Section 7 'Linear Stability of the Profile', opening, LaTeX source line 2085. CONFIRMED verbatim. The Grade-B reading rests on this clause alone and is unaffected.",
+   "beyond_SS33_flagged_not_smuggled": {
+    "found_by": "V5",
+    "what": "the banked failing_clause_second_quoted has a SINGLE space in 'can be treated' where the authors' source has a DOUBLE space: 'can be  treated as exponentially decaying forcing'.",
+    "status": "SS33 did not name this. It is recorded here and NOT silently merged into the D2 correction, because widening a repair's scope without saying so is how correction records rot. The character-exact form is given so a future unit does not have to re-fetch.",
+    "character_exact_form": "Within this range of $\\gamma$, there exist self-similar solutions to the Euler equations for which the dissipation terms for the corresponding self-similar Navier-Stokes problem can be  treated as exponentially decaying forcing due to the specific self-similar scaling.",
+    "location": "LaTeX e-print source RadialImplosion31_FinalArxiv.tex line 203",
+    "material": false
+   }
+  },
+  {
+   "id": "D3",
+   "row": "R5",
+   "arxiv_id": "2305.05660v3",
+   "field": "failing_clause_location",
+   "defect_per_SS33": "'linear' banked where the paper has 'non- linear' (a pdftotext hyphenation). V-W4's own extra claim of an inserted 'the' was WRONG and was WITHDRAWN.",
+   "was_embedded_quote": "linear partial differential equations that govern the motion of the ideal INVISCID fluid flow",
+   "now_embedded_quote": "The three dimensional incompressible Euler equations are one of the most fundamental nonlinear partial differential equations that govern the motion of the ideal inviscid fluid flow.",
+   "now_status": "VERBATIM, character-exact, full sentence",
+   "now_location": "arXiv:2305.05660v3 (Part II), Section 1 Introduction, p.1; LaTeX e-print source arXiv_Euler_Part2.tex line 384",
+   "V_W4_self_correction_CONFIRMED_BY_V5": "V-W4 withdrew its own first-pass claim of an inserted 'the'. V5 confirms the withdrawal was CORRECT: the source reads 'the motion of the ideal inviscid fluid flow' and the 'the' is the authors'. The withdrawal stands and is not reopened.",
+   "true_source_form_of_the_hyphenation": "The authors' LaTeX has the single word 'nonlinear'. There is no hyphen in the source at all; 'non- linear' was manufactured by pdftotext at a rendered line break. This is why V5 re-anchored every quote in this repair against LaTeX e-prints rather than extracted text.",
+   "changes_the_verdict": false,
+   "verdict_unchanged": "NOT_GRADE_A",
+   "why_the_verdict_is_untouched": "Restoring 'non' changes 'linear PDEs' to 'nonlinear PDEs'. The word carrying the verdict is 'inviscid', which was banked correctly and is confirmed. The certified equation has no dissipative term either way.",
+   "beyond_SS33_flagged_not_smuggled": {
+    "found_by": "V5",
+    "what": "the _v1 upper-cased INVISCID inside a field presented as a quotation. The authors write 'inviscid' in lower case. Editorial emphasis inside quoted bytes is the same defect class as a dropped word, in the opposite direction.",
+    "status": "SS33 did not name it; recorded, not silently merged.",
+    "material": false
+   }
+  },
+  {
+   "id": "D4",
+   "row": "R3",
+   "arxiv_id": "2605.15149v1",
+   "field": "interval_arithmetic_evidence",
+   "defect_per_SS33": "inserted 'the'; 'in INTLAB' is not the paper's phrasing; the paragraph is at p.71, not '~68'",
+   "was": "Appendix B.3 'Interval Arithmetic', p.~68: 'For the rigorous computer-assisted proof, we use interval arithmetic [41,43] ... in INTLAB'. Section 1.5: 'The computer-assisted estimates are confined to Section 3, Section 4.3-4.4, and Appendices B-C'.",
+   "now": "Appendix paragraph titled 'Interval Arithmetic' (\\paragraph{\\bf Interval Arithmetic}\\label{bd:intval}), inside the subsection 'Rigorous piecewise bounds' (\\label{app:piece_bound}), at p.71: 'For rigorous computer-assisted proof, we use interval arithmetic  \\cite{rump2010verification,moore2009introduction}, and use the MATLAB toolbox INTLAB (version 11 \\cite{Ru99a}) for the interval computations.' Interval arithmetic (INTLAB) IS genuinely used.",
+   "now_status": "VERBATIM, character-exact (LaTeX markup reproduced as written, including the double space before \\cite)",
+   "now_location": "LaTeX e-print source Axi_Euler_C13_1D.tex line 7731; enclosing subsection declared at line 7700",
+   "three_defects_each_separately_discharged": {
+    "inserted_the": "the paper has 'For rigorous computer-assisted proof', NOT 'For the rigorous computer-assisted proof'. Removed.",
+    "in_INTLAB": "'in INTLAB' does not occur in this sentence. The paper says 'and use the MATLAB toolbox INTLAB (version 11 [Ru99a]) for the interval computations'. V5 records that the phrase 'in INTLAB' DOES occur in the paper, but in a DIFFERENT sentence one paragraph later (line 7733, 'by applying interval arithmetic in INTLAB to $f([a,b])$'). The banked field spliced two sentences. Corrected to the single sentence actually at the cited location.",
+    "page": "p.~68 -> p.71. V5 confirms the enclosing subsection is titled 'Rigorous piecewise bounds', NOT 'B.3 Interval Arithmetic'; 'Interval Arithmetic' is a \\paragraph inside it. The section-number claim 'B.3' is therefore also dropped."
+   },
+   "changes_the_verdict": false,
+   "verdict_unchanged": "NOT_GRADE_A",
+   "why_the_verdict_is_untouched": "This field is SUPPORTING evidence that interval arithmetic is genuinely used -- which it is, and the corrected quote says so more clearly than the spliced one did. The verdict turns on the certified equation carrying no dissipative term, a separate field that SS33 does not name and that V5 did not touch."
+  }
+ ],
+ "what_none_of_this_changes": {
+  "verdicts": "ZERO verdicts change. All four rows were and remain NOT_GRADE_A.",
+  "numbers": "ZERO numbers change.",
+  "gate_answer_of_leg_399": "unchanged; this document does not re-open V3's gate.",
+  "census_occupancy": "unchanged.",
+  "L1_to_L4": "No link of the L1->L4 chain moved. Tier 2. Clay stays ~0.05%."
+ },
+ "self_hash": "6322309acc4d8bf8"
+}
