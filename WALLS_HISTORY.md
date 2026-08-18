@@ -194,3 +194,37 @@ LANE PRIORITIES for what that does and does not license.
   **0 survive two.** Lane T needs a **non-DSS** ansatz on `T³` — open work, not a lookup.
 - **(D)'s data conditions (8) and (9) are readable** (the hold is author *contact* only). **Leg 390
   §5 item 1 owes the `check_A` re-run; the §4 disposition MAY CHANGE.**
+
+
+## §OPTIONS-F — two discharged items, retired verbatim 2026-08-18 under §3j
+
+Retired from `OPTIONS.md` §F to make room for the Lane-R ranking ruling. Verbatim, nothing edited.
+
+### The DSS escalation packet
+
+- **The DSS escalation packet** (legs 313/320, branches unmerged). Complete: both candidate theorems
+  read at full text, neither reaches the screened object.
+
+### The verification debt's DISCHARGED half
+
+  **DISCHARGED:** wave 1 (`T1`, `T2`, `R0`+`R1`) by `V1`; wave 2 (`T4`, `T6`, `T5`) by `V-W2`, whose
+  items (1) and (2) were re-measured from **re-fetched primary artefacts whose SHA-256 matched the
+  banked digests exactly** — measurements, not transcription checks. `V-W2` also caught a Conductor
+  wording defect and it was ruled at landing **against the Conductor's own wording** (`WALLS.md`
+  History).
+
+**Live consequence: nothing.** Both are closed items. `OPTIONS.md` §F keeps the **OUTSTANDING**
+half of the verification ledger, which is the half that binds.
+
+
+## §OPTIONS-A2 — rows A, B and D of `PROG-R4`'s option table, retired verbatim 2026-08-18
+
+**Why they leave `OPTIONS.md`:** all three **buy seed supply**, and proposing more seed supply for
+`PROG-R4` is a **standing user prohibition**. They are not deferred on my judgement; they are
+forbidden, so carrying them in a live options table misrepresents them as choosable. Row **C**
+stays live — it is the largest measured hole in the trial space, and it is not a supply buy.
+Verbatim, nothing edited:
+
+| **A** | Spend the rest of the anchored pool — 141 attempts | ≈10.7 h | Grows the in-band arm 60 → 72 only. Lowest information per hour of the five, and buys supply. | Never on its own merits. |
+| **B** | Relax the admission window to Chandler–Kerswell's `R_thres = 0.3` | ≈0.9 h re-mine + 0.0713 h/attempt (≈8 h for 100) (**wall**-h at 8 workers; the ~8× warning below is REFUTED) | Buys supply. Leaves the realization intact, so the U3/U5 baselines stay comparable — U5's second choice. **The supply multiplier cannot be read off U5's library** (pruned at 0.25); the re-mine is what measures it. | ~~E's diagnostic shows the in-band conversion penalty is *not* intrinsic.~~ **DID NOT FIRE — `E` returned and the penalty did not weaken.** One thing `E` left live: **the `R < 0.25` window remains a confound `E` could not separate**, and 1 of its 16 seeds deliberately sat outside it. So B re-opens only as *a measurement of that confound*, never as a supply buy. |
+| **D** | Raise supply at source — longer DNS or finer `N` | ≈3.4 h per extra `T=1e5` + ≈0.9 h re-mine, plus attempts | Most expensive, buys supply, does nothing about H-hard. `N` refinement invalidates the banked library. | Only if the object itself changes and a fresh library is needed anyway. |

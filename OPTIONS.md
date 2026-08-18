@@ -42,10 +42,8 @@ is in the BASIN STRUCTURE, not the seed supply.**
 
 | id | option | cost | why deferred | re-opens if |
 |---|---|---|---|---|
-| **A** | Spend the rest of the anchored pool — 141 attempts | ≈10.7 h | Grows the in-band arm 60 → 72 only. Lowest information per hour of the five, and buys supply. | Never on its own merits. |
-| **B** | Relax the admission window to Chandler–Kerswell's `R_thres = 0.3` | ≈0.9 h re-mine + 0.0713 h/attempt (≈8 h for 100) (**wall**-h at 8 workers; the ~8× warning below is REFUTED) | Buys supply. Leaves the realization intact, so the U3/U5 baselines stay comparable — U5's second choice. **The supply multiplier cannot be read off U5's library** (pruned at 0.25); the re-mine is what measures it. | ~~E's diagnostic shows the in-band conversion penalty is *not* intrinsic.~~ **DID NOT FIRE — `E` returned and the penalty did not weaken.** One thing `E` left live: **the `R < 0.25` window remains a confound `E` could not separate**, and 1 of its 16 seeds deliberately sat outside it. So B re-opens only as *a measurement of that confound*, never as a supply buy. |
+| **A**, **B**, **D** | all three **BUY SUPPLY** | — | **RETIRED, NOT DEFERRED**: proposing more seed supply for `PROG-R4` is a **standing user prohibition**, so these were never choosable. Verbatim → `WALLS_HISTORY.md` §OPTIONS-A2. | Only by a user ruling that lifts the prohibition. |
 | **C** | Carry `m` as an unknown in the residual (= Lane R's **R5**) | own milestone, ≈10 h compute + solver work | Changes the realization, so M1's reproduction no longer compares attempt for attempt. **U5 priced it: 334 anchored in-window candidates, 58.1% of the window, but only 1 in the published band.** Not a band fix — the fix for `\|s\| > 0.9`. | On its own merits as the largest measured hole in the trial space, **not** as a route to the named rows. |
-| **D** | Raise supply at source — longer DNS or finer `N` | ≈3.4 h per extra `T=1e5` + ≈0.9 h re-mine, plus attempts | Most expensive, buys supply, does nothing about H-hard. `N` refinement invalidates the banked library. | Only if the object itself changes and a fresh library is needed anyway. |
 
 **`E` — THE H-HARD DIAGNOSTIC. TAKEN, LANDED `d0d72b1`, `UNVERIFIED`. Retired to one line plus a
 pointer, §3j.** **2 of 16 converged, 0 recovered any named row**, both below the 0.15 `|s|` shelf;
@@ -71,11 +69,16 @@ in this table is re-priced.**
 | **R4** | second-order-in-time stepper | **DEFERRED — AND `E` PROMOTED IT** | U3's is Lie–Trotter, globally **first** order (measured ratio 2.00), so its periodic orbits are `O(dt)` perturbations of the true flow's while the published rates come from higher-order codes. Invalidates M1's reproduction — own milestone. **`E-ii` named `R4` in advance as where a non-recovery would point, and its antecedent IS satisfied.** `E`'s leg-353 comparison is **the first evidence pointing at the REALIZATION rather than the budget** — a better realization got closer (residuals [0.80, 10.32] vs [22.5, 29.5]) from strictly **worse** seeds and still recovered nothing. |
 | **R5** | carry the `m` unknown | **DEFERRED** — same object as `PROG-R4` option **C** | One unit, listed in both ledgers because it arrived from two directions. Do not double-count. |
 
-**THE LANE-R RANKING QUESTION `E` LEAVES OPEN, AND NO CONDUCTOR HAS RULED IT.** `E-iii` fired
-(→ `R3`/`R2`) *and* `E-ii`'s antecedent is satisfied (→ `R4`). Both readings were pre-committed, both
-honestly engaged, and they point at **different** units. **Which of `R2`/`R3`/`R4` is the highest-value
-Lane R unit is a genuine re-ranking, and it belongs to a wave plan.** Not taken in wave 3 (no slot),
-not taken in wave 4 (§3g's floor: **Lane R never sets a wave's direction**).
+**THE LANE-R RANKING — RULED 2026-08-18 BY THE CONDUCTOR: `R4` FIRST, `R2` SECOND, `R3` THIRD.**
+Tie broken on **kind**: **`R4` is a VALIDITY fix, `R2`/`R3` are THROUGHPUT fixes.** `U3`'s stepper is Lie–Trotter, **first order, measured ratio 2.00**, so every
+orbit either run produced is an `O(dt)` perturbation of the true flow's, and **deflating a
+first-order solver buys faster production of objects whose status is in doubt.** `R4` can also
+**falsify** something landed (`M1`); `R2` cannot — **57 core-hours bought ONE new orbit**. `R2`
+beats `R3` because `R2`'s waste is **measured** and `R3`'s case is an inference. **`R4`'s first
+unit is NOT a campaign re-run** (122.1 core-h): re-solve the **landed** orbits under a Strang
+stepper, measure the displacement against the residual band. **§3g's floor stands — this ranks the
+lane's units, it does not promote it.** Reasoning + §3k gate: `writeup/waves/WAVE7_PLAN.md` §0.
+**No grinder** — the in-band arm cannot exceed 72 attempts ever.
 
 **Live ban on this lane:** leg 349's GA gate answered NO (0 of 6 properties cleared). A **learned or
 evolved** seed-scoring function is banned territory; R2–R5 are deterministic, keep it that way. **`E`
@@ -88,7 +91,7 @@ hookstep. It returned **`MIXED`** (97.1% constrained, `p = 0.9317`) — **not
 removes re-finds **within** a run, not **between** runs; any comparison must state its convention, and
 the denominator is **worker-hours** — physical core count appears in no numeric field of either JSON.
 
-## C. Lane V — the viscous rung. ~~*ACTIVE, PRIORITY.*~~ ~~**HELD 2026-08-18.**~~ **UN-HELD BY RULING.**
+## C. Lane V — the viscous rung. **ACTIVE** (held 2026-08-18, **UN-HELD BY RULING**).
 
 **The premise was measured, then ruled to have survived.** `V3` (leg 399, `16ba44e`) graded 9 fluid
 blow-up CAPs against leg 174's **own, unchanged** criterion: **`arXiv:2509.25116` (Hou–Wang–Yang)
@@ -194,12 +197,11 @@ H11 — the one previous attempt at this lane's target, by anyone, died that way
 | **T2** | periodic-rigidity search | **TAKEN** w1, gate = no theorem located → **`UNDER-RESOURCED`, not `no`**. Not a clearance. |
 | **T2′** | the **compliant** rigidity search | **DEFERRED, ≈1.2–1.7 h plus one user ruling.** Closes T2's three holes: NRS 1996 / Tsai 1998 are pre-arXiv (needs a forward-citation pass), Semantic Scholar was throttled on 5 of 6 substantive queries (needs an S2 key), battery `E` failed its own domain control (needs repair). |
 | **T2″** | **the Type-I rigidity question on `T³`** | **DEFERRED — as of 2026-08-14 the ONLY thing keeping Lane T alive, and re-open condition 2.** The sharpest item the lane owns. A Type-I condition is a *rate* condition (`\|u\| ≲ (T−t)^{−1/2}`), needs **no dilation symmetry**, and carries to the torus intact **as a question**. Measured: `"Type I blowup" AND "periodic"` = **0**. Nothing located proves it. |
-| **T3** | the non-DSS `T³` ansatz | ~~**OPEN — the priority unit.**~~ **DEFERRED WITH THE LANE — NOT KILLED.** Still the lane's real mathematical content; runs when a re-open condition is met. Binds: C1's naming requirement. |
+| **T3** | the non-DSS `T³` ansatz | **DEFERRED WITH THE LANE — NOT KILLED.** Still the lane's real mathematical content; runs when a re-open condition is met. Binds: C1's naming requirement. |
 
 ## F. Other standing options, recorded so they are not lost
 
-- **The DSS escalation packet** (legs 313/320, branches unmerged). Complete: both candidate theorems
-  read at full text, neither reaches the screened object.
+- **The DSS escalation packet** (legs 313/320) — **COMPLETE, retired** → `WALLS_HISTORY.md` §OPTIONS-F.
 - **The three leg-382 follow-ups, all open.** **389 (CT2C)** wire 382's certified enclosure into the
   screen's second T2 column — but 386 clause 2 first: the δ-window is **EMPTY at every `α_centre ≤ 1`**
   and the banked object carries `α = 1`, so it reports an empty window and manufactures no headroom.
@@ -214,12 +216,8 @@ H11 — the one previous attempt at this lane's target, by anyone, died that way
   and unchecked.
 
 - **THE VERIFICATION DEBT — the standing §3f ledger.**
-  **DISCHARGED:** wave 1 (`T1`, `T2`, `R0`+`R1`) by `V1`; wave 2 (`T4`, `T6`, `T5`) by `V-W2`, whose
-  items (1) and (2) were re-measured from **re-fetched primary artefacts whose SHA-256 matched the
-  banked digests exactly** — measurements, not transcription checks. `V-W2` also caught a Conductor
-  wording defect and it was ruled at landing **against the Conductor's own wording** (`WALLS.md`
-  History).
-  **OUTSTANDING:** **`U2`, `U3` and `U5` themselves remain `UNVERIFIED`** — `V1` checked `R0`'s
+  **DISCHARGED:** waves 1–2, detail retired → `WALLS_HISTORY.md` §OPTIONS-F.
+ain `UNVERIFIED`** — `V1` checked `R0`'s
   *reading* of them, not the runs. **`E` (wave 1, landed `d0d72b1`) is `UNVERIFIED`.** **`V-W2`
   (wave 3, landed `594ff89`) is `UNVERIFIED`.** Wave 3 landed nothing else. **A candidate emerging
   from an unverified pipeline is worth a fraction of one that did not.**

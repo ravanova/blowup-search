@@ -82,7 +82,7 @@ the directive priced** — and what it should actually buy is a **forward-citati
 
 | lane | what would be built | published method it must name |
 |---|---|---|
-| **R2** | deflation to stop re-finding solutions (4 of `U5`'s 5 were re-finds) | **UNNAMED** — deflated continuation is published (Farrell–Birkisson–Funke and successors). Name it, at primary, or show the search that found none. |
+| **R2** | deflation to stop re-finding solutions (4 of `U5`'s 5 were re-finds) | **NAMED, UNREAD** — `OPTIONS.md` §B writes "Farrell–Birkisson–Funke". **Naming is not reading**: this register records **no depth** for it. Read at primary before a line is written. |
 | **R3** | multiple shooting for the periodic-orbit boundary-value problem | **UNNAMED** — a textbook technique. Same requirement. |
 | **R4** | a second-order (Strang) stepper replacing `U3`'s Lie–Trotter | operator splitting for NSE — standard; still must be **cited**, not assumed. |
 
