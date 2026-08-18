@@ -2364,6 +2364,13 @@ nothing**: the banked-rows-only route gives `95.389` s/epoch against the banked 
 `1.0041`, same conclusion. It is a **provenance** defect, and the standing rule it violates is
 *re-derive from `writeup/data/*.json`, never from prose*.
 
+**Conductor's own re-run, recorded for the audit trail.** I integrated on the fast path
+(`--no-quad`, EXIT 0) plus my own mutation test (exponent perturbed in the 13th digit inside the
+worker's worktree, restored after: EXIT 1, naming both the bit-pattern and the `self_hash` check).
+The **expensive path finished afterwards and agrees**: `quadrature re-run: ON` → *ALL FIVE ITEMS
+REPRODUCE*, 8 notes, 0 repaired, **EXIT 0**. Nothing in the verdict changed; the difference between
+the two runs is the single note saying the quadrature was skipped.
+
 **What `V-W5` verified, and what it did not.** Verified: `L5`'s `NO` and `ρ`-exponent
 `0.00010850007559945518` (bit-for-bit, including a **full float64 quadrature re-run**, not just a
 re-fit of banked rows); the three positive controls (`−0.2498`, `−0.5996`, `−2.000005`, each
