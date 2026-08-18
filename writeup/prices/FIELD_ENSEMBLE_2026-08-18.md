@@ -76,6 +76,18 @@ control: long, large, and they finished.
 With (1)–(4) the expected cost of a host exit is **one worker-attempt**, ~0.57 core-hours out of
 91 — **0.6%**. Without them, a host exit at hour 10 costs the entire campaign.
 
+## 3b. AMENDED 2026-08-19 — QUEUED, and the price is an OUTTURN, not a FLOOR
+
+**The "price, do not queue" steer is WITHDRAWN by the user as over-cautious**: ~11.4 h wall at 8
+workers is one overnight run and defers nothing. The ensemble is **queued** as `E-FE`
+(`writeup/waves/WAVE7_PLAN.md` §B), behind `R-bank`, which makes it shardable.
+
+**And the 90.9 figure is honest as a MEASUREMENT of what `E` cost — it is not a floor.** It
+inherits `95.389 s/epoch`, a constant **no unit in 403 legs has ever profiled**. A Conductor smoke
+test finds the inner loop's transforms flat in cost from `N = 24` to `N = 32` — the signature of
+**per-call overhead**, paid 20 times per RK4 step. If `R-prof` (§C) finds a factor, **this number
+and every cost figure in `OPTIONS.md` move together.**
+
 ## 4. What this does NOT say
 
 - It is **not queued**, not ranked, and not in any wave. Nothing in `STATE.md` or `OPTIONS.md`

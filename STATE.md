@@ -98,11 +98,10 @@ brief since carries **COMMIT DURING THE RUN, NOT ONLY AT THE GATE**. **Wave 4 re
 gate's own wording. Narrative, headroom and the §3i answers for both waves: `reports/ORCH_STATE.md`
 Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits `6320790`, `391fd8f`.
 
-## WAVE 5 — COMPLETE 2026-08-18. Three planned, three dispatched, three landed.
+## WAVE 5 — COMPLETE, LANDED, **VERIFIED** by `V-W5`. Retired 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE5.
 
-**Gates and pre-committed readings, FINAL WORDING and verbatim: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`, committed BEFORE any dispatch.** The unit descriptions are in that file and are **retired from here** under §3j — a pointer to committed text is not a summary. SHAs `036e56d` (`D-REPAIR`), `4be46ef` (`L5`), `b46ee4d` (`V-W4`); integration `e42e7ab`. **The mechanical audits, `§3i`'s seven per unit and the headroom report are in `reports/ORCH_STATE.md`.**
-
-**⚠ A PRECEDENT SET HERE: one request to change a gate mid-wave was REFUSED.** Ruling Q5 landed after dispatch asking `L5` to state what distinguishes a genuine natively-finite-energy ansatz from the same trap in a different hat. **Amending a gate after dispatch defeats pre-registration**, so it was required **at integration** instead — and `L5`'s own pre-registration `e2f13c1`, made **before the ruling existed**, already carried the discriminator: **Clay condition (7), `E(t)` bounded uniformly in `t`, measured across all three `κ` branches.**
+**The precedent it set, kept live because it binds every wave:** a request to change a gate
+**mid-wave was REFUSED**. Plan verbatim: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`.
 
 ## WAVE 6 — **DISPATCHED 2026-08-18**. Plan: `writeup/waves/WAVE6_PLAN.md` @ `e202653`.
 
@@ -156,10 +155,12 @@ is `∝ ṁ`. **This repo does not get to call that new until it is checked.**
    is *no*, the **cell-occupancy fact** changes status, not the wall. Packet:
    `writeup/escalations/ESCALATION_PUB0C_PUBLISHED_2026-08-18.md`.
 
-1. **`PROG-R4` after U5 — five costed options, ONE RULED.** The user ruled **E**, which has now
-   landed. **A, B and D stay unqueued** — all three buy supply, and both U5's and `E`'s pre-committed
-   readings point away from it. **C** stays unqueued with its own milestone, aimed at `|s| > 0.9`.
-   Costs verbatim: `experiments/journal/prog_r4_u5.md` §9. **`PROG-R4` is not stopped.**
+1. **`PROG-R4` — A, B and D are RETIRED, not deferred** (all buy supply, a standing prohibition):
+   `WALLS_HISTORY.md` §OPTIONS-A2. **C** stays unqueued, own milestone, aimed at `|s| > 0.9`.
+   **QUEUED 2026-08-19 by user directive, order fixed:** `R-bank` (bank the 160 seed fields, **737
+   KB**, kills the 3.4 h-per-shard DNS) → **`E-FE` the field ensemble** (160 attempts, **90.9
+   core-h, ~11.4 h wall**, closes `E-iv`) ‖ `R-prof` (**profile the inner loop — never once done in
+   403 legs**). Gates in final wording: `writeup/waves/WAVE7_PLAN.md` §§A–C.
 2. **Two ban-wording defects RECORDED AND NOT RULED**, because nothing currently depends on them: the
    ℓ¹-Fourier ban's lift clause still names a *"FOURTH space/basis"*, the wrong kind of object for a
    candidate that is an **apparatus** (`T5` measured that it is exactly what blocks leg 257); stage
