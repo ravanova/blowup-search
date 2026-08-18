@@ -153,3 +153,44 @@ untouched and both no-method. **The live ranking question is no longer "what els
 but whether W4 clause (c) is enough on its own to re-open Lane T** — and re-open condition (i) or
 (ii) is still what decides that, not a Conductor's preference. Retired narrative, verbatim:
 `WALLS_HISTORY.md` §PRIORITIES.
+
+## §W3-CELL — retired from `WALLS.md` 2026-08-18 under §3j when `V5`'s audit landed (verbatim)
+
+> **THE CELL IS OCCUPIED AND THE WALL STILL STANDS — THESE ARE TWO DIFFERENT CLAIMS.**
+> `arXiv:2509.25116` (Hou–Wang–Yang) satisfies **both** clauses of leg 174's Grade-A × fluid
+> criterion — interval arithmetic (§7.3, p.55) enclosing a solution of a system carrying `−ΔŨ`
+> (Prop. 1, eq. (1.15), p.5) for the unforced 3D incompressible Navier–Stokes equations (eq. (1.1)).
+> **The certified object is NOT a finite-time singularity**: forward self-similar, from singular
+> initial data, *"smooth for positive times"*, concluding **nonuniqueness of Leray–Hopf solutions**.
+> The paper itself warns against confusing this with the backward setting (§1.2, p.2). **W3 asserts
+> the absence of a certified SINGULARITY and is unrefuted; leg 174's cell asserts the absence of a
+> Grade-A fluid ENCLOSURE and is refuted.** Graded by `V3` / leg 399, **UNVERIFIED and UNAUDITED**.
+
+## §W2-C1 — retired from `WALLS.md` 2026-08-18 under §3j (verbatim)
+
+**Second finding, separate and also adverse:** the paper is certified by **exactly the banned
+apparatus** — a Newton–Kantorovich radii-polynomial contraction in a weighted `ℓ¹_η` Fourier space on
+**one bounded approximate inverse** `A : X_{−2,−1} → X`, stated in its own abstract. **C1's
+proposition is untouched but its EXEMPLAR falls; RULED 2026-08-14, C1 STANDS EXEMPLAR-FREE** — see
+LANE PRIORITIES for what that does and does not license.
+
+## §LANE-T-PRICE — retired from `WALLS.md` 2026-08-18 under §3j (verbatim; every number also in `OPTIONS.md` §E)
+
+**The price, stated first, because free lunches here get repurchased** (full itemisation:
+`OPTIONS.md` §E, leg 390).
+- **0 of 4 rigidity clearances carry to `T³`** (leg 390). The §2 screen must be rebuilt from scratch.
+- **THE CONVERSE, LOAD-BEARING.** *"0 of 4 carry"* says the `ℝ³` screen does not **help** on the
+  torus; it does **not** say the `ℝ³` **exclusions** stop applying, **and they do not** — an `ℝ³`
+  exclusion still reaches a `T³` object built by periodic extension of an `ℝ³` self-similar core.
+  Not hypothetical: leg 309 read `2604.09949` at full text and reached **GATE NO, broken at H11**, on
+  that ground. **The one previous attempt at Lane T's target, by anyone, died this way.** The torus
+  buys an escape only for a **natively periodic** ansatz.
+- **NO PERIODIC ANALOGUE OF NRS/TSAI LOCATED — NOT a clearance** (`T2`, `UNDER-RESOURCED` under §3d,
+  not `no`): both sources pre-arXiv, S2 throttled on 5 of 6 substantive queries; arXiv clean
+  **32/32 MEASURED**, no throttled query banked as a zero. Compliant search: **≈1.2–1.7 h**.
+- **`T2″`, THE DE NOVO ITEM AND RE-OPEN CONDITION (ii): a TYPE-I RIGIDITY THEOREM ON `T³`.** A *rate*
+  condition needs no dilation symmetry, so it carries to the torus **as a question**, unproven.
+- **The DSS ansatz does not survive periodization.** 342 modes survive one DSS step at `λ = 1.7`;
+  **0 survive two.** Lane T needs a **non-DSS** ansatz on `T³` — open work, not a lookup.
+- **(D)'s data conditions (8) and (9) are readable** (the hold is author *contact* only). **Leg 390
+  §5 item 1 owes the `check_A` re-run; the §4 disposition MAY CHANGE.**

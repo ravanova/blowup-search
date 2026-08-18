@@ -47,11 +47,19 @@ not a theorem of impossibility.
 are 2D lifts**, from the authors' own data package (`writeup/data/p2_route_t4_v1.json`). Struck text
 and the full measurement: `## History`.
 
-**Second finding, separate and also adverse:** the paper is certified by **exactly the banned
-apparatus** — a Newton–Kantorovich radii-polynomial contraction in a weighted `ℓ¹_η` Fourier space on
-**one bounded approximate inverse** `A : X_{−2,−1} → X`, stated in its own abstract. **C1's
-proposition is untouched but its EXEMPLAR falls; RULED 2026-08-14, C1 STANDS EXEMPLAR-FREE** — see
-LANE PRIORITIES for what that does and does not license.
+**Second finding on `arXiv:1902.00384`, also adverse — retired verbatim 2026-08-18 → `WALLS_HISTORY.md` §W2-C1.** Live consequence: **C1's PROPOSITION is untouched, its EXEMPLAR falls, and C1 STANDS EXEMPLAR-FREE** (ruled 2026-08-14).
+
+**⚠ `V5` (leg 402) MEASURED THE OTHER GRADE-A FLUID OCCUPANT AND IT IS *NOT* A 2D LIFT.**
+`arXiv:2509.25116` — Hou–Wang–Huang, **nonuniqueness of Leray–Hopf solutions**, not a singularity
+theorem — is **genuinely 3D on THIS WALL'S OWN pre-committed test** (`p2_route_t4_v1.json` ::
+`controls.C_3D`, located in the record, **not invented**): the predicate fails on all three
+conjuncts and `max|u_φ| = 8.754` is **57% of `max|u_r|`** — a principal component, not a residue.
+The shipped data is tied to the certified object by `λ` matching the printed eigenvalue to **16
+significant figures**. **W2 IS NOT BROKEN AND NOT STRENGTHENED HERE: its statement is scoped to
+3D SINGULARITY theorems, and this is a nonuniqueness theorem.** Whether that scope is the wording
+the wall wants is a **USER ESCALATION, RECORDED NOT RULED** →
+`writeup/escalations/ESCALATION_W2_SCOPE_2026-08-18.md`. The object is also **axisymmetric**;
+`V5` flagged that and, under its own pre-committed rule, did **not** weigh it.
 
 **W2 STANDS, STRENGTHENED**: the one instance the programme believed cleared it does not.
 
@@ -84,15 +92,16 @@ any dimension"* was **FALSE** and is retired.
 **⚠ RULED 2026-08-18 (Q1): THE PROSE TEST GOVERNS. W3 STANDS. LANE V's PREMISE SURVIVES.**
 Required beside the wall by the ruling, and non-optional:
 
-> **THE CELL IS OCCUPIED AND THE WALL STILL STANDS — THESE ARE TWO DIFFERENT CLAIMS.**
-> `arXiv:2509.25116` (Hou–Wang–Yang) satisfies **both** clauses of leg 174's Grade-A × fluid
-> criterion — interval arithmetic (§7.3, p.55) enclosing a solution of a system carrying `−ΔŨ`
-> (Prop. 1, eq. (1.15), p.5) for the unforced 3D incompressible Navier–Stokes equations (eq. (1.1)).
-> **The certified object is NOT a finite-time singularity**: forward self-similar, from singular
-> initial data, *"smooth for positive times"*, concluding **nonuniqueness of Leray–Hopf solutions**.
-> The paper itself warns against confusing this with the backward setting (§1.2, p.2). **W3 asserts
-> the absence of a certified SINGULARITY and is unrefuted; leg 174's cell asserts the absence of a
-> Grade-A fluid ENCLOSURE and is refuted.** Graded by `V3` / leg 399, **UNVERIFIED and UNAUDITED**.
+**THE CELL IS OCCUPIED AND THE WALL STILL STANDS — TWO DIFFERENT CLAIMS.** Narrative retired
+2026-08-18 (the named §3j retirement, unlocked when `V5`'s audit landed) → `WALLS_HISTORY.md`
+§W3-CELL. **`V5` (leg 402) has now AUDITED the occupant at full text: the certificate DOES close**
+— 24 recomputable constants re-derived at 50 dps, **four printed constants fail** (`H28`, `H30`,
+`H32`, `H33`; the real one is `x_0^U`, `1.44e-5` printed against `1.45054706437e-5`, from
+substituting `η₂ = 0.005` where the certified `M_2^U ≤ 0.0061` belongs), and **carrying the
+corrections through, closure survives** — `x_1^U` clears by **0.08%**, recorded as **luck, not
+margin**. **Class A (22 interval-arithmetic inputs) was NOT verified and is banked as a LIMIT OF
+THE AUDIT, never as a pass.** **W3 IS UNMOVED: the audit did not run W3's prose test.**
+`CORRECTIONS.md` §36.
 
 **The predicate is not tightened and the YES is not withdrawn.** `V3` applied leg 174's criterion
 unchanged, having been told not to tighten it, and recorded the YES first with the disqualifying
@@ -280,24 +289,7 @@ inverse uniform in `M`. **Absent both, the ban applies in full.**
 4. **(D) vacates §4 as an acceptance test but not the work** (W4). Leg 390 §5 item 4: ***"§1's POCP
    credit is unclaimed."***
 
-**The price, stated first, because free lunches here get repurchased** (full itemisation:
-`OPTIONS.md` §E, leg 390).
-- **0 of 4 rigidity clearances carry to `T³`** (leg 390). The §2 screen must be rebuilt from scratch.
-- **THE CONVERSE, LOAD-BEARING.** *"0 of 4 carry"* says the `ℝ³` screen does not **help** on the
-  torus; it does **not** say the `ℝ³` **exclusions** stop applying, **and they do not** — an `ℝ³`
-  exclusion still reaches a `T³` object built by periodic extension of an `ℝ³` self-similar core.
-  Not hypothetical: leg 309 read `2604.09949` at full text and reached **GATE NO, broken at H11**, on
-  that ground. **The one previous attempt at Lane T's target, by anyone, died this way.** The torus
-  buys an escape only for a **natively periodic** ansatz.
-- **NO PERIODIC ANALOGUE OF NRS/TSAI LOCATED — NOT a clearance** (`T2`, `UNDER-RESOURCED` under §3d,
-  not `no`): both sources pre-arXiv, S2 throttled on 5 of 6 substantive queries; arXiv clean
-  **32/32 MEASURED**, no throttled query banked as a zero. Compliant search: **≈1.2–1.7 h**.
-- **`T2″`, THE DE NOVO ITEM AND RE-OPEN CONDITION (ii): a TYPE-I RIGIDITY THEOREM ON `T³`.** A *rate*
-  condition needs no dilation symmetry, so it carries to the torus **as a question**, unproven.
-- **The DSS ansatz does not survive periodization.** 342 modes survive one DSS step at `λ = 1.7`;
-  **0 survive two.** Lane T needs a **non-DSS** ansatz on `T³` — open work, not a lookup.
-- **(D)'s data conditions (8) and (9) are readable** (the hold is author *contact* only). **Leg 390
-  §5 item 1 owes the `check_A` re-run; the §4 disposition MAY CHANGE.**
+**The price, stated first, because free lunches here get repurchased.** Full itemisation retired 2026-08-18 → `WALLS_HISTORY.md` §LANE-T-PRICE; **every number is in `OPTIONS.md` §E, which is the live ledger.** Lane T stays **DEFERRED**, alive only through **`T2″`**, and its price is the reason re-opening it needs condition (i) or (ii), **not a Conductor's preference.**
 
 **All dispatched units are TAKEN** — `T1` (ruled), `T2` (`UNDER-RESOURCED`, named `T2″`), `T4`
 (`STOP`), `T5`/`T6`. **`T3`, the non-DSS `T³` ansatz, is the lane's real mathematical content,

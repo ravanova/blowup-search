@@ -1532,6 +1532,7 @@ scope to compensate").
 | (ii) | `experiments/journal/leg_221.md` and `solver/boussinesq_rescaled.py`'s module docstring (the two identical "86x the module's own tolerance" / "86x tolerance" sites describing the two-scale counterexample) | leg 307's arithmetic finding: the passage's own `5e-4` basis implies `~865x`, not `86x` | **Confirmed by direct re-computation:** `(2.0-1.135121)/2.0 = 0.4324395`; `0.4324395/5e-4 = 864.879`, i.e. `~865x`. The passage's other three magnitudes (`2000x`, `93.9x`, `1731x`) were checked by leg 307 and found consistent with their own bases; untouched by this leg. | **Corrected**, both sites, inline `[CORRECTED 2026-08-12, leg 307's arithmetic finding, batched at leg 352: 0.4324/5e-4 = 864.9, i.e. ~865x, not 86x]`, original `86x` wording left standing alongside the marker. |
 | 16 | `L5`'s pre-committed gate (wave 5, `WAVE5_PLAN.md` @ `1e49a00`) said measure *"on route 4's **banked** discrete profile"* — **route 4 has no banked profile**, so the gate as worded was **unsatisfiable** | **`L5` itself** (2026-08-18, `4be46ef`), which banked `route_4_has_no_banked_profile = True` with evidence at `experiments/journal/leg_382.md:174` and `leg_397.md` §1, and substituted leg 381's **banked SYNTHETIC** exactly-DSS profile; the Conductor records it here as a **gate deviation**, which its integration commit `e42e7ab` described only as a limitation | **The substitution is the right one and the deviation is the unit's, not a defect**: leg 381's synthetic profile is the object clause (a)'s bill was computed on, so clause (b)'s bill is **directly comparable** to it, and control `C1` reproduces leg 381's exponents to `1.996e-12`. What it costs: **the EXPONENT is a class fact, the CONSTANT `c_mod = 869.288` is not route 4's number.** This is the direct motivation for wave 6's `L6`. |
 | 17 | `L5`'s `C6` basis control **did not fire as planted** (`2.03e-02` against a pre-committed `1e-02`), and a **second, passing** criterion on a narrower fit window (`fired_on_tail3_fit`) sits beside the failing one; `c_mod = 869.288` is quoted unqualified though it is basis-dependent; the `U5` half of the `0.9958` cost ratio is **not in any banked JSON** | **`V-W5`** (2026-08-18, leg 403, `writeup/data/p2_verify_wave5_v1.json`, `self_hash da8a0d7cb9fb4896`), **LOCATED THREE, REPAIRED ZERO** — Conductor recorded at integration | **three defects, NONE changes a verdict.** The tolerance was **NEVER moved** (`347676f`; no `−` line on any ref, checked by the Conductor independently). The added criterion is **post-hoc**: it went in at the **landing** commit `4be46ef`, after the failure was known. The gate `NO` rests on the **exponent** and is untouched; the **CONSTANT is basis-dependent by `1.476×`** (C⁴ smoothstep vs leg 381's quintic C²). §35 below |
+| 18 | `arXiv:2509.25116` v2 prints **four constants that do not recompute** (`H28`, `H30`, `H32`, `H33`), the worst being `x_0^U = 1.44e-5` where 50-dps re-derivation from the paper's own Class-A inputs gives `1.45054706437e-5` — **non-conservative** — because `η₂ = 0.005` was substituted where the certified `M_2^U ≤ 0.0061` belongs; separately, wave 4's `D1`–`D6`/`N1` were still undischarged | **`V5`** (2026-08-18, leg 402, `writeup/data/p2_route_v5_audit_v1.json`, `self_hash ae2b95efcbe5209b`) | **the certificate CLOSES anyway.** Carrying the corrected values through the whole chain, both closure conditions survive (`M_4^v = 0.0210567838661 ≥ 0.021`; `|λ| = 0.00426280601272 ≤ 0.0045`) — but `x_1^U` clears by **0.08%**, recorded as **luck, not margin**. `D1`–`D6`/`N1` discharged as **`_v2` deltas, no `_v1` edited** (ruling Q3). §36 below |
 
 ### The ceiling
 
@@ -2378,6 +2379,67 @@ recovering what it planted); both `self_hash`es; `D-REPAIR`'s epoch correction a
 model. **Not verified — and it must not be read as verified:** the SCIENCE. A reproduction validates
 **arithmetic**. `L5`'s object is still the **SYNTHETIC** stand-in (§34), the tier is still **Tier 2**,
 and **no `L1→L4` link moved.**
+
+## §36 — `V5`'s audit of `arXiv:2509.25116`: four broken constants that do not break the certificate, and one defect of the unit's own
+
+**Unit** `V5` (leg 402), the adversarial audit made **obligatory** by user ruling Q4. Both gate
+clauses were answered **separately**, as the ruling required.
+
+**CLAUSE 1 — the certificate CLOSES (branch `B1-PARTIAL`).** The enumeration was **frozen before
+adjudication** (commit `548b9af`, 20:22, against the clause-1 verdict at `8bcdee0`, 20:31): 22
+Class-A interval-arithmetic inputs, 24 Class-B recomputable constants, 8 Class-C structural. All 24
+Class-B were re-derived at 50 dps **from Class-A inputs alone**. The localisation step (Remark 2,
+§1.3 with §2) was checked at full text across twelve links: **no gap**.
+
+**The four that fail, both numbers each:**
+
+| id | what | printed | recomputed at 50 dps | direction |
+|---|---|---|---|---|
+| `H28` | coefficient in the reduced `M_4^U`, which *is* `4ε^U` | `2.8e-6` | `2.6e-6` | conservative |
+| `H30` | `x_0^U` | `1.44e-5` | `1.45054706437e-5` | **NON-CONSERVATIVE** |
+| `H32` | `y_0^U` | `1.3e-7` | `1.30549235793e-7` | propagated |
+| `H33` | `y_1^U` | `4.8e-7` | `4.82306898903e-7` | propagated |
+
+`H30` is the substantive one. The failing clause, character-exact from `main.tex:2278-2280`:
+`0.25 - 0.199 - 0.005 + \sqrt{0.002}` — `η₂ = 0.005` stands where the certified bound
+`M_2^U ≤ 0.0061` belongs. **Carrying the corrections through the whole chain, closure survives**:
+`M_4^v = 0.0210567838661 ≥ 0.021` and `|λ| = 0.00426280601272 ≤ 0.0045`. But `x_1^U` clears its
+bound by **0.08%**, and `V5` recorded that as **luck, not margin** — the right call.
+
+**WHAT THIS AUDIT DID NOT ESTABLISH, banked as limits and never as passes:** the 22 Class-A
+interval-arithmetic outputs were **not verified** (unrecomputable by design here); the Julia
+certification was **not re-run**; **W3's prose test was not run, so W3 does not move**; and **no
+`L1→L4` link moved.**
+
+**CLAUSE 2 — the profile IS genuinely 3D, answered standing alone.** Not folded into clause 1, per
+the ruling. Detail and the scope question it raises: `WALLS.md` W2 and
+`writeup/escalations/ESCALATION_W2_SCOPE_2026-08-18.md` (**recorded, NOT ruled**).
+
+**THE SECOND DELIVERABLE — wave 4's repair, `_v1` UNTOUCHED (ruling Q3).** Re-issued as deltas:
+`p2_route_v3_gradeA_v2.json` (`6322309acc4d8bf8`, discharges `D1`–`D4`) and
+`p2_route_l2_decay_v2.json` (`9a58a36c81734066`, discharges `D5`/`D6`/`N1`). Both carry
+`supersedes` and a `correction_record` pointer to §33; both self-hash correctly; the Conductor
+confirmed **no `_v1` file was edited**. Re-anchoring the quotes against the authors' own LaTeX
+e-prints showed **`D3`'s `non- linear` was a pdftotext artefact** and **`D4`'s "in INTLAB" was a
+splice of two sentences eleven lines apart**. Two further defects §33 does not name (a double
+space, an upper-cased `INVISCID`) were **flagged in a dedicated field rather than silently merged**
+— the correct handling.
+
+**⚠ D-V5-1 — A DEFECT OF THE UNIT'S OWN, FOUND BY INTEGRATION AND NOT BY THE UNIT.**
+`experiments/p2_route_v5_v1_evidence.py` imports **`mpmath`**, which was **not in
+`requirements.txt` and not in the repo venv**: on a clean checkout it exited **3**, not 0, until
+the Conductor installed it. **Lesson 68 — a check nobody can execute decays into a claim.** Fixed
+at integration by adding `mpmath>=1.3` to `requirements.txt`. The unit's own sanity report said the
+script "exits 0", which was true **in its worktree** and false in the repository it shipped to.
+**The rule this makes explicit: an evidence script must run in the environment `requirements.txt`
+describes, and a unit that adds a dependency must add it to that file.**
+
+**What the Conductor checked mechanically, not on the unit's report:** territory (5 files, all
+additions); the pre-registration `eb756b1` predates the paper fetch and names W2's test, so the
+test was **located before adjudication**; the evidence script **EXIT 0 on 75 checks** once the
+dependency was installed; a **Conductor-run tampering test** (swirl set to zero) **EXIT 1**,
+failing in three independent places — `self_hash`, the swirl-fraction re-derivation, and `L2`'s
+consistency; and all three `self_hash`es recompute.
 
 ## §33 — `V-W4`'s six defects and `N1`: the correction RECORD for wave 4, artefacts untouched
 

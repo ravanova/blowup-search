@@ -12,24 +12,14 @@ verbatim 2026-08-18 under §3j → `## Superseded — the 2026-08-14 fork`.
 
 ## LIVE — CONDUCTOR mode, **WAVE 5 CLOSED; WAVE 6 PLANNED AND DISPATCHED**, 2026-08-18
 
-### Wave 5 CLOSED — 3 planned, 3 dispatched, 3 landed
+### Wave 5 — CLOSED, INTEGRATED and now VERIFIED; rows retired
 
-`D-REPAIR` `036e56d`, **`L5` `4be46ef`**, **`V-W4` `b46ee4d`**. Gates immutable at
-`writeup/waves/WAVE5_PLAN.md` @ `1e49a00`, committed before any dispatch and **unchanged after it** —
-including when a ruling landed mid-wave asking for an addition to `L5`'s reading: **I refused to
-amend a dispatched gate** and required it at integration instead (demoted block below).
-
-### What I audited, mechanically, and NOT on either unit's report
-
-**Demoted verbatim 2026-08-18 when wave 6's plan was written**, per the remedy in the headroom
-report below → `## Superseded — wave 5's mechanical audits`. Nothing was shortened.
-
-### §3i — wave 5's direction check: retired 2026-08-18 → `## Superseded — wave 5's §3i`
-
-**Live consequences kept:** no re-ranking (W4 running out of clauses in Lane L does **not** re-open
-Lane T — a decision may not supersede a measurement); `L5`'s ceiling is **both jaws of its pincer
-unread at primary**, `UNDER-RESOURCED` with a cost; **q7 fired twice**, which is why wave 6 opened
-with construction.
+3 planned, 3 dispatched, 3 landed (`L5`, `V-W4`, `D-REPAIR`); `V-W5` verified it 2026-08-18.
+`L5` and `V-W4` rows have **left `STATE.md` under §3j** → `writeup/INDEX.md`. Narrative, the
+mechanical audits and wave 5's §3i: **retired verbatim below the boundary**. Live consequences
+kept: **no re-ranking** (W4 running out of clauses in Lane L does **not** re-open Lane T); `L5`'s
+ceiling is **both jaws of its pincer unread at primary**, `UNDER-RESOURCED` with a cost; **q7 fired
+twice**, which is why wave 6 opened with construction.
 
 ### ⚠ THE TRIGGER FIRED — `V-W5` CLEARED `L5` 2026-08-18, AND THE MESSAGE WAS SENT
 
@@ -42,22 +32,36 @@ claim without those three.
 pass on `L5` — no novelty entry exists (dir stops at `leg_394.md`). Claim to check: Chae–Wolf's
 `α`-pin **and** NRŠ/Tsai's exclusion of exactly-SS profiles **jointly** shut clause (b).
 
-### §3i — THE DIRECTION CHECK, `V-W5` (leg 403), against the RECORD
+### §3i — THE DIRECTION CHECK, per unit, `V-W5` (leg 403) and `V5` (leg 402)
 
-**(1) Link moved?** **NO.** A verifier cannot move an `L1→L4` link; it can only make one safe to
-lean on. **(2) Made FALSE?** That `L5` is *unverified*, and any suspicion the `C6` tolerance was
-moved — it was not (`347676f`, no `−` line on any ref, checked by me not by its report). It also
-made false *"`c_mod` is a portable constant"*: `1.476×` basis-dependent. **(3) Lane rank NOW?**
-Lane L keeps priority — §6(i)/§6(ii) untouched, on every path. **(4) Live
-claim on an undischarged ceiling?** **YES, unchanged and now the sharpest thing in the file:** both
-jaws of `L5`'s pincer (ESŠ; NRŠ 1996, Tsai 1998) are **journal-only, `UNREACHABLE`, never read at
-primary.** Verifying the arithmetic does **nothing** for that. **(5) Cheapest killer of the priority
-lane?** Reading those two at primary — **cannot be bought here** (no S2 key, author contact
-prohibited): `UNDER-RESOURCED` with a cost. **(6) If Lane L died tomorrow?** Lane T's `T2″`, and it
-is **not** cheaper. **(7) Audit/instrument loop?** Last three by kind: `L5` construction, `V-W4`
-verification, `V-W5` verification — **2 of 3 are audit**, which is exactly why wave 6 opened with
-`L6`. **RE-RANKING: none. `V-W5` verified arithmetic; a decision may not supersede a measurement,
-and no measurement moved.**
+**`V-W5`.** (1) No link moved — a verifier cannot move one. (2) Made FALSE: that `L5` is
+unverified, and that `c_mod` is portable (**`1.476×` basis-dependent**). (3) Lane L keeps priority.
+(4) **Ceiling unchanged and now the sharpest thing in the file:** both jaws of `L5`'s pincer (ESŠ;
+NRŠ 1996, Tsai 1998) are **journal-only, never read at primary** — verifying arithmetic does
+nothing for that. (5) Cheapest killer: read them at primary; **cannot be bought here** —
+`UNDER-RESOURCED` with a cost. (6) If Lane L died: `T2″`, not cheaper. (7) 2 of the last 3 units
+were audit — which is what `L6` exists to break. Detail: `CORRECTIONS.md` §35.
+
+**`V5`.** (1) **No link moved**, and the unit says so itself. (2) Made FALSE: that the Grade-A ×
+fluid occupant might be **another 2D lift** — it is **genuinely 3D on W2's own test**, swirl 57% of
+`max|u_r|`; and that wave 4's `D1`–`D6`/`N1` were undischarged. (3) **Lane V's rank is re-earned,
+not merely retained**: the lane's premise was that the cell is occupied by something worth
+auditing, and the audit found a closing certificate **with four broken constants**. (4) **YES, and
+it is now named in the wall itself:** the certificate's **Class A — 22 interval-arithmetic inputs —
+was NOT verified** and is banked as a **LIMIT OF THE AUDIT, never a pass**; the closure claim rests
+on it. (5) Cheapest killer of Lane V: re-running the **Julia certification** end-to-end, which this
+audit did not do. Not next because `L6`'s construction debt outranks it and q7 has fired twice.
+(6) If Lane V died: Lane L already is the priority; nothing changes. (7) See above.
+
+**RE-RANKING: NONE.** `V5`'s clause 2 raises a **scope** question about W2 — its statement names
+**3D SINGULARITY theorems** and this is a **nonuniqueness** theorem — and one reading of that
+scope would make Lane T's **re-open condition (i)** live. **THE CONDUCTOR IS NOT RULING IT:** a
+wall's WORDING is the user's, a deferral set by ruling is not undone by a Conductor's reading, and
+a ban or wall is superseded by a **MEASUREMENT**, never a decision. Recorded, not ruled →
+`writeup/escalations/ESCALATION_W2_SCOPE_2026-08-18.md`.
+
+**WAVE 6 STATUS: 2 of 3 returned and integrated** (`V-W5` `95cf861`, `V5` `dacc01c`). **`L6` is
+still in flight** — the wave does not close until it returns or is declared under-resourced.
 
 ### Headroom at the wave boundary (§3j) — IN **BYTES**, AND THE FIRST COUNT WAS WRONG
 
@@ -76,6 +80,48 @@ them **over**. `ORCHESTRATION.md` §3j now carries the rule. Rows stay in **char
 
 **Next retirement NAMED:** `WALLS.md` — W3's cell-occupancy narrative behind a pointer;
 `OPTIONS.md` — §F's discharged items. Cycles: wave 5 = 2; context HAS summarised.
+
+### WAVE 6 — DISPATCHED 2026-08-18; **2 of 3 RETURNED**
+
+Plan `e202653`, pointer `5c49486`, **both before any worker started**; gates carried **verbatim**
+into self-contained briefs, each pre-registering in its own commit. Dispatch narrative retired →
+`## Superseded — wave 6's dispatch record`. **`V-W5` LANDED `95cf861`; `V5` LANDED `dacc01c`;
+`L6` STILL IN FLIGHT** on `leg/401-l6-route4-profile`. **I planned this wave, so I do not verify
+it** — `V-W5` verified **wave 5**. **§34 was applied to every wave-6 gate before dispatch: every
+artefact a brief names exists.** Handoff at **wave 6's END**, when `L6` returns.
+
+### Headroom at the wave boundary — §3j, IN BYTES (`wc -c`)
+
+| file | bytes | cap | free |
+|---|---|---|---|
+| `STATE.md` | 24,123 | 24,576 | 453 (longest row 570 ≤ 600) |
+| `WALLS.md` | 32,280 | 32,768 | 488 |
+| `OPTIONS.md` | 24,487 | 24,576 | 89 |
+| `ORCH_STATE.md` LIVE | 6,644 | 8,192 | 1,548 |
+
+**`WALLS.md` has NO `## History` section** — the exemption I had been subtracting does not exist,
+which is how it went 31 B over undetected. Retired this integration, verbatim: §W3-CELL (the named
+retirement, unlocked by `V5`'s audit), §W2-C1, §LANE-T-PRICE, §PRIORITIES-Q6 → `WALLS_HISTORY.md`;
+`L5` + `V-W4` rows → `writeup/INDEX.md`; wave 5's close, its §3i, and wave 6's dispatch record →
+below the boundary. **Retirement, not compaction. NEXT NAMED:** `OPTIONS.md` §F's discharged items
+(**89 B free is not headroom**).
+
+### Open escalations — THREE OPEN, NONE RULED BY ME
+
+1. **NEW 2026-08-18** — `ESCALATION_W2_SCOPE_2026-08-18.md`. `V5` measured the Grade-A × fluid
+   occupant **genuinely 3D on W2's own test**, but W2's statement names **3D SINGULARITY**
+   theorems and `arXiv:2509.25116` is a **NONUNIQUENESS** theorem. Three defensible readings; the
+   third would make Lane T's **re-open condition (i)** live. **A wall's WORDING is the user's, and
+   a deferral set by ruling is not undone by a Conductor's reading.** Nothing stops.
+2. `ESCALATION_PUB0C_PUBLISHED_2026-08-18.md` — `PUB_0C` §1 grades *"any PUBLISHED work"*; the
+   paper carries **no journal-ref** (`V5` confirmed at v2, and correctly did **not** grade it).
+3. Still on the desk: `T1`'s ban-wording packet (machine record **DISCHARGED**) and the leg-257
+   lift-clause defect — **recorded, NOT ruled**. C1 is **DISCHARGED**, **EXEMPLAR-FREE**.
+
+**The W3 wording escalation is RULED** and transcribed. **`V5` did not run W3's prose test, so W3
+does not move** — the audit says nothing about whether the wall stands.
+
+## Superseded — wave 6's dispatch record, demoted 2026-08-18 under §3j (verbatim)
 
 ### WAVE 6 — **DISPATCHED**, 2026-08-18, in the order the plan fixes (§3f rule 3)
 
@@ -116,17 +162,26 @@ discrete profile"*, which **does not exist** — the gate was **unsatisfiable as
 integration commit `e42e7ab` called the substitution a *limitation* when it is a **gate deviation**.
 `writeup/CORRECTIONS.md` §34, row 16. **No wave-6 gate names an artefact I have not checked exists.**
 
-### Open escalations
+## Superseded — wave 5's close narrative and audit pointer, demoted 2026-08-18 under §3j (verbatim)
 
-**NEW, OPEN, NOT RULED:** `writeup/escalations/ESCALATION_PUB0C_PUBLISHED_2026-08-18.md` — `PUB_0C`
-§1 grades *"any PUBLISHED work"*, but `arXiv:2509.25116` carries **no journal-ref**. **A defective
-criterion WORDING is the user's, never the Conductor's**, and **nothing is stopped by it.** The W3
-wording escalation is **RULED** and transcribed (`STATE.md`, `WALLS.md`). Still on the desk: `T1`'s
-ban-wording packet (machine record **DISCHARGED**) and the leg-257 lift-clause defect, **recorded,
-NOT ruled**. C1 is **DISCHARGED** and stands **EXEMPLAR-FREE**.
+### Wave 5 CLOSED — 3 planned, 3 dispatched, 3 landed
 
----
+`D-REPAIR` `036e56d`, **`L5` `4be46ef`**, **`V-W4` `b46ee4d`**. Gates immutable at
+`writeup/waves/WAVE5_PLAN.md` @ `1e49a00`, committed before any dispatch and **unchanged after it** —
+including when a ruling landed mid-wave asking for an addition to `L5`'s reading: **I refused to
+amend a dispatched gate** and required it at integration instead (demoted block below).
 
+### What I audited, mechanically, and NOT on either unit's report
+
+**Demoted verbatim 2026-08-18 when wave 6's plan was written**, per the remedy in the headroom
+report below → `## Superseded — wave 5's mechanical audits`. Nothing was shortened.
+
+### §3i — wave 5's direction check: retired 2026-08-18 → `## Superseded — wave 5's §3i`
+
+**Live consequences kept:** no re-ranking (W4 running out of clauses in Lane L does **not** re-open
+Lane T — a decision may not supersede a measurement); `L5`'s ceiling is **both jaws of its pincer
+unread at primary**, `UNDER-RESOURCED` with a cost; **q7 fired twice**, which is why wave 6 opened
+with construction.
 
 ## Superseded — wave 5's §3i direction check, demoted 2026-08-18 under §3j (verbatim)
 

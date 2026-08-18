@@ -82,13 +82,11 @@ measurement, verbatim: `reports/ORCH_STATE.md` Superseded LIVE blocks.
 
 | unit | gate answer | SHA | state |
 |---|---|---|---|
-| **`L5`** / leg 400 (L) | **GATE `NO`, THRESHOLD-FREE, WITH THE NUMBER.** W4 clause (b): the natively finite-energy ansatz was **built** and measured — `‖curl F‖_{L¹_t L^{3/2}_x}` saturates at **`c_mod = 869.288`/unit `s`**, ρ-exponent **`+1.09e-04`** to `|y| = 1261.7`, `Σ(∞) = ∞`, so it fails for **every** `ε_close > 0`. An **ENDPOINT, not a gap**: the survivor is `T3 ∝ ṁ` of size `ρ^{1-α}`, and both exits — `α > 1`, or `ṁ ≡ 0` — are shut by the pin and by NRŠ/Tsai. Did **not** collapse to (D)SS on the `κ = a` branch. Tier 2, SYNTHETIC profile. | `4be46ef` | **UNVERIFIED** |
-| **`V-W4`** (verification of **wave 4**) | **PASS — all five gate items REPRODUCE**, and both wave-4 artefacts **regenerate bit-identically** from primaries re-fetched that day. **6 defects located and UNREPAIRED**: 4 quote/attribution (`D1`–`D4`, none material), and **`D5`/`D6` on the pin's provenance**. **ESŠ banks `UNREACHABLE` at primary, never a zero**; the direction survives through Seregin's **local** form. Also **one NEW USER ESCALATION**, recorded not ruled. | `b46ee4d` | **UNVERIFIED** |
 | **`D-REPAIR`** (wave 5, infra) | **GATE `NO`, twice, with the enumeration.** The record cites **110** figure ids: **45 rebuilt, 22 self-checked, 52 cited-with-a-`.png`-and-no-rebuild-path.** `NO` **before the repair and `NO` after** — the four debts were one figure of 66. **`V-W3`'s D3 is WRONG IN SIGN** (`E` used **+1.9% MORE** epochs/attempt, not −2.3% fewer) and its D5 *cannot close* is wrong (subset recovered, **9.0884 core-h**); **D2 no longer exists.** Detail and 11 unrepaired flags: `experiments/journal/d_repair.md`. | `036e56d` | **UNVERIFIED** |
 | **`V-W3`** (wave 4, verification) | **3 of 4 CONFIRMED, 1 REFUTED.** `E`'s headline reproduces 6/6; `V-W2` confirms on both parts from **re-fetched primaries** (`.mat` fields **bitwise**); `fig107`'s `P2_EVIDENCE` gap confirmed by `ast.literal_eval` (36 entries, `107` the only gap in 99–110). **REFUTED: `E`'s `8×` overrun — `0.0713` is WALL-h, `0.57` is CORE-h; like for like `E` came in 0.4% UNDER.** 6 defects **unrepaired**, 0 `UNREACHABLE`. | `2b8755e` | **UNVERIFIED** |
 | **`V1`** (wave 2, verification) | **All five wave-1 claims reproduce** from banked JSON and landed evidence scripts alone; **`M3 = DELIVERED` SURVIVES** U5's 57% seed overlap. Two defects banked, not reconciled. | `2fb399f` | **UNVERIFIED** |
 | **`PROG-R4`** (route-4 DSS, leg 380) | **U0–U3, U5 LANDED; U4 BLOCKED** — needs a recovered **named** orbit and there is not one. `G1 = UNDER-RESOURCED`, `M2`/`M3 = DELIVERED`. **`E` tightened `G1` without converting it to a `no`** and made **U4/G2 harder to open**. §3d's stop did **not** fire; **route 4 is NOT stopped.** | leg 380 | **UNVERIFIED** |
-| *retired under §3j* | **`T4`, `T5`, `T6`, `T1`, `T2`, `R0`, `R1`, `V-W2`, `E`, `L2′`, `V3` — LANDED and VERIFIED, so they leave this file.** Gate answers in their own words, SHAs and verifiers: `writeup/INDEX.md`, *Retired from `STATE.md`*. | — | **VERIFIED** |
+| *retired under §3j* | **`T4`, `T5`, `T6`, `T1`, `T2`, `R0`, `R1`, `V-W2`, `E`, `L2′`, `V3`, and now `L5` + `V-W4` (`L5` VERIFIED by `V-W5` 2026-08-18) — LANDED and VERIFIED, so they leave this file.** Gate answers in their own words, SHAs and verifiers: `writeup/INDEX.md`, *Retired from `STATE.md`*. | — | **VERIFIED** |
 | **`plan_of_record.py` posture** | **Additive only**, 75 insertions / 0 deletions. **No ban lifted, narrowed, reworded or re-read**; `BANNED` byte-identical, `test_plan_of_record.py` **26 bans / 19 in force, ALL GATES PASS**. | `1ca9e91` | — |
 
 ## WAVES 3 AND 4 — CLOSED. Detail retired 2026-08-18 under §3j.
@@ -108,7 +106,15 @@ Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits 
 
 ## WAVE 6 — **DISPATCHED 2026-08-18**. Plan: `writeup/waves/WAVE6_PLAN.md` @ `e202653`.
 
-Branches: `L6` `leg/401-l6-route4-profile`; `V5` `leg/402-v5-audit-25116`; **`V-W5` LANDED
+Branches: `L6` `leg/401-l6-route4-profile` **(in flight)**; **`V5` LANDED `dacc01c`** — **both
+clauses YES**: the certificate **CLOSES** (24 constants re-derived at 50 dps, **four printed ones
+fail**, worst `x_0^U` `1.44e-5` vs `1.45054706437e-5`, **non-conservative**; closure survives, but
+`x_1^U` clears by **0.08% — luck, not margin**), and the profile **IS genuinely 3D** on W2's own
+test (swirl **57%** of `max|u_r|`), answered **standing alone**. **Class A NOT verified — a LIMIT,
+never a pass. W3 does NOT move: its prose test was not run.** Wave 4's `D1`–`D6`/`N1` discharged as
+**`_v2` deltas, no `_v1` edited**. One defect of its own: its evidence script needed `mpmath`, which
+was **not in `requirements.txt`** — it exited **3** on a clean checkout. `CORRECTIONS.md` §36, row 18.
+**`V-W5` LANDED
 `95cf861`** — five items reproduce, **`C6`'s tolerance NEVER moved** (`347676f`), **3 defects
 located, 0 repaired** (`CORRECTIONS.md` §35, row 17): the passing `C6` criterion is **post-hoc**
 (added at the landing commit), `c_mod` is **basis-dependent by `1.476×`**, and half the `0.9958`
