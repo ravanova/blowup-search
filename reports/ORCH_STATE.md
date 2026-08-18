@@ -13,7 +13,66 @@ verifier, do not re-raise the C1 escalation, do not redo `T1`'s machine record: 
 
 ---
 
-## LIVE — CONDUCTOR mode, **WAVE 4 CLOSED: ALL THREE RETURNED**, 2026-08-18
+## LIVE — CONDUCTOR mode, **WAVE 5 IN FLIGHT — `D-REPAIR` LANDED, `L5` AND `V-W4` OUT**, 2026-08-18
+
+### Wave 5 — PLANNED AND COMMITTED BEFORE DISPATCH
+
+**`writeup/waves/WAVE5_PLAN.md` @ `1e49a00`.** Three units: **`L5`** (Lane L, CONSTRUCTION, first)
+attacking **W4 clause (b)**, the natively finite-energy ansatz; **`D-REPAIR`** for `V-W3`'s D2–D6
+plus the four held Conductor debts; **`V-W4`** (LAST) verifying wave 4. §3f rule 3, §3h composition
+floor and §3i q7 all discharged by named units.
+
+**A SECOND §3j MECHANISM, FLAGGED NOT SILENT.** The gates are in a committed plan file and
+`STATE.md` carries the wave-5 block **by pointer to that SHA** — plan committed first, pointer
+second, **both before any worker starts**. This is §3j rule 5 (*quote a gate by pointer once
+committed*) applied at plan time rather than after dispatch, and it was forced by the cap: wave 4's
+equivalent block was 5,598 bytes and `STATE.md` had 142. **The gates are not weaker for it — they
+are in final wording and unchangeable after dispatch.** If the user prefers gates inline, that is a
+cap ruling, and it is asked for above.
+
+**DISPATCHED 2026-08-18, plan and pointer both landed first (`1e49a00`, `d842898`; `origin/main` and
+local agreed at `d842898`, no concurrent push).** `L5` → `leg/400-l5-finite-energy`, `D-REPAIR` →
+`repair/wave3-defects` — **construction opened the wave** — then `V-W4` → `verify/wave4` **last**.
+Each brief carries its gate in the final committed wording, COMMIT DURING THE RUN, the never-relax
+rules and the prohibitions; **no brief was given `DIRECTION.md` or a repo tour**. Nothing was
+committed to the gates after the first worker started.
+
+### Wave 5 — `D-REPAIR` RETURNED AND LANDED (`036e56d`), the other two in flight
+
+**Audited mechanically, not on report.** Territory clean (STATE/WALLS/OPTIONS/ORCHESTRATION/reports/
+and every banked JSON untouched; `p2_route_vbs_v1_scoping.json` not touched, per reading (b)). Both
+`prog_r4` journals are **insert-only, 0 deletions** — corrections placed beside standing text. The
+coverage check re-run by me reproduces its numbers exactly, exit 1. I **independently re-derived D5**
+off `p2_prog_r4_e_v1.json`: exactly **8** attempts exceed the 2,047.44 s window, their walls sum to
+**20,117.0 s = 5.5880 core-h**, all 16 sum to **32,718.3 core-s = 9.0884 core-h**, and
+32,718.3/343 = **95.389 s/epoch**. The subset the record called unrecoverable is recoverable.
+
+**SCOPE, STATED PLAINLY: this unit exceeded its literal listing once.** Registering T6's evidence
+script required widening `P2_EVIDENCE`'s entry schema to `(path, args, required_inputs)` with a
+counted `SKIP` for absent gitignored PDFs. **Accepted** — a naive registration would have broken the
+rebuild on every clean checkout, and the alternative was `UNDER-RESOURCED` — but it is a behaviour
+change to a shared runner, and reading (a) said repair only what is listed. Recorded, not hidden.
+
+**NEW DEBT, NOT REPAIRED AND NOT MINE TO SLIP IN:** `fig81_route_egmf_v1_evidence.py` is tracked and
+unregistered — **the same defect as D6 at a different figure**, one line from fixed. It is a unit,
+not a favour. The 52 cited figures with a `.png` and no rebuild path (`fig8`–`fig47` is a contiguous
+block of 40, and looks like a pre-convention era rather than 40 lapses) are the larger item; there is
+**no room in `OPTIONS.md` to open them as options** — 15 bytes free. That is the cap question biting
+a second time, in a place where it now costs the record something.
+
+### Open escalations
+
+**NEW, OPEN:** `writeup/escalations/ESCALATION_W3_WORDING_2026-08-18.md` — three questions on W3's
+two disagreeing tests. **Work has not stopped.** `T1`'s ban-wording packet remains on the user's desk
+(machine record **DISCHARGED**). The lift-clause defect (leg 257 / fourth space) is **recorded, NOT
+ruled**. C1 is **DISCHARGED** and stands **EXEMPLAR-FREE**.
+
+---
+
+## Superseded LIVE block — CONDUCTOR mode, **WAVE 4 CLOSED: ALL THREE RETURNED**, 2026-08-18
+
+*Demoted from LIVE 2026-08-18 under §3j — the live block keeps the three most recent
+records. Nothing deleted, nothing reworded.*
 
 **Plan committed BEFORE dispatch at `8f4cb53`; dispatch record `d0c2c5d`. Gates and pre-committed
 readings live there in final wording and are quoted BY POINTER per §3j rule 5, not restated.**
@@ -75,36 +134,8 @@ nothing deleted, nothing unstruck**, every `## History` pointer resolving there.
 disk after each. `git ls-remote` checked before **both** integrations: **no concurrent push**; `origin/main` and
 local `main` agreed at `950115f`, then at `6320790`.
 
-### Wave 5 — PLANNED AND COMMITTED BEFORE DISPATCH
-
-**`writeup/waves/WAVE5_PLAN.md` @ `1e49a00`.** Three units: **`L5`** (Lane L, CONSTRUCTION, first)
-attacking **W4 clause (b)**, the natively finite-energy ansatz; **`D-REPAIR`** for `V-W3`'s D2–D6
-plus the four held Conductor debts; **`V-W4`** (LAST) verifying wave 4. §3f rule 3, §3h composition
-floor and §3i q7 all discharged by named units.
-
-**A SECOND §3j MECHANISM, FLAGGED NOT SILENT.** The gates are in a committed plan file and
-`STATE.md` carries the wave-5 block **by pointer to that SHA** — plan committed first, pointer
-second, **both before any worker starts**. This is §3j rule 5 (*quote a gate by pointer once
-committed*) applied at plan time rather than after dispatch, and it was forced by the cap: wave 4's
-equivalent block was 5,598 bytes and `STATE.md` had 142. **The gates are not weaker for it — they
-are in final wording and unchangeable after dispatch.** If the user prefers gates inline, that is a
-cap ruling, and it is asked for above.
-
-**DISPATCHED 2026-08-18, plan and pointer both landed first (`1e49a00`, `d842898`; `origin/main` and
-local agreed at `d842898`, no concurrent push).** `L5` → `leg/400-l5-finite-energy`, `D-REPAIR` →
-`repair/wave3-defects` — **construction opened the wave** — then `V-W4` → `verify/wave4` **last**.
-Each brief carries its gate in the final committed wording, COMMIT DURING THE RUN, the never-relax
-rules and the prohibitions; **no brief was given `DIRECTION.md` or a repo tour**. Nothing was
-committed to the gates after the first worker started.
-
-### Open escalations
-
-**NEW, OPEN:** `writeup/escalations/ESCALATION_W3_WORDING_2026-08-18.md` — three questions on W3's
-two disagreeing tests. **Work has not stopped.** `T1`'s ban-wording packet remains on the user's desk
-(machine record **DISCHARGED**). The lift-clause defect (leg 257 / fourth space) is **recorded, NOT
-ruled**. C1 is **DISCHARGED** and stands **EXEMPLAR-FREE**.
-
 ---
+
 ## Superseded LIVE block — CONDUCTOR mode, **WAVE 3 CLOSED AND INTEGRATED**, 2026-08-18
 
 **WAVE 3'S OUTCOME: ONE UNIT OF FOUR RETURNED.** Established from `origin`, not from prose.

@@ -98,6 +98,7 @@ being one. Escalation §3, question (Q3).
 
 | unit | gate answer | SHA | state |
 |---|---|---|---|
+| **`D-REPAIR`** (wave 5, infra) | **GATE `NO`, twice, with the enumeration.** The record cites **110** figure ids: **45 rebuilt, 22 self-checked, 52 cited-with-a-`.png`-and-no-rebuild-path.** `NO` **before the repair and `NO` after** — the four debts were one figure of 66. **`V-W3`'s D3 is WRONG IN SIGN** (`E` used **+1.9% MORE** epochs/attempt, not −2.3% fewer) and its D5 *cannot close* is wrong (subset recovered, **9.0884 core-h**); **D2 no longer exists.** Detail and 11 unrepaired flags: `experiments/journal/d_repair.md`. | `036e56d` | **UNVERIFIED** |
 | **`L2′`** / leg 397 (L) | **GATE `YES`** — failing hypothesis **named, quoted, located** for **all 18** techniques (**all 7** families + 3 OFF-LIST): **9 `FAILS` / 8 `FAILS-BY-CONSTRUCTION` / 1 `SATISFIED`**. **ZERO could supply `α > 1.5` even in principle** — `α` is **pinned to exactly 1**, so paying leg 381's bill destroys the object. Closes **one** of W4's three break clauses; **§6(i) NOT retired.** Detail: `experiments/journal/leg_397.md` §§4–9. | `1493e5e` | **UNVERIFIED** |
 | **`V3`** / leg 399 (V) | **GATE `YES` on 1 row of 9.** `arXiv:2509.25116` (Hou–Wang–Yang) **passes both of leg 174's clauses** and had **never been graded here**; 8 `NO` with the failing clause quoted; leg 309/342/123 **cited, not redone**. **The object is NOT a finite-time singularity — the paper says so (§1.2, p.2).** Lane V's premise **DEAD on the named predicate**; W3 **DISPUTED / UNRULED**, escalation OPEN. YES **unaudited**, one database, S2 a **gap not a zero**. | `16ba44e` | **UNVERIFIED** |
 | **`V-W3`** (wave 4, verification) | **3 of 4 CONFIRMED, 1 REFUTED.** `E`'s headline reproduces 6/6; `V-W2` confirms on both parts from **re-fetched primaries** (`.mat` fields **bitwise**); `fig107`'s `P2_EVIDENCE` gap confirmed by `ast.literal_eval` (36 entries, `107` the only gap in 99–110). **REFUTED: `E`'s `8×` overrun — `0.0713` is WALL-h, `0.57` is CORE-h; like for like `E` came in 0.4% UNDER.** 6 defects **unrepaired**, 0 `UNREACHABLE`. | `2b8755e` | **UNVERIFIED** |
@@ -174,8 +175,8 @@ through two independently-read secondaries. **If that direction does not follow,
 hold and W4 clause (a) re-opens.** That is the sharpest single test in the wave.
 
 **DISPATCHED** on branches `leg/400-l5-finite-energy`, `repair/wave3-defects`, `verify/wave4` —
-construction first, verifier last (§3f rule 3). Gates unchanged after dispatch. **All three IN
-FLIGHT, none returned.**
+construction first, verifier last (§3f rule 3). Gates unchanged after dispatch. **`D-REPAIR`
+RETURNED and is LANDED at `036e56d`** (row above); `L5` and `V-W4` still in flight.
 
 ## Open — needs the user, not a task
 
