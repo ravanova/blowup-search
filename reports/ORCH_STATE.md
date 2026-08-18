@@ -90,6 +90,13 @@ equivalent block was 5,598 bytes and `STATE.md` had 142. **The gates are not wea
 are in final wording and unchangeable after dispatch.** If the user prefers gates inline, that is a
 cap ruling, and it is asked for above.
 
+**DISPATCHED 2026-08-18, plan and pointer both landed first (`1e49a00`, `d842898`; `origin/main` and
+local agreed at `d842898`, no concurrent push).** `L5` → `leg/400-l5-finite-energy`, `D-REPAIR` →
+`repair/wave3-defects` — **construction opened the wave** — then `V-W4` → `verify/wave4` **last**.
+Each brief carries its gate in the final committed wording, COMMIT DURING THE RUN, the never-relax
+rules and the prohibitions; **no brief was given `DIRECTION.md` or a repo tour**. Nothing was
+committed to the gates after the first worker started.
+
 ### Open escalations
 
 **NEW, OPEN:** `writeup/escalations/ESCALATION_W3_WORDING_2026-08-18.md` — three questions on W3's

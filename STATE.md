@@ -155,7 +155,7 @@ three** → **`L5`**, which is dispatched first for exactly that reason.
 
 ---
 
-## WAVE 5 — PLANNED AND COMMITTED BEFORE DISPATCH, 2026-08-18
+## WAVE 5 — DISPATCHED 2026-08-18; PLAN COMMITTED BEFORE DISPATCH
 
 **Gates and pre-committed readings, FINAL WORDING: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`,
 committed BEFORE any dispatch.** They are in that file and not restated here because integrating one
@@ -172,6 +172,10 @@ unit already took all three capped files to within 0.7% of their limits (§3j; `
 *"at most 1"* rests on **Escauriaza–Seregin–Šverák, NOT read at primary** — it reaches the record
 through two independently-read secondaries. **If that direction does not follow, the pin does not
 hold and W4 clause (a) re-opens.** That is the sharpest single test in the wave.
+
+**DISPATCHED** on branches `leg/400-l5-finite-energy`, `repair/wave3-defects`, `verify/wave4` —
+construction first, verifier last (§3f rule 3). Gates unchanged after dispatch. **All three IN
+FLIGHT, none returned.**
 
 ## Open — needs the user, not a task
 
