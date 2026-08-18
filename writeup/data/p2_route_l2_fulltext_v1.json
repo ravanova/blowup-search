@@ -1,0 +1,180 @@
+{
+ "leg": 397,
+ "unit": "L2'",
+ "what": "full texts pulled for leg 397; Papers/ is gitignored so this is the committed provenance",
+ "fulltexts": [
+  {
+   "arxiv_id": "1610.09464",
+   "pdf_bytes": 218473,
+   "pdf_md5": "f1d14db17f643323cfa1a16ba661eb9d",
+   "txt_md5": "73279aa90ce78c1190d0027000fd1cf2",
+   "txt_lines": 1021,
+   "status": "OK",
+   "family": "F2",
+   "title": "Chae-Wolf, Removing discretely self-similar singularities for the 3D Navier-Stokes equations"
+  },
+  {
+   "arxiv_id": "2202.08352",
+   "pdf_bytes": 354758,
+   "pdf_md5": "0a359ec1fb8606401d0b9b3498de400b",
+   "txt_md5": "4b8947dd7c7d43481b4615462d482ccb",
+   "txt_lines": 2134,
+   "status": "OK",
+   "family": "F2",
+   "title": "Bradshaw-Tsai, Spatial decay of discretely self-similar solutions to the Navier-Stokes equations"
+  },
+  {
+   "arxiv_id": "2409.13586",
+   "pdf_bytes": 360194,
+   "pdf_md5": "ceed151477c845f7f2a0d41bd29cc011",
+   "txt_md5": "75b3f63e8a684205c21fc4de26db08d7",
+   "txt_lines": 1837,
+   "status": "OK",
+   "family": "F2",
+   "title": "Asymptotic properties of discretely self-similar Navier-Stokes solutions with rough data"
+  },
+  {
+   "arxiv_id": "2006.15776",
+   "pdf_bytes": 298686,
+   "pdf_md5": "a5341254bb530337257512dd2e8ae601",
+   "txt_md5": "b0feceba2433663a0fac582f33a081b1",
+   "txt_lines": 1694,
+   "status": "OK",
+   "family": "F1",
+   "title": "Leray's backward self-similar solutions of the 3D Navier-Stokes equations in Morrey spaces (SECONDARY for NRS/Tsai)"
+  },
+  {
+   "arxiv_id": "2607.09619",
+   "pdf_bytes": 617825,
+   "pdf_md5": "53680cb802803dda9b0a27975c7d1270",
+   "txt_md5": "01bdf4c836b3a8b6ddfa071618335ef2",
+   "txt_lines": 2278,
+   "status": "OK",
+   "family": "F1",
+   "title": "On rotated backwards self-similar solutions of the incompressible 3D Navier-Stokes equations"
+  },
+  {
+   "arxiv_id": "1204.0529",
+   "pdf_bytes": 304378,
+   "pdf_md5": "5f7466362f7eb7c9c8bad47db3433414",
+   "txt_md5": "d75b8f6231004c764c7252ceaa6c3277",
+   "txt_lines": 1486,
+   "status": "OK",
+   "family": "F3",
+   "title": "Jia-Sverak, Local-in-space estimates near initial time ... and forward self-similar solutions"
+  },
+  {
+   "arxiv_id": "1210.2783",
+   "pdf_bytes": 229486,
+   "pdf_md5": "626fd1483d14bfda6003543a55126fda",
+   "txt_md5": "d4a3c6c0bfd52c8bbf11bb42dfd3f321",
+   "txt_lines": 1060,
+   "status": "OK",
+   "family": "F3",
+   "title": "Bradshaw-Tsai, Forward discretely self-similar solutions of the Navier-Stokes equations"
+  },
+  {
+   "arxiv_id": "1703.03480",
+   "pdf_bytes": 271083,
+   "pdf_md5": "d9945492d503e5cdb1d05e5b6686d3c0",
+   "txt_md5": "436d873f6a1c6ccc758e76325f6ace93",
+   "txt_lines": 1412,
+   "status": "OK",
+   "family": "F3",
+   "title": "Discretely self-similar solutions to the Navier-Stokes equations with Besov space data"
+  },
+  {
+   "arxiv_id": "1910.00173",
+   "pdf_bytes": 1256297,
+   "pdf_md5": "b68d37b622a9acbff9ece677105502e5",
+   "txt_md5": "d7d5bc5b5b7bdb09b23a828c0c48bb74",
+   "txt_lines": 5599,
+   "status": "OK",
+   "family": "F4",
+   "title": "Chen-Hou, Finite time blowup of 2D Boussinesq and 3D Euler equations with C^{1,alpha} velocity and boundary"
+  },
+  {
+   "arxiv_id": "1904.04795",
+   "pdf_bytes": 664080,
+   "pdf_md5": "0fb7ddeea16ed3cc0ce1132baf40596d",
+   "txt_md5": "e6950ab8a2fdce2db39eaa1816b3f334",
+   "txt_lines": 3680,
+   "status": "OK",
+   "family": "F4",
+   "title": "Elgindi, Finite-time singularity formation for C^{1,alpha} solutions to the incompressible Euler equations on R^3"
+  },
+  {
+   "arxiv_id": "1910.14071",
+   "pdf_bytes": 377479,
+   "pdf_md5": "fec278bc74fc9b2ee4e8a7acd3610dab",
+   "txt_md5": "f5c15409ea09ffb864f7818632859b15",
+   "txt_lines": 1694,
+   "status": "OK",
+   "family": "F4",
+   "title": "Elgindi-Ghoul-Masmoudi, On the stability of self-similar blow-up for C^{1,alpha} solutions"
+  },
+  {
+   "arxiv_id": "2210.07191",
+   "pdf_bytes": 5181971,
+   "pdf_md5": "ca2f9c6d30e7781b5bccd3b08ac2c15f",
+   "txt_md5": "ed7701e43bc72f596c5922bc5d0b3b8d",
+   "txt_lines": 12021,
+   "status": "OK",
+   "family": "F4",
+   "title": "Chen-Hou, Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations"
+  },
+  {
+   "arxiv_id": "1912.11009",
+   "pdf_bytes": 1238457,
+   "pdf_md5": "5f3f35cf8500eb13daa9900de45aec90",
+   "txt_md5": "c1f24804ef3a79d5e249060ce5ecce6a",
+   "txt_lines": 6550,
+   "status": "OK",
+   "family": "F5",
+   "title": "Merle-Raphael-Rodnianski-Szeftel, On the implosion of a three dimensional compressible fluid"
+  },
+  {
+   "arxiv_id": "2606.12758",
+   "pdf_bytes": 633685,
+   "pdf_md5": "3de5dd24ae8c59f34d9127c5df9e9ea0",
+   "txt_md5": "fc8965939b5b782cb484b02f01a3fc65",
+   "txt_lines": 1557,
+   "status": "OK",
+   "family": "F5",
+   "title": "OFF-LIST: Self-similar imploding solutions of the 1D compressible Euler equations with far field cutoff"
+  },
+  {
+   "arxiv_id": "2112.03116",
+   "http_status": 200,
+   "pdf_bytes": 426725,
+   "pdf_md5": "7a1650324e020b5320671ce401eaae9a",
+   "txt_md5": "1a9f1b47840c85792da1b4302dc95896",
+   "txt_lines": 1647,
+   "status": "OK",
+   "family": "F3-OFFLIST",
+   "title": "OFF-LIST: Albritton-Brue-Colombo, Non-uniqueness of Leray solutions of the forced Navier-Stokes equations"
+  },
+  {
+   "arxiv_id": "2209.03530",
+   "http_status": 200,
+   "pdf_bytes": 281754,
+   "pdf_md5": "69644a79383f5115ed096065481ab51d",
+   "txt_md5": "ab574e9900ce35f63fa01f1156a35384",
+   "txt_lines": 1187,
+   "status": "OK",
+   "family": "F3-OFFLIST",
+   "title": "OFF-LIST: Albritton-Brue-Colombo, Gluing non-unique Navier-Stokes solutions"
+  },
+  {
+   "arxiv_id": "1103.3718",
+   "http_status": 200,
+   "pdf_bytes": 206540,
+   "pdf_md5": "ef8fd58b76a35bdac6d102571b8c4e1a",
+   "txt_md5": "8c3e0a02e111ae36520881257cb3a501",
+   "txt_lines": 927,
+   "status": "OK",
+   "family": "F7",
+   "title": "SECONDARY for Bogovskii 1979 (journal-only): an elementary proof of the continuity of Bogovskii's right inverse of the divergence"
+  }
+ ]
+}
