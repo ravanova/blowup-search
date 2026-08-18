@@ -1,32 +1,112 @@
 # ORCH_STATE — orchestrator handoff
 
-**Owner: the CONDUCTOR** (`ORCHESTRATION.md` §3g; previously "the orchestrator", a role that no
-longer exists). Written **at every wave boundary** — in the same commit as the wave plan (§3g
-step 1) and again in the same commit as the wave's integration (step 4) — and at every handoff and
-every stop. A fresh session reads this at Step 0b before dispatching anything.
+**Owner: CONDUCTOR** (`ORCHESTRATION.md` §3g; the separate "orchestrator" role no longer exists).
+Written **at every wave boundary** — in the same commit as the wave plan (§3g step 1), again in the
+same commit as the wave's integration (step 4) — and at every handoff. A fresh session reads Step 0b
+before dispatching anything.
+
+**The 2026-08-14 fork is CLOSED at `5d9c065`.** Two concurrent CONDUCTOR sessions diverged at
+`2928966` and were merged: the branch supplied the C1-exemplar ruling, wave 3 and `V-W2`; `main`
+supplied unit **`E` LANDED COMPLETE at `d0d72b1`**. **Any row anywhere claiming "`E` DID NOT RETURN"
+is stale** — it was true when written on the branch and is false now. Do not re-dispatch a wave-2
+verifier, do not re-raise the C1 escalation, do not redo `T1`'s machine record: all three are DONE.
 
 ---
 
-## ⚠ RECONCILIATION — TWO CONDUCTOR SESSIONS, MERGED 2026-08-14
+## LIVE — CONDUCTOR mode, **WAVE 3 CLOSED AND INTEGRATED**, 2026-08-18
 
-**The fork is closed.** Two CONDUCTOR sessions ran concurrently and diverged at `2928966`. `main`
-carried unit `E` and the wind-up; `claude/wave-3-conductor-dispatch-7rdhlg` carried the C1-exemplar
-ruling, wave 3, and `V-W2`. **Neither was wrong; both were partial.** This merge takes both.
+**WAVE 3'S OUTCOME: ONE UNIT OF FOUR RETURNED.** Established from `origin`, not from prose.
 
-**Resolved in favour of the branch, because it is strictly later:** `V-W2`'s verification of wave 2
-(so `T4`, `T6`, `T5` are `VERIFIED`, not `UNVERIFIED`), `T1`'s machine record `DISCHARGED`, the C1
-escalation `DISCHARGED`, and the wave-3 plan.
+| unit | lane | branch on `origin` | outcome |
+|---|---|---|---|
+| `V-W2` | verification | `claude/wave-3-conductor-dispatch-7rdhlg` @ `594ff89` | **RETURNED, AUDITED, LANDED.** Verified wave 2 (`T4`, `T6`, `T5`) and discharged `T1`'s machine record. Itself `UNVERIFIED`. |
+| `V2` / leg 396 | V | **none** | **DEAD. Zero bytes.** No branch, no commit. Gate unanswered. |
+| `L2` / leg 397 | L | `leg/397-l2-decay` @ `a9a4370` | **DEAD, but its pre-registration SURVIVED** because it was committed: `experiments/journal/leg_397.md` §§0–3 (object, leg 381's banked bill, search plan, controls, criteria), 256 lines, **fully resumable**. Gate unanswered. |
+| `L3′` / leg 398 | L | **none** | **DEAD. Zero bytes.** No branch, no commit. Gate unanswered. |
 
-**Resolved in favour of `main`, because the branch predates it:** unit **`E` LANDED and COMPLETE**
-(`d0d72b1`). The branch's `STATE.md` row saying *"`E` DID NOT RETURN, GATE UNANSWERED"* was true when
-written and is **false now** — `E` returned all three diagnostics, branch `E-iii` fired, and its
-`§3d` costing and lesson-91 clauses are on `main`. **Any successor reading that row from the branch
-is reading stale state.**
+**"COMMIT DURING THE RUN" PAID FOR ITSELF A SECOND TIME.** Three units died; the only one that left
+anything behind is the one that had committed. This clause, and mandatory checkpointing above ~1 h
+wall, go in **every** brief. Wave 4's briefs carry both.
 
-**Still owed and NOT discharged by this merge:** a verifier for **`E`** and for **wave 3's own
-units** — `V-W2` verified wave 2 only, and `E` landed after `V1` ran.
+### §3i THE DIRECTION CHECK — answered against the RECORD, 2026-08-18
 
-## LIVE — CONDUCTOR mode, **WAVE 3 PLANNED AND COMMITTED BEFORE DISPATCH**, 2026-08-14
+1. **Did a unit move an L1→L4 link?** **No.** `V-W2` is verification; the other three produced no
+   measurement. The chain has not moved in 398 legs.
+2. **What did it make FALSE?** `V-W2` made false the live possibility that `T4`/`T6`/`T5`'s headline
+   numbers were transcription artefacts: items (1) and (2) were re-measured from **re-fetched primary
+   artefacts whose SHA-256 matched the banked digests exactly**. It also falsified a **Conductor
+   wording defect**, ruled at landing against the Conductor's own wording (`WALLS.md` History).
+   `V2`, `L2`, `L3′` made nothing false.
+3. **Do the lanes still deserve their rank ON WHAT IS MEASURED NOW?** **Lane L: yes, and re-earned —
+   zero units in 398 legs, and leg 390 measured §6(i)/(ii) OPEN in *both* branches, so it is on every
+   path. Lane V: rank UNCHANGED but now CONDITIONAL on `V3`** — see q4. Lane T stays DEFERRED; nothing
+   re-opened it. Lane R never sets a wave's direction.
+4. **Is a live claim resting on a source whose recorded ceiling is undischarged?** **YES, and this is
+   the wave's finding.** `WALLS.md` W3 carried *"leg 242 confirms nobody filled it since."* Leg 242's
+   gate is an **author-line** question about Dahne–Figueras, answered `NO` over twelve author nets —
+   it closes the CGL line, **not the cell** — and **its own control net surfaced six fluid blow-up
+   computer-assisted proofs (`2509.25116`, `2605.19716`, `2605.15149`, `2604.09949` among them) and
+   graded none against leg 174's Grade-A criterion.** Leg 174's matrix rests on an 11-row hand-built
+   ledger recording a **Tier** ceiling and **no coverage ceiling**. **Struck in `WALLS.md` W3 and
+   `OPTIONS.md` §C as a flag on the SUPPORT, not a retraction of the wall:** nothing measures that
+   anyone DID fill the cell, and W3 stands until something does.
+5. **Cheapest unit that could KILL the priority lane, and why is it not next?** **`V3` — grade the
+   `fluid × Grade-A` cell against leg 174's own unchanged Grade-A criterion, starting from leg 242's
+   six ungraded CAPs. It IS next.** If one grades Grade-A, W3 is broken by someone else and Lane V's
+   premise dies for ~2–3 h of reading.
+6. **If Lane V died tomorrow, what instead, and is it cheaper?** **Lane L, and yes** — `L2′` resumes a
+   committed pre-registration at ≈2–4 h against a full `V2` build. Lane L is on every path regardless
+   of how `V3` lands, which is why wave 4 runs both.
+7. **Are we in an audit/instrument loop?** **YES — the last three landed units are `V1`
+   (verification), `E` (instrument), `V-W2` (verification). Three of three.** Remedy applied in the
+   wave-4 plan: **the wave opens with construction and the verifier is dispatched last.**
+
+**RE-RANK MADE (q3/q5):** priority order **V, L** is unchanged, but **Lane V's rank is now
+conditional on `V3`.** If `V3` finds a Grade-A fluid row, Lane V's premise is dead and Lane L becomes
+sole priority in the same commit. Recorded in `WALLS.md` §LANE PRIORITIES.
+
+### §3j HEADROOM REPORT — wave boundary 2026-08-18
+
+| file | cap | now | headroom |
+|---|---|---|---|
+| `STATE.md` | 24,576 (no row > 600 ch) | **18,109**, longest row 542 | 6,467 |
+| `WALLS.md` | 32,768 | **32,722** | 46 |
+| `OPTIONS.md` | 24,576 | **24,538** | 38 |
+| this LIVE block | 8,192 | see foot | — |
+
+**Context WAS summarised — twice — during this Conductor session.** All four files were re-read from
+disk after the fork closed and after each summarisation, per §3j. Remedies used: `STATE.md` detail
+moved to journals leaving pointers; `WALLS.md` retracted text moved to a `## History` foot section;
+`OPTIONS.md` `TAKEN`/`KILLED` entries compressed to one line plus a pointer; this file truncated to
+the three most recent superseded blocks with the accumulating sections carried verbatim.
+
+### Standing obligations wave 4 MUST carry (not preferences — contract)
+
+- **A VERIFIER for `E` AND for wave 3's own units.** `V-W2` covered wave 2 only; `E` (`d0d72b1`) and
+  `V-W2` (`594ff89`) are both `UNVERIFIED`. **YOU MAY NOT VERIFY A WAVE YOU PLANNED** — the verifier
+  is dispatched in the wave *after* the units it checks.
+- **Whatever `L2` needs to finish.** Lane L's first unit in 398 legs, pre-registration committed.
+- **The composition floor: at least one unit attacking a wall on the Clay chain directly.** Three
+  consecutive waves met it from Lane T. Wave 4 meets it from **V and L**, per q6.
+
+### Open escalations
+
+| id | what | state |
+|---|---|---|
+| ban-wording packet (`T1`) | on the user's desk | machine record **DISCHARGED** by `V-W2` (`writeup/data/p2_route_t1_packet_v1.json`, 31/31, exit 0) |
+| lift-clause defect (leg 257 / fourth space) | recorded in `OPTIONS.md` §F, **NOT ruled** | a ban-wording question is a **user** escalation, never a Conductor's call |
+| C1 exemplar | **DISCHARGED** 2026-08-14 | C1 stands **EXEMPLAR-FREE**; no unit may cite it as evidence the technology closes for any object class |
+
+### What the next Conductor must do first
+
+Read `STATE.md`, `WALLS.md` whole, `OPTIONS.md`, `ORCHESTRATION.md` §§3g–3j, run
+`.venv/bin/python plan_of_record.py`, then this file. **Never `DIRECTION.md`.** Check
+`git ls-remote --heads origin` before any handoff — concurrent sessions commit to `main` mid-run and
+also diverge onto their own branches.
+
+---
+
+## Superseded LIVE block — CONDUCTOR mode, WAVE 3 PLANNED AND COMMITTED BEFORE DISPATCH, 2026-08-14
 
 **`main` = this commit.** The user's ruling on `ESCALATION_C1_EXEMPLAR_2026-08-14.md` is transcribed
 (one commit per item, `test_plan_of_record.py` ALL GATES PASS after each), and the wave-3 plan is
@@ -451,944 +531,6 @@ refusals that cited the ℓ¹-Fourier ban and were apparatus-based, which C1 now
 > the WIND-UP block immediately below. The paragraphs above are kept as the record of what was owed.
 
 ---
-
-## WOUND UP BY USER INSTRUCTION, 2026-08-14 — waves 1 and 2 both complete, everything pushed
-
-**User instruction, verbatim:** *"Please complete what is outstanding from wave 2, complete E, and
-then wind up, push all to main"*. All three parts are done. **No worker is in flight. `main` is
-clean, synced and `MERGE GATE: PASS`.**
-
-**This is a wind-up, not a stop.** No hold is placed on any lane and no ban changes. The programme
-resumes by planning wave 3 under §3g step 1 — plan first, commit the plan, then dispatch.
-
-### The board at wind-up
-
-| | |
-|---|---|
-| **Wave 1** (`T1`, `T2`, `R0+R1`, `E`) | **COMPLETE.** `E` landed last, `d0d72b1`. |
-| **Wave 2** (`T4`, `T6`, `V1`, `T5`) | **COMPLETE AND INTEGRATED**, `46fe612` / `2928966`. |
-| **In flight** | **NOTHING.** |
-| **Branches on origin** | `leg/393-t4-repro`, `leg/394-t6-fulltext`, `leg/395-t5-sweep`, `verify/wave1`, `prog-r4/e-hhard` — all merged, all pushed, none deleted. |
-| **Open escalation** | **`ESCALATION_C1_EXEMPLAR_2026-08-14.md` — ON THE USER'S DESK, three questions, none the Conductor's to answer.** |
-
-### The two results a successor must not re-derive
-
-1. **Lane T's central premise is measured FALSE.** `arXiv:1902.00384` is certified by **exactly the
-   banned apparatus** and **both certified rows are 2D lifts**. Measured twice, by two units, by two
-   different methods (`T4` from the authors' data package, `T6` from their prose), verified by the
-   Conductor against both workers' separately fetched PDFs. **W2 stands, strengthened.** **C1's
-   general proposition, the scoping ruling, Theorem NGX and leg 341 are all untouched**, and **the
-   obstruction leg 348 named is NOT refuted** — its evidence base is thinner than the record said.
-2. **The named Table IV rows are not reachable even from their own published coordinates.** `E`,
-   diagnostic (3): **0 of 16**, with a positive control proving the predicate can return a recovery.
-   **`G1` stays `UNDER-RESOURCED` and was not written to** — this is not a `no` (§3d).
-
-### WHAT WAVE 3 IS OBLIGED TO CARRY, before anyone's preferences get a vote
-
-- **THE VERIFIER, AND IT IS NOW BIGGER THAN ONE WAVE'S WORTH.** This Conductor planned `T4`, `T6`,
-  `T5` **and** `E` and **may not check any of them** (§3f rule 1: verification is a fresh session or
-  it is not verification). **All four are `UNVERIFIED`.** `V1` discharged wave 1's debt for `T1`,
-  `T2` and `R0`+`R1` only — **`E` landed after `V1` ran and is not covered by it.**
-- **THE COMPOSITION FLOOR.** At least one unit attacking a wall on the Clay chain directly — Lane T,
-  V or L. **A wave of pure Lane R is out of contract, and so is a wave whose only non-Lane-R unit is
-  an audit.** Note this bites harder than usual now: the verifier is an audit, so wave 3 needs a real
-  Lane T/V/L unit *alongside* it.
-- **§3f rule 3.** No more than two consecutive audit/repair/instrument tasks. `E` was an instrument
-  and the wave-3 verifier is an audit — **wave 3 must contain a mathematics or construction unit.**
-
-### Ranked candidates for wave 3 — offered as a ranking, not a ruling
-
-**The honest caveat first: the top of this ranking depends on an answer only the user can give.**
-The C1 escalation asks whether Lane T's priority-1 standing survives the loss of item 3. Until it is
-answered, ranking `T3` first would be **assuming** the answer.
-
-1. **The wave-2 + `E` verifier.** Owed, and the largest verification debt the programme has carried.
-2. **`T3` — the non-DSS `T³` ansatz.** Still the lane's real mathematical content and the biggest
-   prize, but **re-rank it against the escalation's answer, not around it.**
-3. **THE CHEN–HOU THREAD (`arXiv:2308.01528`).** Computer-assisted blow-up on an **unbounded domain
-   in >1D with algebraic decay**. Ledgered in `OPTIONS.md` §F as **the sharpest available attack on
-   the obstruction itself**, and it does **not** fire U6.
-4. **`O1` — leg 315's Taylor-model flow-map build**, re-openable under C1, *"needs no function
-   space"* — and it points at **Lane V, not Lane T.** The genuinely new thing C1 bought.
-5. **Lane L.** Still **zero units in 395 legs**, and it is the lane that tells the user whether the
-   Tier-2 ceiling is permanent.
-6. **The cheap owed debts**, none of which is a unit on its own: `T1`'s machine record, the leg-348
-   `domain_census` re-count, **`fig107`'s missing `build_figures.py` registration**, and the
-   **INDEX.md rows for all five recent units — a Conductor-owned debt, not a worker's.**
-7. **Lane R's own re-ranking**, which `E` left genuinely open: `E-iii` fired (→ `R3`/`R2`) *and*
-   `E-ii`'s antecedent is satisfied (→ `R4`). **This Conductor did not rule between them.**
-
-### Dispatch-brief rules this run paid for — put them in every future brief
-
-1. **Commit early and often on the unit's branch.** The 2026-08-14 host process-exit destroyed four
-   workers mid-run; the briefs required a pre-registration commit but said nothing about committing
-   *during* the run.
-2. **Poll long jobs from inside the turn.** `E` did this correctly and it is why it survived.
-3. **CHECKPOINT TO DISK ABOVE ~1 h WALL, and say where.** `E` reports **the host killed its
-   unattended run twice**; rules 1 and 2 were necessary and **not sufficient** — what saved its 5.7
-   core-hours was per-attempt checkpoints it could resume from.
-4. **Cost models are floors, not estimates, when the seeds are good.** `E` measured its commissioned
-   model **wrong by ~8×** (0.0713 vs ~0.57 h/attempt) for a structural reason: **good seeds do not
-   fail fast.**
-
-### Standing, and unchanged by anything this run measured
-
-**Ceiling: TIER 2. No `L1→L4` link moved by any unit in either wave. Clay stays ~0.05%.** A
-best-in-field orbit finder does not move it — it makes the questions affordable, which is a
-different and lesser thing. **Author contact remains held**; reading published material is
-authorised. **No Semantic Scholar key is available** — pace against unauthenticated limits and bank
-a throttled query as `THROTTLED`, **never as a zero**.
-
----
-
-## ⛔ STOP — RUN WOUND DOWN BY USER INSTRUCTION, 2026-08-12 (cycle 11h, incomplete)
-
-> **SUPERSEDED 2026-08-13 by the user's CONDUCTOR-mode restart** (`ORCHESTRATION.md` §3g,
-> `WALLS.md`, `CLAY_ROADMAP.md` §7.6). **Retained, not deleted:** the stop happened, and the board
-> below explains why several branches sit where they do. The four-slot board, the bench lane and the
-> DM described in it **no longer exist**, and the instruction *"dispatches nothing until the user
-> says to"* has been discharged — the user has said to. Read the LIVE block above for the current
-> board. Everything below is history.
-
-**The user stopped the run.** Every live agent was told to halt where it stood, commit its work
-as **WIP on its own branch**, push the **branch only**, and answer nothing it had not finished.
-`main` was closed to further landings at that moment. **Do not resume any of them by assumption**
-— a successor session reads this block first and dispatches nothing until the user says to.
-
-**The board at the stop.** Four leg slots plus a bench lane and the DM:
-
-| slot | unit | state at the stop |
-|---|---|---|
-| A | 380 PROG-R4 (§3c programme) | LIVE, stood down mid-programme. `703b616` (M1, hookstep/trust-region globalisation) and `396f622` (GMRES relative-residual early exit + U2/U3 runners) are **landed and safe**; a DNS was in flight and was abandoned. Everything after `396f622` is WIP by definition. |
-| B | 389 CT2C | LIVE, stood down. Gate **UNANSWERED**. Dispatched this cycle as the refill for 386 once its precondition became true. |
-| C | — | **VACANT at the stop, deliberately.** 390 landed; the only dispatchable reserve item (391 MVLD) is verification-typed and would have put the floor at 2/4. Held rather than filled. |
-| D | 388 CRVB | LIVE, stood down. Gate **UNANSWERED**. A one-sided ladder is not a bracket and must not be read as one. |
-| bench | 387 DXNV | LIVE, stood down. Gate **UNANSWERED** unless both queries came back banked. |
-| DM | cycle 11h | Stood down mid-cycle. **Its drafting request was withdrawn** — no new specs were written for a run that had ended. Absorptions and rulings were the only things worth finishing. |
-
-**What is genuinely finished and landed on `main` this cycle** (all gated by exit code, never by
-reading a printed line):
-
-- **Leg 381 (CLOC)** and **leg 385 (SCEL)** — landed earlier in the cycle, absorbed in full.
-- **Leg 233 (BVRRV)** — landed, and its §6 quartet later closed from banked JSON alone.
-- **Leg 384 (COBV), `a029565`, gate YES** — `CLAY_OBLIGATIONS.md` verified clause by clause,
-  17 MATCH / 6 MISMATCH / 0 UNVERIFIED, 23 of 23 planted controls firing in **both** directions.
-  All six corrections landed in the leg's own wording; STATUS header graduated from
-  DRAFT-UNVERIFIED to **verified as a specification** — explicitly a lesser thing than a theorem.
-- **Leg 386 (DTOL), `0ecaeee`** — CLAUSE 1 **YES**, CLAUSE 2 **EMPTY**, side by side, not netted.
-  §4's δ sub-question is **CLOSED and the answer is EMPTY at the α in play**; the tolerance buys
-  **zero** threshold headroom (30 rows, 0 exceptions, a step and not a slope).
-- **Leg 390 (DTOR), `e89cdbd`, gate YES** — **(D) deletes the acceptance test, not the work**;
-  periodization charges §4 back at **3.993989×** in deficit, or inherits leg 381's full cutoff
-  bill; **0 of 4** rigidity clearances carry to `T³`. **NO RETARGET RECOMMENDATION IS MADE**, by
-  the leg or by integration. The retarget decision is the user's.
-- **The bench caller-census unit** — gated **FAIL and returned unmerged** on its first attempt
-  (its green was ambient-dependent), then landed rescoped to `git ls-files`.
-- **Two DOCS-lane closures** — leg 233's quartet rebuilt from banked JSON (52/52, no re-run), and
-  `writeup/INDEX.md` rows for both Route-BVRRV v1 and Route-CLOC v1, each row stating **inside
-  itself** that its evidence script and figure were earned by a later hand.
-
-**WHAT THE STOP DOES NOT CHANGE.** The ceiling is **Tier 2**. `CLAY_OBLIGATIONS.md` §6 items 1
-and 2 are **OPEN** — no method exists in this repository for either. **§4 stays OPEN in every
-route-4 gate**, satisfied on its own terms by DTOL landing but *not* closed, on the
-admissible-cutoff half and on the absent profile. **No profile of route 4's object exists in this
-repository, on `ℝ³` or on `T³`** — the certified-enclosure chain (382 → 385 → 386, and 389 as far
-as it got) has no real input, and that is the hole the whole cycle circled. **No `L1 → L4` link
-moved. Clay stays ~0.05%.**
-
-**THE WIP LEDGER — every branch, its tip, and what on it is worth trusting.** All five units
-reported. Nothing below is merged; integration merged **no leg branch** at the stop, because that
-rule does not relax for a wind-down.
-
-| unit | branch | WIP tip | trustworthy on it | must be redone |
-|---|---|---|---|---|
-| PROG-R4 (A) | `prog/r4-programme` | `70ad21f` | one genuine bug fix (`run_recur` now honours the declared `n_snapshots` instead of differencing against a preallocated zero tail — that path was **silently wrong on any partial or resumed trajectory**); `fig97`/`fig98` evidence scripts, smoke-tested in both branches of each gate plus two doctored records they correctly reject | the entire `T=1e5` DNS from scratch (~2.8 h at the measured 0.92–1.08 ms/step); recurrence at full length; **a measured per-epoch cost before fixing U3's iteration caps** — never taken, and at current defaults the worst case is ~4 h per attempt, which does **not** fit 100 attempts; then U3 and U4 end to end. `u4_g2_basin.py` was written and **never run, not once, not even on synthetic data** |
-| 389 CT2C (B) | `leg/389-ct2c` | `9021fdd` | novelty (`8f495b7`) and pre-registration (`cc72f47`), both before construction; a *demonstrated* 8/8 showing leg 383's fitted path undisturbed | all four new functions, never executed once; all three pre-registered red paths, never started. **Live trap: `screen_candidate()` gained `certified_input`/`certified_delta`/`banked_exponent` in its SIGNATURE ONLY — passing them today is silently ignored.** Finish the wiring or delete the parameters |
-| 388 CRVB (D) | `leg/388-crvb-v1` | `fddcccd` | novelty (`5cbe659`) and pre-registration (`f2084ae`), in that order, both before any measurement. Its capabilities grep caught a real near-duplication: **`solver/interval_mp.py` (leg 312) already holds rigorous arbitrary-precision directed-rounded intervals** — import it, never build one — and it has **no logarithm**, so a high-precision arm must plant curvature *additively* in the log-log plane | **all measurement — zero ladder rungs were run at any precision.** The runner was never imported and never executed, so assume it is broken; its ZC/ZC-RED control pair has never fired in either direction, so the demonstrated red path its own pre-registration requires **does not exist**. Every number on the branch (`κ* = 8·h_eff/W²`, float64 `≈5.8e-16`, predicted bracket `[1e-16,1e-15]`, `−1.00`/digit slope, tolerance coefficient `0.377435` on `[10,1000]` only) is a labelled untested prediction |
-| 387 DXNV (bench) | `leg/387-route-dxnv` | `5305458` | the **arXiv half is discharged** — two CONTROLLED-ZEROs, control-validated in the same run; the namespace fix; the single hit assessed *predates-but-does-not-duplicate* | the Semantic Scholar half: **no validated zero**, its positive control never once returned 200. Leg 382's obligation stays **OPEN and re-queued**. `fig107` allocated but never drawn, so it is **free for reallocation** — as is `fig108`, which 388 never registered |
-| DM | `dm/cycle-11h` | `bee8dfa` | **merged to `main` at `c9d9aa1`** — the one exception to the landing freeze, because finished rulings are not WIP | nothing. Its five drafted specs (392–396) died in scratch and were deliberately not let into `DIRECTION.md` |
-
-**Two things on that table matter more than the rest, and both are corrections to beliefs this
-repository was holding.** First, **arXiv never refused once — 13 of 13 HTTP 200** — against
-eighteen journals recording arXiv and Semantic Scholar as a single 429 wall; legs may have been
-treating a live channel as dead. Second, **PROG-R4's stop is explicitly NOT a resourced null**:
-the DNS died at t=16,000 of 100,000 (16%), so §3d's stop did **not** fire and **route 4 has not
-been stopped on measurement**. Anyone reading the three UNANSWERED gates as a verdict on route 4
-would be reading them exactly backwards.
-
-**FOR WHOEVER PICKS THIS UP.** Read the WIP branches before believing anything on them; each was
-told to label untrusted numbers *inside the files*, not only in commit messages, and to write the
-word UNANSWERED against any gate it did not reach. `test_9`/§3b still cannot represent a
-wind-down state — that limitation is `reports/STATUS.md` item 8 and is the user's to rule on;
-no table was edited to fake it. The open questions for the user are in `reports/STATUS.md`, and
-the POCP spend decision remains theirs and was never pre-empted.
-
----
-
-## USER DIRECTIVE, 2026-08-11 — the contract is now **four** leg slots, not ten
-
-The user reduced the parallel Opus leg count from ten to four. `ORCHESTRATION.md` and
-`ORCHESTRATOR_PROMPT.md` are already updated and are the authority: slots are **LEG-A…D** and
-**VER-A…D**, the worker cap is **20** concurrent plus the DM, the §3b composition floor is
-**2 of the 4** live slots, and the §3a reserve watermark is **≤2 → draft at least 4 more**.
-
-Any roster below this line that lists ten slots is history. A fresh orchestrator dispatches
-four legs, not ten. The four in-flight slots to keep are the DM's call — forward this
-directive to the DM verbatim and ask for a re-ranked four-slot board before dispatching; the
-legs that lose their slot are returned to the reserve queue, not cancelled as findings.
-
----
-
-## Status: RESUMED — new orchestrator session, 2026-08-12, cycle 11 (four-slot contract;
-the TERMINAL state below is LIFTED by the user's consolidated rulings of 2026-08-11,
-received 2026-08-12)
-
-`origin/main` at `11f73a9`, merge gate **PASS**. The precondition the terminal block itself
-named — "check whether any user ruling has landed since this was written, and if so, execute
-it" — is now met. What has been executed so far, in order:
-
-1. **`plan_of_record.py` annotated** with §1's DSS scope ruling (`bb00a0d`). Neither ban
-   lifted; Ban 2's object scoped to its own wording; named-seed pre-registration required;
-   absent a named seed the ban applies in full; lift condition unchanged. This was routed to
-   integration by the ruling itself — the ban text is not the DM's.
-2. **`reports/STATUS.md` NEEDS-YOU re-headed** (`11f73a9`) with each item's new state named
-   individually, including the two items the rulings did NOT touch (item 2's tautological
-   pass; item 3's 35-leg spend) and the one that stays open by instruction (item 4, §5).
-3. **DM spawned** on branch `dm/cycle-11a` with the rulings verbatim, to produce the cycle-11
-   entry: the §1 record, the §2 screening stop with the FLOOR-TABLE re-synced under §3c, the
-   §3d re-reading of leg 353 as UNDER-RESOURCED-not-NO, the route-4 PROGRAMME spec under §3c,
-   the §4 verification work, and a ranked queue of ≥8 filling four slots.
-
-**Slots at this write: all four still vacant, nothing dispatched.** The DM's slot assignments
-will be cycle 11's first dispatch. Two items are parked on the DM's ruling rather than on the
-user: the disposition of `leg/313-sdss-v1` and `leg/320-mtsc-v1` (finished screening work in
-hand vs §2's stop on screening as a unit of work — figure numbers 72 and 76 are both free on
-main, so the recurring collision does not apply), and a stale reserve precondition the
-orchestrator found and did not act on unilaterally — the DM's roll-up has read "231-234
-(blocked on repairs 217/219/225)" for ~20 cycles, four legs against three repairs, and leg
-233's actual blocker is leg 221, which LANDED (`d19614a`, `3ff62f4`, `a2f1c8a`). No
-`p2_route_bvrrv_v1_postrepair.json` and no leg 233 commit exist, so its precondition now reads
-TRUE on its face; adjacent work has landed since (leg 307 adjudicated 221's two-scale
-counterexample yes-artifact, leg 335 adjudicated the `spike1_stepC_gate.json` gap
-REPRODUCIBLE_AS_BANKED) but 233's clause (b) appears unconsumed.
-
-### Board as of `d65419c` — all four slots live, and the roster is THREE-PLUS-ONE
-
-| Slot | # | State |
-|---|---|---|
-| A | 380 PROG-R4 | running; **U0 landed `dd35bbf`** (the one programme-level novelty pass + pre-registration, committed before construction). **Does not vacate on landing.** |
-| B | 386 DTOL | dispatched (refill for 381), `fig99` |
-| C | 385 SCEL | running |
-| D | 233 BVRRV | running |
-
-**STANDING RULE — user, 2026-08-11: the programme occupies a slot that does not vacate on
-landing, so the four-slot roster is effectively THREE-PLUS-ONE while it runs. Refills are
-planned against B/C/D only, and slot A's non-vacancy is never read as a stall.** Its floor
-consequence: PROG-R4 is construction-class and permanently eligible, so §3b needs only ONE
-more eligible leg among B/C/D to read 2/4. That slack is to be spent on the ranked obligations
-work — it is not a licence to fill B/C/D with non-eligible units.
-
-**Landed by integration this cycle beyond the merges:** `e2cfd94` — `CLAY_OBLIGATIONS.md`
-carries a **§4-scoped VERIFIED header** on leg 381's pass (§1/§2/§3/§5/§6/§7 stay DRAFT,
-UNVERIFIED), the `f ≡ 0` **refutation** and the (b)→**(C)** labelling fix, the priced cutoff
-bill, the **§4-stays-open-until-DTOL** rule, §7 marked still-unchecked, and §8 ask #1 recorded
-**SATISFIED** by POCP being the only open route. Leg 381 was correctly forbidden from editing
-that document and did not; these are integration's edits, landed on its report.
-
-**Audit gap recorded, not waived:** leg 381 landed with **no figure**, so its documentation
-quartet is incomplete on the figure limb. Territory was otherwise clean (novelty pass first,
-then only its own CLOC files). This is the second contract deviation of the cycle and is
-carried openly rather than dropped.
-
-**Housekeeping:** an orchestrator `git add -A` swept the ten stale `.legNNN-work` worktree
-directories in as embedded gitlinks; caught before push, dropped from the commit, and
-`.gitignore` extended so it cannot recur.
-
-### ⚠ STANDING HAZARD — `git <cmd> | tail && git push` swallows the failure
-
-**This defect occurred TWICE in one hour, independently, in two different agents (one of them
-integration itself), and it is the reason `main` went red on 2026-08-12.** In a shell pipeline
-the exit status is the **last** command's, so an `&&` guard reads `tail`'s success and proceeds
-no matter what the git command actually did.
-
-- **Integration's instance:** `scripts/merge_gate.sh origin/main | tail -2` masked a printed
-  `MERGE GATE: FAIL`, and the `&&` chain pushed on top of a red tree. The contract's "a FAIL is
-  fixed in your worktree and never pushed" was defeated by the checking method, not by a
-  judgement call.
-- **Leg 385's instance:** `git rebase origin/main 2>&1 | tail -3 && git push origin HEAD:main`
-  masked a **stopped rebase** — a conflict in `writeup/build_figures.py`, leg 381's fig104 line
-  against leg 385's fig103 line, both wanted and both ultimately kept. `HEAD` was parked
-  mid-rebase on commit 3 of 4, so the push landed **3 of 4 commits**: the new solver module
-  `solver/dssp_decay_samples.py` **without** the `capabilities.py` row that lived in commit 4.
-  That fails `test_every_solver_module_is_indexed` and therefore fails the merge gate **for
-  every agent in the run**. Leg 385's own gate had passed on its complete branch; the gate was
-  never run on the state that reached `main`.
-
-**Standing rules, now written into every dispatch brief:**
-1. **Never chain a push behind a piped git command.** Redirect to a file and test `$?`.
-2. **A mid-rebase `HEAD` is a publishable-looking pointer at an unpublishable state.**
-3. **Every new module under `solver/` is indexed in `capabilities.py` in the same commit**, or
-   the gate goes red for everyone.
-
-Both are the **"green light that cannot go red"** pattern — the same failure class as leg 233's
-fabricated zero and the planted-mismatch requirement integration wrote into leg 384's brief.
-**Four instances this cycle, two of them in the run's own machinery rather than in the
-science.** No scientific record was affected in either case.
-
----
-
-### Superseded status: TERMINAL — 2026-08-12, cycle 10pp (retained verbatim; its
-do-not-draft instruction is DISCHARGED by the rulings above, not overridden — the condition
-it set for lifting is the one that fired)
-
-**DO NOT DRAFT A LEG INTO ANY SLOT.** A successor session reading this file should not treat
-four vacant slots as an oversight to fix. Every standing research direction in this repo is
-blocked on one of the eight items in `reports/STATUS.md`'s NEEDS-YOU section; the reserve
-holds 5 undispatched legs (325 user-gated, 231-234 blocked), 0 immediately dispatchable
-without a ruling. Drafting fresh work now would mean manufacturing busywork to look occupied
-— explicitly the thing the DM's cycle-10jj/10nn/10oo/10pp rulings have refused to do, in that
-order, each with the machine gate's own 2-of-4 floor check confirming the honesty of doing so
-(one/two held-open slots beside eligible live legs passed; the DM's first cycle-10jj attempt
-to hold two slots open with nothing else eligible read 0/4 and the merge gate rejected it
-outright — that is the standing proof this repo already has that "just draft something" is
-not a neutral default here).
-
-**The one documented divergence, per DM cycle 10pp:** `test_9_composition_floor_is_met` was
-written to catch an under-staffed roster, not to represent a genuine, direction-exhausted full
-stop — a truly all-vacant 4-slot table reads 0/4 and fails the gate. This is why the
-FLOOR-TABLE in `DIRECTION.md` still carries rows for legs 376/377 (already landed) rather than
-four honest vacancy markers: it is a legal fiction kept only to keep the merge gate passing,
-while this prose block is the actual truth at higher prominence. Escalated to the user as
-`reports/STATUS.md` item 8 (whether to amend §3b/`test_9` to admit a real wind-down state, or
-rule the current divergence acceptable as standing practice). Not this session's call to
-resolve unilaterally.
-
-**What a successor session should actually do:** read `reports/STATUS.md`'s NEEDS-YOU section
-(items 1-8) end to end, check whether any user ruling has landed since this was written, and
-if so, execute it (which is likely to unfreeze several fresh research directions at once, per
-item 6's trigger inventory) — but if none has landed, the correct action is to report the
-terminal state honestly and wait, not to invent a ninth item or draft a leg to fill a slot.
-
-## Superseded status: RUNNING — same orchestrator session, 2026-08-12, cycle 10oo (four-slot contract;
-DM ruling chain 10jj through 10oo integrated; 379 LCB7 and 377 HCDX landed and audited clean;
-slots A and D BOTH formally HELD OPEN by DM ruling, not vacant by oversight)
-
-`origin/main` at `e97d9b9` (leg 376 R3SP landing), merge gate **PASS**. Roster:
-**A=HELD OPEN** and **D=HELD OPEN** — the DM's explicit, machine-lawful exception, extended to
-A in cycle 10oo on identical grounds to D's cycle-10nn original: with B/376 and C/377 eligible,
-`test_9` reads 2/4 and PASSES; the owed-work books and the accumulator are both empty; the
-reserve holds only user-gated and blocked entries (5 undispatched: 325, 231, 232, 233, 234, 0
-immediately dispatchable); drafting either slot now would mean manufacturing work rather than
-measuring something real. **Neither is an oversight — do not "fix" either by drafting a leg.**
-Both refill mechanically the moment any of the seven-plus-one pending user rulings on
-`reports/STATUS.md` lands (see that file's trigger inventory for which ruling unfreezes which
-downstream item). A prior DM attempt (cycle 10jj) to hold open TWO slots at once failed the
-merge gate's 2-of-4 floor check outright and was publicly revised; two held-open slots beside
-two eligible live legs (the current shape) is the lawful form of this, distinct from 10jj's
-failed attempt which held TWO open while only TWO were eligible (0/4). **B=376 R3SP LANDED**
-(`e97d9b9`) — resumed from the spend-limit-preserved WIP, re-verified rather than trusted: the
-"numerical wall" lead was real (Chebyshev-Lobatto clustering pushing leg 350's log-Boyd map
-past float64 underflow at N=60, fixed via closed-form weighted combinations) plus one
-independent, previously-unexercised drift-0 control-inversion bug found and fixed; both ℓ=1
-and ℓ=2 channels measured CONTINUOUS (ℓ=2 reported honestly as
-CONTINUOUS-BUT-PLANTED-CONTROL-CONVERGENCE-MARGINAL at N=60, clean from N=90). **C=377 HCDX
-LANDED** (`bc807ca`) — Boyd (1980) coefficient-decay concern resolved ADEQUATE for leg 374's
-surviving generalized-Hermite candidate via a measured Gegenbauer-equivalence argument (reading
-alone was insufficient — the literature stayed paywalled). Both landings independently audited
-(territory diff, `plan_of_record.py`/`DIRECTION.md` byte-identity confirmed empty, fresh
-detached-worktree gate re-run) before being reported to the DM.
-
-**Sequence since cycle 10d (all integrated cleanly via the standard detached-checkout /
-worktree-rebase-gate sequence; two mid-integration `origin/main` moves were caught and
-resolved by re-fetching and re-rebasing before the final push, no bad pushes):** legs 370
-(B7M), 371 (SFX), 372 (IDXB), 373 (HSFM), 374 (SBIV), 375 (PBLG), and 299 (TESTA) all landed
-and were independently audited (territory diff, `plan_of_record.py`/`DIRECTION.md` byte-
-identity confirmed empty every time, fresh detached-worktree gate re-run) before being
-reported to the DM. DM cycles 10jj/10kk/10ll/10mm/10nn integrated in sequence. Legs 376, 377,
-378 were then killed simultaneously by an API monthly-spend-limit fleet-kill; leg 378's
-complete-but-unpushed local commit was verified and pushed on its behalf (`1ba84bc`); leg
-376's genuine partial WIP was preserved under an explicit, honestly-labeled orchestrator
-commit (`57aff39`), never presented as a finished result; leg 377 had nothing captured
-(clean worktree, reported as zero progress). `reports/STATUS.md` item 6 was separately
-rewritten (`5d1321a`) to reflect decision-support exhaustion, the trigger inventory, and the
-standing wind-down clause. Full narrative detail lives in DM cycle-10jj through 10nn commit
-messages and the corresponding leg journal files — this block is a pointer, not a
-duplicate.
-
----
-
-## Superseded status: RUNNING — same orchestrator session, 2026-08-12, cycle 10d (four-slot contract,
-cycle-10 user decision packet COMPLETE AND RELEASED; user's post-S1 certification reframing
-executed as legs 348/349; leg 343 critical-path landing YES, B2 now dispatchable)
-
-`origin/main` at `0f6acf7` (leg 343's landing; the DM's cycle-10d ruling is at `5ff9bfd`), merge
-gate **PASS**. Roster: **A=335 S1GR** (still running, mid-diagnosis, waiting on a background
-diagnostic script — confirmed via its own transcript, not a stale "completed" task wrapper).
-**B=348 POCP** (dispatched, running in an isolated worktree — the user's §1 reframing leg: does
-periodic-orbit CAP for dissipative PDEs reach route 4's object). **C vacant** (343 DSSP-B1 landed
-`0f6acf7`, reported to the DM, awaiting refill ruling — B2 is expected next per the plan's own
-branching). **D=338 LCB1** (dispatched, running in an isolated worktree — light corrections batch,
-four named sites including the amended item (iv) covering 336's two flagged repeat sites).
-
-**Sequence since cycle 9f (all integrated cleanly, no conflicts, `origin/main` unmoved between
-integration and push each time):**
-- **DM cycle 10 (`ec462ee`)** absorbed 341/344/336, ruled ONE consolidated user decision packet
-  (ceiling S1-DIES answer + 342/344's ≈35-leg seed option on the corrected literature base +
-  route-4-continues-Tier-2 under standing authority), with leg 347 (DSSC) named as the packet's
-  final scheduled input. Refilled C←343 (critical path, precondition fired), B←347 (DSSC),
-  D←337 (C318) — firing the cycle-9e deadline. Requested isolated-worktree-per-leg as standard
-  practice, in direct response to leg 341's HEAD-move near miss; adopted immediately for all
-  dispatches from 343 onward.
-- **Leg 347 (DSSC) landed gate YES (`fb6bd4d`)** — screened all 12 objects arXiv:2509.14185
-  reports (3 CCF, 4 IPM, 5 Boussinesq) against leg 313's three-way screen object by object: 0/12
-  pass, 11/12 fail with named clauses, the 12th (unresolved 4th Boussinesq candidate) honestly
-  flagged incomplete/no-verdict. Zero cheap-entrance-shaped objects. The ≈35-leg creation-path
-  cost is unmoved; the risk record sharpens with object-level evidence of a
-  convergence-degrades-with-instability-order gradient, including one demonstrated
-  non-convergence case inside the module a DSS retarget would inherit from. Audited clean.
-- **The user's own message arrived mid-window: "AFTER S1's DEATH: the certification route,
-  reframed"** (2026-08-11, addressed to the DM). Reframes route 4's object as "not a profile in a
-  space" but "a periodic orbit of a dissipative PDE" (leg 260's own framing), naming mature,
-  never-touched-by-this-repo certification technology (Zgliczyński's self-consistent a-priori
-  bounds, Kuramoto-Sivashinsky/Arioli-Koch lines, Taylor-model flow-map enclosure, validated time
-  integration via arXiv:2305.08221) and asking whether it reaches route 4's actual object where
-  four profile-in-a-space certifications already died. Explicit guard: "the build is the next
-  ruling, not this leg's to start." Also proposes a non-blow-up GA fitness (NK-convergence) gated
-  entirely on the certification question, and records a reverse-engineered-fitness design as
-  blocked-on-348 with auto-pickup. Relayed to the DM in full; judged the DM's separately-requested
-  "one packet to the user" superseded by this message (it already showed full awareness of the
-  S1-DIES/seed-decision content), so no redundant packet was sent — explained transparently to the
-  user instead.
-- **DM cycle 10b (`67b108a`)** verified §0's factual claims first (leg 315's blocker confirmed
-  verbatim BCG-specific/hyperbolic-only; arXiv:2305.08221 confirmed already in the ledger; zero
-  in-repo prior art on Zgliczyński/Kuramoto/Arioli confirmed by grep) before drafting leg 348
-  (POCP, reserve rank 1, scoping-only, the user's "build is the next ruling" guard written
-  directly into the gate text) and leg 349 (GAFV, hard-gated on 348's report, NK-convergence
-  fitness-viability only, no GA compute on either branch).
-- **Leg 337 (C318) landed gate YES (`ce0e485`)** — re-measured leg 318's float64 mechanism
-  directly on the live scoping functions: `alpha_of` carries zero rounding error (exact by
-  Sterbenz's lemma), `r_crit` carries ≈0.88 ulp, amplified by δ_dis's sensitivity (1/alpha ≈
-  26.667), reproducing the observed residual. Corrected mechanism: 1 ulp amplified by 1/alpha —
-  NOT catastrophic cancellation; "leg 302's failure mode" label retracted as inapplicable. The
-  tautological control was rewritten falsifiable and re-run: passes for a real reason now.
-  Audited clean.
-- **DM cycle 10c (`7fcb66b`)** absorbed 347's YES without amendment and declared **THE CYCLE-10
-  USER DECISION PACKET COMPLETE AND RELEASED** — 347 was its final scheduled input. Drew an
-  explicit boundary: leg 348's future answer is a NEW decision item, not a late edit to this
-  packet. Refilled B←348 POCP (dispatched by the orchestrator immediately after integration).
-  Floor landed at 2/4 (348, 343) for a third consecutive cycle — noted openly by the DM as the
-  §3b minimum, the right shape while the corrections queue drains.
-- **Leg 337 (C318) audit reported to the DM; DM cycle 10d (`5ff9bfd`) absorbed it without
-  amendment** — the corrected ulp mechanism, the retracted "catastrophic cancellation"/leg-302
-  label, and the now-falsifiable-and-passing control all banked as reported. Cross-referenced one
-  lesson without minting a new rule: carrying a prior lesson's name onto a mechanism it doesn't
-  describe is the same mechanism-drift failure as closure #6 (leg 337 and leg 339 now jointly
-  witness it in the CORRECTIONS record). Refilled D←338 (LCB1, corrections rank 1, the cycle-10
-  item-(iv) amendment covering 336's two flagged repeat sites), dispatched by the orchestrator
-  immediately after integration. Floor restored to 4/4.
-- **Leg 343 (DSSP-B1, critical path) landed gate YES on both clauses (`0f6acf7`)** — "the space is
-  pinned, B2 proceeds." Consumed leg 341's S1-DIES verdict without re-litigating it, per the plan's
-  §2.9 branch B: the algebraically-weighted certificate space is dead, but §2.3's unweighted
-  vorticity/compactified-X space still stands for the search, and that is what B1 tested on its
-  own terms. Measured: the `2p+s>d` criterion made executable reproduces leg 313's s=1 crossing
-  and leg 331's measured tail exponents (all gaps <2%); the spectrum of `-Δ + ½(y·∇) + 1` on the
-  ℓ=0 radial channel, Chebyshev-collocated on leg 313's compactified variable, is measured
-  continuous — validated against a drift-0 analytic-null control and a planted Gaussian-well
-  positive control that converges a genuine isolated eigenvalue to 8 digits, proving the filter
-  can detect discrete spectrum. New figure fig91 shipped (genuine new measurement). Audited clean
-  (6 declared files, 778 insertions, 0 deletions). Reported to the DM; slot C now vacant, B2
-  expected next per the plan's own branching.
-
-**A fresh orchestrator reading this at Step 0b:** read this block, then the Environment notes,
-Known flakes and Incidents sections at the bottom of this file, then `PROGRESS.md`. Do not
-dispatch before Step 0b's own liveness sweep for unpushed local work. Check the DM for its refill ruling on slot C (343 landed; B2 is expected next per the plan's
-own branching) before dispatching into it yourself. Continue isolated-worktree-per-leg for every
-new dispatch. Watch for leg 335's actual completion — it has repeatedly emitted "completed"
-task-status wrappers while its own transcript shows it still mid-diagnosis waiting on a background
-script; do not treat the wrapper alone as a landing.
-
----
-
-## Superseded status: RUNNING — same orchestrator session, 2026-08-12, cycle 9f (four-slot contract,
-user's ceiling-raising programme ANSWERED)
-
-`origin/main` at `30e376d`, merge gate **PASS**. **A=335 S1GR** (resolves the leg-221 flag/repair
-gap, dispatched cycle 9e, still running). **B, C, D all vacant** — 344 (PKLR) landed `3ec2516`,
-341 (ALGW) landed `782a310`, 336 (C305) landed `d0248c6`, all reported to the DM; awaiting its
-refill ruling. Decision Maker reachable, last ruling `85c8209` (cycle 9f) integrated by rebase
-(clean, no conflicts, `origin/main` unmoved between integration and push both times).
-
-**THE CEILING-RAISING PROGRAMME IS ANSWERED: S1 DIES.** Leg 341 (ALGW) found that leg 260's
-algebraically weighted space — the "namable fourth space" the stage-V ban's own lift condition
-asks for — has already been realized in three independent lanes, each already dead by a different
-mechanism: sup-norm/collocation (Route-D, 11+ legs, exhaustively audited, 6.04x short of the
-needed bound at theoretical optimum, `a=0` only); coefficient/ℓ¹-weighted (legs 51/52, kernel/
-cokernel failure modes swap exactly at the critical exponent, no window anywhere, re-attempt
-already banned in `plan_of_record.py`); origin-conjugated/Mellin (legs 163/176, already
-algebraically weighted, dies orthogonally, no transfer to the needed regime). **Consequence: no
-lift-condition packet was assembled (S1 dies, per spec); the deferred §3 build is never drafted;
-the Tier-2 ceiling stands unchanged on every route-4 gate.** Leg 334's clause (a),
-OWNED-BY-341-PENDING, closes CLOSED-NO. S2 (the composition question) also dissolves as a
-secondary finding — leg 261's `u~|x|⁻³` was measured on a Gaussian witness, not the actual
-target; re-derived on leg 260's own Type-I rate, the target sits exactly on the log-divergent L³
-boundary leg 260 had already found independently by a different route. DSS position stated
-independently (leg 253, parked, read-only): NRS/Tsai's theorems pin to exactly-backward-SS
-profiles, and DSS-at-λ≫1 (leg 260's own target class) is the one corner they don't reach — a
-second, independent reason the wall doesn't bind the actual screened object. **No ban is lifted
-or touched by any of this — that ruling stays the user's, per their own directive.** Territory
-audited clean (3 declared files, 793 insertions), merge gate independently re-verified PASS. This
-was escalated directly to the user by the orchestrator, in the same turn as the DM report, since
-it is the direct answer to their ceiling-raising directive.
-
-One process note from leg 341, not a research finding: an unexplained mid-session HEAD move
-briefly landed a commit on a concurrent leg's branch (342's) instead of its own; leg 341 recovered
-via an isolated worktree with no lasting damage (confirmed in the orchestrator's audit — main's
-ancestry shows no corruption), but flagged as a possible collision-risk signal under concurrent
-dispatch in the shared main worktree, worth a fresh orchestrator's attention if it recurs.
-
-**Leg 340 (EGRB) answered leg 329's C4 reading question — and the answer is an identity, not a
-measurement.** Re-derived the bound with truncation fully controlled, in exact rational+π
-arithmetic (substitution X=tan(θ/2): every relevant integral collapses to
-R=(r1+q1π)/(r2+q2π) exactly, no floats in the exact path). At all 19 ladder rungs, for both
-`B4_egm` and `E_egm`, R = −1/2 EXACTLY: bound=1/2, margin=exactly 1e-9, dependence on the
-truncation parameter=exactly 0, enclosure width 1.4e-59 — against a measured eigensolve spread of
-1.927e-05/2.697e-05, reproducing leg 329's own banked 3.853e-05/5.394e-05 relative spreads.
-Structural cause: `Sym(B) = -G/2` entry-by-entry, because the nonlocal Hilbert term vanishes
-identically on `T2_egm` while `D_φ ≡ -1/2`. Eleven controls pass; six able to fire against,
-notably `A4_chen_hou` (non-constant `D_φ`) gives -0.5001506 and FAILS the ceiling — the instrument
-is not a tautology of the code itself. **Gate answers YES on this bound — but the pre-registered
-mandatory second reading (novelty §7e) is that since R=-1/2 is an identity, clause 5 is a
-TAUTOLOGY on this class and cannot come out otherwise: a flip of leg 178's original NO would be a
-flip ON AN IDENTITY, not a measurement.** The leg declined to adjudicate escalation #3 itself,
-deferring to the user per the standing cycle-8e ruling that this class of call is the user's, not
-the DM's or the leg's — escalated directly by the orchestrator. Territory audited clean (8
-declared files, 4636 insertions), merge gate independently re-verified PASS.
-
-**Leg 342 (SEED) landed gate YES via branch (ii)** — no screen-passing seed exists for route 4
-today (0/5 candidates pass leg 313's three-way screen + the cheap-entrance ban, including an
-adverse find: Kwon-Tsai `2011.02800` bifurcates off Landau solutions, the literal shape the ban
-forbids), but one creation path is named and costed: retargeting Hou's PINN/KAN machinery at the
-true non-axisymmetric 3D NS DSS ansatz, ≈35 legs at this leg's live rate. Consequence for leg
-334 clause (c): satisfied via the "none exists yet, here's the creation path" branch — 334's own
-plan hadn't landed yet at leg 342's dispatch time, so nothing was marked consumed. Territory
-audited clean (3 declared files, 469 insertions).
-
-**Leg 344 (PKLR) landed gate YES** — sourced 7-entry literature inventory sharpening 342's
-35-leg estimate. Headline correction: "Hou's PINN/KAN machinery" was a mislabel — full-text read
-of `2506.19243` shows KAN appears only as a citation, never used (plain MLP+SSBroyden); the KAN
-half traces to a separate paper (`2604.16842`) never applied to NS/Euler anywhere. New load-bearing
-find not in 342's net: `arXiv:2509.14185` (DeepMind+Buckmaster+Gómez-Serrano, "Discovery of
-Unstable Singularities," Sept 2025) — a better-validated Gauss-Newton/envelope-architecture line,
-near-machine-precision on CCF/IPM/Boussinesq, whose own authors name boundary-free 3D Euler as
-their next open problem and report explicit PINN failure modes. Net effect: the ≈35-leg estimate
-is unmoved numerically, but its largest risk (the DSS/time-periodic gap) is now confirmed against
-two independent literature lines instead of one, and a stronger retarget base is named. Territory
-audited clean (3 declared files, 383 insertions).
-
-**The decision now sitting on top of all four landings, routed to the user in `STATUS.md`
-NEEDS-YOU item #3**: 342/344's 35-leg creation path is costed against a route whose parent lift
-condition already failed (S1 dies). Spending it raises route 4's seeding completeness, not its
-Tier-2 ceiling. Is that spend still worth it under this programme, or should it be shelved?
-
-**Leg 336 (C305) landed gate YES** — two claim-bearing corrections to leg 305's landed prose,
-measured against 305's own ledger JSON: (a) "C1 has the largest elasticity" is FALSE, C9_a1 is
-2.27x larger; C1 remains "costliest constant" only under 305's separate smallest-|move_to_close|
-rule, which the SHARP/SLACK gate actually consumes. (b) "all seven capped rows" holds for six —
-C11_aR1 adjudicated inert-by-construction (its term multiplies R₁, exactly zero at r* by the same
-fact that defines r* as the saddle-node — a Lesson 90 tell, not missing data). **SHARP verdict
-UNMOVED** — rests only on M4_class=EXACT_IDENTITY (unanimous, all eleven rows) and the
-smallest-|move_to_close| rule, neither touched. Two downstream repeat-sites flagged
-(`experiments/JOURNAL.md:5018`, `writeup/INDEX.md:124`), left unedited (out of territory).
-Territory audited clean (6 declared files, 401 insertions, 16 deletions — the deletions are the
-two corrected claim sites, replaced with inline `[CORRECTED]` markers, originals preserved).
-
-**DM cycle 9f ruling (`85c8209`, integrated cleanly):** absorbed 340's identity finding (user
-escalation endorsed, DM adds nothing decisional beyond noting the knife edge decided at exactly
-1/2 is neither prior reading's naive victory) and 342's cost bracket (recorded and routed into the
-same 341-landing user decision packet, not drafted on DM authority — a programme-scale resource
-commitment is the user's call). Refilled under a stated §3b floor bind: the entire dispatchable
-reserve was non-eligible corrections/audit work, so filling both open vacancies from it would have
-put the floor at 1/4, below §3b's hard 2-of-4 minimum. Slot D got leg 336 (C305, corrections rank
-1); slot B got a fresh floor-eligible leg 344 (PKLR), drafted specifically to feed the 341-landing
-decision packet with a sourced inventory rather than one team's self-description. Floor landed at
-2/4 exactly (341, 344) — the minimum, not a margin; noted, and the next vacancy should restore
-margin if an eligible leg is available. A 334-landed record slip from an earlier cycle was also
-corrected in this ruling.
-
-**Heartbeat armed:** `CronCreate` recurring job, every 25 min, session-only (no `send_later` in
-this environment — see Environment notes). A fresh orchestrator session must re-arm its own
-heartbeat; cron jobs do not survive a session boundary.
-
-**A fresh orchestrator reading this at Step 0b:** read this block, then the Environment notes,
-Known flakes and Incidents sections at the bottom of this file, then `PROGRESS.md`. Do not
-dispatch before Step 0b's own liveness sweep for unpushed local work. Check the DM for a refill
-ruling on slots B/C/D before dispatching into them yourself.
-
----
-
-## Superseded status: RUNNING — same orchestrator session, 2026-08-11, cycle 9c (four-slot contract,
-user's ceiling-raising programme in force)
-
-`origin/main` at `a89d8b3`, merge gate **PASS**. **A=vacant** (334 landed, awaiting DM
-refill), **B=342 SEED** (route 4's seeding problem, user programme §4, dispatched cycle 9c, still
-running), **C=341 ALGW** (user programme §1+§2 merged — the fourth-space scoping leg that is the
-sole route by which the programme's ceiling could move Tier 2 → Tier 3; the DM's cycle-9d ruling
-made this leg's priority standing text in DIRECTION.md — a CEILING-GATE PRIORITY block: while 341
-is in flight, its stall/resume/consequence work takes any vacancy ahead of the entire reserve),
-**D=340 EGRB** (truncation-controlled re-derivation of the C4 bound, dispatched cycle 8e, still
-running). Decision Maker reachable, last ruling `8a7be9c` (cycle 9d) integrated by rebase (clean,
-no conflicts).
-
-**Leg 334 (DSSP) landed gate YES on all four clauses** — `a89d8b3`, territory audited clean (4
-declared files, 1974 insertions, 0 deletions; plan_of_record.py/DIRECTION.md untouched). This is
-the route-4 programme plan itself: Tier 2 ceiling stated in every one of nine drafted bricks,
-mechanically checked not asserted. Clause (a) (the weight-collision question) was drafted before
-the DM's cycle-9 §5 ruling reached the leg; once relayed, the leg retained and re-labelled its own
-analysis as context offered to leg 341 rather than asserting a conclusion — recorded
-OWNED-BY-341-PENDING, both branches named, programme shown robust to either. Its own criterion
-(2p+s>d) reproduces leg 313's measured s=1 crossing without being fitted to it, and shows leg
-331's divergence is 100% weight-driven — flagged as a cross-check between not-obviously-
-independent derivations, not proof. Independent gain: vorticity of a Type-I profile lands in
-*unweighted* L²(ℝ³) (2p+0=4>3), a second argument for the vorticity formulation. Clause (c)
-(seeding) re-measured independently, still empty — S1 (Hou-continuation) rejected as exactly
-Entry A's banned bifurcation, strategy dropped, no ban touched; cost bracketed 34–370 legs. B9
-struck (not just unscheduled) as superseded by the DM's 341-gated §3 build. Leg's own consistency
-checker broke and passed vacuously (lesson-90 class) — caught and fixed with an assert, banked in
-the journal. Reported to the DM; awaiting slot-A refill ruling.
-
-**Cycle 9c/9d (DM), absorbed:** leg 339's landing (see below) was adjudicated — over-read closure
-#6 executed in full, width stands, grounds corrected, the DM applied its own two DIRECTION.md
-site corrections. Slot B refilled with leg 342 (SEED). The user's separate ranking-confirmation
-message on leg 341 was answered: 341 was already live one rank ahead of the ask (dispatched into
-slot C at cycle 9b when it freed, not held in reserve behind 340) — the CEILING-GATE PRIORITY
-block cited above is the DM's response, making that explicit as standing text.
-
-**THE USER'S CEILING-RAISING PROGRAMME (2026-08-11, directive addressed to the DM, relayed in
-full): "nothing below displaces leg 334 or leg 339."** Problem: leg 334 (DSSP) was the only
-Clay-directed route in the queue and its ceiling is Tier 2 by design — a route that cannot
-produce a proof cannot produce a Clay solve. This programme adds "the missing half": leg 341
-(ALGW) scopes whether leg 260's algebraically-weighted space is the "namable fourth space" the
-stage-V ban's own lift condition asks for; if it escapes the three-realization death AND the CAP
-apparatus has a coherent formulation there, the evidence packet goes to the user for a ruling (the
-leg itself lifts nothing). A deferred §3 "build" (CAP machinery in that space) is gated entirely
-on 341's report and the user's ruling — if it lands, route 4's ceiling moves Tier 2 → Tier 3,
-**the sole justification for the programme**. Leg 342 (SEED) scopes route 4's seeding problem
-independently. §5 ownership is ruled: leg 341 owns the Gaussian-weight-vs-algebraic-tail question;
-leg 334's clause (a) narrows to consuming 341's answer, not re-deriving it (relayed to the
-in-flight leg 334 by the orchestrator on the DM's cycle-9 ruling).
-
-**Cycle 8e ruling (`476e794`): the C4 pre-registration defect flagged by leg 329 is RULED — the
-literal pre-registration governs, 329's NO stands.** Three grounds: (a) the 5.19e-18/1.42e-18
-bound margin is thirteen orders smaller than the 3.85e-05/5.39e-05 truncation sensitivity C5
-itself measured, and a Rayleigh quotient one-sides the *truncated matrix's* eigenvalue, not the
-operator clause 5 is about; (b) these rows sit at EGM's published +1/2, a knife edge, and the
-standing 318/302 lesson is that knife edges are decided in exact/enclosed arithmetic, never by
-which side a float lands on; (c) overriding a fired control in the hoped-for direction is exactly
-what novelty §7d forbids — the leg's refusal to do so is endorsed by name. The bound reading
-earns its own gate instead: **leg 340 (EGRB) drafted at reserve rank 1** — does a
-truncation-controlled bound (re-derived at every C5 ladder rung / with an explicit
-truncation-error enclosure) hold clause 5 with a margin that survives the ladder? Escalation #3
-stays parked until 340 answers. Slot B refilled with leg 339 ORC6. `.gitignore` fix endorsed.
-
-**Leg 330 (PVLX) landed gate YES-(ii): Pineau-Vicol does NOT reach the screened object** —
-`5496bbc`, territory audited clean (its 3 declared files only). Deciding clause quoted verbatim:
-"There exists λ̲ = λ̲(C_U,0) > 1, such that if 1 < λ < λ̲, then U ≡ 0" — the paper's own proof
-caps that window near 1 (WLOG λ̲ ≤ e^{1/2} ≈ 1.6487, smallness requirement (1+α²)S < 2 log λ̲ ≪
-1, final choice "sufficiently close to 1"), against the screened object's λ specified
-significantly larger than 1. Two independent reinforcements (their own DSS theorem restates
-Chae-Wolf's, already screened via leg 253; their weak-L³-at-every-phase bound carries its own
-open, non-explicit conditions, recorded honestly). One genuine large-λ corner exists (RSS
-sub-locus, λ ≥ 10^21935.3 under leg 262's most favorable constants) — recorded as indicative,
-not certified, verdict unchanged. **This closes the last open thread in the leg 313/320
-NEEDS-YOU packet — see NEEDS THE USER below, now complete and ready for the user's ruling.**
-
-**Leg 331 (NLH) landed gate NO, critical path** — first measurement (not just naming) of the
-(iv_a) obstruction: an algebraic tail (measured exponent 1.507674/2.012245/2.517908 against
-predicted 1.5/2.0/2.5) meets the Gaussian weight e^{x²/4}; nonlocality is only the tail-producer,
-not the direct cause Remark 40 names. Reframing routed to, and absorbed by, the DM: leg 334's
-plan clause (a) must now resolve the collision between this finding and leg 332's vorticity-space
-finding (which lands exactly on that same Gaussian weight, since Biot-Savart is nonlocal) — or
-route the blocker to the user. DM also drafted leg 339 (ORC6, rank 1) for the closure-#6
-correction deferred to this landing (adjudicates the closed-three-ways sites on both measured
-answers). Leg 334 dispatched into slot A once both its preconditions (331 AND 332 landed) were
-satisfied.
-
-**Leg 329 (EGMF) landed gate NO.** DM's float64-artifact thesis for `clause_quad_stable`
-confirmed as arithmetic (MP repairs the pointwise contraction by 6-7 orders of magnitude), but
-two pre-registered controls able to fire against a flip both fired (C5: rcond ladder; C4: MP
-Rayleigh vs eigensolve disagreement matching `cond(G)·eps`) — obstruction moved from a pointwise
-cancellation to a float64 whitened assembly/eigensolve the patch can't reach. Escalation #3 stays
-parked. **Flagged to the DM, unadjudicated by the leg on its own authority:** C4's residual is
-actually a one-sided bound on the gap, not an agreement test as pre-registered, and the exact
-bound lands *below* 1/2 (~5.19e-18 / 1.42e-18) — read that way, clause 5 would pass and the gate
-would flip to YES, re-triggering escalation #3's yes-branch. This is the one open thread that
-could change the answer; the DM's call, not the orchestrator's or the leg's.
-
-**Housekeeping fixed directly by the orchestrator, not leg territory:** leg 329 self-caught a
-`.venv` symlink landing on `main` by accident (`.gitignore`'s `.venv/`/`venv/` patterns, trailing
-slash, don't match symlinks) and removed it in a follow-up commit; the orchestrator then fixed
-the root cause at `fd43ac8` by adding slash-less pattern variants.
-
-**Prior-cycle landings (8/8b), all audited and pushed:** leg 221 (BVRR) — gate YES on the repair
-itself (0/256233 calls moved), flagged one real unresolved gap outside its own territory
-(`spike1_stepC_gate.json` artifact doesn't reproduce with the repair absent, 13.2% shift, two
-predicates flip), handed to the successor — this resolved leg 307 (TSCX)'s precondition to
-dispatchable. Leg 333 (SHELL) — gate NO, 3D NS at dissipation degree α=2/5 in the Katz–Pavlovic
-hierarchy, inside its undecided window. Leg 332 (VORT) — gate NO, the Leray obstruction of legs
-257/261 fails to survive re-derivation in the vorticity formulation (fails at step S4, tail lives
-in `ker(curl)`); positive content (reconstructed Biot-Savart velocity lands in L³(ℝ³), the
-NRS/Tsai admissibility wall) bound into leg 334's plan. Leg 326 (CTRX) — gate YES-(ii), Chae-Tsai
-does not reach the screened object — see NEEDS THE USER below. Four correction legs (335 S1GR,
-336 C305, 337 C318, 338 LCB1) drafted, not yet dispatched; leg 339 (ORC6) now drafted at rank 1
-ahead of them.
-
-**NEEDS THE USER — packet update now COMPLETE, ready for ruling:** leg 313's escalation packet +
-the DSS ban-wording question remain bundled and explicitly routed to the user by the DM's own
-text ("the DM does not rule on ban scope"). Both threads that were open are now closed: leg 326
-found the packet's only theorem (Chae-Tsai) does not bite (Euler-only, no viscosity term), and
-leg 330 found the second candidate it flagged (Pineau-Vicol) also does not reach the screened
-object (λ-window caps near 1 against an object specified with λ significantly larger — see
-cycle 8e/leg-330 status above for the full finding). What remains in the packet: leg 260's
-dissolved argument plus an empty seed set leg 313 itself called "an availability fact, not an
-impossibility" — no theorem in the literature searched so far reaches the screened object. No
-ban touched, `plan_of_record.py` untouched. `leg/313-sdss-v1` and `leg/320-mtsc-v1` remain
-parked, not merged — do not merge them without the user's ruling. **This is the complete packet;
-nothing further is pending on the orchestrator's or DM's side.**
-
-**Heartbeat armed:** `CronCreate` recurring job, every 25 min, session-only (no `send_later` in
-this environment — see Environment notes). A fresh orchestrator session must re-arm its own
-heartbeat; cron jobs do not survive a session boundary.
-
-**A fresh orchestrator reading this at Step 0b:** read this block, then the Environment notes,
-Known flakes and Incidents sections at the bottom of this file (in particular the two most
-recent leg-221-worktree and near-miss-parked-merge incidents), then `PROGRESS.md`. Do not
-dispatch before Step 0b's own liveness sweep for unpushed local work.
-
----
-
-## Superseded status: RUNNING — same orchestrator session, 2026-08-11 ~17:50 UTC, **cycle 4**
-(§9d handoff)
-
-`main` at `63d973a`, merge gate **PASS**. Ten slots live, Decision Maker live and reachable.
-This block supersedes the cycle-1 roster below; the cycle-1 block is left intact as history.
-
-**A fresh orchestrator reading this at Step 0b: read this block, then the Environment notes,
-Known flakes and Incidents sections at the bottom of this file, then `PROGRESS.md`. Do not
-dispatch before Step 0b's own liveness sweep — environment note 3 says this file has been
-stale by days before.**
-
-### Live-slot roster, cycle 4
-
-| Slot | Leg | Route | Dispatched | Floor-eligible |
-|---|---|---|---|---|
-| A | 312 | APIA — arbitrary-precision interval arithmetic (steer item 1) | cycle 3 | **yes** |
-| B | 221 | BVRR — `boussinesq_rescaled.py` repair (long-lived, resumed on 3 WIP commits) | cycle 1 | no |
-| C | 323 | CENV — census variant re-run under MF1 | cycle 3 | **yes** |
-| D | 313 | SDSS — does leg 260's obstruction survive seeding? (steer item 3) | cycle 4 | **yes** |
-| E | 314 | FUS — finite-unstable-spectrum classification (steer item 5) | cycle 4 | **yes** |
-| F | 321 | BLCX — blog L102/L108 + two gate-text pointers | cycle 4 | no |
-| G | 320 | MTSC — Malmquist–Takenaka scoping (from escalation #8) | cycle 3 | **yes** |
-| H | 229 | PNRV — post-repair verification of leg 226 | cycle 1 | no |
-| I | 292 | CAPA — `capabilities.py` freshness audit | cycle 1 | no |
-| J | 287 | EPA — environment-portability census | cycle 1 | no |
-
-Floor **6/10**, well above §3b's minimum of 3. **Reserve 17** — 315, 318, 322, 324, 293, 298,
-299, 321, 305, 306, 307, 308, 310, 231–234; immediately dispatchable **7**. Blocked with known
-triggers: 308 on 312, 307 on 221, 310 on 287+298. **Next fresh leg number: 325.**
-
-**Legs closed this session (10):** 297 (`b2d750b`), 304 CADX YES(i) (`b319449`), 300 P0TCV NO
-(`5e30bf3`), 311 IVAX YES (`2a3dcbe`), 301 FSB YES = **escalation #8, parked**, 286 CNRV YES
-(`fe5e84d`), 303 GAF YES (`fc8bb1f`), 280 PUB2X YES (`fec7b4c`), 316 DFRE YES (`a863de2`),
-302 P2T1 NO (`55166b8`), 309 GAF2 NO (`5145002`), 317 SFTX NO (`1bc3977`), 319 P0TCR NO
-(`f213be7`, landed by a landing agent after the DM's ruling).
-
-**The one result a successor must not mis-carry:** leg 309 refuted arXiv:2604.09949, the only
-claimant ever found in the Grade-A/fluid cell. The cell **stays empty** and Phase 1's premise
-**stands**. That is a restored assumption, **not** a moved link — do not let it be written up
-as progress.
-
-**Standing rules adopted this session, binding on every future leg:**
-1. **Dispatched gate text is immutable** (from leg 319's NO, adopted by the DM). A
-   pre-committed gate records what was *asked*; editing it corrupts the audit trail. Wrong
-   values in gate text get `CORRECTIONS.md` **pointers**, never edits.
-2. **Apparatus specs must grant `capabilities.py` + `test_capabilities.py` territory
-   explicitly** if the leg is expected to bank a `solver/*.py` module — `test_capabilities.py`'s
-   index gate has teeth, so a leg without that territory cannot land a module (leg 302's
-   process note, adopted by the DM).
-3. **Assess before running anything long** (the user's instruction, 2026-08-11): estimate
-   runtime, improve the hot path if over ~10 minutes, record estimate/change/achieved. Not a
-   licence to weaken a gate to make it cheap. Now in `CONTINUATION_PROMPT.md`.
-4. **Search with spelling variants** — `Navier--Stokes` (LaTeX double hyphen), unhyphenated,
-   `self similar`. See method finding MF1 under Incidents.
-
-**Open with the user, none of them blocking (see `PROGRESS.md` for the full statements):**
-the Cadiot ban-wording question (leg 304 ran the lift clause's named pass and its result
-*confirmed* the ban's justification — **not lifted**), leg 301's Malmquist–Takenaka fourth
-space (escalation #8, branch `leg/301-fsb-v1`, never merged), the leg-251 Phase-1 packet
-(PR #20, now also gating leg 266), leg 257's stage-V ban-lift recommendation, leg 129/188's
-Bowman dealiasing rule.
-
----
-
-## Superseded status: RUNNING — fresh orchestrator session, 2026-08-11 ~15:30 UTC, cycle 1
-
-`main` at `3ff808b`, merge gate **PASS**. Ten leg agents dispatched, heartbeat armed. The
-Decision Maker (Fable 5) is live and reachable for the duration of this session.
-
-**What this session did at Step 0, before dispatching anything:** acting on environment note 3
-below, it cross-checked this file's live state against `git log` and found it stale by four
-days. It then swept every local branch for commits that existed nowhere on `origin` — the
-2026-08-11 incident class — and found **17**: `leg/266-p0tc-v1` (a *finished, unpushed GATE
-YES*), `leg/221-bvrr-v1-resume` (real WIP), `leg-275-work`, and 14 anonymous
-`worktree-agent-*` branches. All 17 are now on `origin` (the two named branches under their
-own names; the rest under a `snapshot/` prefix). Nothing was lost, but leg 266's finished
-result had been sitting unpushed since 2026-08-07.
-
-### Live-slot roster, cycle 1 (dispatched 2026-08-11 ~15:25 UTC)
-
-| Slot | Leg | Route | Branch | Fresh/resume | Floor-eligible |
-|---|---|---|---|---|---|
-| A | 300 | P0TCV — **critical path (P0)** | `leg/300-p0tcv-v1` | fresh | no |
-| B | 221 | BVRR | `leg/221-bvrr-v1-resume` | resume (3 commits WIP) | no |
-| C | 301 | FSB | `leg/301-fsb-v1` | fresh | **yes** |
-| D | 302 | P2T1 | `leg/302-p2t1-v1` | fresh | **yes** |
-| E | 303 | GAF | `leg/303-gaf-v1` | fresh | **yes** |
-| F | 304 | CADX | `leg/304-cadx-v1` | fresh | **yes** |
-| G | 286 | CNRV | `leg/286-cnrv-v1` | resume (novelty pass only) | no |
-| H | 229 | PNRV | `leg/229-pnrv-v1` | resume (novelty pass only) | no |
-| I | 292 | CAPA | `leg/292-capa-v2` | resume (novelty pass only) | no |
-| J | 287 | EPA | `leg/287-epa-v1` | fresh (no branch ever existed) | no |
-
-Floor 4/10, above §3b's floor of 3. Territories verified disjoint at dispatch: no two legs
-name the same `solver/` module or the same `writeup/data/*.json`.
-
-**Reserve (DM's canonical line): count 14** — 293, 298, 299, 305, 306, 307, 308, 309, 310,
-280, 231, 232, 233, 234. Immediately dispatchable: 3 (293, 298, 299). **Next fresh leg
-number: 311.**
-
-**Open with the user, carried forward unchanged, none re-raised by this session:** leg 297
-(anchor-JSON re-bank ruling), leg 280 (sign-off), the leg-251 Phase-1 packet, leg 257
-(stage-V ban-lift recommendation), leg 129/188 (Bowman dealiasing rule).
-
-**No verifiers or support agents are live yet** — verifiers are spawned per §4's trigger (a
-leg about to consume a prior headline, or a claim-bearing leg that has landed), not
-idle-run, and nothing has landed yet this session.
-
----
-
-## Superseded status: PAUSED — SESSION-WIDE USAGE LIMIT HIT (2026-08-07, ~00:03 UTC / ~01:03 BST)
-
-**Five background agents failed simultaneously** (legs 236, 226, 248, verify-256, and leg 261's
-sibling checks) with the identical error: `"You've hit your session limit · resets 1am
-(Europe/London)"`. This is an account-wide usage limit, not an individual agent failure — it is
-external to this run and cannot be worked around by retrying. **The orchestrator stopped
-dispatching new agents the moment this was detected**, per the same discipline as an
-externally-forced stop (this is not a graceful user-requested close, nor a context-exhaustion
-handoff — those get different procedures; this is neither).
-
-**What the orchestrator did before pausing, all completed and pushed to `main`:**
-
-1. Checked every failed agent's worktree for salvageable work.
-2. **Leg 261 (P1A2, relaxed fluid census) had actually finished** — a complete, well-documented
-   GATE NO (0 survivors of 18 fluid rows under the relaxed evidence tier; screen (iv_a),
-   Remark 40's stated reach, kills all 18 because incompressibility is a nonlocal constraint no
-   fluid row can pass by construction) — its agent just died before running its own finish
-   protocol. The orchestrator verified territory, rebased, ran the merge gate (PASS), and pushed
-   it to `main` on the leg's behalf: commit `28545ce`.
-3. **Legs 236, 226, and 248 had real but incomplete work** (repairs in progress, one runner
-   partially written). Salvaged as WIP and pushed to new branches — **none merged, none gated,
-   raw salvage only**:
-   - `leg/236-rddep-v1-wip2` — 699-line runner in progress (D3/D4 exclusion-axis analysis)
-   - `leg/226-pnr-v1-wip2` — repair to `solver/profile_newton.py` in progress (D2 gauge test +
-     D3 decay-class test being wired into `converged`)
-   - `leg/248-cnr2-v1-wip2` — repair to `solver/collocation_newton.py` in progress (leg 150's
-     absolute-companion fix)
-4. **verify-256 (leg 256's post-landing verifier) had nothing to salvage** — no commits, no
-   uncommitted changes at time of failure. Leg 256 itself already landed clean on `main` at
-   `68c74de` before its verifier died; the verifier's own review is simply unfinished and needs
-   re-dispatching once the session limit resets.
-
-## What the next orchestrator (or this same session, once the limit resets) must do first
-
-1. **Do not immediately re-dispatch a fresh batch of ten agents.** Check whether the usage limit
-   has actually reset (the error names ~1am Europe/London; confirm the current time is past
-   that before assuming capacity is back) — a premature re-dispatch will likely fail identically
-   and waste the attempt.
-2. Resume/recreate the Decision Maker (Fable 5) — it was mid-cycle, DIRECTION.md is its own
-   durable state and is fully current as of this pause (commit `6a795cd` and earlier, all synced
-   to `main`).
-3. **Re-check every "live" slot's actual state before trusting it** — five of them were
-   interrupted mid-flight (see below); their agent processes are gone.
-4. Re-spawn fresh agents for the interrupted slots, resuming from the WIP branches above where
-   real work exists (236, 226, 248) or from a clean restart where nothing was salvageable
-   (verify-256's re-dispatch).
-
-## Live-slot roster at pause (branches, not live-process guarantees)
-
-| Slot | Leg | Route | Branch | State at pause |
-|---|---|---|---|---|
-| A | 266 | P0TC (rework) | not yet dispatched | DM drafted this rework leg (re-poses leg 251's certificate obligation #1 per the verifier's finding) but the orchestrator had not dispatched it before the limit hit — **dispatch this first**, it's blocking the user-facing packet on leg 251. |
-| B | 249 | H2CV2 | `leg/249-h2cv2-v2` | Was mid-flight (independently re-deriving leg 176's certificate, found leg 176's "truncation-independent" tail descriptor may not hold at quoted precision — potentially real gap in PUB2's 4.026 figure). Last nudge sent, no completion notification received before the limit hit — **status unknown, re-check the branch for a finished commit before assuming it needs a full restart.** |
-| C | 260 | DSSB | `leg/260-dssb-v1` | Was mid-flight (Entry B scoping: function space/object/price for the DSS expensive entrance). Status unknown at pause — re-check branch. |
-| D | 221 | BVRR | `leg/221-bvrr-v1` | Was mid-flight, firmly re-nudged twice, found live orphaned processes writing to its own comparison baseline. Status unknown at pause — re-check branch. |
-| E | 248 | CNR2 | `leg/248-cnr2-v1-wip2` | **CONFIRMED interrupted, WIP salvaged** (see above). Real repair in progress, not finished. |
-| F | 236 | RDDEP | `leg/236-rddep-v1-wip2` | **CONFIRMED interrupted, WIP salvaged** (see above). Runner in progress, not finished. |
-| G | 267 | FDL | not yet dispatched | DM drafted this fresh literature leg (precedent census for BCG's stability-step argument shape) but the orchestrator had not dispatched it before the limit hit. |
-| H | 261 | P1A2 | — | **LANDED** by the orchestrator on the leg's behalf, commit `28545ce`. Slot is genuinely vacant, needs a fresh assignment from the DM. |
-| I | 252 | VBRG | `leg/252-vbrg-v1` | Was mid-flight, nudged to finish in foreground. Status unknown at pause — re-check branch. |
-| J | 226 | PNR | `leg/226-pnr-v1-wip2` | **CONFIRMED interrupted, WIP salvaged** (see above). Repair in progress, not finished. |
-
-**Support in flight at pause:** verify-256 (leg 256's post-landing verifier) — confirmed dead,
-nothing salvageable, needs a fresh re-dispatch.
-
-## What this session accomplished before pausing (full detail in `experiments/JOURNAL.md`'s
-tail and the git log)
-
-This was an extremely eventful single cycle. Landed on `main`: legs 250 (PUB2 σ_min citation
-fix, verified), 258 (composition floor locked into code), 255 (Phase 1 census, verified), 178
-(WES, landed under the user's ruling), 256 (Breden-Chu reproduction, gate YES), 261 (relaxed
-fluid census, gate NO — landed by the orchestrator post-agent-death). The user's ruling on leg
-254 (DSS ban split) was applied directly to `plan_of_record.py`. The user's ruling on leg 178
-(WES) was forwarded, processed by the DM, and executed.
-
-**The single most consequential event: leg 251 (Phase 0) named its Phase-1 candidate** — the 3D
-compressible Navier-Stokes imploding self-similar profile (BCG/CGSS, γ=7/5), explicitly flagged
-as compressible NS, not the incompressible system Clay's problem asks about. Parked as PR #20,
-NOT merged (correctly, per its own gate). An independent verifier confirmed nearly everything at
-primary source but found ONE load-bearing gap: certificate obligation #1 asks to enclose a
-"profile system of the dissipative equation" that doesn't exist at BCG's scaling (dissipation
-enters only as a decaying forcing term, never a stationary profile term) — the real gap is in
-the stability step. The DM cut a rework leg (266, drafted, not yet dispatched) to re-pose just
-that one obligation before anything goes to the user as final.
-
-Two more major escalations, both still parked pending the user's ruling:
-- **Leg 253 (NRSX)** — pinned the NRS/Tsai exclusion at full text, narrowed Phase 0's survivor
-  classes, surfaced a fourth candidate class (Pineau-Vicol rotated self-similar, 28-day-old
-  preprint) — later independently confirmed viable by leg 262's adversarial full-text read
-  (landed on `main`), which also found the class necessarily has infinite kinetic energy, so
-  even total success there resolves Perelman's conjecture, not Clay.
-- **Leg 257 (P1C)** — confirmed the stage-V ban's lift clause is satisfied on paper (Breden-Chu's
-  H²(µ) space evades all three prior death mechanisms) but independently found a NEW obstruction
-  (the Leray projection provably leaves L²(µ)) that closes the fluid route through this space
-  regardless of the ban question.
-
-**⚠ NEEDS YOU, as of pause** (also in `PROGRESS.md`, more current):
-1. Leg 257's stage-V ban-lift recommendation (the DM drafted a recommendation: lift it, since
-   the space is validated for non-fluid targets even though the fluid route is independently
-   closed) — awaiting the user's ruling.
-2. Leg 251's named candidate — awaiting the verifier-confirmed correction (leg 266, drafted, not
-   yet dispatched) before it should be treated as final, and awaiting the user's read once
-   corrected.
-3. Leg 129/188 (Bowman dealiasing rule, escalation #4) — still parked, unchanged this session.
-
-## Run
-
-| Field | Value |
-|---|---|
-| `main` SHA at pause | `28545ce04979bf0f337ad0f3ba93ca3c60436672` |
-| Highest leg number drafted | 267 (leg 268 next) |
-| Stop reason | External, hard usage limit (account-wide, not context or user-requested) — resets ~1am Europe/London |
-| Self-chain scheduled? | No — this is a pause expecting the same session (or a manually-restarted one) to resume once capacity returns, not a context-exhaustion handoff |
 
 ---
 

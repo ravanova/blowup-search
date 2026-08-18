@@ -1,484 +1,204 @@
 # STATE — the compact working surface
 
-**This file is the read surface for ALL modes.** Read it first and read it instead of
-`DIRECTION.md`. Everything else is archive, consulted only when a pointer here names it.
+**Read this instead of `DIRECTION.md`, which is never read (§3e).** Everything else is archive,
+consulted only when a pointer here names it. **Regenerated at every landing**, under `ORCHESTRATION.md`
+**§3j**'s caps: this file **≤24 KB, no row over 600 characters**. A row's job is to let you decide
+whether to open the journal — not to summarise it. **Numbers are cited by JSON field, not restated.**
 
-**Why it exists.** `DIRECTION.md` is 23,699 lines / 1.5 MB (~380k tokens). With the other
-mandatory reads the per-agent load is ~480k tokens — paid by *every* agent in orchestrated
-mode, and on *every task* in solo mode. That cost is pure overhead: a task needs its own
-entry, the live bans, and what landed recently, not the accumulated cycle history.
-
-**Regenerate at every landing.** Stale state is worse than no state — this file is only
-trustworthy if it is rewritten as part of finishing a task, the way `JOURNAL.md` pointers are.
-
-**REGENERATED 2026-08-14** with the wave-3 plan, after the user's ruling on
-`ESCALATION_C1_EXEMPLAR_2026-08-14.md`. Waves 1 and 2 are compressed to their landed rows; their
-full gate texts and pre-committed readings are in the git history at `a384d92` and `c1a8d5e`, and
-abbreviated in `reports/ORCH_STATE.md`.
-
----
+**REGENERATED 2026-08-18** at wave 3's integration. Waves 1–3 are compressed to their landed rows.
+Gate texts are immutable on `main` and are quoted **by pointer**: wave 1 `a384d92`, wave 2 `c1a8d5e`,
+wave 3 `42011ff`.
 
 ## Mode
 
-**CONDUCTOR** — one long-lived entity owning both direction and integration, dispatching waves
-of 2–4 self-terminating workers. See `ORCHESTRATION.md` **§3g** for the contract and **§3h** for
-what a wall-breaking mandate does and does not license.
-
-*(§3f SOLO and the four-slot contract of §§2–5 both remain available and are unchanged.)*
-
-> **WOUND UP 2026-08-14 ON THE USER'S INSTRUCTION — WAVES 1 AND 2 BOTH COMPLETE, NOTHING IN FLIGHT,
-> EVERYTHING PUSHED.** All nine units of both waves returned, were audited against their
-> pre-committed gates and landed; `main` is clean, synced and `MERGE GATE: PASS`. **This is a
-> wind-up, not a stop:** no lane is held, no ban changed, and the programme resumes by planning
-> wave 3 under §3g step 1 — **plan first, commit the plan, then dispatch.**
->
-> **WAVE 3 IS OBLIGED TO CARRY THE VERIFIER FOR `T4`, `T6`, `T5` AND `E`.** This Conductor planned
-> all four and **may not check any of them** (§3f rule 1). `V1` discharged wave 1's debt for `T1`,
-> `T2` and `R0`+`R1` **only** — `E` landed after `V1` ran. **And a verifier is an audit**, so both
-> the composition floor (≥1 unit attacking a wall on the Clay chain — Lane T, V or L) and §3f rule 3
-> (no more than two consecutive audit/repair/instrument tasks) require a **real mathematics or
-> construction unit alongside it.**
->
-> **ONE ESCALATION IS OPEN ON THE USER'S DESK** and the top of the wave-3 ranking depends on it:
-> `writeup/escalations/ESCALATION_C1_EXEMPLAR_2026-08-14.md`. See "Open — needs the user" item 0.
-> The full handoff — board, ranked candidates, and the four dispatch-brief rules this run paid for —
-> is in `reports/ORCH_STATE.md` under *"WOUND UP BY USER INSTRUCTION, 2026-08-14"*.
->
-> **⚠ BUT DO NOT ACT ON THAT SENTENCE WITHOUT READING THIS ONE. A CONCURRENT CONDUCTOR SESSION
-> EXISTS**, on `origin`, branch **`claude/wave-3-conductor-dispatch-7rdhlg`** (tip `594ff89`). It
-> branched from `2928966` and is **NOT** downstream of `E`; **the histories have diverged.** On that
-> branch the **C1 escalation is RULED and DISCHARGED** (`RULING_C1_EXEMPLAR_2026-08-14.md`), **wave 3
-> is already planned and dispatched** (`V2`, `L2`, `L3′`, `V-W2`), **wave 2 is VERIFIED** by `V-W2`,
-> **`T1`'s missing machine record is repaired**, and a **Lane L** unit is in flight
-> (`leg/397-l2-decay`). **This session did not merge it and read nothing from it into any claim
-> here** — its verifier checks the wave this Conductor planned, and the ruling was never delivered to
-> this session. **Reconciling the two is the next session's first task, before it dispatches
-> anything.** Expect a genuine `STATE.md` conflict: that branch rewrites this file from a base that
-> predates `E`, so `E`'s row and this block exist on **one side only.**
+**CONDUCTOR** — one long-lived entity owning direction *and* integration, dispatching waves of 2–4
+self-terminating workers. Contract `ORCHESTRATION.md` **§3g**; wall mandate **§3h**; **§3i** the
+direction check (seven questions, in every integration commit, per unit); **§3j** headroom.
+*(§3f solo and the §§2–5 four-slot contract remain available, unchanged.)*
 
 ## Goal, posture, odds
 
-- **Goal:** a full Clay solve (user ruling 2026-08-06). Prize direction is Fefferman
-  statement **(C)** — breakdown on `ℝ³`. **Statement (D), the torus, is deferred with Lane T
-  (user ruling 2026-08-14)** and returns to being an open option rather than an active attack.
-- **Posture (user ruling 2026-08-13, unchanged):** *the walls are the work.* Seven blockers are
-  enumerated in **`WALLS.md`**, each with its evidence separated from its assumption and each with
-  a pre-committed statement of what breaking it consists of. **Every lane is authorised to build
-  whatever it needs, at any size, without a further ruling.**
-- **Ceiling right now: Tier 2.** Route 4 produces a candidate; no certification route is
-  built. `CLAY_OBLIGATIONS.md` §6 names the two obligations with **no known method**.
-- **Clay odds ~0.05%**, unmoved. No `L1 → L4` link has ever moved. This line stays in the same
-  section as the ambition, under a ruling that raises it — not in spite of that ruling.
+- **Goal:** a full Clay solve (user ruling 2026-08-06). Prize direction is Fefferman **(C)** —
+  breakdown on `ℝ³`. **(D), the torus, is deferred with Lane T** (ruling 2026-08-14).
+- **Posture (ruling 2026-08-13):** *the walls are the work.* Seven blockers in **`WALLS.md`**, each
+  with evidence separated from assumption and a pre-committed statement of what breaking it consists
+  of. **Every lane may build whatever it needs, at any size, without a further ruling.**
+- **Ceiling: Tier 2.** Route 4 produces a candidate; no certification route is built.
+  `CLAY_OBLIGATIONS.md` §6 names the two obligations with **no known method**.
+- **Clay odds ~0.05%**, unmoved. **No `L1 → L4` link has ever moved, in 398 legs.**
 
-## THE LANES — RE-RANKED 2026-08-14 BY USER RULING. Read `WALLS.md` before working in any of them.
+## THE LANES — ranked 2026-08-14 by user ruling; re-earned per unit under §3i
 
-**The ruling is authoritative at `writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md`; the
-escalation it discharges is `ESCALATION_C1_EXEMPLAR_2026-08-14.md`.** Deferred options keep their
-cost and their re-open conditions in **`OPTIONS.md`** — read that file alongside this one when
-planning a wave. **Nothing is dropped because a lane was not chosen.**
+Ruling: `writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md`. Deferred options keep their cost and
+re-open conditions in **`OPTIONS.md`** — read it alongside this file when planning. **Nothing is
+dropped because a lane was not chosen.**
 
-| lane | attacks | status 2026-08-14 | one line |
+| lane | attacks | status | one line |
 |---|---|---|---|
-| **V — VISCOUS RUNG** | W3 | **PRIORITY, ACTIVE** | **It decides whether any path exists.** W3 is the rung that settles whether **Tier 3 is reachable in principle**: if a viscous blow-up cannot be certified for a dissipative fluid equation in **one** dimension, 3D Navier–Stokes is not a question of compute and the honest ceiling of the whole programme is Tier 2. Leg 174's cell is empty **"for want of a target, not a method"**, so supplying the named target is the lane's first job. Both branches valuable — that is what makes it cheap. |
-| **L — THE LAST OBLIGATIONS** | W4, **W5**, `CLAY_OBLIGATIONS` **§6(i)** and **§6(ii)** | **PRIORITY, ACTIVE** | **It is on every path.** Leg 390 measured that the torus does **not** retire §6(i)/(ii), so the two no-method obligations are the last blockers on **every** branch — and **no unit in 395 legs has ever attacked either.** Leg 381 banked the bill on §6(i): critical `L³` tail **326.875 per decade**, required `α > 1.5` against available `α = 1.0`. **A deficit of 0.5 in a decay exponent is a number, not an impossibility.** |
-| **T — TORUS** | W2, W4, W6 | **DEFERRED** | Demoted from priority 1 on **the lane's own measurement**: `arXiv:1902.00384`, recorded as the crack in W2, is certified by **exactly the banned apparatus** and **both certified rows are 2D lifts** (leg 393 from the data package; leg 394 independently from the prose). **Not killed, and nothing measured is superseded** — the domain-shape obstruction is still not refuted, Theorem NGX and leg 341 stand, and **W2 stands strengthened.** Kept alive only through **`T2″`**; **`T3` is deferred WITH the lane, not killed.** Cost of deferring and both re-open conditions: `OPTIONS.md` §E. |
-| **R — REFORMULATION + SOLVER COMPETITIVENESS** | W7 | **continuous, unchanged** | Runs inside **every** unit's pre-registration (*what makes this answerable an order of magnitude cheaper?*) and takes its own units when a wave has room. Every factor removed is permanent. |
+| **V — VISCOUS RUNG** | W3 | **PRIORITY, ACTIVE** | Decides whether **any** path exists: if a viscous blow-up cannot be certified for a dissipative fluid equation in **one** dimension, the honest ceiling is Tier 2. Leg 174 says the cell is empty *"for want of a target, not a method."* **Both branches valuable — that is what makes it cheap. ZERO units have ever landed in this lane.** |
+| **L — THE LAST OBLIGATIONS** | W4, W5, §6(i), §6(ii) | **PRIORITY, ACTIVE** | On **every** path: leg 390 measured that the torus does **not** retire §6(i)/(ii). **No unit in 398 legs has ever landed at either.** Leg 381 banked the bill on §6(i) — `writeup/data/p2_route_cloc_v1.json`. **A deficit of 0.5 in a decay exponent is a number, not an impossibility.** |
+| **T — TORUS** | W2, W4, W6 | **DEFERRED** | Demoted on **the lane's own measurement**: `arXiv:1902.00384` is certified by exactly the banned apparatus and both certified rows are 2D lifts (`T4`, `T6`). **Nothing measured is superseded; W2 stands strengthened.** Alive only through **`T2″`**; `T3` deferred **with** the lane, not killed. `OPTIONS.md` §E. |
+| **R — REFORMULATION + SOLVER** | W7 | **continuous** | Runs inside every unit's pre-registration (*what makes this an order of magnitude cheaper?*) and takes its own units when a wave has room. Every factor removed is permanent. **Never sets a wave's direction.** |
 
 **LANE T's TWO RE-OPEN CONDITIONS, either sufficient:** **(i)** a **demonstrated, genuinely-3D
-closure** appearing in the literature — a certificate meeting **W2's own pre-committed test**, its
-three-dimensionality supplied **by the certified object itself**; or **(ii)** **`T2″`** returning a
-rigidity picture favourable to a **natively-periodic non-DSS** ansatz.
+closure** in the literature, meeting W2's own pre-committed test with three-dimensionality supplied
+**by the certified object itself**; or **(ii)** **`T2″`** returning a rigidity picture favourable to a
+**natively-periodic non-DSS** ansatz.
 
-**C1 STANDS, EXEMPLAR-FREE, AND THIS BINDS EVERY UNIT IN EVERY LANE.** It is an **apparatus
-scoping**: a Zgliczyński-style Galerkin-plus-tail **dynamical closure** is a different apparatus
-from a Newton–Kantorovich radii-polynomial contraction, and that proposition is true independent of
-any instance in the literature. **The scope no longer carries any implied *"and this has been
-demonstrated"* — NO UNIT MAY CITE C1 AS EVIDENCE THE TECHNOLOGY CLOSES FOR ANY OBJECT CLASS.**
-**The naming requirement is unchanged and is not waivable by the Conductor:** any unit claiming the
-scope must, **in its own pre-registration**, both **(1) name its apparatus** with a citation and
-**(2) show it does not construct a single bounded approximate inverse uniform in `M`**. **Absent
-both, the ban applies in full**, and a unit reaching for a `Y₀/Z₀/Z₁/Z₂` contraction **in any
-space** is inside the ban whatever it calls itself.
+**C1 STANDS, EXEMPLAR-FREE, AND BINDS EVERY UNIT IN EVERY LANE.** It is an **apparatus scoping**: a
+Zgliczyński-style Galerkin-plus-tail **dynamical closure** is a different apparatus from a
+Newton–Kantorovich radii-polynomial contraction, true independent of any instance. **NO UNIT MAY CITE
+C1 AS EVIDENCE THE TECHNOLOGY CLOSES FOR ANY OBJECT CLASS.** **The naming requirement is not waivable
+by the Conductor:** a unit claiming the scope must, **in its own pre-registration**, both **(1) name
+its apparatus** with a citation and **(2) show it does not construct a single bounded approximate
+inverse uniform in `M`**. **Absent both the ban applies in full**, and a unit reaching for a
+`Y₀/Z₀/Z₁/Z₂` contraction **in any space** is inside it whatever it calls itself.
 
-**Still in force from 2026-08-13, untouched by the 2026-08-14 ruling:** **A2** (the Cadiot ban
-stands, lift clause CLOSED), **B1** (*"which needs L1 first"* struck from stage V's lift clause),
-and the **narrowed outreach hold** — **reading any published document is authorised; contacting an
-author, group, maintainer or list remains HELD.**
-
-## In flight
-
-| What | State |
-|---|---|
-| **WAVE 3** (`V2`, `L2`, `L3′`, `V-W2`) | **PLANNED AND COMMITTED 2026-08-14, BEFORE DISPATCH** (`42011ff`), per §3g step 1; all four dispatched after the plan was pushed. **`V-W2` HAS RETURNED, BEEN AUDITED AND LANDED; `V2`, `L2` and `L3′` ARE LIVE.** Gates in final wording and pre-committed readings are below. **Composition floor met TWICE OVER** — `V2` attacks W3 and `L2` attacks W4/§6(i), both on the Clay chain directly. **§3f rule 3 satisfied:** `V2` is construction and was dispatched first. **WAVE 3's OWN UNITS LAND `UNVERIFIED` AND WAVE 4 MUST CARRY THEIR VERIFIER.** |
-| **WAVE 3** (`V2`, `L2`, `L3′`, `V-W2`) | **PLANNED AND COMMITTED 2026-08-14, BEFORE DISPATCH** (`42011ff`), per §3g step 1; all four dispatched after the plan was pushed. **`V-W2` HAS RETURNED, BEEN AUDITED AND LANDED; `V2`, `L2` and `L3′` ARE LIVE.** Gates in final wording and pre-committed readings are below. **Composition floor met TWICE OVER** — `V2` attacks W3 and `L2` attacks W4/§6(i), both on the Clay chain directly. **§3f rule 3 satisfied:** `V2` is construction and was dispatched first. **WAVE 3's OWN UNITS LAND `UNVERIFIED` AND WAVE 4 MUST CARRY THEIR VERIFIER.** |
-| **WAVE 2** (`T4`, `T6`, `V1`, `T5`) | **COMPLETE, AUDITED AND INTEGRATED 2026-08-14** (`46fe612`). All four returned; each audited against the gate committed at `c1a8d5e` *before it existed*. Planned and committed before dispatch per §3g step 1; `ORCH_STATE.md` refreshed in both the plan and the integration commit. **THE WAVE'S RESULT: Lane T's central premise is measured FALSE**, twice, by two units, by two different methods. **VERIFIED 2026-08-14 by `V-W2`** (wave 3), dispatched by a different Conductor session — the debt §3g owed is DISCHARGED. |
-| **`T4` / leg 393** (Lane T) | **LANDED 2026-08-14** (`2c87244`), **GATE = `STOP`, pre-committed branch (c)**. `arXiv:1902.00384` is certified by **exactly the banned apparatus** (Newton–Kantorovich radii-polynomial in weighted `ℓ¹_η`, on **one bounded approximate inverse** `A : X_{−2,−1} → X`) — stated in the **abstract** leg 348 read. **Both certified rows are 2D LIFTS**: `N_x3 = 0` in Table 1 and `Nrec`, decoded arrays of extent 1 in `x₃`, `max|u⁽³⁾| = max|ω⁽¹⁾| = max|ω⁽²⁾| = 0.0` exactly while `max|ω⁽³⁾| = 1.6351 / 1.5274`, `setup = '2D'`; the authors' reason is that a 3D solution's memory cost is *"for now, prohibitive."* The gate's **first** conjunct was met on both rows (criterion (4.32); `r_min`/`r_max` deviations to `5.6e-15`; both `r_sol^Ω` exact; norm check `δ = 5.3e-06` vs `1e-3`) by arithmetic on published constants — **no operator, no `Y₀/Z₀/Z₁/Z₂`**. `C−` could have fired and did not: all six closure terms **0**, Zgliczyński only as bibliography [48]. **W2 STANDS, STRENGTHENED. W6 UNTOUCHED.** Evidence 68/68, exit 0. **VERIFIED 2026-08-14 by `V-W2`** — items (1) and (2), re-derived from a re-fetched artefact whose SHA-256 matches the banked digest. |
-| **`T6` / leg 394** (Lane T) | **LANDED 2026-08-14** (`e7db624`), **GATE ANSWERED: 7/7 full texts — 2 UNDERCUT / 4 strengthen / 1 confirm, 0 `UNREACHABLE`, 0 `THROTTLED`, 0 zeros banked.** **UNDERCUT 1 = the independent replication of `T4`**, reached by reading the authors' **prose** where `T4` reproduced from their **data package**, and never told what `T4` found: *"the solutions we present in Theorem 1.1 below are two-dimensional (in space) time-periodic solutions"* … *"they are independent of `x₃` and the third component of the velocity vanishes"* (§1, p.3) — **verified by the Conductor against the PDF in BOTH workers' separately fetched copies.** **UNDERCUT 2:** `arXiv:2409.09234` does not belong in leg 348's `domain_census` — 1-D map fitted to DNS data, **no-slip walls, not periodicity** — so **the census OVER-COUNTS BY ONE and leg 390's "6 compact/periodic" inherits it.** **The obstruction leg 348 named is NOT refuted**; its evidence base is **thinner than the record said, not wrong.** Evidence 77/77, exit 0. **VERIFIED 2026-08-14 by `V-W2`** on every count; the one nuance is in the *ground* the Conductor's wording gave for UNDERCUT 2, not in `T6`. |
-| **`T5` / leg 395** (Lane T) | **LANDED 2026-08-14** (`a6f0c38`), **GATE = PASS.** An **obligation** discharged. Corpus 1428 tracked `*.md`+`*.py`, 417,476 lines, `DIRECTION.md` excluded by name **with the exclusion asserted executably**. **7 refusals: APPARATUS 5 / REALIZATION 2.** **Re-openable under C1 — 2, UNRANKED:** leg 348's Galerkin-plus-tail build, and **leg 315's `O1`** sonic-point-desingularized **Taylor-model flow-map** enclosure, which *"needs **no function space**"* — **the genuinely new item, and it points at LANE V.** **Leg 257 is NOT re-openable**: its apparatus **is** the Corollary-21 radii polynomial in a **fourth space**, and a fourth SPACE is not a fourth APPARATUS. Mutation-tested by the Conductor (corrupt the anchor → exit 1). Evidence exit 0, four controls PASS. **VERIFIED 2026-08-14 by `V-W2`**, corpus re-enumerated independently with `git ls-tree`. |
-| **`V1`** (verification, wave 1) | **LANDED 2026-08-14** (`2fb399f`). **All five wave-1 claims reproduce** from banked JSON and landed evidence scripts alone. **`M3 = DELIVERED` SURVIVES** U5's 57% seed overlap on M3's own pre-committed wording. **Two defects banked, not reconciled:** `T1` banked **NO machine record** (now owed, folded into `V-W2`), and the gate's own comparand was the Conductor's ambiguous wording. Evidence 38/38, exit 0. |
-| **WAVE 1** (`T1`, `T2`, `R0+R1`, `E`) | **COMPLETE — ALL FOUR UNITS LANDED, 2026-08-14** (`E` last, at `d0d72b1`). **PLANNED AND COMMITTED 2026-08-13, before dispatch**, per §3g step 1. Gates in final wording and pre-committed readings are below. Composition floor met by **two** Lane T units, not one. **No verifier in this wave** — §3g forbids the Conductor verifying a wave it planned; wave 2 carried it for `T1`/`T2`/`R0`+`R1` and **DISCHARGED that debt**. **`E` LANDED AFTER `V1` RAN AND IS THEREFORE STILL `UNVERIFIED` — wave 3 owes a verifier to `E` as well as to all of wave 2.** |
-| **`E`** (Lane R, instrument) | **LANDED 2026-08-14** (`d0d72b1`), **GATE = PASS in its pre-committed wording** — all three named diagnostics **RETURN**, each with a planted control demonstrated firing in **both** directions. Per that wording this is a PASS *regardless of convergence*. **PRE-COMMITTED BRANCH FIRED: `E-iii`, "it converges to something ELSE."** **DIAGNOSTIC (3) — the sharpest single test of H-hard available, never run at this realization before.** 16 attempts = 8 named Lucas–Kerswell Table IV rows × 2 arms, each planted at the published period **exactly** and at ±the published `|s|` **exactly, with the sign MEASURED** (tally 5 plus / 11 minus): **2 converged, 0 recovered their own named row, 0 recovered ANY named row, 0 secondary `|s|` matches**, exits `{stalled 14, converged 2}`. The two convergences are **genuine solutions of this realization and neither is its row** — UPO35 arm Q at `‖R‖ 4.83e-09` (`ΔT 3.124`, `Δ|s| 0.572`) and UPO9 arm Q at `‖R‖ 2.06e-10` (`ΔT 1.761`, `Δ|s| 0.196` unsigned / `0.394` signed) — and **BOTH LANDED BELOW DIAGNOSTIC (1)'s 0.15 SHELF**: U5 §9's basin structure reappearing **at the strongest seed quality this programme can construct**. **WHY THE NULL IS A MEASUREMENT AND NOT A BROKEN PREDICATE:** three controls fired as planted, `failures = []` — **P** (closed-form fixed point) recovered at `7.75e-09`, **N** (phase-scrambled) did **not**, `‖R‖ 51.46`, **R** matched a *perturbed banked orbit* back at `1.52e-10`, `ΔT 3.0e-07`. **Control R is load-bearing: it proves this unit's own predicate CAN return a recovery.** **`E-ii`'s antecedent is ALSO literally satisfied** (0 of 16 recovered any named row) and `E` **recorded that openly rather than suppressing it**, reporting `E-iii` as the more specific. `E-i` did not fire; **no fifth branch was constructed.** **`E-iv`'s discipline was kept and it is why the result is readable at all** — a published row supplies `(T, s)` but **NOT a field**; `E` seeded **field-plus-pinned-`(T,s)`** and said so in those words, never calling it "seeding at the published orbit." **LEG 353, stated as required rather than rediscovered:** *agrees* nothing was recovered; *disagrees* on distance — residuals **[0.80, 10.32]** here vs leg 353's **[22.5, 29.5]**, from **worse** seeds (20.06–54.94 vs mined 14–19), and **no attempt exited `line_search_failed`**, leg 353's only exit reason and **unreachable under the hookstep**. Diagnostics (1) `PULL_TO_LOW_S` (17/6, `p = 0.0347`, 91.3% below 0.15) and (2) `MIXED` (97.1% constrained, `p = 0.9317`) unchanged as landed, both two-sided. **WHAT DOES NOT FOLLOW:** **`G1` STAYS `UNDER-RESOURCED` and was not written to** (§3d — a hand-placed seed at published coordinates is **not** a mined seed); (2) returned `MIXED`, **not** `MINIMISATION_ATTRACTOR`, so the score-fix conditional **does not fire and NOTHING is proposed** — **leg 349's ban untouched**; the `R < 0.25` window **remains a live confound this unit could not separate**. Conductor audit: pre-registration `70f3962` landed **2026-08-13 23:05, hours before stage 3 ran**, already carrying all four branches; evidence **60/60 exit 0** re-run from the branch and again on `main`; **headline re-derived by the Conductor directly from the 16 raw attempt rows**, independent of `E`'s summary fields — matches. Territory clean, 11 files, **4895 insertions / 0 deletions**, nothing Conductor-owned touched. **§3d:** 5.687 core-hours + 0.806 h controls; **the commissioned model under-estimated by ~8×** (0.0713 vs ~0.57 h/attempt) **for a structural reason worth carrying — direct seeds do not fail fast.** Priced, not bought: field ensemble ≈91 ch, `N=48` lift ≈730 ch, closing (2)'s coverage gap 122.1 ch. Tier 2; no `L1→L4` link moved. **UNVERIFIED.** |
-| **`T1` / leg 391, `T2` / leg 392, `R0`+`R1`** (wave 1) | **LANDED 2026-08-13 and VERIFIED by `V1`.** `T1` gate `yes` — the escalation packet, ruling none of its three questions; **its ruling landed 2026-08-13** (`RULING_BAN_WORDING_2026-08-13.md`). `T2` returned **`UNDER-RESOURCED`, not `no`** — no periodic analogue of NRS/Tsai located, **and that is NOT a clearance**; it named **`T2″`**, the Type-I rigidity question on `T³`, which now keeps Lane T alive. `R0` landed the metric and **retracted "Lane R's first measured win"**; `R1` **closed against itself** (+0.45 pp headroom; spend no more compute on that family). |
-| **`plan_of_record.py` posture** | **LANDED 2026-08-13** (`1ca9e91`), the Conductor's first act under §3g. Additive only — 75 insertions, 0 deletions: `POSTURE`, `MODE`, `BLOCKERS_FILE` → `WALLS.md`, `LANES` (T/V/L/R with the walls each attacks), `POSTURE_LIMITS` (§3h restated executably). **No ban lifted, narrowed, reworded or re-read**; the `BANNED` table is byte-identical and `test_plan_of_record.py` still reports 26 bans / 19 in force, ALL GATES PASS. |
-| **`PROG-R4`** (route-4 DSS programme, leg 380) | **U0–U3, U5 LANDED. U4 BLOCKED — but now *interesting*, see below.** U2 answered **MILESTONE M2** (T=1e5 DNS on the attractor, `D/D_lam`=0.0645±0.0253). U3 answered **GATE G1 = `UNDER-RESOURCED`**, controls fired as planted — 0 of 100 recovered a named orbit, 14 of 100 converged onto eight *other* RPOs. **U5 answered `MILESTONE M3 = DELIVERED`** (2026-08-13): the budget is now stratified by SHIFT — exhaustive re-mine 2,014 → **75,873** candidates, in-band admissible supply 35 → **72**, in-band spend 31 → **60**, controls fired as planted, **2,104 epochs against U3's 4,629 (no iterations bought)**. **9 of 100 converged, 0 recovered a named row**, and **U5's pre-committed reading fired on branch (b) — the bias is in BASIN STRUCTURE, not only seed supply.** **§3d's stop did NOT fire; route 4 is NOT stopped.** **G1 is untouched and stays `UNDER-RESOURCED`** — `n_recovered=0` is a count, not a `no`, and no G1 re-open is raised. U4 (G2, basin radius) still cannot open — it needs a recovered **named** orbit — but the pre-committed reading makes it the interesting unit rather than a formality. Tier-2 ceiling; Clay unmoved. **UNVERIFIED** under §3f. **UPDATED 2026-08-14 BY `E` (`d0d72b1`): the named rows are not reachable even from their own published coordinates.** 0 of 16 direct-seeded attempts recovered any named row, with a positive control proving the predicate can return a recovery. **This tightens G1's `UNDER-RESOURCED` without converting it to a `no`** — and it makes **U4/G2 harder to open, not easier**, since direct seeding was the last cheap route to a recovered named orbit. **THE OPEN QUESTION `E` LEAVES, and it is the ranking question for Lane R:** `E-iii` fired (points at **`R3`** multiple shooting / **`R2`** deflation), but **`E-ii`'s antecedent is also satisfied**, and `E-ii` was pre-committed to point at **`R4`** — U3's stepper is **Lie–Trotter, globally first order** (measured global ratio 2.00), so its periodic orbits are `O(dt)` perturbations of the true flow's. **`E`'s leg-353 comparison is the first evidence in this programme pointing at the REALIZATION rather than the budget**: a strictly better realization got strictly closer (residuals [0.80, 10.32] vs [22.5, 29.5]) from strictly worse seeds — and still recovered nothing. **Which of `R2`/`R3`/`R4` that makes the highest-value Lane R unit is a live re-ranking for wave 3 and this Conductor has NOT ruled it.** |
+**Still in force, untouched by the 2026-08-14 ruling:** **A2** (Cadiot ban stands, lift clause
+CLOSED), **B1** (*"which needs L1 first"* struck from stage V's lift clause), and the **narrowed
+outreach hold** — **reading any published document is authorised; contacting an author, group,
+maintainer or list remains HELD.**
 
 ---
 
-# WAVE 3 — PLANNED AND COMMITTED 2026-08-14, BEFORE DISPATCH
+## ⚠ THE §3i FINDING OF 2026-08-18 — W3's "nobody filled it since" IS NOT SUPPORTED BY LEG 242
 
-**Ranked after the user's ruling of 2026-08-14 and against `OPTIONS.md`, which §3g requires be read
-alongside this file when planning every wave.** The ruling is the reason the ranking changed:
-**Lane T is deferred, and the priority lanes are V and L.**
+**Question 4 of the direction check, answered against the record.** `WALLS.md` W3 carried
+*"Leg 174's occupancy matrix; leg 242 confirms nobody filled it since."* **Leg 242's own gate is an
+author-line question** — *did Dahne & Figueras's subsequent work reach a fluid, or complete the CGL
+work into certified blow-up?* — answered **NO on both clauses**. Its twelve nets are author nets
+(Dahne, Figueras, Gomez-Serrano, Parker) plus three keyword searches **about that author line**.
+**It confirms the CGL author line did not fill the cell. It does not confirm that nobody did.**
 
-**Composition floor (§3g, per-wave): MET TWICE OVER.** `V2` attacks **W3** and `L2` attacks
-**W4 / `CLAY_OBLIGATIONS` §6(i)**, both walls on the Clay chain, both directly. `L3′` is a
-literature unit in the same lane; `V-W2` is verification and counts toward no floor.
+**And leg 242's own control net surfaced six fluid blow-up computer-assisted proofs**
+(`experiments/journal/leg_242.md` §"How the candidate set was closed", incl. `2509.25116`,
+`2605.19716`, `2605.15149`, `2604.09949`) **and graded none of them against leg 174's Grade-A
+criterion, because that was not its gate.** Leg 174's occupancy matrix rests on an **11-row
+hand-built ledger** (`writeup/data/p2_route_vbs_v1_scoping.json`, field `ledger`) whose
+`honest_ceiling` records a **Tier** ceiling and **no coverage ceiling**.
 
-**§3f rule 3 is satisfied and was checked before dispatch:** wave 2's last unit was construction
-(`T4`) and this wave opens with construction (`V2`), which is dispatched first and is the wave's
-centre of gravity. No two instrument/audit/repair units are queued back to back.
-
-**`V-W2` IS OBLIGATORY.** §3g forbids a Conductor verifying a wave a Conductor planned, *with more
-force rather than less because it has more context to be biased by.* `T4`, `T6` and `T5` are
-`UNVERIFIED` and this Conductor planned all three.
-
-> ### ⚠ WRITTEN INTO THE PLAN SO IT CANNOT BE FORGOTTEN
-> **WAVE 3's OWN UNITS — `V2`, `L2` and `L3′` — LAND `UNVERIFIED`, AND WAVE 4 MUST CARRY THEIR
-> VERIFIER.** This Conductor planned them and may not check them. A wave-4 plan without that unit
-> is out of contract.
-
-**C1's naming requirement binds `V2` and is not waivable by the Conductor.** And **C1 may not be
-cited by any unit as evidence that any apparatus closes for any object class** — the scope ruling
-says the ban does not *reach* a dynamical closure, never that one has *worked*.
-
-**Every gate below is in FINAL WORDING and every unit carries a PRE-COMMITTED READING**, fixed here
-before any worker is dispatched and before any number exists.
+**This is the leg-348 shape, on Lane V instead of Lane T:** a lane, a priority ranking and a
+construction unit's whole gate resting on a source whose coverage was never discharged. **It is
+recorded as a flag, not as a ruling — nothing here measures that anyone DID fill the cell.**
+**`V3` (wave 4) measures it, and it is the cheapest unit that could kill the priority lane.**
+`WALLS.md` W3 is corrected in the same commit.
 
 ---
 
-### 1. `V2` — NAME LANE V's TARGET, AND OPEN THE APPARATUS FEASIBILITY. *Lane V, CONSTRUCTION. leg 396. The wave's centre of gravity.*
+## Landed — what the record actually holds
 
-Leg 174's Grade-A × fluid cell is empty **"for want of a target, not a method"**, and **supplying
-the named target is the lane's first job.** Two record items point here and neither was found by
-looking for it: **`T5`'s `O1`** — leg 315's sonic-point-desingularized **Taylor-model flow-map
-enclosure**, which *"needs **no function space**"* and is the genuinely new thing C1 bought — and
-the **Galerkin-plus-tail dynamical closure** itself. **Both are now outside the bans**, subject in
-full to C1's naming requirement.
+| unit | gate answer | SHA | state |
+|---|---|---|---|
+| **`V-W2`** (wave 3, verification) | **ALL FOUR ITEMS REPRODUCE**, items (1)/(2) from **re-fetched primary artefacts whose SHA-256 matched the banked digests** — measurements, not transcription checks. Banked one nuance **unreconciled**: the *ground* for `T6`'s UNDERCUT 2 was the **Conductor's** wording, not `T6`'s. **Second Conductor-wording defect a verifier has caught.** `T1`'s owed machine record **DISCHARGED**, mutation-tested four ways. | `594ff89` | **UNVERIFIED** |
+| **`E`** (wave 1, Lane R instrument) | **PASS in its pre-committed wording** — all three diagnostics RETURN, each with a planted control firing both ways. **Branch fired: `E-iii`.** 16 attempts at the eight published Lucas–Kerswell rows: **2 converged, 0 recovered any named row**, both convergences below diagnostic (1)'s 0.15 shelf. Control **R** is load-bearing — it proves the predicate **can** return a recovery. `G1` stays `UNDER-RESOURCED` **and was not written to**. `experiments/journal/prog_r4_e.md`. | `d0d72b1` | **UNVERIFIED** |
+| **`T4`** / leg 393 (T) | **`STOP`, pre-committed branch (c).** `arXiv:1902.00384` is certified by **exactly the banned apparatus**, and **both certified rows are 2D lifts**. **W2 STANDS, STRENGTHENED. W6 UNTOUCHED.** `writeup/data/p2_route_t4_v1.json`. | `2c87244` | **VERIFIED** by `V-W2` |
+| **`T6`** / leg 394 (T) | **7/7 full texts — 2 UNDERCUT / 4 strengthen / 1 confirm; 0 `UNREACHABLE`, 0 `THROTTLED`, 0 zeros.** UNDERCUT 1 independently replicates `T4` from the authors' **prose**. UNDERCUT 2 removes one row from leg 348's `domain_census`. **The obstruction is NOT refuted — its evidence base is thinner than the record said, not wrong.** | `e7db624` | **VERIFIED** by `V-W2` |
+| **`T5`** / leg 395 (T) | **PASS** — the C1 sweep, an obligation of the ruling discharged. **7 refusals: APPARATUS 5 / REALIZATION 2.** **2 re-openable under C1, UNRANKED**: leg 348's Galerkin-plus-tail build, and **leg 315's `O1`** Taylor-model flow-map enclosure that *"needs no function space"* — **the genuinely new item, and it points at LANE V.** **Leg 257 is NOT re-openable** (fourth *space*, not fourth *apparatus*). | `a6f0c38` | **VERIFIED** by `V-W2` |
+| **`V1`** (wave 2, verification) | **All five wave-1 claims reproduce** from banked JSON and landed evidence scripts alone; **`M3 = DELIVERED` SURVIVES** U5's 57% seed overlap. Two defects banked, not reconciled. | `2fb399f` | **UNVERIFIED** |
+| **`T1`/391, `T2`/392, `R0`+`R1`** (wave 1) | `T1` **yes** — escalation packet, ruled **none** of its three questions; ruling landed `RULING_BAN_WORDING_2026-08-13.md`. `T2` **`UNDER-RESOURCED`, not `no`** — and it named **`T2″`**, which now keeps Lane T alive. `R0` **retracted** *"Lane R's first measured win"*. `R1` **closed against itself** (+0.45 pp; spend no more compute on that family). | wave 1 | **VERIFIED** by `V1` |
+| **`PROG-R4`** (route-4 DSS, leg 380) | **U0–U3, U5 LANDED; U4 BLOCKED** — it needs a recovered **named** orbit and there is not one. `G1 = UNDER-RESOURCED`, `M2` and `M3 = DELIVERED`. **`E` tightened `G1` without converting it to a `no`** and made **U4/G2 harder to open**, since direct seeding was the last cheap route. §3d's stop did **not** fire; **route 4 is NOT stopped.** `experiments/journal/prog_r4_u5.md` §9. | leg 380 | **UNVERIFIED** |
+| **`plan_of_record.py` posture** | **Additive only**, 75 insertions / 0 deletions. **No ban lifted, narrowed, reworded or re-read**; `BANNED` byte-identical, `test_plan_of_record.py` **26 bans / 19 in force, ALL GATES PASS**. | `1ca9e91` | — |
 
-> **GATE (final wording).** Does the unit deliver **both**:
-> **(A) a NAMED TARGET** — a specific **dissipative fluid** model in the lowest dimension admitting
-> genuine fluid structure (1D unless the unit states why 1D cannot carry it), with **the dissipative
-> term inside the equation that would be certified**, together with the named blow-up ansatz /
-> object class and what a certificate for it would assert; **and**
-> **(B) a FEASIBILITY VERDICT** on attacking that target with a **C1-compliant apparatus** — the
-> Galerkin-plus-tail dynamical closure and/or leg 315's `O1` Taylor-model flow-map enclosure — where
-> the apparatus is **named with a citation** and **shown, in the unit's own pre-registration, not to
-> construct a single bounded approximate inverse uniform in `M`**?
-> **yes →** name the target and the ansatz; name the apparatus and give the C1 compliance argument
-> in full; give the feasibility verdict with the **named obstruction or the named next step**, and
-> state explicitly what the verdict does **and does not** establish.
-> **no →** return a **measured statement of which candidate targets were considered and why each
-> fails** — per candidate, the named property that disqualifies it (not fluid; dissipative term
-> outside the certified equation; already certified by someone; no expressible blow-up ansatz).
-> **A named list of failures with the reason per candidate is a landable answer and is reported as
-> the result, not as a failure of the unit.**
-> **`UNDER-RESOURCED` →** §3d governs: an attempt that runs out of budget returns
-> **`UNDER-RESOURCED` and a cost for the compliant attempt**, never a bare `no`.
+## WAVE 3 — CLOSED 2026-08-18. ONE UNIT OF FOUR RETURNED.
 
-**PRE-COMMITTED READING.** **(a) A NAMED TARGET IS NOT A CERTIFICATE.** Naming the object leg 174
-says the cell is empty for want of does not fill the cell, does not enclose anything, and is not
-evidence anything can be enclosed. **(b) A FEASIBILITY IS NOT A RESULT ON THE CLAY CHAIN.** No link
-of `L1 → L4` moves in this unit under any branch; the ceiling stays **Tier 2** and **Clay stays
-~0.05%**, and the write-up says so in its own words (§3h rules 2 and 3 — scale is not evidence, and
-a large build is not a result). **(c) `W3` IS BROKEN ONLY BY LEG 174's OWN GRADE-A CRITERION,
-APPLIED UNCHANGED** — an interval-arithmetic enclosure of a **genuine finite-time singularity** of a
-**dissipative fluid** equation with the **dissipative term inside the certified equation**. Nothing
-in this unit approaches that bar, and no sentence may suggest it does. **(d) IF THE APPARATUS, WHEN
-ACTUALLY SPECIFIED FOR THIS TARGET, TURNS OUT TO REQUIRE A BOUNDED APPROXIMATE INVERSE UNIFORM IN
-`M`, THE UNIT STOPS AND SAYS SO.** That is `T4`'s branch (c), and it fired once already this
-programme; it is a **more valuable** finding than a feasibility verdict, because it is a fact about
-the ban that nobody has measured. Report it as a **stop**, not as a failure. **(e) THE NEGATIVE
-BRANCH IS AS VALUABLE AS THE POSITIVE ONE** — that is the whole reason this lane is cheap. A
-measured "no admissible target exists in 1D, and here is the property each candidate fails" is the
-strongest available evidence that the ceiling is Tier 2, and it is **not softened, not padded, and
-not rewritten as a partial success.** **(f) NOVELTY.** The named target owes a novelty pass **before
-any construction**: if a Grade-A certificate for it already exists in the literature, **W3 is broken
-by someone else and that is the finding** — report it as such rather than proposing to rebuild it.
-**(g) CONTROLS, PLANTED AND FIRING BOTH WAYS.** The unit's Grade-A/fluid classifier must be shown to
-say **both** words: a **positive control** it must classify as Grade-A-but-not-fluid
-(Dahne–Figueras CGL `arXiv:2410.05480`, reproduced here by leg 316), and a **negative control** it
-must reject (an object whose dissipative term is outside the certified equation). A classifier that
-cannot fire both ways has not classified anything. **(h) Lesson 91:** any negative names its
-realization, trial space and basis.
+Planned and committed before dispatch at **`42011ff`** (gates and pre-committed readings verbatim
+there; §3j rule 5 — quoted by pointer, not restated).
 
-**Territory (§5b).** `experiments/journal/leg_396.md`, `experiments/p2_route_v2_*.py`,
-`writeup/data/p2_route_v2_v1.json`, `writeup/novelty/leg_396.md`, **figure `fig111`** (allocated
-here, at dispatch, to this unit and to no other). **Branch:** `leg/396-v2-target`.
-**Resourcing (§3d):** resourced as a **full unit** — build whatever the target selection and the
-feasibility argument need. An under-resourced attempt returns `UNDER-RESOURCED` **and a cost**.
+| unit | lane | outcome |
+|---|---|---|
+| `V-W2` | verification | **RETURNED, AUDITED, LANDED** `594ff89`. |
+| `V2` / leg 396 | **V**, construction, the wave's centre of gravity | **DEAD. No branch, no commit, zero bytes.** Gate unanswered; **no branch of its pre-committed reading fired** and none is claimed. W3 is exactly where wave 2 left it. |
+| `L2` / leg 397 | **L** | **DEAD, but its PRE-REGISTRATION SURVIVED** — `leg/397-l2-decay` @ `a9a4370`, §§0–3 (gate, pre-committed reading, search plan, instrument controls, classification criteria), committed **before any verdict existed**. No gate answer, no verdict, no conclusion about §6(i) exists. **Resumable: wave 4's `L2′` executes §§4+ on that branch.** |
+| `L3′` / leg 398 | **L**, literature | **DEAD. No branch, no commit.** Gate unanswered. |
 
-### 2. `L2` — ATTACK `CLAY_OBLIGATIONS.md` §6(i). *Lane L. leg 397. The first unit ever dispatched at a final blocker.*
-
-**Is certified far-field decay plus an admissible cutoff genuinely without METHOD, or only without
-an ATTEMPT?** The claim "no known method" has been carried as an assumption through 395 legs
-without being checked to the standard this repository applies to everything else, and it sits on the
-most load-bearing statement in the whole roadmap. **Leg 381's banked bill is the object:** critical
-`L³` tail **326.875 per decade** (the increment of the *cube*; the norm itself runs 8.679 → 14.841),
-required decay exponent **`α > 1.5`** against an a-priori **`α = 1.0`** — **a deficit of 0.5. That
-is a number, not an impossibility, and the unit's question is what would supply it.**
-
-> **GATE (final wording).** Reading the **published** localisation / far-field-decay techniques
-> against **this object** — route 4's discretely-self-similar profile carrying leg 381's banked bill
-> — does the unit state, **per technique**, the **named hypothesis** that fails for this object, or
-> the one that does **not**?
-> **yes →** report the table: technique, citation, the hypothesis it requires **quoted verbatim and
-> located by section or page**, and whether this object satisfies it. State plainly whether the
-> answer is *"still no method, and here is precisely which hypothesis fails"* or *"here is a
-> candidate whose hypotheses this object may meet"* — **and for any candidate, state whether leg
-> 381's bill is actually paid (`α > 1.5` supplied for THIS object) or not.**
-> **no →** name which techniques could not be located or read at the level required, and **what it
-> would take** — a cost, not a verdict (§3d). **`UNDER-RESOURCED`, never a bare `no`.**
-
-**PRE-COMMITTED READING.** **(a) A MEASURED "STILL NO METHOD, AND HERE IS PRECISELY WHICH HYPOTHESIS
-FAILS" IS A REAL, LANDABLE RESULT AND IS NOT SOFTENED.** It is **the answer to whether the Tier-2
-ceiling is permanent**, which is the single most useful thing this lane can return short of a
-method. It is not a failure, it is not padded with hedges, and it is not rewritten as "promising
-directions". **(b) A CANDIDATE METHOD IS A LEAD, NOT A BROKEN WALL, UNTIL LEG 381's BILL IS ACTUALLY
-PAID.** The word is **candidate**. `W4` is broken only by its own pre-committed test — a
-localisation argument that carries blow-up from the infinite-energy profile to a finite-energy
-solution **with the decay actually available**, or a natively finite-energy ansatz. A technique
-whose hypotheses hold for a *different* object has not paid this object's bill. **(c) THE DEFICIT IS
-THE MEASUREMENT, AND IT IS NOT TO BE RE-DERIVED SLOPPILY OR QUOTED FROM PROSE** — take 326.875 per
-decade and `α > 1.5` vs `α = 1.0` from the banked artefact, and if the banked artefact disagrees
-with any prose in the repository, **the artefact wins and the disagreement is banked**. **(d) READ,
-DO NOT CONTACT.** Any published document may be fetched and read; **contacting an author, group,
-maintainer or list remains HELD by the user** and needs its own ruling. Do not route around it — 
-raise it. **(e) INSTRUMENT EVERY ZERO.** A technique not found is `UNREACHABLE` or `THROTTLED` with
-the reason banked, **never a zero and never a confirmation**; leg 387's namespace bug fabricated a
-controlled zero once already, and leg 392 was throttled on 5 of 6 substantive Semantic Scholar
-queries. **No S2 key exists** — pace against the unauthenticated limits and back off. **(f) LESSON
-91.** Any negative here names the object it is a negative about: the profile, the norm, the decay
-available, the cutoff class. **(g) CEILING.** Reading the literature moves no `L1 → L4` link.
-**Tier 2; Clay ~0.05%.**
-
-**Territory (§5b).** `experiments/journal/leg_397.md`, `experiments/p2_route_l2_*.py`,
-`writeup/data/p2_route_l2_v1.json`, `writeup/novelty/leg_397.md`. **No figure.**
-**Branch:** `leg/397-l2-decay`. **Resourcing (§3d):** a literature-and-analysis unit against a
-banked bill, ≈2–4 h. If the compliant reading costs more, return `UNDER-RESOURCED` **and the cost**.
-
-### 3. `L3′` — THE CHEN–HOU READING UNIT. *Lane L, literature, FULL TEXT. leg 398.*
-
-**`T6` found this as a near-miss and recorded it rather than dropping it**, which is the only reason
-it is on the board. `arXiv:2308.01528` §1 describes the Chen–Hou line as **computer-assisted blow-up
-on an UNBOUNDED domain, in >1D, with ALGEBRAIC decay** — precisely the combination leg 348's
-obstruction says the Galerkin-plus-tail bridge cannot reach. **It is the record's best lead on the
-compact-domain obstruction, and it points at route 4's actual `ℝ³` geometry — prize statement (C).**
-
-> **GATE (final wording).** Reading `arXiv:2308.01528` and the Chen–Hou stability line **at full
-> text**, does the unit answer **both** named questions, **each with the deciding sentence quoted
-> verbatim and located by section or page**:
-> **(a)** does its **unbounded-domain, algebraic-decay, computer-assisted** mechanism **bear on the
-> compact-domain obstruction leg 348 named — and ON WHICH SIDE**: does it **UNDERCUT** the
-> obstruction (a certified object living where the obstruction says the bridge cannot reach),
-> **STRENGTHEN** it (the mechanism is available only because of a feature the obstruction already
-> names), or **NOT REACH** it (the objects or apparatus differ)?
-> **(b)** does its **nonlinear-stability-with-finite-unstable-spectrum** technique contain anything
-> that reaches **`CLAY_OBLIGATIONS.md` §6(ii)** — persistence of the blow-up under localisation —
-> **for this programme's object**, and if so, **which hypothesis would this object have to satisfy**?
-> **yes →** both answered, with quotes located. Name explicitly anything that moves leg 348's
-> obstruction in either direction.
-> **no →** name which document could not be obtained at full text and **what it would take** (§3d).
-> A document not obtained is banked as **`UNREACHABLE`** with its reason — **never as a
-> confirmation and never as a zero.**
-
-**PRE-COMMITTED READING.** **(a) ALL THREE BRANCHES OF QUESTION (a) ARE NAMED IN ADVANCE AND NO
-FOURTH IS CONSTRUCTED** — UNDERCUT / STRENGTHEN / DOES NOT REACH. **The prior is DOES NOT REACH, and
-it is `T6`'s, recorded before this unit existed:** the target is **stationary self-similar** rather
-than time-periodic, and the apparatus is **energy estimates** rather than Galerkin-plus-tail, so
-`T6` judged it **not** a counter-instance to the obstruction as posed. **This unit must say whether
-full text AGREES or DISAGREES with that prior, in those words**, and an undercut is the valuable
-branch and is **reported first**, not buried. **(b) A TECHNIQUE THAT REACHES §6(ii) IN SHAPE IS NOT
-A METHOD.** Naming the hypothesis this object would have to satisfy **is** the deliverable; claiming
-the obligation is discharged is not available on any branch of this gate. **W5 is unbroken and stays
-unbroken by anything read here.** **(c) A CONFIRMATION IS NOT A STRENGTHENING** — `T6`'s standard,
-applied unchanged: "the full text is consistent with the abstract" adds nothing; only a full-text
-clause that could not have been seen at abstract level counts, and it must be quoted. **(d) THIS
-UNIT READS. IT DOES NOT CONTACT.** Papers, proceedings, theses, publisher pages, full texts:
-authorised. **Contacting an author, group, maintainer or mailing list: HELD by the user, and needs
-its own ruling.** **(e) BANK `UNREACHABLE`/`THROTTLED` AS SUCH, NEVER AS ZEROS, AND INSTRUMENT EVERY
-ZERO** — a positive datum proving the source was reached, on every query. **No Semantic Scholar key
-exists**; pace against the unauthenticated rate limits and back off rather than assuming one.
-**(f) CEILING.** No `L1 → L4` link moves. **Tier 2; Clay ~0.05%.**
-
-**Territory (§5b).** `experiments/journal/leg_398.md`, `writeup/data/p2_route_l3p_v1.json`,
-`writeup/novelty/leg_398.md`. **No figure.** **Branch:** `leg/398-l3p-chenhou`.
-**Resourcing (§3d):** full text of one paper plus the stability line around it, ≈1.5–3 h.
-
-### 4. `V-W2` — THE WAVE-2 VERIFIER. *Verification. OBLIGATORY under §3g.*
-
-**`T4`, `T6` and `T5` are `UNVERIFIED` and this Conductor planned all three.** §3g is explicit that
-this is the one thing a Conductor may not do for itself. **`V-W2` is a fresh worker with no memory
-of the construction, re-deriving from banked JSON and landed evidence scripts alone**, briefed on
-the **claims** and never on the reasoning that produced them.
-
-> **GATE (final wording).** Re-deriving **from the banked JSON and the landed evidence scripts
-> alone**, does each of the following reproduce **exactly**?
-> **(1) `T4`'s 2D-lift finding:** `N_x3 = 0` in Table 1 and in `Nrec`; decoded coefficient arrays of
-> **extent 1** in `x₃`; `max|u⁽³⁾| = max|ω⁽¹⁾| = max|ω⁽²⁾| = 0.0` **exactly** while
-> `max|ω⁽³⁾| = 1.6351 / 1.5274`; `setup = '2D'`.
-> **(2) `T4`'s first conjunct and its negative control:** criterion (4.32) verified on both rows,
-> `r_min`/`r_max` relative deviations to **`5.6e-15`**, both `r_sol^Ω` exact, independent norm check
-> **`δ = 5.3e-06`** against **`1e-3`**; and the apparatus finding with its control — term counts
-> *approximate inverse* **×7**, *Newton-Kantorovich* **×4**, *interval arithmetic* **×5**, INTLAB
-> **×2**, against **all six** closure terms (*self-consistent*, *a priori bounds*, *isolating*,
-> *trapping region*, *logarithmic norm*, *dynamical closure*) at **zero**, Zgliczyński appearing
-> only as bibliography item **[48]**.
-> **(3) `T6`'s table:** **7/7** full texts read, **2 UNDERCUT / 4 strengthen / 1 confirm**, **0**
-> `UNREACHABLE`, **0** `THROTTLED`; and **UNDERCUT 2** — `arXiv:2409.09234` carries **no-slip walls,
-> not periodicity**, so leg 348's `domain_census` **over-counts by one**.
-> **(4) `T5`'s sweep:** corpus **1428** tracked `*.md`+`*.py` / **417,476** lines with `DIRECTION.md`
-> excluded by name **and the exclusion asserted executably**; **7 refusals, APPARATUS 5 /
-> REALIZATION 2**; **exactly 2** re-openable under C1 (leg 348's Galerkin-plus-tail build and leg
-> 315's `O1`); and **leg 257 NOT re-openable** — its apparatus is the Corollary-21 radii polynomial
-> in a fourth **space**.
-> **yes →** each reproduces; say so per item, **with the number you got**.
-> **no →** name the item, the number you got, the number claimed, and the **file and line** the
-> discrepancy is in. **A DISCREPANCY IS THE DELIVERABLE, NOT A FAILURE OF THE UNIT.**
->
-> **AND ONE OBLIGATION FOLDED IN, FOUND BY `V1` AND OWED SINCE 2026-08-13** (`OPTIONS.md` §F; well
-> under an hour): **`T1` / leg 391 banked NO machine record** — no JSON, no evidence script — so its
-> gate answer checks out against **prose only**. **Bank the packet's three questions and the fact
-> that it ruled NONE of them, with an evidence script that EXITS NON-ZERO on disagreement with
-> `writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md`.**
-
-**PRE-COMMITTED READING.** **(a) AGREEMENT IS THE EXPECTED OUTCOME AND IS WORTH LITTLE ON ITS OWN.**
-The Conductor already re-derived parts of (1)–(3) at landing; the value is concentrated wherever a
-number has been transcribed rather than measured. **(b) A DISAGREEMENT IS BANKED AS A DISAGREEMENT
-AND IS NOT RECONCILED BY THE VERIFIER.** Report both numbers and stop — deciding which is right is
-the Conductor's job, and doing it inside the verifier destroys the independence the unit exists for.
-**(c) A CLAIM THE JSON CANNOT SUPPORT IS `UNVERIFIABLE`, NOT `no`** — and that is a finding about
-banking discipline, which lesson 68 says decays at the rate of memory. It is exactly how `T1`'s
-missing record was found. **(d) `V-W2` MUST NOT READ** `STATE.md`, `WALLS.md`, `OPTIONS.md`,
-`DIRECTION.md`, `reports/ORCH_STATE.md`, the wave-2 briefs, or the wave-2 journals' **reasoning**
-sections. It reads the **claims listed in this gate**, the **banked JSON**, and the **landed
-evidence scripts**. **That narrowness IS the unit.** **(e) THE FILENAME TRAP, NAMED IN ADVANCE
-BECAUSE THE RECORD ALREADY WARNS ABOUT IT:** `writeup/data/p2_route_p2t1_v1.json` is **leg 302,
-route P2T1, unrelated to `T1`.** **Do not match on filename substrings** — scan the `leg`/`route`/
-`unit` **fields** of every banked JSON. **(f) BANKING `T1`'s RECORD DOES NOT RE-OPEN `T1`'s GATE
-ANSWER** and is not evidence for or against it; `V1` already ruled that. The record states what the
-packet **asked** and that it **ruled none**. **(g) CEILING.** Verification moves no `L1 → L4` link.
-**Tier 2; Clay ~0.05%.**
-
-**Territory (§5b).** `experiments/journal/verify_wave2.md`, `writeup/data/p2_verify_wave2_v1.json`,
-and for the folded-in obligation `writeup/data/p2_route_t1_packet_v1.json` +
-`experiments/p2_route_t1_packet_evidence.py`. **Writes no source, no figure, and none of the
-Conductor-owned files.** **Branch:** `verify/wave2`. **Resourcing (§3d):** ≈2–3 h.
-
----
-
-### What `OPTIONS.md` offered and was NOT taken this wave, and why
-
-§3g requires `OPTIONS.md` be read alongside this file when planning every wave, and a deferred
-option that is never *said* to be deferred is an option that was silently dropped.
-
-| option | why not this wave |
-|---|---|
-| **`L1`** — price §4 on `ℝ³` (`OPTIONS.md` §D) | **Deferred by ONE WAVE, deliberately, and it is ranked for wave 4.** It is the same *shape* of unit as `L2` — read the published attempts, name the hypothesis that fails per attempt — and running both in one wave would put two literature units on the same reading discipline before either has been verified. `L2` is ranked first because leg 381 banked it a **number** to attack, which `L1` does not have. |
-| **`T2″`** — Type-I rigidity on `T³` (`OPTIONS.md` §E) | **Deferred with Lane T, and it is now RE-OPEN CONDITION (ii) FOR THE WHOLE LANE.** That raises its value rather than lowering it: it is the one unit that can bring Lane T back. Not taken because the wave is full and both priority lanes come first. |
-| **`T3`** — the non-DSS `T³` ansatz | **DEFERRED WITH THE LANE, NOT KILLED** (user ruling 2026-08-14). Still the lane's real mathematical content; it runs when a re-open condition is met. |
-| **`T2′`** — the compliant rigidity search | **Deferred with Lane T.** Priced at ≈1.2–1.7 h now that the ruling has landed and full text is readable. |
-| **`E`** — the H-hard diagnostic (wave 1) | **NOT RE-DISPATCHED.** Its gate is unanswered and its branch holds two of three diagnostics; finishing it needs U2's DNS regenerated (≈6–7 h wall in total) because the container took the checkpoints. The user ruled this wave's composition, and `E`'s result **re-opens Lane R rankings in `OPTIONS.md` §A/§B — it does not change this wave.** Ranked for wave 4 alongside the verifier. |
-| **`R2`** — deflation (`OPTIONS.md` §B) | **Deferred by contract and by ranking.** It is the strongest surviving Lane R item, but a wave with two priority-lane units, a literature unit and an obligatory verifier has no room, and Lane R never sets a wave's direction. |
-| **`R3`/`R4`/`R5`, `PROG-R4` A/B/C/D, `U4`/`G2`** | **Deferred.** A/B/D buy supply and are demoted by U5's pre-committed reading (branch (b): the bias is in **basin structure**); `U4`/`G2` is **blocked**, not deferred — it needs a recovered **named** orbit and there is not one. |
-| **(D)'s data conditions (8),(9)**; **leg 390 §5 item 1's `check_A` re-run** | **Deferred WITH Lane T.** Unblocked and cheap, but (D) is the torus branch and the torus is deferred; parked with the lane rather than run for a branch nothing is currently attacking. |
-| **`T1`'s owed machine record** (`OPTIONS.md` §F) | **TAKEN — folded into `V-W2`.** It is well under an hour and it belongs with a verifier, not on its own. |
-| **U3's two owed novelty questions; legs 387/388/389** (`OPTIONS.md` §F) | **Deferred.** Small, real, and they lose to two priority-lane units and an obligatory verifier. |
+**THE LESSON, AND IT IS THE SAME ONE TWICE.** Wave 3 lost three of four workers to a host process
+exit. **The one thing that survived is the one thing that was committed** — `L2`'s pre-registration,
+which now saves wave 4 a full unit of setup. This is the second time (2026-08-14 took five in-flight
+workers the same way). **`COMMIT DURING THE RUN, NOT ONLY AT THE GATE` is in every brief from now on,
+alongside the checkpointing rule `E` paid for** (`OPTIONS.md` §F): any unit above ~1 h wall
+checkpoints to disk at a granularity it can resume from, and says where.
 
 ---
 
 ## Open — needs the user, not a task
 
-1. **`PROG-R4` after U5 — five costed options, ONE RULED.** The user ruled **option E** on
-   2026-08-13 and it is the unit that did not return (see "In flight"). **A, B and D stay
-   unqueued** — all three buy supply, and the pre-committed reading points away from it. **C** stays
-   unqueued with its own milestone, aimed at `|s| > 0.9` rather than at the named rows. Full text
-   and costs: `experiments/journal/prog_r4_u5.md` §9, preserved verbatim. **`PROG-R4` is not
-   stopped**; `G1` stays `UNDER-RESOURCED`.
-2. **The two ban-wording defects that are RECORDED AND NOT RULED**, because nothing currently
-   depends on them: the ℓ¹-Fourier ban's lift clause still names a *"FOURTH space/basis"*, which is
-   the wrong kind of object for a candidate that is an **apparatus** (moot while Lane T is deferred,
-   and `T5` measured that it is exactly what blocks leg 257); and stage V's lift clause is now clean
-   after B1. **Neither is escalated** — an entity that both raises and rules an escalation has
-   defeated the mechanism, and there is nothing to rule until a unit is blocked by one.
-3. **Statement (D)'s data conditions (8) and (9) are UNREAD**, and readable since the outreach
-   narrowing. **Parked with Lane T** (item above). Until they are read, `CLAY_OBLIGATIONS.md`'s
-   "(D) carries no decay condition" stays narrowed to (D)'s **solution** conditions, and leg 390 §5
-   item 1's `check_A` re-run stays owed.
-4. **The DSS escalation packet** (legs 313/320, branches unmerged). Complete: both candidate
-   theorems read at full text and neither reaches the screened object.
+1. **`PROG-R4` after U5 — five costed options, ONE RULED.** The user ruled **E**, which has now
+   landed. **A, B and D stay unqueued** — all three buy supply, and both U5's and `E`'s pre-committed
+   readings point away from it. **C** stays unqueued with its own milestone, aimed at `|s| > 0.9`.
+   Costs verbatim: `experiments/journal/prog_r4_u5.md` §9. **`PROG-R4` is not stopped.**
+2. **Two ban-wording defects RECORDED AND NOT RULED**, because nothing currently depends on them: the
+   ℓ¹-Fourier ban's lift clause still names a *"FOURTH space/basis"*, the wrong kind of object for a
+   candidate that is an **apparatus** (`T5` measured that it is exactly what blocks leg 257); stage
+   V's lift clause is clean after B1. **Neither is escalated** — an entity that both raises and rules
+   an escalation has defeated the mechanism, and there is nothing to rule until a unit is blocked.
+3. **Statement (D)'s data conditions (8) and (9) are UNREAD** and readable since the outreach
+   narrowing. **Parked with Lane T.** Until read, `CLAY_OBLIGATIONS.md`'s *"(D) carries no decay
+   condition"* stays narrowed to (D)'s **solution** conditions, and leg 390 §5 item 1's `check_A`
+   re-run stays owed.
+4. **The DSS escalation packet** (legs 313/320, branches unmerged). Complete: both candidate theorems
+   read at full text and neither reaches the screened object.
 
-**DISCHARGED 2026-08-14 and no longer on the desk:** the C1-exemplar escalation
-(`writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md`) and, from 2026-08-13, all four
-ban-wording items (`writeup/escalations/RULING_BAN_WORDING_2026-08-13.md`).
+**Conductor-owned debts, owed not optional** (`OPTIONS.md` §F): `fig107` is **not registered** in
+`writeup/build_figures.py`, so nothing detects it going stale; and `INDEX.md` owes rows for `T4`,
+`T6`, `T5`, `V1`, `E` — **a Conductor-owned file, therefore a Conductor-owned debt.**
 
-## Live bans — 19, one line each
+**DISCHARGED and off the desk:** the C1-exemplar escalation (`RULING_C1_EXEMPLAR_2026-08-14.md`) and
+all four 2026-08-13 ban-wording items (`RULING_BAN_WORDING_2026-08-13.md`).
 
-Full text and lift conditions: `.venv/bin/python plan_of_record.py`. **Run it when a task
-could touch one**; do not paraphrase from here. **§3h rule 1: a ban is superseded by a
-measurement, never by a decision** — and a defective ban *wording* is a user escalation.
-**Ban counts are UNCHANGED by the 2026-08-14 ruling: 26 recorded, 19 in force.**
+## Live bans — 19 in force of 26 recorded, one line each
+
+Full text and lift conditions: `.venv/bin/python plan_of_record.py`. **Run it when a task could touch
+one**; do not paraphrase from here. **§3h rule 1: a ban is superseded by a measurement, never by a
+decision** — and a defective ban *wording* is a **user escalation**.
 
 gCLM measurement · DSS cheap entrance (bifurcation off a fixed point) · DSS expensive entrance
-(**SCOPED 2026-08-11: a *seeded* search is outside it; name the seed or the ban applies**) ·
-2D β re-measurement · scaling-gauge near-null · GA compute on unvalidated fitness ·
-"closure is a property of the space" · stage V as posed · ℓ¹-Fourier/radii-polynomial on any
-model (**SCOPED 2026-08-13 by C1 to an APPARATUS; C1 stands EXEMPLAR-FREE after 2026-08-14 and
-is NOT evidence any apparatus closes; the naming requirement binds every unit**) ·
-V-rigorous's L1 prerequisite (superseded) · closing the truncation gap by extending the
-domain · three readings of legs 51/53 · `Z₁` block-coupling by tuning · weight exponent toward
-leg 51's minimum · leg 51's finding at full strength · leg 51's zero `Y₀` as progress ·
-Chen–Hou 2D as a target · leg 44's 2D near-null · building a solver without grepping
+(**SCOPED 2026-08-11: a *seeded* search is outside it; name the seed or the ban applies**) · 2D β
+re-measurement · scaling-gauge near-null · GA compute on unvalidated fitness · "closure is a property
+of the space" · stage V as posed · ℓ¹-Fourier/radii-polynomial on any model (**SCOPED 2026-08-13 by
+C1 to an APPARATUS; C1 stands EXEMPLAR-FREE and is NOT evidence any apparatus closes; the naming
+requirement binds every unit**) · V-rigorous's L1 prerequisite (superseded) · closing the truncation
+gap by extending the domain · three readings of legs 51/53 · `Z₁` block-coupling by tuning · weight
+exponent toward leg 51's minimum · leg 51's finding at full strength · leg 51's zero `Y₀` as progress
+· Chen–Hou 2D as a target · leg 44's 2D near-null · building a solver without grepping
 `capabilities.py`.
 
 ## Standing discipline — non-negotiable in every mode
 
-Three-tier win condition (Tier 2 is never a proof) · pre-committed gates on every claim ·
-novelty pass before construction (**once per programme**, not per unit, under §3c) ·
-**lesson 91**: a negative names its realization/trial-space/basis · **§3d**: a stop fires only
-on a null from an attempt resourced at the scale the question is posed at — an under-resourced
-null returns a cost and answers `UNDER-RESOURCED` · planted controls that can fire both ways ·
-**lesson 68**: checks are executable or they decay · `scripts/merge_gate.sh origin/main` must
-PASS on everything that lands · **reading published material is authorised; CONTACTING an author,
-group, maintainer or list is HELD** (narrowed 2026-08-13) · no output described as movement toward
-Clay unless a link actually moved · **§3h rule 2: scale is not evidence** — a large build is not a
-result, and the gate is the deliverable.
+Three-tier win condition (**Tier 2 is never a proof**) · pre-committed gates on every claim · novelty
+pass before construction (once per programme, §3c) · **lesson 91**: a negative names its
+realization/trial-space/basis · **§3d**: a stop fires only on a null from an attempt resourced at the
+scale the question is posed at — an under-resourced null returns a **cost** and answers
+`UNDER-RESOURCED` · planted controls that can fire **both** ways · **lesson 68**: checks are
+executable or they decay · `scripts/merge_gate.sh origin/main` must PASS on everything that lands ·
+**reading published material is authorised; CONTACTING an author, group, maintainer or list is HELD**
+· no output described as movement toward Clay unless a link actually moved · **§3h rule 2: scale is
+not evidence** · **a retraction is not progress and is never described as it.**
 
-**WAVE COMPOSITION FLOOR (`ORCHESTRATION.md` §3g).** **Every wave carries at least one unit that
-attacks a wall on the Clay chain directly** — a Lane T, V or L unit. Lane R work is real and it is
-often the most productive thing here, which is exactly why this floor exists: efficiency work is
-satisfying, it always has a next increment, and a programme can spend a year getting very good at
-finding orbits it was never going to certify. **A wave of pure Lane R units is out of contract**,
-and so is a wave whose only non-Lane-R unit is an audit.
+**WAVE COMPOSITION FLOOR (§3g).** Every wave carries at least one unit attacking a wall on the Clay
+chain **directly** — Lane T, V or L. Lane R work is real and often the most productive thing here,
+which is exactly why the floor exists: a programme can spend a year getting very good at finding
+orbits it was never going to certify. **A wave of pure Lane R units is out of contract**, and so is a
+wave whose only non-Lane-R unit is an audit.
 
 **VERIFICATION IS A FRESH SESSION OR IT IS NOT VERIFICATION**, and **a Conductor may not verify a
 wave a Conductor planned.** Every wave budgets one verifier, dispatched in the *following* wave.
-**Wave 4 carries wave 3's.**
+**Wave 4 carries the verifier for `E` and for `V-W2`.**
 
 ## Where the detail lives — consult by pointer, never wholesale
 
-| Need | Read | Size |
-|---|---|---|
-| **The blockers and the lanes** | **`WALLS.md`** | **7 walls, 4 lanes — read whole** |
-| **The 2026-08-14 lane ruling** | `writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md` | one page |
-| The 2026-08-13 ban rulings | `writeup/escalations/RULING_BAN_WORDING_2026-08-13.md` | one page |
-| The strategic ruling | `CLAY_ROADMAP.md` §7.5 + **§7.6** | two addenda |
-| A task's own spec | `DIRECTION.md`, that entry only | 23,699 lines — never read whole |
-| Bans, stage, gate, lanes | `.venv/bin/python plan_of_record.py` | executable, ~40 lines out |
-| Does a module exist | `.venv/bin/python capabilities.py <term>` | executable, grep don't read |
-| The contract | `ORCHESTRATION.md` §3c–§3h | 3g = CONDUCTOR, 3h = walls |
-| What a Tier-2 candidate owes | `CLAY_OBLIGATIONS.md` | 8 sections, §4 verified |
-| Per-leg record | `experiments/journal/leg_N.md`, `writeup/novelty/leg_N.md` | one leg each |
-| **Deferred options, with costs and re-open conditions** | **`OPTIONS.md`** | read when planning a wave |
-| Wave 1 and 2 gates, verbatim | git `a384d92` and `c1a8d5e`; `reports/ORCH_STATE.md` | history |
-| `E`'s four pre-committed branches, verbatim | `experiments/journal/prog_r4_e.md` §3 on `prog-r4/e-hhard` | branch, unmerged |
-| Banked numbers | `writeup/data/*.json` | **re-derive from these, never from prose** |
+| Need | Read |
+|---|---|
+| **The blockers and the lanes** | **`WALLS.md`** — 7 walls, 4 lanes, read whole |
+| **Deferred options, costs, re-open conditions** | **`OPTIONS.md`** — read when planning a wave |
+| The contract | `ORCHESTRATION.md` §3c–§3j (**3g** CONDUCTOR, **3h** walls, **3i** direction check, **3j** headroom) |
+| Bans, stage, gate, lanes | `.venv/bin/python plan_of_record.py` — executable |
+| Does a module exist | `.venv/bin/python capabilities.py <term>` — grep, don't read |
+| The 2026-08-14 lane ruling | `writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md` |
+| The 2026-08-13 ban rulings | `writeup/escalations/RULING_BAN_WORDING_2026-08-13.md` |
+| What a Tier-2 candidate owes | `CLAY_OBLIGATIONS.md` — §6 is the two no-method obligations |
+| Wave gates, verbatim and immutable | git `a384d92` (w1), `c1a8d5e` (w2), `42011ff` (w3) |
+| `E`'s four pre-committed branches | `experiments/journal/prog_r4_e.md` §3 |
+| Per-leg record | `experiments/journal/leg_N.md`, `writeup/novelty/leg_N.md` |
+| Live wave state, escalations, headroom | `reports/ORCH_STATE.md` — LIVE block |
+| **Banked numbers** | **`writeup/data/*.json` — re-derive from these, never from prose** |
+| A task's own spec | `DIRECTION.md`, that entry only — **never read whole** |
