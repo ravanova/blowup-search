@@ -12,7 +12,7 @@ verbatim 2026-08-18 under §3j → `## Superseded — the 2026-08-14 fork`.
 
 ## LIVE — CONDUCTOR mode, **WAVE 5 CLOSED — ALL THREE UNITS LANDED**, 2026-08-18
 
-### Wave 5 CLOSED — three planned, three dispatched, three landed
+### Wave 5 CLOSED — 3 planned, 3 dispatched, 3 landed
 
 `D-REPAIR` `036e56d`, **`L5` `4be46ef`**, **`V-W4` `b46ee4d`**. Gates immutable at
 `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`, committed before any dispatch and **unchanged after it** —
@@ -21,21 +21,8 @@ amend a dispatched gate** and required it at integration instead (demoted block 
 
 ### What I audited, mechanically, and NOT on either unit's report
 
-**`L5`.** Five new files, **no banked JSON touched**, journal insert-only 654/0. Pre-registration
-`e2f13c1` carries the gate, the readings and the discriminator, holds **no result number**, and
-precedes the first code commit by 15 min. **I re-fitted all 18 sweep cells** and reproduced every
-exponent; its evidence script runs clean from a fresh worktree. **The controls are
-why I believe the `NO` is about the object and not the apparatus:** the same machinery returns
-`−0.2498` at `α = 1.25` and `−0.5996` at `α = 1.6`, tracking `1 − α`, and the unmodulated `SS`
-control at `κ = a` returns `−2.000005` — with `ṁ = 0` the localisation error **is** summable. `C6`
-did **not** fire as planted on its 5-point form (`2.03e-02` vs `1e-02`); it **says so**, **the
-tolerance was not moved**, and the constant it perturbs is not what the `NO` rests on.
-
-**`V-W4`.** Three new files, **nothing of `V3`'s or `L2′`'s edited**, no Conductor file touched.
-`self_hash` `e0171ac1e855f90e` recomputed independently. **I re-ran its re-derivation from an empty
-cache against primaries I fetched myself**: exit **1** with **exactly the two item-(2) discrepancies
-it reports**, none manufactured, (1)(3)(4)(5) clean, `p2_route_l2_decay_v1.json` regenerating
-**bit-identically**. It also **withdrew one of its own first-pass claims** mid-run.
+**Demoted verbatim 2026-08-18 when wave 6's plan was written**, per the remedy in the headroom
+report below → `## Superseded — wave 5's mechanical audits`. Nothing was shortened.
 
 ### §3i — THE DIRECTION CHECK, per unit, against the RECORD
 
@@ -71,37 +58,52 @@ backwards. Lane T's two re-open conditions are unchanged and neither fired. What
 **value** of `T2″`, now the cheapest thing that could put a live W4 clause back in front of Lane L.
 **Cost before ranking.**
 
-### Headroom at the wave boundary (§3j) — MEASURED IN **BYTES**, AND THE FIRST COUNT WAS WRONG
+### Headroom at the wave boundary (§3j) — IN **BYTES**, AND THE FIRST COUNT WAS WRONG
 
 **A correction the next Conductor needs:** I first measured with Python `len()` — **characters**.
-These files are dense with multi-byte UTF-8 (`—`, `⚠`, `≤`, `ρ`, `α`), so that under-reports by ~2%,
-and on bytes **`WALLS.md` and `OPTIONS.md` were both OVER cap** when I read them as inside it. `HEAD`
-was compliant: the defect is **mine, this integration's**. **Measure with `wc -c`.**
+These files are dense with multi-byte UTF-8, so that under-reports by ~2%, and on bytes **`WALLS.md`
+and `OPTIONS.md` were both OVER cap** when I read them as inside it. `HEAD` was compliant: the defect
+is **mine**. **Measure with `wc -c`.** `ORCHESTRATION.md` §3j now says so.
 
 | file | bytes | cap | free |
 |---|---|---|---|
-| `STATE.md` | 24,198 | 24,576 | 378 (longest row 583 ≤ 600) |
+| `STATE.md` | 23,247 | 24,576 | 1,329 (longest row 583 ≤ 600) |
 | `WALLS.md` *(excl. exempt `## History`)* | 32,233 | 32,768 | 535 |
 | `OPTIONS.md` | 24,487 | 24,576 | 89 |
-| `ORCH_STATE.md` LIVE block | **at cap** | 8,192 | **<100** |
+| `ORCH_STATE.md` LIVE | **at cap** | 8,192 | **<100** |
 
-Integration cycles: **wave 5 = 2**. **Context HAS been summarised** — §9d's triggers are 12 cycles
+Cycles: **wave 5 = 2**. **Context HAS been summarised** — §9d's triggers are 12 cycles
 *or* first summarisation, and **the second has fired**: wave 6 is planned knowing a handoff is due.
 
 **Retired this integration**, verbatim: `E`'s H-hard narrative and the superseded lane-priority
-paragraphs → `WALLS_HISTORY.md` §E, §PRIORITIES; `V3` and `L2′` rows → `writeup/INDEX.md`; the wave-5
-in-flight narrative and the fork paragraph → the blocks below; **and, on finding the overrun, two
-more** — `V-W4`'s `≤ 1` provenance paragraph → §W4-PROV (1,087 B; (a) is SHUT *and* VERIFIED) and the
-refuted `~8×` cost-model block → §OPTIONS-A (753 B, struck kept struck), both leaving live pointers
-carrying the wall-relevant facts. **Retirement, not compaction.**
+paragraphs → `WALLS_HISTORY.md` §E, §PRIORITIES; `V3` and `L2′` rows → `writeup/INDEX.md`; wave 5's
+unit table → its own committed plan file; the wave-5 in-flight narrative, the fork paragraph and this
+wave's audit detail → the blocks below; **and, on finding the overrun** — `V-W4`'s `≤ 1` provenance
+paragraph → §W4-PROV (1,087 B) and the refuted `~8×` cost-model block → §OPTIONS-A (753 B, struck
+kept struck), both leaving live pointers. **Retirement, not compaction.**
 
-**THE NEXT RETIREMENT IS STILL NAMED, because 535 bytes is not headroom.** `WALLS.md`: W3's
+**THE NEXT RETIREMENT IS NAMED, because 535 bytes is not headroom.** `WALLS.md`: W3's
 cell-occupancy narrative retires **the moment wave 6's audit lands** (that unit supersedes it), and
 Lane T's *price* bullets restate `OPTIONS.md` §E — **but Lane T got MORE load-bearing this wave, so
 those move only behind a pointer that keeps every number.** `OPTIONS.md`: §F's discharged items.
-`ORCH_STATE.md`: the remedy is §3j's own — **demote this wave's audit detail when wave 6's plan is
-written**, the next touch of this file. **If a wave needs more than that, the cap itself is
-the escalation, not the content.**
+`ORCH_STATE.md`: **done** — wave 5's audit detail demoted verbatim when this plan was written.
+**If a wave needs more than that, the cap itself is the escalation, not the content.**
+
+### WAVE 6 — PLANNED, COMMITTED BEFORE DISPATCH: `writeup/waves/WAVE6_PLAN.md` @ `e202653`
+
+**`L6`** (Lane L, **CONSTRUCTION, FIRST**, ~10² agent-h) — **bank a discrete route-4 profile.** Route
+4 has never had one; leg 381's bill and `L5`'s clause-(b) bill were both measured on a **synthetic**
+stand-in, which is why `L5`'s exponent is a class fact and its constant is not route 4's.
+**`V5`** (Lane V, **obligatory under ruling Q4**) — adversarial full-text audit of
+`arXiv:2509.25116` at leg-309 depth, **two clauses answered separately**, the 3D clause arbitrated by
+**W2's own pre-committed test**, **not** folded into the close/does-not-close verdict; it carries the
+wave-4 repair as `_v2` files, `v1` untouched (Q3). **`V-W5`** (**last**) — verifies wave 5, which it
+did not plan, including **whether `C6`'s tolerance was ever moved**.
+
+**A GATE DEFECT OF MINE, FOUND WHILE PLANNING.** `L5`'s wave-5 gate named *"route 4's **banked**
+discrete profile"*, which **does not exist** — the gate was **unsatisfiable as worded**, and my
+integration commit `e42e7ab` called the substitution a *limitation* when it is a **gate deviation**.
+`writeup/CORRECTIONS.md` §34, row 16. **No wave-6 gate names an artefact I have not checked exists.**
 
 ### Open escalations
 
@@ -113,6 +115,27 @@ ban-wording packet (machine record **DISCHARGED**) and the leg-257 lift-clause d
 NOT ruled**. C1 is **DISCHARGED** and stands **EXEMPLAR-FREE**.
 
 ---
+
+
+## Superseded — wave 5's mechanical audits, demoted 2026-08-18 under §3j
+
+### What I audited, mechanically, and NOT on either unit's report
+
+**`L5`.** Five new files, **no banked JSON touched**, journal insert-only 654/0. Pre-registration
+`e2f13c1` carries the gate, the readings and the discriminator, holds **no result number**, and
+precedes the first code commit by 15 min. **I re-fitted all 18 sweep cells** and reproduced every
+exponent; its evidence script runs clean from a fresh worktree. **The controls are
+why I believe the `NO` is about the object and not the apparatus:** the same machinery returns
+`−0.2498` at `α = 1.25` and `−0.5996` at `α = 1.6`, tracking `1 − α`, and the unmodulated `SS`
+control at `κ = a` returns `−2.000005` — with `ṁ = 0` the localisation error **is** summable. `C6`
+did **not** fire as planted on its 5-point form (`2.03e-02` vs `1e-02`); it **says so**, **the
+tolerance was not moved**, and the constant it perturbs is not what the `NO` rests on.
+
+**`V-W4`.** Three new files, **nothing of `V3`'s or `L2′`'s edited**, no Conductor file touched.
+`self_hash` `e0171ac1e855f90e` recomputed independently. **I re-ran its re-derivation from an empty
+cache against primaries I fetched myself**: exit **1** with **exactly the two item-(2) discrepancies
+it reports**, none manufactured, (1)(3)(4)(5) clean, `p2_route_l2_decay_v1.json` regenerating
+**bit-identically**. It also **withdrew one of its own first-pass claims** mid-run.
 
 ## Superseded — the 2026-08-14 fork, retired from the live preamble 2026-08-18 under §3j
 

@@ -100,62 +100,28 @@ brief since carries **COMMIT DURING THE RUN, NOT ONLY AT THE GATE**. **Wave 4 re
 gate's own wording. Narrative, headroom and the §3i answers for both waves: `reports/ORCH_STATE.md`
 Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits `6320790`, `391fd8f`.
 
-## WAVE 5 — COMPLETE 2026-08-18. All three units returned; plan committed before dispatch.
+## WAVE 5 — COMPLETE 2026-08-18. Three planned, three dispatched, three landed.
 
-**Gates and pre-committed readings, FINAL WORDING: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`,
-committed BEFORE any dispatch.** They are in that file and not restated here because integrating one
-unit already took all three capped files to within 0.7% of their limits (§3j; `reports/ORCH_STATE.md`).
-**Plan committed first, pointer second, both before a worker starts.**
+**Gates and pre-committed readings, FINAL WORDING and verbatim: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`, committed BEFORE any dispatch.** The unit descriptions are in that file and are **retired from here** under §3j — a pointer to committed text is not a summary. SHAs `036e56d` (`D-REPAIR`), `4be46ef` (`L5`), `b46ee4d` (`V-W4`); integration `e42e7ab`. **The mechanical audits, `§3i`'s seven per unit and the headroom report are in `reports/ORCH_STATE.md`.**
 
-| unit | lane | what it is |
-|---|---|---|
-| `L5` | **L**, **CONSTRUCTION, dispatched FIRST** | **W4 clause (b): the natively finite-energy ansatz.** Build it, derive the profile system with every term the modulation and cutoff generate, and MEASURE on route 4's banked profile whether a cutoff radius and a named norm exist where the localisation error beats the closure threshold — **a number, the clause-(b) analogue of leg 381's bill.** |
-| `D-REPAIR` | infrastructure | `V-W3`'s **D2–D6**, plus the four Conductor debts held open until `V-W3` returned: `fig107` and `p2_route_t6_v1_evidence.py` into `P2_EVIDENCE`, `INDEX.md` rows for `E` and `V-W2`, and `INDEX.md`'s stale figure-allocation table. |
-| `V-W4` | verification, **LAST** | **Wave 4 only.** `V3`'s YES at re-fetched full text, its 8 `NO`s, `L2′`'s pin, the 8 `FAILS-BY-CONSTRUCTION` and the 1 `SATISFIED`, and the bill re-derivation. |
+**⚠ A PRECEDENT SET HERE: one request to change a gate mid-wave was REFUSED.** Ruling Q5 landed after dispatch asking `L5` to state what distinguishes a genuine natively-finite-energy ansatz from the same trap in a different hat. **Amending a gate after dispatch defeats pre-registration**, so it was required **at integration** instead — and `L5`'s own pre-registration `e2f13c1`, made **before the ruling existed**, already carried the discriminator: **Clay condition (7), `E(t)` bounded uniformly in `t`, measured across all three `κ` branches.**
 
-**`V-W4`'s gate item (3) names the ceiling this Conductor flagged rather than buried:** `L2′`'s
-*"at most 1"* rests on **Escauriaza–Seregin–Šverák, NOT read at primary** — it reaches the record
-through two independently-read secondaries. **If that direction does not follow, the pin does not
-hold and W4 clause (a) re-opens.** That is the sharpest single test in the wave.
+## WAVE 6 — PLANNED AND COMMITTED BEFORE DISPATCH. Plan: `writeup/waves/WAVE6_PLAN.md` @ `e202653`.
 
-**DISPATCHED** on branches `leg/400-l5-finite-energy`, `repair/wave3-defects`, `verify/wave4` —
-construction first, verifier last (§3f rule 3). **Gates unchanged after dispatch, and one request to
-change one was REFUSED:** ruling Q5 landed mid-wave asking `L5` to state what distinguishes a genuine
-natively-finite-energy ansatz from the same trap in a different hat, and amending a gate after
-dispatch defeats pre-registration — so it was **required at integration instead**, and `L5`'s own
-pre-registration (`e2f13c1`, before the ruling existed) turned out to carry the discriminator already:
-**Clay condition (7), `E(t)` bounded uniformly in `t`, measured across all three `κ` branches.**
-**ALL THREE UNITS RETURNED AND ARE LANDED** — rows above, SHAs `036e56d`, `4be46ef`, `b46ee4d`.
+**Gates in FINAL WORDING in the plan file, not re-wordable after dispatch — including by a mid-wave ruling, which is taken at integration instead (§3g; refused once in wave 5).** §3f rule 3: construction opens, verifier last. **§3i q7 fired TWICE running** (last six landed: reading, grading, verification, infrastructure, construction, verification), so debt 1 is discharged by making `L6` **the wave's centre**, not a side unit.
 
-## WAVE 6 — OWED BEFORE IT IS PLANNED
+| unit | lane | what it must return | status |
+|---|---|---|---|
+| **`L6`** | L | **CONSTRUCTION, FIRST, ~10² agent-h.** Bank a **discrete route-4 profile** — the object route 4 has NEVER had, which is why `L5`'s constant is a stand-in's. Gate: smallest residual in the norm route 4's closure requires, and does it **decrease under refinement**, at what rate. Collapse to exactly-(D)SS ⇒ **STOP, call it `NO`**. | **PLANNED** |
+| **`V5`** | V | **OBLIGATORY (ruling Q4).** Adversarial full-text audit of `arXiv:2509.25116` at leg-309 depth. **TWO clauses answered SEPARATELY:** does the certificate close, and — on **W2's own pre-committed test, NOT folded into the first** — is the profile genuinely **3D**. **Second deliverable: the wave-4 repair** (`D1`–`D6`, `N1`) as **new `_v2` files, `v1` UNTOUCHED** (Q3). | **PLANNED** |
+| **`V-W5`** | — | **LAST.** Verifies wave 5, which it did not plan. Five items: `L5`'s `NO` and `ρ`-exponent re-derived from artefact+code, not report; its three positive controls; **was `C6`'s tolerance EVER moved**; both `self_hash`es; `D-REPAIR`'s epoch correction. **REPAIR NOTHING.** | **PLANNED** |
 
-Not a plan; a **debt list**, written down at wave 5's close so it is not rediscovered at the boundary.
+**⚠ A GATE DEFECT OF MINE, REGISTERED SO IT DOES NOT REPEAT.** `L5`'s wave-5 gate said measure *"on route 4's **banked** discrete profile"*. **Route 4 has no banked profile: the gate was unsatisfiable as worded.** `L5` said so in its artefact and used leg 381's banked **synthetic** (controls reproduce leg 381 to `1.996e-12`).
+The `NO` is unaffected — threshold-free, resting on an **exponent** (`0.0001085`), not a constant — but **`c_mod = 869.288` is the stand-in's number, not route 4's**. `writeup/CORRECTIONS.md` §34, row 16. **No wave-6 gate names an artefact I have not checked exists.**
 
-1. **CONSTRUCTION, AND IT IS NOW BINDING.** Debt 3 was written *"if `L5` returns a `NO`, wave 6 must
-   open with construction that is not a reading."* **`L5` returned a `NO`.** Five consecutive landed
-   units have been reading, verification, grading, infrastructure and a measurement-on-a-synthetic.
-   **The wave opens with construction or it is out of contract.**
-2. **OBLIGATORY, by ruling Q4** — the adversarial full-text audit of `arXiv:2509.25116` to leg-309
-   depth (≈4–8 h, Lane V). Enumerate the load-bearing constants **before** adjudicating; recompute
-   what is recomputable; check the localisation step (Remark 2, §1.3 + §2); **pre-commit both
-   branches**; and answer as a **separate clause** whether the certified profile is genuinely 3D —
-   **W2's own pre-committed test is the arbiter, and it must not be folded into the W3 verdict.**
-   **`V-W4` has already found the first thing this audit must confront: no journal-ref.**
-3. **A VERIFIER for wave 5** — `V-W4` covered wave 4 only. `L5`, `D-REPAIR` and `V-W4` are all
-   **UNVERIFIED**, and the Conductor planned wave 5 and so may not verify it.
-4. **A REPAIR unit for `V-W4`'s six defects and `N1`** — `D1`–`D4` (quote/attribution in `V3`'s
-   rows), **`D5`/`D6` (the pin's provenance)**, `N1` (`326.875` is amplitude-dependent, not a
-   portable constant). **Ruling Q3 is the standing rule: correction RECORD, banked artefacts
-   UNTOUCHED.** `WALLS.md` §W4 already carries the provenance correction; the artefacts do not.
-5. `fig81_route_egmf_v1_evidence.py` unregistered, and the **52** cited-but-unrebuildable figures
-   (`writeup/check_figure_coverage.py`, executable, currently exits 1).
+**CARRIED FORWARD, NOT ATTEMPTED:** `fig81_route_egmf_v1_evidence.py` + the **52** cited-but-unrebuildable figures (`writeup/check_figure_coverage.py`). Real; not the priority while construction is the binding debt.
 
-**THE RANKING QUESTION WAVE 6 INHERITS, stated so it is not decided by drift.** W4's only unbroken
-clause is **(c)**, which belongs to **Lane T, DEFERRED**. That does **not** re-open Lane T: its two
-re-open conditions are unchanged and neither has fired. **Lane T is not re-opened by W4 running out
-of clauses elsewhere** — that would be a decision superseding a measurement, backwards. What it does
-change is the value of **`T2″`** (re-open condition (ii)), which is now the cheapest thing that could
-put a live clause back in front of Lane L. **Costed before it is ranked, not after.**
+**THE RANKING QUESTION WAVE 6 INHERITS, AND DOES NOT ANSWER BY DISPATCHING.** W4 running out of clauses in Lane L does **NOT** re-open Lane T — a decision may not supersede a measurement. Both re-open conditions are unchanged and neither fired. What changed is the **value of `T2″`** (condition (ii)), now the cheapest thing that could put a live W4 clause back in front of Lane L. **Cost before ranking.**
 
 ## Open — needs the user, not a task
 
