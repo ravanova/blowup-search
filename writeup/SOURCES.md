@@ -104,3 +104,19 @@ the directive priced** — and what it should actually buy is a **forward-citati
 
 **Maintenance (§3k rule 1):** a unit that reads a source **updates this file in the same commit**
 that lands its artefact. A row with no DEPTH is a defect.
+
+## Appended 2026-08-19 by `L6-b` (leg 406) — APPEND-ONLY, nothing above this line edited
+
+**§3k rule 3, discharged rather than assumed.** `L6-b` builds **no new method**: it runs
+`L6`'s own apparatus (`experiments/p2_route_l6_v1.py`, imported unchanged) at a 25× larger
+iteration cap. The published method that apparatus implements, named with its citation as the
+rule requires:
+
+| # | source | claim it supports | DEPTH | read by | load-bearing |
+|---|---|---|---|---|---|
+| L6b-1 | Byrd, Lu, Nocedal, Zhu, *"A limited memory algorithm for bound constrained optimization"*, **SIAM J. Sci. Comput. 16(5) (1995) 1190–1208** | the minimiser used by `L6` (leg 401 §0.3) and by `L6-b` (leg 406) — L-BFGS-B, via `scipy.optimize.minimize(method="L-BFGS-B")` | **`ABSTRACT`** — the *implementation* is used and exercised; the **paper is not read at primary** | `L6` named it, `L6-b` records the depth | **NO** — and the reason is executable, not rhetorical: every number `L6-b` reports is the value of a residual functional at a banked coefficient vector, recomputable by anyone from `writeup/data/p2_route_l6b_v1.json` **without knowing which algorithm produced the vector**. If the 1995 paper were wrong, no claim in `WALLS.md`, `STATE.md`, `CLAY_OBLIGATIONS.md` or `L6-b`'s gate answer would change. Under §3k rule 2 an `ABSTRACT` row may not carry a load-bearing claim, and this one carries none. |
+
+**Note for whoever fills the "Owed at pre-registration" table.** `L6`'s own row was never
+added there; this row supplies the depth retrospectively for the optimiser both units use.
+It does **not** discharge anything owed for `R2`, `R3`, `R4` or the NRŠ 1996 `SECOND HAND`
+debt, all of which remain exactly as recorded above.
