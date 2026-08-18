@@ -45,6 +45,12 @@ WANTED = [
     ("2210.07191", "F4", "Chen-Hou, Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations"),
     ("1912.11009", "F5", "Merle-Raphael-Rodnianski-Szeftel, On the implosion of a three dimensional compressible fluid"),
     ("2606.12758", "F5", "OFF-LIST: Self-similar imploding solutions of the 1D compressible Euler equations with far field cutoff"),
+    # -- OFF-LIST, added DURING the run and marked as such per SS2.3's last line.  These are
+    # -- the closest published thing to SS4's localisation clause actually succeeding for
+    # -- INCOMPRESSIBLE Navier-Stokes on R^3: Jia-Sverak's own 2012 "future work" sentence.
+    ("2112.03116", "F3-OFFLIST", "OFF-LIST: Albritton-Brue-Colombo, Non-uniqueness of Leray solutions of the forced Navier-Stokes equations"),
+    ("2209.03530", "F3-OFFLIST", "OFF-LIST: Albritton-Brue-Colombo, Gluing non-unique Navier-Stokes solutions"),
+    ("1103.3718",  "F7", "SECONDARY for Bogovskii 1979 (journal-only): an elementary proof of the continuity of Bogovskii's right inverse of the divergence"),
 ]
 
 

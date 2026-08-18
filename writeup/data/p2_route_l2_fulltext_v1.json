@@ -95,7 +95,6 @@
   },
   {
    "arxiv_id": "1904.04795",
-   "http_status": 200,
    "pdf_bytes": 664080,
    "pdf_md5": "0fb7ddeea16ed3cc0ce1132baf40596d",
    "txt_md5": "e6950ab8a2fdce2db39eaa1816b3f334",
@@ -143,6 +142,39 @@
    "status": "OK",
    "family": "F5",
    "title": "OFF-LIST: Self-similar imploding solutions of the 1D compressible Euler equations with far field cutoff"
+  },
+  {
+   "arxiv_id": "2112.03116",
+   "http_status": 200,
+   "pdf_bytes": 426725,
+   "pdf_md5": "7a1650324e020b5320671ce401eaae9a",
+   "txt_md5": "1a9f1b47840c85792da1b4302dc95896",
+   "txt_lines": 1647,
+   "status": "OK",
+   "family": "F3-OFFLIST",
+   "title": "OFF-LIST: Albritton-Brue-Colombo, Non-uniqueness of Leray solutions of the forced Navier-Stokes equations"
+  },
+  {
+   "arxiv_id": "2209.03530",
+   "http_status": 200,
+   "pdf_bytes": 281754,
+   "pdf_md5": "69644a79383f5115ed096065481ab51d",
+   "txt_md5": "ab574e9900ce35f63fa01f1156a35384",
+   "txt_lines": 1187,
+   "status": "OK",
+   "family": "F3-OFFLIST",
+   "title": "OFF-LIST: Albritton-Brue-Colombo, Gluing non-unique Navier-Stokes solutions"
+  },
+  {
+   "arxiv_id": "1103.3718",
+   "http_status": 200,
+   "pdf_bytes": 206540,
+   "pdf_md5": "ef8fd58b76a35bdac6d102571b8c4e1a",
+   "txt_md5": "8c3e0a02e111ae36520881257cb3a501",
+   "txt_lines": 927,
+   "status": "OK",
+   "family": "F7",
+   "title": "SECONDARY for Bogovskii 1979 (journal-only): an elementary proof of the continuity of Bogovskii's right inverse of the divergence"
   }
  ]
 }
