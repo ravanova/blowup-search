@@ -1,0 +1,115 @@
+{
+ "issued_by": "V5",
+ "leg": 402,
+ "branch": "leg/402-v5-audit-25116",
+ "date": "2026-08-18",
+ "kind": "CORRECTION RE-ISSUE (delta document)",
+ "ruling": "Q3 -- correction RECORD, artefact UNTOUCHED. No _v1 file was edited by this unit.",
+ "scope_discipline": "This document carries ONLY the fields CORRECTIONS.md SS33 names, plus the supersedes and correction_record pointers the dispatch requires. It is a DELTA, not a re-issue of the whole artefact: every field of the _v1 not named below stands unchanged and the _v1 remains the artefact of record for them.",
+ "quoting_discipline": "Dispatch reading (d): QUOTE VERBATIM OR DO NOT QUOTE. Every corrected quote below was re-anchored by V5 against the AUTHORS' OWN LaTeX e-print source fetched today, not against pdftotext output. That choice eliminates the defect class of D3 (a pdftotext line-break hyphenation carried into an artefact as verbatim) at the root.",
+ "artefact": "writeup/data/p2_route_l2_decay_v2.json",
+ "supersedes": "writeup/data/p2_route_l2_decay_v1.json",
+ "supersedes_self_hash_of_v1": "fd5c410859eb764b",
+ "correction_record": "writeup/CORRECTIONS.md SS33",
+ "correction_record_items_discharged": [
+  "D5",
+  "D6",
+  "N1"
+ ],
+ "corrections": [
+  {
+   "id": "D5",
+   "row": "T2c",
+   "field": "citation / quote_provenance -- the pin's provenance",
+   "defect_per_SS33": "the citation carrying the load-bearing row points at ESS 'Backward uniqueness for parabolic equations' (ARMA 169), which contains NO Navier-Stokes regularity theorem; the paper that does is ESS Russian Math. Surveys 58 (2003)",
+   "was": "D. Chae, J. Wolf, arXiv:1610.09464v2, Remark 1.2, citing L. Escauriaza, G. Seregin, V. Sverak",
+   "now": {
+    "secondary_actually_read": "D. Chae, J. Wolf, arXiv:1610.09464v2, Remark 1.2 -- ONE unproved sentence, no hypotheses stated",
+    "the_ESS_paper_Chae_Wolf_points_at": "L. Escauriaza, G. Seregin, V. Sverak, 'Backward uniqueness for parabolic equations', Arch. Ration. Mech. Anal. 169 (2003) 147-157 -- a backward-uniqueness lemma for parabolic operators. It states NO Navier-Stokes regularity criterion.",
+    "the_ESS_paper_that_carries_the_criterion": "L. Escauriaza, G. Seregin, V. Sverak, 'L_{3,infty}-solutions of the Navier-Stokes equations and backward uniqueness', Russian Math. Surveys 58 (2003) 211-250.",
+    "primary_reachability_of_both_ESS_papers": "UNREACHABLE",
+    "banked_as": "UNREACHABLE -- NEVER AS A ZERO",
+    "why_unreachable": "both 2003 papers are journal-only; au:'Escauriaza' on the arXiv API returns 25 entries and neither is among them (instrumented, http 200, not a throttle); no S2 key exists here; read-do-not-contact binds.",
+    "THE_ROUTE_THE_AT_MOST_1_DIRECTION_ACTUALLY_RUNS_THROUGH": {
+     "form": "the LOCAL SUITABLE-WEAK-SOLUTION form, NOT the global Leray-Hopf form",
+     "source": "G. Seregin, arXiv:math/0510396, SS1 -- reachable at primary, by an ESS AUTHOR, citing ESS Russian Math. Surveys 58 (2003) as its [2]",
+     "hypotheses": "suitable weak solutions on Q_T = Omega x ]0,T[ for ANY Omega: v in L_{2,inf}(Q_T) cap W^{1,0}_2(Q_T), p in L_{3/2}(Q_T), the equations in the sense of distributions, and the LOCAL ENERGY INEQUALITY. NO FINITE-ENERGY HYPOTHESIS.",
+     "why_this_matters_and_not_a_technicality": "the object's GLOBAL energy is MEASURED INFINITE (int_{|y|<1e2}|U|^2 = 1153.09, int_{|y|<1e4}|U|^2 = 125445.0, int_{|y|<1e6}|U|^2 = 12566000.0, int_{|y|<1e8}|U|^2 = 1256640000.0 -- linear in the cutoff radius, so the integral over R^3 diverges). THE OBJECT IS NOT A LERAY-HOPF SOLUTION. The global form of ESS does not apply to it and the phrase 'by Escauriaza-Seregin-Sverak' invited a form of the theorem the object provably fails.",
+     "object_supplies_the_local_hypotheses": {
+      "sup_t int_{B_1}|u|^2": 1.42887,
+      "int_{-1}^{0} int_{B_1}|grad u|^2": 628344.0,
+      "local_energy_inequality": "holds with EQUALITY, since u is C^inf(Q) by hypothesis"
+     },
+     "seregin_m_T_criterion_separates_the_cases_EXACTLY_AT_THE_PIN": {
+      "alpha_eq_1": {
+       "m_T": "+infinity",
+       "int_{B_1}|u|^3 at |s| = 1e-4, 1e-8, 1e-16, 1e-32": [
+        57.9953,
+        115.742,
+        231.481,
+        462.962
+       ],
+       "reading": "LOG-DIVERGENT; the criterion DOES NOT APPLY; the case stays open"
+      },
+      "alpha_gt_1": {
+       "m_T": "||U||^3_{L^3} < infinity, s-independent",
+       "reading": "the criterion APPLIES; (0,0) is a REGULAR point"
+      }
+     },
+     "and_then": "DSS scaling u(lam^{-k} y, lam^{-2k} s) = lam^k u(y,s) with |u| <= M near the origin forces lam^k |u(y,s)| <= M for every k, hence u == 0"
+    }
+   },
+   "changes_the_verdict": false,
+   "verdict_unchanged": "FAILS",
+   "the_pin_still_holds": true,
+   "note_in_the_v1s_favour_preserved": "T2c's `name` field said 'via Escauriaza-Seregin-Sverak BACKWARD UNIQUENESS', which matches Chae-Wolf's [5] exactly, and T2c's `citation` named no specific ESS paper. The _v1 neither stated nor mis-stated which one. What it did was leave the provenance underdetermined at the load-bearing row. That is what this correction repairs."
+  },
+  {
+   "id": "D6",
+   "row": "honest_ceiling.the_pin",
+   "field": "the_pin",
+   "defect_per_SS33": "'restated INDEPENDENTLY by Pineau-Vicol' overstates: PV state it for rotated globally self-similar solutions, not DSS, and both routes terminate at ESS -- independent AUTHORS, not an independent PROOF",
+   "was": "For any NONTRIVIAL backward lambda-DSS blow-up profile of 3D Navier-Stokes the far-field decay exponent is pinned to EXACTLY alpha = 1: at least 1 by Chae-Wolf Thm 1.1 (an upper bound on |u| of the form C/(sqrt(-t)+|x|)), and AT MOST 1 by Chae-Wolf Remark 1.2 + Escauriaza-Seregin-Sverak, restated independently by Pineau-Vicol (2026) Sec. 1.2.",
+   "now": "For any NONTRIVIAL backward lambda-DSS blow-up profile of 3D Navier-Stokes the far-field decay exponent is pinned to EXACTLY alpha = 1. AT LEAST 1 by Chae-Wolf Thm 1.1 (an upper bound on |u| of the form C/(sqrt(-t)+|x|)). AT MOST 1 by Chae-Wolf Remark 1.2 -- which for the ACTUAL OBJECT (DSS at fixed lambda >> 1) is the ONLY primary statement of the implication -- terminating at Escauriaza-Seregin-Sverak, whose Navier-Stokes criterion is UNREACHABLE at primary here and is banked UNREACHABLE, never as a zero. The 'at most 1' direction is reachable at primary only in the LOCAL suitable-weak-solution form (Seregin, arXiv:math/0510396 SS1), which is the form the object satisfies, its global energy being MEASURED INFINITE. Pineau-Vicol (2026) SS1.2 state the implication for ROTATED GLOBALLY self-similar solutions, NOT for DSS; they are INDEPENDENT AUTHORS, NOT AN INDEPENDENT PROOF, since their route also terminates at Escauriaza-Seregin-Sverak.",
+   "what_was_removed_and_why": {
+    "removed_word": "independently",
+    "why": "it asserted evidential independence that does not exist. Two secondaries citing the same unreachable primary are one line of evidence, not two."
+   },
+   "the_step_that_is_the_verifiers_not_Pineau_Vicols": "extending PV's sentence from rotated-globally-self-similar to DSS is immediate (||u(.,t)||_{L^3} = ||U(.,s)||_{L^3} is s-periodic hence bounded) but that step is the VERIFIER's, not PV's, and is not in PV's bytes. It is attributed here rather than absorbed.",
+   "changes_the_verdict": false,
+   "the_pin_still_holds": true,
+   "what_the_correction_actually_costs": "not the pin, but the record's HONESTY ABOUT TRUST: the 'at most 1' direction rests on unproved one-sentence remarks in secondaries plus one reachable ESS-author restatement, not on a primary text read here. The _v1 understated that. This field now states it."
+  },
+  {
+   "id": "N1",
+   "row": "banked_bill_re_derived_from_artefact",
+   "field": "critical_L3_tail_cubed_increment_per_decade",
+   "defect_per_SS33": "AMPLITUDE-DEPENDENT: a unit-amplitude model gives 4*pi*ln(10) = 28.935. The LOG-DIVERGENCE reproduces independently; the NUMBER DOES NOT TRAVEL.",
+   "was": 326.87521405120924,
+   "was_presented_as": "a portable constant",
+   "now": {
+    "value": 326.87521405120924,
+    "status": "AMPLITUDE-DEPENDENT -- NOT A PORTABLE CONSTANT",
+    "must_not_be_re_issued_as_portable": true,
+    "what_it_is": "the per-decade increment of the cubed critical L^3 tail norm FOR THE SPECIFIC AMPLITUDE of leg 381's banked profile. Rescaling the profile's amplitude by c rescales this number by c^3. It characterises that profile, not the phenomenon.",
+    "the_amplitude_free_content": {
+     "unit_amplitude_model": 28.93548,
+     "closed_form": "4*pi*ln(10)",
+     "reproduces_independently": true
+    },
+    "what_actually_travels": "the LOG-DIVERGENCE itself -- that the cubed critical L^3 tail norm grows by a CONSTANT per decade, without bound, i.e. the tail L^3 norm rho-exponent is 1.2768224253058113e-05, i.e. zero, i.e. no decay at all.",
+    "what_the_bill_rests_on": "the divergence, which is amplitude-free. The bill is NOT re-opened by this correction."
+   },
+   "changes_the_verdict": false,
+   "changes_the_bill": false
+  }
+ ],
+ "what_none_of_this_changes": {
+  "verdicts": "ZERO verdicts change. T2c was and remains FAILS. The verdict counts (FAILS 9, FAILS-BY-CONSTRUCTION 8, SATISFIED 1) stand.",
+  "the_pin": "HOLDS. alpha is still pinned to exactly 1.",
+  "the_bill": "leg 381's bill is still NOT PAID by anyone, and the deficit of 0.5 in the exponent is still a step into a region the literature has emptied.",
+  "escauriaza_seregin_sverak": "banked UNREACHABLE at primary -- NEVER AS A ZERO. This is re-stated here because the standing rule requires it and because an UNREACHABLE silently becoming a zero is the exact failure this record exists to prevent.",
+  "L1_to_L4": "No link of the L1->L4 chain moved. Tier 2. Clay stays ~0.05%."
+ },
+ "self_hash": "9a58a36c81734066"
+}
