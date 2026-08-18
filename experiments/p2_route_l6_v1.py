@@ -1150,6 +1150,11 @@ def finalise(doc, results, banked, axis, axis_maxiter, args, st, t_start):
         this_is_not_a_certificate=True,
     )
 
+    # finalise() is called TWICE (SS7.6), so a self_hash from the first call may already
+    # be sitting in doc.  The recipe is sha256 of the document WITHOUT its own hash field;
+    # hashing a doc that still carries the stale one is a self-reference bug, and the
+    # evidence script's C01 caught it.
+    doc.pop('self_hash', None)
     body = json.dumps(doc, sort_keys=True)
     doc['self_hash'] = hashlib.sha256(body.encode()).hexdigest()[:16]
     OUT.write_text(json.dumps(doc, indent=1, sort_keys=True))
