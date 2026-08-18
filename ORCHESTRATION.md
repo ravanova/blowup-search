@@ -500,6 +500,25 @@ journal. If a number is in a banked JSON, the row cites the field; it does not r
 5. **Quote a gate by pointer once it is committed.** The wording is immutable on `main`; pasting
    it into every brief and every commit message pays for it repeatedly.
 
+**RETIREMENT, added 2026-08-18 — the caps must not cost a compaction per landing.** As first
+applied, the caps bind against a record that only grows, and the Conductor reported integrating a
+single unit *"required compacting all three capped files to within 0.7% of their limits."* That is
+the cap working and the mechanism missing. **The mechanism is retirement, not compression:**
+
+- **A unit's row leaves `STATE.md` once it is LANDED *and* VERIFIED.** It moves to `writeup/INDEX.md`
+  as one line — unit, gate answer in the gate's own words, SHA, verifier — and `STATE.md` keeps only
+  **live units, the next wave, and open user items.** A verified unit is history; history belongs in
+  the index and the journals.
+- **`WALLS.md`'s `## History` is exempt from that file's cap** and may be split to
+  `writeup/WALLS_HISTORY.md` when it dominates. Struck text is evidence and is never dropped to make
+  room — if the cap binds, move history out, never the live walls.
+- **`OPTIONS.md` entries marked `TAKEN` or `KILLED` retire to one line plus a pointer at the wave
+  boundary**, not when the file next overflows.
+
+**Compaction is what you do when retirement is not available.** A commit whose only content is
+compaction is a signal that something retirable was not retired; say so in that commit rather than
+absorbing it.
+
 **Report headroom at every wave boundary**, in the `ORCH_STATE.md` live block: integration cycles
 used, whether context has been summarised yet, and the four file sizes above. §9d's handoff
 triggers are unchanged — 12 cycles or first summarisation, whichever comes first — but a
