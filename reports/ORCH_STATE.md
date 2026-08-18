@@ -85,20 +85,22 @@ artefact a brief names exists.** Handoff at **wave 6's END**, when `L6` returns.
 | file | bytes | cap | free |
 |---|---|---|---|
 | `STATE.md` | 23,737 | 24,576 | 839 (longest row 570 ≤ 600) |
-| `WALLS.md` | 32,653 | 32,768 | 115 — **thin** |
+| `WALLS.md` | 30,980 | 32,768 | 1,788 — **Lane T retired 2026-08-19** |
 | `OPTIONS.md` | 24,423 | 24,576 | 153 |
-| `ORCH_STATE.md` LIVE | 7,054 | 8,192 | 1,138 |
+| `ORCH_STATE.md` LIVE | 8,148 | 8,192 | 44 — **thin** |
 
-**DEFECT OF MINE, FOUND AND REPAIRED 2026-08-19.** Yesterday's retirement inserted a block at
-a `txt.index(marker)` hit that landed **inside a pointer sentence** in the live block, splitting
-the wave-6 paragraph and pushing the current headroom table and the escalations list below the
-boundary. **Repaired by line index, not string search** — retire by slicing the section, never by
-searching for its title, because the title also appears in every pointer to it.
+**DEFECT OF MINE, FOUND AND REPAIRED 2026-08-19** — a retirement spliced into a live paragraph
+because it located its target by TITLE, and the title also lives in every pointer to it. Full
+entry and the mechanical rule: `writeup/CORRECTIONS.md` §37. **Retire by slicing between asserted
+line indices; measure the live block by line index too, or the cap check silently passes.**
 
-**Retired 2026-08-19, verbatim:** wave 5's close, the trigger record, wave 6's §3i →
-`## Superseded — wave 5's close, the trigger, and wave 6's §3i`; `OPTIONS.md` §A rows A/B/D and
-`E`'s stale summary → `WALLS_HISTORY.md` §OPTIONS-A2/§OPTIONS-E; `STATE.md`'s wave-5 section →
-`WALLS_HISTORY.md` §STATE-WAVE5. **`WALLS.md` is the thin one and must be retired from next.**
+**Retired verbatim 2026-08-19** (headings are the index; git carries the rest): ORCH's wave-5
+close / trigger / wave-6 §3i; `WALLS_HISTORY.md` §OPTIONS-A2, §OPTIONS-E, §STATE-WAVE5, **§LANE-T**
+— the last **before** `WALLS.md`'s next edit rather than after it bounced off the cap.
+
+**`R-prof`'s §3k rule 3 DISCHARGED before dispatch (2026-08-19)**: reference **named, fetched and
+STEPPED at `N = 24`** — JAX-CFD `ForcedNavierStokes2D` (PNAS 2021) + FFTW3 via `pyfftw` for the
+transform floor. `SOURCES.md` 23–25; caveats and drift fallback in `WAVE7_PLAN.md` §C.
 
 ### Open escalations — THREE OPEN, NONE RULED BY ME
 

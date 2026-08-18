@@ -274,12 +274,33 @@ cost within 3× of the reference at `N = 24`, YES or NO?**
   the solver in the same unit: a stepper change invalidates every banked comparison, which is
   precisely the `R4` problem, and it needs its own unit and its own equivalence check.
 
-**§3k, and it is not optional here.** Name the reference before writing a line: FFT-based
-pseudospectral steppers are **published**, and this realization's own source (Chandler–Kerswell's
-2D Kolmogorov flow, already cited in `OPTIONS.md` for `R_thres`) is the first place to look for the
-reference loop. **Do not hand-roll a benchmark and call it the reference** — a self-authored
-comparison measures the author's assumptions. The row in `writeup/SOURCES.md` must be filled at
-`FULL TEXT` in the same commit as the pre-registration.
+**§3k, DISCHARGED 2026-08-19 BEFORE DISPATCH, NOT LEFT TO THE UNIT.** The reference is
+**named, fetched, and verified to RUN at `N = 24`** — because a benchmark nobody can execute decays
+into a claim (**lesson 68**), and *"the reference is published somewhere"* is exactly that claim.
+
+| level | reference | status, verified by the Conductor |
+|---|---|---|
+| solver | **JAX-CFD** `jax_cfd.spectral.equations.ForcedNavierStokes2D` with `forcings.kolmogorov_forcing` — Kochkov *et al.*, **PNAS 118(21) e2101784118 (2021)**, `arXiv:2102.01010` | **CONSTRUCTED AND STEPPED at `N = 24`** under `jax 0.11.1`, `jax_cfd 0.2.1`, x64 enabled; returns `(24,13) complex128`. Same equation, published, independently authored. `SOURCES.md` row 23 |
+| transform | **FFTW3** — Frigo & Johnson, *Proc. IEEE* **93(2):216–231 (2005)** — via `pyfftw 0.15.1` | wheel fetched, imports. Supplies the floor: **20 transforms of `24 × 24` per RK4 step**. `SOURCES.md` row 24 |
+| method | Chandler & Kerswell, **JFM 722:554–595 (2013)**, `arXiv:1207.4682` | **CITATION ONLY, UNREAD.** Recorded for lineage. **Nothing may rest on it.** `SOURCES.md` row 25 |
+
+**TWO DIFFERENCES THE UNIT MUST MEASURE AND REPORT, NOT NORMALISE AWAY.** The reference steps with
+**Crank–Nicolson RK4**; ours uses an **exact integrating factor + RK4**. The reference transforms with
+**`rfftn` (`24 × 13`)**; ours uses full **`fft2` (`24 × 24`)**, ~2× the transform work for a real
+field. **A bare per-step ratio that ignores either is not an answer to the gate.** The second
+difference is also a *candidate finding*, written down here so nobody can later present it as a
+discovery: **moving to `rfft2` is a published-practice change the reference already makes.**
+
+**Install into a SEPARATE venv** — `.venv` is carrying live runs; do not perturb it. Verified recipe:
+`python3 -m venv <scratch>; pip install "jax[cpu]" jax-cfd pyfftw`.
+
+**IF THE REFERENCE DRIFTS** (a jax API break on some future install), the gate does **not** become
+self-authored: fall back to the **FFTW3 transform floor alone**, answer against it, and **record the
+drift as the reason** — a degraded reference, stated, is honest; a silently substituted one is not.
+
+**Do not hand-roll a benchmark and call it the reference** — a self-authored comparison measures its
+author's own assumptions. The `SOURCES.md` rows are filled **in the same commit as this
+pre-registration**, which is what §3k rule 3 requires.
 
 ---
 

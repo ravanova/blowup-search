@@ -2487,3 +2487,39 @@ divergence-free poloidal field, reproducing leg 381's own `ρ`-exponents to `1.9
 **What this changes about how I write gates:** a gate may not name an artefact without the Conductor
 having checked that the artefact exists. Wave 6's `L6` exists to remove the deficiency itself.
 **0 banked JSON files touched. No link of the `L1 → L4` chain moved.**
+
+## §37 — the Conductor's own retirement splice: a section moved by SEARCHING FOR ITS TITLE, when the title also lives in every pointer to it
+
+**Whose defect.** Mine, the Conductor's. Found and repaired 2026-08-19, one day after it was made.
+No unit is implicated and no measurement was touched.
+
+**What happened.** A §3j retirement in `reports/ORCH_STATE.md` located its insertion point with
+`txt.index(marker)`, where `marker` was the retired section's own title. **The first match was not
+the section — it was a POINTER SENTENCE in the live block that names the section it points at.** The
+retired block was therefore spliced into the middle of a live paragraph. Three consequences, none of
+which raised an error: the wave-6 paragraph was cut in half; a mangled heading appeared, welded to
+the sentence it had landed inside; and — the one that actually mattered — **the current headroom
+table and the whole open-escalations list ended up BELOW the superseded boundary**, where a reader
+following the file's own convention would have read them as retired.
+
+**Why it is worth a numbered entry rather than a note.** Nothing was deleted, so no diff review
+would flag data loss, and the file still parsed as markdown. The damage was *positional*: live
+material silently reclassified as superseded. **In a file whose entire function is to tell the next
+session what is still live, mis-filing is indistinguishable from lying.** This is the retirement
+mechanism's failure mode in general, and §3j prescribes retirement everywhere.
+
+**The rule, stated so it can be followed mechanically.** **Retire by SLICING THE SECTION between
+asserted line indices; never locate it by searching for its title.** A well-maintained file
+guarantees the title appears more than once — once as the heading, and once in every pointer that
+sends a reader to it. The better the cross-referencing, the more reliably a title search finds the
+wrong occurrence. Assert the boundaries (`assert L[i].startswith(...)`, `assert L[j].startswith(...)`)
+so a shifted file fails loudly instead of splicing quietly.
+
+**Repair.** Restored by line-index slicing with asserted boundaries: the pointer's truncated opening
+backtick was put back, the mis-placed block was moved below the superseded boundary, and the live
+headroom table and escalations list were returned above it. Verified by re-reading the heading list.
+
+**A second-order point the repair made obvious.** The same trap catches *size measurement*:
+computing a live-block length as `len(t[:t.index('## Superseded')])` returns the offset of the first
+POINTER to a superseded section, not the boundary — 540 bytes against a true 8,008 on the file as it
+stood. **Measure the block by line index too, or the cap check silently passes.**
