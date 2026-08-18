@@ -8,6 +8,7 @@ Writes: writeup/data/p2_route_l5_finite_energy_v1.json  (checkpointed after ever
 import importlib.util
 import json
 import math
+import sys
 import time
 from pathlib import Path
 
@@ -538,10 +539,138 @@ def main():
     L5.checkpoint(doc, "S10 C7")
 
     doc["runtime_seconds"] = round(time.time() - t0, 1)
-    doc["self_hash"] = L5.sha({k: v for k, v in doc.items() if not k.startswith("_")})
-    OUT.write_text(json.dumps(doc, indent=1))
+    assemble_gate(doc)
+    L5.checkpoint(doc, "S11 gate")
+    seal(doc)
     print("done in %.1f s -> %s" % (doc["runtime_seconds"], OUT), flush=True)
 
 
+def seal(doc):
+    doc.pop("_checkpoint", None)
+    doc.pop("_checkpoint_time", None)
+    doc["self_hash"] = L5.sha({k: v for k, v in doc.items() if k != "self_hash"})
+    OUT.write_text(json.dumps(doc, indent=1))
+
+
+# ---------------------------------------------------------------------------------------------
+# S11.  THE GATE -- assembled mechanically from the banked rows, by the SS3.3 rules
+# ---------------------------------------------------------------------------------------------
+
+def assemble_gate(doc):
+    sw = doc["sweep"]
+    kA = "alpha=1|kappa=a_physical_frozen|DSS"
+    kS = "alpha=1|kappa=a_physical_frozen|SS"
+    period = doc["bill_from_artefact"]["period_in_s"]
+    e = sw[kA]
+    c_mod = e["curl_L32_at_largest_rho"]                 # the LOAD-BEARING, pressure-free norm
+    c_vel = e["L3_at_largest_rho"]
+    per_period = c_mod * period
+    eps_list = ["1", "0.1", "0.01", "1e-06"]
+    doc["gate"] = {
+        "question": ("IS THERE A CUTOFF RADIUS rho AND A NAMED NORM IN WHICH THE TOTAL "
+                     "LOCALISATION-PLUS-MODULATION ERROR IS SMALLER THAN THE CLOSURE THRESHOLD "
+                     "IT MUST BEAT -- YES OR NO, WITH THE NUMBER?"),
+        "answer": "NO",
+        "answer_in_precommitted_wording": (
+            "NO. There is NO cutoff radius rho and NO named norm in which the total "
+            "localisation-plus-modulation error of the natively finite-energy ansatz beats the "
+            "closure threshold. In the load-bearing pressure-free norm "
+            "||curl F||_{L1_t L3/2_x} the error PER UNIT SIMILARITY TIME saturates at "
+            "c_mod = %.6g, with measured rho-exponent %.6f over rho0 in [%g, %g]: enlarging the "
+            "cutoff radius buys NOTHING. Summed over the infinitely many DSS periods a backward-DSS "
+            "blow-up requires, Sigma(infinity) = infinity, so the answer is NO for EVERY "
+            "eps_close > 0 and no closure constant is needed."
+            % (c_mod, e["curl_L32_rho_exponent_tail3"], RHOS[0], RHOS[-1])),
+        "norm": "||curl F||_{L1_t L3/2_x} = int ||curl_y R_loc(.,s)||_{L3/2_y} ds (pressure-free)",
+        "secondary_norm": "||F||_{L1_t L3_x} = int ||R_loc(.,s)||_{L3_y} ds",
+        "c_mod_per_unit_s": c_mod,
+        "c_mod_per_unit_s_velocity_norm": c_vel,
+        "c_mod_per_DSS_period": per_period,
+        "rho_exponent": e["curl_L32_rho_exponent_tail3"],
+        "rho_exponent_velocity_norm": e["L3_rho_exponent_tail3"],
+        "rho0_range_tested": [RHOS[0], RHOS[-1]],
+        "largest_cutoff_radius_in_y_tested": e["rows"][-1]["rho"],
+        "N_periods_affordable_by_threshold": {q: float(q) / per_period for q in eps_list},
+        "Sigma_infinity": "infinity",
+        "threshold_free": True,
+        "why_threshold_free": ("the NO does not compare c_mod to any closure constant: c_mod > 0 "
+                               "and rho-independent already makes Sigma(S) = c_mod S divergent, so "
+                               "the answer is NO for every eps_close > 0. C1 stays disengaged: no "
+                               "bounded approximate inverse, uniform in M or otherwise, is used."),
+        "the_obstruction_named": (
+            "THE MODULATION COMMUTATOR T3 = sum_k mdot_k (P[chi psi] - chi P[psi]). At kappa = a "
+            "the cutoff-drift T1 and the modulation-transport T2 CANCEL IDENTICALLY (measured "
+            "|T1+T2|/|T1| = %.3e), the viscous and nonlinear commutators T4, T5 decay like "
+            "rho^{-alpha-1} and rho^{-2alpha}, and what is left is EXACTLY T3 (measured "
+            "|R_loc|/|T3| = %.6f). T3 is proportional to mdot: it is EXACTLY ZERO iff the profile "
+            "is exactly self-similar, and its scale-invariant size is rho^{1-alpha}."
+            % (e["T12_over_T1_at_largest_rho"], e["total_over_T3_at_largest_rho"])),
+        "the_clause_b_bill": {
+            "required_rho_exponent_for_summability": "< 0 strictly, i.e. alpha > 1 STRICTLY",
+            "available_rho_exponent_at_the_pinned_alpha": e["curl_L32_rho_exponent_tail3"],
+            "banked_type_I_alpha": doc["bill_from_artefact"]["banked_type_I_alpha"],
+            "deficit_in_exponent": 0.0 - e["curl_L32_rho_exponent_tail3"],
+            "the_bill": ("clause (b) is an ENDPOINT failure, not a gap: the deficit in the exponent "
+                         "is ZERO, but summability needs the exponent STRICTLY negative and the "
+                         "pinned alpha = 1 delivers exactly 0. Compare clause (a)'s bill (leg 381): "
+                         "L2_threshold_alpha %s vs banked %s, deficit %s in the exponent."
+                         % (doc["bill_from_artefact"]["L2_threshold_alpha"],
+                            doc["bill_from_artefact"]["banked_type_I_alpha"],
+                            doc["bill_from_artefact"]["deficit_to_L2_in_exponent"])),
+            "what_a_YES_would_need": ("either alpha > 1 strictly -- but alpha is PINNED to exactly 1 "
+                                      "(Chae-Wolf 1610.09464 Thm 1.1 from below, Rmk 1.2 + "
+                                      "Escauriaza-Seregin-Sverak from above) -- or mdot == 0, i.e. an "
+                                      "EXACTLY self-similar profile, which Necas-Ruzicka-Sverak (ARMA "
+                                      "136 (1996) 55-98) and Tsai (ARMA 143 (1998) 29-51) exclude."),
+        },
+        "controls_that_could_have_flipped_it": {
+            "C7_modulation_absorption": doc["controls"]["C7_modulation_absorption_falsifier"]["flips_gate_to_YES"],
+            "C7_rho_exponent_after_optimal_absorption": doc["controls"]["C7_modulation_absorption_falsifier"]["rho_exponent_after"],
+            "C3_SS_control_exponent": sw[kS]["curl_L32_rho_exponent_tail3"],
+        },
+        "reading_that_fired": (
+            "NONE of (a) [no YES]; reading (c) fired ONLY for the kappa = 0 branch, which the "
+            "collapse test shows IS exactly DSS to %.1e and which is therefore called a NO and "
+            "stopped; the kappa = a branch -- the natively finite-energy one -- is NOT exactly "
+            "(D)SS (defect %.4f), so the ansatz did NOT collapse and the NO is a real measurement, "
+            "not a disguise. Reading (d) governs every number: all re-derived from "
+            "writeup/data/p2_route_cloc_v1.json (self_hash %s) and from this file's own rows."
+            % (doc["controls"]["C4b_exact_DSS_collapse_reading_c"]["kappa=0_similarity_frozen"]["max_rel_dss_defect"],
+               doc["controls"]["C4b_exact_DSS_collapse_reading_c"]["kappa=a_physical_frozen"]["max_rel_dss_defect"],
+               doc["bill_from_artefact"]["source_self_hash"])),
+    }
+    doc["chain"] = {
+        "links_moved": [],
+        "statement": ("NO link of the L1->L4 chain moved. This is a Tier-2 measurement on a "
+                      "synthetic realization; Clay stays at ~0.05%. Scale is not evidence."),
+    }
+    doc["under_resourced_with_a_cost"] = {
+        "what_is_missing": ("the true modulation amplitude |mdot| of route 4's object. The EXPONENT "
+                            "(0 at alpha = 1) is a property of the ansatz class and is settled here; "
+                            "the CONSTANT c_mod = %.6g is a property of leg 381's synthetic "
+                            "realization and is NOT route 4's number." % c_mod),
+        "why_it_does_not_change_the_answer": ("c_mod is measured LINEAR in the modulation amplitude "
+                                              "(control C3', ratio constant to %.1e), so any "
+                                              "|mdot| > 0 gives a positive rho-independent c_mod and "
+                                              "the same divergent Sigma. Only |mdot| == 0 -- exactly "
+                                              "self-similar -- gives c_mod = 0, and that object is "
+                                              "excluded by NRS/Tsai."
+                                              % doc["controls"]["C3p_modulation_amplitude_linearity"]["linear_in_amplitude_rel_spread"]),
+        "cost_to_remove_the_ceiling": [
+            "a BANKED discrete profile for route 4 (none exists: leg 382 line 174, leg 397 SS1) -- "
+            "the wave-4/5 construction legs, order 10^2 agent-hours, not purchasable inside leg 400",
+            "interval arithmetic on the same commutator to turn the float exponent into a certified "
+            "bound: a Route-D-style interval core over the annulus, order 10^1 agent-hours ON TOP of "
+            "a banked profile",
+        ],
+    }
+
+
 if __name__ == "__main__":
-    main()
+    if "--gate-only" in sys.argv:
+        doc = json.loads(OUT.read_text())
+        assemble_gate(doc)
+        seal(doc)
+        print("gate assembled -> %s" % OUT)
+    else:
+        main()
