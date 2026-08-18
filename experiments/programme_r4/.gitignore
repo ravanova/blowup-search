@@ -13,3 +13,10 @@ u5_shift_library.json
 # beside them are the record.
 u5_mining_progress.txt
 u5_attempts_progress.txt
+
+# THE SEEDBANK IS COMMITTED ON PURPOSE (unit R-bank, wave 7, leg 404).
+# 160 x 24 x 24 float64 = 737,280 bytes of payload -- three orders of
+# magnitude smaller than u2_dns_ckpt.npy, and it is what removes the 3.4 h
+# per-shard DNS prerequisite above. The big artefacts above stay ignored.
+!seedbank/
+!seedbank/**
