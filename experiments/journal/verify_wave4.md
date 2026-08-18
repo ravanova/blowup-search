@@ -244,12 +244,17 @@ and anchors strict**, and I independently confirmed at Theorem 1.3 (p.5) that th
 *asymptotically* self-similar with limiting profiles `(U^E, S^E)` **of Theorem 1.2, which solve the
 Euler ODE (1.5)**. The certified object is the inviscid profile. `NOT_GRADE_A` (Grade B) stands.
 
-**D3 — `R5` / `arXiv:2305.05660v3`. MISQUOTE.** Banked as introduced verbatim: *"**linear** partial
-differential equations that govern the motion of **the** ideal INVISCID fluid flow"*. Paper, p.1:
-*"one of the most fundamental **non-linear** partial differential equations that govern the motion of
-ideal inviscid fluid flow."* The `non-` was clipped (a `pdftotext` hyphenation artefact carried into
-the artefact) and a `the` inserted. **Materiality: NIL** — eq. (1.1)
-`omega_t + u.grad omega = omega.grad u` anchors and carries no dissipative term. `NOT_GRADE_A` stands.
+**D3 (CORRECTED BY ME AT THE SECOND PASS, see SS5.4) - `R5` / `arXiv:2305.05660v3`. ONE CLIPPED
+PREFIX, AND ONE CLAIM OF MINE THAT WAS ITSELF WRONG.** Banked by `V3` as introduced verbatim:
+*"**linear** partial differential equations that govern the motion of the ideal INVISCID fluid
+flow"*. Re-fetched `2305.05660`, Introduction, p.1, character for character:
+*"The three dimensional incompressible Euler equations are one of the most fundamental **non-
+linear** partial differential equations that govern the motion of **the** ideal inviscid fluid
+flow."* So: the `non-` **is** clipped in `V3`'s field (a `pdftotext` line-break hyphenation,
+`"non- linear"`, carried into the artefact) - that part of D3 **stands**. But my first-pass claim
+that `V3` had **inserted a `the`** before "ideal" is **FALSE**: the paper has that `the`. I withdraw
+it, unsoftened. **Materiality: NIL either way** - eq. (1.1) `omega_t + u.grad omega = omega.grad u`
+anchors strict and carries no dissipative term. `NOT_GRADE_A` stands.
 
 **D4 — `R3` / `arXiv:2605.15149v1`. MISQUOTE + LOCATION SLIP, in supporting evidence (not the
 failing clause).** Banked: *"For **the** rigorous computer-assisted proof, we use interval arithmetic
@@ -279,9 +284,42 @@ evidence; its failing clause is eq. (1.1) itself.
 ### §5.3 — ITEM (2) VERDICT
 
 **REPRODUCES.** All eight `NO` verdicts are correct on their quoted hypotheses; **not one is wrong**.
-Four verbatim-quote defects (D1-D4) are located and sized above; **none of them changes any verdict**,
-and **none of them is repaired here**. `V3`'s eight `NO`s are, as it says itself, a statement about
+Four quote defects (D1-D4) are located and sized above - D3 **reduced to one clipped `non-`** by my
+own second pass, see SS5.4; **none of them changes any verdict**, and **none of them is repaired
+here**. `V3`'s eight `NO`s are, as it says itself, a statement about
 **this named list only**; they do not re-establish that nobody else filled the cell.
+
+### §5.4 — SECOND PASS: THE MECHANICAL ITEM-(2) CHECK, AND ONE CORRECTION TO MY OWN D3
+
+`experiments/verify_wave4_rederive.py --only 2` now anchors item (2) **mechanically** rather than by
+hand. Three facts about `V3`'s artefact had to be built into it before the automated pass could be
+honest, and each is a property of `V3`'s style, **not** a defect:
+
+1. `V3` **transcribes displayed equations into ASCII on purpose** - `"partial_t omega + 2 psi_alpha
+   partial_x omega = ..."`, `"i u_t + (1 - i eps) Laplacian(u) + ..."`, `"(u . grad)u"`, `"H^2(mu)"`.
+   These can never anchor against `pdftotext` output and it is **not a misquote** that they do not.
+   They are reported as **`TRANSCRIPTION`** (17 fields), never as discrepancies.
+2. `equation_certified` is a **description field in `V3`'s own voice** (`"NOTHING IS CERTIFIED BY
+   INTERVAL ARITHMETIC. The object constructed is..."`). Anchoring `V3`'s framing against the paper
+   would **manufacture** defects. Reported as **`DESCRIPTION`** (12 fields).
+3. `V3`'s `*_evidence` and `*_location` fields are `V3`'s framing **with the paper's words set inside
+   single quotes**. Only the **embedded spans** are quotations, and only those are checked.
+
+Within each quotation the script anchors the **longest run of plain prose** (>= 8 ordinary words, no
+ASCII-ised Greek), which is where a dropped or altered word actually shows.
+
+**Result of the mechanical pass: exactly two rows carry a verbatim defect, and both are already
+written up above** - `R7 failing_clause_quoted` (**D1**, dropped `stringent`) and `R3
+interval_arithmetic_evidence` (**D4**, inserted `the`). **Zero `UNREACHABLE`.** `D2` is an
+attribution defect (the sentence *is* verbatim) and no mechanical check can catch it; it stands.
+
+**AND ONE FINDING AGAINST MYSELF.** The mechanical pass anchored `R5`'s `failing_clause_location`
+span **strict** - which my first-pass hand reading had called a misquote. Re-read of the re-fetched
+bytes (`2305.05660`, Introduction, p.1) shows the paper **does** write *"govern the motion of **the**
+ideal inviscid fluid flow"*. **My D3 claim that `V3` inserted a `the` was WRONG and is withdrawn.**
+D3 now reduces to the clipped `non-` prefix alone, itself a `pdftotext` line-break artefact
+(`"non- linear"`). Reading (b) - *any discrepancy is reported first and is not softened* - **applies
+to my own errors as well as to `V3`'s**, so it is recorded here rather than quietly deleted.
 
 ---
 

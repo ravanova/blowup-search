@@ -220,64 +220,121 @@ def item1(cache: pathlib.Path, offline: bool) -> None:
 
 # ---------------------------------------------------------------- ITEM 2
 
+# V3 ASCII-ises mathematics inside its quotes ON PURPOSE: 'gamma' for the Greek letter,
+# '(u . grad)u' for the operator, 'H^2(mu)', 'partial_t omega + ...'.  Those spans cannot
+# anchor against pdftotext output and it is NOT a misquote that they do not.  What IS
+# mechanically checkable, and what a dropped or altered word actually shows up in, is the
+# longest run of PLAIN PROSE inside the quote.  That is what this checks.
+_GREEK = ("alpha", "beta", "gamma", "delta", "epsilon", "eps", "lambda", "mu", "nu", "xi",
+          "rho", "sigma", "tau", "phi", "psi", "omega", "zeta", "theta", "Omega", "Pi")
+_EMBEDDED = re.compile(r"'([^']{40,})'")
+
+
+def quotations_in(key: str, val: str):
+    """What in this field is actually QUOTED FROM THE PAPER.
+
+    V3's evidence fields are V3's own framing prose with the paper's words set inside
+    single quotes; V3's 'equation_certified' is a DESCRIPTION field in V3's own voice
+    ('NOTHING IS CERTIFIED BY INTERVAL ARITHMETIC. ...'), sometimes carrying an embedded
+    quotation.  Checking V3's framing against the paper would manufacture defects, so only
+    the embedded spans are checked; a *_quoted field with no embedded span IS the quote."""
+    spans = _EMBEDDED.findall(val)
+    if spans:
+        return spans
+    if "quoted" in key:
+        return [val]
+    return None
+
+
+_WORD_RUN = re.compile(r"[A-Za-z][A-Za-z'\-]*(?:[,;]?[ ][A-Za-z][A-Za-z'\-]*)*")
+
+
+def longest_prose_run(s: str, min_words: int = 8) -> str | None:
+    """The longest run of >= min_words ordinary words, with no symbols and no ASCII-ised
+    Greek in it.  Returns None when the string is essentially a transcribed formula."""
+    best = ""
+    for m in _WORD_RUN.finditer(s):
+        run = m.group(0).strip(" ,;")
+        words = run.split()
+        if len(words) < min_words:
+            continue
+        if any(w.strip(",;") in _GREEK for w in words):
+            continue
+        if len(run) > len(best):
+            best = run
+    return best or None
+
+
 def item2(cache: pathlib.Path, offline: bool) -> None:
     print("\n" + "=" * 78)
     print("ITEM (2)  V3's 8 NO rows -- does each failing clause hold as quoted?")
     print("=" * 78)
+    print("  PROSE fields are anchored mechanically.  ASCII TRANSCRIPTIONS of displayed")
+    print("  equations are reported as TRANSCRIPTION and were read BY HAND (journal SS5).")
     art = json.loads(V3_ART.read_text())
     rows = art["rows"] if "rows" in art else art.get("candidates", [])
-    n_ok = n_bad = n_unr = 0
+    n_ok = n_bad = n_unr = n_tr = 0
     for r in rows:
         blob = json.dumps(r, ensure_ascii=False)
-        if "GRADE_A_FLUID" in blob:
+        if r.get("verdict", "").upper().startswith("GRADE_A_FLUID"):
             continue
-        ids = re.findall(r"\b(\d{4}\.\d{4,5})\b", json.dumps(r.get("arxiv", r.get("id", ""))))
-        if not ids:
-            ids = re.findall(r"\b(\d{4}\.\d{4,5})\b", blob)[:2]
-        quotes = []
-        for key in ("failing_clause_quoted", "failing_clauses", "quotes", "evidence"):
-            v = r.get(key)
-            if isinstance(v, str):
-                quotes.append(v)
-            elif isinstance(v, list):
-                quotes += [x for x in v if isinstance(x, str)]
-            elif isinstance(v, dict):
-                quotes += [x for x in v.values() if isinstance(x, str)]
-        label = r.get("row", r.get("id", ids[0] if ids else "?"))
-        if not quotes:
-            print(f"  {label:<10s} no machine-readable quote field -- read by hand")
-            continue
-        st_all = []
-        for q in quotes:
-            if len(q) < 25:
+        ids = [str(r.get("arxiv_id", ""))]
+        ids += [x for x in re.findall(r"\b(\d{4}\.\d{4,5})\b", blob) if x not in ids]
+        ids = [i for i in ids if re.fullmatch(r"\d{4}\.\d{4,5}", i)]
+        label = r.get("row", "?")
+        prose, trans, desc = [], [], []
+        for k, v in r.items():
+            if not isinstance(v, str) or k in ("cite", "prior_adjudication", "row"):
                 continue
+            if not any(t in k for t in ("quoted", "evidence", "certified", "location")):
+                continue
+            qs = quotations_in(k, v)
+            if qs is None:
+                desc.append(k)
+                continue
+            for q in qs:
+                run = longest_prose_run(q)
+                if run:
+                    prose.append((k, run))
+                else:
+                    trans.append((k, q))
+        st_all = []
+        for k, q in prose:
             hit = "NOT-ANCHORED"
             for aid in ids:
                 t = fetch(cache, aid, offline)
                 if t is None:
                     hit = "UNREACHABLE"
                     continue
-                s, _ = anchor(t, q)
-                if s == "ANCHORED":
+                st, _ = anchor(t, q)
+                if st == "ANCHORED":
                     hit = "ANCHORED"
                     break
-                if s != "UNREACHABLE":
-                    hit = s
-            st_all.append(hit)
-        summary = ("ANCHORED" if st_all and all(s == "ANCHORED" for s in st_all)
-                   else "UNREACHABLE" if "UNREACHABLE" in st_all else "NOT-ANCHORED")
-        print(f"  {label:<10s} sources={','.join(ids) or '-':<24s} quotes={len(st_all)} -> {summary}")
+                if st != "UNREACHABLE":
+                    hit = st
+            st_all.append((k, hit))
+            if hit == "NOT-ANCHORED":
+                bad("2", f"row {label} field {k!r}: longest prose run does not anchor "
+                         f"verbatim in the re-fetched source -- VERBATIM DEFECT. The VERDICT "
+                         f"may still stand; see journal SS5 (D1/D3/D4). Run: {q[:90]!r}")
+            elif hit == "UNREACHABLE":
+                unv("2", f"row {label}: source unreachable")
+        n_tr += len(trans)
+        bads = [k for k, h in st_all if h == "NOT-ANCHORED"]
+        unrs = [k for k, h in st_all if h == "UNREACHABLE"]
+        summary = ("ANCHORED" if st_all and not bads and not unrs
+                   else "UNREACHABLE" if unrs else "NOT-ANCHORED" if bads else "(no prose field)")
+        print(f"  {label:<4s} src={','.join(ids[:2]):<24s} prose={len(prose)} "
+              f"transcription={len(trans)} description={len(desc)} -> {summary}"
+              + (f"   defective fields: {bads}" if bads else ""))
         if summary == "ANCHORED":
             n_ok += 1
         elif summary == "UNREACHABLE":
             n_unr += 1
-            unv("2", f"row {label}: source unreachable")
-        else:
+        elif summary == "NOT-ANCHORED":
             n_bad += 1
-            bad("2", f"row {label}: a quoted failing clause does not anchor verbatim "
-                     f"in the re-fetched source (VERBATIM defect; the VERDICT may still stand "
-                     f"-- see journal SS5)")
-    print(f"  rows anchored={n_ok}  verbatim-defective={n_bad}  unreachable={n_unr}")
+    print(f"  rows with all prose anchored={n_ok}  rows with a verbatim defect={n_bad}  "
+          f"unreachable={n_unr}  equation transcriptions (not mechanically checkable)={n_tr}")
 
 
 # ---------------------------------------------------------------- ITEM 3 + 4
