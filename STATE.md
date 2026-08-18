@@ -103,9 +103,10 @@ Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits 
 **The precedent it set, kept live because it binds every wave:** a request to change a gate
 **mid-wave was REFUSED**. Plan verbatim: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`.
 
-## WAVE 6 — **DISPATCHED 2026-08-18**. Plan: `writeup/waves/WAVE6_PLAN.md` @ `e202653`.
+## WAVE 6 — **COMPLETE 2026-08-19. Three planned, three dispatched, three landed.** Plan: `writeup/waves/WAVE6_PLAN.md` @ `e202653`.
 
-Branches: `L6` `leg/401-l6-route4-profile` **(in flight)**; **`V5` LANDED `dacc01c`** — **both
+**`L6` LANDED `e62c449`** (leg 401) — route 4's **first ever** discrete profile, gate **`NO`**: `ρ = 1.6138` in `L5`'s own norm at `n_dof = 6720`, far-field amplitude normalised to 1, **not decreasing under refinement** (`−0.0222` over the last 3 rungs, `NO` at every cap 50–800), evidence **30/30 reproduced independently by me**.
+**CEILING I FOUND ON LANDING, not claimed by the unit: the minimum is reached by ONE start — the continuation — while 5 independent seeds land 10–24× higher and get WORSE as `n_dof` grows; every start hit the 800-iteration cap. The `NO` is about THIS CONSTRUCTION AT THIS BUDGET.** Reading (b) fires, and (d) `UNDER-RESOURCED` fires with it. **`V5` LANDED `dacc01c`** — **both
 clauses YES**: the certificate **CLOSES** (24 constants re-derived at 50 dps, **four printed ones
 fail**, worst `x_0^U` `1.44e-5` vs `1.45054706437e-5`, **non-conservative**; closure survives, but
 `x_1^U` clears by **0.08% — luck, not margin**), and the profile **IS genuinely 3D** on W2's own
@@ -126,7 +127,7 @@ fired on summarisation, not on cycles) — **not mid-wave**.
 
 | unit | lane | what it must return | status |
 |---|---|---|---|
-| **`L6`** | L | **CONSTRUCTION, FIRST, ~10² agent-h.** Bank a **discrete route-4 profile** — the object route 4 has NEVER had, which is why `L5`'s constant is a stand-in's. Gate: smallest residual in the norm route 4's closure requires, and does it **decrease under refinement**, at what rate. Collapse to exactly-(D)SS ⇒ **STOP, call it `NO`**. | **PLANNED** |
+| **`L6`** | L | construction, dispatched first | **LANDED `e62c449`, gate `NO`.** `WALLS.md` W4; `OPTIONS.md` §D. Next: **`L6-b`** — is the stall the ansatz or the 800-iteration budget? |
 | **`V5`** | V | **OBLIGATORY (ruling Q4).** Adversarial full-text audit of `arXiv:2509.25116` at leg-309 depth. **TWO clauses answered SEPARATELY:** does the certificate close, and — on **W2's own pre-committed test, NOT folded into the first** — is the profile genuinely **3D**. **Second deliverable: the wave-4 repair** (`D1`–`D6`, `N1`) as **new `_v2` files, `v1` UNTOUCHED** (Q3). | **PLANNED** |
 | **`V-W5`** | — | **LAST.** Verifies wave 5, which it did not plan. Five items: `L5`'s `NO` and `ρ`-exponent re-derived from artefact+code, not report; its three positive controls; **was `C6`'s tolerance EVER moved**; both `self_hash`es; `D-REPAIR`'s epoch correction. **REPAIR NOTHING.** | **PLANNED** |
 

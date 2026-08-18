@@ -176,6 +176,22 @@ at `α = 1.25`, `1.6` the machinery returns `−0.2498`, `−0.5996`, tracking `
 float64, SYNTHETIC profile — route 4 has none banked. The EXPONENT is a class property and is settled;
 the CONSTANT is not route 4's number.**
 
+**⚠ ROUTE 4 NOW HAS A DISCRETE PROFILE — `L6`, leg 401 — AND IT DOES NOT CLOSE.** First ever
+built on route 4's own object (λ-DSS, `a = 0.5`, poloidal–toroidal, `div V ≡ 0` identically, **no
+Bogovskiĭ corrector**), measured in **`L5`'s own load-bearing norm**. Smallest residual at the best
+affordable resolution (`n_dof = 6720`): **`ρ = 1.6138`** with the `α = 1` far-field amplitude
+normalised to **1** — *order one*, not small. **It does NOT decrease under refinement:**
+`d log ρ / d log n_dof = −0.0222` over the last three rungs, **0.497 %** at the top, `NO` at every
+iteration cap from 50 to 800. Evidence reproduces independently (30/30; banked coefficients
+re-synthesise `ρ` exactly). **The `Ks = 0` exactly-SS control costs a factor 2.0, so the DSS degrees
+of freedom are load-bearing — the construction did NOT collapse to (D)SS.**
+**CEILING, MEASURED BY THE CONDUCTOR ON LANDING, NOT CLAIMED BY THE UNIT: at every rung above the
+coarsest, `ρ` is attained by ONE start — the continuation — while all five independent random seeds
+land 10–24× higher and get WORSE as `n_dof` grows (`J1 ≈ 6.8 → J4 ≈ 32–38`). Every start hit the
+800-iteration cap. So the ladder is a chain each rung of which INHERITS its predecessor's minimiser
+at a budget too small to explore the added dimensions — it is biased toward measuring "no change".
+The `NO` is a fact about THIS CONSTRUCTION AT THIS BUDGET.** `c_mod` is still not route 4's number.
+
 **WHAT THIS DOES AND DOES NOT DO.** It does **not** break W4 — a wall breaks when (a), (b) or (c)
 *succeeds*; two are **shut**, the opposite. It says **nothing** about whether 3D NS is regular and
 retires neither §6(i) nor §6(ii). **W4's ONLY UNBROKEN CLAUSE IS NOW (c)** — and (c) is **UNTESTED, NOT CLOSED** — — a target not imposing

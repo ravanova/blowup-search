@@ -10,42 +10,19 @@ verbatim 2026-08-18 under §3j → `## Superseded — the 2026-08-14 fork`.
 
 ---
 
-## LIVE — CONDUCTOR mode, **WAVE 5 CLOSED; WAVE 6 PLANNED AND DISPATCHED**, 2026-08-18
+## LIVE — CONDUCTOR mode, **WAVE 6 COMPLETE AND INTEGRATED; WAVE 7 QUEUED**, 2026-08-19
 
-### Wave 5, the trigger message, and wave 6's §3i — all RETIRED 2026-08-19 (verbatim, below)
+### Wave 5, the trigger message, and wave 6's §3i — RETIRED 2026-08-19 (verbatim, below)
 
-**Wave 5** is CLOSED, LANDED, **VERIFIED**. **The trigger message was SENT** on 2026-08-18 with its
-three caveats. **§3i is ANSWERED for `V-W5` and `V5`** — both landed, both audited mechanically by
-me and not on their own reports, and neither moved an L1→L4 link. Full text: `## Superseded — wave
-5's close, the trigger, and wave 6's §3i` below. **`L6`'s §3i is NOT answered — it is in flight.**
+**Wave 5** CLOSED, LANDED, **VERIFIED**; **the trigger message SENT** 2026-08-18 with three caveats;
+**§3i answered for `V-W5` and `V5`**, neither moved an `L1→L4` link. Full text: `## Superseded —
+wave 5's close, the trigger, and wave 6's §3i`.
 
-### 2026-08-18 — THE §3k DIRECTIVE AND THE LANE-R RULING, both discharged mid-wave
+### 2026-08-18 — the §3k directive and the Lane-R ruling — **BOTH DISCHARGED**; detail retired
 
-**`9b9571a` — §3k(a), `writeup/SOURCES.md` BUILT**, 22 rows, shipped incomplete and saying so.
-1,671 arXiv ids are mentioned across the record; **6** appear in the load-bearing files. **DEPTH is
-the column that matters.** Rule-2 sweep: **no live load-bearing claim rests on an `ABSTRACT`.**
-**The register CORRECTS the directive that ordered it** — Chae–Wolf `1610.09464` (leg 359, hashed),
-Seregin `math/0510396` (`V-W4`) and **Tsai 1998** (leg 359, re-downloaded from the author's page,
-re-hashed, diffed) are **already at primary**. Only **NRŠ 1996** is unread, and it is `SECOND HAND`
-(Tsai p.30 quoting `[NRS]` (1.3) verbatim + a second restatement), **not `ABSTRACT`**. So §3k(b)'s
-unit is **much smaller than priced** and is scoped to NRŠ alone (`WAVE7_PLAN.md` §2).
-
-**`f94cde4` — E's field ensemble PRICED, NOT QUEUED. 90.9 core-hours**, re-derived from `E`'s own
-outturn (2,044.90 core-s/attempt × 160), **plus a ~3.4 h serial DNS prologue** that does not
-parallelise. **W7 datum: size is NOT the binding risk.** `U3` **finished** — 14.47 h wall, 144.69
-core-h reserved, 92.9% utilised. Every recorded loss was a **suspended session** or a **gitignored**
-checkpoint. Conditional survivability, four cheap conditions, in
-`writeup/prices/FIELD_ENSEMBLE_2026-08-18.md`.
-
-**`9811c1e` — LANE-R RANKING RULED: `R4` > `R2` > `R3`** (`WAVE7_PLAN.md` §0). Broken on **kind**:
-`R4` is a **validity** fix (Lie–Trotter, first order, **measured** ratio 2.00), `R2`/`R3` are
-throughput fixes, and deflating a first-order solver produces objects whose status is in doubt,
-faster. **I overturned `OPTIONS.md`'s standing "`R2` is strongest"** and said so. **Self-unwinding:**
-if §1's displacement lands below the acceptance band, `R4` drops below `R2` in that commit.
-**Options A/B/D RETIRED, not deferred** — all three buy supply, a standing prohibition.
-
-**WAVE 7 IS PLANNED, NOT DISPATCHED.** `L6` is still in flight; §3i is answered when a unit
-**returns**. Gates are in final wording already.
+Verbatim → `## Superseded — the §3k directive and the Lane-R ruling` below. **What still binds:**
+`writeup/SOURCES.md` is the register (26 rows) with **`R-prof`'s rule-3 row filled at primary**; the
+ranking **`R4` > `R2` > `R3`** stands (`WAVE7_PLAN.md` §0), **self-unwinding** through §1's gate.
 
 ### 2026-08-19 — USER DIRECTIVE: "PRICE, DO NOT QUEUE" WITHDRAWN. THREE UNITS QUEUED.
 
@@ -53,41 +30,62 @@ if §1's displacement lands below the acceptance band, `R4` drops below `R2` in 
 `R4` > `R2` > `R3` ranking STANDS** — additions, not a re-rank; these run first because they are
 **cheaper and upstream**, not because they outrank `R4-a`.
 
-**Two premise checks I ran before committing the gates, both against the repo:**
-1. **`R-bank`'s premise HOLDS, exactly as stated.** `experiments/programme_r4/.gitignore`: the
-   1.2 GB `u2_dns_ckpt.npy` is **"never committed"**, and `e_hhard_diagnostic.py`'s header says the
-   seed field is a **bit-for-bit re-integration of a `T = 1e5` snapshot** via that module. So a
-   shard cannot build a seed without it. Fields are `24×24` f64 = **4,608 B → 160 = 737 KB**
-   (the directive's ~5 MB was conservative). **Committable by two orders of magnitude.**
-2. **`R-prof`'s hypothesis needed its GATE RE-WORDED, and I did it before dispatch, not after.**
-   The solver is **already FFT-based** (`kolmogorov2d_nkbasin.py`: full `fft2`, 2/3 dealiasing,
-   exact integrating factor). So the comparison is implementation-vs-implementation. Smoke test
-   (load 21.5/12 cores, so absolutes inflated ~2×, ratios not): `fft2` costs **197 µs at `N = 24`
-   and 189 µs at `N = 32`** — **flat across 1.9× the work**, the signature of **per-call overhead**,
-   which the loop pays **20× per RK4 step** (~69% of a 4,306 µs step). **Overhead-bound, not
-   FLOP-bound.** That is a hypothesis with a measurement behind it, not the unit's answer.
+**Two premise checks I ran before committing the gates, both against the repo.** (1) **`R-bank`'s
+premise HOLDS exactly as stated** — the `.gitignore` calls the 1.2 GB `u2_dns_ckpt.npy` *"never
+committed"*, and `e_hhard_diagnostic.py` builds each seed as a bit-for-bit re-integration through it,
+so no shard can build a seed without it. Sharpened: one field is **4,608 B**, so 160 are **737 KB**,
+not ~5 MB — committable by two orders. (2) **`R-prof`'s gate REWORDED BEFORE dispatch, because the
+solver is ALREADY FFT-based** — so it is implementation-vs-implementation. Smoke (load 21.5 on 12
+cores; absolutes inflated ~2×, ratios not): `fft2` **197 µs at `N = 24` vs 189 µs at `N = 32` — FLAT
+across 1.9× the work**, paid **20× per RK4 step**, ~69% of a 4,306 µs step. **OVERHEAD-bound, not
+FLOP-bound — a hypothesis with a measurement behind it, not the unit's answer.**
 
 **Consequence I have to own: my own 90.9 core-hour price is an OUTTURN, not a FLOOR.** It inherits
 `95.389 s/epoch`, unprofiled in 403 legs. If `R-prof` finds a factor, that number and every cost
 figure in `OPTIONS.md` move together.
 
-### WAVE 6 — DISPATCHED 2026-08-18; **2 of 3 RETURNED**
+### WAVE 6 — **COMPLETE 2026-08-19. Three planned, three dispatched, three landed.**
 
 Plan `e202653`, pointer `5c49486`, **both before any worker started**; gates carried **verbatim**
-into self-contained briefs, each pre-registering in its own commit. Dispatch narrative retired →
-`## Superseded — wave 6's dispatch record`. **`V-W5` LANDED `95cf861`; `V5` LANDED `dacc01c`;
-`L6` STILL IN FLIGHT** on `leg/401-l6-route4-profile`. **I planned this wave, so I do not verify
-it** — `V-W5` verified **wave 5**. **§34 was applied to every wave-6 gate before dispatch: every
-artefact a brief names exists.** Handoff at **wave 6's END**, when `L6` returns.
+into self-contained briefs. **`V-W5` `95cf861`; `V5` `dacc01c`; `L6` `e62c449`.** Dispatch narrative
+retired → `## Superseded — wave 6's dispatch record`. **I planned this wave, so I do not verify it**
+— `V-W5` verified **wave 5**; **`L6` is `UNVERIFIED`** and a verifier for it belongs in wave 7.
+
+**`L6`'s LANDING AUDIT AND ITS §3i — FULL TEXT IN `writeup/waves/WAVE6_CLOSE.md`.** What I checked
+myself: evidence **30/30**, `C18` re-synthesises `ρ = 1.613811231995` from banked coefficients;
+territory **7 files, all added, zero modifications**. **One clause of the unit's summary I do NOT
+adopt** — it calls the `NO` *"a fact about the construction, not the stopping point"*. At every rung
+above the coarsest, `ρ` is reached by **ONE start, the continuation**; five independent seeds land
+**10–24× higher and get WORSE as `n_dof` grows**, all capped at 800 iterations. A ladder whose rungs
+each start at the predecessor's minimiser, at a budget too small for the added dimensions, is biased
+toward measuring "no change". **The `NO` is about THIS CONSTRUCTION AT THIS BUDGET**, and reading (d)
+`UNDER-RESOURCED` is the DOMINANT reading, not a secondary one.
+
+**§3i, the seven, one line each.** (1) **No** `L1→L4` link moved; Clay ~0.05%. (2) Made FALSE:
+`OPTIONS.md`'s `L7` price — *"needs `L6` first, ~10¹ h"* — because an enclosure needs a residual
+small enough to contract and this one is **1.6 against a unit-normalised field**; same for `L4`.
+`W4(b)` is **untouched** (threshold-free, rests on the exponent). (3) Lane L **keeps** its rank —
+three consecutive narrowing units, the only lane on the FINAL blockers. (4) Live ceiling: **every
+route-4 CONSTANT is still the synthetic stand-in's**; `L6` did not end that. Plus NRŠ 1996
+`SECOND HAND`. (5) **CHEAPEST KILLER, NOW NEXT: `L6-b`** — fix `n_dof = 6720`, raise the cap **800 →
+20,000** from `L6`'s banked minimiser plus two seeds, **~10¹ core-h against the ~10³ ladder `L6`
+asked for**. Decisive both ways. (6) If Lane L died: Lane V — not cheaper in the way that matters,
+it does not touch W4/W5. **No lane re-rank.** (7) **LOOP RISK REAL:** the last three units are
+CONSTRUCTION / AUDIT / VERIFICATION — two of three audit-kind. **Applied, not noted:** wave 7's
+Lane-L slot is `L6-b`, a measurement on the object; `R-prof` is instrument work, **capped at one
+slot**, paired with `E-FE`, which measures the object.
+
+**RE-RANK MADE HERE (§3i q5): Lane L's next unit is `L6-b`, not `L7`.** Nothing else moves —
+`R4` > `R2` > `R3` stands, and `R-bank` → `E-FE` ‖ `R-prof` stands.
 
 ### Headroom at the wave boundary — §3j, IN BYTES (`wc -c`)
 
 | file | bytes | cap | free |
 |---|---|---|---|
-| `STATE.md` | 23,737 | 24,576 | 839 (longest row 570 ≤ 600) |
-| `WALLS.md` | 30,980 | 32,768 | 1,788 — **Lane T retired 2026-08-19** |
-| `OPTIONS.md` | 24,423 | 24,576 | 153 |
-| `ORCH_STATE.md` LIVE | 8,148 | 8,192 | 44 — **thin** |
+| `STATE.md` | 24,234 | 24,576 | 342 |
+| `WALLS.md` | 32,457 | 32,768 | 311 |
+| `OPTIONS.md` | 24,555 | 24,576 | **21 — thinnest** |
+| `ORCH_STATE.md` LIVE | 8,025 | 8,192 | 167 |
 
 **DEFECT OF MINE, FOUND AND REPAIRED 2026-08-19** — a retirement spliced into a live paragraph
 because it located its target by TITLE, and the title also lives in every pointer to it. Full
@@ -116,6 +114,36 @@ transform floor. `SOURCES.md` 23–25; caveats and drift fallback in `WAVE7_PLAN
 
 **The W3 wording escalation is RULED** and transcribed. **`V5` did not run W3's prose test, so W3
 does not move** — the audit says nothing about whether the wall stands.
+
+## Superseded — the §3k directive and the Lane-R ruling, demoted 2026-08-19 (verbatim; DISCHARGED)
+
+### 2026-08-18 — THE §3k DIRECTIVE AND THE LANE-R RULING, both discharged mid-wave
+
+**`9b9571a` — §3k(a), `writeup/SOURCES.md` BUILT**, 22 rows, shipped incomplete and saying so.
+1,671 arXiv ids are mentioned across the record; **6** appear in the load-bearing files. **DEPTH is
+the column that matters.** Rule-2 sweep: **no live load-bearing claim rests on an `ABSTRACT`.**
+**The register CORRECTS the directive that ordered it** — Chae–Wolf `1610.09464` (leg 359, hashed),
+Seregin `math/0510396` (`V-W4`) and **Tsai 1998** (leg 359, re-downloaded from the author's page,
+re-hashed, diffed) are **already at primary**. Only **NRŠ 1996** is unread, and it is `SECOND HAND`
+(Tsai p.30 quoting `[NRS]` (1.3) verbatim + a second restatement), **not `ABSTRACT`**. So §3k(b)'s
+unit is **much smaller than priced** and is scoped to NRŠ alone (`WAVE7_PLAN.md` §2).
+
+**`f94cde4` — E's field ensemble PRICED, NOT QUEUED. 90.9 core-hours**, re-derived from `E`'s own
+outturn (2,044.90 core-s/attempt × 160), **plus a ~3.4 h serial DNS prologue** that does not
+parallelise. **W7 datum: size is NOT the binding risk.** `U3` **finished** — 14.47 h wall, 144.69
+core-h reserved, 92.9% utilised. Every recorded loss was a **suspended session** or a **gitignored**
+checkpoint. Conditional survivability, four cheap conditions, in
+`writeup/prices/FIELD_ENSEMBLE_2026-08-18.md`.
+
+**`9811c1e` — LANE-R RANKING RULED: `R4` > `R2` > `R3`** (`WAVE7_PLAN.md` §0). Broken on **kind**:
+`R4` is a **validity** fix (Lie–Trotter, first order, **measured** ratio 2.00), `R2`/`R3` are
+throughput fixes, and deflating a first-order solver produces objects whose status is in doubt,
+faster. **I overturned `OPTIONS.md`'s standing "`R2` is strongest"** and said so. **Self-unwinding:**
+if §1's displacement lands below the acceptance band, `R4` drops below `R2` in that commit.
+**Options A/B/D RETIRED, not deferred** — all three buy supply, a standing prohibition.
+
+**WAVE 7 IS PLANNED, NOT DISPATCHED.** `L6` is still in flight; §3i is answered when a unit
+**returns**. Gates are in final wording already.
 
 ## Superseded — the FIRST headroom table of the wave-6 boundary, demoted 2026-08-18 (verbatim)
 

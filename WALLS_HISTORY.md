@@ -289,3 +289,27 @@ Retired because the lane has been **DEFERRED since 2026-08-14** and every dispat
 (`STOP`), `T5`/`T6`. **`T3`, the non-DSS `T³` ansatz, is the lane's real mathematical content,
 deferred WITH the lane, not killed**; leg 390 §5 item 3 prices it (one-step DSS margin decays with
 band width at exponent **−0.99057**).
+
+## §OPTIONS-L5 — `L5`'s option row, retired verbatim from `OPTIONS.md` §D 2026-08-19
+
+Retired because the unit is **TAKEN and CLOSED** and every clause of the row is restated at `WALLS.md` W4(b), which is the live home. Verbatim.
+
+| **L5** | W4 clause (b) | **TAKEN and CLOSED, `4be46ef`. GATE `NO`, threshold-free.** The ansatz does not escape the pin: what survives localisation is the modulation commutator `T3 ∝ ṁ`, size `ρ^{1-α}`, and `α = 1` makes it ρ-independent. `WALLS.md` §W4. | done |
+
+## §OPTIONS-L1RES — the `L1-res` row, retired verbatim from `OPTIONS.md` §D 2026-08-19
+
+Retired because `writeup/SOURCES.md` now records DEPTH for all four pre-arXiv primaries by name, which is strictly more than this row carried. The one live debt — NRŠ 1996, `SECOND HAND` — is queued as `L7-src`. Verbatim.
+
+| **L1-res** | the 4 pre-arXiv primaries | NRŠ 1996, Tsai 1998, Bogovskiĭ 1979, Giga–Kohn banked **`UNREACHABLE` as declared in advance**, quoted through secondaries. **Low value.** No author contact — prohibited. | ~1 unit |
+
+## §OPTIONS-382 — the three leg-382 follow-ups, retired verbatim from `OPTIONS.md` §F 2026-08-19
+
+**STILL OPEN, not discharged.** Retired for headroom only. Each of 389 (CT2C), 387 (DXNV) and 388 (CRVB) carries a MEASURED reason it stalled — an empty δ-window, an opensearch namespace mismatch that made a zero-result look real, and a ladder that bottomed out — so re-running one blind repeats a known failure. Verbatim.
+
+- **The three leg-382 follow-ups, all open.** **389 (CT2C)** wire 382's certified enclosure into the
+  screen's second T2 column — but 386 clause 2 first: the δ-window is **EMPTY at every `α_centre ≤ 1`**
+  and the banked object carries `α = 1`, so it reports an empty window and manufactures no headroom.
+  **387 (DXNV)** discharge 382's owed novelty obligation; **leg 392 measured why it failed** — arXiv
+  serves opensearch namespace `1.1`, 387's harness listed `1.0`, so it refused every response while
+  reporting a zero, and **any re-run must use a namespace-agnostic parser**. **388 (CRVB)** bound
+  382's curvature-detection threshold from below; the ladder bottomed out at ≤1e-6, one-sided.

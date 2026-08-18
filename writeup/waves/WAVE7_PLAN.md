@@ -312,3 +312,62 @@ in-band**, so nothing keeping the `R < 0.25` window can push the in-band arm pas
 ever**. **`E-FE` is not a grinder** — it is 160 attempts at **fixed** rows and arms, varying **only**
 the draw, with a pre-committed reading in both directions and its own milestone. **NO GA** (leg 349:
 0 of 6; leg 160 measured why the ban pins the grid). **No new seed supply.**
+
+---
+
+# AMENDMENT 2 — `L6-b`, ADDED BY THE §3i DIRECTION CHECK AT WAVE 6's CLOSE (2026-08-19)
+
+**This is a §3i q5 re-rank, made in the integration commit as §3i requires, not a preference.**
+`L6` landed and its own named next purchase — a ~10³ core-hour resolution ladder — is **the wrong
+one**. Full reasoning: `writeup/waves/WAVE6_CLOSE.md`.
+
+## `L6-b` — IS THE STALL THE ANSATZ OR THE BUDGET? **Lane L. ~10¹ core-h. Wave 7's Lane-L slot.**
+
+**Why it exists.** `L6` reports `ρ = 1.6138` at `n_dof = 6720` and `NO` under refinement. The
+landing audit found that **at every rung above the coarsest, that minimum is attained by exactly ONE
+start — the continuation from the rung below — while five independent random seeds land 10–24×
+higher and get monotonically WORSE as `n_dof` grows** (`J1 ≈ 6.8 → J4 ≈ 32–38`), **every start
+having hit the 800-iteration cap**. A ladder each of whose rungs is initialised at its predecessor's
+minimiser, at a budget demonstrably too small to explore the dimensions the rung just added, is
+**biased toward measuring "no change"**. `L6`'s own §8.4 concedes the number is not the infimum.
+**So the `NO` is not yet a fact about the ansatz, and the whole Lane-L queue behind it — `L7`, `L4`
+— is priced as if it were.**
+
+**GATE, final wording.** At **FIXED** `n_dof = 6720`, branch B, the realization, trial space, basis
+and norm **unchanged from `L6`** (`writeup/data/p2_route_l6_profile_v1.json`), run three
+minimisations to an iteration cap of **20,000**: (i) from `L6`'s **banked** `J4` minimiser, (ii)–(iii)
+from two fresh independent seeds. Answer, with numbers: **what is the smallest residual reached at
+20,000 iterations, and is it materially below `L6`'s 1.6138 — YES or NO?** Report the residual
+trajectory against iteration count for each start, not only the endpoint.
+
+**Pre-committed reading, both directions, before dispatch.**
+- **A drop to below `1.45`** (a 10% improvement, the smallest change that exceeds `L6`'s whole
+  five-rung ladder movement) ⟹ **`L6`'s ladder was measuring the OPTIMISER BUDGET, not the ansatz.**
+  The refinement `NO` is then **NOT** a statement about route 4, the `L7`/`L4` prices are re-opened,
+  and the resolution ladder must be re-run at an adequate budget before anything is concluded.
+- **No material drop** ⟹ **the stall is the CONSTRUCTION, and `L6`'s `NO` hardens into a real
+  result about route 4's ansatz.** That is a landable negative and it is what `L7` needs to know.
+- **An independent seed reaching `≈ 1.6` on its own** ⟹ the value is a genuine basin floor, which
+  strengthens the `NO` further and is worth saying separately.
+
+**What this unit MAY NOT do.** Change the trial space, the basis, the norm, the realization or
+`n_dof` — **any of those makes it a different measurement and it stops being an answer to `L6`.**
+No new resolution rung. **Tier 2 is never a proof; no `L1→L4` link moves either way.**
+
+**§3k rule 3.** No new method is built — this is `L6`'s own apparatus at a larger cap, so **the
+exemption is stated rather than assumed**, exactly as for `R-bank`. `L6`'s L-BFGS-B **falsely
+reported convergence once** because the objective is scale-invariant; that defect and its fix are in
+`experiments/journal/leg_401.md` §7.3 and **must be carried, not rediscovered**.
+
+**Cost, from `L6`'s own banked timing.** 1,240 s per start at 800 iterations at `n_dof = 6720` ⟹
+**~8.6 h wall per start at 20,000**; three starts concurrently ≈ the same wall on ~6 cores,
+**~10¹ core-h. Two orders below the ~10³ `L6` priced for a full ladder.** Checkpoint above ~1 h.
+**COMMIT DURING THE RUN, NOT ONLY AT THE GATE.**
+
+## Wave 7's composition, after this amendment
+
+`R-bank` (construction, first) → **`E-FE`** ‖ **`R-prof`** ‖ **`L6-b`**. The §3f composition floor is
+met by `L6-b`, which attacks **W4** through route 4 and is a **measurement on the object**, not an
+audit — deliberately, because §3i q7 counted **two of the last three units as audit-kind**.
+`L7-src` (§2) and `L5-nov` (§3) stay queued behind it. **`L6` is `UNVERIFIED`: a verifier for wave 6
+belongs in wave 7 and I may not brief it on construction I planned.**

@@ -152,17 +152,18 @@ construction unit rather than spend a slot. | **~1–2 h**
 `CLAY_OBLIGATIONS.md` §6(i)/(ii) — **OPEN in both branches** — and (D)'s gain on §4 is *"the
 acceptance test, not the work."* **Nothing queued anywhere retires them.**
 
-**⚠ 2026-08-18 — THE LANE LANDED TWO UNITS AND BOTH NARROWED IT.** `L2′` (`1493e5e`, **VERIFIED by `V-W4`**) shut W4 clause **(a)**; `L5` (`4be46ef`) shut clause **(b)**. Recorded once, at `WALLS.md` §W4, and not restated here.
+**⚠ THREE UNITS LANDED, ALL NARROWING.** `L2′` shut W4 clause **(a)**, `L5` clause **(b)**, and `L6` (leg 401) priced route 4's construction for the first time. Recorded once at `WALLS.md` §W4.
 
 | id | unit | what it is | cost |
 |---|---|---|---|
 | **L1**, **L2** | price §4 / attack §6(i) | **TAKEN by `L2′`, `1493e5e`, for the DECAY clause.** Pointer: `WALLS.md` §W4, `experiments/journal/leg_397.md` §§4–9. | — |
-| **L1-res** | the 4 pre-arXiv primaries | NRŠ 1996, Tsai 1998, Bogovskiĭ 1979, Giga–Kohn banked **`UNREACHABLE` as declared in advance**, quoted through secondaries. **Low value.** No author contact — prohibited. | ~1 unit |
-| **L4** | **certify the decay** | §6(i) wants *certified* decay + a built cutoff, and `L2′` built neither. Interval/NK enclosure on route 4's own profile + a cutoff controlled in a scaling-invariant norm. **`§6.2` predicts `α_hi = 1`, which does not pay the bill** — price that in before dispatching. | **≥1 full wave** |
-| **L5** | W4 clause (b) | **TAKEN and CLOSED, `4be46ef`. GATE `NO`, threshold-free.** The ansatz does not escape the pin: what survives localisation is the modulation commutator `T3 ∝ ṁ`, size `ρ^{1-α}`, and `α = 1` makes it ρ-independent. `WALLS.md` §W4. | done |
-| **L6** | **BANK A DISCRETE ROUTE-4 PROFILE** | `L5`'s own `UNDER-RESOURCED` residual, and the thing every Lane L number now waits on: **route 4 has no banked profile** (leg 382 line 174, leg 397 SS1), so `L5`'s exponent is a class property but its constant is a synthetic's. **This is construction, not reading.** | **~10² agent-h** |
-| **L7** | interval the commutator | turn `L5`'s float exponent into a certified bound — a Route-D-style interval core over the annulus. **Needs `L6` first.** | ~10¹ agent-h **on top of L6** |
-| **L3** | attack §6(ii) — persistence under localisation | The published persistence techniques (nonlinear stability with a finite unstable spectrum, the Chen–Hou line, `arXiv:2308.01528`) have **never been read against this object**. **DEFERRED — `L3′` died in wave 3 without committing.** | — |
+| **L1-res** | the 4 pre-arXiv primaries | **SUPERSEDED 2026-08-19 by `writeup/SOURCES.md`** (rows 2, 3, 19, 20). Live debt is NRŠ 1996 alone → `L7-src`. | see `L7-src` |
+| **L4** | **certify the decay** | §6(i) wants *certified* decay + a built cutoff; `L2′` built neither. Interval/NK enclosure on route 4's own profile — **and `L6` measures that no accurate such profile exists yet (`ρ ≈ 1.6`), so `≥1 full wave` is a FLOOR, not an estimate** — plus a cutoff in a scaling-invariant norm. **`§6.2` predicts `α_hi = 1`, which does not pay the bill.** | **≥1 full wave** |
+| **L5** | W4 clause (b) | **TAKEN and CLOSED, `4be46ef`.** Gate `NO`, threshold-free. Row retired 2026-08-19 → `WALLS_HISTORY.md` §OPTIONS-L5; substance at `WALLS.md` W4(b). | done |
+| **L6** | bank a discrete route-4 profile | **LANDED leg 401, `NO`.** Route 4's first: `ρ = 1.6138` in `L5`'s norm at `n_dof = 6720`, far-field amplitude normalised to 1, **not decreasing under refinement** (`−0.0222`, last 3 rungs). **Ceiling found ON LANDING: the minimum is reached by ONE start — the continuation; 5 independent seeds land 10–24× higher and WORSEN with `n_dof`, all capped at 800 iters.** `WALLS.md` W4. | done, 2.30 h |
+| **L7** | interval the commutator | **PRECONDITION NOT MET — "needs `L6` first" is discharged IN LETTER ONLY.** An enclosure needs a residual small enough for a contraction to close; `L6`'s is **1.6** against a unit-normalised field. **Do not dispatch until `L6-b` rules.** The `~10¹` price assumed banking a profile meant banking an ACCURATE one. | **re-price after `L6-b`** |
+| **L6-b** | **is the stall the ANSATZ or the BUDGET?** | **NEW, from `L6`'s landing audit — cheapest thing that can overturn its `NO`.** Fix `n_dof = 6720`, start from `L6`'s banked minimiser, raise the cap **800 → 20,000**; two independent seeds too. `L6`'s own timing (1,240 s / start / 800 iters) prices it at ~8.6 h wall per start — **two orders below the ~10³ core-h `L6` priced for a full ladder.** Decisive both ways. | **~10–30 core-h** |
+| **L3** | attack §6(ii) — persistence under localisation | Published persistence techniques (the Chen–Hou line, `arXiv:2308.01528`) **never read against this object**. **DEFERRED — `L3′` died in wave 3 without committing.** | — |
 
 **The record's best lead on this lane arrived as a by-product** (§F): **`arXiv:2308.01528`, the
 Chen–Hou line**, which `L3′` was to read at full text. **A measured, honest "still no method, and here
@@ -208,13 +209,7 @@ H11 — the one previous attempt at this lane's target, by anyone, died that way
 ## F. Other standing options, recorded so they are not lost
 
 - **The DSS escalation packet** (legs 313/320) — **COMPLETE, retired** → `WALLS_HISTORY.md` §OPTIONS-F.
-- **The three leg-382 follow-ups, all open.** **389 (CT2C)** wire 382's certified enclosure into the
-  screen's second T2 column — but 386 clause 2 first: the δ-window is **EMPTY at every `α_centre ≤ 1`**
-  and the banked object carries `α = 1`, so it reports an empty window and manufactures no headroom.
-  **387 (DXNV)** discharge 382's owed novelty obligation; **leg 392 measured why it failed** — arXiv
-  serves opensearch namespace `1.1`, 387's harness listed `1.0`, so it refused every response while
-  reporting a zero, and **any re-run must use a namespace-agnostic parser**. **388 (CRVB)** bound
-  382's curvature-detection threshold from below; the ladder bottomed out at ≤1e-6, one-sided.
+- **The three leg-382 follow-ups (389 CT2C, 387 DXNV, 388 CRVB) — ALL STILL OPEN.** Detail retired 2026-08-19 verbatim → `WALLS_HISTORY.md` §OPTIONS-382; each carries a MEASURED reason it stalled, so re-running one blind repeats a known failure.
 - **`PROG-R4` U3's two owed novelty questions** — (i) are the **9 distinct solutions across both
   units** known in the literature at all? U5 contributed exactly one new, `T = 20.4175 / |s| = 0.5867`
   (stratum P, anchor UPO37), **the only solution either run found inside the published band**. (ii) Is
