@@ -63,6 +63,44 @@ a ban or wall is superseded by a **MEASUREMENT**, never a decision. Recorded, no
 **WAVE 6 STATUS: 2 of 3 returned and integrated** (`V-W5` `95cf861`, `V5` `dacc01c`). **`L6` is
 still in flight** — the wave does not close until it returns or is declared under-resourced.
 
+### 2026-08-18 — THE §3k DIRECTIVE AND THE LANE-R RULING, both discharged mid-wave
+
+**`9b9571a` — §3k(a), `writeup/SOURCES.md` BUILT**, 22 rows, shipped incomplete and saying so.
+1,671 arXiv ids are mentioned across the record; **6** appear in the load-bearing files. **DEPTH is
+the column that matters.** Rule-2 sweep: **no live load-bearing claim rests on an `ABSTRACT`.**
+**The register CORRECTS the directive that ordered it** — Chae–Wolf `1610.09464` (leg 359, hashed),
+Seregin `math/0510396` (`V-W4`) and **Tsai 1998** (leg 359, re-downloaded from the author's page,
+re-hashed, diffed) are **already at primary**. Only **NRŠ 1996** is unread, and it is `SECOND HAND`
+(Tsai p.30 quoting `[NRS]` (1.3) verbatim + a second restatement), **not `ABSTRACT`**. So §3k(b)'s
+unit is **much smaller than priced** and is scoped to NRŠ alone (`WAVE7_PLAN.md` §2).
+
+**`f94cde4` — E's field ensemble PRICED, NOT QUEUED. 90.9 core-hours**, re-derived from `E`'s own
+outturn (2,044.90 core-s/attempt × 160), **plus a ~3.4 h serial DNS prologue** that does not
+parallelise. **W7 datum: size is NOT the binding risk.** `U3` **finished** — 14.47 h wall, 144.69
+core-h reserved, 92.9% utilised. Every recorded loss was a **suspended session** or a **gitignored**
+checkpoint. Conditional survivability, four cheap conditions, in
+`writeup/prices/FIELD_ENSEMBLE_2026-08-18.md`.
+
+**`9811c1e` — LANE-R RANKING RULED: `R4` > `R2` > `R3`** (`WAVE7_PLAN.md` §0). Broken on **kind**:
+`R4` is a **validity** fix (Lie–Trotter, first order, **measured** ratio 2.00), `R2`/`R3` are
+throughput fixes, and deflating a first-order solver produces objects whose status is in doubt,
+faster. **I overturned `OPTIONS.md`'s standing "`R2` is strongest"** and said so. **Self-unwinding:**
+if §1's displacement lands below the acceptance band, `R4` drops below `R2` in that commit.
+**Options A/B/D RETIRED, not deferred** — all three buy supply, a standing prohibition.
+
+**WAVE 7 IS PLANNED, NOT DISPATCHED.** `L6` is still in flight; §3i is answered when a unit
+**returns**. Gates are in final wording already.
+
+### WAVE 6 — DISPATCHED 2026-08-18; **2 of 3 RETURNED**
+
+Plan `e202653`, pointer `5c49486`, **both before any worker started**; gates carried **verbatim**
+into self-contained briefs, each pre-registering in its own commit. Dispatch narrative retired →
+`## Superseded — the FIRST headroom table of the wave-6 boundary, demoted 2026-08-18 (verbatim)
+
+**Why:** it names a `WALLS.md` `## History` exemption **that does not exist** — the file has no
+such section, so the whole file counts. Kept verbatim because the `wc -c` lesson inside it is the
+reason two files were committed over cap.
+
 ### Headroom at the wave boundary (§3j) — IN **BYTES**, AND THE FIRST COUNT WAS WRONG
 
 Detail retired verbatim 2026-08-18 → `## Superseded — wave 5's headroom detail` below.
@@ -75,17 +113,15 @@ them **over**. `ORCHESTRATION.md` §3j now carries the rule. Rows stay in **char
 |---|---|---|---|
 | `STATE.md` | 23,247 | 24,576 | 1,329 (longest row 583 ≤ 600) |
 | `WALLS.md` *(excl. exempt `## History`)* | 32,233 | 32,768 | 535 |
-| `OPTIONS.md` | 24,487 | 24,576 | 89 |
+| `OPTIONS.md` | 23,522 | 24,576 | 1,054 — **§F + A/B/D retired, debt CLEARED** |
 | `ORCH_STATE.md` LIVE | at cap | 8,192 | <100 |
 
 **Next retirement NAMED:** `WALLS.md` — W3's cell-occupancy narrative behind a pointer;
 `OPTIONS.md` — §F's discharged items. Cycles: wave 5 = 2; context HAS summarised.
 
-### WAVE 6 — DISPATCHED 2026-08-18; **2 of 3 RETURNED**
+---
 
-Plan `e202653`, pointer `5c49486`, **both before any worker started**; gates carried **verbatim**
-into self-contained briefs, each pre-registering in its own commit. Dispatch narrative retired →
-`## Superseded — wave 6's dispatch record`. **`V-W5` LANDED `95cf861`; `V5` LANDED `dacc01c`;
+## Superseded — wave 6's dispatch record`. **`V-W5` LANDED `95cf861`; `V5` LANDED `dacc01c`;
 `L6` STILL IN FLIGHT** on `leg/401-l6-route4-profile`. **I planned this wave, so I do not verify
 it** — `V-W5` verified **wave 5**. **§34 was applied to every wave-6 gate before dispatch: every
 artefact a brief names exists.** Handoff at **wave 6's END**, when `L6` returns.
@@ -94,10 +130,10 @@ artefact a brief names exists.** Handoff at **wave 6's END**, when `L6` returns.
 
 | file | bytes | cap | free |
 |---|---|---|---|
-| `STATE.md` | 24,123 | 24,576 | 453 (longest row 570 ≤ 600) |
-| `WALLS.md` | 32,280 | 32,768 | 488 |
-| `OPTIONS.md` | 24,487 | 24,576 | 89 |
-| `ORCH_STATE.md` LIVE | 6,644 | 8,192 | 1,548 |
+| `STATE.md` | 24,369 | 24,576 | 207 (longest row 570 ≤ 600) |
+| `WALLS.md` | 32,653 | 32,768 | 115 — **thin, retire before the next edit** |
+| `OPTIONS.md` | 23,522 | 24,576 | 1,054 — **§F + A/B/D retired, debt CLEARED** |
+| `ORCH_STATE.md` LIVE | 7,418 | 8,192 | 774 |
 
 **`WALLS.md` has NO `## History` section** — the exemption I had been subtracting does not exist,
 which is how it went 31 B over undetected. Retired this integration, verbatim: §W3-CELL (the named
@@ -232,7 +268,7 @@ is **mine**. **Measure with `wc -c`.** `ORCHESTRATION.md` §3j now says so.
 |---|---|---|---|
 | `STATE.md` | 23,247 | 24,576 | 1,329 (longest row 583 ≤ 600) |
 | `WALLS.md` *(excl. exempt `## History`)* | 32,233 | 32,768 | 535 |
-| `OPTIONS.md` | 24,487 | 24,576 | 89 |
+| `OPTIONS.md` | 23,522 | 24,576 | 1,054 — **§F + A/B/D retired, debt CLEARED** |
 | `ORCH_STATE.md` LIVE | **at cap** | 8,192 | **<100** |
 
 Cycles: **wave 5 = 2**. **Context HAS been summarised** — §9d's triggers are 12 cycles
