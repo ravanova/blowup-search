@@ -396,6 +396,34 @@ the model was calibrated on U5 attempts that stall early, while **an attempt pla
 `(T, s)` runs 20–31 epochs before the stall rule fires.** A seed that is *plausible* is expensive
 exactly because it does not fail fast. **This is logged as a correction for the Conductor (§12d).**
 
+> **CORRECTION, 2026-08-18 — unit `D-REPAIR` (wave 5), discharging `V-W3`'s defect D3.**
+> Per `writeup/CORRECTIONS.md`'s convention the paragraph above stands as written; this block
+> is beside it, and it is the measurement. **The structural explanation is contradicted by both
+> ledgers. `E` ran 2.3% FEWER epochs per attempt than U5, not more, and its per-epoch cost was
+> the modelled one.**
+>
+> | quantity | source, re-derived | value |
+> |---|---|---|
+> | `E` epochs/attempt | `writeup/data/p2_prog_r4_e_v1.json`, `sum(diagnostic_3.attempts[].n_iters) = 343 = resourcing.total_epochs`, over 16 | **21.4375** |
+> | U5 epochs/attempt | `experiments/programme_r4/u5_m3_ledger.json`, `sum(len(attempts[].ledger)) = 2195`, over 100 | **21.95** |
+> | ratio | — | **0.9767, i.e. `E` used 2.33% fewer** |
+> | `E` s/epoch, realised | `sum(diagnostic_3.attempts[].wall_seconds) = 32,718.334 s`, over 343 epochs | **95.389 s** |
+> | s/epoch, modelled | the 95 s the commissioning figure was costed at | **95 s** |
+> | ratio | — | **1.0041, i.e. 0.41% over** |
+>
+> **Both factors of the cost model were accurate**, so there is no structural over-run for the
+> "runs 20–31 epochs before the stall rule fires" story to explain. That story is not merely
+> unsupported: the direction it predicts is the opposite of the direction measured. The same
+> wording at §12(d) carries its own correction block.
+>
+> **NOT repaired here, and deliberately.** The `~8×` in the sentence above is `V-W3`'s defect
+> **D1**, which is **not in this unit's scope** — D1 was the Conductor's to rule and was
+> corrected by the Conductor in `STATE.md` and `OPTIONS.md` on 2026-08-18 (`0.0713` is
+> **wall**-h/attempt at 8 workers, `0.57` is **core**-h/attempt; like for like `E` came in 0.4%
+> *under*, and the `8×` is `core ÷ wall` = the worker count). **The residue at these lines and at
+> `writeup/4_p2_lottery/TECHNICAL_P2_PROGR4_HHARD.md:212` is FLAGGED, NOT FIXED**, and is
+> reported to the Conductor as such. A repair is a unit; this one was not commissioned to make it.
+
 **The scale at which the question "are these rows reachable in this realization?" is properly
 posed**, priced from this unit's own measured 0.57 h/attempt:
 
@@ -475,6 +503,15 @@ unit's own artifacts explicitly.
 calibrated on mined-seed attempts that stall early; **direct-seed attempts measured `≈0.57
 h/attempt`** because a plausible seed runs 20–31 epochs before the stall rule fires. **A brief that
 prices direct seeding off mined-seed telemetry will under-resource it every time.**
+
+> **CORRECTION, 2026-08-18 — unit `D-REPAIR` (wave 5), `V-W3` defect D3.** The wording above
+> stands; this is the measurement beside it. **The mined-seed-vs-direct-seed explanation does not
+> survive either ledger.** `E` **21.44** epochs/attempt (343/16, its own `n_iters`) against U5's
+> **21.95** (2195/100, `u5_m3_ledger.json`, and independently `E`'s own
+> `diagnostic_2.n_epochs = 2195`) — **2.3% fewer, not more** — at **95.389 s/epoch** against a
+> modelled **95 s**, i.e. **0.41% over**. So the recommendation this item draws is unsupported by
+> the numbers it draws it from: the telemetry priced this unit correctly in both of its factors.
+> Full table and the D1 scope note at §10. **The `~8×` here is D1, not D3: flagged, not fixed.**
 
 **(e) The host killed the unattended run TWICE.** The first launch died after ~2 h with **zero**
 banked results. Per-attempt pickle checkpointing plus `imap_unordered(chunksize=1)` was added to
