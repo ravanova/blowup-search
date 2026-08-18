@@ -1530,6 +1530,7 @@ scope to compensate").
 |---|---|---|---|---|
 | (i) | `writeup/data/p2_route_fus_v1.json`, `sources.USC2.cite` (`"Wang, Leger, Lai, Buckmaster …"`, arXiv:2511.22819) | dispatched as "the same fix leg 338 made to `sources.USC.cite`" — i.e. that "Leger" is a misspelling of "Gomez-Serrano" here too | **FALSE.** arXiv:2511.22819's own live byline (fetched directly this leg) is "Yongji Wang, Tristan Léger, Ching-Yao Lai, Tristan Buckmaster" — four authors, no Gómez-Serrano at all. `Leger` is the ASCII form of the real coauthor **Tristan Léger**, a different person from **Javier Gómez-Serrano** (the coauthor on the sibling paper, 2509.14185, that leg 338 correctly fixed). The two papers have different, non-overlapping-in-this-name author lists; leg 338's fix does not generalize to this field. | **RESISTER, not forced.** `sources.USC2.cite` is left exactly as it was — its "Leger" is correct as written. Reported here so no future leg re-attempts this specific "fix" on the mistaken premise that it mirrors leg 338's. |
 | (ii) | `experiments/journal/leg_221.md` and `solver/boussinesq_rescaled.py`'s module docstring (the two identical "86x the module's own tolerance" / "86x tolerance" sites describing the two-scale counterexample) | leg 307's arithmetic finding: the passage's own `5e-4` basis implies `~865x`, not `86x` | **Confirmed by direct re-computation:** `(2.0-1.135121)/2.0 = 0.4324395`; `0.4324395/5e-4 = 864.879`, i.e. `~865x`. The passage's other three magnitudes (`2000x`, `93.9x`, `1731x`) were checked by leg 307 and found consistent with their own bases; untouched by this leg. | **Corrected**, both sites, inline `[CORRECTED 2026-08-12, leg 307's arithmetic finding, batched at leg 352: 0.4324/5e-4 = 864.9, i.e. ~865x, not 86x]`, original `86x` wording left standing alongside the marker. |
+| 16 | `L5`'s pre-committed gate (wave 5, `WAVE5_PLAN.md` @ `1e49a00`) said measure *"on route 4's **banked** discrete profile"* — **route 4 has no banked profile**, so the gate as worded was **unsatisfiable** | **`L5` itself** (2026-08-18, `4be46ef`), which banked `route_4_has_no_banked_profile = True` with evidence at `experiments/journal/leg_382.md:174` and `leg_397.md` §1, and substituted leg 381's **banked SYNTHETIC** exactly-DSS profile; the Conductor records it here as a **gate deviation**, which its integration commit `e42e7ab` described only as a limitation | **The substitution is the right one and the deviation is the unit's, not a defect**: leg 381's synthetic profile is the object clause (a)'s bill was computed on, so clause (b)'s bill is **directly comparable** to it, and control `C1` reproduces leg 381's exponents to `1.996e-12`. What it costs: **the EXPONENT is a class fact, the CONSTANT `c_mod = 869.288` is not route 4's number.** This is the direct motivation for wave 6's `L6`. |
 
 ### The ceiling
 
@@ -2361,3 +2362,21 @@ It is banked as `UNREACHABLE`, **never as a zero**, and `read-do-not-contact` bi
 **0 banked JSON files touched.** `WALLS.md` §W4 carries the D5/D6 provenance correction in the live
 wall text; the artefacts carry none of it, and the per-field repair is a **wave-6 unit**, not a
 passing edit. **No link of the `L1 → L4` chain moved.** Tier 2. Clay stays **~0.05%**.
+
+
+## §34 — `L5`'s gate deviation: a pre-committed gate that named an object which does not exist
+
+**Recorded 2026-08-18, after the wave-5 integration commit `e42e7ab`, by the Conductor against its own
+audit.** The gate was written by me. It required the measurement *on route 4's banked discrete profile*.
+**Route 4 has no banked discrete profile**, and `L5` said so in its artefact rather than quietly using
+something else: `route_4_has_no_banked_profile = True`, evidenced at `experiments/journal/leg_382.md`
+line 174 and `leg_397.md` §1. It then measured on leg 381's **banked synthetic** exactly-DSS
+divergence-free poloidal field, reproducing leg 381's own `ρ`-exponents to `1.996e-12` (control `C1`).
+
+**The `NO` is unaffected**, because the `NO` is threshold-free and rests on an **exponent** —
+`0.0001085`, i.e. zero — not on a constant. What is affected is the reach of the constant:
+`c_mod = 869.288` per unit similarity time is **that synthetic profile's** number, not route 4's.
+
+**What this changes about how I write gates:** a gate may not name an artefact without the Conductor
+having checked that the artefact exists. Wave 6's `L6` exists to remove the deficiency itself.
+**0 banked JSON files touched. No link of the `L1 → L4` chain moved.**
