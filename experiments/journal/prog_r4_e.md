@@ -397,24 +397,40 @@ the model was calibrated on U5 attempts that stall early, while **an attempt pla
 exactly because it does not fail fast. **This is logged as a correction for the Conductor (§12d).**
 
 > **CORRECTION, 2026-08-18 — unit `D-REPAIR` (wave 5), discharging `V-W3`'s defect D3.**
-> Per `writeup/CORRECTIONS.md`'s convention the paragraph above stands as written; this block
-> is beside it, and it is the measurement. **The structural explanation is contradicted by both
-> ledgers. `E` ran 2.3% FEWER epochs per attempt than U5, not more, and its per-epoch cost was
-> the modelled one.**
+> Per `writeup/CORRECTIONS.md`'s convention the paragraph above stands as written; this block is
+> beside it, and it is the measurement. **D3's finding holds and its arithmetic does not.** The
+> structural explanation IS contradicted — but **not** because `E` used fewer epochs. `V-W3`
+> compared `E`'s **343** (an `n_iters` count) against U5's **2195** (a ledger-row count), and
+> those are two different conventions (see `prog_r4_u5.md` §"Cost basis", D4's correction block:
+> a non-converged attempt banks one ledger row beyond its `n_iters`, and `2195 − 2104 = 91` is
+> exactly U5's non-converged count, `357 − 343 = 14` exactly `E`'s). **Like for like, in EITHER
+> convention, `E` used slightly MORE epochs per attempt, not 2.3% fewer — and it is still nowhere
+> near a structural difference.**
 >
-> | quantity | source, re-derived | value |
-> |---|---|---|
-> | `E` epochs/attempt | `writeup/data/p2_prog_r4_e_v1.json`, `sum(diagnostic_3.attempts[].n_iters) = 343 = resourcing.total_epochs`, over 16 | **21.4375** |
-> | U5 epochs/attempt | `experiments/programme_r4/u5_m3_ledger.json`, `sum(len(attempts[].ledger)) = 2195`, over 100 | **21.95** |
-> | ratio | — | **0.9767, i.e. `E` used 2.33% fewer** |
-> | `E` s/epoch, realised | `sum(diagnostic_3.attempts[].wall_seconds) = 32,718.334 s`, over 343 epochs | **95.389 s** |
-> | s/epoch, modelled | the 95 s the commissioning figure was costed at | **95 s** |
-> | ratio | — | **1.0041, i.e. 0.41% over** |
+> | quantity, like for like | `E` | U5 | ratio |
+> |---|---|---|---|
+> | epochs/attempt, `n_iters` convention | **21.4375** (343/16) | **21.04** (2104/100) | **1.0189** — `E` +1.9% |
+> | epochs/attempt, ledger-row convention | **22.3125** (357/16) | **21.95** (2195/100) | **1.0165** — `E` +1.7% |
+> | core-s/attempt | **2044.90** (32,718.334/16) | **2053.44** (0.0713 wall-h × 8 workers) | **0.9958** — `E` 0.4% **under** |
+> | s/epoch, `n_iters` convention | **95.389** | **97.597** | **0.9774** — `E` 2.3% cheaper |
+> | s/epoch, realised vs the **95 s** U5 banked as `seconds_per_epoch_costed_at` | **95.389** | 95 (model) | **1.0041** — 0.41% over |
 >
-> **Both factors of the cost model were accurate**, so there is no structural over-run for the
-> "runs 20–31 epochs before the stall rule fires" story to explain. That story is not merely
-> unsupported: the direction it predicts is the opposite of the direction measured. The same
-> wording at §12(d) carries its own correction block.
+> Sources, all re-derived: `writeup/data/p2_prog_r4_e_v1.json` (`diagnostic_3.attempts[].n_iters`,
+> `.wall_seconds`), `experiments/programme_r4/e_hhard_ledger.json`,
+> `writeup/data/p2_prog_r4_m3_v1.json` (`resourcing.epochs_spent`, `.seconds_per_epoch_costed_at`),
+> `experiments/programme_r4/u5_m3_ledger.json`.
+>
+> **Both factors of the cost model land within ~2% in either convention**, so there is no
+> structural over-run for the "runs 20–31 epochs before the stall rule fires" story to explain:
+> that story predicts a *multiple*, and the measurement is a couple of per cent. The same wording
+> at §12(d) carries its own correction block.
+>
+> **A finding about the verifier, reported not ruled.** `V-W3`'s D3 sentence "`E` used 2.3% fewer
+> epochs per attempt, not more" is **wrong in size and in direction** — it is +1.9% (or +1.7%),
+> not −2.3% — because it mixed the two epoch conventions. **D3's conclusion survives; its number
+> does not.** The same mixed comparison reached `STATE.md` and `OPTIONS.md` in the Conductor's D1
+> correction ("21.44 epochs/attempt vs U5's 21.95"); **those files are the Conductor's and are
+> untouched by this unit.**
 >
 > **NOT repaired here, and deliberately.** The `~8×` in the sentence above is `V-W3`'s defect
 > **D1**, which is **not in this unit's scope** — D1 was the Conductor's to rule and was
@@ -506,12 +522,15 @@ prices direct seeding off mined-seed telemetry will under-resource it every time
 
 > **CORRECTION, 2026-08-18 — unit `D-REPAIR` (wave 5), `V-W3` defect D3.** The wording above
 > stands; this is the measurement beside it. **The mined-seed-vs-direct-seed explanation does not
-> survive either ledger.** `E` **21.44** epochs/attempt (343/16, its own `n_iters`) against U5's
-> **21.95** (2195/100, `u5_m3_ledger.json`, and independently `E`'s own
-> `diagnostic_2.n_epochs = 2195`) — **2.3% fewer, not more** — at **95.389 s/epoch** against a
-> modelled **95 s**, i.e. **0.41% over**. So the recommendation this item draws is unsupported by
-> the numbers it draws it from: the telemetry priced this unit correctly in both of its factors.
-> Full table and the D1 scope note at §10. **The `~8×` here is D1, not D3: flagged, not fixed.**
+> survive either ledger.** Like for like, `E` ran **21.44** epochs/attempt against U5's **21.04**
+> on the `n_iters` convention (**+1.9%**) and **22.31** against **21.95** on the ledger-row
+> convention (**+1.7%**), at **95.389 s/epoch** against the **95 s** U5 banked as
+> `seconds_per_epoch_costed_at` (**0.41% over**), for **2044.90** core-s/attempt against a
+> modelled **2053.44** (**0.4% under**). A structural difference is a multiple; this is a couple
+> of per cent. So the recommendation this item draws is unsupported by the numbers it draws it
+> from: **the mined-seed telemetry priced this unit correctly in both of its factors.** Full table,
+> sources, and the note on `V-W3`'s own mixed-convention arithmetic at §10. **The `~8×` here is
+> D1, not D3: flagged, not fixed.**
 
 **(e) The host killed the unattended run TWICE.** The first launch died after ~2 h with **zero**
 banked results. Per-attempt pickle checkpointing plus `imap_unordered(chunksize=1)` was added to

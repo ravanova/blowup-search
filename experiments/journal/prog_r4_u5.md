@@ -406,6 +406,34 @@ was not started in this session.
 epochs / 100 attempts, epochs costed at 95 s as required); 0.68 h for the control set; 0.80 h for
 a full re-mine; 3.44 h for a fresh `T = 1e5` DNS.
 
+> **CORRECTION, 2026-08-18 — unit `D-REPAIR` (wave 5), discharging `V-W3`'s defect D4.**
+> `V-W3` located this line as disagreeing with U5's own ledger by **91 epochs (4.3%)**:
+> `experiments/programme_r4/u5_m3_ledger.json` holds **2195** iteration records, and `E`'s
+> `diagnostic_2.n_epochs` independently reports **2195**. **The `2,104` above is NOT wrong and
+> is NOT changed.** The two artefacts count different things, and the gap is exactly accounted
+> for:
+>
+> | count | how it is obtained | value |
+> |---|---|---|
+> | `n_iters` convention | `sum(attempts[].n_iters)` in `writeup/data/p2_prog_r4_m3_v1.json`, `== resourcing.epochs_spent` | **2104** |
+> | ledger-row convention | `sum(len(attempts[].ledger))` in `experiments/programme_r4/u5_m3_ledger.json` | **2195** |
+> | difference | — | **91** |
+>
+> **Attempt by attempt the rule is exact and has no residue:** for each of the **9 converged**
+> attempts `len(ledger) == n_iters`; for each of the **91 that did not converge**
+> `len(ledger) == n_iters + 1`. `91 = 100 − 9` is the whole discrepancy — a non-converged attempt
+> banks one Newton iteration record beyond the count `n_iters` reports. **Unit `E` carries the
+> identical rule**: `sum(n_iters) = 343 = resourcing.total_epochs` against **357** ledger rows,
+> and `357 − 343 = 14 = 16 − 2`, its own non-converged count.
+>
+> **This line is therefore left standing**, because `2,104` is what U5's banked JSON says and
+> what three landed executable checks assert (`experiments/p2_prog_r4_m3_evidence.py:212,222`,
+> `experiments/p2_prog_r4_r0r1_evidence.py:238`,
+> `experiments/programme_r4/r1_flatness.py:173`). Editing it to `2195` would put the prose at odds
+> with its own artefact and break all three. **What was actually missing is the convention, and
+> it is now written down here.** `E`'s `2195` is not a contradiction of this unit; it is the same
+> run counted the other way.
+
 **The constraint that shapes every option: the anchored admissible pool is now exhausted at
 `R < 0.25`.** 241 candidates exist, 100 are spent, **141 remain — of which only 12 are in-band**.
 No option that keeps the current window can push the in-band arm past 72 attempts, ever.
