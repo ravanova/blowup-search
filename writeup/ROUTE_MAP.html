@@ -1,0 +1,465 @@
+<title>Closed Routes to Blow-Up</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    --ground:#F2F5F6; --surface:#FFFFFF; --sunk:#E7ECEE;
+    --ink:#16212B; --body:#33424E; --muted:#61707C;
+    --line:#C3D0D7; --hair:#DAE3E7;
+    --open:#B4530A; --open-soft:#F6E7D6;
+    --flight:#1B6E8A; --flight-soft:#DCEBF0;
+    --closed:#74838E; --closed-soft:#E9EDEF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0F161C; --surface:#18222B; --sunk:#131C23;
+      --ink:#E6EDF2; --body:#C3CFD8; --muted:#8B9AA6;
+      --line:#2C3945; --hair:#232F39;
+      --open:#E8963F; --open-soft:#3A2A18;
+      --flight:#5CB4CE; --flight-soft:#152C36;
+      --closed:#6E7D89; --closed-soft:#1D262E;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0F161C; --surface:#18222B; --sunk:#131C23;
+    --ink:#E6EDF2; --body:#C3CFD8; --muted:#8B9AA6;
+    --line:#2C3945; --hair:#232F39;
+    --open:#E8963F; --open-soft:#3A2A18;
+    --flight:#5CB4CE; --flight-soft:#152C36;
+    --closed:#6E7D89; --closed-soft:#1D262E;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ground); color:var(--body);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1000px; margin:0 auto; padding:56px 28px 96px; display:flex; flex-direction:column; gap:56px}
+
+  h1,h2,h3{font-family:"IBM Plex Serif",Georgia,serif; color:var(--ink); text-wrap:balance; margin:0}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:600; line-height:1.14; letter-spacing:-.015em}
+  h2{font-size:23px; font-weight:600; line-height:1.25}
+  h3{font-size:16px; font-weight:600}
+  p{margin:0}
+  code,.mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.9em}
+
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.13em;
+    text-transform:uppercase; color:var(--muted);
+  }
+
+  header{display:flex; flex-direction:column; gap:16px; border-bottom:1px solid var(--line); padding-bottom:28px}
+  .lede{font-size:18px; max-width:64ch; color:var(--body)}
+  .facts{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px}
+  .fact{
+    font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--muted);
+    border:1px solid var(--hair); background:var(--surface);
+    padding:5px 10px; border-radius:2px;
+  }
+  .fact b{color:var(--ink); font-weight:500}
+
+  section{display:flex; flex-direction:column; gap:18px}
+  .intro{max-width:66ch}
+
+  figure{margin:0; display:flex; flex-direction:column; gap:12px}
+  .canvas{
+    background:var(--surface); border:1px solid var(--line); border-radius:3px;
+    padding:20px 16px; overflow-x:auto;
+  }
+  .canvas svg{display:block; width:100%; min-width:640px; height:auto}
+  figcaption{font-size:13.5px; color:var(--muted); max-width:70ch}
+  figcaption b{color:var(--ink); font-weight:500}
+
+  /* --- SVG token styling --- */
+  .n-box{fill:var(--surface); stroke:var(--line); stroke-width:1.2}
+  .n-box.is-open{fill:var(--open-soft); stroke:var(--open); stroke-width:1.6}
+  .n-box.is-flight{fill:var(--flight-soft); stroke:var(--flight); stroke-width:1.4}
+  .n-box.is-closed{fill:var(--closed-soft); stroke:var(--closed); stroke-width:1.1; stroke-dasharray:4 3}
+  .n-box.is-root{fill:var(--sunk); stroke:var(--ink); stroke-width:1.4}
+
+  .t-title{font-family:"IBM Plex Sans",sans-serif; font-size:13px; font-weight:600; fill:var(--ink)}
+  .t-sub{font-family:"IBM Plex Mono",monospace; font-size:10.5px; fill:var(--muted)}
+  .t-edge{font-family:"IBM Plex Mono",monospace; font-size:10.5px; fill:var(--muted)}
+  .t-open{fill:var(--open)}
+  .t-flight{fill:var(--flight)}
+  .t-closed{fill:var(--closed)}
+  .t-ink{fill:var(--ink)}
+
+  .e-line{stroke:var(--line); stroke-width:1.3; fill:none}
+  .e-line.is-open{stroke:var(--open); stroke-width:1.8}
+  .e-line.is-flight{stroke:var(--flight); stroke-width:1.6}
+  .e-line.is-closed{stroke:var(--closed); stroke-width:1.1; stroke-dasharray:4 3}
+  .buffer{stroke:var(--closed); stroke-width:3.2; stroke-linecap:butt}
+
+  .legend{display:flex; flex-wrap:wrap; gap:18px; align-items:center; font-size:13px; color:var(--muted)}
+  .key{display:flex; align-items:center; gap:7px}
+  .swatch{width:22px; height:0; border-top-width:2px; border-top-style:solid; display:inline-block}
+  .sw-open{border-color:var(--open)}
+  .sw-flight{border-color:var(--flight)}
+  .sw-closed{border-color:var(--closed); border-top-style:dashed}
+
+  /* --- ledger --- */
+  .ledger{display:flex; flex-direction:column; border:1px solid var(--line); border-radius:3px; overflow:hidden; background:var(--surface)}
+  .row{display:grid; grid-template-columns:64px 1fr 128px; gap:14px; padding:14px 16px; border-bottom:1px solid var(--hair); align-items:start}
+  .row:last-child{border-bottom:0}
+  .row .id{font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:500; color:var(--ink)}
+  .row .what{font-size:14.5px; line-height:1.5}
+  .row .what em{color:var(--muted); font-style:normal; display:block; font-size:13px; margin-top:3px}
+  .pill{
+    font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+    padding:4px 8px; border-radius:2px; border:1px solid; white-space:nowrap; text-align:center; justify-self:start;
+  }
+  .p-closed{color:var(--closed); border-color:var(--closed); background:var(--closed-soft)}
+  .p-open{color:var(--open); border-color:var(--open); background:var(--open-soft)}
+  .p-flight{color:var(--flight); border-color:var(--flight); background:var(--flight-soft)}
+
+  ol.remain{margin:0; padding-left:0; list-style:none; counter-reset:r; display:flex; flex-direction:column; gap:14px}
+  ol.remain li{
+    counter-increment:r; display:grid; grid-template-columns:30px 1fr; gap:14px;
+    padding-bottom:14px; border-bottom:1px solid var(--hair);
+  }
+  ol.remain li:last-child{border-bottom:0; padding-bottom:0}
+  ol.remain li::before{
+    content:counter(r); font-family:"IBM Plex Mono",monospace; font-size:12px;
+    color:var(--open); padding-top:2px;
+  }
+  ol.remain b{color:var(--ink); font-weight:600}
+
+  .note{
+    background:var(--sunk); border-left:2px solid var(--muted);
+    padding:16px 18px; font-size:14px; display:flex; flex-direction:column; gap:10px;
+  }
+  .note b{color:var(--ink)}
+  footer{border-top:1px solid var(--line); padding-top:20px; font-size:13px; color:var(--muted)}
+
+  @media (max-width:620px){
+    .row{grid-template-columns:52px 1fr; }
+    .row .pill{grid-column:2}
+  }
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Problem space · route ledger · 2026-08-18 · wave 6</span>
+  <h1>What is still open, and what has been closed off</h1>
+  <p class="lede">Every branch below was open when this programme started. Six are now closed by
+  measurement — four by other people's published theorems, two by units this repository ran and
+  verified. This is the map of what survives.</p>
+  <div class="facts">
+    <span class="fact">ceiling <b>Tier 2</b></span>
+    <span class="fact">Clay <b>~0.05%</b></span>
+    <span class="fact">legs <b>403</b></span>
+    <span class="fact">L1→L4 links moved <b>0</b></span>
+  </div>
+</header>
+
+<section>
+  <span class="eyebrow">Figure 1</span>
+  <h2>The route map</h2>
+  <p class="intro">Reading top to bottom. A dashed path ending in a solid bar is closed and cannot be
+  reopened by effort — the bar marks what closed it. Amber is live; teal is a unit in flight now.</p>
+
+  <figure>
+    <div class="canvas">
+      <svg viewBox="0 0 900 660" role="img" aria-label="Decision tree of routes to a Clay Navier-Stokes answer. Global regularity is closed by Tao's supercriticality barrier. Under blow-up, statement C on R-cubed is the live target and statement D on the torus is parked. Exactly self-similar profiles are closed by Necas-Ruzicka-Sverak and Tsai. The DSS route splits into finding a Tier 2 candidate, which is under-resourced, and certifying it, where two of three localisation clauses are shut.">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9 z" fill="currentColor"/>
+          </marker>
+        </defs>
+
+        <!-- ROOT -->
+        <rect class="n-box is-root" x="350" y="16" width="200" height="40" rx="3"/>
+        <text class="t-title" x="450" y="35" text-anchor="middle">Clay: 3D Navier–Stokes</text>
+        <text class="t-sub" x="450" y="49" text-anchor="middle">two directions, one is closed on a theorem</text>
+
+        <!-- root to two -->
+        <path class="e-line" d="M450,56 L450,74 L200,74 L200,96" marker-end="url(#ar)" style="color:var(--line)"/>
+        <path class="e-line is-open" d="M450,56 L450,74 L640,74 L640,96" marker-end="url(#ar)" style="color:var(--open)"/>
+
+        <!-- (a) closed -->
+        <rect class="n-box is-closed" x="96" y="98" width="208" height="46" rx="3"/>
+        <text class="t-title t-closed" x="200" y="118" text-anchor="middle">(a) Global regularity</text>
+        <text class="t-sub" x="200" y="133" text-anchor="middle">prove no blow-up ever occurs</text>
+        <line class="buffer" x1="140" y1="156" x2="260" y2="156"/>
+        <text class="t-edge t-closed" x="200" y="174" text-anchor="middle">Tao: averaged-NS supercriticality</text>
+        <text class="t-edge t-closed" x="200" y="188" text-anchor="middle">W1: a search argues only FOR blow-up</text>
+
+        <!-- (b) open -->
+        <rect class="n-box is-open" x="540" y="98" width="200" height="46" rx="3"/>
+        <text class="t-title" x="640" y="118" text-anchor="middle">(b) Finite-time blow-up</text>
+        <text class="t-sub" x="640" y="133" text-anchor="middle">the only direction in scope</text>
+
+        <!-- b to statements -->
+        <path class="e-line is-open" d="M640,144 L640,168 L470,168 L470,196" marker-end="url(#ar)" style="color:var(--open)"/>
+        <path class="e-line is-closed" d="M640,144 L640,168 L800,168 L800,196" marker-end="url(#ar)" style="color:var(--closed)"/>
+
+        <!-- (C) -->
+        <rect class="n-box is-open" x="370" y="198" width="200" height="44" rx="3"/>
+        <text class="t-title" x="470" y="217" text-anchor="middle">(C) breakdown on ℝ³</text>
+        <text class="t-sub" x="470" y="232" text-anchor="middle">the prize target</text>
+
+        <!-- (D) -->
+        <rect class="n-box is-closed" x="700" y="198" width="188" height="44" rx="3"/>
+        <text class="t-title t-closed" x="794" y="217" text-anchor="middle">(D) breakdown on 𝕋³</text>
+        <text class="t-sub" x="794" y="232" text-anchor="middle">parked, not disproved</text>
+        <text class="t-edge t-closed" x="794" y="258" text-anchor="middle">0 of 4 rigidity clearances carry;</text>
+        <text class="t-edge t-closed" x="794" y="272" text-anchor="middle">0 modes survive two DSS steps</text>
+
+        <!-- C to ansatz -->
+        <path class="e-line is-closed" d="M470,242 L470,266 L150,266 L150,292" marker-end="url(#ar)" style="color:var(--closed)"/>
+        <path class="e-line is-open" d="M470,242 L470,292" marker-end="url(#ar)" style="color:var(--open)"/>
+        <path class="e-line" d="M470,242 L470,266 L640,266 L640,292" marker-end="url(#ar)" style="color:var(--line)"/>
+        <text class="t-edge" x="470" y="260" text-anchor="middle">which ansatz?</text>
+
+        <!-- exactly SS -->
+        <rect class="n-box is-closed" x="52" y="294" width="196" height="44" rx="3"/>
+        <text class="t-title t-closed" x="150" y="313" text-anchor="middle">Exactly self-similar</text>
+        <text class="t-sub" x="150" y="328" text-anchor="middle">backward SS profile</text>
+        <line class="buffer" x1="96" y1="350" x2="204" y2="350"/>
+        <text class="t-edge t-closed" x="150" y="368" text-anchor="middle">Nečas–Růžička–Šverák; Tsai</text>
+
+        <!-- DSS -->
+        <rect class="n-box is-open" x="374" y="294" width="192" height="44" rx="3"/>
+        <text class="t-title" x="470" y="313" text-anchor="middle">Discretely self-similar</text>
+        <text class="t-sub" x="470" y="328" text-anchor="middle">route 4 · period 2 log λ</text>
+
+        <!-- non-SS -->
+        <rect class="n-box" x="548" y="294" width="184" height="44" rx="3" transform="translate(0,0)"/>
+        <text class="t-title" x="640" y="313" text-anchor="middle">Non-self-similar</text>
+        <text class="t-sub" x="640" y="328" text-anchor="middle">never explored here</text>
+
+        <!-- DSS splits -->
+        <path class="e-line is-flight" d="M470,338 L470,364 L250,364 L250,392" marker-end="url(#ar)" style="color:var(--flight)"/>
+        <path class="e-line is-open" d="M470,338 L470,364 L680,364 L680,392" marker-end="url(#ar)" style="color:var(--open)"/>
+
+        <!-- Tier 2 -->
+        <rect class="n-box is-flight" x="140" y="394" width="220" height="46" rx="3"/>
+        <text class="t-title" x="250" y="414" text-anchor="middle">Tier 2 — find the candidate</text>
+        <text class="t-sub" x="250" y="429" text-anchor="middle">a numerical DSS orbit</text>
+        <text class="t-edge" x="250" y="458" text-anchor="middle">216 attempts, 0 named orbits recovered</text>
+        <text class="t-edge" x="250" y="472" text-anchor="middle">cause measured: basin structure,</text>
+        <text class="t-edge" x="250" y="486" text-anchor="middle">not seed supply · gate UNDER-RESOURCED</text>
+        <text class="t-edge t-flight" x="250" y="506" text-anchor="middle">open: multiple shooting · 2nd-order stepper</text>
+
+        <!-- Tier 3 -->
+        <rect class="n-box is-open" x="570" y="394" width="220" height="46" rx="3"/>
+        <text class="t-title" x="680" y="414" text-anchor="middle">Tier 3 — certify it</text>
+        <text class="t-sub" x="680" y="429" text-anchor="middle">what a Clay answer requires</text>
+
+        <!-- Tier3 to obligations -->
+        <path class="e-line is-open" d="M680,440 L680,466" marker-end="url(#ar)" style="color:var(--open)"/>
+
+        <rect class="n-box is-closed" x="416" y="468" width="176" height="42" rx="3"/>
+        <text class="t-title t-closed" x="504" y="487" text-anchor="middle">§4 localisation</text>
+        <text class="t-sub" x="504" y="501" text-anchor="middle">2 of 3 clauses SHUT</text>
+
+        <rect class="n-box is-open" x="606" y="468" width="150" height="42" rx="3"/>
+        <text class="t-title" x="681" y="487" text-anchor="middle">§6(ii) persistence</text>
+        <text class="t-sub" x="681" y="501" text-anchor="middle">never attacked</text>
+
+        <rect class="n-box" x="770" y="468" width="118" height="42" rx="3"/>
+        <text class="t-title" x="829" y="487" text-anchor="middle">§1 enclosure</text>
+        <text class="t-sub" x="829" y="501" text-anchor="middle">route demoted</text>
+
+        <path class="e-line is-open" d="M680,440 L680,458 L504,458 L504,466" style="color:var(--open)"/>
+        <path class="e-line is-open" d="M680,440 L680,458 L829,458 L829,466" style="color:var(--open)"/>
+
+        <!-- clause detail -->
+        <path class="e-line is-closed" d="M504,510 L504,530" marker-end="url(#ar)" style="color:var(--closed)"/>
+        <rect class="n-box is-closed" x="330" y="532" width="348" height="88" rx="3"/>
+        <text class="t-sub t-closed" x="348" y="552">(a) localise with the decay available</text>
+        <text class="t-sub t-closed" x="660" y="552" text-anchor="end">SHUT · verified</text>
+        <text class="t-sub t-closed" x="348" y="574">(b) natively finite-energy ansatz</text>
+        <text class="t-sub t-closed" x="660" y="574" text-anchor="end">SHUT · verified</text>
+        <text class="t-sub t-open" x="348" y="596">(c) a target not imposing condition (7)</text>
+        <text class="t-sub t-open" x="660" y="596" text-anchor="end">OPEN · untested</text>
+        <line x1="348" y1="606" x2="660" y2="606" stroke="var(--hair)" stroke-width="1"/>
+        <text class="t-edge t-open" x="504" y="616" text-anchor="middle">clause (c) is statement (D) — the branch parked above</text>
+      </svg>
+    </div>
+    <figcaption><b>The one surviving route runs through a branch that is already parked.</b>
+    W4's only unbroken localisation clause is (c) — a target that does not impose Clay's bounded-energy
+    condition — and that target is statement (D) on the torus, which the programme deferred on its own
+    measurements. Every other path from the root either terminates at a buffer or leads into an
+    under-resourced search.</figcaption>
+  </figure>
+
+  <div class="legend">
+    <span class="key"><i class="swatch sw-open"></i> live route</span>
+    <span class="key"><i class="swatch sw-flight"></i> unit in flight</span>
+    <span class="key"><i class="swatch sw-closed"></i> closed by measurement</span>
+    <span class="key">▬ buffer bar — what closed it</span>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">Figure 2 · the mechanism</span>
+  <h2>How the last two clauses shut</h2>
+  <p class="intro">Both closures come from the same pin, arriving from opposite sides. This is the
+  part worth understanding: after localisation, four of the five error terms cancel or decay, and the
+  single survivor is trapped between two published exclusions.</p>
+
+  <figure>
+    <div class="canvas">
+      <svg viewBox="0 0 900 400" role="img" aria-label="Diagram of the pincer that shuts W4 clause b. After cutting off the profile, terms T1 and T2 cancel to 2.6 times ten to the minus 8 and terms T4 and T5 decay like rho to the minus 2, leaving only T3, the modulation commutator, which is proportional to m-dot and of size rho to the power one minus alpha. T3 vanishes only if alpha exceeds 1, which the Chae-Wolf alpha pin forbids, or if m-dot is zero, which Necas-Ruzicka-Sverak and Tsai forbid.">
+        <defs>
+          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9 z" fill="currentColor"/>
+          </marker>
+        </defs>
+
+        <text class="t-edge" x="450" y="20" text-anchor="middle">cut the infinite-energy profile off at radius ρ — five error terms appear</text>
+
+        <!-- vanishing terms -->
+        <rect class="n-box is-closed" x="40" y="40" width="200" height="40" rx="3"/>
+        <text class="t-sub t-closed" x="140" y="58" text-anchor="middle">T₁ cutoff drift + T₂ transport</text>
+        <text class="t-sub t-closed" x="140" y="72" text-anchor="middle">cancel identically · 2.58e-08</text>
+
+        <rect class="n-box is-closed" x="40" y="92" width="200" height="40" rx="3"/>
+        <text class="t-sub t-closed" x="140" y="110" text-anchor="middle">T₄ , T₅</text>
+        <text class="t-sub t-closed" x="140" y="124" text-anchor="middle">decay like ρ⁻² · gone</text>
+
+        <path class="e-line is-closed" d="M240,60 L300,60 L300,150 L336,150" marker-end="url(#ar2)" style="color:var(--closed)"/>
+        <path class="e-line is-closed" d="M240,112 L300,112 L300,150" style="color:var(--closed)"/>
+        <text class="t-edge t-closed" x="270" y="52" text-anchor="middle">removed</text>
+
+        <!-- survivor -->
+        <rect class="n-box is-open" x="338" y="118" width="226" height="66" rx="3"/>
+        <text class="t-title" x="451" y="140" text-anchor="middle">T₃ — modulation commutator</text>
+        <text class="t-sub t-open" x="451" y="158" text-anchor="middle">99.9998% of what remains</text>
+        <text class="t-sub" x="451" y="174" text-anchor="middle">∝ ṁ · size ρ¹⁻ᵅ</text>
+
+        <!-- left jaw -->
+        <rect class="n-box" x="40" y="228" width="240" height="62" rx="3"/>
+        <text class="t-title" x="160" y="249" text-anchor="middle">The α-pin</text>
+        <text class="t-sub" x="160" y="265" text-anchor="middle">Chae–Wolf Thm 1.1 + Rmk 1.2 + ESS</text>
+        <text class="t-sub" x="160" y="280" text-anchor="middle">α ≡ 1 exactly, both directions</text>
+
+        <!-- right jaw -->
+        <rect class="n-box" x="620" y="228" width="240" height="62" rx="3"/>
+        <text class="t-title" x="740" y="249" text-anchor="middle">The rigidity exclusion</text>
+        <text class="t-sub" x="740" y="265" text-anchor="middle">Nečas–Růžička–Šverák; Tsai</text>
+        <text class="t-sub" x="740" y="280" text-anchor="middle">no exactly-SS profile exists</text>
+
+        <path class="e-line" d="M280,252 L400,252 L400,190" marker-end="url(#ar2)" style="color:var(--ink)"/>
+        <text class="t-edge t-ink" x="340" y="244" text-anchor="middle">forbids α &gt; 1</text>
+
+        <path class="e-line" d="M620,252 L502,252 L502,190" marker-end="url(#ar2)" style="color:var(--ink)"/>
+        <text class="t-edge t-ink" x="560" y="244" text-anchor="middle">forbids ṁ = 0</text>
+
+        <!-- verdict -->
+        <line x1="40" y1="322" x2="860" y2="322" stroke="var(--hair)" stroke-width="1"/>
+        <text class="t-title" x="40" y="346">Clause (b) needs the exponent strictly negative. The pinned α = 1 delivers exactly 0.</text>
+        <text class="t-sub" x="40" y="366">Measured ρ-exponent +1.09e-04 out to |y| = 1261.72 — enlarging the cutoff radius buys nothing.</text>
+        <text class="t-sub t-open" x="40" y="384">An ENDPOINT, not a gap: clause (a) was short 0.5 of exponent; clause (b) is short nothing and still fails.</text>
+      </svg>
+    </div>
+    <figcaption><b>Two published theorems, closing from opposite sides on the one surviving term.</b>
+    Neither exclusion shuts clause (b) alone — the α-pin blocks the only exponent that would make the
+    tail summable, and the rigidity result blocks the only profile for which the term vanishes
+    identically. Putting them together appears to be new; it has not yet been checked against the
+    literature, and both jaws are currently held at second hand rather than read at primary source.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <span class="eyebrow">Status</span>
+  <h2>The wall ledger</h2>
+  <div class="ledger">
+    <div class="row">
+      <span class="id">W1</span>
+      <span class="what">A search can only ever argue <em>for</em> blow-up
+        <em>Costs one of the two Clay directions. Closed on a theorem, not on effort.</em></span>
+      <span class="pill p-closed">Closed</span>
+    </div>
+    <div class="row">
+      <span class="id">W2</span>
+      <span class="what">No certificate has ever supplied its own three-dimensionality
+        <em>Stands — but only on a scope reading. The instance believed to clear it was 2D lifts; a <b>second</b> occupant is now measured <b>genuinely 3D</b> on this wall's own test, and is excluded only because the wall is scoped to <em>singularity</em> theorems and this one proves nonuniqueness.</em></span>
+      <span class="pill p-flight">Scope open</span>
+    </div>
+    <div class="row">
+      <span class="id">W3</span>
+      <span class="what">No certified blow-up exists for any fluid equation
+        <em>Stands, and the audit has landed: the certificate <b>does close</b>, with four printed constants corrected and the margin surviving by 0.08% — recorded as luck, not margin. The cell is occupied by an object that is not a singularity. Two different claims.</em></span>
+      <span class="pill p-open">Stands</span>
+    </div>
+    <div class="row">
+      <span class="id">W4</span>
+      <span class="what">Finite energy — the localisation problem
+        <em>(a) and (b) shut and verified. Only (c) survives, and (c) is the parked torus branch.</em></span>
+      <span class="pill p-closed">2 of 3 shut</span>
+    </div>
+    <div class="row">
+      <span class="id">W5</span>
+      <span class="what">Persistence and stability under localisation
+        <em>No known method. No unit has ever attacked it in 403 legs.</em></span>
+      <span class="pill p-open">Untouched</span>
+    </div>
+    <div class="row">
+      <span class="id">W6</span>
+      <span class="what">The certificate's function space
+        <em>Three realizations dead; the algebraic weight dead in three further lanes. A fourth <b>apparatus</b> is in scope but has no demonstrated instance.</em></span>
+      <span class="pill p-open">Stands</span>
+    </div>
+    <div class="row">
+      <span class="id">W7</span>
+      <span class="what">Compute
+        <em>Attacked by reformulation rather than hardware. Two reformulations paid; the cost model is now measured accurate.</em></span>
+      <span class="pill p-flight">Partly paid</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">What is left</span>
+  <h2>Avenues that still exist, ranked</h2>
+  <ol class="remain">
+    <li><b>W4 clause (c) — statement (D), the torus.</b> The only unbroken localisation clause, and
+    the only surviving path through the finite-energy problem. It sits behind a lane deferred on its
+    own adverse measurements, so taking it means reopening that lane deliberately rather than by
+    default.</li>
+    <li><b>§6(ii) — persistence under localisation.</b> Never attacked. Its sibling §6(i) turned out
+    to be far sharper than "no known method" once someone looked, which is the argument for looking
+    here too.</li>
+    <li><b>A non-self-similar ansatz.</b> The third branch of the ansatz split, never explored. It
+    escapes the rigidity exclusion by construction, and nothing measured rules it out — nobody has
+    tried to state one.</li>
+    <li><b>The search side's realization changes.</b> Multiple shooting and a second-order stepper.
+    The measured cause of 216 failed recoveries is basin structure, and both of these change the
+    basin rather than buying more attempts, which is now refuted twice.</li>
+    <li><b>W2's scope, now that the question has been asked and answered.</b> The audit found the
+    certified object <em>is</em> genuinely three-dimensional on W2's own pre-committed test — the
+    swirl component is 57% of the radial one, a principal component rather than a residue. W2 survives
+    only because its statement is scoped to <em>singularity</em> theorems and this is a nonuniqueness
+    theorem. Whether that scope is the wording the wall wants is now an open question on the desk.</li>
+  </ol>
+</section>
+
+<section>
+  <div class="note">
+    <p><b>What this map is not.</b> A closed branch means <em>closed on a measurement this programme
+    can point at</em> — not proved impossible. Statement (D) is parked, not disproved. The
+    non-self-similar branch is unexplored, not empty.</p>
+    <p><b>Live caveats on the two newest closures.</b> Both jaws of the clause-(b) pincer are held at
+    second hand and have never been read at primary source — the same defect that cost this programme
+    two lanes earlier this month. The constant in that unit is basis-dependent and measured on a
+    synthetic profile, because the route has never had a real one banked; the unit now in flight
+    exists to fix exactly that. The verdict survives all of it, because it rests on an exponent
+    measured as zero rather than on any constant.</p>
+    <p><b>Nothing here moved a link of the L1 → L4 chain.</b> Closing routes is not the same as
+    approaching an answer. The ceiling is Tier 2 and the odds are unchanged.</p>
+  </div>
+</section>
+
+<footer>
+  Drawn from <code>WALLS.md</code>, <code>STATE.md</code>, <code>OPTIONS.md</code> and the leg journals
+  at <code>main</code>, 2026-08-18. Every status shown is the repository's own recorded verdict in its
+  own pre-committed wording; nothing is inferred.
+</footer>
+
+</div>

@@ -504,3 +504,9 @@ journal; nothing here is a summary written after the fact.*
 
 - **`L5`** (leg 400, Lane L) — W4 clause **(b)** measured **SHUT**: gate `NO`, threshold-free, `c_mod = 869.288` per unit similarity time, ρ-exponent `+1.085e-04`. **VERIFIED** by `V-W5` (leg 403) 2026-08-18 — arithmetic only. Ceiling: Tier 2, float64, **SYNTHETIC** profile. `WALLS.md` W4; `CORRECTIONS.md` §34, §35. Row retired from `STATE.md` 2026-08-18 under §3j.
 - **`V-W4`** (verification of wave 4) — **PASS**, all five gate items reproduce; both wave-4 artefacts regenerate bit-identically from re-fetched primaries. **6 defects + 1 note, none changing a verdict** (`CORRECTIONS.md` §33); repaired by `V5` as `_v2` deltas, `_v1` untouched. Row retired 2026-08-18 under §3j.
+
+## Views of the record (not sources — the record is the source)
+
+| view | what it shows | regenerate |
+|---|---|---|
+| `writeup/ROUTE_MAP.html` | Decision tree of every route to a Clay answer: closed by measurement / live / in flight / never explored, plus the W4 clause table and the wall ledger. | **Never automatically.** Procedure and the reasons in `writeup/ROUTE_MAP.md`. A Conductor FLAGS it stale in the integration commit; it does not rebuild it. |
