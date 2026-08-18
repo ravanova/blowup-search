@@ -242,7 +242,7 @@ wave a Conductor planned.** Every wave budgets one verifier, dispatched in the *
 |---|---|
 | **The blockers and the lanes** | **`WALLS.md`** — 7 walls, 4 lanes, read whole |
 | **Deferred options, costs, re-open conditions** | **`OPTIONS.md`** — read when planning a wave |
-| The contract | `ORCHESTRATION.md` §3c–§3j (**3g** CONDUCTOR, **3h** walls, **3i** direction check, **3j** headroom) |
+| The contract | `ORCHESTRATION.md` §3c–§3k (**3g** CONDUCTOR, **3h** walls, **3i** direction, **3j** headroom, **3k** literature) |
 | Bans, stage, gate, lanes | `.venv/bin/python plan_of_record.py` — executable |
 | Does a module exist | `.venv/bin/python capabilities.py <term>` — grep, don't read |
 | The 2026-08-14 lane ruling | `writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md` |
@@ -252,5 +252,6 @@ wave a Conductor planned.** Every wave budgets one verifier, dispatched in the *
 | `E`'s four pre-committed branches | `experiments/journal/prog_r4_e.md` §3 |
 | Per-leg record | `experiments/journal/leg_N.md`, `writeup/novelty/leg_N.md` |
 | Live wave state, escalations, headroom | `reports/ORCH_STATE.md` — LIVE block |
+| **Sources + the DEPTH each was read at** | **`writeup/SOURCES.md`** — §3k register; no load-bearing claim may rest on an `ABSTRACT` |
 | **Banked numbers** | **`writeup/data/*.json` — re-derive from these, never from prose** |
 | A task's own spec | `DIRECTION.md`, that entry only — **never read whole** |
