@@ -103,6 +103,8 @@ Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits 
 **The precedent it set, kept live because it binds every wave:** a request to change a gate
 **mid-wave was REFUSED**. Plan verbatim: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`.
 
+## WAVE 7 — **DISPATCHED 2026-08-19: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` HELD** until `R-bank` returns **160/160**.
+
 ## WAVE 6 — **COMPLETE 2026-08-19. Three planned, three dispatched, three landed.** Plan: `writeup/waves/WAVE6_PLAN.md` @ `e202653`.
 
 **`L6` LANDED `e62c449`** (leg 401) — route 4's **first ever** discrete profile, gate **`NO`**: `ρ = 1.6138` in `L5`'s own norm at `n_dof = 6720`, far-field amplitude normalised to 1, **not decreasing under refinement** (`−0.0222` over the last 3 rungs, `NO` at every cap 50–800), evidence **30/30 reproduced independently by me**.

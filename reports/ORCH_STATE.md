@@ -10,7 +10,7 @@ verbatim 2026-08-18 under §3j → `## Superseded — the 2026-08-14 fork`.
 
 ---
 
-## LIVE — CONDUCTOR mode, **WAVE 6 COMPLETE AND INTEGRATED; WAVE 7 QUEUED**, 2026-08-19
+## LIVE — CONDUCTOR mode, **WAVE 7 DISPATCHED, FOUR UNITS IN FLIGHT**, 2026-08-19
 
 ### Wave 5, the trigger message, and wave 6's §3i — RETIRED 2026-08-19 (verbatim, below)
 
@@ -30,15 +30,7 @@ ranking **`R4` > `R2` > `R3`** stands (`WAVE7_PLAN.md` §0), **self-unwinding** 
 `R4` > `R2` > `R3` ranking STANDS** — additions, not a re-rank; these run first because they are
 **cheaper and upstream**, not because they outrank `R4-a`.
 
-**Two premise checks I ran before committing the gates, both against the repo.** (1) **`R-bank`'s
-premise HOLDS exactly as stated** — the `.gitignore` calls the 1.2 GB `u2_dns_ckpt.npy` *"never
-committed"*, and `e_hhard_diagnostic.py` builds each seed as a bit-for-bit re-integration through it,
-so no shard can build a seed without it. Sharpened: one field is **4,608 B**, so 160 are **737 KB**,
-not ~5 MB — committable by two orders. (2) **`R-prof`'s gate REWORDED BEFORE dispatch, because the
-solver is ALREADY FFT-based** — so it is implementation-vs-implementation. Smoke (load 21.5 on 12
-cores; absolutes inflated ~2×, ratios not): `fft2` **197 µs at `N = 24` vs 189 µs at `N = 32` — FLAT
-across 1.9× the work**, paid **20× per RK4 step**, ~69% of a 4,306 µs step. **OVERHEAD-bound, not
-FLOP-bound — a hypothesis with a measurement behind it, not the unit's answer.**
+**The two premise checks I ran before committing those gates — `R-bank`'s 1.2 GB blocker, and `R-prof`'s gate reworded because the solver is ALREADY FFT-based and overhead-bound — retired verbatim → `## Superseded — wave 7's premise checks`. Live wording: `WAVE7_PLAN.md` §A, §C.**
 
 **Consequence I have to own: my own 90.9 core-hour price is an OUTTURN, not a FLOOR.** It inherits
 `95.389 s/epoch`, unprofiled in 403 legs. If `R-prof` finds a factor, that number and every cost
@@ -75,8 +67,15 @@ CONSTRUCTION / AUDIT / VERIFICATION — two of three audit-kind. **Applied, not 
 Lane-L slot is `L6-b`, a measurement on the object; `R-prof` is instrument work, **capped at one
 slot**, paired with `E-FE`, which measures the object.
 
-**RE-RANK MADE HERE (§3i q5): Lane L's next unit is `L6-b`, not `L7`.** Nothing else moves —
-`R4` > `R2` > `R3` stands, and `R-bank` → `E-FE` ‖ `R-prof` stands.
+**RE-RANK MADE HERE (§3i q5): Lane L's next unit is `L6-b`, not `L7`.** `R4` > `R2` > `R3` stands.
+
+### WAVE 7 — DISPATCHED 2026-08-19: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ **`V-W6`** (legs 404–407)
+
+Plan committed `2a5ea0d` **before** dispatch; gates carried verbatim into self-contained briefs.
+**`V-W6` verifies WAVE 6** — I planned wave 6, so I may not, and it is briefed to scrutinise my own
+landing audit too. **`E-FE` IS HELD** until `R-bank` returns **160/160** bit-identical: that is
+`R-bank`'s own pre-committed reading, not a new decision. Territories disjoint; every brief carries
+explicit-paths-only commits (four workers, one tree), COMMIT DURING THE RUN, and its §3d price.
 
 ### Headroom at the wave boundary — §3j, IN BYTES (`wc -c`)
 
@@ -85,7 +84,7 @@ slot**, paired with `E-FE`, which measures the object.
 | `STATE.md` | 24,234 | 24,576 | 342 |
 | `WALLS.md` | 32,457 | 32,768 | 311 |
 | `OPTIONS.md` | 24,555 | 24,576 | **21 — thinnest** |
-| `ORCH_STATE.md` LIVE | 8,025 | 8,192 | 167 |
+| `ORCH_STATE.md` LIVE | 7,950 | 8,192 | 242 |
 
 **DEFECT OF MINE, FOUND AND REPAIRED 2026-08-19** — a retirement spliced into a live paragraph
 because it located its target by TITLE, and the title also lives in every pointer to it. Full
@@ -1154,3 +1153,16 @@ One short paragraph each: what happened, how it was diagnosed, what changed as a
   partial unit's landed record can still be executable. Neither rule was applied retroactively by
   the Conductor — **editing another unit's evidence script to make it pass is the move this
   repository refuses**, and the branch was left as the record instead.
+
+
+## Superseded — wave 7's premise checks, demoted 2026-08-19 under §3j (verbatim)
+
+**Two premise checks I ran before committing the gates, both against the repo.** (1) **`R-bank`'s
+premise HOLDS exactly as stated** — the `.gitignore` calls the 1.2 GB `u2_dns_ckpt.npy` *"never
+committed"*, and `e_hhard_diagnostic.py` builds each seed as a bit-for-bit re-integration through it,
+so no shard can build a seed without it. Sharpened: one field is **4,608 B**, so 160 are **737 KB**,
+not ~5 MB — committable by two orders. (2) **`R-prof`'s gate REWORDED BEFORE dispatch, because the
+solver is ALREADY FFT-based** — so it is implementation-vs-implementation. Smoke (load 21.5 on 12
+cores; absolutes inflated ~2×, ratios not): `fft2` **197 µs at `N = 24` vs 189 µs at `N = 32` — FLAT
+across 1.9× the work**, paid **20× per RK4 step**, ~69% of a 4,306 µs step. **OVERHEAD-bound, not
+FLOP-bound — a hypothesis with a measurement behind it, not the unit's answer.**
