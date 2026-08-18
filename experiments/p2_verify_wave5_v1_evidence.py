@@ -36,9 +36,12 @@ L5_CORE = ROOT / "experiments" / "p2_route_l5_v1.py"
 
 FAILURES = []
 NOTES = []
+CHECKS_RUN = 0
 
 
 def check(item, label, got, want, ok=None):
+    global CHECKS_RUN
+    CHECKS_RUN += 1
     if ok is None:
         ok = (got == want)
     print("  [%s] %-4s %-62s got=%r want=%r" % ("PASS" if ok else "FAIL", item, label, got, want))
@@ -404,6 +407,27 @@ def reading_e():
     check("e", "C1 fired as planted against its 1e-2 tolerance", c1["fired_as_planted"], True)
 
 
+def selfhash(doc):
+    """The rule V-W5 was sent to check, applied to V-W5's own artefact."""
+    stripped = {k: v for k, v in doc.items() if k != "self_hash"}
+    return hashlib.sha256(json.dumps(stripped, sort_keys=True).encode()).hexdigest()[:16]
+
+
+def bank(do_quad):
+    """Write writeup/data/p2_verify_wave5_v1.json.  Only ever called with a clean run."""
+    out = ROOT / "writeup" / "data" / "p2_verify_wave5_v1.json"
+    doc = json.loads(out.read_text())
+    doc["checks_run"] = CHECKS_RUN
+    doc["checks_failed"] = len(FAILURES)
+    doc["checks_passed"] = CHECKS_RUN - len(FAILURES)
+    doc["quadrature_rerun_in_this_run"] = bool(do_quad)
+    doc.pop("self_hash", None)
+    doc["self_hash"] = selfhash(doc)
+    out.write_text(json.dumps(doc, indent=1) + "\n")
+    print("\nbanked %s  self_hash %s  (%d/%d checks)"
+          % (out.relative_to(ROOT), doc["self_hash"], doc["checks_passed"], CHECKS_RUN))
+
+
 def main():
     do_quad = "--no-quad" not in sys.argv
     print("leg 403 / V-W5 -- executable re-derivation of wave 5's five gate items")
@@ -431,6 +455,19 @@ def main():
     print("A reproduction is a validation of the ARITHMETIC, not of the SCIENCE. L5's NO is NOT")
     print("upgraded by this run. No link of the L1->L4 chain moved. Clay stays ~0.05%.")
     print("=" * 96)
+    if "--bank" in sys.argv:
+        bank(do_quad)
+    else:
+        # even without --bank, the banked artefact's OWN self_hash is verified under the same rule
+        out = ROOT / "writeup" / "data" / "p2_verify_wave5_v1.json"
+        if out.exists():
+            d = json.loads(out.read_text())
+            h = selfhash(d)
+            ok = (h == d.get("self_hash"))
+            print("  [%s] self  V-W5's own artefact self_hash %s (banked %s)"
+                  % ("PASS" if ok else "FAIL", h, d.get("self_hash")))
+            if not ok:
+                return 1
     return 0
 
 
