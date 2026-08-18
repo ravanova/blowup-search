@@ -151,8 +151,9 @@ whose `m_T` separates the cases **exactly at the pin**. **ESŠ is `UNREACHABLE` 
 pin rests on secondaries.** Four citation defects, verbatim → `WALLS_HISTORY.md` §W4-PROV;
 register `writeup/CORRECTIONS.md` §33; detail `experiments/journal/verify_wave4.md`.
 
-**(b) SHUT, ⚠ UNVERIFIED — `L5` (leg 400), an ENDPOINT not a gap. `V-W5` has not yet reported;
-until it does this reads SHUT-UNVERIFIED, and `C6` did NOT fire as planted.** The ansatz was **built**: cut-off **potential**
+**(b) SHUT, ✅ VERIFIED by `V-W5` (leg 403) — an ENDPOINT not a gap. Five items
+reproduce; `C6`'s tolerance was NEVER moved (`347676f`). ⚠ **Arithmetic, not science**, and the
+CONSTANT is basis-dependent by **1.476×**: `CORRECTIONS.md` §35.** The ansatz was **built**: cut-off **potential**
 (`div V ≡ 0` exactly, no Bogovskii corrector to grow), physical support frozen at `κ = a`, **Clay
 condition (7) verified by measurement.** Gate **`NO`, threshold-free** — in `‖curl F‖_{L¹_t L^{3/2}_x}`
 the error saturates at **`c_mod = 869.288` per unit similarity time**, ρ-exponent **`+1.09e-04`** out

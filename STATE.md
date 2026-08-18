@@ -61,7 +61,7 @@ maintainer or list remains HELD.**
 
 ---
 
-## ⚠ 2026-08-18 — W4 HAS ONE BREAK CLAUSE LEFT, AND THE OTHER TWO ARE **SHUT-UNVERIFIED**
+## ⚠ 2026-08-18 — W4 HAS ONE BREAK CLAUSE LEFT, AND THE OTHER TWO ARE SHUT, **(b) VERIFIED**
 
 `L2′` shut clause **(a)**; **`L5` (leg 400) shut clause (b)** — threshold-free, with the number, on
 an ansatz it **built** rather than surveyed. **W4's only unbroken break clause is now (c)** — a
@@ -108,8 +108,12 @@ Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits 
 
 ## WAVE 6 — **DISPATCHED 2026-08-18**. Plan: `writeup/waves/WAVE6_PLAN.md` @ `e202653`.
 
-Branches: `L6` `leg/401-l6-route4-profile`; `V5` `leg/402-v5-audit-25116`; `V-W5`
-`leg/403-vw5-verify-wave5`. §34 applied to every gate **before** dispatch: **every artefact
+Branches: `L6` `leg/401-l6-route4-profile`; `V5` `leg/402-v5-audit-25116`; **`V-W5` LANDED
+`95cf861`** — five items reproduce, **`C6`'s tolerance NEVER moved** (`347676f`), **3 defects
+located, 0 repaired** (`CORRECTIONS.md` §35, row 17): the passing `C6` criterion is **post-hoc**
+(added at the landing commit), `c_mod` is **basis-dependent by `1.476×`**, and half the `0.9958`
+ratio is **scraped from prose**. **Arithmetic verified, science NOT** — still Tier 2, still the
+SYNTHETIC profile, no `L1→L4` link moved. §34 applied to every gate **before** dispatch: **every artefact
 named in a wave-6 brief was checked to exist.** Handoff is planned for **wave 6's END** (§9d
 fired on summarisation, not on cycles) — **not mid-wave**.
 

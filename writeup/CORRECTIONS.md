@@ -1531,6 +1531,7 @@ scope to compensate").
 | (i) | `writeup/data/p2_route_fus_v1.json`, `sources.USC2.cite` (`"Wang, Leger, Lai, Buckmaster …"`, arXiv:2511.22819) | dispatched as "the same fix leg 338 made to `sources.USC.cite`" — i.e. that "Leger" is a misspelling of "Gomez-Serrano" here too | **FALSE.** arXiv:2511.22819's own live byline (fetched directly this leg) is "Yongji Wang, Tristan Léger, Ching-Yao Lai, Tristan Buckmaster" — four authors, no Gómez-Serrano at all. `Leger` is the ASCII form of the real coauthor **Tristan Léger**, a different person from **Javier Gómez-Serrano** (the coauthor on the sibling paper, 2509.14185, that leg 338 correctly fixed). The two papers have different, non-overlapping-in-this-name author lists; leg 338's fix does not generalize to this field. | **RESISTER, not forced.** `sources.USC2.cite` is left exactly as it was — its "Leger" is correct as written. Reported here so no future leg re-attempts this specific "fix" on the mistaken premise that it mirrors leg 338's. |
 | (ii) | `experiments/journal/leg_221.md` and `solver/boussinesq_rescaled.py`'s module docstring (the two identical "86x the module's own tolerance" / "86x tolerance" sites describing the two-scale counterexample) | leg 307's arithmetic finding: the passage's own `5e-4` basis implies `~865x`, not `86x` | **Confirmed by direct re-computation:** `(2.0-1.135121)/2.0 = 0.4324395`; `0.4324395/5e-4 = 864.879`, i.e. `~865x`. The passage's other three magnitudes (`2000x`, `93.9x`, `1731x`) were checked by leg 307 and found consistent with their own bases; untouched by this leg. | **Corrected**, both sites, inline `[CORRECTED 2026-08-12, leg 307's arithmetic finding, batched at leg 352: 0.4324/5e-4 = 864.9, i.e. ~865x, not 86x]`, original `86x` wording left standing alongside the marker. |
 | 16 | `L5`'s pre-committed gate (wave 5, `WAVE5_PLAN.md` @ `1e49a00`) said measure *"on route 4's **banked** discrete profile"* — **route 4 has no banked profile**, so the gate as worded was **unsatisfiable** | **`L5` itself** (2026-08-18, `4be46ef`), which banked `route_4_has_no_banked_profile = True` with evidence at `experiments/journal/leg_382.md:174` and `leg_397.md` §1, and substituted leg 381's **banked SYNTHETIC** exactly-DSS profile; the Conductor records it here as a **gate deviation**, which its integration commit `e42e7ab` described only as a limitation | **The substitution is the right one and the deviation is the unit's, not a defect**: leg 381's synthetic profile is the object clause (a)'s bill was computed on, so clause (b)'s bill is **directly comparable** to it, and control `C1` reproduces leg 381's exponents to `1.996e-12`. What it costs: **the EXPONENT is a class fact, the CONSTANT `c_mod = 869.288` is not route 4's number.** This is the direct motivation for wave 6's `L6`. |
+| 17 | `L5`'s `C6` basis control **did not fire as planted** (`2.03e-02` against a pre-committed `1e-02`), and a **second, passing** criterion on a narrower fit window (`fired_on_tail3_fit`) sits beside the failing one; `c_mod = 869.288` is quoted unqualified though it is basis-dependent; the `U5` half of the `0.9958` cost ratio is **not in any banked JSON** | **`V-W5`** (2026-08-18, leg 403, `writeup/data/p2_verify_wave5_v1.json`, `self_hash da8a0d7cb9fb4896`), **LOCATED THREE, REPAIRED ZERO** — Conductor recorded at integration | **three defects, NONE changes a verdict.** The tolerance was **NEVER moved** (`347676f`; no `−` line on any ref, checked by the Conductor independently). The added criterion is **post-hoc**: it went in at the **landing** commit `4be46ef`, after the failure was known. The gate `NO` rests on the **exponent** and is untouched; the **CONSTANT is basis-dependent by `1.476×`** (C⁴ smoothstep vs leg 381's quintic C²). §35 below |
 
 ### The ceiling
 
@@ -2333,6 +2334,43 @@ retitled, old title struck not deleted, the ruling's required paragraph placed b
 `STATE.md`, `OPTIONS.md` and this file carry the correction; the artefact carries none of it.
 **No link of the `L1 → L4` chain moved.** The ruling says so itself: it moved wording and a queue.
 Ceiling **TIER 2**. Clay stays **~0.05%**.
+
+## §35 — `V-W5`'s three defects: a post-hoc pass-criterion, a basis-dependent constant quoted as if portable, and a ratio half-scraped from prose
+
+**Unit** `V-W5` (leg 403), verifier of wave 5, which it did not plan. **Repaired: none.** A verifier
+that repairs destroys the evidence of the defect, so it was told to record and stop, and it did.
+
+**D-VW5-1 — the pass-criterion is post-hoc.** `L5`'s control `C6` (cutoff basis: degree-9 C⁴
+smoothstep against leg 381's quintic C²) **was planted to fire and did not**: `2.03e-02` against the
+pre-committed tolerance `1e-02`. **The tolerance was NEVER moved** — `git log --all -p` over the
+driver returns three C6-tolerance diff lines across every ref, **all three `+` lines, no `−` line
+exists**, and the literal is `1e-2` in all three (introduced `347676f`, 2026-08-18 16:25). I checked
+this myself rather than on the unit's report. **But** a second criterion, `fired_on_tail3_fit`, was
+**added at the LANDING commit `4be46ef` (16:59) — after the failure was known** — and it passes, on
+the narrower tail-3 window where the two bases agree to `5.408e-05`, `185×` inside tolerance. The
+honest statement: **the pre-committed control failed and a post-hoc one passed.** Nothing about the
+gate `NO` depends on it.
+
+**D-VW5-2 — the constant is basis-dependent by `1.476×`.** `c_mod = 869.288` per unit similarity
+time is quoted unqualified in `L5`'s gate block. It moves by a factor **`1.47604`** between the two
+cutoff bases. **The EXPONENT is basis-independent and the `NO` rests on the exponent**
+(`+1.085e-04`, threshold-free), so the verdict is untouched — but this narrows `c_mod`'s reach
+**further than §34 already did**: it is not route 4's number *and* it is not basis-portable.
+
+**D-VW5-3 — half of `0.9958` is scraped from prose.** The `E` side of the cost ratio is
+banked-row-derived (`32718.334 s / 16` attempts). The `U5` side (`0.0713` wall-h × 8 workers) is
+**in no banked JSON** — it is regex-scraped from `experiments/journal/prog_r4_u5.md:405`. **Changes
+nothing**: the banked-rows-only route gives `95.389` s/epoch against the banked `95.0`, ratio
+`1.0041`, same conclusion. It is a **provenance** defect, and the standing rule it violates is
+*re-derive from `writeup/data/*.json`, never from prose*.
+
+**What `V-W5` verified, and what it did not.** Verified: `L5`'s `NO` and `ρ`-exponent
+`0.00010850007559945518` (bit-for-bit, including a **full float64 quadrature re-run**, not just a
+re-fit of banked rows); the three positive controls (`−0.2498`, `−0.5996`, `−2.000005`, each
+recovering what it planted); both `self_hash`es; `D-REPAIR`'s epoch correction and the `0.9958` cost
+model. **Not verified — and it must not be read as verified:** the SCIENCE. A reproduction validates
+**arithmetic**. `L5`'s object is still the **SYNTHETIC** stand-in (§34), the tier is still **Tier 2**,
+and **no `L1→L4` link moved.**
 
 ## §33 — `V-W4`'s six defects and `N1`: the correction RECORD for wave 4, artefacts untouched
 

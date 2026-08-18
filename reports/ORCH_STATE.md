@@ -24,34 +24,40 @@ amend a dispatched gate** and required it at integration instead (demoted block 
 **Demoted verbatim 2026-08-18 when wave 6's plan was written**, per the remedy in the headroom
 report below → `## Superseded — wave 5's mechanical audits`. Nothing was shortened.
 
-### §3i — THE DIRECTION CHECK, wave 5, per unit, against the RECORD
+### §3i — wave 5's direction check: retired 2026-08-18 → `## Superseded — wave 5's §3i`
 
-Full seven for `L5` and `V-W4` retired verbatim 2026-08-18 → `## Superseded — wave 5's §3i`
-below. **Live consequences, all four:** (1) **RE-RANKING: none this wave**, and the reason is
-recorded so it is not drift — W4 running out of clauses in Lane L does **NOT** re-open Lane T;
-**a decision may not supersede a measurement**, and what changed is `T2″`'s value. (2) `L5`'s
-largest **undischarged ceiling**: *both* jaws of its pincer (ESŠ; NRŠ 1996, Tsai 1998) are
-**journal-only, banked `UNREACHABLE`, never read at primary** — the cheapest killer cannot be
-bought here (no S2 key; author contact **prohibited**), so it is `UNDER-RESOURCED` **with a
-cost**. (3) **q7 fired twice running** — audit/instrument loop — which is why wave 6 opens with
-**construction** (`L6`) and why that is the wave's centre, not a side unit. (4) `L5` is
-**UNVERIFIED** until `V-W5` reports; `C6` did **not** fire as planted.
+**Live consequences kept:** no re-ranking (W4 running out of clauses in Lane L does **not** re-open
+Lane T — a decision may not supersede a measurement); `L5`'s ceiling is **both jaws of its pincer
+unread at primary**, `UNDER-RESOURCED` with a cost; **q7 fired twice**, which is why wave 6 opened
+with construction.
 
-### ⚠ OWED TO THE USER, ON A TRIGGER, NOT AT THE WAVE BOUNDARY
+### ⚠ THE TRIGGER FIRED — `V-W5` CLEARED `L5` 2026-08-18, AND THE MESSAGE WAS SENT
 
-**THE MOMENT `V-W5` CLEARS `L5`, send the user a SHORT STANDALONE MESSAGE** — *not* folded into
-a wave summary, *not* deferred to wave 6's end: two of W4's three break clauses are now closed
-**by measurement** ((a) by `L2′`, (b) by `L5`) and (c) is statement (D), parked behind a
-**deferred** Lane T, so the **Tier-2 ceiling looks STRUCTURAL rather than circumstantial for the
-first time.** **DO NOT WRITE THAT CONCLUSION BEFORE THE TRIGGER, AND NEVER WITHOUT ALL THREE
-CAVEATS:** `L5` is **unverified**; its constant `c_mod = 869.288` is the **SYNTHETIC** profile's
-number, not route 4's; and **(c) is UNTESTED, NOT CLOSED.** If `V-W5` does *not* clear `L5`, the
-message is not sent — the trigger is the clearance, not the wave.
+Standalone, not folded into a wave summary, carrying **all three caveats**: `L5` verified as
+**arithmetic only**; `c_mod = 869.288` is the **SYNTHETIC** profile's number *and* basis-dependent
+by `1.476×`; **(c) is UNTESTED, NOT CLOSED.** Do not re-send it and do not restate the structural
+claim without those three.
 
-**QUEUED FOR WAVE 7, owed on the run's own output (so the screening stop does not bite):** a
-`writeup/novelty/` pass on `L5`. It shipped a journal and a data file and **no novelty entry**
-(the dir stops at `leg_394.md`). Claim to check: Chae–Wolf's `α`-pin **and** NRŠ/Tsai's exclusion
-of exactly-SS profiles **jointly** shut clause (b), the one surviving obstruction being `∝ ṁ`.
+**STILL QUEUED FOR WAVE 7 (owed on the run's own output, not screening):** a `writeup/novelty/`
+pass on `L5` — no novelty entry exists (dir stops at `leg_394.md`). Claim to check: Chae–Wolf's
+`α`-pin **and** NRŠ/Tsai's exclusion of exactly-SS profiles **jointly** shut clause (b).
+
+### §3i — THE DIRECTION CHECK, `V-W5` (leg 403), against the RECORD
+
+**(1) Link moved?** **NO.** A verifier cannot move an `L1→L4` link; it can only make one safe to
+lean on. **(2) Made FALSE?** That `L5` is *unverified*, and any suspicion the `C6` tolerance was
+moved — it was not (`347676f`, no `−` line on any ref, checked by me not by its report). It also
+made false *"`c_mod` is a portable constant"*: `1.476×` basis-dependent. **(3) Lane rank NOW?**
+Lane L keeps priority — §6(i)/§6(ii) untouched, on every path. **(4) Live
+claim on an undischarged ceiling?** **YES, unchanged and now the sharpest thing in the file:** both
+jaws of `L5`'s pincer (ESŠ; NRŠ 1996, Tsai 1998) are **journal-only, `UNREACHABLE`, never read at
+primary.** Verifying the arithmetic does **nothing** for that. **(5) Cheapest killer of the priority
+lane?** Reading those two at primary — **cannot be bought here** (no S2 key, author contact
+prohibited): `UNDER-RESOURCED` with a cost. **(6) If Lane L died tomorrow?** Lane T's `T2″`, and it
+is **not** cheaper. **(7) Audit/instrument loop?** Last three by kind: `L5` construction, `V-W4`
+verification, `V-W5` verification — **2 of 3 are audit**, which is exactly why wave 6 opened with
+`L6`. **RE-RANKING: none. `V-W5` verified arithmetic; a decision may not supersede a measurement,
+and no measurement moved.**
 
 ### Headroom at the wave boundary (§3j) — IN **BYTES**, AND THE FIRST COUNT WAS WRONG
 
@@ -84,12 +90,10 @@ its territory, *pre-register in its own commit before any result-producing code*
 | `V5` — adversarial audit of `arXiv:2509.25116` + the `_v2` repair | V | `leg/402-v5-audit-25116` | second |
 | `V-W5` — verify wave 5 | — | `leg/403-vw5-verify-wave5` | **last (verifier)** |
 
-**POST-COMPACTION RE-READ, 2026-08-18:** `STATE.md`, `WALLS.md`, `OPTIONS.md`, this file and
-`ORCHESTRATION.md` §3g/h/i/j re-read **from disk** after a summarisation. It caught a real
-defect: **`WALLS.md` has no `## History` section any more**, so the exemption I measured
-against does not exist and the file was **31 B OVER** cap. Fixed by retirement (§PRIORITIES-Q6
-→ `WALLS_HISTORY.md`). **§34 applied to every wave-6 gate: every artefact named in a brief was
-checked to exist — all present.** Handoff planned for **wave 6's END**, not mid-wave.
+**POST-COMPACTION RE-READ 2026-08-18** caught a real defect: `WALLS.md` has **no `## History`
+section any more**, so the exemption I had been subtracting does not exist and the file was **31 B
+OVER**. Fixed by retirement (§PRIORITIES-Q6). **§34 applied to every wave-6 gate — all artefacts
+named in a brief exist.** Handoff at **wave 6's END**.
 
 **I planned this wave, so I may not verify it** — `V-W5` verifies **wave 5**. No brief
 sends a worker on a repo tour; each names the files it may read. `V5` carries reading (e):
