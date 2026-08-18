@@ -334,18 +334,22 @@ def _vsh_lap_w(g, F, Q):
 
 
 def _synth(g, comps):
-    """VSH radial components -> Cartesian field on (r, ang, s) grid: (nq_r, nP, ns, 3)."""
-    out = einsum("him,hpc->ipmc", comps[0], g.E[0])
-    out = out + einsum("him,hpc->ipmc", comps[1], g.E[1])
-    out = out + einsum("him,hpc->ipmc", comps[2], g.E[2])
+    """VSH radial components -> Cartesian field, layout (nq_r, ns, nP, 3).
+
+    The (r, s, ang, component) ordering is chosen so that every large contraction below
+    is already in `matmul` layout and no rank-4/5 array is ever transposed or copied.
+    """
+    out = einsum("him,hpc->impc", comps[0], g.E[0])
+    out = out + einsum("him,hpc->impc", comps[1], g.E[1])
+    out = out + einsum("him,hpc->impc", comps[2], g.E[2])
     return out
 
 
 def _synth_grad(g, comps):
-    """-> tangential gradient tensor of the Cartesian components: (nq_r, nP, ns, 3, 3)."""
-    out = einsum("him,hpcj->ipmcj", comps[0], g.GE[0])
-    out = out + einsum("him,hpcj->ipmcj", comps[1], g.GE[1])
-    out = out + einsum("him,hpcj->ipmcj", comps[2], g.GE[2])
+    """-> tangential gradient tensor of the Cartesian components: (nq_r, ns, nP, 3, 3)."""
+    out = einsum("him,hpcj->impcj", comps[0], g.GE[0])
+    out = out + einsum("him,hpcj->impcj", comps[1], g.GE[1])
+    out = out + einsum("him,hpcj->impcj", comps[2], g.GE[2])
     return out
 
 
@@ -413,48 +417,42 @@ def residual_field(g, aF, aQ):
     WS = _synth(g, wsc)
     rdW = _synth(g, tuple(g.rr * c for c in dwc))     # y.grad w = r d/dr w
 
-    SV = _synth_grad(g, Vc)
+    SV = _synth_grad(g, Vc)                           # (1/r) x this = tangential grad
     SW = _synth_grad(g, wc)
 
-    er = g.er[None, :, None, :]                       # (1,nP,1,3)
-    ri = g.rinv[:, :, :, None] if False else (1.0 / g.r)[:, None, None, None]
-
-    # full Cartesian gradient tensors:  grad A = e_r (x) dA/dr + (1/r) grad_S A
-    GV = einsum("ipmc,pj->ipmcj", dV, g.er) + ri[..., None] * SV
-    GW = einsum("ipmc,pj->ipmcj", dW, g.er) + ri[..., None] * SW
-
-    nV = V.shape
-    Ve = V.reshape(nV[0], nV[1], nV[2], 1, 3)
-    We = W.reshape(nV[0], nV[1], nV[2], 1, 3)
-    NL1 = (Ve * GW).sum(axis=-1)                      # (V.grad) w
-    NL2 = (We * GV).sum(axis=-1)                      # (w.grad) V
+    # grad A = e_r (x) dA/dr + (1/r) grad_S A, so for any B:
+    #   (B.grad) A = (B.e_r) dA/dr + (1/r) sum_j B_j (grad_S A)_{c j}
+    # -- the radial piece is contracted analytically, so the rank-5 tensor grad A is
+    # never materialised.
+    er = g.er[None, None, :, :]                       # (1,1,nP,3)
+    ri = (1.0 / g.r)[:, None, None, None]
+    sh = V.shape
+    Vrad = (V * er).sum(axis=-1).reshape(sh[0], sh[1], sh[2], 1)
+    Wrad = (W * er).sum(axis=-1).reshape(sh[0], sh[1], sh[2], 1)
+    Ve = V.reshape(sh[0], sh[1], sh[2], 1, 3)
+    We = W.reshape(sh[0], sh[1], sh[2], 1, 3)
+    NL1 = Vrad * dW + ri * (Ve * SW).sum(axis=-1)     # (V.grad) w
+    NL2 = Wrad * dV + ri * (We * SV).sum(axis=-1)     # (w.grad) V
 
     return WS + A_SIM * (2.0 * W + rdW) - LW + NL1 - NL2, V, W
 
 
-def load_bearing_norm(g, Wfield, quad_r=None):
-    """int_0^{T_s} ||W(.,s)||_{L3/2(R^3)} ds  (AD-traced when Wfield is a Var)."""
-    wr = g.wr if quad_r is None else quad_r
+def load_bearing_norm(g, Wfield):
+    """int_0^{T_s} ||W(.,s)||_{L3/2(R^3)} ds  (AD-traced when Wfield is a Var).
+
+    This IS the norm route 4's own closure requires -- pressure-free, because W = curl R.
+    Layout of Wfield is (nq_r, ns, nP, 3).
+    """
+    wpr = g.wr[:, None, None] * g.wa[None, None, :]
     if isinstance(Wfield, Var):
-        sq = (Wfield * Wfield).sum(axis=-1)            # (nq_r, nP, ns)
+        sq = (Wfield * Wfield).sum(axis=-1)            # (nq_r, ns, nP)
         dens = (sq + EPS_FLOOR) ** 0.75
-        wpr = wr[:, None, None] * g.wa[None, :, None]
-        per_s = (dens * wpr).sum(axis=(0, 1))          # (ns,)
+        per_s = (dens * wpr).sum(axis=(0, 2))          # (ns,)
         return ((per_s ** (2.0 / 3.0)) * g.ws).sum()
     sq = (Wfield ** 2).sum(axis=-1)
     dens = (sq + EPS_FLOOR) ** 0.75
-    wpr = wr[:, None, None] * g.wa[None, :, None]
-    per_s = np.einsum("ipm,ipm->m", dens, np.broadcast_to(wpr, dens.shape), optimize=True)
+    per_s = (dens * wpr).sum(axis=(0, 2))
     return float(np.sum(per_s ** (2.0 / 3.0) * g.ws))
-
-
-def velocity_norm(g, Rfield):
-    """Secondary norm int ||R||_{L3} ds -- reported, NOT the headline (not pressure-free)."""
-    sq = (Rfield ** 2).sum(axis=-1)
-    dens = sq ** 1.5
-    wpr = g.wr[:, None, None] * g.wa[None, :, None]
-    per_s = np.einsum("ipm,ipm->m", dens, np.broadcast_to(wpr, dens.shape), optimize=True)
-    return float(np.sum(per_s ** (1.0 / 3.0) * g.ws))
 
 
 # --------------------------------------------------------------------------------------
@@ -571,7 +569,7 @@ def selftests(verbose=True):
             Jm[:, j] = (eval_V_cart(g, aF, aQ, (p + e)[None, :], sval)[0]
                         - eval_V_cart(g, aF, aQ, (p - e)[None, :], sval)[0]) / (2 * e[j])
         curl = np.array([Jm[2, 1] - Jm[1, 2], Jm[0, 2] - Jm[2, 0], Jm[1, 0] - Jm[0, 1]])
-        ref = wgrid[ii, pp, im]
+        ref = wgrid[ii, im, pp]
         errs.append(np.max(np.abs(curl - ref)) / max(1e-12, np.max(np.abs(ref))))
     res["T_C_curl_max_rel_err"] = float(max(errs))
     assert res["T_C_curl_max_rel_err"] < 1e-5, res
@@ -609,7 +607,7 @@ def selftests(verbose=True):
             e[j] = hh
             Jm[:, j] = (Rnp(p + e, sval) - Rnp(p - e, sval)) / (2 * hh)
         curlR = np.array([Jm[2, 1] - Jm[1, 2], Jm[0, 2] - Jm[2, 0], Jm[1, 0] - Jm[0, 1]])
-        ref = Wg[ii, pp, 1]
+        ref = Wg[ii, 1, pp]
         errs.append(np.max(np.abs(curlR - ref)) / max(1e-9, np.max(np.abs(ref))))
     res["T_D_W_vs_fd_curlR_max_rel_err"] = float(max(errs))
     assert res["T_D_W_vs_fd_curlR_max_rel_err"] < 2e-3, res
@@ -667,8 +665,9 @@ def diagnostics(g, x, branch):
     else:
         d["far_field_shape_s_variation"] = 0.0
 
-    # measured far-field decay exponent of |V|
-    prof = np.sqrt(np.einsum("ipmc,p,m->i", Vg ** 2, g.wa, g.ws, optimize=True) / (4 * math.pi * PERIOD))
+    # measured far-field decay exponent of |V|   (layout i, m, p, c)
+    prof = np.sqrt(np.einsum("impc,p,m->i", Vg ** 2, g.wa, g.ws, optimize=True)
+                   / (4 * math.pi * PERIOD))
     sel = (g.r > 5.0) & (g.r < 200.0) & (prof > 0)
     if sel.sum() >= 3:
         A = np.vstack([np.log(g.r[sel]), np.ones(sel.sum())]).T
@@ -680,7 +679,7 @@ def diagnostics(g, x, branch):
     # radial-tail structure of the load-bearing integrand (leg-381-shaped diagnostic)
     sq = (Wg ** 2).sum(axis=-1)
     dens = sq ** 0.75
-    radial_mass = np.einsum("ipm,p,m->i", dens, g.wa, g.ws, optimize=True) * g.wr
+    radial_mass = np.einsum("imp,p,m->i", dens, g.wa, g.ws, optimize=True) * g.wr
     cum = np.cumsum(radial_mass) / max(1e-300, radial_mass.sum())
     d["tail_cumfrac"] = {}
     for R in (1.0, 10.0, 100.0, 1000.0, 10000.0):

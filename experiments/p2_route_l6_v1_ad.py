@@ -15,6 +15,8 @@ axes, elementwise power, sqrt, reshape/transpose.
 
 from __future__ import annotations
 
+import math
+
 import numpy as np
 
 
@@ -141,14 +143,55 @@ def sqrt(x):
     return Var(val, (x,), lambda g: (g * 0.5 / val,))
 
 
+_CONST_CACHE = {}
+
+
+def fast_einsum(spec, a, b):
+    """Two-operand einsum routed through BLAS `matmul`.
+
+    numpy's own two-operand einsum falls into a slow batched-matmul kernel for the
+    contraction shapes used here; this routes batch/contract/free index groups through a
+    single 3-D `matmul`, which is 5-10x faster on the shapes in this leg.
+    """
+    lhs, out = spec.split("->")
+    sa, sb = lhs.split(",")
+    batch = [c for c in out if c in sa and c in sb]
+    contr = [c for c in sa if c in sb and c not in out]
+    fa = [c for c in sa if c not in batch and c not in contr]
+    fb = [c for c in sb if c not in batch and c not in contr]
+    da = {c: a.shape[i] for i, c in enumerate(sa)}
+    db = {c: b.shape[i] for i, c in enumerate(sb)}
+    dim = {**db, **da}
+    nb = math.prod([dim[c] for c in batch]) if batch else 1
+    na = math.prod([dim[c] for c in fa]) if fa else 1
+    nc = math.prod([dim[c] for c in contr]) if contr else 1
+    nf = math.prod([dim[c] for c in fb]) if fb else 1
+    pa = [sa.index(c) for c in batch + fa + contr]
+    A = a.reshape(nb, na, nc) if pa == sorted(pa) else \
+        np.ascontiguousarray(a.transpose(pa)).reshape(nb, na, nc)
+    key = (id(b), spec)
+    hit = _CONST_CACHE.get(key)
+    if hit is not None and hit[0] is b:
+        B = hit[1]
+    else:
+        pb = [sb.index(c) for c in batch + contr + fb]
+        B = (b.reshape(nb, nc, nf) if pb == sorted(pb) else
+             np.ascontiguousarray(b.transpose(pb)).reshape(nb, nc, nf))
+        _CONST_CACHE[key] = (b, B)   # hold a reference so `id(b)` cannot be recycled
+    R = np.matmul(A, B)
+    R = R.reshape([dim[c] for c in batch + fa + fb])
+    order = batch + fa + fb
+    return R.transpose([order.index(c) for c in out])
+
+
 def einsum(spec, var, const):
     """einsum with EXACTLY one Var operand (first) and one constant ndarray (second)."""
     lhs, out_spec = spec.split("->")
     var_spec, const_spec = lhs.split(",")
     const = np.asarray(const, dtype=np.float64)
-    val = np.einsum(spec, var.v, const, optimize=True)
+    val = fast_einsum(spec, var.v, const)
     back = f"{out_spec},{const_spec}->{var_spec}"
-    return Var(val, (var,), lambda g: (np.einsum(back, np.asarray(g), const, optimize=True),))
+    return Var(val, (var,), lambda g: (fast_einsum(back, np.ascontiguousarray(g), const),))
 
 
 def backward(out):
