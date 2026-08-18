@@ -13,92 +13,59 @@ verifier, do not re-raise the C1 escalation, do not redo `T1`'s machine record: 
 
 ---
 
-## LIVE — CONDUCTOR mode, **WAVE 4 PLANNED AND COMMITTED BEFORE DISPATCH**, 2026-08-18
+## LIVE — CONDUCTOR mode, **WAVE 4: TWO OF THREE RETURNED**, 2026-08-18
 
-**Plan committed at the SHA below, before any worker was dispatched (§3g step 1). Full gates in
-FINAL WORDING and all pre-committed readings live in `STATE.md` §"WAVE 4" — quoted here by pointer,
-per §3j, and NOT restated.**
+**Plan committed BEFORE dispatch at `8f4cb53`; dispatch record `d0c2c5d`. Gates and pre-committed
+readings live there in final wording and are quoted BY POINTER per §3j rule 5, not restated.**
 
-| unit | lane | kind | branch | dispatched |
-|---|---|---|---|---|
-| `V3` | **V** | construction / measurement | `leg/399-v3-gradeA` | **first** |
-| `L2′` | **L** | construction | `leg/397-l2-decay` (resumes `a9a4370`) | **first** |
-| `V-W3` | verification, **OBLIGATORY** | audit | `verify/wave3` | **last** |
+| unit | lane | branch | outcome |
+|---|---|---|---|
+| `V3` / leg 399 | **V** | `leg/399-v3-gradeA` @ `16ba44e` | **RETURNED. GATE `YES` on 1 row of 9.** Merged. `UNVERIFIED`. |
+| `V-W3` | verification | `verify/wave3` @ `2b8755e` | **RETURNED. 3 of 4 CONFIRMED, 1 REFUTED.** Merged. `UNVERIFIED`. |
+| `L2′` / leg 397 | **L** | `leg/397-l2-decay` | **IN FLIGHT.** §§0–3 committed and binding; executing §§4+. |
 
-**HOW THIS WAVE DISCHARGES ITS THREE STANDING OBLIGATIONS.**
-- **Verifier for `E` and wave 3.** `V-W3` covers `E` (`d0d72b1`) and `V-W2` (`594ff89`). It does
-  **not** cover wave 4 — **you may not verify a wave you planned**, so `V3` and `L2′` land
-  `UNVERIFIED` and **wave 5 must carry their verifier.**
-- **Whatever `L2` needs to finish.** `L2′` resumes the committed pre-registration on its own branch.
-  §§0–3 are binding and must not be re-done; it executes §§4+.
-- **Composition floor.** `V3` attacks **W3**, `L2′` attacks **W4 / §6(i)** — **met from V and L, not
-  from Lane T, for the first time in four waves.** §3i q6 asked for exactly this.
+**THE TWO RESULTS, IN ONE LINE EACH.**
+- **`V3`:** leg 174's Grade-A × fluid cell is **OCCUPIED** — `arXiv:2509.25116` passes both of leg
+  174's clauses and had never been graded here — **but the certified object is not a finite-time
+  singularity**, and W3's prose test and its own named grading predicate **disagree on whether that
+  matters**. **Defective wall WORDING → USER escalation, `ESCALATION_W3_WORDING_2026-08-18.md`,
+  OPEN, NOT RULED.** Ranking consequence: **Lane V → HELD, Lane L sole priority** — a ranking, not a
+  ruling. `V3`'s pre-committed reading (a) fired and was honoured rather than re-interpreted.
+- **`V-W3`:** `E`'s claimed **`8×` cost overrun is REFUTED** — `0.0713` is wall-hours at 8 workers,
+  `0.57` is core-hours; like for like `E` came in **0.4% UNDER**. **The Conductor's own record broke,
+  and the Conductor had written it into a live gate.** Third such defect a verifier has caught.
+  Corrected in `STATE.md` and `OPTIONS.md` this commit; **D2–D6 left unrepaired for wave 5.**
 
-**§3f rule 3:** the wave **opens with construction** and the verifier goes **last**. This is the
-remedy for §3i q7: the last three landed units were `V1`, `E`, `V-W2` — verification, instrument,
-verification, three of three.
+**§3i WAS RUN PER UNIT, NOT PER WAVE** — seven questions answered twice in the integration commit.
+The re-rank came out of q3/q5/q6 and is recorded in `WALLS.md` and `STATE.md`, not only here.
 
-**WHY `V3` IS FIRST AND NOT DEFERRED.** §3i q5 named it the cheapest unit that could **kill** the
-priority lane. §3i q4 found W3's *"nobody filled it since"* rests on leg 242, whose gate is an
-author-line question and whose control net surfaced six fluid blow-up CAPs it graded against nothing.
-`V3` grades them against **leg 174's own unchanged criterion**. **A single Grade-A × fluid row ends
-Lane V's premise for ~2–3 h of reading** — and if it fires, Lane L becomes sole priority in the
-integration commit. **It is a grading against a fixed criterion, not a screen** (screening as a unit
-of work is prohibited): the criterion is quoted, fixed and not the unit's to move, three of the four
-rows already carry adjudications the unit must cite rather than redo, and the deliverable is a
-per-row verdict with the failing clause quoted.
-
-**CARRIED IN EVERY BRIEF.** Commit during the run, not only at the gate — wave 3 lost three units and
-only the one that had committed left anything behind. Mandatory checkpointing above ~1 h wall, to
-disk, at a resumable granularity, saying where. Push the branch only: **never merge, never push to
-`main`.** Never read `DIRECTION.md`. Re-derive from `writeup/data/*.json`, never from prose. Workers
-**self-terminate** and never pick their own next unit.
-
-### §3j HEADROOM at this wave boundary
+**HEADROOM AT THIS BOUNDARY (§3j).**
 
 | file | cap | now | headroom |
 |---|---|---|---|
-| `STATE.md` | 24,576 / no row > 600 ch | **23,798**, longest row 542 | 778 |
-| `WALLS.md` | 32,768 | **32,722** | 46 |
-| `OPTIONS.md` | 24,576 | **24,538** | 38 |
-| this LIVE block | 8,192 | **see commit** | — |
+| `STATE.md` | 24,576 | **24,077** | 499 (longest row 542 / 600) |
+| `WALLS.md` | 32,768 | **31,224** | 1,544 |
+| `OPTIONS.md` | 24,576 | **24,519** | 57 |
+| this LIVE block | 8,192 | see commit | — |
 
-**Context WAS summarised, twice, in this Conductor session**; all four files were re-read from disk
-after each summarisation and after the fork closed. **All three files are within a few hundred bytes
-of their caps — the next Conductor should expect to compact again before it can add anything.**
+**§3j REMEDY EXTENDED ONE STEP, FLAGGED NOT SILENT.** `WALLS.md`'s named remedy — *retracted text
+stays struck but moves to a `## History` section at the foot* — had stopped buying headroom once that
+section reached ~2.9 KB. **History moved to `WALLS_HISTORY.md`, struck text byte-for-byte intact,
+nothing deleted, nothing unstruck**, every `## History` pointer resolving there. `OPTIONS.md` is at
+**57 bytes of headroom and the next session must compact it before adding anything.**
 
-### DISPATCH RECORD — wave 4 is AWAY, 2026-08-18
+**Cycles: context was summarised twice this Conductor session**; all four files were re-read from
+disk after each. `git ls-remote` checked before this integration: **no concurrent push**; `origin/main`
+and local `main` agreed at `950115f`.
 
-All three units dispatched **after** the plan was committed at `8f4cb53` and pushed, in the order
-§3f rule 3 requires: **construction first, verifier last.**
+### Open escalations
 
-| unit | branch it must push | dispatch order | status |
-|---|---|---|---|
-| `V3` | `leg/399-v3-gradeA` | 1st | IN FLIGHT |
-| `L2′` | `leg/397-l2-decay` (resumes `a9a4370`) | 1st | IN FLIGHT |
-| `V-W3` | `verify/wave3` | last | IN FLIGHT |
-
-Every brief carries, verbatim: **commit during the run, not only at the gate** (2026-08-14 host exit,
-five workers lost; wave 3 lost three of four and only the committed one left anything); **mandatory
-checkpointing above ~1 h wall, to disk, resumable, saying where**; **push the branch only — never
-merge, never push to `main`**; **never read `DIRECTION.md`**; **re-derive from `writeup/data/*.json`,
-never from prose**; **READ, do not CONTACT**; `UNREACHABLE`/`THROTTLED` bank as themselves, never as
-zeros; **`UNDER-RESOURCED` with a cost, never a bare `no`**. `L2′`'s adds that `leg_397.md` §§0–3 are
-**COMMITTED AND BINDING — execute §§4+**. `V-W3`'s adds **report, do not repair** and **covers waves
-1 and 3 ONLY, never wave 4**.
-
-**CONDUCTOR-OWNED DEBT HELD ON PURPOSE:** `fig107`'s registration in `writeup/build_figures.py` is
-gate item (4) of `V-W3`. Registering it now would destroy that measurement. **It stays unfixed until
-`V-W3` returns.**
-
-### Open escalations — unchanged from the wave-3 block below
-
-`T1`'s ban-wording packet is on the user's desk (machine record **DISCHARGED**). The lift-clause
-defect (leg 257 / fourth space) is **recorded, NOT ruled** — a ban-wording question is a **user**
-escalation. C1 is **DISCHARGED** and stands **EXEMPLAR-FREE**.
+**NEW, OPEN:** `writeup/escalations/ESCALATION_W3_WORDING_2026-08-18.md` — three questions on W3's
+two disagreeing tests. **Work has not stopped.** `T1`'s ban-wording packet remains on the user's desk
+(machine record **DISCHARGED**). The lift-clause defect (leg 257 / fourth space) is **recorded, NOT
+ruled**. C1 is **DISCHARGED** and stands **EXEMPLAR-FREE**.
 
 ---
-
 ## Superseded LIVE block — CONDUCTOR mode, **WAVE 3 CLOSED AND INTEGRATED**, 2026-08-18
 
 **WAVE 3'S OUTCOME: ONE UNIT OF FOUR RETURNED.** Established from `origin`, not from prose.
@@ -488,6 +455,21 @@ re-run alone under low load before treating one as a regression (ORCHESTRATION.m
 | — | | |
 
 ## Incidents and root causes
+
+**2026-08-18 — a units error survived four documents, a wave plan and a live gate.** `E`'s cost was
+recorded as an `~8×` overrun against its commissioning estimate. `V-W3` refuted it: `0.0713` is
+**wall**-hours per attempt at **8 workers** and `0.57` is **core**-hours per attempt, so the `8×` is
+`core ÷ wall` and is numerically the worker count (`7.967`). Like for like, `E` came in **0.4%
+under**. **Root cause: the repository has no convention forcing a time figure to name its unit at the
+point of use.** `WALLS.md`'s R0 block already warned that the R0 denominator is worker-hours and that
+physical core count is banked in **no numeric field of either JSON** — the warning existed and did
+not stop the error, because it lived in one file and the numbers lived in four others. **Fix owed
+(not done here, it is a unit): every banked duration field carries its unit in its key, and
+`plan_of_record.py` or a test enforces it.** Contributing factor: the Conductor wrote the bad
+comparison into `V-W3`'s own gate, so the verifier was asked to confirm an artefact of the record —
+which is exactly why the gate said *"real, or an artefact of what was counted?"* and why that
+phrasing was worth having.
+
 
 One short paragraph each: what happened, how it was diagnosed, what changed as a result.
 

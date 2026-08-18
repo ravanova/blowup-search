@@ -35,7 +35,7 @@ dropped because a lane was not chosen.**
 
 | lane | attacks | status | one line |
 |---|---|---|---|
-| **V — VISCOUS RUNG** | W3 | **PRIORITY, ACTIVE** | Decides whether **any** path exists: if a viscous blow-up cannot be certified for a dissipative fluid equation in **one** dimension, the honest ceiling is Tier 2. Leg 174 says the cell is empty *"for want of a target, not a method."* **Both branches valuable — that is what makes it cheap. ZERO units have ever landed in this lane.** |
+| **V — VISCOUS RUNG** | W3 | **HELD 2026-08-18** | `V3` (leg 399) measured the lane's own premise and it **did not hold**: leg 174's Grade-A × fluid cell is **OCCUPIED** by `arXiv:2509.25116` on leg 174's own two clauses. `V3`'s **pre-committed** reading (a) — *a YES kills Lane V's premise* — **FIRED and is honoured.** Whether W3 is thereby *broken* turns on which of its two wordings governs: **OPEN user escalation, not ruled here.** Held, not killed; reversible in one line. |
 | **L — THE LAST OBLIGATIONS** | W4, W5, §6(i), §6(ii) | **PRIORITY, ACTIVE** | On **every** path: leg 390 measured that the torus does **not** retire §6(i)/(ii). **No unit in 398 legs has ever landed at either.** Leg 381 banked the bill on §6(i) — `writeup/data/p2_route_cloc_v1.json`. **A deficit of 0.5 in a decay exponent is a number, not an impossibility.** |
 | **T — TORUS** | W2, W4, W6 | **DEFERRED** | Demoted on **the lane's own measurement**: `arXiv:1902.00384` is certified by exactly the banned apparatus and both certified rows are 2D lifts (`T4`, `T6`). **Nothing measured is superseded; W2 stands strengthened.** Alive only through **`T2″`**; `T3` deferred **with** the lane, not killed. `OPTIONS.md` §E. |
 | **R — REFORMULATION + SOLVER** | W7 | **continuous** | Runs inside every unit's pre-registration (*what makes this an order of magnitude cheaper?*) and takes its own units when a wave has room. Every factor removed is permanent. **Never sets a wave's direction.** |
@@ -61,27 +61,38 @@ maintainer or list remains HELD.**
 
 ---
 
-## ⚠ THE §3i FINDING OF 2026-08-18 — W3's "nobody filled it since" IS NOT SUPPORTED BY LEG 242
+## ⚠ 2026-08-18 — THE §3i FLAG BECAME A MEASUREMENT, AND THE CELL IS OCCUPIED
 
-**Question 4 of the direction check, answered against the record.** `WALLS.md` W3 carried
-*"Leg 174's occupancy matrix; leg 242 confirms nobody filled it since."* **Leg 242's own gate is an
-author-line question** — *did Dahne & Figueras's subsequent work reach a fluid, or complete the CGL
-work into certified blow-up?* — answered **NO on both clauses**. Its twelve nets are author nets
-(Dahne, Figueras, Gomez-Serrano, Parker) plus three keyword searches **about that author line**.
-**It confirms the CGL author line did not fill the cell. It does not confirm that nobody did.**
+Question 4 of the direction check flagged that W3's *"leg 242 confirms nobody filled it since"* was
+**over-read** — leg 242's gate was an author-line question and it graded **none** of the six fluid
+blow-up CAPs its own control net surfaced. That was a flag on the *support*, not a retraction.
 
-**And leg 242's own control net surfaced six fluid blow-up computer-assisted proofs**
-(`experiments/journal/leg_242.md` §"How the candidate set was closed", incl. `2509.25116`,
-`2605.19716`, `2605.15149`, `2604.09949`) **and graded none of them against leg 174's Grade-A
-criterion, because that was not its gate.** Leg 174's occupancy matrix rests on an **11-row
-hand-built ledger** (`writeup/data/p2_route_vbs_v1_scoping.json`, field `ledger`) whose
-`honest_ceiling` records a **Tier** ceiling and **no coverage ceiling**.
+**`V3` (leg 399, `16ba44e`) then graded them, and the flag turned into a measurement.**
+**`arXiv:2509.25116` (Hou–Wang–Yang, v2) passes BOTH of leg 174's clauses** — interval arithmetic
+(§7.3, p.55) enclosing a solution of a system carrying `−ΔŨ` (Prop. 1, eq. (1.15), p.5) for the
+**unforced 3D incompressible Navier–Stokes equations** (eq. (1.1)) — and it had **never been graded
+in this record.** 9 rows graded, 8 `NO` with the failing clause quoted.
 
-**This is the leg-348 shape, on Lane V instead of Lane T:** a lane, a priority ranking and a
-construction unit's whole gate resting on a source whose coverage was never discharged. **It is
-recorded as a flag, not as a ruling — nothing here measures that anyone DID fill the cell.**
-**`V3` (wave 4) measures it, and it is the cheapest unit that could kill the priority lane.**
-`WALLS.md` W3 is corrected in the same commit.
+**AND IT IS NOT A BLOW-UP.** The paper says so itself (§1.2, p.2): the setting *"starts from singular
+initial data"*, is **forward** self-similar, and its solutions are *"smooth for positive times."*
+W3's prose test requires *"a genuine finite-time singularity"*; **leg 174's criterion, which the same
+sentence names as `V3`'s grading predicate, has no such clause.** The two tests are not the same test
+and an object now sits between them.
+
+**A defective wall WORDING is a USER escalation. The Conductor has NOT ruled it:**
+`writeup/escalations/ESCALATION_W3_WORDING_2026-08-18.md` — three questions, **OPEN**, work not
+stopped. **W3's status: DISPUTED / UNRULED.** Ranking consequence taken (Lane V → HELD, Lane L sole
+priority) is a **ranking, not a ruling**, and supersedes no measurement.
+
+**The YES is UNAUDITED** — one database, title-screened, S2 banked as a **gap, not a zero** (no API
+key here). `V3`'s costed next unit, an adversarial full-text audit of `2509.25116` to leg-309 depth
+(4–8 h), is **not dispatched pending the ruling**, because what it should test depends on the answer.
+**Nobody's link moved:** somebody else certified something, this repository graded it.
+
+**Also flagged, NOT repaired:** `p2_route_vbs_v1_scoping.json::the_empty_cell.meaning` — *"no
+published work applies interval arithmetic to a DISSIPATIVE fluid equation's own self-similar
+object"* — is **measured FALSE**. It is another leg's banked artefact and rewriting it to match a
+later finding is how a record stops being one. Escalation §3, question (Q3).
 
 ---
 
@@ -89,6 +100,8 @@ recorded as a flag, not as a ruling — nothing here measures that anyone DID fi
 
 | unit | gate answer | SHA | state |
 |---|---|---|---|
+| **`V3`** / leg 399 (V) | **GATE `YES` on 1 row of 9.** `arXiv:2509.25116` (Hou–Wang–Yang) **passes both of leg 174's clauses** and had **never been graded here**; 8 `NO` with the failing clause quoted; leg 309/342/123 **cited, not redone**. **The object is NOT a finite-time singularity — the paper says so (§1.2, p.2).** Lane V's premise **DEAD on the named predicate**; W3 **DISPUTED / UNRULED**, escalation OPEN. YES **unaudited**, one database, S2 a **gap not a zero**. | `16ba44e` | **UNVERIFIED** |
+| **`V-W3`** (wave 4, verification) | **3 of 4 CONFIRMED, 1 REFUTED.** `E`'s headline reproduces 6/6; `V-W2` confirms on both parts from **re-fetched primaries** (`.mat` fields **bitwise**); `fig107`'s `P2_EVIDENCE` gap confirmed by `ast.literal_eval` (36 entries, `107` the only gap in 99–110). **REFUTED: `E`'s `8×` overrun — `0.0713` is WALL-h, `0.57` is CORE-h; like for like `E` came in 0.4% UNDER.** 6 defects **unrepaired**, 0 `UNREACHABLE`. | `2b8755e` | **UNVERIFIED** |
 | **`V-W2`** (wave 3, verification) | **ALL FOUR ITEMS REPRODUCE**, items (1)/(2) from **re-fetched primary artefacts whose SHA-256 matched the banked digests** — measurements, not transcription checks. Banked one nuance **unreconciled**: the *ground* for `T6`'s UNDERCUT 2 was the **Conductor's** wording, not `T6`'s. **Second Conductor-wording defect a verifier has caught.** `T1`'s owed machine record **DISCHARGED**, mutation-tested four ways. | `594ff89` | **UNVERIFIED** |
 | **`E`** (wave 1, Lane R instrument) | **PASS in its pre-committed wording** — all three diagnostics RETURN, each with a planted control firing both ways. **Branch fired: `E-iii`.** 16 attempts at the eight published Lucas–Kerswell rows: **2 converged, 0 recovered any named row**, both convergences below diagnostic (1)'s 0.15 shelf. Control **R** is load-bearing — it proves the predicate **can** return a recovery. `G1` stays `UNDER-RESOURCED` **and was not written to**. `experiments/journal/prog_r4_e.md`. | `d0d72b1` | **UNVERIFIED** |
 | **`T4`** / leg 393 (T) | **`STOP`, pre-committed branch (c).** `arXiv:1902.00384` is certified by **exactly the banned apparatus**, and **both certified rows are 2D lifts**. **W2 STANDS, STRENGTHENED. W6 UNTOUCHED.** `writeup/data/p2_route_t4_v1.json`. | `2c87244` | **VERIFIED** by `V-W2` |
@@ -120,81 +133,51 @@ checkpoints to disk at a granularity it can resume from, and says where.
 
 ---
 
-## WAVE 4 — PLANNED AND COMMITTED **BEFORE DISPATCH**, 2026-08-18
+## WAVE 4 — TWO OF THREE RETURNED, 2026-08-18. `L2′` STILL IN FLIGHT.
 
-**Composition floor (§3g): MET FROM `V` AND `L`, NOT `T` — the first time in four waves.** `V3`
-attacks **W3**; `L2′` attacks **W4 / §6(i)**. **§3f rule 3:** the wave **opens with construction**
-(`V3`, `L2′` dispatched first); the verifier is dispatched **last**. **§3i q7's remedy applied.**
+**Gates and all pre-committed readings are COMMITTED AT `8f4cb53`, before dispatch (§3g step 1), and
+are quoted by pointer per §3j rule 5 — NOT restated here.** Dispatch record: `d0c2c5d`.
 
-### `V3` — Lane V. **The cheapest unit that could kill the priority lane (§3i q5).** ~2–4 h.
+| unit | lane | outcome |
+|---|---|---|
+| `V3` / leg 399 | **V** | **RETURNED. GATE ANSWERED `YES` on 1 row of 9.** `16ba44e`, merged. The cell is **occupied** on leg 174's own criterion; pre-committed reading (a) **FIRED**. **`UNVERIFIED`.** |
+| `V-W3` | verification | **RETURNED. 3 of 4 CONFIRMED, 1 REFUTED.** `2b8755e`, merged. 6 defects located, sized, **unrepaired** as instructed. Executable re-derivation banked, 180 checks, 0 disagreements. |
+| `L2′` / leg 397 | **L** | **IN FLIGHT** on `leg/397-l2-decay`. §§0–3 committed and binding; executing §§4+. |
 
-**GATE, final wording.** Grade **every** fluid blow-up computer-assisted proof this record has
-surfaced — leg 242's control net (`2509.25116`, `2605.19716`, `2605.15149`, `2604.09949`) plus any
-the unit's own control net surfaces — **row by row against leg 174's OWN, UNCHANGED Grade-A × fluid
-criterion** (`writeup/PUB_0C_CENSUS_SPINE.md` §1: *Grade A* = the interval certificate encloses a
-solution of an equation **that itself carries the dissipative term**; *fluid* = a genuine
-fluid-dynamics equation). **Does any row grade Grade-A AND fluid simultaneously — per row, YES or NO,
-with the failing clause quoted?**
+**`V-W3`'s REFUTATION, and it is the Conductor's own record that broke.** ~~`E` overran its
+commissioning estimate ~8×~~ — **WITHDRAWN. There was no overrun.** `0.0713` is **WALL**-hours per
+attempt at **8 workers** (`prog_r4_u5.md:405`); `0.57` is **CORE**-hours per attempt. Like for like,
+U5's model predicts `0.0713 × 8 = 0.5704` core-h and `E` measured `9.08843 / 16 = 0.56803` —
+**ratio 0.9958, `E` came in 0.4% UNDER.** The claimed `8×` is recovered by dividing core-hours by
+wall-hours and **equals the worker count** (`7.967`). Two more fell out: the record's own
+`(5.687 + 0.806)/16` evaluates to **0.4058, not 0.57** (off 1.400×), and the structural story is
+contradicted — `E` ran **21.44** epochs/attempt against U5's **21.95**, at **95.389 s/epoch** against
+a 95 s model. **Both factors of the cost model were accurate.** `E`'s forward pricing table is fine;
+only the comparison was wrong. **THIRD Conductor-record defect a verifier has caught, and the first
+one the Conductor wrote into a live gate.**
 
-**Pre-committed readings.** (a) A **YES** on any row **BREAKS W3 and kills Lane V's premise** —
-report it first, do not soften it, and record it as *someone else filled the cell*, which is **not
-this repository moving a link**. (b) A **NO** on every row **does NOT re-establish "nobody filled it
-since"** — it establishes only that **this named list** does not fill it; state the residual coverage
-ceiling explicitly and cost it (§3d). (c) Where the record **already** grades a row — leg 309 refuted
-`2604.09949`, leg 342 graded `2605.15149` **Euler, not NS**, leg 123 banked `2605.19716` a **false
-friend** — **cite the existing adjudication, do not redo it**, and say which rows had **never** been
-graded. (d) The criterion is **leg 174's, unchanged**: quote it, do not tighten or relax it.
-(e) `UNREACHABLE`/`THROTTLED` bank as such, **never as zeros**; **no S2 key exists**. (f) Lesson 91:
-a negative names the exact criterion clause that fails, per row. (g) **READ, do not CONTACT.**
-(h) This is a **grading against a fixed criterion**, not a screen; if the list cannot be closed at
-this cost, return **`UNDER-RESOURCED` with a cost, never a bare `no`**. (i) **C1 may not be cited as
-evidence any apparatus closes** for any object class.
+**`V-W3`'s three confirmations.** **(1)** `E`'s headline reproduces **6 of 6** off a recount of the
+16 attempt rows (2 converged, 0 recovered, control **R** at `1.5243710606417483e-10`, `PULL_TO_LOW_S`,
+`MIXED` `p = 0.9316534173291335`), with two nuances already in the artefact: `1.5e-10` is control
+**R**'s alone (**P** sits at `7.75e-09`), and `PULL_TO_LOW_S` is the `n = 23` converged subset — over
+all 200 the statistic is `NO_PULL`. **(3)** `V-W2` confirms on **both** parts: all four
+re-measurements land, re-derived from primaries not from `V-W2`'s record (the VU zip re-downloaded
+and `.mat` fields matched **bitwise**, `r_min`/`r_max` recomputed bitwise, `T4`'s census recounted
+7/4/5/2 off an independent `pdftotext`, `T6`'s verdicts 4/2/1, `T5`'s corpus re-enumerated at
+**1428 files / 417476 lines**), and the **re-fetch-and-SHA-256 method is in the artefact, not the
+prose** — all three hashes reproduce today. **(4)** `fig107` absent from `P2_EVIDENCE` confirmed by
+`ast.literal_eval`: **36 entries, ids `[48…82, 99–106, 108, 109, 110]`, `107` the only gap** in
+99–110; `fig107` appears in **0 string tokens, 2 comment tokens**. Script and `.png` exist and
+`INDEX.md` cites it, so **it is rebuilt and self-checked by nothing.** **0 UNREACHABLE.**
 
-### `L2′` — Lane L. **Resumes a committed pre-registration.** ~2–4 h.
+**Defects D1–D6 are located, sized and STILL UNREPAIRED** (`experiments/journal/verify_wave3.md` §4).
+D1 (the units error) is corrected **here and in `OPTIONS.md`** in this commit; **D2–D6 are wave 5's
+repair unit**, which is a separate unit because a verifier's findings must not be fixed by the hand
+that planned the wave. Re-run any time: `.venv/bin/python experiments/verify_wave3_rederive.py`.
 
-**Branch `leg/397-l2-decay` @ `a9a4370`. `experiments/journal/leg_397.md` §§0–3 are COMMITTED AND
-BINDING — do NOT re-do them. Execute §§4+.**
-
-**GATE, as pre-registered.** Reading the published localisation / far-field-decay techniques against
-**this object** — route 4's DSS profile carrying leg 381's banked bill (`L³` tail **326.875 per
-decade**, required **`α > 1.5`** against available **`α = 1.0`**, deficit **0.5**) — state **per
-technique** the **named hypothesis that fails**, or that one does not. **Quote it and locate it.**
-
-**Pre-committed readings.** (a) A measured *"still no method, and here is precisely which hypothesis
-fails"* is a **real, landable result** — it answers whether the Tier-2 ceiling is permanent — **and
-must not be softened**. (b) A candidate is a **LEAD, not a broken wall**, until leg 381's bill is
-actually paid: a technique claimed to supply the deficit must be shown to supply **that number**.
-(c) The deficit comes from the **artefact**, never from prose. (d) **READ, do not CONTACT.**
-(e) Instrument every zero: `THROTTLED`/`UNREACHABLE` are **never** zeros; **no S2 key exists**.
-(f) Lesson 91. (g) `no` → what it would take (§3d), i.e. **`UNDER-RESOURCED` with a cost**.
-
-### `V-W3` — verification, **OBLIGATORY**, dispatched LAST. ~2–3 h.
-
-**GATE, final wording.** From **banked JSON, landed evidence and scripts alone** — never from a
-journal's narrative — do these reproduce **exactly**? **(1)** `E`'s headline (`d0d72b1`,
-`writeup/data/p2_prog_r4_e_v1.json`): **16 attempts, 2 converged, 0 recovered any named row**, both
-convergences **below the 0.15 `|s|` shelf and not their rows**; positive control at **`‖R‖ 1.5e-10`
-through `E`'s OWN predicate**; scrambled negative control failing **as planted**; diagnostics (1)
-`PULL_TO_LOW_S` and (2) `MIXED`, `p = 0.9317`. **(2)** `E`'s **~8× cost overrun**: measured
-**≈0.57 h/attempt** (5.687 core-hours + 0.806 h controls, 16 attempts) against the `0.0713`
-commissioning figure — real, or an artefact of what was counted? **(3)** `V-W2` (`594ff89`): do its
-four re-measurements land where it says, and does its **re-fetch-and-SHA-256** method actually appear
-in its artefacts? **(4)** `fig107`'s absence from `P2_EVIDENCE` in `writeup/build_figures.py` —
-confirm mechanically.
-
-**Pre-committed readings.** (a) Reproducing everything is **PASS, and a real result** — say so
-plainly. (b) **Any discrepancy is reported FIRST and not softened.** (c) Re-measure from artefacts,
-never from prose. (d) **`UNVERIFIABLE` is a valid verdict** with its reason. (e) You did **not** plan
-these units: **report, do not repair** — a fix is a separate unit. (f) Lesson 68: a check that is not
-executable decays. (g) **You may not verify a wave you planned** — this verifier covers waves 1 and 3
-only, never wave 4.
-
-### Carried in EVERY wave-4 brief
-
-**COMMIT DURING THE RUN, NOT ONLY AT THE GATE** — wave 3 lost three units and only the one that had
-committed left anything behind. **MANDATORY CHECKPOINTING above ~1 h wall**, to disk, at a resumable
-granularity, saying where. **PUSH THE BRANCH ONLY — never merge, never push to `main`.**
-**Never read `DIRECTION.md`.** Re-derive from `writeup/data/*.json`, never from prose.
+**WAVE 5 MUST CARRY:** a verifier for `V3` and `L2′` (**you may not verify a wave you planned**);
+the D2–D6 repair unit; and **the composition floor from a non-T lane again.** Lane L is now the
+**sole** priority lane and still has never landed a unit.
 
 ## Open — needs the user, not a task
 

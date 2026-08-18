@@ -76,20 +76,19 @@ Breden–Chu viscous Burgers). **Assumed: nothing about impossibility** — and 
 width (over-read closure #5, leg 328): the wider claim *"no certified viscous blow-up in any model,
 any dimension"* was **FALSE** and is retired.
 
-**⚠ COVERAGE CORRECTION 2026-08-18 — THIS WALL'S "NOBODY FILLED IT SINCE" WAS OVER-READ (Conductor,
-§3i q4).** **Struck:** ~~leg 242 confirms nobody filled it since~~. **Leg 242's gate is an
-author-line question** — *did Dahne & Figueras's subsequent work reach a fluid, or complete the CGL
-work into certified blow-up?* — answered **NO on both clauses** over **twelve author nets** plus
-three keyword searches **about that author line**. It closes the CGL line; **it does not close the
-cell.** Its own control net **surfaced six fluid blow-up computer-assisted proofs** (`2509.25116`,
-`2605.19716`, `2605.15149`, `2604.09949` among them) **and graded none against leg 174's Grade-A
-criterion, because that was not its gate.** Leg 174's matrix rests on an **11-row hand-built ledger**
-(`p2_route_vbs_v1_scoping.json`, `ledger`) whose `honest_ceiling` records a **Tier** ceiling and **no
-coverage ceiling**.
-
-**Nothing here measures that anyone DID fill the cell** — a flag on the *support*, not a retraction.
-**`V3` (wave 4) grades the cell against leg 174's own unchanged Grade-A criterion**, and it is the
-cheapest unit that could kill Lane V.
+**⚠ MEASURED 2026-08-18 BY `V3` (leg 399, `16ba44e`): THE CELL IS OCCUPIED ON LEG 174'S OWN
+CRITERION — AND THE WALL'S TWO TESTS DISAGREE. STATUS: DISPUTED / UNRULED.**
+`arXiv:2509.25116` (Hou–Wang–Yang, v2) **passes both of leg 174's clauses** — interval arithmetic
+(§7.3 p.55) encloses a solution of a system carrying `−ΔŨ` (Prop. 1 eq. (1.15) p.5) for the
+**unforced 3D incompressible Navier–Stokes equations** (eq. (1.1)) — and **fails** the prose test's
+extra requirement: the paper itself says the object is **not** a finite-time singularity (§1.2 p.2,
+solutions *"smooth for positive times"*). It had **never been graded here.** 9 rows, 8 `NO` with the
+failing clause quoted. **The YES is UNAUDITED** — one database, title-screened, S2 banked a **gap not
+a zero**; the costed audit (4–8 h) waits on the ruling. **A defective wall WORDING is a USER
+escalation and the Conductor has NOT ruled it:** `ESCALATION_W3_WORDING_2026-08-18.md`, 3 questions,
+OPEN. Also **struck:** ~~leg 242 confirms nobody filled it since~~ — its gate was an author-line
+question and it graded none of the six CAPs it surfaced. `V3` has now graded them.
+`writeup/data/p2_route_v3_gradeA_v1.json` · `experiments/journal/leg_399.md`.
 
 **Why this wall matters more than its size suggests.** If a viscous blow-up cannot be certified for a
 dissipative fluid equation in **one** dimension, 3D Navier–Stokes is not a question of compute and
@@ -98,7 +97,9 @@ the programme's honest ceiling is Tier 2. Worth as much negative as positive —
 **BREAKING W3 CONSISTS OF:** an interval enclosure of a blow-up solution of a dissipative *fluid*
 equation — any dimension, any model, provided the dissipative term is inside the certified equation
 and the object is a genuine finite-time singularity. Pre-committed test, **and `V3`'s grading
-predicate**: leg 174's own Grade-A criterion, applied unchanged.
+predicate**: leg 174's own Grade-A criterion, applied unchanged. **⚠ THESE ARE NOT THE SAME TEST —
+leg 174's criterion has NO singularity clause, and since 2026-08-18 an object sits between them.
+Which one governs is question (Q1) of the OPEN escalation and is NOT ruled here.**
 
 **Lane: V** (below) — **PRIORITY LANE, ACTIVE 2026-08-14.**
 
@@ -187,12 +188,12 @@ link moved without the link moving.**
 ## ⚠ LANE PRIORITIES — RE-RANKED 2026-08-14 BY USER RULING
 
 **`writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md`.** The 2026-08-13 ranking is superseded
-**as a ranking**; every measurement it rested on stands. **Wave 4 re-check (§3i q3/q5/q6): ranking
-UNCHANGED, but Lane V's is now conditional on `V3` — see below.**
+**as a ranking**; every measurement it rested on stands. **RE-RANKED AGAIN 2026-08-18 on `V3`'s
+return: Lane V → HELD, Lane L sole priority.**
 
 | lane | was | **now** | why |
 |---|---|---|---|
-| **V** | 2 | **PRIORITY, ACTIVE** | **Decides whether any path exists** — W3 is the rung determining whether **Tier 3 is reachable in principle**, and both branches are valuable. |
+| **V** | 2 | **HELD 2026-08-18** | `V3`'s **pre-committed** reading (a) — *a YES kills Lane V's premise* — **FIRED**: the cell is occupied on leg 174's own criterion. Which of W3's two wordings governs is an OPEN **user** escalation, so the lane is held, not killed. A ranking, not a ruling; reversible in one line. |
 | **L** | 3 | **PRIORITY, ACTIVE** | **On every path.** Leg 390: the torus does **not** retire §6(i)/(ii), so the two no-method obligations block **every** branch — and **no unit has ever landed one.** |
 | **T** | 1 | **DEFERRED** | The demonstrated-technology argument fell to the lane's **own** measurement (leg 393, replicated by 394). Alive only through **`T2″`**; **`T3` deferred, not killed.** `OPTIONS.md` §E. |
 | **R** | continuous | **unchanged** | Runs inside **every** unit's pre-registration and takes its own units when a wave has room. **Never sets a wave's direction.** |
@@ -203,10 +204,10 @@ near-miss (`arXiv:2308.01528` — computer-assisted blow-up, **unbounded** domai
 decay**) points at **Lane L** and route 4's `ℝ³` geometry, statement **(C)**. **`O1` is unranked and
 belongs to no unit yet.**
 
-**⚠ RE-EARNED, NOT INHERITED (§3i, 2026-08-18).** Lane V's rank rests on leg 174's *"empty for want
-of a target"*, and **the support for "nobody filled it since" was over-read** (W3). **`V3` measures
-it before Lane V spends another unit.** Lane L's rank is unaffected — it rests on leg 390's
-measurement, not on a survey.
+**⚠ IT WAS RE-EARNED AND IT DID NOT SURVIVE (§3i, 2026-08-18).** Lane V's rank rested on leg 174's
+*"empty for want of a target"*. `V3` measured that premise instead of inheriting it, and **it did not
+hold.** Lane L's rank is **unaffected** — it rests on leg 390's measurement, not on a survey — so
+**Lane L is now the sole priority lane, and it still has never landed a unit.**
 
 **Binding on every lane: C1 STANDS, EXEMPLAR-FREE**, and no unit may cite it as evidence the
 technology closes for any object class. **Naming requirement unchanged, not waivable by the
@@ -224,12 +225,11 @@ inverse uniform in `M`. **Absent both, the ban applies in full.**
 **Attacks W2, W4, W6.** What survives after `T4`/`T6`:
 
 1. **Leg 348's obstruction is NOT refuted, but its evidence base is thinner than the record said.**
-   The only named obstruction to periodic-orbit certification reaching route 4's object is **domain
-   shape**: the Galerkin-plus-tail bridge closes against a **compact domain with a discrete,
-   geometrically decaying spectral basis**, and route 4 wants unbounded `ℝ³` in an algebraic weight.
-   **Leg 348 read `arXiv:1902.00384` at ABSTRACT LEVEL ONLY and flagged that limit itself** — an
-   undischarged ceiling the programme built a lane, an escalation and a user ruling on top of for 45
-   legs. **`T6` discharged it at full text.**
+   The only named obstruction is **domain shape**: the Galerkin-plus-tail bridge closes against a
+   **compact domain with a discrete, geometrically decaying spectral basis**, and route 4 wants
+   unbounded `ℝ³` in an algebraic weight. **Leg 348 read `arXiv:1902.00384` at ABSTRACT LEVEL ONLY
+   and flagged that limit itself** — an undischarged ceiling the programme built a lane, an
+   escalation and a user ruling on for 45 legs. **`T6` discharged it at full text.**
 2. **`T³` is the domain the obstruction asks for**, but **leg 348's `domain_census` OVER-COUNTS BY
    ONE** — `arXiv:2409.09234` is not an instance of the technology at all (`T6`, verified by `V-W2`).
    **6 − 1 = 5.** Leg 390's figure inherits the error. **Re-check before citing it.** `## History`.
@@ -242,30 +242,29 @@ inverse uniform in `M`. **Absent both, the ban applies in full.**
 **The price, stated first, because free lunches here get repurchased** (full itemisation:
 `OPTIONS.md` §E, leg 390).
 - **0 of 4 rigidity clearances carry to `T³`** (leg 390). The §2 screen must be rebuilt from scratch.
-- **THE CONVERSE, AND IT IS LOAD-BEARING.** *"0 of 4 carry"* says the `ℝ³` screen does not **help**
-  on the torus. It does **not** say the `ℝ³` **exclusions** stop applying — **and they do not: an
-  `ℝ³` exclusion still reaches a `T³` object built by periodic extension of an `ℝ³` self-similar
-  core.** Not hypothetical — `2604.09949` was read at full text by leg 309 and reached **GATE NO,
-  broken at H11**, on that ground. **The one previous attempt at Lane T's target, by anyone, died
-  this way.** The torus buys an escape only for a **natively periodic** ansatz.
-- **NO PERIODIC ANALOGUE OF NRS/TSAI WAS LOCATED — and that is NOT a clearance** (`T2`,
-  `UNDER-RESOURCED` under §3d, not `no`): both sources pre-arXiv, Semantic Scholar throttled on 5 of
-  6 substantive queries, one battery failed its own domain control. arXiv clean, **32/32 MEASURED**,
-  no throttled query banked as a zero. Compliant search costed **≈1.2–1.7 h**.
+- **THE CONVERSE, LOAD-BEARING.** *"0 of 4 carry"* says the `ℝ³` screen does not **help** on the
+  torus; it does **not** say the `ℝ³` **exclusions** stop applying, **and they do not** — an `ℝ³`
+  exclusion still reaches a `T³` object built by periodic extension of an `ℝ³` self-similar core.
+  Not hypothetical: leg 309 read `2604.09949` at full text and reached **GATE NO, broken at H11**, on
+  that ground. **The one previous attempt at Lane T's target, by anyone, died this way.** The torus
+  buys an escape only for a **natively periodic** ansatz.
+- **NO PERIODIC ANALOGUE OF NRS/TSAI LOCATED — NOT a clearance** (`T2`, `UNDER-RESOURCED` under §3d,
+  not `no`): both sources pre-arXiv, S2 throttled on 5 of 6 substantive queries, one battery failed
+  its own domain control; arXiv clean **32/32 MEASURED**, no throttled query banked as a zero.
+  Compliant search costed **≈1.2–1.7 h**.
 - **`T2″`, THE DE NOVO ITEM AND RE-OPEN CONDITION (ii): a TYPE-I RIGIDITY THEOREM ON `T³`.** A *rate*
   condition needs no dilation symmetry, so it carries to the torus **as a question**, unproven.
 - **The DSS ansatz does not survive periodization.** 342 modes survive one DSS step at `λ = 1.7`;
   **0 survive two.** Lane T needs a **non-DSS** ansatz on `T³` — open work, not a lookup.
-- **(D)'s data conditions (8) and (9) are not here and are READABLE** (the outreach hold is author
-  contact only). **Leg 390 §5 item 1 owes the `check_A` re-run; the §4 disposition MAY CHANGE.**
+- **(D)'s data conditions (8) and (9) are readable** (the hold is author *contact* only). **Leg 390
+  §5 item 1 owes the `check_A` re-run; the §4 disposition MAY CHANGE.**
 
-**All four dispatched units are TAKEN** — `T1` (ruled), `T2` (`UNDER-RESOURCED`, named `T2″`), `T4`
-(`STOP`), plus `T5`/`T6` in wave 2. **`T3`, the non-DSS `T³` ansatz, is the lane's real mathematical
-content, deferred WITH the lane and not killed.** Leg 390 §5 item 3 prices the nearest object: the
-one-step DSS margin decays with band width at exponent **−0.99057**, so an
-*almost-periodic-almost-DSS* object is the first thing to price.
+**All dispatched units are TAKEN** — `T1` (ruled), `T2` (`UNDER-RESOURCED`, named `T2″`), `T4`
+(`STOP`), `T5`/`T6`. **`T3`, the non-DSS `T³` ansatz, is the lane's real mathematical content,
+deferred WITH the lane, not killed**; leg 390 §5 item 3 prices the nearest object — the one-step DSS
+margin decays with band width at exponent **−0.99057**.
 
-## LANE V — THE VISCOUS RUNG. **PRIORITY, ACTIVE (ruling 2026-08-14).** *Highest information per unit of spend.*
+## LANE V — THE VISCOUS RUNG. ~~*PRIORITY, ACTIVE.*~~ **HELD 2026-08-18 on `V3`'s return.**
 
 > **PROMOTED 2026-08-14.** The user's reason, in its own terms: **Lane V decides whether any path
 > exists.** Its job is to supply the **named target** leg 174 says the cell is empty for want of, and
@@ -273,17 +272,16 @@ one-step DSS margin decays with band width at exponent **−0.99057**, so an
 > and is not waivable.**
 
 **Attacks W3.** Fill the Grade-A × fluid cell in the lowest dimension admitting genuine fluid
-structure — the target first, not the method. **Both branches are valuable, which is what makes it
-cheap:** success gives the Clay path a certification mechanism; failure is the strongest available
-evidence that the ceiling is Tier 2, and evidence the programme can act on rather than assume.
+structure — target first, not method. **The stage-V lift clause is CLEAN** (*"which needs L1 first"*
+**struck by user ruling B1**, 2026-08-13); a fluid transport target attacked with a dynamical closure
+is **outside both bans**, subject in full to C1's naming requirement.
 
-**The stage-V lift clause is CLEAN** — *"which needs L1 first"* was **struck by user ruling B1**
-(2026-08-13). A fluid transport target attacked with a dynamical closure is **outside both bans**,
-subject in full to C1's naming requirement.
-
-**⚠ THIS LANE HAS LANDED ZERO UNITS.** `V1` became a verifier; `V2` was dispatched in wave 3 and
-**died without committing a byte**. Its priority is a ruling plus an argument — **`V3` is the first
-measurement it will own.**
+**⚠ HELD, AND THE LANE'S ONE LANDED UNIT IS WHY.** `V1` became a verifier; `V2` died in wave 3
+without committing a byte; **`V3` (leg 399) is the lane's first and only measurement — and it
+measured the lane's own premise FALSE on leg 174's criterion.** `V3`'s pre-committed reading (a)
+fired and is honoured. Whether W3 is thereby *broken* turns on which of its two wordings governs:
+**OPEN user escalation, `ESCALATION_W3_WORDING_2026-08-18.md`. Not ruled here.** The lane's next unit
+if it re-opens is `V3`'s own costed one — an adversarial full-text audit of `2509.25116`, 4–8 h.
 
 ## LANE L — THE LAST OBLIGATIONS. **PRIORITY, ACTIVE (ruling 2026-08-14).** *The only lane touching the FINAL blockers.*
 
@@ -336,11 +334,12 @@ forever, and every factor taken out is permanent and transfers.
 
 ### R0 — the metric, pre-committed BEFORE optimisation. **TAKEN, wave 1. Its inference RETRACTED.**
 
-**The standing cross-unit metric is `ORBITS NEW TO THE PROGRAMME PER WORKER-HOUR`**; within-unit it
-is distinct orbits per worker-hour, per-attempt rate only as a secondary diagnostic alongside it.
-**The denominator is WORKER-hours, not machine-core-hours** — physical core count is in **no numeric
-field** of either JSON; a future unit must bank `magnitudes.physical_cores` and per-attempt
-`time.process_time`.
+**The standing cross-unit metric is `ORBITS NEW TO THE PROGRAMME PER WORKER-HOUR`**; within-unit,
+distinct orbits per worker-hour, per-attempt rate a secondary diagnostic beside it. **The denominator
+is WORKER-hours, not machine-core-hours** — physical core count is in **no numeric field** of either
+JSON; a future unit must bank `magnitudes.physical_cores` and per-attempt `time.process_time`.
+**`V-W3` (2026-08-18) shows what that ambiguity costs: a claimed `8×` cost overrun for `E` was
+`core ÷ wall` and equals the worker count. See `STATE.md`.**
 
 | | distinct | worker-hours | distinct / worker-hour | NEW to programme / worker-hour |
 |---|---|---|---|---|
@@ -349,40 +348,39 @@ field** of either JSON; a future unit must bank `magnitudes.physical_cores` and 
 
 **THE INFERENCE FROM THIS TABLE IS RETRACTED** — ~~*"U5 is above U3 on every variant, Lane R's first
 measured improvement"*~~ **WITHDRAWN.** The per-run arithmetic (1.27×–1.59×) is confirmed; the
-inference is not, because the metric counts **cross-run** re-finds as successes — the exact defect it
-was introduced to remove, one level up. **57 of U5's 100 seeds were already spent by U3; 4 of U5's 5
+inference is not: the metric counts **cross-run** re-finds as successes — the exact defect it was
+introduced to remove, one level up. **57 of U5's 100 seeds were already spent by U3; 4 of U5's 5
 distinct solutions are re-finds; U5's contribution new to the programme is ONE orbit.** Report
-**both** rows. Core-hour convention: **pool reservation (`wall × workers`)** wherever quoted; §W7's
-134.45 is attempt-CPU and is labelled there.
-**`MILESTONE M3 = DELIVERED` SURVIVES** — adjudicated by `V1`, not by the Conductor that planned it. **Instrument limit:** U3's converged states are **banked nowhere**, only U5's, so the numerator 8 is
-testable only in the `(T, |s|)` pair — and the deciding pair sits at **1.288 × TOL** (`OPTIONS.md` §B).
+**both** rows. Core-hour convention: **pool reservation (`wall × workers`)**; §W7's 134.45 is
+attempt-CPU and labelled there. **`M3 = DELIVERED` SURVIVES** — adjudicated by `V1`, not by the
+Conductor that planned it. **Instrument limit:** U3's converged states are **banked nowhere**, only
+U5's, so the numerator 8 is testable only in the `(T, |s|)` pair, and the deciding pair sits at
+**1.288 × TOL** (`OPTIONS.md` §B).
 
 ### R1 — early abort on flatness. **CLOSED 2026-08-13 — the win was already taken.**
 
 ~~*"Cheapest competitive win in the repository."*~~ **Withdrawn.** R1's numbers are **CONFIRMED
-exactly**, but the win they describe **U5 had already collected** (`resourcing.stall_exit` **is**
-this criterion, deployed). Remaining headroom over 12,597 deterministic rules: **+0.48
-worker-hours**, and **hold-out shows a rule selected on U5's 9 convergences KILLS one of U3's 14.**
-Deployed rule: **zero false kills over 23 banked convergences, 6.90× margin — spend no more here.** The underlying measurement stands and is reusable: U3's convergence is
-**bimodal** — all 14 convergences finished in **≤29 epochs** (median 16) while the 86
-non-convergences ran to the 52-epoch cap, **the majority of the run.**
+exactly**, but **U5 had already collected the win** (`resourcing.stall_exit` **is** this criterion,
+deployed). Headroom over 12,597 deterministic rules: **+0.48 worker-hours**, and **hold-out shows a
+rule selected on U5's 9 convergences KILLS one of U3's 14.** Deployed rule: **zero false kills over
+23 banked convergences, 6.90× margin — spend no more here.** The underlying measurement stands and
+is reusable: U3's convergence is **bimodal** — all 14 convergences finished in **≤29 epochs**
+(median 16) while the 86 non-convergences ran to the 52-epoch cap, **the majority of the run.**
 
-### R2 — deflation. *Attacks the largest measured waste after R1.*
+### R2 — deflation. *Attacks the largest measured waste after R1.* Detail: `OPTIONS.md` §B.
 
 **NINE** of U3's 14 convergences landed on three solutions, and **U5 made it cross-unit: a second
 100-attempt budget at 57 core-hours bought exactly ONE solution the first run had not reached.**
-Newton keeps finding what it has already found, across runs, from a different seed pool. **Deflated
-continuation (Farrell–Birkisson–Funke)** removes located solutions from the residual so the same
-Newton cannot reconverge — converting re-finds into new orbits and improving the R0 metric directly.
-Well established, absent here, matched to the largest measured waste here. **Deflate against the
-union of both runs' solutions.**
+Newton keeps re-finding what it has found, across runs, from a different seed pool. **Deflated
+continuation (Farrell–Birkisson–Funke)** removes located solutions from the residual, converting
+re-finds into new orbits and improving the R0 metric directly. Well established, absent here,
+matched to the largest measured waste here. **Deflate against the union of both runs' solutions.**
 
-### R3 — multiple shooting. *Standard in this field and absent here.*
+### R3 — multiple shooting. *Standard in this field and absent here.* Detail: `OPTIONS.md` §B.
 
-Route-DSSP brick **B6's own spec already names it** — *"the seeded Newton–Krylov / multiple-shooting
-layer"* — and U1 built the hookstep/trust-region globalisation without it. Splitting the period into
-segments is the standard conditioning fix for long orbits, and long orbits are where the published
-targets live. A build unit with its own milestone.
+Route-DSSP brick **B6's own spec names it** — *"the seeded Newton–Krylov / multiple-shooting layer"*
+— and U1 built the hookstep/trust-region globalisation without it. Segmenting the period is the
+standard conditioning fix for long orbits, and long orbits are where the published targets live.
 
 ### R4 — a second-order-in-time stepper. *Realization change; needs its own milestone.*
 
@@ -433,34 +431,8 @@ not dropped because the ambition went up.
 
 # History — retracted and superseded text, kept struck rather than deleted
 
-**§3j's remedy for this file's cap.** Nothing below is live; it is retained because a wall's history
-is the point: a reader who finds only the corrected claim cannot tell whether it was ever wrong.
-Full elaboration is in the journals and in git.
-
-## W2's crack and Lane T's item 3 — the same claim, struck
-
-> ~~Leg 348 located `arXiv:1902.00384` — **a certified periodic orbit of 3D Navier–Stokes with the
-> viscous term inside the certified equation, on the three-torus.** Natively 3D, natively
-> time-dependent, genuinely viscous, genuinely fluid. Not a blow-up, so it does not fill leg 174's
-> Grade-A/fluid **blow-up** cell — but the *technology* clears W2's bar already, and only the
-> *target* is missing.~~
-
-**RETRACTED by `T4` / leg 393 (`2c87244`)**, from the authors' own data package and not from prose:
-`N_x3 = 0` in Table 1 and in `Nrec`; decoded arrays of **extent 1** in `x₃`;
-`max|u⁽³⁾| = max|ω⁽¹⁾| = max|ω⁽²⁾| = 0.0` **exactly** while `max|ω⁽³⁾| = 1.6351 / 1.5274`, so the
-zeros are structure and not an empty array; `setup = '2D'`. The authors say why: a 3D solution's
-memory cost is *"for now, prohibitive."* **Certified by exactly the banned apparatus
-besides**, and **VERIFIED by `V-W2` from a re-fetched artefact whose SHA-256 matched the banked
-digest.** Leg 348 read it **at abstract level only and flagged that limit itself.**
-
-## The `2409.09234` census correction, and the Conductor-wording defect inside it
-
-**The record's own ground is the FIRST clause, not the second** — this file and the dispatch that
-quoted it had the two the wrong way round. **(i) PRIMARY**, `T6` verbatim: *"THIS PAPER CLOSES NO
-TAIL-DOMINATION ESTIMATE AND IS NOT AN INSTANCE OF THAT TECHNOLOGY AT ALL"* — its rigorous content is
-a theorem about a **1-D map fitted to DNS data**, and `V-W2` re-measured all five term counts at
-**0**. **(ii) SECONDARY** — *struck:* ~~"its domain carries no-slip walls, not periodicity"~~; the
-paper never uses *"no-slip"* and states a moving-wall Dirichlet condition with *"periodicity …
-enforced to the rest of boundaries"* (§2, p.4), and the dropped clause was the substance. **Count
-unchanged: 6 − 1 = 5.** **Second Conductor-wording defect a verifier has caught** (`V1` caught the
-first, on `R0`'s comparand) — **neither found by the Conductor.**
+**MOVED 2026-08-18 to `WALLS_HISTORY.md`, struck text intact and byte-for-byte.** WALLS.md's §3j cap
+is 32 KB and the named remedy — *retracted text stays struck but moves to a `## History` section at
+the foot* — had stopped buying headroom once the section itself grew to ~2.9 KB. The remedy is
+extended one step rather than abandoned: **nothing is deleted, nothing is unstruck**, and every
+`## History` pointer in this file now resolves to `WALLS_HISTORY.md`. Flagged, not silent.

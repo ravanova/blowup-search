@@ -49,19 +49,18 @@ is in the BASIN STRUCTURE, not the seed supply.**
 | id | option | cost | why deferred | re-opens if |
 |---|---|---|---|---|
 | **A** | Spend the rest of the anchored pool — 141 attempts | ≈10.7 h | Grows the in-band arm 60 → 72 only. Lowest information per hour of the five, and buys supply. | Never on its own merits. |
-| **B** | Relax the admission window to Chandler–Kerswell's `R_thres = 0.3` | ≈0.9 h re-mine + 0.0713 h/attempt (≈8 h for 100) — **but see the ~8× warning below** | Buys supply. Leaves the realization intact, so the U3/U5 baselines stay comparable — U5's second choice. **The supply multiplier cannot be read off U5's library** (pruned at 0.25); the re-mine is what measures it. | ~~E's diagnostic shows the in-band conversion penalty is *not* intrinsic.~~ **DID NOT FIRE — `E` returned and the penalty did not weaken.** One thing `E` left live: **the `R < 0.25` window remains a confound `E` could not separate**, and 1 of its 16 seeds deliberately sat outside it. So B re-opens only as *a measurement of that confound*, never as a supply buy. |
+| **B** | Relax the admission window to Chandler–Kerswell's `R_thres = 0.3` | ≈0.9 h re-mine + 0.0713 h/attempt (≈8 h for 100) (**wall**-h at 8 workers; the ~8× warning below is REFUTED) | Buys supply. Leaves the realization intact, so the U3/U5 baselines stay comparable — U5's second choice. **The supply multiplier cannot be read off U5's library** (pruned at 0.25); the re-mine is what measures it. | ~~E's diagnostic shows the in-band conversion penalty is *not* intrinsic.~~ **DID NOT FIRE — `E` returned and the penalty did not weaken.** One thing `E` left live: **the `R < 0.25` window remains a confound `E` could not separate**, and 1 of its 16 seeds deliberately sat outside it. So B re-opens only as *a measurement of that confound*, never as a supply buy. |
 | **C** | Carry `m` as an unknown in the residual (= Lane R's **R5**) | own milestone, ≈10 h compute + solver work | Changes the realization, so M1's reproduction no longer compares attempt for attempt. **U5 priced it: 334 anchored in-window candidates, 58.1% of the window, but only 1 in the published band.** Not a band fix — the fix for `\|s\| > 0.9`. | On its own merits as the largest measured hole in the trial space, **not** as a route to the named rows. |
 | **D** | Raise supply at source — longer DNS or finer `N` | ≈3.4 h per extra `T=1e5` + ≈0.9 h re-mine, plus attempts | Most expensive, buys supply, does nothing about H-hard. `N` refinement invalidates the banked library. | Only if the object itself changes and a fresh library is needed anyway. |
 
-**`E` — THE H-HARD DIAGNOSTIC. TAKEN, LANDED `d0d72b1`, gate ANSWERED, `UNVERIFIED`.** Result:
-`experiments/journal/prog_r4_e.md`, data `writeup/data/p2_prog_r4_e_v1.json`. **2 of 16 converged, 0
-recovered any named row**; both convergences are genuine solutions of this realization that are
-**not** their rows, both below the 0.15 `|s|` shelf; positive control recovered a perturbed banked
-orbit at `‖R‖ 1.5e-10` **through this unit's own predicate**; scrambled negative control failed as
-planted. Diagnostics (1) `PULL_TO_LOW_S`, (2) `MIXED` (`p = 0.9317`). **`E-ii` (→ `R4`) has its
-antecedent satisfied and `E-iii` (→ `R3`/`R2`) fired; the re-ranking between them is NOT made.**
-*(Stale row struck 2026-08-18: this entry read "IT DID NOT RETURN … branch `prog-r4/e-hhard` at
-`6a706f7`", which described the wave-1 host kill. `E` was re-run and landed.)*
+**`E` — THE H-HARD DIAGNOSTIC. TAKEN, LANDED `d0d72b1`, gate ANSWERED, `UNVERIFIED`.** **2 of 16
+converged, 0 recovered any named row** (both are genuine solutions of this realization that are not
+their rows, both below the 0.15 `|s|` shelf); positive control **R** at `‖R‖ 1.5e-10` through the
+unit's own predicate; diagnostics (1) `PULL_TO_LOW_S`, (2) `MIXED` (`p = 0.9317`). **`E-iii` fired
+(→ `R3`/`R2`), `E-ii`'s (→ `R4`) antecedent is satisfied; the re-ranking between them is NOT made.**
+`V-W3` reproduced all six figures. Detail: `experiments/journal/prog_r4_e.md`,
+`writeup/data/p2_prog_r4_e_v1.json`. *(Struck 2026-08-18: this read "IT DID NOT RETURN … `6a706f7`",
+which described the wave-1 host kill. `E` was re-run and landed.)*
 
 **`U4`/`G2`, the basin radius — BLOCKED, not an option.** It needs a recovered *named* orbit to
 perturb and there is not one; direct seeding at the published `(T, s)` was the last cheap route and
@@ -69,12 +68,15 @@ returned **0 of 16**, so `U4` is blocked behind a *realization or method* change
 **`G1` stays `UNDER-RESOURCED` — `E` did not write to it**: a hand-placed seed at published
 coordinates is not a mined seed.
 
-**THE COST MODEL UNDER ALL FOUR OPTIONS IS WRONG BY ~8×, MEASURED.** `E` was commissioned at
-`0.0713 h/attempt` and measured **≈0.57 h/attempt** (5.687 core-hours + 0.806 h controls, 16
-attempts). **The reason is structural: good seeds do not fail fast** — `0.0713` came from runs
-dominated by quick rejections. **Every `h/attempt` above is a floor**, whenever the seeds beat U3's
-mined ones. Costs `E` priced but did not buy: field ensemble **≈91 ch**, `N=48` lift **≈730 ch**,
-closing diagnostic (2)'s coverage gap **122.1 ch**.
+**⚠ ~~THE COST MODEL UNDER ALL FOUR OPTIONS IS WRONG BY ~8×.~~ REFUTED 2026-08-18 by `V-W3`
+(`2b8755e`) — NO OVERRUN; THE `8×` WAS A UNITS ERROR.** `0.0713` is **WALL**-h/attempt at **8
+workers**, `0.57` is **CORE**-h/attempt. Like for like: U5's model predicts `0.0713 × 8 = 0.5704`
+core-h, `E` measured `9.08843/16 = 0.56803` — **ratio 0.9958, 0.4% UNDER**; the `8×` is `core ÷ wall`
+and equals the worker count (`7.967`). The structural story is contradicted too: `E` ran **21.44**
+epochs/attempt vs U5's **21.95** at **95.389 s/epoch** vs a 95 s model — **both factors accurate.**
+~~*every `h/attempt` above is a floor*~~ **WITHDRAWN**; the figures above are wall-hours at 8 workers
+and sound as written. Priced but not bought: field ensemble **≈91 ch**, `N=48` lift **≈730 ch**,
+diagnostic (2)'s coverage gap **122.1 ch**.
 
 ## B. Lane R — the units not taken
 
@@ -104,42 +106,36 @@ hookstep. It returned **`MIXED`** (97.1% constrained, `p = 0.9317`) — **not
 removes re-finds **within** a run, not **between** runs; any comparison must state its convention, and
 the denominator is **worker-hours** — physical core count appears in no numeric field of either JSON.
 
-## C. Lane V — the viscous rung. **ACTIVE, PRIORITY LANE (user ruling 2026-08-14).**
+## C. Lane V — the viscous rung. ~~*ACTIVE, PRIORITY.*~~ **HELD 2026-08-18 on `V3`'s return.**
 
-**The ruling's reason, in its own terms: Lane V decides whether any path exists** — `W3` is the rung
-determining whether **Tier 3 is reachable in principle**, and the information is worth as much on the
-negative branch as on the positive one.
+**The lane's premise was measured and it did not hold.** `V3` (leg 399, `16ba44e`) graded 9 fluid
+blow-up CAPs against leg 174's **own, unchanged** criterion: **`arXiv:2509.25116` (Hou–Wang–Yang)
+passes both clauses** — interval arithmetic (§7.3 p.55) enclosing a solution of a system carrying
+`−ΔŨ` (Prop. 1 eq. (1.15) p.5) for the **unforced 3D incompressible Navier–Stokes equations** — and
+had **never been graded here**. 8 rows `NO`, clause quoted per row; legs 309/342/123 **cited, not
+redone**. Reading (a) — *a YES kills Lane V's premise* — **FIRED, honoured as written.**
 
-**⚠ THIS LANE HAS LANDED ZERO UNITS.** `V1` became a verifier; **`V2` was dispatched in wave 3 and
-died without committing a byte** (no branch, no commit). `V3` is the lane's first owned measurement.
+**BUT THE OBJECT IS NOT A BLOW-UP** (paper's §1.2 p.2: forward self-similar, singular data,
+*"smooth for positive times"*), and **W3's prose test requires a finite-time singularity while leg
+174's criterion — named in the same sentence as `V3`'s predicate — does not.** Which governs is (Q1)
+of an **OPEN user escalation**, `ESCALATION_W3_WORDING_2026-08-18.md`. **W3: DISPUTED / UNRULED, not
+ruled by the Conductor; HELD rather than KILLED is the consequence.** **The YES is UNAUDITED:** one
+database, title-screened, S2 banked a **gap not a zero** (no key here).
 
-**⚠ COVERAGE CORRECTION 2026-08-18 (§3i q4).** ~~*leg 242 confirms nobody filled it since*~~ is
-**over-read**: leg 242's gate is an **author-line** question about Dahne–Figueras, answered `NO` on
-both clauses over twelve author nets — it closes the CGL line, **not the cell** — and **its own
-control net surfaced six fluid blow-up computer-assisted proofs it graded against nothing.** Leg
-174's matrix rests on an 11-row hand-built ledger recording a **Tier** ceiling and **no coverage
-ceiling**. **Nothing measures that anyone DID fill the cell.** See `WALLS.md` W3.
+**HELD UNITS — all three wait on the ruling, because what they should test depends on it.**
+- **`V3-audit`, 4–8 h** — adversarial full-text audit of `2509.25116` to leg-309 depth, incl. the
+  localisation step to a genuine Leray–Hopf solution. *Decides whether the YES survives contact.*
+- **`V-net`, 6–10 h** — a real coverage net, ≥8 nets over ≥3 databases plus author pages. **Needs an
+  S2 or OpenAlex key**, or half the channels bank `THROTTLED`.
+- **`V2`** (wave 3 killed it without a byte) — name a dissipative fluid target, open the feasibility
+  of a C1-compliant apparatus against it. **Re-opens only if the ruling leaves the cell empty of a
+  certified singularity.**
 
-**Two record items point here, and neither was found by looking for it:** **`O1`, leg 315's
-Taylor-model flow-map build** (§F) — the genuinely new item C1 bought, a flow map on a
-finite-dimensional ODE that *"needs **no function space**"* — found by `T5` while sweeping for Lane T
-and pointing at **this** lane; and **leg 174's own diagnosis** that the cell is empty *"for want of a
-target, not a method"*, which makes **naming the target** this lane's first job.
-
-**Binding on every unit here: C1's naming requirement**, unwaivable by the Conductor — name the
-apparatus with a citation, and show it does not construct a single bounded approximate inverse
-uniform in `M`. Absent both, the ℓ¹-Fourier/radii-polynomial ban applies in full. **And C1 may not be
-cited as evidence any apparatus closes**, for this or any object class.
-
-**Both bans are clear of this lane's opening move** (`writeup/escalations/RULING_BAN_WORDING_2026-08-13.md`):
-**B1** struck *"which needs L1 first"* from stage V's lift clause, and **C1** put a
-Galerkin-plus-tail dynamical closure outside the ℓ¹-Fourier/radii-polynomial ban. **A fluid transport
-target attacked with a dynamical closure is outside both bans**, subject in full to C1's naming
-requirement.
-
-**Held units: `V2`** — name a dissipative fluid target (1D, any model, dissipative term inside the
-certified equation) and open the feasibility of a C1-compliant apparatus against it. **DEFERRED after
-wave 3 killed it; re-opens the moment `V3` says the cell is still empty.**
+**C1 binds every unit here, not waivable by the Conductor:** name the apparatus with a citation and
+show it constructs no single bounded approximate inverse uniform in `M`; absent both, the ban applies
+in full. **C1 may not be cited as evidence any apparatus closes for any object class.** **B1** struck
+*"which needs L1 first"* from stage V's lift clause, so a fluid transport target attacked with a
+dynamical closure is **outside both bans**.
 
 ## D. Lane L — the last obligations. **ACTIVE, PRIORITY LANE (user ruling 2026-08-14).**
 
