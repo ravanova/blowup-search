@@ -1,0 +1,200 @@
+{
+  "unit": "V-W3",
+  "wave": 4,
+  "role": "wave-3 verifier (covers waves 1 and 3 only; NEVER wave 4)",
+  "branch": "verify/wave3",
+  "date": "2026-08-18",
+  "journal": "experiments/journal/verify_wave3.md",
+  "rederivation_script": "experiments/verify_wave3_rederive.py",
+  "how_to_run": "python3 experiments/verify_wave3_rederive.py  (offline core; exit 0 iff every re-derivation agrees). Independent legs, additive, each UNREACHABLE rather than failing when absent: --net (re-fetch and SHA-256 the three sources), --saveddata DIR (re-decode the authors' .mat; needs scipy), --pdf FILE (recount T4's C+/C- terms; needs pdftotext).",
+  "checks_executed": 180,
+  "check_disagreements": 0,
+  "method": "Every number below is recomputed from writeup/data/*.json, from experiments/programme_r4/*.json, from source parsed with ast/tokenize, from git ls-tree over the landing commit, or from third-party bytes re-fetched today. No number is taken from a journal sentence. Where a claim's own summary field exists it is checked AGAINST a recount of the per-row records, not read.",
+
+  "item_1_unit_E_headline": {
+    "claim_as_recorded": "16 attempts, 2 converged, 0 recovered any named row; a positive control passing at ||R|| ~ 1.5e-10 through E's own predicate; diagnostic (i) PULL_TO_LOW_S; diagnostic (ii) MIXED with p = 0.9317",
+    "source_artefact": "writeup/data/p2_prog_r4_e_v1.json",
+    "how_rederived": "recounted the 16 rows of diagnostic_3.attempts directly (reason, success, recovered_named_orbit, recovered_any_named_orbit, matched_row) and then checked the diagnostic_3 summary block agrees with the recount; read the control block's own predicate field; read diagnostic_1.verdict and diagnostic_2.verdict/permutation_p",
+    "values_i_got": {
+      "n_attempts_recounted": 16,
+      "n_reason_converged_recounted": 2,
+      "n_success_flag_recounted": 2,
+      "n_recovered_its_own_row_recounted": 0,
+      "n_recovered_any_named_row_recounted": 0,
+      "n_matched_row_not_null": 0,
+      "summary_block_agrees_with_recount": true,
+      "control_R_final_residual": 1.5243710606417483e-10,
+      "control_R_harness_predicate_says_recovered": true,
+      "control_R_recovered": true,
+      "control_P_final_residual": 7.750376115652152e-09,
+      "controls_fired_as_planted": true,
+      "control_failures": [],
+      "diagnostic_1_verdict": "PULL_TO_LOW_S",
+      "diagnostic_1_n": 23,
+      "diagnostic_2_verdict": "MIXED",
+      "diagnostic_2_permutation_p": 0.9316534173291335,
+      "diagnostic_2_permutation_p_to_4dp": 0.9317
+    },
+    "verdict": "CONFIRMED",
+    "discrepancy": null,
+    "nuances_banked_not_defects": [
+      "The 1.5e-10 figure belongs to control R alone. E ran TWO positive controls; the other, P, lands at ||R|| = 7.75e-09. Both are banked, both are labelled, and only R carries harness_predicate_says_recovered = true, so the claim is exact as stated -- but 'a positive control' is the correct article, not 'the'.",
+      "diagnostic (1)'s PULL_TO_LOW_S is measured on the n = 23 CONVERGED subset. The same statistic over all 200 banked attempts returns NO_PULL (median drift -0.0239, 120/80, sign-test p = 0.00569). Both readings are in the artefact and E's own TECHNICAL write-up states the secondary; the headline is a subset statement and must be quoted as one."
+    ]
+  },
+
+  "item_2_unit_E_cost": {
+    "claim_as_recorded": "E overran its commissioning estimate by ~8x: ~0.57 h/attempt (5.687 core-hours + 0.806 h of controls, over 16 attempts) against a commissioning figure of 0.0713. Recorded at STATE.md:178-179, OPTIONS.md:72-74, experiments/journal/prog_r4_e.md:393-394 and :474-476, writeup/4_p2_lottery/TECHNICAL_P2_PROGR4_HHARD.md:212.",
+    "source_artefacts": [
+      "writeup/data/p2_prog_r4_e_v1.json (diagnostic_3.resourcing, diagnostic_3.attempts)",
+      "experiments/journal/prog_r4_u5.md:405 (the definition of 0.0713, parsed by regex, not read as prose)",
+      "experiments/programme_r4/u5_m3_ledger.json (U5's per-epoch ledger)"
+    ],
+    "how_rederived": "summed diagnostic_3.attempts[].wall_seconds and [].n_iters; checked resourcing.core_hours against wall_seconds * workers / 3600; parsed the unit of 0.0713 out of prog_r4_u5.md with a regex on 'h <unit> per attempt at N workers'; converted both sides to CORE-HOURS PER ATTEMPT; counted U5's epochs by len(ledger) over its 100 attempts",
+    "values_i_got": {
+      "E_banked_core_hours": 5.687335857417849,
+      "E_banked_core_hours_identity_holds": "2047.4409086704254 s * 10 workers / 3600 = 5.687335857417849",
+      "E_control_hours": 0.805709578593572,
+      "E_sum_of_per_attempt_wall_core_hours": 9.08842624425888,
+      "E_epochs": 343,
+      "E_seconds_per_epoch": 95.38873026044307,
+      "E_epochs_per_attempt": 21.4375,
+      "the_records_own_arithmetic_(5.687+0.806)/16": 0.4058153397507138,
+      "where_0.57_actually_comes_from": "9.08842624425888 core-hours / 16 attempts = 0.56802664026618",
+      "commissioning_figure_0.0713_its_unit": "WALL hours per attempt at 8 workers (experiments/journal/prog_r4_u5.md:405, verbatim: '0.0713 h wall per attempt at 8 workers')",
+      "commissioning_figure_in_core_hours_per_attempt": 0.5704,
+      "like_for_like_ratio_E_over_U5_core_hours_per_attempt": 0.9958391309014375,
+      "the_claimed_ratio_reproduced_only_by_mixing_units": 7.9667130472115,
+      "U5_epochs_from_its_own_ledger": 2195,
+      "U5_epochs_per_attempt": 21.95
+    },
+    "verdict": "REFUTED",
+    "discrepancy": {
+      "the_8x_is_not_real": "Like for like, in core-hours per attempt, E measured 0.5680 against a commissioning model of 0.0713 wall-h/attempt x 8 workers = 0.5704. Ratio 0.996. E came in 0.4% UNDER its commissioning estimate, not 8x over.",
+      "0.0713_is_not_the_like_for_like_comparison": "0.0713 is WALL-hours per attempt on 8 concurrent workers. 0.57 is CORE-hours per attempt. The ~8x is exactly and only U5's worker count: 0.56803 / 0.0713 = 7.967 ~ 8. It is a units error, not an overrun.",
+      "size_of_the_units_error": "factor 8.0 (the worker count); the true overrun factor is 1.00",
+      "second_independent_arithmetic_defect": "The parenthetical '(5.687 core-hours + 0.806 h controls, 16 attempts)' does not evaluate to 0.57. It evaluates to 0.4058. The 0.57 figure comes from a different, unquoted quantity -- the sum of per-attempt wall, 9.088 core-hours, over 16. Size: the stated derivation is off by a factor 1.400.",
+      "the_structural_explanation_is_also_unsupported": "The record explains the overrun by 'a plausible seed runs 20-31 epochs before the stall rule fires, while the model was calibrated on U5 attempts that stall early'. Measured: E 343/16 = 21.44 epochs/attempt, U5 2195/100 = 21.95 epochs/attempt. E used 2.3% FEWER epochs per attempt than U5, not more. E's realised cost of an epoch, 95.39 s, is within 0.4% of the 95 s the commissioning model prices one at. The cost model was accurate in both of its factors.",
+      "collateral_finding": "experiments/journal/prog_r4_u5.md:405 states '2,104 epochs / 100 attempts'; its own banked ledger experiments/programme_r4/u5_m3_ledger.json holds 2195, and E's diagnostic_2.n_epochs independently reports 2195. Size: 91 epochs, 4.3%.",
+      "what_is_NOT_wrong": "E's forward pricing table (prog_r4_e.md:400 onward) is internally consistent and correct: it prices from 9.088/16 = 0.568 core-h/attempt and converts to wall correctly (160 attempts -> ~91 core-hours -> ~11 h wall at 8 workers). Only the overrun COMPARISON is defective. The downstream statement 'THE COST MODEL UNDER ALL FOUR OPTIONS IS WRONG BY ~8x, MEASURED' (OPTIONS.md:72) does not survive; the cost model is right."
+    }
+  },
+
+  "item_3_verify_the_verifier_V_W2": {
+    "claim_as_recorded": "V-W2 (594ff89) re-measured four wave-2 items and reports all four reproduce; its stated method includes re-fetching sources and recording SHA-256.",
+    "source_artefacts": [
+      "writeup/data/p2_verify_wave2_v1.json (V-W2's own record)",
+      "writeup/data/p2_route_t4_v1.json, p2_route_t5_v1.json, p2_route_t6_v1.json (the PRIMARY artefacts V-W2 was checking)",
+      "experiments/p2_route_t4_v1_evidence.py (V4_REPRODUCED threshold, read from source)",
+      "third-party bytes re-fetched by me on 2026-08-18"
+    ],
+    "part_a_four_remeasurements": {
+      "how_rederived": "each of the four re-measured from the PRIMARY artefact and, where an independent leg existed, from the third-party bytes themselves; V-W2's own banked column then checked against mine",
+      "remeasurement_1_T4_2D_lift": {
+        "verdict": "CONFIRMED",
+        "values_i_got": {
+          "p1": {"table1_Nx3": 0, "solshape_Nrec": [17, 17, 0, 11], "x3_mode_extent": 1, "omega_shape": [35, 35, 1, 23, 3], "u_shape": [35, 35, 1, 23, 3], "max_abs_u3_repr": "0.0", "max_abs_omega1_repr": "0.0", "max_abs_omega2_repr": "0.0", "max_abs_omega3": 1.6351073366158, "setup": "2D"},
+          "p2": {"table1_Nx3": 0, "solshape_Nrec": [21, 21, 0, 16], "x3_mode_extent": 1, "omega_shape": [43, 43, 1, 33, 3], "u_shape": [43, 43, 1, 33, 3], "max_abs_u3_repr": "0.0", "max_abs_omega1_repr": "0.0", "max_abs_omega2_repr": "0.0", "max_abs_omega3": 1.5274264613264072, "setup": "2D"}
+        },
+        "independent_leg": "re-decoded {data,extra}orbit{1,2}.mat out of the zip I downloaded myself today; every field above reproduces BITWISE, including ||u||_X = 10.070710173304683 (p1) and 12.557400068291274 (p2)"
+      },
+      "remeasurement_2_T4_first_conjunct_and_negative_control": {
+        "verdict": "CONFIRMED",
+        "values_i_got": {
+          "criterion_4_32_recomputed_from_the_four_published_constants": "Z0+Z1, 2*Y0*Z2, (1-Z0-Z1)^2 and the discriminant all reproduce bitwise for both rows; criterion met on both",
+          "r_min_r_max_recomputed_bitwise": true,
+          "the_four_relative_deviations": {"p1.r_min": 2.434836388617244e-10, "p1.r_max": 0.0, "p2.r_min": 8.334721598932383e-13, "p2.r_max": 5.6180654069261824e-15},
+          "smallest_nonzero_of_the_four": 5.6180654069261824e-15,
+          "r_sol_Omega_rel_dev_vs_printed_both_rows": 0.0,
+          "norm_check_delta": 5.2748360311577114e-06,
+          "V4_REPRODUCED_threshold_parsed_from_the_evidence_script": 0.001,
+          "term_counts_C_plus_recounted_by_me_off_the_pdf": {"approximate inverse": 7, "newton-kantorovich": 4, "interval arithmetic": 5, "intlab": 2},
+          "term_counts_C_minus_recounted_by_me_off_the_pdf": {"self-consistent": 0, "a priori bounds": 0, "isolating": 0, "trapping region": 0, "logarithmic norm": 0, "dynamical closure": 0},
+          "zgliczynski_lines_in_the_pdf": 1,
+          "that_line_is_bibliography_item_48": true
+        },
+        "nuance_banked": "the gate's '5.6e-15' is the SMALLEST NON-ZERO of four cells. One cell (p1.r_max) is exactly 0.0 and two others are 2.4e-10 and 8.3e-13. 'relative deviations down to 5.6e-15' is true of one cell in four; V-W2 reports all four, and pre-registered that reading before computing. No defect."
+      },
+      "remeasurement_3_T6_table": {
+        "verdict": "CONFIRMED",
+        "values_i_got": {"n_fulltexts": 7, "n_fulltext_MEASURED": 7, "n_fulltext_UNREACHABLE": 0, "n_fulltext_THROTTLED": 0, "verdict_recount_from_the_seven_rows": {"strengthen": 4, "UNDERCUT": 2, "confirm": 1}, "banked_verdict_counts_agree_with_the_recount": true, "the_two_UNDERCUTs": ["1902.00384", "2409.09234"]}
+      },
+      "remeasurement_4_T5_sweep": {
+        "verdict": "CONFIRMED",
+        "values_i_got": {"landing_commit_of_p2_route_t5_v1_json": "3cab83ed2dc9", "my_corpus_re_enumeration_files": 1428, "my_corpus_re_enumeration_lines": 417476, "n_findings": 7, "classification_recount": {"APPARATUS": 5, "REALIZATION": 2}, "reopenable": ["F1", "F2"]},
+        "how_rederived": "git ls-tree -r at the landing commit, filtered to *.md and *.py, minus the corpus's own excluded_by_name list, then git cat-file over every blob to count newlines -- I did not re-run T5's sweep"
+      }
+    },
+    "part_b_sha256_method": {
+      "question": "does the re-fetch-and-hash method actually appear in the artefacts with hashes present and reproducible, or is it claimed in prose only?",
+      "verdict": "CONFIRMED -- it is in the artefact, not only in prose, and it reproduces today",
+      "where_it_lives": "writeup/data/p2_verify_wave2_v1.json -> independent_artefacts_refetched, three sources, each with url, http, my_sha256, banked_sha256, match",
+      "my_refetch_2026_08_18": {
+        "https://arxiv.org/pdf/1902.00384": {"bytes": 874126, "my_sha256": "97e81647e108b8d73122c5e0c9fdc11da3ed291abb724519eab7f9ad74a05d29", "matches_V_W2": true},
+        "https://www.math.vu.nl/~janbouwe/code/navierstokes/navierstokes-code.zip": {"bytes": 4851078, "my_sha256": "edf64bc0cf099ed6cf96cc6931da02461068f61e58cfb2ea0a804f4a20c7ac5f", "matches_V_W2": true},
+        "https://arxiv.org/pdf/2409.09234": {"bytes": 4533748, "my_sha256": "7a3c8ac94b0af8658d30b7f7e4185a8850427263bb44f5b4f840629d3d3042b3", "matches_V_W2": true}
+      },
+      "corroboration": "two of the three hashes are also carried independently by the PRIMARY artefact writeup/data/p2_route_t4_v1.json, so V-W2's hash column is checkable against a record it did not write"
+    },
+    "verdict": "CONFIRMED"
+  },
+
+  "item_4_fig107": {
+    "claim_as_recorded": "fig107 is absent from the P2_EVIDENCE structure in writeup/build_figures.py (OPTIONS.md:256, STATE.md:182 and :217, experiments/journal/prog_r4_e.md:460-463)",
+    "source_artefact": "writeup/build_figures.py, parsed",
+    "how_rederived": "ast.parse of the module, ast.literal_eval of the P2_EVIDENCE assignment, then the figure ids read off the literal's own source line range via the trailing '# figNNN' comment on each entry (the id is in the comment, not in the path string, for all but two entries); separately tokenize.generate_tokens to locate every occurrence of the token text 'fig107' by token type. No eyeballing.",
+    "values_i_got": {
+      "P2_EVIDENCE_is_a_list_of": 36,
+      "distinct_figure_ids_named": 36,
+      "registered_ids": [48, 49, 50, 51, 52, 55, 56, 58, 59, 60, 61, 64, 65, 66, 67, 68, 69, 71, 73, 74, 76, 77, 79, 80, 82, 99, 100, 101, 102, 103, 104, 105, 106, 108, 109, 110],
+      "107_in_registered_ids": false,
+      "fig107_in_any_P2_EVIDENCE_path_string": false,
+      "fig107_occurrences_in_STRING_tokens": 0,
+      "fig107_occurrences_in_COMMENT_tokens": 2,
+      "those_comment_lines": [401, 402],
+      "what_those_comments_are": "the dispatch notes inside fig108's and fig109's own entries, each recording that fig107 was allocated to U5 -- so the file records the allocation and never registers the figure",
+      "neighbours_that_ARE_registered": [99, 103, 104, 105, 106, 108, 109, 110],
+      "fig107_drawing_script_exists_on_disk": "writeup/figures/fig107_prog_r4_m3_shift_strata.py",
+      "fig107_png_is_banked": "writeup/figures/fig107_prog_r4_m3_shift_strata.png",
+      "fig107_is_cited_in_writeup_INDEX_md": true
+    },
+    "verdict": "CONFIRMED",
+    "defect_size": "one missing list entry. fig107 is the only gap in the 99-110 block: 99 and 100-106 and 108-110 are all registered. The figure is drawn, banked and cited in writeup/INDEX.md, so it is rebuilt by nothing and self-checked by nothing, and no build run detects it going stale against writeup/data/p2_prog_r4_m3_v1.json.",
+    "REPAIRED_BY_THIS_UNIT": false,
+    "why_not_repaired": "pre-committed reading (a): a verifier that repairs its own findings has destroyed the measurement. Flag, do not fix."
+  },
+
+  "verdict_table": {
+    "item_1_unit_E_headline": "CONFIRMED",
+    "item_2_unit_E_cost": "REFUTED",
+    "item_3_verify_the_verifier_V_W2": "CONFIRMED",
+    "item_4_fig107": "CONFIRMED",
+    "n_CONFIRMED": 3,
+    "n_REFUTED": 1,
+    "n_PARTIAL": 0,
+    "n_UNREACHABLE": 0
+  },
+
+  "honest_ceiling": {
+    "what_i_could_not_check_and_why": [
+      "I did not re-run a single Newton-GMRES-hookstep solve. Item (1) verifies that E's 16 attempt records are internally consistent, that its summary agrees with a recount of its own rows, and that its controls carry the fields they claim. It does NOT establish that those 16 solves were executed as described, or that the solver is correct. Re-running them is ~9.1 core-hours and was not bought.",
+      "E's two cost figures do not reconcile and I could not close the gap. resourcing.core_hours = 5.687 is documented as 'the relaunch only', while the sum of per-attempt wall over the same 16 rows is 9.088. The artefact carries no per-attempt provenance flag distinguishing relaunched attempts from those inherited from the launch the host killed, so I cannot say which subset the 5.687 covers. I used 9.088 for the like-for-like because it is the one derivable from the per-attempt rows; the conclusion of item (2) does not depend on the choice (using 5.687+0.806 gives 0.406 core-h/attempt, ratio 0.71 to the commissioning model -- still nowhere near 8).",
+      "Item (2) tests the ARITHMETIC of the overrun claim, not whether the commissioning brief was reasonable. Whether U5's 0.0713 wall-h/attempt SHOULD have been the basis for E's brief is a Conductor question, not a measurement, and I do not rule it.",
+      "For item (3) I re-derived V-W2's four re-measurements and its hash method. I did NOT re-derive the wave-2 UNITS themselves beyond what those four re-measurements touch: T4's, T5's and T6's gate ANSWERS, their pre-registration ordering, and their reading of what the papers mean are outside this gate.",
+      "T6's seven full texts: I re-fetched and hashed the two arXiv PDFs that V-W2 hashed. I did not re-fetch the other five full texts, so T6's per-paper deciding sentences are verified at the JSON level only, except for 1902.00384 where I recounted the terms off my own copy.",
+      "Item (4) confirms fig107 is unregistered. I did not run writeup/build_figures.py, so I have not shown that the other 36 entries actually build; only that they are registered.",
+      "WAVE 4 IS OUT OF TERRITORY BY DESIGN. V3 (leg/399-v3-gradeA) and L2' (leg/397-l2-decay) were not opened, not graded and not commented on. They land UNVERIFIED and wave 5 carries their verifier. This is a scope boundary, not an UNREACHABLE.",
+      "A defective ban WORDING, if any of the above touched one, would be a user escalation and not mine to rule. None of the four items reached one."
+    ],
+    "unreachable_count": 0,
+    "throttled_count": 0,
+    "note_on_banking": "UNREACHABLE and THROTTLED bank as themselves and never as zeros. This unit recorded none of either: every gate item was reachable. The independent legs (--net, --saveddata, --pdf) all ran and all agreed."
+  },
+
+  "clay_movement": {
+    "links_moved": 0,
+    "ceiling": "TIER 2",
+    "clay_odds": "~0.05%, unmoved",
+    "note": "VERIFICATION IS NOT MOVEMENT TOWARD CLAY. Three of four numbers checking out moves no L1->L4 link, and the one that did not check out is a bookkeeping defect, not a mathematical retreat. Scale is not evidence; Tier 2 is never a proof."
+  }
+}
