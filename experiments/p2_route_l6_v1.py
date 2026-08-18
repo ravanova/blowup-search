@@ -61,7 +61,8 @@ from scipy.optimize import minimize
 from scipy.special import lpmv
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from p2_route_l6_v1_ad import Var, einsum, grad_of, sqrt as ad_sqrt  # noqa: E402
+from p2_route_l6_v1_ad import (Var, concat0, einsum, grad_of,  # noqa: E402
+                               matvec_last, sqrt as ad_sqrt)
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "writeup" / "data" / "p2_route_l6_profile_v1.json"
@@ -277,6 +278,9 @@ class Geom:
         self.S, self.Sd = S, Sd
 
         # ---- handy broadcast constants ------------------------------------------------
+        # stacked synthesis operators: one matmul instead of three plus two adds
+        self.Eall = np.ascontiguousarray(np.concatenate(list(self.E), axis=0))
+        self.GEall = np.ascontiguousarray(np.concatenate(list(self.GE), axis=0))
         self.Lh = np.array([l * (l + 1) for (l, m) in self.harm], float)[:, None, None]
         self.rinv = (1.0 / self.r)[None, :, None]
         self.rr = self.r[None, :, None]
@@ -350,18 +354,13 @@ def _synth(g, comps):
     The (r, s, ang, component) ordering is chosen so that every large contraction below
     is already in `matmul` layout and no rank-4/5 array is ever transposed or copied.
     """
-    out = einsum("him,hpc->impc", comps[0], g.E[0])
-    out = out + einsum("him,hpc->impc", comps[1], g.E[1])
-    out = out + einsum("him,hpc->impc", comps[2], g.E[2])
-    return out
+    # ONE matmul over the stacked (radial, Psi, Phi) components, not three plus two adds
+    return einsum("him,hpc->impc", concat0(comps), g.Eall)
 
 
 def _synth_grad(g, comps):
     """-> tangential gradient tensor of the Cartesian components: (nq_r, ns, nP, 3, 3)."""
-    out = einsum("him,hpcj->impcj", comps[0], g.GE[0])
-    out = out + einsum("him,hpcj->impcj", comps[1], g.GE[1])
-    out = out + einsum("him,hpcj->impcj", comps[2], g.GE[2])
-    return out
+    return einsum("him,hpcj->impcj", concat0(comps), g.GEall)
 
 
 def weighted_L2_by_mode(g, aF, aQ):
@@ -442,8 +441,8 @@ def residual_field(g, aF, aQ):
     Wrad = (W * er).sum(axis=-1).reshape(sh[0], sh[1], sh[2], 1)
     Ve = V.reshape(sh[0], sh[1], sh[2], 1, 3)
     We = W.reshape(sh[0], sh[1], sh[2], 1, 3)
-    NL1 = Vrad * dW + ri * (Ve * SW).sum(axis=-1)     # (V.grad) w
-    NL2 = Wrad * dV + ri * (We * SV).sum(axis=-1)     # (w.grad) V
+    NL1 = Vrad * dW + ri * matvec_last(SW, V)         # (V.grad) w
+    NL2 = Wrad * dV + ri * matvec_last(SV, W)         # (w.grad) V
 
     return WS + A_SIM * (2.0 * W + rdW) - LW + NL1 - NL2, V, W
 

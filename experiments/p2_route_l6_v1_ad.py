@@ -194,6 +194,43 @@ def einsum(spec, var, const):
     return Var(val, (var,), lambda g: (fast_einsum(back, np.ascontiguousarray(g), const),))
 
 
+def concat0(vars_):
+    """Concatenate Vars along axis 0.  Lets the three vector-spherical-harmonic
+    components be synthesised by ONE matmul instead of three plus two adds."""
+    vals = [v.v for v in vars_]
+    sizes = [a.shape[0] for a in vals]
+    val = np.concatenate(vals, axis=0)
+
+    def vjp(g):
+        g = np.asarray(g)
+        out, k = [], 0
+        for n in sizes:
+            out.append(g[k:k + n])
+            k += n
+        return tuple(out)
+
+    return Var(val, tuple(vars_), vjp)
+
+
+def matvec_last(A, v):
+    """out[..., c] = sum_j A[..., c, j] v[..., j], with A, v Vars.
+
+    Fused: numpy's `einsum` does this in one pass with no rank-5 temporary, which is
+    3x faster forward and 6x faster in the reverse sweep than
+    `(v[..., None, :] * A).sum(-1)` on the shapes this leg uses.
+    """
+    Av, vv = A.v, v.v
+    val = np.einsum("...cj,...j->...c", Av, vv)
+
+    def vjp(g):
+        g = np.asarray(g)
+        dA = g[..., :, None] * vv[..., None, :]
+        dv = np.einsum("...c,...cj->...j", g, Av)
+        return (dA, dv)
+
+    return Var(val, (A, v), vjp)
+
+
 def backward(out):
     """Reverse sweep from a scalar Var.  Returns {id(Var): grad ndarray}."""
     topo, seen = [], set()
