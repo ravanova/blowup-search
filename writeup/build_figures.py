@@ -346,6 +346,18 @@ def fig_route_ivax_v1():
 # Phase-2 per-leg figures live in their own *_evidence.py next to their writeups, so that
 # each one rebuilds from its own curated JSON with no re-run. Registered here so that
 # `build_figures.py` rebuilds the whole figure set rather than only the Phase-1 half.
+#
+# ENTRY FORMS (all three appear below):
+#   "path"                       run it, and fail the rebuild if it exits non-zero.
+#   ("path", [args])             the same, for the few runners that emit their figure only
+#                                when asked (leg 302's --figure was the first).
+#   ("path", [args], [inputs])   the same, EXCEPT that the entry is SKIPPED, out loud and
+#                                counted, when one of `inputs` (paths relative to the repo
+#                                root) is absent. This exists for verification scripts whose
+#                                inputs are gitignored full texts: a missing artefact is
+#                                never a pass, so the entry refuses to run and SAYS SO,
+#                                rather than either passing quietly or taking the whole
+#                                figure rebuild down with it on a fresh clone.
 P2_EVIDENCE = [
     "4_p2_lottery/p2_route_tc_v1_evidence.py",      # fig48 -- Route-TC v1 (leg 53)
     # Legs 54-57 keep their evidence scripts in experiments/ (their declared territory in
@@ -401,6 +413,15 @@ P2_EVIDENCE = [
     "figures/fig108_prog_r4_r0r1.py",                           # fig108 -- PROG-R4 R0+R1, Lane R metric reconciliation and flatness abort; fig108 assigned at dispatch (fig107 to U5, fig109 to another worker in the same wave). The drawing script IS the rebuild path: it redraws from writeup/data/p2_prog_r4_r0r1_v1.json alone and re-runs no solver
     "figures/fig109_prog_r4_hhard.py",                          # fig109 -- PROG-R4 unit E, the H-hard diagnostic (leg 380, wave 1); fig109 assigned at dispatch (fig107 is U5's, fig108 another worker's in the same wave). The drawing script IS the rebuild path: it redraws from writeup/data/p2_prog_r4_e_v1.json and the two banked PROG-R4 records alone and re-runs no solve. Its 17 self-checks exit non-zero if the JSON stops supporting a panel
     "../experiments/p2_route_t4_v1_evidence.py",                # fig110 -- Route-T4 v1 (leg 393); fig110 assigned at dispatch. Redraws from writeup/data/p2_route_t4_v1.json alone: no network, no PDF, no .mat at rebuild time
+    # --- registered by unit D-REPAIR (wave 5), discharging V-W3's D6 and two Conductor debts
+    # held open until V-W3's measurement was banked. Neither is a new figure; both are rebuild
+    # paths that already existed and that this list had never been told about.
+    "figures/fig107_prog_r4_m3_shift_strata.py",                # fig107 -- PROG-R4 unit U5, milestone M3, the seed budget stratified by SHIFT (leg 380, wave 1). V-W3 measured its absence from this list as defect D6: the drawing script and the .png both existed and INDEX.md cited the figure, so fig107 was rebuilt by nothing and self-checked by nothing, and 107 was the ONLY gap in the 99-110 block. The drawing script IS the rebuild path: it redraws from writeup/data/p2_prog_r4_m3_v1.json (plus p2_prog_r4_g1_v1.json, read-only, for the U3 baseline) alone, re-runs no solve, and its 16 self-checks exit non-zero if the JSON stops supporting a panel
+    ("../experiments/p2_route_t6_v1_evidence.py", [], [         # NO FIGURE -- Route-T6 v1 (leg 394) allocated none, and this script draws none. It is registered as a VERIFICATION: its controls K1-K10 re-derive leg 394's checkable content from writeup/data/p2_route_t6_v1.json and the full texts, and exit non-zero on any failure. Registering it makes `build_figures.py` the one place that runs every landed rebuild-or-recheck path, which is what INDEX.md's quartet column already promised. The comment block above that says this list is "specifically for rebuilding figures" is superseded HERE ONLY, by the Conductor debt this entry discharges; the known-answer audits it names (Route-KA v1, Route-NKR v1) stay unregistered and are NOT this unit's to touch
+        "Papers/math_0005247.pdf", "Papers/2305.08221.pdf", "Papers/1902.00384.pdf",
+        "Papers/2409.09234.pdf", "Papers/2105.04148.pdf", "Papers/2009.12762.pdf",
+        "Papers/2308.01528.pdf",                                # ... its K6/K7 re-find every quoted deciding sentence and re-extract every page locator from these seven, which are gitignored on purpose. Absent, the script reports SKIPPED-NO-PDF and exits non-zero BY DESIGN -- "a missing artefact is never a pass" is its own wording. So it is declared with its inputs and skipped out loud when they are absent, rather than failing a figure rebuild that has nothing to do with them
+    ]),
 ]
 
 
@@ -408,16 +429,38 @@ def build_p2_evidence_figures():
     import subprocess
     import sys
     here = Path(__file__).resolve().parent
+    root = here.parent
+    skipped = []
     for entry in P2_EVIDENCE:
-        # An entry is either a path, or a (path, extra_args) pair for the few runners that
-        # emit their figure only when asked -- leg 302's --figure is the first such case.
-        rel, extra = (entry, []) if isinstance(entry, str) else entry
+        # See ENTRY FORMS above the list: a path, a (path, extra_args) pair for the few
+        # runners that emit their figure only when asked (leg 302's --figure was the first),
+        # or a (path, extra_args, required_inputs) triple for a verification whose inputs are
+        # gitignored.
+        if isinstance(entry, str):
+            rel, extra, required = entry, [], []
+        elif len(entry) == 2:
+            (rel, extra), required = entry, []
+        else:
+            rel, extra, required = entry
         extra = [a.format(figures=here / "figures") for a in extra]
         script = here / rel
         if not script.exists():
             print(f"  SKIP {rel} (not present)")
+            skipped.append((rel, "script not present"))
+            continue
+        absent = [r for r in required if not (root / r).exists()]
+        if absent:
+            # NOT a pass. The entry is not run and the reason is printed and counted.
+            print(f"  SKIP {rel} ({len(absent)} required input(s) absent, gitignored: "
+                  f"{', '.join(absent[:3])}{' ...' if len(absent) > 3 else ''})")
+            skipped.append((rel, f"{len(absent)} gitignored input(s) absent"))
             continue
         subprocess.run([sys.executable, str(script), *extra], check=True)
+    if skipped:
+        print(f"\n  {len(skipped)} P2_EVIDENCE entr{'y' if len(skipped) == 1 else 'ies'} "
+              f"SKIPPED and NOT verified:")
+        for rel, why in skipped:
+            print(f"    - {rel}: {why}")
 
 
 if __name__ == "__main__":
