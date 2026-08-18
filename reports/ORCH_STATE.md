@@ -75,6 +75,21 @@ nothing deleted, nothing unstruck**, every `## History` pointer resolving there.
 disk after each. `git ls-remote` checked before **both** integrations: **no concurrent push**; `origin/main` and
 local `main` agreed at `950115f`, then at `6320790`.
 
+### Wave 5 — PLANNED AND COMMITTED BEFORE DISPATCH
+
+**`writeup/waves/WAVE5_PLAN.md` @ `1e49a00`.** Three units: **`L5`** (Lane L, CONSTRUCTION, first)
+attacking **W4 clause (b)**, the natively finite-energy ansatz; **`D-REPAIR`** for `V-W3`'s D2–D6
+plus the four held Conductor debts; **`V-W4`** (LAST) verifying wave 4. §3f rule 3, §3h composition
+floor and §3i q7 all discharged by named units.
+
+**A SECOND §3j MECHANISM, FLAGGED NOT SILENT.** The gates are in a committed plan file and
+`STATE.md` carries the wave-5 block **by pointer to that SHA** — plan committed first, pointer
+second, **both before any worker starts**. This is §3j rule 5 (*quote a gate by pointer once
+committed*) applied at plan time rather than after dispatch, and it was forced by the cap: wave 4's
+equivalent block was 5,598 bytes and `STATE.md` had 142. **The gates are not weaker for it — they
+are in final wording and unchangeable after dispatch.** If the user prefers gates inline, that is a
+cap ruling, and it is asked for above.
+
 ### Open escalations
 
 **NEW, OPEN:** `writeup/escalations/ESCALATION_W3_WORDING_2026-08-18.md` — three questions on W3's

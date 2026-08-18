@@ -130,45 +130,48 @@ it can resume from, and says where.
 
 ## WAVE 4 — ALL THREE RETURNED, 2026-08-18. WAVE CLOSED.
 
-**Gates and all pre-committed readings are COMMITTED AT `8f4cb53`, before dispatch (§3g step 1), and
-are quoted by pointer per §3j rule 5 — NOT restated here.** Dispatch record: `d0c2c5d`.
+**Gates committed at `8f4cb53` before dispatch; dispatch record `d0c2c5d`** (§3j rule 5 — pointer,
+not restatement). All three outcomes are in the **Landed** table above with their SHAs, all three
+**`UNVERIFIED`**. `V3` `16ba44e`, `V-W3` `2b8755e`, `L2′` `1493e5e`.
 
-| unit | lane | outcome |
+**THE ONE THING THAT MUST NOT BECOME A POINTER — `V-W3` REFUTED THE CONDUCTOR'S OWN RECORD.**
+~~`E` overran its commissioning estimate ~8×~~ — **WITHDRAWN. There was no overrun.** `0.0713` is
+**WALL**-hours per attempt at **8 workers**; `0.57` is **CORE**-hours per attempt. Like for like,
+U5's model predicts `0.5704` core-h and `E` measured `0.56803` — **`E` came in 0.4% UNDER**, and the
+claimed `8×` **equals the worker count** (`7.967`). Both factors of the cost model were accurate.
+**THIRD Conductor-record defect a verifier has caught, and the first one the Conductor wrote into a
+live gate.** `E`'s forward pricing table is fine; only the comparison was wrong.
+
+**Defects D1–D6 located, sized, and D2–D6 STILL UNREPAIRED** (`experiments/journal/verify_wave3.md`
+§4) — **wave 5's `D-REPAIR`**, because a verifier's findings must not be fixed by the hand that
+planned the wave. Re-run any time: `.venv/bin/python experiments/verify_wave3_rederive.py`
+(180 checks, 0 disagreements).
+
+**WAVE 5'S FOUR OBLIGATIONS, EACH DISCHARGED BY A NAMED UNIT BELOW:** a verifier for `V3` and
+`L2′` → **`V-W4`** (you may not verify a wave you planned); the D2–D6 repair → **`D-REPAIR`**;
+the composition floor from a non-T lane → **`L5`**; and **§3i q7 — A UNIT THAT BUILDS SOMETHING**,
+because `V3`/`V-W3`/`L2′` are a grading, a verification and a reading, **zero construction in
+three** → **`L5`**, which is dispatched first for exactly that reason.
+
+---
+
+## WAVE 5 — PLANNED AND COMMITTED BEFORE DISPATCH, 2026-08-18
+
+**Gates and pre-committed readings, FINAL WORDING: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`,
+committed BEFORE any dispatch.** They are in that file and not restated here because integrating one
+unit already took all three capped files to within 0.7% of their limits (§3j; `reports/ORCH_STATE.md`).
+**Plan committed first, pointer second, both before a worker starts.**
+
+| unit | lane | what it is |
 |---|---|---|
-| `V3` / leg 399 | **V** | **RETURNED. GATE ANSWERED `YES` on 1 row of 9.** `16ba44e`, merged. The cell is **occupied** on leg 174's own criterion; pre-committed reading (a) **FIRED**. **`UNVERIFIED`.** |
-| `V-W3` | verification | **RETURNED. 3 of 4 CONFIRMED, 1 REFUTED.** `2b8755e`, merged. 6 defects located, sized, **unrepaired** as instructed. Executable re-derivation banked, 180 checks, 0 disagreements. |
-| `L2′` / leg 397 | **L** | **RETURNED. GATE ANSWERED `YES`** — the failing hypothesis is named, quoted and located for **all 18** techniques. `1493e5e`, merged. §§0–3 **byte-identical** to the pre-registration. **`UNVERIFIED`.** |
+| `L5` | **L**, **CONSTRUCTION, dispatched FIRST** | **W4 clause (b): the natively finite-energy ansatz.** Build it, derive the profile system with every term the modulation and cutoff generate, and MEASURE on route 4's banked profile whether a cutoff radius and a named norm exist where the localisation error beats the closure threshold — **a number, the clause-(b) analogue of leg 381's bill.** |
+| `D-REPAIR` | infrastructure | `V-W3`'s **D2–D6**, plus the four Conductor debts held open until `V-W3` returned: `fig107` and `p2_route_t6_v1_evidence.py` into `P2_EVIDENCE`, `INDEX.md` rows for `E` and `V-W2`, and `INDEX.md`'s stale figure-allocation table. |
+| `V-W4` | verification, **LAST** | **Wave 4 only.** `V3`'s YES at re-fetched full text, its 8 `NO`s, `L2′`'s pin, the 8 `FAILS-BY-CONSTRUCTION` and the 1 `SATISFIED`, and the bill re-derivation. |
 
-**`V-W3`'s REFUTATION, and it is the Conductor's own record that broke.** ~~`E` overran its
-commissioning estimate ~8×~~ — **WITHDRAWN. There was no overrun.** `0.0713` is **WALL**-hours per
-attempt at **8 workers** (`prog_r4_u5.md:405`); `0.57` is **CORE**-hours per attempt. Like for like,
-U5's model predicts `0.0713 × 8 = 0.5704` core-h and `E` measured `9.08843 / 16 = 0.56803` —
-**ratio 0.9958, `E` came in 0.4% UNDER.** The claimed `8×` **equals the worker count** (`7.967`) —
-it is core-h ÷ wall-h. The structural story is contradicted too (**21.44** epochs/attempt vs U5's
-**21.95**, **95.389 s/epoch** vs a 95 s model): **both factors of the cost model were accurate.**
-`E`'s forward pricing table is fine; only the comparison was wrong. **THIRD Conductor-record defect
-a verifier has caught, and the first one the Conductor wrote into a live gate.**
-
-**`V-W3`'s three confirmations** — `E`'s headline 6/6, `V-W2` on both parts from re-fetched
-primaries, `fig107`'s `P2_EVIDENCE` gap mechanically; **0 UNREACHABLE**. Detail:
-`experiments/journal/verify_wave3.md` §§2–3 (§3j — pointer, not restatement).
-
-**`L2′`'s finding is sharper than "still no method": `α` is pinned to EXACTLY 1**, so leg 381's
-`α > 1.5` cannot be paid by anything — paying it puts `U ∈ L³` and gives **full regularity**.
-**W4 clause (a) is measured SHUT; §6(i) is NOT retired.** Full statement with citations, and what
-it does *not* say: **`WALLS.md` §W4**, `experiments/journal/leg_397.md` §§4–9.
-
-**Defects D1–D6 are located, sized and STILL UNREPAIRED** (`experiments/journal/verify_wave3.md` §4).
-D1 (the units error) is corrected **here and in `OPTIONS.md`** in this commit; **D2–D6 are wave 5's
-repair unit**, which is a separate unit because a verifier's findings must not be fixed by the hand
-that planned the wave. Re-run any time: `.venv/bin/python experiments/verify_wave3_rederive.py`.
-
-**WAVE 5 MUST CARRY:** a verifier for `V3` and `L2′` (**you may not verify a wave you planned**);
-the D2–D6 repair unit; the composition floor from a non-T lane; and — **§3i q7, and it is the
-sharpest flag on this page — A UNIT THAT BUILDS SOMETHING.** The last three units (`V3`, `V-W3`,
-`L2′`) are a grading, a verification and a reading: **zero construction in three.** Lane L's live
-residual is W4 clause (b), **a natively finite-energy ansatz that never asks the profile for decay**
-— uncosted, unpre-registered, and the natural home for that construction.
+**`V-W4`'s gate item (3) names the ceiling this Conductor flagged rather than buried:** `L2′`'s
+*"at most 1"* rests on **Escauriaza–Seregin–Šverák, NOT read at primary** — it reaches the record
+through two independently-read secondaries. **If that direction does not follow, the pin does not
+hold and W4 clause (a) re-opens.** That is the sharpest single test in the wave.
 
 ## Open — needs the user, not a task
 
