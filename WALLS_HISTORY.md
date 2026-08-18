@@ -142,3 +142,14 @@ global energy is measured infinite. The **local suitable-weak-solution** form do
 its local hypotheses. Seregin's `m_T` separates the cases **exactly at the pin**: `α = 1` → `m_T = +∞`,
 criterion **silent, case open**; `α > 1` → `m_T < ∞`, origin regular, DSS scaling forces `u ≡ 0`.
 Detail: `experiments/journal/verify_wave4.md`.
+
+## §PRIORITIES-Q6 — retired from `WALLS.md` 2026-08-18 under §3j (verbatim, wave 5's q6 answer)
+
+**⚠ §3i q6 WAS LEFT LIVE FOR WAVE 5 TO ANSWER, AND WAVE 5 ANSWERED IT.** The question was what Lane
+L has left once `L2′` closed W4 clause (a). **`L5` (leg 400) has now closed clause (b) too, on a
+measurement**, and what remains inside W4 is **only clause (c) — the torus, deferred with Lane T.**
+Lane L's rank is **unchanged and re-earned**: it still owns **W5** and **§6(i)/§6(ii)**, both
+untouched and both no-method. **The live ranking question is no longer "what else does Lane L have"
+but whether W4 clause (c) is enough on its own to re-open Lane T** — and re-open condition (i) or
+(ii) is still what decides that, not a Conductor's preference. Retired narrative, verbatim:
+`WALLS_HISTORY.md` §PRIORITIES.

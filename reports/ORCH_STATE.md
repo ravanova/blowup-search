@@ -24,39 +24,34 @@ amend a dispatched gate** and required it at integration instead (demoted block 
 **Demoted verbatim 2026-08-18 when wave 6's plan was written**, per the remedy in the headroom
 report below → `## Superseded — wave 5's mechanical audits`. Nothing was shortened.
 
-### §3i — THE DIRECTION CHECK, per unit, against the RECORD
+### §3i — THE DIRECTION CHECK, wave 5, per unit, against the RECORD
 
-**`L5`.** **(1)** No link moved; Tier 2, float64, **synthetic** profile. **(2)** It made **FALSE** the
-record's own description of clause (b) as *"the strongest surviving item in the lane"* which
-*"never asks the profile for decay at all, so the pin at `α = 1` does not bind it"* (`OPTIONS.md` §D,
-now corrected): the ansatz **does** ask, through the modulation commutator's `ρ^{1-α}` scaling, and
-the escape was illusory. **(3)** Lane L keeps its rank, but **not on W4** — its rank rests on leg
-390's measurement that §6(i)/(ii) block every branch, and those are untouched. Its W4 content is now
-**exhausted**; the one clause left is Lane T's. **(4) YES, and this is the sharpest thing in the
-wave.** `L5`'s `NO` is a pincer whose **two jaws are both literature this repository has never read
-at primary**: the `α = 1` pin (ESŠ, `UNREACHABLE`, journal-only, and `V-W4` found the carrying
-citation names the **wrong ESŠ paper** — `D5`) and the exact-self-similar exclusion (NRŠ 1996, Tsai
-1998, both pre-arXiv, both banked `UNREACHABLE`). **The clause-(b) result is exactly as strong as
-four secondary readings.** **(5)** Cheapest killer: *read those four at primary*, ~1 unit — **not next
-because it cannot be bought here** (all journal-only, no S2 key, author contact prohibited). That is
-`UNDER-RESOURCED` **with a cost**, not a ranking. **(6)** If Lane L died tomorrow: Lane V's
-obligatory audit and Lane T's `T2″`, both cheaper — but **neither touches §6(i)/(ii)**, which is why
-Lane L is not dead. **(7) YES, still in the loop, flag stands.** Last six landed: reading, grading,
-verification, infrastructure, **construction**, verification. Wave 6's debt 1 is **binding** now.
+Full seven for `L5` and `V-W4` retired verbatim 2026-08-18 → `## Superseded — wave 5's §3i`
+below. **Live consequences, all four:** (1) **RE-RANKING: none this wave**, and the reason is
+recorded so it is not drift — W4 running out of clauses in Lane L does **NOT** re-open Lane T;
+**a decision may not supersede a measurement**, and what changed is `T2″`'s value. (2) `L5`'s
+largest **undischarged ceiling**: *both* jaws of its pincer (ESŠ; NRŠ 1996, Tsai 1998) are
+**journal-only, banked `UNREACHABLE`, never read at primary** — the cheapest killer cannot be
+bought here (no S2 key; author contact **prohibited**), so it is `UNDER-RESOURCED` **with a
+cost**. (3) **q7 fired twice running** — audit/instrument loop — which is why wave 6 opens with
+**construction** (`L6`) and why that is the wave's centre, not a side unit. (4) `L5` is
+**UNVERIFIED** until `V-W5` reports; `C6` did **not** fire as planted.
 
-**`V-W4`.** **(1)** No link moved — a verification builds nothing. **(2)** It made **FALSE** four
-fields presented as verbatim, the `T2c` citation, the word *"independently"*, and `326.875` as a
-portable constant — and the implicit claim that the `≤ 1` direction runs through the **global** ESŠ
-theorem: this object has infinite global energy, is **not** Leray–Hopf, and runs through the
-**local** suitable-weak form or not at all. **(3)** Lane V's rank is the user's (un-held by ruling);
-`V-W4` adds a **user escalation**, not a ranking input. **(4)** As `L5` (4) — the same undischarged
-ceiling, now named precisely instead of gestured at. **(5)–(7)** as above.
+### ⚠ OWED TO THE USER, ON A TRIGGER, NOT AT THE WAVE BOUNDARY
 
-**RE-RANKING: none this wave, and the reason is recorded so it is not drift.** W4 running out of
-clauses in Lane L does **not** re-open Lane T — that would be a decision superseding a measurement,
-backwards. Lane T's two re-open conditions are unchanged and neither fired. What changed is the
-**value** of `T2″`, now the cheapest thing that could put a live W4 clause back in front of Lane L.
-**Cost before ranking.**
+**THE MOMENT `V-W5` CLEARS `L5`, send the user a SHORT STANDALONE MESSAGE** — *not* folded into
+a wave summary, *not* deferred to wave 6's end: two of W4's three break clauses are now closed
+**by measurement** ((a) by `L2′`, (b) by `L5`) and (c) is statement (D), parked behind a
+**deferred** Lane T, so the **Tier-2 ceiling looks STRUCTURAL rather than circumstantial for the
+first time.** **DO NOT WRITE THAT CONCLUSION BEFORE THE TRIGGER, AND NEVER WITHOUT ALL THREE
+CAVEATS:** `L5` is **unverified**; its constant `c_mod = 869.288` is the **SYNTHETIC** profile's
+number, not route 4's; and **(c) is UNTESTED, NOT CLOSED.** If `V-W5` does *not* clear `L5`, the
+message is not sent — the trigger is the clearance, not the wave.
+
+**QUEUED FOR WAVE 7, owed on the run's own output (so the screening stop does not bite):** a
+`writeup/novelty/` pass on `L5`. It shipped a journal and a data file and **no novelty entry**
+(the dir stops at `leg_394.md`). Claim to check: Chae–Wolf's `α`-pin **and** NRŠ/Tsai's exclusion
+of exactly-SS profiles **jointly** shut clause (b), the one surviving obstruction being `∝ ṁ`.
 
 ### Headroom at the wave boundary (§3j) — IN **BYTES**, AND THE FIRST COUNT WAS WRONG
 
@@ -88,6 +83,13 @@ its territory, *pre-register in its own commit before any result-producing code*
 | `L6` — bank a discrete route-4 profile | L | `leg/401-l6-route4-profile` | **first (construction)** |
 | `V5` — adversarial audit of `arXiv:2509.25116` + the `_v2` repair | V | `leg/402-v5-audit-25116` | second |
 | `V-W5` — verify wave 5 | — | `leg/403-vw5-verify-wave5` | **last (verifier)** |
+
+**POST-COMPACTION RE-READ, 2026-08-18:** `STATE.md`, `WALLS.md`, `OPTIONS.md`, this file and
+`ORCHESTRATION.md` §3g/h/i/j re-read **from disk** after a summarisation. It caught a real
+defect: **`WALLS.md` has no `## History` section any more**, so the exemption I measured
+against does not exist and the file was **31 B OVER** cap. Fixed by retirement (§PRIORITIES-Q6
+→ `WALLS_HISTORY.md`). **§34 applied to every wave-6 gate: every artefact named in a brief was
+checked to exist — all present.** Handoff planned for **wave 6's END**, not mid-wave.
 
 **I planned this wave, so I may not verify it** — `V-W5` verifies **wave 5**. No brief
 sends a worker on a repo tour; each names the files it may read. `V5` carries reading (e):
@@ -121,6 +123,42 @@ NOT ruled**. C1 is **DISCHARGED** and stands **EXEMPLAR-FREE**.
 
 ---
 
+
+## Superseded — wave 5's §3i direction check, demoted 2026-08-18 under §3j (verbatim)
+
+### §3i — THE DIRECTION CHECK, per unit, against the RECORD
+
+**`L5`.** **(1)** No link moved; Tier 2, float64, **synthetic** profile. **(2)** It made **FALSE** the
+record's own description of clause (b) as *"the strongest surviving item in the lane"* which
+*"never asks the profile for decay at all, so the pin at `α = 1` does not bind it"* (`OPTIONS.md` §D,
+now corrected): the ansatz **does** ask, through the modulation commutator's `ρ^{1-α}` scaling, and
+the escape was illusory. **(3)** Lane L keeps its rank, but **not on W4** — its rank rests on leg
+390's measurement that §6(i)/(ii) block every branch, and those are untouched. Its W4 content is now
+**exhausted**; the one clause left is Lane T's. **(4) YES, and this is the sharpest thing in the
+wave.** `L5`'s `NO` is a pincer whose **two jaws are both literature this repository has never read
+at primary**: the `α = 1` pin (ESŠ, `UNREACHABLE`, journal-only, and `V-W4` found the carrying
+citation names the **wrong ESŠ paper** — `D5`) and the exact-self-similar exclusion (NRŠ 1996, Tsai
+1998, both pre-arXiv, both banked `UNREACHABLE`). **The clause-(b) result is exactly as strong as
+four secondary readings.** **(5)** Cheapest killer: *read those four at primary*, ~1 unit — **not next
+because it cannot be bought here** (all journal-only, no S2 key, author contact prohibited). That is
+`UNDER-RESOURCED` **with a cost**, not a ranking. **(6)** If Lane L died tomorrow: Lane V's
+obligatory audit and Lane T's `T2″`, both cheaper — but **neither touches §6(i)/(ii)**, which is why
+Lane L is not dead. **(7) YES, still in the loop, flag stands.** Last six landed: reading, grading,
+verification, infrastructure, **construction**, verification. Wave 6's debt 1 is **binding** now.
+
+**`V-W4`.** **(1)** No link moved — a verification builds nothing. **(2)** It made **FALSE** four
+fields presented as verbatim, the `T2c` citation, the word *"independently"*, and `326.875` as a
+portable constant — and the implicit claim that the `≤ 1` direction runs through the **global** ESŠ
+theorem: this object has infinite global energy, is **not** Leray–Hopf, and runs through the
+**local** suitable-weak form or not at all. **(3)** Lane V's rank is the user's (un-held by ruling);
+`V-W4` adds a **user escalation**, not a ranking input. **(4)** As `L5` (4) — the same undischarged
+ceiling, now named precisely instead of gestured at. **(5)–(7)** as above.
+
+**RE-RANKING: none this wave, and the reason is recorded so it is not drift.** W4 running out of
+clauses in Lane L does **not** re-open Lane T — that would be a decision superseding a measurement,
+backwards. Lane T's two re-open conditions are unchanged and neither fired. What changed is the
+**value** of `T2″`, now the cheapest thing that could put a live W4 clause back in front of Lane L.
+**Cost before ranking.**
 
 ## Superseded — wave 5's headroom detail, demoted 2026-08-18 under §3j (verbatim)
 

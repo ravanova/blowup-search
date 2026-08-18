@@ -151,7 +151,8 @@ whose `m_T` separates the cases **exactly at the pin**. **ESŠ is `UNREACHABLE` 
 pin rests on secondaries.** Four citation defects, verbatim → `WALLS_HISTORY.md` §W4-PROV;
 register `writeup/CORRECTIONS.md` §33; detail `experiments/journal/verify_wave4.md`.
 
-**(b) SHUT — `L5` (leg 400), an ENDPOINT not a gap.** The ansatz was **built**: cut-off **potential**
+**(b) SHUT, ⚠ UNVERIFIED — `L5` (leg 400), an ENDPOINT not a gap. `V-W5` has not yet reported;
+until it does this reads SHUT-UNVERIFIED, and `C6` did NOT fire as planted.** The ansatz was **built**: cut-off **potential**
 (`div V ≡ 0` exactly, no Bogovskii corrector to grow), physical support frozen at `κ = a`, **Clay
 condition (7) verified by measurement.** Gate **`NO`, threshold-free** — in `‖curl F‖_{L¹_t L^{3/2}_x}`
 the error saturates at **`c_mod = 869.288` per unit similarity time**, ρ-exponent **`+1.09e-04`** out
@@ -167,7 +168,7 @@ the CONSTANT is not route 4's number.**
 
 **WHAT THIS DOES AND DOES NOT DO.** It does **not** break W4 — a wall breaks when (a), (b) or (c)
 *succeeds*; two are **shut**, the opposite. It says **nothing** about whether 3D NS is regular and
-retires neither §6(i) nor §6(ii). **W4's ONLY UNBROKEN CLAUSE IS NOW (c)** — a target not imposing
+retires neither §6(i) nor §6(ii). **W4's ONLY UNBROKEN CLAUSE IS NOW (c)** — and (c) is **UNTESTED, NOT CLOSED** — — a target not imposing
 condition (7): the torus, **deferred with Lane T.** A ranking question, not a wall movement.
 
 ## W5 — Persistence and stability under localisation
@@ -246,14 +247,7 @@ return: Lane V → HELD, Lane L sole priority.**
 | **T** | 1 | **DEFERRED** | The demonstrated-technology argument fell to the lane's **own** measurement (leg 393, replicated by 394). Alive only through **`T2″`**; **`T3` deferred, not killed.** `OPTIONS.md` §E. |
 | **R** | continuous | **unchanged** | Runs inside **every** unit's pre-registration and takes its own units when a wave has room. **Never sets a wave's direction.** |
 
-**⚠ §3i q6 WAS LEFT LIVE FOR WAVE 5 TO ANSWER, AND WAVE 5 ANSWERED IT.** The question was what Lane
-L has left once `L2′` closed W4 clause (a). **`L5` (leg 400) has now closed clause (b) too, on a
-measurement**, and what remains inside W4 is **only clause (c) — the torus, deferred with Lane T.**
-Lane L's rank is **unchanged and re-earned**: it still owns **W5** and **§6(i)/§6(ii)**, both
-untouched and both no-method. **The live ranking question is no longer "what else does Lane L have"
-but whether W4 clause (c) is enough on its own to re-open Lane T** — and re-open condition (i) or
-(ii) is still what decides that, not a Conductor's preference. Retired narrative, verbatim:
-`WALLS_HISTORY.md` §PRIORITIES.
+**§3i q6 ("what would we do if Lane L died?") WAS LEFT LIVE FOR WAVE 5, AND WAVE 5 ANSWERED IT.** Narrative retired verbatim 2026-08-18 → `WALLS_HISTORY.md` §PRIORITIES-Q6. **Live consequence: `L2′` shut W4 (a) and `L5` shut (b) — SHUT-UNVERIFIED until `V-W5` reports — so what Lane L has left is re-earned, NOT retired: §6(i)/§6(ii), both no-method. Two clauses closing does NOT re-open Lane T: a decision may not supersede a measurement.**
 
 **Binding on every lane: C1 STANDS, EXEMPLAR-FREE**, and no unit may cite it as evidence the
 technology closes for any object class. **Naming requirement unchanged, not waivable by the

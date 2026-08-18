@@ -61,7 +61,7 @@ maintainer or list remains HELD.**
 
 ---
 
-## ⚠ 2026-08-18 — WAVE 5 CLOSED W4's SECOND BREAK CLAUSE, AND W4 HAS ONE LEFT
+## ⚠ 2026-08-18 — W4 HAS ONE BREAK CLAUSE LEFT, AND THE OTHER TWO ARE **SHUT-UNVERIFIED**
 
 `L2′` shut clause **(a)**; **`L5` (leg 400) shut clause (b)** — threshold-free, with the number, on
 an ansatz it **built** rather than surveyed. **W4's only unbroken break clause is now (c)** — a
@@ -106,7 +106,12 @@ Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits 
 
 **⚠ A PRECEDENT SET HERE: one request to change a gate mid-wave was REFUSED.** Ruling Q5 landed after dispatch asking `L5` to state what distinguishes a genuine natively-finite-energy ansatz from the same trap in a different hat. **Amending a gate after dispatch defeats pre-registration**, so it was required **at integration** instead — and `L5`'s own pre-registration `e2f13c1`, made **before the ruling existed**, already carried the discriminator: **Clay condition (7), `E(t)` bounded uniformly in `t`, measured across all three `κ` branches.**
 
-## WAVE 6 — PLANNED AND COMMITTED BEFORE DISPATCH. Plan: `writeup/waves/WAVE6_PLAN.md` @ `e202653`.
+## WAVE 6 — **DISPATCHED 2026-08-18**. Plan: `writeup/waves/WAVE6_PLAN.md` @ `e202653`.
+
+Branches: `L6` `leg/401-l6-route4-profile`; `V5` `leg/402-v5-audit-25116`; `V-W5`
+`leg/403-vw5-verify-wave5`. §34 applied to every gate **before** dispatch: **every artefact
+named in a wave-6 brief was checked to exist.** Handoff is planned for **wave 6's END** (§9d
+fired on summarisation, not on cycles) — **not mid-wave**.
 
 **Gates in FINAL WORDING in the plan file, not re-wordable after dispatch — including by a mid-wave ruling, which is taken at integration instead (§3g; refused once in wave 5).** §3f rule 3: construction opens, verifier last. **§3i q7 fired TWICE running** (last six landed: reading, grading, verification, infrastructure, construction, verification), so debt 1 is discharged by making `L6` **the wave's centre**, not a side unit.
 
@@ -118,6 +123,12 @@ Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits 
 
 **⚠ A GATE DEFECT OF MINE, REGISTERED SO IT DOES NOT REPEAT.** `L5`'s wave-5 gate said measure *"on route 4's **banked** discrete profile"*. **Route 4 has no banked profile: the gate was unsatisfiable as worded.** `L5` said so in its artefact and used leg 381's banked **synthetic** (controls reproduce leg 381 to `1.996e-12`).
 The `NO` is unaffected — threshold-free, resting on an **exponent** (`0.0001085`), not a constant — but **`c_mod = 869.288` is the stand-in's number, not route 4's**. `writeup/CORRECTIONS.md` §34, row 16. **No wave-6 gate names an artefact I have not checked exists.**
+
+**OWED ON THE RUN'S OWN OUTPUT, QUEUED FOR WAVE 7 (not screening, so the standing stop does
+not bite):** `L5` shipped a journal and a data file and **no `writeup/novelty/` entry** — the
+dir stops at `leg_394.md`. The claim to check: Chae–Wolf's `α`-pin **and** NRŠ/Tsai's exclusion
+of exactly-SS profiles **jointly** shut clause (b), because the one surviving obstruction term
+is `∝ ṁ`. **This repo does not get to call that new until it is checked.**
 
 **CARRIED FORWARD, NOT ATTEMPTED:** `fig81_route_egmf_v1_evidence.py` + the **52** cited-but-unrebuildable figures (`writeup/check_figure_coverage.py`). Real; not the priority while construction is the binding debt.
 
