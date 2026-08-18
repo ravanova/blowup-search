@@ -1,0 +1,627 @@
+{
+ "unit": "V-W2",
+ "branch": "verify/wave2",
+ "role": "wave-2 verifier; no figure, no leg number",
+ "date": "2026-08-14",
+ "gate": "Re-deriving from the banked JSON and the landed evidence scripts alone, does each of T4's 2D-lift finding (1), T4's first conjunct and its negative control (2), T6's table (3), and T5's sweep (4) reproduce EXACTLY? Plus the folded-in obligation: bank T1/leg 391's missing machine record.",
+ "method": "Re-derived, not re-run. The unit's own scripts were NOT executed as the check; every number below was recomputed independently -- the .mat arrays decoded from scratch, the radii recomputed from the paper's own (4.33)/(4.34), the term counts recounted with an independently written normaliser, the corpus re-enumerated with git ls-tree + cat-file, and every tally recounted with collections.Counter.",
+ "independent_artefacts_refetched": {
+  "arxiv_1902.00384_pdf": {
+   "url": "https://arxiv.org/pdf/1902.00384",
+   "http": 200,
+   "my_sha256": "97e81647e108b8d73122c5e0c9fdc11da3ed291abb724519eab7f9ad74a05d29",
+   "banked_sha256": "97e81647e108b8d73122c5e0c9fdc11da3ed291abb724519eab7f9ad74a05d29",
+   "match": true
+  },
+  "vu_navierstokes_code_zip": {
+   "url": "https://www.math.vu.nl/~janbouwe/code/navierstokes/navierstokes-code.zip",
+   "http": 200,
+   "my_sha256": "edf64bc0cf099ed6cf96cc6931da02461068f61e58cfb2ea0a804f4a20c7ac5f",
+   "banked_sha256": "edf64bc0cf099ed6cf96cc6931da02461068f61e58cfb2ea0a804f4a20c7ac5f",
+   "match": true
+  },
+  "arxiv_2409.09234_pdf": {
+   "url": "https://arxiv.org/pdf/2409.09234",
+   "http": 200,
+   "my_sha256": "7a3c8ac94b0af8658d30b7f7e4185a8850427263bb44f5b4f840629d3d3042b3",
+   "banked_sha256": "7a3c8ac94b0af8658d30b7f7e4185a8850427263bb44f5b4f840629d3d3042b3",
+   "match": true
+  },
+  "note": "Papers/ is untracked and was EMPTY in this worktree, so items (1)-(3) could not be measured from anything already on disk. All three artefacts were re-fetched from their published endpoints (read-only; no author, group, maintainer or list was contacted) and all three sha256 digests match the banked ones exactly. That turns items (1) and (2) from a TRANSCRIPTION CHECK into a MEASUREMENT."
+ },
+ "item_1_T4_2D_lift": {
+  "p1": {
+   "MY_MEASUREMENT_from_the_authors_mat_files": {
+    "x3_mode_extent": 1,
+    "omega_shape": [
+     35,
+     35,
+     1,
+     23,
+     3
+    ],
+    "u_shape": [
+     35,
+     35,
+     1,
+     23,
+     3
+    ],
+    "p_shape": [
+     69,
+     69,
+     1,
+     45
+    ],
+    "max_abs_u3": 0.0,
+    "max_abs_omega1": 0.0,
+    "max_abs_omega2": 0.0,
+    "max_abs_omega3": 1.6351073366158,
+    "setup": "2D",
+    "Nrec": [
+     17,
+     17,
+     0,
+     11
+    ]
+   },
+   "banked": {
+    "x3_mode_extent": 1,
+    "omega_shape": [
+     35,
+     35,
+     1,
+     23,
+     3
+    ],
+    "u_shape": [
+     35,
+     35,
+     1,
+     23,
+     3
+    ],
+    "p_shape": [
+     69,
+     69,
+     1,
+     45
+    ],
+    "max_abs_u3": 0.0,
+    "max_abs_omega1": 0.0,
+    "max_abs_omega2": 0.0,
+    "max_abs_omega3": 1.6351073366158
+   },
+   "banked_setup": "2D",
+   "banked_solshape_Nrec": [
+    17,
+    17,
+    0,
+    11
+   ],
+   "banked_table1_Nx3": 0,
+   "my_table1_Nx3_read_from_the_pdf": 0,
+   "max_abs_omega3_rounded_4dp": 1.6351,
+   "bitwise_identical": true
+  },
+  "p2": {
+   "MY_MEASUREMENT_from_the_authors_mat_files": {
+    "x3_mode_extent": 1,
+    "omega_shape": [
+     43,
+     43,
+     1,
+     33,
+     3
+    ],
+    "u_shape": [
+     43,
+     43,
+     1,
+     33,
+     3
+    ],
+    "p_shape": [
+     85,
+     85,
+     1,
+     65
+    ],
+    "max_abs_u3": 0.0,
+    "max_abs_omega1": 0.0,
+    "max_abs_omega2": 0.0,
+    "max_abs_omega3": 1.5274264613264072,
+    "setup": "2D",
+    "Nrec": [
+     21,
+     21,
+     0,
+     16
+    ]
+   },
+   "banked": {
+    "x3_mode_extent": 1,
+    "omega_shape": [
+     43,
+     43,
+     1,
+     33,
+     3
+    ],
+    "u_shape": [
+     43,
+     43,
+     1,
+     33,
+     3
+    ],
+    "p_shape": [
+     85,
+     85,
+     1,
+     65
+    ],
+    "max_abs_u3": 0.0,
+    "max_abs_omega1": 0.0,
+    "max_abs_omega2": 0.0,
+    "max_abs_omega3": 1.5274264613264072
+   },
+   "banked_setup": "2D",
+   "banked_solshape_Nrec": [
+    21,
+    21,
+    0,
+    16
+   ],
+   "banked_table1_Nx3": 0,
+   "my_table1_Nx3_read_from_the_pdf": 0,
+   "max_abs_omega3_rounded_4dp": 1.5274,
+   "bitwise_identical": true
+  }
+ },
+ "item_2_T4_first_conjunct_and_negative_control": {
+  "rows": {
+   "p1": {
+    "criterion_4_32_my_recomputation": {
+     "Z0_plus_Z1": 0.9730669503350271,
+     "first_half_holds": true,
+     "two_Y0_Z2": 0.00037376517188592533,
+     "one_minus_Z0_Z1_squared": 0.0007253891642558966,
+     "second_half_holds": true,
+     "criterion_met": true
+    },
+    "criterion_4_32_banked": {
+     "Z0_plus_Z1": 0.9730669503350271,
+     "Z0_plus_Z1_lt_1": true,
+     "criterion_met": true,
+     "discriminant": 0.0003516239923699713,
+     "one_minus_Z0_Z1_squared": 0.0007253891642558966,
+     "second_inequality_holds": true,
+     "two_Y0_Z2": 0.00037376517188592533
+    },
+    "r_min": {
+     "mine": 2.6313456850946193e-05,
+     "published": 2.631345685735309e-05,
+     "banked_reproduced": 2.6313456850946193e-05,
+     "my_rel_dev": 2.434836388617244e-10,
+     "banked_rel_dev": 2.434836388617244e-10,
+     "bitwise_identical_to_banked_reproduced": true
+    },
+    "r_max": {
+     "mine": 8.662341154018993e-05,
+     "published": 8.662341154018993e-05,
+     "banked_reproduced": 8.662341154018993e-05,
+     "my_rel_dev": 0.0,
+     "banked_rel_dev": 0.0,
+     "bitwise_identical_to_banked_reproduced": true
+    },
+    "r_sol_Omega_exact": true
+   },
+   "p2": {
+    "criterion_4_32_my_recomputation": {
+     "Z0_plus_Z1": 0.9728800000004357,
+     "first_half_holds": true,
+     "two_Y0_Z2": 1.4831072505600002e-05,
+     "one_minus_Z0_Z1_squared": 0.000735494399976366,
+     "second_half_holds": true,
+     "criterion_met": true
+    },
+    "criterion_4_32_banked": {
+     "Z0_plus_Z1": 0.9728800000004357,
+     "Z0_plus_Z1_lt_1": true,
+     "criterion_met": true,
+     "discriminant": 0.000720663327470766,
+     "one_minus_Z0_Z1_squared": 0.000735494399976366,
+     "second_inequality_holds": true,
+     "two_Y0_Z2": 1.4831072505600002e-05
+    },
+    "r_min": {
+     "mine": 2.2490060286024575e-06,
+     "published": 2.249006028604332e-06,
+     "banked_reproduced": 2.2490060286024575e-06,
+     "my_rel_dev": 8.334721598932383e-13,
+     "banked_rel_dev": 8.334721598932383e-13,
+     "bitwise_identical_to_banked_reproduced": true
+    },
+    "r_max": {
+     "mine": 0.00022193271314021918,
+     "published": 0.00022193271314021793,
+     "banked_reproduced": 0.00022193271314021918,
+     "my_rel_dev": 5.6180654069261824e-15,
+     "banked_rel_dev": 5.6180654069261824e-15,
+     "bitwise_identical_to_banked_reproduced": true
+    },
+    "r_sol_Omega_exact": true
+   }
+  },
+  "norm_check": {
+   "my_delta": 5.2748360311577114e-06,
+   "banked_rel_dev": 5.2748360311577114e-06,
+   "claimed": 5.3e-06,
+   "threshold_V4_REPRODUCED_read_from_evidence_script": 0.001,
+   "under_threshold": true
+  },
+  "smallest_nonzero_rel_dev_over_the_four_r_cells": {
+   "mine": 5.6180654069261824e-15,
+   "banked": 5.6180654069261824e-15,
+   "claimed": 5.6e-15,
+   "all_four_mine": {
+    "p1.r_min": 2.434836388617244e-10,
+    "p1.r_max": 0.0,
+    "p2.r_min": 8.334721598932383e-13,
+    "p2.r_max": 5.6180654069261824e-15
+   },
+   "all_four_banked": {
+    "p1.r_min": 2.434836388617244e-10,
+    "p1.r_max": 0.0,
+    "p2.r_min": 8.334721598932383e-13,
+    "p2.r_max": 5.6180654069261824e-15
+   }
+  },
+  "radii_polynomial_convention": "The paper's (4.33)/(4.34) -- read by me from the re-fetched PDF at pdftotext line 2626-2632 -- are r_min = [1-(Z0+Z1) - sqrt((1-(Z0+Z1))^2 - 2*Y0*Z2)] / Z2 and r_max = [1-(Z0+Z1)] / Z2. r_max is the VALIDITY BOUND, not the larger root. My pre-registered guess (the textbook 1/2-free quadratic, r_max = larger root) was WRONG and is recorded here as MY error, not the record's: under the paper's own (4.33)/(4.34) both radii reproduce bit-for-bit.",
+  "term_counts": {
+   "my_counts_C_plus": {
+    "approximate inverse": 7,
+    "newton-kantorovich": 4,
+    "interval arithmetic": 5,
+    "intlab": 2
+   },
+   "banked_C_plus": {
+    "approximate inverse": 7,
+    "interval arithmetic": 5,
+    "intlab": 2,
+    "newton-kantorovich": 4
+   },
+   "claimed_C_plus": {
+    "approximate inverse": 7,
+    "newton-kantorovich": 4,
+    "interval arithmetic": 5,
+    "intlab": 2
+   },
+   "my_counts_C_minus": {
+    "self-consistent": 0,
+    "a priori bounds": 0,
+    "isolating": 0,
+    "trapping region": 0,
+    "logarithmic norm": 0,
+    "dynamical closure": 0
+   },
+   "banked_C_minus": {
+    "a priori bounds": 0,
+    "dynamical closure": 0,
+    "isolating": 0,
+    "logarithmic norm": 0,
+    "self-consistent": 0,
+    "trapping region": 0
+   },
+   "sensitivity_note": "'approximate inverse' counts 7 with de-hyphenation across a line break and 6 without; both the landed runner and my independently written normaliser de-hyphenate, so 7 stands. The other three counts are normalisation-insensitive.",
+   "my_counts_without_dehyphenation": {
+    "approximate inverse": 6,
+    "newton-kantorovich": 4,
+    "interval arithmetic": 5,
+    "intlab": 2
+   }
+  },
+  "zgliczynski": {
+   "my_lines_containing_the_name": [
+    "[48] P. Zgliczynski. Rigorous numerics for dissipative partial differential equations II. Periodic"
+   ],
+   "n": 1,
+   "is_bibliography_item_48": true,
+   "banked": [
+    "[48] P. Zgliczynski. Rigorous numerics for dissipative partial differential equations II. Periodic"
+   ],
+   "nuance": "The NAME appears exactly once, as bibliography item [48]. The BRACKET REFERENCE [48] is additionally cited once in the body, at 'Shivashinsky PDE [1, 9, 10, 48]' -- i.e. as prior work on Kuramoto-Sivashinsky, never as this paper's method. This refines the claim; it does not contradict it."
+  },
+  "six_verbatim_quotes_relocated_by_me_in_the_refetched_pdf": true
+ },
+ "item_3_T6_table": {
+  "n_fulltexts": 7,
+  "my_status_counter": {
+   "MEASURED": 7
+  },
+  "banked_summary_fetch": {
+   "n_fulltext_MEASURED": 7,
+   "n_fulltext_UNREACHABLE": 0,
+   "n_fulltext_THROTTLED": 0,
+   "n_abstract_MEASURED": 7,
+   "namespaces_served": [
+    "http://a9.com/-/spec/opensearch/1.1/"
+   ],
+   "k4_any_probe_fired": true
+  },
+  "all_is_pdf_magic": true,
+  "min_chars_extracted": 30592,
+  "my_verdict_recount": {
+   "strengthen": 4,
+   "UNDERCUT": 2,
+   "confirm": 1
+  },
+  "banked_verdict_counts": {
+   "confirm": 1,
+   "strengthen": 4,
+   "UNDERCUT": 2,
+   "UNREACHABLE": 0
+  },
+  "claimed": {
+   "UNDERCUT": 2,
+   "strengthen": 4,
+   "confirm": 1,
+   "UNREACHABLE": 0,
+   "THROTTLED": 0
+  },
+  "undercut_ids": [
+   "1902.00384",
+   "2409.09234"
+  ],
+  "undercut_2": {
+   "id": "2409.09234",
+   "u_codes": [
+    "U4",
+    "U1"
+   ],
+   "banked_deciding_sentence": "our results, depending on numerical approximations, do not guarantee that the Navier-Stokes solutions exhibit chaotic behaviour in the sense of Devaney",
+   "my_refetch_sha256": "7a3c8ac94b0af8658d30b7f7e4185a8850427263bb44f5b4f840629d3d3042b3",
+   "banked_sha256": "7a3c8ac94b0af8658d30b7f7e4185a8850427263bb44f5b4f840629d3d3042b3",
+   "deciding_sentence_relocated_verbatim_by_me": true,
+   "wall_bc_sentence_i_read_myself": "The boundary conditions at the inner and outer cylinder walls r = r_i and r = r_o are v = R_i theta-hat and v = R_o theta-hat. Periodicity is enforced to the rest of boundaries of the parallelogram domain. (p.4, sec 2)",
+   "my_term_census_on_that_paper": {
+    "no-slip": 0,
+    "interval arithmetic": 0,
+    "newton-kantorovich": 0,
+    "galerkin": 0,
+    "computer-assisted": 0,
+    "intlab": 0,
+    "self-consistent": 0,
+    "a priori bounds": 0,
+    "trapping region": 0
+   },
+   "nuance": "The paper never uses the literal phrase 'no-slip' (0 occurrences). What it states is a MOVING-WALL DIRICHLET condition v = R_i theta-hat / R_o theta-hat at r = r_i, r_o -- the no-slip condition on a rotating cylinder -- with periodicity only 'to the rest of boundaries'. So the domain is NOT a pure periodic cell, which is the substance of the claim; 'no-slip walls, not periodicity' is a compression of the paper's own words."
+  },
+  "domain_census": {
+   "banked_leg348_compact_or_periodic_domain": [
+    "math/0005247 (KS, periodic-domain Galerkin line)",
+    "arXiv:2305.08221 (explicit periodic BC)",
+    "arXiv:1902.00384 (three-torus)",
+    "arXiv:2409.09234 (minimal periodic domain)",
+    "arXiv:2105.04148 (bounded, Dirichlet BC)",
+    "arXiv:2009.12762 (bounded square, Navier BC)"
+   ],
+   "n_entries": 6,
+   "entry_for_2409_09234": [
+    "arXiv:2409.09234 (minimal periodic domain)"
+   ],
+   "over_count_arithmetic": "6 entries - 1 = 5",
+   "the_records_own_ground_for_the_over_count": "The T6 record's stated ground is that 2409.09234 'CLOSES NO TAIL-DOMINATION ESTIMATE AND IS NOT AN INSTANCE OF THAT TECHNOLOGY AT ALL'; the no-slip/periodicity point is filed as u_code U1, 'secondary'. The gate's wording makes the wall BC the ground ('carries no-slip walls, not periodicity, SO ... over-counts by one'). Both facts are in the record and both reproduce; the CAUSAL LINK differs between the gate's wording and the record's. REPORTED, NOT RECONCILED.",
+   "i_verified_the_not_an_instance_ground_independently": true
+  },
+  "leg348_lock": {
+   "writeup/data/p2_route_pocp_v1.json": {
+    "locked": "ef1df36451c9d969ce12249fa234092c6826056cda2a6ba565503ca08698a1d4",
+    "live": "ef1df36451c9d969ce12249fa234092c6826056cda2a6ba565503ca08698a1d4",
+    "match": true
+   },
+   "experiments/journal/leg_348.md": {
+    "locked": "639e600bb4fb83c078d5f5daeaad6e6370c8d4806b3129dbc2b726e295805aa4",
+    "live": "639e600bb4fb83c078d5f5daeaad6e6370c8d4806b3129dbc2b726e295805aa4",
+    "match": true
+   }
+  }
+ },
+ "item_4_T5_sweep": {
+  "landing_commit_of_p2_route_t5_v1_json": "3cab83ed2dc96d247caac35890b6a1c1bf8ade5e",
+  "my_corpus_at_landing_commit": {
+   "files": 1428,
+   "lines": 417476,
+   "bytes": 23547210,
+   "DIRECTION_md_in_corpus": false
+  },
+  "my_corpus_at_origin_main": {
+   "files": 1440,
+   "lines": 421528,
+   "bytes": 23787752,
+   "DIRECTION_md_in_corpus": false
+  },
+  "banked_corpus": {
+   "files_enumerated": 1428,
+   "files_read": 1428,
+   "lines": 417476,
+   "bytes": 23547210
+  },
+  "claimed": {
+   "files": 1428,
+   "lines": 417476
+  },
+  "corpus_drift_note": "The corpus is a function of the tree. At the landing commit it reproduces bit-for-bit; at origin/main it has grown with later legs' files. That growth is not a discrepancy and is recorded so nobody re-derives it at HEAD and reports one.",
+  "DIRECTION_md": {
+   "excluded_by_name": true,
+   "banked_flag": true,
+   "control_N_B_direction_md_in_corpus": false,
+   "exclusion_asserted_executably": true,
+   "the_executable_assertion": "experiments/p2_route_t5_sweep.py: `if \"DIRECTION.md\" in corpus: fail.append(\"N-B: DIRECTION.md is in the corpus -- S3e VIOLATED\")`, and `if fail: ... return 1` at the end of main(). A non-empty fail list is a non-zero exit, so the exclusion is gated by EXIT CODE, not by prose.",
+   "windows_forgone_143_status": "UNVERIFIABLE BY THIS UNIT -- checking it requires reading DIRECTION.md, which is on V-W2's forbidden-read list. Not in the gate."
+  },
+  "tally": {
+   "my_n_findings": 7,
+   "banked_refusals": 7,
+   "my_classification_recount": {
+    "APPARATUS": 5,
+    "REALIZATION": 2
+   },
+   "banked": {
+    "apparatus": 5,
+    "realization": 2
+   },
+   "my_reopenable_recount": [
+    "F1",
+    "F2"
+   ],
+   "banked_reopenable": [
+    "F1",
+    "F2"
+   ],
+   "n_reopenable": 2
+  },
+  "the_two_reopenables": {
+   "F1": {
+    "leg": 348,
+    "names_galerkin_plus_tail_dynamical_closure": true
+   },
+   "F2": {
+    "leg": 315,
+    "names_O1": true
+   }
+  },
+  "leg_257": {
+   "finding_id": [
+    "F3"
+   ],
+   "reopenable": [
+    false
+   ],
+   "names_corollary_21": true,
+   "names_radii_polynomial": true,
+   "names_a_fourth_SPACE": true,
+   "capabilities_py_quote_relocated_live": true
+  },
+  "all_seven_quotes_verified_at_file_line": {
+   "F1": true,
+   "F2": true,
+   "F3": true,
+   "F4": true,
+   "F5": true,
+   "F6": true,
+   "F7": true
+  }
+ },
+ "field_scoped_census": {
+  "scope": "every writeup/data/*.json, matched on the top-level FIELDS leg/route/unit only -- never on filename",
+  "files_total": 306,
+  "files_parsed": 306,
+  "files_unparseable": [],
+  "coverage": {
+   "leg": "229/306",
+   "route": "225/306",
+   "unit": "9/306"
+  },
+  "rows_with_unit_in_wave2_set": [
+   {
+    "file": "p2_route_t4_v1.json",
+    "leg": 393,
+    "route": "Route-T4",
+    "unit": "T4"
+   },
+   {
+    "file": "p2_route_t5_v1.json",
+    "leg": 395,
+    "route": null,
+    "unit": "T5"
+   },
+   {
+    "file": "p2_route_t6_v1.json",
+    "leg": 394,
+    "route": "ROUTE-T6",
+    "unit": "T6"
+   }
+  ],
+  "rows_with_leg_in_wave2_set": [
+   {
+    "file": "p2_route_t4_v1.json",
+    "leg": 393,
+    "route": "Route-T4",
+    "unit": "T4"
+   },
+   {
+    "file": "p2_route_t5_v1.json",
+    "leg": 395,
+    "route": null,
+    "unit": "T5"
+   },
+   {
+    "file": "p2_route_t6_v1.json",
+    "leg": 394,
+    "route": "ROUTE-T6",
+    "unit": "T6"
+   }
+  ],
+  "leg_391_or_unit_T1_found": false,
+  "the_filename_trap": [
+   {
+    "file": "p2_route_p2t1_v1.json",
+    "leg": 302,
+    "route": "P2T1",
+    "unit": null
+   }
+  ],
+  "distinct_units_seen": [
+   "R0+R1",
+   "T2 (WAVE 1, CONDUCTOR §3g), LANE T",
+   "T4",
+   "T5",
+   "T6",
+   "U3",
+   "U5",
+   "V-W2",
+   "V1"
+  ],
+  "conclusion": "No banked JSON carries top-level leg == 391 or unit == 'T1'. p2_route_p2t1_v1.json is leg 302, route 'P2T1', unit null -- the trap, avoided. The wave-1 verifier's finding is CONFIRMED independently by field-scoped scan at 100% parse coverage.",
+  "note_on_the_repair_record": "V-W2's own p2_route_t1_packet_v1.json deliberately carries NO top-level leg/unit field: it is a repair record banked BY V-W2 ABOUT leg 391, not leg 391's own record, and it nests that under `banks_for`. The census statement above therefore stays true after the repair, which is the intended reading -- leg 391 still banked nothing itself.",
+  "census_taken_after_v_w2_added_its_own_two_files": true
+ },
+ "verdicts": {
+  "item_1": "YES -- reproduces exactly, bit-for-bit, from a re-fetched primary artefact",
+  "item_2": "YES -- reproduces exactly; one nuance banked (see zgliczynski.nuance and term_counts.sensitivity_note); the pre-registered radii formula was MY error and is recorded as such",
+  "item_3": "YES on every count; one WORDING NUANCE reported and NOT reconciled (see item_3.domain_census.the_records_own_ground_for_the_over_count and undercut_2.nuance)",
+  "item_4": "YES -- reproduces exactly at the landing commit; one item UNVERIFIABLE BY THIS UNIT (DIRECTION_md_windows_forgone = 143, forbidden read, not in the gate)",
+  "folded_in_T1_obligation": "DISCHARGED -- writeup/data/p2_route_t1_packet_v1.json + experiments/p2_route_t1_packet_evidence.py, mutation-tested (3 mutations, each exit 1)"
+ },
+ "unreconciled_disagreements": [],
+ "unverifiable": [
+  {
+   "what": "p2_route_t5_v1.json corpus.DIRECTION_md_windows_forgone = 143",
+   "why": "verifying it requires reading DIRECTION.md, which is on V-W2's forbidden-read list",
+   "in_the_gate": false
+  },
+  {
+   "what": "the REASONING behind any wave-2 number",
+   "why": "the reasoning sections of leg_393/394/395.md and every Conductor-owned file are forbidden reads for this unit; that narrowness IS the unit",
+   "in_the_gate": false
+  }
+ ],
+ "forbidden_reads_honoured": true,
+ "forbidden_reads_list": [
+  "STATE.md",
+  "WALLS.md",
+  "OPTIONS.md",
+  "DIRECTION.md",
+  "CLAY_ROADMAP.md",
+  "reports/ORCH_STATE.md",
+  "any wave-2 brief",
+  "the reasoning sections of experiments/journal/leg_393.md, leg_394.md, leg_395.md"
+ ],
+ "journal_reads_made": [
+  "none of leg_393.md / leg_394.md / leg_395.md were opened at all",
+  "experiments/journal/leg_348.md, leg_315.md, leg_273.md, leg_341.md, experiments/JOURNAL.md and writeup/novelty/leg_262.md were opened ONLY to confirm a banked quote sits at its recorded line"
+ ],
+ "ceiling": "TIER 2. Verification moves NO link of the L1 -> L4 chain. Re-deriving four banked findings and repairing one missing record changes what the repository can be trusted to have measured, not what it has proved. Clay odds ~0.05%, unchanged by this unit."
+}

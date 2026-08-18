@@ -2,7 +2,25 @@
 
 **Raised:** 2026-08-14, by the Conductor, on the return of leg 393 / `T4` (landed `2c87244`).
 **Class:** §8. **A ruling was made on a packet carrying a factual error, and the error is now measured.**
-**Status:** OPEN — awaiting the user. **Work has NOT stopped**; see §6.
+**Status:** ~~OPEN — awaiting the user.~~ **DISCHARGED 2026-08-14.** All three questions below were
+ruled by the user on 2026-08-14. The authoritative ruling record is
+**`writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md`**; this document is retained unchanged
+below as the packet that was ruled on. **Work never stopped**; see §6.
+
+> **THE RULINGS, IN ONE LINE EACH** (full text and reasoning in the ruling document):
+> **(1) C1 needs NO replacement exemplar — it is an APPARATUS SCOPING and stands EXEMPLAR-FREE**,
+> with the scope explicitly no longer carrying any implied *"and this has been demonstrated"*: no
+> unit may cite C1 as evidence the technology closes for any object class. C1's **naming
+> requirement is unchanged and binds every unit.**
+> **(2) Lane T's priority-1 ranking does NOT survive — Lane T is DEMOTED to DEFERRED**, kept alive
+> only through **`T2″`**, with two re-open conditions recorded in `OPTIONS.md`. Nothing measured is
+> superseded: the domain-shape obstruction is still not refuted, Theorem NGX / leg 341 / the three
+> dead realizations stand, W2 stands strengthened, and `T3` is deferred rather than killed.
+> **(3) The packet's defect was material to the RANKING, not to the SCOPING** — C1 needs no
+> re-ruling and its transcription in `plan_of_record.py` stands byte-unchanged; A2, B1 and the
+> narrowed outreach hold are untouched.
+> **DIRECTION: the programme's priority lanes are now V and L.** **No ban is lifted, narrowed or
+> reworded**; 26 recorded / 19 in force, unchanged.
 
 ---
 

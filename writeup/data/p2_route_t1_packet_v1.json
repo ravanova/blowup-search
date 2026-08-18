@@ -1,0 +1,63 @@
+{
+ "banked_by": {
+  "branch": "verify/wave2",
+  "date": "2026-08-14",
+  "obligation": "folded into V-W2's gate; owed since 2026-08-13",
+  "unit": "V-W2"
+ },
+ "banks_for": {
+  "lane": "T",
+  "leg": 391,
+  "unit": "T1",
+  "wave": "CONDUCTOR wave 1"
+ },
+ "carries_no_gate_verdict": true,
+ "ceiling_verbatim_from_source": "**Tier 2 ceiling; Clay odds ~0.05%, unmoved.**",
+ "does_not_reopen_t1_gate_answer": true,
+ "fourth_item_not_a_ban_wording_question": {
+  "blocks_verbatim": "Any Lane T claim about statement **(D)**'s acceptance conditions.",
+  "id": "d",
+  "label": "**(d)**",
+  "pending_since_verbatim": "2026-08-13 (leg 390 §4)",
+  "question_verbatim": "**The outreach hold on Lane T's critical path.** Not a ban-wording question; raised here because it is the fourth thing the user must decide before Lane T can be read honestly."
+ },
+ "record_type": "MISSING-RECORD REPAIR, banked by the wave-2 verifier V-W2 (branch verify/wave2)",
+ "ruling": {
+  "note": "Both strings are quoted from the escalation document itself and are re-asserted verbatim by experiments/p2_route_t1_packet_evidence.py, which exits 1 on any drift.",
+  "packet_rules_nothing_verbatim": "**This packet rules nothing.**",
+  "questions_asked": 3,
+  "questions_ruled": 0,
+  "ruled_none_verbatim": "- **It ruled none of (a), (b), (c).** No reading is endorsed, preferred, ranked, or recommended."
+ },
+ "scope_limit": "This record states what the packet ASKED and that it RULED NONE of the three ban-wording questions. It is not evidence for or against T1's gate answer, and it does not re-open it.",
+ "source_document": {
+  "lines": 478,
+  "path": "writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md",
+  "raised_by_line_verbatim": "**Raised by:** leg 391 (unit `T1`, Lane T, CONDUCTOR wave 1).",
+  "sha256": "e73eeca8e49c443b8a6a2f09b36998057beaa1f1766b5bd60f5ef4c8dfe596bd"
+ },
+ "three_questions": [
+  {
+   "blocks_verbatim": "**Nothing operational.** Its subject is a *claim about the literature*, not a build. Bundled here because it is pending, not because a lane needs it.",
+   "id": "a",
+   "label": "**(a)**",
+   "pending_since_verbatim": "2026-08-11 (leg 304)",
+   "question_verbatim": "**Cadiot.** The lift clause says *\"unless a pass resolves whether…\"*; a pass has resolved it, and the resolution **confirmed** the ban's justification."
+  },
+  {
+   "blocks_verbatim": "**Lane V's first unit (`V1`).**",
+   "id": "b",
+   "label": "**(b)**",
+   "pending_since_verbatim": "2026-08-06 / re-raised 2026-08-13",
+   "question_verbatim": "**Stage V's \"needs L1 first.\"** A lift condition that is unliftable as written — and a 2026-08-06 ban review whose own text says it retired that wording."
+  },
+  {
+   "blocks_verbatim": "**THE WHOLE OF LANE T** — `T3` and `T4` included.",
+   "id": "c",
+   "label": "**(c)**",
+   "pending_since_verbatim": "2026-08-13 (leg 348 §5 raised it 2026-08-12 and refused to answer)",
+   "question_verbatim": "**The apparatus question.** Does the ℓ¹-Fourier/radii-polynomial ban reach a Zgliczyński-style Galerkin-plus-tail **dynamical** closure?"
+  }
+ ],
+ "why_this_file_exists": "The wave-1 verifier found that leg 391 / unit T1 banked NO machine record -- no JSON and no evidence script -- so its gate answer could only be checked against prose. V-W2 re-confirmed that independently by a FIELD-SCOPED census of every writeup/data/*.json (304/304 parsed): no banked JSON carries leg == 391 or unit == 'T1'. The filename-shaped near-miss writeup/data/p2_route_p2t1_v1.json carries leg == 302, route == 'P2T1', unit == null and is unrelated. This file repairs that gap and NOTHING ELSE."
+}

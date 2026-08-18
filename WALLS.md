@@ -92,8 +92,11 @@ built on **one bounded approximate inverse** `A : X_{−2,−1} → X`. This is 
 (*"a Newton-Kantorovich theorem is applied"*, on *"a Banach space of geometrically decaying Fourier
 coefficients"*), independently confirmed by the Conductor at the landing of `2c87244`. **Ruling C1's
 general proposition is untouched — a Galerkin-plus-tail dynamical closure remains a different
-apparatus — but its EXEMPLAR falls.** `ESCALATION_C1_EXEMPLAR_2026-08-14.md` is open with the user;
-naming a replacement exemplar, or ruling that none is needed, is not the Conductor's to decide.
+apparatus — but its EXEMPLAR falls.** **RULED 2026-08-14 (`RULING_C1_EXEMPLAR_2026-08-14.md`, the
+escalation DISCHARGED): C1 needs NO replacement exemplar and STANDS EXEMPLAR-FREE** — it is an
+apparatus scoping and its proposition is true independent of any instance. **What the ruling
+removes is the implied *"and this has been demonstrated"*: no unit may cite C1 as evidence the
+technology closes for any object class.**
 
 **W2 STANDS, AND IS STRENGTHENED**: the one instance the programme believed cleared it does not.
 
@@ -102,7 +105,9 @@ both come from the certified object itself, for a dissipative fluid equation. No
 carried up. Not an ODE profile. Pre-committed test: name the certified equation, show the viscous
 term is inside it, and show the certified object is not a lift of a lower-dimensional one.
 
-**Lane: T** (below) — this is where the credit is collected.
+**Lane: T** (below) — **DEFERRED 2026-08-14.** A **demonstrated, genuinely-3D closure meeting this
+wall's own pre-committed test** is re-open condition **(i)** for that lane (`OPTIONS.md` §E). The
+credit stays unclaimed; deferring the lane neither collects it nor concedes it.
 
 ---
 
@@ -130,7 +135,7 @@ dissipative *fluid* equation — any dimension, any model, provided the dissipat
 the certified equation and the object is a genuine finite-time singularity. Pre-committed test:
 leg 174's own Grade-A criterion, applied unchanged.
 
-**Lane: V** (below).
+**Lane: V** (below) — **PRIORITY LANE, ACTIVE 2026-08-14.**
 
 ---
 
@@ -152,7 +157,8 @@ infinite-energy profile to a finite-energy solution with the decay actually avai
 ansatz that is natively finite-energy, or (c) a target for which condition (7) is not imposed —
 which is Fefferman statement **(D)**, the torus.
 
-**Lanes: T and L** (below).
+**Lanes: T and L** (below) — **L is a PRIORITY LANE, ACTIVE 2026-08-14; T is DEFERRED.** W4's
+attack (c), the torus, is deferred with Lane T; attacks (a) and (b) live in Lane L and run now.
 
 ---
 
@@ -161,8 +167,12 @@ which is Fefferman statement **(D)**, the torus.
 **Statement.** Even granted W4's cutoff, the cut solution must still be shown to blow up. No known
 method. `CLAY_OBLIGATIONS.md` §6(ii).
 
-**Status: DOWNSTREAM.** Nothing to attack until W4 has a shape. Recorded so it is not forgotten
-when W4 moves and someone declares victory one obligation early.
+**Status: DOWNSTREAM — but its LITERATURE is not.** Nothing to *build* here until W4 has a shape,
+and it is recorded so it is not forgotten when W4 moves and someone declares victory one obligation
+early. **Amended 2026-08-14:** downstream in logic is not downstream in reading. The published
+nonlinear-stability-with-finite-unstable-spectrum technique (the Chen–Hou line) has **never been
+read against this object**, and `L3′` reads it in wave 3. **A reading is not an attack on the wall
+and does not move it** — it establishes whether a method exists to attack it with.
 
 ---
 
@@ -187,14 +197,21 @@ Newton–Kantorovich contraction in a function space, and which leg 348 explicit
 possibly outside the ban's subject ("a **different** apparatus … I make no claim about whether that
 apparatus distinction matters to the ban's scope; that reading is for the DM/user").
 
-**THAT READING IS NOW REQUIRED WORK, and it is the first thing Lane T must settle.**
+~~**THAT READING IS NOW REQUIRED WORK, and it is the first thing Lane T must settle.**~~ **RULED C1
+BY THE USER 2026-08-13, and the ruling STANDS EXEMPLAR-FREE after 2026-08-14:** the ban names an
+apparatus, and a Galerkin-plus-tail dynamical closure is outside its object. **But C1 is a statement
+about the ban's SCOPE, not about any apparatus having WORKED** — no unit may cite it as evidence the
+technology closes for any object class, and the exemplar the record once had for that claim
+(`arXiv:1902.00384`) is certified by exactly the banned apparatus. **W6 is unbroken, and the fourth
+apparatus is a candidate, not a result.**
 
 **BREAKING W6 CONSISTS OF:** a named certificate framework, run to a `Y₀/Z₀/Z₁/Z₂`-equivalent
 closure (or its analogue in the framework's own terms) on route 4's object class, with `Z₁ < 1`
 achieved — or the framework's own contraction criterion met, if it does not use radii-polynomial
 bounds at all.
 
-**Lane: T.**
+**Lane: T — DEFERRED 2026-08-14.** W6 is unbroken and stays unbroken; the fourth *apparatus* is a
+candidate, not a result, and C1 may not be cited as evidence it closes.
 
 ---
 
@@ -224,7 +241,37 @@ order of magnitude of hardware, because it is permanent.
 Each lane attacks named walls. Each is authorised to build whatever it needs. None may claim a
 Clay link moved without the link moving.
 
-## LANE T — THE TORUS LANE. *Priority 1. This is the breakthrough candidate.*
+## ⚠ LANE PRIORITIES — RE-RANKED 2026-08-14 BY USER RULING
+
+**`writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md`.** The 2026-08-13 ranking is superseded
+**as a ranking**; every measurement it rested on stands.
+
+| lane | 2026-08-13 | **2026-08-14** | why |
+|---|---|---|---|
+| **V** | priority 2 | **PRIORITY, ACTIVE** | **It decides whether any path exists.** W3 is the rung that determines whether **Tier 3 is reachable in principle**, and both branches are valuable. |
+| **L** | priority 3 | **PRIORITY, ACTIVE** | **It is on every path.** Leg 390 measured that the torus does **not** retire `CLAY_OBLIGATIONS.md` §6(i)/(ii), so the two no-method obligations are the last blockers on **every** branch — and **no unit in 395 legs has attacked either.** |
+| **T** | priority 1 | **DEFERRED** | The demonstrated-technology argument fell to the lane's **own** measurement (leg 393, replicated by leg 394). Kept alive only through **`T2″`**; **`T3` is deferred with the lane, not killed.** Cost and the two re-open conditions: `OPTIONS.md` §E. |
+| **R** | continuous | **continuous, unchanged** | Runs inside **every** unit's pre-registration (*what makes this answerable an order of magnitude cheaper?*) and takes its own units when a wave has room. |
+
+**Two byproducts of wave 2 point at V and L, and neither was found by looking for them:** `T5`'s
+`O1` (leg 315's Taylor-model flow-map, *"needs **no function space**"*) points at **Lane V**, and
+`T6`'s Chen–Hou near-miss (`arXiv:2308.01528` — computer-assisted blow-up, **unbounded** domain,
+**>1D**, **algebraic decay**) points at **Lane L** and at route 4's actual `ℝ³` geometry, prize
+statement **(C)**.
+
+**Binding on every lane: C1 STANDS, EXEMPLAR-FREE.** The scope no longer carries any implied *"and
+this has been demonstrated"* — **no unit may cite C1 as evidence the technology closes for any
+object class.** Its **naming requirement is unchanged**: name the apparatus with a citation, and
+show it constructs no single bounded approximate inverse uniform in `M`. **Absent both, the ban
+applies in full**, and the Conductor may not waive it.
+
+## LANE T — THE TORUS LANE. ~~*Priority 1. This is the breakthrough candidate.*~~ **DEFERRED 2026-08-14.**
+
+> **DEFERRED BY USER RULING 2026-08-14**, on the lane's own measurement. **Not killed, and nothing it
+> measured is superseded.** `T3` is deferred **with** the lane; `T2″` is what keeps the lane alive and
+> is re-open condition 2. The full cost of deferring, and both re-open conditions, are recorded in
+> **`OPTIONS.md` §E** — read that before re-opening anything here. The lane text below is retained as
+> written, because the price paragraphs are still the live statement of what this lane would cost.
 
 **Attacks W2, W4, W6 simultaneously.** It is first because it is the only lane where four
 independently-measured repository results line up in the same direction, and **no leg has ever put
@@ -241,10 +288,25 @@ The four results:
    rescaled Navier–Stokes system is genuinely parabolic.
 2. **`T³` is exactly the domain the obstruction asks for.** Compact, discrete Fourier basis,
    exponential decay. Leg 390's census: **6 compact/periodic instances, 0 unbounded.**
-   **⚠ THE CENSUS COUNT IS SUSPECT AS OF 2026-08-14 — leg 394 / `T6` (`e7db624`).** At full text,
-   **`arXiv:2409.09234` does not belong in leg 348's `domain_census`**: its rigorous content is a
-   theorem about a 1-D map fitted to DNS data — no interval arithmetic, no Galerkin-plus-tail, no
-   tail-domination estimate — and **its domain carries no-slip walls, not periodicity**. The authors:
+   **⚠ THE CENSUS COUNT IS WRONG AS OF 2026-08-14 — leg 394 / `T6` (`e7db624`), and the GROUND is
+   corrected here 2026-08-14 by `V-W2`, whose finding was against the Conductor's wording, not
+   against `T6`.** At full text, **`arXiv:2409.09234` does not belong in leg 348's `domain_census`**,
+   and **the record's own ground is the FIRST clause below, not the second** — this file and the
+   dispatch that quoted it had the two the wrong way round:
+   **(i) PRIMARY — it is not an instance of the technology at all.** `T6`, verbatim: *"THIS PAPER
+   CLOSES NO TAIL-DOMINATION ESTIMATE AND IS NOT AN INSTANCE OF THAT TECHNOLOGY AT ALL. The census
+   over-counts by one."* Its rigorous content is a theorem about a **1-D map fitted to DNS data** —
+   no interval arithmetic, no Galerkin projection, no tail-domination estimate, no
+   Newton–Kantorovich argument anywhere in it (`V-W2` re-measured all five term counts at **0**).
+   **(ii) SECONDARY, and it is `T6`'s own `u_code` U1** — the domain is **not a pure periodic cell**.
+   *(Superseded wording, struck: ~~"its domain carries no-slip walls, not periodicity"~~. `V-W2`
+   measured that the paper **never uses the phrase "no-slip"** — 0 occurrences. What it states is a
+   **moving-wall Dirichlet condition**, *"the boundary conditions at the inner and outer cylinder
+   walls `r = r_i` and `r = r_o` are `v = R_i θ̂` and `v = R_o θ̂`. Periodicity is enforced to the
+   rest of boundaries of the parallelogram domain"* (§2, p.4). That **is** no-slip on a rotating
+   cylinder, but the compression dropped "to the rest of boundaries", which is the substance.)*
+   **The count is unchanged: 6 entries − 1 = 5**, and `V-W2` reproduced the arithmetic and both
+   grounds independently from a re-fetched PDF whose SHA-256 matches the banked digest. The authors:
    *"our results, depending on numerical approximations, do not guarantee that the Navier-Stokes
    solutions exhibit chaotic behaviour in the sense of Devaney."* **Leg 348's census over-counts by
    one, and leg 390's figure inherits from it. Re-check before citing this count again.** The
@@ -315,7 +377,12 @@ The four results:
 - **T4 — reproduce `arXiv:1902.00384`'s certificate**, row for row, the way leg 316 reproduced
   Dahne–Figueras. Until it is reproduced in this repository it is a citation, not a capability.
 
-## LANE V — THE VISCOUS RUNG. *Priority 2. Highest information per unit of spend.*
+## LANE V — THE VISCOUS RUNG. **PRIORITY LANE, ACTIVE (user ruling 2026-08-14).** *Highest information per unit of spend.*
+
+> **PROMOTED 2026-08-14.** The user's reason, in its own terms: **Lane V decides whether any path
+> exists.** `V2` runs in wave 3 and is that wave's centre of gravity — it supplies the **named
+> target** leg 174 says the cell is empty for want of, and opens the feasibility of a **C1-compliant**
+> apparatus against it. **C1's naming requirement binds and is not waivable.**
 
 **Attacks W3.** Fill the Grade-A × fluid cell in the lowest dimension that admits a genuine fluid
 structure. Leg 174 says the cell is empty **for want of a target**, so the lane's first job is to
@@ -331,7 +398,13 @@ candidate, which makes that precondition unliftable **as written**. That is a wo
 same shape as the Cadiot escalation already pending. **Lane V's first unit escalates the wording to
 the user**; it does not read around it.
 
-## LANE L — THE LAST OBLIGATIONS. *Priority 3, and it is the only lane that touches the FINAL blockers.*
+## LANE L — THE LAST OBLIGATIONS. **PRIORITY LANE, ACTIVE (user ruling 2026-08-14).** *The only lane that touches the FINAL blockers.*
+
+> **PROMOTED 2026-08-14.** The user's reason, in its own terms: **Lane L is on every path.** `L2`
+> (§6(i)) and `L3′` (the Chen–Hou reading, §6(ii)) run in wave 3 — **the first units ever dispatched
+> at a final blocker.** Leg 381's banked bill is the object: critical `L³` tail **326.875 per
+> decade**, required `α > 1.5` against available `α = 1.0`. **A deficit of 0.5 in a decay exponent is
+> a number, not an impossibility.**
 
 **Widened 2026-08-13.** This lane was drafted to price W4 on `ℝ³`. That is L1 below, and it is
 still the right first unit — but the lane's real subject is larger and nothing in this repository
@@ -376,7 +449,12 @@ already know how to produce. **A measured, honest "still no method, and here is 
 hypothesis fails" is also a real result**, and it is the one that would tell the user whether the
 Tier-2 ceiling is permanent.
 
-## LANE R — REFORMULATION FOR SCALE, AND SOLVER COMPETITIVENESS. *Runs continuously; R1–R2 are wave-1 priority.*
+## LANE R — REFORMULATION FOR SCALE, AND SOLVER COMPETITIVENESS. *Runs continuously, unchanged 2026-08-14.*
+
+> **UNCHANGED BY THE 2026-08-14 RE-RANKING.** Lane R runs **continuously inside every unit's
+> pre-registration** — *what would make this question answerable an order of magnitude cheaper?* — and
+> takes its own units when a wave has room. `R1` is closed against itself; `R0` landed; `R2`–`R5`
+> stay deferred in `OPTIONS.md` §B.
 
 **Attacks W7 by mathematics and engineering rather than hardware.** Every unit in every lane asks,
 as a standing question in its pre-registration: *what would make this question answerable an order
