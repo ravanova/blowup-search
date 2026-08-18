@@ -383,6 +383,35 @@ def item_3_net(hashes):
             NOTES.append("independent re-fetch of %s UNREACHABLE: %s" % (k, exc))
 
 
+def item_3_pdf(pdf):
+    print("\n  (3a-2, INDEPENDENT LEG) recounting T4's C+/C- terms off the PDF myself")
+    try:
+        txt = subprocess.run(["pdftotext", "-layout", pdf, "-"],
+                             capture_output=True, text=True).stdout
+    except FileNotFoundError as exc:
+        print("    UNREACHABLE: %s" % exc)
+        NOTES.append("independent term recount UNREACHABLE: %s" % exc)
+        return
+    t = txt.replace("­", "")
+    t = re.sub(r"-\s*\n\s*", "", t)          # de-hyphenate across line breaks
+    low = re.sub(r"\s+", " ", t).lower()
+    t4 = load("p2_route_t4_v1.json")
+    for term, want in t4["controls"]["C_plus"]["term_counts"].items():
+        check("pdf C+ %r" % term, low.count(term), want)
+    cm = {"self-consistent": low.count("self-consistent") + low.count("self consistent"),
+          "a priori bounds": low.count("a priori bounds"),
+          "isolating": low.count("isolating"),
+          "trapping region": low.count("trapping region"),
+          "logarithmic norm": low.count("logarithmic norm"),
+          "dynamical closure": low.count("dynamical closure")}
+    for term, got in cm.items():
+        check("pdf C- %r" % term, got, 0)
+    zg = [l.strip() for l in txt.splitlines() if "gliczy" in l.lower()]
+    check("pdf zgliczynski lines", len(zg), 1)
+    check("pdf the one zgliczynski line is bibliography item [48]",
+          zg[0].startswith("[48]"), True)
+
+
 def item_3_mat(saved):
     print("\n  (3a-1/2, INDEPENDENT LEG) re-decoding the authors' .mat myself")
     try:
@@ -485,6 +514,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--net", action="store_true", help="re-fetch the three sources and hash them")
     ap.add_argument("--saveddata", default=None, help="dir with {data,extra}orbit{1,2}.mat")
+    ap.add_argument("--pdf", default=None, help="local copy of arXiv:1902.00384 (needs pdftotext)")
     args = ap.parse_args()
 
     e = item_1()
@@ -498,6 +528,10 @@ def main():
         item_3_mat(args.saveddata)
     else:
         print("  (.mat re-decode NOT run; pass --saveddata DIR. Recorded UNREACHABLE, not passed.)")
+    if args.pdf:
+        item_3_pdf(args.pdf)
+    else:
+        print("  (PDF term recount NOT run; pass --pdf FILE. Recorded UNREACHABLE, not passed.)")
     item_4()
 
     print("\n" + "=" * 78)
