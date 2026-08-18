@@ -510,3 +510,4 @@ journal; nothing here is a summary written after the fact.*
 | view | what it shows | regenerate |
 |---|---|---|
 | `writeup/ROUTE_MAP.html` | Decision tree of every route to a Clay answer: closed by measurement / live / in flight / never explored, plus the W4 clause table and the wall ledger. | **Never automatically.** Procedure and the reasons in `writeup/ROUTE_MAP.md`. A Conductor FLAGS it stale in the integration commit; it does not rebuild it. |
+| `writeup/papers/` | Three drafts aimed at refereed venues — P1 selection bias, P2 the α-pin pincer, P4 the methodology record — each with a `STATUS.md` enumerating blockers BEFORE drafting. | **A paper is a VIEW of the record, never a source. No unit may cite one.** Contract and the honesty rules: `writeup/papers/README.md`. |
