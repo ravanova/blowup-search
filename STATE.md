@@ -149,25 +149,14 @@ it is core-h ÷ wall-h. The structural story is contradicted too (**21.44** epoc
 `E`'s forward pricing table is fine; only the comparison was wrong. **THIRD Conductor-record defect
 a verifier has caught, and the first one the Conductor wrote into a live gate.**
 
-**`V-W3`'s three confirmations, in one line each** (detail: `experiments/journal/verify_wave3.md`
-§§2–3, §3j remedy — pointer, not restatement). **(1)** `E`'s headline reproduces **6 of 6** off a
-recount of the 16 attempt rows, with two nuances already in the artefact. **(3)** `V-W2` confirms on
-**both** parts, re-derived from primaries not from `V-W2`'s record — VU `.mat` fields **bitwise**,
-`T5`'s corpus **1428 files / 417476 lines**, all three SHA-256 reproducing today. **(4)** `fig107`
-absent from `P2_EVIDENCE` confirmed by `ast.literal_eval` — 36 entries, `107` the only gap in 99–110;
-it is rebuilt and self-checked by nothing. **0 UNREACHABLE.**
+**`V-W3`'s three confirmations** — `E`'s headline 6/6, `V-W2` on both parts from re-fetched
+primaries, `fig107`'s `P2_EVIDENCE` gap mechanically; **0 UNREACHABLE**. Detail:
+`experiments/journal/verify_wave3.md` §§2–3 (§3j — pointer, not restatement).
 
-**`L2′`'s finding, and it is sharper than "still no method".** For any **nontrivial** backward
-λ-DSS blow-up profile of 3D NS the far-field decay exponent is pinned to **exactly `α = 1`**:
-**≥ 1** by Chae–Wolf Thm 1.1, **≤ 1** by Chae–Wolf Rmk 1.2 + Escauriaza–Seregin–Šverák, restated
-independently by Pineau–Vicol (`arXiv:2607.09619v2`, 6 Aug 2026) §1.2. **Any `α > 1` puts `U ∈ L³(ℝ³)`
-and yields FULL REGULARITY** — no singularity left to localise. Leg 381's bill asks `α > 1.5`, i.e. it
-**overshoots the `L³` threshold by 0.5**. So the deficit is **not a gap a sharper technique might
-close**; it is a step into a region the literature has emptied. The object is alive at all only
-because `λ = 1.7 ≫ 1` defeats the λ-near-1 hypotheses of Chae–Wolf Thm 1.3 and Pineau–Vicol
-Thms 1.6/1.7 — but **Rmk 1.2's `L³` clause carries no λ restriction**, so `λ ≫ 1` does not save it
-there. **This says NOTHING about whether 3D NS is regular**, and it retires **no** obligation:
-§6(i) wants *certified* decay and an admissible cutoff, and `L2′` certified nothing.
+**`L2′`'s finding is sharper than "still no method": `α` is pinned to EXACTLY 1**, so leg 381's
+`α > 1.5` cannot be paid by anything — paying it puts `U ∈ L³` and gives **full regularity**.
+**W4 clause (a) is measured SHUT; §6(i) is NOT retired.** Full statement with citations, and what
+it does *not* say: **`WALLS.md` §W4**, `experiments/journal/leg_397.md` §§4–9.
 
 **Defects D1–D6 are located, sized and STILL UNREPAIRED** (`experiments/journal/verify_wave3.md` §4).
 D1 (the units error) is corrected **here and in `OPTIONS.md`** in this commit; **D2–D6 are wave 5's
