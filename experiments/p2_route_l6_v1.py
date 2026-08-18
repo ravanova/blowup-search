@@ -40,9 +40,20 @@ import argparse
 import hashlib
 import json
 import math
+import multiprocessing as mp
+import os
 import sys
 import time
 from pathlib import Path
+
+# Threads per process.  The 6 starts of a rung are run in 6 worker PROCESSES (the
+# optimiser is inherently sequential within a start), so BLAS is capped at 2 threads
+# each to fill the 12 available cores without oversubscription.  Must be set BEFORE
+# numpy is imported.
+_NT = os.environ.setdefault("L6_THREADS", "2")
+for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+           "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS"):
+    os.environ.setdefault(_v, _NT)
 
 import numpy as np
 from numpy.polynomial import chebyshev as C
@@ -714,7 +725,29 @@ def diagnostics(g, x, branch):
 # --------------------------------------------------------------------------------------
 # 8.  One rung of the ladder
 # --------------------------------------------------------------------------------------
-def run_rung(Lmax, Nr, Ks, branch, seeds, maxiter, warm=None, Lmap=2.0, verbose=True):
+def _minimise_one(task):
+    """One L-BFGS-B start.  Top-level so it is picklable by multiprocessing.
+
+    Rebuilds `Geom` in the worker (a few tenths of a second) rather than shipping it;
+    `Geom` is deterministic in its arguments, so the reconstructed operator is
+    bit-identical to the parent's.
+    """
+    Lmax, Nr, Ks, Lmap, branch, name, x0, maxiter = task
+    g = Geom(Lmax, Nr, Ks, Lmap)
+    ts = time.time()
+    r = minimize(lambda z: objective(g, z, branch), np.asarray(x0, float), jac=True,
+                 method="L-BFGS-B",
+                 options=dict(maxiter=maxiter, maxfun=maxiter * 2, ftol=1e-16, gtol=1e-12))
+    gn = float(np.max(np.abs(r.jac))) if r.jac is not None else float("nan")
+    rec = dict(start=name, fun=float(r.fun), nit=int(r.nit), nfev=int(r.nfev),
+               max_abs_grad=gn, status=int(r.status),
+               hit_maxiter=bool(int(r.nit) >= maxiter),
+               seconds=round(time.time() - ts, 2))
+    return rec, np.asarray(r.x, float).copy()
+
+
+def run_rung(Lmax, Nr, Ks, branch, seeds, maxiter, warm=None, Lmap=2.0, verbose=True,
+             nproc=None):
     t0 = time.time()
     g = Geom(Lmax, Nr, Ks, Lmap)
     rng_starts = []
@@ -729,21 +762,26 @@ def run_rung(Lmax, Nr, Ks, branch, seeds, maxiter, warm=None, Lmap=2.0, verbose=
         except (ZeroDivisionError, ValueError):
             pass
 
+    tasks = [(Lmax, Nr, Ks, Lmap, branch, name, x0, maxiter) for name, x0 in rng_starts]
+    if nproc is None:
+        nproc = min(len(tasks), int(os.environ.get("L6_NPROC", "6")))
+    if nproc > 1:
+        ctx = mp.get_context("fork")
+        with ctx.Pool(nproc) as pool:
+            results = pool.map(_minimise_one, tasks, chunksize=1)
+    else:
+        results = [_minimise_one(t) for t in tasks]
+
     best = None
     per_start = []
-    for name, x0 in rng_starts:
-        ts = time.time()
-        r = minimize(lambda z: objective(g, z, branch), x0, jac=True, method="L-BFGS-B",
-                     options=dict(maxiter=maxiter, maxfun=maxiter * 2, ftol=1e-16, gtol=1e-12))
-        gn = float(np.max(np.abs(r.jac))) if r.jac is not None else float("nan")
-        per_start.append(dict(start=name, fun=float(r.fun), nit=int(r.nit),
-                              max_abs_grad=gn, status=int(r.status),
-                              seconds=round(time.time() - ts, 2)))
-        if best is None or r.fun < best[0]:
-            best = (float(r.fun), r.x.copy())
+    for rec, xopt in results:
+        per_start.append(rec)
+        if best is None or rec["fun"] < best[0]:
+            best = (rec["fun"], xopt)
         if verbose:
-            print(f"    start={name:12s} J={r.fun:.10e} nit={r.nit:5d} "
-                  f"|g|inf={gn:.2e} {time.time()-ts:.1f}s")
+            print(f"    start={rec['start']:12s} J={rec['fun']:.10e} nit={rec['nit']:5d} "
+                  f"|g|inf={rec['max_abs_grad']:.2e} {rec['seconds']:.1f}s "
+                  f"status={rec['status']}")
     out = dict(Lmax=Lmax, Nr=Nr, Ks=Ks, branch=branch, n_dof=g.n_dof,
                nq_r=g.nq_r, n_theta=g.nth, n_phi=g.nph, n_s=g.ns, Lmap=Lmap,
                residual_load_bearing=best[0], starts=per_start,
@@ -786,6 +824,43 @@ JOINT_LADDER = [("J0", 2, 8, 1), ("J1", 2, 12, 1), ("J2", 3, 12, 2),
                 ("J3", 3, 16, 2), ("J4", 4, 20, 3)]
 SEEDS = [401, 402, 403, 404, 405]
 
+# Single-axis ladders, leg_401.md SS5, verbatim:
+#   radial   N_r   in {8,12,16,20,24} at (L_max,K_s) = (3,2)
+#   angular  L_max in {1,2,3,4}       at (N_r,K_s)   = (16,2)
+#   temporal K_s   in {0,1,2,3}       at (L_max,N_r) = (3,16);  K_s = 0 is the
+#                                     exactly-self-similar control
+AXIS_LADDERS = {
+    "radial":   [(f"R{n}", 3, n, 2) for n in (8, 12, 16, 20, 24)],
+    "angular":  [(f"A{l}", l, 16, 2) for l in (1, 2, 3, 4)],
+    "temporal": [(f"K{k}", 3, 16, k) for k in (0, 1, 2, 3)],
+}
+
+CKPT = ROOT / "experiments" / "_l6_ckpt"
+
+
+def _checkpoint(name, obj):
+    """Flush partial results to disk.  The container is ephemeral; a ladder that dies at
+    the top rung must not take the rungs below it with it."""
+    CKPT.mkdir(exist_ok=True)
+    (CKPT / f"{name}.json").write_text(json.dumps(obj, indent=1, default=float))
+
+
+def run_ladder(ladder, branch, seeds, maxiter, ckpt_name, verbose=True):
+    """Run a ladder bottom-up with continuation between consecutive rungs."""
+    rows, warm, last = [], None, None
+    for (tag, Lmax, Nr, Ks) in ladder:
+        print(f"  rung {tag}: Lmax={Lmax} Nr={Nr} Ks={Ks}", flush=True)
+        row, g, xbest = run_rung(Lmax, Nr, Ks, branch, seeds, maxiter, warm=warm,
+                                 verbose=verbose)
+        row["tag"] = tag
+        rows.append(row)
+        warm = (xbest, g)
+        last = (row, g, xbest)
+        print(f"    -> residual = {row['residual_load_bearing']:.10e}   "
+              f"({row['seconds']:.0f}s)", flush=True)
+        _checkpoint(ckpt_name, rows)
+    return rows, last
+
 
 def main():
     ap = argparse.ArgumentParser()
@@ -793,6 +868,8 @@ def main():
     ap.add_argument("--rungs", type=int, default=5)
     ap.add_argument("--selftest-only", action="store_true")
     ap.add_argument("--quick", action="store_true")
+    ap.add_argument("--axis-branch", default="B", choices=["A", "B", "none"],
+                    help="branch on which the three single-axis ladders are run")
     args = ap.parse_args()
 
     t_start = time.time()
@@ -878,20 +955,37 @@ def main():
 
     results = {}
     for branch in ("A", "B"):
-        print(f"\nBRANCH {branch}")
-        rows, warm = [], None
-        for (tag, Lmax, Nr, Ks) in JOINT_LADDER[:args.rungs]:
-            print(f"  rung {tag}: Lmax={Lmax} Nr={Nr} Ks={Ks}")
-            row, g, xbest = run_rung(Lmax, Nr, Ks, branch, seeds, args.maxiter, warm=warm)
-            row["tag"] = tag
-            row["diagnostics"] = diagnostics(g, xbest, branch)
-            rows.append(row)
-            warm = (xbest, g)
-            print(f"    -> residual = {row['residual_load_bearing']:.10e}   "
-                  f"({row['seconds']:.0f}s)")
+        print(f"\nBRANCH {branch}", flush=True)
+        rows, last = run_ladder(JOINT_LADDER[:args.rungs], branch, seeds, args.maxiter,
+                                f"joint_{branch}")
+        row, g, xbest = last
+        row["diagnostics"] = diagnostics(g, xbest, branch)
+        _checkpoint(f"joint_{branch}", rows)
         results[branch] = rows
 
     doc["ladder_results"] = results
+
+    # ---- single-axis ladders (leg_401.md SS5) -----------------------------------------
+    axis = {}
+    if args.axis_branch != "none":
+        for name, lad in AXIS_LADDERS.items():
+            print(f"\nAXIS LADDER {name} (branch {args.axis_branch})", flush=True)
+            rows, _ = run_ladder(lad, args.axis_branch, seeds, args.maxiter,
+                                 f"axis_{name}_{args.axis_branch}")
+            rs = [r["residual_load_bearing"] for r in rows]
+            ns = [r["n_dof"] for r in rows]
+            axis[name] = dict(branch=args.axis_branch, rungs=rows,
+                              per_rung_residual=dict(zip([r["tag"] for r in rows], rs)),
+                              rate_dlogresid_dlogndof=slope(ns, rs))
+    doc["axis_ladders"] = dict(
+        branch=args.axis_branch,
+        why_one_branch=("branch B is the pinned alpha=1 class -- the class the Chae-Wolf pin "
+                        "says a nontrivial backward lambda-DSS profile must lie in -- so the "
+                        "per-axis rates are measured there. Running both branches on all three "
+                        "axis ladders as well as the joint ladder was not affordable; the cost "
+                        "is recorded in cost_and_shortfall."),
+        ladders=axis,
+    )
 
     # ---- the gate answer ---------------------------------------------------------------
     gate = {}
@@ -942,6 +1036,36 @@ def main():
             branch_A_weighted_L2=dA["weighted_L2_total"],
             branch_B_weighted_L2=dB["weighted_L2_total"],
         ),
+    )
+    # ---- reading (d): the cost, stated whether or not the answer is a NO ---------------
+    all_starts = []
+    for br in results.values():
+        for r in br:
+            all_starts.extend(r["starts"])
+    for lad in axis.values():
+        for r in lad["rungs"]:
+            all_starts.extend(r["starts"])
+    n_capped = sum(1 for r in all_starts if r["hit_maxiter"])
+    top = results["B"][-1]
+    doc["cost_and_shortfall"] = dict(
+        preregistered_maxiter=20000,
+        maxiter_actually_used=args.maxiter,
+        shortfall_reason=("wall-clock. One objective-plus-exact-gradient evaluation costs "
+                          "~0.25 s at rung J0 and ~1.5 s at rung J4 on 12 cores; the "
+                          "pre-registered 20000 iterations x 6 starts x 5 joint rungs x 2 "
+                          "branches x 13 further axis rungs is ~10^3 core-hours, which this "
+                          "container does not have."),
+        starts_run=len(all_starts),
+        starts_that_hit_the_iteration_cap=n_capped,
+        fraction_of_starts_capped=(n_capped / len(all_starts)) if all_starts else None,
+        resolution_reached=dict(tag=top["tag"], Lmax=top["Lmax"], Nr=top["Nr"],
+                                Ks=top["Ks"], n_dof=top["n_dof"],
+                                nq_r=top["nq_r"], n_theta=top["n_theta"],
+                                n_phi=top["n_phi"], n_s=top["n_s"]),
+        wall_clock_seconds=round(time.time() - t_start, 1),
+        wall_clock_hours=round((time.time() - t_start) / 3600.0, 3),
+        cores=12,
+        UNDER_RESOURCED=bool(n_capped > 0),
     )
     doc["runtime_seconds"] = round(time.time() - t_start, 1)
     doc["chain"] = dict(
