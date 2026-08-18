@@ -10,7 +10,7 @@ verbatim 2026-08-18 under §3j → `## Superseded — the 2026-08-14 fork`.
 
 ---
 
-## LIVE — CONDUCTOR mode, **WAVE 5 CLOSED — ALL THREE UNITS LANDED**, 2026-08-18
+## LIVE — CONDUCTOR mode, **WAVE 5 CLOSED; WAVE 6 PLANNED AND DISPATCHED**, 2026-08-18
 
 ### Wave 5 CLOSED — 3 planned, 3 dispatched, 3 landed
 
@@ -60,34 +60,39 @@ backwards. Lane T's two re-open conditions are unchanged and neither fired. What
 
 ### Headroom at the wave boundary (§3j) — IN **BYTES**, AND THE FIRST COUNT WAS WRONG
 
-**A correction the next Conductor needs:** I first measured with Python `len()` — **characters**.
-These files are dense with multi-byte UTF-8, so that under-reports by ~2%, and on bytes **`WALLS.md`
-and `OPTIONS.md` were both OVER cap** when I read them as inside it. `HEAD` was compliant: the defect
-is **mine**. **Measure with `wc -c`.** `ORCHESTRATION.md` §3j now says so.
+Detail retired verbatim 2026-08-18 → `## Superseded — wave 5's headroom detail` below.
+**Live consequence: measure the caps with `wc -c`, NOT Python `len()`** — these files are
+dense with multi-byte UTF-8 and a character count under-reports by ~2% (~500 B at
+`WALLS.md`'s size); on that error I read two files as inside their caps and committed
+them **over**. `ORCHESTRATION.md` §3j now carries the rule. Rows stay in **characters**.
 
 | file | bytes | cap | free |
 |---|---|---|---|
 | `STATE.md` | 23,247 | 24,576 | 1,329 (longest row 583 ≤ 600) |
 | `WALLS.md` *(excl. exempt `## History`)* | 32,233 | 32,768 | 535 |
 | `OPTIONS.md` | 24,487 | 24,576 | 89 |
-| `ORCH_STATE.md` LIVE | **at cap** | 8,192 | **<100** |
+| `ORCH_STATE.md` LIVE | at cap | 8,192 | <100 |
 
-Cycles: **wave 5 = 2**. **Context HAS been summarised** — §9d's triggers are 12 cycles
-*or* first summarisation, and **the second has fired**: wave 6 is planned knowing a handoff is due.
+**Next retirement NAMED:** `WALLS.md` — W3's cell-occupancy narrative behind a pointer;
+`OPTIONS.md` — §F's discharged items. Cycles: wave 5 = 2; context HAS summarised.
 
-**Retired this integration**, verbatim: `E`'s H-hard narrative and the superseded lane-priority
-paragraphs → `WALLS_HISTORY.md` §E, §PRIORITIES; `V3` and `L2′` rows → `writeup/INDEX.md`; wave 5's
-unit table → its own committed plan file; the wave-5 in-flight narrative, the fork paragraph and this
-wave's audit detail → the blocks below; **and, on finding the overrun** — `V-W4`'s `≤ 1` provenance
-paragraph → §W4-PROV (1,087 B) and the refuted `~8×` cost-model block → §OPTIONS-A (753 B, struck
-kept struck), both leaving live pointers. **Retirement, not compaction.**
+### WAVE 6 — **DISPATCHED**, 2026-08-18, in the order the plan fixes (§3f rule 3)
 
-**THE NEXT RETIREMENT IS NAMED, because 535 bytes is not headroom.** `WALLS.md`: W3's
-cell-occupancy narrative retires **the moment wave 6's audit lands** (that unit supersedes it), and
-Lane T's *price* bullets restate `OPTIONS.md` §E — **but Lane T got MORE load-bearing this wave, so
-those move only behind a pointer that keeps every number.** `OPTIONS.md`: §F's discharged items.
-`ORCH_STATE.md`: **done** — wave 5's audit detail demoted verbatim when this plan was written.
-**If a wave needs more than that, the cap itself is the escalation, not the content.**
+Plan `e202653`, `STATE.md` pointer `5c49486`, both **before any worker started**. Three
+self-contained briefs, each carrying **its gate verbatim from the plan**, its readings,
+its territory, *pre-register in its own commit before any result-producing code*, and
+**COMMIT DURING THE RUN, NOT ONLY AT THE GATE**.
+
+| unit | lane | branch | order |
+|---|---|---|---|
+| `L6` — bank a discrete route-4 profile | L | `leg/401-l6-route4-profile` | **first (construction)** |
+| `V5` — adversarial audit of `arXiv:2509.25116` + the `_v2` repair | V | `leg/402-v5-audit-25116` | second |
+| `V-W5` — verify wave 5 | — | `leg/403-vw5-verify-wave5` | **last (verifier)** |
+
+**I planned this wave, so I may not verify it** — `V-W5` verifies **wave 5**. No brief
+sends a worker on a repo tour; each names the files it may read. `V5` carries reading (e):
+the journal-ref finding is an **open user escalation** — record it, **do not grade the
+criterion, do not stop for it**. `V5` and `V-W5` may not edit any `_v1` artefact (Q3).
 
 ### WAVE 6 — PLANNED, COMMITTED BEFORE DISPATCH: `writeup/waves/WAVE6_PLAN.md` @ `e202653`
 
@@ -116,6 +121,39 @@ NOT ruled**. C1 is **DISCHARGED** and stands **EXEMPLAR-FREE**.
 
 ---
 
+
+## Superseded — wave 5's headroom detail, demoted 2026-08-18 under §3j (verbatim)
+
+### Headroom at the wave boundary (§3j) — IN **BYTES**, AND THE FIRST COUNT WAS WRONG
+
+**A correction the next Conductor needs:** I first measured with Python `len()` — **characters**.
+These files are dense with multi-byte UTF-8, so that under-reports by ~2%, and on bytes **`WALLS.md`
+and `OPTIONS.md` were both OVER cap** when I read them as inside it. `HEAD` was compliant: the defect
+is **mine**. **Measure with `wc -c`.** `ORCHESTRATION.md` §3j now says so.
+
+| file | bytes | cap | free |
+|---|---|---|---|
+| `STATE.md` | 23,247 | 24,576 | 1,329 (longest row 583 ≤ 600) |
+| `WALLS.md` *(excl. exempt `## History`)* | 32,233 | 32,768 | 535 |
+| `OPTIONS.md` | 24,487 | 24,576 | 89 |
+| `ORCH_STATE.md` LIVE | **at cap** | 8,192 | **<100** |
+
+Cycles: **wave 5 = 2**. **Context HAS been summarised** — §9d's triggers are 12 cycles
+*or* first summarisation, and **the second has fired**: wave 6 is planned knowing a handoff is due.
+
+**Retired this integration**, verbatim: `E`'s H-hard narrative and the superseded lane-priority
+paragraphs → `WALLS_HISTORY.md` §E, §PRIORITIES; `V3` and `L2′` rows → `writeup/INDEX.md`; wave 5's
+unit table → its own committed plan file; the wave-5 in-flight narrative, the fork paragraph and this
+wave's audit detail → the blocks below; **and, on finding the overrun** — `V-W4`'s `≤ 1` provenance
+paragraph → §W4-PROV (1,087 B) and the refuted `~8×` cost-model block → §OPTIONS-A (753 B, struck
+kept struck), both leaving live pointers. **Retirement, not compaction.**
+
+**THE NEXT RETIREMENT IS NAMED, because 535 bytes is not headroom.** `WALLS.md`: W3's
+cell-occupancy narrative retires **the moment wave 6's audit lands** (that unit supersedes it), and
+Lane T's *price* bullets restate `OPTIONS.md` §E — **but Lane T got MORE load-bearing this wave, so
+those move only behind a pointer that keeps every number.** `OPTIONS.md`: §F's discharged items.
+`ORCH_STATE.md`: **done** — wave 5's audit detail demoted verbatim when this plan was written.
+**If a wave needs more than that, the cap itself is the escalation, not the content.**
 
 ## Superseded — wave 5's mechanical audits, demoted 2026-08-18 under §3j
 
