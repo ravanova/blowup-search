@@ -214,9 +214,12 @@ granularity, saying where. **PUSH THE BRANCH ONLY — never merge, never push to
 4. **The DSS escalation packet** (legs 313/320, branches unmerged). Complete: both candidate theorems
    read at full text and neither reaches the screened object.
 
-**Conductor-owned debts, owed not optional** (`OPTIONS.md` §F): `fig107` is **not registered** in
-`writeup/build_figures.py`, so nothing detects it going stale; and `INDEX.md` owes rows for `T4`,
-`T6`, `T5`, `V1`, `E` — **a Conductor-owned file, therefore a Conductor-owned debt.**
+**Conductor-owned debts** (`OPTIONS.md` §F). `INDEX.md`: `T4`/`T6`/`T5`/`V1` rows **WRITTEN**
+`bcd8063`; `E` and `V-W2` **HELD** — they are what `V-W3` audits. `fig107` **not registered** in
+`build_figures.py` (nor is `p2_route_t6_v1_evidence.py`) — **HELD UNFIXED ON PURPOSE**: registration
+coverage is `V-W3`'s gate item (4), and fixing it now destroys the measurement. Both land at wave-4
+integration. The in-flight figure table in `INDEX.md` is stale (legs in the 300s marked live) —
+**flagged, not repaired**; reconciling it is a unit of work, not a passing fix.
 
 **DISCHARGED and off the desk:** the C1-exemplar escalation (`RULING_C1_EXEMPLAR_2026-08-14.md`) and
 all four 2026-08-13 ban-wording items (`RULING_BAN_WORDING_2026-08-13.md`).
