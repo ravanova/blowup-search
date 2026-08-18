@@ -235,6 +235,11 @@ mathematics not procurement — **a reformulation whose compliant scale is small
 magnitude taken out of the required resourcing beats an order of magnitude of hardware, because it
 is permanent.
 
+**2026-08-18 — SIZE IS NOT THE BINDING RISK, PERSISTENCE IS.** `U3` **finished**: 14.47 h wall,
+144.69 core-h reserved, 92.9% utilised. Every recorded loss (13 agents 08-06, 5 on 08-07, `E`
+killed twice, 3 of 4 in wave 3) was a suspended session or a **gitignored** checkpoint, never a
+job too big. Priced, **not queued**: `writeup/prices/FIELD_ENSEMBLE_2026-08-18.md`.
+
 **Lane: R.**
 
 ---
