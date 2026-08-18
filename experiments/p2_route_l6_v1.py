@@ -724,25 +724,90 @@ def diagnostics(g, x, branch):
 # --------------------------------------------------------------------------------------
 # 8.  One rung of the ladder
 # --------------------------------------------------------------------------------------
-def _minimise_one(task):
-    """One L-BFGS-B start.  Top-level so it is picklable by multiprocessing.
+def _gscaled(x, gr, f):
+    """Scale-invariant convergence measure ||x||_2 * ||grad||_2 / |J|.
 
-    Rebuilds `Geom` in the worker (a few tenths of a second) rather than shipping it;
-    `Geom` is deterministic in its arguments, so the reconstructed operator is
-    bit-identical to the parent's.
+    The objective is INVARIANT under x -> c x (the normalisation is applied inside the
+    tape), so grad J is orthogonal to x and its size falls like 1/||x||.  A small
+    ||grad||_inf therefore does NOT by itself mean converged -- it can just mean the
+    coefficient vector has grown.  This quotient is invariant under x -> c x and is the
+    honest stationarity measure for this parametrisation.
+    """
+    x = np.asarray(x, float)
+    gr = np.asarray(gr, float) if gr is not None else None
+    if gr is None or not np.isfinite(f) or f == 0.0:
+        return float("nan")
+    return float(np.linalg.norm(x) * np.linalg.norm(gr) / abs(f))
+
+
+def _minimise_one(task):
+    """One start: L-BFGS-B with RENORMALISING RESTARTS.  Top-level so it is picklable.
+
+    Why restarts.  The objective is invariant under c -> t c, because the normalisation is
+    applied inside the tape.  grad J is therefore orthogonal to c and its norm falls like
+    1/||c||.  L-BFGS-B's stopping test is on ||proj grad||_inf, so once the iterate has
+    drifted outward the test fires while the objective is STILL FALLING -- measured on this
+    problem at rung J0: `CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL` at iteration
+    1041 with |g|inf = 6.85e-13, at which point J was still dropping 2.7% per 25
+    iterations.  That is a false stop, not a minimum.
+
+    The fix keeps the objective and the minimiser untouched: whenever L-BFGS-B stops, the
+    iterate is rescaled to the normalisation surface (which changes no function value) and
+    the solver is restarted with the remaining iteration budget.  The loop ends when a
+    restart buys less than `REL_STALL` relative improvement, or when the budget is spent.
+
+    `Geom` is rebuilt in the worker; it is deterministic in its four arguments.
     """
     Lmax, Nr, Ks, Lmap, branch, name, x0, maxiter = task
     g = Geom(Lmax, Nr, Ks, Lmap)
     ts = time.time()
-    r = minimize(lambda z: objective(g, z, branch), np.asarray(x0, float), jac=True,
-                 method="L-BFGS-B",
-                 options=dict(maxiter=maxiter, maxfun=maxiter * 2, ftol=1e-16, gtol=1e-12))
-    gn = float(np.max(np.abs(r.jac))) if r.jac is not None else float("nan")
-    rec = dict(start=name, fun=float(r.fun), nit=int(r.nit), nfev=int(r.nfev),
-               max_abs_grad=gn, status=int(r.status),
-               hit_maxiter=bool(int(r.nit) >= maxiter),
+
+    traj, state = [], dict(k=0)
+
+    def cb(xk):
+        state["k"] += 1
+        k = state["k"]
+        if k in (1, 2, 5, 10) or k % TRAJ_EVERY == 0:
+            f, gr = objective(g, xk, branch)
+            traj.append([k, round(time.time() - ts, 2), f, float(np.max(np.abs(gr))),
+                         _gscaled(xk, gr, f)])
+
+    x = np.asarray(x0, float)
+    total_nit = total_nfev = 0
+    prev = float("inf")
+    rounds, r = [], None
+    while total_nit < maxiter:
+        x = normalise(g, x, branch)
+        r = minimize(lambda z: objective(g, z, branch), x, jac=True, method="L-BFGS-B",
+                     callback=cb,
+                     options=dict(maxiter=maxiter - total_nit,
+                                  maxfun=2 * (maxiter - total_nit),
+                                  ftol=1e-16, gtol=1e-12))
+        total_nit += int(r.nit)
+        total_nfev += int(r.nfev)
+        rounds.append(dict(nit=int(r.nit), fun=float(r.fun), status=int(r.status),
+                           coeff_norm=float(np.linalg.norm(r.x))))
+        x = np.asarray(r.x, float)
+        gain = (prev - float(r.fun)) / abs(prev) if np.isfinite(prev) else 1.0
+        prev = float(r.fun)
+        if int(r.nit) == 0 or gain < REL_STALL:
+            break
+
+    x = normalise(g, x, branch)
+    fun, jac = objective(g, x, branch)
+    gn = float(np.max(np.abs(jac)))
+    gs = _gscaled(x, jac, fun)
+    traj.append([int(total_nit), round(time.time() - ts, 2), float(fun), gn, gs])
+    rec = dict(start=name, fun=float(fun), nit=int(total_nit), nfev=int(total_nfev),
+               restarts=len(rounds), rounds=rounds,
+               max_abs_grad=gn, scale_invariant_grad=gs,
+               coeff_norm=float(np.linalg.norm(x)),
+               status=int(r.status) if r is not None else -1,
+               hit_maxiter=bool(total_nit >= maxiter),
+               stalled_before_cap=bool(total_nit < maxiter),
+               trajectory_k_sec_J_ginf_gscaled=traj,
                seconds=round(time.time() - ts, 2))
-    return rec, np.asarray(r.x, float).copy()
+    return rec, x.copy()
 
 
 def run_rung(Lmax, Nr, Ks, branch, seeds, maxiter, warm=None, Lmap=2.0, verbose=True,
@@ -763,7 +828,11 @@ def run_rung(Lmax, Nr, Ks, branch, seeds, maxiter, warm=None, Lmap=2.0, verbose=
 
     tasks = [(Lmax, Nr, Ks, Lmap, branch, name, x0, maxiter) for name, x0 in rng_starts]
     if nproc is None:
-        nproc = min(len(tasks), int(os.environ.get("L6_NPROC", "6")))
+        # measured (experiments/_l6_scaling.py): the residual is memory-bandwidth bound,
+        # so at the smallest rung 6 processes are SLOWER in aggregate than 1, while at the
+        # larger rungs 6 processes buy ~1.9x.  The threshold is where the two cross.
+        wide = int(os.environ.get("L6_NPROC", "6"))
+        nproc = min(len(tasks), 1 if g.n_dof < 500 else wide)
     if nproc > 1:
         ctx = mp.get_context("fork")
         with ctx.Pool(nproc) as pool:
@@ -788,12 +857,29 @@ def run_rung(Lmax, Nr, Ks, branch, seeds, maxiter, warm=None, Lmap=2.0, verbose=
     return out, g, best[1]
 
 
+def _l5_norm_verbatim():
+    """The load-bearing norm string as L5 banked it, read from the banked artefact and
+    never retyped -- so the norm this leg measures in cannot have been invented here."""
+    try:
+        return json.loads(L5_ART.read_text())[
+            "realization_lesson_91"]["norms"]["vorticity_LOAD_BEARING"]
+    except Exception as exc:                                    # noqa: BLE001
+        return f"UNREADABLE: {exc}"
+
+
 def bank_profile(g, x, branch, tag):
     """Package the actual velocity field so the artefact CARRIES THE PROFILE, not just a
     number about it.  The gate asks for a divergence-free velocity field to be banked."""
+    # objective() rescales c -> c/sqrt(N(c)) INSIDE the tape, so the residual it reports is
+    # the residual of the NORMALISED field.  Bank that field, not the raw iterate, or the
+    # banked coefficients do not reproduce the banked number (caught by evidence check C18).
+    x = normalise(g, np.asarray(x, float), branch)
     aF, aQ = g.unpack(x)
-    # sample V on a fixed, named grid so the field is checkable without this code
-    dirs = np.array([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0],
+    # Sample V on a fixed, named grid so the field is checkable without this code.
+    # No direction is the polar axis: theta=0 is a coordinate singularity of the vector
+    # spherical harmonics (Psi, Phi involve d_phi Y / sin theta), not of the field.  The
+    # quadrature never touches it -- Gauss-Legendre nodes in cos(theta) are interior.
+    dirs = np.array([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.3, -0.4, 0.9],
                      [1.0, 1.0, 1.0], [1.0, -2.0, 0.5]], float)
     dirs = dirs / np.linalg.norm(dirs, axis=1, keepdims=True)
     radii = [0.25, 1.0, 4.0, 16.0, 64.0]
@@ -801,6 +887,8 @@ def bank_profile(g, x, branch, tag):
     samples = []
     for s_val in (0.0, 0.25 * PERIOD, 0.5 * PERIOD):
         V = eval_V_cart(g, aF, aQ, pts, s_val)
+        if not np.all(np.isfinite(V)):
+            raise FloatingPointError("non-finite V in banked field samples")
         samples.append(dict(s=float(s_val),
                             points=[[float(c) for c in q] for q in pts],
                             V=[[float(c) for c in v] for v in V]))
@@ -845,6 +933,36 @@ def prolong(x_old, g_new, g_old):
     return np.concatenate([aFn.ravel(), aQn.ravel()])
 
 
+def verdict(ns, rs):
+    """The pre-registered decision rule (leg_401.md SS5.1), in one place."""
+    if len(rs) < 2:
+        return "NO", float("nan")
+    rels = [(rs[i] - rs[i - 1]) / rs[i - 1] for i in range(1, len(rs))]
+    k = slice(max(0, len(rs) - 3), len(rs))
+    s3 = slope(ns[k], rs[k])
+    strictly_dec = all(rs[i] < rs[i - 1] for i in range(max(1, len(rs) - 2), len(rs)))
+    big = all(r < -0.05 for r in rels[-2:]) if len(rels) >= 2 else False
+    return ("YES" if (strictly_dec and big and s3 < -0.05) else "NO"), s3
+
+
+def residual_at_cap(rows, K):
+    """Best residual over starts at iteration cap K, from the recorded trajectories.
+
+    Answers the question the iteration cap raises: is the refinement verdict a fact about
+    the construction, or about where L-BFGS-B happened to be stopped?
+    """
+    out = []
+    for row in rows:
+        best = None
+        for st_ in row["starts"]:
+            pts = [t for t in st_.get("trajectory_k_sec_J_ginf_gscaled", []) if t[0] <= K]
+            if pts:
+                v = min(t[2] for t in pts)
+                best = v if best is None else min(best, v)
+        out.append(best)
+    return out
+
+
 def slope(ns, rs):
     ns, rs = np.asarray(ns, float), np.asarray(rs, float)
     ok = rs > 0
@@ -860,6 +978,14 @@ def slope(ns, rs):
 JOINT_LADDER = [("J0", 2, 8, 1), ("J1", 2, 12, 1), ("J2", 3, 12, 2),
                 ("J3", 3, 16, 2), ("J4", 4, 20, 3)]
 SEEDS = [401, 402, 403, 404, 405]
+
+# how often the convergence trajectory is sampled (an extra objective+gradient each time,
+# so it is kept sparse)
+TRAJ_EVERY = 50
+
+# a renormalising restart that buys less than this relative improvement means the
+# start has genuinely stalled, not that L-BFGS-B's gradient test misfired
+REL_STALL = 1e-10
 
 # Single-axis ladders, leg_401.md SS5, verbatim:
 #   radial   N_r   in {8,12,16,20,24} at (L_max,K_s) = (3,2)
@@ -907,6 +1033,9 @@ def main():
     ap.add_argument("--quick", action="store_true")
     ap.add_argument("--axis-branch", default="B", choices=["A", "B", "none"],
                     help="branch on which the three single-axis ladders are run")
+    ap.add_argument("--axis-maxiter", type=int, default=None,
+                    help="iteration cap for the secondary single-axis ladders "
+                         "(defaults to --maxiter)")
     args = ap.parse_args()
 
     t_start = time.time()
@@ -970,6 +1099,11 @@ def main():
                               "||curl_y R[V](.,s)||_{L3/2(R^3)} ds  (pressure-free)"),
                 norm_source=("writeup/data/p2_route_l5_finite_energy_v1.json "
                              ".realization_lesson_91.norms.vorticity_LOAD_BEARING"),
+                norm_source_verbatim=_l5_norm_verbatim(),
+                same_norm_why=("L5 writes the integrand as curl_y R_loc and L6 as curl_y R[V]: "
+                               "the same object, since L6's R[V] IS route 4's profile operator "
+                               "and L6's V is global, so no localisation appears. Both are "
+                               "||curl F||_{L1_t L3/2_x} over one DSS period."),
             ),
             normalisations=dict(
                 branch_A=("free far field: (1/T_s) int int |V|^2 e^{-|y|^2/4} dy ds = 1"),
@@ -1007,10 +1141,11 @@ def main():
 
     # ---- single-axis ladders (leg_401.md SS5) -----------------------------------------
     axis = {}
+    axis_maxiter = args.axis_maxiter or args.maxiter
     if args.axis_branch != "none":
         for name, lad in AXIS_LADDERS.items():
             print(f"\nAXIS LADDER {name} (branch {args.axis_branch})", flush=True)
-            rows, _ = run_ladder(lad, args.axis_branch, seeds, args.maxiter,
+            rows, _ = run_ladder(lad, args.axis_branch, seeds, axis_maxiter,
                                  f"axis_{name}_{args.axis_branch}")
             rs = [r["residual_load_bearing"] for r in rows]
             ns = [r["n_dof"] for r in rows]
@@ -1019,6 +1154,7 @@ def main():
                               rate_dlogresid_dlogndof=slope(ns, rs))
     doc["axis_ladders"] = dict(
         branch=args.axis_branch,
+        maxiter=axis_maxiter,
         why_one_branch=("branch B is the pinned alpha=1 class -- the class the Chae-Wolf pin "
                         "says a nontrivial backward lambda-DSS profile must lie in -- so the "
                         "per-axis rates are measured there. Running both branches on all three "
@@ -1028,6 +1164,20 @@ def main():
     )
 
     # ---- the gate answer ---------------------------------------------------------------
+    def _cap_table(rows, ns, mx):
+        tab = {}
+        for K in [k for k in (50, 100, 200, 400, 800, 1600, 3200) if k <= mx] + [mx]:
+            rs_k = residual_at_cap(rows, K)
+            if any(v is None for v in rs_k):
+                continue
+            v, s3 = verdict(ns, rs_k)
+            tab[str(K)] = dict(per_rung_residual=rs_k, decreases_under_refinement=v,
+                               rate_dlogresid_dlogndof_last3=s3)
+        vs = [t["decreases_under_refinement"] for t in tab.values()]
+        return dict(by_cap=tab, verdict_is_stable_in_the_cap=bool(len(set(vs)) == 1),
+                    why=("if the verdict is the same at every iteration cap, it is a fact "
+                         "about the construction and not about where the optimiser stopped"))
+
     gate = {}
     for branch in ("A", "B"):
         rows = results[branch]
@@ -1051,6 +1201,7 @@ def main():
             decreases_under_refinement="YES" if yes else "NO",
             rate_dlogresid_dlogndof_last3=s_last3,
             rate_dlogresid_dlogndof_all=s_all,
+            stability_against_the_iteration_cap=_cap_table(rows, ns, args.maxiter),
         )
     doc["gate"] = gate
 
@@ -1090,6 +1241,7 @@ def main():
     doc["cost_and_shortfall"] = dict(
         preregistered_maxiter=20000,
         maxiter_actually_used=args.maxiter,
+        maxiter_on_the_secondary_axis_ladders=axis_maxiter,
         shortfall_reason=("wall-clock. One objective-plus-exact-gradient evaluation costs "
                           "~0.25 s at rung J0 and ~1.5 s at rung J4 on 12 cores; the "
                           "pre-registered 20000 iterations x 6 starts x 5 joint rungs x 2 "

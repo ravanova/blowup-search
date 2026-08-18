@@ -171,11 +171,19 @@ def main():
     if L5_ART.exists():
         l5 = json.loads(L5_ART.read_text())
         l5norm = l5["realization_lesson_91"]["norms"]["vorticity_LOAD_BEARING"]
-        mine = doc["realization_lesson_91"]["norms"]["LOAD_BEARING"]
-        chk("C11 load-bearing norm is the one L5 banked", l5norm == mine,
-            f"L5={l5norm!r} L6={mine!r}")
+        norms = doc["realization_lesson_91"]["norms"]
+        mine = norms["LOAD_BEARING"]
+        head = "||curl F||_{L1_t L3/2_x}"
+        # the artefact must carry L5's string CHARACTER FOR CHARACTER, and its own
+        # statement of the norm must be the same functional
+        chk("C11 load-bearing norm is the one L5 banked, quoted verbatim",
+            norms.get("norm_source_verbatim") == l5norm
+            and mine.startswith(head) and l5norm.startswith(head)
+            and "L3/2" in mine and "pressure-free" in mine,
+            f"L5={l5norm!r}")
     else:
-        chk("C11 load-bearing norm is the one L5 banked", False, "L5 artefact missing")
+        chk("C11 load-bearing norm is the one L5 banked, quoted verbatim", False,
+            "L5 artefact missing")
 
     # ---- C12..C14 ---------------------------------------------------------------------
     b = doc["ban_C1"]
@@ -271,15 +279,20 @@ def main():
             chk(f"C19[{branch}] the banked field is divergence free", rel < 1e-6,
                 f"max|div V| / max|V| = {rel:.3e}")
 
-            bad20 = 0.0
+            bad20, finite = 0.0, True
             for samp in prof["field_samples"]:
                 P = np.asarray(samp["points"], float)
                 Vb = np.asarray(samp["V"], float)
                 Vr = L6.eval_V_cart(g, aF, aQ, P, samp["s"])
-                bad20 = max(bad20, float(np.max(np.abs(Vr - Vb))
-                                         / max(1e-300, np.max(np.abs(Vb)))))
-            chk(f"C20[{branch}] banked field samples reproduce", bad20 < 1e-10,
-                f"max rel dev = {bad20:.3e}")
+                finite = finite and bool(np.all(np.isfinite(Vb))
+                                         and np.all(np.isfinite(Vr)))
+                dev = np.max(np.abs(Vr - Vb)) / max(1e-300, np.max(np.abs(Vb)))
+                # NaN must not be swallowed by max(): compare explicitly
+                if not np.isfinite(dev) or dev > bad20:
+                    bad20 = float(dev)
+            chk(f"C20[{branch}] banked field samples are finite and reproduce",
+                finite and np.isfinite(bad20) and bad20 < 1e-10,
+                f"finite={finite} max rel dev = {bad20:.3e}")
 
     # ---- verdict ----------------------------------------------------------------------
     print(f"\n{NCHECK} checks, {len(FAILURES)} failure(s)")
