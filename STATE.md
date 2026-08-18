@@ -35,7 +35,7 @@ dropped because a lane was not chosen.**
 
 | lane | attacks | status | one line |
 |---|---|---|---|
-| **V — VISCOUS RUNG** | W3 | **HELD 2026-08-18** | `V3` (leg 399) measured the lane's own premise and it **did not hold**: leg 174's Grade-A × fluid cell is **OCCUPIED** by `arXiv:2509.25116` on leg 174's own two clauses. `V3`'s **pre-committed** reading (a) — *a YES kills Lane V's premise* — **FIRED and is honoured.** Whether W3 is thereby *broken* turns on which of its two wordings governs: **OPEN user escalation, not ruled here.** Held, not killed; reversible in one line. |
+| **V — VISCOUS RUNG** | W3 | **ACTIVE — un-held 2026-08-18 by USER RULING** | `V3` (leg 399) measured leg 174's Grade-A × fluid cell **OCCUPIED** by `arXiv:2509.25116`, and its pre-committed reading (a) **FIRED and stays honoured**. **RULED (Q1): the prose test governs — W3 STANDS and the premise SURVIVES**, because the certified object is **not a finite-time singularity**. The hold went in one line and comes out in one. **Wave 6 owes the lane an OBLIGATORY unit** (Q4). |
 | **L — THE LAST OBLIGATIONS** | W4, W5, §6(i), §6(ii) | **PRIORITY, ACTIVE — AND IT HAS NOW LANDED** | `L2′` (leg 397) is Lane L's **first landed unit in 399 legs**, and it came back **narrowing the lane, not widening it**: leg 381's decay bill is not merely unpaid, **paying it is self-defeating** — `α` is pinned to exactly 1 and any `α > 1` gives full regularity. **§6(i) is NOT retired** (nothing certified). What is left is **two untouched structural residuals**, both named in W4's own break test: a **natively finite-energy DSS ansatz**, and **a target not imposing Clay condition (7)**. |
 | **T — TORUS** | W2, W4, W6 | **DEFERRED** | Demoted on **the lane's own measurement**: `arXiv:1902.00384` is certified by exactly the banned apparatus and both certified rows are 2D lifts (`T4`, `T6`). **Nothing measured is superseded; W2 stands strengthened.** Alive only through **`T2″`**; `T3` deferred **with** the lane, not killed. `OPTIONS.md` §E. |
 | **R — REFORMULATION + SOLVER** | W7 | **continuous** | Runs inside every unit's pre-registration (*what makes this an order of magnitude cheaper?*) and takes its own units when a wave has room. Every factor removed is permanent. **Never sets a wave's direction.** |
@@ -104,57 +104,19 @@ being one. Escalation §3, question (Q3).
 | **`V-W3`** (wave 4, verification) | **3 of 4 CONFIRMED, 1 REFUTED.** `E`'s headline reproduces 6/6; `V-W2` confirms on both parts from **re-fetched primaries** (`.mat` fields **bitwise**); `fig107`'s `P2_EVIDENCE` gap confirmed by `ast.literal_eval` (36 entries, `107` the only gap in 99–110). **REFUTED: `E`'s `8×` overrun — `0.0713` is WALL-h, `0.57` is CORE-h; like for like `E` came in 0.4% UNDER.** 6 defects **unrepaired**, 0 `UNREACHABLE`. | `2b8755e` | **UNVERIFIED** |
 | **`V-W2`** (wave 3, verification) | **ALL FOUR ITEMS REPRODUCE**, items (1)/(2) from **re-fetched primary artefacts whose SHA-256 matched the banked digests** — measurements, not transcription checks. Banked one nuance **unreconciled**: the *ground* for `T6`'s UNDERCUT 2 was the **Conductor's** wording, not `T6`'s. **Second Conductor-wording defect a verifier has caught.** `T1`'s owed machine record **DISCHARGED**, mutation-tested four ways. | `594ff89` | **UNVERIFIED** |
 | **`E`** (wave 1, Lane R instrument) | **PASS in its pre-committed wording** — all three diagnostics RETURN, each with a planted control firing both ways. **Branch fired: `E-iii`.** 16 attempts at the eight published Lucas–Kerswell rows: **2 converged, 0 recovered any named row**, both convergences below diagnostic (1)'s 0.15 shelf. Control **R** is load-bearing — it proves the predicate **can** return a recovery. `G1` stays `UNDER-RESOURCED` **and was not written to**. `experiments/journal/prog_r4_e.md`. | `d0d72b1` | **UNVERIFIED** |
-| **`T4`** / leg 393 (T) | **`STOP`, pre-committed branch (c).** `arXiv:1902.00384` is certified by **exactly the banned apparatus**, and **both certified rows are 2D lifts**. **W2 STANDS, STRENGTHENED. W6 UNTOUCHED.** `writeup/data/p2_route_t4_v1.json`. | `2c87244` | **VERIFIED** by `V-W2` |
-| **`T6`** / leg 394 (T) | **7/7 full texts — 2 UNDERCUT / 4 strengthen / 1 confirm; 0 `UNREACHABLE`, 0 zeros.** **The obstruction is NOT refuted — its evidence base is thinner than the record said, not wrong.** | `e7db624` | **VERIFIED** by `V-W2` |
-| **`T5`** / leg 395 (T) | **PASS** — the C1 sweep, an obligation of the ruling discharged. **7 refusals: APPARATUS 5 / REALIZATION 2.** **2 re-openable under C1, UNRANKED**: leg 348's Galerkin-plus-tail build, and **leg 315's `O1`** Taylor-model enclosure that *"needs no function space"*. **Leg 257 is NOT** (fourth *space*, not *apparatus*). | `a6f0c38` | **VERIFIED** by `V-W2` |
 | **`V1`** (wave 2, verification) | **All five wave-1 claims reproduce** from banked JSON and landed evidence scripts alone; **`M3 = DELIVERED` SURVIVES** U5's 57% seed overlap. Two defects banked, not reconciled. | `2fb399f` | **UNVERIFIED** |
-| **`T1`/391, `T2`/392, `R0`+`R1`** (wave 1) | `T1` **yes** — escalation packet, ruled **none** of its three questions (`RULING_BAN_WORDING_2026-08-13.md`). `T2` **`UNDER-RESOURCED`, not `no`**, and it named **`T2″`**. `R0` **retracted** *"Lane R's first measured win"*. `R1` **closed against itself** (+0.45 pp). | wave 1 | **VERIFIED** by `V1` |
 | **`PROG-R4`** (route-4 DSS, leg 380) | **U0–U3, U5 LANDED; U4 BLOCKED** — needs a recovered **named** orbit and there is not one. `G1 = UNDER-RESOURCED`, `M2`/`M3 = DELIVERED`. **`E` tightened `G1` without converting it to a `no`** and made **U4/G2 harder to open**. §3d's stop did **not** fire; **route 4 is NOT stopped.** | leg 380 | **UNVERIFIED** |
+| *retired under §3j* | **`T4`, `T5`, `T6`, `T1`, `T2`, `R0`, `R1` — LANDED and VERIFIED, so they leave this file.** Gate answers in their own words, SHAs and verifiers: `writeup/INDEX.md`, *Retired from `STATE.md`*. | — | **VERIFIED** |
 | **`plan_of_record.py` posture** | **Additive only**, 75 insertions / 0 deletions. **No ban lifted, narrowed, reworded or re-read**; `BANNED` byte-identical, `test_plan_of_record.py` **26 bans / 19 in force, ALL GATES PASS**. | `1ca9e91` | — |
 
-## WAVE 3 — CLOSED 2026-08-18. ONE UNIT OF FOUR RETURNED.
+## WAVES 3 AND 4 — CLOSED. Detail retired 2026-08-18 under §3j.
 
-Planned and committed before dispatch at **`42011ff`** (gates verbatim there; §3j rule 5 — pointer,
-not restatement). **`V-W2` RETURNED, AUDITED, LANDED** `594ff89` (row above). **`V2` (leg 396, V),
-`L3′` (leg 398, L) DEAD** — no branch, no commit, zero bytes, gates unanswered, and **no branch of
-`V2`'s pre-committed reading fired**; W3 was left exactly where wave 2 left it, until `V3`.
-**`L2` (leg 397, L) DEAD, but its PRE-REGISTRATION SURVIVED** — `a9a4370`, §§0–3, committed **before
-any verdict existed** — and **wave 4's `L2′` executed §§4+ on that branch and landed.**
-
-**THE LESSON, AND IT IS THE SAME ONE TWICE.** Wave 3 lost three of four workers to a host process
-exit; **the one thing that survived is the one thing that was committed.** Second time (2026-08-14
-took five). **`COMMIT DURING THE RUN, NOT ONLY AT THE GATE` is in every brief**, with `E`'s
-checkpointing rule (`OPTIONS.md` §F): any unit above ~1 h wall checkpoints to disk at a granularity
-it can resume from, and says where.
-
----
-
-## WAVE 4 — ALL THREE RETURNED, 2026-08-18. WAVE CLOSED.
-
-**Gates committed at `8f4cb53` before dispatch; dispatch record `d0c2c5d`** (§3j rule 5 — pointer,
-not restatement). All three outcomes are in the **Landed** table above with their SHAs, all three
-**`UNVERIFIED`**. `V3` `16ba44e`, `V-W3` `2b8755e`, `L2′` `1493e5e`.
-
-**THE ONE THING THAT MUST NOT BECOME A POINTER — `V-W3` REFUTED THE CONDUCTOR'S OWN RECORD.**
-~~`E` overran its commissioning estimate ~8×~~ — **WITHDRAWN. There was no overrun.** `0.0713` is
-**WALL**-hours per attempt at **8 workers**; `0.57` is **CORE**-hours per attempt. Like for like,
-U5's model predicts `0.5704` core-h and `E` measured `0.56803` — **`E` came in 0.4% UNDER**, and the
-claimed `8×` **equals the worker count** (`7.967`). Both factors of the cost model were accurate.
-**THIRD Conductor-record defect a verifier has caught, and the first one the Conductor wrote into a
-live gate.** `E`'s forward pricing table is fine; only the comparison was wrong.
-
-**Defects D1–D6 located, sized, and D2–D6 STILL UNREPAIRED** (`experiments/journal/verify_wave3.md`
-§4) — **wave 5's `D-REPAIR`**, because a verifier's findings must not be fixed by the hand that
-planned the wave. Re-run any time: `.venv/bin/python experiments/verify_wave3_rederive.py`
-(180 checks, 0 disagreements).
-
-**WAVE 5'S FOUR OBLIGATIONS, EACH DISCHARGED BY A NAMED UNIT BELOW:** a verifier for `V3` and
-`L2′` → **`V-W4`** (you may not verify a wave you planned); the D2–D6 repair → **`D-REPAIR`**;
-the composition floor from a non-T lane → **`L5`**; and **§3i q7 — A UNIT THAT BUILDS SOMETHING**,
-because `V3`/`V-W3`/`L2′` are a grading, a verification and a reading, **zero construction in
-three** → **`L5`**, which is dispatched first for exactly that reason.
-
----
+**Wave 3 closed with ONE unit of four returning** (`V-W2`); three worktrees were lost to a host
+process exit with their pre-registrations committed and their partial JSON not. That is why every
+brief since carries **COMMIT DURING THE RUN, NOT ONLY AT THE GATE**. **Wave 4 returned all three**
+(`V3`, `V-W3`, `L2′`), each row in the **Landed** table above with its SHA and its gate answer in the
+gate's own wording. Narrative, headroom and the §3i answers for both waves: `reports/ORCH_STATE.md`
+Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits `6320790`, `391fd8f`.
 
 ## WAVE 5 — DISPATCHED 2026-08-18; PLAN COMMITTED BEFORE DISPATCH
 
@@ -178,6 +140,22 @@ hold and W4 clause (a) re-opens.** That is the sharpest single test in the wave.
 construction first, verifier last (§3f rule 3). Gates unchanged after dispatch. **`D-REPAIR`
 RETURNED and is LANDED at `036e56d`** (row above); `L5` and `V-W4` still in flight.
 
+## WAVE 6 — OWED BEFORE IT IS PLANNED
+
+Not a plan; a **debt list** written down now so it is not rediscovered at the boundary.
+
+1. **OBLIGATORY, by ruling Q4** — the adversarial full-text audit of `arXiv:2509.25116` to leg-309
+   depth (≈4–8 h, Lane V). Enumerate the load-bearing constants **before** adjudicating; recompute
+   what is recomputable; check the localisation step from the `ℝ³` self-similar profile to a genuine
+   Leray–Hopf solution (Remark 2, §1.3 + §2); **pre-commit both branches**; and answer as a
+   **separate clause** whether the certified profile is genuinely 3D — **W2's own pre-committed test
+   is the arbiter, and it must not be folded into the W3 verdict.**
+2. **A VERIFIER for wave 5** — `V-W4` covers wave 4 only. `L5` and `D-REPAIR` are unverified.
+3. **CONSTRUCTION, and the §3i q7 count says it plainly.** Four consecutive **landed** units have
+   been reading, verification, grading and infrastructure. `L5` is dispatched but unreturned. **If
+   `L5` returns a `NO`, wave 6 must open with construction that is not a reading.**
+4. `fig81_route_egmf_v1_evidence.py` unregistered, and the 52 cited-but-unrebuildable figures.
+
 ## Open — needs the user, not a task
 
 1. **`PROG-R4` after U5 — five costed options, ONE RULED.** The user ruled **E**, which has now
@@ -196,12 +174,27 @@ RETURNED and is LANDED at `036e56d`** (row above); `L5` and `V-W4` still in flig
 4. **The DSS escalation packet** (legs 313/320, branches unmerged). Complete: both candidate theorems
    read at full text and neither reaches the screened object.
 
-**Conductor-owned debts** (`OPTIONS.md` §F). `INDEX.md`: `T4`/`T6`/`T5`/`V1` rows **WRITTEN**
-`bcd8063`; `E` and `V-W2` **HELD** — they are what `V-W3` audits. `fig107` **not registered** in
-`build_figures.py` (nor is `p2_route_t6_v1_evidence.py`) — **HELD UNFIXED ON PURPOSE**: registration
-coverage is `V-W3`'s gate item (4), and fixing it now destroys the measurement. Both land at wave-4
-integration. The in-flight figure table in `INDEX.md` is stale (legs in the 300s marked live) —
-**flagged, not repaired**; reconciling it is a unit of work, not a passing fix.
+**Conductor-owned debts — ALL FOUR DISCHARGED by `D-REPAIR` (`036e56d`)**, after `V-W3` returned
+and not before, because `fig107`'s registration gap *was* `V-W3`'s gate item (4) and fixing it early
+would have destroyed the measurement. **A NEW ONE IS OPEN IN ITS PLACE, and it is a unit, not a
+passing fix:** `fig81_route_egmf_v1_evidence.py` is tracked and unregistered — the same defect at a
+different figure — and **52 cited figures have a `.png` a reader is shown and no rebuild path at
+all** (`writeup/check_figure_coverage.py`, executable, currently exits 1).
+
+**RULED 2026-08-18 AND OFF THE DESK — the W3 wording escalation, all three questions plus two
+consequential items:** `writeup/escalations/RULING_W3_WORDING_2026-08-18.md`. **(Q1)** W3's **prose
+test governs**; the wall **STANDS** and Lane V's premise **survives**; the cell-occupancy fact is
+recorded **beside** the wall, not as a break of it. **(Q2)** W3 **retitled** to *No certified blow-up
+exists for any fluid equation*, the old title struck not deleted, with the required paragraph beside
+it. **(Q3)** leg 174's banked `the_empty_cell.meaning` is **NOT edited** — a correction record
+instead, and the refusal to rewrite a banked datum is now the **standing rule**. **(Q4)** the
+adversarial full-text audit of `2509.25116` is **OBLIGATORY IN WAVE 6**, ≈4–8 h, scope set by the
+ruling, and it must answer as a **separate clause** whether the certified profile is genuinely 3D —
+which bears on **W2**, whose own pre-committed test is the arbiter. **(Q5)** Lane L's next unit is
+**W4 clause (b)** — already in flight as `L5`, planned at `1e49a00` before the ruling existed; the
+ruling adds that `L5` must state **what distinguishes a genuine natively-finite-energy ansatz from
+the same trap wearing a different hat.** **Nothing in the ruling moved an L1→L4 link** — it moved
+wording and a queue, and it says so itself.
 
 **DISCHARGED and off the desk:** the C1-exemplar escalation (`RULING_C1_EXEMPLAR_2026-08-14.md`) and
 all four 2026-08-13 ban-wording items (`RULING_BAN_WORDING_2026-08-13.md`).

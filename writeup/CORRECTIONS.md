@@ -43,6 +43,7 @@ lesson 35). This file is the index, not the substitute.
 | 10 | Whether `a*` itself (as opposed to leg 185's flawed corroboration of it) is a real, locatable feature of Object B — left an open, un-adjudicated three/four-way contradiction after §10/leg 283: leg 210's independent bracket `[0.36, 0.37]` **excludes** leg 125's `a* = 0.3864963972206034` | **leg 284** (2026-08-07, Route-NU12, pseudo-arclength continuation — a third, independent method) → **leg 296** (this entry; read all four reports method-by-method and reconciled) | **`a* ≈ 0.386` IS PINNED**, by two mutually independent methods agreeing to ~2e-3: leg 125's algebraic `Δ(a) = 0` crossing (`ν = 0`, residual `1.933e-15`) and leg 284's grid-converged pseudo-arclength turning point (`0.3857 ± 0.004`, monotone over 4 grids). Leg 210's exclusion bracket is **explained, not outvoted**: it used the same fixed-`a` Newton-restart method leg 284 showed (Findings 2 and 4) folds and develops a singular Jacobian (`σ_min/σ_max = 3.454e-19` at `n = 1601`) in exactly this neighborhood — and leg 210's own report already recorded the predicted symptom (non-convergence at `a = 0.3865`, residual `6.0e-03`; amplitude collapse toward the trivial null beyond it) independently of anything leg 284 later found. Leg 185's specific corroboration claim **stays refuted** — its two starts still straddle zero at `a = 0.3865`. §11 below |
 | 11 | PUB3's `a_max_machine` exposure row (`writeup/4_p2_lottery/TECHNICAL_P2_PUB3_V1.md`, the Route-D v11 "Exposure" table) named the scalar as materially exposed but never carried a resolution once one existed; leg 294's own flag additionally mis-cited the site as line 134 quoting the literal `a_max_machine=1.0` — checked directly, no such literal string exists anywhere in the file (line 134 is unrelated prose; the actual site is the table row at line 148, which names the scalar without printing a value) | **leg 236** (row-exclusion) + **leg 226** (D2/D3 repair), reconciled by **leg 294** → **leg 295** (this entry; located the true site, found leg 294's line/citation imprecise, appended the resolution) | `a_max_machine`'s corrected value **0.55** (confirmed by two independent methods from the stale `1.0`) is now recorded at the site as a dated, additive footnote — **zero** existing sentence reworded. §12 below |
 | 12 | PUB2's caveat family printed a single Xu-normalization digit, `0.0420`, at four sites (§0, §3.2, the §4.5 sign-correction paragraph, §7) as if it were the unambiguous conversion of `0.0908` into “Xu's own normalization” | **leg 277** (2026-08-07, Route-XUN, branch `leg/277-xun-v1`, never merged) → **leg 280** (this entry; applied the correction to the two sites that state it independently, §0 and §7 — the other two are backreferences to §0 and needed no separate edit) | Xu's Definition 4.1 names **two** norms: the *displayed* half-line definition (4.2), constant `π`, and the *equivalent* full-line norm, constant `2π`. `0.0420` is the **full-line** reading (`κ = 2π`); under the **displayed** definition the value is **`0.057643`** (`‖R‖_X = 17.348`, not `23.792`) — **`1.37×`** larger. §13 below |
+| 13 | leg 174's banked `writeup/data/p2_route_vbs_v1_scoping.json::the_empty_cell.meaning`: *"no published work applies interval arithmetic to a **dissipative** fluid equation's own self-similar object"* — banked as the meaning of an empty occupancy cell and read downstream as the content of wall **W3** | **`V3` / leg 399** (2026-08-18, `16ba44e`), grading 9 fluid blow-up CAPs against leg 174's **own, unchanged** criterion → **the Conductor** (this entry), on **USER RULING (Q3) of 2026-08-18**, `writeup/escalations/RULING_W3_WORDING_2026-08-18.md` | **MEASURED FALSE, and no reading survives** — the word *self-similar* is in the sentence. `arXiv:2509.25116` (Hou–Wang–Yang) encloses, by interval arithmetic (§7.3, p.55), a solution of a system carrying `−ΔŨ` (Prop. 1, eq. (1.15), p.5) for the **unforced 3D incompressible Navier–Stokes equations** (eq. (1.1)), and its object **is** self-similar (forward, from singular data). **THE ARTEFACT IS NOT EDITED**: the ruling makes the Conductor's refusal — *"rewriting a banked datum to match a later finding is precisely how a record stops being a record"* — **the standing rule for banked artefacts**, not a one-off judgement. **W3 itself is unrefuted and STANDS**: its prose test requires a genuine **finite-time singularity**, and this object is not one (§1.2, p.2, *"smooth for positive times"*). The cell is occupied and the wall stands — **two different claims.** §32 below |
 | 13 | (a) PUB2 §4.5 stated that “any claim that the digits `0.0908` and `0.71465` are convention-independent” does not survive; (b) the same paragraph's “optimistic by `7.9×`” factor was printed with no convention caveat anywhere in the document | **leg 281** (drafted 2026-08-07, Route-CVF, branch `leg/281-cvf-v1`, never dispatched) → **leg 280** (this entry; corrected (a), flagged (b), both in place, 2026-08-11) | (a) is **backwards for `0.71465`**: it is convention-**free** to `1.87e−16` (a ratio of `X`-norms with no border coordinate, so the weight cancels) — only `0.0908` is convention-relative. (b) the `7.9×` factor **is** convention-relative and unflagged: it ranges `5.265 … 656.95` (`124.8×`) over the same weight sweep §0 names. §14 below |
 | 14 | leg 221's own repair-verification sweep found `writeup/data/spike1_stepC_gate.json` does not reproduce (`.runs[0].alpha` moves `13.2%`, two of four `predicate_checks` flip), identically with and without its own repair; declined to adjudicate, flagged forward as possible staleness or environment sensitivity | **leg 335** (2026-08-12, Route-S1GR) | **neither.** `experiments/p2_route_bvrr_v1_repair.py`'s `BANKED` registry entry for this artifact invokes the generator with `argv=["--logged"]` only, omitting the `--steps 2500` flag the banked artifact's own `runs[*].steps` field proves was used originally, silently falling back to the CLI default of `400` — a harness bug, not code drift or environment sensitivity (BLAS-thread control: `alpha` spread `1.55e-15` across `1/2/4` threads). All four resolution rungs reproduce the banked `alpha` to float64 precision when re-run at the correct `steps=2500`, and `0` of `4` `predicate_checks` actually differ. **REPRODUCIBLE_AS_BANKED.** §23 below |
 
@@ -2286,3 +2287,47 @@ pass. `test_gclm_postrepair.py`: 9/9 checks pass. `test_plan_of_record.py` and
 changed anywhere** — leg 133's and leg 103's own YES verdicts are untouched; this leg only
 repairs the regression suites that bank them. `plan_of_record.py` and `DIRECTION.md` untouched.
 No link of the `L1 → L4` chain moved. Clay odds stay **~0.05%**.
+
+---
+
+## §32 — the W3 wording ruling of 2026-08-18: leg 174's `the_empty_cell.meaning`, correction record
+
+**Class, stated first.** This is an over-read closure of the register's kind: **the measurement
+stood, the sentence written about it did not.** Leg 174's occupancy matrix returned `0` in the
+`fluid=True, grade=A` cell and said so *"for want of a target, not a method"* — that count was of
+what leg 174 had screened, and it was honest. The banked **meaning** field went further than the
+count and asserted a fact about the published literature. That assertion is now false.
+
+**The field, named exactly.** `writeup/data/p2_route_vbs_v1_scoping.json`, key
+`the_empty_cell.meaning`. **It is NOT edited, and it will not be.**
+
+**The measurement that falsified it.** `V3` (leg 399, `16ba44e`, `writeup/data/p2_route_v3_gradeA_v1.json`,
+`experiments/journal/leg_399.md`) graded 9 candidate computer-assisted proofs against **leg 174's own
+two clauses, applied unchanged**, having been told explicitly not to tighten them. One row passes
+both: **`arXiv:2509.25116` (Hou–Wang–Yang)** — interval arithmetic at §7.3, p.55, enclosing a
+solution of a system carrying `−ΔŨ` (Prop. 1, eq. (1.15), p.5), for the **unforced 3D incompressible
+Navier–Stokes equations** (eq. (1.1)). The other 8 rows are `NO` with the failing clause quoted. It
+**had never been graded here**. The YES is **UNVERIFIED and UNAUDITED** — one database,
+title-screened, Semantic Scholar banked as a **gap, not a zero** (no key in this environment) — and
+the ruling makes the adversarial full-text audit **obligatory in wave 6**.
+
+**The unit that made it, and the behaviour that is being protected.** `V3` recorded the YES **first
+and unsoftened**, with the disqualifying qualification beside it. The ruling's second reason for
+letting the prose test govern is about exactly that: *"Letting the predicate redefine the wall would
+convert that honesty into a wall-break it does not support; tightening the predicate after seeing the
+row it admitted would be the mirror error."* Neither happens here. Leg 174's predicate stays exactly
+as leg 174 wrote it and **stops being described as W3's test**.
+
+**What this entry does NOT do**, per this file's own rule and per the ruling. It does not withdraw
+`V3`'s YES. It does not restore ~~*"leg 242 confirms nobody filled it since"*~~, which stays struck.
+It does not make the cell empty: **on leg 174's own definitions the cell is OCCUPIED, and W3 is true
+anyway.** It does not lift a ban, promote a route, or open anything. **"Not what we said" is not
+"open."**
+
+### The ceiling
+
+**0 banked JSON files touched** — that is the point of the entry, not an aside. `WALLS.md` (W3
+retitled, old title struck not deleted, the ruling's required paragraph placed beside it),
+`STATE.md`, `OPTIONS.md` and this file carry the correction; the artefact carries none of it.
+**No link of the `L1 → L4` chain moved.** The ruling says so itself: it moved wording and a queue.
+Ceiling **TIER 2**. Clay stays **~0.05%**.

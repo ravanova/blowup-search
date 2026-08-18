@@ -60,6 +60,45 @@ block of 40, and looks like a pre-convention era rather than 40 lapses) are the 
 **no room in `OPTIONS.md` to open them as options** — 15 bytes free. That is the cap question biting
 a second time, in a place where it now costs the record something.
 
+### A USER RULING LANDED MID-WAVE, from a concurrent session (`c41280e`)
+
+**Caught by `git ls-remote` before the push, not after.** `origin/main` had moved from `54183bb` to
+`c41280e` while wave 5 was in flight: the W3 wording escalation is **RULED, all three questions plus
+two consequential items**, and **§3j gains RETIREMENT**. Merged at `e45ef0e`; `STATE.md`, `WALLS.md`
+and `OPTIONS.md` re-read from disk after the merge, as the standing rule requires.
+
+**The ruling is transcription work and it is now transcribed.** (Q1) prose test governs, **W3
+STANDS**, Lane V's premise **survives**. (Q2) W3 **retitled**, old title struck not deleted, the
+required paragraph placed beside it verbatim. (Q3) the banked field is **NOT edited** — correction
+record at `writeup/CORRECTIONS.md` register row 13 and §32, and the refusal to rewrite a banked datum
+is now the **standing rule**. (Q4) the `2509.25116` audit is **OBLIGATORY IN WAVE 6**, scope fixed,
+with the separate **W2** clause. (Q5) confirms `L5`, already in flight and planned before the ruling
+existed. **Lane V is UN-HELD** in all three capped files — the hold went in on one line and comes out
+on one, which was the point of recording it that way.
+
+**RETIREMENT APPLIED THE DAY IT ARRIVED, and it is the difference between a cap and a treadmill.**
+`T4`/`T5`/`T6`/`T1`/`T2`/`R0`/`R1` left `STATE.md` for a new *Retired from `STATE.md`* table in
+`writeup/INDEX.md` (unit, gate answer in the gate's own words, SHA, verifier); waves 3 and 4 became a
+paragraph pointing at the Superseded LIVE blocks here; `WALLS.md` §R0/R1 moved **verbatim** to
+`WALLS_HISTORY.md`; `OPTIONS.md`'s `E` and `R0`/`R1` entries retired to one line plus a pointer.
+**`STATE.md` went 24,531 → 23,474 with MORE content in it than before** — the ruling, the wave-6
+debt list and `D-REPAIR`'s row all landed inside a file that got smaller.
+
+**AND ONE CORRECTION CARRIED WHILE THE FILE WAS OPEN.** `OPTIONS.md` §A still printed `V-W3`'s
+*"21.44 vs 21.95 epochs/attempt"* — the cross-convention comparison `D-REPAIR` refuted. It now
+carries the like-for-like numbers (**+1.9% / +1.7%, `E` used MORE**) with the convention spelled out.
+
+### Ruling Q5's added requirement, and what I did NOT do about it
+
+The ruling requires `L5` to state **what distinguishes a genuine natively-finite-energy ansatz from
+the same trap wearing a different hat.** `L5` was dispatched before the ruling existed, and its
+pre-committed reading (c) already says: *"THE MOST LIKELY OUTCOME IS THAT THE ANSATZ IS EXACTLY (D)SS
+IN DISGUISE … SAY SO, STOP, AND CALL IT A `NO`."* **I did not message the worker to amend a gate
+after dispatch** — that is the one thing the pre-registration discipline exists to prevent, and the
+requirement is already covered in substance. **If `L5`'s return does not draw the distinction
+explicitly, I require it at integration and say so there.** Recorded now, before the return, so it
+cannot be a judgement made after seeing the answer.
+
 ### Open escalations
 
 **NEW, OPEN:** `writeup/escalations/ESCALATION_W3_WORDING_2026-08-18.md` — three questions on W3's

@@ -480,3 +480,20 @@ returns `MISSING` for the three rows above, which is how legs 125/127/128 were f
 
 Route-TC is no longer in progress: it landed as leg 53 and has a complete quartet, indexed in
 the Arc 4 table above.
+
+## Retired from `STATE.md` under §3j retirement (added 2026-08-18)
+
+*A unit's row leaves `STATE.md` once it is LANDED **and** VERIFIED, and arrives here as one line —
+unit, gate answer in the gate's own words, SHA, verifier. `STATE.md` keeps live units, the next wave
+and open user items. Full detail for every row below is in the Arc 4 table above and in the unit's
+journal; nothing here is a summary written after the fact.*
+
+| unit | gate answer, in the gate's own words | SHA | verifier |
+|---|---|---|---|
+| **`T4`** / leg 393 (Lane T) | **`STOP`, pre-committed branch (c).** `arXiv:1902.00384` is certified by **exactly the banned apparatus**, and **both certified rows are 2D lifts**. W2 STANDS, STRENGTHENED; W6 UNTOUCHED. | `2c87244` | `V-W2` (`594ff89`) |
+| **`T6`** / leg 394 (Lane T) | **7/7 full texts — 2 UNDERCUT / 4 strengthen / 1 confirm; 0 `UNREACHABLE`, 0 zeros.** The obstruction is **NOT refuted** — its evidence base is thinner than the record said, not wrong. | `e7db624` | `V-W2` (`594ff89`) |
+| **`T5`** / leg 395 (Lane T) | **PASS** — the C1 sweep, an obligation of `RULING_BAN_WORDING_2026-08-13.md` discharged. **7 refusals: APPARATUS 5 / REALIZATION 2.** 2 re-openable under C1, UNRANKED (leg 348's Galerkin-plus-tail, leg 315's `O1`); **leg 257 is NOT** — fourth *space*, not *apparatus*. | `a6f0c38` | `V-W2` (`594ff89`) |
+| **`T1`** / leg 391 (Lane T) | **`yes`** — the ban-wording escalation packet. The user ruled **none** of its three questions; `RULING_BAN_WORDING_2026-08-13.md`. The machine record is **DISCHARGED**. | wave 1 | `V1` (`2fb399f`) |
+| **`T2`** / leg 392 (Lane T) | **`UNDER-RESOURCED`, not `no`** — and it named its own successor, **`T2″`**. | wave 1 | `V1` (`2fb399f`) |
+| **`R0`** (Lane R, wave 1) | Metric pre-committed before optimisation; **the inference from its own table is RETRACTED** — ~~*"Lane R's first measured win"*~~. The standing metric survives: **ORBITS NEW TO THE PROGRAMME PER WORKER-HOUR**. | wave 1 | `V1` (`2fb399f`) |
+| **`R1`** (Lane R, wave 1) | **CLOSED against itself** (+0.45 pp): the numbers confirm exactly, but U5 had already collected the win. | wave 1 | `V1` (`2fb399f`) |

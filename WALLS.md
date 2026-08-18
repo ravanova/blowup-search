@@ -64,7 +64,12 @@ inside it, and show the certified object is not a lift of a lower-dimensional on
 pre-committed test** is re-open condition **(i)** for that lane (`OPTIONS.md` §E). The credit stays
 unclaimed; deferring neither collects it nor concedes it.
 
-## W3 — The Grade-A × fluid cell is empty
+## W3 — No certified blow-up exists for any fluid equation
+
+*Retitled by USER RULING 2026-08-18 (Q2), `writeup/escalations/RULING_W3_WORDING_2026-08-18.md`.*
+*Former title, struck not deleted:* ~~The Grade-A × fluid cell is empty~~ — **false as a matter of
+fact**: on leg 174's own definitions the cell is OCCUPIED. A wall whose title and whose test
+disagree is how the next over-read gets built.
 
 **Statement.** No certified (interval-enclosed, equation-carrying-the-dissipative-term) blow-up
 exists for any *fluid* equation, in any dimension.
@@ -76,19 +81,26 @@ Breden–Chu viscous Burgers). **Assumed: nothing about impossibility** — and 
 width (over-read closure #5, leg 328): the wider claim *"no certified viscous blow-up in any model,
 any dimension"* was **FALSE** and is retired.
 
-**⚠ MEASURED 2026-08-18 BY `V3` (leg 399, `16ba44e`): THE CELL IS OCCUPIED ON LEG 174'S OWN
-CRITERION — AND THE WALL'S TWO TESTS DISAGREE. STATUS: DISPUTED / UNRULED.**
-`arXiv:2509.25116` (Hou–Wang–Yang, v2) **passes both of leg 174's clauses** — interval arithmetic
-(§7.3 p.55) encloses a solution of a system carrying `−ΔŨ` (Prop. 1 eq. (1.15) p.5) for the
-**unforced 3D incompressible Navier–Stokes equations** (eq. (1.1)) — and **fails** the prose test's
-extra requirement: the paper itself says the object is **not** a finite-time singularity (§1.2 p.2,
-solutions *"smooth for positive times"*). It had **never been graded here.** 9 rows, 8 `NO` with the
-failing clause quoted. **The YES is UNAUDITED** — one database, title-screened, S2 banked a **gap not
-a zero**; the costed audit (4–8 h) waits on the ruling. **A defective wall WORDING is a USER
-escalation and the Conductor has NOT ruled it:** `ESCALATION_W3_WORDING_2026-08-18.md`, 3 questions,
-OPEN. Also **struck:** ~~leg 242 confirms nobody filled it since~~ — its gate was an author-line
-question and it graded none of the six CAPs it surfaced. `V3` has now graded them.
-`writeup/data/p2_route_v3_gradeA_v1.json` · `experiments/journal/leg_399.md`.
+**⚠ RULED 2026-08-18 (Q1): THE PROSE TEST GOVERNS. W3 STANDS. LANE V's PREMISE SURVIVES.**
+Required beside the wall by the ruling, and non-optional:
+
+> **THE CELL IS OCCUPIED AND THE WALL STILL STANDS — THESE ARE TWO DIFFERENT CLAIMS.**
+> `arXiv:2509.25116` (Hou–Wang–Yang) satisfies **both** clauses of leg 174's Grade-A × fluid
+> criterion — interval arithmetic (§7.3, p.55) enclosing a solution of a system carrying `−ΔŨ`
+> (Prop. 1, eq. (1.15), p.5) for the unforced 3D incompressible Navier–Stokes equations (eq. (1.1)).
+> **The certified object is NOT a finite-time singularity**: forward self-similar, from singular
+> initial data, *"smooth for positive times"*, concluding **nonuniqueness of Leray–Hopf solutions**.
+> The paper itself warns against confusing this with the backward setting (§1.2, p.2). **W3 asserts
+> the absence of a certified SINGULARITY and is unrefuted; leg 174's cell asserts the absence of a
+> Grade-A fluid ENCLOSURE and is refuted.** Graded by `V3` / leg 399, **UNVERIFIED and UNAUDITED**.
+
+**The predicate is not tightened and the YES is not withdrawn.** `V3` applied leg 174's criterion
+unchanged, having been told not to tighten it, and recorded the YES first with the disqualifying
+qualification beside it. Leg 174's predicate stays exactly as written and **stops being described as
+W3's test**. Also **struck:** ~~leg 242 confirms nobody filled it since~~ — that over-read stays
+struck. **The audit of the YES is QUEUED FOR WAVE 6 and is NOT optional** (ruling Q4, ≈4–8 h): one
+database, title-screened, S2 banked a **gap not a zero**. `writeup/data/p2_route_v3_gradeA_v1.json` ·
+`experiments/journal/leg_399.md`.
 
 **Why this wall matters more than its size suggests.** If a viscous blow-up cannot be certified for a
 dissipative fluid equation in **one** dimension, 3D Navier–Stokes is not a question of compute and
@@ -96,10 +108,10 @@ the programme's honest ceiling is Tier 2. Worth as much negative as positive —
 
 **BREAKING W3 CONSISTS OF:** an interval enclosure of a blow-up solution of a dissipative *fluid*
 equation — any dimension, any model, provided the dissipative term is inside the certified equation
-and the object is a genuine finite-time singularity. Pre-committed test, **and `V3`'s grading
-predicate**: leg 174's own Grade-A criterion, applied unchanged. **⚠ THESE ARE NOT THE SAME TEST —
-leg 174's criterion has NO singularity clause, and since 2026-08-18 an object sits between them.
-Which one governs is question (Q1) of the OPEN escalation and is NOT ruled here.**
+and the object is a genuine finite-time singularity. **THAT — the prose test — GOVERNS, ruled
+2026-08-18.** Leg 174's Grade-A criterion is a **certification standard with NO singularity clause**;
+it is `V3`'s grading predicate and it is **not** W3's test. An object sits between them and both
+statements are true of it.
 
 **Lane: V** (below) — **PRIORITY LANE, ACTIVE 2026-08-14.**
 
@@ -212,7 +224,7 @@ return: Lane V → HELD, Lane L sole priority.**
 
 | lane | was | **now** | why |
 |---|---|---|---|
-| **V** | 2 | **HELD 2026-08-18** | `V3`'s **pre-committed** reading (a) — *a YES kills Lane V's premise* — **FIRED**: the cell is occupied on leg 174's own criterion. Which of W3's two wordings governs is an OPEN **user** escalation, so the lane is held, not killed. A ranking, not a ruling; reversible in one line. |
+| **V** | 2 | **ACTIVE — un-held 2026-08-18 by RULING (Q1)** | The hold was one line and it goes in one line. **W3's prose test governs, W3 STANDS, the premise SURVIVES**: the cell is occupied on leg 174's criterion, but the certified object is **not a finite-time singularity**, so the target the lane exists to supply is still missing. **Next unit is OBLIGATORY IN WAVE 6** (ruling Q4): the adversarial full-text audit of `2509.25116`, ≈4–8 h, scope set by the ruling. **Lane L keeps sole priority** (ruling Q5 confirms `L5`). |
 | **L** | 3 | **PRIORITY, ACTIVE** | **On every path.** Leg 390: the torus does **not** retire §6(i)/(ii), so the two no-method obligations block **every** branch. **`L2′` (2026-08-18) is the lane's first landed unit in 399 legs** — and it **narrowed** the lane: W4 clause (a) measured shut. |
 | **T** | 1 | **DEFERRED** | The demonstrated-technology argument fell to the lane's **own** measurement (leg 393, replicated by 394). Alive only through **`T2″`**; **`T3` deferred, not killed.** `OPTIONS.md` §E. |
 | **R** | continuous | **unchanged** | Runs inside **every** unit's pre-registration and takes its own units when a wave has room. **Never sets a wave's direction.** |
@@ -285,7 +297,7 @@ inverse uniform in `M`. **Absent both, the ban applies in full.**
 deferred WITH the lane, not killed**; leg 390 §5 item 3 prices it (one-step DSS margin decays with
 band width at exponent **−0.99057**).
 
-## LANE V — THE VISCOUS RUNG. ~~*PRIORITY, ACTIVE.*~~ **HELD 2026-08-18 on `V3`'s return.**
+## LANE V — THE VISCOUS RUNG. ~~*PRIORITY, ACTIVE.*~~ ~~**HELD 2026-08-18.**~~ **UN-HELD 2026-08-18 BY RULING.**
 
 > **PROMOTED 2026-08-14.** The user's reason, in its own terms: **Lane V decides whether any path
 > exists.** Its job is to supply the **named target** leg 174 says the cell is empty for want of, and
@@ -297,12 +309,20 @@ structure — target first, not method. **The stage-V lift clause is CLEAN** (*"
 **struck by user ruling B1**, 2026-08-13); a fluid transport target attacked with a dynamical closure
 is **outside both bans**, subject in full to C1's naming requirement.
 
-**⚠ HELD, AND THE LANE'S ONE LANDED UNIT IS WHY.** `V1` became a verifier; `V2` died in wave 3
-without committing a byte; **`V3` (leg 399) is the lane's first and only measurement — and it
-measured the lane's own premise FALSE on leg 174's criterion.** `V3`'s pre-committed reading (a)
-fired and is honoured. Whether W3 is thereby *broken* turns on which of its two wordings governs:
-**OPEN user escalation, `ESCALATION_W3_WORDING_2026-08-18.md`. Not ruled here.** The lane's next unit
-if it re-opens is `V3`'s own costed one — an adversarial full-text audit of `2509.25116`, 4–8 h.
+**⚠ THE HOLD IS LIFTED, AND THE REASON IT WAS IMPOSED IS THE REASON IT GOES.** `V1` became a
+verifier; `V2` died in wave 3 without committing a byte; **`V3` (leg 399) is the lane's first and
+only measurement**, and it measured the lane's premise FALSE **on leg 174's criterion**. The lane was
+held on that. **RULED 2026-08-18 (Q1): the prose test governs, W3 STANDS, and the premise SURVIVES**
+— `2509.25116`'s certified object is not a finite-time singularity, so the target the lane exists to
+supply is still missing. `V3`'s reading (a) fired against the criterion it was gated on and stays
+honoured; it did not kill the lane. **The lane's next unit is `V3`'s own costed one — the adversarial
+full-text audit of `2509.25116`, ≈4–8 h — and the ruling (Q4) makes it OBLIGATORY IN WAVE 6.** Its
+scope is set by the ruling: enumerate the load-bearing constants **before** adjudicating, recompute
+what is recomputable, check the localisation step from the `ℝ³` self-similar profile to a genuine
+Leray–Hopf solution (Remark 2, §1.3 + §2), **pre-commit both branches**, and answer as a **separate
+clause** whether the certified profile is genuinely three-dimensional rather than symmetry-reduced —
+**which bears on W2, whose own pre-committed test is the arbiter. Do not fold it into the W3 verdict
+and do not claim it without the test.**
 
 ## LANE L — THE LAST OBLIGATIONS. **PRIORITY, ACTIVE (ruling 2026-08-14).** *The only lane touching the FINAL blockers.*
 
@@ -364,39 +384,14 @@ compliant scale bought by fixing a selection bias rather than by buying compute 
 recovery rate until this repository's orbit-finding machinery is the best in the field, not merely
 adequate** — every factor taken out is permanent and transfers.
 
-### R0 — the metric, pre-committed BEFORE optimisation. **TAKEN, wave 1. Its inference RETRACTED.**
+### R0 and R1 — TAKEN and CLOSED, retired 2026-08-18 under §3j retirement
 
-**The standing cross-unit metric is `ORBITS NEW TO THE PROGRAMME PER WORKER-HOUR`**; within-unit,
-distinct orbits per worker-hour, per-attempt rate a secondary diagnostic beside it. **The denominator
-is WORKER-hours, not machine-core-hours** — physical core count is in **no numeric field** of either
-JSON; a future unit must bank `magnitudes.physical_cores` and per-attempt `time.process_time`.
-**`V-W3` (2026-08-18) shows what that ambiguity costs: a claimed `8×` cost overrun for `E` was
-`core ÷ wall` and equals the worker count. See `STATE.md`.**
-
-| | distinct | worker-hours | distinct / worker-hour | NEW to programme / worker-hour |
-|---|---|---|---|---|
-| U3 | 8 | 144.69 | 0.0553 | 0.0553 |
-| U5 | 5 | 57.04 | 0.0877 | **0.0175 — 3.15× WORSE** |
-
-**THE INFERENCE FROM THIS TABLE IS RETRACTED** — ~~*"U5 is above U3 on every variant, Lane R's first
-measured improvement"*~~ **WITHDRAWN.** The per-run arithmetic (1.27×–1.59×) is confirmed; the
-inference is not — the metric counts **cross-run** re-finds as successes, the exact defect it was
-introduced to remove, one level up. **57 of U5's 100 seeds were already spent by U3; U5's
-contribution new to the programme is ONE orbit.** Report **both** rows. Core-hour convention:
-**pool reservation (`wall × workers`)**. **`M3 = DELIVERED` SURVIVES** — adjudicated by `V1`, not by
-the Conductor that planned it. **Instrument limit:** U3's converged states are **banked nowhere**, so
-the numerator 8 is testable only in the `(T, |s|)` pair, deciding pair at **1.288 × TOL**
-(`OPTIONS.md` §B).
-
-### R1 — early abort on flatness. **CLOSED 2026-08-13 — the win was already taken.**
-
-~~*"Cheapest competitive win in the repository."*~~ **Withdrawn.** R1's numbers are **CONFIRMED
-exactly**, but **U5 had already collected the win** (`resourcing.stall_exit` **is** this criterion,
-deployed). Headroom over 12,597 deterministic rules: **+0.48 worker-hours**, and **hold-out shows a
-rule selected on U5's 9 convergences KILLS one of U3's 14.** Deployed rule: **zero false kills over
-23 banked convergences, 6.90× margin — spend no more here.** The underlying measurement stands and
-is reusable: U3's convergence is **bimodal** — all 14 convergences finished in **≤29 epochs**
-(median 16) while the 86 non-convergences ran to the 52-epoch cap, **the majority of the run.**
+**LIVE, and kept here because a wall depends on it: the standing cross-unit metric is `ORBITS NEW TO
+THE PROGRAMME PER WORKER-HOUR`, the denominator is WORKER-hours, not machine-core-hours**, and a
+future unit must bank `magnitudes.physical_cores` and per-attempt `time.process_time`. **`R0`'s
+inference from its own table is RETRACTED and `R1` is CLOSED — the win was already taken by U5.**
+Both sections, tables and struck text **verbatim and intact**: `WALLS_HISTORY.md` §R0/R1. Ledger and
+costs: `OPTIONS.md` §B.
 
 ### R2–R5 — the deferred Lane R units. **Ledger, costs and notes: `OPTIONS.md` §B** (§3j — pointer,
 not restatement). Kept here only where a wall depends on it:

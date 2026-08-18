@@ -53,35 +53,29 @@ is in the BASIN STRUCTURE, not the seed supply.**
 | **C** | Carry `m` as an unknown in the residual (= Lane R's **R5**) | own milestone, ≈10 h compute + solver work | Changes the realization, so M1's reproduction no longer compares attempt for attempt. **U5 priced it: 334 anchored in-window candidates, 58.1% of the window, but only 1 in the published band.** Not a band fix — the fix for `\|s\| > 0.9`. | On its own merits as the largest measured hole in the trial space, **not** as a route to the named rows. |
 | **D** | Raise supply at source — longer DNS or finer `N` | ≈3.4 h per extra `T=1e5` + ≈0.9 h re-mine, plus attempts | Most expensive, buys supply, does nothing about H-hard. `N` refinement invalidates the banked library. | Only if the object itself changes and a fresh library is needed anyway. |
 
-**`E` — THE H-HARD DIAGNOSTIC. TAKEN, LANDED `d0d72b1`, gate ANSWERED, `UNVERIFIED`.** **2 of 16
-converged, 0 recovered any named row**, both below the 0.15 `|s|` shelf; positive control through
-the unit's own predicate; diagnostics `PULL_TO_LOW_S` and `MIXED` (`p = 0.9317`). **`E-iii` fired
-(→ `R3`/`R2`), `E-ii`'s (→ `R4`) antecedent is satisfied; the re-ranking between them is NOT made.**
-`V-W3` reproduced all six figures. Detail: `experiments/journal/prog_r4_e.md`. *(Struck 2026-08-18:
-this read "IT DID NOT RETURN … `6a706f7`", the wave-1 host kill. `E` was re-run and landed.)*
+**`E` — THE H-HARD DIAGNOSTIC. TAKEN, LANDED `d0d72b1`, `UNVERIFIED`. Retired to one line plus a
+pointer, §3j.** **2 of 16 converged, 0 recovered any named row**, both below the 0.15 `|s|` shelf;
+positive control recovered through the unit's own predicate. **`E-iii` fired (→ `R3`/`R2`), `E-ii`'s
+(→ `R4`) antecedent satisfied; the re-ranking between them is NOT made.** `experiments/journal/prog_r4_e.md`.
 
-**`U4`/`G2`, the basin radius — BLOCKED, not an option.** It needs a recovered *named* orbit to
-perturb and there is not one; direct seeding at the published `(T, s)` was the last cheap route and
-returned **0 of 16**, so `U4` is blocked behind a *realization or method* change, not a budget.
-**`G1` stays `UNDER-RESOURCED` — `E` did not write to it**: a hand-placed seed at published
-coordinates is not a mined seed.
+**`U4`/`G2`, basin radius: BLOCKED, not an option** — it needs a recovered *named* orbit to perturb
+and there is not one. **`G1` stays `UNDER-RESOURCED`; `E` did not write to it** (hand-placed seed at
+published coordinates, not a mined seed).
 
 **⚠ ~~THE COST MODEL UNDER ALL FOUR OPTIONS IS WRONG BY ~8×.~~ REFUTED 2026-08-18 by `V-W3`
-(`2b8755e`) — NO OVERRUN; THE `8×` WAS A UNITS ERROR.** `0.0713` is **WALL**-h/attempt at **8
-workers**, `0.57` is **CORE**-h/attempt. Like for like: U5's model predicts `0.0713 × 8 = 0.5704`
-core-h, `E` measured `9.08843/16 = 0.56803` — **ratio 0.9958, 0.4% UNDER**; the `8×` is `core ÷ wall`
-and equals the worker count (`7.967`). The structural story is contradicted too: `E` ran **21.44**
-epochs/attempt vs U5's **21.95** at **95.389 s/epoch** vs a 95 s model — **both factors accurate.**
-~~*every `h/attempt` above is a floor*~~ **WITHDRAWN**; the figures above are wall-hours at 8 workers
-and sound as written. Priced but not bought: field ensemble **≈91 ch**, `N=48` lift **≈730 ch**,
-diagnostic (2)'s coverage gap **122.1 ch**.
+(`2b8755e`): NO OVERRUN, THE `8×` WAS A UNITS ERROR** — `core ÷ wall` is the worker count. `0.0713`
+**WALL**-h/attempt at 8 workers = `0.5704` **CORE**-h/attempt against `9.08843/16 = 0.56803`
+measured: **0.9958, i.e. 0.4% UNDER.** **AND `V-W3`'s OWN EPOCH FIGURE IS CORRECTED** by `D-REPAIR`
+(`036e56d`): its *"2.3% fewer epochs/attempt"* compared `E`'s `n_iters` against U5's **ledger rows**,
+which differ by one row per non-converged attempt (`2195 − 2104 = 91 = 100 − 9`; `E`: `357 − 343 =
+14 = 16 − 2`). **Like for like `E` used MORE: +1.9% on `n_iters`, +1.7% on ledger rows**, at
+**95.389 s/epoch** against the banked 95 s model (+0.41%).
 
 ## B. Lane R — the units not taken
 
 | id | unit | status | note |
 |---|---|---|---|
-| **R0** | the metric | **TAKEN**, w1, gate `yes`, VERIFIED by `V1` | Corrected `WALLS.md` twice and **retracted** "Lane R's first measured win". `WALLS.md` §R0. |
-| **R1** | early abort on flatness | **TAKEN, CLOSED AGAINST ITSELF**, w1, VERIFIED by `V1` | Already collected by U5 before commissioning. **Spend no more compute on this family.** `WALLS.md` §R1. |
+| **R0**, **R1** | metric; early abort | **TAKEN, w1, VERIFIED by `V1`** — §3j, one line plus a pointer. | `R0` **retracted** *"Lane R's first measured win"*; `R1` **closed against itself**, U5 had already collected it — **spend no more compute on this family.** `WALLS_HISTORY.md` §R0/R1. |
 | **R2** | deflation (Farrell–Birkisson–Funke) | **DEFERRED — the strongest surviving Lane R item** | R0 measured the waste: **57 of U5's 100 seeds were already spent by U3**, **5 of 9 convergences are bit-identical re-executions**, **4 of 5 distinct solutions are re-finds**, U5's contribution new to the programme is **one orbit**. Deflate against the **union** of both runs' solutions. Re-opens whenever Lane R gets a wave slot. |
 | **R3** | multiple shooting | **DEFERRED** | Brick B6's own spec names it; U1 built the globalisation without it. Standard conditioning fix for long orbits, and long orbits are where the published targets live. **The basin-structure finding points here, and `E-iii` fired, which points here again.** |
 | **R4** | second-order-in-time stepper | **DEFERRED — AND `E` PROMOTED IT** | U3's is Lie–Trotter, globally **first** order (measured ratio 2.00), so its periodic orbits are `O(dt)` perturbations of the true flow's while the published rates come from higher-order codes. Invalidates M1's reproduction — own milestone. **`E-ii` named `R4` in advance as where a non-recovery would point, and its antecedent IS satisfied.** `E`'s leg-353 comparison is **the first evidence pointing at the REALIZATION rather than the budget** — a better realization got closer (residuals [0.80, 10.32] vs [22.5, 29.5]) from strictly **worse** seeds and still recovered nothing. |
@@ -104,30 +98,36 @@ hookstep. It returned **`MIXED`** (97.1% constrained, `p = 0.9317`) — **not
 removes re-finds **within** a run, not **between** runs; any comparison must state its convention, and
 the denominator is **worker-hours** — physical core count appears in no numeric field of either JSON.
 
-## C. Lane V — the viscous rung. ~~*ACTIVE, PRIORITY.*~~ **HELD 2026-08-18 on `V3`'s return.**
+## C. Lane V — the viscous rung. ~~*ACTIVE, PRIORITY.*~~ ~~**HELD 2026-08-18.**~~ **UN-HELD BY RULING.**
 
-**The lane's premise was measured and it did not hold.** `V3` (leg 399, `16ba44e`) graded 9 fluid
+**The premise was measured, then ruled to have survived.** `V3` (leg 399, `16ba44e`) graded 9 fluid
 blow-up CAPs against leg 174's **own, unchanged** criterion: **`arXiv:2509.25116` (Hou–Wang–Yang)
 passes both clauses** — interval arithmetic (§7.3 p.55) enclosing a solution of a system carrying
 `−ΔŨ` (Prop. 1 eq. (1.15) p.5) for the **unforced 3D incompressible Navier–Stokes equations** — and
 had **never been graded here**. 8 rows `NO`, clause quoted per row; legs 309/342/123 **cited, not
 redone**. Reading (a) — *a YES kills Lane V's premise* — **FIRED, honoured as written.**
 
-**BUT THE OBJECT IS NOT A BLOW-UP** (paper's §1.2 p.2: forward self-similar, singular data,
-*"smooth for positive times"*), and **W3's prose test requires a finite-time singularity while leg
-174's criterion — named in the same sentence as `V3`'s predicate — does not.** Which governs is (Q1)
-of an **OPEN user escalation**, `ESCALATION_W3_WORDING_2026-08-18.md`. **W3: DISPUTED / UNRULED, not
-ruled by the Conductor; HELD rather than KILLED is the consequence.** **The YES is UNAUDITED:** one
+**BUT THE OBJECT IS NOT A BLOW-UP** (paper's §1.2 p.2: forward self-similar, singular data, *"smooth
+for positive times"*, concluding nonuniqueness of Leray–Hopf solutions). **RULED 2026-08-18 (Q1),
+`RULING_W3_WORDING_2026-08-18.md`: W3's prose test governs, W3 STANDS, and the lane's premise
+SURVIVES** — the certified singularity the lane exists to supply is still missing. The cell is
+occupied and the wall stands; **these are two different claims.** **The YES remains UNAUDITED:** one
 database, title-screened, S2 banked a **gap not a zero** (no key here).
 
-**HELD UNITS — all three wait on the ruling, because what they should test depends on it.**
-- **`V3-audit`, 4–8 h** — adversarial full-text audit of `2509.25116` to leg-309 depth, incl. the
-  localisation step to a genuine Leray–Hopf solution. *Decides whether the YES survives contact.*
+**UNITS.**
+- **`V3-audit`, ≈4–8 h — OBLIGATORY IN WAVE 6 (ruling Q4), no longer optional.** Adversarial
+  full-text audit of `2509.25116` to leg-309 depth. **Scope fixed by the ruling:** enumerate the
+  load-bearing constants **before** adjudicating; recompute what is recomputable; check the
+  localisation step from the `ℝ³` self-similar profile to a genuine Leray–Hopf solution (Remark 2,
+  §1.3 + §2); **pre-commit both branches**; and report as a **SEPARATE CLAUSE** whether the certified
+  profile is genuinely 3D rather than symmetry-reduced — **it bears on W2, W2's own pre-committed
+  test is the arbiter, and it must not be folded into the W3 verdict or claimed without the test.**
 - **`V-net`, 6–10 h** — a real coverage net, ≥8 nets over ≥3 databases plus author pages. **Needs an
   S2 or OpenAlex key**, or half the channels bank `THROTTLED`.
 - **`V2`** (wave 3 killed it without a byte) — name a dissipative fluid target, open the feasibility
-  of a C1-compliant apparatus against it. **Re-opens only if the ruling leaves the cell empty of a
-  certified singularity.**
+  of a C1-compliant apparatus against it. **RE-OPENED by the ruling**: the cell is empty of a
+  certified *singularity*, which is exactly its re-open condition. Unranked against `V3-audit`, which
+  the ruling puts first.
 
 **C1 binds every unit here, not waivable by the Conductor:** name the apparatus with a citation and
 show it constructs no single bounded approximate inverse uniform in `M`; absent both, the ban applies
