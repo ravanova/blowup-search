@@ -15,27 +15,10 @@ verifier, do not re-raise the C1 escalation, do not redo `T1`'s machine record: 
 
 ## LIVE — CONDUCTOR mode, **WAVE 5 IN FLIGHT — `D-REPAIR` LANDED, `L5` AND `V-W4` OUT**, 2026-08-18
 
-### Wave 5 — PLANNED AND COMMITTED BEFORE DISPATCH
+### Wave 5 — planned and committed before dispatch: retired from LIVE under §3j
 
-**`writeup/waves/WAVE5_PLAN.md` @ `1e49a00`.** Three units: **`L5`** (Lane L, CONSTRUCTION, first)
-attacking **W4 clause (b)**, the natively finite-energy ansatz; **`D-REPAIR`** for `V-W3`'s D2–D6
-plus the four held Conductor debts; **`V-W4`** (LAST) verifying wave 4. §3f rule 3, §3h composition
-floor and §3i q7 all discharged by named units.
-
-**A SECOND §3j MECHANISM, FLAGGED NOT SILENT.** The gates are in a committed plan file and
-`STATE.md` carries the wave-5 block **by pointer to that SHA** — plan committed first, pointer
-second, **both before any worker starts**. This is §3j rule 5 (*quote a gate by pointer once
-committed*) applied at plan time rather than after dispatch, and it was forced by the cap: wave 4's
-equivalent block was 5,598 bytes and `STATE.md` had 142. **The gates are not weaker for it — they
-are in final wording and unchangeable after dispatch.** If the user prefers gates inline, that is a
-cap ruling, and it is asked for above.
-
-**DISPATCHED 2026-08-18, plan and pointer both landed first (`1e49a00`, `d842898`; `origin/main` and
-local agreed at `d842898`, no concurrent push).** `L5` → `leg/400-l5-finite-energy`, `D-REPAIR` →
-`repair/wave3-defects` — **construction opened the wave** — then `V-W4` → `verify/wave4` **last**.
-Each brief carries its gate in the final committed wording, COMMIT DURING THE RUN, the never-relax
-rules and the prohibitions; **no brief was given `DIRECTION.md` or a repo tour**. Nothing was
-committed to the gates after the first worker started.
+*The plan, the gates-by-pointer mechanism and the dispatch record are verbatim in the Superseded
+LIVE block below. `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`; dispatch at `54183bb`.*
 
 ### Wave 5 — `D-REPAIR` RETURNED AND LANDED (`036e56d`), the other two in flight
 
@@ -88,6 +71,27 @@ debt list and `D-REPAIR`'s row all landed inside a file that got smaller.
 *"21.44 vs 21.95 epochs/attempt"* — the cross-convention comparison `D-REPAIR` refuted. It now
 carries the like-for-like numbers (**+1.9% / +1.7%, `E` used MORE**) with the convention spelled out.
 
+### The retirement BACKLOG cleared, and one path discrepancy recorded not fixed
+
+**Re-read from disk after the ruling — `RULING_W3_WORDING_2026-08-18.md`, `ORCHESTRATION.md` §3j,
+`STATE.md`, `WALLS.md` — and the transcription checked MECHANICALLY, not by eye.** The ruling's
+required paragraph is present in `WALLS.md` **byte-identical after whitespace normalisation**
+(9 blockquote lines, 0 missing); the retitle is on disk; the old title is struck and not deleted;
+`HELD` appears nowhere in the three capped files.
+
+**Backlog cleared, and it was real:** `V-W2` **is** verified — `V-W3`'s item 3 is literally *verify
+the verifier*, verdict **CONFIRMED**, with an independent re-fetch-and-hash of all three sources —
+and `E`'s **gate answer** is verified by `V-W3`'s item 1 (16 rows recounted off
+`diagnostic_3.attempts`). Both retired to `writeup/INDEX.md` with their verifier named. **`E`'s row
+carries the distinction that makes it honest: the gate answer verified, the RECORD'S COST CLAIM about
+it refuted.** `V1` stays — nothing has audited it; `V-W3` audits `V-W2`, not `V1`.
+**`STATE.md`: 22,457 / 24,576 — 2,119 free, from 162 free two integrations ago.**
+
+**PATH DISCREPANCY, RECORDED NOT FIXED.** The amendment names `writeup/WALLS_HISTORY.md`; the file
+created at `6320790` and used by every existing pointer is `WALLS_HISTORY.md` at the repo root. I did
+not rename it — a rename breaks the live `## History` pointers to buy nothing — but a later reader
+should know the two names refer to one file.
+
 ### Ruling Q5's added requirement, and what I did NOT do about it
 
 The ruling requires `L5` to state **what distinguishes a genuine natively-finite-energy ansatz from
@@ -105,6 +109,34 @@ cannot be a judgement made after seeing the answer.
 two disagreeing tests. **Work has not stopped.** `T1`'s ban-wording packet remains on the user's desk
 (machine record **DISCHARGED**). The lift-clause defect (leg 257 / fourth space) is **recorded, NOT
 ruled**. C1 is **DISCHARGED** and stands **EXEMPLAR-FREE**.
+
+---
+
+## Superseded LIVE block — wave 5 as PLANNED AND DISPATCHED, 2026-08-18
+
+*Demoted from LIVE 2026-08-18 under §3j. Nothing deleted, nothing reworded.*
+
+### Wave 5 — PLANNED AND COMMITTED BEFORE DISPATCH
+
+**`writeup/waves/WAVE5_PLAN.md` @ `1e49a00`.** Three units: **`L5`** (Lane L, CONSTRUCTION, first)
+attacking **W4 clause (b)**, the natively finite-energy ansatz; **`D-REPAIR`** for `V-W3`'s D2–D6
+plus the four held Conductor debts; **`V-W4`** (LAST) verifying wave 4. §3f rule 3, §3h composition
+floor and §3i q7 all discharged by named units.
+
+**A SECOND §3j MECHANISM, FLAGGED NOT SILENT.** The gates are in a committed plan file and
+`STATE.md` carries the wave-5 block **by pointer to that SHA** — plan committed first, pointer
+second, **both before any worker starts**. This is §3j rule 5 (*quote a gate by pointer once
+committed*) applied at plan time rather than after dispatch, and it was forced by the cap: wave 4's
+equivalent block was 5,598 bytes and `STATE.md` had 142. **The gates are not weaker for it — they
+are in final wording and unchangeable after dispatch.** If the user prefers gates inline, that is a
+cap ruling, and it is asked for above.
+
+**DISPATCHED 2026-08-18, plan and pointer both landed first (`1e49a00`, `d842898`; `origin/main` and
+local agreed at `d842898`, no concurrent push).** `L5` → `leg/400-l5-finite-energy`, `D-REPAIR` →
+`repair/wave3-defects` — **construction opened the wave** — then `V-W4` → `verify/wave4` **last**.
+Each brief carries its gate in the final committed wording, COMMIT DURING THE RUN, the never-relax
+rules and the prohibitions; **no brief was given `DIRECTION.md` or a repo tour**. Nothing was
+committed to the gates after the first worker started.
 
 ---
 
