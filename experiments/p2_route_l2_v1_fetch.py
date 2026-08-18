@@ -37,7 +37,10 @@ WANTED = [
     ("1204.0529",  "F3", "Jia-Sverak, Local-in-space estimates near initial time ... and forward self-similar solutions"),
     ("1210.2783",  "F3", "Bradshaw-Tsai, Forward discretely self-similar solutions of the Navier-Stokes equations"),
     ("1703.03480", "F3", "Discretely self-similar solutions to the Navier-Stokes equations with Besov space data"),
-    ("1910.00173", "F4", "Elgindi, Finite-time singularity formation for C^{1,alpha} solutions to the incompressible Euler equations"),
+    # CORRECTION made during the run and left visible: 1910.00173 is CHEN-HOU, not Elgindi.
+    # Elgindi's own C^{1,alpha} paper is 1904.04795 and is fetched separately below.
+    ("1910.00173", "F4", "Chen-Hou, Finite time blowup of 2D Boussinesq and 3D Euler equations with C^{1,alpha} velocity and boundary"),
+    ("1904.04795", "F4", "Elgindi, Finite-time singularity formation for C^{1,alpha} solutions to the incompressible Euler equations on R^3"),
     ("1910.14071", "F4", "Elgindi-Ghoul-Masmoudi, On the stability of self-similar blow-up for C^{1,alpha} solutions"),
     ("2210.07191", "F4", "Chen-Hou, Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations"),
     ("1912.11009", "F5", "Merle-Raphael-Rodnianski-Szeftel, On the implosion of a three dimensional compressible fluid"),

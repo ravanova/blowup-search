@@ -5,7 +5,6 @@
  "fulltexts": [
   {
    "arxiv_id": "1610.09464",
-   "http_status": 200,
    "pdf_bytes": 218473,
    "pdf_md5": "f1d14db17f643323cfa1a16ba661eb9d",
    "txt_md5": "73279aa90ce78c1190d0027000fd1cf2",
@@ -16,7 +15,6 @@
   },
   {
    "arxiv_id": "2202.08352",
-   "http_status": 200,
    "pdf_bytes": 354758,
    "pdf_md5": "0a359ec1fb8606401d0b9b3498de400b",
    "txt_md5": "4b8947dd7c7d43481b4615462d482ccb",
@@ -27,7 +25,6 @@
   },
   {
    "arxiv_id": "2409.13586",
-   "http_status": 200,
    "pdf_bytes": 360194,
    "pdf_md5": "ceed151477c845f7f2a0d41bd29cc011",
    "txt_md5": "75b3f63e8a684205c21fc4de26db08d7",
@@ -38,7 +35,6 @@
   },
   {
    "arxiv_id": "2006.15776",
-   "http_status": 200,
    "pdf_bytes": 298686,
    "pdf_md5": "a5341254bb530337257512dd2e8ae601",
    "txt_md5": "b0feceba2433663a0fac582f33a081b1",
@@ -49,7 +45,6 @@
   },
   {
    "arxiv_id": "2607.09619",
-   "http_status": 200,
    "pdf_bytes": 617825,
    "pdf_md5": "53680cb802803dda9b0a27975c7d1270",
    "txt_md5": "01bdf4c836b3a8b6ddfa071618335ef2",
@@ -60,7 +55,6 @@
   },
   {
    "arxiv_id": "1204.0529",
-   "http_status": 200,
    "pdf_bytes": 304378,
    "pdf_md5": "5f7466362f7eb7c9c8bad47db3433414",
    "txt_md5": "d75b8f6231004c764c7252ceaa6c3277",
@@ -71,7 +65,6 @@
   },
   {
    "arxiv_id": "1210.2783",
-   "http_status": 200,
    "pdf_bytes": 229486,
    "pdf_md5": "626fd1483d14bfda6003543a55126fda",
    "txt_md5": "d4a3c6c0bfd52c8bbf11bb42dfd3f321",
@@ -82,7 +75,6 @@
   },
   {
    "arxiv_id": "1703.03480",
-   "http_status": 200,
    "pdf_bytes": 271083,
    "pdf_md5": "d9945492d503e5cdb1d05e5b6686d3c0",
    "txt_md5": "436d873f6a1c6ccc758e76325f6ace93",
@@ -93,18 +85,27 @@
   },
   {
    "arxiv_id": "1910.00173",
-   "http_status": 200,
    "pdf_bytes": 1256297,
    "pdf_md5": "b68d37b622a9acbff9ece677105502e5",
    "txt_md5": "d7d5bc5b5b7bdb09b23a828c0c48bb74",
    "txt_lines": 5599,
    "status": "OK",
    "family": "F4",
-   "title": "Elgindi, Finite-time singularity formation for C^{1,alpha} solutions to the incompressible Euler equations"
+   "title": "Chen-Hou, Finite time blowup of 2D Boussinesq and 3D Euler equations with C^{1,alpha} velocity and boundary"
+  },
+  {
+   "arxiv_id": "1904.04795",
+   "http_status": 200,
+   "pdf_bytes": 664080,
+   "pdf_md5": "0fb7ddeea16ed3cc0ce1132baf40596d",
+   "txt_md5": "e6950ab8a2fdce2db39eaa1816b3f334",
+   "txt_lines": 3680,
+   "status": "OK",
+   "family": "F4",
+   "title": "Elgindi, Finite-time singularity formation for C^{1,alpha} solutions to the incompressible Euler equations on R^3"
   },
   {
    "arxiv_id": "1910.14071",
-   "http_status": 200,
    "pdf_bytes": 377479,
    "pdf_md5": "fec278bc74fc9b2ee4e8a7acd3610dab",
    "txt_md5": "f5c15409ea09ffb864f7818632859b15",
@@ -115,7 +116,6 @@
   },
   {
    "arxiv_id": "2210.07191",
-   "http_status": 200,
    "pdf_bytes": 5181971,
    "pdf_md5": "ca2f9c6d30e7781b5bccd3b08ac2c15f",
    "txt_md5": "ed7701e43bc72f596c5922bc5d0b3b8d",
@@ -126,7 +126,6 @@
   },
   {
    "arxiv_id": "1912.11009",
-   "http_status": 200,
    "pdf_bytes": 1238457,
    "pdf_md5": "5f3f35cf8500eb13daa9900de45aec90",
    "txt_md5": "c1f24804ef3a79d5e249060ce5ecce6a",
@@ -137,7 +136,6 @@
   },
   {
    "arxiv_id": "2606.12758",
-   "http_status": 200,
    "pdf_bytes": 633685,
    "pdf_md5": "3de5dd24ae8c59f34d9127c5df9e9ea0",
    "txt_md5": "fc8965939b5b782cb484b02f01a3fc65",
