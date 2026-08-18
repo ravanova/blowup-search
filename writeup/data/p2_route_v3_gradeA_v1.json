@@ -1,0 +1,13 @@
+{
+  "leg": 399,
+  "route": "V3",
+  "branch": "leg/399-v3-gradeA",
+  "status": "PRE-REGISTERED, no rows graded",
+  "criterion_source": "writeup/PUB_0C_CENSUS_SPINE.md §1 (leg 174's criterion, unchanged)",
+  "criterion": {
+    "grade_A": "the interval-arithmetic certificate encloses a solution of an equation that itself carries the dissipative term",
+    "fluid": "the equation is a genuine fluid-dynamics equation (transport nonlinearity, incompressibility or a fluid-adjacent structure), not an off-axis scalar/complex-field model"
+  },
+  "rows": [],
+  "honest_ceiling": null
+}
