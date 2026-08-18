@@ -447,7 +447,7 @@ def residual_field(g, aF, aQ):
     return WS + A_SIM * (2.0 * W + rdW) - LW + NL1 - NL2, V, W
 
 
-def load_bearing_norm(g, Wfield):
+def load_bearing_norm(g, Wfield, eps=EPS_FLOOR):
     """int_0^{T_s} ||W(.,s)||_{L3/2(R^3)} ds  (AD-traced when Wfield is a Var).
 
     This IS the norm route 4's own closure requires -- pressure-free, because W = curl R.
@@ -456,11 +456,11 @@ def load_bearing_norm(g, Wfield):
     wpr = g.wr[:, None, None] * g.wa[None, None, :]
     if isinstance(Wfield, Var):
         sq = (Wfield * Wfield).sum(axis=-1)            # (nq_r, ns, nP)
-        dens = (sq + EPS_FLOOR) ** 0.75
+        dens = (sq + eps) ** 0.75
         per_s = (dens * wpr).sum(axis=(0, 2))          # (ns,)
         return ((per_s ** (2.0 / 3.0)) * g.ws).sum()
     sq = (Wfield ** 2).sum(axis=-1)
-    dens = (sq + EPS_FLOOR) ** 0.75
+    dens = (sq + eps) ** 0.75
     per_s = (dens * wpr).sum(axis=(0, 2))
     return float(np.sum(per_s ** (2.0 / 3.0) * g.ws))
 
@@ -468,16 +468,31 @@ def load_bearing_norm(g, Wfield):
 # --------------------------------------------------------------------------------------
 # 5.  Objective (branch A / branch B normalisation), value + exact gradient
 # --------------------------------------------------------------------------------------
-def objective(g, x, branch):
+def objective(g, x, branch, eps=EPS_FLOOR):
+    """Value and exact gradient of the load-bearing residual functional.
+
+    `eps` is the smoothing floor inside (|W|^2 + eps)^{3/4}.  At eps = EPS_FLOOR (the
+    default, 1e-300) this IS the load-bearing norm and nothing has been changed.  Positive
+    eps is used ONLY as a homotopy to get near the minimum quickly: the integrand
+    |W|^{3/2} has a Holder-1/2 gradient where W vanishes, which is what makes a quasi-Newton
+    method crawl on it.  EVERY REPORTED NUMBER IS EVALUATED AT eps = EPS_FLOOR.
+    """
     aF0, aQ0 = g.unpack(x)
     vF, vQ = Var(aF0), Var(aQ0)
     N = _norm_A(g, vF, vQ) if branch == "A" else _norm_B(g, vF, vQ)
     scale = 1.0 / ad_sqrt(N)
     aF, aQ = vF * scale, vQ * scale
     Wf, _, _ = residual_field(g, aF, aQ)
-    J = load_bearing_norm(g, Wf)
+    J = load_bearing_norm(g, Wf, eps=eps)
     gF, gQ = grad_of(J, [vF, vQ])
     return float(J.v), np.concatenate([gF.ravel(), gQ.ravel()])
+
+
+def mean_sq_residual(g, x, branch):
+    """mean of |W|^2 over the grid -- sets the scale of the smoothing floor."""
+    aF, aQ = g.unpack(normalise(g, np.asarray(x, float), branch))
+    Wf, _, _ = residual_field(g, Var(aF), Var(aQ))
+    return float(np.mean((Wf.v ** 2).sum(axis=-1)))
 
 
 def normalise(g, x, branch):
@@ -1025,6 +1040,124 @@ def run_ladder(ladder, branch, seeds, maxiter, ckpt_name, verbose=True):
     return rows, last
 
 
+def finalise(doc, results, banked, axis, axis_maxiter, args, st, t_start):
+    """Assemble the gate block, the readings, the cost and the self_hash, and write
+    the artefact.  Called TWICE: once as soon as the joint ladder -- which is what the
+    gate is read off -- is complete, and again after the secondary axis ladders.  The
+    container is ephemeral, so the gate answer must be on disk before the optional
+    work starts."""
+    # ---- the gate answer ---------------------------------------------------------------
+    def _cap_table(rows, ns, mx):
+        tab = {}
+        for K in [k for k in (50, 100, 200, 400, 800, 1600, 3200) if k <= mx] + [mx]:
+            rs_k = residual_at_cap(rows, K)
+            if any(v is None for v in rs_k):
+                continue
+            v, s3 = verdict(ns, rs_k)
+            tab[str(K)] = dict(per_rung_residual=rs_k, decreases_under_refinement=v,
+                               rate_dlogresid_dlogndof_last3=s3)
+        vs = [t["decreases_under_refinement"] for t in tab.values()]
+        return dict(by_cap=tab, verdict_is_stable_in_the_cap=bool(len(set(vs)) == 1),
+                    why=("if the verdict is the same at every iteration cap, it is a fact "
+                         "about the construction and not about where the optimiser stopped"))
+
+    gate = {}
+    for branch in ("A", "B"):
+        rows = results[branch]
+        rs = [r["residual_load_bearing"] for r in rows]
+        ns = [r["n_dof"] for r in rows]
+        last3 = slice(max(0, len(rs) - 3), len(rs))
+        s_all = slope(ns, rs)
+        s_last3 = slope(ns[last3], rs[last3])
+        rels = [(rs[i] - rs[i - 1]) / rs[i - 1] for i in range(1, len(rs))]
+        strictly_dec = all(rs[i] < rs[i - 1] for i in range(max(1, len(rs) - 2), len(rs)))
+        big_enough = all(r < -0.05 for r in rels[-2:]) if len(rels) >= 2 else False
+        yes = bool(strictly_dec and big_enough and s_last3 < -0.05)
+        gate[branch] = dict(
+            smallest_residual=min(rs),
+            residual_at_best_affordable_resolution=rs[-1],
+            best_affordable_resolution=dict(tag=rows[-1]["tag"], Lmax=rows[-1]["Lmax"],
+                                            Nr=rows[-1]["Nr"], Ks=rows[-1]["Ks"],
+                                            n_dof=rows[-1]["n_dof"]),
+            per_rung_residual=dict(zip([r["tag"] for r in rows], rs)),
+            per_rung_relative_change=rels,
+            decreases_under_refinement="YES" if yes else "NO",
+            rate_dlogresid_dlogndof_last3=s_last3,
+            rate_dlogresid_dlogndof_all=s_all,
+            stability_against_the_iteration_cap=_cap_table(rows, ns, args.maxiter),
+        )
+    doc["gate"] = gate
+
+    # ---- readings ----------------------------------------------------------------------
+    dA = results["A"][-1]["diagnostics"]
+    dB = results["B"][-1]["diagnostics"]
+    doc["readings"] = dict(
+        reading_c1_SS_collapse=dict(
+            tolerance=1e-6,
+            branch_A_oscillating_fraction=dA["s_mode_energy_fraction_oscillating"],
+            branch_B_oscillating_fraction=dB["s_mode_energy_fraction_oscillating"],
+            fired_A=bool(dA["s_mode_energy_fraction_oscillating"] < 1e-6),
+            fired_B=bool(dB["s_mode_energy_fraction_oscillating"] < 1e-6),
+            change_of_variables_if_fired="the DSS->SS reduction V_s == 0",
+        ),
+        reading_c2_far_field_SS_collapse=dict(
+            branch_A_far_field_shape_s_variation=dA["far_field_shape_s_variation"],
+            branch_B_far_field_shape_s_variation=dB["far_field_shape_s_variation"],
+            branch_A_far_field_amplitude_rel_std=dA["far_field_alpha1_amplitude_rel_std"],
+            branch_B_far_field_amplitude_rel_std=dB["far_field_alpha1_amplitude_rel_std"],
+        ),
+        reading_c3_trivialisation=dict(
+            branch_A_weighted_L2=dA["weighted_L2_total"],
+            branch_B_weighted_L2=dB["weighted_L2_total"],
+        ),
+    )
+    # ---- reading (d): the cost, stated whether or not the answer is a NO ---------------
+    all_starts = []
+    for br in results.values():
+        for r in br:
+            all_starts.extend(r["starts"])
+    for lad in axis.values():
+        for r in lad["rungs"]:
+            all_starts.extend(r["starts"])
+    n_capped = sum(1 for r in all_starts if r["hit_maxiter"])
+    top = results["B"][-1]
+    doc["cost_and_shortfall"] = dict(
+        preregistered_maxiter=20000,
+        maxiter_actually_used=args.maxiter,
+        maxiter_on_the_secondary_axis_ladders=axis_maxiter,
+        shortfall_reason=("wall-clock. One objective-plus-exact-gradient evaluation costs "
+                          "~0.25 s at rung J0 and ~1.5 s at rung J4 on 12 cores; the "
+                          "pre-registered 20000 iterations x 6 starts x 5 joint rungs x 2 "
+                          "branches x 13 further axis rungs is ~10^3 core-hours, which this "
+                          "container does not have."),
+        starts_run=len(all_starts),
+        starts_that_hit_the_iteration_cap=n_capped,
+        fraction_of_starts_capped=(n_capped / len(all_starts)) if all_starts else None,
+        resolution_reached=dict(tag=top["tag"], Lmax=top["Lmax"], Nr=top["Nr"],
+                                Ks=top["Ks"], n_dof=top["n_dof"],
+                                nq_r=top["nq_r"], n_theta=top["n_theta"],
+                                n_phi=top["n_phi"], n_s=top["n_s"]),
+        wall_clock_seconds=round(time.time() - t_start, 1),
+        wall_clock_hours=round((time.time() - t_start) / 3600.0, 3),
+        cores=12,
+        UNDER_RESOURCED=bool(n_capped > 0),
+    )
+    doc["runtime_seconds"] = round(time.time() - t_start, 1)
+    doc["chain"] = dict(
+        L1_to_L4_link_moved="NONE",
+        clay_percent_unchanged=True,
+        this_is_not_a_blowup=True,
+        this_is_not_a_certificate=True,
+    )
+
+    body = json.dumps(doc, sort_keys=True)
+    doc['self_hash'] = hashlib.sha256(body.encode()).hexdigest()[:16]
+    OUT.write_text(json.dumps(doc, indent=1, sort_keys=True))
+    print(f"\nwrote {OUT}  self_hash={doc['self_hash']}  "
+          f"({doc['runtime_seconds']:.0f}s)", flush=True)
+    return doc
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--maxiter", type=int, default=4000)
@@ -1139,9 +1272,17 @@ def main():
     doc["ladder_results"] = results
     doc["banked_profile"] = banked
 
-    # ---- single-axis ladders (leg_401.md SS5) -----------------------------------------
+    # ---- the gate is read off the JOINT ladder, so write it to disk NOW, before the
+    # ---- optional per-axis work.  The container is ephemeral.
     axis = {}
     axis_maxiter = args.axis_maxiter or args.maxiter
+    doc["axis_ladders"] = dict(branch=args.axis_branch, maxiter=axis_maxiter,
+                               ladders={}, status="NOT RUN YET")
+    print("\n--- joint ladder complete; writing the gate answer before the axis ladders",
+          flush=True)
+    finalise(doc, results, banked, axis, axis_maxiter, args, st, t_start)
+
+    # ---- single-axis ladders (leg_401.md SS5) -----------------------------------------
     if args.axis_branch != "none":
         for name, lad in AXIS_LADDERS.items():
             print(f"\nAXIS LADDER {name} (branch {args.axis_branch})", flush=True)
@@ -1163,115 +1304,7 @@ def main():
         ladders=axis,
     )
 
-    # ---- the gate answer ---------------------------------------------------------------
-    def _cap_table(rows, ns, mx):
-        tab = {}
-        for K in [k for k in (50, 100, 200, 400, 800, 1600, 3200) if k <= mx] + [mx]:
-            rs_k = residual_at_cap(rows, K)
-            if any(v is None for v in rs_k):
-                continue
-            v, s3 = verdict(ns, rs_k)
-            tab[str(K)] = dict(per_rung_residual=rs_k, decreases_under_refinement=v,
-                               rate_dlogresid_dlogndof_last3=s3)
-        vs = [t["decreases_under_refinement"] for t in tab.values()]
-        return dict(by_cap=tab, verdict_is_stable_in_the_cap=bool(len(set(vs)) == 1),
-                    why=("if the verdict is the same at every iteration cap, it is a fact "
-                         "about the construction and not about where the optimiser stopped"))
-
-    gate = {}
-    for branch in ("A", "B"):
-        rows = results[branch]
-        rs = [r["residual_load_bearing"] for r in rows]
-        ns = [r["n_dof"] for r in rows]
-        last3 = slice(max(0, len(rs) - 3), len(rs))
-        s_all = slope(ns, rs)
-        s_last3 = slope(ns[last3], rs[last3])
-        rels = [(rs[i] - rs[i - 1]) / rs[i - 1] for i in range(1, len(rs))]
-        strictly_dec = all(rs[i] < rs[i - 1] for i in range(max(1, len(rs) - 2), len(rs)))
-        big_enough = all(r < -0.05 for r in rels[-2:]) if len(rels) >= 2 else False
-        yes = bool(strictly_dec and big_enough and s_last3 < -0.05)
-        gate[branch] = dict(
-            smallest_residual=min(rs),
-            residual_at_best_affordable_resolution=rs[-1],
-            best_affordable_resolution=dict(tag=rows[-1]["tag"], Lmax=rows[-1]["Lmax"],
-                                            Nr=rows[-1]["Nr"], Ks=rows[-1]["Ks"],
-                                            n_dof=rows[-1]["n_dof"]),
-            per_rung_residual=dict(zip([r["tag"] for r in rows], rs)),
-            per_rung_relative_change=rels,
-            decreases_under_refinement="YES" if yes else "NO",
-            rate_dlogresid_dlogndof_last3=s_last3,
-            rate_dlogresid_dlogndof_all=s_all,
-            stability_against_the_iteration_cap=_cap_table(rows, ns, args.maxiter),
-        )
-    doc["gate"] = gate
-
-    # ---- readings ----------------------------------------------------------------------
-    dA = results["A"][-1]["diagnostics"]
-    dB = results["B"][-1]["diagnostics"]
-    doc["readings"] = dict(
-        reading_c1_SS_collapse=dict(
-            tolerance=1e-6,
-            branch_A_oscillating_fraction=dA["s_mode_energy_fraction_oscillating"],
-            branch_B_oscillating_fraction=dB["s_mode_energy_fraction_oscillating"],
-            fired_A=bool(dA["s_mode_energy_fraction_oscillating"] < 1e-6),
-            fired_B=bool(dB["s_mode_energy_fraction_oscillating"] < 1e-6),
-            change_of_variables_if_fired="the DSS->SS reduction V_s == 0",
-        ),
-        reading_c2_far_field_SS_collapse=dict(
-            branch_A_far_field_shape_s_variation=dA["far_field_shape_s_variation"],
-            branch_B_far_field_shape_s_variation=dB["far_field_shape_s_variation"],
-            branch_A_far_field_amplitude_rel_std=dA["far_field_alpha1_amplitude_rel_std"],
-            branch_B_far_field_amplitude_rel_std=dB["far_field_alpha1_amplitude_rel_std"],
-        ),
-        reading_c3_trivialisation=dict(
-            branch_A_weighted_L2=dA["weighted_L2_total"],
-            branch_B_weighted_L2=dB["weighted_L2_total"],
-        ),
-    )
-    # ---- reading (d): the cost, stated whether or not the answer is a NO ---------------
-    all_starts = []
-    for br in results.values():
-        for r in br:
-            all_starts.extend(r["starts"])
-    for lad in axis.values():
-        for r in lad["rungs"]:
-            all_starts.extend(r["starts"])
-    n_capped = sum(1 for r in all_starts if r["hit_maxiter"])
-    top = results["B"][-1]
-    doc["cost_and_shortfall"] = dict(
-        preregistered_maxiter=20000,
-        maxiter_actually_used=args.maxiter,
-        maxiter_on_the_secondary_axis_ladders=axis_maxiter,
-        shortfall_reason=("wall-clock. One objective-plus-exact-gradient evaluation costs "
-                          "~0.25 s at rung J0 and ~1.5 s at rung J4 on 12 cores; the "
-                          "pre-registered 20000 iterations x 6 starts x 5 joint rungs x 2 "
-                          "branches x 13 further axis rungs is ~10^3 core-hours, which this "
-                          "container does not have."),
-        starts_run=len(all_starts),
-        starts_that_hit_the_iteration_cap=n_capped,
-        fraction_of_starts_capped=(n_capped / len(all_starts)) if all_starts else None,
-        resolution_reached=dict(tag=top["tag"], Lmax=top["Lmax"], Nr=top["Nr"],
-                                Ks=top["Ks"], n_dof=top["n_dof"],
-                                nq_r=top["nq_r"], n_theta=top["n_theta"],
-                                n_phi=top["n_phi"], n_s=top["n_s"]),
-        wall_clock_seconds=round(time.time() - t_start, 1),
-        wall_clock_hours=round((time.time() - t_start) / 3600.0, 3),
-        cores=12,
-        UNDER_RESOURCED=bool(n_capped > 0),
-    )
-    doc["runtime_seconds"] = round(time.time() - t_start, 1)
-    doc["chain"] = dict(
-        L1_to_L4_link_moved="NONE",
-        clay_percent_unchanged=True,
-        this_is_not_a_blowup=True,
-        this_is_not_a_certificate=True,
-    )
-
-    body = json.dumps(doc, sort_keys=True)
-    doc["self_hash"] = hashlib.sha256(body.encode()).hexdigest()[:16]
-    OUT.write_text(json.dumps(doc, indent=1, sort_keys=True))
-    print(f"\nwrote {OUT}  self_hash={doc['self_hash']}  "
-          f"({doc['runtime_seconds']:.0f}s)")
+    finalise(doc, results, banked, axis, axis_maxiter, args, st, t_start)
     return 0
 
 
