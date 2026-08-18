@@ -605,10 +605,50 @@ travel outside leg 381's model and should not be quoted as if it did.
 It writes nothing belonging to `V3` or `L2'`: both generators are copied to a temporary
 directory with `OUT` redirected before being run. Missing sources bank as `UNREACHABLE`,
 never as zeros. It exits non-zero if any check disagrees with the banked record.
-Items (3), (4), (5) exit **0** with `DISCREPANCIES: none` — the discrepancies this unit
-reports (D1-D6, O1-O3, N1) are **editorial and attributional**, located by reading, and
-are recorded here rather than encoded as machine assertions, because none of them changes
-a number or a verdict.
+Items (3), (4), (5) exit **0** with `DISCREPANCIES: none`. Item (2) exits **1** and prints
+**exactly two** discrepancies, **D1** (`R7 failing_clause_quoted`, `stringent` dropped) and
+**D4** (`R3 interval_arithmetic_evidence`, `the` inserted) — and **manufactures none**;
+see §5.4 for how `V3`'s deliberate ASCII equation transcriptions (17 fields) and its own
+description fields (12 fields) are separated from what is actually quoted. The remaining
+findings (D2, D3, D5, D6, O1-O3, N1) are **editorial and attributional**, located by
+reading, and are recorded here rather than encoded as machine assertions, because none of
+them changes a number or a verdict.
+
+**Full run, this cache, all items:**
+
+```
+ITEM (1)  all 5 probes ANCHORED (strict); criterion mentions blow-up: False;
+          'not a finite-time singularity' anchor: ANCHORED (strict)
+ITEM (2)  rows all-prose-anchored=4  rows with a verbatim defect=2  unreachable=0
+          transcriptions=17   descriptions=12
+ITEM (3)+(4)  1610.09464 pdf/txt md5 MATCH;  2607.09619 pdf/txt md5 MATCH
+          18/18 rows: chars MATCH, sha256_12 MATCH, ANCHORED (strict)
+          verdict counts recomputed {'FAILS': 9, 'FAILS-BY-CONSTRUCTION': 8, 'SATISFIED': 1}
+          L2' generator re-run on TODAY's texts: self_hash fd5c410859eb764b both
+          sides, payload bit-identical: True
+ITEM (3) maths  L^2 threshold 1.5 MATCH; L^3 threshold 1.0 MATCH;
+          int_{|y|<R}|U|^2 = 1153.09 / 125445 / 1.2566e7 / 1.25664e9  (grows ~ R)
+          => NOT Leray-Hopf; the GLOBAL ESS form does not apply
+          sup_t int_{B_1}|u|^2 ~ 1.42887 ; int int |grad u|^2 ~ 628344  => suitable weak
+          alpha=1: int_{B_1}|u|^3 = 57.9953 / 115.742 / 231.481 / 462.962 at
+          |s| = 1e-4 ... 1e-32  => log-divergent, m_T = +inf, criterion does NOT apply
+          alpha=1.2: m_T ~ 0.635864 < inf  => (0,0) regular => DSS scaling forces u == 0
+ITEM (5)  cloc self_hash 58c57b62c0cbc80d recomputes AND regenerates bit-identically;
+          L2's source_self_hash MATCHES it; all 11 bill fields OK;
+          deficit 0.5, overshoot 0.5, relative spread 7.393926e-10 re-derived
+          NOTE N1: 326.875/decade is amplitude-dependent (unit amplitude 4*pi*ln10 = 28.94)
+SUMMARY   2 DISCREPANCIES (both item (2), both = D1 and D4), 1 NOTE (N1),
+          ESS AT PRIMARY: UNREACHABLE, NO LINK OF THE L1->L4 CHAIN MOVED.
+exit status 1
+```
+
+### §9.1 — the verdict artefact
+
+`writeup/data/p2_verify_wave4_v1.json`, `self_hash` **`e0171ac1e855f90e`**, recomputed as
+`sha256(json.dumps(payload_without_self_hash, sort_keys=True, ensure_ascii=False))[:16]`
+and verified to reproduce. It carries every verdict, every discrepancy (D1-D6), the
+observations (O1-O3), note N1, the ESS `UNREACHABLE` block with what the record then rests
+on, **and the withdrawal of my own over-stated first-pass D3**.
 
 ## §10 — CEILING
 
