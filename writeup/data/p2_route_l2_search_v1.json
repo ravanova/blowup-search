@@ -1,0 +1,1116 @@
+{
+ "leg": 397,
+ "unit": "L2'",
+ "what": "arXiv search instrument for leg 397 SS2.3, with SS2.2 controls",
+ "controls": {
+  "positive_control_fired": true,
+  "positive_control_total": 23,
+  "negative_control_fired": true,
+  "negative_control_total": 0,
+  "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+  "namespace_served_is_1_1": true,
+  "instrument_is_live": true
+ },
+ "queries": [
+  {
+   "label": "POSITIVE_CONTROL",
+   "query": "all:\"discretely self-similar\" AND all:\"Navier-Stokes\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22discretely+self-similar%22+AND+all%3A%22Navier-Stokes%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 36729,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 23,
+   "entries_parsed": 23,
+   "entries": [
+    {
+     "id": "1210.2783v2",
+     "title": "Forward Discretely Self-Similar Solutions of the Navier-Stokes Equations",
+     "published": "2012-10-10"
+    },
+    {
+     "id": "1306.0305v5",
+     "title": "Remarks on the asymptotically discretely self-similar solutions of the Navier-Stokes and the Euler equations",
+     "published": "2013-06-03"
+    },
+    {
+     "id": "1610.09464v2",
+     "title": "Removing discretely self-similar singularities for the 3D Navier-Stokes equations",
+     "published": "2016-10-29"
+    },
+    {
+     "id": "1510.07504v1",
+     "title": "Forward discretely self-similar solutions of the Navier-Stokes equations II",
+     "published": "2015-10-26"
+    },
+    {
+     "id": "1801.08060v1",
+     "title": "Discretely self-similar solutions to the Navier-Stokes equations with data in $L^2_{\\mathrm{loc}}$ satisfying the local energy inequality",
+     "published": "2018-01-24"
+    },
+    {
+     "id": "1610.01386v1",
+     "title": "Existence of discretely self-similar solutions to the Navier-Stokes equations for initial value in $ L^2_{ loc}(\\Bbb R^{3})$",
+     "published": "2016-10-05"
+    },
+    {
+     "id": "1703.03480v1",
+     "title": "Discretely self-similar solutions to the Navier-Stokes equations with Besov space data",
+     "published": "2017-03-09"
+    },
+    {
+     "id": "1902.10771v3",
+     "title": "Forward Discretely Self-Similar Solutions of the MHD Equations and the Viscoelastic Navier-Stokes Equations with Damping",
+     "published": "2019-02-27"
+    },
+    {
+     "id": "2202.08352v1",
+     "title": "Spatial decay of discretely self-similar solutions to the Navier-Stokes equations",
+     "published": "2022-02-16"
+    },
+    {
+     "id": "2409.13586v1",
+     "title": "Asymptotic properties of discretely self-similar Navier-Stokes solutions with rough data",
+     "published": "2024-09-20"
+    },
+    {
+     "id": "1910.11267v2",
+     "title": "Existence of infinite-energy and discretely self-similar global weak solutions for 3D MHD equations",
+     "published": "2019-10-24"
+    },
+    {
+     "id": "1906.11038v1",
+     "title": "Weak solutions for Navier--Stokes equations with initial data in weighted $L^2$ spaces",
+     "published": "2019-06-26"
+    },
+    {
+     "id": "1610.05680v1",
+     "title": "Rotationally corrected scaling invariant solutions to the Navier-Stokes equations",
+     "published": "2016-10-18"
+    },
+    {
+     "id": "1910.06929v1",
+     "title": "Existence of global weak solutions to the Navier-Stokes equations in weighted spaces",
+     "published": "2019-10-15"
+    },
+    {
+     "id": "1812.10509v1",
+     "title": "Short time regularity of Navier-Stokes flows with locally $L^3$ initial data and applications",
+     "published": "2018-12-26"
+    },
+    {
+     "id": "1907.00256v1",
+     "title": "Global existence, regularity, and uniqueness of infinite energy solutions to the Navier-Stokes equations",
+     "published": "2019-06-29"
+    },
+    {
+     "id": "2003.06717v3",
+     "title": "Quantitative regularity for the Navier-Stokes equations via spatial concentration",
+     "published": "2020-03-14"
+    },
+    {
+     "id": "1105.0414v1",
+     "title": "Asymptotics of small exterior Navier-Stokes flows with non-decaying boundary data",
+     "published": "2011-05-02"
+    },
+    {
+     "id": "2011.02800v1",
+     "title": "On bifurcation of self-similar solutions of the stationary Navier-Stokes equations",
+     "published": "2020-11-05"
+    },
+    {
+     "id": "2407.06179v1",
+     "title": "Non-uniqueness in the Leray-Hopf class for a dyadic Navier-Stokes model",
+     "published": "2024-07-08"
+    },
+    {
+     "id": "2006.13145v2",
+     "title": "An $\u03b5$-regularity criterion and estimates of the regular set for Navier-Stokes flows in terms of initial data",
+     "published": "2020-06-23"
+    },
+    {
+     "id": "2607.09619v2",
+     "title": "On rotated backwards self-similar solutions of the incompressible 3D Navier-Stokes equations",
+     "published": "2026-07-10"
+    },
+    {
+     "id": "2012.15848v1",
+     "title": "Global weak solutions of the Navier-Stokes equations for intermittent initial data in half-space",
+     "published": "2020-12-31"
+    }
+   ]
+  },
+  {
+   "label": "NEGATIVE_CONTROL",
+   "query": "all:\"zqxjkvwbrfmp discretely self-similar cutoff\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22zqxjkvwbrfmp+discretely+self-similar+cutoff%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 776,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 0,
+   "entries_parsed": 0,
+   "entries": []
+  },
+  {
+   "label": "F1_rigidity_integrability",
+   "query": "all:\"Leray\" AND all:\"self-similar\" AND all:\"Navier-Stokes\" AND all:\"rigidity\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22Leray%22+AND+all%3A%22self-similar%22+AND+all%3A%22Navier-Stokes%22+AND+all%3A%22rigidity%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 2982,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 1,
+   "entries_parsed": 1,
+   "entries": [
+    {
+     "id": "2002.12828v2",
+     "title": "Symmetry and rigidity: Only one kind of symmetry allow non-zero real symmetric solution",
+     "published": "2020-02-25"
+    }
+   ]
+  },
+  {
+   "label": "F2_dss_apriori_decay",
+   "query": "all:\"discretely self-similar\" AND all:\"Navier-Stokes\" AND all:\"decay\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22discretely+self-similar%22+AND+all%3A%22Navier-Stokes%22+AND+all%3A%22decay%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 6401,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 3,
+   "entries_parsed": 3,
+   "entries": [
+    {
+     "id": "2202.08352v1",
+     "title": "Spatial decay of discretely self-similar solutions to the Navier-Stokes equations",
+     "published": "2022-02-16"
+    },
+    {
+     "id": "2409.13586v1",
+     "title": "Asymptotic properties of discretely self-similar Navier-Stokes solutions with rough data",
+     "published": "2024-09-20"
+    },
+    {
+     "id": "1105.0414v1",
+     "title": "Asymptotics of small exterior Navier-Stokes flows with non-decaying boundary data",
+     "published": "2011-05-02"
+    }
+   ]
+  },
+  {
+   "label": "F2b_dss_removing",
+   "query": "ti:\"discretely self-similar\" AND abs:\"Navier-Stokes\"",
+   "url": "http://export.arxiv.org/api/query?search_query=ti%3A%22discretely+self-similar%22+AND+abs%3A%22Navier-Stokes%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 16520,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 11,
+   "entries_parsed": 11,
+   "entries": [
+    {
+     "id": "1210.2783v2",
+     "title": "Forward Discretely Self-Similar Solutions of the Navier-Stokes Equations",
+     "published": "2012-10-10"
+    },
+    {
+     "id": "1610.09464v2",
+     "title": "Removing discretely self-similar singularities for the 3D Navier-Stokes equations",
+     "published": "2016-10-29"
+    },
+    {
+     "id": "1902.10771v3",
+     "title": "Forward Discretely Self-Similar Solutions of the MHD Equations and the Viscoelastic Navier-Stokes Equations with Damping",
+     "published": "2019-02-27"
+    },
+    {
+     "id": "1306.0305v5",
+     "title": "Remarks on the asymptotically discretely self-similar solutions of the Navier-Stokes and the Euler equations",
+     "published": "2013-06-03"
+    },
+    {
+     "id": "1510.07504v1",
+     "title": "Forward discretely self-similar solutions of the Navier-Stokes equations II",
+     "published": "2015-10-26"
+    },
+    {
+     "id": "1703.03480v1",
+     "title": "Discretely self-similar solutions to the Navier-Stokes equations with Besov space data",
+     "published": "2017-03-09"
+    },
+    {
+     "id": "1910.11267v2",
+     "title": "Existence of infinite-energy and discretely self-similar global weak solutions for 3D MHD equations",
+     "published": "2019-10-24"
+    },
+    {
+     "id": "2202.08352v1",
+     "title": "Spatial decay of discretely self-similar solutions to the Navier-Stokes equations",
+     "published": "2022-02-16"
+    },
+    {
+     "id": "1610.01386v1",
+     "title": "Existence of discretely self-similar solutions to the Navier-Stokes equations for initial value in $ L^2_{ loc}(\\Bbb R^{3})$",
+     "published": "2016-10-05"
+    },
+    {
+     "id": "1801.08060v1",
+     "title": "Discretely self-similar solutions to the Navier-Stokes equations with data in $L^2_{\\mathrm{loc}}$ satisfying the local energy inequality",
+     "published": "2018-01-24"
+    },
+    {
+     "id": "2409.13586v1",
+     "title": "Asymptotic properties of discretely self-similar Navier-Stokes solutions with rough data",
+     "published": "2024-09-20"
+    }
+   ]
+  },
+  {
+   "label": "F3_local_leray",
+   "query": "all:\"local Leray\" AND all:\"self-similar\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22local+Leray%22+AND+all%3A%22self-similar%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 3970,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 2,
+   "entries_parsed": 2,
+   "entries": [
+    {
+     "id": "1510.07504v1",
+     "title": "Forward discretely self-similar solutions of the Navier-Stokes equations II",
+     "published": "2015-10-26"
+    },
+    {
+     "id": "1801.08060v1",
+     "title": "Discretely self-similar solutions to the Navier-Stokes equations with data in $L^2_{\\mathrm{loc}}$ satisfying the local energy inequality",
+     "published": "2018-01-24"
+    }
+   ]
+  },
+  {
+   "label": "F3b_forward_ss_large_data",
+   "query": "all:\"forward self-similar\" AND all:\"Navier-Stokes\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22forward+self-similar%22+AND+all%3A%22Navier-Stokes%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 25345,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 16,
+   "entries_parsed": 16,
+   "entries": [
+    {
+     "id": "2008.08715v1",
+     "title": "An Approximation of Forward Self-Similar solutions to the 3D Navier-Stokes system",
+     "published": "2020-08-20"
+    },
+    {
+     "id": "1710.08041v2",
+     "title": "Forward self-similar solutions of the fractional Navier-Stokes Equations",
+     "published": "2017-10-22"
+    },
+    {
+     "id": "1409.2516v3",
+     "title": "Forward Self-Similar Solutions of the Navier-Stokes Equations in the Half Space",
+     "published": "2014-09-08"
+    },
+    {
+     "id": "1601.07478v1",
+     "title": "Forward self-similar solutions to the viscoelastic Navier-Stokes equation with damping",
+     "published": "2016-01-27"
+    },
+    {
+     "id": "2603.12497v2",
+     "title": "Forward Self-Similar Solutions to the 2D Hypodissipative Navier-Stokes Equations",
+     "published": "2026-03-12"
+    },
+    {
+     "id": "2601.03833v2",
+     "title": "On the forward self-similar solutions to the two-dimensional Navier-Stokes equations",
+     "published": "2026-01-07"
+    },
+    {
+     "id": "1903.09958v1",
+     "title": "Self-similar solutions for compressible Navier-Stokes equations",
+     "published": "2019-03-24"
+    },
+    {
+     "id": "1802.00038v1",
+     "title": "Self-similar solutions to the Navier-Stokes equations: a survey of recent results",
+     "published": "2018-01-31"
+    },
+    {
+     "id": "2107.02952v2",
+     "title": "Self-similar source-type solutions to the three-dimensional Navier-Stokes equations",
+     "published": "2021-07-07"
+    },
+    {
+     "id": "2601.03161v1",
+     "title": "Forward self-similar solutions to the 2D Navier--Stokes equations",
+     "published": "2026-01-06"
+    },
+    {
+     "id": "1802.03164v2",
+     "title": "Global weak Besov solutions of the Navier-Stokes equations and applications",
+     "published": "2018-02-09"
+    },
+    {
+     "id": "1204.0529v1",
+     "title": "Local-in-space estimates near initial time for weak solutions of the Navier-Stokes equations and forward self-similar solutions",
+     "published": "2012-04-02"
+    },
+    {
+     "id": "2412.00390v1",
+     "title": "Global well-posedness and self-similar solution of the inhomogeneous Navier-Stokes system",
+     "published": "2024-11-30"
+    },
+    {
+     "id": "2607.12159v1",
+     "title": "Homothetic Self-Similar Solutions to the Incompressible Navier-Stokes Equations",
+     "published": "2026-07-13"
+    },
+    {
+     "id": "2202.08352v1",
+     "title": "Spatial decay of discretely self-similar solutions to the Navier-Stokes equations",
+     "published": "2022-02-16"
+    },
+    {
+     "id": "1812.00957v2",
+     "title": "Leray self-similarity equations in fluid dynamics",
+     "published": "2018-12-03"
+    }
+   ]
+  },
+  {
+   "label": "F4_cutoff_finite_energy",
+   "query": "all:\"finite energy\" AND all:\"finite speed of propagation\" AND all:\"blow-up\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22finite+energy%22+AND+all%3A%22finite+speed+of+propagation%22+AND+all%3A%22blow-up%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 3322,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 1,
+   "entries_parsed": 1,
+   "entries": [
+    {
+     "id": "2409.13274v2",
+     "title": "Blow-up dynamics for radial self-dual Chern-Simons-Schr\u00f6dinger equation with prescribed asymptotic profile",
+     "published": "2024-09-20"
+    }
+   ]
+  },
+  {
+   "label": "F4b_elgindi_c1alpha",
+   "query": "all:\"self-similar\" AND all:\"Euler\" AND all:\"finite energy\" AND all:\"singularity\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22self-similar%22+AND+all%3A%22Euler%22+AND+all%3A%22finite+energy%22+AND+all%3A%22singularity%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 25380,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 11,
+   "entries_parsed": 11,
+   "entries": [
+    {
+     "id": "2605.19716v2",
+     "title": "Self-similar blow-up solutions of $d$-dimensional incompressible Euler equations with $C^{1,\\left(1-2/d\\right)-}$ velocity",
+     "published": "2026-05-19"
+    },
+    {
+     "id": "2106.05422v2",
+     "title": "Asymptotically self-similar blowup of the Hou-Luo model for the 3D Euler equations",
+     "published": "2021-06-09"
+    },
+    {
+     "id": "2107.05870v2",
+     "title": "Potential singularity of the 3D Euler equations in the interior domain",
+     "published": "2021-07-13"
+    },
+    {
+     "id": "1910.00173v4",
+     "title": "Finite time blowup of 2D Boussinesq and 3D Euler equations with $C^{1,\u03b1}$ velocity and boundary",
+     "published": "2019-10-01"
+    },
+    {
+     "id": "1910.14071v1",
+     "title": "On the Stability of Self-similar Blow-up for $C^{1,\u03b1}$ Solutions to the Incompressible Euler Equations on $\\mathbb{R}^3$",
+     "published": "2019-10-30"
+    },
+    {
+     "id": "2210.07191v4",
+     "title": "Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations with smooth data I: Analysis",
+     "published": "2022-10-13"
+    },
+    {
+     "id": "2102.06663v3",
+     "title": "Potential singularity formation of incompressible axisymmetric Euler equations with degenerate viscosity coefficients",
+     "published": "2021-02-12"
+    },
+    {
+     "id": "2305.05660v3",
+     "title": "Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations with smooth data II: Rigorous Numerics",
+     "published": "2023-05-09"
+    },
+    {
+     "id": "1203.3348v3",
+     "title": "Renormalization group formalism for incompressible Euler equations and the blowup problem",
+     "published": "2012-03-15"
+    },
+    {
+     "id": "2107.06509v2",
+     "title": "The potentially singular behavior of the 3D Navier-Stokes equations",
+     "published": "2021-07-14"
+    },
+    {
+     "id": "1912.11009v2",
+     "title": "On the implosion of a three dimensional compressible fluid",
+     "published": "2019-12-23"
+    }
+   ]
+  },
+  {
+   "label": "F5_implosion",
+   "query": "all:\"implosion\" AND all:\"compressible\" AND all:\"self-similar\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22implosion%22+AND+all%3A%22compressible%22+AND+all%3A%22self-similar%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 30481,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 15,
+   "entries_parsed": 15,
+   "entries": [
+    {
+     "id": "2512.00827v2",
+     "title": "Self-similar multishock implosions for ultrahigh compression of matter",
+     "published": "2025-11-30"
+    },
+    {
+     "id": "2104.05728v3",
+     "title": "Self-Similar Solutions to the Compressible Euler Equations and their Instabilities",
+     "published": "2021-04-12"
+    },
+    {
+     "id": "2605.00808v1",
+     "title": "Smooth and stable Euler implosions",
+     "published": "2026-05-01"
+    },
+    {
+     "id": "2608.10554v1",
+     "title": "Formation of Implosion Singularities in 3D Compressible Navier-Stokes-Korteweg Equation",
+     "published": "2026-08-11"
+    },
+    {
+     "id": "2110.13660v2",
+     "title": "Energy density balance during shock wave implosion in water",
+     "published": "2021-10-25"
+    },
+    {
+     "id": "2511.03033v2",
+     "title": "On Hydrodynamic Implosions and the Landau-Coulomb Equation",
+     "published": "2025-11-04"
+    },
+    {
+     "id": "2311.09909v1",
+     "title": "Self-similar shock dynamics satisfying the inviscid Burgers equation in planar, cylindrical and spherical problems",
+     "published": "2023-11-16"
+    },
+    {
+     "id": "1912.11009v2",
+     "title": "On the implosion of a three dimensional compressible fluid",
+     "published": "2019-12-23"
+    },
+    {
+     "id": "2606.12758v1",
+     "title": "Self-similar imploding solutions of the 1D compressible Euler equations with a far field cutoff",
+     "published": "2026-06-10"
+    },
+    {
+     "id": "2604.22592v1",
+     "title": "Scaling laws of multi-shock implosions toward the quasi-isentropic limit",
+     "published": "2026-04-24"
+    },
+    {
+     "id": "2602.05981v1",
+     "title": "Finite time singularities in the Landau equation with very hard potentials",
+     "published": "2026-02-05"
+    },
+    {
+     "id": "2410.15619v2",
+     "title": "Blowup for the defocusing septic complex-valued nonlinear wave equation in $\\mathbb{R}^{4+1}$",
+     "published": "2024-10-21"
+    },
+    {
+     "id": "2110.10155v2",
+     "title": "Limitation in velocity of converging shock wave",
+     "published": "2021-10-19"
+    },
+    {
+     "id": "2606.18152v1",
+     "title": "A new class of Euler explosions",
+     "published": "2026-06-16"
+    },
+    {
+     "id": "2504.11432v2",
+     "title": "Analysis of Preheat Propagation in MagLIF-like Plasmas",
+     "published": "2025-04-15"
+    }
+   ]
+  },
+  {
+   "label": "F6_semilinear_heat_trunc",
+   "query": "all:\"self-similar\" AND all:\"blow-up\" AND all:\"truncation\" AND all:\"heat equation\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22self-similar%22+AND+all%3A%22blow-up%22+AND+all%3A%22truncation%22+AND+all%3A%22heat+equation%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 856,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 0,
+   "entries_parsed": 0,
+   "entries": []
+  },
+  {
+   "label": "F7_bogovskii",
+   "query": "all:\"Bogovskii\" AND all:\"divergence equation\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22Bogovskii%22+AND+all%3A%22divergence+equation%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 2554,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 1,
+   "entries_parsed": 1,
+   "entries": [
+    {
+     "id": "2003.07265v1",
+     "title": "Solvability In Weighted Lebesgue Spaces of the Divergence Equation with Measure Data",
+     "published": "2020-03-16"
+    }
+   ]
+  },
+  {
+   "label": "X_localisation_infinite_energy",
+   "query": "all:\"infinite energy\" AND all:\"Navier-Stokes\" AND all:\"localization\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22infinite+energy%22+AND+all%3A%22Navier-Stokes%22+AND+all%3A%22localization%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 19663,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 11,
+   "entries_parsed": 11,
+   "entries": [
+    {
+     "id": "1105.4216v1",
+     "title": "Exact, Rotational, Infinite Energy, Blowup Solutions to the 3-Dimensional Euler Equations",
+     "published": "2011-05-21"
+    },
+    {
+     "id": "1311.3128v1",
+     "title": "Infinite-energy solutions for the Navier-Stokes equations in a strip revisited",
+     "published": "2013-11-13"
+    },
+    {
+     "id": "1203.5733v2",
+     "title": "Infinite Energy Solutions for Damped Navier-Stokes Equations in R2",
+     "published": "2012-03-26"
+    },
+    {
+     "id": "1907.00256v1",
+     "title": "Global existence, regularity, and uniqueness of infinite energy solutions to the Navier-Stokes equations",
+     "published": "2019-06-29"
+    },
+    {
+     "id": "1803.02068v1",
+     "title": "Infinite energy solutions to the Navier-Stokes equations in the half-space and applications",
+     "published": "2018-03-06"
+    },
+    {
+     "id": "1411.5156v1",
+     "title": "Infinite energy solutions of the two-dimensional Navier-Stokes equations",
+     "published": "2014-11-19"
+    },
+    {
+     "id": "1510.01036v1",
+     "title": "Remarks on the Cauchy problem for the axisymmetric Navier-Stokes equations",
+     "published": "2015-10-05"
+    },
+    {
+     "id": "1501.00684v1",
+     "title": "Infinite energy solutions for Dissipative Euler equations in R^2",
+     "published": "2015-01-04"
+    },
+    {
+     "id": "2008.09204v1",
+     "title": "Local energy solutions to the Navier-Stokes equations in Wiener amalgam spaces",
+     "published": "2020-08-20"
+    },
+    {
+     "id": "1910.11267v2",
+     "title": "Existence of infinite-energy and discretely self-similar global weak solutions for 3D MHD equations",
+     "published": "2019-10-24"
+    },
+    {
+     "id": "1304.4489v1",
+     "title": "Existence of global strong solution for Korteweg system with large infinite energy initial data",
+     "published": "2013-04-16"
+    }
+   ]
+  },
+  {
+   "label": "T_necas_ruzicka_sverak",
+   "query": "all:\"Leray\" AND all:\"self-similar\" AND all:\"Navier-Stokes\" AND all:\"L^3\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22Leray%22+AND+all%3A%22self-similar%22+AND+all%3A%22Navier-Stokes%22+AND+all%3A%22L%5E3%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 2540,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 1,
+   "entries_parsed": 1,
+   "entries": [
+    {
+     "id": "2006.15776v1",
+     "title": "Leray's backward self-similar solutions to the 3D Navier-Stokes equations in Morrey spaces",
+     "published": "2020-06-29"
+    }
+   ]
+  },
+  {
+   "label": "T_tsai_local_energy",
+   "query": "au:\"Tsai_T\" AND all:\"self-similar\"",
+   "url": "http://export.arxiv.org/api/query?search_query=au%3A%22Tsai_T%22+AND+all%3A%22self-similar%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 750,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 0,
+   "entries_parsed": 0,
+   "entries": []
+  },
+  {
+   "label": "T_bradshaw_tsai_decay",
+   "query": "au:\"Bradshaw\" AND all:\"discretely self-similar\"",
+   "url": "http://export.arxiv.org/api/query?search_query=au%3A%22Bradshaw%22+AND+all%3A%22discretely+self-similar%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 16034,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 9,
+   "entries_parsed": 9,
+   "entries": [
+    {
+     "id": "1801.08060v1",
+     "title": "Discretely self-similar solutions to the Navier-Stokes equations with data in $L^2_{\\mathrm{loc}}$ satisfying the local energy inequality",
+     "published": "2018-01-24"
+    },
+    {
+     "id": "1510.07504v1",
+     "title": "Forward discretely self-similar solutions of the Navier-Stokes equations II",
+     "published": "2015-10-26"
+    },
+    {
+     "id": "1703.03480v1",
+     "title": "Discretely self-similar solutions to the Navier-Stokes equations with Besov space data",
+     "published": "2017-03-09"
+    },
+    {
+     "id": "2202.08352v1",
+     "title": "Spatial decay of discretely self-similar solutions to the Navier-Stokes equations",
+     "published": "2022-02-16"
+    },
+    {
+     "id": "2409.13586v1",
+     "title": "Asymptotic properties of discretely self-similar Navier-Stokes solutions with rough data",
+     "published": "2024-09-20"
+    },
+    {
+     "id": "1610.05680v1",
+     "title": "Rotationally corrected scaling invariant solutions to the Navier-Stokes equations",
+     "published": "2016-10-18"
+    },
+    {
+     "id": "1910.06929v1",
+     "title": "Existence of global weak solutions to the Navier-Stokes equations in weighted spaces",
+     "published": "2019-10-15"
+    },
+    {
+     "id": "1907.00256v1",
+     "title": "Global existence, regularity, and uniqueness of infinite energy solutions to the Navier-Stokes equations",
+     "published": "2019-06-29"
+    },
+    {
+     "id": "2012.15848v1",
+     "title": "Global weak solutions of the Navier-Stokes equations for intermittent initial data in half-space",
+     "published": "2020-12-31"
+    }
+   ]
+  },
+  {
+   "label": "T_kang_miura_tsai",
+   "query": "au:\"Miura\" AND all:\"self-similar\" AND all:\"Navier-Stokes\"",
+   "url": "http://export.arxiv.org/api/query?search_query=au%3A%22Miura%22+AND+all%3A%22self-similar%22+AND+all%3A%22Navier-Stokes%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 7878,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 5,
+   "entries_parsed": 5,
+   "entries": [
+    {
+     "id": "1812.10509v1",
+     "title": "Short time regularity of Navier-Stokes flows with locally $L^3$ initial data and applications",
+     "published": "2018-12-26"
+    },
+    {
+     "id": "1606.01854v2",
+     "title": "Green tensor of the Stokes system and asymptotics of stationary Navier-Stokes flows in the half space",
+     "published": "2016-06-06"
+    },
+    {
+     "id": "1105.0414v1",
+     "title": "Asymptotics of small exterior Navier-Stokes flows with non-decaying boundary data",
+     "published": "2011-05-02"
+    },
+    {
+     "id": "1807.10341v2",
+     "title": "On stability of blow-up solutions of the Burgers vortex type for the Navier-Stokes equations with a linear strain",
+     "published": "2018-07-26"
+    },
+    {
+     "id": "2006.13145v2",
+     "title": "An $\u03b5$-regularity criterion and estimates of the regular set for Navier-Stokes flows in terms of initial data",
+     "published": "2020-06-23"
+    }
+   ]
+  },
+  {
+   "label": "T_lai_miao_zheng",
+   "query": "all:\"discretely self-similar\" AND all:\"Besov\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22discretely+self-similar%22+AND+all%3A%22Besov%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 6711,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 3,
+   "entries_parsed": 3,
+   "entries": [
+    {
+     "id": "1703.03480v1",
+     "title": "Discretely self-similar solutions to the Navier-Stokes equations with Besov space data",
+     "published": "2017-03-09"
+    },
+    {
+     "id": "2409.13586v1",
+     "title": "Asymptotic properties of discretely self-similar Navier-Stokes solutions with rough data",
+     "published": "2024-09-20"
+    },
+    {
+     "id": "2601.23175v1",
+     "title": "Interacting dynamical systems on networks and fractals: discrete and continuous models, mean-field limit, and convergence rates",
+     "published": "2026-01-30"
+    }
+   ]
+  },
+  {
+   "label": "T_mrrs_implosion",
+   "query": "ti:\"implosion\" AND all:\"compressible fluid\"",
+   "url": "http://export.arxiv.org/api/query?search_query=ti%3A%22implosion%22+AND+all%3A%22compressible+fluid%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 4656,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 2,
+   "entries_parsed": 2,
+   "entries": [
+    {
+     "id": "1912.11009v2",
+     "title": "On the implosion of a three dimensional compressible fluid",
+     "published": "2019-12-23"
+    },
+    {
+     "id": "2411.12933v1",
+     "title": "Degradation of performance in ICF implosions due to Rayleigh--Taylor instabilities: a Hamiltonian perspective",
+     "published": "2024-11-19"
+    }
+   ]
+  },
+  {
+   "label": "T_elgindi_c1alpha",
+   "query": "au:\"Elgindi_T\" AND all:\"finite time\"",
+   "url": "http://export.arxiv.org/api/query?search_query=au%3A%22Elgindi_T%22+AND+all%3A%22finite+time%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 754,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 0,
+   "entries_parsed": 0,
+   "entries": []
+  },
+  {
+   "label": "T_chen_hou",
+   "query": "au:\"Hou_T\" AND all:\"Boussinesq\" AND all:\"blowup\"",
+   "url": "http://export.arxiv.org/api/query?search_query=au%3A%22Hou_T%22+AND+all%3A%22Boussinesq%22+AND+all%3A%22blowup%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 784,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 0,
+   "entries_parsed": 0,
+   "entries": []
+  },
+  {
+   "label": "T_giga_kohn_heat",
+   "query": "all:\"backward self-similar\" AND all:\"semilinear heat\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22backward+self-similar%22+AND+all%3A%22semilinear+heat%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 3837,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 2,
+   "entries_parsed": 2,
+   "entries": [
+    {
+     "id": "1906.11159v1",
+     "title": "On the multiplicity of self-similar solutions of the semilinear heat equation",
+     "published": "2019-06-26"
+    },
+    {
+     "id": "1605.07337v1",
+     "title": "On the stability of type I blow up for the energy super critical heat equation",
+     "published": "2016-05-24"
+    }
+   ]
+  },
+  {
+   "label": "T_semilinear_heat_cut",
+   "query": "all:\"cut-off\" AND all:\"self-similar\" AND all:\"blow-up\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22cut-off%22+AND+all%3A%22self-similar%22+AND+all%3A%22blow-up%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 1954,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 1,
+   "entries_parsed": 1,
+   "entries": [
+    {
+     "id": "2105.03942v1",
+     "title": "Non-existence of some approximately self-similar singularities for the Landau, Vlasov-Poisson-Landau, and Boltzmann equations",
+     "published": "2021-05-09"
+    }
+   ]
+  },
+  {
+   "label": "T_bogovskii_weighted",
+   "query": "all:\"Bogovskii operator\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22Bogovskii+operator%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 15812,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 9,
+   "entries_parsed": 9,
+   "entries": [
+    {
+     "id": "2603.29018v2",
+     "title": "Discrete Poincare and Bogovskii operators on cochains and Whitney forms",
+     "published": "2026-03-30"
+    },
+    {
+     "id": "1605.01006v2",
+     "title": "Trace-free Korn inequalities in Orlicz spaces",
+     "published": "2016-05-03"
+    },
+    {
+     "id": "2606.04809v1",
+     "title": "Steady compressible Navier-Stokes-Fourier system with general temperature dependent viscosities and hard sphere pressure law",
+     "published": "2026-06-03"
+    },
+    {
+     "id": "1703.06421v1",
+     "title": "Homogenization of the compressible Navier-Stokes equations in domains with very tiny holes",
+     "published": "2017-03-19"
+    },
+    {
+     "id": "2208.07933v1",
+     "title": "On the motion of a small rigid body in a viscous compressible fluid",
+     "published": "2022-08-16"
+    },
+    {
+     "id": "2501.14501v1",
+     "title": "Steady compressible Navier-Stokes-Fourier system with general temperature dependent viscosities I: density estimates based on Bogovskii operator",
+     "published": "2025-01-24"
+    },
+    {
+     "id": "1401.4885v2",
+     "title": "Negative Orlicz-Sobolev norms and strongly nonlinear systems in fluid mechanics",
+     "published": "2014-01-20"
+    },
+    {
+     "id": "2202.04826v2",
+     "title": "Corrector estimates and homogenization errors of unsteady flow ruled by Darcy's law",
+     "published": "2022-02-10"
+    },
+    {
+     "id": "2512.04782v1",
+     "title": "Homogenized limits of Stokes flow and advective transport in thin perforated domains",
+     "published": "2025-12-04"
+    }
+   ]
+  },
+  {
+   "label": "T_dss_type_I",
+   "query": "all:\"discretely self-similar\" AND all:\"Type I\"",
+   "url": "http://export.arxiv.org/api/query?search_query=all%3A%22discretely+self-similar%22+AND+all%3A%22Type+I%22&start=0&max_results=25&sortBy=relevance&sortOrder=descending",
+   "http_status": 200,
+   "bytes": 11115,
+   "served_namespaces": [
+    "http://a9.com/-/spec/opensearch/1.1/",
+    "http://arxiv.org/schemas/atom",
+    "http://www.w3.org/2005/Atom"
+   ],
+   "opensearch_namespace_served": "http://a9.com/-/spec/opensearch/1.1/",
+   "status": "OK",
+   "total_results": 5,
+   "entries_parsed": 5,
+   "entries": [
+    {
+     "id": "1407.6938v1",
+     "title": "Discrete Self Similarity in Filled Type I Strong Explosions",
+     "published": "2014-07-25"
+    },
+    {
+     "id": "1706.02020v2",
+     "title": "Energy concentrations and Type I blow-up for the 3D Euler equations",
+     "published": "2017-06-07"
+    },
+    {
+     "id": "2003.06717v3",
+     "title": "Quantitative regularity for the Navier-Stokes equations via spatial concentration",
+     "published": "2020-03-14"
+    },
+    {
+     "id": "1712.04458v2",
+     "title": "Critical phenomena in the general spherically symmetric Einstein-Yang-Mills system",
+     "published": "2017-12-12"
+    },
+    {
+     "id": "2607.09619v2",
+     "title": "On rotated backwards self-similar solutions of the incompressible 3D Navier-Stokes equations",
+     "published": "2026-07-10"
+    }
+   ]
+  }
+ ]
+}
