@@ -170,41 +170,11 @@ Chen–Hou line**, which `L3′` was to read at full text. **A measured, honest 
 is precisely which hypothesis fails" is a real result** — the one that would tell the user whether the
 Tier-2 ceiling is permanent.
 
-## E. Lane T — **THE LANE ITSELF IS DEFERRED (user ruling 2026-08-14)**, and its own held units
+## E. Lane T — **DEFERRED (user ruling 2026-08-14).** Whole section retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §OPTIONS-LANE-T, beside `WALLS.md`'s §LANE-T.
 
-**WHAT DEFERRED THE LANE — a measurement, and it is the lane's own.** The lane was ranked priority 1
-on four results lining up. **Item 3 fell**: `arXiv:1902.00384`, recorded as *the crack in W2*, is
-certified by **exactly the banned apparatus** and **both of its certified rows are 2D lifts** —
-`T4` from the authors' data package, `T6` from their prose, both VERIFIED. **The strongest of the
-four arguments was that the technology was *demonstrated*. It is not.**
+**What still binds, and is not superseded:** the lane is deferred by RULING, not by measurement; **both re-open conditions are unchanged and neither has fired**; `T1`/`T4`/`T5`/`T6` are TAKEN; **`T2` returned `UNDER-RESOURCED`, not `no` — it is not a clearance**.
 
-**THE COST OF DEFERRING, stated because a deferral with no cost line is a silent drop:** **`T3`, the
-lane's real mathematical content, does not run** (deferred, **not killed** — the non-DSS `T³` ansatz
-is open work nobody has done); **`T2′`** (≈1.2–1.7 h) does not run, so `T2`'s three coverage holes and
-its `UNDER-RESOURCED` stand; **the credit leg 390 called *unclaimed* stays unclaimed** — deferring
-neither collects nor concedes; and **(D)'s data conditions (8) and (9) stay unread** with leg 390 §5
-item 1's `check_A` re-run still owed, cheap, unblocked, and parked with the lane.
-
-**RE-OPEN CONDITIONS — either one is sufficient:**
-1. **A demonstrated, genuinely-3D closure appears in the literature** — a certificate meeting **W2's
-   own pre-committed test**, with its **three-dimensionality supplied by the certified object
-   itself**: name the certified equation, show the dissipative term is inside it, and show the object
-   is **not a lift**. *(A 2D lift does not re-open this lane. That is the measurement that closed it.)*
-2. **`T2″` returns a rigidity picture favourable to a natively-periodic non-DSS ansatz.**
-
-**WHAT IS NOT SUPERSEDED BY THE DEMOTION** (§3h rule 1): leg 348's **domain-shape obstruction is
-still not refuted** (no counter-instance at full text either); **Theorem NGX**, **leg 341** and the
-**three dead realizations** stand; **`W2` stands, strengthened**; and the `ℝ³` **exclusions still
-reach** a `T³` object built by periodic extension of an `ℝ³` self-similar core (leg 309, GATE NO at
-H11 — the one previous attempt at this lane's target, by anyone, died that way).
-
-| id | unit | status |
-|---|---|---|
-| **T1**, **T4**, **T5**, **T6** | all TAKEN | **§3j — one line plus a pointer.** `T1` w1 gate `yes`, machine record DISCHARGED by `V-W2`, packet on the user's desk. `T4` `2c87244` **`STOP`**, `T5` `a6f0c38` **PASS** (left `O1` and leg 257, §F), `T6` `e7db624` **ANSWERED** 7/7 — all three VERIFIED by `V-W2`. Detail: `STATE.md` Landed. |
-| **T2** | periodic-rigidity search | **TAKEN** w1, gate = no theorem located → **`UNDER-RESOURCED`, not `no`**. Not a clearance. |
-| **T2′** | the **compliant** rigidity search | **DEFERRED, ≈1.2–1.7 h plus one user ruling.** Closes T2's three holes: NRS 1996 / Tsai 1998 are pre-arXiv (needs a forward-citation pass), Semantic Scholar was throttled on 5 of 6 substantive queries (needs an S2 key), battery `E` failed its own domain control (needs repair). |
-| **T2″** | **the Type-I rigidity question on `T³`** | **DEFERRED — as of 2026-08-14 the ONLY thing keeping Lane T alive, and re-open condition 2.** The sharpest item the lane owns. A Type-I condition is a *rate* condition (`\|u\| ≲ (T−t)^{−1/2}`), needs **no dilation symmetry**, and carries to the torus intact **as a question**. Measured: `"Type I blowup" AND "periodic"` = **0**. Nothing located proves it. |
-| **T3** | the non-DSS `T³` ansatz | **DEFERRED WITH THE LANE — NOT KILLED.** Still the lane's real mathematical content; runs when a re-open condition is met. Binds: C1's naming requirement. |
+**`T2″`** (Type-I rigidity on `T³`) is re-open condition (ii) and **the cheapest thing that could put a live W4 clause back in front of Lane L — cost before ranking**. **`T3`** (the non-DSS `T³` ansatz) is the lane's undone mathematical content, **deferred, NOT killed**. `T1`'s ban-wording packet is open on the user's desk and **I may not rule it**.
 
 ## F. Other standing options, recorded so they are not lost
 

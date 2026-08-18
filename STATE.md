@@ -105,46 +105,11 @@ Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits 
 
 ## WAVE 7 — **DISPATCHED 2026-08-19: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` HELD** until `R-bank` returns **160/160**.
 
-## WAVE 6 — **COMPLETE 2026-08-19. Three planned, three dispatched, three landed.** Plan: `writeup/waves/WAVE6_PLAN.md` @ `e202653`.
+## WAVE 6 — COMPLETE 2026-08-19. Retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE6. Audit + §3i: `writeup/waves/WAVE6_CLOSE.md`.
 
-**`L6` LANDED `e62c449`** (leg 401) — route 4's **first ever** discrete profile, gate **`NO`**: `ρ = 1.6138` in `L5`'s own norm at `n_dof = 6720`, far-field amplitude normalised to 1, **not decreasing under refinement** (`−0.0222` over the last 3 rungs, `NO` at every cap 50–800), evidence **30/30 reproduced independently by me**.
-**CEILING I FOUND ON LANDING, not claimed by the unit: the minimum is reached by ONE start — the continuation — while 5 independent seeds land 10–24× higher and get WORSE as `n_dof` grows; every start hit the 800-iteration cap. The `NO` is about THIS CONSTRUCTION AT THIS BUDGET.** Reading (b) fires, and (d) `UNDER-RESOURCED` fires with it. **`V5` LANDED `dacc01c`** — **both
-clauses YES**: the certificate **CLOSES** (24 constants re-derived at 50 dps, **four printed ones
-fail**, worst `x_0^U` `1.44e-5` vs `1.45054706437e-5`, **non-conservative**; closure survives, but
-`x_1^U` clears by **0.08% — luck, not margin**), and the profile **IS genuinely 3D** on W2's own
-test (swirl **57%** of `max|u_r|`), answered **standing alone**. **Class A NOT verified — a LIMIT,
-never a pass. W3 does NOT move: its prose test was not run.** Wave 4's `D1`–`D6`/`N1` discharged as
-**`_v2` deltas, no `_v1` edited**. One defect of its own: its evidence script needed `mpmath`, which
-was **not in `requirements.txt`** — it exited **3** on a clean checkout. `CORRECTIONS.md` §36, row 18.
-**`V-W5` LANDED
-`95cf861`** — five items reproduce, **`C6`'s tolerance NEVER moved** (`347676f`), **3 defects
-located, 0 repaired** (`CORRECTIONS.md` §35, row 17): the passing `C6` criterion is **post-hoc**
-(added at the landing commit), `c_mod` is **basis-dependent by `1.476×`**, and half the `0.9958`
-ratio is **scraped from prose**. **Arithmetic verified, science NOT** — still Tier 2, still the
-SYNTHETIC profile, no `L1→L4` link moved. §34 applied to every gate **before** dispatch: **every artefact
-named in a wave-6 brief was checked to exist.** Handoff is planned for **wave 6's END** (§9d
-fired on summarisation, not on cycles) — **not mid-wave**.
+**`L6` `e62c449`** (leg 401) — route 4's first ever discrete profile, gate **`NO`**: `ρ = 1.6138` in `L5`'s norm at `n_dof = 6720`, not decreasing under refinement (`−0.0222` over the last 3 rungs). **CEILING I FOUND ON LANDING, not claimed by the unit: the minimum is reached by ONE start — the continuation — while 5 independent seeds land 10–24× higher and get WORSE as `n_dof` grows, and every start hit the 800-iteration cap. The `NO` is about THIS CONSTRUCTION AT THIS BUDGET**, which is why `L6-b` is in wave 7 and `L7` is not.
 
-**Gates in FINAL WORDING in the plan file, not re-wordable after dispatch — including by a mid-wave ruling, which is taken at integration instead (§3g; refused once in wave 5).** §3f rule 3: construction opens, verifier last. **§3i q7 fired TWICE running** (last six landed: reading, grading, verification, infrastructure, construction, verification), so debt 1 is discharged by making `L6` **the wave's centre**, not a side unit.
-
-| unit | lane | what it must return | status |
-|---|---|---|---|
-| **`L6`** | L | construction, dispatched first | **LANDED `e62c449`, gate `NO`.** `WALLS.md` W4; `OPTIONS.md` §D. Next: **`L6-b`** — is the stall the ansatz or the 800-iteration budget? |
-| **`V5`** | V | **OBLIGATORY (ruling Q4).** Adversarial full-text audit of `arXiv:2509.25116` at leg-309 depth. **TWO clauses answered SEPARATELY:** does the certificate close, and — on **W2's own pre-committed test, NOT folded into the first** — is the profile genuinely **3D**. **Second deliverable: the wave-4 repair** (`D1`–`D6`, `N1`) as **new `_v2` files, `v1` UNTOUCHED** (Q3). | **PLANNED** |
-| **`V-W5`** | — | **LAST.** Verifies wave 5, which it did not plan. Five items: `L5`'s `NO` and `ρ`-exponent re-derived from artefact+code, not report; its three positive controls; **was `C6`'s tolerance EVER moved**; both `self_hash`es; `D-REPAIR`'s epoch correction. **REPAIR NOTHING.** | **PLANNED** |
-
-**⚠ A GATE DEFECT OF MINE, REGISTERED SO IT DOES NOT REPEAT.** `L5`'s wave-5 gate said measure *"on route 4's **banked** discrete profile"*. **Route 4 has no banked profile: the gate was unsatisfiable as worded.** `L5` said so in its artefact and used leg 381's banked **synthetic** (controls reproduce leg 381 to `1.996e-12`).
-The `NO` is unaffected — threshold-free, resting on an **exponent** (`0.0001085`), not a constant — but **`c_mod = 869.288` is the stand-in's number, not route 4's**. `writeup/CORRECTIONS.md` §34, row 16. **No wave-6 gate names an artefact I have not checked exists.**
-
-**OWED ON THE RUN'S OWN OUTPUT, QUEUED FOR WAVE 7 (not screening, so the standing stop does
-not bite):** `L5` shipped a journal and a data file and **no `writeup/novelty/` entry** — the
-dir stops at `leg_394.md`. The claim to check: Chae–Wolf's `α`-pin **and** NRŠ/Tsai's exclusion
-of exactly-SS profiles **jointly** shut clause (b), because the one surviving obstruction term
-is `∝ ṁ`. **This repo does not get to call that new until it is checked.**
-
-**CARRIED FORWARD, NOT ATTEMPTED:** `fig81_route_egmf_v1_evidence.py` + the **52** cited-but-unrebuildable figures (`writeup/check_figure_coverage.py`). Real; not the priority while construction is the binding debt.
-
-**THE RANKING QUESTION WAVE 6 INHERITS, AND DOES NOT ANSWER BY DISPATCHING.** W4 running out of clauses in Lane L does **NOT** re-open Lane T — a decision may not supersede a measurement. Both re-open conditions are unchanged and neither fired. What changed is the **value of `T2″`** (condition (ii)), now the cheapest thing that could put a live W4 clause back in front of Lane L. **Cost before ranking.**
+**`V5` `dacc01c`** — both clauses **YES**: the `2509.25116` certificate **CLOSES** (24 constants at 50 dps, **four printed ones fail**, `x_1^U` clears by **0.08% — luck, not margin**) and the profile **IS genuinely 3D** (swirl **57%** of `max|u_r|`). **Class A NOT verified — a LIMIT, never a pass. W3 does NOT move: its prose test was not run.** **`V-W5` `95cf861`** — five items reproduce, **`C6`'s tolerance NEVER moved**, 3 defects found. `L6` remains **`UNVERIFIED`**.
 
 ## Open — needs the user, not a task
 
