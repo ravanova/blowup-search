@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import multiprocessing as mp
+import os
 import sys
 import time
 from pathlib import Path
@@ -35,12 +36,19 @@ def one(task):
     t0 = time.time()
     state = dict(k=0)
 
+    OUTDIR.mkdir(exist_ok=True)
+    live = OUTDIR / f"live_{tag}_{branch}_{seed}.txt"
+    live.write_text("")
+
     def cb(xk):
         state["k"] += 1
         if state["k"] % 25 == 0 or state["k"] <= 5:
             f, gr = L6.objective(g, xk, branch)
-            traj.append((state["k"], round(time.time() - t0, 1), f,
-                         float(np.max(np.abs(gr)))))
+            rec = (state["k"], round(time.time() - t0, 1), f,
+                   float(np.max(np.abs(gr))))
+            traj.append(rec)
+            with live.open("a") as fh:   # flush as we go: the plateau must be watchable
+                fh.write("%d %.1f %.12e %.6e\n" % rec)
 
     r = minimize(lambda z: L6.objective(g, z, branch), x0, jac=True, method="L-BFGS-B",
                  callback=cb,
@@ -60,11 +68,12 @@ def one(task):
     return out
 
 
+MAXIT = int(os.environ.get("L6_PROBE_MAXITER", "20000"))
 TASKS = [
-    ("J0", 2, 8, 1, "B", 401, 20000),
-    ("J2", 3, 12, 2, "B", 401, 20000),
-    ("J0", 2, 8, 1, "A", 401, 20000),
-    ("J2", 3, 12, 2, "A", 401, 20000),
+    ("J0", 2, 8, 1, "B", 401, MAXIT),
+    ("J2", 3, 12, 2, "B", 401, MAXIT),
+    ("J0", 2, 8, 1, "A", 401, MAXIT),
+    ("J2", 3, 12, 2, "A", 401, MAXIT),
 ]
 
 if __name__ == "__main__":

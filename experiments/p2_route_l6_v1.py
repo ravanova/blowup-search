@@ -789,6 +789,44 @@ def run_rung(Lmax, Nr, Ks, branch, seeds, maxiter, warm=None, Lmap=2.0, verbose=
     return out, g, best[1]
 
 
+def bank_profile(g, x, branch, tag):
+    """Package the actual velocity field so the artefact CARRIES THE PROFILE, not just a
+    number about it.  The gate asks for a divergence-free velocity field to be banked."""
+    aF, aQ = g.unpack(x)
+    # sample V on a fixed, named grid so the field is checkable without this code
+    dirs = np.array([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0],
+                     [1.0, 1.0, 1.0], [1.0, -2.0, 0.5]], float)
+    dirs = dirs / np.linalg.norm(dirs, axis=1, keepdims=True)
+    radii = [0.25, 1.0, 4.0, 16.0, 64.0]
+    pts = np.array([d * rr for rr in radii for d in dirs])
+    samples = []
+    for s_val in (0.0, 0.25 * PERIOD, 0.5 * PERIOD):
+        V = eval_V_cart(g, aF, aQ, pts, s_val)
+        samples.append(dict(s=float(s_val),
+                            points=[[float(c) for c in q] for q in pts],
+                            V=[[float(c) for c in v] for v in V]))
+    return dict(
+        branch=branch, rung=tag, Lmax=g.Lmax, Nr=g.Nr, Ks=g.Ks, Lmap=g.Lmap,
+        n_dof=int(g.n_dof),
+        harmonics_l_m=[[int(l), int(m)] for (l, m) in g.harm],
+        packing=("x = concat(aF.ravel(), aQ.ravel()); aF, aQ have shape "
+                 "(nH, Nr, nK) with nH = Lmax(Lmax+2) harmonics ordered as "
+                 "harmonics_l_m, Nr radial Chebyshev modes, nK = 2*Ks+1 real Fourier "
+                 "modes in s ordered [1, cos(w s), sin(w s), cos(2 w s), sin(2 w s), ...] "
+                 "with w = 2 pi / (2 log lambda)"),
+        column_scaling=("coefficients are expressed in the unit-Gaussian-weighted-L2 "
+                        "column scaling built by Geom(Lmax,Nr,Ks,Lmap); Geom is "
+                        "deterministic in those four arguments, so the scaling is "
+                        "reproducible and no scale factors need be stored"),
+        reconstruction=("V(y,s) = curl curl (f y) + curl (g y) with "
+                        "f = sum_lm F_lm(r) S_k(s) Y_lm, g = sum_lm Q_lm(r) S_k(s) Y_lm; "
+                        "F built from aF on the u^l * T_n(2u-1) basis, Q from aQ on the "
+                        "u^l (1-u) * T_n(2u-1) basis, u = r/(r+Lmap)"),
+        coefficients=[float(c) for c in np.asarray(x, float)],
+        field_samples=samples,
+    )
+
+
 def prolong(x_old, g_new, g_old):
     """Zero-prolong a coefficient vector from a coarser space into a finer one."""
     aFo, aQo = g_old.unpack(x_old)
@@ -953,7 +991,7 @@ def main():
         joint_ladder=JOINT_LADDER[:args.rungs],
     )
 
-    results = {}
+    results, banked = {}, {}
     for branch in ("A", "B"):
         print(f"\nBRANCH {branch}", flush=True)
         rows, last = run_ladder(JOINT_LADDER[:args.rungs], branch, seeds, args.maxiter,
@@ -962,8 +1000,11 @@ def main():
         row["diagnostics"] = diagnostics(g, xbest, branch)
         _checkpoint(f"joint_{branch}", rows)
         results[branch] = rows
+        banked[branch] = bank_profile(g, xbest, branch, row["tag"])
+        banked[branch]["residual_load_bearing"] = row["residual_load_bearing"]
 
     doc["ladder_results"] = results
+    doc["banked_profile"] = banked
 
     # ---- single-axis ladders (leg_401.md SS5) -----------------------------------------
     axis = {}
