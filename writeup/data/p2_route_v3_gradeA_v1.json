@@ -2,8 +2,8 @@
   "leg": 399,
   "route": "V3",
   "branch": "leg/399-v3-gradeA",
-  "status": "IN PROGRESS -- 1 of 6 rows graded (checkpoint after row R1)",
-  "criterion_source": "writeup/PUB_0C_CENSUS_SPINE.md §1 (leg 174's criterion, unchanged)",
+  "status": "COMPLETE -- 9 rows graded",
+  "criterion_source": "writeup/PUB_0C_CENSUS_SPINE.md \u00a71 (leg 174's criterion, unchanged)",
   "criterion": {
     "grade_A": "the interval-arithmetic certificate encloses a solution of an equation that itself carries the dissipative term",
     "fluid": "the equation is a genuine fluid-dynamics equation (transport nonlinearity, incompressibility or a fluid-adjacent structure), not an off-axis scalar/complex-field model"
@@ -67,7 +67,8 @@
       "failing_clause_location": "Section 1, eq. (1.1), p.1 -- the certified equation carries NO dissipative term. The words 'viscosity', 'Laplacian' and 'Navier-Stokes' occur nowhere in the paper's own equations; the only occurrence of 'Navier-Stokes' in the body (p.7, literature survey) is a citation of OTHER authors' work, namely [34] = arXiv:2509.25116.",
       "concludes_pde_singularity": true,
       "already_graded_by_this_record": true,
-      "prior_adjudication": "leg 342 (experiments/journal/leg_342.md, row C3 of the candidate table) graded 'Chen 2605.15149/2605.15130' as: equation = 'Euler, not NS', axisymmetric (no swirl), stationary, verdict 'FAILS: wrong equation, axisymmetric, stationary'. CITED, NOT REDONE. This leg confirms the equation-level finding at the primary source and supplies the verbatim clause leg 342's table did not quote."
+      "prior_adjudication": "leg 342 (experiments/journal/leg_342.md, row C3 of the candidate table) graded 'Chen 2605.15149/2605.15130' as: equation = 'Euler, not NS', axisymmetric (no swirl), stationary, verdict 'FAILS: wrong equation, axisymmetric, stationary'. CITED, NOT REDONE. This leg confirms the equation-level finding at the primary source and supplies the verbatim clause leg 342's table did not quote.",
+      "companion_paper": "arXiv:2605.15130 (Chen, Part II: 3D Profiles, Blowup, Limiting behavior), named alongside 15149 in leg 342's row C3. Graded from arXiv metadata ONLY (abstract, not full text): 'we construct exact C^alpha self-similar blowup profiles for the vorticity of the 3D incompressible Euler equation without swirl'. Same failing clause -- Euler, no dissipative term. Recorded in honest_ceiling as an abstract-depth, not full-text-depth, grading."
     },
     {
       "row": "R4",
@@ -85,7 +86,118 @@
       "concludes_pde_singularity": "CLAIMED, REFUTED",
       "already_graded_by_this_record": true,
       "prior_adjudication": "leg 309 (Route-GAF2), experiments/journal/leg_309.md:11 -- gate 'does the full text sustain the claim as stated ... or does it break?' answered 'GATE: NO -- it breaks.' Leg 309's own consequence, quoted: 'the Grade-A/fluid viscous-certification cell stays EMPTY. Leg 303's claimed 1 is downgraded to refuted by this leg's adversarial read; it does not become established 0 in the positive sense -- it is simply not a fill.' Leg 309 verified every independently recomputable constant (K ~ 1.0998e4, C_rec^map maximizer at k=2500 reproducing 2.5652e7, NK closure 2 delta M K ~ 8.9e-5 < 1) and found the break theorem-level, not arithmetic. CITED, NOT REDONE -- this leg re-fetched the primary source only to quote eq. (18) and eq. (6) verbatim and confirms both displays render as leg 309 recorded them."
+    },
+    {
+      "row": "R5",
+      "arxiv_id": "2210.07191 + 2305.05660",
+      "also_published_as": "Chen & Hou, PNAS 2025, doi 10.1073/pnas.2500940122, 'Singularity formation in 3D Euler equations with smooth initial data and boundary'; Multiscale Model. Simul., doi 10.1137/23M1580395",
+      "version_read": "2305.05660v3, 16 Aug 2026 (Part II: Rigorous Numerics -- front matter and Section 1 read in full; this is the part that carries the computer assistance)",
+      "cite": "Jiajie Chen, Thomas Y. Hou -- Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler equations with smooth data, I: Analysis (2210.07191) + II: Rigorous Numerics (2305.05660)",
+      "surfaced_by": "leg 242's own control net, experiments/journal/leg_242.md:73, listed there as 'Chen-Hou PNAS'. This is one of the TWO rows of leg 242's six that the dispatch did not name; this leg grades it because the gate says 'plus any further ones your own control net surfaces'.",
+      "equation_certified": "The 2D Boussinesq system (2.3)-(2.5) and the 3D axisymmetric EULER equations (2.1)-(2.2) in a cylinder; the vorticity form is stated at eq. (1.1), p.1 of Part II.",
+      "dissipative_term_inside_certified_equation": false,
+      "genuine_fluid_equation": true,
+      "verdict": "NOT_GRADE_A",
+      "failing_clause_quoted": "omega_t + u . grad omega = omega . grad u",
+      "failing_clause_location": "Part II (arXiv:2305.05660v3), Section 1, eq. (1.1), p.1, introduced verbatim as 'linear partial differential equations that govern the motion of the ideal INVISCID fluid flow' -- 'The 3D Euler equations governing the vorticity omega are given by (1.1) omega_t + u.grad omega = omega.grad u'. There is no dissipative term in the certified equation. Theorem 2, p.2: 'Consider the 3D axisymmetric Euler equations in the cylinder r,z in [0,1] x T ... The solution of the 3D Euler equations (2.1)-(2.2) develops a nearly self-similar blowup ... in finite time'.",
+      "concludes_pde_singularity": true,
+      "already_graded_by_this_record": true,
+      "prior_adjudication": "solver/viscous_novelty.py::PRECEDENTS, id 'arXiv:2210.07191 + Part II (2305.05660)', verdict EXCLUSION, banked by leg 197: 'INVISCID -- the certificate has no dissipation dial.' Also leg 174's ledger row CHENHOU-BOUSS (2210.07191): fluid_adjacent true, pde_dissipative FALSE, certified_object_dissipative FALSE. CITED; the verbatim eq. (1.1) clause is this leg's addition."
+    },
+    {
+      "row": "R6",
+      "arxiv_id": "2208.09445",
+      "version_read": "arxiv.org/pdf/2208.09445 (latest, full text; Forum of Mathematics Pi 13 (2025) e6, doi 10.1017/fmp.2024.12)",
+      "cite": "Tristan Buckmaster, Gonzalo Cao-Labora, Javier Gomez-Serrano -- Smooth imploding solutions for 3D compressible fluids",
+      "surfaced_by": "leg 242's own control net, experiments/journal/leg_242.md:73. This is the SECOND of leg 242's six that the dispatch did not name.",
+      "equation_certified": "The self-similar ODE system (1.9)/(1.10) for the isentropic compressible EULER equations in Riemann variables: '(r + (1/2)((1+2a)W + (1-a)Z))W + (1 + (1/2)(W + Z + a(W-Z))) d_xi W - (a/2) Z^2 = 0' and its Z-counterpart, rearranged into the autonomous system (1.10). Interval arithmetic IS genuinely used (Section 1.3: 'In order to perform rigorous, error-free calculations, interval arithmetic will be used as part of the proof whenever needed').",
+      "dissipative_term_inside_certified_equation": false,
+      "genuine_fluid_equation": true,
+      "verdict": "NOT_GRADE_A",
+      "failing_clause_quoted": "In this section, we will study the linearized operator of the Euler equations around the self-similar profiles we have found. The stability for the Euler equation will follow in general, while in the Navier-Stokes case we need to restrict the parameter r to a regime where the self-similar profile dominates the dissipation.",
+      "failing_clause_location": "Section 7 'Linear Stability of the Profile', opening paragraph, p.54",
+      "failing_clause_second_quoted": "Within this range of gamma, there exist self-similar solutions to the Euler equations for which the dissipation terms for the corresponding self-similar Navier-Stokes problem can be treated as exponentially decaying forcing due to the specific self-similar scaling.",
+      "failing_clause_second_location": "Section 1.1.2 'Imploding solutions', p.4",
+      "grade_a_fails_by": "The theorem's conclusion is about compressible Navier-Stokes (dissipative, fluid) -- but the object the interval arithmetic encloses is a solution of the INVISCID Euler self-similar ODE (1.9)/(1.10). Viscosity is reached afterwards, analytically, by choosing the self-similar exponent r so that dissipation decays exponentially in self-similar time. That is precisely leg 174's Grade B, not Grade A.",
+      "concludes_pde_singularity": true,
+      "already_graded_by_this_record": true,
+      "prior_adjudication": "leg 174's ledger row BCG-NS (writeup/data/p2_route_vbs_v1_scoping.json::ledger): fluid_adjacent TRUE, pde_dissipative TRUE, concludes_pde_singularity TRUE, certified_object_dissipative FALSE, computer_assistance_essential TRUE -- i.e. THE Grade-B/fluid occupant of leg 174's occupancy matrix. CITED, NOT REDONE; the Section 7 and Section 1.1.2 clauses are re-derived here from the primary source and confirm leg 174's grading."
+    },
+    {
+      "row": "R7",
+      "arxiv_id": "2509.14185",
+      "version_read": "v1 (arXiv API metadata: title, abstract, categories). Full text NOT read -- see honest_ceiling.",
+      "cite": "Wang, Lai, Gomez-Serrano, Buckmaster et al. -- Discovery of Unstable Singularities",
+      "surfaced_by": "THIS LEG'S OWN CONTROL NET, query all:\"Discovery of Unstable Singularities\" following its appearance in arXiv net query abs:\"computer-assisted\" AND abs:\"Navier-Stokes\" (9 hits, sorted by submittedDate descending). Not in the dispatch's four; not in leg 242's six.",
+      "equation_certified": "NOTHING IS CERTIFIED. Numerical self-similar profiles for the incompressible porous media (IPM) equation and the 3D Euler equation with boundary, at near-double-float precision.",
+      "dissipative_term_inside_certified_equation": false,
+      "genuine_fluid_equation": true,
+      "verdict": "NOT_GRADE_A",
+      "failing_clause_quoted": "This level of precision meets the requirements for rigorous mathematical validation via computer-assisted proofs.",
+      "failing_clause_location": "Abstract (arXiv:2509.14185). The sentence states the numerics are CAP-READY; it does not claim a CAP was performed. No interval-arithmetic certificate is claimed anywhere in the abstract. Secondarily, the two equations named -- IPM and 3D Euler with boundary -- are both inviscid, so the dissipative term is absent from the equations as well as the certificate absent from the paper.",
+      "concludes_pde_singularity": false,
+      "already_graded_by_this_record": true,
+      "prior_adjudication": "solver/viscous_novelty.py::PRECEDENTS, id 'arXiv:2509.14185', verdict EXCLUSION, banked by leg 197: 'Unstable self-similar singularities for IPM and 3D Euler with boundary at near-machine precision, stated as CAP-ready. Inviscid.' / rigor: 'numerics at CAP-ready precision; no certificate claimed'. This leg's independent net re-surfaced it and confirms the banked characterisation at the abstract."
+    },
+    {
+      "row": "R8",
+      "arxiv_id": "2404.04054",
+      "version_read": "arxiv.org/pdf/2404.04054 (latest, full text; Section 6 'An example with first order terms' read in full)",
+      "cite": "Breden, Chu -- Constructive proofs for some semilinear PDEs on H^2(e^{|x|^2/4}, R^d)",
+      "surfaced_by": "THIS LEG. Included because writeup/PUB_0C_CENSUS_SPINE.md \u00a72 names it as the method that 'is already Grade-A on a NON-FLUID dissipative equation ... including viscous Burgers', and because leg 174's OWN field definition of fluid_adjacent turns on a transport nonlinearity. Grading it is how the record's most obvious internal tension gets measured rather than assumed.",
+      "equation_certified": "The self-similar profile equation of a generalised viscous Burgers equation on R+, eq. (54): 'L u - u/4 + u^2 (du/dx) = 0, x >= 0', arising from eq. (53) 'd_t v + v^2 d_x v = d_xx v, d_x v(t,0) = 0' under v(t,x) = t^{-1/4} u(x/sqrt(t)). The operator L = -Laplacian - (x/2).grad carries the dissipative term. Interval arithmetic IS genuinely used (Section 1: 'All computations ... have been implemented in Julia, using the IntervalArithmetic.jl library [46] for interval arithmetic').",
+      "dissipative_term_inside_certified_equation": true,
+      "genuine_fluid_equation": false,
+      "verdict": "NOT_FLUID",
+      "failing_clause_quoted": "We deal with a one-dimensional example here for simplicity, but terms like (u . grad)u could in principle also be handled in dimension d in {2,3}, as u in H^2(mu) is then still enough to guarantee that (u . grad)u in L^2(mu) since u in L^infinity(R^d).",
+      "failing_clause_location": "Remark 40, Section 6, p.28",
+      "failing_clause_why": "The paper's own remark draws the line this leg needs: what was CERTIFIED is the scalar 1D nonlinearity v^2 d_x v on R+ with a Neumann boundary condition -- no incompressibility, no vorticity/velocity relation, no (u.grad)u. Remark 40 states (u.grad)u is reachable 'in principle', i.e. it was NOT done. There is no genuine fluid-dynamics equation anywhere in the certified object.",
+      "concludes_pde_singularity": false,
+      "not_a_blowup_note": "Decisive and independent of the fluid clause: the similarity transformation is v(t,x) = t^{-1/4} u(x/sqrt(t)), a DECAYING source-type self-similar solution valid for t>0, not a finite-time singularity. The strings 'blow-up' and 'blowup' do not occur anywhere in this paper's body text -- only in reference [16]'s title.",
+      "already_graded_by_this_record": true,
+      "prior_adjudication": "solver/viscous_novelty.py::PRECEDENTS, id 'arXiv:2404.04054', verdict ADJACENT, banked by leg 197/48: 'The dissipative term sits inside the certified profile equation ... The hole: neither paper does it for a FLUID transport model'. writeup/PUB_0C_CENSUS_SPINE.md \u00a72 calls it 'already Grade-A on a non-fluid dissipative equation'. This leg CONFIRMS that reading at Remark 40 and eq. (53), and FLAGS the record-internal tension (see honest_ceiling::flags) that leg 174's ledger grades fractional Burgers (0804.3549, KNS) as fluid_adjacent=TRUE while the spine prose calls viscous Burgers non-fluid. This leg does NOT rule that tension -- it is flagged to the Conductor."
+    },
+    {
+      "row": "R9",
+      "arxiv_id": "2410.05480",
+      "version_read": "not re-read this leg -- cited from leg 174's ledger row DF-CGL and leg 316's row-for-row reproduction",
+      "cite": "Dahne, Figueras -- Self-similar singular solutions to NLS and the complex Ginzburg-Landau equations",
+      "equation_certified": "Complex Ginzburg-Landau, i u_t + (1 - i eps) Laplacian(u) + (1 + i delta)|u|^{2 sigma} u = 0, eps > 0; the certified ODE carries eps INSIDE it.",
+      "dissipative_term_inside_certified_equation": true,
+      "genuine_fluid_equation": false,
+      "verdict": "NOT_FLUID",
+      "failing_clause_quoted": "i u_t + (1 - i eps) Laplacian(u) + (1 + i delta) |u|^{2 sigma} u = 0",
+      "failing_clause_location": "The equation itself, as transcribed in leg 174's ledger row DF-CGL ('equation' field). A complex-field semilinear Schroedinger/Ginzburg-Landau equation: no transport nonlinearity, no incompressibility, no vorticity/velocity relation. This is exactly leg 174's 'off-axis scalar/complex-field model'.",
+      "concludes_pde_singularity": true,
+      "already_graded_by_this_record": true,
+      "prior_adjudication": "leg 174's ledger row DF-CGL: fluid_adjacent FALSE, grade A -- THE occupant of the Grade-A/not-fluid cell. Reproduced row-for-row by leg 316 (49,465/49,465 rows, zero failures, zero tiling gaps, experiments/journal/leg_316.md:42-62). Included here only as leg 174's own control, to show the fluid predicate varies over the graded set and is not tautological. CITED, NOT REDONE."
     }
   ],
-  "honest_ceiling": null
+  "gate_answer": {
+    "question": "Does any row grade Grade-A AND fluid simultaneously?",
+    "answer": "YES -- on exactly one row, R1 = arXiv:2509.25116 (Hou, Wang, Yang).",
+    "rows_yes": [
+      "R1 / 2509.25116"
+    ],
+    "rows_no": [
+      "R2 / 2605.19716",
+      "R3 / 2605.15149 (+2605.15130)",
+      "R4 / 2604.09949",
+      "R5 / 2210.07191+2305.05660",
+      "R6 / 2208.09445",
+      "R7 / 2509.14185",
+      "R8 / 2404.04054",
+      "R9 / 2410.05480"
+    ],
+    "reading_a_applied": "Per pre-committed reading (a), the YES is reported FIRST and unsoftened, and is recorded as SOMEONE ELSE FILLED THE CELL. That is NOT this repository moving a link. No link of the L1->L4 chain moves. Clay odds stay ~0.05%.",
+    "the_qualification_that_must_travel_with_the_yes": "R1's certified object is NOT a finite-time singularity. It is a FORWARD self-similar Leray-Hopf profile, and the paper says so in its own words (Section 1.2, p.2): 'The readers should not confuse this self-similar setting, which starts from singular initial data, with the backward self-similar setting related to finite-time singularities from smooth initial data.' Theorem 1's solutions are 'smooth for positive times'. Leg 174's criterion, as quoted in PUB_0C_CENSUS_SPINE \u00a71 and as handed to this leg, has exactly TWO clauses and does not contain a finite-time-singularity clause. Adding one would be TIGHTENING the criterion, which the dispatch forbids. So the YES stands as graded, and the qualification is recorded beside it rather than used to withdraw it. WALLS.md's 'BREAKING W3 CONSISTS OF' paragraph DOES contain a third requirement ('the object is a genuine finite-time singularity') that R1 does not meet. That divergence between the wall's break-test and the criterion the wall names as its own predicate is a BAN-WORDING DEFECT and is escalated to the user, NOT ruled by this leg.",
+    "what_is_now_false_verbatim": "leg 174's own cell 'meaning' string (writeup/data/p2_route_vbs_v1_scoping.json::the_empty_cell.meaning) reads: 'no published work applies interval arithmetic to a DISSIPATIVE fluid equation's own self-similar object'. arXiv:2509.25116 applies interval arithmetic to 3D Navier-Stokes's own self-similar profile equation. That sentence, as written, is FALSE as of 2026-03-19 (v2 date). The narrower sentence 'no published work encloses a FINITE-TIME SINGULARITY of a dissipative fluid equation' is NOT contradicted by any row graded here."
+  },
+  "honest_ceiling": "WHAT WAS NOT GRADED. (1) COVERAGE: nine rows were graded. That is the four the dispatch named, plus the two further rows of leg 242's own six that the dispatch did not name (2208.09445, Chen-Hou PNAS), plus three this leg's own instruments surfaced (2509.14185, 2404.04054, 2410.05480). It is NOT a census of the literature. My control net was three arXiv API queries (abs:\"computer-assisted\" AND abs:\"Navier-Stokes\" -> 9 hits; abs:\"interval arithmetic\" AND (blow-up|blowup|singularity) -> 15 hits; abs:\"computer-assisted\" AND (viscous|viscosity|dissipative) -> 22 hits), all title-screened only. Three queries over ONE database is not a coverage net; leg 242 needed twelve nets of three independent kinds for a single AUTHOR line. Semantic Scholar was NOT queried -- no API key exists in this environment, and rather than record a THROTTLED I did not fire a query I could not complete; that is a gap, recorded as a gap. OpenAlex, Crossref, Google Scholar, MathSciNet, zbMATH, and every journal-side channel: NOT QUERIED. (2) DEPTH: R1, R2, R3, R4, R6, R8 were graded at FULL TEXT. R5 was graded at Part II front matter + Section 1 (the part carrying the computer assistance), not the full 81-page Part II nor Part I. R7 was graded at ABSTRACT ONLY. R9 was graded from leg 174's transcription plus leg 316's reproduction, NOT re-read. R3's companion 2605.15130 was graded at ABSTRACT ONLY. (3) VERIFICATION: this leg did NOT re-run, re-derive or audit any paper's certificate. R1's YES rests on Hou-Wang-Yang's own Propositions 1 and 2 and their own Section 7 as published; this leg verified that the Laplacian is present in the displayed certified equation and that interval arithmetic is named as the enclosure mechanism, and NOTHING MORE. An adversarial full-text audit of R1 of the kind leg 309 ran on 2604.09949 has NOT been done and is the single highest-value follow-up. (4) A NEGATIVE THAT DOES NOT GENERALISE: pre-committed reading (b) binds -- the eight NOs establish only that THIS NAMED LIST does not fill the cell. They do not re-establish 'nobody else filled it'. COST TO CLOSE EACH GAP. (a) Adversarial full-text audit of arXiv:2509.25116 to leg-309 depth (enumerate load-bearing constants before adjudicating, recompute what is recomputable, check the localisation step from the R^3 self-similar profile to a genuine Leray-Hopf solution): 1 unit, 4-8 h, literature + light compute, no new mathematics. This is the unit that decides whether the YES survives contact. (b) A real coverage net over the Grade-A/fluid cell -- not an author line: >= 8 nets over >= 3 independent databases (arXiv full-text, OpenAlex, Crossref, plus author-maintained pages for the ~10 groups doing fluid CAPs), every hit title-and-abstract screened, every unreachable channel banked as UNREACHABLE: 1 unit, 6-10 h, no compute, REQUIRES a Semantic Scholar or OpenAlex key to avoid banking half the channels as THROTTLED. (c) Full-text grading of R5 (Parts I+II, ~120 pp.) and R7 (Discovery of Unstable Singularities, full text + any subsequent CAP paper by that group): 1 unit, 3-5 h. Both are expected NOs on the equation clause and neither is on the critical path. (d) Re-reading R9 at primary source rather than at leg 174's transcription: ~1 h, low value, leg 316 already reproduced it row-for-row.",
+  "flags_for_the_conductor": [
+    "BAN-WORDING DEFECT, W3. WALLS.md's W3 headline ('No certified (interval-enclosed, equation-carrying-the-dissipative-term) blow-up exists for any fluid equation, in any dimension') and its 'BREAKING W3 CONSISTS OF' paragraph both require a FINITE-TIME SINGULARITY. The predicate W3 names as its own grading test -- 'leg 174's own Grade-A criterion, applied unchanged' -- does NOT contain that requirement; it has two clauses only. arXiv:2509.25116 satisfies the named predicate and fails the headline. This leg REPORTS the divergence and does NOT rule it. Per the rules, a defective ban wording is a user escalation. NOT edited by this leg.",
+    "leg 174's the_empty_cell.meaning string in writeup/data/p2_route_vbs_v1_scoping.json is now FALSIFIED as written (see gate_answer.what_is_now_false_verbatim). This leg did not edit that file. Someone with territory over it must decide whether to correct the string or the claim.",
+    "RECORD-INTERNAL TENSION on the fluid predicate, unresolved and NOT ruled here. leg 174's ledger grades fractional Burgers (arXiv:0804.3549, KNS) as fluid_adjacent=TRUE, while writeup/PUB_0C_CENSUS_SPINE.md \u00a72 calls arXiv:2404.04054's viscous Burgers a 'non-fluid dissipative equation'. Both cannot be right under one reading of 'transport nonlinearity'. This leg graded R8 NOT_FLUID on the narrower reading AND recorded that R8's certified object is not a blow-up at all, so the row's verdict does not depend on which reading wins. But the next leg that grades a Burgers-family row will have to have this settled.",
+    "COVERAGE, not correction: leg 174's 11-row ledger does not contain arXiv:2509.25116, although v1 (2025-09-29) predates leg 174. WALLS.md's own 2026-08-18 coverage correction already anticipated exactly this shape of gap ('an 11-row hand-built ledger whose honest_ceiling records a Tier ceiling and NO coverage ceiling'). This leg is the measurement that the flagged gap was real and non-empty."
+  ]
 }
