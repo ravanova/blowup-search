@@ -54,13 +54,11 @@ is in the BASIN STRUCTURE, not the seed supply.**
 | **D** | Raise supply at source — longer DNS or finer `N` | ≈3.4 h per extra `T=1e5` + ≈0.9 h re-mine, plus attempts | Most expensive, buys supply, does nothing about H-hard. `N` refinement invalidates the banked library. | Only if the object itself changes and a fresh library is needed anyway. |
 
 **`E` — THE H-HARD DIAGNOSTIC. TAKEN, LANDED `d0d72b1`, gate ANSWERED, `UNVERIFIED`.** **2 of 16
-converged, 0 recovered any named row** (both are genuine solutions of this realization that are not
-their rows, both below the 0.15 `|s|` shelf); positive control **R** at `‖R‖ 1.5e-10` through the
-unit's own predicate; diagnostics (1) `PULL_TO_LOW_S`, (2) `MIXED` (`p = 0.9317`). **`E-iii` fired
+converged, 0 recovered any named row**, both below the 0.15 `|s|` shelf; positive control through
+the unit's own predicate; diagnostics `PULL_TO_LOW_S` and `MIXED` (`p = 0.9317`). **`E-iii` fired
 (→ `R3`/`R2`), `E-ii`'s (→ `R4`) antecedent is satisfied; the re-ranking between them is NOT made.**
-`V-W3` reproduced all six figures. Detail: `experiments/journal/prog_r4_e.md`,
-`writeup/data/p2_prog_r4_e_v1.json`. *(Struck 2026-08-18: this read "IT DID NOT RETURN … `6a706f7`",
-which described the wave-1 host kill. `E` was re-run and landed.)*
+`V-W3` reproduced all six figures. Detail: `experiments/journal/prog_r4_e.md`. *(Struck 2026-08-18:
+this read "IT DID NOT RETURN … `6a706f7`", the wave-1 host kill. `E` was re-run and landed.)*
 
 **`U4`/`G2`, the basin radius — BLOCKED, not an option.** It needs a recovered *named* orbit to
 perturb and there is not one; direct seeding at the published `(T, s)` was the last cheap route and
@@ -82,8 +80,8 @@ diagnostic (2)'s coverage gap **122.1 ch**.
 
 | id | unit | status | note |
 |---|---|---|---|
-| **R0** | the metric | **TAKEN**, wave 1, gate `yes`, VERIFIED by `V1` | Corrected `WALLS.md` twice and **retracted** "Lane R's first measured win". `WALLS.md` §R0. |
-| **R1** | early abort on flatness | **TAKEN and CLOSED AGAINST ITSELF**, wave 1, VERIFIED by `V1` | Already collected by U5 before commissioning. **Spend no more compute on this family.** `WALLS.md` §R1. |
+| **R0** | the metric | **TAKEN**, w1, gate `yes`, VERIFIED by `V1` | Corrected `WALLS.md` twice and **retracted** "Lane R's first measured win". `WALLS.md` §R0. |
+| **R1** | early abort on flatness | **TAKEN, CLOSED AGAINST ITSELF**, w1, VERIFIED by `V1` | Already collected by U5 before commissioning. **Spend no more compute on this family.** `WALLS.md` §R1. |
 | **R2** | deflation (Farrell–Birkisson–Funke) | **DEFERRED — the strongest surviving Lane R item** | R0 measured the waste: **57 of U5's 100 seeds were already spent by U3**, **5 of 9 convergences are bit-identical re-executions**, **4 of 5 distinct solutions are re-finds**, U5's contribution new to the programme is **one orbit**. Deflate against the **union** of both runs' solutions. Re-opens whenever Lane R gets a wave slot. |
 | **R3** | multiple shooting | **DEFERRED** | Brick B6's own spec names it; U1 built the globalisation without it. Standard conditioning fix for long orbits, and long orbits are where the published targets live. **The basin-structure finding points here, and `E-iii` fired, which points here again.** |
 | **R4** | second-order-in-time stepper | **DEFERRED — AND `E` PROMOTED IT** | U3's is Lie–Trotter, globally **first** order (measured ratio 2.00), so its periodic orbits are `O(dt)` perturbations of the true flow's while the published rates come from higher-order codes. Invalidates M1's reproduction — own milestone. **`E-ii` named `R4` in advance as where a non-recovery would point, and its antecedent IS satisfied.** `E`'s leg-353 comparison is **the first evidence pointing at the REALIZATION rather than the budget** — a better realization got closer (residuals [0.80, 10.32] vs [22.5, 29.5]) from strictly **worse** seeds and still recovered nothing. |
@@ -143,15 +141,19 @@ dynamical closure is **outside both bans**.
 `CLAY_OBLIGATIONS.md` §6(i)/(ii) — **OPEN in both branches** — and (D)'s gain on §4 is *"the
 acceptance test, not the work."* **Nothing queued anywhere retires them.**
 
-**⚠ THIS LANE HAS LANDED ZERO UNITS IN 398 LEGS.** `L2` was dispatched in wave 3 and **died with its
-pre-registration committed and its gate unanswered** (`leg/397-l2-decay` @ `a9a4370`, §§0–3 complete
-and fully resumable). `L3′` was dispatched in wave 3 and **died without committing a byte.**
+**⚠ 2026-08-18 — THE LANE HAS LANDED, AND ITS FIRST UNIT NARROWED IT.** `L2′` (leg 397, `1493e5e`,
+`UNVERIFIED`) resumed wave 3's surviving pre-registration and answered its gate **`YES`**: 18
+techniques read, failing hypothesis named/quoted/located in every one, **and ZERO could supply
+`α > 1.5` even in principle** — `α` is pinned to exactly 1, so paying leg 381's bill destroys the
+object (`WALLS.md` §W4). **W4 clause (a) is measured SHUT.** §6(i) is **NOT** retired.
 
-| id | unit | what it is |
-|---|---|---|
-| **L1** | price §4 on `ℝ³` | Read the published attempts to localise a self-similar profile to finite energy; state, **per attempt**, the named hypothesis that fails for DSS. Converts an assumption into a measurement. **DEFERRED.** |
-| **L2** | attack §6(i) — certified far-field decay + admissible cutoff | Leg 381 banked the bill: `L³` tail **326.875 per decade**, required `α > 1.5` against available `α = 1.0`. **A deficit of 0.5 in a decay exponent is a number, not an impossibility**, and no unit has ever asked what would supply it. **The most tractable-looking item on the entire no-method list. IN FLIGHT as `L2′`.** |
-| **L3** | attack §6(ii) — persistence under localisation | The published techniques for persistence of singular behaviour under perturbation (nonlinear stability with a finite unstable spectrum, the Chen–Hou line) have **never been read against this object**. **DEFERRED — `L3′` died in wave 3 without committing.** |
+| id | unit | what it is | cost |
+|---|---|---|---|
+| **L1**, **L2** | price §4 / attack §6(i) | **TAKEN by `L2′`, `1493e5e`, for the DECAY clause.** Pointer: `WALLS.md` §W4, `experiments/journal/leg_397.md` §§4–9. | — |
+| **L1-res** | the 4 pre-arXiv primaries | NRŠ 1996, Tsai 1998, Bogovskiĭ 1979, Giga–Kohn banked **`UNREACHABLE` as declared in advance**, quoted through secondaries. **Low value.** No author contact — prohibited. | ~1 unit |
+| **L4** | **certify the decay** | §6(i) wants *certified* decay + a built cutoff, and `L2′` built neither. Interval/NK enclosure on route 4's own profile + a cutoff controlled in a scaling-invariant norm. **`§6.2` predicts `α_hi = 1`, which does not pay the bill** — price that in before dispatching. | **≥1 full wave** |
+| **L5** | **W4 clause (b): a NATIVELY FINITE-ENERGY ansatz** | The residual `L2′` names first: an ansatz that **never asks the profile for decay at all**, so the pin at `α = 1` does not bind it. **UNCOSTED, unpre-registered, and the strongest surviving item in the lane.** | needs scoping |
+| **L3** | attack §6(ii) — persistence under localisation | The published persistence techniques (nonlinear stability with a finite unstable spectrum, the Chen–Hou line, `arXiv:2308.01528`) have **never been read against this object**. **DEFERRED — `L3′` died in wave 3 without committing.** | — |
 
 **The record's best lead on this lane arrived as a by-product** (§F): **`arXiv:2308.01528`, the
 Chen–Hou line**, which `L3′` was to read at full text. **A measured, honest "still no method, and here
@@ -188,14 +190,11 @@ H11 — the one previous attempt at this lane's target, by anyone, died that way
 
 | id | unit | status |
 |---|---|---|
-| **T1** | ban-wording escalation packet | **TAKEN** w1, gate `yes`; machine record DISCHARGED by `V-W2` (`writeup/data/p2_route_t1_packet_v1.json`). Packet open on the user's desk. |
-| **T2** | periodic-rigidity literature search | **TAKEN** w1, gate = no theorem located → **`UNDER-RESOURCED`, not `no`**. Not a clearance. |
+| **T1**, **T4**, **T5**, **T6** | all TAKEN | **§3j — one line plus a pointer.** `T1` w1 gate `yes`, machine record DISCHARGED by `V-W2`, packet on the user's desk. `T4` `2c87244` **`STOP`**, `T5` `a6f0c38` **PASS** (left `O1` and leg 257, §F), `T6` `e7db624` **ANSWERED** 7/7 — all three VERIFIED by `V-W2`. Detail: `STATE.md` Landed. |
+| **T2** | periodic-rigidity search | **TAKEN** w1, gate = no theorem located → **`UNDER-RESOURCED`, not `no`**. Not a clearance. |
 | **T2′** | the **compliant** rigidity search | **DEFERRED, ≈1.2–1.7 h plus one user ruling.** Closes T2's three holes: NRS 1996 / Tsai 1998 are pre-arXiv (needs a forward-citation pass), Semantic Scholar was throttled on 5 of 6 substantive queries (needs an S2 key), battery `E` failed its own domain control (needs repair). |
 | **T2″** | **the Type-I rigidity question on `T³`** | **DEFERRED — as of 2026-08-14 the ONLY thing keeping Lane T alive, and re-open condition 2.** The sharpest item the lane owns. A Type-I condition is a *rate* condition (`\|u\| ≲ (T−t)^{−1/2}`), needs **no dilation symmetry**, and carries to the torus intact **as a question**. Measured: `"Type I blowup" AND "periodic"` = **0**. Nothing located proves it. |
 | **T3** | the non-DSS `T³` ansatz | ~~**OPEN — the priority unit.**~~ **DEFERRED WITH THE LANE — NOT KILLED.** Still the lane's real mathematical content; runs when a re-open condition is met. Binds: C1's naming requirement. |
-| **T4** | reproduce `arXiv:1902.00384` row for row | **TAKEN** w2, `2c87244`, gate **`STOP`** on pre-committed branch (c); VERIFIED. **CLOSED.** |
-| **T5** | the C1 sweep | **TAKEN** w2, `a6f0c38`, gate **PASS**; VERIFIED. Left **2 re-openable, UNRANKED**: `O1` (§F, → Lane V), leg 257 (§F, NOT re-openable). |
-| **T6** | discharge leg 348's ceiling | **TAKEN** w2, `e7db624`, gate **ANSWERED**; VERIFIED. 7/7 at full text, 2 UNDERCUT / 4 strengthen / 1 confirm. By-product: the Chen–Hou thread (§F). |
 
 ## F. Other standing options, recorded so they are not lost
 

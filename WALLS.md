@@ -119,8 +119,27 @@ first** (disjoint supports at `L > 2ρ`), in which case leg 381's bill is inheri
 **BREAKING W4 CONSISTS OF:** (a) a localisation argument carrying blow-up from the infinite-energy
 profile to a finite-energy solution with the decay actually available, or (b) a natively
 finite-energy ansatz, or (c) a target for which condition (7) is not imposed — Fefferman statement
-**(D)**, the torus. **Lanes: T and L.** Attack (c) is deferred with Lane T; **(a) and (b) live in
-Lane L and run now.**
+**(D)**, the torus. **Lanes: T and L.** Attack (c) is deferred with Lane T.
+
+**⚠ 2026-08-18 — CLAUSE (a) IS CLOSED BY MEASUREMENT, NOT BY DECISION.** `L2′` (leg 397, `1493e5e`)
+read **18** localisation / far-field-decay techniques against **this object** (all 7 pre-registered
+families + 3 OFF-LIST), naming, quoting and locating the failing hypothesis in every one:
+**9 `FAILS`, 8 `FAILS-BY-CONSTRUCTION`, 1 `SATISFIED`** — the last being Chae–Wolf Thm 1.1, which
+banked the `α = 1` in the first place and supplies nothing further. **ZERO could supply `α > 1.5`
+even in principle.** A **pin, not a gap**: for any nontrivial backward λ-DSS blow-up profile of 3D
+NS the exponent is **exactly 1** — **≥ 1** by Chae–Wolf Thm 1.1, **≤ 1** by Chae–Wolf Rmk 1.2 +
+Escauriaza–Seregin–Šverák, restated independently by Pineau–Vicol (`arXiv:2607.09619v2`, 6 Aug 2026)
+§1.2. **Any `α > 1` puts `U ∈ L³(ℝ³)` and yields full regularity** — the singularity being localised
+is gone. Leg 381's bill asks `α > 1.5`: **paying it destroys the object it is for.** λ does not save
+it — `λ = 1.7 ≫ 1` defeats the λ-near-1 hypotheses of Chae–Wolf Thm 1.3 and Pineau–Vicol Thms
+1.6/1.7, but **Rmk 1.2's `L³` clause carries no λ restriction.**
+
+**WHAT THIS DOES AND DOES NOT DO.** It does **not** break W4 — a wall breaks when (a), (b) or (c)
+*succeeds*, and (a) has been measured **shut**, which is the opposite. It says **nothing** about
+whether 3D NS is regular, and it does **not** retire §6(i), which wants *certified* decay and a
+built cutoff. **Lane L's live attacks are therefore (b) and, if un-deferred, (c)** — a **natively
+finite-energy DSS ansatz**, and **a target not imposing condition (7)**. Both need their own
+pre-registration; neither was entered.
 
 ## W5 — Persistence and stability under localisation
 
@@ -194,7 +213,7 @@ return: Lane V → HELD, Lane L sole priority.**
 | lane | was | **now** | why |
 |---|---|---|---|
 | **V** | 2 | **HELD 2026-08-18** | `V3`'s **pre-committed** reading (a) — *a YES kills Lane V's premise* — **FIRED**: the cell is occupied on leg 174's own criterion. Which of W3's two wordings governs is an OPEN **user** escalation, so the lane is held, not killed. A ranking, not a ruling; reversible in one line. |
-| **L** | 3 | **PRIORITY, ACTIVE** | **On every path.** Leg 390: the torus does **not** retire §6(i)/(ii), so the two no-method obligations block **every** branch — and **no unit has ever landed one.** |
+| **L** | 3 | **PRIORITY, ACTIVE** | **On every path.** Leg 390: the torus does **not** retire §6(i)/(ii), so the two no-method obligations block **every** branch. **`L2′` (2026-08-18) is the lane's first landed unit in 399 legs** — and it **narrowed** the lane: W4 clause (a) measured shut. |
 | **T** | 1 | **DEFERRED** | The demonstrated-technology argument fell to the lane's **own** measurement (leg 393, replicated by 394). Alive only through **`T2″`**; **`T3` deferred, not killed.** `OPTIONS.md` §E. |
 | **R** | continuous | **unchanged** | Runs inside **every** unit's pre-registration and takes its own units when a wave has room. **Never sets a wave's direction.** |
 
@@ -207,7 +226,10 @@ belongs to no unit yet.**
 **⚠ IT WAS RE-EARNED AND IT DID NOT SURVIVE (§3i, 2026-08-18).** Lane V's rank rested on leg 174's
 *"empty for want of a target"*. `V3` measured that premise instead of inheriting it, and **it did not
 hold.** Lane L's rank is **unaffected** — it rests on leg 390's measurement, not on a survey — so
-**Lane L is now the sole priority lane, and it still has never landed a unit.**
+**Lane L is the sole priority lane. It has now landed, and what it landed CLOSES one of its own
+attacks (W4 clause (a)) rather than opening one.** §3i q6 is therefore live: what Lane L has left is
+clause (b) and `L3`/§6(ii), and neither has a costed unit yet. **This is the question wave 5 must
+answer before it ranks anything.**
 
 **Binding on every lane: C1 STANDS, EXEMPLAR-FREE**, and no unit may cite it as evidence the
 technology closes for any object class. **Naming requirement unchanged, not waivable by the
@@ -226,10 +248,10 @@ inverse uniform in `M`. **Absent both, the ban applies in full.**
 
 1. **Leg 348's obstruction is NOT refuted, but its evidence base is thinner than the record said.**
    The only named obstruction is **domain shape**: the Galerkin-plus-tail bridge closes against a
-   **compact domain with a discrete, geometrically decaying spectral basis**, and route 4 wants
-   unbounded `ℝ³` in an algebraic weight. **Leg 348 read `arXiv:1902.00384` at ABSTRACT LEVEL ONLY
-   and flagged that limit itself** — an undischarged ceiling the programme built a lane, an
-   escalation and a user ruling on for 45 legs. **`T6` discharged it at full text.**
+   **compact domain with a discrete, geometrically decaying spectral basis**; route 4 wants unbounded
+   `ℝ³` in an algebraic weight. **Leg 348 read `arXiv:1902.00384` at ABSTRACT LEVEL ONLY and flagged
+   that limit itself** — an undischarged ceiling a lane, an escalation and a user ruling rested on
+   for 45 legs. **`T6` discharged it at full text.**
 2. **`T³` is the domain the obstruction asks for**, but **leg 348's `domain_census` OVER-COUNTS BY
    ONE** — `arXiv:2409.09234` is not an instance of the technology at all (`T6`, verified by `V-W2`).
    **6 − 1 = 5.** Leg 390's figure inherits the error. **Re-check before citing it.** `## History`.
@@ -249,9 +271,8 @@ inverse uniform in `M`. **Absent both, the ban applies in full.**
   that ground. **The one previous attempt at Lane T's target, by anyone, died this way.** The torus
   buys an escape only for a **natively periodic** ansatz.
 - **NO PERIODIC ANALOGUE OF NRS/TSAI LOCATED — NOT a clearance** (`T2`, `UNDER-RESOURCED` under §3d,
-  not `no`): both sources pre-arXiv, S2 throttled on 5 of 6 substantive queries, one battery failed
-  its own domain control; arXiv clean **32/32 MEASURED**, no throttled query banked as a zero.
-  Compliant search costed **≈1.2–1.7 h**.
+  not `no`): both sources pre-arXiv, S2 throttled on 5 of 6 substantive queries; arXiv clean
+  **32/32 MEASURED**, no throttled query banked as a zero. Compliant search: **≈1.2–1.7 h**.
 - **`T2″`, THE DE NOVO ITEM AND RE-OPEN CONDITION (ii): a TYPE-I RIGIDITY THEOREM ON `T³`.** A *rate*
   condition needs no dilation symmetry, so it carries to the torus **as a question**, unproven.
 - **The DSS ansatz does not survive periodization.** 342 modes survive one DSS step at `λ = 1.7`;
@@ -261,8 +282,8 @@ inverse uniform in `M`. **Absent both, the ban applies in full.**
 
 **All dispatched units are TAKEN** — `T1` (ruled), `T2` (`UNDER-RESOURCED`, named `T2″`), `T4`
 (`STOP`), `T5`/`T6`. **`T3`, the non-DSS `T³` ansatz, is the lane's real mathematical content,
-deferred WITH the lane, not killed**; leg 390 §5 item 3 prices the nearest object — the one-step DSS
-margin decays with band width at exponent **−0.99057**.
+deferred WITH the lane, not killed**; leg 390 §5 item 3 prices it (one-step DSS margin decays with
+band width at exponent **−0.99057**).
 
 ## LANE V — THE VISCOUS RUNG. ~~*PRIORITY, ACTIVE.*~~ **HELD 2026-08-18 on `V3`'s return.**
 
@@ -285,9 +306,12 @@ if it re-opens is `V3`'s own costed one — an adversarial full-text audit of `2
 
 ## LANE L — THE LAST OBLIGATIONS. **PRIORITY, ACTIVE (ruling 2026-08-14).** *The only lane touching the FINAL blockers.*
 
-> **PROMOTED 2026-08-14. Lane L is on every path.** Leg 381's banked bill is the object: critical
-> `L³` tail **326.875 per decade**, required `α > 1.5` against available `α = 1.0`. **A deficit of
-> 0.5 in a decay exponent is a number, not an impossibility.**
+> **PROMOTED 2026-08-14. Lane L is on every path.** Leg 381's banked bill: critical `L³` tail
+> **326.875 per decade**, required `α > 1.5` against available `α = 1.0`. ~~**A deficit of 0.5 in a
+> decay exponent is a number, not an impossibility.**~~ **FALSIFIED 2026-08-18 by `L2′`: for this
+> object it IS an impossibility — `α` is pinned to exactly 1 and `α > 1` gives full regularity.**
+> The promotion **stands on leg 390's measurement**, which is untouched; **this half of its stated
+> reason does not.**
 
 **The gap this lane exists to close.** `CLAY_OBLIGATIONS.md` §6 names **two obligations with no known
 method** — **§6(i)** certified far-field decay with an admissible cutoff, **§6(ii)** persistence of
@@ -299,16 +323,25 @@ answer.
 other lane retires or even touches them.** If every other lane succeeded completely, these two would
 still be the answer to *"why isn't this a Clay solve yet."*
 
-**Nobody here has ever LANDED a unit on either.** Carried as an assumption — *"no known method"* —
-through 398 legs, unchecked to the standard this repository applies to everything else. **`L2` was
-dispatched in wave 3 and died with its pre-registration committed and its gate unanswered**
-(`leg/397-l2-decay` @ `a9a4370`); **`L2′` finishes it.**
+**⚠ 2026-08-18 — THE LANE HAS LANDED ITS FIRST UNIT IN 399 LEGS, AND IT NARROWED THE LANE.**
+`L2′` (leg 397, `1493e5e`, `UNVERIFIED`) answered its gate **`YES`**: the failing hypothesis is
+named, quoted verbatim and located for **all 18** techniques read. **The *"no known method"*
+assumption on §6(i) is no longer an assumption — it is a measurement, and a stronger one than the
+assumption was:** nothing can supply the 0.5, because **`α` is pinned to exactly 1** and any
+`α > 1` gives full regularity (W4, above). **`L2` is answered; `L1`'s question is answered with it**
+for the decay clause. **What survives in this lane is (b) and `L3`** — see W4.
 
-**L1 — price §4 on `ℝ³`.** Read the published attempts to localise a self-similar profile to finite
-energy; state, per attempt, the **named hypothesis** that fails for DSS. Turns an assumption into a
-measurement, and may find the method — the claim has never been tested.
-**L2 — attack §6(i).** Is certified far-field decay plus an admissible cutoff genuinely without
-method, or without an *attempt*? **No unit has ever asked what would supply the 0.5.**
+**L1 — price §4 on `ℝ³`.** ~~Read the published attempts to localise a self-similar profile to
+finite energy; state, per attempt, the named hypothesis that fails for DSS.~~ **DONE by `L2′` for
+the decay clause** (18 techniques, 7 families). Residual: the **four pre-arXiv primaries**
+(NRŠ 1996, Tsai 1998, Bogovskiĭ 1979, Giga–Kohn) banked **`UNREACHABLE` as declared in advance**
+and quoted through secondaries — ~1 unit, **low value**, and **no author contact** (prohibited).
+**L2 — attack §6(i).** ~~Is certified far-field decay plus an admissible cutoff genuinely without
+method, or without an *attempt*?~~ **ANSWERED: without method, and the method cannot exist for this
+object.** §6(i) is **NOT retired** — it wants *certified* decay and a built cutoff, and `L2′`
+produced neither. Certifying it costs **≥ 1 full wave** (interval/NK enclosure on route 4's own
+profile + a cutoff controlled in a scaling-invariant norm), and **§6.2 predicts the answer is
+`α_hi = 1`** — which does not pay the bill.
 **L3 — attack §6(ii).** Persistence under localisation — downstream of L2 in logic but not in
 literature: the published techniques (nonlinear stability with a finite unstable spectrum, the
 Chen–Hou line) have never been read against *this* object.
@@ -327,10 +360,9 @@ fails" is also a real result** — the one that says whether the Tier-2 ceiling 
 
 **Attacks W7 by mathematics rather than hardware.** `PROG-R4` U5's shift stratification is the move:
 compliant scale bought by fixing a selection bias rather than by buying compute — the second time
-(after AMENDMENT 4's period stratification) the same reformulation paid. **Promoted 2026-08-13 by
-user ruling: raise the recovery rate until this repository's orbit-finding machinery is the best in
-the field, not merely adequate** — W7 says an under-resourced programme returns `UNDER-RESOURCED`
-forever, and every factor taken out is permanent and transfers.
+(after AMENDMENT 4) the same reformulation paid. **Promoted 2026-08-13 by user ruling: raise the
+recovery rate until this repository's orbit-finding machinery is the best in the field, not merely
+adequate** — every factor taken out is permanent and transfers.
 
 ### R0 — the metric, pre-committed BEFORE optimisation. **TAKEN, wave 1. Its inference RETRACTED.**
 
@@ -348,14 +380,13 @@ JSON; a future unit must bank `magnitudes.physical_cores` and per-attempt `time.
 
 **THE INFERENCE FROM THIS TABLE IS RETRACTED** — ~~*"U5 is above U3 on every variant, Lane R's first
 measured improvement"*~~ **WITHDRAWN.** The per-run arithmetic (1.27×–1.59×) is confirmed; the
-inference is not: the metric counts **cross-run** re-finds as successes — the exact defect it was
-introduced to remove, one level up. **57 of U5's 100 seeds were already spent by U3; 4 of U5's 5
-distinct solutions are re-finds; U5's contribution new to the programme is ONE orbit.** Report
-**both** rows. Core-hour convention: **pool reservation (`wall × workers`)**; §W7's 134.45 is
-attempt-CPU and labelled there. **`M3 = DELIVERED` SURVIVES** — adjudicated by `V1`, not by the
-Conductor that planned it. **Instrument limit:** U3's converged states are **banked nowhere**, only
-U5's, so the numerator 8 is testable only in the `(T, |s|)` pair, and the deciding pair sits at
-**1.288 × TOL** (`OPTIONS.md` §B).
+inference is not — the metric counts **cross-run** re-finds as successes, the exact defect it was
+introduced to remove, one level up. **57 of U5's 100 seeds were already spent by U3; U5's
+contribution new to the programme is ONE orbit.** Report **both** rows. Core-hour convention:
+**pool reservation (`wall × workers`)**. **`M3 = DELIVERED` SURVIVES** — adjudicated by `V1`, not by
+the Conductor that planned it. **Instrument limit:** U3's converged states are **banked nowhere**, so
+the numerator 8 is testable only in the `(T, |s|)` pair, deciding pair at **1.288 × TOL**
+(`OPTIONS.md` §B).
 
 ### R1 — early abort on flatness. **CLOSED 2026-08-13 — the win was already taken.**
 
@@ -367,39 +398,19 @@ rule selected on U5's 9 convergences KILLS one of U3's 14.** Deployed rule: **ze
 is reusable: U3's convergence is **bimodal** — all 14 convergences finished in **≤29 epochs**
 (median 16) while the 86 non-convergences ran to the 52-epoch cap, **the majority of the run.**
 
-### R2 — deflation. *Attacks the largest measured waste after R1.* Detail: `OPTIONS.md` §B.
+### R2–R5 — the deferred Lane R units. **Ledger, costs and notes: `OPTIONS.md` §B** (§3j — pointer,
+not restatement). Kept here only where a wall depends on it:
 
-**NINE** of U3's 14 convergences landed on three solutions, and **U5 made it cross-unit: a second
-100-attempt budget at 57 core-hours bought exactly ONE solution the first run had not reached.**
-Newton keeps re-finding what it has found, across runs, from a different seed pool. **Deflated
-continuation (Farrell–Birkisson–Funke)** removes located solutions from the residual, converting
-re-finds into new orbits and improving the R0 metric directly. Well established, absent here,
-matched to the largest measured waste here. **Deflate against the union of both runs' solutions.**
-
-### R3 — multiple shooting. *Standard in this field and absent here.* Detail: `OPTIONS.md` §B.
-
-Route-DSSP brick **B6's own spec names it** — *"the seeded Newton–Krylov / multiple-shooting layer"*
-— and U1 built the hookstep/trust-region globalisation without it. Segmenting the period is the
-standard conditioning fix for long orbits, and long orbits are where the published targets live.
-
-### R4 — a second-order-in-time stepper. *Realization change; needs its own milestone.*
-
-Lesson 91 forced U3 to disclose that its stepper is **Lie–Trotter, globally first order** (local
-ratio 4.00, global 2.00), so its periodic orbits are `O(dt)` perturbations of the true flow's, while
-the published rates come from higher-order codes. Strang or IMEX-RK moves the discrete orbits closer
-to the true ones — raising the chance a named orbit *is* a solution of the discrete map at achievable
-tolerance. **This invalidates M1's reproduction and must re-run it.**
-
-### R5 — carry the `m` unknown in the residual. *U3's option (c). Realization change.*
-
-U3's extended residual carries a continuous `x`-shift only, so a large block of in-window candidates
-**cannot be expressed as seeds at all**, and every negative this repository states about orbit
-recovery carries the clause *"with a residual that cannot represent one of the two shift classes."*
-**CORRECTED 2026-08-13 by U5 — this file previously implied R5 helps the band, and it does not:**
-carrying `m` unlocks **334 anchored in-window candidates, 58.1% of the window, but only 1 of the 334
-lies in the published `|s|` band. R5 is not a fix for the named rows** — it is the fix for
-`|s| > 0.9`. **Do not let it be sold as a route to the published targets.** (Same unit as `PROG-R4`
-option **C** — do not double-count it.)
+- **R2 deflation** — strongest surviving Lane R item; attacks the largest measured waste (R0: **57 of
+  U5's 100 seeds already spent by U3**). Deflate against the union of both runs' solutions.
+- **R3 multiple shooting** — named by route-DSSP brick **B6's own spec**, built without it.
+- **R4 second-order stepper** — U3's is **Lie–Trotter, globally first order** (measured ratio 2.00),
+  so its orbits are `O(dt)` perturbations of the true flow's while the published rates come from
+  higher-order codes. **`E-iii` promoted it. Invalidates M1's reproduction; must re-run it.**
+- **R5 carry `m`** — U3's residual carries an `x`-shift only, so every negative here about orbit
+  recovery carries *"with a residual that cannot represent one of the two shift classes."*
+  **CORRECTED by U5: R5 does NOT help the band** (334 anchored candidates unlocked, **1** in the
+  published `|s|` band). It is the fix for `|s| > 0.9`. Same unit as `PROG-R4` **C**; don't double-count.
 
 **THE H-HARD DIAGNOSTIC HAS RUN — `E`, landed `d0d72b1`** — the hardest number Lane R has produced
 about the named rows. Seeded at the published `(T, s)` of all eight Lucas–Kerswell Table IV rows, two

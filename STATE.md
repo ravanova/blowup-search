@@ -25,7 +25,7 @@ direction check (seven questions, in every integration commit, per unit); **§3j
   of. **Every lane may build whatever it needs, at any size, without a further ruling.**
 - **Ceiling: Tier 2.** Route 4 produces a candidate; no certification route is built.
   `CLAY_OBLIGATIONS.md` §6 names the two obligations with **no known method**.
-- **Clay odds ~0.05%**, unmoved. **No `L1 → L4` link has ever moved, in 398 legs.**
+- **Clay odds ~0.05%**, unmoved. **No `L1 → L4` link has ever moved, in 399 legs.**
 
 ## THE LANES — ranked 2026-08-14 by user ruling; re-earned per unit under §3i
 
@@ -36,7 +36,7 @@ dropped because a lane was not chosen.**
 | lane | attacks | status | one line |
 |---|---|---|---|
 | **V — VISCOUS RUNG** | W3 | **HELD 2026-08-18** | `V3` (leg 399) measured the lane's own premise and it **did not hold**: leg 174's Grade-A × fluid cell is **OCCUPIED** by `arXiv:2509.25116` on leg 174's own two clauses. `V3`'s **pre-committed** reading (a) — *a YES kills Lane V's premise* — **FIRED and is honoured.** Whether W3 is thereby *broken* turns on which of its two wordings governs: **OPEN user escalation, not ruled here.** Held, not killed; reversible in one line. |
-| **L — THE LAST OBLIGATIONS** | W4, W5, §6(i), §6(ii) | **PRIORITY, ACTIVE** | On **every** path: leg 390 measured that the torus does **not** retire §6(i)/(ii). **No unit in 398 legs has ever landed at either.** Leg 381 banked the bill on §6(i) — `writeup/data/p2_route_cloc_v1.json`. **A deficit of 0.5 in a decay exponent is a number, not an impossibility.** |
+| **L — THE LAST OBLIGATIONS** | W4, W5, §6(i), §6(ii) | **PRIORITY, ACTIVE — AND IT HAS NOW LANDED** | `L2′` (leg 397) is Lane L's **first landed unit in 399 legs**, and it came back **narrowing the lane, not widening it**: leg 381's decay bill is not merely unpaid, **paying it is self-defeating** — `α` is pinned to exactly 1 and any `α > 1` gives full regularity. **§6(i) is NOT retired** (nothing certified). What is left is **two untouched structural residuals**, both named in W4's own break test: a **natively finite-energy DSS ansatz**, and **a target not imposing Clay condition (7)**. |
 | **T — TORUS** | W2, W4, W6 | **DEFERRED** | Demoted on **the lane's own measurement**: `arXiv:1902.00384` is certified by exactly the banned apparatus and both certified rows are 2D lifts (`T4`, `T6`). **Nothing measured is superseded; W2 stands strengthened.** Alive only through **`T2″`**; `T3` deferred **with** the lane, not killed. `OPTIONS.md` §E. |
 | **R — REFORMULATION + SOLVER** | W7 | **continuous** | Runs inside every unit's pre-registration (*what makes this an order of magnitude cheaper?*) and takes its own units when a wave has room. Every factor removed is permanent. **Never sets a wave's direction.** |
 
@@ -63,9 +63,8 @@ maintainer or list remains HELD.**
 
 ## ⚠ 2026-08-18 — THE §3i FLAG BECAME A MEASUREMENT, AND THE CELL IS OCCUPIED
 
-Question 4 of the direction check flagged that W3's *"leg 242 confirms nobody filled it since"* was
-**over-read** — leg 242's gate was an author-line question and it graded **none** of the six fluid
-blow-up CAPs its own control net surfaced. That was a flag on the *support*, not a retraction.
+Question 4 flagged W3's *"leg 242 confirms nobody filled it since"* as **over-read** — leg 242's
+gate was an author-line question and it graded **none** of the CAPs its control net surfaced.
 
 **`V3` (leg 399, `16ba44e`) then graded them, and the flag turned into a measurement.**
 **`arXiv:2509.25116` (Hou–Wang–Yang, v2) passes BOTH of leg 174's clauses** — interval arithmetic
@@ -89,10 +88,9 @@ key here). `V3`'s costed next unit, an adversarial full-text audit of `2509.2511
 (4–8 h), is **not dispatched pending the ruling**, because what it should test depends on the answer.
 **Nobody's link moved:** somebody else certified something, this repository graded it.
 
-**Also flagged, NOT repaired:** `p2_route_vbs_v1_scoping.json::the_empty_cell.meaning` — *"no
-published work applies interval arithmetic to a DISSIPATIVE fluid equation's own self-similar
-object"* — is **measured FALSE**. It is another leg's banked artefact and rewriting it to match a
-later finding is how a record stops being one. Escalation §3, question (Q3).
+**Also flagged, NOT repaired:** `p2_route_vbs_v1_scoping.json::the_empty_cell.meaning` is **measured
+FALSE**. Another leg's banked artefact; rewriting it to match a later finding is how a record stops
+being one. Escalation §3, question (Q3).
 
 ---
 
@@ -100,40 +98,37 @@ later finding is how a record stops being one. Escalation §3, question (Q3).
 
 | unit | gate answer | SHA | state |
 |---|---|---|---|
+| **`L2′`** / leg 397 (L) | **GATE `YES`** — failing hypothesis **named, quoted, located** for **all 18** techniques (**all 7** families + 3 OFF-LIST): **9 `FAILS` / 8 `FAILS-BY-CONSTRUCTION` / 1 `SATISFIED`**. **ZERO could supply `α > 1.5` even in principle** — `α` is **pinned to exactly 1**, so paying leg 381's bill destroys the object. Closes **one** of W4's three break clauses; **§6(i) NOT retired.** Detail: `experiments/journal/leg_397.md` §§4–9. | `1493e5e` | **UNVERIFIED** |
 | **`V3`** / leg 399 (V) | **GATE `YES` on 1 row of 9.** `arXiv:2509.25116` (Hou–Wang–Yang) **passes both of leg 174's clauses** and had **never been graded here**; 8 `NO` with the failing clause quoted; leg 309/342/123 **cited, not redone**. **The object is NOT a finite-time singularity — the paper says so (§1.2, p.2).** Lane V's premise **DEAD on the named predicate**; W3 **DISPUTED / UNRULED**, escalation OPEN. YES **unaudited**, one database, S2 a **gap not a zero**. | `16ba44e` | **UNVERIFIED** |
 | **`V-W3`** (wave 4, verification) | **3 of 4 CONFIRMED, 1 REFUTED.** `E`'s headline reproduces 6/6; `V-W2` confirms on both parts from **re-fetched primaries** (`.mat` fields **bitwise**); `fig107`'s `P2_EVIDENCE` gap confirmed by `ast.literal_eval` (36 entries, `107` the only gap in 99–110). **REFUTED: `E`'s `8×` overrun — `0.0713` is WALL-h, `0.57` is CORE-h; like for like `E` came in 0.4% UNDER.** 6 defects **unrepaired**, 0 `UNREACHABLE`. | `2b8755e` | **UNVERIFIED** |
 | **`V-W2`** (wave 3, verification) | **ALL FOUR ITEMS REPRODUCE**, items (1)/(2) from **re-fetched primary artefacts whose SHA-256 matched the banked digests** — measurements, not transcription checks. Banked one nuance **unreconciled**: the *ground* for `T6`'s UNDERCUT 2 was the **Conductor's** wording, not `T6`'s. **Second Conductor-wording defect a verifier has caught.** `T1`'s owed machine record **DISCHARGED**, mutation-tested four ways. | `594ff89` | **UNVERIFIED** |
 | **`E`** (wave 1, Lane R instrument) | **PASS in its pre-committed wording** — all three diagnostics RETURN, each with a planted control firing both ways. **Branch fired: `E-iii`.** 16 attempts at the eight published Lucas–Kerswell rows: **2 converged, 0 recovered any named row**, both convergences below diagnostic (1)'s 0.15 shelf. Control **R** is load-bearing — it proves the predicate **can** return a recovery. `G1` stays `UNDER-RESOURCED` **and was not written to**. `experiments/journal/prog_r4_e.md`. | `d0d72b1` | **UNVERIFIED** |
 | **`T4`** / leg 393 (T) | **`STOP`, pre-committed branch (c).** `arXiv:1902.00384` is certified by **exactly the banned apparatus**, and **both certified rows are 2D lifts**. **W2 STANDS, STRENGTHENED. W6 UNTOUCHED.** `writeup/data/p2_route_t4_v1.json`. | `2c87244` | **VERIFIED** by `V-W2` |
-| **`T6`** / leg 394 (T) | **7/7 full texts — 2 UNDERCUT / 4 strengthen / 1 confirm; 0 `UNREACHABLE`, 0 `THROTTLED`, 0 zeros.** UNDERCUT 1 independently replicates `T4` from the authors' **prose**. UNDERCUT 2 removes one row from leg 348's `domain_census`. **The obstruction is NOT refuted — its evidence base is thinner than the record said, not wrong.** | `e7db624` | **VERIFIED** by `V-W2` |
-| **`T5`** / leg 395 (T) | **PASS** — the C1 sweep, an obligation of the ruling discharged. **7 refusals: APPARATUS 5 / REALIZATION 2.** **2 re-openable under C1, UNRANKED**: leg 348's Galerkin-plus-tail build, and **leg 315's `O1`** Taylor-model flow-map enclosure that *"needs no function space"* — **the genuinely new item, and it points at LANE V.** **Leg 257 is NOT re-openable** (fourth *space*, not fourth *apparatus*). | `a6f0c38` | **VERIFIED** by `V-W2` |
+| **`T6`** / leg 394 (T) | **7/7 full texts — 2 UNDERCUT / 4 strengthen / 1 confirm; 0 `UNREACHABLE`, 0 zeros.** **The obstruction is NOT refuted — its evidence base is thinner than the record said, not wrong.** | `e7db624` | **VERIFIED** by `V-W2` |
+| **`T5`** / leg 395 (T) | **PASS** — the C1 sweep, an obligation of the ruling discharged. **7 refusals: APPARATUS 5 / REALIZATION 2.** **2 re-openable under C1, UNRANKED**: leg 348's Galerkin-plus-tail build, and **leg 315's `O1`** Taylor-model enclosure that *"needs no function space"*. **Leg 257 is NOT** (fourth *space*, not *apparatus*). | `a6f0c38` | **VERIFIED** by `V-W2` |
 | **`V1`** (wave 2, verification) | **All five wave-1 claims reproduce** from banked JSON and landed evidence scripts alone; **`M3 = DELIVERED` SURVIVES** U5's 57% seed overlap. Two defects banked, not reconciled. | `2fb399f` | **UNVERIFIED** |
-| **`T1`/391, `T2`/392, `R0`+`R1`** (wave 1) | `T1` **yes** — escalation packet, ruled **none** of its three questions; ruling landed `RULING_BAN_WORDING_2026-08-13.md`. `T2` **`UNDER-RESOURCED`, not `no`** — and it named **`T2″`**, which now keeps Lane T alive. `R0` **retracted** *"Lane R's first measured win"*. `R1` **closed against itself** (+0.45 pp; spend no more compute on that family). | wave 1 | **VERIFIED** by `V1` |
-| **`PROG-R4`** (route-4 DSS, leg 380) | **U0–U3, U5 LANDED; U4 BLOCKED** — it needs a recovered **named** orbit and there is not one. `G1 = UNDER-RESOURCED`, `M2` and `M3 = DELIVERED`. **`E` tightened `G1` without converting it to a `no`** and made **U4/G2 harder to open**, since direct seeding was the last cheap route. §3d's stop did **not** fire; **route 4 is NOT stopped.** `experiments/journal/prog_r4_u5.md` §9. | leg 380 | **UNVERIFIED** |
+| **`T1`/391, `T2`/392, `R0`+`R1`** (wave 1) | `T1` **yes** — escalation packet, ruled **none** of its three questions (`RULING_BAN_WORDING_2026-08-13.md`). `T2` **`UNDER-RESOURCED`, not `no`**, and it named **`T2″`**. `R0` **retracted** *"Lane R's first measured win"*. `R1` **closed against itself** (+0.45 pp). | wave 1 | **VERIFIED** by `V1` |
+| **`PROG-R4`** (route-4 DSS, leg 380) | **U0–U3, U5 LANDED; U4 BLOCKED** — needs a recovered **named** orbit and there is not one. `G1 = UNDER-RESOURCED`, `M2`/`M3 = DELIVERED`. **`E` tightened `G1` without converting it to a `no`** and made **U4/G2 harder to open**. §3d's stop did **not** fire; **route 4 is NOT stopped.** | leg 380 | **UNVERIFIED** |
 | **`plan_of_record.py` posture** | **Additive only**, 75 insertions / 0 deletions. **No ban lifted, narrowed, reworded or re-read**; `BANNED` byte-identical, `test_plan_of_record.py` **26 bans / 19 in force, ALL GATES PASS**. | `1ca9e91` | — |
 
 ## WAVE 3 — CLOSED 2026-08-18. ONE UNIT OF FOUR RETURNED.
 
-Planned and committed before dispatch at **`42011ff`** (gates and pre-committed readings verbatim
-there; §3j rule 5 — quoted by pointer, not restated).
-
-| unit | lane | outcome |
-|---|---|---|
-| `V-W2` | verification | **RETURNED, AUDITED, LANDED** `594ff89`. |
-| `V2` / leg 396 | **V**, construction, the wave's centre of gravity | **DEAD. No branch, no commit, zero bytes.** Gate unanswered; **no branch of its pre-committed reading fired** and none is claimed. W3 is exactly where wave 2 left it. |
-| `L2` / leg 397 | **L** | **DEAD, but its PRE-REGISTRATION SURVIVED** — `leg/397-l2-decay` @ `a9a4370`, §§0–3 (gate, pre-committed reading, search plan, instrument controls, classification criteria), committed **before any verdict existed**. No gate answer, no verdict, no conclusion about §6(i) exists. **Resumable: wave 4's `L2′` executes §§4+ on that branch.** |
-| `L3′` / leg 398 | **L**, literature | **DEAD. No branch, no commit.** Gate unanswered. |
+Planned and committed before dispatch at **`42011ff`** (gates verbatim there; §3j rule 5 — pointer,
+not restatement). **`V-W2` RETURNED, AUDITED, LANDED** `594ff89` (row above). **`V2` (leg 396, V),
+`L3′` (leg 398, L) DEAD** — no branch, no commit, zero bytes, gates unanswered, and **no branch of
+`V2`'s pre-committed reading fired**; W3 was left exactly where wave 2 left it, until `V3`.
+**`L2` (leg 397, L) DEAD, but its PRE-REGISTRATION SURVIVED** — `a9a4370`, §§0–3, committed **before
+any verdict existed** — and **wave 4's `L2′` executed §§4+ on that branch and landed.**
 
 **THE LESSON, AND IT IS THE SAME ONE TWICE.** Wave 3 lost three of four workers to a host process
-exit. **The one thing that survived is the one thing that was committed** — `L2`'s pre-registration,
-which now saves wave 4 a full unit of setup. This is the second time (2026-08-14 took five in-flight
-workers the same way). **`COMMIT DURING THE RUN, NOT ONLY AT THE GATE` is in every brief from now on,
-alongside the checkpointing rule `E` paid for** (`OPTIONS.md` §F): any unit above ~1 h wall
-checkpoints to disk at a granularity it can resume from, and says where.
+exit; **the one thing that survived is the one thing that was committed.** Second time (2026-08-14
+took five). **`COMMIT DURING THE RUN, NOT ONLY AT THE GATE` is in every brief**, with `E`'s
+checkpointing rule (`OPTIONS.md` §F): any unit above ~1 h wall checkpoints to disk at a granularity
+it can resume from, and says where.
 
 ---
 
-## WAVE 4 — TWO OF THREE RETURNED, 2026-08-18. `L2′` STILL IN FLIGHT.
+## WAVE 4 — ALL THREE RETURNED, 2026-08-18. WAVE CLOSED.
 
 **Gates and all pre-committed readings are COMMITTED AT `8f4cb53`, before dispatch (§3g step 1), and
 are quoted by pointer per §3j rule 5 — NOT restated here.** Dispatch record: `d0c2c5d`.
@@ -142,33 +137,37 @@ are quoted by pointer per §3j rule 5 — NOT restated here.** Dispatch record: 
 |---|---|---|
 | `V3` / leg 399 | **V** | **RETURNED. GATE ANSWERED `YES` on 1 row of 9.** `16ba44e`, merged. The cell is **occupied** on leg 174's own criterion; pre-committed reading (a) **FIRED**. **`UNVERIFIED`.** |
 | `V-W3` | verification | **RETURNED. 3 of 4 CONFIRMED, 1 REFUTED.** `2b8755e`, merged. 6 defects located, sized, **unrepaired** as instructed. Executable re-derivation banked, 180 checks, 0 disagreements. |
-| `L2′` / leg 397 | **L** | **IN FLIGHT** on `leg/397-l2-decay`. §§0–3 committed and binding; executing §§4+. |
+| `L2′` / leg 397 | **L** | **RETURNED. GATE ANSWERED `YES`** — the failing hypothesis is named, quoted and located for **all 18** techniques. `1493e5e`, merged. §§0–3 **byte-identical** to the pre-registration. **`UNVERIFIED`.** |
 
 **`V-W3`'s REFUTATION, and it is the Conductor's own record that broke.** ~~`E` overran its
 commissioning estimate ~8×~~ — **WITHDRAWN. There was no overrun.** `0.0713` is **WALL**-hours per
 attempt at **8 workers** (`prog_r4_u5.md:405`); `0.57` is **CORE**-hours per attempt. Like for like,
 U5's model predicts `0.0713 × 8 = 0.5704` core-h and `E` measured `9.08843 / 16 = 0.56803` —
-**ratio 0.9958, `E` came in 0.4% UNDER.** The claimed `8×` is recovered by dividing core-hours by
-wall-hours and **equals the worker count** (`7.967`). Two more fell out: the record's own
-`(5.687 + 0.806)/16` evaluates to **0.4058, not 0.57** (off 1.400×), and the structural story is
-contradicted — `E` ran **21.44** epochs/attempt against U5's **21.95**, at **95.389 s/epoch** against
-a 95 s model. **Both factors of the cost model were accurate.** `E`'s forward pricing table is fine;
-only the comparison was wrong. **THIRD Conductor-record defect a verifier has caught, and the first
-one the Conductor wrote into a live gate.**
+**ratio 0.9958, `E` came in 0.4% UNDER.** The claimed `8×` **equals the worker count** (`7.967`) —
+it is core-h ÷ wall-h. The structural story is contradicted too (**21.44** epochs/attempt vs U5's
+**21.95**, **95.389 s/epoch** vs a 95 s model): **both factors of the cost model were accurate.**
+`E`'s forward pricing table is fine; only the comparison was wrong. **THIRD Conductor-record defect
+a verifier has caught, and the first one the Conductor wrote into a live gate.**
 
-**`V-W3`'s three confirmations.** **(1)** `E`'s headline reproduces **6 of 6** off a recount of the
-16 attempt rows (2 converged, 0 recovered, control **R** at `1.5243710606417483e-10`, `PULL_TO_LOW_S`,
-`MIXED` `p = 0.9316534173291335`), with two nuances already in the artefact: `1.5e-10` is control
-**R**'s alone (**P** sits at `7.75e-09`), and `PULL_TO_LOW_S` is the `n = 23` converged subset — over
-all 200 the statistic is `NO_PULL`. **(3)** `V-W2` confirms on **both** parts: all four
-re-measurements land, re-derived from primaries not from `V-W2`'s record (the VU zip re-downloaded
-and `.mat` fields matched **bitwise**, `r_min`/`r_max` recomputed bitwise, `T4`'s census recounted
-7/4/5/2 off an independent `pdftotext`, `T6`'s verdicts 4/2/1, `T5`'s corpus re-enumerated at
-**1428 files / 417476 lines**), and the **re-fetch-and-SHA-256 method is in the artefact, not the
-prose** — all three hashes reproduce today. **(4)** `fig107` absent from `P2_EVIDENCE` confirmed by
-`ast.literal_eval`: **36 entries, ids `[48…82, 99–106, 108, 109, 110]`, `107` the only gap** in
-99–110; `fig107` appears in **0 string tokens, 2 comment tokens**. Script and `.png` exist and
-`INDEX.md` cites it, so **it is rebuilt and self-checked by nothing.** **0 UNREACHABLE.**
+**`V-W3`'s three confirmations, in one line each** (detail: `experiments/journal/verify_wave3.md`
+§§2–3, §3j remedy — pointer, not restatement). **(1)** `E`'s headline reproduces **6 of 6** off a
+recount of the 16 attempt rows, with two nuances already in the artefact. **(3)** `V-W2` confirms on
+**both** parts, re-derived from primaries not from `V-W2`'s record — VU `.mat` fields **bitwise**,
+`T5`'s corpus **1428 files / 417476 lines**, all three SHA-256 reproducing today. **(4)** `fig107`
+absent from `P2_EVIDENCE` confirmed by `ast.literal_eval` — 36 entries, `107` the only gap in 99–110;
+it is rebuilt and self-checked by nothing. **0 UNREACHABLE.**
+
+**`L2′`'s finding, and it is sharper than "still no method".** For any **nontrivial** backward
+λ-DSS blow-up profile of 3D NS the far-field decay exponent is pinned to **exactly `α = 1`**:
+**≥ 1** by Chae–Wolf Thm 1.1, **≤ 1** by Chae–Wolf Rmk 1.2 + Escauriaza–Seregin–Šverák, restated
+independently by Pineau–Vicol (`arXiv:2607.09619v2`, 6 Aug 2026) §1.2. **Any `α > 1` puts `U ∈ L³(ℝ³)`
+and yields FULL REGULARITY** — no singularity left to localise. Leg 381's bill asks `α > 1.5`, i.e. it
+**overshoots the `L³` threshold by 0.5**. So the deficit is **not a gap a sharper technique might
+close**; it is a step into a region the literature has emptied. The object is alive at all only
+because `λ = 1.7 ≫ 1` defeats the λ-near-1 hypotheses of Chae–Wolf Thm 1.3 and Pineau–Vicol
+Thms 1.6/1.7 — but **Rmk 1.2's `L³` clause carries no λ restriction**, so `λ ≫ 1` does not save it
+there. **This says NOTHING about whether 3D NS is regular**, and it retires **no** obligation:
+§6(i) wants *certified* decay and an admissible cutoff, and `L2′` certified nothing.
 
 **Defects D1–D6 are located, sized and STILL UNREPAIRED** (`experiments/journal/verify_wave3.md` §4).
 D1 (the units error) is corrected **here and in `OPTIONS.md`** in this commit; **D2–D6 are wave 5's
@@ -176,8 +175,11 @@ repair unit**, which is a separate unit because a verifier's findings must not b
 that planned the wave. Re-run any time: `.venv/bin/python experiments/verify_wave3_rederive.py`.
 
 **WAVE 5 MUST CARRY:** a verifier for `V3` and `L2′` (**you may not verify a wave you planned**);
-the D2–D6 repair unit; and **the composition floor from a non-T lane again.** Lane L is now the
-**sole** priority lane and still has never landed a unit.
+the D2–D6 repair unit; the composition floor from a non-T lane; and — **§3i q7, and it is the
+sharpest flag on this page — A UNIT THAT BUILDS SOMETHING.** The last three units (`V3`, `V-W3`,
+`L2′`) are a grading, a verification and a reading: **zero construction in three.** Lane L's live
+residual is W4 clause (b), **a natively finite-energy ansatz that never asks the profile for decay**
+— uncosted, unpre-registered, and the natural home for that construction.
 
 ## Open — needs the user, not a task
 

@@ -13,7 +13,7 @@ verifier, do not re-raise the C1 escalation, do not redo `T1`'s machine record: 
 
 ---
 
-## LIVE — CONDUCTOR mode, **WAVE 4: TWO OF THREE RETURNED**, 2026-08-18
+## LIVE — CONDUCTOR mode, **WAVE 4 CLOSED: ALL THREE RETURNED**, 2026-08-18
 
 **Plan committed BEFORE dispatch at `8f4cb53`; dispatch record `d0c2c5d`. Gates and pre-committed
 readings live there in final wording and are quoted BY POINTER per §3j rule 5, not restated.**
@@ -22,9 +22,9 @@ readings live there in final wording and are quoted BY POINTER per §3j rule 5, 
 |---|---|---|---|
 | `V3` / leg 399 | **V** | `leg/399-v3-gradeA` @ `16ba44e` | **RETURNED. GATE `YES` on 1 row of 9.** Merged. `UNVERIFIED`. |
 | `V-W3` | verification | `verify/wave3` @ `2b8755e` | **RETURNED. 3 of 4 CONFIRMED, 1 REFUTED.** Merged. `UNVERIFIED`. |
-| `L2′` / leg 397 | **L** | `leg/397-l2-decay` | **IN FLIGHT.** §§0–3 committed and binding; executing §§4+. |
+| `L2′` / leg 397 | **L** | `leg/397-l2-decay` @ `1493e5e` | **RETURNED. GATE `YES`, all 18 techniques.** Merged. §§0–3 byte-identical to the pre-registration. `UNVERIFIED`. |
 
-**THE TWO RESULTS, IN ONE LINE EACH.**
+**THE THREE RESULTS, IN ONE LINE EACH.**
 - **`V3`:** leg 174's Grade-A × fluid cell is **OCCUPIED** — `arXiv:2509.25116` passes both of leg
   174's clauses and had never been graded here — **but the certified object is not a finite-time
   singularity**, and W3's prose test and its own named grading predicate **disagree on whether that
@@ -36,6 +36,14 @@ readings live there in final wording and are quoted BY POINTER per §3j rule 5, 
   and the Conductor had written it into a live gate.** Third such defect a verifier has caught.
   Corrected in `STATE.md` and `OPTIONS.md` this commit; **D2–D6 left unrepaired for wave 5.**
 
+- **`L2′`:** Lane L's **first landed unit in 399 legs**, and it **narrowed the lane**: 18 techniques
+  read against this object, failing hypothesis named/quoted/located in every one, and **ZERO could
+  supply `α > 1.5` even in principle** — `α` is **pinned to exactly 1** (Chae–Wolf Thm 1.1 from
+  below; Chae–Wolf Rmk 1.2 + ESŠ from above, restated by Pineau–Vicol `2607.09619` §1.2), and any
+  `α > 1` gives **full regularity**. **W4 clause (a) is measured SHUT. §6(i) is NOT retired** —
+  nothing was certified. **A closed attack is not a broken wall and is not progress toward Clay.**
+  What survives in Lane L: W4 clause (b) — a natively finite-energy ansatz — and `L3`/§6(ii).
+
 **§3i WAS RUN PER UNIT, NOT PER WAVE** — seven questions answered twice in the integration commit.
 The re-rank came out of q3/q5/q6 and is recorded in `WALLS.md` and `STATE.md`, not only here.
 
@@ -43,20 +51,29 @@ The re-rank came out of q3/q5/q6 and is recorded in `WALLS.md` and `STATE.md`, n
 
 | file | cap | now | headroom |
 |---|---|---|---|
-| `STATE.md` | 24,576 | **24,077** | 499 (longest row 542 / 600) |
-| `WALLS.md` | 32,768 | **31,224** | 1,544 |
-| `OPTIONS.md` | 24,576 | **24,519** | 57 |
+| `STATE.md` | 24,576 | **24,414** | **162** (longest row 542 / 600) |
+| `WALLS.md` | 32,768 | **32,600** | **168** |
+| `OPTIONS.md` | 24,576 | **24,561** | **15** |
 | this LIVE block | 8,192 | see commit | — |
+
+**⚠ THE CAPS ARE NOW THE BINDING CONSTRAINT, AND THIS IS A FINDING, NOT A COMPLAINT.** Three of the
+four capped files sit inside **0.7%** of their limits **on live content**, and every named §3j
+remedy has been applied: `WALLS.md`'s History is out to `WALLS_HISTORY.md`; `OPTIONS.md`'s `TAKEN`
+entries are one line plus a pointer; `STATE.md`'s detail is in the units' journals. Integrating
+`L2′` alone required compacting **all three**. **The next wave cannot land a result of this size
+without either a structural split or a cap ruling** — flagged for the user, **not decided here**.
+What was compacted this commit, so nothing looks silent: `STATE.md` wave-3 block and `V-W3` detail
+→ pointers; `WALLS.md` `R2`–`R5` → `OPTIONS.md` §B pointer (their ledger already lives there);
+`OPTIONS.md` Lane T `TAKEN` rows → one row. **No measurement was dropped and nothing was unstruck.**
 
 **§3j REMEDY EXTENDED ONE STEP, FLAGGED NOT SILENT.** `WALLS.md`'s named remedy — *retracted text
 stays struck but moves to a `## History` section at the foot* — had stopped buying headroom once that
 section reached ~2.9 KB. **History moved to `WALLS_HISTORY.md`, struck text byte-for-byte intact,
-nothing deleted, nothing unstruck**, every `## History` pointer resolving there. `OPTIONS.md` is at
-**57 bytes of headroom and the next session must compact it before adding anything.**
+nothing deleted, nothing unstruck**, every `## History` pointer resolving there. `OPTIONS.md` was compacted again here under its own named remedy.
 
 **Cycles: context was summarised twice this Conductor session**; all four files were re-read from
-disk after each. `git ls-remote` checked before this integration: **no concurrent push**; `origin/main`
-and local `main` agreed at `950115f`.
+disk after each. `git ls-remote` checked before **both** integrations: **no concurrent push**; `origin/main` and
+local `main` agreed at `950115f`, then at `6320790`.
 
 ### Open escalations
 
