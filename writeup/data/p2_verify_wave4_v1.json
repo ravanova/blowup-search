@@ -1,0 +1,285 @@
+{
+ "unit": "V-W4",
+ "kind": "ADVERSARIAL VERIFICATION",
+ "branch": "verify/wave4",
+ "covers": "WAVE 4 ONLY (units V3 and L2'). A verifier may not verify a wave it planned.",
+ "gate_source": "writeup/waves/WAVE5_PLAN.md @ 1e49a00, section '## `V-W4` -- verification'",
+ "date": "2026-08-18",
+ "what": "Re-measurement of wave 4's two banked results from RE-FETCHED PRIMARY SOURCES AND BANKED ARTEFACTS ALONE, never from any journal's prose. REPORT, DO NOT REPAIR: nothing belonging to V3 or L2' was edited, and no fix was applied.",
+ "method": {
+  "sources_refetched_today": 22,
+  "sources_unreachable": [
+   "Escauriaza-Seregin-Sverak, ARMA 169 (2003) 147-157",
+   "Escauriaza-Seregin-Sverak, Russian Math. Surveys 58 (2003) 211-250"
+  ],
+  "unreachable_is_banked_as_itself_never_as_a_zero": true,
+  "quote_anchoring": "two levels: STRICT (NFKD fold, dash/quote/ligature normalisation, de-hyphenation across line breaks, whitespace collapse, casefold) and TOKEN (alphanumeric runs only, to separate rendering artefacts from real misquotes)",
+  "artefacts_regenerated": [
+   "writeup/data/p2_route_cloc_v1.json",
+   "writeup/data/p2_route_l2_decay_v1.json"
+  ],
+  "regeneration_was_bit_identical": true,
+  "generators_were_copied_out_of_the_repo_before_running": true,
+  "outreach": "NONE. READ, DO NOT CONTACT. Not one author, group or list was contacted."
+ },
+ "items": {
+  "1": {
+   "gate": "does arXiv:2509.25116 pass BOTH of leg 174's clauses on the verifier's own reading, and is the object NOT a finite-time singularity as V3 reports?",
+   "verdict": "REPRODUCES",
+   "evidence": [
+    "2509.25116v2 re-fetched, sha256 2d369e...8318, stamp 'arXiv:2509.25116v2 [math.AP] 19 Mar 2026' matches V3's 'v2, 19 Mar 2026'",
+    "eq. (1.1) is 3D incompressible Navier-Stokes; the CERTIFIED system (1.12) carries -Delta Utilde and -Delta vtilde; Proposition 1 eq. (1.15) carries -Delta Ubar",
+    "interval arithmetic named as the enclosure mechanism at 4 independent places (SS1.5, SS1.6, SS7.3, SS7.4); SS7's opening anchors verbatim",
+    "leg 174's criterion at PUB_0C_CENSUS_SPINE.md SS1 has EXACTLY TWO clauses and NEITHER mentions blow-up; V3's restatement is character-identical modulo a dropped parenthetical",
+    "V3's criterion_note EXPLICITLY REFUSES to fold concludes_pde_singularity into the criterion -- no blow-up clause was silently imported",
+    "object is NOT a finite-time singularity: SS1.2 p.2 'The readers should not confuse this self-similar setting...' anchors strict; Theorem 1's conclusion is NONUNIQUENESS and the solutions are 'smooth for positive times'"
+   ],
+   "adversarial_notes": [
+    "The enclosure closes by SCHAUDER FIXED POINT on a coercive+compact+finite-rank decomposition, NOT by a radii-polynomial / Newton-Kantorovich contraction. C1 IS THEREFORE NOT ENGAGED, and C1 is not cited anywhere in this unit as evidence that any apparatus closes.",
+    "The arXiv abs page carries NO journal-ref: 2509.25116 is an UNREFEREED PREPRINT, while PUB_0C SS1 says the cell 'has never been filled by any PUBLISHED work'. This is a BAN/WORDING defect and therefore a USER ESCALATION. IT IS RECORDED, NOT RULED."
+   ]
+  },
+  "2": {
+   "gate": "the 8 NO rows -- does each failing clause hold as quoted?",
+   "verdict": "REPRODUCES on every one of the 8 NO verdicts",
+   "papers_refetched": 8,
+   "papers_unreachable": 0,
+   "verbatim_quote_defects": [
+    {
+     "id": "D1",
+     "row": "R7",
+     "arxiv": "2509.14185",
+     "defect": "the word 'stringent' is DROPPED from a field named failing_clause_quoted",
+     "material": false
+    },
+    {
+     "id": "D2",
+     "row": "R6",
+     "arxiv": "2208.09445",
+     "defect": "ATTRIBUTION: the second failing clause is verbatim and at the stated location (SS1.1.2, p.4), but SS1.1.2 sits under SS1.1 'Background' and the sentence describes PRIOR WORK [69], not this paper's own construction",
+     "why_the_verdict_survives": "V3's FIRST failing clause (SS7 opening, p.54) IS the paper's own voice, and Theorem 1.3 (p.5) independently confirms the NS blow-up's limiting profiles (U^E,S^E) are the EULER profiles of Theorem 1.2 solving ODE (1.5)",
+     "material": false
+    },
+    {
+     "id": "D3",
+     "row": "R5",
+     "arxiv": "2305.05660v3",
+     "defect": "banked 'linear' where the paper says 'NON-linear'; plus an inserted 'the'",
+     "material": false
+    },
+    {
+     "id": "D4",
+     "row": "R3",
+     "arxiv": "2605.15149v1",
+     "defect": "inserted 'the'; 'in INTLAB' is not the paper's phrasing; the 'Interval Arithmetic.' paragraph is at p.71, not '~68' (SSB.3 is titled 'Rigorous piecewise bounds')",
+     "material": false
+    }
+   ],
+   "side_claim_checked_mechanically": {
+    "row": "R3",
+    "arxiv": "2605.15149v1",
+    "viscos_star": 0,
+    "laplac_star": 0,
+    "navier": 2,
+    "navier_occurrences": [
+     "one body literature-survey hit citing [34]",
+     "one bibliography entry, which IS arXiv:2509.25116"
+    ],
+    "V3_was": "EXACTLY RIGHT"
+   },
+   "note": "R9 (2410.05480) was NOT re-read by V3, which says so honestly. The verifier re-fetched it and confirms NLS/CGL: a complex-field semilinear equation with no transport nonlinearity and no incompressibility."
+  },
+  "3": {
+   "gate": "L2's PIN AT alpha = 1: re-fetch 1610.09464 and 2607.09619, verify by anchor and hash, and answer whether the 'at most 1' direction ACTUALLY FOLLOWS",
+   "verdict": "REPRODUCES, with TWO DISCREPANCIES and ONE UNREACHABLE",
+   "hashes": {
+    "1610.09464.pdf": {
+     "banked": "f1d14db17f643323cfa1a16ba661eb9d",
+     "recomputed": "f1d14db17f643323cfa1a16ba661eb9d",
+     "match": true
+    },
+    "1610.09464.txt": {
+     "banked": "73279aa90ce78c1190d0027000fd1cf2",
+     "recomputed": "73279aa90ce78c1190d0027000fd1cf2",
+     "match": true
+    },
+    "2607.09619.pdf": {
+     "banked": "53680cb802803dda9b0a27975c7d1270",
+     "recomputed": "53680cb802803dda9b0a27975c7d1270",
+     "match": true
+    },
+    "2607.09619.txt": {
+     "banked": "01bdf4c836b3a8b6ddfa071618335ef2",
+     "recomputed": "01bdf4c836b3a8b6ddfa071618335ef2",
+     "match": true
+    }
+   },
+   "strongest_reproduction": "L2's OWN generator, experiments/p2_route_l2_v1_evidence.py, re-run against the TWELVE source texts the verifier fetched and converted itself today, regenerates writeup/data/p2_route_l2_decay_v1.json BIT-IDENTICALLY, self_hash fd5c410859eb764b both sides.",
+   "escauriaza_seregin_sverak_at_primary": {
+    "status": "UNREACHABLE",
+    "why": "both 2003 papers are journal-only; au:'Escauriaza' on the arXiv API returns 25 entries and NEITHER is among them (instrumented, http 200, not a throttle); no S2 key exists here; READ-DO-NOT-CONTACT binds",
+    "banked_as": "UNREACHABLE, never as a zero",
+    "what_the_record_then_rests_on": [
+     "Chae-Wolf arXiv:1610.09464v2 Remark 1.2 -- ONE unproved sentence, no hypotheses stated",
+     "Pineau-Vicol arXiv:2607.09619v2 SS1.2 -- ONE unproved sentence, no hypotheses stated, and stated for ROTATED GLOBALLY self-similar solutions, NOT for DSS",
+     "AND, located by this verifier and reachable at primary: Seregin arXiv:math/0510396 SS1, which states the SAME result in a LOCAL SUITABLE-WEAK-SOLUTION form with NO finite-energy hypothesis, citing ESS Russian Math. Surveys 58 (2003) as its [2]"
+    ]
+   },
+   "discrepancies": [
+    {
+     "id": "D5",
+     "what": "the two secondaries cite TWO DIFFERENT ESS papers, and Chae-Wolf's is the one that contains NO Navier-Stokes regularity theorem",
+     "detail": "Chae-Wolf Remark 1.2 says 'by using the result in [5]'; Chae-Wolf's [5] is verbatim 'L. Escauriaza, G. Sergin, and V. Sverak. BACKWARD UNIQUENESS FOR PARABOLIC EQUATIONS, Arch. Ration. Mech. Anal., 169, pp. 147-157, 2003' -- a backward-uniqueness lemma for parabolic operators, which states no NS regularity criterion. The paper that does is 'L3,infty-solutions of the Navier-Stokes equations and backward uniqueness', Russian Math. Surveys 58 (2003) 211-250, which Pineau-Vicol cite as [23]. On its face the citation carrying L2's load-bearing row T2c points at a paper that cannot deliver the conclusion drawn from it.",
+     "note_in_L2s_favour": "T2c's `name` field says 'via Escauriaza-Seregin-Sverak BACKWARD UNIQUENESS', which matches Chae-Wolf's [5] exactly, and T2c's `citation` names no ESS paper. The artefact neither states nor mis-states which one. The GATE's own gloss -- 'it is the L^{3,infty}/L^3 regularity criterion result' -- names the OTHER paper.",
+     "repaired": false
+    },
+    {
+     "id": "D6",
+     "what": "honest_ceiling.the_pin's word 'independently' overstates what Pineau-Vicol say",
+     "detail": "Pineau-Vicol SS1.2 states the implication for ROTATED GLOBALLY SELF-SIMILAR (RSS) solutions -- 'This argument applies to rotated self-similar solutions' -- NOT for discretely self-similar ones. Route 4's object is DSS at fixed lambda >> 1. For the ACTUAL OBJECT the implication is stated at primary by CHAE-WOLF REMARK 1.2 ALONE. The extension of PV's sentence to DSS is immediate (||u(.,t)||_{L^3} = ||U(.,s)||_{L^3} is s-periodic hence bounded) but that step is the VERIFIER's, not PV's, and is not in PV's bytes. Further, the two are not independent: both terminate at ESS. Independent AUTHORS, not an independent PROOF.",
+     "repaired": false
+    }
+   ],
+   "the_load_bearing_objection_and_its_resolution": {
+    "objection": "the classical GLOBAL ESS statement is for LERAY-HOPF solutions -- finite energy -- and route 4's object has INFINITE energy on R^3",
+    "measured": {
+     "int_{|y|<1e2}|U|^2": 1153.09,
+     "int_{|y|<1e4}|U|^2": 125445.0,
+     "int_{|y|<1e6}|U|^2": 12566000.0,
+     "int_{|y|<1e8}|U|^2": 1256640000.0,
+     "growth": "linear in the cutoff radius; the integral over R^3 diverges"
+    },
+    "therefore": "the object is NOT a Leray-Hopf solution and the GLOBAL form of ESS does not apply to it",
+    "but": "Seregin arXiv:math/0510396 SS1 -- reachable, fetched today, by an ESS AUTHOR -- states the same result for SUITABLE WEAK SOLUTIONS on Q_T = Omega x ]0,T[ for ANY Omega, defined by v in L_{2,inf}(Q_T) cap W^{1,0}_2(Q_T), p in L_{3/2}(Q_T), the equations in the sense of distributions, and the LOCAL ENERGY INEQUALITY. No finite-energy hypothesis. Russian convention L_{3,inf}(Q_T) = L_inf(0,T;L_3(Omega)), confirmed by its own ref [6] (Neustupa, 'in the class L_inf(0,T;L_3(Omega)^3)').",
+    "object_supplies_the_local_hypotheses": {
+     "sup_t int_{B_1}|u|^2": 1.42887,
+     "int_{-1}^{0} int_{B_1}|grad u|^2": 628344.0,
+     "local_energy_inequality": "holds with EQUALITY, since u is C^inf(Q) by hypothesis"
+    },
+    "seregin_m_T_criterion_separates_the_two_cases_exactly_at_the_pin": {
+     "alpha_eq_1": {
+      "m_T": "+infinity",
+      "int_{B_1}|u|^3_at_|s|=1e-4,1e-8,1e-16,1e-32": [
+       57.9953,
+       115.742,
+       231.481,
+       462.962
+      ],
+      "reading": "LOG-DIVERGENT; the criterion DOES NOT APPLY; the case stays open"
+     },
+     "alpha_gt_1": {
+      "m_T": "||U||^3_{L^3} < infinity, s-independent",
+      "reading": "the criterion APPLIES; (0,0) is a REGULAR point"
+     }
+    },
+    "and_then": "DSS scaling u(lam^{-k} y, lam^{-2k} s) = lam^k u(y,s) with |u| <= M near the origin forces lam^k |u(y,s)| <= M for every k, hence u == 0"
+   },
+   "answer_to_the_gate_question": "YES -- the 'at most 1' direction ACTUALLY FOLLOWS. But it follows through the LOCAL suitable-weak-solution form of the ESS result, NOT the global Leray-Hopf form that the phrase 'by Escauriaza-Seregin-Sverak' invites, and the record nowhere says so. The record did NOT overstate a secondary's paraphrase -- both secondaries say what the record says they say, character for character. What the record understates is HOW MUCH IS TAKEN ON TRUST in two unproved one-sentence remarks whose stated hypotheses the object provably fails in the global reading."
+  },
+  "4": {
+   "gate": "all 8 FAILS-BY-CONSTRUCTION and the 1 SATISFIED -- is any verdict wrong on the quoted hypothesis?",
+   "verdict": "REPRODUCES",
+   "rows_checked": [
+    "T2a (SATISFIED)",
+    "T1b",
+    "T3a",
+    "T3b",
+    "T4a",
+    "T4c",
+    "T5",
+    "T6",
+    "T10"
+   ],
+   "verdicts_wrong": 0,
+   "all_18_rows_quote_integrity": {
+    "chars_match": 18,
+    "sha256_12_match": 18,
+    "anchored_strict": 18,
+    "not_anchored": 0,
+    "unreachable": 0
+   },
+   "verdict_counts_recomputed": {
+    "FAILS": 9,
+    "FAILS-BY-CONSTRUCTION": 8,
+    "SATISFIED": 1
+   },
+   "observations_not_changing_any_verdict": [
+    {
+     "id": "O1",
+     "row": "T1b",
+     "what": "the field is `decisive_hypothesis_quote` and the decisive hypothesis is 'backward GLOBALLY self-similar', but the 144-char quote is about L^p profiles and local energy estimates; the SS clause is supplied by the surrounding Pineau-Vicol section title, not by the quoted bytes"
+    },
+    {
+     "id": "O2",
+     "row": "T6",
+     "what": "the row is labelled Giga-Kohn but quotes NO Giga-Kohn text at all -- it quotes Pineau-Vicol on the Navier-Stokes analogue. The artefact declares this honestly in `location`; it is still a row whose named source is never quoted"
+    },
+    {
+     "id": "O3",
+     "rows": "T1a / T6",
+     "what": "T1a's 99-char quote is a STRICT PREFIX of T6's 492-char quote -- the same Pineau-Vicol sentence. Two rows, one piece of text; not two pieces of evidence"
+    }
+   ]
+  },
+  "5": {
+   "gate": "L2's bill re-derivation against p2_route_cloc_v1.json -- do the numbers and the self_hash match?",
+   "verdict": "REPRODUCES",
+   "cloc_self_hash": {
+    "stored": "58c57b62c0cbc80d",
+    "recomputed": "58c57b62c0cbc80d",
+    "match": true
+   },
+   "L2_source_self_hash_equals_cloc_self_hash": true,
+   "L2_self_hash": {
+    "stored": "fd5c410859eb764b",
+    "recomputed": "fd5c410859eb764b",
+    "match": true
+   },
+   "cloc_regenerates_bit_identically": true,
+   "fields_compared": 11,
+   "fields_matching": 11,
+   "fields_mismatching": 0,
+   "independently_rederived_not_copied": {
+    "L2_threshold_alpha": "L^p needs p*alpha - 2 > 1 => alpha > 3/2 = 1.5, MATCH",
+    "L3_threshold_alpha": "alpha > 3/3 = 1.0, MATCH",
+    "deficit": "1.5 - 1.0 = 0.5, MATCH",
+    "overshoot": "1.5 - 1.0 = 0.5 -- any alpha paying the L^2 bill lands STRICTLY INSIDE L^3, which item (3) measures to be FATAL",
+    "increment_spread": "is a RELATIVE spread, (max-min)/mean = 7.393926e-10, MATCH"
+   },
+   "note_N1": "critical_L3_tail_cubed_increment_per_decade = 326.875 is NOT scale-free: it carries leg 381's field amplitude. A unit-amplitude model |U| <= (1+|y|)^-1 gives 4*pi*ln10 = 28.935 per decade, a factor 11.30. The LOAD-BEARING content -- a CONSTANT increment per decade, i.e. LOGARITHMIC divergence of the critical L^3 tail at alpha = 1 -- reproduces independently. The absolute number does not travel outside leg 381's model and should not be quoted as if it did."
+  }
+ },
+ "discrepancies_first_and_unsoftened": [
+  "D5 -- ITEM (3): Chae-Wolf's [5] is ESS 'Backward uniqueness for parabolic equations' (ARMA 169), which contains NO Navier-Stokes regularity theorem. The paper that does is ESS Russian Math. Surveys 58, cited by Pineau-Vicol as [23]. The citation carrying the load-bearing row T2c points, on its face, at a paper that cannot deliver its conclusion.",
+  "D6 -- ITEM (3): 'restated independently by Pineau-Vicol' overstates. PV state it for ROTATED GLOBALLY self-similar solutions, not DSS; for the actual object only Chae-Wolf states it. And both terminate at ESS: independent authors, not an independent proof.",
+  "D1 -- ITEM (2): 'stringent' dropped from a field named failing_clause_quoted (R7 / 2509.14185).",
+  "D2 -- ITEM (2): attribution defect -- R6's second failing clause describes prior work [69], not 2208.09445's own construction.",
+  "D3 -- ITEM (2): 'linear' banked where 2305.05660v3 says 'NON-linear'; plus an inserted 'the'.",
+  "D4 -- ITEM (2): inserted 'the'; 'in INTLAB' is not the paper's phrasing; paragraph is at p.71, not '~68' (R3 / 2605.15149v1).",
+  "O1, O2, O3 -- ITEM (4): three quote-provenance observations (see items.4).",
+  "N1 -- ITEM (5): 326.875 per decade is amplitude-dependent, not a portable constant.",
+  "NOT A DISCREPANCY BUT A USER ESCALATION -- ITEM (1): arXiv:2509.25116 carries NO journal-ref and is an UNREFEREED PREPRINT, while PUB_0C SS1 speaks of 'any PUBLISHED work'. A defective ban/criterion WORDING is a USER escalation. RECORDED, NOT RULED."
+ ],
+ "none_of_the_discrepancies_changes_a_verdict_or_a_number": true,
+ "nothing_was_repaired": true,
+ "honest_ceiling": {
+  "tier": "TIER 2",
+  "overall": "PASS. All five gate items REPRODUCE. Both wave-4 artefacts regenerate bit-identically from primaries re-fetched today. The discrepancies located are editorial and attributional; none changes a verdict or a number. This is a REAL RESULT and it is said plainly.",
+  "does_any_link_of_L1_to_L4_move": "NO. A verification -- even a clean PASS -- builds nothing, certifies nothing and realises no profile. NO LINK OF THE L1->L4 CHAIN MOVED.",
+  "clay_odds": "~0.05%, unchanged. Scale is not evidence and Tier 2 is never a proof.",
+  "C1": "BINDS throughout, was not lifted, narrowed, re-read or argued against, and is NOT cited anywhere in this unit as evidence that any apparatus closes. It is not engaged by 2509.25116, whose enclosure closes by Schauder fixed point.",
+  "what_this_does_NOT_say": [
+   "It does NOT say 3D Navier-Stokes is regular, or singular. It says nothing whatever about that.",
+   "It does NOT retire any CLAY_OBLIGATION. Verifying a reading certifies nothing and builds nothing.",
+   "It does NOT establish that nobody has filled leg 174's Grade-A x fluid cell -- only that V3's NAMED LIST is correctly graded.",
+   "It does NOT read Escauriaza-Seregin-Sverak. ESS remains UNREACHABLE at primary in this repository."
+  ]
+ },
+ "deliverables": [
+  "experiments/journal/verify_wave4.md",
+  "experiments/verify_wave4_rederive.py",
+  "writeup/data/p2_verify_wave4_v1.json"
+ ],
+ "territory_respected": "no artefact, journal or script belonging to V3 or L2' was edited; STATE.md, WALLS.md, OPTIONS.md, ORCHESTRATION.md and reports/ were not touched; both generators were copied out of the repository before being re-run",
+ "self_hash": "3f67cf85d9fcc5df"
+}
