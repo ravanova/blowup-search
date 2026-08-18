@@ -67,6 +67,30 @@ disk, at a resumable granularity, saying where. Push the branch only: **never me
 after each summarisation and after the fork closed. **All three files are within a few hundred bytes
 of their caps — the next Conductor should expect to compact again before it can add anything.**
 
+### DISPATCH RECORD — wave 4 is AWAY, 2026-08-18
+
+All three units dispatched **after** the plan was committed at `8f4cb53` and pushed, in the order
+§3f rule 3 requires: **construction first, verifier last.**
+
+| unit | branch it must push | dispatch order | status |
+|---|---|---|---|
+| `V3` | `leg/399-v3-gradeA` | 1st | IN FLIGHT |
+| `L2′` | `leg/397-l2-decay` (resumes `a9a4370`) | 1st | IN FLIGHT |
+| `V-W3` | `verify/wave3` | last | IN FLIGHT |
+
+Every brief carries, verbatim: **commit during the run, not only at the gate** (2026-08-14 host exit,
+five workers lost; wave 3 lost three of four and only the committed one left anything); **mandatory
+checkpointing above ~1 h wall, to disk, resumable, saying where**; **push the branch only — never
+merge, never push to `main`**; **never read `DIRECTION.md`**; **re-derive from `writeup/data/*.json`,
+never from prose**; **READ, do not CONTACT**; `UNREACHABLE`/`THROTTLED` bank as themselves, never as
+zeros; **`UNDER-RESOURCED` with a cost, never a bare `no`**. `L2′`'s adds that `leg_397.md` §§0–3 are
+**COMMITTED AND BINDING — execute §§4+**. `V-W3`'s adds **report, do not repair** and **covers waves
+1 and 3 ONLY, never wave 4**.
+
+**CONDUCTOR-OWNED DEBT HELD ON PURPOSE:** `fig107`'s registration in `writeup/build_figures.py` is
+gate item (4) of `V-W3`. Registering it now would destroy that measurement. **It stays unfixed until
+`V-W3` returns.**
+
 ### Open escalations — unchanged from the wave-3 block below
 
 `T1`'s ban-wording packet is on the user's desk (machine record **DISCHARGED**). The lift-clause
