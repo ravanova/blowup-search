@@ -2,12 +2,35 @@
   "leg": 399,
   "route": "V3",
   "branch": "leg/399-v3-gradeA",
-  "status": "PRE-REGISTERED, no rows graded",
+  "status": "IN PROGRESS -- 1 of 6 rows graded (checkpoint after row R1)",
   "criterion_source": "writeup/PUB_0C_CENSUS_SPINE.md §1 (leg 174's criterion, unchanged)",
   "criterion": {
     "grade_A": "the interval-arithmetic certificate encloses a solution of an equation that itself carries the dissipative term",
     "fluid": "the equation is a genuine fluid-dynamics equation (transport nonlinearity, incompressibility or a fluid-adjacent structure), not an off-axis scalar/complex-field model"
   },
-  "rows": [],
+  "criterion_note": "The criterion has exactly TWO clauses. Leg 174's ledger ALSO carries a field 'concludes_pde_singularity', but that field is NOT one of the two axes of the occupancy matrix (axes are fluid_adjacent x grade). This leg records it per row as a separate observable and does NOT fold it into the criterion -- folding it in would be TIGHTENING the criterion, which the dispatch forbids.",
+  "rows": [
+    {
+      "row": "R1",
+      "arxiv_id": "2509.25116",
+      "version_read": "v2, 19 Mar 2026 (full text, pdftotext of arxiv.org/pdf/2509.25116v2)",
+      "cite": "Thomas Hou, Yixuan Wang, Changhe Yang -- Nonuniqueness of Leray-Hopf solutions to the unforced incompressible 3D Navier-Stokes Equation",
+      "equation_certified": "The forward self-similar profile system (1.12) for the unforced 3D incompressible Navier-Stokes equation on R^3, jointly with its linearised eigenvalue problem: '-1/2 U~ - 1/2 xi.grad U~ + Pi(U~.grad U~) - Delta U~ = 0, div U~ = 0' and '-1/2 v~ - 1/2 xi.grad v~ + Pi(U~.grad v~ + v~.grad U~) - Delta v~ = lambda~ v~'.",
+      "dissipative_term_inside_certified_equation": true,
+      "dissipative_term_evidence": "Proposition 1 (Exact self-similar profile), eq. (1.15), p.5: 'there exists a U_bar satisfying the following equation in the distributional sense: -1/2 U_bar - 1/2 xi.grad U_bar - Delta U_bar + Pi(U.grad U_bar + U_bar.grad U + U_bar.grad U_bar) = -Pi E_U, div U_bar = 0 ... so that U~ = U + U_bar solves the first and third equations of (1.12). Moreover, the perturbation U_bar in H^1 satisfies ||U_bar||_{L^2} <~ eps_U.' The Laplacian is a term of the very equation the enclosure solves.",
+      "interval_arithmetic_evidence": "Section 7.3, p.55: 'All pointwise evaluations f_{i,j} are computed with interval arithmetic to enclose round-off.' Section 7.4: 'with interval arithmetic capturing floating-point uncertainty.' Section 7 opening, p.53: 'In this section, we outline the framework we use for rigorous computer-assisted validation; in particular, the rigorous justification for the constants in Section 4.5.'",
+      "genuine_fluid_equation": true,
+      "fluid_evidence": "Section 1, eq. (1.1), p.1: 'partial_t u + u.grad u - Delta u + grad p = 0, div u = 0, u(t=0,x) = u_in(x)' -- 'the three-dimensional incompressible Navier-Stokes equation on the whole space without forcing'. Transport nonlinearity AND incompressibility, both present in the certified profile system.",
+      "verdict": "GRADE_A_FLUID",
+      "failing_clause_quoted": null,
+      "failing_clause_location": null,
+      "concludes_pde_singularity": false,
+      "not_a_blowup_quoted_verbatim": "'The readers should not confuse this self-similar setting, which starts from singular initial data, with the backward self-similar setting related to finite-time singularities from smooth initial data.'",
+      "not_a_blowup_location": "Section 1.2 'Self-similar setting', p.2, immediately after eq. (1.5)",
+      "not_a_blowup_corroboration": "Theorem 1, p.2: 'There exist infinitely many distinct suitable Leray-Hopf solutions to the Navier-Stokes equation (1.1) on R^3 x [0,1] with the same divergence-free initial condition u_in = u_loc of compact support ... The solutions are L^s([0,1];L^q(R^3)), for any q >= 2, 3/q + 2/s > 1, and smooth for positive times.' The theorem's conclusion is NONUNIQUENESS, not a finite-time singularity; the certified solutions are smooth for t>0.",
+      "already_graded_by_this_record": false,
+      "prior_adjudication": "NONE. Surfaced by leg 242's control net (experiments/journal/leg_242.md:73) but explicitly NOT graded against leg 174's Grade-A criterion -- WALLS.md:84-86 records that leg 242 'graded none against leg 174's Grade-A criterion, because that was not its gate.' It is absent from leg 174's 11-row ledger (writeup/data/p2_route_vbs_v1_scoping.json::ledger) although v1 (2025-09-29) predates leg 174. THIS LEG IS THE FIRST GRADING OF THIS ROW."
+    }
+  ],
   "honest_ceiling": null
 }
