@@ -282,3 +282,301 @@ evidence; its failing clause is eq. (1.1) itself.
 Four verbatim-quote defects (D1-D4) are located and sized above; **none of them changes any verdict**,
 and **none of them is repaired here**. `V3`'s eight `NO`s are, as it says itself, a statement about
 **this named list only**; they do not re-establish that nobody else filled the cell.
+
+---
+
+## §6 — ITEM (3): `L2'`'s PIN AT alpha = 1
+
+The gate: *"re-fetch `1610.09464` and `2607.09619`, verify the decisive quotes by anchor
+and hash, and answer the question the Conductor flagged as this result's LOAD-BEARING
+CEILING — THE 'AT MOST 1' DIRECTION RESTS ON ESCAURIAZA-SEREGIN-SVERAK, WHICH WAS NOT
+READ AT PRIMARY AND REACHES THE RECORD ONLY THROUGH TWO SECONDARIES. DOES THE DIRECTION
+ACTUALLY FOLLOW?"*
+
+### §6.1 — hashes, re-fetched today
+
+| file | banked md5 | recomputed md5 | |
+|---|---|---|---|
+| `1610.09464.pdf` | `f1d14db17f643323cfa1a16ba661eb9d` | `f1d14db17f643323cfa1a16ba661eb9d` | **MATCH** |
+| `1610.09464.txt` | `73279aa90ce78c1190d0027000fd1cf2` | `73279aa90ce78c1190d0027000fd1cf2` | **MATCH** |
+| `2607.09619.pdf` | `53680cb802803dda9b0a27975c7d1270` | `53680cb802803dda9b0a27975c7d1270` | **MATCH** |
+| `2607.09619.txt` | `01bdf4c836b3a8b6ddfa071618335ef2` | `01bdf4c836b3a8b6ddfa071618335ef2` | **MATCH** |
+
+sha256 of the two PDFs as fetched today:
+`1f537bc2b6b2e7752db275a1eb1c903782068510c4d7bcd68dbdd45d14c0efdc` (Chae-Wolf) and
+`379591aa3c1036c9140702ebe71aaab309fe207439a57db5ceff893f15d0ae8e` (Pineau-Vicol).
+
+All three decisive quotes anchor **strict** (no token-level fallback needed), including
+Chae-Wolf's own typo *"For **evrey** C∗ > 0"* preserved unaltered in the artefact —
+evidence that the transcription is mechanical, not retyped.
+
+### §6.2 — the strongest single reproduction in this unit
+
+`L2'` carries its own generator, `experiments/p2_route_l2_v1_evidence.py`, which extracts
+every quote mechanically by a (start-anchor, end-anchor) pair. I re-ran that generator
+**against the twelve source texts I fetched and converted myself today**, with `PAPERS`
+and `OUT` redirected out of the repository so nothing of `L2'`'s was written:
+
+```
+banked self_hash fd5c410859eb764b   re-run self_hash fd5c410859eb764b
+payload bit-identical: True
+```
+
+`writeup/data/p2_route_l2_decay_v1.json` **regenerates bit-for-bit from primaries
+re-fetched today.** All 18 rows: `chars` MATCH, `sha256_12` MATCH, quote **ANCHORED
+(strict)**, zero `UNREACHABLE`, zero `NOT-ANCHORED`. `verdict_counts` recompute to
+`{FAILS: 9, FAILS-BY-CONSTRUCTION: 8, SATISFIED: 1}`.
+
+### §6.3 — ESS at primary: **UNREACHABLE**
+
+Both relevant Escauriaza-Seregin-Šverák papers are journal-only:
+
+* ESS, *Backward uniqueness for parabolic equations*, **Arch. Ration. Mech. Anal. 169
+  (2003) 147-157**;
+* ESS, *L_{3,∞}-solutions of the Navier-Stokes equations and backward uniqueness*,
+  **Russian Math. Surveys 58 (2003) no. 2, 211-250**.
+
+`au:"Escauriaza"` on the arXiv API returns **25** entries; **neither paper is among
+them** (instrumented, `http 200`, not a throttle). No S2 key exists here and
+**READ, DO NOT CONTACT** binds. **ESS banks as `UNREACHABLE`, never as a zero.**
+
+### §6.4 — DISCREPANCY D5: the two secondaries cite **two different ESS papers**, and
+Chae-Wolf's is the one that contains **no Navier-Stokes regularity theorem**
+
+Read at its own committed bytes, Chae-Wolf Remark 1.2 says
+
+> If u ∈ C((−∞, 0); L3(R3)), and discretely self-similar, then u ∈ L∞(−∞, 0; L3(R3)).
+> Thus, in case p = 3, **by using the result in [5]**, we get the full regularity u in Q.
+
+and Chae-Wolf's bibliography entry **[5]** is, verbatim:
+
+> [5] L. Escauriaza, G. Sergin, and V. Šverák. **Backward uniqueness for parabolic
+> equations**, Arch. Ration. Mech. Anal., 169, pp. 147–157, 2003.
+
+That is the **backward-uniqueness lemma for parabolic operators**. It states no
+Navier-Stokes regularity criterion at all. The paper that does is the *Russian Math.
+Surveys* one, which **Pineau-Vicol cite as [23]** — verbatim from `2607.09619`:
+
+> [23] L. Escauriaza, G. Seregin, V. Šverák. **L3,∞-solutions of the Navier-Stokes
+> equations and backward uniqueness**. Russian Math. Surveys 58 (2):211–250, 2003.
+
+**On its face, the citation carrying `L2'`'s load-bearing row `T2c` points at a paper
+that cannot deliver the conclusion drawn from it.** The load therefore transfers to the
+row `L2'` describes as the *second, independent* statement. Recorded; **not repaired**.
+(The `T2c` row's own `name` field says "via Escauriaza-Seregin-Sverak **backward
+uniqueness**", which matches Chae-Wolf's [5] exactly; the artefact names no ESS paper in
+`citation`, so the artefact itself neither states nor mis-states which one. The gate's
+own gloss — *"it is the L^{3,infty} / L^3 regularity criterion result"* — names the
+**other** paper.)
+
+### §6.5 — DISCREPANCY D6: `the_pin`'s word "independently" overstates what Pineau-Vicol say
+
+`honest_ceiling.the_pin` reads *"AT MOST 1 by Chae-Wolf Remark 1.2 +
+Escauriaza-Seregin-Sverak, **restated independently** by Pineau-Vicol (2026) Sec. 1.2."*
+Pineau-Vicol §1.2 at primary, in full:
+
+> Why is Conjecture 1.1 open for α ̸= 0? Assumption (1.9) only implies that the profile U
+> belongs to the weak-L3 class L3,∞(R3). Had we assumed that the profile decays a little
+> bit faster, to ensure that U ∈ L3(R3), then we would have u ∈ L∞([−1, 0); L3(R3)), and
+> by the theory of Escauriaza, Seregin, and Šverák [23] this would imply regularity (and
+> hence the triviality of U). **This argument applies to rotated self-similar solutions**
+> since (1.7) implies that ∥u(·, t)∥L3 = ∥U∥L3 for all t < 0 and α ∈ R.
+
+Two things follow, and neither is in the record:
+
+1. **The class is different.** Pineau-Vicol state it for **rotated globally self-similar
+   (RSS)** solutions, *not* for discretely self-similar ones. Route 4's object is DSS at
+   a fixed λ ≫ 1. For the **actual object** the implication is stated at primary by
+   **Chae-Wolf Remark 1.2 alone**. The extension of PV's sentence to DSS is immediate —
+   `‖u(·,t)‖_{L³} = ‖U(·,s)‖_{L³}` is periodic in `s` hence bounded — but that step is
+   **mine, not PV's**, and it is not in PV's bytes.
+2. **The two are not independent.** Both terminate at ESS. They are independent
+   *authors*, not an independent *proof*. Only one of them names the ESS paper that
+   contains a Navier-Stokes regularity theorem (D5).
+
+Recorded; **not repaired**.
+
+### §6.6 — the substantive question, measured
+
+Neither Chae-Wolf's one-sentence Remark 1.2 nor Pineau-Vicol's one-sentence §1.2 states
+the hypotheses of the ESS theorem being invoked. The classical global ESS statement is
+for **Leray-Hopf** solutions — finite energy. Route 4's object is not one:
+`experiments/verify_wave4_rederive.py` computes, at the banked α = 1,
+
+```
+int_{|y|<1e2} |U|^2 = 1153.09      int_{|y|<1e6} |U|^2 = 1.2566e+07
+int_{|y|<1e4} |U|^2 = 125445       int_{|y|<1e8} |U|^2 = 1.25664e+09
+```
+
+i.e. `∫_{R³}|u(·,t)|² dx = ∞`, growing linearly in the cutoff radius. **The object is not
+a Leray-Hopf solution and the global form of ESS does not apply to it.** That is the real
+load-bearing objection, and it is not addressed anywhere in the record.
+
+It does **not** sink the direction. Seregin — an ESS author — states the same result in a
+**purely local, suitable-weak-solution** form in a source that **is** reachable at
+primary (arXiv:`math/0510396`, *"Navier-Stokes equations: almost L3,∞-case"*, fetched
+today, `pdftotext` 688 lines). Its §1 defines `v, p` on `Q_T = Ω×]0,T[` for **any**
+`Ω ⊂ R³` by the three conditions
+
+> v ∈ L2,∞(QT) ∩ W21,0(QT), p ∈ L3/2(QT);  … the Navier-Stokes equations … in the sense of
+> distributions;  … the local energy inequality …
+
+and calls that pair *"a suitable weak solution to the Navier-Stokes equations in QT"*.
+Its §1 then records, of the condition `v ∈ L3,∞(QT)` (Russian convention:
+`L_{s,l}(Q_T) = L_l(0,T;L_s(Ω))`, i.e. **`L^∞_t L^3_x`** — confirmed by its own ref [6],
+Neustupa, *"in the class L∞(0,T;L3(Ω)³)"*):
+
+> Later, in [12], [2], it was proved that (1.5) implies regularity of v in QT and thus
+> NT = 0.
+
+with **[2] = ESS, Russian Math. Surveys 58 (2003) 211-250** — i.e. exactly Pineau-Vicol's
+[23]. **No finite-energy and no Leray-Hopf hypothesis anywhere.** Seregin's own Theorem
+1.1 is weaker still, needing only `m_T = liminf_{t↑T} (1/(T−t)) ∫_t^T ∫_Ω |v|³ < ∞`, and
+its proof reduces by scaling to the unit cylinder `B×]−1,0[`.
+
+The object supplies those local hypotheses. Re-derived numerically on `B_1 × (−1,0)` from
+the Type-I bound `|u| ≤ C/(√(−t)+|x|)`:
+
+```
+sup_t int_{B_1} |u|^2 dx            ~ 1.42887   < inf   (L_{2,inf})
+int_{-1}^{0} int_{B_1} |grad u|^2   ~ 6.28e+05  < inf   (W^{1,0}_2)
+```
+
+and `u` is `C^∞(Q)` by hypothesis, so the local energy inequality holds with **equality**.
+And the criterion separates the two cases exactly where the pin sits:
+
+```
+alpha = 1.0 : m_T = +infinity   (int_{B_1}|u|^3 = 57.99, 115.7, 231.5, 463.0
+                                 at |s| = 1e-4, 1e-8, 1e-16, 1e-32 — log-divergent)
+alpha > 1   : m_T = ||U||^3_{L^3} < infinity, s-independent
+```
+
+so at α > 1 the criterion **applies**, `(0,0)` is a regular point, and DSS scaling
+`u(λ^{−k}y, λ^{−2k}s) = λ^k u(y,s)` with `|u| ≤ M` near the origin forces `λ^k|u(y,s)| ≤ M`
+for every `k`, hence `u ≡ 0`. At α = 1 exactly it **does not apply** — by a logarithm.
+That is precisely why the case is open, and it is the sharpest available statement of
+*why*.
+
+### §6.7 — ITEM (3) VERDICT
+
+**REPRODUCES**, with **TWO DISCREPANCIES (D5, D6)** and **ONE UNREACHABLE (ESS itself)**.
+The pin at α = 1 stands: α ≥ 1 from Chae-Wolf Thm 1.1 (`T2a`, `SATISFIED`, quote anchored)
+and α ≤ 1 for any nontrivial profile. The direction **DOES follow** — but through the
+**local suitable-weak-solution** form of the ESS result, not the global Leray-Hopf form
+that the phrase "by Escauriaza-Seregin-Šverák" invites, and the record nowhere says so.
+The record did **not** overstate a secondary's paraphrase: both secondaries say what the
+record says they say, character for character. What the record understates is **how much
+is being taken on trust** in two unproved one-sentence remarks whose stated hypotheses the
+object provably fails in the global reading.
+
+---
+
+## §7 — ITEM (4): the 18 adjudications, all 8 `FAILS-BY-CONSTRUCTION` and the 1 `SATISFIED`
+
+Every row's `decisive_hypothesis_quote` re-anchors **strict** in the source re-fetched
+today, with `chars` and `sha256_12` MATCH (§6.2). What follows is whether the **verdict**
+is right **on the quoted hypothesis**.
+
+| row | technique | decisive hypothesis as quoted | object | verdict right? |
+|---|---|---|---|---|
+| `T2a` | Chae-Wolf Thm 1.1 | `u ∈ C((−∞,0);L^p)`, `3 ≤ p < ∞` | met: at α = 1, `U ∈ L^p` for every `p > 3`, and `∫r^{−p}r²dr` converges iff `p > 3` | **YES**, `SATISFIED` |
+| `T1b` | Tsai 1998 | backward **globally** self-similar | object is DSS at one fixed λ | **YES**, by construction |
+| `T3a` | Bradshaw-Phelps | **forward** self-similarity | object is backward | **YES**, by construction |
+| `T3b` | Jia-Šverák Thm 1.1 | `(−1)`-homogeneous data, **forward** Cauchy problem | object is backward, no data | **YES**, by construction |
+| `T4a` | Elgindi | **Euler**, `C^{1,α}` | object is Navier-Stokes, `C^∞` (Clay cond. (6)) | **YES**, by construction |
+| `T4c` | Chen-Hou §8.6 | Boussinesq/Euler **with boundary**, `C^{1,α}`, smallness from α | object is NS on `R³`, fixed viscosity, no such parameter | **YES**, by construction |
+| `T5` | MRRS | **finite speed of propagation** | NS is parabolic with nonlocal pressure — and MRRS's own quoted sentence says *"This procedure cannot be applied in the Navier-Stokes case"* | **YES**, by construction |
+| `T6` | Giga-Kohn | a scalar obeying a **maximum principle** | NS velocity has none; the Bernoulli head-pressure Π obeys an **elliptic** inequality only in the exactly-SS class, and the object's profile is `s`-periodic with period `2 log λ = 1.0612565021243408` | **YES**, by construction |
+| `T10` | Luong-Ramsey-Bertozzi-Baty | **1D compressible Euler**, closed-form profile | object is 3D incompressible NS | **YES**, by construction |
+
+**Not one verdict is wrong on its quoted hypothesis.** Three observations, none of which
+changes a verdict, none repaired here:
+
+* **O1 (`T1b`).** The field is `decisive_hypothesis_quote` and the decisive hypothesis is
+  *"backward **globally** self-similar"*, but the 144-character quote is about `L^p`
+  profiles and local energy estimates — the SS clause is supplied by the surrounding
+  Pineau-Vicol section title ("Backwards self-similar solutions"), not by the quoted
+  bytes. The quote does not, on its own, carry the hypothesis the row turns on.
+* **O2 (`T6`).** The row is labelled *Giga-Kohn* but quotes **no Giga-Kohn text at all** —
+  it quotes Pineau-Vicol on the Navier-Stokes analogue. The artefact declares this
+  honestly in `location` ("for the Navier-Stokes analogue of the structural hypothesis
+  and where it breaks"); it is still a row whose named source is never quoted.
+* **O3 (`T1a` / `T6`).** `T1a`'s 99-character quote is a **strict prefix** of `T6`'s
+  492-character quote — the same Pineau-Vicol sentence. Two rows, one piece of text.
+  They are not two pieces of evidence.
+
+**ITEM (4) VERDICT: REPRODUCES.** All 8 `FAILS-BY-CONSTRUCTION` and the 1 `SATISFIED` are
+correct on the quoted hypothesis.
+
+---
+
+## §8 — ITEM (5): `L2'`'s bill against `p2_route_cloc_v1.json`
+
+`cloc`'s `self_hash` recomputes from its own payload by its own stated recipe
+(`sha256(json.dumps(payload, indent=2, sort_keys=False))[:16]`):
+**`58c57b62c0cbc80d` stored, `58c57b62c0cbc80d` recomputed — MATCH.** `L2'`'s
+`source_self_hash` equals it. Re-running `experiments/p2_route_cloc_v1.py` with `OUT`
+redirected out of the repository regenerates the whole leg-381 artefact **bit-identically**
+(`SELF-TESTS: ALL PASS`, payload identical `True`).
+
+`L2'`'s own `self_hash` recomputes by its generator's recipe
+(`sha256(json.dumps(art, sort_keys=True, ensure_ascii=False))[:16]`):
+**`fd5c410859eb764b` stored, `fd5c410859eb764b` recomputed — MATCH.**
+
+Field by field, `L2'`'s bill against `cloc`'s own numbers — every one **MATCH**:
+
+```
+L2_threshold_alpha                             1.5                     MATCH
+L3_threshold_alpha                             1.0                     MATCH
+banked_type_I_alpha                            1.0                     MATCH
+deficit_to_L2_in_exponent                      0.5                     MATCH
+required_over_available_exponent_ratio         1.5                     MATCH
+critical_L3_tail_cubed_increment_per_decade    326.87521405120924      MATCH (= increment_per_decade[0])
+critical_L3_tail_cubed_increment_spread        7.393926228758692e-10   MATCH (= RELATIVE spread, re-derived)
+tail_L3_norm_2_decades                         8.678998071314405       MATCH
+tail_L3_norm_10_decades                        14.840907203374448      MATCH
+bogovskii_corrector_L2_rho_exponent_at_alpha_1 0.5004159707002005      MATCH
+tail_L3_norm_rho_exponent_at_alpha_1           1.2768224253058113e-05  MATCH
+```
+
+Independently re-derived, not copied: `L^p` needs `p·α − 2 > 1`, so the `L²` threshold is
+`α > 3/2` and the `L³` threshold is `α > 1` — both MATCH; deficit `1.5 − 1.0 = 0.5`;
+overshoot `1.5 − 1.0 = 0.5`, so **any α paying the `L²` bill lands strictly inside `L³`** —
+which is exactly what §6 measures to be fatal. The banked "spread" is a **relative**
+spread, `(max − min)/mean = 7.393926e-10`; re-derived, MATCH.
+
+**NOTE N1 (not a discrepancy).** `critical_L3_tail_cubed_increment_per_decade = 326.875`
+is **not scale-free**: it carries leg 381's field amplitude. A unit-amplitude model
+`|U| ≤ (1+|y|)^{−1}` gives `4π ln 10 = 28.935` per decade — a factor `11.30`. What is
+load-bearing — a **constant** increment per decade, i.e. **logarithmic divergence** of the
+critical `L³` tail at α = 1 — reproduces independently. The absolute number does not
+travel outside leg 381's model and should not be quoted as if it did.
+
+**ITEM (5) VERDICT: REPRODUCES.**
+
+---
+
+## §9 — the executable re-derivation
+
+`experiments/verify_wave4_rederive.py` (lesson 68, reading (f)). Run:
+
+```
+.venv/bin/python experiments/verify_wave4_rederive.py --cache <dir> [--offline] [--only 1,2,3,5]
+```
+
+It writes nothing belonging to `V3` or `L2'`: both generators are copied to a temporary
+directory with `OUT` redirected before being run. Missing sources bank as `UNREACHABLE`,
+never as zeros. It exits non-zero if any check disagrees with the banked record.
+Items (3), (4), (5) exit **0** with `DISCREPANCIES: none` — the discrepancies this unit
+reports (D1-D6, O1-O3, N1) are **editorial and attributional**, located by reading, and
+are recorded here rather than encoded as machine assertions, because none of them changes
+a number or a verdict.
+
+## §10 — CEILING
+
+**TIER 2.** **NO LINK OF THE `L1`→`L4` CHAIN MOVED.** A verification builds nothing,
+certifies nothing and realises no profile; even a clean PASS is not movement toward Clay.
+Clay stays **~0.05%**. Scale is not evidence and Tier 2 is never a proof. C1 (the
+l¹-Fourier / radii-polynomial apparatus ban) binds throughout, was not lifted, narrowed,
+re-read or argued against, and is **not** cited anywhere in this unit as evidence that any
+apparatus closes. Nothing here was contacted; ESS banks `UNREACHABLE`.
