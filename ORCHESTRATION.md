@@ -529,6 +529,59 @@ used, whether context has been summarised yet, and the four file sizes above. §
 triggers are unchanged — 12 cycles or first summarisation, whichever comes first — but a
 Conductor that cannot say how close it is to them is not managing the budget, it is hoping.
 
+### 3k. THE LITERATURE OBLIGATION — do not rebuild what is published, and do not lean on an abstract
+
+**Adopted 2026-08-18 by user ruling.** This repository runs a novelty pass per unit — 299 of them —
+and has **no cross-unit view of what it has read, or at what depth.** Novelty asks *"is my result
+new?"*. Nothing asks *"is this claim resting on something nobody opened?"* or *"has someone already
+built this?"*. Both failures have happened and both were expensive:
+
+- **Leg 348 read seven papers at ABSTRACT LEVEL ONLY**, said so in its own ceiling, and the
+  programme built a lane, a `CLAY_ROADMAP` section, an escalation packet and a user ruling on top of
+  it for 45 legs. The disqualifying sentence was in the abstract the whole time.
+- **`arXiv:2509.25116` was surfaced by leg 242 and graded by nobody** until `V3`, though it predates
+  leg 174's ledger and changed that ledger's occupancy claim.
+- **`L5`'s pincer — the load-bearing half of a verified wall closure — rests on Chae–Wolf and
+  NRS/Tsai, both journal-only and never read at primary.** `V-W5` called that the sharpest
+  undischarged item in the file, and it is still undischarged.
+- **`R3` is multiple shooting, which brick B6's own spec names, and `U1` built the globalisation
+  without it.** The programme's own spec named the standard technique and the build skipped it.
+
+**Three rules. They bind at PRE-REGISTRATION, before work, not at integration after it.**
+
+**1. THE SOURCE REGISTER.** `writeup/SOURCES.md` — one row per source the record leans on: the
+identifier, the claim it supports, **the depth it was read at** (`ABSTRACT` / `FULL TEXT` /
+`RECOMPUTED`), the unit that read it, and whether it is **load-bearing** (a claim in `WALLS.md`,
+`STATE.md`, `CLAY_OBLIGATIONS.md` or a gate answer would change if the source were wrong). A unit
+that reads a source adds or updates its row in the same commit. **The register is a view of what has
+been read; it never becomes a substitute for reading.**
+
+**2. A LOAD-BEARING CLAIM MAY NOT REST ON AN ABSTRACT.** If a claim is load-bearing, its source is
+read at full text and the register says so. A unit that finds a load-bearing claim resting on an
+`ABSTRACT` row **reports it as a blocking debt on everything above it** — it does not quietly proceed.
+Where full text is unreachable, the row says `UNREACHABLE` with the reason and the claim is marked
+**held at second hand**, never silently promoted.
+
+**3. BEFORE BUILDING, ESTABLISH WHETHER IT IS ALREADY BUILT.** Every construction unit's
+pre-registration names **the published method it implements**, with a citation — or states that it
+searched and found none, **with the search shown**. Standard machinery has a literature: multiple
+shooting, deflated continuation, self-consistent bounds, interval-arithmetic enclosure. **Building a
+standard technique from scratch without naming its source is a defect, not diligence**, and it is how
+`R3` came to be missing from a layer whose own spec named it.
+
+**Search instrument standard, codified from leg 392 because it is the best in the record.** Controls
+before verdicts — a positive control that must return many, a nonsense negative that must return
+exactly zero, and an AND-pair known to intersect, so that an ANDed zero is a measurement. `MEASURED`
+requires HTTP 200 **and** a parsed total; **a throttled, timed-out or unparsed query is `THROTTLED` /
+`FAILED` and is NEVER rendered as a zero** — leg 387 reported zeros for a served-namespace mismatch
+and cost a leg. Bank the served namespace verbatim. Bank ids, never counts alone. Reduced coverage is
+reported as reduced coverage, and a null from an under-covered search is **`UNDER-RESOURCED`, not
+`no`** (§3d).
+
+**What this does not license.** Reading is authorised and contacting is not — the narrowed outreach
+hold stands. And a literature pass is **not** screening: the standing stop on screening as a unit of
+work is untouched, because this obligation attaches to units that are already doing something else.
+
 ### 3h. Attacking a wall — what ambition does and does not license
 
 **Adopted 2026-08-13 with §3g.** `WALLS.md` authorises building whatever a lane needs, at any
