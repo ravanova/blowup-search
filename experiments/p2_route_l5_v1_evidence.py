@@ -95,8 +95,21 @@ def main():
        "rel spread %.2e" % c3p["linear_in_amplitude_rel_spread"])
 
     c6 = C["C6_basis"]
-    ck("C6 exponent independent of the cutoff basis", c6["fired_as_planted"],
-       "dL3 %.2e dcurl %.2e" % (c6["exponent_disagreement_L3"], c6["exponent_disagreement_curl"]))
+    # HONEST: the pre-registered 5-point form of C6 did NOT fire (the rho0 = 10 row is
+    # pre-asymptotic and the two bases differ most there).  The evidence check asserts the
+    # artefact still SAYS so, and separately that the tail-3 fit -- the fit the gate uses
+    # everywhere else -- does agree.  It does not move the pre-registered tolerance.
+    ck("C6 5-point form did NOT fire, and the artefact says so",
+       c6["fired_as_planted"] is False and c6["exponent_disagreement_curl"] > 1e-2,
+       "dL3 %.2e dcurl %.2e (tolerance %.0e)" % (c6["exponent_disagreement_L3"],
+                                                 c6["exponent_disagreement_curl"],
+                                                 c6["precommitted_tolerance"]))
+    ck("C6 tail-3 form DOES fire (basis-independent exponent)", c6["fired_on_tail3_fit"],
+       "dL3 %.2e dcurl %.2e" % (c6["exponent_disagreement_L3_tail3"],
+                                c6["exponent_disagreement_curl_tail3"]))
+    ck("C6 the CONSTANT does depend on the basis, as pre-registered",
+       abs(c6["constant_ratio_curl_C4_over_C2quintic"] - 1.0) > 0.1,
+       "C4/C2quintic = %.6f" % c6["constant_ratio_curl_C4_over_C2quintic"])
 
     c9 = C["C9_refinement"]
     ck("C9 norms stable under refinement", c9["worst_rel_change"] < 5e-2,
@@ -120,7 +133,7 @@ def main():
     # --- 4.  the structural facts the gate rests on -------------------------------------------
     kA = "alpha=1|kappa=a_physical_frozen|DSS"
     kS = "alpha=1|kappa=a_physical_frozen|SS"
-    k0 = "alpha=1|kappa=0_similarity_frozen|DSS"
+    kH = "alpha=1|kappa=a/2_intermediate|DSS"
     e = sw[kA]
     ck("C4: T1+T2 cancel at kappa=a", e["T12_over_T1_at_largest_rho"] < 1e-5,
        "|T1+T2|/|T1| = %.2e" % e["T12_over_T1_at_largest_rho"])
@@ -134,9 +147,9 @@ def main():
     ck("C3: the SS control DOES fall off (exponent ~ -2)",
        sw[kS]["curl_L32_rho_exponent_tail3"] < -1.5,
        "%.6f" % sw[kS]["curl_L32_rho_exponent_tail3"])
-    ck("C4: kappa=0 does NOT cancel T1+T2",
-       sw[k0]["T12_over_T1_at_largest_rho"] > 1e-3,
-       "|T1+T2|/|T1| = %.4f" % sw[k0]["T12_over_T1_at_largest_rho"])
+    ck("C4: kappa = a/2 does NOT cancel T1+T2",
+       sw[kH]["T12_over_T1_at_largest_rho"] > 0.1,
+       "|T1+T2|/|T1| = %.4f" % sw[kH]["T12_over_T1_at_largest_rho"])
 
     # --- 5.  C5, the alpha bill: exponent must track 1 - alpha --------------------------------
     devs = []

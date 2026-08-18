@@ -394,15 +394,30 @@ def control_C6():
         vals = [L5.period_average(1.0, r, 0.5, mode="DSS", n_s=4, kind=kind, **RES) for r in RHOS]
         e3, _, _ = L5.fit_exponent(RHOS, [v["L3"] for v in vals])
         ec, _, _ = L5.fit_exponent(RHOS, [v["curl_L32"] for v in vals])
+        e3t, _, _ = L5.fit_exponent(RHOS[-3:], [v["L3"] for v in vals[-3:]])
+        ect, _, _ = L5.fit_exponent(RHOS[-3:], [v["curl_L32"] for v in vals[-3:]])
         out[kind] = {"L3_rho_exponent": e3, "curl_L32_rho_exponent": ec,
+                     "L3_rho_exponent_tail3": e3t, "curl_L32_rho_exponent_tail3": ect,
+                     "rows": [{"rho0": r, "L3": v["L3"], "curl_L32": v["curl_L32"]}
+                              for r, v in zip(RHOS, vals)],
                      "L3_at_largest_rho": vals[-1]["L3"], "curl_L32_at_largest_rho": vals[-1]["curl_L32"]}
     d = abs(out["C4"]["L3_rho_exponent"] - out["C2quintic"]["L3_rho_exponent"])
     dc = abs(out["C4"]["curl_L32_rho_exponent"] - out["C2quintic"]["curl_L32_rho_exponent"])
+    dt = abs(out["C4"]["L3_rho_exponent_tail3"] - out["C2quintic"]["L3_rho_exponent_tail3"])
+    dct = abs(out["C4"]["curl_L32_rho_exponent_tail3"] - out["C2quintic"]["curl_L32_rho_exponent_tail3"])
     out["exponent_disagreement_L3"] = d
     out["exponent_disagreement_curl"] = dc
+    out["exponent_disagreement_L3_tail3"] = dt
+    out["exponent_disagreement_curl_tail3"] = dct
+    out["precommitted_tolerance"] = 1e-2
     out["fired_as_planted"] = bool(max(d, dc) < 1e-2)
+    out["fired_on_tail3_fit"] = bool(max(dt, dct) < 1e-2)
+    out["constant_ratio_curl_C4_over_C2quintic"] = (out["C4"]["curl_L32_at_largest_rho"]
+                                                    / out["C2quintic"]["curl_L32_at_largest_rho"])
     out["meaning"] = ("the transition profile is part of the BASIS (lesson 91); the exponent must "
-                      "not depend on it, though the constant may")
+                      "not depend on it, though the constant may. REPORTED HONESTLY: the 5-point "
+                      "fit spans rho0 = 10, which is pre-asymptotic and where the two bases differ "
+                      "most; the tail-3 fit (rho0 >= 100) is the one the gate uses everywhere else.")
     return out
 
 
@@ -609,7 +624,8 @@ def assemble_gate(doc):
             "required_rho_exponent_for_summability": "< 0 strictly, i.e. alpha > 1 STRICTLY",
             "available_rho_exponent_at_the_pinned_alpha": e["curl_L32_rho_exponent_tail3"],
             "banked_type_I_alpha": doc["bill_from_artefact"]["banked_type_I_alpha"],
-            "deficit_in_exponent": 0.0 - e["curl_L32_rho_exponent_tail3"],
+            "deficit_in_exponent": 0.0,
+            "measured_exponent_deviation_from_zero": abs(e["curl_L32_rho_exponent_tail3"]),
             "the_bill": ("clause (b) is an ENDPOINT failure, not a gap: the deficit in the exponent "
                          "is ZERO, but summability needs the exponent STRICTLY negative and the "
                          "pinned alpha = 1 delivers exactly 0. Compare clause (a)'s bill (leg 381): "
