@@ -390,6 +390,51 @@ banked, plus **0.806 h** of planted controls. The banked figure counts the relau
 was killed by the host after ~2 h with nothing banked (see §12). Diagnostics (1) and (2) were
 re-derivations of banked records and cost minutes.
 
+> **CORRECTION, 2026-08-18 — unit `D-REPAIR` (wave 5), discharging `V-W3`'s defect D5.**
+> D5 recorded that `diagnostic_3.resourcing.core_hours = 5.687` and
+> `sum(diagnostic_3.attempts[].wall_seconds) = 9.088` core-hours do not reconcile (**3.40
+> core-hours, 37.4% of the larger**), and that **"which subset the 5.687 covers is not
+> recoverable from the record"**. **The banked JSON is NOT edited** — reading (b), no banked
+> artefact may be rewritten to match a later finding — but **the subset IS recoverable, and here
+> it is.**
+>
+> **1. `5.687` is OCCUPANCY, not consumption.** `resourcing.core_hours` is exactly
+> `wall_seconds × workers / 3600` = `2047.4409 × 10 / 3600` — a 10-worker pool held open for the
+> relaunch window. It is not the sum of anything the attempts spent.
+>
+> **2. The relaunch's elapsed window identifies its members.** `resourcing.wall_seconds`
+> (**2047.4409 s**) equals attempt **11**'s own `wall_seconds` (**2047.4169 s**) to **0.024 s**,
+> `1.2e-5` relative: attempt 11 was the last of the relaunch to finish, so the window IS its
+> duration. **No attempt can run longer than the window that contains it**, so the eight rows
+> with `wall_seconds > 2047.4409` — attempts **0, 1, 2, 3, 4, 6, 7, 8** — **cannot** have been in
+> the relaunch. That is **exactly eight**, and §12(e) records **exactly eight** completed attempts
+> reused from checkpoint. The relaunch is therefore attempts **5, 9, 10, 11, 12, 13, 14, 15**.
+>
+> **3. The books then close, to the second.**
+>
+> | quantity | attempts | core-seconds | core-hours |
+> |---|---|---|---|
+> | relaunched, CPU actually spent | 5, 9, 10, 11, 12, 13, 14, 15 | 12,601.38 | **3.5004** |
+> | inherited from the killed launch, CPU spent | 0, 1, 2, 3, 4, 6, 7, 8 | 20,116.96 | **5.5880** |
+> | **all 16, `sum(attempts[].wall_seconds)`** | — | **32,718.33** | **9.0884** |
+> | relaunch OCCUPANCY, `= wall_seconds × workers` (the banked `core_hours`) | 8 tasks on a 10-worker pool | 20,474.41 | **5.6873** |
+> | of which BUSY / IDLE | — | 12,601.38 / 7,873.03 | 61.5% / **38.5%** |
+>
+> **The 3.40 core-hour gap is two effects, not one:** the banked figure **omits** the 5.588
+> core-hours the eight inherited attempts really cost, and **adds** 2.187 core-hours of idle pool
+> (two of ten workers were never given a task at all — 1.1375 core-hours of that on its own).
+>
+> **4. What this unit cost, stated once.** **9.0884 core-hours of attempt CPU** (`sum` over all
+> 16 rows) **plus 0.8057 h of planted controls** (`resourcing.control_wall_seconds = 2900.554 s`),
+> on top of the ~2 h first launch that banked nothing. **`5.687` is not that number and must not
+> be quoted as it.**
+>
+> **A finding about the verifier, reported not ruled.** D5's ceiling — *"the reconciliation itself
+> is beyond this artefact"* (`verify_wave3.md` §5 item 2) — **does not hold**: the provenance flag
+> D5 correctly says is missing turned out not to be needed, because the elapsed window and the
+> per-attempt walls determine the partition on their own. D5's **size** (3.40 core-hours, 37.4%)
+> is exact and stands.
+
 **The commissioned model was ~0.0713 h/attempt → ~1.14 core-hours for 16 attempts. The true figure
 is ~0.57 h/attempt, an ~8× under-estimate**, and the reason is structural rather than accidental:
 the model was calibrated on U5 attempts that stall early, while **an attempt planted at a published
