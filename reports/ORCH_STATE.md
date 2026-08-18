@@ -13,7 +13,69 @@ verifier, do not re-raise the C1 escalation, do not redo `T1`'s machine record: 
 
 ---
 
-## LIVE — CONDUCTOR mode, **WAVE 3 CLOSED AND INTEGRATED**, 2026-08-18
+## LIVE — CONDUCTOR mode, **WAVE 4 PLANNED AND COMMITTED BEFORE DISPATCH**, 2026-08-18
+
+**Plan committed at the SHA below, before any worker was dispatched (§3g step 1). Full gates in
+FINAL WORDING and all pre-committed readings live in `STATE.md` §"WAVE 4" — quoted here by pointer,
+per §3j, and NOT restated.**
+
+| unit | lane | kind | branch | dispatched |
+|---|---|---|---|---|
+| `V3` | **V** | construction / measurement | `leg/399-v3-gradeA` | **first** |
+| `L2′` | **L** | construction | `leg/397-l2-decay` (resumes `a9a4370`) | **first** |
+| `V-W3` | verification, **OBLIGATORY** | audit | `verify/wave3` | **last** |
+
+**HOW THIS WAVE DISCHARGES ITS THREE STANDING OBLIGATIONS.**
+- **Verifier for `E` and wave 3.** `V-W3` covers `E` (`d0d72b1`) and `V-W2` (`594ff89`). It does
+  **not** cover wave 4 — **you may not verify a wave you planned**, so `V3` and `L2′` land
+  `UNVERIFIED` and **wave 5 must carry their verifier.**
+- **Whatever `L2` needs to finish.** `L2′` resumes the committed pre-registration on its own branch.
+  §§0–3 are binding and must not be re-done; it executes §§4+.
+- **Composition floor.** `V3` attacks **W3**, `L2′` attacks **W4 / §6(i)** — **met from V and L, not
+  from Lane T, for the first time in four waves.** §3i q6 asked for exactly this.
+
+**§3f rule 3:** the wave **opens with construction** and the verifier goes **last**. This is the
+remedy for §3i q7: the last three landed units were `V1`, `E`, `V-W2` — verification, instrument,
+verification, three of three.
+
+**WHY `V3` IS FIRST AND NOT DEFERRED.** §3i q5 named it the cheapest unit that could **kill** the
+priority lane. §3i q4 found W3's *"nobody filled it since"* rests on leg 242, whose gate is an
+author-line question and whose control net surfaced six fluid blow-up CAPs it graded against nothing.
+`V3` grades them against **leg 174's own unchanged criterion**. **A single Grade-A × fluid row ends
+Lane V's premise for ~2–3 h of reading** — and if it fires, Lane L becomes sole priority in the
+integration commit. **It is a grading against a fixed criterion, not a screen** (screening as a unit
+of work is prohibited): the criterion is quoted, fixed and not the unit's to move, three of the four
+rows already carry adjudications the unit must cite rather than redo, and the deliverable is a
+per-row verdict with the failing clause quoted.
+
+**CARRIED IN EVERY BRIEF.** Commit during the run, not only at the gate — wave 3 lost three units and
+only the one that had committed left anything behind. Mandatory checkpointing above ~1 h wall, to
+disk, at a resumable granularity, saying where. Push the branch only: **never merge, never push to
+`main`.** Never read `DIRECTION.md`. Re-derive from `writeup/data/*.json`, never from prose. Workers
+**self-terminate** and never pick their own next unit.
+
+### §3j HEADROOM at this wave boundary
+
+| file | cap | now | headroom |
+|---|---|---|---|
+| `STATE.md` | 24,576 / no row > 600 ch | **23,798**, longest row 542 | 778 |
+| `WALLS.md` | 32,768 | **32,722** | 46 |
+| `OPTIONS.md` | 24,576 | **24,538** | 38 |
+| this LIVE block | 8,192 | **see commit** | — |
+
+**Context WAS summarised, twice, in this Conductor session**; all four files were re-read from disk
+after each summarisation and after the fork closed. **All three files are within a few hundred bytes
+of their caps — the next Conductor should expect to compact again before it can add anything.**
+
+### Open escalations — unchanged from the wave-3 block below
+
+`T1`'s ban-wording packet is on the user's desk (machine record **DISCHARGED**). The lift-clause
+defect (leg 257 / fourth space) is **recorded, NOT ruled** — a ban-wording question is a **user**
+escalation. C1 is **DISCHARGED** and stands **EXEMPLAR-FREE**.
+
+---
+
+## Superseded LIVE block — CONDUCTOR mode, **WAVE 3 CLOSED AND INTEGRATED**, 2026-08-18
 
 **WAVE 3'S OUTCOME: ONE UNIT OF FOUR RETURNED.** Established from `origin`, not from prose.
 
@@ -331,206 +393,12 @@ wind-up block exist on **one side only.**
 
 ---
 
-## Wave 2 as dispatched — CONDUCTOR mode, 2026-08-14
+## Wave 2 as dispatched and everything older — DROPPED 2026-08-18 under §3j
 
-**Read this block, not the ⛔ STOP block below it.** That stop is real history and is retained, but
-it was **superseded by the user's CONDUCTOR-mode restart of 2026-08-13**. There are no longer four
-leg slots, no bench, and no separate Decision Maker: one entity ranks, dispatches, audits, lands
-and re-ranks, in waves of 2–4 self-terminating workers.
-
-**`main` = `c1a8d5e`** (`origin/main`, 2026-08-14). The four ruling-transcription commits, the
-`ORCH_STATE` refresh and the `STATE.md` transcription are all **pushed**. `c1a8d5e` carried the
-wave-2 plan and this block together, per §3g step 1, and was pushed **before any wave-2 worker was
-dispatched**.
-
-**DISPATCHED 2026-08-14, after `c1a8d5e` was pushed.** All four wave-2 workers are live on the
-branches named in the table below. Each carries a written brief with its unit, its gate in the
-final wording committed at `c1a8d5e`, its §5b territory, its lane and the §3d resourcing statement.
-None was given `DIRECTION.md` (§3e). `T4` and `T6` additionally carry **C1's naming requirement**
-verbatim — name the apparatus, and show it does not construct a single bounded approximate inverse
-uniform in `M`; absent both, the ban applies in full. `V1` additionally carries its forbidden-read
-list (`WALLS.md`, `STATE.md`, `OPTIONS.md`, this file, the wave-1 briefs, and the wave-1 journals'
-reasoning) — that narrowness **is** the unit. Figure **`fig110`** was allocated to `T4` at dispatch
-and to no one else; `T6`, `T5` and `V1` were allocated no figure. Every brief instructs: **push the
-branch only, never merge or push to `main`** — the Conductor gates and merges.
-
-**INTERRUPTED AND RESUMED, 2026-08-14.** The host process exited and all five live workers stopped
-without completion records. **None had reached its gate.** Every one had landed its pre-registration
-on its branch before computing, so nothing pre-committed was lost; every one also held uncommitted
-work in its worktree, which is the part that was at risk. See `## Incidents and root causes`,
-entry 2026-08-14. All five were resumed from their saved transcripts with gates, territories and
-pre-committed readings restated **unchanged**. **The branch is the record, not the agent** — a
-successor that finds these agents gone reads the branch tips below and re-spawns only what a branch
-does not already hold.
-
-| unit | branch | landed on branch before the interruption | uncommitted, at risk |
-|---|---|---|---|
-| `T4` | `leg/393-t4-repro` | pre-registration `9e36e3c` — apparatus named under C1, controls planted both ways | **resumed, RAN TO GATE, LANDED `2c87244`** |
-| `T6` | `leg/394-t6-fulltext` | pre-registration `0ee0b4c`, instrument `c113c6a` | modified `p2_route_t6_v1.py`, **partial `p2_route_t6_v1.json`** |
-| `V1` | `verify/wave1` | pre-registration `fc84241` — gate verbatim, six derivation paths | **resumed, RAN TO GATE, LANDED `2fb399f`** |
-| `T5` | `leg/395-t5-sweep` | pre-registration `7af3f64` — gate, corpus, patterns, decision rule, both controls | `p2_route_t5_sweep.py`, **partial `p2_route_t5_v1.json`** |
-| `E` | `prog-r4/e-hhard` | pre-registration `70f3962`, diagnostics (1) and (2) at `952b2cf` | evidence script, `build_figures.py`, `fig109_prog_r4_hhard.py` |
-
-### Wave 2 — PLANNED AND COMMITTED 2026-08-14, BEFORE DISPATCH
-
-Full gate texts and pre-committed readings are in `STATE.md` §"WAVE 2". Abbreviated here so a
-successor that has lost `STATE.md` still holds the pre-commitments; **`STATE.md` is authoritative**.
-
-| unit | lane | branch | gate (final wording, abbreviated) | pre-committed reading | state |
-|---|---|---|---|---|---|
-| `T4` / leg 393 | **T**, CONSTRUCTION | `leg/393-t4-repro` | Does the unit reproduce at least one published enclosure row of `arXiv:1902.00384` — quantity, interval, and the paper's own certification criterion — to the paper's stated precision, **using an apparatus named and shown C1-compliant in its own pre-registration**? | (a) success is a **CAPABILITY, NOT a Clay-chain result**, no `L1→L4` link moves; (b) the object is a **periodic orbit, NOT a blow-up** — W3 untouched; (c) if the apparatus turns out to need a bounded approximate inverse uniform in `M`, **STOP and say so** — that is more valuable than the reproduction; (d) right shape + wrong interval is **`no`**, quantified | DISPATCHED |
-| `T6` / leg 394 | **T**, literature | `leg/394-t6-fulltext` | At **full text**, does each of leg 348's seven papers **confirm**, **strengthen**, or **UNDERCUT** its abstract-level classification? Table, deciding sentence quoted and located. Unobtainable = **`UNREACHABLE`**, never a confirmation. | (a) **an undercut is the valuable branch and is reported first**; if it hits `1902.00384` it lands on `T4` immediately; (b) consistency is **not** strengthening; (c) `UNREACHABLE` ≠ zero; (d) **READ, do not CONTACT**; (e) no S2 key — **`THROTTLED`, never zero** | DISPATCHED |
-| `V1` | verification | `verify/wave1` | Re-deriving **from banked JSON and landed evidence scripts alone**, do all five claims reproduce exactly: R0's metric + the 134.45/144.69 reconciliation; the retraction (57/100, 5/9, 4/5, **ONE** new orbit, 0.0175 vs 0.0553); R1's +0.45 pp and the hold-out kill; T2's 32/32 MEASURED / namespace `1.1` / 5-of-6 THROTTLED; T1 ruling none of the three questions. **Plus: does `M3 = DELIVERED` survive the 57% seed overlap, on M3's own wording?** | (a) agreement is expected and worth little; the value is in (3),(4),(5) and M3; (b) **a disagreement is BANKED, not reconciled** by the verifier; (c) missing field = `UNVERIFIABLE`, not `no`; (d) **must not read** `WALLS.md`, `STATE.md`, `DIRECTION.md`, the briefs, or the wave-1 reasoning | DISPATCHED |
-| `T5` / leg 395 | **T** | `leg/395-t5-sweep` | Grep the landed record for every leg that declined/deferred/narrowed work citing the ℓ¹-Fourier/radii-polynomial ban. For each: **apparatus-based** or **realization-based**? Name which C1 now permits to be re-opened. A zero is instrumented like any other zero. | (a) permitted ≠ recommended — **`T5` ranks nothing and re-opens nothing**; (b) **realization-based refusals stay refused** — C1 supersedes no measurement; (c) if nothing is found, say C1 cost nothing; (d) "both" is filed as realization-based | DISPATCHED |
-
-### `T4` — RETURNED AND LANDED, `2c87244`, 2026-08-14. **THE WAVE'S REAL RESULT.**
-
-**Gate answer: `STOP`, under pre-committed branch (c).** Not `yes`, not `no`, not `UNDER-RESOURCED`.
-The brief told this unit that if the apparatus turned out to require a bounded approximate inverse
-uniform in `M` it should stop and say so, and that this would be **more valuable than the
-reproduction**. It was.
-
-**`arXiv:1902.00384` — the crack in W2, the paper Lane T was ranked on — is certified by EXACTLY THE
-BANNED APPARATUS**, and **both its certified rows are 2D LIFTS**. See
-`writeup/escalations/ESCALATION_C1_EXEMPLAR_2026-08-14.md`, open with the user.
-
-- **Apparatus:** Newton–Kantorovich radii-polynomial contraction in a weighted `ℓ¹_η` Fourier space
-  on **one bounded approximate inverse** `A : X_{−2,−1} → X`. *approximate inverse* ×7,
-  *Newton-Kantorovich* ×4. **Stated in the abstract**, which the Conductor confirmed independently —
-  so the disqualifying sentence was in the text leg 348 read.
-- **2D:** `N_x3 = 0` in Table 1 and `Nrec`; decoded arrays of extent 1 in `x₃`;
-  `max|u⁽³⁾| = max|ω⁽¹⁾| = max|ω⁽²⁾| = 0.0` exactly while `max|ω⁽³⁾| = 1.6351 / 1.5274`, so the
-  zeros are structure; `setup = '2D'`; authors' reason — a 3D solution's memory cost is *"for now,
-  prohibitive."* **W2's own test requires showing the object is not a lift. It is one.**
-- **`C−` could have fired and did not:** *self-consistent* / *a priori bounds* / *isolating* /
-  *trapping region* / *logarithmic norm* / *dynamical closure* all **0**; Zgliczyński only as
-  bibliography item [48]. Had it fired, the unit would have proceeded into a full reproduction.
-- **W2 STANDS, STRENGTHENED. W6 UNTOUCHED** — `inf` over nonzero modes of `μ(n)` equals `ν` exactly,
-  a truncation-independent positive floor, against NGX's `σ_min(L_M) → 0`. The apparatus is bounded
-  *because* the domain is compact and the equation viscous; route 4's object has neither. **Not a
-  counterexample to NGX.** Cost of the apparatus, authors' Table 1: **95 CPU-days, 110 GB RAM — for
-  a 2D row.**
-- **The gate's FIRST conjunct was met on both rows** (criterion (4.32) verified; `r_min`/`r_max`
-  relative deviations to `5.6e-15`; both `r_sol^Ω` exact; independent norm check `δ = 5.3e-06`
-  against `1e-3`), all by arithmetic on the authors' published constants — **no operator and no
-  `Y₀/Z₀/Z₁/Z₂` computed**, leg 316's precedent. The SECOND conjunct cannot be met by anything that
-  actually certifies those rows, so `yes` was never available.
-
-**Audit, not taken on report:** territory clean (allocated files, `fig110` as allocated, the single
-permitted additive line in `build_figures.py`); **pre-registration `9e36e3c` landed before any
-computation and already contained V1–V4 and six two-sided controls with `H1 → branch (c) → STOP`
-written down in advance** — the load-bearing point, since it means the STOP was not constructed
-after the answer; evidence script re-run by the Conductor from the branch, **exit 0, 68/68**;
-apparatus claim confirmed independently against the paper's abstract; the 2D shape was already
-visible in Table 1 at pre-registration time, which strengthens the finding rather than weakening it.
-
-**Record corrected in the same commit:** `WALLS.md` W2 (crack retracted, superseded text kept inline
-and struck) and its four-results item 3; `CLAY_ROADMAP.md` §7.6 item 3. **C1's general proposition,
-your ruling that Lane T is unblocked by scope, Theorem NGX and leg 341 are ALL UNTOUCHED** — only
-the exemplar falls, and naming a replacement is not the Conductor's to decide.
-
-**`T6` HAS NOT BEEN TOLD.** It is independently reading the same seven papers at full text. Telling
-it would destroy the only available cross-check; if it returns the same undercut unprompted, the
-finding is measured twice by two instruments.
-
-### `V1` — RETURNED AND LANDED, `2fb399f`, 2026-08-14
-
-**Gate answer: all five wave-1 claims reproduce** from banked JSON and landed evidence scripts
-alone. No banked figure disagreed; distinct-orbit counts held under leader, single and complete
-linkage alike, with the arbiter rule **re-implemented rather than imported**. **The verification
-debt on `T1`, `T2` and `R0`+`R1` is DISCHARGED** — by a worker dispatched in the *following* wave,
-with no memory of the construction it checked (§3f rule 1). `U2`/`U3`/`U5` themselves are still
-`UNVERIFIED`: `V1` checked `R0`'s reading of them, not the runs.
-
-**`M3 = DELIVERED` SURVIVES**, on M3's own pre-committed wording, located in
-`p2_prog_r4_m3_v1.json` → `prog_r4_u2u3_prereg_addendum.md` §3g.3 (AMENDMENT 5) and quoted verbatim
-*before* being judged. **No clause conditions DELIVERED on seed novelty**, and clause 1 *requires*
-exhausting the same reservoir U3 drew from — so the 57% overlap is what compliance looks like. The
-overlap falsifies the per-run orbits-per-core-hour inference, which `R0` already retracted; M3 never
-made that claim. This was the question the Conductor deliberately declined to answer, and handing it
-to the verifier was the right call: the answer went **against** the direction a Conductor protecting
-its own wave would have leaned.
-
-**Two defects banked, not reconciled by the verifier** (its reading (b)):
-1. **`T1` banked NO machine record** — no JSON, no evidence script; item (5) checks out against
-   *prose* only. Reproduced independently by the Conductor with a field-scoped scan: zero hits.
-   A banking-discipline defect in a unit this Conductor landed, **not** evidence the claim is false.
-   T1's gate answer stands. Logged as an **obligation** in `OPTIONS.md` §F.
-2. **The gate's own comparand was ambiguous** — the Conductor's wording, not `V1`'s work, and `V1`
-   was right to refuse to decide it. **RULED:** reading A was meant. `0.0553` is **U3's baseline**
-   (`8/144.688755`); the retraction's point is that the corrected `0.0175` falls *below* it. Reading
-   B fails arithmetically — U5's own original is `0.0877`, as the same gate's item (1) says.
-
-**Audit trail, performed by the Conductor and not taken on report:** territory clean (exactly its
-three allocated files); pre-registration landed before the first re-derivation; **run 1 committed as
-it ran** (`0633494`, exit 1, 34/37) *before* its repair, with all three failures being defects in
-`V1`'s own script and **no wave-1 artefact adjusted to make a check pass** — the instrument was
-repaired, never the evidence; evidence script re-run from the branch by the Conductor, **exit 0,
-38/38**; both findings reproduced independently.
-
-**Composition floor (§3g):** met from **Lane T, by three units** (`T4`, `T6`, `T5`).
-**§3f rule 3:** `E` was an instrument task; `T4` is the construction unit that discharges the rule.
-**Verifier:** `V1`, discharging the debt on `T1`, `T2` and `R0`+`R1`.
-
-**Not taken this wave, and why** — `T3` (deferred by SEQUENCING, first unit ranked for wave 3;
-`T6` can undercut its premise and `T4` builds its apparatus), `T2′` (now cheaper than costed — the
-ruling it needed has landed), `T2″` Type-I on `T³` (sharpest item the lane owns; wants `T4`'s
-apparatus; wave 3), **Lane V** (**deferred by PRIORITY, NOT blocked**), **Lane L** `L1`/`L2`/`L3`
-(the most valuable lane by leg 390's measurement, and no unit in 390 legs has attacked §6(i) or
-§6(ii); excluded only because a fifth unit exceeds §3g's cap — **wave 3**), `R2`–`R5` (`E` reopens
-this ranking, not this wave), PROG-R4 A/B/D (demoted by the basin-structure reading), U3's owed
-novelty questions, legs 387/388/389, and (D)'s conditions (8),(9) (**now unblocked**, wave 3).
-Full table with reasons in `STATE.md` §"WAVE 2".
-
----
-
-### Wave 1 — units, gates in FINAL WORDING, pre-committed readings
-
-The full gate texts and readings are in `STATE.md` §"WAVE 1 — PLANNED AND COMMITTED 2026-08-13,
-BEFORE DISPATCH" (lines ~86–300), committed **before** dispatch. Abbreviated here so a successor
-that has lost `STATE.md` still holds the pre-commitments; **`STATE.md` is authoritative on wording**.
-
-| unit | lane | branch | gate (final wording, abbreviated) | pre-committed reading | state |
-|---|---|---|---|---|---|
-| `T1` / leg 391 | **T** | landed `829c8db` | Does the packet state, for each of the three pending ban-wording questions, **both** supportable readings, evidence from the ban's own text and the landed record, **without ruling any of them**? | (a) apparatus-naming ban → 2026-08-11 scoping precedent available **in shape, not exercised**; (b) conclusion-naming ban → Lane T blocked on a **lift not a scope**, materially worse, report unsoftened; (c) either way surface the *fourth space/basis* vs fourth *apparatus* mismatch, do not resolve it | **LANDED, gate `yes`.** All three readings honoured. **UNVERIFIED.** |
-| `T2` / leg 392 | **T** | landed `b5f8bac` | Does the search locate a **published theorem** excluding a finite-time singularity for 3D NS on `T³` of the shape Lane T needs — a periodic analogue of NRS/Tsai? | (a) a self-similar-only `T³` theorem **narrows**, does not kill; (b) a broader bounded-energy/scaling-smallness theorem **bites directly**; (c) **a controlled zero is NOT clearance**; (d) throttled ≠ zero | **LANDED, gate = `UNDER-RESOURCED`, not `no`** (§3d). Branch (b) fired in shape. **UNVERIFIED.** |
-| `R0`+`R1` | R | `prog-r4/r0r1-metric`, landed `ba512e0` | R0: does the metric land with **both** reconciliations closed against banked JSON? R1: does a **deterministic** flatness rule beat the incumbent on held-out data? | (a) a reconciliation moving U3's baseline **down** is a correction against ourselves and lands as one, not as a better ratio | **LANDED, both gates `yes`.** Headline "Lane R's first measured win" **RETRACTED**; R1 **CLOSED against itself**. **UNVERIFIED.** |
-| `E` | R (instrument) | **`prog-r4/e-hhard`, LIVE** | On the 200 banked attempts, do all three named diagnostics return, **each with a planted control demonstrated firing in both directions**: (1) converged-`\|s\|` vs seed `\|s\|`; (2) attractor of the **hookstep** or of the **minimisation**; (3) are the named Table IV rows reachable **at all** when seeded at their published `(T, s)`? | four branches E-i/E-ii/E-iii/E-iv, fixed pre-run; **no fifth is constructed after** | **IN FLIGHT.** Branch tip `952b2cf`: pre-registration `70f3962` landed on branch **before** the first attempt; diagnostics **(1) and (2) RETURN with controls firing both ways**; **(3) not yet returned**. |
-
-**Composition floor (§3g):** met from **Lane T, by two units** (`T1`, `T2`), not one. Wave 1 was
-therefore in contract without `E` or `R0`+`R1`.
-
-**Verification debt.** `T1`, `T2` and `R0`+`R1` are **all UNVERIFIED**, and the Conductor **planned
-them and may not verify them** (§3g, §3f rule 1). **Wave 2 must carry the verifier**, dispatched as
-a worker with no memory of the construction, re-deriving from banked JSON.
-
-**Audited but not landed:** none. **Landed this wave:** `T1`, `T2`, `R0`+`R1`.
-
-### Open escalations
-
-| escalation | state |
-|---|---|
-| The ban-wording packet (`writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md`) | **RULED and DISCHARGED.** Ruling at `writeup/escalations/RULING_BAN_WORDING_2026-08-13.md` (`e2f618d`). All four items transcribed into `plan_of_record.py` / `WALLS.md` / `CLAY_OBLIGATIONS.md`, one commit per item: (c)=C1 `42b2c45`, (a)=A2 `cc0f036`, (b)=B1 `1f2d00c`, (d) `8654fca`. **No ban lifted; ban counts unchanged; `test_plan_of_record.py` ALL GATES PASS after each.** |
-| U5 §9's five costed options | **Not awaiting the user.** Superseded as a fork by the basin-structure reading, which demotes A, B and D. Ledgered in `OPTIONS.md` §A. |
-| Author contact | **Still held by the user.** Reading published material is authorised as of 2026-08-13; contacting an author, group, maintainer or list is not, and needs its own ruling. |
-
-**What the rulings changed, so a successor does not re-derive it:** Lane T is **unblocked by scope,
-not by a lift** — `T3` and `T4` are OPEN and *"BUILD NOTHING IN LANE T"* is **RESCINDED**; any unit
-claiming the scope must **name its apparatus** and **show it constructs no single bounded
-approximate inverse uniform in `M`**, or the ban applies in full. Lane V is **deferred by priority,
-NOT blocked**. Two units are **obligations, not options**: **`T5`** (sweep the landed record for
-refusals that cited the ℓ¹-Fourier ban and were apparatus-based, which C1 now permits) and **`T6`**
-(discharge leg 348's own ceiling — it read seven papers at **abstract level only**; run it early
-*because* it can undercut the lane).
-
-### What the next Conductor must do first
-
-> **DISCHARGED 2026-08-14.** All five branches — the four wave-2 units and `prog-r4/e-hhard` — were
-> gated, audited, landed and pushed. `E` returned in full; diagnostic (3) ran to its verdict and was
-> **not** `UNDER-RESOURCED`. **Wave 1 and wave 2 are both COMPLETE.** The current instruction set is
-> the WIND-UP block immediately below. The paragraphs above are kept as the record of what was owed.
-
----
+The live block is truncated to **the three most recent** status blocks. Wave 2's dispatch
+block, the 2026-08-14 wind-up, and every block from the four-slot-contract era (2026-08-07 to
+2026-08-12) are in git history and their results are in `STATE.md`, `WALLS.md` and `OPTIONS.md`.
+The accumulating sections below are carried forward **verbatim**, as §3j requires.
 
 ---
 

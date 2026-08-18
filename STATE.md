@@ -120,6 +120,82 @@ checkpoints to disk at a granularity it can resume from, and says where.
 
 ---
 
+## WAVE 4 — PLANNED AND COMMITTED **BEFORE DISPATCH**, 2026-08-18
+
+**Composition floor (§3g): MET FROM `V` AND `L`, NOT `T` — the first time in four waves.** `V3`
+attacks **W3**; `L2′` attacks **W4 / §6(i)**. **§3f rule 3:** the wave **opens with construction**
+(`V3`, `L2′` dispatched first); the verifier is dispatched **last**. **§3i q7's remedy applied.**
+
+### `V3` — Lane V. **The cheapest unit that could kill the priority lane (§3i q5).** ~2–4 h.
+
+**GATE, final wording.** Grade **every** fluid blow-up computer-assisted proof this record has
+surfaced — leg 242's control net (`2509.25116`, `2605.19716`, `2605.15149`, `2604.09949`) plus any
+the unit's own control net surfaces — **row by row against leg 174's OWN, UNCHANGED Grade-A × fluid
+criterion** (`writeup/PUB_0C_CENSUS_SPINE.md` §1: *Grade A* = the interval certificate encloses a
+solution of an equation **that itself carries the dissipative term**; *fluid* = a genuine
+fluid-dynamics equation). **Does any row grade Grade-A AND fluid simultaneously — per row, YES or NO,
+with the failing clause quoted?**
+
+**Pre-committed readings.** (a) A **YES** on any row **BREAKS W3 and kills Lane V's premise** —
+report it first, do not soften it, and record it as *someone else filled the cell*, which is **not
+this repository moving a link**. (b) A **NO** on every row **does NOT re-establish "nobody filled it
+since"** — it establishes only that **this named list** does not fill it; state the residual coverage
+ceiling explicitly and cost it (§3d). (c) Where the record **already** grades a row — leg 309 refuted
+`2604.09949`, leg 342 graded `2605.15149` **Euler, not NS**, leg 123 banked `2605.19716` a **false
+friend** — **cite the existing adjudication, do not redo it**, and say which rows had **never** been
+graded. (d) The criterion is **leg 174's, unchanged**: quote it, do not tighten or relax it.
+(e) `UNREACHABLE`/`THROTTLED` bank as such, **never as zeros**; **no S2 key exists**. (f) Lesson 91:
+a negative names the exact criterion clause that fails, per row. (g) **READ, do not CONTACT.**
+(h) This is a **grading against a fixed criterion**, not a screen; if the list cannot be closed at
+this cost, return **`UNDER-RESOURCED` with a cost, never a bare `no`**. (i) **C1 may not be cited as
+evidence any apparatus closes** for any object class.
+
+### `L2′` — Lane L. **Resumes a committed pre-registration.** ~2–4 h.
+
+**Branch `leg/397-l2-decay` @ `a9a4370`. `experiments/journal/leg_397.md` §§0–3 are COMMITTED AND
+BINDING — do NOT re-do them. Execute §§4+.**
+
+**GATE, as pre-registered.** Reading the published localisation / far-field-decay techniques against
+**this object** — route 4's DSS profile carrying leg 381's banked bill (`L³` tail **326.875 per
+decade**, required **`α > 1.5`** against available **`α = 1.0`**, deficit **0.5**) — state **per
+technique** the **named hypothesis that fails**, or that one does not. **Quote it and locate it.**
+
+**Pre-committed readings.** (a) A measured *"still no method, and here is precisely which hypothesis
+fails"* is a **real, landable result** — it answers whether the Tier-2 ceiling is permanent — **and
+must not be softened**. (b) A candidate is a **LEAD, not a broken wall**, until leg 381's bill is
+actually paid: a technique claimed to supply the deficit must be shown to supply **that number**.
+(c) The deficit comes from the **artefact**, never from prose. (d) **READ, do not CONTACT.**
+(e) Instrument every zero: `THROTTLED`/`UNREACHABLE` are **never** zeros; **no S2 key exists**.
+(f) Lesson 91. (g) `no` → what it would take (§3d), i.e. **`UNDER-RESOURCED` with a cost**.
+
+### `V-W3` — verification, **OBLIGATORY**, dispatched LAST. ~2–3 h.
+
+**GATE, final wording.** From **banked JSON, landed evidence and scripts alone** — never from a
+journal's narrative — do these reproduce **exactly**? **(1)** `E`'s headline (`d0d72b1`,
+`writeup/data/p2_prog_r4_e_v1.json`): **16 attempts, 2 converged, 0 recovered any named row**, both
+convergences **below the 0.15 `|s|` shelf and not their rows**; positive control at **`‖R‖ 1.5e-10`
+through `E`'s OWN predicate**; scrambled negative control failing **as planted**; diagnostics (1)
+`PULL_TO_LOW_S` and (2) `MIXED`, `p = 0.9317`. **(2)** `E`'s **~8× cost overrun**: measured
+**≈0.57 h/attempt** (5.687 core-hours + 0.806 h controls, 16 attempts) against the `0.0713`
+commissioning figure — real, or an artefact of what was counted? **(3)** `V-W2` (`594ff89`): do its
+four re-measurements land where it says, and does its **re-fetch-and-SHA-256** method actually appear
+in its artefacts? **(4)** `fig107`'s absence from `P2_EVIDENCE` in `writeup/build_figures.py` —
+confirm mechanically.
+
+**Pre-committed readings.** (a) Reproducing everything is **PASS, and a real result** — say so
+plainly. (b) **Any discrepancy is reported FIRST and not softened.** (c) Re-measure from artefacts,
+never from prose. (d) **`UNVERIFIABLE` is a valid verdict** with its reason. (e) You did **not** plan
+these units: **report, do not repair** — a fix is a separate unit. (f) Lesson 68: a check that is not
+executable decays. (g) **You may not verify a wave you planned** — this verifier covers waves 1 and 3
+only, never wave 4.
+
+### Carried in EVERY wave-4 brief
+
+**COMMIT DURING THE RUN, NOT ONLY AT THE GATE** — wave 3 lost three units and only the one that had
+committed left anything behind. **MANDATORY CHECKPOINTING above ~1 h wall**, to disk, at a resumable
+granularity, saying where. **PUSH THE BRANCH ONLY — never merge, never push to `main`.**
+**Never read `DIRECTION.md`.** Re-derive from `writeup/data/*.json`, never from prose.
+
 ## Open — needs the user, not a task
 
 1. **`PROG-R4` after U5 — five costed options, ONE RULED.** The user ruled **E**, which has now
