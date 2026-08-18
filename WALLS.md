@@ -133,25 +133,42 @@ profile to a finite-energy solution with the decay actually available, or (b) a 
 finite-energy ansatz, or (c) a target for which condition (7) is not imposed — Fefferman statement
 **(D)**, the torus. **Lanes: T and L.** Attack (c) is deferred with Lane T.
 
-**⚠ 2026-08-18 — CLAUSE (a) IS CLOSED BY MEASUREMENT, NOT BY DECISION.** `L2′` (leg 397, `1493e5e`)
-read **18** localisation / far-field-decay techniques against **this object** (all 7 pre-registered
-families + 3 OFF-LIST), naming, quoting and locating the failing hypothesis in every one:
-**9 `FAILS`, 8 `FAILS-BY-CONSTRUCTION`, 1 `SATISFIED`** — the last being Chae–Wolf Thm 1.1, which
-banked the `α = 1` in the first place and supplies nothing further. **ZERO could supply `α > 1.5`
-even in principle.** A **pin, not a gap**: for any nontrivial backward λ-DSS blow-up profile of 3D
-NS the exponent is **exactly 1** — **≥ 1** by Chae–Wolf Thm 1.1, **≤ 1** by Chae–Wolf Rmk 1.2 +
-Escauriaza–Seregin–Šverák, restated independently by Pineau–Vicol (`arXiv:2607.09619v2`, 6 Aug 2026)
-§1.2. **Any `α > 1` puts `U ∈ L³(ℝ³)` and yields full regularity** — the singularity being localised
-is gone. Leg 381's bill asks `α > 1.5`: **paying it destroys the object it is for.** λ does not save
-it — `λ = 1.7 ≫ 1` defeats the λ-near-1 hypotheses of Chae–Wolf Thm 1.3 and Pineau–Vicol Thms
-1.6/1.7, but **Rmk 1.2's `L³` clause carries no λ restriction.**
+**⚠ 2026-08-18 — TWO OF W4's THREE BREAK CLAUSES ARE MEASURED SHUT, AND BY THE SAME PIN.**
+
+**(a) SHUT — `L2′` (leg 397, `1493e5e`), VERIFIED by `V-W4`.** 18 localisation / far-field-decay
+techniques read against **this object**, failing hypothesis named, quoted and located in every one
+(**9 `FAILS` / 8 `FAILS-BY-CONSTRUCTION` / 1 `SATISFIED`**; census `experiments/journal/leg_397.md`).
+**ZERO could supply `α > 1.5` even in principle.** A **pin, not a gap**: for any nontrivial backward
+λ-DSS blow-up profile the far-field exponent is **exactly 1** — **≥ 1** by Chae–Wolf Thm 1.1, **≤ 1**
+by Rmk 1.2 + ESŠ. **Any `α > 1` puts `U ∈ L³(ℝ³)` and yields full regularity**, so leg 381's
+`α > 1.5` bill **destroys the object it is for.** `λ = 1.7` defeats the λ-near-1 hypotheses of
+Chae–Wolf Thm 1.3 and Pineau–Vicol Thms 1.6/1.7, but **Rmk 1.2's `L³` clause carries no λ restriction.**
+
+**⚠ `V-W4` CORRECTED THE `≤ 1` PROVENANCE; THE DIRECTION HOLDS and (a) STAYS SHUT** — not
+through the **global** Leray–Hopf ESŠ theorem (this object's global energy is measured
+**infinite**) but through the **local** suitable-weak form (Seregin, `arXiv:math/0510396` §1),
+whose `m_T` separates the cases **exactly at the pin**. **ESŠ is `UNREACHABLE` at primary: the
+pin rests on secondaries.** Four citation defects, verbatim → `WALLS_HISTORY.md` §W4-PROV;
+register `writeup/CORRECTIONS.md` §33; detail `experiments/journal/verify_wave4.md`.
+
+**(b) SHUT — `L5` (leg 400), an ENDPOINT not a gap.** The ansatz was **built**: cut-off **potential**
+(`div V ≡ 0` exactly, no Bogovskii corrector to grow), physical support frozen at `κ = a`, **Clay
+condition (7) verified by measurement.** Gate **`NO`, threshold-free** — in `‖curl F‖_{L¹_t L^{3/2}_x}`
+the error saturates at **`c_mod = 869.288` per unit similarity time**, ρ-exponent **`+1.09e-04`** out
+to `|y| = 1261.7`: **enlarging the cutoff buys nothing**, `Σ(∞) = ∞`, so it fails for **every**
+`ε_close > 0`. What survives is **exactly the modulation commutator `T3 ∝ ṁ`** (`‖R_loc‖/‖T3‖ =
+0.999998`), size `ρ^{1-α}`. **Both exits are shut by the SAME pin:** `α > 1` strictly — which (a)
+shows destroys the object — or `ṁ ≡ 0`, exactly self-similar, excluded by **Nečas–Růžička–Šverák**
+(ARMA 136, 1996) and **Tsai** (ARMA 143, 1998). It did **not** collapse into (D)SS: `κ = 0` **is**
+exactly DSS (`7.5e-16`), called a `NO` and stopped; `κ = a` is **not** (`1.0857`). Controls carry it:
+at `α = 1.25`, `1.6` the machinery returns `−0.2498`, `−0.5996`, tracking `1 − α`. **Ceiling: Tier 2,
+float64, SYNTHETIC profile — route 4 has none banked. The EXPONENT is a class property and is settled;
+the CONSTANT is not route 4's number.**
 
 **WHAT THIS DOES AND DOES NOT DO.** It does **not** break W4 — a wall breaks when (a), (b) or (c)
-*succeeds*, and (a) has been measured **shut**, which is the opposite. It says **nothing** about
-whether 3D NS is regular, and it does **not** retire §6(i), which wants *certified* decay and a
-built cutoff. **Lane L's live attacks are therefore (b) and, if un-deferred, (c)** — a **natively
-finite-energy DSS ansatz**, and **a target not imposing condition (7)**. Both need their own
-pre-registration; neither was entered.
+*succeeds*; two are **shut**, the opposite. It says **nothing** about whether 3D NS is regular and
+retires neither §6(i) nor §6(ii). **W4's ONLY UNBROKEN CLAUSE IS NOW (c)** — a target not imposing
+condition (7): the torus, **deferred with Lane T.** A ranking question, not a wall movement.
 
 ## W5 — Persistence and stability under localisation
 
@@ -225,23 +242,18 @@ return: Lane V → HELD, Lane L sole priority.**
 | lane | was | **now** | why |
 |---|---|---|---|
 | **V** | 2 | **ACTIVE — un-held 2026-08-18 by RULING (Q1)** | The hold was one line and it goes in one line. **W3's prose test governs, W3 STANDS, the premise SURVIVES**: the cell is occupied on leg 174's criterion, but the certified object is **not a finite-time singularity**, so the target the lane exists to supply is still missing. **Next unit is OBLIGATORY IN WAVE 6** (ruling Q4): the adversarial full-text audit of `2509.25116`, ≈4–8 h, scope set by the ruling. **Lane L keeps sole priority** (ruling Q5 confirms `L5`). |
-| **L** | 3 | **PRIORITY, ACTIVE** | **On every path.** Leg 390: the torus does **not** retire §6(i)/(ii), so the two no-method obligations block **every** branch. **`L2′` (2026-08-18) is the lane's first landed unit in 399 legs** — and it **narrowed** the lane: W4 clause (a) measured shut. |
+| **L** | 3 | **PRIORITY, ACTIVE** | **On every path.** Leg 390: the torus does **not** retire §6(i)/(ii), so the two no-method obligations block **every** branch. **`L2′` and `L5` (2026-08-18) are the lane's first landed units in 400 legs** — and both **narrowed** it: W4 clauses **(a) and (b)** measured shut, leaving only **(c)**, which is Lane T's. |
 | **T** | 1 | **DEFERRED** | The demonstrated-technology argument fell to the lane's **own** measurement (leg 393, replicated by 394). Alive only through **`T2″`**; **`T3` deferred, not killed.** `OPTIONS.md` §E. |
 | **R** | continuous | **unchanged** | Runs inside **every** unit's pre-registration and takes its own units when a wave has room. **Never sets a wave's direction.** |
 
-**Two byproducts of wave 2 point at V and L, neither found by looking for them:** `T5`'s **`O1`**
-(leg 315's Taylor-model flow-map, *"needs no function space"*) points at **Lane V**; `T6`'s Chen–Hou
-near-miss (`arXiv:2308.01528` — computer-assisted blow-up, **unbounded** domain, **>1D**, **algebraic
-decay**) points at **Lane L** and route 4's `ℝ³` geometry, statement **(C)**. **`O1` is unranked and
-belongs to no unit yet.**
-
-**⚠ IT WAS RE-EARNED AND IT DID NOT SURVIVE (§3i, 2026-08-18).** Lane V's rank rested on leg 174's
-*"empty for want of a target"*. `V3` measured that premise instead of inheriting it, and **it did not
-hold.** Lane L's rank is **unaffected** — it rests on leg 390's measurement, not on a survey — so
-**Lane L is the sole priority lane. It has now landed, and what it landed CLOSES one of its own
-attacks (W4 clause (a)) rather than opening one.** §3i q6 is therefore live: what Lane L has left is
-clause (b) and `L3`/§6(ii), and neither has a costed unit yet. **This is the question wave 5 must
-answer before it ranks anything.**
+**⚠ §3i q6 WAS LEFT LIVE FOR WAVE 5 TO ANSWER, AND WAVE 5 ANSWERED IT.** The question was what Lane
+L has left once `L2′` closed W4 clause (a). **`L5` (leg 400) has now closed clause (b) too, on a
+measurement**, and what remains inside W4 is **only clause (c) — the torus, deferred with Lane T.**
+Lane L's rank is **unchanged and re-earned**: it still owns **W5** and **§6(i)/§6(ii)**, both
+untouched and both no-method. **The live ranking question is no longer "what else does Lane L have"
+but whether W4 clause (c) is enough on its own to re-open Lane T** — and re-open condition (i) or
+(ii) is still what decides that, not a Conductor's preference. Retired narrative, verbatim:
+`WALLS_HISTORY.md` §PRIORITIES.
 
 **Binding on every lane: C1 STANDS, EXEMPLAR-FREE**, and no unit may cite it as evidence the
 technology closes for any object class. **Naming requirement unchanged, not waivable by the
@@ -326,12 +338,9 @@ and do not claim it without the test.**
 
 ## LANE L — THE LAST OBLIGATIONS. **PRIORITY, ACTIVE (ruling 2026-08-14).** *The only lane touching the FINAL blockers.*
 
-> **PROMOTED 2026-08-14. Lane L is on every path.** Leg 381's banked bill: critical `L³` tail
-> **326.875 per decade**, required `α > 1.5` against available `α = 1.0`. ~~**A deficit of 0.5 in a
-> decay exponent is a number, not an impossibility.**~~ **FALSIFIED 2026-08-18 by `L2′`: for this
-> object it IS an impossibility — `α` is pinned to exactly 1 and `α > 1` gives full regularity.**
-> The promotion **stands on leg 390's measurement**, which is untouched; **this half of its stated
-> reason does not.**
+> **PROMOTED 2026-08-14. Lane L is on every path.** Leg 381's banked bill and leg 390's torus
+> pricing are recorded once, at **W4**, and are not restated here (§3j — pointer, not restatement).
+> **The lane's rank does not rest on a survey; it rests on leg 390's measurement.**
 
 **The gap this lane exists to close.** `CLAY_OBLIGATIONS.md` §6 names **two obligations with no known
 method** — **§6(i)** certified far-field decay with an admissible cutoff, **§6(ii)** persistence of
@@ -343,13 +352,12 @@ answer.
 other lane retires or even touches them.** If every other lane succeeded completely, these two would
 still be the answer to *"why isn't this a Clay solve yet."*
 
-**⚠ 2026-08-18 — THE LANE HAS LANDED ITS FIRST UNIT IN 399 LEGS, AND IT NARROWED THE LANE.**
-`L2′` (leg 397, `1493e5e`, `UNVERIFIED`) answered its gate **`YES`**: the failing hypothesis is
-named, quoted verbatim and located for **all 18** techniques read. **The *"no known method"*
-assumption on §6(i) is no longer an assumption — it is a measurement, and a stronger one than the
-assumption was:** nothing can supply the 0.5, because **`α` is pinned to exactly 1** and any
-`α > 1` gives full regularity (W4, above). **`L2` is answered; `L1`'s question is answered with it**
-for the decay clause. **What survives in this lane is (b) and `L3`** — see W4.
+**⚠ 2026-08-18 — THE LANE LANDED ITS FIRST TWO UNITS IN 400 LEGS, AND BOTH NARROWED IT.** `L2′`
+(leg 397, `1493e5e`, **VERIFIED by `V-W4`**) closed **W4 clause (a)**; `L5` (leg 400) closed **clause
+(b)**, threshold-free, with the number. Both are recorded in full at **W4** and neither is restated
+here. **What this lane has left is W5, §6(i) and §6(ii) — all three untouched, all three no-method —
+and inside W4 only clause (c), which is Lane T's.** A lane that closes its own attacks is doing its
+job; it is not the same thing as progress, and no `L1→L4` link moved for either unit.
 
 **L1 — price §4 on `ℝ³`.** ~~Read the published attempts to localise a self-similar profile to
 finite energy; state, per attempt, the named hypothesis that fails for DSS.~~ **DONE by `L2′` for
@@ -396,30 +404,23 @@ costs: `OPTIONS.md` §B.
 ### R2–R5 — the deferred Lane R units. **Ledger, costs and notes: `OPTIONS.md` §B** (§3j — pointer,
 not restatement). Kept here only where a wall depends on it:
 
-- **R2 deflation** — strongest surviving Lane R item; attacks the largest measured waste (R0: **57 of
-  U5's 100 seeds already spent by U3**). Deflate against the union of both runs' solutions.
+- **R2 deflation** — strongest surviving item; attacks the largest measured waste (`R0`: **57 of U5's
+  100 seeds already spent by U3**). Deflate against the union of both runs' solutions.
 - **R3 multiple shooting** — named by route-DSSP brick **B6's own spec**, built without it.
 - **R4 second-order stepper** — U3's is **Lie–Trotter, globally first order** (measured ratio 2.00),
-  so its orbits are `O(dt)` perturbations of the true flow's while the published rates come from
-  higher-order codes. **`E-iii` promoted it. Invalidates M1's reproduction; must re-run it.**
-- **R5 carry `m`** — U3's residual carries an `x`-shift only, so every negative here about orbit
-  recovery carries *"with a residual that cannot represent one of the two shift classes."*
-  **CORRECTED by U5: R5 does NOT help the band** (334 anchored candidates unlocked, **1** in the
-  published `|s|` band). It is the fix for `|s| > 0.9`. Same unit as `PROG-R4` **C**; don't double-count.
+  so its orbits are `O(dt)` perturbations of the true flow's. **`E-iii` promoted it. Invalidates M1's
+  reproduction; must re-run it.**
+- **R5 carry `m`** — every negative here about orbit recovery carries *"with a residual that cannot
+  represent one of the two shift classes."* **CORRECTED by U5: R5 does NOT help the band** (334
+  anchored candidates, **1** in the published `|s|` band). It is the fix for `|s| > 0.9`, and is the
+  same unit as `PROG-R4` **C** — don't double-count.
 
-**THE H-HARD DIAGNOSTIC HAS RUN — `E`, landed `d0d72b1`** — the hardest number Lane R has produced
-about the named rows. Seeded at the published `(T, s)` of all eight Lucas–Kerswell Table IV rows, two
-arms each: **2 of 16 converged, 0 recovered ANY named row**, both convergences genuine solutions of
-this realization that are **not** their rows, **both below the 0.15 `|s|` shelf**. Not a broken
-instrument — the positive control recovered a perturbed banked orbit through **this unit's own
-predicate**. Full result: `experiments/journal/prog_r4_e.md`.
-
-**What it does and does not do.** It does **not** convert `G1` to a `no` — a hand-placed seed is
-**not** a mined seed, so `G1` stays `UNDER-RESOURCED` and was not written to. It does **not** refute
-H-hard's alternatives: the `R < 0.25` window **remains a live confound `E` could not separate.** It
-**moves the suspicion from the budget to the realization** — strictly closer than leg 353 from
-strictly **worse** seeds, and still nothing. **`E-ii` named `R4` in advance; `E-iii` fired and points
-at `R3`/`R2`. Both pointers are live; the re-ranking between them is not yet made.**
+**`E`, the H-hard diagnostic, LANDED and VERIFIED — retired 2026-08-18 under §3j.** Full text
+verbatim: `WALLS_HISTORY.md` §E; result `experiments/journal/prog_r4_e.md`. **Live here because a wall
+depends on it:** `G1` stays **`UNDER-RESOURCED`** (a hand-placed seed is not a mined seed) and was not
+written to; the `R < 0.25` window **remains a live confound `E` could not separate**; and **`E-ii`
+named `R4` in advance while `E-iii` fired and points at `R3`/`R2` — both pointers live, the re-ranking
+between them not yet made.**
 
 **A ban that binds this lane: leg 349's GA gate answered NO (0 of 6 properties cleared), so
 `GA compute on an unvalidated fitness` is live.** A *learned* or *evolved* seed-scoring function is

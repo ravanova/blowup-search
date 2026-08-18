@@ -35,12 +35,6 @@ candidate, and the plan must say why it was or was not taken.
 U5 raised five costed options (`experiments/journal/prog_r4_u5.md` §9); **the user ruled option E on
 2026-08-13** and the other four are recorded here.
 
-**`E` HAS RETURNED — landed `d0d72b1`, and it changes the re-open conditions below.** Its diagnostic
-(3) seeded all eight named Table IV rows directly at their published `(T, s)` and **recovered none:
-0 of 16, positive control firing.** So **option B's re-open condition did NOT fire** — if anything it
-hardened, because the failure now survives at seed quality no amount of supply can beat. **A, B and D
-all buy supply, and supply is now refuted twice over.**
-
 **The constraint shaping all of them:** the anchored admissible pool is **exhausted** at `R < 0.25` —
 241 exist, 100 spent, **141 remain, only 12 in-band** — so nothing keeping the current window can push
 the in-band arm past 72 attempts, ever. **And U5's pre-committed reading fired on branch (b): the bias
@@ -62,14 +56,10 @@ positive control recovered through the unit's own predicate. **`E-iii` fired (�
 and there is not one. **`G1` stays `UNDER-RESOURCED`; `E` did not write to it** (hand-placed seed at
 published coordinates, not a mined seed).
 
-**⚠ ~~THE COST MODEL UNDER ALL FOUR OPTIONS IS WRONG BY ~8×.~~ REFUTED 2026-08-18 by `V-W3`
-(`2b8755e`): NO OVERRUN, THE `8×` WAS A UNITS ERROR** — `core ÷ wall` is the worker count. `0.0713`
-**WALL**-h/attempt at 8 workers = `0.5704` **CORE**-h/attempt against `9.08843/16 = 0.56803`
-measured: **0.9958, i.e. 0.4% UNDER.** **AND `V-W3`'s OWN EPOCH FIGURE IS CORRECTED** by `D-REPAIR`
-(`036e56d`): its *"2.3% fewer epochs/attempt"* compared `E`'s `n_iters` against U5's **ledger rows**,
-which differ by one row per non-converged attempt (`2195 − 2104 = 91 = 100 − 9`; `E`: `357 − 343 =
-14 = 16 − 2`). **Like for like `E` used MORE: +1.9% on `n_iters`, +1.7% on ledger rows**, at
-**95.389 s/epoch** against the banked 95 s model (+0.41%).
+**⚠ THE `~8×` COST-MODEL OVERRUN IS REFUTED, and the epoch figure that refuted it is itself
+corrected.** Full text retired 2026-08-18 under §3j → `WALLS_HISTORY.md` §OPTIONS-A. **Live
+consequence: the banked cost model STANDS** (`0.9958` of measured, 0.4% under), so **no option
+in this table is re-priced.**
 
 ## B. Lane R — the units not taken
 
@@ -135,24 +125,34 @@ in full. **C1 may not be cited as evidence any apparatus closes for any object c
 *"which needs L1 first"* from stage V's lift clause, so a fluid transport target attacked with a
 dynamical closure is **outside both bans**.
 
+**⚠ NEW 2026-08-18, FROM `V-W4` — AND IT IS A USER ESCALATION, NOT AN OPTION.** `arXiv:2509.25116`
+**carries no journal-ref**: it is an **unrefereed preprint**, while `PUB_0C_CENSUS_SPINE.md` §1
+speaks of *"any **published** work."* **The Conductor has not ruled it** — a defective criterion
+wording is the user's. Packet: `writeup/escalations/ESCALATION_PUB0C_PUBLISHED_2026-08-18.md`.
+**Nothing waits on it:** W3 stands on the prose test either way (ruling Q1), and `V3-audit` proceeds.
+
+**`V-REPAIR` — the correction record `V-W4` earned, NOT a re-grading.** `D1`–`D4` are quote and
+attribution defects in `V3`'s banked rows; `D5`/`D6` are the pin's provenance; `N1` is that
+`326.875` per decade is **amplitude-dependent**, not portable. **Ruling Q3 governs: a correction
+RECORD in `writeup/CORRECTIONS.md`, banked artefacts UNTOUCHED.** Cheap; ride it with a
+construction unit rather than spend a slot. | **~1–2 h**
+
 ## D. Lane L — the last obligations. **ACTIVE, PRIORITY LANE (user ruling 2026-08-14).**
 
 **The ruling's reason: Lane L is on every path.** Leg 390 measured that the torus does **not** retire
 `CLAY_OBLIGATIONS.md` §6(i)/(ii) — **OPEN in both branches** — and (D)'s gain on §4 is *"the
 acceptance test, not the work."* **Nothing queued anywhere retires them.**
 
-**⚠ 2026-08-18 — THE LANE HAS LANDED, AND ITS FIRST UNIT NARROWED IT.** `L2′` (leg 397, `1493e5e`,
-`UNVERIFIED`) resumed wave 3's surviving pre-registration and answered its gate **`YES`**: 18
-techniques read, failing hypothesis named/quoted/located in every one, **and ZERO could supply
-`α > 1.5` even in principle** — `α` is pinned to exactly 1, so paying leg 381's bill destroys the
-object (`WALLS.md` §W4). **W4 clause (a) is measured SHUT.** §6(i) is **NOT** retired.
+**⚠ 2026-08-18 — THE LANE LANDED TWO UNITS AND BOTH NARROWED IT.** `L2′` (`1493e5e`, **VERIFIED by `V-W4`**) shut W4 clause **(a)**; `L5` (`4be46ef`) shut clause **(b)**. Recorded once, at `WALLS.md` §W4, and not restated here.
 
 | id | unit | what it is | cost |
 |---|---|---|---|
 | **L1**, **L2** | price §4 / attack §6(i) | **TAKEN by `L2′`, `1493e5e`, for the DECAY clause.** Pointer: `WALLS.md` §W4, `experiments/journal/leg_397.md` §§4–9. | — |
 | **L1-res** | the 4 pre-arXiv primaries | NRŠ 1996, Tsai 1998, Bogovskiĭ 1979, Giga–Kohn banked **`UNREACHABLE` as declared in advance**, quoted through secondaries. **Low value.** No author contact — prohibited. | ~1 unit |
 | **L4** | **certify the decay** | §6(i) wants *certified* decay + a built cutoff, and `L2′` built neither. Interval/NK enclosure on route 4's own profile + a cutoff controlled in a scaling-invariant norm. **`§6.2` predicts `α_hi = 1`, which does not pay the bill** — price that in before dispatching. | **≥1 full wave** |
-| **L5** | **W4 clause (b): a NATIVELY FINITE-ENERGY ansatz** | The residual `L2′` names first: an ansatz that **never asks the profile for decay at all**, so the pin at `α = 1` does not bind it. **UNCOSTED, unpre-registered, and the strongest surviving item in the lane.** | needs scoping |
+| **L5** | W4 clause (b) | **TAKEN and CLOSED, `4be46ef`. GATE `NO`, threshold-free.** The ansatz does not escape the pin: what survives localisation is the modulation commutator `T3 ∝ ṁ`, size `ρ^{1-α}`, and `α = 1` makes it ρ-independent. `WALLS.md` §W4. | done |
+| **L6** | **BANK A DISCRETE ROUTE-4 PROFILE** | `L5`'s own `UNDER-RESOURCED` residual, and the thing every Lane L number now waits on: **route 4 has no banked profile** (leg 382 line 174, leg 397 SS1), so `L5`'s exponent is a class property but its constant is a synthetic's. **This is construction, not reading.** | **~10² agent-h** |
+| **L7** | interval the commutator | turn `L5`'s float exponent into a certified bound — a Route-D-style interval core over the annulus. **Needs `L6` first.** | ~10¹ agent-h **on top of L6** |
 | **L3** | attack §6(ii) — persistence under localisation | The published persistence techniques (nonlinear stability with a finite unstable spectrum, the Chen–Hou line, `arXiv:2308.01528`) have **never been read against this object**. **DEFERRED — `L3′` died in wave 3 without committing.** | — |
 
 **The record's best lead on this lane arrived as a by-product** (§F): **`arXiv:2308.01528`, the
@@ -253,11 +253,6 @@ H11 — the one previous attempt at this lane's target, by anyone, died that way
   is in **no** entry of `P2_EVIDENCE` — `build_figures.py` registers `fig108`/`fig109` and skips it.
   So fig107 is never rebuilt or self-checked and nothing detects it going stale against
   `p2_prog_r4_u5_v1.json`. One line, in numeric order. **Owed, not optional; lesson 68.**
-
-- **`writeup/INDEX.md` ROWS — A CONDUCTOR-OWNED DEBT.** `T4`, `T6`, `T5`, `V1`, `E` and `V-W2` all
-  landed without INDEX rows, because this Conductor did not put `INDEX.md` in anyone's territory and
-  did not write the rows itself. `E` flagged its own missing row and correctly left it alone. Owed:
-  six rows, or an explicit ruling that `INDEX.md` is retired.
 
 - **A DISPATCH RULE `E` PAID FOR: MANDATORY CHECKPOINTING ABOVE ~1 h WALL.** The host killed `E`'s
   unattended run **twice**; it survived on per-attempt `.pkl` checkpoints. The rules adopted after the

@@ -1,9 +1,120 @@
 # ORCH_STATE — orchestrator handoff
 
 **Owner: CONDUCTOR** (`ORCHESTRATION.md` §3g; the separate "orchestrator" role no longer exists).
-Written **at every wave boundary** — in the same commit as the wave plan (§3g step 1), again in the
-same commit as the wave's integration (step 4) — and at every handoff. A fresh session reads Step 0b
-before dispatching anything.
+Written at **every** wave boundary — with the plan (§3g step 1) and with the integration (step 4) —
+and at every handoff. A fresh session reads Step 0b before dispatching anything.
+
+**The 2026-08-14 CONDUCTOR fork is CLOSED at `5d9c065`** — `E`, `V-W2`, `T1`'s record and the C1
+ruling are **DONE**; any row claiming *"`E` DID NOT RETURN"* is **stale**. Full text retired
+verbatim 2026-08-18 under §3j → `## Superseded — the 2026-08-14 fork`.
+
+---
+
+## LIVE — CONDUCTOR mode, **WAVE 5 CLOSED — ALL THREE UNITS LANDED**, 2026-08-18
+
+### Wave 5 CLOSED — three planned, three dispatched, three landed
+
+`D-REPAIR` `036e56d`, **`L5` `4be46ef`**, **`V-W4` `b46ee4d`**. Gates immutable at
+`writeup/waves/WAVE5_PLAN.md` @ `1e49a00`, committed before any dispatch and **unchanged after it** —
+including when a ruling landed mid-wave asking for an addition to `L5`'s reading: **I refused to
+amend a dispatched gate** and required it at integration instead (demoted block below).
+
+### What I audited, mechanically, and NOT on either unit's report
+
+**`L5`.** Five new files, **no banked JSON touched**, journal insert-only 654/0. Pre-registration
+`e2f13c1` carries the gate, the readings and the discriminator, holds **no result number**, and
+precedes the first code commit by 15 min. **I re-fitted all 18 sweep cells** and reproduced every
+exponent; its evidence script runs clean from a fresh worktree. **The controls are
+why I believe the `NO` is about the object and not the apparatus:** the same machinery returns
+`−0.2498` at `α = 1.25` and `−0.5996` at `α = 1.6`, tracking `1 − α`, and the unmodulated `SS`
+control at `κ = a` returns `−2.000005` — with `ṁ = 0` the localisation error **is** summable. `C6`
+did **not** fire as planted on its 5-point form (`2.03e-02` vs `1e-02`); it **says so**, **the
+tolerance was not moved**, and the constant it perturbs is not what the `NO` rests on.
+
+**`V-W4`.** Three new files, **nothing of `V3`'s or `L2′`'s edited**, no Conductor file touched.
+`self_hash` `e0171ac1e855f90e` recomputed independently. **I re-ran its re-derivation from an empty
+cache against primaries I fetched myself**: exit **1** with **exactly the two item-(2) discrepancies
+it reports**, none manufactured, (1)(3)(4)(5) clean, `p2_route_l2_decay_v1.json` regenerating
+**bit-identically**. It also **withdrew one of its own first-pass claims** mid-run.
+
+### §3i — THE DIRECTION CHECK, per unit, against the RECORD
+
+**`L5`.** **(1)** No link moved; Tier 2, float64, **synthetic** profile. **(2)** It made **FALSE** the
+record's own description of clause (b) as *"the strongest surviving item in the lane"* which
+*"never asks the profile for decay at all, so the pin at `α = 1` does not bind it"* (`OPTIONS.md` §D,
+now corrected): the ansatz **does** ask, through the modulation commutator's `ρ^{1-α}` scaling, and
+the escape was illusory. **(3)** Lane L keeps its rank, but **not on W4** — its rank rests on leg
+390's measurement that §6(i)/(ii) block every branch, and those are untouched. Its W4 content is now
+**exhausted**; the one clause left is Lane T's. **(4) YES, and this is the sharpest thing in the
+wave.** `L5`'s `NO` is a pincer whose **two jaws are both literature this repository has never read
+at primary**: the `α = 1` pin (ESŠ, `UNREACHABLE`, journal-only, and `V-W4` found the carrying
+citation names the **wrong ESŠ paper** — `D5`) and the exact-self-similar exclusion (NRŠ 1996, Tsai
+1998, both pre-arXiv, both banked `UNREACHABLE`). **The clause-(b) result is exactly as strong as
+four secondary readings.** **(5)** Cheapest killer: *read those four at primary*, ~1 unit — **not next
+because it cannot be bought here** (all journal-only, no S2 key, author contact prohibited). That is
+`UNDER-RESOURCED` **with a cost**, not a ranking. **(6)** If Lane L died tomorrow: Lane V's
+obligatory audit and Lane T's `T2″`, both cheaper — but **neither touches §6(i)/(ii)**, which is why
+Lane L is not dead. **(7) YES, still in the loop, flag stands.** Last six landed: reading, grading,
+verification, infrastructure, **construction**, verification. Wave 6's debt 1 is **binding** now.
+
+**`V-W4`.** **(1)** No link moved — a verification builds nothing. **(2)** It made **FALSE** four
+fields presented as verbatim, the `T2c` citation, the word *"independently"*, and `326.875` as a
+portable constant — and the implicit claim that the `≤ 1` direction runs through the **global** ESŠ
+theorem: this object has infinite global energy, is **not** Leray–Hopf, and runs through the
+**local** suitable-weak form or not at all. **(3)** Lane V's rank is the user's (un-held by ruling);
+`V-W4` adds a **user escalation**, not a ranking input. **(4)** As `L5` (4) — the same undischarged
+ceiling, now named precisely instead of gestured at. **(5)–(7)** as above.
+
+**RE-RANKING: none this wave, and the reason is recorded so it is not drift.** W4 running out of
+clauses in Lane L does **not** re-open Lane T — that would be a decision superseding a measurement,
+backwards. Lane T's two re-open conditions are unchanged and neither fired. What changed is the
+**value** of `T2″`, now the cheapest thing that could put a live W4 clause back in front of Lane L.
+**Cost before ranking.**
+
+### Headroom at the wave boundary (§3j) — MEASURED IN **BYTES**, AND THE FIRST COUNT WAS WRONG
+
+**A correction the next Conductor needs:** I first measured with Python `len()` — **characters**.
+These files are dense with multi-byte UTF-8 (`—`, `⚠`, `≤`, `ρ`, `α`), so that under-reports by ~2%,
+and on bytes **`WALLS.md` and `OPTIONS.md` were both OVER cap** when I read them as inside it. `HEAD`
+was compliant: the defect is **mine, this integration's**. **Measure with `wc -c`.**
+
+| file | bytes | cap | free |
+|---|---|---|---|
+| `STATE.md` | 24,198 | 24,576 | 378 (longest row 583 ≤ 600) |
+| `WALLS.md` *(excl. exempt `## History`)* | 32,233 | 32,768 | 535 |
+| `OPTIONS.md` | 24,487 | 24,576 | 89 |
+| `ORCH_STATE.md` LIVE block | **at cap** | 8,192 | **<100** |
+
+Integration cycles: **wave 5 = 2**. **Context HAS been summarised** — §9d's triggers are 12 cycles
+*or* first summarisation, and **the second has fired**: wave 6 is planned knowing a handoff is due.
+
+**Retired this integration**, verbatim: `E`'s H-hard narrative and the superseded lane-priority
+paragraphs → `WALLS_HISTORY.md` §E, §PRIORITIES; `V3` and `L2′` rows → `writeup/INDEX.md`; the wave-5
+in-flight narrative and the fork paragraph → the blocks below; **and, on finding the overrun, two
+more** — `V-W4`'s `≤ 1` provenance paragraph → §W4-PROV (1,087 B; (a) is SHUT *and* VERIFIED) and the
+refuted `~8×` cost-model block → §OPTIONS-A (753 B, struck kept struck), both leaving live pointers
+carrying the wall-relevant facts. **Retirement, not compaction.**
+
+**THE NEXT RETIREMENT IS STILL NAMED, because 535 bytes is not headroom.** `WALLS.md`: W3's
+cell-occupancy narrative retires **the moment wave 6's audit lands** (that unit supersedes it), and
+Lane T's *price* bullets restate `OPTIONS.md` §E — **but Lane T got MORE load-bearing this wave, so
+those move only behind a pointer that keeps every number.** `OPTIONS.md`: §F's discharged items.
+`ORCH_STATE.md`: the remedy is §3j's own — **demote this wave's audit detail when wave 6's plan is
+written**, the next touch of this file. **If a wave needs more than that, the cap itself is
+the escalation, not the content.**
+
+### Open escalations
+
+**NEW, OPEN, NOT RULED:** `writeup/escalations/ESCALATION_PUB0C_PUBLISHED_2026-08-18.md` — `PUB_0C`
+§1 grades *"any PUBLISHED work"*, but `arXiv:2509.25116` carries **no journal-ref**. **A defective
+criterion WORDING is the user's, never the Conductor's**, and **nothing is stopped by it.** The W3
+wording escalation is **RULED** and transcribed (`STATE.md`, `WALLS.md`). Still on the desk: `T1`'s
+ban-wording packet (machine record **DISCHARGED**) and the leg-257 lift-clause defect, **recorded,
+NOT ruled**. C1 is **DISCHARGED** and stands **EXEMPLAR-FREE**.
+
+---
+
+## Superseded — the 2026-08-14 fork, retired from the live preamble 2026-08-18 under §3j
 
 **The 2026-08-14 fork is CLOSED at `5d9c065`.** Two concurrent CONDUCTOR sessions diverged at
 `2928966` and were merged: the branch supplied the C1-exemplar ruling, wave 3 and `V-W2`; `main`
@@ -11,9 +122,7 @@ supplied unit **`E` LANDED COMPLETE at `d0d72b1`**. **Any row anywhere claiming 
 is stale** — it was true when written on the branch and is false now. Do not re-dispatch a wave-2
 verifier, do not re-raise the C1 escalation, do not redo `T1`'s machine record: all three are DONE.
 
----
-
-## LIVE — CONDUCTOR mode, **WAVE 5 IN FLIGHT — `D-REPAIR` LANDED, `L5` AND `V-W4` OUT**, 2026-08-18
+## Superseded LIVE block — wave 5 IN FLIGHT, demoted verbatim 2026-08-18 at wave 5's close (§3j)
 
 ### Wave 5 — planned and committed before dispatch: retired from LIVE under §3j
 
@@ -102,15 +211,6 @@ after dispatch** — that is the one thing the pre-registration discipline exist
 requirement is already covered in substance. **If `L5`'s return does not draw the distinction
 explicitly, I require it at integration and say so there.** Recorded now, before the return, so it
 cannot be a judgement made after seeing the answer.
-
-### Open escalations
-
-**NEW, OPEN:** `writeup/escalations/ESCALATION_W3_WORDING_2026-08-18.md` — three questions on W3's
-two disagreeing tests. **Work has not stopped.** `T1`'s ban-wording packet remains on the user's desk
-(machine record **DISCHARGED**). The lift-clause defect (leg 257 / fourth space) is **recorded, NOT
-ruled**. C1 is **DISCHARGED** and stands **EXEMPLAR-FREE**.
-
----
 
 ## Superseded LIVE block — wave 5 as PLANNED AND DISPATCHED, 2026-08-18
 

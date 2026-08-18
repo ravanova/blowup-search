@@ -46,6 +46,7 @@ lesson 35). This file is the index, not the substitute.
 | 13 | leg 174's banked `writeup/data/p2_route_vbs_v1_scoping.json::the_empty_cell.meaning`: *"no published work applies interval arithmetic to a **dissipative** fluid equation's own self-similar object"* — banked as the meaning of an empty occupancy cell and read downstream as the content of wall **W3** | **`V3` / leg 399** (2026-08-18, `16ba44e`), grading 9 fluid blow-up CAPs against leg 174's **own, unchanged** criterion → **the Conductor** (this entry), on **USER RULING (Q3) of 2026-08-18**, `writeup/escalations/RULING_W3_WORDING_2026-08-18.md` | **MEASURED FALSE, and no reading survives** — the word *self-similar* is in the sentence. `arXiv:2509.25116` (Hou–Wang–Yang) encloses, by interval arithmetic (§7.3, p.55), a solution of a system carrying `−ΔŨ` (Prop. 1, eq. (1.15), p.5) for the **unforced 3D incompressible Navier–Stokes equations** (eq. (1.1)), and its object **is** self-similar (forward, from singular data). **THE ARTEFACT IS NOT EDITED**: the ruling makes the Conductor's refusal — *"rewriting a banked datum to match a later finding is precisely how a record stops being a record"* — **the standing rule for banked artefacts**, not a one-off judgement. **W3 itself is unrefuted and STANDS**: its prose test requires a genuine **finite-time singularity**, and this object is not one (§1.2, p.2, *"smooth for positive times"*). The cell is occupied and the wall stands — **two different claims.** §32 below |
 | 13 | (a) PUB2 §4.5 stated that “any claim that the digits `0.0908` and `0.71465` are convention-independent” does not survive; (b) the same paragraph's “optimistic by `7.9×`” factor was printed with no convention caveat anywhere in the document | **leg 281** (drafted 2026-08-07, Route-CVF, branch `leg/281-cvf-v1`, never dispatched) → **leg 280** (this entry; corrected (a), flagged (b), both in place, 2026-08-11) | (a) is **backwards for `0.71465`**: it is convention-**free** to `1.87e−16` (a ratio of `X`-norms with no border coordinate, so the weight cancels) — only `0.0908` is convention-relative. (b) the `7.9×` factor **is** convention-relative and unflagged: it ranges `5.265 … 656.95` (`124.8×`) over the same weight sweep §0 names. §14 below |
 | 14 | leg 221's own repair-verification sweep found `writeup/data/spike1_stepC_gate.json` does not reproduce (`.runs[0].alpha` moves `13.2%`, two of four `predicate_checks` flip), identically with and without its own repair; declined to adjudicate, flagged forward as possible staleness or environment sensitivity | **leg 335** (2026-08-12, Route-S1GR) | **neither.** `experiments/p2_route_bvrr_v1_repair.py`'s `BANKED` registry entry for this artifact invokes the generator with `argv=["--logged"]` only, omitting the `--steps 2500` flag the banked artifact's own `runs[*].steps` field proves was used originally, silently falling back to the CLI default of `400` — a harness bug, not code drift or environment sensitivity (BLAS-thread control: `alpha` spread `1.55e-15` across `1/2/4` threads). All four resolution rungs reproduce the banked `alpha` to float64 precision when re-run at the correct `steps=2500`, and `0` of `4` `predicate_checks` actually differ. **REPRODUCIBLE_AS_BANKED.** §23 below |
+| 15 | wave 4's two banked artefacts, `p2_route_v3_gradeA_v1.json` (4 quote/attribution sites) and `p2_route_l2_decay_v1.json` (the pin's provenance, and `326.875` per decade presented as a portable constant) | **`V-W4`** (2026-08-18, `b46ee4d`, `writeup/data/p2_verify_wave4_v1.json`), which **REPORTED and REPAIRED NOTHING** — the Conductor recorded it at integration | **six defects and one note, NONE of which changes a verdict or a number.** The `≤ 1` direction **still follows**, through the **local** suitable-weak-solution form (Seregin, `arXiv:math/0510396` §1), not the global Leray–Hopf form the phrasing suggested; ESŠ is `UNREACHABLE` at primary and banked as such, **never as a zero**. **ARTEFACTS NOT EDITED** (ruling Q3); the per-field repair is a wave-6 unit. §33 below |
 
 **The process pattern, which is the reason for the register.** In #1 the repository *had the
 reference in hand before it drew the conclusion* — leg 111's own novelty log §2 recorded the
@@ -2331,3 +2332,32 @@ retitled, old title struck not deleted, the ruling's required paragraph placed b
 `STATE.md`, `OPTIONS.md` and this file carry the correction; the artefact carries none of it.
 **No link of the `L1 → L4` chain moved.** The ruling says so itself: it moved wording and a queue.
 Ceiling **TIER 2**. Clay stays **~0.05%**.
+
+## §33 — `V-W4`'s six defects and `N1`: the correction RECORD for wave 4, artefacts untouched
+
+**Recorded 2026-08-18 at wave 5's integration. Ruling Q3 governs: a correction RECORD, and the banked
+artefacts are NOT edited.** `V-W4` (`b46ee4d`, `writeup/data/p2_verify_wave4_v1.json`, `self_hash`
+`e0171ac1e855f90e`, recomputed independently by the Conductor) reproduced **all five** of its gate
+items and located **six defects plus one note**, none of which changes a verdict or a number. The
+authoritative list is that artefact's `discrepancies_first_and_unsoftened` and
+`experiments/journal/verify_wave4.md`; this entry exists so the record names them where a reader of
+the corrections file will find them, and so the **repair unit wave 6 owes** has a scope.
+
+| id | site | what is wrong | what it does NOT change |
+|---|---|---|---|
+| **D1** | `p2_route_v3_gradeA_v1.json`, row `R7` (`2509.14185`), `failing_clause_quoted` | *"stringent"* dropped from a field presented as **verbatim** | the `NO` verdict — NIL |
+| **D2** | row `R6` (`2208.09445`) | attribution: the second failing clause is verbatim but describes **prior work [69]**, not the paper's own construction | the verdict — the **first** clause is the paper's own voice |
+| **D3** | row `R5` (`2305.05660v3`) | *"linear"* banked where the paper has *"non- linear"* (a `pdftotext` hyphenation) | NIL. **`V-W4`'s own first-pass extra claim here was WRONG and it withdrew it against itself** |
+| **D4** | row `R3` (`2605.15149v1`), supporting evidence | inserted *"the"*; *"in INTLAB"* is not the paper's phrasing; the paragraph is at **p.71**, not *"~68"* | the verdict — NIL |
+| **D5** | `p2_route_l2_decay_v1.json`, row `T2c` | the citation carrying the load-bearing row points at ESŠ *Backward uniqueness* (ARMA 169), which contains **no NS regularity criterion**; the paper that does is ESŠ *Russian Math. Surveys* **58** (2003) | **the pin at `α = 1` still holds** — through the **local** suitable-weak-solution form (Seregin, `arXiv:math/0510396` §1), see `WALLS.md` §W4 |
+| **D6** | same artefact, `the_pin` | *"restated **independently** by Pineau–Vicol"* overstates: PV state it for **rotated globally self-similar** solutions, not DSS, and both routes terminate at ESŠ — independent **authors**, not an independent **proof** | the pin — see D5 |
+| **N1** | same artefact, `326.875` per decade | **amplitude-dependent**: a unit-amplitude model gives `4π ln10 = 28.935`. The **log-divergence** reproduces independently; the **number does not travel** | the divergence, which is what the bill rests on |
+
+**Also recorded, and NOT a defect:** ESŠ 2003 is **journal-only and `UNREACHABLE` at primary here**.
+It is banked as `UNREACHABLE`, **never as a zero**, and `read-do-not-contact` binds.
+
+### The ceiling
+
+**0 banked JSON files touched.** `WALLS.md` §W4 carries the D5/D6 provenance correction in the live
+wall text; the artefacts carry none of it, and the per-field repair is a **wave-6 unit**, not a
+passing edit. **No link of the `L1 → L4` chain moved.** Tier 2. Clay stays **~0.05%**.

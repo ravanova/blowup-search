@@ -515,6 +515,11 @@ the cap working and the mechanism missing. **The mechanism is retirement, not co
 - **`OPTIONS.md` entries marked `TAKEN` or `KILLED` retire to one line plus a pointer at the wave
   boundary**, not when the file next overflows.
 
+**MEASURE THE CAPS IN BYTES (`wc -c`), NOT CHARACTERS.** Added 2026-08-18 after a Conductor read
+all three files as inside their caps on Python `len()` and committed two of them **over**: these
+files are dense with multi-byte UTF-8 (`—`, `⚠`, `≤`, `ρ`, `α`), so a character count under-reports
+by ~2% — about 500 bytes at `WALLS.md`'s size. Row limits stay in **characters**.
+
 **Compaction is what you do when retirement is not available.** A commit whose only content is
 compaction is a signal that something retirable was not retired; say so in that commit rather than
 absorbing it.
