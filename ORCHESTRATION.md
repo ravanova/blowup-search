@@ -428,6 +428,83 @@ thresholds), §3e (the read surface), §5a/§5b (territory), §7 (commits, branc
 mechanism; escalations still go to the **user**), and the composition floor of §3b **as a
 per-wave rather than per-cycle quota**.
 
+### 3i. THE DIRECTION CHECK — run it every time a unit returns, not every wave
+
+**Adopted 2026-08-14 by user ruling.** In CONDUCTOR mode one entity holds direction and
+integration, which removes the DM's independent challenge. This clause puts it back as a
+**mandatory, written step**: **the moment any worker returns — landed, stopped, escalated or
+dead — the Conductor answers all seven questions below in the integration commit message**, in
+one or two sentences each. Not at the wave boundary. Per unit, because a wave is four units long
+and three of this programme's biggest corrections arrived inside one.
+
+**Answer them against the record, not against the plan.** "The plan says Lane T" is not an answer
+to any of these.
+
+1. **Did this unit move a link of the `L1 → L4` chain?** It never has, in 395 legs. Say so
+   plainly, and if you believe it did, that is escalation #3 and goes to the user.
+2. **What did this unit make FALSE that we believed yesterday?** This programme's highest-value
+   output has repeatedly been a retraction — `R0` retracted a metric inference, `T4`/`T6`
+   retracted W2's crack, `E` refuted H-supply's prediction. A unit that made nothing false is
+   either confirmatory or incurious; name which.
+3. **Does the lane this unit serves still deserve its rank — on what is measured NOW, not on the
+   argument that opened it?** Lane T was ranked on four results and one of them was false. A
+   ranking is re-earned at every unit or it is inertia.
+4. **Is any live claim now resting on a source whose own recorded ceiling is undischarged?**
+   Leg 348 declared its abstract-level ceiling and the programme built a lane, a roadmap section,
+   an escalation and a user ruling on top of it for 45 legs. **A declared, undischarged ceiling is
+   a blocking debt on everything above it.**
+5. **What is the CHEAPEST unit that could KILL the current priority lane — and why is it not
+   next?** If the answer is "nothing could kill it", the lane is not falsifiable and its rank is
+   not evidence-based.
+6. **If the current priority lane were dead tomorrow, what would we do instead — and is that
+   thing cheaper than what we are doing now?** The opportunity-cost question. Lane L sat unstarted
+   for three waves while being described in the Conductor's own plan as the most valuable lane by
+   leg 390's measurement.
+7. **Are we in an audit/instrument loop?** §3f rule 3. Count the last three units by kind and
+   state the count.
+
+**A wave whose integration commits do not carry these seven is out of contract.** If the honest
+answer to (3), (5) or (6) is that the ranking should change, **re-rank in that commit** and say
+why — §3g's "re-plan only after integration" permits exactly this and nothing else.
+
+### 3j. HEADROOM — the read surface is a budget, and it is currently overspent
+
+**Adopted 2026-08-14 by user ruling.** Token load is not an aesthetic concern here: every worker
+pays the read surface on dispatch, and the Conductor pays it again at every wave. §3e created
+`STATE.md` to replace a 1.5 MB `DIRECTION.md`. **Measured 2026-08-14: `STATE.md` is 52 KB with
+single table rows of 3,817 characters; `WALLS.md` 47 KB; `OPTIONS.md` 35 KB; `ORCH_STATE.md`
+135 KB.** The compact surface is drifting back into the thing it replaced.
+
+**Hard caps, enforced at every regeneration:**
+
+| file | cap | on exceeding |
+|---|---|---|
+| `STATE.md` | **24 KB**, and **no single row over 600 characters** | move the detail to the unit's journal and leave a pointer; the row keeps the gate answer, the branch that fired, the SHA, and `VERIFIED`/`UNVERIFIED` |
+| `WALLS.md` | 32 KB | retracted text stays struck but moves to a `## History` section at the foot |
+| `OPTIONS.md` | 24 KB | `TAKEN` and `KILLED` entries compress to one line plus a pointer |
+| `ORCH_STATE.md` live block | 8 KB | older status blocks below it are already superseded; truncate to the three most recent, keeping the accumulating sections verbatim |
+
+**A row's job is to let a reader decide whether to open the journal.** It is not a summary of the
+journal. If a number is in a banked JSON, the row cites the field; it does not restate the number.
+
+**Standing practice, in order of saving:**
+1. **Never read `DIRECTION.md`.** Still true, still the largest single win.
+2. **Brief workers; do not send them on repo tours.** A worker gets its unit, gate, territory,
+   lane, resourcing statement and the two or three pointers it actually needs. Every extra file
+   named in a brief is paid by that worker in full.
+3. **Re-derive from `writeup/data/*.json`, never from prose** — this is already law (§3e) and it
+   is also the cheapest read in the repository.
+4. **Do not re-read what is already in context.** The exception that matters: after a ruling or a
+   concurrent push, `STATE.md` and `OPTIONS.md` MUST be re-read from disk, because a stale
+   in-context copy is how a wave gets planned against a board that no longer exists.
+5. **Quote a gate by pointer once it is committed.** The wording is immutable on `main`; pasting
+   it into every brief and every commit message pays for it repeatedly.
+
+**Report headroom at every wave boundary**, in the `ORCH_STATE.md` live block: integration cycles
+used, whether context has been summarised yet, and the four file sizes above. §9d's handoff
+triggers are unchanged — 12 cycles or first summarisation, whichever comes first — but a
+Conductor that cannot say how close it is to them is not managing the budget, it is hoping.
+
 ### 3h. Attacking a wall — what ambition does and does not license
 
 **Adopted 2026-08-13 with §3g.** `WALLS.md` authorises building whatever a lane needs, at any
