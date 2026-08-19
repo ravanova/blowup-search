@@ -6,13 +6,20 @@ STYLE CHOICE.  `scale_invariant_grad` GOVERNS -- the objective is invariant unde
 `x -> t x`, `||x|| ||grad J|| / |J|` is invariant under the same rescaling, and
 `||grad J||_inf` is NOT: it can be driven down by rescaling the coefficients without moving
 the geometry at all.  That is exactly how `L6`'s L-BFGS-B was fooled into a false
-convergence report once already (`leg_401.md` SS7.3).  But the correct column governing is
-not a licence to quote it alone: at `L6`'s own `J4` rung the two columns rank its six starts
-in near-opposite orders, and its banked minimiser is the SMALLEST of the six by
-`max_abs_grad` (252.2, against seeds 792-2,501) while being the LARGEST by
-`scale_invariant_grad` (153.2, against seeds 4.65-16.58).  A reader given only the raw
-column concludes the exact opposite of the truth.  So both go in, every time, with the
-invariance argument attached.
+convergence report once already (`leg_401.md` SS7.3).  Both columns are reported anyway, for
+every start, because a reader given only the raw column would read `L6`'s banked minimiser
+(the SMALLEST of its six by `max_abs_grad`) as the best-converged of them.
+
+WHAT IS **NOT** REPORTED AS EVIDENCE, AND WHY -- `CORRECTIONS.md` SS43.  An earlier version of
+this script offered "153.2, the LARGEST `scale_invariant_grad` of its six starts" as a
+finding.  THAT RANKING IS WITHDRAWN.  Decomposing `sig = ||x|| ||grad J||_2 / |J|` against
+the median seed at the same rung: `||x||` x5.19, `||grad J||_2` **x0.169**, `|J|` **x0.050**.
+The banked minimiser's gradient is SIX TIMES SMALLER than the median seed's; its `sig` is
+large principally because its `|J|` is TWENTY times smaller -- i.e. because it is the
+minimiser.  The comparison is confounded by the very outcome being compared, and the ranking
+is decoration.  What survives is ABSOLUTE and needs no other start: `sig = 153.22 >> 1`, so a
+relative coefficient perturbation of size eps moves `J` by up to ~153*eps*|J|.  That is the
+claim; `NOT_CRITICAL = 1.0`, fixed a priori on the invariant measure, is the instrument.
 
 `V-W6`'s recommendation, made binding by the Conductor mid-run and recorded in
 `experiments/journal/leg_406.md` SS7.7 BEFORE the gate number existed: report the TERMINAL
@@ -94,17 +101,19 @@ def main():
         L6s_reported_minimum_was_never_a_critical_point=bool(
             l6_rows["continuation"]["scale_invariant_grad"] >= NOT_CRITICAL),
         L6s_reported_minimum_scale_invariant_grad=l6_rows["continuation"]["scale_invariant_grad"],
-        L6s_reported_minimum_had_the_LARGEST_such_gradient_of_its_six_starts=bool(
-            l6_rows["continuation"]["scale_invariant_grad"]
-            == max(r["scale_invariant_grad"] for r in l6_rows.values())),
+        L6s_reported_minimum_had_the_LARGEST_such_gradient_of_its_six_starts_WITHDRAWN=(
+            "WITHDRAWN as evidence, CORRECTIONS SS43 -- arithmetically true, confounded by "
+            "|J| in the denominator; see ranking_WITHDRAWN_as_evidence.  The claim is the "
+            "ABSOLUTE one: 153.22 >> 1."),
         finding=(
             "L6's reported branch-B minimum rho = 1.613811231995397 carries "
             f"||x|| ||grad J|| / |J| = {l6_rows['continuation']['scale_invariant_grad']:.1f}, "
-            "the LARGEST of all six starts at its own J4 rung (the five seeds read "
-            "4.65-16.58).  It is therefore NOT a critical point of the residual "
-            "functional: it is the point at which an 800-iteration budget ran out on a "
-            "descent path.  This is legible in L6's OWN BANKED ARTEFACT and was not "
-            "stated by L6 or by the landing audit."
+            "which is >> 1 ON AN ABSOLUTE THRESHOLD FIXED A PRIORI -- no comparison to any "
+            "other start is used, and the ranking against the five seeds is WITHDRAWN as "
+            "confounded (see ranking_WITHDRAWN_as_evidence).  It is therefore NOT a "
+            "critical point of the residual functional: it is the point at which an "
+            "800-iteration budget ran out on a descent path.  This is legible in L6's OWN "
+            "BANKED ARTEFACT and was not stated by L6 or by the landing audit."
             + ("  THE SAME IS TRUE OF THIS UNIT AT 20,000: the banked_J4_minimiser start "
                "is still at the cap and still not a critical point, so this unit's own "
                "number is likewise a stopping point and NOT an infimum."
@@ -144,6 +153,56 @@ def main():
 
     l6_by_ginf = sorted(l6_rows, key=lambda n: l6_rows[n]["max_abs_grad"])
     l6_by_gsc = sorted(l6_rows, key=lambda n: l6_rows[n]["scale_invariant_grad"])
+
+    # --- SS43: the ranking, DECOMPOSED, and withdrawn as evidence -----------------------
+    def _g2(r):  # ||grad J||_2 implied by sig = ||x|| ||grad||_2 / |J|
+        return r["scale_invariant_grad"] * abs(r["fun"]) / r["coeff_norm"]
+
+    _seeds = [n for n in l6_rows if n != "continuation"]
+    _median = lambda f: sorted(f(l6_rows[n]) for n in _seeds)[len(_seeds) // 2]
+    _c = l6_rows["continuation"]
+
+    def _rank(v):
+        order = sorted(range(len(v)), key=lambda i: v[i])
+        r = [0] * len(v)
+        for pos, i in enumerate(order):
+            r[i] = pos + 1
+        return r
+
+    def _spearman(a, b):
+        ra, rb = _rank(a), _rank(b)
+        n = len(a)
+        ma, mb = sum(ra) / n, sum(rb) / n
+        num = sum((x - ma) * (y - mb) for x, y in zip(ra, rb))
+        den = (sum((x - ma) ** 2 for x in ra) * sum((y - mb) ** 2 for y in rb)) ** 0.5
+        return num / den if den else float("nan")
+
+    _all = list(l6_rows)
+    d["terminal_stationarity"]["ranking_WITHDRAWN_as_evidence"] = dict(
+        withdrawn_claim="153.2 is the LARGEST scale_invariant_grad of L6's six J4 starts",
+        status="WITHDRAWN -- CORRECTIONS SS43; true as arithmetic, worthless as evidence",
+        why=("sig = ||x|| ||grad J||_2 / |J| is a RATIO, and the ratio is dominated by its "
+             "DENOMINATOR.  The banked minimiser's sig is large principally because its |J| "
+             "is 20x smaller than the median seed's -- which is the same property that makes "
+             "it the minimiser.  The comparison across starts is confounded by the outcome "
+             "being compared."),
+        decomposition_continuation_over_median_seed=dict(
+            coeff_norm=_c["coeff_norm"] / _median(lambda r: r["coeff_norm"]),
+            grad_L2_implied=_g2(_c) / _median(_g2),
+            J=_c["fun"] / _median(lambda r: r["fun"]),
+            sig=_c["scale_invariant_grad"] / _median(lambda r: r["scale_invariant_grad"]),
+            note="its GRADIENT is ~6x SMALLER than the median seed's, not larger",
+        ),
+        absolute_statement_that_survives=(
+            "sig = 153.22 >> NOT_CRITICAL = 1: a relative coefficient perturbation of size "
+            "eps moves J by up to ~153*eps*|J|.  Absolute, threshold-based, and independent "
+            "of every other start.  THIS is the claim; the ranking was decoration."),
+        rule_adopted=("CORRECTIONS SS43 -- decompose a ratio into its factors before "
+                      "believing it; do not let a comparison across units be confounded by "
+                      "the quantity that distinguishes them; where a relative measure is "
+                      "used, the ABSOLUTE threshold statement is the claim."),
+    )
+
     d["terminal_stationarity"]["the_two_columns_rank_differently"] = dict(
         why_both_are_reported=("scale_invariant_grad governs, because the objective is "
                                "invariant under x -> t x and so is ||x||||grad J||/|J|, "
@@ -156,8 +215,20 @@ def main():
         L6_minimiser_is_smallest_by_max_abs_grad=bool(l6_by_ginf[0] == "continuation"),
         L6_minimiser_is_largest_by_scale_invariant_grad=bool(l6_by_gsc[-1] == "continuation"),
         exact_reversal=bool(l6_by_ginf == l6_by_gsc[::-1]),
-        note=("the reversal is NEAR-exact, not exact: seed401 and seed402 transpose between "
-              "the two orderings.  Stated precisely rather than rounded up to 'opposite'."),
+        positions_matching_a_reversal=sum(
+            1 for a, b in zip(l6_by_gsc, l6_by_ginf[::-1]) if a == b),
+        spearman_all_six=_spearman([l6_rows[n]["max_abs_grad"] for n in _all],
+                                   [l6_rows[n]["scale_invariant_grad"] for n in _all]),
+        spearman_seeds_only=_spearman([l6_rows[n]["max_abs_grad"] for n in _seeds],
+                                      [l6_rows[n]["scale_invariant_grad"] for n in _seeds]),
+        note=("SS43, correcting THIS SCRIPT's own earlier wording as well as the Conductor's: "
+              "there is NO reversal here, near or exact.  Only 2 of 6 positions match a "
+              "reversal; Spearman across all six is +0.086 (no relationship), while across "
+              "the FIVE SEEDS ALONE it is +0.900 -- the two columns AGREE among the seeds.  "
+              "The overall null is manufactured entirely by ONE point, the continuation "
+              "start, which disagrees maximally.  'Near reversal' conceded precision on the "
+              "tidiness of a reversal while keeping the reversal, which was the wrong place "
+              "to give ground; 'opposite orders' was worse."),
         this_unit_reports_both_for_all_three_starts=True,
     )
     d["terminal_stationarity"]["L6_ladder_exhaustive_audit"] = l6_audit

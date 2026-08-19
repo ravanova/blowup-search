@@ -276,13 +276,26 @@ def main():
 
         cols = ts.get("the_two_columns_rank_differently", {})
         rows = {r["start"]: r for r in d6["ladder_results"]["B"][-1]["starts"]}
-        check("C37", cols.get("L6_minimiser_is_smallest_by_max_abs_grad") is True
-              and cols.get("L6_minimiser_is_largest_by_scale_invariant_grad") is True
-              and min(rows, key=lambda n: rows[n]["max_abs_grad"]) == "continuation"
-              and max(rows, key=lambda n: rows[n]["scale_invariant_grad"]) == "continuation"
-              and cols.get("exact_reversal") is False,
-              "both gradient columns reported; L6's minimiser is smallest by one and "
-              "largest by the other, and the near-reversal is not claimed as exact")
+        # C37: both columns are reported, and the RANKING is not used as evidence (SS43)
+        wd = ts.get("ranking_WITHDRAWN_as_evidence", {})
+        dec = wd.get("decomposition_continuation_over_median_seed", {})
+        g2 = lambda r: r["scale_invariant_grad"] * abs(r["fun"]) / r["coeff_norm"]
+        seeds = [n for n in rows if n != "continuation"]
+        med = lambda f: sorted(f(rows[n]) for n in seeds)[len(seeds) // 2]
+        c = rows["continuation"]
+        check("C37", wd.get("status", "").startswith("WITHDRAWN")
+              and abs(dec.get("grad_L2_implied", 0) - g2(c) / med(g2)) < 1e-9
+              and dec.get("grad_L2_implied", 9) < 0.2 and dec.get("J", 9) < 0.06,
+              "the 'largest of its six' ranking is WITHDRAWN and the decomposition is "
+              "recomputed here: the minimiser's ||grad||_2 is ~6x SMALLER and its |J| ~20x "
+              "smaller than the median seed's, so sig is dominated by its denominator")
+        check("C37b", cols.get("positions_matching_a_reversal") == 2
+              and abs(cols.get("spearman_all_six", 9) - 0.0857) < 5e-3
+              and abs(cols.get("spearman_seeds_only", 0) - 0.9) < 5e-3
+              and cols.get("exact_reversal") is False
+              and min(rows, key=lambda n: rows[n]["max_abs_grad"]) == "continuation",
+              "there is no reversal, near or exact: 2 of 6 positions, Spearman +0.086 over "
+              "six but +0.900 over the five seeds -- the columns AGREE except at one point")
 
     vl = d.get("verdict_licence")
     if vl is not None:
