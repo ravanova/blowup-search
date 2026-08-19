@@ -228,6 +228,39 @@ def main():
           and d["optimiser"]["TRAJ_EVERY"] == l6.TRAJ_EVERY,
           "optimiser settings are L6's module constants, imported not retyped")
 
+    # ---- V-W6's binding reading: terminal stationarity, all three starts -------------
+    ts = d.get("terminal_stationarity")
+    check("C31", ts is not None,
+          "terminal_stationarity block present (V-W6's binding recommendation)")
+    if ts:
+        for name, st in d["starts"].items():
+            v = ts["per_start"][name]
+            check(f"C32_{name}",
+                  v["max_abs_grad"] == st["max_abs_grad"]
+                  and v["scale_invariant_grad"] == st["scale_invariant_grad"]
+                  and v["is_a_critical_point"] == (st["scale_invariant_grad"]
+                                                   < ts["not_a_critical_point_above"]),
+                  f"{name}: terminal |g|inf = {st['max_abs_grad']:.5g}, "
+                  f"||x||||g||/|J| = {st['scale_invariant_grad']:.5g}, "
+                  f"critical point = {v['is_a_critical_point']}")
+        l6c = ts["L6_same_quantities_at_its_own_J4_rung"]["continuation"]
+        biggest = max(r["scale_invariant_grad"]
+                      for r in ts["L6_same_quantities_at_its_own_J4_rung"].values())
+        check("C33", abs(l6c["J"] - L6_RESIDUAL) <= 1e-15
+              and l6c["scale_invariant_grad"] == biggest
+              and l6c["scale_invariant_grad"] >= ts["not_a_critical_point_above"],
+              f"L6's reported branch-B minimum {l6c['J']!r} carries "
+              f"||x||||g||/|J| = {l6c['scale_invariant_grad']:.4g}, the LARGEST of its six "
+              f"J4 starts -- it was never a critical point")
+        # re-derive that table straight out of L6's untouched artefact, not from mine
+        rows = {r["start"]: r for r in d6["ladder_results"]["B"][-1]["starts"]}
+        check("C34", all(
+            rows[n]["scale_invariant_grad"] == r["scale_invariant_grad"]
+            and rows[n]["max_abs_grad"] == r["max_abs_grad"]
+            and rows[n]["fun"] == r["J"]
+            for n, r in ts["L6_same_quantities_at_its_own_J4_rung"].items()),
+            "the L6 comparison table is copied from L6's artefact, digit for digit")
+
     print(f"\n{N - len(FAILS)}/{N} checks passed"
           + (f"; FAILED: {FAILS}" if FAILS else ""))
     return 1 if FAILS else 0
