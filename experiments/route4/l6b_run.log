@@ -1,0 +1,15 @@
+L6 artefact self_hash=6a033004deef39d3 (recomputed 6a033004deef39d3)
+geometry: Lmax=4 Nr=20 Ks=3 Lmap=2.0 n_dof=6720 nq_r=72 n_theta=16 n_phi=28 n_s=18
+J(banked J4 minimiser) = 1.613811231995397  banked = 1.613811231995397  delta = 0.000e+00
+L6 self-tests (its own fixed field):
+  T_A_div_V_max_abs_over_scale               1.969e-11
+  T_B_grad_max_rel_err                       8.489e-08
+  T_C_curl_max_rel_err                       1.238e-08
+  T_D_W_vs_fd_curlR_max_rel_err              1.220e-04
+  T_E_dss_period_max_rel_err                 8.844e-17
+  T_F_quadrature_rel_err                     1.188e-10
+T_A / T_D at the starting point (n_dof = 6720):
+  T_A_div_V_max_abs_over_scale               1.217e-10
+  T_D_W_vs_fd_curlR_max_rel_err              3.117e-04
+[ckpt] L6-b leg 406: selftests reproduce at the starting point; run begins: rc=0
+[ckpt] L6-b leg 406: in-run checkpoint at 0.84 h (trajectories + current iterates, TRACKED): rc=0
