@@ -10,6 +10,29 @@ verbatim 2026-08-18 under §3j → `## Superseded — the 2026-08-14 fork`.
 
 ---
 
+## ⛔ OPEN ESCALATIONS — ONLY THE USER CAN RESOLVE THESE. NONE IS RULED BY THE CONDUCTOR.
+
+Collected here 2026-08-19 at the wind-down, verified against the record rather than copied from a
+list. **§3h binds: a ban is superseded by a MEASUREMENT, never a decision — and a defective ban
+WORDING is a user escalation.** Each row is phrased so it can be answered **Y or N**.
+
+| # | file | what is at stake | ANSWER Y / N |
+|---|---|---|---|
+| 1 | `writeup/escalations/ESCALATION_D_BUNDLING_2026-08-18.md` | **The most direction-relevant open item on the board, and it has never been ruled.** Statement **(D)** is deferred *with Lane T*, and Lane T was demoted for a reason that has nothing to do with (D). **`W4`'s only surviving clause is (c), and clause (c) IS statement (D).** So `W4` currently has **no live clause any ranked lane may attack.** | **Is "clause (c) is `W4`'s sole survivor" a re-open condition for Lane T — Y or N?** |
+| 2 | `writeup/escalations/ESCALATION_W2_SCOPE_2026-08-18.md` | `W2`'s statement names **SINGULARITY** theorems; `arXiv:2509.25116` certifies **NONUNIQUENESS**. Three defensible readings; **reading three would make Lane T's re-open condition (i) LIVE.** | **Does a nonuniqueness certificate meet `W2` — Y or N?** |
+| 3 | `writeup/escalations/ESCALATION_PUB0C_PUBLISHED_2026-08-18.md` | Whether an unrefereed preprint with no journal-ref is a "published work" for `PUB_0C` §1. Raised by `V-W4`. | **Is an unrefereed preprint with no journal-ref "published" for `PUB_0C` §1 — Y or N?** |
+| 4 | `writeup/escalations/ESCALATION_BAN_WORDING_2026-08-13.md` (`T1`'s packet) | The 2026-08-13 ruling settled the apparatus question as a **SCOPE** ruling and **explicitly left the lift clause untouched and defective**. The required edit is **recorded, not applied**. | **Apply the recorded lift-clause edit as written — Y or N?** |
+| 5 | the **leg-257 lift-clause defect** | Recorded, **not ruled**, and still **EXEMPLAR-FREE**. Distinct from row 4. | **Is the leg-257 lift clause defective as recorded — Y or N?** |
+
+### Two DECISIONS owed that are not escalations
+
+| # | where | the question |
+|---|---|---|
+| A | `writeup/CORRECTIONS.md` **§49**, and now **§54** | Does `ORCHESTRATION.md` §6 clause 3 get a `recompute-from-primary` check beside it? **§54 REVERSES the evidence I originally recorded here:** `L-JVER`'s suite is 12/12 `recompute-from-primary` **because it re-runs everything and overwrites its own artefact**, which means it did not attempt clause 3 at all. `PB2`'s suite is the mirror image (0/31, clause-3 compliant). **No suite in the record satisfies both rules, and no instrument checks which one a suite is.** |
+| B | `PB1`'s finding **F2** | `experiments/JOURNAL.md:5305` and `ORCHESTRATION.md` §3k:576 give **contradictory accounts of leg 387's arXiv harness**. Leg 411 re-measured 10,780 against a recorded 10,756, favouring the journal — which puts **leg 382's queue on the wrong reading.** |
+
+---
+
 ## LIVE — CONDUCTOR mode, **WAVE 8 CLOSED AND INTEGRATED; WAVE 9 DISPATCHED (4 units)**, 2026-08-19
 
 Waves 5, 6 and 7: COMPLETE, VERIFIED, RETIRED VERBATIM BELOW. Wave 8's LIVE block retired verbatim
