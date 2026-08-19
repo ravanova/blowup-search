@@ -258,3 +258,9 @@ E-FE: 163 jobs on 6 shards; loadavg 9.71 9.24 10.46 on 12 cores
   return ufunc(a, fct, axes=[(axis,), (), (axis,)], out=out)
   attempt 107 UPO20  arm S: stalled, final ||R|| = 14.96, 20 epochs, 0.46 h
   [116/163] g107 UPO20  S f7: stalled, ||R||=14.96, 0.46 h
+  attempt 108 UPO20  arm S: stalled, final ||R|| = 6.726, 22 epochs, 0.53 h
+  [117/163] g108 UPO20  S f8: stalled, ||R||=6.726, 0.53 h
+  attempt 109 UPO20  arm S: stalled, final ||R|| = 16.04, 20 epochs, 0.44 h
+  [118/163] g109 UPO20  S f9: stalled, ||R||=16.04, 0.44 h
+  attempt 111 UPO20  arm Q: stalled, final ||R|| = 2.488, 20 epochs, 0.45 h
+  [119/163] g111 UPO20  Q f1: stalled, ||R||=2.488, 0.45 h
