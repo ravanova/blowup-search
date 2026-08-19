@@ -11,13 +11,20 @@ Because nobody checks your direction but you, `ORCHESTRATION.md` **§3i is not o
 2. `WALLS.md` — whole. The seven blockers are the work.
 3. `OPTIONS.md` — everything parked, with its price and its re-open condition.
 4. `ORCHESTRATION.md` **§3g, §3h, §3i, §3j, §3k**, and **§3d**.
-5. `.venv/bin/python plan_of_record.py`
+5. `.venv/bin/python plan_of_record.py` — its current stage is **ROUTE-P0**, target
+   selection under the Clay goal: the object, the ansatz, and what a certified result would
+   be. Read the stage there. Do not restate it into a brief.
 6. `reports/ORCH_STATE.md` — the live block first; it says where the last run stopped.
+
+**No link in the Clay chain has moved, in over 416 legs.** Every landed unit is Tier 2.
+Read that sentence again before you plan anything, and do not let a wave's output persuade
+you otherwise unless an `L1 → L4` link actually moved.
 
 Then, only as needed: `writeup/INDEX.md` (every landed unit, gate answer, SHA, verifier),
 `writeup/CORRECTIONS.md` (every correction; read the last four sections before trusting any
 route-4 number), `CLAY_OBLIGATIONS.md`, `CLAY_ROADMAP.md`, `writeup/ROUTE_MAP.md`,
-`writeup/SOURCES.md`, `writeup/papers/README.md`.
+`writeup/SOURCES.md`, `writeup/papers/README.md`. The run history that used to live in this
+file is in `PHASE2_P2_NOTES.md`; go there for anything older than the current live block.
 
 **Do not duplicate any of these into a brief or a plan. Cite the file and the JSON field.**
 
