@@ -806,3 +806,23 @@ Standing user directive, unchanged and still binding; retired from STATE.md only
 | **R6** | profile the inner loop | **DONE leg 403 `1f89ceb`, VERIFIED `V-W7`.** Gate (iii) `NO`, 4.34×. Row retired verbatim → `WALLS_HISTORY.md` §OPTIONS-R6R7; substance at `WALLS.md` W7. | done |
 | **R7** | bank the seed fields | **DONE leg 404 `8019c35`, VERIFIED `V-W7`.** Row retired verbatim → `WALLS_HISTORY.md` §OPTIONS-R6R7. ⚠ `--verify` CANNOT FAIL (0 `raise`/`assert`/`sys.exit`) — `V-W7` §, remedy owed. | done |
 | **L1-res** | the 4 pre-arXiv primaries | **SUPERSEDED 2026-08-19 by `writeup/SOURCES.md`** (rows 2, 3, 19, 20). Live debt is NRŠ 1996 alone → `L7-src`. | see `L7-src` |
+
+
+## §OPTIONS-A3 — retired verbatim 2026-08-19 under §3j (wind-down): OPTIONS.md §A, the pool constraint on the four not-taken PROG-R4 options
+
+**The constraint shaping all of them:** the anchored admissible pool is **exhausted** at `R < 0.25` —
+241 exist, 100 spent, **141 remain, only 12 in-band** — so nothing keeping the current window can push
+the in-band arm past 72 attempts, ever. **And U5's pre-committed reading fired on branch (b): the bias
+is in the BASIN STRUCTURE, not the seed supply.**
+
+
+## §OPTIONS-A2ROW — retired verbatim 2026-08-19 under §3j (wind-down): OPTIONS.md §A table row A/B/D (body already at §OPTIONS-A2)
+
+| **A**, **B**, **D** | all three **BUY SUPPLY** | — | **RETIRED, NOT DEFERRED**: proposing more seed supply for `PROG-R4` is a **standing user prohibition**, so these were never choosable. Verbatim → `WALLS_HISTORY.md` §OPTIONS-A2. | Only by a user ruling that lifts the prohibition. |
+
+
+## §OPTIONS-U4G2 — retired verbatim 2026-08-19 under §3j (wind-down): OPTIONS.md §A, U4/G2 basin radius and G1
+
+**`U4`/`G2`, basin radius: BLOCKED, not an option** — it needs a recovered *named* orbit to perturb
+and there is not one. **`G1` stays `UNDER-RESOURCED`; `E` did not write to it** (hand-placed seed at
+published coordinates, not a mined seed).

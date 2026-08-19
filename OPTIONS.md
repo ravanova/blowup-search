@@ -35,14 +35,10 @@ candidate, and the plan must say why it was or was not taken.
 U5 raised five costed options (`experiments/journal/prog_r4_u5.md` §9); **the user ruled option E on
 2026-08-13** and the other four are recorded here.
 
-**The constraint shaping all of them:** the anchored admissible pool is **exhausted** at `R < 0.25` —
-241 exist, 100 spent, **141 remain, only 12 in-band** — so nothing keeping the current window can push
-the in-band arm past 72 attempts, ever. **And U5's pre-committed reading fired on branch (b): the bias
-is in the BASIN STRUCTURE, not the seed supply.**
+**The pool constraint on all four:** retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §OPTIONS-A3.
 
 | id | option | cost | why deferred | re-opens if |
 |---|---|---|---|---|
-| **A**, **B**, **D** | all three **BUY SUPPLY** | — | **RETIRED, NOT DEFERRED**: proposing more seed supply for `PROG-R4` is a **standing user prohibition**, so these were never choosable. Verbatim → `WALLS_HISTORY.md` §OPTIONS-A2. | Only by a user ruling that lifts the prohibition. |
 | **C** | Carry `m` as an unknown in the residual (= Lane R's **R5**) | own milestone, ≈10 h compute + solver work | Changes the realization, so M1's reproduction no longer compares attempt for attempt. **U5 priced it: 334 anchored in-window candidates, 58.1% of the window, but only 1 in the published band.** Not a band fix — the fix for `\|s\| > 0.9`. | On its own merits as the largest measured hole in the trial space, **not** as a route to the named rows. |
 
 **`E` — THE H-HARD DIAGNOSTIC. LANDED `d0d72b1`, `UNVERIFIED`.** 2 of 16 converged, **0
@@ -54,9 +50,7 @@ attempts, **90.9 core-h, ~11.4 h wall**; closes `E-iv` (a row supplies `(T,s)`, 
 **Not a grinder** — fixed rows/arms, only the draw varies. `WAVE7_PLAN.md` §B; price
 `writeup/prices/FIELD_ENSEMBLE_2026-08-18.md`. **90.9 is an OUTTURN, not a floor** (see `R6`).
 
-**`U4`/`G2`, basin radius: BLOCKED, not an option** — it needs a recovered *named* orbit to perturb
-and there is not one. **`G1` stays `UNDER-RESOURCED`; `E` did not write to it** (hand-placed seed at
-published coordinates, not a mined seed).
+**`U4`/`G2` basin radius, and `G1`:** retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §OPTIONS-U4G2.
 
 **⚠ THE `~8×` COST-MODEL OVERRUN IS REFUTED, and the epoch figure that refuted it is itself
 corrected.** Full text retired 2026-08-18 under §3j → `WALLS_HISTORY.md` §OPTIONS-A. **Live
@@ -229,3 +223,12 @@ ain `UNVERIFIED`** — `V1` checked `R0`'s
   checkpointing *inside the computation*. **Every brief above ~1 h wall must require checkpointing to
   disk at a resumable granularity, and say where.** **Wave 3 paid for it again:** three of four units
   died and only the one that had committed left anything behind.
+
+## G. Wave-9 follow-ons — PARKED, NOT DISPATCHED (directive 2026-08-19); none entered a brief
+
+- **`P2-F1`** ~2–4 core-h — bank the per-term decomposition in the gate's own `‖curl F‖_{L¹ₜL^{3/2}}`, not `L³` (§55). RE-OPEN: before P2 is submitted; one outcome makes its central sentence wrong.
+- **`P2-F3`** ~30 min — re-bank `rho_exponent` beside its own fit window (§55). ⛔ **ESCALATE FIRST:** the naive repair reports summability available and BREAKS W4(b) off a transient. Not a unit's call.
+- **`V8-HR`** ~15 min — anchor `test_headroom.py:46`; **NOT `count==1`** (§3j's verbatim retirement guarantees a 2nd `## LIVE`, §56.7). RE-OPEN: any edit above the live block; today 7,568/8,192 and TRUE.
+- **`V8-VS`** ~30 min — re-run landed verifier suites at HEAD; `V-W7`'s is 22/25 (§56.11). RE-OPEN: next verifier dispatch.
+- **`P4-F1`** ~1–2 h — bank §45's `32 of 49`; no artefact or classifier exists (§57). RE-OPEN: before it is cited again.
+- **`P4-F3`** ~2–3 h — an instrument reading a verdict field against its object's own sibling fields (§57). **None exists; highest-value item here.**
