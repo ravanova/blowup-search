@@ -55,6 +55,12 @@
   },
   "weighted_L2_total": 0.0013018959203481755
  },
+ "discipline_finding_a_selfcheck_encoded_the_defect_it_existed_to_catch": {
+  "fix": "C37 now recomputes the decomposition and requires the withdrawal label; C37b recomputes the rank-agreement statistics independently",
+  "stated_plainly": "C37 would have passed on a false claim.",
+  "what": "evidence check C37, as first written by this unit, ASSERTED `L6_minimiser_is_largest_by_scale_invariant_grad is True` -- the very ranking later withdrawn as confounded (CORRECTIONS SS43).  IT WOULD HAVE PASSED ON A FALSE CLAIM, and its passing would have been offered as evidence FOR it.",
+  "why_it_matters": "a self-check that encodes the claim it exists to test verifies only internal consistency between an artefact and a script written by the same unit in the same hour.  Every check in this unit's evidence script that merely re-reads a banked field shares that weakness; the checks that RECOMPUTE from L6's untouched artefact do not."
+ },
  "false_convergence_check": {
   "defect": "leg_401.md SS7.3 -- scale-invariant objective, L-BFGS-B stops on ||proj grad||_inf, which falls like 1/||c||",
   "fix_carried": "renormalising restarts; stop only when a restart buys < REL_STALL",
@@ -99,10 +105,74 @@
   },
   "question": "smallest residual reached at 20,000 iterations, and is it materially below L6's 1.6138 -- YES or NO",
   "reading_that_fires": "no material drop: the stall is the CONSTRUCTION, not the budget, and route 4's NO hardens",
+  "reading_that_fires_is_SUPERSEDED": true,
+  "reading_that_fires_superseded_by": "verdict_licence.licence (CORRECTIONS SS41, pre-registered at iteration 7,000). The plan's original NO sentence asserts the stall is the CONSTRUCTION; that inference requires a stationary terminal iterate and this run did not reach one.",
   "relative_change": -0.06751677936822276,
   "smallest_residual_at_20000": 1.504851895102804
  },
  "gate_source": "writeup/waves/WAVE7_PLAN.md AMENDMENT 2 (on main before dispatch)",
+ "landscape_finding_seeds_become_less_stationary_while_descending": {
+  "caution": "reported as a measured trend over a stated window with the window named, NOT extrapolated to 20,000 -- see terminal_stationarity.scale_invariant_grad_trailing_window.no_extrapolation",
+  "correction_recorded": "this unit reported the rise at k ~ 7,700 without stating that it was a window measurement whose direction could change, and its own evidence check C41 then ASSERTED the rise -- which FAILED against the true final artefact.  C37 would have PASSED on a false claim; C41 FAILED on a true one.  Both are the same defect: a check that encodes a CLAIM rather than verifying a NUMBER.  C41 now verifies the coefficients and their windows.",
+  "independent_of_the_gate_number": true,
+  "it_reverses_by_the_end": true,
+  "mechanism": "sig = ||x|| ||grad J||_2 / |J|.  A falling |J| RAISES sig unless ||grad J||_2 falls faster, and it does not.  The seeds are getting closer to a smaller objective value and FURTHER from stationarity in relative terms at the same time.",
+  "per_start": {
+   "banked_J4_minimiser": {
+    "J_first_in_window": 1.6138076567847377,
+    "J_terminal": 1.5048518951028045,
+    "pearson_r_log_sig_vs_k_trailing_3000": -0.6450792834781256,
+    "sig_terminal": 44.56974279510679
+   },
+   "seed406": {
+    "J_first_in_window": 3495.4232450827985,
+    "J_terminal": 6.45968577803712,
+    "pearson_r_log_sig_vs_k_trailing_3000": -0.2264360962692065,
+    "sig_terminal": 12.046689201095933
+   },
+   "seed407": {
+    "J_first_in_window": 3883.2188529060872,
+    "J_terminal": 6.502356422688323,
+    "pearson_r_log_sig_vs_k_trailing_3000": -0.35091086718236797,
+    "sig_terminal": 5.174727917479185
+   }
+  },
+  "this_is_about_the_landscape_not_the_optimiser": true,
+  "what": "SCOPED TO ITS WINDOW, AND IT REVERSES.  Over k = 4,700-7,700 both INDEPENDENT seeds descended in objective while their RELATIVE gradient ROSE (log-linear fits of log(scale_invariant_grad) against k strongly POSITIVE, r = +0.76 and +0.82, while J fell ~18 -> ~11).  Over the FINAL 3,000 iterations the sign REVERSES for both (r < 0).  The mid-run observation is real and is recorded with the window it was measured over; it is NOT a property of the run and must not be quoted as one.  This is the same discipline as SS44: a coefficient without its window is not a measurement.",
+  "window_in_which_it_was_first_measured": {
+   "k_range": [
+    4700,
+    7700
+   ],
+   "note": "the window in which the finding was first reported, at k ~ 7,700",
+   "per_start": {
+    "banked_J4_minimiser": {
+     "J_first": 1.5735694530322077,
+     "J_last": 1.5454505447799147,
+     "n": 61,
+     "pearson_r": -0.6613732411757053,
+     "sig_first": 205.13715743658454,
+     "sig_last": 74.69972790002055
+    },
+    "seed406": {
+     "J_first": 17.971266053754434,
+     "J_last": 10.691821596027154,
+     "n": 63,
+     "pearson_r": 0.7563909545703899,
+     "sig_first": 4.986293571768709,
+     "sig_last": 30.326908290485367
+    },
+    "seed407": {
+     "J_first": 18.085290310307347,
+     "J_last": 11.244121757969426,
+     "n": 63,
+     "pearson_r": 0.8221575805361055,
+     "sig_first": 3.32546838360399,
+     "sig_last": 56.67612853153801
+    }
+   }
+  }
+ },
  "lane": "L",
  "leg": 406,
  "optimiser": {
@@ -145,7 +215,7 @@
   "unchanged_from_L6": true
  },
  "route": "route 4",
- "self_hash": "171e18dc919cd07b",
+ "self_hash": "959d488df4c578b6",
  "selftests": {
   "L6_suite_banked": {
    "T_A_div_V_max_abs_over_scale": 1.9687000871637757e-11,
@@ -9144,7 +9214,373 @@
    ]
   }
  },
+ "terminal_stationarity": {
+  "L6_ladder_exhaustive_audit": {
+   "distinct_nit_values": [
+    800
+   ],
+   "every_record_hit_the_800_cap": true,
+   "finding": "ALL 58 non-angular start-records in L6's banked profile -- both branches, every rung -- have nit == 800.  100% hit the iteration cap; NOT ONE terminated on a convergence criterion, and 56 of 58 are non-critical at threshold 1.  L6 conceded its headline was not the infimum; its own artefact supports the stronger statement that the ladder never located a stationary point ANYWHERE, and therefore compared STOPPING POINTS across rungs.  A refinement ladder built from stopping points measures the budget as much as the ansatz.",
+   "records_not_critical_at_threshold_1": 56,
+   "start_records": 58,
+   "the_two_that_are_critical": [
+    {
+     "J": 7.951824717269735,
+     "branch": "A",
+     "scale_invariant_grad": 0.8877660460739208,
+     "start": "seed403"
+    },
+    {
+     "J": 8.006528006268965,
+     "branch": "A",
+     "scale_invariant_grad": 0.9646234729683512,
+     "start": "seed405"
+    }
+   ],
+   "verified_by": "this script, recounted from p2_route_l6_profile_v1.json, not quoted"
+  },
+  "L6_same_quantities_at_its_own_J4_rung": {
+   "continuation": {
+    "J": 1.613811231995397,
+    "coeff_norm": 0.2641047705912131,
+    "hit_maxiter": true,
+    "max_abs_grad": 252.20995753149754,
+    "nit": 800,
+    "scale_invariant_grad": 153.21564452007757
+   },
+   "seed401": {
+    "J": 32.18267765691035,
+    "coeff_norm": 0.05086655589721426,
+    "hit_maxiter": true,
+    "max_abs_grad": 2500.6771376943143,
+    "nit": 800,
+    "scale_invariant_grad": 11.903008559797383
+   },
+   "seed402": {
+    "J": 32.09331351181081,
+    "coeff_norm": 0.055043477270207135,
+    "hit_maxiter": true,
+    "max_abs_grad": 2473.072635032308,
+    "nit": 800,
+    "scale_invariant_grad": 16.577082701683295
+   },
+   "seed403": {
+    "J": 29.566940188487212,
+    "coeff_norm": 0.05144601580152153,
+    "hit_maxiter": true,
+    "max_abs_grad": 1446.0542830169038,
+    "nit": 800,
+    "scale_invariant_grad": 9.666087905453896
+   },
+   "seed404": {
+    "J": 38.197120753564135,
+    "coeff_norm": 0.03895763626595673,
+    "hit_maxiter": true,
+    "max_abs_grad": 792.048120608054,
+    "nit": 800,
+    "scale_invariant_grad": 4.649863790393282
+   },
+   "seed405": {
+    "J": 37.78536609253251,
+    "coeff_norm": 0.03794786732324486,
+    "hit_maxiter": true,
+    "max_abs_grad": 1265.169393936368,
+    "nit": 800,
+    "scale_invariant_grad": 5.541208992868476
+   }
+  },
+  "L6s_reported_minimum_had_the_LARGEST_such_gradient_of_its_six_starts_WITHDRAWN": "WITHDRAWN as evidence, CORRECTIONS SS43 -- arithmetically true, confounded by |J| in the denominator; see ranking_WITHDRAWN_as_evidence.  The claim is the ABSOLUTE one: 153.22 >> 1.",
+  "L6s_reported_minimum_scale_invariant_grad": 153.21564452007757,
+  "L6s_reported_minimum_was_never_a_critical_point": true,
+  "finding": "L6's reported branch-B minimum rho = 1.613811231995397 carries ||x|| ||grad J|| / |J| = 153.2, which is >> 1 ON AN ABSOLUTE THRESHOLD FIXED A PRIORI -- no comparison to any other start is used, and the ranking against the five seeds is WITHDRAWN as confounded (see ranking_WITHDRAWN_as_evidence).  It is therefore NOT a critical point of the residual functional: it is the point at which an 800-iteration budget ran out on a descent path.  This is legible in L6's OWN BANKED ARTEFACT and was not stated by L6 or by the landing audit.  THE SAME IS TRUE OF THIS UNIT AT 20,000: the banked_J4_minimiser start is still at the cap and still not a critical point, so this unit's own number is likewise a stopping point and NOT an infimum.",
+  "measure": "scale_invariant_grad = ||x||_2 ||grad J||_2 / |J|, invariant under x -> t x (the objective is scale-invariant: leg_401.md SS7.3)",
+  "not_a_critical_point_above": 1.0,
+  "per_start": {
+   "banked_J4_minimiser": {
+    "J_terminal": 1.5048518951028045,
+    "coeff_norm": 0.25495961802211176,
+    "hit_maxiter": true,
+    "is_a_critical_point": false,
+    "iterations": 20000,
+    "max_abs_grad": 60.7057782829307,
+    "scale_invariant_grad": 44.56974279510679,
+    "smallest_J_over_the_run": 1.504851895102804
+   },
+   "seed406": {
+    "J_terminal": 6.45968577803712,
+    "coeff_norm": 0.1322440593397,
+    "hit_maxiter": true,
+    "is_a_critical_point": false,
+    "iterations": 20000,
+    "max_abs_grad": 176.98717895524786,
+    "scale_invariant_grad": 12.046689201095933,
+    "smallest_J_over_the_run": 6.45968577803712
+   },
+   "seed407": {
+    "J_terminal": 6.502356422688323,
+    "coeff_norm": 0.1294886380813898,
+    "hit_maxiter": true,
+    "is_a_critical_point": false,
+    "iterations": 20000,
+    "max_abs_grad": 45.637451021137586,
+    "scale_invariant_grad": 5.174727917479185,
+    "smallest_J_over_the_run": 6.502356422688323
+   }
+  },
+  "ranking_WITHDRAWN_as_evidence": {
+   "absolute_statement_that_survives": "sig = 153.22 >> NOT_CRITICAL = 1: a relative coefficient perturbation of size eps moves J by up to ~153*eps*|J|.  Absolute, threshold-based, and independent of every other start.  THIS is the claim; the ranking was decoration.",
+   "decomposition_continuation_over_median_seed": {
+    "J": 0.05014533747625798,
+    "coeff_norm": 5.19211033522474,
+    "grad_L2_implied": 0.16852883701917054,
+    "note": "its GRADIENT is ~6x SMALLER than the median seed's, not larger",
+    "sig": 15.850843280002525
+   },
+   "rule_adopted": "CORRECTIONS SS43 -- decompose a ratio into its factors before believing it; do not let a comparison across units be confounded by the quantity that distinguishes them; where a relative measure is used, the ABSOLUTE threshold statement is the claim.",
+   "status": "WITHDRAWN -- CORRECTIONS SS43; true as arithmetic, worthless as evidence",
+   "why": "sig = ||x|| ||grad J||_2 / |J| is a RATIO, and the ratio is dominated by its DENOMINATOR.  The banked minimiser's sig is large principally because its |J| is 20x smaller than the median seed's -- which is the same property that makes it the minimiser.  The comparison across starts is confounded by the outcome being compared.",
+   "withdrawn_claim": "153.2 is the LARGEST scale_invariant_grad of L6's six J4 starts"
+  },
+  "scale_invariant_grad_trailing_window": {
+   "no_extrapolation": "DELIBERATELY NONE.  A log-linear fit of log(sig) against k over the trailing 3,000 iterations and over the trailing 5,000 give predictions at k=20,000 that differ by ~15x.  A forecast that moves 15x with the choice of window is not a forecast, and none is offered.",
+   "per_start": {
+    "banked_J4_minimiser": {
+     "max": 199.81196783276508,
+     "median": 55.79560737463341,
+     "min": 32.31616913968334,
+     "n_samples": 42,
+     "p25": 44.56974279495608,
+     "p75": 69.21139752566263,
+     "spread_max_over_min": 6.183033854325315,
+     "terminal": 44.56974279510679,
+     "trailing_iterations": 2000
+    },
+    "seed406": {
+     "max": 32.618869274969335,
+     "median": 13.56126394646845,
+     "min": 6.388940316955327,
+     "n_samples": 41,
+     "p25": 10.683021237897147,
+     "p75": 17.1091317319264,
+     "spread_max_over_min": 5.105521049931169,
+     "terminal": 12.046689201095933,
+     "trailing_iterations": 2000
+    },
+    "seed407": {
+     "max": 25.1561033459748,
+     "median": 10.319686577179143,
+     "min": 5.174727917479185,
+     "n_samples": 41,
+     "p25": 7.933998864250702,
+     "p75": 13.204279211400802,
+     "spread_max_over_min": 4.861338363511358,
+     "terminal": 5.174727917479185,
+     "trailing_iterations": 2000
+    }
+   },
+   "rule": "to claim a point is critical, show it STAYS critical, not that it touched critical once",
+   "why": "CORRECTIONS SS44.  scale_invariant_grad is VOLATILE along an L-BFGS-B path: a single terminal sample can land in a trough or on a spike and license or deny a reading the series does not support.  The distribution over a trailing window is reported for all three starts ALONGSIDE the terminal value, and the licence is keyed to the window MAXIMUM, not the terminal sample."
+  },
+  "starts_still_descending_at_the_cap": {
+   "banked_J4_minimiser": true,
+   "seed406": true,
+   "seed407": true
+  },
+  "the_two_columns_rank_differently": {
+   "L6_J4_rank_by_max_abs_grad_ascending": [
+    "continuation",
+    "seed404",
+    "seed405",
+    "seed403",
+    "seed402",
+    "seed401"
+   ],
+   "L6_J4_rank_by_scale_invariant_grad_ascending": [
+    "seed404",
+    "seed405",
+    "seed403",
+    "seed401",
+    "seed402",
+    "continuation"
+   ],
+   "L6_minimiser_is_largest_by_scale_invariant_grad": true,
+   "L6_minimiser_is_smallest_by_max_abs_grad": true,
+   "exact_reversal": false,
+   "note": "SS43, correcting THIS SCRIPT's own earlier wording as well as the Conductor's: there is NO reversal here, near or exact.  Only 2 of 6 positions match a reversal; Spearman across all six is +0.086 (no relationship), while across the FIVE SEEDS ALONE it is +0.900 -- the two columns AGREE among the seeds.  The overall null is manufactured entirely by ONE point, the continuation start, which disagrees maximally.  'Near reversal' conceded precision on the tidiness of a reversal while keeping the reversal, which was the wrong place to give ground; 'opposite orders' was worse.",
+   "positions_matching_a_reversal": 2,
+   "spearman_all_six": 0.08571428571428572,
+   "spearman_seeds_only": 0.9,
+   "this_unit_reports_both_for_all_three_starts": true,
+   "why_both_are_reported": "scale_invariant_grad governs, because the objective is invariant under x -> t x and so is ||x||||grad J||/|J|, while ||grad J||_inf is not and can be driven down by rescaling coefficients without moving the geometry (leg_401.md SS7.3).  Quoting the governing column ALONE is still selection: the raw column points the other way here."
+  },
+  "why": "V-W6's binding recommendation: a residual is not a result on its own.  The terminal gradient says whether the number is a critical point of the residual functional or a point on a descent path at which the budget ran out.  Reported for all three starts, whichever way the gate answers."
+ },
+ "throughput": {
+  "contention": {
+   "ambient_load_average_range_observed": [
+    11.2,
+    18.2
+   ],
+   "ambient_note": "load average is AMBIENT and includes three concurrent sibling units; it is NOT this unit's consumption and is not divided out",
+   "box_cores": 12,
+   "footprint_note": "3 worker processes x 2 threads each; unchanged for the whole run",
+   "measured_step_at_a_sibling_launch": {
+    "after_it_per_s": 0.712,
+    "before_it_per_s": 1.178,
+    "loss_fraction": 0.396,
+    "note": "partial recovery to ~0.76 it/s observed afterwards",
+    "source": "Conductor's measurement at 02:21 -> 02:26 BST"
+   },
+   "this_units_footprint_cores": 6
+  },
+  "correction_on_the_record": {
+   "corrected_current_rate_at_that_reading_it_per_s": 0.759,
+   "eta_after_correction": "~07:57-08:00 BST",
+   "eta_before_correction": "~07:25 BST",
+   "raised_by": "Conductor, mid-run",
+   "scope": "reporting only",
+   "what_did_NOT_move": [
+    "the gate wording",
+    "the pre-committed reading in either direction",
+    "the 1.45 material-drop threshold",
+    "the measured wall clock",
+    "the measured core-hours"
+   ],
+   "what_this_unit_said": "rate has eased to 0.848 it/s under the heavier sibling load",
+   "why_it_was_wrong": "0.848 was cumulative (6800/8017), not current; quoting it as a present rate both mislabelled it and understated the very contention it was invoked to describe, by ~10-15% at that reading"
+  },
+  "definitions": {
+   "cumulative_it_per_s": "total iterations / total seconds, over the whole run",
+   "windowed_it_per_s": "trailing-window iterations / trailing-window seconds, at the stated window length, from this run's own k/sec trajectory"
+  },
+  "dissent": {
+   "agree": "the arithmetic is correct and independently reproduced from this run's own trajectory field: cumulative 0.846, trailing-500 0.757, trailing-1000 0.759, trailing-2000 0.722 it/s at k=6900",
+   "refinement": "this unit reports a LADDER of trailing windows rather than one.  At the same reading the trailing-2000 figure (0.722) is BELOW the trailing-500 and -1000 figures (0.757/0.759) and the trailing-4000 figure (0.837) is above all of them -- throughput fell at the sibling launch and has partially recovered since.  A single trailing window would report the fall and conceal the recovery, which is the same class of error in the opposite direction.",
+   "unchanged": "for the COST price neither figure is used: core-hours are wall-clock x cores held, measured directly.  The rate framing changes the ETA and any sentence containing 'now', and nothing else."
+  },
+  "per_start": {
+   "banked_J4_minimiser": {
+    "cumulative_it_per_s": 0.7710453949121027,
+    "iterations": 20000,
+    "ratio_cumulative_over_windowed_1000": 1.018921068468445,
+    "seconds": 25938.81,
+    "terminal_windowed_it_per_s_1000": 0.7567273057481009,
+    "windowed_it_per_s_by_trailing_iterations": {
+     "1000": {
+      "actual_iterations": 1000,
+      "it_per_s": 0.7567273057481009,
+      "seconds": 1321.4799999999996
+     },
+     "2000": {
+      "actual_iterations": 2000,
+      "it_per_s": 0.745917963942325,
+      "seconds": 2681.260000000002
+     },
+     "4000": {
+      "actual_iterations": 4000,
+      "it_per_s": 0.7347619554954681,
+      "seconds": 5443.940000000002
+     },
+     "500": {
+      "actual_iterations": 500,
+      "it_per_s": 0.7800190324643896,
+      "seconds": 641.010000000002
+     }
+    }
+   },
+   "seed406": {
+    "cumulative_it_per_s": 0.7756149754188223,
+    "iterations": 20000,
+    "ratio_cumulative_over_windowed_1000": 1.0551491145435579,
+    "seconds": 25785.99,
+    "terminal_windowed_it_per_s_1000": 0.7350761752326751,
+    "windowed_it_per_s_by_trailing_iterations": {
+     "1000": {
+      "actual_iterations": 992,
+      "it_per_s": 0.7350761752326751,
+      "seconds": 1349.5200000000004
+     },
+     "2000": {
+      "actual_iterations": 1992,
+      "it_per_s": 0.736307889065901,
+      "seconds": 2705.390000000003
+     },
+     "4000": {
+      "actual_iterations": 3992,
+      "it_per_s": 0.7327352021262534,
+      "seconds": 5448.080000000002
+     },
+     "500": {
+      "actual_iterations": 492,
+      "it_per_s": 0.7431799643515297,
+      "seconds": 662.0200000000004
+     }
+    }
+   },
+   "seed407": {
+    "cumulative_it_per_s": 0.7709122474443295,
+    "iterations": 20000,
+    "ratio_cumulative_over_windowed_1000": 1.0271089883118727,
+    "seconds": 25943.29,
+    "terminal_windowed_it_per_s_1000": 0.7505651846269782,
+    "windowed_it_per_s_by_trailing_iterations": {
+     "1000": {
+      "actual_iterations": 996,
+      "it_per_s": 0.7505651846269782,
+      "seconds": 1327.0
+     },
+     "2000": {
+      "actual_iterations": 1996,
+      "it_per_s": 0.7420515718407042,
+      "seconds": 2689.84
+     },
+     "4000": {
+      "actual_iterations": 3996,
+      "it_per_s": 0.7323335526424299,
+      "seconds": 5456.5300000000025
+     },
+     "500": {
+      "actual_iterations": 496,
+      "it_per_s": 0.7707727929635879,
+      "seconds": 643.510000000002
+     }
+    }
+   }
+  },
+  "why": "A cumulative it/s average quoted as a current rate hides a mid-run slowdown by construction, because the fast pre-contention hours stay in the numerator.  Both figures are banked here, each labelled, so no reader has to guess which one a sentence meant."
+ },
  "unit": "L6-b",
+ "verdict_licence": {
+  "amendment_SS44": "SS41 keyed the licence to scale_invariant_grad AT 20,000: a single sample of a series whose trailing spread is 6.7x on the banked start and 24-34x on the seeds.  That fix had the same shape as the defect it fixed -- it named a quantity without naming how the quantity is read.  The key is now the MAXIMUM over the trailing 2,000 iterations.  Conservative direction by design; the weakest row remains the default and requires nothing.",
+  "keyed_on": {
+   "dropped_below_1_45": false,
+   "key_is": "max over trailing 2,000 iterations (CORRECTIONS SS44), superseding SS41's terminal-sample key",
+   "not_critical_above": 1.0,
+   "scale_invariant_grad_max_over_trailing_2000": 199.81196783276508,
+   "scale_invariant_grad_terminal_sample_NOT_THE_KEY": 44.56974279510679,
+   "smallest_residual_at_20000": 1.504851895102804,
+   "start": "banked_J4_minimiser",
+   "terminal_iterate_is_stationary": false,
+   "trailing_window_distribution": {
+    "max": 199.81196783276508,
+    "median": 55.79560737463341,
+    "min": 32.31616913968334,
+    "n_samples": 42,
+    "p25": 44.56974279495608,
+    "p75": 69.21139752566263,
+    "spread_max_over_min": 6.183033854325315,
+    "terminal": 44.56974279510679,
+    "trailing_iterations": 2000
+   }
+  },
+  "licence": "ONLY THIS, AND NOTHING STRONGER: '25x L6's budget, still not stationary -- budget alone does not reach 1.45.'  The L7/L4 prices stay OPEN.  The ansatz is NEITHER EXONERATED NOR CONVICTED.  The pre-committed NO sentence is NOT available here: it requires a stationary terminal iterate, and the plan's wording never required one.  A NO at scale_invariant_grad ~ 10^2 says the optimiser was still descending when the cap arrived, which is BUDGET-LIMITED -- the very hypothesis the NO was meant to eliminate.",
+  "pre_registered": "CORRECTIONS SS41, commit 7265627, at iteration 7,000, AS AMENDED by SS44, commit dd1f3b6 -- both BEFORE this unit's gate number existed, so neither can be a reaction to a result",
+  "row_that_fires": "no_drop_and_NOT_stationary",
+  "run_unchanged": true,
+  "the_gate_was_sound_in_one_direction_and_defective_in_the_other": "The YES branch is untouched.  The NO branch, as written in WAVE7_PLAN, asserted 'the stall is the CONSTRUCTION' from a non-stationary stopping point, which does not follow.  Gates can be half-defective; this one was.",
+  "threshold_unchanged": 1.45,
+  "what_changed": "only the sentence a NO licenses; the gate, budget and threshold stand"
+ },
  "wave": 7,
  "what": "Is L6's stall the ANSATZ or the OPTIMISER BUDGET?  Three minimisations at FIXED n_dof = 6720, branch B, L6's realization/trial space/basis/norm unchanged, iteration cap 20,000: (i) from L6's banked J4 minimiser, (ii)-(iii) from two fresh independent seeds."
 }

@@ -246,12 +246,15 @@ def main():
         l6c = ts["L6_same_quantities_at_its_own_J4_rung"]["continuation"]
         biggest = max(r["scale_invariant_grad"]
                       for r in ts["L6_same_quantities_at_its_own_J4_rung"].values())
+        # SS43: this check previously required `== biggest`, i.e. it ASSERTED the ranking
+        # that was later withdrawn as confounded.  It now tests the ABSOLUTE statement,
+        # which is the claim, and uses no comparison to any other start.
         check("C33", abs(l6c["J"] - L6_RESIDUAL) <= 1e-15
-              and l6c["scale_invariant_grad"] == biggest
               and l6c["scale_invariant_grad"] >= ts["not_a_critical_point_above"],
               f"L6's reported branch-B minimum {l6c['J']!r} carries "
-              f"||x||||g||/|J| = {l6c['scale_invariant_grad']:.4g}, the LARGEST of its six "
-              f"J4 starts -- it was never a critical point")
+              f"||x||||g||/|J| = {l6c['scale_invariant_grad']:.4g} >> 1 on an ABSOLUTE "
+              f"threshold fixed a priori -- it was never a critical point.  No ranking "
+              f"against the other five starts is used (WITHDRAWN, SS43)")
         # re-derive that table straight out of L6's untouched artefact, not from mine
         rows = {r["start"]: r for r in d6["ladder_results"]["B"][-1]["starts"]}
         check("C34", all(
@@ -349,12 +352,26 @@ def main():
             num = sum((a-mx)*(b-my) for a, b in zip(xs, ys))
             den = (sum((a-mx)**2 for a in xs)*sum((b-my)**2 for b in ys))**0.5
             return num/den
-        seeds = [n for n in d["starts"] if n.startswith("seed")]
+        seeds_ = [n for n in d["starts"] if n.startswith("seed")]
+        # SS44/SS45: this check originally ASSERTED that the seeds' relative gradients RISE.
+        # That was true over the window in which it was FIRST MEASURED (k 4,700-7,700) and
+        # is FALSE over the final window -- so the assertion form would have failed a true
+        # artefact, exactly as C37's assertion form would have passed a false one.  It now
+        # verifies that the artefact's reported coefficients MATCH a recomputation, and that
+        # the artefact reports the window each one was measured over.
         check("C41", all(abs(lf["per_start"][n]["pearson_r_log_sig_vs_k_trailing_3000"]
-                             - r_of(n)) < 1e-9 for n in d["starts"])
-              and all(r_of(n) > 0.5 for n in seeds),
-              "both independent seeds' relative gradients RISE over the trailing 3,000 "
-              "iterations while their J falls -- recomputed here, not quoted")
+                             - r_of(n)) < 1e-9 for n in d["starts"]),
+              "the reported log-linear coefficients are recomputed here from the raw "
+              "trajectories and match; the claim is scoped to its window, not asserted "
+              "as a direction")
+        early = lf.get("window_in_which_it_was_first_measured", {})
+        check("C41b", bool(early) and early.get("k_range") == [4700, 7700]
+              and all(early["per_start"][n]["pearson_r"] > 0.5 for n in seeds_)
+              and all(lf["per_start"][n]["pearson_r_log_sig_vs_k_trailing_3000"] < 0
+                      for n in seeds_),
+              "the rise is recorded as a MID-RUN window (k 4,700-7,700, r > +0.5 for both "
+              "seeds) and the artefact also records that it REVERSES by the final window "
+              "(r < 0 for both) -- the finding is window-scoped, not a law")
 
     df = d.get("discipline_finding_a_selfcheck_encoded_the_defect_it_existed_to_catch")
     check("C42", df is not None

@@ -18,3 +18,13 @@ T_A / T_D at the starting point (n_dof = 6720):
 [ckpt] L6-b leg 406: in-run checkpoint at 3.34 h (trajectories + current iterates, TRACKED): rc=0
 [ckpt] L6-b leg 406: in-run checkpoint at 4.17 h (trajectories + current iterates, TRACKED): rc=0
 [ckpt] L6-b leg 406: in-run checkpoint at 5.01 h (trajectories + current iterates, TRACKED): rc=0
+[ckpt] L6-b leg 406: in-run checkpoint at 5.84 h (trajectories + current iterates, TRACKED): rc=0
+[ckpt] L6-b leg 406: in-run checkpoint at 6.67 h (trajectories + current iterates, TRACKED): rc=0
+[ckpt] L6-b leg 406: all three starts finished; final trajectories: rc=0
+
+wrote /home/andy/projects/Unsolved/writeup/data/p2_route_l6b_v1.json  self_hash=171e18dc919cd07b
+GATE: smallest residual at 20,000 = 1.504851895102804   materially below 1.6138 (< 1.45) = NO
+   banked_J4_minimiser      1.504851895102804
+   seed406                  6.45968577803712
+   seed407                  6.502356422688323
+[ckpt] L6-b leg 406: gate answered; artefact written: rc=0

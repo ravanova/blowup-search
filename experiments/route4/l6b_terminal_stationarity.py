@@ -373,11 +373,34 @@ def main():
                      J_terminal=st["final_residual"],
                      sig_terminal=st["scale_invariant_grad"])
              for n, st in d["starts"].items()}
+    def _loglin_window(st, lo, hi):
+        traj = st.get("trajectory_k_sec_J_ginf_gscaled") or []
+        w = [r for r in traj if lo <= r[0] <= hi and r[4] > 0]
+        if len(w) < 3:
+            return None
+        xs = [r[0] for r in w]
+        ys = [_math.log(r[4]) for r in w]
+        mx, my = sum(xs) / len(xs), sum(ys) / len(ys)
+        num = sum((a - mx) * (b - my) for a, b in zip(xs, ys))
+        den = (sum((a - mx) ** 2 for a in xs) * sum((b - my) ** 2 for b in ys)) ** 0.5
+        return dict(pearson_r=(num / den if den else None), n=len(w),
+                    J_first=w[0][2], J_last=w[-1][2], sig_first=w[0][4], sig_last=w[-1][4])
+
+    EARLY = (4700, 7700)
     d["landscape_finding_seeds_become_less_stationary_while_descending"] = dict(
-        what=("both INDEPENDENT seeds descend in objective while their RELATIVE gradient "
-              "RISES: log-linear fits of log(scale_invariant_grad) against iteration over "
-              "the trailing 3,000 iterations are strongly POSITIVE for both, while J falls "
-              "by roughly a factor of two over the same span."),
+        what=("SCOPED TO ITS WINDOW, AND IT REVERSES.  Over k = 4,700-7,700 both INDEPENDENT "
+              "seeds descended in objective while their RELATIVE gradient ROSE (log-linear "
+              "fits of log(scale_invariant_grad) against k strongly POSITIVE, r = +0.76 and "
+              "+0.82, while J fell ~18 -> ~11).  Over the FINAL 3,000 iterations the sign "
+              "REVERSES for both (r < 0).  The mid-run observation is real and is recorded "
+              "with the window it was measured over; it is NOT a property of the run and "
+              "must not be quoted as one.  This is the same discipline as SS44: a "
+              "coefficient without its window is not a measurement."),
+        window_in_which_it_was_first_measured=dict(
+            k_range=list(EARLY),
+            per_start={n: _loglin_window(st, *EARLY) for n, st in d["starts"].items()},
+            note="the window in which the finding was first reported, at k ~ 7,700"),
+        it_reverses_by_the_end=True,
         mechanism=("sig = ||x|| ||grad J||_2 / |J|.  A falling |J| RAISES sig unless "
                    "||grad J||_2 falls faster, and it does not.  The seeds are getting "
                    "closer to a smaller objective value and FURTHER from stationarity in "
@@ -385,6 +408,13 @@ def main():
         this_is_about_the_landscape_not_the_optimiser=True,
         independent_of_the_gate_number=True,
         per_start=trend,
+        correction_recorded=("this unit reported the rise at k ~ 7,700 without stating that "
+                             "it was a window measurement whose direction could change, and "
+                             "its own evidence check C41 then ASSERTED the rise -- which "
+                             "FAILED against the true final artefact.  C37 would have PASSED "
+                             "on a false claim; C41 FAILED on a true one.  Both are the same "
+                             "defect: a check that encodes a CLAIM rather than verifying a "
+                             "NUMBER.  C41 now verifies the coefficients and their windows."),
         caution=("reported as a measured trend over a stated window with the window named, "
                  "NOT extrapolated to 20,000 -- see "
                  "terminal_stationarity.scale_invariant_grad_trailing_window.no_extrapolation"),
