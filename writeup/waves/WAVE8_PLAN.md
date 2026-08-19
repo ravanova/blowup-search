@@ -503,3 +503,26 @@ existing position and it is not a new concession.
 **Cost:** revised **down** from the directive's implied full-read, to **≈2–4 h**. The saving is not
 banked as progress; it is redirected into the `L^q`-membership question above, which nothing in the
 record has ever asked.
+
+---
+
+## DISPATCH RECORD — 2026-08-19 08:40, four units, construction first, verifier last
+
+**Dispatched:** `L-JVER` (Lane L, construction, opens the wave — §3f rule 3) ‖ `PB2` (Lane L,
+literature, re-scoped by AMENDMENT 4) ‖ `PB1` (paper blocker, leg-392 instrument discipline) ‖
+`V-W7` (verifier, LAST). **Four units, at the §3g cap.** Composition floor met by `L-JVER`, which
+attacks `W4`/`W5` directly. Plan and all four amendments were on `main` before dispatch
+(`5802a49`, `6ca49a6`); `L6-b`'s integration landed first at `7d121af`.
+
+**Resourcing, stated because a sibling is still running.** `E-FE` (leg 408, Lane R) holds **6 of 12
+cores** until ≈03:20 on 20-Aug. `L-JVER` is priced at 1–5 core-h and the three others are
+literature/verification units, so the wave fits in the remaining 6 cores without contending with
+`E-FE`. **`R-prof`'s `MACHINE_WAS_NOT_QUIET` applies to every timing any of these four report.**
+
+**`E-FE` remains a LATE RETURN.** Ruling `99421dd` stands: it is Lane R, it did not set this wave's
+direction, and **its verdict may not influence wave 8's ranking.**
+
+**What is NOT dispatched, and why, so it is not silently dropped.** `L6-e` and `L8` wait on
+`L-JVER` — funding another route-4 ladder before the functional is checked is what §3i q5 named.
+`P4`'s draft, `L5-nov`, `R4-a`, `R2`, `R3` are queued per §5 and AMENDMENT 2. **If the user wants
+`P4` concurrent, `PB1` is the one of the four that is droppable.**
