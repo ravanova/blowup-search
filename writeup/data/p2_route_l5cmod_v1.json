@@ -45,7 +45,14 @@
    "p2_route_l5_v1_driver.py": "e5576400199c417d",
    "p2_route_l5_v1_evidence.py": "39153ff1773ad503",
    "p2_route_l5_finite_energy_v1.json": "ad99e3e13daa73f6"
-  }
+  },
+  "after": {
+   "p2_route_l5_v1.py": "d888321007c8535d",
+   "p2_route_l5_v1_driver.py": "e5576400199c417d",
+   "p2_route_l5_v1_evidence.py": "39153ff1773ad503",
+   "p2_route_l5_finite_energy_v1.json": "ad99e3e13daa73f6"
+  },
+  "unchanged": true
  },
  "controls": {
   "X1_reproduce_L5_banked_rows": {
@@ -1789,8 +1796,525 @@
      "predicted_magnitude_per_decade": 2.040290308151192,
      "fired_as_planted": true,
      "passed": true
+    },
+    "alpha=1.001": {
+     "expected_sign": -1,
+     "rows": [
+      {
+       "rho": 1261.7173441261198,
+       "L3": 46.41432879316286,
+       "curl_L32": 862.6852106351198,
+       "T1_L3": 178.34430224740586,
+       "T2_L3": 178.34503810217947,
+       "T3_L3": 46.41459856092643,
+       "T4_L3": 0.0015207884378211122,
+       "T5_L3": 0.00039990958054534714,
+       "T12_L3": 0.015653656524758343,
+       "T123_L3": 46.41442866692449,
+       "n_s": 6,
+       "rows_min": {
+        "rho": 1000.0,
+        "L3": 30.217276841956586,
+        "curl_L32": 561.6531414143891,
+        "T1_L3": 119.29445604479051,
+        "T2_L3": 119.2949484501301,
+        "T3_L3": 30.218232237678365,
+        "T4_L3": 0.0008155351757822051,
+        "T5_L3": 0.00013553887741596488,
+        "T12_L3": 0.010470290820686295,
+        "T123_L3": 30.216094464655058
+       },
+       "rows_max": {
+        "rho": 1556.1116990763257,
+        "L3": 60.639178997390914,
+        "curl_L32": 1127.0707501436004,
+        "T1_L3": 235.77439309538573,
+        "T2_L3": 235.77536493228226,
+        "T3_L3": 60.6260397731322,
+        "T4_L3": 0.002857543112441322,
+        "T5_L3": 0.0009000585987235524,
+        "T12_L3": 0.02069663120832279,
+        "T123_L3": 60.640348889398126
+       },
+       "rho0": 1000.0,
+       "seconds": 45.14
+      },
+      {
+       "rho": 12617.173441261199,
+       "L3": 46.3076717847593,
+       "curl_L32": 860.7038179454817,
+       "T1_L3": 177.93409862228376,
+       "T2_L3": 177.93483451469993,
+       "T3_L3": 46.30784259103307,
+       "T4_L3": 1.5172905313721217e-05,
+       "T5_L3": 3.980720345769289e-06,
+       "T12_L3": 0.015613720949306168,
+       "T123_L3": 46.30767278144915,
+       "n_s": 6,
+       "rows_min": {
+        "rho": 10000.0,
+        "L3": 30.14660940104595,
+        "curl_L32": 560.3276126317174,
+        "T1_L3": 119.02007348420516,
+        "T2_L3": 119.02056572456455,
+        "T3_L3": 30.14872905909723,
+        "T4_L3": 8.136594315391704e-06,
+        "T5_L3": 1.3491610089676885e-06,
+        "T12_L3": 0.010444010259523028,
+        "T123_L3": 30.14659760553367
+       },
+       "rows_max": {
+        "rho": 15561.116990763257,
+        "L3": 60.50085710007731,
+        "curl_L32": 1124.5116736559964,
+        "T1_L3": 235.2320836111841,
+        "T2_L3": 235.2330564636826,
+        "T3_L3": 60.486596153267534,
+        "T4_L3": 2.85097048080593e-05,
+        "T5_L3": 8.95922844476611e-06,
+        "T12_L3": 0.020641639802445207,
+        "T123_L3": 60.50086877214018
+       },
+       "rho0": 10000.0,
+       "seconds": 44.62
+      },
+      {
+       "rho": 126171.73441261197,
+       "L3": 46.20116802309361,
+       "curl_L32": 858.7242814358393,
+       "T1_L3": 177.5248613210684,
+       "T2_L3": 177.52559553823986,
+       "T3_L3": 46.20133745512657,
+       "T4_L3": 1.5138008580906728e-07,
+       "T5_L3": 3.962430584364296e-08,
+       "T12_L3": 0.015577771148320154,
+       "T123_L3": 46.20116803303762,
+       "n_s": 6,
+       "rows_min": {
+        "rho": 100000.0,
+        "L3": 30.077262455095035,
+        "curl_L32": 559.0385585492392,
+        "T1_L3": 118.74633478239991,
+        "T2_L3": 118.74682590029087,
+        "T3_L3": 30.079388874772683,
+        "T4_L3": 8.117880661240773e-08,
+        "T5_L3": 1.3429621740260853e-08,
+        "T12_L3": 0.010419967758275181,
+        "T123_L3": 30.07726233741132
+       },
+       "rows_max": {
+        "rho": 155611.16990763257,
+        "L3": 60.361720407238906,
+        "curl_L32": 1121.9256989863281,
+        "T1_L3": 234.69106439870947,
+        "T2_L3": 234.69203504614222,
+        "T3_L3": 60.3474807667218,
+        "T4_L3": 2.84441342601848e-07,
+        "T5_L3": 8.918064493313104e-08,
+        "T12_L3": 0.020594091618113194,
+        "T123_L3": 60.36172052369109
+       },
+       "rho0": 100000.0,
+       "seconds": 44.49
+      },
+      {
+       "rho": 1261717.3441261197,
+       "L3": 46.09490829457547,
+       "curl_L32": 856.7492706698475,
+       "T1_L3": 177.11656546781924,
+       "T2_L3": 177.1172979965103,
+       "T3_L3": 46.09507732713413,
+       "T4_L3": 1.5103192127127773e-09,
+       "T5_L3": 3.944224869428437e-10,
+       "T12_L3": 0.015541942877402024,
+       "T123_L3": 46.09490829467467,
+       "n_s": 6,
+       "rows_min": {
+        "rho": 1000000.0,
+        "L3": 30.008086554640965,
+        "curl_L32": 557.7528021909209,
+        "T1_L3": 118.47322578980756,
+        "T2_L3": 118.473715778255,
+        "T3_L3": 30.010208199788334,
+        "T4_L3": 8.099210053758671e-10,
+        "T5_L3": 1.3367918232921026e-10,
+        "T12_L3": 0.010396002278523258,
+        "T123_L3": 30.008086553466832
+       },
+       "rows_max": {
+        "rho": 1556111.6990763256,
+        "L3": 60.2228924166503,
+        "curl_L32": 1119.3453447903203,
+        "T1_L3": 234.15128992485364,
+        "T2_L3": 234.15225834018287,
+        "T3_L3": 60.20868541173216,
+        "T4_L3": 2.837871456630085e-09,
+        "T5_L3": 8.877089708576873e-10,
+        "T12_L3": 0.020546725786155833,
+        "T123_L3": 60.22289241781213
+       },
+       "rho0": 1000000.0,
+       "seconds": 41.61
+      },
+      {
+       "rho": 12617173.441261197,
+       "L3": 45.98889294748503,
+       "curl_L32": 854.7788020270651,
+       "T1_L3": 176.70920867125176,
+       "T2_L3": 176.70993951517528,
+       "T3_L3": 45.989061591181894,
+       "T4_L3": 1.5068455749157728e-11,
+       "T5_L3": 3.926102802280413e-12,
+       "T12_L3": 0.015506197396805232,
+       "T123_L3": 45.988892947486015,
+       "n_s": 6,
+       "rows_min": {
+        "rho": 10000000.0,
+        "L3": 29.93906986959626,
+        "curl_L32": 556.470006306869,
+        "T1_L3": 118.20074493174062,
+        "T2_L3": 118.20123379324686,
+        "T3_L3": 29.941186636253736,
+        "T4_L3": 8.080582387546637e-12,
+        "T5_L3": 1.330649822775863e-12,
+        "T12_L3": 0.010372092134597973,
+        "T123_L3": 29.939069869584543
+       },
+       "rows_max": {
+        "rho": 15561116.990763258,
+        "L3": 60.08438360880752,
+        "curl_L32": 1116.7709219584308,
+        "T1_L3": 233.61275690211622,
+        "T2_L3": 233.61372309015516,
+        "T3_L3": 60.070209277949935,
+        "T4_L3": 2.8313445333995594e-11,
+        "T5_L3": 8.83630318622934e-12,
+        "T12_L3": 0.0204994696208513,
+        "T123_L3": 60.0843836088191
+       },
+       "rho0": 10000000.0,
+       "seconds": 46.72
+      },
+      {
+       "rho": 126171734.41261198,
+       "L3": 45.88312142883541,
+       "curl_L32": 852.8128653371899,
+       "T1_L3": 176.30278876934184,
+       "T2_L3": 176.30351793237097,
+       "T3_L3": 45.883289684661555,
+       "T4_L3": 1.5033799262642023e-13,
+       "T5_L3": 3.9080639984689365e-14,
+       "T12_L3": 0.015470534132398475,
+       "T123_L3": 45.88312142883541,
+       "n_s": 6,
+       "rows_min": {
+        "rho": 100000000.0,
+        "L3": 29.870211919672624,
+        "curl_L32": 555.190160807852,
+        "T1_L3": 117.92889076227254,
+        "T2_L3": 117.92937849942854,
+        "T3_L3": 29.872323817913273,
+        "T4_L3": 8.061997563778691e-14,
+        "T5_L3": 1.3245360421889388e-14,
+        "T12_L3": 0.010348236984639922,
+        "T123_L3": 29.870211919672514
+       },
+       "rows_max": {
+        "rho": 155611169.90763256,
+        "L3": 59.94619336125756,
+        "curl_L32": 1114.2024201171153,
+        "T1_L3": 233.07546247100512,
+        "T2_L3": 233.07642643687328,
+        "T3_L3": 59.932051630444896,
+        "T4_L3": 2.8248326216764004e-13,
+        "T5_L3": 8.795704060933253e-14,
+        "T12_L3": 0.020452322148979244,
+        "T123_L3": 59.94619336125768
+       },
+       "rho0": 100000000.0,
+       "seconds": 36.34
+      }
+     ],
+     "increments_per_decade": [
+      {
+       "rho_lo": 1261.7173441261198,
+       "rho_hi": 12617.173441261199,
+       "decades": 1.0,
+       "value_lo": 862.6852106351198,
+       "value_hi": 860.7038179454817,
+       "delta": -1.9813926896381417,
+       "per_decade": -1.9813926896381417
+      },
+      {
+       "rho_lo": 12617.173441261199,
+       "rho_hi": 126171.73441261197,
+       "decades": 0.9999999999999999,
+       "value_lo": 860.7038179454817,
+       "value_hi": 858.7242814358393,
+       "delta": -1.9795365096423438,
+       "per_decade": -1.979536509642344
+      },
+      {
+       "rho_lo": 126171.73441261197,
+       "rho_hi": 1261717.3441261197,
+       "decades": 1.0,
+       "value_lo": 858.7242814358393,
+       "value_hi": 856.7492706698475,
+       "delta": -1.975010765991783,
+       "per_decade": -1.975010765991783
+      },
+      {
+       "rho_lo": 1261717.3441261197,
+       "rho_hi": 12617173.441261197,
+       "decades": 1.0,
+       "value_lo": 856.7492706698475,
+       "value_hi": 854.7788020270651,
+       "delta": -1.9704686427824072,
+       "per_decade": -1.9704686427824072
+      },
+      {
+       "rho_lo": 12617173.441261197,
+       "rho_hi": 126171734.41261198,
+       "decades": 1.0,
+       "value_lo": 854.7788020270651,
+       "value_hi": 852.8128653371899,
+       "delta": -1.9659366898752069,
+       "per_decade": -1.9659366898752069
+      }
+     ],
+     "last3_per_decade": [
+      -1.975010765991783,
+      -1.9704686427824072,
+      -1.9659366898752069
+     ],
+     "predicted_magnitude_per_decade": 1.9636741908389521,
+     "fired_as_planted": true,
+     "passed": true
     }
    }
+  },
+  "X5_self_convergence_at_largest_rho": {
+   "class": "recompute-from-primary",
+   "what": "at rho0=1e8: angular+radial order RES vs RES_HI, n_s 6 vs 12, and the curl's finite-difference step fd_rel over 1e-3/1e-4/1e-5",
+   "variants": {
+    "RES_baseline_n_s_6_fd_1e-4": {
+     "curl_L32": 869.290596262992,
+     "L3": 46.769729042314516,
+     "rho": 126171734.41261198,
+     "seconds": 34.63
+    },
+    "RES_HI_n_s_6_fd_1e-4": {
+     "curl_L32": 869.2216330324999,
+     "L3": 46.7697233952992,
+     "rho": 126171734.41261198,
+     "seconds": 187.43
+    },
+    "RES_n_s_12_fd_1e-4": {
+     "curl_L32": 869.6813472230906,
+     "L3": 46.79058707731574,
+     "rho": 129023925.51263209,
+     "seconds": 61.29
+    },
+    "RES_n_s_6_fd_1e-3": {
+     "curl_L32": 869.2905961169845,
+     "L3": 46.769729042314516,
+     "rho": 126171734.41261198,
+     "seconds": 33.69
+    },
+    "RES_n_s_6_fd_1e-5": {
+     "curl_L32": 869.2905962314363,
+     "L3": 46.769729042314516,
+     "rho": 126171734.41261198,
+     "seconds": 39.25
+    }
+   },
+   "absolute_deviations_from_baseline": {
+    "RES_HI_n_s_6_fd_1e-4": 0.0689632304921588,
+    "RES_n_s_12_fd_1e-4": 0.3907509600985577,
+    "RES_n_s_6_fd_1e-3": 1.4600755093852058e-07,
+    "RES_n_s_6_fd_1e-5": 3.1555714485875797e-08
+   },
+   "resolution_floor_absolute": 0.3907509600985577,
+   "gate_last3_increments_abs": [
+    2.583007330712371e-10,
+    1.0882093026429652e-09,
+    2.3568854768452945e-10
+   ],
+   "note": "this is an ABSOLUTE spread in c_mod, not a per-decade rate; it bounds how much of any measured per-decade increment could be discretisation rather than the object"
+  },
+  "X6_overlap": {
+   "class": "recompute-from-primary",
+   "what": "journal SS4(f) asked that the extension code reproduce the banked rho0=1000 row through MY driver path as well as through L5's",
+   "DISCLOSURE": "this control is SUBSUMED BY X1 BY CONSTRUCTION and is not an independent check: the gate ladder's first five rows ARE the X1 rows, reused rather than recomputed, so there is only one code path and X6 cannot fail unless X1 fails. It is reported as one check, not two, and it is NOT counted separately in the tally.",
+   "counted_in_tally": false,
+   "gate_row_rho0_1000_curl_L32": 869.2878218404479,
+   "banked_row_rho0_1000_curl_L32": 869.2878218404479,
+   "bit_identical": true
+  },
+  "X7_float64_saturation_reach": {
+   "class": "recompute-from-primary",
+   "what": "psi_alpha = (1+r^2)^{(2-alpha)/2} differs from the exactly scale-invariant pure power r^{2-alpha} by a RELATIVE O(r^-2). Beyond r^2 ~ 1/eps the `1` is below float64 resolution and the code is computing the pure power EXACTLY, so the terminal bands of the ladder cannot resolve the correction even in principle.",
+   "eps": 2.220446049250313e-16,
+   "per_row": [
+    {
+     "rho": 12.6171734412612,
+     "r_probe": 18.925760161891798,
+     "relative_size_of_the_1": 0.002791858066420693,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 37.851520323783596,
+     "r_probe": 56.77728048567539,
+     "relative_size_of_the_1": 0.00031020645182452147,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 126.171734412612,
+     "r_probe": 189.257601618918,
+     "relative_size_of_the_1": 2.791858066420693e-05,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 378.5152032378359,
+     "r_probe": 567.7728048567539,
+     "relative_size_of_the_1": 3.1020645182452154e-06,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 1261.7173441261198,
+     "r_probe": 1892.5760161891797,
+     "relative_size_of_the_1": 2.791858066420693e-07,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 3785.152032378359,
+     "r_probe": 5677.728048567538,
+     "relative_size_of_the_1": 3.1020645182452154e-08,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 12617.173441261199,
+     "r_probe": 18925.760161891798,
+     "relative_size_of_the_1": 2.791858066420693e-09,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 37851.52032378359,
+     "r_probe": 56777.28048567538,
+     "relative_size_of_the_1": 3.102064518245216e-10,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 126171.73441261197,
+     "r_probe": 189257.60161891795,
+     "relative_size_of_the_1": 2.7918580664206942e-11,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 378515.20323783596,
+     "r_probe": 567772.8048567539,
+     "relative_size_of_the_1": 3.1020645182452144e-12,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 1261717.3441261197,
+     "r_probe": 1892576.0161891796,
+     "relative_size_of_the_1": 2.7918580664206937e-13,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 3785152.032378359,
+     "r_probe": 5677728.048567539,
+     "relative_size_of_the_1": 3.102064518245215e-14,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 12617173.441261197,
+     "r_probe": 18925760.161891796,
+     "relative_size_of_the_1": 2.791858066420694e-15,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 37851520.32378359,
+     "r_probe": 56777280.48567539,
+     "relative_size_of_the_1": 3.1020645182452154e-16,
+     "resolved_in_float64": true
+    },
+    {
+     "rho": 126171734.41261198,
+     "r_probe": 189257601.61891797,
+     "relative_size_of_the_1": 2.791858066420693e-17,
+     "resolved_in_float64": false
+    }
+   ],
+   "largest_rho_where_the_correction_is_still_resolved": 37851520.32378359,
+   "consequence": "the gate must not rest on the float-saturated bands alone; X8 discriminates the two models on the WELL-RESOLVED decades, and X4 measures what the saturated bands are worth"
+  },
+  "X8_model_discrimination": {
+   "class": "recompute-from-primary",
+   "what": "two-parameter least squares of c_mod(rho) over the decades where the correction is still resolved in float64: SATURATING (A + B rho^-2, the analytic prior of journal SS3) against LOG-DIVERGENT (A + B log10 rho, SS53's hypothesis). Same data, same number of parameters.",
+   "rows_used": [
+    {
+     "rho": 12.6171734412612,
+     "curl_L32": 995.4883019232984
+    },
+    {
+     "rho": 37.851520323783596,
+     "curl_L32": 869.9680584858523
+    },
+    {
+     "rho": 126.171734412612,
+     "curl_L32": 869.0679975658632
+    },
+    {
+     "rho": 378.5152032378359,
+     "curl_L32": 869.2606943625965
+    },
+    {
+     "rho": 1261.7173441261198,
+     "curl_L32": 869.2878218404479
+    },
+    {
+     "rho": 3785.152032378359,
+     "curl_L32": 869.290286770777
+    },
+    {
+     "rho": 12617.173441261199,
+     "curl_L32": 869.290568397356
+    },
+    {
+     "rho": 37851.52032378359,
+     "curl_L32": 869.2905931662863
+    },
+    {
+     "rho": 126171.73441261197,
+     "curl_L32": 869.2905959840637
+    },
+    {
+     "rho": 378515.20323783596,
+     "curl_L32": 869.2905962325118
+    },
+    {
+     "rho": 1261717.3441261197,
+     "curl_L32": 869.2905962625455
+    }
+   ],
+   "fits": {
+    "A + B*rho^-2": {
+     "A": 867.9215552501114,
+     "B": 20095.894543710525,
+     "max_abs_residual": 11.97971808520856,
+     "rms_residual": 3.811562874643266
+    },
+    "A + B*log10(rho)": {
+     "A": 921.9513618184619,
+     "B": -11.460570743176756,
+     "max_abs_residual": 86.15459382921165,
+     "rms_residual": 31.416126538170406
+    }
+   },
+   "rms_ratio_log_over_power": 8.242321475835741,
+   "reading": "a ratio >> 1 means the saturating model fits the SAME data far better with the SAME number of parameters; a ratio ~ 1 or < 1 means the two are not separable at this reach and the gate is UNDER-RESOURCED"
   }
  },
  "gate": {
@@ -2636,8 +3160,74 @@
     "delta": -2.1316282072803006e-14,
     "per_decade": -4.076716115391999e-14
    }
-  ]
+  ],
+  "c_mod_banked_by_L5": 869.2878218404479,
+  "c_mod_at_largest_rho": 869.290596262992,
+  "largest_rho_reached": 126171734.41261198,
+  "largest_rho0_reached": 100000000.0,
+  "total_change_from_L5s_last_rho": 0.00277442254412108,
+  "relative_change_from_L5s_last_rho": 3.191604063021496e-06,
+  "decades_added": 5.0,
+  "all_increments_positive": false,
+  "negative_increment_bands": [
+   {
+    "rho_lo": 12.6171734412612,
+    "rho_hi": 37.851520323783596,
+    "decades": 0.47712125471966244,
+    "value_lo": 995.4883019232984,
+    "value_hi": 869.9680584858523,
+    "delta": -125.52024343744608,
+    "per_decade": -263.0782892101439
+   },
+   {
+    "rho_lo": 37.851520323783596,
+    "rho_hi": 126.171734412612,
+    "decades": 0.5228787452803376,
+    "value_lo": 869.9680584858523,
+    "value_hi": 869.0679975658632,
+    "delta": -0.9000609199891869,
+    "per_decade": -1.7213568692807084
+   },
+   {
+    "rho_lo": 1261717.3441261197,
+    "rho_hi": 3785152.032378359,
+    "decades": 0.47712125471966244,
+    "value_lo": 869.2905962625455,
+    "value_hi": 869.2905962622145,
+    "delta": -3.3094238460762426e-10,
+    "per_decade": -6.936232275002565e-10
+   }
+  ],
+  "verdict_detail": {
+   "last3_per_decade": [
+    2.583007330712371e-10,
+    1.0882093026429652e-09,
+    2.3568854768452945e-10
+   ],
+   "mean": 5.273995277995773e-10,
+   "rel_spread_of_last3": 1.6164609750701393,
+   "monotonically_shrinking": false,
+   "noise_floor_used": 0.005365576651852624,
+   "terminal_over_noise_floor": 4.3926042432578236e-08,
+   "mean_over_noise_floor": 9.829316810104222e-08,
+   "verdict_by_precommitted_rule": "UNDER-RESOURCED"
+  },
+  "answer": "UNDER-RESOURCED"
  },
- "_checkpoint": "X3 alpha=0.999",
- "_checkpoint_time": "2026-08-19T10:43:56"
+ "_checkpoint": "SEALED",
+ "_checkpoint_time": "2026-08-19T10:53:36",
+ "cost_own_footprint": {
+  "wall_seconds": 2005.4,
+  "cpu_seconds_user": 1759.9,
+  "cpu_seconds_sys": 15.8,
+  "max_rss_mb": 35.6,
+  "processes": 1,
+  "OMP_NUM_THREADS": "1",
+  "note": "CORRECTIONS.md SS40: this is the unit's OWN footprint, not the ambient load"
+ },
+ "chain": {
+  "links_moved": [],
+  "statement": "NO link of the L1->L4 chain moved. Tier-2 float64 extension of a Tier-2 float64 sweep on a synthetic realization. Clay ~0.05%. Scale is not evidence."
+ },
+ "self_hash": "b65a5466489f37d0"
 }
