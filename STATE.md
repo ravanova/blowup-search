@@ -103,6 +103,18 @@ Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits 
 **The precedent it set, kept live because it binds every wave:** a request to change a gate
 **mid-wave was REFUSED**. Plan verbatim: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`.
 
+## ⚠ 2026-08-19 — **TEMPORARY PIVOT TO PAPERS (user ruling).** Scaffold `7851899`; wave 8 planned and committed before dispatch: `writeup/waves/WAVE8_PLAN.md`.
+
+**Enters at the NEXT WAVE BOUNDARY — wave 7 is not interrupted.** Three drafts: `P1` selection bias, `P2` α-pin × ṁ pincer, `P4` methodology. **`P3` (the `2509.25116` audit) is deliberately absent** — authors-first is the correct route, outreach is held, Class A is unverified.
+
+**A PAPER IS A VIEW OF THE RECORD, NEVER A SOURCE.** Every number cites the banked JSON field it came from. `UNVERIFIED` stays `UNVERIFIED` in the draft; `UNDER-RESOURCED` is never written as a null result; a control that did not fire as planted is disclosed **in the paper**. **NO UNIT MAY CITE A DRAFT.**
+
+**The second output is not the paper.** Where a draft cannot state something cleanly, that is a **finding about the record** — `FINDINGS.md`, then `CORRECTIONS.md` or an escalation, **never smoothed over in prose**. Leg 348's ceiling would not have survived one honest related-work paragraph.
+
+**§3g's composition floor STANDS: paper units are ADDITIONAL, not a substitute.** Two units come before any drafting — **`PB1`** (`P1`'s owed novelty check; a YES kills `P1` and is a GOOD result) and **`PB2`** (both jaws of `P2`'s pincer read at PRIMARY). **`PB2` is not a paper errand: W4 clause (b) is recorded SHUT AND VERIFIED on two theorems this repository has never opened.** A jaw that does not close as cited goes to the user **immediately**.
+
+**Outreach stays held.** Reading published material is authorised; contacting any author, group or maintainer list is not.
+
 ## WAVE 7 — **DISPATCHED 2026-08-19: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` HELD** until `R-bank` returns **160/160**.
 
 ## WAVE 6 — COMPLETE 2026-08-19. Retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE6. Audit + §3i: `writeup/waves/WAVE6_CLOSE.md`.

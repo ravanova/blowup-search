@@ -53,21 +53,23 @@ each start at the predecessor's minimiser, at a budget too small for the added d
 toward measuring "no change". **The `NO` is about THIS CONSTRUCTION AT THIS BUDGET**, and reading (d)
 `UNDER-RESOURCED` is the DOMINANT reading, not a secondary one.
 
-**§3i, the seven, one line each.** (1) **No** `L1→L4` link moved; Clay ~0.05%. (2) Made FALSE:
-`OPTIONS.md`'s `L7` price — *"needs `L6` first, ~10¹ h"* — because an enclosure needs a residual
-small enough to contract and this one is **1.6 against a unit-normalised field**; same for `L4`.
-`W4(b)` is **untouched** (threshold-free, rests on the exponent). (3) Lane L **keeps** its rank —
-three consecutive narrowing units, the only lane on the FINAL blockers. (4) Live ceiling: **every
-route-4 CONSTANT is still the synthetic stand-in's**; `L6` did not end that. Plus NRŠ 1996
-`SECOND HAND`. (5) **CHEAPEST KILLER, NOW NEXT: `L6-b`** — fix `n_dof = 6720`, raise the cap **800 →
-20,000** from `L6`'s banked minimiser plus two seeds, **~10¹ core-h against the ~10³ ladder `L6`
-asked for**. Decisive both ways. (6) If Lane L died: Lane V — not cheaper in the way that matters,
-it does not touch W4/W5. **No lane re-rank.** (7) **LOOP RISK REAL:** the last three units are
-CONSTRUCTION / AUDIT / VERIFICATION — two of three audit-kind. **Applied, not noted:** wave 7's
-Lane-L slot is `L6-b`, a measurement on the object; `R-prof` is instrument work, **capped at one
-slot**, paired with `E-FE`, which measures the object.
+**Wave 6's seven §3i answers retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §ORCH-W6-3i; full
+text with its landing audit: `writeup/waves/WAVE6_CLOSE.md`. What binds: no `L1→L4` link moved;
+`OPTIONS.md`'s `L7` and `L4` prices made FALSE; Lane L keeps its rank; the loop risk is REAL —
+wave 7's Lane-L slot is a measurement on the object, not another audit.**
 
 **RE-RANK MADE HERE (§3i q5): Lane L's next unit is `L6-b`, not `L7`.** `R4` > `R2` > `R3` stands.
+
+### ⚠ 2026-08-19 USER RULING — **TEMPORARY PIVOT TO PAPERS**, entering at the NEXT wave boundary
+
+**Wave 7 is NOT interrupted** — the ruling says so. Scaffold `7851899` (`writeup/papers/`: three
+`STATUS.md`, no drafts), merged to `main` at `7608027`. **Wave 8 planned and committed BEFORE
+dispatch: `writeup/waves/WAVE8_PLAN.md`** — `L8` (Clay-chain floor, opens) ‖ `PB2` (both jaws of
+`P2`'s pincer at PRIMARY — **W4(b) is recorded SHUT AND VERIFIED on two theorems never opened
+here**; a jaw that does not close as cited goes to the user IMMEDIATELY) ‖ `PB1` (`P1`'s owed
+novelty check; a YES kills `P1` and is a GOOD result) ‖ `V-W7` (last). **A PAPER IS A VIEW OF THE
+RECORD, NEVER A SOURCE; no unit may cite a draft; the composition floor STANDS.** `P4`'s draft
+slips to wave 9 on the 2–4 cap — **flagged to the user, not silently dropped** (`WAVE8_PLAN.md` §5).
 
 ### WAVE 7 — DISPATCHED 2026-08-19: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ **`V-W6`** (legs 404–407)
 
@@ -81,10 +83,10 @@ explicit-paths-only commits (four workers, one tree), COMMIT DURING THE RUN, and
 
 | file | bytes | cap | free |
 |---|---|---|---|
-| `STATE.md` | 24,234 | 24,576 | 342 |
+| `STATE.md` | 21,996 | 24,576 | 2,580 |
 | `WALLS.md` | 32,457 | 32,768 | 311 |
-| `OPTIONS.md` | 24,555 | 24,576 | **21 — thinnest** |
-| `ORCH_STATE.md` LIVE | 7,950 | 8,192 | 242 |
+| `OPTIONS.md` | 21,674 | 24,576 | 2,902 |
+| `ORCH_STATE.md` LIVE | 7,960 | 8,192 | 232 |
 
 **DEFECT OF MINE, FOUND AND REPAIRED 2026-08-19** — a retirement spliced into a live paragraph
 because it located its target by TITLE, and the title also lives in every pointer to it. Full

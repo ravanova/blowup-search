@@ -403,3 +403,22 @@ H11 — the one previous attempt at this lane's target, by anyone, died that way
 | **T2′** | the **compliant** rigidity search | **DEFERRED, ≈1.2–1.7 h plus one user ruling.** Closes T2's three holes: NRS 1996 / Tsai 1998 are pre-arXiv (needs a forward-citation pass), Semantic Scholar was throttled on 5 of 6 substantive queries (needs an S2 key), battery `E` failed its own domain control (needs repair). |
 | **T2″** | **the Type-I rigidity question on `T³`** | **DEFERRED — as of 2026-08-14 the ONLY thing keeping Lane T alive, and re-open condition 2.** The sharpest item the lane owns. A Type-I condition is a *rate* condition (`\|u\| ≲ (T−t)^{−1/2}`), needs **no dilation symmetry**, and carries to the torus intact **as a question**. Measured: `"Type I blowup" AND "periodic"` = **0**. Nothing located proves it. |
 | **T3** | the non-DSS `T³` ansatz | **DEFERRED WITH THE LANE — NOT KILLED.** Still the lane's real mathematical content; runs when a re-open condition is met. Binds: C1's naming requirement. |
+
+## §ORCH-W6-3i — wave 6's seven §3i answers, retired verbatim from the ORCH live block 2026-08-19 under §3j
+
+Retired for headroom only, at the wave-8 planning boundary. **Nothing superseded.** Full text
+with the landing audit it belongs to: `writeup/waves/WAVE6_CLOSE.md`.
+
+**§3i, the seven, one line each.** (1) **No** `L1→L4` link moved; Clay ~0.05%. (2) Made FALSE:
+`OPTIONS.md`'s `L7` price — *"needs `L6` first, ~10¹ h"* — because an enclosure needs a residual
+small enough to contract and this one is **1.6 against a unit-normalised field**; same for `L4`.
+`W4(b)` is **untouched** (threshold-free, rests on the exponent). (3) Lane L **keeps** its rank —
+three consecutive narrowing units, the only lane on the FINAL blockers. (4) Live ceiling: **every
+route-4 CONSTANT is still the synthetic stand-in's**; `L6` did not end that. Plus NRŠ 1996
+`SECOND HAND`. (5) **CHEAPEST KILLER, NOW NEXT: `L6-b`** — fix `n_dof = 6720`, raise the cap **800 →
+20,000** from `L6`'s banked minimiser plus two seeds, **~10¹ core-h against the ~10³ ladder `L6`
+asked for**. Decisive both ways. (6) If Lane L died: Lane V — not cheaper in the way that matters,
+it does not touch W4/W5. **No lane re-rank.** (7) **LOOP RISK REAL:** the last three units are
+CONSTRUCTION / AUDIT / VERIFICATION — two of three audit-kind. **Applied, not noted:** wave 7's
+Lane-L slot is `L6-b`, a measurement on the object; `R-prof` is instrument work, **capped at one
+slot**, paired with `E-FE`, which measures the object.
