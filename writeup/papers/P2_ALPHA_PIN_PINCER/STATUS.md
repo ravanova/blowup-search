@@ -116,6 +116,37 @@ at 800 iterations**; `L6-b`'s single `×25` budget step at fixed `n_dof` moved i
 also invert on a margin of `0.4636` percentage points. `L6-e` v2 is the measurement; it is **HELD
 FOR CORES** and has not run. **The paper may not write `L6`'s ladder as evidence about refinement.**
 
+### 8. **NEW, AND IT IS NOW BLOCKER ZERO** — THE DECOMPOSITION IS IN THE **SECONDARY** NORM
+
+Found by `P2-DRAFT` while writing `DRAFT.md` §4, and flagged **`ESCALATE NOW`** in `FINDINGS.md`
+**F1** rather than at end-of-wave.
+
+Every per-term field in `p2_route_l5_finite_energy_v1.json` is an `L³` field — `T1_L3`, `T2_L3`,
+`T3_L3`, `T4_L3`, `T5_L3`, `T12_L3`, `T123_L3` and their exponent variants. **There is no per-term
+field in the load-bearing pressure-free `‖curl F‖_{L¹_t L^{3/2}_x}` norm anywhere in the artefact**;
+that norm is banked only as the total, `curl_L32`. So both headline ratios —
+`T12_over_T1_at_largest_rho = 2.5780635399678998e-08` (`= T12_L3/T1_L3`) and
+`total_over_T3_at_largest_rho = 0.9999978617027289` (`= L3/T3_L3`) — are **secondary-norm** ratios,
+and `gate.the_obstruction_named` quotes both inside a sentence about the load-bearing norm without
+saying so.
+
+**It bites harder than a mislabel:** the load-bearing norm is load-bearing *because* `curl`
+annihilates `∇P`. In the secondary norm `T₆` is **not** annihilated **and is not in the
+decomposition at all**.
+
+- **The claim at the top of this file is therefore narrower than it was written**, and `DRAFT.md`
+  now says *"in the secondary norm"* in the abstract, in a box before §4's first number, and in the
+  conclusion. **Narrower than the ceiling is permitted.**
+- **It does NOT reopen `W4` clause (b).** The `NO` is read off `curl_L32` directly
+  (`995.488, 869.968, 869.068, 869.261, 869.288`), which needs no decomposition.
+- **The fix is cheap and is not this unit's to make:** the apparatus already computes `curl R_loc`;
+  recording `‖curl Tᵢ‖_{L^{3/2}}` per term is a change to what is *written*, not a new calculation.
+  Either it promotes the paper's central sentence to the load-bearing norm, **or the load-bearing
+  decomposition looks different and the paper as drafted is wrong.** The second outcome is why this
+  is escalated rather than queued.
+- **Do not shortcut it by inferring the curl-norm sizes from the `L³` ones.** `curl` is a
+  derivative and the terms live on different length scales.
+
 ---
 
 ## What it owes
@@ -124,10 +155,13 @@ FOR CORES** and has not run. **The paper may not write `L6`'s ladder as evidence
    contemplated.
 2. **`L5-cmod`'s answer** (blocker 5) folded into §5 of the draft.
 3. **`L6-e` v2's answer** (blocker 7) folded into §6 of the draft.
-4. A decision — **not this unit's** — on whether a paper whose two central numbers are values of
+4. **Blocker 8's measurement** — the same sweep, recording `‖curl Tᵢ‖_{L^{3/2}}` per term.
+   **Ranked above everything else here, including the novelty check**, because it is the only owed
+   item that can show the paper's central sentence to be false rather than merely narrow.
+5. A decision — **not this unit's** — on whether a paper whose two central numbers are values of
    truncations should be written at all, or whether the honest object is a shorter note about the
    *exponent*, which is truncation-free, plus a `CORRECTIONS`-style methodological piece.
-   `FINDINGS.md` **F9** puts this to the Conductor.
+   `FINDINGS.md` **F11** puts this to the Conductor.
 
 ## What it must NOT claim, written here so the draft cannot drift
 
@@ -137,3 +171,5 @@ FOR CORES** and has not run. **The paper may not write `L6`'s ladder as evidence
   `n_dof` other than `6720`.
 - Not that NRŠ excludes the object. **It does not.**
 - Not that the `α ≤ 1` direction was read at primary. **It was not, and it cannot be from here.**
+- Not that `T₃` is the sole survivor **in the load-bearing norm**. That is not measured (blocker 8).
+- Not that any `self_hash` shows an artefact is unchanged. `CORRECTIONS.md` §54: it hashes the clock.
