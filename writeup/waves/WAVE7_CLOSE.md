@@ -450,3 +450,26 @@ solver load** — `PB2` reads two theorems at primary, `PB1` runs a novelty chec
 overrun therefore does **not** block the wave-8 dispatch, and no shard count is changed mid-run:
 that was pre-committed against, and changing it destroys the per-attempt cost figure the ensemble
 owes the record.
+
+### `E-FE` cost, UPDATED at 6 completions — and it is RISING
+
+Per-attempt shard-hours in completion order: `0.39, 0.70, 0.77, 0.78, 0.84, 1.02`. First three mean
+`0.620`; **last three mean `0.880`.**
+
+| basis | core-h | wall at 6 shards | vs brief (91 core-h / 15.2 h) |
+|---|---|---|---|
+| all six | 120.0 | 20.0 h | ×1.32 |
+| last three | 140.8 | 23.5 h | **×1.55** |
+
+**No slope is reported and none is claimed.** `n = 6`, and the rise is confounded three ways that
+this measurement cannot separate: `L6-b`'s contention (which §40 measured at 40% on the co-tenant),
+genuine variation in attempt difficulty across UPOs and arms, and shard warm-up. A linear fit gives
+`r = +0.92`, which is exactly the kind of number §44 says not to extrapolate from — **six points and
+three confounded causes.** The honest statement is a **range: ×1.32 to ×1.55 of the briefed budget,
+ETA 21:20–01:00.**
+
+**Nothing changes in the run.** The shard count was pre-committed against mid-run change and a change
+would destroy the per-attempt cost figure the ensemble owes the record. The recovery rate so far is
+**1 of 6**, which is a number for the ensemble's verdict and not for its schedule, and it is far too
+few to carry an interval. `E-FE`'s cost overrun is a fact about this box and this queue; **it bears
+on no gate.**
