@@ -310,3 +310,80 @@ in this repository is computed over a record that already contains the run's `wa
 content hash and is unaffected. **Wherever a `self_hash` appears in this register or beside it as
 evidence that an artefact is unchanged, that citation is void** — the PDF hashes in
 `Papers/MANIFEST.md` are not.
+
+---
+
+## Appended 2026-08-19 by `P4-DRAFT` (leg 414, wave 9, PAPER unit) — APPEND-ONLY; no existing row is edited
+
+**These are METHODOLOGY sources, not mathematics sources.** None of them bears on `L1→L4`, on the
+`α`-pin, or on any Clay-chain step. They exist because `ORCHESTRATION.md` §3k rule 3 requires this
+programme to **name the published practice** its disciplines are instances of, rather than reinvent
+it under a new name. **The comparison came back deflationary and that is written into
+`writeup/papers/P4_METHODOLOGY/DRAFT.md` §3 as the finding: most of our mechanisms are renames, and
+one of them is a rename of a WEAKER form of the existing practice.**
+
+**No external contact of any kind was made.** Every acquisition below was an anonymous HTTP fetch of
+published material from a public endpoint. **No author, group, maintainer or list was contacted;
+that hold is unbroken.** No paywall was circumvented — where a document was paywalled it is recorded
+`UNREACHABLE` in the second table and **never as a zero**.
+
+**Where the copies live.** PDFs and HTML were written to `Papers/p4_sources/` (gitignored — this
+repository does not redistribute publisher PDFs). `Papers/MANIFEST.md` was **NOT** edited: it is not
+this unit's territory. The reproducible part of each row is therefore the **URL + sha256 + byte
+count**, and where a re-fetch was performed the result of the re-fetch is stated.
+
+### Reached — depth as actually attained by this unit at leg 414
+
+| # | source | what it carries in `P4` | DEPTH | URL + evidence |
+|---|---|---|---|---|
+| 52 | **A. Roodman, *Blind Analysis in Particle Physics*, PHYSTAT2003 (SLAC), `arXiv:physics/0312102`** | `DRAFT.md` §3.2. The practice this programme **does not implement**: pre-registration without blinding. The KTeV construction (a hidden ±1 factor that conceals the *direction* the result moves) is quoted verbatim. | **FULL TEXT**, 2,704 words extracted | `https://arxiv.org/pdf/physics/0312102` — sha256 `27a4105316c7bcdcc94ec5f004b366327a2acd398880b2c56b7c0b7e072c08d5`, 113,321 bytes. **Re-fetched from the URL at 10:55Z and byte-identical.** |
+| 53 | **B. A. Nosek, C. R. Ebersole, A. C. DeHaven, D. T. Mellor, *The preregistration revolution*, PNAS 115(11):2600–2606 (2018)** | `DRAFT.md` §3.1. Prediction vs. postdiction; the definition of preregistration; and the sentence that predicts our commonest event — *deviations from plans are common, even in the most predictable investigations* (three of our gates were amended mid-run). | **FULL TEXT**, 8,925 words extracted | `https://pmc.ncbi.nlm.nih.gov/articles/PMC5856500/` (HTTP 200 at 10:57Z) — local copy sha256 `71841c8d9785a0a2e078c7cff188663b8fec5cb4cc4acf8968b306ef4272cb17`, 196,972 bytes. **HTML hashes are not stable across fetches and this one is evidence of what was read, not of what the server will serve next.** |
+| 54 | **B. Goldacre et al., *COMPare: a prospective cohort study correcting and monitoring 58 misreported trials in real time*, Trials 20:118 (2019)** | `DRAFT.md` §3.6. The **compliance measurement** our own rule has never had: 67 trials, mean 76% of pre-specified primary outcomes correctly reported, mean 5.4 undeclared additional outcomes per trial — in a field where preregistration has been mandatory for fifteen years. | **FULL TEXT**, 13,323 words extracted | `https://pmc.ncbi.nlm.nih.gov/articles/PMC6375128/` (HTTP 200 at 10:57Z) — local copy sha256 `6e60ce1c5f89e9f32bbce280f247868a8a18f3471db4160f2f430ea5c1623eab`, 223,269 bytes |
+| 55 | **D. E. Eckhardt, A. K. Caglayan, J. C. Knight, L. D. Lee, D. F. McAllister, M. A. Vouk, J. P. J. Kelly, *An Experimental Evaluation of Software Redundancy as a Strategy for Improving Reliability*, NASA TM-102613 (May 1990), NTRS 19900014642** | `DRAFT.md` §3.4 and `FINDINGS.md` F8. **Twenty independently developed versions, four development sites, independent certification — coincident failures greatly exceeding the rate expected under independence.** This is published evidence AGAINST the assumption our cross-unit design rests on. | **FULL TEXT**, 8,298 words extracted | `https://ntrs.nasa.gov/api/citations/19900014642/downloads/19900014642.pdf` — sha256 `5e9d610591638fe09ae72c86dd9e65d70bc2fa2270ffd9633d234e0b2ddf2003`, 1,229,888 bytes. **Re-fetched from the URL at 10:55Z and byte-identical.** |
+| 56 | **G. K. Sandve, A. Nekrutenko, J. Taylor, E. Hovig, *Ten Simple Rules for Reproducible Computational Research*, PLoS Comput Biol 9(10):e1003285 (2013)** | `DRAFT.md` §3.6. Rules 1 and 5 (track how every result was produced; record all intermediate results in standardised formats) — the published form of our curated-JSON contract. | **FULL TEXT**, 4,447 words extracted | `https://pmc.ncbi.nlm.nih.gov/articles/PMC3812051/` (HTTP 200 at 10:57Z) — local copy sha256 `900e7b727f98cf37858900ea6ca6e17f0fb1bc974e8cade0410d273337f21dcb`, 139,676 bytes |
+| 57 | **L. Melloni, L. Mudrik, M. Pitts, K. Bendtz, O. Ferrante, U. Gorska et al., *An adversarial collaboration protocol for testing contrasting predictions of Global Neuronal Workspace and Integrated Information Theory*, PLOS ONE 18(2):e0268577 (2023)** | `DRAFT.md` §3.3. The **strong form** of the practice our "a verifier may not check what it planned" rule is a weak instance of: *six theory-impartial laboratories* collecting the data, with the proponents of both theories pre-committing to what would falsify them. | **FULL TEXT**, 16,393 words extracted | `https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0268577&type=printable` — sha256 `2152d15a55f0286c9e626d8ce0c70bf7fa2c82263fca8281c8d8d80b992750b4`, 2,090,344 bytes. **Re-fetched from the URL at 10:57Z and byte-identical.** |
+| 58 | **T. Hales, M. Adams, G. Bauer, D. T. Dang, J. Harrison, T. L. Hoang et al., *A formal proof of the Kepler conjecture*, `arXiv:1501.02155`** | `DRAFT.md` §10.3. The norm this programme is downstream of and the reason it labels every numeric result Tier 2: the original proof was **published without complete certification from the referees**, the delay caused by the difficulty of verifying a complex computer proof. | **FULL TEXT**, 11,629 words extracted | `https://arxiv.org/pdf/1501.02155` — sha256 `5cde7b6cb206af54c7d0732502bff569f648b43b647cdf7a3c408560adeeaf44`, 179,069 bytes. **Re-fetched from the URL at 10:55Z and byte-identical.** |
+| 59 | **NIST SP 800-53 Rev. 4, control AC-5 *Separation of Duties*** | `DRAFT.md` §3.3. The codified control, quoted for its **rationale**, which differs from ours and is worth the difference: NIST's separation is **anti-fraud** (*abuse of authorized privileges … malevolent activity without collusion*); ours is **anti-error**. | **FULL TEXT of the control text** | `https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf`. **DISCREPANCY, DISCLOSED NOT SMOOTHED:** the copy read has sha256 `5460dfd68b7ca489ad8ad2ebc51339c70423684aaf5a09dd0d0f1c8e848123b2`, 5,212,362 bytes; a re-fetch of the same URL at 10:57Z, and of the DOI redirect `http://dx.doi.org/10.6028/NIST.SP.800-53r4`, both returned a **different** file (sha256 `e6f8a1aae41168f4…`, 5,301,858 bytes). **This unit cannot account for the difference and does not assert which is canonical.** What it did instead: the AC-5 sentence quoted in `DRAFT.md` was checked, character-for-character (150 chars, sha256 of the quote `7a93047048627a7b…`), against the FRESHLY FETCHED canonical copy and is present there verbatim. **The quotation is verified; the provenance of the local copy is not.** |
+| 60 | **IEEE 1012 (System, Software and Hardware Verification and Validation)** | `DRAFT.md` §3.3, one sentence defining V&V. | **`SCOPE PAGE ONLY` — recorded as such, NOT as `FULL TEXT`** (1,233 words, being the public description page) | `https://standards.ieee.org/ieee/1012/5609/`. **The standard itself is paywalled and was not obtained.** In particular its treatment of *technical, managerial and financial independence* — the part that would sharpen the comparison — was **NOT READ**, and no claim in `P4` rests on it. |
+| 61 | **D. G. Altman, J. M. Bland, *Absence of evidence is not evidence of absence*, BMJ 311:485 (1995). PMID 7647644 / PMC2550545** | `DRAFT.md` §3, attribution of the phrase our `UNDER-RESOURCED ≠ NO` rule is an instance of. | **`CITATION` ONLY** — journal, year, title and identifiers confirmed at the landing page (HTTP 200 at 10:57Z); **the body was NOT obtained** (the PMC record is scan-only; XML and PDF routes returned 404/403). 394 words of landing-page text extracted, which is not the paper. | `https://pmc.ncbi.nlm.nih.gov/articles/PMC2550545/` |
+
+### UNREACHABLE — attempted at leg 414, not obtained, banked as `UNREACHABLE` and NEVER as a zero
+
+| source | why it matters to `P4` | outcome |
+|---|---|---|
+| **ACM, *Artifact Review and Badging* (current policy)** | the closest institutional analogue to our artefact contract and its badge classes | **HTTP 403** on direct fetch, and again through a second fetch path. `UNREACHABLE` |
+| **R. A. DeMillo, R. J. Lipton, F. G. Sayward, *Hints on Test Data Selection: Help for the Practicing Programmer*, IEEE Computer 11(4) (1978)** | the origin of **mutation testing**, which `DRAFT.md` §3.5 claims our check-mutation is an instance of | no open-access copy located; publisher paywalled. `UNREACHABLE` — **so §3.5's claim is made at NO depth and `FINDINGS.md` F11 item 3 says so** |
+| **Y. Jia, M. Harman, *An Analysis and Survey of the Development of Mutation Testing*, IEEE TSE 37(5) (2011)** | the survey that would have supplied that depth | two institutional-repository URLs returned 404. `UNREACHABLE` |
+| **J. C. Knight, N. G. Leveson, *An experimental evaluation of the assumption of independence in multiversion programming*, IEEE TSE 12(1) (1986)** | the canonical N-version independence result | no open copy; host did not resolve. **SUBSTITUTED at FULL TEXT by row 55 (NASA TM-102613)**, a primary report of the same experimental programme, which is quoted instead. Recorded as a substitution, not as a read |
+| **J. R. Klein, A. Roodman, *Blind Analysis in Nuclear and Particle Physics*, Annu. Rev. Nucl. Part. Sci. 55 (2005)** | the review version of row 52 | OSTI landing page timed out. **SUBSTITUTED at FULL TEXT by row 52** (same author, conference review) |
+| **B. A. Mellers, R. Hertwig, D. Kahneman, *Do frequency representations eliminate conjunction effects? An exercise in adversarial collaboration*, Psychological Science 12(4) (2001)** | **the canonical adversarial collaboration** | repository handle returned **403**. `UNREACHABLE` |
+| **D. Kahneman, G. Klein, *Conditions for intuitive expertise: A failure to disagree*, American Psychologist 64(6) (2009)** | the second canonical adversarial collaboration | no open-access location recorded. `UNREACHABLE` |
+| **N. Cowan et al., *How Do Scientific Views Change? Notes From an Extended Adversarial Collaboration*, Perspectives on Psychological Science 15(4) (2020)** | a modern account of the practice | PMC HTML served a stub; the OA mirror returned a bot-check page; full-text XML 404. `UNREACHABLE` |
+| **C. D. Chambers, L. Tzavella, *The past, present and future of Registered Reports*, Nature Human Behaviour (2022)** | registered reports as distinct from preregistration | no open-access location recorded. `UNREACHABLE` |
+| **ICMJE trial-registration statement (De Angelis et al., 2004)** | the moment preregistration became mandatory in medicine | no open copy located in the index searched. `UNREACHABLE` |
+
+**THE CONSEQUENCE, STATED AT FULL STRENGTH BECAUSE IT IS A CEILING ON `P4` AND NOT A FOOTNOTE.**
+`DRAFT.md` §3 names **adversarial collaboration** as one of the three practices `P4` is most at risk
+of reinventing under a new name. **Three of the four canonical adversarial-collaboration sources are
+`UNREACHABLE` from this container**, and the comparison therefore rests on a single reachable modern
+protocol paper (row 57). That is a thinner base than the comparison deserves. It is recorded here as
+a **DEBT**, is repeated in `writeup/papers/P4_METHODOLOGY/FINDINGS.md` F11, and **is not written
+around.**
+
+**One construct with NO counterpart found — and it is NOT claimed novel.** This register's own
+**depth vocabulary**, and the §3k rule that a load-bearing claim may not rest on an `ABSTRACT`, has
+no published counterpart that this unit could find at a depth it could reach. **`DRAFT.md` §10.4
+explicitly declines to call it novel**, on this programme's own rule that failing to find a thing is
+not evidence it is absent — the neighbouring literatures that would settle it (evidence-grading
+frameworks in systematic review; quotation-accuracy studies in medical bibliometrics) were **NOT
+READ**. A proper novelty check on the depth register has never been run and is recorded as owed.
+
+**A HAZARD THAT AFFECTS EVERY ROW ABOVE AND EVERY ROW BELOW IT IN FUTURE.** The tool-output channel
+through which agents in this repository read files **silently drops words from long outputs** —
+first recorded at leg 411 (`PB1` finding F8), re-confirmed with a measurement at leg 414, where a
+224-character quotation rendered through the channel came back with roughly a third of its function
+words missing while `len()` on the identical string returned 224. **Every one of the 19 quotations
+in `DRAFT.md` was therefore extracted mechanically from its source file by
+`writeup/papers/P4_METHODOLOGY/inject_quotes.py` (start marker, end marker), which exits non-zero on
+any unresolved token. NONE WAS TYPED.** Any "verbatim" quotation in this repository whose extraction
+path is not stated should be treated as unverified, regardless of which unit wrote it.

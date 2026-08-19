@@ -699,20 +699,21 @@ judgement rather than measured. It makes a policy binding; it does not make the 
 **The rule this section is written under.** A load-bearing claim may not rest on an abstract. Each
 row states the depth actually reached by this unit at leg 414, with the fetch URL and a hash where
 one exists, so the row can be checked rather than believed. Fetched copies live outside version
-control (the repository does not redistribute PDFs); the URL and hash are the reproducible part.
+control (the repository does not redistribute PDFs); the URL and hash are the reproducible part, and the
+full URL/hash/byte-count table is `writeup/SOURCES.md` rows 52–61, appended this leg.
 
 ### 10.1 Read at FULL TEXT by this unit
 
 | source | used for | depth |
 |---|---|---|
-| Roodman, *Blind Analysis in Particle Physics*, PHYSTAT2003, `arXiv:physics/0312102` | §3.2; the practice we do **not** implement | **FULL TEXT**, PDF sha256 `27a4105316c7bcdc…`, 113,321 bytes, 2,704 words extracted |
+| Roodman, *Blind Analysis in Particle Physics*, PHYSTAT2003, `arXiv:physics/0312102` | §3.2; the practice we do **not** implement | **FULL TEXT**, PDF sha256 `27a4105316c7bcdc…`, 113,321 bytes, 2,704 words; **re-fetched from the URL and byte-identical** |
 | Nosek, Ebersole, DeHaven & Mellor, *The preregistration revolution*, **PNAS 115(11):2600–2606 (2018)**, PMC5856500 | §3.1; prediction vs. postdiction; deviations | **FULL TEXT**, 8,925 words extracted |
 | Goldacre et al., *COMPare: a prospective cohort study…*, **Trials 20:118 (2019)**, PMC6375128 | §3.6; measured compliance with pre-registration | **FULL TEXT**, 13,323 words extracted |
-| Eckhardt, Caglayan, Knight, Lee, McAllister, Vouk & Kelly, *An Experimental Evaluation of Software Redundancy As a Strategy for Improving Reliability*, **NASA TM-102613 (May 1990)**, NTRS 19900014642 | §3.4; independence of independently developed versions | **FULL TEXT**, PDF sha256 `5e9d610591638fe0…`, 8,298 words extracted |
+| Eckhardt, Caglayan, Knight, Lee, McAllister, Vouk & Kelly, *An Experimental Evaluation of Software Redundancy As a Strategy for Improving Reliability*, **NASA TM-102613 (May 1990)**, NTRS 19900014642 | §3.4; independence of independently developed versions | **FULL TEXT**, PDF sha256 `5e9d610591638fe0…`, 8,298 words; **re-fetched and byte-identical** |
 | Sandve, Nekrutenko, Taylor & Hovig, *Ten Simple Rules for Reproducible Computational Research*, **PLoS Comput Biol 9(10):e1003285 (2013)**, PMC3812051 | §3.6; provenance rules | **FULL TEXT**, 4,447 words extracted |
-| Melloni, Mudrik, Pitts, Bendtz, Ferrante, Gorska et al., *An adversarial collaboration protocol…*, **PLOS ONE 18(2):e0268577 (2023)** | §3.3; the strong form of impartial checking | **FULL TEXT**, PDF sha256 `2152d15a55f0286c…`, 16,393 words extracted |
-| Hales et al., *A formal proof of the Kepler conjecture*, `arXiv:1501.02155` | §10.3; computer-assisted-proof norms | **FULL TEXT**, PDF sha256 `5cde7b6cb206af54…`, 11,629 words extracted |
-| **NIST SP 800-53 Rev. 4**, control **AC-5 Separation of Duties** | §3.3; the codified control and its *anti-fraud* rationale | **FULL TEXT** of the control text, PDF sha256 `5460dfd68b7ca489…` |
+| Melloni, Mudrik, Pitts, Bendtz, Ferrante, Gorska et al., *An adversarial collaboration protocol…*, **PLOS ONE 18(2):e0268577 (2023)** | §3.3; the strong form of impartial checking | **FULL TEXT**, PDF sha256 `2152d15a55f0286c…`, 16,393 words; **re-fetched and byte-identical** |
+| Hales et al., *A formal proof of the Kepler conjecture*, `arXiv:1501.02155` | §10.3; computer-assisted-proof norms | **FULL TEXT**, PDF sha256 `5cde7b6cb206af54…`, 11,629 words; **re-fetched and byte-identical** |
+| **NIST SP 800-53 Rev. 4**, control **AC-5 Separation of Duties** | §3.3; the codified control and its *anti-fraud* rationale | **FULL TEXT** of the control text. **Provenance discrepancy, disclosed:** the copy read hashes `5460dfd68b7ca489…` (5,212,362 B) while a re-fetch of the canonical URL *and* of the DOI redirect returns `e6f8a1aae41168f4…` (5,301,858 B). We cannot account for it. The quoted AC-5 sentence was re-checked character-for-character against the freshly fetched copy and is present verbatim; **the quotation is verified, the local copy's provenance is not** (`SOURCES.md` row 59) |
 
 ### 10.2 Reached, but not at full text — stated as such
 
