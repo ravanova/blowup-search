@@ -271,3 +271,42 @@ the **objective and its quadrature**, and it touches **neither** row 31 (the opt
 row 32 (divergence-freeness of the representation), both of which survive it intact. It does,
 independently, corroborate `PB2`'s leg-410 measurement above that the same route-4 object carries a
 **log-divergent** integral — two different integrals, two different units, the same tail.
+
+---
+
+## Appended 2026-08-19 by `P2-DRAFT` (leg 415, wave 9, PAPER unit) — APPEND-ONLY; rows 2/33 are NOT edited, what this unit read is placed BESIDE them
+
+**This unit ran no experiment and produced no measurement.** It re-opened one already-`FULL TEXT`
+primary while drafting, to quote it verbatim, and found a passage the record had not written down.
+The row below records that and nothing more. **No depth is upgraded** — Tsai was already `FULL TEXT`
+— and **no new source was fetched.** No external contact of any kind was made; contacting an author,
+group, maintainer or list remains held.
+
+| # | source | what `P2-DRAFT` did with it | DEPTH REACHED BY THIS UNIT | load-bearing |
+|---|---|---|---|---|
+| 51 | **rows 2 / 33** — T.-P. Tsai, *On Leray's self-similar solutions of the Navier-Stokes equations satisfying local energy estimates*, **Arch. Rational Mech. Anal. 143 (1998) 29–51**, `Papers/TSAI1998.pdf` | **(i) Hash re-confirmed against the leg-359 pin**: sha256 `6d3182d53806ce82fa0a2d834b31b758f22399ff625b8c8d7025a65f83fb8182`, MATCHES. **(ii) Theorems 1 and 2 and the §2 remark bounding Theorem 2's hypotheses re-extracted verbatim** for `DRAFT.md` §7.3 — *"we do not require the weak solution `u` to be a Leray-Hopf weak solution. Our only requirements (apart from self-similarity) are (i) and (ii): the Navier-Stokes equations and the local energy estimates."* **(iii) NEW, and the reason this row exists: pp. 30–31 state IN WORDS the case `PB2` reached by measurement.** Tsai, describing what `[NRS]` leaves open: *"then we only get estimates of some weighted norms which do not imply that `U ∈ L³`. … Therefore, `[NRS]` left open the existence of self-similar singularities which satisfy the local energy estimates. For example, a solution with the following decay was not excluded: `(1.5) U(y) = A(y/|y|)/|y| + o(1/|y|)` as `y → ∞`, where `A : S² → ℝ³` is smooth."* **`(1.5)` IS the `α = 1` object.** `PB2` established by computing `∫|U|³` that NRŠ's hypothesis is unmet and Tsai's Theorem 1/2 hypotheses are met; **Tsai says the same thing in prose, on the page, and the record had only the measurement.** Two independent routes to one conclusion. **(iv) Tsai's bibliography, p. 50, re-read**: the NRŠ entry is **`Acta Math. 176 (1996), 283–294`**, confirming `CORRECTIONS.md` §47's correction of the five `ARMA 136 (1996) 55–98` sites at primary. | **`FULL TEXT` — UNCHANGED, already `FULL TEXT` at rows 2/33.** What changed is that a **third** passage of it (pp. 30–31, the `(1.5)` discussion) is now quoted in the record, having previously been unquoted. **This is not a depth upgrade and is not written as one.** | **YES** — `W4` clause (b) is carried by Theorem 2, and item (iii) is *corroboration* of `PB2`'s measurement, **not a replacement for it**: Tsai's sentence says the case is *not excluded by NRŠ*, which is the same negative `PB2` measured, and neither sentence nor measurement supplies the *solution* hypothesis both theorems need |
+
+**One ceiling on row 51, stated because it is the ceiling on the whole `ṁ = 0` jaw.** Both of Tsai's
+theorems require the object to **be** a weak solution. **It is not one** — the smallest residual
+banked for route 4's own object is `1.5048518951028045`, at its own stated truncation. The solution
+hypothesis is supplied by the counterfactual branch (*if* an exactly self-similar profile existed),
+**not by measurement**, and `p2_route_pb2_v1.json` says so in its own field name
+(`gate.hypothesis_supplied_by_the_branch_not_by_measurement`). **A hypothesis check is not a
+theorem**, and `DRAFT.md` §7.5 claims nothing more from it.
+
+**Two rows this unit deliberately did NOT touch, and why.** Row 3/35 (**NRŠ 1996**) stays
+`SECOND HAND` / `UNREACHABLE` — this unit made no fetch attempt, because a fifth attempt after the
+four at legs 253, 359, 364 and 410 would add nothing, and because **NRŠ carries no step in this
+paper**: its `L³` hypothesis is *measured unmet* at `α = 1`. Row 5 (**ESŠ 2003**) stays
+`UNREACHABLE`, banked as `UNREACHABLE` and **never as a zero**; the `α ≤ 1` jaw's only primary-level
+reading remains Seregin `arXiv:math/0510396` §1 (row 4, `FULL TEXT`), in the **local
+suitable-weak** form — which matters, and is not a technicality, because the object's global energy
+is *measured infinite* and it is therefore **not** a Leray–Hopf solution, so the *global* form of
+ESŠ does not apply to it at all.
+
+**Bearing on the register as a whole, from `CORRECTIONS.md` §54 landed the same day.** `self_hash`
+in this repository is computed over a record that already contains the run's `wall_seconds`, so it
+**certifies nothing about content**. Row 51's evidence is a **sha256 of the PDF bytes**, which is a
+content hash and is unaffected. **Wherever a `self_hash` appears in this register or beside it as
+evidence that an artefact is unchanged, that citation is void** — the PDF hashes in
+`Papers/MANIFEST.md` are not.
