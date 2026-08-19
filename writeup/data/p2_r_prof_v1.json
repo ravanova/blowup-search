@@ -1,0 +1,638 @@
+{
+  "artefact": "p2_r_prof_v1",
+  "cost_and_shortfall": {
+    "THE_SHORTFALL_IS_NOT_IN_CORE_HOURS": "the resource this unit could not get is an IDLE MACHINE, not compute. Absolute per-step times could not be established to better than a factor of ~3; only ratios could. Buying the absolutes costs no additional core-hours -- it costs EXCLUSIVE ACCESS to the box for ~20 minutes, which was not available while E-FE and L6-b were running. A successor wanting absolute microseconds should re-run r_prof_v1.py --part ours and --part duel on a quiet host; the script is unchanged and re-runnable.",
+    "budgeted": "~1-2 h wall, ~10^0 core-h (WAVE7_PLAN.md sec C)",
+    "shortfall_in_core_hours": 0.0,
+    "spent_core_h_estimate": 0.3,
+    "spent_cpu_seconds_measured": null,
+    "within_budget": true
+  },
+  "date": "2026-08-19",
+  "evidence_scripts": [
+    "experiments/programme_r4/profiling/r_prof_v1.py",
+    "experiments/programme_r4/profiling/r_prof_candidates_v1.py",
+    "experiments/programme_r4/profiling/rerun.sh"
+  ],
+  "gate": {
+    "i_where_the_per_step_time_goes": {
+      "arithmetic_share_pct_line_level": 13.27679349828814,
+      "in_situ_cross_check": {
+        "n_fft2_per_step": 4.0,
+        "n_ifft2_per_step": 16.0,
+        "n_steps_timed": 300,
+        "t_step_under_wrapper_s": 0.0011100225033333336,
+        "t_step_unwrapped_s": 0.0010725286111111113,
+        "t_transform_per_step_s": 0.0008484058844401033,
+        "transform_fraction_of_clean_step": 0.791033335289002,
+        "transform_fraction_of_wrapped_step": 0.7643141304724809,
+        "transforms_per_step": 20.0,
+        "wrapper_overhead_per_call_s": 4.927701113282466e-07
+      },
+      "integrate_adds_nothing": {
+        "T": 20.0,
+        "loadavg": [
+          4.36,
+          4.16,
+          4.62
+        ],
+        "loop_overhead_fraction": -0.008411960889449288,
+        "loop_overhead_per_step_s": -1.1168015666666734e-05,
+        "n_steps": 2000,
+        "reps": 3,
+        "t_bare_rk4_step_s": 0.00133880325,
+        "t_integrate_s": 2.6552704686666666,
+        "t_per_step_inside_integrate_s": 0.0013276352343333333
+      },
+      "reconciliation": {
+        "difference_s": 0.00012846235472360908,
+        "python_frames_residual_pct": 7.619872972811658,
+        "reading": "the in-situ figure is the honest one: a transform timed in a tight loop on one fixed buffer runs warmer than the same transform on the freshly built arrays the real stage hands it. Most of the UNATTRIBUTED residual is therefore transform cost the line-level microbenchmark under-measures, not Python frames.",
+        "transform_seconds_in_situ": 0.0008484058844401033,
+        "transform_seconds_line_level": 0.0007199435297164942
+      },
+      "reconstruction_check": {
+        "rhs_reconstruction_ratio": 0.822574403269639,
+        "step_reconstruction_ratio": 0.9718427713142923,
+        "t_rhs_measured_s": 0.00025361086904761906,
+        "t_rhs_reconstructed_s": 0.00020861380926953983,
+        "t_step_measured_s": 0.0010725286111111113,
+        "t_step_reconstructed_from_rhs_s": 0.0010423291777360913
+      },
+      "static_call_count_per_step": {
+        "elementwise_calls_per_step": 78,
+        "per_rhs_hat": {
+          "complex_array_multiplies": 10,
+          "mask_multiply": 1,
+          "negate_and_add_forcing": 2,
+          "real_array_ops": 3,
+          "transforms": 5
+        },
+        "per_rhs_hat_total": 21,
+        "per_step_rhs_x4": 84,
+        "rk4_level": {
+          "decay_multiply": 1,
+          "final_combination": 7,
+          "stage_axpy": 6
+        },
+        "rk4_level_total": 14,
+        "total_numpy_calls_per_step": 98,
+        "transforms_per_step": 20
+      },
+      "sums_to_pct": 100.0,
+      "t_rhs_hat_s": 0.00025361086904761906,
+      "t_rk4_step_s_at_this_load": 0.0010725286111111113,
+      "table_pct_of_step": {
+        "UNATTRIBUTED_python_frames_and_attribution_error": 19.59739538039811,
+        "rhs.dealias_mask_multiply": 0.8005860615055775,
+        "rhs.fft2_advection": 12.23728842276662,
+        "rhs.ifft2_u_v": 28.32680639398059,
+        "rhs.ifft2_wx_wy": 26.56171630456654,
+        "rhs.negate_plus_forcing": 1.051569783612955,
+        "rhs.physical_product_u_wx_plus_v_wy": 1.6333351980174746,
+        "rhs.real_view_u_v": 0.10482228523818192,
+        "rhs.real_view_wx_wy": 0.10106530947244867,
+        "rhs.spectral_gradient_muls": 2.4938581222469094,
+        "rhs.spectral_velocity_muls": 4.491560686180077,
+        "rk4.dt_branch_and_frame": 0.007623141625592479,
+        "rk4.final_combination": 1.246235078950989,
+        "rk4.integrating_factor_multiply": 0.28013462673407896,
+        "rk4.stage_argument_axpy_x3": 1.0660032047038548
+      },
+      "table_seconds": {
+        "UNATTRIBUTED_python_frames_and_attribution_error": 0.0002101876724873369,
+        "rhs.dealias_mask_multiply": 8.586514566214918e-06,
+        "rhs.fft2_advection": 0.00013124841955835964,
+        "rhs.ifft2_u_v": 0.00030381310318949346,
+        "rhs.ifft2_wx_wy": 0.00028488200696864113,
+        "rhs.negate_plus_forcing": 1.1278386795048144e-05,
+        "rhs.physical_product_u_wx_plus_v_wy": 1.751798731408574e-05,
+        "rhs.real_view_u_v": 1.124249e-06,
+        "rhs.real_view_wx_wy": 1.0839543600000002e-06,
+        "rhs.spectral_gradient_muls": 2.6747341881616418e-05,
+        "rhs.spectral_velocity_muls": 4.817327344469988e-05,
+        "rk4.dt_branch_and_frame": 8.176037500000001e-08,
+        "rk4.final_combination": 1.3366227783452504e-05,
+        "rk4.integrating_factor_multiply": 3.004524021352313e-06,
+        "rk4.stage_argument_axpy_x3": 1.143318936581019e-05
+      },
+      "transform_share_pct_line_level": 67.12581112131375,
+      "unattributed_pct": 19.59739538039811
+    },
+    "ii_fixed_per_call_overhead_fraction": {
+      "ANSWER_fixed_fraction_of_step": 0.59610031215749,
+      "cross_check_two_point_extrapolation": {
+        "TRUSTED": true,
+        "fixed_fraction_of_step": 0.6460582159199625,
+        "fixed_seconds_per_step": 0.0008055873037907879
+      },
+      "detail": {
+        "arithmetic_seconds_per_step": 0.0005036333452824599,
+        "fixed_fraction_of_step": 0.59610031215749,
+        "fixed_seconds_per_step": 0.0007432934547175401,
+        "method": "per-call floor at N=4..8 (where FLOPs are negligible) times the static per-step call count; the fitted intercept over N>=128 is the cross-check",
+        "n_elementwise": 78,
+        "n_transforms": 20,
+        "t_step_s": 0.0012469268
+      },
+      "elementwise_per_call_floor_s": 8.006984661354582e-07,
+      "established_by": "a size sweep N = 4..512 on np.fft.fft2, on a bare elementwise complex multiply, and on _rk4_step itself -- not asserted",
+      "fft2_per_call_floor_s": 3.404194871794872e-05,
+      "flatness_24_to_32": {
+        "ratio_t32_over_t24": 1.1293322190982176,
+        "rk4_ratio_t32_over_t24": 1.1816335477443731,
+        "t_fft2_24_s": 4.232873030303031e-05,
+        "t_fft2_32_s": 4.780319892473119e-05,
+        "t_rk4_24_s": 0.0012469268,
+        "t_rk4_32_s": 0.0014734105384615385,
+        "work_ratio_32_over_24": 1.9387048176491695
+      },
+      "sweep_rows": [
+        {
+          "N": 4,
+          "n_elements": 16,
+          "t_fft2_s": 3.5010155038759695e-05,
+          "t_mul_s": 1.8205109481403875e-06,
+          "work_N2logN2": 64.0
+        },
+        {
+          "N": 6,
+          "n_elements": 36,
+          "t_fft2_s": 3.5145053571428574e-05,
+          "t_mul_s": 8.006984661354582e-07,
+          "t_rk4_step_s": 0.0010420883000000001,
+          "work_N2logN2": 186.11730005192322
+        },
+        {
+          "N": 8,
+          "n_elements": 64,
+          "t_fft2_s": 3.404194871794872e-05,
+          "t_mul_s": 8.624075278229336e-07,
+          "t_rk4_step_s": 0.001123396,
+          "work_N2logN2": 384.0
+        },
+        {
+          "N": 10,
+          "n_elements": 100,
+          "t_fft2_s": 3.478736521739131e-05,
+          "t_mul_s": 8.948307228915664e-07,
+          "t_rk4_step_s": 0.0010563468421052632,
+          "work_N2logN2": 664.3856189774724
+        },
+        {
+          "N": 12,
+          "n_elements": 144,
+          "t_fft2_s": 5.2108396296296306e-05,
+          "t_mul_s": 1.0063898932694402e-06,
+          "t_rk4_step_s": 0.0010877363333333333,
+          "work_N2logN2": 1032.469200207693
+        },
+        {
+          "N": 16,
+          "n_elements": 256,
+          "t_fft2_s": 4.0187540268456376e-05,
+          "t_mul_s": 9.77390909090909e-07,
+          "t_rk4_step_s": 0.0011122284705882353,
+          "work_N2logN2": 2048.0
+        },
+        {
+          "N": 20,
+          "n_elements": 400,
+          "t_fft2_s": 3.8731376093294466e-05,
+          "t_mul_s": 1.0979670668224797e-06,
+          "t_rk4_step_s": 0.0011777824375,
+          "work_N2logN2": 3457.54247590989
+        },
+        {
+          "N": 24,
+          "n_elements": 576,
+          "t_fft2_s": 4.232873030303031e-05,
+          "t_mul_s": 1.3406071222329164e-06,
+          "t_rk4_step_s": 0.0012469268,
+          "work_N2logN2": 5281.876800830772
+        },
+        {
+          "N": 28,
+          "n_elements": 784,
+          "t_fft2_s": 4.437820151515152e-05,
+          "t_mul_s": 1.6553439986598545e-06,
+          "t_rk4_step_s": 0.0013286503333333334,
+          "work_N2logN2": 7537.932517786323
+        },
+        {
+          "N": 32,
+          "n_elements": 1024,
+          "t_fft2_s": 4.780319892473119e-05,
+          "t_mul_s": 1.89566139851144e-06,
+          "t_rk4_step_s": 0.0014734105384615385,
+          "work_N2logN2": 10240.0
+        },
+        {
+          "N": 40,
+          "n_elements": 1600,
+          "t_fft2_s": 5.513394382022472e-05,
+          "t_mul_s": 2.238095099309154e-06,
+          "t_rk4_step_s": 0.0017513641818181819,
+          "work_N2logN2": 17030.169903639562
+        },
+        {
+          "N": 48,
+          "n_elements": 2304,
+          "t_fft2_s": 7.041263122171947e-05,
+          "t_mul_s": 2.9937692081680625e-06,
+          "t_rk4_step_s": 0.0021570482777777777,
+          "work_N2logN2": 25735.507203323086
+        },
+        {
+          "N": 64,
+          "n_elements": 4096,
+          "t_fft2_s": 8.822564720812183e-05,
+          "t_mul_s": 5.5223143909497505e-06,
+          "t_rk4_step_s": 0.003042518666666667,
+          "work_N2logN2": 49152.0
+        },
+        {
+          "N": 80,
+          "n_elements": 6400,
+          "t_fft2_s": 0.00012487447637795276,
+          "t_mul_s": 8.99983970856102e-06,
+          "t_rk4_step_s": 0.0049486426,
+          "work_N2logN2": 80920.67961455825
+        },
+        {
+          "N": 96,
+          "n_elements": 9216,
+          "t_fft2_s": 0.00020220937272727273,
+          "t_mul_s": 1.6126099056603775e-05,
+          "t_rk4_step_s": 0.00620120575,
+          "work_N2logN2": 121374.02881329235
+        },
+        {
+          "N": 128,
+          "n_elements": 16384,
+          "t_fft2_s": 0.0004716910263157895,
+          "t_mul_s": 2.5030085816448155e-05,
+          "t_rk4_step_s": 0.0107111385,
+          "work_N2logN2": 229376.0
+        },
+        {
+          "N": 160,
+          "n_elements": 25600,
+          "t_fft2_s": 0.0003812480161290323,
+          "t_mul_s": 3.926809677419355e-05,
+          "t_rk4_step_s": 0.016734924,
+          "work_N2logN2": 374882.718458233
+        },
+        {
+          "N": 192,
+          "n_elements": 36864,
+          "t_fft2_s": 0.0010455817500000001,
+          "t_mul_s": 5.741071291208791e-05,
+          "t_rk4_step_s": 0.023629595,
+          "work_N2logN2": 559224.1152531694
+        },
+        {
+          "N": 256,
+          "n_elements": 65536,
+          "t_fft2_s": 0.0018271685454545458,
+          "t_mul_s": 9.604596268656717e-05,
+          "t_rk4_step_s": 0.041172063,
+          "work_N2logN2": 1048576.0
+        },
+        {
+          "N": 384,
+          "n_elements": 147456,
+          "t_fft2_s": 0.005451562,
+          "t_mul_s": 0.00028697891304347824,
+          "t_rk4_step_s": 0.10757097600000001,
+          "work_N2logN2": 2531808.4610126778
+        },
+        {
+          "N": 512,
+          "n_elements": 262144,
+          "t_fft2_s": 0.006927941666666667,
+          "t_mul_s": 0.0006810099375,
+          "t_rk4_step_s": 0.151163603,
+          "work_N2logN2": 4718592.0
+        }
+      ],
+      "untrusted_OLS_variant": {
+        "TRUSTED": false,
+        "fixed_fraction_of_step": 1.8583974211893972,
+        "fixed_seconds_per_step": 0.0023172855495319474,
+        "why_not": "numpy's fft2 is radix/cache sensitive -- N=128 measures SLOWER than N=160 here -- so an OLS slope over the tail is biased high and this estimate exceeds 100%. Recorded because it was computed, not because it is used."
+      }
+    },
+    "iii_within_3x_of_reference": {
+      "ANSWER": "NO",
+      "both_clocks_agree": true,
+      "difference_a_stepper_MEASURED_NOT_NORMALISED_AWAY": {
+        "direction_of_the_correction": "the reference does 25% MORE explicit stages than we do and is still 4.3x faster. Per stage the gap is 4.3 * 5/4 = 5.43x. Difference (a) makes our position WORSE, not better.",
+        "explicit_stages_ours": 4,
+        "explicit_stages_reference": 5,
+        "ours": "classical RK4, 4 explicit stages, then the EXACT integrating factor exp(-Ksq*dt/Re) applied to the result -- a Lie-Trotter split",
+        "per_stage_ratio": 5.42640116630377,
+        "reference": "Carpenter-Kennedy low-storage RK4, 5 explicit stages, Crank-Nicolson on the linear term inside the stage loop -- IMEX"
+      },
+      "difference_b_spectrum_MEASURED_NOT_NORMALISED_AWAY": {
+        "ANSWER_after_accounting_for_b": "NO",
+        "THE_CANDIDATE_FINDING_WRITTEN_DOWN_SO_NOBODY_CLAIMS_IT_LATER": "moving to rfft2 is a published-practice change the reference already makes, and it is NOT worth 2x AT N=24. Measured here, a real-to-complex 24x24 -> 24x13 transform costs 0.763 of a complex 24x24 through FFTW3 and 0.943 of one through numpy -- not 0.5 -- because at this size the transform is dominated by fixed per-call cost, not by the number of points it touches. The 2x is the asymptotic FLOP argument and it does not hold in this regime. Counting stages as well, the reference's 25 half-transforms are 19.1 full-transform equivalents against our 20: the two implementations do essentially the SAME transform work per step, and difference (b) explains none of the 4.3x.",
+        "measured_fftw3_rfft2_over_fft2_at_24": 0.7634819279548286,
+        "measured_numpy_rfft2_over_fft2_at_24": 0.9433005455439385,
+        "ours": "full complex fft2, state (24,24) complex128, 20 transforms per step",
+        "reference": "half-spectrum rfft2/irfft2, state (24,13) complex128, 25 transforms per step",
+        "transform_work_ours_full_fft_equivalents": 20.0,
+        "transform_work_reference_full_fft_equivalents": 19.087048198870715,
+        "work_normalised_ratio": 4.142959224305933,
+        "work_ratio_ours_over_reference": 1.0478309580201772
+      },
+      "fftw3_transform_floor": {
+        "ours_over_20_transform_floor": {
+          "max": 31.267179680182792,
+          "median": 16.880793140814376,
+          "min": 12.032789323982287,
+          "p10": 14.584425790037722
+        },
+        "reading": "20 planned FFTW3 transforms of 24x24 is the algorithmic price of one RK4 step of this scheme. We are ~17x above it. The reference is ~4.0x above it.",
+        "t_fftw3_complex_fft2_24x24_s": 9.08600105081655e-06
+      },
+      "note_on_the_worst_case": "the CPU clock's WORST round still gives 3.37x. The wall clock has one round at 2.00x, below 3, which is a load excursion and not a measurement of the code -- the CPU clock, which does not charge this process for time another process held the core, never goes below 3.",
+      "numpy_fft2_over_fftw3_fft2_at_24": {
+        "max": 26.765749192504547,
+        "median": 8.847697702356543,
+        "min": 3.9608003184444778
+      },
+      "per_step_us_ours_median": 3027.256945,
+      "per_step_us_reference_median": 721.0564099999999,
+      "question": "is our per-step cost within 3x of the reference at N=24?",
+      "raw_ratio_cpu_clock": {
+        "max": 7.0577267854916546,
+        "median": 4.341120933043016,
+        "min": 3.3721551723168335,
+        "p10": 3.5777471379286565,
+        "p90": 5.428680434800698
+      },
+      "raw_ratio_wall_clock": {
+        "max": 6.787911531474893,
+        "median": 4.212128730261517,
+        "min": 1.9975010694418314,
+        "p10": 3.445736673926875,
+        "p90": 5.2362118949419685
+      },
+      "reference": "JAX-CFD ForcedNavierStokes2D + crank_nicolson_rk4, stepped inside lax.scan under jit -- the library's own idiomatic trajectory form",
+      "which_number_answers_the_gate": "the RAW within-round ratio against the reference's own per-step cost in lax.scan, on the CPU clock: 4.34 (p10 3.58, worst round 3.37). It is NO on the raw number, NO after accounting for difference (b), and MORE emphatically NO after accounting for difference (a). No accounting available brings it under 3.",
+      "worst_case_for_the_NO": 1.9975010694418314
+    }
+  },
+  "gate_text_source": "writeup/waves/WAVE7_PLAN.md sec C -- the binding wording, unchanged by this unit",
+  "implications_for_the_record": {
+    "E_FE_price_if_a_successor_unit_lands_V3": {
+      "CAVEAT": "an arithmetic projection from a per-step ratio, not a measured campaign. It is not a price and no unit may quote it as one.",
+      "current_core_h": 90.9,
+      "divided_by_measured_V3_speedup": 23.488952174438584,
+      "divided_by_the_bitwise_free_V1": 56.17252856034578
+    },
+    "INDEPENDENT_CORROBORATION_of_the_per_step_number": {
+      "banked_krylov_dim_median": 22.0,
+      "banked_seconds_per_epoch_median": 54.70020156948506,
+      "banked_seconds_per_jacobian_action_median": 2.367267649000241,
+      "consistency_of_the_epoch_model": {
+        "implied_actions_per_epoch_from_probe": 23.106893549863862,
+        "krylov_dim_median_plus_residual_eval": 23.0,
+        "reading": "the probe's own epoch cost divided by its own Jacobian action cost lands on its own median Krylov dimension plus one, which is what an epoch of Newton-GMRES is. The cost model in the record is internally coherent."
+      },
+      "ratio_mine_over_banked": 0.8762297473058899,
+      "source": "experiments/programme_r4/u3_cost_probe.json (unit U3)",
+      "this_unit_steps_x_per_step_seconds": 2.0742703338888893,
+      "verdict": "this unit's per-step figure, multiplied by the 1934 steps of one orbit period, agrees with a Jacobian-action cost banked by U3 for an unrelated purpose to within 12.4%. The profile is measuring the same object the record's cost figures were built from."
+    },
+    "banked_seconds_per_epoch": 95.389,
+    "cost_model_link": {
+      "T_orbit_LucasKerswell_UPO37": 19.334,
+      "banked_seconds_per_epoch": 95.389,
+      "dt": 0.01,
+      "implied_jacobian_actions_per_epoch": 45.98677348924068,
+      "note": "an epoch is one Newton iteration = 1 residual + n_gmres Jacobian actions; this ratio is a consistency check on the per-step number, not a re-derivation of the constant",
+      "steps_per_jacobian_action": 1934,
+      "t_per_jacobian_action_s": 2.0742703338888893
+    },
+    "is_that_number_wrong": "NO",
+    "what_DOES_change": "the number is honest AND it is ~3-4x above what the same scheme costs with planned transforms. So the compute wall in OPTIONS.md is real as a description of the current implementation, and is NOT a property of the problem at N=24.",
+    "why": "the profile does not contradict 95.389 s/epoch -- it explains it. Our per-step cost is consistent with it (see cost_model_link), and E's realised figure remains an honest measurement of what this code actually did."
+  },
+  "lane": "R",
+  "leg": 405,
+  "load_conditions": {
+    "MACHINE_WAS_NOT_QUIET": true,
+    "consequence": "ABSOLUTE per-step microseconds in this file are inflated and vary by up to 3x between blocks. Every gate answer is therefore built from WITHIN-ROUND RATIOS, in which load drift cancels, and is confirmed on a CPU clock that does not charge this process for time another process held the core. The two clocks agree.",
+    "harness_controls": {
+      "NOTE": "the reference run's positive control FAILED (busy-loop ratio 7.15, expected ~4) under a load excursion. That failure is WHY --part paired and --part duel exist and is not hidden: the sequential --part ref numbers are banked but NOT used for any gate answer.",
+      "candidates_run": {
+        "negative_noop_PASS": true,
+        "negative_noop_call_s": 1.4267234434000757e-07,
+        "planted_PASS": true,
+        "planted_expected": ">1 and <20; 4x elements, 4.67x N^2 log N^2 work",
+        "planted_fft2_128_over_64_ratio": 4.091380591362557,
+        "positive_PASS": true,
+        "positive_busyloop_expected": "~4 (linear in trip count)",
+        "positive_busyloop_ratio_400_over_100": 4.3210658854282755
+      },
+      "ours_run": {
+        "negative_noop_PASS": true,
+        "negative_noop_call_s": 4.0387555000000004e-08,
+        "planted_PASS": true,
+        "planted_expected": ">1 and <20; 4x elements, 4.67x N^2 log N^2 work",
+        "planted_fft2_128_over_64_ratio": 5.346773926878793,
+        "positive_PASS": true,
+        "positive_busyloop_expected": "~4 (linear in trip count)",
+        "positive_busyloop_ratio_400_over_100": 4.349065905044522
+      },
+      "reference_run": {
+        "negative_noop_PASS": true,
+        "negative_noop_call_s": 1.4578012357648286e-07,
+        "planted_PASS": true,
+        "planted_expected": ">1 and <20; 4x elements, 4.67x N^2 log N^2 work",
+        "planted_fft2_128_over_64_ratio": 4.489980056151437,
+        "positive_PASS": false,
+        "positive_busyloop_expected": "~4 (linear in trip count)",
+        "positive_busyloop_ratio_400_over_100": 7.152934916917788
+      }
+    },
+    "loadavg_1min_span_over_the_whole_run": [
+      6.56,
+      20.16
+    ],
+    "n_cpu": 12,
+    "reason": "three sibling units were running in this same working tree throughout (wave 7 dispatched R-bank, E-FE, L6-b and R-prof concurrently)",
+    "thread_env_ours": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1",
+      "XLA_FLAGS": null
+    },
+    "thread_env_reference": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1",
+      "XLA_FLAGS": "--xla_force_host_platform_device_count=1"
+    }
+  },
+  "object_MODIFIED_BY_THIS_UNIT": false,
+  "object_profiled": "solver/kolmogorov2d_nkbasin.py :: Kolmogorov2D",
+  "object_sha256": "282b61832f588cf0b0f8099847572ca51c88e261fb1efea949da7e6371b8ed47",
+  "raw_inputs": {
+    "all_committed_under": "experiments/programme_r4/profiling/raw/",
+    "candidates": "cand.json",
+    "duel": "duel.json",
+    "ours": "ours_venv.json",
+    "ours_repeat": "ours_venv_r2.json",
+    "paired": "paired.json",
+    "ref": "ref.json"
+  },
+  "reference_version_pins": {
+    "jax": "0.11.1",
+    "jax_cfd": "0.2.1",
+    "jaxlib": "0.11.1",
+    "numpy_reference_env": "2.5.2",
+    "numpy_repo_venv": "2.5.1",
+    "pyfftw": "0.15.1",
+    "python": "3.12.3",
+    "reference_DRIFTED": false,
+    "reference_dtype": "complex128",
+    "reference_state": [
+      24,
+      13
+    ],
+    "reference_stepper": "time_stepping.crank_nicolson_rk4 (Carpenter-Kennedy)",
+    "sources_rows_relied_on": [
+      23,
+      24,
+      27,
+      28
+    ]
+  },
+  "reproducibility_second_ours_run": {
+    "NOT_load_robust": {
+      "fft2_per_call_floor_us": [
+        34.04194871794872,
+        79.91911034482759
+      ],
+      "t_rk4_step_us": [
+        1072.5286111111113,
+        2884.0928571428576
+      ]
+    },
+    "integrate_loop_overhead_fraction": [
+      -0.008411960889449288,
+      -0.20127928594076772
+    ],
+    "load_robust": {
+      "fft2_t32_over_t24": [
+        1.1293322190982176,
+        1.141928423840932
+      ],
+      "fixed_overhead_fraction_direct": [
+        0.59610031215749,
+        0.6332713411380395
+      ],
+      "rk4_t32_over_t24": [
+        1.1816335477443731,
+        1.20785519243396
+      ],
+      "transform_share_in_situ_pct": [
+        79.1033335289002,
+        86.17365714263069
+      ]
+    },
+    "reading": "absolute microseconds move by ~2.7x between the two runs and are NOT reportable as absolutes. The size-ratio at fixed load, the fixed-overhead fraction and the transform share all reproduce. The Python while loop in `integrate` measures at or below zero extra cost per step in BOTH runs: it contributes nothing.",
+    "run1_loadavg_1min": 6.56,
+    "run2_loadavg_1min": 11.3
+  },
+  "self_hash": {
+    "candidates_script_sha256": "17decfcdfa35747fc3a6d6cde2d7bf7f44da7b65c9960e91da5a2b0a5b37a08a",
+    "how_to_verify": "delete the 'self_hash' key, dump the rest with json.dumps(obj, indent=2, sort_keys=True, default=float), sha256 the utf-8 bytes",
+    "script_sha256": "3beaed6fcaaa11e03eafb8b987fca3f2358717369c53e9707ef69f741508a09e",
+    "sha256_of_artefact_without_this_field": "9d160dcda82ee765e2a7fca3d1cecdc92034ead74787b8fa2b59950a51c5654c"
+  },
+  "the_single_change_that_recovers_most_of_it": {
+    "THE_FACTOR": 4.341120933043016,
+    "THE_SINGLE_CHANGE": "replace the 20 per-call numpy.fft.fft2 / ifft2 invocations per step with PRE-PLANNED FFTW3 transforms on pre-allocated aligned buffers (pyfftw, SOURCES row 24 -- the reference's own transform library). Same scheme, same arithmetic, same dealiasing, same integrating factor. It touches NO numerics.",
+    "WHAT_THIS_IS_NOT": "not a solver change. Nothing in solver/ was touched by this unit. The prototypes live in experiments/programme_r4/profiling/ and are priced, not landed. Landing V2 or V3 is a separate unit with its own equivalence check, because a transform change perturbs every banked orbit at the last bit -- which is precisely the R4 problem.",
+    "equivalence_of_the_prototypes": {
+      "V1_batched_numpy": {
+        "bitwise_identical_1_step": true,
+        "rel_sup_err_1_step": 0.0,
+        "rel_sup_err_200_steps": 0.0
+      },
+      "V2_planned_fftw3": {
+        "bitwise_identical_1_step": false,
+        "rel_sup_err_1_step": 6.43796835705657e-17,
+        "rel_sup_err_200_steps": 7.256324647349444e-17
+      },
+      "V3_batched_and_planned": {
+        "bitwise_identical_1_step": false,
+        "rel_sup_err_1_step": 6.43796835705657e-17,
+        "rel_sup_err_200_steps": 7.256324647349444e-17
+      }
+    },
+    "measured_recovery": {
+      "V1_batched_numpy_only": {
+        "cpu": {
+          "max": 2.1436980244103636,
+          "median": 1.6182287379558982,
+          "min": 1.122228454107622,
+          "p10": 1.3127147503457652
+        },
+        "wall": {
+          "max": 2.164893116090873,
+          "median": 1.524617810958822,
+          "min": 1.1211954809231957,
+          "p10": 1.2819509916329932
+        }
+      },
+      "V2_planned_fftw3_only": {
+        "cpu": {
+          "max": 5.184617858873911,
+          "median": 3.4149593998118757,
+          "min": 2.348559561055198,
+          "p10": 2.664345627425411
+        },
+        "wall": {
+          "max": 4.533501266410189,
+          "median": 3.3147740072741554,
+          "min": 2.0071233556620562,
+          "p10": 2.7613945255633303
+        }
+      },
+      "V3_both": {
+        "cpu": {
+          "max": 4.959686647577791,
+          "median": 3.8699044267679272,
+          "min": 2.667363834385686,
+          "p10": 3.1817547789532226
+        },
+        "wall": {
+          "max": 5.667098592884494,
+          "median": 4.046968299839762,
+          "min": 2.7277165162247714,
+          "p10": 3.370227338682243
+        }
+      }
+    },
+    "the_free_half_of_it": "V1 -- issuing a stage's four inverse transforms as ONE np.fft.ifft2(stack, axes=(1,2)) call on a (4,24,24) array -- is BITWISE IDENTICAL to the current step, at 1 step and at 200 steps, and needs no new dependency. It recovers 1.62x on its own. Because it is bitwise identical it invalidates NO banked comparison. V2/V3 differ at ~6e-17 relative, one ulp, which over a 1934-step Jacobian action inside a Newton solve is NOT bitwise reproducible and DOES need its own equivalence unit."
+  },
+  "unit": "R-prof",
+  "wave": 7,
+  "what_this_result_does_NOT_license": [
+    "It does not move any L1->L4 link. Clay stays ~0.05%. A speedup moves no link and this one has not even been landed.",
+    "It is not a solver change and must not be cited as one. solver/kolmogorov2d_nkbasin.py is byte-identical.",
+    "It says nothing about whether route 4 recovers an orbit. Making the same search 4x cheaper produces 4x more of exactly the objects E, U3 and U5 already failed to recover.",
+    "It does not retire 95.389 s/epoch. That figure is an honest measurement of the current implementation and every banked cost built on it stands.",
+    "The projected E-FE prices are arithmetic, not measurements.",
+    "Scale is not evidence, and neither is speed. Tier 2 is never a proof."
+  ]
+}
