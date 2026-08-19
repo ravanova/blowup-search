@@ -444,3 +444,62 @@ wave 8: it checks whether `J(c)` as coded is the functional at all, and **there 
 the stationarity of the wrong function.** `L-JVER` → `L6-e` → `L8`.
 
 **Tier 2 is never a proof. No `L1→L4` link moves on any outcome above.**
+
+---
+
+## AMENDMENT 4 (2026-08-19 06:35, pre-dispatch) — `PB2` IS SMALLER THAN BRIEFED AND POINTED AT THE WRONG THING; THE RE-SCOPE MAKES IT SHARPER, NOT SOFTER
+
+**What the pre-dispatch check established, and what it did not.** The directive prices `PB2` as
+opening *"two theorems this repository has never opened"*. Against the record that is **not the
+state**, and `writeup/SOURCES.md` already carries its own correction saying so. Verified by hash
+today (`04f9ff5`), on disk in `Papers/`:
+
+| jaw source | recorded depth | verified today |
+|---|---|---|
+| Chae–Wolf `1610.09464` Thm 1.1 + Rmk 1.2 | `FULL TEXT` | sha256 `1f537bc2` **matches**, 1002 lines `-layout` **matches** |
+| Tsai *ARMA* 143 (1998) Thm 1 **and Thm 2** | `FULL TEXT` | sha256 `6d3182d5` **matches**, 1258 lines `-layout` **matches** |
+| Seregin `math/0510396` (the ESŠ step now runs through this) | `FULL TEXT` | row 4, `V-W4` |
+| **Nečas–Růžička–Šverák ARMA 136 (1996)** | **`SECOND HAND`** | **pre-arXiv, never obtained here, two failed attempts at leg 364** |
+
+**So three of four are already at primary and re-reading them is not the work.** `PB2`'s budget goes
+to the fourth and to a seam the record has already scratched.
+
+**THE SEAM, and this is what `PB2` must actually settle.** `WALLS.md:163–164` pins clause (b) with:
+*"or `ṁ ≡ 0`, exactly self-similar, **excluded by Nečas–Růžička–Šverák (ARMA 136, 1996) and Tsai
+(ARMA 143, 1998)**"* — **two theorems named jointly, with no statement of which one carries which
+case.** Leg 364 found, and banked as `(ii) DISCREPANCY-FOUND`, that `solver/dssp_screen.py`'s
+`deciding_clause` cites **Tsai Thm 1** as authority for a test that measures **exactly `q = 3`** —
+and Thm 1's own hypothesis range is `q ∈ (3,∞]`, **open at 3, which explicitly excludes that case.**
+The case `q = 3` is NRŠ's, and NRŠ is the one source here at `SECOND HAND`.
+
+**`PB2`'s question, restated so it can be answered YES or NO.** For the route-4 object as `L5`
+actually constructs it: **which named theorem excludes it at `ṁ ≡ 0`, and does that object satisfy
+that theorem's stated hypotheses?** Three candidates and they are not interchangeable —
+**Tsai Thm 1** (needs `U ∈ L^q`, `q > 3` strictly); **Tsai Thm 2** (local energy estimates, `SOURCES.md`
+row 2 records **no `L^q` in the hypothesis** — if this is the one, the `q = 3` seam is irrelevant and
+clause (b) is stronger than its own citation suggests); **NRŠ** (`q = 3` exactly, `SECOND HAND`).
+
+**Pre-committed readings, all three of which are useful:**
+- **Thm 2 carries it, hypotheses met** → clause (b) **STANDS** and the citation in `WALLS.md` is
+  merely under-specified. Fix the sentence to name the theorem. **A good outcome and the likeliest.**
+- **Only Thm 1 or NRŠ carries it** → the pin depends on an `L^q` membership **that `L5` has never
+  measured for its own object**. That is a live gap in a clause recorded `SHUT, ✅ VERIFIED`, and
+  it goes to the user **immediately**, not at the end of the wave.
+- **The object's `L^q` class cannot be determined from what is banked** → `UNDER-RESOURCED`, and
+  that is the honest verdict, **not** a `NO` and **not** a silent pass.
+
+**What is NOT licensed.** `PB2` may not conclude that clause (b) fails because a *ledger comment*
+mis-cites. Leg 364 was explicit that its finding is *"a citation/attribution discrepancy rather than
+a computational or logical error"* and that the operational test itself is **correct against both
+obtainable sources**. **A defective citation is not a defective theorem**, and asserting otherwise
+would be this programme's own §43 error in a new costume.
+
+**Availability constraint the unit must know.** `Papers/fetch.sh` is **arXiv-only** and Tsai 1998 is
+pre-arXiv. The copy in `Papers/` is the only recoverable one (`Papers/MANIFEST.md`, 2026-08-19).
+**Do not delete it.** NRŠ 1996 is very likely `UNREACHABLE`; if two attempts fail, **record
+`UNREACHABLE` and reason from Tsai's verbatim quotation of it** — that is `SOURCES.md` row 3's
+existing position and it is not a new concession.
+
+**Cost:** revised **down** from the directive's implied full-read, to **≈2–4 h**. The saving is not
+banked as progress; it is redirected into the `L^q`-membership question above, which nothing in the
+record has ever asked.
