@@ -168,6 +168,31 @@ at `α = 1.25`, `1.6` the machinery returns `−0.2498`, `−0.5996`, tracking `
 float64, SYNTHETIC profile — route 4 has none banked. The EXPONENT is a class property and is settled;
 the CONSTANT is not route 4's number.**
 
+**⚠ (b) STAYS SHUT AND THE CITATION ABOVE IS BOTH WRONG AND UNDER-SPECIFIED — `PB2`, leg 410.
+Added BESIDE the banked sentence, which is left exactly as `V-W5` verified it.** The sentence names
+two theorems jointly, with no statement of which carries the `ṁ ≡ 0` case; for route 4's object **as
+`L5` actually constructs it, only one of them does.** `PB2` measured the object at the pinned
+`α = 1`: **`∫|U|³` is LOG-DIVERGENT** (increments constant at `139.287`/decade; coefficient
+`60.4916579840` measured vs `60.4916579840` closed-form, rel. `1.1e-13`), so **`U ∉ L³` and
+Nečas–Růžička–Šverák's hypothesis is NOT SATISFIED — NRŠ does not exclude this object.** What shuts
+(b) is **Tsai 1998 THEOREM 2**, whose hypotheses (§2 p.34, at FULL TEXT) are *"the Navier-Stokes
+equations and the local energy estimates"* and **nothing else — no `L^q`, no Leray–Hopf, no boundary
+condition** — and `(1.4)` is satisfied by measurement (`ess sup ½∫_{B₁}|u|² → 17.090273855`,
+`∫|∇U|² → 44.043109634`, space-time Dirichlet `88.086219268`, all finite and converged).
+**Tsai THEOREM 1 carries it INDEPENDENTLY**, since `U ∈ L^q` for **every** `q ∈ (3,∞]`
+(`‖U‖_q`: `18.0853` at `q=3.01` … `2.2228` at `q=100`) — Thm 1's range is **open at 3**, which is the
+seam leg 364 flagged in `solver/dssp_screen.py`. **Clause (b) therefore stands on a STRONGER
+footing than its citation implied: the theorem that carries it is at FULL TEXT here, and the one
+source this repository cannot obtain (`UNREACHABLE`, 4 failed fetches) is not load-bearing for it.**
+The class argument leaves no third case: at `α = 1` either the far-field amplitude `A ≢ 0` (then
+`U ∉ L³` but `U ∈ ⋂_{q>3}L^q`, Tsai's range) or `A ≡ 0` (then `α > 1`, which is (b)'s OTHER exit,
+shut by (a)). **Also: the citation is wrong.** Tsai's own bibliography gives NRŠ as ***Acta Math.*
+176 (1996) 283–294**, not `ARMA 136` — wrong journal, volume and pages, in four load-bearing places
+(`CORRECTIONS.md` §47). **A defective citation is not a defective theorem; (b) is unmoved.**
+Ceiling: this is a **measurement on `L5`'s synthetic profile at `α = 1`**, float64, Tier 2 — it
+verifies a HYPOTHESIS is met, it proves no theorem. Data `writeup/data/p2_route_pb2_v1.json`;
+checks `experiments/p2_route_pb2_v1_evidence.py` (31/31); leg `experiments/journal/leg_410.md`.
+
 **⚠ ROUTE 4 NOW HAS A DISCRETE PROFILE — `L6`, leg 401 — AND IT DOES NOT CLOSE.** First ever
 built on route 4's own object (λ-DSS, `a = 0.5`, poloidal–toroidal, `div V ≡ 0` identically, **no
 Bogovskiĭ corrector**), measured in **`L5`'s own load-bearing norm**. Smallest residual at the best

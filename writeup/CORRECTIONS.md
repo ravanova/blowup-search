@@ -3032,3 +3032,66 @@ against the rewritten artefact** and concluded the **original** failure was spur
 
 **The race was real; the conclusion drawn from it was not.** The failing check was the unit finding
 its own defect, and I read it as the unit being wronged by my timing.
+
+## §47 — the wall's most load-bearing citation names the wrong journal, wrong volume and wrong pages, and names two theorems jointly where only one of them applies; the MEASUREMENT is untouched, the SENTENCE written about it was not checked against the paper
+
+Unit `PB2` (leg 410) was sent to a seam, not a defect: `WALLS.md`'s W4 clause (b) — **SHUT** and
+**✅ VERIFIED** since leg 403 — shuts the `ṁ ≡ 0` exit with *"excluded by **Nečas–Růžička–Šverák**
+(ARMA 136, 1996) **and** Tsai (ARMA 143, 1998)"*, two theorems named jointly with no statement of
+which carries which case. Reading Tsai at primary to settle that produced two findings, and it
+matters that they are kept apart.
+
+**Finding 1, the small one, which is nevertheless in four load-bearing places.** Tsai 1998's own
+bibliography, p.50, read at FULL TEXT from the copy this repository has held since leg 359:
+
+> `[NRS]` J. Nečas, M. Růžička & V. Šverák, *On Leray's self-similar solutions of the Navier-Stokes
+> equations*, **Acta Math. 176 (1996), 283–294.**
+
+The repository cites it as **`ARMA` 136 (1996)** in `WALLS.md` (W4 clause (b)), `SOURCES.md` row 3,
+`WAVE8_PLAN.md` (twice), and `p2_route_l5_finite_energy_v1.json`, the last adding pages **`55–98`**.
+**Wrong journal, wrong volume, wrong pages.** `ARMA 136 (1996) 55–98` is not a null string — it
+looks exactly like a real citation, which is why it survived a verifier. The likely origin is
+adjacency to Tsai's own `ARMA 143`, and it propagated from one artefact into the wall and the plan
+without anyone opening the paper. **Leg 364's journal already had it right** — `Acta Math. 176
+(1996) 283–294`, DOI `10.1007/BF02551584` — so the repository has held the correct citation and the
+incorrect one simultaneously for six legs, in different files, without either noticing the other.
+
+**Finding 2, the one that actually needed the paper.** The joint citation is not merely
+under-specified; **as applied to route 4's object it names one theorem that does not apply.** NRŠ's
+hypothesis is `U ∈ L³(ℝ³)`. At the pinned `α = 1` the object's `∫|U|³` is **log-divergent** —
+measured this leg, increments constant at `139.287` per decade, coefficient `60.4916579840` against
+`60.4916579840` in closed form. **`U ∉ L³`, so NRŠ's hypothesis is not satisfied and NRŠ does not
+exclude this object.** What excludes it is **Tsai 1998 Theorem 2**, whose hypotheses are (§2, p.34)
+*"we do not require the weak solution `u` to be a Leray-Hopf weak solution. Our only requirements
+(apart from self-similarity) are (i) and (ii)"* — the equations and the local energy estimates
+`(1.4)`, with **no `L^q` in the hypothesis at all** — and (ii) is satisfied by measurement.
+**Tsai Theorem 1 independently carries it too**, since `U ∈ L^q` for every `q ∈ (3,∞]`.
+
+> **THE RULE.** *When a wall clause is shut by a NAMED theorem, the record must name WHICH theorem
+> and state that the object meets ITS hypotheses. Two theorems joined by "and" assert that both
+> apply; if one does not, the sentence is false even when the clause is true. And a citation that
+> no unit has ever opened is an UNVERIFIED string however many artefacts repeat it — repetition is
+> not corroboration, it is one source counted many times.*
+
+**What is NOT wrong, stated plainly because the temptation runs the other way.** **Clause (b)
+STANDS.** It stands on a **stronger** footing than its citation suggested: the theorem that carries
+it is the one this repository has at **FULL TEXT**, and the theorem it cannot obtain — NRŠ, four
+failed fetches across legs 253, 359, 364 and 410, `UNREACHABLE` at primary, `SECOND HAND` in the
+register — turns out to be **not load-bearing for this clause at all.** The `SECOND HAND` debt is
+still a debt; it is no longer a debt W4 clause (b) is resting on. **A defective citation is not a
+defective theorem**, and reading it as one would be §43's error in a new costume. `V-W5`'s verdict
+is upheld; what failed was not the verification of the mathematics but the transcription of the
+attribution, which no verifier in this programme has ever been asked to check against a PDF.
+
+**The correction is placed BESIDE the data, not over them.** `WALLS.md`'s banked W4(b) sentence and
+`p2_route_l5_finite_energy_v1.json` are **unedited**; the wall gets an added paragraph naming the
+carrier, `SOURCES.md` gets an append-only block, and the measurements live in
+`writeup/data/p2_route_pb2_v1.json` with `experiments/p2_route_pb2_v1_evidence.py` (31 checks).
+
+**A defect this leg found in ITSELF, banked here so the count is honest.** `PB2`'s first run
+truncated the `L^q` integral at `r = e⁶⁰`, where the `q = 3.01` integrand still sits at `0.55` of
+its far-field size; `‖U‖_{3.01}` read `17.478` against a true `18.085`, a **3.4% error that
+doubling the resolution cannot detect**, because it is a DOMAIN error wearing a convergence
+study's clothes. Fixed with a closed-form `α = 1` tail beyond `r = e³⁰` and a new
+`seam_moved_rel_change` control banked next to `resolution_doubled_rel_change`. *A resolution
+control certifies resolution. It says nothing whatever about where you stopped integrating.*

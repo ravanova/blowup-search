@@ -149,3 +149,57 @@ change it prices (planned FFTW3 transforms in place of per-call `numpy.fft`, and
 inverse transforms of a stage into one call) is **not a numerical method** — it is the documented
 use of row 24's library and of `numpy.fft`'s own `axes=` argument. **It is priced, not landed**, and
 a unit that lands it owes its own equivalence check.
+
+---
+
+## Appended 2026-08-19 by `PB2` (leg 410, Lane L) — APPEND-ONLY, nothing above this line edited
+
+**Scope.** AMENDMENT 4 re-scoped this unit away from re-reading sources already at primary. Three
+of four rows were already discharged; this block records (i) hash re-confirmations, (ii) the ONE
+new depth reached, (iii) the residual on row 1 **RESOLVED**, and (iv) a **citation correction** to
+row 3 placed beside it, not over it.
+
+| # | source | what `PB2` did with it | DEPTH REACHED BY THIS UNIT | load-bearing |
+|---|---|---|---|---|
+| 33 | **row 2** — Tsai, *ARMA* **143** (1998) 29–51, `Papers/TSAI1998.pdf` | Read at primary for the question row 2 did not answer: **which** theorem excludes the exactly-self-similar object. Quoted verbatim: **Thm 1** (p.30, `U ∈ L^q`, **`q ∈ (3,∞]`, open at 3**), **Thm 2** (p.30), the **Thm 2 hypothesis list** (§2 p.34 — *"our only requirements (apart from self-similarity) are (i) and (ii)"*, i.e. the equations and the local energy estimates `(1.4)`; **no `L^q` in the hypothesis**), `(1.2)`–`(1.5)`, and **Rmk 5.3 / Rmk 5.4** (p.49 — a third weaker sufficient condition `|U(y)| ≤ b\|y\|`, `b < a`; and that the growth assumptions **are** necessary, since `U = ∇Φ` with `Φ` harmonic solves `(1.3)` nontrivially) | **FULL TEXT** (confirmed, not newly reached). sha256 `6d3182d53806ce82fa0a2d834b31b758f22399ff625b8c8d7025a65f83fb8182` **matches** the leg-359 pin; `pdftotext -layout` **1258 lines**, matches | **YES — `Thm 2` is what actually carries `W4` clause (b)** |
+| 34 | **row 1** — Chae–Wolf `arXiv:1610.09464`, `Papers/1610.09464.pdf` | **NOT re-read** (AMENDMENT 4). Hashes and line counts re-confirmed only | **FULL TEXT** unchanged (leg 359). sha256 `1f537bc2…` and md5 `f1d14db1…` both **match, on the SAME file** | **YES**, unchanged |
+| 35 | **row 3** — Nečas–Růžička–Šverák 1996 | Two further fetch attempts, with a **positive network control** leg 364 lacked | **`UNREACHABLE`** at primary (4th independent reproduction: legs 253, 359, 364, 410). Hypothesis remains **`SECOND HAND`** via row 2's verbatim quotation | **NO for `W4` clause (b)** — see the correction below. Still `YES` wherever an `L³` hypothesis is genuinely in play |
+
+### Row 1's residual — **RESOLVED**, not `UNVERIFIED`
+
+Row 1 reads *"1002 lines; re-fetched md5 `f1d14db1…`, 1021 lines"*, which presents one file as two
+fetches with two line counts, and `1021` reproduces under **neither** `-layout` (1002) nor plain
+(1609). The gap is exactly **19**, and `pdfinfo` gives `Pages: 19`; `grep -c $'\f'` on the same
+`-layout` extraction returns **19**. **One file, one extraction, counted once with and once without
+page-break form feeds as line terminators.** Both hashes are of the same file and both match. No
+second fetch ever happened. **The row is sound; its wording is not, and the wording is left as
+banked with this note beside it.**
+
+### Row 3 — CITATION CORRECTION, and the depth finding that matters more
+
+Row 3 (and `WALLS.md` W4(b), `WAVE8_PLAN.md`, and `p2_route_l5_finite_energy_v1.json`) cites NRŠ as
+***ARMA* 136 (1996)**, the JSON adding pages `55–98`. Tsai's bibliography, p.50, at FULL TEXT:
+
+> `[NRS]` J. Nečas, M. Růžička & V. Šverák, *On Leray's self-similar solutions of the Navier-Stokes
+> equations*, **Acta Math. 176 (1996), 283–294.**
+
+**Wrong journal, wrong volume, wrong pages, in four load-bearing places.** Leg 364's journal
+already carried it correctly (with DOI `10.1007/BF02551584`). Banked in full at `CORRECTIONS.md`
+**§47**. The two fetch attempts this leg, for the record:
+
+- Springer (`link.springer.com/article/10.1007/BF02551584`) → **login wall**, 247,202 B HTML,
+  sha256 `04165b7d…`, containing *"Access this article"* / *"Log in"* / *"institutional"*, with
+  **empty** `description` and `citation_abstract` meta tags — so **not even `ABSTRACT` depth** is
+  obtainable from the landing page.
+- Project Euclid → 1,165 B Incapsula stub, sha256 `d05e2720…`.
+- **Positive control:** `arxiv.org/abs/1802.00038` → **HTTP 200, 38,114 B**. The container **has**
+  network; the refusal is the publisher's, not the sandbox's. *(No paywall was circumvented and no
+  author, group, maintainer or list was contacted.)*
+
+**The depth finding.** `PB2` measured that the route-4 object at the pinned `α = 1` has
+**log-divergent `∫|U|³`** (increments constant at `139.287` per decade; coefficient
+`60.4916579840` measured against `60.4916579840` closed-form, rel. `1.1e-13`), so **`U ∉ L³` and
+NRŠ's hypothesis is NOT SATISFIED.** The one source this repository cannot obtain is the one that
+**does not carry the case**. Row 3's `SECOND HAND` debt is real and stays open — it is simply no
+longer what `W4` clause (b) rests on. Measurements: `writeup/data/p2_route_pb2_v1.json`; checks:
+`experiments/p2_route_pb2_v1_evidence.py` (31 checks, 0 failed).
