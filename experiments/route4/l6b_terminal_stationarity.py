@@ -238,13 +238,53 @@ def main():
     # terminal iterate.  A NO at scale_invariant_grad >= 1 does not separate the two
     # hypotheses the gate was built to separate.  Pre-registered at 7,000 iterations,
     # BEFORE this unit's gate number existed; the 1.45 threshold does NOT move.
+    # --- SS44: a licence keyed to a SINGLE TERMINAL SAMPLE of a volatile series is the
+    # same defect it was written to fix.  To license "critical", the MAXIMUM of
+    # scale_invariant_grad over the TRAILING 2,000 ITERATIONS must be below threshold:
+    # to claim a point is critical you must show it STAYS critical, not that it touched
+    # critical once.  Conservative by design; the weakest row remains the default.
+    TRAIL = 2000
+
+    def _sig_window(st, trail=TRAIL):
+        traj = st.get("trajectory_k_sec_J_ginf_gscaled") or []
+        if not traj:
+            return None
+        K = traj[-1][0]
+        w = sorted(r[4] for r in traj if r[0] >= K - trail)
+        if not w:
+            return None
+        q = lambda f: w[min(len(w) - 1, int(f * (len(w) - 1)))]
+        return dict(n_samples=len(w), min=w[0], p25=q(0.25), median=q(0.5), p75=q(0.75),
+                    max=w[-1], spread_max_over_min=(w[-1] / w[0] if w[0] else None),
+                    terminal=traj[-1][4], trailing_iterations=trail)
+
+    sig_windows = {n: _sig_window(st) for n, st in d["starts"].items()}
+    d["terminal_stationarity"]["scale_invariant_grad_trailing_window"] = dict(
+        why=("CORRECTIONS SS44.  scale_invariant_grad is VOLATILE along an L-BFGS-B path: a "
+             "single terminal sample can land in a trough or on a spike and license or deny "
+             "a reading the series does not support.  The distribution over a trailing "
+             "window is reported for all three starts ALONGSIDE the terminal value, and the "
+             "licence is keyed to the window MAXIMUM, not the terminal sample."),
+        rule="to claim a point is critical, show it STAYS critical, not that it touched "
+             "critical once",
+        per_start=sig_windows,
+        no_extrapolation=("DELIBERATELY NONE.  A log-linear fit of log(sig) against k over "
+                          "the trailing 3,000 iterations and over the trailing 5,000 give "
+                          "predictions at k=20,000 that differ by ~15x.  A forecast that "
+                          "moves 15x with the choice of window is not a forecast, and none "
+                          "is offered."),
+    )
+
     gate = d.get("gate", {})
     smallest = gate.get("smallest_residual_at_20000")
     threshold = gate.get("material_threshold", 1.45)
     dropped = smallest is not None and smallest < threshold
     best_name = min(per, key=lambda k: per[k]["smallest_J_over_the_run"]) if per else None
     best_gsc = per[best_name]["scale_invariant_grad"] if best_name else None
-    stationary = bool(best_gsc is not None and best_gsc < NOT_CRITICAL)
+    best_win = sig_windows.get(best_name) or {}
+    best_win_max = best_win.get("max")
+    # SS44: the WINDOW MAXIMUM governs, not the terminal sample
+    stationary = bool(best_win_max is not None and best_win_max < NOT_CRITICAL)
 
     if dropped:
         row, licence = "drop_below_1.45", (
@@ -268,12 +308,25 @@ def main():
             "-- the very hypothesis the NO was meant to eliminate.")
 
     d["verdict_licence"] = dict(
-        pre_registered=("CORRECTIONS SS41, commit 7265627, at iteration 7,000 -- BEFORE this "
-                        "unit's gate number existed, so it cannot be a reaction to a result"),
+        pre_registered=("CORRECTIONS SS41, commit 7265627, at iteration 7,000, AS AMENDED by "
+                        "SS44, commit dd1f3b6 -- both BEFORE this unit's gate number existed, "
+                        "so neither can be a reaction to a result"),
+        amendment_SS44=("SS41 keyed the licence to scale_invariant_grad AT 20,000: a single "
+                        "sample of a series whose trailing spread is 6.7x on the banked "
+                        "start and 24-34x on the seeds.  That fix had the same shape as the "
+                        "defect it fixed -- it named a quantity without naming how the "
+                        "quantity is read.  The key is now the MAXIMUM over the trailing "
+                        "2,000 iterations.  Conservative direction by design; the weakest "
+                        "row remains the default and requires nothing."),
         threshold_unchanged=threshold,
         run_unchanged=True,
         what_changed="only the sentence a NO licenses; the gate, budget and threshold stand",
-        keyed_on=dict(start=best_name, scale_invariant_grad=best_gsc,
+        keyed_on=dict(start=best_name,
+                      scale_invariant_grad_terminal_sample_NOT_THE_KEY=best_gsc,
+                      scale_invariant_grad_max_over_trailing_2000=best_win_max,
+                      key_is="max over trailing 2,000 iterations (CORRECTIONS SS44), "
+                             "superseding SS41's terminal-sample key",
+                      trailing_window_distribution=best_win,
                       not_critical_above=NOT_CRITICAL,
                       smallest_residual_at_20000=smallest, dropped_below_1_45=dropped,
                       terminal_iterate_is_stationary=stationary),
@@ -298,6 +351,61 @@ def main():
             "inference requires a stationary terminal iterate and this run did not reach "
             "one." if superseded else
             "not superseded: the row that fires supports the plan's own sentence in full")
+
+    # --- SS44.3: the seeds descend in J while becoming relatively LESS stationary -------
+    import math as _math
+
+    def _loglin_r(st, trail=3000):
+        traj = st.get("trajectory_k_sec_J_ginf_gscaled") or []
+        w = [r for r in traj if r[0] >= traj[-1][0] - trail and r[4] > 0]
+        if len(w) < 3:
+            return None
+        xs = [r[0] for r in w]
+        ys = [_math.log(r[4]) for r in w]
+        mx, my = sum(xs) / len(xs), sum(ys) / len(ys)
+        num = sum((a - mx) * (b - my) for a, b in zip(xs, ys))
+        den = (sum((a - mx) ** 2 for a in xs) * sum((b - my) ** 2 for b in ys)) ** 0.5
+        return num / den if den else None
+
+    trend = {n: dict(pearson_r_log_sig_vs_k_trailing_3000=_loglin_r(st),
+                     J_first_in_window=(st.get("trajectory_k_sec_J_ginf_gscaled") or
+                                        [[0, 0, None]])[0][2],
+                     J_terminal=st["final_residual"],
+                     sig_terminal=st["scale_invariant_grad"])
+             for n, st in d["starts"].items()}
+    d["landscape_finding_seeds_become_less_stationary_while_descending"] = dict(
+        what=("both INDEPENDENT seeds descend in objective while their RELATIVE gradient "
+              "RISES: log-linear fits of log(scale_invariant_grad) against iteration over "
+              "the trailing 3,000 iterations are strongly POSITIVE for both, while J falls "
+              "by roughly a factor of two over the same span."),
+        mechanism=("sig = ||x|| ||grad J||_2 / |J|.  A falling |J| RAISES sig unless "
+                   "||grad J||_2 falls faster, and it does not.  The seeds are getting "
+                   "closer to a smaller objective value and FURTHER from stationarity in "
+                   "relative terms at the same time."),
+        this_is_about_the_landscape_not_the_optimiser=True,
+        independent_of_the_gate_number=True,
+        per_start=trend,
+        caution=("reported as a measured trend over a stated window with the window named, "
+                 "NOT extrapolated to 20,000 -- see "
+                 "terminal_stationarity.scale_invariant_grad_trailing_window.no_extrapolation"),
+    )
+
+    # --- the self-check that would have certified a false claim -------------------------
+    d["discipline_finding_a_selfcheck_encoded_the_defect_it_existed_to_catch"] = dict(
+        what=("evidence check C37, as first written by this unit, ASSERTED "
+              "`L6_minimiser_is_largest_by_scale_invariant_grad is True` -- the very ranking "
+              "later withdrawn as confounded (CORRECTIONS SS43).  IT WOULD HAVE PASSED ON A "
+              "FALSE CLAIM, and its passing would have been offered as evidence FOR it."),
+        why_it_matters=("a self-check that encodes the claim it exists to test verifies only "
+                        "internal consistency between an artefact and a script written by "
+                        "the same unit in the same hour.  Every check in this unit's "
+                        "evidence script that merely re-reads a banked field shares that "
+                        "weakness; the checks that RECOMPUTE from L6's untouched artefact do "
+                        "not."),
+        fix="C37 now recomputes the decomposition and requires the withdrawal label; C37b "
+            "recomputes the rank-agreement statistics independently",
+        stated_plainly="C37 would have passed on a false claim.",
+    )
 
     d.pop("self_hash", None)
     d["self_hash"] = hashlib.sha256(

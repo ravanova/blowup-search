@@ -311,6 +311,57 @@ def main():
               "the three-way verdict licence is keyed to the banked gate and stationarity "
               "fields, and the 1.45 threshold is unmoved")
 
+    # --- C39-C41: SS44 -- the window key, the distributions, and the landscape finding ---
+    if ts is not None:
+        win = ts.get("scale_invariant_grad_trailing_window", {}).get("per_start", {})
+        ok = True
+        for name, st in d["starts"].items():
+            traj = st["trajectory_k_sec_J_ginf_gscaled"]
+            K = traj[-1][0]
+            w = sorted(r[4] for r in traj if r[0] >= K - 2000)
+            v = win.get(name, {})
+            ok &= (v.get("n_samples") == len(w) and v.get("min") == w[0]
+                   and v.get("max") == w[-1] and v.get("terminal") == traj[-1][4])
+        check("C39", bool(win) and ok,
+              "the trailing-2,000 distribution of scale_invariant_grad is recomputed here "
+              "from the banked trajectories for all three starts and matches")
+
+    vl = d.get("verdict_licence")
+    if vl is not None:
+        k = vl["keyed_on"]
+        traj = d["starts"][k["start"]]["trajectory_k_sec_J_ginf_gscaled"]
+        K = traj[-1][0]
+        wmax = max(r[4] for r in traj if r[0] >= K - 2000)
+        check("C40", abs(k["scale_invariant_grad_max_over_trailing_2000"] - wmax) < 1e-12
+              and (vl["row_that_fires"] == "no_drop_and_stationary") == (wmax < 1.0
+                   and not k["dropped_below_1_45"]),
+              "the licence is keyed to the MAXIMUM over the trailing 2,000 iterations "
+              "(SS44), not to the terminal sample, and the row follows from it")
+
+    lf = d.get("landscape_finding_seeds_become_less_stationary_while_descending")
+    if lf is not None:
+        import math
+        def r_of(name):
+            traj = d["starts"][name]["trajectory_k_sec_J_ginf_gscaled"]
+            w = [q for q in traj if q[0] >= traj[-1][0] - 3000 and q[4] > 0]
+            xs = [q[0] for q in w]; ys = [math.log(q[4]) for q in w]
+            mx, my = sum(xs)/len(xs), sum(ys)/len(ys)
+            num = sum((a-mx)*(b-my) for a, b in zip(xs, ys))
+            den = (sum((a-mx)**2 for a in xs)*sum((b-my)**2 for b in ys))**0.5
+            return num/den
+        seeds = [n for n in d["starts"] if n.startswith("seed")]
+        check("C41", all(abs(lf["per_start"][n]["pearson_r_log_sig_vs_k_trailing_3000"]
+                             - r_of(n)) < 1e-9 for n in d["starts"])
+              and all(r_of(n) > 0.5 for n in seeds),
+              "both independent seeds' relative gradients RISE over the trailing 3,000 "
+              "iterations while their J falls -- recomputed here, not quoted")
+
+    df = d.get("discipline_finding_a_selfcheck_encoded_the_defect_it_existed_to_catch")
+    check("C42", df is not None
+          and df.get("stated_plainly") == "C37 would have passed on a false claim.",
+          "the artefact states plainly that this unit's own evidence check C37 would have "
+          "certified the claim it was withdrawn for")
+
     print(f"\n{N - len(FAILS)}/{N} checks passed"
           + (f"; FAILED: {FAILS}" if FAILS else ""))
     return 1 if FAILS else 0
