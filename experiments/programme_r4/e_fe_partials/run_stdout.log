@@ -268,3 +268,15 @@ E-FE: 163 jobs on 6 shards; loadavg 9.71 9.24 10.46 on 12 cores
   [120/163] g113 UPO20  Q f3: stalled, ||R||=5.805, 0.41 h
   attempt 112 UPO20  arm Q: stalled, final ||R|| = 2.787, 25 epochs, 0.53 h
   [121/163] g112 UPO20  Q f2: stalled, ||R||=2.787, 0.53 h
+  attempt 115 UPO20  arm Q: stalled, final ||R|| = 0.3935, 22 epochs, 0.48 h
+  [122/163] g115 UPO20  Q f5: stalled, ||R||=0.3935, 0.48 h
+  attempt 117 UPO20  arm Q: stalled, final ||R|| = 7.224, 20 epochs, 0.44 h
+  [123/163] g117 UPO20  Q f7: stalled, ||R||=7.224, 0.44 h
+  attempt 114 UPO20  arm Q: stalled, final ||R|| = 3.926, 26 epochs, 0.60 h
+  [124/163] g114 UPO20  Q f4: stalled, ||R||=3.926, 0.60 h
+/home/andy/projects/Unsolved/solver/kolmogorov2d_nkbasin.py:139: RuntimeWarning: overflow encountered in multiply
+  adv_hat = np.fft.fft2(u * wx + v * wy) * self.mask
+/home/andy/projects/Unsolved/solver/kolmogorov2d_nkbasin.py:139: RuntimeWarning: invalid value encountered in add
+  adv_hat = np.fft.fft2(u * wx + v * wy) * self.mask
+/home/andy/projects/Unsolved/.venv/lib/python3.12/site-packages/numpy/fft/_pocketfft.py:101: RuntimeWarning: invalid value encountered in fft
+  return ufunc(a, fct, axes=[(axis,), (), (axis,)], out=out)
