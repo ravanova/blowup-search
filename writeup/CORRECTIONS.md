@@ -2681,3 +2681,84 @@ and a mid-run change destroys the per-attempt cost figure the ensemble owes the 
 touch `L6-b`. It bears on **no gate**: this is a fact about one machine on one night, not about Route 4,
 `W4`, or the field ensemble. And it is **not progress** — it is an instrument getting one notch less
 blind, which §3i q7 counts against me, not for me.
+
+## §41 — a gate of my own that is sound in one direction and under-specified in the other: `L6-b`'s `NO` branch cannot separate the two hypotheses it was built to separate
+
+**Found:** 2026-08-19 03:20, by me, at iteration 7,000 of 20,000 — **before the gate number exists.**
+**Filed:** as a pre-registration in `writeup/waves/WAVE7_CLOSE.md`, and here. `WAVE7_PLAN.md`'s
+committed wording is **not edited**; the amendment is a document beside it, per the W3 ruling Q3.
+**Whose defect:** mine. I wrote the wording, I dispatched on it, and no unit or verifier flagged it.
+
+**The wording.** *"No material drop ⟹ the stall is the CONSTRUCTION, and `L6`'s `NO` hardens into a
+real result about route 4's ansatz."*
+
+**Why it does not follow.** That inference is only available at a stationary terminal iterate, and
+the wording never required one. A `NO` at a point with `‖x‖‖∇J‖/|J| ≈ 10²` says the optimiser was
+still descending when the cap arrived — which is *budget-limited*, the very hypothesis the `NO` was
+supposed to eliminate. **A non-critical terminal point makes the two branches of the alternative
+indistinguishable.** On present evidence (the banked start reads `116.9` at 7,000, oscillating in a
+66–274 band rather than decaying) this is the outcome that will actually fire.
+
+**The asymmetry, which is the useful part.** The `YES` branch is unaffected: a drop below `1.45`
+proves `L6`'s ladder was budget-limited whether or not 20,000 converged. **Gates can be
+half-defective.** A gate is not validated by having named both outcomes — it is validated by each
+named outcome being *entailed* by the measurement that triggers it, and those are different checks.
+
+**The exhaustive fact underneath it.** All **58** non-angular start-records in
+`writeup/data/p2_route_l6_profile_v1.json` — both branches, every rung — have `nit == 800`. **100%
+hit the cap. Not one terminated on a convergence criterion; 56 of 58 are non-critical at threshold
+1.** `L6` conceded its headline "is not the infimum"; the artefact supports the stronger statement
+that the ladder never located a stationary point anywhere, and so compared stopping points.
+
+**A second omission, mine, closed in the same commit.** I have been quoting the banked minimiser's
+`scale_invariant_grad = 153.22` as "the largest of its six starts" without its companion: that same
+start has `max_abs_grad = 252.2`, **the smallest of the six**. The two columns rank the starts in
+opposite orders. The scale-invariant one governs — the objective is invariant under `x → t·x`, and
+raw `‖∇J‖_∞` can be shrunk by rescaling alone, which is exactly how `L6`'s L-BFGS-B was fooled into
+a false convergence report once already (`leg_401.md` §7.3). **But "the correct column governs" is a
+disclosure, not a licence to quote it alone.** Both columns, with the invariance argument, every time.
+
+**THE RULE.** *A pre-committed gate must state, for EACH named outcome, the condition under which
+that outcome ENTAILS its stated reading — not merely what the number will be. Where a reading
+depends on the measurement having converged, convergence is part of the gate and is reported with
+the number.* Naming both directions is necessary and is not sufficient.
+
+**What this does NOT do.** `1.45` does not move and the run is untouched. It moves no `L1→L4` link.
+It is **not progress** — it is a gate I wrote being caught under-specified, which §3i q7 counts
+against the instrument.
+
+## §42 — three throughput arithmetic errors in twenty-four hours, two of them mine, and the one thing they share
+
+**Filed:** 2026-08-19 03:20. All three were caught before any of them entered a banked artefact.
+**Why they are filed together:** individually each looks like a slip. Together they are a pattern —
+**every one produced a rate that was wrong in the direction that flattered the reporter's schedule.**
+
+| # | whose | the error | the direction it erred |
+|---|---|---|---|
+| 1 | mine | reported `0.690 it/s` from a **hand-picked tail window** before sweeping the trajectory | picked the window, then read it |
+| 2 | `L6-b`'s | reported *"rate has eased to 0.848 it/s"* — a **cumulative average** presented as a current rate | hid the contention it was invoked to describe; the fast pre-contention hours never leave the numerator |
+| 3 | mine | projected `E-FE` at **×2.09** of its briefed budget by dividing 6 shards × elapsed by **4 COMPLETED attempts while 6 were in flight** | billed work-in-progress to finished units; nearly doubled a real overrun |
+
+**Error 3 in full, because it was 40 minutes old and I had already started writing it up.** The
+correct arithmetic uses the unit's own per-attempt shard-hours (`0.39, 0.70, 0.77, 0.78` — one
+converged, three stalled): mean `0.660 h/attempt` against a briefed `0.569`, i.e. **×1.16 on core-
+hours (105.6 vs 91), or ×1.32 (120 core-h) if stalls dominate as the 1-in-4 recovery rate so far
+suggests.** Wall `17.6–20.0 h` against a briefed `15.2`. **A real and reportable overrun of
+16–32%, not the doubling I first computed.** `n = 4`; this is not yet a rate estimate worth an
+interval and is not written as one.
+
+**What they share.** All three take a ratio whose numerator and denominator are drawn from
+**different windows of the run** — a tail numerator on a whole-run denominator, a whole-run
+numerator on a current-moment claim, an in-flight numerator on a completed-work denominator. The
+error is never in the division; it is in two time-spans silently differing.
+
+**THE RULE.** *Any reported rate or per-unit cost names the window of BOTH its numerator and its
+denominator, and they are the same window. Where a run has a regime change, report a LADDER of
+trailing windows and the cumulative, each labelled — a single trailing window conceals recovery
+exactly as a cumulative average conceals the fall.* The ladder clause is `L6-b`'s refinement, offered
+as reasoned dissent when invited to disagree rather than complied with, and it is right: at its own
+reading trailing-2,000 (`0.722`) sits BELOW trailing-500 (`0.757`) while trailing-4,000 (`0.837`)
+sits above both, and only the ordered ladder shows the fall AND the partial recovery.
+
+**Not progress.** Three arithmetic errors caught is an instrument working, not a result. Nothing
+here bears on `W4`, route 4, or the field ensemble.

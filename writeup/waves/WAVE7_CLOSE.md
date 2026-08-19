@@ -325,3 +325,128 @@ pre-committed against, and a changing shard count destroys the per-attempt cost 
 owes the record. It is not a reason to touch `L6-b`. And **it says nothing whatever about either unit's
 gate**: it is a fact about this machine on this night, not about Route 4, W4, or the field ensemble.
 `E-FE`'s own start/end load figures stay in its artefact unedited; this sits BESIDE them (W3 ruling Q3).
+
+## CONDUCTOR PRE-REGISTRATION 2026-08-19 03:20 — A DEFECT IN `L6-b`'s OWN `NO` BRANCH, RECORDED BEFORE THE NUMBER EXISTS
+
+**Timestamp discipline first.** `L6-b` is at 7,000 of 20,000 iterations. The gate number does not
+exist yet and neither I nor the unit can know it. Everything below is therefore a statement about
+the gate's WORDING, not about its outcome, and it is committed now so that it cannot later be read
+as a reaction to a result I did not like. **I wrote that wording. This is a defect in my own
+pre-committed reading.**
+
+### 1. The fact that provokes it: nothing in `L6` ever converged, and this is exhaustive
+
+Read out of `writeup/data/p2_route_l6_profile_v1.json` directly, all 58 non-angular start-records
+across branches A and B, every rung:
+
+| | count | share |
+|---|---|---|
+| start-records | 58 | |
+| **hit the 800-iteration cap (`nit == 800`)** | **58** | **100%** |
+| not a critical point at `‖x‖‖∇J‖/|J| ≥ 1` | 56 | 97% |
+| critical by that threshold | 2 | branch A rung 0, `seed403` (0.888) and `seed405` (0.965) — the COARSEST rung only |
+
+**Not one record in `L6`'s ladder terminated on a convergence criterion.** Every single one stopped
+because it ran out of iterations. `L6`'s §8.4 conceded the headline number "is not the infimum";
+the stronger statement the artefact supports is that **no rung of either branch, at any resolution,
+ever produced a stationary point at all.** The ladder compared STOPPING POINTS.
+
+### 2. The rank inversion, and which measure governs — this must be disclosed, not chosen
+
+Branch B, top rung, the rung that produced `ρ = 1.6138`:
+
+| start | `nit` | `max_abs_grad` | `scale_invariant_grad` |
+|---|---|---|---|
+| `seed401` | 800 | 2500.7 | 11.90 |
+| `seed402` | 800 | 2473.1 | 16.58 |
+| `seed403` | 800 | 1446.1 | 9.67 |
+| `seed404` | 800 | 792.0 | 4.65 |
+| `seed405` | 800 | 1265.2 | 5.54 |
+| **`continuation`** (the banked minimiser) | 800 | **252.2 — the SMALLEST** | **153.22 — the LARGEST** |
+
+**The two gradient columns rank the six starts in opposite orders, and a reader who takes the raw
+one reaches the opposite conclusion.** `max_abs_grad = 252` says the banked minimiser is the closest
+to stationary of the six; `scale_invariant_grad = 153` says it is by far the furthest.
+
+**The scale-invariant column governs, and the reason is in this repository's own record, not in a
+preference.** The objective is invariant under `x → t·x`. `‖x‖‖∇J‖/|J|` is invariant under the same
+rescaling; `‖∇J‖_∞` is not, and can be driven down by rescaling the coefficient vector without
+moving the geometry at all. That is not a hypothetical: **`L6`'s L-BFGS-B falsely reported
+convergence exactly once, for exactly this reason** (`experiments/journal/leg_401.md` §7.3). The raw
+gradient column is the one that defect knows how to fool. `L6-b`'s
+`experiments/route4/l6b_terminal_stationarity.py` fixes `NOT_CRITICAL = 1.0` a priori and states the
+measure on its face, which is correct.
+
+**Disclosure obligation, and it is the point of writing this down.** The banked artefact carries
+both columns. Any write-up — including `P4` — that quotes `153.22` as "the largest of its six" while
+omitting that the same start has the smallest raw gradient is presenting a selected column. **Both
+go in, with the invariance argument, every time.** My own earlier phrasing of this finding gave the
+scale-invariant figure alone; that is the omission this paragraph exists to close.
+
+### 3. THE DEFECT: `L6-b`'s `NO` branch does not distinguish what it says it distinguishes
+
+`WAVE7_PLAN.md` pre-committed, verbatim:
+
+> **No material drop** ⟹ **the stall is the CONSTRUCTION, and `L6`'s `NO` hardens into a real
+> result about route 4's ansatz.**
+
+**That inference requires the 20,000-iteration iterate to be stationary, and the wording never said
+so.** If the run reaches 20,000 with `scale_invariant_grad` still of order 10² — which is where the
+banked start sits at 7,000 (`116.9`, having been `205.1` at 4,700 and `161.8` earlier, oscillating
+in a 66–274 band rather than decaying toward zero) — then the honest reading of "no material drop"
+is **"25× the budget did not move it, and it is still descending"**, which is a bound on what budget
+alone buys. It is NOT "the stall is the construction", because a non-stationary terminal iterate is
+by definition still budget-limited. **The two hypotheses the gate was built to separate are not
+separated by a `NO` at a non-critical point.**
+
+**The `YES` branch is untouched and I want that asymmetry on the record.** A drop below `1.45` proves
+`L6`'s ladder was budget-limited regardless of whether 20,000 converged — a descent that keeps
+descending is exactly the evidence that branch needs. So the gate is sound in one direction and
+under-specified in the other. **Gates can be half-defective and this one is.**
+
+### 4. The amendment, stated as a rule for the reading and not as a change to the threshold
+
+**`1.45` does not move. The gate number is the gate number.** What changes is the sentence the `NO`
+licenses, and it is now three-way rather than two-way, keyed to a quantity the unit is already
+instrumented to report:
+
+| at 20,000 | `scale_invariant_grad` | what a `NO` licenses |
+|---|---|---|
+| no drop below 1.45 | **< 1** (critical) | the pre-committed reading STANDS IN FULL: the stall is the construction, `L6`'s `NO` hardens into a result about the ansatz |
+| no drop below 1.45 | **≥ 1** (still descending) | **ONLY**: "25× `L6`'s budget, and still not stationary — budget alone does not reach 1.45." `L7`/`L4` prices stay OPEN. The ansatz is NOT exonerated and NOT convicted. |
+| drop below 1.45 | either | the pre-committed `YES` reading stands in full, unaffected |
+
+**On present evidence the middle row is the one that will fire**, and it is the weakest of the three
+— which is precisely why it is written down at 7,000 iterations instead of at the landing. The
+degenerate outcome this forecloses is the one where the unit lands a clean `NO`, the plan's sentence
+is quoted, and `W4`'s route-4 arm is recorded as closed on a comparison between two arbitrary
+stopping points.
+
+**What this does NOT do.** It moves no `L1→L4` link. It does not touch `E-FE`, `W4` clause (b), or
+`PB2`'s subject. It changes nothing the unit is doing — the run continues untouched to 20,000, and
+the three-way table reads fields it already banks. **And it is not progress**: it is a gate I wrote
+being found under-specified before it fired, which §3i q7 counts against the instrument, not for it.
+
+## CONDUCTOR MEASUREMENT 2026-08-19 03:20 — `E-FE`'s SCHEDULE, RE-PRICED FROM ITS OWN PER-ATTEMPT HOURS
+
+From the unit's own progress lines (`[3/163]`–`[6/163]`), four completed attempts: `0.39 h`
+converged, `0.70 / 0.77 / 0.78 h` stalled at the 20-epoch cap. Mean **`0.660 h/attempt`** against a
+briefed `0.569` (`91 core-h / 160`).
+
+| | core-h | wall at 6 shards | vs brief |
+|---|---|---|---|
+| briefed | 91.0 | 15.2 h | — |
+| at the observed mean | 105.6 | 17.6 h | **×1.16** |
+| if stalls dominate (`0.750 h`) | 120.0 | 20.0 h | **×1.32** |
+
+**ETA `20:00`–`22:30` today**, not the `~17:30` on my task list, which is corrected. `n = 4` and the
+recovery rate is `1 in 4` — far too few for an interval, and none is claimed. **My first projection
+of this was `×2.09` and it was wrong**; the error and its class are recorded at `CORRECTIONS.md`
+§42, together with the two other throughput-arithmetic errors of the last day.
+
+**Consequence for wave 8, stated now.** `E-FE` holds 6 of 12 cores until ~20:00–22:30. Wave 8 is
+`L-JVER` ‖ `PB2` ‖ `PB1` ‖ `V-W7`, and **three of those four are reading-and-writing units with no
+solver load** — `PB2` reads two theorems at primary, `PB1` runs a novelty check, `V-W7` audits. The
+overrun therefore does **not** block the wave-8 dispatch, and no shard count is changed mid-run:
+that was pre-committed against, and changing it destroys the per-attempt cost figure the ensemble
+owes the record.
