@@ -1,0 +1,374 @@
+{
+ "leg": 410,
+ "unit": "PB2",
+ "lane": "L",
+ "route": "PB2-LQ-MEMBERSHIP",
+ "date": "2026-08-19",
+ "what": "W4 clause (b): WHICH named theorem excludes the route-4 object at mdot == 0, and does the object satisfy THAT theorem's stated hypotheses",
+ "preregistration": "experiments/journal/leg_410.md, ceilings written before the answer",
+ "ceiling": "TIER 2. float64 spectral quadrature of L5's SYNTHETIC profile. It establishes WHICH HYPOTHESIS the banked object meets. It does NOT make the object a solution of Leray's system -- it is not one (L6's smallest residual is 1.5048519), and BOTH Tsai theorems require a SOLUTION. The solution hypothesis is supplied by the mdot == 0 BRANCH's own counterfactual, not by measurement. No link of the L1->L4 chain moved. Clay stays ~0.05%.",
+ "object": {
+  "source_module": "experiments/p2_route_l5_v1.py (imported unchanged, nothing rebuilt)",
+  "source_json": "writeup/data/p2_route_l5_finite_energy_v1.json",
+  "mdot_zero_branch": "L5.modulation(s, mode='SS') -> (m1, m2, 0.0, 0.0)",
+  "alpha": 1.0,
+  "lambda": 1.7,
+  "a": 0.5,
+  "psi": "psi_alpha(r) = (1+r^2)^{(2-alpha)/2}",
+  "P": "P[f](y;e) = curl curl (f(|y|) e) = (f''-f'/r)(yhat.e)yhat - (f''+f'/r) e",
+  "m1": 1.0,
+  "m2": 0.6,
+  "w_vector": [
+   0.6,
+   0.0,
+   1.0
+  ],
+  "w_norm2": 1.3599999999999999,
+  "abs_w": 1.16619037896906,
+  "mdot": 0.0
+ },
+ "controls": {
+  "C1_reproduces_L5_psi_derivs": {
+   "max_rel_disagreement": 1.1557443086913241e-10,
+   "tolerance": 1e-09,
+   "fired_as_planted": true,
+   "meaning": "the cancellation-free (h, G) must reproduce L5's own psi_derivs-built (F, G) at three alphas over six decades in r; if it fails every number below is void"
+  },
+  "C2_positive_alpha_1p25_L3_finite": {
+   "alpha": 1.25,
+   "int_abs_U_cubed": 29.842731147836847,
+   "L3_norm": 3.101793313684068,
+   "extended_domain_rel_change": 3.571436201198381e-16,
+   "fired_as_planted": true,
+   "meaning": "the SAME L^3 machinery must return a FINITE, domain-independent number at alpha = 1.25, where the record's own leg-381 tail exponent is -0.2498 = -(alpha-1). It does. So M3's divergence is a property of the OBJECT at alpha = 1, not an artefact of the quadrature."
+  },
+  "C3_negative_q3_at_alpha1_must_diverge": {
+   "decade_increments": [
+    139.28515064268026,
+    139.28716953087616,
+    139.28718972045738,
+    139.28718992235315,
+    139.287189924372
+   ],
+   "increment_ratio_last_over_previous": 1.0000000000144942,
+   "ratio_minus_one": 1.4494183631086344e-11,
+   "fired_as_planted": true,
+   "meaning": "a CONVERGENT integral has geometrically decaying decade increments; a log-divergent one has CONSTANT increments. The ratio of the last two must be 1 to quadrature tolerance. A 'zero' here would have been a quadrature failure reported as convergence, and this control is what forbids that."
+  },
+  "C4_DSS_branch_w_never_vanishes": {
+   "min_abs_w_over_one_DSS_period": 0.7707733106908685,
+   "max_abs_w": 1.5616079396469573,
+   "fired_as_planted": true,
+   "meaning": "|U(.,s)| = |w(s)| x (a fixed shape in (r,mu)), and |w(s)| is bounded away from zero over a full DSS period, so the SAME L^q classification holds at every s of the DSS branch. The reading is a property of the ANSATZ CLASS."
+  }
+ },
+ "measurements": {
+  "M1_sup_norm": {
+   "sup_abs_U": 2.3323807579381204,
+   "argmax_r": 1e-08,
+   "argmax_mu": -1.0,
+   "abs_U_at_origin": 2.33238075793812,
+   "U_in_L_infinity": true,
+   "note": "U is smooth on all of R^3 (psi_alpha = (1+r^2)^{1/2} is real-analytic, and h, G are too) and O(|y|^-1) at infinity, so U in L^inf(R^3). Tsai Thm 1 at q = inf concludes 'constant' only; the useful range is q < inf."
+  },
+  "M2_far_field_amplitude": {
+   "A_of_yhat": "-(yhat.w) yhat - w   (exact limit of r U as r -> inf)",
+   "abs_A_squared": "3 (yhat.w)^2 + |w|^2",
+   "min_over_S2_abs_A": 1.16619037896906,
+   "max_over_S2_abs_A": 2.33238075793812,
+   "vanishes_anywhere_on_S2": false,
+   "numeric_checks": [
+    {
+     "r": 10000.0,
+     "mu": 0.0,
+     "r_times_absU": 1.166190384800012,
+     "abs_A_predicted": 1.16619037896906,
+     "rel_err": 5.000000041728321e-09
+    },
+    {
+     "r": 10000.0,
+     "mu": 0.5,
+     "r_times_absU": 1.542724860952205,
+     "abs_A_predicted": 1.5427248620541512,
+     "rel_err": 7.142855586476519e-10
+    },
+    {
+     "r": 10000.0,
+     "mu": 1.0,
+     "r_times_absU": 2.3323807462762165,
+     "abs_A_predicted": 2.33238075793812,
+     "rel_err": 4.999999851326643e-09
+    },
+    {
+     "r": 1000000.0,
+     "mu": 0.0,
+     "r_times_absU": 1.1661903789696433,
+     "abs_A_predicted": 1.16619037896906,
+     "rel_err": 5.001852078849408e-13
+    },
+    {
+     "r": 1000000.0,
+     "mu": 0.5,
+     "r_times_absU": 1.542724862054041,
+     "abs_A_predicted": 1.5427248620541512,
+     "rel_err": 7.138934929470898e-14
+    },
+    {
+     "r": 1000000.0,
+     "mu": 1.0,
+     "r_times_absU": 2.3323807579369538,
+     "abs_A_predicted": 2.33238075793812,
+     "rel_err": 4.99994806207025e-13
+    },
+    {
+     "r": 100000000.0,
+     "mu": 0.0,
+     "r_times_absU": 1.1661903789690602,
+     "abs_A_predicted": 1.16619037896906,
+     "rel_err": 1.9040167791585112e-16
+    },
+    {
+     "r": 100000000.0,
+     "mu": 0.5,
+     "r_times_absU": 1.5427248620541514,
+     "abs_A_predicted": 1.5427248620541512,
+     "rel_err": 1.4393013970707455e-16
+    },
+    {
+     "r": 100000000.0,
+     "mu": 1.0,
+     "r_times_absU": 2.3323807579381204,
+     "abs_A_predicted": 2.33238075793812,
+     "rel_err": 1.9040167791585112e-16
+    }
+   ],
+   "max_rel_err": 5.000000041728321e-09,
+   "meaning": "the alpha = 1 tail amplitude is bounded BELOW by |w| = 1.16619038 > 0 over the whole sphere: the decay is EXACTLY |y|^-1, with no direction in which it is faster. This is what makes the q = 3 integral diverge and every q > 3 converge."
+  },
+  "M3_q_equals_3_NRS_hypothesis": {
+   "partial_integrals": [
+    {
+     "R": 100,
+     "int_abs_U_cubed_over_ball_R": 282.48970676307493,
+     "L3_norm_over_ball_R": 6.561465896961754
+    },
+    {
+     "R": 1000,
+     "int_abs_U_cubed_over_ball_R": 421.7748574057552,
+     "L3_norm_over_ball_R": 7.499406515442524
+    },
+    {
+     "R": 10000,
+     "int_abs_U_cubed_over_ball_R": 561.0620269366314,
+     "L3_norm_over_ball_R": 8.24777792343509
+    },
+    {
+     "R": 100000,
+     "int_abs_U_cubed_over_ball_R": 700.3492166570887,
+     "L3_norm_over_ball_R": 8.880516299896366
+    },
+    {
+     "R": 1000000,
+     "int_abs_U_cubed_over_ball_R": 839.6364065794419,
+     "L3_norm_over_ball_R": 9.434026397106848
+    },
+    {
+     "R": 10000000,
+     "int_abs_U_cubed_over_ball_R": 978.9235965038139,
+     "L3_norm_over_ball_R": 9.929245887926177
+    }
+   ],
+   "decade_increments": [
+    139.28515064268026,
+    139.28716953087616,
+    139.28718972045738,
+    139.28718992235315,
+    139.287189924372
+   ],
+   "increment_ratio_last_over_previous": 1.0000000000144942,
+   "measured_log_coefficient": 60.49165798396497,
+   "analytic_log_coefficient_int_S2_absA_cubed": 60.49165798397186,
+   "rel_error_vs_analytic": 1.1393743809599626e-13,
+   "int_R3_abs_U_cubed": "DIVERGENT, logarithmically",
+   "U_in_L3_R3": false,
+   "verdict": "int_{|y|<R}|U|^3 grows like (int_{S^2}|A|^3 dOmega) log R, coefficient measured to match the analytic value. U is NOT in L^3(R^3). The NECAS-RUZICKA-SVERAK 1996 hypothesis (U in L^3(R^3)) is NOT SATISFIED by this object -- so NRS cannot be the theorem that carries clause (b)."
+  },
+  "M4_q_gt_3_TSAI_THM1_hypothesis": {
+   "norms": {
+    "3.01": {
+     "int_abs_U_q": 6089.072509824398,
+     "norm": 18.085310193467546,
+     "finite": true,
+     "numeric_core_to_r_e30": 1581.103110837798,
+     "closed_form_tail_beyond_r_e30": 4507.9693989866,
+     "tail_fraction": 0.7403376116335005,
+     "resolution_doubled_rel_change": 1.4161899125813706e-11,
+     "seam_moved_rel_change": 1.3922317564042183e-12
+    },
+    "3.05": {
+     "int_abs_U_q": 1250.371197663107,
+     "norm": 10.361499496048955,
+     "finite": true,
+     "numeric_core_to_r_e30": 972.2905610193012,
+     "closed_form_tail_beyond_r_e30": 278.0806366438059,
+     "tail_fraction": 0.22239846628227466,
+     "resolution_doubled_rel_change": 1.063952922670997e-10,
+     "seam_moved_rel_change": 1.2066320995103985e-11
+    },
+    "3.25": {
+     "int_abs_U_q": 285.8489435503165,
+     "norm": 5.698156012742343,
+     "finite": true,
+     "numeric_core_to_r_e30": 285.6935530737407,
+     "closed_form_tail_beyond_r_e30": 0.155390476575793,
+     "tail_fraction": 0.0005436104630851658,
+     "resolution_doubled_rel_change": 6.470648389806806e-12,
+     "seam_moved_rel_change": 5.105884263704464e-12
+    },
+    "3.5": {
+     "int_abs_U_q": 169.53744149833142,
+     "norm": 4.334440400514085,
+     "finite": true,
+     "numeric_core_to_r_e30": 169.53739147814986,
+     "closed_form_tail_beyond_r_e30": 5.002018157196125e-05,
+     "tail_fraction": 2.950391437424962e-07,
+     "resolution_doubled_rel_change": 1.743483772456899e-14,
+     "seam_moved_rel_change": 1.575841102028351e-14
+    },
+    "4.0": {
+     "int_abs_U_q": 120.40575223043015,
+     "norm": 3.312545168302819,
+     "finite": true,
+     "numeric_core_to_r_e30": 120.40575223041971,
+     "closed_form_tail_beyond_r_e30": 1.0439854862594717e-11,
+     "tail_fraction": 8.670561554746262e-14,
+     "resolution_doubled_rel_change": 2.962420372316925e-14,
+     "seam_moved_rel_change": 2.3604943205712546e-16
+    },
+    "5.0": {
+     "int_abs_U_q": 124.69501104499847,
+     "norm": 2.625244852523764,
+     "finite": true,
+     "numeric_core_to_r_e30": 124.69501104499847,
+     "closed_form_tail_beyond_r_e30": 9.330928376924942e-25,
+     "tail_fraction": 7.483000561712696e-27,
+     "resolution_doubled_rel_change": 2.7123646678996277e-14,
+     "seam_moved_rel_change": 0.0
+    },
+    "6.0": {
+     "int_abs_U_q": 176.21105028478735,
+     "norm": 2.3677664177330477,
+     "finite": true,
+     "numeric_core_to_r_e30": 176.21105028478735,
+     "closed_form_tail_beyond_r_e30": 1.1445951446956506e-37,
+     "tail_fraction": 6.495592318675747e-40,
+     "resolution_doubled_rel_change": 2.596826482164207e-14,
+     "seam_moved_rel_change": 1.612935703207582e-16
+    },
+    "10.0": {
+     "int_abs_U_q": 1716.3490417030641,
+     "norm": 2.1060106409082233,
+     "finite": true,
+     "numeric_core_to_r_e30": 1716.3490417030641,
+     "closed_form_tail_beyond_r_e30": 6.804230437321424e-89,
+     "tail_fraction": 3.964362884235866e-92,
+     "resolution_doubled_rel_change": 2.3448109665105438e-14,
+     "seam_moved_rel_change": 0.0
+    },
+    "100.0": {
+     "int_abs_U_q": 4.8972951207545695e+34,
+     "norm": 2.22279577570513,
+     "finite": true,
+     "numeric_core_to_r_e30": 4.8972951207545695e+34,
+     "closed_form_tail_beyond_r_e30": 0.0,
+     "tail_fraction": 0.0,
+     "resolution_doubled_rel_change": 2.0528629115213864e-14,
+     "seam_moved_rel_change": 0.0
+    }
+   },
+   "U_in_Lq_for_every_q_in_open_3_inf": true,
+   "U_in_L_infinity": true,
+   "method": "numeric to r = e^30 plus the CLOSED-FORM alpha=1 tail (int_{S^2}|A|^q) R^{3-q}/(q-3); the seam is moved and the resolution doubled as convergence controls, so no number here depends on a domain cutoff",
+   "verdict": "U in L^q(R^3) for EVERY q in (3, infinity], finite and measured, with the norm blowing up as q -> 3+ exactly as the log divergence at q = 3 requires. TSAI 1998 THEOREM 1's hypothesis range q in (3, infinity] IS SATISFIED by this object -- at every q in the range, not merely at one."
+  },
+  "M5_local_energy_estimate_TSAI_THM2_hypothesis": {
+   "u_from_U": "u(x,t) = lam(t) U(lam(t)x),  lam(t) = 1/sqrt(2a(T-t)),  a = 0.500 > 0",
+   "ball": "B = B_1(0); cylinder Q_1(0,T) = B_1(0) x (T-1, T)",
+   "identities": [
+    "int_{B_1}|u|^2 dx = lam^{-1} int_{|y|<lam}|U|^2 dy",
+    "int_{B_1}|grad u|^2 dx = lam int_{|y|<lam}|grad U|^2 dy"
+   ],
+   "rows": [
+    {
+     "lambda": 100.0,
+     "int_ball_absU_squared": 3384.6110711557762,
+     "half_L2_of_u_over_B1": 16.92305535577888,
+     "int_ball_absGradU_squared": 43.47346818522809,
+     "int_B1_absGradu_squared": 4347.346818522809
+    },
+    {
+     "lambda": 1000.0,
+     "int_ball_absU_squared": 34146.993690493364,
+     "half_L2_of_u_over_B1": 17.07349684524668,
+     "int_ball_absGradU_squared": 43.98614210912185,
+     "int_B1_absGradu_squared": 43986.14210912185
+    },
+    {
+     "lambda": 10000.0,
+     "int_ball_absU_squared": 341771.84494832606,
+     "half_L2_of_u_over_B1": 17.088592247416305,
+     "int_ball_absGradU_squared": 44.03741288322095,
+     "int_B1_absGradu_squared": 440374.1288322095
+    },
+    {
+     "lambda": 100000.0,
+     "int_ball_absU_squared": 3418020.5627870145,
+     "half_L2_of_u_over_B1": 17.090102813935072,
+     "int_ball_absGradU_squared": 44.04253996417464,
+     "int_B1_absGradu_squared": 4404253.996417464
+    },
+    {
+     "lambda": 1000000.0,
+     "int_ball_absU_squared": 34180508.83596021,
+     "half_L2_of_u_over_B1": 17.090254417980105,
+     "int_ball_absGradU_squared": 44.0430526722905,
+     "int_B1_absGradu_squared": 44043052.6722905
+    },
+    {
+     "lambda": 100000000.0,
+     "int_ball_absU_squared": 3418054461.2994366,
+     "half_L2_of_u_over_B1": 17.090272306497184,
+     "int_ball_absGradU_squared": 44.04310907018541,
+     "int_B1_absGradu_squared": 4404310907.018541
+    },
+    {
+     "lambda": 10000000000.0,
+     "int_ball_absU_squared": 341805477109.0963,
+     "half_L2_of_u_over_B1": 17.090273855454814,
+     "int_ball_absGradU_squared": 44.0431096341644,
+     "int_B1_absGradu_squared": 440431096341.64404
+    }
+   ],
+   "ess_sup_t_half_L2_over_B1": 17.090273855454814,
+   "ess_sup_converges": true,
+   "int_R3_absGradU_squared_converges_to": 44.0431096341644,
+   "space_time_dirichlet_integral_nu_1_T_minus_t3_1": 88.0862192683288,
+   "estimate_1p4_finite": true,
+   "verdict": "Tsai (1.4) -- ess sup_{t3<t<T} int_B (1/2)|u|^2 dx + int_{t3}^T int_B nu|grad u|^2 dx dt < infinity -- is FINITE for this object: the kinetic term converges because the |y|^-1 tail makes lam^{-1} int_{|y|<lam}|U|^2 bounded, and int_{R^3}|grad U|^2 converges outright, so the time integral is D_inf sqrt(2(T-t3)/a) < infinity. TSAI 1998 THEOREM 2's hypothesis (ii) IS SATISFIED. Tsai says the same thing in his own words at p.30 for exactly this decay class: 'the function u given by (1.2)_1 satisfies the local energy estimates'."
+  }
+ },
+ "gate": {
+  "question": "For the route-4 object as L5 actually constructs it: WHICH named theorem excludes it at mdot == 0, and does that object satisfy that theorem's stated hypotheses -- YES or NO?",
+  "which_theorem": "TSAI 1998 THEOREM 2 carries it (no L^q in the hypothesis at all); TSAI 1998 THEOREM 1 INDEPENDENTLY carries it; NECAS-RUZICKA-SVERAK 1996 DOES NOT APPLY to this object.",
+  "answer": "YES",
+  "answer_in_precommitted_wording": "YES. Tsai 1998 THEOREM 2 -- stated hypotheses (i) the Navier-Stokes equations in the sense of distributions, (ii) the local energy estimates (1.4) in ONE cylinder Q_1(0,T), plus the exactly-self-similar form (1.2)_1; NO L^q hypothesis, NO boundary condition, and explicitly NOT Leray-Hopf ('Our only requirements (apart from self-similarity) are (i) and (ii)', p.34) -- excludes the route-4 object at mdot == 0, and hypothesis (ii) is SATISFIED BY MEASUREMENT (M5). Tsai THEOREM 1 independently carries it: its hypothesis U in L^q(R^3), q in (3, infinity], is satisfied for EVERY q in that open range (M4), because the object is smooth and bounded (M1) with decay exactly |y|^-1 and nonvanishing angular amplitude (M2). NECAS-RUZICKA-SVERAK's hypothesis U in L^3(R^3) is NOT satisfied: int|U|^3 is log-divergent with the measured coefficient int_{S^2}|A|^3 (M3). So the ONE source in this jaw held at SECOND HAND is the one that does NOT carry the case, and clause (b) does not depend on it.",
+  "clause_b_stands": true,
+  "hypothesis_supplied_by_the_branch_not_by_measurement": "BOTH Tsai theorems require the object to BE a solution -- Thm 1 a weak solution of (1.3), Thm 2 a weak solution of (1.1). The L5/L6 object is NOT one: L6's smallest residual is 1.5048519, order one. That hypothesis is supplied by the mdot == 0 BRANCH's own counterfactual ('if the construction closed with mdot == 0 then an exact backward self-similar blow-up solution exists'), which is exactly how clause (b) uses it. What was NEVER checked before this leg, and is checked here, is the OTHER hypothesis of each theorem: the L^q class and the local energy estimate.",
+  "the_leg_364_seam_does_not_propagate": "leg 364's q = 3 discrepancy is about solver/dssp_screen.py's SCREEN, whose operational test measures q = 3 exactly and is correct for NRS. It does NOT propagate to W4 clause (b): clause (b)'s object sits at q = 3+ -- in every L^q with q > 3 and NOT in L^3 -- so the theorem that carries clause (b) is Tsai's, at a q the screen never measures. The seam is real and it is elsewhere.",
+  "citation_defects_found_beside_the_datum": [
+   "WALLS.md:163-164, SOURCES.md row 3, WAVE8_PLAN.md and p2_route_l5_finite_energy_v1.json all cite NRS 1996 as 'ARMA 136 (1996)' (the JSON adds pages '55-98'). Tsai's own bibliography, read at primary here, gives: '[NRS] J. Necas, M. Ruzicka & V. Sverak, On Leray's self-similar solutions of the Navier-Stokes equations, Acta Math. 176 (1996), 283-294.' leg 364's journal already has it right. WRONG JOURNAL, WRONG VOLUME, WRONG PAGES in four load-bearing places.",
+   "WALLS.md names NRS and Tsai JOINTLY with no statement of which carries which case. Measured here: Tsai carries it (twice over) and NRS does not apply."
+  ]
+ },
+ "runtime_s": 123.39884519577026
+}
