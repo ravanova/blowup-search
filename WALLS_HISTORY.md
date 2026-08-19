@@ -826,3 +826,34 @@ is in the BASIN STRUCTURE, not the seed supply.**
 **`U4`/`G2`, basin radius: BLOCKED, not an option** — it needs a recovered *named* orbit to perturb
 and there is not one. **`G1` stays `UNDER-RESOURCED`; `E` did not write to it** (hand-placed seed at
 published coordinates, not a mined seed).
+
+
+### §OPTIONS-A-WHOLE — `OPTIONS.md` section A retired VERBATIM 2026-08-19 to pay for `§G`'s `P0-NS12` entry (`CORRECTIONS.md` §59). Nothing here is closed; it is moved.
+
+## A. `PROG-R4` — the four options the user did not take
+
+U5 raised five costed options (`experiments/journal/prog_r4_u5.md` §9); **the user ruled option E on
+2026-08-13** and the other four are recorded here.
+
+**The pool constraint on all four:** retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §OPTIONS-A3.
+
+| id | option | cost | why deferred | re-opens if |
+|---|---|---|---|---|
+| **C** | Carry `m` as an unknown in the residual (= Lane R's **R5**) | own milestone, ≈10 h compute + solver work | Changes the realization, so M1's reproduction no longer compares attempt for attempt. **U5 priced it: 334 anchored in-window candidates, 58.1% of the window, but only 1 in the published band.** Not a band fix — the fix for `\|s\| > 0.9`. | On its own merits as the largest measured hole in the trial space, **not** as a route to the named rows. |
+
+**`E` — THE H-HARD DIAGNOSTIC. LANDED `d0d72b1`, `UNVERIFIED`.** 2 of 16 converged, **0
+recovered any named row**. Summary retired 2026-08-19 → `WALLS_HISTORY.md` §OPTIONS-E (its "the
+re-ranking is NOT made" went false when I ruled it). `experiments/journal/prog_r4_e.md`.
+
+**`E`'s FIELD ENSEMBLE — QUEUED 2026-08-19, "price do not queue" WITHDRAWN by the user.** 160
+attempts, **90.9 core-h, ~11.4 h wall**; closes `E-iv` (a row supplies `(T,s)`, **not a field**).
+**Not a grinder** — fixed rows/arms, only the draw varies. `WAVE7_PLAN.md` §B; price
+`writeup/prices/FIELD_ENSEMBLE_2026-08-18.md`. **90.9 is an OUTTURN, not a floor** (see `R6`).
+
+**`U4`/`G2` basin radius, and `G1`:** retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §OPTIONS-U4G2.
+
+**⚠ THE `~8×` COST-MODEL OVERRUN IS REFUTED, and the epoch figure that refuted it is itself
+corrected.** Full text retired 2026-08-18 under §3j → `WALLS_HISTORY.md` §OPTIONS-A. **Live
+consequence: the banked cost model STANDS** (`0.9958` of measured, 0.4% under), so **no option
+in this table is re-priced.**
+

@@ -30,32 +30,7 @@ candidate, and the plan must say why it was or was not taken.
 
 ---
 
-## A. `PROG-R4` — the four options the user did not take
-
-U5 raised five costed options (`experiments/journal/prog_r4_u5.md` §9); **the user ruled option E on
-2026-08-13** and the other four are recorded here.
-
-**The pool constraint on all four:** retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §OPTIONS-A3.
-
-| id | option | cost | why deferred | re-opens if |
-|---|---|---|---|---|
-| **C** | Carry `m` as an unknown in the residual (= Lane R's **R5**) | own milestone, ≈10 h compute + solver work | Changes the realization, so M1's reproduction no longer compares attempt for attempt. **U5 priced it: 334 anchored in-window candidates, 58.1% of the window, but only 1 in the published band.** Not a band fix — the fix for `\|s\| > 0.9`. | On its own merits as the largest measured hole in the trial space, **not** as a route to the named rows. |
-
-**`E` — THE H-HARD DIAGNOSTIC. LANDED `d0d72b1`, `UNVERIFIED`.** 2 of 16 converged, **0
-recovered any named row**. Summary retired 2026-08-19 → `WALLS_HISTORY.md` §OPTIONS-E (its "the
-re-ranking is NOT made" went false when I ruled it). `experiments/journal/prog_r4_e.md`.
-
-**`E`'s FIELD ENSEMBLE — QUEUED 2026-08-19, "price do not queue" WITHDRAWN by the user.** 160
-attempts, **90.9 core-h, ~11.4 h wall**; closes `E-iv` (a row supplies `(T,s)`, **not a field**).
-**Not a grinder** — fixed rows/arms, only the draw varies. `WAVE7_PLAN.md` §B; price
-`writeup/prices/FIELD_ENSEMBLE_2026-08-18.md`. **90.9 is an OUTTURN, not a floor** (see `R6`).
-
-**`U4`/`G2` basin radius, and `G1`:** retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §OPTIONS-U4G2.
-
-**⚠ THE `~8×` COST-MODEL OVERRUN IS REFUTED, and the epoch figure that refuted it is itself
-corrected.** Full text retired 2026-08-18 under §3j → `WALLS_HISTORY.md` §OPTIONS-A. **Live
-consequence: the banked cost model STANDS** (`0.9958` of measured, 0.4% under), so **no option
-in this table is re-priced.**
+## A. `PROG-R4` — the four options the user did not take. **Whole section retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §OPTIONS-A-WHOLE** to pay for §G's `P0-NS12`. Nothing in it is closed. Option **E**'s field ensemble (`E-FE`, leg 408) is **STILL IN FLIGHT** at the stop — see `reports/ORCH_STATE.md` LIVE and `STATE.md`, not this file.
 
 ## B. Lane R — the units not taken
 
@@ -226,6 +201,7 @@ ain `UNVERIFIED`** — `V1` checked `R0`'s
 
 ## G. Wave-9 follow-ons — PARKED, NOT DISPATCHED (directive 2026-08-19); none entered a brief
 
+- **`P0-NS12`** ~0.2 core-h (~12 min, 1 core) — re-run `L5-cmod`'s `c_mod` ladder at `ρ0 ∈ {1e3..1e7}` with **`n_s = 12`**, same `RES`, refit the slope. **`E5` FAILED** (§59): `n_s` `6→12` moves the per-decade increment by `×1.855293`, so §58's `−1.9900` slope is unmeasured at `n_s=12`. **GATE, pre-committed by the unit before its numbers existed:** survives iff slope within `±0.15` of `−2`; near `0` ⇒ `n_s=6` artefact and §53's flag is NOT discharged beyond the directly-measured band; between ⇒ `UNDER-RESOURCED`, and that is the result. RE-OPEN: **before any citation of §58's slope or of `c_mod` beyond `869.288`.**
 - **`P2-F1`** ~2–4 core-h — bank the per-term decomposition in the gate's own `‖curl F‖_{L¹ₜL^{3/2}}`, not `L³` (§55). RE-OPEN: before P2 is submitted; one outcome makes its central sentence wrong.
 - **`P2-F3`** ~30 min — re-bank `rho_exponent` beside its own fit window (§55). ⛔ **ESCALATE FIRST:** the naive repair reports summability available and BREAKS W4(b) off a transient. Not a unit's call.
 - **`V8-HR`** ~15 min — anchor `test_headroom.py:46`; **NOT `count==1`** (§3j's verbatim retirement guarantees a 2nd `## LIVE`, §56.7). RE-OPEN: any edit above the live block; today 7,568/8,192 and TRUE.

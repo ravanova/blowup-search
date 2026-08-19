@@ -4052,6 +4052,8 @@ of it is progress toward Clay. Clay stays **~0.05%**.
 
 ## §58 — `L5-cmod` (leg 413): the literal pre-committed rule returned **`UNDER-RESOURCED`** and that verdict STANDS as the unit's literal answer. `§53`'s flag is discharged **only in the part that was directly measured**; the saturation claim rests on a post-hoc discriminant with a pre-planted control, and is recorded as such.
 
+> **SUPERSEDED IN PART BY `§59`.** The word **`CONTROLLED`** in this section's ruling is WITHDRAWN and its seven-digit `relative_change` is withdrawn as a quoted figure: the unit's own evidence check `E5` FAILED (`n_s` `6 → 12` moves the per-decade increment by a factor `1.855293`) and control `X4` did not fire as planted. Read `§59` before citing anything below. The `UNDER-RESOURCED` verdict and the CEILING are unchanged.
+
 `L5-cmod` extended `L5`'s `c_mod` ladder five decades, to `ρ₀ = 1e8`
 (`gate.largest_rho_reached = 126171734.41261198`). It banked a **sealed raw result** at `95f0bc6`
 before any adjudication, then adjudicated at `5077a0b`. Both are in the artefact and both are in the
@@ -4149,3 +4151,117 @@ ruling Q3, not an edit to it.
 **CEILING.** No `L1 → L4` link moved. No wall moved. `W4` clause (b) stands; clause (c) — the torus,
 statement (D) — remains **UNTESTED, NOT CLOSED**. `Tier 2`. The pre-committed answer to this unit's
 own gate is **`UNDER-RESOURCED`** and that is what the board carries. Clay stays **~0.05%**.
+
+---
+
+## §59 — `L5-cmod`'s journal §7–§12 (leg 413, commit `41b0ace`) landed AFTER `§58` was written, and it **WITHDRAWS one word of `§58`'s ruling and all but the order of magnitude of `§58`'s digits**. The unit reports a failed evidence check against its own result.
+
+**PROVENANCE, and it is the point.** `§58` was written from `L5-cmod`'s committed artefact before the
+unit reported. The unit's journal §7–§12 landed at `41b0ace`, after the close-out commit `add9751`.
+It headlines a disclosure that "is not in `CORRECTIONS.md`, not in `STATE.md` and not in `reports/`,
+because it was measured after this unit was integrated." **It is a measurement by a unit that
+returned, so `§3h` binds and this section follows it.** The direction of travel is *away* from a
+finished-looking board, which is the only direction a wind-down correction is allowed to take.
+
+### 1. `E5` FAILED — the `s`-quadrature, verified at primary in `experiments/journal/leg_413.md` §10
+
+`experiments/p2_route_l5cmod_v1_evidence.py`'s check `E5` — *discretisation invariance of the
+increments* — was run by the unit over the band `ρ0 = 1e4 → 1e6` and **failed**:
+
+| discretisation | increment per decade | rel. deviation from baseline |
+|---|---|---|
+| `RES`, `n_s = 6` (`L5`'s own rule, the gate's) | `1.393259e-05` | — |
+| `RES_HI = (28, 56, 10, 20)`, `n_s = 6` | `1.392649e-05` | `4.378224e-04` |
+| `RES`, **`n_s = 12`** | `2.584904e-05` | **`8.552932e-01`** |
+
+Refining *space* is harmless to four digits. **Doubling the `s`-sampling changes the magnitude of the
+per-decade increment by a factor `1.855293`.** The unit names the mechanism — the `ρ`-dependent part
+of the period average is `⟨C(s) e^{−2κs}⟩` and `C(s)`'s harmonics alias against six equispaced
+samples — and then declines to lean on it: *"that is an argument, not a measurement, and the
+measurement was not made."* **I adopt that refusal rather than repairing around it.**
+
+### 2. `X5` — the absolute value of `c_mod` is defensible to `L5`'s digits, not to `§58`'s
+
+At `ρ0 = 1e8`: `fd_rel ∈ {1e-3, 1e-4, 1e-5}` agree to `1.5e-07` absolute; `RES → RES_HI` moves
+`c_mod` by `0.069`; **`n_s` `6 → 12` moves it by `0.391`** (`4.5e-04` relative).
+
+`§58` recorded `gate.c_mod_at_largest_rho = 869.290596262992` against
+`gate.c_mod_banked_by_L5 = 869.2878218404479`, a difference of `0.00277442254412108`. **The `n_s`
+sensitivity of the absolute value, `0.391`, is `140.93×` that entire difference**, and even the space
+refinement `0.069` is `24.87×` it. **`c_mod`'s defensible value is `L5`'s quoted `869.288`.**
+
+### 3. `X4` DID NOT FIRE AS PLANTED — disclosed by the unit, not re-planted
+
+The unit predicted that replacing `psi` by a pure power `r^{2−α}` would make the construction exactly
+`ρ`-independent, leaving only arithmetic noise. It did not: the pure-power ladder reproduces the
+*whole* `ρ`-dependence. **The unit's own §3 prior named the wrong mechanism.** The `ρ`-dependence is
+`T4`/`T5`'s intrinsic `ρ^{-2}`, visible in `L5`'s banked exponents — verified at primary in
+`writeup/data/p2_route_l5_finite_energy_v1.json:912-919`:
+`T4_L3_rho_exponent = -2.000299539483171`, `T5_L3_rho_exponent = -2.000739321282808`, against
+`T3_L3_rho_exponent = -0.0003285877763923523`. **The qualitative reading is robust and the journal's
+supporting digits are slightly off**: it quotes `T5 ≈ −2.0006` (primary `−2.000739`) and
+`T3 ≈ −0.0002` (primary `−0.000329` full-window, `−7.677739963989294e-06` on `tail3`). Recorded
+beside the datum per `W3` ruling Q3, not edited into it.
+
+### 4. THE RULING — what of `§58` stands and what does not
+
+**(a) The word `CONTROLLED` is WITHDRAWN from `§58`'s ruling.** `§58` reads *"the saturation claim is
+STRONG, CONTROLLED, and POST-HOC-DISCRIMINATED."* One pre-planted control (`X4`) did not fire as
+planted and one evidence check (`E5`) failed on the quantity the claim is about. **The status is
+now: `STRONG, POST-HOC-DISCRIMINATED, AND NOT SHOWN TO SURVIVE `n_s = 12`.`** `X2` — the planted
+log-divergent field returning `slope = −3.654883275293096e-08` — still fired as planted, and that is
+why `STRONG` survives; it validates the *discriminant*, it does not validate the *`s`-rule*.
+
+**(b) The `−1.9900219682735338` slope is NOT retired, and it is NOT relied on beyond the measured
+`s`-rule.** It is a statement about the `ρ`-dependence at fixed `n_s = 6`. Whether it survives
+`n_s = 12` is **unmeasured**.
+
+**(c) `§53`'s flag: the discharge SURVIVES in direction and ORDER OF MAGNITUDE ONLY, and `§58`'s
+seven-digit relative change is WITHDRAWN as a quoted figure.** `§58` recorded
+`gate.relative_change_from_L5s_last_rho = 3.191604063021496e-06` over `decades_added = 5.0`.
+Carrying `E5`'s measured factor `1.855293` onto that number gives `5.921361e-06` — **but that
+scaling is itself an argument, exactly the kind §10 warns against, because `E5` measured one band
+and the total is dominated by the first.** So the honest record is: **the relative change over the
+measured window is `O(1e-5)` or smaller, it is not `3.19e-06` to seven digits, and `c_mod` does not
+grow appreciably across the five decades directly measured.** That last clause is what `§53` asked
+and it still holds. **What does NOT hold is any reading beyond the measured window.**
+
+**(d) `§58`'s CEILING is unchanged and is now larger.** The unit's literal pre-committed rule
+returned **`UNDER-RESOURCED`** and the board still carries that. It now carries, in addition, an
+`s`-quadrature ceiling of order a factor of two on every increment magnitude in the unit's §7 table.
+
+### 5. The evidence tally, and a caveat of mine that turned out to be load-bearing
+
+The unit reports `recompute-from-primary` **5 run, 4 passed** (`E5` the failure) and
+`re-read-own-artefact` **3 of 3** — reported as two classes, never summed, per `§45`. Its own line:
+**"`N/N passed` is not evidence, and here it is not even true."** `X8` is additionally reported
+**weak as coded** — its fit window includes `ρ = 12.6` where `c_mod = 995.49`, pre-asymptotic by
+`L5`'s own account, so both models fit badly and the rms ratio is only `8.24`; the unit reports it as
+it ran and does not re-fit. This is the `§55` transient again, a third unit reaching it by a third
+route.
+
+I committed `experiments/p2_route_l5cmod_v1_evidence.py` in `add9751` marked **UNVERIFIED BY ME**
+because it timed out at my two-minute budget on a box loaded by `E-FE`, and I wrote that a successor
+must run it before citing it. **That caveat was load-bearing: running it fails.** The failing script
+is on `main`. It is left there, failing and labelled, rather than removed — `§3h`, and a check that
+fails is a measurement.
+
+### 6. The fix is PRICED, GATED and NOT DISPATCHED
+
+The unit pre-committed a gate before any of its numbers existed: re-run the ladder at
+`ρ0 ∈ {1e3, 1e4, 1e5, 1e6, 1e7}` with `n_s = 12`, same `RES`, fit the same slope. **~12 min on one
+core, ~0.2 core-h.** *Gate:* the decay-law reading survives iff the slope over the resolved bands is
+within `±0.15` of `−2`; if it returns near `0` the saturation reading is an `n_s = 6` artefact and
+`§53`'s flag is not discharged beyond the directly-measured band; **if it lands between, the unit is
+`UNDER-RESOURCED` at this `s`-resolution and that is the result.** Parked in `OPTIONS.md` §G as
+`P0-NS12`. **NOT DISPATCHED** — the run was stopped by user directive and the wind-down forbids new
+work, including repairs.
+
+**CONDUCT, recorded because it is the right precedent.** The unit did not run its own fix, and said
+why: *"I am not restarting a stopped run to improve my own result."* A stopped run is stopped for
+results that would flatter the unit as much as for results that would not. **That is the correct
+reading of the wind-down and it is adopted as the standing one.**
+
+**CEILING OF THIS SECTION.** No `L1 → L4` link moved; this section moves the record *backwards*, by
+withdrawing a word and six digits. No wall moved. `W4` clause (c) — the torus, statement (D) —
+remains **UNTESTED, NOT CLOSED**. `Tier 2`. Clay stays **~0.05%**.

@@ -88,9 +88,9 @@ measurement, verbatim: `reports/ORCH_STATE.md` Superseded LIVE blocks.
 | *retired under §3j* | **`T4`, `T5`, `T6`, `T1`, `T2`, `R0`, `R1`, `V-W2`, `E`, `L2′`, `V3`, and now `L5` + `V-W4` (`L5` VERIFIED by `V-W5` 2026-08-18) — LANDED and VERIFIED, so they leave this file.** Gate answers in their own words, SHAs and verifiers: `writeup/INDEX.md`, *Retired from `STATE.md`*. | — | **VERIFIED** |
 | **`plan_of_record.py` posture** | **Additive only**, 75 insertions / 0 deletions. **No ban lifted, narrowed, reworded or re-read**; `BANNED` byte-identical, `test_plan_of_record.py` **26 bans / 19 in force, ALL GATES PASS**. | `1ca9e91` | — |
 
-## WAVES 3 AND 4 — CLOSED. Detail retired 2026-08-18 under §3j.
+## WAVES 3 AND 4 — CLOSED. Detail retired 2026-08-18/19 under §3j → `WALLS_HISTORY.md` §STATE-WAVE34.
 
-**Detail retired 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE34.** The rule it produced is live in
+The rule it produced is live in
 **Standing discipline** below: COMMIT DURING THE RUN, NOT ONLY AT THE GATE.
 
 ## WAVE 5 — COMPLETE, LANDED, **VERIFIED** by `V-W5`. Retired 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE5.
@@ -123,6 +123,8 @@ measurement, verbatim: `reports/ORCH_STATE.md` Superseded LIVE blocks.
 
 ⚠ **`L5-cmod`'s literal pre-committed rule returned `UNDER-RESOURCED` and the board carries that.** `§53`'s flag is discharged **only** where directly measured: 5 more decades move `c_mod` by `3.19e-06` relative. The saturation claim rests on a **post-hoc discriminant** (slope `−1.9900`) with a **pre-planted** control (`X2` → `−3.65e-08`), and is recorded at that status, **not** as a `NO`. `c_mod` is **not route 4's number** — route 4 has no banked profile.
 
+⚠ **`L5-cmod`'s OWN EVIDENCE CHECK `E5` FAILED, and it reported AFTER `§58` was written** (`41b0ace`, §59). `n_s` `6→12` moves the per-decade increment `×1.855293`; control `X4` did not fire as planted. §58's word **CONTROLLED is WITHDRAWN** and its 7-digit `relative_change` withdrawn as a quoted figure — the discharge survives in direction and order of magnitude only; `c_mod` is defensible to `869.288`. Fix `~0.2 core-h`, gate pre-committed, parked `OPTIONS.md` §G `P0-NS12`, **NOT DISPATCHED**.
+
 ⚠ **`E-FE` (leg 408) WAS STILL IN FLIGHT AT THE STOP** — `[57/163]` attempts, 54 partials, branch `main`, last checkpoint `3176b35`. **NO gate answer, NOT citable.** Not stopped; the directive forbade `TaskStop`.
 
 **`L6-e` v2 was HELD FOR CORES and was never dispatched. It is priced and gated in `OPTIONS.md`, not in a brief.**
@@ -130,13 +132,10 @@ measurement, verbatim: `reports/ORCH_STATE.md` Superseded LIVE blocks.
 ## WAVE 7 — **CLOSED 2026-08-19 (`L6-b` landed); DISPATCHED: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` DISPATCHED 2026-08-19 (leg 408, 6 shards)** — condition discharged.
 **RETURNED — `V-W6` (407), `L6-b` (406), `L6` (401)**: rows retired VERBATIM → `WALLS_HISTORY.md` §STATE-W67-L6. Gate answers **stand** (`L6` `NO` `ρ=1.6138`; `L6-b` `NO` `ρ=1.5049`); their READINGS are superseded by `§51` (iteration cap dominates the ladder) and `§52`/`§53` (`J` divergent; the numbers are truncation values, the `NO`s survive on the sign).
 
-
 **RETURNED — `R-bank` (leg 404) and `R-prof` (leg 405)**: both **VERIFIED by `V-W7`**. Rows retired VERBATIM → `WALLS_HISTORY.md` §STATE-W7-RBANK-RPROF. `R-prof` gate (iii) `NO`, **4.34×** — and §50 item 6 rules that sentence **run-specific**: true of the banked JSON (`min 3.3722`), false on `V-W7`'s re-run (`2.89873`). ⚠ `R-bank`'s `--verify` **CANNOT FAIL** (0 `raise`/`assert`/`sys.exit`) — remedy owed.
 **DISPATCHED — `E-FE`** (leg 408). 160 attempts, **6 shards not 8**, on a measurement (12 cores, `L6-b` holding ~5, `R-prof`'s banked `MACHINE_WAS_NOT_QUIET`): **~15.2 h wall not ~11.4; ~91 core-h unchanged.** Inherits `R-bank` **C2** (the bank is the seed's *definition* on this CPU) and **C4** (144 non-originals untested by any solver).
 
-
 ## WAVE 6 — COMPLETE 2026-08-19. Retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE6. Audit + §3i: `writeup/waves/WAVE6_CLOSE.md`.
-
 
 **`V5` `dacc01c`** (leg 402) — both clauses **YES**, VERIFIED by `V-W6`. Row retired VERBATIM → `WALLS_HISTORY.md` §STATE-W6-V5; substance at `WALLS.md` W2/W3.
 

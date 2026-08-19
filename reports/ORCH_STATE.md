@@ -49,7 +49,7 @@ The four-slot contract it replaced is at `writeup/prompts/CONTINUATION_PROMPT_FO
 
 | unit | leg | state | where it stopped |
 |---|---|---|---|
-| `L5-cmod` | 413 | **RETURNED, INTEGRATED** `§58` | Sealed raw verdict `95f0bc6`, adjudicated `5077a0b`. Branch `main` (agent worktree). |
+| `L5-cmod` | 413 | **RETURNED, INTEGRATED** `§58`, **RE-INTEGRATED `§59`** | Sealed raw verdict `95f0bc6`, adjudicated `5077a0b`. Branch `main` (agent worktree).  **Journal §7–§12 landed AFTER the close-out, at `41b0ace`: its own check `E5` FAILED (`n_s` `6→12` ⇒ increment `×1.855293`) and `X4` did not fire as planted; §58's `CONTROLLED` and its 7-digit `relative_change` are WITHDRAWN in `§59`. Fix `~0.2 core-h`, gated, parked `OPTIONS.md` §G `P0-NS12`, NOT dispatched.** |
 | `P4-DRAFT` | 414 | **RETURNED, INTEGRATED** `§57` | Landed `7ce5bd0` + `33866c9`. Branch `main`. |
 | `P2-DRAFT` | 415 | **RETURNED, INTEGRATED** `§55` | Landed leg-415 commits. Branch `main`. |
 | `V-W8` | 416 | **RETURNED, INTEGRATED** `§56` | Landed `6f0a52a`. Branch `main`. |
