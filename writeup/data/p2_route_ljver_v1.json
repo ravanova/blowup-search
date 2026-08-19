@@ -1,0 +1,441 @@
+{
+ "unit": "L-JVER",
+ "leg": 409,
+ "lane": "L",
+ "tier": 2,
+ "arithmetic": "float64",
+ "object": "writeup/data/p2_route_l6_profile_v1.json banked_profile.A/.B, n_dof 6720",
+ "primary_quadrature": {
+  "rmin": 1e-06,
+  "rmax": 100000000.0,
+  "per_efold": 1,
+  "gl_order": 10,
+  "ng": 12,
+  "ns": 24
+ },
+ "controls": [
+  {
+   "check": "X1a_mine_curl_vs_closed_form",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "max_rel": 5.016179338437015e-11,
+   "tol": 1e-08
+  },
+  {
+   "check": "X1a_mine_L32_norm_vs_closed_form",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "value": 4.44538084089771,
+   "exact": 4.445380840864306,
+   "rel": 7.514204830200203e-12,
+   "tol": 1e-06
+  },
+  {
+   "check": "X1b_L6_V_vs_closed_form",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "max_rel": 5.521866803021011e-16,
+   "tol": 1e-10
+  },
+  {
+   "check": "X1b_L6_curl_vs_closed_form",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "max_rel": 4.440911183756396e-16,
+   "tol": 1e-10
+  },
+  {
+   "check": "X1b_L6_L32_norm_vs_closed_form",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "value": 4.445380840864294,
+   "exact": 4.445380840864306,
+   "rel": 2.7971726879949703e-15,
+   "tol": 1e-10
+  },
+  {
+   "check": "X2_banked_field_samples_150pts",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "max_rel": 1.1598641534895067e-14,
+   "n_points": 150,
+   "tol": 1e-10
+  },
+  {
+   "check": "X3_div_V_identically_zero",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "max_rel": 2.0773843920399604e-16,
+   "tol": 1e-12
+  },
+  {
+   "check": "X4_planted_defect_drop_a_2w_plus_ygradw",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "J_intact": 1.6139729156760465,
+   "J_defective": 0.3160408740645817,
+   "rel_shift": 0.8041845244148962,
+   "must_exceed": 0.01
+  },
+  {
+   "check": "X5_my_quadrature_self_convergence",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "J_primary": 1.6139729156760465,
+   "variants": {
+    "angular_x1.33": 1.6139735185906252,
+    "s_x1.67": 1.6139729585962534,
+    "radial_panels_x2": 1.6139731521248804,
+    "radial_order_x1.4": 1.6139732062883008,
+    "s_rule_gauss": 1.6139728686530173
+   },
+   "max_rel_spread": 3.735592913925793e-07,
+   "tol": 1e-05
+  },
+  {
+   "check": "X6_jets_vs_Cauchy_k0to2_core_r",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "per_column_all_k": {
+    "l2n4F": [
+     1.198726154167551e-15,
+     7.908175044318979e-16,
+     9.761167418750592e-14,
+     1.05643644200538e-11,
+     2.2278209905541688e-09,
+     6.456390991055285e-07,
+     0.000287140718407549
+    ],
+    "l3n11F": [
+     3.2973585874690517e-15,
+     2.6331257474620844e-15,
+     1.8644843199489376e-14,
+     1.9105684315991242e-13,
+     1.7833578875170687e-11,
+     1.2692932792818232e-09,
+     2.2301862436332349e-07
+    ],
+    "l1n7Q": [
+     2.3454744167854303e-15,
+     2.0736436513342837e-15,
+     4.588795702408157e-14,
+     1.5269743304374138e-12,
+     2.1503844803495034e-10,
+     3.558590164967581e-08,
+     9.860917019170752e-06
+    ]
+   },
+   "max_rel_k_le_2": 9.761167418750592e-14,
+   "tol": 1e-06,
+   "r_window": [
+    0.01,
+    1000.0
+   ],
+   "measured_fact": "float64 Cauchy degrades as k!/rho^k and by Chebyshev growth off the real axis; it is unusable for k >= 3 and unusable at r outside [1e-2, 1e3].  This is a limit of the CROSS-CHECK, not of the jets: X6b settles all k at 40 decimal digits."
+  },
+  {
+   "check": "X6b_jets_vs_mpmath_40dps_all_k",
+   "evidence_class": "recompute-from-primary",
+   "passed": 1.0,
+   "max_rel": 1.6840009470022865e-14,
+   "n": 56,
+   "tol": 1e-10
+  },
+  {
+   "check": "X7_pointwise_W_on_L6_own_grid",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "max_rel_all": 1.7529978815718713e-10,
+   "max_rel_core_r_1em2_to_1e3": 7.548603990169513e-13,
+   "n_points": 580608,
+   "tol": 1e-09
+  },
+  {
+   "check": "X7b_my_W_with_L6_quadrature_vs_J_L6",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "J": 1.6138112319954148,
+   "J_L6": 1.613811231995397,
+   "rel": 1.1007215739872338e-14,
+   "tol": 1e-09
+  },
+  {
+   "check": "X8_column_scaling_sigma_mine_vs_L6",
+   "evidence_class": "recompute-from-primary",
+   "passed": true,
+   "max_rel_F": 5.764505644925717e-12,
+   "max_rel_Q": 8.282188778521934e-13,
+   "tol": 1e-10
+  }
+ ],
+ "controls_all_fired": true,
+ "gate_points": [
+  {
+   "point": "P1",
+   "what": "banked branch B, n_dof 6720 (a minimiser)",
+   "J_new": 1.6139729156760465,
+   "J_L6": 1.613811231995397,
+   "rel_diff": 0.00010018748007447623,
+   "below_1e_3": true
+  },
+  {
+   "point": "P2",
+   "what": "banked branch A, n_dof 6720 (a minimiser)",
+   "J_new": 7.582440061997399,
+   "J_L6": 7.583387202236438,
+   "rel_diff": 0.00012489672672387814,
+   "below_1e_3": true
+  },
+  {
+   "point": "P3",
+   "what": "J0 index box of banked B held in the 6720 space -- NOT a minimiser",
+   "J_new": 21.092039733038114,
+   "J_L6": 14.760889255587662,
+   "rel_diff": 0.42891389318254153,
+   "below_1e_3": false
+  },
+  {
+   "point": "P4",
+   "what": "pseudo-random vector, seed 409 -- NOT a minimiser (extra, beyond the gate)",
+   "J_new": 12855.554353426442,
+   "J_L6": 7222.5038047964445,
+   "rel_diff": 0.7799304369890542,
+   "below_1e_3": false
+  }
+ ],
+ "gate": {
+  "question": "Evaluate the independently built J at L6's banked coefficient vector for branch B at n_dof = 6720, at branch A, and at a third point that is NOT a minimiser.  Is |J_new - J_L6| / J_L6 below 1e-3 at ALL THREE -- YES or NO?",
+  "answer": "NO",
+  "rel_diffs": {
+   "P1": 0.00010018748007447623,
+   "P2": 0.00012489672672387814,
+   "P3": 0.42891389318254153
+  },
+  "controls_all_fired": true
+ },
+ "five_rung_table": [
+  {
+   "rung": "J0",
+   "Lmax": 2,
+   "Nr": 8,
+   "Ks": 1,
+   "n_dof": 384,
+   "J_new": 21.092039733038114,
+   "J_L6": 12.720909774916645,
+   "rel_diff": 0.6580606345174963
+  },
+  {
+   "rung": "J1",
+   "Lmax": 2,
+   "Nr": 12,
+   "Ks": 1,
+   "n_dof": 576,
+   "J_new": 6.086656281760743,
+   "J_L6": 4.2708945286156785,
+   "rel_diff": 0.42514787967231915
+  },
+  {
+   "rung": "J2",
+   "Lmax": 3,
+   "Nr": 12,
+   "Ks": 2,
+   "n_dof": 1800,
+   "J_new": 6.082963950066015,
+   "J_L6": 4.265302371611489,
+   "rel_diff": 0.4261506969710539
+  },
+  {
+   "rung": "J3",
+   "Lmax": 3,
+   "Nr": 16,
+   "Ks": 2,
+   "n_dof": 2400,
+   "J_new": 1.7496641430275979,
+   "J_L6": 1.6916173592946462,
+   "rel_diff": 0.03431436986267122
+  },
+  {
+   "rung": "J4",
+   "Lmax": 4,
+   "Nr": 20,
+   "Ks": 3,
+   "n_dof": 6720,
+   "J_new": 1.6139729156760465,
+   "J_L6": 1.613811231995397,
+   "rel_diff": 0.00010018748007447623
+  }
+ ],
+ "cutoff_sensitivity": [
+  {
+   "r_max": 1000.0,
+   "r_min": 1e-06,
+   "J": 1.6038780729033664
+  },
+  {
+   "r_max": 10000.0,
+   "r_min": 1e-06,
+   "J": 1.6134514480499347
+  },
+  {
+   "r_max": 100000.0,
+   "r_min": 1e-06,
+   "J": 1.6137830343678954
+  },
+  {
+   "r_max": 1000000.0,
+   "r_min": 1e-06,
+   "J": 1.613848401215308
+  },
+  {
+   "r_max": 100000000.0,
+   "r_min": 1e-06,
+   "J": 1.6139729156760465
+  },
+  {
+   "r_max": 100000000000.0,
+   "r_min": 1e-06,
+   "J": 1.6141602831540638
+  },
+  {
+   "r_max": 100000000000000.0,
+   "r_min": 1e-06,
+   "J": 1.6143466387029002
+  },
+  {
+   "r_max": 100000000.0,
+   "r_min": 0.01,
+   "J": 1.6136183694492314
+  },
+  {
+   "r_max": 100000000.0,
+   "r_min": 0.0001,
+   "J": 1.6139650436092778
+  },
+  {
+   "r_max": 100000000.0,
+   "r_min": 1e-08,
+   "J": 1.6139812924900148
+  }
+ ],
+ "integrand_mass_per_decade_of_r": {
+  "-6": 7.691606785632189e-06,
+  "-5": 7.18676685334055e-06,
+  "-4": 2.1127292920452677e-05,
+  "-3": 0.0005833733884826772,
+  "-2": 0.024583168018022534,
+  "-1": 0.03182269724590893,
+  "0": 0.18677512142885788,
+  "1": 1.3021731325861396,
+  "2": 0.42642436309962345,
+  "3": 0.01976206104459783,
+  "4": 0.0005801908462406589,
+  "5": 0.00012746393864914332,
+  "6": 0.00010827673634846669,
+  "7": 0.00011862012106049747
+ },
+ "X9_operator_vs_rule": {
+  "class": "recompute-from-primary",
+  "what": "this unit's INDEPENDENT operator W[V], evaluated on L6's own quadrature points and contracted with L6's own quadrature weights",
+  "rows": [
+   {
+    "point": "P1",
+    "J_my_operator_L6_quadrature": 1.6138112319954148,
+    "J_L6": 1.613811231995397,
+    "rel": 1.1007215739872338e-14
+   },
+   {
+    "point": "P2",
+    "J_my_operator_L6_quadrature": 7.58338720223642,
+    "J_L6": 7.583387202236438,
+    "rel": 2.4595535367364584e-15
+   },
+   {
+    "point": "P3",
+    "J_my_operator_L6_quadrature": 14.760889255587749,
+    "J_L6": 14.760889255587662,
+    "rel": 5.896764322492505e-15
+   },
+   {
+    "point": "P4",
+    "J_my_operator_L6_quadrature": 7222.503804796579,
+    "J_L6": 7222.5038047964445,
+    "rel": 1.8636918650427355e-14
+   }
+  ],
+  "reading": "If these reproduce J_L6 while the gate fails, then the OPERATOR as coded in L6 is right and the whole disagreement is the QUADRATURE RULE -- i.e. it is a property of the integral, not of either program."
+ },
+ "mass_fraction_per_decade_by_point": {
+  "P1": {
+   "-6": 3.859128047116946e-06,
+   "-5": 3.6058335149977837e-06,
+   "-4": 1.0600246598835053e-05,
+   "-3": 0.00029269730866125,
+   "-2": 0.012334170977454817,
+   "-1": 0.015966477083306143,
+   "0": 0.09371112300699024,
+   "1": 0.6533424027281798,
+   "2": 0.21395090329965175,
+   "3": 0.009915265583844635,
+   "4": 0.0002911005242221066,
+   "5": 6.395278312403648e-05,
+   "6": 5.432594277611794e-05,
+   "7": 5.951555362815499e-05
+  },
+  "P3": {
+   "-6": 0.1985488340463889,
+   "-5": 0.18128912110522843,
+   "-4": 0.20187197377192223,
+   "-3": 0.18479705902324003,
+   "-2": 0.10517027102082051,
+   "-1": 0.063559008912663,
+   "0": 0.021504438909315388,
+   "1": 0.01997735527220633,
+   "2": 0.004456896333502966,
+   "3": 0.003554359836770903,
+   "4": 0.003679215631645359,
+   "5": 0.004019531946949721,
+   "6": 0.003613709523817027,
+   "7": 0.003958224665529174
+  },
+  "P4": {
+   "-6": 0.0028308126091855868,
+   "-5": 0.0025846658947681136,
+   "-4": 0.002870104688203389,
+   "-3": 0.002160709442619508,
+   "-2": 0.0014583819540039266,
+   "-1": 0.004647822295139959,
+   "0": 0.02594287904206705,
+   "1": 0.0814821529588525,
+   "2": 0.0829491370979946,
+   "3": 0.13880060334381772,
+   "4": 0.15644003520048919,
+   "5": 0.17251759329088207,
+   "6": 0.15524927330181396,
+   "7": 0.17006582888016233
+  }
+ },
+ "divergence_diagnosis": {
+  "claim": "J(c) = int_0^{T_s} ||W(.,s)||_{L3/2(R^3)} ds is a DIVERGENT integral for generic c in this trial space.  It is logarithmically divergent at r -> infinity, and also at r -> 0 whenever the l = 1 poloidal content is not tuned away.  Every finite value in the record is a value of a particular 72-node truncation, not a value of the functional.",
+  "why_infinity": "F_lm(r, s) -> F_lm(inf, s) finite (the alpha = 1 branch), so w ~ A(yhat, s)/r^2.  The DSS term a(2w + y.grad w) annihilates a degree -2 homogeneous w exactly, and Lap w and the two nonlinear terms are O(r^-4); but w_s ~ d_s A(yhat, s)/r^2 SURVIVES.  Then |W|^{3/2} r^2 ~ 1/r and int dr/r diverges.  Branch B's own normalisation forces sum_lm F_lm(inf, s)^2 to average 1, and the k > 0 s-modes make d_s A nonzero, so branch B cannot escape it.",
+  "why_origin": "the radial basis u^l T_n(2u-1) has a NONZERO r^{l+1} Taylor coefficient at r = 0 (u = r/2 - r^2/4 + ...), and Lap^2 applied to r^{l+1} Y_lm gives -4 l (l+1) r^{l-3} Y_lm.  At l = 1 that is r^-2, so Lap w ~ r^-2, |W|^{3/2} r^2 ~ 1/r, and int_0 dr/r diverges.",
+  "evidence": "mass_fraction_per_decade_by_point above: at P3 the fractions over the decades 1e-6..1e-3 are flat (0.199, 0.181, 0.202, 0.185) and at P4 the fractions over 1e3..1e7 are flat (0.139, 0.156, 0.173, 0.155, 0.170).  A flat mass per decade IS a logarithmic divergence.",
+  "L6_grid_reach": {
+   "r_min": 0.0005502168747104923,
+   "r_max": 7269.860638324989,
+   "nq_r": 72
+  },
+  "what_this_does_NOT_say": [
+   "it does NOT say either program is miscoded -- X7, X7b and X9 say the opposite",
+   "it does NOT say the minimum of the truncated functional is wrong as a number",
+   "it does NOT move any L1->L4 link, in either direction",
+   "it does NOT say a blow-up profile does or does not exist"
+  ]
+ },
+ "cost": {
+  "wall_seconds": 501.3230469226837,
+  "cores_used": "<= 6 of 12 (sibling E-FE holds 6 until ~03:20 20-Aug)",
+  "MACHINE_WAS_NOT_QUIET": true,
+  "note": "R-prof's banked MACHINE_WAS_NOT_QUIET applies to every timing here"
+ },
+ "self_hash": "4bb618d7c8b039ea"
+}

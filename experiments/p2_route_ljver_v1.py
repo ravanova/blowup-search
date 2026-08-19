@@ -285,6 +285,35 @@ def column_sigma(Lmax, Nr, rmax=48.0, npanel=240, order=16):
     return sF, sQ
 
 
+def cauchy_derivs(r, l, n, toroidal, sigma, K, M=64, frac=0.35):
+    """G^{(k)}(r) for one basis column by CAUCHY'S INTEGRAL FORMULA on a complex circle.
+
+    G(z) = T_n(2u-1) (z+L)^{-l}  (poloidal) or  L T_n(2u-1) (z+L)^{-l-1}  (toroidal), which
+    is analytic everywhere except z = -L, so a circle of radius frac*r about r stays inside
+    the domain of analyticity and G^{(k)} = k! c_k with c_k the k-th Fourier coefficient.
+
+    This is the SECOND radial-derivative mechanism of this unit; the primary is the jet
+    arithmetic in `Space.radial_G`.  Their agreement is control X6.
+    """
+    r = np.asarray(r, float)
+    th = 2.0 * math.pi * np.arange(M) / M
+    rho = frac * r
+    z = r[:, None] + rho[:, None] * np.exp(1j * th)[None, :]
+    u = z / (z + LMAP)
+    zz = 2.0 * u - 1.0
+    T = np.ones_like(zz)
+    if n >= 1:
+        Tm1, T = T, zz
+        for _ in range(2, n + 1):
+            Tm1, T = T, 2.0 * zz * T - Tm1
+    if toroidal:
+        G = LMAP * T * (z + LMAP) ** (-l - 1) / sigma
+    else:
+        G = T * (z + LMAP) ** (-l) / sigma
+    c = np.fft.fft(G, axis=1) / M
+    return np.stack([math.factorial(k) * c[:, k].real / rho ** k for k in range(K + 1)])
+
+
 # ---------------------------------------------------------------------------------------
 # 4.  Symbolic term algebra.  Term key = (mono, p, k, gen); value = coeff.
 #     Meaning:  coeff * y^mono * r^p * G^{gen,(k)}(r, s)
@@ -490,6 +519,43 @@ class Space:
                 out[0, h] += dF[:, None, :] * cF[None, :, None]
                 out[1, h] += dQ[:, None, :] * cQ[None, :, None]
         return out
+
+    # -- rebuild the same trial space on a FOREIGN grid ---------------------------------
+    def regrid(self, r, dirs, wa, s, ws):
+        """The same trial space and the same operator, evaluated on someone else's grid.
+
+        Used only by the evidence script, to put this unit's `W` and `L6`'s `W` on a COMMON
+        set of points so the two can be differenced pointwise.  The symbolic operator, the
+        polynomials and the column scaling are shared unchanged; only the grid moves.
+        """
+        o = Space.__new__(Space)
+        o.__dict__.update(self.__dict__)
+        o.r = np.asarray(r, float)
+        o.nr = o.r.size
+        o.wr = np.zeros(o.nr)
+        o.wv = np.zeros(o.nr)
+        o.dirs = np.asarray(dirs, float)
+        o.wa = np.asarray(wa, float)
+        o.nang = o.dirs.shape[0]
+        o.s = np.asarray(s, float)
+        o.ws = np.asarray(ws, float)
+        o.ns = o.s.size
+        S = np.zeros((self.nK, o.ns))
+        Sd = np.zeros((self.nK, o.ns))
+        S[0] = 1.0
+        for j in range(1, self.Ks + 1):
+            S[2 * j - 1] = np.cos(j * OMEGA_S * o.s)
+            Sd[2 * j - 1] = -j * OMEGA_S * np.sin(j * OMEGA_S * o.s)
+            S[2 * j] = np.sin(j * OMEGA_S * o.s)
+            Sd[2 * j] = j * OMEGA_S * np.cos(j * OMEGA_S * o.s)
+        o.S, o.Sd = S, Sd
+        rj = Jet.var(o.r, self.kmax)
+        uden = rj + LMAP
+        zj = 2.0 * (rj * uden.recip()) - Jet.const(1.0, self.kmax, o.nr)
+        o._T = cheb_jets(zj, self.Nr)
+        o._pw = {l: uden.ipow(-l) for l in range(1, self.Lmax + 2)}
+        o._mon_cache = {}
+        return o
 
     # -- angular evaluation of a collected monomial polynomial ---------------------------
     def _mon(self, mono):

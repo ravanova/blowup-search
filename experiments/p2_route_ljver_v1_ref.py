@@ -74,17 +74,19 @@ def control_X1_l6(g):
     Q1 = C * e * (1.0 - r ** 2)
     Q2 = C * e * r * (r ** 2 - 3.0)
     Q3 = C * e * (3.0 + r ** 2 * (-6.0 + r ** 2))
-    F = [np.zeros((nH, nq, ns)) for _ in range(5)]
-    Q = [np.zeros((nH, nq, ns)) for _ in range(4)]
+    Fa = [np.zeros((nH, nq, ns)) for _ in range(5)]
+    Qa = [np.zeros((nH, nq, ns)) for _ in range(4)]
     for k, arr in enumerate((Q0, Q1, Q2, Q3)):
-        Q[k][h10, :, :] = arr[:, None]
+        Qa[k][h10, :, :] = arr[:, None]
+    F = [L6.Var(a) for a in Fa]
+    Q = [L6.Var(a) for a in Qa]
 
     Vc, _ = L6._vsh_V(g, F, Q)
     wc, _ = L6._vsh_w(g, F, Q)
-    V = L6._synth(g, Vc)                          # (nq_r, ns, nP, 3)
-    W = L6._synth(g, wc)
+    V = L6._synth(g, Vc).v                        # (nq_r, ns, nP, 3)
+    W = L6._synth(g, wc).v
 
-    y = g.r[:, None, None] * g.er[None, None, :, :]     # (nq_r, 1, nP, 3)
+    y = g.r[:, None, None, None] * g.er[None, None, :, :]   # (nq_r, 1, nP, 3)
     ey = np.exp(-(y ** 2).sum(axis=-1) / 2.0)
     V_closed = np.stack([-ey * y[..., 1], ey * y[..., 0], np.zeros_like(ey)], axis=-1)
     curl_closed = np.stack([ey * y[..., 0] * y[..., 2],
