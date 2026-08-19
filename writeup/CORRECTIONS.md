@@ -3562,3 +3562,104 @@ strict inequality. Replaced:
 > Report both numbers whatever they say; if they straddle the threshold, that is itself the result
 > and the ladder is undecidable at this reach. **Also report the far-field increment per decade at
 > the new iterate**, to test whether the raised budget changes the divergence coefficient.
+
+---
+
+## §54 — `L-JVER`'s "evidence script" IS the experiment: it re-runs everything and OVERWRITES the artefact it is supposed to check, so it cannot disagree with it. This REVERSES the evidence I recorded under §49.
+
+**Raised 2026-08-19 by the Conductor, at the wind-down, from a re-run I launched myself.** Not by a
+unit, not by a verifier — by running `experiments/p2_route_ljver_v1_evidence.py` and reading its
+last line.
+
+### 1. What happened
+
+The re-run of `L-JVER`'s suite (relaunched after `§53` recorded my own `timeout 900` killing it at
+exit 143) completed with **exit 0, 14 checks, 0 failures**. Its final line reads:
+
+> `wrote /home/andy/projects/Unsolved/writeup/data/p2_route_ljver_v1.json self_hash 5b949a5c6b28fc72`
+
+**The evidence script wrote the artefact.** `experiments/p2_route_ljver_v1_evidence.py` lines
+374–377 build `res`, hash it, and `OUT.write_text(...)` over
+`writeup/data/p2_route_ljver_v1.json`. A separate `experiments/p2_route_ljver_v1.py` exists, so this
+is not a naming accident of a single-file unit: the unit has an experiment file **and** an
+"evidence" file, and the evidence file re-runs the experiment.
+
+### 2. Why that is a defect and not a detail
+
+`ORCHESTRATION.md` line 717, §6 clause 3, requires an evidence script to rebuild the figures and
+claims **from the curated JSON without re-running anything.** This one re-runs everything.
+
+The consequence is structural, and it is worse than the violation:
+
+> **An evidence script that regenerates the artefact it checks CANNOT FAIL THE CHECK.** It never
+> compares two things. It computes a number and then compares that number to itself, freshly
+> written. A drift between the banked artefact and the code that produced it — exactly the failure
+> §6 clause 3 exists to catch — is **invisible by construction**, and no count of passing checks
+> can make it visible. This is `§45`'s blind spot in its purest form: not an error *shared* between
+> artefact and checker, but an artefact that **is** the checker's output.
+
+### 3. THE CORRECTION TO MY OWN RECORD — this is the part that matters
+
+`§49` is an open user decision, and I recorded the evidence for it as follows: *`L-JVER`'s suite is
+the first in the record that is 12/12 `recompute-from-primary`, evidence the clause can be met.*
+
+**That sentence is FALSE as an argument, and it points the wrong way.** The suite is
+`recompute-from-primary` on every check **because it recomputes everything from scratch** — which
+is not a demonstration that §6 clause 3 can be satisfied. It is a demonstration that **this unit
+did not attempt §6 clause 3 at all.** The two properties are not the same property:
+
+| | `recompute-from-primary` (`§45`) | §6 clause 3 |
+|---|---|---|
+| asks | is the number re-derived, not re-read? | is the claim rebuilt **from the banked JSON, without re-running**? |
+| `L-JVER`'s suite | **satisfied — 12/12** | **VIOLATED — 0/14** |
+
+**These two rules pull in opposite directions and the record has been treating them as one rule.**
+`PB2`'s suite is the mirror image: `0/31 recompute-from-primary` (recorded at `§49`) and fully
+compliant with clause 3. **No suite in the record satisfies both, and no instrument in the record
+checks whether a suite is one, the other, or neither.** That is the finding, and it belongs on the
+user's desk beside `§49` rather than inside it.
+
+### 4. The genuinely good result, which must not be lost in the defect
+
+The re-run executed on a **differently loaded machine** (`wall_seconds` `501.32` banked against
+`1259.17` re-run — a **2.51×** slowdown; load ≈27 on 12 cores with `E-FE` live) and reproduced
+**every scientific field bit-identically**. Diffed at the top level, **15 of 17 fields are
+byte-identical**; the two that differ are `cost` and `self_hash`. `gate`, `X9_operator_vs_rule`,
+`cutoff_sensitivity`, `divergence_diagnosis`, `five_rung_table` and `L6_grid_reach` — **every field
+`§52` and `§53` cite — are unchanged.** `§52`'s and `§53`'s findings are reproducible and they
+stand.
+
+### 5. A second, smaller defect found in the same line
+
+**`self_hash` covers `wall_seconds`.** `res["cost"]` is written into `res` **before**
+`json.dumps(res, sort_keys=True)` is hashed, so the hash of a run includes how long the run took.
+Two executions with **bit-identical mathematics therefore produce different `self_hash` values** —
+`4bb618d7c8b039ea` against `5b949a5c6b28fc72`, differing in nothing but a timing field. A
+`self_hash` in this repository consequently certifies **nothing about content**, and cannot be used
+to detect drift, tampering, or a silent change to a banked number. **Wherever a `self_hash` is
+cited as evidence that an artefact is unchanged, that citation is void.**
+
+### 6. What I did with the overwritten file
+
+The artefact was **restored to the banked version** (`self_hash 4bb618d7c8b039ea`) rather than left
+as the re-run wrote it, because `§53` and `writeup/waves/WAVE8_CLOSE.md` cite it and a silent
+substitution would change a cited artefact underneath its citations. **W3 ruling Q3 binds: a banked
+datum gets a correction record BESIDE it, never an edit.** This section is that record. The re-run's
+output is preserved outside the repository and is reproducible by re-running the script — which is,
+after all, the one thing this script is guaranteed to do.
+
+### 7. The rules this establishes
+
+> **An evidence script that writes the artefact it checks is not an evidence script. Before
+> reporting `N/N passed`, check whether the script has an output path at all — if it can write the
+> file it reads, the passes measure nothing.**
+
+> **`recompute-from-primary` and "rebuilt from the banked JSON without re-running" are DIFFERENT
+> AND PARTLY OPPOSED requirements. A suite that satisfies one is not thereby closer to satisfying
+> the other, and a unit that reports only one class label has not told you which rule it broke.**
+
+> **A content hash that covers a timing field is not a content hash. Hash the claims, not the run.**
+
+**CEILING.** No `L1 → L4` link moved in either direction. `§52` and `§53` are **unaffected and now
+independently reproduced**. Nothing here is a retraction of a result, and none of it is progress
+toward Clay. Clay stays **~0.05%**.
