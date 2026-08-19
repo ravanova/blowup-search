@@ -1,0 +1,56 @@
+{
+ "control": "C-PRED",
+ "detail": [
+  {
+   "ok": true,
+   "returned": "UPO37",
+   "row": "UPO37"
+  },
+  {
+   "ok": true,
+   "returned": "UPO35",
+   "row": "UPO35"
+  },
+  {
+   "ok": true,
+   "returned": "UPO34",
+   "row": "UPO34"
+  },
+  {
+   "ok": true,
+   "returned": "UPO32",
+   "row": "UPO32"
+  },
+  {
+   "ok": true,
+   "returned": "UPO22",
+   "row": "UPO22"
+  },
+  {
+   "ok": true,
+   "returned": "UPO20",
+   "row": "UPO20"
+  },
+  {
+   "ok": true,
+   "returned": "UPO17",
+   "row": "UPO17"
+  },
+  {
+   "ok": true,
+   "returned": "UPO9",
+   "row": "UPO9"
+  }
+ ],
+ "fired_as_planted": true,
+ "n_negative_ok": 8,
+ "n_positive_ok": 8,
+ "n_rows": 8,
+ "nonsense_T_s": [
+  3.0,
+  2.9
+ ],
+ "nonsense_ok": true,
+ "nonsense_returned": null,
+ "role": "POSITIVE + NEGATIVE, free -- MUST FIRE BOTH"
+}
