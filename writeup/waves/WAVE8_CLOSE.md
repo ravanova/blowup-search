@@ -258,7 +258,14 @@ integration existed.
   `L1_t` all absent from `writeup/data/p2_route_pb2_v1.json`.
 
 **Recorded as in flight, not as verified:** my re-run of `p2_route_ljver_v1_evidence.py` was still
-executing when this was committed. It is not cited as evidence here. The unit reports 12/12
+executing when this was committed. It is not cited as evidence here.
+
+**UPDATE, same day.** That re-run **did not complete**: it was killed by my own `timeout 900` at
+SIGTERM (exit 143), against a unit-reported cost of 501 s on a quieter machine — `E-FE`'s shards are
+holding cores. **This is a timeout of mine, not a check failure, and it is evidence of nothing in
+either direction.** Re-launched without a timeout. Until it returns, every §53 claim rests on the
+banked JSON fields I read directly, which is where they were derived from in the first place — no
+§53 finding depends on the evidence suite passing. The unit reports 12/12
 `recompute-from-primary`, 0 `re-read-own-artefact` — the first suite in this record to be entirely
 of the class §45 says we lack.
 
