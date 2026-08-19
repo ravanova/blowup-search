@@ -1,0 +1,17 @@
+{
+ "T_converged": 20.703017592978334,
+ "T_seeded": 19.334,
+ "control": "N",
+ "converged_to_tol": false,
+ "final_residual": 51.46443049790665,
+ "guards": "the matching predicate firing spuriously, which would turn a `no` into a false `yes`",
+ "matched_row": null,
+ "n_epochs": 51,
+ "planted": "a phase-scrambled field: the amplitude spectrum of a real candidate (so energy and enstrophy are a genuine turbulent state's, by Parseval) with random phases, so it lies near no orbit; seeded with a period from the Table IV anchor band",
+ "reason": "max_newton_hit",
+ "recovered": false,
+ "role": "NEGATIVE -- MUST FAIL",
+ "s_converged": 1.6353027512202627,
+ "s_seeded": 0.375,
+ "wall_seconds": 9643.409853458405
+}
