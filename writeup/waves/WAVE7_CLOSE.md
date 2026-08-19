@@ -278,3 +278,50 @@ No `L1→L4` link moved. **No wall moved** — and I am not writing an entry int
 ### Dispatch record — `E-FE`, leg 408, 6 shards
 
 Launched immediately on the discharged condition. Not a re-decision: the shard count is **6, not the price sheet's 8**, decided on a measurement (12 cores; `L6-b` holding ~5; `R-prof`'s banked `MACHINE_WAS_NOT_QUIET = true` with a positive control that failed at 7.15× against an expected ~4×). **Consequence stated up front: ~15.2 h wall instead of ~11.4; core-hours unchanged at ~91.** The brief carries `R-bank`'s C2 and C4 as inherited ceilings, the row-major draw order as a **declared choice** so the null names its own realization (lesson 91), the tracked-partials requirement from the 2026-08-14 loss, and the `self_hash` fixed-point lesson learned above.
+
+---
+
+## CONDUCTOR MEASUREMENT 2026-08-19 02:35 — WHAT `E-FE` COST `L6-b`, MEASURED FROM THE OUTSIDE
+
+My `E-FE` brief (staged, now consumed) told the unit to report *"shards used, wall clock, core-hours,
+and the load average at start and end."* That instruction has a hole in it which I am recording rather
+than repairing after the fact: **a unit can report the load it ran under, but it cannot report the cost
+it imposed on the job it was sharing the box with.** Only the CONDUCTOR is positioned to see that, and
+only while both are still running. So I measured it.
+
+Source: `experiments/route4/l6b_ckpt/banked_J4_minimiser.json`, field
+`trajectory_k_sec_J_ginf_gscaled` — `L6-b`'s own in-run checkpoint, written by the running job, read by
+me without touching it. Rate over rolling 250-iteration windows, wall-clock stamped from the checkpoint
+mtime minus its `seconds` field:
+
+| iterations | wall | rate |
+|---|---|---|
+| 3,800 – 4,050 | 02:10 | 0.988 it/s |
+| 4,050 – 4,300 | 02:13 | 1.143 it/s |
+| 4,300 – 4,550 | 02:17 | 1.121 it/s |
+| 4,550 – 4,800 | 02:21 | **1.178 it/s** |
+| 4,800 – 5,050 | 02:26 | **0.712 it/s** |
+| 5,050 – 5,300 | 02:32 | 0.701 it/s |
+
+**The break is between 02:21 and 02:26, and it is a 40% loss of throughput** (1.178 → 0.701 it/s).
+`E-FE`'s six shards came up in that window. `uptime` at 02:31 read `16.94` on a 12-core box.
+
+**Three things this fixes in the record, and one it does not.**
+
+1. **The schedule.** `L6-b` was projected to return ~07:15 at its then-current 0.905 it/s. At 0.701 it/s
+   the remaining 14,700 iterations take **5.8 h**, so the honest projection is **~08:20**, and it stays
+   contended for `E-FE`'s whole ~15 h rather than recovering. **This is a projection, not a measurement,
+   and it is conditional on `E-FE` holding six shards** — which my brief forbade it from changing.
+2. **My own price sheet, corrected by a measurement.** I priced the box at ~11 of 12 busy with six
+   shards. It ran at ~17. I have already recorded that `L6-b` holds 6 cores and not the ~5 I assumed;
+   this is the *other half* of the same error, and it lands on the throughput of the job I under-counted.
+3. **A defect in the brief wording, stated as a defect.** *"Report the load average at start and end"*
+   is a self-report of the weather, not of the unit's own footprint. **A concurrency brief should ask
+   for the delta it imposes on a named co-tenant, not the ambient load** — and where no co-tenant exists
+   to measure, it should say so. Carried to `CORRECTIONS.md` as a brief-wording defect, not a result.
+
+**What this does NOT license.** It is not a reason to lower `E-FE`'s shard count mid-run — that was
+pre-committed against, and a changing shard count destroys the per-attempt cost figure the ensemble
+owes the record. It is not a reason to touch `L6-b`. And **it says nothing whatever about either unit's
+gate**: it is a fact about this machine on this night, not about Route 4, W4, or the field ensemble.
+`E-FE`'s own start/end load figures stay in its artefact unedited; this sits BESIDE them (W3 ruling Q3).

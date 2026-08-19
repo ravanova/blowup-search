@@ -147,12 +147,10 @@ by Rmk 1.2 + ESŠ. **Any `α > 1` puts `U ∈ L³(ℝ³)` and yields full regula
 `α > 1.5` bill **destroys the object it is for.** `λ = 1.7` defeats the λ-near-1 hypotheses of
 Chae–Wolf Thm 1.3 and Pineau–Vicol Thms 1.6/1.7, but **Rmk 1.2's `L³` clause carries no λ restriction.**
 
-**⚠ `V-W4` CORRECTED THE `≤ 1` PROVENANCE; THE DIRECTION HOLDS and (a) STAYS SHUT** — not
-through the **global** Leray–Hopf ESŠ theorem (this object's global energy is measured
-**infinite**) but through the **local** suitable-weak form (Seregin, `arXiv:math/0510396` §1),
-whose `m_T` separates the cases **exactly at the pin**. **ESŠ is `UNREACHABLE` at primary: the
-pin rests on secondaries.** Four citation defects, verbatim → `WALLS_HISTORY.md` §W4-PROV;
-register `writeup/CORRECTIONS.md` §33; detail `experiments/journal/verify_wave4.md`.
+**⚠ `V-W4` CORRECTED THE `≤ 1` PROVENANCE; THE DIRECTION HOLDS and (a) STAYS SHUT** — through the
+**local** suitable-weak ESŠ form (Seregin `arXiv:math/0510396` §1), not the global Leray–Hopf one.
+**ESŠ is `UNREACHABLE` at primary: the pin rests on SECONDARIES** — which is `PB2`'s subject.
+Paragraph + 4 citation defects verbatim → `WALLS_HISTORY.md` §W4-PROV, §W4-PROV2; `CORRECTIONS.md` §33.
 
 **(b) SHUT, ✅ VERIFIED by `V-W5` (leg 403) — an ENDPOINT not a gap. Five items
 reproduce; `C6`'s tolerance was NEVER moved (`347676f`). ⚠ **Arithmetic, not science**, and the
@@ -430,8 +428,5 @@ not dropped because the ambition went up.
 
 # History — retracted and superseded text, kept struck rather than deleted
 
-**MOVED 2026-08-18 to `WALLS_HISTORY.md`, struck text intact and byte-for-byte.** WALLS.md's §3j cap
-is 32 KB and the named remedy — *retracted text stays struck but moves to a `## History` section at
-the foot* — had stopped buying headroom once the section itself grew to ~2.9 KB. The remedy is
-extended one step rather than abandoned: **nothing is deleted, nothing is unstruck**, and every
-`## History` pointer in this file now resolves to `WALLS_HISTORY.md`. Flagged, not silent.
+**MOVED 2026-08-18 to `WALLS_HISTORY.md`, struck text intact and byte-for-byte** — nothing deleted,
+nothing unstruck; every `## History` pointer here resolves there. Rationale verbatim: §HIST-NOTE.

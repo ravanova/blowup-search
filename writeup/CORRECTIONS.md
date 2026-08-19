@@ -2643,3 +2643,41 @@ So **`1.2 GB` is the size of the archive `U2` deliberately did not write.** The 
 **The rule applied, and why it differs by file.** A **banked datum gets a correction beside it, never an edit** (W3 ruling Q3) — so the `.gitignore` line, the two JSON artefacts, the two scripts and the retired ORCH block stand verbatim with `R-bank`'s correction record appended in `.gitignore`. A **committed pre-dispatch record** is the same kind of object: `WAVE7_PLAN.md` §A gets an appended correction, not a rewrite, because the whole value of a pre-committed gate is that it cannot be revised after the answer. **`OPTIONS.md` is a live ranking document** whose rows are rewritten every time a lane's status moves, so its `R7` row is corrected in place in this commit.
 
 **What I should have caught and did not.** I wrote `WAVE7_PLAN.md` §A. I checked that the `.gitignore` *said* the artefact was never committed — that premise check is in `reports/ORCH_STATE.md`'s superseded block and it was correct — and I quoted the size from the same line without measuring it, in a brief whose entire subject was *"the blocker is a `.gitignore` line."* `ls -l` on the two files it names would have cost one second. **The number I did check I got right (4,608 B per field, so 160 = 737 KB, and I sharpened it from a wrong ~5 MB at the time). The number I did not check I propagated.** The generalisation: **when a brief's argument is a size comparison, measure BOTH sides of it.** One side being measured is what makes the other side look measured.
+
+---
+
+## §40 — a concurrency brief that asked for the AMBIENT LOAD instead of the unit's OWN FOOTPRINT: a co-tenant lost 40% of its throughput and nothing in the instrument would have caught it
+
+**Class:** defect in a CONDUCTOR-written brief. Not a defect in any unit, and not a result.
+**Found:** 2026-08-19 02:35, by me, while both affected units were still running.
+**Filed:** BESIDE the artefacts, per the W3 ruling Q3 — nothing in `E-FE`'s or `L6-b`'s output is edited.
+
+**The wording.** My `E-FE` dispatch brief said: *"Report in the artefact: shards used, wall clock,
+core-hours, and the load average at start and end."* That reads like a complete concurrency report and
+is not one. **Load average is the weather. It tells you the box was busy; it does not tell you whose
+work was destroyed, or how much of it.** A unit reporting `load 17` has discharged that clause perfectly
+while remaining structurally blind to the fact that its six shards took 40% of the throughput of the
+job running beside it — because the evidence for that lives in the OTHER unit's checkpoint file, which
+the reporting unit has no reason to open and no standing to interpret.
+
+**The measurement it missed.** `L6-b`'s own in-run trajectory, rolling 250-iteration windows:
+**1.178 it/s at 02:21 → 0.712 it/s at 02:26**, a clean step at exactly the window in which `E-FE`'s
+shards came up. Full table and provenance: `writeup/waves/WAVE7_CLOSE.md`, CONDUCTOR MEASUREMENT
+2026-08-19. Schedule consequence: `L6-b`'s return moves ~07:15 → **~08:20**, conditional on `E-FE`
+holding six shards.
+
+**Compounding my own error, stated plainly.** I priced this box at ~11 of 12 cores busy. It ran at ~17.
+I had already recorded one half of that (I assumed `L6-b` held ~5 cores; it holds 6). This is the other
+half, and it is the half that costs wall-clock. **Both halves were available to measurement before
+dispatch and I estimated instead.**
+
+**THE RULE.** *A brief that puts a unit on a shared box must name the co-tenant and ask for the DELTA
+imposed on it — measured from the co-tenant's own instrument, before and after — not the ambient load.
+Where there is no co-tenant, the brief says so explicitly, so that the absence is a recorded fact rather
+than an unasked question.* Ambient load may still be reported; it is not a substitute.
+
+**What this does NOT do.** It does not change `E-FE`'s shard count — that was pre-committed against,
+and a mid-run change destroys the per-attempt cost figure the ensemble owes the record. It does not
+touch `L6-b`. It bears on **no gate**: this is a fact about one machine on one night, not about Route 4,
+`W4`, or the field ensemble. And it is **not progress** — it is an instrument getting one notch less
+blind, which §3i q7 counts against me, not for me.

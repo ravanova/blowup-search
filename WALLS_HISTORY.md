@@ -502,3 +502,26 @@ live in `STATE.md` as a single pointer row. Nothing reworded.)
 | **`D-REPAIR`** (wave 5, infra) | **GATE `NO`, twice, with the enumeration.** The record cites **110** figure ids: **45 rebuilt, 22 self-checked, 52 cited-with-a-`.png`-and-no-rebuild-path.** `NO` **before the repair and `NO` after** — the four debts were one figure of 66. **`V-W3`'s D3 is WRONG IN SIGN** (`E` used **+1.9% MORE** epochs/attempt, not −2.3% fewer) and its D5 *cannot close* is wrong (subset recovered, **9.0884 core-h**); **D2 no longer exists.** Detail and 11 unrepaired flags: `experiments/journal/d_repair.md`. | `036e56d` | **UNVERIFIED** |
 | **`V-W3`** (wave 4, verification) | **3 of 4 CONFIRMED, 1 REFUTED.** `E`'s headline reproduces 6/6; `V-W2` confirms on both parts from **re-fetched primaries** (`.mat` fields **bitwise**); `fig107`'s `P2_EVIDENCE` gap confirmed by `ast.literal_eval` (36 entries, `107` the only gap in 99–110). **REFUTED: `E`'s `8×` overrun — `0.0713` is WALL-h, `0.57` is CORE-h; like for like `E` came in 0.4% UNDER.** 6 defects **unrepaired**, 0 `UNREACHABLE`. | `2b8755e` | **UNVERIFIED** |
 | **`V1`** (wave 2, verification) | **All five wave-1 claims reproduce** from banked JSON and landed evidence scripts alone; **`M3 = DELIVERED` SURVIVES** U5's 57% seed overlap. Two defects banked, not reconciled. | `2fb399f` | **UNVERIFIED** |
+
+## §W4-PROV2 — the `V-W4` provenance paragraph, retired verbatim from WALLS.md 2026-08-19 under §3j
+
+(Retired for headroom before `L6-b`'s landing. The clause that MATTERS — ESŠ is `UNREACHABLE` at
+primary and the pin rests on secondaries — is kept live in `WALLS.md`. Nothing reworded.)
+
+**⚠ `V-W4` CORRECTED THE `≤ 1` PROVENANCE; THE DIRECTION HOLDS and (a) STAYS SHUT** — not
+through the **global** Leray–Hopf ESŠ theorem (this object's global energy is measured
+**infinite**) but through the **local** suitable-weak form (Seregin, `arXiv:math/0510396` §1),
+whose `m_T` separates the cases **exactly at the pin**. **ESŠ is `UNREACHABLE` at primary: the
+pin rests on secondaries.** Four citation defects, verbatim → `WALLS_HISTORY.md` §W4-PROV;
+register `writeup/CORRECTIONS.md` §33; detail `experiments/journal/verify_wave4.md`.
+
+## §HIST-NOTE — WALLS.md's own `# History` rationale paragraph, retired verbatim 2026-08-19 under §3j
+
+(Retired for headroom before `L6-b`'s landing. It is a one-time PROCESS note, not a statement about
+any wall. The rule it records is unchanged and still in force: nothing deleted, nothing unstruck.)
+
+**MOVED 2026-08-18 to `WALLS_HISTORY.md`, struck text intact and byte-for-byte.** WALLS.md's §3j cap
+is 32 KB and the named remedy — *retracted text stays struck but moves to a `## History` section at
+the foot* — had stopped buying headroom once the section itself grew to ~2.9 KB. The remedy is
+extended one step rather than abandoned: **nothing is deleted, nothing is unstruck**, and every
+`## History` pointer in this file now resolves to `WALLS_HISTORY.md`. Flagged, not silent.

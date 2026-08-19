@@ -92,7 +92,7 @@ on 4 fields — bitwise. **My own `~1.2 GB` is 268.9 MB**, `U2`'s *rejected* arc
 | file | bytes | cap | free |
 |---|---|---|---|
 | `STATE.md` | 23,639 | 24,576 | 937 |
-| `WALLS.md` | 32,476 | 32,768 | 292 |
+| `WALLS.md` | 32,044 | 32,768 | 724 |
 | `OPTIONS.md` | 23,866 | 24,576 | 710 |
 | `ORCH_STATE.md` LIVE | 8,053 | 8,192 | 139 |
 
