@@ -91,10 +91,10 @@ on 4 fields — bitwise. **My own `~1.2 GB` is 268.9 MB**, `U2`'s *rejected* arc
 
 | file | bytes | cap | free |
 |---|---|---|---|
-| `STATE.md` | 24,533 | 24,576 | 43 |
+| `STATE.md` | 23,639 | 24,576 | 937 |
 | `WALLS.md` | 32,476 | 32,768 | 292 |
 | `OPTIONS.md` | 23,866 | 24,576 | 710 |
-| `ORCH_STATE.md` LIVE | 8,052 | 8,192 | 140 |
+| `ORCH_STATE.md` LIVE | 8,053 | 8,192 | 139 |
 
 **Defect of mine, §37 `writeup/CORRECTIONS.md`: retire by slicing between ASSERTED LINE INDICES,
 never by title, and measure the live block by line index too, or the cap check silently passes.**

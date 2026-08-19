@@ -491,3 +491,14 @@ Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits 
 
 **The precedent it set, kept live because it binds every wave:** a request to change a gate
 **mid-wave was REFUSED**. Plan verbatim: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`.
+
+## §STATE-LANDED-UNVERIFIED — three Landed-table rows retired verbatim from STATE.md 2026-08-19 under §3j
+
+(Retired for headroom at `R-bank`'s landing. All three are still **UNVERIFIED** and that obligation stays
+live in `STATE.md` as a single pointer row. Nothing reworded.)
+
+| unit | gate answer | SHA | state |
+|---|---|---|---|
+| **`D-REPAIR`** (wave 5, infra) | **GATE `NO`, twice, with the enumeration.** The record cites **110** figure ids: **45 rebuilt, 22 self-checked, 52 cited-with-a-`.png`-and-no-rebuild-path.** `NO` **before the repair and `NO` after** — the four debts were one figure of 66. **`V-W3`'s D3 is WRONG IN SIGN** (`E` used **+1.9% MORE** epochs/attempt, not −2.3% fewer) and its D5 *cannot close* is wrong (subset recovered, **9.0884 core-h**); **D2 no longer exists.** Detail and 11 unrepaired flags: `experiments/journal/d_repair.md`. | `036e56d` | **UNVERIFIED** |
+| **`V-W3`** (wave 4, verification) | **3 of 4 CONFIRMED, 1 REFUTED.** `E`'s headline reproduces 6/6; `V-W2` confirms on both parts from **re-fetched primaries** (`.mat` fields **bitwise**); `fig107`'s `P2_EVIDENCE` gap confirmed by `ast.literal_eval` (36 entries, `107` the only gap in 99–110). **REFUTED: `E`'s `8×` overrun — `0.0713` is WALL-h, `0.57` is CORE-h; like for like `E` came in 0.4% UNDER.** 6 defects **unrepaired**, 0 `UNREACHABLE`. | `2b8755e` | **UNVERIFIED** |
+| **`V1`** (wave 2, verification) | **All five wave-1 claims reproduce** from banked JSON and landed evidence scripts alone; **`M3 = DELIVERED` SURVIVES** U5's 57% seed overlap. Two defects banked, not reconciled. | `2fb399f` | **UNVERIFIED** |
