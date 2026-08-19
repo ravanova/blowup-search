@@ -364,7 +364,7 @@ Branch B, top rung, the rung that produced `ρ = 1.6138`:
 | `seed405` | 800 | 1265.2 | 5.54 |
 | **`continuation`** (the banked minimiser) | 800 | **252.2 — the SMALLEST** | **153.22 — the LARGEST** |
 
-**The two gradient columns rank the six starts in opposite orders, and a reader who takes the raw
+**The two gradient columns disagree AT THIS START, and a reader who takes the raw
 one reaches the opposite conclusion.** `max_abs_grad = 252` says the banked minimiser is the closest
 to stationary of the six; `scale_invariant_grad = 153` says it is by far the furthest.
 

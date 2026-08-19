@@ -2713,7 +2713,9 @@ that the ladder never located a stationary point anywhere, and so compared stopp
 **A second omission, mine, closed in the same commit.** I have been quoting the banked minimiser's
 `scale_invariant_grad = 153.22` as "the largest of its six starts" without its companion: that same
 start has `max_abs_grad = 252.2`, **the smallest of the six**. The two columns rank the starts in
-opposite orders. The scale-invariant one governs — the objective is invariant under `x → t·x`, and
+opposite orders. (**That "opposite orders" gloss is itself wrong; corrected at §43, which also
+withdraws the seed comparison as confounded.**) The scale-invariant one governs — the objective is
+invariant under `x → t·x`, and
 raw `‖∇J‖_∞` can be shrunk by rescaling alone, which is exactly how `L6`'s L-BFGS-B was fooled into
 a false convergence report once already (`leg_401.md` §7.3). **But "the correct column governs" is a
 disclosure, not a licence to quote it alone.** Both columns, with the invariance argument, every time.
@@ -2762,3 +2764,69 @@ sits above both, and only the ordered ladder shows the fall AND the partial reco
 
 **Not progress.** Three arithmetic errors caught is an instrument working, not a result. Nothing
 here bears on `W4`, route 4, or the field ensemble.
+
+## §43 — the same figure corrected three times in one night, and the third correction removes it from the evidence: `153.22` is confounded by the very property that makes it the minimiser
+
+**Filed:** 2026-08-19 03:30, still before `L6-b`'s gate number exists. **Corrects §41, filed ten
+minutes earlier, and `L6-b`'s own amendment to it, filed five minutes after that.** Both were closer
+than what preceded them and both were wrong.
+
+**The three statements, in order, all about `L6`'s branch-B top rung.**
+
+1. **Mine, standing for days:** *"the banked minimiser carries `scale_invariant_grad = 153.22`, the
+   largest of its six starts, while the five seeds read 4.65–16.58."* True; a selected column.
+2. **Mine, §41:** *"the two columns rank the six starts in opposite orders."* **FALSE.**
+3. **`L6-b`'s:** *"a near reversal, not exact — `seed401` and `seed402` transpose."* **ALSO FALSE**,
+   and it under-claimed in the wrong place: it conceded precision on the tidiness of the reversal
+   while keeping the reversal.
+
+**What the ranks actually are.**
+
+| ascending by | order |
+|---|---|
+| `max_abs_grad` | `continuation`, `seed404`, `seed405`, `seed403`, `seed402`, `seed401` |
+| `scale_invariant_grad` | `seed404`, `seed405`, `seed403`, `seed401`, `seed402`, `continuation` |
+| an exact reversal of the first would be | `seed401`, `seed402`, `seed403`, `seed405`, `seed404`, `continuation` |
+
+**Only 2 of 6 positions match a reversal.** Spearman `ρ = +0.086` (`p = 0.87`) across all six —
+no relationship. **But excluding the continuation start, `ρ = +0.900` (`p = 0.037`): among the five
+independent seeds the two columns AGREE.** The overall null is manufactured entirely by one point.
+There is no reversal. There is **agreement everywhere except at a single start, which disagrees
+maximally** — rank 1 by the raw column, rank 6 by the invariant one.
+
+**And now the part that removes the figure from the evidence.** `sig = ‖x‖‖∇J‖₂/|J|`. Decomposing
+the continuation start against the median seed:
+
+| factor | continuation | median seed | ratio |
+|---|---|---|---|
+| `‖x‖` (`coeff_norm`) | 0.2641 | 0.0509 | **×5.19** |
+| `‖∇J‖₂` (implied) | 936.2 | 5555.3 | **×0.17** — its gradient is SIX TIMES SMALLER |
+| `|J|` | **1.6138** | 32.18 | **×0.05** — its residual is TWENTY TIMES SMALLER |
+| `sig` | 153.22 | 9.67 | ×15.85 |
+
+**The dominant factor is the denominator.** The continuation start's relative gradient is large
+principally because its `J` is twenty times smaller — which is the same property that makes it the
+banked minimiser in the first place. **The comparison to the seeds is confounded by the outcome
+being compared.** "The largest of its six" is not evidence and is withdrawn from the finding.
+
+**What survives, and it is the whole substantive claim.** `sig = 153.22 ≫ 1` is an **absolute**
+statement: a relative perturbation of the coefficients of size `ε` moves `J` by up to `~153·ε·|J|`.
+The point is not a critical point, and that rests on the threshold alone, needing no comparison to
+any other start. **`L6-b`'s instrument was already built this way** — `NOT_CRITICAL = 1.0`, fixed a
+priori — so its verdict logic is unaffected. Only the rhetoric around it was wrong, and only mine.
+
+**Untouched by any of this:** all 58 non-angular start-records at `nit == 800`, 100% at the cap, none
+converged, 56/58 non-critical. That fact needs no ranking and no comparison, and it remains the
+largest thing in `L6`'s artefact.
+
+**THE RULE.** *A ratio offered as evidence must be decomposed into its factors before it is
+believed, and a comparison across units must not be confounded by the quantity that distinguishes
+them. Where a relative measure is used, the ABSOLUTE threshold statement is the claim; a ranking
+against other units is decoration and is usually contaminated.*
+
+**A note on the sequence, because it is the honest finding about the discipline.** This figure was
+corrected three times in ninety minutes — by me, then by the unit against me, then by me against
+both — and every correction came from someone opening the primary artefact for a different reason.
+**The second and third corrections were each produced by a party who had just been corrected.** That
+is the mechanism working. It is not progress, it moves no `L1→L4` link, and §3i q7 counts three
+audit-kind actions in a row against the instrument.

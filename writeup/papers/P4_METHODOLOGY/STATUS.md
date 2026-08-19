@@ -34,7 +34,9 @@ those retractions rather than a claim that it works.
    carrying `scale_invariant_grad = 153.22`, *"the largest of its six starts"*, as evidence it was
    never a critical point — into a landing audit, a wave plan, and a dispatch brief. The same start
    carries `max_abs_grad = 252.2`, **the smallest of the six.** The two columns rank the starts in
-   opposite orders. The scale-invariant column does govern, for a reason in the record rather than a
+   opposite orders **— itself wrong, and corrected at §43, which withdraws the seed comparison
+   entirely as confounded by the very property that makes that start the minimiser.** The
+   scale-invariant column does govern, for a reason in the record rather than a
    preference — the objective is invariant under `x -> t x` and the raw norm is not — but **a
    selected column was quoted as though it were the whole reading, repeatedly, by the person whose
    job is to catch that.** Nothing flagged it; it surfaced only when the Conductor went to the
