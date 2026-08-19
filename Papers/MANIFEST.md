@@ -114,3 +114,42 @@ Fetch one: `bash Papers/fetch.sh 2207.07548`
 
 `arxiv.org`, `export.arxiv.org`, `api.semanticscholar.org`, `www.semanticscholar.org`,
 `link.springer.com`, `onlinelibrary.wiley.com`, `aimsciences.org`, `en.wikipedia.org`.
+
+---
+
+## STATUS 2026-08-19 (Conductor, pre-dispatch check for `PB2`): TWO LOAD-BEARING PRIMARIES WERE LIVING IN AN EPHEMERAL WORKTREE, AND ONE OF THEM CANNOT BE RE-FETCHED
+
+**What was found.** `PB2` is briefed to open `W4` clause (b)'s two jaws at primary. `writeup/SOURCES.md`
+records both as `FULL TEXT` with hashes. They were **not in `Papers/`**. Both existed only under
+`.claude/worktrees/agent-*/Papers/`, which `.gitignore:52` excludes and which is deleted on worktree
+cleanup. They have been copied into `Papers/` and verified against the hashes in `SOURCES.md`:
+
+| file | sha256 (12) | matches `SOURCES.md` | `pdftotext -layout` | re-fetchable by `fetch.sh`? |
+|---|---|---|---|---|
+| `1610.09464.pdf` Chae–Wolf | `1f537bc2b6b2` | **YES** (also md5 `f1d14db1`) | 1002 lines — **matches record** | yes, arXiv |
+| `TSAI1998.pdf` Tsai *ARMA* 143 (1998) | `6d3182d53806` | **YES** | 1258 lines — **matches record** | **NO** |
+
+**The finding that matters, and it is an availability finding rather than a mathematical one.**
+`fetch.sh` is arXiv-only. **Tsai 1998 is pre-arXiv and was obtained from the author's page**, so the
+committed fetcher cannot re-pull it. That PDF is the source in which **NRŠ 1996's hypothesis is
+pinned by verbatim quotation** (`SOURCES.md` row 3 is `SECOND HAND`; row 2 is what makes it usable).
+**The load-bearing half of `W4` clause (b)'s second jaw was one `git worktree prune` from being
+unrecoverable inside this container**, and nothing in the discipline was watching. This is the same
+shape as the seed-field blocker: not compute, a `.gitignore` line.
+
+**And the part where the record survived the check.** The line counts in `SOURCES.md` looked wrong
+against the `.txt` files on disk (1851 vs 1258; 1002 vs 1002). They are not wrong. Re-running the
+extractor settles it: `pdftotext -layout` reproduces **1258** and **1002** exactly, and the 1851-line
+file is simply a no-`-layout` extraction of the same bit-identical PDF. **A recorded line count is
+reproducible only if the extraction MODE is named**, and `SOURCES.md` does name it. The suspicion was
+mine and the record refuted it.
+
+**Residual, not resolved, handed to `PB2`.** `SOURCES.md` row 1 reads *"1002 lines; re-fetched md5
+`f1d14db1…`, 1021 lines"*. `f1d14db1` is the md5 of the **same** PDF whose sha256 is `1f537bc2` — one
+file, two algorithms, presented as two fetches. **1021 reproduces under neither mode here** (1002
+`-layout`, 1609 plain). Likely a `poppler` version difference; **unverified, and it is not a
+discrepancy in the source, which is bit-identical.**
+
+**Policy unchanged: the PDFs stay untracked.** `Papers/*` is gitignored for copyright and that is
+correct. What is committed is this pointer plus the hashes, so the next session can tell whether the
+file it has is the file the record was written against.
