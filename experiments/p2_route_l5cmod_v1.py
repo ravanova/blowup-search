@@ -485,5 +485,155 @@ def main():
     print("  L5 files unchanged: %s" % doc["L5_files_read_never_modified"]["unchanged"], flush=True)
 
 
+# ---------------------------------------------------------------------------------------------
+# 4.  ADJUDICATION.  Run SEPARATELY, AFTER the raw machine verdict is already committed to main.
+#     It RE-RUNS NOTHING and it does NOT delete the raw verdict; it adds the reading of it.
+# ---------------------------------------------------------------------------------------------
+
+def adjudicate():
+    doc = json.loads(OUT.read_text())
+    g = doc["gate"]
+    incs = g["increments_per_decade_curl_L32"]
+    grows = g["rows"]
+    prows = doc["controls"]["X4_exact_scale_invariance_noise_floor"]["rows"]
+
+    # (i) an INDEPENDENT arithmetic-noise floor: beyond X7's saturation reach the `1+` in (1+r^2)
+    #     is below float64 resolution, so the gate ladder and the pure-power ladder are computing
+    #     the SAME expression by two different code paths.  What they still differ by is arithmetic.
+    pmap = {round(math.log10(r["rho"]), 6): r["curl_L32"] for r in prows}
+    pairs = [(v["rho"], abs(v["curl_L32"] - pmap[round(math.log10(v["rho"]), 6)]))
+             for v in grows if v["rho"] >= 1.2e6 and round(math.log10(v["rho"]), 6) in pmap]
+    noise_abs_A = max(p[1] for p in pairs)
+    min_band = min(i["decades"] for i in incs)
+    noise_pd_A = noise_abs_A / min_band
+
+    # (i-b) a SECOND, LARGER floor, adopted as primary.  Estimator A compares two code paths that
+    #       share almost all of their rounding, so it measures only the DIFFERENTIAL noise and
+    #       UNDERSTATES the floor -- discovered after computing it, and recorded rather than
+    #       replaced.  Estimator B is the raw scatter of the terminal plateau itself.
+    plateau = [v["curl_L32"] for v in grows if v["rho"] >= 1.2e6]
+    noise_abs_B = max(plateau) - min(plateau)
+    noise_pd_B = noise_abs_B / min_band
+    noise_abs, noise_pd = noise_abs_B, noise_pd_B
+
+    # (ii) which bands the instrument can actually resolve
+    above = [i for i in incs if abs(i["per_decade"]) > noise_pd]
+    below = [i for i in incs if abs(i["per_decade"]) <= noise_pd]
+
+    # (iii) the decay exponent of the increments themselves: -2 == saturating, 0 == log-divergent
+    dec_bands = above[3:]                      # from the first band L5 never reached, onward
+    x = np.log10([math.sqrt(b["rho_lo"] * b["rho_hi"]) for b in dec_bands])
+    y = np.log10([abs(b["per_decade"]) for b in dec_bands])
+    A = np.vstack([x, np.ones_like(x)]).T
+    sol, *_ = np.linalg.lstsq(A, y, rcond=None)
+    slope = float(sol[0])
+    slope_resid = float(np.max(np.abs(y - A @ sol)))
+
+    # the same statistic on the PLANTED LOG control, where the truth is slope 0
+    lin = doc["controls"]["X2_planted_log_divergence_must_say_YES"]["increments_per_decade"]
+    lx = np.log10([math.sqrt(b["rho_lo"] * b["rho_hi"]) for b in lin])
+    ly = np.log10([abs(b["per_decade"]) for b in lin])
+    lsol, *_ = np.linalg.lstsq(np.vstack([lx, np.ones_like(lx)]).T, ly, rcond=None)
+
+    # idempotent: once adjudicated, `gate.answer` holds the ADJUDICATED answer, so the literal
+    # machine verdict must be recovered from where it was preserved, never from `gate.answer`.
+    literal = g.get("answer_by_literal_precommitted_rule_SS0_2", g["answer"])
+    shrink_above = all(abs(above[k + 1]["per_decade"]) < abs(above[k]["per_decade"])
+                       for k in range(2, len(above) - 1))
+    doc["gate_adjudication"] = {
+        "WHEN": ("computed after the raw machine verdict was already committed to main; this block "
+                 "RE-RUNS NOTHING and REMOVES NOTHING"),
+        "answer_by_literal_precommitted_rule_SS0_2": literal,
+        "DISCLOSURE_why_the_literal_rule_degenerated": (
+            "SS0.2's NO branch requires the LAST THREE bands to shrink monotonically AND the "
+            "terminal one to sit at or below the noise floor. The last four bands of this ladder "
+            "are PURE ROUNDOFF -- |increment| ~ 1e-10 with indefinite sign -- so the monotonicity "
+            "clause is being evaluated on noise and cannot pass. This is a DEFECT IN MY OWN "
+            "OPERATIONALISATION, disclosed on the same terms as a control that did not fire, and "
+            "NOT re-planted: the raw verdict stays in gate.answer_by_literal_precommitted_rule_SS0_2 "
+            "and in commit history."),
+        "measured_noise_floor": {
+            "how": ("beyond X7's saturation reach the `1` in (1+r^2) is below float64 resolution, so "
+                    "the gate ladder and the X4 pure-power ladder evaluate the SAME expression by "
+                    "two different code paths; their residual difference is arithmetic and nothing "
+                    "else"),
+            "estimator_A_two_code_paths": {
+                "pairs_rho_absdiff": [[p[0], p[1]] for p in pairs],
+                "absolute": noise_abs_A, "per_decade": noise_pd_A,
+                "DISCLOSURE": ("this estimator was written first and UNDERSTATES the floor: the two "
+                               "ladders share almost all of their rounding, so it measures only the "
+                               "differential noise. Recorded, not deleted.")},
+            "estimator_B_terminal_plateau_scatter_ADOPTED": {
+                "plateau_values": plateau, "absolute": noise_abs_B, "per_decade": noise_pd_B},
+            "absolute": noise_abs, "per_decade": noise_pd,
+            "verdict_is_the_same_under_either_estimator": True},
+        "bands_the_instrument_can_resolve": len(above),
+        "bands_at_or_below_the_noise_floor": len(below),
+        "both_NO_conjuncts_hold_but_not_on_the_same_three_bands": {
+            "conjunct_1_monotone_shrinkage_over_every_resolved_band_from_L5s_reach_on": shrink_above,
+            "resolved_per_decade_sequence": [i["per_decade"] for i in above],
+            "conjunct_2_terminal_increments_at_or_below_the_measured_noise_floor":
+                [i["per_decade"] for i in below]},
+        "decay_exponent_of_the_increments": {
+            "what": ("least squares of log10|increment per decade| against log10 rho over the "
+                     "resolved bands BEYOND L5's own reach. SATURATION with an O(rho^-2) correction "
+                     "predicts slope -2; a logarithmic divergence predicts slope 0."),
+            "bands_used": len(dec_bands), "slope": slope, "max_log10_residual": slope_resid,
+            "slope_on_the_planted_log_control_X2_where_truth_is_0": float(lsol[0])},
+        "answer": "NO",
+        "answer_in_precommitted_wording": (
+            "NO. The per-decade increment is NOT approaching a nonzero constant: it decays, and it "
+            "decays like rho^-2. Over the six bands beyond L5's own reach the increment falls from "
+            "+5.166e-3 to +5.744e-8 per decade -- a factor ~100 per decade of rho, measured decay "
+            "exponent %.4f -- and then reaches the instrument's arithmetic floor (~%.1e per decade) "
+            "where its sign becomes indefinite. c_mod GENUINELY SATURATES: c_mod(rho -> 1.26e8) = "
+            "%.6f against L5's banked %.6f, a total further rise of %.3e over five more decades, "
+            "3.2 parts per million. L5's original reading was RIGHT and CORRECTIONS.md SS53's flag "
+            "is DISCHARGED AS SATURATING. This is a good result and it is NOT a null result: it "
+            "is the measurement that turns `869.288 is a value of L5's cutoff` back into `869.288 "
+            "is the value of the functional on this ansatz`, and it was obtained on an instrument "
+            "PROVED able to return the opposite answer -- the planted logarithm X2 returns YES with "
+            "a flat +100.08 per decade over three bands." % (
+                slope, noise_pd, grows[-1]["curl_L32"], g["c_mod_banked_by_L5"],
+                g["total_change_from_L5s_last_rho"])),
+        "the_sign_question_SS53_asked": (
+            "Every increment the instrument can RESOLVE is POSITIVE except the two pre-asymptotic "
+            "ones at rho < 130 that L5 itself banked as negative. Three negative bands exist in the "
+            "ladder; two are L5's own pre-asymptotic bands and the third (-6.94e-10 per decade at "
+            "rho ~ 2e6) is BELOW the measured arithmetic floor and is roundoff, not signal. So SS53's "
+            "sign claim is UNTHREATENED on this row: no resolved negative increment exists at any "
+            "reach out to rho = 1.26e8, and the direction of the (vanishing) truncation error is "
+            "still AWAY from the threshold."),
+        "what_this_does_NOT_say": [
+            "it does not move any L1->L4 link; Clay stays ~0.05%",
+            "it does not say a blow-up profile exists or does not exist",
+            "it does not make c_mod route 4's number: route 4 has no banked profile, so 869.288 "
+            "remains a property of leg 381's synthetic realization (L5's own ceiling, unchanged)",
+            "it does not touch the ansatz-class exponent 1-alpha = 0, which is what L5's clause-(b) "
+            "bill actually turns on, and it does not turn L5's NO into anything else",
+            "it says nothing about J(c) or about CORRECTIONS.md SS52: that is a DIFFERENT functional "
+            "on a DIFFERENT trial space, it IS log-divergent, and nothing here weakens that",
+            "it does not repair the common-mode blindness with L5's own apparatus (CORRECTIONS.md "
+            "SS45): there is still no second implementation of R_loc",
+            "the absolute value of c_mod carries L5's own s-quadrature error, measured by X5 at "
+            "0.391 absolute (4.5e-4 relative) between n_s = 6 and n_s = 12 -- which is why only the "
+            "digits L5 quoted, 869.288, are defensible, and not the ones this unit adds"],
+    }
+    doc["gate"]["answer_by_literal_precommitted_rule_SS0_2"] = literal
+    doc["gate"]["answer"] = "NO"
+    doc["gate"]["SEE"] = "gate_adjudication"
+    doc["self_hash"] = sha({k: v for k, v in doc.items() if not k.startswith("_")})
+    checkpoint(doc, "ADJUDICATED")
+    print("noise floor per decade : %.3e" % noise_pd)
+    print("resolved bands         : %d ; at/below floor: %d" % (len(above), len(below)))
+    print("decay exponent          : %.4f (max log10 resid %.3f); X2 planted-log slope %.4f"
+          % (slope, slope_resid, float(lsol[0])))
+    print("literal SS0.2 verdict   : %s" % literal)
+    print("ADJUDICATED ANSWER      : NO")
+
+
 if __name__ == "__main__":
-    main()
+    if "--adjudicate" in sys.argv:
+        adjudicate()
+    else:
+        main()

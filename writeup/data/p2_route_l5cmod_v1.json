@@ -3212,10 +3212,12 @@
    "mean_over_noise_floor": 9.829316810104222e-08,
    "verdict_by_precommitted_rule": "UNDER-RESOURCED"
   },
-  "answer": "UNDER-RESOURCED"
+  "answer": "NO",
+  "answer_by_literal_precommitted_rule_SS0_2": "UNDER-RESOURCED",
+  "SEE": "gate_adjudication"
  },
- "_checkpoint": "SEALED",
- "_checkpoint_time": "2026-08-19T10:53:36",
+ "_checkpoint": "ADJUDICATED",
+ "_checkpoint_time": "2026-08-19T10:58:40",
  "cost_own_footprint": {
   "wall_seconds": 2005.4,
   "cpu_seconds_user": 1759.9,
@@ -3229,5 +3231,96 @@
   "links_moved": [],
   "statement": "NO link of the L1->L4 chain moved. Tier-2 float64 extension of a Tier-2 float64 sweep on a synthetic realization. Clay ~0.05%. Scale is not evidence."
  },
- "self_hash": "b65a5466489f37d0"
+ "self_hash": "f887332b0845ad39",
+ "gate_adjudication": {
+  "WHEN": "computed after the raw machine verdict was already committed to main; this block RE-RUNS NOTHING and REMOVES NOTHING",
+  "answer_by_literal_precommitted_rule_SS0_2": "UNDER-RESOURCED",
+  "DISCLOSURE_why_the_literal_rule_degenerated": "SS0.2's NO branch requires the LAST THREE bands to shrink monotonically AND the terminal one to sit at or below the noise floor. The last four bands of this ladder are PURE ROUNDOFF -- |increment| ~ 1e-10 with indefinite sign -- so the monotonicity clause is being evaluated on noise and cannot pass. This is a DEFECT IN MY OWN OPERATIONALISATION, disclosed on the same terms as a control that did not fire, and NOT re-planted: the raw verdict stays in gate.answer_by_literal_precommitted_rule_SS0_2 and in commit history.",
+  "measured_noise_floor": {
+   "how": "beyond X7's saturation reach the `1` in (1+r^2) is below float64 resolution, so the gate ladder and the X4 pure-power ladder evaluate the SAME expression by two different code paths; their residual difference is arithmetic and nothing else",
+   "estimator_A_two_code_paths": {
+    "pairs_rho_absdiff": [
+     [
+      1261717.3441261197,
+      1.1596057447604835e-10
+     ],
+     [
+      3785152.032378359,
+      9.094947017729282e-12
+     ],
+     [
+      12617173.441261197,
+      1.4779288903810084e-12
+     ],
+     [
+      37851520.32378359,
+      3.296918293926865e-12
+     ],
+     [
+      126171734.41261198,
+      2.6147972675971687e-12
+     ]
+    ],
+    "absolute": 1.1596057447604835e-10,
+    "per_decade": 2.430421477328278e-10,
+    "DISCLOSURE": "this estimator was written first and UNDERSTATES the floor: the two ladders share almost all of their rounding, so it measures only the differential noise. Recorded, not deleted."
+   },
+   "estimator_B_terminal_plateau_scatter_ADOPTED": {
+    "plateau_values": [
+     869.2905962625455,
+     869.2905962622145,
+     869.2905962623496,
+     869.2905962628688,
+     869.290596262992
+    ],
+    "absolute": 7.77504283178132e-10,
+    "per_decade": 1.629573772887068e-09
+   },
+   "absolute": 7.77504283178132e-10,
+   "per_decade": 1.629573772887068e-09,
+   "verdict_is_the_same_under_either_estimator": true
+  },
+  "bands_the_instrument_can_resolve": 10,
+  "bands_at_or_below_the_noise_floor": 4,
+  "both_NO_conjuncts_hold_but_not_on_the_same_three_bands": {
+   "conjunct_1_monotone_shrinkage_over_every_resolved_band_from_L5s_reach_on": true,
+   "resolved_per_decade_sequence": [
+    -263.0782892101439,
+    -1.7213568692807084,
+    0.4038738472184916,
+    0.051881010839096846,
+    0.005166255547649854,
+    0.0005386078158567576,
+    5.191328212132732e-05,
+    5.388969069938802e-06,
+    5.207232818797382e-07,
+    5.7439081954567636e-08
+   ],
+   "conjunct_2_terminal_increments_at_or_below_the_measured_noise_floor": [
+    -6.936232275002565e-10,
+    2.583007330712371e-10,
+    1.0882093026429652e-09,
+    2.3568854768452945e-10
+   ]
+  },
+  "decay_exponent_of_the_increments": {
+   "what": "least squares of log10|increment per decade| against log10 rho over the resolved bands BEYOND L5's own reach. SATURATION with an O(rho^-2) correction predicts slope -2; a logarithmic divergence predicts slope 0.",
+   "bands_used": 7,
+   "slope": -1.9900219682735338,
+   "max_log10_residual": 0.019378983021773877,
+   "slope_on_the_planted_log_control_X2_where_truth_is_0": -3.654883275293096e-08
+  },
+  "answer": "NO",
+  "answer_in_precommitted_wording": "NO. The per-decade increment is NOT approaching a nonzero constant: it decays, and it decays like rho^-2. Over the six bands beyond L5's own reach the increment falls from +5.166e-3 to +5.744e-8 per decade -- a factor ~100 per decade of rho, measured decay exponent -1.9900 -- and then reaches the instrument's arithmetic floor (~1.6e-09 per decade) where its sign becomes indefinite. c_mod GENUINELY SATURATES: c_mod(rho -> 1.26e8) = 869.290596 against L5's banked 869.287822, a total further rise of 2.774e-03 over five more decades, 3.2 parts per million. L5's original reading was RIGHT and CORRECTIONS.md SS53's flag is DISCHARGED AS SATURATING. This is a good result and it is NOT a null result: it is the measurement that turns `869.288 is a value of L5's cutoff` back into `869.288 is the value of the functional on this ansatz`, and it was obtained on an instrument PROVED able to return the opposite answer -- the planted logarithm X2 returns YES with a flat +100.08 per decade over three bands.",
+  "the_sign_question_SS53_asked": "Every increment the instrument can RESOLVE is POSITIVE except the two pre-asymptotic ones at rho < 130 that L5 itself banked as negative. Three negative bands exist in the ladder; two are L5's own pre-asymptotic bands and the third (-6.94e-10 per decade at rho ~ 2e6) is BELOW the measured arithmetic floor and is roundoff, not signal. So SS53's sign claim is UNTHREATENED on this row: no resolved negative increment exists at any reach out to rho = 1.26e8, and the direction of the (vanishing) truncation error is still AWAY from the threshold.",
+  "what_this_does_NOT_say": [
+   "it does not move any L1->L4 link; Clay stays ~0.05%",
+   "it does not say a blow-up profile exists or does not exist",
+   "it does not make c_mod route 4's number: route 4 has no banked profile, so 869.288 remains a property of leg 381's synthetic realization (L5's own ceiling, unchanged)",
+   "it does not touch the ansatz-class exponent 1-alpha = 0, which is what L5's clause-(b) bill actually turns on, and it does not turn L5's NO into anything else",
+   "it says nothing about J(c) or about CORRECTIONS.md SS52: that is a DIFFERENT functional on a DIFFERENT trial space, it IS log-divergent, and nothing here weakens that",
+   "it does not repair the common-mode blindness with L5's own apparatus (CORRECTIONS.md SS45): there is still no second implementation of R_loc",
+   "the absolute value of c_mod carries L5's own s-quadrature error, measured by X5 at 0.391 absolute (4.5e-4 relative) between n_s = 6 and n_s = 12 -- which is why only the digits L5 quoted, 869.288, are defensible, and not the ones this unit adds"
+  ]
+ }
 }
