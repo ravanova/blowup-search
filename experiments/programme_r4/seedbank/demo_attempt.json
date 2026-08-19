@@ -1,0 +1,196 @@
+{
+ "answer": "YES",
+ "arm": "Q",
+ "attempt": 15,
+ "banked_wall_seconds": 798.2659857273102,
+ "comparison": [
+  {
+   "banked": "converged",
+   "exact_equal": true,
+   "field": "reason",
+   "reproduced": "converged"
+  },
+  {
+   "banked": true,
+   "exact_equal": true,
+   "field": "success",
+   "reproduced": true
+  },
+  {
+   "banked": 2.0552353500244844e-10,
+   "exact_equal": true,
+   "field": "final_residual",
+   "reproduced": 2.0552353500244844e-10
+  },
+  {
+   "banked": 12,
+   "exact_equal": true,
+   "field": "n_iters",
+   "reproduced": 12
+  },
+  {
+   "banked": 16.536902623501312,
+   "exact_equal": true,
+   "field": "T_converged",
+   "reproduced": 16.536902623501312
+  },
+  {
+   "banked": -0.09939218012637738,
+   "exact_equal": true,
+   "field": "s_converged",
+   "reproduced": -0.09939218012637738
+  },
+  {
+   "banked": 0.0993921801263773,
+   "exact_equal": true,
+   "field": "abs_s_converged",
+   "reproduced": 0.0993921801263773
+  },
+  {
+   "banked": null,
+   "exact_equal": true,
+   "field": "matched_row",
+   "reproduced": null
+  },
+  {
+   "banked": false,
+   "exact_equal": true,
+   "field": "recovered_named_orbit",
+   "reproduced": false
+  },
+  {
+   "banked": false,
+   "exact_equal": true,
+   "field": "recovered_any_named_orbit",
+   "reproduced": false
+  },
+  {
+   "banked": [
+    18,
+    19,
+    19,
+    18,
+    19,
+    18,
+    17,
+    15,
+    15,
+    16,
+    15,
+    16
+   ],
+   "exact_equal": true,
+   "field": "krylov_dims",
+   "reproduced": [
+    18,
+    19,
+    19,
+    18,
+    19,
+    18,
+    17,
+    15,
+    15,
+    16,
+    15,
+    16
+   ]
+  },
+  {
+   "banked": [
+    3,
+    2,
+    1,
+    1,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "exact_equal": true,
+   "field": "radius_trials",
+   "reproduced": [
+    3,
+    2,
+    1,
+    1,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "banked": [
+    24.26885871223562,
+    21.201028446691748,
+    15.177046686188095,
+    10.452380550345856,
+    6.824322551435131,
+    4.184691769510818,
+    3.645142892508107,
+    1.6457439822035447,
+    0.5092662551735222,
+    0.014321201151248384,
+    4.552183481435616e-05,
+    3.594077662417932e-08,
+    2.0552353500244844e-10
+   ],
+   "exact_equal": true,
+   "field": "residual_history",
+   "reproduced": [
+    24.26885871223562,
+    21.201028446691748,
+    15.177046686188095,
+    10.452380550345856,
+    6.824322551435131,
+    4.184691769510818,
+    3.645142892508107,
+    1.6457439822035447,
+    0.5092662551735222,
+    0.014321201151248384,
+    4.552183481435616e-05,
+    3.594077662417932e-08,
+    2.0552353500244844e-10
+   ]
+  },
+  {
+   "banked": 49.7020095287706,
+   "exact_equal": true,
+   "field": "seed_residual_plus",
+   "reproduced": 49.7020095287706
+  },
+  {
+   "banked": 24.26885871223562,
+   "exact_equal": true,
+   "field": "seed_residual_minus",
+   "reproduced": 24.26885871223562
+  },
+  {
+   "banked": -0.29499999999999993,
+   "exact_equal": true,
+   "field": "s_seeded",
+   "reproduced": -0.29499999999999993
+  }
+ ],
+ "dns_artefacts_absent_in_this_tree": true,
+ "n_iterations_banked": 12,
+ "n_iterations_byte_equal": 12,
+ "n_iterations_reproduced": 12,
+ "n_scalar_fields_checked": 16,
+ "n_scalar_fields_exact": 16,
+ "note": "bit-for-bit here means exact equality of every banked float, compared through canonical JSON, not a tolerance",
+ "per_iteration_ledger_exact": true,
+ "row": "UPO9",
+ "seeded_from": "experiments/programme_r4/seedbank (manifest + npy)",
+ "tree": "/tmp/claude-1001/-home-andy-projects-Unsolved/3e4ba4ff-0366-4658-9679-dfff7963a1db/scratchpad/nodns",
+ "wall_seconds": 1173.3
+}
