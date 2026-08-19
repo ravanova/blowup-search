@@ -86,6 +86,30 @@
       "sha256": "85a5b22f0c6ce66a0522bb513136442f59e8bb902203655e246322368b08772c",
       "n_pages": 26,
       "n_chars": 79486
+    },
+    {
+      "id": "2408.05079v1",
+      "file": "2408.05079.pdf",
+      "what": "Redfern, Lazer & Lucas -- PREPRINT, no journal_ref at fetch",
+      "sha256": "8ed5ec9a35cbc3b1bbd306b429d3fd697f600d73f535345f52ec393be8ab459e",
+      "n_pages": 26,
+      "n_chars": 48502
+    },
+    {
+      "id": "1906.01310v1",
+      "file": "1906.01310.pdf",
+      "what": "Page & Kerswell, JFM 886 (2020) A28",
+      "sha256": "b1349254af3fdf4160a05c834fa7546402ae01f141c1ae4c6a67e86267652a51",
+      "n_pages": 21,
+      "n_chars": 53737
+    },
+    {
+      "id": "2008.07515v2",
+      "file": "2008.07515.pdf",
+      "what": "Page, Brenner & Kerswell, Phys. Rev. Fluids 6 034402 (2021)",
+      "sha256": "cf43ee1e184fdc697a80b4239499f79e6cae94977df2c88df5c4b9f6c2d43ec6",
+      "n_pages": 13,
+      "n_chars": 43954
     }
   ],
   "controls": [
@@ -93,7 +117,7 @@
       "control": "FT1_positive",
       "phrase": "hookstep",
       "rule": "docs>=2",
-      "n_docs_hit": 8,
+      "n_docs_hit": 10,
       "docs": [
         "1207.4682v1",
         "1406.1820v1",
@@ -102,7 +126,9 @@
         "physics/0604062",
         "2309.12754v1",
         "1611.04829v1",
-        "0810.1974v1"
+        "0810.1974v1",
+        "2408.05079v1",
+        "2008.07515v2"
       ],
       "fired_as_planted": true
     },
@@ -110,14 +136,16 @@
       "control": "FT2_topical_positive",
       "phrase": "recurrent flow",
       "rule": "docs>=2",
-      "n_docs_hit": 6,
+      "n_docs_hit": 8,
       "docs": [
         "1207.4682v1",
         "1406.1820v1",
         "1406.1820v2",
         "1308.3356v3",
         "2309.12754v1",
-        "1611.04829v1"
+        "1611.04829v1",
+        "2408.05079v1",
+        "1906.01310v1"
       ],
       "fired_as_planted": true
     },
@@ -133,7 +161,7 @@
       "control": "FT4_and_pair",
       "phrase": "Newton AND Kolmogorov (same document)",
       "rule": "docs>=1",
-      "n_docs_hit": 8,
+      "n_docs_hit": 11,
       "docs": [
         "1207.4682v1",
         "1406.1820v1",
@@ -142,7 +170,10 @@
         "2309.12754v1",
         "1108.0975v1",
         "1611.04829v1",
-        "1705.03720v2"
+        "1705.03720v2",
+        "2408.05079v1",
+        "1906.01310v1",
+        "2008.07515v2"
       ],
       "fired_as_planted": true,
       "why": "if this were 0, every co-occurrence zero below would be an artefact"
@@ -320,6 +351,94 @@
       "status": "MEASURED"
     },
     {
+      "effect": "a",
+      "phrase": "however with much greater diversity than previous studies",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "2408.05079v1",
+          "pdf_page": 2,
+          "quote": " recurrence in direct numerical simulations. Nearly recurrent episodes are identified from simulations and then converged using a standard Newton- GMRES-hookstep method, however with much greater diversity than previous studies which per- formed this \u2018recurrent flow analysis\u2019. Unstable periodic and relative periodic orbits are able to be identified which span larger values of dissipation rate, i.e. corresponding to extreme bur"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "span larger values of dissipation rate",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "2408.05079v1",
+          "pdf_page": 2,
+          "quote": " greater diversity than previous studies which per- formed this \u2018recurrent flow analysis\u2019. Unstable periodic and relative periodic orbits are able to be identified which span larger values of dissipation rate, i.e. corresponding to extreme bursting events. The triad variables are found to provide a more natural way to weight the greater variety of spatial modes active in such orbits than a standard Euclidian norm of complex Fo"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "more natural way to weight the greater variety of spatial modes",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "2408.05079v1",
+          "pdf_page": 2,
+          "quote": " orbits are able to be identified which span larger values of dissipation rate, i.e. corresponding to extreme bursting events. The triad variables are found to provide a more natural way to weight the greater variety of spatial modes active in such orbits than a standard Euclidian norm of complex Fourier amplitudes. Moreover the triad variables build in a reduction of the continuous symmetry of the system which avoids the need"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "ill-suited for high dissipation events",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "2408.05079v1",
+          "pdf_page": 3,
+          "quote": "es because of their choice of norm, this result may be a \u201cfalse-negative\u201d. Therefore we wish to explore the possibility that the recurrence functions used previously are ill-suited for high dissipation events. Where a broad range of spatial Fourier modes are active, a simple L2 norm of the difference between modes may not capture recurrence in small amplitude, but dynamically relevant modes. In order to tackle some of these is"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "may be a",
+      "n_hits": 3,
+      "hits": [
+        {
+          "doc": "1611.04829v1",
+          "pdf_page": 7,
+          "quote": "ften observed in vortically-driven turbulence forming in the large scale strain regions, perpendicular to their \u2018parents\u2019 in anti-parallel pairs and conjecture that this may be a driving mechanism for the turbulent cascade process. Here we see a similar picture emerge from the converged UPOs (e.g. figure 7), although we don\u2019t see the same"
+        },
+        {
+          "doc": "2408.05079v1",
+          "pdf_page": 3,
+          "quote": "ciency of the method as Reynolds number increases. However, if the current recurrence functions are missing near recurrences because of their choice of norm, this result may be a \u201cfalse-negative\u201d. Therefore we wish to explore the possibility that the recurrence functions used previously are ill-suited for high dissipation events. Where a broad range of spatial Fourier modes are active, a simple L2 norm of the difference betwee"
+        },
+        {
+          "doc": "1906.01310v1",
+          "pdf_page": 4,
+          "quote": "e that the sensitivity of Newton-Raphson to initial conditions could result in a lack of convergence even if there is indeed a structure nearby. In these situations, DMD may be a useful tool since it can be used to extract a set of modes associated with \u2018background\u2019 periodic motion, resulting in a more robust initial condition for the root-finder and a more informed estimate of the period. Perhaps more importantly, DMD does no"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "The main downside of the approach is that it requires",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "1906.01310v1",
+          "pdf_page": 2,
+          "quote": "Kerswell 2013). The resulting set of candidate orbits, each augmented with a guessed period from the time between two similar states, is then input into a Newton solver. The main downside of the approach is that it requires the turbulence to shadow a periodic orbit for at least one full cycle, and hence it can be increasingly ineffective as the Reynolds number is increased (Chandler & Kerswell 2013). In addition, the sensitivi"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
       "effect": "b",
       "phrase": "considerable duplication",
       "n_hits": 1,
@@ -366,12 +485,17 @@
     {
       "effect": "b",
       "phrase": "unique recurrent flows",
-      "n_hits": 1,
+      "n_hits": 2,
       "hits": [
         {
           "doc": "1406.1820v1",
           "pdf_page": 5,
           "quote": "ble that the trajectory shadows a recurrent flow the longer its period if the leading Lyapunov exponent is largely period-independent. From these guesses we converged 81 unique recurrent flows: see Table IV in appendix B and figure 2. At low periods, there was a large repetition of the converged solutions already found in [6] (E1, T 1, T 3, T 4, R7, R8 and symmetry group permutations thereof) and so only about a third of the g"
+        },
+        {
+          "doc": "2408.05079v1",
+          "pdf_page": 13,
+          "quote": "us many which converge to known equilibrium and travelling wave solutions). For context [4], at the same parameters, from a DNS of 105 time units, were able to obtain 58 unique recurrent flows. Moreover the success of obtaining a greater diversity of solution is continued with 14 solutions having high mean dissipation. A. High dissipation orbits In order to compare and contrast the higher dissipation orbits to the more regular"
         }
       ],
       "status": "MEASURED"

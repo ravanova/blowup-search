@@ -187,3 +187,21 @@ pre-registration, as a review in a journal-only venue. **That declaration was WR
 direction: the review IS on arXiv, with its `journal_ref` attached, and it was fetched and read.**
 Recorded here rather than silently corrected, per the standing rule on controls and declarations
 that do not fire as planted.
+
+### LEG 411 ADDENDUM — three further PDFs, fetched when the corpus was extended
+
+The leg-411 block above was banked as a **checkpoint at the ten-file mark**, mid-run. The
+corpus was then extended by three when instrument 1's effect-(a) candidates were run down,
+and this addendum exists so that the count in the header above is not silently wrong: the
+leg-411 corpus is **thirteen files / twelve distinct works**, not nine. Fetched from arXiv
+on 2026-08-19, `curl https://arxiv.org/pdf/<id>`, HTTP 200 first attempt on each.
+
+| file | id | what it is | sha256 |
+|---|---|---|---|
+| `2408.05079.pdf` | `2408.05079v1` | Redfern, Lazer & Lucas, *nonlinear-triad recurrence function* (2024 preprint; publication status UNVERIFIED here) | `8ed5ec9a…8ab459e` |
+| `1906.01310.pdf` | `1906.01310v1` | Page & Kerswell, *JFM* **886** (2020) A28, koopman/DMD of Kolmogorov flow | `b1349254…7652a51` |
+| `2008.07515.pdf` | `2008.07515v2` | Page, Brenner & Kerswell, *Phys. Rev. Fluids* **6** 034402 (2021), autoencoder latent space | `cf43ee1e…2d43ec6` |
+
+`2408.05079` is a **preprint whose publication status this leg did not verify** and is graded
+accordingly wherever it is cited. `1906.01310` and `2008.07515` carry `journal_ref` in their
+arXiv metadata and those journal references were read off the served feed, not assumed.
