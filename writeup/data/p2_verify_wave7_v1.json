@@ -1,0 +1,78 @@
+{
+  "lane": "V",
+  "leg": 412,
+  "measured": {
+    "SS3j_headroom_measured_by_V_W7": {
+      "HEAD": {
+        "OPTIONS.md": 23971,
+        "ORCH_STATE_LIVE": 8080,
+        "STATE.md": 22975,
+        "WALLS.md": 32526
+      },
+      "c6287a2": {
+        "OPTIONS.md": 23971,
+        "ORCH_STATE_LIVE": 7401,
+        "STATE.md": 24016,
+        "WALLS.md": 32526
+      }
+    },
+    "SS46_recomputed": {
+      "seed406": {
+        "J_at_20000": 6.45968577803712,
+        "J_at_800": 28.693380532819674,
+        "ratio_at_20000": 4.292572444543338,
+        "ratio_at_800": 17.809800278734784
+      },
+      "seed407": {
+        "J_at_20000": 6.502356422688323,
+        "J_at_800": 35.560845905666,
+        "ratio_at_20000": 4.3209278227636565,
+        "ratio_at_800": 22.072392710868147
+      }
+    },
+    "SS46b_recomputed": {
+      "banked_J4_minimiser": {
+        "mid_run_4700_7700": -0.6613732411757053,
+        "trailing_3000": -0.6450792834781256
+      },
+      "seed406": {
+        "mid_run_4700_7700": 0.7563909545703899,
+        "trailing_3000": -0.2264360962692065
+      },
+      "seed407": {
+        "mid_run_4700_7700": 0.8221575805361055,
+        "trailing_3000": -0.35091086718236797
+      }
+    },
+    "l6b_gate": {
+      "L6_residual": 1.613811231995397,
+      "UNDER_RESOURCED": false,
+      "material_threshold": 1.45,
+      "materially_below_1_6138": "NO",
+      "smallest_residual_at_20000": 1.504851895102804
+    },
+    "longest_STATE_row_chars_at_c6287a2": 570,
+    "the_under_claim_absent_from_the_landing_record": {
+      "J3_at_800": 1.6218749783288575,
+      "J3_fall_needed_to_invert_the_ladder_rel": 0.07215296172004045,
+      "L6_cap_sweep_rate_last3_by_cap": {
+        "100": -0.031298503419278374,
+        "200": -0.029580697900559467,
+        "400": -0.026669284557046716,
+        "50": -0.03258476875087628,
+        "800": -0.02224154647340172
+      },
+      "budget_move_at_J4_rel": -0.06751677936822276,
+      "margin_percentage_points": 0.46361823518176887,
+      "measured_one_rung_up_at_25x_budget_rel": 0.06751677936822276,
+      "ratio": 1.351806114516301,
+      "refinement_ladder_J1_to_J4_rel": -0.04994560879936647,
+      "what": "25x the budget at a FIXED truncation moved the residual 1.35x as far as L6's ENTIRE four-rung refinement ladder did",
+      "why_the_cap_sweep_does_not_answer_it": "V-W6/SS38 ruled L6's cap sweep post-hoc truncation of the SAME 800-iteration runs, so it controls nothing about budgets ABOVE 800; and read as a trend it points the wrong way -- the rate shrinks monotonically as the cap rises."
+    }
+  },
+  "self_hash": "6759c82e36b1df41",
+  "unit": "V-W7",
+  "verifies": "wave 7 (R-bank leg 404, R-prof leg 405, L6-b leg 406) AND the Conductor's seventeen wave-7 integration commits",
+  "wave": 8
+}
