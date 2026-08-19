@@ -797,3 +797,12 @@ Standing user directive, unchanged and still binding; retired from STATE.md only
 **RETURNED — `PB1`** (leg 411, `440f28c`): gate **`YES` — `P1` IS KILLED, and that was pre-committed as a GOOD result.** Both effects are in print at `FULL TEXT`: score-monotone admission bias (Page–Holey–Brenner–Kerswell, *JFM* **991** (2024) A10, p.18; Chandler–Kerswell 2013 p.13 — **twelve years old**), and re-mining re-finds (CK13 p.14 Table 1; LK15 p.5). **`P1`'s framing word *silently* is contradicted by its own intended bibliography.** 1 of 12 controls did not fire (`pos_topical`), disclosed, not re-planted, nothing rests on it.
 
 
+
+
+---
+
+## §OPTIONS-R6R7-L1RES — three `OPTIONS.md` rows retired VERBATIM 2026-08-19 at the wind-down (§3j), to pay for `L6-e`'s never-dispatched annotation. Nothing edited. `R6` and `R7` are DONE and VERIFIED by `V-W7`; `L1-res` is SUPERSEDED by `writeup/SOURCES.md`.
+
+| **R6** | profile the inner loop | **DONE leg 403 `1f89ceb`, VERIFIED `V-W7`.** Gate (iii) `NO`, 4.34×. Row retired verbatim → `WALLS_HISTORY.md` §OPTIONS-R6R7; substance at `WALLS.md` W7. | done |
+| **R7** | bank the seed fields | **DONE leg 404 `8019c35`, VERIFIED `V-W7`.** Row retired verbatim → `WALLS_HISTORY.md` §OPTIONS-R6R7. ⚠ `--verify` CANNOT FAIL (0 `raise`/`assert`/`sys.exit`) — `V-W7` §, remedy owed. | done |
+| **L1-res** | the 4 pre-arXiv primaries | **SUPERSEDED 2026-08-19 by `writeup/SOURCES.md`** (rows 2, 3, 19, 20). Live debt is NRŠ 1996 alone → `L7-src`. | see `L7-src` |
