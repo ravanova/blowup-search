@@ -230,3 +230,5 @@ E-FE: 163 jobs on 6 shards; loadavg 9.71 9.24 10.46 on 12 cores
   [104/163] g092 UPO22  Q f2: stalled, ||R||=0.8524, 0.56 h
   attempt 93 UPO22  arm Q: stalled, final ||R|| = 2.313, 25 epochs, 0.52 h
   [105/163] g093 UPO22  Q f3: stalled, ||R||=2.313, 0.52 h
+  attempt 96 UPO22  arm Q: stalled, final ||R|| = 0.8771, 20 epochs, 0.46 h
+  [106/163] g096 UPO22  Q f6: stalled, ||R||=0.8771, 0.46 h
