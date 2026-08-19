@@ -10,13 +10,14 @@ verbatim 2026-08-18 under §3j → `## Superseded — the 2026-08-14 fork`.
 
 ---
 
-## LIVE — CONDUCTOR mode, **WAVE 7 CLOSED (`L6-b` LANDED); WAVE 8 DISPATCHING**, 2026-08-19
+## LIVE — CONDUCTOR mode, **WAVE 7 CLOSED (`L6-b` LANDED); WAVE 8 IN FLIGHT (4 units)**, 2026-08-19
 
-### Wave 5, the trigger message, and wave 6's §3i — RETIRED 2026-08-19 (verbatim, below)
+### RETIRED VERBATIM BELOW — wave 5's close and trigger; wave 6's §3i; **WAVE 6 COMPLETE**
 
-**Wave 5** CLOSED, LANDED, **VERIFIED**; **the trigger message SENT** 2026-08-18 with three caveats;
-**§3i answered for `V-W5` and `V5`**, neither moved an `L1→L4` link. Full text: `## Superseded —
-wave 5's close, the trigger, and wave 6's §3i`.
+Wave 5 CLOSED/LANDED/**VERIFIED**; trigger SENT 2026-08-18 with three caveats; neither `V-W5` nor
+`V5` moved an `L1→L4` link. **Wave 6 COMPLETE, three landed; its §3i re-rank (`L6-b` before `L7`)
+is DISCHARGED — `L6-b` landed `4df0ca0`.** Full text → `## Superseded — wave 5's close, the
+trigger, and wave 6's §3i` and `## Superseded — wave 6's close`.
 
 ### 2026-08-18 — the §3k directive and the Lane-R ruling — **BOTH DISCHARGED**; detail retired
 
@@ -24,16 +25,12 @@ Verbatim → `## Superseded — the §3k directive and the Lane-R ruling` below.
 `writeup/SOURCES.md` is the register (26 rows) with **`R-prof`'s rule-3 row filled at primary**; the
 ranking **`R4` > `R2` > `R3`** stands (`WAVE7_PLAN.md` §0), **self-unwinding** through §1's gate.
 
-### 2026-08-19 — "PRICE, DO NOT QUEUE" WITHDRAWN: all three queued units have now moved.
+### 2026-08-19 — "PRICE, DO NOT QUEUE" WITHDRAWN — **DISCHARGED**, retired verbatim below
 
-**`R-bank` LANDED `8019c35`, `R-prof` LANDED `1f89ceb`, `E-FE` DISPATCHED leg 408.** The block
-that set their order and priced them retired verbatim → `## Superseded — the 2026-08-19 "PRICE,
-DO NOT QUEUE WITHDRAWN" block`. **§0's `R4` > `R2` > `R3` ranking STANDS** — those were
-additions, not a re-rank. **My 90.9 core-h price was an OUTTURN, not a FLOOR, and `R-prof` has
-now measured the factor: 4.34× a named reference, gate (iii) `NO`, and it breaks no wall.**
-
-### WAVE 6 — COMPLETE 2026-08-19, three landed. **Its §3i re-rank (`L6-b` before `L7`) is
-DISCHARGED — `L6-b` landed `4df0ca0`.** Retired verbatim below → *Superseded — wave 6's close*.
+All three queued units moved and are recorded in the WAVE 7 block below. **What still binds: §0's
+`R4` > `R2` > `R3` ranking STANDS** — those were additions, not a re-rank — **and my 90.9 core-h
+price was an OUTTURN, not a FLOOR.** Full text → `## Superseded — the "PRICE, DO NOT QUEUE"
+discharge block`.
 
 ### ⚠ 2026-08-19 USER RULING — **TEMPORARY PIVOT TO PAPERS**, entering at the NEXT wave boundary
 
@@ -60,14 +57,12 @@ lane and every route-4 residual is downstream of the one function it re-implemen
 Plan committed `2a5ea0d` **before** dispatch, gates verbatim in the briefs. Dispatch block
 retired verbatim → `## Superseded — wave 7's dispatch block`; **its `E-FE` HOLD is DISCHARGED.**
 
-**RETURNED — `R-prof`** (leg 405, `1f89ceb`): gate (iii) **NO, 4.34×** the named reference; 79.1%
-transforms; remedy priced not landed. Integration audit + §3i seven: `writeup/waves/WAVE7_CLOSE.md`.
-Conductor finding: the unit's "every round exceeds 3×" is **cpu-clock-only** (worst wall 1.9975).
+**RETURNED — `R-prof`** (leg 405, `1f89ceb`): gate (iii) **NO, 4.34×** the named reference; breaks
+no wall. Detail retired verbatim → `## Superseded — R-prof's return detail`.
 
-**RETURNED — `V-W6`** (leg 407, `c7f242c`): `V5` and `V-W5` **VERIFIED**, `L6`
-**VERIFIED-WITH-QUALIFICATION**, no arithmetic defect anywhere in wave 6, 11 defects open, 0
-repaired. My landing audit: one-start finding UPHELD, three numbers overstated, one wrong
-conservatively, **two understated** — `CORRECTIONS.md` §38. `D-VW6-7` (undeclared scipy) repaired.
+**RETURNED — `V-W6`** (leg 407, `c7f242c`): `V5`/`V-W5` **VERIFIED**, `L6`
+**VERIFIED-WITH-QUALIFICATION**, 11 defects open, 0 repaired; my own landing audit came back
+three numbers overstated and **two understated** (§38). Detail → `## Superseded — V-W6's return`.
 
 **⚠ RE-RANK MADE IN THAT INTEGRATION COMMIT (§3i q5).** Wave 8 opens with **`L-JVER`** — an
 independent re-implementation of `W[V]`/`J(c)` in a different basis — because every route-4 residual
@@ -75,22 +70,38 @@ number is downstream of one function whose only evidence is a selftest comparing
 implementations. **`L8`'s branch rule is deferred VERBATIM to wave 9**, still keyed to `L6-b`.
 `WAVE8_PLAN.md` AMENDMENT 1, written **before** dispatch.
 
-**RETURNED — `R-bank`** (leg 404, `8019c35`): **`YES` ×3** — 160/160 bit-identical, 16/16 at
-`ulp_gap 0`, attempt 15 **12/12 byte-equal with both DNS field artefacts ABSENT**. Seedbank
-**TRACKED, 737,408 B**. I recomputed `self_hash`, re-hashed all 160 slices, re-ran `regenerate`
-on 4 fields — bitwise. **My own `~1.2 GB` is 268.9 MB**, `U2`'s *rejected* archive size (§39).
+**RETURNED — `R-bank`** (leg 404, `8019c35`): **`YES` ×3**, 160/160 bit-identical, seedbank now
+TRACKED. My independent re-hash and 4-field regeneration agreed bitwise. Detail retired verbatim
+→ `## Superseded — R-bank's return detail`; the archive-size correction is `CORRECTIONS.md` §39.
 
 **DISPATCHED — `E-FE`** (leg 408). **6 shards not 8**, on a measurement: **~15.2 h wall not ~11.4;
 ~91 core-h unchanged.** Inherits C2/C4; draw order a **declared choice** (lesson 91).
+
+### WAVE 8 — DISPATCHED AND IN FLIGHT 2026-08-19 08:52 (legs 409–412), plan `5802a49`/`6ca49a6`
+
+`L-JVER` (409, Lane L construction, opens the wave, meets the composition floor: independently
+re-implements `W[V]` and `J(c)` in a different basis; gate is `|ΔJ|/J_L6 < 1e-3` at three points,
+`YES`/`NO`) ‖ `PB2` (410, Lane L literature, re-scoped by AMENDMENT 4 to the NRŠ/`q = 3` seam) ‖
+`PB1` (411, paper blocker, `P1`'s owed novelty check under full leg-392 instrument discipline — a
+`YES` KILLS `P1` and is a GOOD RESULT) ‖ `V-W7` (412, verifier, dispatched LAST). **Four units, at
+the §3g cap; one verifier per wave, dispatched in the FOLLOWING wave, as budgeted.**
+
+**`V-W7` is briefed against my own seventeen wave-7 integration commits**, itemised — the §41
+three-way-licence row I fired on `L6-b`, the §46 withdrawal that overturns something `V-W6` UPHELD,
+the §46b self-correction, and the §3j figures below, which it is told to measure itself. I planned
+wave 7; I may not verify it.
+
+**`E-FE` (408) is a LATE RETURN.** Ruling `99421dd` stands: Lane R, did not set this wave's
+direction, **may not influence wave 8's ranking.** It holds 6 of 12 cores until ≈03:20 on 20-Aug.
 
 ### Headroom at the wave boundary — §3j, IN BYTES (`wc -c`)
 
 | file | bytes | cap | free |
 |---|---|---|---|
-| `STATE.md` | 23,639 | 24,576 | 937 |
+| `STATE.md` | 24,016 | 24,576 | 560 |
 | `WALLS.md` | 32,526 | 32,768 | 242 |
 | `OPTIONS.md` | 23,971 | 24,576 | 605 |
-| `ORCH_STATE.md` LIVE | 7,247 | 8,192 | 945 |
+| `ORCH_STATE.md` LIVE | 8,080 | 8,192 | 112 |
 
 **Defect of mine, §37 `writeup/CORRECTIONS.md`: retire by slicing between ASSERTED LINE INDICES,
 never by title, and measure the live block by line index too, or the cap check silently passes.**
@@ -1222,3 +1233,48 @@ wave 7's Lane-L slot is a measurement on the object, not another audit.**
 
 **RE-RANK MADE HERE (§3i q5): Lane L's next unit is `L6-b`, not `L7`.** `R4` > `R2` > `R3` stands.
 
+---
+
+## Superseded — the "PRICE, DO NOT QUEUE" discharge block
+
+Retired from LIVE 2026-08-19 under §3j when wave 8 was dispatched. VERBATIM.
+
+### 2026-08-19 — "PRICE, DO NOT QUEUE" WITHDRAWN: all three queued units have now moved.
+
+**`R-bank` LANDED `8019c35`, `R-prof` LANDED `1f89ceb`, `E-FE` DISPATCHED leg 408.** The block
+that set their order and priced them retired verbatim → `## Superseded — the 2026-08-19 "PRICE,
+DO NOT QUEUE WITHDRAWN" block`. **§0's `R4` > `R2` > `R3` ranking STANDS** — those were
+additions, not a re-rank. **My 90.9 core-h price was an OUTTURN, not a FLOOR, and `R-prof` has
+now measured the factor: 4.34× a named reference, gate (iii) `NO`, and it breaks no wall.**
+
+---
+
+## Superseded — R-bank's return detail
+
+Retired from LIVE 2026-08-19 under §3j when wave 8 was dispatched. VERBATIM.
+
+**RETURNED — `R-bank`** (leg 404, `8019c35`): **`YES` ×3** — 160/160 bit-identical, 16/16 at
+`ulp_gap 0`, attempt 15 **12/12 byte-equal with both DNS field artefacts ABSENT**. Seedbank
+**TRACKED, 737,408 B**. I recomputed `self_hash`, re-hashed all 160 slices, re-ran `regenerate`
+on 4 fields — bitwise. **My own `~1.2 GB` is 268.9 MB**, `U2`'s *rejected* archive size (§39).
+
+---
+
+## Superseded — R-prof's return detail
+
+Retired from LIVE 2026-08-19 under §3j when wave 8 was dispatched. VERBATIM.
+
+**RETURNED — `R-prof`** (leg 405, `1f89ceb`): gate (iii) **NO, 4.34×** the named reference; 79.1%
+transforms; remedy priced not landed. Integration audit + §3i seven: `writeup/waves/WAVE7_CLOSE.md`.
+Conductor finding: the unit's "every round exceeds 3×" is **cpu-clock-only** (worst wall 1.9975).
+
+---
+
+## Superseded — V-W6's return
+
+Retired from LIVE 2026-08-19 under §3j when wave 8 was dispatched. VERBATIM.
+
+**RETURNED — `V-W6`** (leg 407, `c7f242c`): `V5` and `V-W5` **VERIFIED**, `L6`
+**VERIFIED-WITH-QUALIFICATION**, no arithmetic defect anywhere in wave 6, 11 defects open, 0
+repaired. My landing audit: one-start finding UPHELD, three numbers overstated, one wrong
+conservatively, **two understated** — `CORRECTIONS.md` §38. `D-VW6-7` (undeclared scipy) repaired.
