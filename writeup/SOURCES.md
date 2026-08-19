@@ -243,3 +243,31 @@ them. The amendment to rows 25/29 belongs to the Conductor:
 | 46 | Redfern, Lazer & Lucas, nonlinear-triad recurrence function (2024) — **PREPRINT; the served arXiv metadata carries NO `journal_ref` and this leg DID NOT VERIFY publication status**, `Papers/2408.05079.pdf` | Gate effect (a) as the paper's ENTIRE PREMISE (`S3`, discounted one notch for preprint status): the standard recurrence function's choice of norm decides which orbits are recoverable. p.13 supplies the head-to-head number against the standard `L2` recurrence function's **58 unique recurrent flows** at identical parameters. | **FULL TEXT** — sha256 `8ed5ec9a…8ab459e` in `Papers/MANIFEST.md`; 26 pages extracted, 48,502 chars | **YES** — `NOVELTY.md` §2.4, §3.3, **and it is cited as a preprint everywhere it appears** |
 | 47 | Page & Kerswell, **JFM 886 (2020) A28** (`journal_ref` read off the served feed, not assumed), `Papers/1906.01310.pdf` | **GRADED `S0 ADJACENT` AND DELIBERATELY NOT COUNTED AS A `YES`.** p.2's `main downside` sentence is about the *requirement* of shadowing, not about *which* orbits the requirement selects. §0.5's rule was written before the corpus was read precisely so this near-miss could not be quietly promoted. | **FULL TEXT** — sha256 `b1349254…7652a51` in `Papers/MANIFEST.md`; 21 pages extracted, 53,737 chars | no — and the refusal to promote it is the load-bearing part |
 | 48 | Page, Brenner & Kerswell, **Phys. Rev. Fluids 6 034402 (2021)** (`journal_ref` read off the served feed), `Papers/2008.07515.pdf` | Read in full as part of the autoencoder/latent-space thread. No graded quote. | **FULL TEXT** — sha256 `cf43ee1e…2d43ec6` in `Papers/MANIFEST.md`; 13 pages extracted, 43,954 chars | no |
+
+---
+
+## Appended 2026-08-19 by `L-JVER` (leg 409, Lane L) — APPEND-ONLY; rows 31 and 32 are NOT edited, the reached depth is placed BESIDE them
+
+The footer above records that `L-JVER` "carries the standing obligation to keep [rows 31 and 32]
+current if it upgrades either depth." One depth attempt **failed** and one **partially upgraded**.
+Both are recorded exactly as they came out.
+
+| # | source | what `L-JVER` did with it | DEPTH REACHED BY THIS UNIT | load-bearing |
+|---|---|---|---|---|
+| 49 | **row 31** — R. H. Byrd, P. Lu, J. Nocedal, C. Zhu, *A limited memory algorithm for bound constrained optimization*, **SIAM J. Sci. Comput. 16(5):1190–1208 (1995)** | **Depth upgrade ATTEMPTED AND FAILED.** Two public PDF URLs tried. (i) `www.ece.northwestern.edu` → `curl: (60) SSL: no alternative certificate subject name matches target host name` — TLS certificate name mismatch, no bytes retrieved. (ii) UNT digital library → `http=200 bytes=3357 type=text/html`, an HTML block page, not a PDF. `Papers/fetch.sh` is **arXiv-only** and this is a 1995 SIAM article with no arXiv record. *(Positive network control: arXiv resolves and returns HTTP 200 from this container, so the refusal is the publisher's, not the sandbox's. No paywall circumvented; no author, group, maintainer or list contacted.)* | **`UNREACHABLE` from this container.** Row 31's `LIBRARY EXECUTED, PAPER CITATION ONLY` **stands unchanged**. No depth faked. | unchanged — still `YES` for `L6`'s `ban_C1.engaged = false`, which remains a statement about the algorithm's documented *form*, checkable without the paper |
+| 50 | **row 32** — S. Chandrasekhar, *Hydrodynamic and Hydromagnetic Stability* (Oxford, 1961), §II — poloidal–toroidal representation `V = curl curl(f y) + curl(g y)` | **The SOURCE was not read** (a printed Oxford monograph; not fetchable here). **But the IDENTITY it carries is now `RECOMPUTED` by a second, independent implementation**: `L-JVER` derived Cartesian real solid harmonics and built `∇×∇×(f y)` from its own term algebra, in a different basis from `L6`, and it reproduces `L6`'s VSH components to `1.16e-14` on 150 banked field samples and gives `max abs div V = 2.08e-16`. Independent closed-form control on both implementations: `L-JVER` `7.51e-12`, `L6` `2.80e-15`. | **SOURCE DEPTH UNCHANGED — `CITATION, UNREAD HERE`. THE IDENTITY'S STATUS UPGRADED FROM ONE-IMPLEMENTATION MEASUREMENT TO `RECOMPUTED` BY TWO DISJOINT IMPLEMENTATIONS.** These are different things and are deliberately not merged into one word. | **YES** for divergence-freeness — now doubly measured, still not cited. **NO** for completeness of the representation on `ℝ³`, which remains unestablished here and on which nothing live depends |
+
+**One ceiling this unit declared in advance and did not clear.** `L-JVER`'s solid harmonics were
+fitted by least squares **against `L6`'s `Y_lm` convention**, because a comparison at a shared
+coefficient vector is meaningless if the two codes mean different things by the same index. The
+convention is therefore **INHERITED, not independent**, and a common-mode error in the convention
+itself is invisible to row 50's `RECOMPUTED`. The closed-form controls partially guard it; they do
+not close it.
+
+**Bearing on rows 31/32's load.** `L-JVER`'s gate answered **`NO`** and the reason is recorded in
+`CORRECTIONS.md` **§52**: `J(c)` is a **divergent** integral for generic `c` in this trial space, and
+every route-4 residual in the record is a value of a 72-node truncation of it. That finding is about
+the **objective and its quadrature**, and it touches **neither** row 31 (the optimiser's form) **nor**
+row 32 (divergence-freeness of the representation), both of which survive it intact. It does,
+independently, corroborate `PB2`'s leg-410 measurement above that the same route-4 object carries a
+**log-divergent** integral — two different integrals, two different units, the same tail.
