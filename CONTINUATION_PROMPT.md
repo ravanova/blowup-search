@@ -21,7 +21,7 @@ Read that sentence again before you plan anything, and do not let a wave's outpu
 you otherwise unless an `L1 → L4` link actually moved.
 
 Then, only as needed: `writeup/INDEX.md` (every landed unit, gate answer, SHA, verifier),
-`writeup/CORRECTIONS.md` (every correction; read the last FIVE sections, §55–§59, before
+`writeup/CORRECTIONS.md` (every correction; read the last SIX sections, §55–§60, before
 trusting any route-4 number — **§59 withdraws a word and six digits from §58 and its
 pointer sits above §58, so read §59 first**), `CLAY_OBLIGATIONS.md`, `CLAY_ROADMAP.md`, `writeup/ROUTE_MAP.md`,
 `writeup/SOURCES.md`, `writeup/papers/README.md`. The run history that used to live in this
