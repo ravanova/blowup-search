@@ -363,3 +363,84 @@ citation can be re-established anywhere by one `pip install` and one `sha256sum`
 in place to say `available ONLY via a pinned re-install` rather than `available`. **`R4-a` must re-run
 that check itself and report `PASS`/`FAIL` on the hash before using the reference** — if the hash does
 not match, the reference is a different implementation and the naming above is void.
+
+---
+
+## AMENDMENT 3 — 2026-08-19 04:05, WRITTEN AT `L6-b` ITERATION 9,700 OF 20,000, BEFORE ITS ANSWER EXISTS. **BOTH `L8` BRANCHES INHERIT §41's DEFECT, AND BRANCH (ii) INHERITS IT VERBATIM.**
+
+**Timestamp first.** `L6-b` is at 9,700 of 20,000. Its answer does not exist. This amends a
+**pre-committed decision rule** and it is committed before the input that selects the branch, which
+is the only condition under which such an amendment is legitimate.
+
+### 1. The inheritance
+
+`§1`'s **BRANCH (ii)** opens: *"`L6-b` returns no material drop. **Then the stall is the
+CONSTRUCTION, the `NO` hardens**…"* That is `WAVE7_PLAN.md`'s sentence, copied forward — **the exact
+sentence `CORRECTIONS.md` §41 found unsupported at a non-stationary terminal iterate**, and which
+the three-way licence's middle row denies. The defect propagated into the wave-8 decision rule
+before it was found in the wave-7 gate.
+
+**And branch (i) is not clean either, which I did not see when writing §41.** `L6-c` re-runs the
+refinement ladder at cap 20,000 per rung and reports `d log ρ / d log n_dof`. **On present evidence
+every rung of that ladder would also terminate non-stationary** — the banked start's trailing-2,000
+`sig` minimum is `51.2`, fifty-one times the threshold, at 9,700 iterations. A slope computed across
+rungs whose every point is a non-critical stopping point is **`L6`'s original defect one budget
+level up, at ten times the cost.** That is the outcome I would least like to fund.
+
+### 2. What changes, and what does NOT
+
+**The UNIT branch (ii) selects does not change. `L6-d` is still right, for a better reason.** If two
+independently constructed trial spaces stall at the same budget with the same non-stationarity, that
+is evidence about **the objective's landscape**, which is a stronger and more interesting object than
+either basis. What changes is its pre-committed reading: *"a `NO` from two independent trial spaces
+is a much harder statement about route 4"* becomes **a `NO` from two non-converged optimisations**,
+which is a statement about what 20,000 iterations reach in two bases and **not** about route 4
+having no profile. `CORRECTIONS.md` §35's `1.476×` clause is unaffected.
+
+**Branch (i) gains a pre-condition it did not have:** `L6-c` is **NOT dispatched** unless `L6-b`'s
+own trailing-window stationarity says a rung can reach a critical point at cap 20,000. Otherwise it
+buys a ten-times-more-expensive instance of the defect it exists to discharge.
+
+### 3. THE CONSTRUCTION THIS EXPOSES — `L6-e`, AND IT IS CHEAPER THAN EITHER BRANCH
+
+Both branches are blocked by the same unanswered question, and **`L6` never asked it, `L6-b` cannot
+answer it, and it is not on any queue:**
+
+> **Does a stationary point of this objective at this `n_dof` exist and is it reachable AT ALL —
+> at any budget?**
+
+Every measurement in this lane has been taken at an **iteration cap**: `L6` at 800 (58 of 58
+records), `L6-b` at 20,000. **Not one has ever been run to a stationarity CRITERION.** The whole
+`ρ`-vs-`n_dof` question is being asked with an instrument that has never once been shown to
+terminate on the property it reports.
+
+**`L6-e`, named now so the answer selects nothing after the fact.** One start — `L6`'s banked
+branch-B minimiser, the object the record already leans on — same realization, basis, norm and
+`n_dof = 6720`, **no iteration cap**; run to `scale_invariant_grad < 1` sustained over a trailing
+2,000 iterations (§44's key, the conservative direction) or to a **wall-clock cap of 12 h**,
+whichever comes first. **GATE, final wording: does `‖x‖‖∇J‖₂/|J|` reach and hold below `1`, YES or
+NO, and at what iteration count and what `ρ`?**
+
+**Pre-committed reading, both directions plus the third.**
+- **`YES`** ⟹ a critical point exists and its iteration cost is now **measured**. Every ladder in
+  this lane can be priced properly for the first time, and `L6-c` becomes dispatchable at a known
+  budget instead of a guessed one.
+- **`NO`, gradient still ≫ 1 at 12 h** ⟹ **the objective as posed does not have a reachable
+  stationary point at this `n_dof` by this optimiser**, and every `ρ` in the record — `L5`'s
+  `c_mod`, `L6`'s `1.6138`, `L6-b`'s answer — is a **stopping value, not a minimum.** That is a
+  statement about the FORMULATION, it is adverse to route 4 in a way no basis change can repair,
+  and it is far larger than anything either `L8` branch can return.
+- **`UNDER-RESOURCED`** — the 12 h cap hit with `sig` **falling monotonically through the last
+  quarter** ⟹ reported as `UNDER-RESOURCED`, **which is a verdict here and not a `NO`**, with the
+  extrapolated cost stated as a range and no slope claimed (§44).
+
+**Cost: ≤ 12 h wall on ~2 cores, one start, `~2.4×10¹ core-h`** — the same order as either `L8`
+branch and **strictly cheaper than `L6-c`**, which is a three-rung ladder with independent seeds.
+
+**§3i q5 asked and answered.** *What is the cheapest unit that could kill the priority lane, and why
+is it not next?* **It is this one, and as of this amendment it IS next in Lane L after `L-JVER`** —
+ahead of both `L8` branches, because both are unpriceable until it returns. `L-JVER` still opens
+wave 8: it checks whether `J(c)` as coded is the functional at all, and **there is no point measuring
+the stationarity of the wrong function.** `L-JVER` → `L6-e` → `L8`.
+
+**Tier 2 is never a proof. No `L1→L4` link moves on any outcome above.**
