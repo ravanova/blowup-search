@@ -288,3 +288,11 @@ E-FE: 163 jobs on 6 shards; loadavg 9.71 9.24 10.46 on 12 cores
   [127/163] g119 UPO20  Q f9: stalled, ||R||=1.6, 0.61 h
   attempt 121 UPO17  arm S: stalled, final ||R|| = 1.819, 25 epochs, 0.54 h
   [128/163] g121 UPO17  S f1: stalled, ||R||=1.819, 0.54 h
+/home/andy/projects/Unsolved/solver/kolmogorov2d_nkbasin.py:139: RuntimeWarning: overflow encountered in multiply
+  adv_hat = np.fft.fft2(u * wx + v * wy) * self.mask
+/home/andy/projects/Unsolved/solver/kolmogorov2d_nkbasin.py:139: RuntimeWarning: invalid value encountered in add
+  adv_hat = np.fft.fft2(u * wx + v * wy) * self.mask
+/home/andy/projects/Unsolved/.venv/lib/python3.12/site-packages/numpy/fft/_pocketfft.py:101: RuntimeWarning: invalid value encountered in fft
+  return ufunc(a, fct, axes=[(axis,), (), (axis,)], out=out)
+  attempt 124 UPO17  arm S: stalled, final ||R|| = 18.78, 20 epochs, 0.43 h
+  [129/163] g124 UPO17  S f4: stalled, ||R||=18.78, 0.43 h
