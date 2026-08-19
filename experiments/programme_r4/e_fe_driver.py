@@ -203,7 +203,7 @@ def clopper_pearson(k, n, alpha=ALPHA):
         two_sided_95_lower=lo2, two_sided_95_upper=hi2,
         one_sided_95_upper=hi1, one_sided_95_lower=lo1,
         closed_form_check_upper_at_k0=(
-            None if k else 1.0 - (alpha / 2.0) ** (1.0 / n)))
+            None if (k or not n) else 1.0 - (alpha / 2.0) ** (1.0 / n)))
 
 
 # ==========================================================================
