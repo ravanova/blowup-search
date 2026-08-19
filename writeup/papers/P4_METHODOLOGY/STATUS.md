@@ -1,10 +1,26 @@
 # P4 — Running a computational-mathematics programme that catches its own errors. STATUS.
 
-**Working claim.** A set of mechanical disciplines — pre-committed gates naming both outcomes,
-planted controls that must fire in both directions, `UNDER-RESOURCED` as a verdict distinct from
-`NO`, verifiers forbidden from checking what they planned, and bans superseded only by measurement
-— produces a programme that **finds and retracts its own errors**, and the evidence is a record of
-those retractions rather than a claim that it works.
+**Working claim, REVISED 2026-08-19 and now weaker than it was.** A set of mechanical disciplines
+— pre-committed gates naming both outcomes, planted controls that must fire in both directions,
+`UNDER-RESOURCED` as a verdict distinct from `NO`, verifiers forbidden from checking what they
+planned, and bans superseded only by measurement — produces a programme that **finds and retracts
+its own errors**, and the evidence is a record of those retractions rather than a claim that it
+works.
+
+**The revision, and it is the paper's spine rather than a caveat.** The disciplines that do the
+catching are **not** the ones the programme most advertises. Measured 2026-08-19 (`CORRECTIONS.md`
+§45): **32 of this repository's 49 `*_evidence.py` scripts reference no data file outside their own
+unit's artefact**, and therefore cannot detect a claim that is wrong in the artefact and in the
+checker together — the same reasoning wrote both. That failure mode is not hypothetical (`C37`,
+§43). **The `N/N evidence checks passed` line that appears in nearly every artefact here is, 65% of
+the time, a statement about internal consistency and not about the claim.**
+
+**What actually caught things, on the record below:** units run in parallel and never told each
+other's result (`T4`/`T6`); a verifier forbidden from auditing what it planned; a co-tenant's
+instrument read from outside the unit; and, repeatedly, someone opening a primary artefact for an
+unrelated reason. **Every one of those is a STRUCTURAL separation between the claimer and the
+checker. None of them is a check the unit wrote about itself.** If this paper has a thesis, that is
+it, and it is considerably less flattering than the one it started with.
 
 ## The evidence, and it is unusual because it is all adverse to the programme's own hopes
 
