@@ -246,3 +246,120 @@ during the run, not only at the gate; explicit paths only; never `git add -A`, `
 **Wave 8 is therefore: `L-JVER` ‖ `PB2` ‖ `PB1` ‖ `V-W7`** — construction first, verifier last, four
 units, at the §3g cap. §2, §3, §4 and §6 are unchanged. **`L8` moves to wave 9 with its branch rule
 intact.**
+
+---
+
+## AMENDMENT 2 — 2026-08-19, WRITTEN BEFORE DISPATCH. `R4-a`'s REMEDY IS NAMED, AND THE OLD PRE-CONDITION IS WITHDRAWN AS DEFECTIVE
+
+The directive lists `R4-a` as *"whose remedy you correctly found is NOT specified as 'Strang' and needs
+naming before dispatch."* This amendment discharges that. It is a CONDUCTOR specification, written
+before any unit exists, and it is committed before dispatch so that it cannot be tuned to an answer.
+
+### 1. What `U3` actually does — read from the code, not from the header comment
+
+`solver/kolmogorov2d_nkbasin.py:142-149`, `_rk4_step`, verbatim in structure:
+
+    k1..k4 = RK4 stages of self._rhs_hat   (nonlinear + forcing ONLY)
+    w_hat  = w_hat + (dt/6)(k1 + 2k2 + 2k3 + k4)
+    return w_hat * decay,   decay = exp(-Ksq*dt/Re)
+
+**A full explicit RK4 step on the nonstiff part, then one multiplication by the exact viscous factor.**
+That is **Lie–Trotter**: first order globally, regardless of the fact that RK4 is fourth order and the
+viscous factor is *exact*. The header comment at `:25-27` describes the same thing accurately
+(*"applied after each RK4 step"*) — the defect was never hidden, it was simply never priced.
+
+### 2. Why `Strang` was not a specification
+
+`writeup/SOURCES.md`'s `R4` row already says so in its own words: *"'second-order Strang' is a
+hypothesis about the fix, not yet a specification."* Three things were missing and all three mattered:
+**which** second-order scheme; **whether** the fix is a symmetric split of the same factor or a change
+of scheme family; and **what the new stepper does to the viscous term**, which `U3` currently treats
+*exactly* and which most second-order IMEX schemes do **not**. A remedy that raises the global order
+from 1 to 2 while *lowering* the viscous term from exact to second-order is not obviously an
+improvement, and the old wording could not even pose that question.
+
+### 3. THE NAMED REMEDY — TWO STEPPERS, BOTH SECOND ORDER, AND THE REASON THERE ARE TWO
+
+**`S1`, the probative one: Crank–Nicolson + RK2 (Heun), exactly as `jax_cfd` implements it.**
+Reference implementation, **executed here, not merely cited**: `jax-cfd==0.2.1`,
+`jax_cfd/spectral/time_stepping.py`, function `crank_nicolson_rk2`, lines 81–114,
+`sha256 11ede6ca9f0c22a1a0b3513df3c0d6ef96a48258f6d06126d47e80cad8fcee09`. Its body, quoted:
+
+    g  = u0 + 0.5*dt*G(u0)
+    h1 = F(u0)
+    u1 = G_inv(g + dt*h1, 0.5*dt)
+    h2 = 0.5*(F(u1) + h1)
+    u2 = G_inv(g + dt*h2, 0.5*dt)
+
+with `F` the explicit (nonlinear + forcing) terms, `G` the implicit (viscous) terms and `G_inv` the
+implicit solve — which for a diagonal spectral Laplacian is one elementwise divide.
+
+**Why this one and not Canuto D.3 (`SOURCES.md` row 26, which is what the record currently points at):
+the reference implementation names its own published home for this function, and that home is
+`Chandler & Kerswell, JFM 722:554–595 (2013), Section 3` — the paper `M1` reproduces.** So `S1` asks
+the sharpest available form of `R4-a`'s question: *do this programme's landed orbits survive being
+re-solved under the stepper the reproduced paper itself used?* Canuto D.3 remains correct as the home
+of the low-storage RK–CN family and stays in row 26; it is simply not the most probative member of it.
+
+**`S2`, the control: Strang-split integrating factor.** One line of change to `_rk4_step`:
+
+    E_half = exp(-Ksq*dt/(2*Re))
+    w  <-  E_half * RK4_N( E_half * w, dt )
+
+Second order globally, and — unlike `S1` — **it keeps the viscous term EXACT**, as `U3` had it.
+
+**The reason both run, stated as a discriminator and not as thoroughness.** `S1` and `S2` differ in
+exactly one property: `S1` gives up the exact viscous factor, `S2` keeps it. So the two together
+separate two hypotheses a single stepper cannot:
+
+| `S1` | `S2` | reading, pre-committed |
+|---|---|---|
+| NO | NO | the orbits are robust to the splitting order. `M1`'s reproduction survives on measurement. |
+| YES | YES | the **first-order splitting** is the cause. `M1`'s reproduction is invalidated (§1's YES branch). |
+| YES | NO | the movement comes from **Crank–Nicolson's treatment of viscosity**, not from the order. That is a statement about `S1`, **not** about `U3`, and `M1` is **not** invalidated by it. |
+| NO | YES | incoherent — two second-order schemes disagreeing about which way is *up*. **Stop and report; do not interpret.** |
+
+Row 3 is the one that makes this worth doing twice: without `S2`, a `YES` on `S1` alone would have been
+written up as *"`M1`'s reproduction is invalidated"* when the honest reading may be *"Crank–Nicolson
+moved it."* **The single-stepper gate could not have told those apart, and would have reported the
+louder one.**
+
+### 4. THE OLD PRE-CONDITION IS WITHDRAWN. §1 of `WAVE7_PLAN.md` said:
+
+> *"Pre-condition (§3k rule 3): the Strang-splitting citation is in `writeup/SOURCES.md` at `FULL TEXT`,
+> **in the same commit as the pre-registration**, or the unit does not run."*
+
+**That wording is defective on two counts and I am withdrawing it rather than quietly satisfying it.**
+(i) It names the wrong scheme, per §2 above. (ii) **It mis-assigns load-bearing status.** `R4-a`'s claim
+is *"this stepper is second order and the orbits do / do not move under it"* — that rests on a
+**measured convergence order and a measured displacement**, not on any published theorem. Demanding
+`FULL TEXT` of Strang 1968 as a gate on running a measurement is §3k applied where §3k does not bite,
+and its only achievable outcomes were an indefinite block or a fudged depth label.
+
+**REPLACEMENT PRE-CONDITION, three clauses, all of which THIS AMENDMENT ALREADY DISCHARGES:**
+1. **The scheme is specified at formula level in a commit that predates dispatch.** §3 above. Done.
+2. **The reference implementation is named to file, function, line range, version and hash, and is
+   EXECUTED, not cited.** §3 above; the unit must re-execute it and say so.
+3. **Attribution is labelled as attribution.** `Chandler & Kerswell` stays at `CITATION, UNREAD HERE`
+   (`SOURCES.md` row 25) and **nothing in `R4-a` rests on it**; Strang 1968 stays `cited, not read`.
+   The load is carried by clause 2's execution and by the gate's own measured order ≈ 2.
+
+The rest of `WAVE7_PLAN.md` §1's gate — the 9 distinct `U3`/`U5` orbits, displacement in `T`, `|s|` and
+state norm each **against the residual band the original was accepted at**, measured order ≈ 2, and
+`NO` is a real result — **stands unchanged**, and now runs twice, once per stepper.
+
+### 5. A DEFECT FOUND WHILE NAMING THIS, RAISED HERE RATHER THAN SMOOTHED OVER
+
+`SOURCES.md` **row 26 claims the executable form of the reference "is available and inspectable."**
+It is — at
+`/tmp/claude-1001/-home-andy-projects-Unsolved/<session-uuid>/scratchpad/refvenv`, **a 615 MB
+session-scoped scratchpad venv installed by `R-prof`.** That path does not survive this session, let
+alone a container. **A `SOURCES.md` availability claim resting on an ephemeral path is a citation that
+will silently become false, and the row does not say so.**
+
+**Remedy, and it is deliberately not "vendor the venv":** pin what makes the citation *reproducible* —
+`jax-cfd==0.2.1`, the file's `sha256`, and the line range — all three now recorded above, so the
+citation can be re-established anywhere by one `pip install` and one `sha256sum`. Row 26 is corrected
+in place to say `available ONLY via a pinned re-install` rather than `available`. **`R4-a` must re-run
+that check itself and report `PASS`/`FAIL` on the hash before using the reference** — if the hash does
+not match, the reference is a different implementation and the naming above is void.
