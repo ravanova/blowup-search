@@ -3663,3 +3663,132 @@ after all, the one thing this script is guaranteed to do.
 **CEILING.** No `L1 → L4` link moved in either direction. `§52` and `§53` are **unaffected and now
 independently reproduced**. Nothing here is a retraction of a result, and none of it is progress
 toward Clay. Clay stays **~0.05%**.
+
+---
+
+## §55 — the Conductor's landing audit of `P2-DRAFT` (leg 415): `F1` UPHELD at primary, `F3` UPHELD **and extended** — and the extension REVERSES which fit window is the dangerous one
+
+`P2-DRAFT` escalated two findings against `writeup/data/p2_route_l5_finite_energy_v1.json`, the
+artefact behind `L5`'s `NO` and behind `W4` clause (b). I verified both at primary before
+integrating. Both stand. The second one goes further than the unit claimed, **in the opposite
+direction from the one the unit's wording implies**, and that reversal is the reason this section
+exists.
+
+### 1. `F1` — UPHELD. The per-term decomposition is at the WRONG NORM, and it is the only decomposition there is
+
+The gate's load-bearing norm is `gate.norm` — the **pressure-free** `‖curl F‖_{L¹_t L^{3/2}_x}`.
+The per-term decomposition that names the obstruction is not in that norm. Every per-term field in
+the artefact is `L³`: `T1_L3`, `T2_L3`, `T3_L3`, `T4_L3`, `T5_L3`, `T12_L3`, `T123_L3`, together
+with their `_at_largest_rho`, `_rho_exponent` and `_rho_exponent_tail3` variants. I filtered every
+per-term key in the file for any mention of `curl`, `L32` or `L1t`: the filter returned `[]`.
+`curl_L32` exists **only as a per-row total**, never decomposed.
+
+So the two numbers quoted inside `gate.the_obstruction_named` —
+`|T1+T2|/|T1| = 2.578e-08` and `|R_loc|/|T3| = 0.999998`, which are
+`T12_over_T1_at_largest_rho` and `total_over_T3_at_largest_rho` on the load-bearing row
+`sweep/alpha=1|kappa=a_physical_frozen|DSS` — are measured in `L³`, and the sentence they support
+is asserted about the `L^{3/2}` curl norm. The identification of `T3` as the sole survivor is an
+`L³` statement wearing an `L^{3/2}` label.
+
+**Found by writing a referee's table with a units column and being unable to fill it in from the
+field names** — after eleven legs on this route and a `120/120` verification pass.
+
+### 2. What `F1` does NOT do: `W4` clause (b) is NOT reopened
+
+The gate's `NO` does not pass through the decomposition. It is read off the total directly:
+`gate.c_mod_per_unit_s` = the load-bearing row's `rows[4]/curl_L32`, and the `NO` follows from
+`c_mod > 0` and ρ-independent via `gate.why_threshold_free` — `Σ(S) = c_mod·S` diverges, so the
+answer is `NO` for every `eps_close > 0` with no closure constant needed. **Clause (b) stands.**
+`P2-DRAFT` stated this limit itself and used no number from the decomposition to argue otherwise.
+That is correct and I confirm it at primary.
+
+What `F1` damages is the **explanatory** claim — *which* term survives, and the `ṁ`-proportionality
+that the whole P2 narrative is built on. That claim is currently unsupported **in the norm that
+matters**. The fix writes new fields from an existing calculation. One of its two outcomes means the
+P2 draft's central sentence is wrong.
+
+### 3. `F3` — UPHELD, and the mis-pairing is IN THE ARTEFACT, not merely in the prose
+
+`gate.answer_in_precommitted_wording` reads *"with measured rho-exponent 0.000109 over rho0 in
+[10, 1000]"*. That number is `curl_L32_rho_exponent_tail3` = `1.0850007559945518e-04`, fitted over
+the **last three** ρ₀ points. The full-window fit over the range actually quoted is
+`curl_L32_rho_exponent` = `-2.340048393964631e-02`. The `rho` values are `[10, 30, 100, 300, 1000]`,
+so the tail-3 window is `[100, 1000]` — **one decade, three points**, not the 2-decade, 5-point
+window the sentence claims.
+
+This is not only a prose defect. In the artefact itself `gate.rho_exponent` carries the **tail-3**
+value while the adjacent `gate.rho0_range_tested` carries `[10.0, 1000.0]`, the **full** range. The
+same mis-pairing appears a third time in
+`gate.the_clause_b_bill.available_rho_exponent_at_the_pinned_alpha`. Three banked fields, one error.
+
+### 4. The extension, and the reversal: the CONTAMINATED window is the one that would have BROKEN the wall
+
+`P2-DRAFT` reported the sign change as a defect and stopped there. I refitted both windows myself
+from `rows[*]/curl_L32` and reproduce both banked exponents to 13 significant figures
+(`-0.02340048393964549` vs banked `-0.02340048393964631`; `+0.00010850007559998556` vs banked
+`+0.00010850007559945518`). The banked arithmetic is right. The question is which window is
+*correct*, and the answer is not the one the sign change insinuates.
+
+The raw sequence is `[995.488, 869.968, 869.068, 869.261, 869.288]`. It falls **12.6 %** between
+ρ₀ = 10 and ρ₀ = 30 and then moves by **0.078 %** across the whole remaining 1.5 decades. That first
+step is a transient, not a scaling. A power-law fit that includes it does not measure the asymptotic
+exponent; it measures the transient. **The tail-3 value is the right choice for an asymptotic claim,
+and `L5`'s gate answer `NO` therefore stands on the correct number.**
+
+Now the part that matters. `the_clause_b_bill` states the requirement as
+`required_rho_exponent_for_summability` = *"< 0 strictly"*. The full-window exponent is
+**negative**. Had the gate quoted the number matching the range it names — the arithmetically
+honest-looking pairing, the one a referee chasing consistency would demand — it would have reported
+an exponent satisfying the summability requirement, and clause (b) would have appeared to **BREAK**.
+
+**The defect direction is therefore the dangerous one inverted from the usual case.** The error here
+protects the wall; correcting it *in the naive direction* — making the number match the stated range
+— would have produced a **FALSE WALL BREAK** off a transient. This is the third time in this record
+(`§51`, `§53`, now `§55`) that the sign or direction of an error is the only reason a `NO` survives,
+and the second time that the *repair a consistency check would have suggested* is worse than the
+defect. `§45`'s point stands: the instruments cannot see this class, because both windows are
+banked, both are arithmetically correct, and nothing in the record checks whether a fit window is
+asymptotic.
+
+### 5. What this does to my own `§53` flag on `c_mod`: it makes it WORSE
+
+`§53` flagged that the ρ sweep behind `c_mod` stops short of where the analogous `L-JVER` sweep
+flattens. `F3` sharpens that flag rather than answering it. The saturation claim's real evidential
+basis is **three points across one decade**, not the five points across two that
+`gate.rho0_range_tested` advertises. `gate.largest_cutoff_radius_in_y_tested` = `1261.717`. A
+saturation asserted to hold to `ρ → ∞`, carrying `Σ(∞) = ∞` and clause (b) with it, rests on a
+3-point fit ending just past `10³`.
+
+**This is not a retraction of `L5`.** The `NO` stands, on the correct exponent, for the reason
+`gate.why_threshold_free` gives. What is now recorded is that its margin of evidence is thinner than
+the artefact's own prose states.
+
+### 6. `L5-cmod` (leg 413) is NON-CITABLE and nothing here rests on it
+
+`L5-cmod` was dispatched to extend exactly this sweep to ρ₀ = 1e8. Its last checkpoint `c8e9123` is
+marked `CHECKPOINT (NOT a landing, NOT a verdict)`, carries `_checkpoint: X2`, has **no gate answer
+field**, and four of its controls were still running. It may not be cited and it is not cited here or
+in the P2 draft. `P2-DRAFT` correctly took no number from it. Whether the saturation survives to 1e8
+is **UNTESTED**, not settled, and it stays that way in this record regardless of which way the
+checkpoint was trending.
+
+### 7. Rules this section adds
+
+1. **A fit exponent is banked with its own fit window, in the same field name or an adjacent field
+   asserted to match it.** `rho_exponent` beside `rho0_range_tested` describing a different window is
+   how this survived. Where a full-window and a tail fit both exist, **both are banked and the one
+   used by the gate is named in the gate.**
+2. **A per-term decomposition is banked in the norm the gate is answered in, or the gate does not
+   cite it.** If the decomposition is in a second norm for cost reasons, the gate sentence must say
+   which norm each number is in. `F1` is exactly the failure of this rule.
+3. **Before quoting a scaling exponent, plot the raw sequence and identify the transient.** A fit
+   window that includes a 12.6 % first step and a 0.078 % remainder is measuring the step.
+4. **When a consistency repair would break a wall, it is escalated, never applied.** The repair `F3`
+   naively suggests — align the number to the stated range — flips clause (b). No unit may make that
+   change without a ruling.
+
+**CEILING.** No `L1 → L4` link moved. `W4` clause (b) **stands**; clause (a) stands; clause (c) — the
+torus, statement (D) — remains **UNTESTED, NOT CLOSED**, and remains the only surviving clause and
+the open user escalation `D_BUNDLING`. Everything above is **Tier 2**. Nothing here is progress
+toward Clay, and one of the two findings means a draft is wrong rather than a wall is. Clay stays
+**~0.05%**.
