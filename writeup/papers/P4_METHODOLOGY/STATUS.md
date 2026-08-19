@@ -45,6 +45,21 @@ is correct.** A programme that mechanises its own scepticism will mechanise it i
 substitutions, because the mechanism's own outputs are counts and ratios. **That is the finding a
 referee should take away, and it is not specific to fluid dynamics.**
 
+**A seventh, at 05:50, and it breaks the table above rather than extending it.** Having just
+written that table, the Conductor declined to commit an unlanded observation — *"a tenth commit
+tonight on an unlanded number would be the same substitution I have spent the last two hours
+recording"* — and then **made the inference anyway, in prose, and reasoned from it**. The reading
+was `"the continuation start is approaching stationarity"`; the fuller series gives `ρ = −0.563`
+with a reversal in the last 1,000 iterations, and the value is still 43× threshold.
+
+**Declining to bank a claim is not the same as declining to believe it.** Every mechanism this paper
+describes — pre-committed gates, evidence checks, corrections filed beside artefacts, `UNVERIFIED`
+labels, `§3k` depth vocabulary — operates on **what is written into an artefact**. **Not one of them
+touches what the writer concluded and carried forward unbanked**, and the unbanked conclusions are
+what select the next unit. The instrument that caught the other six could not have caught this one:
+there was nothing to check. **That is the boundary of the entire method and the paper must state it
+where a reader cannot miss it.**
+
 **What it costs this paper to say:** the six were caught in seventy-five minutes because two parties
 were reading the same live run for different reasons — and **four of the six were caught by the
 party who had just been corrected on the previous one.** That is not a discipline. It is two agents

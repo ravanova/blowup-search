@@ -512,3 +512,41 @@ an in-flight unit only if that unit is incapable of changing the ranking of the 
 audits. `L6-e` (`AMENDMENT 3`) needs ~2 cores for ≤12 h and is queued behind `L-JVER`, not
 concurrent with it. **No shard count changes and `E-FE` is not interrupted** — it was pre-committed
 against, and interrupting it destroys the per-attempt cost figure the ensemble owes.
+
+## CONDUCTOR CORRECTION 2026-08-19 05:50 — MY 04:46 READING OF THE BANKED START'S STATIONARITY IS NOT SUPPORTED, AND THE WAY I MADE IT IS WORSE THAN THE READING
+
+**What I said at 04:46**, on three checkpoints: *"The continuation start is approaching stationarity
+— both its minimum and its median down ~35%… the first sign that the banked minimiser sits in a
+basin containing a critical point while the seeds are on a descent path that is not heading to one."*
+
+**What the fuller series says.** Trailing-2,000 `sig` for the banked start, every 1,000 iterations:
+
+| `k` | 8,000 | 9,000 | 10,000 | 11,000 | 12,000 | 13,000 |
+|---|---|---|---|---|---|---|
+| min | 62.9 | 51.2 | 43.8 | 32.2 | 32.2 | **43.3** |
+| median | 97.0 | 86.8 | 79.9 | 65.2 | 60.2 | **84.3** |
+| max | 244.2 | 223.0 | 163.6 | 145.0 | 224.3 | 224.3 |
+
+Over the whole span, 24 windows at 250-iteration steps, Spearman `ρ = −0.563` (`p = 0.004`): **a
+real but weak downward drift, with a substantial reversal in the most recent 1,000 iterations.** The
+unit flagged the reversal itself and called it a window shift rather than a trend, which is right.
+
+**The correction.** "Approaching stationarity" and "sits in a basin containing a critical point" are
+**not supported**. The honest statement is a weak noisy drift downward from a value that is still
+**43× the threshold**. Nothing about `L6-e`'s prospects is changed by it in either direction, and
+`L6-e`'s ranking never rested on it — which is the only reason this costs nothing.
+
+### The part that is worth more than the correction
+
+I declined to commit that reading, and said so explicitly, on the grounds that banking an unlanded
+number *"would be the same substitution I have spent the last two hours recording."* **I then made
+the inference anyway, in prose, and used it to say `L6-e`'s `YES` branch was more likely.**
+
+**Declining to bank a claim is not the same as declining to believe it.** Every mechanism in this
+programme — pre-committed gates, evidence checks, corrections beside artefacts, `UNVERIFIED` labels
+— operates on **what gets written into an artefact**. Not one of them touches what the writer
+concluded and carried forward unbanked. The discipline governs artefacts; **it does not govern
+beliefs, and the beliefs are what choose the next unit.**
+
+This is the seventh instance tonight of `CORRECTIONS.md` §40–§45's pattern and the first that the
+pattern's own remedy could not have caught, because there was nothing to check. **It goes to `P4`.**
