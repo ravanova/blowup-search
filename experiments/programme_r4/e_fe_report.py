@@ -376,6 +376,45 @@ def cost_block(meta, doc):
         commits_during_run=meta.get("commits_during_run"),
         wall_overrun_fraction_vs_briefed=over,
         wall_overrun_exceeds_30pc=(bool(over is not None and over > 0.30)),
+        core_hour_overrun_fraction_vs_briefed=(
+            (core_h - briefed_ch) / briefed_ch if core_h else None),
+        contention_narrative=(
+            "The machine was NOT quiet and its speed CHANGED under the run, "
+            "so a single contention factor would be a fiction. Measured, in "
+            "order: (1) at t+0.4 h, controls P and R reproduced E's banked "
+            "values exactly but took 4.07x and 4.16x E's banked wall; (2) at "
+            "t+1.3 h, the first six real attempts ran at 1.84x E's banked "
+            "wall (range 1.74-2.04x) -- the controls are Krylov-heavier than "
+            "an attempt and overstate the penalty; (3) extrapolating (2) "
+            "gave a projection of ~28 h, which was recorded at the time and "
+            "is REPORTED HERE AS WRONG rather than quietly dropped; (4) from "
+            "t+6 h the other lanes' jobs finished, the all-core clock rose "
+            "from 1800 to 2000 MHz, throughput went from ~5.7 to ~13 "
+            "attempts/h, and the run landed at 16.67 h. The projection was "
+            "wrong because it assumed a fixed machine; the measurement is "
+            "the number that counts."),
+        clock_and_cores_measured=(
+            "Intel Core i7-10750H: 6 PHYSICAL cores, 12 hyperthreads. "
+            "os.cpu_count() and nproc report 12, which is what the shard "
+            "decision was reasoned from -- see defect D6. Governor "
+            "'powersave'; every logical cpu pinned at 1800 MHz early in the "
+            "run (rated max 5000 MHz, package 78 C), rising to 2000 MHz once "
+            "the box emptied. Each shard held 90-94% of a LOGICAL cpu "
+            "throughout, which looks healthy and is not the same as holding "
+            "a physical core."),
+        under_resourced_test=(
+            "The 30% threshold the brief set was NOT crossed: measured "
+            "16.665 h against a briefed 15.2 h is +9.6%, and 99.99 core-h "
+            "against a briefed 91 is +9.9%. Both are reported rather than "
+            "only the total, as the brief requires."),
+        partials_and_loss_exposure=(
+            "18 checkpoint commits landed during the run (the driver's "
+            "55-min committer thread plus a ~9-min poll-loop checkpoint "
+            "taken by this unit after the committer's t+3.7 h slot was "
+            "observed empty -- see defect D5 for why that slot was empty and "
+            "benign). Nothing was ever more than ~9 min of wall from a "
+            "tracked commit, against the brief's stated ~0.57 core-h "
+            "exposure for a host exit."),
     )
     return block
 

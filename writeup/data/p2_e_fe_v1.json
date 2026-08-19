@@ -1,0 +1,1326 @@
+{
+ "_run_meta": {
+  "bank_manifest_sha": "9659913f307936ed9b8daf0641b8b9bc9b81befcfc17d85d600c656ffc33d35e",
+  "briefed_budget_core_hours": 91.0,
+  "briefed_wall_hours_at_6_shards": 15.2,
+  "commits_during_run": 18,
+  "core_hours": 99.99028953234355,
+  "cores": 12,
+  "finished_utc": "2026-08-19T18:01:35Z",
+  "lane": "R",
+  "leg": 408,
+  "loadavg_at_end": {
+   "fifteen": 5.41,
+   "five": 3.77,
+   "one": 1.81,
+   "raw": "1.81 3.77 5.41"
+  },
+  "loadavg_at_start": {
+   "fifteen": 10.46,
+   "five": 9.24,
+   "one": 9.71,
+   "raw": "9.71 9.24 10.46"
+  },
+  "n_attempts": 160,
+  "n_jobs": 163,
+  "n_repro_controls": 16,
+  "n_repro_fired": 16,
+  "note": "shards fixed at dispatch and NEVER raised mid-run: a unit with a changing shard count cannot report a clean per-attempt cost",
+  "shards": 6,
+  "started_monotonic": 1787102501.4886665,
+  "started_utc": "2026-08-19T01:21:41Z",
+  "unit": "E-FE",
+  "wall_hours": 16.66504825539059,
+  "wall_seconds": 59994.17371940613,
+  "wave": 7
+ },
+ "ceilings": [
+  {
+   "ceiling": "The bank's gate (i) ran against THIS tree's checkpoint on THIS CPU. The bank is now the DEFINITION of the seed, not a cache of a machine-independent one. Cross-machine agreement is UNPRICED and this unit did not price it: every one of the 160 attempts ran on the same host as the bank build.",
+   "from": "R-bank leg 404 artefact, ceiling C2",
+   "id": "C2-inherited"
+  },
+  {
+   "ceiling": "Before this unit, the 144 non-original fields had never been fed to a solver by anything -- R-bank verified them as BYTES only. This unit is the first thing ever to run them. Any failure mode seen only in the 144 could in principle be theirs rather than the physics'. The 16 C-REPRO controls bound this from one side only: they show the PIPELINE is sound on the 16 fields that were solved before, not that the other 144 are good fields.",
+   "from": "R-bank leg 404 artefact, ceiling C4",
+   "id": "C4-inherited"
+  },
+  {
+   "ceiling": "The bank's draw order is row-major and that is a DECLARED CHOICE, not a canonical ordering. THIS NULL NAMES ITS OWN REALIZATION: it is a statement about these 160 snapshots selected in this order from this trajectory, and a different declared order would have produced a different 160.",
+   "from": "R-bank ceiling C5; lesson 91",
+   "id": "C5-inherited-lesson-91"
+  },
+  {
+   "ceiling": "The bank's gate (ii) was a FUNCTIONAL check, not a byte check, for 15 of the 16 original fields -- only one attempt of 16 was re-solved end to end at bank time. This unit upgrades that: all 16 originals were re-solved here and compared field by field. That is a strengthening of an inherited ceiling, and it is reported as such rather than as a new result.",
+   "from": "R-bank leg 404 artefact, ceiling C1",
+   "id": "C1-inherited-functional-not-byte"
+  },
+  {
+   "ceiling": "The machine was NOT quiet. L6-b held ~5.2 of 12 cores throughout. Wall-clock per attempt here is a CONTENDED measurement and is not comparable to E's without the contention factor stated alongside it. Core-hours are the honest currency; wall hours are not.",
+   "from": "this unit",
+   "id": "C6-own-single-host"
+  },
+  {
+   "ceiling": "'Recovery' means E's match_named predicate, unchanged: |T - T_pub| < 0.05 AND wrapped |s - s_pub| < 0.05 AND success. A converged orbit that is a genuine RPO of the system but not one of the eight named rows counts as NOT recovered here, by design. This unit did not attempt to identify what the converged solutions ARE.",
+   "from": "this unit",
+   "id": "C7-predicate-scope"
+  }
+ ],
+ "clay_movement": {
+  "L1_to_L4_link_moved": false,
+  "clay_percent": 0.05,
+  "links_moved": "none",
+  "not_progress": "A tightened negative is not progress toward Clay and is not described as such here.",
+  "statement": "No L1->L4 link moved. No wall moved. Clay remains ~0.05%. TIER 2 IS NEVER A PROOF. This unit is a numerical measurement on a 24 x 24 truncation of 2D Kolmogorov flow at Re = 60; it bears on the credibility of one recovery-of-published-orbits claim inside Lane R and on nothing above it.",
+  "tier": 2,
+  "wall_moved": false
+ },
+ "controls": {
+  "C_N": {
+   "T_converged": 20.703017592978334,
+   "T_seeded": 19.334,
+   "control": "N",
+   "converged_to_tol": false,
+   "final_residual": 51.46443049790665,
+   "guards": "the matching predicate firing spuriously, which would turn a `no` into a false `yes`",
+   "matched_row": null,
+   "n_epochs": 51,
+   "planted": "a phase-scrambled field: the amplitude spectrum of a real candidate (so energy and enstrophy are a genuine turbulent state's, by Parseval) with random phases, so it lies near no orbit; seeded with a period from the Table IV anchor band",
+   "reason": "max_newton_hit",
+   "recovered": false,
+   "role": "NEGATIVE -- MUST FAIL",
+   "s_converged": 1.6353027512202627,
+   "s_seeded": 0.375,
+   "wall_seconds": 9643.409853458405
+  },
+  "C_P": {
+   "T_used": 2.65,
+   "control": "P",
+   "converged_to_tol": true,
+   "exercises": "the state block ONLY -- at a relative equilibrium ||dR/ds|| = 0 exactly and dR/dT is negligible (M1's rank deficiency of 2); T and s are exercised by control R",
+   "final_residual": 7.750376115652152e-09,
+   "krylov_dims": [
+    88,
+    62,
+    59,
+    64,
+    57,
+    51,
+    50,
+    48,
+    51,
+    56,
+    63,
+    51,
+    59,
+    47,
+    49,
+    50,
+    51,
+    52,
+    52,
+    51,
+    51,
+    63,
+    51,
+    54,
+    61,
+    61,
+    63,
+    63,
+    67,
+    64,
+    65,
+    63,
+    64
+   ],
+   "krylov_hit_cap": 0,
+   "max_gmres_used": 140,
+   "max_newton_used": 52,
+   "n_epochs": 33,
+   "perturbation_relative": 0.001,
+   "planted": "the exact fixed point of the discrete map, in closed form: w*_hat = dt*forcing_hat*decay/(1-decay). ||Phi_dt(w*)-w*|| = 7.6e-14 and ||Phi_T(w*)-w*|| = 2.35e-13 at T=19.33, so the extended residual there is an exact zero",
+   "radius_trials": [
+    5,
+    3,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    8,
+    1,
+    4,
+    1,
+    2,
+    1,
+    1,
+    1,
+    3,
+    2,
+    2,
+    2,
+    1,
+    1,
+    3,
+    1,
+    1,
+    4,
+    2,
+    1,
+    1,
+    1,
+    1
+   ],
+   "reason": "converged",
+   "recovered": true,
+   "relative_error_to_w_star": 2.8948674854467033e-06,
+   "residual_history": [
+    195.4394933828536,
+    51.26622795080903,
+    30.767216646887192,
+    17.828102170552036,
+    9.659105126696758,
+    6.768534251898502,
+    4.996648333585803,
+    4.653136825699412,
+    1.2639142251928508,
+    0.05221183938844074,
+    0.008617662630666363,
+    0.0034288292187485154,
+    0.0012126877022940214,
+    0.000990735780581956,
+    0.0008426911718247163,
+    0.0004254282308720941,
+    0.0003755702396564588,
+    0.00036509286301171945,
+    0.0003533946877167651,
+    0.000123173548660603,
+    8.629084742201932e-05,
+    3.1960607665464204e-05,
+    2.077042398415327e-05,
+    7.157529710207913e-06,
+    3.657044166176092e-06,
+    2.7823130765117257e-06,
+    7.182764385991298e-07,
+    5.351966976441447e-07,
+    3.5010119435134565e-07,
+    1.674668662118512e-07,
+    1.1583373458242619e-07,
+    3.4956863448235204e-08,
+    2.0424687062235797e-08,
+    7.750376115652152e-09
+   ],
+   "role": "POSITIVE, unconditional -- MUST SUCCEED",
+   "seed_residual_would_be": "0 exactly at the unperturbed w*",
+   "wall_seconds": 1051.6776990890503
+  },
+  "C_PRED": {
+   "control": "C-PRED",
+   "detail": [
+    {
+     "ok": true,
+     "returned": "UPO37",
+     "row": "UPO37"
+    },
+    {
+     "ok": true,
+     "returned": "UPO35",
+     "row": "UPO35"
+    },
+    {
+     "ok": true,
+     "returned": "UPO34",
+     "row": "UPO34"
+    },
+    {
+     "ok": true,
+     "returned": "UPO32",
+     "row": "UPO32"
+    },
+    {
+     "ok": true,
+     "returned": "UPO22",
+     "row": "UPO22"
+    },
+    {
+     "ok": true,
+     "returned": "UPO20",
+     "row": "UPO20"
+    },
+    {
+     "ok": true,
+     "returned": "UPO17",
+     "row": "UPO17"
+    },
+    {
+     "ok": true,
+     "returned": "UPO9",
+     "row": "UPO9"
+    }
+   ],
+   "fired_as_planted": true,
+   "n_negative_ok": 8,
+   "n_positive_ok": 8,
+   "n_rows": 8,
+   "nonsense_T_s": [
+    3.0,
+    2.9
+   ],
+   "nonsense_ok": true,
+   "nonsense_returned": null,
+   "role": "POSITIVE + NEGATIVE, free -- MUST FIRE BOTH"
+  },
+  "C_R": {
+   "T_orbit": 20.41751140125702,
+   "anchor": "U5 attempt007_P_UPO37",
+   "control": "R",
+   "converged_to_tol": true,
+   "delta_T": 2.985844496095069e-07,
+   "delta_s": 6.50090399290093e-08,
+   "exercises": "the state block AND T and s -- neither is degenerate at a genuine RPO, which is what P cannot test",
+   "final_residual": 1.5243710606417483e-10,
+   "harness_predicate_says_recovered": true,
+   "n_epochs": 5,
+   "perturbation_relative": 0.001,
+   "planted": "a converged orbit from this run (anchor U5 attempt007_P_UPO37), perturbed",
+   "reason": "converged",
+   "recovered": true,
+   "relative_error_to_orbit": 3.622629642524818e-05,
+   "role": "POSITIVE, conditional -- MUST SUCCEED IF IT RUNS",
+   "s_orbit": 5.696515622026857,
+   "wall_seconds": 729.35378074646
+  },
+  "C_REPRO_00": {
+   "arm": "S",
+   "banked_wall_seconds": 2646.8674507141113,
+   "control": "C-REPRO",
+   "e_attempt_index": 0,
+   "fired_as_planted": true,
+   "global_index": 0,
+   "mismatches": [],
+   "n_iterations_banked": 21,
+   "n_iterations_byte_equal": 21,
+   "n_iterations_reproduced": 21,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 3335.9395520687103,
+   "row": "UPO37"
+  },
+  "C_REPRO_01": {
+   "arm": "Q",
+   "banked_wall_seconds": 2572.017075061798,
+   "control": "C-REPRO",
+   "e_attempt_index": 1,
+   "fired_as_planted": true,
+   "global_index": 10,
+   "mismatches": [],
+   "n_iterations_banked": 21,
+   "n_iterations_byte_equal": 21,
+   "n_iterations_reproduced": 21,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 3239.8129675388336,
+   "row": "UPO37"
+  },
+  "C_REPRO_02": {
+   "arm": "S",
+   "banked_wall_seconds": 2643.899850130081,
+   "control": "C-REPRO",
+   "e_attempt_index": 2,
+   "fired_as_planted": true,
+   "global_index": 20,
+   "mismatches": [],
+   "n_iterations_banked": 21,
+   "n_iterations_byte_equal": 21,
+   "n_iterations_reproduced": 21,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 3307.4233207702637,
+   "row": "UPO35"
+  },
+  "C_REPRO_03": {
+   "arm": "Q",
+   "banked_wall_seconds": 2423.650843858719,
+   "control": "C-REPRO",
+   "e_attempt_index": 3,
+   "fired_as_planted": true,
+   "global_index": 30,
+   "mismatches": [],
+   "n_iterations_banked": 22,
+   "n_iterations_byte_equal": 22,
+   "n_iterations_reproduced": 22,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 3077.131100177765,
+   "row": "UPO35"
+  },
+  "C_REPRO_04": {
+   "arm": "S",
+   "banked_wall_seconds": 2486.7957513332367,
+   "control": "C-REPRO",
+   "e_attempt_index": 4,
+   "fired_as_planted": true,
+   "global_index": 40,
+   "mismatches": [],
+   "n_iterations_banked": 21,
+   "n_iterations_byte_equal": 21,
+   "n_iterations_reproduced": 21,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 3161.6032540798187,
+   "row": "UPO34"
+  },
+  "C_REPRO_05": {
+   "arm": "Q",
+   "banked_wall_seconds": 1803.5997838974,
+   "control": "C-REPRO",
+   "e_attempt_index": 5,
+   "fired_as_planted": true,
+   "global_index": 50,
+   "mismatches": [],
+   "n_iterations_banked": 27,
+   "n_iterations_byte_equal": 27,
+   "n_iterations_reproduced": 27,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 3677.788209438324,
+   "row": "UPO34"
+  },
+  "C_REPRO_06": {
+   "arm": "S",
+   "banked_wall_seconds": 2130.9649329185486,
+   "control": "C-REPRO",
+   "e_attempt_index": 6,
+   "fired_as_planted": true,
+   "global_index": 60,
+   "mismatches": [],
+   "n_iterations_banked": 21,
+   "n_iterations_byte_equal": 21,
+   "n_iterations_reproduced": 21,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 2777.981607913971,
+   "row": "UPO32"
+  },
+  "C_REPRO_07": {
+   "arm": "Q",
+   "banked_wall_seconds": 2584.2282497882843,
+   "control": "C-REPRO",
+   "e_attempt_index": 7,
+   "fired_as_planted": true,
+   "global_index": 70,
+   "mismatches": [],
+   "n_iterations_banked": 24,
+   "n_iterations_byte_equal": 24,
+   "n_iterations_reproduced": 24,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 3283.4403896331787,
+   "row": "UPO32"
+  },
+  "C_REPRO_08": {
+   "arm": "S",
+   "banked_wall_seconds": 2628.531321287155,
+   "control": "C-REPRO",
+   "e_attempt_index": 8,
+   "fired_as_planted": true,
+   "global_index": 80,
+   "mismatches": [],
+   "n_iterations_banked": 25,
+   "n_iterations_byte_equal": 25,
+   "n_iterations_reproduced": 25,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 3361.271581172943,
+   "row": "UPO22"
+  },
+  "C_REPRO_09": {
+   "arm": "Q",
+   "banked_wall_seconds": 1847.5697453022003,
+   "control": "C-REPRO",
+   "e_attempt_index": 9,
+   "fired_as_planted": true,
+   "global_index": 90,
+   "mismatches": [],
+   "n_iterations_banked": 26,
+   "n_iterations_byte_equal": 26,
+   "n_iterations_reproduced": 26,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 3796.753078222275,
+   "row": "UPO22"
+  },
+  "C_REPRO_10": {
+   "arm": "S",
+   "banked_wall_seconds": 1587.5506556034088,
+   "control": "C-REPRO",
+   "e_attempt_index": 10,
+   "fired_as_planted": true,
+   "global_index": 100,
+   "mismatches": [],
+   "n_iterations_banked": 21,
+   "n_iterations_byte_equal": 21,
+   "n_iterations_reproduced": 21,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 3033.339846134186,
+   "row": "UPO20"
+  },
+  "C_REPRO_11": {
+   "arm": "Q",
+   "banked_wall_seconds": 2047.416918039322,
+   "control": "C-REPRO",
+   "e_attempt_index": 11,
+   "fired_as_planted": true,
+   "global_index": 110,
+   "mismatches": [],
+   "n_iterations_banked": 32,
+   "n_iterations_byte_equal": 32,
+   "n_iterations_reproduced": 32,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 4465.857706546783,
+   "row": "UPO20"
+  },
+  "C_REPRO_12": {
+   "arm": "S",
+   "banked_wall_seconds": 1546.892420053482,
+   "control": "C-REPRO",
+   "e_attempt_index": 12,
+   "fired_as_planted": true,
+   "global_index": 120,
+   "mismatches": [],
+   "n_iterations_banked": 21,
+   "n_iterations_byte_equal": 21,
+   "n_iterations_reproduced": 21,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 2793.462924003601,
+   "row": "UPO17"
+  },
+  "C_REPRO_13": {
+   "arm": "Q",
+   "banked_wall_seconds": 1567.2987914085388,
+   "control": "C-REPRO",
+   "e_attempt_index": 13,
+   "fired_as_planted": true,
+   "global_index": 130,
+   "mismatches": [],
+   "n_iterations_banked": 21,
+   "n_iterations_byte_equal": 21,
+   "n_iterations_reproduced": 21,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 2782.486469745636,
+   "row": "UPO17"
+  },
+  "C_REPRO_14": {
+   "arm": "S",
+   "banked_wall_seconds": 1402.784704208374,
+   "control": "C-REPRO",
+   "e_attempt_index": 14,
+   "fired_as_planted": true,
+   "global_index": 140,
+   "mismatches": [],
+   "n_iterations_banked": 21,
+   "n_iterations_byte_equal": 21,
+   "n_iterations_reproduced": 21,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 2503.9189581871033,
+   "row": "UPO9"
+  },
+  "C_REPRO_15": {
+   "arm": "Q",
+   "banked_wall_seconds": 798.2659857273102,
+   "control": "C-REPRO",
+   "e_attempt_index": 15,
+   "fired_as_planted": true,
+   "global_index": 150,
+   "mismatches": [],
+   "n_iterations_banked": 12,
+   "n_iterations_byte_equal": 12,
+   "n_iterations_reproduced": 12,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "per_iteration_ledger_exact": true,
+   "reproduced_wall_seconds": 1388.1143593788147,
+   "row": "UPO9"
+  }
+ },
+ "cost_and_shortfall": {
+  "E_seconds_per_attempt": 2044.9,
+  "UNDER_RESOURCED": false,
+  "briefed_basis": "E's 16 attempts cost 32,718.3 s = 9.088 core-h; x10 = 90.9 core-h. CONDUCTOR chose 6 shards over the price sheet's 8 because the box is 12 cores and L6-b holds ~5.2 of them, and R-prof had already banked MACHINE_WAS_NOT_QUIET = true.",
+  "briefed_budget_core_hours": 91.0,
+  "briefed_wall_hours_at_6_shards": 15.2,
+  "clock_and_cores_measured": "Intel Core i7-10750H: 6 PHYSICAL cores, 12 hyperthreads. os.cpu_count() and nproc report 12, which is what the shard decision was reasoned from -- see defect D6. Governor 'powersave'; every logical cpu pinned at 1800 MHz early in the run (rated max 5000 MHz, package 78 C), rising to 2000 MHz once the box emptied. Each shard held 90-94% of a LOGICAL cpu throughout, which looks healthy and is not the same as holding a physical core.",
+  "commits_during_run": 18,
+  "contention_narrative": "The machine was NOT quiet and its speed CHANGED under the run, so a single contention factor would be a fiction. Measured, in order: (1) at t+0.4 h, controls P and R reproduced E's banked values exactly but took 4.07x and 4.16x E's banked wall; (2) at t+1.3 h, the first six real attempts ran at 1.84x E's banked wall (range 1.74-2.04x) -- the controls are Krylov-heavier than an attempt and overstate the penalty; (3) extrapolating (2) gave a projection of ~28 h, which was recorded at the time and is REPORTED HERE AS WRONG rather than quietly dropped; (4) from t+6 h the other lanes' jobs finished, the all-core clock rose from 1800 to 2000 MHz, throughput went from ~5.7 to ~13 attempts/h, and the run landed at 16.67 h. The projection was wrong because it assumed a fixed machine; the measurement is the number that counts.",
+  "core_hour_overrun_fraction_vs_briefed": 0.09879439046531377,
+  "core_hours": 99.99028953234355,
+  "cores": 12,
+  "finished_utc": "2026-08-19T18:01:35Z",
+  "gate_assembled_utc": "2026-08-19T18:07:00Z",
+  "loadavg_at_end": {
+   "fifteen": 5.41,
+   "five": 3.77,
+   "one": 1.81,
+   "raw": "1.81 3.77 5.41"
+  },
+  "loadavg_at_start": {
+   "fifteen": 10.46,
+   "five": 9.24,
+   "one": 9.71,
+   "raw": "9.71 9.24 10.46"
+  },
+  "n_attempts": 160,
+  "partials_and_loss_exposure": "18 checkpoint commits landed during the run (the driver's 55-min committer thread plus a ~9-min poll-loop checkpoint taken by this unit after the committer's t+3.7 h slot was observed empty -- see defect D5 for why that slot was empty and benign). Nothing was ever more than ~9 min of wall from a tracked commit, against the brief's stated ~0.57 core-h exposure for a host exit.",
+  "seconds_per_attempt_measured": 2157.517925645411,
+  "shards": 6,
+  "shards_note": "fixed at 6 for the entire run and never raised, so per-attempt cost is clean",
+  "shards_raised_mid_run": false,
+  "started_utc": "2026-08-19T01:21:41Z",
+  "sum_of_attempt_wall_seconds": 345202.86810326576,
+  "under_resourced_statement": "NOT under-resourced. Every one of the 160 briefed attempts ran to a terminal state and the gate is answered on the full 160. No attempt was dropped, shortened, or reported as a null because the budget ran out.",
+  "under_resourced_test": "The 30% threshold the brief set was NOT crossed: measured 16.665 h against a briefed 15.2 h is +9.6%, and 99.99 core-h against a briefed 91 is +9.9%. Both are reported rather than only the total, as the brief requires.",
+  "wall_hours": 16.66504825539059,
+  "wall_overrun_exceeds_30pc": false,
+  "wall_overrun_fraction_vs_briefed": 0.09638475364411787,
+  "wall_seconds": 59994.17371940613
+ },
+ "defects_found": [
+  {
+   "defect": "SS B asks for 'the recovery rate out of 10 with its exact binomial confidence interval' and in the next breath states a bound -- 'above 26% is excluded at 95%' -- that is the ONE-SIDED 95% upper limit (1 - 0.05**(1/10) = 0.2589). The equal-tailed two-sided 95% interval that 'confidence interval' conventionally denotes has upper limit 1 - 0.025**(1/10) = 0.3085. The convention is never stated.",
+   "fix_is_CONDUCTORs": true,
+   "handled_by_this_unit": "both conventions computed, both named, both reported per (row, arm) and pooled; no verdict rests on the choice",
+   "id": "D1",
+   "impact": "A reader who takes the interval at face value would report a 31% exclusion; a reader who takes the 26% would report a one-sided bound as if it were an interval.",
+   "severity": "wording, affects how the headline number is read",
+   "where": "writeup/waves/WAVE7_PLAN.md SS B"
+  },
+  {
+   "defect": "The manifest's 'what' string still reads '... the 1.2 GB gitignored DNS artefacts'. R-bank's OWN defect D1 corrected that figure -- the measured size is 268,864,256 B = 268.9 MB, wrong by 4.5x. R-bank fixed the .gitignore header beside it and let the same wrong figure stand inside its own manifest.",
+   "fix_is_CONDUCTORs": true,
+   "handled_by_this_unit": "recorded only; R-bank's files are not this unit's to edit",
+   "id": "D2",
+   "impact": "None on any number in this artefact -- the bank's bytes are sound and were used as delivered. It is a propagation defect: a corrected figure that did not propagate into the artefact that carries it.",
+   "severity": "factual, self-inconsistent within R-bank's own deliverable",
+   "where": "experiments/programme_r4/seedbank/manifest.json, 'what' field"
+  },
+  {
+   "defect": "SS 3k rule 1 requires a writeup/SOURCES.md row, in the pre-registration commit, for a published method a gate answer rests on. The gate's confidence intervals rest on Clopper-Pearson (1934). The brief forbids this unit from touching writeup/SOURCES.md.",
+   "fix_is_CONDUCTORs": true,
+   "handled_by_this_unit": "row OWED, handed up, not filled",
+   "id": "D3",
+   "impact": "The unit cannot simultaneously obey both. It obeyed the territory ban and recorded the row as OWED in sources_3k.",
+   "severity": "process conflict, unresolvable inside the unit",
+   "where": "the E-FE dispatch brief (territory grant) vs ORCHESTRATION.md SS 3k rule 1"
+  },
+  {
+   "defect": "E's module-level PARTIAL points at experiments/programme_r4/e_hhard_partial and keys checkpoints by bare attempt index. This unit's 160 attempt indices would have collided with E's banked 0..15 and silently resumed from E's checkpoints.",
+   "fix_is_CONDUCTORs": false,
+   "handled_by_this_unit": "pre-empted and declared",
+   "id": "D4",
+   "impact": "None -- caught before launch. The driver rebinds E.PARTIAL to experiments/programme_r4/e_fe_partials/pkl as its ONE declared monkeypatch, changing no algorithm, seed, tolerance or cap. Declared in the driver docstring and in journal leg_408 SS 1 before the run.",
+   "severity": "collision hazard, pre-empted",
+   "where": "experiments/programme_r4/e_hhard_diagnostic.py"
+  },
+  {
+   "defect": "The no-op guard tests for the substring 'nothing to commit' in git's output. In PATHSPEC mode -- `git commit -m msg -- <paths>`, which this unit uses deliberately so a sibling worker's staged files can never be swept in -- git does NOT print that string when the given paths are clean; it prints 'Changes not staged for commit:' and exits non-zero. So a checkpoint that had nothing to do was retried six times and then logged as '[commit] FAILED after retries at #5 t+4.6h'.",
+   "fix_is_CONDUCTORs": false,
+   "handled_by_this_unit": "diagnosed by probing git's pathspec-mode wording directly; the driver was NOT patched, because the fix is cosmetic and editing a pre-registered driver to quiet a log line is a worse trade than recording the defect",
+   "id": "D5",
+   "impact": "None on the record. Verified at the time: the working tree was clean for this unit's paths because a concurrent CONDUCTOR session had committed them at 04:58Z (commit edb9f6b) and this unit's own poll-loop checkpoints were running every ~9 min. Nothing was lost. The cost is that a benign event was logged in the vocabulary of a failure, which is the opposite of what a run log is for.",
+   "severity": "false alarm in this unit's own run log; no data effect",
+   "where": "experiments/programme_r4/e_fe_driver.py, commit_partials()"
+  },
+  {
+   "defect": "os.cpu_count() and nproc both report 12 on this host, and the shard decision was reasoned from that. The CPU is an Intel Core i7-10750H: SIX physical cores, twelve hyperthreads. Six E-FE shards plus L6-b's ~4.5 threads oversubscribe six physical cores, and hyperthread siblings share the execution units an FFT loop is bound by. Measured alongside it: every logical CPU was pinned at exactly 1800 MHz -- the governor is 'powersave', the package was at 78 C and the part's rated max is 5000 MHz -- so the all-core clock was roughly half the single-core clock the banked figures were taken at.",
+   "fix_is_CONDUCTORs": true,
+   "handled_by_this_unit": "measured (per-process CPU-time over a 60 s window, /proc/cpuinfo, /sys/.../cpufreq/*, thermal zones) and reported; the shard count was NOT changed, as the brief requires",
+   "id": "D6",
+   "impact": "This, not scheduler contention, is the bulk of the measured per-attempt inflation over E's banked walls. The shards were each getting ~91% of a LOGICAL cpu, which looks healthy and is not: the physical core behind it was shared. Reported in cost_and_shortfall rather than smoothed into a single 'contention' number.",
+   "severity": "cost model, load-bearing for the wall-clock estimate",
+   "where": "the resourcing rationale in CONDUCTOR's dispatch ('12 cores')"
+  }
+ ],
+ "gate": {
+  "ANY_ROW_RECOVERS_IN_ANY_DRAW": "NO",
+  "answer_scope": "the primary predicate is E's match_named, unchanged: |T - T_pub| < 0.05 AND wrapped |s - s_pub| < 0.05 AND success. The |s|-only variant is SECONDARY and no verdict rests on it.",
+  "closest_approach": {
+   "arm": "S",
+   "delta_T_from_published": 0.03620553987706643,
+   "delta_abs_s_from_published": 0.08540524816249029,
+   "delta_s_from_published": 0.08540524816249118,
+   "field_index": 0,
+   "final_residual": 9.669335298764443,
+   "global_index": 20,
+   "row": "UPO35",
+   "success": false
+  },
+  "confidence_interval_method": "Clopper-Pearson exact binomial (Clopper & Pearson 1934, Biometrika 26(4):404-413), computed by Beta-quantile inversion via scipy.stats.beta. TAIL CONVENTION: both are reported. 'two_sided_95_*' is the equal-tailed 95% interval (alpha/2 in each tail) -- this is what 'its exact binomial confidence interval' means. 'one_sided_95_upper' is the 95% upper bound with all 5% in the upper tail -- this is the convention behind SS B's '26%'.",
+  "n_attempts": 160,
+  "n_converged": 7,
+  "n_recovered_abs_secondary": 0,
+  "n_recovered_any_named_row": 0,
+  "n_recovered_its_own_named_row": 0,
+  "per_row_arm": [
+   {
+    "arm": "S",
+    "best_final_residual": 2.6421027819726417,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.11192659389521253,
+    "min_delta_abs_s_from_published": 0.01585514875183769,
+    "n_converged": 0,
+    "n_draws": 10,
+    "reasons": {
+     "stalled": 10
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO37"
+   },
+   {
+    "arm": "Q",
+    "best_final_residual": 0.9182057753635103,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.09107664228417889,
+    "min_delta_abs_s_from_published": 0.08628107352355929,
+    "n_converged": 0,
+    "n_draws": 10,
+    "reasons": {
+     "stalled": 10
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO37"
+   },
+   {
+    "arm": "S",
+    "best_final_residual": 0.11033443858437388,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.03620553987706643,
+    "min_delta_abs_s_from_published": 0.05046796636792816,
+    "n_converged": 0,
+    "n_draws": 10,
+    "reasons": {
+     "max_newton_hit": 1,
+     "stalled": 9
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO35"
+   },
+   {
+    "arm": "Q",
+    "best_final_residual": 4.827114589052694e-09,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.40854234753243546,
+    "min_delta_abs_s_from_published": 0.003066689928433952,
+    "n_converged": 1,
+    "n_draws": 10,
+    "reasons": {
+     "converged": 1,
+     "stalled": 9
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO35"
+   },
+   {
+    "arm": "S",
+    "best_final_residual": 2.4250953452518828e-09,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.404792455939063,
+    "min_delta_abs_s_from_published": 0.01872960769036025,
+    "n_converged": 1,
+    "n_draws": 10,
+    "reasons": {
+     "converged": 1,
+     "stalled": 9
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO34"
+   },
+   {
+    "arm": "Q",
+    "best_final_residual": 1.1794298045724452,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.13688636087363548,
+    "min_delta_abs_s_from_published": 0.020470809530832135,
+    "n_converged": 0,
+    "n_draws": 10,
+    "reasons": {
+     "stalled": 10
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO34"
+   },
+   {
+    "arm": "S",
+    "best_final_residual": 0.3822275143831922,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.3856075000447561,
+    "min_delta_abs_s_from_published": 0.032943496535898564,
+    "n_converged": 0,
+    "n_draws": 10,
+    "reasons": {
+     "stalled": 10
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO32"
+   },
+   {
+    "arm": "Q",
+    "best_final_residual": 1.2729138256118455e-10,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.17314259814341781,
+    "min_delta_abs_s_from_published": 0.0744384354301757,
+    "n_converged": 1,
+    "n_draws": 10,
+    "reasons": {
+     "converged": 1,
+     "stalled": 9
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO32"
+   },
+   {
+    "arm": "S",
+    "best_final_residual": 0.8036557956779805,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.12433835417341044,
+    "min_delta_abs_s_from_published": 0.026510938775033743,
+    "n_converged": 0,
+    "n_draws": 10,
+    "reasons": {
+     "stalled": 10
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO22"
+   },
+   {
+    "arm": "Q",
+    "best_final_residual": 7.594737085174106e-09,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.12370830340379513,
+    "min_delta_abs_s_from_published": 0.04078222997951508,
+    "n_converged": 1,
+    "n_draws": 10,
+    "reasons": {
+     "converged": 1,
+     "stalled": 9
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO22"
+   },
+   {
+    "arm": "S",
+    "best_final_residual": 1.375275424108258,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.2414036149389993,
+    "min_delta_abs_s_from_published": 0.010572717878287285,
+    "n_converged": 0,
+    "n_draws": 10,
+    "reasons": {
+     "stalled": 10
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO20"
+   },
+   {
+    "arm": "Q",
+    "best_final_residual": 0.3934656840992305,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.3868848779712053,
+    "min_delta_abs_s_from_published": 0.06204830454319854,
+    "n_converged": 0,
+    "n_draws": 10,
+    "reasons": {
+     "stalled": 10
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO20"
+   },
+   {
+    "arm": "S",
+    "best_final_residual": 0.7719774216270979,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.292991193250451,
+    "min_delta_abs_s_from_published": 0.022310883390692204,
+    "n_converged": 0,
+    "n_draws": 10,
+    "reasons": {
+     "stalled": 10
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO17"
+   },
+   {
+    "arm": "Q",
+    "best_final_residual": 0.5504909481595762,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.18131457088000147,
+    "min_delta_abs_s_from_published": 0.018481218873562355,
+    "n_converged": 0,
+    "n_draws": 10,
+    "reasons": {
+     "stalled": 10
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO17"
+   },
+   {
+    "arm": "S",
+    "best_final_residual": 0.12389745302575964,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.08901177202587185,
+    "min_delta_abs_s_from_published": 0.011962718473627287,
+    "n_converged": 0,
+    "n_draws": 10,
+    "reasons": {
+     "stalled": 10
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO9"
+   },
+   {
+    "arm": "Q",
+    "best_final_residual": 1.924640552139498e-11,
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.30849710781876083,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 10,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.2588655508930522,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.3084971078187607
+    },
+    "k_recovered_any_row": 0,
+    "k_recovered_own_row": 0,
+    "min_delta_T_from_published": 0.35331017500108075,
+    "min_delta_abs_s_from_published": 0.02531762523805181,
+    "n_converged": 3,
+    "n_draws": 10,
+    "reasons": {
+     "converged": 3,
+     "stalled": 7
+    },
+    "recovery_rate_out_of_10": "0/10",
+    "row": "UPO9"
+   }
+  ],
+  "per_row_pooled_over_arms_SECONDARY": [
+   {
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.16843347098308536,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 20,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.13910834066826516,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.1684334709830853
+    },
+    "k_recovered_own_row": 0,
+    "n_draws": 20,
+    "row": "UPO37"
+   },
+   {
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.16843347098308536,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 20,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.13910834066826516,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.1684334709830853
+    },
+    "k_recovered_own_row": 0,
+    "n_draws": 20,
+    "row": "UPO35"
+   },
+   {
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.16843347098308536,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 20,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.13910834066826516,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.1684334709830853
+    },
+    "k_recovered_own_row": 0,
+    "n_draws": 20,
+    "row": "UPO34"
+   },
+   {
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.16843347098308536,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 20,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.13910834066826516,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.1684334709830853
+    },
+    "k_recovered_own_row": 0,
+    "n_draws": 20,
+    "row": "UPO32"
+   },
+   {
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.16843347098308536,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 20,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.13910834066826516,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.1684334709830853
+    },
+    "k_recovered_own_row": 0,
+    "n_draws": 20,
+    "row": "UPO22"
+   },
+   {
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.16843347098308536,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 20,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.13910834066826516,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.1684334709830853
+    },
+    "k_recovered_own_row": 0,
+    "n_draws": 20,
+    "row": "UPO20"
+   },
+   {
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.16843347098308536,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 20,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.13910834066826516,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.1684334709830853
+    },
+    "k_recovered_own_row": 0,
+    "n_draws": 20,
+    "row": "UPO17"
+   },
+   {
+    "exact_binomial": {
+     "closed_form_check_upper_at_k0": 0.16843347098308536,
+     "k": 0,
+     "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+     "n": 20,
+     "one_sided_95_lower": 0.0,
+     "one_sided_95_upper": 0.13910834066826516,
+     "point_estimate": 0.0,
+     "two_sided_95_lower": 0.0,
+     "two_sided_95_upper": 0.1684334709830853
+    },
+    "k_recovered_own_row": 0,
+    "n_draws": 20,
+    "row": "UPO9"
+   }
+  ],
+  "pooled_over_all_160": {
+   "closed_form_check_upper_at_k0": 0.02279174945546658,
+   "k": 0,
+   "method": "Clopper-Pearson exact binomial (Beta-quantile inversion)",
+   "n": 160,
+   "one_sided_95_lower": 0.0,
+   "one_sided_95_upper": 0.018549134077503755,
+   "point_estimate": 0.0,
+   "two_sided_95_lower": 0.0,
+   "two_sided_95_upper": 0.022791749455466522
+  },
+  "question": "how many of 160 converge; how many recover a named row; per (row, arm) the recovery rate out of 10 with an exact binomial CI; does ANY row recover in ANY of its 10 draws, YES or NO?",
+  "reasons": {
+   "converged": 7,
+   "max_newton_hit": 1,
+   "stalled": 152
+  }
+ },
+ "gate_source": "writeup/waves/WAVE7_PLAN.md SS B, verbatim; SS B is BINDING where it and the dispatch brief differ",
+ "git_head_at_assembly": "17866cfa54df538f3e2ef92d8b7858ab2422c913",
+ "kind": "measurement at scale",
+ "lane": "R",
+ "leg": 408,
+ "programme": "PROG-R4",
+ "readings": {
+  "anything_loosened": false,
+  "exclusion_arithmetic_computed_by_this_unit": {
+   "checked_against": "scipy.stats.beta.ppf (scipy 1.18.0) to full float64 precision, and against the closed form above",
+   "closed_form": "for k = 0 the Clopper-Pearson upper limit is 1 - alpha_upper**(1/n); alpha_upper = 0.05 one-sided, 0.025 equal-tailed two-sided",
+   "instruction": "CONDUCTOR: 'Compute and report the 26% figure yourself rather than quoting mine; if your arithmetic disagrees with 26%, your number wins and you flag the discrepancy.'",
+   "one_sided_95_upper_at_k0_n10": 0.2588655508930523,
+   "two_sided_95_upper_at_k0_n10": 0.30849710781876083,
+   "verdict": "MY ARITHMETIC AGREES WITH SS B UNDER THE ONE-SIDED CONVENTION: 1 - 0.05**(1/10) = 0.2589, i.e. ~26%. It DISAGREES under the equal-tailed two-sided convention, which gives 1 - 0.025**(1/10) = 0.3085, i.e. ~31%. SS B asks in the same sentence for 'its exact binomial confidence interval' -- an interval is conventionally two-sided -- and then states a bound that is one-sided. The defect is the UNSTATED CONVENTION, not an arithmetic error. Both are computed and both are reported per (row, arm); no verdict in this artefact rests on which is preferred.",
+   "what_SS_B_says": "a per-draw recovery probability above 26% is excluded at 95% for every row"
+  },
+  "loosening_statement": "NOTHING WAS LOOSENED. TOL, MAX_NEWTON, MAX_GMRES, GMRES_RTOL, the stall rule, T_ANCHOR_TOL, MATCH_T_TOL and MATCH_S_TOL were imported from e_hhard_diagnostic.py and never rebound. The row set was not widened, no arm was added, no Newton parameter was tuned and no tolerance was adjusted to make anything converge. Three temptations were recorded in journal leg_408 SS 4 and all three knobs were left alone.",
+  "not_a_grinder": "This is NOT a grinder. 160 attempts at FIXED rows and arms, varying ONLY the draw. No new seed supply, no GA, no learned or evolved seed-scoring fitness. SCALE IS NOT EVIDENCE: 160 attempts is not 10x more evidence than 16, it is 10x more DRAWS.",
+  "pre_committed": {
+   "dispatch_brief_amplification": "CONDUCTOR's dispatch added, on the >= 1 branch: 'This is the more interesting outcome. If it fires, say so plainly and do not hedge it into insignificance.' And on the 0 branch: the realization gap and the N = 24 limit are to be restated 'not omitted because the number looks strong.'",
+   "quoted_verbatim": true,
+   "reading_if_0_of_160": "0 of 160 => the null is no longer about draws. With 10 draws per arm, a per-draw recovery probability above 26% is excluded at 95% for every row. That is a statement about the rows in this realization, and it is the strongest negative this programme can buy for ~11 h wall. It is not a statement about the rows in the published realization -- E-iv's realization gap and the N = 24 resolution limit both survive it, and must be restated in the artefact.",
+   "reading_if_at_least_1_recovery": ">= 1 recovery => E's null was a draw artefact, M1's comparison changes, and Lane R's ranking is re-opened in that integration commit.",
+   "source": "writeup/waves/WAVE7_PLAN.md SS B, 'Pre-committed reading, both directions, before dispatch:'"
+  },
+  "surviving_limits_restated": [
+   {
+    "limit": "E-iv realization gap",
+    "restated": "This ensemble draws all 160 fields from ONE DNS realization -- U2's T = 1e5 trajectory as re-integrated in this tree. Ten fields per (row, arm) are ten independent DRAWS FROM THAT REALIZATION, not ten realizations. A negative here bounds the recovery probability of the rows AS THEY SIT IN THIS REALIZATION. It says nothing about the rows in Lucas & Kerswell's published realization.",
+    "survives_the_result": true
+   },
+   {
+    "limit": "N = 24 resolution limit",
+    "restated": "Every attempt runs on the 24 x 24 grid at Re = 60, n_forcing = 4, dt = 0.01 with a Lie-Trotter split that is globally first order. If the published orbits are not represented at this resolution, no number of draws can recover them and this ensemble cannot distinguish that from their absence. The limit is untouched by 160 attempts.",
+    "survives_the_result": true
+   },
+   {
+    "limit": "scale is not evidence",
+    "restated": "160 attempts is not 10x more evidence than 16. It is 10x more DRAWS. The extra information is entirely in the per-(row, arm) draw dimension; the row set, the arm definitions, the seeded (T, s), the solver, its tolerances and its caps are all IDENTICAL to E's.",
+    "survives_the_result": true
+   }
+  ],
+  "temptations_recorded_not_taken": [
+   "E's attempt 2 (UPO35 S) missed on |s| by 0.0854 against MATCH_S_TOL = 0.05. Widening the tolerance to 0.09 would have produced a 'recovery'. Not widened.",
+   "14 of E's 16 attempts exited 'stalled' rather than hitting a Newton cap. Relaxing the stall rule would have converted some into converged-but-not-recovered. Not relaxed.",
+   "MAX_NEWTON = 52 and GMRES_RTOL = 1e-3 are E's; raising the cap or tightening the Krylov solve would change every number. Imported, not redefined."
+  ],
+  "which_fired": "0_of_160",
+  "which_fired_plain": "The 0-of-160 branch fired."
+ },
+ "self_hash": "dd42c307aa63ae3b",
+ "self_hash_recipe": "sha256 of json.dumps(doc, sort_keys=True, separators=(',',':')) over the WHOLE artefact after deleting: the key 'self_hash', the key 'self_hash_recipe' (so the recipe is a FIXED POINT and does not move the hash it describes), and from cost_and_shortfall the wall-clock-valued keys wall_seconds, wall_hours, core_hours, started_utc, finished_utc, started_monotonic, gate_assembled_utc, per_attempt_wall_seconds, seconds_per_attempt_measured, loadavg_at_start, loadavg_at_end. Every count, every gate answer, every confidence interval and every control verdict is INSIDE the hash. First 16 hex chars.",
+ "sources_3k": {
+  "no_claim_on_an_abstract": true,
+  "row_OWED": {
+   "read_status": "method known and implemented; the 1934 paper itself was NOT fetched by this unit, so no load-bearing claim is made about its text -- only about the interval it defines, which is standard and independently checkable by the closed form above",
+   "reference": "Clopper, C. J. and Pearson, E. S. (1934), 'The use of confidence or fiducial limits illustrated in the case of the binomial', Biometrika 26(4):404-413",
+   "verified_by_this_unit": "the implementation is Beta-quantile inversion via scipy.stats.beta.ppf, checked against the closed form 1 - alpha**(1/n) at k = 0 to full float64 agreement",
+   "why_not_filled": "writeup/SOURCES.md is explicitly OUTSIDE this unit's briefed territory ('Do not touch ... writeup/SOURCES.md'). The row is therefore OWED and is handed to CONDUCTOR to fill. Recorded as a defect of the brief, not discharged silently.",
+   "why_owed": "The gate answer's confidence intervals rest on this method, so SS 3k rule 1 would require a writeup/SOURCES.md row in the same commit as this unit's pre-registration."
+  },
+  "rule_3_exemption": "SS 3k rule 3 (SOURCES.md row filled in the same commit as pre-registration) is claimed EXEMPT for the physics: this unit implements NO published method of its own. It calls E's solver, E's Newton loop, E's convergence test and E's row-matching unchanged, and R-bank's loader unchanged. Every published method in the call graph (Viswanath's hookstep trust-region Newton-Krylov; Lucas & Kerswell Table IV) is already registered against the units that implemented it."
+ },
+ "unit": "E-FE",
+ "wave": 7,
+ "what": "160 direct-seed attempts: E's 8 Table IV rows x 2 arms x 10 independent banked fields per (row, arm). Rows and arms FIXED; only the DRAW varies."
+}
