@@ -261,6 +261,43 @@ def main():
             for n, r in ts["L6_same_quantities_at_its_own_J4_rung"].items()),
             "the L6 comparison table is copied from L6's artefact, digit for digit")
 
+    # --- C35-C38: the L6 exhaustive audit and the three-way verdict licence -------------
+    if ts is not None:
+        aud = ts.get("L6_ladder_exhaustive_audit")
+        allrec = [st for br, rungs in d6["ladder_results"].items()
+                  for ru in rungs for st in ru.get("starts", [])]
+        check("C35", aud is not None and aud["start_records"] == len(allrec) == 58
+              and aud["every_record_hit_the_800_cap"] is True
+              and all(st["nit"] == 800 for st in allrec),
+              "all 58 of L6's start-records recounted here: every one hit the 800 cap")
+        check("C36", aud["records_not_critical_at_threshold_1"]
+              == sum(1 for st in allrec if st["scale_invariant_grad"] >= 1.0) == 56,
+              "56 of 58 non-critical at threshold 1, recounted")
+
+        cols = ts.get("the_two_columns_rank_differently", {})
+        rows = {r["start"]: r for r in d6["ladder_results"]["B"][-1]["starts"]}
+        check("C37", cols.get("L6_minimiser_is_smallest_by_max_abs_grad") is True
+              and cols.get("L6_minimiser_is_largest_by_scale_invariant_grad") is True
+              and min(rows, key=lambda n: rows[n]["max_abs_grad"]) == "continuation"
+              and max(rows, key=lambda n: rows[n]["scale_invariant_grad"]) == "continuation"
+              and cols.get("exact_reversal") is False,
+              "both gradient columns reported; L6's minimiser is smallest by one and "
+              "largest by the other, and the near-reversal is not claimed as exact")
+
+    vl = d.get("verdict_licence")
+    if vl is not None:
+        k = vl["keyed_on"]
+        expect = ("drop_below_1.45" if k["dropped_below_1_45"]
+                  else ("no_drop_and_stationary" if k["terminal_iterate_is_stationary"]
+                        else "no_drop_and_NOT_stationary"))
+        check("C38", vl["row_that_fires"] == expect
+              and vl["threshold_unchanged"] == d["gate"]["material_threshold"] == 1.45
+              and k["dropped_below_1_45"] == (d["gate"]["smallest_residual_at_20000"] < 1.45)
+              and (d["gate"]["reading_that_fires_is_SUPERSEDED"]
+                   == (expect == "no_drop_and_NOT_stationary")),
+              "the three-way verdict licence is keyed to the banked gate and stationarity "
+              "fields, and the 1.45 threshold is unmoved")
+
     print(f"\n{N - len(FAILS)}/{N} checks passed"
           + (f"; FAILED: {FAILS}" if FAILS else ""))
     return 1 if FAILS else 0
