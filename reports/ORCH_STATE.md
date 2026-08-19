@@ -79,19 +79,21 @@ landing audit too. **`E-FE` IS HELD** until `R-bank` returns **160/160** bit-ide
 `R-bank`'s own pre-committed reading, not a new decision. Territories disjoint; every brief carries
 explicit-paths-only commits (four workers, one tree), COMMIT DURING THE RUN, and its §3d price.
 
+**RETURNED — `R-prof`** (leg 405, `1f89ceb`): gate (iii) **NO, 4.34×** the named reference; 79.1%
+transforms; remedy priced not landed. Integration audit + §3i seven: `writeup/waves/WAVE7_CLOSE.md`.
+Conductor finding: the unit's "every round exceeds 3×" is **cpu-clock-only** (worst wall 1.9975).
+
 ### Headroom at the wave boundary — §3j, IN BYTES (`wc -c`)
 
 | file | bytes | cap | free |
 |---|---|---|---|
-| `STATE.md` | 21,996 | 24,576 | 2,580 |
-| `WALLS.md` | 32,457 | 32,768 | 311 |
-| `OPTIONS.md` | 21,674 | 24,576 | 2,902 |
-| `ORCH_STATE.md` LIVE | 7,960 | 8,192 | 232 |
+| `STATE.md` | 22,717 | 24,576 | 1,859 |
+| `WALLS.md` | 32,691 | 32,768 | 77 |
+| `OPTIONS.md` | 22,152 | 24,576 | 2,424 |
+| `ORCH_STATE.md` LIVE | 8,076 | 8,192 | 116 |
 
-**DEFECT OF MINE, FOUND AND REPAIRED 2026-08-19** — a retirement spliced into a live paragraph
-because it located its target by TITLE, and the title also lives in every pointer to it. Full
-entry and the mechanical rule: `writeup/CORRECTIONS.md` §37. **Retire by slicing between asserted
-line indices; measure the live block by line index too, or the cap check silently passes.**
+**Defect of mine, §37 `writeup/CORRECTIONS.md`: retire by slicing between ASSERTED LINE INDICES,
+never by title, and measure the live block by line index too, or the cap check silently passes.**
 
 **Retired verbatim 2026-08-19** (headings are the index; git carries the rest): ORCH's wave-5
 close / trigger / wave-6 §3i; `WALLS_HISTORY.md` §OPTIONS-A2, §OPTIONS-E, §STATE-WAVE5, **§LANE-T**

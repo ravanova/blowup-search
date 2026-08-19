@@ -116,6 +116,8 @@ Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits 
 **Outreach stays held.** Reading published material is authorised; contacting any author, group or maintainer list is not.
 
 ## WAVE 7 — **DISPATCHED 2026-08-19: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` HELD** until `R-bank` returns **160/160**.
+**RETURNED — `R-prof`** (leg 405, `1f89ceb`, `writeup/data/p2_r_prof_v1.json`). Gate (iii) **NO**: `PROG-R4`'s loop is **4.34× slower** than the named reference (cpu median; wall 4.21; **worst wall round 1.9975** — "every round exceeds 3×" is true on the **cpu clock only**, a Conductor landing finding the unit's prose over-generalised).
+`R-prof` cont.: (i) 15-row table sums to **exactly 100.0**, **79.1% transforms**; (ii) fixed fraction **0.596** (`N = 4..512`). Remedy pre-planned FFTW3 **3.41×**, **priced not landed** (it moves every banked orbit at the last bit). Solver **unmodified**, sha256 matches live. Machine not quiet, positive control **failed** — both disclosed. **W7 unmoved; no link moved.**
 
 ## WAVE 6 — COMPLETE 2026-08-19. Retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE6. Audit + §3i: `writeup/waves/WAVE6_CLOSE.md`.
 

@@ -75,9 +75,7 @@ unclaimed; deferring neither collects it nor concedes it.
 ## W3 — No certified blow-up exists for any fluid equation
 
 *Retitled by USER RULING 2026-08-18 (Q2), `writeup/escalations/RULING_W3_WORDING_2026-08-18.md`.*
-*Former title, struck not deleted:* ~~The Grade-A × fluid cell is empty~~ — **false as a matter of
-fact**: on leg 174's own definitions the cell is OCCUPIED. A wall whose title and whose test
-disagree is how the next over-read gets built.
+*Former title struck, not deleted — retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §W3-TITLE.*
 
 **Statement.** No certified (interval-enclosed, equation-carrying-the-dissipative-term) blow-up
 exists for any *fluid* equation, in any dimension.
@@ -103,13 +101,9 @@ margin**. **Class A (22 interval-arithmetic inputs) was NOT verified and is bank
 THE AUDIT, never as a pass.** **W3 IS UNMOVED: the audit did not run W3's prose test.**
 `CORRECTIONS.md` §36.
 
-**The predicate is not tightened and the YES is not withdrawn.** `V3` applied leg 174's criterion
-unchanged, having been told not to tighten it, and recorded the YES first with the disqualifying
-qualification beside it. Leg 174's predicate stays exactly as written and **stops being described as
-W3's test**. Also **struck:** ~~leg 242 confirms nobody filled it since~~ — that over-read stays
-struck. **The audit of the YES is QUEUED FOR WAVE 6 and is NOT optional** (ruling Q4, ≈4–8 h): one
-database, title-screened, S2 banked a **gap not a zero**. `writeup/data/p2_route_v3_gradeA_v1.json` ·
-`experiments/journal/leg_399.md`.
+**Predicate not tightened, `YES` not withdrawn; leg 242's over-read struck; the wave-6 audit that
+ruling Q4 made non-optional is DONE (`V5`, leg 402, VERIFIED by `V-W6`). Retired verbatim 2026-08-19
+→ `WALLS_HISTORY.md` §W3-PREDICATE.**
 
 **Why this wall matters more than its size suggests.** If a viscous blow-up cannot be certified for a
 dissipative fluid equation in **one** dimension, 3D Navier–Stokes is not a question of compute and
@@ -242,9 +236,7 @@ question is posed at. `PROG-R4` U3 spent **134.45 core-hours of attempt CPU** (t
 **144.69** worker-hours of pool, 92.92% utilised — two real measurements of different quantities,
 §R0); the source papers use **~10.2 GPU-days** for the *2D* problem. This repository has neither.
 
-**Why it is a wall and not a complaint.** Under §3d an unresourced programme cannot return `NO` — it
-returns `UNDER-RESOURCED` forever, an unbounded sequence of honest non-answers indistinguishable
-from no programme at all.
+**Why it is a wall and not a complaint** — retired verbatim → `WALLS_HISTORY.md` §W7-COMPLAINT.
 
 **BREAKING W7 CONSISTS OF:** compute at the sources' scale, or — the cheaper attack, and it is
 mathematics not procurement — **a reformulation whose compliant scale is smaller.** Every order of
@@ -254,7 +246,17 @@ is permanent.
 **2026-08-18 — SIZE IS NOT THE BINDING RISK, PERSISTENCE IS.** `U3` **finished**: 14.47 h wall,
 144.69 core-h reserved, 92.9% utilised. Every recorded loss (13 agents 08-06, 5 on 08-07, `E`
 killed twice, 3 of 4 in wave 3) was a suspended session or a **gitignored** checkpoint, never a
-job too big. Priced, **not queued**: `writeup/prices/FIELD_ENSEMBLE_2026-08-18.md`.
+job too big. **QUEUED 2026-08-18 by user directive** (the "price, do not queue" clause was
+WITHDRAWN): `writeup/prices/FIELD_ENSEMBLE_2026-08-18.md`, 160 attempts, ~91 core-h.
+
+**⚠ 2026-08-19 — W7 MEASURED FROM THE INSIDE. THE INEFFICIENCY IS REAL AND IT BREAKS NOTHING.**
+`R-prof` (leg 403, `1f89ceb`, `writeup/data/p2_r_prof_v1.json`) profiled `PROG-R4`'s loop against a
+named reference. Gate (iii) **NO: 4.34× slower** (cpu median; wall 4.21; **worst wall round 1.9975**,
+so "every round exceeds 3×" holds on the cpu clock only — Conductor finding; machine not quiet and
+the positive control failed, both disclosed). **79.1% of a step is transforms**, fixed fraction
+**0.596** (`N = 4..512`). The one change that recovers most — pre-planned FFTW3, **3.41×** — is
+**priced, not landed**: it perturbs every banked orbit at the last bit, the `R4` problem, so it needs
+its own unit and equivalence check. **W7 UNMOVED**: a speedup breaks no wall, and no link moved.
 
 **Lane: R.**
 

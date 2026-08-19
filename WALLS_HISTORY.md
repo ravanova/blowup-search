@@ -422,3 +422,25 @@ it does not touch W4/W5. **No lane re-rank.** (7) **LOOP RISK REAL:** the last t
 CONSTRUCTION / AUDIT / VERIFICATION — two of three audit-kind. **Applied, not noted:** wave 7's
 Lane-L slot is `L6-b`, a measurement on the object; `R-prof` is instrument work, **capped at one
 slot**, paired with `E-FE`, which measures the object.
+
+## §W3-TITLE — retired verbatim from `WALLS.md` W3 on 2026-08-19 (§3j headroom).
+
+*Former title, struck not deleted:* ~~The Grade-A × fluid cell is empty~~ — **false as a matter of
+fact**: on leg 174's own definitions the cell is OCCUPIED. A wall whose title and whose test
+disagree is how the next over-read gets built.
+
+## §W3-PREDICATE — retired verbatim from `WALLS.md` W3 on 2026-08-19 (§3j headroom).
+
+**The predicate is not tightened and the YES is not withdrawn.** `V3` applied leg 174's criterion
+unchanged, having been told not to tighten it, and recorded the YES first with the disqualifying
+qualification beside it. Leg 174's predicate stays exactly as written and **stops being described as
+W3's test**. Also **struck:** ~~leg 242 confirms nobody filled it since~~ — that over-read stays
+struck. **The audit of the YES is QUEUED FOR WAVE 6 and is NOT optional** (ruling Q4, ≈4–8 h): one
+database, title-screened, S2 banked a **gap not a zero**. `writeup/data/p2_route_v3_gradeA_v1.json` ·
+`experiments/journal/leg_399.md`.
+
+## §W7-COMPLAINT — retired verbatim from `WALLS.md` W7 on 2026-08-19 (§3j headroom).
+
+**Why it is a wall and not a complaint.** Under §3d an unresourced programme cannot return `NO` — it
+returns `UNDER-RESOURCED` forever, an unbounded sequence of honest non-answers indistinguishable
+from no programme at all.
