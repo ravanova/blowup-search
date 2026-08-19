@@ -153,3 +153,37 @@ discrepancy in the source, which is bit-identical.**
 **Policy unchanged: the PDFs stay untracked.** `Papers/*` is gitignored for copyright and that is
 correct. What is committed is this pointer plus the hashes, so the next session can tell whether the
 file it has is the file the record was written against.
+
+---
+
+## LEG 411 (`PB1`, wave 8) — the recurrence-mining corpus fetched for `P1`'s novelty check
+
+**Nine PDFs fetched from arXiv on 2026-08-19 by `curl https://arxiv.org/pdf/<id>` (HTTP 200 first
+attempt, every one). `Papers/` is gitignored: pointers and hashes only, never a PDF.**
+
+| file | id | what it is | sha256 |
+|---|---|---|---|
+| `1207.4682.pdf` | `1207.4682v1` | Chandler & Kerswell, *JFM* **722**:554–595 (2013) | `343d2173…88d80cf` |
+| `1406.1820.pdf` | `1406.1820v2` | Lucas & Kerswell, *Phys. Fluids* **27** 045106 (2015), doi `10.1063/1.4917279` | `da9cab5c…f479258` |
+| `1406.1820v1.pdf` | `1406.1820v1` | **the version actually quoted** — see the extraction note below | `edf2f7e9…9a6cbad76` |
+| `1308.3356.pdf` | `1308.3356v3` | Lucas & Kerswell, 2D Kolmogorov over large domains | `f39f1333…e00e541c` |
+| `physics_0604062.pdf` | `physics/0604062` | Viswanath 2007, the founding hookstep paper | `fe9fe1aa…4d5dc5d6` |
+| `2309.12754.pdf` | `2309.12754v1` | Page, Holey, Brenner & Kerswell, *JFM* **991** (2024) A10, doi `10.1017/jfm.2024.552` | `5e47a4bd…8200b612` |
+| `1108.0975.pdf` | `1108.0975v1` | Kawahara, Uhlmann & van Veen, *Annu. Rev. Fluid Mech.* **44**:203–225 (2012) | `9e4d666e…6fe47be2a9` |
+| `1611.04829.pdf` | `1611.04829v1` | Lucas & Kerswell 2017, sustaining processes from recurrent flows | `2ef11677…3cfbbda198` |
+| `0810.1974.pdf` | `0810.1974v1` | Halcrow–Gibson–Cvitanović line, plane Couette UPOs | `065f947a…43e3b55a5` |
+| `1705.03720.pdf` | `1705.03720v2` | Willis, Cvitanović & Avila, RPOs as the backbone of pipe flow | `85a5b22f…368b08772c` |
+
+**EXTRACTION NOTE, AND IT IS LOAD-BEARING FOR EVERY QUOTE TAKEN FROM `1406.1820`.** The **v2** PDF
+carries a **doubled text layer** — two copies of the running text at nearly the same coordinates —
+so `pdftotext` (with or without `-layout`, and with column cropping) returns interleaved,
+unreadable prose on the pages that matter. **v1 extracts cleanly and is what leg 411 quotes.** The
+one sentence leg 411 leans on hardest was then **re-checked in the v2 extraction and is present
+there verbatim** (`1406.1820.txt` line 478 vs `lk_v1.txt` line 267), so the quote is not an
+artefact of the version chosen. Pagination differs between versions; leg 411 cites **v1 pages**.
+
+**`ANNUREV` NOTE.** `1108.0975` was declared **UNREACHABLE in advance** by leg 411's own
+pre-registration, as a review in a journal-only venue. **That declaration was WRONG in the safe
+direction: the review IS on arXiv, with its `journal_ref` attached, and it was fetched and read.**
+Recorded here rather than silently corrected, per the standing rule on controls and declarations
+that do not fire as planted.
