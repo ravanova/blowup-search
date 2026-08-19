@@ -364,3 +364,5 @@ E-FE: 163 jobs on 6 shards; loadavg 9.71 9.24 10.46 on 12 cores
   [162/163] g159 UPO9   Q f9: stalled, ||R||=0.1189, 0.28 h
   attempt 158 UPO9   arm Q: stalled, final ||R|| = 0.1158, 24 epochs, 0.32 h
   [163/163] g158 UPO9   Q f8: stalled, ||R||=0.1158, 0.32 h
+
+run complete: 16.67 h wall, 99.99 core-hours on 6 shards
