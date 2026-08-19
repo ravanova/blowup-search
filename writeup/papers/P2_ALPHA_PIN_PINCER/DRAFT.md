@@ -17,13 +17,18 @@ modulated, localised ansatz: cut the profile off at radius `ρ`, let the modulat
 `m(s)` move, and ask whether the error this introduces can be made small.
 
 We report a float64 computation, on a **synthetic exactly-DSS realization**, of every error term
-that cut-off and modulation generate. Five terms are generated. The cut-off drift `T₁` and the
+that cut-off and modulation generate. **The term-by-term decomposition exists in the record only in
+the `L¹_t L³_x` norm, which the gate designates *secondary*; the pressure-free load-bearing norm
+`‖curl F‖_{L¹_t L^{3/2}_x}` is banked only as a total. Every ratio in this abstract is a
+secondary-norm ratio and we say so wherever it appears.** Five terms are generated. The cut-off drift `T₁` and the
 modulation transport `T₂` **cancel** when the cut-off radius is frozen to the similarity rate
 (`κ = a`), measured `|T₁+T₂|/|T₁| = 2.5780635399678998e-08`. The viscous and nonlinear commutators
 `T₄`, `T₅` **decay** like `ρ^{-2}` (measured exponents `-2.000005376382061` and
 `-2.0000138353404697`). The pressure term is annihilated by the curl and the divergence corrector
 is identically zero for this ansatz. **What is left is the modulation commutator `T₃`**, and it
-carries `0.9999978617027289` of the total residual at the largest radius tested.
+carries `0.9999978617027289` of the total residual at the largest radius tested — in the secondary
+norm, the ratio rising monotonically toward `1` across the sweep (`1.0286, 0.99828, 0.99979,
+0.999976, 0.9999979`).
 
 `T₃` is algebraically proportional to `ṁ` and its scale-invariant size is `ρ^{1-α}`. It therefore
 vanishes only if `α > 1` or `ṁ = 0`. **Chae–Wolf's Remark 1.2, via Escauriaza–Seregin–Šverák,
@@ -190,6 +195,32 @@ and **none could supply `α > 1.5` even in principle** (`p2_route_l2_decay_v1.js
 
 ## §4. THE MEASUREMENT: FIVE TERMS IN, ONE TERM OUT
 
+> ### **BEFORE ANY NUMBER: WHICH NORM THE DECOMPOSITION IS IN, WHICH IS NOT THE LOAD-BEARING ONE**
+>
+> The gate names two norms (`gate.norm`, `gate.secondary_norm`):
+> the **load-bearing** `‖curl F‖_{L¹_t L^{3/2}_x}`, which is pressure-free because `curl` annihilates
+> `∇P`; and the **secondary** `‖F‖_{L¹_t L³_x}`.
+>
+> **Every per-term field banked in the record is a secondary-norm field.** The artefact's keys are
+> `T1_L3…`, `T2_L3…`, …, `T5_L3…`, `T12_L3…`, `T123_L3…`. **There is no per-term field in the
+> load-bearing norm anywhere in the artefact.** The load-bearing norm appears only as the *total*,
+> `curl_L32`.
+>
+> **Consequences, stated plainly rather than absorbed:**
+> 1. The two headline ratios below — `|T₁+T₂|/|T₁| = 2.578e-08` and `total/|T₃| = 0.999998` — are
+>    **secondary-norm ratios**. The gate's own `the_obstruction_named` field quotes both inside a
+>    sentence about the load-bearing norm **without saying so**. We do not repeat that.
+> 2. The pressure term `T₆` is annihilated only by the `curl`. In the secondary norm it is **not**
+>    annihilated, and **it is not in the decomposition at all** — so the secondary-norm "total" is
+>    not the sum of the terms listed, and no term-wise conclusion in that norm is closed.
+> 3. **Therefore this paper's identification of `T₃` as the sole survivor is an identification IN
+>    THE SECONDARY NORM.** That is *narrower* than the contribution ceiling permits, and it is the
+>    version we assert. The measurement that would widen it — the same sweep, recording `‖curl Tᵢ‖`
+>    per term — **has not been run**, and its absence is not evidence either way.
+>
+> The `NO` itself does **not** depend on the decomposition: it is read off `curl_L32` directly,
+> which is measured. **What depends on the decomposition is this paper's sentence, not the wall.**
+
 All numbers in this section are from `writeup/data/p2_route_l5_finite_energy_v1.json`, `self_hash`
 `0c5e0f827f526df6`, load-bearing row `sweep["alpha=1|kappa=a_physical_frozen|DSS"]`, and were
 reproduced bit-for-bit by an independent verifier (`p2_verify_wave5_v1.json`, `V-W5`, leg 403,
@@ -214,6 +245,8 @@ which **re-ran the float64 quadrature from `L5`'s own code and returned identica
 Radii `ρ ∈ {12.6171734412612, 37.851520323783596, 126.171734412612, 378.5152032378359,
 1261.7173441261198}`, the last being `gate.largest_cutoff_radius_in_y_tested`.
 
+**All rows below are in the SECONDARY `L³` norm** (see the box above).
+
 | quantity | field | value |
 |---|---|---|
 | `\|T₁+T₂\| / \|T₁\|` at largest `ρ` | `T12_over_T1_at_largest_rho` | **`2.5780635399678998e-08`** |
@@ -223,6 +256,11 @@ Radii `ρ ∈ {12.6171734412612, 37.851520323783596, 126.171734412612, 378.51520
 | `T₁+T₂` `ρ`-exponent (tail-3) | `T12_L3_rho_exponent_tail3` | `-1.9999930154541286` |
 | `T₃` `ρ`-exponent (tail-3) | `T3_L3_rho_exponent_tail3` | `-4.962567269511898e-06` |
 | predicted leading exponent | `predicted_rho_exponent_leading` | `0.0` |
+
+The "sole survivor" ratio is not a single-point measurement: across the five radii it reads
+`1.0285935244169777, 0.9982831750453196, 0.9997915495946416, 0.9999763023011322,
+0.9999978617027289` — approaching `1` from above and then from below, each step about an order of
+magnitude closer, consistent with the `ρ^{-2}` leftovers.
 
 Read across the row: at `κ = a` the cut-off drift and the modulation transport annihilate one
 another to eight digits; the two commutators that do not involve the modulation fall like `ρ^{-2}`,
@@ -277,9 +315,18 @@ A backward-DSS blow-up requires **infinitely many** DSS periods. The localisatio
 `S` units of similarity time is `Σ(S) = c_mod · S` when the per-unit error is `ρ`-independent. The
 measured `ρ`-exponent of the load-bearing norm is
 
-    gate.rho_exponent = 1.0850007559945518e-04       (tail-3 window, ρ₀ ≥ 100)
+    gate.rho_exponent = 1.0850007559945518e-04       (TAIL-3 window: rho0 = 100, 300, 1000 only)
 
-against a requirement of **strictly negative** for summability
+**and the same quantity fitted over the full sweep is `curl_L32_rho_exponent =
+-2.340048393964631e-02`, i.e. NEGATIVE.** The sign of the headline exponent is a property of the
+fit window, and we print both because a referee is entitled to both. The gate's pre-committed
+answer wording attaches the tail-3 value to the full range — *"measured `rho-exponent 0.000109`
+over `rho0` in `[10, 1000]`"* — **which is the wrong range for that number**; the full range gives
+`-0.0234`. The secondary norm behaves identically (`L3_rho_exponent = -4.913347365381298e-03` full,
+`+8.350419121029962e-05` tail-3). What is *not* window-dependent, and is what the `NO` rests on, is
+the raw sequence of per-decade increments in §5.3.
+
+Against a requirement of **strictly negative** for summability
 (`gate.the_clause_b_bill.required_rho_exponent_for_summability`). The pinned `α = 1` delivers
 **exactly `0`**: `deficit_in_exponent = 0.0`, `measured_exponent_deviation_from_zero =
 1.0850007559945518e-04`.
@@ -682,7 +729,12 @@ failing hypothesis named, quoted and located in each: 9 `FAILS`, 8 `FAILS-BY-CON
     mathematics hash differently (`4bb618d7c8b039ea` vs `5b949a5c6b28fc72`) — `CORRECTIONS.md` §54
     item 5. **The `self_hash` values in §11 are identifiers of the banked file, not integrity
     certificates**, and no claim in this paper rests on one.
-13. **One primary and two monographs are `UNREACHABLE`** from this environment (NRŠ 1996, ESŠ 2003,
+13. **The load-bearing norm has no term-by-term decomposition in the record** (§4 box). The
+    identification of `T₃` as the sole survivor is asserted **only in the secondary norm**.
+14. **The headline `ρ`-exponent changes sign with the fit window** (`+1.085e-04` tail-3 against
+    `-2.340e-02` full-range), and the gate's answer text attaches the tail-3 value to the full
+    range (§5.1).
+15. **One primary and two monographs are `UNREACHABLE`** from this environment (NRŠ 1996, ESŠ 2003,
     Chandrasekhar 1961; plus Byrd–Lu–Nocedal–Zhu 1995). Each is banked as `UNREACHABLE`, **never as
     a zero**, and no paywall was circumvented at any point.
 
@@ -693,7 +745,8 @@ failing hypothesis named, quoted and located in each: 9 `FAILS`, 8 `FAILS-BY-CON
 For a natively finite-energy modulated, localised ansatz built on a backward DSS profile, the
 localisation error is, at large cut-off radius, **the modulation commutator and nothing else**:
 `|T₁+T₂|/|T₁| = 2.5780635399678998e-08`, `T₄`, `T₅ ~ ρ^{-2}`, and the total is `T₃` to
-`0.9999978617027289`. `T₃` is algebraically `∝ ṁ` with scale-invariant size `ρ^{1-α}`, so it
+`0.9999978617027289` — **all three in the secondary `L³` norm, the only norm in which the record
+decomposes the residual at all** (§4). `T₃` is algebraically `∝ ṁ` with scale-invariant size `ρ^{1-α}`, so it
 vanishes only at `α > 1` or `ṁ = 0`, and each exit is closed by a published theorem — the first by
 Chae–Wolf's Remark 1.2 through Escauriaza–Seregin–Šverák, the second by **Tsai's Theorem 2**, whose
 hypotheses this object is measured to satisfy.
@@ -702,7 +755,8 @@ The failure is at an **endpoint**: summability needs a strictly negative `ρ`-ex
 delivers exactly zero (`1.0850007559945518e-04` measured).
 
 > **THIS IS THE WHOLE CONTRIBUTION: the identification of `T₃` as the sole survivor and its
-> `ṁ`-proportionality, in float64, on a synthetic profile.**
+> `ṁ`-proportionality, in float64, on a synthetic profile** — and, narrower than that ceiling
+> requires, **in the secondary norm.**
 
 It is not a proof, it does not construct or exclude a blow-up, and **it does not move the
 Navier–Stokes existence-and-smoothness problem.**
