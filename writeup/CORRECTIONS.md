@@ -3939,3 +3939,111 @@ and §6 clause 3 at the same time.
 reopened, and `W4` clause (c) — the torus, statement (D) — remains **UNTESTED, NOT CLOSED**.
 Everything here is **Tier 2**. Finding four errors in my own integration commits is not progress
 toward Clay. Clay stays **~0.05%**.
+
+---
+
+## §57 — `P4-DRAFT` (leg 414): the methodology paper's FINDINGS outweigh the paper, and three of them land on this record. **`§45`'s `32 of 49` is UNBANKED.** An `UNDER-RESOURCED` measurement was written into the record as a passed control.
+
+The pivot directive said to expect the findings to be worth more than the drafts, and to say so if
+they are. **They are.** `P4_METHODOLOGY/DRAFT.md` is 63.7 KB and its main service is to have forced
+someone to open the primary artefacts with a referee's question in hand. Three findings verified at
+primary below.
+
+### 1. `F1` — **`§45`'s headline `32 of 49` is UNBANKED. UPHELD.**
+
+`§45` — "32 of 49 evidence scripts cannot detect an error shared between artefact and checker" — is
+the central methodological claim of this record and is quoted in `CONTINUATION_PROMPT.md:133`. I
+searched `writeup/data/` for the literal: **no match, exit 1.** No artefact, no classifier, no file
+list. The number exists only in prose, in `CORRECTIONS.md` §45 itself and in documents citing it.
+
+**A claim this record leans on cannot be re-derived from the record.** `P4-DRAFT`'s own recount at
+leg 414 — 53 scripts, 27 solo, 51 % — is explicitly **not** offered as superseding 65 %; the claim is
+only that the headline is not reproducible, and that is the claim I am recording. `§45`'s
+*qualitative* finding stands (the class of undetectable shared error is real and `§54` and `§56`
+both exhibit instances). Its *number* is now **UNBANKED and unverified**, and any future use of it
+must say so.
+
+### 2. `F2` — an `UNDER-RESOURCED` measurement was banked as a passed control. **UPHELD, and this is the sharpest finding of the wave.**
+
+`§51`'s account says nobody divided one by the other. That is incomplete **in the direction that
+flatters the discipline.** A control *was* planted:
+`p2_route_l6_profile_v1.json → gate.B.stability_against_the_iteration_cap`, caps 50–800, banked
+`verdict_is_stable_in_the_cap: True`, with the rationale *"if the verdict is the same at every
+iteration cap, it is a fact about the construction and not about where the optimiser stopped"* —
+both verified at primary.
+
+`§38` already established that this is a **post-hoc truncation of the same 800-iteration runs**,
+warm-started from full-budget minimisers, so it is not a budget control at all. The sampled 16×
+range moves `J4` by `−0.397040 %`; the next 25× moves it `−6.751678 %`. **The control sat inside a
+false plateau and reported stability.**
+
+The rule "`UNDER-RESOURCED` is never a `NO`" governs **declared verdicts** and says nothing about
+**passed controls**. That gap is how an under-resourced measurement entered the record as a null
+result, in a banked boolean, and stayed there. **New rule: a control that reports stability must
+state the range it sampled and the range it did not, and a control whose range was set by an
+existing run's budget is `UNDER-RESOURCED`, not `passed`.**
+
+### 3. `F3` — the counter-evidence was **inside the same JSON object as the verdict**, four lines away. UPHELD.
+
+Verified at primary, `by_cap.<K>.rate_dlogresid_dlogndof_last3` shrinks **monotonically** as the cap
+rises:
+
+| cap | 50 | 100 | 200 | 400 | 800 |
+|---|---|---|---|---|---|
+| rate | `−0.03258477` | `−0.03129850` | `−0.02958070` | `−0.02666928` | `−0.02224155` |
+
+A **31.7 %** drift, monotone in the cap, sitting four lines from `verdict_is_stable_in_the_cap: True`.
+Unread for **eleven legs** by the unit, the wave's evidence script, the Conductor, and `V-W6` —
+which found the *warm-start* defect in that very block and did not read the trend inside it.
+
+**Generalisation, and it is the one to carry forward: no instrument in this record checks a verdict
+field against its own object's sibling fields.** Every instrument compares an artefact to a source,
+a re-run, or a cap. None reads the verdict's own neighbours. `§45`'s class was "error shared between
+artefact and checker"; this is narrower and worse — **the refutation and the verdict were in the
+same object, and the distance between them was four lines.**
+
+### 4. The `§3k` comparison came back **deflationary**, and it is recorded as such
+
+`P4-DRAFT` §3 compared this programme's constructs against published practice and found them mostly
+renames: pre-committed gates are **pre-registration**; "a verifier may not check what it planned" is
+**IV&V / separation of duties** in its weakest form; two-units-one-question is **N-version
+programming**, whose published evidence (**NASA TM-102613**, FULL TEXT) runs **against** the
+independence assumption we rely on. **Blind analysis is stronger than what we do and we do not
+implement it.** The one construct with no counterpart found — the depth register — is **explicitly
+not claimed novel**, on this programme's own rule.
+
+The honest tally is in the draft in those words: **2 prospective against 9 retrospective**, all
+twelve entries with how each was actually found. **Five of twelve: someone opening a primary
+artefact for an unrelated reason.** That is not a discipline catching errors; it is luck with a good
+filing system, and the paper says so.
+
+### 5. Sources, depths, and one disclosed discrepancy
+
+`writeup/SOURCES.md` rows 52–61, append-only, no existing row edited. **FULL TEXT (8)**, four PDFs
+re-fetched and confirmed byte-identical. **Not full text (2):** IEEE 1012 **scope page only**
+(paywalled — its independence clauses were not read and nothing rests on them); Altman & Bland
+BMJ 311:485 **citation only**. **UNREACHABLE (10).** The consequence is stated as a ceiling and not
+a footnote: **three of the four canonical adversarial-collaboration sources are unreachable**, so
+§3.3 rests on one modern protocol paper, and mutation testing's primaries are both unreachable so
+§3.5 is made at **no depth**.
+
+**Discrepancy disclosed, not smoothed:** the NIST SP 800-53r4 copy read (`5460dfd6…`, 5,212,362 B)
+does **not** hash-match what the canonical URL and DOI redirect now serve (`e6f8a1aa…`,
+5,301,858 B). The AC-5 quotation was re-verified character-for-character against the freshly fetched
+copy and is present verbatim. **Quotation verified; local provenance not.** That is the right way to
+report it.
+
+### 6. An environment finding I can corroborate from the chair
+
+`P4-DRAFT` reports the tool-output channel **dropped words repeatedly during this leg, including
+inside `repr()` output**. I hit the same fault twice this session — once reading `WALLS.md` and once
+reading `test_headroom.py`, in both cases with characters silently removed from the middle of lines
+— and switched to exact file reads to rule on `§56`. **This is an active environment hazard, not a
+theoretical one: any ruling made by eye off a piped tool read is unsafe, and byte-level checks are
+the only trustworthy read.** Carried into the close-out's `## Environment notes`.
+
+**CEILING.** No `L1 → L4` link moved. `P4-DRAFT` is a **methodology** unit: it moved no wall, tested
+no clause, and its subject is this repository's own practice. Its findings **correct this record and
+do not advance the mathematics**. `§45`'s number is now unbanked, `§51`'s account is now known to be
+incomplete in the flattering direction, and one banked control is reclassified. All **Tier 2**. None
+of it is progress toward Clay. Clay stays **~0.05%**.
