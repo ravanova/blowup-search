@@ -2,9 +2,18 @@
  "bank_manifest_sha": "9659913f307936ed9b8daf0641b8b9bc9b81befcfc17d85d600c656ffc33d35e",
  "briefed_budget_core_hours": 91.0,
  "briefed_wall_hours_at_6_shards": 15.2,
+ "commits_during_run": 18,
+ "core_hours": 99.99028953234355,
  "cores": 12,
+ "finished_utc": "2026-08-19T18:01:35Z",
  "lane": "R",
  "leg": 408,
+ "loadavg_at_end": {
+  "fifteen": 5.41,
+  "five": 3.77,
+  "one": 1.81,
+  "raw": "1.81 3.77 5.41"
+ },
  "loadavg_at_start": {
   "fifteen": 10.46,
   "five": 9.24,
@@ -13,10 +22,14 @@
  },
  "n_attempts": 160,
  "n_jobs": 163,
+ "n_repro_controls": 16,
+ "n_repro_fired": 16,
  "note": "shards fixed at dispatch and NEVER raised mid-run: a unit with a changing shard count cannot report a clean per-attempt cost",
  "shards": 6,
  "started_monotonic": 1787102501.4886665,
  "started_utc": "2026-08-19T01:21:41Z",
  "unit": "E-FE",
+ "wall_hours": 16.66504825539059,
+ "wall_seconds": 59994.17371940613,
  "wave": 7
 }

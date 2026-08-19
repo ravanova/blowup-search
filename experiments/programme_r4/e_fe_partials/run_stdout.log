@@ -354,3 +354,13 @@ E-FE: 163 jobs on 6 shards; loadavg 9.71 9.24 10.46 on 12 cores
   [157/163] g151 UPO9   Q f1: stalled, ||R||=2.342, 0.36 h
   attempt 155 UPO9   arm Q: converged, final ||R|| = 3.818e-10, 10 epochs, 0.14 h
   [158/163] g155 UPO9   Q f5: converged, ||R||=3.818e-10, 0.14 h
+  attempt 156 UPO9   arm Q: stalled, final ||R|| = 0.1155, 20 epochs, 0.32 h
+  [159/163] g156 UPO9   Q f6: stalled, ||R||=0.1155, 0.32 h
+  attempt 154 UPO9   arm Q: stalled, final ||R|| = 0.1472, 20 epochs, 0.33 h
+  [160/163] g154 UPO9   Q f4: stalled, ||R||=0.1472, 0.33 h
+  attempt 157 UPO9   arm Q: stalled, final ||R|| = 1.211, 20 epochs, 0.31 h
+  [161/163] g157 UPO9   Q f7: stalled, ||R||=1.211, 0.31 h
+  attempt 159 UPO9   arm Q: stalled, final ||R|| = 0.1189, 21 epochs, 0.28 h
+  [162/163] g159 UPO9   Q f9: stalled, ||R||=0.1189, 0.28 h
+  attempt 158 UPO9   arm Q: stalled, final ||R|| = 0.1158, 24 epochs, 0.32 h
+  [163/163] g158 UPO9   Q f8: stalled, ||R||=0.1158, 0.32 h
