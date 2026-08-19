@@ -4047,3 +4047,105 @@ no clause, and its subject is this repository's own practice. Its findings **cor
 do not advance the mathematics**. `§45`'s number is now unbanked, `§51`'s account is now known to be
 incomplete in the flattering direction, and one banked control is reclassified. All **Tier 2**. None
 of it is progress toward Clay. Clay stays **~0.05%**.
+
+---
+
+## §58 — `L5-cmod` (leg 413): the literal pre-committed rule returned **`UNDER-RESOURCED`** and that verdict STANDS as the unit's literal answer. `§53`'s flag is discharged **only in the part that was directly measured**; the saturation claim rests on a post-hoc discriminant with a pre-planted control, and is recorded as such.
+
+`L5-cmod` extended `L5`'s `c_mod` ladder five decades, to `ρ₀ = 1e8`
+(`gate.largest_rho_reached = 126171734.41261198`). It banked a **sealed raw result** at `95f0bc6`
+before any adjudication, then adjudicated at `5077a0b`. Both are in the artefact and both are in the
+history. **The unit did this correctly and the order matters**; nothing below is a criticism of how
+it conducted itself.
+
+### 1. The pre-committed rule returned `UNDER-RESOURCED`, and it stays `UNDER-RESOURCED`
+
+`gate.answer_by_literal_precommitted_rule_SS0_2` = **`UNDER-RESOURCED`**, preserved verbatim beside
+the adjudication. §0.2's `NO` branch required the last three per-decade increments to shrink
+monotonically **and** the terminal one to sit below the noise floor. The last four bands are
+`−6.94e-10`, `+2.58e-10`, `+1.09e-09`, `+2.36e-10` against
+`gate.verdict_detail.noise_floor_used = 0.005365576651852624` — **pure roundoff with indefinite
+sign, eight orders below the floor.** `terminal_over_noise_floor = 4.39e-08`. The monotonicity
+clause was being evaluated on noise and could not pass.
+
+The unit disclosed this in its own words as *"a DEFECT IN MY OWN OPERATIONALISATION, disclosed on
+the same terms as a control that did not fire, NOT re-planted"*. **That is the right disclosure and
+I am not softening it.** The wind-down directive is explicit: a unit that came back
+`UNDER-RESOURCED` stays `UNDER-RESOURCED`. **The literal pre-committed answer to §0.2 is
+`UNDER-RESOURCED` and this record carries it as such.**
+
+### 2. What IS directly measured, and what `§53`'s flag actually asked
+
+`§53`'s flag was that the `c_mod` sweep **stops ~3 decades too early**. That is a statement about
+reach, and reach is now measured, with no fit and no discriminant:
+
+| field | value |
+|---|---|
+| `gate.c_mod_banked_by_L5` | `869.2878218404479` |
+| `gate.c_mod_at_largest_rho` | `869.290596262992` |
+| `gate.decades_added` | `5.0` |
+| `gate.relative_change_from_L5s_last_rho` | `3.191604063021496e-06` |
+
+**Five more decades move `c_mod` by 3.2 parts per million.** `§53`'s flag as posed — *the sweep is
+too short to tell* — is **DISCHARGED, by direct extension.** This is a measurement by a unit that
+returned, not a tidy-up, and it is the one part of this landing I am willing to call discharged.
+
+### 3. What is NOT directly measured: the ρ → ∞ saturation claim
+
+The stronger claim — that `c_mod` saturates in the limit, so `Σ(∞) = ∞` is secure — rests on
+`gate_adjudication.decay_exponent_of_the_increments`: a least-squares slope of `log₁₀|increment|`
+against `log₁₀ ρ` over the **7** resolved bands beyond `L5`'s reach, giving
+**`slope = −1.9900219682735338`**, `max_log10_residual = 0.0194`. Saturation with an `O(ρ⁻²)`
+correction predicts `−2`; a logarithmic divergence predicts `0`.
+
+**This discriminant was chosen after the data existed.** That is `P4-DRAFT`'s `F7` class — a gate
+operationalisation repaired by the party who could see the numbers — landed in `§57` an hour before
+this. It is disclosed, not concealed, but it is post-hoc.
+
+**What materially strengthens it, and why I record the claim as strong rather than dismissing it:**
+control **`X2` was planted in advance** — a synthetic genuinely log-divergent field that the gate
+was pre-committed to answer `YES` on. The same slope instrument returns
+`slope_on_the_planted_log_control_X2_where_truth_is_0 = −3.654883275293096e-08` on it. **The
+discriminant was validated against a planted truth it could have failed on, and it did not fail.**
+The resolved sequence falls monotonically by a factor ~10 per band across eight bands
+(`0.4039 → 5.744e-08`).
+
+**Ruling: the saturation claim is STRONG, CONTROLLED, and POST-HOC-DISCRIMINATED. It is recorded at
+that status and not as a pre-committed `NO`.** Re-open condition: a *pre-committed* re-test naming
+the slope discriminant before the data exists.
+
+### 4. The sign question `§53` asked — answered, in the direction that PROTECTS the `NO`s
+
+`gate.all_increments_positive` is `False`, and there are three negative bands. Two are `L5`'s own
+**pre-asymptotic** bands at `ρ < 130` — `per_decade −263.08` and `−1.72`, spanning
+`ρ 12.6 → 37.9 → 126`. **These are exactly the transient I diagnosed independently in `§55` from the
+raw sequence `[995.488, 869.968, 869.068, 869.261, 869.288]`, and two units reached the same reading
+by different routes.** The third negative band is `−6.94e-10` at `ρ ≈ 1.26e6`, four orders below the
+noise floor — indefinite sign, not a signal. **Every band the instrument can resolve is positive.**
+`§53`'s `NO`-protecting sign therefore survives, now measured five decades further out.
+
+### 5. What this landing does NOT do — the unit's own list, which is the honest part
+
+- **It does not move any `L1 → L4` link. Clay stays ~0.05%.**
+- It does not say a blow-up profile exists or does not exist.
+- **`c_mod` is not route 4's number.** Route 4 has **no banked profile**, so `869.288` remains a
+  property of **leg 381's synthetic realization** — `L5`'s own ceiling, unchanged. A perfect
+  saturation result here is a fact about a synthetic object.
+- It does not touch the ansatz-class exponent `1 − α = 0`, **which is what `L5`'s clause-(b) bill
+  actually turns on**, and it does not turn `L5`'s `NO` into anything else. **`L5`'s `NO` stands and
+  `W4` clause (b) stands, unchanged.**
+- It says nothing about `J(c)` or `§52`: that is a **different functional on a different trial
+  space**, it **is** log-divergent, and nothing here weakens that.
+- It does not repair the common-mode blindness in `L5`'s own apparatus (`§54`, `§56`).
+
+### 6. Correction to `§55`
+
+`§55` item 6 recorded `L5-cmod` as **non-citable** — checkpoint `c8e9123`, no gate answer field,
+controls still running. **That was true when written and is now superseded**: the unit sealed at
+`95f0bc6` and adjudicated at `5077a0b`. `§55`'s statement that `P2-DRAFT` correctly took no number
+from it stands, and was correct at the time. This is a correction record beside the original, per W3
+ruling Q3, not an edit to it.
+
+**CEILING.** No `L1 → L4` link moved. No wall moved. `W4` clause (b) stands; clause (c) — the torus,
+statement (D) — remains **UNTESTED, NOT CLOSED**. `Tier 2`. The pre-committed answer to this unit's
+own gate is **`UNDER-RESOURCED`** and that is what the board carries. Clay stays **~0.05%**.
