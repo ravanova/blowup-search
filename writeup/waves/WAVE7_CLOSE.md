@@ -473,3 +473,42 @@ would destroy the per-attempt cost figure the ensemble owes the record. The reco
 **1 of 6**, which is a number for the ensemble's verdict and not for its schedule, and it is far too
 few to carry an interval. `E-FE`'s cost overrun is a fact about this box and this queue; **it bears
 on no gate.**
+
+## CONDUCTOR RULING 2026-08-19 05:05 — WAVE 7 CLOSES ON `L6-b`, NOT ON `E-FE`, AND THE REASON HAS A LIMIT
+
+**Decided before the boundary, not at it.** `L6-b` lands ~08:05. `E-FE` re-priced at ×1.32–1.55 runs
+to **21:20–01:00**. On a literal reading of §3g — integrate the batch, then re-plan, then dispatch —
+wave 8 would wait **thirteen to seventeen hours** on one Lane R unit. That is obviously wrong, so
+the question is whether the contract actually says it.
+
+**It does not, and the reason is in §3g's own rationale rather than in a loophole.** §3g explains
+why merging the Decision Maker and the orchestrator is safe: *"workers are dispatched in a batch,
+they self-terminate, and the Conductor does not re-rank until the batch is complete and audited.
+**There is nothing to be convenient about.**"* The rule defends against an **integration pressure** —
+a slot to fill, a leg mid-flight to keep fed — deforming the ranking.
+
+**That pressure cannot arise from `E-FE`, and the reason is structural: `E-FE` is Lane R, and Lane R
+never sets a wave's direction.** Whatever the field ensemble returns, it cannot re-rank Lane L or
+Lane V, so no ranking decision is being deferred by waiting for it and none is being pre-empted by
+not waiting. There is genuinely nothing to be convenient about. §3g step 4 already says integration
+happens *"per wave at minimum — **more often if a unit lands cleanly on its own**"*, which is the
+per-unit integration this uses.
+
+**THE RULING.** *Wave 7 closes for planning purposes when its last **direction-bearing** unit
+returns. `E-FE` integrates as a late return into wave 8's close, audited against the same
+pre-committed gate, with no part of its verdict permitted to influence wave 8's ranking after the
+fact — wave 8's plan is already committed at `WAVE8_PLAN.md` and will not be edited once `E-FE`
+lands.*
+
+**THE LIMIT, and it is the part that makes this a ruling rather than an excuse.** This turns
+**entirely** on `E-FE` being Lane R. **Had a Lane T, V or L unit been in flight, wave 8 would
+wait** — because that unit *can* re-rank the queue, the deferred decision would be real, and
+dispatching around it is exactly the convenience §3g forbids. The clause is: *a wave may close over
+an in-flight unit only if that unit is incapable of changing the ranking of the wave that follows.*
+**Lane R units qualify by construction. Nothing else does.**
+
+**The cost, stated rather than assumed.** Wave 8 runs on ~6 of 12 cores while `E-FE` holds the rest.
+`L-JVER` is the only wave-8 unit with real compute needs; `PB2`, `PB1` and `V-W7` are reads and
+audits. `L6-e` (`AMENDMENT 3`) needs ~2 cores for ≤12 h and is queued behind `L-JVER`, not
+concurrent with it. **No shard count changes and `E-FE` is not interrupted** — it was pre-committed
+against, and interrupting it destroys the per-attempt cost figure the ensemble owes.
