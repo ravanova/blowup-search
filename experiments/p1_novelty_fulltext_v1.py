@@ -60,6 +60,9 @@ CORPUS = [
     ("1611.04829v1", "1611.04829.pdf", "Lucas & Kerswell 2017, sustaining processes"),
     ("0810.1974v1", "0810.1974.pdf", "Halcrow-Gibson-Cvitanovic, plane Couette UPOs"),
     ("1705.03720v2", "1705.03720.pdf", "Willis, Cvitanovic & Avila, pipe-flow RPO backbone"),
+    ("2408.05079v1", "2408.05079.pdf", "Redfern, Lazer & Lucas -- PREPRINT, no journal_ref at fetch"),
+    ("1906.01310v1", "1906.01310.pdf", "Page & Kerswell, JFM 886 (2020) A28"),
+    ("2008.07515v2", "2008.07515.pdf", "Page, Brenner & Kerswell, Phys. Rev. Fluids 6 034402 (2021)"),
 ]
 
 CONTROLS = [
@@ -84,6 +87,12 @@ PROBES = [
     ("a", "relies on a turbulent orbit shadowing"),
     ("a", "This inherently restricts the approach to lower"),
     ("a", "only s = m = 0 shifts had been searched over"),
+    ("a", "however with much greater diversity than previous studies"),
+    ("a", "span larger values of dissipation rate"),
+    ("a", "more natural way to weight the greater variety of spatial modes"),
+    ("a", "ill-suited for high dissipation events"),
+    ("a", "may be a"),
+    ("a", "The main downside of the approach is that it requires"),
     # effect (b): re-mining re-finds
     ("b", "considerable duplication"),
     ("b", "distinct recurrent structures"),

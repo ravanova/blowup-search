@@ -177,6 +177,17 @@ channel at all.
 and injected into artefacts by a script. A quote that a unit read on screen and retyped is
 `SECOND HAND` at best and should be labelled so.
 
+**AND IT BIT THIS VERY LEG, IN THE ONE PLACE THAT WAS DONE BY HAND.** The sha256 rows in
+`Papers/MANIFEST.md` were transcribed from displayed output rather than injected by script.
+One of them — `1611.04829.pdf` — was banked as `…3cfbbda198` when the true tail is
+`…c3fbbda198`: **two characters transposed.** It was caught by this leg's own
+`manifest_hashes` check, class `recompute-from-primary`, which re-hashes the bytes. **A
+`re-read-own-artefact` check could not have caught it at any strength.** That is `CORRECTIONS.md`
+§45 demonstrated live, on this leg, at a cost of nothing because the check existed. The wrong
+value is written out in `Papers/MANIFEST.md` rather than erased. Every quotation in
+`NOVELTY.md` was script-injected and all 29 re-verify against the PDF page claimed; the one
+artefact element typed by hand is the one that was wrong.
+
 **Routing: `CORRECTIONS.md`, as a standing instrument rule, and it should reach
 `ORCHESTRATION.md` §3k if the Conductor agrees.**
 

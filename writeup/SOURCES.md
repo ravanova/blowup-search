@@ -203,3 +203,43 @@ NRŠ's hypothesis is NOT SATISFIED.** The one source this repository cannot obta
 **does not carry the case**. Row 3's `SECOND HAND` debt is real and stays open — it is simply no
 longer what `W4` clause (b) rests on. Measurements: `writeup/data/p2_route_pb2_v1.json`; checks:
 `experiments/p2_route_pb2_v1_evidence.py` (31 checks, 0 failed).
+
+## LEG 411 (`PB1`, wave 8) — the recurrence-mining corpus, read for `P1`'s novelty gate
+
+**Twelve distinct works / thirteen files, ALL READ AT `FULL TEXT` DEPTH**, fetched from arXiv
+on 2026-08-19 and hashed in `Papers/MANIFEST.md`. Added in the same commit as the reads, per
+§3k rule 1. `Papers/` is gitignored (copyrighted PDFs): pointers and hashes only, never a PDF.
+
+**Pagination cited by leg 411 is arXiv PREPRINT pagination, NOT journal pagination**, and is
+labelled as such in `writeup/papers/P1_SELECTION_BIAS/NOVELTY.md`. No paywalled version was
+fetched and no paywall was circumvented. **No external contact of any kind was made.**
+
+Every quote drawn from these documents is banked in
+`writeup/data/p1_novelty_fulltext_v1.json` — because `Papers/` is gitignored, the verdict has
+to stay readable in a checkout where these PDFs do not exist — and each banked quote is
+re-verified against the PDF page it claims, from the bytes, by
+`experiments/p1_novelty_v1_evidence.py` check `quotes_on_claimed_pages`
+(class `recompute-from-primary`).
+
+**ROW 25 AND ROW 29 ARE WRONG AND THIS UNIT DID NOT EDIT THEM.** Both record Chandler &
+Kerswell 2013 as `CITATION, UNREAD HERE` / `CITATION ONLY, UNREAD`. `experiments/journal/leg_358.md`
+§1–2 read it at full text, and leg 411 has now re-read it at primary and CONFIRMED leg 358's
+`7/163 = 4.3%` from Table 1. Row 36 below places the true depth beside them rather than over
+them. The amendment to rows 25/29 belongs to the Conductor:
+`writeup/papers/P1_SELECTION_BIAS/FINDINGS.md` **F3**.
+
+| # | source | what leg 411 did with it | DEPTH REACHED BY THIS UNIT | load-bearing |
+|---|---|---|---|---|
+| 36 | Chandler & Kerswell, *Invariant recurrent solutions embedded in a turbulent two-dimensional Kolmogorov flow*, **JFM 722:554–595 (2013)**, `Papers/1207.4682.pdf` | Gate effect (b) at `S3` (p.14 `considerable duplication`, quantified in Table 1) and effect (a) at `S2` (p.13, search confined to `s = m = 0` shifts, Series B commissioned to undo it). **ALSO: Table 1 RE-READ AT PRIMARY and leg 358's `7/163 = 4.3%` CONFIRMED** — see FINDINGS F3, row 25's depth register is wrong. | **FULL TEXT** — sha256 `343d2173…88d80cf` in `Papers/MANIFEST.md`; 40 pages extracted, 88,420 chars | **YES** — `NOVELTY.md` §2.3, §3.1; and it is the row-25/row-29 depth correction |
+| 37 | Lucas & Kerswell, *Recurrent flow analysis in spatiotemporally chaotic 2-dimensional Kolmogorov flow*, **Phys. Fluids 27 045106 (2015)**, `10.1063/1.4917279` — **v1, THE VERSION QUOTED**, `Papers/1406.1820v1.pdf` | Gate effects (a) AND (b) in a single sentence at p.5: skew toward low periods, and ~2/3 of short-period guesses skipped BECAUSE they were known repeats of ref [6] = Chandler & Kerswell 2013 (bibliography verified at p.21, not inferred). | **FULL TEXT** — sha256 `edf2f7e9…6cbad76` in `Papers/MANIFEST.md`; 24 pages extracted, 64,150 chars | **YES** — `NOVELTY.md` §2.2, §3.2 |
+| 38 | Lucas & Kerswell (2015) — **v2**, `Papers/1406.1820.pdf` | Cross-check ONLY. **v2 carries a DOUBLED TEXT LAYER and is not safely quotable** (FINDINGS F7). The single load-bearing sentence was re-checked in the v2 extraction and is present in both, so the finding is an artefact of the version, not of the claim. | **FULL TEXT** — sha256 `da9cab5c…f479258` in `Papers/MANIFEST.md`; 28 pages extracted, 123,054 chars | no — it exists to prove the v1/v2 hazard was measured, not assumed |
+| 39 | Lucas & Kerswell, *Spatiotemporal dynamics in 2D Kolmogorov flow over large domains*, `Papers/1308.3356.pdf` | Read in full as part of the recurrence-mining corpus. Did not supply a graded quote for either gate effect. | **FULL TEXT** — sha256 `f39f1333…00e541c` in `Papers/MANIFEST.md`; 37 pages extracted, 84,682 chars | no |
+| 40 | Viswanath, *Recurrent motions within plane Couette turbulence* (2007) — the founding locally-constrained-optimal hookstep paper, `Papers/physics_0604062.pdf` | Read in full. Supplies the method whose admission filter both gate effects are about; did not itself supply a graded quote. | **FULL TEXT** — sha256 `fe9fe1aa…d5dc5d6` in `Papers/MANIFEST.md`; 23 pages extracted, 59,825 chars | no — but it is the paper `PROG-R4`'s solver descends from |
+| 41 | Page, Holey, Brenner & Kerswell, *Exact coherent structures in two-dimensional turbulence identified with convolutional autoencoders*, **JFM 991 (2024) A10**, `10.1017/jfm.2024.552`, `Papers/2309.12754.pdf` | **THE STRONGEST STATEMENT OF GATE EFFECT (a), at `S3`.** pp.2, 16, 18 — the recovered orbit set is skewed low in dissipation, the skew is attributed to the recurrence criterion, and the more unstable structures are `not flagged in this approach at all`. | **FULL TEXT** — sha256 `5e47a4bd…200b612` in `Papers/MANIFEST.md`; 28 pages extracted, 81,541 chars | **YES — this is the paper that kills `P1`'s effect (a)** |
+| 42 | Kawahara, Uhlmann & van Veen, *The significance of simple invariant solutions in turbulent flows*, **Annu. Rev. Fluid Mech. 44:203–225 (2012)**, `Papers/1108.0975.pdf` | Read in full. **DECLARED `UNREACHABLE` IN ADVANCE BY THIS LEG AND THAT DECLARATION WAS WRONG** — it is on arXiv with its `journal_ref` attached (FINDINGS F6). Wrong in the safe direction; recorded rather than quietly corrected. | **FULL TEXT** — sha256 `9e4d666e…47be2a9` in `Papers/MANIFEST.md`; 32 pages extracted, 76,109 chars | no — but the failed ceiling is itself a correction |
+| 43 | Lucas & Kerswell (2017), sustaining processes in 2D Kolmogorov flow, `Papers/1611.04829.pdf` | Read in full. Contributes an `S0 ADJACENT` co-hit only. | **FULL TEXT** — sha256 `2ef11677…bbda198` in `Papers/MANIFEST.md`; 11 pages extracted, 41,678 chars | no |
+| 44 | Halcrow, Gibson & Cvitanović — UPOs in plane Couette flow, `Papers/0810.1974.pdf` | Read in full: the Cvitanović line, which the gate named explicitly. | **FULL TEXT** — sha256 `065f947a…e3b55a5` in `Papers/MANIFEST.md`; 3 pages extracted, 3,191 chars | no graded quote — and that is a real result: the gate's own named line did not supply the strongest statement, the 2024 JFM paper did |
+| 45 | Cvitanović line — RPOs, `Papers/1705.03720.pdf` | Read in full: the Cvitanović line, as the gate named it. | **FULL TEXT** — sha256 `85a5b22f…b08772c` in `Papers/MANIFEST.md`; 26 pages extracted, 79,486 chars | no graded quote |
+| 46 | Redfern, Lazer & Lucas, nonlinear-triad recurrence function (2024) — **PREPRINT; the served arXiv metadata carries NO `journal_ref` and this leg DID NOT VERIFY publication status**, `Papers/2408.05079.pdf` | Gate effect (a) as the paper's ENTIRE PREMISE (`S3`, discounted one notch for preprint status): the standard recurrence function's choice of norm decides which orbits are recoverable. p.13 supplies the head-to-head number against the standard `L2` recurrence function's **58 unique recurrent flows** at identical parameters. | **FULL TEXT** — sha256 `8ed5ec9a…8ab459e` in `Papers/MANIFEST.md`; 26 pages extracted, 48,502 chars | **YES** — `NOVELTY.md` §2.4, §3.3, **and it is cited as a preprint everywhere it appears** |
+| 47 | Page & Kerswell, **JFM 886 (2020) A28** (`journal_ref` read off the served feed, not assumed), `Papers/1906.01310.pdf` | **GRADED `S0 ADJACENT` AND DELIBERATELY NOT COUNTED AS A `YES`.** p.2's `main downside` sentence is about the *requirement* of shadowing, not about *which* orbits the requirement selects. §0.5's rule was written before the corpus was read precisely so this near-miss could not be quietly promoted. | **FULL TEXT** — sha256 `b1349254…7652a51` in `Papers/MANIFEST.md`; 21 pages extracted, 53,737 chars | no — and the refusal to promote it is the load-bearing part |
+| 48 | Page, Brenner & Kerswell, **Phys. Rev. Fluids 6 034402 (2021)** (`journal_ref` read off the served feed), `Papers/2008.07515.pdf` | Read in full as part of the autoencoder/latent-space thread. No graded quote. | **FULL TEXT** — sha256 `cf43ee1e…2d43ec6` in `Papers/MANIFEST.md`; 13 pages extracted, 43,954 chars | no |

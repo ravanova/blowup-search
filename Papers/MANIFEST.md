@@ -170,7 +170,7 @@ attempt, every one). `Papers/` is gitignored: pointers and hashes only, never a 
 | `physics_0604062.pdf` | `physics/0604062` | Viswanath 2007, the founding hookstep paper | `fe9fe1aa…4d5dc5d6` |
 | `2309.12754.pdf` | `2309.12754v1` | Page, Holey, Brenner & Kerswell, *JFM* **991** (2024) A10, doi `10.1017/jfm.2024.552` | `5e47a4bd…8200b612` |
 | `1108.0975.pdf` | `1108.0975v1` | Kawahara, Uhlmann & van Veen, *Annu. Rev. Fluid Mech.* **44**:203–225 (2012) | `9e4d666e…6fe47be2a9` |
-| `1611.04829.pdf` | `1611.04829v1` | Lucas & Kerswell 2017, sustaining processes from recurrent flows | `2ef11677…3cfbbda198` |
+| `1611.04829.pdf` | `1611.04829v1` | Lucas & Kerswell 2017, sustaining processes from recurrent flows | `2ef11677…c3fbbda198` |
 | `0810.1974.pdf` | `0810.1974v1` | Halcrow–Gibson–Cvitanović line, plane Couette UPOs | `065f947a…43e3b55a5` |
 | `1705.03720.pdf` | `1705.03720v2` | Willis, Cvitanović & Avila, RPOs as the backbone of pipe flow | `85a5b22f…368b08772c` |
 
@@ -205,3 +205,22 @@ on 2026-08-19, `curl https://arxiv.org/pdf/<id>`, HTTP 200 first attempt on each
 `2408.05079` is a **preprint whose publication status this leg did not verify** and is graded
 accordingly wherever it is cited. `1906.01310` and `2008.07515` carry `journal_ref` in their
 arXiv metadata and those journal references were read off the served feed, not assumed.
+
+### LEG 411 CORRECTION — one sha256 in this file was TRANSCRIBED WRONG, and how it was caught
+
+The row for `1611.04829.pdf` was banked in the checkpoint commit as
+`` `2ef11677…3cfbbda198` ``. **That tail is wrong.** The true sha256 of the file ends
+`…c3fbbda198`: the recorded value has the two characters `c3` TRANSPOSED to `3c`. The row
+above now carries the correct value; the wrong one is written out here rather than erased,
+because a hash that was once banked wrong is exactly the kind of thing a later reader needs
+to be able to recognise if they meet it in another artefact.
+
+**It was caught by `experiments/p1_novelty_v1_evidence.py`, check `manifest_hashes`, class
+`recompute-from-primary`** — which re-hashes the bytes rather than re-reading this file. A
+`re-read-own-artefact` check could not have caught it at any strength, which is the concrete
+demonstration of `CORRECTIONS.md` §45 that this leg happens to have produced by accident.
+
+It is also a direct instance of `P1_SELECTION_BIAS/FINDINGS.md` **F8**: the value was
+transcribed by hand from a displayed command output, and the display channel is where
+characters go missing or move. Every quotation in this leg's verdict was injected by script
+for that reason; this hash was not, and this hash is the one that was wrong.
