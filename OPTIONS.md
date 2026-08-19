@@ -81,9 +81,9 @@ orbit either run produced is an `O(dt)` perturbation of the true flow's, and **d
 first-order solver buys faster production of objects whose status is in doubt.** `R4` can also
 **falsify** something landed (`M1`); `R2` cannot — **57 core-hours bought ONE new orbit**. `R2`
 beats `R3` because `R2`'s waste is **measured** and `R3`'s case is an inference. **`R4`'s first
-unit is NOT a campaign re-run** (122.1 core-h): re-solve the **landed** orbits under a Strang
-stepper, measure the displacement against the residual band. **§3g's floor stands — this ranks the
-lane's units, it does not promote it.** Reasoning + §3k gate: `writeup/waves/WAVE7_PLAN.md` §0.
+unit is NOT a campaign re-run** (122.1 core-h): re-solve the **landed** orbits under TWO 2nd-order
+steppers (`S1` CN-RK2, `S2` Strang-IF), measure displacement against the residual band. **§3g's floor stands — this ranks the
+lane's units, it does not promote it.** Steppers NAMED, old pre-condition WITHDRAWN as defective: `WAVE8_PLAN.md` AMENDMENT 2. Reasoning + §3k gate: `WAVE7_PLAN.md` §0.
 **No grinder** — the in-band arm cannot exceed 72 attempts ever.
 
 **Live ban on this lane:** leg 349's GA gate answered NO (0 of 6 properties cleared). A **learned or
