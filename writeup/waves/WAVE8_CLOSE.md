@@ -122,3 +122,110 @@ reading that did fire is the one AMENDMENT 4 called the likeliest before the uni
 
 **Ceiling on all of the above: Tier 2, float64, a measurement on `L5`'s synthetic `α = 1` profile.
 Route 4 has no banked profile of its own here. No `L1→L4` link moved.**
+
+---
+
+# `V-W7` (leg 412, `aefe590`) and `PB1` (leg 411, `440f28c`) — INTEGRATED 2026-08-19
+
+## `V-W7`: the verifier verified the wave and convicted the Conductor
+
+Wave 7's three units — `R-bank`, `R-prof`, `L6-b` — are **VERIFIED** against their pre-committed
+gates. *"Every discrepancy is in the integration, not the units."* **Seven defects ruled against my
+own integration work.** I re-checked all seven from primaries rather than accepting them.
+
+| # | `V-W7`'s ruling | my check | verdict |
+|---|---|---|---|
+| 1 | §46's support sentence FALSE: `seed406` reads `28.6934` at `k=800`, below the claimed `29.57–38.20` | read `l6b_ckpt/seed406.json` trajectory: **`28.693380532819674`**; `seed407` `35.560845905666` | **UPHELD** → §50 item 1 |
+| 2 | §46's withdrawal too broad at the low end | 20,000-iter ratios **`4.29257`/`4.32093`**, both above `3.93` | **UPHELD** → §50 item 2 |
+| 3 | §46's second clause voids §46's own evidence | the `×4.44`/`×5.47` column IS a cross-budget comparison | **UPHELD** → §50 item 3, rule replaced |
+| 4 | `OPTIONS.md:163` never got the §46 patch | confirmed: the withdrawn range stood there as a *verified* `V-W6`/§38 correction, on a capped live surface | **UPHELD** → patched |
+| 5 | §3j table at `c6287a2` overstated 2 of 4 rows, byte-identical to wave 6's | already re-measured; `test_headroom.py` now makes the class impossible | **UPHELD, ALREADY REMEDIED** → §50 item 5 |
+| 6 | `04f9ff5`/`6ca49a6` swept `L6-b`'s live checkpoints under subjects naming neither | `git show --stat`: both carry `l6b_ckpt/seed406.json`, `seed407.json` | **UPHELD** → §50 item 4, §5b crossing |
+| 7 | my repaired `R-prof` sentence "still false", citing `raw_ratio_cpu_clock.min = 2.89873` | that number is **`V-W7`'s own re-run**; the banked JSON has exactly one such key, `min = **3.3721551723168335**` | **UPHELD IN PART** → §50 item 6 |
+
+Item 7 is the one I rule differently, and the difference is the finding: the sentence is **true of
+the record and false on re-execution**. A ratio 12% above a threshold on a box the artefact itself
+flags `MACHINE_WAS_NOT_QUIET` is not a stable property. Qualified as run-specific, not withdrawn.
+
+`V-W7` also **UPHELD** my §41 row-2 reading as correct *and the narrowest the data supports*,
+**UPHELD** §46b as accurate and not over-corrected, and **UPHELD** the verbatim retirements
+(`§W4-L6CEIL`, 11/11 lines byte-identical). It found `R-bank`'s `--verify` **cannot fail** — zero
+`raise`, `assert` or `sys.exit` in `verify()`. Remedy owed.
+
+## The item that outweighs the other seven: `CORRECTIONS.md` §51
+
+Not a wrong number. **An under-claim, in the record for eleven legs, past the unit, past my
+integration, past a clean verifier.** Re-derived by me from the banked JSON:
+
+- `L6`, four rungs of refinement, cap 800: `ρ` `1.6986514108481086 → 1.613811231995397` = **`−4.994561%`**
+- `L6-b`, one ×25 budget step, `n_dof` **fixed**: `1.613811231995397 → 1.504851895102804` = **`−6.751678%`**
+- **ratio `×1.3518`** — one budget step beat the entire refinement ladder
+- `J3` = `1.6218749783288575` needs **`7.2153%`** to fall under `J4@20,000` and invert the ladder;
+  **`6.7517%`** is measured one rung up **at more degrees of freedom**. **Margin `0.4636` pp.**
+
+`L6`'s `NO` is **not overturned**. It is left resting on an ordering never measured at a budget where
+the ordering means anything. Gate for `L6-e` pre-committed at §51, **both outcomes results**.
+
+## `PB1`: `P1` is KILLED, and it was pre-committed as a good result
+
+Both effects are in print at `FULL TEXT`, `S3`. `P1`'s framing word *silently* is **contradicted by
+its own intended bibliography** — CK 2013 counts the duplication in a published table. One control
+of twelve did not fire (`pos_topical`, measured 33 against a planted ≥50); disclosed, not re-planted,
+nothing in the verdict rests on it. Semantic Scholar throttled on all three of its controls, so its
+totals are used for nothing. **No external contact.** Its `manifest_hashes` check caught a
+transposition in this leg's own banked MANIFEST that no `re-read-own-artefact` check could see —
+§45 demonstrated live, prospectively.
+
+**A paper died to a check that cost half a wave. That is the pivot working exactly as specified.**
+
+---
+
+# THE §3i DIRECTION CHECK — against the RECORD, not the plan
+
+**(1) Did this unit move an L1→L4 link?** **No.** Neither did. `V-W7` is verification; `PB1` killed a
+paper. Clay stays **~0.05%**. Tier 2 throughout.
+
+**(2) What did it make FALSE?** A great deal, and most of it mine. §46's support sentence. §46's
+rule, which forbade the experiment that resolved it. The `3.93–23.67×` withdrawal at its low end.
+`OPTIONS.md:163`'s standing text. The reproducibility of the `R-prof` 3× sentence. `P1`'s novelty
+premise, entirely. And — the big one — the *interpretability* of `L6`'s refinement ladder, which is
+now known to have been differenced at a cap that dominates it.
+
+**(3) Does Lane L still deserve its rank ON WHAT IS MEASURED NOW?** **Yes, and §51 sharpens rather
+than weakens the reason** — but the *grounds* stated at wave 7's close were wrong and are narrowed
+here. I recorded Lane L's rank as resting on `L6`/`L6-b` having *measured* that route 4's profile
+does not close under refinement. It has not measured that. What it has measured is that the profile
+does not close **at the budgets tried**, and that budget is the dominant term. Lane L keeps priority
+because it remains the only lane whose units bear directly on a Clay obligation — not because its
+refinement result is settled. **It is not settled.**
+
+**(4) Is any live claim resting on a source whose own recorded ceiling is undischarged?** After
+`PB2`, no on the literature side: `W4` clause (b) rests on Tsai Thm 2, read at `FULL TEXT`, and the
+`UNREACHABLE` NRŠ is not load-bearing. But **yes on the internal side, and §51 is exactly that
+shape**: `L6`'s headline rested on a ladder whose own resource ceiling was recorded and never
+propagated into the claim built on it.
+
+**(5) What is the CHEAPEST unit that could KILL the priority lane, and why is it not next?**
+Changed by this integration. It is now **`L6-e`** — one rung, `J3` to 20,000 iterations, **~20–35
+core-h**, cheaper than `L6-b` because `J3` carries fewer dof. It cannot kill the lane, but it can
+overturn the lane's own headline on a **0.46 pp** margin, which is the nearest thing available.
+**It IS next: queued at the head of wave 9.** `L-JVER` (in flight) remains the deeper kill —
+if `J` as coded is not the norm it is documented to be, every ρ above is measuring the wrong thing.
+
+**(6) If Lane L were dead tomorrow, what would we do instead — and is it cheaper?** Lane V, un-held,
+with `V5`'s certificate result live. Cheaper per unit, further from the Clay chain. Unchanged by
+this wave.
+
+**(7) Are we in an audit/instrument loop? Count the last three units by kind.** `PB2` (audit),
+`V-W7` (verifier), `PB1` (audit). **Three of three are instruments. That is a loop, and it is out of
+contract to continue it.** The user's pivot authorised paper units as **additional**, and §3g's
+composition floor stands. **Wave 9 opens with `L6-e` and `L-JVER`'s follow-on — construction and
+measurement — before any drafting.** `P4` drafts only alongside them.
+
+## RE-RANK
+
+**Lane order UNCHANGED: L, V, T(deferred), R(continuous).** The order of units within Lane L
+**CHANGES**: `L6-e` enters at the head, ahead of `L8`'s branch rule, on §51's margin.
+
+**And the grounds recorded for answer (3) at wave 7's close are NARROWED, per above.** The
+instruments have now run three deep. Wave 9 builds.

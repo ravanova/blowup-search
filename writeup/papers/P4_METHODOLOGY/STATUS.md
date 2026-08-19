@@ -180,6 +180,45 @@ institutionalise, and the paper must not dress it up as a procedure.
 3. **Anonymity and scope.** It describes an ongoing programme with a live prize target and a
    standing outreach hold. What may be said publicly is a **user decision**, not a drafting one.
 
+### Eleventh, and it is the worst one on this page: THE UNDER-CLAIM (`CORRECTIONS.md` §51)
+
+Every catch above is an error *found*. This is an error *not* found — for **eleven legs**, by the
+unit, by the Conductor's integration, and by a first verifier who passed the wave clean.
+
+`L6` measured a four-rung refinement ladder and reported the residual **does not decrease under
+refinement**. `L6-b`, five legs later, raised the iteration cap `×25` at the discretisation held
+fixed. The refinement ladder moved `−4.994561%`. **The single budget step moved `−6.751678%` —
+`×1.3518` of the whole ladder.** Both numbers were correct, banked, and checked. **Nobody divided
+one by the other.** The ladder was differenced at a cap that dominates it, so `L6`'s headline is not
+established in either direction, and the ordering can invert on a margin of **0.46 percentage
+points**.
+
+**Why this is the paper's centre of gravity.** The other ten entries are the discipline working —
+slowly, or embarrassingly, but working. This one is the discipline's *shape* failing. Every
+instrument here is scoped to a single unit: a unit's evidence script rebuilds a unit's claims, a
+verifier verifies a wave's units against their pre-committed gates. **§45 counted 32 of 49 scripts
+unable to see an error shared between an artefact and its checker. §51 is the neighbouring blind
+spot and there is no count for it: an error shared between two artefacts that no single checker
+reads together.** No gate in this programme compares a number in leg 401 against a number in leg 406
+and asks whether one makes the other meaningless.
+
+The honest tally for the paper is now **2 prospective against 9 retrospective**, and the largest
+item on the page was caught by nothing structural at all — a verifier read two legs and did one line
+of arithmetic on a third pass.
+
+### Twelfth: a `[P]` check caught what no re-read could, in the same wave (leg 411)
+
+`PB1`'s `manifest_hashes` check re-hashed the PDF bytes and found this leg's **own** banked MANIFEST
+carried `…3cfbbda198` against a true tail of `…c3fbbda198` — two characters transposed by hand. **No
+`re-read-own-artefact` check could have caught it**, because both copies of the wrong string would
+have agreed. §45's classification, demonstrated live and prospectively, in the leg that wrote it up.
+
+`PB1` also names the mechanism (its finding F8): **the tool-output channel silently drops words from
+long outputs**, so a unit retyping a "verbatim" quote off screen can transcribe a sentence its source
+does not contain — instrument-produced fabrication of exactly the shared-error class. Its mitigation
+is the one this paper should recommend: **every quotation in `NOVELTY.md` was script-injected
+straight from the extraction JSON. The one element typed by hand is the one that came out wrong.**
+
 ## What it owes
 
 - A named comparison to existing practice: pre-registration in the sciences, adversarial

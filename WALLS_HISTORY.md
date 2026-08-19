@@ -644,3 +644,57 @@ ruling Q4 made non-optional is DONE (`V5`, leg 402, VERIFIED by `V-W6`). Retired
   represent one of the two shift classes."* **CORRECTED by U5: R5 does NOT help the band** (334
   anchored candidates, **1** in the published `|s|` band). It is the fix for `|s| > 0.9`, and is the
   same unit as `PROG-R4` **C** — don't double-count.
+
+## §OPTIONS-R6R7 — OPTIONS.md rows R6 and R7, retired VERBATIM 2026-08-19
+
+Both units are TAKEN and LANDED (`R6` = leg 403 `1f89ceb`; `R7` = leg 404 `8019c35`), both VERIFIED
+by `V-W7` (leg 412, `aefe590`). Retired to fund the `L6-e` row and the §51 ladder finding on a
+capped surface (`ORCHESTRATION.md` §3j). Moved, not compacted; not one character altered.
+
+| **R6** | **profile the inner loop** | **TAKEN 2026-08-19, leg 403 — gate (iii) `NO`** | **In 403 legs no unit has profiled it**, and every cost figure here inherits `95.389 s/epoch` unexamined. Smoke test: transform cost **flat from `N=24` to `N=32`** — per-call **overhead**, paid 20× per step. Two-sided; a YES is a **useful negative**. §C. **ANSWERED (`1f89ceb`, `writeup/data/p2_r_prof_v1.json`): 4.34× slower than the named reference (cpu median; wall 4.21; worst wall round 1.9975, so the unit's "every round exceeds 3×" is cpu-clock-only — Conductor finding). 79.1% transforms, fixed fraction 0.596. Remedy pre-planned FFTW3 3.41×, PRICED NOT LANDED — it perturbs every banked orbit at the last bit, which is `R4`'s problem, so it needs its own unit and its own equivalence check. A speedup breaks no wall.** |
+| **R7** | **bank the seed fields** | **TAKEN 2026-08-19, leg 404 `8019c35` — `YES` on all three: 160/160, 16/16, and one attempt bit-for-bit with NO DNS** | Blocker was a **`.gitignore` line** — now a **tracked 737,408 B** blob that cannot die with a container (it has, twice). Buys `E-FE` ~27.5 of 90.9 core-h. `1.2 GB` was wrong: measured **268.9 MB** — §39, and it was `U2`'s *rejected* archive size. Ceiling **C2**: the bank is now the seed's **definition** on this CPU, not a cache. |
+
+## §W4-A-PROV — WALLS.md W4 clause (a), the `V-W4` provenance correction, retired VERBATIM 2026-08-19
+
+Clause (a) is SHUT by `L2′` and VERIFIED by `V-W4`; the provenance of the `≤ 1` was corrected by
+that verifier and the direction held. Settled, unchallenged since, and cited nowhere as live.
+Retired to fund `CORRECTIONS.md` §51's ladder finding on a capped surface (`ORCHESTRATION.md` §3j).
+Moved verbatim, 21 lines, not compacted.
+
+**⚠ `V-W4` CORRECTED THE `≤ 1` PROVENANCE; THE DIRECTION HOLDS and (a) STAYS SHUT** — through the
+**local** suitable-weak ESŠ form (Seregin `arXiv:math/0510396` §1), not the global Leray–Hopf one.
+**ESŠ is `UNREACHABLE` at primary: the pin rests on SECONDARIES** — which is `PB2`'s subject.
+Paragraph + 4 citation defects verbatim → `WALLS_HISTORY.md` §W4-PROV, §W4-PROV2; `CORRECTIONS.md` §33.
+
+**(b) SHUT, ✅ VERIFIED by `V-W5` (leg 403) — an ENDPOINT not a gap. Five items
+reproduce; `C6`'s tolerance was NEVER moved (`347676f`). ⚠ **Arithmetic, not science**, and the
+CONSTANT is basis-dependent by **1.476×**: `CORRECTIONS.md` §35.** The ansatz was **built**: cut-off **potential**
+(`div V ≡ 0` exactly, no Bogovskii corrector to grow), physical support frozen at `κ = a`, **Clay
+condition (7) verified by measurement.** Gate **`NO`, threshold-free** — in `‖curl F‖_{L¹_t L^{3/2}_x}`
+the error saturates at **`c_mod = 869.288` per unit similarity time**, ρ-exponent **`+1.09e-04`** out
+to `|y| = 1261.7`: **enlarging the cutoff buys nothing**, `Σ(∞) = ∞`, so it fails for **every**
+`ε_close > 0`. What survives is **exactly the modulation commutator `T3 ∝ ṁ`** (`‖R_loc‖/‖T3‖ =
+0.999998`), size `ρ^{1-α}`. **Both exits are shut by the SAME pin:** `α > 1` strictly — which (a)
+shows destroys the object — or `ṁ ≡ 0`, exactly self-similar, excluded by **Nečas–Růžička–Šverák**
+(ARMA 136, 1996) and **Tsai** (ARMA 143, 1998). It did **not** collapse into (D)SS: `κ = 0` **is**
+exactly DSS (`7.5e-16`), called a `NO` and stopped; `κ = a` is **not** (`1.0857`). Controls carry it:
+at `α = 1.25`, `1.6` the machinery returns `−0.2498`, `−0.5996`, tracking `1 − α`. **Ceiling: Tier 2,
+float64, SYNTHETIC profile — route 4 has none banked. The EXPONENT is a class property and is settled;
+the CONSTANT is not route 4's number.**
+
+## §STATE-W7-RBANK-RPROF — two STATE.md wave-7 return rows, retired VERBATIM 2026-08-19
+
+Both units VERIFIED by `V-W7` (leg 412, `aefe590`) against their pre-committed gates. Substance
+lives at `WALLS.md` W7, `OPTIONS.md` R6/R7 and `CORRECTIONS.md` §50 item 6. Retired to hold
+`ORCHESTRATION.md` §3j's STATE.md cap while landing `V-W7` and `PB1`. Moved, not compacted.
+
+**RETURNED — `R-prof`** (leg 405, `1f89ceb`): gate (iii) **`NO`** — the loop is **4.34×** a named reference, not the 3× the unit's own wording claimed for every round (that was **cpu-clock-only**; worst wall 1.9975). Remedy priced, **not landed**; breaks no wall. Detail VERBATIM → §STATE-WAVE7-RETURNS.
+
+**RETURNED — `R-bank`** (leg 404, `8019c35`): **`YES` ×3**; 160/160 bit-identical, seedbank **TRACKED**, both DNS field artefacts **ABSENT**. I re-hashed all 160 and regenerated 4 — bitwise. My own `~1.2 GB` estimate was **268.9 MB** in fact (`CORRECTIONS.md` §39). Detail VERBATIM → §STATE-WAVE7-RETURNS.
+
+## §STATE-W6-V5 — the STATE.md `V5` row, retired VERBATIM 2026-08-19
+
+`V5` (leg 402) is landed and VERIFIED by `V-W6`. Substance lives at `WALLS.md` W2/W3 and
+`CLAY_OBLIGATIONS.md`. Retired to hold §3j's STATE.md cap while landing `V-W7` and `PB1`.
+
+**`V5` `dacc01c`** — both clauses **YES**: the `2509.25116` certificate **CLOSES** (24 constants at 50 dps, **four printed ones fail**, `x_1^U` clears by **0.08% — luck, not margin**) and the profile **IS genuinely 3D** (swirl **57%** of `max|u_r|`). **Class A NOT verified — a LIMIT, never a pass. W3 does NOT move: its prose test was not run.** **`V-W5` `95cf861`** — five items reproduce, **`C6`'s tolerance NEVER moved**, 3 defects found. `L6` remains **`UNVERIFIED`**.

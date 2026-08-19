@@ -137,26 +137,8 @@ by Rmk 1.2 + ESŠ. **Any `α > 1` puts `U ∈ L³(ℝ³)` and yields full regula
 `α > 1.5` bill **destroys the object it is for.** `λ = 1.7` defeats the λ-near-1 hypotheses of
 Chae–Wolf Thm 1.3 and Pineau–Vicol Thms 1.6/1.7, but **Rmk 1.2's `L³` clause carries no λ restriction.**
 
-**⚠ `V-W4` CORRECTED THE `≤ 1` PROVENANCE; THE DIRECTION HOLDS and (a) STAYS SHUT** — through the
-**local** suitable-weak ESŠ form (Seregin `arXiv:math/0510396` §1), not the global Leray–Hopf one.
-**ESŠ is `UNREACHABLE` at primary: the pin rests on SECONDARIES** — which is `PB2`'s subject.
-Paragraph + 4 citation defects verbatim → `WALLS_HISTORY.md` §W4-PROV, §W4-PROV2; `CORRECTIONS.md` §33.
-
-**(b) SHUT, ✅ VERIFIED by `V-W5` (leg 403) — an ENDPOINT not a gap. Five items
-reproduce; `C6`'s tolerance was NEVER moved (`347676f`). ⚠ **Arithmetic, not science**, and the
-CONSTANT is basis-dependent by **1.476×**: `CORRECTIONS.md` §35.** The ansatz was **built**: cut-off **potential**
-(`div V ≡ 0` exactly, no Bogovskii corrector to grow), physical support frozen at `κ = a`, **Clay
-condition (7) verified by measurement.** Gate **`NO`, threshold-free** — in `‖curl F‖_{L¹_t L^{3/2}_x}`
-the error saturates at **`c_mod = 869.288` per unit similarity time**, ρ-exponent **`+1.09e-04`** out
-to `|y| = 1261.7`: **enlarging the cutoff buys nothing**, `Σ(∞) = ∞`, so it fails for **every**
-`ε_close > 0`. What survives is **exactly the modulation commutator `T3 ∝ ṁ`** (`‖R_loc‖/‖T3‖ =
-0.999998`), size `ρ^{1-α}`. **Both exits are shut by the SAME pin:** `α > 1` strictly — which (a)
-shows destroys the object — or `ṁ ≡ 0`, exactly self-similar, excluded by **Nečas–Růžička–Šverák**
-(ARMA 136, 1996) and **Tsai** (ARMA 143, 1998). It did **not** collapse into (D)SS: `κ = 0` **is**
-exactly DSS (`7.5e-16`), called a `NO` and stopped; `κ = a` is **not** (`1.0857`). Controls carry it:
-at `α = 1.25`, `1.6` the machinery returns `−0.2498`, `−0.5996`, tracking `1 − α`. **Ceiling: Tier 2,
-float64, SYNTHETIC profile — route 4 has none banked. The EXPONENT is a class property and is settled;
-the CONSTANT is not route 4's number.**
+**⚠ (a) STAYS SHUT.** `L2′` shuts it; `V-W4` verifies it and CORRECTED the `≤ 1` provenance —
+the direction held. Detail retired VERBATIM 2026-08-19 → `WALLS_HISTORY.md` §W4-A-PROV.
 
 **⚠ (b) STAYS SHUT AND THE CITATION ABOVE IS BOTH WRONG AND UNDER-SPECIFIED — `PB2`, leg 410.
 Added BESIDE the banked sentence, which is left exactly as `V-W5` verified it.** The sentence names
@@ -256,6 +238,19 @@ is permanent.
 suspended session's **gitignored** checkpoint, never a job too big. The field ensemble is now
 DISPATCHED (`E-FE`, leg 408). Detail retired VERBATIM → `WALLS_HISTORY.md` §W7-U3QUEUE.
 
+
+**⚠⚠ AND THE LADDER THAT `L6`'s `NO` RESTS ON HAS NEVER BEEN MEASURED AT AN ADEQUATE BUDGET —
+`V-W7` (leg 412), `CORRECTIONS.md` §51. THIS IS AN UNDER-CLAIM, NOT A WRONG NUMBER: every figure
+below was already banked, in two different units, and no one divided one by the other.**
+`L6` refined four rungs with **every rung stopped at 800 iterations**: `ρ` `1.6986514 → 1.6138112`,
+**`−4.994561%`**. `L6-b` then raised the cap `×25` at `n_dof` **FIXED**: `1.6138112 → 1.5048519`,
+**`−6.751678%`**. **One budget step moved the objective `×1.3518` of the ENTIRE refinement ladder.**
+So the ladder differences rungs at a cap that dominates them — *"not decreasing under refinement"*
+is not established, in either direction. **It can also INVERT:** `J3` (`Nr = 16`, 2400 dof) reads
+`1.6218750` at 800 and needs **`7.2153%`** to fall below `J4@20,000 = 1.5048519`; **`6.7517%` is
+measured one rung up at MORE dof. Margin `0.46` percentage points.** `L6`'s `NO` is NOT overturned —
+it is left resting on an ordering never measured where the ordering means anything. → **`L6-e`**,
+one rung, `J3` to 20,000, **~20–35 core-h**, gate pre-committed at §51, **wave 9**. `W4` UNMOVED.
 **⚠ 2026-08-19 — W7 MEASURED FROM THE INSIDE. THE INEFFICIENCY IS REAL AND IT BREAKS NOTHING.**
 `R-prof` (leg 403, `1f89ceb`, `writeup/data/p2_r_prof_v1.json`) profiled `PROG-R4`'s loop against a
 named reference. Gate (iii) **NO: 4.34× slower** (cpu median; wall 4.21; **worst wall round 1.9975**,

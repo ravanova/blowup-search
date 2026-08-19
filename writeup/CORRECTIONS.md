@@ -2990,6 +2990,7 @@ budgets** — same apparatus, same `n_dof = 6720`, same branch, same norm, only 
 | at `k = 20,000` | `6.4597` | `6.5024` | **4.29× and 4.32×** |
 | improvement, same seed | **×4.44** | **×5.47** | **the ratio falls ~5×** |
 
+⚠ **THE NEXT SENTENCE IS FALSE — see §50 item 1. Left standing, not edited.**
 `L6-b`'s two seeds sit inside `L6`'s own five branch-B seeds at the same cap (`29.57`–`38.20`), so
 they are drawn from the same population and the comparison is like-for-like. **`23.67×` is what the
 seed/continuation ratio reads when every start is stopped at 800 iterations. It is not what the
@@ -3005,6 +3006,8 @@ property, and any inference that the gap is large because the basin is narrow.
 > otherwise, and it may not be quoted as a property of the object. Where a spread, ratio or ranking
 > is offered as evidence about a construction, the record must state the budget at which every term
 > was measured — and if the terms were measured at DIFFERENT budgets, the comparison is void.*
+
+⚠ **The second clause as written voids this section's own evidence — repaired at §50 item 3.**
 
 This is §43's error in its second costume: there a ratio was confounded by `|J|`, here by the
 iteration cap. Both were quoted by me, both were true of what was computed, and both were read as
@@ -3205,3 +3208,138 @@ generator, and correcting the downstream copies leaves the plant running.*
 wrong and the theorem is right. **Tsai 1998 Theorem 2 carries `W4` clause (b)**, its hypotheses
 are met by measurement, and clause (b) STANDS. A defective citation is not a defective theorem —
 which is `WAVE8_PLAN.md` AMENDMENT 4's own pre-committed constraint, and it binds here.
+
+## §50 — the correction §46 needed: one FALSE sentence, one over-broad withdrawal, and a rule that voided its own evidence; plus a §5b commit crossing of mine
+
+**Provenance.** All four were found by `V-W7` (leg 412, `aefe590`) auditing **the Conductor's own
+integration**, not the units. Every one is re-verified here from the banked primary, not accepted on
+the verifier's word. `V-W7` ruled seven defects against me; the three that touch `§46` are below,
+the commit crossing is item 4, and the two that were already remedied or that I rule differently are
+recorded at items 5–6.
+
+**Item 1 — §46's support sentence is FALSE.** §46 says `L6-b`'s two seeds *"sit inside `L6`'s own
+five branch-B seeds at the same cap (`29.57`–`38.20`)"*. Read from
+`experiments/route4/l6b_ckpt/seed406.json`, trajectory row `k = 800`:
+
+| | at `k = 800` | inside `29.57–38.20`? |
+|---|---|---|
+| `seed406` | **`28.693380532819674`** | **NO — 2.96% BELOW the lower end** |
+| `seed407` | `35.560845905666` | yes |
+
+One of the two is outside. The sentence was written to establish that the fresh seeds and `L6`'s
+seeds are drawn from one population, and it overstated its own evidence to do it. **What survives:
+the like-for-like comparison, which never needed that sentence** — `L6-b` fixed `n_dof`, branch,
+norm, apparatus and seeds and varied *only* the cap, so the budget effect is measured within the
+same seeds and does not depend on where they fall among `L6`'s. The population claim is now: one
+seed inside the observed range, one just below it.
+
+**Item 2 — the withdrawal is too broad at the low end.** §46 withdraws the range *"3.93–23.67× on
+B"* entire. But the same seeds read at 20,000 iterations give seed/continuation ratios
+**`4.29257`** and **`4.32093`** — both *above* `3.93`. **The bottom of that range is not a cap
+artefact; it survives a 25× budget.** What the budget destroys is the TOP of the range and the
+inference drawn from its width. The withdrawal is hereby narrowed: `23.67×`, and the spread read as
+basin structure, are withdrawn; **`≈ 4×` at full budget stands as measured.**
+
+**Item 3 — §46's rule voided §46's own evidence.** The rule's second clause said *"if the terms were
+measured at DIFFERENT budgets, the comparison is void."* §46's own decisive column — the
+`×4.44`/`×5.47` improvement per seed — **is** a comparison of terms at two different budgets. Under
+its own rule §46 deletes its own proof. The clause is replaced:
+
+> **THE RULE, REPAIRED.** *A quantity measured at a resource cap is a property of the cap until it
+> is shown otherwise, and it may not be quoted as a property of the object. Comparing terms measured
+> at DIFFERENT budgets in order to claim something about the OBJECT is void. Comparing the SAME term
+> at two budgets in order to claim something about the BUDGET is not merely valid, it is the only
+> instrument that settles it — which is exactly what `L6-b` did. A rule about confounding must name
+> what is confounded with what, or it forbids the experiment that would resolve it.*
+
+**Item 4 — a §5b commit crossing, mine.** `04f9ff5` (*"PB2 pre-dispatch: rescue two load-bearing
+primaries out of an ephemeral worktree"*) and `6ca49a6` (*"WAVE8 AMENDMENT 4: re-scope PB2"*) each
+carry `experiments/route4/l6b_ckpt/seed406.json` and `seed407.json` — **`L6-b`'s live in-run
+checkpoints, swept into commits whose subjects name neither the files nor the unit.** Confirmed from
+`git show --stat`. Nothing was corrupted and the sweep is why the k=800 rows above are on `main` at
+all, but a concurrent unit's live state entered the record under an unrelated subject, and the next
+reader has no way to know it. **This is how a checkpoint gets attributed to the wrong leg.**
+
+> **THE RULE.** *A commit subject is an index into the record. Sweeping another unit's live files
+> under a subject that does not name them is not untidiness — it silently reassigns their
+> provenance, and provenance is the only thing that makes a checkpoint evidence rather than a file.*
+
+**Item 5 — the §3j table, ALREADY REMEDIED, recorded for the count.** `V-W7` found the headroom
+table at `c6287a2` overstated 2 of 4 rows (STATE `24,016` not `23,639`; ORCH LIVE `7,401` not
+`7,247`) and that both wrong rows were **byte-identical to the superseded wave-6 table** — carried
+forward, not re-measured. Same disease as §48, one boundary earlier. Already fixed by re-measuring
+every row, and `test_headroom.py` now makes the class impossible to repeat. `V-W7` separately
+**UPHELD** the verbatim retirements (`§W4-L6CEIL` byte-identical, 11/11 lines).
+
+**Item 6 — the `R-prof` sentence: UPHELD IN PART, and the part that differs matters.** `V-W7` rules
+my repaired sentence — *"'every round exceeds 3×' holds on the cpu clock only"* — **still false**,
+citing `raw_ratio_cpu_clock.min = 2.89873`. Checked: that number is from **`V-W7`'s own re-run**, and
+it is **not in the banked artefact**. `writeup/data/p2_r_prof_v1.json` records exactly one
+`raw_ratio_cpu_clock`, at `gate/iii_within_3x_of_reference`, with **`min = 3.3721551723168335`**. So
+the sentence is TRUE of the record and FALSE on re-execution. That is not a misreading; it is a
+**reproducibility** finding, and the better one: a ratio sitting `12%` above a threshold, on a
+machine the artefact itself flags `MACHINE_WAS_NOT_QUIET`, is not a stable property of the code. The
+sentence is qualified as run-specific rather than withdrawn.
+
+> **THE RULE.** *A verifier's number that disagrees with the banked artefact has not necessarily
+> found an error in the reading — check whether it re-ran. A claim that is true of the record and
+> false on re-execution is a claim about one run, and the threshold it sits near is the finding.*
+
+## §51 — the under-claim: `L6-b`'s 25× budget moved the residual `×1.3518` of `L6`'s ENTIRE refinement ladder, and `L6`'s ladder can INVERT on a margin of 0.46 percentage points
+
+**This is not a correction of a wrong number. Every number below was already banked. It is the
+correction of a landing — mine — that recorded the smaller finding and missed the larger one, and it
+went un-noticed through the unit's own write-up, the Conductor's integration, and a verifier.**
+Found by `V-W7` (leg 412) and re-derived here from `writeup/data/p2_route_l6_profile_v1.json` and
+`experiments/route4/l6b_ckpt/*.json`.
+
+**The comparison nobody made.** `L6` refined the discretisation four rungs and `L6-b` raised the
+iteration cap 25× at the discretisation held FIXED. Both are reported in `ρ`, `L5`'s load-bearing
+norm, on branch B. Put side by side:
+
+| what was varied | `ρ` | change |
+|---|---|---|
+| `L6`, **four rungs of refinement**, `J1 → J4`, cap 800 | `1.6986514108481086 → 1.613811231995397` | **`−4.994561%`** |
+| `L6-b`, **one budget step ×25**, `n_dof` FIXED at 6720 | `1.613811231995397 → 1.504851895102804` | **`−6.751678%`** |
+
+**One budget step moved the objective `×1.3518` of what the entire four-rung refinement ladder
+moved.** `L6`'s headline reading — *the residual does not decrease under refinement* — was measured
+with every rung stopped at 800 iterations, i.e. **at a cap now demonstrated to dominate the very
+quantity being differenced.** The ladder does not measure refinement. It measures where L-BFGS-B
+had got to after 800 iterations at each `n_dof`, and the rungs are not converged enough to be
+subtracted from one another.
+
+**And the ladder can invert.** `L6`'s rung `J3` (`Nr = 16`, 2400 dof) reads `ρ = 1.6218749783288575`
+at 800 iterations, above `J4`'s `1.6138`. For the ordering to reverse, `J3` at raised budget must
+fall below `J4`-at-20,000 = `1.504851895102804` — a drop of **`7.2153%`**. One rung up, at *more*
+degrees of freedom, the same budget increase delivered **`6.7517%`**.
+
+> **THE MARGIN IS `0.4636` PERCENTAGE POINTS, AND IT IS THE WRONG WAY ROUND BY LESS THAN THE
+> MEASUREMENT ALREADY IN HAND.**
+
+`J3` has *fewer* degrees of freedom than `J4`, so it is cheaper to run and, on the usual expectation
+that smaller problems converge further per iteration, it is the rung most likely to clear the bar.
+**Nothing in the record establishes that it does not.** `L6`'s `NO` is not overturned by this — it
+is left resting on an ordering that has never been measured at a budget where the ordering means
+anything.
+
+> **THE RULE.** *When a refinement study and a budget study measure the same objective, DIVIDE ONE
+> BY THE OTHER BEFORE REPORTING EITHER. If the budget term is the same size as the refinement term,
+> the refinement study has not measured refinement, and its monotonicity — in either direction — is
+> an artefact of where the iteration stopped. The comparison costs one line of arithmetic and it was
+> not done at the landing, not done in the unit, and not done by the first verifier.*
+
+**What this obliges.** A new Lane L unit, `L6-e`: **one rung, `J3` (`Nr = 16`, 2400 dof), re-run to
+20,000 iterations**, same apparatus, same seed policy, same norm — the single cheapest measurement
+in this record that could overturn Lane L's own headline. Priced **~20–35 core-h** (below `L6-b`'s
+43.3 because `J3` carries fewer dof), one shard, ~6 h wall. **Queued for wave 9.** Its gate is
+pre-committed here: `ρ(J3 @ 20,000) < 1.504851895102804` ⟹ **the ladder inverts and `L6`'s
+"not decreasing under refinement" is withdrawn as budget-confounded**; `≥` ⟹ the ordering survives
+one honest test and `L6`'s `NO` is strengthened, having been at risk. **Both outcomes are results.**
+
+**Why it was missed, which is the part `P4` needs.** The two numbers live in different units, in
+different waves, in different JSON files, under different headings — and each was correct where it
+sat. No check compares across units; §45 counted 32 of 49 evidence scripts unable to see an error
+shared between artefact and checker, and this is the neighbouring blind spot: **an error shared
+between two artefacts that no single checker reads together.** The discipline did not catch this. A
+verifier reading both legs did, on the third pass, at leg 412 — **eleven legs after `L6` landed.**

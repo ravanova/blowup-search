@@ -112,12 +112,18 @@ measurement, verbatim: `reports/ORCH_STATE.md` Superseded LIVE blocks.
 
 **RETURNED — `PB2`** (leg 410, `a7ffa1e`): gate **`YES`**. **`W4` clause (b) is carried by TSAI 1998 THM 2** — hypotheses (i) equations + (ii) local energy estimates, **no `L^q` at all** — verified by me at FULL TEXT, and met by measurement. **NRŠ does NOT apply** (`∫|U|³` log-divergent at `α=1`), so the one `UNREACHABLE` source is **not load-bearing**. Clause (b) STANDS, stronger than its citation. 31/31, but **0/31 recompute-from-primary**.
 
+**RETURNED — `V-W7`** (leg 412, `aefe590`): wave 7 **VERIFIED** — `R-bank`, `R-prof`, `L6-b` all clean against their pre-committed gates. *"Every discrepancy is in the integration, not the units."* **SEVEN defects ruled against ME.** All seven re-checked at primary by me: **6 UPHELD, 1 UPHELD IN PART** (§50–§51).
+
+**⚠⚠ THE WAVE'S BIGGEST ITEM IS AN UNDER-CLAIM, NOT A DEFECT — `CORRECTIONS.md` §51.** `L6`'s four-rung refinement ladder moved `−4.994561%`; `L6-b`'s ONE ×25 budget step at FIXED `n_dof` moved `−6.751678%` = **×1.3518 of the ENTIRE ladder**. Both banked, both correct, **nobody divided one by the other for 11 legs.** `L6`'s *"not decreasing under refinement"* is budget-confounded; `J3` needs `7.2153%` to INVERT and `6.7517%` is measured one rung up. **Margin 0.46 pp** → `L6-e` (~20–35 core-h, gate pre-committed, wave 9).
+
+**RETURNED — `PB1`** (leg 411, `440f28c`): gate **`YES` — `P1` IS KILLED, and that was pre-committed as a GOOD result.** Both effects are in print at `FULL TEXT`: score-monotone admission bias (Page–Holey–Brenner–Kerswell, *JFM* **991** (2024) A10, p.18; Chandler–Kerswell 2013 p.13 — **twelve years old**), and re-mining re-finds (CK13 p.14 Table 1; LK15 p.5). **`P1`'s framing word *silently* is contradicted by its own intended bibliography.** 1 of 12 controls did not fire (`pos_topical`), disclosed, not re-planted, nothing rests on it.
+
+
 ## WAVE 7 — **CLOSED 2026-08-19 (`L6-b` landed); DISPATCHED: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` DISPATCHED 2026-08-19 (leg 408, 6 shards)** — condition discharged.
 **RETURNED — `V-W6`** (leg 407, `c7f242c`): **`V5` VERIFIED, `V-W5` VERIFIED, `L6` VERIFIED-WITH-QUALIFICATION**; 11 defects open, 0 repaired. My own landing audit came back **3 numbers overstated, 1 wrong conservatively, 2 UNDERSTATED** (`CORRECTIONS.md` §38). Its `D-VW6-2` (no start converged by `ftol`; `scale_invariant_grad 153.22` vs pre-registered `1e-12`) is what `L6-b` and §41 act on. Rows retired VERBATIM → `WALLS_HISTORY.md` §STATE-WAVE7-RETURNS.
 
-**RETURNED — `R-prof`** (leg 405, `1f89ceb`): gate (iii) **`NO`** — the loop is **4.34×** a named reference, not the 3× the unit's own wording claimed for every round (that was **cpu-clock-only**; worst wall 1.9975). Remedy priced, **not landed**; breaks no wall. Detail VERBATIM → §STATE-WAVE7-RETURNS.
 
-**RETURNED — `R-bank`** (leg 404, `8019c35`): **`YES` ×3**; 160/160 bit-identical, seedbank **TRACKED**, both DNS field artefacts **ABSENT**. I re-hashed all 160 and regenerated 4 — bitwise. My own `~1.2 GB` estimate was **268.9 MB** in fact (`CORRECTIONS.md` §39). Detail VERBATIM → §STATE-WAVE7-RETURNS.
+**RETURNED — `R-bank` (leg 404) and `R-prof` (leg 405)**: both **VERIFIED by `V-W7`**. Rows retired VERBATIM → `WALLS_HISTORY.md` §STATE-W7-RBANK-RPROF. `R-prof` gate (iii) `NO`, **4.34×** — and §50 item 6 rules that sentence **run-specific**: true of the banked JSON (`min 3.3722`), false on `V-W7`'s re-run (`2.89873`). ⚠ `R-bank`'s `--verify` **CANNOT FAIL** (0 `raise`/`assert`/`sys.exit`) — remedy owed.
 **DISPATCHED — `E-FE`** (leg 408). 160 attempts, **6 shards not 8**, on a measurement (12 cores, `L6-b` holding ~5, `R-prof`'s banked `MACHINE_WAS_NOT_QUIET`): **~15.2 h wall not ~11.4; ~91 core-h unchanged.** Inherits `R-bank` **C2** (the bank is the seed's *definition* on this CPU) and **C4** (144 non-originals untested by any solver).
 **RETURNED — `L6-b`** (leg 406, `4df0ca0`, `writeup/data/p2_route_l6b_v1.json`). Gate **`NO`**: `ρ = 1.5048519` at 20,000 iters (25× `L6`), **−6.75%**, threshold `<1.45` not met; 43.3 core-h; 57/57. Terminal `‖x‖‖∇J‖₂/|J|` **44.6/12.0/5.2 — not stationary**, so §41 bites: the plan's *"the stall is the CONSTRUCTION"* is **SUPERSEDED**. Licenses ONLY *budget alone does not reach 1.45; `L7`/`L4` OPEN; ansatz neither exonerated nor convicted*. Both cold seeds `6.46`/`6.50`, outside `[1.55,1.70]`.
 
@@ -126,7 +132,7 @@ measurement, verbatim: `reports/ORCH_STATE.md` Superseded LIVE blocks.
 
 **`L6` `e62c449`** (leg 401) — route 4's first discrete profile, gate **`NO`**: `ρ = 1.6138` in `L5`'s norm at `n_dof = 6720`, not decreasing under refinement (`−0.0222`). **Its landing ceiling is PARTLY WITHDRAWN** — the seed-spread magnitude was a property of the 800-iter cap (`CORRECTIONS.md` §46); what stands is that `ρ` is attained by the continuation start alone. Superseded on budget by `L6-b` above.
 
-**`V5` `dacc01c`** — both clauses **YES**: the `2509.25116` certificate **CLOSES** (24 constants at 50 dps, **four printed ones fail**, `x_1^U` clears by **0.08% — luck, not margin**) and the profile **IS genuinely 3D** (swirl **57%** of `max|u_r|`). **Class A NOT verified — a LIMIT, never a pass. W3 does NOT move: its prose test was not run.** **`V-W5` `95cf861`** — five items reproduce, **`C6`'s tolerance NEVER moved**, 3 defects found. `L6` remains **`UNVERIFIED`**.
+**`V5` `dacc01c`** (leg 402) — both clauses **YES**, VERIFIED by `V-W6`. Row retired VERBATIM → `WALLS_HISTORY.md` §STATE-W6-V5; substance at `WALLS.md` W2/W3.
 
 ## Open — needs the user, not a task
 
