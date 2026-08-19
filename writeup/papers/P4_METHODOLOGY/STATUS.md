@@ -22,6 +22,35 @@ unrelated reason. **Every one of those is a STRUCTURAL separation between the cl
 checker. None of them is a check the unit wrote about itself.** If this paper has a thesis, that is
 it, and it is considerably less flattering than the one it started with.
 
+**And a second thesis, which fell out of one night's record and may be the more portable of the
+two.** Between 02:35 and 03:50 on 2026-08-19 this programme produced **six** defects of its own
+(`CORRECTIONS.md` §40–§45, plus a monitor found dead-but-counted). They look unrelated — a
+concurrency brief, a gate, three arithmetic slips, a verification layer, a process supervisor —
+**and they are one error wearing six costumes: a COUNT or a RATIO quoted as evidence of a property
+it does not establish.**
+
+| the number quoted | the property it was taken to establish | why it could not |
+|---|---|---|
+| `load average 17` | this unit's cost to its neighbour | ambient load is the weather, not a footprint (§40) |
+| `0.848 it/s` | the current contended rate | a cumulative average; the fast hours never leave the numerator (§42) |
+| `153.22`, largest of six | this point is furthest from stationary | confounded by `|J|`, the very thing that makes it the minimiser (§43) |
+| `205 → 162 → 117 → …` | a steady decay | two points reordered, two maxima dropped, from a series with 6.7× spread (§44) |
+| `N/N evidence checks passed` | the claim is verified | 65% of the checks read only the artefact their own unit wrote (§45) |
+| `4 processes running` | the monitor is monitoring | the wrapper was dead and its orphaned `sleep` held the count (`L6-b`, 03:50) |
+
+**In every row the number was true.** Not one is a miscalculation. The failure is always the
+*inference*, and it always runs the same way: **a quantity that is cheap to produce is substituted
+for a property that is expensive to establish, and the substitution is invisible because the number
+is correct.** A programme that mechanises its own scepticism will mechanise it into exactly these
+substitutions, because the mechanism's own outputs are counts and ratios. **That is the finding a
+referee should take away, and it is not specific to fluid dynamics.**
+
+**What it costs this paper to say:** the six were caught in seventy-five minutes because two parties
+were reading the same live run for different reasons — and **four of the six were caught by the
+party who had just been corrected on the previous one.** That is not a discipline. It is two agents
+with different vantage points and no incentive to agree, which is cheaper to describe than to
+institutionalise, and the paper must not dress it up as a procedure.
+
 ## The evidence, and it is unusual because it is all adverse to the programme's own hopes
 
 | what was caught | by | what it overturned |
