@@ -229,3 +229,66 @@ measurement — before any drafting.** `P4` drafts only alongside them.
 
 **And the grounds recorded for answer (3) at wave 7's close are NARROWED, per above.** The
 instruments have now run three deep. Wave 9 builds.
+
+---
+
+# `L-JVER` (leg 409) — INTEGRATED 2026-08-19. WAVE 8 IS THE WAVE THAT FOUND THE FLOOR MOVING.
+
+Gate **`NO`**. Escalated to the user mid-run as its own pre-committed reading required, before this
+integration existed.
+
+## What I re-derived from primaries, not from the unit's summary
+
+- **`X9` is the measurement that makes this a finding.** The unit's independent operator `W[V]`,
+  evaluated on **`L6`'s own quadrature nodes with `L6`'s own weights**, reproduces `J_L6` at
+  `1.10e-14`, `2.46e-15`, `5.90e-15`, `1.86e-14` — **including at P3, where the gate fails by 43%.**
+  A disagreement that vanishes to machine precision when both codes share a rule, while each rule is
+  separately converged, is not a coding error in either program.
+- **§51's ladder rungs confirmed:** branch B `1.698651411`, `1.675613729`, `1.621874978`,
+  `1.613811232`, with `nq_r` = 36, 48, 48, 60, 72.
+- **Going further than the unit:** the divergence is present **at the minimiser** — `+6.226e-5`,
+  `+6.246e-5`, `+6.212e-5` per decade over `r_max` `1e6 → 1e14`, three bands inside 1%. `P1`'s
+  `1.00e-4` PASS is not evidence of convergence.
+- **The sign is POSITIVE**, which is why every gate answer survives: less truncation ⟹ larger `ρ` ⟹
+  further from `ρ < 1.45`. **`L6`'s `NO`, `L6-b`'s `NO` and `L5`'s `NO` all stand. Their numbers do
+  not.**
+- **§52 does NOT subsume §51**: divergence coefficient `6.22e-5`/decade against a last ladder step of
+  `8.06e-3` — **×130**. Two independent defects in the same four numbers.
+- **`W4` clause (b) is clear**, checked rather than assumed: `c_mod`, `869.288`, `J(`, `curl F`,
+  `L1_t` all absent from `writeup/data/p2_route_pb2_v1.json`.
+
+**Recorded as in flight, not as verified:** my re-run of `p2_route_ljver_v1_evidence.py` was still
+executing when this was committed. It is not cited as evidence here. The unit reports 12/12
+`recompute-from-primary`, 0 `re-read-own-artefact` — the first suite in this record to be entirely
+of the class §45 says we lack.
+
+## A defect of mine, found while landing this and recorded rather than quietly fixed
+
+The §51 block I landed two commits ago went into **`WALLS.md`'s W7 — Compute** section, not W4.
+`t.find("\n**⚠", i+5)` walked past W5 and W6 because neither carries a ⚠ block, and §52's block
+then followed §51 into the wrong section. Both moved to W4; W7 verified intact. **§37's rule says
+retire by slicing between ASSERTED line indices, and when an edit must search, ASSERT THE MATCH
+COUNT — I asserted the count and not the neighbourhood, so the edit was well-formed and landed in
+the wrong wall.** → `CORRECTIONS.md`, next revision.
+
+## §3i, re-run because a unit returned
+
+**(1) L1→L4?** No. **(2) What did it make FALSE?** That any `J` in this record is a value of the
+functional it is named for. **(3) Does Lane L still deserve its rank?** **Yes — and this is the
+strongest grounds it has had.** A lane that discovers its own measuring instrument is divergent, and
+then measures the sign well enough to show its conclusions survive, is a lane doing the work.
+**(4) Undischarged ceiling under a live claim?** `L5`'s `c_mod` — flagged, sweep owed, not
+adjudicated. **(5) Cheapest unit that could kill the lane?** Unchanged in identity, **rewritten in
+gate**: `L6-e` v2, at matched truncation (§53). **(6) If Lane L died?** Lane V. Unchanged.
+**(7) Audit/instrument loop?** The last four are `PB2`, `V-W7`, `PB1`, **`L-JVER` — a CONSTRUCTION
+unit, on object, and it is the one that found the floor.** The loop broke itself.
+
+## RE-RANK
+
+**Lane order UNCHANGED. Within Lane L: `L6-e` v2 at the head, then the `L5` `c_mod` sweep to
+`1e8` (cheap, and it is the last unadjudicated flag from §53), then `L8`'s branch rule.**
+`L7` and `L4` are pushed further out by §52 and their rows are retired accordingly.
+
+**Wave 8 closes: `PB2` YES, `PB1` YES (`P1` killed), `V-W7` VERIFIED with seven against me,
+`L-JVER` NO with the largest structural finding in the record. `E-FE` outstanding as a late return
+and MAY NOT influence this ranking (ruling `99421dd`).**

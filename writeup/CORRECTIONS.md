@@ -3445,3 +3445,120 @@ the coefficient vector is defined in it. `Byrd–Lu–Nocedal–Zhu 1995` was **
 container (two public PDF URLs: one SSL certificate-name failure, one HTML block page) and no depth
 was faked. Chandrasekhar 1961 remains unread here, though the identity it carries is now
 **RECOMPUTED** independently (`div V = 2.08e-16`).
+
+## §53 — the Conductor's landing audit of `L-JVER`/§52: the diagnosis is UPHELD and it goes FURTHER than the unit claimed, but it does NOT explain §51, and the direction of the error protects both `NO`s
+
+**`L-JVER` (leg 409) is a construction unit whose gate came back `NO`, and its diagnosis is the
+largest structural finding in this record. Everything below is re-derived by me from the banked
+artefacts, not accepted from the unit's summary.**
+
+### What I verified at primary
+
+| claim | my check | verdict |
+|---|---|---|
+| gate `NO`: rel diffs `1.00e-4` / `1.25e-4` / **`4.29e-1`** at P1/P2/P3 | read `p2_route_ljver_v1.json` `gate_points` | **CONFIRMED** |
+| the 43% is the QUADRATURE RULE, not the operator | `X9`: the unit's independent `W[V]` on **`L6`'s own nodes and weights** reproduces `J_L6` at `1.10e-14`, `2.46e-15`, `5.90e-15`, `1.86e-14` — **including at P3, where the gate fails** | **CONFIRMED, and this is the decisive measurement** |
+| §51's ladder rungs | branch B `residual_load_bearing`: `1.698651411`, `1.675613729`, `1.621874978`, `1.613811232` | **CONFIRMED — §51 stands** |
+
+`X9` is what makes this a finding rather than a bug report. A disagreement that vanishes to
+machine precision the moment both codes use the same rule, while each rule is separately converged,
+**cannot be a coding error in either program.** It is a property of the integral.
+
+### FURTHER THAN THE UNIT SAID: the divergence is present AT THE MINIMISER
+
+The unit reports `J` divergent "for generic `c`". Read its own `cutoff_sensitivity` sweep at **P1,
+the banked branch-B minimiser** — the point where the gate PASSED:
+
+| `r_max` band | ΔJ per decade |
+|---|---|
+| `1e3 → 1e4` | `+9.573e-3` |
+| `1e4 → 1e5` | `+3.316e-4` |
+| `1e5 → 1e6` | `+6.537e-5` |
+| `1e6 → 1e8` | **`+6.226e-5`** |
+| `1e8 → 1e11` | **`+6.246e-5`** |
+| `1e11 → 1e14` | **`+6.212e-5`** |
+
+**Three consecutive decade-bands, spanning eight decades, agreeing to better than 1%.** That is a
+constant increment per decade — the signature of a logarithmic divergence, and the same signature
+`PB2` measured and I verified at primary last leg for `∫|U|³` on the same object. The origin sweep
+gives the same picture at `+4.19e-6` per decade.
+
+> **So `P1`'s `1.00e-4` PASS is NOT evidence that `J` converges there.** It is evidence that two
+> truncations of similar reach agree. `ρ = 1.613811232` has **no limit**: it grows without bound as
+> the domain is extended, at `≈ 3.9e-5` relative per decade. The gate passing at the minimisers and
+> failing away from them is not a boundary between a good region and a bad one — it is the
+> divergence being weakest where the optimiser was always looking.
+
+### THE SIGN, which nobody has stated and which protects both `NO`s
+
+**Every divergence increment measured above is POSITIVE.** Extending the domain makes `ρ` LARGER.
+`L6`'s threshold is `ρ < 1.45` and `L6`'s banked `ρ` is `1.6138`; `L6-b`'s is `1.5049`. **The
+truncation error therefore points AWAY from the threshold**, so:
+
+> **`L6`'s `NO` and `L6-b`'s `NO` are ROBUST IN DIRECTION to §52.** A less truncated `J` is a larger
+> `J`, and a larger `J` is further from closure. What §52 destroys is the meaning of the NUMBERS as
+> values of the functional — not the answers that were read off them. **This is the rare case where
+> a foundational defect is discovered and the conclusions built on it survive, because the defect
+> has a sign and the sign is unfavourable to the claim that was never made.**
+
+### AND IT DOES NOT EXPLAIN §51 — the two findings are independent
+
+`nq_r` varies across `L6`'s rungs — **36, 48, 48, 60, 72** — so the refinement ladder differences a
+divergent integral at **five different radial reaches**, which looks at first like §52 subsuming
+§51. It does not, and the arithmetic settles it:
+
+| | |
+|---|---|
+| divergence coefficient at the minimiser | `+6.22e-5` per decade |
+| `L6`'s last ladder step, `J3 → J4` | `−8.064e-3` |
+| ratio | **×130** |
+
+**The truncation bias is two orders of magnitude too small to account for the ladder's flatness.**
+§51's diagnosis — the rungs were differenced at an ITERATION CAP that dominates them — stands
+untouched, and §52 does not rescue it. Two independent defects in the same four numbers.
+
+### `L5`'s `c_mod = 869.288`: FLAGGED, NOT ADJUDICATED, and the flag is specific
+
+`L5`'s banked gate reads: *"the error PER UNIT SIMILARITY TIME saturates at `c_mod = 869.288`, with
+measured ρ-exponent `0.000109` over `ρ0 ∈ [10, 1000]`: enlarging the cutoff radius buys NOTHING."*
+**A logarithmic divergence is exactly the exponent-zero case.** A power-law fit cannot tell
+saturation from `log ρ` growth; both give exponent ≈ 0.
+
+Read `L5`'s own load-bearing row (`α=1 | κ=a_physical_frozen | DSS`), increments per decade:
+`−263.078`, `−1.721`, **`+0.404`**, **`+0.052`**. The last two are **POSITIVE** — `c_mod` is
+creeping UP at the end of the sweep. Two positive points are not a floor, and I do not rule that
+they are. But the sweep stops at `ρ ≈ 1.26e3`, and `L-JVER`'s sweep at the minimiser shows
+increments still decaying steeply through `r ≈ 1e6` and only flattening to their nonzero floor
+beyond it. **`L5`'s sweep is roughly three decades too short to distinguish saturation from
+logarithmic divergence, and it was read as saturation.**
+
+**Direction again saves the answer:** if `c_mod` diverges it GROWS, and `L5`'s gate was `NO` because
+the error is too LARGE. **`L5`'s `NO` is strengthened, not threatened. The number `869.288` is what
+is at risk.** Not adjudicated here; it needs a sweep to `1e8`, which is cheap and is now owed.
+
+### `W4` clause (b) is NOT affected — checked, not assumed
+
+`PB2` closed clause (b) on **Tsai 1998 Theorem 2**, whose hypotheses are the equations plus the
+local energy estimates, measured directly: `sup|U|`, `∫|∇U|²`, the space-time Dirichlet integral.
+I searched `writeup/data/p2_route_pb2_v1.json` for `c_mod`, `869.288`, `J(`, `curl F` and
+`L1_t`: **none appears.** Clause (b)'s closure is downstream of no value of this functional.
+
+> **THE RULE.** *When a quantity is found to be divergent, the first question is not "which results
+> are wrong" but "what is the SIGN of the truncation error, and does it point toward or away from
+> the threshold each result had to beat." A defect with a known sign can leave every conclusion
+> standing while destroying every number. Report both facts, and never let the second be softened
+> into the first.*
+
+### `§51`'s `L6-e` gate is REWRITTEN before dispatch
+
+The gate committed at §51 compared `ρ(J3@20k)` against `ρ(J4@20k)` — two rungs at `nq_r = 60` and
+`72`, i.e. **two different truncations of a divergent integral**, which §52 makes meaningless as a
+strict inequality. Replaced:
+
+> **`L6-e` GATE, v2, PRE-COMMITTED.** Re-run rung `J3` (`Lmax 3, Nr 16, Ks 2`, 2400 dof) to 20,000
+> iterations. Report `ρ(J3@20k)` evaluated at **`J3`'s native `nq_r = 60` AND at `J4`'s
+> `nq_r = 72` reach (`r ∈ [5.50e-4, 7.27e+3]`)**, so the comparison is made at MATCHED truncation.
+> The ladder inverts iff `ρ(J3@20k)` at the **matched** reach falls below `1.504851895102804`.
+> Report both numbers whatever they say; if they straddle the threshold, that is itself the result
+> and the ladder is undecidable at this reach. **Also report the far-field increment per decade at
+> the new iterate**, to test whether the raised budget changes the divergence coefficient.

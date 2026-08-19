@@ -698,3 +698,75 @@ lives at `WALLS.md` W7, `OPTIONS.md` R6/R7 and `CORRECTIONS.md` §50 item 6. Ret
 `CLAY_OBLIGATIONS.md`. Retired to hold §3j's STATE.md cap while landing `V-W7` and `PB1`.
 
 **`V5` `dacc01c`** — both clauses **YES**: the `2509.25116` certificate **CLOSES** (24 constants at 50 dps, **four printed ones fail**, `x_1^U` clears by **0.08% — luck, not margin**) and the profile **IS genuinely 3D** (swirl **57%** of `max|u_r|`). **Class A NOT verified — a LIMIT, never a pass. W3 does NOT move: its prose test was not run.** **`V-W5` `95cf861`** — five items reproduce, **`C6`'s tolerance NEVER moved**, 3 defects found. `L6` remains **`UNVERIFIED`**.
+
+## §W-LANEL-FIRSTTWO — the WALLS.md Lane-L "first two units in 400 legs" block, retired VERBATIM 2026-08-19
+
+The two units it celebrates are `L5` and `L6`. Both are now heavily qualified by the same day's
+work: `CORRECTIONS.md` §51 (the ladder was differenced at an iteration cap that dominates it), §52
+(`J` is a divergent integral; every finite value is a truncation value) and §53 (the Conductor's
+landing audit: the divergence reaches the minimiser, but its SIGN protects both `NO`s). The block is
+retired because its framing — two clean landings — is no longer the shortest true description, not
+because anything in it was found false. Substance now lives in the W4 blocks above it. Retired to
+fund §52/§53 under `ORCHESTRATION.md` §3j. Moved verbatim, 26 lines, not compacted.
+
+**⚠ 2026-08-18 — THE LANE LANDED ITS FIRST TWO UNITS IN 400 LEGS, AND BOTH NARROWED IT.** `L2′`
+(leg 397, `1493e5e`, **VERIFIED by `V-W4`**) closed **W4 clause (a)**; `L5` (leg 400) closed **clause
+(b)**, threshold-free, with the number. Both are recorded in full at **W4** and neither is restated
+here. **What this lane has left is W5, §6(i) and §6(ii) — all three untouched, all three no-method —
+and inside W4 only clause (c), which is Lane T's.** A lane that closes its own attacks is doing its
+job; it is not the same thing as progress, and no `L1→L4` link moved for either unit.
+
+**L1 — price §4 on `ℝ³`.** ~~Read the published attempts to localise a self-similar profile to
+finite energy; state, per attempt, the named hypothesis that fails for DSS.~~ **DONE by `L2′` for
+the decay clause** (18 techniques, 7 families). Residual: the **four pre-arXiv primaries**
+(NRŠ 1996, Tsai 1998, Bogovskiĭ 1979, Giga–Kohn) banked **`UNREACHABLE` as declared in advance**
+and quoted through secondaries — ~1 unit, **low value**, and **no author contact** (prohibited).
+**L2 — attack §6(i).** ~~Is certified far-field decay plus an admissible cutoff genuinely without
+method, or without an *attempt*?~~ **ANSWERED: without method, and the method cannot exist for this
+object.** §6(i) is **NOT retired** — it wants *certified* decay and a built cutoff, and `L2′`
+produced neither. Certifying it costs **≥ 1 full wave** (interval/NK enclosure on route 4's own
+profile + a cutoff controlled in a scaling-invariant norm), and **§6.2 predicts the answer is
+`α_hi = 1`** — which does not pay the bill.
+**L3 — attack §6(ii).** Persistence under localisation — downstream of L2 in logic but not in
+literature: the published techniques (nonlinear stability with a finite unstable spectrum, the
+Chen–Hou line) have never been read against *this* object.
+
+**BREAKING EITHER OF §6's OBLIGATIONS IS THE SINGLE MOST VALUABLE OUTCOME AVAILABLE TO THIS
+PROGRAMME** — more valuable than a Tier-2 candidate, because a candidate without them is what we
+already know how to produce. **A measured "still no method, and here is precisely which hypothesis
+fails" is also a real result** — the one that says whether the Tier-2 ceiling is permanent.
+
+## §OPTIONS-L7 — the OPTIONS.md L7 row, retired VERBATIM 2026-08-19
+
+`L7`'s precondition is NOT MET and is now further from met: `§52` shows the residual it would
+enclose is a truncation value of a divergent integral. Retired to fund the `L6-e` v2 gate under
+`ORCHESTRATION.md` §3j. Moved verbatim, not compacted.
+
+| **L7** | interval the commutator | **PRECONDITION NOT MET — "needs `L6` first" is discharged IN LETTER ONLY.** An enclosure needs a residual small enough for a contraction to close; `L6`'s is **7.58** on the genuinely unit-normalised branch A — **CORRECTED 2026-08-19**: the 1.6138 is branch B, whose Gaussian-weighted interior `L²` is 0.0022, 0.22% of A's (`CORRECTIONS.md` §38). **`L7` is blocked HARDER than the landing audit said, not less.** **Do not dispatch until `L6-b` rules.** The `~10¹` price assumed banking a profile meant banking an ACCURATE one. | **re-price after `L6-b`** |
+
+## §OPTIONS-L4 — the OPTIONS.md L4 row, retired VERBATIM 2026-08-19
+
+Retired to hold `ORCHESTRATION.md` §3j's OPTIONS.md cap while landing `L-JVER`/§52/§53.
+Substance at `CLAY_OBLIGATIONS.md` §6(i) and `WALLS.md` W4. Moved verbatim, not compacted.
+
+| **L4** | **certify the decay** | §6(i) wants *certified* decay + a built cutoff; `L2′` built neither. Interval/NK enclosure on route 4's own profile — **and `L6` measures that no accurate such profile exists yet (`ρ ≈ 1.6`), so `≥1 full wave` is a FLOOR, not an estimate** — plus a cutoff in a scaling-invariant norm. **`§6.2` predicts `α_hi = 1`, which does not pay the bill.** | **≥1 full wave** |
+
+## §STATE-W67-L6 — three STATE.md rows (`V-W6`, `L6-b`, `L6`), retired VERBATIM 2026-08-19
+
+All three are superseded in their READING, not in their numbers, by `CORRECTIONS.md` §51/§52/§53:
+the ladder was differenced at a dominating iteration cap, and the functional is a divergent
+integral whose finite values are truncation values. The gate answers stand. Retired to hold
+`ORCHESTRATION.md` §3j's STATE.md cap while landing `L-JVER`. Moved verbatim, not compacted.
+
+**RETURNED — `V-W6`** (leg 407, `c7f242c`): **`V5` VERIFIED, `V-W5` VERIFIED, `L6` VERIFIED-WITH-QUALIFICATION**; 11 defects open, 0 repaired. My own landing audit came back **3 numbers overstated, 1 wrong conservatively, 2 UNDERSTATED** (`CORRECTIONS.md` §38). Its `D-VW6-2` (no start converged by `ftol`; `scale_invariant_grad 153.22` vs pre-registered `1e-12`) is what `L6-b` and §41 act on. Rows retired VERBATIM → `WALLS_HISTORY.md` §STATE-WAVE7-RETURNS.
+
+**RETURNED — `L6-b`** (leg 406, `4df0ca0`, `writeup/data/p2_route_l6b_v1.json`). Gate **`NO`**: `ρ = 1.5048519` at 20,000 iters (25× `L6`), **−6.75%**, threshold `<1.45` not met; 43.3 core-h; 57/57. Terminal `‖x‖‖∇J‖₂/|J|` **44.6/12.0/5.2 — not stationary**, so §41 bites: the plan's *"the stall is the CONSTRUCTION"* is **SUPERSEDED**. Licenses ONLY *budget alone does not reach 1.45; `L7`/`L4` OPEN; ansatz neither exonerated nor convicted*. Both cold seeds `6.46`/`6.50`, outside `[1.55,1.70]`.
+
+**`L6` `e62c449`** (leg 401) — route 4's first discrete profile, gate **`NO`**: `ρ = 1.6138` in `L5`'s norm at `n_dof = 6720`, not decreasing under refinement (`−0.0222`). **Its landing ceiling is PARTLY WITHDRAWN** — the seed-spread magnitude was a property of the 800-iter cap (`CORRECTIONS.md` §46); what stands is that `ρ` is attained by the continuation start alone. Superseded on budget by `L6-b` above.
+
+## §STATE-PIVOT-FLOOR — the STATE.md paper-pivot composition-floor row, retired VERBATIM 2026-08-19
+
+Standing user directive, unchanged and still binding; retired from STATE.md only to hold
+`ORCHESTRATION.md` §3j's cap. It governs wave 9 exactly as written. Moved verbatim, not compacted.
+
+**§3g's composition floor STANDS: paper units are ADDITIONAL, not a substitute.** Two units come before any drafting — **`PB1`** (`P1`'s owed novelty check; a YES kills `P1` and is a GOOD result) and **`PB2`** (both jaws of `P2`'s pincer read at PRIMARY). **`PB2` is not a paper errand: W4 clause (b) is recorded SHUT AND VERIFIED on two theorems this repository has never opened.** A jaw that does not close as cited goes to the user **immediately**.

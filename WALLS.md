@@ -182,6 +182,41 @@ the 800-iteration cap (§46; `V-W6` had upheld the withdrawn version). The SS-co
 opposite. **W4's ONLY UNBROKEN CLAUSE IS (c)**, UNTESTED NOT CLOSED, deferred with Lane T. Retired
 verbatim 2026-08-19 → `WALLS_HISTORY.md` §W4-SCOPE.
 
+**⚠⚠ AND THE LADDER THAT `L6`'s `NO` RESTS ON HAS NEVER BEEN MEASURED AT AN ADEQUATE BUDGET —
+`V-W7` (leg 412), `CORRECTIONS.md` §51. THIS IS AN UNDER-CLAIM, NOT A WRONG NUMBER: every figure
+below was already banked, in two different units, and no one divided one by the other.**
+`L6` refined four rungs with **every rung stopped at 800 iterations**: `ρ` `1.6986514 → 1.6138112`,
+**`−4.994561%`**. `L6-b` then raised the cap `×25` at `n_dof` **FIXED**: `1.6138112 → 1.5048519`,
+**`−6.751678%`**. **One budget step moved the objective `×1.3518` of the ENTIRE refinement ladder.**
+So the ladder differences rungs at a cap that dominates them — *"not decreasing under refinement"*
+is not established, in either direction. **It can also INVERT:** `J3` (`Nr = 16`, 2400 dof) reads
+`1.6218750` at 800 and needs **`7.2153%`** to fall below `J4@20,000 = 1.5048519`; **`6.7517%` is
+measured one rung up at MORE dof. Margin `0.46` percentage points.** `L6`'s `NO` is NOT overturned —
+it is left resting on an ordering never measured where the ordering means anything. → **`L6-e`**,
+one rung, `J3` to 20,000, **~20–35 core-h**, gate pre-committed at §51, **wave 9**. `W4` UNMOVED.
+
+**⚠⚠⚠ AND THE FUNCTIONAL ITSELF IS A DIVERGENT INTEGRAL — `L-JVER` (leg 409, `2acaa9e`),
+`CORRECTIONS.md` §52, Conductor's landing audit §53. THE LARGEST STRUCTURAL FINDING IN THIS RECORD.**
+An independently built `J` agrees with `L6`'s to `1.0e-4`/`1.2e-4` at both **minimisers** and
+disagrees by **42.9%** at a non-minimiser (`78%` at a random point). **Neither program is miscoded:**
+the unit's own operator on **`L6`'s nodes and `L6`'s weights** reproduces `J_L6` to `1e-14` at all
+four points, P3 included (`X9`). The whole gap is the **quadrature rule** — so
+`J(c) = ∫‖W(·,s)‖_{L^{3/2}} ds` is **logarithmically divergent**, at `r→∞` (`w_s ~ ∂_s A/r²`
+survives the DSS annihilation) and at `r→0` (`l = 1`, `Δ²(r²Y₁ₘ) ~ r⁻²`). **Every finite `J` in this
+record is a value of `L6`'s 72-node, `r ∈ [5.5e-4, 7.27e3]` truncation, not of the functional.**
+**Conductor, at primary and going further:** the divergence is present **AT THE MINIMISER** —
+`+6.226e-5`, `+6.246e-5`, `+6.212e-5` per decade over `r_max` `1e6→1e14`, **three bands agreeing to
+<1%**, so `ρ = 1.6138` has **no limit**; the same signature `PB2` measured for `∫|U|³`. **BUT THE
+SIGN IS POSITIVE:** less truncation ⟹ LARGER `ρ` ⟹ FURTHER from `ρ < 1.45`. **`L6`'s `NO` and
+`L6-b`'s `NO` SURVIVE — the numbers do not.** And §52 does **NOT** subsume §51: the divergence
+coefficient is **×130 smaller** than the last ladder step, so the ladder's flatness is still §51's
+iteration cap. **Two independent defects in the same four numbers.** `L5`'s `c_mod = 869.288`
+FLAGGED (its ρ-exponent `0.000109` "saturation" is exactly what a log divergence fits to, and its
+sweep stops ~3 decades short; last two increments **positive**) — **not adjudicated; sweep owed.**
+**`W4` clause (b) NOT affected** — `PB2` closes it on Tsai Thm 2 hypotheses measured directly;
+`c_mod`/`J`/`curl F` appear nowhere in its artefact (Conductor searched). **`W4` UNMOVED. No `L1→L4`
+link moved either way. Nothing here says a blow-up profile does or does not exist.**
+
 ## W5 — Persistence and stability under localisation
 
 **Statement.** Even granted W4's cutoff, the cut solution must still be shown to blow up. No known
@@ -239,18 +274,6 @@ suspended session's **gitignored** checkpoint, never a job too big. The field en
 DISPATCHED (`E-FE`, leg 408). Detail retired VERBATIM → `WALLS_HISTORY.md` §W7-U3QUEUE.
 
 
-**⚠⚠ AND THE LADDER THAT `L6`'s `NO` RESTS ON HAS NEVER BEEN MEASURED AT AN ADEQUATE BUDGET —
-`V-W7` (leg 412), `CORRECTIONS.md` §51. THIS IS AN UNDER-CLAIM, NOT A WRONG NUMBER: every figure
-below was already banked, in two different units, and no one divided one by the other.**
-`L6` refined four rungs with **every rung stopped at 800 iterations**: `ρ` `1.6986514 → 1.6138112`,
-**`−4.994561%`**. `L6-b` then raised the cap `×25` at `n_dof` **FIXED**: `1.6138112 → 1.5048519`,
-**`−6.751678%`**. **One budget step moved the objective `×1.3518` of the ENTIRE refinement ladder.**
-So the ladder differences rungs at a cap that dominates them — *"not decreasing under refinement"*
-is not established, in either direction. **It can also INVERT:** `J3` (`Nr = 16`, 2400 dof) reads
-`1.6218750` at 800 and needs **`7.2153%`** to fall below `J4@20,000 = 1.5048519`; **`6.7517%` is
-measured one rung up at MORE dof. Margin `0.46` percentage points.** `L6`'s `NO` is NOT overturned —
-it is left resting on an ordering never measured where the ordering means anything. → **`L6-e`**,
-one rung, `J3` to 20,000, **~20–35 core-h**, gate pre-committed at §51, **wave 9**. `W4` UNMOVED.
 **⚠ 2026-08-19 — W7 MEASURED FROM THE INSIDE. THE INEFFICIENCY IS REAL AND IT BREAKS NOTHING.**
 `R-prof` (leg 403, `1f89ceb`, `writeup/data/p2_r_prof_v1.json`) profiled `PROG-R4`'s loop against a
 named reference. Gate (iii) **NO: 4.34× slower** (cpu median; wall 4.21; **worst wall round 1.9975**,
@@ -344,32 +367,9 @@ answer.
 other lane retires or even touches them.** If every other lane succeeded completely, these two would
 still be the answer to *"why isn't this a Clay solve yet."*
 
-**⚠ 2026-08-18 — THE LANE LANDED ITS FIRST TWO UNITS IN 400 LEGS, AND BOTH NARROWED IT.** `L2′`
-(leg 397, `1493e5e`, **VERIFIED by `V-W4`**) closed **W4 clause (a)**; `L5` (leg 400) closed **clause
-(b)**, threshold-free, with the number. Both are recorded in full at **W4** and neither is restated
-here. **What this lane has left is W5, §6(i) and §6(ii) — all three untouched, all three no-method —
-and inside W4 only clause (c), which is Lane T's.** A lane that closes its own attacks is doing its
-job; it is not the same thing as progress, and no `L1→L4` link moved for either unit.
-
-**L1 — price §4 on `ℝ³`.** ~~Read the published attempts to localise a self-similar profile to
-finite energy; state, per attempt, the named hypothesis that fails for DSS.~~ **DONE by `L2′` for
-the decay clause** (18 techniques, 7 families). Residual: the **four pre-arXiv primaries**
-(NRŠ 1996, Tsai 1998, Bogovskiĭ 1979, Giga–Kohn) banked **`UNREACHABLE` as declared in advance**
-and quoted through secondaries — ~1 unit, **low value**, and **no author contact** (prohibited).
-**L2 — attack §6(i).** ~~Is certified far-field decay plus an admissible cutoff genuinely without
-method, or without an *attempt*?~~ **ANSWERED: without method, and the method cannot exist for this
-object.** §6(i) is **NOT retired** — it wants *certified* decay and a built cutoff, and `L2′`
-produced neither. Certifying it costs **≥ 1 full wave** (interval/NK enclosure on route 4's own
-profile + a cutoff controlled in a scaling-invariant norm), and **§6.2 predicts the answer is
-`α_hi = 1`** — which does not pay the bill.
-**L3 — attack §6(ii).** Persistence under localisation — downstream of L2 in logic but not in
-literature: the published techniques (nonlinear stability with a finite unstable spectrum, the
-Chen–Hou line) have never been read against *this* object.
-
-**BREAKING EITHER OF §6's OBLIGATIONS IS THE SINGLE MOST VALUABLE OUTCOME AVAILABLE TO THIS
-PROGRAMME** — more valuable than a Tier-2 candidate, because a candidate without them is what we
-already know how to produce. **A measured "still no method, and here is precisely which hypothesis
-fails" is also a real result** — the one that says whether the Tier-2 ceiling is permanent.
+**⚠ LANE L's FIRST TWO UNITS IN 400 LEGS (`L5`, `L6`) — block retired VERBATIM 2026-08-19 →
+`WALLS_HISTORY.md` §W-LANEL-FIRSTTWO.** Both are now qualified by `CORRECTIONS.md` §51 (budget),
+§52 (`J` divergent) and §53 (the sign protects both `NO`s). **The answers stand; the numbers do not.**
 
 ## LANE R — REFORMULATION FOR SCALE, AND SOLVER COMPETITIVENESS. *Continuous, unchanged 2026-08-14.*
 
