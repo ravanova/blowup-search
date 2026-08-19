@@ -4390,5 +4390,7 @@ digits, which is `RECOMPUTED` for **the identity used** and nothing more.
 of 2D Kolmogorov flow at Re = 60; it bears on the credibility of one recovery-of-published-orbits
 claim inside Lane R and on nothing above it."* **A tightened negative is not progress toward Clay.**
 No wall moved. `W4` clause (c) — the torus, statement (D) — remains **UNTESTED, NOT CLOSED.**
+**POST-INTEGRATION INTEGRITY, and it is the unit that checked, not me.** On teardown `E-FE` noticed its artefact's mtime had moved under a concurrent session and re-checked rather than assume: all four of its files byte-identical to `HEAD`, the last commit touching `writeup/data/p2_e_fe_v1.json` still its own `1f27071`, `self_hash` still a fixed point. **I confirmed all three independently after the integration commit `832a3fb`** — `git log -1` on the artefact still returns `1f27071`, and I recomputed `dd42c307aa63ae3b` a second time. **Nothing of the unit's was rewritten by the integration**, which is the property `W3` ruling Q3 exists to protect and the first time in this run it has been checked from both sides.
+
 **This unit is UNVERIFIED: it verified nothing of its own beyond the `self_hash` fixed point, a
 verifier was budgeted separately, and the run is stopped. It lands UNVERIFIED and must be cited so.**

@@ -1077,6 +1077,22 @@ provably obsolete. (Added 2026-08-11, ported from the Project Building Engine.)
 
 **2026-08-19 — THE TOOL-OUTPUT CHANNEL DROPS WORDS, INCLUDING INSIDE `repr()`.** Hit independently by `P4-DRAFT` (leg 414) and by the Conductor twice this session, reading `WALLS.md` and `test_headroom.py`; characters are silently removed from the middle of lines. **Any ruling made by eye off a piped tool read is unsafe.** Byte-level checks and exact file reads are the only trustworthy read. This is an ACTIVE hazard, not historical.
 
+
+- **LEAKED WATCHER PROCESSES OUTLIVE THE UNITS THEY WATCH — measured 2026-08-19, and it is worse
+  than the unit that reported it knew.** `E-FE` (leg 408) disclosed on teardown that four of its own
+  watchers survived the solver and kept firing heartbeats reading `160/160` for over a day: the
+  heartbeat loop's `break` on zero driver processes is evaluated only AFTER its `sleep 3600`, and the
+  sibling `tail -f | grep` log watcher had **no exit condition at all**. **Conductor finding: the leak
+  is at least two units deep.** A `ps` sweep at integration time found
+  `tail -f experiments/route4/l6b_run.log` **still alive at 65,611 s = 18.2 hours**, belonging to
+  `L6-b` — a WAVE 8 unit that closed before `E-FE` even landed — plus two `sleep 3600` loops of ages
+  1,430 s and 244 s.
+- **I did NOT kill them, deliberately.** A concurrent CONDUCTOR session exists (recorded on `main`,
+  `772399f`), process ownership is not determinable from inside this session, and killing another
+  session's watcher is not a wind-down integrator's call. A blocked `tail -f` costs a PID and an fd,
+  not CPU. **The finding is recorded; the cleanup is left to whoever owns the processes.**
+- **Cheap fix for every future unit, from `E-FE`'s own teardown:** give every watcher a hard deadline
+  (`timeout`), and test the break condition BEFORE the sleep, not after.
 ## Known flakes
 
 Tests confirmed to fail under load (many worktrees gating at once) and pass in isolation —
