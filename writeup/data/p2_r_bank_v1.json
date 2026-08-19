@@ -1,0 +1,616 @@
+{
+ "artefact": {
+  "bytes_on_disk": 737408,
+  "fields": "experiments/programme_r4/seedbank/seed_fields.npy",
+  "fields_file_sha256": "9659913f307936ed9b8daf0641b8b9bc9b81befcfc17d85d600c656ffc33d35e",
+  "manifest": "experiments/programme_r4/seedbank/manifest.json",
+  "n_fields": 160,
+  "payload_bytes": 737280
+ },
+ "ceilings": [
+  {
+   "ceiling": "Gate (ii) is NOT a byte comparison and is not reported as one. e_hhard_ledger.json is a per-Newton-iteration ledger and holds NO field bytes: run_attempt pops _w0, and only the 2 converged attempts had a state saved at all. What the ledger supports is exact float64 equality of the iteration-0 record (residual_before, T_before, s_before), a functional of the field. A one-ULP change to the field would move residual_before, so the check has teeth -- but it is a functional check, not a byte check, and the two are not the same statement.",
+   "id": "C1"
+  },
+  {
+   "ceiling": "Gate (i) was run in THIS working tree, against THIS copy of u2_dns_ckpt.npy. It establishes that the banked bytes are what regenerate() produces HERE, on this CPU, under this numpy/FFT build. It does NOT establish that a different machine's regenerate() would produce the same bytes. That is precisely why banking the fields is worth doing -- but it means the artefact is now the DEFINITION of the seed, not a cache of a machine-independent one.",
+   "id": "C2"
+  },
+  {
+   "ceiling": "Gate (iii) is ONE attempt of 16, chosen as the cheapest (E's attempt 15, 0.22 h banked). It is the only one of the 16 re-run. The other 15 are covered only by gate (ii)'s iteration-0 check, which pins the seed but not the whole solve.",
+   "id": "C3"
+  },
+  {
+   "ceiling": "The 144 NON-original fields have never been fed to the solver by anything. They are verified as BYTES against regenerate(); no attempt has been run from any of them. Their seed residuals are unknown and this unit does not estimate them.",
+   "id": "C4"
+  },
+  {
+   "ceiling": "The row-major draw order is a CHOICE, declared in the module docstring, not forced by E's rule. A round-robin draw would have produced a different 144. Nothing here measures whether the choice matters; it is recorded so that E-FE's null, if it gets one, names its own realization (lesson 91).",
+   "id": "C5"
+  }
+ ],
+ "clay_movement": {
+  "L1_to_L4_link_moved": "none",
+  "scale_is_not_evidence": "737 KB of committed fields is a portability fact, not evidence about the Navier-Stokes object",
+  "tier": "this unit produces no candidate and no certificate; Tier 2 is never a proof"
+ },
+ "cost_and_shortfall": {
+  "UNDER_RESOURCED": false,
+  "briefed_budget": "~10^0 core-h (SS3d: 'this unit is cheap')",
+  "load_context": {
+   "cores": 12,
+   "load_average_during_run": 15.0,
+   "note": "three sibling wave-7 units ran concurrently in this tree; the demo attempt took 1173.3 s against E's banked 798.3 s for the same attempt, a 1.47x inflation that is CONTENTION, not a difference in the computation -- the result is bit-identical"
+  },
+  "measured": {
+   "build_seconds": 230.0,
+   "demo_attempt_seconds": 1173.3,
+   "exploration_and_setup_seconds_estimate": 900,
+   "n_verify_runs": 2,
+   "total_core_hours_estimate": 1.06,
+   "verify_seconds_per_run": 1166.87
+  },
+  "verdict": "inside the briefed order of magnitude. Bit-identity did NOT require re-running the 3.4 h DNS -- the checkpoint archive was present in this working tree and one regenerate() call costs ~2.3 s under load.",
+  "what_the_artefact_buys": {
+   "avoided_core_hours_at_8_shards": 27.5,
+   "dns_artefact_bytes": 268864256,
+   "dns_source": "experiments/programme_r4/u2_dns_meta.json, U2's own meta",
+   "dns_wall_hours": 3.439,
+   "dns_wall_seconds": 12379.473534584045,
+   "e_fe_priced_core_hours": 90.9,
+   "fraction_of_E_FE_saved": 0.303,
+   "second_benefit": "the artefact is TRACKED, so it cannot die with a container, which the DNS checkpoints have done twice",
+   "seedbank_file_bytes": 737408,
+   "size_ratio": 364.6
+  }
+ },
+ "defects_found": [
+  {
+   "claim": "'Large binary artefacts of the T=1e5 DNS ... (~1.2 GB)'",
+   "id": "D1",
+   "measured": "u2_dns_ckpt.npy 36,864,128 B + u2_dns_feat.f32 232,000,128 B = 268,864,256 B = 268.9 MB",
+   "measured_bytes": 268864256,
+   "note": "the '~1.2 GB' figure is repeated in WAVE7_PLAN.md SS A and in this unit's own dispatch. It is wrong by 4.5x. The ARGUMENT is unaffected -- 268.9 MB is still 365x the seedbank and still gitignored and still 3.44 h to regenerate -- but the number should not propagate further uncorrected. The existing .gitignore line is NOT REWRITTEN -- the standing rule (W3 ruling Q3) is that a banked datum gets a correction record beside it, not an edit. The correction sits in this unit's own appended block. Its restatements in WAVE7_PLAN.md SS A and in this unit's dispatch are the Conductor's files and are left alone.",
+   "repaired": "correction recorded beside it, original not edited",
+   "where": "experiments/programme_r4/.gitignore, header comment"
+  }
+ ],
+ "gate": {
+  "i_bit_identical_to_regenerate": {
+   "answer": "YES",
+   "batch_call_cross_check": {
+    "answer": "YES",
+    "n_bit_identical": 160,
+    "note": "E regenerated all 16 of its seeds in ONE call; a shard will call for one. Both are measured so batch context is not an untested assumption."
+   },
+   "mismatches": [],
+   "n_bit_identical": 160,
+   "n_checked": 160,
+   "one_snapshot_per_call": true,
+   "question": "is every field bit-identical to what u2_m2_dns_recurrence.regenerate produces from the same snapshot index?"
+  },
+  "ii_E_16_against_E_banked_ledger": {
+   "answer": "YES",
+   "ceiling": "exact float64 equality of the iteration-0 record (residual_before, T_before, s_before), which is a functional of the field; the ledger holds NO field bytes, so this is not a byte comparison and is not reported as one",
+   "n_checked": 16,
+   "n_matching": 16,
+   "n_matching_curated_json": 16,
+   "per_attempt": [
+    {
+     "arm": "S",
+     "curated_match": true,
+     "e_attempt_index": 0,
+     "exact_float_equal": true,
+     "ledger_T_before": 19.334,
+     "ledger_match": true,
+     "ledger_residual_before": 20.059797465311412,
+     "ledger_s_before": 0.375,
+     "recomputed_s_seeded": 0.375,
+     "recomputed_seed_residual": 20.059797465311412,
+     "row": "UPO37",
+     "snapshot_index": 339393,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "Q",
+     "curated_match": true,
+     "e_attempt_index": 1,
+     "exact_float_equal": true,
+     "ledger_T_before": 19.334,
+     "ledger_match": true,
+     "ledger_residual_before": 33.01940937828841,
+     "ledger_s_before": -0.375,
+     "recomputed_s_seeded": -0.375,
+     "recomputed_seed_residual": 33.01940937828841,
+     "row": "UPO37",
+     "snapshot_index": 202493,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "S",
+     "curated_match": true,
+     "e_attempt_index": 2,
+     "exact_float_equal": true,
+     "ledger_T_before": 18.912,
+     "ledger_match": true,
+     "ledger_residual_before": 38.60894351214967,
+     "ledger_s_before": -0.7071853071795857,
+     "recomputed_s_seeded": -0.7071853071795857,
+     "recomputed_seed_residual": 38.60894351214967,
+     "row": "UPO35",
+     "snapshot_index": 233995,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "Q",
+     "curated_match": true,
+     "e_attempt_index": 3,
+     "exact_float_equal": true,
+     "ledger_T_before": 18.912,
+     "ledger_match": true,
+     "ledger_residual_before": 54.937198140536,
+     "ledger_s_before": -0.7071853071795857,
+     "recomputed_s_seeded": -0.7071853071795857,
+     "recomputed_seed_residual": 54.937198140536,
+     "row": "UPO35",
+     "snapshot_index": 89337,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "S",
+     "curated_match": true,
+     "e_attempt_index": 4,
+     "exact_float_equal": true,
+     "ledger_T_before": 18.878,
+     "ledger_match": true,
+     "ledger_residual_before": 36.200021562267914,
+     "ledger_s_before": 0.41800000000000015,
+     "recomputed_s_seeded": 0.41800000000000015,
+     "recomputed_seed_residual": 36.200021562267914,
+     "row": "UPO34",
+     "snapshot_index": 20441,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "Q",
+     "curated_match": true,
+     "e_attempt_index": 5,
+     "exact_float_equal": true,
+     "ledger_T_before": 18.878,
+     "ledger_match": true,
+     "ledger_residual_before": 47.799362048258075,
+     "ledger_s_before": -0.41800000000000015,
+     "recomputed_s_seeded": -0.41800000000000015,
+     "recomputed_seed_residual": 47.799362048258075,
+     "row": "UPO34",
+     "snapshot_index": 284402,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "S",
+     "curated_match": true,
+     "e_attempt_index": 6,
+     "exact_float_equal": true,
+     "ledger_T_before": 18.694,
+     "ledger_match": true,
+     "ledger_residual_before": 28.85649124767403,
+     "ledger_s_before": 0.43400000000000016,
+     "recomputed_s_seeded": 0.43400000000000016,
+     "recomputed_seed_residual": 28.85649124767403,
+     "row": "UPO32",
+     "snapshot_index": 173318,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "Q",
+     "curated_match": true,
+     "e_attempt_index": 7,
+     "exact_float_equal": true,
+     "ledger_T_before": 18.694,
+     "ledger_match": true,
+     "ledger_residual_before": 31.212056662591014,
+     "ledger_s_before": -0.43400000000000016,
+     "recomputed_s_seeded": -0.43400000000000016,
+     "recomputed_seed_residual": 31.212056662591014,
+     "row": "UPO32",
+     "snapshot_index": 89310,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "S",
+     "curated_match": true,
+     "e_attempt_index": 8,
+     "exact_float_equal": true,
+     "ledger_T_before": 17.16,
+     "ledger_match": true,
+     "ledger_residual_before": 25.739493458991866,
+     "ledger_s_before": 0.36099999999999977,
+     "recomputed_s_seeded": 0.36099999999999977,
+     "recomputed_seed_residual": 25.739493458991866,
+     "row": "UPO22",
+     "snapshot_index": 116426,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "Q",
+     "curated_match": true,
+     "e_attempt_index": 9,
+     "exact_float_equal": true,
+     "ledger_T_before": 17.16,
+     "ledger_match": true,
+     "ledger_residual_before": 47.039830521985195,
+     "ledger_s_before": -0.36099999999999977,
+     "recomputed_s_seeded": -0.36099999999999977,
+     "recomputed_seed_residual": 47.039830521985195,
+     "row": "UPO22",
+     "snapshot_index": 212104,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "S",
+     "curated_match": true,
+     "e_attempt_index": 10,
+     "exact_float_equal": true,
+     "ledger_T_before": 16.908,
+     "ledger_match": true,
+     "ledger_residual_before": 23.983095652358475,
+     "ledger_s_before": -0.5529999999999999,
+     "recomputed_s_seeded": -0.5529999999999999,
+     "recomputed_seed_residual": 23.983095652358475,
+     "row": "UPO20",
+     "snapshot_index": 42838,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "Q",
+     "curated_match": true,
+     "e_attempt_index": 11,
+     "exact_float_equal": true,
+     "ledger_T_before": 16.908,
+     "ledger_match": true,
+     "ledger_residual_before": 54.86640892896297,
+     "ledger_s_before": 0.5529999999999999,
+     "recomputed_s_seeded": 0.5529999999999999,
+     "recomputed_seed_residual": 54.86640892896297,
+     "row": "UPO20",
+     "snapshot_index": 10550,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "S",
+     "curated_match": true,
+     "e_attempt_index": 12,
+     "exact_float_equal": true,
+     "ledger_T_before": 16.753,
+     "ledger_match": true,
+     "ledger_residual_before": 29.28654605207489,
+     "ledger_s_before": -0.4820000000000002,
+     "recomputed_s_seeded": -0.4820000000000002,
+     "recomputed_seed_residual": 29.28654605207489,
+     "row": "UPO17",
+     "snapshot_index": 163668,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "Q",
+     "curated_match": true,
+     "e_attempt_index": 13,
+     "exact_float_equal": true,
+     "ledger_T_before": 16.753,
+     "ledger_match": true,
+     "ledger_residual_before": 38.08203781201913,
+     "ledger_s_before": -0.4820000000000002,
+     "recomputed_s_seeded": -0.4820000000000002,
+     "recomputed_seed_residual": 38.08203781201913,
+     "row": "UPO17",
+     "snapshot_index": 392199,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "S",
+     "curated_match": true,
+     "e_attempt_index": 14,
+     "exact_float_equal": true,
+     "ledger_T_before": 14.776,
+     "ledger_match": true,
+     "ledger_residual_before": 22.184908149744597,
+     "ledger_s_before": -0.29499999999999993,
+     "recomputed_s_seeded": -0.29499999999999993,
+     "recomputed_seed_residual": 22.184908149744597,
+     "row": "UPO9",
+     "snapshot_index": 390405,
+     "ulp_gap": 0
+    },
+    {
+     "arm": "Q",
+     "curated_match": true,
+     "e_attempt_index": 15,
+     "exact_float_equal": true,
+     "ledger_T_before": 14.776,
+     "ledger_match": true,
+     "ledger_residual_before": 24.26885871223562,
+     "ledger_s_before": -0.29499999999999993,
+     "recomputed_s_seeded": -0.29499999999999993,
+     "recomputed_seed_residual": 24.26885871223562,
+     "row": "UPO9",
+     "snapshot_index": 392192,
+     "ulp_gap": 0
+    }
+   ],
+   "question": "do E's 16 original fields verify against E's banked ledger e_hhard_ledger.json?"
+  },
+  "iii_attempt_without_the_dns_checkpoint": {
+   "answer": "YES",
+   "arm": "Q",
+   "attempt": 15,
+   "banked_wall_seconds": 798.2659857273102,
+   "comparison": [
+    {
+     "banked": "converged",
+     "exact_equal": true,
+     "field": "reason",
+     "reproduced": "converged"
+    },
+    {
+     "banked": true,
+     "exact_equal": true,
+     "field": "success",
+     "reproduced": true
+    },
+    {
+     "banked": 2.0552353500244844e-10,
+     "exact_equal": true,
+     "field": "final_residual",
+     "reproduced": 2.0552353500244844e-10
+    },
+    {
+     "banked": 12,
+     "exact_equal": true,
+     "field": "n_iters",
+     "reproduced": 12
+    },
+    {
+     "banked": 16.536902623501312,
+     "exact_equal": true,
+     "field": "T_converged",
+     "reproduced": 16.536902623501312
+    },
+    {
+     "banked": -0.09939218012637738,
+     "exact_equal": true,
+     "field": "s_converged",
+     "reproduced": -0.09939218012637738
+    },
+    {
+     "banked": 0.0993921801263773,
+     "exact_equal": true,
+     "field": "abs_s_converged",
+     "reproduced": 0.0993921801263773
+    },
+    {
+     "banked": null,
+     "exact_equal": true,
+     "field": "matched_row",
+     "reproduced": null
+    },
+    {
+     "banked": false,
+     "exact_equal": true,
+     "field": "recovered_named_orbit",
+     "reproduced": false
+    },
+    {
+     "banked": false,
+     "exact_equal": true,
+     "field": "recovered_any_named_orbit",
+     "reproduced": false
+    },
+    {
+     "banked": [
+      18,
+      19,
+      19,
+      18,
+      19,
+      18,
+      17,
+      15,
+      15,
+      16,
+      15,
+      16
+     ],
+     "exact_equal": true,
+     "field": "krylov_dims",
+     "reproduced": [
+      18,
+      19,
+      19,
+      18,
+      19,
+      18,
+      17,
+      15,
+      15,
+      16,
+      15,
+      16
+     ]
+    },
+    {
+     "banked": [
+      3,
+      2,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "exact_equal": true,
+     "field": "radius_trials",
+     "reproduced": [
+      3,
+      2,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "banked": [
+      24.26885871223562,
+      21.201028446691748,
+      15.177046686188095,
+      10.452380550345856,
+      6.824322551435131,
+      4.184691769510818,
+      3.645142892508107,
+      1.6457439822035447,
+      0.5092662551735222,
+      0.014321201151248384,
+      4.552183481435616e-05,
+      3.594077662417932e-08,
+      2.0552353500244844e-10
+     ],
+     "exact_equal": true,
+     "field": "residual_history",
+     "reproduced": [
+      24.26885871223562,
+      21.201028446691748,
+      15.177046686188095,
+      10.452380550345856,
+      6.824322551435131,
+      4.184691769510818,
+      3.645142892508107,
+      1.6457439822035447,
+      0.5092662551735222,
+      0.014321201151248384,
+      4.552183481435616e-05,
+      3.594077662417932e-08,
+      2.0552353500244844e-10
+     ]
+    },
+    {
+     "banked": 49.7020095287706,
+     "exact_equal": true,
+     "field": "seed_residual_plus",
+     "reproduced": 49.7020095287706
+    },
+    {
+     "banked": 24.26885871223562,
+     "exact_equal": true,
+     "field": "seed_residual_minus",
+     "reproduced": 24.26885871223562
+    },
+    {
+     "banked": -0.29499999999999993,
+     "exact_equal": true,
+     "field": "s_seeded",
+     "reproduced": -0.29499999999999993
+    }
+   ],
+   "dns_artefacts_absent_in_this_tree": true,
+   "n_iterations_banked": 12,
+   "n_iterations_byte_equal": 12,
+   "n_iterations_reproduced": 12,
+   "n_scalar_fields_checked": 16,
+   "n_scalar_fields_exact": 16,
+   "note": "bit-for-bit here means exact equality of every banked float, compared through canonical JSON, not a tolerance",
+   "per_iteration_ledger_exact": true,
+   "row": "UPO9",
+   "seeded_from": "experiments/programme_r4/seedbank (manifest + npy)",
+   "tree": "/tmp/claude-1001/-home-andy-projects-Unsolved/3e4ba4ff-0366-4658-9679-dfff7963a1db/scratchpad/nodns",
+   "wall_seconds": 1173.3
+  }
+ },
+ "gate_source": "writeup/waves/WAVE7_PLAN.md SS A, on main, final wording",
+ "kind": "reproducibility / instrument",
+ "lane": "R",
+ "leg": 404,
+ "programme": "PROG-R4",
+ "readings": {
+  "a_NO_would_have_been_more_valuable": true,
+  "pre_committed": "anything short of 160/160 bit-identical means the ensemble DOES NOT LAUNCH from this artefact and the shortfall is a finding about the re-integration path's determinism, reported as one and not patched around",
+  "which_fired": "160/160 -- the artefact is launchable. Nothing was loosened: the comparator is SHA-256 over the float64 buffer and contains no tolerance to loosen"
+ },
+ "self_hash": "3b592e3c21bf7a42",
+ "self_hash_recipe": "sha256(json.dumps(doc minus self_hash, self_hash_recipe, verify_seconds, sort_keys=True))[:16]",
+ "selftests": [
+  {
+   "n_expected": 16,
+   "n_matched": 16,
+   "name": "T1_pick_reproduces_E_select_seeds",
+   "passed": true
+  },
+  {
+   "n_checked": 160,
+   "n_ok": 160,
+   "name": "T2_manifest_sha256_recomputes",
+   "passed": true
+  },
+  {
+   "n_distinct_snapshots": 160,
+   "n_fields": 160,
+   "n_row_arm_keys": 16,
+   "name": "T3_shape_8_rows_x_2_arms_x_10_fields",
+   "passed": true,
+   "per_key_counts": [
+    10
+   ]
+  },
+  {
+   "n_matching_E_select_seeds": 16,
+   "n_originals": 16,
+   "name": "T4_E_originals_present_at_field_index_0",
+   "passed": true
+  },
+  {
+   "manifest": "9659913f307936ed9b8daf0641b8b9bc9b81befcfc17d85d600c656ffc33d35e",
+   "name": "T5_fields_file_sha256",
+   "on_disk": "9659913f307936ed9b8daf0641b8b9bc9b81befcfc17d85d600c656ffc33d35e",
+   "passed": true
+  },
+  {
+   "expect": true,
+   "got": true,
+   "name": "C_POS_unmodified_field_is_identical"
+  },
+  {
+   "expect": true,
+   "got": true,
+   "name": "C_NEG_one_ulp_perturbation_is_caught",
+   "perturbation_abs": 1.3877787807814457e-17
+  },
+  {
+   "expect": true,
+   "got": true,
+   "name": "C_NEG_distinct_snapshots_have_distinct_hashes"
+  }
+ ],
+ "sources_3k": {
+  "depth": "RECOMPUTED (own code, re-executed and byte-compared)",
+  "external_machinery": [
+   "SHA-256 (FIPS 180-4)",
+   "IEEE-754 binary64"
+  ],
+  "new_rows_added_to_SOURCES_md": 0,
+  "rule_3_exemption": "STATED, not assumed: this unit implements no published method. It re-executes this repository's own code (regenerate, select_seeds, solve_with_stall_exit) and hashes the output bytes."
+ },
+ "unit": "R-bank",
+ "verify_seconds": 1106.56,
+ "wave": 7,
+ "what": "bank the 160 E-FE seed fields so no shard needs the 1.2 GB gitignored DNS artefacts, and prove the banked bytes are the bytes the re-integration path produces"
+}

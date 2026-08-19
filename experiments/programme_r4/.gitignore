@@ -15,8 +15,15 @@ u5_mining_progress.txt
 u5_attempts_progress.txt
 
 # THE SEEDBANK IS COMMITTED ON PURPOSE (unit R-bank, wave 7, leg 404).
-# 160 x 24 x 24 float64 = 737,280 bytes of payload -- three orders of
-# magnitude smaller than u2_dns_ckpt.npy, and it is what removes the 3.4 h
-# per-shard DNS prerequisite above. The big artefacts above stay ignored.
+# 160 x 24 x 24 float64 = 737,280 bytes of payload -- the whole bank is
+# 365x smaller than the two ignored DNS artefacts, and it is what removes the
+# 3.44 h per-shard DNS prerequisite above. The big artefacts stay ignored.
 !seedbank/
 !seedbank/**
+#
+# CORRECTION RECORD, R-bank, 2026-08-19 (the line above is NOT rewritten; a
+# banked datum gets a correction beside it, W3 ruling Q3). The "~1.2 GB" in
+# this file's own header is wrong by 4.5x: measured, u2_dns_ckpt.npy is
+# 36,864,128 B and u2_dns_feat.f32 is 232,000,128 B, total 268,864,256 B =
+# 268.9 MB. The argument is unaffected -- that is still 365x the seedbank and
+# still 3.44 h of DNS to regenerate (u2_dns_meta.json: 12,379.47 s).

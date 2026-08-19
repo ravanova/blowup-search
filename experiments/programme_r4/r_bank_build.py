@@ -82,6 +82,14 @@ Usage:
     .venv/bin/python experiments/programme_r4/r_bank_build.py --build
     .venv/bin/python experiments/programme_r4/r_bank_build.py --verify
     .venv/bin/python experiments/programme_r4/r_bank_build.py --demo-attempt 15
+    .venv/bin/python experiments/programme_r4/r_bank_build.py --rehash
+
+--verify is the re-runnable evidence command and reproduces every count. It
+needs u2_dns_ckpt.npy for gate (i) ONLY; without it gate (i) reports NOT_RUN
+with the reason and every other check still runs -- which is itself the point
+of the unit. The self_hash recipe excludes verify_seconds, so a verifier's
+wall clock does not move it while every count, gate answer and SHA-256 is
+inside it.
 """
 from __future__ import annotations
 
@@ -380,6 +388,110 @@ def load_seed(row, arm, field_index=0):
 
 
 # ==========================================================================
+# COST, CEILINGS, DEFECTS -- measured, and stated whether or not asked for
+# ==========================================================================
+
+# Every second below was measured on this box, which carried three concurrent
+# sibling units throughout: load average ~15 on 12 cores. Wall figures are
+# therefore INFLATED relative to an idle machine and are not normalised.
+COST = dict(
+    UNDER_RESOURCED=False,
+    briefed_budget="~10^0 core-h (SS3d: 'this unit is cheap')",
+    measured=dict(
+        build_seconds=230.0,
+        verify_seconds_per_run=1166.87,
+        n_verify_runs=2,
+        demo_attempt_seconds=1173.3,
+        exploration_and_setup_seconds_estimate=900,
+        total_core_hours_estimate=1.06),
+    verdict=("inside the briefed order of magnitude. Bit-identity did NOT "
+             "require re-running the 3.4 h DNS -- the checkpoint archive was "
+             "present in this working tree and one regenerate() call costs "
+             "~2.3 s under load."),
+    load_context=dict(
+        cores=12, load_average_during_run=15.0,
+        note=("three sibling wave-7 units ran concurrently in this tree; the "
+              "demo attempt took 1173.3 s against E's banked 798.3 s for the "
+              "same attempt, a 1.47x inflation that is CONTENTION, not a "
+              "difference in the computation -- the result is bit-identical")),
+    what_the_artefact_buys=dict(
+        dns_wall_seconds=12379.473534584045,
+        dns_wall_hours=3.439,
+        dns_source="experiments/programme_r4/u2_dns_meta.json, U2's own meta",
+        dns_artefact_bytes=268864256,
+        seedbank_file_bytes=737408,
+        size_ratio=364.6,
+        avoided_core_hours_at_8_shards=27.5,
+        e_fe_priced_core_hours=90.9,
+        fraction_of_E_FE_saved=0.303,
+        second_benefit=("the artefact is TRACKED, so it cannot die with a "
+                        "container, which the DNS checkpoints have done "
+                        "twice")))
+
+CEILINGS = [
+    dict(id="C1",
+         ceiling=("Gate (ii) is NOT a byte comparison and is not reported as "
+                  "one. e_hhard_ledger.json is a per-Newton-iteration ledger "
+                  "and holds NO field bytes: run_attempt pops _w0, and only "
+                  "the 2 converged attempts had a state saved at all. What "
+                  "the ledger supports is exact float64 equality of the "
+                  "iteration-0 record (residual_before, T_before, s_before), "
+                  "a functional of the field. A one-ULP change to the field "
+                  "would move residual_before, so the check has teeth -- but "
+                  "it is a functional check, not a byte check, and the two "
+                  "are not the same statement.")),
+    dict(id="C2",
+         ceiling=("Gate (i) was run in THIS working tree, against THIS copy "
+                  "of u2_dns_ckpt.npy. It establishes that the banked bytes "
+                  "are what regenerate() produces HERE, on this CPU, under "
+                  "this numpy/FFT build. It does NOT establish that a "
+                  "different machine's regenerate() would produce the same "
+                  "bytes. That is precisely why banking the fields is worth "
+                  "doing -- but it means the artefact is now the DEFINITION "
+                  "of the seed, not a cache of a machine-independent one.")),
+    dict(id="C3",
+         ceiling=("Gate (iii) is ONE attempt of 16, chosen as the cheapest "
+                  "(E's attempt 15, 0.22 h banked). It is the only one of "
+                  "the 16 re-run. The other 15 are covered only by gate "
+                  "(ii)'s iteration-0 check, which pins the seed but not the "
+                  "whole solve.")),
+    dict(id="C4",
+         ceiling=("The 144 NON-original fields have never been fed to the "
+                  "solver by anything. They are verified as BYTES against "
+                  "regenerate(); no attempt has been run from any of them. "
+                  "Their seed residuals are unknown and this unit does not "
+                  "estimate them.")),
+    dict(id="C5",
+         ceiling=("The row-major draw order is a CHOICE, declared in the "
+                  "module docstring, not forced by E's rule. A round-robin "
+                  "draw would have produced a different 144. Nothing here "
+                  "measures whether the choice matters; it is recorded so "
+                  "that E-FE's null, if it gets one, names its own "
+                  "realization (lesson 91).")),
+]
+
+DEFECTS = [
+    dict(id="D1", where="experiments/programme_r4/.gitignore, header comment",
+         claim="'Large binary artefacts of the T=1e5 DNS ... (~1.2 GB)'",
+         measured_bytes=268864256,
+         measured="u2_dns_ckpt.npy 36,864,128 B + u2_dns_feat.f32 "
+                  "232,000,128 B = 268,864,256 B = 268.9 MB",
+         note=("the '~1.2 GB' figure is repeated in WAVE7_PLAN.md SS A and in "
+               "this unit's own dispatch. It is wrong by 4.5x. The ARGUMENT "
+               "is unaffected -- 268.9 MB is still 365x the seedbank and "
+               "still gitignored and still 3.44 h to regenerate -- but the "
+               "number should not propagate further uncorrected. The "
+               "existing .gitignore line is NOT REWRITTEN -- the standing "
+               "rule (W3 ruling Q3) is that a banked datum gets a correction "
+               "record beside it, not an edit. The correction sits in this "
+               "unit's own appended block. Its restatements in "
+               "WAVE7_PLAN.md SS A and in this unit's dispatch are the "
+               "Conductor's files and are left alone."),
+         repaired="correction recorded beside it, original not edited"),
+]
+
+
+# ==========================================================================
 # VERIFY
 # ==========================================================================
 
@@ -638,6 +750,19 @@ def verify(args):
                     note="run --demo-attempt N in a checkout with the DNS "
                          "artefacts removed, then re-run --verify"))),
         selftests=tests,
+        readings=dict(
+            pre_committed=("anything short of 160/160 bit-identical means the "
+                           "ensemble DOES NOT LAUNCH from this artefact and "
+                           "the shortfall is a finding about the "
+                           "re-integration path's determinism, reported as "
+                           "one and not patched around"),
+            which_fired=("160/160 -- the artefact is launchable. Nothing was "
+                         "loosened: the comparator is SHA-256 over the "
+                         "float64 buffer and contains no tolerance to loosen"),
+            a_NO_would_have_been_more_valuable=True),
+        cost_and_shortfall=COST,
+        ceilings=CEILINGS,
+        defects_found=DEFECTS,
         clay_movement=dict(
             L1_to_L4_link_moved="none",
             tier="this unit produces no candidate and no certificate; "
@@ -659,10 +784,19 @@ def verify(args):
     return doc
 
 
+# Fields whose value is wall-clock of THIS run and therefore cannot be part of
+# a hash an independent verifier is expected to reproduce. Everything else --
+# every count, every gate answer, every SHA-256 -- is inside the hash.
+VOLATILE = ("self_hash", "self_hash_recipe", "verify_seconds")
+
+
 def finalise(doc):
-    doc.pop("self_hash", None)
-    body = json.dumps(doc, sort_keys=True)
+    body = json.dumps({k: v for k, v in doc.items() if k not in VOLATILE},
+                      sort_keys=True)
     doc["self_hash"] = hashlib.sha256(body.encode()).hexdigest()[:16]
+    doc["self_hash_recipe"] = (
+        "sha256(json.dumps(doc minus " + ", ".join(VOLATILE)
+        + ", sort_keys=True))[:16]")
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w") as f:
         json.dump(doc, f, indent=1, sort_keys=True)
@@ -775,9 +909,22 @@ def main():
     ap.add_argument("--build", action="store_true")
     ap.add_argument("--verify", action="store_true")
     ap.add_argument("--demo-attempt", type=int, default=None)
+    # --rehash re-applies the self_hash RECIPE to the banked document without
+    # re-running gate (i), which costs ~19 min of a contended box. It changes
+    # NO count: it exists because the recipe was made timing-independent after
+    # the counts were produced, and re-running the whole verify to move a hash
+    # would have contended with a Lane-L run on the Clay chain.
+    ap.add_argument("--rehash", action="store_true")
     ap.add_argument("--ckpt", default=None)
     ap.add_argument("--no-write", action="store_true")
     args = ap.parse_args()
+    if args.rehash:
+        with open(OUT) as f:
+            doc = json.load(f)
+        doc.pop("self_hash", None)
+        doc.pop("self_hash_recipe", None)
+        finalise(doc)
+        return
     if args.build:
         build(args)
     if args.demo_attempt is not None:
@@ -789,7 +936,8 @@ def main():
         else:
             finalise(doc)
     if not (args.build or args.verify or args.demo_attempt is not None):
-        ap.error("one of --build / --verify / --demo-attempt is required")
+        ap.error("one of --build / --verify / --demo-attempt / --rehash "
+                 "is required")
 
 
 if __name__ == "__main__":
