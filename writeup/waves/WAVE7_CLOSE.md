@@ -550,3 +550,36 @@ beliefs, and the beliefs are what choose the next unit.**
 
 This is the seventh instance tonight of `CORRECTIONS.md` §40–§45's pattern and the first that the
 pattern's own remedy could not have caught, because there was nothing to check. **It goes to `P4`.**
+
+---
+
+## CONDUCTOR NOTE 2026-08-19 06:05 — E-FE PRICE AT 20 COMPLETIONS, AND A MIRRORED ERROR CAUGHT BEFORE BANKING
+
+**The number.** 20 of 160 attempts banked, mean `0.868` core-h each.
+
+| route | figure | note |
+|---|---|---|
+| core-hours, `160 x 0.868` | `138.9` core-h | vs briefed `91.0` = **x1.53** |
+| wall at 100% shard occupancy | `23.1` h | the figure banked at `48d303c` |
+| wall at measured occupancy | **`25.0` h** | finishes ~`03:21 20-Aug` local |
+
+**x1.53 sits at the CEILING of the banked x1.32-1.55 range, not outside it.** The range holds; the
+wall figure is revised `23.1 -> 25.0` h. E-FE remains a LATE RETURN into wave 8's close and its
+verdict still may not influence wave 8's ranking (ruling `99421dd`).
+
+**The part that matters more than the number.** The occupancy figure was first computed as **80.5%**,
+from `sum(hours of FINISHED attempts) / (wall x shards)`. That is wrong, and it is **the x2.09 error
+of 01:50 with the sign flipped**: there I billed work-in-progress to finished units and overstated
+the price; here I dropped work-in-progress from the numerator while leaving it in the denominator,
+and understated the occupancy. At any instant the 6 shards hold ~`S x mean/2 = 2.60` core-h of
+unfinished work. Counting it in both places gives **92.6%**, and the two independent routes then
+agree to within that estimate.
+
+**`CORRECTIONS.md` Sec 42 already forbids this** — *"names the window of BOTH its numerator and its
+denominator, and they are the same window"*. A ratio over shard-time has a third window nobody
+names: **the work in flight at the instant you take the ratio.** It belongs to the denominator's
+window whether or not it has finished, so it belongs to the numerator's.
+
+**No new Sec is opened.** This is an instance of Sec 42, not a defect in it, and the rule as written
+is what caught it. Recorded here rather than in `CORRECTIONS.md` because **nothing false was
+banked** — which is the whole point of the entry.

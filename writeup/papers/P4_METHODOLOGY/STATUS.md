@@ -60,6 +60,23 @@ what select the next unit. The instrument that caught the other six could not ha
 there was nothing to check. **That is the boundary of the entire method and the paper must state it
 where a reader cannot miss it.**
 
+**An eighth, at 06:05, and it is the FIRST ENTRY ON THIS PAGE WHERE A DISCIPLINE FIRED IN
+ADVANCE.** Costing a live ensemble, the Conductor computed shard occupancy as `sum(hours of FINISHED
+attempts) / (wall x shards) = 80.5%` and was about to project a wall-clock from it. That is the
+`x2.09` error of four hours earlier **with the sign flipped** — work-in-progress left in the
+denominator and dropped from the numerator. `CORRECTIONS.md` Sec 42, written at 03:10 in response to
+the first version, caught the second **before the number was banked**: corrected occupancy `92.6%`,
+and two independent routes to the price then agreed.
+
+**Why it belongs in the paper and not in the corrections file.** Every other row on this page is a
+retraction. This one is a rule, written in response to an error, catching a **differently-shaped**
+instance of the same error days-to-hours later, in a different lane, on a different quantity —
+which is the only kind of evidence that a discipline generalises rather than merely records. **One
+data point is not a claim**, and the paper must say so in the same breath; but the count of such
+points, currently `1` against `7` retrospective catches, is the honest headline number for a paper
+whose subject is whether any of this works.
+
+
 **What it costs this paper to say:** the six were caught in seventy-five minutes because two parties
 were reading the same live run for different reasons — and **four of the six were caught by the
 party who had just been corrected on the previous one.** That is not a discipline. It is two agents

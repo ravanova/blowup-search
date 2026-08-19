@@ -1,0 +1,17 @@
+{
+ "arm": "S",
+ "banked_wall_seconds": 2646.8674507141113,
+ "control": "C-REPRO",
+ "e_attempt_index": 0,
+ "fired_as_planted": true,
+ "global_index": 0,
+ "mismatches": [],
+ "n_iterations_banked": 21,
+ "n_iterations_byte_equal": 21,
+ "n_iterations_reproduced": 21,
+ "n_scalar_fields_checked": 16,
+ "n_scalar_fields_exact": 16,
+ "per_iteration_ledger_exact": true,
+ "reproduced_wall_seconds": 3335.9395520687103,
+ "row": "UPO37"
+}
