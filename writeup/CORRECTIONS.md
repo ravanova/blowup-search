@@ -2830,3 +2830,76 @@ both — and every correction came from someone opening the primary artefact for
 **The second and third corrections were each produced by a party who had just been corrected.** That
 is the mechanism working. It is not progress, it moves no `L1→L4` link, and §3i q7 counts three
 audit-kind actions in a row against the instrument.
+
+## §44 — a monotone trend manufactured from a non-monotone series, and the defect it exposes in MY OWN three-way licence: a single terminal sample cannot decide a threshold on a series with a 7-fold spread
+
+**Filed:** 2026-08-19 03:35, still before the gate number exists. **Two defects, one measurement.**
+
+### 1. The reported trend does not exist as reported
+
+`L6-b` reported the banked start's `scale_invariant_grad` as *"205 → 162 → 117 → 99.7 → 74.7,
+falling steadily."* Located in the run's own checkpoint trajectory, those five values occur at:
+
+| reported order | 205.1 | 161.8 | 116.9 | 99.7 | 74.7 |
+|---|---|---|---|---|---|
+| **actual `k`** | **4,700** | **3,900** | 7,000 | 7,400 | 7,700 |
+
+**`161.8` precedes `205.1` by 800 iterations. The reported chain puts them in the reverse of their
+true order**, which is what makes the sequence read as monotone. And it omits the two largest values
+in the same span: **`260.1` at `k = 5,500`** and **`423.9` at `k = 4,800`** — the latter being the
+global maximum after `k = 4,000` and **5.7× the current reading**.
+
+The series is not decaying steadily. Over the last 3,000 iterations, 61 samples:
+
+| start | min | p25 | median | p75 | max | max/min |
+|---|---|---|---|---|---|---|
+| `banked_J4` | 62.9 | 96.5 | 124.9 | 166.2 | 423.9 | **6.7×** |
+| `seed406` | 4.1 | 11.5 | 18.9 | 32.3 | 97.7 | **24.1×** |
+| `seed407` | 3.2 | 9.0 | 20.1 | 31.2 | 106.9 | **33.7×** |
+
+**Extrapolation from it is worthless and I checked before relying on it.** A log-linear fit over the
+last 3,000 iterations predicts `sig(20,000) = 2.01`; the same fit over the last 5,000 predicts
+`30.3`. **A forecast whose answer moves 15× with the choice of window is not a forecast.** I
+therefore make none, and the plain statement is: the banked start's relative gradient drifts
+downward inside a band that spans a factor of seven, and where it will sit at 20,000 is unknown.
+
+**Almost certainly innocent in origin** — an earlier report said *"down from 205.1 at `k = 4,700` and
+161.8 earlier"*, which is accurate, and the arrow chain is a later compression of it. **The
+compression is where the trend was created.** This is `CORRECTIONS.md` §42's family again: a
+statistic assembled from points drawn out of their own ordering.
+
+### 2. THE DEFECT IN MY AMENDMENT, which is the more serious half
+
+`CORRECTIONS.md` §41 gave `L6-b` a three-way licence keyed to **`scale_invariant_grad` at 20,000** —
+a **single sample** of a series whose trailing-window spread is 6.7× on the banked start and 24–34×
+on the seeds. **A single sample cannot decide a threshold crossing on a series like that.** Both
+seeds visit `sig ≈ 3.2–4.1` transiently while sitting at a median near 20; a terminal sample landing
+in a trough would license a reading the series does not support, and one landing on a spike would
+deny a reading it does.
+
+**I wrote that licence ten minutes after finding the gate it was fixing under-specified.** The fix
+had the same shape as the defect: it named a quantity without naming how the quantity is read.
+
+**THE AMENDMENT TO THE AMENDMENT.** The licence keys off a **trailing-window statistic, and in the
+conservative direction**: to license the "critical, pre-committed reading stands in full" row, the
+**MAXIMUM** of `scale_invariant_grad` over the last 2,000 iterations must be below 1 — not the
+terminal sample. *To claim a point is critical you must show it STAYS critical, not that it touched
+critical once.* The middle row is the default and requires nothing. `1.45` is untouched; the `YES`
+branch is untouched; the run is untouched. Report min / p25 / median / p75 / max over the trailing
+2,000 for all three starts alongside the terminal value.
+
+**On present numbers this changes no outcome** — the trailing minima are 62.9 and 3.2–4.1, all above
+1, so the middle row fires either way. **It is written down because it must be right for the right
+reason, and because the terminal-sample version would have been the load-bearing sentence in a
+different run.**
+
+### 3. One thing worth reporting in its own right
+
+**The two independent seeds' relative gradients are RISING, not falling** — log-linear fits over the
+last 3,000 iterations give `r = +0.77` and `r = +0.83`, strongly positive — **while their `J` falls**
+(≈18 → 10.7 and 11.2). `sig = ‖x‖‖∇J‖₂/|J|`, so a falling `J` raises `sig` unless the gradient falls
+faster, and it is not. **They are descending in objective while becoming relatively LESS stationary.**
+That is a fact about the landscape, not about the optimiser, and it belongs in the artefact.
+
+**Not progress.** No `L1→L4` link moves. This is the fourth audit-kind action in a row and §3i q7
+counts every one of them against the instrument.
