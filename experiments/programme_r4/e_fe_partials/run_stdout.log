@@ -296,3 +296,7 @@ E-FE: 163 jobs on 6 shards; loadavg 9.71 9.24 10.46 on 12 cores
   return ufunc(a, fct, axes=[(axis,), (), (axis,)], out=out)
   attempt 124 UPO17  arm S: stalled, final ||R|| = 18.78, 20 epochs, 0.43 h
   [129/163] g124 UPO17  S f4: stalled, ||R||=18.78, 0.43 h
+  attempt 125 UPO17  arm S: stalled, final ||R|| = 5.804, 20 epochs, 0.45 h
+  [130/163] g125 UPO17  S f5: stalled, ||R||=5.804, 0.45 h
+  attempt 123 UPO17  arm S: stalled, final ||R|| = 2.262, 31 epochs, 0.67 h
+  [131/163] g123 UPO17  S f3: stalled, ||R||=2.262, 0.67 h
