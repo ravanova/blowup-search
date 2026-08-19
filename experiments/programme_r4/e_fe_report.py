@@ -275,6 +275,59 @@ def defects(doc, meta):
                    "and in journal leg_408 SS 1 before the run.",
          "handled_by_this_unit": "pre-empted and declared",
          "fix_is_CONDUCTORs": False},
+        {"id": "D5", "where": "experiments/programme_r4/e_fe_driver.py, "
+                              "commit_partials()",
+         "severity": "false alarm in this unit's own run log; no data effect",
+         "defect": "The no-op guard tests for the substring 'nothing to "
+                   "commit' in git's output. In PATHSPEC mode -- "
+                   "`git commit -m msg -- <paths>`, which this unit uses "
+                   "deliberately so a sibling worker's staged files can never "
+                   "be swept in -- git does NOT print that string when the "
+                   "given paths are clean; it prints 'Changes not staged for "
+                   "commit:' and exits non-zero. So a checkpoint that had "
+                   "nothing to do was retried six times and then logged as "
+                   "'[commit] FAILED after retries at #5 t+4.6h'.",
+         "impact": "None on the record. Verified at the time: the working "
+                   "tree was clean for this unit's paths because a "
+                   "concurrent CONDUCTOR session had committed them at "
+                   "04:58Z (commit edb9f6b) and this unit's own poll-loop "
+                   "checkpoints were running every ~9 min. Nothing was lost. "
+                   "The cost is that a benign event was logged in the "
+                   "vocabulary of a failure, which is the opposite of what a "
+                   "run log is for.",
+         "handled_by_this_unit": "diagnosed by probing git's pathspec-mode "
+                                 "wording directly; the driver was NOT "
+                                 "patched, because the fix is cosmetic and "
+                                 "editing a pre-registered driver to quiet a "
+                                 "log line is a worse trade than recording "
+                                 "the defect",
+         "fix_is_CONDUCTORs": False},
+        {"id": "D6", "where": "the resourcing rationale in CONDUCTOR's "
+                              "dispatch ('12 cores')",
+         "severity": "cost model, load-bearing for the wall-clock estimate",
+         "defect": "os.cpu_count() and nproc both report 12 on this host, "
+                   "and the shard decision was reasoned from that. The CPU "
+                   "is an Intel Core i7-10750H: SIX physical cores, twelve "
+                   "hyperthreads. Six E-FE shards plus L6-b's ~4.5 threads "
+                   "oversubscribe six physical cores, and hyperthread "
+                   "siblings share the execution units an FFT loop is bound "
+                   "by. Measured alongside it: every logical CPU was pinned "
+                   "at exactly 1800 MHz -- the governor is 'powersave', the "
+                   "package was at 78 C and the part's rated max is 5000 "
+                   "MHz -- so the all-core clock was roughly half the "
+                   "single-core clock the banked figures were taken at.",
+         "impact": "This, not scheduler contention, is the bulk of the "
+                   "measured per-attempt inflation over E's banked walls. "
+                   "The shards were each getting ~91% of a LOGICAL cpu, "
+                   "which looks healthy and is not: the physical core behind "
+                   "it was shared. Reported in cost_and_shortfall rather "
+                   "than smoothed into a single 'contention' number.",
+         "handled_by_this_unit": "measured (per-process CPU-time over a 60 s "
+                                 "window, /proc/cpuinfo, "
+                                 "/sys/.../cpufreq/*, thermal zones) and "
+                                 "reported; the shard count was NOT changed, "
+                                 "as the brief requires",
+         "fix_is_CONDUCTORs": True},
     ]
     if meta.get("shards") and meta.get("briefed_wall_hours_at_6_shards"):
         pass
