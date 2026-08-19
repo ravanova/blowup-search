@@ -587,6 +587,7 @@
   "checks_run": 65,
   "checks_failed": 0,
   "checks_passed": 65,
+  "deep_mode_actually_executed": "python3 experiments/p2_verify_wave6_v1_evidence.py --deep was RUN, not merely offered: 68 checks, 0 failures, exit 0. The three extra checks (I01/I02/I03) are subprocess re-runs of L6's, V5's and V-W5's own evidence scripts from inside this harness, and all three exit 0. Recorded under lesson 68: an option nobody exercises is not a check.",
   "unit_evidence_scripts_rerun_by_me": {
     "p2_route_l6_v1_evidence.py": {
       "checks": 30,
@@ -611,5 +612,5 @@
     "V_W5": "VERIFIED",
     "CONDUCTORS_L6_LANDING_AUDIT": "FINDING CORRECT, THREE NUMBERS OVERSTATED, TWO PLACES UNDERSTATED, ONE ERROR IN THE CONSERVATIVE DIRECTION; CONSEQUENCE UPHELD"
   },
-  "self_hash": "7116301a5abd3d82"
+  "self_hash": "5834da0a4ff30a3c"
 }
