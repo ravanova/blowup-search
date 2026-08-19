@@ -1,0 +1,615 @@
+{
+  "leg": 407,
+  "unit": "V-W6",
+  "lane": "verification",
+  "covers": "WAVE 6 ONLY -- L6 (e62c449), V5 (dacc01c), V-W5 (95cf861), and the Conductor's own landing audit in writeup/waves/WAVE6_CLOSE.md. The Conductor planned wave 6 and may not verify a wave it planned (ORCHESTRATION.md 3g); this unit was dispatched in wave 7 so it could not be briefed by the construction it checks.",
+  "bound": "commit 2a5ea0d. Three sibling construction units (R-bank, R-prof, L6-b) were committing into the same working tree while this ran. EVERY repo file this unit reads is read at the bound via `git show 2a5ea0d:<path>`, including inside the evidence script, so the verdicts are invariant to sibling churn. Verified: the three wave-6 artefacts, L6's solver, L6's evidence script, leg_401.md, requirements.txt and WAVE6_CLOSE.md are all BYTE-IDENTICAL at 2a5ea0d and at the time of writing; only writeup/SOURCES.md has moved (see D-VW6-6).",
+  "preregistration": "experiments/journal/leg_407.md 0, committed in the same commit as this artefact. This unit re-derives from banked JSON only; it registered no predictions to bias.",
+  "gate_source": "writeup/waves/WAVE6_PLAN.md, committed e202653 BEFORE any wave-6 unit was dispatched. Each unit below is judged against THAT wording, quoted verbatim, and never against what it chose to report afterwards.",
+  "evidence_script": "experiments/p2_verify_wave6_v1_evidence.py -- 65 checks, 0 failures, exit 0. EXITS NON-ZERO on any disagreement (mutation-verified). `--deep` additionally re-runs all three unit evidence scripts.",
+  "self_hash_rule": "sha256(json.dumps(doc_without_self_hash, sort_keys=True)).hexdigest()[:16] -- the same rule wave 5 and wave 6 used",
+  "ceiling": "This unit verifies ARITHMETIC, PROVENANCE and GATE-COMPLIANCE. It does NOT verify the SCIENCE. Reproducing L6's rho does not make rho small; reproducing V5's recomputation does not make arXiv:2509.25116's certificate true. Tier 2 throughout. No link of the L1 -> L4 chain moved in wave 6 or in this verification. Clay ~0.05%, unchanged.",
+  "headline": "V5 VERIFIED. V-W5 VERIFIED. L6 VERIFIED-WITH-QUALIFICATION -- it answered its gate exactly, in the gate's own terms, with the gate's own numbers, and its artefact is re-derivable; but ONE bolded sentence of its prose (8.2, 'The NO is a fact about the construction, not about the stopping point') is NOT supported by the control offered for it, that control is covered by none of its 30 checks, and the banked minimiser is ~14 orders from its own pre-registered gtol with the gap growing monotonically under refinement. The Conductor's landing audit reached the right conclusion by an argument that is overstated in three numbers and understated in two places that matter more.",
+  "L6": {
+    "commit": "e62c449 (worker tip 614eeaf, branch base 5c49486)",
+    "VERDICT": "VERIFIED-WITH-QUALIFICATION",
+    "verdict_in_one_line": "The gate is answered, in the gate's own terms, with the gate's own numbers, and every number re-derives from the banked artefact. The qualifications are about what the unit's PROSE and the Conductor's AUDIT then did with those numbers.",
+    "a_did_it_answer_the_PRECOMMITTED_gate": {
+      "gate_verbatim": "Bank a discrete route-4 profile: a divergence-free velocity field on a named realization, in a named trial space and basis, solving route 4's profile system to a MEASURED residual, with the artefact carrying the residual, the realization, the trial space, the basis, the resolution and the norm in which the residual is measured. Then answer, WITH THE NUMBER: what is the smallest residual, in the norm route 4's own closure requires, that this construction attains at its best affordable resolution -- and does it decrease under refinement, YES or NO, at what measured rate?",
+      "delivered_verbatim": "rho = 1.613811231995397 at n_dof = 6720 (Lmax=6, Nr=14, Ks=2), in ||curl F||_{L1_t L3/2_x} = integral ||curl_y R_loc(.,s)||_{L3/2_y} ds (pressure-free), branch B (far-field angular amplitude pinned to 1); decreases_under_refinement = NO; measured rate dlog(resid)/dlog(n_dof) = -0.0222 over the last three rungs, -0.2126 over all five. Branch A (interior L2 = 1): rho = 7.583387202236438, NO, rate -0.001066.",
+      "clause_by_clause": [
+        {
+          "clause": "a divergence-free velocity field",
+          "delivered": "Chandrasekhar poloidal-toroidal V = curl curl (f y) + curl (g y); div V = 0 IDENTICALLY, no projection, no Bogovskii corrector. Independently checked: check C19 measures max|div V| = 3.16e-13.",
+          "verdict": "MET",
+          "caveat": "C19 is a structural tautology -- see (e). It is honest, not discriminating."
+        },
+        {
+          "clause": "on a NAMED realization",
+          "delivered": "backward lambda-DSS profile for 3D incompressible NSE on R^3, lambda = 1.7, a = 0.5, T_s = 2 log lambda = 1.0612565021243408; banked at realization_lesson_91.",
+          "verdict": "MET"
+        },
+        {
+          "clause": "in a NAMED trial space and basis",
+          "delivered": "real spherical harmonics Y_lm, 1 <= l <= Lmax, all |m| <= l; radial Chebyshev T_n(2u-1) on u = r/(r+2) with end prefactors u^l (poloidal) and u^l (1-u) (toroidal); real Fourier in s, modes 0..Ks. All six components banked.",
+          "verdict": "MET"
+        },
+        {
+          "clause": "to a MEASURED residual",
+          "delivered": "measured, not bounded: J(c) is evaluated by quadrature on the banked coefficients and re-synthesised independently by check C18 to 1.613811231995 exactly.",
+          "verdict": "MET"
+        },
+        {
+          "clause": "the norm route 4's own closure requires",
+          "delivered": "read VERBATIM from L5's banked JSON, not paraphrased; the string in L6's artefact is byte-identical to L5's load_bearing_norm field.",
+          "verdict": "MET"
+        },
+        {
+          "clause": "does it decrease under refinement, YES or NO",
+          "delivered": "NO on both branches. The 5.1 decision rule (strictly decreasing over the last three rungs AND >5%/rung AND slope < -0.05) was fixed BEFORE any number existed, at commit e4598a5, and re-applying it from scratch here reproduces the banked verdict.",
+          "verdict": "MET -- and the rule was not softened after the fact (plan reading (b))"
+        },
+        {
+          "clause": "at what measured RATE",
+          "delivered": "-0.022241546473401628 (last 3, branch B), -0.2125507456078885 (all 5), and per-rung relative changes. Re-derived here by an INDEPENDENT pure-python OLS, not numpy.lstsq: agrees to 1e-10 relative.",
+          "verdict": "MET"
+        },
+        {
+          "clause": "plan reading (d): a NO because the resolution was unaffordable is UNDER-RESOURCED WITH A COST (3d), never a bare no",
+          "delivered": "cost_and_shortfall.UNDER_RESOURCED = true, with wall_clock_hours 2.304, 12 cores, 133 starts, 133 capped, preregistered_maxiter 20000 vs maxiter_actually_used 800, and a named ~10^3 core-h ladder as the price of the compliant attempt. Reading (d) FIRED.",
+          "verdict": "MET"
+        },
+        {
+          "clause": "plan reading (h) / ban C1: no radii-polynomial contraction apparatus",
+          "delivered": "ban_C1 block names L-BFGS-B (Byrd-Lu-Nocedal-Zhu 1995) as the apparatus, pre-registered at 0.3 BEFORE the run. No Y0/Z0/Z1/Z2 anywhere in the artefact.",
+          "verdict": "MET"
+        }
+      ],
+      "verdict": "ANSWERED IN FULL, in the gate's own terms, with the gate's own numbers."
+    },
+    "b_self_consistency_and_re_derivability": {
+      "evidence_script_rerun_by_me": {
+        "script": "experiments/p2_route_l6_v1_evidence.py",
+        "checks": 30,
+        "failures": 0,
+        "exit_code": 0,
+        "note": "run by me from the merged tree, not read from the unit's report"
+      },
+      "self_hash": {
+        "banked": "6a033004deef39d3",
+        "recomputed_by_me": "6a033004deef39d3",
+        "match": true,
+        "rule_applied": "the literal rule as stated in the artefact"
+      },
+      "headline_recomputed_from_raw": [
+        "C18 re-synthesises the field from the 6720 banked coefficients and recomputes J = 1.613811231995e+00 (branch B) and 7.583387202236e+00 (branch A) -- exact.",
+        "gate.per_rung_residual equals ladder_results[*].residual_load_bearing rung by rung, on both branches (my check B04).",
+        "both refinement rates re-derived by an INDEPENDENT non-numpy OLS to 1e-10 (my B05/B06).",
+        "the 5.1 decision rule re-applied from scratch reproduces NO on both branches (my B07).",
+        "the ENTIRE stability_against_the_iteration_cap block re-derived from the recorded trajectories, all 5 caps x 5 rungs x 2 branches (my D04). It is exactly a truncation."
+      ],
+      "verdict": "SELF-CONSISTENT AND RE-DERIVABLE. No arithmetic defect found anywhere."
+    },
+    "c_does_the_prose_overclaim": {
+      "verdict": "ONE SENTENCE OVERCLAIMS, and it is bolded and load-bearing.",
+      "sentences_named": [
+        {
+          "id": "D-VW6-1",
+          "severity": "MATERIAL",
+          "where": "experiments/journal/leg_401.md 8.2, bolded",
+          "sentence": "The NO is a fact about the construction, not about the stopping point.",
+          "why_it_says_more_than_the_data_supports": "The only control offered for it is the cap sweep 50/100/200/400/800, whose verdict_is_stable_in_the_cap = true. I re-derived that block: it is EXACTLY a post-hoc truncation of the trajectories of the SAME runs, computed by residual_at_cap() taking min over recorded trajectory points with k <= K. Every rung's continuation start was warm-started from the PREVIOUS rung's FULL-800-ITERATION minimiser. So the 'cap 50' column is not what a cap-50 ladder would have produced: at n_dof=1800 it reads 3.2798, which is a truncation of a run seeded from J0's 800-iteration answer 3.6467, whereas J0's own cap-50 value is 14.0239. The construct cannot separate the construction from the budget, because the budget is inside every one of its columns.",
+          "what_the_data_DOES_support": "'This construction, at this resolution, under this budget, does not converge to one' -- which is what the same journal says at 10.1, unbolded. That sentence is sound.",
+          "not_repaired_by_me": true
+        },
+        {
+          "id": "D-VW6-2",
+          "severity": "MATERIAL",
+          "where": "the artefact, and every prose summary of it",
+          "sentence": "the reported rho is presented as a minimum without stating how far the reported point is from being a stationary point at all",
+          "why": "At the reported rho = 1.6138 the banked continuation start has max_abs_grad = 252.21 and scale_invariant_grad = 153.216, against the unit's own pre-registered gtol = 1e-12 -- about 14 orders of magnitude. Worse, the scale-invariant gradient grows MONOTONICALLY with n_dof on BOTH branches: B 23.05 -> 24.06 -> 60.11 -> 153.22; A 1.16 -> 1.75 -> 3.11 -> 16.12. Every one of the 133 starts exited with status = 1 ('maximum iterations reached'); not one converged by gradient or by ftol anywhere in the artefact. The numbers ARE banked, honestly, per start. What is missing is any sentence anywhere -- unit, close doc or STATE.md -- that says the ladder is getting FURTHER from stationarity as it refines.",
+          "why_it_matters": "It cuts against 8.2 harder than the seed spread does. A sequence of points whose gradients grow with n_dof is the signature of a budget that has stopped tracking the problem, which is precisely the alternative 8.2 rules out.",
+          "not_repaired_by_me": true
+        },
+        {
+          "id": "D-VW6-3",
+          "severity": "MINOR-BUT-PRE-REGISTERED",
+          "where": "leg_401.md 3.5, three pre-registered mechanism predictions",
+          "sentence": "Each prediction is recorded so that a failure of the prediction is as reportable as a success.",
+          "why": "No section of leg_401.md after 7 contains the string 'prediction' in any case (my check D08), and neither does WAVE6_CLOSE.md. The predictions were banked and then never adjudicated, against an explicit written commitment. The banked diagnostics adjudicate two of them and neither adjudication is favourable: PREDICTION 2 (branch A's interior normalisation kills the alpha=1 far-field tail) is REFUTED -- branch A's far_field_alpha1_amplitude_mean is 0.3479, not ~0, and its fitted decay exponent is 0.9954, i.e. alpha ~ 1 exactly as Chae-Wolf pins; PREDICTION 3 (the L^{3/2} norm grows under radial-quadrature refinement, log-divergence) is NOT CONFIRMED -- the x4/x1 ratio is 1.0000117.",
+          "not_repaired_by_me": true
+        },
+        {
+          "id": "D-VW6-4",
+          "severity": "MINOR",
+          "where": "leg_401.md 4 promised 'the far-field exponent of the minimiser' be reported",
+          "why": "It is banked (far_field_decay_exponent_alpha) and it is not reported in prose anywhere. The number for the HEADLINE branch B minimiser is 0.2250 over 5 < r < 200 -- not 1, not 0.5, and four times shallower than branch A's 0.9954. The string '0.225' does not occur in leg_401.md, in WAVE6_CLOSE.md, or in STATE.md. A profile whose fitted far-field decay is 0.225 is, on its face, further from the Chae-Wolf alpha >= 1 class than branch A is, and branch B is the branch the headline number comes from.",
+          "not_repaired_by_me": true
+        }
+      ],
+      "what_the_prose_gets_RIGHT_and_should_be_credited_for": [
+        "8.4 states plainly that the number is NOT the infimum and does not claim it is.",
+        "10.1: 'It says THIS construction, at THIS resolution, under THIS budget, does not converge to one.' That is the correct scope and it is in the unit's own words.",
+        "10 reading (c-3) discloses the branch-B normalisation asymmetry, which the Conductor's audit then got wrong in the opposite direction -- see the ruling.",
+        "the honest factor-11 spread is tabulated at 8.4 rather than buried.",
+        "the false convergence found mid-run and three evidence-caught defects are recorded at 7 as failures, not smoothed over."
+      ]
+    },
+    "d_territory": {
+      "derived_from": "git diff --name-status 5c49486 614eeaf, NOT from the unit's report",
+      "files": 7,
+      "statuses": "A x 7, zero M, zero D",
+      "list": [
+        "experiments/_l6_scaling.py",
+        "experiments/journal/leg_401.md",
+        "experiments/p2_route_l6_v1.py",
+        "experiments/p2_route_l6_v1_ad.py",
+        "experiments/p2_route_l6_v1_evidence.py",
+        "experiments/p2_route_l6_v1_probe.py",
+        "writeup/data/p2_route_l6_profile_v1.json"
+      ],
+      "journal_insert_only": "VERIFIED: 0 deleted lines across all three of its journal commits (e4598a5, 5e7c1a9, 614eeaf), as its territory clause required.",
+      "no_banked_JSON_edited": "VERIFIED for OTHER units' artefacts. Its OWN artefact was re-banked once mid-branch at 8531960 (+7317/-8). I read the 8 deleted lines: the axis-ladder placeholder, the pre-axis start counts (58/58), the old runtime and the old self_hash. NO gate number changed. This is within territory ('new files only') but the Conductor's phrase 'zero modifications' describes the NET diff, not the branch history.",
+      "verdict": "CLEAN. Nothing outside territory."
+    },
+    "e_are_the_selftests_real_tests": {
+      "method": "mutation testing. Every mutation was performed on a COPY under the session scratchpad. The repository was never modified to test it.",
+      "mutations_run": [
+        {
+          "mutation": "flipped gate.B.decreases_under_refinement from NO to YES (recomputing self_hash so the hash check would not mask the result)",
+          "result": "FAIL C10[B] banked=YES recomputed=NO; script EXIT 1",
+          "verdict": "REAL TEST"
+        },
+        {
+          "mutation": "perturbed ONE of the 6720 banked branch-B coefficients by 0.1%",
+          "result": "C18 and C20 both FAIL; EXIT 1",
+          "verdict": "REAL TEST -- C18 genuinely re-synthesises the field rather than reading a stored scalar"
+        },
+        {
+          "mutation": "replaced ALL branch-B coefficients with Gaussian noise",
+          "result": "C18 FAIL, C20 FAIL -- but C19 (divergence-free) still PASSED at 3.16e-13",
+          "verdict": "C19 IS A STRUCTURAL TAUTOLOGY. In the Chandrasekhar representation div V = 0 identically for ANY coefficient vector, so C19 cannot fail for any input and measures the implementation of curl, not the solution. The unit says exactly this at 8.5, so the check is honest -- but it is not evidence about the profile and should not be counted as one of the 30 that constrain it."
+        }
+      ],
+      "the_six_named_selftests": {
+        "T_A": 1.9687e-11,
+        "T_B": 8.489e-08,
+        "T_C": 1.238e-08,
+        "T_D": 0.00012203,
+        "T_E": 8.844e-17,
+        "T_F": 1.188e-10,
+        "assessment": "T_D (exact-basis W[V] against a finite-difference curl of R[V], 1.22e-4) is the only one that cross-checks the operator against an independent discretisation, and it is the loosest by seven orders. That is the right shape for a finite-difference comparison and the unit pre-registered its 1e-6-class tolerances before any number existed (0.2, commit e4598a5). Not itself a defect; recorded because T_D is the load-bearing selftest and 1.2e-4 is the accuracy floor under everything above it."
+      },
+      "verdict": "REAL, with C19 the one non-discriminating check of the thirty."
+    },
+    "f_undischarged_source_ceilings_3i_q4": {
+      "checked_against": "writeup/SOURCES.md at 2a5ea0d (106 lines, 26 rows)",
+      "findings": [
+        {
+          "id": "D-VW6-5",
+          "severity": "MINOR",
+          "finding": "L6's branch-B selection leans on the exactly-self-similar exclusion of Necas-Ruzicka-Sverak 1996 / Tsai 1998, which SOURCES.md records at SECOND HAND. The Conductor's 3i q4 names this debt but attributes it to L7-src; it is also live under L6's own branch choice.",
+          "load_bearing": "PARTIALLY. It motivates which of two pre-registered branches carries the headline. Both branches are banked, so no NUMBER depends on it."
+        },
+        {
+          "id": "D-VW6-6",
+          "severity": "MINOR -- and NOT L6's fault",
+          "finding": "At the bound, SOURCES.md carries NO row for Byrd-Lu-Nocedal-Zhu 1995 -- the apparatus L6 names to discharge ban C1 -- and none for the Chandrasekhar poloidal-toroidal representation, its trial space. Both are load-bearing for C1 compliance and for lesson 91's trial-space naming, and both have no DEPTH. SOURCES.md's own footer says a row with no DEPTH is a defect.",
+          "why_it_is_NOT_L6s_fault": "3k and SOURCES.md were created on the Conductor line at 1f0d6b0/9b9571a, AFTER L6's branch point 5c49486. L6 could not have complied with a rule that did not exist when it was dispatched. It DID satisfy 3k rule 3 in substance by naming the published method with citation at 0.3.",
+          "whose_it_is": "the integration boundary. e62c449 landed L6 into a tree that already had the register, and 3i q4 reviewed source ceilings in that same commit without noticing L6's two undepthed load-bearing citations.",
+          "status_outside_the_bound": "informational: L6-b (wave 7) has since added the Byrd-Lu-Nocedal-Zhu row at depth ABSTRACT with a written not-load-bearing argument. The Chandrasekhar row is still absent. Outside my bound; recorded so it is not re-found."
+        }
+      ],
+      "verdict": "ONE genuine second-hand dependency (NRS/Tsai, already on the register), plus a register-maintenance gap that belongs to the integration boundary, not to L6."
+    },
+    "additional_defect_found": {
+      "id": "D-VW6-7",
+      "severity": "MATERIAL, and mechanical",
+      "finding": "experiments/p2_route_l6_v1.py does `from scipy.optimize import minimize` and `from scipy.special import lpmv`, while requirements.txt says verbatim '# scipy is intentionally NOT required (no adaptive ODE integrators are used).' scipy is nowhere in requirements.txt.",
+      "consequence_MEASURED": "in a sandbox with scipy unavailable, experiments/p2_route_l6_v1_evidence.py dies with an uncaught ImportError -- exit 1, traceback, ZERO checks reported -- because its full path does `import p2_route_l6_v1 as L6` inside main(). The --fast path survives. So on a clean checkout following the repo's own stated dependencies, L6's evidence does not execute at all.",
+      "why_it_matters": "this is lesson 68 exactly: a check nobody can execute decays into a claim. It is also the IDENTICAL defect class to V5's mpmath omission, which was repaired one commit earlier at ac34fd4 -- so the failure is not that the class was unknown, it is that the same sweep was not run for L6.",
+      "not_repaired_by_me": true,
+      "cost_to_repair": "one line in requirements.txt. Not mine to make (territory)."
+    },
+    "qualifications_summary": [
+      "D-VW6-1 8.2's bolded claim is not established by the control offered for it.",
+      "D-VW6-2 the banked minimiser is ~14 orders from its own pre-registered gtol, and the gap grows monotonically under refinement -- banked per start, never stated.",
+      "D-VW6-3 three pre-registered predictions never adjudicated; two are unfavourable.",
+      "D-VW6-4 the headline branch's far-field decay exponent, 0.225, is banked and unreported.",
+      "D-VW6-7 undeclared scipy dependency; the evidence script cannot run on a clean checkout.",
+      "COVERAGE: neither stability_against_the_iteration_cap nor cost_and_shortfall is touched by any of the 30 evidence checks (my D07). The two blocks doing the most rhetorical work in the unit's conclusion are the two with no executable check behind them.",
+      "C19 is a structural tautology (disclosed at 8.5)."
+    ],
+    "what_the_qualifications_do_NOT_touch": "The gate answer. rho = 1.613811231995397 and decreases_under_refinement = NO are correct, re-derived, and correctly scoped by the unit's own 10.1. Nothing here suggests the NO should have been a YES; two of the findings (D-VW6-2, D-VW6-4) make route 4's construction problem look WORSE, not better."
+  },
+  "V5": {
+    "commit": "dacc01c (integrated ac34fd4, branch base 5c49486)",
+    "VERDICT": "VERIFIED",
+    "verdict_in_one_line": "Both clauses answered separately, as the gate demanded and in the gate's own words; 75/75 checks reproduce under my re-run; self_hash verifies; territory strictly additive; the mutation test is real; the audit's own limits are banked as limits.",
+    "a_did_it_answer_the_PRECOMMITTED_gate": {
+      "gate_clause_1_verbatim": "does the certificate CLOSE as claimed, and does every printed constant recompute -- naming any that does not, with both numbers and the clause it breaks",
+      "delivered": "answered_standing_alone = true. The W2 predicate was LOCATED in the record at p2_route_t4_v1.json :: controls.C_3D with invented = false, and the profile is genuinely 3D: max|u_phi| = 8.754198315291823 against max|u_r| = 15.291462690010507, i.e. 57.25%. I re-derived the ratio from the banked component maxima.",
+      "gate_clause_2_verbatim": "MUST NOT be folded into the clause-1 verdict",
+      "verdict": "BOTH CLAUSES ANSWERED, SEPARATELY, AS REQUIRED. The 'must not be folded' instruction was honoured structurally, not just verbally."
+    },
+    "b_self_consistency_and_re_derivability": {
+      "evidence_script_rerun_by_me": {
+        "script": "experiments/p2_route_v5_v1_evidence.py",
+        "checks": 75,
+        "disagreements": 0,
+        "exit_code": 0
+      },
+      "self_hash": {
+        "banked": "ae2b95efcbe5209b",
+        "recomputed_by_me": "ae2b95efcbe5209b",
+        "match": true
+      },
+      "recomputed_from_raw": "the 57.25% swirl fraction re-derives from the two banked maxima to 1e-3 relative (my E06)."
+    },
+    "c_does_the_prose_overclaim": {
+      "verdict": "NO OVERCLAIM FOUND.",
+      "scoping_note_not_a_defect": "CLAUSE_1's 'the certificate DOES close as claimed' is conditional on 22 Class-A interval-arithmetic outputs taken as given -- they are UNRECOMPUTABLE-BY-DESIGN without re-running the authors' interval code. The artefact enumerates all 22 explicitly, banks the condition under what_this_audit_did_NOT_establish, and the Conductor carried it into STATE.md and into WALLS.md as the named undischarged ceiling. This is a disclosed scope, correctly disclosed at every level. It is the single most important thing to keep attached to V5's YES, and it is attached.",
+      "credit": [
+        "H30's diagnosis -- eta_2 = 0.005 substituted where the certified M_2^U <= 0.0061 belongs -- is a specific, checkable mechanism, not a discrepancy report.",
+        "the 0.08% margin on x_1^U is called LUCK in the artefact's own words.",
+        "the localisation step is recorded as 'NO GAP FOUND', which is the correct null."
+      ]
+    },
+    "d_territory": {
+      "derived_from": "git diff --name-status 5c49486 dacc01c",
+      "files": 5,
+      "statuses": "A x 5, zero M, zero D",
+      "list": [
+        "experiments/journal/leg_402.md",
+        "experiments/p2_route_v5_v1_evidence.py",
+        "writeup/data/p2_route_l2_decay_v2.json",
+        "writeup/data/p2_route_v3_gradeA_v2.json",
+        "writeup/data/p2_route_v5_audit_v1.json"
+      ],
+      "note": "the wave-4 repair was issued as _v2 deltas with NO _v1 edited, exactly as the gate required. Verified from git status letters, not from the unit's claim.",
+      "verdict": "CLEAN."
+    },
+    "e_are_the_selftests_real_tests": {
+      "mutation": "in a scratch copy, set the recomputed value of the x_1^U <= 6.2e-6 closure condition to 9.9e-6",
+      "result": "RESULT: FAILED -- 1 of 75 checks disagreed; EXIT 1",
+      "verdict": "REAL TEST. The script compares against re-derived values rather than echoing banked ones."
+    },
+    "f_undischarged_source_ceilings_3i_q4": {
+      "finding": "V5's source is arXiv:2509.25116, read at PRIMARY and RECOMPUTED -- the deepest depth in the register. No ceiling is undischarged for V5's own claims. The Class-A limit is a limit of the SOURCE's method, not of V5's reading of it, and it is registered.",
+      "verdict": "CLEAN."
+    },
+    "residual_notes_not_defects": [
+      "the four broken constants are a finding ABOUT THE PAPER, not about the repo; describing them as progress toward Clay would be prohibited, and neither the unit nor the Conductor does."
+    ]
+  },
+  "V_W5": {
+    "commit": "95cf861 (integrated 7c79397, branch base 5c49486)",
+    "VERDICT": "VERIFIED",
+    "verdict_in_one_line": "All five pre-committed items answered, including BOTH halves of item 3; 120/120 banked checks reproduce (121 PASS lines printed, see the bookkeeping note); both pre-named self_hashes recomputed; three defects located and ZERO repaired, as its gate demanded.",
+    "a_did_it_answer_the_PRECOMMITTED_gate": {
+      "item_1": {
+        "gate": "L5's gate answer and rho-exponent reproduce",
+        "delivered": "REPRODUCES BIT-FOR-BIT; rho_exponent 0.00010850007559945518 re-fitted, not echoed",
+        "verdict": "MET"
+      },
+      "item_2": {
+        "gate": "the three positive controls",
+        "delivered": "all three REPRODUCE",
+        "verdict": "MET"
+      },
+      "item_3": {
+        "gate": "was C6's tolerance ever moved -- AND does anything the NO rests on depend on the constant C6 perturbs",
+        "delivered": "NO to the first, from git log --all -p --follow; and the second half is answered as its own field, not folded in",
+        "verdict": "MET -- both halves, which is the half most easily dropped"
+      },
+      "item_4": {
+        "gate": "recompute both pre-named self_hashes under the literal stated rule",
+        "delivered": "0c5e0f827f526df6 and e0171ac1e855f90e both match",
+        "verdict": "MET"
+      },
+      "item_5": {
+        "gate": "the D-REPAIR epoch correction",
+        "delivered": "REPRODUCES",
+        "verdict": "MET"
+      },
+      "reading_a": {
+        "gate": "REPAIR NOTHING",
+        "delivered": "defects_repaired = 0, banked_artefacts_edited = 0, and three defects banked as found-and-not-repaired",
+        "verdict": "MET, and verified independently from git: 3 files, all A"
+      },
+      "reading_exit": {
+        "gate": "Exit non-zero if any item does not reproduce",
+        "delivered": "verified by mutation, below",
+        "verdict": "MET"
+      },
+      "verdict": "ALL FIVE ITEMS ANSWERED IN THE GATE'S OWN TERMS."
+    },
+    "b_self_consistency_and_re_derivability": {
+      "evidence_script_rerun_by_me": {
+        "script": "experiments/p2_verify_wave5_v1_evidence.py",
+        "PASS_lines_printed": 121,
+        "failures": 0,
+        "notes": 8,
+        "exit_code": 0
+      },
+      "self_hash": {
+        "banked": "da8a0d7cb9fb4896",
+        "recomputed_by_me": "da8a0d7cb9fb4896",
+        "match": true
+      },
+      "bookkeeping_discrepancy": {
+        "id": "D-VW6-8",
+        "severity": "COSMETIC",
+        "finding": "the artefact banks checks_run = checks_passed = 120; the script prints 121 [PASS] lines. The 121st is the script's own artefact-self_hash check, emitted after the summary line and outside the counter. Nothing substantive turns on it; recorded so a future verifier does not re-find it as a discrepancy.",
+        "not_repaired_by_me": true
+      },
+      "portability_note": {
+        "id": "D-VW6-9",
+        "severity": "COSMETIC",
+        "finding": "item 3 shells out to `git log --all -p --follow` and raises an uncaught CalledProcessError when run outside a git checkout. Every other item is self-contained. It is a provenance check, so it legitimately needs git; the defect is only that the failure is a traceback rather than a reported FAIL.",
+        "not_repaired_by_me": true
+      }
+    },
+    "c_does_the_prose_overclaim": {
+      "verdict": "NO OVERCLAIM FOUND.",
+      "credit": [
+        "its stated ceiling -- 'this unit verifies ARITHMETIC and PROVENANCE, not SCIENCE; reproduction does NOT make L5's NO true' -- is exactly the right disclaimer for a verifier and I have adopted its wording here.",
+        "reading (e) on L5's disclosed gate deviation is carried as its own field rather than absorbed into a verdict."
+      ]
+    },
+    "d_territory": {
+      "derived_from": "git diff --name-status 5c49486 95cf861",
+      "files": 3,
+      "statuses": "A x 3, zero M, zero D",
+      "list": [
+        "experiments/journal/leg_403.md",
+        "experiments/p2_verify_wave5_v1_evidence.py",
+        "writeup/data/p2_verify_wave5_v1.json"
+      ],
+      "verdict": "CLEAN -- and this is the check that matters most for a REPAIR-NOTHING unit. It repaired nothing."
+    },
+    "e_are_the_selftests_real_tests": {
+      "mutation": "in a scratch copy, set L5's gate.rho_exponent to -0.5",
+      "result": "two item-1 checks FAIL bit-for-bit; EXIT 1",
+      "verdict": "REAL TEST."
+    },
+    "f_undischarged_source_ceilings_3i_q4": {
+      "finding": "V-W5 itself named L5's Chae-Wolf and NRS/Tsai dependence as the sharpest undischarged item in the file. It is still undischarged, is recorded on SOURCES.md at SECOND HAND, and 3k's own preamble cites it as one of the four failures that motivated the register. V-W5 leans on no source of its own.",
+      "verdict": "CLEAN, with the inherited debt correctly named by the unit itself."
+    }
+  },
+  "RULING_on_the_CONDUCTORS_L6_LANDING_AUDIT": {
+    "what_was_asked": "verify, independently, the Conductor's assertion that at every rung above the coarsest the minimum residual is attained by exactly ONE start (the continuation from the rung below) while five independent random seeds land 10-24x higher and get monotonically worse as n_dof grows, and that all 133 starts hit the 800-iteration cap against a pre-registered cap of 20,000 -- then rule on the consequence drawn from it, and say plainly if the audit is itself overclaimed or understated.",
+    "audit_text_verbatim": "at every rung above the coarsest the reported rho is attained by ONE start -- the continuation -- while five independent random seeds land 10-24x higher and get monotonically WORSE as n_dof grows (J1 ~ 6.8 -> J4 ~ 32-38), all capped at 800 iterations",
+    "claim_by_claim": [
+      {
+        "claim": "at every rung above the coarsest the reported rho is attained by ONE start, the continuation",
+        "my_finding": "UPHELD, EXACTLY, and I confirmed it independently on BOTH branches. At each of the four rungs above the coarsest, the set of starts attaining the reported minimum to 1e-12 relative is the single-element set {continuation}. The coarsest rung has no continuation start at all (5 starts; the others have 6).",
+        "verdict": "CORRECT",
+        "and_the_unit_never_said_it": "this is the audit's real contribution. leg_401.md mentions 'continuation' only in the 5 protocol statement and the 8.4 spread table; the FINDING -- that the minimum is the continuation's alone at every refined rung -- appears nowhere in the unit's own writing. The Conductor found something real that the unit did not report."
+      },
+      {
+        "claim": "five independent random seeds land 10-24x higher",
+        "my_finding": "OVERSTATED IN RANGE. The true branch-B factors, rung by rung: n_dof=576 3.93-4.02x; n_dof=1800 8.04-11.35x; n_dof=2400 10.08-11.29x; n_dof=6720 18.32-23.67x. The 10-24x band is right only for the top two rungs. On branch A the factor NEVER reaches 10x at any rung: 1.01-1.04x, 2.55-2.62x, 2.58-2.62x, 5.36-5.95x -- and at the coarsest refined rung on branch A the seeds are within 4% of the continuation, i.e. essentially tied.",
+        "verdict": "OVERSTATED. The direction is right; the number quoted is the top of the range presented as the range, and one of the two branches does not support it at all."
+      },
+      {
+        "claim": "and get monotonically WORSE as n_dof grows",
+        "my_finding": "OVERSTATED. True of the per-rung seed MINIMUM (6.680 -> 13.470 -> 16.355 -> 29.567) and of 3 of the 5 seeds individually. It is FALSE for seed402 (6.802, 18.265, 16.355, 32.093 -- falls at the third rung) and for seed403 (6.751, 19.020, 18.314, 29.567 -- also falls at the third rung).",
+        "verdict": "OVERSTATED as written; TRUE if read as the per-rung minimum over seeds."
+      },
+      {
+        "claim": "J1 ~ 6.8 -> J4 ~ 32-38",
+        "my_finding": "the J4 seed range is 29.567-38.197, not 32-38.",
+        "verdict": "MINOR NUMERICAL SLIP, conservative in direction (it understates the spread)."
+      },
+      {
+        "claim": "all capped at 800 iterations / all 133 starts hit the cap",
+        "my_finding": "133 of 133 starts hit THEIR cap -- that part is exactly right and I confirmed it (every start has hit_maxiter = true and status = 1). But only 58 were capped at 800: those are the joint ladder. The other 75 were capped at 250, which is the artefact's own maxiter_on_the_secondary_axis_ladders. 'all 133 at 800' would be wrong; 'all 133 at their cap' is right.",
+        "verdict": "IMPRECISE, not wrong. The gate-bearing joint ladder is the 58, and those were at 800."
+      },
+      {
+        "claim": "against a pre-registered cap of 20,000",
+        "my_finding": "CORRECT. leg_401.md 5 pre-registers maxiter = 20000 from 6 starts per rung at commit e4598a5, before any number existed, and the artefact banks preregistered_maxiter = 20000 against maxiter_actually_used = 800. A 25x shortfall.",
+        "verdict": "CORRECT"
+      },
+      {
+        "claim": "(implicit) that this is a ceiling the unit itself did not state",
+        "my_finding": "HALF RIGHT, and the half that is wrong is worth saying. The unit DID bank UNDER_RESOURCED = true, the 20000-vs-800 shortfall, the 133/133 cap counts, the ~10^3 core-h price of the compliant attempt, and it explicitly fired plan reading (d). Its 10.1 already reads 'this construction, at this resolution, under this budget'. What the unit did NOT state -- at all, anywhere -- is the ONE-START finding. That is the new thing, and it is enough on its own.",
+        "verdict": "the audit's novelty is real but narrower than its framing implies."
+      }
+    ],
+    "where_the_audit_is_UNDERSTATED": [
+      {
+        "understatement": "the audit CONCEDES ground it did not have to concede: 'The cap sweep (50->800) supports that against the iteration budget.' It does not support it. I re-derived the entire by_cap block from the recorded trajectories: it is exactly residual_at_cap() taking the min over trajectory points with k <= K -- a post-hoc TRUNCATION of the same 800-iteration runs. And each rung's continuation start was warm started from the previous rung's FULL-BUDGET minimiser, so the truncated columns still carry the full budget from below. Concretely: J1 at 'cap 50' reads 3.2798, which is a truncation of a run seeded from J0's 800-iteration answer 3.6467; J0's own cap-50 value is 14.0239. verdict_is_stable_in_the_cap = true is therefore not a control on the budget at all, and no evidence check touches it.",
+        "consequence": "the Conductor was RIGHT to refuse 8.2's sentence, and had a stronger reason available than the one it used."
+      },
+      {
+        "understatement": "the audit never mentions that the banked minimiser is not a stationary point in any sense. At the reported rho the scale-invariant gradient is 153.2 against a pre-registered gtol of 1e-12, and it grows MONOTONICALLY with n_dof on both branches (B: 23.05, 24.06, 60.11, 153.22; A: 1.16, 1.75, 3.11, 16.12). A ladder whose iterates get further from stationarity as they refine is a stronger statement of the audit's own thesis -- 'biased toward measuring no change' -- than the seed spread is, and it is sitting in the same artefact, per start, unremarked.",
+        "consequence": "the audit's conclusion is under-evidenced, not over-evidenced."
+      }
+    ],
+    "where_the_audit_is_WRONG_in_the_conservative_direction": {
+      "text": "3i q2: an interval/NK enclosure needs a residual small enough for a contraction to close, and this one is '1.6 against a unit-normalised field'",
+      "finding": "1.6 is branch B's number, and branch B is NOT the unit-normalised branch. Branch B pins the far-field angular amplitude to 1 and its Gaussian-weighted interior L2 is 0.0021915332982833375 -- 0.22% of branch A's. The unit-normalised branch is A, whose weighted_L2_total is 1.0000000000 and whose residual is 7.58. The unit discloses this asymmetry at its 10 reading (c-3); the audit did not carry it.",
+      "which_way_it_cuts": "AGAINST the audit's own case, i.e. the error is conservative. Measured against a genuinely unit-normalised field the residual is 7.58, not 1.6, so L7 is blocked harder than the audit says, not less. The re-rank to L6-b stands undisturbed and is if anything better justified.",
+      "verdict": "WRONG IN FACT, CORRECT IN DIRECTION."
+    },
+    "THE_RULING": {
+      "on_the_one_start_claim": "UPHELD AND CONFIRMED INDEPENDENTLY. It is the audit's genuine find, and the unit did not report it.",
+      "on_the_supporting_numbers": "OVERSTATED IN THREE PLACES (the 10-24x band, 'monotonically worse', and 'all 133 at 800'), none of them fatal, all of them in the same direction: the rhetoric runs slightly ahead of the arithmetic.",
+      "on_the_consequence_drawn": "SOUND. 'decreases_under_refinement = NO cannot yet be read as a statement about the ansatz' is CORRECT, and on my evidence it is BETTER SUPPORTED than the Conductor's own argument for it. Three independent facts force it: (i) the minimum at every refined rung is one warm-started point, so the ladder measures the continuation path and not the trial space; (ii) the cap sweep offered as the control against the budget hypothesis is a truncation of full-budget runs and controls nothing; (iii) every iterate is ~14 orders from its own convergence criterion and getting worse with n_dof. Any one of these blocks the inference to the ansatz. Together they make it unavailable.",
+      "on_the_re_rank_to_L6_b": "CORRECT and, in my judgement, the right purchase. It is exactly the experiment that separates (ii) and (iii) from the ansatz hypothesis: fixed n_dof = 6720, cap raised to 20000, from L6's own banked minimiser plus independent seeds. I would add one thing to its gate that the Conductor's version does not require: it should report the terminal max_abs_grad and scale_invariant_grad, not only the terminal rho, because a rho that does not move while the gradient DOES fall means something different from a rho that does not move while the gradient stays at 153.",
+      "on_the_price": "'~10^1 core-h from L6's own timing (1,240 s per start at 800 iterations), two orders below the ladder' -- I re-derived it: 1238.7 s / 800 = 1.548 s per iteration, x 20000 x 3 starts = 25.8 core-h. That is inside '~10^1' but at its top, and it is ~1.6 orders below a 10^3 core-h ladder, not two. The purchase is still cheap and the conclusion is unaffected.",
+      "one_line": "The Conductor's audit is CORRECT IN ITS FINDING, OVERSTATED IN THREE OF ITS NUMBERS, UNDERSTATED IN TWO PLACES THAT WOULD HAVE HELPED IT, AND WRONG ONCE IN THE CONSERVATIVE DIRECTION. The consequence it drew stands. The integrator did not confirm its own unit -- it contradicted it, which is the behaviour the rule exists to produce -- but it did so with prose that runs ahead of its arithmetic, which is the same defect it charged the unit with."
+    }
+  },
+  "WAVE_LEVEL_PROCESS_CHECKS": {
+    "3g_step_1_gates_precommitted_before_dispatch": "VERIFIED from git: WAVE6_PLAN.md was committed at e202653, and the three worker branches all base at 5c49486 with their first commits being pre-registrations carrying NO RESULT NUMBERS (e4598a5 for L6, a7e61e8 for V-W5, eb756b1 for V5). No gate wording changed after dispatch.",
+    "3g_no_self_verification": "VERIFIED. WAVE6_CLOSE.md states 'I planned this wave, so I did not verify it' and labels L6 UNVERIFIED; this unit is that verifier, dispatched in wave 7.",
+    "3i_answered_per_unit_in_the_integration_commit": "SUBSTANTIALLY MET, with one form deviation. V5's seven are in ac34fd4, V-W5's in 7c79397. L6's are NOT in its landing commit e62c449 -- whose body is empty -- but in the wave-close commit 2a5ea0d one commit later, and in WAVE6_CLOSE.md. 3i says 'the moment any worker returns ... in the integration commit message'. Content complete, timing one commit late. Recorded, not charged as a defect.",
+    "3g_wave_composition_floor": "MET: L6 is a Lane L unit attacking W4/W5 directly. But two of the three units are audit-kind, which the Conductor itself flagged under 3i q7 and acted on by opening wave 7 with construction.",
+    "no_link_moved": "VERIFIED across all three artefacts. L6 banks L1_to_L4_link_moved = NONE and clay_percent_unchanged = true; V5 and V-W5 the same. Clay ~0.05%."
+  },
+  "not_checked_WITH_PRICES": [
+    {
+      "item": "Whether L6's residual is actually the minimum of J over the trial space -- i.e. whether the 800-iteration cap, not the ansatz, produced 1.6138.",
+      "why_not": "needs compute I do not have, and it is precisely L6-b's job.",
+      "price": "~26 core-h at the top rung (3 starts x 20000 iterations x 1.548 s/iteration, re-derived from L6's own banked timing). Currently in flight as unit L6-b.",
+      "severity_if_it_went_the_other_way": "decisive in both directions, as the Conductor says."
+    },
+    {
+      "item": "Whether J(c) as CODED is actually the L^{3/2} norm of curl of route 4's profile residual -- i.e. whether the objective is the right functional.",
+      "why_not": "this is SCIENCE, not arithmetic, and it is outside a verifier's remit as this programme defines it. The strongest internal evidence is selftest T_D, which compares the exact-basis W[V] against a finite-difference curl of R[V] and agrees to 1.22e-4. That is a real cross-check of the operator, but it is self-consistency of two of the unit's own implementations, not an external one.",
+      "price": "an independent re-implementation of the vorticity residual in a different basis (e.g. a uniform-grid finite-difference evaluation of W[V] on the banked field) and a comparison of J: ~1 unit-week of agent time, ~1-5 core-h of compute. This is the single highest-value unrun check on route 4's construction line.",
+      "severity_if_it_went_the_other_way": "TOTAL. Every route-4 residual number in the record is downstream of this one function."
+    },
+    {
+      "item": "Whether the 22 Class-A interval-arithmetic inputs V5 took as given are correct.",
+      "why_not": "UNRECOMPUTABLE BY DESIGN without re-running the authors' interval code, which is not published in a form we hold. V5 says so and enumerates all 22. Contacting the author group is PROHIBITED.",
+      "price": "a from-scratch interval-arithmetic re-derivation of the Grade-A inputs: ~2-4 unit-weeks and an interval library we do not currently depend on. Alternatively ~0 if the authors' code is ever published.",
+      "severity_if_it_went_the_other_way": "V5's CLAUSE_1 YES would become unsupported. Note the record already carries the condition explicitly."
+    },
+    {
+      "item": "Whether L6's far-field decay exponent of 0.225 on branch B indicates a genuine failure to sit in the Chae-Wolf alpha >= 1 class, or is an artefact of fitting over 5 < r < 200 on a truncated algebraic map.",
+      "why_not": "needs the fit repeated over several disjoint r-windows on the banked field, which means re-synthesising the field -- doable, but it is a NEW measurement and my territory is three files. I report the number and its absence from the prose; I do not adjudicate what it means.",
+      "price": "~0.5 core-h from the banked coefficients. Genuinely cheap; I did not spend it because producing a new physical measurement is outside a verifier's gate.",
+      "severity_if_it_went_the_other_way": "would bear directly on whether branch B is in the right function class at all, i.e. on which branch should carry the headline."
+    },
+    {
+      "item": "Whether the four constants V5 found broken are broken in the published paper or only in the version V5 pinned.",
+      "why_not": "V5 pinned a specific arXiv version and recorded it; checking other versions means fetching them, and reading published material is authorised but I did not spend the network step on it.",
+      "price": "~15 minutes of agent time plus one network fetch per version.",
+      "severity_if_it_went_the_other_way": "low for us -- V5's conclusion is about the pinned version and says so."
+    },
+    {
+      "item": "Whether L6's evidence script passes on a truly clean checkout with pip install -r requirements.txt.",
+      "why_not": "I SIMULATED it by blocking scipy in a scratch sandbox and confirmed the uncaught ImportError, but I did not build a fresh virtualenv from requirements.txt.",
+      "price": "~5 minutes and ~200 MB of disk. The simulated result is unambiguous; a real venv would only confirm it.",
+      "severity_if_it_went_the_other_way": "none -- it would mean the defect is smaller than reported."
+    },
+    {
+      "item": "The three sibling units in flight during this run (R-bank, R-prof, L6-b).",
+      "why_not": "OUT OF SCOPE BY CONSTRUCTION. They are wave 7, not wave 6. Their verifier is V-W7.",
+      "price": "n/a",
+      "severity_if_it_went_the_other_way": "n/a"
+    }
+  ],
+  "defects_found_and_NOT_repaired": [
+    {
+      "id": "D-VW6-1",
+      "unit": "L6",
+      "severity": "MATERIAL",
+      "short": "8.2's bolded 'a fact about the construction, not the stopping point' is not established by its only control; the cap sweep is a truncation of full-budget runs."
+    },
+    {
+      "id": "D-VW6-2",
+      "unit": "L6",
+      "severity": "MATERIAL",
+      "short": "the banked minimiser is ~14 orders from its own pre-registered gtol (153.2 vs 1e-12) and the gap grows monotonically with n_dof on both branches. Banked per start; stated nowhere."
+    },
+    {
+      "id": "D-VW6-3",
+      "unit": "L6",
+      "severity": "MINOR",
+      "short": "3.5's three pre-registered mechanism predictions are never adjudicated, against an explicit written commitment that failures are as reportable as successes. Two are unfavourable on the banked data."
+    },
+    {
+      "id": "D-VW6-4",
+      "unit": "L6",
+      "severity": "MINOR",
+      "short": "the headline branch's fitted far-field decay exponent is 0.2250; 4 promised to report it and no prose anywhere carries it."
+    },
+    {
+      "id": "D-VW6-5",
+      "unit": "L6",
+      "severity": "MINOR",
+      "short": "branch-B selection leans on NRS 1996 / Tsai 1998, held SECOND HAND. Named in the register under L7-src; also live here."
+    },
+    {
+      "id": "D-VW6-6",
+      "unit": "integration boundary, NOT L6",
+      "severity": "MINOR",
+      "short": "at the bound, SOURCES.md has no row and no DEPTH for Byrd-Lu-Nocedal-Zhu 1995 (L6's C1-discharging apparatus) or Chandrasekhar (its trial space). 3k postdates L6's dispatch, so this is the landing commit's gap, not the unit's."
+    },
+    {
+      "id": "D-VW6-7",
+      "unit": "L6",
+      "severity": "MATERIAL",
+      "short": "undeclared scipy dependency: p2_route_l6_v1.py imports scipy, requirements.txt says scipy is intentionally NOT required, and the full evidence script therefore dies with an uncaught ImportError on a clean checkout -- zero checks reported. Same defect class as V5's mpmath, repaired one commit earlier."
+    },
+    {
+      "id": "D-VW6-8",
+      "unit": "V-W5",
+      "severity": "COSMETIC",
+      "short": "banks 120 checks, prints 121 PASS lines; the extra is its own self_hash check outside the counter."
+    },
+    {
+      "id": "D-VW6-9",
+      "unit": "V-W5",
+      "severity": "COSMETIC",
+      "short": "item 3's git subprocess raises an uncaught CalledProcessError outside a checkout instead of reporting a FAIL."
+    },
+    {
+      "id": "D-VW6-10",
+      "unit": "L6",
+      "severity": "COVERAGE",
+      "short": "neither stability_against_the_iteration_cap nor cost_and_shortfall is touched by any of the 30 evidence checks. The two blocks carrying the most rhetorical weight in the conclusion have no executable check behind them."
+    },
+    {
+      "id": "D-VW6-11",
+      "unit": "L6",
+      "severity": "COVERAGE",
+      "short": "C19 (divergence-free) is a structural tautology -- it passes on Gaussian noise. Disclosed at 8.5; recorded so it is not counted as evidence about the profile."
+    }
+  ],
+  "defects_repaired": 0,
+  "banked_artefacts_edited": 0,
+  "files_created": [
+    "writeup/data/p2_verify_wave6_v1.json",
+    "experiments/p2_verify_wave6_v1_evidence.py",
+    "experiments/journal/leg_407.md"
+  ],
+  "what_this_unit_did_NOT_do": [
+    "did not repair any defect it found -- reporting, not fixing, is the gate (11 open above)",
+    "did not edit any banked artefact",
+    "did not verify the SCIENCE of any unit; reproducing a number is not endorsing it",
+    "did not read DIRECTION.md",
+    "did not contact any author group",
+    "did not run any new physical measurement on route 4",
+    "did not verify the three sibling units in flight -- they are wave 7"
+  ],
+  "mutation_tests_all_run_in_scratch_never_the_repo": 5,
+  "chain": "No link of the L1 -> L4 chain moved in wave 6, and none moved in this verification. Wave 6's three units are verified as ARITHMETIC and PROVENANCE. W4 and W5 stand where they stood.",
+  "clay_movement": "none",
+  "clay_percent_unchanged": true,
+  "tier": 2,
+  "checks_run": 65,
+  "checks_failed": 0,
+  "checks_passed": 65,
+  "unit_evidence_scripts_rerun_by_me": {
+    "p2_route_l6_v1_evidence.py": {
+      "checks": 30,
+      "failures": 0,
+      "exit": 0
+    },
+    "p2_route_v5_v1_evidence.py": {
+      "checks": 75,
+      "failures": 0,
+      "exit": 0
+    },
+    "p2_verify_wave5_v1_evidence.py": {
+      "checks": 120,
+      "failures": 0,
+      "exit": 0,
+      "PASS_lines_printed": 121
+    }
+  },
+  "VERDICTS": {
+    "L6": "VERIFIED-WITH-QUALIFICATION",
+    "V5": "VERIFIED",
+    "V_W5": "VERIFIED",
+    "CONDUCTORS_L6_LANDING_AUDIT": "FINDING CORRECT, THREE NUMBERS OVERSTATED, TWO PLACES UNDERSTATED, ONE ERROR IN THE CONSERVATIVE DIRECTION; CONSEQUENCE UPHELD"
+  },
+  "self_hash": "7116301a5abd3d82"
+}
