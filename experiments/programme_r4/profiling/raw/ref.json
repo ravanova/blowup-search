@@ -1,0 +1,89 @@
+{
+  "controls": {
+    "negative_noop_PASS": true,
+    "negative_noop_call_s": 1.4578012357648286e-07,
+    "planted_PASS": true,
+    "planted_expected": ">1 and <20; 4x elements, 4.67x N^2 log N^2 work",
+    "planted_fft2_128_over_64_ratio": 4.489980056151437,
+    "positive_PASS": false,
+    "positive_busyloop_expected": "~4 (linear in trip count)",
+    "positive_busyloop_ratio_400_over_100": 7.152934916917788
+  },
+  "env": {
+    "host_platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "loadavg_at_start": [
+      4.35,
+      4.19,
+      4.6
+    ],
+    "n_cpu": 12,
+    "numpy": "2.5.2",
+    "python": "3.12.3",
+    "thread_env": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1",
+      "XLA_FLAGS": "--xla_force_host_platform_device_count=1"
+    },
+    "timer": "time.perf_counter_ns",
+    "timer_resolution_ns": 1.0
+  },
+  "fftw3_transform_floor": {
+    "citation": "Frigo & Johnson, Proc. IEEE 93(2):216-231 (2005)",
+    "fftw_version": "n/a",
+    "floor_20_complex_transforms_per_step_s": 0.00018212139205842082,
+    "floor_25_rfft_transforms_per_step_s": 0.00019610238847583643,
+    "library": "FFTW3 via pyfftw",
+    "numpy_fft2_24x24_s": 8.505683333333334e-05,
+    "numpy_over_fftw_transform_ratio": 9.340674631571984,
+    "pyfftw_version": "0.15.1",
+    "rfft2_over_fft2_ratio": 0.8614139668466,
+    "status": "MEASURED",
+    "t_complex_fft2_24x24_s": 9.106069602921041e-06,
+    "t_rfft2_24x24_to_24x13_s": 7.844095539033458e-06
+  },
+  "jax_cfd_reference": {
+    "citation": "Kochkov, Smith, Alieva, Wang, Brenner & Hoyer, PNAS 118(21) e2101784118 (2021), arXiv:2102.01010",
+    "dispatch_overhead_per_step_s": 0.0004410857231818184,
+    "drag": 0.1,
+    "jax_devices": [
+      "cpu:0"
+    ],
+    "jax_version": "0.11.1",
+    "library": "jax_cfd.spectral.equations.ForcedNavierStokes2D",
+    "loadavg": [
+      6.97,
+      4.79,
+      4.79
+    ],
+    "n_explicit_stages_per_step": 5,
+    "note_drag": "the reference's ForcedNavierStokes2D hard-codes drag=0.1; ours has no drag. It is one term folded into linear_term -- zero extra arrays per step.",
+    "state_dtype": "complex128",
+    "state_shape": [
+      24,
+      13
+    ],
+    "status": "MEASURED",
+    "stepped_ok": true,
+    "stepper": "time_stepping.crank_nicolson_rk4 (Carpenter-Kennedy)",
+    "t_per_step_in_scan_s": 0.000540801345,
+    "t_scan_200_steps_s": 0.108160269,
+    "t_single_jitted_step_s": 0.0009818870681818183,
+    "transforms_per_explicit_terms": 5,
+    "transforms_per_step_rfft": 25
+  },
+  "leg": 405,
+  "ours_in_this_process": {
+    "loadavg": [
+      7.69,
+      4.98,
+      4.85
+    ],
+    "numpy": "2.5.2",
+    "t_rk4_step_s": 0.0025196937142857143
+  },
+  "part": "ref",
+  "unit": "R-prof"
+}

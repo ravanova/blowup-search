@@ -120,3 +120,24 @@ rule requires:
 added there; this row supplies the depth retrospectively for the optimiser both units use.
 It does **not** discharge anything owed for `R2`, `R3`, `R4` or the NRŠ 1996 `SECOND HAND`
 debt, all of which remain exactly as recorded above.
+
+## Appended by `R-prof` (leg 405, wave 7) — EXECUTION RECORD, rows 23–26 untouched
+
+**§3k rule 1 asks a unit that reads a source to update its row in the same commit; my brief
+forbids me editing rows 23–26, which the Conductor filled correctly before dispatch. So this is
+appended beside them rather than written into them.** It records the DEPTH at which `R-prof`
+actually consumed each, which is the column §3k says the register exists for.
+
+| # | source | what `R-prof` did with it | DEPTH REACHED BY THIS UNIT | load-bearing |
+|---|---|---|---|---|
+| 27 | **row 23** — JAX-CFD `ForcedNavierStokes2D` + `crank_nicolson_rk4` (Kochkov *et al.*, PNAS 118(21) e2101784118, 2021) | **CONSTRUCTED, STEPPED AND TIMED at `N = 24`** under `jax 0.11.1` / `jax_cfd 0.2.1`, x64, state `(24,13) complex128`; `explicit_terms` and `time_stepping.crank_nicolson_rk4` **read in source** to count 5 explicit stages and 5 transforms per stage, and to establish that `kolmogorov_forcing`'s two `rfft2` calls are **grid-only and therefore constant-folded under `jit`**, so they are NOT in the 25. Reference sanity checked: the state advances and stays finite over 200 steps. | **CODE READ + EXECUTED + MEASURED.** The **PNAS paper itself remains UNREAD** — the code is what is load-bearing here, and nothing in this unit rests on the paper's text. | **YES — gate (iii)** |
+| 28 | **row 24** — FFTW3 (Frigo & Johnson, *Proc. IEEE* **93(2):216–231**, 2005) via `pyfftw 0.15.1` | planned `FFTW_MEASURE` transforms on aligned buffers, complex `24×24` **and** real `24×24 → 24×13`, timed in the same interleaved rounds as everything else. Supplies both the 20-transform floor and the **measured** `rfft2/fft2` cost ratio at this size. | **LIBRARY EXECUTED AND MEASURED; PAPER CITATION ONLY.** | **YES — gate (iii)'s floor** |
+| 29 | **row 25** — Chandler & Kerswell, *JFM* **722:554–595** (2013) | **not used.** Recorded here only to state that this unit did **not** upgrade its depth and rests nothing on it, as the brief requires. | **CITATION ONLY, UNREAD** | no |
+| 30 | numpy's `numpy.fft` (pocketfft) as shipped in `numpy 2.5.1` / `2.5.2` | the **object under measurement**, not a source: every claim about its per-call cost in this leg is `R-prof`'s own measurement, reproducible from `experiments/programme_r4/profiling/r_prof_v1.py`. **No published claim is being leaned on**, so no depth applies. | n/a — **measured, not cited** | **YES, but self-measured** |
+
+**§3k rule 3 (do not rebuild what is published) — the exemption, stated rather than assumed.**
+`R-prof` **builds nothing**: it measures a module it is forbidden to modify. The one candidate
+change it prices (planned FFTW3 transforms in place of per-call `numpy.fft`, and batching the four
+inverse transforms of a stage into one call) is **not a numerical method** — it is the documented
+use of row 24's library and of `numpy.fft`'s own `axes=` argument. **It is priced, not landed**, and
+a unit that lands it owes its own equivalence check.

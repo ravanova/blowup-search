@@ -1,0 +1,1568 @@
+{
+  "cpu_process_time": {
+    "load_span": [
+      14.71,
+      20.16
+    ],
+    "per_call_summary": {
+      "fftw3_fft2_24x24": {
+        "max_over_min": 2.132639377654841,
+        "max_s": 1.1766505810736027e-05,
+        "median_s": 9.08600105081655e-06,
+        "min_s": 5.517344345238096e-06
+      },
+      "jaxcfd_scan_100_steps": {
+        "max_over_min": 1.7020060774589556,
+        "max_s": 0.00080745786,
+        "median_s": 0.00072105641,
+        "min_s": 0.00047441538000000006
+      },
+      "ours_100_steps": {
+        "max_over_min": 1.870667415808746,
+        "max_s": 0.00420058733,
+        "median_s": 0.003027256945,
+        "min_s": 0.00224550195
+      }
+    },
+    "rounds": [
+      {
+        "fftw3_fft2_24x24": 7.4360492277992285e-06,
+        "jaxcfd_scan_100_steps": 0.0007171848900000001,
+        "load": 16.54,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00277697053,
+        "round": 0
+      },
+      {
+        "fftw3_fft2_24x24": 9.050711267605634e-06,
+        "jaxcfd_scan_100_steps": 0.0006640426000000001,
+        "load": 17.3,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0039951956,
+        "round": 1
+      },
+      {
+        "fftw3_fft2_24x24": 9.454993998153279e-06,
+        "jaxcfd_scan_100_steps": 0.0006787451,
+        "load": 18.08,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00297329324,
+        "round": 2
+      },
+      {
+        "fftw3_fft2_24x24": 8.801459778597786e-06,
+        "jaxcfd_scan_100_steps": 0.00069931307,
+        "load": 18.08,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0036613745400000002,
+        "round": 3
+      },
+      {
+        "fftw3_fft2_24x24": 8.915786506469502e-06,
+        "jaxcfd_scan_100_steps": 0.00071697296,
+        "load": 18.95,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00322460565,
+        "round": 4
+      },
+      {
+        "fftw3_fft2_24x24": 9.799524186046513e-06,
+        "jaxcfd_scan_100_steps": 0.00064118409,
+        "load": 19.92,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00324740405,
+        "round": 5
+      },
+      {
+        "fftw3_fft2_24x24": 6.145124459809853e-06,
+        "jaxcfd_scan_100_steps": 0.00069645383,
+        "load": 20.09,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00313500648,
+        "round": 6
+      },
+      {
+        "fftw3_fft2_24x24": 1.0055209061488674e-05,
+        "jaxcfd_scan_100_steps": 0.0007726567500000001,
+        "load": 20.16,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0033568010000000004,
+        "round": 7
+      },
+      {
+        "fftw3_fft2_24x24": 9.82927942583732e-06,
+        "jaxcfd_scan_100_steps": 0.00055014328,
+        "load": 20.16,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0028766508400000002,
+        "round": 8
+      },
+      {
+        "fftw3_fft2_24x24": 9.168147219690065e-06,
+        "jaxcfd_scan_100_steps": 0.00077819812,
+        "load": 19.5,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0033771191100000005,
+        "round": 9
+      },
+      {
+        "fftw3_fft2_24x24": 1.0025632589517384e-05,
+        "jaxcfd_scan_100_steps": 0.0007497855200000001,
+        "load": 19.5,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0029243618900000002,
+        "round": 10
+      },
+      {
+        "fftw3_fft2_24x24": 1.0122167900092506e-05,
+        "jaxcfd_scan_100_steps": 0.0006961922500000001,
+        "load": 18.82,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00302326839,
+        "round": 11
+      },
+      {
+        "fftw3_fft2_24x24": 9.869416547788875e-06,
+        "jaxcfd_scan_100_steps": 0.00068194933,
+        "load": 19.4,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00296701019,
+        "round": 12
+      },
+      {
+        "fftw3_fft2_24x24": 8.942006658595642e-06,
+        "jaxcfd_scan_100_steps": 0.0007398267700000001,
+        "load": 19.4,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0031042509500000003,
+        "round": 13
+      },
+      {
+        "fftw3_fft2_24x24": 9.21588848429677e-06,
+        "jaxcfd_scan_100_steps": 0.0007404541,
+        "load": 19.69,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00304109167,
+        "round": 14
+      },
+      {
+        "fftw3_fft2_24x24": 9.008096079276175e-06,
+        "jaxcfd_scan_100_steps": 0.0007241146300000001,
+        "load": 19.07,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00337795583,
+        "round": 15
+      },
+      {
+        "fftw3_fft2_24x24": 8.107197663551402e-06,
+        "jaxcfd_scan_100_steps": 0.00074006852,
+        "load": 19.07,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00420058733,
+        "round": 16
+      },
+      {
+        "fftw3_fft2_24x24": 1.1766505810736027e-05,
+        "jaxcfd_scan_100_steps": 0.0006212510300000001,
+        "load": 19.15,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00283167771,
+        "round": 17
+      },
+      {
+        "fftw3_fft2_24x24": 7.984436200378072e-06,
+        "jaxcfd_scan_100_steps": 0.00069073964,
+        "load": 18.33,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00263931523,
+        "round": 18
+      },
+      {
+        "fftw3_fft2_24x24": 9.896235009225094e-06,
+        "jaxcfd_scan_100_steps": 0.00079695376,
+        "load": 18.33,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00288405907,
+        "round": 19
+      },
+      {
+        "fftw3_fft2_24x24": 5.517344345238096e-06,
+        "jaxcfd_scan_100_steps": 0.0007638938200000001,
+        "load": 19.27,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0034502359400000004,
+        "round": 20
+      },
+      {
+        "fftw3_fft2_24x24": 9.810997805092187e-06,
+        "jaxcfd_scan_100_steps": 0.00073156898,
+        "load": 19.17,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0033357990300000003,
+        "round": 21
+      },
+      {
+        "fftw3_fft2_24x24": 8.883150476190478e-06,
+        "jaxcfd_scan_100_steps": 0.0004898414100000001,
+        "load": 19.17,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00345716684,
+        "round": 22
+      },
+      {
+        "fftw3_fft2_24x24": 9.34178093721565e-06,
+        "jaxcfd_scan_100_steps": 0.0008001917,
+        "load": 18.35,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00269837058,
+        "round": 23
+      },
+      {
+        "fftw3_fft2_24x24": 1.0037234649122809e-05,
+        "jaxcfd_scan_100_steps": 0.00069487118,
+        "load": 18.35,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00324129374,
+        "round": 24
+      },
+      {
+        "fftw3_fft2_24x24": 9.269342843994479e-06,
+        "jaxcfd_scan_100_steps": 0.00075855906,
+        "load": 18.24,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0033746062500000003,
+        "round": 25
+      },
+      {
+        "fftw3_fft2_24x24": 9.21158779342723e-06,
+        "jaxcfd_scan_100_steps": 0.00070307408,
+        "load": 18.14,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0030196441100000006,
+        "round": 26
+      },
+      {
+        "fftw3_fft2_24x24": 6.7798548168249666e-06,
+        "jaxcfd_scan_100_steps": 0.0006687157600000001,
+        "load": 18.14,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00336033788,
+        "round": 27
+      },
+      {
+        "fftw3_fft2_24x24": 9.988574045801528e-06,
+        "jaxcfd_scan_100_steps": 0.00079770191,
+        "load": 17.57,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0035700984100000004,
+        "round": 28
+      },
+      {
+        "fftw3_fft2_24x24": 9.678857530864199e-06,
+        "jaxcfd_scan_100_steps": 0.0005913451900000001,
+        "load": 17.57,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0026937916900000003,
+        "round": 29
+      },
+      {
+        "fftw3_fft2_24x24": 9.250093849658315e-06,
+        "jaxcfd_scan_100_steps": 0.0007927184400000001,
+        "load": 16.97,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0027775529200000006,
+        "round": 30
+      },
+      {
+        "fftw3_fft2_24x24": 9.572174651303821e-06,
+        "jaxcfd_scan_100_steps": 0.00077858945,
+        "load": 16.41,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00294930668,
+        "round": 31
+      },
+      {
+        "fftw3_fft2_24x24": 9.08332013888889e-06,
+        "jaxcfd_scan_100_steps": 0.00080745786,
+        "load": 16.41,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0028708270800000004,
+        "round": 32
+      },
+      {
+        "fftw3_fft2_24x24": 7.691234813847158e-06,
+        "jaxcfd_scan_100_steps": 0.0006491460599999999,
+        "load": 16.13,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0027412743000000002,
+        "round": 33
+      },
+      {
+        "fftw3_fft2_24x24": 5.961419577579205e-06,
+        "jaxcfd_scan_100_steps": 0.00051140588,
+        "load": 16.13,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00324930249,
+        "round": 34
+      },
+      {
+        "fftw3_fft2_24x24": 9.28461028277635e-06,
+        "jaxcfd_scan_100_steps": 0.0007267431100000001,
+        "load": 16.28,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0031241305200000002,
+        "round": 35
+      },
+      {
+        "fftw3_fft2_24x24": 8.84809606020363e-06,
+        "jaxcfd_scan_100_steps": 0.00047441538000000006,
+        "load": 15.7,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00258131377,
+        "round": 36
+      },
+      {
+        "fftw3_fft2_24x24": 5.770482891566265e-06,
+        "jaxcfd_scan_100_steps": 0.00065438284,
+        "load": 15.7,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00224550195,
+        "round": 37
+      },
+      {
+        "fftw3_fft2_24x24": 9.051894872899613e-06,
+        "jaxcfd_scan_100_steps": 0.0007766184100000001,
+        "load": 15.8,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00326588519,
+        "round": 38
+      },
+      {
+        "fftw3_fft2_24x24": 9.282342673403767e-06,
+        "jaxcfd_scan_100_steps": 0.0007830651100000001,
+        "load": 15.8,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00375037022,
+        "round": 39
+      },
+      {
+        "fftw3_fft2_24x24": 9.656036016007114e-06,
+        "jaxcfd_scan_100_steps": 0.0007651753500000001,
+        "load": 15.34,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00325700867,
+        "round": 40
+      },
+      {
+        "fftw3_fft2_24x24": 9.088681962744209e-06,
+        "jaxcfd_scan_100_steps": 0.0007785876500000001,
+        "load": 15.34,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00401904111,
+        "round": 41
+      },
+      {
+        "fftw3_fft2_24x24": 9.899833097261568e-06,
+        "jaxcfd_scan_100_steps": 0.0007249042700000001,
+        "load": 14.99,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00317428612,
+        "round": 42
+      },
+      {
+        "fftw3_fft2_24x24": 9.283199612403101e-06,
+        "jaxcfd_scan_100_steps": 0.00075840821,
+        "load": 15.47,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0031231089300000005,
+        "round": 43
+      },
+      {
+        "fftw3_fft2_24x24": 7.827534803206997e-06,
+        "jaxcfd_scan_100_steps": 0.0007313863800000001,
+        "load": 15.47,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0028544144400000004,
+        "round": 44
+      },
+      {
+        "fftw3_fft2_24x24": 8.852963116643615e-06,
+        "jaxcfd_scan_100_steps": 0.00076227526,
+        "load": 15.68,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00276711172,
+        "round": 45
+      },
+      {
+        "fftw3_fft2_24x24": 9.23699299610895e-06,
+        "jaxcfd_scan_100_steps": 0.00070066769,
+        "load": 15.68,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0038037009800000006,
+        "round": 46
+      },
+      {
+        "fftw3_fft2_24x24": 8.65769978118162e-06,
+        "jaxcfd_scan_100_steps": 0.00066916768,
+        "load": 15.46,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0028326981700000004,
+        "round": 47
+      },
+      {
+        "fftw3_fft2_24x24": 8.586372033898306e-06,
+        "jaxcfd_scan_100_steps": 0.00071541963,
+        "load": 15.18,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0031176030600000002,
+        "round": 48
+      },
+      {
+        "fftw3_fft2_24x24": 8.612738314176245e-06,
+        "jaxcfd_scan_100_steps": 0.0007187523400000001,
+        "load": 15.49,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00267844778,
+        "round": 49
+      },
+      {
+        "fftw3_fft2_24x24": 7.641736552567239e-06,
+        "jaxcfd_scan_100_steps": 0.0006863708999999999,
+        "load": 15.49,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0030312455,
+        "round": 50
+      },
+      {
+        "fftw3_fft2_24x24": 7.919485045146727e-06,
+        "jaxcfd_scan_100_steps": 0.00078075289,
+        "load": 15.53,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0027358360900000002,
+        "round": 51
+      },
+      {
+        "fftw3_fft2_24x24": 9.624080681818183e-06,
+        "jaxcfd_scan_100_steps": 0.0007098443,
+        "load": 15.53,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0026125692100000004,
+        "round": 52
+      },
+      {
+        "fftw3_fft2_24x24": 8.854719087635054e-06,
+        "jaxcfd_scan_100_steps": 0.00072336048,
+        "load": 15.17,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00299226508,
+        "round": 53
+      },
+      {
+        "fftw3_fft2_24x24": 9.485861038107753e-06,
+        "jaxcfd_scan_100_steps": 0.00071300864,
+        "load": 15.17,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0029791478400000002,
+        "round": 54
+      },
+      {
+        "fftw3_fft2_24x24": 8.772698219713417e-06,
+        "jaxcfd_scan_100_steps": 0.0007264372000000001,
+        "load": 15.39,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0025953997900000003,
+        "round": 55
+      },
+      {
+        "fftw3_fft2_24x24": 7.757176339285715e-06,
+        "jaxcfd_scan_100_steps": 0.0006924512,
+        "load": 15.2,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0033331501700000006,
+        "round": 56
+      },
+      {
+        "fftw3_fft2_24x24": 6.128772557394555e-06,
+        "jaxcfd_scan_100_steps": 0.00074551426,
+        "load": 15.2,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0026672615100000003,
+        "round": 57
+      },
+      {
+        "fftw3_fft2_24x24": 9.147756226193964e-06,
+        "jaxcfd_scan_100_steps": 0.00061973465,
+        "load": 14.71,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0025678208699999997,
+        "round": 58
+      },
+      {
+        "fftw3_fft2_24x24": 7.93060263864043e-06,
+        "jaxcfd_scan_100_steps": 0.00073932183,
+        "load": 14.71,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0028875988800000003,
+        "round": 59
+      }
+    ],
+    "within_round_ratios": {
+      "ours_over_fftw3_20x_floor": {
+        "max": 31.267179680182792,
+        "median": 16.880793140814376,
+        "min": 12.032789323982287,
+        "p10": 14.584425790037722
+      },
+      "ours_over_fftw3_fft2_24x24": {
+        "max": 625.3435936036558,
+        "median": 337.6158628162875,
+        "min": 240.6557864796457,
+        "p10": 291.68851580075443,
+        "p90": 442.20285476756885
+      },
+      "ours_over_jaxcfd_scan_100_steps": {
+        "max": 7.0577267854916546,
+        "median": 4.341120933043016,
+        "min": 3.3721551723168335,
+        "p10": 3.5777471379286565,
+        "p90": 5.428680434800698
+      }
+    }
+  },
+  "env": {
+    "host_platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "loadavg_at_start": [
+      16.45,
+      13.95,
+      9.04
+    ],
+    "n_cpu": 12,
+    "numpy": "2.5.2",
+    "python": "3.12.3",
+    "thread_env": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1",
+      "XLA_FLAGS": "--xla_cpu_multi_thread_eigen=false intra_op_parallelism_threads=1"
+    },
+    "timer": "time.perf_counter_ns",
+    "timer_resolution_ns": 1.0
+  },
+  "leg": 405,
+  "n_rounds": 60,
+  "note_same_simulated_time": "both sides advance 100 steps of dt=0.01; per-call figures are per STEP",
+  "part": "duel",
+  "unit": "R-prof",
+  "wall_perf_counter": {
+    "load_span": [
+      14.96,
+      18.3
+    ],
+    "per_call_summary": {
+      "fftw3_fft2_24x24": {
+        "max_over_min": 2.715306911565195,
+        "max_s": 1.7711542682926832e-05,
+        "median_s": 9.254030863606992e-06,
+        "min_s": 6.522851102941177e-06
+      },
+      "jaxcfd_scan_100_steps": {
+        "max_over_min": 3.254859847945809,
+        "max_s": 0.0016449678900000001,
+        "median_s": 0.0007529751750000001,
+        "min_s": 0.0005053882400000001
+      },
+      "ours_100_steps": {
+        "max_over_min": 2.3995443820896547,
+        "max_s": 0.006345513150000001,
+        "median_s": 0.0032285841300000004,
+        "min_s": 0.0026444658400000005
+      }
+    },
+    "rounds": [
+      {
+        "fftw3_fft2_24x24": 7.221078129806214e-06,
+        "jaxcfd_scan_100_steps": 0.0007978459,
+        "load": 15.77,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0026874400200000005,
+        "round": 0
+      },
+      {
+        "fftw3_fft2_24x24": 9.195628729547643e-06,
+        "jaxcfd_scan_100_steps": 0.0007986608,
+        "load": 16.11,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00307234715,
+        "round": 1
+      },
+      {
+        "fftw3_fft2_24x24": 8.012065258661604e-06,
+        "jaxcfd_scan_100_steps": 0.0007309722200000001,
+        "load": 16.11,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0030210131300000003,
+        "round": 2
+      },
+      {
+        "fftw3_fft2_24x24": 9.646333955223881e-06,
+        "jaxcfd_scan_100_steps": 0.00078809658,
+        "load": 15.86,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0032203431600000003,
+        "round": 3
+      },
+      {
+        "fftw3_fft2_24x24": 9.716254161043636e-06,
+        "jaxcfd_scan_100_steps": 0.00072074394,
+        "load": 15.86,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0028601702500000003,
+        "round": 4
+      },
+      {
+        "fftw3_fft2_24x24": 6.842196531791908e-06,
+        "jaxcfd_scan_100_steps": 0.00072186953,
+        "load": 15.39,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0029851213200000003,
+        "round": 5
+      },
+      {
+        "fftw3_fft2_24x24": 9.483854176498349e-06,
+        "jaxcfd_scan_100_steps": 0.0006329528800000001,
+        "load": 15.04,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00305276541,
+        "round": 6
+      },
+      {
+        "fftw3_fft2_24x24": 9.52872090729783e-06,
+        "jaxcfd_scan_100_steps": 0.0006978938900000001,
+        "load": 15.04,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00286927398,
+        "round": 7
+      },
+      {
+        "fftw3_fft2_24x24": 9.429208577878104e-06,
+        "jaxcfd_scan_100_steps": 0.0007617522800000002,
+        "load": 14.96,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00364521376,
+        "round": 8
+      },
+      {
+        "fftw3_fft2_24x24": 8.856091903719913e-06,
+        "jaxcfd_scan_100_steps": 0.0007185162000000001,
+        "load": 14.96,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0032575057500000004,
+        "round": 9
+      },
+      {
+        "fftw3_fft2_24x24": 9.243946876537138e-06,
+        "jaxcfd_scan_100_steps": 0.00074196574,
+        "load": 15.28,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00338844176,
+        "round": 10
+      },
+      {
+        "fftw3_fft2_24x24": 1.0070281381241251e-05,
+        "jaxcfd_scan_100_steps": 0.00079672592,
+        "load": 15.34,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0033959872300000004,
+        "round": 11
+      },
+      {
+        "fftw3_fft2_24x24": 1.7711542682926832e-05,
+        "jaxcfd_scan_100_steps": 0.0016449678900000001,
+        "load": 15.34,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00436875726,
+        "round": 12
+      },
+      {
+        "fftw3_fft2_24x24": 1.7225563725490196e-05,
+        "jaxcfd_scan_100_steps": 0.0007474562600000001,
+        "load": 15.55,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.004632332970000001,
+        "round": 13
+      },
+      {
+        "fftw3_fft2_24x24": 1.461015141700405e-05,
+        "jaxcfd_scan_100_steps": 0.00151437716,
+        "load": 15.91,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.006345513150000001,
+        "round": 14
+      },
+      {
+        "fftw3_fft2_24x24": 8.21516166936791e-06,
+        "jaxcfd_scan_100_steps": 0.00067484124,
+        "load": 16.16,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0028658555099999997,
+        "round": 15
+      },
+      {
+        "fftw3_fft2_24x24": 7.701598513011153e-06,
+        "jaxcfd_scan_100_steps": 0.0006080759600000001,
+        "load": 17.1,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0026661084600000003,
+        "round": 16
+      },
+      {
+        "fftw3_fft2_24x24": 7.716510029876228e-06,
+        "jaxcfd_scan_100_steps": 0.00057183844,
+        "load": 17.1,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00276205635,
+        "round": 17
+      },
+      {
+        "fftw3_fft2_24x24": 6.578244670542636e-06,
+        "jaxcfd_scan_100_steps": 0.00068213799,
+        "load": 16.78,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00273697094,
+        "round": 18
+      },
+      {
+        "fftw3_fft2_24x24": 8.88643825350277e-06,
+        "jaxcfd_scan_100_steps": 0.0007723218300000001,
+        "load": 16.78,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0030746255700000004,
+        "round": 19
+      },
+      {
+        "fftw3_fft2_24x24": 7.5486950536630896e-06,
+        "jaxcfd_scan_100_steps": 0.00074299113,
+        "load": 16.39,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00285853446,
+        "round": 20
+      },
+      {
+        "fftw3_fft2_24x24": 1.1363285214348207e-05,
+        "jaxcfd_scan_100_steps": 0.00078203587,
+        "load": 16.39,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0053083903,
+        "round": 21
+      },
+      {
+        "fftw3_fft2_24x24": 9.760471754212092e-06,
+        "jaxcfd_scan_100_steps": 0.0007152205000000001,
+        "load": 16.28,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0026444658400000005,
+        "round": 22
+      },
+      {
+        "fftw3_fft2_24x24": 9.274858893673404e-06,
+        "jaxcfd_scan_100_steps": 0.0011662651000000001,
+        "load": 16.02,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0037756218800000002,
+        "round": 23
+      },
+      {
+        "fftw3_fft2_24x24": 1.1520885687732344e-05,
+        "jaxcfd_scan_100_steps": 0.00078103855,
+        "load": 16.02,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0027653689600000003,
+        "round": 24
+      },
+      {
+        "fftw3_fft2_24x24": 1.5048658166363085e-05,
+        "jaxcfd_scan_100_steps": 0.00115656014,
+        "load": 16.74,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0039852016900000006,
+        "round": 25
+      },
+      {
+        "fftw3_fft2_24x24": 8.931093484419263e-06,
+        "jaxcfd_scan_100_steps": 0.00102962005,
+        "load": 16.92,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0032096299300000005,
+        "round": 26
+      },
+      {
+        "fftw3_fft2_24x24": 1.0675363901018924e-05,
+        "jaxcfd_scan_100_steps": 0.0008358070200000001,
+        "load": 17.81,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00437646266,
+        "round": 27
+      },
+      {
+        "fftw3_fft2_24x24": 1.0121316371681416e-05,
+        "jaxcfd_scan_100_steps": 0.0010734924700000002,
+        "load": 17.81,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00459663235,
+        "round": 28
+      },
+      {
+        "fftw3_fft2_24x24": 7.680927157360407e-06,
+        "jaxcfd_scan_100_steps": 0.0008279454700000001,
+        "load": 18.3,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00269182541,
+        "round": 29
+      },
+      {
+        "fftw3_fft2_24x24": 9.232011079455525e-06,
+        "jaxcfd_scan_100_steps": 0.0007175008100000001,
+        "load": 17.56,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0028046698800000005,
+        "round": 30
+      },
+      {
+        "fftw3_fft2_24x24": 9.421078489816196e-06,
+        "jaxcfd_scan_100_steps": 0.00078928513,
+        "load": 17.56,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00298371689,
+        "round": 31
+      },
+      {
+        "fftw3_fft2_24x24": 6.794361805555556e-06,
+        "jaxcfd_scan_100_steps": 0.00088839598,
+        "load": 17.27,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00362698613,
+        "round": 32
+      },
+      {
+        "fftw3_fft2_24x24": 9.302881764438382e-06,
+        "jaxcfd_scan_100_steps": 0.00072077231,
+        "load": 17.25,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0038610057000000005,
+        "round": 33
+      },
+      {
+        "fftw3_fft2_24x24": 8.345448707482995e-06,
+        "jaxcfd_scan_100_steps": 0.0005053882400000001,
+        "load": 17.25,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00296141084,
+        "round": 34
+      },
+      {
+        "fftw3_fft2_24x24": 9.94127725437416e-06,
+        "jaxcfd_scan_100_steps": 0.0008779793000000001,
+        "load": 16.83,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00343727268,
+        "round": 35
+      },
+      {
+        "fftw3_fft2_24x24": 8.567095275903137e-06,
+        "jaxcfd_scan_100_steps": 0.00071797161,
+        "load": 16.83,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0028411144900000003,
+        "round": 36
+      },
+      {
+        "fftw3_fft2_24x24": 8.713928219563687e-06,
+        "jaxcfd_scan_100_steps": 0.00163428711,
+        "load": 18.12,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00326449025,
+        "round": 37
+      },
+      {
+        "fftw3_fft2_24x24": 9.217439057544177e-06,
+        "jaxcfd_scan_100_steps": 0.0007500675400000001,
+        "load": 18.12,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0033154349900000003,
+        "round": 38
+      },
+      {
+        "fftw3_fft2_24x24": 9.852721076233184e-06,
+        "jaxcfd_scan_100_steps": 0.0008042539800000001,
+        "load": 17.39,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00330075851,
+        "round": 39
+      },
+      {
+        "fftw3_fft2_24x24": 7.905890480591498e-06,
+        "jaxcfd_scan_100_steps": 0.00079342256,
+        "load": 17.2,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0033501365700000004,
+        "round": 40
+      },
+      {
+        "fftw3_fft2_24x24": 9.454937939859245e-06,
+        "jaxcfd_scan_100_steps": 0.00062985634,
+        "load": 17.2,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00288011358,
+        "round": 41
+      },
+      {
+        "fftw3_fft2_24x24": 9.184015297202797e-06,
+        "jaxcfd_scan_100_steps": 0.0007558828100000001,
+        "load": 17.67,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0032318207000000005,
+        "round": 42
+      },
+      {
+        "fftw3_fft2_24x24": 9.253148796498905e-06,
+        "jaxcfd_scan_100_steps": 0.00077475342,
+        "load": 17.67,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00325541403,
+        "round": 43
+      },
+      {
+        "fftw3_fft2_24x24": 7.024807811531309e-06,
+        "jaxcfd_scan_100_steps": 0.0006457557700000001,
+        "load": 17.29,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0029209442200000004,
+        "round": 44
+      },
+      {
+        "fftw3_fft2_24x24": 9.310295714997508e-06,
+        "jaxcfd_scan_100_steps": 0.00106827201,
+        "load": 18.07,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00408067125,
+        "round": 45
+      },
+      {
+        "fftw3_fft2_24x24": 8.941167171935904e-06,
+        "jaxcfd_scan_100_steps": 0.00071062183,
+        "load": 18.07,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00345297232,
+        "round": 46
+      },
+      {
+        "fftw3_fft2_24x24": 9.50858111501758e-06,
+        "jaxcfd_scan_100_steps": 0.0006662973600000001,
+        "load": 17.66,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0032866155900000004,
+        "round": 47
+      },
+      {
+        "fftw3_fft2_24x24": 8.64962541567696e-06,
+        "jaxcfd_scan_100_steps": 0.00067890328,
+        "load": 17.45,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00290444325,
+        "round": 48
+      },
+      {
+        "fftw3_fft2_24x24": 1.018929792979298e-05,
+        "jaxcfd_scan_100_steps": 0.00074786958,
+        "load": 17.45,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00303518689,
+        "round": 49
+      },
+      {
+        "fftw3_fft2_24x24": 8.922972800679983e-06,
+        "jaxcfd_scan_100_steps": 0.00069855252,
+        "load": 17.5,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0032253475600000003,
+        "round": 50
+      },
+      {
+        "fftw3_fft2_24x24": 6.579706172839507e-06,
+        "jaxcfd_scan_100_steps": 0.00080625825,
+        "load": 17.5,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00314283672,
+        "round": 51
+      },
+      {
+        "fftw3_fft2_24x24": 9.48488644524237e-06,
+        "jaxcfd_scan_100_steps": 0.00075858033,
+        "load": 16.81,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.0031829769400000003,
+        "round": 52
+      },
+      {
+        "fftw3_fft2_24x24": 9.807481343283584e-06,
+        "jaxcfd_scan_100_steps": 0.0007330207200000001,
+        "load": 16.27,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.0033702447000000003,
+        "round": 53
+      },
+      {
+        "fftw3_fft2_24x24": 9.262971799462847e-06,
+        "jaxcfd_scan_100_steps": 0.00068777556,
+        "load": 16.27,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.00425167628,
+        "round": 54
+      },
+      {
+        "fftw3_fft2_24x24": 9.25491293071508e-06,
+        "jaxcfd_scan_100_steps": 0.00066636001,
+        "load": 16.33,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00341973845,
+        "round": 55
+      },
+      {
+        "fftw3_fft2_24x24": 6.522851102941177e-06,
+        "jaxcfd_scan_100_steps": 0.00079005911,
+        "load": 15.98,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00343567018,
+        "round": 56
+      },
+      {
+        "fftw3_fft2_24x24": 1.6843208365910868e-05,
+        "jaxcfd_scan_100_steps": 0.00070990997,
+        "load": 15.98,
+        "order": [
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24"
+        ],
+        "ours_100_steps": 0.0030443500200000003,
+        "round": 57
+      },
+      {
+        "fftw3_fft2_24x24": 9.833658415841585e-06,
+        "jaxcfd_scan_100_steps": 0.00078700224,
+        "load": 15.98,
+        "order": [
+          "jaxcfd_scan_100_steps",
+          "fftw3_fft2_24x24",
+          "ours_100_steps"
+        ],
+        "ours_100_steps": 0.00349276007,
+        "round": 58
+      },
+      {
+        "fftw3_fft2_24x24": 9.174604265402844e-06,
+        "jaxcfd_scan_100_steps": 0.00091996459,
+        "load": 15.98,
+        "order": [
+          "fftw3_fft2_24x24",
+          "ours_100_steps",
+          "jaxcfd_scan_100_steps"
+        ],
+        "ours_100_steps": 0.00424733182,
+        "round": 59
+      }
+    ],
+    "within_round_ratios": {
+      "ours_over_fftw3_20x_floor": {
+        "max": 26.69114652559654,
+        "median": 17.75093990498563,
+        "min": 9.037322206859026,
+        "p10": 14.718482053853485
+      },
+      "ours_over_fftw3_fft2_24x24": {
+        "max": 533.8229305119307,
+        "median": 355.01879809971257,
+        "min": 180.74644413718053,
+        "p10": 294.36964107706973,
+        "p90": 458.99700139932975
+      },
+      "ours_over_jaxcfd_scan_100_steps": {
+        "max": 6.787911531474893,
+        "median": 4.212128730261517,
+        "min": 1.9975010694418314,
+        "p10": 3.445736673926875,
+        "p90": 5.2362118949419685
+      }
+    }
+  }
+}

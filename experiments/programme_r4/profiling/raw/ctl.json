@@ -1,0 +1,33 @@
+{
+  "controls": {
+    "negative_noop_PASS": true,
+    "negative_noop_call_s": 4.302296000000001e-08,
+    "planted_PASS": true,
+    "planted_expected": ">1 and <20; 4x elements, 4.67x N^2 log N^2 work",
+    "planted_fft2_128_over_64_ratio": 5.04646309925405,
+    "positive_PASS": true,
+    "positive_busyloop_expected": "~4 (linear in trip count)",
+    "positive_busyloop_ratio_400_over_100": 4.353086462031387
+  },
+  "env": {
+    "host_platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+    "loadavg_at_start": [
+      6.29,
+      4.11,
+      4.68
+    ],
+    "n_cpu": 12,
+    "numpy": "2.5.1",
+    "python": "3.12.3",
+    "thread_env": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1",
+      "XLA_FLAGS": null
+    },
+    "timer": "time.perf_counter_ns",
+    "timer_resolution_ns": 1.0
+  }
+}
