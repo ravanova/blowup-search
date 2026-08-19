@@ -300,3 +300,5 @@ E-FE: 163 jobs on 6 shards; loadavg 9.71 9.24 10.46 on 12 cores
   [130/163] g125 UPO17  S f5: stalled, ||R||=5.804, 0.45 h
   attempt 123 UPO17  arm S: stalled, final ||R|| = 2.262, 31 epochs, 0.67 h
   [131/163] g123 UPO17  S f3: stalled, ||R||=2.262, 0.67 h
+  attempt 122 UPO17  arm S: stalled, final ||R|| = 0.772, 34 epochs, 0.74 h
+  [132/163] g122 UPO17  S f2: stalled, ||R||=0.772, 0.74 h
