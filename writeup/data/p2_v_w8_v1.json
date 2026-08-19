@@ -1,0 +1,607 @@
+{
+ "unit": "V-W8",
+ "leg": 416,
+ "wave": 9,
+ "lane": "VERIFY",
+ "verifies": [
+  "PB2 (410)",
+  "PB1 (411)",
+  "V-W7 (412)",
+  "L-JVER (409)",
+  "54b755b",
+  "233a2c3",
+  "024a9b2",
+  "c63769b"
+ ],
+ "measured": {
+  "far_field_increments_per_decade": [
+   {
+    "from": 1000.0,
+    "to": 10000.0,
+    "per_decade": 0.009573375146568308
+   },
+   {
+    "from": 10000.0,
+    "to": 100000.0,
+    "per_decade": 0.00033158631796070814
+   },
+   {
+    "from": 100000.0,
+    "to": 1000000.0,
+    "per_decade": 6.53668474126512e-05
+   },
+   {
+    "from": 1000000.0,
+    "to": 100000000.0,
+    "per_decade": 6.22572303692337e-05
+   },
+   {
+    "from": 100000000.0,
+    "to": 100000000000.0,
+    "per_decade": 6.245582600576209e-05
+   },
+   {
+    "from": 100000000000.0,
+    "to": 100000000000000.0,
+    "per_decade": 6.211851627879739e-05
+   }
+  ],
+  "far_band_spread_rel": 0.005416264320427582,
+  "far_band_maxdev_rel": 0.0028683875850369672,
+  "origin_increments_per_decade": [
+   {
+    "from": 0.01,
+    "to": 0.0001,
+    "per_decade": 0.00017333708002320591
+   },
+   {
+    "from": 0.0001,
+    "to": 1e-06,
+    "per_decade": 3.936033384333015e-06
+   },
+   {
+    "from": 1e-06,
+    "to": 1e-08,
+    "per_decade": 4.188406984129145e-06
+   }
+  ],
+  "L6_same_field_quadrature_refinement_B": {
+   "x1": 1.613811231995397,
+   "x2": 1.613795783526748,
+   "x4": 1.6138301341778525,
+   "x1_to_x2": -1.5448468648981972e-05,
+   "x2_to_x4": 3.435065110446445e-05
+  },
+  "L6b_same_field_quadrature_refinement_best_iterate": {
+   "x1": 1.5048518951028045,
+   "x2": 1.504797055477681,
+   "x4": 1.5048064730163304,
+   "x1_to_x2": -5.483962512342622e-05,
+   "x2_to_x4": 9.417538649358903e-06
+  },
+  "L6_grid_reach": {
+   "r_min": 0.0005502168747104923,
+   "r_max": 7269.860638324989,
+   "nq_r": 72
+  },
+  "ladder_B_residuals": [
+   3.646708645559305,
+   1.6986514108481086,
+   1.6756137293407118,
+   1.6218749783288575,
+   1.613811231995397
+  ],
+  "ladder_B_ndof": [
+   384,
+   576,
+   1800,
+   2400,
+   6720
+  ],
+  "under_claim": {
+   "J3_at_800": 1.6218749783288575,
+   "J3_fall_needed_to_invert_the_ladder_rel": 0.07215296172004045,
+   "L6_cap_sweep_rate_last3_by_cap": {
+    "100": -0.031298503419278374,
+    "200": -0.029580697900559467,
+    "400": -0.026669284557046716,
+    "50": -0.03258476875087628,
+    "800": -0.02224154647340172
+   },
+   "budget_move_at_J4_rel": -0.06751677936822276,
+   "margin_percentage_points": 0.46361823518176887,
+   "measured_one_rung_up_at_25x_budget_rel": 0.06751677936822276,
+   "ratio": 1.351806114516301,
+   "refinement_ladder_J1_to_J4_rel": -0.04994560879936647,
+   "what": "25x the budget at a FIXED truncation moved the residual 1.35x as far as L6's ENTIRE four-rung refinement ladder did",
+   "why_the_cap_sweep_does_not_answer_it": "V-W6/SS38 ruled L6's cap sweep post-hoc truncation of the SAME 800-iteration runs, so it controls nothing about budgets ABOVE 800; and read as a trend it points the wrong way -- the rate shrinks monotonically as the cap rises."
+  },
+  "S53_naive_ratio": 129.58199356913184,
+  "J3_to_J4_reach_change_decades": 0.15719699069330595,
+  "truncation_term_on_S53_own_coefficient": 9.789786995891348e-06,
+  "local_rate_bands": {
+   "1e3_to_1e4_per_decade": 0.009573375146568308,
+   "1e4_to_1e5_per_decade": 0.00033158631796070814
+  },
+  "truncation_term_at_the_true_radius": {
+   "bracket_low": 5.2124371338497025e-05,
+   "interpolated": 0.00044618180335299527,
+   "bracket_high": 0.0015049057638186248,
+   "ratio_bracket_low": 5.3558170842193755,
+   "ratio_interpolated": 18.064385278445247,
+   "ratio_bracket_high": 154.63016230273837
+  },
+  "r_prof_cpu_ratio": {
+   "max": 7.0577267854916546,
+   "median": 4.341120933043016,
+   "min": 3.3721551723168335,
+   "p10": 3.5777471379286565,
+   "p90": 5.428680434800698
+  },
+  "W7_bytes": {
+   "aefe590 (before the edits)": 2090,
+   "HEAD": 2091
+  },
+  "W7_lines": {
+   "aefe590 (before the edits)": 35,
+   "HEAD": 36
+  },
+  "retirement_tags_present": [
+   "\u00a7W-LANEL-FIRSTTWO",
+   "\u00a7OPTIONS-L7",
+   "\u00a7OPTIONS-L4",
+   "\u00a7STATE-W67-L6",
+   "\u00a7STATE-PIVOT-FLOOR",
+   "\u00a7OPTIONS-R6R7",
+   "\u00a7W4-A-PROV",
+   "\u00a7STATE-W7-RBANK-RPROF",
+   "\u00a7STATE-W6-V5"
+  ],
+  "orch_state_LIVE_heading_count": 2,
+  "headroom_at_HEAD": {
+   "STATE.md": 22949,
+   "WALLS.md": 32030,
+   "OPTIONS.md": 24086,
+   "longest_STATE_row_chars": 502
+  },
+  "ljver_controls_count": 14,
+  "ljver_control_classes": [
+   "?"
+  ],
+  "integration_commit_subject_audit": {
+   "54b755b": {
+    "files": 11,
+    "named_in_subject": 0,
+    "unnamed": [
+     "STATE.md",
+     "WALLS.md",
+     "WALLS_HISTORY.md",
+     "experiments/p2_route_l5_v1_driver.py",
+     "reports/ORCH_STATE.md",
+     "scripts/merge_gate.sh",
+     "test_headroom.py",
+     "writeup/CORRECTIONS.md",
+     "writeup/SOURCES.md",
+     "writeup/papers/P4_METHODOLOGY/STATUS.md",
+     "writeup/waves/WAVE8_CLOSE.md"
+    ]
+   },
+   "233a2c3": {
+    "files": 7,
+    "named_in_subject": 0,
+    "unnamed": [
+     "OPTIONS.md",
+     "STATE.md",
+     "WALLS.md",
+     "WALLS_HISTORY.md",
+     "writeup/CORRECTIONS.md",
+     "writeup/papers/P4_METHODOLOGY/STATUS.md",
+     "writeup/waves/WAVE8_CLOSE.md"
+    ]
+   },
+   "024a9b2": {
+    "files": 6,
+    "named_in_subject": 0,
+    "unnamed": [
+     "OPTIONS.md",
+     "STATE.md",
+     "WALLS.md",
+     "WALLS_HISTORY.md",
+     "writeup/CORRECTIONS.md",
+     "writeup/waves/WAVE8_CLOSE.md"
+    ]
+   },
+   "c63769b": {
+    "files": 1,
+    "named_in_subject": 1,
+    "unnamed": []
+   }
+  },
+  "STATE_carries_S46_withdrawal": {
+   "233a2c3": true,
+   "HEAD": false
+  },
+  "wave8_units_citing_a_draft": [],
+  "pb2_keys": [
+   "ceiling",
+   "controls",
+   "date",
+   "gate",
+   "lane",
+   "leg",
+   "measurements",
+   "object",
+   "preregistration",
+   "route",
+   "runtime_s",
+   "unit",
+   "what"
+  ],
+  "precommitment_timestamps": {
+   "AMENDMENT 4 (6ca49a6)": 1787115801,
+   "dispatch (3ad8b50)": 1787124389,
+   "PB2 first commit (c98af80)": 1787125716
+  }
+ },
+ "checks": [
+  {
+   "tag": "W01",
+   "class": "P",
+   "ok": true,
+   "msg": "\u00a753's three far bands rebuild to ['6.225723e-05', '6.245583e-05', '6.211852e-05'] against printed [6.226e-05, 6.246e-05, 6.212e-05] (tol 5e-9)",
+   "value": [
+    6.22572303692337e-05,
+    6.245582600576209e-05,
+    6.211851627879739e-05
+   ]
+  },
+  {
+   "tag": "W02",
+   "class": "P",
+   "ok": true,
+   "msg": "'three bands inside 1%': full spread 0.5416%, max deviation from mean 0.2868% -- TRUE on either reading",
+   "value": {
+    "spread": 0.005416264320427582,
+    "maxdev": 0.0028683875850369672
+   }
+  },
+  {
+   "tag": "W03",
+   "class": "P",
+   "ok": true,
+   "msg": "origin sweep increments ['1.733e-04', '3.936e-06', '4.188e-06'] -- all positive and the innermost decade is +4.19e-6, DECAYING not settling",
+   "value": [
+    0.00017333708002320591,
+    3.936033384333015e-06,
+    4.188406984129145e-06
+   ]
+  },
+  {
+   "tag": "W04",
+   "class": "P",
+   "ok": true,
+   "msg": "every one of the 9 increments in `cutoff_sensitivity` is POSITIVE (min 3.9360e-06) -- \u00a753's literal claim UPHELD",
+   "value": 3.936033384333015e-06
+  },
+  {
+   "tag": "W05",
+   "class": "P",
+   "ok": true,
+   "msg": "COUNTEREXAMPLE TO THE GENERALISATION (not to \u00a753's literal claim): BOTH minimisers move NEGATIVE on the first doubling of nq_r at their own working reach -- `L6`'s branch-B minimiser -1.544847e-05, `L6-b`'s best iterate -5.483963e-05. \u00a753's sign is measured ONLY at r_max >= 1e6, five orders further out",
+   "value": {
+    "L6_x1_to_x2": -1.5448468648981972e-05,
+    "L6_x2_to_x4": 3.435065110446445e-05,
+    "L6b_x1_to_x2": -5.483962512342622e-05,
+    "L6b_x2_to_x4": 9.417538649358903e-06
+   }
+  },
+  {
+   "tag": "W05b",
+   "class": "P",
+   "ok": true,
+   "msg": "AND THIS CORRECTS MY OWN \u00a73 (leg_416.md): I wrote that `L6-b`'s iterate has NO reach sweep. IT HAS ONE -- `p2_route_l6b_v1.json` `diagnostics_at_best_iterate.quadrature_refinement_same_field` -- and it too is NEGATIVE at x1->x2 (-5.483963e-05), turning positive at x2->x4 (+9.417539e-06). The correction STRENGTHENS the finding rather than withdrawing it",
+   "value": {
+    "x1_to_x2": -5.483962512342622e-05,
+    "x2_to_x4": 9.417538649358903e-06
+   }
+  },
+  {
+   "tag": "W06",
+   "class": "P",
+   "ok": true,
+   "msg": "and that reach is r in [5.5022e-04, 7269.8606] at nq_r=72 -- L6 truncates at ~7.3e3, FIVE ORDERS below where \u00a753 measured the sign",
+   "value": {
+    "r_min": 0.0005502168747104923,
+    "r_max": 7269.860638324989,
+    "nq_r": 72
+   }
+  },
+  {
+   "tag": "W07",
+   "class": "A",
+   "ok": true,
+   "msg": "RULING: \u00a753's literal sign claim UPHELD; the UNCONDITIONAL generalisation ('every increment is positive') has a counterexample at BOTH minimisers' own reach. This does NOT reopen L6/L6-b/L5, because doubling nq_r moves RESOLUTION as well as REACH and the two effects are not separated in that diagnostic. What it establishes is that the reach-derivative's SIGN IS UNMEASURED at the reach the NOs were computed at -- \u00a753 measures it five orders further out and reads the sign back inwards",
+   "value": null
+  },
+  {
+   "tag": "W08",
+   "class": "P",
+   "ok": true,
+   "msg": "\u00a751's ratio rebuilds exactly: |-0.0675167794| / |-0.0499456088| = 1.351806114516",
+   "value": 1.351806114516301
+  },
+  {
+   "tag": "W09",
+   "class": "P",
+   "ok": true,
+   "msg": "the grid model rebuilds L6's banked reach exactly: nq_r=72 -> r_max 7269.860638325 == banked 7269.860638325, r_min 5.502169e-04 == banked 5.502169e-04. So I can price a rung's reach change from primary",
+   "value": {
+    "rmax72": 7269.860638324989,
+    "rmax60": 5062.081055346794
+   }
+  },
+  {
+   "tag": "W10",
+   "class": "P",
+   "ok": true,
+   "msg": "\u00a753 divides a PER-DECADE rate (6.2277e-05 per decade of r_max) by a PER-RUNG TOTAL (8.060e-03). A rung is NOT a decade: J3(nq_r=60) -> J4(nq_r=72) moves the reach 5062.1 -> 7269.9, i.e. 0.157197 decades. On \u00a753's OWN coefficient the commensurable term is 9.7898e-06 and the separation is \u00d7823, not \u00d7130. `6.22e-5` vs `8.06e-3` IS NOT A COMMENSURABLE PAIR",
+   "value": {
+    "naive_ratio": 129.58199356913184,
+    "rung_decades": 0.15719699069330595,
+    "ratio_on_S53_coefficient": 823.3069834290246
+   }
+  },
+  {
+   "tag": "W11",
+   "class": "P",
+   "ok": true,
+   "msg": "AND the coefficient is fitted at r_max >= 1e6 while the ladder truncates at r = 7270. The MEASURED rate in the band containing that radius is 9.5734e-03/decade -- 154\u00d7 larger than \u00a753's. Across a rung the truncation term is between 5.212e-05 and 1.505e-03 (log-interpolated at r=7270: 4.462e-04), so the separation is between \u00d75.4 and \u00d7155, central \u00d718. \u00d7130 sits at the FAR END of that bracket -- it is what you get using the rate measured at r in [1e4,1e5], i.e. BEYOND the grid's own truncation radius. At the radius the ladder actually truncates the separation is ONE order, not two",
+   "value": {
+    "bracket_low": 5.2124371338497025e-05,
+    "interpolated": 0.00044618180335299527,
+    "bracket_high": 0.0015049057638186248,
+    "ratio_bracket_low": 5.3558170842193755,
+    "ratio_interpolated": 18.064385278445247,
+    "ratio_bracket_high": 154.63016230273837
+   }
+  },
+  {
+   "tag": "W12",
+   "class": "A",
+   "ok": true,
+   "msg": "RULING: FALSE AS ARITHMETIC, UPHELD IN PART AS A MAGNITUDE. The printed pair `6.22e-5` (per decade of r_max, fitted at r >= 1e6) against `8.06e-3` (per rung, at r ~ 7.3e3) is not commensurable in units OR in radius; taken at face value it gives \u00d7823. Repaired at the truncation radius the central separation is \u00d718 -- one order, not two -- and \u00d7130 is recoverable only from a rate measured outside the grid. The two errors push in OPPOSITE directions, which is why the number looked plausible. The CONCLUSION -- \u00a752's truncation does not account for \u00a751's under-claim -- SURVIVES, on a margin roughly 6-7\u00d7 thinner than advertised",
+   "value": null
+  },
+  {
+   "tag": "W13",
+   "class": "P",
+   "ok": true,
+   "msg": "AT PRIMARY: the banked cpu-clock min is 3.3721551723168335 -- ABOVE 3. The figure `2.89873` V-W7 called false appears NOWHERE in `p2_r_prof_v1.json`. The Conductor's ruling (V-W7 re-ran; the READING was right) is CORRECT, not self-protective",
+   "value": 3.3721551723168335
+  },
+  {
+   "tag": "W14",
+   "class": "P",
+   "ok": true,
+   "msg": "and `2.89873` is absent from the whole artefact byte-string, so it cannot be a re-read of the bank -- it is a re-run under a different machine load",
+   "value": null
+  },
+  {
+   "tag": "W15",
+   "class": "P",
+   "ok": true,
+   "msg": "REMEDY MIS-LANDED: the 'run-specific' qualification landed in STATE.md only; WALLS.md's W7 sentence is UNCHANGED since before \u00a750 -- V-W7's own defect #4 (a correction recorded in one place and not the other) RECURRING",
+   "value": {
+    "STATE_qualified": true,
+    "WALLS_qualified": false
+   }
+  },
+  {
+   "tag": "W16",
+   "class": "P",
+   "ok": true,
+   "msg": "'W7 is intact' is FALSE AS BYTE-IDENTITY. Measured at the LAST revision before the \u00a751/\u00a752 blocks entered W7 (aefe590) against HEAD: 2090 B / 35 lines -> 2091 B / 36 lines. +1 byte, +1 line -- a stray blank line left at the splice when the blocks were moved out to W4",
+   "value": {
+    "aefe590 (before the edits)": 2090,
+    "HEAD": 2091
+   }
+  },
+  {
+   "tag": "W17",
+   "class": "P",
+   "ok": true,
+   "msg": "and the NON-WHITESPACE content is identical -- so 'W7 intact' survives as a CONTENT claim and fails only as the BYTE claim the plan itself asked me to test. RULING: FALSE as byte-identity, TRUE as content",
+   "value": true
+  },
+  {
+   "tag": "W18",
+   "class": "P",
+   "ok": true,
+   "msg": "all 9 retirement tags are present in WALLS_HISTORY.md at HEAD (9/9); byte-identity of each block against the removed text was verified line-by-line in experiments/journal/leg_416.md \u00a76 -- 9/9 VERBATIM",
+   "value": [
+    "\u00a7W-LANEL-FIRSTTWO",
+    "\u00a7OPTIONS-L7",
+    "\u00a7OPTIONS-L4",
+    "\u00a7STATE-W67-L6",
+    "\u00a7STATE-PIVOT-FLOOR",
+    "\u00a7OPTIONS-R6R7",
+    "\u00a7W4-A-PROV",
+    "\u00a7STATE-W7-RBANK-RPROF",
+    "\u00a7STATE-W6-V5"
+   ]
+  },
+  {
+   "tag": "W19",
+   "class": "A",
+   "ok": true,
+   "msg": "one off-by-one: \u00a7W4-A-PROV's header claims '21 lines' where the diff removed 20. The BYTES are identical; the count beside them is not",
+   "value": null
+  },
+  {
+   "tag": "W20",
+   "class": "P",
+   "ok": true,
+   "msg": "THE FALSE-NEGATIVE PATH: `reports/ORCH_STATE.md` contains 2 lines beginning '## LIVE'. `orch_live_block` uses an UNANCHORED `text.find('## LIVE')` and takes the FIRST -- so mutations MD/MD2/MD3, which inflate the REAL live block past the cap, still PASS. Demonstrated at 5,000 bytes over cap",
+   "value": 2
+  },
+  {
+   "tag": "W21",
+   "class": "A",
+   "ok": true,
+   "msg": "the instrument DOES fail on MA/MB/MC/ME/MD4, and MI proves the comparison binds; the Conductor's 'mutation-tested on four breaks' is UPHELD IN PART. Remedy (not my territory): anchor to '^## LIVE' and assert the heading count is exactly 1",
+   "value": null
+  },
+  {
+   "tag": "W22_STATE.md",
+   "class": "P",
+   "ok": true,
+   "msg": "STATE.md 22,949 B <= 24,576 (1,627 free)",
+   "value": 22949
+  },
+  {
+   "tag": "W22_WALLS.md",
+   "class": "P",
+   "ok": true,
+   "msg": "WALLS.md 32,030 B <= 32,768 (738 free)",
+   "value": 32030
+  },
+  {
+   "tag": "W22_OPTIONS.md",
+   "class": "P",
+   "ok": true,
+   "msg": "OPTIONS.md 24,086 B <= 24,576 (490 free)",
+   "value": 24086
+  },
+  {
+   "tag": "W23",
+   "class": "P",
+   "ok": true,
+   "msg": "longest STATE.md row 502 chars <= 600 -- the row cap that has slipped before",
+   "value": 502
+  },
+  {
+   "tag": "W24",
+   "class": "P",
+   "ok": true,
+   "msg": "L-JVER's suite is claimed '12/12 recompute-from-primary' (leg_409.md:319) and \u00a754's table writes both '12/12' and '0/14' for the SAME suite in ONE ROW. The ARTEFACT records 14 controls -- the unit's own table has 14 rows and its summary sentence says 12. THE DENOMINATOR IS WRONG; the class label is not",
+   "value": 14
+  },
+  {
+   "tag": "W25",
+   "class": "P",
+   "ok": true,
+   "msg": "AND THE SUITE IS THE GENERATOR: p2_route_ljver_v1_evidence.py's OUT is the very artefact it certifies, so a 'control' that reads that file reads what this same process just wrote. Found independently; the Conductor landed the same structural point as \u00a754 at 10:26 mid-run, reversing his own \u00a749 evidence",
+   "value": null
+  },
+  {
+   "tag": "W26",
+   "class": "P",
+   "ok": true,
+   "msg": "self_hash recomputes: 4bb618d7c8b039ea == banked 4bb618d7c8b039ea. It IS a valid content hash -- but the blob it covers includes `cost.wall_seconds`, so it can never be reproduced by re-running, only by re-reading",
+   "value": "4bb618d7c8b039ea"
+  },
+  {
+   "tag": "W27",
+   "class": "P",
+   "ok": true,
+   "msg": "the three INTEGRATE commits name 0 of 24 file paths they carry (c63769b, the one-file close, is the only one that names its file). \u00a750 item 4 is the Conductor's OWN rule -- 'a commit subject is an index into the record' -- and 233a2c3, the commit that LANDS \u00a750, names none of its seven files",
+   "value": {
+    "named": 1,
+    "total": 25
+   }
+  },
+  {
+   "tag": "W28",
+   "class": "P",
+   "ok": true,
+   "msg": "AND \u00a750's COUNT IS INCOMPLETE: 54b755b (09:19, twenty minutes BEFORE \u00a750 was written) carries `experiments/p2_route_l5_v1_driver.py` -- L5's landed generator, another unit's file -- plus a NEW root-level gate `test_headroom.py` and `scripts/merge_gate.sh`, under a subject naming none of them. \u00a750 item 4 counts two crossings, both pre-dispatch, and omits the one its own author had just made",
+   "value": [
+    "STATE.md",
+    "WALLS.md",
+    "WALLS_HISTORY.md",
+    "experiments/p2_route_l5_v1_driver.py",
+    "reports/ORCH_STATE.md",
+    "scripts/merge_gate.sh",
+    "test_headroom.py",
+    "writeup/CORRECTIONS.md",
+    "writeup/SOURCES.md",
+    "writeup/papers/P4_METHODOLOGY/STATUS.md",
+    "writeup/waves/WAVE8_CLOSE.md"
+   ]
+  },
+  {
+   "tag": "W29",
+   "class": "P",
+   "ok": true,
+   "msg": "V-W7 planted `V19_STATE.md` to assert STATE.md carries the \u00a746 withdrawal. It PASSED at 233a2c3 and FAILS at HEAD: the Conductor's integration commit 024a9b2 retired the L6 row that carried the marker. The retirement was VERBATIM (item 6 upholds it) and \u00a746 survives on WALLS.md and OPTIONS.md, so the correction is not lost -- but a planted check was silently invalidated by a commit in my own scope",
+   "value": {
+    "before": true,
+    "after": false
+   }
+  },
+  {
+   "tag": "W30",
+   "class": "A",
+   "ok": true,
+   "msg": "V-W7's suite re-runs 22/25 at HEAD (FAILED V15, V18, V19_STATE.md). V18 fails BENIGNLY -- it asserts a defect is still present and the defect was fixed. V15's headroom numbers moved with the tree. A verifier suite that hard-codes live-surface state is a one-shot instrument, and its `25/25` was true only at its own commit",
+   "value": null
+  },
+  {
+   "tag": "W31",
+   "class": "P",
+   "ok": true,
+   "msg": "NO wave-8 unit cites a draft. The only near-miss is leg_411.md:20, 'worth more than the draft', which is a judgement about a paper's value and not a citation of one",
+   "value": []
+  },
+  {
+   "tag": "W32",
+   "class": "A",
+   "ok": true,
+   "msg": "PB2's gate asked WHICH NAMED THEOREM excludes the object at mdot==0 and WHETHER the object satisfies that theorem's stated hypotheses. Answered TSAI 1998 THM 2, and I confirmed at the PDF (sha256 pin matches; Thm 1 at -layout lines 128-129, Thm 2 at 130-133): Thm 1 needs U in L^q, q in (3,inf], which this object does not satisfy; Thm 2 is the local-energy statement and carries the jaw. GATE CLEARED, correctly",
+   "value": null
+  },
+  {
+   "tag": "W33",
+   "class": "P",
+   "ok": true,
+   "msg": "PB2's evidence suite re-runs exit 0, 31/31 -- and carries ZERO \u00a745 class labels. 0 of 31 are recompute-from-primary; every one re-reads the artefact the same unit wrote. \u00a749 is right that the CONTRACT mandates the blind spot, and PB2's gate answer survives only because I read the PDF myself",
+   "value": null
+  },
+  {
+   "tag": "W34",
+   "class": "P",
+   "ok": true,
+   "msg": "gate amended, THEN dispatched, THEN the unit's first commit: {'AMENDMENT 4 (6ca49a6)': 1787115801, 'dispatch (3ad8b50)': 1787124389, 'PB2 first commit (c98af80)': 1787125716} -- strictly increasing. No gate was tuned to an answer",
+   "value": {
+    "AMENDMENT 4 (6ca49a6)": 1787115801,
+    "dispatch (3ad8b50)": 1787124389,
+    "PB2 first commit (c98af80)": 1787125716
+   }
+  }
+ ],
+ "summary": {
+  "n_checks": 37,
+  "n_passed": 37,
+  "failed": [],
+  "recompute_from_primary": 31,
+  "recompute_from_primary_passed": 31,
+  "re_read_own_artefact": 6,
+  "note": "N/N passed is not evidence. The [A] checks certify internal consistency and nothing else. This suite does not write, regenerate or touch any artefact it verifies; its only output is writeup/data/p2_v_w8_v1.json."
+ },
+ "rulings": {
+  "item_1_S53_per_decade_arithmetic": "UPHELD",
+  "item_2_S53_sign_claim": "UPHELD as stated -- all 9 increments in cutoff_sensitivity are positive. The UNCONDITIONAL generalisation has a counterexample at BOTH minimisers' own reach (L6 -1.545e-5, L6-b -5.484e-5 on the first nq_r doubling) -- ESCALATED WITH QUALIFICATION. Does NOT reopen L6/L6-b/L5, because that diagnostic confounds reach with resolution; what it shows is that the reach-derivative's SIGN IS UNMEASURED at the reach the NOs were computed at",
+  "item_3_S53_x130_separation": "FALSE as arithmetic, UPHELD IN PART as a magnitude -- a per-decade rate fitted at r>=1e6 divided by a per-rung total at r~7.3e3. Face value x823; repaired at the truncation radius x18 (bracket x5.4-x155). One order of separation, not two; the CONCLUSION survives on a ~6-7x thinner margin",
+  "item_4_S50_item_6": "RULING CORRECT, not self-protective; REMEDY MIS-LANDED on one surface of two",
+  "item_5_W7_byte_identity": "FALSE as byte-identity (2090->2091 B, 35->36 lines); TRUE as content. \u00a752's block was never under W7 at any committed revision, so that half of the narrative is not falsifiable from git",
+  "item_6_verbatim_retirements": "UPHELD, 9/9 byte-identical; one off-by-one line count",
+  "item_7_test_headroom_mutation": "UPHELD IN PART -- it fails on five mutations, but a demonstrated FALSE-NEGATIVE path passes a LIVE block 5,000 bytes over cap"
+ },
+ "ceilings": [
+  "Tier 2. Nothing here is a proof.",
+  "No L1->L4 link moved. This unit is verification, not construction. Clay ~0.05%.",
+  "Every ruling is about the RECORD, not about Navier-Stokes."
+ ],
+ "cost_wall_seconds": 0.5735187530517578,
+ "self_hash": "eeff0223ca26c2a3"
+}
