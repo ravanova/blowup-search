@@ -770,3 +770,30 @@ Standing user directive, unchanged and still binding; retired from STATE.md only
 `ORCHESTRATION.md` §3j's cap. It governs wave 9 exactly as written. Moved verbatim, not compacted.
 
 **§3g's composition floor STANDS: paper units are ADDITIONAL, not a substitute.** Two units come before any drafting — **`PB1`** (`P1`'s owed novelty check; a YES kills `P1` and is a GOOD result) and **`PB2`** (both jaws of `P2`'s pincer read at PRIMARY). **`PB2` is not a paper errand: W4 clause (b) is recorded SHUT AND VERIFIED on two theorems this repository has never opened.** A jaw that does not close as cited goes to the user **immediately**.
+
+
+---
+
+## §STATE-WAVE8 — `STATE.md`'s WAVE 8 block, retired VERBATIM 2026-08-19 at the wind-down (§3j). Nothing edited. Wave 8 is CLOSED AND INTEGRATED; the live summary that replaced it is in `STATE.md` and the full audit is in `writeup/waves/WAVE8_CLOSE.md`.
+
+## WAVE 8 — **IN FLIGHT 2026-08-19: `L-JVER` ‖ `PB2` ‖ `PB1` ‖ `V-W7`** (legs 409–412), plan `writeup/waves/WAVE8_PLAN.md` + 4 amendments, committed **before** dispatch. Composition floor: `L-JVER` (re-implements `W[V]`/`J(c)` in a different basis; gate `|ΔJ|/J < 1e-3`). `V-W7` verifies **wave 7 AND my seventeen integration commits** — I planned it, I may not. `E-FE` is a LATE RETURN and **may not influence this wave's ranking** (`99421dd`).
+
+**RETURNED — `PB2`** (leg 410, `a7ffa1e`): gate **`YES`**. **`W4` clause (b) is carried by TSAI 1998 THM 2** — hypotheses (i) equations + (ii) local energy estimates, **no `L^q` at all** — verified by me at FULL TEXT, and met by measurement. **NRŠ does NOT apply** (`∫|U|³` log-divergent at `α=1`), so the one `UNREACHABLE` source is **not load-bearing**. Clause (b) STANDS, stronger than its citation. 31/31, but **0/31 recompute-from-primary**.
+
+**RETURNED — `L-JVER`** (leg 409, `2acaa9e`): gate **`NO`** — `1.0e-4`/`1.2e-4` at both minimisers, **`42.9%`** at a non-minimiser. **NEITHER PROGRAM IS MISCODED**: `X9` runs the unit's own operator on `L6`'s nodes+weights, reproduces `J_L6` to `1e-14` at all four points.
+
+**⟹ `J` IS A DIVERGENT INTEGRAL** (`§52`), log-divergent at `r→∞` and `r→0`. **Every finite `J` in this record is a value of `L6`'s 72-node, `r ∈ [5.5e-4, 7.27e3]` truncation, not of the functional.**
+
+**⚠⚠⚠ MY LANDING AUDIT (`§53`) GOES FURTHER:** the divergence reaches **the minimiser** — `+6.226e-5`/`+6.246e-5`/`+6.212e-5` per decade over `r_max` `1e6→1e14`, **three bands inside 1%**. `ρ = 1.6138` has **no limit**; P1's PASS is not convergence.
+
+**AND THEN LIMITS IT. THE SIGN IS POSITIVE**: less truncation ⟹ larger `ρ` ⟹ **further** from `<1.45`. **`L6`'s and `L6-b`'s `NO`s SURVIVE; the numbers do not.** §52 does **NOT** subsume §51 — the divergence coeff is **×130 below** the last ladder step. Two independent defects, same four numbers.
+
+**`W4`(b) NOT affected** — `PB2` closes it on Tsai Thm 2 hypotheses measured directly; `c_mod`/`J`/`curl F` absent from its artefact (I searched). **`L5`'s `c_mod = 869.288` FLAGGED**: its ρ-exponent `0.000109` "saturation" is what a log divergence fits to, and its sweep stops ~3 decades short. **NOT adjudicated; sweep owed.**
+
+**RETURNED — `V-W7`** (leg 412, `aefe590`): wave 7 **VERIFIED** — `R-bank`, `R-prof`, `L6-b` all clean against their pre-committed gates. *"Every discrepancy is in the integration, not the units."* **SEVEN defects ruled against ME.** All seven re-checked at primary by me: **6 UPHELD, 1 UPHELD IN PART** (§50–§51).
+
+**⚠⚠ THE WAVE'S BIGGEST ITEM IS AN UNDER-CLAIM, NOT A DEFECT — `CORRECTIONS.md` §51.** `L6`'s four-rung refinement ladder moved `−4.994561%`; `L6-b`'s ONE ×25 budget step at FIXED `n_dof` moved `−6.751678%` = **×1.3518 of the ENTIRE ladder**. Both banked, both correct, **nobody divided one by the other for 11 legs.** `L6`'s *"not decreasing under refinement"* is budget-confounded; `J3` needs `7.2153%` to INVERT and `6.7517%` is measured one rung up. **Margin 0.46 pp** → `L6-e` (~20–35 core-h, gate pre-committed, wave 9).
+
+**RETURNED — `PB1`** (leg 411, `440f28c`): gate **`YES` — `P1` IS KILLED, and that was pre-committed as a GOOD result.** Both effects are in print at `FULL TEXT`: score-monotone admission bias (Page–Holey–Brenner–Kerswell, *JFM* **991** (2024) A10, p.18; Chandler–Kerswell 2013 p.13 — **twelve years old**), and re-mining re-finds (CK13 p.14 Table 1; LK15 p.5). **`P1`'s framing word *silently* is contradicted by its own intended bibliography.** 1 of 12 controls did not fire (`pos_topical`), disclosed, not re-planted, nothing rests on it.
+
+

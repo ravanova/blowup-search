@@ -25,9 +25,9 @@ direction check (seven questions, in every integration commit, per unit); **§3j
   of. **Every lane may build whatever it needs, at any size, without a further ruling.**
 - **Ceiling: Tier 2.** Route 4 produces a candidate; no certification route is built.
   `CLAY_OBLIGATIONS.md` §6 names the two obligations with **no known method**.
-- **Clay odds ~0.05%**, unmoved. **No `L1 → L4` link has ever moved, in 400 legs.**
+- **Clay odds ~0.05%**, unmoved. **No `L1 → L4` link has EVER moved, in over 410 legs.** **The cheapest unit that could move one: NO SUCH UNIT IS KNOWN** — `CLAY_OBLIGATIONS.md` §6 names two obligations with **no known method**, every landed unit is Tier 2, and nothing in `OPTIONS.md` is priced to deliver a certified result.
 
-## THE LANES — ranked 2026-08-14 by user ruling; re-earned per unit under §3i
+## THE LANES — **RE-RANKED 2026-08-19 AT THE STOP, on what is measured NOW** (order unchanged; Lane L DEMOTED); re-earned per unit under §3i
 
 Ruling: `writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md`. Deferred options keep their cost and
 re-open conditions in **`OPTIONS.md`** — read it alongside this file when planning. **Nothing is
@@ -35,10 +35,11 @@ dropped because a lane was not chosen.**
 
 | lane | attacks | status | one line |
 |---|---|---|---|
-| **V — VISCOUS RUNG** | W3 | **ACTIVE — un-held 2026-08-18 by USER RULING** | `V3` (leg 399) measured leg 174's Grade-A × fluid cell **OCCUPIED** by `arXiv:2509.25116`, and its pre-committed reading (a) **FIRED and stays honoured**. **RULED (Q1): the prose test governs — W3 STANDS and the premise SURVIVES**, because the certified object is **not a finite-time singularity**. The hold went in one line and comes out in one. **Wave 6 owes the lane an OBLIGATORY unit** (Q4). |
-| **L — THE LAST OBLIGATIONS** | W4, W5, §6(i), §6(ii) | **PRIORITY, ACTIVE — TWO UNITS LANDED, BOTH NARROWING** | `L2′` (leg 397) and `L5` (leg 400) are Lane L's **first landed units in 400 legs**, and both came back **narrowing the lane**: W4 clause **(a)** shut (paying leg 381's bill destroys the object — `α` pinned to exactly 1) and clause **(b)** shut (threshold-free, `c_mod = 869.288`, ρ-exponent `0`). **§6(i) is NOT retired** (nothing certified). **Left: W5, §6(i), §6(ii) — all untouched, all no-method — and inside W4 only clause (c), which is Lane T's.** |
-| **T — TORUS** | W2, W4, W6 | **DEFERRED** | Demoted on **the lane's own measurement**: `arXiv:1902.00384` is certified by exactly the banned apparatus and both certified rows are 2D lifts (`T4`, `T6`). **Nothing measured is superseded; W2 stands strengthened.** Alive only through **`T2″`**; `T3` deferred **with** the lane, not killed. `OPTIONS.md` §E. |
-| **R — REFORMULATION + SOLVER** | W7 | **continuous** | Runs inside every unit's pre-registration (*what makes this an order of magnitude cheaper?*) and takes its own units when a wave has room. Every factor removed is permanent. **Never sets a wave's direction.** **Internal ranking RULED 2026-08-18: `R4` (validity) > `R2` > `R3`** — `WAVE7_PLAN.md` §0. |
+| **V — VISCOUS RUNG** | W3 | **RANK 1 — BY DEFAULT, NOT BY STRENGTH** | First because the lanes below it are shut or blocked, **not** because its method is measured to work. ACTIVE, un-held 2026-08-18 by USER RULING; `V3` (leg 399) measured leg 174's Grade-A × fluid cell OCCUPIED, its pre-committed reading (a) FIRED and stays honoured, and **RULED (Q1): the prose test governs — W3 STANDS, the premise SURVIVES.** **Still owes the OBLIGATORY unit (Q4), never dispatched.** |
+| **L — THE LAST OBLIGATIONS** | W5, §6(i), §6(ii) | **RANK 2 — DEMOTED 2026-08-19 from PRIORITY** | **Both `W4` clauses it can reach are shut BY ITS OWN UNITS** — (a) by `L2′` (leg 397), (b) by `L5` (leg 400) and re-verified by `PB2` (leg 410) on Tsai 1998 Thm 2. What is left in its charter — **W5, §6(i), §6(ii) — is untouched and no-method**. Inside `W4` only clause (c), **which is Lane T's**. **DEMOTED, NOT KILLED.** |
+| ↳ *why the demotion is not merely bookkeeping* | — | — | `CORRECTIONS.md` **§52/§53**: `J(c)`, the functional every route-4 residual is scored against, is a **logarithmically divergent integral**. Its gate answers survive **only on the SIGN** of the truncation error — **the numbers do not.** A lane cannot hold PRIORITY on an objective that does not exist as a number. **§54: `§52`/`§53` are now independently reproduced bit-identically, so the demotion rests on a re-run result, not on one run.** |
+| **T — TORUS** | W2, **W4(c)**, W6 | **RANK 3 — DEFERRED, and BLOCKED ON A USER RULING, not on work** | Deferred on **the lane's own measurement** (`arXiv:1902.00384` certified by exactly the banned apparatus; both certified rows 2D lifts). **But `W4`'s ONLY surviving clause is (c), and clause (c) IS statement (D), which sits in this deferred lane** — `ESCALATION_D_BUNDLING_2026-08-18.md`, **never ruled**. Alive through `T2″`; `T3` deferred *with* the lane, not killed. `OPTIONS.md` §E. |
+| **R — REFORMULATION + SOLVER** | W7 | **continuous — NEVER sets a wave's direction** | Runs inside every unit's pre-registration (*what makes this an order of magnitude cheaper?*) and takes its own units when a wave has room. Every factor removed is permanent. Internal ranking RULED 2026-08-18: **`R4` (validity) > `R2` > `R3`**. |
 
 **LANE T's TWO RE-OPEN CONDITIONS, either sufficient:** **(i)** a **demonstrated, genuinely-3D
 closure** in the literature, meeting W2's own pre-committed test with three-dimensionality supplied
@@ -108,26 +109,17 @@ measurement, verbatim: `reports/ORCH_STATE.md` Superseded LIVE blocks.
 
 **Outreach stays held.** Reading published material is authorised; contacting any author, group or maintainer list is not.
 
-## WAVE 8 — **IN FLIGHT 2026-08-19: `L-JVER` ‖ `PB2` ‖ `PB1` ‖ `V-W7`** (legs 409–412), plan `writeup/waves/WAVE8_PLAN.md` + 4 amendments, committed **before** dispatch. Composition floor: `L-JVER` (re-implements `W[V]`/`J(c)` in a different basis; gate `|ΔJ|/J < 1e-3`). `V-W7` verifies **wave 7 AND my seventeen integration commits** — I planned it, I may not. `E-FE` is a LATE RETURN and **may not influence this wave's ranking** (`99421dd`).
+## WAVE 8 — **CLOSED AND INTEGRATED 2026-08-19** (legs 409–412). Detail retired verbatim → `WALLS_HISTORY.md` §STATE-WAVE8.
 
-**RETURNED — `PB2`** (leg 410, `a7ffa1e`): gate **`YES`**. **`W4` clause (b) is carried by TSAI 1998 THM 2** — hypotheses (i) equations + (ii) local energy estimates, **no `L^q` at all** — verified by me at FULL TEXT, and met by measurement. **NRŠ does NOT apply** (`∫|U|³` log-divergent at `α=1`), so the one `UNREACHABLE` source is **not load-bearing**. Clause (b) STANDS, stronger than its citation. 31/31, but **0/31 recompute-from-primary**.
+`L-JVER` **`NO`** (`J` is a DIVERGENT integral — `CORRECTIONS.md` §52) ‖ `PB2` **`YES`** (`W4`(b) carried by Tsai 1998 Thm 2; NRŠ does NOT apply) ‖ `PB1` **`YES` — `P1` IS KILLED, and that is a GOOD RESULT** ‖ `V-W7` (seven defects against my integration; I re-checked all seven at primary: **6 UPHELD, 1 UPHELD IN PART** → §50).
 
-**RETURNED — `L-JVER`** (leg 409, `2acaa9e`): gate **`NO`** — `1.0e-4`/`1.2e-4` at both minimisers, **`42.9%`** at a non-minimiser. **NEITHER PROGRAM IS MISCODED**: `X9` runs the unit's own operator on `L6`'s nodes+weights, reproduces `J_L6` to `1e-14` at all four points.
+**The two items that outrank every wave-8 gate: `CORRECTIONS.md` §51 (the under-claim — a refinement ladder and a budget step measuring the same objective, never divided, for eleven legs) and §53 (THE SIGN IS POSITIVE, which is the only reason three `NO`s survive).** §54 reproduces §52/§53 bit-identically on a 2.51× slower box.
 
-**⟹ `J` IS A DIVERGENT INTEGRAL** (`§52`), log-divergent at `r→∞` and `r→0`. **Every finite `J` in this record is a value of `L6`'s 72-node, `r ∈ [5.5e-4, 7.27e3]` truncation, not of the functional.**
+## WAVE 9 — **DISPATCHED 2026-08-19, then the RUN WAS STOPPED BY USER DIRECTIVE.** Plan `11abd04`.
 
-**⚠⚠⚠ MY LANDING AUDIT (`§53`) GOES FURTHER:** the divergence reaches **the minimiser** — `+6.226e-5`/`+6.246e-5`/`+6.212e-5` per decade over `r_max` `1e6→1e14`, **three bands inside 1%**. `ρ = 1.6138` has **no limit**; P1's PASS is not convergence.
+**Legs 413–416: `L5-cmod` (Lane L, construction, opened the wave) ‖ `P4-DRAFT` ‖ `P2-DRAFT` ‖ `V-W8` (verifier, last).** Dispatched **before** the wind-down directive reached the Conductor; the directive forbids `TaskStop`, so they ran to their pre-committed gates. **NOT recorded as `PLANNED, NOT DISPATCHED` — that would be false.** `writeup/waves/WAVE9_PLAN.md` carries every gate.
 
-**AND THEN LIMITS IT. THE SIGN IS POSITIVE**: less truncation ⟹ larger `ρ` ⟹ **further** from `<1.45`. **`L6`'s and `L6-b`'s `NO`s SURVIVE; the numbers do not.** §52 does **NOT** subsume §51 — the divergence coeff is **×130 below** the last ladder step. Two independent defects, same four numbers.
-
-**`W4`(b) NOT affected** — `PB2` closes it on Tsai Thm 2 hypotheses measured directly; `c_mod`/`J`/`curl F` absent from its artefact (I searched). **`L5`'s `c_mod = 869.288` FLAGGED**: its ρ-exponent `0.000109` "saturation" is what a log divergence fits to, and its sweep stops ~3 decades short. **NOT adjudicated; sweep owed.**
-
-**RETURNED — `V-W7`** (leg 412, `aefe590`): wave 7 **VERIFIED** — `R-bank`, `R-prof`, `L6-b` all clean against their pre-committed gates. *"Every discrepancy is in the integration, not the units."* **SEVEN defects ruled against ME.** All seven re-checked at primary by me: **6 UPHELD, 1 UPHELD IN PART** (§50–§51).
-
-**⚠⚠ THE WAVE'S BIGGEST ITEM IS AN UNDER-CLAIM, NOT A DEFECT — `CORRECTIONS.md` §51.** `L6`'s four-rung refinement ladder moved `−4.994561%`; `L6-b`'s ONE ×25 budget step at FIXED `n_dof` moved `−6.751678%` = **×1.3518 of the ENTIRE ladder**. Both banked, both correct, **nobody divided one by the other for 11 legs.** `L6`'s *"not decreasing under refinement"* is budget-confounded; `J3` needs `7.2153%` to INVERT and `6.7517%` is measured one rung up. **Margin 0.46 pp** → `L6-e` (~20–35 core-h, gate pre-committed, wave 9).
-
-**RETURNED — `PB1`** (leg 411, `440f28c`): gate **`YES` — `P1` IS KILLED, and that was pre-committed as a GOOD result.** Both effects are in print at `FULL TEXT`: score-monotone admission bias (Page–Holey–Brenner–Kerswell, *JFM* **991** (2024) A10, p.18; Chandler–Kerswell 2013 p.13 — **twelve years old**), and re-mining re-finds (CK13 p.14 Table 1; LK15 p.5). **`P1`'s framing word *silently* is contradicted by its own intended bibliography.** 1 of 12 controls did not fire (`pos_topical`), disclosed, not re-planted, nothing rests on it.
-
+**`L6-e` v2 was HELD FOR CORES and was never dispatched. It is priced and gated in `OPTIONS.md`, not in a brief.**
 
 ## WAVE 7 — **CLOSED 2026-08-19 (`L6-b` landed); DISPATCHED: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` DISPATCHED 2026-08-19 (leg 408, 6 shards)** — condition discharged.
 **RETURNED — `V-W6` (407), `L6-b` (406), `L6` (401)**: rows retired VERBATIM → `WALLS_HISTORY.md` §STATE-W67-L6. Gate answers **stand** (`L6` `NO` `ρ=1.6138`; `L6-b` `NO` `ρ=1.5049`); their READINGS are superseded by `§51` (iteration cap dominates the ladder) and `§52`/`§53` (`J` divergent; the numbers are truncation values, the `NO`s survive on the sign).
