@@ -277,7 +277,7 @@ DISPATCHED (`E-FE`, leg 408). Detail retired VERBATIM → `WALLS_HISTORY.md` §W
 **⚠ 2026-08-19 — W7 MEASURED FROM THE INSIDE. THE INEFFICIENCY IS REAL AND IT BREAKS NOTHING.**
 `R-prof` (leg 403, `1f89ceb`, `writeup/data/p2_r_prof_v1.json`) profiled `PROG-R4`'s loop against a
 named reference. Gate (iii) **NO: 4.34× slower** (cpu median; wall 4.21; **worst wall round 1.9975**,
-so "every round exceeds 3×" holds on the cpu clock only — Conductor finding; machine not quiet and
+so "every round exceeds 3×" holds on the cpu clock only — Conductor finding, and is **RUN-SPECIFIC** (§50 item 6: true on the banked JSON, min **3.3722**; FALSE on `V-W7`'s re-run, **2.89873**; §56 item 4); machine not quiet and
 the positive control failed, both disclosed). **79.1% of a step is transforms**, fixed fraction
 **0.596** (`N = 4..512`). The one change that recovers most — pre-planned FFTW3, **3.41×** — is
 **priced, not landed**: it perturbs every banked orbit at the last bit, the `R4` problem, so it needs

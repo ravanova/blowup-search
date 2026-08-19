@@ -3792,3 +3792,150 @@ torus, statement (D) — remains **UNTESTED, NOT CLOSED**, and remains the only 
 the open user escalation `D_BUNDLING`. Everything above is **Tier 2**. Nothing here is progress
 toward Clay, and one of the two findings means a draft is wrong rather than a wall is. Clay stays
 **~0.05%**.
+
+---
+
+## §56 — `V-W8` (leg 416) verifies wave 8 and lands four defects ON THE CONDUCTOR. `§53`'s `×130` is **FALSE as arithmetic**; the conclusion it supported survives. Two of `V-W8`'s own remedies are wrong and are corrected here.
+
+`V-W8` was the wave-8 verifier, dispatched in wave 9 per §3f rule 3. I did not plan what it
+verified into existence and it was told to attack my integration commits. It did. Every ruling below
+I re-verified at primary before writing it down; where I reproduce its arithmetic I say so, and where
+it is wrong I say that too.
+
+### 1. `§53`'s per-decade arithmetic — **UPHELD**
+
+All six increments rebuild from `p2_route_ljver_v1.json` `cutoff_sensitivity` to the printed digits
+(`6.225723e-5`, `6.245583e-5`, `6.211852e-5`). The three far bands spread **0.5416 %**, max
+deviation from mean **0.2868 %**. "Inside 1 %" is true on either reading.
+
+### 2. `§53`'s SIGN claim — **UPHELD AS STATED**, and its unconditional reading has a counterexample
+
+All 9 increments in `cutoff_sensitivity` are positive (min `3.936e-6`). **No negative increment
+exists there, so `L6`, `L6-b` and `L5` are NOT reopened** — the sign is the only thing holding those
+three `NO`s up and it holds. But both minimisers' banked `quadrature_refinement_same_field` move
+**negative** on the first `nq_r` doubling: `L6` branch B `−1.545e-05`, `L6-b`'s best iterate
+`−5.484e-05`. That diagnostic confounds reach with resolution, so it is **not** a counterexample to
+the reach-derivative's sign.
+
+What it does establish is worse than a counterexample and I record it as the finding: **the
+reach-derivative's sign is unmeasured at the reach every surviving `NO` was actually computed at.**
+`L6` truncates at `r = 7269.860638325`; §53 measures the sign only at `r_max ≥ 1e6` — **five orders
+further out.** The sign is measured, and it is measured somewhere else.
+
+### 3. `§53`'s `×130` — **FALSE AS ARITHMETIC.** UPHELD only as an order of magnitude, and the repaired figure is `×18`
+
+I wrote that §52's effect and §51's effect are separated by `×130`, and concluded §52 does not
+subsume §51. **The ratio is not a ratio.** `6.22e-5` is a rate **per decade of `r_max`**, fitted at
+`r ≥ 1e6`. `8.06e-3` is a **total per rung**, at `r ≈ 7.3e3`. They share neither units nor radius. I
+divided one by the other and reproduce my own banked `129.46` — arithmetically correct, dimensionally
+meaningless.
+
+Repaired: one rung is **0.157197 decades** (`V-W8` rebuilt the grid reach from the same
+Gauss–Legendre map and recovers `nq_r = 72 → r_max 7269.860638325`, identical to the banked field).
+§52 over one rung is `6.2257e-5 × 0.157197 = 9.7866e-6`, so at face value the separation is
+**`×823.6`** — I reproduce this. Carried to the radius `L6` actually truncates at, `V-W8` puts it at
+**`×18`**, bracket **`×5.4`–`×155`**.
+
+**One order, not two.** The conclusion `§52` was invoked to support — **`§52` does not account for
+`§51`** — survives every figure in that bracket, including the low end. The number was wrong; the
+finding it carried is not. `§53`'s `×130` is **WITHDRAWN and replaced by `×18` (bracket `×5.4`–`×155`)**.
+
+### 4. `§50` item 6 — the RULING is correct, the REMEDY landed in ONE file of two
+
+`V-W7` re-ran and got cpu min `2.89873`; the banked artefact carries `3.3721551723168335`, and
+`2.89873` is absent from the entire artefact byte string. So the Conductor applied W3 ruling Q3 the
+right way round: the re-run does not overwrite the bank. That stands.
+
+But the "run-specific" qualification landed in `STATE.md:128` only. `WALLS.md:279–280` still reads
+*"so 'every round exceeds 3×' holds on the cpu clock only — Conductor finding"* with **no
+run-specific qualification at all**. Verified at primary in both files. **This is `V-W7`'s own defect
+#4 recurring inside the commit that adjudicated it** — a ruling recorded once and believed to be
+recorded twice. Fixed in this commit, in `WALLS.md`, as the landing of an already-measured ruling and
+not as a new decision.
+
+### 5. W7 byte-identity — **FALSE as bytes, TRUE as content**
+
+`aefe590` → HEAD: **2090 B / 35 lines → 2091 B / 36 lines**, a stray blank line at the splice.
+Non-whitespace content identical. My assertion was "byte-identical" and it was not; §37's rule
+requires asserting the count **and the neighbourhood**, and a splice that adds a blank line is
+exactly what the neighbourhood assertion is for.
+
+### 6. Nine verbatim retirements — **UPHELD, 9/9 byte-identical**, one line-count off by one
+
+`§W4-A-PROV` claims 21 lines; the diff removed 20. The bytes are right; the count beside them is not.
+
+### 7. `test_headroom.py` — it DOES fail correctly, it HAS a false-negative path, and **`V-W8`'s remedy is wrong**
+
+Mutations MA/MB/MC/ME/MD4 fail correctly and MI proves the comparison binds — the gate is not
+decorative. The defect: `orch_live_block` (`test_headroom.py:46`) uses an **unanchored**
+`text.find("## LIVE")`, so it takes whichever occurrence appears first **anywhere in the file**,
+including inside a quoted line, a fence, or a retired block — then slices to the next `\n## `.
+
+**Today's reading is nevertheless TRUE.** I measured it independently: anchored `^## LIVE` finds
+exactly two headings, lines **36** (current) and **136** (the wave-8 block I retired verbatim this
+morning); anchored and unanchored select the **same** block; the escalations block above line 36
+contains no `## LIVE`; the block is **7,568 bytes against the 8,192 cap**. So the instrument is one
+edit away from lying and is not lying now. Both halves of that go in the record.
+
+**`V-W8`'s proposed remedy — "anchor to `^## LIVE`, assert count == 1" — is WRONG and must not be
+applied.** There are legitimately two anchored headings right now, and there will be two after every
+future wave, **because §3j prefers retirement-verbatim over compaction**: retiring a LIVE block
+necessarily creates a second `## LIVE`. `count == 1` would fail on the very file it guards, and the
+cheapest way to make it pass would be to stop retiring blocks verbatim — the instrument would punish
+the practice §3j mandates. The correct remedy anchors the match **and takes the first**, or marks
+the current block with a heading no retired block can carry. Priced in `OPTIONS.md`, not applied
+here: I am not repairing instruments in a wind-down.
+
+### 8. `§54`'s denominators — **UPHELD, and it is my error**
+
+`§54`'s table row reads `satisfied — 12/12` and `VIOLATED — 0/14` for one suite. Verified at primary:
+`p2_route_ljver_v1.json` banks `controls` as a list of **14**, and `experiments/journal/leg_409.md:319`
+claims *"12 of 12 checks are `recompute-from-primary`"*. Those are two different objects — checks and
+controls — and I put their denominators side by side in one row as though they were commensurable.
+The **class labels are right**; the row invites a reader to compare `12` with `14` and there is no
+comparison there. `§54`'s finding is unaffected; the presentation is corrected here.
+
+### 9. `§54`'s `self_hash` claim — **TOO BROAD, corrected**
+
+`§54` clause (5) says *"wherever a `self_hash` is cited as evidence that an artefact is unchanged,
+that citation is void."* `V-W8` recomputed `L-JVER`'s hash from the banked file and got
+`4bb618d7c8b039ea` = banked. So the hash **is** a valid integrity check on the file as it sits: it
+detects a later edit. What it cannot do is survive a **re-run**, because the hashed blob contains
+`cost.wall_seconds`. The precise statement, replacing clause (5): **a `self_hash` of this
+construction is valid evidence that a banked file has not been edited, and is NOT evidence that the
+code would reproduce it.** `§54`'s underlying point — that the hash certifies nothing about
+reproducibility — stands.
+
+### 10. `§50` item 4 applied to its own author — **UPHELD**
+
+The three `INTEGRATE` commits name **0 of 24** file paths they carry, and `233a2c3` *is* the commit
+that lands §50. Worse: `54b755b`, twenty minutes earlier, carries `experiments/p2_route_l5_v1_driver.py`
+— `L5`'s landed generator — plus the new root gate `test_headroom.py` and `scripts/merge_gate.sh`,
+under a `PB2` subject naming none of them. **§50 counts two crossings, both pre-dispatch, and omits
+that one.** It was disclosed in §50's body, so this is an undercount, not concealment. Corrected to
+**three**.
+
+### 11. A landed verifier's suite is never re-run, and one of mine went stale silently
+
+`V-W7`'s suite re-runs **22/25** at HEAD. `V19_STATE.md` asserts `STATE.md` carries the §46
+withdrawal; commit `024a9b2` retired the row carrying it. The retirement was verbatim and §46
+survives on `WALLS.md` and `OPTIONS.md`, so **no claim was lost** — but a planted check was
+**silently invalidated by a later, correct, retirement**, and nothing in the record re-runs a landed
+verifier's suite to notice. This is the same shape as §45: the instrument cannot see its own decay.
+
+### 12. What `V-W8` tried that found nothing
+
+Seven negative results at `experiments/journal/leg_416.md` §13 — chiefly the hunt for a negative
+`cutoff_sensitivity` increment, the `self_hash` check, byte-defects in the nine retirements, and
+`2.89873` hiding in `p2_r_prof_v1.json`. `V-W8` also corrected itself in the record rather than
+deleting: its §3 said `L6-b`'s iterate has no reach sweep; it has one, and it is negative too.
+Its artefact `writeup/data/p2_v_w8_v1.json` reports 37 checks, **31 recompute-from-primary / 6
+re-read-own-artefact**, 0 failed, and — unlike `L-JVER` — **writes nothing but its own artefact and
+touches nothing it verifies**. That is the first suite in this record to satisfy §45's classification
+and §6 clause 3 at the same time.
+
+**CEILING.** No `L1 → L4` link moved. Four defects landed on the Conductor and one banked number
+(`§53`'s `×130`) is **WITHDRAWN as arithmetic**; no wall moved in either direction, no `NO` was
+reopened, and `W4` clause (c) — the torus, statement (D) — remains **UNTESTED, NOT CLOSED**.
+Everything here is **Tier 2**. Finding four errors in my own integration commits is not progress
+toward Clay. Clay stays **~0.05%**.
