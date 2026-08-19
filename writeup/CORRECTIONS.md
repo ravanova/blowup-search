@@ -3095,3 +3095,113 @@ doubling the resolution cannot detect**, because it is a DOMAIN error wearing a 
 study's clothes. Fixed with a closed-form `α = 1` tail beyond `r = e³⁰` and a new
 `seam_moved_rel_change` control banked next to `resolution_doubled_rel_change`. *A resolution
 control certifies resolution. It says nothing whatever about where you stopped integrating.*
+
+---
+
+## §48 — a cap that nobody measures is not a cap: `WALLS.md` landed **2,151 bytes over §3j** through a `MERGE GATE: PASS`, and the check that would have caught it did not exist
+
+**What happened.** `PB2` (leg 410) added 25 lines to `WALLS.md` and landed at `a7ffa1e`. The file
+went from **32,526** to **34,919 bytes** against an `ORCHESTRATION.md` §3j cap of **32,768**. The
+merge gate printed `MERGE GATE: PASS`. Nothing objected, because nothing was looking.
+
+**Whose defect this is, stated plainly: MINE, and in two distinct ways.** First, `WAVE8_PLAN.md`
+§6 STANDING CLAUSES — the block whose entire purpose is *"IN EVERY BRIEF"* — **does not mention
+§3j at all**, so no unit in this wave was told the caps exist. Second, and worse, I had measured
+those caps by hand at `0c7c52e` **ninety minutes earlier**, retiring five blocks to hold them, and
+recorded the result in a table. **I treated a number I had just computed by hand as a standing
+property of the repository.** That is `§45`'s substitution again, and this time the cheap quantity
+was one I produced myself.
+
+**THE RULE.** *A cap enforced by a person reading `wc -c` at a boundary is not enforced between
+boundaries, and every concurrent unit works between boundaries. A limit that is not mechanically
+checked at the same moment the artefact is written is a description of intent, not a constraint —
+and it will be quoted as though it were a measurement, because the last time someone measured it,
+it was true.*
+
+**The remedy, and it is a construction rather than a note.** `test_headroom.py`, wired into
+`scripts/merge_gate.sh` as an always-on check alongside `test_plan_of_record.py` and
+`test_capabilities.py`. It measures all four §3j caps in **bytes**, measures `STATE.md`'s rows in
+**characters** (they are not the same thing in a file full of `‖`, `∇` and em dashes), locates
+`ORCH_STATE.md`'s LIVE block by heading, and **fails when it cannot locate that block** — an
+UNCHECKED cap is a FAIL, never a silent PASS. Mutation-tested in a scratch copy on four separate
+breaks: a file over cap, a row over 600 characters, a LIVE block over cap, and a missing LIVE
+heading. All four were caught; the unmutated control passed.
+
+**What it does NOT do, said here so nobody quotes it as more than it is.** It cannot tell a
+retirement from a deletion, so §3j's *"retirement is preferred over compaction"* remains a
+discipline held by a person. It checks size and says nothing about whether the text is true. And
+it enforces caps that were themselves chosen by judgement, not measured — the caps are a policy,
+and this test only makes the policy binding.
+
+**The honest accounting for `P4`.** This is the **second** prospective catch on that page against
+**eight** retrospective ones, and it is weaker than the first: `§42` caught its instance *before
+the number was banked*, whereas this one was found **after** a bad state had already landed on
+`main` and been pushed. The catch was a `wc -c` run during an integration audit for an unrelated
+reason — **which is, for the fifth recorded time, how defects are actually found here.**
+
+---
+
+## §49 — the documentation contract MANDATES the blind spot that §45 measured: `ORCHESTRATION.md` §6 clause 3 REQUIRES evidence scripts to re-read their own artefact and re-run nothing
+
+**The measurement.** `experiments/p2_route_pb2_v1_evidence.py` runs **31 checks, 0 failed**. It
+imports `json`, `sys` and `pathlib`, and nothing else. **Zero of its 31 checks recompute anything
+from a primary source.** All 31 read `writeup/data/p2_route_pb2_v1.json` — the file written by the
+unit whose claims they check. On `§45`'s classification the script is 0/31
+`recompute-from-primary` and 31/31 `re-read-own-artefact`, which is worse than the repository's
+already-poor 35%.
+
+**And the unit was not free to do otherwise.** `ORCHESTRATION.md` §6 clause 3, verbatim: an
+*"`*_evidence.py` script rebuilds figures/claims from the curated JSON **without re-running
+anything**"*. The unit followed the contract exactly. `§45` diagnosed this as a property of 32 of
+49 scripts and treated it as drift; **it is not drift. It is compliance.** The contract that
+exists to make claims checkable specifies a check that cannot fail on the error that matters.
+
+**THE RULE.** *Where a standard prescribes the FORM of a check, read the form for what it makes
+IMPOSSIBLE to detect before congratulating the check for passing. A rule that mandates a procedure
+also mandates that procedure's blind spot, and the blind spot inherits the rule's authority — so
+it is defended rather than noticed.*
+
+**What is NOT concluded, and this matters.** §6 clause 3 has a real purpose: it stops an evidence
+script silently re-running the experiment and "verifying" a fresh answer against fresh prose,
+which is how a wrong number gets laundered into agreement. **The clause is not withdrawn and no
+part of it is called defective here.** What is recorded is that it is not sufficient, that the
+`N/N passed` line it produces means less than it reads as, and that the two purposes need two
+checks rather than one. **Naming the amendment is not this correction's job** — it is a change to
+the orchestration contract, and it goes to the user with the rest of this integration.
+
+**Also not discharged, and it is mine again.** `PB2`'s brief required, in terms, *"classify every
+check you write as recompute-from-primary vs re-read-own-artefact and state the class beside it"*.
+The script carries **zero** such labels. Nothing checked that the brief's own instrument clause
+was obeyed, and I did not notice until I grepped for the labels during the landing audit. **A
+requirement stated in a brief and verified by nobody is a preference.**
+
+---
+
+## §47b — the citation defect is in FIVE places, not four, and the one `PB2` missed is the one that GENERATES the others
+
+**The correction to a correction.** `§47` names four sites carrying NRŠ as *`ARMA` 136 (1996)*:
+`WALLS.md`, `SOURCES.md` row 3, `WAVE8_PLAN.md`, and `p2_route_l5_finite_energy_v1.json`. There is
+a fifth, and it is the source of the fourth: **`experiments/p2_route_l5_v1_driver.py:640`** emits
+the string `"136 (1996) 55-98) and Tsai (ARMA 143 (1998) 29-51) exclude."` into the banked JSON.
+The JSON is a **product**; the driver is the **plant**. There is also a sixth occurrence in
+`experiments/journal/leg_400.md:505`, which is a journal and correctly gets a correction beside it
+rather than an edit.
+
+**The count was low for a reason worth naming.** `PB2` searched the prose record — the `.md` files
+and the banked `.json` — and found every occurrence in it. It did not search the **code that wrote
+the JSON**. A defect in a generated artefact is not fixed, and is not even fully counted, until
+the generator is in the list.
+
+**And I propagated it myself.** `WAVE8_PLAN.md` AMENDMENT 4, which I wrote **to scope the very
+unit that found this**, cites *"Nečas–Růžička–Šverák ARMA 136 (1996)"* twice — in the jaw table
+and in the quoted `WALLS.md` sentence. The second is a quotation and correctly reproduces the
+error it quotes. **The first is my own assertion, made while auditing citations, and it is wrong.**
+
+**THE RULE.** *When a wrong string is found in a banked artefact, the search is not finished until
+it has been run against the code that produces the artefact. Prose and data are downstream of a
+generator, and correcting the downstream copies leaves the plant running.*
+
+**Unchanged by all of the above, and stated so no one reads this as a retreat:** the citation is
+wrong and the theorem is right. **Tsai 1998 Theorem 2 carries `W4` clause (b)**, its hypotheses
+are met by measurement, and clause (b) STANDS. A defective citation is not a defective theorem —
+which is `WAVE8_PLAN.md` AMENDMENT 4's own pre-committed constraint, and it binds here.

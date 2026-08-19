@@ -12,25 +12,9 @@ verbatim 2026-08-18 under §3j → `## Superseded — the 2026-08-14 fork`.
 
 ## LIVE — CONDUCTOR mode, **WAVE 7 CLOSED (`L6-b` LANDED); WAVE 8 IN FLIGHT (4 units)**, 2026-08-19
 
-### RETIRED VERBATIM BELOW — wave 5's close and trigger; wave 6's §3i; **WAVE 6 COMPLETE**
-
-Wave 5 CLOSED/LANDED/**VERIFIED**; trigger SENT 2026-08-18 with three caveats; neither `V-W5` nor
-`V5` moved an `L1→L4` link. **Wave 6 COMPLETE, three landed; its §3i re-rank (`L6-b` before `L7`)
-is DISCHARGED — `L6-b` landed `4df0ca0`.** Full text → `## Superseded — wave 5's close, the
-trigger, and wave 6's §3i` and `## Superseded — wave 6's close`.
-
-### 2026-08-18 — the §3k directive and the Lane-R ruling — **BOTH DISCHARGED**; detail retired
-
-Verbatim → `## Superseded — the §3k directive and the Lane-R ruling` below. **What still binds:**
-`writeup/SOURCES.md` is the register (26 rows) with **`R-prof`'s rule-3 row filled at primary**; the
-ranking **`R4` > `R2` > `R3`** stands (`WAVE7_PLAN.md` §0), **self-unwinding** through §1's gate.
-
-### 2026-08-19 — "PRICE, DO NOT QUEUE" WITHDRAWN — **DISCHARGED**, retired verbatim below
-
-All three queued units moved and are recorded in the WAVE 7 block below. **What still binds: §0's
-`R4` > `R2` > `R3` ranking STANDS** — those were additions, not a re-rank — **and my 90.9 core-h
-price was an OUTTURN, not a FLOOR.** Full text → `## Superseded — the "PRICE, DO NOT QUEUE"
-discharge block`.
+**Wave 5 and wave 6: COMPLETE, VERIFIED, and RETIRED VERBATIM BELOW.** Neither `V-W5` nor `V5`
+moved an `L1→L4` link; wave 6's §3i re-rank is DISCHARGED (`L6-b` landed `4df0ca0`). Full text →
+`## Superseded — wave 5's close, the trigger, and wave 6's §3i` and `## Superseded — wave 6's close`.
 
 ### ⚠ 2026-08-19 USER RULING — **TEMPORARY PIVOT TO PAPERS**, entering at the NEXT wave boundary
 
@@ -64,11 +48,9 @@ no wall. Detail retired verbatim → `## Superseded — R-prof's return detail`.
 **VERIFIED-WITH-QUALIFICATION**, 11 defects open, 0 repaired; my own landing audit came back
 three numbers overstated and **two understated** (§38). Detail → `## Superseded — V-W6's return`.
 
-**⚠ RE-RANK MADE IN THAT INTEGRATION COMMIT (§3i q5).** Wave 8 opens with **`L-JVER`** — an
-independent re-implementation of `W[V]`/`J(c)` in a different basis — because every route-4 residual
-number is downstream of one function whose only evidence is a selftest comparing two of `L6`'s own
-implementations. **`L8`'s branch rule is deferred VERBATIM to wave 9**, still keyed to `L6-b`.
-`WAVE8_PLAN.md` AMENDMENT 1, written **before** dispatch.
+**⚠ THE §3i q5 RE-RANK MADE IN THAT COMMIT IS NOW DISCHARGED** — `L-JVER` was dispatched and is
+in flight (leg 409). `L8`'s branch rule stays **DEFERRED VERBATIM to wave 9**, still keyed to
+`L6-b`. Full text → `## Superseded — wave 7's §3i q5 re-rank`.
 
 **RETURNED — `R-bank`** (leg 404, `8019c35`): **`YES` ×3**, 160/160 bit-identical, seedbank now
 TRACKED. My independent re-hash and 4-field regeneration agreed bitwise. Detail retired verbatim
@@ -77,7 +59,15 @@ TRACKED. My independent re-hash and 4-field regeneration agreed bitwise. Detail 
 **DISPATCHED — `E-FE`** (leg 408). **6 shards not 8**, on a measurement: **~15.2 h wall not ~11.4;
 ~91 core-h unchanged.** Inherits C2/C4; draw order a **declared choice** (lesson 91).
 
-### WAVE 8 — DISPATCHED AND IN FLIGHT 2026-08-19 08:52 (legs 409–412), plan `5802a49`/`6ca49a6`
+### WAVE 8 — IN FLIGHT (legs 409–412); **`PB2` LANDED `a7ffa1e`**, plan `5802a49`/`6ca49a6`
+
+**RETURNED — `PB2`** (leg 410, `a7ffa1e`): gate **`YES`**. `W4` clause (b) is carried by **TSAI
+1998 THM 2** (no `L^q` in the hypothesis), verified by me at FULL TEXT; **NRŠ does not apply** and
+the one `UNREACHABLE` source is **not load-bearing** for it. Clause (b) STANDS. Three Conductor
+findings at landing: **`WALLS.md` was 2,151 B OVER §3j and the gate did not check** (§48, remedied
+by `test_headroom.py`, now always-on); the evidence suite is **0/31 recompute-from-primary and §6
+clause 3 REQUIRES that** (§49); the citation defect is in **five** places, the fifth being the
+generator (§47b). §3i seven + full audit: `writeup/waves/WAVE8_CLOSE.md`. **RE-RANK: NONE.**
 
 `L-JVER` (409, Lane L construction, opens the wave, meets the composition floor: independently
 re-implements `W[V]` and `J(c)` in a different basis; gate is `|ΔJ|/J_L6 < 1e-3` at three points,
@@ -98,10 +88,13 @@ direction, **may not influence wave 8's ranking.** It holds 6 of 12 cores until 
 
 | file | bytes | cap | free |
 |---|---|---|---|
-| `STATE.md` | 24,016 | 24,576 | 560 |
-| `WALLS.md` | 32,526 | 32,768 | 242 |
+| `STATE.md` | 23,434 | 24,576 | 1,142 |
+| `WALLS.md` | 32,446 | 32,768 | 322 |
 | `OPTIONS.md` | 23,971 | 24,576 | 605 |
-| `ORCH_STATE.md` LIVE | 8,080 | 8,192 | 112 |
+| `ORCH_STATE.md` LIVE | 7,811 | 8,192 | 381 |
+
+**⚠ NO LONGER MEASURED BY HAND** — `test_headroom.py`, always-on in `merge_gate.sh` (§48). A LIVE
+block it cannot locate is a **FAIL**, not a skip. **It caught this edit going over as it was written.**
 
 **Defect of mine, §37 `writeup/CORRECTIONS.md`: retire by slicing between ASSERTED LINE INDICES,
 never by title, and measure the live block by line index too, or the cap check silently passes.**
@@ -1278,3 +1271,15 @@ Retired from LIVE 2026-08-19 under §3j when wave 8 was dispatched. VERBATIM.
 **VERIFIED-WITH-QUALIFICATION**, no arithmetic defect anywhere in wave 6, 11 defects open, 0
 repaired. My landing audit: one-start finding UPHELD, three numbers overstated, one wrong
 conservatively, **two understated** — `CORRECTIONS.md` §38. `D-VW6-7` (undeclared scipy) repaired.
+
+---
+
+## Superseded — wave 7's §3i q5 re-rank
+
+Retired from LIVE 2026-08-19 under §3j at `PB2`'s landing, DISCHARGED. VERBATIM.
+
+**⚠ RE-RANK MADE IN THAT INTEGRATION COMMIT (§3i q5).** Wave 8 opens with **`L-JVER`** — an
+independent re-implementation of `W[V]`/`J(c)` in a different basis — because every route-4 residual
+number is downstream of one function whose only evidence is a selftest comparing two of `L6`'s own
+implementations. **`L8`'s branch rule is deferred VERBATIM to wave 9**, still keyed to `L6-b`.
+`WAVE8_PLAN.md` AMENDMENT 1, written **before** dispatch.

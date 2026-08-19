@@ -92,18 +92,10 @@ Required beside the wall by the ruling, and non-optional:
 
 **THE CELL IS OCCUPIED AND THE WALL STILL STANDS — TWO DIFFERENT CLAIMS.** Narrative retired
 2026-08-18 (the named §3j retirement, unlocked when `V5`'s audit landed) → `WALLS_HISTORY.md`
-§W3-CELL. **`V5` (leg 402) has now AUDITED the occupant at full text: the certificate DOES close**
-— 24 recomputable constants re-derived at 50 dps, **four printed constants fail** (`H28`, `H30`,
-`H32`, `H33`; the real one is `x_0^U`, `1.44e-5` printed against `1.45054706437e-5`, from
-substituting `η₂ = 0.005` where the certified `M_2^U ≤ 0.0061` belongs), and **carrying the
-corrections through, closure survives** — `x_1^U` clears by **0.08%**, recorded as **luck, not
-margin**. **Class A (22 interval-arithmetic inputs) was NOT verified and is banked as a LIMIT OF
-THE AUDIT, never as a pass.** **W3 IS UNMOVED: the audit did not run W3's prose test.**
-`CORRECTIONS.md` §36.
-
-**Predicate not tightened, `YES` not withdrawn; leg 242's over-read struck; the wave-6 audit that
-ruling Q4 made non-optional is DONE (`V5`, leg 402, VERIFIED by `V-W6`). Retired verbatim 2026-08-19
-→ `WALLS_HISTORY.md` §W3-PREDICATE.**
+§W3-CELL. **`V5` (leg 402) has AUDITED the occupant at FULL TEXT and the certificate CLOSES** —
+24 constants re-derived at 50 dps, **four printed ones fail**, and `x_1^U` clears by **0.08%,
+which is luck rather than margin.** The audit is `YES`; **W3 is UNMOVED by it** (`CORRECTIONS.md`
+§36). Detail retired VERBATIM → `WALLS_HISTORY.md` §W3-V5AUDIT and §W3-PREDICATE.
 
 **Why this wall matters more than its size suggests.** If a viscous blow-up cannot be certified for a
 dissipative fluid equation in **one** dimension, 3D Navier–Stokes is not a question of compute and
@@ -124,12 +116,10 @@ statements are true of it.
 energy. Converting one into the other — cutting the profile off and showing the cut solution still
 blows up — has **no known method**, anywhere.
 
-**What is measured.** Leg 381's cutoff bill: the critical `L³` tail runs at **326.875 per decade**
-(increment of the *cube*; the norm itself runs 8.679 → 14.841), required decay exponent `α > 1.5`
-against an a-priori `α = 1.0`, **deficit 0.5**. Leg 390 priced the torus alternative: `α > 2.996995`
-to wrap the uncut profile, deficit 1.996995 — **3.99399× worse** — but **0.0 if the profile is cut
-first** (disjoint supports at `L > 2ρ`), in which case leg 381's bill is inherited unchanged. Leg
-390's own words: **"(D) deletes the acceptance test, not the work."**
+**What is measured.** Leg 381's cutoff bill needs decay `α > 1.5` against an a-priori `α = 1.0`,
+**deficit 0.5**; leg 390 priced the torus alternative at deficit 1.996995 uncut, **0.0 if the
+profile is cut first**, inheriting leg 381's bill unchanged — *"(D) deletes the acceptance test,
+not the work."* Numbers retired VERBATIM → `WALLS_HISTORY.md` §W4-CUTOFFBILL.
 
 **BREAKING W4 CONSISTS OF:** (a) a localisation argument carrying blow-up from the infinite-energy
 profile to a finite-energy solution with the decay actually available, or (b) a natively
@@ -189,33 +179,22 @@ The class argument leaves no third case: at `α = 1` either the far-field amplit
 shut by (a)). **Also: the citation is wrong.** Tsai's own bibliography gives NRŠ as ***Acta Math.*
 176 (1996) 283–294**, not `ARMA 136` — wrong journal, volume and pages, in four load-bearing places
 (`CORRECTIONS.md` §47). **A defective citation is not a defective theorem; (b) is unmoved.**
+**Conductor, at landing: FIVE places, not four — the fifth is `experiments/p2_route_l5_v1_driver.py:640`,
+the GENERATOR of the fourth, now corrected; and `WAVE8_PLAN.md` AMENDMENT 4 propagated the error while
+auditing citations. `CORRECTIONS.md` §47b.**
 Ceiling: this is a **measurement on `L5`'s synthetic profile at `α = 1`**, float64, Tier 2 — it
 verifies a HYPOTHESIS is met, it proves no theorem. Data `writeup/data/p2_route_pb2_v1.json`;
 checks `experiments/p2_route_pb2_v1_evidence.py` (31/31); leg `experiments/journal/leg_410.md`.
 
-**⚠ ROUTE 4 NOW HAS A DISCRETE PROFILE — `L6`, leg 401 — AND IT DOES NOT CLOSE.** First ever
-built on route 4's own object (λ-DSS, `a = 0.5`, poloidal–toroidal, `div V ≡ 0` identically, **no
-Bogovskiĭ corrector**), measured in **`L5`'s own load-bearing norm**. Smallest residual at the best
-affordable resolution (`n_dof = 6720`): **`ρ = 1.6138`** with the `α = 1` far-field amplitude
-normalised to **1** — *order one*, not small. **It does NOT decrease under refinement:**
-`d log ρ / d log n_dof = −0.0222` over the last three rungs, **0.497 %** at the top. Evidence
-reproduces independently (30/30; banked coefficients re-synthesise `ρ` exactly). **The `Ks = 0`
-of freedom are load-bearing — the construction did NOT collapse to (D)SS.**
-**CEILING ON `L6`, MEASURED ON LANDING, RULED ON BY `V-W6` — AND PARTLY WITHDRAWN 2026-08-19 BY
-`L6-b`.** At every rung above the coarsest, `ρ` is attained by ONE start, the continuation: **this
-STANDS**, and `L6-b` re-measured it at 25× budget — both fresh seeds reach only `6.46`/`6.50`,
-outside `[1.55,1.70]`. **WITHDRAWN: the magnitude.** *"Seed spread 3.93–23.67× on B"* is a property
-of the **800-iteration cap**, not the landscape — the same seeds read `17.81–22.07×` at `k=800` and
-**`4.29–4.32×` at `k=20,000`** (`CORRECTIONS.md` §46; `V-W6` upheld the withdrawn version).
-**All 133 starts hit their cap; all 58 at 800; 56/58 non-critical — the ladder compared STOPPING
-POINTS, never stationary ones.** `V-W6`'s two harder facts stand: the cap sweep is a post-hoc
-TRUNCATION of the same warm-started runs and **controls nothing**; the banked minimiser is ~14
-orders from its pre-registered `gtol`. **`L6-b` (leg 406, `4df0ca0`) ANSWERED: `NO`.** 20,000
-iterations, 43.3 core-h → **`ρ = 1.5048519`, −6.75%**, threshold `<1.45` not met; terminal
-`‖x‖‖∇J‖₂/|J|` = **44.6/12.0/5.2**, none stationary. **It licenses ONLY: budget alone does not
-reach 1.45; `L7`/`L4` prices stay OPEN; the ansatz is NEITHER exonerated NOR convicted** — the
-plan's *"the stall is the CONSTRUCTION"* needed a stationary iterate and is SUPERSEDED
-(`CORRECTIONS.md` §41). SS-collapse control does **not** fire (`1.88e-3` vs `1e-6`).
+**⚠ ROUTE 4 HAS A DISCRETE PROFILE AND IT DOES NOT CLOSE — `L6` (leg 401, `e62c449`) and `L6-b`
+(leg 406, `4df0ca0`).** In `L5`'s own load-bearing norm at `n_dof = 6720`: `ρ = 1.6138` at 800
+iterations, **`ρ = 1.5048519` at 20,000** — 25× the budget, **−6.75%**, threshold `<1.45` NOT met,
+and the terminal `‖x‖‖∇J‖₂/|J|` = **44.6/12.0/5.2 is nowhere near stationary.** It licenses ONLY:
+*budget alone does not reach 1.45; `L7`/`L4` prices stay OPEN; the ansatz is NEITHER exonerated NOR
+convicted* — the plan's *"the stall is the CONSTRUCTION"* needed a stationary iterate and is
+**SUPERSEDED** (`CORRECTIONS.md` §41). The seed-spread MAGNITUDE is **WITHDRAWN** as an artefact of
+the 800-iteration cap (§46; `V-W6` had upheld the withdrawn version). The SS-collapse control does
+**not** fire (`1.88e-3` vs `1e-6`). Full text retired VERBATIM → `WALLS_HISTORY.md` §W4-L6-L6B.
 
 **`L6` does NOT break W4** — a wall breaks when (a), (b) or (c) *succeeds*, and two are shut, the
 opposite. **W4's ONLY UNBROKEN CLAUSE IS (c)**, UNTESTED NOT CLOSED, deferred with Lane T. Retired
@@ -273,11 +252,9 @@ mathematics not procurement — **a reformulation whose compliant scale is small
 magnitude taken out of the required resourcing beats an order of magnitude of hardware, because it
 is permanent.
 
-**2026-08-18 — SIZE IS NOT THE BINDING RISK, PERSISTENCE IS.** `U3` **finished**: 14.47 h wall,
-144.69 core-h reserved, 92.9% utilised. Every recorded loss (13 agents 08-06, 5 on 08-07, `E`
-killed twice, 3 of 4 in wave 3) was a suspended session or a **gitignored** checkpoint, never a
-job too big. **QUEUED 2026-08-18 by user directive** (the "price, do not queue" clause was
-WITHDRAWN): `writeup/prices/FIELD_ENSEMBLE_2026-08-18.md`, 160 attempts, ~91 core-h.
+**2026-08-18 — SIZE IS NOT THE BINDING RISK, PERSISTENCE IS.** Every recorded agent loss was a
+suspended session's **gitignored** checkpoint, never a job too big. The field ensemble is now
+DISPATCHED (`E-FE`, leg 408). Detail retired VERBATIM → `WALLS_HISTORY.md` §W7-U3QUEUE.
 
 **⚠ 2026-08-19 — W7 MEASURED FROM THE INSIDE. THE INEFFICIENCY IS REAL AND IT BREAKS NOTHING.**
 `R-prof` (leg 403, `1f89ceb`, `writeup/data/p2_r_prof_v1.json`) profiled `PROG-R4`'s loop against a
@@ -424,16 +401,10 @@ costs: `OPTIONS.md` §B.
 ### R2–R5 — the deferred Lane R units. **Ledger, costs and notes: `OPTIONS.md` §B** (§3j — pointer,
 not restatement). Kept here only where a wall depends on it:
 
-- **R2 deflation** — strongest surviving item; attacks the largest measured waste (`R0`: **57 of U5's
-  100 seeds already spent by U3**). Deflate against the union of both runs' solutions.
-- **R3 multiple shooting** — named by route-DSSP brick **B6's own spec**, built without it.
-- **R4 second-order stepper** — U3's is **Lie–Trotter, globally first order** (measured ratio 2.00),
-  so its orbits are `O(dt)` perturbations of the true flow's. **`E-iii` promoted it. Invalidates M1's
-  reproduction; must re-run it.**
-- **R5 carry `m`** — every negative here about orbit recovery carries *"with a residual that cannot
-  represent one of the two shift classes."* **CORRECTED by U5: R5 does NOT help the band** (334
-  anchored candidates, **1** in the published `|s|` band). It is the fix for `|s| > 0.9`, and is the
-  same unit as `PROG-R4` **C** — don't double-count.
+- **R2** deflation (largest measured waste), **R3** multiple shooting (named by `B6`'s own spec),
+  **R4** second-order stepper (U3's is **Lie–Trotter, globally first order**; `R4-a`'s remedy is
+  named at `WAVE8_PLAN.md` AMENDMENT 2), **R5** carry `m` — **CORRECTED by `U5`: R5 does NOT help
+  the band.** Bullets retired VERBATIM → `WALLS_HISTORY.md` §R2R5-LEDGER; costs in `OPTIONS.md` §B.
 
 **`E`, the H-hard diagnostic, LANDED and VERIFIED — retired 2026-08-18 under §3j.** Full text
 verbatim: `WALLS_HISTORY.md` §E; result `experiments/journal/prog_r4_e.md`. **Live here because a wall

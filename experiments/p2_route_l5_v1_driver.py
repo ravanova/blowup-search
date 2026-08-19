@@ -636,8 +636,13 @@ def assemble_gate(doc):
             "what_a_YES_would_need": ("either alpha > 1 strictly -- but alpha is PINNED to exactly 1 "
                                       "(Chae-Wolf 1610.09464 Thm 1.1 from below, Rmk 1.2 + "
                                       "Escauriaza-Seregin-Sverak from above) -- or mdot == 0, i.e. an "
-                                      "EXACTLY self-similar profile, which Necas-Ruzicka-Sverak (ARMA "
-                                      "136 (1996) 55-98) and Tsai (ARMA 143 (1998) 29-51) exclude."),
+                                      "EXACTLY self-similar profile, which TSAI (ARMA 143 (1998) 29-51) "
+                                      "THEOREM 2 excludes -- read at FULL TEXT and checked against this "
+                                      "object by PB2, leg 410. Necas-Ruzicka-Sverak is Acta Math. 176 "
+                                      "(1996) 283-294, NOT ARMA 136, and it does NOT apply here: its "
+                                      "hypothesis is U in L^3 and this object is not (CORRECTIONS SS47, "
+                                      "SS47b). The banked JSON keeps the pre-correction wording by the "
+                                      "W3 Q3 ruling -- a regeneration WILL differ in this field, by design."),
         },
         "controls_that_could_have_flipped_it": {
             "C7_modulation_absorption": doc["controls"]["C7_modulation_absorption_falsifier"]["flips_gate_to_YES"],

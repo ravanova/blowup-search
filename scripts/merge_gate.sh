@@ -39,6 +39,10 @@ run_test() {
 # Always-on: the machine-readable plan must stay coherent, whatever the diff.
 run_test test_plan_of_record.py
 run_test test_capabilities.py
+# Always-on: ORCHESTRATION.md §3j caps STATE/WALLS/OPTIONS and ORCH_STATE's LIVE
+# block in BYTES. Added 2026-08-19 after a unit landed WALLS.md 2,151 B over cap
+# through a PASS (writeup/CORRECTIONS.md §48). A cap nobody measures is not a cap.
+run_test test_headroom.py
 
 # Targeted: tests implied by the diff against base.
 changed=$(git diff --name-only "$BASE"...HEAD 2>/dev/null)

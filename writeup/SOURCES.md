@@ -183,7 +183,7 @@ Row 3 (and `WALLS.md` W4(b), `WAVE8_PLAN.md`, and `p2_route_l5_finite_energy_v1.
 > `[NRS]` J. Nečas, M. Růžička & V. Šverák, *On Leray's self-similar solutions of the Navier-Stokes
 > equations*, **Acta Math. 176 (1996), 283–294.**
 
-**Wrong journal, wrong volume, wrong pages, in four load-bearing places.** Leg 364's journal
+**Wrong journal, wrong volume, wrong pages, in four load-bearing places.** **FIVE, at the landing audit — `CORRECTIONS.md` §47b.** The fifth is `experiments/p2_route_l5_v1_driver.py:640`, which GENERATES the fourth; it is now corrected, and the banked JSON is deliberately left as it was under the W3 Q3 ruling, so a regeneration will differ in that field by design. `WAVE8_PLAN.md` AMENDMENT 4 also propagated the wrong citation in its own jaw table, written by the Conductor while auditing citations. Leg 364's journal
 already carried it correctly (with DOI `10.1007/BF02551584`). Banked in full at `CORRECTIONS.md`
 **§47**. The two fetch attempts this leg, for the record:
 

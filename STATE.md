@@ -110,6 +110,8 @@ measurement, verbatim: `reports/ORCH_STATE.md` Superseded LIVE blocks.
 
 ## WAVE 8 — **IN FLIGHT 2026-08-19: `L-JVER` ‖ `PB2` ‖ `PB1` ‖ `V-W7`** (legs 409–412), plan `writeup/waves/WAVE8_PLAN.md` + 4 amendments, committed **before** dispatch. Composition floor: `L-JVER` (re-implements `W[V]`/`J(c)` in a different basis; gate `|ΔJ|/J < 1e-3`). `V-W7` verifies **wave 7 AND my seventeen integration commits** — I planned it, I may not. `E-FE` is a LATE RETURN and **may not influence this wave's ranking** (`99421dd`).
 
+**RETURNED — `PB2`** (leg 410, `a7ffa1e`): gate **`YES`**. **`W4` clause (b) is carried by TSAI 1998 THM 2** — hypotheses (i) equations + (ii) local energy estimates, **no `L^q` at all** — verified by me at FULL TEXT, and met by measurement. **NRŠ does NOT apply** (`∫|U|³` log-divergent at `α=1`), so the one `UNREACHABLE` source is **not load-bearing**. Clause (b) STANDS, stronger than its citation. 31/31, but **0/31 recompute-from-primary**.
+
 ## WAVE 7 — **CLOSED 2026-08-19 (`L6-b` landed); DISPATCHED: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` DISPATCHED 2026-08-19 (leg 408, 6 shards)** — condition discharged.
 **RETURNED — `V-W6`** (leg 407, `c7f242c`): **`V5` VERIFIED, `V-W5` VERIFIED, `L6` VERIFIED-WITH-QUALIFICATION**; 11 defects open, 0 repaired. My own landing audit came back **3 numbers overstated, 1 wrong conservatively, 2 UNDERSTATED** (`CORRECTIONS.md` §38). Its `D-VW6-2` (no start converged by `ftol`; `scale_invariant_grad 153.22` vs pre-registered `1e-12`) is what `L6-b` and §41 act on. Rows retired VERBATIM → `WALLS_HISTORY.md` §STATE-WAVE7-RETURNS.
 

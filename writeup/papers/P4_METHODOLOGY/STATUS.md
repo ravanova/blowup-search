@@ -77,6 +77,45 @@ points, currently `1` against `7` retrospective catches, is the honest headline 
 whose subject is whether any of this works.
 
 
+**A NINTH, at 09:40, and it is the SECOND prospective catch — but it is weaker than the first and
+the paper must grade it as such.** A unit landed `WALLS.md` **2,151 bytes over its §3j cap**
+through a `MERGE GATE: PASS`. The cap had been measured by hand, correctly, **ninety minutes
+earlier**, and recorded in a table. Nothing measured it again, because nothing ever did: the
+merge gate did not check §3j, and the standing clauses shipped in every brief that wave **did not
+mention §3j at all** (`CORRECTIONS.md` §48).
+
+**Why it grades lower than the eighth.** `§42`'s catch fired **before the number was banked**.
+This one fired **after** a bad state had landed on `main` and been pushed, and it fired because
+someone ran `wc -c` during an integration audit **for an unrelated reason** — the fifth time on
+this page that a defect was found that way and the first time it has happened *after* the paper
+named the pattern. **The honest count is now 2 prospective against 8 retrospective, and one of the
+two is really a retrospective catch that arrived quickly.**
+
+**What makes it worth a paragraph anyway: the remedy is a mechanism, not a resolution.**
+`test_headroom.py`, wired into the merge gate, mutation-tested on four separate breaks including
+the case where the block being capped cannot be located — which it treats as a FAIL, because *an
+unchecked cap is not a passed cap*. **A limit enforced by a person reading a number at a boundary
+is not enforced between boundaries, and every concurrent unit works between boundaries.** That
+sentence is the transferable part; the byte counts are not.
+
+**And a tenth, on the same day, which is the most damaging finding this paper has recorded about
+its own subject, because it is not a slip at all.** `ORCHESTRATION.md` §6 clause 3 — the
+documentation contract — *requires* every `*_evidence.py` to rebuild its claims from the curated
+JSON **"without re-running anything"**. §45 measured that 32 of 49 such scripts therefore cannot
+detect an error shared between an artefact and its checker, and treated that as drift. **It is not
+drift. It is compliance.** One unit's script this morning ran 31 checks, 0 failed, and **0 of the
+31 recomputed anything from a primary source** — the unit followed the contract exactly
+(`CORRECTIONS.md` §49).
+
+**The clause is not defective and is not withdrawn** — it exists to stop a script silently
+re-running the experiment and validating a fresh answer against fresh prose, which is a worse
+failure. The finding is narrower and harder: **a rule that mandates a procedure also mandates that
+procedure's blind spot, and the blind spot inherits the rule's authority, so it gets defended
+instead of noticed.** For a paper whose claim is that mechanised scepticism catches errors, the
+sharpest available evidence is that **this programme's own mechanisation specified a check that
+cannot fail on the error class it most needs to catch, and nobody noticed for 49 scripts.**
+
+
 **What it costs this paper to say:** the six were caught in seventy-five minutes because two parties
 were reading the same live run for different reasons — and **four of the six were caught by the
 party who had just been corrected on the previous one.** That is not a discipline. It is two agents

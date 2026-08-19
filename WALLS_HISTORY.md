@@ -561,3 +561,86 @@ about THIS CONSTRUCTION AT THIS BUDGET**; `L6-b` separates budget from ansatz.
 **RETURNED — `R-bank`** (leg 404, `8019c35`, `writeup/data/p2_r_bank_v1.json`). **`YES` on all three.** (i) **160/160** bit-identical to `regenerate`, run both one-per-call and all-in-one-call; (ii) **16/16** vs `E`'s ledger, `ulp_gap 0`; (iii) attempt 15 reproduces **12/12 ledger entries byte-equal with the two DNS artefacts ABSENT**. `self_hash 3b592e3c…` recomputed MATCH. 1.06 core-h.
 
 `R-bank` cont.: seedbank **TRACKED, 737,408 B** — it cannot die with a container, which the DNS ckpts have **twice**. I re-hashed all 160 slices vs the manifest and re-ran `regenerate` on 4 fields myself, bitwise. Defect **§39**: `~1.2 GB` is **268.9 MB**, and was `U2`'s *rejected* archive size. **No wall moved; no link moved.**
+
+---
+
+## §W4-L6-L6B — retired from `WALLS.md` 2026-08-19 under §3j at `PB2`'s integration, when the file went 2,151 B OVER cap. VERBATIM.
+
+**⚠ ROUTE 4 NOW HAS A DISCRETE PROFILE — `L6`, leg 401 — AND IT DOES NOT CLOSE.** First ever
+built on route 4's own object (λ-DSS, `a = 0.5`, poloidal–toroidal, `div V ≡ 0` identically, **no
+Bogovskiĭ corrector**), measured in **`L5`'s own load-bearing norm**. Smallest residual at the best
+affordable resolution (`n_dof = 6720`): **`ρ = 1.6138`** with the `α = 1` far-field amplitude
+normalised to **1** — *order one*, not small. **It does NOT decrease under refinement:**
+`d log ρ / d log n_dof = −0.0222` over the last three rungs, **0.497 %** at the top. Evidence
+reproduces independently (30/30; banked coefficients re-synthesise `ρ` exactly). **The `Ks = 0`
+of freedom are load-bearing — the construction did NOT collapse to (D)SS.**
+**CEILING ON `L6`, MEASURED ON LANDING, RULED ON BY `V-W6` — AND PARTLY WITHDRAWN 2026-08-19 BY
+`L6-b`.** At every rung above the coarsest, `ρ` is attained by ONE start, the continuation: **this
+STANDS**, and `L6-b` re-measured it at 25× budget — both fresh seeds reach only `6.46`/`6.50`,
+outside `[1.55,1.70]`. **WITHDRAWN: the magnitude.** *"Seed spread 3.93–23.67× on B"* is a property
+of the **800-iteration cap**, not the landscape — the same seeds read `17.81–22.07×` at `k=800` and
+**`4.29–4.32×` at `k=20,000`** (`CORRECTIONS.md` §46; `V-W6` upheld the withdrawn version).
+**All 133 starts hit their cap; all 58 at 800; 56/58 non-critical — the ladder compared STOPPING
+POINTS, never stationary ones.** `V-W6`'s two harder facts stand: the cap sweep is a post-hoc
+TRUNCATION of the same warm-started runs and **controls nothing**; the banked minimiser is ~14
+orders from its pre-registered `gtol`. **`L6-b` (leg 406, `4df0ca0`) ANSWERED: `NO`.** 20,000
+iterations, 43.3 core-h → **`ρ = 1.5048519`, −6.75%**, threshold `<1.45` not met; terminal
+`‖x‖‖∇J‖₂/|J|` = **44.6/12.0/5.2**, none stationary. **It licenses ONLY: budget alone does not
+reach 1.45; `L7`/`L4` prices stay OPEN; the ansatz is NEITHER exonerated NOR convicted** — the
+plan's *"the stall is the CONSTRUCTION"* needed a stationary iterate and is SUPERSEDED
+(`CORRECTIONS.md` §41). SS-collapse control does **not** fire (`1.88e-3` vs `1e-6`).
+
+---
+
+## §W7-U3QUEUE — retired from `WALLS.md` 2026-08-19 under §3j at `PB2`'s integration. VERBATIM.
+
+**2026-08-18 — SIZE IS NOT THE BINDING RISK, PERSISTENCE IS.** `U3` **finished**: 14.47 h wall,
+144.69 core-h reserved, 92.9% utilised. Every recorded loss (13 agents 08-06, 5 on 08-07, `E`
+killed twice, 3 of 4 in wave 3) was a suspended session or a **gitignored** checkpoint, never a
+job too big. **QUEUED 2026-08-18 by user directive** (the "price, do not queue" clause was
+WITHDRAWN): `writeup/prices/FIELD_ENSEMBLE_2026-08-18.md`, 160 attempts, ~91 core-h.
+
+
+---
+
+## §W4-CUTOFFBILL — retired from `WALLS.md` 2026-08-19 under §3j at `PB2`'s integration. VERBATIM.
+
+**What is measured.** Leg 381's cutoff bill: the critical `L³` tail runs at **326.875 per decade**
+(increment of the *cube*; the norm itself runs 8.679 → 14.841), required decay exponent `α > 1.5`
+against an a-priori `α = 1.0`, **deficit 0.5**. Leg 390 priced the torus alternative: `α > 2.996995`
+to wrap the uncut profile, deficit 1.996995 — **3.99399× worse** — but **0.0 if the profile is cut
+first** (disjoint supports at `L > 2ρ`), in which case leg 381's bill is inherited unchanged. Leg
+390's own words: **"(D) deletes the acceptance test, not the work."**
+
+
+---
+
+## §W3-V5AUDIT — retired from `WALLS.md` 2026-08-19 under §3j at `PB2`'s integration. VERBATIM.
+
+§W3-CELL. **`V5` (leg 402) has now AUDITED the occupant at full text: the certificate DOES close**
+— 24 recomputable constants re-derived at 50 dps, **four printed constants fail** (`H28`, `H30`,
+`H32`, `H33`; the real one is `x_0^U`, `1.44e-5` printed against `1.45054706437e-5`, from
+substituting `η₂ = 0.005` where the certified `M_2^U ≤ 0.0061` belongs), and **carrying the
+corrections through, closure survives** — `x_1^U` clears by **0.08%**, recorded as **luck, not
+margin**. **Class A (22 interval-arithmetic inputs) was NOT verified and is banked as a LIMIT OF
+THE AUDIT, never as a pass.** **W3 IS UNMOVED: the audit did not run W3's prose test.**
+`CORRECTIONS.md` §36.
+
+**Predicate not tightened, `YES` not withdrawn; leg 242's over-read struck; the wave-6 audit that
+ruling Q4 made non-optional is DONE (`V5`, leg 402, VERIFIED by `V-W6`). Retired verbatim 2026-08-19
+→ `WALLS_HISTORY.md` §W3-PREDICATE.**
+
+---
+
+## §R2R5-LEDGER — retired from `WALLS.md` 2026-08-19 under §3j at `PB2`'s integration. VERBATIM.
+
+- **R2 deflation** — strongest surviving item; attacks the largest measured waste (`R0`: **57 of U5's
+  100 seeds already spent by U3**). Deflate against the union of both runs' solutions.
+- **R3 multiple shooting** — named by route-DSSP brick **B6's own spec**, built without it.
+- **R4 second-order stepper** — U3's is **Lie–Trotter, globally first order** (measured ratio 2.00),
+  so its orbits are `O(dt)` perturbations of the true flow's. **`E-iii` promoted it. Invalidates M1's
+  reproduction; must re-run it.**
+- **R5 carry `m`** — every negative here about orbit recovery carries *"with a residual that cannot
+  represent one of the two shift classes."* **CORRECTED by U5: R5 does NOT help the band** (334
+  anchored candidates, **1** in the published `|s|` band). It is the fix for `|s| > 0.9`, and is the
+  same unit as `PROG-R4` **C** — don't double-count.
