@@ -2971,3 +2971,64 @@ I am naming it as one.** The five were cheap, they were forced by a live unit's 
 sought, and every one landed before a gate number existed — but the count stands and the direction
 check answers it the same way regardless. **Wave 8 opens on the Clay chain: `L-JVER` and `PB2` both
 attack `W4` directly, and no further instrument work is dispatched ahead of them.**
+
+## §46 — `L6`'s seed spread was quoted as a property of the ANSATZ and is substantially a property of the BUDGET; plus my own misreading of a failing check as a false alarm
+
+**The withdrawn claim.** `WALLS.md`'s `L6` block records, as a ceiling measured by the Conductor on
+landing and upheld by `V-W6`: *"Seed spread **3.93–23.67× on B**, never above 5.95× on A"*, offered
+as evidence about the construction's basin structure — that `ρ ≈ 1.6` is a continuation artefact
+which fresh seeds do not find. **The direction of that statement survives. The NUMBER does not, and
+it was never a number about the ansatz.**
+
+**Why, and this time the comparison is not confounded.** `L6-b` (leg 406) ran two fresh seeds to
+20,000 iterations and banked their whole trajectories, so **the same seeds can be read at both
+budgets** — same apparatus, same `n_dof = 6720`, same branch, same norm, only the cap differs:
+
+| | `seed406` | `seed407` | seed/continuation ratio |
+|---|---|---|---|
+| at `k = 800` (`L6`'s cap) | `28.6934` | `35.5608` | **17.81× and 22.07×** |
+| at `k = 20,000` | `6.4597` | `6.5024` | **4.29× and 4.32×** |
+| improvement, same seed | **×4.44** | **×5.47** | **the ratio falls ~5×** |
+
+`L6-b`'s two seeds sit inside `L6`'s own five branch-B seeds at the same cap (`29.57`–`38.20`), so
+they are drawn from the same population and the comparison is like-for-like. **`23.67×` is what the
+seed/continuation ratio reads when every start is stopped at 800 iterations. It is not what the
+landscape is; it is where L-BFGS-B happened to be at 800.**
+
+**What still stands, stated separately so it is not lost.** At 20,000 iterations both independent
+seeds are still at `6.46`/`6.50`, **outside** the pre-committed `[1.55, 1.70]` band. *At this budget
+`ρ ≈ 1.6` remains reachable by continuation and not from cold starts.* That claim is intact and it
+is the one the ceiling was for. What is withdrawn is the **magnitude** being read as a landscape
+property, and any inference that the gap is large because the basin is narrow.
+
+> **THE RULE.** *A quantity measured at a resource cap is a property of the cap until it is shown
+> otherwise, and it may not be quoted as a property of the object. Where a spread, ratio or ranking
+> is offered as evidence about a construction, the record must state the budget at which every term
+> was measured — and if the terms were measured at DIFFERENT budgets, the comparison is void.*
+
+This is §43's error in its second costume: there a ratio was confounded by `|J|`, here by the
+iteration cap. Both were quoted by me, both were true of what was computed, and both were read as
+establishing a property they cannot reach. **`V-W6` upheld the first version of this ceiling; a
+verifier agreeing is not the same as the claim being measured.**
+
+### §46b — and one of mine, from the same landing, in the same family
+
+Auditing `L6-b` I ran its evidence suite and saw `C41` **FAIL**. The unit was mid-landing: it
+rewrote the check at 08:08:58 and the artefact at 08:09:19, my run having started at 08:08:0x. I
+recomputed the three correlation coefficients, found them identical to `0.00e+00`, and reported to
+the user that the failure was **"void"** and **"a false defect against a unit that had done nothing
+wrong."**
+
+**Both words were wrong.** `C41` had genuinely failed on a true artefact, and the unit had already
+diagnosed why: the check **asserted a direction** (the seeds' relative gradient rising, `r = +0.76`
+/`+0.82` over `k = 4,700–7,700`) which **reverses** over the final 3,000 (`−0.23`/`−0.35`). That is
+the exact mirror of `C37`, which would have *passed* on a false claim — one check encoding a claim
+instead of verifying a number, in both directions. My recomputation compared **the rewritten check
+against the rewritten artefact** and concluded the **original** failure was spurious.
+
+> **THE RULE.** *When an artefact and its checker are both moving, a check result names WHICH
+> VERSION OF EACH it was produced from, or it is not a result. And a recomputation that agrees with
+> the current pair says nothing whatever about a failure observed against a previous pair.*
+
+**The race was real; the conclusion drawn from it was not.** The failing check was the unit finding
+its own defect, and I read it as the unit being wronged by my timing.

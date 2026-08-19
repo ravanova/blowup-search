@@ -525,3 +525,21 @@ is 32 KB and the named remedy — *retracted text stays struck but moves to a `#
 the foot* — had stopped buying headroom once the section itself grew to ~2.9 KB. The remedy is
 extended one step rather than abandoned: **nothing is deleted, nothing is unstruck**, and every
 `## History` pointer in this file now resolves to `WALLS_HISTORY.md`. Flagged, not silent.
+
+
+## §W4-L6CEIL — `L6`'s landing ceiling, retired VERBATIM from `WALLS.md` 2026-08-19 on `L6-b`'s landing
+
+Retired because `L6-b` (leg 406) measured two of its numbers and **one of them was a property of
+the iteration cap, not of the construction** (`CORRECTIONS.md` §46). Kept verbatim, not compacted,
+so the withdrawn figure stays legible beside its correction. `V-W6` had **upheld** this text.
+
+**CEILING, MEASURED BY THE CONDUCTOR ON LANDING, NOT CLAIMED BY THE UNIT, RULED ON BY `V-W6`: at
+every rung above the coarsest, `ρ` is attained by ONE start — the continuation. UPHELD both
+branches.** Seed spread **3.93–23.67× on B, never above 5.95× on A** (my "10–24×" was the top of the
+range quoted as the range — `CORRECTIONS.md` §38); it worsens with `n_dof` in the per-rung
+**minimum**, not seed by seed; all 133 hit **their** cap, 58 at 800 and 75 at 250. **`V-W6` adds two
+facts I missed, both stronger:** the cap sweep is a post-hoc TRUNCATION of the same full-budget runs,
+warm-started from below, so it **controls nothing**; and the banked minimiser is **~14 orders from
+its pre-registered `gtol`** (`153.22` vs `1e-12`), growing with `n_dof` on both. The ladder inherits
+its predecessor's minimiser at a budget too small to explore the added dimensions. **The `NO` is
+about THIS CONSTRUCTION AT THIS BUDGET**; `L6-b` separates budget from ansatz.

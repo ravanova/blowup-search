@@ -10,7 +10,7 @@ verbatim 2026-08-18 under §3j → `## Superseded — the 2026-08-14 fork`.
 
 ---
 
-## LIVE — CONDUCTOR mode, **WAVE 7 DISPATCHED, FOUR UNITS IN FLIGHT**, 2026-08-19
+## LIVE — CONDUCTOR mode, **WAVE 7 CLOSED (`L6-b` LANDED); WAVE 8 DISPATCHING**, 2026-08-19
 
 ### Wave 5, the trigger message, and wave 6's §3i — RETIRED 2026-08-19 (verbatim, below)
 
@@ -32,21 +32,8 @@ DO NOT QUEUE WITHDRAWN" block`. **§0's `R4` > `R2` > `R3` ranking STANDS** — 
 additions, not a re-rank. **My 90.9 core-h price was an OUTTURN, not a FLOOR, and `R-prof` has
 now measured the factor: 4.34× a named reference, gate (iii) `NO`, and it breaks no wall.**
 
-### WAVE 6 — **COMPLETE 2026-08-19. Three planned, three dispatched, three landed.**
-
-Plan `e202653` before any worker started; `V-W5` `95cf861`, `V5` `dacc01c`, `L6` `e62c449`; **all
-three now VERIFIED by `V-W6`.** Detail retired verbatim → `WALLS_HISTORY.md` §ORCH-W6-DISPATCH.
-
-**`L6`'s landing audit and its §3i — retired verbatim 2026-08-19 → `WALLS_HISTORY.md`
-§ORCH-W6-L6AUDIT. THREE OF ITS NUMBERS ARE CORRECTED BY `V-W6` at `writeup/CORRECTIONS.md` §38**;
-the one-start finding is UPHELD. Full text with the audit: `writeup/waves/WAVE6_CLOSE.md`.
-
-**Wave 6's seven §3i answers retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §ORCH-W6-3i; full
-text with its landing audit: `writeup/waves/WAVE6_CLOSE.md`. What binds: no `L1→L4` link moved;
-`OPTIONS.md`'s `L7` and `L4` prices made FALSE; Lane L keeps its rank; the loop risk is REAL —
-wave 7's Lane-L slot is a measurement on the object, not another audit.**
-
-**RE-RANK MADE HERE (§3i q5): Lane L's next unit is `L6-b`, not `L7`.** `R4` > `R2` > `R3` stands.
+### WAVE 6 — COMPLETE 2026-08-19, three landed. **Its §3i re-rank (`L6-b` before `L7`) is
+DISCHARGED — `L6-b` landed `4df0ca0`.** Retired verbatim below → *Superseded — wave 6's close*.
 
 ### ⚠ 2026-08-19 USER RULING — **TEMPORARY PIVOT TO PAPERS**, entering at the NEXT wave boundary
 
@@ -59,7 +46,16 @@ novelty check; a YES kills `P1` and is a GOOD result) ‖ `V-W7` (last). **A PAP
 RECORD, NEVER A SOURCE; no unit may cite a draft; the composition floor STANDS.** `P4`'s draft
 slips to wave 9 on the 2–4 cap — **flagged to the user, not silently dropped** (`WAVE8_PLAN.md` §5).
 
-### WAVE 7 — `R-bank`, `R-prof`, `V-W6` LANDED; `L6-b` and `E-FE` IN FLIGHT (legs 404–408)
+### WAVE 7 — `R-bank`, `R-prof`, `V-W6`, **`L6-b` LANDED**; `E-FE` alone in flight (legs 404–408)
+**`L6-b` LANDED 2026-08-19 08:06 (`4df0ca0`, leg 406). GATE `NO`: `ρ = 1.5048519` at 20,000
+iterations, −6.75%, threshold `<1.45` NOT met; 43.3 core-h; evidence 57/57.** Terminal
+`‖x‖‖∇J‖₂/|J|` = 44.6/12.0/5.2 — **not stationary**, so §41 bites and the plan's `NO` sentence is
+**SUPERSEDED**. Licenses ONLY: *budget alone does not reach 1.45; `L7`/`L4` prices stay OPEN; the
+ansatz is neither exonerated nor convicted.* Withdraws `WALLS.md`'s seed-spread magnitude as a
+cap artefact (§46). **No `L1→L4` link moved. §3i seven answered in `WAVE7_CLOSE.md`; RE-RANK:
+NONE** — `L-JVER` → `L6-e` → `L8` stands, because `L-JVER` is the cheapest unit that can kill the
+lane and every route-4 residual is downstream of the one function it re-implements.
+
 
 Plan committed `2a5ea0d` **before** dispatch, gates verbatim in the briefs. Dispatch block
 retired verbatim → `## Superseded — wave 7's dispatch block`; **its `E-FE` HOLD is DISCHARGED.**
@@ -92,9 +88,9 @@ on 4 fields — bitwise. **My own `~1.2 GB` is 268.9 MB**, `U2`'s *rejected* arc
 | file | bytes | cap | free |
 |---|---|---|---|
 | `STATE.md` | 23,639 | 24,576 | 937 |
-| `WALLS.md` | 32,044 | 32,768 | 724 |
+| `WALLS.md` | 32,526 | 32,768 | 242 |
 | `OPTIONS.md` | 23,971 | 24,576 | 605 |
-| `ORCH_STATE.md` LIVE | 8,053 | 8,192 | 139 |
+| `ORCH_STATE.md` LIVE | 7,247 | 8,192 | 945 |
 
 **Defect of mine, §37 `writeup/CORRECTIONS.md`: retire by slicing between ASSERTED LINE INDICES,
 never by title, and measure the live block by line index too, or the cap check silently passes.**
@@ -168,10 +164,10 @@ them **over**. `ORCHESTRATION.md` §3j now carries the rule. Rows stay in **char
 
 | file | bytes | cap | free |
 |---|---|---|---|
-| `STATE.md` | 23,247 | 24,576 | 1,329 (longest row 583 ≤ 600) |
+| `STATE.md` | 23,639 | 24,576 | 937 |
 | `WALLS.md` *(excl. exempt `## History`)* | 32,233 | 32,768 | 535 |
-| `OPTIONS.md` | 23,522 | 24,576 | 1,054 — **§F + A/B/D retired, debt CLEARED** |
-| `ORCH_STATE.md` LIVE | at cap | 8,192 | <100 |
+| `OPTIONS.md` | 23,971 | 24,576 | 605 |
+| `ORCH_STATE.md` LIVE | 7,247 | 8,192 | 945 |
 
 **Next retirement NAMED:** `WALLS.md` — W3's cell-occupancy narrative behind a pointer;
 `OPTIONS.md` — §F's discharged items. Cycles: wave 5 = 2; context HAS summarised.
@@ -344,10 +340,10 @@ is **mine**. **Measure with `wc -c`.** `ORCHESTRATION.md` §3j now says so.
 
 | file | bytes | cap | free |
 |---|---|---|---|
-| `STATE.md` | 23,247 | 24,576 | 1,329 (longest row 583 ≤ 600) |
+| `STATE.md` | 23,639 | 24,576 | 937 |
 | `WALLS.md` *(excl. exempt `## History`)* | 32,233 | 32,768 | 535 |
-| `OPTIONS.md` | 23,522 | 24,576 | 1,054 — **§F + A/B/D retired, debt CLEARED** |
-| `ORCH_STATE.md` LIVE | **at cap** | 8,192 | **<100** |
+| `OPTIONS.md` | 23,971 | 24,576 | 605 |
+| `ORCH_STATE.md` LIVE | 7,247 | 8,192 | 945 |
 
 Cycles: **wave 5 = 2**. **Context HAS been summarised** — §9d's triggers are 12 cycles
 *or* first summarisation, and **the second has fired**: wave 6 is planned knowing a handoff is due.
@@ -553,9 +549,9 @@ The re-rank came out of q3/q5/q6 and is recorded in `WALLS.md` and `STATE.md`, n
 
 | file | cap | now | headroom |
 |---|---|---|---|
-| `STATE.md` | 24,576 | **24,414** | **162** (longest row 542 / 600) |
-| `WALLS.md` | 32,768 | **32,600** | **168** |
-| `OPTIONS.md` | 24,576 | **24,561** | **15** |
+| `STATE.md` | 23,639 | 24,576 | 937 |
+| `WALLS.md` | 32,526 | 32,768 | 242 |
+| `OPTIONS.md` | 23,971 | 24,576 | 605 |
 | this LIVE block | 8,192 | see commit | — |
 
 **⚠ THE CAPS ARE NOW THE BINDING CONSTRAINT, AND THIS IS A FINDING, NOT A COMPLAINT.** Three of the
@@ -635,9 +631,9 @@ sole priority in the same commit. Recorded in `WALLS.md` §LANE PRIORITIES.
 
 | file | cap | now | headroom |
 |---|---|---|---|
-| `STATE.md` | 24,576 (no row > 600 ch) | **18,109**, longest row 542 | 6,467 |
-| `WALLS.md` | 32,768 | **32,722** | 46 |
-| `OPTIONS.md` | 24,576 | **24,538** | 38 |
+| `STATE.md` | 23,639 | 24,576 | 937 |
+| `WALLS.md` | 32,526 | 32,768 | 242 |
+| `OPTIONS.md` | 23,971 | 24,576 | 605 |
 | this LIVE block | 8,192 | see foot | — |
 
 **Context WAS summarised — twice — during this Conductor session.** All four files were re-read from
@@ -1203,3 +1199,26 @@ Plan committed `2a5ea0d` **before** dispatch; gates carried verbatim into self-c
 landing audit too. **`E-FE` IS HELD** until `R-bank` returns **160/160** bit-identical: that is
 `R-bank`'s own pre-committed reading, not a new decision. Territories disjoint; every brief carries
 explicit-paths-only commits (four workers, one tree), COMMIT DURING THE RUN, and its §3d price.
+
+
+## Superseded — wave 6's close and its §3i re-rank, demoted 2026-08-19 on `L6-b`'s landing (verbatim)
+
+*Discharged: the re-rank it made — Lane L's next unit is `L6-b`, not `L7` — was executed and
+`L6-b` landed at `4df0ca0` with gate `NO`. Nothing reworded.*
+
+### WAVE 6 — **COMPLETE 2026-08-19. Three planned, three dispatched, three landed.**
+
+Plan `e202653` before any worker started; `V-W5` `95cf861`, `V5` `dacc01c`, `L6` `e62c449`; **all
+three now VERIFIED by `V-W6`.** Detail retired verbatim → `WALLS_HISTORY.md` §ORCH-W6-DISPATCH.
+
+**`L6`'s landing audit and its §3i — retired verbatim 2026-08-19 → `WALLS_HISTORY.md`
+§ORCH-W6-L6AUDIT. THREE OF ITS NUMBERS ARE CORRECTED BY `V-W6` at `writeup/CORRECTIONS.md` §38**;
+the one-start finding is UPHELD. Full text with the audit: `writeup/waves/WAVE6_CLOSE.md`.
+
+**Wave 6's seven §3i answers retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §ORCH-W6-3i; full
+text with its landing audit: `writeup/waves/WAVE6_CLOSE.md`. What binds: no `L1→L4` link moved;
+`OPTIONS.md`'s `L7` and `L4` prices made FALSE; Lane L keeps its rank; the loop risk is REAL —
+wave 7's Lane-L slot is a measurement on the object, not another audit.**
+
+**RE-RANK MADE HERE (§3i q5): Lane L's next unit is `L6-b`, not `L7`.** `R4` > `R2` > `R3` stands.
+

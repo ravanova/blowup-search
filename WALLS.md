@@ -176,16 +176,21 @@ normalised to **1** — *order one*, not small. **It does NOT decrease under ref
 `d log ρ / d log n_dof = −0.0222` over the last three rungs, **0.497 %** at the top. Evidence
 reproduces independently (30/30; banked coefficients re-synthesise `ρ` exactly). **The `Ks = 0`
 of freedom are load-bearing — the construction did NOT collapse to (D)SS.**
-**CEILING, MEASURED BY THE CONDUCTOR ON LANDING, NOT CLAIMED BY THE UNIT, RULED ON BY `V-W6`: at
-every rung above the coarsest, `ρ` is attained by ONE start — the continuation. UPHELD both
-branches.** Seed spread **3.93–23.67× on B, never above 5.95× on A** (my "10–24×" was the top of the
-range quoted as the range — `CORRECTIONS.md` §38); it worsens with `n_dof` in the per-rung
-**minimum**, not seed by seed; all 133 hit **their** cap, 58 at 800 and 75 at 250. **`V-W6` adds two
-facts I missed, both stronger:** the cap sweep is a post-hoc TRUNCATION of the same full-budget runs,
-warm-started from below, so it **controls nothing**; and the banked minimiser is **~14 orders from
-its pre-registered `gtol`** (`153.22` vs `1e-12`), growing with `n_dof` on both. The ladder inherits
-its predecessor's minimiser at a budget too small to explore the added dimensions. **The `NO` is
-about THIS CONSTRUCTION AT THIS BUDGET**; `L6-b` separates budget from ansatz.
+**CEILING ON `L6`, MEASURED ON LANDING, RULED ON BY `V-W6` — AND PARTLY WITHDRAWN 2026-08-19 BY
+`L6-b`.** At every rung above the coarsest, `ρ` is attained by ONE start, the continuation: **this
+STANDS**, and `L6-b` re-measured it at 25× budget — both fresh seeds reach only `6.46`/`6.50`,
+outside `[1.55,1.70]`. **WITHDRAWN: the magnitude.** *"Seed spread 3.93–23.67× on B"* is a property
+of the **800-iteration cap**, not the landscape — the same seeds read `17.81–22.07×` at `k=800` and
+**`4.29–4.32×` at `k=20,000`** (`CORRECTIONS.md` §46; `V-W6` upheld the withdrawn version).
+**All 133 starts hit their cap; all 58 at 800; 56/58 non-critical — the ladder compared STOPPING
+POINTS, never stationary ones.** `V-W6`'s two harder facts stand: the cap sweep is a post-hoc
+TRUNCATION of the same warm-started runs and **controls nothing**; the banked minimiser is ~14
+orders from its pre-registered `gtol`. **`L6-b` (leg 406, `4df0ca0`) ANSWERED: `NO`.** 20,000
+iterations, 43.3 core-h → **`ρ = 1.5048519`, −6.75%**, threshold `<1.45` not met; terminal
+`‖x‖‖∇J‖₂/|J|` = **44.6/12.0/5.2**, none stationary. **It licenses ONLY: budget alone does not
+reach 1.45; `L7`/`L4` prices stay OPEN; the ansatz is NEITHER exonerated NOR convicted** — the
+plan's *"the stall is the CONSTRUCTION"* needed a stationary iterate and is SUPERSEDED
+(`CORRECTIONS.md` §41). SS-collapse control does **not** fire (`1.88e-3` vs `1e-6`).
 
 **`L6` does NOT break W4** — a wall breaks when (a), (b) or (c) *succeeds*, and two are shut, the
 opposite. **W4's ONLY UNBROKEN CLAUSE IS (c)**, UNTESTED NOT CLOSED, deferred with Lane T. Retired

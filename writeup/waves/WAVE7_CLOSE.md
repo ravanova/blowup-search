@@ -583,3 +583,105 @@ window whether or not it has finished, so it belongs to the numerator's.
 **No new Sec is opened.** This is an instance of Sec 42, not a defect in it, and the rule as written
 is what caught it. Recorded here rather than in `CORRECTIONS.md` because **nothing false was
 banked** — which is the whole point of the entry.
+
+---
+
+# LANDING: `L6-b` (leg 406, `4df0ca0`) — THE GATE ANSWERS `NO`, AND THE `NO` BUYS THE WEAKEST OF ITS THREE ROWS
+
+**THE NUMBER.** Smallest residual at 20,000 iterations = **`1.504851895102804`**, against `L6`'s
+`1.613811231995397`. Absolute **−0.10896**, relative **−6.75%**. Material threshold was **`< 1.45`**.
+**Materially below: NO.** Cost **43.29 core-h**, 7.215 h wall, 6 of 12 cores. `UNDER_RESOURCED =
+false` — the pre-registered 20,000 ran in full and was not truncated. Evidence **57/57** on a clean
+re-run after the unit settled. Apparatus identity confirmed like-for-like: at `k = 800` this unit
+reads `1.6111006` against `L6`'s `1.6138112`, **0.17% apart** — this is `L6`'s machine, not a
+re-implementation of it.
+
+**WHICH ROW FIRES, AND WHY IT IS NOT THE ONE THE PLAN WROTE.** Terminal `scale_invariant_grad` is
+**44.57 / 12.05 / 5.17**; trailing-2,000 **minima** are 32.3 / 6.39 / 5.17. The closest start is
+**5× above** the a-priori threshold of `1`, so §44's window-maximum key and the terminal-sample key
+select the same row — **§44 was correct and, on this instance, not load-bearing. That is stated
+rather than counted as a catch.** Row 2 fires:
+
+> **ONLY: "25× `L6`'s budget, and still not stationary — budget alone does not reach 1.45."
+> `L7`/`L4` prices stay OPEN. The ansatz is NOT exonerated and NOT convicted.**
+
+`WAVE7_PLAN` AMENDMENT 2's `NO` sentence — *"the stall is the CONSTRUCTION, not the budget, and
+route 4's `NO` hardens"* — **is not licensed and is not claimed.** It requires a stationary terminal
+iterate; the run did not reach one. The unit banked it inline flagged `SUPERSEDED` and reached the
+same reading independently. **This is the first time §41 has bitten**, and it bit a gate I wrote,
+on a defect I pre-registered at iteration 7,000 of 20,000, before the number existed.
+
+**WHAT THE UNIT ESTABLISHED THAT THE GATE DID NOT ASK.**
+1. **Both independent seeds fail to find the basin at 25× budget** — `6.4597` and `6.5024`, outside
+   the pre-committed `[1.55, 1.70]`. *At this budget `ρ ≈ 1.6` is reachable by continuation and not
+   from cold starts.* **This is the ceiling that survives.**
+2. **And it withdraws its own predecessor's number** — the same two seeds read `28.69`/`35.56` at
+   `k = 800`, so the seed/continuation ratio falls **17.81–22.07× → 4.29–4.32×** on nothing but
+   budget. `WALLS.md`'s *"seed spread 3.93–23.67× on B"* was a property of the **cap**.
+   **`CORRECTIONS.md` §46**, and note `V-W6` had **upheld** the first version.
+3. **All 58 of `L6`'s start-records hit `nit == 800`.** None converged; 56/58 non-critical.
+   **`L6`'s five-rung ladder compared stopping points, never stationary ones** — which is what
+   `L6-e` exists to fix and why it is ranked where it is.
+4. **The `leg_401.md` §7.3 false-convergence defect did not recur**, and the renormalising-restart
+   fix **fired 3 rounds on each seed** — without it both seeds would have reported false convergence
+   early. A planted fix that measurably fired, which this record has few of.
+5. **The SS-collapse control does NOT fire.** Oscillating `s`-mode fraction `1.88e-3` against
+   `L6`'s `6.08e-3` and a tolerance of `1e-6`: it fell 3.2× under 25× budget and remains **1,880×
+   above tolerance**. The `Ks` freedoms stay load-bearing; the construction has **not** collapsed
+   into the exactly-SS class that `W4` clause (b)'s pin excludes. **Two points are not a trend and
+   this is not read as one** — it is handed to `L6-e`/`L8` as a quantity to watch, nothing more.
+
+**CEILINGS, taken from the unit's own §9 rather than restated by me.** 20,000 iterations is a bigger
+budget, not convergence; three starts are not a basin survey; `n_dof = 6720` is one truncation and
+if budget was ever the binding constraint then **the entire five-rung ladder is unmeasured at
+adequate budget**; the integrand is Hölder-½ where `W` vanishes, so quasi-Newton has no convergence
+theory on it and neither slow nor fast descent may be read as evidence; branch A was not run;
+float64, Tier 2, no enclosure. **`chain`: NO `L1→L4` link moved, either way. Not a blow-up, not a
+certificate, not an infimum. Clay stays ~0.05%.** 43 core-h bought 6.6% of a residual — **scale is
+not evidence.**
+
+## §3i THE DIRECTION CHECK — seven answers, against the RECORD
+
+**(1) Did it move an `L1→L4` link?** **No**, and the artefact banks that in a `chain` block rather
+than leaving it to me. Route 4's residual at one resolution moved 6.75% and no link depends on it.
+
+**(2) What did it make FALSE?** Four things. *(a)* That `L6`'s stall could be attributed to the
+construction — never established, and now explicitly superseded. *(b)* `WALLS.md`'s seed-spread
+magnitude as a landscape property (§46). *(c)* The implicit reading that `L6`'s ladder compared
+converged minima — all 58 records are stopping points. *(d)* My own report that `C41`'s failure was
+"void" (§46b).
+
+**(3) Does Lane L still deserve its rank ON WHAT IS MEASURED NOW?** **Yes, and less comfortably than
+before.** What is measured: a residual of 1.50 that does not decrease under refinement, is not
+stationary at 25× budget, and sits in a basin only continuation can find. That is a lane whose
+central object is not converging. It keeps priority because it is still the only lane building on
+route 4's own profile and because **the next unit is a check, not another ladder** — see (5).
+
+**(4) Is any live claim resting on a source whose recorded ceiling is undischarged?** **Yes, two.**
+`W4` clause (b) rests on NRŠ 1996 at `SECOND HAND` — routed to `PB2`, re-scoped this morning
+(AMENDMENT 4). And **every route-4 residual rests on `J(c)` as coded**, whose only evidence is
+self-test `T_D = 1.22e-4` comparing two of `L6`'s **own** implementations. That is §45's failure
+mode at the load-bearing point of the whole lane.
+
+**(5) What is the CHEAPEST unit that could KILL the priority lane, and why is it not next?**
+**`L-JVER`, and it IS next.** If `J(c)` is miscoded, `L5`'s `c_mod = 869.288`, `L6`'s `ρ = 1.6138`
+and `L6-b`'s `1.5049` all fall together, because all three are that one function. Buying the check
+is strictly cheaper than buying another ladder, and `L6-b` has just spent 43 core-h refining a
+number nobody outside its own author has ever computed. **Ranking unchanged: `L-JVER` → `L6-e` →
+`L8`.** The runner-up, recorded so it is not lost: **the `α = 1` far-field normalisation is taken
+from `L6`, not tested** (leg 406 §9 ceiling 7), and every residual in the lane is conditional on it.
+That is the next kill-shot after `L-JVER` if `L-JVER` clears.
+
+**(6) If Lane L died tomorrow, what instead — and is it cheaper?** Lane V's `2509.25116`
+adversarial audit (obligatory, un-held, ≈4–8 h) and Lane T's `W4` clause (c), the torus, **UNTESTED
+NOT CLOSED**. Both are cheaper than a Lane L ladder. **This is why `L-JVER` before `L6-e`**: a lane
+that might be resting on a miscoded functional should be tested before it is funded further.
+
+**(7) Are we in an audit/instrument loop? Count the last three units by kind.** `R-bank` (Lane R,
+instrument), `E-FE` (Lane R, measurement, still in flight), `L6-b` (Lane L, **construction**). Not a
+loop by units — **but I logged five consecutive audit-kind actions of my own overnight and ruled
+against a sixth.** Wave 8 opens with `L-JVER` and `PB2`, construction first, and the composition
+floor is met by `L-JVER` attacking `W4`/`W5` directly.
+
+**RE-RANK: NONE.** (3), (5) and (6) all point the same way and the order in `WAVE8_PLAN` already
+reflects it. Recorded rather than assumed.
