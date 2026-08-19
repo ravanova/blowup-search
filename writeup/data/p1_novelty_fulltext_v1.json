@@ -1,0 +1,421 @@
+{
+  "leg": 411,
+  "unit": "PB1",
+  "instrument": 2,
+  "role": "FULL-TEXT ADJUDICATION.  Instrument 1 searches metadata only and cannot answer this gate.  Depth of every quote below is FULL TEXT (Sec 3k).",
+  "pdftotext": "pdftotext version 24.02.0",
+  "papers_dir_is_gitignored": true,
+  "quotes_banked_in_this_json_because_the_pdfs_are_not": true,
+  "corpus": [
+    {
+      "id": "1207.4682v1",
+      "file": "1207.4682.pdf",
+      "what": "Chandler & Kerswell, JFM 722:554-595 (2013)",
+      "sha256": "343d21738154d9044acbda305b3abede82a805fff860df0268d6caa0c88d80cf",
+      "n_pages": 40,
+      "n_chars": 88420
+    },
+    {
+      "id": "1406.1820v1",
+      "file": "1406.1820v1.pdf",
+      "what": "Lucas & Kerswell, Phys. Fluids 27 045106 (2015) [v1: THE QUOTED VERSION]",
+      "sha256": "edf2f7e9e3617417379fb02cdf9533fc75b6d697bdc41e86df001af9a6cbad76",
+      "n_pages": 24,
+      "n_chars": 64150
+    },
+    {
+      "id": "1406.1820v2",
+      "file": "1406.1820.pdf",
+      "what": "Lucas & Kerswell (2015) [v2: doubled text layer, cross-check only]",
+      "sha256": "da9cab5cb8745317b0cc262d214b4df9841f0440c5efaeff29086634ff479258",
+      "n_pages": 28,
+      "n_chars": 123054
+    },
+    {
+      "id": "1308.3356v3",
+      "file": "1308.3356.pdf",
+      "what": "Lucas & Kerswell, 2D Kolmogorov over large domains",
+      "sha256": "f39f1333f8d2fed21a8fcc4bc3b5033e6d6b90b6df82f7644fb4d6c5e00e541c",
+      "n_pages": 37,
+      "n_chars": 84682
+    },
+    {
+      "id": "physics/0604062",
+      "file": "physics_0604062.pdf",
+      "what": "Viswanath 2007, founding hookstep paper",
+      "sha256": "fe9fe1aaf9dd3b9d52b470eb3d9008f77efdc8666b2e8122119b66c14d5dc5d6",
+      "n_pages": 23,
+      "n_chars": 59825
+    },
+    {
+      "id": "2309.12754v1",
+      "file": "2309.12754.pdf",
+      "what": "Page, Holey, Brenner & Kerswell, JFM 991 (2024) A10",
+      "sha256": "5e47a4bd7cb32c3e84334d89e5fb6277a2822e377262ed8ffde9f6208200b612",
+      "n_pages": 28,
+      "n_chars": 81541
+    },
+    {
+      "id": "1108.0975v1",
+      "file": "1108.0975.pdf",
+      "what": "Kawahara, Uhlmann & van Veen, Annu. Rev. Fluid Mech. 44:203-225 (2012)",
+      "sha256": "9e4d666e7c93463c2241f275af42ba7933a2792268d4e4e077d9bb6fe47be2a9",
+      "n_pages": 32,
+      "n_chars": 76109
+    },
+    {
+      "id": "1611.04829v1",
+      "file": "1611.04829.pdf",
+      "what": "Lucas & Kerswell 2017, sustaining processes",
+      "sha256": "2ef116770ff611d624001140102864ff1a213da3fa23749048a7dcc3fbbda198",
+      "n_pages": 11,
+      "n_chars": 41678
+    },
+    {
+      "id": "0810.1974v1",
+      "file": "0810.1974.pdf",
+      "what": "Halcrow-Gibson-Cvitanovic, plane Couette UPOs",
+      "sha256": "065f947a15f3a9875e5931edec070e2ba93594fe65ae8923316d59943e3b55a5",
+      "n_pages": 3,
+      "n_chars": 3191
+    },
+    {
+      "id": "1705.03720v2",
+      "file": "1705.03720.pdf",
+      "what": "Willis, Cvitanovic & Avila, pipe-flow RPO backbone",
+      "sha256": "85a5b22f0c6ce66a0522bb513136442f59e8bb902203655e246322368b08772c",
+      "n_pages": 26,
+      "n_chars": 79486
+    }
+  ],
+  "controls": [
+    {
+      "control": "FT1_positive",
+      "phrase": "hookstep",
+      "rule": "docs>=2",
+      "n_docs_hit": 8,
+      "docs": [
+        "1207.4682v1",
+        "1406.1820v1",
+        "1406.1820v2",
+        "1308.3356v3",
+        "physics/0604062",
+        "2309.12754v1",
+        "1611.04829v1",
+        "0810.1974v1"
+      ],
+      "fired_as_planted": true
+    },
+    {
+      "control": "FT2_topical_positive",
+      "phrase": "recurrent flow",
+      "rule": "docs>=2",
+      "n_docs_hit": 6,
+      "docs": [
+        "1207.4682v1",
+        "1406.1820v1",
+        "1406.1820v2",
+        "1308.3356v3",
+        "2309.12754v1",
+        "1611.04829v1"
+      ],
+      "fired_as_planted": true
+    },
+    {
+      "control": "FT3_nonsense_negative",
+      "phrase": "Grznarov admission funnel",
+      "rule": "docs==0",
+      "n_docs_hit": 0,
+      "docs": [],
+      "fired_as_planted": true
+    },
+    {
+      "control": "FT4_and_pair",
+      "phrase": "Newton AND Kolmogorov (same document)",
+      "rule": "docs>=1",
+      "n_docs_hit": 8,
+      "docs": [
+        "1207.4682v1",
+        "1406.1820v1",
+        "1406.1820v2",
+        "1308.3356v3",
+        "2309.12754v1",
+        "1108.0975v1",
+        "1611.04829v1",
+        "1705.03720v2"
+      ],
+      "fired_as_planted": true,
+      "why": "if this were 0, every co-occurrence zero below would be an artefact"
+    },
+    {
+      "control": "FT5_substring_trap",
+      "phrase": "'bias' as a bare substring vs the given name 'Tobias'",
+      "rule": "at least one doc must hit 'bias' ONLY via 'Tobias'",
+      "docs_hitting_bias": [
+        "1406.1820v2",
+        "1308.3356v3",
+        "1611.04829v1"
+      ],
+      "docs_hitting_Tobias": [
+        "1406.1820v2",
+        "1308.3356v3",
+        "1611.04829v1"
+      ],
+      "docs_where_bias_is_inside_Tobias": [
+        "1308.3356v3",
+        "1406.1820v2",
+        "1611.04829v1"
+      ],
+      "fired_as_planted": true,
+      "why": "a naive substring count of 'bias' over this corpus is dominated by the reference lists; reporting it as a measure of how much the field discusses bias would be reporting bibliography"
+    }
+  ],
+  "probes": [
+    {
+      "effect": "a",
+      "phrase": "chosen judiciously",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "1207.4682v1",
+          "pdf_page": 7,
+          "quote": "eriodic orbit (P 1 in Table 2) with period 5.3807 and the next 4 dots with t \u2208 [130, 160] to a TW (T 1 in Table 2) with phase speed c = 0.0198). The threshold Rthres was chosen judiciously to give enough good quality guesses. 3.3. UPO extraction method: Newton-GMRES-Hookstep Once a near-recurrence has been found by the above stated criterion, we then attempted to find if an exact recurrent flow was lurking nearby in phase spac"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "large skew toward low periods",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "1406.1820v1",
+          "pdf_page": 5,
+          "quote": "vered with a small residual are also likely to be visited \u2018less closely\u2019, i.e. with a larger residual, at about the same time. The variation with period T is marked by a large skew toward low periods, i.e. T < 5.0, which reflect close visits to unstable steady and travelling wave states. For larger periods (T > 20), there is little variation in the numbers of guesses found. This is somewhat counterintuitive since it should bec"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "somewhat counterintuitive",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "1406.1820v1",
+          "pdf_page": 5,
+          "quote": "which reflect close visits to unstable steady and travelling wave states. For larger periods (T > 20), there is little variation in the numbers of guesses found. This is somewhat counterintuitive since it should become less probable that the trajectory shadows a recurrent flow the longer its period if the leading Lyapunov exponent is largely period-independent. From these guesses we converged 81 unique recurrent flows: see Tab"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "focussed computational resources",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "1406.1820v1",
+          "pdf_page": 5,
+          "quote": "try group permutations thereof) and so only about a third of the guesses with T < 5.0 were processed. Likewise for T > 60.0, no recurrences with R < 0.25 converged so we focussed computational resources on periods 0.5 < T < 60.0 and skipped recurrences with R > 0.25 (this filtering still meant attempts were made to converge 5,120 of the total 11,934 guesses). Figure 3 shows the success rate of converging near-recurrence guesse"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "two shortcomings with the approach",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "2309.12754v1",
+          "pdf_page": 16,
+          "quote": " & Kerswell 2013; Lucas & Kerswell 2014, 2015). This is similar to the the issues discussed around the error metric (2.4) used for the neural networks in \u00a72.2. There are two shortcomings with the approach outlined above: (i) it requires a near recurrence to occur, which is unlikely at higher \ud835\udc45\ud835\udc52 due to the increased instability of the UPOs, and (ii) the measure in equation (4.1) is unlikely to be the best measure of similarity "
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "increased instability of the UPOs",
+      "n_hits": 2,
+      "hits": [
+        {
+          "doc": "2309.12754v1",
+          "pdf_page": 2,
+          "quote": "ndler & Kerswell 2013). This inherently restricts the approach to lower \ud835\udc45\ud835\udc52, as the shadowing becomes increasingly unlikely as the Reynolds number is increased due to the increased instability of the UPOs. Furthermore, measuring near recurrence with an Euclidean norm is unlikely to be a suitable choice for a distance metric on the solution manifold unless the near recurrence is very close (Page et al. 2021). More recent methods"
+        },
+        {
+          "doc": "2309.12754v1",
+          "pdf_page": 16,
+          "quote": "ural networks in \u00a72.2. There are two shortcomings with the approach outlined above: (i) it requires a near recurrence to occur, which is unlikely at higher \ud835\udc45\ud835\udc52 due to the increased instability of the UPOs, and (ii) the measure in equation (4.1) is unlikely to be the best measure of similarity for points which are not particularly close on the inertial manifold, but which may still be observed in a shadowing event. At \ud835\udc45\ud835\udc52 = 40 re"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "all the UPOs found are relatively low dissipation",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "2309.12754v1",
+          "pdf_page": 18,
+          "quote": "ulent p.d.f. Similar to the majority of structures found previously via recurrent flow analysis (e.g. in particular see Chandler & Kerswell 2013; Lucas & Kerswell 2014), all the UPOs found are relatively low dissipation. So, while latent recurrent flow analysis does provide access to large numbers of new solutions that a standard recurrent flow analysis has not been able to return, it is still constrained by the fact that the "
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "not flagged in this approach at all",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "2309.12754v1",
+          "pdf_page": 18,
+          "quote": "e numbers of new solutions that a standard recurrent flow analysis has not been able to return, it is still constrained by the fact that the more unstable structures are not flagged in this approach at all. We now discuss a new method to use latent Fourier analysis to isolate smaller-scale solutions which play a substantial role in the high-dissipation dynamics, and which is effective at both \ud835\udc45\ud835\udc52 = 40 and \ud835\udc45\ud835\udc52 = 100."
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "relies on a turbulent orbit shadowing",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "2309.12754v1",
+          "pdf_page": 2,
+          "quote": "o turbulence at high \ud835\udc45\ud835\udc52 which is inherently multiscale (e.g. Jime\u0301nez 2012). The most popular method for searching for periodic orbits, termed \u2018recurrent flow analysis\u2019, relies on a turbulent orbit shadowing a UPO for at least a full cycle, with the near recurrence \u2013measured with an \ud835\udc3f 2 norm\u2013 identifying a guess for both the velocity field and period of the solution (Viswanath 2007; Cvitanovic & Gibson 2010; Chandler & Kerswel"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "This inherently restricts the approach to lower",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "2309.12754v1",
+          "pdf_page": 2,
+          "quote": "asured with an \ud835\udc3f 2 norm\u2013 identifying a guess for both the velocity field and period of the solution (Viswanath 2007; Cvitanovic & Gibson 2010; Chandler & Kerswell 2013). This inherently restricts the approach to lower \ud835\udc45\ud835\udc52, as the shadowing becomes increasingly unlikely as the Reynolds number is increased due to the increased instability of the UPOs. Furthermore, measuring near recurrence with an Euclidean norm is unlikely to be"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "a",
+      "phrase": "only s = m = 0 shifts had been searched over",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "1207.4682v1",
+          "pdf_page": 13,
+          "quote": "35 at Re = 80 and 0.4 for Re = 100: see Table 1. Unfortunately, it was noticed after these (Series A) runs had been completed and the guesses tested for convergence that only s = m = 0 shifts had been searched over. So the runs were repeated (Series B runs o, p, q and r) searching specifically for recurrences which selected either s 6= 0 and/or m 6= 0 to minimise R. This was done to indicate"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "b",
+      "phrase": "considerable duplication",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "1207.4682v1",
+          "pdf_page": 14,
+          "quote": " a very efficient DNS code was important for this work. Table 1 also indicates the conversion rate of near-recurrences guesses to exactly recur- rent solutions. There is considerable duplication of such solutions so that a much smaller set of distinct recurrent structures is obtained."
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "b",
+      "phrase": "distinct recurrent structures",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "1207.4682v1",
+          "pdf_page": 14,
+          "quote": "cates the conversion rate of near-recurrences guesses to exactly recur- rent solutions. There is considerable duplication of such solutions so that a much smaller set of distinct recurrent structures is obtained."
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "b",
+      "phrase": "large repetition of the converged solutions already found",
+      "n_hits": 2,
+      "hits": [
+        {
+          "doc": "1406.1820v1",
+          "pdf_page": 5,
+          "quote": "v exponent is largely period-independent. From these guesses we converged 81 unique recurrent flows: see Table IV in appendix B and figure 2. At low periods, there was a large repetition of the converged solutions already found in [6] (E1, T 1, T 3, T 4, R7, R8 and symmetry group permutations thereof) and so only about a third of the guesses with T < 5.0 were processed. Likewise for T > 60.0, no recurrences with R < 0.25 conve"
+        },
+        {
+          "doc": "1406.1820v2",
+          "pdf_page": 6,
+          "quote": "pendix trajectory shadows B and figurea2.recurrent flow the At low periods, longer its period if the leading Lyapunov exponent is largely period-independent. there was a large repetition of the converged solutions already found in [6] (E1, T 1, T 3, T 4, R7, R8 and symmetry group permutations From these thereof) guesses and weso only about converged a third recurrent 81 unique of the guesses flows:with T < 5.0 see Table IV wer"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "b",
+      "phrase": "unique recurrent flows",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "1406.1820v1",
+          "pdf_page": 5,
+          "quote": "ble that the trajectory shadows a recurrent flow the longer its period if the leading Lyapunov exponent is largely period-independent. From these guesses we converged 81 unique recurrent flows: see Table IV in appendix B and figure 2. At low periods, there was a large repetition of the converged solutions already found in [6] (E1, T 1, T 3, T 4, R7, R8 and symmetry group permutations thereof) and so only about a third of the g"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "b",
+      "phrase": "conversion rate of near",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "1207.4682v1",
+          "pdf_page": 14,
+          "quote": "o be subdivided 12 ways to make the process manageable. These numbers make it clear why a very efficient DNS code was important for this work. Table 1 also indicates the conversion rate of near-recurrences guesses to exactly recur- rent solutions. There is considerable duplication of such solutions so that a much smaller set of distinct recurrent structures is obtained."
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "b",
+      "phrase": "So the runs were repeated",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "1207.4682v1",
+          "pdf_page": 13,
+          "quote": "1. Unfortunately, it was noticed after these (Series A) runs had been completed and the guesses tested for convergence that only s = m = 0 shifts had been searched over. So the runs were repeated (Series B runs o, p, q and r) searching specifically for recurrences which selected either s 6= 0 and/or m 6= 0 to minimise R. This was done to indicate"
+        }
+      ],
+      "status": "MEASURED"
+    },
+    {
+      "effect": "b",
+      "phrase": "Chandler and R. R. Kerswell, Journal of Fluid Mechanics 722",
+      "n_hits": 1,
+      "hits": [
+        {
+          "doc": "1406.1820v1",
+          "pdf_page": 21,
+          "quote": "). [4] G. Kawahara, M. Uhlmann, and L. van Veen, Annual Review of Fluid Mechanics 44, 203 (2012). [5] P. Cvitanovic\u0301, Journal of Fluid Mechanics 726, 1 (2013). [6] G. J. Chandler and R. R. Kerswell, Journal of Fluid Mechanics 722, 554 (2013). [7] E. Hopf, Commun. Appl. Maths 1, 303 (1948). [8] R. Artuso, E. Aurell, and P. Cvitanovic\u0301, Nonlinearity 3, 325 (1990). [9] R. Artuso, E. Aurell, and P. Cvitanovic\u0301, Nonlinearity 3, 361"
+        }
+      ],
+      "status": "MEASURED"
+    }
+  ],
+  "missing": [],
+  "controls_all_fired": true
+}
