@@ -119,6 +119,12 @@ measurement, verbatim: `reports/ORCH_STATE.md` Superseded LIVE blocks.
 
 **Legs 413–416: `L5-cmod` (Lane L, construction, opened the wave) ‖ `P4-DRAFT` ‖ `P2-DRAFT` ‖ `V-W8` (verifier, last).** Dispatched **before** the wind-down directive reached the Conductor; the directive forbids `TaskStop`, so they ran to their pre-committed gates. **NOT recorded as `PLANNED, NOT DISPATCHED` — that would be false.** `writeup/waves/WAVE9_PLAN.md` carries every gate.
 
+**ALL FOUR RETURNED AND ARE INTEGRATED.** `L5-cmod` → `§58`; `P4-DRAFT` → `§57`; `P2-DRAFT` → `§55`; `V-W8` → `§56`. **Four of those six `CORRECTIONS.md` sections are corrections to the Conductor's own record.** `§53`'s `×130` **WITHDRAWN as arithmetic** (repaired `×18`, bracket `×5.4`–`×155`; its conclusion survives). `§45`'s `32 of 49` is **UNBANKED**. **No `NO` reopened, no wall moved, no `L1 → L4` link moved.**
+
+⚠ **`L5-cmod`'s literal pre-committed rule returned `UNDER-RESOURCED` and the board carries that.** `§53`'s flag is discharged **only** where directly measured: 5 more decades move `c_mod` by `3.19e-06` relative. The saturation claim rests on a **post-hoc discriminant** (slope `−1.9900`) with a **pre-planted** control (`X2` → `−3.65e-08`), and is recorded at that status, **not** as a `NO`. `c_mod` is **not route 4's number** — route 4 has no banked profile.
+
+⚠ **`E-FE` (leg 408) WAS STILL IN FLIGHT AT THE STOP** — `[57/163]` attempts, 54 partials, branch `main`, last checkpoint `3176b35`. **NO gate answer, NOT citable.** Not stopped; the directive forbade `TaskStop`.
+
 **`L6-e` v2 was HELD FOR CORES and was never dispatched. It is priced and gated in `OPTIONS.md`, not in a brief.**
 
 ## WAVE 7 — **CLOSED 2026-08-19 (`L6-b` landed); DISPATCHED: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` DISPATCHED 2026-08-19 (leg 408, 6 shards)** — condition discharged.
