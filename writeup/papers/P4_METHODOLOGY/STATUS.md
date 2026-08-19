@@ -44,6 +44,21 @@ those retractions rather than a claim that it works.
    **The pattern across all four: every one was found by looking at a primary artefact for an
    unrelated reason. Not one was found by a discipline designed to look for it.** That sentence is
    the paper's most important finding about its own subject and it must not be softened.
+   **A fifth, and it is the sharpest of all because the instrument was complicit.** When the
+   `153.22` ranking was withdrawn as confounded (`CORRECTIONS.md` §43), the unit found that its own
+   evidence check `C37` **asserted that ranking** — the check would have PASSED on the false claim
+   and certified it. A self-check that encodes the defect it exists to catch is not a weak check;
+   it is an **error-amplifier wearing the costume of verification**, and this programme's whole
+   claim rests on checks of that kind. It was found only because a correction arrived from outside
+   the unit and forced a re-examination. **The check did not catch the error; the check was part of
+   the error.** `C37` was replaced by one that recomputes the decomposition and requires the
+   withdrawal label, plus `C37b` on the rank statistics.
+   **And a sixth, twenty minutes later, of the same kind and mine.** The remedy I wrote for a
+   half-defective gate (§41) keyed its licence to a **single terminal sample** of a series whose
+   trailing spread is 6.7× on one start and 24–34× on the others — **the fix had the same shape as
+   the defect it fixed**, naming a quantity without naming how the quantity is read (`§44`).
+   **Two consecutive remedies were themselves defective in the same way as what they remedied.**
+   That is the paper's second-most-important finding and it is worse than the first.
 2. **Framing, not results.** This is the one draft where the material exists and the work is
    deciding what the contribution *is*. Resist writing it as a tour of the repository.
 3. **Anonymity and scope.** It describes an ongoing programme with a live prize target and a
