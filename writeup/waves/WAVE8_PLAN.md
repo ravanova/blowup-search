@@ -526,3 +526,11 @@ direction, and **its verdict may not influence wave 8's ranking.**
 `L-JVER` — funding another route-4 ladder before the functional is checked is what §3i q5 named.
 `P4`'s draft, `L5-nov`, `R4-a`, `R2`, `R3` are queued per §5 and AMENDMENT 2. **If the user wants
 `P4` concurrent, `PB1` is the one of the four that is droppable.**
+
+**LAUNCHED 2026-08-19 08:52 — all four in flight.** `L-JVER` = leg 409, `PB2` = leg 410, `PB1` =
+leg 411, `V-W7` = leg 412. Every brief carries §6's STANDING CLAUSES verbatim, the pre-committed
+gate wording from this file (not a paraphrase), the §45/§46b evidence-classification requirement,
+the explicit-paths-only git clauses (three siblings share this tree; no `git add -A`, no
+`git commit -a`, no `checkout`/`stash`/`reset`/`rebase`, DO NOT PUSH), and the external-contact
+hold. `V-W7` is additionally briefed to rule on **my own seventeen integration commits**, itemised,
+because I planned this wave's predecessor and may not verify it.
