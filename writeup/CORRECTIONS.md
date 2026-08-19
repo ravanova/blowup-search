@@ -3343,3 +3343,105 @@ sat. No check compares across units; §45 counted 32 of 49 evidence scripts unab
 shared between artefact and checker, and this is the neighbouring blind spot: **an error shared
 between two artefacts that no single checker reads together.** The discipline did not catch this. A
 verifier reading both legs did, on the third pass, at leg 412 — **eleven legs after `L6` landed.**
+
+---
+
+## §52 — `J(c)` is a DIVERGENT integral, and every route-4 residual in the record is a value of a 72-node truncation of it; the operator is RIGHT, which is why nobody saw it
+
+**Provoked by** `V-W6`'s `D-VW6-6`, executed by `L-JVER` (leg 409, wave 8), artefact
+`writeup/data/p2_route_ljver_v1.json`, `self_hash 4bb618d7c8b039ea`, journal
+`experiments/journal/leg_409.md` §§7–15.
+
+**This is a correction record placed BESIDE the banked data. `writeup/data/p2_route_l6_profile_v1.json`,
+`writeup/data/p2_route_l6b_v1.json` and `experiments/p2_route_l6_v1.py` are NOT edited and must not be.**
+
+`V-W6` observed that `J(c)` — `‖curl F‖_{L¹_t L^{3/2}_x}` for the backward λ-DSS profile, λ = 1.7,
+`a = 0.5` — had never been checked against anything outside its own author's code. Its only internal
+evidence was a self-test comparing two of `L6`'s OWN implementations. `L-JVER` built a second
+implementation from the written mathematics in a disjoint basis (Cartesian real solid harmonics, term
+algebra on `y^α r^p G^{(k)}`), a disjoint radial-derivative mechanism (Taylor jets, cross-checked
+against mpmath at 40 dps), and a disjoint quadrature (composite Gauss–Legendre in `ln r` over an
+explicit `[r_min, r_max]`, equiangular cube-sphere in angle, offset-uniform in `s`). Twelve controls,
+**all twelve `recompute-from-primary`, none `re-read-own-artefact`** (§45/§46b), fired first —
+including both implementations against a field with closed-form `curl` and a hand-computable
+`L^{3/2}` norm (mine `7.51e-12`, `L6`'s `2.80e-15`), and a planted-defect control that moves `J` by
+80% and so proves the pipeline can fail.
+
+**The pre-committed two-sided gate — `|J_new − J_L6|/J_L6 < 1e-3` at branch B, branch A, AND a
+non-minimiser — answers `NO`:**
+
+| point | `J_new` | `J_L6` | rel |
+|---|---|---|---|
+| banked branch B, `n_dof = 6720` (minimiser) | `1.613972916` | `1.613811232` | `1.0019e-04` |
+| banked branch A, `n_dof = 6720` (minimiser) | `7.582440062` | `7.583387202` | `1.2490e-04` |
+| **`J0` index box of B in the 6720 space — NOT a minimiser** | `21.09203973` | `14.76088926` | **`4.2891e-01`** |
+| pseudo-random, seed 409 (extra) | `12855.55435` | `7222.503805` | `7.7993e-01` |
+
+**And now the part that matters more than the `NO`.** The natural reading — "one of the two programs
+computes `W` wrongly" — is **refuted by measurement.** Take `L-JVER`'s independent operator and
+evaluate it at `L6`'s own quadrature nodes, contracted with `L6`'s own weights: `J` reproduces `J_L6`
+at rel `1.101e-14`, `2.460e-15`, `5.897e-15`, `1.864e-14` at the four points respectively. Pointwise,
+on 580 608 of `L6`'s grid points, `max rel 1.75e-10`.
+
+> **`L6`'s OPERATOR `W[V]` IS RIGHT. THE ENTIRE 43% IS THE QUADRATURE RULE — AND A DISAGREEMENT THAT
+> LIVES ONLY IN THE RULE, WHILE EACH RULE IS SEPARATELY CONVERGED, MEANS THERE IS NO FINITE NUMBER
+> FOR THE TWO PROGRAMS TO AGREE ON.**
+
+`J(c)` diverges logarithmically at both ends for generic `c` in this trial space. At `r → ∞`,
+`F_lm → F_lm(∞,s)` finite, so `w ~ A(ŷ,s)/r²`; the DSS term `a(2w + y·∇w)` annihilates a degree `−2`
+homogeneous `w` exactly and `Δw` and both nonlinear terms are `O(r^{-4})`, but `w_s ~ ∂_s A/r²`
+survives, giving `|W|^{3/2} r² ~ 1/r`. Branch B's own normalisation forces `Σ F_lm(∞,s)²` to average
+1 and its `k > 0` `s`-modes force `∂_s A ≠ 0`, so branch B cannot escape it. At `r → 0`, the radial
+basis `u^l T_n(2u−1)` with `u = r/2 − r²/4 + …` carries a nonzero `r^{l+1}` coefficient and
+`Δ²(r^{l+1}Y_lm) = −4l(l+1) r^{l−3}Y_lm`, which at `l = 1` is `r^{-2}`, again `|W|^{3/2}r² ~ 1/r`.
+The integrand's **mass per decade of `r` is FLAT** — `0.199, 0.181, 0.202, 0.185` over `1e-6…1e-3`;
+`0.139, 0.156, 0.173, 0.155, 0.170` over `1e3…1e7` — and a flat mass per decade IS a logarithmic
+divergence. The cutoff study shows a near-constant increment per decade out to `r_max = 1e14` with no
+sign of a limit.
+
+**`L6`'s grid reach is `nq_r = 72`, `r ∈ [5.502e-4, 7.270e+3]`.** So: `L5`'s `c_mod = 869.288`,
+`L6`'s `ρ = 1.613811231995397` and `L6-b`'s `ρ = 1.504851895102804` are all **correct values of a
+72-node truncation**, and what was not previously known is *which* functional they are values of.
+
+**Why eleven legs of scrutiny missed it.** Because the disagreement *shrinks toward the minimiser* —
+`6.58e-01`, `4.25e-01`, `4.26e-01`, `3.43e-02`, `1.00e-04` across rungs `J0…J4`. The optimiser
+suppresses the divergent tail; that is its job. **The functional is best behaved precisely where it
+was always evaluated.** Every evaluation in the record sits at or near a minimiser, and at a
+minimiser two truncations of a divergent integral agree to `1e-4` and look like a converged number.
+
+> **THE RULE.** *A verification of an objective that is only ever evaluated AT ITS OWN MINIMISERS
+> verifies almost nothing. Evaluate at a point the optimiser has never visited — a restriction, a
+> random vector, anything not stationary — BEFORE believing an agreement. And when two independently
+> converged quadratures disagree about the same integrand, do not go looking for the coding error
+> first: check whether the integral CONVERGES. An objective must be shown to be finite on its own
+> trial space before any minimum of it is quoted, and that check — a cutoff sweep, or the mass per
+> decade — costs minutes.*
+
+**What this obliges.**
+1. `L6-b`'s `ρ = 1.504851895102804` is **HELD**: it is a minimum of a truncation whose value depends
+   on the truncation.
+2. `L5`'s W4-clause-(b) closure rests on `c_mod = 869.288`, downstream of the same functional.
+   **Flagged, not adjudicated** — that is `L5`'s to answer.
+3. **§51's queued `L6-e`** (re-run rung `J3` to 20 000 iterations to test whether `L6`'s refinement
+   ladder inverts) is measuring this same functional. Its gate is still worth running — an inversion
+   is a real finding about the truncation — but its result must be stated as a property of **the
+   72-node truncation**, not of `J`.
+4. Any future route-4 unit must state its `[r_min, r_max]` **as part of the reported number**, since
+   the number is a function of them.
+5. `L6` is **NOT** repaired. `L-JVER` was forbidden to and did not.
+
+**What is NOT concluded.** This does **not** say either program is miscoded — the measurement says
+the opposite, at `1e-14`. It does **not** say the truncated minima are wrong numbers. It does **not**
+move any `L1→L4` link in either direction, and nothing here is progress toward anything. It does
+**not** say a blow-up profile does or does not exist: a divergent objective is a statement about a
+trial space and a norm as coded, not about Navier–Stokes. And it does **not** establish that a
+regularised `J` has a minimiser anywhere near the banked one — `L-JVER` ran no optimiser and that
+question is open.
+
+**Ceilings `L-JVER` declared before its answer existed.** The `Y_lm` convention is INHERITED, not
+independent (a comparison at a coefficient vector is meaningless otherwise), so a common-mode error
+in the convention itself is invisible to this check. The `s` trial space is common in spirit, since
+the coefficient vector is defined in it. `Byrd–Lu–Nocedal–Zhu 1995` was **UNREACHABLE** from this
+container (two public PDF URLs: one SSL certificate-name failure, one HTML block page) and no depth
+was faked. Chandrasekhar 1961 remains unread here, though the identity it carries is now
+**RECOMPUTED** independently (`div V = 2.08e-16`).
