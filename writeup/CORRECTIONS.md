@@ -2903,3 +2903,71 @@ That is a fact about the landscape, not about the optimiser, and it belongs in t
 
 **Not progress.** No `L1→L4` link moves. This is the fourth audit-kind action in a row and §3i q7
 counts every one of them against the instrument.
+
+## §45 — a repository-wide measurement provoked by `C37`: 32 of 49 evidence scripts cannot, by construction, detect an error shared between an artefact and its own checker
+
+**Filed:** 2026-08-19 03:45. **Provoked by `L6-b`**, which found that its evidence check `C37`
+**asserted** the `153.22` ranking that §43 withdrew — the check would have PASSED on the false claim
+and certified it. `L6-b`'s generalisation, which is its own and is correct, is that *a self-check
+that encodes the claim it tests verifies only internal consistency between an artefact and a script
+written by the same unit in the same hour.* **This entry is the measurement of how far that reaches.
+It reaches most of the repository.**
+
+### The measurement
+
+Every `experiments/*_evidence.py` was classified by whether it references any data file **outside
+its own unit's artefact**:
+
+| | count | share |
+|---|---|---|
+| evidence scripts | **49** | |
+| **reference NO file outside their own unit's artefact** | **32** | **65%** |
+| reference at least one independent source | 17 | 35% |
+| of the 32, do not recompute at all (pure field read) | 3 | |
+
+**Classifier validated by hand on three scripts before the number was believed** — `t4` (solo,
+correct: its own docstring says *"every number this leg's journal quotes, re-derived from
+`p2_route_t4_v1.json`"*), `l6b` (independent, correct: it opens `L6`'s untouched artefact and the raw
+checkpoint iterates), `ng` (solo, correct). §44's lesson applied to §45's own number.
+
+### What the number does and does not say
+
+**It does NOT say those 32 checks are worthless.** A solo check catches transcription errors,
+internal arithmetic inconsistency, and a journal quoting a figure the artefact does not contain —
+all real defects, all caught here before.
+
+**It says exactly one thing, and it is sufficient:** a check that reads only the artefact its own
+unit wrote **cannot detect a claim that is wrong in the artefact AND in the script**, because the
+same reasoning produced both. That is not a hypothetical failure mode. **It is what `C37` was**, and
+`C37` sat inside a unit that was otherwise running better instrument discipline than most.
+
+**The pointed instance.** `p2_route_t4_v1_evidence.py` is solo. `T4` is one of the two units that
+measured **the lane's central premise FALSE** — the single largest adverse finding this programme
+has produced, and the first row of `P4`'s evidence table. Its evidence check re-derives the journal's
+numbers from `T4`'s own artefact and reads nothing else. **The result survives because `T6` reached
+it independently by another method and the two were never told each other's result** — which is the
+cross-unit design, not the evidence-check design, and the distinction has been invisible in the
+record until now.
+
+### THE RULE
+
+*An evidence check is classified, not counted. A check that reads only its own unit's artefact
+certifies INTERNAL CONSISTENCY and is labelled as such; a check that recomputes from an independent
+artefact, from raw data, or from a source the unit did not write certifies the CLAIM.* **`N/N
+passed` is not evidence of anything until every check carries its class.** Where a finding is
+load-bearing, at least one check on it must be of the second kind or the finding is `UNVERIFIED`
+however many checks passed.
+
+### What this does NOT do, and a count I owe against myself
+
+It moves **no** `L1→L4` link. It retracts **no** landed result — `V-W3`, `V-W4`, `V-W5` and the
+cross-unit design are independent of the evidence-check layer and are untouched. It is **not
+progress**; it is the verification layer being measured for the first time and coming back weaker
+than its `N/N passed` headlines implied.
+
+**§3i q7, answered honestly: this is the FIFTH audit-kind action in a row** (§41, §42, §43, §44,
+§45). Two of the five corrected remedies I had written minutes earlier. **That is an audit loop and
+I am naming it as one.** The five were cheap, they were forced by a live unit's returns rather than
+sought, and every one landed before a gate number existed — but the count stands and the direction
+check answers it the same way regardless. **Wave 8 opens on the Clay chain: `L-JVER` and `PB2` both
+attack `W4` directly, and no further instrument work is dispatched ahead of them.**
