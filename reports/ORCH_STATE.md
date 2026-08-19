@@ -54,20 +54,29 @@ The four-slot contract it replaced is at `writeup/prompts/CONTINUATION_PROMPT_FO
 | `P2-DRAFT` | 415 | **RETURNED, INTEGRATED** `§55` | Landed leg-415 commits. Branch `main`. |
 | `V-W8` | 416 | **RETURNED, INTEGRATED** `§56` | Landed `6f0a52a`. Branch `main`. |
 
-### Still in flight at the stop — ONE unit
+### Nothing is in flight. The last unit LANDED AFTER the stop.
 
-**`E-FE` (leg 408, the 160-attempt field ensemble).** **STILL RUNNING when this block was written.**
-- **How far it got:** `[57/163]` attempts, **54** banked partials in
-  `experiments/programme_r4/e_fe_partials/json/`, ~8.2 h elapsed against a ~11.4 h wall estimate.
-- **Branch:** `main`. It checkpoints directly to `main` and its last checkpoint is `3176b35`
-  (11:02), subject `E-FE leg 408: partials checkpoint (poll) -- NOT a landing, NOT a verdict`.
-- **Status: NO GATE ANSWER, NO VERDICT, NOT CITABLE.** Its partials are banked and safe. Whoever
-  restarts must read the partials, not assume a result. It was **not** stopped: the directive
-  forbade `TaskStop` and I did not issue one.
+**`E-FE` (leg 408, the 160-attempt field ensemble) — LANDED `1f27071`, `UNVERIFIED`.** It was still
+running when this block was first written; it was never stopped (the directive forbade `TaskStop`
+and I did not issue one), it finished on its own, and it was gated and integrated exactly as if the
+run were continuing. **`ANY_ROW_RECOVERS_IN_ANY_DRAW = NO`** — 160/160 attempts, 7 converged, **0**
+recovered any named row; pooled Clopper–Pearson two-sided 95% upper `0.02279174945547`.
+- **The gate was NOT moved.** `MATCH_S_TOL` stayed `0.05`, asserted against `U3`'s value at import;
+  widening it to `0.10` is in the PRE-REGISTRATION as a temptation recorded and refused.
+- **Verified by me at primary:** counts re-summed from the 16 cells, both Clopper–Pearson bounds
+  re-derived two independent ways to 14 digits, `self_hash` `dd42c307aa63ae3b` recomputed as a fixed
+  point, and pre-registration `fbada1b` shown to contain no results and to precede attempt 1 by 11 s.
+- **Three Conductor findings the unit's own summary does not support** — an UNBANKED `19/19, 14/14,
+  17/17`; `fired_as_planted` present on only 17 of 20 controls; a metric-dependent `closest_approach`.
+  `CORRECTIONS.md` §60, items 3–5.
+- **It closes only the field-draw half of `E-iv`.** The realization gap, `N = 24`, and `R-bank`'s C2
+  and C4 all SURVIVE. 99.99 core-h against 91 briefed. Tier 2. No `L1→L4` link moved.
+- **UNVERIFIED.** It verified nothing of its own beyond the `self_hash` fixed point; a verifier was
+  budgeted separately and the run is stopped. Cite it as UNVERIFIED or not at all.
 
 ### What landed this session, and the honest summary of it
 
-Six `CORRECTIONS.md` sections, `§53`–`§58`. **Four of the six are corrections to the Conductor's own
+Eight `CORRECTIONS.md` sections, `§53`–`§60`. **`§59` and `§60` landed AFTER the close-out** — `§59` withdraws part of `§58` on `L5-cmod`'s own failed check, `§60` integrates `E-FE`'s `NO`. **Four of the six are corrections to the Conductor's own
 record**, and the two that are not are corrections to drafts. Specifically:
 
 - `§54` — `L-JVER`'s "evidence script" re-runs and OVERWRITES the artefact it checks. Reverses `§49`.

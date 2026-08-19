@@ -129,11 +129,9 @@ The rule it produced is live in
 
 **`L6-e` v2 was HELD FOR CORES and was never dispatched. It is priced and gated in `OPTIONS.md`, not in a brief.**
 
-## WAVE 7 — **CLOSED 2026-08-19 (`L6-b` landed); DISPATCHED: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` DISPATCHED 2026-08-19 (leg 408, 6 shards)** — condition discharged.
-**RETURNED — `V-W6` (407), `L6-b` (406), `L6` (401)**: rows retired VERBATIM → `WALLS_HISTORY.md` §STATE-W67-L6. Gate answers **stand** (`L6` `NO` `ρ=1.6138`; `L6-b` `NO` `ρ=1.5049`); their READINGS are superseded by `§51` (iteration cap dominates the ladder) and `§52`/`§53` (`J` divergent; the numbers are truncation values, the `NO`s survive on the sign).
+## WAVE 7 — **CLOSED; whole block retired VERBATIM 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE7-CLOSE.**
 
-**RETURNED — `R-bank` (leg 404) and `R-prof` (leg 405)**: both **VERIFIED by `V-W7`**. Rows retired VERBATIM → `WALLS_HISTORY.md` §STATE-W7-RBANK-RPROF. `R-prof` gate (iii) `NO`, **4.34×** — and §50 item 6 rules that sentence **run-specific**: true of the banked JSON (`min 3.3722`), false on `V-W7`'s re-run (`2.89873`). ⚠ `R-bank`'s `--verify` **CANNOT FAIL** (0 `raise`/`assert`/`sys.exit`) — remedy owed.
-**DISPATCHED — `E-FE`** (leg 408). 160 attempts, **6 shards not 8**, on a measurement (12 cores, `L6-b` holding ~5, `R-prof`'s banked `MACHINE_WAS_NOT_QUIET`): **~15.2 h wall not ~11.4; ~91 core-h unchanged.** Inherits `R-bank` **C2** (the bank is the seed's *definition* on this CPU) and **C4** (144 non-originals untested by any solver).
+**`E-FE` (leg 408) LANDED `1f27071`, the run's last unit, `UNVERIFIED`.** **`ANY_ROW_RECOVERS_IN_ANY_DRAW = NO`** — 160/160 run, 7 converged, **0 recovered any named row**; pooled Clopper–Pearson 95% upper `0.02279`. Gate **NOT moved**: `MATCH_S_TOL` stayed `0.05` and widening it to `0.10` is recorded in the pre-registration as a temptation refused. `CORRECTIONS.md` §60. **Closes only the field-draw half of `E-iv`** — the realization gap, `N = 24`, and `R-bank`'s C2/C4 all SURVIVE. 99.99 core-h vs 91 briefed. Tier 2, no link moved.
 
 ## WAVE 6 — COMPLETE 2026-08-19. Retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE6. Audit + §3i: `writeup/waves/WAVE6_CLOSE.md`.
 

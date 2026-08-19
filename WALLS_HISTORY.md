@@ -857,3 +857,68 @@ corrected.** Full text retired 2026-08-18 under §3j → `WALLS_HISTORY.md` §OP
 consequence: the banked cost model STANDS** (`0.9958` of measured, 0.4% under), so **no option
 in this table is re-priced.**
 
+### §OPTIONS-F-WHOLE — `OPTIONS.md` section F retired VERBATIM 2026-08-19 to pay for §G's five `E-FE` follow-ons (`CORRECTIONS.md` §60). Nothing here is closed, declined or discharged; it is moved, and every re-open condition in it still stands.
+
+## F. Other standing options, recorded so they are not lost
+
+- **The DSS escalation packet** (legs 313/320) — **COMPLETE, retired** → `WALLS_HISTORY.md` §OPTIONS-F.
+- **The three leg-382 follow-ups (389 CT2C, 387 DXNV, 388 CRVB) — ALL STILL OPEN.** Detail retired 2026-08-19 verbatim → `WALLS_HISTORY.md` §OPTIONS-382; each carries a MEASURED reason it stalled, so re-running one blind repeats a known failure.
+- **`PROG-R4` U3's two owed novelty questions** — (i) are the **9 distinct solutions across both
+  units** known in the literature at all? U5 contributed exactly one new, `T = 20.4175 / |s| = 0.5867`
+  (stratum P, anchor UPO37), **the only solution either run found inside the published band**. (ii) Is
+  the selection-bias caveat in `BLOG_P2_PROGR4_MINING_BAND.md` already published? Externally-facing
+  and unchecked.
+
+- **THE VERIFICATION DEBT — the standing §3f ledger.**
+  **DISCHARGED:** waves 1–2, detail retired → `WALLS_HISTORY.md` §OPTIONS-F.
+ain `UNVERIFIED`** — `V1` checked `R0`'s
+  *reading* of them, not the runs. **`E` (wave 1, landed `d0d72b1`) is `UNVERIFIED`.** **`V-W2`
+  (wave 3, landed `594ff89`) is `UNVERIFIED`.** Wave 3 landed nothing else. **A candidate emerging
+  from an unverified pipeline is worth a fraction of one that did not.**
+
+- **THE CHEN–HOU THREAD — the best lead the programme has on the compact-domain obstruction, found by
+  `T6` as a near-miss it recorded rather than dropped.** `arXiv:2308.01528` §1 describes Chen–Hou as
+  **computer-assisted blow-up on an UNBOUNDED domain in >1D with algebraic decay** — the exact
+  combination leg 348's obstruction says the Galerkin-plus-tail bridge cannot reach. It **does not**
+  fire U6 (target stationary self-similar not time-periodic; apparatus energy estimates not
+  Galerkin-plus-tail), so it is no counter-instance to the obstruction as posed. **It is the sharpest
+  available attack on the obstruction itself**, and it points at Lane L / route 4's actual geometry
+  rather than `T³`. Unranked; ranking happens in a wave plan.
+
+- **`O1`, THE TMS BUILD (leg 315) — RE-OPENABLE UNDER C1. Found by `T5`.** Sonic-point-desingularized
+  **Taylor-model flow-map enclosure**. The C1 scope test passes on leg 315's own text: a flow map on a
+  **finite-dimensional ODE**, which *"needs **no function space**."* Leg 315 refused it citing the ban
+  and declined to lift it on its own reading. **The genuinely new item C1 bought** — and it points at
+  **Lane V's direction, not Lane T's.** Still subject in full to C1's naming requirement. **Unranked
+  and owned by no unit.**
+
+- **LEG 257 IS *NOT* RE-OPENABLE, and the reason is the known live defect.** `T5` measured that its
+  apparatus **is** the Corollary-21 radii polynomial (`capabilities.py:518-522`) merely in a **fourth
+  space**, and C1 says a `Y₀/Z₀/Z₁/Z₂` contraction **in any space** is inside the ban. **A fourth
+  SPACE is not a fourth APPARATUS.** Legs 262/273 refuse *spaces*, which would need a **lift**; C1 was
+  a *scoping* and left that clause unrepaired. Recorded so no later unit mistakes the mismatch for an
+  opening. **The wording defect is recorded, not ruled** — a ban-wording question is a user
+  escalation, never a Conductor's call.
+
+- **`fig107` IS NOT REGISTERED IN `build_figures.py`. Flagged by `E`; CONFIRMED BY THE CONDUCTOR.**
+  `writeup/figures/fig107_prog_r4_m3_shift_strata.py` exists and its `.png` is banked, but the script
+  is in **no** entry of `P2_EVIDENCE` — `build_figures.py` registers `fig108`/`fig109` and skips it.
+  So fig107 is never rebuilt or self-checked and nothing detects it going stale against
+  `p2_prog_r4_u5_v1.json`. One line, in numeric order. **Owed, not optional; lesson 68.**
+
+- **A DISPATCH RULE `E` PAID FOR: MANDATORY CHECKPOINTING ABOVE ~1 h WALL.** The host killed `E`'s
+  unattended run **twice**; it survived on per-attempt `.pkl` checkpoints. The rules adopted after the
+  2026-08-14 process-exit incident — **commit early and often on the branch**, **poll long jobs from
+  inside the turn** — are necessary but **were not sufficient**; what saved 5.7 core-hours was
+  checkpointing *inside the computation*. **Every brief above ~1 h wall must require checkpointing to
+  disk at a resumable granularity, and say where.** **Wave 3 paid for it again:** three of four units
+  died and only the one that had committed left anything behind.
+
+### §STATE-WAVE7-CLOSE — `STATE.md`'s WAVE 7 block retired VERBATIM 2026-08-19 when `E-FE` landed, to pay for the §60 row. Its `DISPATCHED — E-FE` line is superseded by that landing and by nothing else.
+
+## WAVE 7 — **CLOSED 2026-08-19 (`L6-b` landed); DISPATCHED: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` DISPATCHED 2026-08-19 (leg 408, 6 shards)** — condition discharged.
+**RETURNED — `V-W6` (407), `L6-b` (406), `L6` (401)**: rows retired VERBATIM → `WALLS_HISTORY.md` §STATE-W67-L6. Gate answers **stand** (`L6` `NO` `ρ=1.6138`; `L6-b` `NO` `ρ=1.5049`); their READINGS are superseded by `§51` (iteration cap dominates the ladder) and `§52`/`§53` (`J` divergent; the numbers are truncation values, the `NO`s survive on the sign).
+
+**RETURNED — `R-bank` (leg 404) and `R-prof` (leg 405)**: both **VERIFIED by `V-W7`**. Rows retired VERBATIM → `WALLS_HISTORY.md` §STATE-W7-RBANK-RPROF. `R-prof` gate (iii) `NO`, **4.34×** — and §50 item 6 rules that sentence **run-specific**: true of the banked JSON (`min 3.3722`), false on `V-W7`'s re-run (`2.89873`). ⚠ `R-bank`'s `--verify` **CANNOT FAIL** (0 `raise`/`assert`/`sys.exit`) — remedy owed.
+**DISPATCHED — `E-FE`** (leg 408). 160 attempts, **6 shards not 8**, on a measurement (12 cores, `L6-b` holding ~5, `R-prof`'s banked `MACHINE_WAS_NOT_QUIET`): **~15.2 h wall not ~11.4; ~91 core-h unchanged.** Inherits `R-bank` **C2** (the bank is the seed's *definition* on this CPU) and **C4** (144 non-originals untested by any solver).
+

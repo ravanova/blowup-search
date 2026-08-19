@@ -144,63 +144,15 @@ Tier-2 ceiling is permanent.
 
 **`T2″`** (Type-I rigidity on `T³`) is re-open condition (ii) and **the cheapest thing that could put a live W4 clause back in front of Lane L — cost before ranking**. **`T3`** (the non-DSS `T³` ansatz) is the lane's undone mathematical content, **deferred, NOT killed**. `T1`'s ban-wording packet is open on the user's desk and **I may not rule it**.
 
-## F. Other standing options, recorded so they are not lost
-
-- **The DSS escalation packet** (legs 313/320) — **COMPLETE, retired** → `WALLS_HISTORY.md` §OPTIONS-F.
-- **The three leg-382 follow-ups (389 CT2C, 387 DXNV, 388 CRVB) — ALL STILL OPEN.** Detail retired 2026-08-19 verbatim → `WALLS_HISTORY.md` §OPTIONS-382; each carries a MEASURED reason it stalled, so re-running one blind repeats a known failure.
-- **`PROG-R4` U3's two owed novelty questions** — (i) are the **9 distinct solutions across both
-  units** known in the literature at all? U5 contributed exactly one new, `T = 20.4175 / |s| = 0.5867`
-  (stratum P, anchor UPO37), **the only solution either run found inside the published band**. (ii) Is
-  the selection-bias caveat in `BLOG_P2_PROGR4_MINING_BAND.md` already published? Externally-facing
-  and unchecked.
-
-- **THE VERIFICATION DEBT — the standing §3f ledger.**
-  **DISCHARGED:** waves 1–2, detail retired → `WALLS_HISTORY.md` §OPTIONS-F.
-ain `UNVERIFIED`** — `V1` checked `R0`'s
-  *reading* of them, not the runs. **`E` (wave 1, landed `d0d72b1`) is `UNVERIFIED`.** **`V-W2`
-  (wave 3, landed `594ff89`) is `UNVERIFIED`.** Wave 3 landed nothing else. **A candidate emerging
-  from an unverified pipeline is worth a fraction of one that did not.**
-
-- **THE CHEN–HOU THREAD — the best lead the programme has on the compact-domain obstruction, found by
-  `T6` as a near-miss it recorded rather than dropped.** `arXiv:2308.01528` §1 describes Chen–Hou as
-  **computer-assisted blow-up on an UNBOUNDED domain in >1D with algebraic decay** — the exact
-  combination leg 348's obstruction says the Galerkin-plus-tail bridge cannot reach. It **does not**
-  fire U6 (target stationary self-similar not time-periodic; apparatus energy estimates not
-  Galerkin-plus-tail), so it is no counter-instance to the obstruction as posed. **It is the sharpest
-  available attack on the obstruction itself**, and it points at Lane L / route 4's actual geometry
-  rather than `T³`. Unranked; ranking happens in a wave plan.
-
-- **`O1`, THE TMS BUILD (leg 315) — RE-OPENABLE UNDER C1. Found by `T5`.** Sonic-point-desingularized
-  **Taylor-model flow-map enclosure**. The C1 scope test passes on leg 315's own text: a flow map on a
-  **finite-dimensional ODE**, which *"needs **no function space**."* Leg 315 refused it citing the ban
-  and declined to lift it on its own reading. **The genuinely new item C1 bought** — and it points at
-  **Lane V's direction, not Lane T's.** Still subject in full to C1's naming requirement. **Unranked
-  and owned by no unit.**
-
-- **LEG 257 IS *NOT* RE-OPENABLE, and the reason is the known live defect.** `T5` measured that its
-  apparatus **is** the Corollary-21 radii polynomial (`capabilities.py:518-522`) merely in a **fourth
-  space**, and C1 says a `Y₀/Z₀/Z₁/Z₂` contraction **in any space** is inside the ban. **A fourth
-  SPACE is not a fourth APPARATUS.** Legs 262/273 refuse *spaces*, which would need a **lift**; C1 was
-  a *scoping* and left that clause unrepaired. Recorded so no later unit mistakes the mismatch for an
-  opening. **The wording defect is recorded, not ruled** — a ban-wording question is a user
-  escalation, never a Conductor's call.
-
-- **`fig107` IS NOT REGISTERED IN `build_figures.py`. Flagged by `E`; CONFIRMED BY THE CONDUCTOR.**
-  `writeup/figures/fig107_prog_r4_m3_shift_strata.py` exists and its `.png` is banked, but the script
-  is in **no** entry of `P2_EVIDENCE` — `build_figures.py` registers `fig108`/`fig109` and skips it.
-  So fig107 is never rebuilt or self-checked and nothing detects it going stale against
-  `p2_prog_r4_u5_v1.json`. One line, in numeric order. **Owed, not optional; lesson 68.**
-
-- **A DISPATCH RULE `E` PAID FOR: MANDATORY CHECKPOINTING ABOVE ~1 h WALL.** The host killed `E`'s
-  unattended run **twice**; it survived on per-attempt `.pkl` checkpoints. The rules adopted after the
-  2026-08-14 process-exit incident — **commit early and often on the branch**, **poll long jobs from
-  inside the turn** — are necessary but **were not sufficient**; what saved 5.7 core-hours was
-  checkpointing *inside the computation*. **Every brief above ~1 h wall must require checkpointing to
-  disk at a resumable granularity, and say where.** **Wave 3 paid for it again:** three of four units
-  died and only the one that had committed left anything behind.
+## F. Other standing options — whole section retired VERBATIM 2026-08-19 → `WALLS_HISTORY.md` §OPTIONS-F-WHOLE. Nothing in it is closed or declined; every re-open condition in it still stands.
 
 ## G. Wave-9 follow-ons — PARKED, NOT DISPATCHED (directive 2026-08-19); none entered a brief
 
+- **`EFE-C7`** ~1 core-h — classify the **7 converged solutions** `E-FE` found and banked in `e_fe_converged_orbits.npz` (UPO9 Q ×3, UPO35 Q, UPO34 S, UPO32 Q, UPO22 Q). **None matched a named row, and nobody has asked what they ARE.** Cheapest of the three and the only one that could yield a positive. RE-OPEN: immediately, on its own merits (§60).
+- **`EFE-C2`** ~1 container-h ELSEWHERE — reproduce the seed bank on a second machine. Inherited `R-bank` ceiling C2: the bank was only ever verified on this host, and all 160 attempts ran on that same host. RE-OPEN: before any cross-machine claim about the bank.
+- **`EFE-C4`** ~91 core-h — a **second bank at a different declared draw order**. The 16 `C-REPRO` controls bound the PIPELINE, not the FIELDS; nothing shows the 144 previously-untouched fields are good fields. **Expensive and it is the honest price of the `NO`'s remaining half.** RE-OPEN: only if the 0-of-160 is ever cited as bearing on the published realization — which §60 says it does not.
+- **`EFE-D7/D8`** ~20 min — add `fired_as_planted` to `C_N`/`C_P`/`C_R` (a machine check counts `17/20`, §60.4) and disambiguate `gate.closest_approach` by metric (§60.5). **Artefact is banked: a correction record goes BESIDE it, never an edit** (W3 ruling Q3). RE-OPEN: before any mechanical control audit of this artefact.
+- **`EFE-D2`** ~5 min — `seedbank/manifest.json`'s `what` still says **1.2 GB**, the figure `R-bank`'s own D1 corrected to **268.9 MB**. A live artefact carrying a superseded number. RE-OPEN: immediately; cheapest item on this list.
 - **`P0-NS12`** ~0.2 core-h (~12 min, 1 core) — re-run `L5-cmod`'s `c_mod` ladder at `ρ0 ∈ {1e3..1e7}` with **`n_s = 12`**, same `RES`, refit the slope. **`E5` FAILED** (§59): `n_s` `6→12` moves the per-decade increment by `×1.855293`, so §58's `−1.9900` slope is unmeasured at `n_s=12`. **GATE, pre-committed by the unit before its numbers existed:** survives iff slope within `±0.15` of `−2`; near `0` ⇒ `n_s=6` artefact and §53's flag is NOT discharged beyond the directly-measured band; between ⇒ `UNDER-RESOURCED`, and that is the result. RE-OPEN: **before any citation of §58's slope or of `c_mod` beyond `869.288`.**
 - **`P2-F1`** ~2–4 core-h — bank the per-term decomposition in the gate's own `‖curl F‖_{L¹ₜL^{3/2}}`, not `L³` (§55). RE-OPEN: before P2 is submitted; one outcome makes its central sentence wrong.
 - **`P2-F3`** ~30 min — re-bank `rho_exponent` beside its own fit window (§55). ⛔ **ESCALATE FIRST:** the naive repair reports summability available and BREAKS W4(b) off a transient. Not a unit's call.

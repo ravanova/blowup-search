@@ -4265,3 +4265,130 @@ reading of the wind-down and it is adopted as the standing one.**
 **CEILING OF THIS SECTION.** No `L1 → L4` link moved; this section moves the record *backwards*, by
 withdrawing a word and six digits. No wall moved. `W4` clause (c) — the torus, statement (D) —
 remains **UNTESTED, NOT CLOSED**. `Tier 2`. Clay stays **~0.05%**.
+
+---
+
+## §60 — `E-FE` (leg 408) LANDS: **`ANY_ROW_RECOVERS_IN_ANY_DRAW = NO`**, 0 of 160, with the gate NOT moved and the temptation to move it recorded and refused. Three Conductor findings the unit's own return summary does not support, one of them an **UNBANKED number**.
+
+**This is the last unit of the run.** It was dispatched in wave 7 (leg 408) and was still in flight at
+the stop; it finished and landed at `1f27071`. Under the wind-down directive it is gated and
+integrated exactly as if the run were continuing.
+
+### 1. VERIFIED BY ME AT PRIMARY — `recompute-from-primary`, not a re-read of the unit's summary
+
+| what | how I checked it | result |
+|---|---|---|
+| `gate.n_attempts / n_converged / n_recovered_any_named_row / n_recovered_its_own_named_row` | summed the **16 per-cell** records myself, not the gate's own totals | `160 / 7 / 0 / 0` — **agrees** |
+| exit reasons | `7 + 1 + 152` | `= 160`, closes |
+| per-cell Clopper–Pearson at `k=0, n=10` | re-derived **two independent ways**: closed form `1 − 0.025^{1/10}` and `scipy.stats.beta.ppf(0.975, 1, 10)` | `0.30849710781876` both, to **14 digits** |
+| one-sided at `k=0, n=10` | `1 − 0.05^{1/10}` and `beta.ppf(0.95, 1, 10)` | `0.25886555089305` both |
+| pooled at `k=0, n=160` | same two routes | two-sided `0.02279174945547`, one-sided `0.01854913407750` — **agrees** |
+| `C-REPRO ×16` exactness | summed the 16 control records | `256/256` scalar fields exact, `357/357` ledger iterations byte-equal, banked total also `357` |
+| `self_hash` | **recomputed the recipe myself** — dropped `self_hash`, `self_hash_recipe` and the eleven wall-clock keys, re-serialised sorted/compact, sha256, first 16 hex | `dd42c307aa63ae3b` — **fixed point TRUE** |
+| pre-registration precedes the run | `git show --stat fbada1b` | driver + journal + three empty `.keep` files, **841 insertions, no results**; first partials commit `3c03297` is **11 s later** and is `t0 (pre-run)` |
+
+### 2. THE GATE WAS NOT MOVED, AND THE TEMPTATION TO MOVE IT IS IN THE PRE-REGISTRATION
+
+`gate.answer_scope` reads `|T − T_pub| < 0.05 AND wrapped |s − s_pub| < 0.05 AND success`, while the
+pre-registered journal §4 mentions `MATCH_S_TOL 0.10`. **I checked this before anything else, because
+a tightened tolerance manufactures a `NO`.** It was not tightened. `e_hhard_diagnostic.py:147` sets
+`MATCH_T_TOL, MATCH_S_TOL = 0.05, 0.05` and **line 160 asserts them equal to `U3`'s values at
+import**. The `0.10` appears in journal §4 as **temptation 1, recorded and refused**:
+
+> "`E`'s attempt 2 (UPO35 S) stalled at `ΔT = 0.036`, `Δ|s| = 0.085` — *just* outside the `0.05`
+> matching tolerance. Widening `MATCH_S_TOL` to `0.10` would have converted the near-miss into a
+> 'recovery'. **Not touched.**"
+
+**That is the opposite of gate-moving, and it is the strongest single thing about this unit.** Two
+further temptations (relaxing `STALL_K`/`STALL_W`; touching `TOL`/`MAX_NEWTON`/`MAX_GMRES`/
+`GMRES_RTOL`) are recorded alongside, knobs untouched, `readings.anything_loosened = false`.
+**Arithmetic note, and it does not rescue the row:** at `MATCH_S_TOL = 0.10` that attempt would clear
+both tolerance clauses — but its `success` is `false` at `‖R‖ = 9.669`, so the predicate still fails.
+The refusal cost the unit nothing here. It was still the right refusal, because the unit could not
+have known that before checking.
+
+### 3. CONDUCTOR FINDING 1 — an **UNBANKED** number in the return summary, the `§57`-F1 class again
+
+The unit's return summary states: *"C-P / C-N / C-R each reproduced **every** banked field exactly
+(**19/19, 14/14, 17/17**)."* **None of `19/19`, `14/14` or `17/17` appears anywhere in
+`writeup/data/p2_e_fe_v1.json`, and grep of `experiments/journal/leg_408.md` returns nothing.** The
+`C_P`, `C_N` and `C_R` control records carry no field-count key at all — their only `n_`-prefixed
+keys are `n_epochs`, `max_newton_used` and `perturbation_relative`. **The claim is UNBANKED and is
+not carried forward.** This is the same defect class as `§57`'s F1 (`§45`'s "32 of 49", also
+unbanked) — **the second time in this run that a summary quoted a ratio the artefact does not
+contain.** What IS banked for those three, and is enough for their stated roles: `C_P` `recovered
+true`, `final_residual 7.750376115652152e-09` below `TOL = 1e-8`; `C_R` `recovered true`,
+`delta_T 2.985844496095069e-07`, `delta_s 6.50090399290093e-08`; `C_N` `recovered false`,
+`converged_to_tol false`, `final_residual 51.46443049790665`, `reason max_newton_hit`.
+
+### 4. CONDUCTOR FINDING 2 — "20 planted, 20 fired" is TRUE but is **not machine-checkable**, 17 of 20
+
+`fired_as_planted` is `True` on **17** of the 20 control records. `C_N`, `C_P` and `C_R` **do not
+carry the key at all**. Their verdicts are recoverable — each has an explicit `role` (`NEGATIVE —
+MUST FAIL`, `POSITIVE, unconditional — MUST SUCCEED`, `POSITIVE, conditional — MUST SUCCEED IF IT
+RUNS`) beside `recovered` / `converged_to_tol`, and read that way all three fired. **So the claim is
+true and the evidence is present, but a mechanical check counts `17/20` and a successor writing one
+will disagree with the summary.** Recorded as a defect of the artefact's uniformity, `D7`, beside the
+unit's own six. It is exactly the `§45`/`§49` blind spot in a new place: the checker and the artefact
+are the same author, so a shape the checker never runs against goes unnoticed.
+
+### 5. CONDUCTOR FINDING 3 — "closest approach" is **metric-dependent** and the summary reports one metric
+
+`gate.closest_approach` is `UPO35`, arm `S`, `field_index 0`, `global_index 20`, with
+`delta_T_from_published = 0.03620553987706643`, `delta_abs_s_from_published = 0.08540524816249029`,
+`final_residual 9.669335298764443`, `success false`. Taking the minimum over the 16 cells myself:
+**`min ΔT = 0.036206` is attained by that attempt, but `min Δ|s| = 0.003067` is attained by a
+DIFFERENT one** — 27.8× closer in `|s|` than the reported "closest approach", and further in `T`.
+The predicate is a conjunction, so neither is close in the sense that matters and the `NO` is
+untouched; but **"the closest approach over all 160" is under-specified as written**, and a successor
+comparing runs on `Δ|s|` will get a different row. `D8`.
+
+### 6. WHAT THE `NO` DOES AND DOES NOT CLOSE — the part that must not be overstated
+
+**Closed:** the field-draw half of `E-iv`. `E` gave each `(row, arm)` a single field; the objection
+was that a row supplies `(T, s)` and **not** a field, so one draw could not distinguish a bad row from
+a bad draw. Ten draws per cell, `k = 0` in all sixteen, closes that half. **The 144 fields no solver
+had ever touched did not get closer than the single draw `E` already had.**
+
+**NOT closed, restated by the unit in `readings.surviving_limits_restated` with
+`survives_the_result: true` on each:**
+- **The realization gap.** All 160 fields are drawn from **ONE** DNS realization — `U2`'s `T = 1e5`
+  trajectory as re-integrated in this tree. Ten draws from that realization are not ten
+  realizations. *"It says nothing about the rows in Lucas & Kerswell's published realization."*
+- **`N = 24`.** Every attempt is `24×24`, `Re = 60`, `n_forcing = 4`, `dt = 0.01`, Lie–Trotter,
+  globally **first order**.
+- **`C2` and `C4`, inherited from `R-bank` (leg 404)** — the bank was verified on **this** host only,
+  and the 16 `C-REPRO` controls bound the **pipeline**, not the **fields**: they show the harness is
+  sound on 16 fields solved before, not that the other 144 are good fields.
+- **Draw order is row-major by declared choice**, so this null **names its own realization**
+  (lesson 91).
+- **Scale is not evidence.** 160 is 10× the draws, **not 10× the evidence**, and the unit says so
+  itself.
+
+### 7. COST, AND A HARDWARE FACT EVERY FUTURE ESTIMATE ON THIS HOST INHERITS
+
+`16.665 h` wall, **`99.99` core-hours** against a briefed `91.0` / `15.2 h` at 6 shards — `+9.9%` and
+`+9.6%`, inside the 30% threshold, `UNDER_RESOURCED = false`, 18 checkpoint commits. The unit reports
+its own mid-run projection of `~28 h` as **wrong rather than deleting it**. Its `D6` is the one with
+reach: **the box is an Intel i7-10750H with 6 PHYSICAL cores**, 12 hyperthreads; `os.cpu_count()` and
+`nproc` report 12, **and the 6-shard decision was reasoned from that 12** — the briefed basis in the
+artefact says so verbatim. Governor `powersave`, every logical cpu pinned at **1800 MHz** against a
+rated 5000, package 78 °C, for the first third of the run. Shards held 90–94% of a **logical** cpu
+throughout, *"which looks healthy and is not the same as holding a physical core."* **This is a
+Conductor error, not the unit's: I briefed the shard count.** Every wall estimate on this host
+inherits it.
+
+### 8. `D3` — the source obligation, handed up and DISCHARGED HERE
+
+The unit flagged that Clopper–Pearson is load-bearing but `writeup/SOURCES.md` was outside its grant.
+A row is added by me, at the depth I can honestly claim: **I recomputed the identity, I did not read
+the 1934 paper.** Both `k = 0` bounds reproduce by closed form and by Beta-quantile inversion to 14
+digits, which is `RECOMPUTED` for **the identity used** and nothing more.
+
+**CEILING.** `clay_movement.L1_to_L4_link_moved = false`, `links_moved: "none"`, `tier 2`,
+`clay_percent 0.05`. The unit's own words: this is *"a numerical measurement on a 24 × 24 truncation
+of 2D Kolmogorov flow at Re = 60; it bears on the credibility of one recovery-of-published-orbits
+claim inside Lane R and on nothing above it."* **A tightened negative is not progress toward Clay.**
+No wall moved. `W4` clause (c) — the torus, statement (D) — remains **UNTESTED, NOT CLOSED.**
+**This unit is UNVERIFIED: it verified nothing of its own beyond the `self_hash` fixed point, a
+verifier was budgeted separately, and the run is stopped. It lands UNVERIFIED and must be cited so.**
