@@ -474,3 +474,20 @@ Plan `e202653`, pointer `5c49486`, **both before any worker started**; gates car
 into self-contained briefs. **`V-W5` `95cf861`; `V5` `dacc01c`; `L6` `e62c449`.** Dispatch narrative
 retired → `## Superseded — wave 6's dispatch record`. **I planned this wave, so I do not verify it**
 — `V-W5` verified **wave 5**; **`L6` is `UNVERIFIED`** and a verifier for it belongs in wave 7.
+
+## §STATE-WAVE34 — the wave 3/4 detail paragraph, retired verbatim from STATE.md 2026-08-19 under §3j
+(Retired to make room for `R-bank`'s landing and `E-FE`'s dispatch. Nothing reworded.)
+
+**Wave 3 closed with ONE unit of four returning** (`V-W2`); three worktrees were lost to a host
+process exit with their pre-registrations committed and their partial JSON not. That is why every
+brief since carries **COMMIT DURING THE RUN, NOT ONLY AT THE GATE**. **Wave 4 returned all three**
+(`V3`, `V-W3`, `L2′`), each row in the **Landed** table above with its SHA and its gate answer in the
+gate's own wording. Narrative, headroom and the §3i answers for both waves: `reports/ORCH_STATE.md`
+Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits `6320790`, `391fd8f`.
+
+## §STATE-WAVE5-PRECEDENT — retired verbatim from STATE.md 2026-08-19 under §3j
+
+(Retired for headroom at `R-bank`'s landing. The rule itself stays live in STATE.md as a one-liner.)
+
+**The precedent it set, kept live because it binds every wave:** a request to change a gate
+**mid-wave was REFUSED**. Plan verbatim: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`.

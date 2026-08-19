@@ -24,17 +24,13 @@ Verbatim → `## Superseded — the §3k directive and the Lane-R ruling` below.
 `writeup/SOURCES.md` is the register (26 rows) with **`R-prof`'s rule-3 row filled at primary**; the
 ranking **`R4` > `R2` > `R3`** stands (`WAVE7_PLAN.md` §0), **self-unwinding** through §1's gate.
 
-### 2026-08-19 — USER DIRECTIVE: "PRICE, DO NOT QUEUE" WITHDRAWN. THREE UNITS QUEUED.
+### 2026-08-19 — "PRICE, DO NOT QUEUE" WITHDRAWN: all three queued units have now moved.
 
-**Order fixed: `R-bank` → `E-FE` ‖ `R-prof`** (`WAVE7_PLAN.md` §§A–C, final wording). **§0's
-`R4` > `R2` > `R3` ranking STANDS** — additions, not a re-rank; these run first because they are
-**cheaper and upstream**, not because they outrank `R4-a`.
-
-**The two premise checks I ran before committing those gates — `R-bank`'s 1.2 GB blocker, and `R-prof`'s gate reworded because the solver is ALREADY FFT-based and overhead-bound — retired verbatim → `## Superseded — wave 7's premise checks`. Live wording: `WAVE7_PLAN.md` §A, §C.**
-
-**Consequence I have to own: my own 90.9 core-hour price is an OUTTURN, not a FLOOR.** It inherits
-`95.389 s/epoch`, unprofiled in 403 legs. If `R-prof` finds a factor, that number and every cost
-figure in `OPTIONS.md` move together.
+**`R-bank` LANDED `8019c35`, `R-prof` LANDED `1f89ceb`, `E-FE` DISPATCHED leg 408.** The block
+that set their order and priced them retired verbatim → `## Superseded — the 2026-08-19 "PRICE,
+DO NOT QUEUE WITHDRAWN" block`. **§0's `R4` > `R2` > `R3` ranking STANDS** — those were
+additions, not a re-rank. **My 90.9 core-h price was an OUTTURN, not a FLOOR, and `R-prof` has
+now measured the factor: 4.34× a named reference, gate (iii) `NO`, and it breaks no wall.**
 
 ### WAVE 6 — **COMPLETE 2026-08-19. Three planned, three dispatched, three landed.**
 
@@ -63,13 +59,10 @@ novelty check; a YES kills `P1` and is a GOOD result) ‖ `V-W7` (last). **A PAP
 RECORD, NEVER A SOURCE; no unit may cite a draft; the composition floor STANDS.** `P4`'s draft
 slips to wave 9 on the 2–4 cap — **flagged to the user, not silently dropped** (`WAVE8_PLAN.md` §5).
 
-### WAVE 7 — DISPATCHED 2026-08-19: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ **`V-W6`** (legs 404–407)
+### WAVE 7 — `R-bank`, `R-prof`, `V-W6` LANDED; `L6-b` and `E-FE` IN FLIGHT (legs 404–408)
 
-Plan committed `2a5ea0d` **before** dispatch; gates carried verbatim into self-contained briefs.
-**`V-W6` verifies WAVE 6** — I planned wave 6, so I may not, and it is briefed to scrutinise my own
-landing audit too. **`E-FE` IS HELD** until `R-bank` returns **160/160** bit-identical: that is
-`R-bank`'s own pre-committed reading, not a new decision. Territories disjoint; every brief carries
-explicit-paths-only commits (four workers, one tree), COMMIT DURING THE RUN, and its §3d price.
+Plan committed `2a5ea0d` **before** dispatch, gates verbatim in the briefs. Dispatch block
+retired verbatim → `## Superseded — wave 7's dispatch block`; **its `E-FE` HOLD is DISCHARGED.**
 
 **RETURNED — `R-prof`** (leg 405, `1f89ceb`): gate (iii) **NO, 4.34×** the named reference; 79.1%
 transforms; remedy priced not landed. Integration audit + §3i seven: `writeup/waves/WAVE7_CLOSE.md`.
@@ -86,14 +79,22 @@ number is downstream of one function whose only evidence is a selftest comparing
 implementations. **`L8`'s branch rule is deferred VERBATIM to wave 9**, still keyed to `L6-b`.
 `WAVE8_PLAN.md` AMENDMENT 1, written **before** dispatch.
 
+**RETURNED — `R-bank`** (leg 404, `8019c35`): **`YES` ×3** — 160/160 bit-identical, 16/16 at
+`ulp_gap 0`, attempt 15 **12/12 byte-equal with both DNS field artefacts ABSENT**. Seedbank
+**TRACKED, 737,408 B**. I recomputed `self_hash`, re-hashed all 160 slices, re-ran `regenerate`
+on 4 fields — bitwise. **My own `~1.2 GB` is 268.9 MB**, `U2`'s *rejected* archive size (§39).
+
+**DISPATCHED — `E-FE`** (leg 408). **6 shards not 8**, on a measurement: **~15.2 h wall not ~11.4;
+~91 core-h unchanged.** Inherits C2/C4; draw order a **declared choice** (lesson 91).
+
 ### Headroom at the wave boundary — §3j, IN BYTES (`wc -c`)
 
 | file | bytes | cap | free |
 |---|---|---|---|
-| `STATE.md` | 23,904 | 24,576 | 672 |
-| `WALLS.md` | 32,476 | 32,768 |   292 |
-| `OPTIONS.md` | 23,733 | 24,576 | 843 |
-| `ORCH_STATE.md` LIVE | 8,100 | 8,192 | 92 |
+| `STATE.md` | 24,533 | 24,576 | 43 |
+| `WALLS.md` | 32,476 | 32,768 | 292 |
+| `OPTIONS.md` | 23,866 | 24,576 | 710 |
+| `ORCH_STATE.md` LIVE | 8,052 | 8,192 | 140 |
 
 **Defect of mine, §37 `writeup/CORRECTIONS.md`: retire by slicing between ASSERTED LINE INDICES,
 never by title, and measure the live block by line index too, or the cap check silently passes.**
@@ -1173,3 +1174,32 @@ solver is ALREADY FFT-based** — so it is implementation-vs-implementation. Smo
 cores; absolutes inflated ~2×, ratios not): `fft2` **197 µs at `N = 24` vs 189 µs at `N = 32` — FLAT
 across 1.9× the work**, paid **20× per RK4 step**, ~69% of a 4,306 µs step. **OVERHEAD-bound, not
 FLOP-bound — a hypothesis with a measurement behind it, not the unit's answer.**
+
+## Superseded — the 2026-08-19 "PRICE, DO NOT QUEUE WITHDRAWN" block, retired verbatim 2026-08-19 under §3j
+
+(All three of its units have now moved: `R-bank` LANDED `8019c35`, `R-prof` LANDED `1f89ceb`, `E-FE` DISPATCHED leg 408. Nothing reworded.)
+
+### 2026-08-19 — USER DIRECTIVE: "PRICE, DO NOT QUEUE" WITHDRAWN. THREE UNITS QUEUED.
+
+**Order fixed: `R-bank` → `E-FE` ‖ `R-prof`** (`WAVE7_PLAN.md` §§A–C, final wording). **§0's
+`R4` > `R2` > `R3` ranking STANDS** — additions, not a re-rank; these run first because they are
+**cheaper and upstream**, not because they outrank `R4-a`.
+
+**The two premise checks I ran before committing those gates — `R-bank`'s 1.2 GB blocker, and `R-prof`'s gate reworded because the solver is ALREADY FFT-based and overhead-bound — retired verbatim → `## Superseded — wave 7's premise checks`. Live wording: `WAVE7_PLAN.md` §A, §C.**
+
+**Consequence I have to own: my own 90.9 core-hour price is an OUTTURN, not a FLOOR.** It inherits
+`95.389 s/epoch`, unprofiled in 403 legs. If `R-prof` finds a factor, that number and every cost
+figure in `OPTIONS.md` move together.
+
+
+## Superseded — wave 7's dispatch block, retired verbatim 2026-08-19 under §3j
+
+(Retired at `R-bank`'s landing: its `E-FE` HOLD is discharged and three of its four units have returned. Nothing reworded.)
+
+### WAVE 7 — DISPATCHED 2026-08-19: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ **`V-W6`** (legs 404–407)
+
+Plan committed `2a5ea0d` **before** dispatch; gates carried verbatim into self-contained briefs.
+**`V-W6` verifies WAVE 6** — I planned wave 6, so I may not, and it is briefed to scrutinise my own
+landing audit too. **`E-FE` IS HELD** until `R-bank` returns **160/160** bit-identical: that is
+`R-bank`'s own pre-committed reading, not a new decision. Territories disjoint; every brief carries
+explicit-paths-only commits (four workers, one tree), COMMIT DURING THE RUN, and its §3d price.

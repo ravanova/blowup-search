@@ -371,3 +371,25 @@ met by `L6-b`, which attacks **W4** through route 4 and is a **measurement on th
 audit — deliberately, because §3i q7 counted **two of the last three units as audit-kind**.
 `L7-src` (§2) and `L5-nov` (§3) stay queued behind it. **`L6` is `UNVERIFIED`: a verifier for wave 6
 belongs in wave 7 and I may not brief it on construction I planned.**
+
+
+---
+
+## CORRECTION APPENDED 2026-08-19 — §A's `~1.2 GB` is wrong by 4.5×. §A IS NOT REWRITTEN.
+
+`R-bank` (leg 404, `8019c35`) measured the artefacts §A's premise is built on: `u2_dns_ckpt.npy`
+**36,864,128 B** + `u2_dns_feat.f32` **232,000,128 B** = **268,864,256 B = 268.9 MB**, not
+*"~1.2 GB"*. I wrote that figure into §A by quoting `experiments/programme_r4/.gitignore`'s header
+without measuring it. The root cause, found at landing:
+`experiments/programme_r4/u2_m2_dns_recurrence.py:127-136` shows `1.2 GB` is the size of the archive
+`U2` **decided not to write** ("~280 MB instead of ~1.2 GB") — a counterfactual, later copied onto
+the files it was being contrasted with. `U2`'s own `~280 MB` agrees with the measurement to 4%.
+
+**§A's argument is unaffected and its gate stands as written.** 268.9 MB is still **365×** the
+737,408 B seedbank, still gitignored, still **3.44 h** to regenerate (`u2_dns_meta.json`:
+12,379.47 s), and `R-bank` returned **YES on all three clauses** against §A's wording verbatim.
+
+**Why this is an appended note and not an edit.** A pre-committed gate whose text can be revised
+after the answer is not a pre-committed gate. The same rule that protects §A's *gate* from me
+protects its *errors* from me. The live restatement is corrected in `OPTIONS.md`'s `R7` row; the
+full account is `writeup/CORRECTIONS.md` §39.

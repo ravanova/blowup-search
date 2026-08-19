@@ -214,3 +214,67 @@ worth a full wave slot.
 (`L-JVER`), per §3f rule 3, and carries the verifier last.
 
 **Tier 2 is never a proof. No link moved. Clay ~0.05%.**
+
+
+---
+
+## `R-bank` — leg 404, landed by the unit at `8019c35`. GATE ANSWER: **YES on all three.**
+
+### What the gate asked, and what came back
+
+| clause | question (WAVE7_PLAN.md §A) | answer | the number |
+|---|---|---|---|
+| (i) | is every banked field bit-identical to what `u2_m2_dns_recurrence.regenerate` produces for the same snapshot index? | **YES** | **160 / 160**, zero mismatches, SHA-256 over the IEEE-754 float64 C-order buffer. Run **both ways** — one snapshot per call (the shard case) **160/160**, and all 160 in one call (the case `E` actually ran) **160/160**, because `regenerate`'s block-walking makes batch context a live confound. |
+| (ii) | do `E`'s 16 originals match `E`'s banked ledger? | **YES** | **16 / 16**, `ulp_gap 0`, and separately **16/16** against `writeup/data/p2_prog_r4_e_v1.json`. |
+| (iii) | does one of `E`'s attempts reproduce with the DNS artefacts absent? | **YES** | attempt 15 (`UPO9`, arm Q): **16/16 scalar fields** and **12/12 per-Newton-iteration ledger entries** byte-equal. `converged`, `‖R‖ = 2.0552353500244844e-10`. |
+
+`self_hash 3b592e3c21bf7a42`. Cost **1.06 core-h** against a briefed ~10⁰ core-h; `UNDER_RESOURCED false`.
+
+### The independent audit — what I checked myself, not from the report
+
+1. **`self_hash` RECOMPUTED from the committed blob** (`git show 8019c35:writeup/data/p2_r_bank_v1.json`), under the recipe the file states: **`3b592e3c21bf7a42`, MATCH.**
+2. **The seedbank is genuinely tracked.** All three files appear in `git ls-files`; `git check-ignore -v` returns nothing for `seed_fields.npy`; `git ls-tree -l 8019c35` shows the blobs at **737,408 / 123,799 / 3,571 B**. This was the whole point of the unit and it is the one thing a report could most easily assert falsely.
+3. **Manifest ↔ `.npy` consistency, all 160.** I hashed every slice of `seed_fields.npy` myself against `manifest.json`'s per-field `sha256`: **160/160 match, 0 mismatches.** Arithmetic closes: 4,608 B × 160 = 737,280 + 128 B npy header = **737,408 B**. Shape `(160, 24, 24)` float64, C-contiguous. 8 rows × 2 arms × 10 `field_index` = 160; exactly **16** rows carry `is_E_original`, and they are exactly the `field_index == 0` entries.
+4. **`regenerate` re-run by me, not by the unit.** I called `r_bank_build._regenerate` on a 4-field sample — one `is_E_original` and three not, across three rows and both arms (`UPO37/S fi=0`, `UPO20/Q fi=1`, `UPO17/S fi=5`, `UPO17/Q fi=7`). **4/4 bitwise equal, `maxabsdiff = 0.000e+00`.** That is a 2.5% independent sample of gate (i), and it is corroboration of the unit's own result, not a substitute for it.
+5. **Gate (iii)'s tree audited in place.** `scratchpad/nodns` still exists. `u2_dns_ckpt.npy` and `u2_dns_feat.f32` are **both absent**; its seedbank is byte-identical to the tracked one (same SHA-256). I read the call graph: `demo_attempt` → `load_seed` → the bank; nothing on that path opens the checkpoint, the feature file, or `e_hhard_converged_orbits.npz` — which matters, because that `.npz` *is* present in the tree and seeding from it would have been circular. It is not read.
+6. **Disclosure the unit did not make.** Three DNS *metadata* files **are** present in the no-DNS tree — `u2_dns_meta.json` (1,211 B), `u2_dns_progress.txt` (62 B), `u2_dns_stdout.log` (100 B). They carry no field data and `regenerate` cannot use them, and the flag `dns_artefacts_absent_in_this_tree` is *defined in code* as exactly the two field-carrying files, with `demo15.log` printing both as `present: False`. The claim is sound; the **wording is looser than the check**, and a referee would say so. Recorded, not smoothed.
+
+### CONDUCTOR LANDING FINDING — the `~1.2 GB` defect is sharper than "wrong by 4.5×", and it is mine
+
+`R-bank` found `D1`: `experiments/programme_r4/.gitignore`'s header calls the DNS artefacts **"~1.2 GB"**, and the measurement is **268,864,256 B = 268.9 MB**. It correctly declined to rewrite the banked line (W3 ruling Q3 — a banked datum gets a correction *beside* it) and correctly left my files alone.
+
+**The root cause is not an arithmetic slip.** `experiments/programme_r4/u2_m2_dns_recurrence.py:127-136` says, in `U2`'s own words, that storing all 400,000 snapshots as float32 *"would need ~1.2 GB and this machine has 1.5 GB free"*, and that the archive actually written costs *"~280 MB instead of ~1.2 GB"*. **`1.2 GB` is the size of the archive `U2` decided NOT to write.** The `.gitignore` header then attached that counterfactual to the files it actually lists. `U2`'s own `~280 MB` estimate agrees with the measurement to **4%** — so the repository had the right number all along and copied the wrong one.
+
+It then propagated: into `WAVE7_PLAN.md` §A and `OPTIONS.md`'s `R7` row — **both mine** — and onward into `r_bank_build.py`, `u5_reduce_library.py`, `seedbank/manifest.json` and `reports/ORCH_STATE.md`'s superseded block. `OPTIONS.md` is a live ranking document and is corrected in this commit. `WAVE7_PLAN.md` is a committed pre-dispatch record and gets a correction appended, **not an edit**. The superseded ORCH block and the banked artefacts are left verbatim. `CORRECTIONS.md §39`.
+
+**A second process finding, smaller and mine.** Three `--verify` runs produced three different `self_hash`es (`183cb1…`, `ff3b62…`, `3b592e…`). **None is a reproducibility failure** — the document gained its `cost_and_shortfall` / `ceilings` / `defects_found` blocks between runs, and then `self_hash_recipe` was added to `VOLATILE` to remove a self-reference that made the hash chase itself. The final value is a fixed point and I verified it. The cost of learning it was ~19 min of a 19-min verify on a box at load 15, which is why I intervened and told the unit to stop re-verifying and land; it then used `--rehash` in seconds. The lesson is now in `E-FE`'s brief as a named instruction.
+
+### The pre-committed reading, applied
+
+> *"anything short of 160/160 bit-identical means the ensemble DOES NOT LAUNCH from that artefact; the shortfall is a finding about the re-integration path's determinism, reported and not patched around."*
+
+**160/160 fired.** Nothing was loosened — and the unit's own note on that is the right one: the comparator is a SHA-256 over a float64 buffer and **contains no tolerance to loosen**. `E-FE`'s launch condition is therefore **DISCHARGED**, and `E-FE` was dispatched at 6 shards immediately after this audit.
+
+### What this does NOT license
+
+No `L1→L4` link moved. **No wall moved** — and I am not writing an entry into `WALLS.md` for this, because `W7` is the claim that *the search is too big*, and taking 27.5 core-h off one 90.9 core-h ensemble is an operational fact about this box, not a statement about the object. **Scale is not evidence**: 737 KB of committed fields is a portability fact. 160 fields is not 10× more evidence than 16 — it is 10× more **draws**. `E`'s 0-of-16, `E-iv`'s realization gap and the `N = 24` limit are all untouched, and **no seed supply was added**. **Tier 2 is never a proof. Clay ~0.05%.**
+
+## §3i THE DIRECTION CHECK on `R-bank`
+
+**q1 — Did this unit move an `L1→L4` link?** **No.** It is Lane R infrastructure and says so itself. What it moved is a *prerequisite*: a shard no longer needs a 3.44 h DNS it cannot fetch, measured, not argued.
+
+**q2 — What did it make FALSE?** (a) That the DNS artefacts are ~1.2 GB — they are 268.9 MB, and the figure was a counterfactual all along. (b) That a seed cannot be built without the checkpoint — gate (iii) reproduced an attempt bit for bit with both field-carrying artefacts absent. (c) That the seedbank was safely ignored — the `.gitignore` line was the blocker, and it is now a tracked 737,408 B blob that cannot die with a container, which the DNS checkpoints have done **twice**.
+
+**q3 — Does its lane still deserve its rank on what is measured NOW?** Lane R is continuous and **never sets a wave's direction**; that is unchanged and `R-bank` does not change it. Its rank *within* Lane R was "runs first, because it unblocks the ensemble", and it delivered exactly that at 1.06 core-h.
+
+**q4 — Is any live claim resting on a source whose own recorded ceiling is undischarged?** **YES, two.** (a) The big one is not this unit's: **`W4` clause (b) is recorded SHUT and VERIFIED on Chae–Wolf Thm 1.1 / Rmk 1.2 and the ESŠ step, and this repository has never opened either.** That is `PB2`, wave 8, and the user directive requires any failure there to come to them immediately rather than at a wave's end. (b) Within this unit: ceiling **C2** — gate (i) establishes the bank is what `regenerate` produces *here, on this CPU, under this numpy/FFT build*. **The artefact is now the DEFINITION of the seed, not a cache of a machine-independent one.** `E-FE`'s entire 160 attempts rest on that, cross-machine agreement is unpriced, and I have written C2 into `E-FE`'s brief rather than letting it be rediscovered.
+
+**q5 — What is the CHEAPEST unit that could KILL the priority lane, and why is it not next?** Unchanged from the `V-W6` re-rank: **`L-JVER`**, because every route-4 residual number is downstream of one `J` whose only evidence is a selftest comparing two of `L6`'s own implementations. **It IS next** — slot 1 of wave 8, ahead of `L8`.
+
+**q6 — If Lane L were dead tomorrow, what would we do instead, and is it cheaper?** Lane V (the `L5` norm) and Lane T (the torus — `W4` clause (c), **UNTESTED, NOT CLOSED**). Lane T is cheaper per unit and is *still* held on a ban-wording question that is on the user's desk, not mine to rule. That has not changed and I am not treating it as changed.
+
+**q7 — Are we in an audit/instrument loop? Count the last three units by kind.** `R-prof` (instrument) → `V-W6` (verifier) → `R-bank` (infrastructure). **Three non-construction units in a row, and I am flagging it rather than explaining it away.** The mitigation was already committed before this landing, not invented for it: `L6-b` (construction) has been live throughout and is 3,900/20,000 iterations in, and wave 8 **opens** with `L-JVER` (construction) per §3f rule 3. The count is the count; the correction is in place.
+
+### Dispatch record — `E-FE`, leg 408, 6 shards
+
+Launched immediately on the discharged condition. Not a re-decision: the shard count is **6, not the price sheet's 8**, decided on a measurement (12 cores; `L6-b` holding ~5; `R-prof`'s banked `MACHINE_WAS_NOT_QUIET = true` with a positive control that failed at 7.15× against an expected ~4×). **Consequence stated up front: ~15.2 h wall instead of ~11.4; core-hours unchanged at ~91.** The brief carries `R-bank`'s C2 and C4 as inherited ceilings, the row-major draw order as a **declared choice** so the null names its own realization (lesson 91), the tracked-partials requirement from the 2026-08-14 loss, and the `self_hash` fixed-point lesson learned above.

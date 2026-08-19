@@ -91,17 +91,12 @@ measurement, verbatim: `reports/ORCH_STATE.md` Superseded LIVE blocks.
 
 ## WAVES 3 AND 4 — CLOSED. Detail retired 2026-08-18 under §3j.
 
-**Wave 3 closed with ONE unit of four returning** (`V-W2`); three worktrees were lost to a host
-process exit with their pre-registrations committed and their partial JSON not. That is why every
-brief since carries **COMMIT DURING THE RUN, NOT ONLY AT THE GATE**. **Wave 4 returned all three**
-(`V3`, `V-W3`, `L2′`), each row in the **Landed** table above with its SHA and its gate answer in the
-gate's own wording. Narrative, headroom and the §3i answers for both waves: `reports/ORCH_STATE.md`
-Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits `6320790`, `391fd8f`.
+**Detail retired 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE34.** The rule it produced is live in
+**Standing discipline** below: COMMIT DURING THE RUN, NOT ONLY AT THE GATE.
 
 ## WAVE 5 — COMPLETE, LANDED, **VERIFIED** by `V-W5`. Retired 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE5.
 
-**The precedent it set, kept live because it binds every wave:** a request to change a gate
-**mid-wave was REFUSED**. Plan verbatim: `writeup/waves/WAVE5_PLAN.md` @ `1e49a00`.
+**Precedent, still binding:** a request to change a gate **mid-wave was REFUSED** — `WALLS_HISTORY.md` §STATE-WAVE5-PRECEDENT.
 
 ## ⚠ 2026-08-19 — **TEMPORARY PIVOT TO PAPERS (user ruling).** Scaffold `7851899`; wave 8 planned and committed before dispatch: `writeup/waves/WAVE8_PLAN.md`.
 
@@ -115,12 +110,15 @@ Superseded LIVE blocks (verbatim, nothing reworded) and the integration commits 
 
 **Outreach stays held.** Reading published material is authorised; contacting any author, group or maintainer list is not.
 
-## WAVE 7 — **DISPATCHED 2026-08-19: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` HELD** until `R-bank` returns **160/160**.
+## WAVE 7 — **DISPATCHED 2026-08-19: `R-bank` ‖ `R-prof` ‖ `L6-b` ‖ `V-W6`** (legs 404–407). Plan `writeup/waves/WAVE7_PLAN.md` @ `2a5ea0d`, committed **before** dispatch. `V-W6` verifies **wave 6** — I planned it, so I may not. **`E-FE` DISPATCHED 2026-08-19 (leg 408, 6 shards)** — condition discharged.
 **RETURNED — `V-W6`** (leg 407, `c7f242c`, `writeup/data/p2_verify_wave6_v1.json`). **`V5` VERIFIED. `V-W5` VERIFIED. `L6` VERIFIED-WITH-QUALIFICATION** — gate answered exactly, artefact fully re-derivable, **no arithmetic defect anywhere in wave 6**. 65 checks 0 fail (`--deep` 68); self_hash recomputes; territory 3 files all `A`; **0 repaired, 0 artefacts edited**. 11 defects open.
 `V-W6` cont.: my `L6` landing audit **UPHELD on the one-start finding** (its genuine find, the unit never said it), **overstated 3×**, **wrong once conservatively** (`1.6` is branch B; the unit-normalised branch is A at **7.58**, so `L7` is blocked HARDER). **Understated twice**: the cap sweep controls nothing, and the minimiser is **~14 orders from its `gtol`**. `CORRECTIONS.md` §38.
 **`V-W6`'s most serious finding (`D-VW6-2`)**: all 133 starts exited `status = 1`, not one converged by gradient or `ftol`; `scale_invariant_grad = 153.22` against a pre-registered `1e-12`, growing monotonically with `n_dof` on both branches. **`L6`'s bolded §8.2 claim has no surviving support.** `D-VW6-7` (undeclared scipy) **REPAIRED** in the integration commit.
 **RETURNED — `R-prof`** (leg 405, `1f89ceb`, `writeup/data/p2_r_prof_v1.json`). Gate (iii) **NO**: `PROG-R4`'s loop is **4.34× slower** than the named reference (cpu median; wall 4.21; **worst wall round 1.9975** — "every round exceeds 3×" is true on the **cpu clock only**, a Conductor landing finding the unit's prose over-generalised).
 `R-prof` cont.: (i) 15-row table sums to **exactly 100.0**, **79.1% transforms**; (ii) fixed fraction **0.596** (`N = 4..512`). Remedy pre-planned FFTW3 **3.41×**, **priced not landed** (it moves every banked orbit at the last bit). Solver **unmodified**, sha256 matches live. Machine not quiet, positive control **failed** — both disclosed. **W7 unmoved; no link moved.**
+**RETURNED — `R-bank`** (leg 404, `8019c35`, `writeup/data/p2_r_bank_v1.json`). **`YES` on all three.** (i) **160/160** bit-identical to `regenerate`, run both one-per-call and all-in-one-call; (ii) **16/16** vs `E`'s ledger, `ulp_gap 0`; (iii) attempt 15 reproduces **12/12 ledger entries byte-equal with the two DNS artefacts ABSENT**. `self_hash 3b592e3c…` recomputed MATCH. 1.06 core-h.
+`R-bank` cont.: seedbank **TRACKED, 737,408 B** — it cannot die with a container, which the DNS ckpts have **twice**. I re-hashed all 160 slices vs the manifest and re-ran `regenerate` on 4 fields myself, bitwise. Defect **§39**: `~1.2 GB` is **268.9 MB**, and was `U2`'s *rejected* archive size. **No wall moved; no link moved.**
+**DISPATCHED — `E-FE`** (leg 408). 160 attempts, **6 shards not 8**, on a measurement (12 cores, `L6-b` holding ~5, `R-prof`'s banked `MACHINE_WAS_NOT_QUIET`): **~15.2 h wall not ~11.4; ~91 core-h unchanged.** Inherits `R-bank` **C2** (the bank is the seed's *definition* on this CPU) and **C4** (144 non-originals untested by any solver).
 
 ## WAVE 6 — COMPLETE 2026-08-19. Retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE6. Audit + §3i: `writeup/waves/WAVE6_CLOSE.md`.
 
