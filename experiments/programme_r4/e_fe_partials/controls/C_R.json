@@ -1,0 +1,20 @@
+{
+ "T_orbit": 20.41751140125702,
+ "anchor": "U5 attempt007_P_UPO37",
+ "control": "R",
+ "converged_to_tol": true,
+ "delta_T": 2.985844496095069e-07,
+ "delta_s": 6.50090399290093e-08,
+ "exercises": "the state block AND T and s -- neither is degenerate at a genuine RPO, which is what P cannot test",
+ "final_residual": 1.5243710606417483e-10,
+ "harness_predicate_says_recovered": true,
+ "n_epochs": 5,
+ "perturbation_relative": 0.001,
+ "planted": "a converged orbit from this run (anchor U5 attempt007_P_UPO37), perturbed",
+ "reason": "converged",
+ "recovered": true,
+ "relative_error_to_orbit": 3.622629642524818e-05,
+ "role": "POSITIVE, conditional -- MUST SUCCEED IF IT RUNS",
+ "s_orbit": 5.696515622026857,
+ "wall_seconds": 729.35378074646
+}
