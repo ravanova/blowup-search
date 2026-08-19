@@ -444,3 +444,33 @@ database, title-screened, S2 banked a **gap not a zero**. `writeup/data/p2_route
 **Why it is a wall and not a complaint.** Under §3d an unresourced programme cannot return `NO` — it
 returns `UNDER-RESOURCED` forever, an unbounded sequence of honest non-answers indistinguishable
 from no programme at all.
+
+## §W4-SCOPE — retired verbatim from `WALLS.md` W4 on 2026-08-19 (§3j headroom).
+
+**WHAT THIS DOES AND DOES NOT DO.** It does **not** break W4 — a wall breaks when (a), (b) or (c)
+*succeeds*; two are **shut**, the opposite. It says **nothing** about whether 3D NS is regular and
+retires neither §6(i) nor §6(ii). **W4's ONLY UNBROKEN CLAUSE IS NOW (c)** — and (c) is **UNTESTED, NOT CLOSED** — — a target not imposing
+condition (7): the torus, **deferred with Lane T.** A ranking question, not a wall movement.
+
+## §W-3I-Q6 — retired verbatim from `WALLS.md` LANE PRIORITIES on 2026-08-19 (§3j headroom).
+
+**§3i q6 ("what would we do if Lane L died?") WAS LEFT LIVE FOR WAVE 5, AND WAVE 5 ANSWERED IT.** Narrative retired verbatim 2026-08-18 → `WALLS_HISTORY.md` §PRIORITIES-Q6. **Live consequence: `L2′` shut W4 (a) and `L5` shut (b) — SHUT-UNVERIFIED until `V-W5` reports — so what Lane L has left is re-earned, NOT retired: §6(i)/§6(ii), both no-method. Two clauses closing does NOT re-open Lane T: a decision may not supersede a measurement.**
+
+## §ORCH-W6-L6AUDIT — retired verbatim from `reports/ORCH_STATE.md` on 2026-08-19. **Three of its numbers are CORRECTED at `writeup/CORRECTIONS.md` §38 by `V-W6`; it is kept here as written.**
+
+**`L6`'s LANDING AUDIT AND ITS §3i — FULL TEXT IN `writeup/waves/WAVE6_CLOSE.md`.** What I checked
+myself: evidence **30/30**, `C18` re-synthesises `ρ = 1.613811231995` from banked coefficients;
+territory **7 files, all added, zero modifications**. **One clause of the unit's summary I do NOT
+adopt** — it calls the `NO` *"a fact about the construction, not the stopping point"*. At every rung
+above the coarsest, `ρ` is reached by **ONE start, the continuation**; five independent seeds land
+**10–24× higher and get WORSE as `n_dof` grows**, all capped at 800 iterations. A ladder whose rungs
+each start at the predecessor's minimiser, at a budget too small for the added dimensions, is biased
+toward measuring "no change". **The `NO` is about THIS CONSTRUCTION AT THIS BUDGET**, and reading (d)
+`UNDER-RESOURCED` is the DOMINANT reading, not a secondary one.
+
+## §ORCH-W6-DISPATCH — retired verbatim from `reports/ORCH_STATE.md` on 2026-08-19 (§3j headroom).
+
+Plan `e202653`, pointer `5c49486`, **both before any worker started**; gates carried **verbatim**
+into self-contained briefs. **`V-W5` `95cf861`; `V5` `dacc01c`; `L6` `e62c449`.** Dispatch narrative
+retired → `## Superseded — wave 6's dispatch record`. **I planned this wave, so I do not verify it**
+— `V-W5` verified **wave 5**; **`L6` is `UNVERIFIED`** and a verifier for it belongs in wave 7.

@@ -175,21 +175,23 @@ built on route 4's own object (λ-DSS, `a = 0.5`, poloidal–toroidal, `div V �
 Bogovskiĭ corrector**), measured in **`L5`'s own load-bearing norm**. Smallest residual at the best
 affordable resolution (`n_dof = 6720`): **`ρ = 1.6138`** with the `α = 1` far-field amplitude
 normalised to **1** — *order one*, not small. **It does NOT decrease under refinement:**
-`d log ρ / d log n_dof = −0.0222` over the last three rungs, **0.497 %** at the top, `NO` at every
-iteration cap from 50 to 800. Evidence reproduces independently (30/30; banked coefficients
-re-synthesise `ρ` exactly). **The `Ks = 0` exactly-SS control costs a factor 2.0, so the DSS degrees
+`d log ρ / d log n_dof = −0.0222` over the last three rungs, **0.497 %** at the top. Evidence
+reproduces independently (30/30; banked coefficients re-synthesise `ρ` exactly). **The `Ks = 0`
 of freedom are load-bearing — the construction did NOT collapse to (D)SS.**
-**CEILING, MEASURED BY THE CONDUCTOR ON LANDING, NOT CLAIMED BY THE UNIT: at every rung above the
-coarsest, `ρ` is attained by ONE start — the continuation — while all five independent random seeds
-land 10–24× higher and get WORSE as `n_dof` grows (`J1 ≈ 6.8 → J4 ≈ 32–38`). Every start hit the
-800-iteration cap. So the ladder is a chain each rung of which INHERITS its predecessor's minimiser
-at a budget too small to explore the added dimensions — it is biased toward measuring "no change".
-The `NO` is a fact about THIS CONSTRUCTION AT THIS BUDGET.** `c_mod` is still not route 4's number.
+**CEILING, MEASURED BY THE CONDUCTOR ON LANDING, NOT CLAIMED BY THE UNIT, RULED ON BY `V-W6`: at
+every rung above the coarsest, `ρ` is attained by ONE start — the continuation. UPHELD both
+branches.** Seed spread **3.93–23.67× on B, never above 5.95× on A** (my "10–24×" was the top of the
+range quoted as the range — `CORRECTIONS.md` §38); it worsens with `n_dof` in the per-rung
+**minimum**, not seed by seed; all 133 hit **their** cap, 58 at 800 and 75 at 250. **`V-W6` adds two
+facts I missed, both stronger:** the cap sweep is a post-hoc TRUNCATION of the same full-budget runs,
+warm-started from below, so it **controls nothing**; and the banked minimiser is **~14 orders from
+its pre-registered `gtol`** (`153.22` vs `1e-12`), growing with `n_dof` on both. The ladder inherits
+its predecessor's minimiser at a budget too small to explore the added dimensions. **The `NO` is
+about THIS CONSTRUCTION AT THIS BUDGET**; `L6-b` separates budget from ansatz.
 
-**WHAT THIS DOES AND DOES NOT DO.** It does **not** break W4 — a wall breaks when (a), (b) or (c)
-*succeeds*; two are **shut**, the opposite. It says **nothing** about whether 3D NS is regular and
-retires neither §6(i) nor §6(ii). **W4's ONLY UNBROKEN CLAUSE IS NOW (c)** — and (c) is **UNTESTED, NOT CLOSED** — — a target not imposing
-condition (7): the torus, **deferred with Lane T.** A ranking question, not a wall movement.
+**`L6` does NOT break W4** — a wall breaks when (a), (b) or (c) *succeeds*, and two are shut, the
+opposite. **W4's ONLY UNBROKEN CLAUSE IS (c)**, UNTESTED NOT CLOSED, deferred with Lane T. Retired
+verbatim 2026-08-19 → `WALLS_HISTORY.md` §W4-SCOPE.
 
 ## W5 — Persistence and stability under localisation
 
@@ -280,7 +282,8 @@ return: Lane V → HELD, Lane L sole priority.**
 | **T** | 1 | **DEFERRED** | The demonstrated-technology argument fell to the lane's **own** measurement (leg 393, replicated by 394). Alive only through **`T2″`**; **`T3` deferred, not killed.** `OPTIONS.md` §E. |
 | **R** | continuous | **unchanged** | Runs inside **every** unit's pre-registration and takes its own units when a wave has room. **Never sets a wave's direction.** |
 
-**§3i q6 ("what would we do if Lane L died?") WAS LEFT LIVE FOR WAVE 5, AND WAVE 5 ANSWERED IT.** Narrative retired verbatim 2026-08-18 → `WALLS_HISTORY.md` §PRIORITIES-Q6. **Live consequence: `L2′` shut W4 (a) and `L5` shut (b) — SHUT-UNVERIFIED until `V-W5` reports — so what Lane L has left is re-earned, NOT retired: §6(i)/§6(ii), both no-method. Two clauses closing does NOT re-open Lane T: a decision may not supersede a measurement.**
+**§3i q6 — "what would we do if Lane L died?" — was left live for wave 5 and wave 5 answered it.**
+Retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §W-3I-Q6.
 
 **Binding on every lane: C1 STANDS, EXEMPLAR-FREE**, and no unit may cite it as evidence the
 technology closes for any object class. **Naming requirement unchanged, not waivable by the

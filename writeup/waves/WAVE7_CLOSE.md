@@ -106,3 +106,111 @@ explicitly kept the composition floor**, and it is recorded here so that wave 9 
 construction-heavy or the loop is real.
 
 **Tier 2 is never a proof. No link moved. Clay ~0.05%.**
+
+---
+
+## `V-W6` — leg 407, landed by the unit at `c7f242c` (+ `280f421`, `1844b46`). VERDICTS: `V5` **VERIFIED**, `V-W5` **VERIFIED**, `L6` **VERIFIED-WITH-QUALIFICATION**.
+
+**Artefact:** `writeup/data/p2_verify_wave6_v1.json`. I planned wave 6, so I could not verify it;
+this unit did, and it was briefed to scrutinise my own landing audit as well. It did that too.
+
+### The independent audit of the verifier
+
+- **Self-hash** `5834da0a4ff30a3c` **recomputes to a MATCH** under the artefact's own stated rule.
+- **Territory**: three files, all `A` (`writeup/data/p2_verify_wave6_v1.json`,
+  `experiments/p2_verify_wave6_v1_evidence.py`, `experiments/journal/leg_407.md`). Nothing else in
+  the tree was touched by any of its three commits. `banked_artefacts_edited: 0`,
+  `defects_repaired: 0` — a verifier that repairs is no longer a verifier, and this one did not.
+- **Evidence re-run by me**: `65 checks, 0 failures`, exit 0. `--deep` was **executed**, not merely
+  offered: 68 checks, and all three unit evidence scripts re-run as subprocesses, all exit 0.
+- **I re-derived its central corrections myself from `writeup/data/p2_route_l6_profile_v1.json`**,
+  not from its word: the per-rung minimum is the `continuation` start at every rung above the
+  coarsest on **both** branches; branch-B seed ratios 3.93–4.02 / 8.04–11.35 / 10.08–11.29 /
+  18.32–23.67; branch A never above 5.95; `scale_invariant_grad` at the banked minimiser **153.22**
+  with the ladder 23.05 → 24.06 → 60.11 → 153.22 on B and 1.16 → 1.75 → 3.11 → 16.12 on A; the main
+  ladder is **58 starts at `nit = 800`** and the axis ladders are **75 at 250**, 133 total, every one
+  `hit_maxiter = true`, `status = 1`. Every one of its numbers reproduced.
+- **It states its own ceiling**: it verifies **arithmetic, provenance and gate-compliance**, not
+  science. That is the correct ceiling for a verifier and it is banked, not implied.
+
+### The ruling on my own landing audit — accepted in full
+
+**Upheld:** the one-start finding, independently confirmed, and it is what forced the re-rank to
+`L6-b`. **Overstated three times, wrong once conservatively, understated twice.** All seven items,
+with my own re-derivation of each, are written to **`writeup/CORRECTIONS.md` §38**. Nothing is
+smoothed: the "10–24×" band, "monotonically worse", "all 133 at 800" and "1.6 against a
+unit-normalised field" are corrected in `WALLS.md`, `STATE.md` and `OPTIONS.md` in this commit.
+
+### `D-VW6-7`, REPAIRED
+
+`requirements.txt` declared scipy "intentionally NOT required" while `experiments/p2_route_l6_v1.py`
+imports `scipy.optimize.minimize` and `scipy.special.lpmv`, so on a clean checkout `L6`'s evidence
+script dies with an uncaught `ImportError` and reports **zero** checks. Verified by me at the source
+lines (60–61). **Repaired in this commit.** The other ten defects stay open, unrepaired, in the
+verifier's artefact — that is the record's job, not a verifier's.
+
+---
+
+## §3i — THE DIRECTION CHECK for `V-W6`, AND A RE-RANK
+
+**1. Did this unit move an `L1→L4` link?** **No.** A verification cannot. It confirms that wave 6
+moved none either.
+
+**2. What did it make FALSE?**
+- `L6`'s bolded §8.2 claim — that the stall is *"a fact about the construction, not the stopping
+  point"* — **has no surviving support.** Its only control, the cap sweep, is a post-hoc truncation
+  of the same full-budget runs, warm-started from below.
+- The belief that the banked minimiser is a minimiser in any meaningful sense. **All 133 starts
+  exited `status = 1`; not one converged by gradient or by `ftol`**, and the distance from
+  stationarity **grows** with `n_dof`.
+- Three of my own supporting numbers, and one of my inferences: `L7` is blocked **harder**, at 7.58
+  on the genuinely unit-normalised branch, not 1.6.
+- That a clean checkout can reproduce `L6`. It could not, until this commit.
+
+**3. Does Lane L still deserve its rank ON WHAT IS MEASURED NOW?** **Yes as a lane — it is still the
+only lane touching `CLAY_OBLIGATIONS.md` §6(i)/§6(ii) — but the ORDER INSIDE IT CHANGES, and that is
+this integration's real output.** See q5.
+
+**4. Is any live claim resting on a source whose own recorded ceiling is undischarged?** Yes, and
+`V-W6` adds a new one that is worse than the source ceilings: **not a source, but a function.**
+`D-VW6-5` re-flags NRŠ 1996 / Tsai 1998 held SECOND HAND under branch-B selection (already queued as
+`L7-src`, absorbed into `PB2`). `D-VW6-6` records that `SOURCES.md` has no row and no DEPTH for
+Byrd–Lu–Nocedal–Zhu 1995 (`L6`'s `C1`-discharging apparatus) or Chandrasekhar (its trial space) —
+**that is the landing commit's gap, i.e. mine, and it is owed.**
+
+**5. What is the CHEAPEST unit that could KILL the priority lane, and why is it not next? — IT IS
+NOW NEXT. RE-RANKED IN THIS COMMIT.** `V-W6`'s single most important *unchecked* item: whether
+`J(c)` **as coded** is actually the `L^{3/2}` norm of the curl of route 4's profile residual. The
+only internal evidence is selftest `T_D` at `1.22e-4`, which compares **two of the unit's own
+implementations**. **Every route-4 residual number in the record is downstream of that one
+function** — `L5`'s `c_mod`, `L6`'s `ρ = 1.6138`, and `L6-b`'s answer whichever way it lands. Price:
+an independent re-implementation of `W[V]` in a different basis, ~1 unit-week + 1–5 core-h.
+
+**The re-rank.** Wave 8's Clay-chain slot was pre-committed as `L8`, a branch decision keyed to
+`L6-b` (`WAVE8_PLAN.md` §1). It is **replaced by `L-JVER`**, the independent re-implementation, and
+`L8`'s branch rule is **deferred verbatim to wave 9**, unchanged and still keyed to `L6-b`'s banked
+answer, which does not expire. Two reasons, and the second is the one that decides it:
+
+1. `L8` cannot be *chosen* until `L6-b` returns anyway, and `L6-b` is still running.
+2. **Either branch of `L8` spends a full wave refining a functional nobody outside its own author
+   has ever computed.** If `J(c)` is not the norm it is documented to be, `L6-c`/`L6-d` measure
+   nothing, `L6-b` measures nothing, and `L5`'s clause-(b) closure is standing on it. Buying the
+   check first is strictly cheaper than buying it after another ladder.
+
+This satisfies the §3g composition floor: `L-JVER` is a Lane L unit attacking W4/W5 directly, and it
+is a **construction** unit, not an instrument — which also repairs wave 8's 3:1 instrument skew
+flagged in `R-prof`'s q7 above. The amendment is written into `WAVE8_PLAN.md` **before** dispatch,
+with its gate, as §3g requires.
+
+**6. If Lane L were dead tomorrow, what would we do instead — and is it cheaper?** Unchanged from
+`R-prof`'s answer: Lane V, and W4 clause (c) on the torus, which is Lane T's and deferred by ruling.
+Both cheaper per unit, neither on the §6 path. **Note the sharpening**: `L-JVER` is precisely the
+unit that could *cause* that question to become live rather than hypothetical, which is why it is
+worth a full wave slot.
+
+**7. Are we in an audit/instrument loop?** The last three returned units are `R-prof` (instrument),
+`V-W6` (verifier) and — still running — `L6-b` (construction). Two of three are non-construction.
+**The re-rank in q5 is also the answer to q7**: wave 8 now opens with a construction unit
+(`L-JVER`), per §3f rule 3, and carries the verifier last.
+
+**Tier 2 is never a proof. No link moved. Clay ~0.05%.**

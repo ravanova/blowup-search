@@ -38,20 +38,12 @@ figure in `OPTIONS.md` move together.
 
 ### WAVE 6 — **COMPLETE 2026-08-19. Three planned, three dispatched, three landed.**
 
-Plan `e202653`, pointer `5c49486`, **both before any worker started**; gates carried **verbatim**
-into self-contained briefs. **`V-W5` `95cf861`; `V5` `dacc01c`; `L6` `e62c449`.** Dispatch narrative
-retired → `## Superseded — wave 6's dispatch record`. **I planned this wave, so I do not verify it**
-— `V-W5` verified **wave 5**; **`L6` is `UNVERIFIED`** and a verifier for it belongs in wave 7.
+Plan `e202653` before any worker started; `V-W5` `95cf861`, `V5` `dacc01c`, `L6` `e62c449`; **all
+three now VERIFIED by `V-W6`.** Detail retired verbatim → `WALLS_HISTORY.md` §ORCH-W6-DISPATCH.
 
-**`L6`'s LANDING AUDIT AND ITS §3i — FULL TEXT IN `writeup/waves/WAVE6_CLOSE.md`.** What I checked
-myself: evidence **30/30**, `C18` re-synthesises `ρ = 1.613811231995` from banked coefficients;
-territory **7 files, all added, zero modifications**. **One clause of the unit's summary I do NOT
-adopt** — it calls the `NO` *"a fact about the construction, not the stopping point"*. At every rung
-above the coarsest, `ρ` is reached by **ONE start, the continuation**; five independent seeds land
-**10–24× higher and get WORSE as `n_dof` grows**, all capped at 800 iterations. A ladder whose rungs
-each start at the predecessor's minimiser, at a budget too small for the added dimensions, is biased
-toward measuring "no change". **The `NO` is about THIS CONSTRUCTION AT THIS BUDGET**, and reading (d)
-`UNDER-RESOURCED` is the DOMINANT reading, not a secondary one.
+**`L6`'s landing audit and its §3i — retired verbatim 2026-08-19 → `WALLS_HISTORY.md`
+§ORCH-W6-L6AUDIT. THREE OF ITS NUMBERS ARE CORRECTED BY `V-W6` at `writeup/CORRECTIONS.md` §38**;
+the one-start finding is UPHELD. Full text with the audit: `writeup/waves/WAVE6_CLOSE.md`.
 
 **Wave 6's seven §3i answers retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §ORCH-W6-3i; full
 text with its landing audit: `writeup/waves/WAVE6_CLOSE.md`. What binds: no `L1→L4` link moved;
@@ -83,14 +75,25 @@ explicit-paths-only commits (four workers, one tree), COMMIT DURING THE RUN, and
 transforms; remedy priced not landed. Integration audit + §3i seven: `writeup/waves/WAVE7_CLOSE.md`.
 Conductor finding: the unit's "every round exceeds 3×" is **cpu-clock-only** (worst wall 1.9975).
 
+**RETURNED — `V-W6`** (leg 407, `c7f242c`): `V5` and `V-W5` **VERIFIED**, `L6`
+**VERIFIED-WITH-QUALIFICATION**, no arithmetic defect anywhere in wave 6, 11 defects open, 0
+repaired. My landing audit: one-start finding UPHELD, three numbers overstated, one wrong
+conservatively, **two understated** — `CORRECTIONS.md` §38. `D-VW6-7` (undeclared scipy) repaired.
+
+**⚠ RE-RANK MADE IN THAT INTEGRATION COMMIT (§3i q5).** Wave 8 opens with **`L-JVER`** — an
+independent re-implementation of `W[V]`/`J(c)` in a different basis — because every route-4 residual
+number is downstream of one function whose only evidence is a selftest comparing two of `L6`'s own
+implementations. **`L8`'s branch rule is deferred VERBATIM to wave 9**, still keyed to `L6-b`.
+`WAVE8_PLAN.md` AMENDMENT 1, written **before** dispatch.
+
 ### Headroom at the wave boundary — §3j, IN BYTES (`wc -c`)
 
 | file | bytes | cap | free |
 |---|---|---|---|
-| `STATE.md` | 22,717 | 24,576 | 1,859 |
-| `WALLS.md` | 32,691 | 32,768 | 77 |
-| `OPTIONS.md` | 22,152 | 24,576 | 2,424 |
-| `ORCH_STATE.md` LIVE | 8,076 | 8,192 | 116 |
+| `STATE.md` | 23,904 | 24,576 | 672 |
+| `WALLS.md` | 32,476 | 32,768 |   292 |
+| `OPTIONS.md` | 23,733 | 24,576 | 843 |
+| `ORCH_STATE.md` LIVE | 8,100 | 8,192 | 92 |
 
 **Defect of mine, §37 `writeup/CORRECTIONS.md`: retire by slicing between ASSERTED LINE INDICES,
 never by title, and measure the live block by line index too, or the cap check silently passes.**

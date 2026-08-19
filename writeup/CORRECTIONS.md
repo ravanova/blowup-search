@@ -2523,3 +2523,100 @@ headroom table and escalations list were returned above it. Verified by re-readi
 computing a live-block length as `len(t[:t.index('## Superseded')])` returns the offset of the first
 POINTER to a superseded section, not the boundary — 540 bytes against a true 8,008 on the file as it
 stood. **Measure the block by line index too, or the cap check silently passes.**
+
+## §38 — The Conductor's `L6` landing audit: the finding is real, three supporting numbers overstate it, and two stronger facts were sitting unused in the same artefact
+
+**Recorded 2026-08-19, on `V-W6`'s ruling (leg 407, `writeup/data/p2_verify_wave6_v1.json`), every
+number below re-derived by me from `writeup/data/p2_route_l6_profile_v1.json` rather than taken from
+the verifier's word.** `V-W6` was briefed to scrutinise my own landing audit; it did, and this is
+the result. The audit is `writeup/waves/WAVE6_CLOSE.md`.
+
+**What stands.** *"At every rung above the coarsest, the reported `ρ` is attained by exactly one
+start — the continuation."* **UPHELD on both branches**, confirmed independently twice. On my own
+recompute the minimum at `n_dof` = 576, 1800, 2400 and 6720 is the `continuation` start on branch A
+and on branch B, at every one. `L6` does not report this anywhere. It is the audit's genuine find
+and it is what forced the re-rank to `L6-b`.
+
+**Overstated, three times, all in the same direction — the rhetoric ran ahead of the arithmetic.**
+
+1. *"Five independent random seeds land 10–24× higher."* The band is right only for **branch B's
+   top two rungs**. Recomputed branch B: 3.93–4.02× at `n_dof` = 576, 8.04–11.35× at 1800,
+   10.08–11.29× at 2400, 18.32–23.67× at 6720. **On branch A the factor never reaches 10× at any
+   rung** (1.01–1.04, 2.55–2.62, 2.58–2.62, 5.36–5.95) — at the first refined rung the seeds are
+   within 4% of the continuation, i.e. essentially tied. The top of the range was quoted as the
+   range, and one of the two branches does not support it at all.
+2. *"And get monotonically worse as `n_dof` grows."* True of the per-rung **minimum over seeds**
+   (6.680 → 13.470 → 16.355 → 29.567) and of three seeds individually; **false for `seed402` and
+   `seed403`**, both of which fall at the third rung. True as written only under a reading the
+   sentence does not state.
+3. *"All 133 starts capped at 800 iterations."* **133 of 133 hit their cap** — that part is exact,
+   and I re-counted it: every start carries `hit_maxiter = true` and `status = 1`. But only **58**
+   were capped at 800 (the gate-bearing joint ladder); the other **75** were capped at **250**, the
+   artefact's own `maxiter_on_the_secondary_axis_ladders`. Imprecise, not wrong.
+
+A fourth, minor: the `J4` seed range is **29.567–38.197**, not "32–38" — a slip that *understates*
+the spread.
+
+**Wrong once, and conservatively.** I wrote that an interval/NK enclosure needs a residual small
+enough for a contraction to close and that this one is *"1.6 against a unit-normalised field"*.
+**1.6 is branch B, and branch B is not the unit-normalised branch.** Branch B pins the far-field
+angular amplitude to 1; its Gaussian-weighted interior `L²` is 0.0021915332982833375, **0.22% of
+branch A's**. The unit-normalised branch is **A**, `weighted_L2_total = 1.0000000000`, residual
+**7.583387202236438** — which my own recompute confirms is branch A's banked minimum. **`L7` is
+blocked harder than the audit said, not less.** The unit disclosed the asymmetry at its §10 reading
+(c-3); the audit did not carry it.
+
+**Understated twice, and this matters more than the overstatements.**
+
+- **The audit conceded ground it did not have to concede.** It wrote that the cap sweep (50→800)
+  *supports* `L6`'s claim against the iteration-budget hypothesis. **It does not.** `V-W6`
+  re-derived the whole `by_cap` block: it is `residual_at_cap()` taking the minimum over recorded
+  trajectory points with `k ≤ K` — a **post-hoc truncation of the same 800-iteration runs** — and
+  each rung's continuation start was warm-started from the previous rung's **full-budget**
+  minimiser, so the truncated columns still carry the full budget from below. `J1` at "cap 50" reads
+  3.2798, a truncation of a run seeded from `J0`'s 800-iteration answer; `J0`'s own cap-50 value is
+  14.0239. **`verdict_is_stable_in_the_cap = true` is not a control on the budget at all**, and no
+  evidence check touches it. Refusing §8.2's sentence was right; the reason available was stronger
+  than the one given.
+- **The audit never mentioned that the banked minimiser is not a stationary point in any sense.** At
+  the reported `ρ` the scale-invariant gradient is **153.22** against a **pre-registered `gtol` of
+  `1e-12`** — about fourteen orders — and it **grows monotonically with `n_dof` on both branches**
+  (B: 23.05, 24.06, 60.11, 153.22; A: 1.16, 1.75, 3.11, 16.12). I re-read these per start and they
+  are exactly as `V-W6` states. A ladder whose iterates get *further* from stationarity as they
+  refine is a stronger statement of the audit's own thesis than the seed spread is, and it was
+  banked per start, in the same artefact, unremarked.
+
+**What does not change.** The gate answer. `ρ = 1.613811231995397` and
+`decreases_under_refinement = NO` are correct and re-derivable; `V-W6` re-synthesised `C18` to
+`1.613811231995` exactly and reproduced both rates with an independent non-numpy OLS. **No
+arithmetic defect exists anywhere in wave 6.** The consequence drawn — that `NO` cannot yet be read
+as a statement about the ansatz — **stands, and is better supported by `V-W6`'s evidence than by my
+own argument for it**: three independent facts force it, and any one of them alone would.
+
+**The lesson, stated so it binds later units and me.** *When the supporting numbers are banked per
+start, quote the recomputed range, not its top; and read the whole artefact for the fact that makes
+your case, because it was already there.* Both understatements were fields in the same JSON the
+audit was written against.
+
+**Repair.** None to the record: no banked number changes and no verdict changes. This entry is the
+repair. `D-VW6-7` — `requirements.txt` declaring scipy "intentionally NOT required" while
+`experiments/p2_route_l6_v1.py` imports `scipy.optimize` and `scipy.special`, so `L6`'s evidence
+script dies with an uncaught `ImportError` on a clean checkout — **is repaired in the same commit**.
+The other ten `V-W6` defects are recorded, unrepaired, in its artefact.
+
+### §37, ADDENDUM — 2026-08-19: the same defect fired again, on TABLE ROWS, and was caught before the commit
+
+Refreshing the §3j headroom table in `reports/ORCH_STATE.md`, I set the row for each file by
+`line.startswith('| `WALLS.md')` **without stopping at the first match**. `reports/ORCH_STATE.md`
+carries **four historic headroom tables** below its `## Superseded` boundary, and every one of them
+has a `WALLS.md` row. All four were silently overwritten with today's numbers — including one whose
+cap column then read `32,476 | **32,600**`, an arithmetic impossibility that is the only reason I
+looked. **Retired history had been rewritten to agree with the present.** Repaired before the commit
+by restoring the whole superseded section from `HEAD` and diffing it line by line; the four rows are
+back to 32,233/535, 32,233/535, 32,768/168 and 32,768/46.
+
+**The rule generalises, and this is its second firing.** §37 says: locate by asserted line index,
+never by searching for a title. The addendum: **when a mechanical edit must search, assert the match
+COUNT before writing** — in a file that keeps its own history, every string you can search for
+appears once per historic copy, and an edit that "fixes them all" is a falsification of the record,
+not a tidy-up. A live-block edit must never touch a byte below the boundary.

@@ -175,3 +175,74 @@ learned or evolved seed-scoring fitness (leg 349); more seed supply for `PROG-R4
 current realization; screening as a unit of work; describing a retraction as progress; drafting
 `P3`; **softening a caveat because it reads badly in a paper — in two of the three papers the
 caveats ARE the result.**
+
+---
+
+## AMENDMENT 1 — 2026-08-19, WRITTEN BEFORE DISPATCH, ON `V-W6`'s RETURN. §1's slot changes.
+
+**§3i q5 forced this and it is recorded in the same commit that landed `V-W6`**
+(`writeup/waves/WAVE7_CLOSE.md`, `V-W6` §3i q5). §1's `L8` — the branch decision keyed to `L6-b` —
+is **DEFERRED VERBATIM TO WAVE 9**, unchanged, still keyed to `L6-b`'s banked answer, which does not
+expire and which `L6-b` will have banked by then. **§1's slot in wave 8 is taken by `L-JVER`.**
+
+**Why.** `V-W6`'s single most important unchecked item is whether `J(c)` **as coded** is the
+`L^{3/2}` norm of the curl of route 4's profile residual. The only internal evidence is selftest
+`T_D` at `1.22e-4`, which compares two of `L6`'s **own** implementations. Every route-4 residual
+number in the record is downstream of that one function: `L5`'s `c_mod = 869.288`, `L6`'s
+`ρ = 1.613811231995397`, and `L6-b`'s answer whichever way it lands. **Either branch of `L8` would
+spend a full wave refining a functional nobody outside its own author has ever computed.** Buying
+the check first is strictly cheaper than buying it after another ladder. `L-JVER` is a Lane L
+construction unit attacking W4/W5 directly, so the §3g composition floor is met and the wave now
+**opens with construction** (§3f rule 3), which also repairs the 3:1 instrument skew flagged at §5.
+
+### `L-JVER` — INDEPENDENTLY RE-IMPLEMENT `W[V]` AND `J(c)` IN A DIFFERENT BASIS
+
+**Object.** The same banked profile `L6` banked: `writeup/data/p2_route_l6_profile_v1.json`,
+`banked_profile.B` (and `.A` as the second case), `n_dof = 6720`, λ = 1.7, `a = 0.5`, the
+Chandrasekhar poloidal–toroidal representation, `L5`'s norm `‖curl F‖_{L¹_t L^{3/2}_x}`.
+
+**What the unit must NOT do.** It may not import, call, copy or transliterate
+`experiments/p2_route_l6_v1.py`'s `W`, its quadrature, its basis, or its norm assembly. It may read
+them — it must, to know what it is checking — and it must then build its own from the **written
+mathematics**, in a genuinely different basis and a genuinely different quadrature. Reading the
+existing code and re-typing it is the failure mode this unit exists to exclude, and it must state,
+in its artefact, exactly which choices differ.
+
+**THE GATE, PRE-COMMITTED, TWO-SIDED.**
+
+> Evaluate the independently built `J` at `L6`'s banked coefficient vector for branch B at
+> `n_dof = 6720`, and at branch A, and at a third point that is not a minimiser (`L6`'s coarsest-rung
+> banked vector, re-expressed). **Report the relative difference `|J_new − J_L6| / J_L6` at each of
+> the three points. Is it below `1e-3` at ALL THREE — YES or NO?**
+
+**Pre-committed reading of each answer, written before the number exists.**
+
+- **YES** ⟹ `J(c)` is confirmed as coded to the stated tolerance, at three points including a
+  non-minimiser. `L5`'s `c_mod`, `L6`'s `ρ` and `L6-b`'s answer keep their standing. **This is the
+  expected outcome and it is worth a wave slot anyway**, because it is the only thing that converts
+  a self-comparison into a check. It does **not** move any `L1→L4` link and must not be written as
+  progress.
+- **NO at any of the three** ⟹ **the finding, and it is a large one.** Every route-4 residual number
+  in the record is suspect, `L5`'s clause-(b) closure is resting on it, and it goes to the user
+  **immediately**, not at the end of the wave. `L6-b` is then measuring an unknown functional and
+  its answer must be held. Do **not** repair `L6`; report.
+- **The unit cannot build the second implementation at all, or cannot reach `n_dof = 6720`** ⟹
+  **`UNDER-RESOURCED` with a cost (§3d)**, never `NO`. Report the largest `n_dof` reached and the
+  price of the rest.
+
+**Discipline.** Controls before verdicts: evaluate both implementations on at least one field with a
+**known closed-form** `curl` and a hand-computable `L^{3/2}` norm, and report that control **before**
+the three-point comparison; if the control does not fire, say so and the verdicts are void. Bank the
+disagreement at every one of `L6`'s five rungs, not only the top. Bank a `self_hash` under the
+repository's rule. Do not edit any banked artefact. Do not edit `solver/` or
+`experiments/p2_route_l6_v1.py`. **§3k binds**: name Chandrasekhar and Byrd–Lu–Nocedal–Zhu 1995 in
+`SOURCES.md` with a DEPTH — `D-VW6-6` records that neither has a row, and that gap is the landing
+commit's, so this unit closes it.
+
+**Price.** ~1 unit-week of construction, 1–5 core-h of compute. **Checkpoint above ~1 h; commit
+during the run, not only at the gate; explicit paths only; never `git add -A`, `git add .` or
+`git commit -a`; no `checkout`, `stash`, `reset` or rebase; do not push.**
+
+**Wave 8 is therefore: `L-JVER` ‖ `PB2` ‖ `PB1` ‖ `V-W7`** — construction first, verifier last, four
+units, at the §3g cap. §2, §3, §4 and §6 are unchanged. **`L8` moves to wave 9 with its branch rule
+intact.**
