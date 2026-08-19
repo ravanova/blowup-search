@@ -280,3 +280,7 @@ E-FE: 163 jobs on 6 shards; loadavg 9.71 9.24 10.46 on 12 cores
   adv_hat = np.fft.fft2(u * wx + v * wy) * self.mask
 /home/andy/projects/Unsolved/.venv/lib/python3.12/site-packages/numpy/fft/_pocketfft.py:101: RuntimeWarning: invalid value encountered in fft
   return ufunc(a, fct, axes=[(axis,), (), (axis,)], out=out)
+  attempt 116 UPO20  arm Q: stalled, final ||R|| = 10.49, 24 epochs, 0.62 h
+  [125/163] g116 UPO20  Q f6: stalled, ||R||=10.49, 0.62 h
+  attempt 118 UPO20  arm Q: stalled, final ||R|| = 5.392, 23 epochs, 0.52 h
+  [126/163] g118 UPO20  Q f8: stalled, ||R||=5.392, 0.52 h
