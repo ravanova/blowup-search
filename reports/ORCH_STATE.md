@@ -33,100 +33,85 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — CONDUCTOR mode, **WAVE 8 CLOSED AND INTEGRATED; WAVE 9 DISPATCHED (4 units)**, 2026-08-19
+## LIVE — CONDUCTOR mode. **RUN STOPPED BY USER DIRECTIVE 2026-08-19 — NO SUCCESSOR SCHEDULED.** 2026-08-19
 
-Waves 5, 6 and 7: COMPLETE, VERIFIED, RETIRED VERBATIM BELOW. Wave 8's LIVE block retired verbatim
-→ `## Superseded LIVE block — wave 8 IN FLIGHT`. **The 2026-08-19 USER PIVOT TO PAPERS is IN FORCE**
-(paper units are ADDITIONAL; §3g's composition floor STANDS; a wave of pure paper units is out of
-contract). **A PAPER IS A VIEW OF THE RECORD, NEVER A SOURCE. No unit may cite a draft.**
+**This run is over.** The wind-down directive (`writeup/prompts/WINDDOWN_2026-08-19.md`) arrived
+mid-wave and forbade dispatching anything new, forbade `TaskStop`, and suspended §9e's successor
+trigger. **No successor was scheduled and none is running.** Wave 9 had already been dispatched
+~20 minutes before the directive reached me, so it is recorded as **DISPATCHED**, not as
+`PLANNED, NOT DISPATCHED` — recording it the other way would be false. Everything in flight was
+allowed to finish.
 
-### WAVE 8 — CLOSED. All four returned; integrated `233a2c3`, `024a9b2`, `c63769b`; audit in `writeup/waves/WAVE8_CLOSE.md`
+**To restart: paste `CONTINUATION_PROMPT.md`.** It is the CONDUCTOR restart document (14,836 B).
+The four-slot contract it replaced is at `writeup/prompts/CONTINUATION_PROMPT_FOURSLOT_2026-08-12.md`.
 
-- **`L-JVER`** (409, `a55ca9b`): gate **`NO`** — and the **largest structural finding in the record**.
-  Its independent operator, put on `L6`'s own nodes and weights, reproduces `J_L6` to `1e-14` at all
-  four points **including P3 where the gate misses by 43%**. Neither program is miscoded:
-  **`J(c) = ∫₀^{T_s}‖W(·,s)‖_{L^{3/2}} ds` IS A LOGARITHMICALLY DIVERGENT INTEGRAL**, at `r→∞`
-  (`w_s ~ ∂_s A/r²` survives DSS annihilation) and at `r→0` (`l = 1`). `CORRECTIONS.md` §52.
-- **`PB2`** (410, `a7ffa1e`): gate **`YES`**. `W4` clause (b) carried by **Tsai 1998 Thm 2** at FULL
-  TEXT (no `L^q`, no Leray–Hopf, no boundary condition); **NRŠ does NOT apply** (`U ∈ L³` exactly,
-  and `∫|U|³` is log-divergent at `α = 1`). Clause (b) **STANDS**. Debt: no BLOG/TECHNICAL, no figure.
-- **`PB1`** (411, `1b2c0f0`): gate **`YES` — `P1` IS KILLED, and that is a GOOD RESULT.** Both effects
-  are in print, one of them twelve years old, and `P1`'s framing word was *silently contradicted by
-  its own bibliography*. **This is the pivot's first return and it paid for itself.**
-- **`V-W7`** (412, `f3d4e0e`): seven defects against the Conductor's own integration. I re-checked all
-  seven at primary: **6 UPHELD, 1 UPHELD IN PART** (`V-W7`'s `2.89873` came from its own re-run and is
-  **not in the banked artefact**) → `CORRECTIONS.md` §50.
+### Wave 9 — all four units accounted for
 
-### THE TWO CORRECTIONS THAT MATTER MORE THAN ANY WAVE-8 GATE
+| unit | leg | state | where it stopped |
+|---|---|---|---|
+| `L5-cmod` | 413 | **RETURNED, INTEGRATED** `§58` | Sealed raw verdict `95f0bc6`, adjudicated `5077a0b`. Branch `main` (agent worktree). |
+| `P4-DRAFT` | 414 | **RETURNED, INTEGRATED** `§57` | Landed `7ce5bd0` + `33866c9`. Branch `main`. |
+| `P2-DRAFT` | 415 | **RETURNED, INTEGRATED** `§55` | Landed leg-415 commits. Branch `main`. |
+| `V-W8` | 416 | **RETURNED, INTEGRATED** `§56` | Landed `6f0a52a`. Branch `main`. |
 
-- **§51 — THE UNDER-CLAIM.** `L6`'s four-rung refinement ladder moved `ρ` **−4.994561%**; `L6-b`'s
-  single ×25 budget step at FIXED `n_dof` moved it **−6.751678%** — **×1.3518 of the whole ladder**.
-  Both numbers correct, both banked, in two units, **and nobody divided one by the other for eleven
-  legs.** `J3` needs `7.2153%` to invert and `6.7517%` is measured one rung up: **margin 0.4636 pp.**
-  Rule: *when a refinement study and a budget study measure the same objective, DIVIDE ONE BY THE
-  OTHER BEFORE REPORTING EITHER.* §45's neighbouring blind spot — **an error shared between two
-  artefacts that no single checker reads together** — and there is no count for it.
-- **§53 — THE SIGN.** The divergence **reaches the minimiser** (`+6.226e-5`, `+6.246e-5`, `+6.212e-5`
-  per decade of `r_max` over `1e6→1e14`; three bands inside 1%). **THE SIGN IS POSITIVE**, which is
-  the ONLY reason `L6`'s, `L6-b`'s and `L5`'s `NO`s survive — **their gate answers stand, their
-  numbers do not.** §52 does **NOT** subsume §51 (×130 apart). `L5`'s `c_mod = 869.288` **FLAGGED,
-  not adjudicated** — its sweep stops ~3 decades short and a log divergence is exactly the
-  exponent-zero case a power-law fit calls "saturation". `W4`(b) **NOT affected** (searched `PB2`'s
-  artefact for `c_mod`/`869.288`/`J(`/`curl F`/`L1_t`: none present).
+### Still in flight at the stop — ONE unit
 
-### WAVE 9 — DISPATCHED 2026-08-19. Plan committed BEFORE dispatch at `11abd04` (`writeup/waves/WAVE9_PLAN.md`), gates verbatim in the briefs
+**`E-FE` (leg 408, the 160-attempt field ensemble).** **STILL RUNNING when this block was written.**
+- **How far it got:** `[57/163]` attempts, **54** banked partials in
+  `experiments/programme_r4/e_fe_partials/json/`, ~8.2 h elapsed against a ~11.4 h wall estimate.
+- **Branch:** `main`. It checkpoints directly to `main` and its last checkpoint is `3176b35`
+  (11:02), subject `E-FE leg 408: partials checkpoint (poll) -- NOT a landing, NOT a verdict`.
+- **Status: NO GATE ANSWER, NO VERDICT, NOT CITABLE.** Its partials are banked and safe. Whoever
+  restarts must read the partials, not assume a result. It was **not** stopped: the directive
+  forbade `TaskStop` and I did not issue one.
 
-1. **`L5-cmod`** (413, **Lane L, CONSTRUCTION, opens the wave — §3f rule 3, meets the composition
-   floor**). Extends `L5`'s cutoff sweep on its load-bearing row from `ρ≈1.26e3` to `ρ = 1e8`.
-   Gate: *is the per-decade increment in `c_mod` approaching a NONZERO CONSTANT — YES or NO?*
-   **YES ⟹ `c_mod` is a value of the cutoff, not of the functional, and `L5`'s `NO` is STRENGTHENED.**
-   NO ⟹ genuine saturation, `L5` was right, **and that is NOT written as a null result.**
-2. **`P4-DRAFT`** (414, PAPER, ADDITIONAL). §51 is its centre of gravity, not an appendix. Honest
-   tally **2 prospective against 9 retrospective** goes in the paper in those words.
-3. **`P2-DRAFT`** (415, PAPER, ADDITIONAL). **Unblocked because `PB2` cleared `YES`.** Contribution
-   capped verbatim by the user at *"the identification of T₃ as the sole survivor and its
-   ṁ-proportionality, in float64, on a synthetic profile."* Every `J` printed with its truncation.
-4. **`V-W8`** (416, VERIFIER, **dispatched LAST**). **I PLANNED WAVE 8; I MAY NOT VERIFY IT.** Aimed
-   at my own work: §53's arithmetic, **§53's SIGN claim** (*a single negative increment at any reach
-   reopens `L6`, `L6-b` and `L5` simultaneously — escalate immediately, not at wave end*), §53's ×130,
-   §50 item 6, the W7 byte-identity after my misplacement, all nine verbatim retirements, and a
-   **mutation test on `test_headroom.py`** because I wrote it.
+### What landed this session, and the honest summary of it
 
-**`L6-e` v2 — HELD FOR CORES, not descoped.** Gate pre-committed at `CORRECTIONS.md` §53 (matched
-truncation: report `ρ(J3@20k)` at `nq_r = 60` **and** at `72`; straddling the threshold means the
-ladder is **undecidable at this reach and that is the result**). Held on a MEASUREMENT: load 27 on
-12 cores with `E-FE` live. Dispatch on `E-FE`'s return. **This is a scheduling decision, not a
-scoping one.**
+Six `CORRECTIONS.md` sections, `§53`–`§58`. **Four of the six are corrections to the Conductor's own
+record**, and the two that are not are corrections to drafts. Specifically:
 
-**`E-FE`** (408) is a **LATE RETURN** and **may not influence wave 8's ranking** (ruling `99421dd`).
+- `§54` — `L-JVER`'s "evidence script" re-runs and OVERWRITES the artefact it checks. Reverses `§49`.
+- `§55` — `P2-DRAFT`'s `F1`/`F3`, verified at primary. The per-term decomposition is at the **wrong
+  norm** (`L³`, not the gate's `‖curl F‖_{L¹ₜL^{3/2}}`), and `rho_exponent` is banked against the
+  **wrong fit window** in three fields. **The naive repair of `F3` would have BROKEN `W4` clause (b)
+  off a transient.**
+- `§56` — `V-W8` lands four defects on me. **`§53`'s `×130` is WITHDRAWN as arithmetic** (per-decade
+  rate divided by per-rung total); repaired figure `×18`, bracket `×5.4`–`×155`. Its conclusion
+  survives. `§50` item 6's remedy had landed in one file of two; fixed in `WALLS.md`.
+- `§57` — `P4-DRAFT`. **`§45`'s headline `32 of 49` is UNBANKED** — no artefact, no classifier
+  anywhere in `writeup/data/`. An **`UNDER-RESOURCED` measurement was banked as a passed control**,
+  with its refutation **four lines away in the same JSON object**, unread for eleven legs.
+- `§58` — `L5-cmod`. **The literal pre-committed rule returned `UNDER-RESOURCED` and the board
+  carries that.** `§53`'s flag is discharged **only** in the part directly measured (5 more decades
+  move `c_mod` by `3.19e-06` relative). The saturation claim rests on a **post-hoc discriminant**
+  with a pre-planted control, and is recorded at that status, not as a `NO`.
 
-### USER DECISIONS OWED — recorded, NOT ruled by me
-1. **§49** — does `ORCHESTRATION.md` §6 clause 3 get a recompute-from-primary check beside it?
-   `L-JVER`'s suite is the first in the record claimed 12/12 of that class; `V-W8` is checking it.
-2. **`PB1`'s F2** — `JOURNAL.md:5305` and `ORCHESTRATION.md` §3k:576 give **contradictory accounts of
-   leg 387's arXiv harness**; leg 411 re-measured 10,780 against a recorded 10,756, favouring the
-   journal, which puts leg 382's queue on the wrong reading.
+**No `L1 → L4` link moved. No wall moved in either direction. No `NO` was reopened. `W4` clause (c)
+— the torus, statement (D) — remains UNTESTED, NOT CLOSED, and is the only surviving clause of W4.**
 
-### Open escalations — THREE OPEN, NONE RULED BY ME
-`ESCALATION_W2_SCOPE_2026-08-18.md` (W2 names 3D SINGULARITY, `arXiv:2509.25116` proves
-NONUNIQUENESS; the third reading would make Lane T's re-open condition (i) live);
-`ESCALATION_PUB0C_PUBLISHED_2026-08-18.md`; **`T1`'s ban-wording packet**. **A ban is superseded by a
-MEASUREMENT, never a decision — a defective ban WORDING is a user escalation, and I may not rule it.**
-The **leg-257 lift-clause defect** stays open and EXEMPLAR-FREE.
+### Wave 10 — PLANNED, NOT DISPATCHED
 
-### Debt carried into wave 9
-`PB2`'s BLOG/TECHNICAL pair (~1 h) and registered figure (~15 min); **`R-bank`'s `--verify` CANNOT
-FAIL** (0 `raise`/`assert`/`sys.exit` in `verify()`) — remedy owed, an instrument that cannot fail is
-not an instrument; the §37 **"assert the NEIGHBOURHOOD, not only the match COUNT"** rule owed to
-`CORRECTIONS.md` (my own defect: `§51`/`§52` landed under `## W7` because a search walked past W5 and
-W6, neither of which carries a `⚠` block); Lane R queue `L5-nov`, `R4-a` (remedy **NOT** specified as
-"Strang" — needs naming before dispatch), `R2`, `R3`.
+Not written. The directive asked for a wave-9 plan; wave 9 was already dispatched, so the honest
+equivalent is the successor's first wave, and **the six parked follow-ons in `OPTIONS.md §G` are it**
+— each with a price and a re-open condition, **none in a brief**. `P4-F3` (an instrument that reads
+a verdict field against its own object's sibling fields, ~2–3 h, **none exists**) is the
+highest-value item and should open any new wave, alongside a construction unit — §3f rule 3 still
+binds, and §57 recorded that three consecutive units were audits before `L5-cmod` broke the run.
 
-### Headroom, IN BYTES (`wc -c`), §3j — **no longer measured by hand**
-`test_headroom.py` is always-on in `merge_gate.sh` (§48) and **FAILS rather than skips** when it
-cannot locate the LIVE block. Caps: `STATE.md` 24,576 **and NO ROW OVER 600 CHARS**; `WALLS.md`
-32,768; `OPTIONS.md` 24,576; this LIVE block 8,192. Retirement (verbatim move) is preferred over
-compaction; nine blocks were retired verbatim at wave 8's close.
+### The state of the board in one line
+
+**Lane V rank 1 by default, not by strength; Lane L DEMOTED 2026-08-19; Lane T rank 3, DEFERRED and
+blocked on a USER RULING, not on work; Lane R continuous and never sets direction.** The cheapest
+unit that could move an `L1 → L4` link: **NO SUCH UNIT IS KNOWN.** Clay **~0.05%**, unmoved.
+
+### Headroom at the stop (§3j, bytes)
+
+`STATE.md` 22,949 / 24,576 · `WALLS.md` 32,162 / 32,768 · `OPTIONS.md` 24,527 / 24,576 ·
+this LIVE block / 8,192 · `STATE.md` longest row 502 / 600 chars. `test_headroom.py`: **PASS**.
+⚠ `test_headroom.py:46` has a **known false-negative path** (unanchored `## LIVE` match, `§56` item
+7); today's reading is **TRUE** and independently re-measured. Remedy parked as `V8-HR`, and it is
+**NOT** `V-W8`'s proposed `count == 1`, which §3j's own preference for verbatim retirement would
+break.
 
 ## Superseded LIVE block — wave 8 IN FLIGHT, demoted 2026-08-19 at wave 9's dispatch (§3j)
 
@@ -1081,6 +1066,8 @@ provably obsolete. (Added 2026-08-11, ported from the Project Building Engine.)
    file still showed an older pause. Cross-check `git log -- reports/ORCH_STATE.md` against
    `git log` on `main` before trusting the header above.
 
+**2026-08-19 — THE TOOL-OUTPUT CHANNEL DROPS WORDS, INCLUDING INSIDE `repr()`.** Hit independently by `P4-DRAFT` (leg 414) and by the Conductor twice this session, reading `WALLS.md` and `test_headroom.py`; characters are silently removed from the middle of lines. **Any ruling made by eye off a piped tool read is unsafe.** Byte-level checks and exact file reads are the only trustworthy read. This is an ACTIVE hazard, not historical.
+
 ## Known flakes
 
 Tests confirmed to fail under load (many worktrees gating at once) and pass in isolation —
@@ -1406,3 +1393,102 @@ independent re-implementation of `W[V]`/`J(c)` in a different basis — because 
 number is downstream of one function whose only evidence is a selftest comparing two of `L6`'s own
 implementations. **`L8`'s branch rule is deferred VERBATIM to wave 9**, still keyed to `L6-b`.
 `WAVE8_PLAN.md` AMENDMENT 1, written **before** dispatch.
+
+## Superseded LIVE block — wave 9 DISPATCHED, demoted 2026-08-19 at the RUN STOP under §3j (verbatim)
+
+**Verbatim. Nothing edited.** Superseded by the RUN STOPPED live block above.
+
+## LIVE — CONDUCTOR mode, **WAVE 8 CLOSED AND INTEGRATED; WAVE 9 DISPATCHED (4 units)**, 2026-08-19
+
+Waves 5, 6 and 7: COMPLETE, VERIFIED, RETIRED VERBATIM BELOW. Wave 8's LIVE block retired verbatim
+→ `## Superseded LIVE block — wave 8 IN FLIGHT`. **The 2026-08-19 USER PIVOT TO PAPERS is IN FORCE**
+(paper units are ADDITIONAL; §3g's composition floor STANDS; a wave of pure paper units is out of
+contract). **A PAPER IS A VIEW OF THE RECORD, NEVER A SOURCE. No unit may cite a draft.**
+
+### WAVE 8 — CLOSED. All four returned; integrated `233a2c3`, `024a9b2`, `c63769b`; audit in `writeup/waves/WAVE8_CLOSE.md`
+
+- **`L-JVER`** (409, `a55ca9b`): gate **`NO`** — and the **largest structural finding in the record**.
+  Its independent operator, put on `L6`'s own nodes and weights, reproduces `J_L6` to `1e-14` at all
+  four points **including P3 where the gate misses by 43%**. Neither program is miscoded:
+  **`J(c) = ∫₀^{T_s}‖W(·,s)‖_{L^{3/2}} ds` IS A LOGARITHMICALLY DIVERGENT INTEGRAL**, at `r→∞`
+  (`w_s ~ ∂_s A/r²` survives DSS annihilation) and at `r→0` (`l = 1`). `CORRECTIONS.md` §52.
+- **`PB2`** (410, `a7ffa1e`): gate **`YES`**. `W4` clause (b) carried by **Tsai 1998 Thm 2** at FULL
+  TEXT (no `L^q`, no Leray–Hopf, no boundary condition); **NRŠ does NOT apply** (`U ∈ L³` exactly,
+  and `∫|U|³` is log-divergent at `α = 1`). Clause (b) **STANDS**. Debt: no BLOG/TECHNICAL, no figure.
+- **`PB1`** (411, `1b2c0f0`): gate **`YES` — `P1` IS KILLED, and that is a GOOD RESULT.** Both effects
+  are in print, one of them twelve years old, and `P1`'s framing word was *silently contradicted by
+  its own bibliography*. **This is the pivot's first return and it paid for itself.**
+- **`V-W7`** (412, `f3d4e0e`): seven defects against the Conductor's own integration. I re-checked all
+  seven at primary: **6 UPHELD, 1 UPHELD IN PART** (`V-W7`'s `2.89873` came from its own re-run and is
+  **not in the banked artefact**) → `CORRECTIONS.md` §50.
+
+### THE TWO CORRECTIONS THAT MATTER MORE THAN ANY WAVE-8 GATE
+
+- **§51 — THE UNDER-CLAIM.** `L6`'s four-rung refinement ladder moved `ρ` **−4.994561%**; `L6-b`'s
+  single ×25 budget step at FIXED `n_dof` moved it **−6.751678%** — **×1.3518 of the whole ladder**.
+  Both numbers correct, both banked, in two units, **and nobody divided one by the other for eleven
+  legs.** `J3` needs `7.2153%` to invert and `6.7517%` is measured one rung up: **margin 0.4636 pp.**
+  Rule: *when a refinement study and a budget study measure the same objective, DIVIDE ONE BY THE
+  OTHER BEFORE REPORTING EITHER.* §45's neighbouring blind spot — **an error shared between two
+  artefacts that no single checker reads together** — and there is no count for it.
+- **§53 — THE SIGN.** The divergence **reaches the minimiser** (`+6.226e-5`, `+6.246e-5`, `+6.212e-5`
+  per decade of `r_max` over `1e6→1e14`; three bands inside 1%). **THE SIGN IS POSITIVE**, which is
+  the ONLY reason `L6`'s, `L6-b`'s and `L5`'s `NO`s survive — **their gate answers stand, their
+  numbers do not.** §52 does **NOT** subsume §51 (×130 apart). `L5`'s `c_mod = 869.288` **FLAGGED,
+  not adjudicated** — its sweep stops ~3 decades short and a log divergence is exactly the
+  exponent-zero case a power-law fit calls "saturation". `W4`(b) **NOT affected** (searched `PB2`'s
+  artefact for `c_mod`/`869.288`/`J(`/`curl F`/`L1_t`: none present).
+
+### WAVE 9 — DISPATCHED 2026-08-19. Plan committed BEFORE dispatch at `11abd04` (`writeup/waves/WAVE9_PLAN.md`), gates verbatim in the briefs
+
+1. **`L5-cmod`** (413, **Lane L, CONSTRUCTION, opens the wave — §3f rule 3, meets the composition
+   floor**). Extends `L5`'s cutoff sweep on its load-bearing row from `ρ≈1.26e3` to `ρ = 1e8`.
+   Gate: *is the per-decade increment in `c_mod` approaching a NONZERO CONSTANT — YES or NO?*
+   **YES ⟹ `c_mod` is a value of the cutoff, not of the functional, and `L5`'s `NO` is STRENGTHENED.**
+   NO ⟹ genuine saturation, `L5` was right, **and that is NOT written as a null result.**
+2. **`P4-DRAFT`** (414, PAPER, ADDITIONAL). §51 is its centre of gravity, not an appendix. Honest
+   tally **2 prospective against 9 retrospective** goes in the paper in those words.
+3. **`P2-DRAFT`** (415, PAPER, ADDITIONAL). **Unblocked because `PB2` cleared `YES`.** Contribution
+   capped verbatim by the user at *"the identification of T₃ as the sole survivor and its
+   ṁ-proportionality, in float64, on a synthetic profile."* Every `J` printed with its truncation.
+4. **`V-W8`** (416, VERIFIER, **dispatched LAST**). **I PLANNED WAVE 8; I MAY NOT VERIFY IT.** Aimed
+   at my own work: §53's arithmetic, **§53's SIGN claim** (*a single negative increment at any reach
+   reopens `L6`, `L6-b` and `L5` simultaneously — escalate immediately, not at wave end*), §53's ×130,
+   §50 item 6, the W7 byte-identity after my misplacement, all nine verbatim retirements, and a
+   **mutation test on `test_headroom.py`** because I wrote it.
+
+**`L6-e` v2 — HELD FOR CORES, not descoped.** Gate pre-committed at `CORRECTIONS.md` §53 (matched
+truncation: report `ρ(J3@20k)` at `nq_r = 60` **and** at `72`; straddling the threshold means the
+ladder is **undecidable at this reach and that is the result**). Held on a MEASUREMENT: load 27 on
+12 cores with `E-FE` live. Dispatch on `E-FE`'s return. **This is a scheduling decision, not a
+scoping one.**
+
+**`E-FE`** (408) is a **LATE RETURN** and **may not influence wave 8's ranking** (ruling `99421dd`).
+
+### USER DECISIONS OWED — recorded, NOT ruled by me
+1. **§49** — does `ORCHESTRATION.md` §6 clause 3 get a recompute-from-primary check beside it?
+   `L-JVER`'s suite is the first in the record claimed 12/12 of that class; `V-W8` is checking it.
+2. **`PB1`'s F2** — `JOURNAL.md:5305` and `ORCHESTRATION.md` §3k:576 give **contradictory accounts of
+   leg 387's arXiv harness**; leg 411 re-measured 10,780 against a recorded 10,756, favouring the
+   journal, which puts leg 382's queue on the wrong reading.
+
+### Open escalations — THREE OPEN, NONE RULED BY ME
+`ESCALATION_W2_SCOPE_2026-08-18.md` (W2 names 3D SINGULARITY, `arXiv:2509.25116` proves
+NONUNIQUENESS; the third reading would make Lane T's re-open condition (i) live);
+`ESCALATION_PUB0C_PUBLISHED_2026-08-18.md`; **`T1`'s ban-wording packet**. **A ban is superseded by a
+MEASUREMENT, never a decision — a defective ban WORDING is a user escalation, and I may not rule it.**
+The **leg-257 lift-clause defect** stays open and EXEMPLAR-FREE.
+
+### Debt carried into wave 9
+`PB2`'s BLOG/TECHNICAL pair (~1 h) and registered figure (~15 min); **`R-bank`'s `--verify` CANNOT
+FAIL** (0 `raise`/`assert`/`sys.exit` in `verify()`) — remedy owed, an instrument that cannot fail is
+not an instrument; the §37 **"assert the NEIGHBOURHOOD, not only the match COUNT"** rule owed to
+`CORRECTIONS.md` (my own defect: `§51`/`§52` landed under `## W7` because a search walked past W5 and
+W6, neither of which carries a `⚠` block); Lane R queue `L5-nov`, `R4-a` (remedy **NOT** specified as
+"Strang" — needs naming before dispatch), `R2`, `R3`.
+
+### Headroom, IN BYTES (`wc -c`), §3j — **no longer measured by hand**
+`test_headroom.py` is always-on in `merge_gate.sh` (§48) and **FAILS rather than skips** when it
+cannot locate the LIVE block. Caps: `STATE.md` 24,576 **and NO ROW OVER 600 CHARS**; `WALLS.md`
+32,768; `OPTIONS.md` 24,576; this LIVE block 8,192. Retirement (verbatim move) is preferred over
+compaction; nine blocks were retired verbatim at wave 8's close.
