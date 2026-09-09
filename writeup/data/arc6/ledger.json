@@ -2,7 +2,7 @@
  "schema": "arc6_ledger_v1",
  "leg": 425,
  "cursor": {
-  "read_through_page": 143,
+  "read_through_page": 166,
   "sections_done": [
    "1-2",
    "3",
@@ -13,7 +13,9 @@
    "8",
    "9",
    "10",
-   "A"
+   "A",
+   "B",
+   "C"
   ]
  },
  "entries": [
@@ -1880,6 +1882,370 @@
    ],
    "role": "Closes the outer end of the cone verification (Theorem 4.6(iv)-(v)): at the outer edge the stress is flat but its direction is smooth and almost purely azimuthal, T_z/T_theta = O(delta^6), so the pulse construction of Section 7 has a well-defined limiting stress direction to realize even where the stress vanishes.",
    "page": 142
+  },
+  {
+   "id": "Lemma B.1",
+   "kind": "Lemma",
+   "section": "B",
+   "hypotheses": [
+    "the weighted analytic coefficient space B_rho: F(Y, eta) = sum_{alpha >= 0} F_alpha(eta) Y^alpha with ||F||_rho = sup_{alpha, beta, eta in I} |d_eta^beta F_alpha| / a_{alpha beta}, a_{alpha beta} = 20^{-alpha} rho^{-beta} beta! binom(alpha+beta, beta) / ((alpha+1)^2 (beta+1)^2) (B.4); Y = Lambda X, D_X = Y d_Y, I F = int_0^Y F, AX(F) = Y^{-1} I F",
+    "nu in {1, 2}; J_nu F the solution G of Y G_YY + nu G_Y = F smooth at Y = 0 with G(0) = 0, coefficients (J_nu F)_{alpha+1} = F_alpha / ((alpha+1)(alpha+nu)) (B.5)"
+   ],
+   "conclusion": "Multiplication is bounded on B_rho (algebra constant C_sq^2 from the convolution bound (B.7)); J_nu, radial averaging, multiplication by Y, I and d_eta I are bounded; and the mixed bound ||J_nu[(d_eta F)(D_X G)]||_rho <= C_rho ||F||_rho ||G||_rho (B.6) holds, also with either derivative omitted, F replaced by AX(F), or extra undifferentiated factors inserted.",
+   "constants": [
+    "C_sq = 8 sum i^{-2} (B.7)",
+    "weight ratios (B.9) a_{alpha,beta}/a_{alpha+1,beta} <= 80 and (B.10) a_{i,k+1}/a_{i+1,k} <= 80 (i+1)/rho",
+    "binomial inequality (B.8)"
+   ],
+   "cites": [
+    "(B.4)",
+    "(B.5)",
+    "(B.6)",
+    "(B.7)",
+    "(B.8)",
+    "(B.9)",
+    "(B.10)"
+   ],
+   "role": "The functional-analytic setting for the Cauchy-Kovalevskaya-type axis construction: a Banach algebra in which one parameter derivative is paid for by one radial degree, so the profile equations (with eta-derivatives and a regular singular point at X = 0) become a contraction.",
+   "page": 145
+  },
+  {
+   "id": "Proposition B.2",
+   "kind": "Proposition",
+   "section": "B",
+   "hypotheses": [
+    "axis data of Section B.1: Pi_0 from Lemma A.5 (analytic, even, Pi_0 <= -c P_*^2 f^2, eta Pi_0' > 0); 0 < j_0 <= .05; U_* = 4 eta + j_0, H_* = D eta + d U_*, W_* = 1 - d U_*' - 2 D eta U_*, Z_* (B.1) with -W_* > 2.8 and Z_*(eta_0) >= c j_0 P_*^2 > 0 at the unique zero eta_0 of H_*; delta_*, sigma_* with chi = H_*^2/(H_*^2 + sigma_*^2) > .99 where |Z_*| <= delta_* (B.2); zeta_* = -L H_*/(H_*^2 + sigma_*^2), xi_0 = Lambda zeta_*, phi_* = exp(Lambda int_0^eta zeta_*) (B.3)",
+    "Lambda >= Lambda_0, then amplitude C >= C_0(Lambda) >= sup_Omega |phi_*| (B.16)"
+   ],
+   "conclusion": "There is an analytic axis profile with vanishing leading residual stress on 0 <= Y = Lambda X <= 4.1 of the form phi = phi_* Phi, U = U_* + Lambda^{-1} u, Pi = Pi_0 + Lambda^{-1} I(g^2 Phi^2), g = phi_*/C (B.12), Phi(0, eta) = 1, u(0, eta) = 0, analytic in Y and eta on a common neighbourhood of [0, 4.1] x I, with sup |d_Y^r d_eta^s (Phi - f_0(Y chi), u + Y Z_*/(2L))| <= C_{r,s}/Lambda (B.13), constants independent of large Lambda and C >= C_0(Lambda); in unscaled radial derivatives C_{r,s} Lambda^{r-1}.",
+   "constants": [
+    "comparison function f_0(z) = sum (-z/2)^alpha / (alpha! (alpha+1)!), with .265 < f_0 <= 1 on [0, 4.1] (B.11)",
+    "equations (B.15): -2L(X phi_XX + 2 phi_X)/phi = S_q, -2L(X U_XX + U_X) = S_n, Pi_X = phi^2/C^2; rescaled: 2(Y Phi_YY + 2 Phi_Y) = -chi Phi + Lambda^{-1} R_1, 2(Y u_YY + u_Y) = -Z_*/L + Lambda^{-1} R_2",
+    "Neumann series for (1 + T)^{-1}, T = J_2 chi/2, ||T^k|| <= (40 M_chi)^k/(k!(k+1)!)",
+    "radius R in (4.1, 20)"
+   ],
+   "cites": [
+    "(4.4)",
+    "(4.5)",
+    "(4.13)",
+    "(B.1)",
+    "(B.2)",
+    "(B.3)",
+    "(B.11)",
+    "(B.12)",
+    "(B.13)",
+    "(B.14)",
+    "(B.15)",
+    "(B.16)",
+    "Lemma A.5",
+    "Lemma B.1"
+   ],
+   "role": "Constructs the regular-axis inner profile with ZERO leading stress as a Lambda^{-1}-perturbation of an explicit Bessel-type profile f_0(Y chi). The large parameter Lambda in the azimuthal datum is what makes both the contraction and the outer-endpoint shear inequality (B.19) work; smoothness across the axis in Cartesian coordinates follows from analyticity in X.",
+   "page": 146
+  },
+  {
+   "id": "Proposition B.3",
+   "kind": "Proposition",
+   "section": "B",
+   "hypotheses": [
+    "the analytic axis profile of Proposition B.2 with Lambda and then C_0(Lambda) increased if necessary; p_1 = p_{s,1} = X Q_s/L, p_2 = p_{s,2} = X N_s/(L E), n_s = N_s/L"
+   ],
+   "conclusion": "Phi >= c_0 > 0 on [0, 4.1] x [-1,1]; S_q >= 2.5 + .95 Lambda L chi (B.17); on 0 < X <= 4.1/Lambda: p_1/X >= c_1 > 0, 0 < p_1 <= C_1, n_s = -2 U_X = Z_*/L + O(Lambda^{-1}) (B.18); at X_0 = 4/Lambda, p_1 + p_2^2/p_1 > 2 + c_ex (B.19) with e.g. c_ex = .2. Phi, log Phi, u, p_1, n_s have bounded derivatives in every fixed parameter order uniformly in C >= C_0(Lambda).",
+   "constants": [
+    "(B.20): |D_X log Phi| + |H_* d_eta log Phi| <= C chi + C/Lambda",
+    "(B.21): -H_c (log phi)_eta >= .95 Lambda L chi - C sigma_*/Lambda",
+    "identities p_1 = a = -2 Y Phi_Y/Phi, n_s = -2 u_Y; positive representation Q_s = int_0^X X' Phi S_q dX' / (X^2 Phi)",
+    "at Y = 4 with chi > .99: f_0 + z f_0' < -.188 so p_1 > 2.3; with chi <= .99: |n_s| >= delta_*/2 and |p_2| = C sqrt(2/Lambda) |n_s|/(phi_* Phi) made large by C"
+   ],
+   "cites": [
+    "(B.2)",
+    "(B.3)",
+    "(B.11)",
+    "(B.13)",
+    "(B.14)",
+    "(B.17)",
+    "(B.18)",
+    "(B.19)",
+    "(B.20)",
+    "(B.21)",
+    "Proposition B.2"
+   ],
+   "role": "Quantitative outputs of the axis profile: positive angular source and the strict shear inequality (B.19) at the outer end of the axis region, proved by a dichotomy (azimuthal contribution where chi > .99, axial contribution where |Z_*| > delta_*) that the choice (B.2) was designed for. These are the entry conditions for the continuation.",
+   "page": 148
+  },
+  {
+   "id": "Lemma B.4",
+   "kind": "Lemma",
+   "section": "B",
+   "hypotheses": [
+    "outer and axis parameters fixed; X_0 = 4/Lambda, X_b = 100, X_i = 110; fixed t-bar > 0 with 4 e^{2 t-bar} < 4.1; for 0 < t_1 <= t-bar the reference continuation (B.22): d_y log phi_r = [1 - sigma((y - t_1)/t_1)] D_X log phi_nat, d_y U_r = [1 - sigma((y-t_1)/t_1)] D_X U_nat on t_1 < y < 2 t_1, then constant in y; pressure and Q_s, N_s by radial integration from the axis with datum Pi_0",
+    "Lambda, then C sufficiently large, then t_1 sufficiently small"
+   ],
+   "conclusion": "On [X_0, X_i] x [-1,1]: S_{q,r} >= .94 L Lambda chi + 2.4, l_r <= 1, v_r := p_{1,r} + p_{2,r}^2/p_{1,r} > 2 + c (B.23); p_{1,r} > 0 and p_{1,r} > 3 for X_b <= X <= X_i. For each fixed k the parameter norms of C E_r, its reciprocal, p_{1,r}, n_{s,r} on [X_0, X_i] are bounded independently of large C and of 0 < t_1 <= t-bar.",
+   "constants": [
+    "(B.24): Pi_r - Pi_0 = C^{-2} int_0^X phi_r^2, ||Pi_r - Pi_0||_{C^k} <= C_k C^{-2}",
+    "(B.25): D_X p_{1,r} = X S_{q,r}/L - l_r p_{1,r}, D_X n_{s,r} + n_{s,r} = S_{n,r}/L",
+    "comparisons p_{1,r}(y) >= p_{1,r}(0) e^{-y} + 1.88 chi (e^y - e^{-y}); p_{1,r}(X) >= p_{1,r}(X_0) X_0/X + 1.2(X - X_0^2/X)"
+   ],
+   "cites": [
+    "(4.16)",
+    "(A.5)",
+    "(B.17)",
+    "(B.20)",
+    "(B.21)",
+    "(B.22)",
+    "(B.23)",
+    "(B.24)",
+    "(B.25)",
+    "Proposition B.2",
+    "Proposition B.3"
+   ],
+   "role": "Provides a reference continuation (freeze the logarithmic slopes) on which the shear inequality v_r > 2 + c persists out to X_i = 110 with bounds uniform in the amplitude C and the transition width t_1. Proposition B.5 then reduces the shear relative to this reference.",
+   "page": 150
+  },
+  {
+   "id": "Proposition B.5",
+   "kind": "Proposition",
+   "section": "B",
+   "hypotheses": [
+    "the reference family of Lemma B.4 with large fixed C and 0 < t_1 <= t_* so its bounds hold uniformly; V_max a t_1-independent upper bound for v_r; 0 < kappa_0 < 1/2",
+    "shear reduction (B.26) on 0 < y < t_1: e_a = (1 - kappa_0) sigma(y/t_1), kappa = 1 - e_a, a = kappa p_{1,r}, D_X U = -kappa X n_{s,r}/2, d_y log phi = -kappa p_{1,r}/2; then kappa = kappa_0 through the reference cutoff and constant-slope interval; at X_b the axial prescription is cut to zero and a interpolated convexly from kappa_0 p_{1,r} to .8"
+   ],
+   "conclusion": "The analytic axis profile continues to X_i with E > 0, unchanged for X <= X_0. Its stress factorizes as T_0 = e_a B_0 with e_a vanishing to infinite order at X_0 and B_0 smooth and nonzero there, B_0(0, eta) = F(X_0, eta) p_{s,r}(X_0, eta) (B.30); |T_0| >= c e^{-t_1^2/y^2}, |d^I T_0| <= C_I e^{-t_1^2/y^2} y^{-N_I} (B.31). The admissible stress cone holds on a first collar and the strict relaxed cone condition on the rest of (X_0, X_i]. At X_i: a = .8, D_X U = 0, p_1 > 2.",
+   "constants": [
+    "(B.27): d_y(log phi - log phi_r) = e_a p_{1,r}/2, d_y(U - U_r) = e_a X n_{s,r}/2",
+    "(B.28): p_s - p_{s,r} = O(y e_a), E_r/E = 1 + O(y e_a)",
+    "(B.29): t_s = p_{2,r} E_r/(p_{1,r} E), v_s = kappa v_r + O(y e_a), P_c = v_r + O(y e_a), J_c = O(y e_a)",
+    "on the final interval a = .8, l = .6, S_q > 1 with constant contribution .6(-W_*) > 1.68; barrier D_X p_1 > X - 1.2 > 0 at p_1 = 2"
+   ],
+   "cites": [
+    "(4.11)",
+    "(4.16)",
+    "(B.26)",
+    "(B.27)",
+    "(B.28)",
+    "(B.29)",
+    "(B.30)",
+    "(B.31)",
+    "Lemma 4.5",
+    "Lemma A.9",
+    "Lemma B.4"
+   ],
+   "role": "Switches the leading stress on smoothly at X_0 = X_a: the flat factor e_a is what makes T_0 vanish to infinite order at the inner edge of the annulus (Theorem 4.6(iv)) while its DIRECTION B_0 is smooth and nonzero, so the pulse construction has a limiting direction to realize. Inner counterpart of Proposition A.10.",
+   "page": 151
+  },
+  {
+   "id": "Corollary B.6",
+   "kind": "Corollary",
+   "section": "B",
+   "hypotheses": [
+    "the continuation of Proposition B.5; a compact complex parameter neighbourhood inside that of Proposition B.2 on which Phi has no zeros"
+   ],
+   "conclusion": "There is t_c > 0 with t_c < t_1 and 4 e^{t_c} < 4.1 such that E/sqrt(2X), U, V_0/X, Pi on [0, X_0 e^{t_c}] x [-1,1] are smooth in (X, eta) through X = 0 and analytic in eta on one complex neighbourhood, with every fixed radial derivative bounded on a smaller neighbourhood. On X_0 < X <= X_0 e^{t_c} the admissible stress cone and the factorization (B.30) hold. All subsequent profile modifications are supported strictly to the right of X_0 e^{t_c}.",
+   "constants": [
+    "t_c (not uniform as C grows or transition widths shrink)"
+   ],
+   "cites": [
+    "(B.26)",
+    "(B.30)",
+    "Proposition B.2",
+    "Proposition B.5"
+   ],
+   "role": "Reserves the analytic rectangle near the axis (needed for Theorem 4.6(i) and the analytic-in-eta requirement of the inner collar) from all later modifications; X_an in Appendix C is chosen inside it.",
+   "page": 153
+  },
+  {
+   "id": "Lemma B.7",
+   "kind": "Lemma",
+   "section": "B",
+   "hypotheses": [
+    "outer-profile data, axis data, Lambda, and a finite parameter order k fixed; l_i = log(C E(X_i, eta)), G_i = U(X_i, eta); omega_fin the total logarithmic length of the final axial cutoff and the a -> .8 interpolation in Proposition B.5"
+   ],
+   "conclusion": "||l_i||_{C^k_eta} <= B_k and ||G_i - U_*||_{C^k_eta} <= C^nat_k/Lambda + C^join_k(Lambda)(t_1 + kappa_0 + omega_fin) (B.32), with C^nat_k independent of Lambda and large C, and B_k, C^join_k(Lambda) independent of large C and of smaller transition widths.",
+   "constants": [
+    "||log phi(X_i)||_{C^k} <= ||log phi_* + log Phi(4, .)||_{C^k} + (1/2)(M_k + .8) L_0, L_0 = log(X_i/X_0)"
+   ],
+   "cites": [
+    "(B.1)",
+    "(B.13)",
+    "(B.32)",
+    "Lemma B.4",
+    "Proposition B.5"
+   ],
+   "role": "Bounds the state at X_i independently of the amplitude C, so the transition length T_sh >= 20 ||sigma'|| (B_0 + ||log f||) (B.33) to the reference form E = P_* f (X/X_R)^{1/10} can be fixed BEFORE C. This ordering is what lets a large C push X_R = X_i (C P_*)^{10} outward and make the inner moment discrepancies small (B.38)-(B.39).",
+   "page": 154
+  },
+  {
+   "id": "Proposition B.8",
+   "kind": "Proposition",
+   "section": "B",
+   "hypotheses": [
+    "the profile of Proposition B.5 continued by (B.34): log E = -log C + y_i/10 + (1 - sigma(y_i/T_sh)) l_i + sigma(y_i/T_sh) log f, U = G_i, y_i = log(X/X_i), so l in [.55, .65], a in [.7, .9], b_s = 0, S_q > 1, p_1 > 2 preserved by the barrier; X_R = X_i (C P_*)^{10}, x = X/X_R, X_sep = X_i e^{T_sh}",
+    "sufficiently large amplitude C (so x_sep = e^{T_sh}/(C P_*)^{10} < e^{-8}), followed by sufficiently small activation transitions; restoration of G_i to 4 eta on -8 < log x < -7; two U bumps and three E bumps on -6 < log x < -5 with weights (1, f x^{3/5}) and (x^{1/2}, f x^{1/10}, f x^{-9/10})"
+   ],
+   "conclusion": "The profile can be continued to log x = -5 preserving the strict relaxed cone condition so that its fields, pressure Pi, and all five radial moment functions M, I, J, S, C_p agree EXACTLY with those of the reference inner profile (A.7); it can then follow the reference outer profile without changing the pressure datum or the subsequent Q_s, N_s (Lemma 4.4). Tolerance (B.36): Q_s >= Q_min/2, E >= e_*/2, |a - .8| <= .1, |N_s/(E Q_s)| <= w_*, |b_s| <= .1/(1 + w_*), giving v_s < 1 and P_c = X_R x G/L > 2 for large X_R (B.37).",
+   "constants": [
+    "normalized moment formulas (B.35) in which X_R cancels",
+    "(B.38) x_sep = e^{T_sh}/(C P_*)^{10}",
+    "(B.39): ||M^||, ||S^|| <= C x_sep; ||I^||, ||J^|| <= C C^{-1} x_sep^{3/2}; ||C_p|| <= C C^{-2} at x_sep",
+    "G >= 6 Q_s/7 >= 3 Q_min/7 (B.37)"
+   ],
+   "cites": [
+    "(4.15)",
+    "(4.16)",
+    "(A.7)",
+    "(A.25)",
+    "(B.32)",
+    "(B.33)",
+    "(B.34)",
+    "(B.35)",
+    "(B.36)",
+    "(B.37)",
+    "(B.38)",
+    "(B.39)",
+    "Corollary A.3",
+    "Lemma A.2",
+    "Lemma 4.4",
+    "Proposition B.5"
+   ],
+   "role": "The exact join of axis and outer profiles: five bumps restore the five cumulative integrals exactly at log x = -5, and Lemma 4.4 then propagates equality of pressure and Q_s, N_s along the whole outer profile. This closes the loop that lets the outer profile (built first, with Pi_0 as datum) and the axis profile (built from Pi_0) be one profile.",
+   "page": 155
+  },
+  {
+   "id": "Corollary B.10",
+   "kind": "Corollary",
+   "section": "B",
+   "hypotheses": [
+    "Propositions B.5 and B.8, the preservation of p_1 > 2 along (B.34), and Corollary B.6; parameters chosen in the order (B.40): M_d, T_d, P_*, lambda, h -> matching tolerance, j_0 -> delta_*, sigma_*, Lambda -> (B_k), T_sh -> C, X_R -> kappa_0, t_1, widths of final transitions; radial frequency N for cone realization chosen after all of these"
+   ],
+   "conclusion": "The analytic axis profile of Proposition B.2 admits a smooth continuation with E > 0 for X > 0 matching the reference outer profile at log(X/X_R) = -5 with exact fields, pressure, and radial moment functions. It has vanishing leading residual stress through X_0, then an inner collar analytic in eta satisfying the admissible stress cone with flat factor (B.30), and the strict relaxed cone condition thereafter up to the matching point. Its finite parameters can be chosen in the order (B.40).",
+   "constants": [
+    "the parameter order (B.40) (Remark B.9)"
+   ],
+   "cites": [
+    "(B.30)",
+    "(B.34)",
+    "(B.40)",
+    "Proposition B.2",
+    "Proposition B.5",
+    "Proposition B.8",
+    "Corollary B.6",
+    "Remark B.9"
+   ],
+   "role": "Summary statement of Appendix B: the complete joined profile with a definite parameter order. It is the input profile of Appendix C, which upgrades the relaxed cone to the admissible cone on the joining interval.",
+   "page": 157
+  },
+  {
+   "id": "Lemma C.1",
+   "kind": "Lemma",
+   "section": "C",
+   "hypotheses": [
+    "a, b_s, p_s smooth on I x [-1,1], a > 0, t_s = -b_s/a, v_s = a(1 + t_s^2); the strict relaxed cone inequalities (4.21) hold everywhere and the admissible stress cone holds near both radial boundary components of I = [X_-, X_+]"
+   ],
+   "conclusion": "There is a smooth loop (a_L, -b_L)(X, eta, phi), period one in phi, a_L > 0, with int_0^1 (a_L, -b_L) dphi = (a, -b_s) (C.1); the four cone gaps satisfy Psi_j(a_L, b_L, p_s) >= kappa_L > 0 on I x [-1,1] x (R/Z) (C.2); and the loop equals the original shear on the boundary collars dist(X, dI) < delta_d (C.3).",
+   "constants": [
+    "tilted family t(theta'; mu) = t_s + d_0 (e^{mu p_{s,2} sin theta'}/M_e(mu p_{s,2}) - 1)/p_{s,2}, M_e(z) = <e^{z sin theta'}> (C.4)-(C.5), 0 < d_0 < (1/2) min(P_c(t_s) - 2)",
+    "variance V(mu, p) = d_0^2 [M_e(2 mu p)/M_e(mu p)^2 - 1]/p^2, strictly increasing in mu (C.6), unbounded; mu_max with V > 3/min a (C.7)",
+    "delta_L with U(P_c(t), J_c(t)) > 2 + delta_L (C.8); v_* = 2 + delta_L/2, rho = zeta_L(v_s)^2 (v_* - v_s), v = v_s + rho (C.9); solve V(mu, p_{s,2}) = rho/a (C.10)",
+    "reparametrization dphi/dtheta' = a(1 + t^2)/(2 pi v), (a_L, -b_L) = v(1, t)/(1 + t^2)"
+   ],
+   "cites": [
+    "(4.21)",
+    "(4.35)",
+    "(C.1)",
+    "(C.2)",
+    "(C.3)",
+    "(C.4)",
+    "(C.5)",
+    "(C.6)",
+    "(C.7)",
+    "(C.8)",
+    "(C.9)",
+    "(C.10)"
+   ],
+   "role": "Convex-integration-style lemma at the level of the profile shear: a relaxed-cone shear is the average of a loop of admissible-cone shears with v > 2, with uniform gap kappa_L. It exploits that the cone condition constrains only the shear, not the moments p_s, which are held fixed.",
+   "page": 158
+  },
+  {
+   "id": "Proposition C.2",
+   "kind": "Proposition",
+   "section": "C",
+   "hypotheses": [
+    "the fixed input profile E, U, Pi from Corollary B.10, Proposition A.4, and Proposition A.7 with stress nonzero exactly on (X_a, X_b), relaxed cone throughout, admissible cone on an inner collar and from the intermediate power-law interval onward; compact I = [X_-, X_+] in (X_a, X_b) containing every possible failure point; the loop of Lemma C.1 with zero-mean periodic antiderivatives d_phi A = -(1/2)(a_L - a), d_phi B = (1/2) E (b_L - b_s) (C.11)",
+    "modulated profiles E_N = E exp(A(X, eta, N log X)/N), U_N = U + B(X, eta, N log X)/N (C.12); a sufficiently large finite integer N; a correction (two U bumps, three E bumps) in the first reserved patch of the intermediate power-law interval"
+   ],
+   "conclusion": "Smooth profiles E~, U~, Pi~ with E~ > 0 for X > 0 satisfying the admissible stress cone throughout (X_a, X_b). Both endpoint collars, the axis rectangle, and the two patches reserved for higher-order and mean corrections are unchanged. (m~, Pi~, Q_s~, N_s~) = (m, Pi, Q_s, N_s) beyond the first correction patch (C.17); before it, profile values and each fixed number of eta-derivatives differ from the input by O(N^{-1}).",
+   "constants": [
+    "exact modulated shears (C.13): a_N = a_L - 2 D_X A/N, b_N = e^{-A/N}(b_L + 2 D_X B/(N E))",
+    "(C.14)-(C.16): profile, moment, pressure, and p_s changes O(N^{-1}) in each fixed eta-order (radial derivatives of the profile difference may be O(N^{r-1}))",
+    "moment-correction block weights: (M, J): 1, H (powers 0, -lambda); (I, S, C_p): sqrt(2X), -E, E/X (powers 1/2, -1/2 - lambda, -3/2 - lambda)"
+   ],
+   "cites": [
+    "(4.15)",
+    "(4.16)",
+    "(C.11)",
+    "(C.12)",
+    "(C.13)",
+    "(C.14)",
+    "(C.15)",
+    "(C.16)",
+    "(C.17)",
+    "Lemma C.1",
+    "Lemma A.1",
+    "Lemma A.2",
+    "Corollary A.3",
+    "Lemma 4.4"
+   ],
+   "role": "Realizes the admissible stress cone by a HIGH-FREQUENCY radial modulation of the profiles: the shear (a radial derivative) changes by order one while profile values and cumulative moments change by O(1/N). The O(1/N) moment error is then removed exactly on a reserved patch. N is fixed before q and every later band and stage.",
+   "page": 161
+  },
+  {
+   "id": "Proposition C.3",
+   "kind": "Proposition",
+   "section": "C",
+   "hypotheses": [
+    "the corrected profiles E, U, Pi of Proposition C.2 and all quantities formed from them; the preserved edge factorizations (B.30) at X_a and (A.48)-(A.49) at X_b; t_1 > 0 the fixed activation width from Proposition 4.10; weight zeta = exp(-t_1^2/y_a^2 - 4/y_b^2) with y_a = log(X/X_a), y_b = log(X_b/X), delta = min{1, y_a, y_b} (C.18), zero outside (X_a, X_b)"
+   ],
+   "conclusion": "The profiles satisfy ALL conclusions of Theorem 4.6 with the weight (C.18): (i) regularity and Cartesian smoothness across the axis, analytic rectangle near the axis, pressure normalization (4.25); (ii) stress support exactly (X_a, X_b), (4.13) for X <= X_a, exact tangential residual identities; (iii) F > 0, a > 0, v_s > 2 on the closed annulus, direction n = T_0/|T_0| smooth up to both edges with inner limit a positive multiple of a(1, t_s) and outer limit (1, 0), and uniform margins n_theta + t_s n_z >= kappa, (v_s - 2)(n_z - t_s n_theta)^2 <= (2 - kappa)(n_theta + t_s n_z)^2; (iv) |T_0| >= c zeta, |d^I T_0| <= C_I zeta delta^{-m_I} (C.19); (v) exact exterior moments (4.28), heat exterior (4.29), V_0 = 0 beyond X_v = X_end; (vi) I_pos, I_mean the third and fourth reserved intervals with (4.30) retained, sup I_pos < inf I_mean.",
+   "constants": [
+    "zeta of (C.18)",
+    "kappa in (0, 2)",
+    "outer direction n = (b_theta, y_b^6 b_z)/sqrt(b_theta^2 + y_b^12 b_z^2)"
+   ],
+   "cites": [
+    "(4.4)",
+    "(4.5)",
+    "(4.7)",
+    "(4.11)",
+    "(4.13)",
+    "(4.25)",
+    "(4.28)",
+    "(4.29)",
+    "(4.30)",
+    "(A.48)",
+    "(A.49)",
+    "(A.51)",
+    "(A.56)",
+    "(B.30)",
+    "(B.31)",
+    "(C.17)",
+    "(C.18)",
+    "(C.19)",
+    "Theorem 4.6",
+    "Proposition 4.2",
+    "Proposition 4.10",
+    "Proposition A.4",
+    "Proposition A.7",
+    "Proposition A.10",
+    "Proposition B.2",
+    "Proposition B.5",
+    "Corollary B.6",
+    "Lemma A.6",
+    "Lemma A.8",
+    "Proposition C.2"
+   ],
+   "role": "The proof of Theorem 4.6: assembles Appendices A, B, C into the leading profile with an admissible-cone stress supported exactly in the annulus, flat at both edges with smooth limiting directions, plus the reserved intervals and exterior conditions that Sections 5-9 consume. Every downstream construction reads its hypotheses off this statement.",
+   "page": 163
   }
  ],
  "hard_pages": [
@@ -1940,6 +2306,18 @@
    "pages": "129-137",
    "section": "A",
    "why": "Proposition A.4 and its proof (A.2, A.3, A.5): the outer profile is a schedule of a dozen logarithmic stages with parameters fixed in a strict order (A.6) and each stage's cone verification uses a different mechanism (variation of constants (A.26), lambda-uniform lower bound (A.27), the pulse expansion (A.28)-(A.30) with explicit quadratic maxima .74 and 1.68, the h^8 / h^6 hold factors (A.17)). The axial pulse amplitude is the unique root of (A.19) on the bracket [.9, 1.2] with K_b bounded only as .20 < K_b <= 1/4. A re-derivation must reproduce these numbers; an instantiation must build the schedule and verify the cone test (A.24) pointwise. The ordering constraints (lambda before h, X_R last, T_f 'sufficiently large') are the places a numerical port can silently violate.",
+   "leg": 425
+  },
+  {
+   "pages": "146-150",
+   "section": "B",
+   "why": "Proposition B.2/B.3: the axis profile is built in a weighted analytic space (B.4) where a parameter derivative costs a radial degree, the angular operator 1 + T is inverted by a Neumann series with factorial decay, and the outer-endpoint inequality (B.19) is proved by a dichotomy on chi with explicit numerics (f_0 + z f_0' < -.188 at t = 1.98, p_1 > 2.3). The requirement that |g| = |phi_*/C| <= 1 hold on a COMPLEX neighbourhood (B.16), because phi_* grows exponentially in Lambda, is easy to miss and is what makes the Cauchy estimates uniform in both large parameters.",
+   "leg": 425
+  },
+  {
+   "pages": "158-160",
+   "section": "C",
+   "why": "Lemma C.1: the loop construction is a tilted-exponential family (C.4)-(C.5) whose variance must be shown strictly increasing and unbounded in mu uniformly over p_{s,2} INCLUDING p_{s,2} = 0 (a removable singularity), then a reparametrization of the circle fixes both averages at once because a<1 + t^2> = v_s + a V = v. The smoothness of mu through rho = 0 requires the signed square root of V. Whether the relaxed cone (4.21) can always be averaged into the admissible cone is the whole content of Appendix C; a numerical port must check the four gaps (C.2) on the loop pointwise.",
    "leg": 425
   }
  ]
