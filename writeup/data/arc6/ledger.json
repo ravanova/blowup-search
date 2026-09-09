@@ -2,14 +2,15 @@
  "schema": "arc6_ledger_v1",
  "leg": 425,
  "cursor": {
-  "read_through_page": 87,
+  "read_through_page": 99,
   "sections_done": [
    "1-2",
    "3",
    "4",
    "5",
    "6",
-   "7"
+   "7",
+   "8"
   ]
  },
  "entries": [
@@ -951,6 +952,227 @@
    ],
    "role": "The exact covariance bookkeeping for one correction step: prescribed increment Sigma plus THREE retained higher-order terms. Section 9's exponent accounting for operation 2 is this corollary read off term by term.",
    "page": 87
+  },
+  {
+   "id": "Proposition 8.1",
+   "kind": "Proposition",
+   "section": "8",
+   "hypotheses": [
+    "u has the divergence-free decomposition (8.1): slow base (b,V,G), angularly invariant correction (beta,v,gamma), wave field w with <w>_theta = 0, W_ab = <w_a w_b>_theta (all curl remainders included)",
+    "p_m the angularly invariant pressure correction; Sigma_a = Q^{2A} T_phys,a the normalized base stress components from (5.41)",
+    "the base's flat residual is retained as a separate additive error (every fixed-order derivative vanishes faster than every power of q)"
+   ],
+   "conclusion": "The angular mean of the remaining normalized residual is (D_r p_m - g_r, E_theta, E_z) with E_theta, E_z, g_r given in divergence form by (8.3): each is t_* (increment) + radial divergence (D_r + e/R) of quadratic fluxes + D_z of axial fluxes - eps (Delta_0 - R^{-2} or Delta_0)(increment) - radial divergence of Sigma; g_r additionally carries the centrifugal term (2Vv + v^2 + W_thetatheta)/R.",
+   "constants": [
+    "e in {0,1,2} radial weights",
+    "eps",
+    "Delta_0 = D_r^2 + R^{-1} D_r + D_z^2"
+   ],
+   "cites": [
+    "(8.1)",
+    "(8.3)",
+    "(5.41)",
+    "(6.6)",
+    "(3.7)",
+    "(3.9)"
+   ],
+   "role": "Defines the exact mean-residual sources the whole of Section 8 inverts. Divergence form is what makes the integrated constraints (8.16) endpoint terms; the retention of W (including curl remainders) is what lets the wave covariance enter with a definite sign through W_rtheta, W_rz.",
+   "page": 89
+  },
+  {
+   "id": "Lemma 8.2",
+   "kind": "Lemma",
+   "section": "8",
+   "hypotheses": [
+    "correction stage j, exponent alpha, a band and its common torus y = Y_{i0}, e in {0,1,2}",
+    "f in M_alpha a smooth scalar coefficient: |d^I f| <= C_{j,I} eps^alpha S_*^{B_{j,I}} zeta delta^{-B_{j,I}} for every fixed multi-index I in (R,Z,T,y), smooth zero extension",
+    "operators (8.4)-(8.6): I, J radial integrals along the torus phase path with shift M((R')^{d_r} - R^{d_r}) v_r, M = Lambda_g^{i0} Q^{d_r}/2; I_c = I - chi_m J with chi_m a fixed slow cutoff varying only in a fixed interior portion of the shell; D_e = D_r + e/R, T_e f = R^{-e} I_c(R^e f), A_e f = R^{-e}(d_R chi_m) J(R^e f)"
+   ],
+   "conclusion": "T_e f is supported in the same active shell and the (Z,T)-projection of the input support, lies in M_alpha, and satisfies the exact radial identity D_e T_e f = f - A_e f (8.7). If int R^e <f>_Y dR = 0 at every (Z,T) then <A_e f>_Y = 0 and for every fixed I and integer p >= 1, |d^I A_e f| <= C_{j,I,p} eps^{alpha + p kappa_s} S_*^{B} zeta delta^{-B} (8.8): the cutoff remainder is flat as q -> 0 at every fixed derivative order. If f is Y-independent with zero weighted integral, A_e f = 0 identically.",
+   "constants": [
+    "kappa_s",
+    "M = Lambda_g^{i0} Q^{d_r}/2 with M^{-1} <= C eps^{kappa_s} S_*^{rho_g}",
+    "Diophantine constant of (6.7), loss of p+3 torus derivatives per (8.10)",
+    "d_r"
+   ],
+   "cites": [
+    "(8.4)",
+    "(8.5)",
+    "(8.6)",
+    "(8.7)",
+    "(8.8)",
+    "(8.9)",
+    "(8.10)",
+    "(6.4)",
+    "(6.7)",
+    "Lemma 6.2",
+    "Definition 6.4"
+   ],
+   "role": "The compactly supported radial inverse for all three cylindrical weights. Its only price is a cutoff remainder A_e f, which is flat exactly when the weighted auxiliary-mean integral vanishes: this is the mechanism that keeps the force compactly supported. Flatness is via torus Fourier inversion (8.10) gaining eps^{kappa_s} per integration by parts; no estimate uniform in p.",
+   "page": 90
+  },
+  {
+   "id": "Proposition 8.3",
+   "kind": "Proposition",
+   "section": "8",
+   "hypotheses": [
+    "radial operators of Lemma 8.2 and a fixed bump rho in C_c^inf(I_m) on the reserved mean patch (Theorem 4.6(vi)), int rho dR = 1, independent of angular and auxiliary variables",
+    "(i) g_r a smooth shell-supported scalar source; (ii) gamma_d a smooth shell-supported desired axial increment with int R <gamma_d>_Y dR = 0 at every (Z,T)",
+    "normalizations (8.11): u_* = Q^A u_phys, g_* = Q^{2A+1/2} g_phys, p_* = Q^{2A} p_phys, Psi_* = Q^{A-1/2} Psi_phys"
+   ],
+   "conclusion": "(i) With P = int <g_r>_Y dR and p_m = T_0(g_r - rho P) (8.12): D_r p_m - g_r = -rho P - A_0(g_r - rho P), d_R <p_m>_Y = <g_r>_Y - rho P (8.13); g_r in M_alpha gives P in S_alpha, p_m in M_alpha, and the cutoff remainder has zero auxiliary mean and is flat. (ii) With Psi_* = T_1 gamma_d, Delta beta = -eps d_Z Psi_*, Delta gamma = (D_r + 1/R) Psi_* = gamma_d - A_1 gamma_d (8.14): (Delta beta, 0, Delta gamma) is exactly divergence-free, <Delta gamma>_Y = <gamma_d>_Y, Psi_*, Delta gamma in M_alpha, Delta beta in M_{alpha+1}; Y-independent gamma_d gives Delta gamma = gamma_d pointwise. Both are compactly supported in the active shell.",
+   "constants": [
+    "the factor eps = Q^{1/2 - D} = Q^h in Delta beta",
+    "I_m = {sqrt(2X) : X in I_mean}"
+   ],
+   "cites": [
+    "(8.4)",
+    "(8.11)",
+    "(8.12)",
+    "(8.13)",
+    "(8.14)",
+    "Lemma 8.2",
+    "Theorem 4.6"
+   ],
+   "role": "Pressure reconstruction isolates the single scalar obstruction P (a bump times a number) and the azimuthal-potential realization turns any zero-flux axial target into an exactly divergence-free increment. Both are the outputs the correction cycle (Prop 9.6) calls after each wave update.",
+   "page": 92
+  },
+  {
+   "id": "Proposition 8.4",
+   "kind": "Proposition",
+   "section": "8",
+   "hypotheses": [
+    "(beta,v,gamma) and w smooth shell-supported corrections as in (8.1)",
+    "the two moments M_theta = int R^2 <v>_Y dR and M_z = int R <gamma>_Y dR of (8.2) vanish at every (Z,T)",
+    "p_m reconstructed from g_r by (8.12); defects J_theta, J_z and c_rho = (1/2) int R^2 rho dR defined by (8.15)"
+   ],
+   "conclusion": "int R^2 <E_theta>_Y dR = eps d_Z J_theta and int R <E_z>_Y dR = eps d_Z (J_z + c_rho P) (8.16): the weighted radial integrals of the two tangential mean residuals are exact axial derivatives of the flux defects.",
+   "constants": [
+    "c_rho (may depend on (Z,T) since rho scales with the moving q)",
+    "normalization table (8.17)"
+   ],
+   "cites": [
+    "(8.2)",
+    "(8.3)",
+    "(8.12)",
+    "(8.15)",
+    "(8.16)",
+    "(8.17)",
+    "Proposition 8.1"
+   ],
+   "role": "The compatibility identity: radial divergences and viscous terms integrate to zero by compact support and two integrations by parts, the time and axial-viscous terms are derivatives of the zero moments, and only the axial fluxes survive. It is what allows a compactly supported tangential stress to represent the mean residual up to two explicit bumps (Cor 8.5).",
+   "page": 94
+  },
+  {
+   "id": "Corollary 8.5",
+   "kind": "Corollary",
+   "section": "8",
+   "hypotheses": [
+    "hypotheses of Proposition 8.4",
+    "fixed interior bumps sigma_theta, sigma_z in the mean patch with int R^2 sigma_theta dR = int R sigma_z dR = 1 (chart representatives of fixed physical bumps)"
+   ],
+   "conclusion": "The covariance targets H_theta = -T_2(<E_theta>_Y - sigma_theta eps d_Z J_theta), H_z = -T_1(<E_z>_Y - sigma_z eps d_Z (J_z + c_rho P)) (8.18) are Y-independent, compactly supported in the active shell, and satisfy (D_r + 2/R) H_theta = -<E_theta>_Y + sigma_theta eps d_Z J_theta, (D_r + 1/R) H_z = -<E_z>_Y + sigma_z eps d_Z (J_z + c_rho P) exactly (zero cutoff remainder). They vanish wherever the integrands vanish for every R; no enlargement of Z-support.",
+   "constants": [
+    "eps d_Z factors retained on both bump terms"
+   ],
+   "cites": [
+    "(8.16)",
+    "(8.18)",
+    "Lemma 8.2",
+    "Proposition 8.4"
+   ],
+   "role": "Produces the stress pair that the next wave update must realize as added covariance (through W_rtheta, W_rz in (8.3)). It reduces the auxiliary-averaged mean correction to three scalar defects P, J_theta, J_z plus a compactly supported stress, with the displayed eps d_Z gain kept.",
+   "page": 95
+  },
+  {
+   "id": "Lemma 8.6",
+   "kind": "Lemma",
+   "section": "8",
+   "hypotheses": [
+    "N = v_t . d_y on T^2 with v_t as in (6.2) (Diophantine by (6.7)); F smooth with zero Haar mean",
+    "for the update: E_theta, E_z in M_alpha normalized angularly invariant residual coefficients; the zero-auxiliary-mean parts E_theta^o, E_z^o; normalized fast time derivative c_{i0} N_{i0}, c_{i0} = T_g^{i0} Q^{1+h}, with t_* = -eps d_T + c_{i0} N_{i0}"
+   ],
+   "conclusion": "N phi = F has a unique smooth zero-mean solution N^{-1} F = sum_{k != 0} F^(k) e^{2 pi i k.y}/(2 pi i v_t . k) with ||N^{-1} F||_{C^m_y} <= C_m ||F||_{C^{m+4}_y} (8.19). The chart updates Delta v = -c_{i0}^{-1} N_{i0}^{-1} E_theta^o, gamma_d = -c_{i0}^{-1} N_{i0}^{-1} E_z^o (8.20), c_{i0}^{-1} <= C S_*, lie in M_alpha with zero auxiliary mean at every slow and radial point; the realized increment (Delta beta, Delta v, Delta gamma) = (-eps d_Z T_1 gamma_d, Delta v, gamma_d - A_1 gamma_d) in M_{alpha+1} x M_alpha x M_alpha (8.21) is divergence-free, preserves both constraints (8.2), and satisfies c_{i0} N_{i0} Delta v = -E_theta^o, c_{i0} N_{i0} Delta gamma = -E_z^o + c_{i0} N_{i0} a (8.22) with a = -A_1 gamma_d flat at every fixed order.",
+   "constants": [
+    "four torus derivatives lost per output derivative",
+    "c_{i0}^{-1} <= C S_*",
+    "chart transfer (8.23): N_abs P_i = T_g^i P_i N_i via J_g v_t = T_g v_t"
+   ],
+   "cites": [
+    "(6.2)",
+    "(6.4)",
+    "(6.6)",
+    "(6.7)",
+    "(8.8)",
+    "(8.14)",
+    "(8.19)",
+    "(8.20)",
+    "(8.21)",
+    "(8.22)",
+    "(8.23)",
+    "Proposition 8.3"
+   ],
+   "role": "Inverts the fast auxiliary-time derivative on the torus-oscillating part of the mean residual: the angularly invariant but Y-dependent residual is killed exactly by a velocity increment rather than by a stress, at the cost of one factor S_* and four torus derivatives. Together with Cor 8.5 it exhausts the mean residual except for the three integral defects.",
+   "page": 95
+  },
+  {
+   "id": "Lemma 8.7",
+   "kind": "Lemma",
+   "section": "8",
+   "hypotheses": [
+    "the fixed slow base satisfies (8.24) on the reserved interval I_m: G_q = 0, V_q = a(eta) x^{-1-2 lambda} with |a(eta)| >= a_0 > 0, lambda > 0 fixed, a(eta) = 2^{1/2+lambda} c_patch (1 + eta^2)^{-1}",
+    "arbitrary scalar targets (P, J_theta, J_z) at each (Z,T), normalized row by row as in (8.17)"
+   ],
+   "conclusion": "There are three fixed azimuthal bump profiles and two fixed axial bump profiles (geometric copies eta_j(x) = a_j^{-1} eta_0(x/a_j), a_j = e^{jd}, on disjoint subintervals) such that a unique linear combination (Delta v, gamma_d) solves the five equations (8.25): int R^2 Delta v dR = 0, int R gamma_d dR = 0, int (2V/R) Delta v dR = -P, int R^2 (G Delta v + V gamma_d) dR = -J_theta, int (2RG gamma_d - RV Delta v) dR = -J_z. Increments are independent of angular and auxiliary variables, linear in the targets; targets in S_alpha give increments in M_alpha (constants may depend on lambda); the azimuthal realization has Delta gamma = gamma_d exactly and Delta beta in M_{alpha+1}; both constraints (8.2) preserved exactly.",
+   "constants": [
+    "lambda > 0",
+    "a_0",
+    "d > 0 and the Vandermonde determinants in e^{dp} for powers p in {2, -2-2 lambda, -2 lambda} (angular block) and {1, 1-2 lambda} (axial block)",
+    "mu_p = int x^p eta_0 dx > 0",
+    "matrices A_theta (3x3), A_z (2x2) on p. 98"
+   ],
+   "cites": [
+    "(4.30)",
+    "(5.18)",
+    "(5.44)",
+    "(8.2)",
+    "(8.14)",
+    "(8.17)",
+    "(8.24)",
+    "(8.25)",
+    "Proposition 5.5",
+    "Lemma 8.2"
+   ],
+   "role": "The finite-dimensional linear map that removes the three integral defects while preserving the two velocity moments. Its invertibility is a Vandermonde argument on the power-law patch (8.24); the inverse may deteriorate as lambda -> 0 and no uniformity there is claimed.",
+   "page": 97
+  },
+  {
+   "id": "Lemma 8.8",
+   "kind": "Lemma",
+   "section": "8",
+   "hypotheses": [
+    "slow base satisfies (8.24) with fixed lambda > 0, |a(eta)| >= a_0 > 0",
+    "(beta,v,gamma) a smooth divergence-free mean correction supported in the active shell; base and wave field w fixed; g_r and (P,J_theta,J_z) formed by (8.3),(8.12),(8.15); Lemma 8.7 applied with these defects as targets, gamma_d realized by (8.14); updated field (beta+Delta beta, v+Delta v, gamma+Delta gamma)",
+    "for the estimate: on the support of the azimuthal potential every fixed derivative of b is bounded by C_I eps S_*^{B_I} and those of slow V, G by C_I S_*^{B_I}; v, gamma in M_0.9, beta in M_1.9; targets in S_alpha with alpha >= 0.9"
+   ],
+   "conclusion": "R_g := g_r,new - g_r - (2V/R) Delta v is the explicit quadratic-plus-transport expression (8.26); the recomputed defects are P_new = int <R_g>_Y dR, (J_theta)_new = int R^2 <gamma Delta v + v Delta gamma + Delta gamma Delta v>_Y dR, (J_z)_new = int R <2 gamma Delta gamma + (Delta gamma)^2>_Y dR - (1/2) int R^2 <R_g>_Y dR (8.27): all terms linear in the base and the old defects cancel exactly. Under the stated bounds, R_g in M_{alpha + 0.9 - 2 kappa_s} and (P_new, (J_theta)_new, (J_z)_new) in S_{alpha + 0.9 - 2 kappa_s}.",
+   "constants": [
+    "gain 0.9 - 2 kappa_s per application",
+    "exponent table p. 99: -t_* Delta beta in M_{alpha+2}; (D_r+1/R)(2b Delta beta) in M_{alpha+2-kappa_s}; D_z(b Delta gamma + G Delta beta) in M_{alpha+2}; 2v Delta v/R in M_{alpha+0.9}; (Delta v)^2/R in M_{2 alpha}; eps(Delta_0 - R^{-2}) Delta beta in M_{alpha+2-2 kappa_s}"
+   ],
+   "cites": [
+    "(8.3)",
+    "(8.12)",
+    "(8.14)",
+    "(8.15)",
+    "(8.24)",
+    "(8.25)",
+    "(8.26)",
+    "(8.27)",
+    "Lemma 8.7"
+   ],
+   "role": "The contraction estimate for the moment correction: one application of the five-dimensional map replaces defects of size eps^alpha by defects of size eps^{alpha + 0.9 - 2 kappa_s}. This is the gain the correction cycle in Prop 9.6 iterates; the thresholds 0.9 and 1.9 are the entry conditions on the current corrections.",
+   "page": 98
   }
  ],
  "hard_pages": [
@@ -988,6 +1210,12 @@
    "pages": "82-83",
    "section": "7.3 (Proposition 7.5 Step 2)",
    "why": "The positivity of the squared amplitudes rests on the reference cone T_N < 0, |T_K| < (u_*/A_c)(-T_N), derived from H_sigma = h_sigma(-A_c N - sigma u_* K + e_sigma), and on the claim that (7.1)'s choice of u_* gives |T_K|/u_* <= (1 - eta_c)(-T_N/A_c) with a FIXED eta_c > 0 on the closed annulus including its edges, where the stress vanishes and only its limiting direction survives (Theorem 4.6(iii)). The passage from Lemma 4.5's inequalities (4.22) through c_0^2 = (v_s - 2)/2 to this reference cone is asserted, not displayed; the reader has to carry Theorem 4.6(iii)'s kappa-margin through three changes of variable. The O(S_*^{-1/2}) error e_sigma comes from the |v - L_s/2|/L_s moment of the Gaussian envelope, a nice one-line computation once seen."
+  },
+  {
+   "pages": "90-92 and 97-99",
+   "section": "8",
+   "why": "Lemma 8.2 Step 3 (pp. 91-92): flatness of the cutoff remainder is a two-parameter argument (torus Fourier inversion (8.10) losing p+3 derivatives, times M^{-1} <= C eps^{kappa_s} S_*^{rho_g} per step) and the manuscript states explicitly that no estimate uniform in p is asserted; the reader must track that each flatness order N is bought by a p chosen after N and L. Lemma 8.7/8.8 (pp. 97-99): invertibility of the five-moment map is a Vandermonde argument that needs G_q = 0 on the patch (8.24), and the exponent table for R_g mixes three different exponents (alpha+2, alpha+0.9, 2 alpha) whose minimum alpha+0.9-2kappa_s only holds because alpha >= 0.9 is assumed on entry.",
+   "leg": 425
   }
  ]
 }
