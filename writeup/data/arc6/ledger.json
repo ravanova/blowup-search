@@ -2,7 +2,7 @@
  "schema": "arc6_ledger_v1",
  "leg": 425,
  "cursor": {
-  "read_through_page": 125,
+  "read_through_page": 143,
   "sections_done": [
    "1-2",
    "3",
@@ -12,7 +12,8 @@
    "7",
    "8",
    "9",
-   "10"
+   "10",
+   "A"
   ]
  },
  "entries": [
@@ -1605,6 +1606,280 @@
    ],
    "role": "Fefferman's alternative (D): the periodic forced breakdown. It is a pure translate-and-sum corollary of the compactly supported whole-space construction; the pressure is periodic as required by the erratum to [13]. This is the statement that kills the repository's A6-D lane (CORRECTIONS.md section 66).",
    "page": 125
+  },
+  {
+   "id": "Lemma A.1",
+   "kind": "Lemma",
+   "section": "A",
+   "hypotheses": [
+    "alpha_1, ..., alpha_m distinct real numbers; beta_j nonnegative nonzero smooth functions supported in the interiors of ordered disjoint compact intervals I_1 < ... < I_m in (0, inf)"
+   ],
+   "conclusion": "The moment matrix B_ij = int_0^inf x^{alpha_i} beta_j(x) dx is invertible; likewise for exponential weights in a logarithmic coordinate. If the data vary smoothly over a compact parameter set with the separations persisting, the inverse and each fixed parameter derivative of it are bounded. No uniform inverse is claimed when two exponents approach each other (explicitly ||B^{-1}|| = O(lambda^{-1}) for slopes separated by lambda, (A.1)).",
+   "constants": [
+    "generalized Vandermonde: a nonzero combination of m distinct powers has at most m - 1 positive zeros (Rolle)",
+    "(A.1): det B = b(s_1) b(s_2)(e^{s_2 Delta} - e^{s_1 Delta}) for two translated bumps"
+   ],
+   "cites": [
+    "(A.1)"
+   ],
+   "role": "The rank tool for every finite-dimensional moment correction in the paper (five cumulative integrals in App A, axis attachment in Prop B.8, shear modification in Prop C.2, and the five-moment map of Lemma 8.7). Its lambda^{-1} loss is why lambda is fixed before h.",
+   "page": 126
+  },
+  {
+   "id": "Lemma A.2",
+   "kind": "Lemma",
+   "section": "A",
+   "hypotheses": [
+    "K = [-1, 1]; correction coefficients c in R^m change the required (linearly recombined, normalized) moments by F_eta(c) = B(eta) c + Q_eta(c, c) (A.2), B and the bilinear Q smooth, B invertible on K; prescribed discrepancy d in C^inf(K; R^m)",
+    "beta_0 = sup_K ||B^{-1}||, kappa_0 = sup_K ||Q||, d_0 = ||d||_{C^0}; smallness 8 beta_0^2 kappa_0 d_0 <= 1 (none needed if Q = 0); for C^k: 8 beta_k^2 kappa_k ||d||_{C^k} <= 1"
+   ],
+   "conclusion": "There is a unique solution of F_eta(c) = d(eta) in the ball ||c||_{C^0} <= 2 beta_0 d_0, smooth in eta, obtained by iterating c -> B^{-1}(d - Q(c,c)) from zero; the same branch satisfies ||c||_{C^k} <= 2 beta_k ||d||_{C^k} (A.3). No simultaneous smallness of all derivative orders is required.",
+   "constants": [
+    "contraction constant 2 beta_0 kappa_0 r <= 1/2 with r = 2 beta_0 d_0"
+   ],
+   "cites": [
+    "(A.2)",
+    "(A.3)"
+   ],
+   "role": "Solves the QUADRATIC moment equations (the five cumulative integrals are quadratic in (U, E)) for small discrepancies with parameter-derivative control. Every 'add bumps and restore the moments' step in Apps A, B, C invokes it.",
+   "page": 127
+  },
+  {
+   "id": "Corollary A.3",
+   "kind": "Corollary",
+   "section": "A",
+   "hypotheses": [
+    "the five radial moment functions (M, I, J, S, C_p) of (4.15) with C_p the pressure increment; X = rho x with normalizing factors (rho, rho^{3/2}, rho^{3/2}, rho, 1) and H = rho^{1/2} sqrt(2x) E (A.4)",
+    "on a fixed correction interval U_0 = u_c(eta), E_0 = e_* f_*(eta) x^alpha with e_* > 0, f_* > 0 smooth; alpha not in {-1/2, 1/2, 3/2}"
+   ],
+   "conclusion": "Two additive U bumps and three additive E bumps give an invertible Jacobian of the normalized five-moment map (blocks: U weights 1, x^{alpha + 1/2}; E weights x^{1/2}, x^alpha, x^{alpha - 1} after replacing J by J - u_c I and S by S - 2 u_c M). The moment changes have the exact quadratic form (A.2). At U_0 = 0 the three E corrections prescribe (I, S, C_p) while preserving M, J.",
+   "constants": [
+    "axis correction alpha = 1/10: blocks (0, 3/5), (1/2, 1/10, -9/10)",
+    "intermediate interval alpha = -1/2 - lambda: blocks (0, -lambda), (1/2, -1/2 - lambda, -3/2 - lambda) with inverse bound lambda^{-1}"
+   ],
+   "cites": [
+    "(4.15)",
+    "(A.2)",
+    "(A.4)",
+    "Lemma A.1",
+    "Lemma A.2",
+    "Lemma 4.4"
+   ],
+   "role": "Identifies the concrete power weights of the five-moment map on a power-law interval so Lemmas A.1/A.2 apply. Used for the axis attachment (alpha = 1/10) and the intermediate-interval corrections (alpha = -1/2 - lambda).",
+   "page": 128
+  },
+  {
+   "id": "Proposition A.4",
+   "kind": "Proposition",
+   "section": "A",
+   "hypotheses": [
+    "the outer profile schedule of Section A.2 with parameters fixed in the order M_d, T_d = e^{M_d} + 10, P_* > e^{T_d}, 0 < lambda << 1, 0 < h << min{lambda, e^{-T_d}} (A.6), then large X_R",
+    "reference inner profile U = 4 eta, E = P_* f(eta) e^{y/10}, f = (1 + eta^2)^{-1} (A.7); stages: axial transition (l = (3/5)(1 - sigma), then l = 0 with U = k(y) eta on 0 <= y <= T_d), intermediate power law l = -lambda for T_w = 60 log(1/lambda) (A.9) with four reserved patches, axial pulse U = E R_b on 0 <= y <= 13/lambda with R_b = Amp(eta) R_0(lambda y) + c_1 beta_1 + c_2 beta_2, profile interpolation (A.10) with two relative E bumps (A.11), exterior transition l: -lambda -> -1 (held 4 log(1/h)) -> -h, terminal tail (A.12)-(A.13) with E = E_pow f_o"
+   ],
+   "conclusion": "There are finite choices in the order (A.6) for which the profile defines smooth U, E for X > 0, eta in [-1,1], E > 0, satisfying the moment identities int (U^2 - E^2/2) dX = 0 and int (H - H_pow) dX = 0 (A.8), H_pow = sqrt(2X) E_pow, E_pow = c_inf X^{-A}. Stage boundaries / X_R are independent of X_R and eta. After the pulse U = M = J = 0; after the terminal interval E = E_pow. Four disjoint unaltered patches carry U = 0, E a positive multiple of f X^{-1/2 - lambda}. For each x_- in (0,1], a large enough X_R gives the strict relaxed cone from x = x_- through the first half-unit of the terminal tail, and the admissible stress cone throughout the intermediate power law, pulse, interpolation, and exterior transition.",
+   "constants": [
+    "sigma(y) the fixed smooth step (A.5)",
+    "T_w = 60 log(1/lambda); reserved patches (T_w-25, T_w-20), (T_w-20, T_w-15), (T_w-14, T_w-9), (T_w-8, T_w-3)",
+    "pulse length 13/lambda, R_0 = phi_b (1 - sigma(xi_b - 10)), bumps of width .3 at 13/lambda - 3, 13/lambda - 1",
+    "rho_o = c_o h with f_o'/f_o < h/4; Q_p of (A.13)",
+    "bounds (A.14): e_b <= C lambda^{30}, |AX(U)/E|, |S/(X e_b^2)| <= C lambda^{29}; (A.15) ||c_i|| <= C e^{-c/lambda}(1 + |Amp|); (A.17) hold-interval factors h^8, h^6; (A.18); amplitude equation (A.19) lambda S(inf)/(X_p e_b^2 f^2) = Amp^2 K_b - (1 + e^{-26})/4 + E, K_b in (.20, 1/4], root in [.9, 1.2] with slope >= .36; (A.20) |d_eta Amp| <= C lambda(1 + log 1/lambda)",
+    "cone margins: pulse b_s w < .74, second test < 1.68 (p. 136); (A.25)-(A.27), (A.29)-(A.31)"
+   ],
+   "cites": [
+    "(4.15)",
+    "(4.16)",
+    "(A.1)",
+    "(A.5)",
+    "(A.6)",
+    "(A.7)",
+    "(A.8)",
+    "(A.9)",
+    "(A.10)",
+    "(A.11)",
+    "(A.12)",
+    "(A.13)",
+    "(A.14)",
+    "(A.15)",
+    "(A.17)",
+    "(A.18)",
+    "(A.19)",
+    "(A.20)",
+    "(A.24)",
+    "(A.25)",
+    "(A.26)",
+    "(A.27)",
+    "(A.28)",
+    "(A.29)",
+    "(A.30)",
+    "(A.31)",
+    "Lemma 4.5",
+    "Lemma A.1",
+    "Lemma A.2",
+    "Definition 3.3"
+   ],
+   "role": "THE explicit outer profile. Every piece is a prescribed logarithmic slope l = X d_X log H with a smooth step, the axial pulse amplitude is fixed by a scalar equation (A.19) solved by a bracket, and the admissible stress cone is verified stage by stage with explicit numerical margins. This is the most numerically reproducible object in the paper and the natural target of an R5 instantiation.",
+   "page": 130
+  },
+  {
+   "id": "Lemma A.5",
+   "kind": "Lemma",
+   "section": "A",
+   "hypotheses": [
+    "E_id,sched the reference inner profile (A.7) followed by the outer profile of Section A.2 with the pressure-preserving azimuthal corrections omitted; global logarithmic coordinate y = log(X/X_R)"
+   ],
+   "conclusion": "Pi_0(eta) = -(1/2) int_{-inf}^{inf} E_id,sched(y, eta)^2 dy (A.21) is independent of X_R and analytic on a complex neighbourhood of [-1,1]; it is even, Pi_0'(eta) has the sign of eta for eta != 0, and Pi_0(eta) <= -(5/2) P_*^2 f(eta)^2 (A.22). For the complete reference profile, Pi(X, eta) = -(1/2) int_{log(X/X_R)}^inf E(v, eta)^2 dv (A.23).",
+   "constants": [
+    "decay of the squared integrand: C e^{y/5} as y -> -inf, C e^{-(1+2h) y} as y -> +inf",
+    "inner-profile contribution exactly -(5/2) P_*^2 f^2"
+   ],
+   "cites": [
+    "(4.25)",
+    "(A.7)",
+    "(A.11)",
+    "(A.21)",
+    "(A.22)",
+    "(A.23)",
+    "Proposition B.2"
+   ],
+   "role": "Supplies the analytic pressure datum Pi_0 that the Cauchy-Kovalevskaya axis construction (Prop B.2) needs, with the sign and size bounds it requires. Its X_R-independence lets the axis be built before the outer scale is chosen.",
+   "page": 133
+  },
+  {
+   "id": "Lemma A.6",
+   "kind": "Lemma",
+   "section": "A",
+   "hypotheses": [
+    "0 < h < 1/2, A = 1/2 + h, a_K = 1 + h; heat factor H(Z) = Gamma(a_K)^{-1} int_0^inf e^{-v} v^{a_K - 1} (1 + Zv)^{-h} dv for Z >= 0 (A.32); K(r,t) = c_inf s^{-A} H(2 tau/s), s = r^2/2 (A.33)"
+   ],
+   "conclusion": "H is positive and smooth up to Z = 0 from the right with every fixed derivative bounded on bounded nonnegative intervals; H^{(m)}(0) = (-1)^m (h)_m (1 + h)_m (A.35); H(Z) = 1 - h(1+h) Z + O_h(Z^2), |H - 1| + |Z H'| <= C h Z (A.36); H satisfies Z^2 H'' + (1 + 2 a_K Z) H' + a_K(a_K - 1) H = 0 (A.37). K is z-independent, solves d_t K = (d_rr + r^{-1} d_r - r^{-2}) K, has K_r < 0, and 0 <= -Z H'/H < h, r K_r/K = -A - Z H'/H < -1/2. Its profile E_pow(X) H(2d/X) is smooth with all eta-derivatives continuous up to eta = +-1, and E_heat/E_pow = 1 - 2h(1+h) d/X + O(X^{-2}) (A.38).",
+   "constants": [
+    "(h)_m (1+h)_m <= C_m h for m >= 1",
+    "(A.34): H^{(m)}(Z) = (-1)^m (h)_m Gamma(1+h)^{-1} int e^{-v} v^{h+m} (1 + Zv)^{-h-m} dv"
+   ],
+   "cites": [
+    "(4.1)",
+    "(A.32)",
+    "(A.33)",
+    "(A.34)",
+    "(A.35)",
+    "(A.36)",
+    "(A.37)",
+    "(A.38)"
+   ],
+   "role": "The exact radial swirl heat flow that replaces the exterior power law, making the exterior Navier-Stokes residual identically zero and giving the field smooth limits at the singular time away from the axis (Theorem 3.1(iii), (3.5)). It is a confluent-hypergeometric-type integral; its explicit Taylor data at Z = 0 are used in Lemma 10.2 and Prop 9.9 Step 4.",
+   "page": 138
+  },
+  {
+   "id": "Proposition A.7",
+   "kind": "Proposition",
+   "section": "A",
+   "hypotheses": [
+    "X_K = e^{.2} X_tail; smooth step chi_K(y) zero for y <= .2, one for y >= .5; terminal replacement E_cl -> E_cl [1 + chi_K(y)(H(2d/X) - 1)] (A.39)",
+    "three additive E-bumps delta E = e_* sum c_i(eta) beta_i(x_*) in the second reserved patch (unmodified profile E = e_* f x_*^{-1/2 - lambda}, U = 0) with rows normalized by e_*^2, X_* e_*^2, X_*^{3/2} e_* (A.43) and weights f x^{-3/2 - lambda}, -f x^{-1/2 - lambda}, sqrt 2 x^{1/2}"
+   ],
+   "conclusion": "The heat replacement can be compensated by the three bumps so that the complete edit preserves M, J, the totals S(inf), C_p(inf), and int (H - H_pow) dX pointwise on [-1,1]. For sufficiently large X_R it preserves E > 0 and the strict admissible stress cone from that patch through y = .5. The axis pressure datum Pi_0 and the profiles before the compensation patch are unchanged.",
+   "constants": [
+    "discrepancies (A.40)-(A.42): pressure and S(inf) changes O(e_K^2 / X_K), angular O(e_K X_K^{1/2}/h); coefficients ||d_eta^m c|| <= C_m X_K^{-1}",
+    "|(X d_X)^j d_eta^m (E - E_cl)| <= C e_K X_K^{-1} x^{-A-1}"
+   ],
+   "cites": [
+    "(4.15)",
+    "(4.16)",
+    "(A.34)",
+    "(A.35)",
+    "(A.36)",
+    "(A.39)",
+    "(A.40)",
+    "(A.41)",
+    "(A.42)",
+    "(A.43)",
+    "Lemma A.1",
+    "Lemma A.2",
+    "Proposition A.4"
+   ],
+   "role": "Installs the heat exterior while restoring the three moments it perturbs, so the exact backward stress representation (Lemma A.8) and the axis datum survive. Second of the four reserved patches is consumed here.",
+   "page": 139
+  },
+  {
+   "id": "Lemma A.8",
+   "kind": "Lemma",
+   "section": "A",
+   "hypotheses": [
+    "leading axisymmetric field smooth at the axis, U = 0 and E = E_pow f_o [1 + chi_K(H(2d/X) - 1)] for y >= 0",
+    "exact moment conditions M(inf) = J(inf) = S(inf) = 0, int_0^inf (H - H_pow) dX = 0, Pi(X) = -(1/2) int_X^inf E(x)^2 dx/x"
+   ],
+   "conclusion": "The leading tangential stresses vanish for X >= X_b. On y >= 1/2 (chi_K = 1) they are given by the weighted integrals of the leading residual from r to infinity with positive sign: T_theta(r) = r^{-2} int_r^inf r'^2 R^{(0)}_theta dr', T_z(r) = r^{-1} int_r^inf r' R^{(0)}_z dr' (A.46). In the tail I(X) = X H_pow/(1-h) - int_X^inf (H - H_pow) dx, S(X) = (1/2) int_X^inf E^2 dx, Q_s = -1 + ((1-h) I - D eta I_eta)/(XH), N_s = (4h eta S - d S_eta)/X + 4A eta Pi - d Pi_eta.",
+   "constants": [
+    "exterior asymptotics (A.44): K - K_pow = O(tau r^{-3-2h}), d_t K = O(r^{-3-2h}), r^2 K_r - r K = O(r^{-2h})",
+    "(A.45): int_0^inf r^2 (u_theta - K_pow) dr = q^{3/2 - A} int (H - H_pow) dX = 0",
+    "exact pressure identity int_0^inf r p dr = -(1/2) int r u_theta^2 dr"
+   ],
+   "cites": [
+    "(4.12)",
+    "(4.16)",
+    "(A.36)",
+    "(A.44)",
+    "(A.45)",
+    "(A.46)",
+    "Proposition 4.2",
+    "Lemma A.6",
+    "Proposition B.2",
+    "Corollary B.10"
+   ],
+   "role": "Shows the four moment identities are exactly what make the total weighted integrals of the leading residual vanish, so the stress T_0 can be computed from the exterior inward. This is the mechanism by which the stress is compactly supported in the annulus (Theorem 4.6(v)).",
+   "page": 140
+  },
+  {
+   "id": "Lemma A.9",
+   "kind": "Lemma",
+   "section": "A",
+   "hypotheses": [
+    "c > 0; j a fixed nonnegative integer; b(u, eta) smooth for 0 <= u <= delta_0 and eta in a compact interval K (or any finite collection of smooth compact parameters)"
+   ],
+   "conclusion": "For 0 < delta <= delta_0, int_0^delta e^{-c/u^2} u^{-j} b(u, eta) du = (1/2) e^{-c/delta^2} delta^{3-j} B(delta, eta) (A.47), with B smooth on [0, delta_0] x K, B(0, eta) = b(0, eta)/c, and bounded mixed derivatives of every fixed order.",
+   "constants": [
+    "substitution u = delta (1 + delta^2 v)^{-1/2}; B(delta, eta) = int_0^inf e^{-cv} (1 + delta^2 v)^{(j-3)/2} b(delta (1 + delta^2 v)^{-1/2}, eta) dv"
+   ],
+   "cites": [
+    "(A.47)"
+   ],
+   "role": "A flat-integral Laplace-type lemma: factors the Gaussian-flat cutoff out of the backward stress integrals so the stress DIRECTION can be controlled where the stress itself vanishes to infinite order. Needed for Prop A.10's smooth extension of T_z/T_theta to the outer edge.",
+   "page": 141
+  },
+  {
+   "id": "Proposition A.10",
+   "kind": "Proposition",
+   "section": "A",
+   "hypotheses": [
+    "regular axis and exact moment hypotheses of Lemma A.8; terminal interval 0 <= y < 3 with f = f_o(y), u_theta = K f, u_r = u_z = 0; delta = 3 - y"
+   ],
+   "conclusion": "The profile satisfies the admissible stress cone on .5 <= y < 3. The stress direction extends smoothly to the outer endpoint and 2 - (a - 2)(T_z/T_theta)^2 has a uniform positive lower bound. For small delta: T_{0,theta} = e^{-4/delta^2} delta^{-3} b_theta(delta, eta) with b_theta(0, eta) > 0 (A.48), T_{0,z} = e^{-4/delta^2} delta^3 b_z(delta, eta) (A.49), T_{0,z}/T_{0,theta} = delta^6 b_z/b_theta -> 0 (A.50); |d^I T_0| <= C_I e^{-4/delta^2} delta^{-N_I}, |T_0| >= c e^{-4/delta^2} delta^{-3} (A.51), constants independent of the physical scale q.",
+   "constants": [
+    "(A.54): T_theta = K f_r + r^{-2} int (r'K - r'^2 K_r') f_r' dr' + (qL r^2)^{-1} int r'^2 K f' dr', all three terms nonnegative",
+    "(A.55): |T_z/T_theta| <= C q^{1-D} K = C E_pow H",
+    "(A.56): a = 2 + 2h + 2ZH'/H - 2 f'/f in (2 + h, 2 + 2h]",
+    "b_theta(0, eta) = 16 rho_o E_pow(X_b) H(2d/X_b) g(0)/sqrt(2 X_b), g(0) = e",
+    "psi_o = e^{-4/delta^2} g(delta)"
+   ],
+   "cites": [
+    "(A.46)",
+    "(A.47)",
+    "(A.48)",
+    "(A.49)",
+    "(A.50)",
+    "(A.51)",
+    "(A.52)",
+    "(A.53)",
+    "(A.54)",
+    "(A.55)",
+    "(A.56)",
+    "(A.17)",
+    "Lemma A.6",
+    "Lemma A.8",
+    "Lemma A.9"
+   ],
+   "role": "Closes the outer end of the cone verification (Theorem 4.6(iv)-(v)): at the outer edge the stress is flat but its direction is smooth and almost purely azimuthal, T_z/T_theta = O(delta^6), so the pulse construction of Section 7 has a well-defined limiting stress direction to realize even where the stress vanishes.",
+   "page": 142
   }
  ],
  "hard_pages": [
@@ -1659,6 +1934,12 @@
    "pages": "121-123",
    "section": "10",
    "why": "Lemma 10.5's comparison argument: uniqueness against a competitor whose pressure has NO spatial growth restriction. The pressure gradient is identified with the Riesz-transform distribution pi_* via a Fourier-support-at-zero argument in H^{-3}, and the boundary pressure flux on expanding balls is bounded through a commutator [phi_{4R}, R_i R_j] with kernel in L^{4/3} of norm O(R^{-3/4}); all powers of A_R must come out strictly below 2 for Young's inequality to absorb them into dissipation. A reader checking the spine must verify the exponent bookkeeping in (10.17)-(10.19), since this lemma is what makes Theorem 1.1 a NON-EXISTENCE statement rather than merely an existence of one singular solution.",
+   "leg": 425
+  },
+  {
+   "pages": "129-137",
+   "section": "A",
+   "why": "Proposition A.4 and its proof (A.2, A.3, A.5): the outer profile is a schedule of a dozen logarithmic stages with parameters fixed in a strict order (A.6) and each stage's cone verification uses a different mechanism (variation of constants (A.26), lambda-uniform lower bound (A.27), the pulse expansion (A.28)-(A.30) with explicit quadratic maxima .74 and 1.68, the h^8 / h^6 hold factors (A.17)). The axial pulse amplitude is the unique root of (A.19) on the bracket [.9, 1.2] with K_b bounded only as .20 < K_b <= 1/4. A re-derivation must reproduce these numbers; an instantiation must build the schedule and verify the cone test (A.24) pointwise. The ordering constraints (lambda before h, X_R last, T_f 'sufficiently large') are the places a numerical port can silently violate.",
    "leg": 425
   }
  ]
