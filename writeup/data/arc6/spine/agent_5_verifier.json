@@ -1,0 +1,843 @@
+{
+ "schema": "arc6_spine_v1",
+ "agent": 5,
+ "role": "adversarial verifier",
+ "leg": 429,
+ "seed": 428,
+ "nodes_assigned": [
+  "Lemma 4.4",
+  "Proposition 4.10",
+  "Lemma 6.3",
+  "Lemma 8.8",
+  "Proposition 9.1",
+  "Lemma 9.8",
+  "Proposition 9.9",
+  "Lemma B.7",
+  "Proposition B.8",
+  "Proposition C.3"
+ ],
+ "nodes": [
+  {
+   "id": "Lemma 4.4",
+   "verdict": "CHECKED",
+   "pages_read": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+   ],
+   "attack": "Tried to break (i) at the joining radius itself (do a, b_s, which contain radial derivatives, agree AT X=X_h?), tried to find a hidden radial-derivative dependence in (4.17), tried to find a sign error in the W display of the proof (extraction shows '1 -2DetaM_i + d d_eta M_i / X'), re-derived (4.16) from (4.9)-(4.10) since the lemma consumes it as a definition, and checked the rescaling remark (4.19).",
+   "steps_checked": [
+    "(4.18): Delta m is the integral of the difference of integrands; each integrand vanishes for x >= X_h under (U_1,E_1)=(U_2,E_2), so Delta m(X)=Delta m(X_h)=0 for X>=X_h; eta-derivatives agree as functions of eta.",
+    "Delta Pi = Delta C_p = 0 by the common axis datum Pi_ax; (4.7) V_0 = X/L (2 eta U - 2 D eta M/X - d M_eta/X) depends only on U and M, so Delta V_0 = 0.",
+    "(4.16) depends only on W(M,M_eta), I, I_eta, J, J_eta, H, U, S, S_eta, Pi, Pi_eta: all agree, so Delta Q_s = Delta N_s = 0; p_s = (XQ_s/L, XN_s/(LE)) agrees.",
+    "a = 1 - 2 D_X log E, b_s = 2 D_X U/E at X = X_h: both profiles smooth on (0,inf) and equal on [X_h,inf), so one-sided right derivatives equal the two-sided ones; a, b_s, T_0 agree for all X >= X_h (not only X > X_h).",
+    "(ii): denominators X >= X_0, L = 1 - 2h eta^2 >= 1 - 2h > 0, H_i = sqrt(2X) E_i >= sqrt(2X_0) e_min; reciprocal identities Delta(H^-1) = -Delta H/(H_1H_2), Delta(E^-1) = -Delta E/(E_1E_2).",
+    "Derivative count: Q_s uses M_eta (via W), I_eta, J_eta; N_s uses M_eta, S_eta, Pi_eta = Pi_ax' + C_p,eta; k eta-derivatives of a difference therefore need at most k+1 derivatives of Delta m and at most k of Delta(U,E) (the stated k+1 on Delta(U,E) is a harmless over-statement); Pi_ax enters only undifferenced through N_s,1 in Delta(1/E) products, hence the C^{k+1} dependence.",
+    "No radial derivative of any input appears in (4.16) or in p_s; confirmed.",
+    "Independent re-derivation of Lemma 4.3 (4.16): integrating factor XH for D_X Q_s + (1+l)Q_s = S_q (since D_X(XHQ_s) = XH(D_X Q_s + (1+l) Q_s) with l = XH_X/H); int_0^X H S_q = -XWH + (1-h)I - D eta I_eta - d J_eta + 2(h-D) eta J using d_X(XW) = 1 - 2 D eta U - d U_eta and H_eta/H = E_eta/E; int_0^X S_n = -XWU + D(M - eta M_eta) + 4h eta S - d S_eta + X(4A eta Pi - d Pi_eta) using 1-A = D, A-D = 2h, int_0^X Pi dx = X Pi - int E^2/2, 2A-1 = 2h.",
+    "Rescaling (4.19): H = sqrt(rho) Hhat, (M,I,J,S,C_p) = (rho Mhat, rho^{3/2} Ihat, rho^{3/2} Jhat, rho Shat, Chat_p); every rho cancels in W, Q_s, N_s and p_s = rho phat_s; checked term by term."
+   ],
+   "recomputed": [
+    {
+     "quantity": "sign/structure of W_i in the proof (p.29)",
+     "claimed": "text extraction: 'W_i = 1 -2D eta M_i + d d_eta M_i , X'",
+     "obtained": "W_i = 1 - (2 D eta M_i + d d_eta M_i)/X, consistent with (4.8) W = 1 - 2 D eta A_X(U) - d d_eta A_X(U) and A_X(U) = M/X",
+     "method": "PDF geometry p.29: fraction bar y=563.4 spans x 281.4-359.6, numerator word '-2D eta M_i' starts at x=269.1, i.e. the minus sign lies left of the bar; same for Delta W (bar 291.3-379.4, word starts 281.1)"
+    },
+    {
+     "quantity": "(4.16) Q_s numerator",
+     "claimed": "(1-h)I - D eta I_eta - d J_eta + 2(h-D) eta J",
+     "obtained": "identical, via -int W D_X H = -XWH + int H(1 - 2 D eta U - d U_eta), -h int H(1-2 eta U) = -hI + 2h eta J, -int H_c H_eta = -D eta I_eta - d int U H_eta",
+     "method": "hand integration by parts"
+    },
+    {
+     "quantity": "(4.16) N_s numerator",
+     "claimed": "D(M - eta M_eta) + 4h eta S - d S_eta + X(4A eta Pi - d Pi_eta)",
+     "obtained": "identical, using 1-A = D, 2(A-D) = 4h, and the pressure terms combining with the U^2 terms into S",
+     "method": "hand integration by parts"
+    },
+    {
+     "quantity": "lower bounds on the rectangle",
+     "claimed": "X >= X_0, L >= 1-2h > 0, H_i >= sqrt(2X_0) e_min",
+     "obtained": "same",
+     "method": "L = 1 - 2h eta^2 with eta^2 <= 1; H = sqrt(2X)E"
+    },
+    {
+     "quantity": "loss of derivatives in (4.17)",
+     "claimed": "k on the left, k+1 on the right",
+     "obtained": "k+1 needed for Delta m (through M_eta, I_eta, J_eta, S_eta, C_p,eta); only k needed for Delta(U,E)",
+     "method": "term-by-term inspection of (4.16), (4.11)"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "The extraction artefact in the W display could have looked like a sign error (+ d d_eta M_i); the PDF geometry shows the minus sign outside the fraction, so the proof's identity agrees with (4.8). No step fails."
+  },
+  {
+   "id": "Proposition 4.10",
+   "verdict": "CHECKED",
+   "pages_read": [
+    35,
+    36,
+    37,
+    38,
+    39,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157
+   ],
+   "attack": "Tried to break the positivity of Z_* at the zero of H_* (naive evaluation at eta=0 gives -A j_0 < 0), the uniqueness of that zero, the reference moments (4.34), the tolerance chain, the sign of x_sep < e^{-8} vs the order of choices (T_sh before C), and the consistency of the statement's constants (X_a = 4/Lambda, X_i = 110, X_R = 110 (C P_*)^10, X_h = X_R e^{-5}) with Appendix B; also checked the numerics of Proposition B.3 (alternating series) and Lemma B.4 (comparison functions) that supply the exit inequality.",
+   "steps_checked": [
+    "H_* = D eta + d(4 eta + j_0) is a cubic with H_*(-1) = -D < 0, H_*(1) = D > 0 and negative leading coefficient, hence exactly one real zero in (-1,1) (the other two lie outside [-1,1]); with j_0 small, eta_0 ~ -j_0/(D+4) < 0.",
+    "Z_*(eta_0) = -A(1-2 eta_0 U_*) U_* - d Pi_0'(eta_0) + 4 A eta_0 Pi_0(eta_0): first term is O(j_0) negative (-A j_0 D/(D+4)), second is >= 0 since eta Pi_0' > 0, third is >= 4A |eta_0| (5/2) P_*^2 f^2 > 0 since Pi_0 <= -(5/2)P_*^2 f^2 (Lemma 4.8); ratio of third to first ~ 10 P_*^2/D >> 1, so Z_*(eta_0) > 0 as claimed (and as (B.1) states, >= c j_0 P_*^2).",
+    "delta_* < Z_*(eta_0) makes {|Z_*| <= delta_*} avoid a neighbourhood of eta_0, so |H_*| has a positive minimum there and sigma_*^2 < h_min^2/99 gives chi = H_*^2/(H_*^2+sigma_*^2) > .99 there; phi(0,eta) = exp(-Lambda int_0^eta L H_*/(H_*^2+sigma_*^2)) is positive and analytic (denominator > 0).",
+    "(4.34) reference moments recomputed by direct integration (see recomputed).",
+    "Tolerance chain: v_s = a + b_s^2/a <= .9 + .01/.7 = .9143 < 1; G = Q_s - b_s N_s/(aE) >= Q_s - (.1/(1+w_*)) w_* Q_s/.7 >= (1 - 1/7) Q_s = 6Q_s/7 >= 3 Q_min/7; P_c = p_s1 + t_s p_s2 = X (Q_s - b_s N_s/(aE))/L = X_R x G/L >= X_R e^{-8} (3Q_min/7) > 2 for X_R large.",
+    "Relaxed condition then holds: P_c > 2 and v_s < 1 < 2 < v_- = U(P_c,J_c) (the smaller root exceeds 2 whenever P_c > 2, from Lemma 4.5's proof).",
+    "x_sep = X_sep/X_R = X_i e^{T_sh}/(X_i (C P_*)^{10}) = e^{T_sh}/(C P_*)^{10}; x_sep < e^{-8} iff C > e^{(T_sh+8)/10}/P_*, achievable since T_sh is fixed before C by Lemma B.7 / (B.33).",
+    "Order of choices: j_0, Lambda control C_k j_0 + C^nat_k/Lambda; then C (x_sep small, (B.39) small, P_c > 2); then t_1, kappa_0, omega_fin small (C^join_k(Lambda) fixed) - matches (B.40).",
+    "Statement (i): analytic rectangle [0,X_an] from Corollary B.6 with X_an = X_0 e^{t_c} in (X_a, X_h); (4.13) and T_0 = 0 on [0,X_a] from Proposition B.2 (X_a = X_0 = 4/Lambda).",
+    "Statement (ii): a > 0, P_c > 2, v_s < U on (X_a,X_h] from Proposition B.5 (activation, (B.29)), the transition (B.34) (l in [.55,.65], a in [.7,.9], b_s = 0, S_q > 1 barrier keeps p_1 > 2) and Proposition B.8 (tolerance); v_s > 2 on the first collar and v_s(X_a) = v_r(X_0) > 2 + c from (B.19)/(B.23); (4.33) is (B.30) with B_a(0,eta) = F p_s,r(X_0) = F s(X_a) since at y=0 kappa = 1 gives (a,-b_s) = p_s,r.",
+    "Statement (iii): (B.34) with sigma = 1 is exactly E_0 because C^{-1} f (X/X_i)^{1/10} = P_* f (X/X_R)^{1/10} when X_R^{1/10} = X_i^{1/10} C P_*; bumps supported strictly inside (e^{-6},e^{-5}) so fields equal (U_0,E_0) near X_h and the five moments match there.",
+    "Proposition B.3 numerics: f_0(z) = sum (-z/2)^a/(a!(a+1)!) = 1 - t/2 + t^2/12 - t^3/144 + ..., at t = 2.05: .26538 (= 305719/1152000) > .265; f_0 + z f_0' = sum (-t)^a/(a!)^2 = 1 - t + t^2/4 - t^3/36 + t^4/576, at t = 1.98: -.18888 < -.188; hence -2z f_0'/f_0 > 2.36 and p_1 > 2.3 at Y=4.",
+    "Lemma B.4 comparisons: from D_X p_1 >= .94 X Lambda chi + 2.4 X/L - p_1 with X = 4e^y/Lambda one gets p_1(y) >= p_1(0)e^{-y} + 1.88 chi (e^y - e^{-y}); and d_X(X p_1) >= 2.4 X gives p_1(X) >= p_1(X_0)X_0/X + 1.2(X - X_0^2/X) > 3 for X >= 100.",
+    "Proposition B.2 weight ratios (B.9), (B.10) recomputed from (B.4): a_{ab}/a_{a+1,b} = 20 (a+2)^2/(a+1)^2 * (a+1)/(a+b+1) <= 80; a_{i,k+1}/a_{i+1,k} = (20/rho)(i+1)(i+2)^2(k+1)^2/((i+1)^2(k+2)^2) <= (80/rho)(i+1)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "Mhat_0",
+     "claimed": "4 eta x",
+     "obtained": "int_0^X 4 eta dX'/X_R = 4 eta x",
+     "method": "direct integration"
+    },
+    {
+     "quantity": "Ihat_0",
+     "claimed": "(5 sqrt2/8) P_* f x^{8/5}  (extraction: '5 8 2 P_* f x^{8/5}')",
+     "obtained": "H_0 = sqrt(2 X_R x) P_* f x^{1/10} = sqrt(2X_R) P_* f x^{3/5}; int_0^x X_R sqrt(2X_R) P_* f s^{3/5} ds = X_R^{3/2} sqrt2 (5/8) P_* f x^{8/5}",
+     "method": "direct integration"
+    },
+    {
+     "quantity": "Jhat_0",
+     "claimed": "4 eta Ihat_0",
+     "obtained": "U_0 = 4 eta constant in x",
+     "method": "direct integration"
+    },
+    {
+     "quantity": "Shat_0",
+     "claimed": "16 eta^2 x - (5/12) P_*^2 f^2 x^{6/5}  (extraction '512')",
+     "obtained": "int_0^x (16 eta^2 - P_*^2 f^2 s^{1/5}/2) ds = 16 eta^2 x - (1/2)(5/6) P_*^2 f^2 x^{6/5}",
+     "method": "direct integration"
+    },
+    {
+     "quantity": "C_p,0",
+     "claimed": "(5/2) P_*^2 f^2 x^{1/5}  (extraction '52')",
+     "obtained": "int_0^x P_*^2 f^2 s^{1/5}/(2s) ds = (P_*^2 f^2/2) * 5 x^{1/5}",
+     "method": "direct integration"
+    },
+    {
+     "quantity": "v_s bound",
+     "claimed": ".9 + .01/.7 < 1",
+     "obtained": "0.91429",
+     "method": "a <= .9, |b_s| <= .1/(1+w_*) <= .05, a >= .7"
+    },
+    {
+     "quantity": "G lower bound",
+     "claimed": "6 Q_s/7 >= 3 Q_min/7",
+     "obtained": "|b_s N_s/(aE)| <= (.1 w_*/(1+w_*)) Q_s/.7 < Q_s/7; with Q_s >= Q_min/2: G >= 3Q_min/7",
+     "method": "inequalities of (B.36)"
+    },
+    {
+     "quantity": "P_c formula",
+     "claimed": "X_R x G/L",
+     "obtained": "p_s1 + t_s p_s2 = XQ_s/L - (b_s/a) X N_s/(LE) = X G/L",
+     "method": "(4.11), (4.20)"
+    },
+    {
+     "quantity": "x_sep",
+     "claimed": "e^{T_sh}/(C P_*)^{10}",
+     "obtained": "same; < e^{-8} iff (C P_*)^{10} > e^{T_sh+8}",
+     "method": "X_sep = X_i e^{T_sh}, X_R = X_i (C P_*)^{10}, X_i = 110"
+    },
+    {
+     "quantity": "X_i, j_0, X_a",
+     "claimed": "X_i = 110, 0 < j_0 <= .05, X_a = 4/Lambda",
+     "obtained": "p.150: X_0 = 4/Lambda, X_b = 100, X_i = 110; (B.1): 0 < j_0 <= .05; X_a = X_0",
+     "method": "cross-check of Section 4.5 against Appendix B"
+    },
+    {
+     "quantity": "-W_* lower bound used for S_q > 1",
+     "claimed": "-W_* = 3 - 8h eta^2 + (1-2h) j_0 eta > 2.8",
+     "obtained": "W_* = 1 - 2D eta(4 eta + j_0) - 4d = -3 + 8h eta^2 - 2D j_0 eta; min of -W_* >= 3 - .08 - .05 = 2.87",
+     "method": "4 - 8D = 8h, 2D = 1 - 2h, h <= .01, j_0 <= .05"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "The proof of 4.10 is a chain through Propositions B.2, B.3, B.5, B.8 and Corollaries B.6, B.10, Lemma B.7. I reproduced every constant and inequality in 4.10's own text and the numerical/analytic inputs listed above. What I did NOT independently re-derive: the full contraction/Banach-algebra argument of Proposition B.2 beyond its weight ratios (B.9)-(B.10), and the O(y e_a) activation comparison (B.28)-(B.29) beyond checking its consequences (P_c - v_s >= c e_a, J_c^2 (v_s-2)_+/(P_c-v_s)^2 <= C y^2). Displayed-fraction extraction on p.37-38 resolved by recomputation."
+  },
+  {
+   "id": "Lemma 6.3",
+   "verdict": "CHECKED",
+   "pages_read": [
+    63,
+    64,
+    65,
+    66,
+    67,
+    68
+   ],
+   "attack": "Tried to make the pointwise count unbounded via the dyadic partition (how many bands contain a given q?), via the closed supports K_gamma, and via boxes meeting a radial line from more than one band; tried to find an inconsistency between the mesh S_*^{-3} of p.64 and the exponents 9 and 3.",
+   "steps_checked": [
+    "Dyadic overlap: chi_l supported in q/Q in [1/2,2], Q = 2^{-l}; a given q lies in the support of at most 3 consecutive bands (l in [log2(1/q)-1, log2(1/q)+1]).",
+    "Grid overlap: supports of chi_{l,a} extend at most one mesh length S_l^{-3} on either side of a grid point in each of the three chart coordinates; a point lies in at most 3 supports per coordinate, i.e. at most 27 boxes per band; times 2 signs; times 3 bands: C <= 162, independent of band and point (closed supports change nothing since K_gamma is a closed set of bounded overlap count).",
+    "Compact chart set B of diameter D_B: grid points within S_l^{-3} of B number at most (D_B S_l^3 + 3)^3 <= C_B S_l^9; times 2 for sigma; restricting to a in I_l only decreases the count.",
+    "Radial line I_R x {Z} x {T}: at most 3 grid positions in Z and in T, and |I_R| S_l^3 + 3 in R: <= 2*9*(|I_R| S_l^3 + 3) <= C_{I_R} S_l^3.",
+    "Fixed-factor enlargement K S_l^{-3}: replaces 3 by 2K+1 in the counts, constants only.",
+    "Remark after the proof: at fixed (z,t), q is fixed, so at most 3 bands (|l - l'| <= 2 for meeting dyadic supports) contribute, all with S_l comparable (ratio (l/l')^2 <= (1 + 2/l_0)^2); lifts add the factor 14^{Delta_max} of Lemma 6.2 (#(Z^2/J_g^Delta Z^2) = |det J_g|^Delta = 14^Delta since det J_g = 15 - 1 = 14)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "pointwise label bound C",
+     "claimed": "some constant independent of band and point",
+     "obtained": "<= 3 bands x 27 boxes x 2 signs = 162",
+     "method": "counting"
+    },
+    {
+     "quantity": "exponent for a compact chart set",
+     "claimed": "S_l^9",
+     "obtained": "(mesh^{-1})^3 = (S_l^3)^3 = S_l^9",
+     "method": "three coordinates at mesh S_l^{-3}"
+    },
+    {
+     "quantity": "exponent for a radial line",
+     "claimed": "S_l^3",
+     "obtained": "S_l^3 (one coordinate) times bounded factor 9 in (Z,T)",
+     "method": "counting"
+    },
+    {
+     "quantity": "det J_g",
+     "claimed": "14",
+     "obtained": "3*5 - 1*1 = 14",
+     "method": "arithmetic on (6.2)"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Elementary counting; nothing to break."
+  },
+  {
+   "id": "Lemma 8.8",
+   "verdict": "CHECKED",
+   "pages_read": [
+    88,
+    89,
+    90,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100
+   ],
+   "attack": "Re-expanded g_r,new - g_r from (8.3) term by term looking for a missing cross term or a wrong sign in (8.26); re-derived (8.27) checking that exactly rows 3-5 of (8.25) are what cancels (including the -1/2 int R^2 <2V/R Delta v> piece inside J_z and the use of Delta gamma = gamma_d); recomputed every exponent in the class table and looked for a term below alpha + 0.9 - 2 kappa_s; checked that Delta beta is auxiliary-independent so t_* Delta beta = -eps d_T Delta beta.",
+   "steps_checked": [
+    "(8.3) g_r = -t_* beta - (D_r + 1/R)(2 b beta + beta^2 + W_rr) - D_z(b gamma + G beta + beta gamma + W_zr) + (2 V v + v^2 + W_thth)/R + eps(Delta_0 - R^{-2}) beta.",
+    "Substituting beta -> beta + Delta beta, v -> v + Delta v, gamma -> gamma + Delta gamma with W fixed: (beta+Dbeta)^2 - beta^2 = 2 beta Dbeta + Dbeta^2; (beta+Dbeta)(gamma+Dgamma) - beta gamma = beta Dgamma + gamma Dbeta + Dbeta Dgamma; (v+Dv)^2 - v^2 = 2 v Dv + Dv^2; subtracting (2V/R) Delta v gives exactly (8.26).",
+    "P_new = int <g_r,new>_Y dR = P + int (2V/R) Delta v dR + int <R_g> dR = int <R_g>_Y dR by row 3 of (8.25) (Delta v is Y-independent).",
+    "(J_theta)_new = J_theta + int R^2 (G Dv + V Dgamma) dR + int R^2 <gamma Dv + v Dgamma + Dgamma Dv> dR; row 4 with Dgamma = gamma_d cancels the first two; (8.27) second line.",
+    "(J_z)_new = J_z + int 2RG Dgamma dR + int R<2 gamma Dgamma + Dgamma^2> dR - (1/2) int R^2 <(2V/R) Dv + R_g> dR; the pieces int(2RG Dgamma - RV Dv) dR = -J_z by row 5; (8.27) third line.",
+    "Delta gamma = gamma_d exactly: gamma_d is Y-independent with int R gamma_d dR = 0 (row 2), so Proposition 8.3(ii)/Lemma 8.2 give zero cutoff remainder; Delta beta = -eps d_Z T_1 gamma_d is Y-independent, so the fast part of t_* kills it and t_* Dbeta = -eps d_T Dbeta.",
+    "Class table: -t_* Dbeta = eps d_T Dbeta in M_{alpha+1+1}; (D_r+1/R)(2 b Dbeta): b = O(eps), Dbeta in M_{alpha+1}, D_r costs kappa_s -> alpha+2-kappa_s; D_z(b Dgamma + G Dbeta): D_z = eps d_Z gains 1 -> alpha+2; 2 v Dv/R: 0.9 + alpha; Dv^2/R: 2 alpha; eps(Delta_0 - R^{-2}) Dbeta: 1 + alpha + 1 - 2 kappa_s.",
+    "Remaining transport products: (D_r+1/R)(2 beta Dbeta + Dbeta^2) >= 1.9 + alpha + 1 - kappa_s; D_z(beta Dgamma + gamma Dbeta + Dbeta Dgamma) >= 1 + 0.9 + alpha + 1; all >= alpha + 2 - kappa_s as claimed.",
+    "Minimum over the table for alpha >= 0.9 is alpha + 0.9 (from 2 v Dv/R; 2 alpha >= alpha + 0.9); the stated alpha + 0.9 - 2 kappa_s is implied with 2 kappa_s slack.",
+    "Defects: radial integration over the bounded shell of M-class coefficients gives S-class of the same exponent (Prop 8.3(i) argument); gamma Dv, v Dgamma in M_{alpha+0.9}, Dgamma Dv, Dgamma^2 in M_{2 alpha}, 2 gamma Dgamma in M_{alpha+0.9}; all >= alpha+0.9-2kappa_s."
+   ],
+   "recomputed": [
+    {
+     "quantity": "alpha + 0.9 - 2 kappa_s (kappa_s = 1e-5)",
+     "claimed": "alpha + 0.9 - 2 kappa_s",
+     "obtained": "alpha + 0.89998; at alpha = 0.9: 1.79998; Prop 9.6 Step 4 uses H + 0.9 - 2kappa_s = C_* + 0.9 - 4 kappa_s with H = C_* - 2 kappa_s, consistent",
+     "method": "arithmetic"
+    },
+    {
+     "quantity": "class of -t_* Delta beta",
+     "claimed": "M_{alpha+2}",
+     "obtained": "M_{alpha+2}",
+     "method": "Delta beta in M_{alpha+1}, -eps d_T gains 1 by (6.32)"
+    },
+    {
+     "quantity": "class of (D_r+1/R)(2b Delta beta)",
+     "claimed": "M_{alpha+2-kappa_s}",
+     "obtained": "M_{alpha+2-kappa_s}",
+     "method": "b = O(eps) hypothesis, D_r: C_a -> C_{a-kappa_s} (6.32)"
+    },
+    {
+     "quantity": "class of D_z(b Delta gamma + G Delta beta)",
+     "claimed": "M_{alpha+2}",
+     "obtained": "min(1 + (1+alpha), 1 + (alpha+1)) = alpha+2",
+     "method": "(6.32)"
+    },
+    {
+     "quantity": "class of 2 v Delta v/R",
+     "claimed": "M_{alpha+0.9}",
+     "obtained": "M_{alpha+0.9}",
+     "method": "(6.30) product rule"
+    },
+    {
+     "quantity": "class of (Delta v)^2/R",
+     "claimed": "M_{2 alpha}",
+     "obtained": "M_{2 alpha} >= M_{alpha+0.9} for alpha >= 0.9",
+     "method": "(6.30)"
+    },
+    {
+     "quantity": "class of eps(Delta_0 - R^{-2}) Delta beta",
+     "claimed": "M_{alpha+2-2kappa_s}",
+     "obtained": "1 + (alpha+1) - 2 kappa_s (two D_r's in D_r^2)",
+     "method": "(6.32)"
+    },
+    {
+     "quantity": "minimum exponent in the table",
+     "claimed": ">= alpha + 0.9 - 2 kappa_s",
+     "obtained": "= alpha + 0.9 (attained by 2 v Delta v/R); claim holds with slack 2 kappa_s",
+     "method": "comparison"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Exact algebra (8.26)-(8.27) reproduces; the exponent table reproduces; the stated gain is slightly weaker than what the table gives. No hidden hypothesis: the auxiliary-independence of the increments comes from Lemma 8.7 as stated."
+  },
+  {
+   "id": "Proposition 9.1",
+   "verdict": "CHECKED",
+   "pages_read": [
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    85,
+    86,
+    87,
+    100,
+    101,
+    102,
+    103
+   ],
+   "attack": "Re-derived the linearised residual (9.2) from R_* = Q^{2A+1/2} R(u,p) with u = base + a e^{ikm Phi}, checking which frame/shear terms sit in K (7.6) versus the remainder; recomputed every gain in the table from (6.32), (7.9), (7.15); looked for a term with gain below 1/2 - 3 kappa_s (in particular the curl correction r_m fed through the principal operator, and the pressure gradient); checked the pulse-cutoff tail flatness arithmetic.",
+   "steps_checked": [
+    "Transport by the base: (u.grad)(a e^{ikmPhi}) gives ikm (bD_r Phi + F d_theta Phi + G D_z Phi) a (part of E_ik) plus (bD_r + F d_theta + G D_z) a with d_theta a = 0; time: t_* on the exponential gives ikm t_* Phi (part of E_ik), on the amplitude Q^{1+h} N_abs a (in L_m) and -eps d_T a (remainder).",
+    "Frame/shear terms: linearising the cylindrical transport gives K a with K = [[0,-2F,0],[2F+RF_R,0,0],[G_R,0,0]] (7.6) [radial derivative of V,G and the V-rotation terms] plus the remainder a_r (d_R b) e_r + a_z D_z(b,V,G) + (b/R) a_theta e_theta: verified 2F + RF_R = V/R + d_R V.",
+    "Pressure: grad(pi e^{ikmPhi}) = ikm n_Phi pi (in L_m) + (D_r pi, 0, D_z pi).",
+    "Viscosity: -eps Delta(a e^{ikmPhi}) = -eps{Delta_0 a - R^{-2}(a_r,a_theta,0) + 2ikm(n_Phi,r D_r + n_Phi,z D_z)a + ikm(D_r n_Phi,r + n_Phi,r/R + D_z n_Phi,z) a + 2ikm (n_Phi,theta/R)(-a_theta,a_r,0)} e^{ikmPhi} plus eps k^2 m^2 |n_Phi|^2 a (in L_m); matches (9.2).",
+    "Gains: slow transport (-eps d_T: 1; b D_r: 1 - kappa_s; G D_z: 1) -> 1 - kappa_s. Phase defect: E_ik = eps v((H_Phi)_T - G (H_Phi)_Z) + b n_Phi,r = O(eps S_*^C) by (7.9) and k = O(eps^{-1/2}) -> 1/2. Base derivatives/connections: d_R b, b/R = O(eps), D_z gains 1 -> 1. Pressure gradient: pi_m in W_{alpha+1/2} (7.15), D_r costs kappa_s -> 1/2 - kappa_s. Viscous amplitude derivatives: eps D_r^2 -> 1 - 2 kappa_s. Mixed/phase divergence: eps k D_r -> 1/2 - kappa_s. Viscous angular connection: eps k -> 1/2.",
+    "Curl correction: r_m in W_{alpha+1/2-kappa_s} (Lemma 7.7); L_m(r_m,0) preserves the exponent (fast time on the coefficient, K, eps k^2 = O(1)); the remainder applied to r_m gains a further >= 1/2 - kappa_s; so the total linear residual lies in W_{alpha+1/2-kappa_s}, which implies the stated W_{alpha+1/2-3kappa_s}.",
+    "Pulse cutoff: (7.40) gives the uncancelled (1-psi) f_m + psi' t_m supported where |v - L_s/2| >= L_s/5, where (7.16) gives P_v <= e^{-c S_*}; flatness: q^{-N} Q^{-M} S_*^C e^{-cS_*} = exp(-c l^2 + (M+N) l log 2 + 2C log l) -> 0.",
+    "No spatial derivative hits psi: D_r v = D_z v = 0 by (6.12); the fast-time derivative of psi is the psi' t_m term retained in (7.40)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "gain table (9.2)",
+     "claimed": "1-kappa_s, 1/2, 1, 1/2-kappa_s, 1-2kappa_s, 1/2-kappa_s, 1/2",
+     "obtained": "same seven values from (6.32) [D_r: -kappa_s, D_z and -eps d_T: +1], (7.9) [E_ik = O(eps)], (7.15) [pi_m in W_{alpha+1/2}], k = O(eps^{-1/2}), b = O(eps)",
+     "method": "term-by-term"
+    },
+    {
+     "quantity": "common lower bound",
+     "claimed": "alpha + 1/2 - 3 kappa_s = alpha + 0.49997",
+     "obtained": "table minimum alpha + 1/2 - kappa_s = alpha + 0.49999; claimed bound implied (slack 2 kappa_s); I could not identify a term that needs the extra 2 kappa_s",
+     "method": "minimum of the table"
+    },
+    {
+     "quantity": "pressure class",
+     "claimed": "W_{alpha+1/2}",
+     "obtained": "W_{alpha+1/2} by (7.13)/(7.15): pi_m = (i/(km)) (n_Phi.K t_m - n_Phi'.t_m + n_Phi.f_m)/|n_Phi|^2 with (km)^{-1} = O(eps^{1/2})",
+     "method": "Proposition 7.2"
+    },
+    {
+     "quantity": "tail flatness exponent",
+     "claimed": "C Q^{-M} S_*^P e^{-c S_*} is O(q^N)",
+     "obtained": "exp(-c l^2 + (M+N) l log2 + 2P log l) -> 0 for every fixed M,N,P",
+     "method": "S_* = l^2, Q = 2^{-l}, q ~ Q"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Structure of (9.2) and all gains reproduce. The stated 3 kappa_s is a (safe) over-count relative to the table's 1 kappa_s; this is slack, not an error, and Prop 9.6 consumes the weaker figure."
+  },
+  {
+   "id": "Lemma 9.8",
+   "verdict": "CHECKED",
+   "pages_read": [
+    56,
+    57,
+    58,
+    59,
+    62,
+    63,
+    73,
+    74,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114
+   ],
+   "attack": "Recomputed each row of (9.19) from (6.6) and (6.2); recomputed the phase derivative bounds from (7.3) [including the axial term p_z Z/eps and the v-dependence through (6.12)]; checked that s_x, s_t dominate (9.19); checked k <= 2 Q^{-h/2}; checked that l_m = 2A + (m+1)(1+3h/2) covers the physical rescalings and the curl; checked that every stage-j increment really has normalized exponent >= j/10 using (9.8)/(9.9)/Prop 9.6; checked (9.18) against (9.8).",
+   "steps_checked": [
+    "(9.19) radial: physical d_r = Q^{-1/2} D_r, D_r = d_R + M_i d_r R^{d_r-1} L_i with M_i ~ eps^{-kappa_s} S_*^{-rho_g} (6.6), so loss Q^{-1/2} eps^{-kappa_s} = Q^{-(1/2 + h kappa_s)}.",
+    "(9.19) axial: d_z = Q^{-D} d_Z on a chart coefficient (Z = z/Q^D), loss D = 1/2 - h; check D_z = sqrt(Q) d_z = Q^{1/2-D} d_Z = eps d_Z.",
+    "(9.19) time: d_t = Q^{-1-h} t_* = Q^{-1-h}(-eps d_T + c_i N_i), c_i ~ S_*^{-1}: loss 1 + h. Frame: 1/r = Q^{-1/2}/R: loss 1/2.",
+    "Phase (7.3): Phi = p theta + p_z Z/eps + x_0 R - v(pF + p_z G); |grad_x Phi|: d_r(x_0 R) = x_0 Q^{-1/2}; d_z(p_z Z/eps) = p_z Q^{-D}/eps = p_z Q^{-1/2}; (1/r) d_theta = p/(sqrt(Q) R); D_r v = D_z v = 0 by (6.12); F, G slow: so |grad Phi| <= C Q^{-1/2} S_*^P. |d_t Phi|: t_* v = 1 gives Q^{-1-h}(pF + p_z G) plus Q^{-1} v d_T(...) with v <= L_s ~ S_*: <= C Q^{-1-h} S_*^P.",
+    "k = ceil(eps^{-1/2}) = ceil(Q^{-h/2}) <= 2 Q^{-h/2} for Q <= 1; chain rule: each spatial derivative of e^{ikmPhi} costs k Q^{-1/2} = Q^{-1/2 - h/2} = Q^{-s_x}, each time derivative k Q^{-1-h} = Q^{-1-3h/2} = Q^{-s_t}; higher derivatives of Phi (Q^{-a/2-b(1+h)}) are dominated by products of first derivatives.",
+    "s_x = 1/2 + h/2 >= 1/2 + h kappa_s (kappa_s < 1/2), >= D = 1/2 - h, >= 1/2; s_t = 1 + 3h/2 >= 1 + h: (9.19) is dominated.",
+    "Normalized coefficient of class exponent alpha: eps^alpha = Q^{h alpha}; Leibniz: |grad^a d_t^b (a e^{ikmPhi})| <= C Q^{h alpha - a s_x - b s_t} S_*^P (1+|log q|)^P with S_* = l^2 ~ log^2(1/q).",
+    "Physical rescalings Q^{-A}, Q^{-2A}, Q^{1/2-A} (Lemma 7.7 potentials; (8.11) Psi_phys = Q^{1/2-A} Psi_*) all <= Q^{-2A} for Q <= 1.",
+    "l_m = 2A + (m+1)(1+3h/2): m derivatives at cost <= s_t each, one extra spatial derivative for curl A_j, plus the prefactor 2A; so |Z_j|_m + |Delta u_j|_m <= C q^{h alpha_j - l_m}(1+|log q|)^P.",
+    "Stage-j exponent >= j/10: waves of the cycle j-1 -> j lie in W_{B_{j-1}} or W_{B_{j-1}-kappa_s} with B_{j-1} = 1/2 + 1/5 + (j-1)/10 = 0.6 + j/10; means/pressures in M_H, H = C*_{j-1} - 2 kappa_s = 1.1 + j/10 - 2kappa_s; all >= j/10, giving g_j = h j/10.",
+    "(9.18): residual of a stage-j state has normalized exponent >= min(B_j, C*_j) = 1/2 + sigma_j >= sigma_j (waves W_{B_j}, means M_{C*_j}, radial residual -rho P with P in S_{C*_j}); physical factor Q^{-2A-1/2} and m derivatives absorbed in K_m = 2A + 1/2 + m s_t; flat term E_{j,m} from (9.5).",
+    "Partial sums: base+initialization q^{-K_m} bound plus increments with g_j - l_m >= -l_m: K_m >= l_m works, independent of j."
+   ],
+   "recomputed": [
+    {
+     "quantity": "(9.19) radial loss",
+     "claimed": "1/2 + h kappa_s",
+     "obtained": "1/2 + h kappa_s (Q^{-1/2} times eps^{-kappa_s} = Q^{-h kappa_s})",
+     "method": "(6.6)"
+    },
+    {
+     "quantity": "(9.19) axial loss",
+     "claimed": "D = 1/2 - h",
+     "obtained": "1/2 - h",
+     "method": "Z = z/Q^D"
+    },
+    {
+     "quantity": "(9.19) time loss",
+     "claimed": "1 + h",
+     "obtained": "1 + h",
+     "method": "t_* = Q^{1+h} t"
+    },
+    {
+     "quantity": "(9.19) frame loss",
+     "claimed": "1/2",
+     "obtained": "1/2",
+     "method": "1/r = Q^{-1/2}/R"
+    },
+    {
+     "quantity": "axial phase term cost",
+     "claimed": "Q^{-D} eps^{-1} = Q^{-1/2}",
+     "obtained": "Q^{-(1/2-h) - h} = Q^{-1/2}",
+     "method": "arithmetic"
+    },
+    {
+     "quantity": "s_x, s_t",
+     "claimed": "s_x = 1/2 + h/2, s_t = 1 + 3h/2 (extraction 'sx = 12 + 2,h st = 1 + 3h2')",
+     "obtained": "k Q^{-1/2} = Q^{-1/2-h/2}, k Q^{-1-h} = Q^{-1-3h/2}",
+     "method": "k <= 2 Q^{-h/2}"
+    },
+    {
+     "quantity": "l_m",
+     "claimed": "2A + (m+1)(1 + 3h/2)",
+     "obtained": "2A + (m+1) s_t, sufficient",
+     "method": "worst-case per-derivative loss s_t >= s_x, one extra derivative for the curl, prefactor bounded by Q^{-2A}"
+    },
+    {
+     "quantity": "g_j",
+     "claimed": "h j/10 (extraction 'gj = 10h')",
+     "obtained": "h * (j/10) from the lowest stage-j class exponent 0.6 + j/10 (waves) resp. 1.1 + j/10 - 2 kappa_s (means)",
+     "method": "(9.8), (9.9), Prop 9.6"
+    },
+    {
+     "quantity": "sigma_j, B_j, C*_j",
+     "claimed": "sigma_j = 1/5 + j/10, B_j = 1/2 + sigma_j, C*_j = 1 + sigma_j (extraction '15 + 10,j', '21 + sigma_j')",
+     "obtained": "consistent with B_0 = 0.7, C*_0 = 1.2 of Prop 9.5 and the +1/10 step of Prop 9.6",
+     "method": "cross-check"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "existence_source": "The states (u^[j],p^[j]) whose increments Z_j the lemma bounds are produced inductively by Proposition 9.5 (stage 0) and Proposition 9.6 (stage j -> j+1, 'There is a state (u^[j+1],p^[j+1])'); their common domain 0 < q < q_big is asserted by Lemma 9.7. Lemma 9.8's text defines Z_j via (9.15) 'the cycle from stage j-1 to stage j' (p.112) and cites (9.8), (9.9), (9.5) for the bounds; it does not cite Prop 9.5/9.6 by number.",
+   "notes": "All exponent arithmetic reproduces; the losses claimed are consistent with (6.6), (7.3), (6.12). The extraction garbles g_j, s_x, s_t, sigma_j; all were resolved by recomputation and by p.114 ('g_j = hj/10')."
+  },
+  {
+   "id": "Proposition 9.9",
+   "verdict": "CHECKED",
+   "pages_read": [
+    15,
+    16,
+    17,
+    56,
+    57,
+    58,
+    59,
+    60,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116
+   ],
+   "attack": "Checked each hypothesis of Lemma 5.4 ((5.28), U_0 bound, (5.29) representatives, (5.30), (5.32), (5.33)) against what Lemmas 9.7/9.8 and (9.15) supply; recomputed the H_ext derivative bound; tested the exterior formula K = r^{-1-2h} H_ext(tau/r^2) against (4.29) - the extracted prefactor '2A c_infty' is WRONG as written (2^A is needed) so I checked the PDF glyphs; checked the inner asymptotic (3.6) at z = 0; probed whether X_in in (0,X_a) is covered by the expansion bounds.",
+   "steps_checked": [
+    "(5.28): q_t = -1/L bounded (b=1: q^{1-1}); q_z = 2 eta q^{1-D}/L = O(q^{1-D}); higher derivatives inductively; D = 1/2 - h in (0,1). Lower bound: q = tau/(1-eta^2) >= tau = 1-t, positive on compact subsets of Omega.",
+    "Representatives: Z_j = (A_j, B_j, p_j) with B_j = b_j e_theta, Delta u_j = curl A_j + B_j (9.15); curl(Psi_j e_theta) = (-d_z Psi_j, 0, (d_r + 1/r) Psi_j) checked; chi(a_j q) B_j divergence-free since d_theta b_j = 0 and q = q(z,t); annular representatives vanish near the axis for t < 1.",
+    "(5.30) with g_j = hj/10 -> infinity nondecreasing, l_m nondecreasing and j-independent: supplied by Lemma 9.8 (9.17).",
+    "U_0 = base + finite initialization block (cut once inside q < q_big with cutoff = 1 near q = 0): |U_0|_m <= C q^{-K_m}(1+|log q|)^P from Lemma 9.8's partial-sum bound.",
+    "(5.32): F = R has constant coefficients (c_{a0} = 0), trivially satisfied; (5.33) is (9.18) with rho_j = h sigma_j -> infinity, K^F_m = K_m j-independent, E_{j,m} flat.",
+    "Lemma 5.4 then gives (5.34) U locally finite, smooth, div u = 0 and (5.36) = (9.20); (9.21) is (5.34) written out.",
+    "Theorem 3.1(i): base vector potential = (S/r^2)(-x_2,x_1,0) with S/r^2 smooth in (r^2,z,t) (5.27), base angular field r x smooth, corrections vanish near the axis.",
+    "Theorem 3.1(ii): on c <= q <= c' only finitely many cutoffs are nonzero (a_j -> infinity), finitely many bands/labels, one-sided bounds from the fixed ODE inverses, L >= 1-2h > 0 in the coordinate conversion; FTC gives compatible one-sided limits.",
+    "Theorem 3.1(iii): beyond all supports A = 0 (M(inf)=0 and U = 0 for X >= X_v make the Stokes streamfunctions vanish), B = K; u_theta = q^{-A} c_inf X^{-A} H(2d/X) = c_inf (r^2/2)^{-A} H(4 tau/r^2) = 2^A c_inf r^{-1-2h} H(4 tau/r^2) = r^{-1-2h} H_ext(tau/r^2) with H_ext(s) = 2^A c_inf H(4s); pressure p = -int_r^inf K^2/rho drho is the centrifugal balance; Lemma A.6 gives the radial heat equation; residual zero.",
+    "H^{(m)}(Z) = Gamma(1+h)^{-1} int e^{-v} v^{h+m} (-1)^m (h)_m (1+Zv)^{-h-m} dv, |.| <= (h)_m Gamma(h+m+1)/Gamma(1+h) = (h)_m (1+h)_m; H_ext^{(m)}(s) = 2^A c_inf 4^m H^{(m)}(4s): the stated bound (with 2^A) follows.",
+    "Theorem 3.1(iv): at z = 0, eta = 0 and q = tau; r = sqrt(2 X_in tau) gives X = X_in; u_theta = q^{-A}(E_0(X_in,0) + O(q^{2h})) by the recovered expansion of Prop 5.5 on [0,X_max] (valid for any fixed X_in in (0,X_a), not only on the enlarged rectangle of (5.42)); annular corrections vanish for X < X_a; e_0 = sqrt(2X_in) F(X_in,0) > 0 since phi > 0."
+   ],
+   "recomputed": [
+    {
+     "quantity": "prefactor in H_ext(s)",
+     "claimed": "text extraction: '2Ac_inf H(4s)'",
+     "obtained": "2^A c_inf H(4s), from (4.29): c_inf (r^2/2)^{-A} = 2^A c_inf r^{-2A} and 2A = 1 + 2h",
+     "method": "PDF rawdict p.116: the 'A' after '2' is an 8.0pt glyph with bbox top y=331.0 versus the 10.9pt baseline glyph '2' at y=333.5, i.e. a superscript; likewise in the derivative bound line"
+    },
+    {
+     "quantity": "sup |H_ext^{(m)}|",
+     "claimed": "<= 2^A c_inf 4^m (h)_m (1+h)_m",
+     "obtained": "same: (1+Zv)^{-h-m} <= 1, int e^{-v} v^{h+m} dv = Gamma(h+m+1) = Gamma(1+h)(1+h)_m",
+     "method": "differentiation under the integral (A.34)/(4.29)"
+    },
+    {
+     "quantity": "(5.28) exponents",
+     "claimed": "|d_z^a d_t^b q| <= C q^{1 - aD - b}",
+     "obtained": "a=b=0 trivial; b=1: q_t = -1/L; a=1: q_z = 2 eta q^{1-D}/L",
+     "method": "Lemma 4.1 derivatives"
+    },
+    {
+     "quantity": "rho_j in (5.33)",
+     "claimed": "h sigma_j -> infinity",
+     "obtained": "h(1/5 + j/10) -> infinity",
+     "method": "(9.8), (9.18)"
+    },
+    {
+     "quantity": "inner growth (3.6)",
+     "claimed": "u_theta(sqrt(2 X_in tau),0,0,1-tau) = tau^{-A}(e_0 + O(tau^{2h}))",
+     "obtained": "same with e_0 = E_0(X_in, 0) = sqrt(2 X_in) phi(X_in,0)/C > 0",
+     "method": "eta = 0, q = tau at z = 0; X = r^2/(2q)"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "existence_source": "Existence of a state at every stage j (the terms being summed) comes from Proposition 9.5 (stage 0) plus Proposition 9.6 applied inductively (stage j -> j+1); Lemma 9.7 asserts the common domain q < q_big for all finite partial sums. Proposition 9.9's proof cites Lemma 9.7, Lemma 9.8, Lemma 5.4 and (9.15); it does not cite Propositions 9.5/9.6 by number (they are cited in the Section 9 introduction, p.100, and in the setup of (9.15) on p.112).",
+   "notes": "The one item that looked like an error ('2A c_inf') is an extraction artefact (lost superscript). Lemma 5.4's hypotheses are all supplied. What I accepted from cited statements without re-deriving: Lemma 5.4's proof (read, hypotheses matched), Lemma A.6's heat equation, Prop 5.5's streamfunction form at the axis."
+  },
+  {
+   "id": "Lemma B.7",
+   "verdict": "CHECKED",
+   "pages_read": [
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155
+   ],
+   "attack": "Reconstructed the slope of log phi along [X_0, X_i] from (B.26), the reference cutoff and the a -> .8 interpolation, to see whether -kappa p_{1,r}/2 with kappa <= 1 really holds throughout (including the reference-cutoff interval where the reference slope is (1-sigma) D_X log phi_nat); reconstructed each contribution to G_i - U_* (activation (B.27), kappa_0-remainder, axial cutoff to zero, axis approximation) and checked which constants can depend on Lambda or C; checked that a = .8 corresponds to slope -.4.",
+   "steps_checked": [
+    "a = 1 - 2 D_X log E = -2 D_X log phi (E = sqrt(2X) phi/C), so a = .8 iff d_y log phi = -.4, and on the stress-free axis profile a = p_1 gives d_y log phi = -p_1/2.",
+    "Slope on [X_0, X_i]: (B.26) prescribes d_y log phi = -kappa p_{1,r}/2 on 0 < y < t_1 with kappa = 1 - e_a in [kappa_0, 1], and 'keep (B.26) with kappa = kappa_0 through the reference cutoff and constant-slope interval' (p.153); then convex interpolation of a from kappa_0 p_{1,r} to .8 (slope between -kappa_0 p_{1,r}/2 and -.4); so |d_y log phi|_{C^k} <= (M_k + .8)/2 everywhere on [X_0, X_i].",
+    "Integration over L_0 = log(X_i/X_0) = log(110 Lambda/4): ||log phi(X_i)||_{C^k} <= ||log phi_* + log Phi(4,.)||_{C^k} + (M_k + .8) L_0/2, using log phi(X_0) = log phi_* + log Phi(4,.) (Y = Lambda X_0 = 4); adding log sqrt(2X_i) = (1/2) log(2 X_i) gives ||l_i||_{C^k} <= B_k.",
+    "B_k depends on Lambda (phi_* = exp(Lambda int zeta_*), L_0, M_k) but not on C >= C_0(Lambda) (Phi bounds of B.2/B.3 uniform in C; M_k amplitude-independent by Lemma B.4) nor on t_1, kappa_0, widths (only bounded cutoff values integrated).",
+    "G_i - U_*: (a) axis profile U = U_* + Lambda^{-1} u with u = -Y Z_*/(2L) + O(1/Lambda) by (B.13), and the reference cutoff integrates D_X U_nat = O(Lambda^{-1}) over length <= 2 tbar: together C^nat_k/Lambda with C^nat_k independent of Lambda (Z_*, L fixed) and of C; (b) activation: d_y(U - U_r) = e_a X n_{s,r}/2 on 0 < y < t_1, |X n_{s,r}| <= X_0 e^{tbar} N_k, contribution <= X_0 e^{tbar} N_k t_1/2; (c) kappa = kappa_0 phase: D_X U = -kappa_0 X n_{s,r}/2 while D_X U_r = 0, integrated in dX over [.,X_b]: <= kappa_0 N_k X_i/2; (d) the beta-transition of D_X U to zero: same bound; so ||G_i - U_*||_{C^k} <= C^nat_k/Lambda + C^join_k(Lambda)(t_1 + kappa_0) which implies (B.32) (the omega_fin term is extra slack: the a-interpolation does not touch U).",
+    "C^join_k(Lambda) = max(X_0 e^{tbar} N_k/2, X_i N_k) depends on Lambda through N_k but not on C or on the widths (Lemma B.4 bounds are independent of C and t_1)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "slope during the a-interpolation",
+     "claimed": "varies convexly to -.4",
+     "obtained": "a = .8 <=> d_y log phi = -.4 since a = -2 D_X log phi",
+     "method": "(4.11) with E = sqrt(2X) phi/C"
+    },
+    {
+     "quantity": "bound on log phi(X_i)",
+     "claimed": "||log phi_* + log Phi(4,.)||_{C^k} + (1/2)(M_k + .8) L_0",
+     "obtained": "same; slope magnitude <= max(M_k/2, .4) <= (M_k+.8)/2 over length L_0",
+     "method": "integration of the prescribed slopes"
+    },
+    {
+     "quantity": "U change during the first axial transition",
+     "claimed": "<= X_0 e^{tbar} N_k t_1/2",
+     "obtained": "int_0^{t_1} e_a X |n_{s,r}|/2 dy <= t_1 X_0 e^{tbar} N_k/2 (X <= X_0 e^{t_1} <= X_0 e^{tbar}, e_a <= 1)",
+     "method": "(B.27)"
+    },
+    {
+     "quantity": "U change from the kappa_0 remainder",
+     "claimed": "<= X_i N_k kappa_0/2",
+     "obtained": "int kappa_0 X N_k/2 dy = kappa_0 N_k/2 int dX <= kappa_0 N_k X_i/2",
+     "method": "(B.26) with kappa = kappa_0, D_X U_r = 0"
+    },
+    {
+     "quantity": "Lambda-independence of C^nat_k",
+     "claimed": "independent of Lambda and large C",
+     "obtained": "|U - U_*| <= (4.1/2)|Z_*|/(L Lambda) + O(Lambda^{-2}) on Y <= 4.1",
+     "method": "(B.13)"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "The bound (B.32) reproduces with the stated dependence of constants. Lemma B.4's amplitude-independent bounds M_k, N_k were accepted as stated (its proof was read; the comparison functions were recomputed under Proposition 4.10)."
+  },
+  {
+   "id": "Proposition B.8",
+   "verdict": "CHECKED",
+   "pages_read": [
+    28,
+    35,
+    36,
+    37,
+    38,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157
+   ],
+   "attack": "Tried to break the tolerance chain (B.36)-(B.37) numerically; tried to make Q_{s,0} of the ideal profile vanish on R (the proof only cites '(A.25)'), by computing Q_{s,0} explicitly; tried to break (B.39)'s C_p = O(C^{-2}) bound noting that E^2/(2X) on the axis region equals X_R phi^2/C^2 with X_R growing like C^{10}; checked the ideal-profile identity after X_sep; checked the block-triangular moment map and its weights; checked the relaxed cone along (B.34) (l range, S_q > 1, barrier); checked that X_R cancels in (B.35).",
+   "steps_checked": [
+    "(B.35): W = 1 - 2 D eta M/X - d M_eta/X with M = X_R Mhat, X = X_R x gives W = 1 - 2 D eta Mhat/x - d Mhat_eta/x; Q_s numerator X_R^{3/2}(...) over X H = X_R x sqrt(X_R) Hhat gives (...)/(x Hhat); N_s numerator X_R(...)/(X_R x); C_p scale invariant; X_R cancels.",
+    "(B.36) => v_s <= .9 + .01/.7 < 1 and G >= 6Q_s/7 >= 3Q_min/7; P_c = X_R x G/L; on R x >= e^{-8} so P_c > 2 once X_R > 14 e^8/(3 Q_min) (X_R = 110 (C P_*)^{10}).",
+    "Q_{s,0} for U_0 = 4 eta, E_0 = P_* f x^{1/10}, computed from (B.35) with Mhat_0 = 4 eta x, Ihat_0 = (5 sqrt2/8) P_* f x^{8/5}, Jhat_0 = 4 eta Ihat_0, Hhat_0 = sqrt2 P_* f x^{3/5}: W_0 = -3 + 8h eta^2 and Q_{s,0} = 9/8 - 5h/8 + 2h eta^2 + (5/8) eta^2 (2D + 8(1-eta^2))/(1+eta^2), x-independent, >= 9/8 - 5h/8 > 1 on all of R x [-1,1]; so Q_min > 1 exists; e_* = min E_0 = P_* e^{-4/5}/2 > 0.",
+    "(B.38): x_sep = e^{T_sh}/(C P_*)^{10}; (B.39): |U| bounded on [0,X_sep] (U_* + small, then G_i), CE bounded on [0,X_sep] and O(sqrt X) near 0 (log phi bounded by B_k-type bounds, (B.34) exponent bounded by T_sh/10 + B_0 + ||log f||), so ||Mhat|| + ||Shat|| <= C_k x_sep, ||Ihat|| + ||Jhat|| <= C_k C^{-1} x_sep^{3/2}; C_p = C^{-2} int_0^{X_sep} (CE)^2/(2X) dX <= C^{-2}(sup phi^2 X_0 + C'' Lambda X_sep) = O_k(C^{-2}) since X_sep = X_i e^{T_sh} is fixed before C (the X_R growth is absorbed because the integral is taken in X, not x).",
+    "Reference pressure increment at x_sep: (5/2) P_*^2 f^2 x_sep^{1/5} = (5/2) f^2 e^{T_sh/5} C^{-2} = O(C^{-2}).",
+    "After X_sep, (B.34) with sigma = 1 gives E = C^{-1} f (X/X_i)^{1/10} = P_* f (X/X_R)^{1/10} since X_R^{1/10} = X_i^{1/10} C P_*.",
+    "Along (B.34): l = 1/2 + D_X log E = .6 + T_sh^{-1} sigma'(y_i/T_sh)(log f - l_i), |second term| <= (B_0 + ||log f||)||sigma'||/T_sh <= 1/20 by (B.33), so l in [.55,.65], a = 2 - 2l in [.7,.9], b_s = 2 D_X U/E = 0 (U = G_i); S_q = -W l - h(1 - 2 eta U) - H_c (log E)_eta with (log E)_eta a convex combination of l_i' and (log f)': -H_c (log f)' = 2 eta H_c/(1+eta^2) >= -C j_0^2 - C/Lambda - o(1) (complete the square in eta H_* = (D + 4d) eta^2 + d j_0 eta), -H_c l_i' >= L Lambda chi - C chi - C sigma_* sqrt(chi) - C/Lambda - o(1) >= -C'/Lambda; with -W ~ -W_* > 2.8 and l >= .55: S_q >= 1.54 - 0.1 - small > 1.",
+    "Barrier: D_X p_1 = X S_q/L - l p_1; at p_1 = 2, >= X - 1.3 > 0 for X >= X_i = 110; so p_1 > 2 persists; with b_s = 0, t_s = 0: P_c = p_1 > 2, v_s = a < 1 < U(P_c,J_c): strict relaxed cone.",
+    "Restoration (e^{-8}, e^{-7}): moment discrepancies at x = e^{-6} bounded by C_k ||G_i - 4 eta||_{C^{k+1}} + o_C(1) (the o_C(1) collects (B.39) and the ideal integrals over [0,x_sep]); made small by j_0, Lambda, then C, then the widths ((B.32)).",
+    "Moment map on (e^{-6},e^{-5}): rows J - 4 eta I and S - 8 eta M remove the E-dependence of J (dJ/dE = 4 eta sqrt(2x) dE = 4 eta dI) and the U-dependence of S (dS/dU = 2 U_0 dU = 8 eta dM); U-block weights 1, f x^{3/5} (from Hhat_0); E-block weights sqrt(2x) ~ x^{1/2}, -E_0 ~ f x^{1/10}, E_0/x ~ f x^{-9/10}; distinct exponents (0, 3/5) and (1/2, 1/10, -9/10); Lemma A.1/Cor A.3 invertible; nonlinearity exactly quadratic (dU dE in J, dU^2, dE^2 in S, dE^2 in C_p); Lemma A.2 applies for small discrepancy.",
+    "Bumps supported strictly inside the patch, so fields equal the ideal near x = e^{-5}; with matched moments and common Pi_0, Lemma 4.4(i) propagates equality outward."
+   ],
+   "recomputed": [
+    {
+     "quantity": "v_s bound",
+     "claimed": ".9 + .01/.7 < 1",
+     "obtained": "0.91429 (using |b_s| <= .1; actually |b_s| <= .05 gives .9036)",
+     "method": "arithmetic"
+    },
+    {
+     "quantity": "G bound",
+     "claimed": "G >= 6Q_s/7 >= 3Q_min/7",
+     "obtained": "|b_s N_s/(aE)| <= (.1/(1+w_*)) w_* Q_s/.7 < Q_s/7",
+     "method": "inequalities of (B.36)"
+    },
+    {
+     "quantity": "P_c",
+     "claimed": "X_R x G/L",
+     "obtained": "X_R x G/L",
+     "method": "(4.20), (4.11)"
+    },
+    {
+     "quantity": "Q_{s,0} on R (ideal profile)",
+     "claimed": "positive minimum (cited to (A.25))",
+     "obtained": "Q_{s,0} = 9/8 - 5h/8 + 2h eta^2 + (5/8) eta^2 (2D + 8 d)/(1+eta^2) >= 1.11 for h <= .01",
+     "method": "explicit evaluation of (B.35) with the (4.34) moments"
+    },
+    {
+     "quantity": "x_sep",
+     "claimed": "e^{T_sh}/(C P_*)^{10}",
+     "obtained": "same",
+     "method": "X_sep/X_R"
+    },
+    {
+     "quantity": "(B.39) C_p bound",
+     "claimed": "||C_p||_{C^k} <= C_k C^{-2} at x = x_sep",
+     "obtained": "C^{-2} int_0^{X_sep} (CE)^2/(2X) dX with (CE)^2/(2X) = phi^2 bounded near the axis and (CE)^2 bounded on [X_0,X_sep]; constants depend on Lambda, T_sh only",
+     "method": "integration in X"
+    },
+    {
+     "quantity": "reference pressure increment at x_sep",
+     "claimed": "(5/2) P_*^2 f^2 x_sep^{1/5} = O(C^{-2})",
+     "obtained": "(5/2) f^2 e^{T_sh/5} C^{-2}",
+     "method": "x_sep^{1/5} = e^{T_sh/5}/(C P_*)^2"
+    },
+    {
+     "quantity": "l range along (B.34)",
+     "claimed": "[.55, .65]",
+     "obtained": ".6 +/- 1/20 by (B.33)",
+     "method": "T_sh >= 20 ||sigma'|| (B_0 + ||log f||)"
+    },
+    {
+     "quantity": "barrier at p_1 = 2",
+     "claimed": "D_X p_1 > 0",
+     "obtained": "X S_q/L - l p_1 >= 110*1 - .65*2 > 0",
+     "method": "S_q > 1, l <= .65, L <= 1, X >= 110"
+    },
+    {
+     "quantity": "moment-map weights",
+     "claimed": "U: 1, f x^{3/5}; E: x^{1/2}, f x^{1/10}, f x^{-9/10}",
+     "obtained": "same from dM, d(J - 4 eta I), dI, d(S - 8 eta M), dC_p at the ideal profile",
+     "method": "differentiation of (4.15)"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Every displayed number reproduces. The garbled display (B.35) was reconstructed from (4.16)+(4.8) and checked to be X_R-free. The only inputs accepted without re-derivation are Corollary A.3/Lemma A.1 (Vandermonde-type invertibility, whose proof sketch on p.34 I checked) and Lemma A.2 (contraction, checked on p.34)."
+  },
+  {
+   "id": "Proposition C.3",
+   "verdict": "CHECKED",
+   "pages_read": [
+    30,
+    31,
+    32,
+    33,
+    140,
+    141,
+    142,
+    143,
+    144,
+    152,
+    153,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165
+   ],
+   "attack": "Tried to break the edge directions: inner direction from (B.30) [is B_0(0,eta) really parallel to a(1,t_s)?], outer direction from (A.48)-(A.49) [is the y_b^6 exponent right and does it give (1,0)?]; re-derived the interior identities n_theta + t_s n_z = (P_c - v_s)/|p_s - s| and n_z - t_s n_theta = J_c/|p_s - s| from (4.11)/(4.20); checked that the cone expression equals 2 at both edges; checked that (C.18) matches (6.23) and that (B.31)/(A.51) give (C.19) with delta = min{1,y_a,y_b}; checked the 'stress cannot vanish in the interior' argument; checked which collars are untouched by Proposition C.2.",
+   "steps_checked": [
+    "T_0 = F(p_s - s), s = a(1,t_s): T_{0,theta} + t_s T_{0,z} = F[(p_s1 - a) + t_s(p_s2 + a t_s)] = F(P_c - v_s); T_{0,z} - t_s T_{0,theta} = F(p_s2 - t_s p_s1) = F J_c; hence n_theta + t_s n_z = (P_c - v_s)/|p_s - s| and n_z - t_s n_theta = J_c/|p_s - s| (F > 0).",
+    "Admissible cone (4.22) <=> P_c > v_s and (v_s - 2) J_c^2 < 2 (P_c - v_s)^2 <=> n_theta + t_s n_z > 0 and 2 - (v_s-2)(n_z - t_s n_theta)^2/(n_theta + t_s n_z)^2 > 0 in the interior.",
+    "Interior nonvanishing: T_0 = 0 would give p_s = s, hence P_c = a(1 + t_s^2) = v_s, contradicting P_c > v_s.",
+    "Inner edge: (B.30) T_0 = e_a B_0 with B_0(0,eta) = F(X_0,eta) p_{s,r}(X_0,eta) and the limiting shear at y = 0 is (a,-b_s) = p_{s,r} (kappa = 1 there), so n(X_a) is a positive multiple of a(1,t_s): n_z - t_s n_theta = 0, n_theta + t_s n_z > 0; the cone expression equals 2.",
+    "Outer edge: (A.48)-(A.49) T_{0,theta} = e^{-4/y_b^2} y_b^{-3} b_theta, T_{0,z} = e^{-4/y_b^2} y_b^3 b_z; dividing by the common positive factor e^{-4/y_b^2} y_b^{-3}: n = (b_theta, y_b^6 b_z)/sqrt(b_theta^2 + y_b^{12} b_z^2) -> (1,0) with b_theta(0,eta) > 0 (A.48); b_s = 0 there (A.56) so t_s = 0 and again n_z - t_s n_theta = 0: expression = 2.",
+    "Compactness: n_theta + t_s n_z and 2 - (...) are continuous and positive on the closed annulus, so one kappa in (0,2) works for both inequalities (4.26).",
+    "Positive lower bounds for F, a, v_s - 2: interior from the admissible-cone margins (C.2)/(C.16) and F > 0; inner endpoint a = p_{1,r}(X_0) > 0, v_s = v_r > 2 + c ((B.19)/(B.23)); outer endpoint a in (2+h, 2+2h] (A.56), v_s = a, F > 0 (heat factor); continuity gives bounds on the closed annulus.",
+    "(C.18) vs (6.23): zeta = exp(-a_a/log^2(X/X_a) - a_b/log^2(X_b/X)) with a_a = t_1^2, a_b = 4; (C.19): on the inner collar zeta/e^{-t_1^2/y_a^2} = e^{-4/y_b^2} is bounded above and below (y_b in a compact subinterval of (0,inf)), so (B.31) (|T_0| >= c e^{-t_1^2/y_a^2}, |d^I T_0| <= C e^{-t_1^2/y_a^2} y_a^{-N_I}) gives (C.19) with delta = y_a; on the outer collar (A.51) with delta = 3 - y = log(X_b/X) = y_b gives it; on the compact interior both zeta and |T_0| have positive minima.",
+    "Collars preserved: Prop C.2's modulation is supported in I compact in (X_a,X_b) and its moment correction in a later patch; forward integration from the unchanged axis datum keeps everything up to X_- unchanged; exact moment restoration at X_rep plus (E,U) unchanged beyond gives, by Lemma 4.4(i), unchanged Pi, Q_s, N_s, p_s, a, b_s, T_0 for X >= X_rep, so the outer collar's (A.48)-(A.51) persist.",
+    "Parts (i),(ii),(v),(vi): axis regularity (B.2, B.6), (4.25) via Lemma A.5/A.7/B.8 and (C.17), Pi_X = E^2/(2X) = F^2 at X = 0, exterior moments (4.28) via A.7/B.8 and (C.17), V_0 = 0 beyond X_v from U = M = 0 and (4.7), reserved intervals with (4.30) unchanged."
+   ],
+   "recomputed": [
+    {
+     "quantity": "inner limiting direction",
+     "claimed": "parallel to (a(X_a), -b_s(X_a)) = a(1,t_s)",
+     "obtained": "B_0(0,eta) = F p_{s,r}(X_0) and p_{s,r}(X_0) = (a,-b_s)(X_a) since kappa(0) = 1 in (B.26)",
+     "method": "(B.30), (B.26)"
+    },
+    {
+     "quantity": "outer limiting direction",
+     "claimed": "(1,0), t_s = 0",
+     "obtained": "(b_theta, y_b^6 b_z)/sqrt(b_theta^2 + y_b^12 b_z^2) -> (1,0); b_s = 0 by (A.56)",
+     "method": "(A.48)-(A.50)"
+    },
+    {
+     "quantity": "n_theta + t_s n_z",
+     "claimed": "(P_c - v_s)/|p_s - (a,-b_s)|",
+     "obtained": "same",
+     "method": "(4.11), (4.20), (4.23)"
+    },
+    {
+     "quantity": "n_z - t_s n_theta",
+     "claimed": "J_c/|p_s - (a,-b_s)|",
+     "obtained": "same",
+     "method": "(4.23)"
+    },
+    {
+     "quantity": "cone expression at the edges",
+     "claimed": "equals 2 at either edge",
+     "obtained": "n_z - t_s n_theta = 0 at both edges, so 2 - 0 = 2",
+     "method": "edge directions"
+    },
+    {
+     "quantity": "weight (C.18) vs (6.23)",
+     "claimed": "zeta = exp(-t_1^2/y_a^2 - 4/y_b^2), delta = min{1,y_a,y_b}",
+     "obtained": "(6.23) with a_a = t_1^2, a_b = 4; matches (B.31) exponent t_1^2 and (A.51) exponent 4",
+     "method": "comparison"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "All edge computations reproduce. Accepted from cited statements without full re-derivation: Proposition A.10's factorization (A.48)-(A.51) (its proof was read; the b_theta(0,eta) > 0 formula follows from (A.54) as stated) and Proposition C.2's O(N^{-1}) estimates (read and found consistent with Lemma 4.4(ii))."
+  }
+ ],
+ "summary": {
+  "CHECKED": 10,
+  "GAP": 0,
+  "NOT-CHECKED": 0
+ },
+ "escalation_candidates": [],
+ "extraction_artefacts_found": [
+  {
+   "page": 29,
+   "display": "W_i = 1 -2D eta M_i + d d_eta M_i , X  and  Delta W = -2D eta Delta M + d d_eta Delta M , X",
+   "resolved_as": "W_i = 1 - (2 D eta M_i + d d_eta M_i)/X and Delta W = -(2 D eta Delta M + d d_eta Delta M)/X (fraction bars start right of the minus signs; consistent with (4.8))"
+  },
+  {
+   "page": 116,
+   "display": "H_ext(s) = 2Ac_inf H(4s)  and  sup|H_ext^{(m)}| <= 2Ac_inf 4^m (h)_m (1+h)_m",
+   "resolved_as": "2^A c_inf (the 'A' is an 8pt superscript glyph raised above the 10.9pt baseline); required by (4.29): c_inf (r^2/2)^{-A} = 2^A c_inf r^{-1-2h}"
+  },
+  {
+   "page": 37,
+   "display": "Ihat_0 = 5 8 2 P_* f x^{8/5};  Shat_0 = 16 eta^2 x - 512 P_*^2 f^2 x^{6/5};  C_p,0 = 52 P_*^2 f^2 x^{1/5}",
+   "resolved_as": "(5 sqrt2/8) P_* f x^{8/5};  (5/12) P_*^2 f^2 x^{6/5};  (5/2) P_*^2 f^2 x^{1/5} (recomputed by direct integration)"
+  },
+  {
+   "page": 38,
+   "display": "G = Qs - bsNs >= 6 >= 3Qmin , Pc = XRx G > 2  aE 7Qs 7 L",
+   "resolved_as": "G = Q_s - b_s N_s/(aE) >= 6 Q_s/7 >= 3 Q_min/7, P_c = X_R x G/L > 2"
+  },
+  {
+   "page": 113,
+   "display": "gj = 10h (in (9.17));  sx = 12 + 2,h  st = 1 + 3h2",
+   "resolved_as": "g_j = h j/10 (confirmed by p.114 'g_j = hj/10'); s_x = 1/2 + h/2, s_t = 1 + 3h/2"
+  },
+  {
+   "page": 106,
+   "display": "Bj = 21 + sigma_j, C*_j = 1 + sigma_j, sigma_j = 15 + 10,j",
+   "resolved_as": "B_j = 1/2 + sigma_j, C*_j = 1 + sigma_j, sigma_j = 1/5 + j/10 (consistent with B_0 = 0.7, C*_0 = 1.2)"
+  },
+  {
+   "page": 155,
+   "display": "(B.35) garbled: 'W = 1 -2D eta M/x -d M_eta/x, Q_s = -W + ... x Hhat, N_s = -WU + D(M - eta M_eta)/x + ...'",
+   "resolved_as": "the (4.16) formulas with X -> x, H -> Hhat = sqrt(2x) E, m -> mhat; X_R cancels (re-derived)"
+  },
+  {
+   "page": 156,
+   "display": "(B.37): 'G >= 6 >= 3Qmin , Pc = XRx G.  7Qs 7 L'",
+   "resolved_as": "G >= 6Q_s/7 >= 3Q_min/7, P_c = X_R x G/L"
+  }
+ ]
+}

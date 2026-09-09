@@ -1,0 +1,966 @@
+{
+ "schema": "arc6_spine_v1",
+ "agent": 1,
+ "leg": 429,
+ "nodes_assigned": [
+  "Theorem 1.1",
+  "Lemma 10.2",
+  "Lemma 10.3",
+  "Lemma 10.4",
+  "Lemma 10.5",
+  "Proposition 10.1",
+  "Theorem 3.1",
+  "Proposition 9.9",
+  "Lemma 9.7",
+  "Lemma 9.8",
+  "Lemma 5.4",
+  "Proposition 5.5",
+  "Proposition 5.3",
+  "Lemma 5.1",
+  "Lemma 5.2"
+ ],
+ "nodes": [
+  {
+   "id": "Theorem 1.1",
+   "verdict": "CHECKED",
+   "pages_read": [
+    1,
+    7,
+    16,
+    17,
+    117,
+    124
+   ],
+   "steps_checked": [
+    "p.124: u solves (1.1) exactly on [0,1) by definition (10.5) f := R(u,p); smoothness + fixed compact support K give u in C([0,T];H^3), T<1.",
+    "Force smoothness/support from Lemma 10.3 (f in C_c^inf(R^3 x (0,inf)), supp in K x [0,2]); energy bound from Lemma 10.4; compact support of u,p from Prop 10.1; u(.,0)=0 from (10.2).",
+    "(10.20): along x_tau=(sqrt(2 X_in tau),0,0), t=1-tau: z=0 => eta=0 => q=tau and X=r^2/(2q)=2X_in tau/(2tau)=X_in; spatial cutoff chi_x=1 once r=sqrt(2X_in tau)<=r_0/2, temporal cutoff chi_t=1 once tau<=tau_0/2, so u=u_loc on the path for small tau.",
+    "(10.21) is Theorem 3.1(iv)=(3.6): u_theta(x_tau,1-tau)=tau^{-A}(e_0+O(tau^{2h})) -> +inf since e_0>0, A=1/2+h>0; x_tau -> 0.",
+    "H^3(R^3) -> L^inf excludes an H^3 continuation through t=1 (the L^inf norm blows up).",
+    "Comparison: for a hypothetical global smooth v with bounded energy and every T<1, v in L^inf([0,T];L^2), same f, zero datum, so Lemma 10.5 gives v=u on [0,T]; hence on [0,1); (10.21) contradicts boundedness of smooth v near (0,1).",
+    "f nonzero: if f=0 then F=0 and (10.13) gives u=0, contradicting (10.21).",
+    "(10.22) rescaling: with y=x/sqrt(nu), each of d_t u_nu, (u_nu.grad_x)u_nu, nu Lap_x u_nu, grad_x p_nu equals sqrt(nu) times the corresponding viscosity-one term at (y,t); div_x u_nu=0; K_nu=sqrt(nu)K; time unchanged.",
+    "Competitor v(y,t)=nu^{-1/2}v_nu(sqrt(nu)y,t), P=nu^{-1}P_nu(sqrt(nu)y,t) is a viscosity-one bounded-energy smooth solution with the same data, already excluded.",
+    "Theorem statement: compact support (Prop 10.1), sup ||u||_2<inf (Lemma 10.4), limsup ||u||_inf=inf ((10.21)), 'Consequently' clause (comparison argument)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "chain rule for (10.22)",
+     "claimed": "d_t u_nu+(u_nu.grad_x)u_nu-nu Lap_x u_nu+grad_x p_nu = sqrt(nu)[...](y,t)=f_nu",
+     "obtained": "d_t: sqrt(nu) d_t u; transport: sqrt(nu)*sqrt(nu)*nu^{-1/2}(u.grad_y)u=sqrt(nu)(u.grad_y)u; viscous: nu*nu^{-1}*sqrt(nu)Lap_y u; pressure: nu*nu^{-1/2}grad_y p. All = sqrt(nu)*(viscosity-one term). Matches.",
+     "method": "chain rule, y=x/sqrt(nu)"
+    },
+    {
+     "quantity": "derivative scaling of f_nu",
+     "claimed": "d^alpha_x d^m_t f_nu = nu^{(1-|alpha|)/2}(d^alpha_y d^m_t f)(x/sqrt(nu),t)",
+     "obtained": "sqrt(nu)*nu^{-|alpha|/2} = nu^{(1-|alpha|)/2}. Matches.",
+     "method": "chain rule"
+    },
+    {
+     "quantity": "(10.23) energy scaling",
+     "claimed": "||u_nu(t)||_2^2 = nu^{5/2}||u(t)||_2^2 ; nu int ||grad u_nu||^2 = nu^{5/2} int ||grad u||^2",
+     "obtained": "int nu|u(x/sqrt nu)|^2 dx = nu*nu^{3/2}||u||^2 = nu^{5/2}||u||^2; grad_x u_nu=(grad_y u)(y) so ||grad_x u_nu||^2=nu^{3/2}||grad u||^2, times nu = nu^{5/2}. Matches.",
+     "method": "substitution x=sqrt(nu) y, dx=nu^{3/2}dy"
+    },
+    {
+     "quantity": "competitor energy",
+     "claimed": "||v(t)||_2^2 = nu^{-5/2}||v_nu(t)||_2^2",
+     "obtained": "nu^{-1} int |v_nu(sqrt(nu) y)|^2 dy = nu^{-1} nu^{-3/2}||v_nu||^2. Matches.",
+     "method": "substitution"
+    },
+    {
+     "quantity": "growth point (10.20)",
+     "claimed": "z=0, q=tau, X=X_in, cutoffs=1 for small tau",
+     "obtained": "eta=z q^{-D}=0 => tau=q(1-0)=q; X=2X_in tau/(2 tau)=X_in; r->0 so chi_x=1; tau<=tau_0/2 so chi_t=1. Matches.",
+     "method": "(3.2) coordinates"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Proof is the assembly of Prop 10.1, Lemmas 10.2-10.5 and Theorem 3.1(iv); each cited input is one of my nodes and was checked. The uniqueness-in-H^3 remark (maximal lifespan) is a side statement not needed for the theorem's conclusion."
+  },
+  {
+   "id": "Proposition 10.1",
+   "verdict": "CHECKED",
+   "pages_read": [
+    7,
+    15,
+    16,
+    116,
+    117,
+    118
+   ],
+   "steps_checked": [
+    "(10.3): from (3.2) tau=q(1-eta^2), z=q^D eta: if 1-eta^2>=1/2 then q<=2 tau; else |eta|>2^{-1/2} so |z|>q^D 2^{-1/2}, q<(sqrt2 |z|)^{1/D}; hence q<=C_0(tau+|z|^{1/D}) uniformly in r.",
+    "Choice of 0<tau_0<1/2, z_0>0 with C_0(tau_0+z_0^{1/D})<q*/2; on supp c (|z|<z_0, tau<tau_0) this gives q<q*/2, a fixed margin from the outer boundary q=q* of Omega*.",
+    "Cutoffs: chi_x axisymmetric, smooth in (r^2,z), =1 on {r<=r_0/2,|z|<=z_0/2}, supp in {r<r_0,|z|<z_0}; chi_t(t)=0 for 1-t>=tau_0, =1 for 1-t<=tau_0/2; c=chi_x chi_t.",
+    "(10.4): u=curl(cA)+cB e_theta, p=c p_loc; product rule u=c u_loc + grad c x A; div u = div curl(cA) + r^{-1} d_theta(cB) = 0 since c and B are theta-independent.",
+    "Axis smoothness from the Cartesian representatives of A and B e_theta (Theorem 3.1(i)) and chi_x smooth in r^2; smooth zero extension from the cutoff supports and the q<q*/2 margin; supp in K=supp chi_x; (10.2) from chi_t=0 for t<=1-tau_0.",
+    "Agreement with (u_loc,p_loc) near (0,1): both cutoffs equal one there.",
+    "Section 10.1 background: (10.1) Stokes streamfunctions S_n=q^{1-A+2nh} int_0^X U_n, S=r^2 a(r^2,z,t) near axis so (S/r)e_theta=a(-x_2,x_1,0); exterior A=0 on X>=X_ext (background moments (4.28),(5.10) kill radial integrals beyond the supports; mean potentials Psi=r^{-1}I_c(r gamma)=0 beyond source since chi_m=1 and I g = J g there)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "(10.3) bound q<=C_0(tau+|z|^{1/D})",
+     "claimed": "q <= C_0(tau+|z|^{1/D})",
+     "obtained": "q<=max(2 tau, 2^{1/(2D)}|z|^{1/D}) <= C_0(tau+|z|^{1/D}) with C_0=max(2,2^{1/(2D)}). Obtained.",
+     "method": "case split on 1-eta^2 >= 1/2 in (3.2)"
+    },
+    {
+     "quantity": "div u",
+     "claimed": "0",
+     "obtained": "div curl(cA)=0; div(cB e_theta)=r^{-1}d_theta(cB)=0. Obtained.",
+     "method": "cylindrical divergence, axisymmetry"
+    },
+    {
+     "quantity": "(10.2) vanishing time",
+     "claimed": "u=p=0 for all sufficiently small t",
+     "obtained": "c=0 for t<=1-tau_0, and 1-tau_0>1/2>0. Obtained.",
+     "method": "definition of chi_t"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Straightforward; depends on Theorem 3.1(i) for axis smoothness and on q ~ tau+|z|^{1/D} from (3.2)."
+  },
+  {
+   "id": "Lemma 10.2",
+   "verdict": "CHECKED",
+   "pages_read": [
+    15,
+    16,
+    116,
+    118,
+    119,
+    120,
+    138
+   ],
+   "steps_checked": [
+    "Region 1 (q bounded below, away from q*): Theorem 3.1(ii) bounds every space-time derivative of A, B e_theta, p_loc up to tau=0 on such compact sets; FTC in t gives uniform Cauchy for each derivative; the finite expression (10.5) with fixed cutoffs preserves this.",
+    "Region 2 (r bounded below, q small => X>=X_ext): A=0, velocity = K(r,tau)e_theta with (10.7) K=c_inf s^{-A}H(2 tau/s), s=r^2/2; H from (A.32); H_ext(Z)=2^A c_inf H(4Z) consistent with (3.5).",
+    "(10.8): |d_tau^j K| <= C_j r^{-1-2h-2j} and |d_tau^j(K(rho,tau)^2/rho)| <= C_j rho^{-3-4h-2j}, using sup_{Z>=0}|H^{(m)}|<=(h)_m(1+h)_m from (A.34).",
+    "Pressure: p_loc=-int_r^inf K^2/rho d rho; the majorant rho^{-3-4h-2j} is integrable on [r_-,inf), so dominated convergence gives d_tau^j p_loc = -int_r^inf d_tau^j(K^2/rho) with uniform bounds and one-sided limits on compact positive-radius intervals; d_r p_loc = K^2/r gives further radial derivatives.",
+    "Exterior residual identically zero: for u=K e_theta, (u.grad)u=-(K^2/r)e_r cancels grad p=(K^2/r)e_r, and d_t K=(d_rr+r^{-1}d_r-r^{-2})K (Lemma A.6) kills the e_theta component.",
+    "Coverage of the terminal slice minus the origin: z != 0 => q > |z|^{1/D} > 0 (since |eta|<1); z=0, x != 0 => r>0 and the exterior argument applies on a small neighborhood.",
+    "Near the origin: cutoffs =1, f=R(u_loc,p_loc); (3.4) on X<=X_ext plus zero residual for X>=X_ext plus (10.3) give (10.9) |d^alpha d^j f| <= C(tau+|z|^{1/D})^N.",
+    "Uniform Cauchy on R^3: pick a small ball and late time so (10.9) is below tolerance there; finite cover of K minus the ball gives uniform convergence outside; derivatives vanish off K; limits vanish at the origin.",
+    "F_j := uniform limit for alpha=0; limit in the FTC along spatial segments identifies every other limit as d^alpha F_j, so F_j is smooth with support in K; (10.10) from the time FTC gives compatibility under time differentiation."
+   ],
+   "recomputed": [
+    {
+     "quantity": "H_ext(Z) from (10.7) vs (3.5)",
+     "claimed": "H_ext(Z)=2^A c_inf H(4Z)",
+     "obtained": "s^{-A}=(r^2/2)^{-A}=2^A r^{-1-2h}; 2 tau/s=4 tau/r^2=4Z. So K=2^A c_inf r^{-1-2h}H(4Z). Matches.",
+     "method": "algebra with s=r^2/2, A=1/2+h"
+    },
+    {
+     "quantity": "sup_{Z>=0}|H^{(m)}(Z)|",
+     "claimed": "<= (h)_m (1+h)_m (p.116: sup|H_ext^{(m)}|<=2^A c_inf 4^m (h)_m(1+h)_m)",
+     "obtained": "(A.34): |H^{(m)}| <= (h)_m/Gamma(1+h) int e^{-v}v^{h+m}dv = (h)_m Gamma(1+h+m)/Gamma(1+h) = (h)_m (1+h)_m since (1+Zv)^{-h-m}<=1. Chain rule adds 4^m and 2^A c_inf. Matches.",
+     "method": "(A.34), Gamma-function ratio = rising factorial"
+    },
+    {
+     "quantity": "(10.8) exponents",
+     "claimed": "|d_tau^j K|<=C r^{-1-2h-2j}; |d_tau^j(K^2/rho)|<=C rho^{-3-4h-2j}",
+     "obtained": "d_tau^j K = c_inf s^{-A}(2/s)^j H^{(j)}(2tau/s) = O(s^{-A-j}) = O(r^{-2A-2j}) = O(r^{-1-2h-2j}). Product rule on K^2/rho: rho^{-1}*rho^{-2-4h-2j}. Matches.",
+     "method": "differentiation of (10.7)"
+    },
+    {
+     "quantity": "integrability of majorant",
+     "claimed": "rho^{-3-4h-2j} integrable on [r_-,inf)",
+     "obtained": "exponent 3+4h+2j > 1. Yes.",
+     "method": "power integral"
+    },
+    {
+     "quantity": "exterior residual",
+     "claimed": "identically zero",
+     "obtained": "e_r: -K^2/r + d_r p = 0 with d_r p=K^2/r; e_theta: d_t K - (Lap - r^{-2})K = 0 by Lemma A.6. Obtained.",
+     "method": "NS in cylindrical coordinates for a swirl field"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Depends on Theorem 3.1(ii),(iii) (proved in Prop 9.9) and Lemma A.6. Extraction of the display (10.8) on p.119 is scrambled; reconstructed from the surrounding text and checked as above."
+  },
+  {
+   "id": "Lemma 10.3",
+   "verdict": "CHECKED",
+   "pages_read": [
+    118,
+    120
+   ],
+   "steps_checked": [
+    "(10.11): f(x,1+sigma)=sum_j chi_0(b_j sigma) sigma^j/j! F_j(x), chi_0=1 near 0, =0 for arguments >=1, b_j increasing integers >=1.",
+    "(10.12): d_sigma^m of chi_0(b_j sigma)sigma^j/j! = sum_a C(m,a) b_j^a chi_0^{(a)}(b_j sigma) sigma^{j-m+a}/(j-m+a)!; on the support 0<=sigma<=b_j^{-1} so sigma^{j-m+a}<=b_j^{-(j-m+a)}; total b_j^{m-j}. Terms with the monomial differentiated to zero are absent.",
+    "b_0=1; for j>=1, b_j = least integer b>b_{j-1} with max_{a+m<=floor(j/2)} C_{j,m} b^{m-j}||F_j||_{C^a} <= 2^{-j}: finitely many constraints, each with m-j<0, so the set is nonempty.",
+    "Hence (10.12)<=2^{-j} whenever |alpha|+m<=floor(j/2); for fixed (alpha,m) all j>=2(|alpha|+m) qualify, so every differentiated series converges uniformly (tail sum of 2^{-j}).",
+    "At sigma=0 the cutoff is constant near zero, so d_sigma^m of the j-th summand at 0 is delta_{jm}F_m; with (10.10) and uniform convergence, all mixed derivative limits from t<1 are matched; smooth gluing across t=1.",
+    "Support: each summand supported in K x [1,1+b_j^{-1}] subset K x [1,2]; f=0 near t=0 by (10.2); so f in C_c^inf(R^3 x (0,inf)) with support in K x [0,2].",
+    "Decay bound: on the support 1+|x|+t<=3+R so |d f|<=M(3+R)^k(1+|x|+t)^{-k}."
+   ],
+   "recomputed": [
+    {
+     "quantity": "(10.12) exponent",
+     "claimed": "C_{j,m} b_j^{m-j} ||F_j||_{C^{|alpha|}}",
+     "obtained": "b_j^a * b_j^{-(j-m+a)} = b_j^{m-j}, independent of a. Matches (PDF geometry confirms superscript m-j, subscript j).",
+     "method": "Leibniz rule + sigma<=b_j^{-1} on supp chi_0(b_j sigma)"
+    },
+    {
+     "quantity": "nonemptiness of the b_j constraint set",
+     "claimed": "nonempty",
+     "obtained": "for a+m<=floor(j/2), m<=j/2<j, so b^{m-j}->0 as b->inf; finitely many constraints. Nonempty.",
+     "method": "monotonicity"
+    },
+    {
+     "quantity": "tail after choosing b_j",
+     "claimed": "sum over j of the differentiated summands converges uniformly for each fixed (alpha,m)",
+     "obtained": "for j>=2(|alpha|+m): |alpha|+m<=floor(j/2) so term<=2^{-j}; sum_{j>=J}2^{-j}=2^{1-J}. Converges.",
+     "method": "geometric series"
+    },
+    {
+     "quantity": "decay bound constant",
+     "claimed": "(3+R)^k(1+|x|+t)^{-k}>=1 on supp f",
+     "obtained": "|x|<=R, t<=2 => 1+|x|+t<=3+R. Yes.",
+     "method": "support"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Self-contained given Lemma 10.2's (10.6),(10.10)."
+  },
+  {
+   "id": "Lemma 10.4",
+   "verdict": "CHECKED",
+   "pages_read": [
+    121
+   ],
+   "steps_checked": [
+    "Statement: F(t)=int_0^t ||f(s)||_2 ds (PDF geometry: subscript 2), (10.13): ||u(t)||_2^2 + 2 int_0^t ||grad u||_2^2 <= F(t)^2.",
+    "(10.14): on [0,T], T<1, u,p smooth with fixed compact support; testing (10.5) with u kills transport (div u=0) and pressure, giving (1/2)d/dt||u||^2+||grad u||^2=<f,u>.",
+    "Divide by (||u||^2+delta^2)^{1/2}, drop dissipation, Cauchy-Schwarz: d/dt (||u||^2+delta^2)^{1/2} <= ||f||_2; integrate from u(0)=0, let delta->0: ||u(t)||_2<=F(t).",
+    "Back in (10.14): (1/2)d/dt||u||^2+||grad u||^2 <= ||f|| ||u|| <= F'F; integrate and double: ||u||^2+2 int||grad u||^2 <= 2 int F'F = F(t)^2.",
+    "F(1)<inf since f is smooth and compactly supported; monotone convergence gives finite dissipation on [0,1)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "d/dt (||u||^2+delta^2)^{1/2}",
+     "claimed": "<= ||f||_2",
+     "obtained": "= (1/2 d/dt||u||^2)/(||u||^2+delta^2)^{1/2} <= |<f,u>|/(||u||^2+delta^2)^{1/2} <= ||f|| ||u||/(||u||^2+delta^2)^{1/2} <= ||f||. Obtained.",
+     "method": "(10.14) with dissipation dropped, Cauchy-Schwarz"
+    },
+    {
+     "quantity": "2 int_0^t F'F ds",
+     "claimed": "F(t)^2",
+     "obtained": "= [F^2]_0^t = F(t)^2 - 0. Obtained.",
+     "method": "F(0)=0"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Elementary energy identity; uses smoothness and compact support from Prop 10.1 and f from Lemma 10.3."
+  },
+  {
+   "id": "Lemma 10.5",
+   "verdict": "CHECKED",
+   "pages_read": [
+    121,
+    122,
+    123
+   ],
+   "steps_checked": [
+    "Setup: w=v-u, pi=P-p, g_ij=v_i v_j-u_i u_j = w_i w_j+w_i u_j+u_i w_j; ||w(t)||_2<=C_T, ||g(t)||_1<=C_T; div g = (v.grad)w+(w.grad)u; (10.15).",
+    "Pressure gradient: pi*=sum R_iR_j g_ij has multiplier -xi_i xi_j/|xi|^2 times bounded g-hat, so pi* in H^{-s}, s>3/2 (int (1+|xi|^2)^{-s} < inf in R^3 iff s>3/2); Lap pi* = -sum d_i d_j g_ij.",
+    "For a in C_c^inf(0,T): int a grad pi dt = Lap int a w + int a' w - div int a g, with terms in H^{-2}, L^2, H^{-3} (last via g in L^1, s=2). This makes int a grad pi tempered even though grad pi itself has no growth condition. H_a := int a(grad pi - grad pi*) in H^{-3}.",
+    "Divergence of (10.15): Lap pi = -sum d_i d_j g_ij = Lap pi*, so Lap H_a = 0; H_a-hat is a weighted L^2 function supported at {0}, hence 0; testing in space: grad pi = grad pi* for a.e. t.",
+    "Cutoffs: phi_R(x)=phi(x/R), chi_R = phi_R^8 (PDF geometry: the 8 is a superscript; see extraction_artefacts_found). E_R=int chi_R|w|^2, A_R=(int chi_R|grad w|^2)^{1/2}, B_R=||phi_R^4 w||_6.",
+    "(10.17): Sobolev + product rule: B_R<=C||grad(phi^4 w)||_2<=C(||phi^4 grad w||_2 + 4||phi^3 grad phi||_inf ||w||_2) = C(A_R + R^{-1}||w||_2), exactly since (phi^4)^2=phi^8=chi_R.",
+    "(10.18): phi^4 pi* = sum R_iR_j(phi^4 g_ij) + sum [phi^4, R_iR_j]g_ij. First sum in L^{3/2} with norm <= C_T(B_R+1): ||phi^4 w_i w_j||_{3/2}<=||phi^4 w||_6||w||_2 (1/6+1/2=2/3), ||phi^4 w_i u_j||_{3/2}<=||w||_2||u||_6, ||u_i u_j||_{3/2}<=C_T; Riesz transforms bounded on L^{3/2}.",
+    "Commutator kernel: |phi^4(x)-phi^4(y)| <= min(C|x-y|/R,1), Riesz kernel C|x-y|^{-3}, identity part cancels: |K_R(x-y)| <= C|x-y|^{-3}min(|x-y|/R,1).",
+    "||K_R||_{4/3}^{4/3} <= C[R^{-4/3} int_0^R r^{-2/3} dr + int_R^inf r^{-2} dr] = C R^{-1}; Young: second sum of (10.18) has L^{4/3} norm <= ||K_R||_{4/3}||g||_1 <= C_T R^{-3/4}.",
+    "Pressure flux: grad chi_R = 8 phi^7 grad phi so |grad chi_R|<=C R^{-1} phi^7; pi* w.grad chi_R = (phi^4 pi*)(phi^3 w).8 grad phi, i.e. 'the two terms in (10.18) pair with C R^{-1} phi_R^3 |w|'.",
+    "Interpolation: ||phi^3 w||_3<=||phi^2 w||_3 (phi<=1) and int phi^6|w|^3 = int (phi^4|w|)^{3/2}|w|^{3/2} <= ||phi^4 w||_6^{3/2}||w||_2^{3/2}, so ||phi^2 w||_3 <= B_R^{1/2}||w||_2^{1/2}; int phi^12|w|^4 = int (phi^4|w|)^3|w| <= B_R^3||w||_2 so ||phi^3 w||_4 <= B_R^{3/4}||w||_2^{1/4}.",
+    "(10.19): |int pi w.grad chi_R| <= C_T R^{-1}[(B_R+1)B_R^{1/2} + R^{-3/4}B_R^{3/4}].",
+    "Difference energy identity: pair (10.15) with chi_R w: (1/2)E_R' + A_R^2 = -int chi_R (w.grad)u.w + (1/2)int|w|^2 Lap chi_R + (1/2)int |w|^2 v.grad chi_R + int pi w.grad chi_R (signs verified: -int chi_R(v.grad)w.w = +(1/2)int|w|^2 v.grad chi_R by div v=0; -int chi_R w.grad pi = +int pi w.grad chi_R; -int chi_R Lap w.w = A_R^2 - (1/2)int|w|^2 Lap chi_R).",
+    "Transport flux: chi_R=1 near supp u so v=w on supp grad chi_R; |(1/2)int|w|^2 w.grad chi_R| <= C R^{-1} int phi^7|w|^3 <= C R^{-1} int phi^6 |w|^3 <= C_T R^{-1} B_R^{3/2}. Laplacian term <= C R^{-2}||w||_2^2 <= C_T R^{-2}.",
+    "Powers of A_R after (10.17): 3/2, 1/2, 3/4 (and 3/2 for the transport flux), all < 2; Young's inequality absorbs each into (1/2)A_R^2 with remainder C_T/R.",
+    "(1/2)E_R' + (1/2)A_R^2 <= ||grad u||_inf E_R + C_T/R; Gronwall with E_R(0)=0: E_R(t) <= C'_T/R; chi_R=1 on each fixed ball for large R, so R->inf gives w=0 on [0,T]."
+   ],
+   "recomputed": [
+    {
+     "quantity": "||K_R||_{4/3}^{4/3}",
+     "claimed": "<= C R^{-1}",
+     "obtained": "int_{|x|<R} (C|x|^{-2}/R)^{4/3} dx + int_{|x|>R}(C|x|^{-3})^{4/3}dx = C R^{-4/3} int_0^R r^{-8/3} r^2 dr + C int_R^inf r^{-4} r^2 dr = C R^{-4/3}*3R^{1/3} + C R^{-1} = C R^{-1}. Matches.",
+     "method": "radial integration in R^3"
+    },
+    {
+     "quantity": "Young bound for commutator sum",
+     "claimed": "L^{4/3} norm <= C_T R^{-3/4}",
+     "obtained": "||K_R * g||_{4/3} <= ||K_R||_{4/3}||g||_1 <= (C R^{-1})^{3/4} C_T. Matches.",
+     "method": "Young's convolution inequality"
+    },
+    {
+     "quantity": "(10.17)",
+     "claimed": "B_R <= C(A_R + R^{-1}||w||_2)",
+     "obtained": "grad(phi^4 w) = phi^4 grad w + 4 phi^3 (grad phi) w; ||phi^4 grad w||_2 = (int phi^8 |grad w|^2)^{1/2} = A_R exactly since chi_R=phi^8; |4phi^3 grad phi| <= C/R. Matches (requires chi_R=phi_R^8, not a dilation).",
+     "method": "Sobolev H^1 -> L^6 in R^3, product rule"
+    },
+    {
+     "quantity": "|grad chi_R|",
+     "claimed": "<= C R^{-1} phi_R^7",
+     "obtained": "grad(phi_R^8) = 8 phi_R^7 grad phi_R, |grad phi_R| <= C/R. Matches exactly.",
+     "method": "chain rule"
+    },
+    {
+     "quantity": "Holder exponents in (10.18) first sum",
+     "claimed": "||phi^4 w_i w_j||_{3/2} <= B_R ||w||_2 ; ||phi^4 w_i u_j||_{3/2} <= ||w||_2 ||u||_6",
+     "obtained": "1/6+1/2 = 2/3 both times. Matches.",
+     "method": "Holder"
+    },
+    {
+     "quantity": "interpolation exponents",
+     "claimed": "||phi^3 w||_3 <= B_R^{1/2}||w||_2^{1/2}; ||phi^3 w||_4 <= B_R^{3/4}||w||_2^{1/4}",
+     "obtained": "int phi^6|w|^3 <= ||phi^4 w||_6^{3/2}||w||_2^{3/2} (Holder 4, 4/3) => power 1/2; int phi^12|w|^4 <= ||phi^4 w||_6^3 ||w||_2 (Holder 2,2) => power 3/4. Matches.",
+     "method": "Holder with phi^2|w| = (phi^4|w|)^{1/2}|w|^{1/2}, phi^3|w| <= (phi^4|w|)^{3/4}|w|^{1/4}"
+    },
+    {
+     "quantity": "powers of A_R in flux bounds",
+     "claimed": "all at most 3/2 < 2",
+     "obtained": "transport: B^{3/2}; pressure: B^{3/2}, B^{1/2}, B^{3/4}; B <= C(A+R^{-1}) so max power 3/2. Matches.",
+     "method": "(10.17) into (10.19)"
+    },
+    {
+     "quantity": "Young absorption example",
+     "claimed": "R^{-1}A^{3/2} <= delta A^2 + C_delta R^{-4}",
+     "obtained": "Young with p=4/3, p'=4: (A^{3/2})^{4/3}=A^2, (R^{-1})^4=R^{-4}. Matches. Also R^{-1}A^{1/2} <= delta A^2 + C R^{-4/3} <= C/R, R^{-3/4}A^{3/4} <= delta A^2 + C R^{-6/5} <= C/R for R>=1.",
+     "method": "Young's inequality"
+    },
+    {
+     "quantity": "Sobolev dual exponent for pi* in H^{-s}",
+     "claimed": "s > 3/2",
+     "obtained": "int_{R^3}(1+|xi|^2)^{-s} d xi < inf iff 2s > 3. Matches.",
+     "method": "polar coordinates"
+    },
+    {
+     "quantity": "Lap pi* multiplier",
+     "claimed": "Lap pi* = -sum d_i d_j g_ij",
+     "obtained": "(-|xi|^2)(-xi_i xi_j/|xi|^2) g-hat = xi_i xi_j g-hat = (-d_i d_j g)-hat. Matches.",
+     "method": "Fourier multipliers"
+    },
+    {
+     "quantity": "Gronwall constant",
+     "claimed": "E_R(t) <= (2C_T/R) int_0^t exp(2 int_s^t ||grad u||_inf) ds <= C'_T/R",
+     "obtained": "from E' <= 2||grad u||_inf E + 2C_T/R, E(0)=0, ||grad u||_inf bounded on [0,T]. Matches.",
+     "method": "Gronwall"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "The banked text reads 'chi_R = phi8R', 'phi4R', 'phi3R', 'phi2R', 'phi6R', 'phi7R'. Read as dilations phi(x/(kR)) these are mutually inconsistent (|grad chi_R| <= C R^{-1} phi_{7R} fails at the outer edge of supp grad phi_{8R} for every phi; ||phi_{3R}w||_3 <= ||phi_{2R}w||_3 is backwards; no monotone ordering satisfies (10.17), the pairing, and the interpolations simultaneously). PDF word geometry on p.122 (y-boxes: 'phi8' raised, 'R,' lowered; 'phi4' raised, 'R' lowered) shows they are powers phi_R^k of a single cutoff. With that reading every inequality is exact and the lemma is fully reproduced. Recorded under extraction_artefacts_found."
+  },
+  {
+   "id": "Theorem 3.1",
+   "verdict": "CHECKED",
+   "pages_read": [
+    7,
+    8,
+    15,
+    16,
+    114,
+    115,
+    116
+   ],
+   "steps_checked": [
+    "Statement matched clause by clause to Prop 9.9's proof: (i) <- Step 2 (representation (9.21), Cartesian smoothness at the axis, div u_loc=0); (ii) <- Step 3; (iii) <- Step 1 end + (9.20) for (3.4), Step 4 for A=0, B=K, p=-int K^2/rho, H_ext bounds and the swirl heat equation (Lemma A.6); (iv) <- Step 5.",
+    "Constants: h<1/100 from Theorem 4.6; q*=q_big from Lemma 9.7; X_a from Theorem 4.6; X_ext 'beyond all slow supports' (>= X_b, X_+), finite.",
+    "(3.5)/(3.6) consistency with (4.29) and (5.1) recomputed under Prop 9.9 below.",
+    "Domain Omega*={tau>0, q<q*}: q>=tau>0 on compact subsets; q ~ tau+|z|^{1/D} from (3.2) (verified: q - z^2 q^{2h} = tau, d_q>=1-2h>0)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "q - z^2 q^{2h} = tau from (3.2)",
+     "claimed": "yes, with d_q(q - z^2 q^{2h}) = 1 - 2h eta^2 >= 1-2h",
+     "obtained": "eta = z q^{-D}; tau = q(1-eta^2) = q - z^2 q^{1-2D} = q - z^2 q^{2h} since 1-2D=2h; d_q: 1 - 2h z^2 q^{2h-1} = 1 - 2h eta^2. Matches.",
+     "method": "algebra, A+D=1, 1-2D=2h"
+    },
+    {
+     "quantity": "energy scales in Sec.3.5 (side remark)",
+     "claimed": "E_core ~ tau^{1/2-3h}, D_core ~ tau^{-1/2-3h}, integrable iff h<1/6",
+     "obtained": "volume ~ l_r^2 l_z = tau*tau^{1/2-h}=tau^{3/2-h}; velocity^2 ~ tau^{-1-2h} => tau^{1/2-3h}; (d_r u)^2 ~ tau^{-2-2h} => tau^{-1/2-3h}; int_0 tau^{-1/2-3h} < inf iff 1/2-3h>0. Matches.",
+     "method": "scaling"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Theorem 3.1 has no proof of its own; it is 'all conclusions hold' in Prop 9.9. Verdict inherits Prop 9.9's, including the caveat recorded there about Step 3's delegated one-sided bounds."
+  },
+  {
+   "id": "Proposition 9.9",
+   "verdict": "CHECKED",
+   "pages_read": [
+    100,
+    106,
+    107,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116
+   ],
+   "steps_checked": [
+    "Step 1: F=R(u,p) is a constant-coefficient differential polynomial (order s=2, degree d=2), so (5.32) is trivial; q*=q_big (Lemma 9.7); U_0 = slow base + finite initialization block, cut once inside q<q_big on potentials before differentiation (the finite-block remark after Lemma 5.4 permits this).",
+    "Representatives Z_j=(A_j,B_j,p_j) from (9.15): curl(Psi_j e_theta)=(-d_z Psi_j, 0, (d_r+r^{-1})Psi_j) (checked); chi(q) B_j stays divergence-free since B_j=b_j e_theta with d_theta b_j=0; annular representatives vanish near the axis for each t<1, giving smooth Cartesian extension; zero extensions at lateral boundaries.",
+    "(5.28) for q(z,t): from (3.2), d_z q = 2 eta q^{1-D}/L, d_t q = -1/L, giving |d_z^a d_t^b q| <= C q^{1-aD-b} (checked a+b=1; higher orders by induction on the same identities); local lower bound q >= 1-t.",
+    "(5.30) from Lemma 9.8 with g_j = h j/10 (PDF geometry confirms the fraction) and losses ell_m independent of j; |U_0|_m <= C q^{-K_m}Lambda^P for the base (from Prop 5.5 via (5.38)+(5.35)) and initialization.",
+    "(5.33) from (9.18) with rho_j = h sigma_j = h(1/5 + j/10) -> inf, K^F_m independent of j, flat remainder E_{j,m} uniform over labels ((9.5)).",
+    "Uniformity over the whole local domain: fixed bounded X-interval containing all supports, where (5.41)+(9.18) apply; outside, every finite state is the exact exterior heat field (4.29) with centrifugal pressure and zero residual.",
+    "Step 2: Lemma 5.4 gives (9.20) and (9.21); A_0 = (S/r)e_theta with S=r^2 a(r^2,z,t) (from (10.1): S_n = q^{1-A+2nh} X (F_n/X), F_n/X smooth at X=0, X=r^2/(2q)) so A_0 is Cartesian-smooth; B_0 e_theta = r*(smooth)*e_theta; annular parts vanish near the axis. Theorem 3.1(i).",
+    "Step 3: on c<=q<=c'<q*, cutoff sequences a_j, c_n -> inf leave finitely many terms; finitely many bands/labels on a compact set; base profiles closed-range smooth (Theorem 4.6(i); Prop 5.5 last paragraph); geometry fixed on tau>=0 (p.64-65: active part of band at tau>=0, supports include the smooth extension near tau=0); pulse inverse one-sided derivatives (Prop 7.2's statement, p.~76, 'the solution and pressure have the same one-sided derivatives'); mean maps (p.100 closing paragraph of Sec.8); coordinate map has L>=1-2h>0; FTC in time gives uniform one-sided limits and compatibility. Theorem 3.1(ii).",
+    "Step 4: beyond X_ext: A=0, B=K, pressure = -int_r^inf K^2/rho; H_ext(s)=2^A c_inf H(4s) from (4.29) (checked); sup|H_ext^{(m)}| <= 2^A c_inf 4^m (h)_m(1+h)_m from (A.34) (checked); heat equation by Lemma A.6; residual zero in the exterior; with (5.41),(9.20) this is Theorem 3.1(iii).",
+    "Step 5: at (X,eta)=(X_in,0), X_in in (0,X_a): z=0, q=tau; annular corrections vanish; (5.1) with cutoffs gives u_theta = tau^{-A}(E_0(X_in,0) + sum_{n>=1} chi(c_n tau) tau^{2nh} E_n(X_in,0)) and the sum is O(tau^{2h}) by (5.46) (finite block O(q^{2h}), tail sum_{n>=2} 2^{-n} q^{nh} <= q^{2h}); e_0 = E_0(X_in,0) > 0 by Theorem 4.6(i). Theorem 3.1(iv)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "(5.28) first derivatives of q",
+     "claimed": "|d_z q| <= C q^{1-D}, |d_t q| <= C",
+     "obtained": "implicit differentiation of tau=q(1-eta^2), z=q^D eta: d_z q = 2 eta q^{1-D}/L, d_tau q = 1/L, L=1-2h eta^2 >= 1-2h. Matches.",
+     "method": "(3.2)"
+    },
+    {
+     "quantity": "rho_j = h sigma_j",
+     "claimed": "-> inf",
+     "obtained": "sigma_j = 1/5 + j/10 (Def. 9.4), so rho_j = h/5 + hj/10 -> inf. Matches.",
+     "method": "Definition 9.4"
+    },
+    {
+     "quantity": "g_j",
+     "claimed": "h j/10 (9.17) = 'hj/10' in Step 1",
+     "obtained": "PDF p.113: numerator 'h j', denominator '10'. Matches Step 1's statement.",
+     "method": "PDF geometry"
+    },
+    {
+     "quantity": "(3.6) remainder",
+     "claimed": "O(tau^{2h})",
+     "obtained": "finite block of chi(c_n q)q^{2nh}E_n, n<J: O(q^{2h}); tail via (5.46): sum_{n>=J} 2^{-n}q^{nh} <= 2^{1-J} q^{Jh} <= q^{2h} for J>=2. Obtained.",
+     "method": "Prop 5.5 Step 4"
+    },
+    {
+     "quantity": "H_ext^{(m)} bound",
+     "claimed": "2^A c_inf 4^m (h)_m (1+h)_m",
+     "obtained": "H^{(m)}(Z) = (-1)^m (h)_m/Gamma(1+h) int e^{-v} v^{h+m}(1+Zv)^{-h-m} dv, last factor <= 1, integral = Gamma(1+h+m) = Gamma(1+h)(1+h)_m; chain rule for H(4s) gives 4^m. Matches.",
+     "method": "(A.34)"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "existence_source": "Existence of a state at every stage j is supplied by Definition 9.4 together with Proposition 9.5 (stage 0 exists: 'The resulting fields form a state at stage 0') and Proposition 9.6 (given a state at stage j, 'There is a state (u[j+1],p[j+1])'), closed by induction at the end of the proof of Prop 9.6 (p.111: 'Proposition 9.3 supplies the source hypotheses for the next cycle, completing the induction'). The partial sums are (9.15) on p.112, (u[J],p[J]) = U_0 + sum_{j<=J}(Delta u_j, p_j), differences of consecutive states. Lemma 9.7 adds only that all of them live on one domain 0<q<q_big (its proof: the cycle consists of fixed linear inverses with fixed coefficients applied to sources of arbitrary size, so no stage shrinks the domain). Citation status: Prop 9.9 cites Lemmas 9.7, 9.8, 5.4, Prop 5.5, Theorem 4.6, (7.33), (9.15), (9.18), (9.21) but never Prop 9.5 or 9.6 by number; the dependence is implicit through 'the finite corrections above', 'each finite state', (9.15), and the section intro (p.100: 'We prove in Proposition 9.6 that each cycle gains a fixed positive power of eps ... This permits every finite stage to be defined on one domain (Lemma 9.7), where the final summation produces the local field of Proposition 9.9') and Sec.9.4's opening sentence (p.111). The bounds (9.8)-(9.9) are Definition 9.4's, guaranteed at every stage by Props 9.5/9.6.",
+   "notes": "Steps 1, 2, 4, 5 reproduced in full. Step 3 is a list of closed-range (tau>=0) properties delegated to earlier sections; I confirmed that each delegated property is asserted in the cited or nearby text (Theorem 4.6(i), Prop 5.5's final paragraph, Prop 7.2's statement, the closing paragraph of Sec.8 on p.100, and Sec.6.2's tau>=0 geometry), but I did not re-derive those earlier constructions, which are outside my nodes. Prop 9.9 does not cite Prop 7.2 by number for the pulse one-sided claim; it says 'Differentiating its fixed linear ODE gives the bounds at every derivative order' and cites (7.33)."
+  },
+  {
+   "id": "Lemma 9.7",
+   "verdict": "CHECKED",
+   "pages_read": [
+    100,
+    106,
+    107,
+    108,
+    109,
+    111,
+    112
+   ],
+   "steps_checked": [
+    "q_big <= q* chosen once so that the pulse estimates, the lower bound for |n_Phi|, the primary covariance, and the fixed supports of the normalized mean-correction profiles hold on 0<q<q_big; Prop 7.2's threshold is stated (p.~76) to be independent of M, alpha and the correction stage.",
+    "Every later amplitude problem is linear with these fixed coefficients and a known source; (7.18) writes each harmonic's propagator as the fundamental one times a forward damping factor of modulus <= 1, so higher harmonics need no smaller threshold (Cor. 7.3).",
+    "Signed updates divide by the fixed positive primary amplitude 2 sqrt(y_sigma) (7.31), consistent with p.109 ('permits increments of either sign without requiring a square root of the current covariance'); the five-equation system is the fixed linear map of Lemma 8.7; pressure T_0, temporal inverses N^{-1}, modified radial integrals are fixed linear maps. Hence all operations are defined on the same domain for sources of any size.",
+    "Derivative counting: D_{v,a}(m) = max_{w->v} D_{w,a}(m + d_{v,w}) over a finite DAG per stage, initial values D_{b,a}(m)=m delta_{ab}; finitely many vertices => finite counts; pulse equation differentiated to order m involves amplitude derivatives of order <= m; torus inverses cost finitely many derivatives; radial integrals preserve bounds; flatness by finitely many integrations by parts.",
+    "Evaluation at Y=Y(r,t) and physical differentiation come last."
+   ],
+   "recomputed": [
+    {
+     "quantity": "harmonic damping factor",
+     "claimed": "modulus <= 1",
+     "obtained": "(7.18): V_m = exp(-(m^2-1) int d(a) da) V_1 with d>=0 per the text ('only adds damping'), so factor <= 1 for |m|>=1. Consistent.",
+     "method": "reading (7.18) at line 3748 and its surrounding remarks"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "existence_source": "Lemma 9.7 does not itself construct the states; it asserts a common domain for 'every finite partial sum above', i.e. the (u[j],p[j]) of Definition 9.4 produced by Prop 9.5 (j=0) and Prop 9.6 (j -> j+1). Neither proposition is cited by number in the lemma or its proof; the paragraph following the proof (p.112) speaks of 'the cycle from stage j-1 to stage j' (the cycle of Prop 9.6), and Sec.9.4's opening sentence says 'all finite states (u[j],p[j]) must exist on one domain (Lemma 9.7)'. So the existence source is Props 9.5/9.6 by induction, and Lemma 9.7 supplies domain-uniformity; the text makes this link only implicitly.",
+   "notes": "A bookkeeping lemma: no numerical content beyond the damping factor; its substance is the linearity of the Section 7-8 inverses with stage-independent coefficients, which I checked against the cited statements (7.18), (7.31) as used on p.109, Lemma 8.7 as cited, and Prop 7.2's threshold statement."
+  },
+  {
+   "id": "Lemma 9.8",
+   "verdict": "CHECKED",
+   "pages_read": [
+    17,
+    18,
+    62,
+    63,
+    64,
+    65,
+    106,
+    113,
+    114
+   ],
+   "steps_checked": [
+    "(9.19) loss table from (6.6): D_r = sqrt(Q) r = d_R + M_i d_r R^{d_r-1} L_i with M_i ~ eps^{-kappa_s} S^{-rho_g}, so a physical radial derivative costs Q^{-1/2} Q^{-h kappa_s} (times S powers): 1/2 + h kappa_s. Axial: d_z = Q^{-D} d_Z: D=1/2-h. Time: d_t = Q^{-1-h}(-eps d_T + c_i N_i), c_i ~ S^{-1}: 1+h. Frame 1/R = Q^{1/2}/r: 1/2.",
+    "Phase: |grad_x Phi| <= C Q^{-1/2}S^P, |d_t Phi| <= C Q^{-1-h}S^P; axial term p_z Z/eps costs Q^{-D}eps^{-1} = Q^{-D-h} = Q^{-1/2}; general |grad^a d_t^b Phi| <= C Q^{-a/2-b(1+h)}S^P.",
+    "k = ceil(eps^{-1/2}) (7.2) so k <= 2 Q^{-h/2}; chain rule on e^{ikm Phi}: each of at most a+b phase-derivative factors carries km, giving |grad^a d_t^b e^{ikm Phi}| <= C Q^{-a s_x - b s_t} S^P with s_x = 1/2 + h/2, s_t = 1 + 3h/2 (extraction 'sx = 12 + 2,h' read as 1/2 + h/2).",
+    "Dominance: s_x=1/2+h/2 > 1/2+h kappa_s (kappa_s=1e-5), > D=1/2-h, > 1/2; s_t = 1+3h/2 > 1+h. So every physical derivative costs at most Q^{-s_t}.",
+    "Harmonic range finite per stage (quadratic residual at most doubles it; inverses and curls preserve integers), so (km)^a enters constants only.",
+    "Leibniz: class exponent alpha gives coefficient bound C Q^{h alpha - a s_x - b s_t}S^P; edge weights sqrt(zeta) delta^{-M}, zeta delta^{-M} bounded on the closed shell; physical prefactors Q^{-A}, Q^{-2A}, Q^{1/2-A}, Q^{1/2-A} all <= Q^{-2A} (Q<1); one extra spatial derivative for curl: ell_m = 2A + (m+1)(1+3h/2).",
+    "Stage-j increment exponents: wave W_{B_{j-1}} with B_{j-1} = 0.7 + (j-1)/10 = 0.6 + j/10; signed corrections W_{B-kappa_s}; means M_H with H = C*_{j-1} - 2 kappa_s = 1.1 + j/10 - 2kappa_s; pressures M_H, W_{B+1/2}, S_{C*_{j-1}}. All >= j/10, so normalized exponent >= j/10, eps^{j/10} = Q^{hj/10} = q^{g_j}. (9.17).",
+    "Partial sums: |U_0|_m <= C q^{-K_m}Lambda^P; increments <= C q^{g_j - ell_m}Lambda^P <= C q^{-ell_m}Lambda^P; K_m = max(K_m^{base}, ell_m) independent of j.",
+    "(9.18): residual classes at stage j are W_{1/2+sigma_j}, M_{1+sigma_j}, S_{1+sigma_j} (radial residual -rho P), all >= sigma_j; physical residual = Q^{-2A-1/2} R*, a fixed power; m derivatives cost <= m s_t; flat part E_{j,m} <= C q^N by (9.5) uniformly over labels; overlapping charts agree by covariance/relabeling; smooth zero extensions across boundaries.",
+    "S_* = l^2 with Q=2^{-l}, so S_* <= C(1+|log q|)^2, giving the Lambda_log powers."
+   ],
+   "recomputed": [
+    {
+     "quantity": "radial loss in (9.19)",
+     "claimed": "1/2 + h kappa_s",
+     "obtained": "Q^{-1/2} from sqrt(Q) conversion times M_i ~ eps^{-kappa_s} = Q^{-h kappa_s}. Matches.",
+     "method": "(6.6), M_i ~ eps^{-kappa_s}S^{-rho_g}"
+    },
+    {
+     "quantity": "axial loss",
+     "claimed": "D = 1/2 - h",
+     "obtained": "d_z = Q^{-1/2} D_z = Q^{-1/2} eps d_Z = Q^{-1/2+h} d_Z = Q^{-D} d_Z. Matches.",
+     "method": "(6.6)"
+    },
+    {
+     "quantity": "time loss",
+     "claimed": "1 + h",
+     "obtained": "d_t = Q^{-1-h} t_* = Q^{-1-h}(-eps d_T + c_i N_i), eps<=1, c_i ~ S^{-1}. Matches.",
+     "method": "(6.6)"
+    },
+    {
+     "quantity": "frame loss",
+     "claimed": "1/2",
+     "obtained": "1/r = Q^{-1/2}/R. Matches.",
+     "method": "(6.1)"
+    },
+    {
+     "quantity": "k bound",
+     "claimed": "k <= 2 Q^{-h/2}",
+     "obtained": "k = ceil(eps^{-1/2}) <= eps^{-1/2} + 1 <= 2 eps^{-1/2} = 2 Q^{-h/2} since eps = Q^h <= 1. Matches.",
+     "method": "(7.2)"
+    },
+    {
+     "quantity": "s_x, s_t",
+     "claimed": "s_x = 1/2 + h/2, s_t = 1 + 3h/2",
+     "obtained": "(km)^a Q^{-a/2} = Q^{-a(1/2 + h/2)}; (km)^b Q^{-b(1+h)} = Q^{-b(1+h+h/2)}. Matches.",
+     "method": "chain rule on e^{ikm Phi}"
+    },
+    {
+     "quantity": "dominance of s_x, s_t over (9.19)",
+     "claimed": "these costs dominate (9.19)",
+     "obtained": "h/2 > h kappa_s = 1e-5 h; 1/2+h/2 > 1/2-h; 1/2+h/2 > 1/2; 1+3h/2 > 1+h. All hold.",
+     "method": "comparison"
+    },
+    {
+     "quantity": "ell_m",
+     "claimed": "2A + (m+1)(1 + 3h/2)",
+     "obtained": "m physical derivatives + 1 for curl, each <= Q^{-s_t}, s_t = 1+3h/2; prefactor <= Q^{-2A}. Matches.",
+     "method": "sum of losses"
+    },
+    {
+     "quantity": "minimal stage-j normalized exponent",
+     "claimed": ">= j/10",
+     "obtained": "B_{j-1} = 1/2 + 1/5 + (j-1)/10 = 0.6 + j/10; H = 1 + 1/5 + (j-1)/10 - 2 kappa_s = 1.1 + j/10 - 2e-5. Both >= j/10. Matches.",
+     "method": "Def. 9.4 with sigma_j = 1/5 + j/10; Prop 9.6 class assignments"
+    },
+    {
+     "quantity": "g_j",
+     "claimed": "h j / 10",
+     "obtained": "eps^{j/10} = Q^{h j/10}, q ~ Q on the chart. Matches (PDF geometry confirms the fraction).",
+     "method": "eps = Q^h"
+    },
+    {
+     "quantity": "residual exponent in (9.18)",
+     "claimed": "h sigma_j",
+     "obtained": "min class exponent at stage j = min(1/2+sigma_j, 1+sigma_j) = 1/2+sigma_j >= sigma_j; eps^{sigma_j} = q^{h sigma_j}. Matches (conservative).",
+     "method": "(9.8)"
+    },
+    {
+     "quantity": "physical prefactor ordering",
+     "claimed": "Q^{-A}, Q^{-2A}, Q^{1/2-A}, Q^{1/2-A} <= Q^{-2A}",
+     "obtained": "for 0<Q<1 and A>0: -A > -2A and 1/2-A > -2A, so all powers of Q are <= Q^{-2A}. Matches.",
+     "method": "monotonicity of Q^x"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "existence_source": "Lemma 9.8 estimates increments Z_j = (A_j, B_j, p_j) of (9.15), i.e. differences of consecutive states from Definition 9.4; it uses (9.8)-(9.9) ('Apply the same calculation to (9.9), to the fixed background, and to (9.8)') and 'Every retained stage-j increment has normalized exponent at least j/10', which is the class bookkeeping of Prop 9.6's proof. The existence of the states at each stage is therefore taken from Props 9.5/9.6 (induction), not cited by number here; Lemma 9.8 assumes them as given.",
+   "notes": "The only numerical inputs beyond (6.6)/(7.2)/Def. 9.4 are the phase bounds (7.3),(6.12), which I took as cited. The extraction 'gj = 10h j' and 'sx = 12 + 2,h' are fraction artefacts; resolved by PDF geometry and by Prop 9.9 Step 1's explicit 'g_j = hj/10'."
+  },
+  {
+   "id": "Lemma 5.4",
+   "verdict": "CHECKED",
+   "pages_read": [
+    56,
+    57,
+    58,
+    59
+   ],
+   "steps_checked": [
+    "Hypotheses restated: domain 0<q<q_0<=1, (5.28), U_0 bound, increments Z_j with (5.30) (losses ell_m independent of j, g_j nondecreasing to inf), differential polynomial (5.31) with coefficient bounds (5.32), residual hypothesis (5.33).",
+    "Step 1: d_z^{a'}d_t^{b'} chi(aq) = sum a^k chi^{(k)}(aq) prod d^{a_nu}d^{b_nu} q; by (5.28) the product is <= C q^{k - a'D - b'}; on the support 1/2<=aq<=1 so a^k q^k <= 1; bound C q^{-a'D-b'} independent of a. curl(chi A) = chi curl A + a chi'(aq) grad q x A. Product rule: j-th summand through order m bounded by C q^{g_j - ell'_m}Lambda^P with ell'_m depending on m and ell_{m+1} (checked: ell'_m <= ell_{m+1} + m suffices).",
+    "Step 2: (5.37) C-hat_{j,m}Lambda^P q^{g_j/2} <= 2^{-j} for q<=a_j^{-1}, m<=j: finitely many conditions, satisfiable since g_j>0; then the j-th cutoff increment through order m<=j is <= 2^{-j} q^{g_j/2 - ell'_m}. Local finiteness (terms with a_j > delta^{-1} vanish on q>=delta), div-free of each term, smoothness termwise.",
+    "(5.35): for q < (2a_J)^{-1}, chi(a_j q)=1 for j<=J (a_j q <= a_J q < 1/2); tail sum_{j>J} 2^{-j} q^{g_j/2 - ell'_m} <= q^{g_{J+1}/2 - ell'_m} sum_{j>J}2^{-j} = 2^{-J} q^{g_{J+1}/2 - ell'_m} (q<1, g_j >= g_{J+1}, m<=J<j).",
+    "Step 3: (5.38) |U^{[J]}|_m <= C q^{-K_m}Lambda^P with K_m = max(K_m^{U_0}, ell_{m+1}) independent of J (g_j>0). (5.39) by telescoping monomials of degree <= d and order <= s with (5.32): |F(U)-F(U^{[J]})|_m <= C q^{-H_m}|e|_{m+s}(1+|U^{[J]}|_{m+s}+|e|_{m+s})^{d-1}.",
+    "Choice: J >= m+s with g_{J+1}/2 - ell'_{m+s} >= N + H_m + (d-1)(K_{m+s}+1) and rho_J - K^F_m >= N+1; on a small q-neighborhood cutoffs j<=J equal one, |e|_{m+s} <= 1, logs absorbed by one power of q; then (5.39) = O(q^N) and (5.33) = O(q^N) with the fixed flat E_{J,m}. Order of choices (m,N) -> J -> neighborhood."
+   ],
+   "recomputed": [
+    {
+     "quantity": "cutoff derivative bound",
+     "claimed": "|d_z^{a'} d_t^{b'} chi(aq)| <= C q^{-a'D - b'}, C independent of a",
+     "obtained": "each factor |d^{a_nu}d^{b_nu}q| <= C q^{1-a_nu D - b_nu}; product of k factors: C q^{k - a'D - b'}; times a^k with (aq)^k <= 1. Matches.",
+     "method": "(5.28) + chain rule"
+    },
+    {
+     "quantity": "(5.35) tail",
+     "claimed": "2^{-J} q^{g_{J+1}/2 - ell'_m}",
+     "obtained": "sum_{j>J} 2^{-j} q^{g_j/2 - ell'_m} <= q^{g_{J+1}/2 - ell'_m} * 2^{-J}. Matches.",
+     "method": "geometric sum, monotone g_j, q<1"
+    },
+    {
+     "quantity": "(5.39) -> O(q^N)",
+     "claimed": "O(q^N)",
+     "obtained": "q^{-H_m} * q^{N+H_m+(d-1)(K_{m+s}+1)} * (3 q^{-K_{m+s}-1})^{d-1} = 3^{d-1} q^N. Obtained.",
+     "method": "substitute |e| <= q^{g_{J+1}/2 - ell'_{m+s}} <= q^{N+H_m+(d-1)(K+1)} and |U^{[J]}| <= q^{-K-1}"
+    },
+    {
+     "quantity": "(5.33) part",
+     "claimed": "O(q^N)",
+     "obtained": "C q^{rho_J - K^F_m} Lambda^P <= C q^{N+1} Lambda^P <= q^N for small q; E_{J,m} <= C q^N. Obtained.",
+     "method": "choice rho_J - K^F_m >= N+1"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Fully reproduced. The remark after the proof (finite initial block with one common cutoff included in U_0, and the additional diagonal requirements (5.40)) is consistent with the construction since only finitely many requirements are added per step."
+  },
+  {
+   "id": "Proposition 5.5",
+   "verdict": "CHECKED",
+   "pages_read": [
+    46,
+    55,
+    56,
+    57,
+    59,
+    60,
+    61,
+    62
+   ],
+   "steps_checked": [
+    "Step 1: tuples from (5.27)/(5.1): A_n=(S_n/r)e_theta ~ q^{1/2-A+2nh}, B_n=u_{theta,n}e_theta ~ q^{-A+2nh}, p_n ~ q^{-2A+2nh}, stress ~ q^{-A-1/2+2nh}; (5.26) with a transverse, k axial, l time derivatives loses q^{-a/2 - Dk - l} <= q^{-m} (D<1/2); worst prefactor q^{-2A}; so ell_m = 2A + m and g_n = 2nh. Powers of n from differentiating q^{lambda_n} go into C_{n,m}.",
+    "Cutoffs: (q d_q)^j chi(c_n q) = ((sigma d_sigma)^j chi)(c_n q), sup bounded by C_j uniformly in n.",
+    "Residual hypothesis: (5.25) is (5.33) with rho_N = 2h(N+1), no remainder. Lemma 5.4 applied with F_slow gives E_B flat with all derivatives, i.e. (5.41).",
+    "Step 2: (5.45) r u^cut_{r,n} = q^{2nh}[chi(c_n q)V_n - (2 eta/L)(c_n q)chi'(c_n q)F_n], from -d_z of chi(c_n q) S_n with d_z = q^{-D}L^{-1}(2 eta q d_q - 2 eta X d_X + d d_eta) and 1-A-D=0 (checked); divergence exactly zero (curl); (5.18) makes both bracket terms vanish on I_mean, and E_n=U_n=0 there, giving (5.44) with (4.30).",
+    "Step 3: extra diagonal requirements (5.40) give (5.46) |D^I[chi(c_n q) q^{2nh} a_n]| <= 2^{-n} q^{nh} for n >= max(2,|I|); (5.42): finite block O(q^{2h}) plus tail sum_{n>=J} 2^{-n}q^{nh} <= 2^{1-J}q^{Jh} <= q^{2h}; radial in q^A normalization: q^A u_r = q^{A-1/2}(q^{1/2}u_r) = q^h * O(1), positive-order part O(q^{3h}); (5.43): n=1 term q^{2h}T_1 with (5.22)/(5.13), n>=2 via (5.46) for T_n/zeta, giving C q^{2h} zeta delta^{-N} <= C q^h zeta delta^{-N}.",
+    "Step 4: split at J = max(2N+2, m+1): intermediate block has original powers >= q^{2h(N+1)}; tail <= 2^{1-J} q^{Jh} <= 2^{1-J} q^{2h(N+1)} since Jh >= (2N+2)h. Endpoint extensions: finitely many terms on compact sets with q>0; intersect their analytic eta-neighborhoods (Lemmas 5.1/5.2); order zero one-sided by Theorem 4.6(i) and the heat construction; L>0 transfers to physical variables."
+   ],
+   "recomputed": [
+    {
+     "quantity": "ell_m for the coefficient tuple",
+     "claimed": "2A + m",
+     "obtained": "losses per derivative: transverse 1/2, axial D=1/2-h, time 1, all <= 1; prefactors: velocity -A, pressure -2A, streamfunction/potential 1/2-A, stress -A-1/2; min is -2A. So q^{2nh - 2A - m}. Matches.",
+     "method": "(5.26) and (5.1),(5.27)"
+    },
+    {
+     "quantity": "(5.45) cutoff radial term",
+     "claimed": "-(2 eta/L)(c_n q) chi'(c_n q) F_n q^{2nh}",
+     "obtained": "-d_z[chi(c_n q) q^{1-A+2nh}F_n] contains -q^{-D}L^{-1} 2 eta (c_n q)chi'(c_n q) q^{1-A+2nh}F_n = -(2 eta/L)(c_n q)chi' q^{1-A-D+2nh}F_n, and 1-A-D=0. Matches.",
+     "method": "d_z formula on p.56"
+    },
+    {
+     "quantity": "tail in Step 4",
+     "claimed": "sum_{n>=J} 2^{-n}q^{nh} <= 2^{1-J} q^{Jh} <= 2^{1-J} q^{2h(N+1)}",
+     "obtained": "q^{nh} <= q^{Jh} for n>=J, q<=1; sum 2^{-n} = 2^{1-J}; J >= 2N+2 gives q^{Jh} <= q^{2h(N+1)}. Matches.",
+     "method": "geometric series"
+    },
+    {
+     "quantity": "(5.42) radial exponents",
+     "claimed": "q^{1/2}u_r - V_0/sqrt(2X) = O(q^{2h}); q^A u_r = O(q^h)",
+     "obtained": "r u_r,n = q^{2nh}V_n and r = q^{1/2}sqrt(2X) so q^{1/2}u_{r,n} = q^{2nh}V_n/sqrt(2X); q^A u_r = q^{A-1/2} * O(1) = q^h O(1). Matches; positive-order part q^{h+2h}=q^{3h} as stated.",
+     "method": "(5.1), r^2 = 2qX"
+    },
+    {
+     "quantity": "(5.43) power",
+     "claimed": "C q^{2h} zeta delta^{-N} <= C q^h zeta delta^{-N}",
+     "obtained": "n=1: q^{2h}|d^I T_1| <= C q^{2h} e^{-4/delta_b^2}delta_b^{-N} <= C q^{2h} zeta delta^{-N'} (zeta ~ e^{-4/delta^2} x bounded factor near the edge); n>=2: sum_{n>=2} 2^{-n}q^{nh} zeta <= q^{2h} zeta. q<=1 gives the second inequality. Matches.",
+     "method": "(5.22),(5.46)"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Fully reproduced given Lemma 5.4, Prop 5.3, Lemma 5.2's (5.13),(5.18),(5.22) and Theorem 4.6."
+  },
+  {
+   "id": "Proposition 5.3",
+   "verdict": "CHECKED",
+   "pages_read": [
+    45,
+    46,
+    47,
+    49,
+    53,
+    54,
+    55,
+    56
+   ],
+   "steps_checked": [
+    "Step 1: at order n apply Lemma 5.1 then Lemma 5.2 with finalized lower orders; both use the same n-independent radial intervals (a, X_-, X_keep, X_cut, X_+), so the induction runs for all n. (5.2) gives exact incompressibility order by order, hence for every finite sum; (5.5) holds globally by (5.15).",
+    "Stress identities: for T_{n,theta}(R) = -R^{-2} int_0^R rho^2 r_theta d rho, (d_R + 2/R)T_{n,theta} = -r_{theta,n}; for T_{n,z} = -R^{-1} int_0^R rho r_z, (d_R + 1/R)T_{n,z} = -r_{z,n}. Physical: (d_r + 2/r)[q^{-A-1/2+lambda_n}T_n] = q^{-A-1+lambda_n}(d_R + 2/R)T_n = -R_{theta,n} since d_r = q^{-1/2}d_R, r = q^{1/2}R; so F_slow cancels every retained order exactly; order zero by Prop 4.2.",
+    "After truncation at N the uncancelled terms are products u_i u_j with i+j >= N+1 and axial viscosity applied to order N, entering at relative order >= 2h(N+1).",
+    "Step 2: (5.26): d_t = q^{-1}L^{-1}(-q d_q + X d_X + D eta d_eta), d_z = q^{-D}L^{-1}(2 eta q d_q - 2 eta X d_X + d d_eta) (both re-derived from (3.2)); transverse derivative gives q^{-1/2}; so a transverse, k axial, l time derivatives of q^b g(x_perp/sqrt q, eta) lose q^{b - a/2 - Dk - l} with constant C_m(1+|b|)^m ||g||_{C^m}.",
+    "Powers of n from q^{lambda_n} go into constants; on the stress support X >= X_a so r^{-1} = q^{-1/2}(2X)^{-1/2} has N-independent losses; near the axis use the Cartesian representative; finitely many terms in a fixed truncation; hence (5.25) with K_m independent of N."
+   ],
+   "recomputed": [
+    {
+     "quantity": "(d_R + 2/R) T_{n,theta}",
+     "claimed": "-r_{theta,n}",
+     "obtained": "d_R[-R^{-2} int_0^R rho^2 r] = 2R^{-3} int rho^2 r - r = -(2/R)T - r. So (d_R+2/R)T = -r. Matches.",
+     "method": "differentiate (5.9)"
+    },
+    {
+     "quantity": "(d_R + 1/R) T_{n,z}",
+     "claimed": "-r_{z,n}",
+     "obtained": "d_R[-R^{-1} int_0^R rho r] = R^{-2} int rho r - r = -(1/R)T - r. Matches.",
+     "method": "differentiate (5.9)"
+    },
+    {
+     "quantity": "d_z operator (p.56)",
+     "claimed": "q^{-D}L^{-1}(2 eta q d_q - 2 eta X d_X + d d_eta)",
+     "obtained": "from tau = q(1-eta^2), z = q^D eta at fixed tau: d_z q = 2 eta q^{1-D}/L, d_z eta = d q^{-D}/L, d_z X = -X d_z q/q = -2 eta X q^{-D}/L, L = 1 - 2h eta^2. Matches.",
+     "method": "implicit differentiation"
+    },
+    {
+     "quantity": "d_t operator (p.56)",
+     "claimed": "q^{-1}L^{-1}(-q d_q + X d_X + D eta d_eta)",
+     "obtained": "d_tau q = 1/L, d_tau eta = -D eta/(qL), d_tau X = -X/(qL); d_t = -d_tau. Matches.",
+     "method": "implicit differentiation"
+    },
+    {
+     "quantity": "(5.25) exponent",
+     "claimed": "2h(N+1) - K_m",
+     "obtained": "lowest uncancelled relative order 2h(N+1) (products with i+j=N+1 or axial viscosity of order N); base power q^{-A-1} (tangential) or q^{-2A-1} (radial x r^{-1}) and <= m from derivatives give K_m independent of N. Matches.",
+     "method": "order counting in (5.3)-(5.6)"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Fully reproduced given Lemmas 5.1, 5.2 and Prop 4.2."
+  },
+  {
+   "id": "Lemma 5.1",
+   "verdict": "CHECKED",
+   "pages_read": [
+    45,
+    46,
+    47,
+    48,
+    49,
+    32,
+    33
+   ],
+   "steps_checked": [
+    "Step 1: xi = sqrt X; 2(X phi'' + 2 phi') = (1/2)(phi_xixi + 3 xi^{-1} phi_xi) and 2(X U'' + U') = (1/2)(U_xixi + xi^{-1}U_xi) (re-derived); K_n = A_X(U_n) - U_n satisfies d_xi K + 2K/xi = -d_xi U (re-derived from d_X(X A_X U) = U); pressure row d_xi Pi_n = 4 xi phi_0 phi_n/C^2 + known (from Pi'_n = 2C^{-2}phi_0 phi_n + ... - Omega_{n-1}/(2X), d_xi = 2 xi d_X); X d_X Pi_n in the axial equation replaced by this row; all divisions by X regular. Hence (5.7) with diag(0,0,2,0,3,1) singular part, W_n(0)=0, coefficients/sources bounded holomorphic on S_rho (L has no zero there).",
+    "A_1 block structure: (A_1)_{51} = 2H_c/L (from T_{b,n} and U_0 Z_{b,n} acting on phi_n), (A_1)_{52}=(A_1)_{53} = -2d(phi_0 + X d_X phi_0)/L (from V_n(phi_0' + phi_0/X) with V_n/X containing -d d_eta A_X(U_n)/L and A_X(U_n) = K_n + U_n), (A_1)_{62} = 2(H_c - dX d_X U_0)/L, (A_1)_{63} = -2dX d_X U_0/L, (A_1)_{64} = 2d/L (from Z_{-2A,n}Pi_n): maps first four coordinates into the last two and annihilates the last two.",
+    "Step 2: G g = int_0^xi (s/xi)^{c_i} g_i(s) ds inverts the diagonal part with zero axis data, kernel <= 1, commutes with d_eta; K = G(A_0 + A_1 d_eta). A_1(xi) D_0 A_1(s) = 0 and A_1(xi) D_0 (d_eta A_1)(s) = 0 (same sparsity), so adjacent A_1 d_eta factors vanish: a nonzero k-fold composition has at most p_k = ceil(k/2) parameter derivatives.",
+    "(5.8): Cauchy estimates with the radius loss Delta = rho - rho' split among p_k derivatives (factor (p_k/Delta)^{p_k}); ordered simplex volume a^{k+1}/(k+1)!; coefficient bounds C_n^{k+1}; 2^k compositions absorbed. Root test: k-th root -> 0, so the Picard series converges on S_rho' for every a regardless of C_n; uniqueness by the same bound on the homogeneous equation.",
+    "Step 3: (Gg)_i = xi int_0^1 t^{c_i} g_i(t xi) dt, d_xi(Gg)_i = g_i(xi) - c_i int_0^1 t^{c_i} g_i(t xi) dt, continuous at 0; parity (even first four, odd last two) preserved and selected by uniqueness; even smooth functions of xi are smooth in X = xi^2; regularity of Omega_n/X follows."
+   ],
+   "recomputed": [
+    {
+     "quantity": "radial operators in xi",
+     "claimed": "(d_xixi + 3 xi^{-1} d_xi)/2 and (d_xixi + xi^{-1} d_xi)/2",
+     "obtained": "d_X = (2xi)^{-1}d_xi, d_X^2 = (4xi^2)^{-1}d_xixi - (4xi^3)^{-1}d_xi; X phi'' + 2phi' = (1/4)phi_xixi + (3/(4xi))phi_xi; XU''+U' = (1/4)U_xixi + (1/(4xi))U_xi. Times 2 gives the stated operators. Matches.",
+     "method": "chain rule X = xi^2"
+    },
+    {
+     "quantity": "K_n equation",
+     "claimed": "d_xi K_n + 2K_n/xi = -d_xi U_n",
+     "obtained": "A' = (U-A)/X = -K/X; d_xi K = 2 xi A' - d_xi U = -2K/xi - d_xi U. Matches.",
+     "method": "d_X(X A_X U) = U"
+    },
+    {
+     "quantity": "pressure row",
+     "claimed": "d_xi Pi_n = 4 xi phi_0 phi_n/C^2 + known",
+     "obtained": "2 xi * 2 C^{-2} phi_0 phi_n = 4 xi phi_0 phi_n / C^2. Matches.",
+     "method": "d_xi = 2 xi d_X on (5.5)"
+    },
+    {
+     "quantity": "(5.8)",
+     "claimed": "||K^k G f_n|| <= C_n^{k+1} a^{k+1}/(k+1)! (max{1, p_k/Delta})^{p_k}",
+     "obtained": "k+1 nested integrals over 0<=s_{k+1}<=...<=s_1<=xi<=a: a^{k+1}/(k+1)!; kernels <= 1; <= p_k Cauchy estimates each costing p_k/Delta; k matrix factors and the source: C_n^{k+1}; 2^k terms absorbed (C_n >= 2). Matches.",
+     "method": "Cauchy estimate + simplex volume"
+    },
+    {
+     "quantity": "k-th root of RHS of (5.8)",
+     "claimed": "-> 0",
+     "obtained": "(C_n a)^{(k+1)/k} -> C_n a; ((k+1)!)^{-1/k} <= (e/(k+1))^{(k+1)/k} ~ e/k; (p_k/Delta)^{p_k/k} <= ((k+1)/(2 Delta))^{(k+1)/(2k)} ~ sqrt(k/(2 Delta)). Product ~ C/sqrt(k) -> 0. Obtained.",
+     "method": "Stirling"
+    },
+    {
+     "quantity": "p_k",
+     "claimed": "ceil(k/2)",
+     "obtained": "no two A_1 d_eta factors adjacent among k factors => at most ceil(k/2). Matches.",
+     "method": "combinatorics"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Fully reproduced. The moment m_{n,5} and the pressure equation displays are fraction-garbled in the extraction; the reading Pi'_n = C^{-2} sum phi_i phi_j - Omega_{n-1}/(2X) is fixed by Pi_X = E^2/(2X) with E = sqrt(2X) phi/C and by p.51's m_{n,5} formula."
+  },
+  {
+   "id": "Lemma 5.2",
+   "verdict": "CHECKED",
+   "pages_read": [
+    33,
+    34,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    126,
+    127,
+    141,
+    142
+   ],
+   "steps_checked": [
+    "Step 1: kappa cutoff with X_- < X_keep < X_cut < a^2 < inf I_pos fixed independent of n; U_n = kappa U^in_n + sum alpha_j b^U_j(R), E_n = kappa E^in_n + sum beta_j b^E_j(R), bumps in J_pos; V_n, Pi_n, F_n by forward integration (5.15) so (5.2),(5.5) hold globally; on [0,X_-] the profiles equal the inner solution; bumps vanish on [0,a^2] and kappa is eta-independent, so parameter regularity persists there.",
+    "Step 2: on I_pos, U_0=0, E_0 = e* f(eta) R^{-1-2 lambda} (from (4.30), X^{-1/2-lambda} = (R^2/2)^{-1/2-lambda}); moments affine in (alpha,beta): m_{n,1} ~ int R b^U (p_1=1); m_{n,4} via U_n E_0 ~ e* f int R^{1-2lambda} b^U (p_2 = 1-2lambda); m_{n,2} ~ int R^2 b^E (s_1=2); m_{n,3} via 2E_0 E_n/R ~ 2e* f int R^{-2-2lambda} b^E (s_2 = -2-2lambda); m_{n,5} via -E_0 E_n in the X-integral, dX = R dR ~ -e* f int R^{-2lambda} b^E (s_3 = -2lambda). No quadratic terms (U_0 = 0 on the patch; E_n E_n absent for i+j=n, n>=1). Two decoupled blocks with distinct exponents => Lemma A.1 invertible; (5.16). Normalizations of d_{U,n}, d_{E,n} match.",
+    "Step 3: X_+ beyond U_0's support (X_v) and every positive-order patch, before the outer collar: F_n(X) = m_{n,1} = 0 for X >= X_+; A_X(U_n) = V_n = 0 there; every Omega_k term has a V factor (V_0 = 0 beyond X_v, V_n = 0 beyond X_+), so d_X Pi_n = 0 beyond X_+ and Pi_n = Pi_n(0) + m_{n,3} = 0 there; smoothness; F_n/X = int_0^1 U_n(tX) dt smooth; (5.17) by compactness; (5.18) on I_mean (E_n=U_n=0 since kappa=0 and bumps are to the left; F_n = m_{n,1} - int_X^inf U_n = 0; V_n = 0 by (5.2)).",
+    "Step 4: conservative forms r^2 R_theta and r R_z re-derived from the cylindrical equations with div u = 0; order-n moments in profile variables: int r^2 u_{theta,n} dr = q^{3/2-A+lambda_n} m_{n,2}, int r^2 sum u_{z,i}u_{theta,j} = q^{3/2-2A+lambda_n} m_{n,4}, int r u_{z,n} = q^{1-A+lambda_n} m_{n,1}, int r(sum u_z u_z + p_n) = q^{1-2A+lambda_n} m_{n,5} using int R Pi_n dR = -(1/2) int R^2 d_R Pi_n dR; boundary terms vanish (axis parity, compact positive-order supports); axial viscosity uses m_{n-1,2}, m_{n-1,1} (=0 for n>=2; at n=1, the subtracted convergent identity (5.19)/(A.45) and M(inf)=0). Hence (5.21) and int R^2 r_{theta,n} dR = int R r_{z,n} dR = 0, giving the backward representation of T_n.",
+    "Step 5: n>=2: residual vanishes beyond X_+ (same-order terms carry a positive-order factor, axial viscosity acts on order n-1>=1), so supp T_n subset [X_-, X_+]; n=1: only -d_zz u_{theta,0} survives, zero beyond X_b (z-independent heat field), so supp T_1 subset [X_-, X_b]; edge estimate: u_{theta,0} = K f_o on the terminal collar, d_zz(K f_o) = K q^{-2D}(a_z^2 d_yy f_o + b_z d_y f_o) with a_z = -2 eta/L, b_z = (-2D eta a_z + d d_eta a_z)/L (re-derived), 1 - f_o = e^{-4/delta_b^2} x smooth, d_y f_o, d_yy f_o <= C e^{-4/delta_b^2} delta_b^{-3}, delta_b^{-6}; Lemma A.9 (c=4, j=3,6) gains delta_b^3: |T_1| <= C e^{-4/delta_b^2} delta_b^{-3}, derivatives add finite inverse powers (5.22); zeta's edge factor is e^{-4/delta^2} x bounded, so (5.13) holds for n=1; near X_a, T_1 = 0; for n>=2 the compact interior support makes T_n/zeta bounded with derivatives."
+   ],
+   "recomputed": [
+    {
+     "quantity": "moment weights B_U",
+     "claimed": "(p_1,p_2) = (1, 1-2lambda)",
+     "obtained": "m_{n,1}: int R b^U; m_{n,4}: int R^2 E_0 b^U = e* f int R^{2-1-2lambda} b^U. Matches.",
+     "method": "substitution of (5.14) into (5.10)-(5.11) with E_0 = e* f R^{-1-2lambda}"
+    },
+    {
+     "quantity": "moment weights B_E",
+     "claimed": "(s_1,s_2,s_3) = (2, -2-2lambda, -2lambda)",
+     "obtained": "m_{n,2}: int R^2 b^E; m_{n,3}: int 2E_0 b^E/R dR = 2e* f int R^{-2-2lambda} b^E; m_{n,5}: -int E_0 E_n dX = -e* f int R^{-1-2lambda} b^E R dR = -e* f int R^{-2lambda} b^E. Matches; exponents distinct for lambda>0.",
+     "method": "(5.10),(5.11), dX = R dR"
+    },
+    {
+     "quantity": "affineness of the five moments",
+     "claimed": "affine in (alpha, beta)",
+     "obtained": "U_n enters m_5 only through U_0 U_n = 0 and m_4 only through U_n E_0; E_n enters m_3, m_5 only through E_0 E_n; no E_n^2 or U_n^2 term since i+j=n with i=j=n is impossible. Affine. Matches.",
+     "method": "inspection of (5.10)-(5.11)"
+    },
+    {
+     "quantity": "normalizations of d_{U,n}, d_{E,n}",
+     "claimed": "(m0_1, m0_4/(e* f)) and (m0_2, m0_3/(2e* f), -m0_5/(e* f))",
+     "obtained": "dividing rows m_4 by e* f, m_3 by 2e* f, m_5 by -e* f turns each into int R^{p} b = B entries. Matches.",
+     "method": "row scaling"
+    },
+    {
+     "quantity": "order-n angular moment power",
+     "claimed": "q^{3/2-A+lambda_n}",
+     "obtained": "r = q^{1/2}R, dr = q^{1/2}dR, u_theta,n = q^{-A+lambda_n}E_n: r^2 u dr = q^{1+1/2-A+lambda_n}R^2 E_n dR. Matches.",
+     "method": "change of variables"
+    },
+    {
+     "quantity": "order-n axial flux power",
+     "claimed": "q^{1-2A+lambda_n}",
+     "obtained": "r(u_z u_z + p) dr = q^{1/2}R q^{-2A+lambda_n}(...) q^{1/2} dR. Matches.",
+     "method": "change of variables"
+    },
+    {
+     "quantity": "int R Pi_n dR",
+     "claimed": "-(1/2) int R^2 d_R Pi_n dR",
+     "obtained": "integration by parts, boundary term R^2 Pi_n/2 vanishes at 0 and beyond X_+. Matches.",
+     "method": "IBP"
+    },
+    {
+     "quantity": "b_z",
+     "claimed": "(-2D eta a_z + d d_eta a_z)/L",
+     "obtained": "d_z(q^{-D} a_z(eta)) = q^{-2D}L^{-1}[2 eta (-D) a_z + d a_z'] using d_z = q^{-D}L^{-1}(2 eta q d_q - 2 eta X d_X + d d_eta). Matches.",
+     "method": "d_z operator"
+    },
+    {
+     "quantity": "Lemma A.9 gain",
+     "claimed": "int_0^delta e^{-4/u^2} u^{-6} b du = (1/2) e^{-4/delta^2} delta^{-3} B",
+     "obtained": "3 - j with j = 6 gives delta^{-3}; j = 3 gives delta^0 (dominated). Matches (5.22).",
+     "method": "(A.47)"
+    },
+    {
+     "quantity": "conservative angular form",
+     "claimed": "r^2 R_theta = d_t(r^2 u_theta) + d_r(r^2 u_r u_theta) + d_z(r^2 u_z u_theta) - d_r(r^2 d_r u_theta - r u_theta) - d_zz(r^2 u_theta)",
+     "obtained": "expanding with d_r u_r + u_r/r + d_z u_z = 0 reproduces r^2[d_t u_theta + u_r d_r u_theta + u_z d_z u_theta + u_r u_theta/r - (d_rr + r^{-1}d_r - r^{-2} + d_zz)u_theta]. Matches.",
+     "method": "direct expansion"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Fully reproduced given Lemma 5.1, Theorem 4.6 (items (i),(iv),(v),(vi)), Lemma A.1, Lemma A.9 and (A.45). The extraction of (5.11) leaves the placement of the outer parenthesis ambiguous; the reading m_{n,5} = int (R sum U_i U_j - (1/2) R^2 d_R Pi_n) dR is forced by p.51's X-integral form and by the IBP identity used in (5.20)."
+  }
+ ],
+ "summary": {
+  "CHECKED": 15,
+  "GAP": 0,
+  "NOT-CHECKED": 0
+ },
+ "escalation_candidates": [],
+ "extraction_artefacts_found": [
+  {
+   "page": 122,
+   "display": "phi_R(x) = phi(x/R), chi_R = phi8R; later phi4R, phi3R, phi2R, phi6R, phi7R (pp.122-123)",
+   "resolved_as": "powers of one cutoff: chi_R = phi_R^8, phi_R^4, phi_R^3, phi_R^2, phi_R^6, phi_R^7. PDF word boxes: 'phi8' top y=384.1 (raised) and 'R,' top y=385.9 (lowered) on the chi_R line; 'phi4' y=498.1 with 'R' at y=505.3. As dilations the inequalities of Lemma 10.5 would be inconsistent; as powers every one is exact."
+  },
+  {
+   "page": 113,
+   "display": "gj = 10h j (9.17)",
+   "resolved_as": "g_j = h j / 10; PDF: 'h','j' at y~216, '10' at y=223 (denominator). Consistent with Prop 9.9 Step 1 'g_j = hj/10'."
+  },
+  {
+   "page": 113,
+   "display": "sx = 12 + 2,h        st = 1 + 3h2",
+   "resolved_as": "s_x = 1/2 + h/2, s_t = 1 + 3h/2 (recomputed from k <= 2Q^{-h/2} and the phase bounds; both then dominate (9.19) as claimed)."
+  },
+  {
+   "page": 120,
+   "display": "Cj,mbm-jj  ||Fj||C|alpha| (10.12)",
+   "resolved_as": "C_{j,m} b_j^{m-j} ||F_j||_{C^{|alpha|}}; PDF: 'bm-j' with lowered 'j'. Recomputed exponent m-j."
+  },
+  {
+   "page": 121,
+   "display": "F(t) = int_t ||f(s)||2 ds and (10.13) ||u(t)||22 + 2 ||grad u(s)||22 ds <= F(t)2",
+   "resolved_as": "F(t) = int_0^t ||f(s)||_2 ds; ||u(t)||_2^2 + 2 int_0^t ||grad u(s)||_2^2 ds <= F(t)^2 (PDF: L^2 subscripts lowered, squares raised)."
+  },
+  {
+   "page": 119,
+   "display": "(10.8) two-part display scrambled: 'K(rho, tau)2 tau <= Cj rho-3-4h-2j ... |d_tau^j K(r, tau)| <= Cj r-1-2h-2j ... d_j rho'",
+   "resolved_as": "|d_tau^j K(r,tau)| <= C_j r^{-1-2h-2j} and |d_tau^j (K(rho,tau)^2/rho)| <= C_j rho^{-3-4h-2j}; both recomputed from (10.7) and (A.34)."
+  },
+  {
+   "page": 118,
+   "display": "(10.3) line: 'then q <= 2tau; otherwise |eta| > 2-1/2 and q <= (  2|z|)1/D' with a stray sqrt",
+   "resolved_as": "q <= (sqrt(2)|z|)^{1/D}; recomputed from (3.2)."
+  },
+  {
+   "page": 47,
+   "display": "Pi'n = 2C-2 phi0 phin + C-2 sum phi_i phi_{n-i} - Omega_{n-1} . 2X (and (5.5) on p.46)",
+   "resolved_as": "Pi'_n = 2C^{-2}phi_0 phi_n + C^{-2} sum_{i=1}^{n-1} phi_i phi_{n-i} - Omega_{n-1}/(2X); fixed by Pi_X = E^2/(2X), E = sqrt(2X) phi/C, and by the p.48 pressure row d_xi Pi_n = 4 xi phi_0 phi_n/C^2."
+  },
+  {
+   "page": 49,
+   "display": "mn,5 = int R ( sum UiUj - 12 R2 dR Pi_n ) dR (5.11)",
+   "resolved_as": "m_{n,5} = int_0^inf (R sum_{i+j=n} U_i U_j - (1/2) R^2 d_R Pi_n) dR; forced by p.51's form int (sum U_i U_j - (1/2) sum E_i E_j + (1/2) Omega_{n-1}) dX and by the IBP in (5.20)."
+  },
+  {
+   "page": 15,
+   "display": "(3.5): 'int_inf K(rho, tau)2 A = 0, B = K(r, tau), p = - d rho, ... r rho'",
+   "resolved_as": "A = 0, B = K(r,tau), p = -int_r^inf K(rho,tau)^2/rho d rho, K = r^{-1-2h}H_ext(tau/r^2); consistent with p.116 Step 4 and (10.7)."
+  }
+ ]
+}

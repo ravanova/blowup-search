@@ -1,0 +1,607 @@
+{
+ "schema": "arc6_spine_v1",
+ "agent": 3,
+ "leg": 429,
+ "nodes_assigned": [
+  "Lemma 7.1",
+  "Proposition 7.2",
+  "Lemma 7.4",
+  "Proposition 7.5",
+  "Proposition 7.6",
+  "Lemma 7.7",
+  "Corollary 7.8",
+  "Lemma 6.2",
+  "Definition 6.4",
+  "Lemma 6.3"
+ ],
+ "nodes": [
+  {
+   "id": "Lemma 7.1",
+   "verdict": "CHECKED",
+   "pages_read": [
+    27,
+    30,
+    31,
+    32,
+    33,
+    73,
+    74,
+    75,
+    76,
+    77
+   ],
+   "steps_checked": [
+    "g = (R F_R, G_R) at order zero equals F(-a, b_s): from (4.11)/(4.3) with X=r^2/(2q), d_r u_theta - u_theta/r = -q^{-A-1/2} F_prof a and d_r u_z = q^{-A-1/2} F_prof b_s; chart scaling V=Q^A u_theta, R=r/sqrt(Q) gives F_chart=V/R=(Q/q)^{A+1/2}F_prof and R F_R = -F_chart a, G_R = F_chart b_s.",
+    "N = g_0/|g_0| = -(1,t_s)/sqrt(1+t_s^2), K=(-N_z,N_theta), so T.N = -(T_theta+t_s T_z)/sqrt(1+t_s^2), T.K = -(T_z - t_s T_theta)/sqrt(1+t_s^2); with (4.23) the quotient (T.K)/(T.N) = J_c/(P_c - v_s) and T.N<0 iff P_c>v_s (F>0).",
+    "c_0^2 = lambda_0^2/(4F_0^2 N_theta^2) = (v_s-2)/2, hence |c_0 (T.K)/(T.N)|<1 iff (v_s-2)J_c^2 < 2(P_c-v_s)^2, i.e. (7.1) is exactly Lemma 4.5's (4.22).",
+    "Under Theorem 4.6(iii)'s (4.26): |c_0 (T.K)/(T.N)|^2 <= (2-kappa)/2 = 1-kappa/2 < 1 on the closed annulus (via the unit direction n), so u_* with u_*/sqrt(1+u_*^2) > sup exists; this is where the margin enters.",
+    "K t = (-2F t_theta, t_r(2F e_theta + g)); -K_0 e = (-2F_0 s K_theta, -2F_0 e_theta - g_0), -K_0 N = (2F_0 N_theta, 0); e.(-K_0 e) = -2F_0 s K_theta + 2F_0 s K_theta + s K.g_0 = 0; e.(-K_0 N)=2F_0 N_theta; N.(-K_0 e) = -2F_0 N_theta - |g_0|.",
+    "Reference matrix in (x,y) with t=x e+yN, |e|^2=1+s^2: [[0, 2F_0N_theta/(1+s^2)],[-(2F_0N_theta+|g_0|),0]]; eigenvalues +-lambda, lambda^2 = lambda_0^2/(1+s^2), lambda_0^2 = -2F_0N_theta(2F_0N_theta+|g_0|); eigenvectors (1, +-c_0 sqrt(1+s^2)) with c_0 = lambda_0/(2F_0N_theta), i.e. the columns of M in (7.8); det M = -2c_0 sqrt(1+s^2).",
+    "Left inverse: (e_r^T; N_a^T) U = I_2, so B^l = M^{-1}(e_r^T;N_a^T) satisfies B^l B = I and B^l t = M^{-1}(x,y) for t in n^perp.",
+    "n_Phi components from (7.3): D_r Phi = x_0 - v(H_Phi)_R (D_r v = 0 since L_i eta_g = 0), R^{-1}d_theta Phi = p/R, D_z Phi = p_z - eps v (H_Phi)_Z (D_z = eps d_Z acting on p_z Z/eps).",
+    "Reference normal: (p/R_0,p_z).g_0 = B_s K.g_0 - sigma B_s u_* |g_0|^2/(L_s|g_0|^2) = -sigma B_s u_*/L_s; so n_r = x_0 - v (p/R,p_z).g ~ sigma B_s u_*(1/2 + v/L_s) = B_s s(v); tangential normal = B_s K - sigma B_s u_* N/(L_s|g_0|) = B_s K + O(1/S_*).",
+    "Error budget: slow box O(S_*^{-3}), base O(eps^2), rounding O(1/k); times v=O(S_*) gives O(S_*^{-2}+S_* eps^2 + S_*/k) <= C/S_* under S_*^2(eps+eps^2+k^{-1})<=1 with k^{-1}<=eps^{1/2}; eps S_* <= 1/S_* likewise; n_Phi' = O(1/L_s)+O(eps) = O(1/S_*).",
+    "Eik: t_* Phi = eps v (H_Phi)_T - H_Phi (t_* v = 1), F d_theta Phi + G D_z Phi = H_Phi - eps v G (H_Phi)_Z, b D_r Phi = b n_{Phi,r}; sum = eps v((H_Phi)_T - G(H_Phi)_Z) + b n_{Phi,r} = O(eps S_*^C) since b=O(eps).",
+    "(7.11): d - d_ref = eps k^2 (|n_Phi|^2 - |n_ref|^2) = O(1/S_*) since 1<=eps k^2<=4 (k=ceil(eps^{-1/2})).",
+    "E=O(1/S_*): all perturbations (base coefficients, n_Phi-n_ref, K_a-K, s_a-s, moving-normal term, B') are O(1/S_*) and the frame/left inverse are uniformly bounded (det M bounded below via |c_0| >= sqrt((v_s-2)/2) > 0)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "lambda_0^2 from reference 2x2 matrix",
+     "claimed": "lambda_0^2 = -2F_0 N_theta (2F_0 N_theta + |g_0|) > 0",
+     "obtained": "det of [[0,2F_0N_theta/(1+s^2)],[-(2F_0N_theta+|g_0|),0]] = 2F_0N_theta(2F_0N_theta+|g_0|)/(1+s^2), eigenvalues +-sqrt(-det); sign condition: -|g_0| < 2F_0 N_theta < 0 (2F_0N_theta and 2F_0N_theta+|g_0| of opposite sign)",
+     "method": "hand; numerically confirmed on 3 random parameter sets"
+    },
+    {
+     "quantity": "lambda_0^2 in profile variables",
+     "claimed": "2 a F_0^2 (1 - 2/v_s)",
+     "obtained": "with g_0=F_0(-a,b_s): N_theta=-a/sqrt(a^2+b_s^2), |g_0|=F_0 sqrt(a^2+b_s^2); lambda_0^2 = 2aF_0^2 (a^2+b_s^2-2a)/(a^2+b_s^2) = 2aF_0^2(1-2a/(a^2+b_s^2)) = 2aF_0^2(1-2/v_s) since v_s=a(1+b_s^2/a^2)=(a^2+b_s^2)/a; positive iff v_s>2 given a>0,F_0>0 (a>0 also forces 2F_0N_theta<0 hence c_0<0)",
+     "method": "hand + numeric"
+    },
+    {
+     "quantity": "c_0^2",
+     "claimed": "(v_s-2)/2",
+     "obtained": "lambda_0^2/(4F_0^2N_theta^2) = 2aF_0^2(1-2/v_s)(a^2+b_s^2)/(4F_0^2a^2) = v_s(1-2/v_s)/2 = (v_s-2)/2",
+     "method": "hand + numeric"
+    },
+    {
+     "quantity": "quotient (T.K)/(T.N)",
+     "claimed": "|J_c|/(P_c - v_s) without c_0",
+     "obtained": "J_c/(P_c-v_s) exactly, using (4.23) and N = -(1,t_s)/sqrt(1+t_s^2), K = (t_s,-1)/sqrt(1+t_s^2)",
+     "method": "hand + numeric (1.45402 both ways)"
+    },
+    {
+     "quantity": "e.(-K_0 e)",
+     "claimed": "0",
+     "obtained": "s K.g_0 = s|g_0| K.N = 0",
+     "method": "hand + numeric (1e-17)"
+    },
+    {
+     "quantity": "N.(-K_0 e)",
+     "claimed": "-(2F_0N_theta+|g_0|)",
+     "obtained": "N.(-2F_0 e_theta - g_0) = -2F_0N_theta - |g_0|",
+     "method": "hand + numeric"
+    },
+    {
+     "quantity": "e.(-K_0 N)",
+     "claimed": "2F_0 N_theta",
+     "obtained": "e_r component 1 times 2F_0N_theta, tangential part of -K_0N is 0",
+     "method": "hand"
+    },
+    {
+     "quantity": "det M",
+     "claimed": "-2c_0 sqrt(1+s^2)",
+     "obtained": "1*(-c_0 sqrt(1+s^2)) - 1*(c_0 sqrt(1+s^2))",
+     "method": "hand + numeric"
+    },
+    {
+     "quantity": "M^{-1} A_xy M",
+     "claimed": "diag(lambda,-lambda)",
+     "obtained": "A_xy (1, c_0 sqrt(1+s^2))^T = (lambda_0/sqrt(1+s^2), -(2F_0N_theta+|g_0|)) = lambda (1, c_0 sqrt(1+s^2)) using lambda_0 c_0 = lambda_0^2/(2F_0N_theta)",
+     "method": "hand + numeric (2e-16)"
+    },
+    {
+     "quantity": "eps k^2 range",
+     "claimed": "1 <= eps k^2 <= 4",
+     "obtained": "k=ceil(eps^{-1/2}) so eps^{-1} <= k^2 <= (eps^{-1/2}+1)^2, eps k^2 in [1,(1+eps^{1/2})^2] subset [1,4]",
+     "method": "hand"
+    },
+    {
+     "quantity": "smallness condition S_*^2(eps+eps^2+k^{-1}) <= 1 suffices",
+     "claimed": "errors x v = O(S_*) are <= C/S_*",
+     "obtained": "(S_*^{-3}+eps^2+k^{-1}) S_* <= S_*^{-2} + S_*^{-1}; eps S_* <= S_*^{-1}; with eps=2^{-h l}, S_*=l^2 this holds for large l (l^4 2^{-h l/2} -> 0)",
+     "method": "hand"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Frame line p.74 resolved by PDF geometry: N=g_0/|g_0|, c_0=lambda_0/(2F_0N_theta)<0. The derived sign condition for lambda_0 real is -|g_0|<2F_0N_theta<0, which with g_0=F_0(-a,b_s), a>0, F_0>0 is exactly v_s>2; both a>0 and v_s-2>0 are supplied by Theorem 4.6(iii). The cone (7.1) coincides with (4.22) pointwise, and the uniform margin needed to choose u_* comes from (4.26) (sup of |c_0 T.K/T.N| <= sqrt(1-kappa/2) < 1). Note a minor notational overlap on p.76: 'e_theta' in '-K_0 e = (-2F_0 s K_theta, -2F_0 e_theta - g_0)' is the unit tangential vector (1,0), not the theta-component of e. The higher-derivative polynomial bounds are routine product/quotient-rule claims and were accepted as such after the denominators (|n_Phi,tan|, det M) were checked to be bounded below."
+  },
+  {
+   "id": "Proposition 7.2",
+   "verdict": "CHECKED",
+   "pages_read": [
+    68,
+    69,
+    77,
+    78,
+    79,
+    80
+   ],
+   "steps_checked": [
+    "a_net(y) = lambda_0/sqrt(1+y^2) - eps k^2 B_s^2 (1+y^2) = lambda_0/sqrt(1+y^2) - lambda_0(1+y^2)/(1+u_*^2)^{3/2} using B_s^2 from (7.2); vanishes at y=u_*.",
+    "d/dv a_net(|s(v)|) = (u_*/L_s) a_net'(y) = -(u_*/L_s) lambda_0 |s| [(1+s^2)^{-3/2} + 2(1+u_*^2)^{-3/2}]; with u_*/2 <= |s| <= 3u_*/2 it lies in [-C/L_s, -c/L_s].",
+    "(log P)' = lambda - d_ref = a_net(|s(v)|), log P(L_s/2)=0, (log P)'(L_s/2)=0; integrating twice from the midpoint gives -C(v-L_s/2)^2/L_s <= log P <= -c(v-L_s/2)^2/L_s <= 0, i.e. (7.16) and P<=1.",
+    "(7.18): if z_1'=A_1 z_1 then z = exp(-(m^2-1) int_w^v d) z_1 satisfies z' = (A_1 - (m^2-1) d) z = A_m z; factor <= 1 because d = eps k^2 |n_Phi|^2 >= 0 and m^2 >= 1.",
+    "(7.19) for m=1: z.A_1 z <= (lambda + |E| - d)|z|^2 <= (lambda - d_ref + C/S_*)|z|^2, so |z(v)| <= |z(w)| (P(v)/P(w)) e^{C(v-w)/S_*} <= C P(v)/P(w) since L_s/S_* bounded; uniform in m by (7.18).",
+    "Duhamel: |z_m(v)| <= int_0^v C P(v)/P(w) |g_m(w)| dw <= C eps^alpha S_*^{b_0} sqrt(zeta) delta^{-a_0} P(v) L_s, L_s = O(S_*): one extra power of S_*.",
+    "Parameter derivatives commute with d/dv giving (7.20); induction with (7.19) adds polynomial degree only, no loss in alpha.",
+    "Path H_w = H + T_g^{-Delta} c_i (w-v(H)) v_t: moving eta_g by c_i(w-v) in Y_i = J^Delta H coordinates is J^{-Delta} c_i (w-v) v_t = T_g^{-Delta} c_i (w-v) v_t; D_H v = T_g^Delta lambda_t / c_i = O(S_*); D_H H_w = I - v_t lambda_t.",
+    "Step 4: n.A_Phi t = -n.Kt + (n.Kt - n'.t) = -n'.t, so n.t' = -n'.t - m^2 d n.t and (n.t)' = -m^2 d (n.t); zero data keeps n.t = 0.",
+    "t' + Kt + m^2 d t + f = n (n.Kt - n'.t + n.f)/|n|^2; with pi_m from (7.13), ikm n pi_m = -n(...)/|n|^2, so (7.5) holds; (km)^{-1} <= eps^{1/2} gives (7.15)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "a_net(y)",
+     "claimed": "lambda_0/sqrt(1+y^2) - lambda_0(1+y^2)/(1+u_*^2)^{3/2}",
+     "obtained": "eps k^2 B_s^2(1+y^2) with B_s^2 = lambda_0/(eps k^2 (1+u_*^2)^{3/2}) equals lambda_0(1+y^2)/(1+u_*^2)^{3/2}; zero at y=u_*",
+     "method": "hand; PDF geometry confirms display on p.78"
+    },
+    {
+     "quantity": "d a_net/dv",
+     "claimed": "-(u_* lambda_0 |s|/L_s)[(1+s^2)^{-3/2}+2(1+u_*^2)^{-3/2}], between -C/L_s and -c/L_s",
+     "obtained": "chain rule with d|s|/dv = u_*/L_s; |s| in [u_*/2,3u_*/2]",
+     "method": "hand"
+    },
+    {
+     "quantity": "Gaussian envelope (7.16)",
+     "claimed": "e^{-C(v-L_s/2)^2/L_s} <= P <= e^{-c(v-L_s/2)^2/L_s} <= 1",
+     "obtained": "double integration of the derivative bounds from v=L_s/2 where log P and (log P)' vanish",
+     "method": "hand"
+    },
+    {
+     "quantity": "damping factor in (7.18)",
+     "claimed": "at most one",
+     "obtained": "exp(-(m^2-1) int_w^v eps k^2 |n_Phi|^2) <= 1 for m^2>=1, v>=w",
+     "method": "hand"
+    },
+    {
+     "quantity": "pressure sign",
+     "claimed": "ikm n pi_m equals minus the normal vector n(n.Kt - n'.t + n.f)/|n|^2",
+     "obtained": "ikm * i/(km) = -1",
+     "method": "hand"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "The one-sided endpoint-derivative and descent/support claims are qualitative consequences of uniqueness for the linear ODE with zero data; accepted. Depends on Lemma 7.1 for E, d_ref, B^l bounds (checked above)."
+  },
+  {
+   "id": "Lemma 7.4",
+   "verdict": "CHECKED",
+   "pages_read": [
+    80,
+    81
+   ],
+   "steps_checked": [
+    "Riccati equation for r=z_-/z_+: from z_+' = (lambda+E_11-d)z_+ + E_12 z_-, z_-' = E_21 z_+ + (-lambda+E_22-d) z_-: r' = E_21 + (-2lambda + E_22 - E_11) r - E_12 r^2, r(0)=0.",
+    "Barrier at r = +-K_b/S_*: +-r' <= [ -2 c_lambda K_b + C(1 + K_b/S_* + K_b^2/S_*^2) ]/S_* < 0 for K_b > C/(2c_lambda) fixed and S_* large (display resolved by PDF geometry: single fraction bar over S_*). Hence |r| <= K_b/S_* while z_+>0.",
+    "(log(z_+/P))' = (lambda+E_11-d) + E_12 r - (lambda - d_ref) = -(d-d_ref) + E_11 + E_12 r = O(1/S_*); integrated over v <= L_s = O(S_*): |log(z_+/P)| <= C, so cP <= z_+ <= CP and z_+ never reaches 0 (bootstrap closes).",
+    "x = z_+ + z_- = z_+(1+r), y = c_0 sqrt(1+s^2)(z_+ - z_-) = c_0 sqrt(1+s^2) z_+(1-r) from M in (7.8); y/x = c_0 sqrt(1+s^2)(1-r)/(1+r) = c_0 sqrt(1+s^2) + O(1/S_*); cP<=x<=CP.",
+    "Energy identity: t.Kt = -2F t_r t_theta + (2F+RF_R) t_r t_theta + G_R t_r t_z = g.(t_r(t_theta,t_z)); t.(normal term) = 0 since n.t=0; so (1/2)(|t|^2)' = -g.(t_r t_tan) - eps k^2 |n|^2 |t|^2, i.e. (7.22)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "Riccati coefficients",
+     "claimed": "r' = E_21 + (-2lambda+E_22-E_11) r - E_12 r^2",
+     "obtained": "quotient rule on z_-/z_+",
+     "method": "hand"
+    },
+    {
+     "quantity": "barrier inequality",
+     "claimed": "+-r'|_{r=+-K_b/S_*} <= (-2c_lambda K_b + C(1+K_b/S_*+K_b^2/S_*^2))/S_* < 0",
+     "obtained": "|E_21|<=C/S_*, |E_22-E_11| K_b/S_* <= C K_b/S_*^2, |E_12| K_b^2/S_*^2 <= C K_b^2/S_*^3, -2lambda K_b/S_* <= -2c_lambda K_b/S_*",
+     "method": "hand; PDF geometry for the display"
+    },
+    {
+     "quantity": "y/x",
+     "claimed": "c_0 sqrt(1+s^2) + O(S_*^{-1})",
+     "obtained": "from M columns (1, +-c_0 sqrt(1+s^2)) and |r| <= K_b/S_*",
+     "method": "hand; PDF geometry for (7.21)"
+    },
+    {
+     "quantity": "(7.22)",
+     "claimed": "(1/2) d|t|^2/dv = -g.(t_r(t_theta,t_z)) - eps k^2|n_Phi|^2|t|^2",
+     "obtained": "t.Kt computed entrywise from (7.6)",
+     "method": "hand"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Derivative bounds follow the (7.20) induction of Proposition 7.2; accepted. Homogeneous pressure factor eps^{1/2} from (km)^{-1}."
+  },
+  {
+   "id": "Proposition 7.5",
+   "verdict": "CHECKED",
+   "pages_read": [
+    32,
+    33,
+    65,
+    66,
+    69,
+    74,
+    81,
+    82,
+    83,
+    84
+   ],
+   "steps_checked": [
+    "Angular average of cos^2(k Phi_sigma) with k p in Z\\{0} is exactly 1/2.",
+    "(7.27): Haar average of chi_g^2 psi^2 x t_tan on the band torus with parametrization Y = c + xi v_r + eta v_t, area |det(v_r,v_t)| = 1+b_g^2, d eta_g = c_i dv; amplitude independent of xi_g with radial component x.",
+    "h_sigma ~ c_i sqrt(L_s) ~ S_*^{-1/2}: with w=(v-L_s/2)/sqrt(L_s), int psi^2 x^2 dv is between c sqrt(L_s) int_{|w|<=sqrt(L_s)/5} e^{-2Cw^2} and C sqrt(L_s) int e^{-2cw^2}, using cP<=x<=CP, (7.16), psi=1 on |v-L_s/2|<=L_s/5; c_i ~ S_*^{-1}, L_s ~ S_*.",
+    "int psi^2 x^2 |v-L_s/2|/L_s dv <= C int |w| e^{-2cw^2} dw = O(1); normalized weighted average of |v-L_s/2|/L_s is O(L_s^{-1/2}) = O(S_*^{-1/2}).",
+    "t^h_tan/x = -s_a K_a + (y/x) N_a = -s(v)K + c_0 sqrt(1+s(v)^2) N + O(1/S_*); s(v) - sigma u_* = sigma u_*(v-L_s/2)/L_s and c_0 sqrt(1+s^2) - c_0 sqrt(1+u_*^2) = O(|v-L_s/2|/L_s); weighted averaging gives H_sigma = h_sigma(-A_c N - sigma u_* K + e_sigma), |e_sigma| <= C S_*^{-1/2}, A_c = -c_0 sqrt(1+u_*^2) > 0.",
+    "Step 2 linear system (errors omitted): N-row -A_c(h_+y_+ + h_-y_-) = T_N, K-row u_*(h_-y_- - h_+y_+) = T_K; so h_+y_+ = (1/2)(-T_N/A_c - T_K/u_*), h_-y_- = (1/2)(-T_N/A_c + T_K/u_*) [the factor is 1/2, resolved by PDF geometry; extraction shows '2(']. Positive iff T_N<0 and |T_K| < (u_*/A_c)(-T_N).",
+    "|T_K|/u_* < (-T_N)/A_c iff |c_0 T_K/T_N| < u_*/sqrt(1+u_*^2) since A_c = |c_0| sqrt(1+u_*^2); this is exactly the u_* chosen on p.74, whose existence uses Theorem 4.6(iii): (4.26) gives sup |c_0 T.K/T.N| <= sqrt(1-kappa/2) < 1 uniformly on the closed annulus (unit direction n), yielding the fixed margin eta_c > 0. T_N < 0 follows from n_theta + t_s n_z >= kappa (T.N = -|T|(n_theta+t_s n_z)/sqrt(1+t_s^2)).",
+    "Errors e_sigma = O(S_*^{-1/2}) perturb the linear system by a relative O(S_*^{-1/2}), preserving the strict inequality with margin eta_c for large S_*.",
+    "det H = h_+h_- det[(-A_c,-u_*),(-A_c,u_*)] + O(S_*^{-1/2}) h_+h_- = -2A_c u_* h_+h_-(1+O(S_*^{-1/2})), so |det H| >= c S_*^{-1}; ||H^{-1}|| <= ||H||/|det H| <= C S_*^{-1/2}/S_*^{-1} = C sqrt(S_*); y_sigma = (1/h_sigma)(bracket ~ |T|) gives c sqrt(S_*)|T| <= y_sigma <= C sqrt(S_*)|T| (7.29).",
+    "(7.25): |T_0| >= c zeta (4.27) and Q/q in [1/2,2] give y_sigma >= c sqrt(S_*) zeta; derivatives via differentiated inverse and |d^alpha T_0| <= C zeta delta^{-m}.",
+    "D^I a_sigma = sum c y^{1/2-n} prod D^{I_nu} y: each term bounded by (sqrt(S_*) zeta)^{1/2-n} (S^b zeta delta^{-a})^n = S-power * zeta^{1/2} delta^{-na}; tends to 0 at shell edges by (6.23); smooth zero extension.",
+    "C(W_0) = eps sum_sigma a_sigma^2 C(b_sigma) (cross terms vanish: disjoint auxiliary supports of the two signs) = eps H y = eps T_{0,*} (7.26).",
+    "(7.30) scale check: Q^{-2A} eps T_{0,*} = Q^{-2A+h}(Q/q)^{A+1/2} T_0 = Q^{-A+h+1/2} q^{-A-1/2} T_0 = q^{-A-1/2} T_0 since A=1/2+h; consistent with chart stress = Q^{2A} q^{-A-1/2} T_0 = eps T_{0,*}."
+   ],
+   "recomputed": [
+    {
+     "quantity": "h_sigma",
+     "claimed": "~ c_i sqrt(L_s) ~ S_*^{-1/2}",
+     "obtained": "Gaussian substitution w=(v-L_s/2)/sqrt(L_s); c_i in (1/(T_g S_*), 1/S_*], L_s = 2r_0/c_i",
+     "method": "hand"
+    },
+    {
+     "quantity": "e_sigma",
+     "claimed": "|e_sigma| <= C S_*^{-1/2}",
+     "obtained": "O(1/S_*) frame error plus O(weighted average of |v-L_s/2|/L_s) = O(S_*^{-1/2}) from |s(v)-sigma u_*| = u_*|v-L_s/2|/L_s and Lipschitz dependence of c_0 sqrt(1+s^2) on s",
+     "method": "hand"
+    },
+    {
+     "quantity": "squared amplitudes (errors omitted)",
+     "claimed": "h_+y_+ = (1/2)(-T_N/A_c - T_K/u_*), h_-y_- = (1/2)(-T_N/A_c + T_K/u_*)",
+     "obtained": "solve the 2x2 system in the (N,K) basis",
+     "method": "hand; PDF geometry confirms the 1/2"
+    },
+    {
+     "quantity": "reference cone equals (7.1)",
+     "claimed": "T_N<0, |T_K| < (u_*/A_c)(-T_N)",
+     "obtained": "A_c = |c_0| sqrt(1+u_*^2) so |T_K|/(-T_N) < u_*/A_c iff |c_0 T_K/T_N| < u_*/sqrt(1+u_*^2)",
+     "method": "hand"
+    },
+    {
+     "quantity": "margin from Theorem 4.6(iii)",
+     "claimed": "strict inequality with uniform margin including annular edges",
+     "obtained": "|c_0 (T.K)/(T.N)|^2 = ((v_s-2)/2) (n_z-t_s n_theta)^2/(n_theta+t_s n_z)^2 <= (2-kappa)/2 < 1 by (4.26)",
+     "method": "hand"
+    },
+    {
+     "quantity": "(7.29)",
+     "claimed": "|det H| >= c/S_*, ||H^{-1}|| <= C sqrt(S_*), c sqrt(S_*)|T| <= y_sigma <= C sqrt(S_*)|T|",
+     "obtained": "det of unperturbed columns = -2A_c u_* h_+h_-, h_sigma ~ S_*^{-1/2}",
+     "method": "hand"
+    },
+    {
+     "quantity": "(7.30)",
+     "claimed": "Q^{-2A} eps T_{0,*} = q^{-A-1/2} T_0",
+     "obtained": "exponent of Q: -2A + h + A + 1/2 = 0 with A = 1/2 + h",
+     "method": "hand"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Positivity of the squared amplitudes under (7.1) is exact in the unperturbed system and survives the O(S_*^{-1/2}) column errors only because of the fixed margin eta_c, which traces back to (4.26) in Theorem 4.6(iii) (used twice: for choosing u_* on p.74, and for the sign T_N<0). The freezing of N,K,c_0 at representatives costs an error tending to zero uniformly by continuity on the closed annulus (slow boxes O(S_*^{-3})). Requires Theorem 4.6(iv) (4.27) for (7.25)."
+  },
+  {
+   "id": "Proposition 7.6",
+   "verdict": "CHECKED",
+   "pages_read": [
+    69,
+    70,
+    71,
+    72,
+    84,
+    85
+   ],
+   "steps_checked": [
+    "B(W_0, L Sigma) = <<W_{0,r}(LSigma)_tan + (LSigma)_r W_{0,tan}>> = eps sum_sigma a_sigma delta a_sigma * 2 C(b_sigma) (cross-sign terms vanish by disjoint auxiliary supports) = eps H (2 a (.) delta a) = eps H dSigma = Sigma, using dSigma = H^{-1}(Sigma/eps) and delta a = dSigma/(2a): (7.34).",
+    "Class of dSigma: Sigma in M_alpha means |d^I Sigma| <= C eps^alpha S^b zeta delta^{-d} (display (6.24) resolved by PDF geometry: zeta to the first power); with (7.29) and the polynomial bounds on derivatives of H^{-1}: |D^I (dSigma)_sigma| <= C eps^{alpha-1} S^b zeta delta^{-a}.",
+    "Derivatives of y^{-1/2}: terms C y^{-k-1/2} prod_{nu=1}^k D^{I_nu} y <= (c sqrt(S_*) zeta)^{-k-1/2} (C S^b zeta delta^{-a})^k = S-power * zeta^{-1/2} delta^{-ka}; so delta a = dSigma/(2 sqrt y) has weight zeta * zeta^{-1/2} = sqrt(zeta): (7.33) with eps^{alpha-1}.",
+    "L Sigma = sqrt(eps) sum delta a_sigma b_sigma: harmonic coefficients eps^{1/2} eps^{alpha-1} = eps^{alpha-1/2} with sqrt(zeta) P_v from Lemma 7.4 and the cutoffs: W_{alpha-1/2}; sqrt(zeta) delta^{-N} -> 0 at edges gives smooth zero extension.",
+    "C(eta_beta L Sigma): product of two W_{alpha-1/2} coefficients at harmonics +-1 gives M_{2alpha-1} by (6.31)."
+   ],
+   "recomputed": [
+    {
+     "quantity": "cross identity",
+     "claimed": "B(W_0,LSigma) = eps H(2a (.) delta a) = eps H dSigma = Sigma",
+     "obtained": "expansion of the symmetric cross term; the factor 2 from w_r v_tan + v_r w_tan for the same sign, the 1/2 of cos^2 already inside H",
+     "method": "hand"
+    },
+    {
+     "quantity": "exponent of L Sigma",
+     "claimed": "alpha - 1/2",
+     "obtained": "1/2 (from sqrt(eps)) + (alpha - 1) (from dSigma)",
+     "method": "hand"
+    },
+    {
+     "quantity": "edge weight of delta a",
+     "claimed": "sqrt(zeta)",
+     "obtained": "zeta (from Sigma) times zeta^{-1/2} (from y^{-1/2}, y >= c sqrt(S_*) zeta)",
+     "method": "hand"
+    },
+    {
+     "quantity": "C(eta L Sigma) class",
+     "claimed": "M_{2alpha-1}",
+     "obtained": "2(alpha-1/2)",
+     "method": "hand"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Relies on Proposition 6.6 product rules (statement read on p.71) and on (7.25)/(7.29) from Proposition 7.5."
+  },
+  {
+   "id": "Lemma 7.7",
+   "verdict": "CHECKED",
+   "pages_read": [
+    63,
+    64,
+    71,
+    72,
+    85,
+    86
+   ],
+   "steps_checked": [
+    "curl_* (7.37) is the cylindrical curl with normalized operators: (r) R^{-1}d_theta A_z - D_z A_theta, (theta) D_z A_r - D_r A_z, (z) (D_r + R^{-1})A_theta - R^{-1} d_theta A_r; homogeneous of degree sqrt(Q) in physical derivatives.",
+    "curl_*(C e^{ikmPhi}) = e^{ikmPhi}[ikm n_Phi x C + curl_* C] with n_Phi = (D_r Phi, R^{-1}d_theta Phi, D_z Phi); with C_m = i n x t/(km|n|^2): ikm n x C_m = -n x (n x t)/|n|^2 = (t|n|^2 - n(n.t))/|n|^2 = t since n.t=0.",
+    "r_m = curl_* C_m with d_theta terms dropped (C_m independent of theta) = (-D_z (C_m)_theta, D_z(C_m)_r - D_r(C_m)_z, (D_r+R^{-1})(C_m)_theta).",
+    "Exponents: (km)^{-1} <= eps^{1/2} (k >= eps^{-1/2}, |m|>=1) and n/|n|^2 polynomially bounded (Lemma 7.1): C_m in W_{alpha+1/2}; D_r maps C_a -> C_{a-kappa_s} by (6.32) (its L_i coefficient M_i d_r R^{d_r-1} ~ eps^{-kappa_s}S_*^{-rho_g}), D_z = eps d_Z gains 1, R^{-1} loses nothing: r_m in W_{alpha+1/2-kappa_s}.",
+    "div_* curl_* = 0: using (D_r+R^{-1})(R^{-1}f) = R^{-1}D_r f (D_r R^{-1} = -R^{-2}), the six terms pair off by commutation of D_r with d_theta, of D_z with D_r+R^{-1}, and of D_z with d_theta; D_r commutes with d_theta since its L_i term acts on Y_i only, and D_z = eps d_Z commutes with everything.",
+    "(7.39): 0 = div_*(a e^{ikmPhi}) = e^{ikmPhi}[ikm n.a + (D_r+R^{-1})a_r + D_z a_z] (d_theta a = 0); n.a = -(1/(ikm))[(D_r+R^{-1})a_r + D_z a_z]: one D_r (loss kappa_s) and one (km)^{-1} (gain 1/2) from W_alpha gives W_{alpha+1/2-kappa_s}.",
+    "Physical potential factor Q^{1/2-A}: velocity Q^{-A} x chart, physical curl = Q^{-1/2} curl_*, so A_phys = Q^{-A}Q^{1/2}A_chart; pressure Q^{-2A}."
+   ],
+   "recomputed": [
+    {
+     "quantity": "curl-remainder exponent",
+     "claimed": "alpha + 1/2 - kappa_s",
+     "obtained": "alpha (t_m) + 1/2 (from (km)^{-1} in C_m) - kappa_s (one D_r via (6.32)); D_z and R^{-1} do not lose",
+     "method": "hand"
+    },
+    {
+     "quantity": "vector identity",
+     "claimed": "ikm n x C_m = t_m",
+     "obtained": "-n x (n x t) = t|n|^2 - n(n.t)",
+     "method": "hand"
+    },
+    {
+     "quantity": "div curl",
+     "claimed": "0",
+     "obtained": "explicit expansion, three cancelling pairs",
+     "method": "hand"
+    },
+    {
+     "quantity": "(7.39) exponent",
+     "claimed": "alpha + 1/2 - kappa_s",
+     "obtained": "same bookkeeping",
+     "method": "hand"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "The D_r loss kappa_s is cited from (6.32) (Proposition 6.6), which I read and whose scaling M_i ~ eps^{-kappa_s} S_*^{-rho_g} I verified under Lemma 6.2. The support assumption 'compactly inside the pulse interval' is what allows the amplitude to be differentiated without boundary terms."
+  },
+  {
+   "id": "Corollary 7.8",
+   "verdict": "CHECKED",
+   "pages_read": [
+    71,
+    72,
+    85,
+    86,
+    87,
+    88
+   ],
+   "steps_checked": [
+    "Quadratic expansion: C(U+V) - C(U) = <(U_r+V_r)(U_tan+V_tan)> - <U_r U_tan> = B(U,V) + C(V).",
+    "B(U,V) = B(W_0^as + E, L^as Sigma + R) = B(W_0^as, L^as Sigma) + B(E, L^as Sigma) + B(U, R); B(W_0^as, L^as Sigma) = Sigma by (7.36). This gives (7.41).",
+    "Classes: E in W_rho, L^as Sigma in W_{alpha-1/2} => B(E, L^as Sigma) in M_{rho+alpha-1/2}; U in W_{1/2}, R in W_{(alpha-1/2)+1/2-kappa_s} = W_{alpha-kappa_s} (Lemma 7.7 applied to L^as Sigma) => B(U,R) in M_{alpha+1/2-kappa_s}; V = L^as Sigma + R in W_{alpha-1/2} since kappa_s < 1/2 => C(V) in M_{2alpha-1}; all by (6.30)-(6.31).",
+    "Radial divergence loses at most kappa_s by (6.32); R^{-1} terms lose nothing."
+   ],
+   "recomputed": [
+    {
+     "quantity": "class of R",
+     "claimed": "W_{alpha-kappa_s}",
+     "obtained": "(alpha-1/2) + 1/2 - kappa_s",
+     "method": "hand"
+    },
+    {
+     "quantity": "class of B(U,R)",
+     "claimed": "M_{alpha+1/2-kappa_s}",
+     "obtained": "1/2 + (alpha - kappa_s)",
+     "method": "hand"
+    },
+    {
+     "quantity": "class of C(V)",
+     "claimed": "M_{2alpha-1}",
+     "obtained": "min(alpha-1/2, alpha-kappa_s) = alpha-1/2 as kappa_s = 1e-5 < 1/2; doubled",
+     "method": "hand"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Depends on Proposition 6.6 (product rules), (7.36) from the assembly on p.85, and Lemma 7.7. No positivity is used, as stated."
+  },
+  {
+   "id": "Lemma 6.2",
+   "verdict": "CHECKED",
+   "pages_read": [
+    62,
+    63,
+    64,
+    66,
+    67,
+    68
+   ],
+   "steps_checked": [
+    "J_g=[[3,1],[1,5]]: trace 8, det 14, eigenvalues 4 +- sqrt(2): Lambda_g = 4-sqrt2 = 2.5858, T_g = 4+sqrt2 = 5.4142, 1 < Lambda_g < T_g.",
+    "Eigenvectors with b_g = sqrt2-1: J v_r = (3-b_g, 1-5b_g) = (4-sqrt2, 6-5sqrt2) = Lambda_g (1,-b_g); J v_t = (3b_g+1, b_g+5) = (3sqrt2-2, 4+sqrt2) = T_g (b_g,1); v_r.v_t = 0.",
+    "#(Z^2/J^Delta Z^2) = |det J|^Delta = 14^Delta, so R^H_gamma has 14^Delta lifts (disjoint by injectivity/separation for small r_0); Delta <= Delta_max bounds ||J^{+-Delta}||: uniformly bounded derivative factors.",
+    "(6.19): a character e^{2 pi i n.Y} pulls back under Y=J^Delta H to frequency (J^Delta)^T n, zero iff n=0 (J invertible), so Haar averages agree.",
+    "(6.6) from (6.4)-(6.5): t_* = Q^{1+h}(d_t + T_g^i N_i) = -eps d_T + c_i N_i with c_i = T_g^i Q^{1+h} (d_t = -Q^{-1} d_T, Q^h = eps); with i = floor(log_{T_g}(Q^{-1-h}/S_*)): Q^{-1-h}/(T_g S_*) < T_g^i <= Q^{-1-h}/S_*, so c_i in (1/(T_g S_*), 1/S_*] ~ S_*^{-1}.",
+    "D_r = sqrt(Q)(d_r + d_r r^{d_r-1} Lambda_g^i L_i) = d_R + Q^{d_r/2} Lambda_g^i d_r R^{d_r-1} L_i, so M_i = Lambda_g^i Q^{d_r/2} = (T_g^i)^{rho_g} Q^{d_r/2} ~ Q^{-(1+h)rho_g + d_r/2} S_*^{-rho_g} = Q^{-h kappa_s} S_*^{-rho_g} = eps^{-kappa_s} S_*^{-rho_g} since d_r/2 = (1+h)rho_g - h kappa_s.",
+    "D_z = sqrt(Q) d_z = Q^{1/2-D} d_Z = eps d_Z.",
+    "(6.7): v_r.n = (n_1+n_2) - sqrt2 n_2; times conjugate (n_1+n_2)+sqrt2 n_2 gives (n_1+n_2)^2 - 2n_2^2, a nonzero integer for n != 0 (sqrt2 irrational); conjugate is <= C|n|; so |v_r.n| >= c/(1+|n|). v_t.n = (n_2-n_1) + sqrt2 n_1 likewise.",
+    "(6.14): i(l) = floor(((1+h) l log2 - 2 log l)/log T_g); mean value theorem over |l-l'|<=4 with derivative ((1+h)log2 - 2/l)/log T_g gives |i(l)-i(l')| <= 1 + (4(1+h)log2 + 8/l_0)/log T_g.",
+    "(6.22): eta_g(H) = lambda_t(J^Delta H - c - k), lambda_t J^Delta = T_g^Delta lambda_t (J symmetric, v_t eigenvector), so D_H v = T_g^Delta lambda_t/c_i = O(S_*); D_H H_w = I - v_t lambda_t."
+   ],
+   "recomputed": [
+    {
+     "quantity": "eigenvalues of J_g",
+     "claimed": "Lambda_g = 4-sqrt2, T_g = 4+sqrt2",
+     "obtained": "roots of x^2 - 8x + 14",
+     "method": "hand + numeric"
+    },
+    {
+     "quantity": "T_g^i Q^{1+h}",
+     "claimed": "~ S_*^{-1}",
+     "obtained": "floor definition of i gives c_i in (1/(T_g S_*), 1/S_*]",
+     "method": "hand"
+    },
+    {
+     "quantity": "Lambda_g^i Q^{d_r/2}",
+     "claimed": "~ eps^{-kappa_s} S_*^{-rho_g}",
+     "obtained": "Lambda^i = (T^i)^{rho_g}; exponent of Q: -(1+h)rho_g + d_r/2 = -h kappa_s (numeric: -5.0e-8 = -h kappa_s at h=0.005)",
+     "method": "hand + numeric"
+    },
+    {
+     "quantity": "rho_g, d_r",
+     "claimed": "d_r > 0",
+     "obtained": "rho_g = 0.56247, d_r = 1.1306 (h=0.005): positive",
+     "method": "numeric"
+    },
+    {
+     "quantity": "Diophantine (6.7)",
+     "claimed": "|v_r.n|, |v_t.n| >= c/(1+|n|)",
+     "obtained": "algebraic conjugate argument; numeric min of |v.n|(1+|n|) over |n|<=60 is 0.395 for both directions",
+     "method": "hand + numeric"
+    },
+    {
+     "quantity": "number of lifts",
+     "claimed": "14^Delta",
+     "obtained": "det J_g = 14",
+     "method": "hand"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Statement's Step 2 preservation claims (radial integration, translation, averaging, directional Fourier inversion) are qualitative lattice facts; verified at the level of the character argument."
+  },
+  {
+   "id": "Definition 6.4",
+   "verdict": "CHECKED",
+   "pages_read": [
+    32,
+    33,
+    69,
+    70,
+    71
+   ],
+   "steps_checked": [
+    "Display (6.24) resolved by PDF geometry: |d^I f| <= C_{j,I} eps^alpha S_*^{b_{j,I}} zeta delta^{-d_{j,I}} (zeta to the first power; S_* carries the exponent b_{j,I}).",
+    "(6.23): zeta(X) = exp(-a_a/log^2(X/X_a) - a_b/log^2(X_b/X)) is smooth, positive on (X_a,X_b), flat at both edges (each radial derivative is zeta times a rational function of the logs, which tends to 0); delta = min{1, log(X/X_a), log(X_b/X)}; near X_a, zeta^b delta^{-N} = exp(-b a_a/delta^2) delta^{-N} (times bounded) -> 0 faster than any power.",
+    "zeta and delta depend only on X = QR^2/(2q), constant along the path (6.21) (which moves only H).",
+    "Consistency with consumers: M_alpha has weight zeta (matching a product of two W amplitudes with sqrt(zeta) each, cf. (6.30)-(6.31) and Proposition 7.6's use); no envelope P_v and no rectangle restriction, as the definition states; descent condition (6.20) and theta-independence."
+   ],
+   "recomputed": [
+    {
+     "quantity": "edge behaviour",
+     "claimed": "zeta^b delta^{-N} -> 0 at either edge for b>0",
+     "obtained": "exp(-b a/delta^2) delta^{-N} -> 0 as delta -> 0",
+     "method": "hand"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "This is a definition; CHECKED means it is well-formed and its garbled display was resolved unambiguously. The stronger statement that Theorem 4.6(iv)'s weight can be taken of this explicit form belongs to Theorem 4.6, not to this node."
+  },
+  {
+   "id": "Lemma 6.3",
+   "verdict": "CHECKED",
+   "pages_read": [
+    64,
+    65,
+    68
+   ],
+   "steps_checked": [
+    "Pointwise: chi_l(q) supported in q/Q in [1/2,2] so at most 3 bands (|l-l'|<=2 for meeting supports, p.65); per band the product partition chi_{l,a} has mesh S_*^{-3} with supports extending at most one mesh length, so bounded overlap in each of three coordinates; two signs double: sup # <= C.",
+    "Compact chart set B: O(S_l^3) grid positions per coordinate over a bounded interval, three coordinates: O(S_l^9) boxes; a radial line at fixed (Z,T): only R varies: O(S_l^3).",
+    "Fixed-factor enlargement changes only the constants."
+   ],
+   "recomputed": [
+    {
+     "quantity": "box counts",
+     "claimed": "S_l^9 and S_l^3",
+     "obtained": "(bounded length / S_l^{-3})^3 and ^1",
+     "method": "hand"
+    }
+   ],
+   "gap": null,
+   "not_checked_reason": null,
+   "notes": "Elementary counting; the only inputs are the mesh size S_*^{-3} from p.64 and the dyadic overlap bound from p.65."
+  }
+ ],
+ "summary": {
+  "CHECKED": 10,
+  "GAP": 0,
+  "NOT-CHECKED": 0
+ },
+ "escalation_candidates": [],
+ "extraction_artefacts_found": [
+  {
+   "page": 74,
+   "display": "frame line: 'N = g0 K = N⊥, λ20 = −2F0Nθ(2F0Nθ + |g0|) > 0, c0 = < 0. |g0|, 2F0Nθ'",
+   "resolved_as": "N = g_0/|g_0|, K = N^perp, lambda_0^2 = -2F_0N_theta(2F_0N_theta+|g_0|) > 0, c_0 = lambda_0/(2F_0N_theta) < 0 (fraction bars under g_0 and lambda_0)"
+  },
+  {
+   "page": 74,
+   "display": "(7.1) 'T0,∗· K T0,∗· N < c0 1, T0,∗= (Q/q)A+1/2T0. 0,|| T0,∗· N|| <'",
+   "resolved_as": "T_{0,*}.N < 0, |c_0 (T_{0,*}.K)/(T_{0,*}.N)| < 1, T_{0,*} = (Q/q)^{A+1/2} T_0"
+  },
+  {
+   "page": 78,
+   "display": "'λ0 −λ0(1 + y2) , y = |s(v)|. anet(y) = √ 1 + y2 (1 + u2∗)3/2'",
+   "resolved_as": "a_net(y) = lambda_0/sqrt(1+y^2) - lambda_0(1+y^2)/(1+u_*^2)^{3/2}"
+  },
+  {
+   "page": 80,
+   "display": "(7.21) 'y(v) √ cP(v) ≤x(v) ≤CP(v), = c0 1 + s(v)2 + O(S−1∗). x(v)'",
+   "resolved_as": "cP <= x <= CP, y(v)/x(v) = c_0 sqrt(1+s(v)^2) + O(S_*^{-1})"
+  },
+  {
+   "page": 81,
+   "display": "'+ C(1 + Kb/S∗+ K2b/S2∗) < 0. ±r′| r=±Kb/S∗≤−2cλKb S∗'",
+   "resolved_as": "+-r'|_{r=+-K_b/S_*} <= [-2c_lambda K_b + C(1+K_b/S_*+K_b^2/S_*^2)]/S_* < 0 (single fraction bar over S_*)"
+  },
+  {
+   "page": 83,
+   "display": "'h+y+ = 2(−TN/Ac1 −TK/u∗), h−y−= 2(−TN/Ac1 + TK/u∗)'",
+   "resolved_as": "h_+y_+ = (1/2)(-T_N/A_c - T_K/u_*), h_-y_- = (1/2)(-T_N/A_c + T_K/u_*) (the '1'/'2' are a stacked 1/2 fraction, not a factor 2)"
+  },
+  {
+   "page": 69,
+   "display": "(6.24) '|∂I f | ≤Cj,IεαS ∗ζbj,I δ−dj,I'",
+   "resolved_as": "|d^I f| <= C_{j,I} eps^alpha S_*^{b_{j,I}} zeta delta^{-d_{j,I}} (b_{j,I} is the S_* exponent; zeta to the first power)"
+  },
+  {
+   "page": 84,
+   "display": "(7.31) '(dΣ)σ √ dΣ = H−1(Σ/ε), δaσ = , LΣ = ε ∑ δaσbσ. 2aσ'",
+   "resolved_as": "dSigma = H^{-1}(Sigma/eps), delta a_sigma = (dSigma)_sigma/(2a_sigma), L Sigma = sqrt(eps) sum delta a_sigma b_sigma"
+  }
+ ]
+}
