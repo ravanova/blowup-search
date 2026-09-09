@@ -1,0 +1,493 @@
+{
+  "schema": "arc6_w4_port_v1",
+  "unit": "U5 (leg 421, CONSTRUCTION) \u2014 DOES IT MOVE W4?",
+  "arc": 6,
+  "leg": 421,
+  "date_utc": "2026-09-09",
+  "prereg": {
+    "file": "experiments/journal/leg_421_prereg.md",
+    "commit": "4688459",
+    "T": 1.0,
+    "R_cut": 1.0,
+    "tau_ladder": [
+      0.0001,
+      1e-05,
+      1e-06,
+      1e-07,
+      1e-08
+    ],
+    "rho_levels": [
+      0.01,
+      0.001,
+      0.0001
+    ],
+    "rho_reported": 0.001,
+    "max_spread_allowed": 0.025,
+    "M1_core_exponent": -1.5,
+    "M1_tol": 0.05,
+    "M2_energy_exponent": 0.0,
+    "M2_tol": 0.05,
+    "M3_farfield_exponent": -1.0,
+    "M3_tol": 0.05,
+    "M4_delta": "MEASURED \u2014 no prediction",
+    "M5_annulus_exponent": 0.0,
+    "M5_tol": 0.1,
+    "M6_annulus_dt_tol": 0.15,
+    "admissibility_floor": -0.05,
+    "expected_gate_answer": "NO"
+  },
+  "verification_status": "UNVERIFIED (\u00a73f rule 1).",
+  "W4_break_clause_a_verbatim": "(a) a localisation argument carrying blow-up from the infinite-energy profile to a finite-energy solution with the decay actually available",
+  "M1_core": {
+    "reported_exponent": -1.5000000013726775,
+    "spread_across_rho": 3.4711001783982454e-07,
+    "predicted": -1.5,
+    "abs_error": 1.3726775272004943e-09,
+    "inside_tolerance": true,
+    "per_rho": {
+      "0.01": {
+        "exponent": -1.5000000004567153,
+        "ladder": [
+          {
+            "tau": 0.0001,
+            "max_abs_f": 3015396.307570398,
+            "max_abs_u": 124.48827035141541,
+            "max_abs_div": 8.024198589535239e-09
+          },
+          {
+            "tau": 1e-05,
+            "max_abs_f": 95355203.78613593,
+            "max_abs_u": 393.66647628604636,
+            "max_abs_div": 5.497963684319984e-08
+          },
+          {
+            "tau": 1e-06,
+            "max_abs_f": 3015396311.1408052,
+            "max_abs_u": 1244.8827034984515,
+            "max_abs_div": 6.610407581320032e-07
+          },
+          {
+            "tau": 1e-07,
+            "max_abs_f": 95355203052.02193,
+            "max_abs_u": 3936.6647637580677,
+            "max_abs_div": 6.796213710913435e-06
+          },
+          {
+            "tau": 1e-08,
+            "max_abs_f": 3015396335033.125,
+            "max_abs_u": 12448.827007807675,
+            "max_abs_div": 8.488449449512495e-05
+          }
+        ]
+      },
+      "0.001": {
+        "exponent": -1.5000000013726775,
+        "ladder": [
+          {
+            "tau": 0.0001,
+            "max_abs_f": 3015396.487459384,
+            "max_abs_u": 124.4882709044546,
+            "max_abs_div": 4.317533984653385e-07
+          },
+          {
+            "tau": 1e-05,
+            "max_abs_f": 95355209.60376288,
+            "max_abs_u": 393.6664780349099,
+            "max_abs_div": 5.3984154364299916e-06
+          },
+          {
+            "tau": 1e-06,
+            "max_abs_f": 3015396462.8775163,
+            "max_abs_u": 1244.8827090288435,
+            "max_abs_div": 5.395970090502386e-05
+          },
+          {
+            "tau": 1e-07,
+            "max_abs_f": 95355210947.79533,
+            "max_abs_u": 3936.6647812467004,
+            "max_abs_div": 0.0008327271866933974
+          },
+          {
+            "tau": 1e-08,
+            "max_abs_f": 3015396513862.307,
+            "max_abs_u": 12448.827063111588,
+            "max_abs_div": 0.006706481159199029
+          }
+        ]
+      },
+      "0.0001": {
+        "exponent": -1.4999996542626597,
+        "ladder": [
+          {
+            "tau": 0.0001,
+            "max_abs_f": 3015396.618486246,
+            "max_abs_u": 124.48827090450992,
+            "max_abs_div": 7.247348400419972e-05
+          },
+          {
+            "tau": 1e-05,
+            "max_abs_f": 95355220.50792657,
+            "max_abs_u": 393.6664780350848,
+            "max_abs_div": 0.0004934399451670246
+          },
+          {
+            "tau": 1e-06,
+            "max_abs_f": 3015396803.755348,
+            "max_abs_u": 1244.8827090293971,
+            "max_abs_div": 0.006283524813170516
+          },
+          {
+            "tau": 1e-07,
+            "max_abs_f": 95355216702.07059,
+            "max_abs_u": 3936.664781248451,
+            "max_abs_div": 0.09406116099076546
+          },
+          {
+            "tau": 1e-08,
+            "max_abs_f": 3015384676055.6533,
+            "max_abs_u": 12448.827063117122,
+            "max_abs_div": 0.6862202137708664
+          }
+        ]
+      }
+    }
+  },
+  "M2_energy": {
+    "classification": {
+      "ladder": [
+        52.97300112610219,
+        53.27916001776928,
+        53.37451157361675,
+        53.40446655528965,
+        53.413914658969816
+      ],
+      "per_decade_increment": [
+        0.30615889166708854,
+        0.09535155584747201,
+        0.029954981672901226,
+        0.00944810368016391
+      ],
+      "increment_spread": 0.29671078798692463,
+      "increment_spread_relative": 0.969139868423493,
+      "increment_ratios": [
+        0.3114446728241867,
+        0.31415304560754476,
+        0.31541009716961826
+      ],
+      "log_fit_slope_per_decade": 0.10071336032556046,
+      "log_fit_r2": 0.7447239913282404,
+      "power_fit_exponent": -0.0008219872283671081,
+      "power_fit_r2": 0.7440619924506384,
+      "verdict": "CONVERGENT \u2014 per-decade increments fall geometrically"
+    },
+    "exponent": -0.0008219872283671081,
+    "predicted": 0.0,
+    "abs_error": 0.0008219872283671081,
+    "inside_tolerance": true,
+    "ladder": [
+      {
+        "tau": 0.0001,
+        "energy": 52.97300112610219
+      },
+      {
+        "tau": 1e-05,
+        "energy": 53.27916001776928
+      },
+      {
+        "tau": 1e-06,
+        "energy": 53.37451157361675
+      },
+      {
+        "tau": 1e-07,
+        "energy": 53.40446655528965
+      },
+      {
+        "tau": 1e-08,
+        "energy": 53.413914658969816
+      }
+    ]
+  },
+  "M3_M4_farfield": {
+    "alpha_mean": -1.0000042690434898,
+    "delta_mean": 1.9741261494333586,
+    "per_ray": {
+      "ray_100": {
+        "alpha": -1.0000169698912222,
+        "c_limit": 1.0000000000260612,
+        "delta": 1.9616334060936493,
+        "n_points_used_for_delta": 25
+      },
+      "ray_111": {
+        "alpha": -0.9999915681957573,
+        "c_limit": 1.4142135623589274,
+        "delta": 1.9866188927730681,
+        "n_points_used_for_delta": 25
+      }
+    },
+    "alpha_predicted": -1.0,
+    "alpha_abs_error": 4.269043489824043e-06,
+    "alpha_inside_tolerance": true
+  },
+  "M5_M6_annulus_counterfactual": {
+    "is_a_counterfactual": true,
+    "what_it_grants": "that the core residual is zero, i.e. that the profile SOLVES its equation",
+    "M5_exponent": -0.005321070372015147,
+    "M6_exponent": -1.3457970145138975,
+    "M6_predicted_from_M4": -0.012936925283320688,
+    "M6_abs_error_vs_prediction": 1.3328600892305769,
+    "M6_consistent_with_M4": false,
+    "per_rho": {
+      "0.01": {
+        "M5_exponent": -0.0053174859245068064,
+        "M6_exponent": -0.998615628057793,
+        "ladder": [
+          {
+            "tau": 0.0001,
+            "max_abs_f_cutonly": 59.182253273489266,
+            "max_abs_dt_f_cutonly": 4942.164223175098
+          },
+          {
+            "tau": 1e-05,
+            "max_abs_f_cutonly": 59.93011052823073,
+            "max_abs_dt_f_cutonly": 48266.83191823755
+          },
+          {
+            "tau": 1e-06,
+            "max_abs_f_cutonly": 60.67199127105808,
+            "max_abs_dt_f_cutonly": 481294.6087410962
+          },
+          {
+            "tau": 1e-07,
+            "max_abs_f_cutonly": 61.41315266472671,
+            "max_abs_dt_f_cutonly": 4815063.393137801
+          },
+          {
+            "tau": 1e-08,
+            "max_abs_f_cutonly": 62.15424121084069,
+            "max_abs_dt_f_cutonly": 48698849.94250633
+          }
+        ],
+        "dt_log10_increments_per_decade": [
+          0.9897316215646108,
+          0.9987622028794749,
+          1.0001910123188702,
+          1.004916695926838
+        ]
+      },
+      "0.001": {
+        "M5_exponent": -0.005321070372015147,
+        "M6_exponent": -1.3457970145138975,
+        "ladder": [
+          {
+            "tau": 0.0001,
+            "max_abs_f_cutonly": 59.181340076635514,
+            "max_abs_dt_f_cutonly": 4946.072751042813
+          },
+          {
+            "tau": 1e-05,
+            "max_abs_f_cutonly": 59.929197328787794,
+            "max_abs_dt_f_cutonly": 48896.60627364493
+          },
+          {
+            "tau": 1e-06,
+            "max_abs_f_cutonly": 60.671070719633796,
+            "max_abs_dt_f_cutonly": 547899.1027373092
+          },
+          {
+            "tau": 1e-07,
+            "max_abs_f_cutonly": 61.412306039357155,
+            "max_abs_dt_f_cutonly": 14623272.03655482
+          },
+          {
+            "tau": 1e-08,
+            "max_abs_f_cutonly": 62.15580199156268,
+            "max_abs_dt_f_cutonly": 1532366509.454615
+          }
+        ],
+        "dt_log10_increments_per_decade": [
+          0.9950182174066056,
+          1.0494218717650126,
+          1.4263439700284457,
+          2.020318092472696
+        ]
+      },
+      "0.0001": {
+        "M5_exponent": -0.00574789662333475,
+        "M6_exponent": -1.8555798593733674,
+        "ladder": [
+          {
+            "tau": 0.0001,
+            "max_abs_f_cutonly": 59.18236054771174,
+            "max_abs_dt_f_cutonly": 80661.77541663691
+          },
+          {
+            "tau": 1e-05,
+            "max_abs_f_cutonly": 59.93035925798144,
+            "max_abs_dt_f_cutonly": 1888092.1342909215
+          },
+          {
+            "tau": 1e-06,
+            "max_abs_f_cutonly": 60.67282065412559,
+            "max_abs_dt_f_cutonly": 118165631.50271401
+          },
+          {
+            "tau": 1e-07,
+            "max_abs_f_cutonly": 61.40306263536749,
+            "max_abs_dt_f_cutonly": 17771684200.358276
+          },
+          {
+            "tau": 1e-08,
+            "max_abs_f_cutonly": 62.46837237944993,
+            "max_abs_dt_f_cutonly": 1576574041550.8528
+          }
+        ],
+        "dt_log10_increments_per_decade": [
+          1.3693554061178461,
+          1.796467997284494,
+          2.1772374070272624,
+          1.9479857842813606
+        ]
+      }
+    }
+  },
+  "THE_LOG": {
+    "flagged_in_advance": true,
+    "where": "prereg \u00a75, 'A LOG IS FLAGGED IN ADVANCE'",
+    "per_rho": {
+      "0.01": {
+        "f_ladder": [
+          59.182253273489266,
+          59.93011052823073,
+          60.67199127105808,
+          61.41315266472671,
+          62.15424121084069
+        ],
+        "per_decade_increment_of_f": [
+          0.7478572547414615,
+          0.7418807428273553,
+          0.7411613936686265,
+          0.7410885461139785
+        ],
+        "increment_spread": 0.006768708627483022,
+        "log_fit_slope_per_decade": 0.7427018011198812,
+        "log_fit_r2": 0.9999966811100252,
+        "power_fit_exponent": -0.0053174859245068064,
+        "power_fit_r2": 0.9999203990545626,
+        "verdict": "LOGARITHMIC \u2014 constant per-decade increments, log fit beats power fit"
+      },
+      "0.001": {
+        "f_ladder": [
+          59.181340076635514,
+          59.929197328787794,
+          60.671070719633796,
+          61.412306039357155,
+          62.15580199156268
+        ],
+        "per_decade_increment_of_f": [
+          0.7478572521522793,
+          0.7418733908460027,
+          0.7412353197233585,
+          0.743495952205528
+        ],
+        "increment_spread": 0.006621932428920729,
+        "log_fit_slope_per_decade": 0.7432032540423666,
+        "log_fit_r2": 0.9999976208232231,
+        "power_fit_exponent": -0.005321070372015147,
+        "power_fit_r2": 0.9999292515536465,
+        "verdict": "LOGARITHMIC \u2014 constant per-decade increments, log fit beats power fit"
+      },
+      "0.0001": {
+        "f_ladder": [
+          59.18236054771174,
+          59.93035925798144,
+          60.67282065412559,
+          61.40306263536749,
+          62.46837237944993
+        ],
+        "per_decade_increment_of_f": [
+          0.7479987102697052,
+          0.7424613961441437,
+          0.7302419812419032,
+          1.065309744082441
+        ],
+        "increment_spread": 0.33506776284053785,
+        "log_fit_slope_per_decade": 0.8044727040862435,
+        "log_fit_r2": 0.9936952915689775,
+        "power_fit_exponent": -0.00574789662333475,
+        "power_fit_r2": 0.9947924862337276,
+        "verdict": "POWER"
+      }
+    },
+    "reading": "max|f_cutonly| has CONSTANT per-decade increments and the log fit beats the power fit. f_cutonly is therefore UNBOUNDED as tau -> 0, growing like b*log10(1/tau); M5's power exponent of -0.005 is what a logarithm looks like to a power fit, and reads as 'bounded' if nothing checks. This is the same signature CORRECTIONS.md \u00a752-\u00a754 and PB2 (leg 410, 139.287 per decade) record. d_t f = b/(tau ln 10) then diverges like tau^-1 EXACTLY."
+  },
+  "M6_direct_stencil_status": {
+    "spread_across_rho": 0.8569642313155744,
+    "limit": 0.025,
+    "verdict": "UNDER-RESOURCED",
+    "why": "the time step of the d_t stencil is rho*tau, which shrinks with tau, while the noise floor of f itself is fixed by the SPATIAL step rho*R. At tau = 1e-8 and rho = 1e-4 the quotient is roundoff. The coarsest level has the largest dt and the least amplification.",
+    "coarsest_level_rho_1e-2": -0.998615628057793,
+    "log_fit_prediction": -1.0,
+    "agreement": 0.0013843719422069745,
+    "note": "This is reported as UNDER-RESOURCED under the pre-committed rule and the conclusion is NOT drawn from it. The conclusion is drawn from THE_LOG, whose own ladder is stable across rho to 4e-4."
+  },
+  "controls": {
+    "K1_typeII_gamma0.7": {
+      "measured": -1.839786858250251,
+      "predicted": -1.9,
+      "abs_err": 0.0602131417497489,
+      "must": "MOVE",
+      "tail_3pt": -1.903341632204719,
+      "tail_abs_err": 0.0033416322047190583,
+      "moved_toward_prediction_on_tail": true,
+      "note": "the same subleading contamination U4 measured: gamma = 0.7 puts a competing term at -1.7, only 0.2 from the leading -1.9, and a four-decade fit sits between them"
+    },
+    "K2_uscale2.5": {
+      "measured": -1.500000007708742,
+      "predicted": -1.5,
+      "abs_err": 7.708742089107545e-09,
+      "must": "NOT MOVE",
+      "shift_from_P0": 6.336064561907051e-09
+    },
+    "K3_planted_delta1.5": {
+      "measured": 1.5805487170089423,
+      "predicted": 1.5,
+      "abs_err": 0.08054871700894228
+    },
+    "K4_planted_delta3.0": {
+      "measured": 3.0000423614983327,
+      "predicted": 3.0,
+      "abs_err": 4.23614983326992e-05
+    },
+    "K5_exact_shear": {
+      "max_abs_residual": 2.5844025530741277e-10,
+      "max_abs_div": 1.850371707708594e-14
+    },
+    "K6_shear_1pc_wrong": {
+      "max_abs_residual": 0.023959495320976076,
+      "max_abs_div": 1.850371707708594e-14
+    },
+    "K7_div_u_cut": {
+      "max_abs_div_core": 0.006706481159199029,
+      "gates": "nothing"
+    }
+  },
+  "controls_all_as_predicted": false,
+  "gate": {
+    "question": "Does W4 break under its own test?",
+    "answer": "NO",
+    "clause_a1_bounded_energy": true,
+    "clause_a1_note": "judged on the LADDER, not on the power exponent: M2's increments FALL geometrically (0.306, 0.095, 0.030, 0.009; ratios ~0.31 each decade), so the energy CONVERGES, to ~53.41. The same -0.0008 exponent would also be what a logarithm looks like, and M5's -0.005 IS one.",
+    "clause_a2_still_blows_up": true,
+    "clause_a2_note": "TRUE BY CONSTRUCTION, NOT MEASURED, and said so: chi == 1 on a fixed ball about the origin, where u_cut IS the uncut self-similar field.",
+    "clause_a3_force_admissible": false,
+    "expected_in_advance": "NO",
+    "matched_expectation": true
+  },
+  "clay_movement": {
+    "links_moved": 0,
+    "clay_odds": "~0.05%, unchanged",
+    "walls_moved": "none",
+    "tier": "Tier 2 at best"
+  },
+  "runtime_seconds": 10.38
+}

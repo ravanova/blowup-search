@@ -4834,3 +4834,131 @@ Float64 finite differences on a synthetic field with the manuscript's scalings a
 incompressibility. **It is not the manuscript's profile**, and §5 is the measurement that proves
 the difference is real rather than asserting it. **Tier 2 at best. `links_moved: 0`. No wall moved.
 Clay ~0.05%. `W4` untouched.**
+
+---
+
+## §65 — `U5` (leg 421, arc 6): **`W4` DOES NOT BREAK.** Clause (a) fails twice — once on route 4's own object at exactly `−1.500000`, and once **on a counterfactual that grants an exact profile**, where the cutoff-generated force is **logarithmically unbounded**. The log was flagged in advance and the flag is what caught it.
+
+**Unit:** `U5`, arc 6, §3f SOLO, **CONSTRUCTION**. **Pre-registration:**
+`experiments/journal/leg_421_prereg.md`, committed at **`4688459` before the runner existed** —
+with `W4`'s break clauses quoted verbatim, six measurements and their predictions, the decision
+rule, **the expected answer written down in advance**, and a log flagged in advance.
+**Runner:** `experiments/arc6_w4_port_v1.py`. **Artefact:** `writeup/data/arc6_w4_port_v1.json`.
+**Checks:** `writeup/arc6_w4_port_evidence.py`.
+
+### 1. The gate
+
+> **Does `W4` break under its own test?**
+
+## **NO.** *(UNVERIFIED.)*
+
+Answered against `WALLS.md`'s own clause (a), quoted not paraphrased — *"a localisation argument
+carrying blow-up from the infinite-energy profile to a finite-energy solution with the decay
+actually available"* — and the evidence script checks that the banked clause is a **substring of
+`WALLS.md`**, so a paraphrase would fail the check.
+
+| clause | verdict | on what |
+|---|---|---|
+| **(a1)** bounded energy | **TRUE** | energy **converges to ≈ 53.41**; increments `0.306, 0.095, 0.030, 0.009`, ratios `0.311/0.314/0.315` |
+| **(a2)** still blows up | **TRUE** | **by construction, not measured, and labelled so** |
+| **(a3)** `f` admissible | **FALSE** | **twice, independently** |
+
+### 2. Every advantage was granted to the mechanism, deliberately
+
+`p ≡ 0` (smooth, and free because `f` absorbs it); `f :=` whatever is left, so `(u_cut, 0)` solves
+forced Navier–Stokes **exactly** at every `τ > 0`; and the cutoff applied to the **vector
+potential**, as the manuscript's §3.5 does, so `∇·u_cut = 0` by construction. **A `NO` therefore
+cannot be blamed on the setup**, and the only question left is whether `f` is admissible.
+
+### 3. First failure — route 4's own object
+
+## `M1` core residual exponent **`−1.500000`**, three-level spread **`3.47e-07`**, against a pre-committed **`−1.500`**. `|err| = 0.000000`.
+
+`f` diverges like `τ^{-3/2}` **where the cutoff is identically one** — no cutoff term to blame.
+The reason was written down before the run: route 4 **has no exact profile** (`L6`/`L6-b`:
+`ρ = 1.5048519` at 20,000 iterations against `< 1.45`). **This is a fact about route 4, not about
+the wall**, which is why §4 exists.
+
+### 4. Second failure — the counterfactual, and **the finding with reach**
+
+`M5`/`M6` are measured on the **cutoff-generated terms alone**, `f_cut − χ·f_uncut` — what
+survives if the core residual is **granted** to be zero. **Labelled a counterfactual in the
+pre-registration and in the artefact.**
+
+**`M5`'s power fit returns exponent `−0.005321`, which reads as "bounded". IT IS NOT.**
+
+| per-decade increments of `max\|f_cutonly\|` | **`0.7479, 0.7419, 0.7412, 0.7435`**, spread `6.6e-03` |
+|---|---|
+| log fit `f = c + b·log₁₀(1/τ)` | `b = **0.743203**`, `R² = **0.9999976208**` |
+| power fit | `−0.005321`, `R² = 0.9999292516` |
+| **verdict** | **LOGARITHMIC — and the verdict is the R² COMPARISON, not a preference** |
+
+**`max|f_cutonly|` is UNBOUNDED**, and `∂_t f = b/(τ ln 10)` **diverges like `τ^{-1}` exactly**.
+Such an `f` is not in `C∞_c(ℝ³×(0,∞))` and does not satisfy Fefferman **(5)**.
+
+**`leg_421_prereg.md` §5 flagged a log in advance and required the per-decade increment to be
+reported. That requirement is what caught it** — the same signature as `CORRECTIONS.md` §52–§54
+and `PB2` (leg 410, `139.287` per decade), and the third time this repository has met it.
+
+**The same discipline was then applied to `M2`, which has the same `−0.0008` signature — and
+`M2`'s increments FALL geometrically, so the energy genuinely converges.** The classifier
+distinguishes them; a power exponent alone would not.
+
+### 5. `M6` is `UNDER-RESOURCED` and the conclusion is not drawn from it
+
+Spread across `ρ` is **`0.857`** against a pre-committed `0.025`. **Cause measured, not guessed:**
+the `∂_t` stencil's step is `ρ·τ` and shrinks with `τ`, while `f`'s own noise floor is fixed by the
+**spatial** step `ρ·R`. The coarsest level (largest `dt`) reads **`−0.998616`** and §4's log fit
+predicts **exactly `−1`** — agreement `0.0014`, from two independent routes. **The conclusion rests
+on §4**, whose ladder is stable across `ρ` to `4e-4`.
+
+### 6. Two measurements worth banking in their own right
+
+- **`α = −1.000004`** (rays `−1.000017`, `−0.999992`). **An independent confirmation of the `α = 1`
+  pin** — `L2′`/`V-W4` established it by a literature census with two one-sided theorems; this is
+  the same number **from the closed form, to `4e-6`, by a route sharing no step with theirs.**
+- **`δ = 1.974126`**, the far-field **correction** exponent (rays `1.961633`, `1.986619`).
+  **This repository had never measured it.**
+
+### 7. What §4 does NOT establish, said plainly
+
+**That every `α = 1` profile does this is NOT established.** The logarithm traces to `arcsinh` in
+the closed form of `G4`, specific to this witness's algebraic vorticity `(1+r²)^{-3/2}`.
+
+**What IS structural:** because `α = 1` makes `|u| ~ 1/|x|` in the transition annulus
+**independently of `τ`**, the annulus admissibility question **reduces entirely to the
+`τ`-dependence of the subleading far-field term** — i.e. to `δ`, and to whether it carries a log.
+**That reduction turns "does the mechanism port?" into "what is the far-field expansion of the
+profile?", which is a question about the profile and is measurable.**
+
+**And it is exactly what the manuscript avoids.** It never cuts an exact profile: it builds an
+approximate solution with a **flat** residual (Thm 3.1(iii)), derivative bounds up to `τ = 0` away
+from the origin (Thm 3.1(ii)) and an **exactly solved heat exterior** (3.5). Those three are what
+give the annulus terms limits at `t = 1`. `U3` priced them at **78.9% of the manuscript** (§63).
+
+### 8. A control failed, and it is reported as a failure
+
+**`K1`** (Type-II `γ = 0.7`) landed at `−1.839787`, `|err| 0.060213` against a pre-committed
+`±0.05`. **FAILED.** Its tail fit lands at `|err| 0.003342` and the diagnosis is **the same
+subleading contamination `U4` banked at §64** — `γ = 0.7` puts a competing term at `−1.7`, only
+`0.2` from the leading `−1.9`. **The diagnosis is offered beside the failure, not instead of it,
+and `controls_all_as_predicted` is `false` in the artefact.**
+
+**`K2`** — scaling the profile by `2.5` — moves the exponent by **`1e-08`**. **The instrument
+measures a scaling and not an amplitude**, which is what makes `M1` readable at all.
+
+### 9. NO ESCALATION IS RAISED
+
+The charter reserves escalation for a `YES`. **The answer is `NO`, so none is raised and none is
+manufactured.** **`W4` STANDS.** Clause (a) is not broken by this mechanism on this object; clause
+(b) stays shut; **clause (c) is untouched and remains Lane T's, deferred by a user ruling.**
+
+**A `NO` is not a null.** It carries an exact `−1.500000`, a logarithm at `R² = 0.9999976`, an
+independent confirmation of the `α = 1` pin to `4e-6`, this repository's first measurement of `δ`,
+and a reduction of the annulus question to the profile's far-field expansion.
+
+### CEILING
+
+Float64 finite differences on a banked closed form. **Tier 2 at best.** `W4`'s own statement is
+*"no known method"*; **a measurement cannot upgrade that to "no method"**, and this section does
+not. **`links_moved: 0`. No wall moved. Clay ~0.05%.**
