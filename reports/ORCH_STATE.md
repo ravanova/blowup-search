@@ -33,7 +33,7 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–430. WAVE 1 CLOSED AND INTEGRATED 2026-09-09 (leg 428); WAVE 2 NEXT.**
+## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–431. WAVE 1 CLOSED (leg 428). WAVE 2 IN FLIGHT (dispatched 2026-09-09): `R4` ×5 on the 58-node spine.**
 
 **Mode:** `ORCHESTRATION.md` **§3g CONDUCTOR**, wave sizing **5** by user ruling (recorded in §3g
 beside its original reason; `CORRECTIONS.md` §67). The charter arrived while `R3` was mid-flight
@@ -80,11 +80,27 @@ recorded:** the dispatch preceded the `STATE.md` wave row (§3g step 1 says comm
 and the audit load of five shard merges lands on one context — if it becomes the bottleneck, that
 is measured here, not hidden.
 
-**NEXT (pre-committed):** `R5`(i) pre-registration → runner (serial, mine) while wave 1 reads; then
-wave 2 = **`R4` fan-out ×5** on the **58-node spine** banked in `dag.json` (`r4_spine`), partition in
-`leg_426.md` §5, slot 5 = adversarial verifier, outputs `writeup/data/arc6/spine/<agent>.json`;
-gate: per-node `CHECKED`/`GAP`/`NOT-CHECKED`, verifier agreement rate, `VERIFIED` only where the
-verifier reproduced it blind. **Any `GAP` believed to sink the theorem is escalated, never published.**
+**WAVE 2 — dispatched 2026-09-09 after wave 1 landed on `main` (`1b54840`), five agents, each in its
+own worktree, each writing ONE file under `writeup/data/arc6/spine/` and committing on its branch:**
+
+| slot | nodes | writes | status |
+|---|---|---|---|
+| 1 | §10, §3, summation, §5: Thm 1.1, Lemmas 10.2–10.5, Prop 10.1, Thm 3.1, Prop 9.9, Lemmas 9.7, 9.8, 5.4, Props 5.5, 5.3, Lemmas 5.1, 5.2 (15) | `agent_1.json` | in flight |
+| 2 | §9, §8: Def 9.4, Props 9.6, 9.5, 9.3, 9.1, Lemma 9.2, Lemmas 8.2, 8.6, 8.7, 8.8, Prop 8.4, Cor 8.5 (12) | `agent_2.json` | in flight |
+| 3 | §7, §6: Props 7.2, 7.5, 7.6, Lemmas 7.1, 7.4, 7.7, Cor 7.8, Lemma 6.2, Def 6.4, Lemma 6.3 (10) | `agent_3.json` | in flight |
+| 4 | §4, A, B, C: Thm 4.6, Props 4.2, 4.10, Lemmas 4.4, 4.5, 4.8, Def 3.2, Props C.3, C.2, Lemma C.1, Props A.4, A.7, A.10, Lemma A.8, Props B.2, B.3, B.5, B.8, Lemmas B.4, B.7, Cor B.10 (21) | `agent_4.json` | in flight |
+| 5 | **ADVERSARIAL VERIFIER**, blind, seed 428: Lemma 4.4, Prop 4.10, Lemma 6.3, Lemma 8.8, Prop 9.1, Lemma 9.8, Prop 9.9, Lemma B.7, Prop B.8, Prop C.3 (10; 2/2/1/5 across slots 1–4) | `agent_5_verifier.json` | in flight |
+
+Every agent: verdict `CHECKED` / `GAP` (step quoted) / `NOT-CHECKED` per node, constants recomputed
+not read, garbled displays checked at the PDF's geometry, forbidden from the journals,
+`CORRECTIONS.md`, `dag.json` and each other's files; **escalation candidates go in the file, never
+as a refutation**. Gate pre-committed in `leg_426.md` §5: ≥ 35 of 58 `CHECKED`, ≥ 3 `GAP`, verifier
+agreement ≥ 0.8; `VERIFIED` only where the verifier reproduced a node blind. Composition floor:
+the Conductor's serial **`R5`(i)** runs in this wave (pre-registration `leg_430_prereg.md` first).
+
+**NEXT:** integrate wave 2 (leg 429): agreement table, `VERIFIED` labels, escalation packets for any
+`GAP` believed to sink the theorem (the verifier attacks the GAP first); then wave 3 = `R5`(iii)–(vii)
+fan-out on the interface `R5`(i)–(ii) pin, and `R6` ×5.
 
 **Open escalations:** the five rows above, unchanged; row 1 still carries `U1`'s measured fact and
 is still not ruled. **Lean source build** from leg 418 (`lean_build.log`): not re-checked this wave;

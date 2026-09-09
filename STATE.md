@@ -42,7 +42,7 @@ fresh agent that never saw the construction can mark anything `VERIFIED`.**
 
 **WAVE 1 — CLOSED AND INTEGRATED** (dispatched before this row existed, a §3g step-1 defect, recorded).
 Five R2 shard readers A–E, one file each, merged → `ledger/merged.json` (leg 428). Composition floor met
-by the Conductor's serial `R3` and `R5`(i)–(ii). **WAVE 2 (next): `R4` fan-out ×5 on the 58-node spine**
+by the Conductor's serial `R3` and `R5`(i)–(ii). **WAVE 2 IN FLIGHT (leg 429): `R4` fan-out ×5 on the 58-node spine**
 (`dag.json` `r4_spine`, partition `leg_426.md` §5, slot 5 adversarial verifier); in parallel, serial
 `R5`(i) with pre-registration first.
 
