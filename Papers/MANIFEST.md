@@ -7,6 +7,26 @@ directory no longer exists. The manifest and `fetch.sh` are committed so the PDF
 re-pulled in one command instead of re-derived from memory. **If you download papers, do
 not commit them; commit any change to this manifest instead.**
 
+**STATUS 2026-09-09 (leg 417, arc 6 `U1`): THREE NON-arXiv PRIMARIES ADDED, AND THE EGRESS
+DIAGNOSIS BELOW IS NOW WRONG IN BOTH DIRECTIONS.**
+`bash Papers/fetch.sh openai` re-pulls all three and **verifies each sha256** against
+`writeup/data/arc6_acquire_v1.json` :: `artifacts_fetched`. A hash mismatch is not a fetch
+failure to retry — it means the published file changed, and it is a `CORRECTIONS.md` entry.
+
+| file | source | sha256 | what it gates |
+|---|---|---|---|
+| `openai-navier-stokes.pdf` | `cdn.openai.com/pdf/32d9f210-…/navier-stokes.pdf`, 166 pp | `0e779481c4da40bd…` | the claim arc 6 adjudicates: Fefferman **(C)** *and*, via Corollary 10.6, **(D)** |
+| `openai-euler.pdf` | `cdn.openai.com/pdf/315b36cd-…/euler.pdf`, 57 pp | `a0c234518e6c489e…` | the Lean project's other two declared main results — **unforced** Euler blowup |
+| `fefferman-navierstokes-clay.pdf` | `claymath.org/wp-content/uploads/2022/06/navierstokes.pdf`, 6 pp | `c1b5f27b1a64705c…` | conditions (1)–(11) and statements (A)–(D) at primary. **(8) and (9) were `UNREAD` here until this leg** (`STATE.md` Open item 3). |
+
+**The egress diagnosis in `fetch.sh` is stale and is left standing, not silently edited.**
+Measured 2026-09-09 in this container: `arxiv.org` → **200** (the script says it is blocked);
+`github.com` over plain HTTPS → **403**, while the *same repository* clones fine over the
+session's git proxy and reads fine over `raw.githubusercontent.com` (the script says github is
+allowlisted). `openai.com`'s announcement page → 403 (organisation policy, not retried);
+`cdn.openai.com` and `claymath.org` → 200. **A probe that tests one arXiv URL answers for
+neither host.** Full table: `arc6_acquire_v1.json` :: `network_fact_corrected`.
+
 **STATUS 2026-08-04 (leg 48, Route-V v0): TWO PAPERS ADDED, AND ONE OF THEM CLOSED A STAGE.**
 `bash Papers/fetch.sh 2410.05480 2404.04054` — neither was in this manifest, and the first
 of them **pre-empts stage V outright**: Dahne–Figueras verify branches of self-similar
