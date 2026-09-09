@@ -2,7 +2,7 @@
  "schema": "arc6_ledger_v1",
  "leg": 425,
  "cursor": {
-  "read_through_page": 115,
+  "read_through_page": 125,
   "sections_done": [
    "1-2",
    "3",
@@ -11,7 +11,8 @@
    "6",
    "7",
    "8",
-   "9"
+   "9",
+   "10"
   ]
  },
  "entries": [
@@ -1448,6 +1449,162 @@
    ],
    "role": "Delivers the local field of Theorem 3.1: the summed corrections with shrinking cutoffs have residual flat at the singularity and preserve the endpoint regularity, exterior heat flow, and inner growth. It closes Sections 4-9; Section 10 then turns the local field into a global forced solution.",
    "page": 114
+  },
+  {
+   "id": "Proposition 10.1",
+   "kind": "Proposition",
+   "section": "10",
+   "hypotheses": [
+    "the local fields u_loc = curl A + B e_theta, p_loc of Theorem 3.1 / (9.21) on Omega_* = {tau > 0, q < q_*}, A smooth at the axis and A = 0 on X >= X_ext",
+    "the coordinate bound q <= C_0 (tau + |z|^{1/D}) (10.3); cutoffs tau_0 < 1/2, z_0 with C_0(tau_0 + z_0^{1/D}) < q_*/2; an axisymmetric spatial cutoff chi_x (smooth in r^2, z) equal to one on r <= r_0/2, |z| <= z_0/2; a time cutoff chi_t vanishing for 1 - t >= tau_0 and equal to one for 1 - t <= tau_0/2; c = chi_x chi_t"
+   ],
+   "conclusion": "There are a compact K subset R^3 and smooth u, p on R^3 x [0,1) with supp u(.,t) u supp p(.,t) subset K for all t, div u = 0, and u(.,t) = p(.,t) = 0 for all sufficiently small t >= 0 (10.2); defined by u = curl(cA) + cB e_theta, p = c p_loc (10.4). They agree with (u_loc, p_loc) on a spatial neighbourhood of the origin for all times close enough to 1.",
+   "constants": [
+    "C_0 in (10.3)",
+    "tau_0, z_0, r_0",
+    "K = supp chi_x"
+   ],
+   "cites": [
+    "(3.2)",
+    "(3.5)",
+    "(9.21)",
+    "(10.1)",
+    "(10.2)",
+    "(10.3)",
+    "(10.4)",
+    "Theorem 3.1",
+    "Proposition 5.5"
+   ],
+   "role": "Localizes the local solution to compact support and zero initial datum by cutting the POTENTIALS (not the velocity), which keeps exact incompressibility. The residual of the cut fields is by definition the force f = R(u,p) (10.5), which may have nonzero divergence.",
+   "page": 117
+  },
+  {
+   "id": "Lemma 10.2",
+   "kind": "Lemma",
+   "section": "10",
+   "hypotheses": [
+    "f = R(u,p) = d_t u + (u.nabla) u - Delta u + nabla p on t < 1 from (10.5), with u, p the localized fields of Proposition 10.1",
+    "the flatness (3.4) of the local residual near the origin; the endpoint bounds Theorem 3.1(ii) on compact sets with q bounded below; the exact exterior heat field K(r,tau) = c_inf s^{-A} H(2 tau/s), s = r^2/2 (10.7) with derivative bounds (10.8)"
+   ],
+   "conclusion": "For every spatial multi-index alpha and integer j >= 0, d_x^alpha d_t^j f converges uniformly on R^3 as t -> 1. There are F_j in C_c^inf(R^3; R^3), supported in K, with lim d_x^alpha d_t^j f = d_x^alpha F_j and d_x^alpha F_j(0) = 0 (10.6); these limits are compatible under spatial and time differentiation, via d_x^alpha d_t^j f(x,t) = d_x^alpha F_j(x) - int_t^1 d_x^alpha d_t^{j+1} f ds (10.10).",
+   "constants": [
+    "near-origin bound |d_x^alpha d_t^j f| <= C_{alpha,j,N} (tau + |z|^{1/D})^N (10.9)",
+    "exterior bounds |d_tau^j K| <= C_j r^{-1-2h-2j}, |d_tau^j (K^2/rho)| <= C_j rho^{-3-4h-2j} (10.8)"
+   ],
+   "cites": [
+    "(3.4)",
+    "(3.5)",
+    "(10.5)",
+    "(10.6)",
+    "(10.7)",
+    "(10.8)",
+    "(10.9)",
+    "(10.10)",
+    "(A.32)",
+    "Theorem 3.1",
+    "Proposition 9.9"
+   ],
+   "role": "Establishes that the force has a smooth one-sided extension to the terminal time: flatness at the origin, endpoint regularity elsewhere, and the exact exterior heat field cover R^3. The limits F_j are the Taylor data used by Lemma 10.3 to continue f past t = 1.",
+   "page": 118
+  },
+  {
+   "id": "Lemma 10.3",
+   "kind": "Lemma",
+   "section": "10",
+   "hypotheses": [
+    "the force of (10.5) on t < 1 and its derivative limits F_j from Lemma 10.2",
+    "chi_0 in C_c^inf(R) equal to one near zero and zero for arguments >= 1; increasing integers b_j >= 1 chosen by the minimisation on p. 120 so that (10.12) is at most 2^{-j} whenever |alpha| + m <= floor(j/2)"
+   ],
+   "conclusion": "The force extends to f in C_c^inf(R^3 x (0, inf); R^3) with support in K x [0, 2], via f(x, 1 + sigma) = sum_{j >= 0} chi_0(b_j sigma) sigma^j F_j(x)/j! (10.11) for sigma = t - 1 >= 0. All mixed derivatives match the one-sided limits from t < 1; f is zero near t = 0. Compact support gives the decay bounds |d_x^alpha d_t^m f| <= M_{alpha,m} (3 + R)^k (1 + |x| + t)^{-k} for every k, i.e. Fefferman's condition (5).",
+   "constants": [
+    "b_0 = 1; b_j = min{b > b_{j-1} : max_{a+m <= floor(j/2)} C_{j,m} b^{m-j} ||F_j||_{C^a} <= 2^{-j}}",
+    "bound (10.12): ||d_x^alpha d_sigma^m (chi_0(b_j sigma) sigma^j F_j / j!)||_inf <= C_{j,m} b_j^{m-j} ||F_j||_{C^{|alpha|}}"
+   ],
+   "cites": [
+    "(10.2)",
+    "(10.5)",
+    "(10.10)",
+    "(10.11)",
+    "(10.12)",
+    "Lemma 10.2",
+    "[13, (5)]"
+   ],
+   "role": "A Borel-type extension: realises the Taylor coefficients F_j with shrinking-support cutoffs so the force is smooth AND compactly supported in space-time. This is where Fefferman's decay condition (5) on the force is discharged for free, the point our leg-381 note mispriced.",
+   "page": 120
+  },
+  {
+   "id": "Lemma 10.4",
+   "kind": "Lemma",
+   "section": "10",
+   "hypotheses": [
+    "u the localized velocity of Proposition 10.1 with force f of Lemma 10.3 at viscosity one; F(t) = int_0^t ||f(s)||_2 ds for 0 <= t <= 1"
+   ],
+   "conclusion": "F(1) < inf and ||u(t)||_2^2 + 2 int_0^t ||nabla u(s)||_2^2 ds <= F(t)^2 for 0 <= t < 1 (10.13). The kinetic energy is uniformly bounded and the total dissipation on [0,1) is finite.",
+   "constants": [
+    "energy identity (10.14): (1/2) d/dt ||u||_2^2 + ||nabla u||_2^2 = <f, u>"
+   ],
+   "cites": [
+    "(10.13)",
+    "(10.14)",
+    "Proposition 10.1",
+    "Lemma 10.3"
+   ],
+   "role": "Bounded kinetic energy for the constructed solution: Fefferman's condition (6)/(11) side of the theorem. The proof is the standard energy identity with the delta-regularised division trick to get ||u||_2 <= F.",
+   "page": 121
+  },
+  {
+   "id": "Lemma 10.5",
+   "kind": "Lemma",
+   "section": "10",
+   "hypotheses": [
+    "T < 1; (v, P) a smooth solution of (1.1) at viscosity one on R^3 x [0,T] with the force f of Lemma 10.3, zero initial velocity, v in L^inf([0,T]; L^2(R^3)); no growth condition on P at spatial infinity",
+    "u the localized velocity of Proposition 10.1; w = v - u, pi = P - p, g_ij = v_i v_j - u_i u_j"
+   ],
+   "conclusion": "v = u on [0,T].",
+   "constants": [
+    "pi_* = sum R_i R_j g_ij (10.16) in L^inf_t H^{-s}_x for s > 3/2; nabla pi = nabla pi_* in the space-time interior",
+    "commutator kernel K_R(x-y) = C |x-y|^{-3} min{|x-y|/R, 1} with ||K_R||_{4/3}^{4/3} <= C R^{-1}",
+    "pressure-flux bound (10.19): |int pi w . nabla chi_R| <= C_T R^{-1}[(B_R + 1) B_R^{1/2} + R^{-3/4} B_R^{3/4}]",
+    "Sobolev (10.17): B_R <= C(A_R + R^{-1}||w||_2)",
+    "Gronwall: E_R(t) <= C'_T / R"
+   ],
+   "cites": [
+    "(1.1)",
+    "(10.15)",
+    "(10.16)",
+    "(10.17)",
+    "(10.18)",
+    "(10.19)",
+    "[20]",
+    "Proposition 10.1",
+    "Lemma 10.3"
+   ],
+   "role": "Weak-strong style uniqueness in the class of smooth bounded-energy solutions with unrestricted pressure growth: any competitor global smooth solution must coincide with the constructed one before time 1, so the local blowup transfers to it. This is the step that turns a constructed singular solution into a non-existence statement for smooth bounded-energy solutions.",
+   "page": 121
+  },
+  {
+   "id": "Corollary 10.6",
+   "kind": "Corollary",
+   "section": "10",
+   "hypotheses": [
+    "nu > 0; the whole-space fields and force (u, p, f) of Theorem 1.1 at viscosity nu with common spatial support in K_nu = sqrt(nu) K",
+    "lambda > 1 with lambda^{-1} K_nu compactly inside Q_0 = (-1/2, 1/2)^3; t_0 = 1 - lambda^{-2}; rescaled fields u~(x,t) = lambda u(lambda x, lambda^2 (t - t_0)), p~ = lambda^2 p(...), f~ = lambda^3 f(...), extended by zero for t < t_0; U, P_per, F_per their Z^3-periodizations"
+   ],
+   "conclusion": "For every nu > 0 there is a smooth force on T^3 x [0, inf), compactly supported in time, for which the solution (U, P_per) of the periodic Navier-Stokes equations with viscosity nu and zero initial velocity is smooth on [0,1) and satisfies limsup_{t -> 1} ||U(t)||_{L^inf(T^3)} = inf. Velocity and pressure have support in a fixed compact subset of the interior of Q_0 at every time before one; there is no global smooth periodic solution for the same datum and force.",
+   "constants": [
+    "lambda",
+    "t_0 = 1 - lambda^{-2}",
+    "T^3 = R^3/Z^3"
+   ],
+   "cites": [
+    "(10.22)",
+    "Proposition 10.1",
+    "Lemma 10.3",
+    "[13]",
+    "Theorem 1.1"
+   ],
+   "role": "Fefferman's alternative (D): the periodic forced breakdown. It is a pure translate-and-sum corollary of the compactly supported whole-space construction; the pressure is periodic as required by the erratum to [13]. This is the statement that kills the repository's A6-D lane (CORRECTIONS.md section 66).",
+   "page": 125
   }
  ],
  "hard_pages": [
@@ -1496,6 +1653,12 @@
    "pages": "107-111",
    "section": "9",
    "why": "Proposition 9.6, the inductive step. Four ordered corrections, each with its own exponent table, and the cycle closes only via five explicit inequalities on p. 111 whose margins are small: the wave order improves by min{1/2 - 3 kappa_s, ..., 0.4} - 0.3 = 0.1 exactly at the 0.4 row (cross with total mean correction, from Lemma 9.2 with mu = 0.9), and the tangential mean improves via 0.17 > 0.1 where 0.17 = 0.68 - 1/2 - 2 kappa_s comes from the W_0.68 bound on w - w_0^tan in (9.9). Step 2's exact covariance expansion (9.13) must be matched term by term against Corollary 7.8. Any reader re-deriving the spine must recompute these margins; a slip of 0.02 in either threshold in (9.9) breaks the induction.",
+   "leg": 425
+  },
+  {
+   "pages": "121-123",
+   "section": "10",
+   "why": "Lemma 10.5's comparison argument: uniqueness against a competitor whose pressure has NO spatial growth restriction. The pressure gradient is identified with the Riesz-transform distribution pi_* via a Fourier-support-at-zero argument in H^{-3}, and the boundary pressure flux on expanding balls is bounded through a commutator [phi_{4R}, R_i R_j] with kernel in L^{4/3} of norm O(R^{-3/4}); all powers of A_R must come out strictly below 2 for Young's inequality to absorb them into dissipation. A reader checking the spine must verify the exponent bookkeeping in (10.17)-(10.19), since this lemma is what makes Theorem 1.1 a NON-EXISTENCE statement rather than merely an existence of one singular solution.",
    "leg": 425
   }
  ]
