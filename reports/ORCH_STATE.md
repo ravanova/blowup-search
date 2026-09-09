@@ -33,7 +33,7 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–430. WAVE 1 IN FLIGHT (dispatched 2026-09-09).**
+## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–430. WAVE 1 CLOSED AND INTEGRATED 2026-09-09 (leg 428); WAVE 2 NEXT.**
 
 **Mode:** `ORCHESTRATION.md` **§3g CONDUCTOR**, wave sizing **5** by user ruling (recorded in §3g
 beside its original reason; `CORRECTIONS.md` §67). The charter arrived while `R3` was mid-flight
@@ -52,11 +52,11 @@ and committing it on its worktree branch (not pushed):**
 
 | slot | unit | brief | writes | status |
 |---|---|---|---|---|
-| 1 | `R2` shard A | §§1–3 preamble + §4 pp 24–44, 11 + 4 preamble statements | `writeup/data/arc6/ledger/shard_A.json` | in flight |
-| 2 | `R2` shard B | preamble + §5–§6 pp 45–72, 11 + 4 | `…/shard_B.json` | in flight |
-| 3 | `R2` shard C | preamble + §7–§8, App C pp 73–99, 157–164, 19 + 4 | `…/shard_C.json` | in flight |
-| 4 | `R2` shard D | preamble + §9–§10 pp 100–125, 15 + 4 | `…/shard_D.json` | in flight |
-| 5 | `R2` shard E | preamble + App A–B pp 126–156, 19 + 4 | `…/shard_E.json` | in flight |
+| 1 | `R2` shard A | §§1–3 preamble + §4 pp 24–44, 11 + 4 preamble statements | `writeup/data/arc6/ledger/shard_A.json` | **landed** |
+| 2 | `R2` shard B | preamble + §5–§6 pp 45–72, 11 + 4 | `…/shard_B.json` | **landed** |
+| 3 | `R2` shard C | preamble + §7–§8, App C pp 73–99, 157–164, 19 + 4 | `…/shard_C.json` | **landed** |
+| 4 | `R2` shard D | preamble + §9–§10 pp 100–125, 15 + 4 | `…/shard_D.json` | **landed** |
+| 5 | `R2` shard E | preamble + App A–B pp 126–156, 19 + 4 | `…/shard_E.json` | **landed** |
 
 Every shard was **forbidden to open the solo ledger, `dag.json`, `leg_425.md`, `leg_426*.md` or
 `CORRECTIONS.md`**, told that *"I could not determine X, because Y"* is acceptable and inventing X is
@@ -64,10 +64,14 @@ not, and required to name its hard pages. **All five also ledger the four preamb
 the five-way agreement on Theorem 1.1 / Theorem 3.1 / Definitions 3.2–3.3 is a direct measurement
 of reader variance for gate (d).
 
-**Integration plan for wave 1 (the Conductor's, serial):** merge shards → `ledger/merged.json`;
-reconcile against `ledger.json` field by field (hypotheses, conclusion, constants, cites); every
-disagreement classified *paper* / *solo read* / *shard read*, banked, and summarised as gate (d);
-solo `ledger.json` is **not edited**. A shard with `stopped_at_page` set is re-dispatched from there.
+**Wave 1 integrated (leg 428, `leg_428.md`).** All five shards returned complete (no `stopped_at_page`),
+76 entries + 4 preamble each; merged → `ledger/merged.json` under a named primary rule; reconciled
+against the solo ledger: mean citation Jaccard 0.744 (statements) / 0.791 (labels); **every
+disagreement is citation breadth or a page boundary — none is about what a statement asserts, none
+is a paper finding.** 29 could-not-determine records: 15 extraction artefacts (fraction layout lost
+in R1's text; (4.13) and p. 137 adjudicated at the PDF's geometry), 12 out-of-shard, 1 read gap, 1
+remark on the paper (Proposition 7.2's exponents only asserted to exist → `R4`). Solo `ledger.json`
+**not edited**. Audit load measured: not the bottleneck this wave. Worktrees removed after cherry-pick.
 
 **Composition floor (§3g):** the wave's five slots are audit; the floor is met by the Conductor's
 serial units in the same wave — `R3` (landed) and **`R5`(i)–(ii)**, the leading-order vortex and its

@@ -1,0 +1,606 @@
+{
+  "schema": "arc6_shard_v1",
+  "shard": "B",
+  "leg": 428,
+  "pages": [45, 72],
+  "preamble_pages": [1, 23],
+  "preamble_entries": [
+    {
+      "id": "Theorem 1.1",
+      "kind": "Theorem",
+      "section": "1",
+      "page": 1,
+      "hypotheses": [
+        "nu > 0 is an arbitrary positive viscosity (no other hypothesis; it is an existence statement)."
+      ],
+      "conclusion": "There exist a force f in C_c^infty(R^3 x (0,inf); R^3), a compact set K subset R^3, and smooth velocity and pressure u, p on R^3 x [0,1) satisfying the Navier-Stokes system (1.1): d_t u + (u.grad)u - nu Lap u + grad p = f, div u = 0, u(.,0) = 0, such that supp u(.,t) union supp p(.,t) subset K for every 0 <= t < 1, sup_{0<=t<1} ||u(t)||_{L2(R^3)} < inf, and limsup_{t up 1} ||u(t)||_{Linf(R^3)} = inf. Consequently there is no smooth solution (u,P) on R^3 x [0,inf) with the same force and initial datum whose kinetic energy sup_{t>=0} (1/2) int |u|^2 dx is uniformly bounded. (Remarks after the statement: this is alternative (C) of the Fefferman Millennium statement [13]; compact support gives the T^3 version, alternative (D), Corollary 10.6.)",
+      "constants": [
+        "nu > 0 arbitrary; singular time t = 1",
+        "viscosity rescaling from nu = 1 (page 7): u_nu(x,t) = sqrt(nu) u(x/sqrt(nu), t), p_nu(x,t) = nu p(x/sqrt(nu), t), f_nu(x,t) = sqrt(nu) f(x/sqrt(nu), t) (the sqrt symbols are displaced in the banked text; the sqrt(nu) on f is inferred from dimensional consistency of (1.1))",
+        "force support K x [0,2] (Lemma 10.3, per the outline on page 16)",
+        "energy exponents from the outline: E_core ~ tau^{1/2-3h} -> 0, D_core ~ tau^{-1/2-3h} integrable since h < 1/6"
+      ],
+      "cites": [
+        "(1.1)",
+        "Corollary 10.6",
+        "Theorem 3.1",
+        "(3.4)",
+        "(3.6)",
+        "Proposition 10.1",
+        "Lemma 10.2",
+        "Lemma 10.3",
+        "Lemma 10.4",
+        "Lemma 10.5",
+        "(10.8)",
+        "(10.9)",
+        "(10.22)",
+        "(10.23)",
+        "Fefferman [13] (Millennium problem statement)"
+      ],
+      "role": "The main theorem: finite-time L-infinity blowup from rest with bounded energy and a smooth compactly supported force, proved in Section 10 by localizing the local fields of Theorem 3.1 and applying a uniqueness lemma."
+    },
+    {
+      "id": "Theorem 3.1",
+      "kind": "Theorem",
+      "section": "3",
+      "page": 15,
+      "hypotheses": [
+        "Viscosity one; residual R(u,p) = d_t u + (u.grad)u - Lap u + grad p as in (3.1).",
+        "Similarity coordinates (3.2): tau = 1 - t = q(1 - eta^2), z = q^D eta, X = r^2/(2q), A = 1/2 + h, D = 1/2 - h.",
+        "Existence statement: no external hypotheses; the constants and fields are asserted to exist."
+      ],
+      "conclusion": "There are constants 0 < h < 1/100, q_* > 0, 0 < X_a < X_ext < inf, and smooth fields (u,p) on Omega_* = {(x,t): tau > 0, q < q_*} such that: (i) u = curl A + B e_theta (3.3) with A a vector potential and B an axisymmetric scalar, both smooth in Cartesian coordinates at the axis, and u exactly divergence-free; (ii) every Cartesian space-time derivative of A, B e_theta, p is uniformly bounded on compact spatial subsets with c <= q <= c' < q_* (any 0 < c < c') up to the one-sided boundary tau = 0, with limits compatible under spatial and time differentiation; (iii) for every alpha, b, N and finite X_1, |d^alpha_x d^b_t R(u,p)| <= C_{alpha,b,N,X_1} q^N on 0 <= X <= X_1 as q -> 0 (3.4); for X >= X_ext the residual is identically zero and A = 0, B = K(r,tau), p = -int_r^inf K(rho,tau)^2/rho d rho, K(r,tau) = r^{-1-2h} H_ext(tau/r^2) (3.5), where H_ext is smooth on [0,inf) with each fixed derivative bounded and K solves the radial swirl heat equation -d_tau K = d_rr K + r^{-1} d_r K - r^{-2} K; (iv) for some fixed X_in in (0, X_a) and e_0 > 0, u_theta(sqrt(2 X_in tau), 0, 0, 1 - tau) = tau^{-A}(e_0 + O(tau^{2h})) as tau -> 0 (3.6).",
+      "constants": [
+        "0 < h < 1/100",
+        "q_* > 0",
+        "0 < X_a < X_ext < inf",
+        "X_in in (0, X_a), e_0 > 0",
+        "A = 1/2 + h, D = 1/2 - h",
+        "K(r,tau) = r^{-1-2h} H_ext(tau/r^2)"
+      ],
+      "cites": [
+        "(3.1)",
+        "(3.2)",
+        "(3.3)",
+        "(3.4)",
+        "(3.5)",
+        "(3.6)",
+        "Proposition 9.9",
+        "Lemma 5.4",
+        "Proposition 5.5",
+        "Theorem 4.6",
+        "(4.29)",
+        "(9.20)",
+        "(9.21)"
+      ],
+      "role": "Summarizes the local construction (potential representation, boundedness up to tau = 0 away from the origin, flat residual, exact heat exterior, and velocity growth) that Section 10 localizes to prove Theorem 1.1."
+    },
+    {
+      "id": "Definition 3.2",
+      "kind": "Definition",
+      "section": "3",
+      "page": 18,
+      "hypotheses": [
+        "A leading field (velocity and pressure) given for t < 1, or a scalar auxiliary profile in the similarity variables (X, eta)."
+      ],
+      "conclusion": "A leading field is regular at the axis if its velocity and pressure extend smoothly across r = 0 in Cartesian coordinates for t < 1. For scalar auxiliary profiles, 'regular at the axis' means a smooth extension in (X, eta) to X = 0.",
+      "constants": [],
+      "cites": [],
+      "role": "Fixes the notion of axis regularity used for the profiles and the axis solves (e.g. zero axis data in Lemma 5.1, smoothness of V_n/X and F_n/X in Lemma 5.2)."
+    },
+    {
+      "id": "Definition 3.3",
+      "kind": "Definition",
+      "section": "3",
+      "page": 18,
+      "hypotheses": [
+        "alpha >= 0 and beta > 0 are parameters in a chain of constants."
+      ],
+      "conclusion": "alpha << beta means alpha/beta is required to be sufficiently small, with the allowed size depending on all data already fixed. In a chain of constants, choices proceed from right to left; small reciprocals specify large parameters. For expressions depending on profile variables, the smallness is uniform on the stated domain and is ensured by those parameter choices.",
+      "constants": [],
+      "cites": [],
+      "role": "Fixes the order-of-choices convention for smallness parameters used throughout the construction."
+    }
+  ],
+  "entries": [
+    {
+      "id": "Lemma 5.1",
+      "kind": "Lemma",
+      "section": "5",
+      "page": 47,
+      "hypotheses": [
+        "The leading profiles (E, U, V_0, Pi) of Theorem 4.6 are fixed; the analytic axis solution and first collar (Proposition B.2, Theorem 4.6(i)) have parameter regularity on a fixed radial rectangle, and the stress cone inequalities hold in the inner collar with a uniform positive margin.",
+        "Order n >= 1 is fixed; all coefficients of orders j < n are already constructed, including their radial cutoffs and the integral corrections of Lemma 5.2, which are supported to the right of the inner rectangle and preserve parameter analyticity there.",
+        "The coefficient equations are (5.2)-(5.6) with lambda_n = 2nh, b = -A - 1/2, c = -A, and the sources Omega_{n-1}, phi_{n-1}, U_{n-1} formed from lower orders; Omega_k/X is regular at the axis.",
+        "Zero axis data: phi_n(0,eta) = U_n(0,eta) = Pi_n(0,eta) = 0.",
+        "For uniqueness: solutions are compared among profiles that extend holomorphically in eta to a neighbourhood of [-1,1] with bounds uniform for 0 <= xi <= a."
+      ],
+      "conclusion": "There exists an interval 0 <= xi <= a, xi = sqrt(X), extending from the axis into the inner collar of Theorem 4.6(i) (where the stress cone inequalities hold with a uniform positive margin), on which every positive order n has a unique solution (phi_n, U_n, Pi_n; V_n from (5.2)) of (5.2)-(5.6) with phi_n(0,eta) = U_n(0,eta) = Pi_n(0,eta) = 0. The profiles are smooth in X and, for each fixed radial derivative, holomorphic on a neighbourhood of [-1,1] in eta; that neighbourhood and its bounds may depend on the order and the radial derivative, but a does not. Uniqueness holds among solutions extending holomorphically in eta with bounds uniform on 0 <= xi <= a. Consequently the zero axis values leave the leading traces of phi, U, Pi unchanged at every positive order.",
+      "constants": [
+        "lambda_n = 2nh; b = -A - 1/2; c = -A; A = 1/2 + h; D = 1/2 - h; 1 - 2D = 2A - 1 = 2h",
+        "a = radial endpoint in xi = sqrt(X), independent of n, chosen inside the analytic rectangle beyond the shorter collar",
+        "auxiliary unknown K_n = A_X(U_n) - U_n; vector W_n = (phi_n, U_n, K_n, Pi_n, d_xi phi_n, d_xi U_n)^T; system (5.7): d_xi W_n + xi^{-1} diag(0,0,2,0,3,1) W_n = A_0 W_n + A_1 d_eta W_n + f_n, W_n(0) = 0; A_0, A_1 are 6x6",
+        "d_xi K_n + 2K_n/xi = -d_xi U_n; radial operators (d_xixi + 3 xi^{-1} d_xi)/2 and (d_xixi + xi^{-1} d_xi)/2; pressure row d_xi Pi_n = 4 xi phi_0 phi_n / C^2 + known",
+        "H_c = D eta + d U_0; nonzero entries of A_1: (A_1)_51 = 2H_c/L, (A_1)_52 = (A_1)_53 = -2d(phi_0 + X d_X phi_0)/L, (A_1)_62 = 2(H_c - d X d_X U_0)/L, (A_1)_63 = -2d X d_X U_0 / L, (A_1)_64 = 2d/L",
+        "Volterra operator (G g)_i(xi) = int_0^xi (s/xi)^{c_i} g_i(s) ds with c = (0,0,2,0,3,1); K = G(A_0 + A_1 d_eta); A_1(xi) D_0 A_1(s) = 0 and A_1(xi) D_0 d_eta A_1(s) = 0",
+        "complex strip S_rho = {eta in C : dist(eta,[-1,1]) < rho}; 0 < rho' < rho; Cauchy radius loss Delta = rho - rho' split among p_k = ceil(k/2) parameter derivatives",
+        "bound (5.8): ||K^k G f_n||_{S_rho'} <= C_n^{k+1} a^{k+1}/(k+1)! (max{1, p_k/Delta})^{p_k}, using at most 2^k compositions and simplex volume a^{k+1}/(k+1)!; its k-th root tends to zero",
+        "parities: first four coordinates even in xi, last two odd; smoothness in X = xi^2 via Taylor's formula"
+      ],
+      "cites": [
+        "Theorem 4.6(i)",
+        "Proposition B.2",
+        "Lemma 5.2",
+        "(4.1)",
+        "(4.2)",
+        "(4.6)",
+        "(4.7)",
+        "(4.13)",
+        "(4.31)",
+        "(5.1)",
+        "(5.2)",
+        "(5.3)",
+        "(5.4)",
+        "(5.5)",
+        "(5.6)",
+        "(5.7)",
+        "(5.8)",
+        "Picard iteration",
+        "Cauchy estimates",
+        "Taylor's formula"
+      ],
+      "role": "Solves the linear order-n coefficient equations near the axis on a radial interval independent of the order, using holomorphy in eta to absorb the parameter-derivative loss in the recursion."
+    },
+    {
+      "id": "Lemma 5.2",
+      "kind": "Lemma",
+      "section": "5",
+      "page": 50,
+      "hypotheses": [
+        "Fix n >= 1. For each 1 <= j < n, the tuple P_j = (phi_j, U_j, V_j/X, Pi_j, F_j/X) is smooth, satisfies (5.2) and (5.5) globally, and obeys (5.12) with n = j (m_j(eta) = 0 for |eta| <= 1 and supp_X P_j subset [0, X_+]).",
+        "For each 1 <= j < n these profiles agree with their inner solutions on [0, X_-] and retain the parameter regularity of Lemma 5.1 throughout [0, a^2]. For n = 1 there are no lower positive-order hypotheses.",
+        "The inner order-n solution (phi_n^in, U_n^in, V_n^in, Pi_n^in) of Lemma 5.1 is given on 0 <= X <= a^2.",
+        "Leading profiles of Theorem 4.6: reserved positive-order patch I_pos (item (vi)) with exact profile (4.30) U_0 = 0, E_0 = e_* f(eta) R^{-1-2 lambda} there; inner collar (item (i)); flat weight zeta (item (iv)); reserved mean patch I_mean to the right of I_pos; heat exterior (4.29) with terminal multiplier f_o from (A.12) and pure-power exterior P from (A.45).",
+        "Stress T_n defined by the weighted radial integrals (5.9) of the order-n residual coefficients r_{theta,n}, r_{z,n}; five moments m_{n,1..5} defined by (5.10)-(5.11); delta(X) = min{1, log(X/X_a), log(X_b/X)}."
+      ],
+      "conclusion": "There are radii X_a < X_- < X_+ < X_b, independent of n, such that the inner order-n solution has a smooth extension to X >= 0, |eta| <= 1, agreeing with it on [0, X_-], retaining its parameter regularity throughout [0, a^2], satisfying (5.2) and (5.5) globally, and obeying (5.12): m_n(eta) = 0 for |eta| <= 1 and supp_X P_n subset [0, X_+]. Both V_n/X and F_n/X extend smoothly to X = 0. The stress (5.9) satisfies supp_X T_1 subset [X_-, X_b] and supp_X T_n subset [X_-, X_+] for n >= 2, and for every fixed profile derivative d^I, |d^I T_n(X,eta)| <= C_{n,I} zeta(X) delta(X)^{-N_{n,I}} on X_a < X < X_b, |eta| <= 1 (5.13); C_{n,I}, N_{n,I} may depend on n and I, and for n >= 2 one may take N_{n,I} = 0. (In the proof: coefficient bounds (5.17) max_{k+l<=m} sup |d_X^k d_eta^l P_n| <= C_{n,m}; (5.18) E_n = U_n = F_n = V_n = 0 on I_mean for every n >= 1; (5.22) |T_1| <= C e^{-4/delta_b^2} delta_b^{-3}, |d^I T_1| <= C_I e^{-4/delta_b^2} delta_b^{-N_I} near the outer edge.)",
+      "constants": [
+        "ordering X_- < X_keep < X_cut < a^2 < inf I_pos, fixed independently of n; X_- in the inner collar of Theorem 4.6(i)",
+        "X_+ chosen beyond the leading axial-velocity perturbation U_0 and every positive-order patch, before the terminal outer collar",
+        "cutoff kappa in C^inf([0,inf)), 0 <= kappa <= 1, kappa = 1 on [0, X_keep], kappa = 0 for X >= X_cut; initial extensions phi~_n = kappa phi_n^in, U~_n = kappa U_n^in, E~_n = (R/C) phi~_n, R = sqrt(2X)",
+        "five bumps b_1^U, b_2^U, b_1^E, b_2^E, b_3^E in C_c^inf(J_pos), J_pos = {R > 0 : R^2/2 in I_pos}, each with integral 1 and mutually disjoint ordered supports fixed across orders",
+        "ansatz (5.14): U_n = U~_n + sum_{j=1}^2 alpha_{n,j}(eta) b_j^U(R), E_n = E~_n + sum_{j=1}^3 beta_{n,j}(eta) b_j^E(R), phi_n = (C/R) E_n; reconstruction (5.15) F_n = int_0^X U_n, V_n = -int_0^X Z_{-A,n} U_n, Pi_n = int_0^X [C^{-2} sum_{i+j=n} phi_i phi_j - Omega_{n-1}]/(2x) dx",
+        "on I_pos: U_0 = 0, E_0 = e_* f(eta) R^{-1-2 lambda}, e_* > 0, lambda > 0, f smooth and bounded away from zero",
+        "moment matrices (B_U)_{ij} = int R^{p_i} b_j^U dR with (p_1,p_2) = (1, 1-2 lambda) (2x2); (B_E)_{ij} = int R^{s_i} b_j^E dR with (s_1,s_2,s_3) = (2, -2-2 lambda, -2 lambda) (3x3); invertible by Lemma A.1",
+        "discrepancy vectors d_{U,n} = (m^0_{n,1}, m^0_{n,4}/(e_* f)), d_{E,n} = (m^0_{n,2}, m^0_{n,3}/(2 e_* f), -m^0_{n,5}/(e_* f)); solve (5.16) alpha_n = -B_U^{-1} d_{U,n}, beta_n = -B_E^{-1} d_{E,n}",
+        "fifth moment rewritten as m_{n,5} = int_0^inf [sum U_i U_j - (1/2) sum E_i E_j + Omega_{n-1}/2] dX; d_R Pi_n = 2E_0 E_n/R + (1/R)(sum_{i=1}^{n-1} E_i E_{n-i} - Omega_{n-1})",
+        "conservative forms: r^2 R_theta = d_t(r^2 u_theta) + d_r(r^2 u_r u_theta) + d_z(r^2 u_z u_theta) - d_r(r^2 d_r u_theta - r u_theta) - d_zz(r^2 u_theta); r R_z = d_t(r u_z) + d_r(r u_r u_z) + d_z(r(u_z^2 + p)) - d_r(r d_r u_z) - d_zz(r u_z)",
+        "physical powers of the moments: q^{3/2-A+lambda_n}, q^{3/2-2A+lambda_n}, q^{1-A+lambda_n}, q^{1-2A+lambda_n}; R_{j,n} = q^{-A-1+lambda_n} r_{j,n}",
+        "n = 1 exterior source: -d_zz u_{theta,0} with u_{theta,0} = K(r,t) f_o, K = c_inf s^{-A} H(2(1-t)/s); local coordinate y = log X, delta_b = log(X_b/X); 1 - f_o = e^{-4/delta_b^2} times smooth factor",
+        "a_z(eta) = -2 eta / L, b_z(eta) = (-2 D eta a_z + d d_eta a_z)/L; d_zz(K f_o) = K q^{-2D}(a_z^2 d_yy f_o + b_z d_y f_o); |d_y f_o| <= C e^{-4/delta_b^2} delta_b^{-3}, |d_yy f_o| <= C e^{-4/delta_b^2} delta_b^{-6}; Lemma A.9 applied with c = 4 and j = 3, 6 gains three powers of delta_b",
+        "(5.22): |T_1| <= C e^{-4/delta_b^2} delta_b^{-3}, |d^I T_1| <= C_I e^{-4/delta_b^2} delta_b^{-N_I}"
+      ],
+      "cites": [
+        "Lemma 5.1",
+        "Theorem 4.6(i)",
+        "Theorem 4.6(iv)",
+        "Theorem 4.6(vi)",
+        "Lemma A.1",
+        "Lemma A.9",
+        "(A.12)",
+        "(A.45)",
+        "(4.1)",
+        "(4.29)",
+        "(4.30)",
+        "(5.1)",
+        "(5.2)",
+        "(5.5)",
+        "(5.6)",
+        "(5.9)",
+        "(5.10)",
+        "(5.11)",
+        "(5.12)",
+        "(5.13)",
+        "(5.14)",
+        "(5.15)",
+        "(5.16)",
+        "(5.17)",
+        "(5.18)",
+        "(5.19)",
+        "(5.20)",
+        "(5.21)",
+        "(5.22)",
+        "integration by parts",
+        "differentiation under the integral sign"
+      ],
+      "role": "Extends each inner coefficient to all radii with five moment conditions that make the velocity, streamfunction and pressure compactly supported and confine the order-n stress to the annulus with flat edge weights, so the coefficient can feed the next order and the wave construction."
+    },
+    {
+      "id": "Proposition 5.3",
+      "kind": "Proposition",
+      "section": "5",
+      "page": 55,
+      "hypotheses": [
+        "The leading profiles of Theorem 4.6 are fixed.",
+        "At each order n >= 1 the coefficient is constructed by Lemma 5.1 and then Lemma 5.2 using the finalized lower orders; profiles include their radial cutoffs and moment corrections; no cutoff in q is applied.",
+        "The finite tuple is U^[N] = (u^[N]_slow, p^[N]_slow, T^[N]_slow) = sum_{n=0}^N (u_n, p_n, q^{-A-1/2+lambda_n} T_n) with u_n = u_{r,n} e_r + u_{theta,n} e_theta + u_{z,n} e_z from (5.1) and T_0 the leading stress profile of (4.11).",
+        "The augmented residual is F_slow(u,p,T) = R(u,p) + (d_r + 2/r) T_theta e_theta + (d_r + 1/r) T_z e_z (5.24), measured by |V|_m = max_{|alpha|+b<=m} |d^alpha_x d^b_t V| (5.23).",
+        "Fixed compact profile range 0 <= X <= X_max, -1 <= eta <= 1 with 0 < X_max < inf; N, m >= 0; 0 < q <= 1."
+      ],
+      "conclusion": "There is a sequence of positive-order profiles constructed at each order by Lemma 5.1 and then Lemma 5.2. Every finite velocity sum u^[N]_slow is divergence-free. On every fixed compact profile range, for each N, m >= 0 and 0 < q <= 1, |F_slow(U^[N])|_m <= C_{N,m} q^{2h(N+1) - K_m} (5.25), with K_m independent of N (constants may depend on the profile range and C_{N,m} on N).",
+      "constants": [
+        "decay exponent 2h(N+1); derivative loss K_m independent of N",
+        "stress identities (d_R + 2/R) T_{n,theta} = -r_{theta,n}, (d_R + 1/R) T_{n,z} = -r_{z,n}",
+        "(5.26): |d^beta_{x_perp} d^k_z d^l_t [q^b g(x_perp/sqrt(q), eta)]| <= C_m (1 + |b|)^m ||g||_{C^m} q^{b - a/2 - Dk - l}, a = |beta|, m = a + k + l",
+        "d_t = q^{-1} L^{-1}(-q d_q + X d_X + D eta d_eta); d_z = q^{-D} L^{-1}(2 eta q d_q - 2 eta X d_X + d d_eta); transverse derivative costs q^{-1/2}",
+        "on the stress support X >= X_a > 0: r^{-1} = q^{-1/2}(2X)^{-1/2}"
+      ],
+      "cites": [
+        "Theorem 4.6",
+        "Lemma 5.1",
+        "Lemma 5.2",
+        "Proposition 4.2",
+        "(3.1)",
+        "(4.11)",
+        "(5.1)",
+        "(5.2)",
+        "(5.5)",
+        "(5.9)",
+        "(5.17)",
+        "(5.23)",
+        "(5.24)",
+        "(5.25)",
+        "(5.26)",
+        "chain rule"
+      ],
+      "role": "Runs the coefficient induction and shows the augmented residual of the N-th truncation decays like q^{2h(N+1)} with a derivative loss independent of N, which is the residual hypothesis needed by the summation lemma."
+    },
+    {
+      "id": "Lemma 5.4",
+      "kind": "Lemma",
+      "section": "5",
+      "page": 57,
+      "hypotheses": [
+        "Omega is a domain on which 0 < q < q_0 <= 1; q = q(z,t) is smooth, bounded below on compact subsets of Omega, and satisfies |d^a_z d^b_t q| <= C_{a,b} q^{1 - aD - b} for a, b >= 0 with 0 < D < 1 (5.28).",
+        "The base U_0 = (u_0, p_0, T_0) is smooth with div u_0 = 0 and |U_0|_m <= C_m q^{-K_m} Lambda_log(q)^{P_m} for every m, where Lambda_log(q) = 1 + |log q|; the stress entries T_0, T_j may be omitted.",
+        "For j >= 1 the smooth physical tuples Z_j = (A_j, B_j, p_j, T_j), B_j = b_j(r,z,t) e_theta, U_j = (curl A_j + B_j, p_j, T_j) (5.29) are defined on the same domain, with smooth Cartesian representatives at the axis and smooth zero extensions at every lateral boundary of their spatial supports.",
+        "Increment bounds (5.30): |Z_j|_m <= C_{j,m} q^{g_j - l_m} Lambda_log(q)^{P_{j,m}} with 0 < g_1 <= g_2 <= ... -> inf and nonnegative nondecreasing losses l_m independent of j.",
+        "F is a fixed differential polynomial of the form (5.31) with finite order s and degree d, coefficient functions c_{a nu} satisfying |d^I_{x,t} c_{a nu}| <= C_I q^{-K_I} Lambda_log(q)^{P_I} on regions Omega_{a nu} containing the supports of the field factors before and after cutoffs (5.32); all fixed independently of the summation and truncation indices.",
+        "Residual hypothesis (5.33) for the flatness conclusion: each finite partial sum U^[J] = U_0 + sum_{j=1}^J U_j satisfies |F(U^[J])|_m <= C_{J,m} q^{rho_J - K^F_m} Lambda_log(q)^{P_{J,m}} + E_{J,m}, rho_J -> inf, K^F_m independent of J, and 0 <= E_{J,m} <= C_{J,m,N} q^N for every N, uniformly on the domain."
+      ],
+      "conclusion": "There are numbers a_{j+1} >= 2 a_j with a_1^{-1} < q_0 and a fixed smooth cutoff chi (equal to one on [0,1/2], zero on [1,inf)) such that U = U_0 + sum_{j>=1} (curl(chi(a_j q) A_j) + chi(a_j q) B_j, chi(a_j q) p_j, chi(a_j q) T_j) (5.34) is locally finite and smooth, its velocity satisfies div u = 0, and its added terms extend smoothly by zero across the outer boundary q = q_0. For every m and J >= max(1,m): |U - U^[J]|_m <= 2^{-J} q^{g_{J+1}/2 - l'_m} for 0 < q < 1/(2 a_J) (5.35), with l'_m independent of J. Under (5.33), every Cartesian space-time derivative of F(U) vanishes to infinite order: for all m, N there exist delta, C > 0 with |F(U)|_m <= C q^N for 0 < q < delta (5.36).",
+      "constants": [
+        "Lambda_log(q) = 1 + |log q|; chi = 1 on [0,1/2], chi = 0 on [1,inf); cutoff support 1/2 <= a q <= 1",
+        "|d^{a'}_z d^{b'}_t chi(a q)| <= C_{a',b'} q^{-a'D - b'} with constants independent of a; d_{x1} q = d_{x2} q = 0",
+        "commutator curl(chi(aq) A_j) = chi(aq) curl A_j + a chi'(aq) grad q x A_j",
+        "j-th summand bound: hat C_{j,m} q^{g_j - l'_m} Lambda_log(q)^{hat P_{j,m}}, with l'_m depending only on m and l_{m+1}",
+        "cutoff choice (5.37): a_{j+1} >= 2 a_j, chi(a_j q) supported in q < q_0, and hat C_{j,m} Lambda_log(q)^{hat P_{j,m}} q^{g_j/2} <= 2^{-j} for 0 < q <= a_j^{-1}, 0 <= m <= j",
+        "tail: sum_{j>J} 2^{-j} q^{g_j/2 - l'_m} <= 2^{-J} q^{g_{J+1}/2 - l'_m}",
+        "(5.38): |U^[J]|_m <= C_{J,m} q^{-K_m} Lambda_log(q)^{P_{J,m}}, K_m >= 0 independent of J",
+        "(5.39): |F(U) - F(U^[J])|_m <= C_m q^{-H_m} |e|_{m+s} (1 + |U^[J]|_{m+s} + |e|_{m+s})^{d-1}, e = U - U^[J], H_m independent of J",
+        "choice of J: J >= m + s, g_{J+1}/2 - l'_{m+s} >= N + H_m + (d-1)(K_{m+s} + 1), rho_J - K^F_m >= N + 1, and g_{J+1}/2 - l'_{m+s} >= 0; order of choices (m,N), then J, then neighbourhood and constants",
+        "optional extra requirements (5.40): B_{j,k} Lambda_log(q)^{P_{j,k}} q^{gamma_{j,k}} <= 2^{-j}, gamma_{j,k} > 0, finitely many per step",
+        "recovery of a formal order: M >= max(N,m) with g_{M+1}/2 >= g_{N+1}",
+        "residual comparison identity: R(v+e, p+pi) - R(v,p) = d_t e - Lap e + grad pi + (v.grad)e + (e.grad)v + (e.grad)e"
+      ],
+      "cites": [
+        "(3.1)",
+        "(5.23)",
+        "(5.24)",
+        "(5.28)",
+        "(5.29)",
+        "(5.30)",
+        "(5.31)",
+        "(5.32)",
+        "(5.33)",
+        "(5.34)",
+        "(5.35)",
+        "(5.36)",
+        "(5.37)",
+        "(5.38)",
+        "(5.39)",
+        "(5.40)",
+        "chain rule",
+        "Leibniz product rule"
+      ],
+      "role": "General divergence-preserving summation lemma: sums a formal series with cutoffs chi(a_j q) applied to vector potentials, proves the tail estimate (5.35) and, given improving finite residuals, flatness (5.36); applied to the background in Proposition 5.5 and to the correction sequence in Section 9."
+    },
+    {
+      "id": "Proposition 5.5",
+      "kind": "Proposition",
+      "section": "5",
+      "page": 60,
+      "hypotheses": [
+        "The leading profiles of Theorem 4.6 are fixed, with active annulus [X_a, X_b] (item (ii)), edge weights zeta, delta (item (iv)), reserved mean patch I_mean subset (X_a, X_v) (item (vi)) with exact profile (4.30), and exact heat exterior (4.29).",
+        "The positive-order coefficient sequence and finite truncations U^[N] of Proposition 5.3, with the physical Stokes streamfunctions S_n = q^{1-A+lambda_n} F_n and potentials A_n = (S_n/r) e_theta from (5.27), and the tuple (A_n, u_{theta,n} e_theta, q^{-2A+lambda_n} Pi_n, q^{-A-1/2+lambda_n} T_n).",
+        "Lemma 5.2 supplies common supports and all fixed coefficient derivative bounds; Lemma 5.4 is applied with the cutoffs chi(c_n q).",
+        "Fixed 0 < X_max < inf and fixed radial endpoints 0 < X_lo < X_a < X_b < X_hi < inf."
+      ],
+      "conclusion": "There are smooth axisymmetric fields (u_B, p_B) for q > 0 and two physical tangential stress components T_phys supported where X_a <= X(r,z,t) <= X_b such that div u_B = 0 and R(u_B, p_B) = -(d_r + 2/r) T_{phys,theta} e_theta - (d_r + 1/r) T_{phys,z} e_z + E_B (5.41). For every fixed X_max, uniformly on [0, X_max] x [-1,1] in (X,eta), every Cartesian space-time derivative and every M > 0: |d^alpha E_B| <= C_{alpha,M} q^M as q -> 0. The formal expansion of (u_B, p_B, T_phys) has the truncations U^[N] of Proposition 5.3, with S_n summed before differentiation. Uniformly on [X_lo, X_hi] x [-1,1], for every composition D^I of q d_q, d_X, d_eta: D^I(q^A u_{theta,B} - E_0) = O_I(q^{2h}), D^I(q^A u_{z,B} - U_0) = O_I(q^{2h}), D^I(q^{1/2} u_{r,B} - V_0/sqrt(2X)) = O_I(q^{2h}), D^I(q^A u_{r,B}) = O_I(q^h) (5.42). With hat T = q^{A+1/2} T_phys, on X_a < X < X_b, -1 <= eta <= 1, 0 < q <= 1: |D^I(hat T - T_0)| <= C_I q^{2h} zeta delta^{-N_I} <= C_I q^h zeta delta^{-N_I} (5.43). Every fixed physical derivative of u_B, p_B, T_phys, E_B extends continuously to eta = +-1 on compact sets with q > 0. The corrections u_B - u^(0), p_B - p^(0) vanish for X >= X_+ (X_+ from Lemma 5.2), so the exact exterior (4.29) is preserved. On I_mean, for every -1 <= eta <= 1: u_B = u^(0), u_{z,B} = 0, q^A u_{theta,B} = E_0 = c_patch (1 + eta^2)^{-1} X^{-1/2-lambda} (5.44).",
+      "constants": [
+        "derivative loss l_m = 2A + m for the coefficient tuple (from (5.26), using D < 1/2)",
+        "cutoffs chi(c_n q), sigma = c_n q, (q d_q)^j chi(c_n q) = (sigma d_sigma)^j chi(sigma); C_j = sup_sigma |(sigma d_sigma)^j chi(sigma)| < inf uniformly in n",
+        "finite-residual hypothesis with rho_N = 2h(N+1) and no additional remainder",
+        "(5.45): r u^cut_{r,n} = q^{2nh}[chi(c_n q) V_n - (2 eta / L)(c_n q) chi'(c_n q) F_n], u^cut_{z,n} = q^{-A+2nh} chi(c_n q) U_n",
+        "(5.46): |D^I[chi(c_n q) q^{2nh} a_n]| <= 2^{-n} q^{nh} for n >= max{2, |I|}, a_n in {E_n, U_n, Pi_n, V_n/sqrt(2X), F_n/sqrt(2X)} on the enlarged rectangle, or a component of T_n/zeta (n >= 2) on the active interior",
+        "in the q^A normalization the positive-order radial correction is O(q^{3h}); the n = 1 stress term is controlled by (5.22)",
+        "Step 4 split index J = max{2N+2, m+1}; tail sum_{n>=J} 2^{-n} q^{nh} <= 2^{1-J} q^{Jh} <= 2^{1-J} q^{2h(N+1)} for 0 < q <= 1",
+        "c_patch, lambda > 0 in the reserved profile E_0 = c_patch (1 + eta^2)^{-1} X^{-1/2-lambda}; L > 0 in the coordinate map"
+      ],
+      "cites": [
+        "Theorem 4.6(ii)",
+        "Theorem 4.6(iv)",
+        "Theorem 4.6(vi)",
+        "Proposition 5.3",
+        "Lemma 5.1",
+        "Lemma 5.2",
+        "Lemma 5.4",
+        "(4.3)",
+        "(4.29)",
+        "(4.30)",
+        "(5.1)",
+        "(5.18)",
+        "(5.22)",
+        "(5.24)",
+        "(5.25)",
+        "(5.26)",
+        "(5.27)",
+        "(5.40)",
+        "(5.41)",
+        "(5.42)",
+        "(5.43)",
+        "(5.44)",
+        "(5.45)",
+        "(5.46)",
+        "Proposition 7.5",
+        "Proposition 7.6"
+      ],
+      "role": "Realizes the smooth divergence-free background whose momentum residual is minus the divergence of an annular stress plus a flat remainder, while preserving the leading profile, the heat exterior and the reserved mean patch; its stress is the target for the wave construction."
+    },
+    {
+      "id": "Lemma 6.1",
+      "kind": "Lemma",
+      "section": "6",
+      "page": 65,
+      "hypotheses": [
+        "Dyadic charts (6.1): Q = 2^{-l}, eps = Q^h, S_* = l^2, (R, Z, T) = (r/sqrt(Q), z/Q^D, tau/Q); all bands have l >= l_0 with l_0 sufficiently large and q_big <= 2^{-l_0}.",
+        "Integer covering matrix J_g = [[3,1],[1,5]] from (6.2) with band coordinate Y_i = J_g^i Y, i(l) = floor(log_{T_g}(Q^{-1-h}/S_*)) (6.5).",
+        "Labels Gamma = {(l, a, sigma): l >= l_0, a in I_l, sigma in {+,-}} (6.8), built from the squared partition sum_l chi_l(q)^2 = 1 (chi_l supported in q/Q in [1/2,2]) and the product squared partitions sum_a chi_{l,a}^2 = 1 with mesh S_*^{-3} in each coordinate and supports within one mesh length of a grid point; I_l = {a : B_{l,a} meets the active set A_l}.",
+        "Slow cutoffs eta_gamma = chi_l(q) chi_{l,a}(R,Z,T) and closed slow supports K_gamma = supp(eta_gamma o C_l) in (r,z,t) (6.9).",
+        "Band rectangles R_gamma = {c_gamma + xi v_r + eta v_t : |xi|,|eta| < r_0}, enlargements R^+_gamma with 2 r_0, and absolute preimages R^abs_gamma, R^{abs,+}_gamma = pi_{i(l)}^{-1}(...) (6.10)."
+      ],
+      "conclusion": "There exist centers c_gamma in T^2 and a radius r_0 > 0, common to all labels and independent of the band, such that the enlarged rectangles in (6.10) are injectively parametrized and, for gamma != gamma', K_gamma meets K_gamma' implies R^{abs,+}_gamma and R^{abs,+}_gamma' are disjoint (6.13). Consequently (stated after the proof) any family F_gamma with supp F_gamma subset K_gamma x R^{abs,+}_gamma satisfies F_gamma F_gamma' = 0 for gamma != gamma', also for derivatives of smoothly extended fields and after evaluation on (6.3).",
+      "constants": [
+        "if two dyadic supports meet then q/Q, q/Q' in [1/2,2], so |l - l'| <= 2; labels are joined in the graph when enlarged slow boxes intersect and band indices differ by at most 4, and opposite signs of one box are joined; the graph has bounded degree independent of the band",
+        "(6.14): for |l - l'| <= 4, |i(l) - i(l')| <= 1 + (4(1+h) log 2 + 8/l_0)/log T_g <= Delta_max (integer upper bound)",
+        "center constraints (6.15): c_mu != J_g^Delta c_nu (mod Z^2) for 0 <= Delta <= Delta_max unless (Delta, nu, mu) = (0, nu, nu); uses invertibility of J_g^Delta - I for Delta > 0; rational centers, one per color",
+        "rectangle size: error vectors |e_nu| + |e_mu| <= C r_0; r_0 small enough that the finitely many forbidden differences keep positive separation from the lattice",
+        "subsequent fixed choices: transverse cutoff chi_g in C_c^inf((-r_0, r_0)), 0 <= chi_g <= 1; time cutoff psi with psi(v) = 1 for |v - L_s/2| <= L_s/5 and supp psi subset {|v - L_s/2| < L_s/3} (6.16); L_s = 2 r_0 / c_i ~ S_*"
+      ],
+      "cites": [
+        "(6.1)",
+        "(6.2)",
+        "(6.3)",
+        "(6.5)",
+        "(6.8)",
+        "(6.9)",
+        "(6.10)",
+        "(6.11)",
+        "(6.13)",
+        "(6.14)",
+        "(6.15)",
+        "(6.16)",
+        "greedy coloring of a bounded-degree graph",
+        "mean value theorem"
+      ],
+      "role": "Assigns disjoint auxiliary-torus rectangles to distinct labels whose slow supports overlap, so cross products between distinct localized pulses vanish identically after evaluation."
+    },
+    {
+      "id": "Lemma 6.2",
+      "kind": "Lemma",
+      "section": "6",
+      "page": 67,
+      "hypotheses": [
+        "A point (z,t) with 0 < q(z,t) < q_big and a sufficiently small neighbourhood U of it, with D_l = supp_{(z,t)} chi_l(q), L(U) = {l : D_l meets U}, chosen so that the band indices in L(U) differ by at most four; i_0 = min_{l in L(U)} i(l) and the common coordinate H = pi_{i_0}(Y) (6.17).",
+        "Delta_l = i(l) - i_0 in {0, ..., Delta_max} by (6.14); pi_{i(l)} = pi_{Delta_l} o pi_{i_0}, Y_i = J_g^{Delta_l} H, R^H_gamma = pi_{Delta_l}^{-1}(R_gamma), R^abs_gamma = pi_{i_0}^{-1}(R^H_gamma) (6.18)."
+      ],
+      "conclusion": "Each change of coordinate H -> Y_i has uniformly bounded derivative factors; R^H_gamma consists of 14^{Delta_l} <= 14^{Delta_max} disjoint lifts of R_gamma; Haar averages on the absolute, common and band tori agree whenever the function is a pullback from the respective torus (6.19); radial integration at fixed (z,t), torus translation, averaging, and directional Fourier inversion on zero-mean functions preserve common-torus descent and introduce no new dyadic band.",
+      "constants": [
+        "|det J_g| = 14; #(Z^2 / J_g^Delta Z^2) = 14^Delta; matrix norms of J_g^Delta bounded since 0 <= Delta <= Delta_max",
+        "(6.19): int_{T^2} f(J_g^Delta H) dH = int_{T^2} f(Y_i) dY_i; a character of frequency n pulls back to frequency (J_g^Delta)^T n, zero iff n = 0",
+        "compatibility identity (6.20): f_U(R,Z,T, J_g^{i_0(U)} Y) = f_V(R,Z,T, J_g^{i_0(V)} Y) over U meets V"
+      ],
+      "cites": [
+        "(6.2)",
+        "(6.5)",
+        "(6.13)",
+        "(6.14)",
+        "(6.17)",
+        "(6.18)",
+        "(6.19)",
+        "(6.20)",
+        "Fourier characters on the torus"
+      ],
+      "role": "Provides a common torus coordinate for overlapping dyadic bands so band fields can be added and averaged consistently without changing physical evaluations or derivative bounds."
+    },
+    {
+      "id": "Lemma 6.3",
+      "kind": "Lemma",
+      "section": "6",
+      "page": 68,
+      "hypotheses": [
+        "Labels Gamma with slow supports K_gamma from (6.8)-(6.9); in each band the boxes B_{l,a} = supp chi_{l,a} have mesh S_l^{-3} in each of the three chart coordinates, S_l = l^2.",
+        "For the counting bounds: a fixed band l, a compact chart set B subset R^3, and a bounded normalized radial interval I_R."
+      ],
+      "conclusion": "There is a constant C independent of band and point with sup_{(r,z,t)} #{gamma in Gamma : (r,z,t) in K_gamma} <= C. For a fixed band l, #{(l,a,sigma) in Gamma : B_{l,a} meets B} <= C_B S_l^9 and sup_{Z,T} #{(l,a,sigma) in Gamma : B_{l,a} meets I_R x {Z} x {T}} <= C_{I_R} S_l^3. The same bounds hold for fixed-factor enlargements of the mesh boxes.",
+      "constants": [
+        "exponents 9 (three coordinates at mesh S_l^{-3}) and 3 (one radial coordinate); factor 2 for the two signs; bounded overlap of the dyadic and grid partitions",
+        "consequence stated after the proof: a radial integral meets O(S_ref^3) labels with S_ref = l_ref^2, l_ref in L(U); common-torus lifts add at most the factor 14^{Delta_max}"
+      ],
+      "cites": [
+        "(6.1)",
+        "(6.8)",
+        "(6.9)",
+        "(6.17)",
+        "Lemma 6.2"
+      ],
+      "role": "Bounds the number of labels contributing at a point or along a radial integral, so sums over labels cost only polynomial factors of S_* without changing bands."
+    },
+    {
+      "id": "Definition 6.4",
+      "kind": "Definition",
+      "section": "6",
+      "page": 69,
+      "hypotheses": [
+        "A fixed correction stage j, normalized chart representatives (R,Z,T) with eps = Q^h and S_* = l^2, and the common auxiliary coordinate H of (6.17).",
+        "Coefficient derivatives d^I = d^{I_1}_R d^{I_2}_Z d^{I_3}_T d^{I_4}_{H_1} d^{I_5}_{H_2}, I in N^5, holding band, label, representative and harmonic fixed.",
+        "Edge weights on X_a < X < X_b: zeta(X) = exp(-a_a/log^2(X/X_a) - a_b/log^2(X_b/X)) with fixed a_a, a_b > 0, extended by zero outside; delta(X) = min{1, log(X/X_a), log(X_b/X)} (6.23).",
+        "Constants C_{j,I} > 0 and b_{j,I}, d_{j,I} >= 0 may depend on j, I and the fixed profile data, but are uniform in band, label, rectangle copy and point."
+      ],
+      "conclusion": "A smooth coefficient f = f(R,Z,T,H) belongs to M_alpha if it descends to each applicable common torus with representatives satisfying (6.20), extends smoothly by zero outside the active radial shell, and on X_a < X < X_b satisfies d_theta f = 0 and, for every I in N^5, |d^I f| <= C_{j,I} eps^alpha S_*^{b_{j,I}} zeta delta^{-d_{j,I}} (6.24); it may depend on H and has no auxiliary rectangle restriction or pulse-envelope bound. A function F = F(Z,T) belongs to S_alpha if for every I in N^2, |d^I_{Z,T} F| <= C_{j,I} eps^alpha S_*^{b_{j,I}} (6.25). Radial moment normalization (6.26): if f_* = Q^{a_f} f_phys then M_*(Z,T) = int R^e <f_*>_Y dR = Q^{a_f - (e+1)/2} int r^e <f_phys>_Y dr, with the Haar average taken on any applicable common torus by (6.19).",
+      "constants": [
+        "eps = Q^h, S_* = l^2, Q = 2^{-l}",
+        "zeta(X) = exp(-a_a/log^2(X/X_a) - a_b/log^2(X_b/X)), a_a, a_b > 0 fixed; delta(X) = min{1, log(X/X_a), log(X_b/X)}; zeta^b delta^{-N} -> 0 faster than any power at either edge for b > 0",
+        "moment scaling exponent a_f - (e+1)/2"
+      ],
+      "cites": [
+        "(6.1)",
+        "(6.17)",
+        "(6.19)",
+        "(6.20)",
+        "(6.23)",
+        "(6.24)",
+        "(6.25)",
+        "(6.26)",
+        "Theorem 4.6(iv)"
+      ],
+      "role": "Defines the normalized angular-mean coefficient class M_alpha and radial-moment class S_alpha with their eps-orders, edge weights and derivative bounds used in all correction estimates."
+    },
+    {
+      "id": "Definition 6.5",
+      "kind": "Definition",
+      "section": "6",
+      "page": 70,
+      "hypotheses": [
+        "Label gamma in Gamma and nonzero harmonic m in Z \\ {0}; local wave data (6.27): phase Phi_gamma = p_gamma theta + phi_gamma(R,Z,T,H), carrier k = ceil(eps^{-1/2}), k p_gamma in Z \\ {0}, envelope 0 < P_v <= 1 for 0 <= v <= L_s (formula (7.12)), finite harmonic set H_j subset Z \\ {0} independent of the band.",
+        "Domains (6.28): x_* = (R,Z,T), K^*_gamma = C_l(K_gamma), E_gamma = {(x_*, H): H in R^H_gamma}, Omega_gamma = {(x_*, H) in E_gamma : x_* in K^*_gamma, xi_g(H) in supp chi_g, X_a <= X <= X_b}, Omega^cut_gamma = Omega_gamma meet {v(H) in supp psi}; E^+_gamma uses the enlarged rectangle R^{H,+}_gamma; X = Q R^2/(2q).",
+        "Rectangle coordinates xi_g, v from (6.11); constants C_{j,I}, b_{j,I}, d_{j,I} as in Definition 6.4."
+      ],
+      "conclusion": "A smooth amplitude a_{gamma,m} on E^+_gamma belongs to W_alpha if its local formulas agree whenever lifts represent the same common-torus point, satisfy (6.20) on overlapping neighbourhoods, d_theta a_{gamma,m} = 0, supp(a_{gamma,m}|_{E_gamma}) subset Omega_gamma, it extends smoothly by zero across the slow and transverse support boundaries and both shell edges, and on E_gamma meet {X_a < X < X_b}, for every I in N^5, |d^I a_{gamma,m}| <= C_{j,I} eps^alpha S_*^{b_{j,I}} sqrt(zeta) delta^{-d_{j,I}} P_v for 0 <= v <= L_s (6.29); these are amplitude derivatives with P_v only a pointwise weight, and the continuation beyond v = 0, L_s has no envelope bound or temporal zero-extension condition. A cut-off coefficient additionally has supp a^cut_{gamma,m} subset Omega^cut_gamma and smooth zero extension in v (no divisibility by eta_gamma, chi_g, psi assumed). A real wave w = sum_nu a_nu e^{i k_{gamma_nu} m_nu Phi_{gamma_nu}} is in W_alpha when, after collecting equal label-harmonic pairs A_{gamma,m} = sum_{nu:(gamma_nu,m_nu)=(gamma,m)} a_nu, every A_{gamma,m} belongs to W_alpha with the uniform bounds (6.29).",
+      "constants": [
+        "k = ceil(eps^{-1/2}); k p_gamma in Z \\ {0}; 0 < P_v <= 1 on 0 <= v <= L_s; H_j finite subset of Z \\ {0}",
+        "weight sqrt(zeta) (versus zeta for M_alpha) and pointwise envelope P_v",
+        "X = Q R^2 / (2q) in chart coordinates"
+      ],
+      "cites": [
+        "(6.11)",
+        "(6.20)",
+        "(6.23)",
+        "(6.27)",
+        "(6.28)",
+        "(6.29)",
+        "(7.3)",
+        "(7.12)",
+        "Definition 6.4"
+      ],
+      "role": "Defines the labelled wave-amplitude class W_alpha, its supports on the auxiliary rectangles and its weighted derivative bounds, which every pulse amplitude and correction must satisfy."
+    },
+    {
+      "id": "Proposition 6.6",
+      "kind": "Proposition",
+      "section": "6",
+      "page": 71,
+      "hypotheses": [
+        "The classes M_alpha, W_alpha, S_alpha of Definitions 6.4 and 6.5 at a fixed stage j; alpha, beta in R.",
+        "Label separation of Lemma 6.1 (after the time cutoff provides smooth extension) and the common-torus representation of Lemma 6.2.",
+        "The normalized derivative operators of (6.6): D_r = d_R + M_i d_r R^{d_r - 1} L_i with M_i ~ eps^{-kappa_s} S_*^{-rho_g}, D_z = eps d_Z, t_* = -eps d_T + c_i N_i with c_i ~ S_*^{-1}; Q^{1+h} N_abs = c_{i_0} N_{i_0}.",
+        "Products within one label use the phase factor e^{i k m Phi_gamma} with k p_gamma a nonzero integer."
+      ],
+      "conclusion": "Each class is closed under finite sums at a fixed exponent. Products satisfy M_alpha M_beta subset M_{alpha+beta} and M_alpha W_beta subset W_{alpha+beta} (6.30). For a_{gamma,m} in W_alpha and b_{gamma,m'} in W_beta with the same label, a_{gamma,m} b_{gamma,m'} lies in W_{alpha+beta} with harmonic m + m' if m + m' != 0, and in M_{alpha+beta} if m + m' = 0 after temporal cutoff (6.31); before cutoff a zero harmonic satisfies the mean bounds on its labelled rectangle. Actual waves with distinct labels satisfy (d^I w_gamma)(d^J w_gamma') = 0 for gamma != gamma' and all I, J. For C in {M, W}, every coefficient derivative in a fixed common-torus representative preserves the eps exponent, and the operators act by (6.32): d_{R,Z,T}: C_alpha -> C_alpha; D_r: C_alpha -> C_{alpha - kappa_s}; D_z = eps d_Z: C_alpha -> C_{alpha+1}; Q^{1+h} N_abs = c_{i_0} N_{i_0}: C_alpha -> C_alpha; -eps d_T: C_alpha -> C_{alpha+1}; these preserve (6.20) and the prescribed supports (the phase is factored out). The wave rules are local to labelled rectangles before cutoff and hold for smoothly extended fields on the common torus after cutoff. Products, differentiation and angular averaging preserve finite band-independent harmonic sets at every fixed stage.",
+      "constants": [
+        "kappa_s = 1e-5 (loss exponent of D_r), from (6.2)",
+        "weight inequalities: zeta^2 <= zeta; zeta^{3/2} P_v <= sqrt(zeta) P_v; zeta P_v^2 <= zeta (m + m' = 0) or <= sqrt(zeta) P_v (m + m' != 0); 0 <= zeta <= 1, 0 < P_v <= 1",
+        "angular averaging: <a_{gamma,m} a_{gamma,m'} e^{i k (m+m') Phi_gamma}>_theta = a_{gamma,m} a_{gamma,m'} if m + m' = 0, else 0; <a_{gamma,m} e^{i k m Phi_gamma}>_theta = 0 for m != 0; f^o = f - <f>_Y",
+        "coordinate coefficients of D_r and all their derivatives bounded by C_I eps^{-kappa_s} S_*^{C_I} on the active annulus; auxiliary operators M_{i_0} L_{i_0} and c_{i_0} N_{i_0} equal Q^{d_r/2} L_abs and Q^{1+h} N_abs on every common torus",
+        "differentiating e^{i k m Phi_gamma} also differentiates the phase and produces the retained factor k m"
+      ],
+      "cites": [
+        "Definition 6.4",
+        "Definition 6.5",
+        "Lemma 6.1",
+        "Lemma 6.2",
+        "(3.9)",
+        "(4.6)",
+        "(6.2)",
+        "(6.6)",
+        "(6.20)",
+        "(6.24)",
+        "(6.29)",
+        "(6.30)",
+        "(6.31)",
+        "(6.32)",
+        "Leibniz formula"
+      ],
+      "role": "Establishes the product, harmonic-selection and derivative calculus of the coefficient classes so that the momentum residual's terms can be sized and supported by bookkeeping of eps exponents."
+    }
+  ],
+  "hard_pages": [
+    {
+      "pages": "47-48",
+      "why": "Lemma 5.1 Step 2: the Picard bound (5.8) rests on the sparse block form of A_1 (the six listed entries (A_1)_51, (A_1)_52 = (A_1)_53, (A_1)_62, (A_1)_63, (A_1)_64) and the claim A_1 D_0 A_1 = 0 and A_1 D_0 d_eta A_1 = 0 for any diagonal Volterra kernel D_0, which gives at most p_k = ceil(k/2) eta-derivatives in a k-fold composition; I could not independently re-derive the A_1 entries from (5.3)-(5.6) with the K_n substitution, nor check that the singular weights diag(0,0,2,0,3,1) are exactly what the two second-order operators (d_xixi + 3 xi^{-1} d_xi)/2 and (d_xixi + xi^{-1} d_xi)/2 produce."
+    },
+    {
+      "pages": "51-52",
+      "why": "Lemma 5.2 Step 2: the moment matrices B_U, B_E with exponents (1, 1-2 lambda) and (2, -2-2 lambda, -2 lambda) and the discrepancy vectors d_{U,n}, d_{E,n}; the banked text scrambles the vector layout (which m^0_{n,k} carries which divisor). I reconstructed the assignment (m^0_{n,1}, m^0_{n,4}/(e_* f)) and (m^0_{n,2}, m^0_{n,3}/(2 e_* f), -m^0_{n,5}/(e_* f)) by matching each moment's R-exponent against E_0 = e_* f R^{-1-2 lambda} and U_0 = 0 on I_pos, and the signs and factors are consistent, but this is my reconstruction."
+    },
+    {
+      "pages": "53-54",
+      "why": "Lemma 5.2 Steps 4-5: the n = 1 case relies on the subtracted convergent moment (5.19) with the pure-power exterior P of (A.45) and on the outer estimate (5.22) obtained from Lemma A.9 with c = 4, j = 3, 6 (gain of three powers of delta_b from the terminal multiplier (A.12) with 1 - f_o = e^{-4/delta_b^2} x smooth). Lemma A.9, (A.12) and (A.45) lie outside my pages, so the constants in (5.22) could not be checked."
+    },
+    {
+      "pages": "57-59",
+      "why": "Lemma 5.4: the exponent bookkeeping in Step 3 (definition of l'_m via l_{m+1}, the loss H_m in (5.39), the choice J >= m + s with g_{J+1}/2 - l'_{m+s} >= N + H_m + (d-1)(K_{m+s}+1) and rho_J - K^F_m >= N + 1) has several constants whose superscripts/subscripts are garbled in the banked text (e.g. K^F_m in (5.33), Lambda_log exponents P_{J,m}); I read them as stated in my entry but the placement of the flat remainder E_{J,m} inside (5.33) had to be inferred."
+    },
+    {
+      "pages": "60-61",
+      "why": "Proposition 5.5 Steps 1 and 3: the claim l_m = 2A + m 'since D < 1/2' from (5.26) is asserted without derivation, and (5.46) is imposed only for n >= max{2, |I|} while the finite initial block and the n = 1 stress term are handled separately by (5.22); reconciling this with the uniform O(q^{2h}) statements in (5.42)-(5.43) (and the stronger O(q^{3h}) for the radial correction) required tracing the q^A versus q^{1/2} normalizations of u_r by hand."
+    },
+    {
+      "pages": "63-64",
+      "why": "The auxiliary-torus constants (6.2) and derivative scales (6.6): J_g = [[3,1],[1,5]], Lambda_g = 4 - sqrt(2), T_g = 4 + sqrt(2), b_g = sqrt(2) - 1, kappa_s = 1e-5, d_r = 2((1+h) rho_g - h kappa_s), and the comparisons c_i ~ S_*^{-1}, M_i ~ eps^{-kappa_s} S_*^{-rho_g}. I verified by hand that v_r, v_t are eigenvectors with those eigenvalues, that det J_g = 14, and that the index bounds (1/T_g) Q^{-1-h}/S_* < T_g^{i(l)} <= Q^{-1-h}/S_* give the two comparisons, but the sqrt symbols are displaced in the banked text and the Diophantine bound (6.7) with its constant c is only sketched."
+    }
+  ],
+  "could_not_determine": [
+    {
+      "id": "Theorem 1.1",
+      "field": "cites",
+      "why": "The proof of Theorem 1.1 is in Section 10 (pages 116-125), outside my shard; the citations listed are taken from the proof outline in Section 3 (pages 7, 16-17) and may be incomplete."
+    },
+    {
+      "id": "Theorem 1.1",
+      "field": "constants",
+      "why": "The viscosity rescaling on page 7 has displaced sqrt symbols in the banked text; I recorded f_nu = sqrt(nu) f(x/sqrt(nu), t) by dimensional consistency with (1.1), not from a legible formula."
+    },
+    {
+      "id": "Theorem 3.1",
+      "field": "cites",
+      "why": "Theorem 3.1 is proved in Section 9 (Proposition 9.9, per the outline on page 14), outside my shard; the citations listed are those named in the outline and in the statement itself."
+    },
+    {
+      "id": "Lemma 5.2",
+      "field": "constants",
+      "why": "The layout of the discrepancy vectors d_{U,n}, d_{E,n} on page 52 is scrambled in the banked text; the entry records my reconstruction from the exponent matching (see hard_pages 51-52), not a verbatim reading."
+    },
+    {
+      "id": "Lemma 5.4",
+      "field": "hypotheses",
+      "why": "In (5.33) the placement of the superscript F on K_m and of the exponent P_{J,m} on Lambda_log is garbled in the banked text; I read the bound as C_{J,m} q^{rho_J - K^F_m} Lambda_log(q)^{P_{J,m}} + E_{J,m} by analogy with (5.30) and (5.38)."
+    },
+    {
+      "id": "Definition 6.4",
+      "field": "conclusion",
+      "why": "In (6.24) the exponent b_{j,I} floats in the banked text between S_* and zeta; I placed it on S_* (giving zeta to the first power) following the summary form on page 18, but the extracted line itself is ambiguous."
+    }
+  ],
+  "stopped_at_page": null
+}

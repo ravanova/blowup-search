@@ -1,0 +1,892 @@
+{
+ "schema": "arc6_shard_v1",
+ "shard": "E",
+ "leg": 428,
+ "pages": [
+  126,
+  156
+ ],
+ "preamble_pages": [
+  1,
+  23
+ ],
+ "preamble_entries": [
+  {
+   "id": "Theorem 1.1",
+   "kind": "Theorem",
+   "section": "1",
+   "page": 1,
+   "hypotheses": [
+    "nu > 0 is an arbitrary positive viscosity (the theorem is asserted for every nu > 0)."
+   ],
+   "conclusion": "There exist a force f in C_c^inf(R^3 x (0,inf); R^3), a compact set K subset R^3, and smooth velocity and pressure fields u, p on R^3 x [0,1) satisfying the Navier-Stokes system (1.1): d_t u + (u.grad)u - nu Lap u + grad p = f, div u = 0, u(.,0) = 0, such that supp u(.,t) union supp p(.,t) subset K for every 0 <= t < 1, sup_{0<=t<1} ||u(t)||_{L2(R^3)} < inf, and limsup_{t->1} ||u(t)||_{L^inf(R^3)} = inf. Consequently there is no smooth solution (u,P) on R^3 x [0,inf) with the same force and initial datum whose kinetic energy sup_{t>=0} (1/2) int |u|^2 dx is uniformly bounded.",
+   "constants": [
+    "nu > 0 arbitrary; singular time t = 1",
+    "force support: compact in space (K) and in time (0,inf); the outline (p.16) supports f in K x [0,2] and vanishing on [0, 1 - tau_0] with 0 < tau_0 < 1/2",
+    "viscosity rescaling u_nu(x,t) = sqrt(nu) u(x/sqrt(nu), t), p_nu = nu p(x/sqrt(nu), t), f_nu = sqrt(nu) f(x/sqrt(nu), t) (p.7)",
+    "core energy scale E_core ~ tau^{1/2-3h}, dissipation D_core ~ tau^{-1/2-3h}, integrable since h < 1/6 (p.16)"
+   ],
+   "cites": [
+    "(1.1)",
+    "Corollary 10.6",
+    "Theorem 3.1",
+    "Proposition 10.1",
+    "Proposition 9.9",
+    "Lemma 10.2",
+    "Lemma 10.3",
+    "Lemma 10.4",
+    "Lemma 10.5",
+    "(3.3)",
+    "(3.4)",
+    "(3.5)",
+    "(3.6)",
+    "(10.8)",
+    "(10.9)",
+    "(10.22)",
+    "(10.23)",
+    "Gronwall's inequality",
+    "reference [13] Fefferman (Millennium problem statement)"
+   ],
+   "role": "Main theorem: finite-time L^inf blowup with bounded energy and smooth compactly supported force, establishing alternative (C) of the Millennium problem statement; the local construction is Theorem 3.1 and the localization/uniqueness steps are in Section 10."
+  },
+  {
+   "id": "Theorem 3.1",
+   "kind": "Theorem",
+   "section": "3",
+   "page": 15,
+   "hypotheses": [
+    "No external hypotheses: an existence statement. It asserts constants 0 < h < 1/100, q_* > 0, 0 < X_a < X_ext < inf and smooth fields (u,p) on Omega_* = {(x,t): tau > 0, q < q_*}, with tau = 1 - t and q = q(z,tau) the concentration scale determined by tau = q(1 - eta^2), z = q^D eta (3.2)."
+   ],
+   "conclusion": "(i) There is a vector potential A and an axisymmetric scalar B with u = curl A + B e_theta (3.3); A and B e_theta are smooth in Cartesian coordinates at the axis and u is exactly divergence-free. (ii) Every Cartesian space-time derivative of A, B e_theta, p is uniformly bounded on compact spatial subsets with c <= q <= c' < q_* (each 0 < c < c') up to the one-sided boundary tau = 0, with limits compatible under differentiation. (iii) For every alpha, b, N and finite X_1: |d_x^alpha d_t^b R(u,p)| <= C_{alpha,b,N,X_1} q^N for 0 <= X <= X_1 as q -> 0 (3.4); for X >= X_ext the residual is identically zero and A = 0, B = K(r,tau), p = -int_r^inf K(rho,tau)^2/rho d rho, K(r,tau) = r^{-1-2h} H_ext(tau/r^2) (3.5), where H_ext is smooth on [0,inf) with each fixed derivative bounded and K satisfies the radial swirl heat equation -d_tau K = d_r^2 K + r^{-1} d_r K - r^{-2} K. (iv) For some fixed X_in in (0,X_a) and e_0 > 0: u_theta(sqrt(2 X_in tau), 0, 0, 1 - tau) = tau^{-A}(e_0 + O(tau^{2h})) as tau -> 0 (3.6).",
+   "constants": [
+    "0 < h < 1/100",
+    "A = 1/2 + h, D = 1/2 - h (p.7)",
+    "q_* > 0",
+    "0 < X_a < X_ext < inf",
+    "X_in in (0, X_a), e_0 > 0",
+    "K(r,tau) = r^{-1-2h} H_ext(tau/r^2)",
+    "residual R(u,p) = d_t u + (u.grad)u - Lap u + grad p at viscosity one (3.1)",
+    "similarity coordinates X = r^2/(2q), eta = z/q^D (3.2)"
+   ],
+   "cites": [
+    "(3.1)",
+    "(3.2)",
+    "(3.3)",
+    "(3.4)",
+    "(3.5)",
+    "(3.6)",
+    "Proposition 9.9",
+    "Lemma 5.4",
+    "Proposition 5.5",
+    "Proposition 9.6",
+    "Lemma 9.7",
+    "Lemma A.6",
+    "Lemma 4.1",
+    "(9.20)",
+    "(9.21)"
+   ],
+   "role": "States the completed local construction (summed corrections before localization): potential representation, boundedness away from the origin up to t = 1, flat residual near the origin, exact heat exterior, and leading velocity growth; it is the input to the localization in Section 10 and Theorem 1.1."
+  },
+  {
+   "id": "Definition 3.2",
+   "kind": "Definition",
+   "section": "3",
+   "page": 18,
+   "hypotheses": [
+    "A leading field (velocity and pressure) is given; alternatively a scalar auxiliary profile in the similarity variables (X, eta) is given."
+   ],
+   "conclusion": "A leading field is regular at the axis if its velocity and pressure extend smoothly across r = 0 in Cartesian coordinates for t < 1. For scalar auxiliary profiles, regular at the axis means a smooth extension in (X, eta) to X = 0.",
+   "constants": [],
+   "cites": [
+    "(4.4)",
+    "(4.5)"
+   ],
+   "role": "Fixes the meaning of axis regularity used throughout the profile construction (e.g. the analytic axis profile of Proposition B.2 and the hypotheses of Lemma A.8 and Proposition A.10)."
+  },
+  {
+   "id": "Definition 3.3",
+   "kind": "Definition",
+   "section": "3",
+   "page": 18,
+   "hypotheses": [
+    "alpha >= 0 and beta > 0 are parameters or expressions depending on profile variables."
+   ],
+   "conclusion": "One writes alpha << beta when alpha/beta is required to be sufficiently small, with the allowed size depending on all data already fixed. In a chain of constants, choices proceed from right to left; small reciprocals specify large parameters. For expressions depending on profile variables the smallness is uniform on the stated domain and is ensured by those parameter choices.",
+   "constants": [],
+   "cites": [
+    "(A.6)",
+    "(B.40)"
+   ],
+   "role": "Fixes the convention for the parameter ordering used in the appendices, in particular the chain (A.6) for the outer profile and the order of choices (B.40) for the axis and joining."
+  }
+ ],
+ "entries": [
+  {
+   "id": "Lemma A.1",
+   "kind": "Lemma",
+   "section": "A",
+   "page": 126,
+   "hypotheses": [
+    "alpha_1, ..., alpha_m are distinct real numbers.",
+    "For each j, beta_j is a nonnegative, nonzero smooth function supported in the interior of a compact interval I_j subset (0, inf), with the intervals ordered I_1 < ... < I_m.",
+    "For the last assertion: the data vary smoothly over a compact parameter set and the stated separations (distinct exponents, ordered supports) persist."
+   ],
+   "conclusion": "The matrix B_ij = int_0^inf x^{alpha_i} beta_j(x) dx is invertible. The assertion also holds for exponential weights in a logarithmic coordinate. If the data vary smoothly over a compact parameter set and the separations persist, the inverse B^{-1} and each fixed parameter derivative of it are bounded. (The proof notes this does not give a uniform inverse when two exponents approach one another.)",
+   "constants": [
+    "Remark after proof (A.1): for identical translated bumps beta(y - c_1), beta(y - c_2), Delta = c_2 - c_1 > 0, b(s) = int e^{st} beta(t) dt, one has det B = b(s_1) b(s_2)(e^{s_2 Delta} - e^{s_1 Delta}); ||B^{-1}|| = O(lambda^{-1}) when s_1 - s_2 = lambda",
+    "same O(lambda^{-1}) inverse bound for weights 1, x^{-lambda} on ordered disjoint bumps, via x^{-lambda} = 1 - lambda log x + O(lambda^2)"
+   ],
+   "cites": [
+    "Rolle's theorem",
+    "generalized Vandermonde / Descartes-type fact: a nonzero combination of m distinct powers has at most m-1 positive zeros",
+    "multilinearity of the determinant",
+    "substitution x = e^y",
+    "differentiation of B^{-1} B = Id",
+    "(A.1)"
+   ],
+   "role": "Shows distinct power weights give independent moment changes, so finitely many bumps can adjust finitely many moments; used in Corollary A.3, Proposition A.7, Proposition B.8 and (per the introduction) Proposition C.2."
+  },
+  {
+   "id": "Lemma A.2",
+   "kind": "Lemma",
+   "section": "A",
+   "page": 127,
+   "hypotheses": [
+    "K = [-1, 1] (parameter interval in eta).",
+    "A finite family of correction coefficients c in R^m changes the required moments (after taking specified linear combinations and dividing each component by a specified nonzero factor) by F_eta(c) = B(eta) c + Q_eta(c,c), eta in K (A.2), with B and the bilinear map Q smooth and B invertible on K.",
+    "The prescribed moment discrepancy is d in C^inf(K; R^m).",
+    "beta_0 = sup_K ||B^{-1}||, kappa_0 = sup_K ||Q||, d_0 = ||d||_{C^0(K)}, and 8 beta_0^2 kappa_0 d_0 <= 1.",
+    "For the C^k assertion: beta_k is the operator norm of multiplication by B^{-1} on C^k(K), kappa_k the corresponding bilinear norm of Q, and 8 beta_k^2 kappa_k ||d||_{C^k} <= 1."
+   ],
+   "conclusion": "There is a unique solution of F_eta(c) = d(eta) in the ball ||c||_{C^0} <= 2 beta_0 d_0; it is smooth in eta and is selected by iteration from zero of c -> B(eta)^{-1}(d(eta) - Q_eta(c,c)). If Q = 0 there is no smallness requirement. Under the C^k smallness condition the same branch satisfies ||c||_{C^k} <= 2 beta_k ||d||_{C^k} (A.3). (Proof adds: all other fixed derivatives are finite by implicit differentiation; an additional parameter in a compact set is treated identically.)",
+   "constants": [
+    "smallness threshold 8 beta_0^2 kappa_0 d_0 <= 1 (and 8 beta_k^2 kappa_k ||d||_{C^k} <= 1)",
+    "ball radius r = 2 beta_0 d_0",
+    "Lipschitz constant of the iteration map at most 2 beta_0 kappa_0 r <= 1/2"
+   ],
+   "cites": [
+    "(A.2)",
+    "(A.3)",
+    "contraction mapping principle (Banach fixed point)",
+    "implicit function theorem",
+    "Banach algebra C^k(K)"
+   ],
+   "role": "Solves the quadratic finite-dimensional moment equations for small discrepancies with control of parameter derivatives; used in Proposition A.4 (pulse end bumps), Proposition A.7 and Proposition B.8."
+  },
+  {
+   "id": "Corollary A.3",
+   "kind": "Corollary",
+   "section": "A",
+   "page": 128,
+   "hypotheses": [
+    "The five radial moment functions (M, I, J, S, C_p) of (4.15) are used, where C_p is the pressure increment.",
+    "Under the rescaling X = rho x, the normalizing factors are (rho, rho^{3/2}, rho^{3/2}, rho, 1) and H = rho^{1/2} sqrt(2x) E (A.4).",
+    "On a fixed correction interval U_0 = u_c(eta) and E_0 = e_* f_*(eta) x^alpha with e_* > 0 and smooth f_* > 0.",
+    "alpha not in {-1/2, 1/2, 3/2}."
+   ],
+   "conclusion": "Two additive U bumps and three additive E bumps give an invertible Jacobian of the normalized five-moment map. The moment changes have the exact quadratic form (A.2). At U_0 = 0, the three corrections to E can prescribe changes in (I, S, C_p) while preserving M, J.",
+   "constants": [
+    "excluded exponents alpha in {-1/2, 1/2, 3/2}",
+    "row operations J -> J - u_c I, S -> S - 2 u_c M",
+    "U block weights 1, x^{alpha+1/2}; E block weights x^{1/2}, x^alpha, x^{alpha-1}",
+    "axis moment correction alpha = 1/10: blocks (0, 3/5) and (1/2, 1/10, -9/10)",
+    "intermediate power-law interval alpha = -1/2 - lambda: blocks (0, -lambda) and (1/2, -1/2-lambda, -3/2-lambda), inverse bound lambda^{-1}; lambda fixed before the later radial frequency"
+   ],
+   "cites": [
+    "(4.15)",
+    "(A.4)",
+    "(A.2)",
+    "Lemma A.1",
+    "Lemma 4.4"
+   ],
+   "role": "Identifies the moment weights of the five-integral system on a power-law interval so that Lemma A.1 / Lemma A.2 apply; used in Proposition A.7 and Proposition B.8 (and the heat/mean corrections)."
+  },
+  {
+   "id": "Proposition A.4",
+   "kind": "Proposition",
+   "section": "A",
+   "page": 130,
+   "hypotheses": [
+    "The profile (U, E) is the one specified in Section A.2: reference inner profile (A.7) U = 4 eta, E = P_* f(eta) e^{y/10} (f = (1+eta^2)^{-1}, y = log(X/X_R) <= 0); axial reduction stage; intermediate power-law interval of length T_w = 60 log(1/lambda) (A.9); axial pulse; profile interpolation (A.10) with angular moment bumps (A.11); exterior transition (A.12)-(A.13) to E_pow = c_inf X^{-A}.",
+    "Parameters are chosen in the order (A.6): M_d, T_d = e^{M_d} + 10, P_* > e^{T_d}, 0 < lambda << 1, 0 < h << min{lambda, e^{-T_d}} (smallness in the sense of Definition 3.3); the large radius X_R is fixed afterward.",
+    "For the cone assertion: for each fixed x_- in (0, 1], X_R is sufficiently large, allowed to depend on x_-."
+   ],
+   "conclusion": "There are finite choices in the order (A.6) for which the profile defines smooth U, E for X > 0, eta in [-1,1], with E > 0, satisfying the moment identities (A.8): int_0^inf (U^2 - E^2/2) dX = 0 and int_0^inf (H - H_pow) dX = 0 with H_pow = sqrt(2X) E_pow. All stage boundaries divided by X_R are independent of X_R and eta. After the compact axial pulse U = M = J = 0; after the terminal interval E = E_pow. There are four disjoint unaltered patches (listed after (A.9)) on which U = 0 and E is a positive multiple of f X^{-1/2-lambda}. For each fixed x_- in (0,1], a sufficiently large X_R makes the reference profile satisfy the strict relaxed cone condition from x = x_- through the first half-unit of its terminal tail. It satisfies the admissible stress cone throughout the intermediate power-law interval, axial pulse, profile interpolation and exterior transition, and as soon as l < 0 on the transition into that constant-slope interval. These assertions concern a finite logarithmic interval ending at tail coordinate 1/2; the endpoint collar is treated by the heat construction (Proposition A.10).",
+   "constants": [
+    "smooth step sigma(y) = e^{-1/y^2}/(e^{-1/y^2} + e^{-1/(1-y)^2}) on (0,1), 0 for y <= 0, 1 for y >= 1 (A.5)",
+    "parameter order (A.6): M_d, T_d = e^{M_d} + 10, P_* > e^{T_d}, 0 < lambda << 1, 0 < h << min{lambda, e^{-T_d}}",
+    "reference inner profile (A.7): U = 4 eta, E = P_* f(eta) e^{y/10}, f = (1+eta^2)^{-1} = e^{-J_0}, J_0 = log(1+eta^2), y <= 0",
+    "exterior power law E_pow = c_inf X^{-A}, c_inf > 0 independent of eta; l = X d_X log H, (log E)' = l - 1/2",
+    "axial reduction: l = (3/5)(1 - sigma(y)) for one unit of log length, U = 4 eta; then l = 0, U = k(y) eta, k(y) = 4[1 - sigma(log(1+y)/M_d)], 0 <= y <= T_d; |k'| <= e_d/(1+y) with e_d = 4 ||sigma'||_inf / M_d; k = 0 on the final eleven units; P_1 ~ P_*, E = P_1 f e^{-y/2}",
+    "intermediate power-law interval: l = -lambda sigma(y) on a unit interval, then l = -lambda for T_w = 60 log(1/lambda) (A.9)",
+    "reserved subintervals in local log coordinate: (T_w-25, T_w-20) correction after cone realization; (T_w-20, T_w-15) heat compensation; (T_w-14, T_w-9) higher-order background moment conditions; (T_w-8, T_w-3) phase-averaged correction moment conditions",
+    "axial pulse: 0 <= y <= 13/lambda, l = -lambda, U = E R_b, xi_b = lambda y, phi_b(xi_b) = int_0^{xi_b} sigma(v/.02) dv, R_0 = phi_b [1 - sigma(xi_b - 10)], R_b = Amp(eta) R_0(xi_b) + c_1 beta_1(y) + c_2 beta_2(y); bumps beta_1, beta_2 identical translates of width .3 centered at 13/lambda - 3 and 13/lambda - 1; c_1, c_2 affine in Amp; E(X_p, eta) = e_b f",
+    "profile interpolation (A.10): log E = log e_end - (1/2 + lambda) y - theta_f(y) J_0 - (1 - theta_f(y)) log 2, theta_f = 1 - sigma(y/T_f); T_f large gives -lambda - .1 <= l <= -lambda; then eta-independent exponential for 30 log(1/lambda) with two relative E bumps of width .3 centered three and one units before its end imposing (A.11): I = XH/(1-lambda) at the end and zero change of int E^2 dy",
+    "exterior transition: l from -lambda to -1 on a unit interval, l = -1 for 4 log(1/h), l from -1 to -h on a unit interval; terminal interval 0 <= y <= 3: psi_o = 1 - sigma((y-1)/2), f_o = 1 - rho_o psi_o, rho_o = c_o h with c_o > 0 small so that 0 <= f_o'/f_o < h/4, l = -h + f_o'/f_o (A.12); Q_p = int_0^3 exp(int_0^v (1+l)) f_o'/f_o dv (A.13); Q' + (1+l)Q = -l - h with Q = (lambda - h)/(1 - lambda) at exterior transition start, hold l = -h until Q reaches Q_p",
+    "proof (A.14): e_b <= C_pre lambda^30, ||A_X(U)/E||_{C^1_eta} <= C_pre lambda^29, ||S(X_p)/(X_p e_b^2 f^2)||_{C^1_eta} <= C_pre (1 + log(1/lambda)); slopes s_1 = 1/2 - lambda, s_2 = 1/2 - 2 lambda; main pulse ends at 11/lambda; both slopes exceed .4",
+    "(A.15): ||c_i||_{C^1_eta} <= C_pre e^{-c/lambda}(1 + |Amp|), M = J = 0 after the pulse",
+    "r_I = I/(XH) obeys r_I' + (1+l) r_I = 1; angular bump coefficients O_{C^1_eta}(C_pre lambda^28); slopes 1 - lambda (I row) and -1 - 2 lambda (pressure row); E > 0 and l <= -lambda/2 persist",
+    "Q_s = (lambda - h)/(1 - lambda) exactly at exterior transition start; (A.16) terminal Q_s(y) = int_y^3 exp(int_y^v (1+l)) f_o'/f_o dv; I = XH/(1-h) beyond the tail",
+    "(A.17): (XE^2)_hold end/(XE^2)_hold start = h^8, E_hold end/E_hold start = h^6; (A.18) int_release XE^2 dy <= C X_rel e_rel^2; l <= -3h/4 after the hold",
+    "(A.19): lambda S(inf)/(X_p e_b^2 f^2) = Amp^2 K_b - (1 - e^{-26})/4 + E(Amp, eta) [constant term reconstructed, see could_not_determine], K_b = int_0^13 e^{-2 xi} R_0^2 d xi, .20 < K_b <= 1/4; ||E||_{C^1} <= C_pre lambda (1 + log(1/lambda)) on [.9, 1.2] x [-1,1]; principal expression below -.047 at Amp = .9 and above .038 at Amp = 1.2, amplitude derivative at least .36 on the bracket; R_0 >= xi_b - .02 on .02 <= xi_b <= 9, R_0 <= xi_b",
+    "(A.20): |d_eta Amp| <= C_pre lambda (1 + log(1/lambda))",
+    "cone test (A.24): a - b_s w > 0 and 2 b_s w + b_s^2/a + (a - 2) w^2 < 2, with w = N_s/(E Q_s); where v_s <= 2 it suffices that P_c = p_{s,1}(1 - b_s w/a) > 2, p_{s,1} = X Q_s/L",
+    "(A.25) reference profile: Q_s = [(3/5)(4L - 1) - h(1 - 8 eta^2) + (D + 4d) eta J_0']/(8/5) >= c > 0, b_s = 0, a = 4/5",
+    "first transition: W = 1 - 4L < 0, angular source >= -h, a <= 2; axial transition (A.26): S_q = -h(1 - 2k eta^2) + (D + dk) eta J_0', Q_s >= c(eta^2 + e^{-y}) on 0 <= y <= T_d; |N_s|/E^2 <= C|eta|(e^{T_d}/P_*^2 + 1 + y) <= C|eta|(1+y); b_s = 2k' eta/E, |b_s w| <= C e_d, a = 2; M_d chosen first (e_d small), then P_*",
+    "intermediate interval: kbar' = k - kbar, L kbar < 1/2, W = 1 - L kbar >= 1/2; c_eta = D eta J_0' ~ eta^2; (A.27): Q_s >= c_pre(eta^2 + lambda + e^{-(1-lambda)y}), Q_s - (lambda - h + c_eta)/(1 - lambda) = O_{C^1_eta}(C_pre (1+y) e^{-(1-lambda)y}), |N_s/E| <= C_pre |eta|(1+y) e^{-(1/2-lambda)y}; sqrt(lambda)|w| <= C_pre sqrt(lambda)(1+y) e^{lambda y/2} = o(1) on 0 <= y <= 60 log(1/lambda); a = 2 + 2 lambda, b_s = 0",
+    "pulse: m = A_X(U)/E, beta = 1/2 - lambda, m' + beta m = R_b, (A.28) m = R_b/beta - lambda d_xi R_b/beta^2 + O(lambda^2) + m(0) e^{-beta y}; (A.29) Q_s = (lambda - h + c_eta)/(1 - lambda) + O(C_pre lambda^28); S/(XE^2) = O_{C^1_eta}(C_pre e^{26}/lambda); (A.30) N_s/E = -R_b + (D + c_eta) m - D eta m_eta + O(C_pre lambda^27); w = 2 R_b - C_d d_xi R_b + o(1), C_d = lambda (D + c_eta)(1 - lambda)/(beta^2 (lambda - h + c_eta)) <= 2 + o(1); a = 2 + 2 lambda, b_s = -R_b + O(lambda); R_b >= 0, d_xi R_b <= 1.2; cone margins: b_s w <= sup_{R>=0}(-2R^2 + 2.41 R) + o(1) < .74 and 2 b_s w + b_s^2/a + (a-2) w^2 <= sup(-3.5 R^2 + 4.82 R) + o(1) < 1.68; a - b_s w > 1, v_s >= a > 2",
+    "profile interpolation / exterior transition: W = 1, angular source -l - h + theta_f c_eta, Q_s >= c lambda; (A.31) S(X)/X = (1/(2X)) int_X^inf E^2; (|S| + |S_eta|)/X <= C E^2/lambda, |Pi| + |Pi_eta| <= C E^2, |w| <= C E/lambda^2 << 1; b_s = 0, 2 < a <= 2 + 2 lambda + .2 + o(1)",
+    "exterior: N_s = 2 eta int_y^inf (h e^{v-y} - A) E(v)^2 dv = O(E(y)^2); E(v)^2 <= E(y)^2 e^{-(1+3h/2)(v-y)}; h int e^{v-y} E^2 <= (2/3) E(y)^2 [text shows '3E(y)^2', garbled]; int E^2 <= E(y)^2/(1 + 3h/2); Q_s >= c lambda before the steep-decay interval, Q_s >= c h after it through the first half-unit of the terminal interval; E <= C e_rel h^6 after steep decay; |w| << 1, b_s = 0, 2 < a <= 4",
+    "final step: one increase of X_R makes the large-p_{s,1} test uniform (fields and Q_s, N_s on a fixed compact log interval are independent of X_R under normalization (A.4))"
+   ],
+   "cites": [
+    "(A.5)",
+    "(A.6)",
+    "(A.7)",
+    "(A.8)",
+    "(A.9)",
+    "(A.10)",
+    "(A.11)",
+    "(A.12)",
+    "(A.13)",
+    "(A.14)",
+    "(A.15)",
+    "(A.16)",
+    "(A.17)",
+    "(A.18)",
+    "(A.19)",
+    "(A.20)",
+    "(A.23)",
+    "(A.24)",
+    "(A.25)",
+    "(A.26)",
+    "(A.27)",
+    "(A.28)",
+    "(A.29)",
+    "(A.30)",
+    "(A.31)",
+    "(A.1)",
+    "(A.4)",
+    "(4.15)",
+    "(4.16)",
+    "Definition 3.3",
+    "Lemma A.1",
+    "Lemma A.2",
+    "Lemma A.5",
+    "Lemma 4.5",
+    "Lemma 4.4",
+    "Taylor's formula",
+    "variation of constants",
+    "implicit function theorem (root of (A.19) smooth in eta)"
+   ],
+   "role": "Constructs the outer reference profile (axial reduction, power-law interval with four reserved patches, axial pulse, interpolation, exterior transition) with the two exterior moment identities (A.8) and the stress cone inequalities on the outer intervals; it supplies the pressure datum Pi_0 and the reference to which the axis profile is later attached."
+  },
+  {
+   "id": "Lemma A.5",
+   "kind": "Lemma",
+   "section": "A",
+   "page": 133,
+   "hypotheses": [
+    "E_{id,sched} is the reference inner profile (A.7) followed by the outer profile E specified in Section A.2, with the azimuthal corrections that preserve the total pressure increment omitted and all other transition intervals unchanged.",
+    "The global logarithmic coordinate y = log(X/X_R) is used on the complete reference profile."
+   ],
+   "conclusion": "The function Pi_0(eta) = -(1/2) int_{-inf}^{inf} E_{id,sched}(y, eta)^2 dy (A.21) is independent of X_R and analytic on a complex neighborhood of [-1, 1]. It is even, Pi_0'(eta) has the sign of eta for eta != 0, and Pi_0(eta) <= -(5/2) P_*^2 f(eta)^2 (A.22). For the complete reference radial profile, integration of Pi_X = E^2/(2X) from this datum gives Pi(X, eta) = -(1/2) int_{log(X/X_R)}^{inf} E(v, eta)^2 dv (A.23).",
+   "constants": [
+    "bound -(5/2) P_*^2 f^2 is exactly the contribution of the reference inner profile",
+    "each piece of E has the form c(y) f(eta)^{theta(y)} with 0 <= theta <= 1 (theta = 1 through the pulse, decreasing to 0 in profile interpolation, 0 afterwards)",
+    "squared integrand bounded by C e^{y/5} as y -> -inf and C e^{-(1+2h)y} as y -> +inf",
+    "d_eta f^{2 theta} = -2 theta J_0' f^{2 theta}"
+   ],
+   "cites": [
+    "(A.7)",
+    "(A.21)",
+    "(A.22)",
+    "(A.23)",
+    "(A.11)",
+    "(4.25)",
+    "Proposition B.2",
+    "uniform limits of holomorphic functions are holomorphic (Weierstrass / dominated convergence)"
+   ],
+   "role": "Fixes the analytic, even, negative axis pressure datum Pi_0 needed by the analytic axis construction (Proposition B.2), and shows it is independent of X_R and of later pressure-preserving edits."
+  },
+  {
+   "id": "Lemma A.6",
+   "kind": "Lemma",
+   "section": "A",
+   "page": 138,
+   "hypotheses": [
+    "a_K = 1 + h, and the heat factor is H(Z) = Gamma(a_K)^{-1} int_0^inf e^{-v} v^{a_K - 1} (1 + Zv)^{-h} dv for Z >= 0 (A.32), so H(0) = 1.",
+    "Standing assumptions of Section A.6: 0 < h < 1/2, A = 1/2 + h, D = 1/2 - h, d = 1 - eta^2, tau = 1 - t, L = 1 - 2h eta^2; c_inf > 0 independent of eta.",
+    "E_heat(X, eta) = E_pow(X) H(2d/X)."
+   ],
+   "conclusion": "H is positive and smooth up to Z = 0 from the right, and every fixed derivative is bounded on bounded nonnegative intervals. The field K(r,t) = c_inf s^{-A} H(2 tau/s), s = r^2/2 (A.33), is independent of z, satisfies d_t K = (d_rr + r^{-1} d_r - r^{-2}) K, and has K_r < 0. Its profile is E_pow(X) H(2d/X), smooth with all eta-derivatives extending continuously to eta = +-1 from the interior.",
+   "constants": [
+    "a_K = 1 + h; H(0) = 1",
+    "(A.34) H^{(m)}(Z) = (-1)^m (h)_m Gamma(1+h)^{-1} int_0^inf e^{-v} v^{h+m} (1+Zv)^{-h-m} dv; (A.35) H^{(m)}(0) = (-1)^m (h)_m (1+h)_m",
+    "(A.36) H(Z) = 1 - h(1+h) Z + O_h(Z^2), |H - 1| + |Z H'| <= C h Z, uniform for 0 < h <= h_0 < 1/2; (h)_m (1+h)_m <= C_m h",
+    "ODE (A.37): Z^2 H'' + (1 + 2 a_K Z) H' + a_K(a_K - 1) H = 0",
+    "d_t K = -2 c_inf s^{-A-1} H'; identities 2A + 1 = 2 a_K, A^2 - 1/4 = a_K(a_K - 1)",
+    "0 <= -Z H'/H < h; r K_r/K = -A - Z H'/H < -1/2",
+    "(A.38) E_heat/E_pow = H(2d/X) = 1 - 2h(1+h) d/X + O_{h,j,m}(X^{-2}) after (X d_X)^j d_eta^m"
+   ],
+   "cites": [
+    "(A.32)",
+    "(A.33)",
+    "(A.34)",
+    "(A.35)",
+    "(A.36)",
+    "(A.37)",
+    "(A.38)",
+    "gamma function integral",
+    "rising factorial (Pochhammer symbol)",
+    "dominated differentiation under the integral",
+    "Taylor's formula with remainder"
+   ],
+   "role": "Provides the exact radial swirl heat flow K (the heat exterior of Theorem 3.1(iii)) replacing the power-law tail, with zero momentum residual and smooth limits at t = 1 away from the axis."
+  },
+  {
+   "id": "Proposition A.7",
+   "kind": "Proposition",
+   "section": "A",
+   "page": 139,
+   "hypotheses": [
+    "X_K = e^{.2} X_tail, and chi_K(y) is a smooth step with 0 <= chi_K <= 1, equal to zero for y <= .2 and to one for y >= .5 (y = log(X/X_tail)).",
+    "E_cl is the reference profile of Proposition A.4; the terminal replacement is E_cl -> E_cl [1 + chi_K(y)(H(2d/X) - 1)] (A.39).",
+    "X_R is sufficiently large (for the positivity and cone assertions)."
+   ],
+   "conclusion": "The replacement (A.39) can be compensated by three additive E-bumps in the second reserved patch in the intermediate power-law interval. The complete edit preserves the functions M, J, the totals S(inf), C_p(inf) from (4.15), and the renormalized angular moment int_0^inf (H - H_pow) dX, pointwise on [-1,1]. For sufficiently large X_R it preserves E > 0 and the strict admissible stress cone from that patch through y = .5. The original axis pressure datum and the profiles before the compensation patch are unchanged.",
+   "constants": [
+    "X_K = e^{.2} X_tail; step thresholds .2 and .5",
+    "|(X d_X)^j d_eta^m (E - E_cl)| <= C_{j,m} e_K X_K^{-1} x^{-A-1} for x = X/X_K >= 1",
+    "(A.40) |d_eta^m Delta int E^2/(2X)| <= C_m (e_K^2/X_K) int_1^inf x^{-2A-2}; (A.41) |d_eta^m Delta S(inf)| <= C_m e_K^2 int_1^inf x^{-2A-1}; (A.42) |d_eta^m Delta int (H - H_pow)| <= C_m e_K X_K^{1/2} int_1^inf x^{-A-1/2} <= C_{m,h} e_K X_K^{1/2}, final integral = 1/h",
+    "compensation patch: unmodified profile E = e_* f x_*^{-1/2-lambda}, U = 0, f >= 1/2; delta E = e_* sum_{i=1}^3 c_i(eta) beta_i(x_*)",
+    "normalization (A.43): e_*^2 (pressure), X_* e_*^2 (S), X_*^{3/2} e_* (angular); derivative weights f x_*^{-3/2-lambda}, -f x_*^{-1/2-lambda}, sqrt(2) x_*^{1/2}",
+    "normalized discrepancies O_m(X_K^{-1}); coefficients ||d_eta^m c||_inf <= C_m X_K^{-1}",
+    "scalings I = X_R^{3/2} Ihat, J = X_R^{3/2} Jhat, M = X_R Mhat, S = X_R Shat cancel every X_R-factor in the Q_s, N_s identities; changes O(X_K^{-1}) after one extra eta-derivative"
+   ],
+   "cites": [
+    "(A.39)",
+    "(A.40)",
+    "(A.41)",
+    "(A.42)",
+    "(A.43)",
+    "(A.34)",
+    "(A.35)",
+    "(A.36)",
+    "(4.15)",
+    "(4.16)",
+    "Lemma A.1",
+    "Lemma A.2",
+    "Proposition A.4",
+    "Lemma A.6",
+    "implicit function theorem"
+   ],
+   "role": "Restores the three moments (pressure total, S(inf), angular moment) altered by the heat replacement of the tail, using bumps in the second reserved patch, while keeping Pi_0, E > 0 and the cone."
+  },
+  {
+   "id": "Lemma A.8",
+   "kind": "Lemma",
+   "section": "A",
+   "page": 140,
+   "hypotheses": [
+    "The leading axisymmetric field is smooth at the axis.",
+    "U = 0 and E = E_pow f_o [1 + chi_K (H(2d/X) - 1)] for y >= 0 (y = log(X/X_tail)).",
+    "Exact moment conditions: M(inf) = J(inf) = S(inf) = 0, int_0^inf (H - H_pow) dX = 0, and Pi(X) = -(1/2) int_X^inf E(x)^2/x dx."
+   ],
+   "conclusion": "The leading tangential stresses vanish for X >= X_b. On y >= 1/2, where chi_K = 1, they are given by the weighted integrals of the leading residual from r to infinity with positive integration sign, (A.46): T_theta(r) = r^{-2} int_r^inf r'^2 R_theta^{(0)}(r') dr', T_z(r) = r^{-1} int_r^inf r' R_z^{(0)}(r') dr'.",
+   "constants": [
+    "X_b = e^3 X_tail (defined p.137)",
+    "tail representations: I(X) = X H_pow/(1-h) - int_X^inf (H - H_pow), S(X) = (1/2) int_X^inf E^2, Q_s = -1 + ((1-h) I - D eta I_eta)/(XH), N_s = (4h eta S - d S_eta)/X + 4A eta Pi - d Pi_eta; W = 1",
+    "(A.44): K - K_pow = O_h(tau r^{-3-2h}), d_t K = O_h(r^{-3-2h}), r^2 K_r - r K = O_h(r^{-2h}), K_pow = c_inf s^{-A}",
+    "int_{R_*}^inf r^2(|K - K_pow| + |d_t K|) dr <= C_h (1+tau) R_*^{-2h}/(2h)",
+    "(A.45): int_0^inf r^2 (u_theta - K_pow) dr = q^{3/2-A} int_0^inf (H - H_pow) dX = 0; axis weight r^{1-2h}",
+    "int r^2 u_z u_theta dr = q^{3/2-2A} J(inf) = 0; int r u_z dr = q^{1-A} M(inf) = 0; int r(u_z^2 + p) dr = q^{1-2A} int (U^2 - E^2/2) dX = 0; int_0^inf r p dr = -(1/2) int_0^inf r' u_theta^2 dr'; p = O(r^{-2-4h}), r^2 p -> 0",
+    "T = q^{-A-1/2} T_0; beyond X_b the field is (u_r, u_theta, u_z) = (0, K, 0)"
+   ],
+   "cites": [
+    "(4.16)",
+    "(4.12)",
+    "(4.15)",
+    "Proposition 4.2",
+    "Lemma A.6",
+    "(A.36)",
+    "(A.44)",
+    "(A.45)",
+    "(A.46)",
+    "(A.8)",
+    "Proposition B.2",
+    "Corollary B.10",
+    "Fubini's theorem (exchange of order in the pressure integral)"
+   ],
+   "role": "Uses the moment identities to show the weighted integrals of the leading residual vanish, hence the stress can be computed by integration from r to infinity and vanishes beyond the annulus (X >= X_b); gives T = 0 for X >= X_b in the outline (p.10)."
+  },
+  {
+   "id": "Lemma A.9",
+   "kind": "Lemma",
+   "section": "A",
+   "page": 141,
+   "hypotheses": [
+    "c > 0, j is a fixed nonnegative integer.",
+    "b(u, eta) is smooth for 0 <= u <= delta_0 and for eta in a compact interval K (or any finite collection of smooth compact parameters)."
+   ],
+   "conclusion": "There exists a coefficient B such that, for 0 < delta <= delta_0, int_0^delta e^{-c/u^2} u^{-j} b(u, eta) du = (1/2) e^{-c/delta^2} delta^{3-j} B(delta, eta) (A.47). B is smooth on [0, delta_0] x K, has B(0, eta) = b(0, eta)/c, and has bounded mixed derivatives of every fixed order there.",
+   "constants": [
+    "substitution u = delta/(1 + delta^2 v)^{1/2}, Jacobian -(1/2) delta^3 (1 + delta^2 v)^{-3/2}, c/u^2 = c/delta^2 + c v",
+    "B(delta, eta) = int_0^inf e^{-cv} (1 + delta^2 v)^{(j-3)/2} b(delta/sqrt(1 + delta^2 v), eta) dv",
+    "prefactor 1/2 and power delta^{3-j}"
+   ],
+   "cites": [
+    "(A.47)",
+    "dominated differentiation under the integral"
+   ],
+   "role": "Separates the flat factor e^{-c/delta^2} from a smooth coefficient in integrals of the cutoff tail; used in Proposition A.10 (j = 3, c = 4 and j = 0) and Proposition B.5 (c = t_1^2, j = 0) to get smooth limiting stress directions."
+  },
+  {
+   "id": "Proposition A.10",
+   "kind": "Proposition",
+   "section": "A",
+   "page": 142,
+   "hypotheses": [
+    "The regular axis and exact moment hypotheses of Lemma A.8 hold.",
+    "The profile is considered on the terminal interval 0 <= y < 3 with delta = 3 - y; the asymptotics are for delta sufficiently small.",
+    "Standing: X_R sufficiently large and h small (constants in (A.55) uniform in these); on y >= 1/2, chi_K = 1, u_theta = K f with f = f_o(y), u_r = u_z = 0."
+   ],
+   "conclusion": "The profile on the terminal interval satisfies the admissible stress cone on .5 <= y < 3. Its stress direction extends smoothly to the outer endpoint, and 2 - (a - 2)(T_z/T_theta)^2, interpreted through this extension, has a uniform positive lower bound. More precisely, for delta = 3 - y small: T_{0,theta} = e^{-4/delta^2} delta^{-3} b_theta(delta, eta) with b_theta(0, eta) > 0 (A.48); T_{0,z} = e^{-4/delta^2} delta^3 b_z(delta, eta) (A.49); T_{0,z}/T_{0,theta} = delta^6 b_z/b_theta -> 0 (A.50). The coefficients are smooth on a closed outer collar and b_theta has a positive lower bound there. For every fixed mixed profile derivative d^I there are finite C_I, N_I with |d^I T_0| <= C_I e^{-4/delta^2} delta^{-N_I} and |T_0| >= c e^{-4/delta^2} delta^{-3} (A.51); these constants may depend on the fixed profile choices and I but not on q.",
+   "constants": [
+    "flat factor e^{-4/delta^2}, powers delta^{-3} (angular) and delta^{3} (axial), ratio delta^6",
+    "(A.52): R_theta^{(0)} = K f'/(qL) - K(f_rr + r^{-1} f_r) - 2 K_r f_r, using y_t = (qL)^{-1}, y_z = -2 eta/(q D L); (A.53): p_z(r) = (2 eta/(q D L)) int_y^3 K(y')^2 f(y') f'(y') dy'",
+    "(A.54): T_theta = K f_r + r^{-2} int_r^inf (r'K - r'^2 K_r') f_r' dr' + (qL r^2)^{-1} int_r^inf r'^2 K f' dr', all three terms nonnegative (K > 0, K_r < 0, f' >= 0)",
+    "remaining log interval length at most 2.5; int_y^3 f' = rho_o psi_o(y); T_theta >= c r K rho_o psi_o/(qL) > 0 for y < 3",
+    "(A.55): |p_z| <= C q^{-D} K^2 rho_o psi_o, |T_z| <= C r q^{-D} K^2 rho_o psi_o, |T_z/T_theta| <= C q^{1-D} K = C E_pow H(2d/X) (uses 1 - D = A); smallness from (A.17)",
+    "(A.56): a = 2 + 2h + 2 Z H'/H - 2 f'/f > 2 + h, Z = 2d/X, since f'/f < h/4 and -Z H'/H < h/4 for large X_R; a <= 2 + 2h; b_s = 0; v_s = a, P_c - v_s = T_{0,theta}/F > 0, J_c = T_{0,z}/F; directional cone inequality (a-2)(T_z/T_theta)^2 < 2",
+    "psi_o = e^{-4/delta^2} g(delta), g(delta) = 1/(e^{-(1 - delta/2)^{-2}} + e^{-4/delta^2}), g(0) = e; f' = rho_o e^{-4/delta^2} delta^{-3} [8 g(delta) + delta^3 g'(delta)]",
+    "q^{A+1/2} K f_r = 2 E_pow(X) H(2d/X) f'/sqrt(2X); Lemma A.9 with j = 3, c = 4 for the integral terms (relative order delta^3), j = 0 for T_z",
+    "b_theta(0, eta) = 16 rho_o E_pow(X_b) H(2d/X_b) g(0)/sqrt(2 X_b) > 0; H has positive minimum on [0, 2/X_b]",
+    "power cancellation q^{A+1/2} q^{1/2-D-2A} = q^{1-D-A} = 1; L >= 1 - 2h > 0",
+    "limiting direction (1, 0), where the normalized directional quadratic expression equals 2"
+   ],
+   "cites": [
+    "Lemma A.8",
+    "(A.46)",
+    "Lemma A.6",
+    "Lemma A.9",
+    "(A.47)",
+    "(A.12)",
+    "(A.17)",
+    "(A.48)",
+    "(A.49)",
+    "(A.50)",
+    "(A.51)",
+    "(A.52)",
+    "(A.53)",
+    "(A.54)",
+    "(A.55)",
+    "(A.56)",
+    "Lemma 4.5",
+    "(4.1)",
+    "integration by parts"
+   ],
+   "role": "Determines the sign and limiting direction (1,0) of the stress at the outer edge X_b of the annulus, with explicit flat factorization and derivative bounds, giving the admissible stress cone on the terminal collar .5 <= y < 3 where Proposition A.4 stopped."
+  },
+  {
+   "id": "Lemma B.1",
+   "kind": "Lemma",
+   "section": "B",
+   "page": 145,
+   "hypotheses": [
+    "B_rho is the space of sequences of smooth coefficients F(Y, eta) = sum_{alpha>=0} F_alpha(eta) Y^alpha with finite norm ||F||_rho = sup_{alpha,beta} sup_{eta in I} |d_eta^beta F_alpha(eta)|/a_{alpha beta}, where a_{alpha beta} = 20^{-alpha} rho^{-beta} beta! C(alpha+beta, beta)/((alpha+1)^2 (beta+1)^2) (B.4); rho > 0 is a small fixed radius, I a compact parameter interval containing [-1,1].",
+    "Y = Lambda X; D_X = X d_X = Y d_Y; I F = int_0^Y F(Y', eta) dY'; A_X(F) = Y^{-1} I F.",
+    "For nu = 1, 2, J_nu F is the solution G of Y G_YY + nu G_Y = F that extends smoothly to Y = 0 and satisfies G(0) = 0."
+   ],
+   "conclusion": "Multiplication is bounded on B_rho. The coefficients of J_nu are (J_nu F)_{alpha+1} = F_alpha/((alpha+1)(alpha+nu)), (J_nu F)_0 = 0 (B.5). The operator J_nu is bounded on B_rho, as are radial averaging, multiplication by Y, and the operators I and d_eta I. In addition ||J_nu[(d_eta F)(D_X G)]||_rho <= C_rho ||F||_rho ||G||_rho (B.6); the same holds if either derivative is omitted or F is replaced by A_X(F); extra undifferentiated factors can be inserted with one additional algebra constant each.",
+   "constants": [
+    "weight base 20 in a_{alpha beta}",
+    "(B.7) C_sq = 8 sum_{i>=1} i^{-2} bounds sum_{i=0}^N (N+1)^2/((i+1)^2 (N-i+1)^2)",
+    "(B.8) binomial inequality C(i+k, k) C(alpha-i+beta-k, beta-k) <= C(alpha+beta, beta)",
+    "(B.9) a_{alpha beta}/a_{alpha+1,beta} = 20 (alpha+2)^2 (alpha+1)/((alpha+1)^2 (alpha+beta+1)) <= 80",
+    "(B.10) a_{i,k+1}/a_{i+1,k} = (20/rho)(i+1)(i+2)^2 (k+1)^2/((i+1)^2 (k+2)^2) <= 80 (i+1)/rho",
+    "algebra constant C_sq^2 for multiplication; constant 80/rho in (B.6)"
+   ],
+   "cites": [
+    "(B.4)",
+    "(B.5)",
+    "(B.6)",
+    "(B.7)",
+    "(B.8)",
+    "(B.9)",
+    "(B.10)",
+    "Leibniz formula for derivatives of products",
+    "Vandermonde-type binomial (subset counting) inequality",
+    "completeness of the weighted coefficient space"
+   ],
+   "role": "Provides the analytic coefficient-space estimates (algebra, radial inverses J_nu, and the mixed parameter/radial derivative bound) needed for the contraction argument in Proposition B.2."
+  },
+  {
+   "id": "Proposition B.2",
+   "kind": "Proposition",
+   "section": "B",
+   "page": 146,
+   "hypotheses": [
+    "Axis data of Section B.1: Pi_0 from Lemma A.5 (real analytic near [-1,1], even, Pi_0 <= -c P_*^2 f^2, eta Pi_0' > 0 for eta != 0); all schedule parameters fixed including 0 < h <= 10^{-2}; 0 < j_0 <= .05; U_* = 4 eta + j_0, H_* = D eta + d U_*, W_* = 1 - d U_*' - 2 D eta U_*, Z_* = -A(1 - 2 eta U_*) U_* - H_* U_*' - d Pi_0' + 4 A eta Pi_0 (B.1).",
+    "delta_* > 0 chosen so {|Z_*| <= delta_*} avoids a neighborhood of the unique zero eta_0 of H_*, and sigma_* > 0 so small that chi = H_*^2/(H_*^2 + sigma_*^2) > .99 where |Z_*| <= delta_* (B.2), on a slightly larger compact interval I containing [-1,1]; Omega a bounded simply connected complex neighborhood of I on whose closure L and H_*^2 + sigma_*^2 do not vanish and Pi_0 is holomorphic.",
+    "For Lambda >= 1: zeta_* = -L H_*/(H_*^2 + sigma_*^2), xi_0 = Lambda zeta_*, phi_* = exp(Lambda int_0^eta zeta_*(w) dw) (B.3), phi_* > 0 on the real interval.",
+    "Lambda >= Lambda_0 and C >= C_0(Lambda) (the amplitude C chosen after Lambda)."
+   ],
+   "conclusion": "There are Lambda_0 and, for each Lambda >= Lambda_0, an amplitude threshold C_0(Lambda) such that every C >= C_0(Lambda) admits an analytic axis profile with vanishing leading residual stress on 0 <= Y = Lambda X <= 4.1. It has the form phi = phi_* Phi, U = U_* + Lambda^{-1} u, Pi = Pi_0 + Lambda^{-1} I(g^2 Phi^2), g = phi_*/C (B.12), with Phi(0, eta) = 1 and u(0, eta) = 0. The profile is analytic in Y and in eta on a common neighborhood of [0, 4.1] x I. For every fixed r, s >= 0: sup_{[0,4.1] x I} |d_Y^r d_eta^s (Phi - f_0(Y chi), u + Y Z_*/(2L))| <= C_{r,s}/Lambda (B.13), with constants and a smaller common parameter neighborhood independent of sufficiently large Lambda and of C >= C_0(Lambda); in unscaled radial derivatives the bound is C_{r,s} Lambda^{r-1}.",
+   "constants": [
+    "h <= 10^{-2}; 0 < j_0 <= .05; radial interval 0 <= Y <= 4.1 (Y = Lambda X)",
+    "H_*/d = D eta/d + 4 eta + j_0 strictly increasing; unique zero eta_0 in (-1, 0), |eta_0| ~ j_0; -W_* = 3 - 8h eta^2 + (1 - 2h) j_0 eta > 2.8; Z_*(eta_0) >= c j_0 P_*^2 > 0",
+    "chi > .99 where |Z_*| <= delta_* (B.2)",
+    "comparison function f_0(z) = sum_{alpha>=0} (-z/2)^alpha/(alpha! (alpha+1)!); (B.11): for 0 <= z <= 4.1, t = z/2, f_0(z) >= 1 - t/2 + t^2/12 - t^3/144 >= 305719/1152000 > .265 and f_0(z) <= 1 (cubic decreasing on [0, 2.05])",
+    "(B.14): B = -2 D eta A_X(u) - d d_eta A_X(u), W = W_* + Lambda^{-1} B, H_c = H_* + Lambda^{-1} d u, p = I(g^2 Phi^2)",
+    "(B.15): -2L(X phi_XX + 2 phi_X)/phi = S_q, -2L(X U_XX + U_X) = S_n, Pi_X = phi^2/C^2",
+    "rescaled equations 2(Y Phi_YY + 2 Phi_Y) = -chi Phi + Lambda^{-1} R_1, 2(Y u_YY + u_Y) = -Z_*/L + Lambda^{-1} R_2 with L R_1 = [W + h(1 - 2 eta U) + d u zeta_*] Phi + W D_X Phi + H_c Phi_eta and L R_2 = [A(1 - 4 eta U_*) + d U_*'] u - 2A eta Lambda^{-1} u^2 + W D_X u + H_* u_eta + d Lambda^{-1} u u_eta - 4A eta p + d d_eta p - 2 eta D_X p; H_* xi_0/(Lambda L) = -chi",
+    "(B.16): C >= sup_{eta in Omega} |phi_*(eta)| so |g| <= 1 on Omega",
+    "T = J_2 chi/2; ||J_2 F|| <= 80/((b+1)(b+2)) ||F|| for F with no coefficient below degree b; ||T^k|| <= (40 M_chi)^k/(k! (k+1)!); Neumann series sum (-T)^k inverts 1 + T",
+    "Phi_0 = (1+T)^{-1} 1 = f_0(Y chi), u_0 = -Y Z_*/(2L); fixed-point map (Phi, u) -> (Phi_0 + (1+T)^{-1} J_2 R_1/(2 Lambda), u_0 + J_1 R_2/(2 Lambda)); fixed point within C/Lambda of the center",
+    "sum_alpha C(alpha+beta, beta)(R/20)^alpha = (1 - R/20)^{-beta-1}, 4.1 < R < 20; parameter radius below rho(1 - R/20); d_X^r = Lambda^r d_Y^r"
+   ],
+   "cites": [
+    "(4.13)",
+    "(4.4)",
+    "(4.5)",
+    "(B.1)",
+    "(B.2)",
+    "(B.3)",
+    "(B.4)",
+    "(B.9)",
+    "(B.11)",
+    "(B.12)",
+    "(B.13)",
+    "(B.14)",
+    "(B.15)",
+    "(B.16)",
+    "Lemma B.1",
+    "Lemma A.5",
+    "Cauchy's inequality / Cauchy estimates for holomorphic functions",
+    "contraction mapping principle",
+    "Neumann series",
+    "alternating series estimates"
+   ],
+   "role": "Constructs the analytic inner (axis) profile with vanishing leading residual stress and the prescribed pressure datum, as a small perturbation of the explicit comparison profile f_0(Y chi) for large Lambda; this is the regular axis used in the outline step 2 (p.10) and gives the smooth Cartesian field at the axis."
+  },
+  {
+   "id": "Proposition B.3",
+   "kind": "Proposition",
+   "section": "B",
+   "page": 148,
+   "hypotheses": [
+    "Setting of Proposition B.2, with Lambda and then C_0(Lambda) increased if necessary.",
+    "Notation: p_1 = p_{s,1} = X Q_s/L, p_2 = p_{s,2} = X N_s/(L E), n_s = N_s/L; X_0 = 4/Lambda."
+   ],
+   "conclusion": "The normalized azimuthal profile satisfies Phi >= c_0 > 0 on [0, 4.1] x [-1,1], and there its angular source satisfies S_q >= 2.5 + .95 Lambda L chi (B.17). On 0 < X <= 4.1/Lambda: p_1/X >= c_1 > 0, 0 < p_1 <= C_1, and n_s = -2 U_X = Z_*/L + O(Lambda^{-1}) (B.18). At X_0 = 4/Lambda there is a fixed c_ex > 0 with p_1 + p_2^2/p_1 > 2 + c_ex (B.19). The quantities Phi, log Phi, u, p_1, n_s have bounded derivatives in every fixed parameter order, uniformly in subsequent C >= C_0(Lambda); constants for derivatives in X may depend on Lambda.",
+   "constants": [
+    "X_0 = 4/Lambda; (B.17) constants 2.5 and .95; c_ex = .2 works",
+    "(B.20): |D_X log Phi| + |H_* d_eta log Phi| <= C chi + C/Lambda; |H_* chi'| <= 2 ||H_*'||_inf chi",
+    "(B.21): -H_c xi_0 = Lambda L chi + O_{sigma_*}(sqrt chi); -H_c (log phi)_eta >= Lambda L chi - C chi - C sigma_* sqrt chi - C/Lambda >= .95 Lambda L chi - C sigma_*/Lambda; |H_*|/(H_*^2 + sigma_*^2) <= sigma_*^{-1} sqrt chi; Young's inequality allocating .05 Lambda L chi",
+    "source formula S_q = -W l - h(1 - 2 eta U) - H_c (log E)_eta with l = 1 + D_X log Phi; |U| <= 4.1 so |h(1 - 2 eta U)| <= 10 h; W - W_* = O(Lambda^{-1}); -W_* > 2.8, h <= 10^{-2}",
+    "Q_s(X, eta) = int_0^X X' Phi(Lambda X', eta) S_q dX'/(X^2 Phi(Lambda X, eta)); identities p_1 = a = -2 Y Phi_Y/Phi, n_s = -2 u_Y",
+    "endpoint Y = 4, chi > .99: t = 2 chi in (1.98, 2]; f_0(z) + z f_0'(z) <= 1 - t + t^2/4 - t^3/36 + t^4/576 < -.18, value at t = 1.98 equals -75535511/400000000 < -.188; -2 z f_0'/f_0 = 2 - 2(f_0 + z f_0')/f_0 > 2.36; p_1 > 2.3",
+    "chi <= .99: |Z_*| > delta_*, |n_s| >= delta_*/2; |p_2| = C sqrt(2/Lambda) |n_s|/(phi_* Phi); p_2^2/p_1 > 2.3 for large C_0(Lambda)"
+   ],
+   "cites": [
+    "Proposition B.2",
+    "(B.2)",
+    "(B.3)",
+    "(B.11)",
+    "(B.13)",
+    "(B.14)",
+    "(B.17)",
+    "(B.18)",
+    "(B.19)",
+    "(B.20)",
+    "(B.21)",
+    "Young's inequality",
+    "alternating series (Leibniz) estimate"
+   ],
+   "role": "Derives the positive angular source and the strict endpoint shear inequality (B.19) at X_0 = 4/Lambda, plus uniform parameter bounds, so that the axis profile can be continued outward (Lemma B.4, Proposition B.5)."
+  },
+  {
+   "id": "Lemma B.4",
+   "kind": "Lemma",
+   "section": "B",
+   "page": 150,
+   "hypotheses": [
+    "The parameters of the outer and axis profiles are fixed; then Lambda, then C sufficiently large, then t_1 sufficiently small.",
+    "X_0 = 4/Lambda, X_b = 100, X_i = 110; a fixed tbar > 0 with 4 e^{2 tbar} < 4.1; 0 < t_1 <= tbar; y = log(X/X_0); sigma the smooth step (A.5).",
+    "Reference continuation (B.22): agrees with the analytic axis profile for y <= t_1; for t_1 < y < 2 t_1, d_y log phi_r = [1 - sigma((y - t_1)/t_1)] D_X log phi_nat and d_y U_r = [1 - sigma((y - t_1)/t_1)] D_X U_nat; then both fields extended constantly in the logarithmic radial coordinate.",
+    "Reference pressure and Q_s, N_s computed by radial integration from the axis with the datum of Lemma A.5."
+   ],
+   "conclusion": "On [X_0, X_i] x [-1,1]: S_{q,r} >= .94 L Lambda chi + 2.4, l_r <= 1, and v_r := p_{1,r} + p_{2,r}^2/p_{1,r} > 2 + c (B.23). Here p_{1,r} > 0, and p_{1,r} > 3 for X_b <= X <= X_i. For each fixed k, the parameter norms of C E_r, its reciprocal, p_{1,r} and n_{s,r} on [X_0, X_i] have bounds independent of sufficiently large C and of 0 < t_1 <= tbar.",
+   "constants": [
+    "X_0 = 4/Lambda, X_b = 100, X_i = 110, 4 e^{2 tbar} < 4.1",
+    "(B.23) constants .94 and 2.4; p_{1,r} > 3 from X = 100",
+    "radial averaging is a contraction: sup ||A_X(U_r) - U_*||_{C^k} <= sup ||U_r - U_*||_{C^k}",
+    "(B.24): Pi_r(X) - Pi_0 = C^{-2} int_0^X phi_r^2, sup_{X <= X_i} ||Pi_r - Pi_0||_{C^k} <= C_k C^{-2}",
+    "|xi_0| <= L Lambda sigma_*^{-1} sqrt chi; error absorption C sigma_* sqrt chi <= eps Lambda L chi + C_{eps,sigma_*}/Lambda",
+    "S_{n,r} = Z_* + O(Lambda^{-1}) + o_{t_1}(1) + O(C^{-2}); D_X U_nat = O(Lambda^{-1})",
+    "(B.25): D_X p_{1,r} = X S_{q,r}/L - l_r p_{1,r}, D_X n_{s,r} + n_{s,r} = S_{n,r}/L",
+    "comparisons: p_{1,r}(y) >= p_{1,r}(0) e^{-y} + 1.88 chi (e^y - e^{-y}); p_{1,r}(X) >= p_{1,r}(X_0) X_0/X + 1.2 (X - X_0^2/X); on chi > .99 the initial value can be replaced by 2.3 and 1.88 chi > 2.3/2"
+   ],
+   "cites": [
+    "(A.5)",
+    "(B.2)",
+    "(B.17)",
+    "(B.20)",
+    "(B.21)",
+    "(B.22)",
+    "(B.23)",
+    "(B.24)",
+    "(B.25)",
+    "Proposition B.2",
+    "Proposition B.3",
+    "Lemma A.5",
+    "comparison principle for scalar linear ODEs"
+   ],
+   "role": "Bounds the reference continuation (obtained by switching off the logarithmic radial slopes) on [X_0, X_i]: positive source, v_r > 2 + c and p_{1,r} > 3 on [100,110], uniformly in the amplitude C and cutoff width t_1, controlling the subsequent shear reduction in Proposition B.5."
+  },
+  {
+   "id": "Proposition B.5",
+   "kind": "Proposition",
+   "section": "B",
+   "page": 151,
+   "hypotheses": [
+    "The analytic axis profile of Proposition B.2 and the reference continuation of Lemma B.4 are given; a sufficiently large finite C is fixed.",
+    "0 < t_* <= tbar is chosen so small that Lemma B.4 holds uniformly for every reference width 0 < t_1 <= t_*; V_max is a finite upper bound for v_r over this reference family (may depend on C, not on t_1).",
+    "0 < kappa_0 < 1/2 is chosen small compared to V_max and the family comparison constants; then t_1 is chosen small."
+   ],
+   "conclusion": "The analytic axis profile can be continued to X_i with positive E, remaining unchanged for X <= X_0. Its stress has the factorization T_0 = e_a B_0, where the scalar factor e_a vanishes to infinite order at X_0 and the smooth vector coefficient B_0 is nonzero there. The admissible stress cone holds on a first collar, and the strict relaxed cone condition holds on the rest of (X_0, X_i]. At X_i: a = .8, D_X U = 0, and p_1 > 2.",
+   "constants": [
+    "(B.26) on 0 < y < t_1: e_a = (1 - kappa_0) sigma(y/t_1), kappa = 1 - e_a, a = kappa p_{1,r}, D_X U = -kappa X n_{s,r}/2, d_y log phi = -kappa p_{1,r}/2",
+    "(B.27): d_y(log phi - log phi_r) = e_a p_{1,r}/2, d_y(U - U_r) = e_a X n_{s,r}/2; differences O(y e_a)",
+    "(B.28): p_s - p_{s,r} = O(y e_a), E_r/E = 1 + O(y e_a)",
+    "(B.29): t_s = p_{2,r} E_r/(p_{1,r} E), v_s = kappa v_r + O(y e_a), P_c = v_r + O(y e_a), J_c = O(y e_a); no inverse power of kappa_0",
+    "P_c - v_s >= c e_a, P_c > 2 + c, (v_s - 2)_+ J_c^2 < 2 (P_c - v_s)^2 for 0 < y <= t_1 (ratio at most C y^2); first collar with v_s > 2 + c/2",
+    "e_a = e^{-t_1^2/y^2} g_a(y) near zero, g_a smooth positive; Lemma A.9 with c = t_1^2, j = 0: e_a(y)^{-1} int_0^y e_a b du = y^3 B(y, eta); classes e_a y^3 C^inf (fields) and e_a y^6 C^inf (moments, pressure)",
+    "(B.30): T_0 = e_a B_0(y, eta), B_0(0, eta) = F(X_0, eta) p_{s,r}(X_0, eta) != 0; B_0.(-t_s, 1) = 0 and B_0.(1, t_s) > 0 at the edge; 2(B_0.(1,t_s))^2 - (v_s - 2)(B_0.(-t_s,1))^2 > 0",
+    "(B.31): |T_0| >= c e^{-t_1^2/y^2}, |d^I T_0| <= C_I e^{-t_1^2/y^2} y^{-N_I}",
+    "continuation: kappa = kappa_0 through reference cutoff and constant-slope interval; O(t_1 + kappa_0) differences; P_c > 2 + c/2, v_s < 1",
+    "at X_b = 100: axial prescription multiplied by beta decreasing 1 -> 0 on a short log interval, P_c = p_{1,r} + beta p_{2,r}^2/p_{1,r} + o(1) > 2, v_s < 1; then a interpolated convexly from kappa_0 p_{1,r} to .8 with D_X U = 0, arranging kappa_0 sup p_{1,r} < .8; v_s = a <= .8",
+    "final constant-slope interval: a = .8, l = .6, S_q > 1 with constant contribution .6(-W_*) > 1.68; barrier at p_1 = 2: D_X p_1 = X S_q/L - .6 p_1 > X - 1.2 > 0"
+   ],
+   "cites": [
+    "Lemma B.4",
+    "Proposition B.2",
+    "Proposition B.3",
+    "Lemma A.9",
+    "Lemma 4.5",
+    "(4.11)",
+    "(4.16)",
+    "(A.5)",
+    "(B.26)",
+    "(B.27)",
+    "(B.28)",
+    "(B.29)",
+    "(B.30)",
+    "(B.31)",
+    "(B.20)",
+    "(B.21)"
+   ],
+   "role": "Continues the axis profile past X_0 while smoothly switching on a nonzero leading residual stress with a flat factor (T_0 = e_a B_0), keeping the admissible cone on a first collar and the relaxed cone up to X_i = 110, where the slope is normalized (a = .8, D_X U = 0, p_1 > 2) for the joining."
+  },
+  {
+   "id": "Corollary B.6",
+   "kind": "Corollary",
+   "section": "B",
+   "page": 153,
+   "hypotheses": [
+    "Setting and continuation of Proposition B.5 (with Proposition B.2 analytic axis profile); t_c > 0 with t_c < t_1 and 4 e^{t_c} < 4.1."
+   ],
+   "conclusion": "There is such a t_c such that the functions E/sqrt(2X), U, V_0/X, Pi on [0, X_0 e^{t_c}] x [-1,1] are smooth in (X, eta) through X = 0 and analytic in eta on one complex neighborhood. Every fixed radial derivative of these four functions has that same parameter neighborhood and finite bounds on a smaller neighborhood. On X_0 < X <= X_0 e^{t_c}, the admissible stress cone condition and the factorization (B.30) hold. All subsequent profile modifications are supported strictly to the right of X_0 e^{t_c}.",
+   "constants": [
+    "t_c < t_1, 4 e^{t_c} < 4.1",
+    "neither t_c nor radial derivative bounds are asserted uniform as C grows and the transition widths shrink"
+   ],
+   "cites": [
+    "Proposition B.2",
+    "Proposition B.5",
+    "(B.26)",
+    "(B.30)"
+   ],
+   "role": "Reserves an analytic-in-eta inner collar rectangle (X_0, X_0 e^{t_c}] with the cone condition and flat stress factorization, protected from all later modifications; used in Corollary B.10."
+  },
+  {
+   "id": "Lemma B.7",
+   "kind": "Lemma",
+   "section": "B",
+   "page": 154,
+   "hypotheses": [
+    "The data for the outer profile and the axis, Lambda, and a finite parameter order k are fixed.",
+    "l_i = log(C E(X_i, eta)) and G_i = U(X_i, eta) at X_i = 110; omega_fin is the sum of the logarithmic radial lengths of the final axial cutoff and the interpolation of a to .8 in the proof of Proposition B.5.",
+    "The continuations are those constructed in Proposition B.5; kappa_0 in (0, 1/2) is the shear-reduction parameter of (B.26)."
+   ],
+   "conclusion": "(B.32): ||l_i||_{C^k_eta} <= B_k and ||G_i - U_*||_{C^k_eta} <= C^nat_k/Lambda + C^join_k(Lambda)(t_1 + kappa_0 + omega_fin). The constant C^nat_k is independent of both Lambda and sufficiently large C (axis data fixed). The bounds B_k and C^join_k(Lambda) may depend on Lambda but are independent of sufficiently large C and of smaller radial transition widths.",
+   "constants": [
+    "L_0 = log(X_i/X_0); M_k, N_k amplitude-independent bounds for p_{1,r}, n_{s,r} from Lemma B.4",
+    "actual logarithmic slope -kappa p_{1,r}/2 with 0 < kappa <= 1 before the final interpolation, varying convexly to -.4 afterwards",
+    "||log phi(X_i)||_{C^k} <= ||log phi_* + log Phi(4, .)||_{C^k} + (1/2)(M_k + .8) L_0; add (1/2) log(2 X_i)",
+    "U changes: at most X_0 e^{tbar} N_k t_1/2 (first axial transition), X_i N_k kappa_0/2 (remainder and its transition to zero); axis approximation error C^nat_k/Lambda"
+   ],
+   "cites": [
+    "(B.13)",
+    "(B.26)",
+    "(B.32)",
+    "Lemma B.4",
+    "Proposition B.5"
+   ],
+   "role": "Bounds the profile values at X_i independently of the amplitude C, so that the transition length T_sh of (B.33) can be fixed before C, which is what lets C push X_R outward and make the inner moment discrepancies small in Proposition B.8."
+  },
+  {
+   "id": "Proposition B.8",
+   "kind": "Proposition",
+   "section": "B",
+   "page": 155,
+   "hypotheses": [
+    "The profile constructed in Proposition B.5 is continued by (B.34): for y_i = log(X/X_i), log E = -log C + y_i/10 + (1 - sigma(y_i/T_sh)) l_i + sigma(y_i/T_sh) log f, U = G_i, with T_sh >= 20 ||sigma'||_inf (B_0 + ||log f||_inf) (B.33) chosen before C via Lemma B.7.",
+    "X_R = X_i (C P_*)^{10}, x = X/X_R; X_sep = X_i e^{T_sh} is the endpoint of the transition (B.34), fixed before the amplitude.",
+    "The amplitude C is sufficiently large, followed by sufficiently small activation transitions (t_1, kappa_0, final widths)."
+   ],
+   "conclusion": "The profile can be continued to log x = -5, preserving the strict relaxed cone condition, so that its fields, pressure Pi, and all five radial moment functions M, I, J, S, C_p agree exactly with those of the reference inner profile (A.7). It can then follow the reference outer radial profile without changing its prescribed pressure datum or the subsequent values of Q_s, N_s.",
+   "constants": [
+    "(B.33) T_sh >= 20 ||sigma'||_inf (B_0 + ||log f||_inf)",
+    "(B.34) transition; l = .6 + T_sh^{-1} sigma'(y_i/T_sh)(log f - l_i) in [.55, .65], so a in [.7, .9] and b_s = 0; S_q > 1 along the transition; barrier D_X p_1 = X S_q/L - l p_1 > 0 at p_1 = 2 preserves p_1 > 2",
+    "gradient bounds: -H_c l_i' >= L Lambda chi - C chi - C sigma_* sqrt chi - C/Lambda - o(1); -H_c (log f)' = 2 eta H_c/(1 + eta^2) >= -C j_0^2 - C/Lambda - o(1); l >= .55; -W close to -W_* > 2.8",
+    "X_R = X_i (C P_*)^{10}; X_sep = X_i e^{T_sh}; (B.38) x_sep = e^{T_sh}/(C P_*)^{10}; require x_sep < e^{-8}",
+    "normalized moments: M = X_R Mhat, I = X_R^{3/2} Ihat, J = X_R^{3/2} Jhat, S = X_R Shat, Hhat = sqrt(2x) E, C_p = int_0^x E^2/(2 xi) d xi, Pi = Pi_0 + C_p; (B.35): W = 1 - 2 D eta Mhat/x - d Mhat_eta/x, Q_s = -W + [(1-h) Ihat - D eta Ihat_eta - d Jhat_eta + 2(h - D) eta Jhat]/(x Hhat), N_s = -W U + D(Mhat - eta Mhat_eta)/x + 4h eta Shat - d Shat_eta + 4A eta Pi - d Pi_eta [reconstructed from garbled display]; X_R cancels",
+    "restoration/correction interval R = [e^{-8}, e^{-5}]; ideal E_0 = P_* f x^{1/10}; Q_min = min Q_{s,0} > 0, e_* = min E_0 > 0, w_* = 1 + max |N_{s,0}/(E_0 Q_{s,0})|",
+    "(B.36) tolerance: Q_s >= Q_min/2, E >= e_*/2, |a - .8| <= .1, |N_s/(E Q_s)| <= w_*, |b_s| <= .1/(1 + w_*); hence v_s <= .9 + .01/.7 < 1",
+    "(B.37): G = Q_s - b_s N_s/(a E) >= 6 Q_s/7 >= 3 Q_min/7, P_c = X_R x G/L; P_c > 2 by increasing X_R",
+    "(B.39) on [0, X_sep]: ||Mhat||_{C^k} + ||Shat||_{C^k} <= C_k x_sep, ||Ihat||_{C^k} + ||Jhat||_{C^k} <= C_k C^{-1} x_sep^{3/2}, ||C_p||_{C^k} <= C_k C^{-2}; C E = O(sqrt X) near zero; reference pressure increment at x_sep is (5/2) P_*^2 f^2 x_sep^{1/5} = O(C^{-2})",
+    "after X_sep, (B.34) is exactly the ideal profile since C^{-1} f (X/X_i)^{1/10} = P_* f x^{1/10}",
+    "restore G_i to 4 eta on -8 < log x < -7 keeping E ideal; discrepancy G_i - 4 eta small via j_0, Lambda, then (B.32)",
+    "moment bumps on -6 < log x < -5: two in U, three in E; rows J -> J - 4 eta I, S -> S - 8 eta M; U weights 1, f x^{3/5}; E weights x^{1/2}, f x^{1/10}, f x^{-9/10} (alpha = 1/10 case of Corollary A.3)"
+   ],
+   "cites": [
+    "(A.7)",
+    "(A.25)",
+    "(4.15)",
+    "(4.16)",
+    "(B.32)",
+    "(B.33)",
+    "(B.34)",
+    "(B.35)",
+    "(B.36)",
+    "(B.37)",
+    "(B.38)",
+    "(B.39)",
+    "(B.20)",
+    "(B.1)",
+    "Lemma B.7",
+    "Proposition B.5",
+    "Corollary A.3",
+    "Lemma A.2",
+    "Lemma 4.4",
+    "Lemma A.5"
+   ],
+   "role": "Matches the five cumulative radial integrals (and pressure) of the continued axis profile exactly to the reference inner profile at log x = -5, with normalized inverse bounds independent of X_R, so the outer profile of Appendix A (and its Q_s, N_s) is attached unchanged via Lemma 4.4."
+  },
+  {
+   "id": "Corollary B.10",
+   "kind": "Corollary",
+   "section": "B",
+   "page": 157,
+   "hypotheses": [
+    "The analytic axis profile of Proposition B.2 is given; the finite parameters are chosen in the order (B.40) of Remark B.9: M_d, T_d, P_*, lambda, h -> matching tolerance, j_0 -> delta_*, sigma_*, Lambda -> (B_k), T_sh -> C, X_R -> kappa_0, t_1, widths of final transitions."
+   ],
+   "conclusion": "The analytic axis profile admits a smooth continuation with E > 0 for X > 0, matching the reference outer radial profile at log(X/X_R) = -5 with exact fields, pressure, and radial moment functions. It has vanishing leading residual stress through X_0, followed by an inner collar on which the profile remains analytic in eta and satisfies the admissible stress cone condition with the flat factor (B.30). It satisfies the strict inequalities of the relaxed cone condition thereafter up to the matching point. Its finite parameters can be chosen in the order (B.40).",
+   "constants": [
+    "matching radius log(X/X_R) = -5",
+    "parameter order (B.40)",
+    "Remark B.9: outer choices make C_pre sqrt(lambda)(1 + log(1/lambda)) small, then h << lambda, h << e^{-T_d}; the radial frequency for cone realization (Appendix C) is chosen only after all these"
+   ],
+   "cites": [
+    "Proposition B.5",
+    "Proposition B.8",
+    "(B.34)",
+    "Corollary B.6",
+    "(B.30)",
+    "(B.40)",
+    "Remark B.9",
+    "Proposition B.2"
+   ],
+   "role": "The completed inner-to-outer connection (outline step 3, p.10): joins the analytic axis profile to the outer reference profile with exact moment matching, providing the leading profile input to Appendix C and Theorem 4.6."
+  }
+ ],
+ "hard_pages": [
+  {
+   "pages": "129-130",
+   "why": "The stage-by-stage profile schedule of Section A.2: many nested constants (T_d = e^{M_d}+10, T_w = 60 log(1/lambda), pulse length 13/lambda, bumps of width .3 at 13/lambda-3 and 13/lambda-1, four reserved subintervals, sigma(v/.02), 30 log(1/lambda) hold, 4 log(1/h) hold, rho_o = c_o h, Q_p in (A.13)) had to be tracked to state Proposition A.4; the (A.11) display is partly garbled."
+  },
+  {
+   "pages": "131-133",
+   "why": "Section A.3 (closing the moments): the small-quantity bookkeeping (A.14) lambda^30 / lambda^29, the e^{-c/lambda} inverse bound (A.15), the h^8 / h^6 factors (A.17), and the amplitude equation (A.19) whose constant term is garbled in the extraction ('-1 -e^-26 / 2 4'); I reconstructed -(1-e^{-26})/4 from int_0^13 e^{-2 xi}/2 d xi and checked the bracket values (below -.047 at .9, above .038 at 1.2, slope >= .36) are consistent with K_b in (.20, .25]."
+  },
+  {
+   "pages": "135-136",
+   "why": "The pulse cone test in A.5: deriving w = 2 R_b - C_d d_xi R_b + o(1) from (A.28)-(A.30), the bound C_d <= 2 + o(1), and the margins .74 and 1.68 obtained as sup(-2R^2 + 2.41R) = .726 and sup(-3.5R^2 + 4.82R) = 1.659 (verified numerically); the origin of the coefficients 2.41 and 4.82 (from d_xi R_b <= 1.2 and C_d <= 2) is only implicit."
+  },
+  {
+   "pages": "142-144",
+   "why": "Proposition A.10: the integration by parts giving (A.54), the q-power cancellation q^{A+1/2} q^{1/2-D-2A} = 1 (checked), the application of Lemma A.9 with j = 3, c = 4 to get relative order delta^3, and the explicit b_theta(0, eta) = 16 rho_o E_pow(X_b) H g(0)/sqrt(2 X_b), where the factor 16 (= 2 x 8 from f' = rho_o e^{-4/delta^2} delta^{-3}[8g + ...]) is not spelled out."
+  },
+  {
+   "pages": "147-148",
+   "why": "Proposition B.2 proof: the remainders R_1, R_2 in the rescaled equations, the Neumann series bound ||T^k|| <= (40 M_chi)^k/(k!(k+1)!) from (B.9), and the identification (1+T)^{-1} 1 = f_0(Y chi) (I verified the recursion c_{alpha+1} = -chi c_alpha/(2(alpha+1)(alpha+2)) reproduces f_0); the role of the complex neighborhood in bounding g = phi_*/C when phi_* grows exponentially in Lambda."
+  },
+  {
+   "pages": "149-150",
+   "why": "Proposition B.3 endpoint alternative: the alternating-series bounds at Y = 4 (f_0 + z f_0' <= 1 - t + t^2/4 - t^3/36 + t^4/576 < -.18, checked at t = 1.98 to be -.1888) and the two-region argument (chi > .99 vs |Z_*| > delta_*) yielding c_ex = .2; the display of (B.11) is garbled ('1 - t/2 + t^2/12 - t^3/144' had to be reconstructed and checked against 305719/1152000)."
+  },
+  {
+   "pages": "152-153",
+   "why": "Proposition B.5: the flat-factor bookkeeping (classes e_a y^3 C^inf and e_a y^6 C^inf via Lemma A.9 with c = t_1^2), the order in which kappa_0 and t_1 are chosen relative to V_max, and the final barrier argument D_X p_1 = X S_q/L - .6 p_1 > X - 1.2 > 0 (which needs X > 1.2, satisfied since X in [100,110])."
+  },
+  {
+   "pages": "155-156",
+   "why": "Proposition B.8: the normalized identities (B.35) for W, Q_s, N_s are heavily garbled in the extraction and had to be reconstructed; the tolerance (B.36)/(B.37) chain (v_s <= .9 + .01/.7 < 1, G >= 6 Q_s/7 from |b_s| <= .1/(1+w_*)) and the smallness (B.39) driven by x_sep = e^{T_sh}/(C P_*)^{10} < e^{-8}."
+  }
+ ],
+ "could_not_determine": [
+  {
+   "id": "Proposition A.4",
+   "field": "constants",
+   "why": "The constant term of the amplitude equation (A.19) is garbled in the banked text ('Amp^2 K_b - 1 - e^-26 ... 2 4'). I recorded it as -(1 - e^{-26})/4, which is what int_0^{13} e^{-2 xi} (1/2) d xi gives and is consistent with the stated bracket values, but this is my reconstruction, not a verbatim reading."
+  },
+  {
+   "id": "Proposition A.4",
+   "field": "constants",
+   "why": "On p.137 the displayed bound 'h int_y^inf e^{v-y} E(v)^2 dv <= ... = 3E(y)^2' is garbled; the integral h int_0^inf e^{-3hs/2} ds equals 2/3, so the intended constant is presumably (2/3)E(y)^2. I recorded both."
+  },
+  {
+   "id": "Proposition B.8",
+   "field": "constants",
+   "why": "The normalized identities (B.35) for W, Q_s, N_s are badly garbled in the extraction (subscripts and hats displaced); the formulas recorded are my best reconstruction by analogy with the tail representations in the proof of Lemma A.8 and (4.16), which is not in my pages."
+  },
+  {
+   "id": "Lemma B.7",
+   "field": "conclusion",
+   "why": "The second line of (B.32) is garbled ('<= C^nat_k(Lambda)/Lambda + C^join_k (t_1 + kappa_0 + omega_fin)' with displaced superscripts). I recorded ||G_i - U_*||_{C^k} <= C^nat_k/Lambda + C^join_k(Lambda)(t_1 + kappa_0 + omega_fin), consistent with the proof text and the following sentence about which constants depend on Lambda."
+  },
+  {
+   "id": "Theorem 3.1",
+   "field": "cites",
+   "why": "The proof of Theorem 3.1 is not in my pages (the outline attributes it to Proposition 9.9 together with Lemma 5.4, Proposition 5.5, Proposition 9.6, Lemma 9.7 and the heat exterior of Lemma A.6); the cites recorded are those named in the preamble, not read from the proof."
+  },
+  {
+   "id": "Theorem 1.1",
+   "field": "cites",
+   "why": "The proof of Theorem 1.1 is in Section 10 (not my pages); cites are taken from the Section 3 outline (pp. 7, 16-17) and the tail of the Corollary 10.6 proof visible on p.126."
+  },
+  {
+   "id": "Proposition A.4",
+   "field": "hypotheses",
+   "why": "The precise definitions of 'admissible stress cone', 'strict relaxed cone condition', and the quantities a, b_s, v_s, P_c, J_c, t_s, Q_s, N_s, W, L, d, l come from Section 4 ((4.11), (4.16), (4.20), (4.21), Lemma 4.5), which is not in my pages; I used only the sufficient test (A.24) and the identities as displayed in the appendices."
+  },
+  {
+   "id": "Proposition B.2",
+   "field": "hypotheses",
+   "why": "The profile equations (4.13) and the Cartesian smoothness statements (4.4)-(4.5) are cited but not in my pages; the rescaled form (B.15) is recorded as displayed."
+  }
+ ],
+ "stopped_at_page": null
+}
