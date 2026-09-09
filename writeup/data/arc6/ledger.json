@@ -2,12 +2,13 @@
  "schema": "arc6_ledger_v1",
  "leg": 425,
  "cursor": {
-  "read_through_page": 61,
+  "read_through_page": 72,
   "sections_done": [
    "1-2",
    "3",
    "4",
-   "5"
+   "5",
+   "6"
   ]
  },
  "entries": [
@@ -580,6 +581,157 @@
     "Theorem 4.6(ii),(iv),(vi)"
    ],
    "role": "THE BACKGROUND. Delivers (u_B, p_B): exactly divergence-free, residual = negative divergence of an annular stress plus a FLAT error, leading stress T_0 recovered to O(q^2h) in the weighted norm (5.43) -- which is what Proposition 7.5 (positive representation of T_0) and 7.6 (signed corrections for the rest) consume -- and the leading profile preserved EXACTLY on I_mean, which Section 8's mean corrections need."
+  },
+  {
+   "id": "Lemma 6.1",
+   "kind": "Lemma",
+   "section": "6",
+   "page": 65,
+   "hypotheses": [
+    "the label set Gamma = {(l, a, sigma)} of (6.8) -- dyadic band l >= l_0, slow box index a in I_l, family sign sigma",
+    "the slow supports K_gamma of (6.9), with squared partitions sum chi_l(q)^2 = 1 and sum_a chi_{l,a}^2 = 1 of mesh S_*^{-3}",
+    "the band coverings Y_i = J_g^i Y (6.5) with i(l) = floor(log_{T_g}(Q^{-1-h}/S_*))"
+   ],
+   "conclusion": "There exist centers c_gamma in T^2 and a radius r_0 > 0, common to all labels and independent of the band, such that the enlarged rectangles R^{abs,+}_gamma of (6.10) are injectively parametrized and: gamma != gamma', K_gamma meets K_gamma' ==> R^{abs,+}_gamma and R^{abs,+}_gamma' are DISJOINT (6.13).",
+   "constants": [
+    "Delta_max, an integer bound on |i(l) - i(l')| for |l - l'| <= 4, (6.14)",
+    "the finite colouring of the bounded-degree interaction graph",
+    "rational colour centers c_nu satisfying c_mu != J_g^Delta c_nu mod Z^2 for 0 <= Delta <= Delta_max (6.15)",
+    "r_0"
+   ],
+   "cites": [
+    "(6.5)",
+    "(6.8)",
+    "(6.9)",
+    "(6.10)",
+    "(6.13)",
+    "(6.14)",
+    "(6.15)",
+    "invertibility of J_g^Delta - I for Delta > 0"
+   ],
+   "role": "THE SEPARATION LEMMA: waves whose physical supports overlap are put in disjoint auxiliary rectangles, so all cross-label products vanish identically after evaluation on the phase map. It is what reduces the quadratic interactions to same-label harmonics."
+  },
+  {
+   "id": "Lemma 6.2",
+   "kind": "Lemma",
+   "section": "6",
+   "page": 67,
+   "hypotheses": [
+    "a neighbourhood U of a point (z,t) with 0 < q < q_big whose band indices L(U) differ by at most four",
+    "i_0 = min_{l in L(U)} i(l) and the common torus coordinate H = pi_{i_0}(Y) (6.17)"
+   ],
+   "conclusion": "Each change H -> Y_i = J_g^{Delta_l} H has uniformly bounded derivative factors; R^H_gamma consists of 14^{Delta_l} <= 14^{Delta_max} disjoint lifts of R_gamma; Haar averages on the absolute, common and band tori agree for pullbacks (6.19); radial integration at fixed (z,t), torus translation, averaging and directional Fourier inversion on zero-mean functions preserve common-torus descent and introduce no new dyadic band.",
+   "constants": [
+    "|det J_g| = 14",
+    "Delta_l = i(l) - i_0 in {0..Delta_max} (6.18)"
+   ],
+   "cites": [
+    "(6.5)",
+    "(6.14)",
+    "(6.17)",
+    "(6.18)",
+    "(6.19)",
+    "(6.20) compatibility on overlaps"
+   ],
+   "role": "Lets fields from up to five overlapping dyadic bands be ADDED on one torus H without changing their physical values, and certifies that every operation the correction cycle uses (radial integration, averaging, N^{-1}) stays on that torus."
+  },
+  {
+   "id": "Lemma 6.3",
+   "kind": "Lemma",
+   "section": "6",
+   "page": 68,
+   "hypotheses": [
+    "the labels Gamma and mesh boxes B_{l,a} of (6.8) with mesh S_l^{-3} in each chart coordinate"
+   ],
+   "conclusion": "sup over (r,z,t) of #{gamma : (r,z,t) in K_gamma} <= C, independent of band and point. For a fixed band l, compact chart set B, and bounded normalized radial interval I_R: #{(l,a,sigma) : B_{l,a} meets B} <= C_B S_l^9 and sup_{Z,T} #{(l,a,sigma) : B_{l,a} meets I_R x {Z} x {T}} <= C S_l^3. Same bounds for fixed-factor enlargements.",
+   "constants": [
+    "C",
+    "C_B",
+    "the exponents 9 (three coordinates) and 3 (one coordinate)"
+   ],
+   "cites": [
+    "(6.8)",
+    "(6.9)",
+    "used after (6.21) to bound radial-integration label sums by O(S_ref^3)"
+   ],
+   "role": "The counting lemma: any sum over labels along a radial integration costs at most a POLYNOMIAL power of S_* = l^2, which the classes M_alpha, W_alpha, S_alpha absorb in their S_*^{b} factors."
+  },
+  {
+   "id": "Definition 6.4",
+   "kind": "Definition",
+   "section": "6",
+   "page": 69,
+   "hypotheses": [
+    "a smooth coefficient f = f(R, Z, T, H) on the active shell X_a < X < X_b; a fixed correction stage j; the flat edge weight zeta and capped log-distance delta of (6.23)"
+   ],
+   "conclusion": "f in M_alpha (mean coefficients) iff f descends to each applicable common torus with representatives satisfying (6.20), extends smoothly by zero outside the active shell, is theta-independent, and for every I in N^5 there are C_{j,I}, b_{j,I}, d_{j,I} with |d^I f| <= C_{j,I} eps^alpha S_*^{b_{j,I}} zeta^{b_{j,I}} delta^{-d_{j,I}} (6.24). F = F(Z,T) in S_alpha (moments) iff |d^I_{Z,T} F| <= C_{j,I} eps^alpha S_*^{b_{j,I}} (6.25); moments are normalized with the radial measure included (6.26).",
+   "constants": [
+    "eps = Q^h",
+    "S_* = l^2",
+    "zeta(X) = exp(-a_a/log^2(X/X_a) - a_b/log^2(X_b/X)), delta = min{1, log(X/X_a), log(X_b/X)} (6.23)",
+    "C_{j,I}, b_{j,I}, d_{j,I} -- may depend on stage and derivative order, uniform in band, label, copy, point"
+   ],
+   "cites": [
+    "(6.19)",
+    "(6.20)",
+    "(6.23)-(6.26)",
+    "Theorem 4.6(iv)"
+   ],
+   "role": "The bookkeeping class for everything that is angularly averaged: its size is a power of eps, its radial vanishing is a power of zeta, and derivatives may cost powers of S_* and delta^-1. The whole residual-improvement induction (Section 9) is stated in these classes."
+  },
+  {
+   "id": "Definition 6.5",
+   "kind": "Definition",
+   "section": "6",
+   "page": 70,
+   "hypotheses": [
+    "a label gamma in Gamma and a nonzero harmonic m; the phase Phi_gamma = p_gamma theta + phi_gamma(R,Z,T,H) with k = ceil(eps^{-1/2}) and k p_gamma a nonzero integer (6.27); the envelope 0 < P_v <= 1 on 0 <= v <= L_s; the domains E_gamma, Omega_gamma, Omega^cut_gamma of (6.28)"
+   ],
+   "conclusion": "a_{gamma,m} in W_alpha (labelled wave amplitudes) iff its local formulas agree on common lifts, satisfy (6.20), are theta-independent, supported in Omega_gamma, extend smoothly by zero across slow/transverse boundaries and both shell edges, and satisfy |d^I a_{gamma,m}| <= C_{j,I} eps^alpha S_*^{b_{j,I}} sqrt(zeta) delta^{-d_{j,I}} P_v for 0 <= v <= L_s (6.29). A cut-off coefficient additionally has support in Omega^cut_gamma. A real wave w = sum a_nu e^{i k m Phi} is in W_alpha iff every collected A_{gamma,m} is.",
+   "constants": [
+    "k = ceil(eps^{-1/2}) (carrier frequency)",
+    "p_gamma",
+    "the finite band-independent harmonic set H_j",
+    "chi_g (transverse cutoff), psi (time cutoff, (6.16))",
+    "sqrt(zeta) -- HALF the mean weight, so that a product of two waves lands in the mean class"
+   ],
+   "cites": [
+    "(6.11)",
+    "(6.16)",
+    "(6.20)",
+    "(6.27)-(6.29)",
+    "(7.3)",
+    "(7.12)"
+   ],
+   "role": "The bookkeeping class for the oscillating part. The choice sqrt(zeta) is deliberate: (6.31) needs a_gamma,m b_gamma,-m in M_{alpha+beta}, and sqrt(zeta)^2 = zeta."
+  },
+  {
+   "id": "Proposition 6.6",
+   "kind": "Proposition",
+   "section": "6",
+   "page": 71,
+   "hypotheses": [
+    "the classes M_alpha, W_alpha, S_alpha of Definitions 6.4-6.5 at a fixed stage",
+    "actual waves with the time cutoff applied (for the cross-label statement)"
+   ],
+   "conclusion": "Each class is closed under finite sums at fixed exponent; M_alpha M_beta subset M_{alpha+beta}, M_alpha W_beta subset W_{alpha+beta} (6.30); same-label products a_{gamma,m} b_{gamma,m'} lie in W_{alpha+beta} with harmonic m+m' if m+m' != 0 and in M_{alpha+beta} if m+m' = 0 after temporal cutoff (6.31); distinct-label actual waves have (d^I w_gamma)(d^J w_gamma') = 0; and the operators act as d_{R,Z,T}: C_alpha -> C_alpha, D_r: C_alpha -> C_{alpha - kappa_s}, D_z = eps d_Z: C_alpha -> C_{alpha+1}, Q^{1+h} N_abs = c_{i_0} N_{i_0}: C_alpha -> C_alpha, -eps d_T: C_alpha -> C_{alpha+1} (6.32). Products, differentiation and angular averaging preserve finite band-independent harmonic sets.",
+   "constants": [
+    "kappa_s = 10^{-5} (the radial derivative loss, from D_r's fast term M_i ~ eps^{-kappa_s} S_*^{-rho_g})",
+    "the inequalities zeta^2 <= zeta, zeta^{3/2} P_v <= sqrt(zeta) P_v, zeta P_v^2 <= sqrt(zeta) P_v"
+   ],
+   "cites": [
+    "(6.6)",
+    "(6.13)",
+    "(6.19)",
+    "(6.20)",
+    "(6.24)",
+    "(6.29)",
+    "(6.30)-(6.32)",
+    "Lemma 6.1",
+    "Lemma 6.2",
+    "(3.9)"
+   ],
+   "role": "THE ALGEBRA OF THE CLASSES. Every term of the residual at every stage is a product of class members acted on by these operators, so (6.30)-(6.32) is the rule-set by which Section 9 tracks the exponent of every term. The one loss, D_r costing eps^{-kappa_s}, is why kappa_s = 10^-5 is tiny and why the stage gain 1/10 in sigma_j has to beat it."
   }
  ],
  "hard_pages": [
@@ -602,6 +754,11 @@
    "pages": "57-59",
    "section": "5.4 (Lemma 5.4)",
    "why": "The lemma is deliberately abstract -- a differential polynomial (5.31) with coefficient bounds (5.32) on fixed regions, a residual hypothesis (5.33) with a flat remainder -- because it is reused in Section 9. Reading it as stated, before seeing its second use, the four hypotheses look over-engineered; the order of choices at the end ((m, N), then J, then the neighbourhood) is the whole point and is one sentence. The inequality (5.39) with its d-1 power of (1 + |U^[J]| + |e|) is where a reader has to trust the product rule on monomials of degree up to d."
+  },
+  {
+   "pages": "62-64",
+   "section": "6.1 (dyadic charts and the auxiliary torus)",
+   "why": "The whole apparatus is fixed in eight lines of (6.2)-(6.6): an integer matrix J_g = [[3,1],[1,5]] with irrational eigenvalues Lambda_g = 4 - sqrt2, T_g = 4 + sqrt2 and eigenvectors v_r = (1, -b_g), v_t = (b_g, 1); a physical evaluation map Y = v_r r^{d_r} + v_t t on T^2 with d_r = 2((1+h) rho_g - h kappa_s); a band covering index i(l) chosen so that T_g^i ~ Q^{-1-h}/S_*. The two derivative scales that fall out -- the fast TIME term c_i ~ S_*^{-1} and the fast RADIAL term M_i ~ eps^{-kappa_s} S_*^{-rho_g} -- are the entire reason the construction can have rapid temporal variation with tiny radial-derivative cost, and the paper says so in one sentence after (6.6). Why the eigenvalue ratio rho_g = log Lambda_g / log T_g enters d_r, and why kappa_s = 10^-5 is exactly the exponent D_r loses in (6.32), took me two readings and a hand computation of T_g^i Q^{1+h} and Lambda_g^i Q^{d_r/2} from (6.5). The Diophantine bound (6.7), |v_r . n| >= c/(1+|n|), via the algebraic conjugate, is the other quiet load-bearing line: it is what makes the directional inverses in Section 8 lose only finitely many torus derivatives."
   }
  ]
 }
