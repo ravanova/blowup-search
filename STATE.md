@@ -27,29 +27,24 @@ direction check (seven questions, in every integration commit, per unit); **§3j
   `CLAY_OBLIGATIONS.md` §6 names the two obligations with **no known method**.
 - **Clay odds ~0.05%**, unmoved. **No `L1 → L4` link has EVER moved, in over 410 legs.** **The cheapest unit that could move one: NO SUCH UNIT IS KNOWN** — `CLAY_OBLIGATIONS.md` §6 names two obligations with **no known method**, every landed unit is Tier 2, and nothing in `OPTIONS.md` is priced to deliver a certified result.
 
-## ⚠⚠ ARC 6 — RAN 2026-09-09 IN §3f SOLO, legs 417–422. **SIX GATES ANSWERED. NO WALL MOVED. NO `L1→L4` LINK MOVED. CLAY ~0.05%.**
+## ⚠⚠ ARC 6 — SECOND PASS, **§3g CONDUCTOR MODE**, legs 423–430, 2026-09-09. **Wave sizing 5 by user ruling (§3g, §67).** First pass (legs 417–422) retired verbatim → `WALLS_HISTORY.md` §STATE-ARC6-SOLO.
 
-Charter `writeup/5_outpaced/TECHNICAL_OUTPACED.md` §5. **Every gate below is `UNVERIFIED` under §3f
-rule 1 — one session measured and wrote its own answers.** Findings, corrections and ceilings:
-`writeup/CORRECTIONS.md` **§61–§65**; the quartet is `writeup/6_adjudicated/`.
+Charter: reproduce the OpenAI construction — read all 166 pp., re-derive the spine, instantiate it in
+our machinery, check the Lean. `CORRECTIONS.md` **§66–§68**. **Solo answers are `UNVERIFIED`; only a
+fresh agent that never saw the construction can mark anything `VERIFIED`.**
 
 | unit | gate answer, in its own words | artefact |
 |---|---|---|
-| **`U1`** 417 ACQUIRE | **`DIFFERS-AS-FOLLOWS`** — 8 agreements, 7 differences. **`D3`: `(D)` IS CLAIMED**, Cor 10.6, so `TECHNICAL_OUTPACED.md` §5's *"(D) is the nearest **unclaimed** statement"* is **false on the manuscript's text**. §61 | `arc6_acquire_v1.json` |
-| **`U2`** 418 LEAN | (a) **`NOT-ESTABLISHED`**, blocker measured: the mathlib olean cache host is **egress-denied**; (b) **it IS Fefferman (C)+(D), byte-identical to DeepMind's Formal Conjectures**, and **strictly weaker than Thm 1.1**; (c) **source-level YES, kernel-level NOT ESTABLISHED**, 0 `sorry` in a 580-module closure; (d) **theorem fully, argument not measurably** — 15 of 25 cited labels exist in NEITHER manuscript. §62 | `arc6_lean_v1.json` |
-| **`U3`** 419 SKELETON | **`PARTLY`** — the forcing DOES buy the escape (§3.5, *"we set `f = R(u,p)`"*), and (5) costs 3 lines while **buying compact support costs 78.9% of the manuscript**. Leg 381 SPLIT: *"buys no escape"* wrong, *"not a shortcut"* right. §63 | `arc6_skeleton_v1.json` |
-| **`U4`** 420 INSTANTIATE | **`YES` on the measurement** (`−1.498218` vs pre-committed `−1.51`, tol `0.05`, spread `2.1e-07`) — **and the pre-committed CONJUNCTION is UNMET**: control `C2` failed because **my own pre-registration's formula omitted axial diffusion**. Not re-scored. §64 | `arc6_instantiate_v1.json` |
-| **`U5`** 421 **DOES W4 MOVE?** | **`NO`.** (a1) energy CONVERGES ✓, (a2) blows up by construction ✓, **(a3) FALSE twice**: core residual exactly `−1.500000`; and on a counterfactual granting an exact profile the cutoff force is **LOGARITHMICALLY UNBOUNDED** (`b = 0.743203`/decade, log `R²` beats power `R²`). **`W4` STANDS. No escalation raised.** §65 | `arc6_w4_port_v1.json` |
-| **`U6`** 422 LAND | this row, the quartet, `reports/ORCH_STATE.md`, and these retirements | `writeup/6_adjudicated/` |
+| **`R0`** 423/427 CORRECT | **A6-D is dead** — (D) is claimed, Cor 10.6 (§66); wave sizing 4→5 recorded beside §3g's own reason (§67) | — |
+| **`R1`** 424 EXTRACT | **`NO-AND-HERE-IS-THE-DIFF`** strictly, **`MATCH`** after six named typographic rules; **79** statements indexed, two overrides named | `arc6/extract_manifest.json` |
+| **`R2`** 425 READ (solo) | (a) **`YES` 79/79** (b) **`YES`** on hyp/concl/cites, two Definitions carry no constants (c) **13 hard-page notes**, hardest pp. 107–111 / 74–77 / 129–137. **`UNVERIFIED`**; five fresh shards (leg 428) re-read it — **IN FLIGHT** | `arc6/ledger.json` |
+| **`R3`** 426 DAG+SPINE | acyclic **`YES`** ×3 passes; complete **`NO-AND-HERE-ARE-THE-DANGLING-NODES`**: `Remark B.9`, 134 labels in unnumbered prose, and **Props 9.5/9.6 never cited downstream**. Spine through §4/§7/§9: **refuted by citation, confirmed by equation** (§68). Prereg 4/8 | `arc6/dag.json` |
 
-**TWO NEW MEASUREMENTS THIS REPOSITORY DID NOT HAVE.** `α = −1.000004` on two rays — **an
-independent confirmation of the `α = 1` pin to `4e-6`**, by a route sharing no step with `L2′`/
-`V-W4`'s literature census. And **`δ = 1.974126`**, the far-field **correction** exponent, never
-measured here before; the annulus admissibility question reduces to it.
-
-**`STATE.md` OPEN ITEM 3 IS DISCHARGED.** Fefferman **(8)** and **(9)** are read at primary
-(`U1`). **(9) asks the force for decay in TIME ONLY** and explicitly replaces (4) and (5). Confirms
-leg 390's machine-read: **(D) carries no condition (7)**.
+**WAVE 1 (dispatched 2026-09-09, before this row was written — a §3g step-1 defect, recorded).**
+Five R2 shard readers A–E in worktrees, each writing only `writeup/data/arc6/ledger/shard_<X>.json`;
+merge → `ledger/merged.json`, reconciled against the solo ledger; disagreements are gate-(d)
+findings. Composition floor: the Conductor's serial `R3` and `R5`(i)–(ii) run in the same wave.
+**Next:** `R5`(i) leading-order vortex (SERIAL, prereg first), then `R4` fan-out on the 58-node spine.
 
 ## THE LANES — **RE-RANKED 2026-08-19 AT THE STOP, on what is measured NOW** (order unchanged; Lane L DEMOTED); re-earned per unit under §3i
 

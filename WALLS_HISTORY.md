@@ -1011,3 +1011,30 @@ sweep stops ~3 decades short; last two increments **positive**) — **not adjudi
 **`W4` clause (b) NOT affected** — `PB2` closes it on Tsai Thm 2 hypotheses measured directly;
 `c_mod`/`J`/`curl F` appear nowhere in its artefact (Conductor searched). **`W4` UNMOVED. No `L1→L4`
 link moved either way. Nothing here says a blow-up profile does or does not exist.**
+
+
+## §STATE-ARC6-SOLO — arc 6's first-pass (legs 417–422) block, retired VERBATIM from `STATE.md` 2026-09-09 (leg 426, arc 6 conductor pass, wave 1) under §3j
+
+## ⚠⚠ ARC 6 — RAN 2026-09-09 IN §3f SOLO, legs 417–422. **SIX GATES ANSWERED. NO WALL MOVED. NO `L1→L4` LINK MOVED. CLAY ~0.05%.**
+
+Charter `writeup/5_outpaced/TECHNICAL_OUTPACED.md` §5. **Every gate below is `UNVERIFIED` under §3f
+rule 1 — one session measured and wrote its own answers.** Findings, corrections and ceilings:
+`writeup/CORRECTIONS.md` **§61–§65**; the quartet is `writeup/6_adjudicated/`.
+
+| unit | gate answer, in its own words | artefact |
+|---|---|---|
+| **`U1`** 417 ACQUIRE | **`DIFFERS-AS-FOLLOWS`** — 8 agreements, 7 differences. **`D3`: `(D)` IS CLAIMED**, Cor 10.6, so `TECHNICAL_OUTPACED.md` §5's *"(D) is the nearest **unclaimed** statement"* is **false on the manuscript's text**. §61 | `arc6_acquire_v1.json` |
+| **`U2`** 418 LEAN | (a) **`NOT-ESTABLISHED`**, blocker measured: the mathlib olean cache host is **egress-denied**; (b) **it IS Fefferman (C)+(D), byte-identical to DeepMind's Formal Conjectures**, and **strictly weaker than Thm 1.1**; (c) **source-level YES, kernel-level NOT ESTABLISHED**, 0 `sorry` in a 580-module closure; (d) **theorem fully, argument not measurably** — 15 of 25 cited labels exist in NEITHER manuscript. §62 | `arc6_lean_v1.json` |
+| **`U3`** 419 SKELETON | **`PARTLY`** — the forcing DOES buy the escape (§3.5, *"we set `f = R(u,p)`"*), and (5) costs 3 lines while **buying compact support costs 78.9% of the manuscript**. Leg 381 SPLIT: *"buys no escape"* wrong, *"not a shortcut"* right. §63 | `arc6_skeleton_v1.json` |
+| **`U4`** 420 INSTANTIATE | **`YES` on the measurement** (`−1.498218` vs pre-committed `−1.51`, tol `0.05`, spread `2.1e-07`) — **and the pre-committed CONJUNCTION is UNMET**: control `C2` failed because **my own pre-registration's formula omitted axial diffusion**. Not re-scored. §64 | `arc6_instantiate_v1.json` |
+| **`U5`** 421 **DOES W4 MOVE?** | **`NO`.** (a1) energy CONVERGES ✓, (a2) blows up by construction ✓, **(a3) FALSE twice**: core residual exactly `−1.500000`; and on a counterfactual granting an exact profile the cutoff force is **LOGARITHMICALLY UNBOUNDED** (`b = 0.743203`/decade, log `R²` beats power `R²`). **`W4` STANDS. No escalation raised.** §65 | `arc6_w4_port_v1.json` |
+| **`U6`** 422 LAND | this row, the quartet, `reports/ORCH_STATE.md`, and these retirements | `writeup/6_adjudicated/` |
+
+**TWO NEW MEASUREMENTS THIS REPOSITORY DID NOT HAVE.** `α = −1.000004` on two rays — **an
+independent confirmation of the `α = 1` pin to `4e-6`**, by a route sharing no step with `L2′`/
+`V-W4`'s literature census. And **`δ = 1.974126`**, the far-field **correction** exponent, never
+measured here before; the annulus admissibility question reduces to it.
+
+**`STATE.md` OPEN ITEM 3 IS DISCHARGED.** Fefferman **(8)** and **(9)** are read at primary
+(`U1`). **(9) asks the force for decay in TIME ONLY** and explicitly replaces (4) and (5). Confirms
+leg 390's machine-read: **(D) carries no condition (7)**.
