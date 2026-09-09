@@ -11,7 +11,7 @@ tiny Clay "lottery ticket." Each note states its own honest ceiling.
 
 ## How this folder is organized
 
-Documents are grouped into five **numbered arc folders** (chronological). The
+Documents are grouped into six **numbered arc folders** (chronological). The
 shared **build layer stays central**: [`data/`](data/) (committed inputs),
 [`figures/`](figures/) (rebuilt outputs), and the two cross-arc builders
 [`build_figures.py`](build_figures.py) / [`curate_evidence.py`](curate_evidence.py).
@@ -28,7 +28,9 @@ writeup/
   2_phase1_2d/     Route-A Phase-1 2D Boussinesq fitness search      figs 6–7
   3_spikes/        numerics upgrade + Spikes 0/1 (dynamic rescaling) figs 8–11
   4_p2_lottery/    P2 — the 1D Hou–Luo lottery-ticket legs           figs 12–35
-  5_outpaced/      the conclusion — READ THIS FIRST                  (no figs)
+  5_outpaced/      the target statement, answered elsewhere          (no figs)
+  6_adjudicated/   arc 6 — the claim read at primary, and our own
+                   wall asked under its own test                     fig112
 ```
 
 ## The rigor ladder (the project's framing)
@@ -46,7 +48,39 @@ writeup/
 
 ## Read in this order
 
-### ▶ Arc 5 — **START HERE.** The conclusion ([`5_outpaced/`](5_outpaced/))
+### ▶ Arc 6 — **START HERE.** The adjudication ([`6_adjudicated/`](6_adjudicated/))
+
+**2026-09-09, legs 417–422, `ORCHESTRATION.md` §3f SOLO — one instance, no subagents, no paired
+verifier. EVERY GATE IS `UNVERIFIED` and says so in its own words.**
+
+Arc 5 recorded that this programme's target statement was answered elsewhere. Arc 6 is what this
+repository did about it: **read the claim at primary, census the Lean, re-derive the construction,
+and ask our own wall under our own wall's test.**
+
+0. [BLOG_ADJUDICATED.md](6_adjudicated/BLOG_ADJUDICATED.md) — *"We read the proof of the century.
+   Here is what we can actually say about it."*
+1. [TECHNICAL_ADJUDICATED.md](6_adjudicated/TECHNICAL_ADJUDICATED.md) — six gates, each in its own
+   pre-committed wording, with what each does **not** establish stated beside it.
+   Rebuild: `.venv/bin/python writeup/6_adjudicated/adjudicated_evidence.py`
+   (it runs all five per-unit evidence scripts and draws **fig112**).
+
+**The five gate answers, in one line each:** `U1` **`DIFFERS-AS-FOLLOWS`** — the manuscript
+**claims (D)**, which arc 5 had recorded as untouched, and (D) is `W4`'s only unbroken break
+clause. `U2` the Lean's top-level statement **is Fefferman (C) and (D), byte-identical to
+DeepMind's independent formalisation**, `sorry`-free across a 580-module closure at source level —
+but **the build is `NOT-ESTABLISHED`** on an egress-denied host, and the *argument*, as opposed to
+the *theorem*, is **not measurably formalised**. `U3` **`PARTLY`** — the forcing does buy the
+escape, and buying compact support costs **78.9% of the manuscript**. `U4` **`YES` on the
+measurement** (`−1.498218` against a pre-committed `−1.51`) **and the conjunction UNMET**, because
+this arc's own pre-registration had a wrong formula and its own control caught it. `U5` **`NO` —
+`W4` STANDS**, with the reason measured twice, the second time as a **logarithm** that a power fit
+reads as *bounded*.
+
+**No wall moved. No `L1 → L4` link moved. Clay stays ~0.05%.**
+
+---
+
+### Arc 5 — the target statement, answered elsewhere ([`5_outpaced/`](5_outpaced/))
 
 **Written 2026-09-09, after the run stopped.** On 2026-09-08 a 166-page
 manuscript and a Lean project claimed finite-time blowup for the **forced** 3D
@@ -607,6 +641,11 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | file | backs |
 |---|---|
 | `summary_metrics.json` | SUMMARY / headline numbers |
+| `arc6_acquire_v1.json` | Arc 6 `U1` — provenance and hashes for the 166-page manuscript, OpenAI's Euler companion, Fefferman's Clay statement and the Lean project, plus the **verbatim** theorem, corollary and Fefferman conditions (8)/(9), read at primary here for the first time. Rebuilt by `arc6_acquire_evidence.py` |
+| `arc6_lean_v1.json` | Arc 6 `U2` — four gate clauses answered separately: the build blocker, the byte-identical-to-DeepMind diff, the `sorry`/axiom census with the import closures computed here, and the cross-reference census showing the Lean was written against a different draft. Rebuilt by `arc6_lean_evidence.py` |
+| `arc6_skeleton_v1.json` | Arc 6 `U3` — the exact-rational scaling ledger, all 23 quantities re-derived and compared against the manuscript's printed values, plus the page accounting behind **78.9%**. Rebuilt by `arc6_skeleton_evidence.py` |
+| `arc6_instantiate_v1.json` | Arc 6 `U4` — the measured residual scaling with its pre-committed prediction and tolerance, the controls, and the **post-hoc** corrected formula kept out of the gate. Rebuilt by `arc6_instantiate_evidence.py` |
+| `arc6_w4_port_v1.json` | Arc 6 `U5` (**fig112**) — the port onto route 4's own witness: `M1`–`M6`, the log classifier, the `UNDER-RESOURCED` stencil, and `W4`'s break clause (a) quoted verbatim. Rebuilt by `arc6_w4_port_evidence.py` and by `6_adjudicated/adjudicated_evidence.py` |
 | `arc5_outpaced_v1.json` | Arc 5 (no figs) — the external record at UNVERIFIED status, this programme's measured throughput at PRIMARY, and the derived arithmetic. **Two provenance classes, not interchangeable; the file says which is which.** Rebuilt by `5_outpaced/outpaced_evidence.py` |
 | `ga_vs_random.json`, `stage3_resolution.json`, `promoted_candidates.jsonl`, `nongenericity.json`, `stage3_6_rough.json`, `blowup_curve.json` | Arc 1 (figs 1–5) |
 | `phase1_spike.json`, `phase1_axis_screen.json`, `phase1_gate4.json`, `phase1_gsustained.json`, `phase1_gate4_reform.json` | Arc 2 (figs 6–7) |

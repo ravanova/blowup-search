@@ -33,7 +33,76 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — CONDUCTOR mode. **RUN STOPPED BY USER DIRECTIVE 2026-08-19 — NO SUCCESSOR SCHEDULED.** 2026-08-19
+## LIVE — §3f SOLO. **ARC 6 RAN AND LANDED 2026-09-09, legs 417–422. NO SUCCESSOR SCHEDULED.**
+
+**Mode:** `ORCHESTRATION.md` **§3f SOLO** — one instance, one task at a time. **No subagents were
+spawned; the Task/Agent tool was not used.** The four-slot contract, the DM, the orchestrator and
+the paired verifiers stayed suspended. §3f's three replacement rules were the whole defence:
+
+1. **VERIFICATION IS A FRESH SESSION.** **Every one of the six gates is `UNVERIFIED` and says so in
+   its own gate answer.** Nothing arc 6 produced is recorded as verified.
+2. **PRE-COMMIT THE NEXT UNIT.** Each journal closes with §"PRE-COMMITMENT OF THE NEXT UNIT". The
+   arc-6 order was never re-ranked, so no re-ranking commit was owed and none was made.
+3. **NO MORE THAN TWO CONSECUTIVE AUDIT UNITS.** `U1`/`U2` were the two; **`U3`, `U4`, `U5` are
+   construction units** and each shipped a module or a runner, a test battery with planted controls
+   firing both ways, and an artefact.
+
+**Six gates, answered in their pre-committed wording. `UNVERIFIED`, all of them.**
+
+| unit | leg | gate answer | §CORRECTIONS |
+|---|---|---|---|
+| `U1` ACQUIRE | 417 | **`DIFFERS-AS-FOLLOWS`** — 8 agreements, 7 differences; **`(D)` is CLAIMED** | §61 |
+| `U2` LEAN | 418 | (a) **`NOT-ESTABLISHED`** on a denied host · (b) **it IS (C)+(D), byte-identical to DeepMind's** and **strictly weaker than Thm 1.1** · (c) **source YES / kernel NOT ESTABLISHED** · (d) **theorem fully, argument not measurably** | §62 |
+| `U3` SKELETON | 419 | **`PARTLY`** — the forcing buys the escape; compact support costs **78.9%** | §63 |
+| `U4` INSTANTIATE | 420 | **`YES` on the measurement, conjunction UNMET** — my own prereg's formula was wrong | §64 |
+| `U5` **DOES W4 MOVE?** | 421 | **`NO`. `W4` STANDS.** (a3) fails twice; the second is a **logarithm** | §65 |
+| `U6` LAND | 422 | this block, the quartet, the retirements | — |
+
+**THE ARC'S OWN DEFECTS, BANKED RATHER THAN SMOOTHED.** `U4`'s pre-registration omitted the
+axial-diffusion term and **its own planted control caught it**; the conjunction is reported UNMET
+and **not re-scored** against the corrected formula. `U5`'s control `K1` **failed** its
+pre-committed tolerance (`0.060` vs `0.05`) and is reported as failed, with the diagnosis beside it
+rather than instead of it. `U2`'s first `sorry` count was **4** and its own evidence script returned
+**5**; the larger number is banked with the split. `U5`'s `M6` stencil is **`UNDER-RESOURCED`**
+(spread `0.857` vs `0.025`) and **the conclusion is not drawn from it**.
+
+**WHAT ARC 6 DID NOT DO, said plainly.** It did **not** read manuscript §§4–9 or Appendices A–C.
+It did **not** compile the Lean — the mathlib olean cache host is **egress-denied (502 to CONNECT)**,
+reported and not routed around; the source build was started and left running. It did **not** rule
+any escalation, and **it raised none** — the charter reserves one for a `W4` `YES` and the answer
+was `NO`. It did **not** touch statement (D) as a target: that is Lane T's, deferred by a user
+ruling.
+
+**⚠ ESCALATION ROW 1 HAS A NEW MEASURED FACT AND IS STILL NOT RULED.** `U1` found the manuscript
+**claims (D)** (Corollary 10.6, every `ν > 0`). `TECHNICAL_OUTPACED.md` §5's A6-D premise —
+*"(D) is the nearest **unclaimed** Fefferman statement"* — is **false on the manuscript's own
+text**. **That is a measurement added to the packet, not a ruling on it.** §3h rule 1 stands: a ban
+or criterion is superseded by a measurement, never by a decision — and an entity that both raises
+and rules an escalation has defeated the mechanism.
+
+**HEADROOM at this landing (§3j).** `STATE.md` 23,548 / 24,576 · `WALLS.md` 32,157 / 32,768 ·
+`OPTIONS.md` 20,961 / 24,576 · this LIVE block / 8,192. **Four blocks were RETIRED VERBATIM** to
+make room, not compacted: `STATE.md`'s `⚠2026-08-18` `W4` block, `WAVE 9`, `WAVE 7`, `WAVE 6`
+(→ `WALLS_HISTORY.md` §STATE-W4-2026-08-18, §STATE-WAVE9, §STATE-WAVE7-EFE, §STATE-WAVE6-V5), and
+two `WALLS.md` `W4` paragraphs (→ §W4-L6-LADDER, §W4-JDIV). **Context has not been summarised.**
+
+**THE DOCUMENTATION CONTRACT (§6), and the one item that is N/A.** ① runners:
+`experiments/arc6_instantiate_v1.py`, `experiments/arc6_w4_port_v1.py`, and the module
+`solver/arc6_residual_ledger.py` (`capabilities.py` row 58, `test_arc6_residual_ledger.py`).
+② five curated JSONs in `writeup/data/`. ③ `writeup/6_adjudicated/` — `BLOG_ADJUDICATED.md`,
+`TECHNICAL_ADJUDICATED.md`, and `adjudicated_evidence.py`, which **runs all five per-unit evidence
+scripts** and cross-checks every prose number. ④ **`fig112`, registered in `build_figures.py` and
+carrying executable assertions** — arc 5 recorded a deliberate figure gap; **arc 6 does not have
+one.** ⑤ `U1`'s artefact has no runner, and that is **stated rather than skipped**: it fetches and
+hashes, it computes nothing.
+
+**NEXT.** Nothing is scheduled and nothing is in flight. The board's live items are the **five open
+escalations above**, unchanged in number, with row 1 now carrying a measured fact. **The Lean
+source build was left running and its final state is not known here** — a future session should
+re-check it and, if it contradicts `arc6_lean_v1.json`'s gate (a), record that as a
+`CORRECTIONS.md` entry rather than editing the gate.
+
+## Superseded LIVE block — CONDUCTOR mode, run stopped 2026-08-19; demoted 2026-09-09 at arc 6's landing (§3j). **Verbatim. Nothing edited.**
 
 **This run is over.** The wind-down directive (`writeup/prompts/WINDDOWN_2026-08-19.md`) arrived
 mid-wave and forbade dispatching anything new, forbade `TaskStop`, and suspended §9e's successor

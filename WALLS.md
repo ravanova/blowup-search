@@ -182,40 +182,42 @@ the 800-iteration cap (§46; `V-W6` had upheld the withdrawn version). The SS-co
 opposite. **W4's ONLY UNBROKEN CLAUSE IS (c)**, UNTESTED NOT CLOSED, deferred with Lane T. Retired
 verbatim 2026-08-19 → `WALLS_HISTORY.md` §W4-SCOPE.
 
-**⚠⚠ AND THE LADDER THAT `L6`'s `NO` RESTS ON HAS NEVER BEEN MEASURED AT AN ADEQUATE BUDGET —
-`V-W7` (leg 412), `CORRECTIONS.md` §51. THIS IS AN UNDER-CLAIM, NOT A WRONG NUMBER: every figure
-below was already banked, in two different units, and no one divided one by the other.**
-`L6` refined four rungs with **every rung stopped at 800 iterations**: `ρ` `1.6986514 → 1.6138112`,
-**`−4.994561%`**. `L6-b` then raised the cap `×25` at `n_dof` **FIXED**: `1.6138112 → 1.5048519`,
-**`−6.751678%`**. **One budget step moved the objective `×1.3518` of the ENTIRE refinement ladder.**
-So the ladder differences rungs at a cap that dominates them — *"not decreasing under refinement"*
-is not established, in either direction. **It can also INVERT:** `J3` (`Nr = 16`, 2400 dof) reads
-`1.6218750` at 800 and needs **`7.2153%`** to fall below `J4@20,000 = 1.5048519`; **`6.7517%` is
-measured one rung up at MORE dof. Margin `0.46` percentage points.** `L6`'s `NO` is NOT overturned —
-it is left resting on an ordering never measured where the ordering means anything. → **`L6-e`**,
-one rung, `J3` to 20,000, **~20–35 core-h**, gate pre-committed at §51, **wave 9**. `W4` UNMOVED.
+**⚠⚠ THE LADDER `L6`'s `NO` RESTS ON WAS NEVER MEASURED AT AN ADEQUATE BUDGET — `V-W7` (leg 412),
+`CORRECTIONS.md` §51.** An **under-claim, not a wrong number**: one budget step moved the objective
+`×1.3518` of the entire refinement ladder, and `J3` needs `7.2153%` where `6.7517%` is measured one rung
+up — **margin `0.46` percentage points.** `L6`'s `NO` is not overturned; it rests on an ordering never
+measured where the ordering means anything. Retired VERBATIM 2026-09-09 → `WALLS_HISTORY.md`
+§W4-L6-LADDER. **`W4` UNMOVED.**
 
-**⚠⚠⚠ AND THE FUNCTIONAL ITSELF IS A DIVERGENT INTEGRAL — `L-JVER` (leg 409, `2acaa9e`),
-`CORRECTIONS.md` §52, Conductor's landing audit §53. THE LARGEST STRUCTURAL FINDING IN THIS RECORD.**
-An independently built `J` agrees with `L6`'s to `1.0e-4`/`1.2e-4` at both **minimisers** and
-disagrees by **42.9%** at a non-minimiser (`78%` at a random point). **Neither program is miscoded:**
-the unit's own operator on **`L6`'s nodes and `L6`'s weights** reproduces `J_L6` to `1e-14` at all
-four points, P3 included (`X9`). The whole gap is the **quadrature rule** — so
-`J(c) = ∫‖W(·,s)‖_{L^{3/2}} ds` is **logarithmically divergent**, at `r→∞` (`w_s ~ ∂_s A/r²`
-survives the DSS annihilation) and at `r→0` (`l = 1`, `Δ²(r²Y₁ₘ) ~ r⁻²`). **Every finite `J` in this
-record is a value of `L6`'s 72-node, `r ∈ [5.5e-4, 7.27e3]` truncation, not of the functional.**
-**Conductor, at primary and going further:** the divergence is present **AT THE MINIMISER** —
-`+6.226e-5`, `+6.246e-5`, `+6.212e-5` per decade over `r_max` `1e6→1e14`, **three bands agreeing to
-<1%**, so `ρ = 1.6138` has **no limit**; the same signature `PB2` measured for `∫|U|³`. **BUT THE
-SIGN IS POSITIVE:** less truncation ⟹ LARGER `ρ` ⟹ FURTHER from `ρ < 1.45`. **`L6`'s `NO` and
-`L6-b`'s `NO` SURVIVE — the numbers do not.** And §52 does **NOT** subsume §51: the divergence
-coefficient is **×130 smaller** than the last ladder step, so the ladder's flatness is still §51's
-iteration cap. **Two independent defects in the same four numbers.** `L5`'s `c_mod = 869.288`
-FLAGGED (its ρ-exponent `0.000109` "saturation" is exactly what a log divergence fits to, and its
-sweep stops ~3 decades short; last two increments **positive**) — **not adjudicated; sweep owed.**
-**`W4` clause (b) NOT affected** — `PB2` closes it on Tsai Thm 2 hypotheses measured directly;
-`c_mod`/`J`/`curl F` appear nowhere in its artefact (Conductor searched). **`W4` UNMOVED. No `L1→L4`
-link moved either way. Nothing here says a blow-up profile does or does not exist.**
+**⚠⚠⚠ AND THE FUNCTIONAL ITSELF IS A DIVERGENT INTEGRAL — `L-JVER` (leg 409), `CORRECTIONS.md` §52,
+Conductor's landing audit §53. THE LARGEST STRUCTURAL FINDING IN THIS RECORD.** `J(c)` is
+**logarithmically divergent** at both ends, so **every finite `J` in this record is a value of `L6`'s
+72-node truncation, not of the functional**, and `ρ = 1.6138` has **no limit**. **BUT THE SIGN IS
+POSITIVE** — less truncation ⟹ larger `ρ` ⟹ further from `ρ < 1.45` — so `L6`'s and `L6-b`'s `NO`s
+**survive; the numbers do not.** `W4` clause (b) **NOT affected** (`PB2` closes it on Tsai Thm 2
+hypotheses measured directly). Retired VERBATIM 2026-09-09 → `WALLS_HISTORY.md` §W4-JDIV.
+**`W4` UNMOVED. No `L1→L4` link moved either way.**
+
+**⚠ 2026-09-09 — CLAUSE (a) WAS PORTED AGAINST AND IT DOES NOT BREAK: `U5` (leg 421, arc 6, §3f
+SOLO), `CORRECTIONS.md` §65, `writeup/data/arc6_w4_port_v1.json`.** The residual-absorption
+mechanism of OpenAI's manuscript was applied **literally** to this repository's own banked witness
+(`solver/dssp_biot_savart.py`), with **every advantage granted** — `p ≡ 0` (smooth, and free since
+`f` absorbs it), `f :=` whatever is left so `(u_cut, 0)` solves forced NS **exactly**, and the
+cutoff on the **vector potential** so `∇·u_cut = 0` by construction. **(a1) energy CONVERGES to
+`≈53.41`** (increments falling geometrically, ratios `~0.31`); **(a2) blows up by construction**;
+**(a3) FAILS TWICE.** Route 4's own core residual is exactly **`−1.500000`** (three-level spread
+`3.47e-07`) because route 4 **has no exact profile**. And on a **counterfactual granting one**, the
+cutoff-generated force alone is **LOGARITHMICALLY UNBOUNDED** — per-decade increments
+`0.7479/0.7419/0.7412/0.7435`, log fit `b = 0.743203` at `R² = 0.9999976` **beating** the power
+fit's `−0.005321` at `R² = 0.9999293` — so `∂_t f ~ τ^{-1}` and `f ∉ C∞_c`, failing Fefferman **(5)**.
+**A log flagged IN ADVANCE in the pre-registration, and the flag is what caught it** (third time:
+§52–§54, `PB2`). **NOT claimed:** that every `α = 1` profile does this — the log traces to `arcsinh`
+in this witness's own `G4`. **What IS structural:** `α = 1` makes the annulus values `τ`-independent
+at leading order, so admissibility there **reduces to the profile's subleading far-field term**, now
+measured for the first time here at **`δ = 1.974126`**. Two more numbers land beside it:
+**`α = −1.000004`** on two rays, an **independent confirmation of the pin** to `4e-6` by a route
+sharing no step with `L2′`/`V-W4`. **`W4` STANDS. Clause (a) not broken. No escalation raised —
+the charter reserves one for a `YES`. No `L1→L4` link moved; Clay ~0.05%.**
 
 ## W5 — Persistence and stability under localisation
 
