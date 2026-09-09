@@ -5008,3 +5008,43 @@ unaffected and still unruled**; Lane T's deferral is a user ruling and this corr
 touch it. An entity that both raises and rules an escalation has defeated the mechanism.
 
 **No wall moved. No `L1 → L4` link moved. Clay ~0.05%.**
+
+
+---
+
+## §67 — `R0` under the CONDUCTOR charter (leg 427, arc 6): **wave sizing raised 4 → 5 by user ruling; the conductor charter is applied FORWARD to units already landed under the solo charter, not by redoing them.**
+
+**Unit:** `R0`, arc-6 conductor charter (`ORCHESTRATION.md` §3g), DOCS, SERIAL. The charter arrived
+2026-09-09 while `R3` (leg 426) was mid-flight under the solo charter, with `R0`–`R2` already landed
+on `main` as legs 423–425 (§66, `leg_424.md`, `leg_425.md`).
+
+### The ruling, recorded where the charter says to record it
+
+`ORCHESTRATION.md` §3g's *Wave sizing* paragraph now carries a dated block: **five workers at a
+time, maximum, plus the Conductor**, and — beside it, verbatim and unedited — §3g's own reason for
+the 2–4 cap: *"above 4 the audit becomes the bottleneck and the Conductor's context becomes the
+constraint the whole mode exists to protect."* If the audit becomes the bottleneck, that is a
+measurement for `reports/ORCH_STATE.md`, not a reason to shrink the wave silently.
+
+### How the conductor charter is applied to units already landed
+
+The charter says *"begin at R0"* and *"do not re-derive facts already established"* (system
+contract). Both are honoured by applying the new mode **forward**:
+
+| unit | solo status | under the conductor charter |
+|---|---|---|
+| `R0` charter correction | landed, §66 | **done**; this section adds the wave-size ruling the new charter requires |
+| `R1` acquire and extract | landed, leg 424, SERIAL in both charters | **unchanged** |
+| `R2` read all 166 pages | landed, leg 425, one reader, `UNVERIFIED` | **re-read by five fresh shard agents** (A–E, the charter's page split) who are given the banked page text and the R1 statement index and are **forbidden to open the solo ledger**. Their shards are merged into `writeup/data/arc6/ledger/merged.json` and **reconciled against the solo ledger**; every disagreement is a gate-(d) finding about the paper or about a read, and the section says which. The solo `ledger.json` is **not edited** (banked artefacts get correction records, not edits). |
+| `R3` DAG and spine | mid-flight, leg 426, SERIAL in both | continues as the Conductor's own unit |
+| `R4`–`R7` | not started | as the conductor charter specifies |
+
+**Composition floor (§3g).** The `R2` fan-out is five audit units. The floor is met by the
+Conductor's own serial units running in the same wave: `R3` (mathematics) and `R5`(i)–(ii) (the
+leading-order vortex and its residual stress — the `W4` attack), which are SERIAL by the charter and
+cannot be delegated anyway. Stated here so that a wave of five auditors is not read as a wave of
+pure audit.
+
+**What this section does NOT do.** It does not re-number legs 423–425, does not re-open their gates,
+and does not mark anything `VERIFIED`: the solo answers stay `UNVERIFIED` until a fresh agent that
+never saw them reproduces them. **No wall moved. No `L1 → L4` link moved. Clay ~0.05%.**
