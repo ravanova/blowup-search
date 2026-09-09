@@ -1,0 +1,135 @@
+{
+  "schema": "arc6_extract_manifest_v1",
+  "leg": 424,
+  "unit": "R1",
+  "pdf": {
+    "path": "Papers/openai-navier-stokes.pdf",
+    "sha256": "0e779481c4da40bd28d1e642e1d8ca57447d129610df28dfa5a11e9af8ae228f",
+    "bytes": 2959204,
+    "pages": 166
+  },
+  "extractor": {
+    "library": "pymupdf",
+    "version": "1.28.2",
+    "mode": "text, sort=True"
+  },
+  "outputs": {
+    "manuscript_pages.jsonl": {
+      "sha256": "3418c38c48ba796f858dae7395d48dc0a1e703fdadf1509035225dd238d88422",
+      "bytes": 876552,
+      "records": 7727
+    },
+    "manuscript_pages.txt": {
+      "sha256": "fe32a61fac197fa073bb2e9305ab0b22c2442c6ab775daafe029c0982941a8a2",
+      "bytes": 599585
+    }
+  },
+  "statement_index": {
+    "file": "statement_index.json",
+    "count": 79,
+    "by_kind": {
+      "Theorem": 3,
+      "Definition": 5,
+      "Lemma": 38,
+      "Proposition": 26,
+      "Corollary": 7
+    },
+    "by_section": {
+      "1": 1,
+      "3": 3,
+      "4": 11,
+      "5": 5,
+      "6": 6,
+      "7": 8,
+      "8": 8,
+      "9": 9,
+      "10": 6,
+      "A": 10,
+      "B": 9,
+      "C": 3
+    }
+  },
+  "running_headers_stripped": {
+    "count": 165,
+    "first": [
+      {
+        "page": 2,
+        "text": "2                                      OPENAI"
+      },
+      {
+        "page": 3,
+        "text": "FINITE TIME BLOWUP FOR NAVIER–STOKES                                 3"
+      },
+      {
+        "page": 4,
+        "text": "4                                      OPENAI"
+      }
+    ],
+    "last": [
+      {
+        "page": 165,
+        "text": "FINITE TIME BLOWUP FOR NAVIER–STOKES                               165"
+      },
+      {
+        "page": 166,
+        "text": "166                                     OPENAI"
+      }
+    ]
+  },
+  "gate": {
+    "question": "Does the extracted Theorem 1.1 match the charter's verbatim text, character for character modulo whitespace?",
+    "charter_text": "For every ν > 0 there exist a force f ∈ C∞_c(R³×(0,∞); R³), a compact set K ⊂ R³, and smooth velocity and pressure fields u, p on R³×[0,1) satisfying ∂_t u + (u·∇)u − νΔu + ∇p = f, ∇·u = 0, u(·,0) = 0, such that supp u(·,t) ∪ supp p(·,t) ⊂ K for every 0 ≤ t < 1, sup_{0≤t<1} ‖u(t)‖_L²(R³) < ∞, limsup_{t↑1} ‖u(t)‖_L∞(R³) = ∞.",
+    "extracted_text": "For every ν > 0 there exist a force  f ∈C∞c (R3 × (0, ∞); R3), a compact set K ⊂R3, and smooth velocity and pressure fields u, p on R3 × [0, 1) satisfying               ∂tu + (u · ∇)u −ν∆u + ∇p = f,   ∇· u = 0,      u(·, 0) = 0,            (1.1) such that supp u(·, t) ∪supp p(·, t) ⊂K for every 0 ≤t < 1,                 sup ∥u(t)∥L2(R3) < ∞,    lim sup ∥u(t)∥L∞(R3) = ∞.                    0≤t<1                                 t↑1",
+    "exact_match_modulo_whitespace": false,
+    "prose_words_match": false,
+    "answer": "NO-AND-HERE-IS-THE-DIFF",
+    "after_named_typographic_normalisations": {
+      "match": true,
+      "rules_that_fired": [
+        "R1 drop the displayed-equation label '(1.1)'",
+        "R2 superscript digits: R³→R3, L²→L2",
+        "R3 TeX sub/superscript markers '_' '{' '}' removed",
+        "R4 Laplacian glyph U+2206 '∆' → U+0394 'Δ'",
+        "R5 norm bars U+2225 '∥' → U+2016 '‖'",
+        "R7 sup/limsup limits displaced by layout: strip the subscript limits from BOTH sides"
+      ],
+      "rules_available": [
+        "R1 drop the displayed-equation label '(1.1)'",
+        "R2 superscript digits: R³→R3, L²→L2",
+        "R3 TeX sub/superscript markers '_' '{' '}' removed",
+        "R4 Laplacian glyph U+2206 '∆' → U+0394 'Δ'",
+        "R5 norm bars U+2225 '∥' → U+2016 '‖'",
+        "R6 'lim sup' → 'limsup'",
+        "R7 sup/limsup limits displaced by layout: strip the subscript limits from BOTH sides"
+      ],
+      "sup_and_limsup_limits_present_in_extraction": true,
+      "residual_diff_if_any": []
+    },
+    "diff_normalised": [
+      "--- charter",
+      "+++ extracted",
+      "@@ -1 +1 @@",
+      "-Foreveryν>0thereexistaforcef∈C∞_c(R³×(0,∞);R³),acompactsetK⊂R³,andsmoothvelocityandpressurefieldsu,ponR³×[0,1)satisfying∂_tu+(u·∇)u−νΔu+∇p=f,∇·u=0,u(·,0)=0,suchthatsuppu(·,t)∪suppp(·,t)⊂Kforevery0≤t<1,sup_{0≤t<1}‖u(t)‖_L²(R³)<∞,limsup_{t↑1}‖u(t)‖_L∞(R³)=∞.",
+      "+Foreveryν>0thereexistaforcef∈C∞c(R3×(0,∞);R3),acompactsetK⊂R3,andsmoothvelocityandpressurefieldsu,ponR3×[0,1)satisfying∂tu+(u·∇)u−ν∆u+∇p=f,∇·u=0,u(·,0)=0,(1.1)suchthatsuppu(·,t)∪suppp(·,t)⊂Kforevery0≤t<1,sup∥u(t)∥L2(R3)<∞,limsup∥u(t)∥L∞(R3)=∞.0≤t<1t↑1"
+    ],
+    "diff_prose_words": [
+      "--- charter-words",
+      "+++ extracted-words",
+      "@@ -28,2 +28 @@",
+      "-t",
+      "-u",
+      "+tu",
+      "@@ -50 +48,0 @@",
+      "-t",
+      "@@ -55,2 +53,2 @@",
+      "-limsup",
+      "-t",
+      "+lim",
+      "+sup",
+      "@@ -60,0 +59,2 @@",
+      "+t",
+      "+t"
+    ],
+    "reading": "An exact character match is not expected between a PDF text layer and a TeX-style transcription: the text layer renders C^infty_c as separate glyph runs, sub/superscripts as adjacent characters, and some operators as private glyphs. The gate therefore reports BOTH the strict answer and the prose-word answer, and prints the diff so the reader sees exactly which characters differ."
+  }
+}

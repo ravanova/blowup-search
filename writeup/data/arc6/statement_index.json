@@ -1,0 +1,1059 @@
+{
+ "schema": "arc6_statement_index_v1",
+ "leg": 424,
+ "count": 79,
+ "by_kind": {
+  "Theorem": 3,
+  "Definition": 5,
+  "Lemma": 38,
+  "Proposition": 26,
+  "Corollary": 7
+ },
+ "by_section": {
+  "1": 1,
+  "3": 3,
+  "4": 11,
+  "5": 5,
+  "6": 6,
+  "7": 8,
+  "8": 8,
+  "9": 9,
+  "10": 6,
+  "A": 10,
+  "B": 9,
+  "C": 3
+ },
+ "charter_expectation": {
+  "count": 79,
+  "by_kind": {
+   "Theorem": 3,
+   "Proposition": 26,
+   "Lemma": 38,
+   "Corollary": 7,
+   "Definition": 5
+  },
+  "by_section": {
+   "1": 1,
+   "3": 3,
+   "4": 11,
+   "5": 5,
+   "6": 6,
+   "7": 8,
+   "8": 8,
+   "9": 9,
+   "10": 6,
+   "A": 10,
+   "B": 9,
+   "C": 3
+  }
+ },
+ "statements": [
+  {
+   "id": "Theorem 1.1",
+   "kind": "Theorem",
+   "section": "1",
+   "number": 1,
+   "page": 1,
+   "line": 37,
+   "title": null,
+   "n_lines_starting_with_this_header": 2,
+   "page_chosen_by": "rule",
+   "other_line_starts": [
+    [
+     117,
+     10
+    ]
+   ]
+  },
+  {
+   "id": "Theorem 3.1",
+   "kind": "Theorem",
+   "section": "3",
+   "number": 1,
+   "page": 15,
+   "line": 32,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Definition 3.2",
+   "kind": "Definition",
+   "section": "3",
+   "number": 2,
+   "page": 18,
+   "line": 28,
+   "title": "Regularity at the axis",
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Definition 3.3",
+   "kind": "Definition",
+   "section": "3",
+   "number": 3,
+   "page": 18,
+   "line": 31,
+   "title": "Parameter smallness and order of choices",
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 4.1",
+   "kind": "Lemma",
+   "section": "4",
+   "number": 1,
+   "page": 25,
+   "line": 9,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 4.2",
+   "kind": "Proposition",
+   "section": "4",
+   "number": 2,
+   "page": 27,
+   "line": 25,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 4.3",
+   "kind": "Lemma",
+   "section": "4",
+   "number": 3,
+   "page": 28,
+   "line": 18,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 4.4",
+   "kind": "Lemma",
+   "section": "4",
+   "number": 4,
+   "page": 28,
+   "line": 44,
+   "title": null,
+   "n_lines_starting_with_this_header": 2,
+   "page_chosen_by": "rule",
+   "other_line_starts": [
+    [
+     155,
+     22
+    ]
+   ]
+  },
+  {
+   "id": "Lemma 4.5",
+   "kind": "Lemma",
+   "section": "4",
+   "number": 5,
+   "page": 31,
+   "line": 13,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Theorem 4.6",
+   "kind": "Theorem",
+   "section": "4",
+   "number": 6,
+   "page": 32,
+   "line": 41,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 4.7",
+   "kind": "Lemma",
+   "section": "4",
+   "number": 7,
+   "page": 34,
+   "line": 24,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 4.8",
+   "kind": "Lemma",
+   "section": "4",
+   "number": 8,
+   "page": 35,
+   "line": 10,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 4.9",
+   "kind": "Lemma",
+   "section": "4",
+   "number": 9,
+   "page": 36,
+   "line": 16,
+   "title": null,
+   "n_lines_starting_with_this_header": 2,
+   "page_chosen_by": "rule",
+   "other_line_starts": [
+    [
+     39,
+     40
+    ]
+   ]
+  },
+  {
+   "id": "Proposition 4.10",
+   "kind": "Proposition",
+   "section": "4",
+   "number": 10,
+   "page": 36,
+   "line": 39,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 4.11",
+   "kind": "Lemma",
+   "section": "4",
+   "number": 11,
+   "page": 38,
+   "line": 40,
+   "title": null,
+   "n_lines_starting_with_this_header": 2,
+   "page_chosen_by": "rule",
+   "other_line_starts": [
+    [
+     34,
+     16
+    ]
+   ]
+  },
+  {
+   "id": "Lemma 5.1",
+   "kind": "Lemma",
+   "section": "5",
+   "number": 1,
+   "page": 47,
+   "line": 27,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 5.2",
+   "kind": "Lemma",
+   "section": "5",
+   "number": 2,
+   "page": 50,
+   "line": 9,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 5.3",
+   "kind": "Proposition",
+   "section": "5",
+   "number": 3,
+   "page": 55,
+   "line": 19,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 5.4",
+   "kind": "Lemma",
+   "section": "5",
+   "number": 4,
+   "page": 57,
+   "line": 42,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 5.5",
+   "kind": "Proposition",
+   "section": "5",
+   "number": 5,
+   "page": 60,
+   "line": 9,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 6.1",
+   "kind": "Lemma",
+   "section": "6",
+   "number": 1,
+   "page": 65,
+   "line": 38,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 6.2",
+   "kind": "Lemma",
+   "section": "6",
+   "number": 2,
+   "page": 67,
+   "line": 18,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 6.3",
+   "kind": "Lemma",
+   "section": "6",
+   "number": 3,
+   "page": 68,
+   "line": 10,
+   "title": "Number of relevant labels",
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Definition 6.4",
+   "kind": "Definition",
+   "section": "6",
+   "number": 4,
+   "page": 69,
+   "line": 42,
+   "title": "Mean and moment coefficients",
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Definition 6.5",
+   "kind": "Definition",
+   "section": "6",
+   "number": 5,
+   "page": 70,
+   "line": 27,
+   "title": "Labelled wave coefficients",
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 6.6",
+   "kind": "Proposition",
+   "section": "6",
+   "number": 6,
+   "page": 71,
+   "line": 16,
+   "title": null,
+   "n_lines_starting_with_this_header": 3,
+   "page_chosen_by": "rule",
+   "other_line_starts": [
+    [
+     62,
+     37
+    ],
+    [
+     69,
+     23
+    ]
+   ]
+  },
+  {
+   "id": "Lemma 7.1",
+   "kind": "Lemma",
+   "section": "7",
+   "number": 1,
+   "page": 75,
+   "line": 27,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 7.2",
+   "kind": "Proposition",
+   "section": "7",
+   "number": 2,
+   "page": 77,
+   "line": 40,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Corollary 7.3",
+   "kind": "Corollary",
+   "section": "7",
+   "number": 3,
+   "page": 80,
+   "line": 23,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 7.4",
+   "kind": "Lemma",
+   "section": "7",
+   "number": 4,
+   "page": 80,
+   "line": 38,
+   "title": null,
+   "n_lines_starting_with_this_header": 2,
+   "page_chosen_by": "rule",
+   "other_line_starts": [
+    [
+     82,
+     43
+    ]
+   ]
+  },
+  {
+   "id": "Proposition 7.5",
+   "kind": "Proposition",
+   "section": "7",
+   "number": 5,
+   "page": 82,
+   "line": 20,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 7.6",
+   "kind": "Proposition",
+   "section": "7",
+   "number": 6,
+   "page": 84,
+   "line": 21,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 7.7",
+   "kind": "Lemma",
+   "section": "7",
+   "number": 7,
+   "page": 86,
+   "line": 10,
+   "title": null,
+   "n_lines_starting_with_this_header": 2,
+   "page_chosen_by": "override: p.73 is §7's opening paragraph, a forward reference",
+   "other_line_starts": [
+    [
+     73,
+     25
+    ]
+   ]
+  },
+  {
+   "id": "Corollary 7.8",
+   "kind": "Corollary",
+   "section": "7",
+   "number": 8,
+   "page": 87,
+   "line": 26,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 8.1",
+   "kind": "Proposition",
+   "section": "8",
+   "number": 1,
+   "page": 89,
+   "line": 9,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 8.2",
+   "kind": "Lemma",
+   "section": "8",
+   "number": 2,
+   "page": 90,
+   "line": 33,
+   "title": null,
+   "n_lines_starting_with_this_header": 2,
+   "page_chosen_by": "override: p.88 is §8's opening paragraph, a forward reference",
+   "other_line_starts": [
+    [
+     88,
+     16
+    ]
+   ]
+  },
+  {
+   "id": "Proposition 8.3",
+   "kind": "Proposition",
+   "section": "8",
+   "number": 3,
+   "page": 92,
+   "line": 46,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 8.4",
+   "kind": "Proposition",
+   "section": "8",
+   "number": 4,
+   "page": 94,
+   "line": 9,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Corollary 8.5",
+   "kind": "Corollary",
+   "section": "8",
+   "number": 5,
+   "page": 95,
+   "line": 2,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 8.6",
+   "kind": "Lemma",
+   "section": "8",
+   "number": 6,
+   "page": 95,
+   "line": 40,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 8.7",
+   "kind": "Lemma",
+   "section": "8",
+   "number": 7,
+   "page": 97,
+   "line": 14,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 8.8",
+   "kind": "Lemma",
+   "section": "8",
+   "number": 8,
+   "page": 98,
+   "line": 42,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 9.1",
+   "kind": "Proposition",
+   "section": "9",
+   "number": 1,
+   "page": 101,
+   "line": 39,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 9.2",
+   "kind": "Lemma",
+   "section": "9",
+   "number": 2,
+   "page": 102,
+   "line": 47,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 9.3",
+   "kind": "Proposition",
+   "section": "9",
+   "number": 3,
+   "page": 103,
+   "line": 30,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Definition 9.4",
+   "kind": "Definition",
+   "section": "9",
+   "number": 4,
+   "page": 106,
+   "line": 16,
+   "title": "Finite correction state",
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 9.5",
+   "kind": "Proposition",
+   "section": "9",
+   "number": 5,
+   "page": 106,
+   "line": 39,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 9.6",
+   "kind": "Proposition",
+   "section": "9",
+   "number": 6,
+   "page": 107,
+   "line": 47,
+   "title": null,
+   "n_lines_starting_with_this_header": 2,
+   "page_chosen_by": "rule",
+   "other_line_starts": [
+    [
+     101,
+     19
+    ]
+   ]
+  },
+  {
+   "id": "Lemma 9.7",
+   "kind": "Lemma",
+   "section": "9",
+   "number": 7,
+   "page": 111,
+   "line": 38,
+   "title": null,
+   "n_lines_starting_with_this_header": 2,
+   "page_chosen_by": "rule",
+   "other_line_starts": [
+    [
+     14,
+     34
+    ]
+   ]
+  },
+  {
+   "id": "Lemma 9.8",
+   "kind": "Lemma",
+   "section": "9",
+   "number": 8,
+   "page": 113,
+   "line": 10,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 9.9",
+   "kind": "Proposition",
+   "section": "9",
+   "number": 9,
+   "page": 114,
+   "line": 28,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition 10.1",
+   "kind": "Proposition",
+   "section": "10",
+   "number": 1,
+   "page": 117,
+   "line": 43,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 10.2",
+   "kind": "Lemma",
+   "section": "10",
+   "number": 2,
+   "page": 118,
+   "line": 39,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 10.3",
+   "kind": "Lemma",
+   "section": "10",
+   "number": 3,
+   "page": 120,
+   "line": 17,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 10.4",
+   "kind": "Lemma",
+   "section": "10",
+   "number": 4,
+   "page": 121,
+   "line": 9,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma 10.5",
+   "kind": "Lemma",
+   "section": "10",
+   "number": 5,
+   "page": 121,
+   "line": 33,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Corollary 10.6",
+   "kind": "Corollary",
+   "section": "10",
+   "number": 6,
+   "page": 125,
+   "line": 13,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma A.1",
+   "kind": "Lemma",
+   "section": "A",
+   "number": 1,
+   "page": 126,
+   "line": 39,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma A.2",
+   "kind": "Lemma",
+   "section": "A",
+   "number": 2,
+   "page": 127,
+   "line": 32,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Corollary A.3",
+   "kind": "Corollary",
+   "section": "A",
+   "number": 3,
+   "page": 128,
+   "line": 18,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition A.4",
+   "kind": "Proposition",
+   "section": "A",
+   "number": 4,
+   "page": 130,
+   "line": 44,
+   "title": null,
+   "n_lines_starting_with_this_header": 2,
+   "page_chosen_by": "rule",
+   "other_line_starts": [
+    [
+     31,
+     11
+    ]
+   ]
+  },
+  {
+   "id": "Lemma A.5",
+   "kind": "Lemma",
+   "section": "A",
+   "number": 5,
+   "page": 133,
+   "line": 30,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma A.6",
+   "kind": "Lemma",
+   "section": "A",
+   "number": 6,
+   "page": 138,
+   "line": 9,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition A.7",
+   "kind": "Proposition",
+   "section": "A",
+   "number": 7,
+   "page": 139,
+   "line": 7,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma A.8",
+   "kind": "Lemma",
+   "section": "A",
+   "number": 8,
+   "page": 140,
+   "line": 35,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma A.9",
+   "kind": "Lemma",
+   "section": "A",
+   "number": 9,
+   "page": 141,
+   "line": 43,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition A.10",
+   "kind": "Proposition",
+   "section": "A",
+   "number": 10,
+   "page": 142,
+   "line": 18,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma B.1",
+   "kind": "Lemma",
+   "section": "B",
+   "number": 1,
+   "page": 145,
+   "line": 26,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition B.2",
+   "kind": "Proposition",
+   "section": "B",
+   "number": 2,
+   "page": 146,
+   "line": 42,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition B.3",
+   "kind": "Proposition",
+   "section": "B",
+   "number": 3,
+   "page": 148,
+   "line": 42,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma B.4",
+   "kind": "Lemma",
+   "section": "B",
+   "number": 4,
+   "page": 150,
+   "line": 32,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition B.5",
+   "kind": "Proposition",
+   "section": "B",
+   "number": 5,
+   "page": 151,
+   "line": 41,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Corollary B.6",
+   "kind": "Corollary",
+   "section": "B",
+   "number": 6,
+   "page": 153,
+   "line": 29,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma B.7",
+   "kind": "Lemma",
+   "section": "B",
+   "number": 7,
+   "page": 154,
+   "line": 12,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition B.8",
+   "kind": "Proposition",
+   "section": "B",
+   "number": 8,
+   "page": 155,
+   "line": 27,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Corollary B.10",
+   "kind": "Corollary",
+   "section": "B",
+   "number": 10,
+   "page": 157,
+   "line": 39,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Lemma C.1",
+   "kind": "Lemma",
+   "section": "C",
+   "number": 1,
+   "page": 158,
+   "line": 36,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition C.2",
+   "kind": "Proposition",
+   "section": "C",
+   "number": 2,
+   "page": 161,
+   "line": 11,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  },
+  {
+   "id": "Proposition C.3",
+   "kind": "Proposition",
+   "section": "C",
+   "number": 3,
+   "page": 163,
+   "line": 28,
+   "title": null,
+   "n_lines_starting_with_this_header": 1,
+   "page_chosen_by": "rule",
+   "other_line_starts": []
+  }
+ ]
+}
