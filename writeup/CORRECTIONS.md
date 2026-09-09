@@ -4632,3 +4632,103 @@ That the project builds, or that it does not. That the kernel accepts the proofs
 manuscript's proof is correct — a Lean project that compiles establishes the THEOREM, not the
 manuscript.** Nothing about `W2`, `W3`, `W4` or any lane. **`links_moved: 0`. Clay stays ~0.05%.
 No tier produced.**
+
+---
+
+## §63 — `U3` (leg 419, arc 6): `TECHNICAL_OUTPACED.md` §2 is **PARTLY** right. Arc 5 was right that the forcing buys the escape; **leg 381's "not a shortcut" is also right and arc 5's table loses it.** A SPLIT, not a reversal.
+
+**Unit:** `U3`, arc 6, §3f SOLO, **CONSTRUCTION**. **Module:** `solver/arc6_residual_ledger.py`
+(`capabilities.py` row 58). **Tests:** `test_arc6_residual_ledger.py`, seven planted controls each
+with a twin. **Artefact:** `writeup/data/arc6_skeleton_v1.json`. **Checks:**
+`writeup/arc6_skeleton_evidence.py`. **Novelty pass:** `writeup/novelty/leg_419.md`, committed at
+`cc52087` **before the module existed**. **Gate: `PARTLY`. UNVERIFIED.**
+
+### 1. The gate, and the sentence this unit was offered and did not say
+
+**Clause 1 — *"the forcing is what buys the escape from the localisation problem"* — RIGHT.**
+The line that settles it is one sentence of §3.5: ***"For `t < 1`, we set `f = R(u, p)`."*** The
+force is not an object controlled alongside the solution; it is **defined as whatever the solution
+fails to satisfy**, and every term the localisation cutoff creates — `(∂_t c − Δc)u_loc`,
+`p_loc ∇c`, the `∇c × A` contributions, `(c² − c)(u_loc·∇)u_loc` — is absorbed by that definition
+rather than estimated. **Arc 5 §2's second row is right in structure.**
+
+**Clause 2 — *"condition (5) discharged by compact support at no analytic cost"* — RIGHT ABOUT (5),
+WRONG IF READ AS "compact support is free", which is how arc 5's table reads.**
+
+- (5) itself costs **three lines** (Lemma 10.3, final paragraph: *"Compact support gives, for every
+  integer `k ≥ 0`, …"*), and nothing else in 166 pages is spent on it.
+- **Having a compactly supported *smooth* `f` at all** costs Theorem 3.1(iii)'s **flatness
+  estimate** — `|∂ₓ^α ∂ₜ^b R(u,p)| ≤ C_{α,b,N,X₁} q^N` for **every** `N` — which is the output of
+  **Sections 4–9 plus Appendices A–C: 131 of 166 pages, 78.9%.** Cut off an object whose residual
+  blows up at the singular time and the force blows up at the singular time.
+
+### 2. **Leg 381: the split, and the words NOT said**
+
+Leg 381 wrote *"the forcing must itself satisfy (4),(5), so it buys **no escape** from the decay
+and bounded-energy obligations that §4 and §5 price."*
+
+- ***"buys no escape"* is WRONG.** Arc 5 flagged it and **arc 5 was right.**
+- ***"NOT a shortcut"* — leg 381's own other sentence — is RIGHT**, and **arc 5's §2 table loses
+  it** by placing *"no analytic cost"* opposite *"a cost of the same order"*, which implies the
+  expensive half does not exist. **A door that is open is not the same as a door that is near.**
+
+**The charter offers a specific sentence — that leg 381's inference was RIGHT and arc 5's reading
+was wrong — to be said in exactly those words if it applies. IT DOES NOT APPLY AND IT IS NOT SAID.**
+
+**What changes in the record:** `TECHNICAL_OUTPACED.md` §2's table row 2 is **upheld**; row 3 is
+**amended** — compact support discharges **(5)** at no analytic cost, and buying compact support
+costs 78.9% of the manuscript. `CLAY_OBLIGATIONS.md`'s leg-381 clause keeps *"not a shortcut"* and
+loses *"buys no escape"*. **`TECHNICAL_OUTPACED.md` §2's own status line — `UNVERIFIED`, "banked as
+the first thing arc 6 must check" — is discharged by this section.**
+
+### 3. Where the residual is discharged: **three places, three orders**
+
+| # | what | by what | where |
+|---|---|---|---|
+| 1 | the leading annular stress divergence, `q^(-3/2-h)` | the pulses' averaged **Reynolds stress** | §3.3, Props 7.5 / 9.5 |
+| 2 | **everything else**, including what each correction itself creates | the four-operation cycle, `σ_j = 1/5 + j/10 → ∞` | §3.4, Prop 9.6, Prop 9.9 |
+| 3 | the **entire remaining residual of the localized fields** | **it is DEFINED to be `f`** | §3.5, one sentence |
+
+**Discharge 2 is the real work: after 1 the residual is still unbounded; 2 makes it FLAT, and
+flatness is what makes 3 legal.** Conflating the three is what makes the mechanism sound either
+trivial or miraculous.
+
+### 4. The ledger, and two banked results reproduced from arithmetic alone
+
+**All 23 re-derived scalings equal the values the manuscript prints — exact equality of
+`Fraction`s, not agreement to a tolerance.** `u_r` and `A_wave` are **solved, not transcribed**
+(`A_wave` by requiring the cancellation and solving; the printed `q^(-1/2-h/2)` falls out). The
+three leading rates coincide at exactly `q^-1`; the pulse stress divergence equals the leading
+tangential residual at exactly `q^(-3/2-h)`; the energy and dissipation conditions are **two
+different equations with the same threshold `h = 1/6`**, checked rather than asserted.
+
+**`route4_contrast()` reproduces two banked results from exponent arithmetic alone, and both are
+recorded as CROSS-CHECKS, not new results:**
+
+1. The `L²` deficit at the pinned `α = 1` is **exactly `1/2` — the same `1/2` as leg 381's cutoff
+   bill.** The ledger computed `3/2 − 1` from the convergence criterion; it did not read leg 381's
+   number.
+2. The `L³` shell integrand at `α = 1` is **exactly `r^{-1}`** — the log-divergence **`PB2`
+   (leg 410) measured** at `139.287` per decade.
+
+**And the ledger caught an error in this unit's own control.** A planted control asserted the `L²`
+integral converges at `α = 3/2`. **It does not** — the criterion is `p·α > 3` **strictly**, and at
+`α = 3/2` the shell integrand is exactly `r^{-1}`, log-divergent. **That is why leg 381's bill
+reads `α > 1.5` and not `α ≥ 1.5`.** Corrected **in place with the error recorded**, per the
+standing rule that a negative construction stays in the artifact.
+
+### 5. The structural difference `U5` must measure — stated, not answered
+
+**The manuscript's object is not a DSS profile that was cut off.** It is an approximate solution
+**built so its residual is flat at the singularity**, then cut off. **Route 4's object is an
+exact-ansatz profile whose residual is not flat** — order one (`L6`: `ρ = 1.5048519` at 20,000
+iterations, threshold `< 1.45` not met). **Flatness is not a property one adds to a profile after
+the fact; it is what Sections 4–9 construct.** Whether any of it transfers is `U5`'s question.
+
+### CEILING
+
+**Exponent bookkeeping.** A consistent ledger is a **necessary** condition on a construction and
+nowhere near a sufficient one — **it cannot see whether the objects it counts exist**. Nothing was
+integrated anywhere in the unit, deliberately (§52–§54). **`links_moved: 0`. No wall moved. Clay
+~0.05%. No tier produced.** This unit says nothing about whether the manuscript's construction is
+correct; it says the exponents balance, which is the cheapest thing that could have been wrong.

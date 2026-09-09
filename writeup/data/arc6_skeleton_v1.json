@@ -1,0 +1,275 @@
+{
+  "schema": "arc6_skeleton_v1",
+  "unit": "U3 (leg 419, CONSTRUCTION) — SKELETON",
+  "arc": 6,
+  "leg": 419,
+  "date_utc": "2026-09-09",
+  "novelty_pass": "writeup/novelty/leg_419.md, committed at cc52087 BEFORE the module existed",
+  "module": "solver/arc6_residual_ledger.py",
+  "tests": "test_arc6_residual_ledger.py",
+  "verification_status": "UNVERIFIED. §3f rule 1 — one session built the ledger, ran it, and wrote the gate answer about its own output.",
+  "ceiling": "EXPONENT BOOKKEEPING. A consistent scaling ledger is a NECESSARY condition on a construction and nowhere near a sufficient one: every term can scale correctly and the construction still fail, because the ledger cannot see whether the objects it counts exist. This is not Tier 2 and it is not a proof of anything.",
+  "re_derivation": {
+    "method": "Every quantity is a linear polynomial a + b·h over Fraction. The ledger derives each from the geometry and the profile exponents and compares against MANUSCRIPT_PRINTED, a single audited transcription table. Exact equality of Fractions — there is no tolerance in the module and therefore none to widen after seeing a number (leg 408's refused temptation, CORRECTIONS.md §60).",
+    "quantities_checked": 23,
+    "quantities_agreeing": 23,
+    "mismatches": [],
+    "table": {
+      "A": {
+        "re_derived": "q^(1/2 + h)",
+        "manuscript_prints": "q^(1/2 + h)",
+        "agree": true
+      },
+      "D": {
+        "re_derived": "q^(1/2 - h)",
+        "manuscript_prints": "q^(1/2 - h)",
+        "agree": true
+      },
+      "ell_r": {
+        "re_derived": "q^(1/2)",
+        "manuscript_prints": "q^(1/2)",
+        "agree": true
+      },
+      "ell_z": {
+        "re_derived": "q^(1/2 - h)",
+        "manuscript_prints": "q^(1/2 - h)",
+        "agree": true
+      },
+      "aspect_r_over_z": {
+        "re_derived": "q^(0 + h)",
+        "manuscript_prints": "q^(0 + h)",
+        "agree": true
+      },
+      "core_volume": {
+        "re_derived": "q^(3/2 - h)",
+        "manuscript_prints": "q^(3/2 - h)",
+        "agree": true
+      },
+      "u_theta": {
+        "re_derived": "q^(-1/2 - h)",
+        "manuscript_prints": "q^(-1/2 - h)",
+        "agree": true
+      },
+      "u_z": {
+        "re_derived": "q^(-1/2 - h)",
+        "manuscript_prints": "q^(-1/2 - h)",
+        "agree": true
+      },
+      "u_r": {
+        "re_derived": "q^(-1/2)",
+        "manuscript_prints": "q^(-1/2)",
+        "agree": true
+      },
+      "u_r_over_u_theta": {
+        "re_derived": "q^(0 + h)",
+        "manuscript_prints": "q^(0 + h)",
+        "agree": true
+      },
+      "Re_theta": {
+        "re_derived": "q^(0 - h)",
+        "manuscript_prints": "q^(0 - h)",
+        "agree": true
+      },
+      "Re_r": {
+        "re_derived": "q^(0)",
+        "manuscript_prints": "q^(0)",
+        "agree": true
+      },
+      "radial_transport_rate": {
+        "re_derived": "q^(-1)",
+        "manuscript_prints": "q^(-1)",
+        "agree": true
+      },
+      "axial_transport_rate": {
+        "re_derived": "q^(-1)",
+        "manuscript_prints": "q^(-1)",
+        "agree": true
+      },
+      "radial_diffusion_rate": {
+        "re_derived": "q^(-1)",
+        "manuscript_prints": "q^(-1)",
+        "agree": true
+      },
+      "axial_over_radial_diffusion": {
+        "re_derived": "q^(0 + 2h)",
+        "manuscript_prints": "q^(0 + 2h)",
+        "agree": true
+      },
+      "A_wave": {
+        "re_derived": "q^(-1/2 - 1/2h)",
+        "manuscript_prints": "q^(-1/2 - 1/2h)",
+        "agree": true
+      },
+      "ell_wave": {
+        "re_derived": "q^(1/2 + 1/2h)",
+        "manuscript_prints": "q^(1/2 + 1/2h)",
+        "agree": true
+      },
+      "wave_ratio": {
+        "re_derived": "q^(0 + 1/2h)",
+        "manuscript_prints": "q^(0 + 1/2h)",
+        "agree": true
+      },
+      "A_wave_squared": {
+        "re_derived": "q^(-1 - h)",
+        "manuscript_prints": "q^(-1 - h)",
+        "agree": true
+      },
+      "stress_divergence": {
+        "re_derived": "q^(-3/2 - h)",
+        "manuscript_prints": "q^(-3/2 - h)",
+        "agree": true
+      },
+      "E_core": {
+        "re_derived": "q^(1/2 - 3h)",
+        "manuscript_prints": "q^(1/2 - 3h)",
+        "agree": true
+      },
+      "D_core": {
+        "re_derived": "q^(-1/2 - 3h)",
+        "manuscript_prints": "q^(-1/2 - 3h)",
+        "agree": true
+      }
+    }
+  },
+  "the_three_components_in_this_repositorys_notation": {
+    "component_1_self_similar_concentrating_vortex": {
+      "manuscript": "axisymmetric leading field u^(0), similarity coordinates tau = q(1-eta^2), z = q^D eta, X = r^2/(2q); u_theta = q^-A E(X,eta), u_z = q^-A U, r u_r = V_0, p = q^-2A Pi; A = 1/2 + h, D = 1/2 - h, 0 < h < 1/100.",
+      "ledger": "GeometryLedger. ell_r = q^(1/2) (parabolic, from X bounded); ell_z = q^D; core volume q^(3/2-h); speeds q^(-1/2-h) tangential and O(q^(-1/2)) radial.",
+      "the_identity_that_makes_it_work": "THE THREE LEADING RATES COINCIDE AT EXACTLY q^-1: radial transport |u_r|/ell_r, axial transport q^-A/ell_z, and radial diffusion 1/ell_r^2. Re-derived here, not transcribed. This is what makes the balance an ODE-like problem in the profile variables at all.",
+      "the_small_parameter": "axial diffusion / radial diffusion = ell_r^2/ell_z^2 = q^(2h). The ONLY small parameter in the background expansion, and it exists only because the core is anisotropic. Control C2 (isotropic core) destroys it — it becomes q^0."
+    },
+    "component_2_oscillatory_pulses_in_a_cylindrical_annulus": {
+      "manuscript": "divergence-free pulses w = curl A_wave, amplitude A_wave ≍ q^(-1/2-h/2), wavelength ell_wave ≍ q^(1/2+h/2), supported in X_a < X < X_b; their averaged quadratic flux (<w_r w_theta>, <w_r w_z>) = T + h.o.t. (Prop 7.5, 9.5).",
+      "ledger": "PulseLedger. A_wave is SOLVED, not transcribed: requiring 2·A_wave − ell_r == leading_tangential_residual gives A_wave = (u_theta + radial_diffusion_rate + ell_r)/2 = q^(-1/2-h/2). The manuscript's printed value falls out.",
+      "the_cancellation_as_an_exact_identity": "pulse stress divergence A_wave^2/ell_r = q^(-3/2-h) == leading tangential residual u_theta × q^-1 = q^(-3/2-h). EXACT, in Fractions, for every h.",
+      "why_it_is_not_free": "The pulses are LOUDER than the background (A_wave/|u_theta| = q^(h/2) → 0, so in fact QUIETER by q^(h/2)) and SHORTER than the core by the same factor q^(h/2). Both ratios are the same power — checked as PulseLedger.ratios_agree(). A single parameter h controls the whole separation, and it is the same h the energy condition constrains."
+    },
+    "component_3_iterative_correction_preserving_compact_support": {
+      "manuscript": "a fixed four-operation cycle (Prop 9.6): solve the wave-amplitude equations for supported nonzero angular modes; signed amplitude increments whose symmetrized cross covariance supplies the stress correction; invert the fast auxiliary-time derivative for the angularly averaged zero-auxiliary-mean part; solve five radial moment equations. sigma_0 = 1/5, sigma_{j+1} = sigma_j + 1/10, so sigma_j -> infinity.",
+      "ledger": "CorrectionCycle. sigma_j = 1/5 + j/10; stages_to_reach(1) = 8; diverges() is True iff step > 0.",
+      "what_sigma_j_MEANS": "FLATNESS. sigma_j -> infinity is the statement that every Cartesian space-time derivative of the residual is O(q^N) for every N (manuscript (3.4), Theorem 3.1(iii)). NOT a smallness estimate — an infinite-order vanishing.",
+      "the_support_clause": "'The radial integral constructions keep the velocity and pressure corrections compactly supported' (§3.4 operation 4). Compact support of the CORRECTIONS is maintained inside the cycle, and it is maintained by the choice of integration constants in the five moment equations, not by a cutoff."
+    }
+  },
+  "where_the_momentum_residual_is_discharged": {
+    "finding": "IT IS DISCHARGED IN THREE DISTINCT PLACES, AT THREE DIFFERENT ORDERS, AND CONFLATING THEM IS WHAT MAKES THE MECHANISM SOUND EITHER TRIVIAL OR MIRACULOUS.",
+    "discharge_1_leading_order": {
+      "what": "the leading annular stress divergence, scale q^(-3/2-h)",
+      "by_what": "the pulses' averaged Reynolds stress",
+      "manuscript_location": "§3.3; Propositions 7.5 and 9.5; the exact increment identity R(u_B+w, p_B+pi) = R(u_B,p_B) + L_{u_B}(w,pi) + div(w ⊗ w)",
+      "ledger_check": "PulseLedger.stress_cancels_residual() — exact"
+    },
+    "discharge_2_all_remaining_orders": {
+      "what": "angular harmonics, auxiliary means, radial-integral defects, curl and cutoff errors, and the quadratic self-interactions each correction creates",
+      "by_what": "the four-operation correction cycle, iterated, driving sigma_j -> infinity",
+      "manuscript_location": "§3.4; Proposition 9.6; (9.8), (9.18); summation with shrinking cutoffs, Proposition 9.9",
+      "why_this_is_the_real_work": "After discharge 1 the residual is still unbounded. It is discharge 2 that makes it FLAT, and flatness is what makes discharge 3 legal."
+    },
+    "discharge_3_everything_that_is_left": {
+      "what": "the entire remaining residual of the localized fields, INCLUDING every term the cutoff itself creates",
+      "by_what": "IT IS DEFINED TO BE THE FORCE.",
+      "manuscript_location": "§3.5, one sentence: 'For t < 1, we set f = R(u,p).'",
+      "the_cutoff_terms_absorbed": [
+        "(∂_t c − Δc) u_loc",
+        "p_loc ∇c",
+        "the curl correction ∇c × A and its derivatives and advection products",
+        "(c^2 − c)(u_loc·∇)u_loc"
+      ],
+      "note": "All four are supported in the cutoff transition region, away from a neighbourhood of (0,1). They are not estimated away. They are handed to f."
+    }
+  },
+  "what_pays_for_compact_support_of_f": {
+    "the_question": "The charter asks what pays for compact support of f. The answer is not one thing and it is not the cutoff.",
+    "the_cutoff_is_free": "c = chi_x chi_t applied to the vector potential A, the azimuthal coefficient B and the pressure, THEN curl taken (so incompressibility survives), then extended by zero. Spatial compact support in K and vanishing near t = 0 are immediate. §3.5.",
+    "what_is_NOT_free": "That the resulting f is SMOOTH THROUGH t = 1. A cutoff of an object whose residual blows up at the singular time produces a force that blows up at the singular time, and such an f is not in C^infty_c(R^3 x (0,infinity)) and does not satisfy Fefferman (5).",
+    "the_three_things_that_buy_it": [
+      {
+        "item": "the FLATNESS estimate (3.4): |∂_x^alpha ∂_t^b R(u,p)| <= C q^N for every N, uniformly on 0 <= X <= X_1",
+        "bought_by": "Sections 4-9 and Appendices A-C — the profile construction, the order-by-order background corrections, the pulse construction, and the correction cycle",
+        "without_it": "the residual has no limit at t = 1 and no force extends"
+      },
+      {
+        "item": "Theorem 3.1(ii): every Cartesian space-time derivative of A, B e_theta, p uniformly bounded on compact sets with c <= q <= c' < q_*, UP TO the one-sided boundary tau = 0, with compatible limits",
+        "bought_by": "the same sections",
+        "without_it": "the cutoff-transition terms have no limits at t = 1, so f is not smooth ON THE TRANSITION REGION even if it is smooth near the origin"
+      },
+      {
+        "item": "the exact heat exterior (3.5): for X >= X_ext the residual is identically zero, A = 0, B = K(r,tau) = r^(-1-2h) H_ext(tau/r^2) solving the radial swirl heat equation, p the normalized integral",
+        "bought_by": "Appendix A (Propositions A.4, A.7, Lemma A.6, Lemma A.8)",
+        "without_it": "the far field is not controlled and the stress does not vanish beyond the annulus"
+      }
+    ],
+    "then_and_only_then": "Lemma 10.2 shows every derivative limit exists at t = 1; Lemma 10.3 realizes those limits from t > 1 by a Borel-type sum sum_j chi_0(b_j sigma) sigma^j F_j / j! with b_j chosen so every differentiated tail converges; support lands in K x [0,2].",
+    "and_condition_5_costs_three_lines": "'To state the decay bounds, we choose R with K subset B(0,R) and write M_{alpha,m} = ||∂_x^alpha ∂_t^m f||_infinity. Compact support gives, for every integer k >= 0, |∂_x^alpha ∂_t^m f(x,t)| <= M_{alpha,m}(3+R)^k (1+|x|+t)^{-k}.' That is the WHOLE discharge of Fefferman (5).",
+    "page_accounting": {
+      "note": "Page spans read from the manuscript's own table of contents at the pinned sha256. They are a proxy for effort, and a crude one; they are banked because the alternative is an adjective.",
+      "sections_1_3_setup_and_outline_pages": 23,
+      "sections_4_9_MAKING_THE_RESIDUAL_FLAT_pages": 92,
+      "section_10_localisation_and_force_extension_pages": 10,
+      "appendices_A_C_serving_section_4_pages": 39,
+      "references_pages": 2,
+      "total": 166,
+      "flatness_machinery_pages": 131,
+      "flatness_machinery_percent": 78.9,
+      "condition_5_discharge": "3 lines, in the final paragraph of the proof of Lemma 10.3"
+    }
+  },
+  "gate": {
+    "question": "Is TECHNICAL_OUTPACED.md §2 right — is the forcing what buys the escape from the localisation problem, with condition (5) discharged by compact support at no analytic cost?",
+    "answer": "PARTLY",
+    "answer_status": "UNVERIFIED (§3f rule 1).",
+    "clause_1": {
+      "text": "'the forcing is what buys the escape from the localisation problem'",
+      "verdict": "RIGHT",
+      "the_line_that_settles_it": "§3.5: 'For t < 1, we set f = R(u,p).'",
+      "why": "The force is not an additional object that must be controlled alongside the solution. It is DEFINED as whatever the solution fails to satisfy. Every cutoff-transition term the localisation creates — (∂_t c − Δc)u_loc, p_loc ∇c, ∇c × A's derivatives and advection products, (c^2 − c)(u_loc·∇)u_loc — is absorbed by that definition rather than estimated. Arc 5 §2's second row, 'the oscillatory pulses' Reynolds stress absorbs the residual, and the iteration hands the remainder to f', is RIGHT in structure."
+    },
+    "clause_2": {
+      "text": "'condition (5) discharged by compact support at no analytic cost'",
+      "verdict": "RIGHT ABOUT CONDITION (5). WRONG IF READ AS 'compact support is free', WHICH IS HOW ARC 5's TABLE READS.",
+      "the_line_that_settles_the_first_half": "Lemma 10.3, final paragraph: 'Compact support gives, for every integer k >= 0, |∂_x^alpha ∂_t^m f(x,t)| <= M_{alpha,m}(3+R)^k (1+|x|+t)^{-k}.' Three lines. Fefferman (5) is discharged and nothing else in the manuscript is spent on it.",
+      "the_line_that_settles_the_second_half": "Theorem 3.1(iii): '|∂_x^alpha ∂_t^b R(u,p)| <= C_{alpha,b,N,X_1} q^N (0 <= X <= X_1, q ↓ 0).' THAT estimate is what makes a compactly supported SMOOTH f exist at all, and it is the output of Sections 4-9 plus Appendices A-C — 131 of 166 pages, 78.9%.",
+      "the_distinction_that_matters": "Condition (5) is cheap ONCE YOU HAVE a compactly supported smooth f. Having one is the entire manuscript. Arc 5's table row 3 — 'compact support discharges (5) at no analytic cost' — states the cheap half and, by placing it opposite leg 381's 'a cost of the same order', implies the expensive half does not exist."
+    },
+    "on_leg_381": {
+      "the_clause": "'the forcing must itself satisfy (4),(5), so it buys no escape from the decay and bounded-energy obligations that §4 and §5 price'",
+      "verdict": "SPLIT, and the split is the point.",
+      "wrong_half": "'buys no escape' is WRONG. The forcing buys exactly that escape, by the sentence in §3.5. Arc 5 was right to flag this and this unit confirms it.",
+      "right_half": "leg 381's OTHER sentence — that the relaxation is 'NOT a shortcut' — is RIGHT, and arc 5's §2 table loses it. The escape exists and costs 78.9% of a 166-page manuscript. A door that is open is not the same as a door that is near.",
+      "the_words_NOT_said": "The charter offers a specific sentence — that leg 381's inference was RIGHT and arc 5's reading was wrong — to be said in exactly those words if it applies. IT DOES NOT APPLY AND IT IS NOT SAID. On the clause arc 5 actually disputed, arc 5 was right.",
+      "correction_owed": "CORRECTIONS.md §63 records the split: arc 5's §2 row 2 upheld, arc 5's §2 row 3 amended, leg 381's 'not a shortcut' restored."
+    },
+    "what_this_gate_does_NOT_say": [
+      "That the manuscript's construction is correct. The ledger checks that the exponents balance. That is the cheapest thing that could have been wrong.",
+      "That the mechanism transfers to route 4's object. That is U5, and the contrast column below is the setup for it, not the answer.",
+      "Anything about W4. W4 is not moved by this unit and is not claimed to be."
+    ]
+  },
+  "route4_contrast": {
+    "purpose": "Put THIS repository's own object in the same units, so U5 has something to port ONTO rather than an analogy.",
+    "alpha_pinned": "1",
+    "alpha_provenance": "L2' (leg 397), verified by V-W4: >= 1 by Chae-Wolf Thm 1.1, <= 1 by Rmk 1.2 + ESS. A PIN, not a fitted value.",
+    "L2_shell_integrand_exponent": "0",
+    "L2_converges": false,
+    "L2_alpha_needed": "3/2",
+    "L2_deficit": "1/2",
+    "L3_shell_integrand_exponent": "-1",
+    "L3_converges": false,
+    "L3_deficit": "0",
+    "cutoff_bill_deficit": "1/2",
+    "two_banked_results_reproduced_from_exponent_arithmetic_alone": [
+      "The L^2 deficit is EXACTLY 1/2 — the same 1/2 leg 381's cutoff bill records (alpha > 1.5 needed against alpha = 1.0 available). The ledger did not read leg 381's number; it computed 3/2 − 1 from the convergence criterion. That the two coincide is a cross-check on both.",
+      "The L^3 shell integrand at alpha = 1 is EXACTLY r^-1, i.e. exactly log-divergent — which is what PB2 (leg 410) measured numerically as constant increments of 139.287 per decade. Again a cross-check, NOT a new result, and it is recorded as such."
+    ],
+    "and_one_thing_the_ledger_caught_in_this_units_own_test": "A planted control asserted that the L^2 integral converges at alpha = 3/2. IT DOES NOT: the criterion is p·alpha > 3 STRICTLY, and at alpha = 3/2 the shell integrand is exactly r^-1, log-divergent. That is precisely why leg 381's bill reads 'alpha > 1.5' and not 'alpha >= 1.5'. The control was corrected IN PLACE with the error recorded, not silently repaired.",
+    "the_structural_difference_U5_must_measure": "The manuscript's object is NOT a DSS profile that was cut off. It is an approximate solution BUILT so that its residual is flat at the singularity, and then cut off. Route 4's object is an exact-ansatz profile whose residual is NOT flat — it is order one (L6: rho = 1.5048519 at 20,000 iterations). Flatness is not a property one can add to a profile after the fact; it is what Sections 4-9 construct. WHETHER ANY OF THIS TRANSFERS IS U5's QUESTION AND IS NOT ANSWERED HERE."
+  },
+  "clay_movement": {
+    "links_moved": 0,
+    "clay_odds": "~0.05%, unchanged",
+    "walls_moved": "none",
+    "tier": "no tier produced",
+    "note": "Exact arithmetic over exponents. It re-derives a published scaling ledger and puts one banked pin in the same units. Nothing here is a measurement of a fluid equation, nothing is a proof, and W4 is exactly where it was."
+  }
+}
