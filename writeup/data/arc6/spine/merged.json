@@ -1,0 +1,1102 @@
+{
+ "schema": "arc6_spine_merged_v1",
+ "leg": 429,
+ "agents_present": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "verifier_present": true,
+ "spine_size": 58,
+ "nodes_with_verdict": 58,
+ "missing": [],
+ "counts": {
+  "CHECKED": 58,
+  "GAP": 0,
+  "NOT-CHECKED": 0
+ },
+ "verifier_counts": {
+  "CHECKED": 10,
+  "GAP": 0,
+  "NOT-CHECKED": 0
+ },
+ "sampled": [
+  "Proposition 9.9",
+  "Lemma 9.8",
+  "Proposition 9.1",
+  "Lemma 8.8",
+  "Lemma 6.3",
+  "Proposition 4.10",
+  "Lemma 4.4",
+  "Proposition C.3",
+  "Proposition B.8",
+  "Lemma B.7"
+ ],
+ "agreement": {
+  "n": 10,
+  "agree": 10,
+  "rate": 1.0,
+  "disagreements": []
+ },
+ "verified": [
+  "Lemma 4.4",
+  "Lemma 6.3",
+  "Lemma 8.8",
+  "Lemma 9.8",
+  "Lemma B.7",
+  "Proposition 4.10",
+  "Proposition 9.1",
+  "Proposition 9.9",
+  "Proposition B.8",
+  "Proposition C.3"
+ ],
+ "gaps": {},
+ "verifier_gaps": {},
+ "escalation_candidates": {
+  "agent_1": [],
+  "agent_2": [],
+  "agent_3": [],
+  "agent_4": [],
+  "verifier": []
+ },
+ "existence_source": {
+  "Proposition 9.9": {
+   "agent": "Existence of a state at every stage j is supplied by Definition 9.4 together with Proposition 9.5 (stage 0 exists: 'The resulting fields form a state at stage 0') and Proposition 9.6 (given a state at stage j, 'There is a state (u[j+1],p[j+1])'), closed by induction at the end of the proof of Prop 9.6 (p.111: 'Proposition 9.3 supplies the source hypotheses for the next cycle, completing the induction'). The partial sums are (9.15) on p.112, (u[J],p[J]) = U_0 + sum_{j<=J}(Delta u_j, p_j), differences of consecutive states. Lemma 9.7 adds only that all of them live on one domain 0<q<q_big (its proof: the cycle consists of fixed linear inverses with fixed coefficients applied to sources of arbitrary size, so no stage shrinks the domain). Citation status: Prop 9.9 cites Lemmas 9.7, 9.8, 5.4, Prop 5.5, Theorem 4.6, (7.33), (9.15), (9.18), (9.21) but never Prop 9.5 or 9.6 by number; the dependence is implicit through 'the finite corrections above', 'each finite state', (9.15), and the section intro (p.100: 'We prove in Proposition 9.6 that each cycle gains a fixed positive power of eps ... This permits every finite stage to be defined on one domain (Lemma 9.7), where the final summation produces the local field of Proposition 9.9') and Sec.9.4's opening sentence (p.111). The bounds (9.8)-(9.9) are Definition 9.4's, guaranteed at every stage by Props 9.5/9.6.",
+   "verifier": "Existence of a state at every stage j (the terms being summed) comes from Proposition 9.5 (stage 0) plus Proposition 9.6 applied inductively (stage j -> j+1); Lemma 9.7 asserts the common domain q < q_big for all finite partial sums. Proposition 9.9's proof cites Lemma 9.7, Lemma 9.8, Lemma 5.4 and (9.15); it does not cite Propositions 9.5/9.6 by number (they are cited in the Section 9 introduction, p.100, and in the setup of (9.15) on p.112)."
+  },
+  "Lemma 9.7": {
+   "agent": "Lemma 9.7 does not itself construct the states; it asserts a common domain for 'every finite partial sum above', i.e. the (u[j],p[j]) of Definition 9.4 produced by Prop 9.5 (j=0) and Prop 9.6 (j -> j+1). Neither proposition is cited by number in the lemma or its proof; the paragraph following the proof (p.112) speaks of 'the cycle from stage j-1 to stage j' (the cycle of Prop 9.6), and Sec.9.4's opening sentence says 'all finite states (u[j],p[j]) must exist on one domain (Lemma 9.7)'. So the existence source is Props 9.5/9.6 by induction, and Lemma 9.7 supplies domain-uniformity; the text makes this link only implicitly.",
+   "verifier": null
+  },
+  "Lemma 9.8": {
+   "agent": "Lemma 9.8 estimates increments Z_j = (A_j, B_j, p_j) of (9.15), i.e. differences of consecutive states from Definition 9.4; it uses (9.8)-(9.9) ('Apply the same calculation to (9.9), to the fixed background, and to (9.8)') and 'Every retained stage-j increment has normalized exponent at least j/10', which is the class bookkeeping of Prop 9.6's proof. The existence of the states at each stage is therefore taken from Props 9.5/9.6 (induction), not cited by number here; Lemma 9.8 assumes them as given.",
+   "verifier": "The states (u^[j],p^[j]) whose increments Z_j the lemma bounds are produced inductively by Proposition 9.5 (stage 0) and Proposition 9.6 (stage j -> j+1, 'There is a state (u^[j+1],p^[j+1])'); their common domain 0 < q < q_big is asserted by Lemma 9.7. Lemma 9.8's text defines Z_j via (9.15) 'the cycle from stage j-1 to stage j' (p.112) and cites (9.8), (9.9), (9.5) for the bounds; it does not cite Prop 9.5/9.6 by number."
+  }
+ },
+ "extraction_artefacts": {
+  "agent_1": [
+   {
+    "page": 122,
+    "display": "phi_R(x) = phi(x/R), chi_R = phi8R; later phi4R, phi3R, phi2R, phi6R, phi7R (pp.122-123)",
+    "resolved_as": "powers of one cutoff: chi_R = phi_R^8, phi_R^4, phi_R^3, phi_R^2, phi_R^6, phi_R^7. PDF word boxes: 'phi8' top y=384.1 (raised) and 'R,' top y=385.9 (lowered) on the chi_R line; 'phi4' y=498.1 with 'R' at y=505.3. As dilations the inequalities of Lemma 10.5 would be inconsistent; as powers every one is exact."
+   },
+   {
+    "page": 113,
+    "display": "gj = 10h j (9.17)",
+    "resolved_as": "g_j = h j / 10; PDF: 'h','j' at y~216, '10' at y=223 (denominator). Consistent with Prop 9.9 Step 1 'g_j = hj/10'."
+   },
+   {
+    "page": 113,
+    "display": "sx = 12 + 2,h        st = 1 + 3h2",
+    "resolved_as": "s_x = 1/2 + h/2, s_t = 1 + 3h/2 (recomputed from k <= 2Q^{-h/2} and the phase bounds; both then dominate (9.19) as claimed)."
+   },
+   {
+    "page": 120,
+    "display": "Cj,mbm-jj  ||Fj||C|alpha| (10.12)",
+    "resolved_as": "C_{j,m} b_j^{m-j} ||F_j||_{C^{|alpha|}}; PDF: 'bm-j' with lowered 'j'. Recomputed exponent m-j."
+   },
+   {
+    "page": 121,
+    "display": "F(t) = int_t ||f(s)||2 ds and (10.13) ||u(t)||22 + 2 ||grad u(s)||22 ds <= F(t)2",
+    "resolved_as": "F(t) = int_0^t ||f(s)||_2 ds; ||u(t)||_2^2 + 2 int_0^t ||grad u(s)||_2^2 ds <= F(t)^2 (PDF: L^2 subscripts lowered, squares raised)."
+   },
+   {
+    "page": 119,
+    "display": "(10.8) two-part display scrambled: 'K(rho, tau)2 tau <= Cj rho-3-4h-2j ... |d_tau^j K(r, tau)| <= Cj r-1-2h-2j ... d_j rho'",
+    "resolved_as": "|d_tau^j K(r,tau)| <= C_j r^{-1-2h-2j} and |d_tau^j (K(rho,tau)^2/rho)| <= C_j rho^{-3-4h-2j}; both recomputed from (10.7) and (A.34)."
+   },
+   {
+    "page": 118,
+    "display": "(10.3) line: 'then q <= 2tau; otherwise |eta| > 2-1/2 and q <= (  2|z|)1/D' with a stray sqrt",
+    "resolved_as": "q <= (sqrt(2)|z|)^{1/D}; recomputed from (3.2)."
+   },
+   {
+    "page": 47,
+    "display": "Pi'n = 2C-2 phi0 phin + C-2 sum phi_i phi_{n-i} - Omega_{n-1} . 2X (and (5.5) on p.46)",
+    "resolved_as": "Pi'_n = 2C^{-2}phi_0 phi_n + C^{-2} sum_{i=1}^{n-1} phi_i phi_{n-i} - Omega_{n-1}/(2X); fixed by Pi_X = E^2/(2X), E = sqrt(2X) phi/C, and by the p.48 pressure row d_xi Pi_n = 4 xi phi_0 phi_n/C^2."
+   },
+   {
+    "page": 49,
+    "display": "mn,5 = int R ( sum UiUj - 12 R2 dR Pi_n ) dR (5.11)",
+    "resolved_as": "m_{n,5} = int_0^inf (R sum_{i+j=n} U_i U_j - (1/2) R^2 d_R Pi_n) dR; forced by p.51's form int (sum U_i U_j - (1/2) sum E_i E_j + (1/2) Omega_{n-1}) dX and by the IBP in (5.20)."
+   },
+   {
+    "page": 15,
+    "display": "(3.5): 'int_inf K(rho, tau)2 A = 0, B = K(r, tau), p = - d rho, ... r rho'",
+    "resolved_as": "A = 0, B = K(r,tau), p = -int_r^inf K(rho,tau)^2/rho d rho, K = r^{-1-2h}H_ext(tau/r^2); consistent with p.116 Step 4 and (10.7)."
+   }
+  ],
+  "agent_2": [
+   {
+    "page": 106,
+    "display": "(9.8): 'Bj = 21 + σj, C∗j = 1 + σj, σj = 15 + 10,j'",
+    "resolved_as": "B_j = 1/2 + sigma_j, C*_j = 1 + sigma_j, sigma_j = 1/5 + j/10 (fraction bars at x=223, 384, 403)"
+   },
+   {
+    "page": 107,
+    "display": "'Bj+1 = Bj + 10,1 C∗j+1 = C∗j + 10.1'",
+    "resolved_as": "B_{j+1} = B_j + 1/10, C*_{j+1} = C*_j + 1/10 (bars at x=281, 380)"
+   },
+   {
+    "page": 108,
+    "display": "'abbreviate B = 12 + σj and C∗= B + 12 = 1 + σj'",
+    "resolved_as": "B = 1/2 + sigma_j, C* = B + 1/2 = 1 + sigma_j"
+   },
+   {
+    "page": 111,
+    "display": "'min{ 21 −3κs, 12 −κs, B −κs, 0.4} ≥0.4, min{ 12 −4κs, 0.4 −κs, 12 −2κs, B −3κs} ≥0.4 −κs, H −B = 1 2 −2κs > 0.1'",
+    "resolved_as": "min{1/2-3k, 1/2-k, B-k, 0.4} >= 0.4; min{1/2-4k, 0.4-k, 1/2-2k, B-3k} >= 0.4-k; H - B = 1/2 - 2k > 0.1 (bars at x=169, 208, 135, 215, 261)"
+   },
+   {
+    "page": 102,
+    "display": "(9.2) braces displaced: '{ −ε (D2r + R−1Dr + D2z)a −R−2(ar, aθ, 0) ... }'",
+    "resolved_as": "-eps { (D_r^2 + R^{-1}D_r + D_z^2)a - R^{-2}(a_r,a_theta,0) + 2ikm(n_r D_r + n_z D_z)a + ikm(D_r n_r + n_r/R + D_z n_z)a + 2ikm(n_theta/R)(-a_theta, a_r, 0) }: the whole block carries the factor eps ('−ε' at x=206 then '{' at x=221 on the D_r^2 line)"
+   },
+   {
+    "page": 104,
+    "display": "(9.6) scrambled: 'W[j] ... = ⟨g[j]r ⟩Y dR, p[j]m = T0(g[j]r −ρP[j]), ab = ⟨w[j]a w[j]b ⟩θ, P[j] ... ⟨G[j]∗+ F ∗−EB,∗⟩θ[j] = (Drp[j]m −g[j]r , E[j]θ , E[j]z )'",
+    "resolved_as": "W_ab = <w_a w_b>_theta, P = int <g_r>_Y dR, p_m = T_0(g_r - rho P), <G_* + F_* - E_{B,*}>_theta = (D_r p_m - g_r, E_theta, E_z) with g_r, E_theta, E_z from (8.3)"
+   },
+   {
+    "page": 107,
+    "display": "(9.11) scrambled",
+    "resolved_as": "<E_theta>_Y = (d_R + 2/R)(<W_rtheta>_Y - Sigma_theta^(0)) - (d_R + 2/R)(Sigma_theta - Sigma_theta^(0)) + eps d_Z <W_ztheta>_Y; <E_z>_Y = (d_R + 1/R)(<W_rz>_Y - Sigma_z^(0)) - (d_R + 1/R)(Sigma_z - Sigma_z^(0)) + eps d_Z <W_zz + p_m>_Y"
+   },
+   {
+    "page": 109,
+    "display": "definitions of b_e, M_e, sigma_e interleaved",
+    "resolved_as": "b_e(r,z,t) = q^{-(e+1)/2} bhat_e(r/sqrt q) with int x^e bhat_e = 1; M_e = int_0^infty r^e F_e dr; sigma_e(r) = -r^{-e} int_0^r (r')^e (F_e(r') - b_e(r') M_e) dr'"
+   },
+   {
+    "page": 110,
+    "display": "(8.20) restated: '∆v = −c−1 N−1 ... i0 i0 E◦θ, γd = −c−1i0 N−1i0 E◦z'",
+    "resolved_as": "Delta v = -c_{i0}^{-1} N_{i0}^{-1} E_theta^o, gamma_d = -c_{i0}^{-1} N_{i0}^{-1} E_z^o"
+   },
+   {
+    "page": 91,
+    "display": "(8.10): '∥L−pH∥Cmy ≤Cm,p∥H∥Cm+p+3y' split across a line",
+    "resolved_as": "||L^{-p} H||_{C^m_y} <= C_{m,p} ||H||_{C^{m+p+3}_y}, p >= 1"
+   },
+   {
+    "page": 95,
+    "display": "(8.19) scrambled",
+    "resolved_as": "N^{-1}F = sum_{k != 0} Fhat(k) e^{2 pi i k.y}/(2 pi i v_t . k), ||N^{-1}F||_{C^m_y} <= C_m ||F||_{C^{m+4}_y}"
+   },
+   {
+    "page": 96,
+    "display": "chart-factor line 'QA−(2A+1/2)T−i0g = Q−1−hT−i0g = c−1i0' displaced into the paragraph",
+    "resolved_as": "Q^{A-(2A+1/2)} T_g^{-i0} = Q^{-1-h} T_g^{-i0} = c_{i0}^{-1} <= C S_*"
+   },
+   {
+    "page": 94,
+    "display": "(8.15): 'Jz = ∫R⟨2Gγ + γ2 + Wzz⟩Y dR −1 ∫ R2⟨gr⟩Y dR, cρ = 1 ∫ R2ρ dR' with '2' on the next line",
+    "resolved_as": "J_z = int R<2G gamma + gamma^2 + W_zz>_Y dR - (1/2) int R^2 <g_r>_Y dR; c_rho = (1/2) int R^2 rho dR"
+   },
+   {
+    "page": 105,
+    "display": "(7.33) recovery bounds scrambled",
+    "resolved_as": "|D^I(dSigma)_sigma| <= C eps^{alpha-1} S^b zeta delta^{-M}; |D^I(a_sigma^{-1})| <= C S^b zeta^{-1/2} delta^{-M}; |D^I delta a_sigma| <= C eps^{alpha-1} S^b sqrt(zeta) delta^{-M}; |D^I(sqrt(eps) delta a_sigma b_sigma)| <= C eps^{alpha-1/2} S^b sqrt(zeta) delta^{-M} P_v"
+   },
+   {
+    "page": 101,
+    "display": "'Cm = i nΦ × tm / km|nΦ|2' split over three lines",
+    "resolved_as": "C_m = i n_Phi x t_m / (k m |n_Phi|^2)"
+   },
+   {
+    "page": 98,
+    "display": "matrices A_theta, A_z",
+    "resolved_as": "readable as printed; row order (angular: rows 1,3,5 of (8.25); axial: rows 2,4)"
+   }
+  ],
+  "agent_3": [
+   {
+    "page": 74,
+    "display": "frame line: 'N = g0 K = N⊥, λ20 = −2F0Nθ(2F0Nθ + |g0|) > 0, c0 = < 0. |g0|, 2F0Nθ'",
+    "resolved_as": "N = g_0/|g_0|, K = N^perp, lambda_0^2 = -2F_0N_theta(2F_0N_theta+|g_0|) > 0, c_0 = lambda_0/(2F_0N_theta) < 0 (fraction bars under g_0 and lambda_0)"
+   },
+   {
+    "page": 74,
+    "display": "(7.1) 'T0,∗· K T0,∗· N < c0 1, T0,∗= (Q/q)A+1/2T0. 0,|| T0,∗· N|| <'",
+    "resolved_as": "T_{0,*}.N < 0, |c_0 (T_{0,*}.K)/(T_{0,*}.N)| < 1, T_{0,*} = (Q/q)^{A+1/2} T_0"
+   },
+   {
+    "page": 78,
+    "display": "'λ0 −λ0(1 + y2) , y = |s(v)|. anet(y) = √ 1 + y2 (1 + u2∗)3/2'",
+    "resolved_as": "a_net(y) = lambda_0/sqrt(1+y^2) - lambda_0(1+y^2)/(1+u_*^2)^{3/2}"
+   },
+   {
+    "page": 80,
+    "display": "(7.21) 'y(v) √ cP(v) ≤x(v) ≤CP(v), = c0 1 + s(v)2 + O(S−1∗). x(v)'",
+    "resolved_as": "cP <= x <= CP, y(v)/x(v) = c_0 sqrt(1+s(v)^2) + O(S_*^{-1})"
+   },
+   {
+    "page": 81,
+    "display": "'+ C(1 + Kb/S∗+ K2b/S2∗) < 0. ±r′| r=±Kb/S∗≤−2cλKb S∗'",
+    "resolved_as": "+-r'|_{r=+-K_b/S_*} <= [-2c_lambda K_b + C(1+K_b/S_*+K_b^2/S_*^2)]/S_* < 0 (single fraction bar over S_*)"
+   },
+   {
+    "page": 83,
+    "display": "'h+y+ = 2(−TN/Ac1 −TK/u∗), h−y−= 2(−TN/Ac1 + TK/u∗)'",
+    "resolved_as": "h_+y_+ = (1/2)(-T_N/A_c - T_K/u_*), h_-y_- = (1/2)(-T_N/A_c + T_K/u_*) (the '1'/'2' are a stacked 1/2 fraction, not a factor 2)"
+   },
+   {
+    "page": 69,
+    "display": "(6.24) '|∂I f | ≤Cj,IεαS ∗ζbj,I δ−dj,I'",
+    "resolved_as": "|d^I f| <= C_{j,I} eps^alpha S_*^{b_{j,I}} zeta delta^{-d_{j,I}} (b_{j,I} is the S_* exponent; zeta to the first power)"
+   },
+   {
+    "page": 84,
+    "display": "(7.31) '(dΣ)σ √ dΣ = H−1(Σ/ε), δaσ = , LΣ = ε ∑ δaσbσ. 2aσ'",
+    "resolved_as": "dSigma = H^{-1}(Sigma/eps), delta a_sigma = (dSigma)_sigma/(2a_sigma), L Sigma = sqrt(eps) sum delta a_sigma b_sigma"
+   }
+  ],
+  "agent_4": [
+   {
+    "page": 27,
+    "display": "(4.13) '−2LXϕXX + 2ϕX = Sq ... ϕ'",
+    "resolved_as": "-2L(X phi_XX + 2 phi_X)/phi = Sq (brief's geometry note; also what the derivation from (4.9) produces)"
+   },
+   {
+    "page": 41,
+    "display": "'∂φA = −12(aL −a0), ∂φB = 2E0(bL −b0)'",
+    "resolved_as": "d_phi A = -(1/2)(aL - a0), d_phi B = (1/2) E0 (bL - b0); PDF words show '−1','2(aL' and '1','2E0(bL' with 4pt fraction bars at x=170 and x=282, y=274"
+   },
+   {
+    "page": 133,
+    "display": "(A.19) 'λS(∞) ... = Amp2Kb −1 −e−26 ... 4 + E'",
+    "resolved_as": "lambda S(inf)/(Xp e_b^2 f^2) = Amp^2 Kb - (1 - e^{-26})/4 + E(Amp, eta); bars at x=111 (width 33, under λS(∞)) and x=216 (width 38, under −1 −e−26)"
+   },
+   {
+    "page": 155,
+    "display": "(B.35) 'Ns = −WU + D(M̂ −ηM̂η) ... + 4hηŜ −dŜη ... x + 4AηΠ −dΠη'",
+    "resolved_as": "Ns = -WU + [D(M^ - eta M^_eta) + 4h eta S^ - d S^_eta]/x + 4A eta Pi - d Pi_eta; the fraction bar (x 235-368) spans all three terms"
+   },
+   {
+    "page": 25,
+    "display": "Lemma 4.1 proof 'ηz = d/(qDL), Xz = −2ηX/(qDL)'",
+    "resolved_as": "q^D L (superscript lost in inline text); rederived: eta_z = q^{-D} d/L, X_z = -2 eta X q^{-D}/L"
+   },
+   {
+    "page": 37,
+    "display": "(4.34) '5 8 2 P∗f x8/5', '512P2∗f 2x6/5', '52P2∗f 2x1/5'",
+    "resolved_as": "(5 sqrt2/8) P* f x^{8/5}, (5/12) P*^2 f^2 x^{6/5}, (5/2) P*^2 f^2 x^{1/5}; verified by integration"
+   },
+   {
+    "page": 29,
+    "display": "'Wi = 1 −2DηMi + d∂ηMi , X'",
+    "resolved_as": "W_i = 1 - (2 D eta M_i + d d_eta M_i)/X"
+   },
+   {
+    "page": 32,
+    "display": "'≥γK > 0 ... 2' in the P_K estimate",
+    "resolved_as": ">= gamma_K/2 > 0"
+   },
+   {
+    "page": 146,
+    "display": "(B.11) 'f0(z) ≥1 −t + t2 −t3 ≥305719 > .265 ... 2 12 144 1152000'",
+    "resolved_as": "f0 >= 1 - t/2 + t^2/12 - t^3/144 >= 305719/1152000"
+   },
+   {
+    "page": 149,
+    "display": "'f0(z) + z f0(z)′ ≤1 −t + t2 −t3 + t4 < −.18 ... 4 36 576'",
+    "resolved_as": "1 - t + t^2/4 - t^3/36 + t^4/576"
+   },
+   {
+    "page": 138,
+    "display": "'0 ≤−ZH′ < h, rKr = −A −ZH′ < −1 ... H 2K H 2'",
+    "resolved_as": "0 <= -ZH'/H < h, r K_r/(2K) = -A - ZH'/H < -1/2"
+   }
+  ],
+  "verifier": [
+   {
+    "page": 29,
+    "display": "W_i = 1 -2D eta M_i + d d_eta M_i , X  and  Delta W = -2D eta Delta M + d d_eta Delta M , X",
+    "resolved_as": "W_i = 1 - (2 D eta M_i + d d_eta M_i)/X and Delta W = -(2 D eta Delta M + d d_eta Delta M)/X (fraction bars start right of the minus signs; consistent with (4.8))"
+   },
+   {
+    "page": 116,
+    "display": "H_ext(s) = 2Ac_inf H(4s)  and  sup|H_ext^{(m)}| <= 2Ac_inf 4^m (h)_m (1+h)_m",
+    "resolved_as": "2^A c_inf (the 'A' is an 8pt superscript glyph raised above the 10.9pt baseline); required by (4.29): c_inf (r^2/2)^{-A} = 2^A c_inf r^{-1-2h}"
+   },
+   {
+    "page": 37,
+    "display": "Ihat_0 = 5 8 2 P_* f x^{8/5};  Shat_0 = 16 eta^2 x - 512 P_*^2 f^2 x^{6/5};  C_p,0 = 52 P_*^2 f^2 x^{1/5}",
+    "resolved_as": "(5 sqrt2/8) P_* f x^{8/5};  (5/12) P_*^2 f^2 x^{6/5};  (5/2) P_*^2 f^2 x^{1/5} (recomputed by direct integration)"
+   },
+   {
+    "page": 38,
+    "display": "G = Qs - bsNs >= 6 >= 3Qmin , Pc = XRx G > 2  aE 7Qs 7 L",
+    "resolved_as": "G = Q_s - b_s N_s/(aE) >= 6 Q_s/7 >= 3 Q_min/7, P_c = X_R x G/L > 2"
+   },
+   {
+    "page": 113,
+    "display": "gj = 10h (in (9.17));  sx = 12 + 2,h  st = 1 + 3h2",
+    "resolved_as": "g_j = h j/10 (confirmed by p.114 'g_j = hj/10'); s_x = 1/2 + h/2, s_t = 1 + 3h/2"
+   },
+   {
+    "page": 106,
+    "display": "Bj = 21 + sigma_j, C*_j = 1 + sigma_j, sigma_j = 15 + 10,j",
+    "resolved_as": "B_j = 1/2 + sigma_j, C*_j = 1 + sigma_j, sigma_j = 1/5 + j/10 (consistent with B_0 = 0.7, C*_0 = 1.2)"
+   },
+   {
+    "page": 155,
+    "display": "(B.35) garbled: 'W = 1 -2D eta M/x -d M_eta/x, Q_s = -W + ... x Hhat, N_s = -WU + D(M - eta M_eta)/x + ...'",
+    "resolved_as": "the (4.16) formulas with X -> x, H -> Hhat = sqrt(2x) E, m -> mhat; X_R cancels (re-derived)"
+   },
+   {
+    "page": 156,
+    "display": "(B.37): 'G >= 6 >= 3Qmin , Pc = XRx G.  7Qs 7 L'",
+    "resolved_as": "G >= 6Q_s/7 >= 3Q_min/7, P_c = X_R x G/L"
+   }
+  ]
+ },
+ "nodes": {
+  "Theorem 1.1": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 5,
+   "n_steps": 10,
+   "existence_source": null,
+   "notes": "Proof is the assembly of Prop 10.1, Lemmas 10.2-10.5 and Theorem 3.1(iv); each cited input is one of my nodes and was checked. The uniqueness-in-H^3 remark (maximal lifespan) is a side statement not needed for the theorem's conclusion.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 10.1": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 3,
+   "n_steps": 7,
+   "existence_source": null,
+   "notes": "Straightforward; depends on Theorem 3.1(i) for axis smoothness and on q ~ tau+|z|^{1/D} from (3.2).",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 10.2": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 5,
+   "n_steps": 9,
+   "existence_source": null,
+   "notes": "Depends on Theorem 3.1(ii),(iii) (proved in Prop 9.9) and Lemma A.6. Extraction of the display (10.8) on p.119 is scrambled; reconstructed from the surrounding text and checked as above.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 10.3": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 4,
+   "n_steps": 7,
+   "existence_source": null,
+   "notes": "Self-contained given Lemma 10.2's (10.6),(10.10).",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 10.4": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 2,
+   "n_steps": 5,
+   "existence_source": null,
+   "notes": "Elementary energy identity; uses smoothness and compact support from Prop 10.1 and f from Lemma 10.3.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 10.5": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 11,
+   "n_steps": 16,
+   "existence_source": null,
+   "notes": "The banked text reads 'chi_R = phi8R', 'phi4R', 'phi3R', 'phi2R', 'phi6R', 'phi7R'. Read as dilations phi(x/(kR)) these are mutually inconsistent (|grad chi_R| <= C R^{-1} phi_{7R} fails at the outer edge of supp grad phi_{8R} for every phi; ||phi_{3R}w||_3 <= ||phi_{2R}w||_3 is backwards; no monotone ordering satisfies (10.17), the pairing, and the interpolations simultaneously). PDF word geometry on p.122 (y-boxes: 'phi8' raised, 'R,' lowered; 'phi4' raised, 'R' lowered) shows they are powers phi_R^k of a single cutoff. With that reading every inequality is exact and the lemma is fully reproduced. Recorded under extraction_artefacts_found.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Theorem 3.1": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 2,
+   "n_steps": 4,
+   "existence_source": null,
+   "notes": "Theorem 3.1 has no proof of its own; it is 'all conclusions hold' in Prop 9.9. Verdict inherits Prop 9.9's, including the caveat recorded there about Step 3's delegated one-sided bounds.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 9.9": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 5,
+   "n_steps": 10,
+   "existence_source": "Existence of a state at every stage j is supplied by Definition 9.4 together with Proposition 9.5 (stage 0 exists: 'The resulting fields form a state at stage 0') and Proposition 9.6 (given a state at stage j, 'There is a state (u[j+1],p[j+1])'), closed by induction at the end of the proof of Prop 9.6 (p.111: 'Proposition 9.3 supplies the source hypotheses for the next cycle, completing the induction'). The partial sums are (9.15) on p.112, (u[J],p[J]) = U_0 + sum_{j<=J}(Delta u_j, p_j), differences of consecutive states. Lemma 9.7 adds only that all of them live on one domain 0<q<q_big (its proof: the cycle consists of fixed linear inverses with fixed coefficients applied to sources of arbitrary size, so no stage shrinks the domain). Citation status: Prop 9.9 cites Lemmas 9.7, 9.8, 5.4, Prop 5.5, Theorem 4.6, (7.33), (9.15), (9.18), (9.21) but never Prop 9.5 or 9.6 by number; the dependence is implicit through 'the finite corrections above', 'each finite state', (9.15), and the section intro (p.100: 'We prove in Proposition 9.6 that each cycle gains a fixed positive power of eps ... This permits every finite stage to be defined on one domain (Lemma 9.7), where the final summation produces the local field of Proposition 9.9') and Sec.9.4's opening sentence (p.111). The bounds (9.8)-(9.9) are Definition 9.4's, guaranteed at every stage by Props 9.5/9.6.",
+   "notes": "Steps 1, 2, 4, 5 reproduced in full. Step 3 is a list of closed-range (tau>=0) properties delegated to earlier sections; I confirmed that each delegated property is asserted in the cited or nearby text (Theorem 4.6(i), Prop 5.5's final paragraph, Prop 7.2's statement, the closing paragraph of Sec.8 on p.100, and Sec.6.2's tau>=0 geometry), but I did not re-derive those earlier constructions, which are outside my nodes. Prop 9.9 does not cite Prop 7.2 by number for the pulse one-sided claim; it says 'Differentiating its fixed linear ODE gives the bounds at every derivative order' and cites (7.33).",
+   "verifier_verdict": "CHECKED",
+   "verifier_gap": null,
+   "verifier_attack": "Checked each hypothesis of Lemma 5.4 ((5.28), U_0 bound, (5.29) representatives, (5.30), (5.32), (5.33)) against what Lemmas 9.7/9.8 and (9.15) supply; recomputed the H_ext derivative bound; tested the exterior formula K = r^{-1-2h} H_ext(tau/r^2) against (4.29) - the extracted prefactor '2A c_infty' is WRONG as written (2^A is needed) so I checked the PDF glyphs; checked the inner asymptotic (3.6) at z = 0; probed whether X_in in (0,X_a) is covered by the expansion bounds.",
+   "verifier_n_recomputed": 5,
+   "verifier_existence_source": "Existence of a state at every stage j (the terms being summed) comes from Proposition 9.5 (stage 0) plus Proposition 9.6 applied inductively (stage j -> j+1); Lemma 9.7 asserts the common domain q < q_big for all finite partial sums. Proposition 9.9's proof cites Lemma 9.7, Lemma 9.8, Lemma 5.4 and (9.15); it does not cite Propositions 9.5/9.6 by number (they are cited in the Section 9 introduction, p.100, and in the setup of (9.15) on p.112).",
+   "status": "VERIFIED",
+   "agree": true
+  },
+  "Lemma 9.7": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 1,
+   "n_steps": 5,
+   "existence_source": "Lemma 9.7 does not itself construct the states; it asserts a common domain for 'every finite partial sum above', i.e. the (u[j],p[j]) of Definition 9.4 produced by Prop 9.5 (j=0) and Prop 9.6 (j -> j+1). Neither proposition is cited by number in the lemma or its proof; the paragraph following the proof (p.112) speaks of 'the cycle from stage j-1 to stage j' (the cycle of Prop 9.6), and Sec.9.4's opening sentence says 'all finite states (u[j],p[j]) must exist on one domain (Lemma 9.7)'. So the existence source is Props 9.5/9.6 by induction, and Lemma 9.7 supplies domain-uniformity; the text makes this link only implicitly.",
+   "notes": "A bookkeeping lemma: no numerical content beyond the damping factor; its substance is the linearity of the Section 7-8 inverses with stage-independent coefficients, which I checked against the cited statements (7.18), (7.31) as used on p.109, Lemma 8.7 as cited, and Prop 7.2's threshold statement.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 9.8": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 12,
+   "n_steps": 10,
+   "existence_source": "Lemma 9.8 estimates increments Z_j = (A_j, B_j, p_j) of (9.15), i.e. differences of consecutive states from Definition 9.4; it uses (9.8)-(9.9) ('Apply the same calculation to (9.9), to the fixed background, and to (9.8)') and 'Every retained stage-j increment has normalized exponent at least j/10', which is the class bookkeeping of Prop 9.6's proof. The existence of the states at each stage is therefore taken from Props 9.5/9.6 (induction), not cited by number here; Lemma 9.8 assumes them as given.",
+   "notes": "The only numerical inputs beyond (6.6)/(7.2)/Def. 9.4 are the phase bounds (7.3),(6.12), which I took as cited. The extraction 'gj = 10h j' and 'sx = 12 + 2,h' are fraction artefacts; resolved by PDF geometry and by Prop 9.9 Step 1's explicit 'g_j = hj/10'.",
+   "verifier_verdict": "CHECKED",
+   "verifier_gap": null,
+   "verifier_attack": "Recomputed each row of (9.19) from (6.6) and (6.2); recomputed the phase derivative bounds from (7.3) [including the axial term p_z Z/eps and the v-dependence through (6.12)]; checked that s_x, s_t dominate (9.19); checked k <= 2 Q^{-h/2}; checked that l_m = 2A + (m+1)(1+3h/2) covers the physical rescalings and the curl; checked that every stage-j increment really has normalized exponent >= j/10 using (9.8)/(9.9)/Prop 9.6; checked (9.18) against (9.8).",
+   "verifier_n_recomputed": 9,
+   "verifier_existence_source": "The states (u^[j],p^[j]) whose increments Z_j the lemma bounds are produced inductively by Proposition 9.5 (stage 0) and Proposition 9.6 (stage j -> j+1, 'There is a state (u^[j+1],p^[j+1])'); their common domain 0 < q < q_big is asserted by Lemma 9.7. Lemma 9.8's text defines Z_j via (9.15) 'the cycle from stage j-1 to stage j' (p.112) and cites (9.8), (9.9), (9.5) for the bounds; it does not cite Prop 9.5/9.6 by number.",
+   "status": "VERIFIED",
+   "agree": true
+  },
+  "Lemma 5.4": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 4,
+   "n_steps": 6,
+   "existence_source": null,
+   "notes": "Fully reproduced. The remark after the proof (finite initial block with one common cutoff included in U_0, and the additional diagonal requirements (5.40)) is consistent with the construction since only finitely many requirements are added per step.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 5.5": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 5,
+   "n_steps": 6,
+   "existence_source": null,
+   "notes": "Fully reproduced given Lemma 5.4, Prop 5.3, Lemma 5.2's (5.13),(5.18),(5.22) and Theorem 4.6.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 5.3": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 5,
+   "n_steps": 5,
+   "existence_source": null,
+   "notes": "Fully reproduced given Lemmas 5.1, 5.2 and Prop 4.2.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 5.1": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 6,
+   "n_steps": 5,
+   "existence_source": null,
+   "notes": "Fully reproduced. The moment m_{n,5} and the pressure equation displays are fraction-garbled in the extraction; the reading Pi'_n = C^{-2} sum phi_i phi_j - Omega_{n-1}/(2X) is fixed by Pi_X = E^2/(2X) with E = sqrt(2X) phi/C and by p.51's m_{n,5} formula.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 5.2": {
+   "agent": 1,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 10,
+   "n_steps": 5,
+   "existence_source": null,
+   "notes": "Fully reproduced given Lemma 5.1, Theorem 4.6 (items (i),(iv),(v),(vi)), Lemma A.1, Lemma A.9 and (A.45). The extraction of (5.11) leaves the placement of the outer parenthesis ambiguous; the reading m_{n,5} = int (R sum U_i U_j - (1/2) R^2 d_R Pi_n) dR is forced by p.51's X-integral form and by the IBP identity used in (5.20).",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 9.6": {
+   "agent": 2,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 9,
+   "n_steps": 15,
+   "existence_source": null,
+   "notes": "All exponent tables reproduced from Prop 9.1, Lemma 9.2, Cor 7.8 and the class rules; all five closing rows hold with kappa_s = 1e-5, and the only row with a single-digit margin is the tangential-mean row (0.07 above the required 0.1, produced by the W_{0.68} old-wave remainder against the signed correction). Two places where the proof is conservative rather than tight: (a) after Step 3 the defects are stated as S_H although the linear term 2V Delta v/R has zero auxiliary mean, (b) the Step-1 claim (P,J_theta,J_z) in S_{C*-k} uses the D_r loss for the g_r term only. Inputs used but not re-proved here: Prop 7.2 (inverse, class preservation), Prop 7.6 (W_{alpha-1/2} for L Sigma), (7.36) exact cross covariance, Cor 7.8 (statement recomputed from (6.31)), Lemma 7.7 (curl remainder), Prop 6.6. The paper's 'We used B >= 0.7' is only needed in rows 1-2 (B - k, B - 3k) and in sigma_j - 3k > 0.17, all satisfied at j = 0 with room.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 9.5": {
+   "agent": 2,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 4,
+   "n_steps": 8,
+   "existence_source": null,
+   "notes": "The chosen B_0 = 0.7, C*_0 = 1.2 are deliberately loose (stage-0 residuals are of order ~1, ~1.5, ~1.9); the looseness is what lets Prop 9.6's mean row (margin 0.07) drive a uniform +0.1 step. Prop 7.5's positivity/invertibility (7.29) and (7.26) were read, not re-derived.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 9.1": {
+   "agent": 2,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 3,
+   "n_steps": 6,
+   "existence_source": null,
+   "notes": "Lemma 7.1's polynomial bounds on n_Phi and |n_Phi| bounded below (p.77) are used as stated. Extraction artefact: display (9.2) on p.102 has its braces displaced; resolved at the PDF.",
+   "verifier_verdict": "CHECKED",
+   "verifier_gap": null,
+   "verifier_attack": "Re-derived the linearised residual (9.2) from R_* = Q^{2A+1/2} R(u,p) with u = base + a e^{ikm Phi}, checking which frame/shear terms sit in K (7.6) versus the remainder; recomputed every gain in the table from (6.32), (7.9), (7.15); looked for a term with gain below 1/2 - 3 kappa_s (in particular the curl correction r_m fed through the principal operator, and the pressure gradient); checked the pulse-cutoff tail flatness arithmetic.",
+   "verifier_n_recomputed": 4,
+   "verifier_existence_source": null,
+   "status": "VERIFIED",
+   "agree": true
+  },
+  "Lemma 9.2": {
+   "agent": 2,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 2,
+   "n_steps": 4,
+   "existence_source": null,
+   "notes": "(7.39) is essential: without it the phase-contraction term would be alpha+alpha'-1/2. (7.39) was re-derived from div_* of a e^{ikmPhi} = 0 (Lemma 7.7 statement): i k m n_Phi . a = -((D_r + 1/R)a_r + D_z a_z), one D_r and division by k m give 1/2 - k.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 9.3": {
+   "agent": 2,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 2,
+   "n_steps": 4,
+   "existence_source": null,
+   "notes": "Part (i)'s support/descent statements are structural consequences of Lemma 6.1, 6.2, Prop 6.6 and Prop 7.2 (zero data along a path gives zero solution); I verified the logic, not new estimates. Display (9.6) on p.104 is scrambled by extraction; resolved via Prop 8.1/(8.3)/(8.12).",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Definition 9.4": {
+   "agent": 2,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 1,
+   "n_steps": 4,
+   "existence_source": null,
+   "notes": "A definition; checked for internal consistency and for consistency with the constants every later use needs. Extraction artefact: (9.8) on p.106 renders as 'Bj = 21 + sigma_j ... sigma_j = 15 + 10,j'.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 8.2": {
+   "agent": 2,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 4,
+   "n_steps": 6,
+   "existence_source": null,
+   "notes": "Extraction artefact: (8.10) on p.91 is split across a line; resolved as ||L^{-p}H||_{C^m_y} <= C_{m,p} ||H||_{C^{m+p+3}_y}. The 'no factor M in coefficient derivatives' remark is consistent with the R-form because int d_1 F du = F - M int L F du (integration by parts in u), so the apparent M-term in d_R I g is bounded without loss.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 8.6": {
+   "agent": 2,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 2,
+   "n_steps": 5,
+   "existence_source": null,
+   "notes": "Extraction artefacts: (8.19) on p.95 and the chart-factor line on p.96 are scrambled; resolved as above.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 8.7": {
+   "agent": 2,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 3,
+   "n_steps": 7,
+   "existence_source": null,
+   "notes": "The three angular rows are 1, 3, 5 of (8.25) and the axial rows are 2, 4; the paper's matrices on p.98 are laid out in that order.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 8.8": {
+   "agent": 2,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 2,
+   "n_steps": 4,
+   "existence_source": null,
+   "notes": "The 2 kappa_s in the conclusion is only needed if one insists on counting the viscous row eps(Delta_0 - R^{-2}) Delta beta (alpha + 2 - 2k) as potentially binding; it never is for alpha >= 0.9.",
+   "verifier_verdict": "CHECKED",
+   "verifier_gap": null,
+   "verifier_attack": "Re-expanded g_r,new - g_r from (8.3) term by term looking for a missing cross term or a wrong sign in (8.26); re-derived (8.27) checking that exactly rows 3-5 of (8.25) are what cancels (including the -1/2 int R^2 <2V/R Delta v> piece inside J_z and the use of Delta gamma = gamma_d); recomputed every exponent in the class table and looked for a term below alpha + 0.9 - 2 kappa_s; checked that Delta beta is auxiliary-independent so t_* Delta beta = -eps d_T Delta beta.",
+   "verifier_n_recomputed": 8,
+   "verifier_existence_source": null,
+   "status": "VERIFIED",
+   "agree": true
+  },
+  "Proposition 8.4": {
+   "agent": 2,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 3,
+   "n_steps": 4,
+   "existence_source": null,
+   "notes": "Uses <A_0(g_r - rho P)>_Y = 0, which holds because int <g_r - rho P>_Y dR = P - P = 0 (Prop 8.3(i)).",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Corollary 8.5": {
+   "agent": 2,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 1,
+   "n_steps": 4,
+   "existence_source": null,
+   "notes": "Straightforward given Prop 8.4 and Lemma 8.2.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 7.1": {
+   "agent": 3,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 11,
+   "n_steps": 13,
+   "existence_source": null,
+   "notes": "Frame line p.74 resolved by PDF geometry: N=g_0/|g_0|, c_0=lambda_0/(2F_0N_theta)<0. The derived sign condition for lambda_0 real is -|g_0|<2F_0N_theta<0, which with g_0=F_0(-a,b_s), a>0, F_0>0 is exactly v_s>2; both a>0 and v_s-2>0 are supplied by Theorem 4.6(iii). The cone (7.1) coincides with (4.22) pointwise, and the uniform margin needed to choose u_* comes from (4.26) (sup of |c_0 T.K/T.N| <= sqrt(1-kappa/2) < 1). Note a minor notational overlap on p.76: 'e_theta' in '-K_0 e = (-2F_0 s K_theta, -2F_0 e_theta - g_0)' is the unit tangential vector (1,0), not the theta-component of e. The higher-derivative polynomial bounds are routine product/quotient-rule claims and were accepted as such after the denominators (|n_Phi,tan|, det M) were checked to be bounded below.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 7.2": {
+   "agent": 3,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 5,
+   "n_steps": 10,
+   "existence_source": null,
+   "notes": "The one-sided endpoint-derivative and descent/support claims are qualitative consequences of uniqueness for the linear ODE with zero data; accepted. Depends on Lemma 7.1 for E, d_ref, B^l bounds (checked above).",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 7.4": {
+   "agent": 3,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 4,
+   "n_steps": 5,
+   "existence_source": null,
+   "notes": "Derivative bounds follow the (7.20) induction of Proposition 7.2; accepted. Homogeneous pressure factor eps^{1/2} from (km)^{-1}.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 7.5": {
+   "agent": 3,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 7,
+   "n_steps": 13,
+   "existence_source": null,
+   "notes": "Positivity of the squared amplitudes under (7.1) is exact in the unperturbed system and survives the O(S_*^{-1/2}) column errors only because of the fixed margin eta_c, which traces back to (4.26) in Theorem 4.6(iii) (used twice: for choosing u_* on p.74, and for the sign T_N<0). The freezing of N,K,c_0 at representatives costs an error tending to zero uniformly by continuity on the closed annulus (slow boxes O(S_*^{-3})). Requires Theorem 4.6(iv) (4.27) for (7.25).",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 7.6": {
+   "agent": 3,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 4,
+   "n_steps": 5,
+   "existence_source": null,
+   "notes": "Relies on Proposition 6.6 product rules (statement read on p.71) and on (7.25)/(7.29) from Proposition 7.5.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 7.7": {
+   "agent": 3,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 4,
+   "n_steps": 7,
+   "existence_source": null,
+   "notes": "The D_r loss kappa_s is cited from (6.32) (Proposition 6.6), which I read and whose scaling M_i ~ eps^{-kappa_s} S_*^{-rho_g} I verified under Lemma 6.2. The support assumption 'compactly inside the pulse interval' is what allows the amplitude to be differentiated without boundary terms.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Corollary 7.8": {
+   "agent": 3,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 3,
+   "n_steps": 4,
+   "existence_source": null,
+   "notes": "Depends on Proposition 6.6 (product rules), (7.36) from the assembly on p.85, and Lemma 7.7. No positivity is used, as stated.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 6.2": {
+   "agent": 3,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 6,
+   "n_steps": 10,
+   "existence_source": null,
+   "notes": "Statement's Step 2 preservation claims (radial integration, translation, averaging, directional Fourier inversion) are qualitative lattice facts; verified at the level of the character argument.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Definition 6.4": {
+   "agent": 3,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 1,
+   "n_steps": 4,
+   "existence_source": null,
+   "notes": "This is a definition; CHECKED means it is well-formed and its garbled display was resolved unambiguously. The stronger statement that Theorem 4.6(iv)'s weight can be taken of this explicit form belongs to Theorem 4.6, not to this node.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 6.3": {
+   "agent": 3,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 1,
+   "n_steps": 3,
+   "existence_source": null,
+   "notes": "Elementary counting; the only inputs are the mesh size S_*^{-3} from p.64 and the dyadic overlap bound from p.65.",
+   "verifier_verdict": "CHECKED",
+   "verifier_gap": null,
+   "verifier_attack": "Tried to make the pointwise count unbounded via the dyadic partition (how many bands contain a given q?), via the closed supports K_gamma, and via boxes meeting a radial line from more than one band; tried to find an inconsistency between the mesh S_*^{-3} of p.64 and the exponents 9 and 3.",
+   "verifier_n_recomputed": 4,
+   "verifier_existence_source": null,
+   "status": "VERIFIED",
+   "agree": true
+  },
+  "Theorem 4.6": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 5,
+   "n_steps": 13,
+   "existence_source": null,
+   "notes": "The proof in Section 4.6 is a combination of Lemma 4.7 (verified inline), Lemma 4.8, Lemma 4.9 (not my node; its content is Lemma A.8 + Prop A.10 which I checked), Prop 4.10 and Lemma 4.11 (verified inline via Lemma C.1). Every step of the combination reproduced. The parameter order is stated in Remark B.9 (a Remark, not a proved statement) and, in Definition 3.3 convention, on p.40; the two chains agree (see parameter_chain). Appendix C.3 (Prop C.3) gives an independent second proof of the same conclusions; the two are consistent (Xv = Xend in C.3 vs 'same Xv as Lemma 4.8' on p.45; both lie after the pulse and before the outer collar).",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 4.2": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 3,
+   "n_steps": 6,
+   "existence_source": null,
+   "notes": "Assumes the residual R of (3.1) is d_t u + u.grad u + grad p - Lap u (p.18 says 'the physical momentum residual is R from (3.1)'; (3.1) not re-read). The extracted display (4.13) reads '−2LXϕXX + 2ϕX = Sq / ϕ'; PDF geometry (given in brief) confirms -2L(X phi_XX + 2 phi_X)/phi, which is what the derivation produces.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition 4.10": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 4,
+   "n_steps": 7,
+   "existence_source": null,
+   "notes": "The extracted (4.34) reads '5 8 2 P∗f x8/5', '512P2∗f 2x6/5', '52P2∗f 2x1/5': these are 5 sqrt2/8, 5/12, 5/2 (fraction bars lost); verified by direct integration. The statement's order of choices (j0, delta*, sigma*, Lambda, Tsh, C0; then t1, kappa0, widths) matches p.40 and (B.40).",
+   "verifier_verdict": "CHECKED",
+   "verifier_gap": null,
+   "verifier_attack": "Tried to break the positivity of Z_* at the zero of H_* (naive evaluation at eta=0 gives -A j_0 < 0), the uniqueness of that zero, the reference moments (4.34), the tolerance chain, the sign of x_sep < e^{-8} vs the order of choices (T_sh before C), and the consistency of the statement's constants (X_a = 4/Lambda, X_i = 110, X_R = 110 (C P_*)^10, X_h = X_R e^{-5}) with Appendix B; also checked the numerics of Proposition B.3 (alternating series) and Lemma B.4 (comparison functions) that supply the exit inequality.",
+   "verifier_n_recomputed": 11,
+   "verifier_existence_source": null,
+   "status": "VERIFIED",
+   "agree": true
+  },
+  "Lemma 4.4": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 2,
+   "n_steps": 5,
+   "existence_source": null,
+   "notes": "Structural lemma; nothing numerical to recompute beyond the identities above.",
+   "verifier_verdict": "CHECKED",
+   "verifier_gap": null,
+   "verifier_attack": "Tried to break (i) at the joining radius itself (do a, b_s, which contain radial derivatives, agree AT X=X_h?), tried to find a hidden radial-derivative dependence in (4.17), tried to find a sign error in the W display of the proof (extraction shows '1 -2DetaM_i + d d_eta M_i / X'), re-derived (4.16) from (4.9)-(4.10) since the lemma consumes it as a definition, and checked the rescaling remark (4.19).",
+   "verifier_n_recomputed": 5,
+   "verifier_existence_source": null,
+   "status": "VERIFIED",
+   "agree": true
+  },
+  "Lemma 4.5": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 4,
+   "n_steps": 5,
+   "existence_source": null,
+   "notes": "Fully reproduced.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma 4.8": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 3,
+   "n_steps": 4,
+   "existence_source": null,
+   "notes": "This lemma is a restatement of Props A.4, A.7 and Lemmas A.5, A.6; each clause was mapped to the appendix and the underlying computations are recorded under Proposition A.4 / A.7. The extracted p.138 line '0 ≤−ZH′ < h, rKr = −A −ZH′ < −1 ... H 2K H 2' is r K_r/(2K) = -A - ZH'/H < -1/2 (fraction bars lost); consistent with the derivation.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Definition 3.2": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 1,
+   "n_steps": 2,
+   "existence_source": null,
+   "notes": "Nothing to prove; recorded for completeness.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition C.3": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 1,
+   "n_steps": 5,
+   "existence_source": null,
+   "notes": "Same argument as Theorem 4.6 Step 4; reproduced.",
+   "verifier_verdict": "CHECKED",
+   "verifier_gap": null,
+   "verifier_attack": "Tried to break the edge directions: inner direction from (B.30) [is B_0(0,eta) really parallel to a(1,t_s)?], outer direction from (A.48)-(A.49) [is the y_b^6 exponent right and does it give (1,0)?]; re-derived the interior identities n_theta + t_s n_z = (P_c - v_s)/|p_s - s| and n_z - t_s n_theta = J_c/|p_s - s| from (4.11)/(4.20); checked that the cone expression equals 2 at both edges; checked that (C.18) matches (6.23) and that (B.31)/(A.51) give (C.19) with delta = min{1,y_a,y_b}; checked the 'stress cannot vanish in the interior' argument; checked which collars are untouched by Proposition C.2.",
+   "verifier_n_recomputed": 6,
+   "verifier_existence_source": null,
+   "status": "VERIFIED",
+   "agree": true
+  },
+  "Proposition C.2": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 2,
+   "n_steps": 6,
+   "existence_source": null,
+   "notes": "Identical mechanism to Theorem 4.6 Steps 2-3; reproduced.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma C.1": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 2,
+   "n_steps": 6,
+   "existence_source": null,
+   "notes": "Fully reproduced.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition A.4": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 12,
+   "n_steps": 12,
+   "existence_source": null,
+   "notes": "Every displayed constant reproduced. Steps verified at the level of asymptotic order rather than explicit constant: the O(lambda^28), O(lambda^27) remainders in (A.29)-(A.30) (mechanism verified: initial discrepancy lambda^{60-60 lambda} log(1/lambda) and O(E) = O(lambda^30) sources), the o(1) term in w (eta m_eta/Qs <= C sqrt(lambda) log(1/lambda) via |eta|/(lambda + c_eta) <= C/sqrt(lambda) and (A.20)), and the Cpre-bookkeeping in (A.14). The lower bound Kb > .20 is weak: the same integral gives Kb > .240.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition A.7": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 3,
+   "n_steps": 6,
+   "existence_source": null,
+   "notes": "Reproduced.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma A.8": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 3,
+   "n_steps": 6,
+   "existence_source": null,
+   "notes": "The integrated identities are exactly the four moment conditions; reproduced.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition A.10": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 4,
+   "n_steps": 8,
+   "existence_source": null,
+   "notes": "Reproduced. The relative smallness of Tz/Ttheta uses E <= C e_rel h^6 on the tail ((A.17)); this is 'fixed strict slack', not a quantitative constant, and I accepted it as such.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition B.2": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 5,
+   "n_steps": 8,
+   "existence_source": null,
+   "notes": "Reproduced. The (B.6) mixed-derivative bound (Lemma B.1) was read but not independently re-derived beyond checking the (B.7)-(B.10) inequalities' form; it is Lemma B.1, not my node.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition B.3": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 6,
+   "n_steps": 6,
+   "existence_source": null,
+   "notes": "Extraction of the quartic reads '1 −t + t2 −t3 + t4 / 4 36 576': denominators 4, 36, 576 = (alpha!)^2; verified. Reproduced.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition B.5": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 3,
+   "n_steps": 5,
+   "existence_source": null,
+   "notes": "Reproduced. The order 'choose kappa0 small compared to Vmax ..., then t1 small' matches p.40 (t1 << kappa0).",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Proposition B.8": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 4,
+   "n_steps": 5,
+   "existence_source": null,
+   "notes": "Reproduced.",
+   "verifier_verdict": "CHECKED",
+   "verifier_gap": null,
+   "verifier_attack": "Tried to break the tolerance chain (B.36)-(B.37) numerically; tried to make Q_{s,0} of the ideal profile vanish on R (the proof only cites '(A.25)'), by computing Q_{s,0} explicitly; tried to break (B.39)'s C_p = O(C^{-2}) bound noting that E^2/(2X) on the axis region equals X_R phi^2/C^2 with X_R growing like C^{10}; checked the ideal-profile identity after X_sep; checked the block-triangular moment map and its weights; checked the relaxed cone along (B.34) (l range, S_q > 1, barrier); checked that X_R cancels in (B.35).",
+   "verifier_n_recomputed": 10,
+   "verifier_existence_source": null,
+   "status": "VERIFIED",
+   "agree": true
+  },
+  "Lemma B.4": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 3,
+   "n_steps": 6,
+   "existence_source": null,
+   "notes": "The constants .94 and 2.4 are absorptions of .95 and 2.5 with unspecified but finite losses (o_{t1}(1), O(C^{-2}), O(1/Lambda)); the available slack (-W* >= 2.87 vs 2.5 used; .05 Lambda L chi allocated) is real, so I accept them.",
+   "status": "UNVERIFIED",
+   "agree": null
+  },
+  "Lemma B.7": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 2,
+   "n_steps": 4,
+   "existence_source": null,
+   "notes": "Reproduced.",
+   "verifier_verdict": "CHECKED",
+   "verifier_gap": null,
+   "verifier_attack": "Reconstructed the slope of log phi along [X_0, X_i] from (B.26), the reference cutoff and the a -> .8 interpolation, to see whether -kappa p_{1,r}/2 with kappa <= 1 really holds throughout (including the reference-cutoff interval where the reference slope is (1-sigma) D_X log phi_nat); reconstructed each contribution to G_i - U_* (activation (B.27), kappa_0-remainder, axial cutoff to zero, axis approximation) and checked which constants can depend on Lambda or C; checked that a = .8 corresponds to slope -.4.",
+   "verifier_n_recomputed": 5,
+   "verifier_existence_source": null,
+   "status": "VERIFIED",
+   "agree": true
+  },
+  "Corollary B.10": {
+   "agent": 4,
+   "verdict": "CHECKED",
+   "gap": null,
+   "not_checked_reason": null,
+   "n_recomputed": 0,
+   "n_steps": 3,
+   "existence_source": null,
+   "notes": "Its proof is a one-line combination; the parameter order it invokes lives in Remark B.9, which is a remark, not a proved statement.",
+   "status": "UNVERIFIED",
+   "agree": null
+  }
+ }
+}
