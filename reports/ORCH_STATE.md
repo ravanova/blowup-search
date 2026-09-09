@@ -33,7 +33,7 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–431. WAVE 1 CLOSED (leg 428). WAVE 2 IN FLIGHT (dispatched 2026-09-09): `R4` ×5 on the 58-node spine.**
+## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–432. WAVES 1–2 CLOSED (legs 428, 429). `R5`(i) SERIAL IN FLIGHT (leg 430). WAVE 3 NEXT: `R6` ×5.**
 
 **Mode:** `ORCHESTRATION.md` **§3g CONDUCTOR**, wave sizing **5** by user ruling (recorded in §3g
 beside its original reason; `CORRECTIONS.md` §67). The charter arrived while `R3` was mid-flight
@@ -85,11 +85,11 @@ own worktree, each writing ONE file under `writeup/data/arc6/spine/` and committ
 
 | slot | nodes | writes | status |
 |---|---|---|---|
-| 1 | §10, §3, summation, §5: Thm 1.1, Lemmas 10.2–10.5, Prop 10.1, Thm 3.1, Prop 9.9, Lemmas 9.7, 9.8, 5.4, Props 5.5, 5.3, Lemmas 5.1, 5.2 (15) | `agent_1.json` | in flight |
-| 2 | §9, §8: Def 9.4, Props 9.6, 9.5, 9.3, 9.1, Lemma 9.2, Lemmas 8.2, 8.6, 8.7, 8.8, Prop 8.4, Cor 8.5 (12) | `agent_2.json` | in flight |
-| 3 | §7, §6: Props 7.2, 7.5, 7.6, Lemmas 7.1, 7.4, 7.7, Cor 7.8, Lemma 6.2, Def 6.4, Lemma 6.3 (10) | `agent_3.json` | in flight |
-| 4 | §4, A, B, C: Thm 4.6, Props 4.2, 4.10, Lemmas 4.4, 4.5, 4.8, Def 3.2, Props C.3, C.2, Lemma C.1, Props A.4, A.7, A.10, Lemma A.8, Props B.2, B.3, B.5, B.8, Lemmas B.4, B.7, Cor B.10 (21) | `agent_4.json` | in flight |
-| 5 | **ADVERSARIAL VERIFIER**, blind, seed 428: Lemma 4.4, Prop 4.10, Lemma 6.3, Lemma 8.8, Prop 9.1, Lemma 9.8, Prop 9.9, Lemma B.7, Prop B.8, Prop C.3 (10; 2/2/1/5 across slots 1–4) | `agent_5_verifier.json` | in flight |
+| 1 | §10, §3, summation, §5: Thm 1.1, Lemmas 10.2–10.5, Prop 10.1, Thm 3.1, Prop 9.9, Lemmas 9.7, 9.8, 5.4, Props 5.5, 5.3, Lemmas 5.1, 5.2 (15) | `agent_1.json` | **landed** |
+| 2 | §9, §8: Def 9.4, Props 9.6, 9.5, 9.3, 9.1, Lemma 9.2, Lemmas 8.2, 8.6, 8.7, 8.8, Prop 8.4, Cor 8.5 (12) | `agent_2.json` | **landed** |
+| 3 | §7, §6: Props 7.2, 7.5, 7.6, Lemmas 7.1, 7.4, 7.7, Cor 7.8, Lemma 6.2, Def 6.4, Lemma 6.3 (10) | `agent_3.json` | **landed** |
+| 4 | §4, A, B, C: Thm 4.6, Props 4.2, 4.10, Lemmas 4.4, 4.5, 4.8, Def 3.2, Props C.3, C.2, Lemma C.1, Props A.4, A.7, A.10, Lemma A.8, Props B.2, B.3, B.5, B.8, Lemmas B.4, B.7, Cor B.10 (21) | `agent_4.json` | **landed** |
+| 5 | **ADVERSARIAL VERIFIER**, blind, seed 428: Lemma 4.4, Prop 4.10, Lemma 6.3, Lemma 8.8, Prop 9.1, Lemma 9.8, Prop 9.9, Lemma B.7, Prop B.8, Prop C.3 (10; 2/2/1/5 across slots 1–4) | `agent_5_verifier.json` | **landed** |
 
 Every agent: verdict `CHECKED` / `GAP` (step quoted) / `NOT-CHECKED` per node, constants recomputed
 not read, garbled displays checked at the PDF's geometry, forbidden from the journals,
@@ -98,9 +98,23 @@ as a refutation**. Gate pre-committed in `leg_426.md` §5: ≥ 35 of 58 `CHECKED
 agreement ≥ 0.8; `VERIFIED` only where the verifier reproduced a node blind. Composition floor:
 the Conductor's serial **`R5`(i)** runs in this wave (pre-registration `leg_430_prereg.md` first).
 
-**NEXT:** integrate wave 2 (leg 429): agreement table, `VERIFIED` labels, escalation packets for any
-`GAP` believed to sink the theorem (the verifier attacks the GAP first); then wave 3 = `R5`(iii)–(vii)
-fan-out on the interface `R5`(i)–(ii) pin, and `R6` ×5.
+**Wave 2 integrated (leg 429, `leg_429.md`).** 58/58 `CHECKED`, 0 `GAP`, 0 `NOT-CHECKED`; verifier
+10/10 blind, agreement 1.0; **10 `VERIFIED`**, 48 `UNVERIFIED`; 301 recomputations, 480 steps, 53
+extraction artefacts; no escalation candidates. The pre-committed "≥ 3 GAPs" was **refuted** (the
+(B.40)/p. 40 chains agree; Prop 9.6's smallest margin is 0.07; the uncited existence step is implicit
+dependence, found blind twice). Eight `CHECKED` verdicts carry a stated limit (listed in the journal,
+not re-labelled). Defect: agent 4's worktree lacked the data files and read the main checkout.
+**Not a proof of the theorem.** Worktrees removed after cherry-pick.
+
+**`R5`(i) IN FLIGHT (serial, leg 430, prereg `e01a64d`).** First numbers, before the full run: G1, G2, G4
+(paper's normalisation), G6, G8 pass at `λ = 0.1`; **G3 and G7 fail there, and the failure is the
+finding**: the paper's closure bracket needs `120 λ log(1/λ) ≪ 1` (`λ ≲ 10⁻⁴`) and its intermediate
+cone needs `√λ P_* ≪ 1` with `P_* > e^{T_d} ≈ 3·10⁵` (`λ ≲ 10⁻¹²`); a λ-sweep and a `P_*` exploration
+are running, labelled post hoc. G5's pre-registered measure is a 10⁸-fold cancellation; the identity
+holds in Lemma A.8's form to 10⁻¹⁵.
+
+**NEXT:** land `R5`(i) (leg 430); dispatch **wave 3 = `R6` ×5** (Lean: build / statement diff / census /
+comparator / coverage), composition floor by the Conductor's serial `R5`(ii); then wave 4 = `R5`(iii)–(vii).
 
 **Open escalations:** the five rows above, unchanged; row 1 still carries `U1`'s measured fact and
 is still not ruled. **Lean source build** from leg 418 (`lean_build.log`): not re-checked this wave;

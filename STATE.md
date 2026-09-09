@@ -38,11 +38,12 @@ fresh agent that never saw the construction can mark anything `VERIFIED`.**
 | **`R0`** 423/427 CORRECT | **A6-D is dead** — (D) is claimed, Cor 10.6 (§66); wave sizing 4→5 recorded beside §3g's own reason (§67) | — |
 | **`R1`** 424 EXTRACT | **`NO-AND-HERE-IS-THE-DIFF`** strictly, **`MATCH`** after six named typographic rules; **79** statements indexed, two overrides named | `arc6/extract_manifest.json` |
 | **`R2`** 425 READ (solo) | (a) **`YES` 79/79** (b) **`YES`** on hyp/concl/cites, two Definitions carry no constants (c) **13 hard-page notes**, hardest pp. 107–111 / 74–77 / 129–137. **`UNVERIFIED`**; **five fresh shards (leg 428) re-read it blind: (a) 79 (b) `YES` (c) 33 hard-page notes (d) every inconsistency is citation breadth, none is about content; 15 extraction artefacts adjudicated, 0 paper defects** | `arc6/ledger.json`, `ledger/merged.json` |
+| **`R4`** 429 RE-DERIVE (×5) | **58 of 58 spine nodes `CHECKED`, 0 `GAP`, 0 `NOT-CHECKED`**; blind verifier (seed 428) 10/10 `CHECKED`, agreement **1.0** → **10 nodes `VERIFIED`**, 48 `UNVERIFIED`. Pre-committed "≥ 3 GAPs" **refuted**; Prop 9.6's smallest closing margin **0.07**; 53 extraction artefacts resolved at the PDF. **Not a proof of the theorem.** | `arc6/spine/merged.json` |
 | **`R3`** 426 DAG+SPINE | acyclic **`YES`** ×3 passes; complete **`NO-AND-HERE-ARE-THE-DANGLING-NODES`**: `Remark B.9`, 134 labels in unnumbered prose, and **Props 9.5/9.6 never cited downstream**. Spine through §4/§7/§9: **refuted by citation, confirmed by equation** (§68). Prereg 4/8 | `arc6/dag.json` |
 
 **WAVE 1 — CLOSED AND INTEGRATED** (dispatched before this row existed, a §3g step-1 defect, recorded).
 Five R2 shard readers A–E, one file each, merged → `ledger/merged.json` (leg 428). Composition floor met
-by the Conductor's serial `R3` and `R5`(i)–(ii). **WAVE 2 IN FLIGHT (leg 429): `R4` fan-out ×5 on the 58-node spine**
+by the Conductor's serial `R3` and `R5`(i)–(ii). **WAVE 2 CLOSED (leg 429): `R4` ×5, integrated above. WAVE 3 (next): `R6` ×5 Lean**
 (`dag.json` `r4_spine`, partition `leg_426.md` §5, slot 5 adversarial verifier); in parallel, serial
 `R5`(i) with pre-registration first.
 
