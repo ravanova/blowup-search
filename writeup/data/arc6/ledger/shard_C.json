@@ -1,0 +1,922 @@
+{
+ "schema": "arc6_shard_v1",
+ "shard": "C",
+ "leg": 428,
+ "pages": [
+  [
+   73,
+   99
+  ],
+  [
+   157,
+   164
+  ]
+ ],
+ "preamble_pages": [
+  1,
+  23
+ ],
+ "preamble_entries": [
+  {
+   "id": "Theorem 1.1",
+   "kind": "Theorem",
+   "section": "1",
+   "page": 1,
+   "hypotheses": [
+    "nu > 0 is an arbitrary positive viscosity"
+   ],
+   "conclusion": "There exist a force f in C_c^inf(R^3 x (0,inf); R^3), a compact set K in R^3, and smooth velocity and pressure fields u, p on R^3 x [0,1) solving the incompressible Navier-Stokes equations (1.1) d_t u + (u.grad)u - nu Lap u + grad p = f, div u = 0, u(.,0) = 0, such that supp u(.,t) union supp p(.,t) is contained in K for every 0 <= t < 1, sup_{0<=t<1} ||u(t)||_{L^2(R^3)} < inf, and limsup_{t->1} ||u(t)||_{L^inf(R^3)} = inf. Consequently there is no smooth solution (u,P) on R^3 x [0,inf) with the same force and initial datum whose kinetic energy sup_{t>=0} (1/2) int |u|^2 dx is uniformly bounded.",
+   "constants": [
+    "nu > 0 arbitrary",
+    "singular time t = 1",
+    "force supported in K x [0,2] (per Section 3.5)",
+    "scaling to viscosity nu: u_nu(x,t) = sqrt(nu) u(x/sqrt(nu), t), p_nu = nu p(x/sqrt(nu), t), f_nu = sqrt(nu) f(x/sqrt(nu), t) (p. 7)"
+   ],
+   "cites": [
+    "(1.1)",
+    "Corollary 10.6",
+    "Theorem 3.1",
+    "Proposition 10.1",
+    "Proposition 9.9",
+    "Lemma 10.2",
+    "Lemma 10.3",
+    "Lemma 10.4",
+    "Lemma 10.5",
+    "(10.22)",
+    "(10.23)",
+    "(3.4)",
+    "(3.6)",
+    "(10.9)",
+    "(10.8)",
+    "(3.5)"
+   ],
+   "role": "Main theorem: finite-time blowup of the L^inf norm with bounded energy and a smooth compactly supported force, establishing alternative (C) of the Millennium problem; the outline (Section 3.5) reduces it to Theorem 3.1 plus localization and uniqueness."
+  },
+  {
+   "id": "Theorem 3.1",
+   "kind": "Theorem",
+   "section": "3",
+   "page": 15,
+   "hypotheses": [
+    "viscosity one (nu = 1), residual R(u,p) = d_t u + (u.grad)u - Lap u + grad p as in (3.1)",
+    "fields are considered on Omega_* = {(x,t): tau > 0, q < q_*} with tau = 1 - t and q = q(z,tau) the concentration scale of (3.2)"
+   ],
+   "conclusion": "There are constants 0 < h < 1/100, q_* > 0, 0 < X_a < X_ext < inf and smooth fields (u,p) on Omega_* such that: (i) u = curl A + B e_theta (3.3) with A a vector potential and B an axisymmetric scalar, both smooth in Cartesian coordinates at the axis, and u exactly divergence-free; (ii) every Cartesian space-time derivative of A, B e_theta, p is uniformly bounded on compact spatial subsets with c <= q <= c' < q_* up to the one-sided boundary tau = 0, with limits compatible under differentiation; (iii) for every alpha, b, N and finite X_1, |d_x^alpha d_t^b R(u,p)| <= C_{alpha,b,N,X_1} q^N for 0 <= X <= X_1 as q -> 0 (3.4); for X >= X_ext the residual vanishes identically and A = 0, B = K(r,tau), p = -int_r^inf K(rho,tau)^2/rho d rho with K(r,tau) = r^{-1-2h} H_ext(tau/r^2) (3.5), H_ext smooth on [0,inf) with each fixed derivative bounded, and K solving the radial swirl heat equation -d_tau K = d_r^2 K + r^{-1} d_r K - r^{-2} K; (iv) for some fixed X_in in (0, X_a) and e_0 > 0, u_theta(sqrt(2 X_in tau), 0, 0, 1 - tau) = tau^{-A}(e_0 + O(tau^{2h})) as tau -> 0 (3.6).",
+   "constants": [
+    "0 < h < 1/100",
+    "q_* > 0",
+    "0 < X_a < X_ext < inf",
+    "A = 1/2 + h",
+    "D = 1/2 - h",
+    "exterior swirl K(r,tau) = r^{-1-2h} H_ext(tau/r^2)",
+    "X_in in (0, X_a)",
+    "e_0 > 0",
+    "error O(tau^{2h}) in (3.6)",
+    "flatness q^N for every N"
+   ],
+   "cites": [
+    "(3.1)",
+    "(3.2)",
+    "(3.3)",
+    "(3.4)",
+    "(3.5)",
+    "(3.6)",
+    "Proposition 9.9",
+    "Lemma 5.4",
+    "Proposition 5.5",
+    "Theorem 4.6",
+    "Lemma 4.1"
+   ],
+   "role": "Local theorem: the summed local fields have a potential representation, are regular up to time one away from the origin, have a flat residual, coincide with the heat exterior for large X, and blow up along the growth path; Theorem 1.1 follows by localization (Section 3.5)."
+  },
+  {
+   "id": "Definition 3.2",
+   "kind": "Definition",
+   "section": "3",
+   "page": 18,
+   "hypotheses": [
+    "a leading field (velocity and pressure) for t < 1, or a scalar auxiliary profile in (X, eta)"
+   ],
+   "conclusion": "A leading field is regular at the axis if its velocity and pressure extend smoothly across r = 0 in Cartesian coordinates for t < 1. For scalar auxiliary profiles, regular at the axis means a smooth extension in (X, eta) to X = 0.",
+   "constants": [],
+   "cites": [],
+   "role": "Fixes the meaning of axis regularity used for the profiles E/sqrt(2X), U, V_0/X, Pi and for the leading field."
+  },
+  {
+   "id": "Definition 3.3",
+   "kind": "Definition",
+   "section": "3",
+   "page": 18,
+   "hypotheses": [
+    "alpha >= 0 and beta > 0"
+   ],
+   "conclusion": "alpha << beta means alpha/beta is required to be sufficiently small, with the allowed size depending on all data already fixed. In a chain of constants, choices proceed from right to left; small reciprocals specify large parameters. For expressions depending on profile variables, the smallness is uniform on the stated domain and is ensured by those parameter choices.",
+   "constants": [],
+   "cites": [],
+   "role": "Fixes the convention for parameter smallness and the order in which constants are chosen throughout the construction."
+  }
+ ],
+ "entries": [
+  {
+   "id": "Lemma 7.1",
+   "kind": "Lemma",
+   "section": "7",
+   "page": 75,
+   "hypotheses": [
+    "labels gamma = (l, a, sigma) in Gamma as in (6.8), with band scale Q = 2^{-l}, eps = Q^h, S_* = l^2, pulse interval 0 <= v <= L_s with L_s = 2 r_0/c_i ~ S_*",
+    "phase Phi = p theta + p_z Z/eps + x_0 R - v(pF + p_z G) as in (7.3) with wave numbers from (7.2): k = ceil(eps^{-1/2}), B_s^2 = lambda_0/(eps k^2 (1+u_*^2)^{3/2}), s(v) = sigma(u_*/2 + u_* v/L_s), (p~/R_0, p_z) = B_s(K - sigma u_* g_0/(L_s |g_0|^2)), kp a nearest nonzero integer to k p~, x_0 = sigma B_s u_*/2",
+    "frame N = g_0/|g_0|, K = N^perp = (-N_z, N_theta), lambda_0^2 = -2F_0 N_theta (2 F_0 N_theta + |g_0|) > 0, c_0 = lambda_0/(2 F_0 N_theta) < 0, frozen at the representative x^0_{l,a}; positivity uses the lower bounds of Theorem 4.6(iii)",
+    "u_* > 0 chosen so that u_*/sqrt(1+u_*^2) exceeds sup |c_0 (T_{0,*}.K)/(T_{0,*}.N)|, using the strict cone margin (7.1)",
+    "background (u_B, p_B) of Proposition 5.5 with b = O(eps) and tangential velocity within O(eps^2) of order zero by (5.42)"
+   ],
+   "conclusion": "There is a sufficiently small q_* > 0, common to all labels and fixed derivative orders, such that on every rectangle with 0 < q < q_*: every e^{ikm Phi}, m nonzero integer, is single-valued in theta with nonzero angular frequency; on 0 <= v <= L_s, |n_Phi - B_s(s(v), K)| + |n_Phi'| <= C/S_* and the eikonal defect E_ik = (t_* + b D_r + F d_theta + G D_z) Phi = O(eps S_*^C) (7.9), in every fixed coefficient derivative with polynomial degree; coefficients extend smoothly to the fixed enlargement; all fixed mixed derivatives of n_Phi and the frames have polynomial bounds in S_*. The real 3x2 matrix B of (7.8) has columns spanning n_Phi^perp, a uniformly bounded left inverse B^l, and B^l(A_Phi B - B') = diag(lambda, -lambda) + E with lambda(v) = lambda_0/sqrt(1+s(v)^2) and |E| <= C/S_* (7.10). With d_ref = eps k^2 B_s^2 (1+s^2), |d - d_ref| <= C/S_* (7.11).",
+   "constants": [
+    "q_* > 0 (single finite choice, common to all labels/orders)",
+    "k = ceil(eps^{-1/2}) so 1 <= eps k^2 <= 4",
+    "B_s^2 = lambda_0/(eps k^2 (1+u_*^2)^{3/2}), B_s > 0 bounded above and below",
+    "s(v) = sigma(u_*/2 + u_* v/L_s), so u_*/2 <= |s| <= 3u_*/2",
+    "x_0 = sigma B_s u_*/2",
+    "lambda_0^2 = -2F_0 N_theta(2F_0 N_theta + |g_0|) = 2 a F_0^2 (1 - 2/v_s) > 0",
+    "c_0 = lambda_0/(2F_0 N_theta) < 0, c_0^2 = (v_s - 2)/2",
+    "lambda(v) = lambda_0/sqrt(1+s(v)^2)",
+    "d = eps k^2 |n_Phi|^2, d_ref = eps k^2 B_s^2(1+s^2)",
+    "error sizes C/S_*, O(S_*^{-3}) box diameter, O(eps^2) base comparison, O(k^{-1}) rounding",
+    "smallness condition S_*^2(eps + eps^2 + k^{-1}) <= 1",
+    "det M = -2 c_0 sqrt(1+s^2)",
+    "slow neighborhoods within C S_*^{-3} of the representative",
+    "reference undamped matrix [[0, 2F_0 N_theta/(1+s^2)],[-(2F_0 N_theta + |g_0|), 0]] with eigenvalues +/- lambda"
+   ],
+   "cites": [
+    "(6.8)",
+    "(7.2)",
+    "(7.3)",
+    "(7.4)",
+    "(7.5)",
+    "(7.6)",
+    "(7.7)",
+    "(7.8)",
+    "(7.9)",
+    "(7.10)",
+    "(7.11)",
+    "(7.1)",
+    "(6.1)",
+    "(6.6)",
+    "(6.11)",
+    "(5.42)",
+    "(4.11)",
+    "(4.20)",
+    "Theorem 4.6(iii)",
+    "Lemma 4.5",
+    "Proposition 5.5",
+    "Proposition 9.1"
+   ],
+   "role": "Establishes that the chosen phase approximately follows background transport and that, in the frame B, the projected pulse operator is a diagonal growth/decay pair plus O(1/S_*) errors, which is the input for solving the amplitude equation (7.5)."
+  },
+  {
+   "id": "Proposition 7.2",
+   "kind": "Proposition",
+   "section": "7",
+   "page": 77,
+   "hypotheses": [
+    "alpha in R fixed; a finite set of harmonics 0 < |m| <= M",
+    "a label at level i on a common torus H = Y_{i_0}, with i - i_0 bounded as in Lemma 6.2",
+    "for each harmonic a source coefficient f_m(x_*, H) in C^3 descending to H, smooth on the fixed enlargement of the label's rectangles",
+    "f_m has a fixed closed slow support inside the label's slow support, compact transverse support inside supp chi_g, and support in the closed active shell X_a <= X <= X_b, with smooth zero extension across all these boundaries",
+    "on X_a < X < X_b and 0 <= v <= L_s, for every fixed multi-index I in (R, Z, T, H): |D^I f_m| <= C_I eps^alpha S_*^{b_I} sqrt(zeta) delta^{-a_I} P(v)",
+    "domain 0 < q < q_* fixed in Lemma 7.1; envelope P(v) = exp(int_{L_s/2}^v (lambda(w) - d_ref(w)) dw) of (7.12)"
+   ],
+   "conclusion": "There is a unique amplitude t_m with n_Phi . t_m = 0 and zero initial data, and a pressure coefficient pi_m, such that (7.5) holds; they are given by t_m' = A_Phi t_m - m^2 d t_m - proj_{n_Phi^perp} f_m, t_m(0) = 0, and pi_m = (i/(km)) (n_Phi . K t_m - n_Phi' . t_m + n_Phi . f_m)/|n_Phi|^2 (7.13), with the source evaluated along the path H_w of (6.21). The coefficients descend to the same common torus and preserve the slow, transverse and shell supports with smooth zero extension; the solution is defined on the entire closed pulse interval 0 <= v <= L_s. On X_a < X < X_b, for every fixed I: |D^I t_m| <= C'_I eps^alpha S_*^{b'_I} sqrt(zeta) delta^{-a'_I} P(v) (7.14) and |D^I pi_m| <= C'_I eps^{alpha+1/2} S_*^{b'_I} sqrt(zeta) delta^{-a'_I} P(v) (7.15). Constants and degrees may depend on M, I and the source bounds; q_* does not depend on M, alpha, or the correction stage. One-sided slow derivatives at tau = 0 on compact sets with q > 0 are inherited from the source.",
+   "constants": [
+    "P(v) = exp(int_{L_s/2}^v (lambda - d_ref)), P(L_s/2) = 1",
+    "Gaussian envelope e^{-C(v-L_s/2)^2/L_s} <= P(v) <= e^{-c(v-L_s/2)^2/L_s} <= 1 (7.16)",
+    "a_net(y) = lambda_0/sqrt(1+y^2) - lambda_0(1+y^2)/(1+u_*^2)^{3/2}, vanishing at y = u_*, with derivative in v between -C/L_s and -c/L_s",
+    "harmonic damping factor exp(-(m^2-1) int_w^v d) <= 1 (7.18)",
+    "propagator bound ||V_m(v,w)|| <= C P(v)/P(w) for 0 <= w <= v <= L_s (7.19)",
+    "pressure gains eps^{1/2} from (km)^{-1} = O(eps^{1/2})",
+    "degree increase at step I at most 1 + max{b_I, max_{0<J<=I}(c_J + b'_{I-J})}",
+    "L_s = O(S_*) integration length",
+    "D_H v = T_g^{i-i_0} lambda_t/c_i = O(S_*)"
+   ],
+   "cites": [
+    "Lemma 7.1",
+    "Lemma 6.2",
+    "(7.5)",
+    "(7.12)",
+    "(7.13)",
+    "(7.14)",
+    "(7.15)",
+    "(7.16)",
+    "(7.17)",
+    "(7.18)",
+    "(7.19)",
+    "(7.20)",
+    "(6.21)",
+    "(6.2)",
+    "(6.29)",
+    "Proposition 5.5",
+    "Duhamel's formula",
+    "Gronwall-type norm inequality d_v|z| <= (lambda - d_ref + C/S_*)|z|"
+   ],
+   "role": "The zero-data linear inverse for the projected amplitude equation with a prescribed harmonic source; used to remove later nonzero harmonics in the correction cycle (Proposition 9.1), with the response inheriting the pulse envelope."
+  },
+  {
+   "id": "Corollary 7.3",
+   "kind": "Corollary",
+   "section": "7",
+   "page": 80,
+   "hypotheses": [
+    "the solution operators f_m -> (t_m, pi_m) of Proposition 7.2 with t_m(0) = 0",
+    "any finite correction stage, finite harmonic set, and derivative order"
+   ],
+   "conclusion": "These solution operators are defined at every finite correction stage on the same domain 0 < q < q_*. Increasing the finite harmonic set or the derivative order changes constants and polynomial degrees but does not require shrinking the domain.",
+   "constants": [
+    "q_* from Lemma 7.1 (single finite choice), stage-independent"
+   ],
+   "cites": [
+    "Lemma 7.1",
+    "Proposition 7.2",
+    "(7.18)",
+    "(7.20)"
+   ],
+   "role": "Guarantees that the space-time domain of the wave inverses does not shrink with the correction stage, so the induction of Section 9 runs on a common domain."
+  },
+  {
+   "id": "Lemma 7.4",
+   "kind": "Lemma",
+   "section": "7",
+   "page": 80,
+   "hypotheses": [
+    "for each sign sigma, t^h_sigma = B(z_+, z_-)^T solves (t^h_sigma)' = A_Phi t^h_sigma - d t^h_sigma with z_+(0) = P(0), z_-(0) = 0 (homogeneous m = 1 problem, real amplitude), with pressure given by (7.13) at f_m = 0",
+    "geometric coordinates K_a, N_a, s_a as in (7.7); write t^h_sigma = x(e_r - s_a K_a) + y N_a",
+    "frame and error estimates of Lemma 7.1 on 0 < q < q_*; S_* sufficiently large"
+   ],
+   "conclusion": "c P(v) <= x(v) <= C P(v) and y(v)/x(v) = c_0 sqrt(1+s(v)^2) + O(S_*^{-1}) on the whole pulse interval (7.21). Every fixed derivative of this homogeneous solution in the coefficient variables or pulse coordinate is bounded by C_I S_*^{b_I} P(v). Its homogeneous pressure (7.13) with f = 0 has the extra factor eps^{1/2}.",
+   "constants": [
+    "ratio r = z_-/z_+ satisfies r' = E_21 + (-2 lambda + E_22 - E_11) r - E_12 r^2, r(0) = 0, and |r| <= K_b/S_* for a large fixed K_b",
+    "c_lambda > 0 uniform lower bound for lambda",
+    "|log(z_+/P)| <= C v/S_* <= C L_s/S_* <= C",
+    "x = z_+(1+r), y = c_0 sqrt(1+s^2) z_+(1-r)",
+    "energy identity (1/2) d/dv |t|^2 = -g.(t_r(t_theta,t_z)) - eps k^2 |n_Phi|^2 |t|^2 (7.22)",
+    "eps k^2 ~ 1; carrier wavelength sqrt(Q)/k ~ Q^{1/2+h/2}; physical amplitude Q^{-A} sqrt(eps) = Q^{-1/2-h/2}"
+   ],
+   "cites": [
+    "Lemma 7.1",
+    "(7.7)",
+    "(7.8)",
+    "(7.10)",
+    "(7.12)",
+    "(7.13)",
+    "(7.19)",
+    "(7.20)",
+    "(7.21)",
+    "(7.22)",
+    "Riccati equation for the frame ratio"
+   ],
+   "role": "Constructs the two real homogeneous pulses (one per sign) that grow and then decay with the envelope P, with radial component comparable to P and controlled tangential direction; these are the building blocks of the leading covariance in Proposition 7.5."
+  },
+  {
+   "id": "Proposition 7.5",
+   "kind": "Proposition",
+   "section": "7",
+   "page": 82,
+   "hypotheses": [
+    "for each slow box beta = (l, a), the homogeneous pulses of Lemma 7.4 form b_sigma = chi_g(xi_g) psi(v) t^h_sigma cos(k Phi_sigma), sigma = +/-, extended by zero off that sign's auxiliary rectangle; the two signs have disjoint auxiliary supports and share the slow cutoff eta_beta",
+    "H = [C(b_+) | C(b_-)] the real 2x2 covariance matrix with columns in (r theta, r z) order, C defined by (7.23)",
+    "order-zero target T_{0,*} = (Q/q)^{A+1/2} T_0 satisfying the strict cone condition (7.1) with uniform margin (choice of u_*)",
+    "a further single decrease of q_*"
+   ],
+   "conclusion": "H is invertible throughout each enlarged slow neighborhood and the components of H^{-1} T_{0,*} are positive on its intersection with X_a < X < X_b. Define y = H^{-1} T_{0,*}, a_sigma = sqrt(y_sigma) (componentwise), W_0 = sqrt(eps) sum_sigma a_sigma b_sigma (7.24). For every fixed slow multi-index I on X_a < X < X_b: y_sigma >= c sqrt(S_*) zeta and |D^I y_sigma| <= C_I S_*^{b_I} zeta delta^{-a_I} (7.25). The a_sigma extend smoothly by zero at the shell edges. On the label's slow neighborhood the harmonic coefficients of W_0 obey the derivative and envelope estimates of W_{1/2}, and eta_beta W_0 in W_{1/2}. Before multiplication by the slow cutoff, C(W_0) = eps T_{0,*} (7.26). The decomposition uses only the order-zero target.",
+   "constants": [
+    "angular average of cos^2(k Phi) is exactly 1/2",
+    "column formula H_sigma = (|det(v_r,v_t)|/2)(int chi_g^2 d xi_g) c_i int_0^{L_s} psi^2 x t^h_{sigma,tan} dv (7.27)",
+    "h_sigma = same with x^2, h_sigma ~ c_i sqrt(L_s) ~ S_*^{-1/2}",
+    "c sqrt(L_s) <= int psi^2 x^2 dv <= C sqrt(L_s); int psi^2 x^2 |v - L_s/2|/L_s dv <= C",
+    "A_c = -c_0 sqrt(1+u_*^2) > 0",
+    "H_sigma = h_sigma(-A_c N - sigma u_* K + e_sigma), |e_sigma| <= C S_*^{-1/2} (7.28)",
+    "h_+ y_+ = (1/2)(-T_N/A_c - T_K/u_*), h_- y_- = (1/2)(-T_N/A_c + T_K/u_*) (garbled '2(...1' read as 1/2)",
+    "reference cone T_N < 0, |T_K| < (u_*/A_c)(-T_N)",
+    "margin |T_K|/u_* <= (1 - eta_c)(-T_N/A_c) for fixed eta_c > 0",
+    "|det H| >= c/S_*, ||H^{-1}|| <= C sqrt(S_*), c sqrt(S_*)|T| <= y_sigma <= C sqrt(S_*)|T| (7.29)",
+    "physical assembly sum_beta Q^{-2A} eta_beta^2 eps T_{0,*} = q^{-A-1/2} T_0 (7.30), using sum_beta eta_beta^2 = 1"
+   ],
+   "cites": [
+    "Lemma 7.4",
+    "Lemma 7.1",
+    "Lemma 6.2",
+    "Lemma 6.1",
+    "(7.1)",
+    "(7.7)",
+    "(7.23)",
+    "(7.24)",
+    "(7.25)",
+    "(7.26)",
+    "(7.27)",
+    "(7.28)",
+    "(7.29)",
+    "(7.30)",
+    "(4.27)",
+    "(3.7)",
+    "Definition 6.5",
+    "(6.29)",
+    "Theorem 4.6(iii)",
+    "Faa di Bruno chain rule for sqrt(y)"
+   ],
+   "role": "Chooses positive squared amplitudes so that the averaged radial momentum flux of the two pulse families equals the leading annular stress; this is the central realization of T_0 by oscillations (Figure 5)."
+  },
+  {
+   "id": "Proposition 7.6",
+   "kind": "Proposition",
+   "section": "7",
+   "page": 84,
+   "hypotheses": [
+    "alpha in R; Sigma(R,Z,T) in M_alpha a real two-vector independent of both the angular and the auxiliary variables (auxiliary independence is an additional requirement beyond the class)",
+    "the fixed positive coefficients a_sigma and matrix H of Proposition 7.5, with bounds (7.25), (7.29)",
+    "definition (7.31): d_Sigma = H^{-1}(Sigma/eps), delta a_sigma = (d_Sigma)_sigma/(2 a_sigma), L Sigma = sqrt(eps) sum_sigma delta a_sigma b_sigma, defined first on X_a < X < X_b"
+   ],
+   "conclusion": "(7.31) defines a linear operation L Sigma whose harmonic coefficients on the slow neighborhood satisfy the local derivative and envelope bounds of W_{alpha-1/2}, with smooth zero extension at the shell edges. With slow cutoffs shown explicitly: eta_beta L Sigma in W_{alpha-1/2}, B(W_0, L Sigma) = Sigma, and C(eta_beta L Sigma) in M_{2alpha-1} (7.32). The denominator a_sigma remains the fixed coefficient at every correction stage. No sign or size restriction on Sigma.",
+   "constants": [
+    "|D^I (d_Sigma)_sigma| <= C_I eps^{alpha-1} S_*^{b_I} zeta delta^{-a_I}",
+    "|D^I delta a_sigma| <= C_I eps^{alpha-1} S_*^{b'_I} sqrt(zeta) delta^{-a'_I} (7.33)",
+    "exact bilinear identity B(W_0, L Sigma) = eps H(2 a (.) delta a) = eps H d_Sigma = Sigma (7.34); the factor 2 explains the denominator 2 a_sigma in (7.31)",
+    "consequence C(W_0 + L Sigma) = eps T_{0,*} + Sigma + C(L Sigma) (p. 85)"
+   ],
+   "cites": [
+    "Proposition 7.5",
+    "Lemma 7.4",
+    "(7.25)",
+    "(7.29)",
+    "(7.31)",
+    "(7.32)",
+    "(7.33)",
+    "(7.34)",
+    "(7.27)",
+    "Leibniz rule"
+   ],
+   "role": "Linearizes the covariance map at the fixed positive amplitudes to obtain a right inverse L of DC(W_0), giving signed stress increments of either sign for later residual corrections (operation 2 of Proposition 9.6)."
+  },
+  {
+   "id": "Lemma 7.7",
+   "kind": "Lemma",
+   "section": "7",
+   "page": 86,
+   "hypotheses": [
+    "alpha in R, nonzero integer m; harmonic coefficient t_m in W_alpha independent of theta with n_Phi . t_m = 0",
+    "t_m supported in the prescribed slow and transverse supports and compactly inside the pulse interval, with smooth zero extension across all these boundaries",
+    "potential C_m = i n_Phi x t_m/(km |n_Phi|^2), A_m = C_m e^{ikm Phi}, curl_* A_m = (t_m + r_m) e^{ikm Phi} as in (7.38), with curl_* the normalized curl (7.37) including chain-rule terms of the phase map (6.3)"
+   ],
+   "conclusion": "C_m in W_{alpha+1/2} and r_m in W_{alpha+1/2-kappa_s}. The velocity (t_m + r_m) e^{ikm Phi} = curl_* A_m is exactly divergence-free for the normalized operators and after evaluation at the phase map. Potential and velocity have smooth zero extensions across their support boundaries. For a_m = t_m + r_m, ikm n_Phi . a_m = -((D_r + R^{-1})(a_m)_r + D_z (a_m)_z) and n_Phi . a_m in W_{alpha+1/2-kappa_s} (7.39). Physical potentials and pressures are obtained from chart ones by multiplying by Q^{1/2-A} and Q^{-2A} respectively.",
+   "constants": [
+    "(km)^{-1} raises the eps exponent by 1/2",
+    "one D_r lowers the eps exponent by at most kappa_s, by (6.32)",
+    "r_m = (-D_z (C_m)_theta, D_z (C_m)_r - D_r (C_m)_z, (D_r + R^{-1})(C_m)_theta)",
+    "physical factors Q^{1/2-A} (potential), Q^{-2A} (pressure)",
+    "identity div_* curl_* A = 0 via (D_r + R^{-1})(R^{-1} f) = R^{-1} D_r f"
+   ],
+   "cites": [
+    "Lemma 7.1",
+    "(7.37)",
+    "(7.38)",
+    "(7.39)",
+    "(6.32)",
+    "(6.3)",
+    "(6.6)",
+    "Definition 6.5",
+    "vector identity -n x (n x t) = |n|^2 t - n(n.t)"
+   ],
+   "role": "Takes exact curls of oscillating vector potentials so the wave velocity is exactly divergence-free, quantifying the curl remainder r_m as a higher-order wave term retained in later covariances and residuals."
+  },
+  {
+   "id": "Corollary 7.8",
+   "kind": "Corollary",
+   "section": "7",
+   "page": 87,
+   "hypotheses": [
+    "alpha, rho in R; normalized representatives W^as_0, L^as of (7.35)",
+    "U a real divergence-free wave field including its curl remainders with U = W^as_0 + E, U in W_{1/2}, E in W_rho",
+    "Sigma(R,Z,T) in M_alpha a real two-vector independent of angular and auxiliary variables",
+    "Lemma 7.7 applied to the signed amplitudes L^as Sigma gives the divergence-free increment V = L^as Sigma + R with curl remainder R in W_{alpha-kappa_s}"
+   ],
+   "conclusion": "C(U + V) - C(U) = Sigma + B(E, L^as Sigma) + B(U, R) + C(V) (7.41), with B(E, L^as Sigma) in M_{rho+alpha-1/2}, B(U, R) in M_{alpha+1/2-kappa_s}, C(V) in M_{2alpha-1} (7.42). Taking the radial divergence of each remainder decreases the eps exponent by at most a further kappa_s.",
+   "constants": [
+    "kappa_s < 1/2 so that V in W_{alpha-1/2}",
+    "class exponents rho+alpha-1/2, alpha+1/2-kappa_s, 2alpha-1",
+    "extra loss kappa_s under radial divergence"
+   ],
+   "cites": [
+    "Lemma 7.7",
+    "Proposition 7.6",
+    "(7.35)",
+    "(7.36)",
+    "(7.41)",
+    "(7.42)",
+    "(6.32)",
+    "(7.23)"
+   ],
+   "role": "Exact covariance expansion for adding a signed wave increment to a wave field that already contains earlier corrections; isolates the prescribed stress increment and three higher-order remainders for the correction cycle."
+  },
+  {
+   "id": "Proposition 8.1",
+   "kind": "Proposition",
+   "section": "8",
+   "page": 89,
+   "hypotheses": [
+    "u has the divergence-free decomposition (8.1): u = (b + beta, V + v, G + gamma) + w with slow base (b, V, G), angularly invariant correction (beta, v, gamma), <w>_theta = 0, and W_ab = <w_a w_b>_theta including all curl remainders",
+    "p_m the angularly invariant pressure correction; Sigma_a = Q^{2A} T_phys,a (a = theta, z) the normalized base stress components from (5.41)",
+    "the base's flat residual is retained as a separate additive error (all derivatives vanish faster than every power of q)",
+    "normalized chart operators (6.6), Delta_0 = D_r^2 + R^{-1} D_r + D_z^2"
+   ],
+   "conclusion": "The angular mean of the remaining normalized residual is (D_r p_m - g_r, E_theta, E_z) with E_theta = t_* v + (D_r + 2/R)(bv + beta V + beta v + W_{r theta}) + D_z(Gv + V gamma + gamma v + W_{z theta}) - eps(Delta_0 - R^{-2}) v - (D_r + 2/R) Sigma_theta; E_z = t_* gamma + (D_r + 1/R)(b gamma + beta G + beta gamma + W_rz) + D_z(2 G gamma + gamma^2 + W_zz + p_m) - eps Delta_0 gamma - (D_r + 1/R) Sigma_z; g_r = -t_* beta - (D_r + 1/R)(2 b beta + beta^2 + W_rr) - D_z(b gamma + G beta + beta gamma + W_zr) + (2 V v + v^2 + W_{theta theta})/R + eps(Delta_0 - R^{-2}) beta (8.3).",
+   "constants": [
+    "cylindrical divergence-form transport identities: (u.grad u)_r = (D_r+1/R)u_r^2 + R^{-1}d_theta(u_theta u_r) + D_z(u_z u_r) - u_theta^2/R, etc.",
+    "weights 2/R (azimuthal) and 1/R (axial) from frame rotation",
+    "vector Laplacian mean: Delta_0 - R^{-2} for r, theta components, Delta_0 for z"
+   ],
+   "cites": [
+    "(8.1)",
+    "(8.3)",
+    "(5.41)",
+    "(6.6)",
+    "(3.7)",
+    "(3.9)"
+   ],
+   "role": "Derives the angularly averaged momentum equations in divergence form, defining the mean residual components (D_r p_m - g_r, E_theta, E_z) to be corrected in the rest of Section 8."
+  },
+  {
+   "id": "Lemma 8.2",
+   "kind": "Lemma",
+   "section": "8",
+   "page": 90,
+   "hypotheses": [
+    "fixed correction stage j, exponent alpha, a band, its common torus y = Y_{i_0}, and e in {0,1,2}",
+    "f in M_alpha a smooth scalar coefficient whose smooth zero extension satisfies |d^I f| <= C_{j,I} eps^alpha S_*^{B_{j,I}} zeta delta^{-B_{j,I}} for every fixed multi-index I in (R,Z,T,y)",
+    "operators (8.4)-(8.6): phase-following prefix integral I, full integral J, compact primitive I_c = I - chi_m J with chi_m(X) a fixed cutoff (zero on an inner collar, one on an outer collar), D_e = D_r + e/R, T_e f = R^{-e} I_c(R^e f), A_e f = R^{-e}(d_R chi_m) J(R^e f); shift M = Lambda^{i_0}_g Q^{d_r/2}"
+   ],
+   "conclusion": "T_e f is supported in the same active radial shell and in the projection of the input support to (Z,T), and belongs to M_alpha under the primitive normalization. Exactly D_e T_e f = f - A_e f (8.7). If int R^e <f>_Y dR = 0 at every (Z,T), then <A_e f>_Y = 0 and, for every fixed I and integer p >= 1, |d^I A_e f| <= C_{j,I,p} eps^{alpha + p kappa_s} S_*^{B_{j,I,p}} zeta delta^{-B_{j,I,p}} (8.8), using only finitely many input derivatives for each (I,p); constants independent of band, label, point. If f is independent of Y and int R^e f dR = 0 at every slow point, the cutoff remainder is identically zero.",
+   "constants": [
+    "e in {0,1,2}",
+    "gain p kappa_s in eps exponent for every p >= 1 (8.8)",
+    "Diophantine estimate ||L^{-p} H||_{C^m_y} <= C_{m,p} ||H||_{C^{m+p+3}_y} for zero-mean H, from (6.7) (8.10)",
+    "M^{-1} <= C eps^{kappa_s} S_*^{rho_g}",
+    "J g = (-M^{-1})^p int d_U^p L^{-p} F^o du",
+    "flatness: for prescribed N choose p with h(alpha + p kappa_s) > N + L, L the fixed q-power loss",
+    "weights zeta = exp(-a_a/d_a^2 - a_b/d_b^2), delta = min(1, d_a, d_b), d_a = log(X/X_a), d_b = log(X_b/X)",
+    "summable series sum_{k in Z^2}(1+|k|)^{-3}",
+    "radial input derivatives up to I_R + p and torus derivatives up to |I_y| + p + 3 suffice"
+   ],
+   "cites": [
+    "Lemma 6.2",
+    "(6.4)",
+    "(6.7)",
+    "(8.4)",
+    "(8.5)",
+    "(8.6)",
+    "(8.7)",
+    "(8.8)",
+    "(8.9)",
+    "(8.10)",
+    "Definition 6.4",
+    "(6.23)",
+    "Fourier series on the torus / translation invariance of Haar measure"
+   ],
+   "role": "Provides the compactly supported radial primitive for the weighted operators D_r + e/R with an exact cutoff-remainder identity and a flatness bound for that remainder under a zero weighted auxiliary-mean integral; it is the basic inverse for pressure, potentials and stresses in Section 8."
+  },
+  {
+   "id": "Proposition 8.3",
+   "kind": "Proposition",
+   "section": "8",
+   "page": 92,
+   "hypotheses": [
+    "the radial operators T_0, T_1, A_0, A_1 of Lemma 8.2 and the fixed bump rho = Q^{1/2} rho_phys, rho_phys = q^{-1/2} rho^(r/sqrt(q)) with rho^ in C_c^inf(I_m) supported in the mean patch I_m = {sqrt(2X): X in I_mean} (I_mean from Theorem 4.6(vi)), normalized int rho dR = 1, independent of angular and auxiliary variables",
+    "(i) a smooth shell-supported scalar source g_r(R,Z,T,y)",
+    "(ii) a smooth shell-supported desired axial increment gamma_d(R,Z,T,y) with int R <gamma_d>_Y dR = 0 at every (Z,T)",
+    "normalizations (8.11): u_* = Q^A u_phys, g_* = Q^{2A+1/2} g_phys, p_* = Q^{2A} p_phys, Psi_* = Q^{A-1/2} Psi_phys, rho_* = Q^{1/2} rho_phys"
+   ],
+   "conclusion": "(i) With P = int <g_r>_Y dR and p_m = T_0(g_r - rho P) (8.12): D_r p_m - g_r = -rho P - A_0(g_r - rho P) and d_R <p_m>_Y = <g_r>_Y - rho P (8.13). If g_r in M_alpha then P in S_alpha and p_m in M_alpha; a change of g_r in M_alpha gives a pressure change of the same class; the cutoff remainder in (8.13) has zero auxiliary mean and is flat as q -> 0 at every fixed derivative order. (ii) With Psi = r^{-1} I_c(r gamma_{d,phys}), Psi_* = T_1 gamma_d, Delta beta = -eps d_Z Psi_*, Delta gamma = (D_r + 1/R) Psi_* = gamma_d - A_1 gamma_d (8.14): the increment (Delta beta, 0, Delta gamma) is divergence-free with <Delta gamma>_Y = <gamma_d>_Y; if gamma_d in M_alpha then Psi_*, Delta gamma in M_alpha and Delta beta in M_{alpha+1}; if gamma_d is independent of Y its zero weighted integral gives Delta gamma = gamma_d pointwise. Pressure and vector potential are compactly supported in the active shell and retain the (Z,T)-projection of the source support.",
+   "constants": [
+    "int rho dR = 1",
+    "Q^{1/2-D} = Q^h = eps gives the extra eps in Delta beta",
+    "normalizations (8.11)",
+    "Q^{2A} I_{c,phys} g_phys = I_c g_*"
+   ],
+   "cites": [
+    "Lemma 8.2",
+    "Theorem 4.6(vi)",
+    "(8.4)",
+    "(8.11)",
+    "(8.12)",
+    "(8.13)",
+    "(8.14)",
+    "(6.4)"
+   ],
+   "role": "Reconstructs the mean pressure from its radial source up to the scalar defect P, and realizes a desired axial mean increment by an azimuthal vector potential so that the mean correction stays exactly divergence-free and compactly supported."
+  },
+  {
+   "id": "Proposition 8.4",
+   "kind": "Proposition",
+   "section": "8",
+   "page": 94,
+   "hypotheses": [
+    "(beta, v, gamma) and w the smooth shell-supported corrections of (8.1)",
+    "the two moments M_theta = int R^2 <v>_Y dR and M_z = int R <gamma>_Y dR in (8.2) vanish at every (Z,T)",
+    "p_m reconstructed from g_r by (8.12)",
+    "defects J_theta = int R^2 <Gv + V gamma + gamma v + W_{z theta}>_Y dR, J_z = int R <2 G gamma + gamma^2 + W_zz>_Y dR - (1/2) int R^2 <g_r>_Y dR, c_rho = (1/2) int R^2 rho dR (8.15)"
+   ],
+   "conclusion": "int R^2 <E_theta>_Y dR = eps d_Z J_theta and int R <E_z>_Y dR = eps d_Z (J_z + c_rho P) (8.16).",
+   "constants": [
+    "viscous integrals vanish: int R^2(v_RR + R^{-1} v_R - R^{-2} v) dR = (2-1-1) int v dR = 0; int R(gamma_RR + R^{-1} gamma_R) dR = 0",
+    "pressure moment int R <p_m>_Y dR = -(1/2) int R^2 <g_r>_Y dR + c_rho P",
+    "auxiliary averaging turns D_r into d_R and t_* into -eps d_T",
+    "normalizations (8.17): (M_theta)_* = Q^{A-3/2}(M_theta)_phys, (M_z)_* = Q^{A-1}(M_z)_phys, P_* = Q^{2A} P_phys, (c_rho)_* = Q^{-1}(c_rho)_phys, (J_theta)_* = Q^{2A-3/2}(J_theta)_phys, (J_z)_* = Q^{2A-1}(J_z)_phys"
+   ],
+   "cites": [
+    "Proposition 8.1",
+    "Proposition 8.3",
+    "(8.1)",
+    "(8.2)",
+    "(8.3)",
+    "(8.12)",
+    "(8.15)",
+    "(8.16)",
+    "(8.17)",
+    "(5.41)",
+    "integration by parts"
+   ],
+   "role": "Identifies the two weighted radial integrals of the tangential mean residuals as axial derivatives of the flux defects, so that compactly supported stresses can represent the residual up to explicit bump terms."
+  },
+  {
+   "id": "Corollary 8.5",
+   "kind": "Corollary",
+   "section": "8",
+   "page": 95,
+   "hypotheses": [
+    "hypotheses of Proposition 8.4",
+    "fixed interior bump profiles sigma^_theta, sigma^_z with int xi^2 sigma^_theta = int xi sigma^_z = 1, supported in the mean patch; sigma_theta,phys = q^{-3/2} sigma^_theta(r/sqrt q), sigma_z,phys = q^{-1} sigma^_z(r/sqrt q); chart representatives sigma_theta = Q^{3/2} sigma_theta,phys, sigma_z = Q sigma_z,phys with int R^2 sigma_theta dR = int R sigma_z dR = 1",
+    "covariance targets H_theta = -T_2(<E_theta>_Y - sigma_theta eps d_Z J_theta), H_z = -T_1(<E_z>_Y - sigma_z eps d_Z (J_z + c_rho P)) (8.18)"
+   ],
+   "conclusion": "H_theta and H_z are independent of the auxiliary variable, compactly supported in the active shell, and satisfy (D_r + 2/R) H_theta = -<E_theta>_Y + sigma_theta eps d_Z J_theta and (D_r + 1/R) H_z = -<E_z>_Y + sigma_z eps d_Z (J_z + c_rho P). The radial primitives act at fixed (Z,T), so H_theta, H_z vanish wherever their integrands vanish for every R; no enlargement of support in Z.",
+   "constants": [
+    "bump normalizations int R^2 sigma_theta dR = int R sigma_z dR = 1",
+    "retained factors eps d_Z J_theta and eps d_Z(J_z + c_rho P)"
+   ],
+   "cites": [
+    "Proposition 8.4",
+    "Lemma 8.2",
+    "(8.16)",
+    "(8.18)",
+    "(8.3)"
+   ],
+   "role": "Produces auxiliary-independent compactly supported stress targets whose weighted radial divergence cancels the auxiliary-averaged tangential residuals up to bump terms carrying the three defects; these become the covariance targets for the wave correction."
+  },
+  {
+   "id": "Lemma 8.6",
+   "kind": "Lemma",
+   "section": "8",
+   "page": 95,
+   "hypotheses": [
+    "N = v_t . d_y on T^2 with v_t as in (6.2); F a smooth function of zero Haar mean",
+    "for the update: a pair E_theta, E_z in M_alpha of normalized angularly invariant residual coefficients; the physical tangential update -N_abs^{-1}(E^o_{theta,phys}, E^o_{z,phys}) in the original auxiliary coordinate Y, with normalizations (8.11); c_{i_0} = T_g^{i_0} Q^{1+h}, N_{i_0} = v_t . d_y, and t_* = -eps d_T + c_{i_0} N_{i_0}",
+    "Diophantine divisor bound (6.7): |v_t . k|^{-1} <= C(1+|k|)"
+   ],
+   "conclusion": "N phi = F has a unique smooth zero-mean solution phi = N^{-1} F = sum_{k != 0} F^(k) e^{2 pi i k.y}/(2 pi i v_t . k), with ||N^{-1} F||_{C^m_y} <= C_m ||F||_{C^{m+4}_y} for every m >= 0 (8.19). The chart representatives of the update are Delta v = -c_{i_0}^{-1} N_{i_0}^{-1} E^o_theta, gamma_d = -c_{i_0}^{-1} N_{i_0}^{-1} E^o_z with c_{i_0}^{-1} <= C S_* (8.20). Both Delta v, gamma_d lie in M_alpha with zero auxiliary mean at each slow and radial point. Realizing gamma_d by (8.14) gives (Delta beta, Delta v, Delta gamma) = (-eps d_Z T_1 gamma_d, Delta v, gamma_d - A_1 gamma_d) in M_{alpha+1} x M_alpha x M_alpha (8.21), divergence-free and preserving both constraints (8.2). With a = -A_1 gamma_d: c_{i_0} N_{i_0} Delta v = -E^o_theta, c_{i_0} N_{i_0} Delta gamma = -E^o_z + c_{i_0} N_{i_0} a (8.22); the angular cancellation is exact and c_{i_0} N_{i_0} a is flat at every fixed coefficient derivative order.",
+   "constants": [
+    "loss of 4 torus derivatives in (8.19)",
+    "c_{i_0} = T_g^{i_0} Q^{1+h}, c_{i_0}^{-1} = Q^{-1-h} T_g^{-i_0} <= C S_*",
+    "covering relation N_abs P_i = T_g^i P_i N_i, N_abs^{-1} P_i = T_g^{-i} P_i N_i^{-1} (8.23)",
+    "summable bound (1+|k|)^{-3} in two dimensions",
+    "slow-time term -eps d_T contributes an extra factor eps"
+   ],
+   "cites": [
+    "(6.2)",
+    "(6.4)",
+    "(6.6)",
+    "(6.7)",
+    "(8.11)",
+    "(8.14)",
+    "(8.2)",
+    "(8.8)",
+    "(8.19)",
+    "(8.20)",
+    "(8.21)",
+    "(8.22)",
+    "(8.23)",
+    "Proposition 8.3(ii)",
+    "Lemma 8.2",
+    "Fourier series on T^2"
+   ],
+   "role": "Inverts the fast auxiliary-time derivative on zero-mean torus functions to cancel the part of the mean residual with zero auxiliary average (operation 3 of the correction cycle), keeping the increment divergence-free via the azimuthal potential."
+  },
+  {
+   "id": "Lemma 8.7",
+   "kind": "Lemma",
+   "section": "8",
+   "page": 97,
+   "hypotheses": [
+    "the fixed slow base satisfies (8.24) on the reserved interior interval I_m: G_q = 0, V_q = a(eta) x^{-1-2 lambda} with x = r/sqrt(q), lambda > 0 fixed, |a(eta)| >= a_0 > 0 (a(eta) = 2^{1/2+lambda} c_patch (1+eta^2)^{-1})",
+    "arbitrary scalar targets (P, J_theta, J_z) at each (Z,T), normalized row by row as in (8.17)"
+   ],
+   "conclusion": "There are three fixed azimuthal bump profiles and two fixed axial bump profiles supported in I_m such that at each (Z,T) the physical rescalings of the targets have a unique linear combination (Delta v, gamma_d) satisfying the five equations (8.25): int R^2 Delta v dR = 0, int R gamma_d dR = 0, int (2V/R) Delta v dR = -P, int R^2 (G Delta v + V gamma_d) dR = -J_theta, int (2 R G gamma_d - R V Delta v) dR = -J_z. The increments are independent of angular and auxiliary variables and linear in the targets; for every alpha, targets in S_alpha give increments in M_alpha for every fixed coefficient derivative (constants may depend on lambda). The realization (8.14) has Delta gamma = gamma_d exactly and Delta beta in M_{alpha+1}; both constraints (8.2) are preserved exactly. When the targets are the current defects of (8.12), (8.15), the last three equations cancel the displayed contributions involving the fixed base.",
+   "constants": [
+    "power law V_q = a(eta) x^{-1-2 lambda}, G_q = 0 (8.24); lambda > 0",
+    "angular block powers of x: 2, -2-2lambda, -2lambda; axial block powers: 1, 1-2lambda (distinct for lambda > 0)",
+    "bumps eta_j(x) = a_j^{-1} eta_0(x/a_j), a_j = e^{jd}, j = 0,1,2, small fixed d > 0, disjoint supports",
+    "moments int x^p eta_j dx = mu_p e^{jdp}, mu_p > 0; Vandermonde in e^{dp}",
+    "matrices A_theta (3x3, rows mu_2 e^{2jd}; 2a mu_{-2-2lambda} e^{jd(-2-2lambda)}; -a mu_{-2lambda} e^{-2jd lambda}) and A_z (2x2, rows mu_1 e^{jd}; a mu_{1-2lambda} e^{jd(1-2lambda)})",
+    "(u_0,u_1,u_2)^T = A_theta^{-1}(0, -P_q, -J_z,q)^T, (s_0,s_1)^T = A_z^{-1}(0, -J_theta,q)^T",
+    "Delta v_phys = q^{-A} sum_j u_j eta_j(r/sqrt q), gamma_d,phys = q^{-A} sum_j s_j eta_j(r/sqrt q)",
+    "no uniformity as lambda -> 0"
+   ],
+   "cites": [
+    "(8.24)",
+    "(8.25)",
+    "(8.17)",
+    "(8.14)",
+    "(8.2)",
+    "(8.12)",
+    "(8.15)",
+    "(4.30)",
+    "(5.44)",
+    "(5.18)",
+    "Proposition 5.5",
+    "Lemma 8.2",
+    "Vandermonde determinant"
+   ],
+   "role": "Fixed five-dimensional linear map cancelling the linear changes of the three integral defects (P, J_theta, J_z) while preserving the two velocity moments (operation 4 of the correction cycle)."
+  },
+  {
+   "id": "Lemma 8.8",
+   "kind": "Lemma",
+   "section": "8",
+   "page": 98,
+   "hypotheses": [
+    "slow base satisfies (8.24) with fixed lambda > 0 and |a(eta)| >= a_0 > 0",
+    "(beta, v, gamma) a smooth divergence-free mean correction supported in the active shell; base and wave field w fixed",
+    "g_r and (P, J_theta, J_z) formed by (8.3), (8.12), (8.15); Lemma 8.7 applied with these defects as targets; gamma_d realized by (8.14); updated mean velocity (beta_new, v_new, gamma_new) = (beta + Delta beta, v + Delta v, gamma + Delta gamma)",
+    "for the estimates: on the support of the azimuthal potential, every fixed coefficient derivative of b is bounded by C_I eps S_*^{B_I} and those of V, G by C_I S_*^{B_I}; current corrections v, gamma in M_{0.9}, beta in M_{1.9}; targets in S_alpha with alpha >= 0.9"
+   ],
+   "conclusion": "With R_g = g_r,new - g_r - (2V/R) Delta v: R_g = -t_* Delta beta - (D_r + 1/R)(2 b Delta beta + 2 beta Delta beta + (Delta beta)^2) - D_z(b Delta gamma + G Delta beta + beta Delta gamma + gamma Delta beta + Delta beta Delta gamma) + (2 v Delta v + (Delta v)^2)/R + eps(Delta_0 - R^{-2}) Delta beta (8.26). The recomputed defects are P_new = int <R_g>_Y dR, (J_theta)_new = int R^2 <gamma Delta v + v Delta gamma + Delta gamma Delta v>_Y dR, (J_z)_new = int R <2 gamma Delta gamma + (Delta gamma)^2>_Y dR - (1/2) int R^2 <R_g>_Y dR (8.27). Under the additional bounds, R_g in M_{alpha+0.9-2kappa_s} and (P_new, (J_theta)_new, (J_z)_new) in S_{alpha+0.9-2kappa_s}.",
+   "constants": [
+    "gain 0.9 - 2 kappa_s",
+    "hypothesis classes v, gamma in M_{0.9}, beta in M_{1.9}, alpha >= 0.9",
+    "term classes: -t_* Delta beta in M_{alpha+2}; (D_r+1/R)(2b Delta beta) in M_{alpha+2-kappa_s}; D_z(b Delta gamma + G Delta beta) in M_{alpha+2}; 2 v Delta v/R in M_{alpha+0.9}; (Delta v)^2/R in M_{2alpha}; eps(Delta_0 - R^{-2}) Delta beta in M_{alpha+2-2kappa_s}; remaining transport products in M_{alpha+2-kappa_s}",
+    "t_* Delta beta = -eps d_T Delta beta since increments are auxiliary independent"
+   ],
+   "cites": [
+    "Lemma 8.7",
+    "(8.24)",
+    "(8.3)",
+    "(8.12)",
+    "(8.14)",
+    "(8.15)",
+    "(8.25)",
+    "(8.26)",
+    "(8.27)"
+   ],
+   "role": "Computes the exact nonlinear remainder of the radial source and of the three defects after the five-dimensional moment correction, and shows they gain 0.9 - 2 kappa_s in decay order for the iteration."
+  },
+  {
+   "id": "Corollary B.10",
+   "kind": "Corollary",
+   "section": "B",
+   "page": 157,
+   "hypotheses": [
+    "the analytic axis profile of Proposition B.2",
+    "the reference outer radial profile and the constructions of Propositions B.5, B.8 and Corollary B.6; preservation of p_1 > 2 along the profile (B.34)"
+   ],
+   "conclusion": "The analytic axis profile admits a smooth continuation with E > 0 for X > 0, matching the reference outer radial profile at log(X/X_R) = -5 with exact fields, pressure and radial moment functions. It has vanishing leading residual stress through X_0, followed by an inner collar on which the profile remains analytic in eta and satisfies the admissible stress cone condition with the flat factor (B.30); it satisfies the strict inequalities of the relaxed cone condition thereafter up to the matching point. Its finite parameters can be chosen in the order (B.40).",
+   "constants": [
+    "matching point log(X/X_R) = -5",
+    "stress vanishes through X_0",
+    "flat factor (B.30)",
+    "order of choices (B.40): M_d, T_d, P_*, lambda, h -> tolerance, j_0 -> delta_*, sigma_*, Lambda -> (B_k), T_sh -> C, X_R -> kappa_0, t_1, final widths"
+   ],
+   "cites": [
+    "Proposition B.2",
+    "Proposition B.5",
+    "Proposition B.8",
+    "Corollary B.6",
+    "(B.30)",
+    "(B.34)",
+    "(B.40)",
+    "Remark B.9"
+   ],
+   "role": "Summarizes the completed joining of the analytic inner profile to the outer profile with exact moments; it is the fixed input profile taken by Appendix C."
+  },
+  {
+   "id": "Lemma C.1",
+   "kind": "Lemma",
+   "section": "C",
+   "page": 158,
+   "hypotheses": [
+    "a, b_s, p_s smooth on I x [-1,1] with a > 0, where I = [X_-, X_+] is a compact interval inside (X_a, X_b); t_s = -b_s/a, v_s = a(1 + t_s^2)",
+    "the strict inequalities of the relaxed cone condition (4.21) hold everywhere on I x [-1,1]",
+    "the admissible stress cone condition holds in neighborhoods of the two radial boundary components of I"
+   ],
+   "conclusion": "There is a smooth loop (a_L, -b_L)(X, eta, phi), of period one in phi, with a_L > 0, such that int_0^1 (a_L, -b_L) d phi = (a, -b_s) (C.1). With Psi the vector of cone gaps in (4.35), there are constants kappa_L, delta_d > 0 depending on a, b_s, p_s, I such that Psi_j(a_L, b_L, p_s) >= kappa_L for (X, eta, phi) in I x [-1,1] x (R/Z), j = 1,...,4 (C.2), and (a_L, -b_L) = (a, -b_s) for X in I with dist(X, dI) < delta_d (C.3). All smoothness includes the closed interval -1 <= eta <= 1.",
+   "constants": [
+    "P_c(t) = p_s,1 + p_s,2 t, J_c(t) = p_s,2 - p_s,1 t",
+    "0 < d_0 < (1/2) min(P_c(t_s) - 2) (extraction '12' read as 1/2)",
+    "M_e(z) = <e^{z sin theta'}>_theta' (C.4)",
+    "t(theta'; mu) = t_s + d_0 (e^{mu p_s,2 sin theta'}/M_e(mu p_s,2) - 1)/p_s,2, mu >= 0 (C.5); at p_s,2 = 0 it is t_s + d_0 mu sin theta'",
+    "<t>_theta' = t_s; P_c(t) >= P_c(t_s) - d_0 > 2",
+    "variance V(mu, p_s,2) = (d_0^2/p_s,2^2)(M_e(2 mu p_s,2)/M_e(mu p_s,2)^2 - 1), = d_0^2 mu^2/2 at p = 0; V = (1/2) d_0^2 mu^2 + O(mu^4 p^2)",
+    "monotonicity (C.6): d_mu{g(2 mu p) - 2 g(mu p)} > 0 with g = log M_e",
+    "M_e(z) ~ e^{|z|}/sqrt|z| for |z| >= 1, so V -> inf",
+    "mu_max with V(mu_max, p_s,2) > 3/min a (C.7)",
+    "U(P_c, J_c) = smaller root in v of 2(P_c - v)^2 = (v-2) J_c^2; 0 < delta_L < 1 with U > 2 + delta_L for 0 <= mu <= mu_max (C.8), also below min(v_s - 2) near boundaries",
+    "cutoff zeta_L(v_s): 1 for v_s <= 2 + delta_L/8, 0 for v_s >= 2 + delta_L/4",
+    "v_* = 2 + delta_L/2, rho = zeta_L^2 (v_* - v_s), v = v_s + rho, 0 <= rho < 3 (C.9)",
+    "V(mu, p_s,2) = rho/a solved for 0 <= mu < mu_max (C.10)",
+    "reparametrization d phi/d theta' = a(1+t^2)/(2 pi v), (a_L, -b_L) = v(1,t)/(1+t^2); a<1+t^2>_theta' = v_s + aV = v"
+   ],
+   "cites": [
+    "(4.21)",
+    "(4.35)",
+    "(4.11)",
+    "Lemma 4.5",
+    "(C.1)",
+    "(C.2)",
+    "(C.3)",
+    "(C.4)",
+    "(C.5)",
+    "(C.6)",
+    "(C.7)",
+    "(C.8)",
+    "(C.9)",
+    "(C.10)",
+    "implicit function theorem",
+    "log-convexity of the moment generating function M_e (g'' > 0)"
+   ],
+   "role": "Builds, at each profile point, a periodic family of admissible shear vectors whose mean is the original (only relaxed-admissible) shear, to be inserted at high radial frequency by Proposition C.2 so as to enforce the strict cone condition v_s > 2."
+  },
+  {
+   "id": "Proposition C.2",
+   "kind": "Proposition",
+   "section": "C",
+   "page": 161,
+   "hypotheses": [
+    "the fixed input profile E, U, Pi selected at the beginning of Appendix C (from Corollary B.10, Propositions A.4, A.7, B.8), with T_0 nonzero precisely on (X_a, X_b), satisfying the relaxed cone condition strictly on that interval and the admissible cone on an inner collar and from the intermediate power-law interval onward",
+    "the loop (a_L, -b_L) of Lemma C.1 on I = [X_-, X_+]",
+    "a sufficiently large finite integer N",
+    "a correction supported in the first reserved patch in the intermediate power-law interval (the first patch listed after (A.9)), where U = 0 and E = K(eta) X^{-1/2-lambda} with K smooth and positive"
+   ],
+   "conclusion": "There are smooth profiles E~, U~, Pi~ with E~ > 0 for X > 0 satisfying the admissible stress cone throughout (X_a, X_b). Both endpoint collars, the rectangle near the axis [0, X_an] x [-1,1], and the two patches reserved for higher-order and mean corrections are unchanged. With m~, Q~_s, N~_s defined by (4.15), (4.16), (m~, Pi~, Q~_s, N~_s) = (m, Pi, Q_s, N_s) beyond the first correction patch. Before that point, profile values and each fixed number of eta-derivatives differ from the input profile by O(N^{-1}).",
+   "constants": [
+    "zero-mean periodic antiderivatives d_phi A = -(1/2)(a_L - a), d_phi B = (1/2) E (b_L - b_s) (C.11) (fractions garbled in extraction; recovered from a_N = 1 - 2 X d_X log E_N, b_N = 2 X d_X U_N/E_N)",
+    "E_N = E exp(A(X, eta, N log X)/N), U_N = U + B(X, eta, N log X)/N (C.12)",
+    "exact shears a_N = a_L - 2 D_X A/N, b_N = e^{-A/N}(b_L + 2 D_X B/(N E)) (C.13)",
+    "X d_X after substitution = D_X + N d_phi",
+    "(C.14): sum_{j<=m} |d_eta^j (E_N - E)| + |d_eta^j (U_N - U)| <= C_m N^{-1}; mixed radial derivatives of order r bounded by C_{r,m} N^{r-1}",
+    "(C.15): moment and pressure differences O(N^{-1}); (C.16): p_s,N - p_s = O(N^{-1}) using orders through m+1",
+    "block-diagonal moment weights at the right endpoint: rows M, J with weights 1, H and powers 0, -lambda; rows I, S, C_p with weights 2X, -E, E/X and powers 1/2, -1/2-lambda, -3/2-lambda",
+    "two bumps added to U, three to E; coefficients O_m(N^{-1})",
+    "N chosen after lambda, patch scales and all profile choices, and before any limit in q or band/stage",
+    "right endpoint X_rep with m~ = m and (E~, U~) = (E, U) for X >= X_rep (C.17)"
+   ],
+   "cites": [
+    "Lemma C.1",
+    "Corollary B.10",
+    "Proposition A.4",
+    "Proposition A.7",
+    "Proposition B.8",
+    "Lemma A.8",
+    "Lemma A.1",
+    "Lemma A.2",
+    "Corollary A.3",
+    "Lemma 4.4",
+    "(4.15)",
+    "(4.16)",
+    "(4.11)",
+    "(A.9)",
+    "(C.1)",
+    "(C.11)",
+    "(C.12)",
+    "(C.13)",
+    "(C.14)",
+    "(C.15)",
+    "(C.16)",
+    "(C.17)"
+   ],
+   "role": "Inserts the admissible loop as a high-frequency radial modulation (phase N log X, amplitude 1/N) so the shear satisfies the admissible cone everywhere while profile values and moments change by O(1/N), then restores the five radial moments exactly on a reserved patch so that the exterior fields are preserved (step 4 of Section 3.2)."
+  },
+  {
+   "id": "Proposition C.3",
+   "kind": "Proposition",
+   "section": "C",
+   "page": 163,
+   "hypotheses": [
+    "the corrected profiles E, U, Pi of Proposition C.2 and all associated quantities formed from them",
+    "the preserved edge factorizations (B.30) at the inner edge and (A.48)-(A.49) at the outer edge; t_1 > 0 the fixed activation width in log(X/X_a) from Proposition 4.10",
+    "weight y_a = log(X/X_a), y_b = log(X_b/X), delta = min{1, y_a, y_b}, zeta = exp(-t_1^2/y_a^2 - 4/y_b^2) on X_a < X < X_b, extended by zero outside (C.18)"
+   ],
+   "conclusion": "The profiles satisfy all conclusions (i)-(v) of Theorem 4.6 with the weight (C.18). In particular: T_0 vanishes exactly for X <= X_a and X >= X_b and nowhere in between; n = T_0/|T_0| extends smoothly to the closed annulus with limiting directions a(1, t_s) (inner edge) and (1,0) (outer edge, t_s = 0); F > 0, a > 0, v_s > 2 with positive lower bounds on the closed annulus; for a single 0 < kappa < 2, n_theta + t_s n_z >= kappa and (v_s - 2)(n_z - t_s n_theta)^2 <= (2 - kappa)(n_theta + t_s n_z)^2; |T_0| >= c zeta and |d^I T_0| <= C_I zeta delta^{-m_I} on X_a < X < X_b, -1 <= eta <= 1 (C.19); axis regularity via Proposition B.2 and Corollary B.6; exact exterior moments (4.28) and heat exterior (4.29) retained.",
+   "constants": [
+    "zeta = exp(-t_1^2/y_a^2 - 4/y_b^2), delta = min{1, y_a, y_b} (C.18)",
+    "single 0 < kappa < 2 cone margin",
+    "inner factorization T_0 = e_a B_0 with e_a = e^{-t_1^2/y_a^2} g_a(y_a), g_a(0) > 0, B_0(0, eta) = F p_s,r != 0",
+    "outer direction n = (b_theta, y_b^6 b_z)/sqrt(b_theta^2 + y_b^12 b_z^2), b_theta(0, eta) > 0; angular factor e^{-4/y_b^2} y_b^{-3} b_theta",
+    "interior identities n_theta + t_s n_z = (P_c - v_s)/|p_s - (a, -b_s)| > 0, n_z - t_s n_theta = J_c/|p_s - (a,-b_s)|; expression 2 - (v_s-2)(n_z - t_s n_theta)^2/(n_theta + t_s n_z)^2 positive, equal to 2 at either edge",
+    "Pi_X = E^2/(2X) = F^2",
+    "v_s > 2 + c at the inner endpoint (Proposition B.5)"
+   ],
+   "cites": [
+    "Proposition C.2",
+    "Theorem 4.6",
+    "Proposition B.5",
+    "Proposition B.2",
+    "Corollary B.6",
+    "Lemma A.8",
+    "Proposition A.10",
+    "Proposition A.7",
+    "Proposition B.8",
+    "Lemma A.5",
+    "Lemma A.6",
+    "Proposition 4.2",
+    "Proposition 4.10",
+    "(4.11)",
+    "(4.13)",
+    "(4.4)",
+    "(4.5)",
+    "(4.25)",
+    "(4.28)",
+    "(4.29)",
+    "(A.48)",
+    "(A.49)",
+    "(A.51)",
+    "(A.56)",
+    "(B.30)",
+    "(B.31)",
+    "(C.17)",
+    "(C.18)",
+    "(C.19)"
+   ],
+   "role": "Verifies that the corrected profiles satisfy every conclusion of Theorem 4.6, in particular the edge behavior of the stress direction, the uniform cone margin, and the flat edge weight zeta, thereby completing the profile construction used by Sections 5-9."
+  }
+ ],
+ "hard_pages": [
+  {
+   "pages": "74",
+   "why": "Frame and cone condition: the displays for lambda_0^2 = -2F_0 N_theta(2F_0 N_theta + |g_0|), c_0 = lambda_0/(2F_0 N_theta), the cone inequality (7.1) |c_0 (T_{0,*}.K)/(T_{0,*}.N)| < 1 with T_{0,*}.N < 0, and the wave-number choice (p~/R_0, p_z) = B_s(K - sigma u_* g_0/(L_s|g_0|^2)) are all badly garbled in the extraction; I reconstructed them from the surrounding prose (c_0^2 = (v_s-2)/2, quotient |J_c|/(P_c - v_s)) and the consistency of (7.28)-(7.29) with Lemma C.1's cone test 2(P_c - v)^2 = (v-2)J_c^2."
+  },
+  {
+   "pages": "76-77",
+   "why": "Lemma 7.1 Step 3: the reference undamped 2x2 matrix [[0, 2F_0N_theta/(1+s^2)],[-(2F_0N_theta+|g_0|),0]] and the claim that its eigenvalues are +/-lambda with lambda = lambda_0/sqrt(1+s^2) had to be checked by hand (product of off-diagonal entries gives lambda_0^2/(1+s^2)); the argument for why the single threshold q_* works for all derivative orders (smallness S_*^2(eps+eps^2+k^{-1}) <= 1, 1 <= eps k^2 <= 4, det M = -2c_0 sqrt(1+s^2)) is dense."
+  },
+  {
+   "pages": "78-79",
+   "why": "Proposition 7.2 Steps 1-2: the net growth rate a_net(y) = lambda_0/sqrt(1+y^2) - lambda_0(1+y^2)/(1+u_*^2)^{3/2} and its v-derivative bound (between -C/L_s and -c/L_s using u_*/2 <= |s| <= 3u_*/2) giving the Gaussian envelope (7.16); the exact harmonic factor (7.18) and propagator bound (7.19) uniform in m; the polynomial-degree bookkeeping 1 + max{b_I, c_J + b'_{I-J}} in (7.20); and the common-torus path H_w with D_H v = O(S_*)."
+  },
+  {
+   "pages": "83",
+   "why": "Proposition 7.5 Step 2: the solved squared amplitudes are printed as 'h_+y_+ = 2(-T_N/A_c 1 - T_K/u_*)' where the displaced '1' must be read as a factor 1/2 (I verified from H_sigma = h_sigma(-A_c N - sigma u_* K) that the correct factor is 1/2); also the relation between u_*, A_c = -c_0 sqrt(1+u_*^2), the margin eta_c, and the cone condition (7.1)."
+  },
+  {
+   "pages": "91-92",
+   "why": "Lemma 8.2 Step 3: the Diophantine estimate (8.10) ||L^{-p}H||_{C^m} <= C||H||_{C^{m+p+3}}, the p-fold integration by parts J g = (-M^{-1})^p int d_U^p L^{-p} F^o du with M^{-1} <= C eps^{kappa_s} S_*^{rho_g}, and the choice of p with h(alpha + p kappa_s) > N + L to get flatness O(q^N); the loss L is stated to be finite but its origin ('graph operators') refers to Section 6 which I did not read."
+  },
+  {
+   "pages": "97-98",
+   "why": "Lemma 8.7: the reduction of the five equations (8.25) to two Vandermonde blocks with powers 2, -2-2lambda, -2lambda and 1, 1-2lambda, the explicit matrices A_theta, A_z (heavily garbled in extraction), and the row normalizations (8.17) with q in place of Q."
+  },
+  {
+   "pages": "159-160",
+   "why": "Lemma C.1 proof: the tilted family t(theta'; mu) of (C.5) with removable singularity at p_s,2 = 0, the variance formula V = (d_0^2/p_s,2^2)(M_e(2 mu p)/M_e(mu p)^2 - 1), monotonicity (C.6) from log-convexity, the asymptotic M_e(z) ~ e^{|z|}/sqrt|z|, the threshold (C.7) V > 3/min a, the chain of choices d_0, mu_max, delta_L, v_*, rho, and the reparametrization d phi/d theta' = a(1+t^2)/(2 pi v); the '12' in '0 < d_0 < 12 min(P_c(t_s)-2)' was read as 1/2."
+  },
+  {
+   "pages": "161-162",
+   "why": "Proposition C.2: (C.11)-(C.13) are garbled ('-12(a_L - a)', '2E(b_L1 - b_s)'); I recovered d_phi A = -(1/2)(a_L - a) and d_phi B = (1/2)E(b_L - b_s) by differentiating (C.12) with X d_X = D_X + N d_phi. The moment-restoration block table (weights 1, H; 2X, -E, E/X with powers 0, -lambda; 1/2, -1/2-lambda, -3/2-lambda) and the appeal to Lemma A.1/Corollary A.3/Lemma A.2 rely on Appendix A, which I did not read."
+  }
+ ],
+ "could_not_determine": [
+  {
+   "id": "Lemma 7.1",
+   "field": "constants",
+   "why": "The displayed wave-number formula '(p~/R_0, p_z) = B_s(K - sigma u_* g_0/(L_s |g_0|^2))' on p. 74 is garbled in the extraction; I recorded the most plausible reading, consistent with the proof's statement '(p/R_0, p_z).g_0 = -sigma B_s u_*/L_s before rounding', but cannot certify the exact placement of the factor."
+  },
+  {
+   "id": "Proposition 7.2",
+   "field": "constants",
+   "why": "The exponents b'_I, a'_I in (7.14)-(7.15) are only asserted to exist (depending on I, M and the source bounds); no explicit formula is given beyond the degree-increase recursion on p. 79."
+  },
+  {
+   "id": "Lemma 8.2",
+   "field": "constants",
+   "why": "The loss L of powers of q from 'graph operators' (p. 92) and the exponent rho_g in M^{-1} <= C eps^{kappa_s} S_*^{rho_g} refer to Section 6 definitions ((6.2), (6.7), Lemma 6.2) which are outside my shard; I record them as named but unquantified."
+  },
+  {
+   "id": "Corollary B.10",
+   "field": "hypotheses",
+   "why": "This statement sits on p. 157 (within my page range) but belongs to Appendix B; its hypotheses reference Propositions B.2, B.5, B.8, Corollary B.6 and (B.30), (B.34), (B.40) which I did not read. The brief expected only the three Appendix C statements; entry included for completeness and may be dropped."
+  },
+  {
+   "id": "Proposition C.3",
+   "field": "conclusion",
+   "why": "The statement says 'all conclusions of Theorem 4.6' with the weight (C.18); Theorem 4.6 (p. 24ff) is outside my shard, so the parts (i)-(v) I list are reconstructed from the proof's own labelling of what it proves, not from the theorem's text."
+  },
+  {
+   "id": "Lemma C.1",
+   "field": "cites",
+   "why": "The vector of cone gaps Psi in (4.35) and the relaxed cone condition (4.21) are referenced but their definitions are in Section 4, outside my shard; the four gaps j = 1..4 are described in the proof only as 'a_L, v - 2, and the two strict inequalities of the quadratic cone test'."
+  }
+ ],
+ "stopped_at_page": null
+}
