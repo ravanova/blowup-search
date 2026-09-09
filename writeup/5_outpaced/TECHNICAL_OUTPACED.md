@@ -99,7 +99,13 @@ else's record, and is banked at the status it actually has.
   while acknowledging it cannot rule out de-identified usage data having helped
   its models; the bibliography grew 16 → 22 entries and critics note missing
   references including Chen–Hou.
-- **(A) and (B) are untouched.** The unforced problem is open. So is **(D)**.
+- **(A) and (B) are untouched.** The unforced problem is open. ~~So is **(D)**.~~
+  **STRUCK 2026-09-09 (leg 423, arc 6 R0; `CORRECTIONS.md` §66).** The manuscript's Theorem 1.1
+  ends: *"Compact support also yields the corresponding construction on `T³ = ℝ³/ℤ³`,
+  establishing alternative (D) in [13]; see Corollary 10.6."* Corollary 10.6 is stated and proved
+  (pp. 125–126, every `ν > 0`) and the Lean project declares
+  `NavierStokes.Comparator.navier_stokes_breakdown_periodic` a proved main result. **(D) is
+  CLAIMED.** Whether the claim is correct is not decided by this note.
 - **Nothing here makes any Tier-2 result in this repository a proof.**
 
 ### 1.5 The companion Euler result
@@ -366,9 +372,18 @@ as an audit wearing a construction hat.
 **is** statement (D). It sits in Lane T, deferred, behind
 `writeup/escalations/ESCALATION_D_BUNDLING_2026-08-18.md` — recorded in
 `reports/ORCH_STATE.md` as *"the most direction-relevant open item on the
-board, and it has never been ruled."* With (C) now claimed, (D) is the nearest
-unclaimed Fefferman statement. Note also that (D)'s data conditions (8) and (9)
-are still **unread** here, and are readable since the outreach narrowing.
+board, and it has never been ruled."* ~~With (C) now claimed, (D) is the nearest
+unclaimed Fefferman statement.~~ ~~Note also that (D)'s data conditions (8) and (9)
+are still **unread** here, and are readable since the outreach narrowing.~~
+
+> **STRUCK 2026-09-09 (leg 423, arc 6 R0; `CORRECTIONS.md` §66). A6-D IS DEAD.** Its premise
+> was false on the manuscript's own text when it was written: (D) is **claimed**, by Corollary
+> 10.6, for every `ν > 0`, and the Lean project formalises a torus result under the same name.
+> A charter item whose stated reason for existing is that a statement is *unclaimed* cannot
+> survive that statement being claimed in the same document that claims (C). The **escalation
+> packet it names is unaffected and still unruled** — Lane T's deferral is a user ruling and this
+> note does not touch it. (8) and (9) were read at primary at leg 417 (§61); the second struck
+> sentence is stale for that reason, not for the first.
 
 **Reachable: BLOCKED ON A USER RULING, not on work.** Lane T's two re-open
 conditions are already written and neither has been met.

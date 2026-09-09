@@ -8,13 +8,11 @@
     "writeup/5_outpaced/outpaced_evidence.py",
     "writeup/data/arc5_outpaced_v1.json"
   ],
-
   "EVIDENCE_CLASS": {
     "what_this_artefact_is": "A banked record of a THIRD-PARTY public result and of this repository's own already-measured throughput, plus arithmetic derived from the two. It contains NO new measurement of any fluid equation. No number here was produced by a solver run in this repository.",
     "why_that_matters": "ORCHESTRATION.md's documentation contract requires every number quoted in prose to live in a JSON. Two different provenance classes are mixed in this file and they are NOT interchangeable. `external_record` is journalism and preprint text, read but NOT audited at full text here -- status UNVERIFIED, and it stays UNVERIFIED in the prose. `this_programme` is primary: every field cites the repository file it is read from. `derived` is pure arithmetic over the other two and is recomputed from them by outpaced_evidence.py rather than restated.",
     "the_standing_rule_this_obeys": "A PAPER IS A VIEW OF THE RECORD, NEVER A SOURCE (STATE.md, wave-8 pivot). An external announcement is a view of somebody else's record. It is banked at the status it actually has."
   },
-
   "external_record": {
     "verification_status": "UNVERIFIED IN THIS REPOSITORY. Read from public announcement, preprint abstract pages and press coverage on 2026-09-09. NOT audited at full text. NOT reproduced. No Lean file in the cited project was compiled here.",
     "openai_navier_stokes": {
@@ -71,7 +69,6 @@
       "tao_remark_as_reported": "the method does not seem far from showing blowup for Navier-Stokes too, though a large amount of compute and detail-checking would be involved"
     }
   },
-
   "this_programme": {
     "verification_status": "PRIMARY. Every field cites the repository file it is read from. These are the programme's own already-landed measurements, not new ones.",
     "target_statement": {
@@ -169,7 +166,6 @@
       "source": "STATE.md wave 7 close; writeup/CORRECTIONS.md section 60"
     }
   },
-
   "derived": {
     "note": "Every field here is RECOMPUTED by outpaced_evidence.py from external_record and this_programme. None is restated from prose. Each carries the assumption that makes it meaningful; strip the assumption and the number is not a forecast.",
     "legs_per_day": {
@@ -189,11 +185,15 @@
     },
     "odds_parity": {
       "formula": "(1 / self_assessed_clay_odds) * (span_days / speedup) days",
-      "speedups_considered": [2.5, 2.0, 1.75, 1.5],
+      "speedups_considered": [
+        2.5,
+        2.0,
+        1.75,
+        1.5
+      ],
       "assumption": "0.05% is a per-programme probability and programmes are independent repeats. The programme's own record says the opposite -- the odds were 'unmoved' across 416 legs, i.e. NOT a per-trial rate that accumulates."
     }
   },
-
   "the_finding": {
     "headline": "The programme's target statement was answered externally, by an apparatus outside the programme's search space, while the programme's own recorded ceiling remained Tier 2 and its own recorded odds remained 0.05%, unmoved.",
     "the_specific_miss": {
@@ -215,7 +215,6 @@
       "It does not retroactively make any Tier-2 result in this repository a proof. Tier 2 is never a proof. That rule is unchanged by anything in this file."
     ]
   },
-
   "arc6_charter": {
     "status": "PROPOSED, NOT RULED. The direction question belongs to the user, not to any agent in this repository (ORCHESTRATION.md section 8 escalation discipline).",
     "the_one_remaining_part": "Arc 6 is the last arc. It is where this programme delivers a result of its own rather than a measurement of its own limits.",
@@ -256,10 +255,27 @@
       "Treat the external record as verified. It is UNVERIFIED here until A6-AUDIT says otherwise, and it stays UNVERIFIED in every draft until then."
     ]
   },
-
   "open_items": [
     "STATE.md is NOT modified by this arc. It is the Conductor's working surface, it is under an ORCHESTRATION.md section 3j byte cap with 833 B of headroom at the time of writing, and file ownership (section 5) puts it outside this arc's territory. A restarting session owes it a row pointing here. RECORDED, NOT DONE.",
     "No figure is registered in writeup/build_figures.py for this arc. The documentation contract's item 4 asks for one; this arc has no measurement of its own to plot, and a plot of somebody else's press numbers would be decoration. RECORDED AS A DELIBERATE GAP, not an oversight.",
     "The two-year Clay clock (CMI Section 4) has not started for the external result and cannot start until a qualifying publication exists. Nothing in this repository depends on that date, but it is a planning fact and CLAY_OBLIGATIONS.md section 7 already carries it."
+  ],
+  "corrections": [
+    {
+      "id": "C1",
+      "date": "2026-09-09",
+      "leg": 423,
+      "unit": "arc 6 R0",
+      "corrections_md_section": 66,
+      "rule": "A banked datum gets a correction record, never an edit (RULING_W3_WORDING_2026-08-18 Q3). Every field named below is left byte-identical; this record sits beside them.",
+      "fields_affected": [
+        "arc5_charter_context... what_this_does_NOT_establish[2]: 'It does not close statements (A), (B) or (D). (A) and (B) are the unforced problem and are untouched. (D) is the torus.'",
+        "arc6_charter.candidates[A6-D].why_it_is_ours: '... it is now the nearest unclaimed Fefferman statement.'",
+        "arc6_charter.candidates[A6-D].reachable: 'BLOCKED ON A USER RULING, not on work'"
+      ],
+      "what_is_wrong": "The reading that (D) is untouched / unclaimed. The manuscript claims (D): Theorem 1.1 ends 'Compact support also yields the corresponding construction on T^3 = R^3/Z^3, establishing alternative (D) in [13]; see Corollary 10.6', and Corollary 10.6 (pp. 125-126) is stated and proved for every nu > 0. The Lean project declares NavierStokes.Comparator.navier_stokes_breakdown_periodic a proved main result (formalization.yaml). Provenance: writeup/data/arc6_acquire_v1.json, manuscript sha256 0e779481c4da40bd28d1e642e1d8ca57447d129610df28dfa5a11e9af8ae228f, Lean HEAD 8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538.",
+      "consequence": "A6-D IS DEAD. Its stated reason for existing -- that (D) is the nearest UNCLAIMED statement -- was false on the manuscript's own text when written. The escalation packet ESCALATION_D_BUNDLING_2026-08-18.md is unaffected and still unruled; Lane T's deferral is a user ruling and is not touched.",
+      "what_is_NOT_corrected": "Nothing here says the claim of (D) is correct. That is not decided by arc 5 and was not decided by leg 417 either. 'Claimed' and 'established' are different words and the correction uses the first."
+    }
   ]
 }
