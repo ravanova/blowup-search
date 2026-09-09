@@ -375,6 +375,17 @@ so it cannot be briefed by the construction it is checking. Anything not so veri
 becomes the bottleneck and the Conductor's context becomes the constraint the whole mode exists to
 protect. Prefer fewer, larger units — §3f's "task size goes up, not down" holds here.
 
+> **RULING 2026-09-09 (user, arc 6 conductor charter): WAVE SIZING RAISED FROM 4 TO 5.** Five
+> workers at a time, maximum, plus the Conductor. **The reason for the original 2–4 cap stands
+> beside the ruling, unchanged, so the tradeoff stays visible:** *"above 4 the audit becomes the
+> bottleneck and the Conductor's context becomes the constraint the whole mode exists to protect."*
+> What the fifth slot buys: **every FAN-OUT wave reserves one slot for an ADVERSARIAL VERIFIER**
+> that re-derives the other four's results from banked data alone and is never told what to
+> conclude — which is what makes §3f rule 1 (*verification is a fresh session*) satisfiable. If the
+> audit becomes the Conductor's bottleneck, **that is a measurement and goes in the record**
+> (`reports/ORCH_STATE.md`); the wave is not silently shrunk. Recorded by leg 427,
+> `writeup/CORRECTIONS.md` §67.
+
 **Wave composition floor (adopted 2026-08-13).** **Every wave carries at least one unit attacking a
 wall on the Clay chain directly** — a Lane T, V or L unit in `WALLS.md`'s terms. This is §3b's
 composition floor re-posed for waves, and it defends against the specific drift this programme is
