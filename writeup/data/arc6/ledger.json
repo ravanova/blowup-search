@@ -2,11 +2,12 @@
  "schema": "arc6_ledger_v1",
  "leg": 425,
  "cursor": {
-  "read_through_page": 44,
+  "read_through_page": 61,
   "sections_done": [
    "1-2",
    "3",
-   "4"
+   "4",
+   "5"
   ]
  },
  "entries": [
@@ -425,6 +426,160 @@
     "Lemma 4.5"
    ],
    "role": "Where only the RELAXED cone holds (the joining interval), replaces the shear by a periodic loop of the same mean every value of which is ADMISSIBLE. Step 2 of Theorem 4.6 then realizes this loop at a large frequency N log X."
+  },
+  {
+   "id": "Lemma 5.1",
+   "kind": "Lemma",
+   "section": "5",
+   "page": 47,
+   "hypotheses": [
+    "the leading profiles of Theorem 4.6 with their analytic axis rectangle (Proposition B.2)",
+    "lower-order coefficients j < n already constructed, cutoffs and moment corrections included, supported to the right of the inner rectangle",
+    "the coefficient system (5.2)-(5.6) at order n >= 1, which is LINEAR in the order-n unknowns"
+   ],
+   "conclusion": "There is an interval 0 <= xi <= a, xi = sqrt(X), from the axis into the inner collar of Theorem 4.6(i) where the cone holds with uniform margin, on which every positive order has a UNIQUE solution of (5.2)-(5.6) with phi_n(0,eta) = U_n(0,eta) = Pi_n(0,eta) = 0; smooth in X, and for each fixed radial derivative holomorphic in eta on a neighbourhood of [-1,1] (neighbourhood and bounds may depend on the order and radial derivative; a does NOT). Uniqueness among solutions extending holomorphically in eta with uniform bounds on 0 <= xi <= a.",
+   "constants": [
+    "a (radial half-length, order-independent)",
+    "lambda_n = 2nh",
+    "b = -A - 1/2, c = -A (the T_b, Z_b operator indices)",
+    "the 6-vector W_n = (phi_n, U_n, K_n, Pi_n, d_xi phi_n, d_xi U_n) of (5.7)",
+    "p_k = ceil(k/2) parameter derivatives per k-fold composition",
+    "the Picard bound (5.8)"
+   ],
+   "cites": [
+    "(5.1)-(5.8)",
+    "(4.2)",
+    "(4.6)",
+    "Theorem 4.6(i)",
+    "Proposition B.2",
+    "Cauchy estimates on the strip S_rho",
+    "parity argument for smoothness in X = xi^2"
+   ],
+   "role": "Solves the order-n inner coefficient equations WITHOUT shrinking the radial interval as n grows -- the sparse structure of A_1 (maps first four coordinates to last two, annihilates the last two) halves the number of eta-derivatives per iteration so the Picard series converges for every finite a. This is what makes an all-orders expansion possible on a fixed interval."
+  },
+  {
+   "id": "Lemma 5.2",
+   "kind": "Lemma",
+   "section": "5",
+   "page": 50,
+   "hypotheses": [
+    "n >= 1; for 1 <= j < n, P_j = (phi_j, U_j, V_j/X, Pi_j, F_j/X) smooth, satisfying (5.2) and (5.5) globally, obeying (5.12) at order j, agreeing with the inner solutions on [0, X_-] and retaining Lemma 5.1's parameter regularity on [0, a^2]",
+    "the inner order-n solution of Lemma 5.1",
+    "the reserved patch I_pos of Theorem 4.6(vi) on which U_0 = 0, E_0 = e_* f(eta) R^{-1-2 lambda}"
+   ],
+   "conclusion": "There are radii X_a < X_- < X_+ < X_b, independent of n, such that the inner solution extends smoothly to X >= 0, agreeing with it on [0, X_-], retaining parameter regularity on [0, a^2], satisfying (5.2) and (5.5) globally, with the five total moments m_n(eta) = 0 of (5.10)-(5.11) and supp_X P_n subset [0, X_+] (5.12); V_n/X and F_n/X smooth at X = 0; the stress T_n of (5.9) has supp T_1 subset [X_-, X_b], supp T_n subset [X_-, X_+] for n >= 2, and |d^I T_n| <= C_{n,I} zeta delta^{-N_{n,I}} on the annulus (5.13), with N_{n,I} = 0 allowed for n >= 2.",
+   "constants": [
+    "X_- < X_keep < X_cut < a^2 < inf I_pos",
+    "X_+ (beyond U_0's support and every positive-order patch, before the terminal collar)",
+    "the cutoff kappa",
+    "five bumps b^U_1, b^U_2, b^E_1..3 in C_c^inf(J_pos) with unit integrals and ordered disjoint supports, fixed across orders",
+    "the moment matrices B_U (exponents 1, 1-2 lambda) and B_E (exponents 2, -2-2 lambda, -2 lambda)",
+    "e_*",
+    "C_{n,I}, N_{n,I} of (5.13)",
+    "the coefficient bounds C_{n,m} of (5.17)"
+   ],
+   "cites": [
+    "(5.9)-(5.22)",
+    "(5.2)",
+    "(5.5)",
+    "(5.6)",
+    "(4.29)",
+    "(A.12)",
+    "(A.45)",
+    "Lemma 5.1",
+    "Lemma A.1",
+    "Lemma A.9",
+    "Theorem 4.6(i),(iv),(vi)",
+    "the conservative forms r^2 R_theta, r R_z"
+   ],
+   "role": "Extends each inner coefficient to all X with COMPACT SUPPORT of the resulting stress: five moment conditions (solved by Lemma A.1's invertible moment matrices on the reserved patch) kill the exterior streamfunction/pressure constants and make the total tangential residual integrals vanish, so the forward stress integrals (5.9) vanish beyond X_+. The n = 1 outer term is the one exception, controlled by the flat outer-collar estimate (5.22). Also proves (5.18): all positive-order fields vanish on I_mean."
+  },
+  {
+   "id": "Proposition 5.3",
+   "kind": "Proposition",
+   "section": "5",
+   "page": 55,
+   "hypotheses": [
+    "the leading profiles of Theorem 4.6 fixed",
+    "the sequence constructed by Lemma 5.1 then Lemma 5.2 at each order using the finalized lower orders"
+   ],
+   "conclusion": "Every finite velocity sum u^[N]_slow is divergence-free, and on every fixed compact profile range 0 <= X <= X_max, |eta| <= 1, for each N, m >= 0 and 0 < q <= 1, the augmented residual F_slow(U^[N]) = R + (d_r + 2/r) T_theta e_theta + (d_r + 1/r) T_z e_z satisfies |F_slow(U^[N])|_m <= C_{N,m} q^{2h(N+1) - K_m} (5.25), with K_m INDEPENDENT of N.",
+   "constants": [
+    "K_m (derivative loss, N-independent)",
+    "C_{N,m}",
+    "the chain-rule loss (5.26): a transverse, k axial, l time derivatives cost q^{-a/2 - Dk - l}",
+    "U^[N] = sum_{n<=N} (u_n, p_n, q^{-A-1/2+lambda_n} T_n)"
+   ],
+   "cites": [
+    "(5.23)-(5.26)",
+    "(5.1)",
+    "(5.2)",
+    "(5.9)",
+    "Lemma 5.1",
+    "Lemma 5.2",
+    "Proposition 4.2"
+   ],
+   "role": "The finite-truncation residual estimate: after cancelling N orders the augmented residual is O(q^{2h(N+1)}) minus a derivative loss that does NOT grow with N. That N-independence of K_m is exactly what Lemma 5.4's summation needs."
+  },
+  {
+   "id": "Lemma 5.4",
+   "kind": "Lemma",
+   "section": "5",
+   "page": 57,
+   "hypotheses": [
+    "a domain Omega on which 0 < q < q_0 <= 1, q = q(z,t) smooth, bounded below on compacts, with |d_z^a d_t^b q| <= C q^{1 - aD - b}, 0 < D < 1 (5.28)",
+    "a base tuple U_0 = (u_0, p_0, T_0) with div u_0 = 0 and |U_0|_m <= C_m q^{-K_m} Lambda_log^{P_m}",
+    "increments Z_j = (A_j, B_j, p_j, T_j), B_j = b_j e_theta, U_j = (curl A_j + B_j, p_j, T_j), with smooth Cartesian representatives at the axis and smooth zero extensions at lateral support boundaries, and |Z_j|_m <= C_{j,m} q^{g_j - l_m} Lambda_log^{P_{j,m}} with 0 < g_1 <= g_2 <= ... -> inf and losses l_m independent of j (5.30)",
+    "a fixed differential polynomial F of the form (5.31) with coefficient bounds (5.32) on fixed regions",
+    "the finite-partial-sum residual hypothesis |F(U^[J])|_m <= C_{J,m} q^{rho_J - K^F_m} Lambda_log^{P} + E_{J,m}, rho_J -> inf, K^F_m independent of J, E_{J,m} flat (5.33)"
+   ],
+   "conclusion": "There are scales a_{j+1} >= 2 a_j with a_1^{-1} < q_0 and a fixed cutoff chi (one on [0,1/2], zero on [1,inf)) such that U = U_0 + sum_j (curl(chi(a_j q) A_j) + chi(a_j q) B_j, chi(a_j q) p_j, chi(a_j q) T_j) (5.34) is locally finite, smooth, with div u = 0, extending smoothly by zero across q = q_0; |U - U^[J]|_m <= 2^{-J} q^{g_{J+1}/2 - l'_m} for 0 < q < 1/(2 a_J), J >= max(1,m) (5.35); and under (5.33) every Cartesian space-time derivative of F(U) vanishes to infinite order as q -> 0: for all m, N there are delta, C with |F(U)|_m <= C q^N on 0 < q < delta (5.36).",
+   "constants": [
+    "a_j (cutoff scales, recursive, a_{j+1} >= 2 a_j)",
+    "chi",
+    "l'_m (depends only on m and l_{m+1})",
+    "the cutoff-derivative bound |d_z^a d_t^b chi(aq)| <= C q^{-aD-b} with constants independent of a",
+    "H_m of (5.39)",
+    "the order of choices: (m, N), then J, then the neighbourhood"
+   ],
+   "cites": [
+    "(5.28)-(5.40)",
+    "the commutator curl(chi A) = chi curl A + a chi'(aq) grad q x A",
+    "used by Proposition 5.5 (background) and Proposition 9.9 (final summation, with F = R and no stress variable)"
+   ],
+   "role": "THE SUMMATION LEMMA. It is stated abstractly so it can be used TWICE -- for the background here and for the wave/mean correction sequence in Section 9. Its content: a formal series whose finite truncations have improving residual can be realized as a smooth field by cutting off the potentials at shrinking scales, without the series converging, and the realized field's residual is FLAT. This is the mechanism by which 'every order' becomes 'flat'."
+  },
+  {
+   "id": "Proposition 5.5",
+   "kind": "Proposition",
+   "section": "5",
+   "page": 60,
+   "hypotheses": [
+    "the coefficient sequence of Proposition 5.3 with potentials A_n = (S_n/r) e_theta, S_n = q^{1-A+lambda_n} F_n (5.27)",
+    "radial endpoints 0 < X_lo < X_a < X_b < X_hi"
+   ],
+   "conclusion": "There are smooth axisymmetric (u_B, p_B) for q > 0 and two physical tangential stress components T_phys supported in X_a <= X <= X_b with div u_B = 0 and R(u_B, p_B) = -(d_r + 2/r) T_phys,theta e_theta - (d_r + 1/r) T_phys,z e_z + E_B (5.41), where |d^alpha E_B| <= C_{alpha,M} q^M on every fixed profile rectangle; the formal expansion has the truncations U^[N]; the normalized velocities satisfy D^I(q^A u_theta,B - E_0) = O(q^2h), D^I(q^A u_z,B - U_0) = O(q^2h), D^I(q^{1/2} u_r,B - V_0/sqrt(2X)) = O(q^2h), D^I(q^A u_r,B) = O(q^h) (5.42) on the enlarged rectangle; with T-hat = q^{A+1/2} T_phys, |D^I(T-hat - T_0)| <= C_I q^{2h} zeta delta^{-N_I} (5.43) on the annulus; every fixed derivative extends continuously to eta = +-1; corrections vanish for X >= X_+ so the exact heat exterior (4.29) is preserved; and on I_mean the base velocity agrees EXACTLY with the leading profile, u_B = u^(0), u_z,B = 0, q^A u_theta,B = E_0 = c_patch (1+eta^2)^{-1} X^{-1/2-lambda} (5.44).",
+   "constants": [
+    "cutoff scales c_n (via Lemma 5.4's a_j)",
+    "l_m = 2A + m (the loss for these coefficients, since D < 1/2)",
+    "the diagonal bounds (5.46): |D^I[chi(c_n q) q^{2nh} a_n]| <= 2^{-n} q^{nh} for n >= max{2,|I|}",
+    "J = max{2N+2, m+1} in the split of Step 4"
+   ],
+   "cites": [
+    "(5.41)-(5.46)",
+    "(5.18)",
+    "(5.22)",
+    "(5.25)",
+    "(5.26)",
+    "(5.27)",
+    "(4.29)",
+    "(4.3)",
+    "Lemma 5.2",
+    "Proposition 5.3",
+    "Lemma 5.4",
+    "Theorem 4.6(ii),(iv),(vi)"
+   ],
+   "role": "THE BACKGROUND. Delivers (u_B, p_B): exactly divergence-free, residual = negative divergence of an annular stress plus a FLAT error, leading stress T_0 recovered to O(q^2h) in the weighted norm (5.43) -- which is what Proposition 7.5 (positive representation of T_0) and 7.6 (signed corrections for the rest) consume -- and the leading profile preserved EXACTLY on I_mean, which Section 8's mean corrections need."
   }
  ],
  "hard_pages": [
@@ -437,6 +592,16 @@
    "pages": "35-38",
    "section": "4.5 (Lemma 4.8, Proposition 4.10)",
    "why": "Two long statements whose proofs are one-paragraph pointers into Appendices A and B; every constant (M_d, T_d, P_*, X_R = 110 (C P_*)^10, X_h = X_R e^-5, X_i = 110, j_0 <= .05, the tolerance eps_m) is introduced here but justified only in the appendix, so on a first pass they read as arbitrary. The value X_R = 110(CP_*)^10 in particular is not motivated until (4.34)'s hat-normalization is understood."
+  },
+  {
+   "pages": "47-49",
+   "section": "5.1 (Lemma 5.1)",
+   "why": "The claim that the radial interval does NOT shrink with the order n rests on one structural fact -- A_1 maps the first four coordinates of W_n into the last two and annihilates the last two, so two adjacent parameter derivatives in the Picard iteration vanish and a k-fold composition carries at most ceil(k/2) eta-derivatives -- and on splitting the Cauchy radius loss among them. The bound (5.8), (ceil(k/2)/Delta)^{ceil(k/2)} a^{k+1}/(k+1)!, has a k-th root tending to zero only because the factorial beats the power; it is a genuine analytic-in-eta argument and it is compressed into half a page. Verifying the sparse entries of A_1 listed on p.48 from (5.3)-(5.6) is the step I could not do by reading alone."
+  },
+  {
+   "pages": "57-59",
+   "section": "5.4 (Lemma 5.4)",
+   "why": "The lemma is deliberately abstract -- a differential polynomial (5.31) with coefficient bounds (5.32) on fixed regions, a residual hypothesis (5.33) with a flat remainder -- because it is reused in Section 9. Reading it as stated, before seeing its second use, the four hypotheses look over-engineered; the order of choices at the end ((m, N), then J, then the neighbourhood) is the whole point and is one sentence. The inequality (5.39) with its d-1 power of (1 + |U^[J]| + |e|) is where a reader has to trust the product rule on monomials of degree up to d."
   }
  ]
 }
