@@ -4732,3 +4732,105 @@ nowhere near a sufficient one — **it cannot see whether the objects it counts 
 integrated anywhere in the unit, deliberately (§52–§54). **`links_moved: 0`. No wall moved. Clay
 ~0.05%. No tier produced.** This unit says nothing about whether the manuscript's construction is
 correct; it says the exponents balance, which is the cheapest thing that could have been wrong.
+
+---
+
+## §64 — `U4` (leg 420, arc 6): the residual scales as the construction requires — **and MY OWN PRE-REGISTRATION'S FORMULA WAS WRONG, caught by a control it wrote itself.** The conjunction is reported UNMET, not re-scored.
+
+**Unit:** `U4`, arc 6, §3f SOLO, **CONSTRUCTION**. **Pre-registration:**
+`experiments/journal/leg_420_prereg.md`, committed at **`d026cd4` before the runner existed.**
+**Runner:** `experiments/arc6_instantiate_v1.py`. **Artefact:**
+`writeup/data/arc6_instantiate_v1.json`. **Checks:** `writeup/arc6_instantiate_evidence.py`.
+
+### 1. The gate
+
+> **Does the measured residual scale as the construction requires?**
+
+## **YES ON THE MEASURED QUESTION — AND THE PRE-COMMITTED CONJUNCTION IS NOT MET.**
+
+| | pre-committed | measured |
+|---|---|---|
+| exponent | **−1.51** | **−1.498218** |
+| `\|error\|` | tolerance **0.05** | **0.011782** |
+| three-level spread | `< 0.025` | **2.11e-07** |
+
+`P0` passes both pre-committed numbers with room. **But §8 of the pre-registration requires ALSO
+that every control do what its row says, and `C2` did not.**
+
+### 2. **The defect is in the pre-registration, not in the instrument**
+
+`leg_420_prereg.md` §7 gives the leading exponent as **`−max(A + 1, 2A + D)`**. **That omits axial
+diffusion**, `u_θ/ℓ_z² = q^{−(A+2D)}`.
+
+**It is invisible at the design point** — there `A + 2D = 1.49 < 1.51`, so the omitted term is
+subdominant *exactly where the pre-registration was written* — **and it dominates as soon as
+`D > 1/2`. `C2` (`D = 0.70`, `A + 2D = 1.91`) is precisely that case.**
+
+| | prereg | corrected | measured | `\|err\|` prereg | `\|err\|` corrected |
+|---|---|---|---|---|---|
+| P0 | −1.5100 | −1.5100 | −1.498218 | 0.0118 | 0.011782 |
+| C1 | −2.0900 | −2.0900 | −2.041281 | 0.0487 | 0.048719 |
+| **C2** | **−1.7200** | **−1.9100** | **−1.909028** | **0.1890** | **0.000972** |
+| PH1 `A=.51 D=.60` | — | −1.7100 | −1.704399 | — | 0.005601 |
+| PH2 `A=.60 D=.55` | — | −1.7500 | −1.689876 | — | **0.060124, OUTSIDE** |
+
+`PH1` and `PH2` are **two exponent pairs the corrected formula had never seen**, so it is *tested*
+there rather than fitted — and `PH2` fails, which is reported rather than dropped.
+
+**THE CONJUNCTION IS REPORTED AS UNMET RATHER THAN RE-SCORED AGAINST THE CORRECTED FORMULA.**
+Re-scoring a pre-committed control after seeing the number is the exact thing a pre-registration
+exists to prevent. Everything derived from the corrected formula is labelled **post-hoc** in the
+artefact and **is excluded from the gate by the evidence script**, which checks that exclusion.
+
+### 3. The offsets are subleading contamination — predicted, then checked
+
+Every measured exponent sits **less negative** than its prediction, by more where the competing
+terms are closer. **That has one explanation and it makes a prediction: restricting the fit to the
+last three decades must move every exponent TOWARD its prediction.**
+
+| case | gap to next term | full `\|err\|` | tail-3pt `\|err\|` | |
+|---|---|---|---|---|
+| P0 | 0.02 | 0.011782 | 0.011559 | toward |
+| C1 | 0.29 | 0.048719 | **0.015490** | toward |
+| C2 | 0.19 | 0.000972 | 0.000282 | toward |
+| PH1 | 0.11 | 0.005601 | 0.003262 | toward |
+| PH2 | 0.05 | 0.060124 | 0.057925 | toward |
+
+**Every case moved toward. None moved away.** This also accounts for `P0`'s own `+0.0118`: its
+competing term `A + 2D = 1.49` sits `0.02` below the leading `1.51` and pulls the fit less
+negative — **direction and magnitude both matching the pre-registration's derived systematic floor
+of `0.0201`**, which was written down before any number existed.
+
+### 4. The controls that did behave, including the one that matters most
+
+- **`C3`** — `B ×= 3.7`, `S ×= 0.4` — moves the measured exponent by **`1.4e-11`**. Roundoff, not
+  a shift. **The instrument measures a scaling and not an amplitude.**
+- **`C4`** rigid rotation `u_θ = Ωr`, `p = Ω²r²/2`: residual `4.554e-10` relative.
+- **`C5`** `u_z = e^{−a²t}J₀(ar)`: `1.180e-10` relative.
+- **`C6`** the same field with `a` 1% wrong **in the time factor only**: `1.911e-02` relative.
+  **`C4`/`C5` are not vacuous.**
+- The pressure satisfies the leading radial balance **identically**:
+  `max|∂_r p − u_θ²/r| / max|u_θ²/r| = 1.408e-12`.
+
+### 5. **A condition this unit does NOT meet, measured and banked**
+
+The manuscript requires `∫₀^∞ r²R_θ dr = 0` and `∫₀^∞ rR_z dr = 0` (what makes its stress vanish
+beyond the exterior radius, Lemma A.8). **This instantiation satisfies neither:**
+
+```
+∫ r² R_θ dr = +1.011743e+01   |·| integral 1.011743e+01   ratio 1.0000
+∫ r  R_z  dr = −3.495453e+04   |·| integral 4.634902e+04   ratio 0.7542
+```
+
+**The ratio of exactly `1.0000` is the sharp statement: `R_θ` has ONE SIGN along the line, so no
+choice of amplitude cancels its moment.** The cancellation must come from the **profile
+construction** — the manuscript's Appendix A — which this unit does not reproduce and never
+claimed to. **Banked because reporting a condition one does not meet is the point of measuring
+it** (lesson 76).
+
+### CEILING
+
+Float64 finite differences on a synthetic field with the manuscript's scalings and exact
+incompressibility. **It is not the manuscript's profile**, and §5 is the measurement that proves
+the difference is real rather than asserting it. **Tier 2 at best. `links_moved: 0`. No wall moved.
+Clay ~0.05%. `W4` untouched.**
