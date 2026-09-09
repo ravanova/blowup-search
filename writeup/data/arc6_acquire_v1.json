@@ -1,0 +1,353 @@
+{
+  "schema": "arc6_acquire_v1",
+  "unit": "U1 (leg 417, AUDIT) — ACQUIRE AND PIN",
+  "arc": 6,
+  "leg": 417,
+  "retrieval_date_utc": "2026-09-09",
+  "provenance_class": "external_record — PRIMARY TEXT, fetched here, hashed here. NOT a summary, NOT a press report. Reading published material is authorised (outreach narrowing 2026-08-13); no author, group, maintainer or list was contacted.",
+  "verification_status": "UNVERIFIED. Per ORCHESTRATION.md §3f rule 1, verification is a fresh session or it is not verification. This unit was acquired, read and gated by one session with memory of its own reading. Every gate answer below carries that label in its own words.",
+  "artifacts_fetched": [
+    {
+      "id": "openai_navier_stokes_manuscript",
+      "url": "https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf",
+      "http_status": 200,
+      "bytes": 2959204,
+      "sha256": "0e779481c4da40bd28d1e642e1d8ca57447d129610df28dfa5a11e9af8ae228f",
+      "pages": 166,
+      "title_in_pdf_body": "FINITE TIME BLOWUP FOR NAVIER-STOKES",
+      "author_in_pdf_body": "OPENAI",
+      "pdf_creationdate": "D:20260908190626Z",
+      "pdf_producer": "pdfTeX-1.40.29 (TeX Live 2026)",
+      "local_path": "Papers/openai-navier-stokes.pdf",
+      "committed": false,
+      "note": "Papers/ is gitignored by repo convention (third-party PDFs are not committed); Papers/MANIFEST.md and Papers/fetch.sh carry the re-pull command and this hash."
+    },
+    {
+      "id": "openai_euler_manuscript",
+      "url": "https://cdn.openai.com/pdf/315b36cd-ec98-4023-8342-93345194ece1/euler.pdf",
+      "http_status": 200,
+      "bytes": 535142,
+      "sha256": "a0c234518e6c489e16996805023eb2e75c00b7c03455f7a3a5be2c124954bfdd",
+      "pages": 57,
+      "title_in_pdf_body": "FINITE TIME BLOWUP FOR THE EULER EQUATION",
+      "author_in_pdf_body": "OPENAI",
+      "pdf_creationdate": "D:20260908190751Z",
+      "local_path": "Papers/openai-euler.pdf",
+      "committed": false,
+      "why_fetched": "The Lean project's four declared main results span BOTH manuscripts; U2 cannot inventory the Lean dependency graph against only one of them."
+    },
+    {
+      "id": "fefferman_clay_statement",
+      "url": "https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf",
+      "http_status": 200,
+      "bytes": 203736,
+      "sha256": "c1b5f27b1a64705cfaf1afceea513db5deedca8a18ca56ab32e7f86445a06d0c",
+      "pages": 6,
+      "local_path": "Papers/fefferman-navierstokes-clay.pdf",
+      "committed": false,
+      "why_fetched": "The gate asks for 'every Fefferman condition it claims'. A condition NUMBER cannot be adjudicated against a paraphrase; leg 384 checked this document at HTTP 200 but this repository has never held its conditions (8) and (9) at full text (STATE.md, Open item 3)."
+    },
+    {
+      "id": "openai_lean_project",
+      "url": "https://github.com/openai/NavierStokesAndEuler",
+      "clone_method": "git clone --depth 1 https://github.com/openai/NavierStokesAndEuler.git",
+      "head_commit_sha1": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+      "head_commit_message": ".",
+      "commit_count_in_shallow_clone": 1,
+      "tracked_files": 2496,
+      "lean_files": 2486,
+      "lean_bytes_total": 32437656,
+      "git_index_manifest_sha256": "d74fd8619307a03d7ec8a1e3d80f29d76841c847e44a3a1fb4651a60202092a3",
+      "manifest_note": "sha256 of `git ls-files -s` output — a digest over the mode+blob-sha+path of every tracked file. The HEAD sha1 is itself a cryptographic commitment to every byte of every file; the manifest digest is banked as a second, independently-checkable handle.",
+      "lean_files_by_top_dir": {
+        "Euler": 1839,
+        "NavierStokes": 643,
+        "ComparatorChallenges": 2,
+        "_root_": 2
+      },
+      "toolchain_declared": "leanprover/lean4:v4.34.0-rc2",
+      "mathlib_rev_declared": "85e3a25e006c35636f0e53b0e9296caca2685bc0 (inputRev v4.34.0-rc2)",
+      "comparator_rev_declared": "19e111e2141cf333c7daff0f64c5f24acc91dd2e (inputRev v4.34.0-rc2)",
+      "top_level_statement_file": "NavierStokes/ComparatorSolution.lean",
+      "top_level_statement_file_sha256": "52950d5d618a8d34c9bfbdb16641c81c276e97b6d7fd2a76c08577353f0b0227",
+      "committed": false
+    }
+  ],
+  "network_fact_corrected": {
+    "what": "Papers/fetch.sh's banked diagnosis says arxiv.org is NOT reachable from this container and github.com IS.",
+    "measured_2026_09_09": {
+      "https://arxiv.org/": 200,
+      "https://export.arxiv.org/api/query (https)": 429,
+      "http://export.arxiv.org/api/query (http)": 301,
+      "https://github.com/openai/NavierStokesAndEuler (curl)": 403,
+      "git ls-remote https://github.com/openai/NavierStokesAndEuler": "OK — refs returned",
+      "https://raw.githubusercontent.com/...": 200,
+      "https://codeload.github.com/...": 403,
+      "https://api.github.com/...": 403,
+      "https://openai.com/index/navier-stokes-solution/": 403,
+      "https://cdn.openai.com/...": 200,
+      "https://www.claymath.org/...": 200
+    },
+    "reading": "The banked diagnosis is now WRONG IN BOTH DIRECTIONS for this environment. arxiv.org is reachable; github.com over plain HTTPS is 403 while the SAME repository clones fine over git (the session's git proxy) and reads fine over raw.githubusercontent.com. A fetch script that probes only arxiv.org/abs/2207.07548 would have reported the wrong thing about both hosts. Recorded as an environment measurement, not a repair of the script's conclusions elsewhere.",
+    "not_reachable_here": [
+      "openai.com announcement page (403 — organisation egress policy, not retried)",
+      "codeload.github.com",
+      "api.github.com"
+    ]
+  },
+  "manuscript_statements": {
+    "extraction_caveat": "Every *_verbatim_pdf_extraction field is the pypdf 6.18.0 text layer of the fetched PDF, unedited. pdfTeX math is extracted with spacing artefacts (e.g. 'R 3' for R^3, 'C ∞ c' for C^∞_c, missing sub/superscript nesting). The *_transcription fields are THIS REPOSITORY'S reading of that text and are NOT the source. Where the two could differ materially, the extraction governs.",
+    "abstract_verbatim_pdf_extraction": "Abstract. For every positive viscosity, we construct a solution of the three-dimensional\nincompressible Navier–Stokes equations that starts from rest and develops unbounded velocity\nin finite time while maintaining uniformly bounded kinetic energy.",
+    "theorem_1_1_verbatim_pdf_extraction": "Theorem 1.1.For every ν> 0there exist a force f∈C ∞\nc (R3×( 0, ∞); R3), a compact set K⊂R 3,\nand smooth velocity and pressure fields u,p onR 3×[0, 1)satisfying\n∂tu+ (u·∇)u−ν∆u+∇p=f,∇·u=0,u(·, 0) =0, (1.1)\nsuch thatsuppu(·,t)∪suppp(·,t)⊂K for every0≤t<1,\nsup\n0≤t<1\n∥u(t)∥ L2(R3) <∞, lim sup\nt↑1\n∥u(t)∥ L∞(R3) =∞.\nConsequently, there is no smooth solution (u, P) on R3×[ 0, ∞) with the same force and initial\ndatum whose kinetic energy is uniformly boundedsup t≥0\n1\n2\n∫︁\nR3|u(x,t)| 2 dx<∞.\nThis establishes alternative (C) in the Millennium problem statement for Navier–Stokes as\nstated by Fefferman in [ 13]. Compact support also yields the corresponding construction on\nT3 =R 3/Z3, establishing alternative (D) in [13]; see Corollary 10.6.",
+    "theorem_1_1_transcription": "Theorem 1.1. For every nu > 0 there exist a force f in C^infty_c(R^3 x (0, infinity); R^3), a compact set K subset R^3, and smooth velocity and pressure fields u, p on R^3 x [0,1) satisfying  d_t u + (u . grad) u - nu Laplacian u + grad p = f,  div u = 0,  u(.,0) = 0,   (1.1)  such that supp u(.,t) union supp p(.,t) subset K for every 0 <= t < 1,  sup_{0<=t<1} ||u(t)||_{L^2(R^3)} < infinity,  limsup_{t -> 1^-} ||u(t)||_{L^infinity(R^3)} = infinity.  Consequently, there is no smooth solution (u,P) on R^3 x [0,infinity) with the same force and initial datum whose kinetic energy is uniformly bounded sup_{t>=0} (1/2) int_{R^3} |u(x,t)|^2 dx < infinity.",
+    "theorem_1_1_hypotheses_enumerated": [
+      {
+        "n": 1,
+        "hypothesis": "nu > 0, quantified UNIVERSALLY: 'For every nu > 0'.",
+        "discharged_where": "Proof of Theorem 1.1, §10.4, by the spatial rescaling u_nu(x,t) = sqrt(nu) u(x/sqrt(nu), t), p_nu = nu p(x/sqrt(nu),t), f_nu = sqrt(nu) f(x/sqrt(nu),t), eq. (10.22). The singular time is unchanged."
+      },
+      {
+        "n": 2,
+        "hypothesis": "NONE on the initial datum: u(.,0) = 0 is an ASSERTION of the construction, not a hypothesis. The datum is identically zero.",
+        "discharged_where": "Proposition 10.1: 'u(.,t) = p(.,t) = 0 for all sufficiently small t >= 0' (10.2) — obtained by a TEMPORAL cutoff."
+      },
+      {
+        "n": 3,
+        "hypothesis": "NONE on the force: f is CONSTRUCTED, in C^infty_c(R^3 x (0,infinity); R^3), support contained in K x [0,2].",
+        "discharged_where": "Lemma 10.3."
+      },
+      {
+        "n": 4,
+        "hypothesis": "T = 1. The singular time is FIXED at one, not existentially quantified.",
+        "discharged_where": "Statement of Theorem 1.1 and Proposition 10.1."
+      }
+    ],
+    "theorem_1_1_assertions_enumerated": [
+      "A1. f in C^infty_c(R^3 x (0,infinity); R^3) exists — smooth, compactly supported in space AND in time, vanishing near t = 0.",
+      "A2. A compact set K subset R^3 exists with supp u(.,t) union supp p(.,t) subset K for EVERY 0 <= t < 1 — the SOLUTION and the PRESSURE are compactly supported in space, uniformly in t, not merely decaying.",
+      "A3. u, p are smooth on R^3 x [0,1) and solve (1.1) exactly with u(.,0) = 0.",
+      "A4. sup_{0<=t<1} ||u(t)||_{L^2} < infinity — uniformly bounded kinetic energy on the whole interval of existence.",
+      "A5. limsup_{t->1^-} ||u(t)||_{L^infinity} = infinity.",
+      "A6. Consequently: NO smooth solution (u,P) on R^3 x [0,infinity) with the same force and initial datum has uniformly bounded kinetic energy."
+    ],
+    "corollary_10_6_verbatim_pdf_extraction": "Corollary 10.6.For every ν> 0, there is a smooth force on T3×[ 0, ∞), compactly supported in\ntime, for which the solution (U, Pper) of the periodic Navier–Stokes equations with viscosity ν and\nzero initial velocity is smooth on[0, 1)and satisfies\nlim sup\nt↑1\n∥U(t)∥ L∞(T3) =∞.\nIts velocity and pressure have support in a fixed compact subset of the interior of Q0 at every time\nbefore one. There is no global smooth periodic solution for the same datum and force.",
+    "corollary_10_6_transcription": "Corollary 10.6. For every nu > 0, there is a smooth force on T^3 x [0,infinity), compactly supported in time, for which the solution (U, P_per) of the periodic Navier-Stokes equations with viscosity nu and zero initial velocity is smooth on [0,1) and satisfies limsup_{t -> 1^-} ||U(t)||_{L^infinity(T^3)} = infinity. Its velocity and pressure have support in a fixed compact subset of the interior of Q_0 at every time before one. There is no global smooth periodic solution for the same datum and force.",
+    "lemma_10_3_and_decay_bound_verbatim_pdf_extraction": "Lemma 10.3.The force in (10.5) extends to f∈C ∞\nc (R3×( 0, ∞); R3), with support contained in\nK×[0, 2].\n[... proof omitted; its final paragraph:]\nTo state the decay bounds, we choose R withK⊂B( 0, R) and write Mα,m =∥∂ α\nx∂m\nt f∥ ∞.\nCompact support gives, for every integerk≥0,\n|∂α\nx∂m\nt f(x,t)|≤M α,m(3+R) k(1+|x|+t) −k.",
+    "euler_theorem_1_1_verbatim_pdf_extraction": "Theorem 1.1.There exists u0∈C ∞\nc,σ(R3) such that0 <T∗(u0)<∞ . Its smooth Euler solution\nsatisfies\nlim sup\nt↑T∗\n∥∇u(t)∥ L∞ =∞,\n∫︂ T∗\n0\n∥curlu(t)∥ L∞ dt=∞."
+  },
+  "fefferman_conditions_at_primary": {
+    "source": "fefferman_clay_statement, pages 1-2, fetched and hashed above. FIRST TIME THIS REPOSITORY HAS HELD (8) AND (9) AT FULL TEXT — STATE.md Open item 3 named them UNREAD.",
+    "conditions_verbatim_pdf_extraction": "(4) |∂α\nx u◦(x)| ≤ CαK(1 + |x|)−K on Rn, for any α and K\nand\n(5) |∂α\nx ∂m\nt f (x, t)| ≤ CαmK(1 + |x| + t)−K on Rn × [0, ∞), for any α, m, K.\nWe accept a solution of (1), (2), (3) as physically reasonable only if it satisﬁes\n(6) p, u ∈ C ∞(Rn × [0, ∞))\nand\n(7)\n∫\nRn\n|u(x, t)|2dx < C for all t ≥ 0 (bounded energy) .",
+    "statement_C_verbatim_pdf_extraction": "(C) Breakdown of Navier–Stokes solutions on R3. Take ν > 0 and n = 3.\nThen there exist a smooth, divergence-free vector ﬁeld u◦(x) on R3 and a smooth\nf (x, t) on R3 × [0, ∞), satisfying (4), (5), for which there exist no solutions ( p, u)\nof (1), (2), (3), (6), (7) on R3 × [0, ∞).\n",
+    "statement_D_verbatim_pdf_extraction": "(D) Breakdown of Navier–Stokes Solutions on R3/Z3. Take ν > 0 and\nn = 3. Then there exist a smooth, divergence-free vector ﬁeld u◦(x) on R3 and a\nsmooth f (x, t) on R3 × [0, ∞), satisfying (8), (9), for which there exist no solutions\n(p, u) of (1), (2), (3), (10), (11) on R3 × [0, ∞).",
+    "numbering_confirmed": {
+      "1": "the Navier-Stokes momentum equation",
+      "2": "div u = 0",
+      "3": "u(x,0) = u^0(x)",
+      "4": "|d_x^alpha u^0(x)| <= C_{alpha K}(1+|x|)^{-K} on R^n, for any alpha and K   [DATA decay]",
+      "5": "|d_x^alpha d_t^m f(x,t)| <= C_{alpha m K}(1+|x|+t)^{-K} on R^n x [0,infinity), for any alpha, m, K   [FORCE decay]",
+      "6": "p, u in C^infty(R^n x [0,infinity))",
+      "7": "int_{R^n} |u(x,t)|^2 dx < C for all t >= 0   [bounded energy]",
+      "8": "u^0(x+e_j) = u^0(x), f(x+e_j,t) = f(x,t) for 1 <= j <= n   [periodicity of DATA and FORCE]",
+      "9": "|d_x^alpha d_t^m f(x,t)| <= C_{alpha m K}(1+|t|)^{-K} on R^3 x [0,infinity), for any alpha, m, K   [periodic-case FORCE decay IN TIME ONLY]",
+      "10": "u(x,t) = u(x+e_j,t) on R^3 x [0,infinity) for 1 <= j <= n",
+      "11": "p, u in C^infty(R^n x [0,infinity))"
+    },
+    "clay_obligations_md_numbering_check": {
+      "claim_in_repo": "CLAY_OBLIGATIONS.md (leg 381, leg 384 I15) says condition (4) bounds every derivative of u^0 and that statement (C) permits a forcing 'satisfying its own decay conditions (4),(5)'.",
+      "measured": "(4) is the DATA decay and (5) is the FORCE decay. (C) requires the PAIR (4),(5) because it quantifies over BOTH u^0 and f. The repo's phrase 'the forcing must itself satisfy (4),(5)' is loose — the forcing satisfies (5); (4) is the datum's. The substance of leg 381's clause is unaffected.",
+      "verdict": "CONFIRMED with a wording correction. Not a defect in a gate answer, so not escalated; recorded for CORRECTIONS.md."
+    },
+    "statement_D_conditions_now_read": {
+      "D_data_conditions": [
+        "(8) periodicity of u^0 and f",
+        "(9) force decay in TIME ONLY, |d_x^alpha d_t^m f| <= C(1+|t|)^{-K}; NO spatial decay is asked, and (9) explicitly replaces (4) and (5): 'In place of (4) and (5), we assume that u^0 is smooth and that (9)'"
+      ],
+      "D_solution_conditions": [
+        "(1),(2),(3)",
+        "(10) periodicity of u",
+        "(11) p,u in C^infty"
+      ],
+      "condition_7_present_in_D": false,
+      "confirms": "leg 390's machine-read (CLAY_OBLIGATIONS.md): (D)'s solution conditions are (1),(2),(3),(10),(11); exactly one condition leaves — (7) bounded energy — and exactly one arrives, (10). NOW CONFIRMED AT PRIMARY, including the two data conditions the repository had never read.",
+      "new_fact": "(9) asks NO spatial decay of the force at all, and (8) asks the force to be PERIODIC. A compactly-supported-in-space force on R^3, periodized by lattice summation, satisfies (8) exactly and (9) trivially (compact support in time)."
+    },
+    "conditions_8_to_11_verbatim_pdf_extraction": "(8) u◦(x + ej) = u◦(x), f (x + ej, t) = f (x, t) for 1 ≤ j ≤ n\n1\n<<<PAGE 2>>>\n2 CHARLES L. FEFFERMAN\n(ej = jth unit vector in Rn).\nIn place of (4) and (5), we assume that u◦ is smooth and that\n(9) |∂α\nx ∂m\nt f (x, t)| ≤ CαmK(1 + |t|)−K on R3 × [0, ∞), for any α, m, K.\nWe then accept a solution of (1), (2), (3) as physically reasonable if it satisﬁes\n(10) u(x, t) = u(x + ej, t) on R3 × [0, ∞) for 1 ≤ j ≤ n\nand\n(11) p, u ∈ C ∞(Rn × [0, ∞))."
+  },
+  "arc5_reported_statement": {
+    "source": "writeup/5_outpaced/TECHNICAL_OUTPACED.md §1.1 and writeup/data/arc5_outpaced_v1.json — a view of the record, never a source.",
+    "text": "There exist a smooth, compactly supported force f and a time T such that the solution u of the forced 3D incompressible Navier-Stokes equations on R^3, starting from rest, is smooth on [0,T) and sup|u| becomes unbounded as t -> T, while the kinetic energy remains uniformly bounded for all t < T.",
+    "fields": {
+      "clay_alternative_addressed": "(C)",
+      "domain": "R^3",
+      "initial_data": "rest, u_0 = 0",
+      "forcing": "smooth, compactly supported in space and time",
+      "energy": "L^2 norm uniformly bounded for t < T",
+      "manuscript": "166 pages",
+      "lean_project": "github.com/openai/NavierStokesAndEuler, review status self-assessed"
+    },
+    "explicit_negative_claims": [
+      "'(A) and (B) are untouched. The unforced problem is open. So is (D).'",
+      "'A separate 112-page preprint (Alpoge-Buckmaster) constructs finite-time blowup for FORCED 3D Euler'",
+      "'critics note missing references including Chen-Hou'"
+    ]
+  },
+  "gate": {
+    "question": "Is the theorem as reported in arc 5 the theorem the manuscript states?",
+    "answer": "DIFFERS-AS-FOLLOWS",
+    "answer_status": "UNVERIFIED (§3f rule 1 — this session read the manuscript and also wrote this gate answer; no fresh session has re-derived it).",
+    "differences": [
+      {
+        "id": "D1",
+        "severity": "MATERIAL",
+        "arc5": "'a smooth, compactly supported force f and a time T'; no viscosity quantifier anywhere in the reported statement or in the banked JSON fields.",
+        "manuscript": "'For every nu > 0 there exist a force f ... and smooth velocity and pressure fields u,p on R^3 x [0,1)'. The viscosity is quantified UNIVERSALLY and the singular time is FIXED at T = 1.",
+        "why_it_matters": "Fefferman's (C) opens 'Take nu > 0 and n = 3', i.e. it is enough to answer one viscosity. The manuscript proves MORE than (C) asks, by an explicit rescaling (10.22). Arc 5 reported neither the surplus nor the fixed T."
+      },
+      {
+        "id": "D2",
+        "severity": "MATERIAL — AND IT IS THE ONE THAT TOUCHES THIS REPOSITORY'S OWN WALL",
+        "arc5": "silent. No banked field records any support property of the SOLUTION.",
+        "manuscript": "'a compact set K subset R^3 ... such that supp u(.,t) union supp p(.,t) subset K for every 0 <= t < 1'.",
+        "why_it_matters": "The velocity and pressure are COMPACTLY SUPPORTED IN SPACE, uniformly in time, not merely finite-energy or fast-decaying. Fefferman's (4) and (7) are then discharged by containment rather than by any decay estimate, and the SAME property is what Corollary 10.6 uses to periodize. W4 is this repository's localisation problem; the manuscript's object never has one, because it is compactly supported by construction from the start of §10."
+      },
+      {
+        "id": "D3",
+        "severity": "MATERIAL",
+        "arc5": "'(A) and (B) are untouched. The unforced problem is open. So is (D).'",
+        "manuscript": "'Compact support also yields the corresponding construction on T^3 = R^3/Z^3, establishing alternative (D) in [13]; see Corollary 10.6.' Corollary 10.6 is stated and proved at pp. 125-126. The Lean project's formalization.yaml declares navier_stokes_breakdown_periodic as a proved main result.",
+        "why_it_matters": "(D) IS NOT UNTOUCHED. It is claimed, in the same manuscript, as a corollary. W4's ONLY unbroken break clause is (c), and clause (c) IS statement (D) (WALLS.md W4; STATE.md). Arc 5's charter item A6-D calls (D) 'the nearest unclaimed Fefferman statement'. On the manuscript's own text it is claimed. This does not by itself make it true; it makes arc 5's sentence false as a report of the manuscript."
+      },
+      {
+        "id": "D4",
+        "severity": "PRECISION",
+        "arc5": "'sup|u| becomes unbounded as t -> T'.",
+        "manuscript": "'limsup_{t->1^-} ||u(t)||_{L^infinity(R^3)} = infinity'.",
+        "why_it_matters": "limsup, not lim. The manuscript asserts unboundedness along a sequence, and the proof exhibits it along an explicit path x_tau = (sqrt(2) X_in tau, 0, 0), t = 1 - tau, eq. (10.20)-(10.21). 'Becomes unbounded' is a fair gloss; it is not the statement."
+      },
+      {
+        "id": "D5",
+        "severity": "PRECISION",
+        "arc5": "the energy clause is reported as a property of the constructed solution only.",
+        "manuscript": "there are TWO energy clauses: the constructed u satisfies sup_{0<=t<1}||u(t)||_{L^2} < infinity, AND the theorem's operative conclusion is a NON-EXISTENCE statement — 'there is no smooth solution (u,P) on R^3 x [0,infinity) with the same force and initial datum whose kinetic energy is uniformly bounded'.",
+        "why_it_matters": "Fefferman's (C) is a non-existence statement, not an exhibition. The manuscript states it in that form; arc 5 reported only the exhibition half. An exhibition does not answer (C) without the comparison argument (Lemma 10.5) that transfers the growth to any competitor."
+      },
+      {
+        "id": "D6",
+        "severity": "MATERIAL, ABOUT A DIFFERENT PAPER",
+        "arc5": "'A separate 112-page preprint (Alpoge-Buckmaster) constructs finite-time blowup for FORCED 3D Euler ... developed with substantial LLM iteration using Anthropic models'.",
+        "manuscript": "OpenAI's companion is a 57-page manuscript, 'FINITE TIME BLOWUP FOR THE EULER EQUATION', OPENAI, whose Theorem 1.1 is UNFORCED: 'There exists u_0 in C^infty_{c,sigma}(R^3) such that 0 < T_*(u_0) < infinity.'",
+        "why_it_matters": "Arc 5's Euler row describes a DIFFERENT manuscript by different authors. This repository has now fetched OpenAI's own Euler manuscript and it claims strictly more than arc 5's row: unforced, smooth, compactly supported, divergence-free initial data on R^3. Arc 5's row is not thereby refuted — the Alpoge-Buckmaster preprint may also exist — but arc 5 banked no OpenAI Euler result and one exists."
+      },
+      {
+        "id": "D7",
+        "severity": "CORRECTS A REPORTED CRITICISM",
+        "arc5": "'critics note missing references including Chen-Hou'.",
+        "manuscript": "MEASURED. The Navier-Stokes manuscript's bibliography has 22 numbered entries and Chen-Hou is NOT among them. The Euler manuscript DOES cite Chen and Hou (entries [6],[7] of its bibliography, 'proved blowup in an axially periodic cylinder with an impermeable wall, combining analysis with rigorous numerical estimates'). Cordoba-Martinez-Zoroa IS cited in the Navier-Stokes manuscript, three times: [6] arXiv:2309.08495, [7] arXiv:2410.22920, [8] ARMA 250 (2026) 38.",
+        "why_it_matters": "Arc 5 recorded the criticism at press level. At primary the criticism is accurate for the Navier-Stokes manuscript and inaccurate for the pair of manuscripts taken together. Whether Chen-Hou is USED in the Navier-Stokes argument, and therefore owed a citation there, is A6-AUDIT gate item 4 and is NOT answered by this unit."
+      }
+    ],
+    "agreements": [
+      "The Clay alternative addressed is (C). CONFIRMED verbatim: 'This establishes alternative (C) in the Millennium problem statement for Navier-Stokes as stated by Fefferman in [13].'",
+      "Domain R^3. CONFIRMED.",
+      "Initial data: rest, u_0 = 0. CONFIRMED verbatim: 'u(.,0) = 0'.",
+      "Forcing smooth and compactly supported in space and time. CONFIRMED verbatim: 'f in C^infty_c(R^3 x (0,infinity); R^3)', support in K x [0,2] (Lemma 10.3).",
+      "Kinetic energy uniformly bounded before the singular time. CONFIRMED verbatim.",
+      "166 pages. CONFIRMED by page count of the fetched PDF.",
+      "Lean project at github.com/openai/NavierStokesAndEuler. CONFIRMED — cloned, HEAD 8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538.",
+      "Lean review status self-assessed. CONFIRMED verbatim in formalization.yaml: 'review: status: \"self-assessed\"'."
+    ],
+    "not_answered_by_this_unit": [
+      "Whether the manuscript's proof is CORRECT. U1 acquires and pins; it does not adjudicate.",
+      "Whether the Lean project builds, and what its top-level statement actually says. That is U2.",
+      "Whether the residual-absorption reading in TECHNICAL_OUTPACED.md §2 is right. That is U3.",
+      "Whether Chen-Hou is used where uncited. That is U3's novelty/attribution pass."
+    ]
+  },
+  "clay_movement": {
+    "links_moved": 0,
+    "clay_odds": "~0.05%, unchanged",
+    "tier": "no tier produced",
+    "note": "This unit fetched and hashed three PDFs and one git repository and compared two strings. Nothing here is a measurement of any fluid equation. Tier 2 is never a proof, and this is not Tier 2."
+  },
+  "fefferman_conditions_claimed_clause_by_clause": {
+    "method": "Each condition of Fefferman's statement (C) and statement (D) is matched to the manuscript object that discharges it, with the manuscript location. This is a MAPPING, not an adjudication: it records what the manuscript CLAIMS to discharge and where, not whether the discharge is correct. Correctness is U3-U5's business and is not answered here.",
+    "statement_C": [
+      {
+        "condition": "nu > 0, n = 3",
+        "manuscript_object": "quantified universally in Theorem 1.1: 'For every nu > 0'",
+        "location": "Thm 1.1; proof §10.4 rescaling (10.22)",
+        "status_claimed": "DISCHARGED, and over-discharged relative to (C), which needs only one nu"
+      },
+      {
+        "condition": "u^0 smooth, divergence-free on R^3",
+        "manuscript_object": "u^0 = 0",
+        "location": "Thm 1.1 'u(.,0) = 0'; Prop 10.1 (10.2)",
+        "status_claimed": "DISCHARGED TRIVIALLY. Fefferman does not require u^0 nonzero."
+      },
+      {
+        "condition": "(4): |d_x^alpha u^0(x)| <= C_{alpha K}(1+|x|)^{-K}, any alpha, K",
+        "manuscript_object": "u^0 = 0",
+        "location": "as above",
+        "status_claimed": "DISCHARGED TRIVIALLY (all constants zero)."
+      },
+      {
+        "condition": "f smooth on R^3 x [0,infinity)",
+        "manuscript_object": "f in C^infty_c(R^3 x (0,infinity); R^3), support in K x [0,2], zero near t = 0 so it extends smoothly by zero to t = 0",
+        "location": "Lemma 10.3",
+        "status_claimed": "DISCHARGED"
+      },
+      {
+        "condition": "(5): |d_x^alpha d_t^m f(x,t)| <= C_{alpha m K}(1+|x|+t)^{-K}, any alpha, m, K",
+        "manuscript_object": "the explicit bound |d_x^alpha d_t^m f(x,t)| <= M_{alpha,m}(3+R)^k (1+|x|+t)^{-k} for every integer k >= 0, with K subset B(0,R) and M_{alpha,m} = ||d_x^alpha d_t^m f||_infinity",
+        "location": "Lemma 10.3, final paragraph",
+        "status_claimed": "DISCHARGED, AND THE MANUSCRIPT'S OWN WORDING FOR HOW IS 'Compact support gives ...'. This is the sentence TECHNICAL_OUTPACED.md §2 asserts costs nothing analytically. U3 gates that assertion; U1 only records that the manuscript discharges (5) in one line from compact support and nowhere else."
+      },
+      {
+        "condition": "no solutions of (1),(2),(3),(6),(7)",
+        "manuscript_object": "'Consequently, there is no smooth solution (u,P) on R^3 x [0,infinity) with the same force and initial datum whose kinetic energy is uniformly bounded'",
+        "location": "Thm 1.1 final clause; proved in §10.4 via Lemma 10.5 (comparison) plus the growth (10.21)",
+        "status_claimed": "DISCHARGED — and this, not the exhibition, is the clause that IS (C)."
+      }
+    ],
+    "statement_D": [
+      {
+        "condition": "nu > 0, n = 3",
+        "manuscript_object": "'For every nu > 0'",
+        "location": "Cor 10.6",
+        "status_claimed": "DISCHARGED"
+      },
+      {
+        "condition": "u^0 smooth, divergence-free, periodic — Fefferman's (8) for the datum",
+        "manuscript_object": "zero initial velocity",
+        "location": "Cor 10.6",
+        "status_claimed": "DISCHARGED TRIVIALLY"
+      },
+      {
+        "condition": "(8) for the force: f(x+e_j,t) = f(x,t)",
+        "manuscript_object": "F_per(x,t) = sum_{k in Z^3} f~(x+k, t), the lattice sum of integer translates of a force supported strictly inside Q_0 = (-1/2,1/2)^3",
+        "location": "Cor 10.6 proof",
+        "status_claimed": "DISCHARGED BY CONSTRUCTION. Translates have disjoint support with a positive gap, so the sum is locally finite and smoothness is preserved."
+      },
+      {
+        "condition": "(9): |d_x^alpha d_t^m f(x,t)| <= C_{alpha m K}(1+|t|)^{-K}, any alpha, m, K",
+        "manuscript_object": "the force is 'compactly supported in time'",
+        "location": "Cor 10.6 statement",
+        "status_claimed": "DISCHARGED TRIVIALLY. (9) asks decay in t ONLY — no spatial decay at all — and compact support in time kills it outright."
+      },
+      {
+        "condition": "no solutions of (1),(2),(3),(10),(11)",
+        "manuscript_object": "'There is no global smooth periodic solution for the same datum and force.'",
+        "location": "Cor 10.6",
+        "status_claimed": "DISCHARGED"
+      },
+      {
+        "condition": "(7) bounded energy",
+        "manuscript_object": "NOT REQUIRED BY (D) AND NOT CLAIMED",
+        "location": "Fefferman p.2: (D)'s solution conditions are (1),(2),(3),(10),(11)",
+        "status_claimed": "N/A — confirms leg 390's machine-read at primary."
+      }
+    ],
+    "consequence_for_this_repository": "The manuscript's discharge of (4),(5),(8),(9) and (7) is by CONTAINMENT: compact spatial support of u, p and f, and compact temporal support of f. Not one of those five conditions is discharged by a decay estimate. W4 — 'A DSS profile on R^3 has infinite global energy; Clay condition (7) demands bounded energy' — is a statement about a DSS profile. The manuscript's object is not DSS on R^3 in that sense: it is a SELF-SIMILAR CORE inside a compactly supported field, and the compact support is imposed by cutoffs in Section 10 with the residual paid to f. Whether that mechanism transfers to a DSS profile this repository actually holds is U5's question and is NOT answered here."
+  }
+}

@@ -4394,3 +4394,128 @@ No wall moved. `W4` clause (c) — the torus, statement (D) — remains **UNTEST
 
 **This unit is UNVERIFIED: it verified nothing of its own beyond the `self_hash` fixed point, a
 verifier was budgeted separately, and the run is stopped. It lands UNVERIFIED and must be cited so.**
+
+---
+
+## §61 — `U1` (leg 417, arc 6): the manuscript was fetched at primary and **arc 5's report of it differs in seven places**. The one that matters is **`(D)` is not untouched — it is claimed, in the same manuscript, as Corollary 10.6.**
+
+**Unit:** `U1`, arc 6, `ORCHESTRATION.md` §3f **SOLO**. **Artefact:**
+`writeup/data/arc6_acquire_v1.json`. **Checks:** `writeup/arc6_acquire_evidence.py` (53/53).
+**Journal:** `experiments/journal/leg_417.md`. **Gate:** *Is the theorem as reported in arc 5 the
+theorem the manuscript states?* → **`DIFFERS-AS-FOLLOWS`**, **UNVERIFIED**.
+
+**Provenance, so nothing here rests on a summary.** The 166-page manuscript
+(sha256 `0e779481c4da40bd…`), OpenAI's 57-page Euler companion (`a0c234518e6c489e…`), Fefferman's
+6-page Clay statement (`c1b5f27b1a64705c…`) and the Lean project (HEAD
+`8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538`, 2,486 `.lean` files) were fetched and hashed in this
+session. **Every quotation below was cut from the PDF text layer by string anchor, not typed** —
+the leg-414 channel hazard (`writeup/SOURCES.md`, foot) makes a typed "verbatim" quotation
+untrustworthy by default, and `arc6_acquire_evidence.py` re-checks each one as a substring of the
+banked span.
+
+### 1. THE CORRECTION WITH REACH — `TECHNICAL_OUTPACED.md` §1.4 is FALSE about `(D)`
+
+Arc 5 banked, as a bullet under *"What is not established"*:
+
+> **(A) and (B) are untouched.** The unforced problem is open. So is **(D)**.
+
+The manuscript's Theorem 1.1 ends:
+
+> *"Compact support also yields the corresponding construction on `T³ = ℝ³/ℤ³`, establishing
+> alternative (D) in [13]; see Corollary 10.6."*
+
+Corollary 10.6 is stated and proved at pp. 125–126, for **every** `ν > 0`, and the Lean project's
+`formalization.yaml` declares `NavierStokes.Comparator.navier_stokes_breakdown_periodic` a proved
+main result. **`(D)` IS CLAIMED.** Whether the claim is correct is not decided here and is not
+decided by U1 at all.
+
+**Why this outranks the other six.** `WALLS.md` `W4`'s **only unbroken break clause is (c)**, and
+clause (c) **is statement (D)** — `STATE.md` says so, `WALLS.md` says so, and §60 above closes with
+*"`W4` clause (c) — the torus, statement (D) — remains **UNTESTED, NOT CLOSED**."* That sentence is
+unchanged as a statement about **this repository**: we have not tested it. What changes is
+`TECHNICAL_OUTPACED.md` §5's charter for **A6-D**, which reads:
+
+> With (C) now claimed, (D) is the nearest **unclaimed** Fefferman statement.
+
+**That premise is now false on the manuscript's own text**, and A6-D may not be planned on it
+without re-reading. **This is a correction to arc 5's reading, not a ruling on Lane T** — Lane T's
+two re-open conditions are unchanged, its deferral was a user ruling, and
+`ESCALATION_D_BUNDLING_2026-08-18.md` remains unruled. An entity that both raises and rules an
+escalation has defeated the mechanism.
+
+### 2. The other six differences, in one line each
+
+Full text and both quotations: `arc6_acquire_v1.json` :: `gate.differences`.
+
+- **`D1`** Arc 5 reports *"a … force `f` and a time `T`"*. The manuscript says **"For every `ν > 0`"**
+  and fixes **`T = 1`**. Fefferman's (C) opens *"Take `ν > 0`"* — one viscosity suffices; the
+  manuscript proves all of them, by the rescaling (10.22). Arc 5 recorded neither.
+- **`D2`** Arc 5 is **silent** on the support of the solution. Theorem 1.1 asserts a compact
+  `K ⊂ ℝ³` with **`supp u(·,t) ∪ supp p(·,t) ⊂ K` for every `0 ≤ t < 1`**. The velocity *and the
+  pressure* are compactly supported in space, uniformly in time.
+- **`D4`** *"`sup|u|` becomes unbounded"* → **`limsup_{t↑1} ‖u(t)‖_{L∞(ℝ³)} = ∞`**, along the
+  explicit path `x_τ = (√2 X_in τ, 0, 0)`, `t = 1 − τ` (10.20)–(10.21).
+- **`D5`** Arc 5 reports only the exhibition. The theorem's operative clause is **non-existence** —
+  *"there is no smooth solution `(u,P)` on `ℝ³ × [0,∞)` with the same force and initial datum whose
+  kinetic energy is uniformly bounded"* — and **that** clause is (C).
+- **`D6`** Arc 5's Euler row describes *"a separate 112-page preprint (Alpöge–Buckmaster) … **forced**
+  3D Euler"*. **OpenAI has its own 57-page Euler manuscript** whose Theorem 1.1 is **unforced**:
+  *"There exists `u₀ ∈ C∞_{c,σ}(ℝ³)` such that `0 < T*(u₀) < ∞`."* Arc 5's row is not refuted — the
+  Alpöge–Buckmaster preprint may exist as reported — but **arc 5 banked no OpenAI Euler result and
+  one exists**, and it is strictly stronger than the row arc 5 did bank.
+- **`D7`** Arc 5 banked the press-level criticism *"critics note missing references including
+  Chen–Hou"*. **Measured at primary:** the Navier–Stokes bibliography has **22 numbered entries and
+  Chen–Hou is not among them**; the **Euler** manuscript **does** cite Chen–Hou ([6],[7]);
+  Córdoba–Martínez-Zoroa **is** cited in the Navier–Stokes manuscript three times ([6] `2309.08495`,
+  [7] `2410.22920`, [8] *ARMA* **250** (2026) 38). The criticism is **accurate for the
+  Navier–Stokes manuscript and inaccurate for the pair**. Whether Chen–Hou is *used* where it is
+  uncited is A6-AUDIT item 4 and is **not** answered by U1.
+
+**And eight things arc 5 got right**, checked verbatim and listed at `gate.agreements`: the
+alternative is (C); the domain is `ℝ³`; the datum is rest, `u(·,0) = 0`; the force is
+`f ∈ C∞_c(ℝ³ × (0,∞); ℝ³)`; the energy is uniformly bounded before the singular time; 166 pages;
+the Lean URL; and *"review: status: `self-assessed`"*, which is verbatim in `formalization.yaml`.
+
+### 3. A LABELLING SLIP IN `CLAY_OBLIGATIONS.md`, recorded and NOT escalated
+
+Leg 381's clause, as carried in `CLAY_OBLIGATIONS.md`, says statement (C) permits a forcing
+*"satisfying its own decay conditions (4),(5)"*. At primary, **(4) is the DATUM's decay**
+(`|∂ₓ^α u°(x)| ≤ C_{αK}(1+|x|)^{−K}`) and **(5) is the FORCE's**
+(`|∂ₓ^α ∂ₜ^m f(x,t)| ≤ C_{αmK}(1+|x|+t)^{−K}`). (C) names the pair because it quantifies over both
+`u°` and `f`; the force satisfies (5) alone. **The substance of leg 381's clause is unaffected.**
+This is a labelling slip in prose, not a defect in any gate answer, so it is recorded here and
+**not** raised as a ban-wording escalation.
+
+### 4. `STATE.md` OPEN ITEM 3 IS DISCHARGED — (8) and (9) are now read at primary
+
+`STATE.md`: *"Statement (D)'s data conditions **(8) and (9) are UNREAD** and readable since the
+outreach narrowing."* They are now read from the hashed PDF:
+
+> **(8)** `u°(x + e_j) = u°(x)`, `f(x + e_j, t) = f(x, t)` for `1 ≤ j ≤ n`
+>
+> *"In place of (4) and (5), we assume that `u°` is smooth and that"*
+> **(9)** `|∂ₓ^α ∂ₜ^m f(x,t)| ≤ C_{αmK}(1 + |t|)^{−K}` on `ℝ³ × [0,∞)`, for any `α, m, K`
+
+**(9) asks the force for decay in TIME ONLY — no spatial decay whatsoever — and it explicitly
+replaces (4) and (5).** This **confirms leg 390's machine-read at primary**: (D)'s solution
+conditions are (1),(2),(3),(10),(11), **(7) is absent**, exactly one condition leaves and one
+arrives. Leg 390 §5 item 1's owed `check_A` re-run is **not** performed here and stays owed.
+
+### 5. A STALE ENVIRONMENT FACT, recorded rather than repaired
+
+`Papers/fetch.sh` carries a banked diagnosis: *"arxiv.org is not reachable from this container …
+github.com IS allowlisted."* Measured 2026-09-09: **`arxiv.org` → 200**; **`github.com` over plain
+HTTPS → 403**, while the *same repository* clones fine over the session's git proxy and reads fine
+over `raw.githubusercontent.com`; `openai.com`'s announcement page → 403 (organisation egress
+policy, not retried, reported); `cdn.openai.com` and `claymath.org` → 200. **A probe that tests one
+arXiv URL answers for neither host.** The script's prose is left standing and a dated note is
+appended to `Papers/MANIFEST.md`; full table at `arc6_acquire_v1.json` :: `network_fact_corrected`.
+
+### CEILING
+
+**`links_moved: 0`. Clay stays ~0.05%. No wall moved. No tier produced — this is not Tier 2, it is
+not a measurement of any fluid equation at all.** U1 fetched four objects, hashed them, and
+compared strings. **It establishes nothing about whether the manuscript is correct**, nothing about
+the Lean project beyond that project's own self-declaration, and nothing about `W4`. **It is
+`UNVERIFIED` under §3f rule 1 — one session read the manuscript and wrote the gate answer about its
+own reading — and it is cited that way in `STATE.md` and everywhere else.**
