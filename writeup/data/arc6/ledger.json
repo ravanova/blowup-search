@@ -2,13 +2,14 @@
  "schema": "arc6_ledger_v1",
  "leg": 425,
  "cursor": {
-  "read_through_page": 72,
+  "read_through_page": 87,
   "sections_done": [
    "1-2",
    "3",
    "4",
    "5",
-   "6"
+   "6",
+   "7"
   ]
  },
  "entries": [
@@ -732,6 +733,224 @@
     "(3.9)"
    ],
    "role": "THE ALGEBRA OF THE CLASSES. Every term of the residual at every stage is a product of class members acted on by these operators, so (6.30)-(6.32) is the rule-set by which Section 9 tracks the exponent of every term. The one loss, D_r costing eps^{-kappa_s}, is why kappa_s = 10^-5 is tiny and why the stage gain 1/10 in sigma_j has to beat it."
+  },
+  {
+   "id": "Lemma 7.1",
+   "kind": "Lemma",
+   "section": "7",
+   "hypotheses": [
+    "the labels of (6.8) and the phases of (7.2)-(7.3): k = ceil(eps^{-1/2}), B_s^2 = lambda_0/(eps k^2 (1+u_*^2)^{3/2}), s(v) = sigma(u_*/2 + u_* v/L_s), Phi = p theta + p_z Z/eps + x_0 R - v(pF + p_z G) with kp a nonzero integer",
+    "the frozen frame N = g_0/|g_0|, K = N^perp, lambda_0^2 = -2F_0 N_theta(2F_0 N_theta + |g_0|) > 0, c_0 = lambda_0/(2F_0 N_theta) < 0 at the representative point, and u_* > 0 chosen so that u_*/sqrt(1+u_*^2) exceeds sup|c_0 (T_{0,*}.K)/(T_{0,*}.N)| (the strict cone margin (7.1))"
+   ],
+   "conclusion": "There is q_* > 0, common to all labels and fixed derivative orders, such that on 0 < q < q_*: every e^{ikm Phi} is single-valued in theta with nonzero angular frequency; |n_Phi - B_s(s(v), K)| + |n_Phi'| <= C/S_* and the phase-transport defect E_ik = (t_* + b D_r + F d_theta + G D_z)Phi = O(eps S_*^C) in every fixed coefficient derivative (7.9); the 3x2 frame B of (7.8) has columns spanning n_Phi^perp with a uniformly bounded left inverse B^l and B^l(A_Phi B - B') = diag(lambda, -lambda) + E with lambda(v) = lambda_0/sqrt(1+s(v)^2) and |E| <= C/S_* (7.10); and |d - d_ref| <= C/S_* with d_ref = eps k^2 B_s^2 (1+s^2) (7.11).",
+   "constants": [
+    "q_*",
+    "k = ceil(eps^{-1/2})",
+    "B_s",
+    "u_*",
+    "x_0 = sigma B_s u_*/2",
+    "(p, p_z) from (K - sigma u_* g_0/(L_s|g_0|^2)) B_s, with kp rounded to a nonzero integer",
+    "lambda_0, c_0, N, K",
+    "the smallness S_*^2(eps + eps^2 + k^{-1}) <= 1 that fixes q_*",
+    "1 <= eps k^2 <= 4"
+   ],
+   "cites": [
+    "(4.11)",
+    "(4.20)",
+    "(5.42)",
+    "(6.6)",
+    "(6.8)",
+    "(6.11)",
+    "(7.1)-(7.11)",
+    "Theorem 4.6(iii)",
+    "Lemma 4.5"
+   ],
+   "role": "Reduces the pulse amplitude equation on the moving plane n_Phi^perp to a 2x2 system that is diag(lambda, -lambda) plus an O(1/S_*) error. The identity lambda_0^2 = 2 a F_0^2 (1 - 2/v_s) is where the cone condition v_s > 2 of Section 4 becomes GROWTH of the waves.",
+   "page": 75
+  },
+  {
+   "id": "Proposition 7.2",
+   "kind": "Proposition",
+   "section": "7",
+   "hypotheses": [
+    "alpha real, a finite harmonic set 0 < |m| <= M, a label at level i on a common torus H = Y_{i_0} with i - i_0 bounded (Lemma 6.2)",
+    "source coefficients f_m(x_*, H) in C^3 descending to H, smooth on the enlargement, with closed slow support in the label's slow support, compact transverse support in supp chi_g, support in the closed active shell, smooth zero extension across all of these, and |D^I f_m| <= C_I eps^alpha S_*^{b_I} sqrt(zeta) delta^{-a_I} P(v) on X_a < X < X_b, 0 <= v <= L_s",
+    "the domain 0 < q < q_* of Lemma 7.1"
+   ],
+   "conclusion": "There is a unique amplitude t_m with n_Phi . t_m = 0 and zero initial data, and a pressure coefficient pi_m, solving (7.5): t_m' = A_Phi t_m - m^2 d t_m - proj_{n_Phi^perp} f_m, t_m(0) = 0, pi_m = (i/(km))(n_Phi . K t_m - n_Phi' . t_m + n_Phi . f_m)/|n_Phi|^2 (7.13); the source is evaluated along the path H_w of (6.21); the coefficients descend to the same common torus and preserve the slow, transverse and shell supports with smooth zero extension; the solution exists on the whole closed pulse interval; and |D^I t_m| <= C'_I eps^alpha S_*^{b'_I} sqrt(zeta) delta^{-a'_I} P(v) (7.14), |D^I pi_m| <= C'_I eps^{alpha + 1/2} ... P(v) (7.15). Constants may depend on M, I and the source bounds; q_* does NOT depend on M, alpha or the stage. One-sided derivatives at tau = 0 propagate from source to solution.",
+   "constants": [
+    "the envelope P(v) = exp(int_{L_s/2}^v (lambda - d_ref)) (7.12), with e^{-C(v-L_s/2)^2/L_s} <= P <= e^{-c(v-L_s/2)^2/L_s} (7.16)",
+    "the propagator bound ||V_m(v,w)|| <= C P(v)/P(w) (7.19), uniform in m via the exact factor (7.18)",
+    "the degree growth rule after (7.20)"
+   ],
+   "cites": [
+    "(6.2)",
+    "(6.21)",
+    "(7.5)",
+    "(7.12)-(7.20)",
+    "Lemma 7.1",
+    "Lemma 6.2",
+    "Duhamel's formula"
+   ],
+   "role": "THE LINEAR INVERSE for the wave equation with a prescribed harmonic source: a source bounded by the envelope P has a response bounded by the same envelope at a polynomial cost in S_*. It is operation 1 of the correction cycle (Proposition 9.6) and the reason later harmonics can be removed without shrinking the domain.",
+   "page": 77
+  },
+  {
+   "id": "Corollary 7.3",
+   "kind": "Corollary",
+   "section": "7",
+   "hypotheses": [
+    "Proposition 7.2's solution operators f_m -> (t_m, pi_m) with t_m(0) = 0"
+   ],
+   "conclusion": "They are defined at every finite correction stage on the SAME domain 0 < q < q_*; increasing the finite harmonic set or the derivative order changes constants and polynomial degrees only, never the domain.",
+   "constants": [
+    "q_* (from Lemma 7.1's single finite choice)"
+   ],
+   "cites": [
+    "Lemma 7.1",
+    "(7.18)",
+    "(7.20)",
+    "Proposition 7.2"
+   ],
+   "role": "The domain-stability statement the induction in Section 9 needs: the pulse inverses do not eat the domain stage by stage.",
+   "page": 80
+  },
+  {
+   "id": "Lemma 7.4",
+   "kind": "Lemma",
+   "section": "7",
+   "hypotheses": [
+    "for each sign sigma, t^h_sigma = B(z_+, z_-)^T solving (t^h_sigma)' = A_Phi t^h_sigma - d t^h_sigma with z_+(0) = P(0), z_-(0) = 0 -- the homogeneous m = 1 problem, pressure by (7.13) at f_m = 0",
+    "the frame (7.7)-(7.8) with t^h_sigma = x(e_r - s_a K_a) + y N_a"
+   ],
+   "conclusion": "c P(v) <= x(v) <= C P(v) and y(v)/x(v) = c_0 sqrt(1 + s(v)^2) + O(S_*^{-1}) (7.21); every fixed derivative of the homogeneous solution in coefficient variables or pulse coordinate is bounded by C_I S_*^{b_I} P(v); its pressure carries an extra factor eps^{1/2}.",
+   "constants": [
+    "K_b (the ratio bound |z_-/z_+| <= K_b/S_*)",
+    "c_lambda > 0 (uniform lower bound for lambda)",
+    "the energy identity (7.22): (1/2) d/dv |t|^2 = -g.(t_r(t_theta, t_z)) - eps k^2 |n_Phi|^2 |t|^2"
+   ],
+   "cites": [
+    "(7.7)",
+    "(7.8)",
+    "(7.10)",
+    "(7.12)",
+    "(7.13)",
+    "(7.16)",
+    "(7.19)",
+    "(7.20)",
+    "(7.21)",
+    "(7.22)"
+   ],
+   "role": "THE PULSE: the real homogeneous solution whose radial component tracks the Gaussian envelope P -- it grows while shear amplification lambda exceeds reference damping d_ref and decays after -- and whose tangential/radial ratio is the fixed c_0 sqrt(1+s^2). Its energy identity (7.22) is the mechanism of Section 2.2 in one line. Proposition 7.5's covariance columns are built from it.",
+   "page": 80
+  },
+  {
+   "id": "Proposition 7.5",
+   "kind": "Proposition",
+   "section": "7",
+   "hypotheses": [
+    "for each slow box beta the two homogeneous pulses of Lemma 7.4 forming b_sigma = chi_g(xi_g) psi(v) t^h_sigma cos(k Phi_sigma) with disjoint auxiliary supports, and the 2x2 covariance matrix H = [C(b_+) | C(b_-)] with C(w) = <<w_r w_tan>_theta>_Y (7.23)",
+    "the order-zero target T_{0,*} = (Q/q)^{A+1/2} T_0",
+    "the strict cone margin (7.1) via the choice of u_*"
+   ],
+   "conclusion": "After one further decrease of q_*, H is invertible on each enlarged slow neighbourhood and the components of H^{-1} T_{0,*} are POSITIVE on its intersection with X_a < X < X_b. With y = H^{-1} T_{0,*}, a_sigma = sqrt(y_sigma), W_0 = sqrt(eps) sum_sigma a_sigma b_sigma (7.24): y_sigma >= c sqrt(S_*) zeta and |D^I y_sigma| <= C_I S_*^{b_I} zeta delta^{-a_I} (7.25); a_sigma extend smoothly by zero at the shell edges; eta_beta W_0 in W_{1/2}; and BEFORE the slow cutoff, C(W_0) = eps T_{0,*} (7.26). Uses only the order-zero target.",
+   "constants": [
+    "H_sigma = h_sigma(-A_c N - sigma u_* K + e_sigma), |e_sigma| <= C S_*^{-1/2} (7.28), with h_sigma ~ c_i sqrt(L_s) ~ S_*^{-1/2} and A_c = -c_0 sqrt(1+u_*^2) > 0",
+    "the reference cone T_N < 0, |T_K| < (u_*/A_c)(-T_N), and its margin eta_c > 0",
+    "|det H| >= c/S_*, ||H^{-1}|| <= C sqrt(S_*), c sqrt(S_*)|T| <= y_sigma <= C sqrt(S_*)|T| (7.29)",
+    "the physical assembly (7.30): sum_beta Q^{-2A} eta_beta^2 eps T_{0,*} = q^{-A-1/2} T_0"
+   ],
+   "cites": [
+    "(4.27)",
+    "(6.11)",
+    "(6.16)",
+    "(7.1)",
+    "(7.7)",
+    "(7.21)",
+    "(7.23)-(7.30)",
+    "Lemma 7.4",
+    "Lemma 6.1",
+    "Lemma 6.2",
+    "Theorem 4.6(iii),(iv)"
+   ],
+   "role": "THE POSITIVE REPRESENTATION OF THE LEADING STRESS. Two pulse families, two covariance directions, positive squared amplitudes y_sigma -- and (7.26)/(7.30) say their averaged Reynolds stress IS the leading annular stress q^{-A-1/2} T_0. This is 'discharge 1' of the momentum residual and the single most load-bearing statement in the paper for the mechanism arc 5 named.",
+   "page": 82
+  },
+  {
+   "id": "Proposition 7.6",
+   "kind": "Proposition",
+   "section": "7",
+   "hypotheses": [
+    "alpha real; a real two-vector Sigma(R, Z, T) in M_alpha INDEPENDENT of the angular and auxiliary variables (an extra requirement beyond M_alpha)",
+    "the fixed positive coefficients a_sigma of Proposition 7.5, kept fixed at every stage",
+    "dSigma = H^{-1}(Sigma/eps), delta a_sigma = (dSigma)_sigma/(2 a_sigma), L Sigma = sqrt(eps) sum_sigma delta a_sigma b_sigma (7.31)"
+   ],
+   "conclusion": "L Sigma is a linear operation whose harmonic coefficients satisfy the local bounds of W_{alpha - 1/2} with smooth zero extension at the shell edges; eta_beta L Sigma in W_{alpha - 1/2}; B(W_0, L Sigma) = Sigma; C(eta_beta L Sigma) in M_{2 alpha - 1} (7.32). No sign or size restriction on Sigma.",
+   "constants": [
+    "the bound |D^I delta a_sigma| <= C_I eps^{alpha-1} S_*^{b'_I} sqrt(zeta) delta^{-a'_I} (7.33)",
+    "the exact bilinear identity B(W_0, L Sigma) = eps H (2 a (.) delta a) = eps H dSigma = Sigma (7.34)",
+    "the assembled physical/normalized versions W^as_0, L^as Sigma of (7.35)-(7.36)"
+   ],
+   "cites": [
+    "(7.25)",
+    "(7.29)",
+    "(7.31)-(7.36)",
+    "Proposition 7.5",
+    "Lemma 7.4",
+    "Proposition 6.6"
+   ],
+   "role": "THE SIGNED STRESS INVERSE: L is a right inverse of the covariance differential DC(W_0) at the fixed positive amplitudes, so any later stress defect of either sign can be cancelled by a first-order amplitude change. Operation 2 of the correction cycle.",
+   "page": 84
+  },
+  {
+   "id": "Lemma 7.7",
+   "kind": "Lemma",
+   "section": "7",
+   "hypotheses": [
+    "alpha real, nonzero integer m, a harmonic coefficient t_m in W_alpha independent of theta with n_Phi . t_m = 0, supported in the prescribed slow and transverse supports and compactly inside the pulse interval, with smooth zero extension",
+    "the potential C_m = i n_Phi x t_m/(km |n_Phi|^2), A_m = C_m e^{ikm Phi} (7.38)"
+   ],
+   "conclusion": "C_m in W_{alpha + 1/2} and the curl remainder r_m in W_{alpha + 1/2 - kappa_s}; curl_* A_m = (t_m + r_m) e^{ikm Phi} is EXACTLY divergence-free for the normalized operators and after evaluation at the phase map; potential and velocity extend smoothly by zero; for a_m = t_m + r_m, ikm n_Phi . a_m = -((D_r + R^{-1})(a_m)_r + D_z (a_m)_z) and n_Phi . a_m in W_{alpha + 1/2 - kappa_s} (7.39). Physical potentials and pressures are chart ones times Q^{1/2 - A} and Q^{-2A}.",
+   "constants": [
+    "kappa_s = 10^{-5} (the D_r loss)",
+    "the factor (km)^{-1} = O(eps^{1/2})",
+    "the normalized curl (7.37)"
+   ],
+   "cites": [
+    "(6.32)",
+    "(7.37)-(7.39)",
+    "Lemma 7.1",
+    "Proposition 6.6",
+    "div_* curl_* = 0 by commutation"
+   ],
+   "role": "EXACT INCOMPRESSIBILITY of the waves: velocities are taken as curls of oscillating vector potentials, and the price is a curl remainder r_m half an eps-order smaller (minus kappa_s). The remainder is carried, never dropped -- it is one of Corollary 7.8's three retained terms.",
+   "page": 86
+  },
+  {
+   "id": "Corollary 7.8",
+   "kind": "Corollary",
+   "section": "7",
+   "hypotheses": [
+    "alpha, rho real; a real divergence-free wave field U = W^as_0 + E with U in W_{1/2}, E in W_rho (curl remainders included)",
+    "Sigma(R,Z,T) in M_alpha, a real two-vector independent of angular and auxiliary variables",
+    "V = L^as Sigma + R the divergence-free increment from Lemma 7.7, R in W_{alpha - kappa_s} its curl remainder"
+   ],
+   "conclusion": "C(U + V) - C(U) = Sigma + B(E, L^as Sigma) + B(U, R) + C(V) (7.41), with B(E, L^as Sigma) in M_{rho + alpha - 1/2}, B(U, R) in M_{alpha + 1/2 - kappa_s}, C(V) in M_{2 alpha - 1} (7.42); taking the radial divergence of each remainder costs at most a further kappa_s.",
+   "constants": [
+    "kappa_s",
+    "the three remainder exponents rho + alpha - 1/2, alpha + 1/2 - kappa_s, 2 alpha - 1"
+   ],
+   "cites": [
+    "(7.35)",
+    "(7.36)",
+    "(7.41)",
+    "(7.42)",
+    "Lemma 7.7",
+    "Proposition 7.6",
+    "Proposition 6.6"
+   ],
+   "role": "The exact covariance bookkeeping for one correction step: prescribed increment Sigma plus THREE retained higher-order terms. Section 9's exponent accounting for operation 2 is this corollary read off term by term.",
+   "page": 87
   }
  ],
  "hard_pages": [
@@ -759,6 +978,16 @@
    "pages": "62-64",
    "section": "6.1 (dyadic charts and the auxiliary torus)",
    "why": "The whole apparatus is fixed in eight lines of (6.2)-(6.6): an integer matrix J_g = [[3,1],[1,5]] with irrational eigenvalues Lambda_g = 4 - sqrt2, T_g = 4 + sqrt2 and eigenvectors v_r = (1, -b_g), v_t = (b_g, 1); a physical evaluation map Y = v_r r^{d_r} + v_t t on T^2 with d_r = 2((1+h) rho_g - h kappa_s); a band covering index i(l) chosen so that T_g^i ~ Q^{-1-h}/S_*. The two derivative scales that fall out -- the fast TIME term c_i ~ S_*^{-1} and the fast RADIAL term M_i ~ eps^{-kappa_s} S_*^{-rho_g} -- are the entire reason the construction can have rapid temporal variation with tiny radial-derivative cost, and the paper says so in one sentence after (6.6). Why the eigenvalue ratio rho_g = log Lambda_g / log T_g enters d_r, and why kappa_s = 10^-5 is exactly the exponent D_r loses in (6.32), took me two readings and a hand computation of T_g^i Q^{1+h} and Lambda_g^i Q^{d_r/2} from (6.5). The Diophantine bound (6.7), |v_r . n| >= c/(1+|n|), via the algebraic conjugate, is the other quiet load-bearing line: it is what makes the directional inverses in Section 8 lose only finitely many torus derivatives."
+  },
+  {
+   "pages": "74-77",
+   "section": "7.1 (frame, phase, Lemma 7.1)",
+   "why": "The hinge of the whole mechanism is one unlabelled line on p.74: g_0 = F_0(-a, b_s) and lambda_0^2 = 2 a F_0^2 (1 - 2/v_s), 'they are not additional choices'. That is the ONLY place the cone condition v_s > 2 of Section 4 is converted into a positive growth rate for the waves, and it is stated as an aside after the definitions of N, K, c_0. Everything else on these pages -- the choice of u_* against sup|c_0 (T.K)/(T.N)|, the wave numbers (p, p_z) with kp rounded to an integer, the phase (7.3) built to follow transport, the projected operator A_Phi = -K + n_Phi(n_Phi^T K - n_Phi'^T)/|n_Phi|^2, and the diagonalisation on p.76 giving the reference matrix [[0, 2F_0 N_theta/(1+s^2)], [-(2F_0 N_theta + |g_0|), 0]] with eigenvalues +-lambda -- I could follow only after recomputing e.(-K_0 e) = s K.g_0 = 0 and N.(-K_0 e) = -(2F_0 N_theta + |g_0|) by hand. The rounding kp -> nearest nonzero integer contributes an O(k^{-1}) error that is then multiplied by v = O(S_*), and the smallness S_*^2(eps + eps^2 + k^-1) <= 1 that absorbs it is the single condition fixing q_* for the entire paper."
+  },
+  {
+   "pages": "82-83",
+   "section": "7.3 (Proposition 7.5 Step 2)",
+   "why": "The positivity of the squared amplitudes rests on the reference cone T_N < 0, |T_K| < (u_*/A_c)(-T_N), derived from H_sigma = h_sigma(-A_c N - sigma u_* K + e_sigma), and on the claim that (7.1)'s choice of u_* gives |T_K|/u_* <= (1 - eta_c)(-T_N/A_c) with a FIXED eta_c > 0 on the closed annulus including its edges, where the stress vanishes and only its limiting direction survives (Theorem 4.6(iii)). The passage from Lemma 4.5's inequalities (4.22) through c_0^2 = (v_s - 2)/2 to this reference cone is asserted, not displayed; the reader has to carry Theorem 4.6(iii)'s kappa-margin through three changes of variable. The O(S_*^{-1/2}) error e_sigma comes from the |v - L_s/2|/L_s moment of the Gaussian envelope, a nice one-line computation once seen."
   }
  ]
 }
