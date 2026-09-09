@@ -1,0 +1,265 @@
+{
+  "artefact": "arc5_outpaced_v1",
+  "date": "2026-09-09",
+  "arc": "5_outpaced",
+  "quartet": [
+    "writeup/5_outpaced/BLOG_OUTPACED.md",
+    "writeup/5_outpaced/TECHNICAL_OUTPACED.md",
+    "writeup/5_outpaced/outpaced_evidence.py",
+    "writeup/data/arc5_outpaced_v1.json"
+  ],
+
+  "EVIDENCE_CLASS": {
+    "what_this_artefact_is": "A banked record of a THIRD-PARTY public result and of this repository's own already-measured throughput, plus arithmetic derived from the two. It contains NO new measurement of any fluid equation. No number here was produced by a solver run in this repository.",
+    "why_that_matters": "ORCHESTRATION.md's documentation contract requires every number quoted in prose to live in a JSON. Two different provenance classes are mixed in this file and they are NOT interchangeable. `external_record` is journalism and preprint text, read but NOT audited at full text here -- status UNVERIFIED, and it stays UNVERIFIED in the prose. `this_programme` is primary: every field cites the repository file it is read from. `derived` is pure arithmetic over the other two and is recomputed from them by outpaced_evidence.py rather than restated.",
+    "the_standing_rule_this_obeys": "A PAPER IS A VIEW OF THE RECORD, NEVER A SOURCE (STATE.md, wave-8 pivot). An external announcement is a view of somebody else's record. It is banked at the status it actually has."
+  },
+
+  "external_record": {
+    "verification_status": "UNVERIFIED IN THIS REPOSITORY. Read from public announcement, preprint abstract pages and press coverage on 2026-09-09. NOT audited at full text. NOT reproduced. No Lean file in the cited project was compiled here.",
+    "openai_navier_stokes": {
+      "title": "Finite Time Blowup for Navier-Stokes",
+      "announced": "2026-09-08",
+      "manuscript_pages": 166,
+      "lean_project_url": "https://github.com/openai/NavierStokesAndEuler",
+      "lean_review_status_as_reported": "self-assessed; independent verification incomplete",
+      "clay_alternative_addressed": "C",
+      "theorem_as_reported": "There exist a smooth, compactly supported force f and a time T such that the solution u of the forced 3D incompressible Navier-Stokes equations on R^3, starting from rest, is smooth on [0, T) and sup|u| becomes unbounded as t -> T, while the kinetic energy stays uniformly bounded for all t < T.",
+      "domain": "R^3",
+      "initial_data_as_reported": "rest (u0 = 0)",
+      "forcing": "smooth, compactly supported in space and time",
+      "energy": "L^2 norm uniformly bounded for t < T",
+      "construction_components_as_reported": [
+        "a self-similar concentrating axisymmetric vortex, shrinking to a point in similarity coordinates as t -> T",
+        "small-scale spatially-localised oscillatory pulses in a cylindrical annulus, whose Reynolds stress cancels the momentum residual",
+        "an iterative correction scheme removing higher-order residuals while preserving compact support of f"
+      ],
+      "prize_status_as_reported": {
+        "openai_will_claim_prize": false,
+        "clay_requires": [
+          "publication in a qualifying refereed outlet (CMI 2018 rules, Section 6(a)(i)/(ii))",
+          "at least two (2) years elapsed since that publication (Section 4)",
+          "general acceptance in the global mathematics community, sole discretion of CMI (Section 4(c))",
+          "the Proposed Solution has satisfactorily answered the questions raised by the official problem description, sole discretion of CMI (Section 4(d))"
+        ],
+        "unforced_statements_A_and_B": "UNTOUCHED, still open",
+        "third_party_summary_2026_09": "public status pages still list the Navier-Stokes Millennium Prize as OPEN"
+      },
+      "compute_as_reported": {
+        "concurrent_agents": 10000,
+        "hours_to_proof": 88,
+        "hours_lean_verification": 17,
+        "hours_total": 105,
+        "messages_navier_stokes": 2700000,
+        "messages_all_trials": 4900000,
+        "tokens_navier_stokes": 130000000000,
+        "cost_usd_as_reported": "millions of dollars (company estimate, unaudited)",
+        "model": "an internal next-generation model, reported as significantly more capable than GPT-6 Astra"
+      },
+      "disputes_as_reported": {
+        "priority": "Tristan Buckmaster alleges use of unpublished drafts from his collaboration without proper credit. OpenAI denies accessing specific user data and acknowledges it cannot rule out de-identified usage data having helped improve its models. UNRESOLVED.",
+        "citations": "bibliography expanded from 16 to 22 entries; critics note missing references including Chen-Hou",
+        "conduct": "Buckmaster reported pressure over authorship; Sebastien Bubeck apologised for language about 'risking a career' and disputed other characterisations"
+      }
+    },
+    "alpoge_buckmaster_euler": {
+      "equation": "forced 3D incompressible Euler",
+      "preprint_pages": 112,
+      "lean_status_as_reported": "verification completed earlier than the Navier-Stokes project",
+      "builds_on": "Cordoba and Martinez-Zoroa",
+      "llm_role_as_reported": "developed with substantial LLM iteration, using Anthropic models",
+      "tao_remark_as_reported": "the method does not seem far from showing blowup for Navier-Stokes too, though a large amount of compute and detail-checking would be involved"
+    }
+  },
+
+  "this_programme": {
+    "verification_status": "PRIMARY. Every field cites the repository file it is read from. These are the programme's own already-landed measurements, not new ones.",
+    "target_statement": {
+      "value": "C",
+      "source": "STATE.md, 'Goal, posture, odds': 'Prize direction is Fefferman (C) -- breakdown on R^3. (D), the torus, is deferred with Lane T.'"
+    },
+    "legs_run": {
+      "value": 416,
+      "source": "highest leg number in the record; wave 9 = legs 413-416 (reports/ORCH_STATE.md, 'Wave 9 -- all four units accounted for')"
+    },
+    "span_start": {
+      "value": "2026-07-22",
+      "source": "ARCHIVE.md: earliest dated stage artefact, 'single commit, dated 2026-07-22 through 07-26'"
+    },
+    "span_end": {
+      "value": "2026-08-19",
+      "source": "reports/ORCH_STATE.md: 'RUN STOPPED BY USER DIRECTIVE 2026-08-19 -- NO SUCCESSOR SCHEDULED'"
+    },
+    "span_days": {
+      "value": 28,
+      "source": "2026-07-22 to 2026-08-19 inclusive of neither endpoint's partial day; computed in outpaced_evidence.py from the two dates above"
+    },
+    "concurrency_actually_run": {
+      "live_leg_slots": 4,
+      "leg_slot_model": "Opus 5, high effort",
+      "worker_ceiling": 20,
+      "worker_steady_state": "10-15",
+      "decision_maker": "one Fable 5, outside the 20-slot pool",
+      "source": "ORCHESTRATION.md: 'Four legs live at all times. Each leg is one Opus 5 agent, end to end'; 'One extra agent, Fable 5, outside the 20-slot pool'; 'Never exceed 20 concurrent workers plus the DM. Steady state is ~10-15'"
+    },
+    "l1_l4_links_moved": {
+      "value": 0,
+      "source": "STATE.md: 'No L1 -> L4 link has EVER moved, in over 410 legs.'"
+    },
+    "cheapest_unit_that_could_move_one": {
+      "value": "NO SUCH UNIT IS KNOWN",
+      "source": "STATE.md, verbatim"
+    },
+    "self_assessed_clay_odds": {
+      "value": 0.0005,
+      "as_written": "~0.05%",
+      "source": "STATE.md 'Clay odds ~0.05%, unmoved'; WALLS.md; CLAY_ROADMAP.md -- recorded in the same paragraph as the ambition, three times"
+    },
+    "ceiling": {
+      "value": "Tier 2",
+      "source": "STATE.md: 'Ceiling: Tier 2. Route 4 produces a candidate; no certification route is built.'"
+    },
+    "obligations_with_no_known_method": {
+      "count": 2,
+      "items": [
+        "CLAY_OBLIGATIONS.md section 6 item 1 -- certified far-field decay and the admissible cutoff. Fitted decay exists; certified decay does not; the cutoff analysis has not been attempted here.",
+        "CLAY_OBLIGATIONS.md section 6 item 2 -- persistence/stability under localisation, including the unstable-manifold question leg 314 classified OPEN. 'This requires a theorem of a kind nobody in this repository has produced, and -- per leg 314 -- of a kind computation cannot supply.'"
+      ],
+      "source": "CLAY_OBLIGATIONS.md section 6"
+    },
+    "leg_381_forcing_finding": {
+      "what_was_right": "'with f = 0' is WRONG for statement (C). f = 0 appears only in the existence statements (A) and (B). Statement (C) permits a smooth forcing f satisfying its own decay conditions (4),(5). Recorded as REFUTED against the reviewer's reading, checked clause by clause against Fefferman's official problem statement.",
+      "what_was_inferred": "'This is a genuine relaxation of the target -- the candidate need not be force-free -- but leg 381 recorded explicitly why it is not a shortcut: the forcing must itself satisfy (4),(5), so it buys no escape from the decay and bounded-energy obligations that section 4 and section 5 price.'",
+      "source": "CLAY_OBLIGATIONS.md, leg 381 (7aecf78) integration-landed corrections block",
+      "status_of_the_inference": "CONTRADICTED BY THE EXTERNAL RECORD, at the external record's own UNVERIFIED status. See the_finding below."
+    },
+    "genome_is_initial_data": {
+      "value": true,
+      "detail": "ga/genome.py defines Genome, random_genome, rough_genome, realize, normalize, shape_descriptors -- all over spectral coefficients of an initial field under an energy budget. There is no force term in the genome and no force gene anywhere in the search.",
+      "source": "ga/genome.py"
+    },
+    "ladder_position_at_the_stop": {
+      "banked": "1D gCLM pipeline at Tier 2 (STAGE_3_RESULTS.md: 'Stage 3 PASSED: Tier-2 numerically-confirmed', with the honest read that alpha = 1.000 throughout, so it is the CLM singularity surviving a = 0.7 advection, NOT a novel De Gregorio blow-up)",
+      "next_rung": "Route A Phase 1, 2D Boussinesq",
+      "three_d_euler": "Stage 4, unscheduled",
+      "source": "PROJECT.md, STAGE_3_RESULTS.md, STAGE_3_6_RESULTS.md"
+    },
+    "w7_compute_measured_from_inside": {
+      "prog_r4_u3_attempt_cpu_core_h": 134.45,
+      "prog_r4_u3_pool_worker_h_reserved": 144.69,
+      "pool_utilisation_pct": 92.92,
+      "source_papers_2d_gpu_days": 10.2,
+      "transform_share_of_a_step_pct": 79.1,
+      "transform_fixed_fraction_N_4_to_512": 0.596,
+      "best_priced_speedup_fftw3": 3.41,
+      "verdict": "W7 UNMOVED: 'a speedup breaks no wall, and no link moved.'",
+      "source": "WALLS.md section W7; leg 403 R-prof (1f89ceb, writeup/data/p2_r_prof_v1.json)"
+    },
+    "last_unit_of_the_run": {
+      "unit": "E-FE",
+      "leg": 408,
+      "gate_answer": "ANY_ROW_RECOVERS_IN_ANY_DRAW = NO",
+      "attempts": 160,
+      "converged": 7,
+      "recovered_any_named_row": 0,
+      "pooled_clopper_pearson_95_upper": 0.02279,
+      "core_h_spent": 99.99,
+      "core_h_briefed": 91,
+      "state": "UNVERIFIED",
+      "source": "STATE.md wave 7 close; writeup/CORRECTIONS.md section 60"
+    }
+  },
+
+  "derived": {
+    "note": "Every field here is RECOMPUTED by outpaced_evidence.py from external_record and this_programme. None is restated from prose. Each carries the assumption that makes it meaningful; strip the assumption and the number is not a forecast.",
+    "legs_per_day": {
+      "formula": "legs_run / span_days",
+      "assumption": "uniform cadence across the run; the record shows waves, not a constant rate"
+    },
+    "clopper_pearson_95_upper_per_leg_link_movement": {
+      "formula": "1 - 0.05 ** (1 / legs_run)",
+      "meaning": "one-sided 95% upper bound on the per-leg probability of moving an L1 -> L4 link, given 0 successes in 416 legs",
+      "assumption": "legs are independent Bernoulli trials at a constant rate. They are not -- they are a directed programme whose lanes were re-ranked repeatedly -- so this is a bound on the DATA, not a model of the work.",
+      "direction_of_the_bound": "It bounds the rate ABOVE, therefore it bounds the time BELOW. It produces a FLOOR and no ceiling. Read the other way round it is a fabrication."
+    },
+    "agent_hour_parity": {
+      "formula": "external concurrent_agents * hours / our_agent_count",
+      "our_agent_count": 10,
+      "assumption": "THE STRONGEST ASSUMPTION IN THIS FILE, and it is false: that our 10 agents run the same method, on the same model, at the same efficiency. They do not. This is the cost of BURNING THE EQUIVALENT AGENT-HOURS, not of arriving."
+    },
+    "odds_parity": {
+      "formula": "(1 / self_assessed_clay_odds) * (span_days / speedup) days",
+      "speedups_considered": [2.5, 2.0, 1.75, 1.5],
+      "assumption": "0.05% is a per-programme probability and programmes are independent repeats. The programme's own record says the opposite -- the odds were 'unmoved' across 416 legs, i.e. NOT a per-trial rate that accumulates."
+    }
+  },
+
+  "the_finding": {
+    "headline": "The programme's target statement was answered externally, by an apparatus outside the programme's search space, while the programme's own recorded ceiling remained Tier 2 and its own recorded odds remained 0.05%, unmoved.",
+    "the_specific_miss": {
+      "claim": "Leg 381 found the door and closed it. It correctly refuted 'f = 0' for statement (C) and correctly called the forcing 'a genuine relaxation'. It then inferred that the relaxation 'buys no escape from the decay and bounded-energy obligations'. On the external record's reported construction, the forcing is EXACTLY what buys the escape: the oscillatory pulses' Reynolds stress absorbs the momentum residual that the localisation problem (W4) otherwise leaves on the solution, and the force is kept COMPACTLY SUPPORTED, which discharges Fefferman condition (5) at no analytic cost rather than at the cost leg 381 priced.",
+      "status": "UNVERIFIED. This is a reading of third-party summaries of a manuscript this repository has not audited at full text. It is banked as the first unit of the next arc to check, NOT as a landed finding.",
+      "why_it_is_worth_banking_anyway": "lesson 76 -- the negative construction stays in the artifact. A wrong inference that closed the winning door is the single most informative row this repository can carry, and it is exactly the kind of row a programme is tempted to smooth over."
+    },
+    "structural_reasons_the_plan_could_not_have_arrived": [
+      "CEILING. Tier 3 needs CLAY_OBLIGATIONS.md section 6 items 1 and 2. Both have no known method. Leg 314 classified item 2 as of a kind computation cannot supply. The programme's own documents say the ceiling is Tier 2.",
+      "SEARCH SPACE. The genome is initial data. The external construction starts from REST -- u0 = 0. Its entire content lives in a force the genome has no gene for. No fitness landscape over u0 contains that object, at any budget, for any number of generations.",
+      "LADDER POSITION. The banked pipeline is 1D gCLM at Tier 2; 2D Boussinesq was Phase 1; 3D Euler is Stage 4, unscheduled. The target equation was several unscheduled rungs above the last landed one.",
+      "APPARATUS. Tier 3 here was to be a Newton-Kantorovich radii-polynomial contraction, scoped by C1. The external proof uses no interval arithmetic, no DNS and no search: it is analysis, then Lean.",
+      "COMPUTE WAS NEVER THE BINDING CONSTRAINT. W7 was measured from the inside at leg 403: 79.1% of a step is transforms, the best priced fix is 3.41x, and the wall's own note reads 'a speedup breaks no wall, and no link moved.'"
+    ],
+    "what_this_does_NOT_establish": [
+      "It does not establish that the external proof is correct. It is unrefereed, its Lean review is self-assessed, independent verification is incomplete, and a priority dispute is unresolved.",
+      "It does not establish that the Clay problem is resolved. CMI's four conditions are unmet, the two-year clock has not started, and OpenAI has said it will not claim the prize.",
+      "It does not close statements (A), (B) or (D). (A) and (B) are the unforced problem and are untouched. (D) is the torus.",
+      "It does not retroactively make any Tier-2 result in this repository a proof. Tier 2 is never a proof. That rule is unchanged by anything in this file."
+    ]
+  },
+
+  "arc6_charter": {
+    "status": "PROPOSED, NOT RULED. The direction question belongs to the user, not to any agent in this repository (ORCHESTRATION.md section 8 escalation discipline).",
+    "the_one_remaining_part": "Arc 6 is the last arc. It is where this programme delivers a result of its own rather than a measurement of its own limits.",
+    "candidates": [
+      {
+        "id": "A6-AUDIT",
+        "what": "Adversarial full-text audit of the 166-page manuscript and a compile-and-check pass over the Lean project.",
+        "why_it_is_ours": "The repository has done exactly this before and landed it: leg 174's census, PB2's re-verification of W4 clause (b) against Tsai 1998 Theorem 2, V-W7's seven defects re-checked at primary. Independent verification of the external result is INCOMPLETE and self-assessed, so the work is wanted and is not duplicated.",
+        "what_would_count": "A pre-committed gate answered in its own wording on (i) whether the reported theorem is the theorem the manuscript proves, (ii) whether the Lean project compiles and what it actually certifies versus what the prose claims, (iii) whether the momentum-residual absorption is where the localisation problem is discharged, and (iv) whether Chen-Hou and the Cordoba-Martinez-Zoroa line are cited where they are used.",
+        "reachable": true
+      },
+      {
+        "id": "A6-PORT",
+        "what": "Port the oscillatory-pulse residual-absorption mechanism onto this repository's banked route-4 DSS profile, and measure what it does to W4.",
+        "why_it_is_ours": "W4, the localisation problem, is this repository's own named wall, with a pre-committed statement of what breaking it consists of. The external record reports a tool for exactly that residual. Whether it transfers to a profile this repository actually holds is an open, measurable, in-scope question.",
+        "what_would_count": "Either a break of W4 under its own pre-committed test, or a measured statement of why the mechanism does not transfer. Both are results. Neither is a Clay claim.",
+        "reachable": true,
+        "caveat": "This is a CONSTRUCTION unit and the composition floor applies. It must not be dispatched as an audit dressed as construction."
+      },
+      {
+        "id": "A6-D",
+        "what": "Statement (D), the torus.",
+        "why_it_is_ours": "W4's only surviving break clause is (c), and clause (c) IS statement (D). It sits in Lane T, deferred, and ESCALATION_D_BUNDLING_2026-08-18.md has NEVER BEEN RULED. It is the board's own most direction-relevant open item, and it is now the nearest unclaimed Fefferman statement.",
+        "what_would_count": "A ruling first. Lane T's re-open conditions are already written and neither has been met; nothing may be dispatched into it until the user answers the escalation.",
+        "reachable": "BLOCKED ON A USER RULING, not on work"
+      },
+      {
+        "id": "A6-A",
+        "what": "The unforced problem, statements (A) and (B).",
+        "why_it_is_not_ours": "W1: a search of this class can only ever argue FOR blow-up. Direction (a) is closed to us on a THEOREM -- Tao's averaged-Navier-Stokes supercriticality barrier -- not on effort. Recorded so nobody rediscovers it as news.",
+        "reachable": false
+      }
+    ],
+    "what_arc_6_may_not_do": [
+      "Soften the three-tier win condition. Tier 2 is never a proof.",
+      "Describe any output as movement toward Clay unless a link of the L1 -> L4 chain actually moves.",
+      "Cite this arc's blog or technical note as a source. A paper is a view of the record, never a source.",
+      "Treat the external record as verified. It is UNVERIFIED here until A6-AUDIT says otherwise, and it stays UNVERIFIED in every draft until then."
+    ]
+  },
+
+  "open_items": [
+    "STATE.md is NOT modified by this arc. It is the Conductor's working surface, it is under an ORCHESTRATION.md section 3j byte cap with 833 B of headroom at the time of writing, and file ownership (section 5) puts it outside this arc's territory. A restarting session owes it a row pointing here. RECORDED, NOT DONE.",
+    "No figure is registered in writeup/build_figures.py for this arc. The documentation contract's item 4 asks for one; this arc has no measurement of its own to plot, and a plot of somebody else's press numbers would be decoration. RECORDED AS A DELIBERATE GAP, not an oversight.",
+    "The two-year Clay clock (CMI Section 4) has not started for the external result and cannot start until a qualifying publication exists. Nothing in this repository depends on that date, but it is a planning fact and CLAY_OBLIGATIONS.md section 7 already carries it."
+  ]
+}

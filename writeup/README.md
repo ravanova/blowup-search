@@ -11,7 +11,7 @@ tiny Clay "lottery ticket." Each note states its own honest ceiling.
 
 ## How this folder is organized
 
-Documents are grouped into four **numbered arc folders** (chronological). The
+Documents are grouped into five **numbered arc folders** (chronological). The
 shared **build layer stays central**: [`data/`](data/) (committed inputs),
 [`figures/`](figures/) (rebuilt outputs), and the two cross-arc builders
 [`build_figures.py`](build_figures.py) / [`curate_evidence.py`](curate_evidence.py).
@@ -28,6 +28,7 @@ writeup/
   2_phase1_2d/     Route-A Phase-1 2D Boussinesq fitness search      figs 6–7
   3_spikes/        numerics upgrade + Spikes 0/1 (dynamic rescaling) figs 8–11
   4_p2_lottery/    P2 — the 1D Hou–Luo lottery-ticket legs           figs 12–35
+  5_outpaced/      the conclusion — READ THIS FIRST                  (no figs)
 ```
 
 ## The rigor ladder (the project's framing)
@@ -44,6 +45,32 @@ writeup/
 ---
 
 ## Read in this order
+
+### ▶ Arc 5 — **START HERE.** The conclusion ([`5_outpaced/`](5_outpaced/))
+
+**Written 2026-09-09, after the run stopped.** On 2026-09-08 a 166-page
+manuscript and a Lean project claimed finite-time blowup for the **forced** 3D
+Navier–Stokes equations on `ℝ³` — **Fefferman's Alternative (C)**, which is the
+statement this programme was aiming at. Arc 5 banks that external record at its
+actual status (**UNVERIFIED here**: not audited at full text, not reproduced, no
+Lean file compiled), prices how long this plan would have taken to arrive
+(three ways, all with their assumptions stated), and states the four structural
+reasons it would not have. It also records the arc's substantive finding, which
+is about *us*: **leg 381 identified the forcing relaxation in statement (C) and
+priced it away in a subordinate clause.**
+
+0. [BLOG_OUTPACED.md](5_outpaced/BLOG_OUTPACED.md) — *"We found the door in leg
+   381. Then we closed it."* The narrative conclusion of the search programme.
+1. [TECHNICAL_OUTPACED.md](5_outpaced/TECHNICAL_OUTPACED.md) — provenance for
+   every number, the three prices worked in full, and the **arc-6 charter**
+   with pre-committed gates.
+   Rebuild: `.venv/bin/python writeup/5_outpaced/outpaced_evidence.py`
+
+**Arcs 1–4 below are the search programme itself, in the order it happened.**
+Nothing in arc 5 changes any of their verdicts, and nothing in it makes any
+Tier-2 result a proof. **One arc remains after this one** — arc 6, where the
+programme delivers a result of its own; its candidates and their gates are in
+arc 5's technical note, **proposed and not ruled**.
 
 ### Arc 1 — the completed 1D gCLM pipeline ([`1_gclm_1d/`](1_gclm_1d/))
 1. [SUMMARY.md](1_gclm_1d/SUMMARY.md) — one-page executive summary.
@@ -580,6 +607,7 @@ Every claim traces to one committed file. Key P2 / Route-D rows:
 | file | backs |
 |---|---|
 | `summary_metrics.json` | SUMMARY / headline numbers |
+| `arc5_outpaced_v1.json` | Arc 5 (no figs) — the external record at UNVERIFIED status, this programme's measured throughput at PRIMARY, and the derived arithmetic. **Two provenance classes, not interchangeable; the file says which is which.** Rebuilt by `5_outpaced/outpaced_evidence.py` |
 | `ga_vs_random.json`, `stage3_resolution.json`, `promoted_candidates.jsonl`, `nongenericity.json`, `stage3_6_rough.json`, `blowup_curve.json` | Arc 1 (figs 1–5) |
 | `phase1_spike.json`, `phase1_axis_screen.json`, `phase1_gate4.json`, `phase1_gsustained.json`, `phase1_gate4_reform.json` | Arc 2 (figs 6–7) |
 | `spike0_rescaling.json`, `spike1_stepA_velocity.json`, `spike1_stepB_rescaled.json`, `spike1_stepC_gate.json` | Arc 3 (figs 8–11) |

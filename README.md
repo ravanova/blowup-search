@@ -9,7 +9,28 @@ evolutionary (quality-diversity) search over initial data, and now with
 **computer-assisted certification** of self-similar blow-up profiles. Every
 claim in the repository is tiered, gated, and rebuildable from committed data.
 
-> **Status, stated plainly.** 146 legs in, nothing here resolves the Clay
+> ## ▶ Start here: [the conclusion of the search programme](writeup/5_outpaced/BLOG_OUTPACED.md)
+>
+> **2026-09-09.** On 2026-09-08 a 166-page manuscript and a Lean project claimed
+> finite-time blowup for the **forced** 3D Navier–Stokes equations on `ℝ³` —
+> **Fefferman's Alternative (C)**, the statement this programme was aiming at.
+> Arc 5 is the concluding writeup: what was claimed and at what status (it is
+> **UNVERIFIED here** — not audited at full text, not reproduced, no Lean file
+> compiled), how long this plan would have taken to arrive, and the four
+> structural reasons it would not have. Its substantive finding is about this
+> repository: **leg 381 identified the forcing relaxation in statement (C) and
+> priced it away in a subordinate clause.**
+>
+> [BLOG_OUTPACED.md](writeup/5_outpaced/BLOG_OUTPACED.md) ·
+> [TECHNICAL_OUTPACED.md](writeup/5_outpaced/TECHNICAL_OUTPACED.md) ·
+> [curated data](writeup/data/arc5_outpaced_v1.json)
+>
+> **One arc remains after it.** Arc 6's candidates and their pre-committed gates
+> are in the technical note, **proposed and not ruled**. Nothing in arc 5 makes
+> any Tier-2 result a proof, and no `L1 → L4` link moved.
+
+> **Status, stated plainly.** ~~146 legs in~~ (**stale — 416 legs at the
+> 2026-08-19 stop**), nothing here resolves the Clay
 > problem, and the recorded probability that it ever will is **~0.05%**. The
 > realistic prize is a *novel Tier-3 (rigorously certified) result on a model
 > where blow-up is provable*. That is the target of record. See
