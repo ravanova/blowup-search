@@ -922,3 +922,92 @@ ain `UNVERIFIED`** — `V1` checked `R0`'s
 **RETURNED — `R-bank` (leg 404) and `R-prof` (leg 405)**: both **VERIFIED by `V-W7`**. Rows retired VERBATIM → `WALLS_HISTORY.md` §STATE-W7-RBANK-RPROF. `R-prof` gate (iii) `NO`, **4.34×** — and §50 item 6 rules that sentence **run-specific**: true of the banked JSON (`min 3.3722`), false on `V-W7`'s re-run (`2.89873`). ⚠ `R-bank`'s `--verify` **CANNOT FAIL** (0 `raise`/`assert`/`sys.exit`) — remedy owed.
 **DISPATCHED — `E-FE`** (leg 408). 160 attempts, **6 shards not 8**, on a measurement (12 cores, `L6-b` holding ~5, `R-prof`'s banked `MACHINE_WAS_NOT_QUIET`): **~15.2 h wall not ~11.4; ~91 core-h unchanged.** Inherits `R-bank` **C2** (the bank is the seed's *definition* on this CPU) and **C4** (144 non-originals untested by any solver).
 
+
+
+## §STATE-W4-2026-08-18 — retired VERBATIM from `STATE.md` 2026-09-09 (leg 422, arc 6 `U6`) under §3j
+
+## ⚠ 2026-08-18 — W4 HAS ONE BREAK CLAUSE LEFT, AND THE OTHER TWO ARE SHUT, **(b) VERIFIED**
+
+`L2′` shut clause **(a)**; **`L5` (leg 400) shut clause (b)** — threshold-free, with the number, on
+an ansatz it **built** rather than surveyed. **W4's only unbroken break clause is now (c)** — a
+target not imposing Clay condition (7), i.e. **the torus, deferred with Lane T.** Both clauses fail
+against **the same pinned `α = 1`**, which is the first time two independent break clauses failed
+against a property of **the object** rather than against a budget, a realization or a seed pool.
+Full record, both clauses and the corrected provenance: **`WALLS.md` §W4.**
+
+**IT IS NOT A WALL MOVEMENT AND NOT A CLAY MOVEMENT.** A wall breaks when a clause *succeeds*.
+**No `L1→L4` link moved for either unit; Clay stays ~0.05%; Tier 2 is never a proof.**
+
+**THE W3 WORDING ESCALATION IS RULED AND OFF THE DESK** (Q1–Q5, below, and `WALLS.md` §W3): the
+prose test governs, **W3 STANDS**, Lane V's premise **survives**, the cell stays **OCCUPIED** by
+`arXiv:2509.25116`, and the two are **different claims**. Narrative of the flag that became a
+measurement, verbatim: `reports/ORCH_STATE.md` Superseded LIVE blocks.
+
+## §STATE-WAVE9 — retired VERBATIM from `STATE.md` 2026-09-09 (leg 422, arc 6 `U6`) under §3j
+
+## WAVE 9 — **DISPATCHED 2026-08-19, then the RUN WAS STOPPED BY USER DIRECTIVE.** Plan `11abd04`.
+
+**Legs 413–416: `L5-cmod` (Lane L, construction, opened the wave) ‖ `P4-DRAFT` ‖ `P2-DRAFT` ‖ `V-W8` (verifier, last).** Dispatched **before** the wind-down directive reached the Conductor; the directive forbids `TaskStop`, so they ran to their pre-committed gates. **NOT recorded as `PLANNED, NOT DISPATCHED` — that would be false.** `writeup/waves/WAVE9_PLAN.md` carries every gate.
+
+**ALL FOUR RETURNED AND ARE INTEGRATED.** `L5-cmod` → `§58`; `P4-DRAFT` → `§57`; `P2-DRAFT` → `§55`; `V-W8` → `§56`. **Four of those six `CORRECTIONS.md` sections are corrections to the Conductor's own record.** `§53`'s `×130` **WITHDRAWN as arithmetic** (repaired `×18`, bracket `×5.4`–`×155`; its conclusion survives). `§45`'s `32 of 49` is **UNBANKED**. **No `NO` reopened, no wall moved, no `L1 → L4` link moved.**
+
+⚠ **`L5-cmod`'s literal pre-committed rule returned `UNDER-RESOURCED` and the board carries that.** `§53`'s flag is discharged **only** where directly measured: 5 more decades move `c_mod` by `3.19e-06` relative. The saturation claim rests on a **post-hoc discriminant** (slope `−1.9900`) with a **pre-planted** control (`X2` → `−3.65e-08`), and is recorded at that status, **not** as a `NO`. `c_mod` is **not route 4's number** — route 4 has no banked profile.
+
+⚠ **`L5-cmod`'s OWN EVIDENCE CHECK `E5` FAILED, and it reported AFTER `§58` was written** (`41b0ace`, §59). `n_s` `6→12` moves the per-decade increment `×1.855293`; control `X4` did not fire as planted. §58's word **CONTROLLED is WITHDRAWN** and its 7-digit `relative_change` withdrawn as a quoted figure — the discharge survives in direction and order of magnitude only; `c_mod` is defensible to `869.288`. Fix `~0.2 core-h`, gate pre-committed, parked `OPTIONS.md` §G `P0-NS12`, **NOT DISPATCHED**.
+
+⚠ **`E-FE` (leg 408) WAS STILL IN FLIGHT AT THE STOP** — `[57/163]` attempts, 54 partials, branch `main`, last checkpoint `3176b35`. **NO gate answer, NOT citable.** Not stopped; the directive forbade `TaskStop`.
+
+**`L6-e` v2 was HELD FOR CORES and was never dispatched. It is priced and gated in `OPTIONS.md`, not in a brief.**
+
+## §STATE-WAVE7-EFE — retired VERBATIM from `STATE.md` 2026-09-09 (leg 422, arc 6 `U6`) under §3j
+
+## WAVE 7 — **CLOSED; whole block retired VERBATIM 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE7-CLOSE.**
+
+**`E-FE` (leg 408) LANDED `1f27071`, the run's last unit, `UNVERIFIED`.** **`ANY_ROW_RECOVERS_IN_ANY_DRAW = NO`** — 160/160 run, 7 converged, **0 recovered any named row**; pooled Clopper–Pearson 95% upper `0.02279`. Gate **NOT moved**: `MATCH_S_TOL` stayed `0.05` and widening it to `0.10` is recorded in the pre-registration as a temptation refused. `CORRECTIONS.md` §60. **Closes only the field-draw half of `E-iv`** — the realization gap, `N = 24`, and `R-bank`'s C2/C4 all SURVIVE. 99.99 core-h vs 91 briefed. Tier 2, no link moved.
+
+## §STATE-WAVE6-V5 — retired VERBATIM from `STATE.md` 2026-09-09 (leg 422, arc 6 `U6`) under §3j
+
+## WAVE 6 — COMPLETE 2026-08-19. Retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE6. Audit + §3i: `writeup/waves/WAVE6_CLOSE.md`.
+
+**`V5` `dacc01c`** (leg 402) — both clauses **YES**, VERIFIED by `V-W6`. Row retired VERBATIM → `WALLS_HISTORY.md` §STATE-W6-V5; substance at `WALLS.md` W2/W3.
+
+
+## §W4-L6-LADDER — the `§51` under-claim paragraph, retired VERBATIM from `WALLS.md` 2026-09-09 (leg 422, arc 6 `U6`) under §3j
+
+**⚠⚠ AND THE LADDER THAT `L6`'s `NO` RESTS ON HAS NEVER BEEN MEASURED AT AN ADEQUATE BUDGET —
+`V-W7` (leg 412), `CORRECTIONS.md` §51. THIS IS AN UNDER-CLAIM, NOT A WRONG NUMBER: every figure
+below was already banked, in two different units, and no one divided one by the other.**
+`L6` refined four rungs with **every rung stopped at 800 iterations**: `ρ` `1.6986514 → 1.6138112`,
+**`−4.994561%`**. `L6-b` then raised the cap `×25` at `n_dof` **FIXED**: `1.6138112 → 1.5048519`,
+**`−6.751678%`**. **One budget step moved the objective `×1.3518` of the ENTIRE refinement ladder.**
+So the ladder differences rungs at a cap that dominates them — *"not decreasing under refinement"*
+is not established, in either direction. **It can also INVERT:** `J3` (`Nr = 16`, 2400 dof) reads
+`1.6218750` at 800 and needs **`7.2153%`** to fall below `J4@20,000 = 1.5048519`; **`6.7517%` is
+measured one rung up at MORE dof. Margin `0.46` percentage points.** `L6`'s `NO` is NOT overturned —
+it is left resting on an ordering never measured where the ordering means anything. → **`L6-e`**,
+one rung, `J3` to 20,000, **~20–35 core-h**, gate pre-committed at §51, **wave 9**. `W4` UNMOVED.
+
+
+## §W4-JDIV — the `§52`/`§53` divergent-functional paragraph, retired VERBATIM from `WALLS.md` 2026-09-09 (leg 422, arc 6 `U6`) under §3j
+
+**⚠⚠⚠ AND THE FUNCTIONAL ITSELF IS A DIVERGENT INTEGRAL — `L-JVER` (leg 409, `2acaa9e`),
+`CORRECTIONS.md` §52, Conductor's landing audit §53. THE LARGEST STRUCTURAL FINDING IN THIS RECORD.**
+An independently built `J` agrees with `L6`'s to `1.0e-4`/`1.2e-4` at both **minimisers** and
+disagrees by **42.9%** at a non-minimiser (`78%` at a random point). **Neither program is miscoded:**
+the unit's own operator on **`L6`'s nodes and `L6`'s weights** reproduces `J_L6` to `1e-14` at all
+four points, P3 included (`X9`). The whole gap is the **quadrature rule** — so
+`J(c) = ∫‖W(·,s)‖_{L^{3/2}} ds` is **logarithmically divergent**, at `r→∞` (`w_s ~ ∂_s A/r²`
+survives the DSS annihilation) and at `r→0` (`l = 1`, `Δ²(r²Y₁ₘ) ~ r⁻²`). **Every finite `J` in this
+record is a value of `L6`'s 72-node, `r ∈ [5.5e-4, 7.27e3]` truncation, not of the functional.**
+**Conductor, at primary and going further:** the divergence is present **AT THE MINIMISER** —
+`+6.226e-5`, `+6.246e-5`, `+6.212e-5` per decade over `r_max` `1e6→1e14`, **three bands agreeing to
+<1%**, so `ρ = 1.6138` has **no limit**; the same signature `PB2` measured for `∫|U|³`. **BUT THE
+SIGN IS POSITIVE:** less truncation ⟹ LARGER `ρ` ⟹ FURTHER from `ρ < 1.45`. **`L6`'s `NO` and
+`L6-b`'s `NO` SURVIVE — the numbers do not.** And §52 does **NOT** subsume §51: the divergence
+coefficient is **×130 smaller** than the last ladder step, so the ladder's flatness is still §51's
+iteration cap. **Two independent defects in the same four numbers.** `L5`'s `c_mod = 869.288`
+FLAGGED (its ρ-exponent `0.000109` "saturation" is exactly what a log divergence fits to, and its
+sweep stops ~3 decades short; last two increments **positive**) — **not adjudicated; sweep owed.**
+**`W4` clause (b) NOT affected** — `PB2` closes it on Tsai Thm 2 hypotheses measured directly;
+`c_mod`/`J`/`curl F` appear nowhere in its artefact (Conductor searched). **`W4` UNMOVED. No `L1→L4`
+link moved either way. Nothing here says a blow-up profile does or does not exist.**

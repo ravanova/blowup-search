@@ -27,6 +27,30 @@ direction check (seven questions, in every integration commit, per unit); **§3j
   `CLAY_OBLIGATIONS.md` §6 names the two obligations with **no known method**.
 - **Clay odds ~0.05%**, unmoved. **No `L1 → L4` link has EVER moved, in over 410 legs.** **The cheapest unit that could move one: NO SUCH UNIT IS KNOWN** — `CLAY_OBLIGATIONS.md` §6 names two obligations with **no known method**, every landed unit is Tier 2, and nothing in `OPTIONS.md` is priced to deliver a certified result.
 
+## ⚠⚠ ARC 6 — RAN 2026-09-09 IN §3f SOLO, legs 417–422. **SIX GATES ANSWERED. NO WALL MOVED. NO `L1→L4` LINK MOVED. CLAY ~0.05%.**
+
+Charter `writeup/5_outpaced/TECHNICAL_OUTPACED.md` §5. **Every gate below is `UNVERIFIED` under §3f
+rule 1 — one session measured and wrote its own answers.** Findings, corrections and ceilings:
+`writeup/CORRECTIONS.md` **§61–§65**; the quartet is `writeup/6_adjudicated/`.
+
+| unit | gate answer, in its own words | artefact |
+|---|---|---|
+| **`U1`** 417 ACQUIRE | **`DIFFERS-AS-FOLLOWS`** — 8 agreements, 7 differences. **`D3`: `(D)` IS CLAIMED**, Cor 10.6, so `TECHNICAL_OUTPACED.md` §5's *"(D) is the nearest **unclaimed** statement"* is **false on the manuscript's text**. §61 | `arc6_acquire_v1.json` |
+| **`U2`** 418 LEAN | (a) **`NOT-ESTABLISHED`**, blocker measured: the mathlib olean cache host is **egress-denied**; (b) **it IS Fefferman (C)+(D), byte-identical to DeepMind's Formal Conjectures**, and **strictly weaker than Thm 1.1**; (c) **source-level YES, kernel-level NOT ESTABLISHED**, 0 `sorry` in a 580-module closure; (d) **theorem fully, argument not measurably** — 15 of 25 cited labels exist in NEITHER manuscript. §62 | `arc6_lean_v1.json` |
+| **`U3`** 419 SKELETON | **`PARTLY`** — the forcing DOES buy the escape (§3.5, *"we set `f = R(u,p)`"*), and (5) costs 3 lines while **buying compact support costs 78.9% of the manuscript**. Leg 381 SPLIT: *"buys no escape"* wrong, *"not a shortcut"* right. §63 | `arc6_skeleton_v1.json` |
+| **`U4`** 420 INSTANTIATE | **`YES` on the measurement** (`−1.498218` vs pre-committed `−1.51`, tol `0.05`, spread `2.1e-07`) — **and the pre-committed CONJUNCTION is UNMET**: control `C2` failed because **my own pre-registration's formula omitted axial diffusion**. Not re-scored. §64 | `arc6_instantiate_v1.json` |
+| **`U5`** 421 **DOES W4 MOVE?** | **`NO`.** (a1) energy CONVERGES ✓, (a2) blows up by construction ✓, **(a3) FALSE twice**: core residual exactly `−1.500000`; and on a counterfactual granting an exact profile the cutoff force is **LOGARITHMICALLY UNBOUNDED** (`b = 0.743203`/decade, log `R²` beats power `R²`). **`W4` STANDS. No escalation raised.** §65 | `arc6_w4_port_v1.json` |
+| **`U6`** 422 LAND | this row, the quartet, `reports/ORCH_STATE.md`, and these retirements | `writeup/6_adjudicated/` |
+
+**TWO NEW MEASUREMENTS THIS REPOSITORY DID NOT HAVE.** `α = −1.000004` on two rays — **an
+independent confirmation of the `α = 1` pin to `4e-6`**, by a route sharing no step with `L2′`/
+`V-W4`'s literature census. And **`δ = 1.974126`**, the far-field **correction** exponent, never
+measured here before; the annulus admissibility question reduces to it.
+
+**`STATE.md` OPEN ITEM 3 IS DISCHARGED.** Fefferman **(8)** and **(9)** are read at primary
+(`U1`). **(9) asks the force for decay in TIME ONLY** and explicitly replaces (4) and (5). Confirms
+leg 390's machine-read: **(D) carries no condition (7)**.
+
 ## THE LANES — **RE-RANKED 2026-08-19 AT THE STOP, on what is measured NOW** (order unchanged; Lane L DEMOTED); re-earned per unit under §3i
 
 Ruling: `writeup/escalations/RULING_C1_EXEMPLAR_2026-08-14.md`. Deferred options keep their cost and
@@ -62,22 +86,15 @@ maintainer or list remains HELD.**
 
 ---
 
-## ⚠ 2026-08-18 — W4 HAS ONE BREAK CLAUSE LEFT, AND THE OTHER TWO ARE SHUT, **(b) VERIFIED**
+## ⚠ W4 — TWO BREAK CLAUSES SHUT, (b) VERIFIED; CLAUSE (c) IS STATEMENT (D), LANE T's, DEFERRED
 
-`L2′` shut clause **(a)**; **`L5` (leg 400) shut clause (b)** — threshold-free, with the number, on
-an ansatz it **built** rather than surveyed. **W4's only unbroken break clause is now (c)** — a
-target not imposing Clay condition (7), i.e. **the torus, deferred with Lane T.** Both clauses fail
-against **the same pinned `α = 1`**, which is the first time two independent break clauses failed
-against a property of **the object** rather than against a budget, a realization or a seed pool.
-Full record, both clauses and the corrected provenance: **`WALLS.md` §W4.**
+`L2′` shut (a); `L5` (leg 400) shut (b), re-verified by `PB2` (leg 410) on **Tsai 1998 Thm 2**. Both fail
+against **the same pinned `α = 1`** — the first time two independent clauses failed against a property of
+**the object**. **NOT a wall movement and NOT a Clay movement.** Full record: **`WALLS.md` §W4**; block
+retired verbatim 2026-09-09 → `WALLS_HISTORY.md` §STATE-W4-2026-08-18.
 
-**IT IS NOT A WALL MOVEMENT AND NOT A CLAY MOVEMENT.** A wall breaks when a clause *succeeds*.
-**No `L1→L4` link moved for either unit; Clay stays ~0.05%; Tier 2 is never a proof.**
-
-**THE W3 WORDING ESCALATION IS RULED AND OFF THE DESK** (Q1–Q5, below, and `WALLS.md` §W3): the
-prose test governs, **W3 STANDS**, Lane V's premise **survives**, the cell stays **OCCUPIED** by
-`arXiv:2509.25116`, and the two are **different claims**. Narrative of the flag that became a
-measurement, verbatim: `reports/ORCH_STATE.md` Superseded LIVE blocks.
+**THE W3 WORDING ESCALATION IS RULED AND OFF THE DESK** — the prose test governs, `W3` STANDS, Lane V's
+premise survives, the cell stays OCCUPIED by `arXiv:2509.25116`, and the two are different claims.
 
 ## Landed — what the record actually holds
 
@@ -115,27 +132,12 @@ The rule it produced is live in
 
 **The two items that outrank every wave-8 gate: `CORRECTIONS.md` §51 (the under-claim — a refinement ladder and a budget step measuring the same objective, never divided, for eleven legs) and §53 (THE SIGN IS POSITIVE, which is the only reason three `NO`s survive).** §54 reproduces §52/§53 bit-identically on a 2.51× slower box.
 
-## WAVE 9 — **DISPATCHED 2026-08-19, then the RUN WAS STOPPED BY USER DIRECTIVE.** Plan `11abd04`.
+## WAVES 6, 7, 9 — CLOSED. Blocks retired VERBATIM 2026-09-09 → `WALLS_HISTORY.md` §STATE-WAVE9, §STATE-WAVE7-EFE, §STATE-WAVE6-V5.
 
-**Legs 413–416: `L5-cmod` (Lane L, construction, opened the wave) ‖ `P4-DRAFT` ‖ `P2-DRAFT` ‖ `V-W8` (verifier, last).** Dispatched **before** the wind-down directive reached the Conductor; the directive forbids `TaskStop`, so they ran to their pre-committed gates. **NOT recorded as `PLANNED, NOT DISPATCHED` — that would be false.** `writeup/waves/WAVE9_PLAN.md` carries every gate.
-
-**ALL FOUR RETURNED AND ARE INTEGRATED.** `L5-cmod` → `§58`; `P4-DRAFT` → `§57`; `P2-DRAFT` → `§55`; `V-W8` → `§56`. **Four of those six `CORRECTIONS.md` sections are corrections to the Conductor's own record.** `§53`'s `×130` **WITHDRAWN as arithmetic** (repaired `×18`, bracket `×5.4`–`×155`; its conclusion survives). `§45`'s `32 of 49` is **UNBANKED**. **No `NO` reopened, no wall moved, no `L1 → L4` link moved.**
-
-⚠ **`L5-cmod`'s literal pre-committed rule returned `UNDER-RESOURCED` and the board carries that.** `§53`'s flag is discharged **only** where directly measured: 5 more decades move `c_mod` by `3.19e-06` relative. The saturation claim rests on a **post-hoc discriminant** (slope `−1.9900`) with a **pre-planted** control (`X2` → `−3.65e-08`), and is recorded at that status, **not** as a `NO`. `c_mod` is **not route 4's number** — route 4 has no banked profile.
-
-⚠ **`L5-cmod`'s OWN EVIDENCE CHECK `E5` FAILED, and it reported AFTER `§58` was written** (`41b0ace`, §59). `n_s` `6→12` moves the per-decade increment `×1.855293`; control `X4` did not fire as planted. §58's word **CONTROLLED is WITHDRAWN** and its 7-digit `relative_change` withdrawn as a quoted figure — the discharge survives in direction and order of magnitude only; `c_mod` is defensible to `869.288`. Fix `~0.2 core-h`, gate pre-committed, parked `OPTIONS.md` §G `P0-NS12`, **NOT DISPATCHED**.
-
-⚠ **`E-FE` (leg 408) WAS STILL IN FLIGHT AT THE STOP** — `[57/163]` attempts, 54 partials, branch `main`, last checkpoint `3176b35`. **NO gate answer, NOT citable.** Not stopped; the directive forbade `TaskStop`.
-
-**`L6-e` v2 was HELD FOR CORES and was never dispatched. It is priced and gated in `OPTIONS.md`, not in a brief.**
-
-## WAVE 7 — **CLOSED; whole block retired VERBATIM 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE7-CLOSE.**
-
-**`E-FE` (leg 408) LANDED `1f27071`, the run's last unit, `UNVERIFIED`.** **`ANY_ROW_RECOVERS_IN_ANY_DRAW = NO`** — 160/160 run, 7 converged, **0 recovered any named row**; pooled Clopper–Pearson 95% upper `0.02279`. Gate **NOT moved**: `MATCH_S_TOL` stayed `0.05` and widening it to `0.10` is recorded in the pre-registration as a temptation refused. `CORRECTIONS.md` §60. **Closes only the field-draw half of `E-iv`** — the realization gap, `N = 24`, and `R-bank`'s C2/C4 all SURVIVE. 99.99 core-h vs 91 briefed. Tier 2, no link moved.
-
-## WAVE 6 — COMPLETE 2026-08-19. Retired verbatim 2026-08-19 → `WALLS_HISTORY.md` §STATE-WAVE6. Audit + §3i: `writeup/waves/WAVE6_CLOSE.md`.
-
-**`V5` `dacc01c`** (leg 402) — both clauses **YES**, VERIFIED by `V-W6`. Row retired VERBATIM → `WALLS_HISTORY.md` §STATE-W6-V5; substance at `WALLS.md` W2/W3.
+Live residue, one line each: **`L5-cmod`'s literal rule returned `UNDER-RESOURCED`** and its own evidence
+check `E5` **FAILED** (§58's *CONTROLLED* withdrawn; `c_mod` defensible to `869.288`) · **`E-FE` (leg 408)
+LANDED `1f27071`, `ANY_ROW_RECOVERS_IN_ANY_DRAW = NO`, 0/160, pooled CP-95 upper `0.02279`, gate NOT moved**
+· **`V5` (leg 402) both clauses `YES`, VERIFIED by `V-W6`** · `L6-e` v2 priced in `OPTIONS.md`, never dispatched.
 
 ## Open — needs the user, not a task
 

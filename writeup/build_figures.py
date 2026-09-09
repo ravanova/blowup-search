@@ -359,6 +359,11 @@ def fig_route_ivax_v1():
 #                                rather than either passing quietly or taking the whole
 #                                figure rebuild down with it on a fresh clone.
 P2_EVIDENCE = [
+    # fig112 -- arc 6 / U5 (leg 421): the cutoff-generated force is logarithmically
+    # unbounded while the energy converges, both with the same tiny power exponent.
+    # The script also RUNS all five arc-6 unit evidence checks and cross-checks every
+    # number in writeup/6_adjudicated/*.md against the five curated JSONs.
+    "6_adjudicated/adjudicated_evidence.py",       # fig112 -- arc 6 U5 (leg 421)
     "4_p2_lottery/p2_route_tc_v1_evidence.py",      # fig48 -- Route-TC v1 (leg 53)
     # Legs 54-57 keep their evidence scripts in experiments/ (their declared territory in
     # DIRECTION.md) rather than beside their writeups like leg 53's -- these paths are

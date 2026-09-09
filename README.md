@@ -9,25 +9,47 @@ evolutionary (quality-diversity) search over initial data, and now with
 **computer-assisted certification** of self-similar blow-up profiles. Every
 claim in the repository is tiered, gated, and rebuildable from committed data.
 
-> ## ▶ Start here: [the conclusion of the search programme](writeup/5_outpaced/BLOG_OUTPACED.md)
+> ## ▶ Start here: [arc 6 — what we can actually say about the claim](writeup/6_adjudicated/BLOG_ADJUDICATED.md)
 >
 > **2026-09-09.** On 2026-09-08 a 166-page manuscript and a Lean project claimed
 > finite-time blowup for the **forced** 3D Navier–Stokes equations on `ℝ³` —
 > **Fefferman's Alternative (C)**, the statement this programme was aiming at.
-> Arc 5 is the concluding writeup: what was claimed and at what status (it is
-> **UNVERIFIED here** — not audited at full text, not reproduced, no Lean file
-> compiled), how long this plan would have taken to arrive, and the four
-> structural reasons it would not have. Its substantive finding is about this
-> repository: **leg 381 identified the forcing relaxation in statement (C) and
-> priced it away in a subordinate clause.**
+> **Arc 6 read it at primary**: six gates, six legs, one session, `§3f` SOLO.
 >
+> **What arc 6 establishes.** The statement is (C), and it **claims (D) too** —
+> which arc 5 had recorded as untouched, and which is the only unbroken way this
+> repository's own wall `W4` can break. The Lean project's top-level statement
+> **is** (C) and (D), and its definitions are **byte-identical to Google
+> DeepMind's independent formalisation** of the Clay problem — checked here
+> against the upstream source, not against the comment that says so. Its
+> 580-module dependency graph is `sorry`-free at source level.
+>
+> **What arc 6 does NOT establish.** That the proof is correct. Sections 4–9 were
+> **not read** and the Lean was **not compiled** — the build is blocked on a host
+> this environment's egress policy denies, which is reported and not routed
+> around. Nothing here suggests the proof is wrong either.
+>
+> **And the part that is ours.** The manuscript's residual-absorption mechanism
+> was ported onto this repository's own banked object, with every advantage
+> granted to it. **`W4` does not break**, and the reason is measured twice — once
+> at exactly `−1.500000`, and once as a **logarithm** that a power-law fit reads
+> as *bounded*. A logarithm this repository flagged **in advance**, in the
+> pre-registration, because it has been fooled by one twice before.
+>
+> [BLOG_ADJUDICATED.md](writeup/6_adjudicated/BLOG_ADJUDICATED.md) ·
+> [TECHNICAL_ADJUDICATED.md](writeup/6_adjudicated/TECHNICAL_ADJUDICATED.md) ·
+> [five curated JSONs](writeup/data/) · fig112
+>
+> **Every arc-6 gate is `UNVERIFIED`** — §3f rule 1: verification is a fresh
+> session or it is not verification, and one session measured all of this and
+> wrote its own answers. **No wall moved. No `L1 → L4` link moved. Clay stays
+> ~0.05%. Tier 2 is never a proof.**
+>
+> *Arc 5, the concluding writeup of the search programme itself —
 > [BLOG_OUTPACED.md](writeup/5_outpaced/BLOG_OUTPACED.md) ·
-> [TECHNICAL_OUTPACED.md](writeup/5_outpaced/TECHNICAL_OUTPACED.md) ·
-> [curated data](writeup/data/arc5_outpaced_v1.json)
->
-> **One arc remains after it.** Arc 6's candidates and their pre-committed gates
-> are in the technical note, **proposed and not ruled**. Nothing in arc 5 makes
-> any Tier-2 result a proof, and no `L1 → L4` link moved.
+> [TECHNICAL_OUTPACED.md](writeup/5_outpaced/TECHNICAL_OUTPACED.md) — is the arc
+> before it, and arc 6 corrects two of its readings:
+> [`CORRECTIONS.md` §61 and §63](writeup/CORRECTIONS.md).*
 
 > **Status, stated plainly.** ~~146 legs in~~ (**stale — 416 legs at the
 > 2026-08-19 stop**), nothing here resolves the Clay
