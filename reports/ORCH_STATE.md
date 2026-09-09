@@ -33,7 +33,62 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — §3f SOLO. **ARC 6 RAN AND LANDED 2026-09-09, legs 417–422. NO SUCCESSOR SCHEDULED.**
+## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–430. WAVE 1 IN FLIGHT (dispatched 2026-09-09).**
+
+**Mode:** `ORCHESTRATION.md` **§3g CONDUCTOR**, wave sizing **5** by user ruling (recorded in §3g
+beside its original reason; `CORRECTIONS.md` §67). The charter arrived while `R3` was mid-flight
+under the solo charter; `R0`–`R2` (legs 423–425) were already on `main`. The conductor charter is
+applied **forward** (§67): landed units are not redone; `R2` is **re-read by five fresh shards** and
+reconciled; `R3` stayed the Conductor's serial unit and has landed (this commit).
+
+**Gates answered so far, all `UNVERIFIED`:** `R0` §66/§67 · `R1` `NO-AND-HERE-IS-THE-DIFF` strictly,
+`MATCH` after six named rules · `R2` (solo) (a) `YES` 79/79, (b) `YES`, (c) 13 hard-page notes ·
+`R3` acyclic `YES`, complete `NO-AND-HERE-ARE-THE-DANGLING-NODES` (Remark B.9; 134 labels in
+unnumbered prose; **Propositions 9.5/9.6 never cited by anything downstream**), spine through
+§4/§7/§9 **refuted by citation, confirmed by equation**, prereg 4 of 8 (§68).
+
+**WAVE 1 — dispatched 2026-09-09, five agents, each in its own git worktree, each writing ONE file
+and committing it on its worktree branch (not pushed):**
+
+| slot | unit | brief | writes | status |
+|---|---|---|---|---|
+| 1 | `R2` shard A | §§1–3 preamble + §4 pp 24–44, 11 + 4 preamble statements | `writeup/data/arc6/ledger/shard_A.json` | in flight |
+| 2 | `R2` shard B | preamble + §5–§6 pp 45–72, 11 + 4 | `…/shard_B.json` | in flight |
+| 3 | `R2` shard C | preamble + §7–§8, App C pp 73–99, 157–164, 19 + 4 | `…/shard_C.json` | in flight |
+| 4 | `R2` shard D | preamble + §9–§10 pp 100–125, 15 + 4 | `…/shard_D.json` | in flight |
+| 5 | `R2` shard E | preamble + App A–B pp 126–156, 19 + 4 | `…/shard_E.json` | in flight |
+
+Every shard was **forbidden to open the solo ledger, `dag.json`, `leg_425.md`, `leg_426*.md` or
+`CORRECTIONS.md`**, told that *"I could not determine X, because Y"* is acceptable and inventing X is
+not, and required to name its hard pages. **All five also ledger the four preamble statements**, so
+the five-way agreement on Theorem 1.1 / Theorem 3.1 / Definitions 3.2–3.3 is a direct measurement
+of reader variance for gate (d).
+
+**Integration plan for wave 1 (the Conductor's, serial):** merge shards → `ledger/merged.json`;
+reconcile against `ledger.json` field by field (hypotheses, conclusion, constants, cites); every
+disagreement classified *paper* / *solo read* / *shard read*, banked, and summarised as gate (d);
+solo `ledger.json` is **not edited**. A shard with `stopped_at_page` set is re-dispatched from there.
+
+**Composition floor (§3g):** the wave's five slots are audit; the floor is met by the Conductor's
+serial units in the same wave — `R3` (landed) and **`R5`(i)–(ii)**, the leading-order vortex and its
+residual stress, which is the `W4` attack and is SERIAL by charter. **Two defects of this wave,
+recorded:** the dispatch preceded the `STATE.md` wave row (§3g step 1 says commit the plan first);
+and the audit load of five shard merges lands on one context — if it becomes the bottleneck, that
+is measured here, not hidden.
+
+**NEXT (pre-committed):** `R5`(i) pre-registration → runner (serial, mine) while wave 1 reads; then
+wave 2 = **`R4` fan-out ×5** on the **58-node spine** banked in `dag.json` (`r4_spine`), partition in
+`leg_426.md` §5, slot 5 = adversarial verifier, outputs `writeup/data/arc6/spine/<agent>.json`;
+gate: per-node `CHECKED`/`GAP`/`NOT-CHECKED`, verifier agreement rate, `VERIFIED` only where the
+verifier reproduced it blind. **Any `GAP` believed to sink the theorem is escalated, never published.**
+
+**Open escalations:** the five rows above, unchanged; row 1 still carries `U1`'s measured fact and
+is still not ruled. **Lean source build** from leg 418 (`lean_build.log`): not re-checked this wave;
+`R6` owns it. **No wall moved. No `L1→L4` link moved. Clay ~0.05%.**
+
+## Superseded LIVE block — §3f SOLO, arc 6 first pass; demoted 2026-09-09 at wave 1 of the conductor pass (§3j). **Verbatim. Nothing edited.**
+
+_Was:_ LIVE — §3f SOLO. **ARC 6 RAN AND LANDED 2026-09-09, legs 417–422. NO SUCCESSOR SCHEDULED.**
 
 **Mode:** `ORCHESTRATION.md` **§3f SOLO** — one instance, one task at a time. **No subagents were
 spawned; the Task/Agent tool was not used.** The four-slot contract, the DM, the orchestrator and

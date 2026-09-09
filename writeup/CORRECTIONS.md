@@ -5048,3 +5048,42 @@ pure audit.
 **What this section does NOT do.** It does not re-number legs 423–425, does not re-open their gates,
 and does not mark anything `VERIFIED`: the solo answers stay `UNVERIFIED` until a fresh agent that
 never saw them reproduces them. **No wall moved. No `L1 → L4` link moved. Clay ~0.05%.**
+
+---
+
+## §68 — `R3` (leg 426, arc 6): **the pre-registered citation graph refuted its own expectation — four of eight — and the refutation is a finding about the manuscript's citation discipline, not about the mathematics.** Two post-hoc passes were added and are labelled post hoc.
+
+**Unit:** `R3`, arc-6 conductor charter, MATHEMATICS, SERIAL. **Prereg:** `leg_426_prereg.md` at
+`15fc747`. **Artefact:** `writeup/data/arc6/dag.json`. **Journal:** `leg_426.md`.
+
+### What was pre-committed, and what fell
+
+The prereg fixed one graph (the R2 ledger's `cites` under five named rules), a 38-node judgment
+spine (its summary line says 36 — a miscount, banked and not edited), and eight numeric
+expectations. **The pre-registered pass passed 4 of 8:** acyclic, chain ≥ 8, a dangling `Remark
+B.9` — but the closure of Theorem 1.1 was **56**, not ≥ 60; **23** statements outside, not ≤ 8;
+and **§7 was absent from the spine**, refuting the charter's own expectation at that granularity.
+
+### What was changed after the graph existed, and why it is recorded here
+
+1. **Two further passes were designed after seeing the first**: one from the manuscript's proof
+   blocks (no ledger input), one resolving displayed-equation labels to the statements that display
+   them. They are labelled `post hoc` in the artefact and the journal; their numbers were not
+   pre-committed. They agree with the first pass on the finding and change its reading: **by
+   statement citation §7 is unreachable from Theorem 1.1; by equation label it is reached through
+   Definition 9.4 → Proposition 9.3.**
+2. **A classifier class `LOCATION` was added** after the first run: *"proved in Section 4.6"* had
+   been reported as a dangling node. It is the location of a proof, which the prereg's own `DEP`
+   row already covered. A false finding was removed; the removal is named here.
+3. `test_arc6_dag.py`'s `C4` asserted the hoped-for numbers and was rewritten to assert the banked ones.
+
+### The finding, stated once
+
+**Propositions 9.5 and 9.6 — stage 0 and the inductive step of the correction cycle — are never
+cited by any statement downstream of them**, by name or by an equation they display; they are named
+only in the outline, the notation table and section introductions. The summation (`Lemma 9.7`,
+`Lemma 9.8`, `Proposition 9.9`) uses *"the finite corrections above"* and `Definition 9.4`'s displayed
+bounds. Six more mean-correction statements (`8.4`, `8.5`, `8.6`, `8.8`, `7.8`, `6.3`) are used only
+inside those two proofs and are therefore also outside the closure. **The graph cannot say whether
+the summation's hypotheses are discharged without them; `R4` can.** Nothing here is a claim about
+correctness. **No wall moved. No `L1 → L4` link moved. Clay ~0.05%.**
