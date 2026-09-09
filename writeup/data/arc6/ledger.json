@@ -2,7 +2,7 @@
  "schema": "arc6_ledger_v1",
  "leg": 425,
  "cursor": {
-  "read_through_page": 99,
+  "read_through_page": 115,
   "sections_done": [
    "1-2",
    "3",
@@ -10,7 +10,8 @@
    "5",
    "6",
    "7",
-   "8"
+   "8",
+   "9"
   ]
  },
  "entries": [
@@ -1173,6 +1174,280 @@
    ],
    "role": "The contraction estimate for the moment correction: one application of the five-dimensional map replaces defects of size eps^alpha by defects of size eps^{alpha + 0.9 - 2 kappa_s}. This is the gain the correction cycle in Prop 9.6 iterates; the thresholds 0.9 and 1.9 are the entry conditions on the current corrections.",
    "page": 98
+  },
+  {
+   "id": "Proposition 9.1",
+   "kind": "Proposition",
+   "section": "9",
+   "hypotheses": [
+    "a fixed label, m in Z \\ {0}, alpha real; f_m in W_alpha satisfying the support and smooth-extension hypotheses of Proposition 7.2, with f_m e^{ikm Phi} extending smoothly by zero outside the fixed local rectangle including pulse endpoints",
+    "(t_m, pi_m) the solution of L_m(t_m, pi_m) = -f_m with L_m(a,pi) = Q^{1+h} N_abs a + K a + eps k^2 m^2 |n_Phi|^2 a + i k m n_Phi pi (9.1); or a homogeneous pulse t_m in W_alpha with f_m = 0",
+    "potential and pressure multiplied by the pulse cutoff psi, then curl taken as in (7.38)"
+   ],
+   "conclusion": "The normalized linear residual, after adding back the prescribed source f_m e^{ikm Phi}, belongs to W_{alpha + 1/2 - 3 kappa_s}, apart from additive pulse-cutoff tails whose Cartesian space-time derivatives vanish to infinite order as q -> 0 (flat: C Q^{-M} S_*^P e^{-c S_*} with S_* = l^2, Q = 2^{-l}). The pressure amplitude pi_m lies in W_{alpha + 1/2}.",
+   "constants": [
+    "gain table p. 102 for the remainder (9.2): slow transport 1 - kappa_s; phase transport defect 1/2; base derivatives and connections 1; pressure-amplitude gradient 1/2 - kappa_s; viscous amplitude derivatives 1 - 2 kappa_s; mixed derivatives and phase divergence 1/2 - kappa_s; viscous angular connection 1/2; common lower bound 1/2 - 3 kappa_s",
+    "eps k^2 = O(1)"
+   ],
+   "cites": [
+    "(7.4)",
+    "(7.5)",
+    "(7.9)",
+    "(7.38)",
+    "(7.39)",
+    "(9.1)",
+    "(9.2)",
+    "(6.6)",
+    "Proposition 7.2",
+    "Lemma 7.7"
+   ],
+   "role": "The linear residual estimate for one curl-generated pulse correction: the amplitude equation removes the principal part and the leftover linear terms gain at least 1/2 - 3 kappa_s. It is the first row of every exponent table in the correction cycle (Prop 9.6 Step 1).",
+   "page": 101
+  },
+  {
+   "id": "Lemma 9.2",
+   "kind": "Lemma",
+   "section": "9",
+   "hypotheses": [
+    "w a wave in W_alpha; v a mean field with tangential components in M_mu and radial component in M_{mu+1}",
+    "for two waves: w, w' curl-generated with the same label and exponents alpha, alpha'; (w . nabla_*) denotes cylindrical transport with normalized derivatives (D_r, R^{-1} d_theta, D_z) including differentiation of the frame"
+   ],
+   "conclusion": "The nonzero harmonics of (w . nabla_*) v + (v . nabla_*) w belong to W_{alpha + mu - 1/2}. For two waves of one label the nonzero harmonics of (w . nabla_*) w' + (w' . nabla_*) w belong to W_{alpha + alpha' - kappa_s} and the zero harmonic to M_{alpha + alpha' - kappa_s}. Distinct labels have zero products on their closed supports.",
+   "constants": [
+    "mean advection of a wave phase costs k = O(eps^{-1/2}), i.e. the 1/2 loss",
+    "the apparent half-power loss in wave-wave phase transport is cancelled by the longitudinal estimate (7.39)",
+    "P_v^2 <= P_v"
+   ],
+   "cites": [
+    "(7.39)",
+    "Lemma 6.1",
+    "Lemma 7.7"
+   ],
+   "role": "The nonlinear interaction estimates: wave-mean costs half a power, wave-wave costs only kappa_s because incompressibility (7.39) controls the contraction of the advecting amplitude with the phase gradient. These fill rows 2-4 of the exponent tables in Prop 9.6.",
+   "page": 102
+  },
+  {
+   "id": "Proposition 9.3",
+   "kind": "Proposition",
+   "section": "9",
+   "hypotheses": [
+    "j in N_0; (u^[j], p^[j]) obtained from the fixed slow base and primary waves by a finite sequence of: the pulse inverse and curl construction, the signed amplitude map for auxiliary-independent stresses, and the mean maps of Section 8",
+    "pressure reconstructed by (8.12) after each update; all products use the complete velocity fields",
+    "alpha, mu any lower bounds for the wave and mean exponents furnished by Propositions 9.1, 7.2, 6.6, 7.6, Section 8 and Lemma 9.2 along the sequence"
+   ],
+   "conclusion": "There is a physical residual decomposition R(u^[j], p^[j]) = G^[j] + F^[j] (9.3) with: (i) nonzero angular harmonics of G^[j]_* of the form sum_{gamma in Gamma} sum_{m in H_j} f^[j]_{gamma,m} e^{i k_gamma m Phi_gamma}, H_j finite and band-independent, supp(f|E_gamma) in Omega_gamma, f in C^inf(E_gamma^+; C^3) with smooth zero extension, f in W_alpha and <G^[j]_*>_theta in M_mu, and the next pulse inverse is applied exactly to these coefficients; (ii) |F^[j]|_m <= C_{j,m,N} q^N for every fixed j, m, N (9.5), uniform over bands, labels, points; (iii) the exact mean equations (9.6): <G_* + F_* - E_{B,*}>_theta = (D_r p_m - g_r, E_theta, E_z) computed by (8.3) on the complete current tuple.",
+   "constants": [
+    "edge-weight integrals int_0^delta s^{-M} e^{-a/s^2} ds <= C delta^{3-M} e^{-a/delta^2} and |d^k/ds^k e^{-a/s^2}| <= C s^{-3k} e^{-a/s^2}",
+    "amplitude-division bounds recovering (7.33): |D^I (dSigma)_sigma| <= C eps^{alpha-1} S_*^b zeta delta^{-M}, |D^I (a_sigma^{-1})| <= C S_*^b zeta^{-1/2} delta^{-M}"
+   ],
+   "cites": [
+    "(5.41)",
+    "(6.23)",
+    "(6.28)",
+    "(7.25)",
+    "(7.31)",
+    "(7.33)",
+    "(8.12)",
+    "(9.3)",
+    "(9.4)",
+    "(9.5)",
+    "(9.6)",
+    "Lemma 6.2",
+    "Proposition 7.2",
+    "Proposition 7.6",
+    "Proposition 8.1",
+    "Proposition 9.1",
+    "Lemma 8.2",
+    "Lemma 9.2"
+   ],
+   "role": "The invariant that lets the cycle iterate: after any finite sequence of the four operations the residual is still (supported pulse sources satisfying the hypotheses of the pulse inverse) + (a flat additive remainder) + (exact mean balances). Without it the induction of Prop 9.6 has no well-formed input at stage j+1.",
+   "page": 103
+  },
+  {
+   "id": "Definition 9.4",
+   "kind": "Definition",
+   "section": "9",
+   "hypotheses": [
+    "j in N u {0}; real fields of the form (9.7): u_* = (b + beta, V + v, G + gamma) + w, p_* = p_{B,*} + p_m + p_w, <w>_theta = <p_w>_theta = 0",
+    "w a sum of curls of supported wave potentials with the fixed label phases; (beta, v, gamma) the sum of a curl of an azimuthal potential and a direct azimuthal field (both exactly divergence-free); supports, harmonic sets, extensions, and residual decomposition as in Proposition 9.3"
+   ],
+   "conclusion": "A state at stage j satisfies (9.8): G^[j]_wave in W_{B_j}, E_theta, E_z in M_{C*_j}, (P, J_theta, J_z) in S_{C*_j} with B_j = 1/2 + sigma_j, C*_j = 1 + sigma_j, sigma_j = 1/5 + j/10; the cumulative bounds (9.9): w in W_{1/2}, w - w_0^tan in W_0.68, v, gamma, p_m in M_0.9, beta in M_1.9; and the exact moments (9.10): int R^2 <v>_Y dR = 0, int R <gamma>_Y dR = 0. Pressure reconstruction is part of the state; consequently the radial residual is -rho P plus the flat cutoff remainder of Proposition 8.3.",
+   "constants": [
+    "B_j = 0.7 + j/10",
+    "C*_j = 1.2 + j/10",
+    "thresholds 1/2, 0.68, 0.9, 1.9 in (9.9)"
+   ],
+   "cites": [
+    "(8.3)",
+    "(8.12)",
+    "(8.15)",
+    "(9.7)",
+    "(9.8)",
+    "(9.9)",
+    "(9.10)",
+    "Proposition 8.3",
+    "Proposition 9.3"
+   ],
+   "role": "The induction hypothesis of the residual-improvement scheme. The three exponent families (wave, tangential mean, defects) rise by 1/10 per stage while the cumulative bounds (9.9) stay fixed; the fixed bounds are what make interaction estimates with later increments stage-independent.",
+   "page": 106
+  },
+  {
+   "id": "Proposition 9.5",
+   "kind": "Proposition",
+   "section": "9",
+   "hypotheses": [
+    "start with the fixed base and the curls of the primary potentials (7.35)",
+    "perform the temporal mean update (8.20) and the five-equation correction (8.25), reconstructing pressure by (8.12) before and after each update"
+   ],
+   "conclusion": "The resulting fields form a state at stage 0 in the sense of Definition 9.4, with residual orders B_0 = 0.7 and C*_0 = 1.2.",
+   "constants": [
+    "primary transverse amplitudes have exponent 1/2; primary linear residual 1 - 3 kappa_s; nonlinear wave residual 1 - kappa_s; auxiliary-averaged tangential residual after the exact primary covariance cancellation: 1.49 (from 3/2 - kappa_s); H_0 = 1 - kappa_s; defects after the moment update > 1.8 - kappa_s"
+   ],
+   "cites": [
+    "(7.35)",
+    "(8.3)",
+    "(8.12)",
+    "(8.20)",
+    "(8.25)",
+    "(9.11)",
+    "Proposition 7.5",
+    "Definition 9.4"
+   ],
+   "role": "Base case of the induction. Its key input is that the primary covariance of Prop 7.5 cancels the order-zero auxiliary radial-tangential stress exactly (9.11), so the initial auxiliary-averaged tangential residual already has order 1.49 and only the torus-dependent part and the three defects need the two mean updates.",
+   "page": 106
+  },
+  {
+   "id": "Proposition 9.6",
+   "kind": "Proposition",
+   "section": "9",
+   "hypotheses": [
+    "(u^[j], p^[j]) a state at stage j as in Definition 9.4",
+    "the same base, primary amplitudes, supports, and inverse operators are used; pressure reconstructed after each correction; wave and meridional increments realized by potentials, azimuthal mean increments added directly"
+   ],
+   "conclusion": "There is a state (u^[j+1], p^[j+1]) with B_{j+1} = B_j + 1/10 and C*_{j+1} = C*_j + 1/10, obtained by the ordered corrections (i) solve the inhomogeneous amplitude equation for each supported nonzero harmonic; (ii) change the wave amplitudes (signed map L^as of (7.35)) to correct the auxiliary-averaged tangential residual; (iii) apply the temporal mean inverse to the zero-auxiliary-mean part; (iv) apply the five-equation correction to the three defects. The cumulative bounds (9.9) and exact moments (9.10) are preserved.",
+   "constants": [
+    "B = 1/2 + sigma_j, C* = B + 1/2, H = C* - 2 kappa_s",
+    "Step 1 table: linear B + 1/2 - 3 kappa_s; cross with old waves B + 1/2 - kappa_s; self-interaction 2B - kappa_s; cross with mean B + 0.4",
+    "Step 2 table: linear B + 1/2 - 4 kappa_s; mean interaction B + 0.4 - kappa_s; cross B + 1/2 - 2 kappa_s; self 2B - 3 kappa_s; covariance remainders C* + 0.18 - kappa_s, C* + 1/2 - 2 kappa_s, C* + sigma_j - 2 kappa_s; result (9.14) <E>_Y in M_{C* + 0.17}",
+    "Step 3: residual changes in M_{H + 1 - 2 kappa_s}",
+    "Step 4: defects in S_{H + 0.9 - 2 kappa_s} = S_{C* + 0.9 - 4 kappa_s}",
+    "closing inequalities p. 111: min{1/2 - 3 kappa_s, 1/2 - kappa_s, B - kappa_s, 0.4} >= 0.4; H - B = 1/2 - 2 kappa_s > 0.1; min{0.17, 1 - 4 kappa_s} > 0.1; 0.9 - 4 kappa_s > 0.1; B - kappa_s >= 0.69999 > 0.68"
+   ],
+   "cites": [
+    "(7.31)",
+    "(7.35)",
+    "(7.36)",
+    "(8.3)",
+    "(8.12)",
+    "(8.16)",
+    "(8.20)",
+    "(8.25)",
+    "(8.27)",
+    "(9.9)",
+    "(9.10)",
+    "(9.12)",
+    "(9.13)",
+    "(9.14)",
+    "Proposition 7.2",
+    "Proposition 9.1",
+    "Proposition 9.3",
+    "Lemma 9.2",
+    "Lemma 8.6",
+    "Lemma 8.7",
+    "Corollary 7.8"
+   ],
+   "role": "THE inductive step: one full cycle of four corrections raises every residual exponent by exactly 1/10 while the total corrections stay inside (9.9). This is the engine that produces residuals vanishing to every order; the 0.1 gain is the minimum of five explicit margins, the tightest being 0.17 > 0.1 from Step 2 (0.68 - 1/2 - 2 kappa_s) and 0.4 - kappa_s for the wave order.",
+   "page": 107
+  },
+  {
+   "id": "Lemma 9.7",
+   "kind": "Lemma",
+   "section": "9",
+   "hypotheses": [
+    "the finite partial sums of Definition 9.4 / Proposition 9.6, before applying summation cutoffs; fixed background, primary amplitudes, positive lower bound for |n_Phi|, primary covariance, and fixed supports of the mean-correction profiles"
+   ],
+   "conclusion": "There exists q_big > 0, independent of the correction stage and derivative order, such that every finite partial sum is well defined on 0 < q < q_big. For every fixed stage and output amplitude derivative, the construction and estimate need only finitely many input amplitude derivatives (derivative-count recursion D_{v,a}(m) = max_{w -> v} D_{w,a}(m + d_{v,w}) on the finite DAG of the construction). Constants may depend on the stage.",
+   "constants": [
+    "q_big <= q_*",
+    "forward damping factor of (7.18) of magnitude at most one",
+    "denominators 2 sqrt(y_sigma) in (7.31) fixed by the primary construction"
+   ],
+   "cites": [
+    "(7.18)",
+    "(7.31)",
+    "(6.6)",
+    "Corollary 7.3",
+    "Lemma 8.7"
+   ],
+   "role": "Guarantees one common domain for all stages: since all inverses are fixed linear maps with denominators fixed by the primary construction, later stages never shrink the q-threshold. Required by the summation lemma 5.4 in Prop 9.9.",
+   "page": 111
+  },
+  {
+   "id": "Lemma 9.8",
+   "kind": "Lemma",
+   "section": "9",
+   "hypotheses": [
+    "the stage increments Z_j = (A_j, B_j, p_j), Delta u_j = curl A_j + B_j = u^[j] - u^[j-1] of (9.15), with pressure increment (9.16); Cartesian space-time jet |.|_m of (5.23)",
+    "physical derivative losses (9.19): radial 1/2 + h kappa_s, axial D = 1/2 - h, time 1 + h, frame 1/2; phase bounds |nabla^a d_t^b Phi_gamma| <= C Q^{-a/2 - b(1+h)} S_*^P; k <= 2 Q^{-h/2}"
+   ],
+   "conclusion": "|Z_j|_m + |Delta u_j|_m <= C_{j,m} q^{g_j - l_m} (1 + |log q|)^{P_{j,m}} with g_j = hj/10 -> infinity and l_m = 2A + (m+1)(1 + 3h/2) independent of j (9.17); |(u^[j], p^[j])|_m <= C q^{-K_m} (1 + |log q|)^P with K_m independent of j; |R(u^[j], p^[j])|_m <= C_{j,m} q^{h sigma_j - K_m} (1 + |log q|)^P + E_{j,m}, E_{j,m} <= C q^N for every N (9.18).",
+   "constants": [
+    "s_x = 1/2 + h/2, s_t = 1 + 3h/2",
+    "l_m = 2A + (m+1)(1 + 3h/2)",
+    "g_j = hj/10",
+    "rescalings Q^{-A}, Q^{-2A}, Q^{1/2-A} all bounded by Q^{-2A}"
+   ],
+   "cites": [
+    "(5.23)",
+    "(6.6)",
+    "(6.12)",
+    "(7.3)",
+    "(9.5)",
+    "(9.8)",
+    "(9.9)",
+    "(9.15)",
+    "(9.16)",
+    "(9.17)",
+    "(9.18)",
+    "(9.19)"
+   ],
+   "role": "Converts the normalized class exponents of the induction into physical Cartesian derivative bounds with stage-independent loss l_m: exactly the hypothesis (5.30)/(5.33) of the summation lemma 5.4. The exponent g_j = hj/10 growing linearly in j is what h > 0 buys.",
+   "page": 113
+  },
+  {
+   "id": "Proposition 9.9",
+   "kind": "Proposition",
+   "section": "9",
+   "hypotheses": [
+    "the finite corrections U_0, (Delta u_j, p_j) of (9.15) on the common domain 0 < q < q_big of Lemma 9.7 with the bounds of Lemma 9.8; summation lemma 5.4 with F(u,p) = R(u,p) and q_* = q_big; shrinking cutoffs chi(a_j q)"
+   ],
+   "conclusion": "There are smooth fields (u_loc, p_loc) on Omega_*, obtained by summing the finite corrections as A = A_0 + sum chi(a_j q) A_j, B e_theta = B_0 e_theta + sum chi(a_j q) B_j, p_loc = p_0 + sum chi(a_j q) p_j, u_loc = curl A + B e_theta (9.21), such that div u_loc = 0, |R(u_loc, p_loc)|_m = O(q^N) for all m, N (9.20), and all conclusions of Theorem 3.1 hold: (i) Cartesian regularity, (ii) one-sided endpoint regularity away from q = 0, (iii) exterior heat-flow formula with flat residual, (iv) inner swirl asymptotic.",
+   "constants": [
+    "g_j = hj/10 and rho_j = h sigma_j -> infinity in the hypotheses of Lemma 5.4",
+    "base Stokes streamfunctions r^2 x smooth(r^2, z, t) at the axis"
+   ],
+   "cites": [
+    "(4.29)",
+    "(5.27)",
+    "(5.28)",
+    "(5.29)",
+    "(5.30)",
+    "(5.33)",
+    "(5.41)",
+    "(7.33)",
+    "(9.15)",
+    "(9.18)",
+    "(9.20)",
+    "(9.21)",
+    "Lemma 5.4",
+    "Lemma 9.7",
+    "Lemma 9.8",
+    "Theorem 3.1",
+    "Theorem 4.6",
+    "Proposition 5.5"
+   ],
+   "role": "Delivers the local field of Theorem 3.1: the summed corrections with shrinking cutoffs have residual flat at the singularity and preserve the endpoint regularity, exterior heat flow, and inner growth. It closes Sections 4-9; Section 10 then turns the local field into a global forced solution.",
+   "page": 114
   }
  ],
  "hard_pages": [
@@ -1215,6 +1490,12 @@
    "pages": "90-92 and 97-99",
    "section": "8",
    "why": "Lemma 8.2 Step 3 (pp. 91-92): flatness of the cutoff remainder is a two-parameter argument (torus Fourier inversion (8.10) losing p+3 derivatives, times M^{-1} <= C eps^{kappa_s} S_*^{rho_g} per step) and the manuscript states explicitly that no estimate uniform in p is asserted; the reader must track that each flatness order N is bought by a p chosen after N and L. Lemma 8.7/8.8 (pp. 97-99): invertibility of the five-moment map is a Vandermonde argument that needs G_q = 0 on the patch (8.24), and the exponent table for R_g mixes three different exponents (alpha+2, alpha+0.9, 2 alpha) whose minimum alpha+0.9-2kappa_s only holds because alpha >= 0.9 is assumed on entry.",
+   "leg": 425
+  },
+  {
+   "pages": "107-111",
+   "section": "9",
+   "why": "Proposition 9.6, the inductive step. Four ordered corrections, each with its own exponent table, and the cycle closes only via five explicit inequalities on p. 111 whose margins are small: the wave order improves by min{1/2 - 3 kappa_s, ..., 0.4} - 0.3 = 0.1 exactly at the 0.4 row (cross with total mean correction, from Lemma 9.2 with mu = 0.9), and the tangential mean improves via 0.17 > 0.1 where 0.17 = 0.68 - 1/2 - 2 kappa_s comes from the W_0.68 bound on w - w_0^tan in (9.9). Step 2's exact covariance expansion (9.13) must be matched term by term against Corollary 7.8. Any reader re-deriving the spine must recompute these margins; a slip of 0.02 in either threshold in (9.9) breaks the induction.",
    "leg": 425
   }
  ]
