@@ -4962,3 +4962,49 @@ and a reduction of the annulus question to the profile's far-field expansion.
 Float64 finite differences on a banked closed form. **Tier 2 at best.** `W4`'s own statement is
 *"no known method"*; **a measurement cannot upgrade that to "no method"**, and this section does
 not. **`links_moved: 0`. No wall moved. Clay ~0.05%.**
+
+---
+
+## §66 — `R0` (leg 423, arc 6, second pass): **A6-D IS DEAD.** Arc 5's charter called statement (D) *"the nearest unclaimed Fefferman statement"*; the manuscript claims it. Struck in three artefacts, recorded here, nothing rewritten.
+
+**Unit:** `R0`, arc 6 second-pass charter, §3f SOLO, DOCS. **Why leg 423 and not 417:** the charter
+numbers its units from 417, but legs 417–422 are already landed on `main` (§61–§65). Reusing a landed
+leg number would put two different units under one identifier, so this pass runs **423–430** and
+says so here rather than silently.
+
+### What was wrong, and where
+
+`TECHNICAL_OUTPACED.md` §1.4: *"(A) and (B) are untouched. The unforced problem is open. **So is
+(D).**"* — and §5's A6-D: *"With (C) now claimed, (D) is the nearest **unclaimed** Fefferman
+statement."* `BLOG_OUTPACED.md` carries both. `arc5_outpaced_v1.json` banks both under
+`what_this_does_NOT_establish[2]` and `arc6_charter.candidates[A6-D]`.
+
+The manuscript's Theorem 1.1 ends, verbatim (cut by string anchor at leg 417, sha256
+`0e779481c4da40bd…`): *"Compact support also yields the corresponding construction on
+`T³ = ℝ³/ℤ³`, establishing alternative (D) in [13]; see Corollary 10.6."* Corollary 10.6 is stated
+and proved at pp. 125–126 for every `ν > 0`, and the Lean project's `formalization.yaml` declares
+`NavierStokes.Comparator.navier_stokes_breakdown_periodic` a proved main result.
+
+**(D) is claimed.** A charter item whose stated reason for existing is that a statement is
+*unclaimed* does not survive that statement being claimed in the same document that claims (C).
+**A6-D is dead.**
+
+### What was done
+
+- `TECHNICAL_OUTPACED.md` and `BLOG_OUTPACED.md`: the sentences are **struck**, not deleted, with a
+  dated pointer to this section. The A6-D block keeps its text under strike-through.
+- `arc5_outpaced_v1.json`: **no banked string was edited.** A `corrections[]` record was added
+  beside them naming each affected field, per the standing rule that a banked datum gets a
+  correction record rather than an edit (`RULING_W3_WORDING_2026-08-18` Q3).
+  `outpaced_evidence.py` still rebuilds every prose number: **PASS**.
+- The second struck sentence — that (8) and (9) are *unread* — is stale for a different reason:
+  they were read at primary at leg 417 (§61).
+
+### What is NOT corrected, said plainly
+
+**Nothing here says the claim of (D) is correct.** *Claimed* and *established* are different words
+and this section uses the first. **The escalation packet `ESCALATION_D_BUNDLING_2026-08-18.md` is
+unaffected and still unruled**; Lane T's deferral is a user ruling and this correction does not
+touch it. An entity that both raises and rules an escalation has defeated the mechanism.
+
+**No wall moved. No `L1 → L4` link moved. Clay ~0.05%.**

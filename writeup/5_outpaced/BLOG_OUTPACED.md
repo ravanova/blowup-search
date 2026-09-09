@@ -158,7 +158,8 @@ them.
 
 And (C) is the forced statement. The **unforced** problem — statements (A) and
 (B), the version most mathematicians consider the real question — is untouched
-and open. So is (D), the torus.
+and open. ~~So is (D), the torus.~~ *[Struck 2026-09-09, leg 423: (D) is claimed by the same
+manuscript, Corollary 10.6 — `CORRECTIONS.md` §66.]*
 
 None of which changes our position. A result being contested is not the same as
 a result being wrong, and our own file predicted this door six weeks early and
@@ -190,8 +191,10 @@ an agent — picks between them:
 - **Statement (D).** `W4`'s only surviving break clause is (c), and clause (c)
   **is** statement (D). It sits in Lane T, deferred, behind
   `ESCALATION_D_BUNDLING_2026-08-18.md` — the board's own most direction-relevant
-  open item, and **never ruled**. It is now the nearest unclaimed Fefferman
-  statement. It needs a ruling before it needs a leg.
+  open item, and **never ruled**. ~~It is now the nearest unclaimed Fefferman
+  statement. It needs a ruling before it needs a leg.~~ *[Struck 2026-09-09, leg 423:
+  **A6-D is dead** — (D) is claimed, Corollary 10.6. The escalation is still unruled;
+  `CORRECTIONS.md` §66.]*
 
 What the last arc may **not** do is inherit any of this as licence. Tier 2 is
 never a proof. No output is described as movement toward Clay unless a link of
