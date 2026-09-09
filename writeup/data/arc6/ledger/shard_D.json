@@ -1,0 +1,694 @@
+{
+ "schema": "arc6_shard_v1",
+ "shard": "D",
+ "leg": 428,
+ "pages": [100, 125],
+ "preamble_pages": [1, 23],
+ "preamble_entries": [
+  {
+   "id": "Theorem 1.1",
+   "kind": "Theorem",
+   "section": "1",
+   "page": 1,
+   "hypotheses": [
+    "nu > 0 is an arbitrary positive viscosity"
+   ],
+   "conclusion": "There exist a force f in C_c^infty(R^3 x (0,infty); R^3), a compact set K subset R^3, and smooth velocity and pressure fields u, p on R^3 x [0,1) solving d_t u + (u.grad)u - nu Laplacian u + grad p = f, div u = 0, u(.,0) = 0 (1.1), such that supp u(.,t) union supp p(.,t) subset K for every 0 <= t < 1, sup_{0<=t<1} ||u(t)||_{L^2(R^3)} < infty, and limsup_{t->1} ||u(t)||_{L^infty(R^3)} = infty. Consequently there is no smooth solution (u,P) on R^3 x [0,infty) with the same force and initial datum whose kinetic energy sup_{t>=0} (1/2) int |u|^2 is uniformly bounded. (Stated as establishing alternative (C) of the Millennium problem statement [13]; the periodic alternative (D) is Corollary 10.6.)",
+   "constants": [
+    "A = 1/2 + h, D = 1/2 - h, 0 < h < 1/100 (from Section 3)",
+    "growth path x_tau = (sqrt(2 X_in tau), 0, 0), t = 1 - tau (10.20), with X_in in (0, X_a) fixed in Theorem 3.1(iv)",
+    "u_theta(x_tau, 1 - tau) = tau^{-A}(e_0 + O(tau^{2h})) -> +infty (10.21), e_0 > 0",
+    "viscosity rescaling (10.22): u_nu(x,t) = sqrt(nu) u(x/sqrt(nu), t), p_nu = nu p(x/sqrt(nu), t), f_nu = sqrt(nu) f(x/sqrt(nu), t); singular time unchanged",
+    "rescaled support K_nu = sqrt(nu) K; force support K_nu x [0,2]",
+    "derivative scaling d^alpha_x d^m_t f_nu = nu^{(1-|alpha|)/2} (d^alpha_y d^m_t f)(x/sqrt(nu), t)",
+    "energy scaling (10.23): ||u_nu(t)||_2^2 = nu^{5/2} ||u(t)||_2^2, nu int_0^1 ||grad u_nu||_2^2 = nu^{5/2} int_0^1 ||grad u||_2^2",
+    "competitor rescaling v(y,t) = nu^{-1/2} v_nu(sqrt(nu) y, t), P = nu^{-1} P_nu(sqrt(nu) y, t), ||v||_2^2 = nu^{-5/2} ||v_nu||_2^2",
+    "regularity class used: u in C([0,T]; H^3) for each T < 1"
+   ],
+   "cites": [
+    "(1.1)",
+    "(10.5)",
+    "Proposition 10.1",
+    "Lemma 10.3",
+    "Lemma 10.4",
+    "Theorem 3.1",
+    "(3.6)",
+    "(10.20)",
+    "(10.4)",
+    "(10.21)",
+    "Lemma 10.5",
+    "(10.13)",
+    "(10.22)",
+    "(10.23)",
+    "Sobolev embedding H^3(R^3) into L^infty(R^3) and H^3 into W^{1,infty}",
+    "Gronwall inequality",
+    "[13]"
+   ],
+   "role": "Main theorem: a smooth compactly supported force drives a zero-datum bounded-energy Navier-Stokes flow to unbounded velocity at time 1, excluding any global smooth bounded-energy solution; proved on p. 124 by combining the localized fields (Prop 10.1, Lemmas 10.3-10.5) with the inner growth (3.6) of Theorem 3.1 and the viscosity rescaling (10.22)."
+  },
+  {
+   "id": "Theorem 3.1",
+   "kind": "Theorem",
+   "section": "3",
+   "page": 15,
+   "hypotheses": [
+    "None beyond the existence of the stated constants: it asserts that there are constants 0 < h < 1/100, q_* > 0, 0 < X_a < X_ext < infty and smooth fields (u,p) on Omega_* = {(x,t): tau > 0, q < q_*} (viscosity one, residual R of (3.1))",
+    "Coordinates: tau = 1 - t, q = q(z,t) defined by tau = q(1 - eta^2), z = q^D eta, X = r^2/(2q) (3.2)"
+   ],
+   "conclusion": "(i) u = curl A + B e_theta (3.3) with A a vector potential and B an axisymmetric scalar; A and B e_theta smooth in Cartesian coordinates at the axis; u exactly divergence-free. (ii) Every Cartesian space-time derivative of A, B e_theta, p is uniformly bounded on compact spatial subsets with c <= q <= c' < q_*, for each 0 < c < c', up to the one-sided boundary tau = 0, with the derivative limits compatible under spatial and time differentiation. (iii) For every alpha, b, N and finite X_1: |d^alpha_x d^b_t R(u,p)| <= C_{alpha,b,N,X_1} q^N on 0 <= X <= X_1 as q -> 0 (3.4); for X >= X_ext the residual is identically zero and A = 0, B = K(r,tau), p = -int_r^infty K(rho,tau)^2/rho d rho, K(r,tau) = r^{-1-2h} H_ext(tau/r^2) (3.5), with H_ext smooth on [0,infty) with each fixed derivative bounded, and K solving the radial swirl heat equation -d_tau K = d_r^2 K + r^{-1} d_r K - r^{-2} K. (iv) For some fixed X_in in (0, X_a) and e_0 > 0: u_theta(sqrt(2 X_in tau), 0, 0, 1 - tau) = tau^{-A}(e_0 + O(tau^{2h})) as tau -> 0 (3.6).",
+   "constants": [
+    "0 < h < 1/100; A = 1/2 + h; D = 1/2 - h",
+    "q_* > 0 (later taken equal to q_big of Lemma 9.7)",
+    "0 < X_a < X_ext < infty; X_in in (0, X_a); e_0 > 0",
+    "Omega_* = {tau > 0, q < q_*}",
+    "K(r,tau) = r^{-1-2h} H_ext(tau/r^2); exterior pressure -int_r^infty K^2/rho d rho",
+    "swirl heat equation -d_tau K = d_r^2 K + r^{-1} d_r K - r^{-2} K"
+   ],
+   "cites": [
+    "(3.1)",
+    "(3.2)",
+    "(3.3)",
+    "(3.4)",
+    "(3.5)",
+    "(3.6)",
+    "Proposition 9.9",
+    "Lemma 4.1"
+   ],
+   "role": "The local existence theorem: it packages the local field (u_loc, p_loc) with its potential representation, one-sided endpoint regularity, flat residual near the singular point, exact heat exterior, and inner swirl growth; proved by Proposition 9.9 and consumed by Section 10 (Prop 10.1, Lemma 10.2, proof of Theorem 1.1)."
+  },
+  {
+   "id": "Definition 3.2",
+   "kind": "Definition",
+   "section": "3",
+   "page": 18,
+   "hypotheses": [
+    "A leading field (velocity and pressure) on t < 1, or a scalar auxiliary profile in the similarity variables (X, eta)"
+   ],
+   "conclusion": "A leading field is regular at the axis if its velocity and pressure extend smoothly across r = 0 in Cartesian coordinates for t < 1. For scalar auxiliary profiles, regular at the axis means a smooth extension in (X, eta) to X = 0.",
+   "constants": [],
+   "cites": [],
+   "role": "Fixes what axis regularity means for the profiles and fields, used whenever smoothness of the construction at r = 0 is asserted (e.g. Theorem 3.1(i), Prop 9.9 Step 2, Prop 10.1)."
+  },
+  {
+   "id": "Definition 3.3",
+   "kind": "Definition",
+   "section": "3",
+   "page": 18,
+   "hypotheses": [
+    "alpha >= 0 and beta > 0 are parameters in the construction"
+   ],
+   "conclusion": "alpha << beta means alpha/beta is required to be sufficiently small, with the allowed size depending on all data already fixed. In a chain of constants, choices proceed from right to left; small reciprocals specify large parameters. For expressions depending on profile variables, this smallness is uniform on the stated domain and is ensured by those parameter choices.",
+   "constants": [],
+   "cites": [],
+   "role": "Convention for the order in which smallness parameters are chosen throughout the paper."
+  }
+ ],
+ "entries": [
+  {
+   "id": "Proposition 9.1",
+   "kind": "Proposition",
+   "section": "9",
+   "page": 101,
+   "hypotheses": [
+    "A fixed wave label, a harmonic index m in Z \\ {0}, and an exponent alpha in R",
+    "Source amplitude f_m in W_alpha satisfying the support and smooth-extension hypotheses of Proposition 7.2",
+    "The source harmonic f_m e^{i k m Phi} extends smoothly by zero outside the fixed local rectangle, including its pulse endpoints",
+    "(t_m, pi_m) solves the principal amplitude-pressure equation L_m(t_m, pi_m) = -f_m of (9.1) with n_Phi . t_m = 0 (alternatively, t_m in W_alpha is a homogeneous pulse with f_m = 0)",
+    "The potential (7.38) and the pressure are multiplied by the pulse cutoff and the curl is taken, giving velocity amplitude a_m = t_m + r_m with curl correction r_m"
+   ],
+   "conclusion": "The normalized linear residual of this curl-generated harmonic, after adding the prescribed source f_m e^{ikmPhi}, belongs to W_{alpha + 1/2 - 3 kappa_s}, apart from additive pulse-cutoff tails whose Cartesian space-time derivatives vanish to infinite order as q -> 0. The pressure amplitude pi_m belongs to W_{alpha + 1/2}.",
+   "constants": [
+    "kappa_s = 10^{-5} (fixed for all of Section 9)",
+    "L_m(a, pi) = Q^{1+h} N_abs a + K a + eps k^2 m^2 |n_Phi|^2 a + i k m n_Phi pi (9.1); eps = Q^h, Q = 2^{-l}, S_* = l^2",
+    "C_m = i n_Phi x t_m / (k m |n_Phi|^2), curl_*(C_m e^{ikmPhi}) = (t_m + r_m) e^{ikmPhi}; t_m in W_alpha implies r_m in W_{alpha + 1/2 - kappa_s} (Lemma 7.7)",
+    "gain table above alpha for the remainder (9.2): slow transport 1 - kappa_s; phase transport defect 1/2; base derivatives and connections 1; pressure-amplitude gradient 1/2 - kappa_s; viscous amplitude derivatives 1 - 2 kappa_s; mixed derivatives and phase divergence 1/2 - kappa_s; viscous angular connection 1/2",
+    "common lower bound alpha + 1/2 - 3 kappa_s at every derivative order",
+    "eps k^2 = O(1)",
+    "cutoff tails supported where P_v <= e^{-c S_*}; each fixed derivative bounded by C Q^{-M} S_*^P e^{-c S_*}, flat since S_* = l^2 and Q = 2^{-l}"
+   ],
+   "cites": [
+    "(9.1)",
+    "(9.2)",
+    "Proposition 7.2",
+    "(7.38)",
+    "(7.39)",
+    "Lemma 7.7",
+    "(7.9)",
+    "(7.4)",
+    "(6.6)",
+    "(7.5)"
+   ],
+   "role": "Quantifies the gain (1/2 - 3 kappa_s) of the linear residual left after one forward pulse solve, used in Step 1 and Step 2 of the correction cycle (Prop 9.6) and in Prop 9.3."
+  },
+  {
+   "id": "Lemma 9.2",
+   "kind": "Lemma",
+   "section": "9",
+   "page": 102,
+   "hypotheses": [
+    "w is a wave in W_alpha",
+    "v is a mean field with tangential components in M_mu and radial component in M_{mu+1}",
+    "For the second part: w, w' are two curl-generated waves with the same label and exponents alpha, alpha'",
+    "(w . grad_*) v denotes cylindrical transport with normalized derivatives (D_r, R^{-1} d_theta, D_z) including differentiation of the cylindrical frame"
+   ],
+   "conclusion": "The nonzero harmonics of (w . grad_*) v + (v . grad_*) w belong to W_{alpha + mu - 1/2}. For two curl-generated waves w, w' with the same label, the nonzero harmonics of (w . grad_*) w' + (w' . grad_*) w belong to W_{alpha + alpha' - kappa_s} and the zero harmonic belongs to the mean class M_{alpha + alpha' - kappa_s}. Waves with distinct labels have zero products on their closed supports.",
+   "constants": [
+    "mean advection of a wave phase costs k = O(eps^{-1/2}) (the 1/2 loss)",
+    "wave transport of a mean costs at most kappa_s radially",
+    "product weights: P_v^2 <= P_v and radial weight zeta (stronger than the required sqrt(zeta))",
+    "phase differentiation gives i k m' (a . n_Phi) a'; (7.39) cancels the apparent half-power loss"
+   ],
+   "cites": [
+    "(7.39)",
+    "Lemma 6.1",
+    "Leibniz rule for amplitude derivatives"
+   ],
+   "role": "Bounds the nonlinear wave-mean and wave-wave interaction terms created by each increment, supplying rows of the exponent tables in Props 9.5 and 9.6."
+  },
+  {
+   "id": "Proposition 9.3",
+   "kind": "Proposition",
+   "section": "9",
+   "page": 103,
+   "hypotheses": [
+    "j in N_0 is a fixed stage",
+    "(u^[j], p^[j]) is obtained from the fixed slow base and primary waves by a finite sequence of: the pulse inverse and curl construction, the signed amplitude map for auxiliary-independent stresses, and the mean maps of Section 8",
+    "Pressure is reconstructed by (8.12) after each update",
+    "All products use the complete velocity fields"
+   ],
+   "conclusion": "There is a physical residual decomposition R(u^[j], p^[j]) = G^[j] + F^[j] (9.3); with G^[j]_* = Q^{2A+1/2} G^[j], F^[j]_* = Q^{2A+1/2} F^[j] in a common chart: (i) Supported sources: on the coarsest common auxiliary torus the nonzero angular harmonics have the form G^[j]_* - <G^[j]_*>_theta = sum_{gamma in Gamma} sum_{m in H_j} f^[j]_{gamma,m} e^{i k_gamma m Phi_gamma} (9.4), H_j subset Z \\ {0} finite and independent of band, the sum locally finite; supp(f^[j]_{gamma,m}|E_gamma) subset Omega_gamma, f^[j]_{gamma,m} in C^infty(E^+_gamma; C^3) with smooth zero extension across the fixed slow and transverse supports and the enlarged local torus rectangle; if alpha, mu are any lower bounds for the wave and mean exponents furnished by Props 9.1, 7.2, 6.6, 7.6, Section 8 and Lemma 9.2 along the sequence, then f^[j]_{gamma,m} in W_alpha and <G^[j]_*>_theta in M_mu, with smooth zero extension of the mean coefficients outside the active shell; the next pulse inverse is applied precisely to the f^[j]_{gamma,m}. (ii) Flat remainder: for every fixed j, m, N, |F^[j]|_m <= C_{j,m,N} q^N (9.5), uniformly over bands, labels and points. (iii) Exact mean equations (9.6): with the complete current correction (beta^[j], v^[j], gamma^[j], w^[j]) and E_{B,*} = Q^{2A+1/2} E_B, W^[j]_{ab} = <w^[j]_a w^[j]_b>_theta, P^[j] = int <g^[j]_r>_Y dR, p^[j]_m = T_0(g^[j]_r - rho P^[j]), and <G^[j]_* + F^[j]_* - E_{B,*}>_theta = (D_r p^[j]_m - g^[j]_r, E^[j]_theta, E^[j]_z) with g_r, E_theta, E_z given by (8.3) on this tuple.",
+   "constants": [
+    "normalization G_* = Q^{2A+1/2} G, F_* = Q^{2A+1/2} F, E_{B,*} = Q^{2A+1/2} E_B",
+    "an explicit D_r costs kappa_s each time it occurs",
+    "edge weight zeta = e^{-a/s^2} times a smooth positive bounded factor, a > 0 fixed, s the logarithmic edge distance of (6.23)",
+    "int_0^delta s^{-M} e^{-a/s^2} ds <= C_{M,a} delta^{3-M} e^{-a/delta^2} and |d^k/ds^k e^{-a/s^2}| <= C_{k,a} s^{-3k} e^{-a/s^2}",
+    "amplitude division as in (7.31): d Sigma = H^{-1}(Sigma/eps), delta a_sigma = (d Sigma)_sigma / (2 a_sigma)",
+    "|D^I (d Sigma)_sigma| <= C eps^{alpha-1} S_*^b zeta delta^{-M}; |D^I (a_sigma^{-1})| <= C S_*^b zeta^{-1/2} delta^{-M}; |D^I delta a_sigma| <= C eps^{alpha-1} S_*^b sqrt(zeta) delta^{-M}; |D^I (sqrt(eps) delta a_sigma b_sigma)| <= C eps^{alpha-1/2} S_*^b sqrt(zeta) delta^{-M} P_v (recovers (7.33); after slow cutoff this is the W_{alpha-1/2} estimate of Prop 7.6)",
+    "a radial mean can aggregate polynomially many labels in S_*; only boundedly many wave labels overlap at a point"
+   ],
+   "cites": [
+    "(9.3)",
+    "(9.4)",
+    "(9.5)",
+    "(9.6)",
+    "(6.28)",
+    "(5.41)",
+    "(8.12)",
+    "(8.3)",
+    "(8.15)",
+    "(8.1)",
+    "Proposition 9.1",
+    "Proposition 7.2",
+    "Proposition 6.6",
+    "Proposition 7.6",
+    "Lemma 9.2",
+    "(7.31)",
+    "(7.25)",
+    "(7.33)",
+    "(6.23)",
+    "Lemma 6.1",
+    "Lemma 6.2",
+    "Lemma 8.2",
+    "Proposition 8.1"
+   ],
+   "role": "Bookkeeping proposition guaranteeing that after any finite sequence of corrections the residual splits into supported sources (satisfying the hypotheses of the pulse inverse for the next cycle) plus a flat remainder, and that the exact mean balances hold; it feeds Definition 9.4 and closes the induction in Prop 9.6."
+  },
+  {
+   "id": "Definition 9.4",
+   "kind": "Definition",
+   "section": "9",
+   "page": 106,
+   "hypotheses": [
+    "j in N union {0}",
+    "Real fields of the normalized form (9.7): u_* = (b + beta, V + v, G + gamma) + w, p_* = p_{B,*} + p_m + p_w, <w>_theta = <p_w>_theta = 0, with base (b, V, G), base pressure p_{B,*}, p_w the pressure harmonics from the amplitude equations, and p_m reconstructed from the current g_r by (8.12)",
+    "The wave w is a sum of curls of supported wave potentials with the fixed label phases; the mean correction (beta, v, gamma) is the sum of a curl of an azimuthal potential and a direct azimuthal field (so both corrections are exactly divergence-free)",
+    "Source supports, finite harmonic sets, smooth zero extensions and the physical residual decomposition are as in Proposition 9.3"
+   ],
+   "conclusion": "Such fields form a state at stage j when: (9.8) the normalized nonzero harmonics G^[j]_wave of G^[j]_* lie in W_{B_j}, the exact tangential mean residuals E_theta, E_z lie in M_{C*_j}, and the three integral defects (P, J_theta, J_z) lie in S_{C*_j}, with B_j = 1/2 + sigma_j, C*_j = 1 + sigma_j, sigma_j = 1/5 + j/10; (9.9) the total corrections satisfy w in W_{1/2}, w - w_0^tan in W_{0.68}, v, gamma, p_m in M_{0.9}, beta in M_{1.9} (wave assertions per grouped nonzero harmonic per label); (9.10) the normalized angular-momentum and axial-flux moments int_0^infty R^2 <v>_Y dR = 0 and int_0^infty R <gamma>_Y dR = 0 hold exactly; and the pressure reconstruction is part of the state. Consequently the radial residual of every state is -rho P plus the flat cutoff remainder of Proposition 8.3.",
+   "constants": [
+    "B_j = 1/2 + sigma_j, C*_j = 1 + sigma_j, sigma_j = 1/5 + j/10",
+    "cumulative bounds: w in W_{1/2}, w - w_0^tan in W_{0.68}, v, gamma, p_m in M_{0.9}, beta in M_{1.9}",
+    "moment constraints int R^2 <v>_Y dR = 0, int R <gamma>_Y dR = 0",
+    "w_0^tan = W^as_0 is the normalized assembled primary transverse field of (7.35)"
+   ],
+   "cites": [
+    "(9.7)",
+    "(9.8)",
+    "(9.9)",
+    "(9.10)",
+    "(8.12)",
+    "(8.3)",
+    "(8.15)",
+    "(7.35)",
+    "Proposition 9.3",
+    "Proposition 8.3"
+   ],
+   "role": "The induction hypothesis of the correction cycle: it records the residual orders and cumulative velocity bounds that Prop 9.5 initializes and Prop 9.6 improves by 1/10 per cycle."
+  },
+  {
+   "id": "Proposition 9.5",
+   "kind": "Proposition",
+   "section": "9",
+   "page": 106,
+   "hypotheses": [
+    "Start from the fixed base (b, V, G) and the curls of the primary potentials (the primary pulses of Prop 7.5 assembled by (7.35), made divergence-free by Lemma 7.7)",
+    "Perform the temporal mean update (8.20) and then the five-equation correction (8.25)",
+    "Reconstruct the pressure by (8.12) before and after each update"
+   ],
+   "conclusion": "The resulting fields form a state at stage 0 in the sense of Definition 9.4; in particular their residual orders are B_0 = 0.7 and C*_0 = 1.2, the cumulative bounds (9.9) hold, and the moments (9.10) are enforced.",
+   "constants": [
+    "B_0 = 0.7, C*_0 = 1.2",
+    "primary transverse amplitudes have exponent 1/2; their supported linear residual has exponent 1 - 3 kappa_s; nonlinear wave residuals 1 - kappa_s",
+    "before any mean update: g_r, p_m, E_theta, E_z in M_{1 - kappa_s}, defects in S_{1 - kappa_s}",
+    "curl-correction x primary-transverse cross tensor in M_{3/2 - kappa_s}; axial fluxes, axial pressure term and higher-order auxiliary stress tensor have residual exponent >= 2 - kappa_s; hence <E_theta>_Y, <E_z>_Y in M_{1.49}",
+    "H_0 = 1 - kappa_s: temporal update increments in M_{H_0} (tangential) and M_{H_0 + 1} (induced radial); pressure change exponent H_0 (from 2 V Delta v / R in Delta g_r)",
+    "residual changes from the temporal update have exponent >= H_0 + 1 - 2 kappa_s; viscosity gains 1 - 2 kappa_s; mean interaction with w in W_{1/2} has wave exponent >= H_0",
+    "five-equation map at order H_0: other terms gain > 0.8 above H_0; remaining defects exponent > 1.8 - kappa_s; tangential means retain 1.49",
+    "primary curl correction exponent 1 - kappa_s > 0.68; mean increments H_0 > 0.9; radial H_0 + 1 > 1.9"
+   ],
+   "cites": [
+    "(8.20)",
+    "(8.25)",
+    "(8.12)",
+    "Definition 9.4",
+    "(8.3)",
+    "Proposition 7.5",
+    "(7.35)",
+    "(9.11)",
+    "(9.8)",
+    "(9.9)",
+    "(9.10)",
+    "Lemma 7.7"
+   ],
+   "role": "Initializes the correction induction: shows the primary pulses plus one round of mean corrections already satisfy the stage-0 state bounds, with the primary covariance of Prop 7.5 cancelling the order-zero auxiliary stress exactly via (9.11)."
+  },
+  {
+   "id": "Proposition 9.6",
+   "kind": "Proposition",
+   "section": "9",
+   "page": 107,
+   "hypotheses": [
+    "(u^[j], p^[j]) is a state at stage j in the sense of Definition 9.4 (so (9.8) with B_j, C*_j, (9.9), (9.10) hold)",
+    "The same base (b, V, G), primary amplitudes, supports and inverse operators are used throughout",
+    "The four corrections are applied in order: (i) solve the inhomogeneous amplitude equation for each supported nonzero harmonic; (ii) change the wave amplitudes to correct the auxiliary-averaged tangential residual; (iii) apply the temporal mean inverse to the part with zero auxiliary average; (iv) apply the five-equation correction to the three current defects; pressure reconstructed after each correction",
+    "Wave and meridional velocity increments are realized by their potentials; azimuthal mean increments are added directly"
+   ],
+   "conclusion": "There is a state (u^[j+1], p^[j+1]) at stage j+1, constructed as described, whose residual orders are B_{j+1} = B_j + 1/10 and C*_{j+1} = C*_j + 1/10. The cumulative bounds (9.9) and the exact moments (9.10) are preserved, and the radial residual is again -rho P plus the flat remainder.",
+   "constants": [
+    "abbreviations B = 1/2 + sigma_j, C* = B + 1/2 = 1 + sigma_j; used B >= 0.7",
+    "pressure update after each step: P_new = int <g_{r,new}>_Y dR, p_{m,new} = T_0(g_{r,new} - rho P_new)",
+    "Step 1 increments: Delta w_m = curl_*((i n_Phi x (psi t_m))/(k m |n_Phi|^2) e^{ikmPhi}), Delta p_{w,m} = psi pi_m e^{ikmPhi}, L_m(t_m, pi_m) = -f_m; velocity in W_B, pressure in W_{B+1/2}",
+    "Step 1 nonzero-harmonic errors: linear B + 1/2 - 3 kappa_s; cross with old exact waves B + 1/2 - kappa_s; particular-correction self-interaction 2B - kappa_s; cross with total mean correction B + 0.4",
+    "Step 1 means: covariance changes exponent >= B + 1/2 = C*; radial divergence costs kappa_s; E_theta, E_z, Delta g_r, Delta p_m in M_{C* - kappa_s}; (P, J_theta, J_z) in S_{C* - kappa_s}; weighted moments int R^2 <E_theta>_Y dR, int R <E_z>_Y dR in S_{C* + 1 - kappa_s} (9.12)",
+    "Step 2: F_2 = Q^{-2A-1/2} <E_theta>_Y, F_1 = Q^{-2A-1/2} <E_z>_Y; fixed interior profile hat b_e with int x^e hat b_e dx = 1, b_e(r,z,t) = q^{-(e+1)/2} hat b_e(r/sqrt(q)); M_e = int_0^infty r^e F_e dr; sigma_e(r) = -r^{-e} int_0^r (r')^e (F_e - b_e M_e) dr'; (d_r + e/r) sigma_e = -F_e + b_e M_e; Sigma = Q^{2A}(sigma_2, sigma_1) in M_{C* - kappa_s}",
+    "Step 2: L^as Sigma in W_{B - kappa_s} with prescribed symmetrized cross covariance Sigma with w_0^tan; division by the fixed positive primary amplitude 2 sqrt(y_sigma)",
+    "Step 2 nonzero-harmonic errors: linear B + 1/2 - 4 kappa_s; mean interaction B + 0.4 - kappa_s; cross with old exact waves B + 1/2 - 2 kappa_s; signed-correction self-interaction 2B - 3 kappa_s",
+    "Step 2 covariance expansion (9.13): <Delta W>_Y = B(w_0^tan, t_s) + B(w - w_0^tan, t_s) + B(w, r_s) + <<s (x) s>_theta>_Y, s = t_s + r_s; remainder exponents before divergence: B + 0.68 - kappa_s = C* + 0.18 - kappa_s; C* + 1/2 - 2 kappa_s; 2B - 2 kappa_s = C* + sigma_j - 2 kappa_s; b_e M_e term of order C* + 1 - kappa_s",
+    "(9.14): <E_theta>_Y, <E_z>_Y in M_{C* + 0.17}; E_theta, E_z in M_H; (P, J_theta, J_z) in S_H; H = C* - 2 kappa_s (using 0.18 - 2 kappa_s > 0.17 and sigma_j - 3 kappa_s > 0.17)",
+    "Step 3: E^o_a = E_a - <E_a>_Y; Delta v = -c_{i0}^{-1} N_{i0}^{-1} E^o_theta, gamma_d = -c_{i0}^{-1} N_{i0}^{-1} E^o_z, Psi_* = T_1 gamma_d, Delta beta = -eps d_Z Psi_*, Delta gamma = (D_r + R^{-1}) Psi_*; t_* = -eps d_T + c_{i0} N_{i0}; fast-time identities c N Delta v = -E^o_theta, c N Delta gamma = -E^o_z + F_ax, F_ax = c N (Delta gamma - gamma_d) flat",
+    "Step 3 term exponents: slow time H + 1; radial flux H + 1 - kappa_s; axial flux H + 1; viscosity H + 1 - 2 kappa_s; |D^I b| <= C eps S_*^b on the shell; result E_theta, E_z in M_{min(C* + 0.17, H + 1 - 2 kappa_s)}, defects S_H, wave change in W_H",
+    "Step 4: five-equation map at order H; increments in M_H (tangential), M_{H+1} (radial); remainder exponent >= H + 0.9 - 2 kappa_s; (P, J_theta, J_z) in S_{H + 0.9 - 2 kappa_s} = S_{C* + 0.9 - 4 kappa_s}",
+    "closing inequalities: min{1/2 - 3 kappa_s, 1/2 - kappa_s, B - kappa_s, 0.4} >= 0.4; min{1/2 - 4 kappa_s, 0.4 - kappa_s, 1/2 - 2 kappa_s, B - 3 kappa_s} >= 0.4 - kappa_s; H - B = 1/2 - 2 kappa_s > 0.1; min{0.17, 1 - 4 kappa_s} = 0.17 > 0.1; 0.9 - 4 kappa_s > 0.1",
+    "smallest signed increment order B - kappa_s >= 0.69999 > 0.68; particular increments start at B >= 0.7; mean increments > 0.9; radial mean increments > 1.9"
+   ],
+   "cites": [
+    "Definition 9.4",
+    "(9.8)",
+    "(9.9)",
+    "(9.10)",
+    "(8.3)",
+    "Proposition 7.2",
+    "Proposition 9.1",
+    "Lemma 9.2",
+    "(8.16)",
+    "(9.12)",
+    "Proposition 9.3",
+    "(7.35)",
+    "(7.36)",
+    "(7.31)",
+    "Lemma 7.7",
+    "Corollary 7.8",
+    "(9.13)",
+    "(9.14)",
+    "(8.20)",
+    "Lemma 8.6",
+    "(8.25)",
+    "(8.27)",
+    "Proposition 8.3"
+   ],
+   "role": "The inductive step: one full four-operation correction cycle raises every residual order by 1/10 while preserving the cumulative velocity bounds and the two moment constraints, so the cycle can be iterated indefinitely."
+  },
+  {
+   "id": "Lemma 9.7",
+   "kind": "Lemma",
+   "section": "9",
+   "page": 111,
+   "hypotheses": [
+    "The finite partial sums (u^[j], p^[j]) of the correction cycle, before applying summation cutoffs, built with the fixed background, the fixed positive lower bound for |n_Phi|, the primary covariance, and the fixed supports of the normalized mean-correction profiles",
+    "All later inhomogeneous amplitude problems are linear equations with these fixed coefficients and known sources"
+   ],
+   "conclusion": "There exists q_big > 0, independent of the correction stage and derivative order, such that every finite partial sum, before summation cutoffs, is well defined on 0 < q < q_big. For every fixed stage and output amplitude derivative, the construction and its estimate require only finitely many input amplitude derivatives. The constants may depend on the correction stage.",
+   "constants": [
+    "0 < q_big <= q_*, chosen once so that the pulse estimates hold for q < q_big",
+    "propagator of each harmonic = fundamental propagator times a forward damping factor of magnitude at most one (7.18)",
+    "signed updates divide by the original 2 sqrt(y_sigma) of (7.31)",
+    "derivative-count recursion on the DAG of operations: D_{v,a}(m) = max_{w -> v} D_{w,a}(m + d_{v,w}), with D_{b,a}(m) = m if b = a and 0 otherwise"
+   ],
+   "cites": [
+    "(7.18)",
+    "Corollary 7.3",
+    "(7.31)",
+    "Lemma 8.7",
+    "Y = Y(r,t) phase map (6.3)"
+   ],
+   "role": "Provides the single common domain on which all finite correction stages live and finiteness of derivative requirements, a hypothesis for the summation lemma (Lemma 5.4) used in Prop 9.9."
+  },
+  {
+   "id": "Lemma 9.8",
+   "kind": "Lemma",
+   "section": "9",
+   "page": 113,
+   "hypotheses": [
+    "The stage tuples Z_j = (A_j, B_j, p_j) and increments Delta u_j = curl A_j + B_j = u^[j] - u^[j-1] of (9.15), with p_j given by (9.16), for j >= 1; U_0 = (u^[0], p^[0]) the base plus finite initialization",
+    "Cartesian space-time jet norms |.|_m of (5.23); perturbation supports have r ~ sqrt(Q), q ~ Q, and Q is held fixed while differentiating in a chart"
+   ],
+   "conclusion": "(9.17): for every m, |Z_j|_m + |Delta u_j|_m <= C_{j,m} q^{g_j - l_m} (1 + |log q|)^{P_{j,m}} with g_j = h j/10 -> infty and l_m independent of j (l_m includes the extra spatial derivative recovering velocities from wave and mean vector potentials). The finite partial sums satisfy |(u^[j], p^[j])|_m <= C_{j,m} q^{-K_m} (1 + |log q|)^{P_{j,m}} with K_m independent of j. Their residuals satisfy (9.18): |R(u^[j], p^[j])|_m <= C_{j,m} q^{h sigma_j - K_m} (1 + |log q|)^{P_{j,m}} + E_{j,m}, with E_{j,m} <= C_{j,m,N} q^N for every N and K_m independent of j.",
+   "constants": [
+    "g_j = h j / 10 (stage-j increment has normalized exponent >= j/10)",
+    "(9.19) Q-power losses per physical derivative of an amplitude coefficient: radial 1/2 + h kappa_s; axial D = 1/2 - h; time 1 + h; cylindrical frame derivative 1/2",
+    "r d_r^{-1} Lambda_{i0} g = O(Q^{-1/2} eps^{-kappa_s} S_*^P); T_{i0} g = O(Q^{-1-h} S_*^P)",
+    "|grad_x Phi| <= C Q^{-1/2} S_*^P, |d_t Phi| <= C Q^{-1-h} S_*^P; axial term p_z Z/eps costs Q^{-D} eps^{-1} = Q^{-1/2}; |grad^a d_t^b Phi_gamma| <= C Q^{-a/2 - b(1+h)} S_*^P for a + b >= 1",
+    "s_x = 1/2 + h/2, s_t = 1 + 3h/2; k <= 2 Q^{-h/2}; |grad^a d_t^b e^{ikmPhi}| <= C Q^{-a s_x - b s_t} S_*^P",
+    "normalized coefficient of class exponent alpha: derivatives bounded by C Q^{h alpha - a s_x - b s_t} S_*^P",
+    "rescalings Q^{-A} (velocity), Q^{-2A} (pressure), Q^{1/2 - A} (wave potential), Q^{1/2 - A} (mean potential), all bounded by Q^{-2A}",
+    "l_m = 2A + (m + 1)(1 + 3h/2)",
+    "the harmonic range at a fixed stage is finite independently of band (a quadratic residual at most doubles it)"
+   ],
+   "cites": [
+    "(9.15)",
+    "(9.16)",
+    "(9.17)",
+    "(9.18)",
+    "(9.19)",
+    "(5.23)",
+    "(5.29)",
+    "(6.6)",
+    "(7.3)",
+    "(6.12)",
+    "(9.9)",
+    "(9.8)",
+    "(9.5)",
+    "Leibniz rule"
+   ],
+   "role": "Converts the normalized exponent gains of the cycle into physical Cartesian derivative bounds with stage-independent loss, supplying hypotheses (5.30) and (5.33) of the summation lemma used in Prop 9.9."
+  },
+  {
+   "id": "Proposition 9.9",
+   "kind": "Proposition",
+   "section": "9",
+   "page": 114,
+   "hypotheses": [
+    "The finite states (u^[j], p^[j]) of the correction cycle exist on the common domain 0 < q < q_big (Lemma 9.7) with the physical derivative and residual bounds of Lemma 9.8",
+    "q_* is taken equal to q_big and earlier local thresholds are shrunk to this common value; the fixed base and initialization block U_0 is cut once inside q < q_big if necessary"
+   ],
+   "conclusion": "There are smooth fields (u_loc, p_loc) on Omega_*, obtained by summing the finite corrections with shrinking cutoffs, such that div u_loc = 0 and all conclusions (i)-(iv) of Theorem 3.1 hold; in particular |R(u_loc, p_loc)|_m = O(q^N) for all m, N (9.20), and u_loc = curl A + B e_theta with A = A_0 + sum_{j>=1} chi(a_j q) A_j, B e_theta = B_0 e_theta + sum chi(a_j q) B_j, p_loc = p_0 + sum chi(a_j q) p_j (9.21).",
+   "constants": [
+    "q_* = q_big",
+    "curl(Psi_j e_theta) = (-d_z Psi_j, 0, (d_r + r^{-1}) Psi_j)",
+    "g_j = h j/10 in (5.30); rho_j = h sigma_j -> infty in (5.33)",
+    "base and initialization derivatives bounded by C_m q^{-K_m} (1 + |log q|)^{P_m}",
+    "coordinate conversion denominator L >= 1 - 2h > 0",
+    "H_ext(s) = 2A c_infty H(4s), K(r,tau) = r^{-1-2h} H_ext(tau/r^2); sup_{s>=0} |H_ext^{(m)}(s)| <= 2A c_infty 4^m (h)_m (1+h)_m with (b)_m the rising factorial",
+    "e_0 = E_0(X_in, 0) > 0 with X_in in (0, X_a); u_{theta,loc}(sqrt(2 X_in tau), 0, 0, 1 - tau) = tau^{-A}(e_0 + O(tau^{2h}))",
+    "base Stokes streamfunctions have the form r^2 times a smooth function of (r^2, z, t) at the axis"
+   ],
+   "cites": [
+    "Lemma 5.4",
+    "Lemma 9.7",
+    "Lemma 9.8",
+    "(9.15)",
+    "(5.28)",
+    "(5.30)",
+    "(5.33)",
+    "(9.18)",
+    "(5.41)",
+    "(4.29)",
+    "(5.27)",
+    "(5.1)",
+    "(9.20)",
+    "(9.21)",
+    "Theorem 4.6",
+    "Proposition 5.5",
+    "(7.33)",
+    "(A.34)",
+    "Lemma A.6",
+    "Theorem 3.1",
+    "(3.5)",
+    "(3.6)"
+   ],
+   "role": "Realizes the local field by summing all correction stages via the summation lemma, and thereby proves Theorem 3.1 (regularity, endpoint bounds, flat residual with exact heat exterior, and inner growth)."
+  },
+  {
+   "id": "Proposition 10.1",
+   "kind": "Proposition",
+   "section": "10",
+   "page": 117,
+   "hypotheses": [
+    "The local fields u_loc = curl A + B e_theta, p_loc of Theorem 3.1 / (9.21) on Omega_* = {tau > 0, q < q_*}, with A smooth at the axis and A = 0 on X >= X_ext",
+    "Cutoffs c(x,t) = chi_x(x) chi_t(t) chosen with support inside q < q_*/2 for t < 1, using the bound (10.3)"
+   ],
+   "conclusion": "There are a compact set K subset R^3, a smooth vector field u and a smooth scalar field p on R^3 x [0,1) with supp u(.,t) union supp p(.,t) subset K for every 0 <= t < 1, satisfying div u = 0 and u(.,t) = p(.,t) = 0 for all sufficiently small t >= 0 (10.2). They agree with u_loc, p_loc on a spatial neighborhood of the origin for all times sufficiently close to 1.",
+   "constants": [
+    "(10.3): q <= C_0 (tau + |z|^{1/D}); derived from q <= 2 tau when 1 - eta^2 >= 1/2 and q <= (sqrt(2)|z|)^{1/D} otherwise",
+    "0 < tau_0 < 1/2 and z_0 > 0 with C_0(tau_0 + z_0^{1/D}) < q_*/2; any fixed r_0 > 0",
+    "chi_x axisymmetric, smooth in (r^2, z), = 1 on r <= r_0/2, |z| <= z_0/2, supp chi_x compactly inside {r < r_0, |z| < z_0}; chi_t = 0 for 1 - t >= tau_0, = 1 for 0 <= 1 - t <= tau_0/2",
+    "(10.4): u = curl(cA) + c B e_theta, p = c p_loc; u = c u_loc + grad c x A; div u = div curl(cA) + r^{-1} d_theta(cB) = 0",
+    "K = supp chi_x",
+    "Stokes streamfunction (10.1): S_n = q^{1 - A + 2nh} int_0^X U_n dX', S = S_0 + sum chi(c_n q) S_n, A_base = (S/r) e_theta; near the axis S = r^2 a(r^2, z, t) so (S/r) e_theta = a(r^2,z,t)(-x_2, x_1, 0)",
+    "mean potential Psi = r^{-1} I_c(r gamma_{d,phys}), I_c g = I g - chi_m J g, vanishing beyond the source"
+   ],
+   "cites": [
+    "Theorem 3.1",
+    "(3.2)",
+    "(3.5)",
+    "(9.21)",
+    "(10.1)",
+    "(4.28)",
+    "(5.10)",
+    "(5.1)",
+    "Proposition 5.5",
+    "(8.4)",
+    "(10.2)",
+    "(10.3)",
+    "(10.4)"
+   ],
+   "role": "Localizes the local field in space and time by cutting off the potential representation before taking the curl, giving a divergence-free compactly supported velocity with zero initial datum that still equals u_loc near the singular point."
+  },
+  {
+   "id": "Lemma 10.2",
+   "kind": "Lemma",
+   "section": "10",
+   "page": 118,
+   "hypotheses": [
+    "f = R(u,p) = d_t u + (u.grad)u - Laplacian u + grad p on 0 <= t < 1 (10.5), where (u,p) are the localized fields of Proposition 10.1",
+    "The endpoint bounds of Theorem 3.1(ii), the flatness (3.4), and the exact exterior heat flow (3.5)"
+   ],
+   "conclusion": "For every spatial multi-index alpha and integer j >= 0, d^alpha_x d^j_t f converges uniformly on R^3 as t -> 1. There are functions F_j in C_c^infty(R^3; R^3), all supported in K, such that lim_{t->1} d^alpha_x d^j_t f(x,t) = d^alpha_x F_j(x) and d^alpha_x F_j(0) = 0 (10.6). These derivative limits from t < 1 are compatible under spatial and time differentiation.",
+   "constants": [
+    "FTC Cauchy bound: sup_{K_0} |d^alpha d^j_t G(t') - d^alpha d^j_t G(t)| <= |t' - t| sup_{K_0 x [t,t']} |d^alpha d^{j+1}_t G| for G = A, B e_theta, p_loc",
+    "(10.7): K(r,tau) = c_infty s^{-A} H(2 tau/s), s = r^2/2; H_ext(Z) = 2A c_infty H(4Z)",
+    "differentiation of the (A.32) integral justified by majorant C e^{-v} v^{h+j}",
+    "(10.8): |d^j_tau K(r,tau)| <= C_j r^{-1-2h-2j}; |d^j_tau (K(rho,tau)^2/rho)| <= C_j rho^{-3-4h-2j}",
+    "d^j_tau p_loc(r,tau) = -int_r^infty d^j_tau (K^2/rho) d rho on r in [r_-, r_+], r_- > 0; d_t = -d_tau; d_r p_loc = K^2/r",
+    "(10.9): |d^alpha_x d^j_t f(x,t)| <= C_{alpha,j,N} (tau + |z|^{1/D})^N on a fixed neighborhood of (0,1)",
+    "(10.10): d^alpha d^j_t f(x,t) = d^alpha F_j(x) - int_t^1 d^alpha d^{j+1}_t f(x,s) ds",
+    "terminal-slice cover: z != 0 gives q >= |z|^{1/D} > 0; z = 0, x != 0 gives r > 0 (exterior region)"
+   ],
+   "cites": [
+    "(10.5)",
+    "(10.6)",
+    "(10.7)",
+    "(10.8)",
+    "(10.9)",
+    "(10.10)",
+    "Theorem 3.1",
+    "(3.4)",
+    "(3.5)",
+    "Proposition 9.9",
+    "(A.32)",
+    "dominated convergence",
+    "fundamental theorem of calculus"
+   ],
+   "role": "Shows every derivative of the force has a uniform limit at the terminal time (vanishing at the origin), providing the Taylor data F_j used by Lemma 10.3 to extend the force smoothly past t = 1."
+  },
+  {
+   "id": "Lemma 10.3",
+   "kind": "Lemma",
+   "section": "10",
+   "page": 120,
+   "hypotheses": [
+    "The force f of (10.5) on 0 <= t < 1 with the derivative limits F_j of Lemma 10.2 (compatible via (10.10)); f vanishes near t = 0 by (10.2)",
+    "chi_0 in C_c^infty(R) equal to one near zero and zero for arguments >= 1"
+   ],
+   "conclusion": "The force extends to f in C_c^infty(R^3 x (0,infty); R^3) with support contained in K x [0,2]; the extension for t >= 1 is (10.11) f(x, 1 + sigma) = sum_{j>=0} chi_0(b_j sigma) (sigma^j/j!) F_j(x), and it satisfies the decay bounds |d^alpha_x d^m_t f(x,t)| <= M_{alpha,m} (3 + R)^k (1 + |x| + t)^{-k} for every k >= 0 (so the decay conditions [13, (5)] hold).",
+   "constants": [
+    "sigma = t - 1 >= 0; on the support of each summand 0 <= sigma <= b_j^{-1}",
+    "(10.12): ||d^alpha_x d^m_sigma (chi_0(b_j sigma) sigma^j F_j / j!)||_infty <= C_{j,m} b_j^{m-j} ||F_j||_{C^{|alpha|}}",
+    "b_0 = 1; for j >= 1, b_j = min{ b in N : b > b_{j-1}, max_{a,m>=0, a+m<=floor(j/2)} C_{j,m} b^{m-j} ||F_j||_{C^a} <= 2^{-j} }",
+    "each term <= 2^{-j} whenever |alpha| + m <= floor(j/2); summands supported in K and zero for sigma >= 1",
+    "R with K subset B(0,R); M_{alpha,m} = ||d^alpha d^m_t f||_infty"
+   ],
+   "cites": [
+    "(10.5)",
+    "Lemma 10.2",
+    "(10.6)",
+    "(10.10)",
+    "(10.11)",
+    "(10.12)",
+    "(10.2)",
+    "[13, (5)]"
+   ],
+   "role": "Borel-type extension of the force through the singular time with compact space-time support, producing the smooth compactly supported force required in Theorem 1.1."
+  },
+  {
+   "id": "Lemma 10.4",
+   "kind": "Lemma",
+   "section": "10",
+   "page": 121,
+   "hypotheses": [
+    "(u,p) are the localized fields of Proposition 10.1, smooth with fixed compact spatial support on each [0,T], T < 1, with zero datum, solving (1.1) at viscosity one with the force f of Lemma 10.3",
+    "F(t) = int_0^t ||f(s)||_2 ds for 0 <= t <= 1"
+   ],
+   "conclusion": "F(1) < infty, and ||u(t)||_2^2 + 2 int_0^t ||grad u(s)||_2^2 ds <= F(t)^2 for 0 <= t < 1 (10.13). In particular the kinetic energy is uniformly bounded and the total dissipation on [0,1) is finite.",
+   "constants": [
+    "energy identity (10.14): (1/2) d/dt ||u||_2^2 + ||grad u||_2^2 = <f, u>",
+    "regularization by dividing by (||u||_2^2 + delta^2)^{1/2}, delta -> 0, giving ||u(t)||_2 <= F(t)",
+    "int_0^t 2 F'(s) F(s) ds = F(t)^2"
+   ],
+   "cites": [
+    "(10.13)",
+    "(10.14)",
+    "Proposition 10.1",
+    "Lemma 10.3",
+    "Cauchy-Schwarz inequality",
+    "monotone convergence"
+   ],
+   "role": "Provides the uniform energy bound (and finite dissipation) of the constructed velocity up to time one, needed for the bounded-energy claim in Theorem 1.1 and to show the force is nonzero."
+  },
+  {
+   "id": "Lemma 10.5",
+   "kind": "Lemma",
+   "section": "10",
+   "page": 121,
+   "hypotheses": [
+    "T < 1 fixed",
+    "(v, P) is a smooth solution of (1.1) at viscosity one on R^3 x [0,T] with the force f of Lemma 10.3 and zero initial velocity",
+    "v in L^infty([0,T]; L^2(R^3)) (no spatial growth condition on P or on derivatives of v at infinity)",
+    "u is the localized velocity of Proposition 10.1 (smooth, compactly supported, with ||grad u||_infty bounded on [0,T])"
+   ],
+   "conclusion": "v = u on R^3 x [0,T].",
+   "constants": [
+    "w = v - u, pi = P - p, g_ij = v_i v_j - u_i u_j = w_i w_j + w_i u_j + u_i w_j; ||w(t)||_2 <= C_T, sum ||g_ij(t)||_1 <= C_T",
+    "difference equation (10.15): d_t w + (v.grad)w + (w.grad)u = Laplacian w - grad pi, div w = 0",
+    "pi_* = sum_{i,j} R_i R_j g_ij (10.16), multiplier -xi_i xi_j/|xi|^2; pi_* uniformly in H^{-s}, s > 3/2; Laplacian pi_* = -sum d_i d_j g_ij; grad pi = grad pi_* in the space-time interior (via H_a = int a (grad pi - grad pi_*) dt in H^{-3}, harmonic, Fourier support {0})",
+    "cutoffs phi_R = phi(x/R), chi_R = phi_{8R}; E_R = int chi_R |w|^2, A_R = (int chi_R |grad w|^2)^{1/2}, B_R = ||phi_{4R} w||_6",
+    "(10.17): B_R <= C ||grad(phi_{4R} w)||_2 <= C (A_R + R^{-1} ||w||_2)",
+    "(10.18): phi_{4R} pi_* = sum R_i R_j (phi_{4R} g_ij) + sum [phi_{4R}, R_i R_j] g_ij; first sum L^{3/2} norm <= C_T (B_R + 1) using ||phi_{4R} w_i w_j||_{3/2} <= B_R ||w||_2, ||phi_{4R} w_i u_j||_{3/2} <= ||w||_2 ||u||_6",
+    "commutator kernel K_R(x - y) = C |x - y|^{-3} min{|x - y|/R, 1}; ||K_R||_{4/3}^{4/3} <= C [R^{-4/3} int_0^R r^{-2/3} dr + int_R^infty r^{-2} dr] <= C R^{-1}; second sum in L^{4/3} bounded by C_T R^{-3/4}",
+    "|grad chi_R| <= C R^{-1} phi_{7R}; interpolation ||phi_{3R} w||_3 <= B_R^{1/2} ||w||_2^{1/2}, ||phi_{3R} w||_4 <= B_R^{3/4} ||w||_2^{1/4}",
+    "(10.19): |int pi w . grad chi_R| <= C_T R^{-1} [(B_R + 1) B_R^{1/2} + R^{-3/4} B_R^{3/4}]",
+    "difference energy: (1/2) E_R' + A_R^2 = -int chi_R (w.grad)u . w + (1/2) int |w|^2 Laplacian chi_R + (1/2) int |w|^2 v . grad chi_R + int pi w . grad chi_R; R large so chi_R = 1 near supp u (then v = w on supp grad chi_R)",
+    "transport flux <= C R^{-1} int phi_{6R} |w|^3 <= C_T R^{-1} B_R^{3/2}; Laplacian term <= C_T R^{-2}; every power of A_R is at most 3/2 < 2; e.g. R^{-1} A_R^{3/2} <= delta A_R^2 + C_delta R^{-4}",
+    "(1/2) E_R' + (1/2) A_R^2 <= ||grad u||_infty E_R + C_T/R a.e. t; E_R(0) = 0; Gronwall gives E_R(t) <= (2 C_T/R) int_0^t exp(2 int_s^t ||grad u(a)||_infty da) ds <= C'_T/R -> 0"
+   ],
+   "cites": [
+    "(1.1)",
+    "Lemma 10.3",
+    "Proposition 10.1",
+    "(10.15)",
+    "(10.16)",
+    "(10.17)",
+    "(10.18)",
+    "(10.19)",
+    "Riesz transforms bounded on L^p, 1 < p < infty [20]",
+    "Sobolev inequality",
+    "Young's convolution inequality",
+    "Holder's inequality",
+    "Young's inequality",
+    "Gronwall inequality"
+   ],
+   "role": "Weak-strong type uniqueness: any smooth bounded-energy solution with the same force and datum coincides with the constructed u before time one, which transfers the velocity blowup to a hypothetical global smooth solution in the proof of Theorem 1.1."
+  },
+  {
+   "id": "Corollary 10.6",
+   "kind": "Corollary",
+   "section": "10",
+   "page": 125,
+   "hypotheses": [
+    "nu > 0 is any positive viscosity",
+    "The whole-space fields and force (u, p, f) at viscosity nu already constructed (Proposition 10.1, Lemma 10.3, rescaling (10.22)), with common spatial support in K_nu = sqrt(nu) K and the growth (10.21) along the path (10.20)",
+    "T^3 = R^3/Z^3 with fundamental cube Q_0 = (-1/2, 1/2)^3"
+   ],
+   "conclusion": "There is a smooth force on T^3 x [0,infty), compactly supported in time, for which the solution (U, P_per) of the periodic Navier-Stokes equations with viscosity nu and zero initial velocity is smooth on [0,1) and satisfies limsup_{t->1} ||U(t)||_{L^infty(T^3)} = infty. Its velocity and pressure have support in a fixed compact subset of the interior of Q_0 at every time before one. There is no global smooth periodic solution for the same datum and force. (This is alternative (D) in [13], with periodic pressure as required by its erratum.)",
+   "constants": [
+    "lambda > 1 with lambda^{-1} K_nu compactly inside Q_0; t_0 = 1 - lambda^{-2}",
+    "tilde u(x,t) = lambda u(lambda x, lambda^2 (t - t_0)), tilde p = lambda^2 p(lambda x, lambda^2(t - t_0)), tilde f = lambda^3 f(lambda x, lambda^2(t - t_0)); extended by zero for t < t_0; each term of the momentum equation is lambda^3 times its original value, viscosity unchanged",
+    "U = sum_{k in Z^3} tilde u(x + k, t), P_per = sum tilde p(x + k, t) (0 <= t < 1), F_per = sum tilde f(x + k, t) (t >= 0); translates have disjoint supports with a positive gap",
+    "force time support in [t_0, 1 + lambda^{-2}]; decay ||d^alpha d^m_t F_per(t)||_infty <= C (1 + t)^{-N}",
+    "rescaled growth path tilde x_tau = lambda^{-1} sqrt(nu) x_tau, tilde t_tau = 1 - lambda^{-2} tau; U_theta(tilde x_tau, tilde t_tau) = lambda sqrt(nu) tau^{-A}(e_0 + O(tau^{2h})) -> +infty",
+    "periodic uniqueness: (1/2) d/dt ||w||_{L^2(T^3)}^2 + nu ||grad w||_{L^2(T^3)}^2 <= ||grad U||_infty ||w||_{L^2(T^3)}^2 on [0,T], T < 1"
+   ],
+   "cites": [
+    "Proposition 10.1",
+    "Lemma 10.3",
+    "(10.22)",
+    "(10.20)",
+    "(10.21)",
+    "Theorem 1.1",
+    "[13]",
+    "Gronwall inequality"
+   ],
+   "role": "Transfers the whole-space blowup to the periodic setting by rescaling the compactly supported fields into a fundamental cube and periodizing, establishing the periodic alternative (D)."
+  }
+ ],
+ "hard_pages": [
+  {
+   "pages": "107-111",
+   "why": "Proof of Proposition 9.6: four steps each with its own exponent table, and the closing inequalities on p. 111 must be checked against every row. Specific points: the Step 1 row 'cross with total mean correction B + 0.4' relies on Lemma 9.2 with mu = 0.9 from (9.9) (alpha + mu - 1/2); Step 2's covariance remainder 'B + 0.68 - kappa_s = C* + 0.18 - kappa_s' uses the w - w_0^tan in W_{0.68} bound and is what fixes the 0.17 in (9.14); Step 3's claim that all four term types reach H + 1 - 2 kappa_s depends on |D^I b| <= C eps S_*^b for the base radial velocity; and the final 'H - B = 1/2 - 2 kappa_s > 0.1' is the only place the wave improvement from Step 3 is checked. The definition of L^as_phys and the covariance identity (7.36) are invoked without restatement."
+  },
+  {
+   "pages": "104-105",
+   "why": "Proof of Proposition 9.3(i): the weighted radial-integral estimate uses zeta = e^{-a/s^2} with the bounds int_0^delta s^{-M} e^{-a/s^2} ds <= C delta^{3-M} e^{-a/delta^2} and |d^k/ds^k e^{-a/s^2}| <= C s^{-3k} e^{-a/s^2}, and then the amplitude-division bounds (|D^I delta a_sigma| etc.) that 'recover (7.33)'; verifying that the sqrt(zeta) weight survives division by a_sigma^{-1} ~ zeta^{-1/2} requires Section 7 material (7.25), (7.31), (7.33) not in this shard."
+  },
+  {
+   "pages": "113-114",
+   "why": "Lemma 9.8: the loss table (9.19) (radial 1/2 + h kappa_s, axial D, time 1 + h, frame 1/2) and the phase-derivative bounds leading to s_x = 1/2 + h/2, s_t = 1 + 3h/2 and l_m = 2A + (m+1)(1 + 3h/2); the extracted text of (9.17) is garbled ('gj = 10h ... j -> infty'), and g_j = h j/10 had to be recovered from p. 114 Step 1 of Prop 9.9."
+  },
+  {
+   "pages": "122-123",
+   "why": "Lemma 10.5 pressure flux: the commutator kernel K_R = C|x-y|^{-3} min{|x-y|/R, 1} and the computation ||K_R||_{4/3}^{4/3} <= C R^{-1} (inner integral R^{-4/3} int_0^R r^{-2/3} dr = 3 R^{-1}, outer int_R^infty r^{-2} dr = R^{-1}), then the Young/Holder pairing giving the R^{-1} R^{-3/4} B_R^{3/4} term in (10.19) and the check that every power of A_R is <= 3/2 so Young's inequality absorbs into A_R^2. Also the identification grad pi = grad pi_* via H_a in H^{-3} with Fourier support at {0}."
+  },
+  {
+   "pages": "116",
+   "why": "Prop 9.9 Step 4: the bound sup |H_ext^{(m)}| <= 2A c_infty 4^m (h)_m (1+h)_m comes from the integral (A.34) in Appendix A, and the identification H_ext(s) = 2A c_infty H(4s) with the exterior formula (4.29) cannot be checked from this shard's pages."
+  }
+ ],
+ "could_not_determine": [
+  {
+   "id": "Lemma 9.8",
+   "field": "constants",
+   "why": "The extracted statement of (9.17) reads 'gj = 10h' with a dangling 'j -> infty', so the exact printed form of g_j in the lemma is garbled; I recorded g_j = h j/10 based on p. 114 ('Lemma 9.8 supplies (5.30) with gj = hj/10') and the proof's 'stage-j increment has normalized exponent at least j/10'."
+  },
+  {
+   "id": "Theorem 3.1",
+   "field": "hypotheses",
+   "why": "The theorem is a pure existence statement with no hypotheses beyond the fixed choices of Sections 4-9; I recorded only the constants it introduces and the coordinate conventions it assumes."
+  },
+  {
+   "id": "Proposition 9.6",
+   "field": "cites",
+   "why": "Step 2 invokes the operator L^as_phys 'from (7.35)' and the covariance identity (7.36) and the amplitude formula (7.31); I recorded these labels as cited but could not verify from pages 100-126 that (7.35) defines L^as_phys rather than only W^as_0."
+  }
+ ],
+ "stopped_at_page": null
+}
