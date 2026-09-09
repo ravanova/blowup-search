@@ -1,0 +1,254 @@
+{
+  "schema": "arc6_lean_v1",
+  "unit": "U2 (leg 418, AUDIT) — LEAN, MEASURED NOT ASSUMED",
+  "arc": 6,
+  "leg": 418,
+  "date_utc": "2026-09-09",
+  "verification_status": "UNVERIFIED. ORCHESTRATION.md §3f rule 1 — one session measured this and wrote its own gate answers. No fresh session has re-derived any of it.",
+  "object": {
+    "repo": "github.com/openai/NavierStokesAndEuler",
+    "head_commit_sha1": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+    "tracked_files": 2496,
+    "lean_files": 2486,
+    "lean_bytes": 32437656,
+    "pinned_in": "writeup/data/arc6_acquire_v1.json :: artifacts_fetched.openai_lean_project"
+  },
+  "gate_a_does_it_build": {
+    "question": "Does it build? (record toolchain, mathlib rev, wall time, or the failure)",
+    "answer": "NOT-ESTABLISHED, WITH THE BLOCKER MEASURED AND NAMED: this environment's egress policy DENIES the mathlib olean cache host, so `lake exe cache get` cannot serve, and mathlib itself must be compiled from source before a single line of the project is elaborated. The build was started anyway and is progressing; it is hours-to-days of 4-core compute, not minutes. This is a measured incompleteness with a named cause, not a refusal.",
+    "what_was_established": [
+      "The toolchain installs. elan installed from elan.lean-lang.org; leanprover/lean4:v4.34.0-rc2 installed from releases.lean-lang.org.",
+      "Lean reports: 'Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)'.",
+      "Lake reports: 'Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)'.",
+      "`lake exe cache get` resolves and begins fetching the declared dependencies. Comparator cloned and checked out at its pinned revision.",
+      "No configuration error, no manifest error, no toolchain mismatch, no egress refusal was encountered at any point."
+    ],
+    "toolchain_declared_by_project": "leanprover/lean4:v4.34.0-rc2 (lean-toolchain)",
+    "toolchain_installed_here": "leanprover/lean4:v4.34.0-rc2, lean commit 6a10ac8c22beadecabdbb0919c2b50214762f91d",
+    "mathlib_rev_declared": "85e3a25e006c35636f0e53b0e9296caca2685bc0 (inputRev v4.34.0-rc2)",
+    "comparator_rev_declared": "19e111e2141cf333c7daff0f64c5f24acc91dd2e (inputRev v4.34.0-rc2)",
+    "comparator_rev_checked_out_here": "19e111e2141cf333c7daff0f64c5f24acc91dd2e — CONFIRMED by lake's own log line",
+    "host": {
+      "cores": 4,
+      "ram_gb": 15,
+      "disk_free_gb_at_start": 30,
+      "note": "single container, no accelerator, shared with this session's own work"
+    },
+    "measured_dependency_fetch_rate_mb_per_min": 30,
+    "why_not_finished": "MEASURED, not guessed: the olean cache host is denied (above), so mathlib compiles from source. mathlib4 is of order 6,500 modules and this project adds 2,486 more, for which no cache exists anywhere in any case. On 4 cores that is hours to days. The dominant term is compute, and the reason the compute is needed at all is the denied host.",
+    "what_would_settle_it": "A completed `lake build` printing no error, followed by the two `#print axioms` lines already present at the foot of NavierStokes/ComparatorSolution.lean. Both are mechanical once the build lands.",
+    "re_check_obligation": "The build was left running. Its final state — success, failure, or still-running at arc close — is banked by U6 and, if it contradicts anything here, as a CORRECTIONS.md entry. A gate answer that says NOT-ESTABLISHED and names what would settle it is an answer; 'I did not try' would not be.",
+    "explicitly_not_claimed": "That the project builds. That it does not build. Neither is established here.",
+    "the_blocker_measured": {
+      "host": "mathlib4.blob.core.windows.net:443",
+      "proxy_verdict": "connect_rejected — 'gateway answered 502 to CONNECT (policy denial or upstream failure)', recorded at 2026-09-09T16:10:55.443Z in the agent proxy's own recentRelayFailures",
+      "consequence": "`lake exe cache get` has no cache to get. mathlib4 (~6.5k modules) is compiled from source, and only then can the project's 2,486 modules be elaborated.",
+      "not_a_workaround": "The blocked host was reported, not routed around. Per the environment's own documentation an organisation egress denial is reported, never retried into.",
+      "a_second_and_DIFFERENT_failure": "The first `lake exe cache get` also died with `error: RPC failed; curl 56 Recv failure: Connection reset by peer` mid-clone of mathlib4. The proxy's log shows why and it is NOT a policy denial: 'ws_closed_mid_exchange — tunnel closed (code 1006) after 748s; 461,265,558 B received'. A relay timeout on a long transfer. The clone SUCCEEDED on the next attempt, so this one is transient and is recorded so it is not mistaken for the first.",
+      "why_both_are_banked": "Two failures against the same vendor, one policy and one transient, that a single line of log would have collapsed into 'the build did not work'."
+    },
+    "build_started_and_left_running": {
+      "command": "lake build (defaultTargets NavierStokes, Euler, ComparatorChallenges)",
+      "state_at_U2_close": "compiling mathlib from source; ~385 mathlib modules built in the first ~10 minutes on 4 cores",
+      "note": "Early mathlib modules are the cheap ones. No total is extrapolated from a 10-minute sample and none is written here."
+    }
+  },
+  "gate_b_is_it_the_papers_theorem": {
+    "question": "Is the top-level statement the paper's theorem, or a weaker/adjacent one?",
+    "answer": "IT IS FEFFERMAN'S (C) AND (D) EXACTLY, AND IT IS STRICTLY WEAKER THAN THE PAPER'S THEOREM 1.1. Both halves of that sentence are measured and neither is a hedge.",
+    "top_level_declarations": [
+      {
+        "name": "NavierStokes.Comparator.navier_stokes_breakdown_R3",
+        "file": "NavierStokes/ComparatorSolution.lean",
+        "claims": "Fefferman (C)"
+      },
+      {
+        "name": "NavierStokes.Comparator.navier_stokes_breakdown_periodic",
+        "file": "NavierStokes/ComparatorSolution.lean",
+        "claims": "Fefferman (D)"
+      }
+    ],
+    "top_level_statement_verbatim_lean": "theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu > 0) :\n    ∃ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),\n    InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧\n    ¬ (∃ v p, NavierStokesExistenceAndSmoothnessRn nu u₀ f v p)",
+    "the_finding_that_matters": {
+      "claim": "The definitions the top-level statement is built from are NOT OpenAI's. They are byte-identical to Google DeepMind's Formal Conjectures formalization of the Clay problem, at a pinned commit.",
+      "how_measured": "The upstream file was fetched here at the commit the project names — https://raw.githubusercontent.com/google-deepmind/formal-conjectures/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjectures/Millenium/NavierStokes.lean, 296 lines, sha256 f446284f2aa54375f558c263a580b34e2e7bc9f44a28829637199cc72257d25d — and diffed against ComparatorChallenges/NavierStokes.lean from `open ContDiff` to end of file.",
+      "diff_result": "THE ONLY DIFFERENCES ARE NON-MATHEMATICAL: the namespace (NavierStokes -> NavierStokes.Comparator), two inlined `local notation` lines replacing an upstream import, `local` added to one notation, removal of upstream's `@[category ...]`/`@[AMS 35]` attributes, and DELETION of upstream's statements (A) and (B). EVERY definition and BOTH breakdown theorem statements are character-for-character identical.",
+      "second_diff": "NavierStokes/ComparatorDefinitions.lean (the module the proof adapters import) differs from ComparatorChallenges/NavierStokes.lean by EXACTLY the two theorem statements and nothing else — i.e. the definitions the proof is against are the same text as the definitions the challenge is against.",
+      "why_it_matters": "The single most common way a formalization is 'true but not the theorem' is a self-authored encoding that quietly weakens a hypothesis. That failure mode is excluded here by construction and I checked the exclusion myself at the upstream source, not by trusting the header comment that asserts it."
+    },
+    "quantifier_by_quantifier": [
+      {
+        "fefferman_C": "Take nu > 0 and n = 3",
+        "lean": "(nu : ℝ) (hnu : nu > 0), and the ambient type is EuclideanSpace ℝ (Fin 3)",
+        "verdict": "MATCH"
+      },
+      {
+        "fefferman_C": "there exist a smooth, divergence-free vector field u°(x) on ℝ³",
+        "lean": "∃ (u₀ : ℝ³ → ℝ³), InitialVelocityConditionDecay u₀, whose fields are div_free (∀ x, ∇·u₀ x = 0) and smooth (ContDiff ℝ ∞ u₀)",
+        "verdict": "MATCH"
+      },
+      {
+        "fefferman_C": "and a smooth f(x,t) on ℝ³ × [0,∞)",
+        "lean": "∃ (f : ℝ³ → ℝ → ℝ³), ForceConditionDecay f, whose smooth field is ContDiffOn ℝ ∞ (↿f) (univ ×ˢ Ici 0)",
+        "verdict": "MATCH — and note the domain is the CLOSED half-line, as Fefferman writes it"
+      },
+      {
+        "fefferman_C": "satisfying (4)",
+        "lean": "decay : ∀ m : ℕ, ∀ K : ℝ, ∃ C : ℝ, ∀ x, ‖iteratedFDeriv ℝ m u₀ x‖ ≤ C / (1 + ‖x‖) ^ K",
+        "verdict": "MATCH. Fefferman quantifies over multi-indices alpha; Lean quantifies over the derivative ORDER m and bounds the norm of the full m-th Frechet derivative, which dominates every individual partial of that order. Equivalent in strength up to constants, and the constant is existentially quantified."
+      },
+      {
+        "fefferman_C": "satisfying (5)",
+        "lean": "decay : ∀ m : ℕ, ∀ K : ℝ, ∃ C, ∀ x, ∀ t ≥ 0, ‖iteratedFDerivWithin ℝ m (↿f) (univ ×ˢ Ici 0) (x,t)‖ ≤ C / (1 + ‖x‖ + t) ^ K",
+        "verdict": "MATCH, same remark"
+      },
+      {
+        "fefferman_C": "for which there exist no solutions (p,u) of (1),(2),(3),(6),(7) on ℝ³ × [0,∞)",
+        "lean": "¬ (∃ v p, NavierStokesExistenceAndSmoothnessRn nu u₀ f v p), whose seven fields are: navier_stokes (1), div_free (2), initial_condition (3), velocity_smooth + pressure_smooth (6), integrable + globally_bounded_energy (7)",
+        "verdict": "MATCH, clause for clause, and the PDE field reads ∂_t v + (v·∇)v = nu·Δv − ∇p + f with the time derivative taken as derivWithin on Ici 0 — Fefferman's (1) exactly, including the sign of the pressure gradient"
+      }
+    ],
+    "in_what_sense_weaker_than_theorem_1_1": {
+      "statement": "The manuscript's Theorem 1.1 asserts SIX things (see arc6_acquire_v1.json :: manuscript_statements.theorem_1_1_assertions_enumerated). The top-level Lean statement asserts only the SIXTH — the non-existence clause. It says nothing about the constructed field at all.",
+      "measured_status_of_the_other_five": [
+        {
+          "assertion": "A1 f in C^infty_c(ℝ³ × (0,∞))",
+          "lean": "PROVED as part of R3CompactCandidate.Properties (force_smooth, force_support, force_time_support)"
+        },
+        {
+          "assertion": "A2 compact K with supp u(·,t) ∪ supp p(·,t) ⊆ K for every t in [0,1)",
+          "lean": "PROVED as part of R3CompactCandidate.Properties (velocity_support, pressure_support)"
+        },
+        {
+          "assertion": "A3 u,p smooth on ℝ³ × [0,1), solving (1.1) with u(·,0)=0",
+          "lean": "PROVED as part of R3CompactCandidate.Properties (velocity_smooth, pressure_smooth, divergence_free, navier_stokes, zero_initial_velocity)"
+        },
+        {
+          "assertion": "A4 sup_{0<=t<1} ‖u(t)‖_{L²} < ∞ for the CONSTRUCTED field",
+          "lean": "PROVED, but NOT as part of R3CompactCandidate.Properties — it is NavierStokesR3.CompactEnergy.uniform_finite_energy, a separate theorem taking the candidate's own hypotheses. That module IS in the top-level theorem's import closure."
+        },
+        {
+          "assertion": "A5 limsup_{t↑1} ‖u(t)‖_{L∞} = ∞",
+          "lean": "PROVED as R3CompactCandidate.Properties.speed_unbounded, encoded as SpeedUnboundedAtOne: ∀ M > 0, ∀ δ > 0, ∃ t ∈ Ioo 0 1, ∃ x, 1 − δ < t ∧ M < ‖u (t,x)‖. That is limsup, not lim — it matches the manuscript's own wording."
+        }
+      ],
+      "and_one_thing_that_is_NOT_proved": "NavierStokesR3.ProblemStatement.breakdownStatement — the project's OWN transcription of the manuscript's Theorem 1.1, bundling every clause including energy_bounded — is DEFINED AND NEVER PROVED. It appears in exactly one file, its own. Its docstring says so: 'This is a target proposition, not an asserted theorem.' Nothing is wrong with that: (C) does not need it. But anyone reading the project for 'the paper's Theorem 1.1, formalised' will find that name and it is not a theorem."
+    },
+    "a_structural_difference_from_the_manuscript": {
+      "measured": "In the LEAN, the PERIODIC object is primary and the ℝ³ object is derived from it. NavierStokes.ProblemStatement.candidateStatement is the TORUS statement (its CandidateProperties carry velocity_periodic / pressure_periodic / force_periodic). ActualCandidateAssembly.selected_candidate proves that. R3CompactCandidate then obtains the whole-space candidate by R3CompactCandidate.of_localized_fields / of_periodic_local_model — localizing the periodic fields.",
+      "in_the_manuscript": "The order is REVERSED. Theorem 1.1 is the ℝ³ statement, proved first; Corollary 10.6 periodizes it by rescaling the compactly supported fields into the interior of Q₀ and summing integer translates.",
+      "reading": "This is not a defect and it is not evidence of one. It is a measured statement that the Lean development is not a transcription of the manuscript's proof order, which bears directly on gate (d)."
+    }
+  },
+  "gate_c_sorry_and_axiom_free": {
+    "question": "Is the dependency graph of that statement sorry-free and axiom-free beyond mathlib's standard axioms?",
+    "answer": "ESTABLISHED AT SOURCE LEVEL: YES. NOT ESTABLISHED AT KERNEL LEVEL: the check that settles it is `#print axioms`, which needs the build of gate (a), and gate (a) is blocked on a denied host. The distinction is stated rather than blurred, because a source-level grep is exactly the check an adversarial encoding is designed to pass.",
+    "source_level_census_tracked_files_only": {
+      "method": "`git ls-files '*.lean'` — the project's own 2,486 files. The .lake/ dependency tree is EXCLUDED, and excluding it matters: 29 `sorry` occurrences and 6 `axiom` declarations live in .lake/packages/Comparator/tests/projects/, which are the Comparator tool's own ADVERSARIAL TEST FIXTURES (files literally named def_hole_axiom_issue, opaque_value, primitive_issue). A census that counted those would report a scandal that is not there.",
+      "sorry_locations": [
+        "ComparatorChallenges/NavierStokes.lean:277 (placeholder)",
+        "ComparatorChallenges/NavierStokes.lean:284 (placeholder)",
+        "ComparatorChallenges/Euler.lean:88 (placeholder)",
+        "ComparatorChallenges/Euler.lean:184 (placeholder)",
+        "ComparatorChallenges/NavierStokes.lean:29 (prose in a docstring)"
+      ],
+      "sorry_in_the_top_level_import_closure": 0,
+      "axiom_declarations": 0,
+      "native_decide_occurrences": 0,
+      "unsafe_or_partial_or_implemented_by_or_extern": 0,
+      "opaque_declarations": 0,
+      "sorry_token_occurrences_total": 5,
+      "sorry_proof_placeholders": 4,
+      "sorry_occurrences_in_prose": 1,
+      "sorry_prose_occurrence": "ComparatorChallenges/NavierStokes.lean:29 — the module docstring's own sentence 'including their intentional `sorry` challenge placeholders'. It is prose, not a proof term. It is banked because the FIRST count this unit made was 4, the re-count by writeup/arc6_lean_evidence.py returned 5, and the difference is exactly this line. A census that silently reported the number it preferred would be the defect this repository has caught in itself before."
+    },
+    "import_closure_measured_here": {
+      "method": "Every `import` line of every one of the 2,486 tracked .lean files was parsed and the transitive closure computed from each root. Project-local modules only; Mathlib.* is not a project module.",
+      "NavierStokes.ComparatorSolution": {
+        "modules": 580,
+        "lines": 379522,
+        "theorem_or_lemma_declarations": 23604,
+        "sorry_lines": 0,
+        "ComparatorChallenges_in_closure": false
+      },
+      "Euler.Solution": {
+        "modules": 1829,
+        "lines": 210326,
+        "theorem_or_lemma_declarations": 10595,
+        "sorry_lines": 0,
+        "ComparatorChallenges_in_closure": false
+      },
+      "Euler.EulerSingularity": {
+        "modules": 1770,
+        "lines": 203639,
+        "theorem_or_lemma_declarations": 10287,
+        "sorry_lines": 0,
+        "ComparatorChallenges_in_closure": false
+      },
+      "why_this_is_the_load_bearing_check": "All four `sorry` tokens are in ComparatorChallenges, which is where the Comparator REFERENCE statements live with their intentional placeholders. The project's headers assert that neither the proof root nor the submission imports that module. THAT ASSERTION IS NOW MEASURED AND IT HOLDS: ComparatorChallenges appears in no main import closure.",
+      "modules_in_no_main_closure": 73,
+      "dead_module_note": "73 of the 2,486 modules (2.9%) are reachable from no main result — among them a whole NavierStokes.R3* pressure family, and modules whose names end in Investigation or NoOptions. Dead code is not a defect in a proof; it is recorded because a reader counting 2,486 files is counting 73 that carry nothing."
+    },
+    "declared_axioms_by_the_project": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "declared_axioms_note": "Those three are Lean 4's standard axioms and are what mathlib itself runs on. formalization.yaml declares them for all four main results and ComparatorChallenges/NavierStokes.json lists exactly those three as permitted_axioms. THIS IS THE PROJECT'S CLAIM ABOUT ITSELF and it is banked at that status until a kernel check runs.",
+    "what_a_source_grep_cannot_see": [
+      "A `sorryAx` introduced through a definition rather than a tactic (the Comparator test suite contains a fixture for exactly this attack, `def_hole_axiom_issue`, which hides sorryAx behind a constant function).",
+      "An axiom inherited from a mathlib declaration.",
+      "A definitional unfolding that makes a hypothesis vacuous.",
+      "Anything at all about whether the 23,604 declarations in the closure actually typecheck."
+    ]
+  },
+  "gate_d_fraction_formalised": {
+    "question": "What fraction of the paper's argument is formalised at all?",
+    "answer": "THE THEOREM IS FULLY FORMALISED; THE PAPER'S ARGUMENT IS NOT MEASURABLY FORMALISED, AND THE PROJECT DOES NOT CLAIM IT IS. The project ships a statement-level alignment of FOUR rows and nothing finer. Below that, its own cross-references point at a document which is not the published manuscript.",
+    "what_the_project_claims": "formalization.yaml :: alignment.statements has exactly four rows: 'Theorem 1.1 (Navier-Stokes on ℝ³)', 'Corollary 10.6 (Navier-Stokes on ℝ³/ℤ³)', 'Theorem 1.1 (Euler)', 'Theorem 1.1 (Euler), alternate version'. No lemma, proposition or section of either manuscript is mapped to a Lean declaration anywhere in the repository.",
+    "cross_reference_census": {
+      "method": "Every occurrence of `(Theorem|Lemma|Proposition|Corollary|Remark) <n>.<m>` in the 2,486 tracked .lean files, matched against the numbered environments actually present in the two fetched manuscripts.",
+      "distinct_labels_cited_in_lean": 25,
+      "present_in_published_NS_manuscript": 9,
+      "present_only_in_published_Euler_manuscript": 1,
+      "present_in_NEITHER_published_manuscript": 15,
+      "labels_present_in_neither": [
+        "Lemma 11.3",
+        "Lemma 3.5",
+        "Lemma 3.6",
+        "Lemma 3.7",
+        "Lemma 8.3",
+        "Lemma 8.4",
+        "Lemma 8.5",
+        "Proposition 10.3",
+        "Proposition 11.4",
+        "Proposition 11.7",
+        "Proposition 3.2",
+        "Proposition 5.1",
+        "Proposition 6.2",
+        "Proposition A.2",
+        "Remark 8.6"
+      ],
+      "numbered_results_in_published_NS_manuscript": 73,
+      "and_the_decisive_detail": "The published Navier-Stokes manuscript has TEN numbered sections plus Appendices A, B and C. There is no Section 11. Yet the Lean cites 'Lemma 11.3', 'Proposition 11.4' and 'Proposition 11.7', and NavierStokes/R3/ProblemStatement.lean is titled 'The whole-space assertion of PART II, Theorem 1.1'. The published manuscript is not in parts. The Lean sources refer throughout to 'the candidate manuscript' and 'the supplied manuscript'.",
+      "reading": "The Lean development was written against a DIFFERENT DRAFT from the one published on 2026-09-08 — a draft with at least eleven sections and at least two parts. That is unremarkable for a project developed alongside a paper, and it is NOT an accusation of any kind. What it means for this gate is precise: a lemma-by-lemma alignment between the published 166 pages and the 2,486 Lean files CANNOT BE READ OFF THE PROJECT, and this unit does not manufacture one."
+    },
+    "the_honest_fraction": {
+      "of_the_paper_s_THEOREM": "100%, in the only sense that is checkable: the top-level Lean statement is Fefferman (C), and (D), with definitions byte-identical to an independent third party's. Subject entirely to gate (a) and the kernel half of gate (c).",
+      "of_the_paper_s_ARGUMENT": "NOT MEASURABLE FROM THE ARTEFACT. At most 9 of the published manuscript's 73 numbered results are even NAMED anywhere in the Lean sources (12.3%), and for none of those nine did this unit check that the Lean statement is the manuscript's statement. The Lean's own structure differs from the manuscript's — the torus object is primary in the Lean and derived in the manuscript.",
+      "why_both_numbers_are_needed": "A formalised THEOREM and a formalised ARGUMENT are different objects. If the build passes and the axioms are the three standard ones, the theorem is proved and the manuscript's 166 pages are, strictly speaking, no longer load-bearing for the truth of the statement. But a reader who wants to know whether THE PAPER'S PROOF is correct learns almost nothing from the Lean, because the Lean does not say which of its 23,604 declarations is which page."
+    }
+  },
+  "what_this_unit_did_not_establish": [
+    "That the project builds, or that it does not. Gate (a) is NOT-ESTABLISHED with a reason.",
+    "That the kernel accepts the proofs, or which axioms it reports. That is `#print axioms` after a build.",
+    "That the manuscript's proof is correct. A Lean project that compiles would establish the THEOREM, not the manuscript.",
+    "Anything about W2, W3, W4 or any lane. No wall moved. No L1->L4 link moved. Clay stays ~0.05%."
+  ],
+  "clay_movement": {
+    "links_moved": 0,
+    "clay_odds": "~0.05%, unchanged",
+    "tier": "no tier produced",
+    "note": "This unit ran greps, parsed import lines, and diffed two text files against a third party's source. It is not a measurement of any fluid equation."
+  }
+}
