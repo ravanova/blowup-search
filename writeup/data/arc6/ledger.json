@@ -1,0 +1,98 @@
+{
+ "schema": "arc6_ledger_v1",
+ "leg": 425,
+ "cursor": {
+  "read_through_page": 23,
+  "sections_done": [
+   "1-2",
+   "3"
+  ]
+ },
+ "entries": [
+  {
+   "id": "Theorem 1.1",
+   "kind": "Theorem",
+   "section": "1",
+   "page": 1,
+   "hypotheses": [
+    "nu > 0 (arbitrary positive viscosity)"
+   ],
+   "conclusion": "There exist f in C^inf_c(R^3 x (0,inf); R^3), a compact K subset R^3, and smooth (u,p) on R^3 x [0,1) solving d_t u + (u.grad)u - nu Lap u + grad p = f, div u = 0, u(.,0) = 0, with supp u(.,t) U supp p(.,t) subset K for all 0<=t<1, sup_{0<=t<1} ||u(t)||_{L^2} < inf, and limsup_{t->1} ||u(t)||_{L^inf} = inf. Consequently no smooth (u,P) on R^3 x [0,inf) with the same force and datum has uniformly bounded kinetic energy.",
+   "constants": [
+    "T = 1 (singular time, fixed)",
+    "K (compact support set, existence only)",
+    "nu > 0 (universally quantified; obtained from nu = 1 by the rescaling (10.22))"
+   ],
+   "cites": [
+    "(1.1)",
+    "Fefferman [13] alternative (C)",
+    "Corollary 10.6 for alternative (D)",
+    "proved in Section 10.4 from Proposition 10.1, Lemma 10.3, Lemma 10.4, Lemma 10.5 and Theorem 3.1(iv)"
+   ],
+   "role": "The main theorem: Fefferman alternative (C), with the exhibition clauses (compact support of u and p, bounded energy, limsup blowup) stated alongside the non-existence clause. Section 2 has no numbered statements."
+  },
+  {
+   "id": "Theorem 3.1",
+   "kind": "Theorem",
+   "section": "3",
+   "page": 15,
+   "hypotheses": [
+    "viscosity nu = 1 (the local construction)",
+    "the similarity coordinates (3.2): tau = q(1-eta^2), z = q^D eta, X = r^2/(2q), with A = 1/2 + h, D = 1/2 - h"
+   ],
+   "conclusion": "There are constants 0 < h < 1/100, q_* > 0, 0 < X_a < X_ext < inf and smooth fields on Omega_* = {tau > 0, q < q_*} with: (i) u = curl A + B e_theta with A, B e_theta smooth in Cartesian coordinates at the axis, exactly divergence-free; (ii) every Cartesian space-time derivative of A, B e_theta, p uniformly bounded on compact spatial sets with c <= q <= c' < q_*, up to the one-sided boundary tau = 0, with compatible limits; (iii) flatness |d_x^alpha d_t^b R(u,p)| <= C_{alpha,b,N,X_1} q^N on 0 <= X <= X_1 as q -> 0 (3.4), and for X >= X_ext the residual is identically zero with A = 0, B = K(r,tau) = r^{-1-2h} H_ext(tau/r^2), p = -int_r^inf K^2/rho drho (3.5), K solving the radial swirl heat equation -d_tau K = d_rr K + r^-1 d_r K - r^-2 K; (iv) for some X_in in (0, X_a) and e_0 > 0, u_theta(sqrt(2 X_in tau), 0, 0, 1 - tau) = tau^-A (e_0 + O(tau^2h)) as tau -> 0 (3.6).",
+   "constants": [
+    "h in (0, 1/100)",
+    "q_*",
+    "X_a",
+    "X_ext",
+    "X_in in (0, X_a)",
+    "e_0 > 0",
+    "H_ext smooth on [0,inf) with bounded derivatives",
+    "C_{alpha,b,N,X_1}"
+   ],
+   "cites": [
+    "(3.2)",
+    "(3.3)",
+    "(3.4)",
+    "(3.5)",
+    "(3.6)",
+    "Lemma 4.1 (endpoints eta = +-1)",
+    "proved from Theorem 4.6, Proposition 5.5, Proposition 9.9 per Section 3.4 and Section 9.5"
+   ],
+   "role": "The local theorem: the whole of Sections 4-9 exist to prove it. Its four clauses are exactly what Section 10 consumes -- (i) for the potential cutoff, (ii) for the cutoff-transition limits, (iii) flatness for the force extension, (iv) for the blowup path."
+  },
+  {
+   "id": "Definition 3.2",
+   "kind": "Definition",
+   "section": "3",
+   "page": 18,
+   "hypotheses": [
+    "a leading field (velocity and pressure) given in cylindrical coordinates for t < 1; or a scalar auxiliary profile in (X, eta)"
+   ],
+   "conclusion": "'Regular at the axis' means: the velocity and pressure extend smoothly across r = 0 in Cartesian coordinates for t < 1; for a scalar profile, a smooth extension in (X, eta) to X = 0.",
+   "constants": [],
+   "cites": [
+    "Section 3.1 (E/sqrt(2X), U, V_0/X smooth at X = 0)",
+    "used by Theorem 4.6(i), Proposition B.2, Proposition 10.1"
+   ],
+   "role": "Fixes what axis regularity means for the whole construction; every 'smooth at the axis' clause later refers here."
+  },
+  {
+   "id": "Definition 3.3",
+   "kind": "Definition",
+   "section": "3",
+   "page": 18,
+   "hypotheses": [
+    "alpha >= 0, beta > 0 two parameters in a chain of constant choices"
+   ],
+   "conclusion": "alpha << beta means alpha/beta is required sufficiently small, the allowed size depending on all data already fixed; in a chain of constants, choices proceed from right to left; small reciprocals specify large parameters; for expressions depending on profile variables the smallness is uniform on the stated domain.",
+   "constants": [],
+   "cites": [
+    "Section 3.6 notation",
+    "used throughout Sections 6-9 for the order of parameter choices (h, N, k, epsilon, S_*, ...)"
+   ],
+   "role": "The order-of-choices convention. It is what makes 'sufficiently small' claims in Sections 6-9 well-defined, and a mis-ordering here would be a circularity in the constants."
+  }
+ ]
+}
