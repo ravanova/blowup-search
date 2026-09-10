@@ -2,7 +2,7 @@
   "//": "Copy to .mcp.json (gitignored) and fix the absolute path for your checkout. Not committed live because the venv is machine-local — a committed .mcp.json pointing at an absent venv breaks every fresh clone. See docs/HEADROOM.md.",
   "mcpServers": {
     "headroom": {
-      "command": "/home/andy/projects/Unsolved/.headroom-venv/bin/headroom",
+      "command": "/absolute/path/to/your/checkout/.headroom-venv/bin/headroom",
       "args": ["mcp", "serve"]
     }
   }

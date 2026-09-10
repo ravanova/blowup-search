@@ -51,3 +51,10 @@ reports/legs_over_time.html
 # Agent worktrees created by subagent isolation
 .claude/worktrees/
 .leg*-work/
+
+# Third-party manuscript text (NOTICE.md §3). Extracted from a copyrighted PDF we
+# do not own, so it is not redistributed -- same rule as Papers/. Regenerate with:
+#   bash Papers/fetch.sh openai && .venv/bin/python experiments/arc6_extract_pages.py
+# Both outputs are sha256-pinned in writeup/data/arc6/extract_manifest.json.
+writeup/data/arc6/manuscript_pages.txt
+writeup/data/arc6/manuscript_pages.jsonl

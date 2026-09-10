@@ -9,6 +9,11 @@ evolutionary (quality-diversity) search over initial data, and now with
 **computer-assisted certification** of self-similar blow-up profiles. Every
 claim in the repository is tiered, gated, and rebuildable from committed data.
 
+> **New here?** Read **[READING_THIS_REPO.md](READING_THIS_REPO.md)** first — the
+> vocabulary (legs, waves, gates, `UNVERIFIED`, `L1 → L4`), the three-tier rule that
+> governs every claim, and an explicit list of what this repository does and does
+> **not** claim. Reuse terms and third-party material: [NOTICE.md](NOTICE.md).
+
 > ## ▶ Start here: [arc 6 — what we can actually say about the claim](writeup/6_adjudicated/BLOG_ADJUDICATED.md)
 >
 > **2026-09-09.** On 2026-09-08 a 166-page manuscript and a Lean project claimed
