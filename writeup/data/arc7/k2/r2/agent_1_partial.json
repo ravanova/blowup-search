@@ -1,0 +1,394 @@
+{
+ "schema": "arc7_k2_r2_v1",
+ "agent": 1,
+ "leg": 438,
+ "run": 2,
+ "clone_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "method": "Blind source-level reading, no lake/lean run. (1) Verified the pinned tree HEAD. (2) Read the five PARTIAL entries in writeup/data/arc6/lean/agent_5_coverage.json (map[1],[3],[7],[28],[48]) and the ledger entries in writeup/data/arc6/ledger.json. (3) The gitignored manuscript_pages.txt is absent from this worktree; read the copy in the main checkout at /home/andy/projects/Unsolved/writeup/data/arc6/manuscript_pages.txt after confirming sha256 fe32a61f...41a8a2 matches REGENERATE.md, and copied it to the scratchpad. Quoted each statement with its <<<PAGE n>>> marker. (4) Read every cited Lean declaration at its file:line with sed. (5) Computed the transitive import closure of NavierStokes/ComparatorSolution.lean with a Python script over `import` lines (580 NavierStokes modules reachable, of 643 .lean files under NavierStokes/; NavierStokes.lean imports only ComparatorSolution). All 17 pointer modules are in the closure. Membership in the closure is necessary, not sufficient, for use by the exported proof; I additionally traced the direct call chain ComparatorSolution -> ComparatorBridge.navier_stokes_breakdown_{R3,periodic} -> R3ActualCandidate.selected_compact_candidate / ActualCandidateAssembly.selected_candidate -> selected_witness -> witness -> GermCandidateAssembly.exists_candidate_witness_of_finite_stages, and the blow-up chain FinalSlowBase.axis_tendsto -> BaseResidual.baseVelocity_axis_tendsto_atTop, PeriodicResidualLimits.periodicVelocity_speed_unbounded -> ProblemStatement.SpeedUnboundedAtOne. (6) For each paper clause not covered by the pointers, grepped the whole tree for the clause's mathematical content and for docstrings citing the manuscript's numbering. Nothing here is a proof check.",
+ "manuscript_text_sha256": "fe32a61fac197fa073bb2e9305ab0b22c2442c6ab775daafe029c0982941a8a2",
+ "import_closure": {
+  "root": "NavierStokes.ComparatorSolution",
+  "modules_in_closure": 580,
+  "lean_files_under_NavierStokes": 643,
+  "all_17_pointer_modules_in_closure": true,
+  "note": "Closure membership is necessary, not sufficient, for use by the exported proof terms; no dependency dump could be produced without running lean."
+ },
+ "commands": [
+  "git -C /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse rev-parse HEAD",
+  "/home/andy/projects/Unsolved/.venv/bin/python - <<'EOF'\nimport json\nd=json.load(open('writeup/data/arc6/lean/agent_5_coverage.json'))\nm=d['map']\nfor i in [1,3,7,28,48]: print(i, json.dumps(m[i],indent=1))\nEOF",
+  "/home/andy/projects/Unsolved/.venv/bin/python - <<'EOF'\nimport json\nd=json.load(open('writeup/data/arc6/ledger.json'))\nfor e in d['entries']:\n    if e.get('id') in ['Theorem 3.1','Definition 3.3','Lemma 4.4','Corollary 7.3','Lemma 9.7']: print(json.dumps(e,indent=1))\nEOF",
+  "sha256sum /home/andy/projects/Unsolved/writeup/data/arc6/manuscript_pages.txt",
+  "cp /home/andy/projects/Unsolved/writeup/data/arc6/manuscript_pages.txt <scratchpad>/manuscript_pages.txt && sha256sum <scratchpad>/manuscript_pages.txt",
+  "grep -n -E 'Theorem 3\\.1|Definition 3\\.3|Lemma 4\\.4|Corollary 7\\.3|Lemma 9\\.7' <scratchpad>/manuscript_pages.txt",
+  "sed -n '700,760p' <scratchpad>/manuscript_pages.txt   # Theorem 3.1, pp.15-16",
+  "sed -n '860,885p' <scratchpad>/manuscript_pages.txt   # Definition 3.3, p.18",
+  "sed -n '1360,1400p' <scratchpad>/manuscript_pages.txt # Lemma 4.4, pp.28-29",
+  "sed -n '3800,3830p' <scratchpad>/manuscript_pages.txt # Corollary 7.3, p.80",
+  "sed -n '5300,5335p' <scratchpad>/manuscript_pages.txt # Lemma 9.7, pp.111-112",
+  "grep -n '<<<PAGE' <scratchpad>/manuscript_pages.txt | awk -F: '...'   # page markers",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && python closure script: BFS over ^import lines from NavierStokes.ComparatorSolution; print size, modules not in closure, membership of the 17 pointer modules",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -n -B2 -A40 'theorem navier_stokes_breakdown_R3' NavierStokes/ComparatorSolution.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && sed -n '1160,1215p' NavierStokes/ActualCandidateAssembly.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && sed -n '100,175p' NavierStokes/MixedCandidateAssembly.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && sed -n '255,300p' NavierStokes/DiagonalResidual.lean; sed -n '690,740p' NavierStokes/BaseExterior.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && sed -n '1,100p' NavierStokes/ModulatedExterior.lean; sed -n '495,545p' NavierStokes/ModulatedExterior.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && sed -n '290,330p' NavierStokes/JointResidualLimits.lean; sed -n '90,120p' NavierStokes/BaseResidual.lean; sed -n '100,160p' NavierStokes/BlowupImplication.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && sed -n '1,80p' NavierStokes/NaturalAxisData.lean; sed -n '1165,1200p' NavierStokes/ReferenceBounds.lean; sed -n '625,665p' NavierStokes/OutgoingProfile.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && sed -n '1190,1240p' NavierStokes/RepairConeBounds.lean; sed -n '1,60p' NavierStokes/ModulatedStockBounds.lean; sed -n '1,60p' NavierStokes/MatchingDebtBounds.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && sed -n '130,200p' NavierStokes/ActualCandidateConstruction.lean; sed -n '1,80p' NavierStokes/ActualCycleGeometry.lean; sed -n '440,490p' NavierStokes/PhysicalStageSupport.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && sed -n '1,60p' NavierStokes/ComparatorR3Theorem.lean; sed -n '1,60p' NavierStokes/ComparatorTheorem.lean; grep -n 'theorem\\|selected\\|import' NavierStokes/R3CompactCandidate.lean NavierStokes/R3ActualCandidate.lean NavierStokes/ComparatorBridge.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -n -A25 'structure CandidateProperties' NavierStokes/ProblemStatement.lean; grep -n -B3 -A8 'def SpeedUnboundedAtOne' NavierStokes/ProblemStatement.lean; grep -n -B2 -A8 'def AllJetsFlat' NavierStokes/ResidualStability.lean; grep -n -B2 -A8 'def JetRate' NavierStokes/DiagonalResidual.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -n 'selectedBudget\\|selectedThreshold\\|def qbig\\|qbig' NavierStokes/ActualCandidateConstruction.lean; grep -n -A20 '^def Witness\\|theorem witness' NavierStokes/ActualCandidateAssembly.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -rn 'IsBigO\\|IsLittleO\\|Asymptotics' --include=*.lean NavierStokes; grep -rln 'IsBigO\\|IsLittleO' --include=*.lean NavierStokes | wc -l",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -rn 'Theorem 3\\.1\\|Theorem 1\\.1\\|(3\\.6)\\|(3\\.5)\\|(3\\.4)\\|Proposition 11\\.7\\|Proposition 10\\.' --include=*.lean NavierStokes",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -rn 'swirl heat\\|heat equation\\|radial heat\\|H_ext\\|Hext\\|heatProfile' --include=*.lean NavierStokes; grep -n -B5 -A25 'def heatVelocity' NavierStokes/BaseExterior.lean; grep -rn 'heat.*navierStokesResidual' --include=*.lean NavierStokes; grep -n -B4 -A10 'def physicalHeat' NavierStokes/TerminalStress.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -rn 'norm_tendsto_atTop_of_profile_lower_bound\\|finite_time_profile_tendsto_atTop\\|baseVelocity_axis_tendsto_atTop\\|baseVelocity_speedUnbounded' --include=*.lean NavierStokes; sed -n '365,380p' NavierStokes/FinalSlowBase.lean; sed -n '436,450p' NavierStokes/PeriodicResidualLimits.lean; grep -n -A12 'def periodicVelocity' NavierStokes/MixedPeriodicAssembly.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -rn 'Definition 3\\.3\\|≪\\|sufficiently small\\|order of choices\\|right to left\\|right-to-left\\|smallness order\\|smallness convention' --include=*.lean NavierStokes; grep -rn 'smallness\\|chain of constants\\|precede\\|chosen before\\|chosen after\\|chosen last\\|chosen first' --include=*.lean NavierStokes | head -25; sed -n '875,900p' NavierStokes/HeatedOutgoing.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -rn 'Lemma 4\\.4\\|(4\\.17)\\|4\\.17\\|(4\\.16)\\|(4\\.15)\\|joining lemma\\|no radial derivative\\|radial derivative of a difference' --include=*.lean NavierStokes; grep -n 'Lemma 4.4' -B3 -A8 NavierStokes/RadialHeatProfile.lean",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -n '^theorem\\|^lemma' NavierStokes/ModulatedStockBounds.lean NavierStokes/MatchingDebtBounds.lean; sed -n '128,150p;220,240p;298,320p' NavierStokes/ModulatedStockBounds.lean; sed -n '1,45p' NavierStokes/ActivationStocks.lean; grep -rn 'LipschitzOnWith\\|LipschitzWith' --include=*.lean NavierStokes | grep -i 'stock\\|shear\\|lag\\|Qs\\|Ns'",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -rn 'Corollary 7\\.3\\|(7\\.18)\\|(7\\.20)\\|Lemma 7\\.1\\|Proposition 7\\.2\\|same domain\\|does not shrink\\|not shrink\\|shrinking the domain\\|damping factor\\|forward damping\\|projected amplitude' --include=*.lean NavierStokes; grep -rn 'Corollary\\|Lemma 7\\.\\|Proposition 7\\.\\|Lemma 9\\.\\|Proposition 9\\.\\|Lemma 4\\.\\|Proposition C\\.\\|Theorem 4\\.' --include=*.lean NavierStokes",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -rn 'propagator\\|Propagator' --include=*.lean NavierStokes | grep -i 'harmonic\\|damp\\|fundamental'; sed -n '520,545p' NavierStokes/PrimaryODE.lean; grep -n -B6 -A12 'theorem high_harmonic_damping' NavierStokes/ViscousPropagator.lean; grep -rn 'Duhamel\\|amplitude equation\\|projected' --include=*.lean NavierStokes | grep -i 'domain\\|threshold\\|harmonic set'",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -rn 'Lemma 9\\.7\\|derivative-count\\|derivative count\\|directed acyclic\\|DAG\\|finitely many input\\|finitely many\\|independent of the correction stage\\|independent of the stage\\|common domain\\|one domain\\|same threshold' --include=*.lean NavierStokes; grep -rn 'def qbig\\|qbig :' --include=*.lean NavierStokes; grep -rn 'def FiniteJetBound' --include=*.lean NavierStokes; sed -n '20,45p' NavierStokes/JetBounds.lean; sed -n '185,200p' NavierStokes/DiagonalResidual.lean; sed -n '365,385p' NavierStokes/PhysicalResidualJetBounds.lean; grep -rn 'input derivative\\|input jets\\|input amplitude' --include=*.lean NavierStokes | head -15",
+  "cd /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse && grep -rn 'sorry\\|axiom ' --include=*.lean NavierStokes/ActualCandidateAssembly.lean NavierStokes/MixedCandidateAssembly.lean NavierStokes/ModulatedExterior.lean NavierStokes/ModulatedStockBounds.lean NavierStokes/ActualCandidateConstruction.lean NavierStokes/PhysicalStageSupport.lean NavierStokes/ReferenceBounds.lean NavierStokes/OutgoingProfile.lean   # no hits (text grep only, not a kernel check)"
+ ],
+ "statements": [
+  {
+   "id": "Theorem 3.1",
+   "paper_clauses": [
+    "p.15: 'There are constants 0 < h < 1/100, q∗> 0, 0 < Xa < Xext < ∞, and smooth fields on Ω∗= {(x, t) : τ > 0, q < q∗} with the following properties.'",
+    "p.15 (i): 'There is a vector potential A and an axisymmetric scalar B such that u = curl A + Beθ. (3.3) Both A and Beθ are smooth in Cartesian coordinates at the axis. The field is exactly divergence-free.'",
+    "p.15 (ii): 'Every Cartesian space-time derivative of A, Beθ, p is uniformly bounded on compact spatial subsets with c ≤q ≤c′ < q∗, for each 0 < c < c′, up to the one-sided boundary τ = 0. The resulting limits of the derivatives are compatible under spatial and time differentiation.'",
+    "p.15 (iii): 'For every α, b, N and every finite X1, |∂αx∂btR(u, p)| ≤Cα,b,N,X1 qN (0 ≤X ≤X1, q ↓0). (3.4) For X ≥Xext the residual is identically zero, and A = 0, B = K(r, τ), p = −∫r^∞ K(ρ,τ)²/ρ dρ, K(r, τ) = r^{−1−2h} Hext(τ/r²). (3.5) Here Hext is smooth on [0, ∞), with each fixed derivative bounded. The radial swirl heat equation satisfied by K is −∂τK = ∂²rK + r^{−1}∂rK − r^{−2}K.'",
+    "p.16 (iv): 'For some fixed Xin ∈(0, Xa) and e0 > 0, uθ(√(2Xinτ), 0, 0, 1 −τ) = τ^{−A}(e0 + O(τ^{2h})) (τ ↓0). (3.6) The entries on the left specify cylindrical position and time.'"
+   ],
+   "lean_pointers_read": [
+    {
+     "name": "NavierStokes.ActualCandidateAssembly.selected_witness",
+     "file": "NavierStokes/ActualCandidateAssembly.lean",
+     "line": 1177,
+     "read": "lines 1121-1190; Witness := ∃ schedule a, AwayExtensions for the three raw sums, ∃ forcing, CandidateProperties (activatedVelocity (periodicVelocity ASum BSum)) (activatedPressure (periodicPressure PSum)) forcing ∧ ContDiff forcing ∧ Consequences ..."
+    },
+    {
+     "name": "NavierStokes.MixedCandidateAssembly.candidate_of_finite_stages",
+     "file": "NavierStokes/MixedCandidateAssembly.lean",
+     "line": 130,
+     "read": "lines 100-175; hypotheses: StageEstimates, SublevelShrinkingSupport for every stage on one qbig, OneSidedExtension away from the axis; conclusion candidateStatement"
+    },
+    {
+     "name": "NavierStokes.DiagonalResidual.allJetsFlat_residual_of_stages",
+     "file": "NavierStokes/DiagonalResidual.lean",
+     "line": 272,
+     "read": "lines 255-300; AllJetsFlat l q (residual u p) from per-stage JetRate hypotheses (m ≤ J)"
+    },
+    {
+     "name": "NavierStokes.BaseExterior.nominal_base_terminal_extension",
+     "file": "NavierStokes/BaseExterior.lean",
+     "line": 708,
+     "read": "lines 690-740; on a terminal time interval at fixed positive radius the base equals heatVelocity/heatPressureField, both ContDiffOn Iic 1"
+    },
+    {
+     "name": "NavierStokes.ModulatedExterior.actual_terminal_extension",
+     "file": "NavierStokes/ModulatedExterior.lean",
+     "line": 513,
+     "read": "lines 495-545; same for the modulated constructed base on an open set U containing (1,x)"
+    },
+    {
+     "name": "NavierStokes.JointResidualLimits.exists_smooth_compatible_limits",
+     "file": "NavierStokes/JointResidualLimits.lean",
+     "line": 308,
+     "read": "lines 290-330; L : Space → FormalMultilinearSeries, locally uniform convergence of all iteratedFDeriv as t → 1⁻, ContDiff of each L · n, HasFDerivAt compatibility L n → L (n+1)"
+    },
+    {
+     "name": "NavierStokes.BaseResidual.baseVelocity_axis_tendsto_atTop",
+     "file": "NavierStokes/BaseResidual.lean",
+     "line": 104,
+     "read": "lines 90-120; ‖baseVelocity a h C d (t,0)‖ = (1-t)^(-A h) * d.axial 0 (0,0) exactly at x = 0, hence Tendsto (𝓝[<] 1) atTop"
+    },
+    {
+     "name": "NavierStokes.BlowupImplication.finite_time_profile_tendsto_atTop",
+     "file": "NavierStokes/BlowupImplication.lean",
+     "line": 125,
+     "read": "lines 100-160; scalar (T-t)^(-A)*(E+error t) → ∞ with error → 0; docstring 'Finite-time version of the scalar asymptotic in Proposition 11.7'"
+    },
+    {
+     "name": "NavierStokes.BaseExterior.heatVelocity / heatCoefficient / heat_navierStokesResidual_zero",
+     "file": "NavierStokes/BaseExterior.lean",
+     "line": 37,
+     "read": "lines 32-62 and 122,148; heatCoefficient C h p = physicalHeat C (1+h) p / sqrt(2 s); residual identically zero"
+    },
+    {
+     "name": "NavierStokes.TerminalStress.physicalHeat",
+     "file": "NavierStokes/TerminalStress.lean",
+     "line": 368,
+     "read": "physicalHeat C a p = C * RadialHeatProfile.spatialProfile a (1 - p.1) p.2.1 (the r^{-1-2h} H_ext(τ/r²) exterior in the regular coordinate s = r²/2)"
+    },
+    {
+     "name": "NavierStokes.FinalSlowBase.axis_tendsto",
+     "file": "NavierStokes/FinalSlowBase.lean",
+     "line": 372,
+     "read": "lines 365-380; applies baseVelocity_axis_tendsto_atTop at x = 0 with leading coefficient W.axis.small.j_pos"
+    },
+    {
+     "name": "NavierStokes.PeriodicResidualLimits.periodicVelocity_speed_unbounded",
+     "file": "NavierStokes/PeriodicResidualLimits.lean",
+     "line": 444,
+     "read": "lines 436-450; SpeedUnboundedAtOne from Tendsto ‖spatialCurl A (t,0)‖ atTop at the axis"
+    },
+    {
+     "name": "NavierStokes.ProblemStatement.SpeedUnboundedAtOne / CandidateProperties",
+     "file": "NavierStokes/ProblemStatement.lean",
+     "line": 94,
+     "read": "lines 92-122; SpeedUnboundedAtOne u := ∀ M>0, ∀ δ>0, ∃ t x, t ∈ Ioo 0 1 ∧ 1-δ < t ∧ M < ‖u (t,x)‖"
+    },
+    {
+     "name": "NavierStokes.MixedPeriodicAssembly.periodicVelocity",
+     "file": "NavierStokes/MixedPeriodicAssembly.lean",
+     "line": 36,
+     "read": "periodicVelocity A v = periodized curl-of-A part + periodized cut direct field v (the curl A + B e_θ split)"
+    }
+   ],
+   "search": "grep for docstrings citing 'Theorem 3.1', '(3.4)', '(3.5)', '(3.6)', 'Theorem 1.1', 'Proposition 11.7' (hits: BlowupImplication.lean:9,124 cite Proposition 11.7; ProblemStatement.lean cites Candidate Theorem 1.1; none cite Theorem 3.1 or (3.6)); grep for IsBigO/IsLittleO/Asymptotics across NavierStokes (4 files use IsBigO/IsLittleO: FlatPrimitiveFactor, WaveEdgeExtension, FlatDyadicExtension, FlatZeroExtension, GaussianTailFlat — none concern the axis velocity); grep for 'swirl heat|heat equation|radial heat|Hext|heatProfile' (BaseExterior, TerminalStress, RadialHeatProfile, HeatProfileExtension, TerminalPressure); grep for who uses baseVelocity_axis_tendsto_atTop (ConstructedSlowBase:293,419; FinalSlowBase:374) and how speed_unbounded is discharged (CandidateFromLimits:171,190,216; PeriodicResidualLimits:446); grep 'def curl' (PrimaryFieldAssembly.curlVelocity, LinearWaveBounds.curlPotential; SpatialCurl.spatialCurl used in PeriodicResidualLimits).",
+   "verdict": "WEAKER",
+   "what_is_missing": "No Lean declaration states Theorem 3.1 as a theorem about fields on 'Ω∗= {(x, t) : τ > 0, q < q∗}' with constants 'h, q∗, Xa, Xext, Xin, e0'; items (i)-(iii) are present in different form (u as periodized curl-potential plus direct angular field; one-sided limits with 'compatible' derivative tensors via exists_smooth_compatible_limits; AllJetsFlat residual via allJetsFlat_residual_of_stages; exact heat exterior K = r^{-1-2h}H_ext(τ/r²) via heatCoefficient/physicalHeat with heat_navierStokesResidual_zero and terminal-extension lemmas). Item (iv) is WEAKER: the paper asserts the two-sided asymptotic 'uθ(√(2Xinτ), 0, 0, 1 −τ) = τ^{−A}(e0 + O(τ^{2h}))' along the path r = √(2Xin τ) inside the axis region; the Lean tree has (a) an exact formula for the BASE field at r = 0 only, ‖baseVelocity (t,0)‖ = (1−t)^{−A}·d.axial 0 (0,0) (BaseResidual.baseVelocity_norm_at_origin), (b) Tendsto atTop at r = 0 for the base (FinalSlowBase.axis_tendsto), and (c) for the assembled candidate only SpeedUnboundedAtOne (∃ points arbitrarily near t = 1 with ‖u‖ > M). No statement with the error term O(τ^{2h}), no evaluation point r = √(2Xin τ), no constants Xin ∈ (0, Xa) or e0, and no asymptotic for the corrected/summed velocity (as opposed to the base). BlowupImplication.finite_time_profile_tendsto_atTop is a scalar lemma with an abstract 'error → 0' hypothesis, weaker than O(τ^{2h}). Also missing as a stated clause: the (iii) uniformity 'for every finite X1 on 0 ≤X ≤X1' — Lean's AllJetsFlat is along a filter l with a weight q, and I did not locate a statement parametrised by X1.",
+   "weakens_exported_statement_via_import_path": "NO. The exported theorems assert only '∃ u₀ f, InitialVelocityCondition* u₀ ∧ ForceCondition* f ∧ ¬ (∃ v p, NavierStokesExistenceAndSmoothness* nu u₀ f v p)'. Along the actual call chain (ComparatorSolution → ComparatorBridge.navier_stokes_breakdown_{R3,periodic} → R3ActualCandidate.selected_compact_candidate / ActualCandidateAssembly.selected_candidate → selected_witness) the only blow-up fact consumed is CandidateProperties.speed_unbounded : SpeedUnboundedAtOne u (mere unboundedness near t = 1), which the tree discharges from the r = 0 divergence. The rate τ^{−A}(e0+O(τ^{2h})) and the path r = √(2Xin τ) are not part of the exported Prop and are not hypotheses of option_C_of_compact_candidate / option_D_of_candidate. So the weaker (iv) makes the Lean intermediate weaker than the paper's Theorem 3.1 but does not change the exported statements. Caveat: closure membership is necessary not sufficient; I traced the call chain by reading proof terms, not by a kernel dependency dump.",
+   "pages_read": [
+    15,
+    16
+   ]
+  },
+  {
+   "id": "Definition 3.3",
+   "paper_clauses": [
+    "p.18: 'Definition 3.3 (Parameter smallness and order of choices). For α ≥0 and β > 0, we write α ≪β when α/β is required to be sufficiently small, with the allowed size depending on all data already fixed. In a chain of constants, choices proceed from right to left; small reciprocals specify large parameters. For expressions depending on profile variables, this smallness is uniform on the stated domain and is ensured by those parameter choices.'"
+   ],
+   "lean_pointers_read": [
+    {
+     "name": "NavierStokes.NaturalAxisData.SmallParameters",
+     "file": "NavierStokes/NaturalAxisData.lean",
+     "line": 41,
+     "read": "lines 1-80; structure SmallParameters (h j : ℝ) : Prop with h_pos, h_le : h ≤ 1/1000, j_pos, j_le : j ≤ 1/1000; docstring 'A concrete range of choices permitted by the manuscript's smallness order.'"
+    },
+    {
+     "name": "NavierStokes.ReferenceBounds.exists_reference_bounds",
+     "file": "NavierStokes/ReferenceBounds.lean",
+     "line": 1180,
+     "read": "lines 1165-1200; ∃ M > 0, ∀ Λ ≥ M, ∃ C₀ > 0, ∀ C ≥ C₀, ∃ E, ∃ r > 0, ∀ δ < r, ∃ hδT, ReferenceBoundsOnHold ...; docstring 'The bounded jet constants and the scale threshold precede Λ; the pressure normalization threshold precedes C; the short cutoff time is chosen last.'"
+    },
+    {
+     "name": "NavierStokes.OutgoingProfile.exists_outgoing_profile",
+     "file": "NavierStokes/OutgoingProfile.lean",
+     "line": 640,
+     "read": "lines 625-665; ∃ lam₀ C, ∀ lam < lam₀, ∀ h with 0 < h, 2h < lam, ∃ F : Profile ...; docstring 'Choose lam after the fixed prefix parameters, and then any permitted h.'"
+    },
+    {
+     "name": "NavierStokes.HeatedOutgoing.exists_fixed_schedule",
+     "file": "NavierStokes/HeatedOutgoing.lean",
+     "line": 886,
+     "read": "lines 875-900; docstring 'The order of choices is P,m, one positive lam, permitted h, one reset/amplitude profile, and then large X_R and its terminal coefficients.'"
+    }
+   ],
+   "search": "grep for 'Definition 3.3', the symbol '≪', 'sufficiently small', 'order of choices', 'right to left', 'right-to-left', 'smallness order', 'smallness convention' (hits: NaturalAxisData.lean:40 docstring; HeatedOutgoing.lean:884 docstring; ResetEnergyBounds.lean:440, UniformAngularReset.lean:935,1250, PhysicalMeanJetBounds.lean:85, ValidDyadicBandCover.lean:9 use 'sufficiently small' informally in docstrings; no declaration defines '≪'); grep for 'smallness|chain of constants|precede|chosen before|chosen after|chosen last|chosen first' (117 docstring hits, e.g. LabelSumBounds.lean:8,1112, ReferenceBounds.lean:1177-1178, PulseCone.lean:1977, all describing per-theorem quantifier order in prose).",
+   "verdict": "NOT-A-THEOREM-IN-LEAN",
+   "what_is_missing": "The definition itself: no Lean declaration introduces the relation 'α ≪β' ('α/β is required to be sufficiently small, with the allowed size depending on all data already fixed'), nor the global rule 'In a chain of constants, choices proceed from right to left; small reciprocals specify large parameters', nor the uniformity clause 'For expressions depending on profile variables, this smallness is uniform on the stated domain'. What exists is (a) a concrete numeric range SmallParameters (h ≤ 1/1000, j ≤ 1/1000) and (b) explicit quantifier alternation in individual existence theorems (∃ M, ∀ Λ ≥ M, ∃ C₀, ∀ C ≥ C₀, ...) with docstrings stating the order in prose. The convention is therefore replaced statement-by-statement by explicit quantifiers, which is the natural formal counterpart of a notational definition; but there is no single object to point to, and the paper's 'uniform on the stated domain' clause has no global counterpart — uniformity is whatever each theorem's ∀ quantifier over the domain says.",
+   "weakens_exported_statement_via_import_path": "NO. A notational convention carries no proof content; the exported Props mention no smallness parameters, and every Lean intermediate on the call chain fixes its constants by explicit ∃/∀ order, so a circular choice of constants cannot hide in an unstated convention. Caveat (in could_not_determine): I did not verify that every Lean quantifier order agrees with the paper's right-to-left chain for the section 6-9 parameters (h, N, k, ε, S∗, ...).",
+   "pages_read": [
+    18
+   ]
+  },
+  {
+   "id": "Lemma 4.4",
+   "paper_clauses": [
+    "p.28: 'Lemma 4.4. Fix h ∈(0, 1/2). For i = 1, 2, let (Ui, Ei) be smooth on (0, ∞) × [−1, 1], with Ei > 0, and suppose the five integrals in (4.15) define smooth functions there, including one-sided η-derivatives at η = ±1. ... Fix one smooth function Πax(η) on [−1, 1] and set Πi(X, η) = Πax(η) + Cp,i(X, η), Πi(0, η) = Πax(η), i = 1, 2. Thus the pressures have the same integration constant at the axis; the velocity profiles need not agree near the axis.'",
+    "p.29 (i): 'Suppose that for some Xh > 0, (U1, E1) = (U2, E2) for X ≥Xh, ∆m(Xh, η) = 0 (−1 ≤η ≤1). Then m1 = m2, and the corresponding quantities Πi, V0,i, Qs,i, Ns,i, ps,i, ai, bs,i, T0,i agree for all X ≥Xh and η ∈[−1, 1].'",
+    "p.29 (ii): 'Fix 0 < X0 < X1 < ∞, an integer k ≥0, and emin > 0. On R = [X0, X1] × [−1, 1], put ∥f ∥j := max_{0≤r≤j} sup_{(X,η)∈R} |∂^r_η f (X, η)|, j ≥0, using the maximum of the component norms for tuples. If Ei ≥emin on R, then ∥∆(Qs, Ns, ps)∥k ≤Ck (∥∆(U, E)∥k+1 + ∥∆m∥k+1). (4.17) The constant Ck depends only on k, h, X0, X1, emin, the Ck+1-norm of Πax, and a common bound for ∥(Ui, Ei, mi)∥k+1, i = 1, 2. No radial derivative of a difference occurs in this estimate.'"
+   ],
+   "lean_pointers_read": [
+    {
+     "name": "NavierStokes.ModulatedExterior.integral_equal_after",
+     "file": "NavierStokes/ModulatedExterior.lean",
+     "line": 28,
+     "read": "∫₀^X f = ∫₀^X g given equal primitives at B and f = g on [B,X] (the primitive-propagation identity behind (i))"
+    },
+    {
+     "name": "NavierStokes.ModulatedExterior.pressure_equal_after",
+     "file": "NavierStokes/ModulatedExterior.lean",
+     "line": 61,
+     "read": "P.pressure (X,eta) = Q.pressure (X,eta) for X ≥ B given P.pressure0 = Q.pressure0 (the common axis pressure clause), equal squared-swirl primitive at B, and equal f on [B,X]; also squared_swirl_anchor_of_rows (fifth row fixes the swirl integral) and modified_fields_after (Q.f, Q.U agree with the nominal profile for X ≥ nominalOuterX)"
+    },
+    {
+     "name": "NavierStokes.RepairConeBounds.actual_observation_estimate",
+     "file": "NavierStokes/RepairConeBounds.lean",
+     "line": 1205,
+     "read": "lines 1190-1240; ∃ r L, ∀ axis stage, controls, eps ≤ r, FiniteJetBound 1 (endpointError c) eps → FiniteJetBound 1 (resetCoefficients) eps → ∀ p ∈ window, SmallDebt → ‖actualObservations c hsep p − observations F (0,p)‖ ≤ L * eps"
+    },
+    {
+     "name": "(module) NavierStokes.ModulatedStockBounds",
+     "file": "NavierStokes/ModulatedStockBounds.lean",
+     "line": 1,
+     "read": "lines 1-60, 128-150, 220-240, 298-320; profileData = 12 entries (f, U, five histories M,I,J,S,pressure and their first parameterPartial (η) derivatives); stockMap_lipschitz_on_dataSet: ‖stockMap h (p,w) − stockMap h (p,z)‖ ≤ C‖w − z‖ on compact positive-radius sets; profile_stocks_lipschitz: |ΔprofileStockOne|, |ΔprofileStockTwo| ≤ C‖ΔprofileData‖ for ‖ΔprofileData‖ ≤ δ; profile_stocks_rate: 1/n data rates give 1/n stock rates"
+    },
+    {
+     "name": "(module) NavierStokes.MatchingDebtBounds",
+     "file": "NavierStokes/MatchingDebtBounds.lean",
+     "line": 1,
+     "read": "lines 1-60 and theorem list; smooth clamps/extensions, resetVector jet bounds, normalized_actual_debt_bound, exists_ordered_matching_threshold/continuation — five-row matching debt estimates, not a Q_s/N_s/p_s difference estimate"
+    },
+    {
+     "name": "NavierStokes.ActivationStocks.stockOne / stockTwo / profileStockOne / profileStockTwo",
+     "file": "NavierStokes/ActivationStocks.lean",
+     "line": 27,
+     "read": "lines 1-45; the two integrated lag stocks (the Lean counterparts of the (4.16)-type quantities) as explicit rational expressions in X, η, f, U, M, Mη, I, Iη, J, Jη, S, Sη, P, Pη divided by L h η (and sqrt(2X) f)"
+    }
+   ],
+   "search": "grep for 'Lemma 4.4', '(4.17)', '4.17', '(4.16)', '(4.15)', 'joining lemma', 'no radial derivative', 'radial derivative of a difference' (hits: only RadialHeatProfile.lean:10,688 — a docstring saying a gamma-normalized improper integral 'is exactly the displayed integral in Lemma 4.4'; that displayed integral does not occur in the p.28-29 statement, so this appears to reference a different numbering and not the joining lemma); grep for LipschitzOnWith/LipschitzWith near stock/shear/lag/Qs/Ns (none besides GenericEndpointExtension); listed all theorems of ModulatedStockBounds and MatchingDebtBounds; grep 'k + 1' filtered (no η-derivative-order-k estimate for stock differences found).",
+   "verdict": "MISSING-CLAUSE",
+   "what_is_missing": "Clause (ii), the general estimate (4.17): '∥∆(Qs, Ns, ps)∥k ≤Ck (∥∆(U, E)∥k+1 + ∥∆m∥k+1)' for every integer k ≥ 0 on a rectangle R = [X0, X1] × [−1, 1] with the stated dependence of Ck ('only on k, h, X0, X1, emin, the Ck+1-norm of Πax, and a common bound for ∥(Ui, Ei, mi)∥k+1') and the explicit rider 'No radial derivative of a difference occurs in this estimate'. The tree has only the order-zero instance for the two lag stocks — profile_stocks_lipschitz bounds |ΔprofileStockOne| and |ΔprofileStockTwo| by C·‖ΔprofileData‖ where profileData carries the fields, the five histories and their FIRST η-derivatives (this is the k = 0 case of (4.17) restricted to Q_s, N_s, with no X-derivative in the data, so the 'no radial derivative' rider holds by construction there), plus actual_observation_estimate with a FiniteJetBound 1 tolerance, plus rate versions. There is no k-th η-derivative version and no difference estimate for p_s (the pressure appears only in the exact-equality form pressure_equal_after). Clause (i) is PRESENT-IN-DIFFERENT-FORM (pressure_equal_after / modified_fields_after / squared_swirl_anchor_of_rows realise 'agree for all X ≥Xh' from tail agreement plus five-row (Δm = 0) matching with the common axis pressure pressure0).",
+   "weakens_exported_statement_via_import_path": "NO. The exported Props do not mention profiles, stocks or the (4.17) constants; the modulation and matching steps that feed selected_witness are discharged by the special-form estimates that are present (each with its own explicit constants). The absence of the general k-th order (4.17) removes a paper-level tool, not a hypothesis of any theorem on the chain. Caveat: ModulatedStockBounds and MatchingDebtBounds are in the import closure (necessary, not sufficient); I did not trace which of their theorems appear in the proof term of selected_witness.",
+   "pages_read": [
+    28,
+    29
+   ]
+  },
+  {
+   "id": "Corollary 7.3",
+   "paper_clauses": [
+    "p.80: 'Corollary 7.3. The solution operators fm ↦→(tm, πm) for the projected amplitude equation with tm(0) = 0 are defined at every finite correction stage on the same domain 0 < q < q∗. Increasing the finite harmonic set or the derivative order changes constants and polynomial degrees, but does not require shrinking this domain.'",
+    "p.80 (proof, for context): 'The frame and damping comparisons require only the single finite choice in Lemma 7.1. The exact factor (7.18) makes every higher harmonic at least as damped in value as the first. In (7.20), the extra factors of m and coefficient derivatives enlarge only the constants and polynomial degrees in the source bounds. Thus the previously chosen threshold q∗remains valid.'"
+   ],
+   "lean_pointers_read": [
+    {
+     "name": "NavierStokes.ActualCandidateConstruction.qbig",
+     "file": "NavierStokes/ActualCandidateConstruction.lean",
+     "line": 155,
+     "read": "lines 130-200; qbig B N0 := ChartScales.Q (firstBand B N0), firstBand := max 4 (bandFloor B N0); qbig_pos, qbig_le_choice, twice_residual_scale, nativeScale_lt_qbig; physicalDomain B N0 := physicalSublevel h (qbig B N0); selectedBudget := 0, selectedThreshold := startingThreshold 0, selectedQbig := qbig selectedBudget selectedThreshold"
+    },
+    {
+     "name": "NavierStokes.MixedCandidateAssembly.candidate_of_finite_stages",
+     "file": "NavierStokes/MixedCandidateAssembly.lean",
+     "line": 130,
+     "read": "every stage is typed on MixedAxisPreservation.localDomain F.data.h qbig / LocalAngularDiagonal.localSlowDomain F.data.h qbig for ONE qbig, and every SublevelShrinkingSupport hypothesis uses the same C and qbig"
+    },
+    {
+     "name": "(module) NavierStokes.ActualCycleGeometry",
+     "file": "NavierStokes/ActualCycleGeometry.lean",
+     "line": 1,
+     "read": "lines 1-80; similarityData fixes h, inner/outer radii, weights, region, common-window index and gap, slow scale once; strip_eq, gauge_eq, region_eq etc. are rfl/derived equalities with ActualInitialization.geometry"
+    },
+    {
+     "name": "NavierStokes.ViscousPropagator.high_harmonic_damping",
+     "file": "NavierStokes/ViscousPropagator.lean",
+     "line": 353,
+     "read": "j ≠ 0 → d − δ ≤ D → d − δ ≤ j² D ('A nonzero integer harmonic only increases nonnegative fundamental damping'); high_harmonic_propagator_estimate: 'The same constants work for every nonzero harmonic.'"
+    },
+    {
+     "name": "NavierStokes.PrimaryODE.homogeneous_forward_bound",
+     "file": "NavierStokes/PrimaryODE.lean",
+     "line": 528,
+     "read": "lines 520-545; docstring 'The same forward propagator constant applies to every nonzero harmonic'; bound exp((D+4C)L)·(P v/P a)·‖x₀‖ uniform in j ≠ 0"
+    },
+    {
+     "name": "NavierStokes.PhysicalResidualJetBounds.NativeBounds",
+     "file": "NavierStokes/PhysicalResidualJetBounds.lean",
+     "line": 375,
+     "read": "lines 365-385; structure with bounds : ∀ m, ∃ A p, ∀ l n ≥ N, ∀ x ∈ U, ∀ j ≤ m, ‖iteratedFDeriv j (f l n) x‖ ≤ A·Q n^(gain − loss m)·S n^p on a FIXED U; docstring 'loss is allowed to depend on the derivative order; it never depends on the correction stage'"
+    }
+   ],
+   "search": "grep for 'Corollary 7.3', '(7.18)', '(7.20)', 'Lemma 7.1', 'Proposition 7.2', 'same domain', 'does not shrink', 'not shrink', 'shrinking the domain', 'damping factor', 'forward damping', 'projected amplitude' (no hits except two unrelated 'same domain' docstrings in ResidualCalculus.lean:143 and UniformPrimaryWeights.lean:10); grep for any docstring citing 'Corollary' or 'Lemma 7.'/'Proposition 7.' (none); grep 'propagator' with harmonic/damping/fundamental (ViscousPropagator.lean:362, PrimaryODE.lean:388,526, BasePhaseGeometry, MovingFrameODE); grep 'Duhamel|amplitude equation|projected' with domain/threshold/harmonic set (none); grep 'def qbig' (ActualCandidateConstruction only; qbig elsewhere is a variable).",
+   "verdict": "PRESENT-IN-DIFFERENT-FORM",
+   "what_is_missing": "No declaration states the corollary as a proposition about 'the solution operators fm ↦→(tm, πm) for the projected amplitude equation with tm(0) = 0' being 'defined at every finite correction stage on the same domain 0 < q < q∗', nor the clause 'Increasing the finite harmonic set or the derivative order changes constants and polynomial degrees, but does not require shrinking this domain'. Its content is realised structurally rather than proved: (a) one threshold qbig B N0 is defined once and every stage is TYPED on localDomain h qbig (so a stage needing a smaller domain would be a type error, not a theorem); (b) the harmonic monotonicity of damping is high_harmonic_damping / homogeneous_forward_bound ('same forward propagator constant applies to every nonzero harmonic'); (c) 'changes constants and polynomial degrees' is the ∃ A, ∃ p per derivative order m in NativeBounds on a fixed U, with loss independent of the stage. I found no Lean object named as a projected-amplitude solution operator, so the identification of (a)-(c) with the corollary is by content; that identification is my reading, not a proved equivalence.",
+   "weakens_exported_statement_via_import_path": "NO. The exported Props contain no domain threshold; along the call chain the only domain fact consumed is candidate_of_finite_stages' single hqbig : 0 < qbig with all stages on that domain, which is supplied by qbig_pos. Whether a paper-level corollary is stated separately or absorbed into the types changes nothing in the exported statement. Caveat: closure membership of ActualCycleGeometry/ActualCandidateConstruction is necessary not sufficient, though ActualCandidateConstruction.qbig_pos is directly invoked in ActualCandidateAssembly.witness (line 1156).",
+   "pages_read": [
+    80
+   ]
+  },
+  {
+   "id": "Lemma 9.7",
+   "paper_clauses": [
+    "p.111: 'Lemma 9.7. There exists qbig > 0, independent of the correction stage and derivative order, such that every finite partial sum above, before applying summation cutoffs, is well defined on 0 < q < qbig. For every fixed stage and output amplitude derivative, its construction and estimate require finitely many input amplitude derivatives. The constants may depend on the correction stage.'",
+    "p.111-112 (proof, for context): 'Choose 0 < qbig ≤q∗once, so that the pulse estimates hold for q < qbig, with the fixed background, the stated positive lower bound for |nΦ|, the primary covariance, and the fixed supports of the normalized mean-correction profiles. ... To count the input derivatives required at each stage, regard the finite construction as a directed acyclic graph of sums, products, derivatives, and the proved inverses.'"
+   ],
+   "lean_pointers_read": [
+    {
+     "name": "NavierStokes.ActualCandidateConstruction.qbig",
+     "file": "NavierStokes/ActualCandidateConstruction.lean",
+     "line": 155,
+     "read": "as above; one qbig from (B, N0), used for initial and all cycle stages (lines 833-947: angularMeanStages, streamMeanStages, pressureMeanStages, PotentialStage all on localDomain h (qbig B N0))"
+    },
+    {
+     "name": "NavierStokes.PhysicalStageSupport.actual_coherent_families_support",
+     "file": "NavierStokes/PhysicalStageSupport.lean",
+     "line": 460,
+     "read": "lines 440-490; for all j, SublevelShrinkingSupport h actualOuterConstant qbig for the wave+mean angular fields, the direct angular field and the pressure, given qbig ≤ ChartScales.Q (N j) for each stage's band and wave upperRadius ≤ 2·patch.b — one outer constant and one qbig for every stage"
+    },
+    {
+     "name": "NavierStokes.MixedCandidateAssembly.candidate_of_finite_stages",
+     "file": "NavierStokes/MixedCandidateAssembly.lean",
+     "line": 130,
+     "read": "as above; StageEstimates h qbig and per-stage support on the same qbig"
+    },
+    {
+     "name": "(module) NavierStokes.ActualCycleGeometry",
+     "file": "NavierStokes/ActualCycleGeometry.lean",
+     "line": 1,
+     "read": "as above"
+    },
+    {
+     "name": "NavierStokes.JetBounds.FiniteJetBound",
+     "file": "NavierStokes/JetBounds.lean",
+     "line": 31,
+     "read": "FiniteJetBound m f s C := ∀ n ≤ m, ∀ x ∈ s, ‖iteratedFDeriv n f x‖ ≤ C — the interface through which each estimate consumes finitely many input derivatives (161 occurrences tree-wide)"
+    },
+    {
+     "name": "NavierStokes.DiagonalResidual.residual_jetRate_of_stages (docstring)",
+     "file": "NavierStokes/DiagonalResidual.lean",
+     "line": 194,
+     "read": "'Only the jets through m+2 of its tail are used, and the background power losses are independent of the stage. Constants and neighborhoods may depend on the stage and derivative order.'"
+    }
+   ],
+   "search": "grep for 'Lemma 9.7', 'derivative-count', 'derivative count', 'directed acyclic', 'DAG', 'finitely many input', 'finitely many', 'independent of the correction stage', 'independent of the stage', 'common domain', 'one domain', 'same threshold' (hits are docstrings only: DiagonalResidual.lean:194 'losses are independent of the stage', PhysicalResidualJetBounds.lean:374 'never depends on the correction stage', FlatKernelBounds.lean:225 'Only finitely many profile jets are needed for a given expression bound', SmoothCutoffs.lean:189, DiagonalScale.lean:129; no declaration about a derivative-count recursion); grep 'input derivative|input jets|input amplitude|derivative order.*stage' (docstrings in PositiveAxisSystem.lean:729 'eleven finite input jets', AxisSourceRegularity.lean:391 'seven actual input jets', etc.); grep 'def qbig' and 'def FiniteJetBound'.",
+   "verdict": "MISSING-CLAUSE",
+   "what_is_missing": "The second sentence: 'For every fixed stage and output amplitude derivative, its construction and estimate require finitely many input amplitude derivatives' — i.e. the derivative-count recursion over the 'directed acyclic graph of sums, products, derivatives, and the proved inverses'. No Lean declaration states or proves a count of input derivatives per output derivative; finiteness of inputs is implicit in the shape of each estimate's hypotheses (FiniteJetBound m ..., JetRate ... m for m ≤ J) and is asserted only in docstrings ('eleven finite input jets', 'Only finitely many profile jets are needed'). The first sentence ('There exists qbig > 0, independent of the correction stage and derivative order, such that every finite partial sum above, before applying summation cutoffs, is well defined on 0 < q < qbig') is PRESENT-IN-DIFFERENT-FORM: qbig B N0 is fixed once; all stages are typed on localDomain h (qbig B N0); actual_coherent_families_support gives one outer constant and one qbig for all j; 'The constants may depend on the correction stage' matches the DiagonalResidual docstring and the existential constants per stage in StageEstimates. Note that in Lean the well-definedness on 0 < q < qbig is a typing fact (a definition on that domain), not a theorem with that name.",
+   "weakens_exported_statement_via_import_path": "NO. The exported Props do not mention stages, amplitudes or derivative counts. The residual flatness fed into the candidate (allJetsFlat_residual_of_stages) takes, for each order m and each stage J ≥ m, a JetRate hypothesis on finitely many orders; the schedule a (StageEstimates.exists_schedule) then selects one stage per requested order. A bookkeeping lemma that counts input derivatives is not a hypothesis of any theorem on the chain; its absence removes nothing from the exported statement. Caveat: closure membership of PhysicalStageSupport is necessary not sufficient; I did not trace whether actual_coherent_families_support itself appears in the proof term of selected_witness.",
+   "pages_read": [
+    111,
+    112
+   ]
+  }
+ ],
+ "gate_answer": "(1) The 5 PARTIAL statements — what is missing, per statement: Theorem 3.1 is WEAKER — items (i)-(iii) are present in different, distributed form (periodized curl-potential plus direct field; compatible one-sided limits via exists_smooth_compatible_limits; AllJetsFlat residual; exact heat exterior K = r^{-1-2h}H_ext(τ/r²) with zero residual), but item (iv) 'uθ(√(2Xinτ), 0, 0, 1 −τ) = τ^{−A}(e0 + O(τ^{2h}))' is replaced by an exact (1−t)^{−A} formula for the BASE field at r = 0 and mere SpeedUnboundedAtOne for the assembled candidate; no O(τ^{2h}) error term, no path r = √(2Xin τ), no constants Xin, e0, and no theorem on Ω∗ with the four items. Definition 3.3 is NOT-A-THEOREM-IN-LEAN — the relation '≪', the right-to-left chain rule and the 'uniform on the stated domain' clause have no declaration; they are replaced per theorem by explicit ∃/∀ alternation (exists_reference_bounds, exists_outgoing_profile) and a numeric SmallParameters range. Lemma 4.4 is MISSING-CLAUSE (ii): the general estimate (4.17) '∥∆(Qs, Ns, ps)∥k ≤Ck(∥∆(U, E)∥k+1 + ∥∆m∥k+1)' for all k with its constant-dependence list and 'No radial derivative of a difference occurs' is absent; only the order-zero lag-stock Lipschitz instances (profile_stocks_lipschitz, actual_observation_estimate) exist, and no p_s difference estimate; (i) is present in different form (pressure_equal_after, modified_fields_after). Corollary 7.3 is PRESENT-IN-DIFFERENT-FORM — no statement about 'the solution operators fm ↦→(tm, πm) ... on the same domain 0 < q < q∗'; instead one qbig is fixed once and every stage is typed on localDomain h qbig, harmonic damping monotonicity is high_harmonic_damping/homogeneous_forward_bound, and 'changes constants and polynomial degrees' is the per-order ∃ A p of NativeBounds on a fixed domain. Lemma 9.7 is MISSING-CLAUSE: the sentence 'For every fixed stage and output amplitude derivative, its construction and estimate require finitely many input amplitude derivatives' (the DAG derivative-count recursion) has no Lean statement, only FiniteJetBound-shaped hypotheses and docstrings; the common-qbig sentence is present in different form (qbig B N0, actual_coherent_families_support). For all five, the answer to 'does the missing clause weaken the exported theorem statements navier_stokes_breakdown_R3/_periodic via the import path' is NO: the exported Props are closed comparator statements, the call chain consumes only CandidateProperties (in particular speed_unbounded = SpeedUnboundedAtOne) and R3CompactCandidate.Properties, and none of the missing clauses is a hypothesis of any theorem on that chain; import-closure membership of all 17 pointer modules was confirmed and is necessary, not sufficient, for use. Nothing here is a proof check.",
+ "could_not_determine": [
+  {
+   "what": "Whether each cited pointer declaration (and the special-form estimates in ModulatedStockBounds, MatchingDebtBounds, PhysicalStageSupport) actually appears in the proof term of selected_witness and hence of the exported theorems, as opposed to merely lying in the import closure.",
+   "why": "Determining use requires a dependency dump (#print axioms / constant-dependency traversal) which needs lean/lake; both are forbidden while the pinned build runs. I traced only the direct call chain by reading proof terms (ComparatorSolution → ComparatorBridge → R3ActualCandidate/ActualCandidateAssembly → selected_witness → witness → GermCandidateAssembly.exists_candidate_witness_of_finite_stages; FinalSlowBase.axis_tendsto → baseVelocity_axis_tendsto_atTop; ActualCandidateAssembly.witness → qbig_pos)."
+  },
+  {
+   "what": "Whether the Lean quantifier orders in the section 6-9 existence theorems agree with the paper's right-to-left chain of constants (h, N, k, ε, S∗, ...) that Definition 3.3 governs.",
+   "why": "That is a statement-by-statement comparison across dozens of theorems, outside the five pointers; I checked only exists_reference_bounds, exists_outgoing_profile and exists_fixed_schedule, whose docstrings state an order consistent with the paper's convention."
+  },
+  {
+   "what": "Whether the Theorem 3.1(iii) uniformity 'for every finite X1 on 0 ≤X ≤X1' has a Lean counterpart parametrised by X1.",
+   "why": "AllJetsFlat is stated along an abstract filter l with weight q; I did not find, by grep, a statement quantified over X1, but the filter may encode a fixed X1 region in a way my searches (X1, X_1, 'finite X') did not detect."
+  },
+  {
+   "what": "What the 'Lemma 4.4' cited in NavierStokes/RadialHeatProfile.lean:10,688 refers to.",
+   "why": "The displayed gamma-normalized integral it cites is not in the p.28-29 statement of Lemma 4.4; it likely refers to a different numbering (e.g. an appendix or an earlier draft). I did not resolve it and it does not affect the joining-lemma verdict."
+  },
+  {
+   "what": "Whether 'Hext is smooth on [0, ∞), with each fixed derivative bounded' and the swirl heat equation are proved for the Lean exterior profile.",
+   "why": "I read only the definitions (physicalHeat, heatCoefficient) and the residual-zero lemma names (heat_navierStokesResidual_zero, RadialHeatProfile 'radial heat equation' sections); I did not read those proofs."
+  },
+  {
+   "what": "Whether the comparator definitions (InitialVelocityConditionDecay, ForceConditionDecay, NavierStokesExistenceAndSmoothnessRn, and the periodic versions) faithfully encode the intended problem statement.",
+   "why": "Out of this unit's scope; the gate concerns the five PARTIAL intermediates, not the comparator."
+  }
+ ],
+ "what_this_does_not_establish": [
+  "This is not a proof check and not a kernel check; no lean or lake was run; 'no sorry/axiom text' in eight cited files is a text grep only.",
+  "It does not establish that the exported theorems are correct, nor that the comparator Props encode the Clay statement.",
+  "It does not establish that any PARTIAL statement's mathematics is wrong or that the Lean construction is mathematically incomplete; a clause missing as a Lean statement may be absorbed into definitions, types, or per-theorem quantifiers.",
+  "It does not establish use (as opposed to import) of the pointer declarations by the exported proofs; import-closure membership is necessary, not sufficient.",
+  "It does not establish that my content-based identifications (e.g. profile stocks ≈ Q_s/N_s; NativeBounds ≈ 'constants and polynomial degrees') are the only or intended correspondences; they are one reader's matching by content.",
+  "The manuscript text was read from the main checkout's gitignored extraction (sha256 verified against REGENERATE.md), not regenerated from the PDF here."
+ ],
+ "forbidden_paths_opened": "none"
+}
