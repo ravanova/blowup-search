@@ -77,7 +77,10 @@ user stops it (§9) or the direction genuinely runs out.
 
 ## 2. Shape of the run
 
-Four legs live at all times. Each leg is **one Opus 5 agent, end to end** — its own novelty
+Four legs live at all times. (Recorded 2026-09-10 for accuracy: this was the standing rule, but the
+number actually running varied across the programme, from one at a time up to ten at the peak, with
+five-agent waves through arcs 6 and 7. Agents ran on a mix of Opus- and Fable-class models, mostly
+Opus.) Each leg is **one Opus 5 agent, end to end** — its own novelty
 pass, its own construction, its own measurement, its own gate answer, its own quartet (§6),
 and **its own push to `main`** (§7b). When its push lands the agent is terminated and a
 fresh agent spawns into the slot on the next brief, so four legs are always in progress.

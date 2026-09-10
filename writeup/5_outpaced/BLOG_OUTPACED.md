@@ -29,7 +29,7 @@ direction is Fefferman **(C)** — breakdown on `ℝ³`."*
 
 So the honest way to open the last post in this project is not with the news.
 It is with a line from our own file `CLAY_OBLIGATIONS.md`, landed by leg 381,
-about six weeks before the announcement:
+about four weeks before the announcement:
 
 > Statement **(C)** permits a smooth forcing `f` satisfying its own decay
 > conditions (4),(5). This is a genuine relaxation of the target — the
@@ -47,7 +47,7 @@ identified the forcing as a genuine relaxation of the target. It wrote the word
 
 And then it priced the relaxation as worthless, in one clause, and moved on.
 
-The construction that was published six weeks later, as reported, has three
+The construction that was published four weeks later, as reported, has three
 components: a self-similar concentrating axisymmetric vortex; **small-scale
 oscillatory pulses in a cylindrical annulus whose Reynolds stress cancels the
 momentum residual**; and an iterative correction scheme that removes
@@ -80,6 +80,12 @@ That is 1.05 million agent-hours. Ten concurrent agents burn that in **about
 twelve years**. This number assumes our ten agents are running their method, on
 their model, at their efficiency. They are not. It is the price of burning the
 equivalent fuel, not of arriving.
+
+**What we actually ran.** One human, a conductor process dispatching waves, and a number of
+agent slots that varied across the programme rather than staying fixed: as few as one at a
+time, five per wave through arcs 6 and 7, and ten at the peak. The agents ran on a mix of
+Opus- and Fable-class models, mostly Opus. The prices below assume ten slots because that is
+the peak, which is the assumption most generous to us.
 
 **Price it in our own odds.** `STATE.md` carries a self-assessed probability of
 a full Clay solve of **~0.05%**, recorded in the same paragraph as the ambition
@@ -162,7 +168,7 @@ and open. ~~So is (D), the torus.~~ *[Struck 2026-09-09, leg 423: (D) is claimed
 manuscript, Corollary 10.6 — `CORRECTIONS.md` §66.]*
 
 None of which changes our position. A result being contested is not the same as
-a result being wrong, and our own file predicted this door six weeks early and
+a result being wrong, and our own file predicted this door four weeks early and
 then bricked it up. That is the finding.
 
 ## One more part
