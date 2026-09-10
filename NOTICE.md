@@ -22,6 +22,9 @@ Licence: **Creative Commons Attribution 4.0 International**
 (<https://creativecommons.org/licenses/by/4.0/>). Quote it, translate it, build on
 it, including commercially — attribute it, and say if you changed it.
 
+**Attribution:** credit **Andy**, and link back to this repository
+(<https://github.com/ravanova/blowup-search>). Fork it freely on those terms.
+
 If you quote a result, please also quote its status. Every claim in this
 repository carries a tier and a verification label, and a quotation that drops
 them is a misquotation. See [`READING_THIS_REPO.md`](READING_THIS_REPO.md).
