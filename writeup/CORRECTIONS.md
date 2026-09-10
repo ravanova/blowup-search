@@ -5243,3 +5243,14 @@ pushed 13:20Z before any run-2 worker was spawned) governs **run 2**, five fresh
 forbidden to open run 1. Run-1/run-2 agreement per slot is reported at integration as an unplanned second-agent
 cross-check, not as verification. The cause is the same as arc 6's: a Conductor with idle slots dispatched into
 them while a serial unit ran, and wrote the record afterwards.
+
+## §75 — arc 7 `K3` (leg 439): **the pre-registration's Q6 was mis-scaled by the Conductor who wrote it — the flat weight's "linear coefficient −3" contradicts a banked leg-432 measurement by a factor of ~10³ and rests on a derivative taken wrongly; DROPPED beside the prereg before any run, not re-scaled.**
+
+`leg_439_prereg.md` §0 (b091c21, 08:30Z) derives `k(δ) = 8 − 3δ` from an expansion whose `−3 log δ` term
+differentiates to `−3δ²`, and whose presence at resolvable `δ` leg 432 had already measured as absent
+(`arc6_residual_v1.json` `H2/local_power_Ttheta_hat_at_0.05 = 0.051`, `H7/delta3_dlogT_ddelta_at_0.05 = 8.000135`).
+The prereg's own §0 cites §71's lesson while repeating it. Since the only surviving route-A prediction is the
+cutoff's own exponent, Q6 has no two-route form and is DROPPED under the wave's rule
+(`leg_439_prereg_amend.md`); Q1–Q5 are unchanged and were checked against the record in the same amendment.
+Found by the laptop Conductor reading the prereg against the banked JSON before dispatch — the check the charter
+asks for and the container Conductor recorded as done.
