@@ -33,7 +33,7 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–434. WAVES 1–3 CLOSED (legs 428, 429, 431). `R5`(i) LANDED (leg 430). `R5`(ii) LANDED (leg 432). NEXT: WAVE 4 = `R5`(iii)–(vii) ×5 (leg 433), then `R7` (leg 434).**
+## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–434. WAVES 1–3 CLOSED (legs 428, 429, 431). `R5`(i) LANDED (leg 430). `R5`(ii) LANDED (leg 432). WAVE 4 CLOSED (leg 433). NEXT: `R7` (leg 434).**
 
 **Mode:** `ORCHESTRATION.md` **§3g CONDUCTOR**, wave sizing **5** by user ruling (recorded in §3g
 beside its original reason; `CORRECTIONS.md` §67). The charter arrived while `R3` was mid-flight
@@ -116,10 +116,10 @@ Conductor-run, `UNVERIFIED` — it changes (a) only. Stale README banner struck 
 `δ`-powers are the limit on a collar `δ ≲ 10⁻⁶⁹` (`NOT TESTABLE`), measured `δ⁰, δ³, δ³` as Lemma A.9 predicts;
 six controls fired; the prereg was amended on a derivation before any number. Tier 2.
 
-**WAVE 4 — DISPATCHED 2026-09-10 (leg 433), pre-registration `c6aaf72` pushed first:** five agents in worktrees,
-two files each — (iii) pulses, (iv) iteration, (v) headline norms, (vi) compact support, (vii) the adversary who
-sees only the gate definitions and tries to fake (iii)–(vi)'s signals. Integration per `leg_433_prereg.md` §3:
-a signal the adversary fakes is `NOT EVIDENCE` whatever the worker's gate said. **Then `R7` (leg 434).**
+**WAVE 4 — CLOSED AND INTEGRATED (leg 433, §71).** Five files cherry-picked unedited → `wave4/merged.json`. Workers:
+pulses P1–P3 `NO` at the pinned tail (`F_0 ≈ 10⁻²⁴⁰`, (7.26) exact to 10⁻¹⁶), iteration I2 `YES` / I1, I3 `NOT-INSTANTIATED`
+(`+1/10` is `10⁻⁸` in `q`), headline V2 `YES` / V1, V3 `NO`, support S1–S3 `YES`. **Adversary: 11 of 12 FAKEABLE → `NOT EVIDENCE`;
+V2 `EVIDENCE`.** Three gates mis-scaled by the Conductor's prereg, recorded. **NEXT: `R7` (leg 434) — land `writeup/6_reproduction/`.**
 
 **Open escalations:** the five rows above, unchanged; row 1 still carries `U1`'s measured fact and
 is still not ruled. **Lean source build** from leg 418 (`lean_build.log`): not re-checked this wave;
