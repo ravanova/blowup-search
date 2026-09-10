@@ -95,6 +95,25 @@ is written for the agent that reads it next, not for you.
 If you are about to quote something from here, quote its status with it. A number
 without its tier and verification label is a misquotation.
 
+### Worker files are not findings
+
+Most of `writeup/data/` is raw artefacts written by individual agents, in agent
+shorthand, *during* a wave — intermediate measurements, notes to the integrator, and
+observations recorded at whatever confidence the agent had at the time. They are
+committed unedited on purpose, because that is what makes the integration auditable.
+
+**A phrase in a worker file is not a finding of this repository until an integration
+leg has ruled on it.** The adjudicated reading always lives in that arc's
+`TECHNICAL_*.md`, under its pre-committed gate wording, with the caveats attached.
+
+This matters most where a worker is measuring somebody else's construction inside
+*our* parameter regime. A line like *"(7.9) fails"* or *"no computable `q` is in the
+paper's regime"* in `writeup/data/arc6/wave4/` is an exact statement about **our
+instantiation at the `λ` we pinned** — not a claim about the source material. The
+arc's technical note says so directly: the construction does not close at any `λ` a
+grid can reach, **and the paper never said it would**. Quoting the worker line
+without that frame inverts its meaning.
+
 ## Checking a claim yourself
 
 Every number in the prose lives in a JSON under `writeup/data/`, and each arc ships
