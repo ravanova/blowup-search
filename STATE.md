@@ -27,25 +27,21 @@ direction check (seven questions, in every integration commit, per unit); **§3j
   `CLAY_OBLIGATIONS.md` §6 names the two obligations with **no known method**.
 - **Clay odds ~0.05%**, unmoved. **No `L1 → L4` link has EVER moved, in over 410 legs.** **The cheapest unit that could move one: NO SUCH UNIT IS KNOWN** — `CLAY_OBLIGATIONS.md` §6 names two obligations with **no known method**, every landed unit is Tier 2, and nothing in `OPTIONS.md` is priced to deliver a certified result.
 
-## ⚠⚠ ARC 6 — SECOND PASS, **§3g CONDUCTOR MODE**, legs 423–430, 2026-09-09. **Wave sizing 5 by user ruling (§3g, §67).** First pass (legs 417–422) retired verbatim → `WALLS_HISTORY.md` §STATE-ARC6-SOLO.
+## ⚠⚠ ARC 6 — SECOND PASS, **§3g CONDUCTOR MODE**, legs 423–431, 2026-09-09/10. **Wave sizing 5 by user ruling (§3g, §67).** First pass (legs 417–422) retired verbatim → `WALLS_HISTORY.md` §STATE-ARC6-SOLO.
 
 Charter: reproduce the OpenAI construction — read all 166 pp., re-derive the spine, instantiate it in
-our machinery, check the Lean. `CORRECTIONS.md` **§66–§68**. **Solo answers are `UNVERIFIED`; only a
+our machinery, check the Lean. `CORRECTIONS.md` **§66–§69**. **Solo answers are `UNVERIFIED`; only a
 fresh agent that never saw the construction can mark anything `VERIFIED`.**
 
 | unit | gate answer, in its own words | artefact |
 |---|---|---|
-| **`R0`** 423/427 CORRECT | **A6-D is dead** — (D) is claimed, Cor 10.6 (§66); wave sizing 4→5 recorded beside §3g's own reason (§67) | — |
-| **`R1`** 424 EXTRACT | **`NO-AND-HERE-IS-THE-DIFF`** strictly, **`MATCH`** after six named typographic rules; **79** statements indexed, two overrides named | `arc6/extract_manifest.json` |
-| **`R2`** 425 READ (solo) | (a) **`YES` 79/79** (b) **`YES`** on hyp/concl/cites, two Definitions carry no constants (c) **13 hard-page notes**, hardest pp. 107–111 / 74–77 / 129–137. **`UNVERIFIED`**; **five fresh shards (leg 428) re-read it blind: (a) 79 (b) `YES` (c) 33 hard-page notes (d) every inconsistency is citation breadth, none is about content; 15 extraction artefacts adjudicated, 0 paper defects** | `arc6/ledger.json`, `ledger/merged.json` |
+| **`R0`–`R2`** 423–428 | landed: A6-D dead (§66); extract `MATCH` after six rules; read (a) 79/79 (b) `YES` (c) 13 + 33 hard-page notes, five blind shards agree (leg 428). **Rows retired verbatim → `WALLS_HISTORY.md` §STATE-ARC6-W1** | `arc6/extract_manifest.json`, `ledger/merged.json` |
 | **`R4`** 429 RE-DERIVE (×5) | **58 of 58 spine nodes `CHECKED`, 0 `GAP`, 0 `NOT-CHECKED`**; blind verifier (seed 428) 10/10 `CHECKED`, agreement **1.0** → **10 nodes `VERIFIED`**, 48 `UNVERIFIED`. Pre-committed "≥ 3 GAPs" **refuted**; Prop 9.6's smallest closing margin **0.07**; 53 extraction artefacts resolved at the PDF. **Not a proof of the theorem.** | `arc6/spine/merged.json` |
 | **`R3`** 426 DAG+SPINE | acyclic **`YES`** ×3 passes; complete **`NO-AND-HERE-ARE-THE-DANGLING-NODES`**: `Remark B.9`, 134 labels in unnumbered prose, and **Props 9.5/9.6 never cited downstream**. Spine through §4/§7/§9: **refuted by citation, confirmed by equation** (§68). Prereg 4/8 | `arc6/dag.json` |
+| **`R5`(i)** 430 PROFILE (serial) | **`NO-AND-HERE-IS-WHERE`**: G1 `K_b=.2450`, G2, G8, G4 (paper's scale), G6 slopes **`YES`**; **G3, G7 `NO` at every pre-registered `λ`** — (A.19) remainder `(λ^{−120λ}−1)/2 ≈ 10¹²` at `λ=.1`; a root on `[.9,1.2]` only at `λ ≤ 3·10⁻⁴` (post hoc sweep); intermediate cone needs `√λP_* ≪ 1`. G5 `NO` on a 10⁸-fold cancellation (identity to 10⁻¹⁵); G6 exponent `NO` (24.0 vs `[30,36]`, = schedule's `λ^{30+60λ}`). C5, C6 **did not fire**, C2 not run (§69). **Tier 2, not a proof.** | `arc6_profile_v1.json`, fig113 |
 
-**WAVE 1 — CLOSED AND INTEGRATED** (dispatched before this row existed, a §3g step-1 defect, recorded).
-Five R2 shard readers A–E, one file each, merged → `ledger/merged.json` (leg 428). Composition floor met
-by the Conductor's serial `R3` and `R5`(i)–(ii). **WAVE 2 CLOSED (leg 429): `R4` ×5, integrated above. WAVE 3 (next): `R6` ×5 Lean**
-(`dag.json` `r4_spine`, partition `leg_426.md` §5, slot 5 adversarial verifier); in parallel, serial
-`R5`(i) with pre-registration first.
+**WAVES 1–2 CLOSED AND INTEGRATED** (legs 428, 429; wave 1 was dispatched before its STATE row existed, a §3g step-1 defect, recorded).
+Rows `R0`–`R2` and the wave-1 paragraph retired verbatim 2026-09-10 (leg 430) under §3j → `WALLS_HISTORY.md` §STATE-ARC6-W1.
 
 ## THE LANES — **RE-RANKED 2026-08-19 AT THE STOP, on what is measured NOW** (order unchanged; Lane L DEMOTED); re-earned per unit under §3i
 

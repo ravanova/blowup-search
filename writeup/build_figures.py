@@ -364,6 +364,10 @@ P2_EVIDENCE = [
     # The script also RUNS all five arc-6 unit evidence checks and cross-checks every
     # number in writeup/6_adjudicated/*.md against the five curated JSONs.
     "6_adjudicated/adjudicated_evidence.py",       # fig112 -- arc 6 U5 (leg 421)
+    # fig113 -- arc 6 second pass / R5(i) (leg 430): Lemma 4.8's outer profile built from
+    # Appendix A's schedule; the closure remainder and the intermediate-interval cone test
+    # against lambda, drawn from writeup/data/arc6_profile_v1.json alone and asserted.
+    "arc6_profile_evidence.py",                    # fig113 -- arc 6 R5(i) (leg 430)
     "4_p2_lottery/p2_route_tc_v1_evidence.py",      # fig48 -- Route-TC v1 (leg 53)
     # Legs 54-57 keep their evidence scripts in experiments/ (their declared territory in
     # DIRECTION.md) rather than beside their writeups like leg 53's -- these paths are
