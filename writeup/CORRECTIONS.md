@@ -5114,3 +5114,34 @@ seen and are labelled `post hoc` in the artefact and the journal.
 
 **Standing:** every pre-registered gate stands as written; nothing was widened; the diagnoses sit
 beside the `NO`s. This is Tier 2. **No wall moved. No `L1 → L4` link moved. Clay ~0.05%.**
+
+## §70 — `R5`(ii) (leg 432, arc 6): **the pre-registration was amended BEFORE any number, on a derivation; two leg-430 statements are corrected; four runner defects were fixed after the quick run and none touched a tolerance.**
+
+**Amendment before numbers** (`leg_432_prereg_amend.md`, `fcac005`, after `leg_432_prereg.md`, `96657de`,
+before the runner existed): writing Lemma A.8's tail representation out by hand showed (i) the heat
+factor `H(2d/X)` cannot be set to 1 in route A because (4.11) multiplies `Q_s` by `X` — with it,
+`X Q_s → (2+2h)L` exactly beyond `X_b` and the stress vanishes there; without it the power law's
+own viscous residual `−(2+2h)F` survives; (ii) the inviscid term of the tail stress is `X` times the
+boundary term whose `δ⁻³` weight (A.48) quotes, so (A.48)–(A.50)'s powers `δ⁻³, δ³, δ⁶` hold only on
+a collar `δ ≲ (8L/X_b)^{1/3}`, which at this profile's `X_b ≈ 10^{207}` is `δ ≲ 10^{−69}`; at every
+resolvable `δ` the paper's own (A.47) predicts `δ⁰, δ³, δ³`. Gates H0, H2, H3, H7 were amended to test
+what is testable and to record the rest `NOT TESTABLE`; control K6 (drop the heat factor) was added.
+The original file is unedited.
+
+**Leg 430 corrected:** (a) `leg_430_prereg.md` said *"`c_o = 0.1` (so `f_o′/f_o < h/4`)"*. The (A.5)
+step's derivative reaches 8, so `f_o′ = ρ_o|ψ_o′| ≤ 4 c_o h = 0.4h`; the paper's `h/4` needs `c_o ≤ 1/16`.
+The runs stand (the shear bracket (A.56) needs only `2f_o′/f_o < h`, which `0.8h < h` meets); the
+parenthetical was false and is recorded here. (b) The `λ = 0.1` tail of leg 430 is the input of leg 432
+(`log X_tail`, `c_∞`); the tail is closure-independent, so leg 430's `G3`/`G7` `NO` does not propagate.
+
+**Runner defects fixed after the quick run, none a tolerance:** the local-slope stencil crossed
+`δ = 0` on the coarse grid (stencil width set in `δ`, not in grid points); `H1` tested "`> 0`" on
+terms pre-registered as "`≥ 0`"; `a − 2` was formed as `(2 + 2h − …) − 2` and lost digits at `h = 10⁻⁷`
+(now formed directly); the `H4` gate was written in units of `h` and could not fire for `h < 0` (K5)
+— now the literal `2 + h < a ≤ 2 + 2h`; `H7`'s slope hard-coded the paper cutoff's `8/δ³` (K1 could
+not fire) — now taken from the cutoff in use; K6's unscaled `−(2+2h)` overflowed under the flat
+weight. `test_arc6_residual_v1.py` asserted the wrong thing for K6 (route agreement without the heat
+factor) and was rewritten to assert the derived disagreement.
+
+**Standing:** every pre-registered inequality stands as written or amended before numbers; the
+diagnoses sit beside the answers. Tier 2. **No wall moved. No `L1 → L4` link moved. Clay ~0.05%.**

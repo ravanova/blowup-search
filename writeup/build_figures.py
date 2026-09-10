@@ -368,6 +368,7 @@ P2_EVIDENCE = [
     # Appendix A's schedule; the closure remainder and the intermediate-interval cone test
     # against lambda, drawn from writeup/data/arc6_profile_v1.json alone and asserted.
     "arc6_profile_evidence.py",                    # fig113 -- arc 6 R5(i) (leg 430)
+    "arc6_residual_evidence.py",                   # fig114 -- arc 6 R5(ii) (leg 432)
     "4_p2_lottery/p2_route_tc_v1_evidence.py",      # fig48 -- Route-TC v1 (leg 53)
     # Legs 54-57 keep their evidence scripts in experiments/ (their declared territory in
     # DIRECTION.md) rather than beside their writeups like leg 53's -- these paths are
