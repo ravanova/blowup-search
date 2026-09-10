@@ -16,3 +16,8 @@ Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)
 cache_get_rc=0 cache_get_s=121
 mathlib_rev=85e3a25e006c35636f0e53b0e9296caca2685bc0
 comparator_rev=19e111e2141cf333c7daff0f64c5f24acc91dd2e
+build_rc=0 build_s=5443
+build_error_lines=0
+axioms_s=8
+olean_count=2486
+t_end=2026-09-10T12:44:55Z total_s=5605

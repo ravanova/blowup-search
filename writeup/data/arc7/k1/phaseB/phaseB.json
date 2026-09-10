@@ -1,0 +1,74 @@
+{
+ "schema": "arc7_k1_phase_v1",
+ "leg": 437,
+ "phase": "B",
+ "what": "fresh clone of openai/NavierStokesAndEuler at the pin 8937a8f4 in a fresh container (leg_437_prereg_amend.md: relocated here by user ruling 2026-09-10, phase A's tree kept for K2), elan install, `lake exe cache get`, `lake build` from nothing, then #print axioms on the two exported theorems, timed end to end; pre-registered leg_437_prereg.md §3 phase B, readings §2 unchanged",
+ "runner": "scripts/arc7_k1_kernel_check.sh B",
+ "machine": {
+  "nproc": 4,
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+  "mem_gb": 15,
+  "disk_at_start": "/dev/vda 252G total, 7.7G used, 30G avail (21%)",
+  "elan": "elan 4.2.4 (227caca13 2026-08-25)",
+  "lean": "Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)",
+  "lake": "Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)",
+  "container": "claude code remote, fresh session (session_01VEipCs6B23bjiQ8aku2Pvn) — a DIFFERENT container from phase A (phase A: Xeon @ 2.80GHz, same 4 cores / 15 GB); no elan, no toolchain, no oleans present before this run"
+ },
+ "tree_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "upstream_head_at_clone": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "toolchain": "leanprover/lean4:v4.34.0-rc2",
+ "mathlib_rev": "85e3a25e006c35636f0e53b0e9296caca2685bc0",
+ "comparator_rev": "19e111e2141cf333c7daff0f64c5f24acc91dd2e",
+ "t_start": "2026-09-10T11:11:30Z",
+ "t_end": "2026-09-10T12:44:55Z",
+ "clone_s": 2,
+ "toolchain_install_s_derived": 31,
+ "toolchain_install_s_note": "not a runner field; derived from t_clone_done=11:11:32Z to CACHE_GET_T0=11:12:03Z (elan fetched v4.34.0-rc2 on first `lean --version`); clone_s+31+cache_get_s+build_s+axioms_s = total_s exactly",
+ "cache_get_rc": 0,
+ "cache_get_s": 121,
+ "cache_get_files": "8747 file(s) attempted, 8747 downloaded, 8747 decompressed, from https://lakecache.blob.core.windows.net/mathlib4-master (build log line 48-50)",
+ "build_rc": 0,
+ "build_s": 5443,
+ "axioms_s": 8,
+ "total_s": 5605,
+ "build_error_lines": 0,
+ "jobs": "11251 jobs per lake's final line `Build completed successfully (11251 jobs).`; highest per-target line printed is `[11250/11251] Built Euler.Solution` (lake prints no line for the root job); all built in this phase (mathlib from cache: 0 `Built Mathlib.` lines); NavierStokes 643, Euler 1839, ComparatorChallenges 2",
+ "build_warning_lines": "4 × `declaration uses \\`sorry\\`` in ComparatorChallenges/Euler.lean:85,170 and ComparatorChallenges/NavierStokes.lean:273,280 (the challenge placeholders; not in either theorem's closure per axioms_verbatim); build log lines 558-562",
+ "olean_count_project": 2486,
+ "axioms_verbatim": "=== AXIOMS_T0 2026-09-10T12:44:47Z\n'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n=== AXIOMS_RC=0 2026-09-10T12:44:55Z\n",
+ "result": {
+  "navier_stokes_breakdown_R3": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "navier_stokes_breakdown_periodic": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "sorryAx_reachable": "NO",
+  "exit_code": 0
+ },
+ "gate": {
+  "a_build_completes": "YES — `lake exe cache get` rc 0 and `lake build` rc 0, `Build completed successfully (11251 jobs)`, 0 error lines; default targets NavierStokes, Euler, ComparatorChallenges all built",
+  "b_print_axioms": "verbatim in axioms_verbatim: both theorems `[propext, Classical.choice, Quot.sound]`",
+  "c_sorryAx_reachable": "NO",
+  "d_wall_time": "END-TO-END 5605 s (1 h 33 min 25 s) from `git clone` to the end of #print axioms: clone 2 s, toolchain install 31 s, cache get 121 s, build 5443 s, axioms 8 s; machine: 4 cores Intel Xeon @ 2.10GHz, 15 GB RAM, toolchain leanprover/lean4:v4.34.0-rc2, mathlib 85e3a25e, Comparator 19e111e2"
+ },
+ "reading": "GREEN (prereg §2)",
+ "what_this_does_not_establish": [
+  "Theorem 1.1 of the paper — the two statements are Fefferman (C)/(D) as the project formalises them (leg 431 gate (b))",
+  "that mathlib's cached oleans match their sources (8747 oleans were downloaded, not compiled here)",
+  "verification by a second agent — a fresh container is a second machine, not a second agent; this run was directed by the same Conductor; UNVERIFIED under §3f rule 1 until a blind agent reproduces it",
+  "that the Lean proof follows the paper's argument, or anything about priority"
+ ],
+ "files": [
+  "k1_B_build.log",
+  "k1_B_summary.txt",
+  "k1_B_axioms.log",
+  "k1_axioms_check.lean",
+  "k1_B_axioms_in_build_log.txt",
+  "k1_B_nohup.log (empty: the runner wrote nothing to stdout/stderr)"
+ ]
+}

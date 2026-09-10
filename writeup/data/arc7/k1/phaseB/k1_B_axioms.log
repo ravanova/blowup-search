@@ -1,0 +1,4 @@
+=== AXIOMS_T0 2026-09-10T12:44:47Z
+'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== AXIOMS_RC=0 2026-09-10T12:44:55Z
