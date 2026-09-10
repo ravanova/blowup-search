@@ -1,0 +1,41 @@
+=== before any install (start of session) ===
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  225G  211G  2.5G  99% /
+tmpfs            16G  115M   16G   1% /dev/shm
+
+=== after go install landrun ===
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  225G  211G  2.5G  99% /
+tmpfs            16G  520M   16G   4% /dev/shm
+
+=== after lake build lean4export ===
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  225G  212G  2.3G  99% /
+tmpfs            16G  510M   16G   4% /dev/shm
+
+=== after lake build Comparator/comparator ===
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  225G  212G  2.2G 100% /
+tmpfs            16G  529M   16G   4% /dev/shm
+
+=== after 4 blocked rustup/nanoda attempts (no install happened; /dev/shm/k2a3/cargo and rustup remained empty) ===
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  225G  212G  2.4G  99% /
+tmpfs            16G  553M   16G   4% /dev/shm
+
+=== after check0 NavierStokes run (real, rc=1) ===
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  225G  212G  2.4G  99% /
+tmpfs            16G  516M   16G   4% /dev/shm
+
+=== after check0 Euler run (real, rc=1) ===
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  225G  212G  2.4G  99% /
+tmpfs            16G  509M   16G   4% /dev/shm
+
+=== after check8 formal-conjectures shallow clone + 2 pin fetches, into /dev/shm ===
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  225G  212G  2.4G  99% /
+tmpfs            16G  525M   16G   4% /dev/shm
+
+Note: / never dropped below 2.2G free and /dev/shm never exceeded ~560M of its 16G at any measured point. No step was stopped for exhausting either filesystem.
