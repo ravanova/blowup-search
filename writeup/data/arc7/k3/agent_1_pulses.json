@@ -2,8 +2,25 @@
  "schema": "arc7_k3_v1",
  "agent": 1,
  "leg": 439,
- "status": "CLAIMED WRITTEN, RUN NOT YET STARTED",
- "pages_read": [7, 8, 16, 24, 25, 27, 46, 47, 63, 77, 82, 101, 102, 103, 109, 110],
+ "status": "COMPLETE",
+ "pages_read": [
+  7,
+  8,
+  16,
+  24,
+  25,
+  27,
+  46,
+  47,
+  63,
+  77,
+  82,
+  101,
+  102,
+  103,
+  109,
+  110
+ ],
  "claimed": {
   "Q1": {
    "quantity": "The pinned tail stress T_0 (both entries, theta-theta and z) on y in [0.5, 2.9] at h = 1e-7, every eta node in {-0.5, 0.0, 0.5}: the target the homogeneous pulses of Lemma 7.4 must reproduce under Definition 6.4's amplitude assignment.",
@@ -18,13 +35,224 @@
    "route_B_plan_and_pre_registered_cost_ceiling": "Route B would build R^(0)_r's two terms explicitly from the pinned tail stress via Proposition 4.2's operators (T_b, Z_b of (4.2)) applied to the profile field G = V_0/X (needs V_0, U, W from the PINNED OUTER PROFILE, arc6_profile_v1.py's build(), not merely T_0), then take the log-log slope of their ratio over q in {1e-2, 1e-3, 1e-4} at h in {1e-7, 1e-3}, exactly as Q2 requires (both h). This is pre-registered as the target BEFORE any number exists. Pre-registered fallback, ALSO written before any number exists: T_0 alone (leg 432's pinned object, what Q1 uses) cannot supply this ratio, because T_0's two components enter the physical stress only through the SHARED overall prefactor q^{-A-1/2} -- any ratio formed from T_0 alone (e.g. T_z/T_theta) is q-independent by construction, so it can never show a q^{2h} hierarchy; a genuine two-route Q2 needs the profile-space force, not the stress alone. If the T_b/Z_b operator build (from (4.2)) cannot be completed and independently checked within this session, Q2 is answered UNDER-RESOURCED, with the specific missing piece named, never NO and never faked from T_0 alone."
   }
  },
- "routes": {},
- "gates": {},
- "controls": {},
+ "routes": {
+  "Q1": {
+   "A_method": "Definition 6.4 / (7.24): invert the fine (dtt=0.02, store_every=1, Lambda=2000) covariance H against the pinned target T (theta=1, z=Tz/Ttheta from leg 432's tail_data, imported via arc6_w4_pulses.tail_data) to assign y_sigma; frozen once, never re-quadratured for the gate itself.",
+   "B_method": "For each M in {16,64,256}: interpolate (cubic) the FROZEN fine ODE solution to M+1 points (odd count for Simpson) spanning the same [0, Lambda] window, recompute psi analytically (psi_of, imported) at those M points, apply Simpson quadrature there, and recombine with the FIXED y_sigma from route A to reconstruct the averaged quadratic product independently of the H-building grid.",
+   "measured": {
+    "theta_worst_err_by_M": {
+     "16": 0.08361292044125213,
+     "64": 0.0056843956306277255,
+     "256": 1.709743457922741e-14
+    },
+    "z_worst_err_by_M": {
+     "16": 0.08386184318554134,
+     "64": 0.005693689316579706,
+     "256": 1.5438447674357455e-14
+    },
+    "theta_fit_slope_vs_M": -10.538270791045962,
+    "z_fit_slope_vs_M": -10.576155995016057
+   }
+  },
+  "Q2": {
+   "A_method": "p. 47: 1 - 2D = 2h from (4.1)'s D = 1/2 - h, applied to (4.2)'s axial-derivative operator order shift in Proposition 4.2's force decomposition; corroborated at p. 16 (3.6).",
+   "B_method": "NOT BUILT: would require Proposition 4.2's T_b, Z_b operators of (4.2) applied to the pinned OUTER PROFILE fields V_0, U, W (arc6_profile_v1.py's build(), not merely the tail stress T_0 that Q1 uses), to form R^(0)_r's two terms and their ratio's q-exponent at q in {1e-2,1e-3,1e-4}, h in {1e-7,1e-3}. Judged, before any number existed, to exceed this session's budget alongside Q1's full build. UNDER-RESOURCED, not faked, not NO."
+  }
+ },
+ "gates": {
+  "Q1": {
+   "answer": "YES",
+   "theta_entry": {
+    "err_at_M256": 1.709743457922741e-14,
+    "threshold": 1e-08,
+    "passes_threshold": true,
+    "slope_vs_M": -10.538270791045962,
+    "slope_threshold": -3.5,
+    "passes_slope": true,
+    "decreasing_M16_to_M256": true
+   },
+   "z_entry": {
+    "err_at_M256": 1.5438447674357455e-14,
+    "threshold": 1e-08,
+    "passes_threshold": true,
+    "slope_vs_M": -10.576155995016057,
+    "slope_threshold": -3.5,
+    "passes_slope": true,
+    "decreasing_M16_to_M256": true
+   },
+   "normalisation": "each entry normalised by its own sup (theta target sup = 1 identically; z target sup = max_y |Tz/Ttheta| at that eta), per leg_439_prereg.md Q1's correction to wave 4's joint norm."
+  },
+  "Q2": {
+   "answer": "UNDER-RESOURCED",
+   "cost": "Building Proposition 4.2's T_b/Z_b operators (4.2) and the pinned outer-profile fields V_0, U, W (arc6_profile_v1.py's build(), not the tail stress alone) to form R^(0)_r's two-term ratio at three q and two h, independently checked against a physical-space finite-difference route, is estimated at several additional hours beyond this session: reading (4.1)-(4.2) and (4.7)-(4.8) in full, deriving T_b/Z_b generically (not just quoting their order-counting consequence 1-2D=2h), and building + debugging the coordinate-inversion (X,eta)<->(r,z) at explicit q needed for an independent numerical check. Not answered NO; not faked from Proposition 9.1's own (9.2) table, which was checked (see dropped_investigation below) and does not contain a q^{2h} entry."
+  }
+ },
+ "controls": {
+  "phase_shift_pi_over_2": {
+   "expected": "theta-entry error O(1) at every M (must fail, i.e. NOT converge toward 0 with M)",
+   "measured_at_M256": 0.5000000000000004,
+   "fired": true
+  },
+  "amplitude_halved": {
+   "expected": "theta-entry error ~ 0.75 +- 0.01, using wave 4's own convention that amp_scale multiplies y_sigma (i.e. y_sigma *= amp_scale**2); reported both under that convention and under the literal-amplitude-halved convention (amp_scale = sqrt(0.5), i.e. y_sigma *= 0.5) for honesty",
+   "measured_wave4_convention_amp_scale_half": 0.7500000000000002,
+   "measured_literal_amplitude_halved_amp_scale_sqrthalf": 0.5000000000000002,
+   "fired": true
+  },
+  "twin": {
+   "expected": "repeat run (different eta node, 0.5, at the same M=256) passes the same way",
+   "measured_theta_err": 1.709743457922741e-14,
+   "measured_z_err": 1.5438447674357455e-14,
+   "twin_passes": true
+  }
+ },
  "dropped": [],
- "instantiated_vs_scaled": "",
- "could_not_determine": [],
- "what_this_does_not_establish": "",
+ "instantiated_vs_scaled": "Q1 is instantiated fully at the pinned interface: h = 1e-7, Lambda = 2000, y in [0.5, 2.9] at 0.1 spacing (25 slow points), eta in {-0.5, 0, 0.5}, using leg 432/433's own tail_data/pulse/columns builders (imported, unedited). The fine ODE solve (dtt=0.02, store_every=1) is the SAME resolution wave 4 used to build H; what is new here is that the RECONSTRUCTION quadrature (M) is swept independently of that fixed grid, via cubic interpolation, rather than reusing it -- this is the only methodological change from wave 4's P1 level 1. Q2's route A (2h exactly) is instantiated as a page quotation and a page-47 order-counting argument; its route B is NOT instantiated (UNDER-RESOURCED).",
+ "could_not_determine": [
+  "Q2's route B (the independent numerical measurement of the axial-viscosity/radial-transport ratio's q-exponent), because it requires Proposition 4.2's T_b/Z_b operators (4.2) applied to the pinned outer profile's V_0/U/W fields (not merely the tail stress T_0 this unit otherwise uses), a build judged to exceed this session's remaining budget once Q1 was done properly (the aliasing fix required rebuilding the quadrature machinery rather than reusing wave 4's, which used most of the session).",
+  "Whether the z-entry's true target (T_z/T_theta, magnitude down to roughly 1e-137 at some eta per wave 4's own report) is resolved by the M-point quadrature at float64 precision at every eta, or whether catastrophic cancellation in the (S,Dd) split silently zeroes it at some (y, eta, M) combination: not separately audited beyond the sup-error reported per M.",
+  "The exact page(s) inside Proposition 7.5's own statement (as opposed to its neighbourhood, (7.24)-(7.28) and Lemma 7.4) were not individually re-transcribed; this unit relies on experiments/arc6_w4_pulses.py's own docstring (an already-committed, imported artefact) for the page range 79-83, cross-checked only against the manuscript's own text around Section 7's 'Proposition 9.1' back-references, not against a fresh, independent read of every displayed equation number in Section 7."
+ ],
+ "what_this_does_not_establish": "Q1 passing (if it passes) shows that the paper's closed-form amplitude assignment (7.26), evaluated by a genuinely independent, converging quadrature, reproduces the pinned target stress at the pinned interface -- it says nothing about whether that stress is the one a real Navier-Stokes solution produces, whether the pulses so built are physically realisable at the paper's own regime (wave 4's agent_3_pulses.json, not opened here, reportedly found the size hierarchy inverted at this same pinned point -- not re-checked or relied upon by this unit), or anything about the construction closing. Q2 UNDER-RESOURCED establishes nothing either way about the q^{2h} hierarchy; it is a cost report, not a verdict.",
  "forbidden_paths_opened": "none",
- "tier": "This is Tier 2, not a proof."
+ "tier": "This is Tier 2, not a proof.",
+ "measured": {
+  "runtime_s": 45.862181186676025,
+  "grid": {
+   "y": [
+    0.5,
+    0.6,
+    0.7,
+    0.7999999999999999,
+    0.8999999999999999,
+    0.9999999999999999,
+    1.0999999999999999,
+    1.1999999999999997,
+    1.2999999999999998,
+    1.4,
+    1.4999999999999998,
+    1.5999999999999996,
+    1.6999999999999997,
+    1.7999999999999998,
+    1.8999999999999997,
+    1.9999999999999996,
+    2.0999999999999996,
+    2.1999999999999997,
+    2.3,
+    2.3999999999999995,
+    2.4999999999999996,
+    2.5999999999999996,
+    2.6999999999999993,
+    2.7999999999999994,
+    2.8999999999999995
+   ],
+   "etas": [
+    -0.5,
+    0.0,
+    0.5
+   ],
+   "Lambda": 2000.0,
+   "h": 1e-07,
+   "M": [
+    16,
+    64,
+    256
+   ],
+   "fine_dtt": 0.02,
+   "fine_n_points": 100001
+  },
+  "per_M": {
+   "16": {
+    "n_quadrature_points": 17,
+    "per_eta": {
+     "-0.5": {
+      "theta_entry_sup_err": 0.08361292044125213,
+      "z_entry_rel_or_abs_err": 0.08386184318554134,
+      "Tz_sup": 7.049420398039013e-137
+     },
+     "0.0": {
+      "theta_entry_sup_err": 0.08361292044125213,
+      "z_entry_rel_or_abs_err": 0.0,
+      "Tz_sup": 0.0
+     },
+     "0.5": {
+      "theta_entry_sup_err": 0.08361292044125213,
+      "z_entry_rel_or_abs_err": 0.08386184318554134,
+      "Tz_sup": 7.049420398039013e-137
+     }
+    },
+    "theta_worst": 0.08361292044125213,
+    "z_worst": 0.08386184318554134
+   },
+   "64": {
+    "n_quadrature_points": 65,
+    "per_eta": {
+     "-0.5": {
+      "theta_entry_sup_err": 0.0056843956306277255,
+      "z_entry_rel_or_abs_err": 0.005693689316579706,
+      "Tz_sup": 7.049420398039013e-137
+     },
+     "0.0": {
+      "theta_entry_sup_err": 0.0056843956306277255,
+      "z_entry_rel_or_abs_err": 0.0,
+      "Tz_sup": 0.0
+     },
+     "0.5": {
+      "theta_entry_sup_err": 0.0056843956306277255,
+      "z_entry_rel_or_abs_err": 0.005693689316579706,
+      "Tz_sup": 7.049420398039013e-137
+     }
+    },
+    "theta_worst": 0.0056843956306277255,
+    "z_worst": 0.005693689316579706
+   },
+   "256": {
+    "n_quadrature_points": 257,
+    "per_eta": {
+     "-0.5": {
+      "theta_entry_sup_err": 1.709743457922741e-14,
+      "z_entry_rel_or_abs_err": 1.5438447674357455e-14,
+      "Tz_sup": 7.049420398039013e-137
+     },
+     "0.0": {
+      "theta_entry_sup_err": 1.709743457922741e-14,
+      "z_entry_rel_or_abs_err": 0.0,
+      "Tz_sup": 0.0
+     },
+     "0.5": {
+      "theta_entry_sup_err": 1.709743457922741e-14,
+      "z_entry_rel_or_abs_err": 1.5438447674357455e-14,
+      "Tz_sup": 7.049420398039013e-137
+     }
+    },
+    "theta_worst": 1.709743457922741e-14,
+    "z_worst": 1.5438447674357455e-14
+   }
+  },
+  "theta_fit_slope_vs_M": -10.538270791045962,
+  "z_fit_slope_vs_M": -10.576155995016057,
+  "inversion_positivity": {
+   "-0.5": {
+    "y_plus_positive": true,
+    "y_minus_positive": true
+   },
+   "0.0": {
+    "y_plus_positive": true,
+    "y_minus_positive": true
+   },
+   "0.5": {
+    "y_plus_positive": true,
+    "y_minus_positive": true
+   }
+  },
+  "controls_measured": {
+   "phase_shift_pi_over_2_theta_err_at_M256": 0.5000000000000004,
+   "amplitude_halved_amp_scale_sqrthalf_theta_err_at_M256": 0.5000000000000002,
+   "amplitude_halved_amp_scale_half_theta_err_at_M256": 0.7500000000000002,
+   "twin_M256_eta_half_theta_err": 1.709743457922741e-14,
+   "twin_M256_eta_half_z_err": 1.5438447674357455e-14
+  }
+ },
+ "dropped_investigation_Q2_prop_9_1_table": "Proposition 9.1's own displayed table of remainder gains (manuscript_pages.txt, the paragraph after (9.2), p. 102): slow transport 1-kappa_s, phase transport defect 1/2, base derivatives/connections 1, pressure-amplitude gradient 1/2-kappa_s, viscous amplitude derivatives 1-2*kappa_s, mixed derivatives/phase divergence 1/2-kappa_s, viscous angular connection 1/2 -- read directly from the manuscript (not re-derived), all <= 1, giving relative order q^{h*gain} <= q^h, never q^{2h}. Every remainder in Prop 9.1's table is therefore SUBLEADING to the leading balance by at most one power of h, not two; the q^{2h} quantity Q2 asks for is NOT in this table. It traces instead to p. 47 (Section 4-5, the outer profile's own correction hierarchy: 1-2D=2h from (4.2)) and p. 16 (3.6). This is reported as a finding about the pre-registration's citation, not a re-scoping of Q2's own number (2h, fixed before this run) or its tolerance.",
+ "gate_answer": "Q1 = YES at the pinned interface (theta-entry sup-err 1.71e-14 at M=256, slope -10.54; z-entry sup-err 1.54e-14 at M=256, slope -10.58; both normalised by their own sup, gated separately per leg_439_prereg.md's correction to wave 4's joint norm). Q2 = UNDER-RESOURCED (route A's 2h is pinned and quoted; route B needs Proposition 4.2's operator machinery on the outer profile, not built here; Proposition 9.1's own (9.2) table was checked and does not itself contain a q^{2h} term). This is Tier 2, not a proof."
 }
