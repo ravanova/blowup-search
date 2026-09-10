@@ -32,11 +32,17 @@ Appendix A schedule, Lemma 4.8's outer profile reproduces its bracket constants,
 datum and pulse-end moment cancellation, and its terminal-tail stress reproduces Proposition A.10
 by two independent routes to `10⁻⁹`; its closure and its cone do **not** reproduce at any `λ` a grid
 can reach, because the paper's own asymptotics place them at `λ ≲ 3·10⁻⁴` with `√λ P_* ≪ 1`, and its
-outer-edge powers are the limit on a collar `δ ≲ 10⁻⁶⁹`. Measured rather than assumed, the Lean
+outer-edge powers are the limit on a collar `δ ≲ 10⁻⁶⁹`. Fanned out on that interface, the pulses' exact identity (7.26) holds to `10⁻¹⁶` and the
+correction ledger's 29 inequalities hold with a smallest margin of 0.020, while the paper's own
+admissibility puts the pulses at `log₁₀ q ≲ −7.5·10⁸` and the per-stage gain at `10⁻⁸` in `q` — and an
+adversary who saw only the gate definitions faked eleven of wave 4's twelve signals, so by the rule
+fixed before dispatch they are not evidence; the one that survives is a measured gap (the leading
+order's force grows like `q^{−3/2−h}`). Measured rather than assumed, the Lean
 project is large and `sorry`-free outside its challenge placeholders, source-covers all 79
 statements, and exports Fefferman's (C) and (D) — a statement strictly weaker than Theorem 1.1 — and
-**no kernel check of it was reached** here. Nothing this pass measured contradicts the manuscript;
-nothing this pass measured is a proof of it, and no wall of ours moved.*
+**no kernel check of it was reached** here. Nothing this pass measured contradicts the manuscript; nothing this pass measured is a proof of
+it; every place where the reproduction stops is a place the paper's own asymptotics put beyond a grid;
+and no wall of ours moved.*
 
 The sections below carry the numbers, unit by unit, and stop there.
 
@@ -175,9 +181,46 @@ compiled"*) was struck and recorded, not rewritten.
 
 ## 9. `R5`(iii)–(vii) — pulses, iteration, headline norms, compact support, and the adversary (wave 4, leg 433)
 
-_[WAVE 4 IN FLIGHT WHEN THIS DRAFT WAS WRITTEN — this section is filled at integration from
-`writeup/data/arc6/wave4/merged.json`, gate by gate, with the adversary's verdict beside each worker's
-answer; a signal the adversary faked is `NOT EVIDENCE` whatever the worker found (`leg_433_prereg.md` §3).]_
+Pre-registered (`c6aaf72`, pushed before dispatch): twelve gates for four workers, one adversary who saw
+only the gate definitions and tried to fake each signal from a deliberately wrong or under-resolved run,
+and one rule fixed in advance — **a signal the adversary faked is `NOT EVIDENCE` whatever the worker's gate
+said.** Five files, cherry-picked unedited, merged by `arc6_wave4_merge.py`.
+
+| gate | worker | adversary | status |
+|---|---|---|---|
+| P1 pulses reproduce `T` · P2 residual after absorption · P3 the `q^{2h}` hierarchy | **NO · NO · NO** | FAKEABLE ×3 | **NOT EVIDENCE** ×3 |
+| I1 one-stage gain vs `1/10` · I2 exponent ledger · I3 second stage | NOT-INSTANTIATED · **YES** · NOT-INSTANTIATED | FAKEABLE ×3 | **NOT EVIDENCE** ×3 |
+| V1 headline exponents · V2 the leading order's force · V3 `T*` and refinement | **NO · YES · NO** | FAKEABLE · **NOT FAKEABLE** · FAKEABLE | NOT EVIDENCE · **EVIDENCE** · NOT EVIDENCE |
+| S1 residual `= 0` beyond `X_b` · S2 §10's clauses · S3 the (A.51) bounds | **YES · YES · YES** | FAKEABLE ×3 | **NOT EVIDENCE** ×3 |
+
+**Workers `YES` 5, `NO` 5, `NOT-INSTANTIATED` 2; faked 11 of 12; evidence 1 of 12.** What the workers measured
+beyond their gates is the wave's content:
+
+- **(iii)** the exact part of Proposition 7.5 holds — the prescribed-amplitude identity (7.26) reproduces
+  the θ-entry of `T_0` to `1.4·10⁻¹⁶`, the (7.21)/(7.28) structure to `Λ^{−1.00}`, both controls fired (0.50, 0.75) —
+  and the curl-of-a-potential field fails at the pinned tail because there `F_0 = E/R ≈ 10⁻²⁴⁰`: covariance
+  defect `8.1·10²²¹`, every one of Proposition 9.1's seven lower-order groups *larger* than the principal
+  operator (`1.6·10¹⁰` to `6.5·10²⁶⁹`). **The paper's own admissibility `S*²(ε + ε² + 1/k) ≤ 1` (p. 77) needs
+  `ℓ ≥ 2.5·10⁹`, i.e. `log₁₀ q ≲ −7.5·10⁸` at `h = 10⁻⁷`.**
+- **(iv)** Definition 9.4's recursion reproduces Propositions 9.5–9.6 and all 29 inequalities of pp. 106–111;
+  **the smallest requirement margin is 0.020** (leg 429's 0.07 was over the closing rows only); Proposition 9.9's
+  summation converges. The `+1/10` is an exponent of `ε = Q^h`, so as a `q`-exponent it is **`h/10 = 10⁻⁸`**;
+  a numerical stage cannot see it (measured gain `2·10⁻¹⁴`, the pre-registered `±0.02` window was `2·10⁶`
+  times the claim); Corollary 8.5's stress inverse reproduces `T_0` to `5·10⁻¹⁰`.
+- **(v)** `‖u_θ‖_∞ ∼ τ^{−0.500000100}` (`−A` exact), the paper's-core `L²` `∼ τ^{0.249999940}` (`¼ − h/2` exact); **the
+  leading order's force `‖f⁽⁰⁾‖_∞ ∼ q^{−1.5000001}`** (`3.7·10¹³` → `1.2·10²¹` over `τ = 10⁻¹ → 10⁻⁶`) is unbounded at
+  `t = 1` — the corrections must close `3/2 + h` powers for boundedness and every power for flatness; and
+  **the `η`-weight `d^{−3/2+3h}` of `dV` is not integrable at `η = ±1`**, so the un-cut-off leading field's
+  `L²(ℝ³)` norm is infinite at every `t < 1`: the bounded-energy headline is carried by the cutoff.
+- **(vi)** the leading residual is exactly zero beyond `X_b` at all 501 grid points, only with the heat
+  factor; `r_b(t) = √(2(1−t)X_b) ≈ 10^{103}` at `1 − t = 10⁻²`; the paper's `H` satisfies (A.37) to `5.8·10⁻¹⁰`; the
+  leading residual's `q`-exponent is `−1.5000001`, a growing power, **a gap of `N + 1.5 + h` to (3.4)'s flatness
+  for every `N`**; the paper does not extend `f` by zero at `t = 1` (it uses (10.11)) — a brief clause corrected.
+- **(vii)** the adversary's verdict: *none of (iii)–(vi)'s `YES` gates, as defined, is evidence the
+  construction works; each is consistent with the paper's algebra being transcribed correctly; what would
+  be evidence is a two-route agreement on a quantity the adversary cannot choose* — which is what leg 432
+  did and wave 4's gates did not. Three gates were mis-scaled by the Conductor's pre-registration
+  (`CORRECTIONS.md` §71); none was widened.
 
 ## 10. What the second pass does NOT establish, said once
 
@@ -186,7 +229,7 @@ construction closes at any `λ` a grid can reach (it does not; the paper never s
 `W4` moves (the first pass measured that it does not). **Every unit is Tier 2. No `L1 → L4` link moved.
 Clay ~0.05%.**
 
-## 11. Defects of this pass, recorded (`CORRECTIONS.md` §66–§70)
+## 11. Defects of this pass, recorded (`CORRECTIONS.md` §66–§71)
 Wave 1 dispatched before its STATE row existed (§3g step-1 defect); `R4`'s agent 4 worked in a
 worktree without the gitignored inputs and read from the main checkout; the Conductor mis-stated
 agent 1's build cap (13.5 of 40 min); `R5`(i)'s pre-registration mis-set three yardsticks (G4's scale,

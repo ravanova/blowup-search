@@ -48,6 +48,20 @@ claim in the repository is tiered, gated, and rebuildable from committed data.
 > as *bounded*. A logarithm this repository flagged **in advance**, in the
 > pre-registration, because it has been fooled by one twice before.
 >
+> **SECOND PASS (legs 423–434, 2026-09-10, §3g CONDUCTOR ×5) — the verdict, in one paragraph.** Read twice —
+> solo and by five blind shards — all 79 statements index and close as the manuscript says (Props 9.5/9.6
+> are never cited downstream). Re-derived by four agents and checked blind by a fifth, the 58-node spine
+> holds: 480 steps, no `GAP`, **ten nodes `VERIFIED`**. Instantiated from the paper's own schedule, Lemma
+> 4.8's profile reproduces its constants, exponents, pressure datum and tail stress (two routes agree to
+> `10⁻⁹`); its closure and cone do **not** reproduce at any `λ` a grid reaches — the paper's own asymptotics
+> put them at `λ ≲ 3·10⁻⁴`, `√λP_* ≪ 1`, and its outer-edge powers on a collar `δ ≲ 10⁻⁶⁹`. Measured, the
+> Lean is `sorry`-free outside its challenge placeholders, source-covers all 79 statements, exports
+> Fefferman's (C)/(D) — **strictly weaker than Theorem 1.1** — and **no kernel check of it was reached**.
+> Wave 4's adversary faked eleven of twelve pre-registered signals, so they are not evidence. **Nothing
+> measured contradicts the manuscript; nothing measured proves it; no wall moved.** Tier 2 throughout.
+> [TECHNICAL_REPRODUCTION.md](writeup/6_reproduction/TECHNICAL_REPRODUCTION.md) ·
+> [BLOG_REPRODUCTION.md](writeup/6_reproduction/BLOG_REPRODUCTION.md) · fig113, fig114
+>
 > [BLOG_ADJUDICATED.md](writeup/6_adjudicated/BLOG_ADJUDICATED.md) ·
 > [TECHNICAL_ADJUDICATED.md](writeup/6_adjudicated/TECHNICAL_ADJUDICATED.md) ·
 > [five curated JSONs](writeup/data/) · fig112

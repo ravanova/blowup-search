@@ -102,7 +102,28 @@ formalized, 5 partial, none absent — a reading, not a kernel check, and every 
 
 ## What the adversary said
 
-_[filled at integration — wave 4's four workers and the adversary who tried to fake their signals.]_
+Wave 4 sent four agents at the rest of the construction — the annulus pulses, the correction
+iteration, the two headline norms, the compact support of the force — and a fifth agent whose only job
+was to fake their signals from deliberately wrong runs, seeing nothing but the gate definitions. The rule,
+fixed before anyone started: a signal the adversary can fake is not evidence, whatever the worker found.
+
+The adversary faked eleven of twelve. Not because the workers were careless — their own numbers are
+the most interesting in the wave — but because the gates the Conductor wrote were, as defined, things
+any transcription of the paper's algebra would pass: a joint norm that cannot see the small stress
+component, a "convergence exponent" that belongs to the averaging window, a `±0.02` window on a
+per-stage gain the paper states as `10⁻⁸`, refinement stability that is automatic for a prescribed
+field, support clauses that are tautologies of the cutoff. The one signal that survived is a measured
+gap: the force the leading order alone would need grows like `q^{−3/2}` toward the singular time, and
+the paper's corrections must close every power of it.
+
+What the workers actually found is better than their gates. The pulses' exact identity holds to
+`10⁻¹⁶`, and the paper's own admissibility condition places the pulses at `log₁₀ q` below about `−7·10⁸`.
+The correction ledger's 29 inequalities hold, with a smallest margin of 0.02, and the gain per stage is
+`10⁻⁸` in `q` — invisible to any float. The energy headline is carried by the cutoff, not by the profile's
+decay: the un-cut-off leading field has infinite energy at every time. The residual vanishes exactly
+outside the edge, and the flatness the theorem needs at the singular time is a gap of every power
+between the leading order and the corrections. Each of these is a place the paper assigns to a part of
+the construction nobody here instantiated.
 
 ## What this is not
 

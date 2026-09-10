@@ -27,23 +27,16 @@ direction check (seven questions, in every integration commit, per unit); **§3j
   `CLAY_OBLIGATIONS.md` §6 names the two obligations with **no known method**.
 - **Clay odds ~0.05%**, unmoved. **No `L1 → L4` link has EVER moved, in over 410 legs.** **The cheapest unit that could move one: NO SUCH UNIT IS KNOWN** — `CLAY_OBLIGATIONS.md` §6 names two obligations with **no known method**, every landed unit is Tier 2, and nothing in `OPTIONS.md` is priced to deliver a certified result.
 
-## ⚠⚠ ARC 6 — SECOND PASS, **§3g CONDUCTOR MODE**, legs 423–433, 2026-09-09/10. **Wave sizing 5 by user ruling (§3g, §67).** First pass (legs 417–422) retired verbatim → `WALLS_HISTORY.md` §STATE-ARC6-SOLO.
+## ⚠⚠ ARC 6 — SECOND PASS **CLOSED AND LANDED 2026-09-10**, §3g CONDUCTOR ×5, legs 423–434. Block retired VERBATIM → `WALLS_HISTORY.md` §STATE-ARC6-CONDUCTOR. Quartet: `writeup/6_reproduction/`.
 
-Charter: reproduce the OpenAI construction — read all 166 pp., re-derive the spine, instantiate it in
-our machinery, check the Lean. `CORRECTIONS.md` **§66–§71**. **Solo answers are `UNVERIFIED`; only a
-fresh agent that never saw the construction can mark anything `VERIFIED`.**
-
-| unit | gate answer, in its own words | artefact |
-|---|---|---|
-| **`R0`–`R2`** 423–428 | landed: A6-D dead (§66); extract `MATCH` after six rules; read (a) 79/79 (b) `YES` (c) 13 + 33 hard-page notes, five blind shards agree (leg 428). **Rows retired verbatim → `WALLS_HISTORY.md` §STATE-ARC6-W1** | `arc6/extract_manifest.json`, `ledger/merged.json` |
-| **`R3`, `R4`** 426, 429 | graph acyclic, complete `NO` (Props 9.5/9.6 never cited downstream, §68); spine 58/58 `CHECKED`, 0 `GAP`, blind verifier 10/10 → **10 `VERIFIED`**. **Rows retired verbatim → `WALLS_HISTORY.md` §STATE-ARC6-W2** | `arc6/dag.json`, `spine/merged.json` |
-| **`R5`(i)** 430 PROFILE (serial) | **`NO-AND-HERE-IS-WHERE`**: G1 `K_b=.2450`, G2, G8, G4 (paper's scale), G6 slopes **`YES`**; **G3, G7 `NO` at every pre-registered `λ`** — (A.19) remainder `(λ^{−120λ}−1)/2 ≈ 10¹²` at `λ=.1`; a root on `[.9,1.2]` only at `λ ≤ 3·10⁻⁴` (post hoc sweep); intermediate cone needs `√λP_* ≪ 1`. G5 `NO` on a 10⁸-fold cancellation (identity to 10⁻¹⁵); G6 exponent `NO` (24.0 vs `[30,36]`, = schedule's `λ^{30+60λ}`). C5, C6 **did not fire**, C2 not run (§69). **Tier 2, not a proof.** | `arc6_profile_v1.json`, fig113 |
-| **`R6`** 431 LEAN (×5) | five answers, separately: **(a) build `NOT-ESTABLISHED`** — 13.6 min, 0 errors, theorem never reached; **(b) top-level statement strictly `WEAKER`** than Thm 1.1 (Fefferman (C)/(D) verbatim; 5 existence clauses `ABSENT`); **(c) 4 `sorry`**, all challenge placeholders, **0 `axiom`**, kernel `NOT-ESTABLISHED`; **(d) comparator 7 PASS / 4 `NOT-ESTABLISHED`**, never run; **(e) 74 `FORMALIZED` / 5 `PARTIAL` / 0 `ABSENT`** of 79 at source level. **No kernel check. `UNVERIFIED`.** | `arc6/lean/merged.json` |
-| **`R5`(ii)** 432 RESIDUAL STRESS (serial) | **`YES`** H0–H7 at `h = 10⁻⁷, 10⁻³`: two routes to `T_0` ((4.11) on Lemma A.8 vs (A.54)/(A.46)) agree to **10⁻⁹**; sign, `e^{−4/δ²}` weight, vanishing beyond `X_b` (exact, only with the heat factor), shear bracket, `q`-invariance, (A.55) `C = 0.49` reproduce; **(A.48)–(A.50)'s `δ⁻³, δ³, δ⁶` are the limit on a collar `δ ≲ 10⁻⁶⁹`** (`NOT TESTABLE`); measured `δ⁰, δ³, δ³` as Lemma A.9 predicts. Six controls fired. Amended before numbers (§70). **Tier 2.** | `arc6_residual_v1.json`, fig114 |
-| **`R5`(iii)–(vii)** 433 WAVE 4 (×5) | pulses **P1–P3 `NO`** at the pinned tail (`F_0 ≈ 10⁻²⁴⁰`; (7.26) exact to 10⁻¹⁶; paper's own admissibility at `log₁₀q ≲ −7.5·10⁸`); iteration **I2 `YES`**, I1/I3 `NOT-INSTANTIATED` (the `+1/10` is `h/10 = 10⁻⁸` in `q`); headline V1/V3 `NO`, **V2 `YES`** (force `∝ q^{−3/2−h}`); support S1–S3 `YES`. **Adversary: 11 of 12 signals FAKEABLE → `NOT EVIDENCE`; 1 EVIDENCE (V2).** Prereg mis-scaled 3 gates (§71). **Tier 2.** | `arc6/wave4/merged.json` |
-
-**WAVES 1–3 CLOSED AND INTEGRATED** (legs 428, 429, 431; wave 1 was dispatched before its STATE row existed, a §3g step-1 defect, recorded). **WAVE 4 CLOSED (leg 433). `R7` next (leg 434): land in `writeup/6_reproduction/`.**
-Rows `R0`–`R2` and the wave-1 paragraph retired verbatim 2026-09-10 (leg 430) under §3j → `WALLS_HISTORY.md` §STATE-ARC6-W1.
+**The verdict (`R7`):** all 79 statements read twice (solo + five blind shards) and closing as the manuscript says;
+the 58-node spine re-derived, 0 `GAP`, **10 nodes `VERIFIED`** blind; Lemma 4.8's profile instantiated from the
+paper's schedule — constants, exponents, datum, tail stress reproduce (two routes to 10⁻⁹); closure and cone
+do **not** at any computable `λ` (paper's regime `λ ≲ 3·10⁻⁴`, `√λP_* ≪ 1`; edge powers on a `10⁻⁶⁹` collar); the Lean
+measured: kernel **`NOT-ESTABLISHED`**, top-level statement **strictly weaker** than Thm 1.1; wave 4's adversary
+faked **11 of 12** signals. **Nothing contradicts the manuscript; nothing proves it; no wall moved.**
+`CORRECTIONS.md` §66–§71. Every Conductor answer `UNVERIFIED`. **Tier 2. No `L1→L4` link moved. Clay ~0.05%.**
+**No successor scheduled.** Open escalations (ORCH_STATE rows 1–5) unchanged and unruled.
 
 ## THE LANES — **RE-RANKED 2026-08-19 AT THE STOP, on what is measured NOW** (order unchanged; Lane L DEMOTED); re-earned per unit under §3i
 
