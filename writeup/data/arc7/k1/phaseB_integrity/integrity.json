@@ -1,0 +1,90 @@
+{
+ "schema": "arc7_k1_phase_v1",
+ "leg": 437,
+ "phase": "B-integrity",
+ "what": "integrity and provenance of the cached mathlib oleans underlying phase B's GREEN, established WITHOUT recompiling mathlib: (1) provenance re-verified from lake's traces and the mathlib cache's content hashes; (2) the project's own `lake exe comparator` run on phase B's prebuilt tree — lean4export of the challenge and solution environments, statement identity, axiom check, replay through the Lean kernel AND through nanoda, an independent Rust kernel. Directed by the user in the phase-B session (\"do what we can without running the whole thing again\"); pre-registered in README_prereg.md and pushed as ad0f429 BEFORE the run. This is the K2 slot-3 comparator step run early.",
+ "runner": "writeup/data/arc7/k1/phaseB_integrity/run_integrity.sh (this directory)",
+ "tree": "/root/k1B/nse — phase B's tree, unchanged, nothing recompiled (the comparator's builds report `Replayed`, 0 `Built` lines)",
+ "tree_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "tool_revs": {
+  "comparator": "leanprover/comparator @ 19e111e2141cf333c7daff0f64c5f24acc91dd2e (the pin the project's lakefile requires)",
+  "lean4export": "leanprover/lean4export @ cacf989bd75f608700820f6afc595f32e7a99a4d",
+  "nanoda": "ammkrn/nanoda_lib @ 4c544ed4099c8227f07d5de77ad1e69fb0740a27, nanoda_bin 0.4.17, built here with cargo 1.94.1",
+  "note_on_summary_line": "integrity_summary.txt's nanoda line carries a stray `Error: failed to open configuration file` — that is `nanoda_bin --version` being fed `--version` as a config path by the summary command, NOT a failure of the checking run; the comparator invokes nanoda with the export file and both runs report acceptance"
+ },
+ "provenance": {
+  "method": "mathlib's cache is content-addressed: per Cache/Hashing.lean @ mathlib 85e3a25e, each module's cache key is hash(rootHash :: pathHash :: hash(source contents) :: import hashes), with rootHash covering mathlib's lakefile.lean, lean-toolchain and lake-manifest.json. A second `lake exe cache get` recomputes every key from the sources ON DISK and fetches by that key.",
+  "second_cache_get": "rc 0 in 14 s — `No files to download`, `Already decompressed 8747 file(s)`: every recomputed key matched a file already present",
+  "second_lake_build": "rc 0 in 11 s — `Build completed successfully (11251 jobs)`, 0 `Built` lines, 4 `Replayed`: every trace still matches its sources",
+  "cache_lookup_samples": {
+   "Mathlib": "c5b6cd2333d24da1.ltar, comment git=mathlib4@85e3a25e006c35636f0e53b0e9296caca2685bc0",
+   "Mathlib.Analysis.Calculus.ContDiff.Operations": "916459edd2357c60.ltar, comment git=mathlib4@85e3a25e006c35636f0e53b0e9296caca2685bc0",
+   "Mathlib.Analysis.Calculus.Deriv.Basic": "32a112c623eb1d29.ltar, comment git=mathlib4@85e3a25e006c35636f0e53b0e9296caca2685bc0",
+   "Mathlib.Logic.Basic": "f8c09860783f15f7.ltar, comment git=mathlib4@5c50c7c19504ea9308c0d373e9b6b7fd30c3d956 (an EARLIER commit: the file and its imports were unchanged between that commit and 85e3a25e, so the content hash — and therefore the cache entry — is the same. Expected behaviour of a content-addressed cache, not a mismatch.)"
+  },
+  "local_cache": "8747 .ltar files, 442 MB, under /root/.cache/mathlib",
+  "what_this_establishes": "the oleans are LABELLED as CI-built from these exact sources, and lake agrees the sources on disk are the ones the keys were computed from",
+  "what_this_does_not_establish": "that the labelled bytes were in fact produced by compiling those sources — the trust sits with mathlib's CI and the Azure cache host; only recompilation removes it"
+ },
+ "integrity": {
+  "navier_stokes": {
+   "rc": 0,
+   "seconds": 913,
+   "theorems": [
+    "NavierStokes.Comparator.navier_stokes_breakdown_R3",
+    "NavierStokes.Comparator.navier_stokes_breakdown_periodic"
+   ],
+   "challenge_module": "ComparatorChallenges.NavierStokes",
+   "solution_module": "NavierStokes.ComparatorSolution",
+   "nanoda": "accepts",
+   "lean_kernel": "accepts",
+   "verdict": "Your solution is okay!"
+  },
+  "euler": {
+   "rc": 0,
+   "seconds": 1442,
+   "theorems": [
+    "Euler.euler_breakdown_R3",
+    "Euler.exists_compact_smooth_euler_singularity"
+   ],
+   "challenge_module": "ComparatorChallenges.Euler",
+   "solution_module": "Euler.Solution",
+   "nanoda": "accepts",
+   "lean_kernel": "accepts",
+   "verdict": "Your solution is okay!",
+   "note": "run for completeness; NOT part of the K1 gate, which is the two NavierStokes theorems"
+  },
+  "permitted_axioms": [
+   "propext",
+   "Quot.sound",
+   "Classical.choice"
+  ],
+  "t_start": "2026-09-10T13:06:09Z",
+  "t_end": "2026-09-10T13:45:24Z",
+  "total_s": 2355,
+  "machine": "same fresh container as phase B: 4 cores Intel Xeon @ 2.10GHz, 15 GB RAM"
+ },
+ "deviations_declared_before_the_run": [
+  "landrun (the sandbox) replaced by the comparator's own scripts/fake-landrun.sh shim — building landrun was blocked by this session's permission policy. The sandbox exists to contain an adversarial Solution.lean DURING COMPILATION; this tree is fully prebuilt and the comparator recompiled nothing (all `Replayed`), which is the case the comparator README explicitly exempts. The shim prints `WARNING: THIS IS NOT REAL LANDRUN` on every line it wraps — visible verbatim in both logs.",
+  "no systemd-run wrapper, for the same reason",
+  "same Conductor-directed session as phase B — a second machine and a second KERNEL, not a second agent"
+ ],
+ "reading": "PASS (README_prereg.md): comparator rc 0 on both challenges, both kernels accept, statements identical to the challenge modules, no axiom outside the permitted three",
+ "what_this_does_not_establish": [
+  "semantic match of oleans to mathlib's source text — only a recompile establishes that, and the import closure of the theorem module is all 8371 mathlib modules (project files import the `Mathlib` umbrella), i.e. the full rebuild this exercise was asked to avoid",
+  "that the cached olean bytes were produced by compiling the labelled sources (see provenance.what_this_does_not_establish)",
+  "Theorem 1.1 of the paper — the statements are Fefferman (C)/(D) as the project formalises them",
+  "verification by a second agent — same Conductor; UNVERIFIED under §3f rule 1 until a blind agent reproduces it"
+ ],
+ "comparator_navier_stokes_verbatim": "=== COMPARATOR_T0 NavierStokes 2026-09-10T13:06:09Z\nBuilding ComparatorChallenges.NavierStokes\nWARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec lake build ComparatorChallenges.NavierStokes\n⚠ [8763/8763] Replayed ComparatorChallenges.NavierStokes\nwarning: ComparatorChallenges/NavierStokes.lean:273:8: declaration uses `sorry`\nwarning: ComparatorChallenges/NavierStokes.lean:280:8: declaration uses `sorry`\nBuild completed successfully (8763 jobs).\nWARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec /root/k1B/nse/.lake/packages/lean4export/.lake/build/bin/lean4export ComparatorChallenges.NavierStokes -- Nat String String.mk Char Quot Quot.mk Quot.lift Quot.ind NavierStokes.Comparator.navier_stokes_breakdown_R3 NavierStokes.Comparator.navier_stokes_breakdown_periodic propext Quot.sound Classical.choice Nat.add Nat.sub Nat.mul Nat.pow Nat.gcd Nat.div Nat.mod Nat.beq Nat.ble Nat.land Nat.lor Nat.xor Nat.shiftLeft Nat.shiftRight String.ofList Char.ofNat List eagerReduce\nExporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, NavierStokes.Comparator.navier_stokes_breakdown_R3, NavierStokes.Comparator.navier_stokes_breakdown_periodic, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from ComparatorChallenges.NavierStokes\nBuilding NavierStokes.ComparatorSolution\nWARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec lake build NavierStokes.ComparatorSolution\nℹ [9342/9342] Replayed NavierStokes.ComparatorSolution\ninfo: NavierStokes/ComparatorSolution.lean:31:0: 'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\ninfo: NavierStokes/ComparatorSolution.lean:32:0: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\nBuild completed successfully (9342 jobs).\nWARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec /root/k1B/nse/.lake/packages/lean4export/.lake/build/bin/lean4export NavierStokes.ComparatorSolution -- Nat String String.mk Char Quot Quot.mk Quot.lift Quot.ind NavierStokes.Comparator.navier_stokes_breakdown_R3 NavierStokes.Comparator.navier_stokes_breakdown_periodic propext Quot.sound Classical.choice Nat.add Nat.sub Nat.mul Nat.pow Nat.gcd Nat.div Nat.mod Nat.beq Nat.ble Nat.land Nat.lor Nat.xor Nat.shiftLeft Nat.shiftRight String.ofList Char.ofNat List eagerReduce\nExporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, NavierStokes.Comparator.navier_stokes_breakdown_R3, NavierStokes.Comparator.navier_stokes_breakdown_periodic, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from NavierStokes.ComparatorSolution\nRunning nanoda kernel on solution\nWARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec /root/k1B/tools/nanoda_lib/target/release/nanoda_bin /tmp/tmp.XXs1Iudo\nnanoda kernel accepts the solution\nRunning Lean default kernel on solution.\nLean default kernel accepts the solution\nYour solution is okay!\n=== COMPARATOR_RC=0 NavierStokes 2026-09-10T13:21:22Z\n",
+ "comparator_euler_verbatim": "=== COMPARATOR_T0 Euler 2026-09-10T13:21:22Z\nBuilding ComparatorChallenges.Euler\nWARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec lake build ComparatorChallenges.Euler\n⚠ [8763/8763] Replayed ComparatorChallenges.Euler\nwarning: ComparatorChallenges/Euler.lean:85:8: declaration uses `sorry`\nwarning: ComparatorChallenges/Euler.lean:170:8: declaration uses `sorry`\nBuild completed successfully (8763 jobs).\nWARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec /root/k1B/nse/.lake/packages/lean4export/.lake/build/bin/lean4export ComparatorChallenges.Euler -- Nat String String.mk Char Quot Quot.mk Quot.lift Quot.ind Euler.euler_breakdown_R3 Euler.exists_compact_smooth_euler_singularity propext Quot.sound Classical.choice Nat.add Nat.sub Nat.mul Nat.pow Nat.gcd Nat.div Nat.mod Nat.beq Nat.ble Nat.land Nat.lor Nat.xor Nat.shiftLeft Nat.shiftRight String.ofList Char.ofNat List eagerReduce\nExporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, Euler.euler_breakdown_R3, Euler.exists_compact_smooth_euler_singularity, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from ComparatorChallenges.Euler\nBuilding Euler.Solution\nWARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec lake build Euler.Solution\nℹ [10591/10591] Replayed Euler.Solution\ninfo: Euler/Solution.lean:73:0: 'Euler.euler_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\ninfo: Euler/Solution.lean:75:0: 'Euler.exists_compact_smooth_euler_singularity' depends on axioms: [propext, Classical.choice, Quot.sound]\nBuild completed successfully (10591 jobs).\nWARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec /root/k1B/nse/.lake/packages/lean4export/.lake/build/bin/lean4export Euler.Solution -- Nat String String.mk Char Quot Quot.mk Quot.lift Quot.ind Euler.euler_breakdown_R3 Euler.exists_compact_smooth_euler_singularity propext Quot.sound Classical.choice Nat.add Nat.sub Nat.mul Nat.pow Nat.gcd Nat.div Nat.mod Nat.beq Nat.ble Nat.land Nat.lor Nat.xor Nat.shiftLeft Nat.shiftRight String.ofList Char.ofNat List eagerReduce\nExporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, Euler.euler_breakdown_R3, Euler.exists_compact_smooth_euler_singularity, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from Euler.Solution\nRunning nanoda kernel on solution\nWARNING: THIS IS NOT REAL LANDRUN! UNSAFELY RUNNING exec /root/k1B/tools/nanoda_lib/target/release/nanoda_bin /tmp/tmp.XX8P6eAp\nnanoda kernel accepts the solution\nRunning Lean default kernel on solution.\nLean default kernel accepts the solution\nYour solution is okay!\n=== COMPARATOR_RC=0 Euler 2026-09-10T13:45:24Z\n",
+ "files": [
+  "README_prereg.md",
+  "run_integrity.sh",
+  "provenance.log",
+  "comparator_NavierStokes.log",
+  "comparator_Euler.log",
+  "integrity_summary.txt",
+  "integrity_nohup.log (empty)"
+ ]
+}

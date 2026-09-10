@@ -1,0 +1,10 @@
+t_start=2026-09-10T13:06:09Z
+tree_head=8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538
+comparator_rev=19e111e2141cf333c7daff0f64c5f24acc91dd2e
+lean4export_rev=cacf989bd75f608700820f6afc595f32e7a99a4d
+nanoda_rev=4c544ed4099c8227f07d5de77ad1e69fb0740a27 Error: failed to open configuration file: Os { code: 2, kind: NotFound, message: "No such file or directory" }
+nproc=4
+Mem:              15           0           9           0           5          14
+NavierStokes_rc=0 NavierStokes_s=913
+Euler_rc=0 Euler_s=1442
+t_end=2026-09-10T13:45:24Z
