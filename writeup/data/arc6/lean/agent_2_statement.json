@@ -1,0 +1,541 @@
+{
+ "schema": "arc6_lean_v1",
+ "agent": 2,
+ "leg": 431,
+ "clone_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "clone_path": "/tmp/claude-0/-home-user-blowup-search/f04cf05e-679d-5fc5-8545-c07be1caa01d/scratchpad/nse",
+ "sources_read": [
+  "formalization.yaml",
+  "README.md",
+  "NavierStokes.lean",
+  "NavierStokes/ComparatorSolution.lean",
+  "NavierStokes/ComparatorDefinitions.lean",
+  "ComparatorChallenges/NavierStokes.lean",
+  "ComparatorChallenges/NavierStokes.json",
+  "NavierStokes/ComparatorBridge.lean",
+  "NavierStokes/ComparatorR3Bridge.lean",
+  "NavierStokes/ComparatorTheorem.lean",
+  "NavierStokes/ComparatorR3Theorem.lean",
+  "NavierStokes/ProblemStatement.lean",
+  "NavierStokes/R3CompactCandidate.lean",
+  "NavierStokes/R3ActualCandidate.lean",
+  "NavierStokes/R3FiniteEnergyComparison.lean",
+  "NavierStokes/CompactSpatialForceDecay.lean",
+  "NavierStokes/MaximalLifespan.lean (statement of candidate_excludes_global_solution)",
+  "NavierStokes/R3/ProblemStatement.lean",
+  "NavierStokes/R3/WholeSpaceUniqueness.lean (statements)",
+  "Euler/Solution.lean (two declarations)",
+  "writeup/data/arc6/manuscript_pages.txt pages 1 and 125",
+  "Papers/fefferman-navierstokes-clay.pdf pages 1, 2, 6"
+ ],
+ "note_on_definitions": "NavierStokes/ComparatorDefinitions.lean (imported by the proofs) was diffed against ComparatorChallenges/NavierStokes.lean (the DeepMind Formal Conjectures reference): the only differences are the module docstring (lines 22-32 vs 22-58) and the absence of the two `sorry` challenge theorems (reference lines 270-284). All predicate definitions are byte-identical.",
+ "main_theorems": [
+  {
+   "name": "NavierStokes.Comparator.navier_stokes_breakdown_R3",
+   "file": "NavierStokes/ComparatorSolution.lean",
+   "line": 16,
+   "claimed_as": "formalization.yaml main_results[0] '(C) Non-existence of global smooth solutions with uniformly bounded kinetic energy on Euclidean space'; alignment: 'Theorem 1.1 (Navier–Stokes on ℝ³)' status 'proved'",
+   "statement_verbatim": "theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu > 0) :\n    ∃ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),\n    InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧\n    ¬ (∃ v p, NavierStokesExistenceAndSmoothnessRn nu u₀ f v p) := by\n  exact ComparatorBridge.navier_stokes_breakdown_R3 nu hnu\n-- context: `namespace NavierStokes.Comparator`; `local notation \"ℝ³\" => EuclideanSpace ℝ (Fin 3)` (ComparatorSolution.lean:11,13)",
+   "reference_statement": {
+    "file": "ComparatorChallenges/NavierStokes.lean",
+    "line": 273,
+    "text": "theorem navier_stokes_breakdown_R3 (nu : ℝ) (hnu : nu > 0) :\n    ∃ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),\n    InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧\n    ¬ (∃ v p, NavierStokesExistenceAndSmoothnessRn nu u₀ f v p) := by\n  sorry"
+   },
+   "proof_route": "ComparatorBridge.navier_stokes_breakdown_R3 (ComparatorR3Theorem.lean:36) ← option_C_of_compact_candidate (line 19) with witnesses u₀ := fun _ => 0, f := toComparator (rescaledForce ν f) (line 30) ← R3CompactCandidate.selected_compact_candidate (R3ActualCandidate.lean:18) and compact_candidate_excludes_global_solution (R3FiniteEnergyComparison.lean:37) via whole-space uniqueness on [0,t], t<1.",
+   "unfolded_definitions": [
+    {
+     "name": "NavierStokes.Comparator.InitialVelocityConditionDecay",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 124,
+     "text": "structure InitialVelocityConditionDecay (u₀ : ℝ^n → ℝ^n) : Prop extends\n    InitialVelocityCondition u₀ where\n  decay : ∀ m : ℕ, ∀ K : ℝ, ∃ C : ℝ, ∀ x, ‖iteratedFDeriv ℝ m u₀ x‖ ≤ C / (1 + ‖x‖) ^ K"
+    },
+    {
+     "name": "NavierStokes.Comparator.InitialVelocityCondition",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 108,
+     "text": "structure InitialVelocityCondition (u₀ : ℝ^n → ℝ^n) : Prop where\n  div_free : ∀ x, ∇⬝ u₀ x = 0\n  smooth : ContDiff ℝ ∞ u₀"
+    },
+    {
+     "name": "NavierStokes.Comparator.divergence",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 55,
+     "text": "noncomputable\ndef divergence (v : ℝ^n → ℝ^n) (x : ℝ^n) : ℝ := (fderiv ℝ v x).trace ℝ (ℝ^n)\n-- `local notation \"∇⬝\" => divergence` (line 58); `local notation \"ℝ^\" n:65 => EuclideanSpace ℝ (Fin n)` (line 40)"
+    },
+    {
+     "name": "NavierStokes.Comparator.ForceConditionDecay",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 159,
+     "text": "structure ForceConditionDecay (f : ℝ^n → ℝ → ℝ^n) : Prop extends ForceCondition f where\n  decay : ∀ m : ℕ, ∀ K : ℝ, ∃ C : ℝ, ∀ x, ∀ t ≥ 0,\n    ‖iteratedFDerivWithin ℝ m (↿f) (Set.univ ×ˢ Set.Ici 0) (x, t)‖ ≤ C / (1 + ‖x‖ + t) ^ K"
+    },
+    {
+     "name": "NavierStokes.Comparator.ForceCondition",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 149,
+     "text": "structure ForceCondition (f : ℝ^n → ℝ → ℝ^n) : Prop where\n  smooth : ContDiffOn ℝ ∞ (↿f) (Set.univ ×ˢ Set.Ici 0)"
+    },
+    {
+     "name": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothnessRn",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 219,
+     "text": "structure NavierStokesExistenceAndSmoothnessRn\n    (nu : ℝ) (u₀ : ℝ^n → ℝ^n) (f : ℝ^n → ℝ → ℝ^n)\n    (v : ℝ^n → ℝ → ℝ^n) (p : ℝ^n → ℝ → ℝ) : Prop\n  extends NavierStokesExistenceAndSmoothness nu u₀ f v p where\n  integrable : ∀ t ≥ 0, MemLp (‖v · t‖) 2\n  globally_bounded_energy : ∃ E, ∀ t ≥ 0, (∫ x : ℝ^n, ‖v x t‖ ^ 2) < E"
+    },
+    {
+     "name": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothness",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 191,
+     "text": "structure NavierStokesExistenceAndSmoothness\n    (nu : ℝ) (u₀ : ℝ^n → ℝ^n) (f : ℝ^n → ℝ → ℝ^n)\n    (v : ℝ^n → ℝ → ℝ^n) (p : ℝ^n → ℝ → ℝ) : Prop where\n  navier_stokes : ∀ x, ∀ t ≥ 0,\n    derivWithin (v x ·) (Set.Ici 0) t + fderiv ℝ (v · t) x (v x t) =\n      nu • Δ (v · t) x - gradient (p · t) x + f x t\n  div_free : ∀ x, ∀ t ≥ 0, ∇⬝ (v · t) x = 0\n  initial_condition : ∀ x, v x 0 = u₀ x\n  velocity_smooth : ContDiffOn ℝ ∞ (↿v) (Set.univ ×ˢ Set.Ici 0)\n  pressure_smooth : ContDiffOn ℝ ∞ (↿p) (Set.univ ×ˢ Set.Ici 0)\n-- file header: `open ContDiff Set InnerProductSpace MeasureTheory` / `open scoped Laplacian` (lines 34-35)"
+    },
+    {
+     "name": "Mathlib: ContDiff-scoped ∞",
+     "file": ".lake/packages/mathlib/Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean",
+     "line": 120,
+     "text": "scoped[ContDiff] notation3 \"∞\" => ((⊤ : ℕ∞) : WithTop ℕ∞)   -- C^∞ (all finite orders), NOT analytic (`ω` = ⊤ : WithTop ℕ∞, line 118)"
+    },
+    {
+     "name": "Mathlib: ContDiffOn / ContDiff",
+     "file": ".lake/packages/mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+     "line": 472,
+     "text": "def ContDiffOn (n : ℕ∞ω) (f : E → F) (s : Set E) : Prop := ...  (line 472);  def ContDiff (n : ℕ∞ω) (f : E → F) : Prop := ... (line 1068)"
+    },
+    {
+     "name": "Mathlib: derivWithin",
+     "file": ".lake/packages/mathlib/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+     "line": 145,
+     "text": "def derivWithin (f : 𝕜 → F) (s : Set 𝕜) (x : 𝕜) := ...   -- one-sided time derivative relative to Set.Ici 0 in `navier_stokes`"
+    },
+    {
+     "name": "Mathlib: iteratedFDerivWithin",
+     "file": ".lake/packages/mathlib/Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean",
+     "line": 398,
+     "text": "noncomputable def iteratedFDerivWithin (n : ℕ) (f : E → F) (s : Set E) : E → E [×n]→L[𝕜] F :=\n  Nat.recOn n (fun x => ContinuousMultilinearMap.uncurry0 𝕜 E (f x)) fun _ rec x =>\n    ContinuousLinearMap.uncurryLeft (fderivWithin 𝕜 rec s x)"
+    },
+    {
+     "name": "Mathlib: gradient",
+     "file": ".lake/packages/mathlib/Mathlib/Analysis/Calculus/Gradient/Basic.lean",
+     "line": 82,
+     "text": "def gradient (f : F → 𝕜) (x : F) : F :=\n  (toDual 𝕜 F).symm (fderiv 𝕜 f x)"
+    },
+    {
+     "name": "Mathlib: Δ (Laplacian instance on E → F)",
+     "file": ".lake/packages/mathlib/Mathlib/Analysis/InnerProductSpace/Laplacian.lean",
+     "line": 137,
+     "text": "noncomputable\ninstance instLaplacian : Laplacian (E → F) (E → F) where\n  laplacian f x := tensorIteratedFDerivTwo ℝ f x (InnerProductSpace.canonicalCovariantTensor E)\n-- the prefix notation `Δ` for the `Laplacian` class is declared in Mathlib/Analysis/Distribution/DerivNotation.lean (file located by grep; line not pinned)"
+    },
+    {
+     "name": "Mathlib: ↿ (HasUncurry)",
+     "file": ".lake/packages/mathlib/Mathlib/Logic/Function/Basic.lean",
+     "line": 996,
+     "text": "class HasUncurry (α : Type*) (β : outParam Type*) (γ : outParam Type*) where\n  uncurry : α → β → γ\n@[inherit_doc] prefix:max \"↿\" => HasUncurry.uncurry\ninstance hasUncurryBase : HasUncurry (α → β) α β := ⟨id⟩\ninstance hasUncurryInduction [HasUncurry β γ δ] : HasUncurry (α → β) (α × γ) δ := ⟨fun f p ↦ ↿(f p.1) p.2⟩\n-- so ↿f : ℝ^n × ℝ → ℝ^n, (x,t) ↦ f x t"
+    },
+    {
+     "name": "Mathlib: MemLp",
+     "file": ".lake/packages/mathlib/Mathlib/MeasureTheory/Function/LpSeminorm/Defs.lean",
+     "line": 118,
+     "text": "def MemLp [TopologicalSpace ε] (f : α → ε) (p : ℝ≥0∞) (μ : Measure α := by volume_tac) : Prop :=\n  AEStronglyMeasurable f μ ∧ eLpNorm f p μ < ∞"
+    }
+   ]
+  },
+  {
+   "name": "NavierStokes.Comparator.navier_stokes_breakdown_periodic",
+   "file": "NavierStokes/ComparatorSolution.lean",
+   "line": 23,
+   "claimed_as": "formalization.yaml main_results[1] '(D) Non-existence of global smooth periodic solutions'; alignment: 'Corollary 10.6 (Navier–Stokes on ℝ³/ℤ³)' status 'proved'",
+   "statement_verbatim": "theorem navier_stokes_breakdown_periodic (nu : ℝ) (hnu : nu > 0) :\n    ∃ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),\n    InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧\n    ¬ (∃ v p, NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p) := by\n  exact ComparatorBridge.navier_stokes_breakdown_periodic nu hnu\n-- context: `namespace NavierStokes.Comparator`; `local notation \"ℝ³\" => EuclideanSpace ℝ (Fin 3)` (ComparatorSolution.lean:11,13)",
+   "reference_statement": {
+    "file": "ComparatorChallenges/NavierStokes.lean",
+    "line": 280,
+    "text": "theorem navier_stokes_breakdown_periodic (nu : ℝ) (hnu : nu > 0) :\n    ∃ (u₀ : ℝ³ → ℝ³) (f : ℝ³ → ℝ → ℝ³),\n    InitialVelocityConditionPeriodic u₀ ∧ ForceConditionPeriodic f ∧\n    ¬ (∃ v p, NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p) := by\n  sorry"
+   },
+   "proof_route": "ComparatorBridge.navier_stokes_breakdown_periodic (ComparatorTheorem.lean:48) ← option_D_of_candidate (line 26) with witnesses u₀ := fun _ => 0, f := toComparator (rescaledForce ν f) (line 38) ← ActualCandidateAssembly.selected_candidate (line 1183) and MaximalLifespan.candidate_excludes_global_solution (MaximalLifespan.lean:237).",
+   "unfolded_definitions": [
+    {
+     "name": "NavierStokes.Comparator.InitialVelocityConditionPeriodic",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 138,
+     "text": "structure InitialVelocityConditionPeriodic (u₀ : ℝ^n → ℝ^n) : Prop extends\n    InitialVelocityCondition u₀ where\n  isOnePeriodic : IsOnePeriodic u₀"
+    },
+    {
+     "name": "NavierStokes.Comparator.InitialVelocityCondition",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 108,
+     "text": "structure InitialVelocityCondition (u₀ : ℝ^n → ℝ^n) : Prop where\n  div_free : ∀ x, ∇⬝ u₀ x = 0\n  smooth : ContDiff ℝ ∞ u₀"
+    },
+    {
+     "name": "NavierStokes.Comparator.divergence",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 55,
+     "text": "noncomputable\ndef divergence (v : ℝ^n → ℝ^n) (x : ℝ^n) : ℝ := (fderiv ℝ v x).trace ℝ (ℝ^n)\n-- `local notation \"∇⬝\" => divergence` (line 58); `local notation \"ℝ^\" n:65 => EuclideanSpace ℝ (Fin n)` (line 40)"
+    },
+    {
+     "name": "NavierStokes.Comparator.IsOnePeriodic",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 95,
+     "text": "def IsOnePeriodic {α : Sort*} (f : ℝ^n → α) : Prop :=\n  ∀ x i, f (x + EuclideanSpace.single i 1) = f x"
+    },
+    {
+     "name": "NavierStokes.Comparator.ForceConditionPeriodic",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 174,
+     "text": "structure ForceConditionPeriodic (f : ℝ^n → ℝ → ℝ^n) : Prop extends ForceCondition f where\n  isOnePeriodic : ∀ t ≥ 0, IsOnePeriodic (f · t)\n  decay : ∀ m : ℕ, ∀ K : ℝ, ∃ C : ℝ, ∀ x, ∀ t ≥ 0,\n    ‖iteratedFDerivWithin ℝ m (↿f) (Set.univ ×ˢ Set.Ici 0) (x, t)‖ ≤ C / (1 + t) ^ K"
+    },
+    {
+     "name": "NavierStokes.Comparator.ForceCondition",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 149,
+     "text": "structure ForceCondition (f : ℝ^n → ℝ → ℝ^n) : Prop where\n  smooth : ContDiffOn ℝ ∞ (↿f) (Set.univ ×ˢ Set.Ici 0)"
+    },
+    {
+     "name": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothnessPeriodic",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 236,
+     "text": "structure NavierStokesExistenceAndSmoothnessPeriodic\n    (nu : ℝ) (u₀ : ℝ^n → ℝ^n) (f : ℝ^n → ℝ → ℝ^n)\n    (v : ℝ^n → ℝ → ℝ^n) (p : ℝ^n → ℝ → ℝ) : Prop\n  extends NavierStokesExistenceAndSmoothness nu u₀ f v p where\n  isOnePeriodic_velocity : ∀ t ≥ 0, IsOnePeriodic (v · t)\n  isOnePeriodic_pressure : ∀ t ≥ 0, IsOnePeriodic (p · t)"
+    },
+    {
+     "name": "NavierStokes.Comparator.NavierStokesExistenceAndSmoothness",
+     "file": "NavierStokes/ComparatorDefinitions.lean",
+     "line": 191,
+     "text": "structure NavierStokesExistenceAndSmoothness\n    (nu : ℝ) (u₀ : ℝ^n → ℝ^n) (f : ℝ^n → ℝ → ℝ^n)\n    (v : ℝ^n → ℝ → ℝ^n) (p : ℝ^n → ℝ → ℝ) : Prop where\n  navier_stokes : ∀ x, ∀ t ≥ 0,\n    derivWithin (v x ·) (Set.Ici 0) t + fderiv ℝ (v · t) x (v x t) =\n      nu • Δ (v · t) x - gradient (p · t) x + f x t\n  div_free : ∀ x, ∀ t ≥ 0, ∇⬝ (v · t) x = 0\n  initial_condition : ∀ x, v x 0 = u₀ x\n  velocity_smooth : ContDiffOn ℝ ∞ (↿v) (Set.univ ×ˢ Set.Ici 0)\n  pressure_smooth : ContDiffOn ℝ ∞ (↿p) (Set.univ ×ˢ Set.Ici 0)\n-- file header: `open ContDiff Set InnerProductSpace MeasureTheory` / `open scoped Laplacian` (lines 34-35)"
+    },
+    {
+     "name": "Mathlib: ContDiff-scoped ∞",
+     "file": ".lake/packages/mathlib/Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean",
+     "line": 120,
+     "text": "scoped[ContDiff] notation3 \"∞\" => ((⊤ : ℕ∞) : WithTop ℕ∞)   -- C^∞ (all finite orders), NOT analytic (`ω` = ⊤ : WithTop ℕ∞, line 118)"
+    },
+    {
+     "name": "Mathlib: ContDiffOn / ContDiff",
+     "file": ".lake/packages/mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+     "line": 472,
+     "text": "def ContDiffOn (n : ℕ∞ω) (f : E → F) (s : Set E) : Prop := ...  (line 472);  def ContDiff (n : ℕ∞ω) (f : E → F) : Prop := ... (line 1068)"
+    },
+    {
+     "name": "Mathlib: derivWithin",
+     "file": ".lake/packages/mathlib/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+     "line": 145,
+     "text": "def derivWithin (f : 𝕜 → F) (s : Set 𝕜) (x : 𝕜) := ...   -- one-sided time derivative relative to Set.Ici 0 in `navier_stokes`"
+    },
+    {
+     "name": "Mathlib: iteratedFDerivWithin",
+     "file": ".lake/packages/mathlib/Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean",
+     "line": 398,
+     "text": "noncomputable def iteratedFDerivWithin (n : ℕ) (f : E → F) (s : Set E) : E → E [×n]→L[𝕜] F :=\n  Nat.recOn n (fun x => ContinuousMultilinearMap.uncurry0 𝕜 E (f x)) fun _ rec x =>\n    ContinuousLinearMap.uncurryLeft (fderivWithin 𝕜 rec s x)"
+    },
+    {
+     "name": "Mathlib: gradient",
+     "file": ".lake/packages/mathlib/Mathlib/Analysis/Calculus/Gradient/Basic.lean",
+     "line": 82,
+     "text": "def gradient (f : F → 𝕜) (x : F) : F :=\n  (toDual 𝕜 F).symm (fderiv 𝕜 f x)"
+    },
+    {
+     "name": "Mathlib: Δ (Laplacian instance on E → F)",
+     "file": ".lake/packages/mathlib/Mathlib/Analysis/InnerProductSpace/Laplacian.lean",
+     "line": 137,
+     "text": "noncomputable\ninstance instLaplacian : Laplacian (E → F) (E → F) where\n  laplacian f x := tensorIteratedFDerivTwo ℝ f x (InnerProductSpace.canonicalCovariantTensor E)\n-- the prefix notation `Δ` for the `Laplacian` class is declared in Mathlib/Analysis/Distribution/DerivNotation.lean (file located by grep; line not pinned)"
+    },
+    {
+     "name": "Mathlib: ↿ (HasUncurry)",
+     "file": ".lake/packages/mathlib/Mathlib/Logic/Function/Basic.lean",
+     "line": 996,
+     "text": "class HasUncurry (α : Type*) (β : outParam Type*) (γ : outParam Type*) where\n  uncurry : α → β → γ\n@[inherit_doc] prefix:max \"↿\" => HasUncurry.uncurry\ninstance hasUncurryBase : HasUncurry (α → β) α β := ⟨id⟩\ninstance hasUncurryInduction [HasUncurry β γ δ] : HasUncurry (α → β) (α × γ) δ := ⟨fun f p ↦ ↿(f p.1) p.2⟩\n-- so ↿f : ℝ^n × ℝ → ℝ^n, (x,t) ↦ f x t"
+    }
+   ]
+  }
+ ],
+ "internal_existence_statements_not_exported": [
+  {
+   "name": "NavierStokes.R3CompactCandidate.selected_compact_candidate",
+   "file": "NavierStokes/R3ActualCandidate.lean",
+   "line": 18,
+   "text": "theorem selected_compact_candidate :\n    ∃ u : VelocityField, ∃ p : PressureField, ∃ f : VelocityField, Properties u p f",
+   "role": "Existence-form witness used by the (C) adapter (ComparatorR3Theorem.lean:41). Viscosity is fixed at ONE (navierStokesResidual has no ν). Not listed as a main result in formalization.yaml."
+  },
+  {
+   "name": "NavierStokes.R3CompactCandidate.Properties",
+   "file": "NavierStokes/R3CompactCandidate.lean",
+   "line": 24,
+   "text": "structure Properties (u : VelocityField) (p : PressureField) (f : VelocityField) : Prop where\n  velocity_smooth : ContDiffOn ℝ ∞ u preSingularDomain\n  pressure_smooth : ContDiffOn ℝ ∞ p preSingularDomain\n  force_smooth : ContDiffOn ℝ ∞ f futureDomain\n  velocity_support : ∃ K : Set Space, IsCompact K ∧\n    ∀ t ∈ Ico (0 : ℝ) 1, ∀ x, x ∉ K → u (t, x) = 0\n  pressure_support : ∃ K : Set Space, IsCompact K ∧\n    ∀ t ∈ Ico (0 : ℝ) 1, ∀ x, x ∉ K → p (t, x) = 0\n  force_support : ∃ K : Set Space, IsCompact K ∧ CompactSpatialForceDecay.SupportedIn K f\n  zero_initial_velocity : ∀ x, u (0, x) = 0\n  force_time_support : CompactFutureTimeSupport f\n  divergence_free : ∀ t ∈ Ico (0 : ℝ) 1, ∀ x, spatialDivergence u t x = 0\n  navier_stokes : ∀ t ∈ Ioo (0 : ℝ) 1, ∀ x, navierStokesResidual u p t x = f (t, x)\n  speed_unbounded : SpeedUnboundedAtOne u",
+   "role": "NO energy / L² field. Velocity and pressure supports use two separately-quantified compact sets (K may differ), not one K as in Theorem 1.1."
+  },
+  {
+   "name": "NavierStokes.ActualCandidateAssembly.selected_candidate",
+   "file": "NavierStokes/ActualCandidateAssembly.lean",
+   "line": 1183,
+   "text": "theorem selected_candidate : ProblemStatement.candidateStatement",
+   "role": "Periodic existence-form witness (viscosity one) used by the (D) adapter (ComparatorTheorem.lean:53)."
+  },
+  {
+   "name": "NavierStokes.ProblemStatement.CandidateProperties / candidateStatement",
+   "file": "NavierStokes/ProblemStatement.lean",
+   "line": 101,
+   "text": "structure CandidateProperties (u : VelocityField) (p : PressureField)\n    (f : VelocityField) : Prop where\n  velocity_smooth : ContDiffOn ℝ ∞ u preSingularDomain\n  pressure_smooth : ContDiffOn ℝ ∞ p preSingularDomain\n  force_smooth : ContDiffOn ℝ ∞ f futureDomain\n  velocity_periodic : UnitSpatialPeriodsOn (Ico 0 1) u\n  pressure_periodic : UnitSpatialPeriodsOn (Ico 0 1) p\n  force_periodic : UnitSpatialPeriodsOn (Ici 0) f\n  zero_initial_velocity : ∀ x : Space, u (0, x) = 0\n  force_time_support : CompactFutureTimeSupport f\n  divergence_free : ∀ t ∈ Ico (0 : ℝ) 1, ∀ x : Space, spatialDivergence u t x = 0\n  navier_stokes : ∀ t ∈ Ioo (0 : ℝ) 1, ∀ x : Space,\n    navierStokesResidual u p t x = f (t, x)\n  speed_unbounded : SpeedUnboundedAtOne u\ndef candidateStatement : Prop :=\n  ∃ u : VelocityField, ∃ p : PressureField, ∃ f : VelocityField,\n    CandidateProperties u p f   -- line 120",
+   "role": "Periodic viscosity-one candidate; no support-in-a-cube field, no energy field."
+  },
+  {
+   "name": "NavierStokes.ProblemStatement primitives",
+   "file": "NavierStokes/ProblemStatement.lean",
+   "line": 30,
+   "text": "abbrev Space := EuclideanSpace ℝ (Fin 3)  -- 30\nabbrev SpaceTime := ℝ × Space  -- 33 (time first)\nabbrev VelocityField := SpaceTime → Space  -- 35\nabbrev PressureField := SpaceTime → ℝ  -- 36\ndef coordinateVector (i : Fin 3) : Space := EuclideanSpace.single i 1  -- 39\ndef preSingularDomain : Set SpaceTime := Ico 0 1 ×ˢ univ  -- 42\ndef futureDomain : Set SpaceTime := Ici 0 ×ˢ univ  -- 45\ndef UnitSpatialPeriodsOn {V : Type*} (times : Set ℝ) (g : SpaceTime → V) : Prop :=\n  ∀ t ∈ times, ∀ x : Space, ∀ i : Fin 3,\n    g (t, x + coordinateVector i) = g (t, x)  -- 49\ndef temporalDerivative (u : VelocityField) (t : ℝ) (x : Space) : Space :=\n  fderiv ℝ (fun s : ℝ => u (s, x)) t 1  -- 55\ndef spatialDerivative (u : VelocityField) (t : ℝ) (x : Space) : Space →L[ℝ] Space :=\n  fderiv ℝ (fun y : Space => u (t, y)) x  -- 59\ndef advection (u : VelocityField) (t : ℝ) (x : Space) : Space :=\n  spatialDerivative u t x (u (t, x))  -- 63\ndef spatialDivergence (u : VelocityField) (t : ℝ) (x : Space) : ℝ :=\n  ∑ i : Fin 3, (spatialDerivative u t x (coordinateVector i)) i  -- 67\ndef pressureGradient (p : PressureField) (t : ℝ) (x : Space) : Space :=\n  ∑ i : Fin 3,\n    (fderiv ℝ (fun y : Space => p (t, y)) x (coordinateVector i)) • coordinateVector i  -- 71\ndef spatialLaplacian (u : VelocityField) (t : ℝ) (x : Space) : Space :=\n  ∑ i : Fin 3,\n    fderiv ℝ (fun y : Space => spatialDerivative u t y (coordinateVector i))\n      x (coordinateVector i)  -- 76\ndef navierStokesResidual (u : VelocityField) (p : PressureField)\n    (t : ℝ) (x : Space) : Space :=\n  temporalDerivative u t x + advection u t x - spatialLaplacian u t x +\n    pressureGradient p t x  -- 82 (viscosity exactly one)\ndef CompactFutureTimeSupport (f : VelocityField) : Prop :=\n  ∃ T : ℝ, 0 ≤ T ∧ ∀ t : ℝ, T ≤ t → ∀ x : Space, f (t, x) = 0  -- 89\ndef SpeedUnboundedAtOne (u : VelocityField) : Prop :=\n  ∀ M : ℝ, 0 < M → ∀ δ : ℝ, 0 < δ →\n    ∃ t : ℝ, ∃ x : Space, t ∈ Ioo 0 1 ∧ 1 - δ < t ∧ M < ‖u (t, x)‖  -- 94",
+   "role": "Primitives of the project's own (non-comparator) statements."
+  },
+  {
+   "name": "NavierStokes.CompactSpatialForceDecay.SupportedIn",
+   "file": "NavierStokes/CompactSpatialForceDecay.lean",
+   "line": 19,
+   "text": "def SupportedIn (K : Set Space) (f : VelocityField) : Prop :=\n  ∀ t : ℝ, 0 ≤ t → ∀ x : Space, x ∉ K → f (t, x) = 0",
+   "role": "Spatial support of the force for t ≥ 0 (no requirement of vanishing near t = 0)."
+  },
+  {
+   "name": "NavierStokesR3.ProblemStatement.breakdownStatement (paper-faithful target, UNPROVED)",
+   "file": "NavierStokes/R3/ProblemStatement.lean",
+   "line": 150,
+   "text": "def breakdownStatement : Prop :=\n  ∀ ν : ℝ, 0 < ν →\n    ∃ u : VelocityField, ∃ p : PressureField, ∃ f : VelocityField, ∃ K : Set Space,\n      CandidateProperties ν u p f K ∧ ¬ Nonempty (GlobalFiniteEnergySolution ν f)\n-- with (line 92) structure CandidateProperties (ν : ℝ) (u : VelocityField) (p : PressureField)\n    (f : VelocityField) (K : Set Space) : Prop where\n  velocity_smooth : ContDiffOn ℝ ∞ u preSingularDomain\n  pressure_smooth : ContDiffOn ℝ ∞ p preSingularDomain\n  support_compact : IsCompact K\n  velocity_support : ∀ t ∈ Ico (0 : ℝ) 1,\n    tsupport (fun x : Space => u (t, x)) ⊆ K\n  pressure_support : ∀ t ∈ Ico (0 : ℝ) 1,\n    tsupport (fun x : Space => p (t, x)) ⊆ K\n  force_smooth : ContDiff ℝ ∞ f\n  force_support : CompactPositiveTimeSupport f\n  zero_initial_velocity : ∀ x : Space, u (0, x) = 0\n  divergence_free : ∀ t ∈ Ico (0 : ℝ) 1, ∀ x : Space,\n    NavierStokes.ProblemStatement.spatialDivergence u t x = 0\n  navier_stokes : ∀ t ∈ Ioo (0 : ℝ) 1, ∀ x : Space,\n    navierStokesResidual ν u p t x = f (t, x)\n  energy_bounded : UniformFiniteEnergy (Ico 0 1) u\n  speed_unbounded : SpeedUnboundedAtOne u\n-- def CompactPositiveTimeSupport (f) : Prop := HasCompactSupport f ∧ tsupport f ⊆ positiveTimeDomain (line 66; positiveTimeDomain := Ioi 0 ×ˢ univ, line 53)\n-- def UniformFiniteEnergy (times) (u) : Prop := ∃ E : ℝ, 0 ≤ E ∧ ∀ t ∈ times, SquareIntegrableAtTime u t ∧ kineticEnergy u t ≤ E (line 81)",
+   "role": "This is the ONLY Lean proposition in the repo that matches Theorem 1.1 clause-for-clause (∀ν, one K, tsupport ⊆ K, C_c^∞ force in positive time, sup L² < ∞, blow-up). Its docstring says 'This is a target proposition, not an asserted theorem.' A grep over NavierStokes/, Euler/, ComparatorChallenges/ finds NO theorem proving `breakdownStatement`, `coreBreakdownStatement`, or `NavierStokesR3.ProblemStatement.candidateStatement ν`; `CandidateProperties ν` occurs only as a HYPOTHESIS in R3/WholeSpaceUniqueness.lean:72-117."
+  }
+ ],
+ "reference_texts": {
+  "theorem_1_1": "For every ν > 0 there exist a force f ∈ C∞c (R3 × (0, ∞); R3), a compact set K ⊂ R3, and smooth velocity and pressure fields u, p on R3 × [0, 1) satisfying ∂tu + (u · ∇)u − ν∆u + ∇p = f, ∇· u = 0, u(·, 0) = 0, (1.1) such that supp u(·, t) ∪ supp p(·, t) ⊂ K for every 0 ≤ t < 1, sup_{0≤t<1} ∥u(t)∥L2(R3) < ∞, lim sup_{t↑1} ∥u(t)∥L∞(R3) = ∞. Consequently, there is no smooth solution (u, P) on R3 × [0, ∞) with the same force and initial datum whose kinetic energy is uniformly bounded sup_{t≥0} ½∫ |u(x, t)|² dx < ∞. (manuscript_pages.txt, page 1)",
+  "corollary_10_6": "For every ν > 0, there is a smooth force on T3 × [0, ∞), compactly supported in time, for which the solution (U, Pper) of the periodic Navier–Stokes equations with viscosity ν and zero initial velocity is smooth on [0, 1) and satisfies lim sup_{t↑1} ∥U(t)∥L∞(T3) = ∞. Its velocity and pressure have support in a fixed compact subset of the interior of Q0 at every time before one. There is no global smooth periodic solution for the same datum and force. (manuscript_pages.txt, page 125)",
+  "fefferman_C": "(C) Breakdown of Navier–Stokes solutions on R3. Take ν > 0 and n = 3. Then there exist a smooth, divergence-free vector field u◦(x) on R3 and a smooth f(x, t) on R3 × [0, ∞), satisfying (4), (5), for which there exist no solutions (p, u) of (1), (2), (3), (6), (7) on R3 × [0, ∞). [(4) |∂^α_x u◦(x)| ≤ C_{αK}(1+|x|)^{-K}; (5) |∂^α_x ∂^m_t f(x,t)| ≤ C_{αmK}(1+|x|+t)^{-K} on R^n×[0,∞); (6) p,u ∈ C∞(R^n×[0,∞)); (7) ∫_{R^n}|u(x,t)|²dx < C for all t ≥ 0 (bounded energy)] (Clay PDF pages 1-2)",
+  "fefferman_D": "(D) Breakdown of Navier–Stokes Solutions on R3/Z3. Take ν > 0 and n = 3. Then there exist a smooth, divergence-free vector field u◦(x) on R3 and a smooth f(x, t) on R3 × [0, ∞), satisfying (8), (9), for which there exist no solutions (p, u) of (1), (2), (3), (10), (11) on R3 × [0, ∞). [(8) u◦(x+e_j)=u◦(x), f(x+e_j,t)=f(x,t); (9) |∂^α_x ∂^m_t f| ≤ C_{αmK}(1+|t|)^{-K} on R3×[0,∞); (10) u(x,t)=u(x+e_j,t) on R3×[0,∞); (11) p,u ∈ C∞(R^n×[0,∞)); Errata (PDF page 6): 'The further condition p(x + ej, t) = p(x, t) should be made explicit in Eqn (8).'] (Clay PDF pages 2, 6)"
+ },
+ "diff_vs_theorem_1_1": [
+  {
+   "clause": "∀ ν > 0",
+   "status": "PRESENT",
+   "lean_text": "(nu : ℝ) (hnu : nu > 0)",
+   "note": "Universally quantified viscosity, matching the paper. (Internally the construction is at viscosity one and the theorem rescales: ComparatorBridge.rescaledForce ν f = rescale (ν^2) ν f, ComparatorBridge.lean:65; this is invisible in the statement.)"
+  },
+  {
+   "clause": "f ∈ C∞_c(R³×(0,∞); R³)",
+   "status": "WEAKER",
+   "lean_text": "ForceConditionDecay f  ==  ContDiffOn ℝ ∞ (↿f) (Set.univ ×ˢ Set.Ici 0) ∧ ∀ m K, ∃ C, ∀ x, ∀ t ≥ 0, ‖iteratedFDerivWithin ℝ m (↿f) (univ ×ˢ Ici 0) (x, t)‖ ≤ C / (1 + ‖x‖ + t) ^ K",
+   "note": "Lean asserts only Fefferman's Schwartz-type decay class (5), not compact support, and nothing forces f to vanish near t = 0 or outside a compact set. (The proof's witness `toComparator (rescaledForce ν f)` does have compact spatial support K and compact future-time support [0,T], via R3CompactCandidate.Properties.force_support / force_time_support, but the exported statement does not say so.)"
+  },
+  {
+   "clause": "∃ compact K ⊂ R³",
+   "status": "ABSENT",
+   "lean_text": "(no K in the statement)",
+   "note": "Only in the unexported viscosity-one structure R3CompactCandidate.Properties (velocity_support / pressure_support, each `∃ K, IsCompact K ∧ ∀ t ∈ Ico 0 1, ∀ x, x ∉ K → · = 0`), with two independently quantified K's rather than one common K."
+  },
+  {
+   "clause": "smooth velocity and pressure u, p on R³×[0,1)",
+   "status": "ABSENT",
+   "lean_text": "(the only u,p in the statement are the negated competitor: ¬ ∃ v p, …)",
+   "note": "Top-level theorem asserts NO existence of a solution on [0,1). The existence content lives in `selected_compact_candidate` (viscosity one only): velocity_smooth/pressure_smooth : ContDiffOn ℝ ∞ · preSingularDomain, preSingularDomain = Ico 0 1 ×ˢ univ."
+  },
+  {
+   "clause": "∂_t u + (u·∇)u − νΔu + ∇p = f (with force, viscosity ν)",
+   "status": "DIFFERENT",
+   "lean_text": "navier_stokes : ∀ x, ∀ t ≥ 0, derivWithin (v x ·) (Set.Ici 0) t + fderiv ℝ (v · t) x (v x t) = nu • Δ (v · t) x - gradient (p · t) x + f x t",
+   "note": "In the paper this is a property of the CONSTRUCTED (u,p) on (0,1); in Lean the equation appears only as a hypothesis on the hypothetical global competitor v (inside the negation), on all of t ≥ 0 with a one-sided derivWithin at t=0. For the constructed fields, the equation is stated only at viscosity one (navierStokesResidual, ProblemStatement.lean:82) on Ioo 0 1 in R3CompactCandidate.Properties.navier_stokes."
+  },
+  {
+   "clause": "∇·u = 0",
+   "status": "DIFFERENT",
+   "lean_text": "div_free : ∀ x, ∀ t ≥ 0, ∇⬝ (v · t) x = 0  (competitor);  InitialVelocityCondition.div_free : ∀ x, ∇⬝ u₀ x = 0",
+   "note": "Same remark: divergence-free is a hypothesis on the competitor and on u₀, not an asserted property of a constructed blowing-up u. Divergence = trace of fderiv (junk value 0 where not differentiable)."
+  },
+  {
+   "clause": "u(·,0) = 0",
+   "status": "DIFFERENT",
+   "lean_text": "∃ (u₀ : ℝ³ → ℝ³) …, InitialVelocityConditionDecay u₀ ∧ … initial_condition : ∀ x, v x 0 = u₀ x",
+   "note": "The statement existentially quantifies an arbitrary smooth, divergence-free, rapidly decaying u₀; it does not say u₀ = 0. (The proof instantiates `fun _ => 0`, ComparatorR3Theorem.lean:30, but the theorem as written is weaker than 'zero initial datum'.)"
+  },
+  {
+   "clause": "supp u(·,t) ∪ supp p(·,t) ⊂ K for every 0 ≤ t < 1",
+   "status": "ABSENT",
+   "lean_text": "(none)",
+   "note": "Not in the top-level statement. In R3CompactCandidate.Properties it appears as pointwise vanishing outside K (not tsupport ⊆ K) with possibly different K for u and p, at viscosity one, unexported."
+  },
+  {
+   "clause": "sup_{0≤t<1} ‖u(t)‖_{L²(R³)} < ∞",
+   "status": "ABSENT",
+   "lean_text": "integrable : ∀ t ≥ 0, MemLp (‖v · t‖) 2 ;  globally_bounded_energy : ∃ E, ∀ t ≥ 0, (∫ x : ℝ^n, ‖v x t‖ ^ 2) < E   (these are hypotheses on the COMPETITOR v, not properties of a constructed u)",
+   "note": "The paper's bounded-energy claim about the blowing-up solution is nowhere asserted in Lean for any constructed field: R3CompactCandidate.Properties has no energy field, and the only structure with `energy_bounded : UniformFiniteEnergy (Ico 0 1) u` (NavierStokesR3.ProblemStatement.CandidateProperties, R3/ProblemStatement.lean:108) is never instantiated by a theorem. The energy bound in the top-level statement plays the opposite role (it restricts the class of excluded global solutions)."
+  },
+  {
+   "clause": "limsup_{t↑1} ‖u(t)‖_{L∞(R³)} = ∞",
+   "status": "ABSENT",
+   "lean_text": "(none at top level); unexported: speed_unbounded : SpeedUnboundedAtOne u  ==  ∀ M > 0, ∀ δ > 0, ∃ t x, t ∈ Ioo 0 1 ∧ 1 - δ < t ∧ M < ‖u (t, x)‖",
+   "note": "The top-level theorem contains no blow-up clause at all. The internal pointwise form (viscosity one) is equivalent to limsup ‖u(t)‖_∞ = ∞ for continuous compactly supported slices, but is not exported."
+  },
+  {
+   "clause": "paper's 'Consequently' sentence: no smooth (u,P) on R³×[0,∞) with same force and datum and uniformly bounded kinetic energy",
+   "status": "PRESENT",
+   "lean_text": "¬ (∃ v p, NavierStokesExistenceAndSmoothnessRn nu u₀ f v p)",
+   "note": "This corollary sentence — not Theorem 1.1's displayed statement — is what the Lean theorem formalizes, and it is exactly Fefferman's (C). The competitor class: smooth on univ ×ˢ Ici 0 (ContDiffOn ℝ ∞ of the uncurried map), equation with one-sided time derivative for all t ≥ 0, div-free, v(·,0)=u₀, MemLp 2 slices and a uniform strict bound on ∫‖v‖²."
+  },
+  {
+   "clause": "Things Lean says that the paper's Theorem 1.1 does not",
+   "status": "DIFFERENT",
+   "lean_text": "∃ u₀ … InitialVelocityConditionDecay u₀ (∀ m K ∃ C ∀ x, ‖iteratedFDeriv ℝ m u₀ x‖ ≤ C/(1+‖x‖)^K, with K : ℝ including K ≤ 0); ForceConditionDecay; derivWithin (Ici 0) at t=0; MemLp (‖v · t‖) 2",
+   "note": "The Lean statement is a Clay-(C)-shaped non-existence statement with Fefferman's decay classes (4),(5) and bounded-energy condition (7) on the competitor. No fixed singular time, no K, no blow-up, no bounded energy of the constructed solution, no zero datum appear in it."
+  }
+ ],
+ "diff_vs_corollary_10_6": [
+  {
+   "clause": "∀ ν > 0",
+   "status": "PRESENT",
+   "lean_text": "(nu : ℝ) (hnu : nu > 0)",
+   "note": "Matches."
+  },
+  {
+   "clause": "smooth force on T³×[0,∞), compactly supported in time",
+   "status": "WEAKER",
+   "lean_text": "ForceConditionPeriodic f == ContDiffOn ℝ ∞ (↿f) (univ ×ˢ Ici 0) ∧ (∀ t ≥ 0, IsOnePeriodic (f · t)) ∧ ∀ m K ∃ C ∀ x, ∀ t ≥ 0, ‖iteratedFDerivWithin ℝ m (↿f) (univ ×ˢ Ici 0) (x, t)‖ ≤ C / (1 + t) ^ K",
+   "note": "Periodicity and smoothness present; compact time support replaced by Fefferman's polynomial time decay (9) (implied by compact time support, not equivalent)."
+  },
+  {
+   "clause": "zero initial velocity",
+   "status": "DIFFERENT",
+   "lean_text": "∃ (u₀ : ℝ³ → ℝ³) …, InitialVelocityConditionPeriodic u₀ ∧ … initial_condition : ∀ x, v x 0 = u₀ x",
+   "note": "Arbitrary smooth, div-free, 1-periodic u₀ is existentially quantified; u₀ = 0 is a proof choice (ComparatorTheorem.lean:38), not part of the statement."
+  },
+  {
+   "clause": "solution (U, P_per) of periodic NS with viscosity ν, smooth on [0,1)",
+   "status": "ABSENT",
+   "lean_text": "(none; only the negated competitor ¬ ∃ v p, NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p)",
+   "note": "Existence of the blowing-up periodic solution is not asserted at top level. Internal viscosity-one version: ProblemStatement.CandidateProperties (velocity_smooth/pressure_smooth on preSingularDomain, velocity_periodic/pressure_periodic on Ico 0 1, navier_stokes on Ioo 0 1) via selected_candidate."
+  },
+  {
+   "clause": "limsup_{t↑1} ‖U(t)‖_{L∞(T³)} = ∞",
+   "status": "ABSENT",
+   "lean_text": "(none at top level); internal: speed_unbounded : SpeedUnboundedAtOne u",
+   "note": "As for Theorem 1.1."
+  },
+  {
+   "clause": "velocity and pressure supported in a fixed compact subset of the interior of Q₀ at every t < 1",
+   "status": "ABSENT",
+   "lean_text": "(none)",
+   "note": "ProblemStatement.CandidateProperties has no support field at all; no Lean statement asserts support inside a fundamental cube."
+  },
+  {
+   "clause": "no global smooth periodic solution for the same datum and force",
+   "status": "PRESENT",
+   "lean_text": "¬ (∃ v p, NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p)",
+   "note": "Competitor class = equation for t ≥ 0 (derivWithin Ici 0), div-free, v(·,0)=u₀, ContDiffOn ℝ ∞ on univ ×ˢ Ici 0 for v and p, 1-periodic v AND 1-periodic p for t ≥ 0. Requiring periodic pressure matches the paper's 'as required in the erratum' (page 125) and the Clay errata page (PDF page 6)."
+  }
+ ],
+ "diff_vs_fefferman_C": [
+  {
+   "clause": "Take ν > 0 and n = 3",
+   "status": "PRESENT",
+   "lean_text": "(nu : ℝ) (hnu : nu > 0); ℝ³ := EuclideanSpace ℝ (Fin 3)",
+   "note": "Matches."
+  },
+  {
+   "clause": "∃ smooth, divergence-free u◦ on R³ satisfying (4)",
+   "status": "PRESENT",
+   "lean_text": "∃ (u₀ : ℝ³ → ℝ³), InitialVelocityConditionDecay u₀ == (∀ x, ∇⬝ u₀ x = 0) ∧ ContDiff ℝ ∞ u₀ ∧ ∀ m : ℕ, ∀ K : ℝ, ∃ C : ℝ, ∀ x, ‖iteratedFDeriv ℝ m u₀ x‖ ≤ C / (1 + ‖x‖) ^ K",
+   "note": "(4) |∂^α u◦(x)| ≤ C_{αK}(1+|x|)^{-K} encoded via the norm of the m-th Fréchet derivative (bounds all multi-indices of order m at once; equivalent up to constants)."
+  },
+  {
+   "clause": "∃ smooth f on R³×[0,∞) satisfying (5)",
+   "status": "PRESENT",
+   "lean_text": "∃ (f : ℝ³ → ℝ → ℝ³), ForceConditionDecay f == ContDiffOn ℝ ∞ (↿f) (univ ×ˢ Ici 0) ∧ ∀ m K ∃ C ∀ x, ∀ t ≥ 0, ‖iteratedFDerivWithin ℝ m (↿f) (univ ×ˢ Ici 0) (x, t)‖ ≤ C / (1 + ‖x‖ + t) ^ K",
+   "note": "(5) |∂^α_x ∂^m_t f| ≤ C(1+|x|+t)^{-K} on R³×[0,∞), with within-derivatives on the closed half-space."
+  },
+  {
+   "clause": "no solutions (p,u) of (1) on R³×[0,∞)",
+   "status": "PRESENT",
+   "lean_text": "navier_stokes : ∀ x, ∀ t ≥ 0, derivWithin (v x ·) (Set.Ici 0) t + fderiv ℝ (v · t) x (v x t) = nu • Δ (v · t) x - gradient (p · t) x + f x t",
+   "note": "(1) ∂_t u + Σ u_j ∂_j u = νΔu − ∇p + f for x ∈ R³, t ≥ 0. Δ is Mathlib's InnerProductSpace Laplacian (trace of second derivative against the canonical covariant tensor), gradient via Riesz (toDual).symm ∘ fderiv, time derivative one-sided within Ici 0 at t=0 as the Clay statement imposes (1) on t ≥ 0."
+  },
+  {
+   "clause": "(2) div u = 0 on R³×[0,∞)",
+   "status": "PRESENT",
+   "lean_text": "div_free : ∀ x, ∀ t ≥ 0, ∇⬝ (v · t) x = 0",
+   "note": "Matches."
+  },
+  {
+   "clause": "(3) u(x,0) = u◦(x)",
+   "status": "PRESENT",
+   "lean_text": "initial_condition : ∀ x, v x 0 = u₀ x",
+   "note": "Matches."
+  },
+  {
+   "clause": "(6) p, u ∈ C∞(R³×[0,∞))",
+   "status": "PRESENT",
+   "lean_text": "velocity_smooth : ContDiffOn ℝ ∞ (↿v) (univ ×ˢ Ici 0); pressure_smooth : ContDiffOn ℝ ∞ (↿p) (univ ×ˢ Ici 0)",
+   "note": "∞ here is `((⊤ : ℕ∞) : WithTop ℕ∞)` = all finite orders (C^∞), not analytic (ω)."
+  },
+  {
+   "clause": "(7) ∫_{R³} |u(x,t)|² dx < C for all t ≥ 0 (bounded energy)",
+   "status": "PRESENT",
+   "lean_text": "integrable : ∀ t ≥ 0, MemLp (‖v · t‖) 2 ;  globally_bounded_energy : ∃ E, ∀ t ≥ 0, (∫ x : ℝ^n, ‖v x t‖ ^ 2) < E",
+   "note": "The explicit MemLp 2 clause is needed because Mathlib's Bochner integral is 0 for non-integrable integrands; with it, the pair is equivalent to (7)."
+  },
+  {
+   "clause": "Overall shape: ∃ u◦ f (classes) such that ¬∃ (p,u) (solution class)",
+   "status": "PRESENT",
+   "lean_text": "∃ u₀ f, InitialVelocityConditionDecay u₀ ∧ ForceConditionDecay f ∧ ¬ (∃ v p, NavierStokesExistenceAndSmoothnessRn nu u₀ f v p)",
+   "note": "The Lean statement is a faithful transcription of (C) (it is DeepMind Formal Conjectures' statement, copied verbatim into ComparatorChallenges/NavierStokes.lean:272-277 and re-declared with a proof in ComparatorSolution.lean:16-20)."
+  }
+ ],
+ "diff_vs_fefferman_D": [
+  {
+   "clause": "Take ν > 0 and n = 3",
+   "status": "PRESENT",
+   "lean_text": "(nu : ℝ) (hnu : nu > 0); ℝ³",
+   "note": "Matches."
+  },
+  {
+   "clause": "∃ smooth, divergence-free u◦ on R³ satisfying (8): u◦(x+e_j) = u◦(x)",
+   "status": "PRESENT",
+   "lean_text": "InitialVelocityConditionPeriodic u₀ == (∀ x, ∇⬝ u₀ x = 0) ∧ ContDiff ℝ ∞ u₀ ∧ IsOnePeriodic u₀  [IsOnePeriodic f := ∀ x i, f (x + EuclideanSpace.single i 1) = f x]",
+   "note": "Matches."
+  },
+  {
+   "clause": "∃ smooth f on R³×[0,∞) satisfying (8): f(x+e_j,t) = f(x,t), and (9): |∂^α_x ∂^m_t f| ≤ C(1+|t|)^{-K}",
+   "status": "PRESENT",
+   "lean_text": "ForceConditionPeriodic f == ContDiffOn ℝ ∞ (↿f) (univ ×ˢ Ici 0) ∧ (∀ t ≥ 0, IsOnePeriodic (f · t)) ∧ ∀ m K ∃ C ∀ x, ∀ t ≥ 0, ‖iteratedFDerivWithin ℝ m (↿f) (univ ×ˢ Ici 0) (x, t)‖ ≤ C / (1 + t) ^ K",
+   "note": "Matches (9) with (1+t) for t ≥ 0."
+  },
+  {
+   "clause": "no solutions (p,u) of (1),(2),(3)",
+   "status": "PRESENT",
+   "lean_text": "navier_stokes / div_free / initial_condition as in (C)",
+   "note": "Same encoding as in (C)."
+  },
+  {
+   "clause": "(10) u(x,t) = u(x+e_j,t) on R³×[0,∞)",
+   "status": "PRESENT",
+   "lean_text": "isOnePeriodic_velocity : ∀ t ≥ 0, IsOnePeriodic (v · t)",
+   "note": "Matches (10) as printed on page 2."
+  },
+  {
+   "clause": "(11) p, u ∈ C∞(R³×[0,∞))",
+   "status": "PRESENT",
+   "lean_text": "velocity_smooth / pressure_smooth : ContDiffOn ℝ ∞ (↿·) (univ ×ˢ Ici 0)",
+   "note": "Matches."
+  },
+  {
+   "clause": "periodic pressure (NOT in (10) on page 2; added by the Clay errata, PDF page 6: 'The further condition p(x+e_j,t) = p(x,t) should be made explicit')",
+   "status": "STRONGER",
+   "lean_text": "isOnePeriodic_pressure : ∀ t ≥ 0, IsOnePeriodic (p · t)",
+   "note": "An extra hypothesis on the competitor, so the excluded class is smaller than (D) as printed on page 2 (the Lean non-existence is formally weaker than page-2 (D) but equal to (D) with the errata applied; the paper's Corollary 10.6 also adopts the errata)."
+  }
+ ],
+ "verdict": {
+  "relation": "weaker",
+  "why": "The top-level Lean theorem `NavierStokes.Comparator.navier_stokes_breakdown_R3` is a verbatim transcription of Fefferman's alternative (C) — '∀ν>0 ∃ u₀,f in decay classes (4),(5) with no global smooth bounded-energy solution' — i.e. it formalizes only the paper's one-line 'Consequently' corollary of Theorem 1.1 and none of the displayed statement: it asserts no blowing-up solution, no compact K, no support containment, no bounded energy of the constructed flow, no limsup L∞ = ∞, no fixed singular time t=1, and it quantifies an arbitrary decaying u₀ and a merely polynomially-decaying f rather than u₀=0 and f ∈ C∞_c(R³×(0,∞)); every one of these Lean clauses is implied by Theorem 1.1 (with u₀=0 and the compactly supported f), while the Lean statement does not imply the existence clauses, so it is strictly weaker as a proposition. The only clause-for-clause match of Theorem 1.1 in the repository, `NavierStokesR3.ProblemStatement.breakdownStatement` (R3/ProblemStatement.lean:150), is a definition that no theorem proves; the closest proved existence statement, `R3CompactCandidate.selected_compact_candidate` (viscosity one only), lacks the sup L² < ∞ clause and uses two separate support sets."
+ },
+ "could_not_determine": [
+  {
+   "what": "Whether the ∀ν existence statement of Theorem 1.1 (a ν-viscosity blowing-up solution with sup‖u(t)‖_L² < ∞) is provable from what the repo proves",
+   "why": "Not a statement question; the repo proves the existence form only at viscosity one (`selected_compact_candidate`, `selected_candidate`) and without any L² bound on the candidate; the ν-dependence is handled by rescaling only inside the non-existence proof. No build was run and no attempt at deriving new theorems was made."
+  },
+  {
+   "what": "Exact line of the `Δ` prefix notation for Mathlib's `Laplacian` class",
+   "why": "Located the declaring file (Mathlib/Analysis/Distribution/DerivNotation.lean) and the instance actually used (InnerProductSpace.instLaplacian, Laplacian.lean:137-139) but did not pin the notation line; immaterial to the diff."
+  },
+  {
+   "what": "The Euler main results named in formalization.yaml (`Euler.euler_breakdown_R3`, Euler/Solution.lean:33; `Euler.exists_compact_smooth_euler_singularity`, Euler/Solution.lean:43)",
+   "why": "They formalize the separate Euler paper, not the Navier–Stokes Theorem 1.1 / Corollary 10.6 / Fefferman (C),(D) that this leg diffs; listed here for completeness, not diffed."
+  },
+  {
+   "what": "Axiom footprint (#print axioms at ComparatorSolution.lean:31-32) and sorry-freeness",
+   "why": "Out of scope for the statement diff and requires a build; a plain grep of NavierStokes/ and Euler/ (excluding ComparatorChallenges/) found no `axiom` declarations and no `sorry`, but that is not a kernel check."
+  }
+ ]
+}

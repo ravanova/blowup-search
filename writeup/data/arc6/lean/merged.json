@@ -1,0 +1,561 @@
+{
+ "schema": "arc6_lean_merged_v1",
+ "leg": 431,
+ "present": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "absent": [],
+ "answers": {
+  "1_build": {
+   "gate_answer": "Toolchain leanprover/lean4:v4.34.0-rc2 (Lean 4.34.0-rc2, commit 6a10ac8c, Lake 5.0.0-src+6a10ac8) on clone HEAD 8937a8f4 with mathlib rev 85e3a25e006c35636f0e53b0e9296caca2685bc0, 4 cores, 15 GB RAM. `timeout 120 lake exe cache get` did NOT hit a proxy/502 error this time: it reached lakecache.blob.core.windows.net and downloaded 441 of 8747 .ltar files (23 MB, 94 decompressed, +93 oleans) before the 120 s cap killed it (exit 124). `lake build` then ran 813 s (06:06:33Z-06:20:06Z) without any error, advancing Lake's counter from [2128/2156] to [2552/2613], writing 373 logged mathlib modules (oleans 3608 -> 3982, 27.5 modules/min), and was killed by me at the coordinator's request at ~13.6 min, well before the 40 min cap. Mathlib stands at 3580/8370 oleans; of the project's own 2484 modules only NavierStokes.ProblemStatement (a leaf statement module, no 'Built' line, olean written at the kill) exists. Projected remaining at the measured rate is about 264 min (4.4 h) as an optimistic upper-bound-count estimate. What IS established: the toolchain installs, the project's dependency graph resolves, and roughly 43% of mathlib compiles cleanly from source in this container. What is NOT established: that the project builds, that NavierStokes.Comparator.navier_stokes_breakdown_R3 type-checks, or what axioms it depends on -- `lake env lean` with `import NavierStokes` fails with 'object file .../NavierStokes.olean of module NavierStokes does not exist', so the kernel check is NOT-ESTABLISHED because the module was never reached, not because anything failed to check.",
+   "toolchain": "leanprover/lean4:v4.34.0-rc2 (Lean version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)",
+   "mathlib_rev": "85e3a25e006c35636f0e53b0e9296caca2685bc0",
+   "cache_get_exit": 124,
+   "counter_start": "[2128/2156]",
+   "counter_end": "[2552/2613]",
+   "oleans_before": 3608,
+   "oleans_after": 3982,
+   "wall_s": 813,
+   "modules_per_min": 27.5,
+   "projected_remaining_min": 264,
+   "project_modules_built": [
+    "NavierStokes.ProblemStatement -- olean present at .lake/build/lib/lean/NavierStokes/ProblemStatement.olean (mtime 2026-09-10T06:20:12Z), written at the moment lake was killed; there is NO 'Built NavierStokes.ProblemStatement' line in the log. It imports only Mathlib.Analysis.Calculus.ContDiff.Comp and Mathlib.Analysis.InnerProductSpace.PiL2, and `lake env lean` on a file importing it succeeded (exit 0), so this leaf module is loadable. It is the problem-statement module, not the proof."
+   ],
+   "kernel_verdict": "NOT-ESTABLISHED",
+   "kernel_reason": "The NavierStokes library was never compiled: after 13.6 min of source build (on top of a prior 54 min session and a partial cache download) only 3580 of 8370 mathlib modules have oleans and 1 of 2484 project modules (the problem statement, not the proof) exists. Lean therefore cannot load the module and `#print axioms` on the main theorem never ran. Nothing here checks, or fails to check, the theorem; it is simply unreached. The axiom list in formalization.yaml (propext, Classical.choice, Quot.sound) is the authors' claim, not a measurement made here."
+  },
+  "2_statement": {
+   "gate_answer": {
+    "relation": "weaker",
+    "why": "The top-level Lean theorem `NavierStokes.Comparator.navier_stokes_breakdown_R3` is a verbatim transcription of Fefferman's alternative (C) — '∀ν>0 ∃ u₀,f in decay classes (4),(5) with no global smooth bounded-energy solution' — i.e. it formalizes only the paper's one-line 'Consequently' corollary of Theorem 1.1 and none of the displayed statement: it asserts no blowing-up solution, no compact K, no support containment, no bounded energy of the constructed flow, no limsup L∞ = ∞, no fixed singular time t=1, and it quantifies an arbitrary decaying u₀ and a merely polynomially-decaying f rather than u₀=0 and f ∈ C∞_c(R³×(0,∞)); every one of these Lean clauses is implied by Theorem 1.1 (with u₀=0 and the compactly supported f), while the Lean statement does not imply the existence clauses, so it is strictly weaker as a proposition. The only clause-for-clause match of Theorem 1.1 in the repository, `NavierStokesR3.ProblemStatement.breakdownStatement` (R3/ProblemStatement.lean:150), is a definition that no theorem proves; the closest proved existence statement, `R3CompactCandidate.selected_compact_candidate` (viscosity one only), lacks the sup L² < ∞ clause and uses two separate support sets."
+   },
+   "main_theorems": [
+    "NavierStokes.Comparator.navier_stokes_breakdown_R3",
+    "NavierStokes.Comparator.navier_stokes_breakdown_periodic"
+   ],
+   "diff_vs_theorem_1_1": {
+    "∀ ν > 0": "PRESENT",
+    "f ∈ C∞_c(R³×(0,∞); R³)": "WEAKER",
+    "∃ compact K ⊂ R³": "ABSENT",
+    "smooth velocity and pressure u, p on R³×[0,1)": "ABSENT",
+    "∂_t u + (u·∇)u − νΔu + ∇p = f (with force, viscosity ν)": "DIFFERENT",
+    "∇·u = 0": "DIFFERENT",
+    "u(·,0) = 0": "DIFFERENT",
+    "supp u(·,t) ∪ supp p(·,t) ⊂ K for every 0 ≤ t < 1": "ABSENT",
+    "sup_{0≤t<1} ‖u(t)‖_{L²(R³)} < ∞": "ABSENT",
+    "limsup_{t↑1} ‖u(t)‖_{L∞(R³)} = ∞": "ABSENT",
+    "paper's 'Consequently' sentence: no smooth (u,P) on R³×[0,∞) with same force and datum and uniformly bounded kinetic energy": "PRESENT",
+    "Things Lean says that the paper's Theorem 1.1 does not": "DIFFERENT"
+   },
+   "diff_vs_fefferman_C": {
+    "Take ν > 0 and n = 3": "PRESENT",
+    "∃ smooth, divergence-free u◦ on R³ satisfying (4)": "PRESENT",
+    "∃ smooth f on R³×[0,∞) satisfying (5)": "PRESENT",
+    "no solutions (p,u) of (1) on R³×[0,∞)": "PRESENT",
+    "(2) div u = 0 on R³×[0,∞)": "PRESENT",
+    "(3) u(x,0) = u◦(x)": "PRESENT",
+    "(6) p, u ∈ C∞(R³×[0,∞))": "PRESENT",
+    "(7) ∫_{R³} |u(x,t)|² dx < C for all t ≥ 0 (bounded energy)": "PRESENT",
+    "Overall shape: ∃ u◦ f (classes) such that ¬∃ (p,u) (solution class)": "PRESENT"
+   },
+   "diff_vs_fefferman_D": {
+    "Take ν > 0 and n = 3": "PRESENT",
+    "∃ smooth, divergence-free u◦ on R³ satisfying (8): u◦(x+e_j) = u◦(x)": "PRESENT",
+    "∃ smooth f on R³×[0,∞) satisfying (8): f(x+e_j,t) = f(x,t), and (9): |∂^α_x ∂^m_t f| ≤ C(1+|t|)^{-K}": "PRESENT",
+    "no solutions (p,u) of (1),(2),(3)": "PRESENT",
+    "(10) u(x,t) = u(x+e_j,t) on R³×[0,∞)": "PRESENT",
+    "(11) p, u ∈ C∞(R³×[0,∞))": "PRESENT",
+    "periodic pressure (NOT in (10) on page 2; added by the Clay errata, PDF page 6: 'The further condition p(x+e_j,t) = p(x,t) should be made explicit')": "STRONGER"
+   },
+   "could_not_determine": [
+    {
+     "what": "Whether the ∀ν existence statement of Theorem 1.1 (a ν-viscosity blowing-up solution with sup‖u(t)‖_L² < ∞) is provable from what the repo proves",
+     "why": "Not a statement question; the repo proves the existence form only at viscosity one (`selected_compact_candidate`, `selected_candidate`) and without any L² bound on the candidate; the ν-dependence is handled by rescaling only inside the non-existence proof. No build was run and no attempt at deriving new theorems was made."
+    },
+    {
+     "what": "Exact line of the `Δ` prefix notation for Mathlib's `Laplacian` class",
+     "why": "Located the declaring file (Mathlib/Analysis/Distribution/DerivNotation.lean) and the instance actually used (InnerProductSpace.instLaplacian, Laplacian.lean:137-139) but did not pin the notation line; immaterial to the diff."
+    },
+    {
+     "what": "The Euler main results named in formalization.yaml (`Euler.euler_breakdown_R3`, Euler/Solution.lean:33; `Euler.exists_compact_smooth_euler_singularity`, Euler/Solution.lean:43)",
+     "why": "They formalize the separate Euler paper, not the Navier–Stokes Theorem 1.1 / Corollary 10.6 / Fefferman (C),(D) that this leg diffs; listed here for completeness, not diffed."
+    },
+    {
+     "what": "Axiom footprint (#print axioms at ComparatorSolution.lean:31-32) and sorry-freeness",
+     "why": "Out of scope for the statement diff and requires a build; a plain grep of NavierStokes/ and Euler/ (excluding ComparatorChallenges/) found no `axiom` declarations and no `sorry`, but that is not a kernel check."
+    }
+   ]
+  },
+  "3_census": {
+   "gate_answer": "Source-level census of NavierStokesAndEuler at 8937a8f (2486 project .lean files, 616,276 lines, Mathlib 85e3a25e / v4.34.0-rc2): 4 `sorry` in code, all four being the intentional Comparator challenge placeholders in ComparatorChallenges/NavierStokes.lean (lines 277, 284) and ComparatorChallenges/Euler.lean (lines 88, 184), which no solution module imports; 0 `sorry` in any of the 2409 project modules reachable from the two main-theorem files; 1 `sorry` in a docstring; 0 `admit`; 0 `axiom` declarations (4 prose mentions in comments); 0 `opaque`, 0 `unsafe`, 0 `implemented_by`, 0 `extern`, 0 `native_decide`, 0 `partial def`, 0 `set_option` of any kind (hence 0 maxHeartbeats / maxRecDepth / autoImplicit / linter overrides), 0 macros/syntax/elab, 0 exact?/apply?-style tactics; 205 kernel-checked `decide` calls and one `infer_instance`-derived Decidable instance; 8285 `noncomputable` markers (informational); 157 explicit Classical.choice uses (a permitted axiom). Import closures: NavierStokes/ComparatorSolution.lean reaches 579 project modules, Euler/Solution.lean reaches 1828; both closures contain `import Mathlib` (whole library), and neither imports any non-Mathlib package directly. Two hygiene observations, not trust extensions: the NavierStokes library compiles with Lean's default autoImplicit=true (Euler sets it false), and Euler/Solution.lean adds a local `CompletePartialOrder.toSupSet` instance right before its main theorem to steer `⨆` elaboration. Kernel-level verdict NOT-ESTABLISHED: no project oleans exist, the Mathlib cache is partial, and nothing was built, so the claimed axiom set {propext, Classical.choice, Quot.sound}, kernel acceptance, and challenge/solution statement identity remain unverified. A zero source-level sorry count is a necessary condition for a kernel-checked proof, not evidence of one.",
+   "counts": {
+    "sorry_in_code": 4,
+    "sorry_in_comments": 1,
+    "sorry_in_strings": 0,
+    "admit": 0,
+    "axiom": 0,
+    "axiom_in_comments": 4,
+    "opaque": 0,
+    "opaque_in_comments": 1,
+    "unsafe": 0,
+    "implemented_by": 0,
+    "extern": 0,
+    "native_decide": 0,
+    "decide": 205,
+    "decide_note": "205 occurrences in 82 files, all of the form `by decide` / `(by decide : ...)` / `<;> decide`, i.e. the kernel-evaluated `decide` tactic on closed Nat/Fin propositions. `decide` is kernel-checked and adds no trust; only `native_decide` would (0).",
+    "custom_Decidable_instances": 1,
+    "custom_Decidable_instances_note": "Exactly one: Euler/PacketKnownPieces.lean:32 `instance (k : KnownPiece) (p i : ℕ) : Decidable (k.active p i) := by cases k <;> unfold active <;> infer_instance` -- derived by infer_instance from Nat.decLe/decLt, not hand-written evaluation; no trust extension.",
+    "partial_def": 0,
+    "noncomputable": 8285,
+    "noncomputable_breakdown": {
+     "noncomputable section": 2448,
+     "noncomputable def/abbrev/instance": 5837
+    },
+    "maxHeartbeats": 0,
+    "maxRecDepth": 0,
+    "set_option_any": 0,
+    "macro_rules": 0,
+    "macro": 0,
+    "syntax": 0,
+    "elab": 0,
+    "notation_local": 156,
+    "notation_note": "156 `local notation`/`notation` lines in 46 files (e.g. ℝ³ => EuclideanSpace ℝ (Fin 3)); notations are elaboration sugar, not trust.",
+    "sorryAx_mentions": 0,
+    "ofReduceBool_or_trustCompiler_mentions": 0,
+    "lcProof_unsafeCast_mentions": 0,
+    "csimp_attributes": 0,
+    "search_tactics_exact?_apply?_simp?_aesop?": 0,
+    "search_tactics_note": "Regex `\\bhint\\b` produced 161 hits, all the identifier `hint` in `have hint := ...` (a hypothesis name), none the `hint` tactic; exact?/apply?/simp?/aesop? occur 0 times.",
+    "print_axioms_commands": 4,
+    "attribute_local_instance": 11,
+    "local_or_scoped_instance_declarations": 145,
+    "Classical_choice_explicit_uses": 157,
+    "Classical_choice_note": "157 explicit `Classical.choice` term uses in 66 files (in definitions/proofs). Classical.choice is one of the three permitted standard axioms; informational only.",
+    "lean3_constant_keyword": 0,
+    "lean3_constant_note": "Regex `\\bconstant\\b` hits 182 code positions, all the identifier `constant` (structure fields / defs such as `def constant : ℝ := ...`), never the Lean 3 `constant` command, which does not exist in Lean 4."
+   },
+   "axiom_declarations": [],
+   "sorry_declarations": [
+    {
+     "file": "ComparatorChallenges/NavierStokes.lean",
+     "line": 277,
+     "declaration": "NavierStokes.Comparator.navier_stokes_breakdown_R3",
+     "role": "Comparator CHALLENGE placeholder (statement to be proved), not part of the solution"
+    },
+    {
+     "file": "ComparatorChallenges/NavierStokes.lean",
+     "line": 284,
+     "declaration": "NavierStokes.Comparator.navier_stokes_breakdown_periodic",
+     "role": "Comparator CHALLENGE placeholder"
+    },
+    {
+     "file": "ComparatorChallenges/Euler.lean",
+     "line": 88,
+     "declaration": "Euler.euler_breakdown_R3",
+     "role": "Comparator CHALLENGE placeholder"
+    },
+    {
+     "file": "ComparatorChallenges/Euler.lean",
+     "line": 184,
+     "declaration": "Euler.exists_compact_smooth_euler_singularity",
+     "role": "Comparator CHALLENGE placeholder"
+    }
+   ],
+   "import_closure": {
+    "NavierStokes/ComparatorSolution.lean": {
+     "n_project_modules": 579,
+     "n_mathlib_direct_imports": 0,
+     "n_distinct_mathlib_modules_imported_by_any_module_in_closure": 209,
+     "closure_contains_import_Mathlib_whole": true
+    },
+    "Euler/Solution.lean": {
+     "n_project_modules": 1828,
+     "n_mathlib_direct_imports": 0,
+     "n_distinct_mathlib_modules_imported_by_any_module_in_closure": 190,
+     "closure_contains_import_Mathlib_whole": true
+    },
+    "NavierStokes.lean (library root)": {
+     "n_project_modules": 580,
+     "note": "root = ComparatorSolution closure + ComparatorSolution itself"
+    },
+    "Euler.lean (library root)": {
+     "n_project_modules": 1770,
+     "reaches_Euler.Solution": false,
+     "note": "The Euler library root does NOT import Euler.Solution; Euler.Solution reaches Euler.EulerSingularity. All Euler/*.lean are nevertheless built by the lakefile glob `Euler.+`."
+    },
+    "ComparatorChallenges/NavierStokes.lean": {
+     "n_project_modules": 0
+    },
+    "ComparatorChallenges/Euler.lean": {
+     "n_project_modules": 0
+    },
+    "closure_stats": {
+     "NS_closure_total_lines": 380102,
+     "Euler_closure_total_lines": 212155,
+     "NS_and_Euler_closures_disjoint": true,
+     "project_modules_total_NS_plus_Euler": 2482,
+     "reachable_from_either_main_file": 2409,
+     "unreachable_from_both_main_files": 73,
+     "unreachable_list_note": "Modules under NavierStokes/ or Euler/ not in the import closure of either main file (complete list). They are dead with respect to the main theorems; they contain no sorry/axiom either (the global counts above cover all 2486 files). NavierStokes.R3 is the file NavierStokes/R3.lean; the NavierStokes/R3/ directory modules are reachable."
+    },
+    "import_Mathlib_whole_note": "NavierStokes/ComparatorDefinitions.lean:20 and Euler/SolutionDefinitions.lean:20 (both in the respective main closures) contain `import Mathlib`, which imports all 8370 Mathlib modules. Therefore the effective Mathlib closure of each main theorem is the WHOLE of Mathlib at rev 85e3a25e; the per-closure lists of 209 / 190 distinct explicitly-named Mathlib modules are a strict subset of that. n_mathlib_direct_imports for both main files is 0 because ComparatorSolution.lean and Solution.lean import only project modules.",
+    "non_mathlib_dependencies": "No project module imports Comparator, Batteries, Aesop, Qq, ProofWidgets, Plausible, LeanSearchClient, ImportGraph, Cli or lean4export directly (all external imports are Mathlib.* or Mathlib). Those packages enter only transitively through Mathlib."
+   },
+   "scope": {
+    "project_dirs": [
+     "NavierStokes.lean",
+     "NavierStokes",
+     "Euler.lean",
+     "Euler",
+     "ComparatorChallenges"
+    ],
+    "n_lean_files": 2486,
+    "n_lean_files_by_dir": {
+     "NavierStokes.lean+NavierStokes/": 644,
+     "Euler.lean+Euler/": 1840,
+     "ComparatorChallenges/": 2
+    },
+    "total_lines": 616276,
+    "approx_declaration_counts_line_start_regex": {
+     "theorem": 37301,
+     "lemma": 29,
+     "def": 10540,
+     "instance": 39,
+     "structure": 627,
+     "abbrev": 863,
+     "inductive": 10
+    }
+   },
+   "kernel_level": {
+    "verdict": "NOT-ESTABLISHED",
+    "reason": "`.lake/build` for the project's own modules does not exist (ls: No such file or directory); 0 project .olean files. The Mathlib package cache is only partial: 3114 of 8370 Mathlib .olean files are present and `Mathlib.olean` (the whole-library module, which both main closures import via `import Mathlib`) is absent. `#print axioms` requires elaborating and kernel-checking the full import closure (580 project modules / 380k lines for NS, 1829 modules / 212k lines for Euler, plus all of Mathlib), which per the brief was not to be attempted. Consequently: (a) that the four main theorems are accepted by the Lean kernel, (b) that their axiom set is exactly {propext, Classical.choice, Quot.sound} as formalization.yaml claims, and (c) that the solution statements are identical to the Comparator challenge statements, are all UNVERIFIED by this agent. Only the source-level census below is established."
+   },
+   "mathlib_rev": "85e3a25e006c35636f0e53b0e9296caca2685bc0"
+  },
+  "4_comparator": {
+   "gate_answer": "Worked from source at clone HEAD 8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538. The ComparatorChallenges directory is the project's Comparator setup: two Mathlib-only challenge modules with sorry'd target theorems (NS: navier_stokes_breakdown_R3 / navier_stokes_breakdown_periodic in namespace NavierStokes.Comparator, adapted from Formal Conjectures commit 8bf45ed7; Euler: euler_breakdown_R3 and the project-authored exists_compact_smooth_euler_singularity in namespace Euler), two JSON configs naming those theorems and solution modules NavierStokes.ComparatorSolution / Euler.Solution with permitted axioms propext/Quot.sound/Classical.choice and nanoda enabled, and a README that just says how to run leanprover/comparator. Everything the README intends that can be done from source PASSES: the challenge definitions are byte-identical to the project-side copies (NS 211 lines, Euler 96 lines), the four target theorem statements are byte-identical between challenge and solution, the solution modules state the theorems in terms of those copied definitions (ComparatorSolution.lean L16-26, Euler/Solution.lean L33-56) with no clashing declarations, and no module in the solutions' import closures (580 and 1829 project modules) imports a ComparatorChallenges module. What is NOT established: the comparator was never run here (comparator, landrun, lean4export, nanoda_bin absent; no build; no logs in the clone), so term-level statement equality, axiom footprint and kernel acceptance remain unverified — and the project's own `attribute [local instance] CompletePartialOrder.toSupSet` workaround shows textual identity does not by itself guarantee identical elaboration; the definitions could not be compared to the Formal Conjectures upstream (no copy, three inconsistent pins); and by construction the mechanism cannot say whether these definitions faithfully encode Clay (C)/(D), nor is the Euler challenge independent of the project (its second theorem and its definitions are the project's own restatement). The JSON files record no hashes or statement text, so the 'byte-for-byte against the JSON' check is inapplicable.",
+   "checks": [
+    [
+     "Run the README's intended check (`lake exe comparator ComparatorChallenges/*.json`)",
+     "NOT-ESTABLISHED"
+    ],
+    [
+     "Byte-for-byte match of comparator statement text against what the JSON records",
+     "NOT-ESTABLISHED"
+    ],
+    [
+     "Challenge definitions vs project-side copy (Navier-Stokes)",
+     "PASS"
+    ],
+    [
+     "Challenge definitions vs project-side copy (Euler)",
+     "PASS"
+    ],
+    [
+     "Target theorem statements, challenge vs solution (Navier-Stokes)",
+     "PASS"
+    ],
+    [
+     "Target theorem statements, challenge vs solution (Euler)",
+     "PASS"
+    ],
+    [
+     "Main theorems are stated in terms of the comparator's definitions (which declarations, where)",
+     "PASS"
+    ],
+    [
+     "Challenge module is never imported by the solution (the project's own claim, ComparatorSolution.lean L8 and Euler/Solution.lean L11-12; also Comparator assumption 1, that the challenge import closure is trusted)",
+     "PASS"
+    ],
+    [
+     "Comparator definitions are the Formal Conjectures definitions",
+     "NOT-ESTABLISHED"
+    ],
+    [
+     "Axiom footprint matches permitted_axioms",
+     "NOT-ESTABLISHED"
+    ],
+    [
+     "Comparator tool identity and what a pass means",
+     "PASS"
+    ]
+   ],
+   "n_pass": 7,
+   "n_not_established": 4,
+   "n_fail": 0,
+   "what_it_does_not_establish": [
+    "That the comparator definitions are a correct formalization of the Clay (C)/(D) statements. Comparator only checks that the solution proves the same Lean proposition as the challenge; the meaning of that proposition (derivWithin on Ici 0 for the time derivative, ContDiffOn on univ ×ˢ Ici 0 for smoothness, MemLp (‖v · t‖) 2 plus a strict uniform bound ∃ E, ∀ t ≥ 0, ∫‖v‖² < E for finite energy, decay via iteratedFDerivWithin bounds, pressure periodicity per the Clay errata) is inherited from the Formal Conjectures authors' choices as adapted by the project, and is outside the comparator's scope.",
+    "Independence of the challenge from the proving party. Both challenge files carry the header 'modified from its original form' and were adapted by the project (namespace, notation, inlining). The Euler challenge is not a DeepMind statement at all: it is the project's own specialization (zero viscosity, zero force), and its second target theorem exists_compact_smooth_euler_singularity together with toL2, SobolevSmoothOn, EulerSobolevExistenceAndSmoothnessR3On, vorticity, velocityC1Norm, vorticityNorm is explicitly 'the following version of EulerPacketInduction.exists_compact_smooth_euler_singularity' — authored by the project. For that theorem the comparator would compare the project's statement against the project's own restatement.",
+    "That the upstream Formal Conjectures definitions were copied faithfully. No upstream copy is present; the files cite three different pins (8bf45ed7…, 8323e878…, 'main'); a reviewer must fetch upstream at the cited commit and diff.",
+    "A kernel check. Nothing in the clone shows the comparator (or `lake build`) was ever run: no .lake/build, no comparator binary, no logs; formalization.yaml's review status is 'self-assessed'. Textual identity of statements and definitions (verified here) is necessary but not sufficient for Comparator's term-level equality, since elaboration depends on the import closure and instance resolution — the project itself had to add `attribute [local instance] CompletePartialOrder.toSupSet` (Euler/Solution.lean L41) to make the reference's ENNReal supremum elaborate the same way. Whether the two environments actually export equal terms is only known after running the tool.",
+    "That the proofs are sorry-free or use only the permitted axioms. The solution modules contain 0 `sorry` tokens at the top level, but the 580- and 1829-module import closures were not scanned for sorry/axiom declarations here, and `#print axioms` output requires a build.",
+    "Anything about how the witnesses are chosen. The comparator statements quantify ∀ nu > 0, ∃ u₀ f (NS) and ∃ u₀ (Euler). The project's bridge discharges (C) and (D) with zero initial velocity `fun _ => 0` and a viscosity-rescaled force `toComparator (rescaledForce ν f)` (NavierStokes/ComparatorR3Theorem.lean L30, NavierStokes/ComparatorTheorem.lean L38); this is permitted by the statement (and by the Clay text, which lets both u° and f be chosen) but the comparator says nothing about unforced or nonzero-initial-data Navier-Stokes. No quantifier mismatch between the submission and the challenge was found: the submission restates the challenge verbatim.",
+    "Correctness of the translation between the project's internal vocabulary (NavierStokes.ProblemStatement: time-first SpaceTime, VelocityField, spatialDivergence) and the comparator's (space-first curried functions, Comparator.divergence). That translation (NavierStokes/ComparatorBridge.lean, 253 lines; ComparatorR3Bridge.lean, 89 lines; Euler/*ComparatorBridge* modules) is part of the proof term and is checked only as a proof, not audited by the comparator as a statement.",
+    "Comparator's own trusted base: it assumes the challenge's import closure (here all of Mathlib at the pinned rev), the lakefile, the mathlib cache, landrun's sandbox, and at least one of the Lean or nanoda kernels are trustworthy (tool README, assumptions 1-6). The lakefile.toml in this clone sets `leanOptions = { autoImplicit = false, warningAsError = true }` only for the Euler lib; the NavierStokes and ComparatorChallenges libs use defaults."
+   ]
+  },
+  "5_coverage": {
+   "gate_answer": "Measured at source level (no build), the OpenAI Lean project (34,605 declarations in 644 files, no sorry, no axiom declarations) contains counterparts for all 79 numbered statements: 74 are FORMALIZED (a Lean declaration, or a small set of them, states the same mathematical content; 27 by a single declaration, 47 distributed over several) and 5 are PARTIAL (Theorem 3.1, whose four items appear separately and whose growth rate is weakened to unbounded speed; Definition 3.3, a parameter-ordering convention realised only by quantifier order; Lemma 4.4, whose general Lipschitz estimate appears only in the special forms used; Corollary 7.3 and Lemma 9.7, which are realised structurally by a single common domain rather than stated). None is ABSENT or STATED-ONLY. The top-level content of Theorem 1.1 and Corollary 10.6 is proved in the Clay (C)/(D) forms, but the Lean route differs: periodic candidate first, whole-space fields extracted afterwards, and the local-field theorem merged into the final assembly. The Lean comments cite a differently numbered draft, so this mapping rests on content, and \"FORMALIZED\" is not a kernel check nor a claim that the Lean proofs follow the paper's proofs.",
+   "summary": {
+    "FORMALIZED": 74,
+    "PARTIAL": 5,
+    "STATED-ONLY": 0,
+    "ABSENT": 0,
+    "UNCLEAR": 0,
+    "total": 79,
+    "fraction_formalized": 0.9367,
+    "fraction_formalized_or_partial": 1.0,
+    "formalized_single_declaration": 27,
+    "formalized_distributed_over_several_declarations": 47,
+    "per_section": {
+     "1": {
+      "FORMALIZED": 1
+     },
+     "3": {
+      "PARTIAL": 2,
+      "FORMALIZED": 1
+     },
+     "4": {
+      "FORMALIZED": 10,
+      "PARTIAL": 1
+     },
+     "5": {
+      "FORMALIZED": 5
+     },
+     "6": {
+      "FORMALIZED": 6
+     },
+     "7": {
+      "FORMALIZED": 7,
+      "PARTIAL": 1
+     },
+     "8": {
+      "FORMALIZED": 8
+     },
+     "9": {
+      "FORMALIZED": 8,
+      "PARTIAL": 1
+     },
+     "10": {
+      "FORMALIZED": 6
+     },
+     "A": {
+      "FORMALIZED": 10
+     },
+     "B": {
+      "FORMALIZED": 9
+     },
+     "C": {
+      "FORMALIZED": 3
+     }
+    },
+    "partial_ids": [
+     "Theorem 3.1",
+     "Definition 3.3",
+     "Lemma 4.4",
+     "Corollary 7.3",
+     "Lemma 9.7"
+    ]
+   },
+   "n_map": 79,
+   "lean_n_declarations": 34605,
+   "lean_n_files": 644,
+   "sorry_count_in_source": 0,
+   "import_closure_of_main_theorem": {
+    "root": "NavierStokes/ComparatorSolution.lean",
+    "n_files": 580,
+    "n_decls": 32435,
+    "n_files_outside": 64,
+    "n_decls_outside": 2170,
+    "files_outside": [
+     "NavierStokes",
+     "ActualCorrectionModels",
+     "ActualParticularDynamicsNoOptions",
+     "ActualParticularPhysicalData",
+     "BaseWitnessClosure",
+     "BoundaryCoordinates",
+     "CandidateAssembly",
+     "CorrectionInitializationNoOptions",
+     "CycleContinuationInvariant",
+     "DiagonalJetBoundsNoOptions",
+     "EndpointLimits",
+     "GraphRestriction",
+     "InitialDyadicSource",
+     "InitialHarmonicContinuation",
+     "MeanStageContinuation",
+     "NativeDyadicRegularity",
+     "R3",
+     "R3AbsorbedBoundary",
+     "R3CompactEnergy",
+     "R3CompactIntegration",
+     "R3CompactParametricIntegral",
+     "R3ConvolutionYoung",
+     "R3CutoffSobolev",
+     "R3CutoffTestFields",
+     "R3DifferenceStress",
+     "R3EnergyAbsorption",
+     "R3EnergyBoundary",
+     "R3EnergyNorms",
+     "R3GaussianPressure",
+     "R3HarmonicPressure",
+     "R3LocalEnergyEvolution",
+     "R3LocalizedEnergyLimit",
+     "R3LocalizedPressure",
+     "R3LocalizedPressureTests",
+     "R3PhysicalPressureBound",
+     "R3PositiveTests",
+     "R3PressureCommutator",
+     "R3PressureCutoff",
+     "R3PressureFlux",
+     "R3PressureFourier",
+     "R3PressureKernel",
+     "R3PressureNearKernel",
+     "R3PressurePairing",
+     "R3RieszApproximation",
+     "R3RieszKernel",
+     "R3SmoothPressure",
+     "R3SpaceTime",
+     "R3SpaceTimeApproximation",
+     "R3SpaceTimeCalculus",
+     "R3SpaceTimeHarmonic",
+     "R3SpaceTimePressure",
+     "R3SpatialConvolution",
+     "R3StressPressureEstimate",
+     "R3TimeLocalization",
+     "R3UniformBounds",
+     "R3WeakPressure",
+     "R3WeightedLp",
+     "RadialPrimitive",
+     "SchwartzCompactApproximation",
+     "SignedRequestContinuation",
+     "SupportedActualContext",
+     "SupportedParameterExtension",
+     "WaveDataReindex",
+     "WaveStageContinuation"
+    ]
+   },
+   "per_section": {
+    "1": {
+     "FORMALIZED": 1
+    },
+    "3": {
+     "PARTIAL": 2,
+     "FORMALIZED": 1
+    },
+    "4": {
+     "FORMALIZED": 10,
+     "PARTIAL": 1
+    },
+    "5": {
+     "FORMALIZED": 5
+    },
+    "6": {
+     "FORMALIZED": 6
+    },
+    "7": {
+     "FORMALIZED": 7,
+     "PARTIAL": 1
+    },
+    "8": {
+     "FORMALIZED": 8
+    },
+    "9": {
+     "FORMALIZED": 8,
+     "PARTIAL": 1
+    },
+    "10": {
+     "FORMALIZED": 6
+    },
+    "A": {
+     "FORMALIZED": 10
+    },
+    "B": {
+     "FORMALIZED": 9
+    },
+    "C": {
+     "FORMALIZED": 3
+    }
+   },
+   "partial_ids": [
+    "Theorem 3.1",
+    "Definition 3.3",
+    "Lemma 4.4",
+    "Corollary 7.3",
+    "Lemma 9.7"
+   ],
+   "could_not_determine": [
+    {
+     "what": "Kernel-level status (successful build, and that the two main theorems depend only on propext/Classical.choice/Quot.sound as formalization.yaml claims)",
+     "why": "No build was run and no #print axioms output was observed; the statement is taken from formalization.yaml only."
+    },
+    {
+     "what": "Whether the literal target proposition NavierStokesR3.ProblemStatement.breakdownStatement (the paper's Theorem 1.1 with an explicit energy_bounded field) is provable from what is proved",
+     "why": "It is declared but never proved or referenced outside its module; the proved theorem is the Clay-(C) form via R3CompactCandidate.Properties, whose energy bound is derived from compact support. Equivalence is plausible but was not checked."
+    },
+    {
+     "what": "Exact numerical exponents in Lemma 4.9/(4.32), Proposition A.10/(A.48)-(A.49) (e^{-4/delta^2} delta^{-3}, delta^{3}), Lemma 6.3 (S_l^9, S_l^3), Lemma 8.6/(8.19) (derivative loss 4), and the paper's 2h(N+1) vs Lean's h(J+1) order normalisation in Proposition 5.3",
+     "why": "The relevant Lean modules (TerminalEdgeFactor with 235 declarations, SlotColoring, TorusInverse, SlowBorelBase) were only read at the level of their main statements; the specific exponents were not traced."
+    },
+    {
+     "what": "For the 41 distributed matches, whether the union of Lean hypotheses is no stronger than the paper's hypotheses",
+     "why": "Hypotheses of Lean declarations are expressed through project-specific records (Witness, Invariant, StripData, Specification) whose full unfolding was not performed."
+    },
+    {
+     "what": "Which version of the manuscript the Lean comments cite",
+     "why": "Cited labels (Lemma 3.5, Proposition 10.3, Proposition 11.7, Part I/II, sections 4.4-11) do not match the 79-statement index; the correspondence given in citation_style was inferred from content only."
+    },
+    {
+     "what": "Evenness of Pi_0 and the sign of eta*Pi_0'(eta) in Lemma A.5",
+     "why": "Not located among the PressureDatum theorems read; the bound, negativity and analyticity were."
+    }
+   ],
+   "route_differences": "(1) Order of results: the Lean project constructs a PERIODIC viscosity-one candidate first (ActualCandidateAssembly.selected_candidate proving ProblemStatement.candidateStatement) and derives alternative (D) from periodic uniqueness/maximal lifespan; the whole-space alternative (C) is then obtained by extracting the compactly supported fields behind the periodisation (R3CompactCandidate.of_localized_fields) and applying whole-space finite-energy uniqueness. The paper proves Theorem 1.1 on R^3 first and obtains Corollary 10.6 by rescaling into the fundamental cube and periodising. (2) There is no Lean counterpart of the local-field theorem (Theorem 3.1) on Omega_* as a separate statement: MixedCandidateAssembly.candidate_of_finite_stages goes from finite correction stages directly to CandidateProperties, folding Proposition 9.9, Proposition 10.1 (cut potential before curl, direct angular field cut separately, time switch), Lemma 10.2 (joint jet limits) and Lemma 10.3 (Borel extension) into one assembly; the inner growth (3.6)/(10.21) is used only as unbounded speed (Tendsto atTop), not as an asymptotic rate. (3) Viscosity is fixed to one throughout the construction and restored by the scaling in ComparatorBridge (force nu^2 f(nu t, x)), essentially the paper's (10.22). (4) Lemma 10.5 (weak-strong uniqueness without growth assumptions on the competitor's pressure) is proved by a full pressure-recovery/Riesz-commutator argument (NavierStokes/R3/) rather than the paper's short energy argument. (5) The Lean cites a \"candidate manuscript\" with different numbering (Part I periodic with sections 3-11 and Appendix A; \"Part II\" whole space), so the Lean was written against an earlier draft; intermediate statements are organised by construction stage (nominal profile Witness structures, correction-cycle Invariant records, weighted classes on StripData) rather than by the paper's lemma list, and many paper lemmas correspond to several Lean declarations (see match_form).",
+   "beyond_the_79": [
+    "Clay-form top-level theorems NavierStokes.Comparator.navier_stokes_breakdown_R3 and navier_stokes_breakdown_periodic (ComparatorSolution.lean), stated with the Formal-Conjectures reference definitions (InitialVelocityConditionDecay/Periodic, ForceConditionDecay/Periodic, NavierStokesExistenceAndSmoothnessRn/Periodic) copied in ComparatorDefinitions.lean; ComparatorBridge/ComparatorR3Bridge translate operators, rescale viscosity (a viscosity-one candidate is rescaled to every nu>0) and normalise a hypothetical global solution back to viscosity one.",
+    "The periodic viscosity-one target NavierStokes.ProblemStatement.candidateStatement/CandidateProperties (smooth, unit-periodic, zero datum, compact future time support of the force, exact PDE on (0,1), SpeedUnboundedAtOne) and its proof ActualCandidateAssembly.selected_candidate; the periodic route (D) via PeriodicUniqueness.classical_uniqueness_on_Icc, PeriodicSobolev (concrete H^3 sup bound), MaximalLifespan (maximal classical lifespan exactly one, candidate_excludes_global_solution), CandidateConsequences (force jet decay) and CompactForceDecay.",
+    "R3CompactCandidate: extraction of the compact whole-space fields \"behind the periodic construction\" (cut potential, direct field and pressure before periodisation, second larger cutoff for the force), then R3FiniteEnergyComparison.",
+    "Whole-space finite-energy uniqueness machinery under NavierStokes/R3/ (about 70 modules, all in the closure): pressure recovery for smooth finite-energy competitors via Schwartz/Fourier pairings, double Riesz transforms with heat-kernel representation, cutoff commutator with an L^(4/3) radial majorant, weighted Sobolev/Young/Gronwall closure, WholeSpaceEnergyLimit. The paper's Lemma 10.5 is a short lemma; the Lean proof is a large independent development.",
+    "Arithmetic and geometry checks not in the paper as statements: ExponentLedger (kappa=10^-5 admissibility, stage arithmetic), ActualIterationLedger (explicit gain/accuracy sequences), DiophantineGraph (Diophantine bounds for the graph directions (1,1-sqrt2),(sqrt2-1,1)), SlotColoring (an explicit 2250-colour proper colouring of the physical grid labels), Scaling (Reynolds-number scaling of core and carrier; cites \"Proposition A.2 and Remark 8.6\"), BlowupImplication (abstract inference that a nonzero profile with negative time power forces unbounded speed and no continuous extension; cites \"Proposition 11.7\").",
+    "Generic analysis infrastructure: BorelExtension/SpatialBorelExtension (Taylor-Borel with compact support), GenericEndpointExtension/SpacetimeGluing/EndpointExtension (gluing from one-sided jets), JetBounds (Leibniz for iteratedFDeriv), ParametricODE/TangentODE/JointODE (Volterra solves with smooth parameter dependence), TorusInverse/SmoothFourierData, HolomorphicFamily/CauchyRestriction, PolarCharts, PeriodicLocalization, SmoothCutoffs, SquaredPartition.",
+    "64 modules (2170 declarations) outside the import closure of the main theorem: an older/alternative whole-space pressure development (R3* files at top level: R3PressureFourier, R3RieszKernel, R3WeakPressure, ...), *NoOptions duplicates of three modules, and unused variants (CandidateAssembly, BaseWitnessClosure, CycleContinuationInvariant, EndpointLimits, GraphRestriction, RadialPrimitive, MeanStageContinuation, WaveStageContinuation, SignedRequestContinuation, SupportedActualContext, ...).",
+    "Euler/ formalises the separate paper \"Finite time blowup for the Euler equation\" (Euler.euler_breakdown_R3); not examined."
+   ]
+  }
+ },
+ "cross_agent": {
+  "main_theorem_names_agree": [
+   "navier_stokes_breakdown_R3",
+   "navier_stokes_breakdown_periodic"
+  ],
+  "mathlib_rev_agree": true,
+  "sorry_only_in_comparator_challenges": true,
+  "sorry_counts_by_scope": {
+   "agent_3_whole_clone": 4,
+   "agent_3_n_files": 2486,
+   "agent_5_NavierStokes_library": 0,
+   "agent_5_n_files": 644,
+   "consistent": true
+  },
+  "project_file_counts": {
+   "agent_1": {
+    "NavierStokes": 643,
+    "Euler": 1839,
+    "ComparatorChallenges": 2
+   },
+   "agent_3": {
+    "NavierStokes.lean+NavierStokes/": 644,
+    "Euler.lean+Euler/": 1840,
+    "ComparatorChallenges/": 2
+   }
+  },
+  "kernel_verdicts": {
+   "1": "NOT-ESTABLISHED",
+   "3": "NOT-ESTABLISHED"
+  },
+  "no_agent_ran_a_kernel_check": true
+ }
+}
