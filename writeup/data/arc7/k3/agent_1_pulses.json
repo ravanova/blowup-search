@@ -1,0 +1,30 @@
+{
+ "schema": "arc7_k3_v1",
+ "agent": 1,
+ "leg": 439,
+ "status": "CLAIMED WRITTEN, RUN NOT YET STARTED",
+ "pages_read": [7, 8, 16, 24, 25, 27, 46, 47, 63, 77, 82, 101, 102, 103, 109, 110],
+ "claimed": {
+  "Q1": {
+   "quantity": "The pinned tail stress T_0 (both entries, theta-theta and z) on y in [0.5, 2.9] at h = 1e-7, every eta node in {-0.5, 0.0, 0.5}: the target the homogeneous pulses of Lemma 7.4 must reproduce under Definition 6.4's amplitude assignment.",
+   "page_equation": "Proposition 7.5 and identity (7.26) (pp. 81-83, per leg 433's own reading, quoted from experiments/arc6_w4_pulses.py's docstring and section headers, cross-checked against manuscript_pages.txt section 7); Lemma 7.4's homogeneous pulse (pp. 79-80); (7.27)-(7.28) covariance columns (p. 82); (7.24) inversion.",
+   "route_A_prediction": "IDENTITY, written before any number exists: with amplitudes y_sigma assigned by inverting the covariance system H y = T (Definition 6.4, (7.24)) built from a SUFFICIENTLY RESOLVED quadrature (the fine ODE solve, dtt = 0.02, RK4, used ONLY to construct H, never to answer the gate), the paper's closed form claims the resulting pulse's averaged quadratic product reproduces T EXACTLY: theta-entry = 1.0 (in T_theta units) and z-entry = T_z/T_theta, for EVERY quadrature scheme that correctly approximates the continuous average -- i.e. the theta-entry error and z-entry error, evaluated by a SEPARATE, INDEPENDENT direct quadrature at oversampling M in {16, 64, 256} points per period (interpolated off the fixed fine ODE solution, never re-using the H-matrix's own quadrature nodes), must be < 1e-8 at M = 256 and must DECREASE with M at Simpson's order (log-log slope <= -3.5). This number (1e-8, slope <= -3.5) is fixed now, before the run.",
+   "why_two_routes_are_independent": "Route A's target (T_0) and Route B's reconstruction machinery (H, the inversion) are built ONCE at high, fixed quadrature resolution (effectively M -> a few thousand, dtt = 0.02 over Lambda = 2000) and FROZEN. Route B then re-evaluates the SAME pulse's quadratic product at a DELIBERATELY COARSER, INDEPENDENT set of M in {16,64,256} nodes obtained by interpolating the frozen fine solution -- a genuinely different discretization of the same continuous integral, not the same quadrature nodes re-summed. Wave 4's P1 used the SAME grid for both steps at every N, which is why its error was N-independent (agent_3_pulses.json, leg 433: flagged in its own artefact, not opened here -- inferred structurally from experiments/arc6_w4_pulses.py's own comment at the inversion step and its finalize() block's own admission 'N_dependence: none (identity; the same number at every N)'). This unit's Route B is built specifically to NOT repeat that: M is swept independently of the (fixed) H-building resolution, so a genuine aliasing/quadrature-order signal is possible and its absence (flat, non-converging error) would itself be diagnostic."
+  },
+  "Q2": {
+   "quantity": "The q-exponent of the ratio (subleading axial-viscosity term over leading radial-transport term) in Proposition 4.2's force decomposition on the pinned annulus, which the paper states directly on p. 47: 'axial viscosity increases order in q^{2h} expansion one because 1 - 2D = 2h' (D = 1/2 - h from (4.1)), and confirms again at p. 16 (3.6): u_theta,loc(sqrt(2 X_in tau), 0, 0, 1-tau) = tau^{-A}(e_0 + O(tau^{2h})).",
+   "page_equation": "p. 47 (the paragraph immediately after (5.6), on axial-derivative order shift 1-2D=2h from (4.2)); p. 16, (3.6); the force decomposition R_r = q^{-3/2}[...] - q^{-3/2+2h} Z_{-1/2-D}Z_{-1/2}G is a derivation recorded (not run) in experiments/arc6_w4_headline.py's CLAIMED block (an imported, unedited wave-4 runner), citing Lemma 4.1 p. 25 and Proposition 4.2 p. 27.",
+   "route_A_prediction": "2h exactly, written before any number exists.",
+   "route_B_plan_and_pre_registered_cost_ceiling": "Route B would build R^(0)_r's two terms explicitly from the pinned tail stress via Proposition 4.2's operators (T_b, Z_b of (4.2)) applied to the profile field G = V_0/X (needs V_0, U, W from the PINNED OUTER PROFILE, arc6_profile_v1.py's build(), not merely T_0), then take the log-log slope of their ratio over q in {1e-2, 1e-3, 1e-4} at h in {1e-7, 1e-3}, exactly as Q2 requires (both h). This is pre-registered as the target BEFORE any number exists. Pre-registered fallback, ALSO written before any number exists: T_0 alone (leg 432's pinned object, what Q1 uses) cannot supply this ratio, because T_0's two components enter the physical stress only through the SHARED overall prefactor q^{-A-1/2} -- any ratio formed from T_0 alone (e.g. T_z/T_theta) is q-independent by construction, so it can never show a q^{2h} hierarchy; a genuine two-route Q2 needs the profile-space force, not the stress alone. If the T_b/Z_b operator build (from (4.2)) cannot be completed and independently checked within this session, Q2 is answered UNDER-RESOURCED, with the specific missing piece named, never NO and never faked from T_0 alone."
+  }
+ },
+ "routes": {},
+ "gates": {},
+ "controls": {},
+ "dropped": [],
+ "instantiated_vs_scaled": "",
+ "could_not_determine": [],
+ "what_this_does_not_establish": "",
+ "forbidden_paths_opened": "none",
+ "tier": "This is Tier 2, not a proof."
+}
