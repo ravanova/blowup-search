@@ -50,6 +50,19 @@ that convention, now closed: they are gitignored and regenerated from the pinned
 hash, exactly like the PDFs. The commits that carried them remain in history, where
 every SHA this project's writeups cite stays valid. Nothing was rewritten.
 
+### Third-party personal data
+
+Four banked artefacts under `writeup/data/arc7/k2/r2/agent_4_upstream/` captured GitHub commit
+metadata, which included **personal email addresses of third-party contributors** unconnected to this
+project. Those addresses were **redacted before this repository was made public** (`CORRECTIONS.md`
+§80) — the only deliberate edit of a banked datum in the record, made on an explicit user ruling.
+Author names, commit SHAs and file hashes are kept: they are public authorship and they are what the
+finding actually rests on.
+
+**They remain in git history.** No history rewrite was performed, so that every commit SHA cited by
+these writeups stays valid. If you are one of those contributors and would prefer a full history
+rewrite, open an issue and we will act on it.
+
 If you are a rights-holder and would like something here removed or attributed
 differently, open an issue and we will act on it.
 

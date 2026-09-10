@@ -14,7 +14,28 @@ claim in the repository is tiered, gated, and rebuildable from committed data.
 > governs every claim, and an explicit list of what this repository does and does
 > **not** claim. Reuse terms and third-party material: [NOTICE.md](NOTICE.md).
 
-> ## ▶ Start here: [arc 6 — what we can actually say about the claim](writeup/6_adjudicated/BLOG_ADJUDICATED.md)
+> ## ▶ Start here: [arc 7 — we ran the Lean kernel to completion](writeup/7_confirmation/BLOG_CONFIRMATION.md)
+>
+> **2026-09-10.** Nobody had published a kernel run on the 2026 Navier–Stokes Lean project. We ran one.
+> On a single pinned commit, in **three environments** and by **two independently written kernels**
+> (Lean's own and **nanoda**, a separate Rust implementation), both exported theorems are accepted
+> depending on no axiom beyond `propext`, `Classical.choice` and `Quot.sound`, with `sorryAx`
+> unreachable. A **blind** agent reproduced it from the raw logs — which is the only reason it is
+> labelled `VERIFIED`, the one such label in this repository.
+>
+> **That is the whole of what it confirms.** It confirms the Lean project proves what its own
+> statements say, and those statements are Fefferman's **(C)/(D)** — *strictly weaker* than the
+> manuscript's Theorem 1.1. It is **not** a confirmation that the 166-page proof is correct. And our own
+> numerical check of the construction produced **zero** surviving evidence in either direction: a blind
+> adversary faked **all five** pre-registered gates, three of which were defective in our own
+> pre-registration. That is a finding about **our gates**, not about the manuscript.
+> **We take no position on the priority dispute.**
+>
+> [Technical](writeup/7_confirmation/TECHNICAL_CONFIRMATION.md) ·
+> [For outsiders](writeup/7_confirmation/CONFIRMATION_FOR_OUTSIDERS.md) ·
+> [Rebuild every number](writeup/7_confirmation/confirmation_evidence.py) · fig115
+
+> ## ▶ Then: [arc 6 — what we can actually say about the claim](writeup/6_adjudicated/BLOG_ADJUDICATED.md)
 >
 > **2026-09-09.** On 2026-09-08 a 166-page manuscript and a Lean project claimed
 > finite-time blowup for the **forced** 3D Navier–Stokes equations on `ℝ³` —
@@ -193,7 +214,8 @@ about effort ([CLAY_ROADMAP.md](CLAY_ROADMAP.md) §2):
 Consequently the stated prize is a **novel Tier-3 result on a model where
 blow-up is provable**, as a genuine contribution and a stepping stone. No
 output of this repository is ever summarized as movement toward Clay unless a
-link of the chain actually moved — which has not happened in 146 legs.
+link of the chain actually moved — which has not happened in ~~146 legs~~ (**440 legs**, at arc 7's
+close, 2026-09-10).
 
 ## Where the project is right now
 
