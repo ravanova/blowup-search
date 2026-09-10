@@ -1,0 +1,330 @@
+{
+  "schema": "arc7_k2_r2_v1",
+  "agent": 5,
+  "leg": 438,
+  "run": 2,
+  "role": "ADVERSARIAL VERIFIER, blind",
+  "clone_head": "52f0860f0a246a8a6c8e1957e7382ff1ab0e3899",
+  "branch": "leg/438-k2-agent5",
+  "date_utc": "2026-09-10T14:21:09Z",
+
+  "method": {
+    "ordering": "PART B was run FIRST, before any banked axioms log was opened, so that my own measurement could not be anchored by someone else's. Only then were the phaseA/phaseB/phaseB_local logs parsed.",
+    "primary_record": "*_build.log and *_axioms.log. The *.json and *_summary.txt files were read ONLY to look for disagreement with the logs; where they disagree the log wins and the disagreement is reported below.",
+    "independence_bound": "PART B ran on the operator's laptop (Intel i7-10750H, 12 cores, Linux 7.0.0-31-generic) - the SAME machine that produced phaseB_local and the k2 support rebuild. My run is therefore a second AGENT on an already-represented machine; it is not a fourth environment and adds agent-independence, not machine-independence.",
+    "adversarial_probes_attempted": [
+      "counted error lines myself, with the runner's own regex and with two looser ones",
+      "counted per-library build jobs myself and compared them with the JSON's claimed counts",
+      "checked whether the axiom lines in the build logs were ELABORATED or REPLAYED",
+      "checked whether the axioms.log was RUN (script control flow) or pasted",
+      "checked whether the theorem NAME printed is the one the challenge config exports, and which MODULE declares it",
+      "ran #print axioms on the SAME fully-qualified names in the challenge environment, to see whether the name alone determines the answer",
+      "verified the sorry-detection path is live (a known-sorry declaration does print sorryAx through my exact pipeline)",
+      "compared the four copies of the runner's check file byte for byte",
+      "compared pins across all three runs and against the built tree's own manifest",
+      "re-fetched the DeepMind upstream file at both cited pins and at main today"
+    ],
+    "concurrency": "3 lake invocations, all in the shared tree, all first-attempt successes (exit 0). No lake lock, no contention, no retry was needed. Nothing was rebuilt, cleaned, deleted, re-pinned or edited; git status --porcelain in the tree was empty before and after my work, and its HEAD was 8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538 both times.",
+    "disk": "/ was 99% full throughout (2.5 GB free at start, 2.4 GB at end). All scratch went to /dev/shm (588 MB used of 16 GB). Nothing large was written to /."
+  },
+
+  "commands": [
+    {"n": 1, "cmd": "df -h / /dev/shm ; git -C <worktree> rev-parse HEAD ; git branch --show-current", "rc": 0, "note": "/ 2.5G free 99% full; worktree head 52f0860f"},
+    {"n": 2, "cmd": "ls -la writeup/data/arc7/k1/{phaseA,phaseB,phaseB_local}/ (three explicit dirs, never a glob, to avoid phaseB_integrity/)", "rc": 0},
+    {"n": 3, "cmd": "git -C <scratchpad>/nse rev-parse HEAD ; git -C <scratchpad>/nse status --porcelain ; cat lean-toolchain ; du -sh", "rc": 0, "note": "8937a8f4...; clean; leanprover/lean4:v4.34.0-rc2; 19G"},
+    {"n": 4, "cmd": "cat -A <scratchpad>/k2_rebuild_logs/k1_axioms_check.lean ; sha256sum it against the three banked copies", "rc": 0, "note": "all four identical: 9162853e6ccb710a39af1fd3f070addcd30bcdf6eb72f8733a6667f24686d2d9"},
+    {"n": 5, "cmd": "python3 -c '<parse lake-manifest>' (variable program path)", "rc": "REFUSED-BY-HARNESS", "note": "worktree-isolation guard; re-run as command 8 with literal paths"},
+    {"n": 6, "cmd": "sed -n 1,200p experiments/journal/leg_438_prereg.md", "rc": 0},
+    {"n": 7, "cmd": "cd <scratchpad>/nse && lake env lean <scratchpad>/k2_rebuild_logs/k1_axioms_check.lean (variable path in program position)", "rc": "REFUSED-BY-HARNESS", "note": "re-run as command 9 with literal paths"},
+    {"n": 8, "cmd": "cat <scratchpad>/nse/lake-manifest.json ; cat lakefile.toml ; git -C <scratchpad>/nse remote -v", "rc": 0, "note": "mathlib 85e3a25e..., Comparator 19e111e2..., remote openai/NavierStokesAndEuler"},
+    {"n": 9, "cmd": "PATH=/home/andy/.elan/bin:$PATH ; cd <scratchpad>/nse ; lake env lean <scratchpad>/k2_rebuild_logs/k1_axioms_check.lean > /dev/shm/a5/mine_runnerfile.out 2> /dev/shm/a5/mine_runnerfile.err", "rc": 0, "note": "PART B, MY OWN RUN, first attempt, no contention; stdout sha256 4e0f56342c519da80e1cb2e55dd68dc664c3fc3947e11f269eaa1bdea2b746f3; stderr empty"},
+    {"n": 10, "cmd": "cat the four *_summary.txt (phaseA, phaseB, phaseB_local, live k2 rebuild)", "rc": 0},
+    {"n": 11, "cmd": "grep -c 'error:' / grep -cE '(^|[[:space:]])error:' / grep -c 'error' / grep -ni sorry / tail -15 on the three banked build logs", "rc": 0},
+    {"n": 12, "cmd": "sha256sum + cat -A of the three banked *_axioms.log, the three *_axioms_in_build_log.txt, and the live rebuild axioms log", "rc": 0},
+    {"n": 13, "cmd": "cat phaseA/phaseA.json, phaseB/phaseB.json, phaseB_local/phaseB.json, phaseB_local/k1_B_wrapper.sh", "rc": 0},
+    {"n": 14, "cmd": "cat scripts/arc7_k1_kernel_check.sh ; cat <scratchpad>/k2_rebuild_wrapper.sh", "rc": 0},
+    {"n": 15, "cmd": "grep -n for section headers over experiments/journal/leg_437.md", "rc": 0, "note": "SEE forbidden_paths_opened: this grep printed three lines belonging to leg_437.md section 5"},
+    {"n": 16, "cmd": "grep -rn --include=*.lean -w sorry <scratchpad>/nse --exclude-dir=.lake", "rc": 0, "note": "5 matches: 4 real sorries + 1 prose mention"},
+    {"n": 17, "cmd": "grep -rni 'deepmind|formal.conjectures|8bf45ed|8323e87' <scratchpad>/nse ; cat formalization.yaml", "rc": 0},
+    {"n": 18, "cmd": "cat ComparatorChallenges/NavierStokes.json ; cat ComparatorChallenges/Euler.json", "rc": 0, "note": "the authoritative definition of 'exported theorem': solution_module + theorem_names + permitted_axioms"},
+    {"n": 19, "cmd": "per-library job counts in the three build logs: grep -c '] Built ' and per-library variants, Replayed count, Build completed line", "rc": 0},
+    {"n": 20, "cmd": "grep -cE '(^|[[:space:]])error:' / 'declaration uses' / 'Build completed' / 'depends on axioms' / find .olean | wc -l  on the LIVE k2 rebuild", "rc": 0, "note": "0 error lines, 11251 jobs, 2486 oleans - all confirmed by me"},
+    {"n": 21, "cmd": "cat -n NavierStokes/ComparatorSolution.lean ; sed challenge NS head/tail ; cat -n Euler/Solution.lean ; grep -rn 'import ComparatorChallenges'", "rc": 0, "note": "the last grep returned NOTHING - no module in the tree imports a challenge module"},
+    {"n": 22, "cmd": "sed -n 1,52p experiments/journal/leg_437.md (sections 1-4 ONLY; section 5 begins at line 53 and was not read)", "rc": 0},
+    {"n": 23, "cmd": "lake env lean /dev/shm/a5/a5_own_check.lean  [MY OWN FILE: 4 exported theorems + 2 types]", "rc": 0},
+    {"n": 24, "cmd": "lake env lean /dev/shm/a5/a5_challenge_check.lean  [MY OWN FILE: the SAME four names, in the CHALLENGE environment]", "rc": 0, "note": "prints sorryAx - see naming_hazard"},
+    {"n": 25, "cmd": "python3 /dev/shm/a5/fetch_dm.py (urllib fetch of FormalConjectures/Millenium/NavierStokes.lean at both pins and at main)", "rc": 0},
+    {"n": 26, "cmd": "python3 /dev/shm/a5/dm_meta.py (GitHub API commit metadata)", "rc": "REFUSED-BY-HARNESS", "note": "re-run as command 29 via WebFetch"},
+    {"n": 27, "cmd": "lake env lean /dev/shm/a5/a5_provenance.lean  [MY OWN FILE: env.getModuleIdxFor? on both theorem names + module-list membership]", "rc": 0},
+    {"n": 28, "cmd": "diff upstream(8bf45ed) vs ComparatorChallenges/NavierStokes.lean and vs NavierStokes/ComparatorDefinitions.lean ; sha256sum/wc -l of the four adapted files", "rc": 0},
+    {"n": 29, "cmd": "WebFetch api.github.com/repos/{google-deepmind/formal-conjectures,openai/NavierStokesAndEuler}/commits/{8bf45ed70d48...,8323e878b83f...,main,8937a8f4...}", "rc": 0},
+    {"n": 30, "cmd": "sed -n 49p / 45,52p on the two phase-B build logs (cache-get totals)", "rc": 0},
+    {"n": 31, "cmd": "git -C <scratchpad>/nse status --porcelain ; rev-parse HEAD ; df -h / (post-work integrity check)", "rc": 0, "note": "still clean, still 8937a8f4, / still 99% full"},
+    {"n": 32, "cmd": "git checkout -b leg/438-k2-agent5", "rc": 0},
+    {"n": 33, "cmd": "heredoc write of this file", "rc": "REFUSED-BY-HARNESS", "note": "isolation guard rejected the compound heredoc; file written with the editor tool instead"}
+  ],
+
+  "part_a": {
+    "what_i_parsed": "the three *_build.log and three *_axioms.log files; the .json/_summary.txt were read only as claims to be tested against those logs",
+
+    "runs": {
+      "phaseA": {
+        "log_files": {"build": "writeup/data/arc7/k1/phaseA/k1_A_build.log (738 lines, sha256 33e1b5739a5e0d3cf987996bd780afa4dc5aa8e310a013f37915f32d4b6487e2)", "axioms": "writeup/data/arc7/k1/phaseA/k1_A_axioms.log (sha256 4423fb223dc684af1f682294c9e79b43314f5b6b2b11a52b766df74d02435ab7)"},
+        "a_build_completes": {
+          "verdict": "YES",
+          "log_evidence": "line 737 'Build completed successfully (11251 jobs).'; line 738 '=== BUILD_RC=0 2026-09-10T09:05:06Z'",
+          "error_lines_I_measured": {"runner_regex_(^|space)error:": 0, "plain_error:": 0, "substring_error_anywhere": 0},
+          "warning_lines_I_measured": "4, all 'declaration uses `sorry`' in ComparatorChallenges/Euler.lean:85,170 and ComparatorChallenges/NavierStokes.lean:273,280",
+          "QUALIFICATION_I_FOUND": "phase A is NOT a build of the project. I count 724 '] Built ' lines, ALL of them Euler modules: 'Built NavierStokes' = 0, 'Built ComparatorChallenges' = 0, 'Built Mathlib' = 0. Line 2 of the log is 'Replayed NavierStokes.ComparatorSolution' and the axiom lines at log lines 3-4 are REPLAYED cached output, not elaboration performed in phase A. The NavierStokes oleans phase A reports on were compiled in an earlier leg (435), not in this run. phaseA.json says as much ('724 built in this phase, the rest replayed', wall time 'PARTIAL') and the log agrees - but it means (a) for phase A covers 724 Euler jobs plus a replay of everything else."
+        },
+        "b_print_axioms_verbatim": "=== AXIOMS_T0 2026-09-10T09:05:06Z\n'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n=== AXIOMS_RC=0 2026-09-10T09:05:51Z\n",
+        "c_sorryAx_reachable": "NO",
+        "pin_evidence_in_the_log": "NONE. Phase A resumed an existing tree, so its build log contains no clone/cache-get section and therefore no 'checking out revision' lines for mathlib or Comparator. The pin, toolchain, mathlib rev and Comparator rev for phase A rest ENTIRELY on k1_A_summary.txt, which the runner wrote from git rev-parse at run time. That is a primary record, but it is not cross-checkable against the build log the way phase B's is.",
+        "verdict": "REPRODUCED for (a), (b), (c), with the qualification above on what (a) covers"
+      },
+
+      "phaseB": {
+        "log_files": {"build": "writeup/data/arc7/k1/phaseB/k1_B_build.log (2549 lines, sha256 c4227155756ff54e37fe1b624273d090b68844dfe2350817781c409681ed7229)", "axioms": "writeup/data/arc7/k1/phaseB/k1_B_axioms.log (sha256 93e2c6c1ac8c8286895cce09bf8ae668a58a5990b5230ad726a3d7e0509b4043)"},
+        "a_build_completes": {
+          "verdict": "YES",
+          "log_evidence": "line 2548 'Build completed successfully (11251 jobs).'; line 2549 '=== BUILD_RC=0 2026-09-10T12:44:47Z'; line 52 '=== CACHE_GET_RC=0'",
+          "error_lines_I_measured": {"runner_regex": 0, "plain_error:": 0, "substring_error_anywhere": 0},
+          "job_counts_I_measured": {"] Built  total": 2507, "NavierStokes": 644, "Euler": 1840, "ComparatorChallenges": 2, "Mathlib": 0, "Replayed": 0},
+          "cache_get_I_measured": "'Attempting to download 8747 file(s) ... lakecache.blob.core.windows.net/mathlib4-master'; final progress 'Downloaded: 8747 file(s) [attempted 8747/8747 = 100%]'; 'Decompressed 8747 file(s)'; CACHE_GET_RC=0. Zero mathlib modules were compiled here."
+        },
+        "b_print_axioms_verbatim": "=== AXIOMS_T0 2026-09-10T12:44:47Z\n'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n=== AXIOMS_RC=0 2026-09-10T12:44:55Z\n",
+        "c_sorryAx_reachable": "NO",
+        "pin_evidence_in_the_log": "YES - the log's own clone section records \"mathlib: checking out revision '85e3a25e006c35636f0e53b0e9296caca2685bc0'\" and \"Comparator: checking out revision '19e111e2141cf333c7daff0f64c5f24acc91dd2e'\", independently of the summary.",
+        "verdict": "REPRODUCED for (a), (b), (c)"
+      },
+
+      "phaseB_local": {
+        "log_files": {"build": "writeup/data/arc7/k1/phaseB_local/k1_B_build.log (2549 lines, sha256 03f80210acb9ac024ce3b31b4e6f9b2cb2bf17f442f918ad0e73876a16ce0431)", "axioms": "writeup/data/arc7/k1/phaseB_local/k1_B_axioms.log (sha256 6c24cf3af7deffee330a432145d796b1a83a90a3f39f5074b441f34ef252a771)"},
+        "a_build_completes": {
+          "verdict": "YES",
+          "log_evidence": "line 2548 'Build completed successfully (11251 jobs).'; line 2549 '=== BUILD_RC=0 2026-09-10T12:25:55Z'; line 52 '=== CACHE_GET_RC=0'",
+          "error_lines_I_measured": {"runner_regex": 0, "plain_error:": 0, "substring_error_anywhere": 0},
+          "job_counts_I_measured": {"] Built  total": 2507, "NavierStokes": 644, "Euler": 1840, "ComparatorChallenges": 2, "Mathlib": 0, "Replayed": 0},
+          "cache_get_I_measured": "8747 attempted / 8747 downloaded / 'Decompressed 8747 file(s)' / CACHE_GET_RC=0"
+        },
+        "b_print_axioms_verbatim": "=== AXIOMS_T0 2026-09-10T12:25:55Z\n'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n=== AXIOMS_RC=0 2026-09-10T12:26:00Z\n",
+        "c_sorryAx_reachable": "NO",
+        "pin_evidence_in_the_log": "YES - same 'checking out revision' lines for mathlib 85e3a25e and Comparator 19e111e2.",
+        "verdict": "REPRODUCED for (a), (b), (c)"
+      }
+    },
+
+    "axioms_log_cross_comparison": "The two theorem lines are byte-identical in all three banked axioms logs AND in the live k2 support rebuild's axioms log AND in my own PART B run. The four banked files differ only in their AXIOMS_T0/AXIOMS_RC timestamps, which is why their sha256 values differ.",
+
+    "was_the_axiom_output_RUN_or_READ": "RUN. scripts/arc7_k1_kernel_check.sh builds the check file itself from a quoted heredoc (so it cannot drift between runs), then executes { echo AXIOMS_T0; lake env lean \"$CHECK\"; echo \"=== AXIOMS_RC=$?\"; } > \"$AX\" 2>&1, so AXIOMS_RC is lean's own exit status and stderr is captured into the same file. Independently, NavierStokes/ComparatorSolution.lean carries #print axioms at its own lines 31-32, so lake build prints the same claim into the build log by a different code path. The four copies of k1_axioms_check.lean (three banked + the live one) are byte-identical, sha256 9162853e6ccb710a39af1fd3f070addcd30bcdf6eb72f8733a6667f24686d2d9.",
+
+    "pin_comparison_across_runs": {
+      "tree_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538 in all three, and in the built tree I used (verified by me with git rev-parse), and confirmed as a real upstream commit (openai/NavierStokesAndEuler, committer date 2026-09-08T10:57:25Z)",
+      "toolchain": "leanprover/lean4:v4.34.0-rc2 in all three; all three summaries record the same Lean build 'commit 6a10ac8c22beadecabdbb0919c2b50214762f91d' and 'Lake version 5.0.0-src+6a10ac8'",
+      "mathlib_rev": "85e3a25e006c35636f0e53b0e9296caca2685bc0 in all three (and in the built tree's lake-manifest.json)",
+      "comparator_rev": "19e111e2141cf333c7daff0f64c5f24acc91dd2e in all three (and in the manifest)",
+      "olean_count": "2486 in all three summaries; I counted 2486 .olean files myself in the built tree",
+      "same_pin": "YES - no pin differs between runs"
+    },
+
+    "log_vs_json_disagreements_found": [
+      {
+        "where": "writeup/data/arc7/k1/phaseB/phaseB.json, field 'jobs'",
+        "json_claims": "'NavierStokes 643, Euler 1839, ComparatorChallenges 2' (sum 2484)",
+        "log_says": "644 / 1840 / 2 (sum 2486), counted by me as '] Built <lib>' lines; 2486 is also the olean_count both runs report",
+        "reading": "the JSON undercounts each of the two root library modules by one. LOG WINS. An arithmetic slip in a descriptive field; it does not touch gate items (a), (b) or (c)."
+      },
+      {
+        "where": "writeup/data/arc7/k1/phaseB_local/phaseB.json, field 'jobs'",
+        "json_claims": "'11250/11251, all built in this phase'",
+        "log_says": "line 2548, verbatim: 'Build completed successfully (11251 jobs).' 11250 is merely the highest numbered per-target line, because lake prints no line for the root job",
+        "reading": "LOG WINS: 11251 jobs completed. The remote phaseB.json states this correctly and explains the 11250 artefact; the laptop one reproduces the raw number without the explanation. Cosmetic, but it is a JSON field contradicted by its own log."
+      },
+      {
+        "where": "writeup/data/arc7/k1/phaseB_local/phaseB.json, the phrase 'mathlib replayed from the official cache' in field 'jobs'",
+        "log_says": "the string 'Replayed' occurs 0 times in that log; mathlib arrived via lake exe cache get (8747 .ltar downloaded and decompressed) and produced 0 'Built Mathlib' lines",
+        "reading": "wording, not a factual error - but 'Replayed' has a specific meaning in lake's output (it appears 4 times in the phase A log and 0 times here), so the word is misleading in this field."
+      }
+    ],
+
+    "overall_verdict": "REPRODUCED in all three runs, for gate items (a), (b) and (c), from the logs alone. No run shows sorryAx; no run shows an axiom outside [propext, Classical.choice, Quot.sound]; no run shows a single error line; the pin is identical across all three. The three disagreements I found are all between a JSON descriptive field and its own log, all resolved in the log's favour, and none of them touches (a), (b) or (c)."
+  },
+
+  "part_b": {
+    "tree": "/tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse",
+    "tree_head_verified_by_me": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538 (git rev-parse, run by me, before and after my work)",
+    "tree_status_verified_by_me": "git status --porcelain empty before and after; remote origin = https://github.com/openai/NavierStokesAndEuler.git; lean-toolchain = leanprover/lean4:v4.34.0-rc2; lake-manifest.json = mathlib 85e3a25e006c35636f0e53b0e9296caca2685bc0, Comparator 19e111e2141cf333c7daff0f64c5f24acc91dd2e",
+    "machine": "the operator's laptop, Intel(R) Core(TM) i7-10750H @ 2.60GHz, 12 cores. THIS IS THE SAME MACHINE THAT PRODUCED phaseB_local, and the same machine that produced the k2 support rebuild whose logs sit in the session scratchpad. My run is therefore a second AGENT on an already-represented machine; it is not a fourth environment, and it does not add machine-independence to K1.",
+
+    "runner_summary_confirmed_by_me": {
+      "file": "<scratchpad>/k2_rebuild_logs/k1_B_summary.txt",
+      "claimed": "runner_rc=0, build_rc=0, build_error_lines=0, 11251 jobs, olean_count 2486, total_s 4287",
+      "my_measurements": {
+        "runner_rc / build_rc": "0 / 0, read from the summary; build_rc corroborated by the log's own '=== BUILD_RC=0 2026-09-10T14:04:50Z'",
+        "error_lines": "0 - I counted with the runner's regex and with a bare 'error' substring search over the whole 175284-byte log: zero hits either way",
+        "jobs": "log line 2548: 'Build completed successfully (11251 jobs).' - confirmed",
+        "olean_count": "I counted 2486 .olean files myself under .lake/build/lib/lean - confirmed",
+        "total_s": "4287 = t_start 2026-09-10T12:53:27Z to t_end 2026-09-10T14:04:54Z - the arithmetic checks out",
+        "warnings": "4 'declaration uses `sorry`' lines, all in ComparatorChallenges - the same four as every other run",
+        "build_job_counts": "2507 '] Built ' lines, 0 'Built Mathlib' - identical structure to the two banked phase-B runs"
+      },
+      "verdict": "CONFIRMED - every claim in that summary that I could re-measure, I re-measured, and all agreed."
+    },
+
+    "my_run_of_the_runners_file": {
+      "file_executed": "<scratchpad>/k2_rebuild_logs/k1_axioms_check.lean - the runner's own file, unmodified, byte-identical (sha256 9162853e6ccb710a39af1fd3f070addcd30bcdf6eb72f8733a6667f24686d2d9) to the copy banked in each of phaseA/, phaseB/ and phaseB_local/",
+      "file_contents_verbatim": "import NavierStokes.ComparatorSolution\n#print axioms NavierStokes.Comparator.navier_stokes_breakdown_R3\n#print axioms NavierStokes.Comparator.navier_stokes_breakdown_periodic\n",
+      "command": "cd <tree> && lake env lean <scratchpad>/k2_rebuild_logs/k1_axioms_check.lean",
+      "exit_code": 0,
+      "stdout_verbatim": "'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stdout_sha256": "4e0f56342c519da80e1cb2e55dd68dc664c3fc3947e11f269eaa1bdea2b746f3",
+      "stderr_verbatim": "",
+      "attempts": "1, succeeded; no lake lock, no contention, no retry"
+    },
+
+    "my_own_additional_files": [
+      {
+        "file": "/dev/shm/a5/a5_own_check.lean (MINE, not the runner's)",
+        "why": "the runner's file checks only the two NavierStokes theorems and prints no types. I wanted all four exported theorems and the actual statements.",
+        "contents": "import NavierStokes.ComparatorSolution / import Euler.Solution / #print axioms on all four / #check @ on the two NS theorems",
+        "exit_code": 0,
+        "stdout_verbatim": "'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Euler.euler_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'Euler.exists_compact_smooth_euler_singularity' depends on axioms: [propext, Classical.choice, Quot.sound]\nNavierStokes.Comparator.navier_stokes_breakdown_R3 : ∀ nu > 0,\n  ∃ u₀ f,\n    NavierStokes.Comparator.InitialVelocityConditionDecay u₀ ∧\n      NavierStokes.Comparator.ForceConditionDecay f ∧\n        ¬∃ v p, NavierStokes.Comparator.NavierStokesExistenceAndSmoothnessRn nu u₀ f v p\nNavierStokes.Comparator.navier_stokes_breakdown_periodic : ∀ nu > 0,\n  ∃ u₀ f,\n    NavierStokes.Comparator.InitialVelocityConditionPeriodic u₀ ∧\n      NavierStokes.Comparator.ForceConditionPeriodic f ∧\n        ¬∃ v p, NavierStokes.Comparator.NavierStokesExistenceAndSmoothnessPeriodic nu u₀ f v p\n",
+        "stderr_verbatim": ""
+      },
+      {
+        "file": "/dev/shm/a5/a5_provenance.lean (MINE)",
+        "why": "#print axioms NAME tells you nothing about WHICH module declared NAME. I wanted the module, measured, not assumed.",
+        "exit_code": 0,
+        "stdout_verbatim": "imported module count: 11162\ncontains ComparatorChallenges.NavierStokes: false\ncontains ComparatorChallenges.Euler: false\ncontains Euler.Solution: false\nNavierStokes.Comparator.navier_stokes_breakdown_R3 DECLARED IN NavierStokes.ComparatorSolution\nNavierStokes.Comparator.navier_stokes_breakdown_periodic DECLARED IN NavierStokes.ComparatorSolution\n",
+        "reading": "the two names the runner printed do resolve, in the runner's own environment, to declarations in NavierStokes.ComparatorSolution - the module ComparatorChallenges/NavierStokes.json names as solution_module. Neither challenge module is anywhere in that environment's 11162 imported modules."
+      },
+      {
+        "file": "/dev/shm/a5/a5_challenge_check.lean (MINE)",
+        "why": "an adversarial control: does my pipeline detect sorryAx at all, and does the NAME alone determine the answer?",
+        "exit_code": 0,
+        "stdout_verbatim": "'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\n'Euler.euler_breakdown_R3' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'Euler.exists_compact_smooth_euler_singularity' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n",
+        "reading": "TWO conclusions. (i) My detection path is live: run against declarations that do contain sorry, this exact command prints sorryAx. The NO in every other run is therefore a measurement, not a blind spot. (ii) See naming_hazard below - this is NOT a RED."
+      }
+    ],
+
+    "naming_hazard_I_FOUND": {
+      "what": "ComparatorChallenges/NavierStokes.lean opens namespace NavierStokes.Comparator and declares theorems named navier_stokes_breakdown_R3 (line 273) and navier_stokes_breakdown_periodic (line 280), both proved by sorry. Their FULLY-QUALIFIED NAMES are character-for-character the two names K1 checked. The same holds on the Euler side: ComparatorChallenges/Euler.lean declares Euler.euler_breakdown_R3 and Euler.exists_compact_smooth_euler_singularity by sorry - the same two names Euler/Solution.lean exports.",
+      "consequence": "#print axioms NavierStokes.Comparator.navier_stokes_breakdown_R3 returns the standard three axioms, or the standard three PLUS sorryAx, depending purely on which module the checking file imports. The name does not determine the answer.",
+      "is_this_a_RED": "NO, and the reason must be stated precisely. The exported theorem is defined by ComparatorChallenges/NavierStokes.json: solution_module = NavierStokes.ComparatorSolution, theorem_names = the two names, permitted_axioms = [propext, Quot.sound, Classical.choice]. The runner's check file imports exactly that solution_module, and I measured that the names resolve there to declarations in NavierStokes.ComparatorSolution, whose import closure contains neither challenge module. sorryAx is reachable only from the reference placeholders in the challenge modules, which nothing imports. The prereg's RED condition - sorryAx reachable from an exported theorem - is NOT met.",
+      "but": "this IS the failure mode worth recording. The K1 artefacts assert an axiom list against a bare name, and the bare name is ambiguous inside this very repository. What makes K1's answer the right one is the import line, not the name. Anyone re-running #print axioms on these names from a different environment - for instance while auditing the challenge files - will get sorryAx, and should not read it as a contradiction of K1."
+    },
+
+    "what_my_part_b_run_does_and_does_not_add": "It adds: a second agent, executing the runner's own unmodified file, reaching byte-identical output, plus three checks the runner never ran (module provenance, all four theorems, a live sorryAx control). It does not add a rebuild. The oleans I queried were compiled by the k2 support rebuild on this laptop earlier today; #print axioms reads a compiled environment, it does not re-run the kernel over the proof terms. My run confirms the recorded axiom result at this pin; it does not independently re-elaborate the proofs."
+  },
+
+  "k1_verdict": "VERIFIED-SUPPORTED",
+
+  "k1_verdict_reasoning": "PART A reproduces (a), (b) and (c) from all three banked LOGS, independently of the JSON summaries, with the pin identical across runs. PART B reproduces (b) and (c) by execution, on a built tree whose head, toolchain and manifest revisions I verified myself, using the runner's own byte-identical file, with byte-identical output - and additionally establishes, by measurement rather than assumption, that the names printed are declared in the module the challenge config exports, and that my detection path does print sorryAx when sorryAx is present. Both parts agree with the banked result. The three disagreements I found are JSON-vs-own-log descriptive slips (job counts), resolved in the log's favour, and none of them bears on (a), (b) or (c). No escalation condition was met in any run: no sorryAx and no axiom outside the standard three is reachable from either exported theorem. The remaining weakness is not a discrepancy but a limit, and I record it rather than soften it: my PART B ran on the same laptop as phaseB_local, so K1 now rests on two agents and three machines, with the second agent adding no new machine.",
+
+  "part_c_sample": {
+    "which_I_took": ["(2) the four sorry", "(4) DeepMind byte-identity at upstream source"],
+    "which_I_did_not_take": "(1) the five PARTIAL statements - not attempted. It needs the manuscript text and a careful per-statement reading, which I judged I could not do properly within this slot alongside the adversarial work on (2) and (4). I state no opinion on (1).",
+
+    "item_2_four_sorry": {
+      "my_method": "grep -rn -w sorry over *.lean excluding .lake (5 hits: 4 real, 1 prose at ComparatorChallenges/NavierStokes.lean:29); enclosing declarations read from the source; import closure established two ways - a grep for 'import ComparatorChallenges' across the whole tree, and the module list of the actual compiled environment of NavierStokes.ComparatorSolution.",
+      "the_four": [
+        {"sorry_at": "ComparatorChallenges/NavierStokes.lean:277", "enclosing_declaration": "NavierStokes.Comparator.navier_stokes_breakdown_R3, declared at line 273 (the build-log warning points at 273:8)", "challenge_placeholder": "YES", "in_import_closure_of_NavierStokes.ComparatorSolution": "NO"},
+        {"sorry_at": "ComparatorChallenges/NavierStokes.lean:284", "enclosing_declaration": "NavierStokes.Comparator.navier_stokes_breakdown_periodic, declared at line 280 (warning at 280:8)", "challenge_placeholder": "YES", "in_import_closure_of_NavierStokes.ComparatorSolution": "NO"},
+        {"sorry_at": "ComparatorChallenges/Euler.lean:88", "enclosing_declaration": "Euler.euler_breakdown_R3, declared at line 85 (warning at 85:8)", "challenge_placeholder": "YES", "in_import_closure_of_NavierStokes.ComparatorSolution": "NO"},
+        {"sorry_at": "ComparatorChallenges/Euler.lean:184", "enclosing_declaration": "Euler.exists_compact_smooth_euler_singularity, declared at line 170 (warning at 170:8)", "challenge_placeholder": "YES", "in_import_closure_of_NavierStokes.ComparatorSolution": "NO"}
+      ],
+      "closure_evidence": "grep -rn 'import ComparatorChallenges' --include=*.lean over the whole tree returns NOTHING - no module in the project imports a challenge module. Independently, my provenance run reports the compiled environment of NavierStokes.ComparatorSolution contains 11162 modules and that 'contains ComparatorChallenges.NavierStokes: false', 'contains ComparatorChallenges.Euler: false'. Measured, not asserted.",
+      "each_a_challenge_placeholder": "YES for all four. Both files carry a header stating they are standalone copies of the Formal Conjectures reference retained 'including their intentional `sorry` challenge placeholders', and each sorry is the entire proof of a reference statement, not a gap inside a proof.",
+      "consistency_with_K1": "CONSISTENT. K1's axiom output shows sorryAx absent from both exported NavierStokes theorems; I reproduced that, and separately reproduced the presence of sorryAx in the challenge environment. The census and the kernel agree; nothing had to be resolved in the kernel's favour.",
+      "my_sharpening_of_the_gate_wording": "the gate says the four sorries are 'none reachable from a main declaration'. True - but the reason is module separation ALONE, not distinct naming. All four sorry-carrying declarations bear the SAME fully-qualified names as the four exported theorems (see naming_hazard). A census keyed on declaration names rather than on modules would be ambiguous for every one of these four."
+    },
+
+    "item_4_deepmind_byte_identity": {
+      "my_method": "fetched FormalConjectures/Millenium/NavierStokes.lean directly from raw.githubusercontent.com at each cited pin and at main today; hashed; diffed against the tree's adapted files; then read commit metadata from the GitHub API.",
+      "upstream_fetches": [
+        {"ref": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee", "http": 200, "bytes": 13691, "lines": 296, "sha256": "f446284f2aa54375f558c263a580b34e2e7bc9f44a28829637199cc72257d25d", "commit_date": "2026-07-27T07:31:09Z", "commit_subject": "Prove the basic divergence lemmas (#4643)"},
+        {"ref": "8323e878b83fcd7f4a448256069352a265460d75", "http": 200, "bytes": 13691, "lines": 296, "sha256": "f446284f2aa54375f558c263a580b34e2e7bc9f44a28829637199cc72257d25d", "commit_date": "2026-09-04T13:36:28Z", "commit_subject": "fix(README): add missing comma (#5267)"},
+        {"ref": "main (today)", "http": 200, "bytes": 13691, "sha256": "f446284f2aa54375f558c263a580b34e2e7bc9f44a28829637199cc72257d25d", "head_sha": "71a0744be944b9d26864cef6f970c291c8e79a2d", "head_date": "2026-09-10T12:33:45Z"}
+      ],
+      "finding_about_the_two_pins": "the file is BYTE-IDENTICAL at both cited pins and at main today - one sha256 for all three. Note what that means: the second pin, 8323e878, is a README-only commit ('fix(README): add missing comma'); it does not touch this Lean file at all. So the tree cites two different commit ids for what is one and the same version of the reference. That is not an error, but the two pins are not two distinct states of the reference, and no comparison can distinguish them.",
+      "my_answer": "YES for the load-bearing content, at the cited pins AND at upstream main today (HEAD 71a0744be944b9d26864cef6f970c291c8e79a2d), with the wrapper enumerated below.",
+      "detail_ComparatorChallenges_NavierStokes_lean": {
+        "tree_file": "ComparatorChallenges/NavierStokes.lean, 286 lines, sha256 0cd193b8d5cbd0266e6e2f72e68dd5abcdcf2430ebd435dd9289737e9aa7da61",
+        "diff_size": "36 lines removed, 26 added, against the 296-line upstream file",
+        "every_hunk_classified": [
+          "a 'modified from its original form' notice added to the licence header",
+          "import FormalConjecturesUtil -> import Mathlib",
+          "module docstring: provenance URL added; Clay PDF reference and the errata/weak-solution paragraph removed; the (A)/(B) bullet lines replaced by a note that only (C)/(D) are included",
+          "open ... EuclideanGeometry dropped from the open list",
+          "namespace NavierStokes -> namespace NavierStokes.Comparator",
+          "notation for R^n, R^3 and the divergence operator inlined and made local",
+          "@[category API, AMS 35] / @[category research open, AMS 35] attributes stripped (they are Formal-Conjectures-specific)",
+          "alternatives (A) and (B) - navier_stokes_existence_and_smoothness_R3 and _periodic - deleted outright"
+        ],
+        "what_is_byte_identical": "the definition bodies. Between the divergence lemmas and the deleted (A) theorem - upstream lines ~104 to ~265 - the diff has NO hunks at all: IsOnePeriodic, InitialVelocityCondition (+Decay/Periodic), ForceCondition (+Decay/Periodic), NavierStokesExistenceAndSmoothness, ...Rn and ...Periodic are character-for-character upstream's. The (C) and (D) theorem STATEMENTS are likewise byte-identical - the only thing removed from each is its attribute line.",
+        "honesty_gap_I_FOUND": "the file's own enumeration of its changes says 'The imports, metadata attributes, namespace, and local notation are adapted for this project. All utility dependencies are inlined; only Mathlib is imported.' That list does NOT mention deleting alternatives (A) and (B), or dropping the Clay PDF reference and the errata paragraph. The immediately preceding sentence does say only (C)/(D) are retained, so the file is not misleading read whole - but the enumerated wrapper is incomplete as an enumeration, and a check performed strictly against that enumeration would flag the (A)/(B) deletion."
+      },
+      "detail_NavierStokes_ComparatorDefinitions_lean": {
+        "tree_file": "NavierStokes/ComparatorDefinitions.lean, 245 lines, sha256 8d90e0f9eee14f8b01773852083a02fd58bda59d4de2abb60d1787bbc9f6ebf4, cites pin 8bf45ed7",
+        "diff_size": "73 lines removed, 22 added, against upstream",
+        "classification": "the same wrapper categories as above, plus the removal of ALL FOUR theorems (this file is definitions only - it exists so that the proof adapters' import closure contains no placeholder). The definition bodies are again byte-identical to upstream: the diff has no hunks between the divergence lemmas and the theorem block.",
+        "significance": "this is the load-bearing one. The exported theorem's statement is built from THESE definitions, and they are upstream's, byte for byte, modulo namespace and notation localisation."
+      },
+      "not_checked": "I did not attempt a byte-identity claim for ComparatorChallenges/Euler.lean or Euler/SolutionDefinitions.lean. Both cite the same upstream NavierStokes.lean, but they are a specialisation to the Euler equation (zero viscosity, zero force), so byte-identity is not the right predicate for them and I did not manufacture one."
+    }
+  },
+
+  "gate_answer": "(5) ADVERSARIAL VERIFIER, blind, a sample of 1-4: DONE, and the answer is VERIFIED-SUPPORTED, not ESCALATION. Blind: I read no file in phaseB_integrity/, no run-1 or run-2 sibling artefact, no other worker's branch, and none of the four discussion documents named in my brief - one accidental partial exposure is disclosed in forbidden_paths_opened. K1 re-derived from the LOGS of all three banked runs: (a) lake build completes in all three - 'Build completed successfully (11251 jobs).' with BUILD_RC=0, and ZERO error lines counted by me three different ways in each of the three logs; (b) both exported theorems print '[propext, Classical.choice, Quot.sound]' in all three, the two lines byte-identical across runs; (c) sorryAx reachable: NO, in all three. Same pin in all three: 8937a8f4, lean v4.34.0-rc2, mathlib 85e3a25e, Comparator 19e111e2, 2486 oleans. Run by me in the built tree, on the runner's own byte-identical file: exit 0, output byte-identical to all three banked runs, and my provenance check shows the names resolve to NavierStokes.ComparatorSolution - the module the challenge config exports - whose 11162-module environment contains neither challenge module. My sample of 1-4 took items (2) and (4): (2) four sorry, all four challenge placeholders, all four outside the solution's import closure (measured twice, once by grep over the tree, once against the compiled environment), CONSISTENT with K1's axiom output; (4) YES - upstream is byte-identical at both cited pins and at main today (one sha256, f446284f...), and the tree's adaptation differs only in the enumerated wrapper, with the definition bodies and the (C)/(D) statements character-for-character upstream's. What I tried to break and could not: the axiom logs are produced by a live lake env lean whose exit status is the recorded AXIOMS_RC, from a heredoc-generated check file identical in all four locations, corroborated by a second independent code path (#print axioms inside ComparatorSolution.lean itself, printed by lake build); and my own pipeline demonstrably prints sorryAx when sorryAx is there. What I did break: three JSON fields contradicted by their own logs (job counts 643/1839 vs measured 644/1840; '11250/11251' vs the log's own '11251 jobs'; 'replayed' used of a cache download), one incomplete enumeration of the DeepMind wrapper, one naming hazard in which the four sorry-bearing placeholders carry the SAME fully-qualified names as the four exported theorems, and one qualification on phase A, which built only 724 Euler jobs and REPLAYED the NavierStokes oleans compiled in an earlier leg. None of these changes (a), (b) or (c) in any run.",
+
+  "could_not_determine": [
+    "Whether the exported theorems' statements are the challenge statements AS ELABORATED IN THE CHALLENGE ENVIRONMENT. I compared source text (identical modulo the stripped attribute line) and printed the elaborated types in the solution environment. Deciding definitional equality across the two environments is what Comparator itself does at runtime, and that is slot 3's gate item, not mine. I did not run Comparator.",
+    "Whether mathlib's cached oleans match their sources. Every run, mine included, obtained mathlib via lake exe cache get - 8747 .ltar downloaded, 'Built Mathlib' lines: 0. Nothing in this leg compiles mathlib from source; the kernel checked the project's 2486 modules AGAINST that cache.",
+    "Whether phase A's NavierStokes oleans were ever elaborated at this pin on that machine. Phase A REPLAYED them from leg 435's build; its build log cannot show the elaboration, only the cached info messages. Phase A's own axioms.log is a live run, but against oleans built in an earlier leg.",
+    "Whether my PART B re-ran the kernel over the proof terms. It did not. #print axioms reads a compiled environment; the compilation was done by the k2 support rebuild on this laptop earlier today. My run verifies the recorded result at this pin; it is not a fourth build.",
+    "Byte-identity for the two Euler-side adapted files (see part_c_sample.item_4_deepmind_byte_identity.not_checked).",
+    "Whether upstream ever force-pushed the cited DeepMind pins. I fetched their content today; I cannot see the history that produced it.",
+    "Item (1), the five PARTIAL statements - not sampled, no opinion offered.",
+    "Anything about how any other slot, in either run, reached any answer. I am blind to all of them and adjudicate none."
+  ],
+
+  "what_this_does_not_establish": [
+    "NOT Theorem 1.1 of the paper. The two theorems checked are Fefferman (C)/(D) as the project formalises them - and I confirmed from the source that their statements come from the DeepMind Formal-Conjectures reference, not from the manuscript.",
+    "NOT that the Lean proof follows the paper's argument. Nothing in my work reads the proof.",
+    "NOT that mathlib is correct, nor that its cached oleans match their sources.",
+    "NOT machine-independence for K1. My PART B ran on the same laptop as phaseB_local. K1 now rests on two agents across three machines; the second agent added no new machine.",
+    "NOT a rebuild. I re-elaborated a three-line check file against an existing environment; I did not recompile the project, and my brief forbade it.",
+    "NOT anything about priority, publication, or any wall. Tier 2 is never a proof.",
+    "NOT a verdict on the four-sorry census or the DeepMind claim as produced by any other slot - only my own independent answers to items (2) and (4)."
+  ],
+
+  "forbidden_paths_opened": {
+    "status": "ONE PARTIAL ACCIDENTAL EXPOSURE, disclosed below. No forbidden file was opened, catted, grepped for content, or git show'n.",
+    "never_touched": [
+      "writeup/data/arc7/k1/phaseB_integrity/ - no file in it was opened, listed or grepped. I deliberately enumerated phaseA, phaseB and phaseB_local as three explicit paths rather than globbing writeup/data/arc7/k1/*, so that this directory never entered any command's expansion.",
+      "writeup/CORRECTIONS.md - not opened at all, section 76 or otherwise",
+      "experiments/journal/leg_438_prereg_amend.md - not opened",
+      "reports/ORCH_STATE.md - not opened",
+      "writeup/data/arc7/k2/agent_* (run 1) - not opened or listed",
+      "writeup/data/arc7/k2/r2/agent_1*, agent_2*, agent_3*, agent_4* - not opened or listed; I created my own file with mkdir -p and a direct write, and never listed the directory",
+      "leg/438-k2-agent1..4 branches, their commits and their diffs - never fetched, logged or shown",
+      "experiments/journal/leg_438.md - not opened"
+    ],
+    "the_exposure": {
+      "what": "experiments/journal/leg_437.md SECTION 5, three lines, seen through a header-listing grep - not through a deliberate read.",
+      "how": "to find where section 5 began so that I could stop before it, I ran grep -n for section headers and for the section-mark character over the whole file. That printed the section-5 heading plus parts of lines 53, 54 and 64.",
+      "what_it_revealed": "that section 5 is a 2026-09-10 addendum which splits one clause of section 4 (the clause about mathlib's oleans), that it landed in commit 1b9f9ea, and that it cross-references CORRECTIONS.md section 76.",
+      "what_it_did_NOT_reveal": "no axiom list, no #print axioms output, no verdict on the theorems, nothing about any other slot's work, and nothing about the result I was asked to re-derive. My PART B run had already completed BEFORE this grep, so my own measurement could not have been influenced by it in any case.",
+      "my_deliberate_read": "after that grep I read only lines 1-52 (sections 1-4), stopping at the line before section 5, as my brief permits."
+    },
+    "also_read_and_permitted": [
+      "experiments/journal/leg_438_prereg.md (full)",
+      "experiments/journal/leg_437_prereg.md (full)",
+      "experiments/journal/leg_437.md lines 1-52 = sections 1-4 only",
+      "STATE.md (grep of the arc-7 rows)",
+      "writeup/data/arc7/k1/phaseA/, phaseB/, phaseB_local/ (all files)",
+      "scripts/arc7_k1_kernel_check.sh",
+      "the session scratchpad's k2_rebuild_logs/ (the live support-rebuild logs my brief pointed me at) and k2_rebuild_wrapper.sh",
+      "the built Lean tree at <scratchpad>/nse (read-only, plus three lake env lean invocations)"
+    ]
+  }
+}
