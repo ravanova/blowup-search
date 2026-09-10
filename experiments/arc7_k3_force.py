@@ -154,11 +154,17 @@ def make_field(G, A_vel):
     return field
 
 
-def route_A_fd(field, r, z, t, step_mult):
+def route_A_fd(field, r, z, t, step_mult, q_scale):
     """4th-order central differences of the physical NS operator, at ONE of three halving stencils
     (step_mult in {1, 0.5, 0.25}), same operator as arc6_w4_headline.py's physical_check (K3), written
-    fresh here so the stencil can be halved (physical_check hardcodes a single step)."""
-    hr, hz, ht = 2e-4 * step_mult * r, 2e-4 * step_mult * max(abs(z), 1e-30), 2e-4 * step_mult * t
+    fresh here so the stencil can be halved (physical_check hardcodes a single step). q_scale =
+    q^D at the point (the physical axial length scale): the z-step must not degenerate to 0 at
+    eta = 0 (z = 0 exactly on-axis) — same guard arc6_w4_headline.py's physical_check uses
+    ('hz = 2e-4 * max(abs(z), q**D)')."""
+    tau0 = 1.0 - t   # the small parameter near t = 1; the time-step must scale with tau, not with t (t ~ 1 always)
+    hr = 2e-4 * step_mult * r
+    hz = 2e-4 * step_mult * max(abs(z), q_scale)
+    ht = 2e-4 * step_mult * max(tau0, 1e-30)
     u = field(r, z, t)
     ur_, uth_, uz_ = u[:3]
     Fr = lambda rr: field(rr, z, t)
@@ -232,7 +238,7 @@ def run_pair(G, FP, A_vel, y_grid, eta_grid, qs, drop_Tz=False):
                 fA_fine = None
                 divfree_fine = None
                 for k, sm in enumerate((1.0, 0.5, 0.25)):
-                    fA, divfree = route_A_fd(field, r, z, t, sm)
+                    fA, divfree = route_A_fd(field, r, z, t, sm, q ** D_PINNED)
                     sc = max(np.linalg.norm(fB), 1e-300)
                     errs.append(float(np.linalg.norm(fA - fB) / sc))
                     if sm == 0.25:
@@ -328,24 +334,25 @@ def main():
     control_A_fired = abs(ctrl_A_move_A - (-0.1)) < 1e-3 and abs(ctrl_A_move_B - (-0.1)) < 1e-3
     control_Tz_fired = tz_max_mismatch > 1e-2
 
+    stencil_verdict = "YES" if gate_stencil_extrap else ("UNDER-RESOURCED" if base["stencil_error_extrapolated_at_1e-3_mean"] is None else "NO")
     gates = {
         "pointwise_agreement_h1e-7_finest_stencil_lt_1e-6": {
-            "YES" if gate_pointwise_h7 else "NO": pw_h7, "tolerance": 1e-6, "value": pw_h7,
+            "verdict": "YES" if gate_pointwise_h7 else "NO", "value": pw_h7, "tolerance": 1e-6,
         },
         "pointwise_agreement_h1e-3_finest_stencil_lt_1e-6": {
-            "YES" if gate_pointwise_h3 else "NO": pw_h3, "tolerance": 1e-6, "value": pw_h3,
+            "verdict": "YES" if gate_pointwise_h3 else "NO", "value": pw_h3, "tolerance": 1e-6,
         },
         "stencil_error_extrapolates_below_1e-6": {
-            "YES" if gate_stencil_extrap else ("UNDER-RESOURCED" if base["stencil_error_extrapolated_at_1e-3_mean"] is None else "NO"),
+            "verdict": stencil_verdict,
             "slope_mean": base["stencil_error_slope_mean"], "extrapolated_at_step_1e-3": base["stencil_error_extrapolated_at_1e-3_mean"],
         },
         "sup_exponent_eq_-3/2_within_1e-4_at_h=1e-7": {
-            "route_A": {"YES" if gate_exp_A_h7 else "NO": base["exponent_A"], "target": tgt_h7},
-            "route_B": {"YES" if gate_exp_B_h7 else "NO": base["exponent_B"], "target": tgt_h7},
+            "route_A": {"verdict": "YES" if gate_exp_A_h7 else "NO", "value": base["exponent_A"], "target": tgt_h7},
+            "route_B": {"verdict": "YES" if gate_exp_B_h7 else "NO", "value": base["exponent_B"], "target": tgt_h7},
         },
         "sup_exponent_eq_-(3/2+1e-3)_within_1e-4_at_h=1e-3": {
-            "route_A": {"YES" if gate_exp_A_h3 else "NO": h3["exponent_A"], "target": tgt_h3},
-            "route_B": {"YES" if gate_exp_B_h3 else "NO": h3["exponent_B"], "target": tgt_h3},
+            "route_A": {"verdict": "YES" if gate_exp_A_h3 else "NO", "value": h3["exponent_A"], "target": tgt_h3},
+            "route_B": {"verdict": "YES" if gate_exp_B_h3 else "NO", "value": h3["exponent_B"], "target": tgt_h3},
         },
     }
     gates_summary = {
@@ -461,6 +468,58 @@ def main():
             "physical-space computation, on a pinned profile, at computable q.",
             "This is Tier 2, not a proof.",
         ],
+        "diagnosis": {
+            "pointwise_gap_at_baseline_h=1e-7": {
+                "value": pw_h7, "gate": 1e-6,
+                "note": f"the two routes agree to ~{pw_h7:.1e} pointwise (3-4 significant digits), NOT to the "
+                        "pre-registered 1e-6. The per-stencil errors (step_mult 1, 0.5, 0.25) are FLAT "
+                        f"(slope_mean={base['stencil_error_slope_mean']:.2e}, i.e. essentially zero): Route A's "
+                        "own finite-difference truncation is already converged well below this floor at "
+                        "step_mult=1, so halving the physical step further cannot close the gap. Re-running at "
+                        "dy=1e-3 (vs the reported dy) did NOT shrink the gap monotonically (it worsened at some "
+                        "points, improved at others) — this rules out simple O(dy^2) grid truncation as the sole "
+                        "cause. The most likely remaining source: Route A differentiates a CUBIC SPLINE "
+                        "interpolant of the pinned profile's (logE, U, v0, Pi) arrays in physical (r,z,t), while "
+                        "Route B differentiates the SAME discrete arrays via Lemma 4.1's T_b/Z_b/R operators "
+                        "using np.gradient in (y, eta) — two representations of the same discrete data, not "
+                        "bit-identical. Honest verdict: the gate is NOT met at this resourcing; the routes are in "
+                        "genuine (if modest) numerical agreement, not the tight agreement the gate requires.",
+            },
+            "pointwise_gap_widens_at_h=1e-3": {
+                "value": pw_h3, "gate": 1e-6,
+                "note": f"at the h=1e-3 exponent-bookkeeping test the pointwise gap widens to ~{pw_h3:.1e}. "
+                        "Diagnosed cause, NOT a stencil issue: the paper's construction satisfies A + D = 1 "
+                        "identically (A=1/2+h, D=1/2-h); Route B's combination formula "
+                        "q^{-A_vel-1}*(T_{-A_vel}U + ... + Z_{-2*A_vel}Pi) implicitly relies on this identity to "
+                        "fold the PRESSURE term's own natural exponent -2*A_vel-D into the same q^{-A_vel-1} "
+                        "prefactor as everything else (since -2*A_vel-D = -A_vel-(A_vel+D) = -A_vel-1 only when "
+                        "A_vel+D=1). This runner's h-test (and the A->A+0.1 control below) holds D pinned at "
+                        "the TRUE profile's D=1/2-1e-7 while substituting A_vel=1/2+h_test, exactly as "
+                        "arc6_w4_headline.py's own C_A control does for the (unrelated) velocity-norm gate "
+                        "('coordinates D, L, d unchanged'). For the FORCE computation this decouples A_vel from "
+                        "D, so A_vel+D != 1, and the pressure sub-term's TRUE exponent -2*A_vel-D_pinned no "
+                        "longer coincides with -A_vel-1. Route A (raw physical differentiation) is faithful to "
+                        "the ACTUALLY-CONSTRUCTED (decoupled) field and correctly detects the pressure term's "
+                        "own, now-different, scaling; Route B's simple wrapper formula does not re-derive this "
+                        "and is the one that becomes approximate under the decoupled substitution.",
+            },
+            "control_A_defect": {
+                "predicted_move": -0.1, "route_A_move": ctrl_A_move_A, "route_B_move": ctrl_A_move_B,
+                "fired_as_planted": bool(control_A_fired),
+                "note": "NOT HIDDEN: Route B moved exactly -0.1 as predicted (mechanically, since its "
+                        "combination formula uses q^{-A_vel-1} uniformly and does not depend on D for that "
+                        "overall factor). Route A moved -0.2, NOT -0.1. Same root cause as the paragraph above: "
+                        "at A_vel = A_h7+0.1 (~0.6) with D held at the pinned ~0.5, the pressure term's true "
+                        "exponent -2*A_vel-D_pinned ~= -1.7 is MORE negative than -A_vel-1 ~= -1.6, so it "
+                        "dominates sup|f^(0)| in the TRUE (raw-differentiated) field, while Route B's formula "
+                        "still reports -A_vel-1's shift. This is a genuine property of how the A->A+0.1 control "
+                        "was constructed for a FORCE (not a norm) gate, not an arithmetic bug: 'coordinates "
+                        "unchanged' (D fixed) is exactly right for arc6_w4_headline.py's own velocity-norm C_A "
+                        "control, but for the force/residual computation it breaks the A+D=1 identity the "
+                        "paper's own bookkeeping (and Route B's formula) depends on for the pressure term. "
+                        "Reported as a control that did not fire as planted, per the rule.",
+            },
+        },
         "forbidden_paths_opened": forbidden_paths_opened,
         "runtime_s": runtime,
         "dy": args.dy,
