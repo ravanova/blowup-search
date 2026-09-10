@@ -41,11 +41,7 @@ under the solo charter; `R0`–`R2` (legs 423–425) were already on `main`. The
 applied **forward** (§67): landed units are not redone; `R2` is **re-read by five fresh shards** and
 reconciled; `R3` stayed the Conductor's serial unit and has landed (this commit).
 
-**Gates answered so far, all `UNVERIFIED`:** `R0` §66/§67 · `R1` `NO-AND-HERE-IS-THE-DIFF` strictly,
-`MATCH` after six named rules · `R2` (solo) (a) `YES` 79/79, (b) `YES`, (c) 13 hard-page notes ·
-`R3` acyclic `YES`, complete `NO-AND-HERE-ARE-THE-DANGLING-NODES` (Remark B.9; 134 labels in
-unnumbered prose; **Propositions 9.5/9.6 never cited by anything downstream**), spine through
-§4/§7/§9 **refuted by citation, confirmed by equation**, prereg 4 of 8 (§68).
+**Gates answered so far** — retired VERBATIM 2026-09-10 (leg 433) under §3j → this file, `## Superseded — gates-answered paragraph`; the live table is `STATE.md`'s arc-6 block.
 
 **WAVE 1 dispatch table** (five `R2` shards, all landed, leg 428) retired VERBATIM 2026-09-10 (leg 431) under §3j → this file, `## Superseded — wave 1 dispatch table`.
 
@@ -1697,3 +1693,12 @@ and committing it on its worktree branch (not pushed):**
 | 3 | `R2` shard C | preamble + §7–§8, App C pp 73–99, 157–164, 19 + 4 | `…/shard_C.json` | **landed** |
 | 4 | `R2` shard D | preamble + §9–§10 pp 100–125, 15 + 4 | `…/shard_D.json` | **landed** |
 | 5 | `R2` shard E | preamble + App A–B pp 126–156, 19 + 4 | `…/shard_E.json` | **landed** |
+
+## Superseded — gates-answered paragraph, retired VERBATIM from the LIVE block 2026-09-10 (leg 433) under §3j
+
+**Gates answered so far, all `UNVERIFIED`:** `R0` §66/§67 · `R1` `NO-AND-HERE-IS-THE-DIFF` strictly,
+`MATCH` after six named rules · `R2` (solo) (a) `YES` 79/79, (b) `YES`, (c) 13 hard-page notes ·
+`R3` acyclic `YES`, complete `NO-AND-HERE-ARE-THE-DANGLING-NODES` (Remark B.9; 134 labels in
+unnumbered prose; **Propositions 9.5/9.6 never cited by anything downstream**), spine through
+§4/§7/§9 **refuted by citation, confirmed by equation**, prereg 4 of 8 (§68).
+
