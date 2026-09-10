@@ -5167,3 +5167,33 @@ reproduction). Workers' answers are recorded beside the rule, not overridden in 
 the exponent ledger `0.020` (leg 429's 0.07 was over the closing rows only); the leading order's force
 `∝ q^{−3/2−h}` and the `N + 1.5 + h` flatness gap; the `η`-weight `d^{−3/2+3h}` that makes the un-cut-off leading
 field's `L²(ℝ³)` norm infinite. Tier 2. **No wall moved. No `L1 → L4` link moved. Clay ~0.05%.**
+
+## §72 — arc 7 `K0` (leg 436): **the user's four rulings of 2026-09-10 recorded; the charter's leg numbering corrected by one; arc 6's kernel check re-described as what it was — `#print axioms` on a build that never completed.**
+
+**The rulings, verbatim in substance.** (1) *N — the programme is not finished.* New goal: **independently
+confirm the OpenAI Navier–Stokes result** — not re-derive it. (2) *Y — finish the Lean kernel check*; arc 7's
+headline. (3) *Y — re-run wave 4 under adversary-proof gates.* (4) *No ruling needed:* publishing this
+repository and its writeups is not the outreach hold; **the hold stays on CONTACTING authors, groups and
+lists.** (5) Lane T re-open, recommended N, and (6) unrefereed preprint counts as "published" for
+`PUB_0C` §1, recommended Y — **both awaiting a one-word confirm, neither recorded as ruled.** Where they
+now live: `ORCHESTRATION.md` §3g (blockquote after the §67 ruling), `STATE.md` (arc-7 block), this section.
+
+**Leg numbering, corrected.** The charter said *"legs run from 435."* Leg 435 had already been spent — the
+Conductor's kernel-check addendum to leg 431, committed `6ee8a2b` before the charter arrived — so arc 7's
+units `K0`–`K4` are legs **436–440**. Recorded here so a reader who finds a leg 435 that is not `K0` knows why.
+
+**What leg 435 was, stated precisely, because the arc-7 charter describes arc 6 as "KILLED AT A CAP … no
+kernel run".** Both are true of different moments. Agent 1 of leg 431 was stopped at 13.6 min by a
+Conductor mis-statement (leg 431 §3 item 1); the Conductor then continued the same build in the
+background, and at `08:05Z` on 2026-09-10 — after `R7` had landed — `#print axioms` on both exported
+theorems returned `[propext, Classical.choice, Quot.sound]` (`kernel_check_conductor.json`). **That build
+never completed:** `Euler` stopped at `[10526/11251]` when the session ended; mathlib's oleans came from the
+official cache, not from source; the comparator was never run; one Conductor, one command, one container,
+`UNVERIFIED`. So arc 7's `K1` still owes exactly what the charter asks: a build **to completion**, a second
+`#print axioms` run, and a wall time a reader can reproduce — pre-registered in `leg_437_prereg.md`
+**before** either of its two phases ran.
+
+**One defect of the charter, recorded and not acted on.** The charter's summary line *"nobody has run a
+kernel"* is true of the published record and was false of this repository by three hours. Nothing in it is
+changed; the discrepancy is what §3j's *re-read `STATE.md` from disk after a concurrent push* exists for.
+

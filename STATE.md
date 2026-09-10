@@ -18,7 +18,7 @@ direction check (seven questions, in every integration commit, per unit); **§3j
 
 ## Goal, posture, odds
 
-- **Goal:** a full Clay solve (user ruling 2026-08-06). Prize direction is Fefferman **(C)** —
+- **Goal:** a full Clay solve (user ruling 2026-08-06). **Arc 7 (ruling 2026-09-10): independently CONFIRM the OpenAI result by running the kernel — see the arc-7 block below.** Prize direction is Fefferman **(C)** —
   breakdown on `ℝ³`. **(D), the torus, is deferred with Lane T** (ruling 2026-08-14).
 - **Posture (ruling 2026-08-13):** *the walls are the work.* Seven blockers in **`WALLS.md`**, each
   with evidence separated from assumption and a pre-committed statement of what breaking it consists
@@ -27,17 +27,37 @@ direction check (seven questions, in every integration commit, per unit); **§3j
   `CLAY_OBLIGATIONS.md` §6 names the two obligations with **no known method**.
 - **Clay odds ~0.05%**, unmoved. **No `L1 → L4` link has EVER moved, in over 410 legs.** **The cheapest unit that could move one: NO SUCH UNIT IS KNOWN** — `CLAY_OBLIGATIONS.md` §6 names two obligations with **no known method**, every landed unit is Tier 2, and nothing in `OPTIONS.md` is priced to deliver a certified result.
 
-## ⚠⚠ ARC 6 — SECOND PASS **CLOSED AND LANDED 2026-09-10**, §3g CONDUCTOR ×5, legs 423–435. Block retired VERBATIM → `WALLS_HISTORY.md` §STATE-ARC6-CONDUCTOR. Quartet: `writeup/6_reproduction/`.
+## ⚠⚠ ARC 7 — INDEPENDENT CONFIRMATION, **OPEN 2026-09-10**, §3g CONDUCTOR ×5, legs 436–440. The arc-6 block retired VERBATIM → `WALLS_HISTORY.md` §STATE-ARC6-CLOSED (leg 436).
 
-**The verdict (`R7`):** all 79 statements read twice (solo + five blind shards) and closing as the manuscript says;
-the 58-node spine re-derived, 0 `GAP`, **10 nodes `VERIFIED`** blind; Lemma 4.8's profile instantiated from the
-paper's schedule — constants, exponents, datum, tail stress reproduce (two routes to 10⁻⁹); closure and cone
-do **not** at any computable `λ` (paper's regime `λ ≲ 3·10⁻⁴`, `√λP_* ≪ 1`; edge powers on a `10⁻⁶⁹` collar); the Lean
-measured: **kernel check REACHED (leg 435): both exported theorems accepted with `[propext, Classical.choice, Quot.sound]`** — for a
-top-level statement **strictly weaker** than Thm 1.1 (Fefferman (C)/(D)); wave 4's adversary
-faked **11 of 12** signals. **Nothing contradicts the manuscript; nothing proves it; no wall moved.**
-`CORRECTIONS.md` §66–§71. Every Conductor answer `UNVERIFIED` (the kernel check included: one run, one container). **Tier 2. No `L1→L4` link moved. Clay ~0.05%.**
-**No successor scheduled.** Open escalations (ORCH_STATE rows 1–5) unchanged and unruled.
+**Arc 7's goal, in one sentence (user ruling 2026-09-10, item 1):** *independently CONFIRM the OpenAI
+Navier–Stokes result — not re-derive it — by running the Lean kernel to completion on its exported
+theorems, because out-refereeing 166 pages is beyond this repository and running a kernel is not, and
+nobody has published a kernel run.*
+
+**Rulings 2026-09-10 (recorded leg 436, `CORRECTIONS.md` §72):** **(1)** the programme is NOT finished; the
+goal is the sentence above. **(2)** finish the Lean kernel check — arc 7's headline, `K1`. **(3)** re-run
+wave 4 under adversary-proof gates, `K3`. **(4)** publishing this repository and its writeups is NOT the
+outreach hold; the hold stays on CONTACTING authors, groups and lists. **(5)** Lane T re-open:
+recommended **N**, AWAITING one-word confirm. **(6)** an unrefereed preprint counts as "published" for
+`PUB_0C` §1: recommended **Y**, AWAITING one-word confirm. Nothing in arc 7 depends on 5 or 6.
+
+**Leg numbering:** the charter said *legs run from 435*; leg 435 was spent on the kernel-check addendum
+(`leg_431.md` §7) before the charter arrived, so `K0`–`K4` are legs **436–440**. Arc 6's kernel check
+(leg 435) reached `#print axioms` on a build that never COMPLETED (Euler 725 jobs short, mathlib from
+cache) — one run, one container, `UNVERIFIED`; `K1` owes the completed build and a second run.
+
+| unit | leg | shape | gate, in final wording | status |
+|---|---|---|---|---|
+| `K0` | 436 | DOCS, serial | rulings 1–4 recorded in ORCHESTRATION / STATE / CORRECTIONS; goal stated where a fresh session reads it; STATE rows retired under §3j before any were added | **LANDED** |
+| `K1` | 437 | SERIAL, **no time cap** | (a) does `lake build` complete; (b) `#print axioms` verbatim for `navier_stokes_breakdown_R3` and `_periodic`; (c) `sorryAx` reachable from either — YES/NO; (d) wall time and machine. GREEN = the standard three only → STOP AND REPORT. RED = `sorryAx` or any other axiom → STOP, ESCALATE, NO PUBLICATION, blind reproduction first. Prereg `leg_437_prereg.md`; runner `scripts/arc7_k1_kernel_check.sh`; phase A resumes the arc-6 tree, phase B is a fresh clone timed end to end | **IN FLIGHT** |
+| `K2` | 438 | FAN-OUT ×5 | (1) the 5 `PARTIAL` statements — what is missing, per statement; (2) the 4 `sorry` — each a challenge placeholder, none reachable from a main declaration, cross-checked against `K1`'s axiom output, which WINS on disagreement; (3) the Comparator's 4 `NOT-ESTABLISHED` checks — run them; (4) DeepMind byte-identity re-verified at upstream source, independently; (5) ADVERSARIAL VERIFIER, blind, a sample of 1–4. One file per agent, own branch, cherry-picked unedited | planned |
+| `K3` | 439 | FAN-OUT ×5, CONSTRUCTION — the composition floor | wave 4 redux on ONE rule: *evidence is a two-route agreement on a quantity the adversary cannot choose* (what leg 432 did and wave 4's gates did not). A gate that cannot be put in two-route form is DROPPED, not weakened. Scales checked against the paper's own asymptotics BEFORE the prereg is pushed (§71). Slot 5 the adversary, blind: a signal it can fake is NOT EVIDENCE whatever the worker's gate said | planned; prereg pushed first |
+| `K4` | 440 | SERIAL | `writeup/7_confirmation/`: full §6 quartet plus ONE document written for outsiders. LEAD WITH THE VERDICT, never with the fragments; every damning-sounding finding sits UNDER the verdict it qualifies. States what a green kernel does and does not establish; takes no position on priority | planned |
+
+**Standing for the arc:** Tier 2 is never a proof · no `L1→L4` claim without the link moving · every gate
+`UNVERIFIED` unless a blind agent reproduced it (§3f rule 1) · pre-registrations pushed BEFORE the runs
+they govern · escalate, never rule (K1's RED branch, any ban lift, any `W4` movement) · hand off per §9d
+with `K1`'s build cursor if it is mid-flight.
 
 ## THE LANES — **RE-RANKED 2026-08-19 AT THE STOP, on what is measured NOW** (order unchanged; Lane L DEMOTED); re-earned per unit under §3i
 
@@ -102,17 +122,7 @@ The rule it produced is live in
 
 **Precedent, still binding:** a request to change a gate **mid-wave was REFUSED** — `WALLS_HISTORY.md` §STATE-WAVE5-PRECEDENT.
 
-## ⚠ 2026-08-19 — **TEMPORARY PIVOT TO PAPERS (user ruling).** Scaffold `7851899`; wave 8 planned and committed before dispatch: `writeup/waves/WAVE8_PLAN.md`.
-
-**Enters at the NEXT WAVE BOUNDARY — wave 7 is not interrupted.** Three drafts: `P1` selection bias, `P2` α-pin × ṁ pincer, `P4` methodology. **`P3` (the `2509.25116` audit) is deliberately absent** — authors-first is the correct route, outreach is held, Class A is unverified.
-
-**A PAPER IS A VIEW OF THE RECORD, NEVER A SOURCE.** Every number cites the banked JSON field it came from. `UNVERIFIED` stays `UNVERIFIED` in the draft; `UNDER-RESOURCED` is never written as a null result; a control that did not fire as planted is disclosed **in the paper**. **NO UNIT MAY CITE A DRAFT.**
-
-**The second output is not the paper.** Where a draft cannot state something cleanly, that is a **finding about the record** — `FINDINGS.md`, then `CORRECTIONS.md` or an escalation, **never smoothed over in prose**. Leg 348's ceiling would not have survived one honest related-work paragraph.
-
-**§3g's composition floor STANDS — paper units are ADDITIONAL, a wave of pure paper units is out of contract.** Row retired VERBATIM → `WALLS_HISTORY.md` §STATE-PIVOT-FLOOR; the directive is unchanged and binds wave 9.
-
-**Outreach stays held.** Reading published material is authorised; contacting any author, group or maintainer list is not.
+## ⚠ 2026-08-19 — TEMPORARY PIVOT TO PAPERS (user ruling). Block retired VERBATIM 2026-09-10 (leg 436) under §3j → `WALLS_HISTORY.md` §STATE-PIVOT-2026-08-19. Still binding: a paper is a VIEW of the record, never a source; no unit may cite a draft; §3g's composition floor stands; outreach stays held.
 
 ## WAVE 8 — **CLOSED AND INTEGRATED 2026-08-19** (legs 409–412). Detail retired verbatim → `WALLS_HISTORY.md` §STATE-WAVE8.
 

@@ -33,7 +33,49 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS CLOSED AND LANDED (legs 423–435, 2026-09-10). `R7` LANDED: `writeup/6_reproduction/`. NO SUCCESSOR SCHEDULED.**
+## LIVE — §3g CONDUCTOR, wave sizing 5. **ARC 7 — INDEPENDENT CONFIRMATION, OPEN 2026-09-10, legs 436–440.** `K0` LANDED (leg 436); **`K1` IN FLIGHT (leg 437, the kernel check, no time cap).**
+
+**Goal (user ruling 2026-09-10):** independently CONFIRM the OpenAI Navier–Stokes result by running the Lean
+kernel to completion on its two exported theorems. Rulings 1–6 recorded: `CORRECTIONS.md` §72, `STATE.md`
+arc-7 block, `ORCHESTRATION.md` §3g. **Legs renumbered 436–440** (leg 435 was already spent; §72).
+
+**The wave plan, gates pre-committed in `STATE.md`'s arc-7 table (leg 436, committed before dispatch):**
+`K1` leg 437 SERIAL → `K2` leg 438 FAN-OUT ×5 (Lean gaps; slot 5 blind adversary) → `K3` leg 439 FAN-OUT ×5
+(wave-4 redux on the two-route rule; slot 5 blind adversary; **composition floor met here**, `W4` attack) →
+`K4` leg 440 SERIAL (`writeup/7_confirmation/`, verdict-first, one outsider document).
+
+**`K1` cursor — the next Conductor reads THIS before anything else.** Runner `scripts/arc7_k1_kernel_check.sh`,
+prereg `experiments/journal/leg_437_prereg.md` (pushed before the run). Two phases, same commit `8937a8f4`,
+same container (4 × Xeon 2.80 GHz, 15 GB, disk holds ONE tree):
+- **Phase A** resumes the arc-6 tree at `/tmp/claude-0/-home-user-blowup-search/f04cf05e-…/scratchpad/nse`
+  (NavierStokes built in leg 435; Euler stopped `[10526/11251]`). Logs: this session's scratchpad
+  `k1/k1_A_{build,axioms}.log`, `k1_A_summary.txt`.
+- **Phase B** deletes A's tree after banking, fresh-clones at the pin, `lake exe cache get`, `lake build` from
+  nothing, timed end to end, then `#print axioms`. Logs `k1/k1_B_*`.
+- If the session dies mid-flight: the successor checks for a live `lake` process, reads the newest
+  `k1_*_build.log` `[n/N]` line, and RESUMES with `lake build` in the same tree — never restarts from a clean
+  tree to "be safe", and never kills a running build on a wall-clock guess.
+- Readings are pre-committed (prereg §2): GREEN → stop and report; RED (`sorryAx` or any non-standard axiom)
+  → STOP, ESCALATE, NO PUBLICATION, blind reproduction first; INCOMPLETE → `NOT-ESTABLISHED` with the blocker.
+
+**Landed this arc:** `K0` (leg 436). **Audited but not landed:** none. **Live workers:** none (K1 is
+Conductor-run, serial). **Open escalations:** the five rows above, unchanged and unruled; rulings 5–6 awaiting a
+one-word confirm. **Composition floor:** `K3` (leg 439), a `W4` attack; `K1`/`K2` are audit and are not
+counted toward it.
+
+**Headroom at this boundary (§3j, bytes):** `STATE.md` 23,710 (cap 24,576); `WALLS.md` 32,157
+(**over its 32 KB cap by 157 B — retirement owed, not compaction**); `OPTIONS.md` 20,961; this file's live block
+under 8 KB; superseded blocks below are more than three (truncation owed at a quieter boundary, accumulating
+sections carried verbatim). Integration cycles this session: 1. Context summarised: no.
+
+**What the next Conductor must do first:** read `K1`'s cursor above, find the newest `k1_*_summary.txt`, and
+either bank a finished phase (`writeup/data/arc7/k1/`) or resume the build.
+
+---
+
+## Superseded LIVE block — arc 6 second pass, demoted 2026-09-10 (leg 436, arc 7 `K0`) under §3j. **Verbatim. Nothing edited.**
+
+## ~~LIVE~~ — §3g CONDUCTOR. **ARC 6 SECOND PASS CLOSED AND LANDED (legs 423–435, 2026-09-10). `R7` LANDED: `writeup/6_reproduction/`. NO SUCCESSOR SCHEDULED.**
 
 **Mode paragraph** retired VERBATIM 2026-09-10 (leg 435) under §3j → this file, `## Superseded — mode paragraph`.
 

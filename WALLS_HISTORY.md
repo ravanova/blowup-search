@@ -1080,3 +1080,30 @@ fresh agent that never saw the construction can mark anything `VERIFIED`.**
 **WAVES 1–3 CLOSED AND INTEGRATED** (legs 428, 429, 431; wave 1 was dispatched before its STATE row existed, a §3g step-1 defect, recorded). **WAVE 4 CLOSED (leg 433). `R7` next (leg 434): land in `writeup/6_reproduction/`.**
 Rows `R0`–`R2` and the wave-1 paragraph retired verbatim 2026-09-10 (leg 430) under §3j → `WALLS_HISTORY.md` §STATE-ARC6-W1.
 
+## §STATE-ARC6-CLOSED — arc 6 second pass, the closing block (legs 423–435), retired VERBATIM from `STATE.md` 2026-09-10 (leg 436, arc 7 `K0`) under §3j. Nothing edited.
+
+## ⚠⚠ ARC 6 — SECOND PASS **CLOSED AND LANDED 2026-09-10**, §3g CONDUCTOR ×5, legs 423–435. Block retired VERBATIM → `WALLS_HISTORY.md` §STATE-ARC6-CONDUCTOR. Quartet: `writeup/6_reproduction/`.
+
+**The verdict (`R7`):** all 79 statements read twice (solo + five blind shards) and closing as the manuscript says;
+the 58-node spine re-derived, 0 `GAP`, **10 nodes `VERIFIED`** blind; Lemma 4.8's profile instantiated from the
+paper's schedule — constants, exponents, datum, tail stress reproduce (two routes to 10⁻⁹); closure and cone
+do **not** at any computable `λ` (paper's regime `λ ≲ 3·10⁻⁴`, `√λP_* ≪ 1`; edge powers on a `10⁻⁶⁹` collar); the Lean
+measured: **kernel check REACHED (leg 435): both exported theorems accepted with `[propext, Classical.choice, Quot.sound]`** — for a
+top-level statement **strictly weaker** than Thm 1.1 (Fefferman (C)/(D)); wave 4's adversary
+faked **11 of 12** signals. **Nothing contradicts the manuscript; nothing proves it; no wall moved.**
+`CORRECTIONS.md` §66–§71. Every Conductor answer `UNVERIFIED` (the kernel check included: one run, one container). **Tier 2. No `L1→L4` link moved. Clay ~0.05%.**
+**No successor scheduled.** Open escalations (ORCH_STATE rows 1–5) unchanged and unruled.
+
+## §STATE-PIVOT-2026-08-19 — the papers-pivot block, retired VERBATIM from `STATE.md` 2026-09-10 (leg 436, arc 7 `K0`) under §3j. Nothing edited.
+
+## ⚠ 2026-08-19 — **TEMPORARY PIVOT TO PAPERS (user ruling).** Scaffold `7851899`; wave 8 planned and committed before dispatch: `writeup/waves/WAVE8_PLAN.md`.
+
+**Enters at the NEXT WAVE BOUNDARY — wave 7 is not interrupted.** Three drafts: `P1` selection bias, `P2` α-pin × ṁ pincer, `P4` methodology. **`P3` (the `2509.25116` audit) is deliberately absent** — authors-first is the correct route, outreach is held, Class A is unverified.
+
+**A PAPER IS A VIEW OF THE RECORD, NEVER A SOURCE.** Every number cites the banked JSON field it came from. `UNVERIFIED` stays `UNVERIFIED` in the draft; `UNDER-RESOURCED` is never written as a null result; a control that did not fire as planted is disclosed **in the paper**. **NO UNIT MAY CITE A DRAFT.**
+
+**The second output is not the paper.** Where a draft cannot state something cleanly, that is a **finding about the record** — `FINDINGS.md`, then `CORRECTIONS.md` or an escalation, **never smoothed over in prose**. Leg 348's ceiling would not have survived one honest related-work paragraph.
+
+**§3g's composition floor STANDS — paper units are ADDITIONAL, a wave of pure paper units is out of contract.** Row retired VERBATIM → `WALLS_HISTORY.md` §STATE-PIVOT-FLOOR; the directive is unchanged and binds wave 9.
+
+**Outreach stays held.** Reading published material is authorised; contacting any author, group or maintainer list is not.

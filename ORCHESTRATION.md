@@ -386,6 +386,20 @@ protect. Prefer fewer, larger units — §3f's "task size goes up, not down" hol
 > (`reports/ORCH_STATE.md`); the wave is not silently shrunk. Recorded by leg 427,
 > `writeup/CORRECTIONS.md` §67.
 
+> **RULINGS 2026-09-10 (user, arc 7 charter — INDEPENDENT CONFIRMATION).** Recorded by leg 436,
+> `writeup/CORRECTIONS.md` §72. **(1) The programme is not finished.** New goal: *independently
+> CONFIRM the OpenAI Navier–Stokes result — not re-derive it; a kernel can be run and nobody has.*
+> **(2) Finish the Lean kernel check** — arc 7's headline. **(3) Re-run wave 4 under adversary-proof
+> gates** — evidence is a two-route agreement on a quantity the adversary cannot choose; a gate that
+> cannot be put in that form is dropped, not weakened. **(4) Publishing this repository and its
+> writeups is NOT the outreach hold.** The hold stays, unchanged, on CONTACTING authors, groups and
+> lists. **(5)** Lane T re-open — recommended N, awaiting one-word confirm. **(6)** an unrefereed
+> preprint counts as "published" for `PUB_0C` §1 — recommended Y, awaiting one-word confirm. Neither
+> 5 nor 6 is ruled; nothing in arc 7 depends on them. **Wave sizing stays 5.** Standing, restated for
+> the arc: Tier 2 is never a proof; every gate is `UNVERIFIED` until a blind agent reproduces it;
+> pre-registrations are pushed before the runs they govern; a RED kernel result (`sorryAx` or an
+> unexpected axiom reachable from a main theorem) is an ESCALATION, never a publication.
+
 **Wave composition floor (adopted 2026-08-13).** **Every wave carries at least one unit attacking a
 wall on the Clay chain directly** — a Lane T, V or L unit in `WALLS.md`'s terms. This is §3b's
 composition floor re-posed for waves, and it defends against the specific drift this programme is
