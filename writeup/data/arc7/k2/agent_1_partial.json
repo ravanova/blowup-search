@@ -1,0 +1,327 @@
+{
+ "schema": "arc7_k2_agent1_v1",
+ "agent": 1,
+ "leg": 438,
+ "clone_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "tree_path": "/tmp/claude-0/-home-user-blowup-search/f04cf05e-679d-5fc5-8545-c07be1caa01d/scratchpad/nse",
+ "method": "Source-level reading only of the read-only Lean tree at clone 8937a8f (no lake/lean run, nothing written under the tree). Started from the arc-6 agent-5 pointers (file+line) for the five PARTIAL statements, read each cited declaration from source, then searched the tree for any declaration matching the paper clause the pointer does not cover (grep on paper labels 'Theorem 3.1', 'Proposition 9.9', '(3.6)', 'Lemma 4.4', '(4.17)', '(4.19)', 'Corollary 7.3', 'Lemma 9.7', 'Definition 3.3', 'q_big', and on content: rpow with 2*h error terms, X_in, rescal*, Lipschitz, 'chosen before'/'precede'). Manuscript clause text taken from writeup/data/arc6/ledger/merged.json (primary shard entries). Import-path question answered by computing the transitive import closure of NavierStokes/ComparatorSolution.lean from the modules' own `import` lines (Python over the .lean files; 580 modules, matching arc 6's count) and checking membership of every pointer module; the declaration-level dependency graph (which would need lean/lake) was NOT computed. The exported theorems were read at ComparatorSolution.lean:16-27 -> ComparatorR3Theorem.lean:36 / ComparatorTheorem.lean:48 -> R3ActualCandidate.lean:18 / ActualCandidateAssembly.lean:1183 (selected_candidate) -> selected_witness (1177) -> Witness (1121).",
+ "statements": [
+  {
+   "id": "Theorem 3.1",
+   "paper_clauses": [
+    "Constants 0<h<1/100, q_*>0, 0<X_a<X_ext<inf and smooth (u,p) on Omega_*={tau>0, q<q_*} exist such that:",
+    "(i) u = curl A + B e_theta, A and B e_theta smooth in Cartesian coordinates at the axis, u exactly divergence-free.",
+    "(ii) every Cartesian space-time derivative of A, B e_theta, p is uniformly bounded on compact spatial subsets with c<=q<=c'<q_* up to the one-sided boundary tau=0, with limits compatible under differentiation.",
+    "(iii-a) |d_x^alpha d_t^b R(u,p)| <= C q^N on 0<=X<=X_1 as q->0, for every alpha,b,N,X_1 (3.4).",
+    "(iii-b) for X>=X_ext: residual identically zero, A=0, B=K(r,tau)=r^{-1-2h}H_ext(tau/r^2), p=-int_r^inf K^2/rho, K solves the radial swirl heat equation (3.5).",
+    "(iv) for some X_in in (0,X_a), e_0>0: u_theta(sqrt(2 X_in tau),0,0,1-tau) = tau^{-A}(e_0+O(tau^{2h})) as tau->0 (3.6)."
+   ],
+   "lean": [
+    {
+     "name": "NavierStokes.ActualCandidateAssembly.Witness",
+     "file": "NavierStokes/ActualCandidateAssembly.lean",
+     "line": 1121,
+     "what_it_states": "def Witness (B N0 : ℕ) (hN : ActualCarrierGeometry.geometricThreshold ≤ N0) : Prop := ∃ a : ℕ → ℕ, MixedCandidateWitness.SelectedSchedule h (ActualCandidateConstruction.qbig B N0) (potentialStages B N0 hN) (directStages B N0 hN) (pressureStages B N0 hN) a ∧ let ASum := SolenoidalDiagonal.potentialSum (fun j => (a j : ℝ)) (PhysicalWaveSum.physicalQ h) (potentialStages B N0 hN) ... ∃ (ea : JointResidualLimits.AwayExtensions ASum) (eb : ...BSum) (ep : ...PSum), ∃ forcing : VelocityField, CandidateProperties (TimeLocalization.activatedVelocity (MixedPeriodicAssembly.periodicVelocity ASum BSum)) (TimeLocalization.activatedPressure (SpatialLocalization.periodicPressure PSum)) forcing ∧ ContDiff ℝ ∞ forcing ∧ CandidateConsequences.Consequences ... ∧ Tendsto (fun t => PeriodicSobolev.derivativeH3Norm ...) (𝓝[<] (1 : ℝ)) atTop ∧ (force jet decay) ∧ (∀ n x, iteratedFDeriv ℝ n forcing (1, x) = MixedPeriodicAssembly.boundaryLimits ASum BSum PSum ea eb ep x n). This is the closest thing to a single 'output theorem' of the construction; it is a periodic CandidateProperties witness, not the local field theorem on Omega_*."
+    },
+    {
+     "name": "NavierStokes.ActualCandidateAssembly.selected_witness",
+     "file": "NavierStokes/ActualCandidateAssembly.lean",
+     "line": 1177,
+     "what_it_states": "theorem selected_witness : Witness ActualCandidateConstruction.selectedBudget ActualCandidateConstruction.selectedThreshold ActualCandidateConstruction.selectedThreshold_geometry — the witness for the one selected (B,N0)=(0, startingThreshold 0) (ActualCandidateConstruction.lean:205-207)."
+    },
+    {
+     "name": "NavierStokes.MixedCandidateAssembly.candidate_of_finite_stages",
+     "file": "NavierStokes/MixedCandidateAssembly.lean",
+     "line": 130,
+     "what_it_states": "From finite-stage data (initial/stages : MixedAxisPreservation.PotentialStage F.data.h (localDomain F.data.h qbig), D : ℕ → DirectAngularDiagonal.AngularData (localSlowDomain F.data.h qbig), pressures, E : StageEstimates F.data.h qbig ..., SublevelShrinkingSupport hypotheses, and one-sided extensions eA eB eP for x 2 ≠ 0 with endpointRoot (2*h) (x 2) < qbig) concludes `candidateStatement` (ProblemStatement.lean:120: ∃ u p f, CandidateProperties u p f). Clause (i): velocity is `periodicVelocity ASum BSum` with ASum a cut potential sum (curl taken after cutoff, SolenoidalDiagonal.lean:186-255) plus the direct angular field sum BSum (rawSeries D j = DirectAngularDiagonal.angularField (D j).scalar, LocalAngularDiagonal.lean:60-62)."
+    },
+    {
+     "name": "NavierStokes.DirectAngularDiagonal.AngularData",
+     "file": "NavierStokes/DirectAngularDiagonal.lean",
+     "line": 139,
+     "what_it_states": "structure AngularData (U : Set Slow) where scalar : Coefficient; smooth : ContDiffOn ℝ ∞ scalar (positiveDomain U); inner : Slow → ℝ; inner_continuous; inner_pos : ∀ s ∈ U, 0 < inner s; vanishes : ∀ p, slowOfCyl p ∈ U → 0 ≤ p.2.1 → p.2.1 < inner (slowOfCyl p) → scalar p = 0. I.e. the direct angular scalar B vanishes on a positive-radius collar around the axis, which is how axis smoothness of B e_theta (clause (i)) is secured — by support, not by a Cartesian-smoothness lemma at the axis."
+    },
+    {
+     "name": "NavierStokes.JointResidualLimits.AwayExtensions / OneSidedExtension",
+     "file": "NavierStokes/JointResidualLimits.lean",
+     "line": 79,
+     "what_it_states": "structure OneSidedExtension (f : SpaceTime → V) (x : Space) where value : SpaceTime → V; domain : Set SpaceTime; isOpen : IsOpen domain; mem : (1, x) ∈ domain; smooth : ContDiffOn ℝ ∞ value domain; agrees : EqOn value f (domain ∩ SpacetimeEndpoint.openPast 1). def AwayExtensions (f) : Prop := ∀ x : Space, x ≠ 0 → Nonempty (OneSidedExtension f x). Clause (ii) is realised as: at every terminal point (1,x), x≠0, the summed potential, direct field and pressure have a genuine smooth extension across t=1 (stronger than bounded derivatives with compatible limits); JointResidualLimits.exists_smooth_compatible_limits (line 308) then derives smooth boundary tensors L x n with the compatibility HasFDerivAt (fun y => L y n) ((L x (n+1)).curryLeft.comp (inr ℝ ℝ Space)) x."
+    },
+    {
+     "name": "NavierStokes.DiagonalResidual.allJetsFlat_residual_of_stages",
+     "file": "NavierStokes/DiagonalResidual.lean",
+     "line": 272,
+     "what_it_states": "theorem allJetsFlat_residual_of_stages ... : AllJetsFlat l q (fun z => navierStokesResidual u p z.1 z.2), where (ResidualStability.lean:67) def AllJetsFlat (l : Filter D) (q : D → ℝ) (f : D → E) : Prop := ∀ m : ℕ, Flatness.PowerFlat l q (fun x => ‖iteratedFDeriv ℝ m f x‖), i.e. for every m and N, ‖iteratedFDeriv ℝ m R x‖ ≤ C * q x ^ N eventually along l. Clause (iii-a) in the form 'every jet of the residual is O(q^N) for every N', but along a filter (in the actual use, 𝓝[SpacetimeEndpoint.openPast 1] (1,0), MixedDiagonalResidual.lean:200-235, whose conclusion is JointResidualLimits.VanishingJointJets (residual ...)), not uniformly on {0 ≤ X ≤ X_1} as in (3.4)."
+    },
+    {
+     "name": "NavierStokes.ActualExteriorPrefix.ExteriorStages",
+     "file": "NavierStokes/ActualExteriorPrefix.lean",
+     "line": 56,
+     "what_it_states": "structure ExteriorStages (B Nr : ℕ) (A D : ℕ → VelocityField) (P : ℕ → PressureField) : Prop where potential_zero : EqOn (A 0) (TailGaugePotential.finalPotential ...) (exteriorDomain Nr); potential_succ : ∀ k, EqOn (A (k + 1)) 0 (exteriorDomain Nr); direct_zero : ∀ k, EqOn (D k) 0 (exteriorDomain Nr); pressure_zero : EqOn (P 0) (FinalSlowBase.pressure ...) (exteriorDomain Nr); pressure_succ : ∀ k, EqOn (P (k + 1)) 0 (exteriorDomain Nr), with exteriorDomain Nr := {w ∈ preterminal ∧ w ∉ ActualPolarCoverage.active} ∩ physicalSublevel h (Q Nr) and active := {w | X-coordinate ∈ Icc activeLeft activeRight} (ActualPolarCoverage.lean:24-27). Proved for the actual stages at ActualCandidateAssembly.lean:701 (exteriorStages). Clause (iii-b): all corrections vanish outside the active X-annulus; only the stage-0 base survives there."
+    },
+    {
+     "name": "NavierStokes.FinalSlowBase.exists_final_base (heat exterior conjunct) / ModulatedExterior.actual_terminal_extension",
+     "file": "NavierStokes/FinalSlowBase.lean",
+     "line": 639,
+     "what_it_states": "exists_final_base concludes among others `EqOn (pressure H v upper B) (BaseExterior.heatPressureField (BaseExterior.nominalHeatNormalization W) F.data.h) (BaseExterior.cartesianExterior F.data.h (BaseExterior.nominalExteriorRadius W))` (lines 685-687); ModulatedExterior.actual_terminal_extension (ModulatedExterior.lean:513) gives, at every x with x 2 = 0 and 0 < radialEnergy x, an open U ∋ (1,x) with EqOn (completedVelocity ...) (heatVelocity ...) U ∧ EqOn (completedPressure ...) (heatPressureField ...) U and ContDiffOn ℝ ∞ on U ∩ (Iic 1 ×ˢ univ). The heat profile itself is RadialHeatProfile.profile (RadialHeatProfile.lean:27, docstring cites the paper's 'Lemma 4.4' = ledger Lemma A.6) with the swirl heat equation at RadialHeatProfile.lean:714 (scaled_forward_radial_heat_equation). Clause (iii-b) exterior formula (3.5) for the base."
+    },
+    {
+     "name": "NavierStokes.MixedAxisPreservation.final_origin_eventually / final_origin_blowup",
+     "file": "NavierStokes/MixedAxisPreservation.lean",
+     "line": 507,
+     "what_it_states": "final_origin_eventually: (fun t => mixedDiagonal (finalPotential H v upper B) p D scales (t, 0)) =ᶠ[𝓝[<] 1] (fun t => ((1 - t) ^ (-CoordinateAlgebra.A F.data.h) * W.axis.j) • coordinateVector 2). final_origin_blowup: Tendsto (fun t => ‖mixedDiagonal ... (t, 0)‖) (𝓝[<] 1) atTop. Base version: BaseResidual.baseVelocity_at_origin (BaseResidual.lean:62): baseVelocity a h C d (t, 0) = ((1 - t) ^ (-CoordinateAlgebra.A h) * d.axial 0 (0, 0)) • coordinateVector 2, and baseVelocity_axis_tendsto_atTop (line 104). This is the Lean counterpart of clause (iv): an exact leading formula for the AXIAL component (coordinateVector 2) AT THE ORIGIN x=0, consumed only as Tendsto atTop → SpeedUnboundedAtOne (MixedPeriodicAssembly.periodicVelocity_speed_unbounded, line 322, via periodicVelocity_origin, line 87)."
+    },
+    {
+     "name": "NavierStokes.BlowupImplication.finite_time_profile_tendsto_atTop",
+     "file": "NavierStokes/BlowupImplication.lean",
+     "line": 125,
+     "what_it_states": "theorem finite_time_profile_tendsto_atTop {T A E : ℝ} {error : ℝ → ℝ} (hA : 0 < A) (hE : 0 < E) (herror : Tendsto error (𝓝[<] T) (𝓝 0)) : Tendsto (fun t => (T - t) ^ (-A) * (E + error t)) (𝓝[<] T) atTop. Abstract scalar lemma of the shape tau^{-A}(e_0 + o(1)) ⇒ divergence; no instance with error = O(tau^{2h}) for the constructed swirl was found."
+    },
+    {
+     "name": "NavierStokes.NaturalAxisData.SmallParameters (h bound)",
+     "file": "NavierStokes/NaturalAxisData.lean",
+     "line": 41,
+     "what_it_states": "structure SmallParameters (h j : ℝ) : Prop where h_pos : 0 < h; h_le : h ≤ 1 / 1000; j_pos : 0 < j; j_le : j ≤ 1 / 1000. The actual profile's h carries this via NominalProfile.AxisStage.small (NominalProfile.lean:64) — stronger than the paper's 0<h<1/100."
+    }
+   ],
+   "missing_or_different": [
+    "NOT STATED: no Lean declaration asserts the existence of a local pair (u,p) on Omega_* = {tau>0, q<q_*} with items (i)-(iv) as a package. The construction goes from finite stages (StageEstimates + extensions) directly to ProblemStatement.candidateStatement (periodic, time-activated, spatially localized fields), folding Theorem 3.1, Prop 9.9 and Section 10 together (MixedCandidateAssembly.lean:130, GermCandidateAssembly.lean:164, ActualCandidateAssembly.lean:1121).",
+    "(iv) MISSING: the rate u_theta(sqrt(2 X_in tau),0,0,1-tau) = tau^{-A}(e_0 + O(tau^{2h})) is absent in every form. What exists is the exact leading formula for the axial component at the origin x=0 (BaseResidual.lean:62; MixedAxisPreservation.lean:507), which is a different observable (u_z at r=0, not u_theta at X=X_in), and it is consumed only as Tendsto ‖u(t,0)‖ atTop. The only q^(2h)-type error bounds found (AllBandBaseJets.lean:97-98: ‖blownJet m (swirlError a h C d) (q, w)‖ ≤ B * q ^ (2 * h)) concern the base's normalized swirl/axial errors on an inner box, not the evaluation on the path (sqrt(2 X_in tau),0,0). grep for X_in / innerRadius found no counterpart.",
+    "(iii-a) DIFFERENT: (3.4) is uniform on {0 ≤ X ≤ X_1} for each finite X_1; Lean's AllJetsFlat / VanishingJointJets is along the filter 𝓝[openPast 1] (1,0) (a spacetime neighbourhood of the singular point), i.e. joint flatness at (1,0), not a bound parameterised by X_1. Flatness away from the origin is instead subsumed by the one-sided smooth extensions (AwayExtensions) and the boundary-limit theorems.",
+    "(iii-b) RESTRUCTURED: X ≥ X_ext is realised as w ∉ ActualPolarCoverage.active (X outside Icc activeLeft activeRight); higher stages vanish there (ExteriorStages) and the stage-0 base equals the explicit heat fields on cartesianExterior. Not checked: whether the paper's X_ext and Lean's activeRight coincide (numerically irrelevant for the exported statement).",
+    "(ii) RESTRUCTURED/STRONGER: replaced by existence of smooth one-sided extensions across t=1 at every x ≠ 0 (OneSidedExtension) plus derived compatible boundary tensors (exists_smooth_compatible_limits). The paper's restriction c ≤ q ≤ c' has no counterpart because the extension is pointwise-local.",
+    "(i) RESTRUCTURED: u = curl(cut potential sum) + direct angular sum; axis smoothness of B e_theta is by construction (AngularData.vanishes: the scalar vanishes for radius < inner), not stated as a Cartesian-smoothness lemma; exact divergence-freeness is via SolenoidalDiagonal (curl after cutoff) and CandidateProperties.divergence_free.",
+    "Constants: h is bounded by h ≤ 1/1000 (SmallParameters.h_le), which implies the paper's h < 1/100; q_* is ActualCandidateConstruction.qbig B N0 = ChartScales.Q (firstBand B N0) (line 155), fixed once."
+   ],
+   "verdict": "MISSING-CLAUSE",
+   "on_main_theorem_import_path": "NO",
+   "how_checked": "All pointer modules (ActualCandidateAssembly, MixedCandidateAssembly, DiagonalResidual, BaseExterior, ModulatedExterior, JointResidualLimits, BaseResidual, BlowupImplication, MixedAxisPreservation) are in the 580-module transitive import closure of ComparatorSolution.lean (computed from import lines). The exported statements (ComparatorSolution.lean:16-27) assert only the comparator's breakdown propositions; their proofs consume, of Theorem 3.1's content, exactly CandidateProperties/R3CompactCandidate.Properties (smoothness on [0,1)×space, periodicity or compact support, zero datum, exact NS at viscosity one, SpeedUnboundedAtOne) — see ComparatorTheorem.lean:25-54 and ComparatorR3Theorem.lean:19-43. The missing clause (iv rate) is not asserted by the exported statement and is not needed by it, so the kernel-checked theorem is not weaker than its own statement; the visible scope gap (no blow-up rate, no local-field theorem) is at statement level, already recorded by arc 6 for Theorem 1.1. Declaration-level dependency tracing was not performed (needs lean)."
+  },
+  {
+   "id": "Definition 3.3",
+   "paper_clauses": [
+    "alpha << beta (alpha ≥ 0, beta > 0) means alpha/beta is required to be sufficiently small, the allowed size depending on all data already fixed.",
+    "In a chain of constants, choices proceed from right to left; small reciprocals specify large parameters.",
+    "For expressions depending on profile variables the smallness is uniform on the stated domain and ensured by those parameter choices."
+   ],
+   "lean": [
+    {
+     "name": "NavierStokes.NaturalAxisData.SmallParameters",
+     "file": "NavierStokes/NaturalAxisData.lean",
+     "line": 41,
+     "what_it_states": "structure SmallParameters (h j : ℝ) : Prop where h_pos : 0 < h; h_le : h ≤ 1 / 1000; j_pos : 0 < j; j_le : j ≤ 1 / 1000 — docstring: 'A concrete range of choices permitted by the manuscript's smallness order.' Numerical thresholds replace '<<' for h and j."
+    },
+    {
+     "name": "NavierStokes.ReferenceBounds.exists_reference_bounds",
+     "file": "NavierStokes/ReferenceBounds.lean",
+     "line": 1180,
+     "what_it_states": "theorem exists_reference_bounds ... : ∃ M > 0, ∀ Λ : ℝ, ∀ hΛ : 0 < Λ, M ≤ Λ → ∃ C₀ > 0, ∀ C : ℝ, C₀ ≤ C → ∃ E : NaturalEntrance.EntranceProfile d Λ C, ∃ r > 0, ∀ δ : ℝ, ∀ hδ : 0 < δ, δ < r → ∃ hδT : 2 * δ < ReferencePath.rampLimit, ReferenceBoundsOnHold E.profile hΛ hδ hδT hP0. Docstring: 'The bounded jet constants and the scale threshold precede Λ; the pressure normalization threshold precedes C; the short cutoff time is chosen last.' The right-to-left order is encoded as ∃/∀ alternation."
+    },
+    {
+     "name": "NavierStokes.OutgoingProfile.exists_outgoing_profile",
+     "file": "NavierStokes/OutgoingProfile.lean",
+     "line": 640,
+     "what_it_states": "theorem exists_outgoing_profile (P m : ℝ) (hP : 0 < P) (hm : 0 < m) : ∃ lam₀ C : ℝ, 0 < lam₀ ∧ 0 < C ∧ ∀ lam : ℝ, 0 < lam → lam < lam₀ → ∀ h : ℝ, 0 < h → 2 * h < lam → ∃ F : Profile, ... ∧ Specification F C. Docstring: 'Choose lam after the fixed prefix parameters, and then any permitted h.'"
+    },
+    {
+     "name": "NavierStokes.ScheduledProfileChoice.heightCap",
+     "file": "NavierStokes/ScheduledProfileChoice.lean",
+     "line": 81,
+     "what_it_states": "noncomputable def heightCap (core : OutgoingSchedule.Parameters) (extra : ℝ) : ℝ := min (core.lam / 4) (min extra (min (1 / 1000) (min (1 / 4) (1 / (1 + TerminalCone.releaseBudget core))))) — docstring: 'chosen before the terminal exponent h'. An explicit cap replacing 'h << lam'."
+    }
+   ],
+   "missing_or_different": [
+    "There is no Lean definition of a relation '<<' nor of an order-of-choices convention; grep for '<<' (outside shift operators), 'right to left', 'smallness order' finds only docstrings (e.g. 'chosen before', 'precede' in ~30 files).",
+    "The convention is realised implicitly: every place the paper writes a chain a << b << ... is a Lean theorem whose quantifier alternation ∃M ∀Λ≥M ∃C₀ ∀C≥C₀ ∃r ∀δ<r ... fixes the order, or an explicit numeric cap (1/1000, 1/120, lam/4).",
+    "Nothing is missing that could be a theorem: a notational convention has no propositional content to formalize."
+   ],
+   "verdict": "NOT-A-THEOREM-IN-LEAN",
+   "on_main_theorem_import_path": "NO",
+   "how_checked": "NaturalAxisData, ReferenceBounds, OutgoingProfile, ScheduledProfileChoice are in the import closure. A convention cannot weaken a kernel-checked statement; the order of choices is enforced by Lean's binder scoping in each existence theorem, which is strictly more rigid than the paper's convention."
+  },
+  {
+   "id": "Lemma 4.4",
+   "paper_clauses": [
+    "(i) If (U_1,E_1)=(U_2,E_2) for X ≥ X_h and Delta m(X_h,eta)=0 (five cumulative integrals M,I,J,S,C_p agree at X_h), then m_1=m_2 and Pi_i, V_{0,i}, Q_{s,i}, N_{s,i}, p_{s,i}, a_i, b_{s,i}, T_{0,i} agree for all X ≥ X_h, eta ∈ [-1,1].",
+    "(ii) (4.17): ||Delta(Q_s,N_s,p_s)||_k ≤ C_k (||Delta(U,E)||_{k+1} + ||Delta m||_{k+1}) on R=[X_0,X_1]×[-1,1] with E_i ≥ e_min, C_k depending only on k,h,X_0,X_1,e_min, the C^{k+1} norm of Pi_ax and a common C^{k+1} bound; no radial derivative of a difference occurs.",
+    "Remark (4.19): under the rescaling X = rho x, hat H = H/sqrt(rho), hat m = (M/rho, I/rho^{3/2}, J/rho^{3/2}, S/rho, C_p), hat p_s = p_s/rho the same estimate holds on a fixed x-rectangle with a constant independent of rho."
+   ],
+   "lean": [
+    {
+     "name": "NavierStokes.ModulatedExterior.integral_equal_after",
+     "file": "NavierStokes/ModulatedExterior.lean",
+     "line": 28,
+     "what_it_states": "theorem integral_equal_after {f g : ℝ → ℝ} {B X : ℝ} (hB : 0 ≤ B) (hX : B ≤ X) (hf : ContinuousOn f (Icc 0 X)) (hg : ContinuousOn g (Icc 0 X)) (hanchor : (∫ r in (0 : ℝ)..B, f r) = ∫ r in (0 : ℝ)..B, g r) (htail : EqOn f g (Icc B X)) : (∫ r in (0 : ℝ)..X, f r) = ∫ r in (0 : ℝ)..X, g r. The propagation mechanism behind (i)."
+    },
+    {
+     "name": "NavierStokes.ModulatedExterior.pressure_equal_after",
+     "file": "NavierStokes/ModulatedExterior.lean",
+     "line": 61,
+     "what_it_states": "theorem pressure_equal_after (P : Profiles D) (Q : Profiles D') {B X eta : ℝ} (hB : 0 ≤ B) (hX : B ≤ X) ... (h0 : P.pressure0 = Q.pressure0) (hanchor : primitive (fun w => P.f w ^ 2) (B, eta) = primitive (fun w => Q.f w ^ 2) (B, eta)) (htail : ∀ r ∈ Icc B X, P.f (r, eta) = Q.f (r, eta)) : P.pressure (X, eta) = Q.pressure (X, eta). Clause (i) for the pressure Pi (same axis constant pressure0, matched squared-swirl integral, equal swirl beyond B)."
+    },
+    {
+     "name": "NavierStokes.ModulatedExterior.modified_fields_after / modified_mass_after / modified_pressure_after",
+     "file": "NavierStokes/ModulatedExterior.lean",
+     "line": 99,
+     "what_it_states": "For the actual finite modification M of the nominal profiles: Q.f (X, eta) = W.profiles.f (X, eta) ∧ Q.U (X, eta) = W.profiles.U (X, eta) (line 99), Q.M (X, eta) = W.profiles.M (X, eta) (line 105), Q.pressure (X, eta) = W.profiles.pressure (X, eta) (line 115), all for nominalOuterX W ≤ X, eta ∈ S. Clause (i) for f,U,M,Pi only; the I,J,S rows and the derived V_0, Q_s, N_s, p_s, a, b_s, T_0 are not stated as equal-after lemmas here (the heat-exterior equalities realized_base_eq_heat (line 275) / actual_fields_eq_heat (line 353) give the exterior fields directly instead)."
+    },
+    {
+     "name": "NavierStokes.ModulatedStockBounds.profile_stocks_lipschitz",
+     "file": "NavierStokes/ModulatedStockBounds.lean",
+     "line": 225,
+     "what_it_states": "theorem profile_stocks_lipschitz (Q : Profiles D) (h : ℝ) {S : Set Point} (hS : IsCompact S) (hSD : S ⊆ D.carrier) (hX : ∀ p ∈ S, 0 < p.1) (hL : ∀ p ∈ S, NaturalAxisData.L h p.2 ≠ 0) (hpos : ∀ p ∈ S, 0 < Q.f p) : ∃ δ C : ℝ, 0 < δ ∧ 0 ≤ C ∧ ∀ {D'} (P : Profiles D'), ∀ p ∈ S, p ∈ D'.carrier → ‖profileData P p - profileData Q p‖ ≤ δ → 0 < P.f p ∧ |ActivationStocks.profileStockOne P h p - ActivationStocks.profileStockOne Q h p| ≤ C * ‖profileData P p - profileData Q p‖ ∧ |profileStockTwo P h p - profileStockTwo Q h p| ≤ C * ‖profileData P p - profileData Q p‖, where profileData P p := ![P.f p, P.U p, P.M p, parameterPartial P.M p, P.I p, parameterPartial P.I p, P.J p, parameterPartial P.J p, P.S p, parameterPartial P.S p, P.pressure p, parameterPartial P.pressure p] (line 26) and profileStockOne P h p := p.1 * P.angularLag h p / L h p.2, profileStockTwo := p.1 * P.axialLag h p / (L h p.2 * P.E p) (ActivationStocks.lean:36-40), with ProfileHistories.lean:584-588 documenting angularLag as 'The printed Q_s' and axialLag as 'The printed N_s'. This is (4.17) at k = 0 for the pair (Q_s, N_s) (rescaled by X/L and X/(L E)): C^0 difference of the stocks ≤ C × (C^0 difference of (f,U) + C^1-in-eta difference of the five rows), constant depending on the compact set and the nominal profile. Pointwise in eta, not a sup-norm statement, but that is only packaging."
+    },
+    {
+     "name": "NavierStokes.ModulatedStockBounds.stockMap_lipschitz_on_dataSet",
+     "file": "NavierStokes/ModulatedStockBounds.lean",
+     "line": 135,
+     "what_it_states": "∃ C ≥ 0, ∀ p ∈ S, ∀ z w ∈ dataSet μ R, ‖stockMap h (p, w) - stockMap h (p, z)‖ ≤ C * ‖w - z‖ — Lipschitz constant of the explicit (4.16)-type formulas in the 12 data slots on a compact set with positive angular field; the 'no radial derivative of a difference' feature is visible: only parameterPartial (eta-derivatives) enter the data."
+    },
+    {
+     "name": "NavierStokes.RepairConeBounds.actual_observation_estimate",
+     "file": "NavierStokes/RepairConeBounds.lean",
+     "line": 1205,
+     "what_it_states": "theorem actual_observation_estimate (F : Profile) : ∃ r L : ℝ, 0 < r ∧ 0 ≤ L ∧ ∀ (A : NominalProfile.AxisStage F) (c : NominalProfile.Controls A) (hsep : c.separation ≤ Real.exp (-8)) (eps : ℝ), eps ≤ r → JetBounds.FiniteJetBound 1 (endpointError c) (Icc (-1) 1) eps → JetBounds.FiniteJetBound 1 (NominalProfile.resetCoefficients F c.debt) (Icc (-1) 1) eps → ∀ p ∈ window, NominalProfile.SmallDebt F c.debt p.2 → ‖actualObservations c hsep p - observations F (0, p)‖ ≤ L * eps. The special instance used by the joining step: observation vector (fields, stocks, lags Q,N, shears a,b per physical_lags/physical_shears lines 962-993) of the actual stage vs. the nominal, bounded by a first-jet tolerance."
+    },
+    {
+     "name": "(module) NavierStokes.MatchingDebtBounds",
+     "file": "NavierStokes/MatchingDebtBounds.lean",
+     "line": 1,
+     "what_it_states": "Quantitative bounds for the five-row matching debt; the only 'rho' here is a drift budget (line 539), not the rescaling (4.19)."
+    }
+   ],
+   "missing_or_different": [
+    "(ii) for k ≥ 1: no theorem bounds the C^k (k ≥ 1) difference of (Q_s, N_s, p_s) by C^{k+1} differences; the Lipschitz results are order-0 in the output (profile_stocks_lipschitz, stockMap_lipschitz_on_dataSet, actual_observation_estimate). grep 'Lipschitz|lipschitz' in the four pointer modules finds no higher-order version.",
+    "(ii) p_s: the pressure Pi enters profileData as an INPUT slot; no Lean statement bounds a difference of p_s (paper's (4.11) stress pressure) by profile/row differences. I could not identify a Lean field named for p_s; the paper's p_s may be absorbed in stockTwo's pressure terms (X * (4 A eta P - d eta P_eta) in ActivationStocks.stockTwo, lines 31-34), but I did not verify this identification.",
+    "Remark (4.19) (rho-rescaling invariance of the constant): absent; grep -i rescal/rho in ModulatedStockBounds, RepairConeBounds, MatchingDebtBounds finds nothing of this kind.",
+    "(i): equal-after lemmas exist for f, U, M, Pi (ModulatedExterior.lean:99-115) and for the general primitive mechanism; equality of I, J, S and of the derived quantities V_0, Q_s, N_s, p_s, a, b_s, T_0 beyond X_h is not stated as such — in the actual construction it is replaced by the stronger exterior identities realized_base_eq_heat / actual_fields_eq_heat (the modified base equals the explicit heat field beyond the outer radius).",
+    "Hypothesis match: paper needs both pressures to share the axis constant Pi_ax; Lean's pressure_equal_after takes h0 : P.pressure0 = Q.pressure0 — same content."
+   ],
+   "verdict": "WEAKER",
+   "on_main_theorem_import_path": "NO",
+   "how_checked": "ModulatedExterior is imported by FinalSlowBase, SlowBaseEndpoint, TailGaugePotential (one hop) and FinalSlowBase.lean:609 uses realized_terminal_extension; ModulatedStockBounds is imported by ModulatedCone; RepairConeBounds and MatchingDebtBounds by NominalConeAssembly — all inside the 580-module closure. The exported theorems need only that the constructed base has the properties packaged in NominalProfile.Witness/ModulatedProfileAssembly.Witness and FinalSlowBase.exists_final_base; those are proved from the order-0 special forms. The general C^k estimate (4.17) and the remark (4.19) are proof devices of the paper that the Lean construction does not need, so their absence does not weaken the kernel-checked statement. Whether the Lean proof of the joining step is 'the same argument' as the paper's is not a question source reading can settle."
+  },
+  {
+   "id": "Corollary 7.3",
+   "paper_clauses": [
+    "The solution operators f_m -> (t_m, pi_m) of Proposition 7.2 (with t_m(0)=0) are defined at every finite correction stage on the same domain 0 < q < q_*.",
+    "Increasing the finite harmonic set or the derivative order changes constants and polynomial degrees but does not require shrinking the domain."
+   ],
+   "lean": [
+    {
+     "name": "NavierStokes.ActualCandidateConstruction.qbig",
+     "file": "NavierStokes/ActualCandidateConstruction.lean",
+     "line": 155,
+     "what_it_states": "noncomputable def qbig (B N0 : ℕ) : ℝ := ChartScales.Q (firstBand B N0), with firstBand B N0 := max 4 (ActualCycleParameters.bandFloor B N0) (line 144); theorem qbig_pos (B N0 : ℕ) : 0 < qbig B N0; physicalDomain B N0 := CutStageEstimates.physicalSublevel h (qbig B N0) (line 189) where physicalSublevel h qbig := PhysicalWaveSum.preterminal ∩ {w | PhysicalWaveSum.physicalQ h w < qbig} (CutStageEstimates.lean:672). The domain depends only on (B,N0), never on the stage index j, the harmonic set or a derivative order."
+    },
+    {
+     "name": "NavierStokes.ActualCandidateConstruction.parameterSequence",
+     "file": "NavierStokes/ActualCandidateConstruction.lean",
+     "line": 37,
+     "what_it_states": "noncomputable def parameterSequence (B N0 : ℕ) : ℕ → CycleParameters (Index B N0) := fun _ => parameters B N0, with parameters B N0 := ActualCycleParameters.fixedParameters B N0 (line 34) and fixedParameters := CycleParameters.ofGeometry ActualInitialization.geometry ActualPrimary.h (CommonWindow.index ActualPrimary.h) ... (ActualCycleParameters.lean:415-419; simp lemmas fixedParameters_strip/gauge/patch/coordinate = ActualInitialization.geometry.*). Every correction cycle uses the same strip, gauge, patch and coordinate — the 'same domain' of the Corollary, by construction."
+    },
+    {
+     "name": "NavierStokes.MixedCandidateAssembly.StageEstimates",
+     "file": "NavierStokes/MixedCandidateAssembly.lean",
+     "line": 28,
+     "what_it_states": "structure StageEstimates (h qbig : ℝ) (A B : ℕ → VelocityField) (P : ℕ → PressureField) where potential_smooth : ∀ j, ContDiffOn ℝ ∞ (A j) (CutStageEstimates.physicalSublevel h qbig); ... potentialConstant : ℕ → ℕ → ℝ; ... potential_bound : CutStageEstimates.RawStageBounds (PhysicalWaveSum.physicalQ h) A gain potentialLoss potentialConstant potentialLog (PhysicalWaveSum.preterminal ∩ CutStageEstimates.physicalSublevel h qbig); ... with RawStageBounds q A g L C p S := ∀ j, 1 ≤ j → ∀ m x, x ∈ S → q x ≤ 1 → ‖iteratedFDeriv ℝ m (A j) x‖ ≤ C j m * (1 + |Real.log (q x)|) ^ (p j m) * q x ^ (g j - L m) (CutStageEstimates.lean:199-203). One qbig for all stages j and all derivative orders m; only the constant C j m and log-degree p j m vary — exactly the Corollary's 'changes constants and polynomial degrees but not the domain', stated as an interface."
+    },
+    {
+     "name": "NavierStokes.ActualCandidateAssembly.estimates",
+     "file": "NavierStokes/ActualCandidateAssembly.lean",
+     "line": 1090,
+     "what_it_states": "noncomputable def estimates (B N0 : ℕ) (hN : ...) : MixedCandidateAssembly.StageEstimates h (ActualCandidateConstruction.qbig B N0) (potentialStages B N0 hN) (directStages B N0 hN) (pressureStages B N0 hN) := GluedStageEstimates.actualStageEstimates ... — the interface is discharged for the actual stages with the single qbig B N0."
+    },
+    {
+     "name": "NavierStokes.CommonCoverSolve (module)",
+     "file": "NavierStokes/CommonCoverSolve.lean",
+     "line": 1,
+     "what_it_states": "'Actual slot solves on a common torus' — the Prop 7.2 solution operators (arc 6 pointers anchoredSolve_projected_equation line 970, copySolve_tangent line 988) are defined on the common cover, with no stage-indexed domain parameter visible in the module header."
+    }
+   ],
+   "missing_or_different": [
+    "No Lean theorem states 'the solution operators of Proposition 7.2 are defined at every finite stage on the same domain'. The property is a consequence of how the Lean objects are typed: the cycle parameters are a constant sequence (parameterSequence B N0 := fun _ => parameters B N0) and every stage estimate is on physicalSublevel h (qbig B N0).",
+    "The paper's q_* (Lemma 7.1) and the Corollary's constant/degree dependence appear as the interface fields potentialConstant/potentialLog : ℕ → ℕ → ℝ of StageEstimates; there is no separate lemma that the domain could have shrunk and did not.",
+    "I did not verify that the Lean 'solution operators' (CommonCoverSolve.anchoredSolve/copySolve) are literally the paper's f_m -> (t_m, pi_m); arc 6 matched Prop 7.2 to them and I only checked that no stage- or order-dependent domain parameter enters their module."
+   ],
+   "verdict": "NOT-A-THEOREM-IN-LEAN",
+   "on_main_theorem_import_path": "NO",
+   "how_checked": "ActualCandidateConstruction is imported by ActualCandidateAssembly, which is imported by ComparatorTheorem and R3ActualCandidate (one hop from the exported theorems); ActualCycleGeometry/ActualCycleParameters are in the closure. Because the common domain is built into the types consumed by selected_witness, the kernel-checked theorem is not weaker than its statement on this account; if the domain had shrunk with the stage, candidate_of_finite_stages could not have been applied with one qbig."
+  },
+  {
+   "id": "Lemma 9.7",
+   "paper_clauses": [
+    "There exists q_big > 0, independent of the correction stage and derivative order, such that every finite partial sum (u^[j], p^[j]), before summation cutoffs, is well defined on 0 < q < q_big.",
+    "For every fixed stage and output amplitude derivative, the construction and its estimate require only finitely many input amplitude derivatives.",
+    "The constants may depend on the correction stage."
+   ],
+   "lean": [
+    {
+     "name": "NavierStokes.ActualCandidateConstruction.qbig / selectedQbig",
+     "file": "NavierStokes/ActualCandidateConstruction.lean",
+     "line": 155,
+     "what_it_states": "noncomputable def qbig (B N0 : ℕ) : ℝ := ChartScales.Q (firstBand B N0); theorem qbig_pos : 0 < qbig B N0; noncomputable def selectedQbig : ℝ := qbig selectedBudget selectedThreshold (line 215). One positive q_big fixed before any stage; the uncut prefixes uncutVelocity A B J / uncutPrefix P (J+1) are estimated on physicalSublevel h qbig for every J (MixedDiagonalResidual.lean:200-235, hypotheses hbg, hres quantified ∀ J m)."
+    },
+    {
+     "name": "NavierStokes.PhysicalStageSupport.actual_coherent_families_support",
+     "file": "NavierStokes/PhysicalStageSupport.lean",
+     "line": 460,
+     "what_it_states": "theorem actual_coherent_families_support (WA : ℕ → WaveData ...) (WP ...) (MA MB MP : ∀ j, ActualMeanFamily ...) (hsA hsB hsP : ∀ j, ActualNativeSupport ...) {qbig : ℝ} (hqA : ∀ j, qbig ≤ ChartScales.Q (NA j)) (hqB ...) (hqP ...) (hWA hWP : ∀ j, (W_ j).upperRadius ≤ 2 * ActualInitialization.geometry.patch.b) : (∀ j, SublevelShrinkingSupport ActualPrimary.h actualOuterConstant qbig (fun w => (WA j).vector w + (MA j).angularField w)) ∧ (∀ j, SublevelShrinkingSupport ... (MB j).angularField) ∧ (∀ j, SublevelShrinkingSupport ... (fun w => (WP j).pressure w + (MP j).field w)). One outer-support constant (actualOuterConstant) and one qbig for every stage j, where SublevelShrinkingSupport h C qbig f := ∀ w, w.1 < 1 → physicalQ h w < qbig → f w ≠ 0 → radius w ≤ outerRadius h C w (MixedDiagonalExtensions.lean:99-101)."
+    },
+    {
+     "name": "NavierStokes.MixedCandidateAssembly.candidate_of_finite_stages",
+     "file": "NavierStokes/MixedCandidateAssembly.lean",
+     "line": 130,
+     "what_it_states": "Takes all stages on the single localDomain F.data.h qbig / localSlowDomain F.data.h qbig ({w | w.1 < 1 ∧ physicalQ h w < qbig}, MixedAxisPreservation.lean:448) — the 'well defined on 0<q<q_big for every finite partial sum' hypothesis, consumed once."
+    },
+    {
+     "name": "NavierStokes.JetBounds.FiniteJetBound",
+     "file": "NavierStokes/JetBounds.lean",
+     "line": 31,
+     "what_it_states": "def FiniteJetBound (m : ℕ) (f : D → E) (s : Set D) (C : ℝ) : Prop := ∀ n : ℕ, n ≤ m → ∀ x ∈ s, ‖iteratedFDeriv ℝ n f x‖ ≤ C. The estimate interfaces (e.g. RepairConeBounds.actual_observation_estimate, StageEstimates.finite_background : ∀ J m, JetRate ...) consume input jets only through such finite-order bounds. The companion AllJetBound (line 35) is defined and given algebra lemmas in JetBounds.lean but is used in no other module of the tree (grep -rl AllJetBound: JetBounds.lean only) — so no construction step demands infinitely many input derivatives."
+    },
+    {
+     "name": "(module) NavierStokes.ActualCycleGeometry",
+     "file": "NavierStokes/ActualCycleGeometry.lean",
+     "line": 1,
+     "what_it_states": "'The actual fixed geometry for every correction cycle': similarityData (strip, gauge, patch, index, gap, slow scale) fixed once, strip_eq : similarityData.strip = ActualInitialization.strip, gauge_eq : similarityData.gauge = ActualPrimary.commonGauge."
+    }
+   ],
+   "missing_or_different": [
+    "No Lean theorem states Lemma 9.7. Its first clause is a definitional fact about the construction (one qbig B N0, one geometry, constant parameter sequence); its second clause ('finitely many input derivatives') is a meta-property of every Lean statement in the chain — each theorem's hypotheses mention finitely many derivative orders (FiniteJetBound m, JetRate ... m, RawStageBounds with ∀ m inside the conclusion but per-m constants) — and is not, and could not sensibly be, a stated theorem.",
+    "The paper's DAG derivative-count recursion D_{v,a}(m) = max_{w->v} D_{w,a}(m + d_{v,w}) has no counterpart; the derivative bookkeeping is implicit in the explicit loss functions potentialLoss/directLoss/pressureLoss/backgroundLoss/residualLoss : ℕ → ℝ of StageEstimates and in ExponentLedger (arc 6's Prop 9.6 pointer).",
+    "The paper's 'before summation cutoffs' is matched: raw (uncut) stages are what StageEstimates bounds (docstring: 'Actual uncut jets, only on the portion q ≤ 1 of the estimate carrier', CutStageEstimates.lean:197).",
+    "The relation 0 < q_big ≤ q_* between Lemma 9.7 and Lemma 7.1 has no counterpart because the two thresholds are the same Lean object (qbig B N0)."
+   ],
+   "verdict": "NOT-A-THEOREM-IN-LEAN",
+   "on_main_theorem_import_path": "NO",
+   "how_checked": "ActualCandidateConstruction (one hop below ActualCandidateAssembly), PhysicalStageSupport, MixedCandidateAssembly, ActualCycleGeometry, JetBounds are all in the closure. Both clauses are consumed by the exported proof in the form of types (single qbig in Witness/StageEstimates) and of finitary hypotheses; nothing weaker than the paper's lemma is asserted anywhere, and no statement of the exported theorems depends on a q_big rate or a derivative count."
+  }
+ ],
+ "gate_answer": "Per statement, at source (clone 8937a8f): Theorem 3.1 = MISSING-CLAUSE — items (i)-(iii) are present in restructured form (cut-potential curl + direct angular sum with axis smoothness by support, one-sided smooth extensions across t=1 at every x≠0, AllJetsFlat/VanishingJointJets residual at (1,0) plus vanishing of all corrections outside the active X-annulus and an exact heat base on cartesianExterior), but item (iv), the swirl rate u_theta(sqrt(2X_in tau),0,0,1-tau)=tau^{-A}(e_0+O(tau^{2h})), is absent in every form: Lean has only the exact leading axial formula at the origin, ((1-t)^(-A) * W.axis.j) • e_2 (MixedAxisPreservation.lean:507, BaseResidual.lean:62), used solely as Tendsto atTop → SpeedUnboundedAtOne, and no local-field theorem on Omega_* is ever stated. Definition 3.3 = NOT-A-THEOREM-IN-LEAN (the '<<' convention is realised by quantifier alternation and numeric caps such as SmallParameters.h_le : h ≤ 1/1000). Lemma 4.4 = WEAKER — part (i) holds for f,U,M,Pi via the equal-after lemmas (ModulatedExterior.lean:28-115) and the stronger exterior heat identities; part (ii) exists only at output order k=0 for the two stocks Q_s,N_s (ModulatedStockBounds.profile_stocks_lipschitz, line 225) and in the special observation form (RepairConeBounds.lean:1205); no C^k, k≥1 version, no p_s difference bound, no rescaling remark (4.19). Corollary 7.3 and Lemma 9.7 = NOT-A-THEOREM-IN-LEAN — realised by construction: one qbig B N0 = ChartScales.Q (firstBand B N0) (ActualCandidateConstruction.lean:155), a constant cycle-parameter sequence (line 37), one geometry (ActualCycleGeometry), StageEstimates on one physicalSublevel h qbig with stage/order-dependent constants only, and derivative inputs consumed through FiniteJetBound m (AllJetBound is unused outside JetBounds.lean). Import path: every pointer module of all five statements lies in the 580-module transitive import closure of ComparatorSolution.lean, but the answer to 'is the kernel-checked theorem weaker than a paper reader would assume because of a missing piece' is NO for all five: the exported theorems assert exactly the comparator's breakdown propositions, whose proofs consume only CandidateProperties / R3CompactCandidate.Properties (smoothness, periodicity or compact support, zero datum, exact NS at viscosity one, SpeedUnboundedAtOne); none of the missing pieces (the (3.6) rate, the general (4.17)/(4.19) estimate, the stated-domain lemmas) is asserted by, or needed for, those statements. The one reader-visible gap is at statement scope, not hidden inside the proof: the formalization certifies breakdown/unbounded speed, not the paper's blow-up rate, as arc 6 already recorded for Theorem 1.1. This is a source-level (module-closure) determination; declaration-level dependency tracing needs lean and was not done.",
+ "could_not_determine": [
+  {
+   "what": "Whether the Lean exterior boundary activeRight (ActualPolarCoverage.active := X ∈ Icc activeLeft activeRight) coincides numerically with the paper's X_ext, and activeLeft with X_a.",
+   "why": "Would require unfolding NominalConeAssembly.activeLeft/activeRight through the nominal profile construction; irrelevant to the exported statement, so not pursued."
+  },
+  {
+   "what": "Which Lean expression, if any, is the paper's p_s of (4.11) in Lemma 4.4(ii).",
+   "why": "ProfileHistories documents angularLag/axialLag as the printed Q_s/N_s (lines 584-588) but no field is documented as p_s; the pressure terms inside ActivationStocks.stockTwo may absorb it, unverified."
+  },
+  {
+   "what": "Declaration-level dependency of navier_stokes_breakdown_R3/_periodic on each cited declaration (as opposed to module-level import closure).",
+   "why": "Requires running lean/lake (#print axioms or a dependency query), which is forbidden on the read-only tree while its build runs; only the transitive module closure (580 modules) and the explicit proof terms at ComparatorSolution/ComparatorTheorem/ComparatorR3Theorem/R3ActualCandidate/ActualCandidateAssembly.selected_candidate were read."
+  },
+  {
+   "what": "Whether the Lean proof of the joining step reproduces the paper's Lemma 4.4 argument or reaches the same conclusion by a different route.",
+   "why": "Source reading identifies statements, not proof strategies; the special-form estimates are proved by compactness + mean value (stockMap_lipschitz_on_dataSet), which is the paper's mechanism, but I did not audit the chain to exists_matched_nominal."
+  }
+ ],
+ "what_this_does_not_establish": [
+  "Nothing here is a kernel check; no Lean was run. Verdicts are about the presence/absence of statements in source, not about the validity of proofs.",
+  "'NO' on the import-path question means: no missing clause makes the exported theorem weaker than its own printed statement. It does not mean the exported statement equals the paper's Theorem 1.1 — the blow-up rate is out of scope of the Lean statement (a statement-level fact, visible to any reader of ComparatorSolution.lean).",
+  "Membership in the import closure is necessary, not sufficient, for a declaration to be used by the exported proof; unused declarations inside imported modules are not distinguished at source.",
+  "The identification of Lean objects with paper objects (e.g. profileStockOne/Two with Q_s/N_s; active annulus with [X_a,X_ext]; W.axis.j with e_0) rests on docstrings and content matching, not on a formal correspondence.",
+  "Tier 2 is never a proof; nothing here moves any wall."
+ ]
+}
