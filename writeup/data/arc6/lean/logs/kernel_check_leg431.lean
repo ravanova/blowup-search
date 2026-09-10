@@ -1,0 +1,2 @@
+import NavierStokes
+#print axioms NavierStokes.Comparator.navier_stokes_breakdown_R3

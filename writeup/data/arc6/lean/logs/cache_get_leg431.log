@@ -1,0 +1,25 @@
+✔ [5/25] Built Cache.Cli (910ms)
+✔ [6/25] Built Cache.Lean (1.0s)
+✔ [7/25] Built Cache.Infra (1.1s)
+✔ [8/25] Built Cache.Cli:c.o (8.2s)
+✔ [9/25] Built Cache.Lean:c.o (8.0s)
+✔ [10/25] Built Cache.Infra:c.o (8.1s)
+✔ [11/25] Built Cache.IO (8.5s)
+✔ [12/25] Built Cache.Hashing (1.2s)
+✔ [13/25] Built Cache.Hashing:c.o (521ms)
+✔ [14/25] Built Cache.IO:c.o (2.0s)
+✔ [15/25] Built Cache.Requests (2.8s)
+✔ [16/25] Built Cache.Marker (903ms)
+✔ [17/25] Built Cache.Marker:c.o (181ms)
+✔ [18/25] Built Cache.Query (1.4s)
+✔ [19/25] Built Cache.Query:c.o (393ms)
+✔ [20/25] Built Cache.Warning (1.2s)
+✔ [21/25] Built Cache.Requests:c.o (3.8s)
+✔ [22/25] Built Cache.Warning:c.o (326ms)
+✔ [23/25] Built Cache.Main (1.7s)
+✔ [24/25] Built Cache.Main:c.o (1.5s)
+✔ [25/25] Built cache:exe (17s)
+Current branch: HEAD
+Using cache from origin: (some leanprover-community/mathlib4)
+Attempting to download 8747 file(s) from leanprover-community/mathlib4 cache at https://lakecache.blob.core.windows.net/mathlib4-master
+Downloaded: 1 file(s) [attempted 1/8747 = 0%, 14 KB/s], Decompressed: 0[KDownloaded: 3 file(s) [attempted 3/8747 = 0%, 12 KB/s], Decompressed: 1[KDownloaded: 41 file(s) [attempted 41/8747 = 0%, 8 KB/s], Decompressed: 3[KDownloaded: 52 file(s) [attempted 52/8747 = 0%, 7 KB/s], Decompressed: 3[KDownloaded: 85 file(s) [attempted 85/8747 = 0%, 69 KB/s], Decompressed: 3[KDownloaded: 94 file(s) [attempted 94/8747 = 1%, 182 KB/s], Decompressed: 31[KDownloaded: 143 file(s) [attempted 143/8747 = 1%, 175 KB/s], Decompressed: 31[KDownloaded: 174 file(s) [attempted 174/8747 = 1%, 132 KB/s], Decompressed: 31[KDownloaded: 193 file(s) [attempted 193/8747 = 2%, 181 KB/s], Decompressed: 31[KDownloaded: 237 file(s) [attempted 237/8747 = 2%, 385 KB/s], Decompressed: 31[KDownloaded: 242 file(s) [attempted 242/8747 = 2%, 206 KB/s], Decompressed: 31[KDownloaded: 293 file(s) [attempted 293/8747 = 3%, 309 KB/s], Decompressed: 94[KDownloaded: 331 file(s) [attempted 331/8747 = 3%, 52 KB/s], Decompressed: 94[KDownloaded: 340 file(s) [attempted 340/8747 = 3%, 168 KB/s], Decompressed: 94[KDownloaded: 368 file(s) [attempted 368/8747 = 4%, 21 KB/s], Decompressed: 94[KDownloaded: 389 file(s) [attempted 389/8747 = 4%, 79 KB/s], Decompressed: 94[KDownloaded: 422 file(s) [attempted 422/8747 = 4%, 19 KB/s], Decompressed: 94[K
