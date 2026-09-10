@@ -1,0 +1,46 @@
+{
+ "schema": "arc6_lean_kernel_check_v1",
+ "leg": 435,
+ "addendum_to_leg": 431,
+ "run_by": "the Conductor, after the five R6 agents reported; UNVERIFIED by a second agent",
+ "clone_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "toolchain": "leanprover/lean4:v4.34.0-rc2",
+ "mathlib_rev": "85e3a25e006c35636f0e53b0e9296caca2685bc0",
+ "command": "lake env lean kernel_check_leg432.lean  (import NavierStokes.ComparatorSolution; #print axioms on the two exported theorems)",
+ "check_file": "import NavierStokes.ComparatorSolution\n#print axioms NavierStokes.Comparator.navier_stokes_breakdown_R3\n#print axioms NavierStokes.Comparator.navier_stokes_breakdown_periodic\n",
+ "output_verbatim": "'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n\nreal\t0m9.715s\nuser\t0m5.268s\nsys\t0m4.159s\nexit 0\n",
+ "result": {
+  "navier_stokes_breakdown_R3_axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "navier_stokes_breakdown_periodic_axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "exit_code": 0,
+  "wall_s": 9.7
+ },
+ "build_state_at_check": {
+  "solution_olean_mtime_utc": "2026-09-10T08:05:36Z",
+  "navierstokes_oleans": 644,
+  "navierstokes_sources": 644,
+  "mathlib_oleans": 8381,
+  "mathlib_modules_built_from_source_in_this_chain": 0,
+  "error_lines_in_build_log": 0,
+  "euler_library_still_building": true,
+  "cache_get_exit": 0,
+  "note": "mathlib came from `lake exe cache get` (the official olean cache, 8747 .ltar files) on top of the ~43% built from source in legs 418/431; the NavierStokes library and its Comparator glue were built from source here, by Lean's own kernel-checking compiler, with zero errors."
+ },
+ "what_this_establishes": "The two exported theorems `NavierStokes.Comparator.navier_stokes_breakdown_R3` and `_periodic` are accepted by the Lean 4 (v4.34.0-rc2) kernel in this container at clone HEAD 8937a8f4 with mathlib 85e3a25e, and their proofs depend on no axiom beyond propext, Classical.choice and Quot.sound — exactly the set formalization.yaml claims. This changes R6 gate (a) from NOT-ESTABLISHED to ESTABLISHED-HERE.",
+ "what_this_does_not_establish": [
+  "that the statements faithfully encode Clay (C)/(D) — agent 2's diff stands: strictly weaker than Theorem 1.1, five existence clauses absent",
+  "an independent kernel replay (lean4export/nanoda) or the comparator run — none was run",
+  "that the mathlib oleans from the official cache correspond to their sources (not rebuilt from source here)",
+  "anything about the Euler library, still compiling at the time of the check",
+  "verification by a second agent: this is one Conductor's run of one command; the machine did the checking, a person did not"
+ ],
+ "tier": "This is a machine kernel check of a formal statement; it is not Tier 2 numerics and it is not a proof of Theorem 1.1 as the paper states it."
+}

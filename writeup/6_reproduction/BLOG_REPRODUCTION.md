@@ -93,8 +93,11 @@ the paper's bound `h/4` in fact gives `0.4h`. The gate that matters still holds.
 ## The Lean, measured
 
 Five agents, one file each. The build was measured, not assumed: this time the cache host answered,
-mathlib compiled without error, and the theorem's module was never reached inside the window, so its
-kernel status is `NOT-ESTABLISHED` — unreached, not refuted. The top-level theorem, read quantifier by
+mathlib compiled without error, and the theorem's module was not reached inside the agents' window.
+The Conductor let the build run on afterwards, and it got there: the whole NavierStokes library compiled
+with zero errors, and the kernel reports that both exported theorems rest on nothing but Lean's three
+standard axioms. That is one run in one container, unreplayed by any independent checker — but it is
+the kernel, and it said yes. The top-level theorem, read quantifier by
 quantifier, is Fefferman's (C) and (D), which is strictly weaker than the paper's Theorem 1.1: five of
 its twelve clauses are absent from what the Lean would prove. The `sorry` count is four, all four the
 challenge placeholders the comparator setup requires. Source coverage of the 79 statements is 74

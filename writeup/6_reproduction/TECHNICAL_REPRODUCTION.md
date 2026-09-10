@@ -1,12 +1,12 @@
 # Arc 6, second pass — Reproduction: reading all of it, re-deriving the spine, instantiating it, measuring the Lean
 
-**Technical note. The conductor pass of arc 6 (§3g), legs 423–434.**
+**Technical note. The conductor pass of arc 6 (§3g), legs 423–435.**
 
 | | |
 |---|---|
 | **Dates** | 2026-09-09 → 2026-09-10 |
 | **Mode** | `ORCHESTRATION.md` **§3g CONDUCTOR**, wave sizing **5 by user ruling** (recorded beside §3g's own reason for 2–4; `CORRECTIONS.md` §67). Four waves, one adversarial verifier per fan-out wave, one file per agent, cherry-picked unedited |
-| **Legs** | 423–434 (`R0` 423/427 · `R1` 424 · `R2` 425 + wave 1 (428) · `R3` 426 · `R4` wave 2 (429) · `R5`(i) 430 · `R6` wave 3 (431) · `R5`(ii) 432 · `R5`(iii)–(vii) wave 4 (433) · `R7` 434) |
+| **Legs** | 423–435 (`R0` 423/427 · `R1` 424 · `R2` 425 + wave 1 (428) · `R3` 426 · `R4` wave 2 (429) · `R5`(i) 430 · `R6` wave 3 (431) · `R5`(ii) 432 · `R5`(iii)–(vii) wave 4 (433) · `R7` 434 · kernel-check addendum 435) |
 | **Curated data** | `writeup/data/arc6/` — `extract_manifest.json`, `ledger.json`, `ledger/merged.json` (+ five shards), `dag.json`, `spine/merged.json` (+ five agents), `lean/merged.json` (+ five agents), `wave4/merged.json` (+ five agents); `writeup/data/arc6_profile_v1.json`, `arc6_residual_v1.json` |
 | **Evidence** | [`reproduction_evidence.py`](reproduction_evidence.py) — rebuilds every number in this note from the banked artefacts, runs each leg's own evidence script, exits nonzero on drift; figures `fig113`, `fig114` from `build_figures.py` |
 | **Narrative companion** | [`BLOG_REPRODUCTION.md`](BLOG_REPRODUCTION.md) |
@@ -39,8 +39,10 @@ adversary who saw only the gate definitions faked eleven of wave 4's twelve sign
 fixed before dispatch they are not evidence; the one that survives is a measured gap (the leading
 order's force grows like `q^{−3/2−h}`). Measured rather than assumed, the Lean
 project is large and `sorry`-free outside its challenge placeholders, source-covers all 79
-statements, and exports Fefferman's (C) and (D) — a statement strictly weaker than Theorem 1.1 — and
-**no kernel check of it was reached** here. Nothing this pass measured contradicts the manuscript; nothing this pass measured is a proof of
+statements, and exports Fefferman's (C) and (D) — a statement strictly weaker than Theorem 1.1 — and, in a
+build completed after the agents reported, **both exported theorems are accepted by the Lean kernel with
+exactly the standard axioms `[propext, Classical.choice, Quot.sound]`** (one run, one container, no
+independent replay). Nothing this pass measured contradicts the manuscript; nothing this pass measured is a proof of
 it; every place where the reproduction stops is a place the paper's own asymptotics put beyond a grid;
 and no wall of ours moved.*
 
@@ -173,10 +175,12 @@ Five agents, one file each, no agent saw another's:
 | **(d) comparator** | 11 checks: **7 PASS / 4 `NOT-ESTABLISHED`** — challenge definitions byte-identical to the project-side copies, target statements byte-identical challenge vs solution, no solution closure imports a challenge module; the comparator itself **never run** (binary absent); the upstream Formal-Conjectures pin could not be checked (three inconsistent pins, no copy) |
 | **(e) coverage** | **74 `FORMALIZED` / 5 `PARTIAL` / 0 `ABSENT`** of 79 at source level (Theorem 3.1, Definition 3.3, Lemma 4.4, Corollary 7.3, Lemma 9.7 partial); the Lean cites a differently numbered draft, so every match rests on content; *"not a kernel check"* |
 
-**No agent ran a kernel check.** The build was continued by the Conductor after the agents reported
-(the cache completed; the project's own modules were compiling when this note was written); if it
-reaches the theorem, `#print axioms` is a dated, Conductor-run, `UNVERIFIED` addendum to `leg_431.md`
-and changes (a) only. The stale first-pass README banner (*"Sections 4–9 not read, Lean not
+**No agent ran a kernel check. The Conductor's continued build did (leg 435, `leg_431.md` §7,
+`lean/kernel_check_conductor.json`):** the NavierStokes library compiled from source with zero errors and
+`#print axioms` reports, for both exported theorems, `[propext, Classical.choice, Quot.sound]` — gate (a)
+is **`ESTABLISHED-HERE`**; (b)–(e) are unchanged (the accepted statement is (C)/(D); no comparator or
+independent replay was run; mathlib's oleans came from the official cache). One run, one container,
+`UNVERIFIED` by a second agent. The stale first-pass README banner (*"Sections 4–9 not read, Lean not
 compiled"*) was struck and recorded, not rewritten.
 
 ## 9. `R5`(iii)–(vii) — pulses, iteration, headline norms, compact support, and the adversary (wave 4, leg 433)
@@ -224,7 +228,7 @@ beyond their gates is the wave's content:
 
 ## 10. What the second pass does NOT establish, said once
 
-That the proof is correct. That the Lean proves anything (no kernel check was reached). That the
+That the proof is correct. That the Lean proves Theorem 1.1 as the paper states it (what the kernel accepted is Fefferman's (C)/(D), in one unreplayed run). That the
 construction closes at any `λ` a grid can reach (it does not; the paper never said it would). That
 `W4` moves (the first pass measured that it does not). **Every unit is Tier 2. No `L1 → L4` link moved.
 Clay ~0.05%.**
