@@ -5087,3 +5087,30 @@ bounds. Six more mean-correction statements (`8.4`, `8.5`, `8.6`, `8.8`, `7.8`, 
 inside those two proofs and are therefore also outside the closure. **The graph cannot say whether
 the summation's hypotheses are discharged without them; `R4` can.** Nothing here is a claim about
 correctness. **No wall moved. No `L1 → L4` link moved. Clay ~0.05%.**
+
+## §69 — `R5`(i) (leg 430, arc 6): **the pre-registration mis-set three of its own yardsticks and planted two controls that could not fire; every one is reported as `NO` or `DID NOT FIRE` against the pre-registered wording, and the finding — that the paper's closure and cone live at `λ ≲ 3·10⁻⁴` and `√λ P_* ≪ 1` — is a measurement of "sufficiently small", not a defect of the paper.**
+
+**What was pre-registered** (`leg_430_prereg.md`, commit `e01a64d`): Lemma 4.8's outer profile from
+Appendix A's schedule at `λ ∈ {0.1, 0.05, 0.025}`, gates G1–G8 with tolerances, controls C1–C6.
+
+**What the numbers said** (`writeup/data/arc6_profile_v1.json`, `leg_430.md` §1): G1, G2, G8 `YES`;
+G4 `YES` at the paper's bump-centre scale and `NO` at the scale the prereg wrote down; G5 `NO` on a
+measure that is a 10⁸-fold cancellation while the identity holds to `10⁻¹⁵`; G6 `YES` on every slope
+and `NO` on an exponent window that transcribed the paper's *upper bound* `e_b ≤ C λ^{30}` as a
+*slope* window `[30, 36]` — the measured slope, 23.0 and 25.0 between the three `λ`, equals the
+schedule's own `λ^{30+60λ}` to 0.04 and satisfies the bound; **G3 and G7 `NO` at every `λ`**, and that
+is the result: the (A.19) remainder is `(λ^{−120λ} − 1)/2` and the intermediate cone needs `√λ P_* ≪ 1`.
+
+**Controls:** C1 and C3 fired. **C5 and C6 did not fire** — the `30 log(1/λ)` hold relaxes
+`I/(XH)` to its target before the (A.11) bumps act (coefficients `≈ 10⁻¹⁴`), and the `e^{−2ξ}` weight
+makes the `R_0` cut at 5 worth `3·10⁻⁴` of `K_b`. **C2 was not run**: G3 fails on the twin, so the
+control had nothing to be compared with. `test_arc6_profile_v1.py` asserted the hoped-for firings and
+was rewritten to assert the measured reasons (the same defect as §68's item 3).
+
+**Runner changes after numbers existed:** a log-scaled rewrite after the first build overflowed
+(no gate or tolerance touched); 17 Chebyshev points instead of the pre-registered 24, for runtime.
+A `λ`-sweep to `5·10⁻⁵` and a `P_*` exploration were designed after the pre-registered runs were
+seen and are labelled `post hoc` in the artefact and the journal.
+
+**Standing:** every pre-registered gate stands as written; nothing was widened; the diagnoses sit
+beside the `NO`s. This is Tier 2. **No wall moved. No `L1 → L4` link moved. Clay ~0.05%.**

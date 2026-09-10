@@ -1038,3 +1038,17 @@ measured here before; the annulus admissibility question reduces to it.
 **`STATE.md` OPEN ITEM 3 IS DISCHARGED.** Fefferman **(8)** and **(9)** are read at primary
 (`U1`). **(9) asks the force for decay in TIME ONLY** and explicitly replaces (4) and (5). Confirms
 leg 390's machine-read: **(D) carries no condition (7)**.
+
+## §STATE-ARC6-W1 — arc 6 conductor pass, rows `R0`–`R2` and the wave-1 paragraph, retired VERBATIM from `STATE.md` 2026-09-10 (leg 430, `R5`(i)) under §3j
+
+| unit | gate answer, in its own words | artefact |
+|---|---|---|
+| **`R0`** 423/427 CORRECT | **A6-D is dead** — (D) is claimed, Cor 10.6 (§66); wave sizing 4→5 recorded beside §3g's own reason (§67) | — |
+| **`R1`** 424 EXTRACT | **`NO-AND-HERE-IS-THE-DIFF`** strictly, **`MATCH`** after six named typographic rules; **79** statements indexed, two overrides named | `arc6/extract_manifest.json` |
+| **`R2`** 425 READ (solo) | (a) **`YES` 79/79** (b) **`YES`** on hyp/concl/cites, two Definitions carry no constants (c) **13 hard-page notes**, hardest pp. 107–111 / 74–77 / 129–137. **`UNVERIFIED`**; **five fresh shards (leg 428) re-read it blind: (a) 79 (b) `YES` (c) 33 hard-page notes (d) every inconsistency is citation breadth, none is about content; 15 extraction artefacts adjudicated, 0 paper defects** | `arc6/ledger.json`, `ledger/merged.json` |
+
+**WAVE 1 — CLOSED AND INTEGRATED** (dispatched before this row existed, a §3g step-1 defect, recorded).
+Five R2 shard readers A–E, one file each, merged → `ledger/merged.json` (leg 428). Composition floor met
+by the Conductor's serial `R3` and `R5`(i)–(ii). **WAVE 2 CLOSED (leg 429): `R4` ×5, integrated above. WAVE 3 (next): `R6` ×5 Lean**
+(`dag.json` `r4_spine`, partition `leg_426.md` §5, slot 5 adversarial verifier); in parallel, serial
+`R5`(i) with pre-registration first.
