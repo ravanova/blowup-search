@@ -85,6 +85,18 @@
   "comparator_NavierStokes.log",
   "comparator_Euler.log",
   "integrity_summary.txt",
-  "integrity_nohup.log (empty)"
- ]
+  "integrity_nohup.log (empty)",
+  "rebuild_cost_estimate.md",
+  "statement_closure.lean",
+  "statement_closure.txt"
+ ],
+ "semantic_match_cost_measured": {
+  "see": "rebuild_cost_estimate.md (method, samples, discarded first attempt), statement_closure.lean + statement_closure.txt (the closure and the 399 modules)",
+  "full_rebuild_wall_h_on_4_cores": "~2.7 h for mathlib (95% CI 2.0-3.4) + 1.5 h measured for the project's 2484 modules = ~4 h; 8.9 CPU-hours for mathlib alone",
+  "targeted_rebuild": "399 of 8370 mathlib modules carry the two theorem STATEMENTS' semantic closure (5579 constants); ~25 CPU-min, ~8-10 min wall on 4 cores",
+  "why_targeted_is_smaller": "proof bodies are already kernel-checked twice (this file); only the definitions appearing in the statements bear on meaning",
+  "targeted_is_weaker": "it assumes the surrounding environment used during elaboration is faithful; the full rebuild does not",
+  "comparison_method": "declaration level via lean4export, NOT bytes — rebuilt oleans are not byte-identical to cached ones (build flags, module-system olean split)",
+  "disk_blocker_for_full": "11 GB free, mathlib build output alone 6.6 GB; a second tree does not fit, and phase B's tree must not be reused or deleted (K2 needs it)"
+ }
 }
