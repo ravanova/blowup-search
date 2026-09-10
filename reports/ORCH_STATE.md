@@ -120,8 +120,10 @@ Conductor-run, `UNVERIFIED` — it changes (a) only. Stale README banner struck 
 `δ`-powers are the limit on a collar `δ ≲ 10⁻⁶⁹` (`NOT TESTABLE`), measured `δ⁰, δ³, δ³` as Lemma A.9 predicts;
 six controls fired; the prereg was amended on a derivation before any number. Tier 2.
 
-**NEXT:** dispatch
-**wave 4 = `R5`(iii)–(vii) ×5** (slot 5 adversarial verifier) on the `R5`(i)–(ii) interface; then `R7` (leg 434).
+**WAVE 4 — DISPATCHED 2026-09-10 (leg 433), pre-registration `c6aaf72` pushed first:** five agents in worktrees,
+two files each — (iii) pulses, (iv) iteration, (v) headline norms, (vi) compact support, (vii) the adversary who
+sees only the gate definitions and tries to fake (iii)–(vi)'s signals. Integration per `leg_433_prereg.md` §3:
+a signal the adversary fakes is `NOT EVIDENCE` whatever the worker's gate said. **Then `R7` (leg 434).**
 
 **Open escalations:** the five rows above, unchanged; row 1 still carries `U1`'s measured fact and
 is still not ruled. **Lean source build** from leg 418 (`lean_build.log`): not re-checked this wave;
