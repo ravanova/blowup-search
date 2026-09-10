@@ -1,0 +1,224 @@
+{
+ "schema": "arc7_k2_agent2_v1",
+ "agent": 2,
+ "leg": 438,
+ "unit": "K2",
+ "slot": 2,
+ "gate_text": "(2) the 4 `sorry` placeholders: confirm each is a challenge placeholder and that none is reachable from a main declaration (cross-check against K1's `#print axioms` -- if the two disagree, the axiom output wins).",
+ "clone_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "tree_path": "/tmp/claude-0/-home-user-blowup-search/f04cf05e-679d-5fc5-8545-c07be1caa01d/scratchpad/nse",
+ "tree_access": "read-only; no lake/lean invoked; nothing written under the tree (a lake build was running in it concurrently)",
+ "toolchain_file": "leanprover/lean4:v4.34.0-rc2",
+ "mathlib_rev_from_lake_manifest": "85e3a25e006c35636f0e53b0e9296caca2685bc0 (inputRev v4.34.0-rc2; matches the leg-435 kernel-check file)",
+ "lakefile_summary": {
+  "defaultTargets": [
+   "NavierStokes",
+   "Euler",
+   "ComparatorChallenges"
+  ],
+  "libs": {
+   "NavierStokes": "globs NavierStokes, NavierStokes.+",
+   "Euler": "globs Euler, Euler.+ ; leanOptions autoImplicit=false, warningAsError=true",
+   "ComparatorChallenges": "globs ComparatorChallenges.+"
+  },
+  "requires": [
+   "mathlib v4.34.0-rc2",
+   "Comparator (leanprover/comparator) v4.34.0-rc2"
+  ],
+  "note": "ComparatorChallenges is a default build target, so its two `sorry`-bearing modules ARE compiled by `lake build` (emitting 'declaration uses sorry' warnings); they are compiled as a separate library that nothing else imports."
+ },
+ "file_census": {
+  "project_lean_files": 2486,
+  "by_top_level": {
+   "ComparatorChallenges": 2,
+   "Euler/": 1839,
+   "Euler.lean": 1,
+   "NavierStokes/": 643,
+   "NavierStokes.lean": 1
+  },
+  "excluded": ".lake/ (no .lake files are git-tracked; os.walk in the census also skips .lake)",
+  "sha256": {
+   "ComparatorChallenges/Euler.lean": "b11e9bafc220c8126142a9c9281cfeab4872d8f74a7d4899fed206f7f6e1d4f7",
+   "ComparatorChallenges/NavierStokes.lean": "0cd193b8d5cbd0266e6e2f72e68dd5abcdcf2430ebd435dd9289737e9aa7da61",
+   "NavierStokes/ComparatorSolution.lean": "52950d5d618a8d34c9bfbdb16641c81c276e97b6d7fd2a76c08577353f0b0227",
+   "Euler/Solution.lean": "5dced6caecbfd85d952ff9537e420a85d4f38386e2c655a9c569a21b7139ea4f"
+  }
+ },
+ "commands": [
+  "cd <tree> && git rev-parse HEAD && git ls-files '*.lean' | wc -l   # 8937a8f4..., 2486",
+  "cd <tree> && git ls-files '*.lean' | grep -v '^\\.lake/' | xargs grep -n -i 'sorry'   # raw: 5 lines (4 code + 1 docstring)",
+  "python3 census.py <tree>   # keyword census, code/prose/string classification (script text below)",
+  "cd <tree> && for k in axiom admit native_decide implemented_by extern unsafe opaque set_option macro elab; do grep -rn --include='*.lean' --exclude-dir=.lake -w \"$k\" ComparatorChallenges Euler NavierStokes Euler.lean NavierStokes.lean; done   # independent whole-word cross-check of census",
+  "python3 closure.py <tree> NavierStokes.ComparatorSolution ComparatorChallenges.NavierStokes ComparatorChallenges.Euler",
+  "python3 closure.py <tree> Euler.Solution ComparatorChallenges.NavierStokes ComparatorChallenges.Euler",
+  "cd <tree> && grep -rn --include='*.lean' --exclude-dir=.lake 'ComparatorChallenges' . | grep -v '^./ComparatorChallenges/'   # no output: nothing imports or mentions the challenge library",
+  "python3 stmtdiff.py <tree> ComparatorChallenges/NavierStokes.lean NavierStokes/ComparatorSolution.lean navier_stokes_breakdown_R3 navier_stokes_breakdown_periodic",
+  "python3 stmtdiff.py <tree> ComparatorChallenges/Euler.lean Euler/Solution.lean euler_breakdown_R3 exists_compact_smooth_euler_singularity",
+  "cat <tree>/ComparatorChallenges/NavierStokes.json <tree>/ComparatorChallenges/Euler.json <tree>/formalization.yaml <tree>/lakefile.toml <tree>/Euler.lean <tree>/NavierStokes.lean",
+  "cat writeup/data/arc6/lean/kernel_check_conductor.json   # step 4 only"
+ ],
+ "scripts": {
+  "census.py": "#!/usr/bin/env python3\n\"\"\"Keyword census over project .lean files (excluding .lake/). Classifies each\nhit as 'code' or 'prose' by stripping nested /- ... -/ block comments and\n-- line comments. String literals are skipped (neither code nor prose).\"\"\"\nimport re, sys, json, collections, os\nROOT = sys.argv[1]\nKW = [\"sorry\",\"axiom\",\"admit\",\"native_decide\",\"implemented_by\",\"extern\",\"unsafe\",\"opaque\",\"set_option\",\"macro\",\"elab\"]\nfiles = []\nfor dp, dns, fns in os.walk(ROOT):\n    dns[:] = [d for d in dns if d != \".lake\" and not d.startswith(\".\")]\n    for fn in fns:\n        if fn.endswith(\".lean\"):\n            files.append(os.path.relpath(os.path.join(dp, fn), ROOT))\nfiles.sort()\ndef regions(src):\n    \"\"\"yield (kind, start, end) char-offset regions, kind in code/prose.\"\"\"\n    i=0; n=len(src); depth=0; out=[]; cur=0; kind=\"code\"\n    while i<n:\n        if kind==\"code\":\n            if src.startswith(\"/-\",i):\n                out.append((\"code\",cur,i)); cur=i; kind=\"block\"; depth=1; i+=2; continue\n            if src.startswith(\"--\",i):\n                j=src.find(\"\\n\",i); j=n if j<0 else j\n                out.append((\"code\",cur,i)); out.append((\"prose\",i,j)); cur=j; i=j; continue\n            if src[i]=='\"':\n                j=i+1\n                while j<n and src[j]!='\"':\n                    if src[j]=='\\\\': j+=1\n                    j+=1\n                out.append((\"code\",cur,i)); out.append((\"string\",i,j+1)); cur=j+1; i=j+1; continue\n            i+=1\n        else:\n            if src.startswith(\"/-\",i): depth+=1; i+=2; continue\n            if src.startswith(\"-/\",i):\n                depth-=1; i+=2\n                if depth==0: out.append((\"prose\",cur,i)); cur=i; kind=\"code\"\n                continue\n            i+=1\n    out.append((kind if kind==\"code\" else \"prose\",cur,n))\n    return out\nres={k:{\"code\":0,\"prose\":0,\"string\":0} for k in KW}; hits=collections.defaultdict(list)\nfor f in files:\n    src=open(os.path.join(ROOT,f),encoding=\"utf-8\").read()\n    lines=src.splitlines()\n    for kind,s,e in regions(src):\n        seg=src[s:e]\n        for k in KW:\n            for m in re.finditer(r\"(?<![A-Za-z0-9_.'!?])\"+re.escape(k)+r\"(?![A-Za-z0-9_'!?])\",seg):\n                line=src.count(\"\\n\",0,s+m.start())+1\n                res[k][kind]+=1\n                hits[k].append((kind,f,line,lines[line-1].strip()[:140]))\nprint(\"FILES\",len(files))\nprint(json.dumps(res,indent=1))\nfor k in KW:\n    for h in hits[k]:\n        if k==\"sorry\" or h[0]!=\"prose\": print(k,*h,sep=\"\\t\")\n",
+  "closure.py": "#!/usr/bin/env python3\n\"\"\"Transitive import closure of a project module, computed purely from `import`\nlines (code regions only; block/line comments stripped). Only project-local\nmodules (NavierStokes.*, Euler.*, ComparatorChallenges.*, and the root modules\nNavierStokes / Euler) are followed; external modules (Mathlib, Comparator, ...)\nare recorded as leaves and not followed.\nusage: closure.py <project_root> <Module.Name> [sorry-module ...]\"\"\"\nimport os, re, sys, json\nROOT = sys.argv[1]; START = sys.argv[2]; SORRY_MODS = set(sys.argv[3:])\nLOCAL_PREFIX = (\"NavierStokes\", \"Euler\", \"ComparatorChallenges\")\ndef path_of(mod):\n    p = os.path.join(ROOT, *mod.split(\".\")) + \".lean\"\n    return p if os.path.exists(p) else None\ndef strip_comments(src):\n    out=[]; i=0; n=len(src); depth=0\n    while i<n:\n        if depth==0:\n            if src.startswith(\"/-\",i): depth=1; i+=2; continue\n            if src.startswith(\"--\",i):\n                j=src.find(\"\\n\",i); i = n if j<0 else j; continue\n            out.append(src[i]); i+=1\n        else:\n            if src.startswith(\"/-\",i): depth+=1; i+=2; continue\n            if src.startswith(\"-/\",i): depth-=1; i+=2; continue\n            if src[i]==\"\\n\": out.append(\"\\n\")\n            i+=1\n    return \"\".join(out)\nIMPORT_RE = re.compile(r\"^\\s*import\\s+(.+?)\\s*$\", re.M)\ndef imports_of(mod):\n    p = path_of(mod)\n    src = strip_comments(open(p, encoding=\"utf-8\").read())\n    mods=[]\n    for m in IMPORT_RE.finditer(src):\n        mods.extend(m.group(1).split())\n    return mods\nseen={}; external=set(); stack=[START]; missing=set()\nwhile stack:\n    m=stack.pop()\n    if m in seen: continue\n    if not m.split(\".\")[0] in LOCAL_PREFIX:\n        external.add(m); continue\n    if path_of(m) is None:\n        missing.add(m); continue\n    imps=imports_of(m); seen[m]=imps\n    stack.extend(imps)\nlocal=sorted(seen)\nsorry_in=sorted(set(local)&SORRY_MODS)\nchal_in=sorted(x for x in local if x.startswith(\"ComparatorChallenges\"))\nprint(json.dumps({\"start\":START,\"local_closure_size\":len(local),\n  \"external_leaves\":sorted(external),\"missing_local_modules\":sorted(missing),\n  \"sorry_modules_in_closure\":sorry_in,\"challenge_modules_in_closure\":chal_in,\n  \"by_prefix\":{p:sum(1 for x in local if x==p or x.startswith(p+\".\")) for p in LOCAL_PREFIX}},indent=1))\n",
+  "stmtdiff.py": "#!/usr/bin/env python3\n\"\"\"Extract `theorem <name> ... :=` statement text from two files and diff them\n(raw and whitespace-normalised). usage: stmtdiff.py root fileA fileB name...\"\"\"\nimport sys, re, difflib, os, json\nROOT, A, B = sys.argv[1:4]; names = sys.argv[4:]\ndef stmt(path, name):\n    src = open(os.path.join(ROOT, path), encoding=\"utf-8\").read()\n    m = re.search(r\"^theorem\\s+\" + re.escape(name) + r\"\\b(.*?):=\", src, re.S | re.M)\n    return m.group(0) if m else None\nout = {}\nfor n in names:\n    a, b = stmt(A, n), stmt(B, n)\n    norm = lambda s: re.sub(r\"\\s+\", \" \", s).strip() if s else s\n    d = list(difflib.unified_diff((a or \"\").splitlines(), (b or \"\").splitlines(), A, B, lineterm=\"\"))\n    out[n] = {\"raw_identical\": a == b, \"ws_normalised_identical\": norm(a) == norm(b),\n              \"found_in_A\": a is not None, \"found_in_B\": b is not None, \"raw_diff\": \"\\n\".join(d)}\nprint(json.dumps(out, indent=1, ensure_ascii=False))\n"
+ },
+ "sorry_hits": [
+  {
+   "file": "ComparatorChallenges/Euler.lean",
+   "line": 88,
+   "decl": "Euler.euler_breakdown_R3 (challenge copy; theorem at line 85, namespace Euler opened line 45)",
+   "kind": "code",
+   "role": "Comparator challenge placeholder (file docstring: 'The theorem proofs are intentional Comparator challenge placeholders')"
+  },
+  {
+   "file": "ComparatorChallenges/Euler.lean",
+   "line": 184,
+   "decl": "Euler.exists_compact_smooth_euler_singularity (challenge copy; theorem at line 170)",
+   "kind": "code",
+   "role": "Comparator challenge placeholder"
+  },
+  {
+   "file": "ComparatorChallenges/NavierStokes.lean",
+   "line": 29,
+   "decl": "none -- inside the module docstring /-! ... -/ (line 22-61)",
+   "kind": "prose",
+   "role": "documentation mentioning the placeholders"
+  },
+  {
+   "file": "ComparatorChallenges/NavierStokes.lean",
+   "line": 277,
+   "decl": "NavierStokes.Comparator.navier_stokes_breakdown_R3 (challenge copy; theorem at line 273, namespace opened line 63)",
+   "kind": "code",
+   "role": "Comparator challenge placeholder"
+  },
+  {
+   "file": "ComparatorChallenges/NavierStokes.lean",
+   "line": 284,
+   "decl": "NavierStokes.Comparator.navier_stokes_breakdown_periodic (challenge copy; theorem at line 280)",
+   "kind": "code",
+   "role": "Comparator challenge placeholder"
+  }
+ ],
+ "sorry_totals": {
+  "code": 4,
+  "prose": 1,
+  "string_literal": 0,
+  "modules_with_code_sorry": [
+   "ComparatorChallenges.Euler",
+   "ComparatorChallenges.NavierStokes"
+  ],
+  "files_outside_ComparatorChallenges_with_any_sorry_substring": 0
+ },
+ "other_hits": {
+  "axiom": {
+   "code": 0,
+   "prose": 4,
+   "note": "prose hits: Euler/BaseInductionStageNoOptions.lean:24, NavierStokes/RadialPrimitive.lean:227, NavierStokes/ProblemStatement.lean:8 and :117 (all inside comments/docstrings). The plural `axioms` occurs in code only as the command `#print axioms` at NavierStokes/ComparatorSolution.lean:31-32 and Euler/Solution.lean:73,75 -- a query command, not an axiom declaration."
+  },
+  "admit": {
+   "code": 0,
+   "prose": 0
+  },
+  "native_decide": {
+   "code": 0,
+   "prose": 0
+  },
+  "implemented_by": {
+   "code": 0,
+   "prose": 0
+  },
+  "extern": {
+   "code": 0,
+   "prose": 0,
+   "note": "339 raw substring hits are all `external`/`externalPressure` identifiers or prose; zero whole-word `extern` and zero `@[extern`"
+  },
+  "unsafe": {
+   "code": 0,
+   "prose": 0
+  },
+  "opaque": {
+   "code": 0,
+   "prose": 1,
+   "note": "NavierStokes/ParticularWaveBounds.lean:1582, inside a docstring"
+  },
+  "set_option": {
+   "code": 0,
+   "prose": 0
+  },
+  "macro": {
+   "code": 0,
+   "prose": 0
+  },
+  "elab": {
+   "code": 0,
+   "prose": 0,
+   "note": "8 raw substring hits are `elaboration`/`elaborating` in prose"
+  },
+  "method": "census.py splits each file into code / nested-block-comment / line-comment / string-literal regions and matches the keyword with identifier boundaries (not preceded by [A-Za-z0-9_.'!?], not followed by [A-Za-z0-9_'!?]); independently cross-checked with `grep -w` per keyword, which agreed on every count."
+ },
+ "closure": {
+  "NavierStokes.ComparatorSolution": {
+   "size": 580,
+   "size_note": "580 project-local modules (all NavierStokes.*, including the start module); 0 Euler.*; 0 ComparatorChallenges.*. External leaves not followed: 208 distinct Mathlib.* modules plus a bare `import Mathlib` (209 leaves); no Comparator.* import.",
+   "contains_sorry_module": false,
+   "contains_challenge_module": false,
+   "direct_imports": [
+    "NavierStokes.ComparatorR3Theorem",
+    "NavierStokes.ComparatorTheorem"
+   ],
+   "exports": [
+    "NavierStokes.Comparator.navier_stokes_breakdown_R3",
+    "NavierStokes.Comparator.navier_stokes_breakdown_periodic"
+   ],
+   "method": "closure.py: DFS over `import X` lines in code regions (block and line comments stripped) starting at the module; follows only modules whose first component is NavierStokes/Euler/ComparatorChallenges and whose .lean file exists at <root>/X/Y.lean; every other import is recorded as an external leaf. missing_local_modules = []."
+  },
+  "Euler.Solution": {
+   "size": 1829,
+   "size_note": "1829 project-local modules (all Euler.*); 0 NavierStokes.*; 0 ComparatorChallenges.*. External leaves: 189 distinct Mathlib.* modules plus bare `import Mathlib`.",
+   "contains_sorry_module": false,
+   "contains_challenge_module": false,
+   "direct_imports": [
+    "Euler.InitialDataBridge",
+    "Euler.ComparatorLocalEvolution",
+    "Euler.ComparatorIdentification",
+    "Euler.CanonicalVorticityConfinement",
+    "Euler.CompactVorticityContradiction",
+    "Euler.EulerFiniteLifespan",
+    "Euler.ComparatorMaximalSolution"
+   ],
+   "exports": [
+    "Euler.euler_breakdown_R3",
+    "Euler.exists_compact_smooth_euler_singularity"
+   ],
+   "method": "same script"
+  },
+  "global_check": "grep for the string `ComparatorChallenges` over every project .lean file outside ComparatorChallenges/ returns nothing: no module imports, opens, or even mentions the challenge library. The two developments are import-disjoint: the NS closure contains no Euler module and vice versa. Root Euler.lean imports Euler.EulerSingularity (not Euler.Solution); root NavierStokes.lean imports NavierStokes.ComparatorSolution."
+ },
+ "challenge_vs_solution_statements": {
+  "identical": true,
+  "diff": "",
+  "detail": {
+   "navier_stokes_breakdown_R3": "raw text from `theorem` to `:=` byte-identical (ComparatorChallenges/NavierStokes.lean:273-276 vs NavierStokes/ComparatorSolution.lean:16-19)",
+   "navier_stokes_breakdown_periodic": "byte-identical (challenge 280-283 vs solution 23-26)",
+   "euler_breakdown_R3 (secondary)": "byte-identical (ComparatorChallenges/Euler.lean:85-87 vs Euler/Solution.lean:33-35)",
+   "exists_compact_smooth_euler_singularity (secondary)": "byte-identical (challenge 170-183 vs solution 43-56)"
+  },
+  "caveat": "Textual identity of the statement source is NOT the Comparator check. The challenge files inline their own copies of the structures (InitialVelocityConditionDecay, ForceConditionDecay, NavierStokesExistenceAndSmoothnessRn, ... under namespace NavierStokes.Comparator; EulerExistenceAndSmoothnessR3 etc. under namespace Euler) importing only Mathlib, whereas the solution modules resolve the same names through NavierStokes.ComparatorR3Theorem / ComparatorTheorem (which the file docstring says import `ComparatorDefinitions`) and Euler `SolutionDefinitions`. Whether those two definition sets elaborate to the same kernel terms is exactly what the Comparator tool (ComparatorChallenges/*.json: challenge_module, solution_module, theorem_names, permitted_axioms = propext/Quot.sound/Classical.choice, enable_nanoda) is designed to decide; that run is not part of this unit and I did not perform it."
+ },
+ "cross_check_vs_leg435_axioms": "CONSISTENT -- writeup/data/arc6/lean/kernel_check_conductor.json (leg 435, one Conductor run, UNVERIFIED, same clone_head 8937a8f4) reports output_verbatim `'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]` and the same list for `_periodic`, with no `sorryAx`. My source-level finding -- zero `sorry` (code or otherwise) in the 580-module import closure of NavierStokes.ComparatorSolution, and the four code `sorry`s confined to the ComparatorChallenges library that nothing imports -- predicts exactly that: sorryAx absent. The leg-435 file says nothing about the Euler theorems (Euler library was still compiling), so for Euler.euler_breakdown_R3 / exists_compact_smooth_euler_singularity my closure result (1829 modules, no sorry, no challenge module) has no kernel output to compare against yet. RULE: the Conductor will repeat this cross-check against K1's fresh `#print axioms` output; if K1's axiom output and this source-level census disagree, the axiom output wins.",
+ "gate_answer": "All four code-level `sorry`s in the project (commit 8937a8f4, 2486 .lean files) sit in the two Comparator challenge modules -- ComparatorChallenges/Euler.lean lines 88 and 184 (challenge copies of Euler.euler_breakdown_R3 and Euler.exists_compact_smooth_euler_singularity) and ComparatorChallenges/NavierStokes.lean lines 277 and 284 (challenge copies of NavierStokes.Comparator.navier_stokes_breakdown_R3 and _periodic); each is the entire proof body of a theorem the file's own docstring labels an intentional Comparator challenge placeholder, and the fifth textual hit (NavierStokes.lean:29) is inside a docstring. No other file contains the substring `sorry` in any case, and there are no code occurrences of axiom, admit, native_decide, implemented_by, extern, unsafe, opaque, set_option, macro, or elab anywhere in the project. The import closure of NavierStokes.ComparatorSolution (580 project modules, all NavierStokes.*) and of Euler/Solution.lean (1829 project modules, all Euler.*), computed from `import` lines, contain no ComparatorChallenges module and no sorry-bearing module, and the string `ComparatorChallenges` appears nowhere outside that directory; so none of the four placeholders is reachable from any main declaration at the source level. The two NS challenge theorem statements are byte-identical to the two solution statements (and likewise for the two Euler ones). This is CONSISTENT with the leg-435 kernel output (propext, Classical.choice, Quot.sound only; no sorryAx) for the two NS theorems; if K1's fresh `#print axioms` disagrees with this census, the axiom output wins. Source-level gate (2): PASSED, subject to that rule.",
+ "could_not_determine": [
+  "Any kernel-level fact: I could not run `lake` or `lean` (tree busy, read-only), so `#print axioms` for the Euler theorems and a fresh NS run are K1's, not mine.",
+  "Whether the build in progress compiled every module in the two closures without error (only an olean/kernel check can say; a source `sorry` census cannot detect an elaboration error).",
+  "Whether the challenge-file definitions and the solution-side definitions elaborate to identical kernel terms (that is the Comparator tool's job; see challenge_vs_solution_statements.caveat)."
+ ],
+ "what_this_does_not_establish": [
+  "The sorry-freeness of mathlib's own transitive closure (8k+ modules in .lake/packages/mathlib) is NOT examined here and is not this unit's job; the census covers only the project's git-tracked .lean files.",
+  "The same for the other .lake/packages dependencies (batteries, aesop, Qq, Comparator, importGraph, LeanSearchClient, Cli).",
+  "That the theorems' statements faithfully encode Clay (C)/(D) or Theorem 1.1 of the paper -- statement fidelity is a different gate.",
+  "A kernel replay (lean4export / nanoda) or the Comparator run itself; neither was performed.",
+  "Anything about the Euler library's compiled state -- the leg-435 kernel output is NS-only.",
+  "A source-level census is a necessary condition for `sorryAx` absence, not a sufficient one for correctness: `#print axioms` output is the authority, and that output wins over this file on any disagreement.",
+  "Tier 2 is never a proof."
+ ]
+}
