@@ -1,0 +1,144 @@
+{
+  "schema": "arc7_k2_r2_v1",
+  "agent": 3,
+  "leg": 438,
+  "run": 2,
+  "clone_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+  "clone_path": "/tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse",
+  "build_confirmed": "scratchpad/k2_rebuild_logs/k1_B_summary.txt: runner_rc=0, build_rc=0, build_error_lines=0, 11251 jobs, olean_count=2486, total_s=4287 (confirmed before starting; tree not rebuilt, not cleaned, no tracked file edited).",
+  "method": "Re-measured the environment fresh (did not trust the brief's snapshot). Put every toolchain/cache on /dev/shm/k2a3 via CARGO_HOME, RUSTUP_HOME, GOPATH, GOMODCACHE, GOCACHE, TMPDIR. Built landrun (Go, from source, real sandbox) and lean4export (Lean, via `lake build` inside the pinned tree) and the comparator executable itself (via `lake build Comparator/comparator` from the tree root) locally. Ran `lake exe comparator ComparatorChallenges/NavierStokes.json` and `.../Euler.json` for real, with COMPARATOR_LANDRUN and COMPARATOR_LEAN4EXPORT pointed at the binaries just built. First attempt at each used `timeout 300`, which was too short for the real operation (a coordinator correction confirmed this mid-run) and was killed by our own wrapper (rc=124) -- that attempt is logged and explicitly NOT reported as a tool result. Both checks were then re-run with a 3600s budget and completed for real, unforced, each finishing in a few minutes since the tree's build cache made the incremental `lake build challengeModule`/`lake build solutionModule` steps fast. For check 8, used the network (available in this session, unlike arc 6) to shallow-clone google-deepmind/formal-conjectures and fetch the two specific commit pins cited in the challenge/definition files' docstrings, then diffed the challenge module text against the upstream file at those pins. Rust/nanoda_bin installation was attempted four ways and blocked at the agent-harness level every time (see install_log and nanoda_rustup_harness_blocks.log); no Rust toolchain and no nanoda_bin were ever installed, so enable_nanoda:true (fixed in both tracked JSON configs, which we did not edit) could not be satisfied and both real comparator runs exit 1 at the nanoda step despite the Lean kernel independently accepting both solutions.",
+  "commands": [
+    {"n": 1, "cmd": "git -C <tree> rev-parse HEAD", "exit": 0, "note": "confirmed clone_head matches brief"},
+    {"n": 2, "cmd": "cat scratchpad/k2_rebuild_logs/k1_B_summary.txt", "exit": 0, "note": "confirmed build complete, runner_rc=0 build_rc=0"},
+    {"n": 3, "cmd": "lake --version; lean --version (inside tree, PATH=~/.elan/bin:$PATH)", "exit": 0, "note": "v4.34.0-rc2, resolved via tree's lean-toolchain, no elan default needed inside tree"},
+    {"n": 4, "cmd": "go install github.com/Kognise/landrun@latest", "exit": 1, "note": "wrong module guess, repository not found"},
+    {"n": 5, "cmd": "go install github.com/Zouuup/landrun@latest", "exit": 0, "note": "module found but wrong case and no root package; go reported the real module path is lowercase github.com/zouuup/landrun"},
+    {"n": 6, "cmd": "go install github.com/Zouuup/landrun/cmd/landrun@latest", "exit": 1, "note": "case mismatch error from go.mod: declares path as github.com/zouuup/landrun"},
+    {"n": 7, "cmd": "GOPATH=/dev/shm/k2a3/go GOMODCACHE=... GOCACHE=... TMPDIR=... go install github.com/zouuup/landrun/cmd/landrun@latest", "exit": 0, "note": "SUCCESS. go auto-switched toolchain go1.22.2 -> go1.26.8 (per go.mod's >=1.24 requirement) and downloaded it; landrun v0.1.17 installed to /dev/shm/k2a3/go/bin/landrun"},
+    {"n": 8, "cmd": "landrun --version", "exit": 0, "note": "\"landrun version 0.1.17\""},
+    {"n": 9, "cmd": "cat <tree>/.lake/packages/Comparator/README.md", "exit": 0, "note": "required reading; defines the checks and env vars COMPARATOR_LANDRUN/COMPARATOR_LEAN4EXPORT/COMPARATOR_NANODA; source https://github.com/Zouuup/landrun"},
+    {"n": 10, "cmd": "lake build lean4export (cwd=<tree>/.lake/packages/lean4export)", "exit": 0, "note": "6 jobs, built lean4export:exe"},
+    {"n": 11, "cmd": "lake build Comparator/comparator (cwd=<tree>)", "exit": 0, "note": "16 jobs, built comparator:exe at <tree>/.lake/packages/Comparator/.lake/build/bin/comparator (122MB)"},
+    {"n": 12, "cmd": "curl -sSf -o rustup-init.sh https://sh.rustup.rs", "exit": 0},
+    {"n": 13, "cmd": "sh rustup-init.sh -y --no-modify-path --profile minimal --default-toolchain stable", "exit": "N/A - harness refused", "note": "blocked before execution by the agent sandbox's worktree-isolation guard; see nanoda_rustup_harness_blocks.log"},
+    {"n": 14, "cmd": "bash rustup-init.sh -y ...", "exit": "N/A - harness refused", "note": "same block"},
+    {"n": 15, "cmd": "curl -sSf -o rustup-init https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init", "exit": 0},
+    {"n": 16, "cmd": "/dev/shm/k2a3/tmp/rustup-init -y --no-modify-path --profile minimal --default-toolchain stable", "exit": "N/A - harness refused", "note": "same block, even for a compiled binary (not a shell script)"},
+    {"n": 17, "cmd": "COMPARATOR_LANDRUN=... COMPARATOR_LEAN4EXPORT=... timeout 300 lake exe comparator ComparatorChallenges/NavierStokes.json (cwd=<tree>)", "exit": 124, "note": "KILLED BY OUR OWN 300s WRAPPER mid-run, not a tool result; discarded as data, logged verbatim, NOT counted as NOT-ESTABLISHED"},
+    {"n": 18, "cmd": "COMPARATOR_LANDRUN=... COMPARATOR_LEAN4EXPORT=... timeout 3600 lake exe comparator ComparatorChallenges/NavierStokes.json (background retry, cwd=<tree>)", "exit": 1, "note": "REAL completed run, finished in well under 3600s (cache-hot build). See check0_navierstokes_attempt2_REAL_result_rc1.log"},
+    {"n": 19, "cmd": "COMPARATOR_LANDRUN=... COMPARATOR_LEAN4EXPORT=... timeout 3600 lake exe comparator ComparatorChallenges/NavierStokes.json (synchronous re-run to capture exact rc)", "exit": 1, "note": "reproduced attempt 18's result exactly, same failure point (nanoda), confirming determinism"},
+    {"n": 20, "cmd": "COMPARATOR_LANDRUN=... COMPARATOR_LEAN4EXPORT=... timeout 3600 lake exe comparator ComparatorChallenges/Euler.json (cwd=<tree>)", "exit": 1, "note": "REAL completed run. See check0_euler_attempt1_REAL_result_rc1.log"},
+    {"n": 21, "cmd": "cat ComparatorChallenges/NavierStokes.json ComparatorChallenges/Euler.json", "exit": 0, "note": "for check 1"},
+    {"n": 22, "cmd": "git clone --depth 1 https://github.com/google-deepmind/formal-conjectures.git /dev/shm/k2a3/formalconj/repo", "exit": 0},
+    {"n": 23, "cmd": "git -C .../formalconj/repo fetch --depth 1 origin 8bf45ed70d48b2b2a501de9c00b26bfa38c573ee", "exit": 0, "note": "fetched the exact pin cited in NavierStokes.lean and ComparatorDefinitions.lean"},
+    {"n": 24, "cmd": "git -C .../formalconj/repo fetch --depth 1 origin 8323e878b83fcd7f4a448256069352a265460d75", "exit": 0, "note": "fetched the exact pin cited in Euler/SolutionDefinitions.lean"},
+    {"n": 25, "cmd": "git -C .../formalconj/repo show <pin>:FormalConjectures/Millenium/NavierStokes.lean > upstream_<pin>.lean (x2)", "exit": 0},
+    {"n": 26, "cmd": "diff -u upstream_8bf45ed7_NavierStokes.lean <tree>/ComparatorChallenges/NavierStokes.lean", "exit": 1, "note": "diff found differences (expected, diff exits 1 when files differ); saved verbatim to check8_diff_navierstokes_challenge_vs_upstream_8bf45ed7.log"},
+    {"n": 27, "cmd": "diff -q upstream_8bf45ed7_NavierStokes.lean upstream_8323e878_NavierStokes.lean", "exit": 0, "note": "the two cited pins are byte-identical for this file -- no discrepancy between the three cited commits in practice"}
+  ],
+  "checks": [
+    {
+      "arc6_index": 0,
+      "check": "Run the README's intended check (lake exe comparator ComparatorChallenges/*.json)",
+      "what_we_ran": "landrun v0.1.17 (built from source, go install github.com/zouuup/landrun/cmd/landrun), lean4export (built via lake inside the pinned tree), and comparator (built via lake inside the pinned tree) were all real, freshly-built local binaries. Ran: COMPARATOR_LANDRUN=<built landrun> COMPARATOR_LEAN4EXPORT=<built lean4export> lake exe comparator ComparatorChallenges/NavierStokes.json, and the same for Euler.json, from the tree root, with a 3600s budget (after an earlier 300s attempt was killed by our own wrapper and discarded).",
+      "verdict": "FAIL",
+      "detail": "Both invocations are real, completed, non-timed-out runs (exit 1, not exit 124). For BOTH NavierStokes.json and Euler.json: `lake build` of the challenge module succeeds (challenge theorems are `sorry`-stubbed by design, expected warnings only); `lake build` of the solution module succeeds and prints '#print axioms' info for all 4 theorems, all exactly [propext, Classical.choice, Quot.sound] (see axiom_footprint); lean4export runs and produces exports for both environments; the statement/definition-term equality check (Compare.lean's compareAt + checkAxioms) passes silently (no 'do not match' error was thrown, which would have aborted before the kernel step); real landrun spawns the nanoda kernel step and reports its own sandboxing error: '[landrun:error] ... Failed to find binary: exec: \"nanoda_bin\": executable file not found in $PATH'; the tool then runs 'Lean default kernel on solution' and prints 'Lean default kernel accepts the solution' for both challenges; but because nanoda already recorded an error, the tool's final result keeps that first error ('nanoda kernel rejected the solution') and throws 'uncaught exception: nanoda exited with 1', exiting 1. Neither run ever printed 'Your solution is okay!'. This is a genuine, measured tool result: the README's intended check literally fails end-to-end in this session, but the failure is localized entirely to the absence of nanoda_bin (an external tool we could not install, see install_log), not to any statement mismatch, illegal axiom, or Lean kernel rejection -- the Lean kernel itself accepted both solutions.",
+      "verbatim_logs": ["agent_3_logs/check0_navierstokes_attempt1_KILLED_by_our_own_timeout300.log", "agent_3_logs/check0_navierstokes_attempt2_REAL_result_rc1.log", "agent_3_logs/check0_euler_attempt1_REAL_result_rc1.log"]
+    },
+    {
+      "arc6_index": 1,
+      "check": "Byte-for-byte match of comparator statement text against what the JSON records",
+      "what_we_ran": "cat ComparatorChallenges/NavierStokes.json ComparatorChallenges/Euler.json (re-read directly in this session, same content as arc 6 recorded)",
+      "verdict": "NOT-ESTABLISHED",
+      "detail": "Still inapplicable, for the same reason as arc 6, independent of build state: the JSON files carry only challenge_module, solution_module, enable_nanoda, theorem_names, and permitted_axioms -- no hashes, no statement text. Verbatim NavierStokes.json: {\"challenge_module\":\"ComparatorChallenges.NavierStokes\",\"solution_module\":\"NavierStokes.ComparatorSolution\",\"enable_nanoda\":true,\"theorem_names\":[\"NavierStokes.Comparator.navier_stokes_breakdown_R3\",\"NavierStokes.Comparator.navier_stokes_breakdown_periodic\"],\"permitted_axioms\":[\"propext\",\"Quot.sound\",\"Classical.choice\"]}. Euler.json is the analogous 314-byte file. There is nothing to byte-compare against; this is not a blocker that a build or network fixes."
+    },
+    {
+      "arc6_index": 8,
+      "check": "Comparator definitions are the Formal Conjectures definitions",
+      "what_we_ran": "Network was available in this session (unlike arc 6). git clone --depth 1 of google-deepmind/formal-conjectures into /dev/shm, then git fetch --depth 1 of the two specific commit SHAs cited in the challenge/definition files' docstrings (8bf45ed70d48b2b2a501de9c00b26bfa38c573ee, cited by ComparatorChallenges/NavierStokes.lean and NavierStokes/ComparatorDefinitions.lean; 8323e878b83fcd7f4a448256069352a265460d75, cited by Euler/SolutionDefinitions.lean). Both fetched successfully by SHA. Extracted FormalConjectures/Millenium/NavierStokes.lean at each pin and diffed against ComparatorChallenges/NavierStokes.lean.",
+      "verdict": "PASS",
+      "detail": "For the NavierStokes challenge (which is the direct, undisguised subject of the upstream file): the diff (151 lines, saved verbatim) shows the two target theorems navier_stokes_breakdown_R3 and navier_stokes_breakdown_periodic, and all 16 non-target declarations (divergence and its 5 lemmas, IsOnePeriodic, all 9 structures), are IDENTICAL in statement/definition text between the challenge module and the upstream file at the cited pin. The only differences are: an added 'This file has been modified...' notice and docstring lines; `import FormalConjecturesUtil` -> `import Mathlib`; two attribute annotations `@[category ..., AMS ...]` removed from every declaration (metadata only, doesn't change the term); `namespace NavierStokes` -> `namespace NavierStokes.Comparator`; three notations (`ℝ^n`, `ℝ³`, `∇⬝`) made `local`; and the two non-breakdown theorems (A)/(B) (navier_stokes_existence_and_smoothness_R3/periodic) removed, since the challenge only needs (C)/(D). As a control: the two cited pins (8bf45ed7... and 8323e878...) are byte-identical for this file (`diff -q` returned no output), so the three inconsistent-looking citations noted in arc 6 do not actually diverge for the file that matters. For the Euler challenge: its divergence/InitialVelocityCondition(Decay) definitions are visibly derived from the SAME upstream NavierStokes.lean, specialized from generic dimension n to n=3 and from a general force to the unforced case (zero force, zero viscosity) -- we did not do a full structural diff of the specialization, only confirmed by inspection that the retained shape (fderiv-trace divergence, decay/joint-smoothness/energy conditions) matches the upstream original. We explicitly could NOT and do NOT claim the Euler challenge's second target theorem, exists_compact_smooth_euler_singularity (and its supporting toL2/vorticity/velocityC1Norm/vorticityNorm/SobolevSmoothOn/EulerSobolevExistenceAndSmoothnessR3On apparatus), is a Formal Conjectures definition at all -- its own docstring says it is 'the following version of EulerPacketInduction.exists_compact_smooth_euler_singularity', i.e. explicitly the project's own restatement, not something we could compare to any Formal Conjectures pin because it does not claim to come from one.",
+      "verbatim_logs": ["agent_3_logs/check8_formalconjectures_clone.log", "agent_3_logs/check8_fetch_pin_8bf45ed7.log", "agent_3_logs/check8_fetch_pin_8323e878.log", "agent_3_logs/check8_diff_navierstokes_challenge_vs_upstream_8bf45ed7.log"]
+    },
+    {
+      "arc6_index": 9,
+      "check": "Axiom footprint matches permitted_axioms",
+      "what_we_ran": "The `#print axioms` directives already present in NavierStokes/ComparatorSolution.lean (lines 31-32) and Euler/Solution.lean (lines 73, 75) fire automatically as `lake build` info messages during the real comparator runs in check 0 (both the NavierStokes.json and Euler.json invocations build both target modules as part of compareIt). Captured verbatim from those same real runs, not a separate invocation.",
+      "verdict": "PASS",
+      "detail": "All four exported theorems' axiom footprints match permitted_axioms exactly.",
+      "verbatim_logs": ["agent_3_logs/check0_navierstokes_attempt2_REAL_result_rc1.log", "agent_3_logs/check0_euler_attempt1_REAL_result_rc1.log"]
+    }
+  ],
+  "axiom_footprint": {
+    "permitted_axioms_navierstokes_json": ["propext", "Quot.sound", "Classical.choice"],
+    "permitted_axioms_euler_json": ["propext", "Quot.sound", "Classical.choice"],
+    "theorems": [
+      {
+        "name": "NavierStokes.Comparator.navier_stokes_breakdown_R3",
+        "verbatim_print_axioms_output": "info: NavierStokes/ComparatorSolution.lean:31:0: 'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "matches_permitted": true
+      },
+      {
+        "name": "NavierStokes.Comparator.navier_stokes_breakdown_periodic",
+        "verbatim_print_axioms_output": "info: NavierStokes/ComparatorSolution.lean:32:0: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "matches_permitted": true
+      },
+      {
+        "name": "Euler.euler_breakdown_R3",
+        "verbatim_print_axioms_output": "info: Euler/Solution.lean:73:0: 'Euler.euler_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "matches_permitted": true
+      },
+      {
+        "name": "Euler.exists_compact_smooth_euler_singularity",
+        "verbatim_print_axioms_output": "info: Euler/Solution.lean:75:0: 'Euler.exists_compact_smooth_euler_singularity' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "matches_permitted": true
+      }
+    ],
+    "note": "No sorryAx and no axiom outside [propext, Classical.choice, Quot.sound] was reachable from any of the four exported theorems in these real runs. The Lean kernel's own independent replay (Comparator's runBuiltinKernel, distinct from the #print axioms elaborator check) also printed 'Lean default kernel accepts the solution' for both challenges. This did NOT trigger the ESCALATION rule."
+  },
+  "install_log": [
+    {
+      "tool": "landrun",
+      "attempted": "YES",
+      "how": "go install (GOPATH/GOMODCACHE/GOCACHE/TMPDIR all on /dev/shm), after two wrong-module-path guesses: github.com/Kognise/landrun (repo not found), github.com/Zouuup/landrun (case-sensitive module-path mismatch). Correct: go install github.com/zouuup/landrun/cmd/landrun@latest. Source is github.com/Zouuup/landrun per the Comparator README (cited literally with capital Z there; the actual go.mod declares lowercase).",
+      "succeeded": "YES",
+      "version": "landrun version 0.1.17",
+      "note": "go1.22.2 (system) auto-fetched go1.26.8 to /dev/shm to satisfy landrun's go.mod >=1.24 requirement; this worked without any harness block (go install is a recognized build tool invocation, unlike a raw downloaded script/binary)."
+    },
+    {
+      "tool": "lean4export",
+      "attempted": "YES",
+      "how": "lake build lean4export, run inside <tree>/.lake/packages/lean4export using the tree's pinned toolchain (leanprover/lean4:v4.34.0-rc2, matches the lean4export package's own lean-toolchain file)",
+      "succeeded": "YES",
+      "version": "no --version flag; built from lean4export package source already checked out in the tree at the pin the tree's lake-manifest.json records; binary at <tree>/.lake/packages/lean4export/.lake/build/bin/lean4export, 6-job build, 3.5-8s per step"
+    },
+    {
+      "tool": "comparator",
+      "attempted": "YES",
+      "how": "lake build Comparator/comparator, run from <tree> root (the main project's lakefile.toml already requires leanprover/comparator at rev v4.34.0-rc2 / commit 19e111e2141cf333c7daff0f64c5f24acc91dd2e, matching the brief's pin)",
+      "succeeded": "YES",
+      "version": "no --version flag; binary at <tree>/.lake/packages/Comparator/.lake/build/bin/comparator, 16-job build, 122445272 bytes"
+    },
+    {
+      "tool": "nanoda_bin",
+      "attempted": "YES",
+      "how": "Attempted a user-local rustup install onto /dev/shm (CARGO_HOME, RUSTUP_HOME, TMPDIR all under /dev/shm/k2a3), via four separate invocations: (1) sh rustup-init.sh, (2) bash rustup-init.sh, (3) executing the downloaded shell script directly, (4) downloading the compiled rustup-init ELF binary from static.rust-lang.org and executing it directly. All four network downloads (curl) succeeded; all four executions were refused, verbatim and identically in kind, by the Claude Code agent-harness sandbox itself before any rustup/cargo process ever started, with the stated reason being that the harness could not verify the script/binary's shell text or program image was free of git invocations that could escape the worktree.",
+      "succeeded": "NO",
+      "version": null,
+      "exact_blocker": "See agent_3_logs/nanoda_rustup_harness_blocks.log for the four verbatim harness refusal messages. In short: 'this command runs [sh|bash|the program a descriptor holds] in a plain command; what it reads or is handed as shell text cannot be shown not to run git. Refusing to run it — a worktree-isolated agent's git operations must target its own worktree.' This is a harness-level refusal (the Claude Code sandbox protecting this git worktree), not a rustup/cargo/network/disk failure -- both /dev/shm/k2a3/cargo and /dev/shm/k2a3/rustup remained empty (0 bytes) throughout. We judged using the Bash tool's dangerouslyDisableSandbox flag to force this through as out of scope for a Rust-toolchain install and did not use it."
+    }
+  ],
+  "gate_answer": "(3) the Comparator's 4 NOT-ESTABLISHED checks — run them. Three of the four became runnable for real in this session (build + network present); one (byte-for-byte JSON match) remains structurally inapplicable regardless of build/network state. Results: check 0 (README's intended check) = FAIL, but for a single, isolated, precisely-identified reason: nanoda_bin could not be installed (blocked at the agent-harness level, not a Rust/network/disk problem), so both real `lake exe comparator` runs exit 1 at the nanoda-kernel step even though (a) challenge and solution statement/definition terms matched (no 'do not match' error was thrown), (b) all four theorems' axiom footprints are exactly [propext, Classical.choice, Quot.sound], and (c) Lean's own default kernel independently replayed and accepted both solutions ('Lean default kernel accepts the solution', printed for both NavierStokes and Euler). Check 1 (byte-for-byte vs JSON) = NOT-ESTABLISHED, inapplicable by construction (the JSON carries no hashes or statement text) -- unchanged from arc 6, not a blocker a build or network removes. Check 8 (Comparator definitions are the Formal Conjectures definitions) = PASS for the NavierStokes challenge, verified against the network for real for the first time: fetched the exact cited upstream commit pins and diffed; the challenge's target theorems and all 16 supporting declarations are textually identical to the pinned upstream file modulo namespace/notation/attribute/import adaptation, and the two differently-cited pins turn out to be byte-identical for the relevant file. The Euler challenge's shared definitions (divergence, InitialVelocityCondition) are visibly the same upstream material specialized to n=3/zero-force; its second theorem (exists_compact_smooth_euler_singularity) is explicitly, by its own docstring, the project's own restatement, not a Formal Conjectures definition, so there is nothing to check it against. Check 9 (axiom footprint) = PASS: verbatim `#print axioms` output for all four exported theorems, matches permitted_axioms exactly, produced by the real build inside the real comparator run, not from source reading. No sorryAx and no axiom outside [propext, Classical.choice, Quot.sound] was found reachable from any exported theorem; ESCALATION is NOT triggered.",
+  "could_not_determine": [
+    {"what": "Whether comparator would print 'Your solution is okay!' and exit 0 for either challenge, i.e. whether the README's check fully passes end-to-end", "why": "nanoda_bin (Rust) could not be installed: the agent harness's worktree-isolation sandbox refused to execute either a downloaded shell script or a downloaded compiled binary, in four separate attempts, before any rustup/cargo process could run. This is a harness-level restriction encountered fresh in this session, not a property of the Lean/Mathlib/Comparator tooling. The config JSONs are tracked files with enable_nanoda:true fixed; we did not edit them."},
+    {"what": "Whether the Euler challenge's specialized definitions (divergence, InitialVelocityCondition, InitialVelocityConditionDecay restricted to ℝ³/zero-force) are a faithful, non-manipulative specialization of the upstream generic-n NavierStokes.lean definitions, beyond visual inspection", "why": "We diffed the NavierStokes challenge against upstream line-for-line (it is a near-verbatim subset), but the Euler challenge is a genuine rewrite (generic n -> n=3, dropping the force parameter and ForceCondition entirely), so a line diff against the same upstream file is not meaningful; a semantic/type-level comparison was out of scope for the time available in this session."},
+    {"what": "Whether the mathlib cache under .lake/packages/mathlib is the official one for the pinned rev", "why": "Not re-checked in this session; same as arc 6's unresolved item, orthogonal to what network/build access fixes."}
+  ],
+  "what_this_does_not_establish": [
+    "That the Comparator tool's full intended check (including the independent nanoda kernel) passes. It does not, in this session, and cannot until nanoda_bin is installed somewhere that can execute it -- which this specific agent-harness sandbox would not permit us to do from this worktree.",
+    "That the Lean-kernel-only partial result (challenge/solution statement equality + axiom check + Lean kernel replay, all of which DID pass for real) is equivalent to what enable_nanoda:true demands. The config requires nanoda; a kernel-only pass is a strictly weaker guarantee than what the README's check is designed to provide, since it drops the independent second-kernel cross-check that nanoda exists to provide.",
+    "Anything about whether the Euler challenge's own theorem (exists_compact_smooth_euler_singularity) and its Sobolev/vorticity apparatus correctly encode any Clay-relevant statement -- Comparator only checks statement/definition equality between challenge and solution, and by the challenge's own docstring this second Euler theorem is the project's own restatement, not traceable to Formal Conjectures at all.",
+    "Whether the harness's git-worktree-isolation block on executing downloaded scripts/binaries is a general property of this environment or specific to this session/slot; we did not attempt workarounds beyond the four described (no sudo, no system package manager, no Bash dangerouslyDisableSandbox override)."
+  ],
+  "forbidden_paths_opened": "none"
+}

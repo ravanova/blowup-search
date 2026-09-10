@@ -1,0 +1,5 @@
+go: github.com/Zouuup/landrun@v0.1.17 requires go >= 1.24.0; switching to go1.26.8
+go: github.com/Zouuup/landrun/cmd/landrun@latest: version constraints conflict:
+	github.com/Zouuup/landrun@v0.1.17: parsing go.mod:
+	module declares its path as: github.com/zouuup/landrun
+	        but was required as: github.com/Zouuup/landrun

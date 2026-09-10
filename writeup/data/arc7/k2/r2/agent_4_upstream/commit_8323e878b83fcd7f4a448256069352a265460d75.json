@@ -1,0 +1,101 @@
+{
+  "sha": "8323e878b83fcd7f4a448256069352a265460d75",
+  "node_id": "C_kwDOOogmB9oAKDgzMjNlODc4YjgzZmNkN2Y0YTQ0ODI1NjA2OTM1MmEyNjU0NjBkNzU",
+  "commit": {
+    "author": {
+      "name": "Thomas Browning",
+      "email": "tb65536@users.noreply.github.com",
+      "date": "2026-09-04T13:36:28Z"
+    },
+    "committer": {
+      "name": "GitHub",
+      "email": "noreply@github.com",
+      "date": "2026-09-04T13:36:28Z"
+    },
+    "message": "fix(README): add missing comma (#5267)",
+    "tree": {
+      "sha": "729b92fc60e702403bc16ef64bc7b4147be3e229",
+      "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/trees/729b92fc60e702403bc16ef64bc7b4147be3e229"
+    },
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/commits/8323e878b83fcd7f4a448256069352a265460d75",
+    "comment_count": 0,
+    "verification": {
+      "verified": true,
+      "reason": "valid",
+      "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqmslsCRC1aQ7uu5UhlAAAJ1cQAFkqALq78NGhPm781pvuH70+\nySj71CCvB1e9WrnE0gyjrDE04HgEdMTFYmS8vLI8F5T2Cpu6W/ZbkZUQ64kjQO7b\n2q+eK+yBOXFq792E7L5PYJIEbGo8QD50cL2yCb6xSpiRtttQStMllGrNbU4UHxCh\nLdaCCnQ+X5u0DpHx32DPjAPtmPxSu5WsY7Br2XG/LF6VSwIIRggv/cZGd73V+Bpp\n3o8NfNDvXRqC3DSDLz89Jn+o7pIyZh7yxCLSq+A23k8esD7ZEQrM2O02ZjWsgu0J\n6HJDHa2d0Z2o3p6ocFeT1BUO/Gj4AXpsmagYegPnHEoSO83BldOr18orG0rx89Zk\n9/ql/t9527PMgyc9+xg0dEsy1GIcq6nlYJQFQ4sl68pC3jK8YgpmmMxYHDFZqn+8\n7Tsfp+SjlPErqVXDDJEKDtAhrZY+RpZi2e2UfDCxUNoex6qJSnmTgESFymNsEd+3\nD+3FcnsJxKNJhiEuZve/bqMbdE2+66NEusvj8bRo1bfykxhJ7aNIY63yBUf/1Vm0\n5tanpGpEhuk3RKpgj97Lf0ukKAX57gQ6/1iVJYc3uhr5qe1/IF9GoJB27HTyD5Bs\naIgUJk0H9YsUuTeSqmGY4Ob70VqU22lDevzXIqpaedPr5fNVft1XE9KjlUfP3lU5\n2GXZjIqDuyCaeSDa4IYP\n=6lhy\n-----END PGP SIGNATURE-----\n",
+      "payload": "tree 729b92fc60e702403bc16ef64bc7b4147be3e229\nparent c1bc243e70d0a229aa5b1e07c6577718e30a70ab\nauthor Thomas Browning <tb65536@users.noreply.github.com> 1788528988 +0000\ncommitter GitHub <noreply@github.com> 1788528988 +0000\n\nfix(README): add missing comma (#5267)",
+      "verified_at": "2026-09-04T13:36:44Z"
+    }
+  },
+  "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/8323e878b83fcd7f4a448256069352a265460d75",
+  "html_url": "https://github.com/google-deepmind/formal-conjectures/commit/8323e878b83fcd7f4a448256069352a265460d75",
+  "comments_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/8323e878b83fcd7f4a448256069352a265460d75/comments",
+  "author": {
+    "login": "tb65536",
+    "id": 13339017,
+    "node_id": "MDQ6VXNlcjEzMzM5MDE3",
+    "avatar_url": "https://avatars.githubusercontent.com/u/13339017?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/tb65536",
+    "html_url": "https://github.com/tb65536",
+    "followers_url": "https://api.github.com/users/tb65536/followers",
+    "following_url": "https://api.github.com/users/tb65536/following{/other_user}",
+    "gists_url": "https://api.github.com/users/tb65536/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/tb65536/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/tb65536/subscriptions",
+    "organizations_url": "https://api.github.com/users/tb65536/orgs",
+    "repos_url": "https://api.github.com/users/tb65536/repos",
+    "events_url": "https://api.github.com/users/tb65536/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/tb65536/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "web-flow",
+    "id": 19864447,
+    "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+    "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/web-flow",
+    "html_url": "https://github.com/web-flow",
+    "followers_url": "https://api.github.com/users/web-flow/followers",
+    "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+    "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+    "organizations_url": "https://api.github.com/users/web-flow/orgs",
+    "repos_url": "https://api.github.com/users/web-flow/repos",
+    "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/web-flow/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "c1bc243e70d0a229aa5b1e07c6577718e30a70ab",
+      "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/c1bc243e70d0a229aa5b1e07c6577718e30a70ab",
+      "html_url": "https://github.com/google-deepmind/formal-conjectures/commit/c1bc243e70d0a229aa5b1e07c6577718e30a70ab"
+    }
+  ],
+  "stats": {
+    "total": 2,
+    "additions": 1,
+    "deletions": 1
+  },
+  "files": [
+    {
+      "sha": "2797fb23e3ef74d4744714aec888e3bdeb8de8ca",
+      "filename": "README.md",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/google-deepmind/formal-conjectures/blob/8323e878b83fcd7f4a448256069352a265460d75/README.md",
+      "raw_url": "https://github.com/google-deepmind/formal-conjectures/raw/8323e878b83fcd7f4a448256069352a265460d75/README.md",
+      "contents_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/README.md?ref=8323e878b83fcd7f4a448256069352a265460d75",
+      "patch": "@@ -102,7 +102,7 @@ benchmark version but instead go into `v{N+1}`.\n If your work has used formal-conjectures, please consider citing it via\n ```\n @misc{FormalConjectures,\n-  author       = {{The Formal Conjectures Authors}}\n+  author       = {{The Formal Conjectures Authors}},\n   title        = {{T}he {F}ormal {C}onjectures {R}epository},\n   year         = {2025},\n   url          = {https://github.com/google-deepmind/formal-conjectures},"
+    }
+  ]
+}

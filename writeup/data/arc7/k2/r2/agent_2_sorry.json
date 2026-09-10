@@ -1,0 +1,164 @@
+{
+  "schema": "arc7_k2_r2_v1",
+  "agent": 2,
+  "leg": 438,
+  "run": 2,
+  "date": "2026-09-10",
+  "clone_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+  "clone_head_source": "git -C /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse rev-parse HEAD (matches the pinned openai/NavierStokesAndEuler commit)",
+  "toolchain": "leanprover/lean4:v4.34.0-rc2 (lean-toolchain); mathlib v4.34.0-rc2 and leanprover/comparator v4.34.0-rc2 per lakefile.toml",
+  "method": "Blind source-level census over the project's own .lean files (git ls-files, .lean suffix, .lake/ excluded because it is the dependency tree: Mathlib, Comparator, and their transitive deps, not the project's code). A Python lexer tags every character as code / block-or-line comment (nested /- -/, /-- -/, /-! -/, --) / string literal, then every word-boundary occurrence of the 11 census keywords is classified by the tag at its position and attributed to the nearest preceding non-comment declaration header. Import closures are computed by BFS over `import X` lines from the root modules NavierStokes.ComparatorSolution and Euler.Solution (the solution_module of the two Comparator configs), expanding only modules that exist as project files; Mathlib.* imports are recorded as external leaves and not expanded. A second, lexer-free word-boundary grep (k2_rawcheck.py) was run as an independent cross-check of the counts, plus an os.walk file count to confirm git ls-files missed no on-disk .lean file. Neither lake nor lean was run; nothing was written under the tree. The four Comparator theorem names, challenge modules, and solution modules were read from ComparatorChallenges/*.json.",
+  "commands": [
+    "git -C /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse rev-parse HEAD",
+    "git -C <tree> ls-files | grep -v '^\\.lake/' | grep '\\.lean$' | wc -l   # 2486",
+    "git -C <tree> ls-files | grep '\\.lean$' | grep -v '^\\.lake/' | awk -F/ '{print $1}' | sort | uniq -c",
+    "cat <tree>/lakefile.toml <tree>/lean-toolchain <tree>/formalization.yaml <tree>/ComparatorChallenges/*.json <tree>/ComparatorChallenges/README.md <tree>/ComparatorChallenges/*.lean <tree>/NavierStokes.lean <tree>/Euler.lean",
+    "git -C <tree> ls-files | grep '\\.lean$' | grep -v '^\\.lake/' | xargs grep -n 'sorry'",
+    "head -40 <tree>/NavierStokes/ComparatorSolution.lean; head -30 <tree>/Euler/Solution.lean",
+    "cat writeup/data/arc7/k1/phaseA/k1_A_axioms.log writeup/data/arc7/k1/phaseB/k1_B_axioms.log writeup/data/arc7/k1/phaseB_local/k1_B_axioms.log",
+    "/home/andy/projects/Unsolved/.venv/bin/python <scratch>/k2_census.py <tree> <scratch>/k2_census_out.json",
+    "/home/andy/projects/Unsolved/.venv/bin/python <scratch>/k2_rawcheck.py <tree>",
+    "python one-liners over k2_census_out.json to print hits, closure sizes, closure intersection, and membership of Euler.Solution / NavierStokes.ComparatorSolution in the closures of the library roots Euler.lean / NavierStokes.lean; plus an os.walk word-boundary scan for notation|syntax|macro_rules|elab_rules|initialize|declare_syntax_cat|simproc|attribute|decide"
+  ],
+  "scripts": {
+    "k2_census.py": "#!/usr/bin/env python3\n\"\"\"K2 run 2 agent 2 source census. Read-only over the Lean tree.\nUsage: k2_census.py <tree> <out.json>\nClassifies every keyword occurrence as code / comment / string by a\nlexer that tracks nested block comments /- -/ (incl. doc comments /-- /-!),\nline comments --, and string literals \"...\" (with backslash escapes).\nThen BFS import closure from root modules over `import X` lines of\nproject files only (Mathlib / Comparator imports are external, recorded but\nnot expanded). .lake/ is excluded via `git ls-files` filter.\"\"\"\nimport re, sys, json, subprocess, hashlib, os, bisect\nT = sys.argv[1]\nfiles = subprocess.run([\"git\",\"-C\",T,\"ls-files\"],capture_output=True,text=True).stdout.split(\"\\n\")\nfiles = [f for f in files if f.endswith(\".lean\") and not f.startswith(\".lake/\")]\nKW = [\"sorry\",\"axiom\",\"admit\",\"native_decide\",\"implemented_by\",\"extern\",\"unsafe\",\"opaque\",\"set_option\",\"macro\",\"elab\"]\nkwre = re.compile(r\"(?<![A-Za-z0-9_.'!?])(\" + \"|\".join(KW) + r\")(?![A-Za-z0-9_'!?])\")\ndef classify(src):\n    \"\"\"return list of same length as src, each char tagged 'c' code,'m' comment,'s' string\"\"\"\n    tags = ['c']*len(src); i=0; n=len(src); depth=0\n    while i<n:\n        if depth>0:\n            if src.startswith(\"/-\",i): depth+=1; tags[i]=tags[i+1]='m'; i+=2; continue\n            if src.startswith(\"-/\",i): depth-=1; tags[i]=tags[i+1]='m'; i+=2; continue\n            tags[i]='m'; i+=1; continue\n        if src.startswith(\"/-\",i): depth=1; tags[i]=tags[i+1]='m'; i+=2; continue\n        if src.startswith(\"--\",i):\n            j=src.find(\"\\n\",i); j=n if j<0 else j\n            for k in range(i,j): tags[k]='m'\n            i=j; continue\n        if src[i]=='\"':\n            j=i+1\n            while j<n and src[j]!='\"':\n                if src[j]=='\\\\': j+=1\n                j+=1\n            for k in range(i,min(j+1,n)): tags[k]='s'\n            i=j+1; continue\n        i+=1\n    return tags\ndeclre = re.compile(r\"^\\s*(?:@\\[[^\\]]*\\]\\s*)?(?:(?:private|protected|noncomputable|nonrec|partial|unsafe|scoped|local)\\s+)*(theorem|lemma|def|abbrev|instance|structure|class|inductive|axiom|opaque|example|macro|elab|syntax|macro_rules|elab_rules)\\b\\s*([^\\s:(\\[{]*)\")\nhits=[]; counts={k:{\"code\":0,\"comment\":0,\"string\":0} for k in KW}\nfor f in files:\n    src=open(os.path.join(T,f),encoding=\"utf-8\").read()\n    tags=classify(src)\n    lines=src.split(\"\\n\"); offs=[0]\n    for L in lines: offs.append(offs[-1]+len(L)+1)\n    for m in kwre.finditer(src):\n        kw=m.group(1); pos=m.start(); tag=tags[pos]\n        kind={\"c\":\"code\",\"m\":\"comment\",\"s\":\"string\"}[tag]\n        counts[kw][kind]+=1\n        ln=bisect.bisect_right(offs,pos)\n        decl=None\n        for L in range(ln-1,-1,-1):\n            if tags[offs[L]]=='m': continue\n            dm=declre.match(lines[L])\n            if dm: decl=f\"{dm.group(1)} {dm.group(2)}\".strip(); break\n        hits.append({\"file\":f,\"line\":ln,\"keyword\":kw,\"kind\":kind,\"enclosing_decl\":decl,\"text\":lines[ln-1].strip()})\ntop={}\nfor f in files: top[f.split(\"/\")[0]]=top.get(f.split(\"/\")[0],0)+1\ndef file_of(m): return m.replace(\".\",\"/\")+\".lean\"\nimp=re.compile(r\"^\\s*import\\s+(\\S+)\",re.M)\nfileset=set(files)\ndef closure(root):\n    seen=set(); ext=set(); stack=[root]\n    while stack:\n        m=stack.pop()\n        if m in seen: continue\n        fn=file_of(m)\n        if fn not in fileset: ext.add(m); continue\n        seen.add(m)\n        src=open(os.path.join(T,fn),encoding=\"utf-8\").read()\n        for mm in imp.findall(src): stack.append(mm)\n    return seen, ext\nout={\"files\":len(files),\"by_top_dir\":top,\"keyword_counts\":counts,\"hits\":hits}\nfor root in [\"NavierStokes.ComparatorSolution\",\"Euler.Solution\",\"NavierStokes\",\"Euler\"]:\n    seen,ext=closure(root)\n    out[\"closure_\"+root]={\"size_project_modules\":len(seen),\"external_imports\":sorted(ext),\n        \"ComparatorChallenges_members\":sorted(m for m in seen if m.startswith(\"ComparatorChallenges\")),\n        \"members\":sorted(seen)}\nout[\"importers_of_ComparatorChallenges\"]=[f for f in files if re.search(r\"^\\s*import\\s+ComparatorChallenges\",open(os.path.join(T,f),encoding=\"utf-8\").read(),re.M)]\nsha={}\nfor f in [\"NavierStokes/ComparatorSolution.lean\",\"Euler/Solution.lean\",\"ComparatorChallenges/NavierStokes.lean\",\"ComparatorChallenges/Euler.lean\"]:\n    sha[f]=hashlib.sha256(open(os.path.join(T,f),\"rb\").read()).hexdigest()\nout[\"sha256\"]=sha\njson.dump(out,open(sys.argv[2],\"w\"),indent=1)\nprint(json.dumps({k:v for k,v in out.items() if k!=\"hits\" and not k.startswith(\"closure_\")},indent=1))\nfor k,v in out.items():\n    if k.startswith(\"closure_\"): print(k,v[\"size_project_modules\"],v[\"external_imports\"],v[\"ComparatorChallenges_members\"])\nprint(\"code hits:\")\nfor h in hits:\n    if h[\"kind\"]==\"code\": print(h)\nprint(\"string hits:\")\nfor h in hits:\n    if h[\"kind\"]==\"string\": print(h)\n",
+    "k2_rawcheck.py": "#!/usr/bin/env python3\n\"\"\"Raw word-boundary cross-check (no comment/string lexing) of the keyword census,\nindependent of k2_census.py's lexer, plus a scan for `#print` / `sorryAx` lines\nand a count of .lean files on disk outside .lake/ (to compare with git ls-files).\nUsage: k2_rawcheck.py <tree>\"\"\"\nimport os, re, sys\nT = sys.argv[1]\nKW = [\"sorry\",\"axiom\",\"admit\",\"native_decide\",\"implemented_by\",\"extern\",\"unsafe\",\"opaque\",\"set_option\",\"macro\",\"elab\"]\nfiles = []\nfor root, dirs, fns in os.walk(T):\n    if os.path.basename(root) == \".lake\" and os.path.dirname(root) == T:\n        dirs[:] = []; continue\n    dirs[:] = [d for d in dirs if not (root == T and d == \".lake\")]\n    for fn in fns:\n        if fn.endswith(\".lean\"): files.append(os.path.join(root, fn))\nprint(\"lean files on disk outside .lake/:\", len(files))\nraw = {k: 0 for k in KW}\nctx = []\nfor f in files:\n    for i, line in enumerate(open(f, encoding=\"utf-8\"), 1):\n        for k in KW:\n            if re.search(r\"\\b\" + k + r\"\\b\", line):\n                raw[k] += 1\n                if k != \"sorry\": ctx.append((os.path.relpath(f, T), i, k, line.rstrip()))\n        if \"#print\" in line or \"sorryAx\" in line:\n            ctx.append((os.path.relpath(f, T), i, \"#print/sorryAx\", line.rstrip()))\nprint(\"raw word-boundary counts (code+comment+string):\", raw)\nfor c in ctx: print(c)\n"
+  },
+  "file_census": {
+    "lean_files_total_excluding_dot_lake": 2486,
+    "lean_files_on_disk_outside_dot_lake_via_os_walk": 2486,
+    "by_top_level_dir": {
+      "ComparatorChallenges": 2,
+      "Euler": 1839,
+      "Euler.lean": 1,
+      "NavierStokes": 643,
+      "NavierStokes.lean": 1
+    },
+    "dot_lake_excluded": "yes: .lake/ holds the Lake-fetched dependencies (Mathlib, Comparator and their transitive deps) and build artefacts; it is not the project's own source and was excluded from every count and grep",
+    "non_lean_tracked_files": [".gitignore", "ComparatorChallenges/Euler.json", "ComparatorChallenges/NavierStokes.json", "ComparatorChallenges/README.md", "LICENSE", "README.md", "formalization.yaml", "lake-manifest.json", "lakefile.toml", "lean-toolchain"],
+    "sha256_theorem_bearing_files": {
+      "NavierStokes/ComparatorSolution.lean": "52950d5d618a8d34c9bfbdb16641c81c276e97b6d7fd2a76c08577353f0b0227",
+      "Euler/Solution.lean": "5dced6caecbfd85d952ff9537e420a85d4f38386e2c655a9c569a21b7139ea4f",
+      "ComparatorChallenges/NavierStokes.lean": "0cd193b8d5cbd0266e6e2f72e68dd5abcdcf2430ebd435dd9289737e9aa7da61",
+      "ComparatorChallenges/Euler.lean": "b11e9bafc220c8126142a9c9281cfeab4872d8f74a7d4899fed206f7f6e1d4f7"
+    },
+    "which_four_files_and_why": "The two solution_module files named in ComparatorChallenges/*.json (NavierStokes/ComparatorSolution.lean carries NavierStokes.Comparator.navier_stokes_breakdown_R3 and ..._periodic; Euler/Solution.lean carries Euler.euler_breakdown_R3 and Euler.exists_compact_smooth_euler_singularity) and the two challenge_module files (ComparatorChallenges/NavierStokes.lean, ComparatorChallenges/Euler.lean) that state the same four theorem names with `sorry` bodies.",
+    "lake_targets": "lakefile.toml defaultTargets = NavierStokes, Euler, ComparatorChallenges; lean_lib NavierStokes globs [NavierStokes, NavierStokes.+]; lean_lib Euler globs [Euler, Euler.+] with autoImplicit=false, warningAsError=true; lean_lib ComparatorChallenges globs [ComparatorChallenges.+]"
+  },
+  "sorry_hits": [
+    {
+      "file": "ComparatorChallenges/NavierStokes.lean",
+      "line": 29,
+      "enclosing_decl": "none (module docstring /-! ... -/ at top of file)",
+      "kind": "comment",
+      "text": "are retained, including their intentional `sorry` challenge placeholders. The",
+      "challenge_placeholder": "N/A (prose, not a proof term)",
+      "in_closure_of_ComparatorSolution": "NO",
+      "in_closure_of_Euler_Solution": "NO"
+    },
+    {
+      "file": "ComparatorChallenges/NavierStokes.lean",
+      "line": 277,
+      "enclosing_decl": "theorem NavierStokes.Comparator.navier_stokes_breakdown_R3 (declared line 272, `:= by` then `sorry`)",
+      "kind": "code",
+      "text": "sorry",
+      "challenge_placeholder": "YES",
+      "evidence": "ComparatorChallenges/NavierStokes.json: challenge_module = ComparatorChallenges.NavierStokes, solution_module = NavierStokes.ComparatorSolution, theorem_names includes NavierStokes.Comparator.navier_stokes_breakdown_R3, permitted_axioms = [propext, Quot.sound, Classical.choice]. The file's module docstring (lines 22-33) says the upstream breakdown alternatives (C) and (D) 'are retained, including their intentional `sorry` challenge placeholders' and 'Neither the proof root nor the submission imports this reference.' The file imports only Mathlib. The identically named theorem in NavierStokes/ComparatorSolution.lean line 16 has body `exact ComparatorBridge.navier_stokes_breakdown_R3 nu hnu`, not sorry.",
+      "in_closure_of_ComparatorSolution": "NO",
+      "in_closure_of_Euler_Solution": "NO"
+    },
+    {
+      "file": "ComparatorChallenges/NavierStokes.lean",
+      "line": 284,
+      "enclosing_decl": "theorem NavierStokes.Comparator.navier_stokes_breakdown_periodic (declared line 279, `:= by` then `sorry`)",
+      "kind": "code",
+      "text": "sorry",
+      "challenge_placeholder": "YES",
+      "evidence": "Same JSON config as above lists NavierStokes.Comparator.navier_stokes_breakdown_periodic as the second theorem_names entry; same module docstring; the solution-side theorem in NavierStokes/ComparatorSolution.lean line 23 has body `exact ComparatorBridge.navier_stokes_breakdown_periodic nu hnu`.",
+      "in_closure_of_ComparatorSolution": "NO",
+      "in_closure_of_Euler_Solution": "NO"
+    },
+    {
+      "file": "ComparatorChallenges/Euler.lean",
+      "line": 88,
+      "enclosing_decl": "theorem Euler.euler_breakdown_R3 (declared line 85, `:= by` then `sorry`)",
+      "kind": "code",
+      "text": "sorry",
+      "challenge_placeholder": "YES",
+      "evidence": "ComparatorChallenges/Euler.json: challenge_module = ComparatorChallenges.Euler, solution_module = Euler.Solution, theorem_names = [Euler.euler_breakdown_R3, Euler.exists_compact_smooth_euler_singularity], permitted_axioms = [propext, Quot.sound, Classical.choice]. Module docstring lines 22-36: 'The reference imports only Mathlib, independently of the Euler proof development. The theorem proofs are intentional Comparator challenge placeholders.' The docstring on the theorem itself (lines 83-84) says 'This is the theorem to supply to Comparator.' The file imports only Mathlib.",
+      "in_closure_of_ComparatorSolution": "NO",
+      "in_closure_of_Euler_Solution": "NO"
+    },
+    {
+      "file": "ComparatorChallenges/Euler.lean",
+      "line": 184,
+      "enclosing_decl": "theorem Euler.exists_compact_smooth_euler_singularity (declared line 168, `:= by` then `sorry`)",
+      "kind": "code",
+      "text": "sorry",
+      "challenge_placeholder": "YES",
+      "evidence": "Same Euler.json config lists this name; same module docstring. The solution-side Euler/Solution.lean states both theorems (lines 33 and 43) with proof bodies drawn from the Euler.* development and imports only Euler.* modules, never ComparatorChallenges.*.",
+      "in_closure_of_ComparatorSolution": "NO",
+      "in_closure_of_Euler_Solution": "NO"
+    }
+  ],
+  "sorry_summary": "Five word-boundary occurrences of `sorry` in the project's .lean files: 4 in code, 1 in a comment, 0 in strings. The 4 code occurrences are exactly the proof bodies of the four Comparator challenge theorems in the two ComparatorChallenges/*.lean reference files. No `sorry` occurs anywhere under Euler/ or NavierStokes/ (1839 + 643 + 2 root files), in code, comment, or string. The raw grep cross-check gives the same 5 total.",
+  "other_keyword_hits": {
+    "axiom": {"code": 0, "comment": 4, "string": 0, "notes": "All four are prose: Euler/BaseInductionStageNoOptions.lean:24 ('occur in its axiom dependencies'), NavierStokes/ProblemStatement.lean:8 and :117 ('not an axiom or a proved theorem' / 'no proof, witness, or axiom asserting this proposition'), NavierStokes/RadialPrimitive.lean:227 (docstring 'not postulated as an inverse axiom'). No `axiom` declaration exists in the project's code. Note that `#print axioms` (4 lines, see print_axioms_commands) is not matched by the word-boundary regex because `axioms` is a different word."},
+    "admit": {"code": 0, "comment": 0, "string": 0, "notes": "no occurrence"},
+    "native_decide": {"code": 0, "comment": 0, "string": 0, "notes": "no occurrence. The plain `decide` tactic (kernel-evaluated, does not add an axiom) appears ~201 times in code, e.g. `(by decide : 2 ≠ 0)`; it is not native_decide and is listed only for completeness."},
+    "implemented_by": {"code": 0, "comment": 0, "string": 0, "notes": "no occurrence"},
+    "extern": {"code": 0, "comment": 0, "string": 0, "notes": "no occurrence"},
+    "unsafe": {"code": 0, "comment": 0, "string": 0, "notes": "no occurrence"},
+    "opaque": {"code": 0, "comment": 1, "string": 0, "notes": "NavierStokes/ParticularWaveBounds.lean:1582, docstring prose ('keep the finite-path solver opaque') attached to def complexCopyPressure region; no `opaque` declaration in code."},
+    "set_option": {"code": 0, "comment": 0, "string": 0, "notes": "no occurrence at all. Several files are named *NoOptions.lean and their docstrings describe having removed heartbeat overrides (e.g. Euler/BaseInductionStageNoOptions.lean lines 8-27 mentions `#count_heartbeats in` measured on temporary copies, none present in the tree). lakefile.toml sets leanOptions autoImplicit=false, warningAsError=true for the Euler lib only; that is a build option, not a set_option in code."},
+    "macro": {"code": 0, "comment": 0, "string": 0, "notes": "no `macro` / `macro_rules` command. However `local notation` commands (which expand to macros) do occur in code, e.g. ComparatorChallenges/NavierStokes.lean:66,67,84, ComparatorChallenges/Euler.lean, NavierStokes/ComparatorSolution.lean:13, Euler/Solution.lean; word-boundary `notation` matches 174 lines tree-wide including prose. These define surface syntax for EuclideanSpace ℝ (Fin 3) and divergence and cannot introduce axioms, but a source census cannot prove what any macro expands to."},
+    "elab": {"code": 0, "comment": 0, "string": 0, "notes": "no `elab` / `elab_rules` command"},
+    "additional_scans_not_in_the_gate_list": {
+      "syntax / macro_rules / elab_rules / declare_syntax_cat / simproc": "0 occurrences",
+      "initialize": "3 occurrences, all prose in docstrings",
+      "attribute": "26 lines, e.g. `attribute [local instance] ...`, `attribute [local irreducible] initialParent` — reducibility/instance attributes, not axioms",
+      "print_axioms_commands": ["NavierStokes/ComparatorSolution.lean:31 `#print axioms NavierStokes.Comparator.navier_stokes_breakdown_R3`", "NavierStokes/ComparatorSolution.lean:32 `#print axioms NavierStokes.Comparator.navier_stokes_breakdown_periodic`", "Euler/Solution.lean:73 `#print axioms Euler.euler_breakdown_R3`", "Euler/Solution.lean:75 `#print axioms Euler.exists_compact_smooth_euler_singularity`"],
+      "sorryAx_literal": "0 occurrences in source"
+    }
+  },
+  "closure": {
+    "how_computed": "BFS over `^\\s*import\\s+(\\S+)` lines starting at the root module, resolving module name M to file M.replace('.','/')+'.lean' among the 2486 tracked project files; modules without a project file (all Mathlib.*) are recorded as external leaves and not expanded. Membership means the module is transitively imported; it is necessary but not sufficient for the module's declarations to be used by any proof.",
+    "closure_of_NavierStokes.ComparatorSolution": {"project_modules": 580, "external_leaf_imports": 209, "all_external_are_Mathlib": true, "ComparatorChallenges_members": [], "members_outside_NavierStokes_namespace": []},
+    "closure_of_Euler.Solution": {"project_modules": 1829, "external_leaf_imports": 190, "all_external_are_Mathlib": true, "ComparatorChallenges_members": [], "members_outside_Euler_namespace": []},
+    "closure_intersection_NS_x_Euler": 0,
+    "any_ComparatorChallenges_module_in_either_closure": "NO",
+    "files_importing_ComparatorChallenges_anywhere_in_tree": [],
+    "library_roots": {
+      "NavierStokes.lean": "imports NavierStokes.ComparatorSolution only; closure 581 project modules; contains ComparatorSolution: YES",
+      "Euler.lean": "imports Euler.EulerSingularity only; closure 1771 project modules; contains Euler.Solution: NO (Euler.Solution is nonetheless built by `lake build` because the Euler lean_lib glob `Euler.+` covers every Euler/*.lean module). Euler.Solution's closure (1829) is a strict superset of the Euler.lean root closure."
+    },
+    "the_four_sorry_files_vs_closures": "Both sorry-bearing files (ComparatorChallenges/NavierStokes.lean, ComparatorChallenges/Euler.lean) import only Mathlib and are imported by no project file. They are therefore in neither closure, and no declaration of the two solution modules can refer to them without an import, which would have shown in the BFS."
+  },
+  "k1_axioms_verbatim": {
+    "writeup/data/arc7/k1/phaseA/k1_A_axioms.log": "=== AXIOMS_T0 2026-09-10T09:05:06Z\n'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n=== AXIOMS_RC=0 2026-09-10T09:05:51Z\n",
+    "writeup/data/arc7/k1/phaseB/k1_B_axioms.log": "=== AXIOMS_T0 2026-09-10T12:44:47Z\n'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n=== AXIOMS_RC=0 2026-09-10T12:44:55Z\n",
+    "writeup/data/arc7/k1/phaseB_local/k1_B_axioms.log": "=== AXIOMS_T0 2026-09-10T12:25:55Z\n'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n=== AXIOMS_RC=0 2026-09-10T12:26:00Z\n",
+    "note": "All three logs cover only the two NavierStokes theorems. None of them mentions the Euler pair (Euler.euler_breakdown_R3, Euler.exists_compact_smooth_euler_singularity); the Euler side of this census therefore has no banked kernel counterpart in K1 and is reported as source-only."
+  },
+  "cross_check_vs_k1": {
+    "verdict": "CONSISTENT",
+    "reasoning": "K1's three runs each report exactly [propext, Classical.choice, Quot.sound] for both exported NavierStokes theorems, with sorryAx absent. The source census predicts exactly this: (a) the only 4 code-level `sorry` are in ComparatorChallenges/*.lean, which import only Mathlib and are imported by nothing, so they cannot be in the dependency graph of NavierStokes.Comparator.navier_stokes_breakdown_R3 / _periodic as elaborated from NavierStokes.ComparatorSolution; (b) no `axiom`, `admit`, `native_decide` (which would surface as Lean.ofReduceBool), `implemented_by`, `extern`, `unsafe`, `opaque`, `set_option`, `macro`, or `elab` occurs in code in any of the 580 modules of the ComparatorSolution closure or anywhere else in the project; (c) the three axioms reported are the standard classical Mathlib trio, which the project's proofs inherit by using Mathlib. The axiom output and the census agree. Per the pre-registered rule, the axiom output WINS on any disagreement; there is none here, and had the kernel reported sorryAx, this census would have been reported as wrong (missing a sorry-introducing path), not the kernel. The Euler theorems are not in K1's logs, so for them the census is a prediction (no sorry / no extra axiom reachable) with no kernel result to cross-check against."
+  },
+  "gate_answer": "Gate (2) in its own terms: the project's .lean files (2486 outside .lake/, at HEAD 8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538) contain exactly 4 `sorry` in code — ComparatorChallenges/NavierStokes.lean:277 and :284 (theorems NavierStokes.Comparator.navier_stokes_breakdown_R3 and _periodic) and ComparatorChallenges/Euler.lean:88 and :184 (theorems Euler.euler_breakdown_R3 and Euler.exists_compact_smooth_euler_singularity) — plus one prose mention in a docstring. Each of the 4 is a Comparator challenge placeholder: the enclosing theorem is named in the corresponding ComparatorChallenges/*.json as a challenge theorem, the file's docstring calls the proofs intentional Comparator challenge placeholders, and the file imports only Mathlib. None is reachable from a main declaration by import: no project file imports any ComparatorChallenges.* module, so neither the 580-module import closure of NavierStokes.ComparatorSolution nor the 1829-module closure of Euler.Solution contains a sorry-bearing file. No axiom, admit, native_decide, implemented_by, extern, unsafe, opaque, set_option, macro, or elab occurs in code anywhere in the tree. Cross-checked against K1's banked `#print axioms` output (three runs, each [propext, Classical.choice, Quot.sound] for both exported NavierStokes theorems, sorryAx absent): CONSISTENT. The axiom output wins on disagreement; there is no disagreement. The Euler pair has no K1 kernel counterpart and is source-only here. So the count IS four, as the gate wording presupposes, and the census confirms rather than contradicts the kernel.",
+  "could_not_determine": [
+    {"what": "Whether any proof in the two closures actually elaborates without error (e.g. a term that only typechecks under the running `lake build`), or whether any tactic/notation macro expansion introduces a hidden dependency.", "why": "This is a source census: no lake or lean was run (a build was running in the tree and I was forbidden to run either). Only the kernel/`#print axioms` output can settle it, which is why K1's output wins."},
+    {"what": "Axiom dependencies of Euler.euler_breakdown_R3 and Euler.exists_compact_smooth_euler_singularity.", "why": "K1's three banked logs contain only the two NavierStokes theorems. The source census predicts the same trio with no sorryAx, and Euler/Solution.lean lines 73/75 issue `#print axioms` for them, but no banked kernel output for the Euler pair was among my inputs."},
+    {"what": "Whether declarations in the ComparatorSolution closure are actually USED by the two exported proofs, as opposed to merely imported.", "why": "Import-closure membership is necessary, not sufficient, for use; determining actual use needs the elaborated dependency graph (kernel-side), not source."},
+    {"what": "Whether .lake/ (Mathlib, Comparator packages at v4.34.0-rc2) is pristine.", "why": "Excluded from the census by instruction; I did not hash or diff it against upstream. K1's axiom output, which loads those oleans, is the only check on that."},
+    {"what": "That the Comparator tool itself (lake exe comparator) would accept the submissions.", "why": "Not run; the JSON configs were read for theorem names and permitted axioms only."}
+  ],
+  "what_this_does_not_establish": [
+    "It is not a proof check; nothing here verifies that any theorem is true or that any proof term is kernel-valid.",
+    "A source census cannot detect an elaboration error, a proof that fails under the build, or an axiom introduced by a macro, tactic, or notation expansion; absence of the keywords in code is evidence, not proof, of absence in the elaborated environment.",
+    "Import-closure membership is necessary, not sufficient, for use by a proof; conversely, absence from the closure is what rules the four sorries out, and that part is solid at the source level.",
+    "It says nothing about the mathematical correctness of the paper, nor whether the Lean statements faithfully formalize Theorem 1.1 / Corollary 10.6 (statement fidelity is another unit's question).",
+    "The Euler pair is source-only: no banked kernel output for it was among my inputs.",
+    "The keyword list is the gate's; other axiom-relevant constructs (e.g. `Lean.ofReduceBool` via native_decide, `Classical` uses) are only covered insofar as they would show in `#print axioms`, which is K1's job."
+  ],
+  "forbidden_paths_opened": "none"
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "name": "2d.lean",
+    "path": "FormalConjecturesForMathlib/Geometry/2d.lean",
+    "sha": "8b71ef05d4441db61d0d3d967c546950aa0ec91b",
+    "size": 11596,
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjecturesForMathlib/Geometry/2d.lean?ref=8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+    "html_url": "https://github.com/google-deepmind/formal-conjectures/blob/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/2d.lean",
+    "git_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/8b71ef05d4441db61d0d3d967c546950aa0ec91b",
+    "download_url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/2d.lean",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjecturesForMathlib/Geometry/2d.lean?ref=8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+      "git": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/8b71ef05d4441db61d0d3d967c546950aa0ec91b",
+      "html": "https://github.com/google-deepmind/formal-conjectures/blob/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/2d.lean"
+    }
+  },
+  {
+    "name": "3d.lean",
+    "path": "FormalConjecturesForMathlib/Geometry/3d.lean",
+    "sha": "75fb8541cf91f20e73cb389e342c0b1c37223783",
+    "size": 1429,
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjecturesForMathlib/Geometry/3d.lean?ref=8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+    "html_url": "https://github.com/google-deepmind/formal-conjectures/blob/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/3d.lean",
+    "git_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/75fb8541cf91f20e73cb389e342c0b1c37223783",
+    "download_url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/3d.lean",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjecturesForMathlib/Geometry/3d.lean?ref=8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+      "git": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/75fb8541cf91f20e73cb389e342c0b1c37223783",
+      "html": "https://github.com/google-deepmind/formal-conjectures/blob/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/3d.lean"
+    }
+  },
+  {
+    "name": "Euclidean.lean",
+    "path": "FormalConjecturesForMathlib/Geometry/Euclidean.lean",
+    "sha": "928880b71b4fee557a0833ec35e08990cc734bb8",
+    "size": 745,
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjecturesForMathlib/Geometry/Euclidean.lean?ref=8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+    "html_url": "https://github.com/google-deepmind/formal-conjectures/blob/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/Euclidean.lean",
+    "git_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/928880b71b4fee557a0833ec35e08990cc734bb8",
+    "download_url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/Euclidean.lean",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjecturesForMathlib/Geometry/Euclidean.lean?ref=8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+      "git": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/928880b71b4fee557a0833ec35e08990cc734bb8",
+      "html": "https://github.com/google-deepmind/formal-conjectures/blob/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/Euclidean.lean"
+    }
+  },
+  {
+    "name": "Metric.lean",
+    "path": "FormalConjecturesForMathlib/Geometry/Metric.lean",
+    "sha": "23f36e9d705daa4451d0a6f2b85cb54f37959a64",
+    "size": 957,
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjecturesForMathlib/Geometry/Metric.lean?ref=8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+    "html_url": "https://github.com/google-deepmind/formal-conjectures/blob/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/Metric.lean",
+    "git_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/23f36e9d705daa4451d0a6f2b85cb54f37959a64",
+    "download_url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/Metric.lean",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjecturesForMathlib/Geometry/Metric.lean?ref=8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+      "git": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/23f36e9d705daa4451d0a6f2b85cb54f37959a64",
+      "html": "https://github.com/google-deepmind/formal-conjectures/blob/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/Metric.lean"
+    }
+  }
+]
