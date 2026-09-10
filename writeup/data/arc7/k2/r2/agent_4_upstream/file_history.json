@@ -1,0 +1,248 @@
+[
+  {
+    "sha": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+    "node_id": "C_kwDOOogmB9oAKDhiZjQ1ZWQ3MGQ0OGIyYjJhNTAxZGU5YzAwYjI2YmZhMzhjNTczZWU",
+    "commit": {
+      "author": {
+        "name": "Robert Joseph",
+        "email": "robujsph2001@gmail.com",
+        "date": "2026-07-27T07:31:09Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-07-27T07:31:09Z"
+      },
+      "message": "Prove the basic divergence lemmas (#4643)\n\nSmall cleanup in the Navier–Stokes file :) This proves `divergence_add`\nand `divergence_smul` using linearity of `fderiv` and trace. The four\nopen Millennium problem statements are unchanged. `lake build` passes.\n\nCloses #4642",
+      "tree": {
+        "sha": "9ffdf5479f23c0d52896b2c132c91c7601d0b9b9",
+        "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/trees/9ffdf5479f23c0d52896b2c132c91c7601d0b9b9"
+      },
+      "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/commits/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqZwk9CRC1aQ7uu5UhlAAAiC4QAEVVox9UEH81xVGxmpEqRDaN\nwUHle8KVmg/6LpoJcpq3PzHYxSLfCuoGMLr2lSEgfbCGPWIlMhmGqcfcZQuUudnq\nsv0CddIWmSfwF9NAIwbjhW+3rPT/N7Npv5R8buQ7HaHebmMlkSW3wLR00QYGs2Ew\nfssTSdZi5fsABkP/q4UJK5Njpu+yuGPl2B+ocz0ef/L0nmPJMBYDBED9U5b1fk8V\nmmdTdP8uX4cBc5JhFdKnMAN6wH25y8tDfZgMHlSmquyLN7zlcVV7tVE9BEJxjYDL\n1Bn7WzWDmRZDVOScBeNLU9DRNxt/cVSd940XUprVCbIN+4fBAS8R4Rt2tO2pXNnf\n+Ym0h3YMeqSzZmbULOCEPlwOlrXlTChADvOyMGIOjcoFD5Uui0mYSynyLMzXDFwk\nSJLyaa4DBncPxtaY6dVaRe3SmfiqDRE5hx6o3WNoOmTMyYjNu599eUfFVhiP/Vpf\nVPFfji/wlkMDV1NZJLUVHHDPNbqg9pqpPTxkwuKWc296RdCGv8srUkzk+fc7RaId\nRw6Ah10fLEL5A1q9wt5u9NJu5wseTFE1P5YIP4MensdChXHIrro3ZO+ChxJUtM1z\nLPBdWFD7E4ldJxk41iLnPjwK3bBgnRBIh4clu8LFiM4ShuF+LFxS5C0csW+qxHgE\n3en4Gt8xabCNqMCVTzAp\n=n9nr\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 9ffdf5479f23c0d52896b2c132c91c7601d0b9b9\nparent b0f99dafb7d16d0c7bf22e9ae724a83168105968\nauthor Robert Joseph <robujsph2001@gmail.com> 1785137469 -0400\ncommitter GitHub <noreply@github.com> 1785137469 +0200\n\nProve the basic divergence lemmas (#4643)\n\nSmall cleanup in the Navier–Stokes file :) This proves `divergence_add`\nand `divergence_smul` using linearity of `fderiv` and trace. The four\nopen Millennium problem statements are unchanged. `lake build` passes.\n\nCloses #4642",
+        "verified_at": "2026-07-27T07:31:09Z"
+      }
+    },
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+    "html_url": "https://github.com/google-deepmind/formal-conjectures/commit/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+    "comments_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/comments",
+    "author": {
+      "login": "Robertboy18",
+      "id": 32393571,
+      "node_id": "MDQ6VXNlcjMyMzkzNTcx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32393571?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Robertboy18",
+      "html_url": "https://github.com/Robertboy18",
+      "followers_url": "https://api.github.com/users/Robertboy18/followers",
+      "following_url": "https://api.github.com/users/Robertboy18/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Robertboy18/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Robertboy18/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Robertboy18/subscriptions",
+      "organizations_url": "https://api.github.com/users/Robertboy18/orgs",
+      "repos_url": "https://api.github.com/users/Robertboy18/repos",
+      "events_url": "https://api.github.com/users/Robertboy18/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Robertboy18/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "b0f99dafb7d16d0c7bf22e9ae724a83168105968",
+        "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/b0f99dafb7d16d0c7bf22e9ae724a83168105968",
+        "html_url": "https://github.com/google-deepmind/formal-conjectures/commit/b0f99dafb7d16d0c7bf22e9ae724a83168105968"
+      }
+    ]
+  },
+  {
+    "sha": "c252a41054125b5fd9c8356e2137cd9b55337657",
+    "node_id": "C_kwDOOogmB9oAKGMyNTJhNDEwNTQxMjViNWZkOWM4MzU2ZTIxMzdjZDliNTUzMzc2NTc",
+    "commit": {
+      "author": {
+        "name": "Yaël Dillies",
+        "email": "yael.dillies@gmail.com",
+        "date": "2026-07-16T23:28:26Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-07-16T23:28:26Z"
+      },
+      "message": "refactor: split out FormalConjectures.Util to a new library (#4433)\n\n... named FormalConjecturesUtil.\n\nThe goal here is to make all files in FormalConjectures be valid\nchallenge files for Comparator.",
+      "tree": {
+        "sha": "a3eb8cb29f72a7ec1e7534955a5af0f6f72775c3",
+        "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/trees/a3eb8cb29f72a7ec1e7534955a5af0f6f72775c3"
+      },
+      "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/commits/c252a41054125b5fd9c8356e2137cd9b55337657",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqWWkaCRC1aQ7uu5UhlAAAPFQQAJ568Ysw9h+F5R7e5DKVwzUR\nzM51Cs352XpX0elES70wa0bwV3pHMs4E5CSkGC2jC+F+haIarfGS7r0Bxz665KI0\ndTFVlpf7Dj6Y16Oum4aUVwrNUKkG54uoQ6xZ0msgwAR1uPdv4PPSF4KdXiPG0BxT\nnc0woygXB9bHVkUMiloh4+tYetETZfS5XdRgJDqNiy+SGfXVXqwR+fPojnGJwenR\n1xICpuyhDXfrXpjlZ7JiHstk33Mghsa+iYvpR6qv5dU+AoIro72yudQcddialNvA\nIEtPTIqxlvwg+sywiFlI3O+WsE6o3tJQQZU21wO+wGv1b3lT2Y+wfkM8BtF+8mqq\n1A1EJYqMgA3MJ3n9sNWy1oY0rVKUm/uOpXM+nZi8yt8w4b9G4gvfz7TtIB9SrU+X\naU9YrMuV/3BZ/qRshwCnU4y9qU9qn45d1o0pHAHCz4gyrQTcTpAkxgesh1VbLaeF\nnvLu1UdZQWIMjpkz+/Zp8H4BOH7SVG66hLiBg+1Hj06WSS30tTB6SvDez18oO2SP\nmIm1R4SAy/QcK3QmPk2D68oyAREu406Ft0ePK6PvOu36rCkroILUivK1IzkflXo2\nMehumQgN1ZdN9nv4ZZmYV6OM0R62Jz3F5jo+/YROacsPe+AdRfDe90lCVaWQ/8qU\nr2EsJgBnYfmHkRsjsEzU\n=evv3\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree a3eb8cb29f72a7ec1e7534955a5af0f6f72775c3\nparent da6f05e576c18b8e27b58b39fbc8d4688d143239\nauthor Yaël Dillies <yael.dillies@gmail.com> 1784244506 +0200\ncommitter GitHub <noreply@github.com> 1784244506 +0000\n\nrefactor: split out FormalConjectures.Util to a new library (#4433)\n\n... named FormalConjecturesUtil.\n\nThe goal here is to make all files in FormalConjectures be valid\nchallenge files for Comparator.",
+        "verified_at": "2026-07-16T23:28:27Z"
+      }
+    },
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/c252a41054125b5fd9c8356e2137cd9b55337657",
+    "html_url": "https://github.com/google-deepmind/formal-conjectures/commit/c252a41054125b5fd9c8356e2137cd9b55337657",
+    "comments_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/c252a41054125b5fd9c8356e2137cd9b55337657/comments",
+    "author": {
+      "login": "YaelDillies",
+      "id": 14090593,
+      "node_id": "MDQ6VXNlcjE0MDkwNTkz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14090593?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/YaelDillies",
+      "html_url": "https://github.com/YaelDillies",
+      "followers_url": "https://api.github.com/users/YaelDillies/followers",
+      "following_url": "https://api.github.com/users/YaelDillies/following{/other_user}",
+      "gists_url": "https://api.github.com/users/YaelDillies/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/YaelDillies/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/YaelDillies/subscriptions",
+      "organizations_url": "https://api.github.com/users/YaelDillies/orgs",
+      "repos_url": "https://api.github.com/users/YaelDillies/repos",
+      "events_url": "https://api.github.com/users/YaelDillies/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/YaelDillies/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "da6f05e576c18b8e27b58b39fbc8d4688d143239",
+        "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/da6f05e576c18b8e27b58b39fbc8d4688d143239",
+        "html_url": "https://github.com/google-deepmind/formal-conjectures/commit/da6f05e576c18b8e27b58b39fbc8d4688d143239"
+      }
+    ]
+  },
+  {
+    "sha": "641ff32207fdcf4fdf6aeda4dbb02f6d9be0c251",
+    "node_id": "C_kwDOOogmB9oAKDY0MWZmMzIyMDdmZGNmNGZkZjZhZWRhNGRiYjAyZjZkOWJlMGMyNTE",
+    "commit": {
+      "author": {
+        "name": "Tomáš Skřivan",
+        "email": "skrivantomas@seznam.cz",
+        "date": "2026-05-15T20:52:58Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-05-15T20:52:58Z"
+      },
+      "message": "feat(Navier-Stokes): formalization of Navier–Stokes existence and smoothness (#1457)\n\nfixes #2293\n\nFormalization of Navier-Stokes existence and smoothness problem as\ndescribed in\nhttps://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf\n\nPotentially issues:\n- not immediately obvious that `fderiv ℝ (v · t) x (v x t)` is the\nconvective term and that `div` is divergence\n- the growth conditions uses `‖iteratedFDeriv ℝ n v₀ x‖` instead of\n`|∂^α u(x,t)|` but it should be equivalent\n- at various places I'm not completely sure if there should be `t ≥ 0`\nor `t > 0` as `fderiv` might not give what we think at `t=0`. Mainly in\n`NavierStokesExistenceAndSmoothness.navierStokes`\n\nNote:\n- I didn't use the unicode character nu for viscosity as it looks too\nsimilar to the letter `v` which is used for velocity.\n- bikeshead: should it use `v(x,t)`(aligned with the official statement)\nor `v(t,x)` that is more mathlib aligned?\n- should it be formulated in an arbitrary dimension and then\ninstantiated for `n:=3`?\n\n---------\n\nCo-authored-by: Paul Lezeau <lezeau@google.com>\nCo-authored-by: Paul Lezeau <paul.lezeau@gmail.com>",
+      "tree": {
+        "sha": "f7a3dcc0573b5390310c0a858f0b2058e833ee6b",
+        "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/trees/f7a3dcc0573b5390310c0a858f0b2058e833ee6b"
+      },
+      "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/commits/641ff32207fdcf4fdf6aeda4dbb02f6d9be0c251",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqB4eqCRC1aQ7uu5UhlAAA8ecQAB8u7aYsmIzKueyHDBRz8JBP\nBZPcUYA7F14Sa4+BJWRXcXYdKZQ/lFTOJVtuzCQ3Y+QnRmiOkNzQamSqRxZhf80T\nTmdSwIanBSH6L4+4EXp9YSdt0oa4uMkAmXm5gf0c9MRkJ4JutVWGRfdLkyWusH66\n+DYPq+uxQsfeGbUo8jNWYsuiIuNHx3VUSyhzMBBB9GWX9OEniGer/E2dOMR8UIYm\nfAFBEOdlCfyVvhbWPytfgIxOCOwFGhU1XLGWeaZSwWwjzUrJQ9KTmGc1Qlxc/SRp\nYj4pRefNmGC9SQf76B8UKASK7mb/st4Ol6aNVHo/RXt7RN3i7G6DYJi6Y0wTBBzA\nYHyYm7Ol6nAvH+Xb0BJILBYlziraQPoD736seUJWVo0kWnum8Rl5Uj0iTt9/DRQ4\n0z4siLe9p377M+4HrDfHD/Cn05P06S2DyBCrMtDfrQ5+bjhhIPCcBojoJz8ItoMS\ny0ypjKETLGtE55fL/ttmVW34BCmynAWseCbC456Ui9tdMOw0pCIefRhs1D3cgSMX\njD2SwiShSHOpz436IShLGj+6i3Ilg535dIeqw7t/Fg+JK6UxeAekP5lUHwSw0QpM\nglg2213eeARIfvadd/1FbWCFjARkh7E8lB9sEx0nttICS5gfArtVR0CovjZ1GB83\ncJA15e7TsdfG38cNaMbq\n=UujU\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree f7a3dcc0573b5390310c0a858f0b2058e833ee6b\nparent 9cd163460111a40e44953de77ab7de9efef903a9\nauthor Tomáš Skřivan <skrivantomas@seznam.cz> 1778878378 -0400\ncommitter GitHub <noreply@github.com> 1778878378 +0000\n\nfeat(Navier-Stokes): formalization of Navier–Stokes existence and smoothness (#1457)\n\nfixes #2293\n\nFormalization of Navier-Stokes existence and smoothness problem as\ndescribed in\nhttps://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf\n\nPotentially issues:\n- not immediately obvious that `fderiv ℝ (v · t) x (v x t)` is the\nconvective term and that `div` is divergence\n- the growth conditions uses `‖iteratedFDeriv ℝ n v₀ x‖` instead of\n`|∂^α u(x,t)|` but it should be equivalent\n- at various places I'm not completely sure if there should be `t ≥ 0`\nor `t > 0` as `fderiv` might not give what we think at `t=0`. Mainly in\n`NavierStokesExistenceAndSmoothness.navierStokes`\n\nNote:\n- I didn't use the unicode character nu for viscosity as it looks too\nsimilar to the letter `v` which is used for velocity.\n- bikeshead: should it use `v(x,t)`(aligned with the official statement)\nor `v(t,x)` that is more mathlib aligned?\n- should it be formulated in an arbitrary dimension and then\ninstantiated for `n:=3`?\n\n---------\n\nCo-authored-by: Paul Lezeau <lezeau@google.com>\nCo-authored-by: Paul Lezeau <paul.lezeau@gmail.com>",
+        "verified_at": "2026-05-15T20:52:59Z"
+      }
+    },
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/641ff32207fdcf4fdf6aeda4dbb02f6d9be0c251",
+    "html_url": "https://github.com/google-deepmind/formal-conjectures/commit/641ff32207fdcf4fdf6aeda4dbb02f6d9be0c251",
+    "comments_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/641ff32207fdcf4fdf6aeda4dbb02f6d9be0c251/comments",
+    "author": {
+      "login": "lecopivo",
+      "id": 6596305,
+      "node_id": "MDQ6VXNlcjY1OTYzMDU=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6596305?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/lecopivo",
+      "html_url": "https://github.com/lecopivo",
+      "followers_url": "https://api.github.com/users/lecopivo/followers",
+      "following_url": "https://api.github.com/users/lecopivo/following{/other_user}",
+      "gists_url": "https://api.github.com/users/lecopivo/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/lecopivo/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/lecopivo/subscriptions",
+      "organizations_url": "https://api.github.com/users/lecopivo/orgs",
+      "repos_url": "https://api.github.com/users/lecopivo/repos",
+      "events_url": "https://api.github.com/users/lecopivo/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/lecopivo/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "9cd163460111a40e44953de77ab7de9efef903a9",
+        "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/9cd163460111a40e44953de77ab7de9efef903a9",
+        "html_url": "https://github.com/google-deepmind/formal-conjectures/commit/9cd163460111a40e44953de77ab7de9efef903a9"
+      }
+    ]
+  }
+]
