@@ -33,7 +33,7 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–434. WAVES 1–3 CLOSED (legs 428, 429, 431). `R5`(i) LANDED (leg 430). NEXT: `R5`(ii) SERIAL (leg 432), then WAVE 4 = `R5`(iii)–(vii) ×5, then `R7`.**
+## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–434. WAVES 1–3 CLOSED (legs 428, 429, 431). `R5`(i) LANDED (leg 430). `R5`(ii) LANDED (leg 432). NEXT: WAVE 4 = `R5`(iii)–(vii) ×5 (leg 433), then `R7` (leg 434).**
 
 **Mode:** `ORCHESTRATION.md` **§3g CONDUCTOR**, wave sizing **5** by user ruling (recorded in §3g
 beside its original reason; `CORRECTIONS.md` §67). The charter arrived while `R3` was mid-flight
@@ -116,7 +116,11 @@ The Conductor is continuing the build in the background (`scratchpad/lean_chain_
 jobs when this was written); if it reaches the theorem, `#print axioms` is a dated addendum to `leg_431.md`,
 Conductor-run, `UNVERIFIED` — it changes (a) only. Stale README banner struck and recorded (user item 4).
 
-**NEXT:** commit `leg_432_prereg.md` FIRST and push, then run `R5`(ii) SERIAL (leg 432); dispatch
+**`R5`(ii) LANDED (leg 432, §70): `YES` H0–H7** — two routes to the tail stress agree to 10⁻⁹; (A.48)–(A.50)'s
+`δ`-powers are the limit on a collar `δ ≲ 10⁻⁶⁹` (`NOT TESTABLE`), measured `δ⁰, δ³, δ³` as Lemma A.9 predicts;
+six controls fired; the prereg was amended on a derivation before any number. Tier 2.
+
+**NEXT:** dispatch
 **wave 4 = `R5`(iii)–(vii) ×5** (slot 5 adversarial verifier) on the `R5`(i)–(ii) interface; then `R7` (leg 434).
 
 **Open escalations:** the five rows above, unchanged; row 1 still carries `U1`'s measured fact and

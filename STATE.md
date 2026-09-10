@@ -27,10 +27,10 @@ direction check (seven questions, in every integration commit, per unit); **§3j
   `CLAY_OBLIGATIONS.md` §6 names the two obligations with **no known method**.
 - **Clay odds ~0.05%**, unmoved. **No `L1 → L4` link has EVER moved, in over 410 legs.** **The cheapest unit that could move one: NO SUCH UNIT IS KNOWN** — `CLAY_OBLIGATIONS.md` §6 names two obligations with **no known method**, every landed unit is Tier 2, and nothing in `OPTIONS.md` is priced to deliver a certified result.
 
-## ⚠⚠ ARC 6 — SECOND PASS, **§3g CONDUCTOR MODE**, legs 423–431, 2026-09-09/10. **Wave sizing 5 by user ruling (§3g, §67).** First pass (legs 417–422) retired verbatim → `WALLS_HISTORY.md` §STATE-ARC6-SOLO.
+## ⚠⚠ ARC 6 — SECOND PASS, **§3g CONDUCTOR MODE**, legs 423–432, 2026-09-09/10. **Wave sizing 5 by user ruling (§3g, §67).** First pass (legs 417–422) retired verbatim → `WALLS_HISTORY.md` §STATE-ARC6-SOLO.
 
 Charter: reproduce the OpenAI construction — read all 166 pp., re-derive the spine, instantiate it in
-our machinery, check the Lean. `CORRECTIONS.md` **§66–§69**. **Solo answers are `UNVERIFIED`; only a
+our machinery, check the Lean. `CORRECTIONS.md` **§66–§70**. **Solo answers are `UNVERIFIED`; only a
 fresh agent that never saw the construction can mark anything `VERIFIED`.**
 
 | unit | gate answer, in its own words | artefact |
@@ -40,8 +40,9 @@ fresh agent that never saw the construction can mark anything `VERIFIED`.**
 | **`R3`** 426 DAG+SPINE | acyclic **`YES`** ×3 passes; complete **`NO-AND-HERE-ARE-THE-DANGLING-NODES`**: `Remark B.9`, 134 labels in unnumbered prose, and **Props 9.5/9.6 never cited downstream**. Spine through §4/§7/§9: **refuted by citation, confirmed by equation** (§68). Prereg 4/8 | `arc6/dag.json` |
 | **`R5`(i)** 430 PROFILE (serial) | **`NO-AND-HERE-IS-WHERE`**: G1 `K_b=.2450`, G2, G8, G4 (paper's scale), G6 slopes **`YES`**; **G3, G7 `NO` at every pre-registered `λ`** — (A.19) remainder `(λ^{−120λ}−1)/2 ≈ 10¹²` at `λ=.1`; a root on `[.9,1.2]` only at `λ ≤ 3·10⁻⁴` (post hoc sweep); intermediate cone needs `√λP_* ≪ 1`. G5 `NO` on a 10⁸-fold cancellation (identity to 10⁻¹⁵); G6 exponent `NO` (24.0 vs `[30,36]`, = schedule's `λ^{30+60λ}`). C5, C6 **did not fire**, C2 not run (§69). **Tier 2, not a proof.** | `arc6_profile_v1.json`, fig113 |
 | **`R6`** 431 LEAN (×5) | five answers, separately: **(a) build `NOT-ESTABLISHED`** — 13.6 min, 0 errors, theorem never reached; **(b) top-level statement strictly `WEAKER`** than Thm 1.1 (Fefferman (C)/(D) verbatim; 5 existence clauses `ABSENT`); **(c) 4 `sorry`**, all challenge placeholders, **0 `axiom`**, kernel `NOT-ESTABLISHED`; **(d) comparator 7 PASS / 4 `NOT-ESTABLISHED`**, never run; **(e) 74 `FORMALIZED` / 5 `PARTIAL` / 0 `ABSENT`** of 79 at source level. **No kernel check. `UNVERIFIED`.** | `arc6/lean/merged.json` |
+| **`R5`(ii)** 432 RESIDUAL STRESS (serial) | **`YES`** H0–H7 at `h = 10⁻⁷, 10⁻³`: two routes to `T_0` ((4.11) on Lemma A.8 vs (A.54)/(A.46)) agree to **10⁻⁹**; sign, `e^{−4/δ²}` weight, vanishing beyond `X_b` (exact, only with the heat factor), shear bracket, `q`-invariance, (A.55) `C = 0.49` reproduce; **(A.48)–(A.50)'s `δ⁻³, δ³, δ⁶` are the limit on a collar `δ ≲ 10⁻⁶⁹`** (`NOT TESTABLE`); measured `δ⁰, δ³, δ³` as Lemma A.9 predicts. Six controls fired. Amended before numbers (§70). **Tier 2.** | `arc6_residual_v1.json`, fig114 |
 
-**WAVES 1–3 CLOSED AND INTEGRATED** (legs 428, 429, 431; wave 1 was dispatched before its STATE row existed, a §3g step-1 defect, recorded). **Wave 4 next: `R5`(iii)–(vii) ×5 after the serial `R5`(ii) (leg 432).**
+**WAVES 1–3 CLOSED AND INTEGRATED** (legs 428, 429, 431; wave 1 was dispatched before its STATE row existed, a §3g step-1 defect, recorded). **`R5`(ii) landed (leg 432). Wave 4 next: `R5`(iii)–(vii) ×5 (leg 433), then `R7` (leg 434).**
 Rows `R0`–`R2` and the wave-1 paragraph retired verbatim 2026-09-10 (leg 430) under §3j → `WALLS_HISTORY.md` §STATE-ARC6-W1.
 
 ## THE LANES — **RE-RANKED 2026-08-19 AT THE STOP, on what is measured NOW** (order unchanged; Lane L DEMOTED); re-earned per unit under §3i
