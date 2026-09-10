@@ -5428,3 +5428,31 @@ Re-dispatched workers were instructed to COMMIT THE `claimed` BLOCK AND THE ARTE
 VALID. Both re-runs did so, and slots 1 and 3 therefore carry an independently timestamped pre-run
 commit (`879f421`, `ce63cf9`) that slot 2 — which asserts its ordering through its own `--claimed`
 mechanism in a single commit — does not.
+
+## §80 — pre-release (2026-09-10, after leg 440): **third-party personal email addresses REMOVED from four banked artefacts — the first deliberate edit of a banked datum in this repository, made on a user ruling, and recorded here because the standing rule forbids it.**
+
+**What was changed.** Four files under `writeup/data/arc7/k2/r2/agent_4_upstream/` —
+`commit_8323e878….json`, `commit_8bf45ed7….json`, `file_history.json` and `main_commit.json` — held
+GitHub commit metadata captured by `K2` slot 4 while re-verifying DeepMind byte-identity at upstream
+source. That metadata included **five distinct personal email addresses, across six occurrences, belonging to third-party
+contributors** who have nothing to do with this project. Each value of an `"email"` key is now the literal
+`[redacted 2026-09-10 — third-party personal address; user ruling, CORRECTIONS.md §80]`.
+
+**What was NOT changed.** Author *names* are kept: they are public authorship, not contact details, and
+they are what slot 4's finding actually cites. GitHub's own non-personal `noreply@github.com` service
+address is kept. Every commit sha, date, file sha256 and byte count is untouched. **No number that any
+finding rests on was altered** — the byte-identity result rests on the sha256
+`f446284f…d25d`, not on who authored the commit.
+
+**Why this breaks a standing rule, and why it was still done.** This repository's discipline is that *a
+banked datum is never edited, only corrected beside* (§3f), and §79 above was resolved that way three
+times over. The Conductor did **not** rule this; it was surfaced as a release-review finding and
+**ruled by the user**, who directed removal before the repository was made public. The rule is
+suspended here for one reason only — the data is *other people's personal information*, and no
+verification discipline of ours is worth republishing it. Any future edit of a banked datum still
+requires a user ruling and an entry here.
+
+**What this does NOT do, stated plainly.** The addresses **remain in this repository's git history**, by
+the same ruling — no history rewrite was performed, so every commit SHA this project's writeups cite
+stays valid. Redaction at the tip is not erasure. Anyone reading old blobs will still find them. If a
+named contributor would prefer a full history rewrite, open an issue and we will act on it (`NOTICE.md`).
