@@ -5208,3 +5208,7 @@ skip it — run it in a fresh container (a new remote session at the branch carr
 tree for `K2` slots 3 and 5, land the artefacts under `writeup/data/arc7/k1/phaseB/` on branch
 `leg/437-k1-phaseB`, integrate only after the log is read. Readings unchanged (GREEN / RED / INCOMPLETE);
 a different container is a second machine, not a second agent — `UNVERIFIED` stands.
+Defect in this entry's own landing: the amendment commit `8c944b3` was pushed although the merge gate
+printed FAIL (ORCH LIVE 100-odd bytes over its cap) — a shell chain that took the exit status of `tail`
+instead of the gate's, the second time this session made that mistake (leg 433's ORCH commit was the
+first). Fixed in the next commit by a verbatim retirement; recorded here rather than rewritten.

@@ -48,9 +48,7 @@ arc-7 block, `ORCHESTRATION.md` §3g. **Legs renumbered 436–440** (leg 435 was
 prereg `experiments/journal/leg_437_prereg.md` (pushed before the run). Two phases, same commit `8937a8f4`,
 same container (4 × Xeon 2.80 GHz, 15 GB, disk holds ONE tree):
 - **Phase A DONE 09:05Z, GREEN** (`writeup/data/arc7/k1/phaseA/phaseA.json`, commit 5f4efcb): all 11251 jobs, rc 0, both theorems on the standard three. **Phase B RELOCATED to a fresh container by user ruling (`leg_437_prereg_amend.md`, §73): A's tree is KEPT for K2 slots 3/5; a new remote session runs `scripts/arc7_k1_kernel_check.sh B` from nothing and pushes `writeup/data/arc7/k1/phaseB/` on `leg/437-k1-phaseB` — never to `main`. The Conductor integrates after reading its log; RED stops everything.**
-- **Phase A** resumed the arc-6 tree at `/tmp/claude-0/-home-user-blowup-search/f04cf05e-…/scratchpad/nse`
-  (NavierStokes built in leg 435; Euler stopped `[10526/11251]`). Logs: this session's scratchpad
-  `k1/k1_A_{build,axioms}.log`, `k1_A_summary.txt`.
+- Phase A's tree/log paths retired VERBATIM 2026-09-10 (leg 437 amend) under §3j → this file, `## Superseded — K1 phase A paths`.
 - **Phase B** (now in the fresh container, not here — A's tree is not deleted) fresh-clones at the pin, `lake exe cache get`, `lake build` from
   nothing, timed end to end, then `#print axioms`. Logs `k1/k1_B_*`.
 - If the session dies mid-flight: the successor checks for a live `lake` process, reads the newest
@@ -1751,3 +1749,8 @@ under the solo charter; `R0`–`R2` (legs 423–425) were already on `main`. The
 applied **forward** (§67): landed units are not redone; `R2` is **re-read by five fresh shards** and
 reconciled; `R3` stayed the Conductor's serial unit and has landed (this commit).
 
+## Superseded — K1 phase A paths, retired VERBATIM from the LIVE block 2026-09-10 (leg 437 amendment) under §3j
+
+- **Phase A** resumed the arc-6 tree at `/tmp/claude-0/-home-user-blowup-search/f04cf05e-…/scratchpad/nse`
+  (NavierStokes built in leg 435; Euler stopped `[10526/11251]`). Logs: this session's scratchpad
+  `k1/k1_A_{build,axioms}.log`, `k1_A_summary.txt`.
