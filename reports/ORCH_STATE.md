@@ -53,6 +53,14 @@ theorems `[propext, Classical.choice, Quot.sound]`, `sorryAx` NO, everywhere. Th
 mathlib oleans REPLAYED from cache, not rebuilt; statements are Fefferman (C)/(D), not Theorem 1.1; a second
 machine is not a second agent — **`VERIFIED` only when K2 slot 5, blind, reproduces it from the banked artefacts.**
 
+**`K1` follow-on (landed 1b9f9ea) — olean INTEGRITY established, SEMANTIC MATCH not.** The first of the three
+limits above is two claims. Integrity (the whole closure kernel-valid, no axiom outside the three) is now
+ESTABLISHED on the container tree by `lake exe comparator`: both kernels — Lean and nanoda 0.4.17, an
+independent Rust implementation — accept, statements identical, nothing recompiled
+(`writeup/data/arc7/k1/phaseB_integrity/`). Semantic match needs a full 8371-module recompile and is NOT
+established. Same Conductor lineage, so it verifies nothing: `K2` slot 3 is re-scoped and re-run BLIND on the
+laptop tree (`leg_438_prereg_amend.md`), not retired, and `K1` stays `UNVERIFIED` until slot 5. §76.
+
 **`K2` (leg 438) — state of the board before its pre-registration.** Four worker files ALREADY on `main`
 (`writeup/data/arc7/k2/agent_{1,2,4,5}_*.json`, commits 5f77a7e b397f68 601d7da 40cbfdb) were produced by the
 container Conductor's agents 08:38–09:21Z **with no pre-registration pushed, no wave row committed, and no own
