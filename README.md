@@ -148,6 +148,7 @@ claim in the repository is tiered, gated, and rebuildable from committed data.
 - [What has been banked](#what-has-been-banked)
 - [Reusable contributions](#reusable-contributions-what-to-steal-from-this-repo)
 - [Working rules](#working-rules-if-you-contribute)
+- [Continuing this work](#continuing-this-work)
 - [Reading order](#reading-order)
 
 ---
@@ -437,7 +438,58 @@ Most of this is model-agnostic and outlives whatever happens to the Clay attempt
    every artifact and an explicit list of the gaps.
 5. [`CONTINUATION_PROMPT.md`](CONTINUATION_PROMPT.md) — the current front line.
 
+## Continuing this work
+
+**Please do.** This is a long-shot programme that ran out of runway, not a closed
+book — and everything needed to pick it up is committed. Fork it, or open an
+issue if you would rather ask first.
+
+**What is genuinely open**, in the order a newcomer would want them:
+
+- **Seven escalations nobody has ruled on**, listed in
+  [`reports/ORCH_STATE.md`](reports/ORCH_STATE.md). Three of them ship full
+  decision packets under [`writeup/escalations/`](writeup/escalations/), each
+  stating its question so it can be answered Y or N, with the numbers behind it.
+  Rows 6 and 7 are the live pair: **a named Phase-1 construction target and its
+  costing**, which would be the first Grade-A × fluid-adjacent certificate — and
+  which no one has built.
+- **Three branches that were parked and never merged**, preserved on `origin`
+  with their head SHAs recorded in the escalation files above:
+  `leg/251-p0t-v1`, `leg/257-p1c-v1`, `leg/265-p2c-v1`. Two leg journals (266,
+  275) exist *only* on the first of those.
+- **Almost everything here is `UNVERIFIED`.** That is a status, not modesty: it
+  means one agent produced it and no independent one has reproduced it. Exactly
+  one claim in this repository is labelled `VERIFIED`. **Re-running any banked
+  result and disagreeing with it is a real contribution**, and the curated
+  JSON + `*_evidence.py` per leg exists so you can do it in seconds from a fresh
+  clone.
+- **The front line**, machine-readable rather than prose:
+  `.venv/bin/python plan_of_record.py`, plus
+  [`CONTINUATION_PROMPT.md`](CONTINUATION_PROMPT.md).
+
+If you take a piece of the machinery and leave the Clay attempt behind, that is
+a fine outcome too — see [Reusable contributions](#reusable-contributions-what-to-steal-from-this-repo).
+Most of it is model-agnostic.
+
 ## Licence
 
-No licence file is present; all rights reserved by the repository owner unless
-one is added.
+**Open, and deliberately so — all of it.** Two licences, because two kinds of
+thing live here. Full detail, plus the third-party material covered by neither,
+is in [`NOTICE.md`](NOTICE.md); read it before reusing.
+
+- **Code — [MIT](LICENSE).** Everything executable: `*.py` at the root,
+  `solver/`, `ga/`, `tools/`, `scripts/`, `experiments/**/*.py`, and the
+  `*_evidence.py` rebuild scripts. Use it, fork it, sell it — keep the copyright
+  notice.
+- **Prose, figures and curated data — [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).**
+  The `*.md` files, `writeup/`, `writeup/figures/`, and the curated JSON this
+  project produced. Quote it, translate it, build on it, including commercially —
+  attribute it and say if you changed it. **Attribution: credit Andy and link
+  back to this repository.**
+- **Third-party material is NOT covered by either** — papers under `Papers/`
+  (fetched, not redistributed), and upstream repositories quoted or measured.
+  [`NOTICE.md`](NOTICE.md) §3 names them.
+
+**If you quote a result, quote its status too.** Every claim carries a tier and a
+verification label; a quotation that drops them is a misquotation. See
+[`READING_THIS_REPO.md`](READING_THIS_REPO.md).
