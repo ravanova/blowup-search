@@ -5306,3 +5306,58 @@ edited.
 second machine is not a second agent"; nanoda makes the INTEGRITY claim stronger, not the verification status.
 `K1` becomes `VERIFIED` only on `leg_438_prereg.md` §4(5)'s condition — a blind slot 5 reproducing it from the
 banked artefacts.
+
+## §77 — arc 7 `K1` (leg 437, phase B): **two banked job counts are off by one against their own build log — corrected beside, the artefact not edited.**
+Found by leg 438's blind adversarial verifier (slot 5), which was instructed to parse the logs rather
+than the JSON summaries, and confirmed independently by the Conductor by counting the log directly.
+
+`writeup/data/arc7/k1/phaseB/phaseB.json` banks, inside its `jobs` field, "NavierStokes 643, Euler
+1839". `writeup/data/arc7/k1/phaseB/k1_B_build.log` — the primary record — carries **644** lines
+matching `Built NavierStokes` and **1840** matching `Built Euler`. The correct figures are **644 and
+1840**. The banked file is left exactly as it is; this entry is the correction.
+
+Nothing in `K1`'s gate depends on either number. The gate is (a) does `lake build` complete, (b) the
+verbatim `#print axioms` output, (c) `sorryAx` reachable, (d) wall time and machine. The build's
+completion line (`Build completed successfully (11251 jobs).`), `BUILD_RC=0` and the axiom lines are
+unaffected, and were re-derived independently from the same log by the same verifier.
+
+A third field the verifier flagged, the `11250/11251` per-target counter, is **not** an error: the
+banked JSON reconciles it in its own text ("lake prints no line for the root job"). That flag is
+recorded here as overstated. A verifier's misses are banked beside its hits.
+
+## §78 — arc 7 `K2` (leg 438): **three pre-registration wording defects, found by running it — the vocabulary was pre-committed, the boundaries inside the vocabulary were not.**
+None of the three is a worker error. Each is a defect in wording the Conductor lineage wrote, found
+only because a blind worker hit its edge. Recorded beside the pre-registration; the pre-registration
+is not edited, and no worker file is edited.
+
+**(a) `FAIL` versus `NOT-ESTABLISHED` on Comparator check 0.** Slot 3 labelled check 0 `FAIL`. The
+pre-registration pre-commits the opposite three times over: §4(3), "a tool that cannot be installed
+within the session makes that check `NOT-ESTABLISHED` with the exact blocker"; §5, "a check not
+reached at that resourcing answers `NOT-ESTABLISHED` with a cost, never `FAIL`"; and
+`leg_438_prereg_amend.md` §3, "never a `FAIL`". `nanoda_bin` was never installed: four attempts were
+refused by the agent-harness worktree-isolation guard before any rustup process could run. The check
+is integrated at the pre-committed label, **`NOT-ESTABLISHED`**, with that blocker recorded. The
+worker's own wording stands verbatim in `agent_3_comparator.json`.
+The distinction is load-bearing: `FAIL` on check 0 would read as *the comparator rejected the
+solution*. It did not. Both real runs exited 1 at the nanoda step only, after statement identity held,
+the axiom footprints matched, and Lean's own kernel printed `Lean default kernel accepts the solution`
+for both challenges. The defect is that the prereg gave the worker a `FAIL` label at all for a
+condition it had already ruled out.
+
+**(b) Slot 1's label vocabulary has undefined boundaries.** Runs 1 and 2 differ on 4 of 5 labels while
+agreeing on every underlying fact and answering the load-bearing question (does a missing clause
+weaken the exported statements via the import path) `NO` unanimously. Two differences are a straight
+transposition of `MISSING-CLAUSE` and `WEAKER`; two are a boundary call between `NOT-A-THEOREM-IN-LEAN`
+and `PRESENT-IN-DIFFERENT-FORM`. The five terms were pre-committed at §4(1); no rule distinguishes
+them. Recorded, not repaired after the fact, and not adjudicated between the two runs.
+
+**(c) `forbidden_paths_opened` is path-shaped; two of the constraints were section-shaped.** Prereg §3
+requires the field to be `none`. Slot 5's brief forbade `experiments/journal/leg_437.md` **§5** while
+permitting §1–4 of the same file — a section, not a path. Slot 5 disclosed, unprompted, that a
+header-listing `grep -n` printed three lines belonging to §5. The Conductor verified this against the
+file: §5 begins at line 53 of 64; the three lines are a heading, a "written beside it" sentence, and a
+`CORRECTIONS.md` §76 cross-reference — no axiom output, no verdict, nothing about the quantity the
+slot was asked to re-derive — and the slot's PART B had already completed before the grep. At path
+level the honest answer is `none`; at section level it is not. **The disclosure is treated as the
+blinding discipline working, not as a breach**, and the finding is that a future prereg must state
+such constraints in the shape the field can actually answer.
