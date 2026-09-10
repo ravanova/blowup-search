@@ -103,6 +103,15 @@ its twelve clauses are absent from what the Lean would prove. The `sorry` count 
 challenge placeholders the comparator setup requires. Source coverage of the 79 statements is 74
 formalized, 5 partial, none absent — a reading, not a kernel check, and every agent said so.
 
+> **Superseded in part 2026-09-10 (arc 7, leg 437) — added beside, nothing above rewritten.** "One run in one
+> container" was arc 6's position and is no longer the record. Arc 7's unit `K1` ran the same check on the same
+> pin in **three environments** (two remote containers and the operator's laptop): all GREEN, 11251 jobs, 0
+> errors, both theorems on the same three axioms, `sorryAx` not reachable anywhere. And leg 435's build — the
+> one this section describes — is now recorded as never having **completed** (`CORRECTIONS.md` §72). What does
+> **not** change: the statements are still Fefferman's (C)/(D), strictly weaker than Theorem 1.1; mathlib was
+> replayed from the official cache, not rebuilt; and the result is still **`UNVERIFIED`**, because a second
+> machine is not a second agent. Record: `experiments/journal/leg_437.md`.
+
 ## What the adversary said
 
 Wave 4 sent four agents at the rest of the construction — the annulus pulses, the correction

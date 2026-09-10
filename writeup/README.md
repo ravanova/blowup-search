@@ -48,7 +48,22 @@ writeup/
 
 ## Read in this order
 
-### ▶ Arc 6 — **START HERE.** The adjudication ([`6_adjudicated/`](6_adjudicated/))
+### ▶ Arc 7 — **OPEN, and it has no folder yet.** Independent confirmation (legs 436–440)
+
+**2026-09-10, `ORCHESTRATION.md` §3g CONDUCTOR ×5.** One job: **run the Lean kernel to completion on
+the two exported theorems**, because out-refereeing 166 pages is beyond this repository and running a
+kernel is not. **`K1` (leg 437) is GREEN in three environments** — `lake build` completes, and
+`#print axioms` gives `[propext, Classical.choice, Quot.sound]` for both, `sorryAx` not reachable.
+**It is not a verification of the manuscript:** the statements are Fefferman's **(C)/(D), strictly
+weaker than Theorem 1.1**; mathlib was replayed from the official cache, not rebuilt; and a second
+machine is not a second agent, so `K1` is **`UNVERIFIED`** until a blind agent reproduces it.
+`K2` is in flight; `K3` and `K4` have not started.
+
+**`7_confirmation/` is `K4`'s deliverable and is not written**, so there is no arc-7 folder to read.
+Until it lands the record is the unit table in [`INDEX.md`](INDEX.md) and the journals
+[`leg_436.md`](../experiments/journal/leg_436.md), [`leg_437.md`](../experiments/journal/leg_437.md).
+
+### ▶ Arc 6 — **START HERE for the substance.** The adjudication ([`6_adjudicated/`](6_adjudicated/))
 
 **2026-09-09, legs 417–422, `ORCHESTRATION.md` §3f SOLO — one instance, no subagents, no paired
 verifier. EVERY GATE IS `UNVERIFIED` and says so in its own words.**

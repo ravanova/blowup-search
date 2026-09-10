@@ -14,6 +14,30 @@ claim in the repository is tiered, gated, and rebuildable from committed data.
 > governs every claim, and an explicit list of what this repository does and does
 > **not** claim. Reuse terms and third-party material: [NOTICE.md](NOTICE.md).
 
+> ## ▶ Where this is now: arc 7 — running the kernel
+>
+> **2026-09-10, OPEN.** Arc 7's job is narrow, and it is the one thing this repository
+> can honestly do about the 2026 claim: **run the Lean kernel to completion on the two
+> exported theorems** — because out-refereeing 166 pages is beyond this repository and
+> running a kernel is not.
+>
+> **`K1` (leg 437) is GREEN in three environments** on one pinned commit: `lake build`
+> completes (11251 jobs, 0 errors) and `#print axioms` returns
+> `[propext, Classical.choice, Quot.sound]` for both exported theorems, with `sorryAx`
+> not reachable. **That is not a verification of the manuscript, and this repository
+> does not call it one.** The Lean statements are Fefferman's **(C)/(D) — strictly
+> weaker than the paper's Theorem 1.1**, five existence clauses absent; mathlib's oleans
+> were replayed from the official cache, not rebuilt; and under this repository's own
+> rule a second machine is not a second agent, so `K1` stays **`UNVERIFIED`** until a
+> blind agent reproduces it from the banked artefacts.
+> Record: [`experiments/journal/leg_437.md`](experiments/journal/leg_437.md).
+>
+> **Still open:** `K2` (the Lean's gaps — five `PARTIAL` statements, four `sorry`, the
+> comparator checks) is in flight; `K3` (the construction re-run under a two-route
+> evidence rule) and `K4` (the verdict written for outsiders, `writeup/7_confirmation/`)
+> have not started. **Until `K4` lands there is no single page here stating what a green
+> kernel does and does not establish — the paragraph above is the interim answer.**
+>
 > ## ▶ Start here: [arc 6 — what we can actually say about the claim](writeup/6_adjudicated/BLOG_ADJUDICATED.md)
 >
 > **2026-09-09.** On 2026-09-08 a 166-page manuscript and a Lean project claimed
@@ -63,7 +87,16 @@ claim in the repository is tiered, gated, and rebuildable from committed data.
 > Lean is `sorry`-free outside its challenge placeholders, source-covers all 79 statements, exports
 > Fefferman's (C)/(D) — **strictly weaker than Theorem 1.1** — and, in a build the Conductor completed after the
 > agents reported (leg 435), **both exported theorems are accepted by the Lean kernel with axioms
-> `[propext, Classical.choice, Quot.sound]`** — one run, one container, unreplayed.
+> `[propext, Classical.choice, Quot.sound]`** — ~~one run, one container, unreplayed.~~
+>
+> **CORRECTED 2026-09-10 (arc 7, legs 436–437); struck, not rewritten.** Leg 435's `#print axioms` ran on a
+> build that never **completed** (`CORRECTIONS.md` §72). Arc 7's unit `K1` supplies the completed build and
+> repeats it: **GREEN in three environments** on the same pin — 11251 jobs, 0 errors, both theorems on the
+> same three axioms, `sorryAx` not reachable in any of them. It stays **`UNVERIFIED`**: mathlib's oleans were
+> replayed from the official cache rather than rebuilt, and a second machine is not a second agent
+> ([`experiments/journal/leg_437.md`](experiments/journal/leg_437.md)).
+>
+> *Arc 6's summary continues:*
 > Wave 4's adversary faked eleven of twelve pre-registered signals, so they are not evidence. **Nothing
 > measured contradicts the manuscript; nothing measured proves it; no wall moved.** Tier 2 throughout.
 > [TECHNICAL_REPRODUCTION.md](writeup/6_reproduction/TECHNICAL_REPRODUCTION.md) ·

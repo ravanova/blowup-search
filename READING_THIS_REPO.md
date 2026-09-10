@@ -41,8 +41,9 @@ over an infinite-dimensional space says nothing about a universally quantified c
    — the conclusion of the search programme itself, including the part where this
    project identified the winning idea six weeks early and priced it away in a
    subordinate clause.
-3. **[`writeup/README.md`](writeup/README.md)** — the full index, arcs 1–6, in the
-   order they happened.
+3. **[`writeup/README.md`](writeup/README.md)** — the full index, arcs 1–7, in the
+   order they happened. Arc 7 is **open**; its own writeup does not exist yet, so
+   its units are indexed in [`writeup/INDEX.md`](writeup/INDEX.md) instead.
 4. **[`WIN_CONDITION.md`](WIN_CONDITION.md)** — the tiers above, in full.
 
 Everything else is working surface. **[`STATE.md`](STATE.md)** is the live board and
@@ -76,9 +77,10 @@ is written for the agent that reads it next, not for you.
   singularity surviving advection, not a novel result.
 - A full independent read of the 2026 manuscript: all 166 pages, twice, 79 of 79
   statements ledgered, a 58-node proof spine re-derived.
-- That in one container, on one run, the two exported Lean theorems were accepted
-  by the Lean 4 kernel depending on no axioms beyond `propext`, `Classical.choice`
-  and `Quot.sound`.
+- That on one pinned commit, in **three environments**, the two exported Lean
+  theorems were accepted by the Lean 4 kernel depending on no axioms beyond
+  `propext`, `Classical.choice` and `Quot.sound` (arc 7, leg 437) — and that this
+  is still **`UNVERIFIED`**, because a second machine is not a second agent.
 
 **Does not claim:**
 
@@ -88,8 +90,11 @@ is written for the agent that reads it next, not for you.
   nothing measured here proves it.
 - That the Lean kernel check settles the manuscript's Theorem 1.1. The Lean
   statement is Fefferman's alternatives (C)/(D) — **strictly weaker** than the
-  paper's theorem, with five existence clauses absent — and the check was **one run,
-  in one container, not independently replicated.**
+  paper's theorem, with five existence clauses absent. Two further limits are banked
+  with the result and neither is softened: mathlib's oleans were **replayed from the
+  official cache, not rebuilt from source**, and all three runs were directed by one
+  role from one brief, so the check stays **`UNVERIFIED` until a blind agent
+  reproduces it** from the banked artefacts.
 - Any position whatsoever on the priority dispute around that manuscript.
 
 If you are about to quote something from here, quote its status with it. A number
