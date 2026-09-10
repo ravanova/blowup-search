@@ -1,0 +1,747 @@
+{
+ "schema": "arc7_k2_r2_v1",
+ "agent": 4,
+ "leg": 438,
+ "run": 2,
+ "date": "2026-09-10",
+ "clone_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "clone_path": "/tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse",
+ "method": "Blind textual re-derivation. (1) `git rev-parse HEAD` on the read-only tree. (2) grep for formal-conjectures URLs / 40-hex ids in the named files to find the project's own pins. (3) curl the upstream file from raw.githubusercontent.com at each cited pin and at `main`, plus the GitHub API commit record of `main`, the file's commit history, the commit records of both pins, the Millenium directory listing, and the upstream notation source files (FormalConjecturesForMathlib/Geometry/*.lean) and FormalConjecturesUtil.lean at the 8bf45ed7 pin; sha256 + byte count recorded for every fetch; every file saved under writeup/data/arc7/k2/r2/agent_4_upstream/. (4) `diff` upstream vs ComparatorChallenges/NavierStokes.lean, and challenge vs NavierStokes/ComparatorDefinitions.lean. (5) Python per-declaration extraction (docstring / attribute lines / code block from keyword to next blank line) for every declaration the two theorems depend on, compared raw and whitespace-collapsed against upstream, for the challenge file, the definitions file, and the solution file's theorem statements. (6) Region check: the whole definitional region and the (C)/(D) theorem region compared byte-for-byte after removing exactly the enumerated attribute/notation-scope edits. No lake/lean run; nothing written under the tree.",
+ "commands": [
+  "git -C /tmp/claude-1001/-home-andy-projects-Unsolved/d1439a98-46b2-402c-a5a7-1e3796b2c9dc/scratchpad/nse rev-parse HEAD   # -> 8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+  "grep -rn -E 'formal-conjectures|[0-9a-f]{40}' <tree>/ComparatorChallenges <tree>/NavierStokes/ComparatorDefinitions.lean <tree>/Euler/SolutionDefinitions.lean <tree>/formalization.yaml <tree>/README.md <tree>/lakefile* <tree>/lake-manifest.json",
+  "cat -n <tree>/ComparatorChallenges/NavierStokes.lean ; cat -n <tree>/NavierStokes/ComparatorDefinitions.lean ; cat -n <tree>/ComparatorChallenges/Euler.lean ; head -80 <tree>/Euler/SolutionDefinitions.lean ; cat <tree>/formalization.yaml <tree>/ComparatorChallenges/README.md <tree>/ComparatorChallenges/NavierStokes.json <tree>/ComparatorChallenges/Euler.json <tree>/lean-toolchain ; grep -n -A6 'theorem navier_stokes_breakdown' <tree>/NavierStokes/ComparatorSolution.lean",
+  "python k2a4_fetch.py   # curl -sS -L -o <file> -w %{http_code} <url> for NavierStokes.lean at 8bf45ed7, 8323e878, main; api.github.com/repos/google-deepmind/formal-conjectures/commits/main; commits?path=FormalConjectures/Millenium/NavierStokes.lean&per_page=5",
+  "python k2a4_fetch2.py  # API contents listing of FormalConjecturesForMathlib/Geometry at 8bf45ed7, then raw fetch of 2d.lean, 3d.lean, Euclidean.lean, Metric.lean and FormalConjecturesUtil.lean at 8bf45ed7",
+  "python k2a4_fetch3.py  # API commit records for 8323e878 and 8bf45ed7; API contents listing of FormalConjectures/Millenium at main",
+  "diff agent_4_upstream/NavierStokes_main.lean <tree>/ComparatorChallenges/NavierStokes.lean ; diff <tree>/ComparatorChallenges/NavierStokes.lean <tree>/NavierStokes/ComparatorDefinitions.lean",
+  "python k2a4_compare.py # per-declaration and region comparison (results embedded below under comparison_detail)",
+  "python k2a4_check.py   # trailing-blank-line confirmation + sha256 of project files",
+  "sha256sum / wc -c on every fetched file (inside the fetch scripts)"
+ ],
+ "pins_cited": [
+  {
+   "file": "ComparatorChallenges/NavierStokes.lean",
+   "line": 26,
+   "pin": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee"
+  },
+  {
+   "file": "NavierStokes/ComparatorDefinitions.lean",
+   "line": 31,
+   "pin": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee"
+  },
+  {
+   "file": "Euler/SolutionDefinitions.lean",
+   "line": 26,
+   "pin": "8323e878b83fcd7f4a448256069352a265460d75"
+  },
+  {
+   "file": "ComparatorChallenges/Euler.lean",
+   "line": 26,
+   "pin": "main (unpinned URL)"
+  },
+  {
+   "file": "ComparatorChallenges/README.md",
+   "line": 11,
+   "pin": "main (unpinned URL)"
+  },
+  {
+   "file": "formalization.yaml",
+   "line": 32,
+   "pin": "main (unpinned URL)"
+  },
+  {
+   "file": "README.md / lakefile.toml / lake-manifest.json",
+   "line": null,
+   "pin": "no formal-conjectures citation found (grep); lake-manifest pins mathlib at 85e3a25e006c35636f0e53b0e9296caca2685bc0 (inputRev v4.34.0-rc2), lean-toolchain leanprover/lean4:v4.34.0-rc2"
+  }
+ ],
+ "upstream_fetched": [
+  {
+   "pin_or_branch": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+   "url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjectures/Millenium/NavierStokes.lean",
+   "http": "200",
+   "bytes": 13691,
+   "sha256": "f446284f2aa54375f558c263a580b34e2e7bc9f44a28829637199cc72257d25d",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/NavierStokes_8bf45ed70d48b2b2a501de9c00b26bfa38c573ee.lean"
+  },
+  {
+   "pin_or_branch": "8323e878b83fcd7f4a448256069352a265460d75",
+   "url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/8323e878b83fcd7f4a448256069352a265460d75/FormalConjectures/Millenium/NavierStokes.lean",
+   "http": "200",
+   "bytes": 13691,
+   "sha256": "f446284f2aa54375f558c263a580b34e2e7bc9f44a28829637199cc72257d25d",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/NavierStokes_8323e878b83fcd7f4a448256069352a265460d75.lean"
+  },
+  {
+   "pin_or_branch": "main",
+   "url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/main/FormalConjectures/Millenium/NavierStokes.lean",
+   "http": "200",
+   "bytes": 13691,
+   "sha256": "f446284f2aa54375f558c263a580b34e2e7bc9f44a28829637199cc72257d25d",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/NavierStokes_main.lean"
+  },
+  {
+   "pin_or_branch": "main (GitHub API commit record)",
+   "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/main",
+   "http": "200",
+   "bytes": 16507,
+   "sha256": "228a0a0156f41799186498f00ccb19a51d8bf9dc43df7d44cd90ffae6b00b96f",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/main_commit.json",
+   "main_sha": "43eeacb8e40e495e9580c74f00b533b0718aebff",
+   "main_date": "2026-09-10T09:41:17Z"
+  },
+  {
+   "pin_or_branch": "main (GitHub API file history, 5 latest commits touching the file)",
+   "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits?path=FormalConjectures/Millenium/NavierStokes.lean&per_page=5",
+   "http": "200",
+   "bytes": 18455,
+   "sha256": "8d753ea525b3014dc8ff2439c2a09b4b1af334a80ace98ef9a3fe0de38aa6a3a",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/file_history.json",
+   "history": [
+    {
+     "sha": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+     "date": "2026-07-27T07:31:09Z",
+     "msg": "Prove the basic divergence lemmas (#4643)"
+    },
+    {
+     "sha": "c252a41054125b5fd9c8356e2137cd9b55337657",
+     "date": "2026-07-16T23:28:26Z",
+     "msg": "refactor: split out FormalConjectures.Util to a new library (#4433)"
+    },
+    {
+     "sha": "641ff32207fdcf4fdf6aeda4dbb02f6d9be0c251",
+     "date": "2026-05-15T20:52:58Z",
+     "msg": "feat(Navier-Stokes): formalization of Navier–Stokes existence and smoothness (#1457)"
+    }
+   ]
+  },
+  {
+   "pin_or_branch": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee (API: contents of FormalConjecturesForMathlib/Geometry)",
+   "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjecturesForMathlib/Geometry?ref=8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+   "http": "200",
+   "bytes": 5403,
+   "sha256": "84eeab916477d683c6e8d45287f62ab0858c2831b900b573357e2075fd488725",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/geometry_dir_8bf45ed70d48b2b2a501de9c00b26bfa38c573ee.json",
+   "entries": [
+    "2d.lean",
+    "3d.lean",
+    "Euclidean.lean",
+    "Metric.lean"
+   ]
+  },
+  {
+   "pin_or_branch": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee (notation source)",
+   "url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/2d.lean",
+   "http": "200",
+   "bytes": 11596,
+   "sha256": "d5f0fe3315f1a0e6c4a606faf6ceebaf35ec94bdd78b02c26bff0acb488ea882",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/Geometry_2d.lean_8bf45ed70d48b2b2a501de9c00b26bfa38c573ee.lean"
+  },
+  {
+   "pin_or_branch": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee (notation source)",
+   "url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/3d.lean",
+   "http": "200",
+   "bytes": 1429,
+   "sha256": "8d2fb5b192229c35ddeecc5fc5924717905707c9f8a25a4ba5fa0698b49da78f",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/Geometry_3d.lean_8bf45ed70d48b2b2a501de9c00b26bfa38c573ee.lean"
+  },
+  {
+   "pin_or_branch": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee (notation source)",
+   "url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/Euclidean.lean",
+   "http": "200",
+   "bytes": 745,
+   "sha256": "c3c0615b00271717acd12d0b294e54bd7b1b8b5b3d63b482d3822d0bdb923ed8",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/Geometry_Euclidean.lean_8bf45ed70d48b2b2a501de9c00b26bfa38c573ee.lean"
+  },
+  {
+   "pin_or_branch": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee (notation source)",
+   "url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesForMathlib/Geometry/Metric.lean",
+   "http": "200",
+   "bytes": 957,
+   "sha256": "b95340d5060a4cd2b951034d707f4662e9b395e2102ef8fe6de72817bcf745aa",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/Geometry_Metric.lean_8bf45ed70d48b2b2a501de9c00b26bfa38c573ee.lean"
+  },
+  {
+   "pin_or_branch": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee (FormalConjecturesUtil.lean root import)",
+   "url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjecturesUtil.lean",
+   "http": "200",
+   "bytes": 1388,
+   "sha256": "7936ddfe407989a84122e53d2f6e566bffa85abb682e1736c2d0230db481b3c9",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/FormalConjecturesUtil_8bf45ed70d48b2b2a501de9c00b26bfa38c573ee.lean"
+  },
+  {
+   "pin_or_branch": "8323e878b83fcd7f4a448256069352a265460d75 (GitHub API commit record)",
+   "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/8323e878b83fcd7f4a448256069352a265460d75",
+   "http": "200",
+   "bytes": 6109,
+   "sha256": "6da0605fa07643ee77bb525d6bd4d36ff3a9b06dfc75ba8df81b7d7d245d8f01",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/commit_8323e878b83fcd7f4a448256069352a265460d75.json",
+   "sha": "8323e878b83fcd7f4a448256069352a265460d75",
+   "date": "2026-09-04T13:36:28Z",
+   "msg": "fix(README): add missing comma (#5267)"
+  },
+  {
+   "pin_or_branch": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee (GitHub API commit record)",
+   "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+   "http": "200",
+   "bytes": 7116,
+   "sha256": "689301c5250bf8f6207602e2d86e89327ccc54ab26e8cab2e9100bd0b0bd601c",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/commit_8bf45ed70d48b2b2a501de9c00b26bfa38c573ee.json",
+   "sha": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+   "date": "2026-07-27T07:31:09Z",
+   "msg": "Prove the basic divergence lemmas (#4643)"
+  },
+  {
+   "pin_or_branch": "main (API: contents of FormalConjectures/Millenium)",
+   "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjectures/Millenium?ref=main",
+   "http": "200",
+   "bytes": 5734,
+   "sha256": "b77641e33fa6395df20e37d67bf2315ebfdbf9ca54000da4623b629577929594",
+   "saved_as": "writeup/data/arc7/k2/r2/agent_4_upstream/millenium_dir_main.json",
+   "entries": [
+    "BSD.lean",
+    "NavierStokes.lean",
+    "Poincare.lean",
+    "PvsNP.lean",
+    "RiemannHypothesis.lean"
+   ]
+  }
+ ],
+ "upstream_main_commit": {
+  "sha": "43eeacb8e40e495e9580c74f00b533b0718aebff",
+  "committer_date": "2026-09-10T09:41:17Z",
+  "how": "GET https://api.github.com/repos/google-deepmind/formal-conjectures/commits/main, HTTP 200"
+ },
+ "upstream_file_sha256_all_three_fetches": "f446284f2aa54375f558c263a580b34e2e7bc9f44a28829637199cc72257d25d",
+ "upstream_file_bytes": 13691,
+ "project_file_sha256": {
+  "ComparatorChallenges/NavierStokes.lean": {
+   "bytes": 13031,
+   "sha256": "0cd193b8d5cbd0266e6e2f72e68dd5abcdcf2430ebd435dd9289737e9aa7da61"
+  },
+  "NavierStokes/ComparatorDefinitions.lean": {
+   "bytes": 10979,
+   "sha256": "8d90e0f9eee14f8b01773852083a02fd58bda59d4de2abb60d1787bbc9f6ebf4"
+  },
+  "NavierStokes/ComparatorSolution.lean": {
+   "bytes": 1359,
+   "sha256": "52950d5d618a8d34c9bfbdb16641c81c276e97b6d7fd2a76c08577353f0b0227"
+  },
+  "ComparatorChallenges/Euler.lean": {
+   "bytes": 9210,
+   "sha256": "b11e9bafc220c8126142a9c9281cfeab4872d8f74a7d4899fed206f7f6e1d4f7"
+  },
+  "Euler/SolutionDefinitions.lean": {
+   "bytes": 6422,
+   "sha256": "91f8c7287fda0f4cdbedf8b97b21a9020c46b9225a9cd70fd69ff68c3f642a70"
+  }
+ },
+ "definitions_compared": [
+  "NavierStokes.Comparator.divergence (upstream NavierStokes.divergence)",
+  "divergence_of_not_differentiableAt",
+  "divergence_zero",
+  "divergence_const",
+  "divergence_add",
+  "divergence_smul",
+  "IsOnePeriodic",
+  "InitialVelocityCondition",
+  "InitialVelocityConditionDecay",
+  "InitialVelocityConditionPeriodic",
+  "ForceCondition",
+  "ForceConditionDecay",
+  "ForceConditionPeriodic",
+  "NavierStokesExistenceAndSmoothness",
+  "NavierStokesExistenceAndSmoothnessRn",
+  "NavierStokesExistenceAndSmoothnessPeriodic",
+  "navier_stokes_breakdown_R3 (statement)",
+  "navier_stokes_breakdown_periodic (statement)",
+  "notation ∇⬝ (=> divergence)",
+  "notation ℝ^ n:65 (=> EuclideanSpace ℝ (Fin n))",
+  "notation ℝ³ (=> EuclideanSpace ℝ (Fin 3))"
+ ],
+ "dependency_closure_note": "The two theorem statements mention InitialVelocityConditionDecay, ForceConditionDecay, NavierStokesExistenceAndSmoothnessRn, InitialVelocityConditionPeriodic, ForceConditionPeriodic, NavierStokesExistenceAndSmoothnessPeriodic and ℝ³. Those structures extend / use InitialVelocityCondition, ForceCondition, NavierStokesExistenceAndSmoothness, IsOnePeriodic, divergence (via ∇⬝), ℝ^n, and Mathlib's derivWithin, fderiv, gradient, Δ (scoped Laplacian), iteratedFDeriv(Within), ContDiff(On), MemLp, ↿ (Function.uncurry), EuclideanSpace.single. The five divergence_* lemmas are not in the statement closure but were compared anyway since the project copies them. Every declaration in the closure that lives in the upstream file was compared; the Mathlib-side names were not compared (same-name assumption, see what_this_does_not_establish).",
+ "comparison_detail": [
+  {
+   "name": "divergence",
+   "upstream_line": 72,
+   "challenge_line": 80,
+   "definitions_line": 54,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "divergence_of_not_differentiableAt",
+   "upstream_line": 80,
+   "challenge_line": 88,
+   "definitions_line": 62,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [
+    "@[simp, category API, AMS 35]"
+   ],
+   "attrs_challenge": [
+    "@[simp]"
+   ],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": [
+    "@[simp]"
+   ]
+  },
+  {
+   "name": "divergence_zero",
+   "upstream_line": 86,
+   "challenge_line": 94,
+   "definitions_line": 68,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [
+    "@[simp, category API, AMS 35]"
+   ],
+   "attrs_challenge": [
+    "@[simp]"
+   ],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": [
+    "@[simp]"
+   ]
+  },
+  {
+   "name": "divergence_const",
+   "upstream_line": 91,
+   "challenge_line": 99,
+   "definitions_line": 73,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [
+    "@[simp, category API, AMS 35]"
+   ],
+   "attrs_challenge": [
+    "@[simp]"
+   ],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": [
+    "@[simp]"
+   ]
+  },
+  {
+   "name": "divergence_add",
+   "upstream_line": 97,
+   "challenge_line": 104,
+   "definitions_line": 78,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [
+    "@[category API, AMS 35]"
+   ],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "divergence_smul",
+   "upstream_line": 105,
+   "challenge_line": 111,
+   "definitions_line": 85,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [
+    "@[category API, AMS 35]"
+   ],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "IsOnePeriodic",
+   "upstream_line": 115,
+   "challenge_line": 121,
+   "definitions_line": 95,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "InitialVelocityCondition",
+   "upstream_line": 128,
+   "challenge_line": 134,
+   "definitions_line": 108,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "InitialVelocityConditionDecay",
+   "upstream_line": 144,
+   "challenge_line": 150,
+   "definitions_line": 124,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "InitialVelocityConditionPeriodic",
+   "upstream_line": 158,
+   "challenge_line": 164,
+   "definitions_line": 138,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "ForceCondition",
+   "upstream_line": 169,
+   "challenge_line": 175,
+   "definitions_line": 149,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "ForceConditionDecay",
+   "upstream_line": 179,
+   "challenge_line": 185,
+   "definitions_line": 159,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "ForceConditionPeriodic",
+   "upstream_line": 194,
+   "challenge_line": 200,
+   "definitions_line": 174,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "NavierStokesExistenceAndSmoothness",
+   "upstream_line": 211,
+   "challenge_line": 217,
+   "definitions_line": 191,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "NavierStokesExistenceAndSmoothnessRn",
+   "upstream_line": 239,
+   "challenge_line": 245,
+   "definitions_line": 219,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "NavierStokesExistenceAndSmoothnessPeriodic",
+   "upstream_line": 256,
+   "challenge_line": 262,
+   "definitions_line": 236,
+   "solution_line": null,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [],
+   "attrs_challenge": [],
+   "code_bytes_identical_definitions": true,
+   "doc_identical_definitions": true,
+   "attrs_definitions": []
+  },
+  {
+   "name": "navier_stokes_breakdown_R3",
+   "upstream_line": 282,
+   "challenge_line": 273,
+   "definitions_line": null,
+   "solution_line": 16,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [
+    "@[category research open, AMS 35]"
+   ],
+   "attrs_challenge": [],
+   "statement_ws_identical_solution": true,
+   "doc_identical_solution": true,
+   "solution_doc": "/-- (C) Breakdown of Navier–Stokes solutions on ℝ³. -/",
+   "upstream_doc": "/-- (C) Breakdown of Navier–Stokes solutions on ℝ³. -/"
+  },
+  {
+   "name": "navier_stokes_breakdown_periodic",
+   "upstream_line": 290,
+   "challenge_line": 280,
+   "definitions_line": null,
+   "solution_line": 23,
+   "code_bytes_identical_challenge": true,
+   "code_ws_identical_challenge": true,
+   "doc_identical_challenge": true,
+   "attrs_upstream": [
+    "@[category research open, AMS 35]"
+   ],
+   "attrs_challenge": [],
+   "statement_ws_identical_solution": true,
+   "doc_identical_solution": false,
+   "solution_doc": "/-- (D) Breakdown of Navier–Stokes solutions on ℝ³/ℤ³. -/",
+   "upstream_doc": "/-- (D) Breakdown of Navier–Stokes Solutions on ℝ³/ℤ³. -/"
+  }
+ ],
+ "region_check": {
+  "definitional_region": "from `variable {n : ℕ}` to the first challenge-theorem docstring",
+  "upstream_region_sha256": "cd55c4286d93d34d0fafd298dc211357e129bbf4cb86d35301bb60e3718df550",
+  "challenge_region_sha256": "fc1f7bcf465ac9acb95947334f99b4bb923522424406200f09f945b938073d69",
+  "byte_identical_raw": false,
+  "byte_identical_after_dropping_category_AMS_attrs_and_localising_notation": true,
+  "residual_unified_diff_after_that": [],
+  "theorems_CD_region_byte_identical_raw": false,
+  "theorems_CD_region_byte_identical_after_dropping_category_attr": true,
+  "challenge_vs_definitions_definitional_region_byte_identical": false
+ },
+ "region_check_note": "challenge_vs_definitions_definitional_region_byte_identical=false is caused solely by trailing blank lines (challenge has two blank lines before the (C) docstring, definitions has one before `end`); after rstrip the two regions are byte-identical (k2a4_check.py). byte_identical_after_dropping_category_AMS_attrs_and_localising_notation=true with an EMPTY residual diff means the entire definitional region of the challenge file equals upstream byte-for-byte once the five `category API, AMS 35` attribute edits and the `notation`->`local notation` edit on ∇⬝ are undone; likewise the (C)/(D) theorem region equals upstream once the two `@[category research open, AMS 35]` lines are removed.",
+ "diff": [
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:4-6",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:(none)",
+   "class": "docstring",
+   "detail": "three added lines in the copyright comment block: 'This file has been modified from its original form in the Formal Conjectures project.' + blank"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:20",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:17",
+   "class": "import",
+   "detail": "`import FormalConjecturesUtil` -> `import Mathlib` (FormalConjecturesUtil.lean at the pin is `public import Mathlib` plus FormalConjecturesForMathlib, Answer and linter modules; fetched and saved)"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:25-33",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:(none)",
+   "class": "docstring",
+   "detail": "nine added module-doc lines: 'Standalone comparator copied from: <pinned URL>' and the paragraph describing what was adapted"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:(none)",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:29",
+   "class": "docstring",
+   "detail": "module-doc reference line '- [Clay Mathematics Institute](...navierstokes.pdf)' dropped"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:44",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:33-36",
+   "class": "docstring",
+   "detail": "module-doc: 'The Clay Millennium Problem asks for a proof of one of the following four statements:' + blank + the (A) and (B) bullets replaced by 'This reference includes the two breakdown alternatives:'"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:57",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:49-53",
+   "class": "docstring",
+   "detail": "module-doc: sentence ends after 'relative to `Set.Ici 0`.'; upstream's errata paragraph (pressure 1-periodicity, weak-solution sign correction) dropped"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:60",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:56",
+   "class": "notation-inlined",
+   "detail": "`open ContDiff Set InnerProductSpace MeasureTheory EuclideanGeometry` -> same without `EuclideanGeometry`; upstream opens it only to expose the scoped notations `ℝ^` (FormalConjecturesForMathlib/Geometry/Euclidean.lean) and `ℝ³` (Geometry/3d.lean), which the project inlines as local notation instead (see :66-67)"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:63",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:59",
+   "class": "namespace",
+   "detail": "`namespace NavierStokes` -> `namespace NavierStokes.Comparator`"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:65-67",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:(none); notation source FormalConjecturesForMathlib/Geometry/Euclidean.lean:22 and Geometry/3d.lean:22 at the pin",
+   "class": "notation-inlined",
+   "detail": "added comment + `local notation \"ℝ^\" n:65 => EuclideanSpace ℝ (Fin n)` + `local notation \"ℝ³\" => EuclideanSpace ℝ (Fin 3)`; upstream text at the pin is `scoped[EuclideanGeometry] notation \"ℝ^\" n:65 => EuclideanSpace ℝ (Fin n)` and `scoped[EuclideanGeometry] notation \"ℝ³\" => EuclideanSpace ℝ (Fin 3)` — right-hand sides and precedence identical"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:84",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:76",
+   "class": "notation-inlined",
+   "detail": "`notation \"∇⬝\" => divergence` -> `local notation \"∇⬝\" => divergence` (scope global -> local; same expansion)"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:87",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:79",
+   "class": "attribute",
+   "detail": "`@[simp, category API, AMS 35]` -> `@[simp]` on divergence_of_not_differentiableAt (formal-conjectures metadata attributes dropped)"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:93",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:85",
+   "class": "attribute",
+   "detail": "`@[simp, category API, AMS 35]` -> `@[simp]` on divergence_zero"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:98",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:90",
+   "class": "attribute",
+   "detail": "`@[simp, category API, AMS 35]` -> `@[simp]` on divergence_const"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:(none)",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:96",
+   "class": "attribute",
+   "detail": "`@[category API, AMS 35]` on divergence_add dropped"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:(none)",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:104",
+   "class": "attribute",
+   "detail": "`@[category API, AMS 35]` on divergence_smul dropped"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:(none)",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:266-279",
+   "class": "omitted-declaration",
+   "detail": "theorems navier_stokes_existence_and_smoothness_R3 (A) and navier_stokes_existence_and_smoothness_periodic (B), with docstrings and attributes, are not copied; neither is referenced by (C) or (D) or by any definition they are stated in"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:(none)",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:281",
+   "class": "attribute",
+   "detail": "`@[category research open, AMS 35]` on navier_stokes_breakdown_R3 dropped"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:(none)",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:289",
+   "class": "attribute",
+   "detail": "`@[category research open, AMS 35]` on navier_stokes_breakdown_periodic dropped"
+  },
+  {
+   "project": "ComparatorChallenges/NavierStokes.lean:286",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:296",
+   "class": "namespace",
+   "detail": "`end NavierStokes` -> `end NavierStokes.Comparator`"
+  },
+  {
+   "project": "NavierStokes/ComparatorDefinitions.lean:23-31",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:19-54 (via ComparatorChallenges/NavierStokes.lean:22-58)",
+   "class": "docstring",
+   "detail": "second project copy (the one the proof adapters import): module-doc replaced by a four-line description plus the same pinned Source URL; its definitional region (`variable {n : ℕ}` .. last structure) is byte-identical to the challenge file's up to one trailing blank line, and the two challenge theorems are omitted (by design: no sorry in the solution import closure)"
+  },
+  {
+   "project": "NavierStokes/ComparatorSolution.lean:22",
+   "upstream": "upstream 8bf45ed7 FormalConjectures/Millenium/NavierStokes.lean:288",
+   "class": "docstring",
+   "detail": "(D) docstring reads 'Breakdown of Navier–Stokes solutions on ℝ³/ℤ³' (lower-case s) vs upstream 'Solutions'; the theorem statement itself is whitespace-identical (see theorem_statements_identical)"
+  }
+ ],
+ "wrapper_summary": {
+  "total_nonidentical_hunks": 21,
+  "by_class": {
+   "docstring": 7,
+   "import": 1,
+   "namespace": 2,
+   "notation-inlined": 3,
+   "attribute": 7,
+   "omitted-declaration": 1,
+   "MATHEMATICALLY-DIFFERENT": 0
+  },
+  "text": "Every non-identical line falls into: docstring/comment edits (copyright notice, module-doc paragraphs, one capitalisation in the solution-file (D) docstring); the single import line (FormalConjecturesUtil -> Mathlib); namespace NavierStokes -> NavierStokes.Comparator; inlining of three notations (ℝ^, ℝ³ as local notation with identical right-hand sides to the upstream scoped[EuclideanGeometry] declarations, and ∇⬝ made local) together with the corresponding removal of `EuclideanGeometry` from the `open` line; removal of the formal-conjectures metadata attributes `category ...`/`AMS 35` (the `simp` attributes are retained); and omission of the two (A)/(B) existence theorems that (C)/(D) do not depend on. Zero lines classified MATHEMATICALLY-DIFFERENT. All 16 definitions/lemmas and both theorem statements are byte-identical in their code blocks and docstrings to upstream."
+ },
+ "theorem_statements_identical": {
+  "navier_stokes_breakdown_R3": "YES — byte-identical (not merely whitespace-collapsed) in ComparatorChallenges/NavierStokes.lean:273-277 vs upstream :282-286 including `:= by sorry`; the solution-side statement in NavierStokes/ComparatorSolution.lean:16-19 is whitespace-collapsed identical to upstream (proof term differs, as it must)",
+  "navier_stokes_breakdown_periodic": "YES — byte-identical in ComparatorChallenges/NavierStokes.lean:280-284 vs upstream :290-294 including `:= by sorry`; solution-side statement NavierStokes/ComparatorSolution.lean:23-26 whitespace-collapsed identical to upstream (docstring differs by one capital letter)"
+ },
+ "upstream_main_changed_since_pin": "NO for the file; the repository has advanced. Established by: (a) sha256 of FormalConjectures/Millenium/NavierStokes.lean fetched at 8bf45ed7, at 8323e878 and at main are all f446284f2aa5…d25d (13691 bytes); (b) GitHub API file history lists 8bf45ed7 (2026-07-27, 'Prove the basic divergence lemmas (#4643)') as the most recent commit touching the file, so the file is unchanged from the pin through main; (c) main HEAD is 43eeacb8e40e495e9580c74f00b533b0718aebff (2026-09-10T09:41:17Z), which is neither pin, and 8323e878 (2026-09-04, 'fix(README): add missing comma (#5267)') is a later commit that does not touch the file — so the project's two different pins are both content-equivalent for this file.",
+ "euler_note": "Upstream formal-conjectures has NO Euler file (Millenium directory at main: BSD, NavierStokes, Poincare, PvsNP, RiemannHypothesis). ComparatorChallenges/Euler.lean (cites `main`, unpinned) and Euler/SolutionDefinitions.lean (cites 8323e878) are project-authored specialisations of the upstream Navier–Stokes definitions: n fixed to 3, viscosity and force removed (`euler : ... = -gradient (p · t) x`), `Function.uncurry` spelled out instead of `↿`, docstrings rewritten, helper lemmas dropped, and Euler.lean adds an entirely new Sobolev-class solution concept and theorem `exists_compact_smooth_euler_singularity` with no upstream counterpart. No byte-identity claim is possible for Euler and the project does not make one ('Adapted from'); SolutionDefinitions.lean's 'reproduce the independent reference exactly' refers to the project's own Euler challenge file, not to upstream. Out of scope for the gate, which names only the two Navier–Stokes theorems.",
+ "gate_answer": "YES, with an enumerated wrapper. Independently re-derived from the read-only tree at 8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538 against google-deepmind/formal-conjectures FormalConjectures/Millenium/NavierStokes.lean fetched today (2026-09-10) at (i) the commit the project's files cite for the Navier–Stokes copy, 8bf45ed70d48b2b2a501de9c00b26bfa38c573ee (HTTP 200, 13691 bytes, sha256 f446284f…d25d), at the second pin 8323e878… cited by the Euler definitions file (HTTP 200, same sha256), and at (ii) upstream main, commit 43eeacb8e40e495e9580c74f00b533b0718aebff (HTTP 200, same sha256): every definition that navier_stokes_breakdown_R3 and navier_stokes_breakdown_periodic are stated in (divergence, IsOnePeriodic, InitialVelocityCondition{,Decay,Periodic}, ForceCondition{,Decay,Periodic}, NavierStokesExistenceAndSmoothness{,Rn,Periodic}), the five divergence lemmas, and both theorem statements are byte-identical in code and docstring in ComparatorChallenges/NavierStokes.lean and (definitions) NavierStokes/ComparatorDefinitions.lean, and whitespace-identical in NavierStokes/ComparatorSolution.lean. The complete list of non-identical lines is 21 hunks, classified docstring (7), import (1), namespace (2), notation-inlined (3: ℝ^/ℝ³ inlined as local notation with right-hand sides identical to upstream's scoped[EuclideanGeometry] declarations, ∇⬝ made local, EuclideanGeometry dropped from `open`), attribute (7: category/AMS metadata removed, simp retained), omitted-declaration (1: the (A)/(B) existence theorems that (C)/(D) do not use); MATHEMATICALLY-DIFFERENT: 0. Upstream main has not changed the file since the pin (file history's newest commit is the pin itself).",
+ "could_not_determine": [
+  {
+   "what": "Whether the two texts elaborate to the same kernel terms under the project's Lean v4.34.0-rc2 / Mathlib 85e3a25e vs the upstream repo's toolchain at 8bf45ed7",
+   "why": "textual comparison only; no lake/lean run permitted, and the upstream lean-toolchain/lake-manifest were not fetched (out of the gate's textual scope)"
+  },
+  {
+   "what": "Whether dropping `open EuclideanGeometry` and the FormalConjecturesForMathlib imports (which carry e.g. the `Module.Oriented ℝ ℝ³ (Fin 3)` instance in Geometry/3d.lean) changes any instance resolution inside the definitions",
+   "why": "requires elaboration; by inspection none of the compared definitions mention orientation, oriented angles or anything else in the EuclideanGeometry namespace, but that is a reading, not a check"
+  },
+  {
+   "what": "That Comparator's runtime check actually compared these files in the banked run",
+   "why": "not my unit; I only compared source text"
+  }
+ ],
+ "what_this_does_not_establish": [
+  "Elaboration identity across Lean/Mathlib versions is not textual identity: byte-identical source can elaborate differently (or fail) under different Mathlib revisions; the upstream repo's toolchain at the pin was not checked against the project's v4.34.0-rc2 / mathlib 85e3a25e.",
+  "Whether the upstream formal-conjectures statement faithfully encodes the Clay problem is out of scope (e.g. the upstream file's own choices: derivWithin on Ici 0, pressure periodicity from the errata, the energy bound as a strict `< E` with Bochner integral, divergence junk value 0).",
+  "That the same-named Mathlib identifiers (fderiv, gradient, Δ, iteratedFDerivWithin, MemLp, ContDiffOn, EuclideanSpace.single, ↿) denote the same objects in both settings — assumed by name, not checked.",
+  "Anything about the proof (NavierStokes/ComparatorSolution.lean and its import closure) beyond the two theorem statements' text; axioms, sorry-freedom and kernel acceptance are other units' concerns.",
+  "Anything about the Euler challenge, which has no upstream file to be byte-identical to.",
+  "That upstream main will remain unchanged: the identity of main is a snapshot at 2026-09-10 (commit 43eeacb8)."
+ ],
+ "forbidden_paths_opened": "none"
+}

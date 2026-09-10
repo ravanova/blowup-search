@@ -1,0 +1,82 @@
+[
+  {
+    "name": "BSD.lean",
+    "path": "FormalConjectures/Millenium/BSD.lean",
+    "sha": "efd6780adc0c970a0a60dce88ab840a23b8210f2",
+    "size": 3461,
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjectures/Millenium/BSD.lean?ref=main",
+    "html_url": "https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Millenium/BSD.lean",
+    "git_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/efd6780adc0c970a0a60dce88ab840a23b8210f2",
+    "download_url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/main/FormalConjectures/Millenium/BSD.lean",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjectures/Millenium/BSD.lean?ref=main",
+      "git": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/efd6780adc0c970a0a60dce88ab840a23b8210f2",
+      "html": "https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Millenium/BSD.lean"
+    }
+  },
+  {
+    "name": "NavierStokes.lean",
+    "path": "FormalConjectures/Millenium/NavierStokes.lean",
+    "sha": "6fd45b55c78e49ec79f45f4e226a9b9f71f57a81",
+    "size": 13691,
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjectures/Millenium/NavierStokes.lean?ref=main",
+    "html_url": "https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Millenium/NavierStokes.lean",
+    "git_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/6fd45b55c78e49ec79f45f4e226a9b9f71f57a81",
+    "download_url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/main/FormalConjectures/Millenium/NavierStokes.lean",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjectures/Millenium/NavierStokes.lean?ref=main",
+      "git": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/6fd45b55c78e49ec79f45f4e226a9b9f71f57a81",
+      "html": "https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Millenium/NavierStokes.lean"
+    }
+  },
+  {
+    "name": "Poincare.lean",
+    "path": "FormalConjectures/Millenium/Poincare.lean",
+    "sha": "8c3dc3b81180dd7ecbef404b577064c5b38c5f3f",
+    "size": 4336,
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjectures/Millenium/Poincare.lean?ref=main",
+    "html_url": "https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Millenium/Poincare.lean",
+    "git_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/8c3dc3b81180dd7ecbef404b577064c5b38c5f3f",
+    "download_url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/main/FormalConjectures/Millenium/Poincare.lean",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjectures/Millenium/Poincare.lean?ref=main",
+      "git": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/8c3dc3b81180dd7ecbef404b577064c5b38c5f3f",
+      "html": "https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Millenium/Poincare.lean"
+    }
+  },
+  {
+    "name": "PvsNP.lean",
+    "path": "FormalConjectures/Millenium/PvsNP.lean",
+    "sha": "1dab34f80657d4dfe5dd1ed5f0f325f7700b255f",
+    "size": 2218,
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjectures/Millenium/PvsNP.lean?ref=main",
+    "html_url": "https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Millenium/PvsNP.lean",
+    "git_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/1dab34f80657d4dfe5dd1ed5f0f325f7700b255f",
+    "download_url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/main/FormalConjectures/Millenium/PvsNP.lean",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjectures/Millenium/PvsNP.lean?ref=main",
+      "git": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/1dab34f80657d4dfe5dd1ed5f0f325f7700b255f",
+      "html": "https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Millenium/PvsNP.lean"
+    }
+  },
+  {
+    "name": "RiemannHypothesis.lean",
+    "path": "FormalConjectures/Millenium/RiemannHypothesis.lean",
+    "sha": "c8d38bef385eb15661c3daf7449625b66b019b2a",
+    "size": 5071,
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjectures/Millenium/RiemannHypothesis.lean?ref=main",
+    "html_url": "https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Millenium/RiemannHypothesis.lean",
+    "git_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/c8d38bef385eb15661c3daf7449625b66b019b2a",
+    "download_url": "https://raw.githubusercontent.com/google-deepmind/formal-conjectures/main/FormalConjectures/Millenium/RiemannHypothesis.lean",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjectures/Millenium/RiemannHypothesis.lean?ref=main",
+      "git": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/blobs/c8d38bef385eb15661c3daf7449625b66b019b2a",
+      "html": "https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Millenium/RiemannHypothesis.lean"
+    }
+  }
+]
