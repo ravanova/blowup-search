@@ -5197,3 +5197,14 @@ official cache, not from source; the comparator was never run; one Conductor, on
 kernel"* is true of the published record and was false of this repository by three hours. Nothing in it is
 changed; the discrepancy is what §3j's *re-read `STATE.md` from disk after a concurrent push* exists for.
 
+
+## §73 — arc 7 `K1` (leg 437): **phase B relocated to a fresh container by user ruling, before it ran; phase A's tree kept for `K2`.**
+
+`leg_437_prereg.md` §3 pre-committed two phases in one container, phase B deleting phase A's tree
+because disk holds one. The user asked whether skipping phase B was reasonable and what it would lose;
+the answer recorded in `leg_437_prereg_amend.md`: it loses only gate (d)'s clean end-to-end time and
+the clean-provenance argument, never (a)–(c), and it never bought a second agent. **Ruling:** do not
+skip it — run it in a fresh container (a new remote session at the branch carrying the runner), keep A's
+tree for `K2` slots 3 and 5, land the artefacts under `writeup/data/arc7/k1/phaseB/` on branch
+`leg/437-k1-phaseB`, integrate only after the log is read. Readings unchanged (GREEN / RED / INCOMPLETE);
+a different container is a second machine, not a second agent — `UNVERIFIED` stands.
