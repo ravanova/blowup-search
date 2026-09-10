@@ -149,7 +149,8 @@ wrong — so a `YES` from it is not on its own evidence. It does **not** say the
 
 Four disagreements are recorded and **not adjudicated**, including one planted control that did not fire
 as planted (slot 3), which that worker reported itself, with a diagnosis. Full record: `CORRECTIONS.md`
-§79 and `experiments/journal/leg_439.md`.
+§79 and `experiments/journal/leg_439.md`. Standalone note, written for readers outside this
+project: [`writeup/notes/PREREGISTERED_GATES_FAKED.md`](../notes/PREREGISTERED_GATES_FAKED.md).
 
 ## 6. What arc 7 does NOT establish, said once, plainly
 
