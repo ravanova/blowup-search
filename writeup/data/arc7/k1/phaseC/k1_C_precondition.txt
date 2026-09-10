@@ -1,0 +1,53 @@
+=== leg 437 phase C — §3 PRECONDITION MEASUREMENT, 2026-09-10, user's laptop
+=== taken BEFORE any clone or build; the run did not start (see phaseC.json)
+
+$ nproc
+12
+
+$ grep -m1 'model name' /proc/cpuinfo
+model name	: Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz
+
+$ free -g
+               total        used        free      shared  buff/cache   available
+Mem:              31           8           3           1          20          22
+Swap:              1           0           1
+
+$ df -h $HOME
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  225G  211G  3.3G  99% /
+
+$ df -B1 --output=source,fstype,size,used,avail,pcent,target /
+Filesystem     Type    1B-blocks         Used      Avail Use% Mounted on
+/dev/nvme0n1p3 ext4 241554038784 225734668288 3474485248  99% /
+
+=== every other filesystem on this machine, for the record
+$ df -hT -x tmpfs -x devtmpfs -x squashfs
+/dev/nvme0n1p3 ext4      225G  211G  3.3G  99% /
+/dev/nvme0n1p1 vfat      861M   66M  796M   8% /boot/efi
+$ df -hT | grep tmpfs
+tmpfs          tmpfs     3.2G  3.6M  3.2G   1% /run
+tmpfs          tmpfs      16G  592M   15G   4% /dev/shm
+tmpfs          tmpfs     5.0M  8.0K  5.0M   1% /run/lock
+tmpfs          tmpfs     3.2G  168K  3.2G   1% /run/user/1001
+$ lsblk (partitions only)
+nvme0n1     238.5G
+├─nvme0n1p1   865M vfat     /boot/efi
+├─nvme0n1p2     8G vfat     (unmounted; EFI/recovery — not touched)
+└─nvme0n1p3 229.6G ext4     /
+
+=== toolchain state (not the blocker; recorded because the runner needs it)
+$ elan --version
+elan 4.2.4 (227caca13 2026-08-25)
+$ elan toolchain list
+leanprover/lean4:v4.34.0-rc2
+$ du -sh ~/.elan/toolchains/*
+3.0G	/home/andy/.elan/toolchains/leanprover--lean4---v4.34.0-rc2
+$ lean --version
+error: no default toolchain configured. run `elan default stable` to install & configure the latest Lean 4 stable release.
+   (the pinned toolchain IS installed; `lake` in the work tree selects it from lean-toolchain,
+    so this is not a blocker in itself — recorded for completeness)
+
+=== leftover trees searched for, so that nothing reclaimable was missed
+$ find $HOME /dev/shm /tmp -maxdepth 4 -type d \( -name 'NavierStokesAndEuler*' -o -name 'k1_*' -o -name '*.lake' \)
+   (no output — phase B local's work tree was already removed after that run;
+    there is no stale Lean tree on this machine to reclaim)

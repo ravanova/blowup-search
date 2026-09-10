@@ -1,0 +1,88 @@
+{
+ "schema": "arc7_k1_phase_v1",
+ "leg": 437,
+ "phase": "C (from-source rebuild: no cache in the trust path)",
+ "what": "the from-source rebuild that would close the last of the three limits banked against K1 — mathlib compiled from its own source, `lake exe cache get` NEVER run, then #print axioms on the two exported theorems. Pre-registered in experiments/journal/leg_437_phaseC_prereg.md, readings fixed before any measurement. THE RUN DID NOT START: the pre-registered §3 disk precondition failed, measured.",
+ "runner": "scripts/arc7_k1_kernel_check.sh would NOT have been used unmodified (it runs `lake exe cache get` for phase B, which phase C forbids); no runner was invoked, because the precondition aborted the run before the clone",
+ "machine": {
+  "nproc": 12,
+  "cpu": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
+  "mem_gb": 31,
+  "mem_available_gb": 22,
+  "swap_gb": 1,
+  "container": "user's local Linux laptop (Linux 7.0.0-31-generic) — the same machine as phaseB_local",
+  "elan": "elan 4.2.4 (227caca13 2026-08-25)",
+  "lean_toolchain_installed": "leanprover/lean4:v4.34.0-rc2 (3.0 GB in ~/.elan/toolchains); no elan DEFAULT toolchain is configured, but lake selects the pinned one from lean-toolchain, so this is not the blocker",
+  "disk_at_start": "/dev/nvme0n1p3 ext4 225G total, 211G used, 3.3G avail (99%); exact: 3474485248 bytes avail = 3.24 GiB"
+ },
+ "precondition": {
+  "required_free_gb": 20,
+  "required_basis": "mathlib's build output alone measured 6.6 GB (phaseB_integrity/rebuild_cost_estimate.md); from source the tree additionally carries .ir and .ilean for ~8370 modules plus the project's own 2486 oleans",
+  "measured_free_bytes": 3474485248,
+  "measured_free_gib": 3.24,
+  "shortfall_gib": 16.76,
+  "verdict": "FAIL — 3.24 GiB free against ~20 GB required, on the only persistent writable filesystem",
+  "alternatives_examined": [
+   "/boot/efi — 796 MB free, vfat: far too small",
+   "/dev/nvme0n1p2 — 8 GB vfat, unmounted, EFI/recovery: too small AND not the agent's to mount or touch",
+   "/dev/shm — 15 GB free but a 16 GB RAM-backed tmpfs: still BELOW the ~20 GB requirement, and it would consume the same RAM the 12-way build needs. Phase B local parked only the 442 MB of cache .ltar archives there; phase C has no .ltar files at all — the space needed IS the build output, which must live in the tree.",
+   "stale Lean trees to reclaim — searched, none exist: phaseB_local's work tree was already removed after that run"
+  ],
+  "not_done_deliberately": "no user files were deleted to make room. The disk is 99% full with the user's own data (projects 30 GB, Unity 15 GB, ~/.cache 10 GB, ...); freeing ~17 GB is the operator's decision, not the agent's."
+ },
+ "tree_head": null,
+ "upstream_head_at_clone": null,
+ "toolchain": "leanprover/lean4:v4.34.0-rc2 (pinned; installed but never invoked on a tree)",
+ "mathlib_rev": null,
+ "comparator_rev": null,
+ "cache_get_rc": "N/A — `lake exe cache get` was NEVER run, by design (prereg §4). No cache was fetched, warmed, or touched.",
+ "build_rc": null,
+ "build_s": null,
+ "jobs": null,
+ "build_error_lines": null,
+ "olean_count_project": null,
+ "axioms_verbatim": null,
+ "mathlib_built_count": null,
+ "result": {
+  "navier_stokes_breakdown_R3": null,
+  "navier_stokes_breakdown_periodic": null,
+  "sorryAx_reachable": "NOT-ESTABLISHED (no build)",
+  "exit_code": null
+ },
+ "gate": {
+  "a_build_completes": "NOT-ESTABLISHED — the build never started; blocker: 3.24 GiB free against ~20 GB required (measured, k1_C_precondition.txt)",
+  "b_print_axioms": "NOT-ESTABLISHED — no built tree to run #print axioms in",
+  "c_sorryAx_reachable": "NOT-ESTABLISHED — see (b)",
+  "d_wall_time": "NOT-ESTABLISHED — no run to time. Machine recorded in full anyway: 12 cores, i7-10750H @ 2.60GHz, 31 GB RAM, toolchain v4.34.0-rc2"
+ },
+ "landrun_comparator_check": "NOT ATTEMPTED — prereg §5(c) presupposes a built tree. The fake shim was NOT substituted (that deviation is closed elsewhere and is not repeated).",
+ "reading": "INCOMPLETE (phase C prereg §2) — blocker measured: 3474485248 bytes (3.24 GiB) free on /dev/nvme0n1p3, against the pre-registered ~20 GB requirement. Shortfall 16.76 GiB.",
+ "comparison_with_phaseB": {
+  "comparable": false,
+  "why": "phase C produced no build, so there is nothing to compare. The fields below are phase B's, restated so the reader sees exactly what phase C would have had to match — they are NOT phase C readings.",
+  "axioms_identical": "NOT-ESTABLISHED (phase C produced no axiom output)",
+  "build_rc_phaseB_container": 0,
+  "build_rc_phaseB_local": 0,
+  "build_rc_phaseC": null,
+  "jobs_phaseB_container": 11251,
+  "jobs_phaseB_local": 11251,
+  "jobs_phaseC": null,
+  "wall_time_cached_same_laptop_s": 4272,
+  "wall_time_from_source_s": null,
+  "mathlib_built_vs_replayed_phaseB_container": "0 `Built Mathlib.` lines — all 8747 mathlib oleans came from the official cache",
+  "mathlib_built_vs_replayed_phaseB_local": "0 `Built Mathlib.` lines — mathlib replayed from the official cache",
+  "mathlib_built_vs_replayed_phaseC": "NOT-ESTABLISHED — this count in the thousands is exactly the evidence phase C exists to produce"
+ },
+ "what_this_does_not_establish": [
+  "anything at all about the axioms, the build, or the oleans — phase C measured a disk, not a proof",
+  "that the cached oleans ARE load-bearing — a failed precondition is not a MISMATCH; K1's prior GREEN readings stand exactly as they were, neither strengthened nor weakened",
+  "Theorem 1.1 of the paper — the two statements are Fefferman (C)/(D) as the project formalises them (leg 431 gate (b))",
+  "that mathlib's cached oleans match their sources — this is precisely the open limit phase C was to close, and it REMAINS OPEN"
+ ],
+ "files": [
+  "k1_C_precondition.txt (the verbatim measurements above)",
+  "phaseC.json (this file)",
+  "k1_C_build.log — ABSENT: no build ran",
+  "k1_C_axioms.log — ABSENT: no build ran"
+ ]
+}
