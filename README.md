@@ -24,10 +24,22 @@ claim in the repository is tiered, gated, and rebuildable from committed data.
 > against the upstream source, not against the comment that says so. Its
 > 580-module dependency graph is `sorry`-free at source level.
 >
-> **What arc 6 does NOT establish.** That the proof is correct. Sections 4–9 were
+> **What arc 6 does NOT establish.** That the proof is correct. ~~Sections 4–9 were
 > **not read** and the Lean was **not compiled** — the build is blocked on a host
 > this environment's egress policy denies, which is reported and not routed
-> around. Nothing here suggests the proof is wrong either.
+> around.~~ Nothing here suggests the proof is wrong either.
+>
+> **STRUCK 2026-09-10 (leg 431), on the user's instruction; recorded, not rewritten.** The
+> struck sentence described the first pass (legs 417–422). The second pass under `§3g` read
+> **all 166 pages twice** — solo (leg 425) and by five blind shards (leg 428), 79 of 79
+> statements both times — and re-derived a 58-node spine (leg 429: 58 `CHECKED`, 0 `GAP`,
+> 10 `VERIFIED` by a blind verifier). The Lean was **measured, not compiled to the theorem**
+> (leg 431): the cache host *was* reachable this time, the toolchain builds mathlib without
+> error, and the main theorem was never reached, so its kernel status is `NOT-ESTABLISHED` —
+> and what the kernel would accept is Fefferman's (C)/(D), strictly weaker than Theorem 1.1.
+> The outer profile of Lemma 4.8 was instantiated from the paper's schedule (leg 430): its
+> constants, exponents and pressure datum reproduce; its closure and cone do not at any
+> pre-registered `λ`, and the sweep locates where they do (`λ ≤ 3·10⁻⁴`). Tier 2 throughout.
 >
 > **And the part that is ours.** The manuscript's residual-absorption mechanism
 > was ported onto this repository's own banked object, with every advantage
