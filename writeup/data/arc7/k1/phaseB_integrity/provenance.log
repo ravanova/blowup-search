@@ -1,0 +1,46 @@
+=== PROVENANCE_T0 2026-09-10T12:59:53Z
+--- lake exe cache get (second run: recompute hashes from sources, expect nothing to download)
+Current branch: HEAD
+Using cache from origin: (some leanprover-community/mathlib4)
+No files to download
+Already decompressed 8747 file(s)
+cache_get2_rc=0 s=14
+--- lake build (second run: re-check every trace against the sources, expect nothing rebuilt)
+info: Euler/Solution.lean:73:0: 'Euler.euler_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Euler/Solution.lean:75:0: 'Euler.exists_compact_smooth_euler_singularity' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (11251 jobs).
+build2_rc=0 s=11 built_lines=0 replayed_lines=4
+--- lake exe cache lookup on three modules in the closure
+«.lake».packages.mathlib.Mathlib.Analysis.Calculus.ContDiff.Operations: /root/.cache/mathlib/bac144b37471f48d.ltar
+uncaught exception: failure in /root/.elan/toolchains/leanprover--lean4---v4.34.0-rc2/bin/leantar #[-k, /root/.cache/mathlib/bac144b37471f48d.ltar]:
+/root/.cache/mathlib/bac144b37471f48d.ltar not found
+
+--- local cache: 8747 .ltar files, 442M
+=== PROVENANCE_T1 2026-09-10T13:00:21Z
+--- lake exe cache lookup, run from the mathlib package dir (module names relative to it)
+info: plausible: cloning https://github.com/leanprover-community/plausible
+info: plausible: checking out revision 'd9598f07b1bc701f1e3aae163d2681c1fd978793'
+info: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient
+info: LeanSearchClient: checking out revision 'ba67e212be1197b84c1f1f6299488a10a3002713'
+info: importGraph: cloning https://github.com/leanprover-community/import-graph
+info: importGraph: checking out revision 'd8823026ac7ef130c253089d95685f9877b95323'
+info: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4
+info: proofwidgets: checking out revision 'a8acbfd87375ff4abe14ce09db5b7664d383bc7f'
+info: aesop: cloning https://github.com/leanprover-community/aesop
+info: aesop: checking out revision '18889deb9e83ea7420ef51c160d6f88552e744e3'
+info: Qq: cloning https://github.com/leanprover-community/quote4
+info: Qq: checking out revision '507746ab8f4b643ccdacb2ec4cdb5853fa9f8ab3'
+info: batteries: cloning https://github.com/leanprover-community/batteries
+info: batteries: checking out revision 'd54dddc581e08be364c278052863524bff7a99a9'
+info: Cli: cloning https://github.com/leanprover/lean4-cli
+info: Cli: checking out revision 'ab3a82db9fea14cf0fd7f5a2de650f4b534640af'
+Mathlib.Logic.Basic: /root/.cache/mathlib/f8c09860783f15f7.ltar
+  comment: git=mathlib4@5c50c7c19504ea9308c0d373e9b6b7fd30c3d956
+Mathlib: /root/.cache/mathlib/c5b6cd2333d24da1.ltar
+  comment: git=mathlib4@85e3a25e006c35636f0e53b0e9296caca2685bc0
+Mathlib.Analysis.Calculus.ContDiff.Operations: /root/.cache/mathlib/916459edd2357c60.ltar
+  comment: git=mathlib4@85e3a25e006c35636f0e53b0e9296caca2685bc0
+Mathlib.Analysis.Calculus.Deriv.Basic: /root/.cache/mathlib/32a112c623eb1d29.ltar
+  comment: git=mathlib4@85e3a25e006c35636f0e53b0e9296caca2685bc0
+--- hash inputs per Cache/Hashing.lean @ mathlib 85e3a25e: fileHash = hash(rootHash :: pathHash :: hashFileContents(source) :: importHashes); rootHash = hash(rootHashGeneration :: hashes of lakefile.lean, lean-toolchain, lake-manifest.json)
+=== PROVENANCE_T2 2026-09-10T13:04:46Z
