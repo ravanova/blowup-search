@@ -33,7 +33,7 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–434. WAVES 1–2 CLOSED (legs 428, 429). `R5`(i) LANDED (leg 430). WAVE 3 = `R6` ×5 DISPATCHED, five files in, INTEGRATING (leg 431).**
+## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS, legs 423–434. WAVES 1–3 CLOSED (legs 428, 429, 431). `R5`(i) LANDED (leg 430). NEXT: `R5`(ii) SERIAL (leg 432), then WAVE 4 = `R5`(iii)–(vii) ×5, then `R7`.**
 
 **Mode:** `ORCHESTRATION.md` **§3g CONDUCTOR**, wave sizing **5** by user ruling (recorded in §3g
 beside its original reason; `CORRECTIONS.md` §67). The charter arrived while `R3` was mid-flight
@@ -47,16 +47,7 @@ reconciled; `R3` stayed the Conductor's serial unit and has landed (this commit)
 unnumbered prose; **Propositions 9.5/9.6 never cited by anything downstream**), spine through
 §4/§7/§9 **refuted by citation, confirmed by equation**, prereg 4 of 8 (§68).
 
-**WAVE 1 — dispatched 2026-09-09, five agents, each in its own git worktree, each writing ONE file
-and committing it on its worktree branch (not pushed):**
-
-| slot | unit | brief | writes | status |
-|---|---|---|---|---|
-| 1 | `R2` shard A | §§1–3 preamble + §4 pp 24–44, 11 + 4 preamble statements | `writeup/data/arc6/ledger/shard_A.json` | **landed** |
-| 2 | `R2` shard B | preamble + §5–§6 pp 45–72, 11 + 4 | `…/shard_B.json` | **landed** |
-| 3 | `R2` shard C | preamble + §7–§8, App C pp 73–99, 157–164, 19 + 4 | `…/shard_C.json` | **landed** |
-| 4 | `R2` shard D | preamble + §9–§10 pp 100–125, 15 + 4 | `…/shard_D.json` | **landed** |
-| 5 | `R2` shard E | preamble + App A–B pp 126–156, 19 + 4 | `…/shard_E.json` | **landed** |
+**WAVE 1 dispatch table** (five `R2` shards, all landed, leg 428) retired VERBATIM 2026-09-10 (leg 431) under §3j → this file, `## Superseded — wave 1 dispatch table`.
 
 Every shard was **forbidden to open the solo ledger, `dag.json`, `leg_425.md`, `leg_426*.md` or
 `CORRECTIONS.md`**, told that *"I could not determine X, because Y"* is acceptable and inventing X is
@@ -117,12 +108,15 @@ holds in Lemma A.8's form to 10⁻¹⁵.
 G3 and G7 `NO` at every pre-registered `λ`; the post-hoc sweep finds the paper's bracket root only at
 `λ ≤ 3·10⁻⁴` and the intermediate cone governed by `√λ P_*`; C5/C6 did not fire, C2 not run. Tier 2.
 
-**WAVE 3 — dispatched 2026-09-10, five Lean agents, one file each (`writeup/data/arc6/lean/agent_*.json`),
-all five committed on their worktree branches and cherry-picked onto `leg/431-r6-integrate`; merge, evidence
-and journal written; landing next.** The Lean build is being continued in the background by the Conductor
-(`scratchpad/lean_chain_leg431.log`; the cache host was reachable); its outcome is not in any landed leg yet.
+**WAVE 3 — CLOSED AND INTEGRATED (leg 431).** Five Lean agents, one file each, cherry-picked unedited
+(`writeup/data/arc6/lean/agent_*.json` → `merged.json`): (a) build `NOT-ESTABLISHED` (theorem never reached);
+(b) top-level statement strictly `WEAKER` than Theorem 1.1; (c) 4 `sorry` all challenge placeholders, 0 `axiom`;
+(d) comparator 7 PASS / 4 `NOT-ESTABLISHED`, never run; (e) 74/5/0 of 79. **No kernel check anywhere.**
+The Conductor is continuing the build in the background (`scratchpad/lean_chain_leg431.log`, at ~9000/9400
+jobs when this was written); if it reaches the theorem, `#print axioms` is a dated addendum to `leg_431.md`,
+Conductor-run, `UNVERIFIED` — it changes (a) only. Stale README banner struck and recorded (user item 4).
 
-**NEXT:** land wave 3 (leg 431); commit `leg_432_prereg.md` and run `R5`(ii) SERIAL (leg 432); dispatch
+**NEXT:** commit `leg_432_prereg.md` FIRST and push, then run `R5`(ii) SERIAL (leg 432); dispatch
 **wave 4 = `R5`(iii)–(vii) ×5** (slot 5 adversarial verifier) on the `R5`(i)–(ii) interface; then `R7` (leg 434).
 
 **Open escalations:** the five rows above, unchanged; row 1 still carries `U1`'s measured fact and
@@ -1684,3 +1678,16 @@ W6, neither of which carries a `⚠` block); Lane R queue `L5-nov`, `R4-a` (reme
 cannot locate the LIVE block. Caps: `STATE.md` 24,576 **and NO ROW OVER 600 CHARS**; `WALLS.md`
 32,768; `OPTIONS.md` 24,576; this LIVE block 8,192. Retirement (verbatim move) is preferred over
 compaction; nine blocks were retired verbatim at wave 8's close.
+
+## Superseded — wave 1 dispatch table, retired VERBATIM from the LIVE block 2026-09-10 (leg 431) under §3j
+
+**WAVE 1 — dispatched 2026-09-09, five agents, each in its own git worktree, each writing ONE file
+and committing it on its worktree branch (not pushed):**
+
+| slot | unit | brief | writes | status |
+|---|---|---|---|---|
+| 1 | `R2` shard A | §§1–3 preamble + §4 pp 24–44, 11 + 4 preamble statements | `writeup/data/arc6/ledger/shard_A.json` | **landed** |
+| 2 | `R2` shard B | preamble + §5–§6 pp 45–72, 11 + 4 | `…/shard_B.json` | **landed** |
+| 3 | `R2` shard C | preamble + §7–§8, App C pp 73–99, 157–164, 19 + 4 | `…/shard_C.json` | **landed** |
+| 4 | `R2` shard D | preamble + §9–§10 pp 100–125, 15 + 4 | `…/shard_D.json` | **landed** |
+| 5 | `R2` shard E | preamble + App A–B pp 126–156, 19 + 4 | `…/shard_E.json` | **landed** |
