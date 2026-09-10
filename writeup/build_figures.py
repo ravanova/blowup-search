@@ -369,6 +369,11 @@ P2_EVIDENCE = [
     # against lambda, drawn from writeup/data/arc6_profile_v1.json alone and asserted.
     "arc6_profile_evidence.py",                    # fig113 -- arc 6 R5(i) (leg 430)
     "arc6_residual_evidence.py",                   # fig114 -- arc 6 R5(ii) (leg 432)
+    # fig115 -- arc 7 / K4 (leg 440): the kernel check GREEN on one pin in three environments and
+    # accepted by two independent kernels, beside K3's zero surviving gates. Redraws from the banked
+    # writeup/data/arc7/ JSONs alone -- no lake, no lean, no network -- and re-derives every number in
+    # writeup/7_confirmation/TECHNICAL_CONFIRMATION.md, exiting nonzero on drift.
+    "7_confirmation/confirmation_evidence.py",     # fig115 -- arc 7 K4 (leg 440)
     "4_p2_lottery/p2_route_tc_v1_evidence.py",      # fig48 -- Route-TC v1 (leg 53)
     # Legs 54-57 keep their evidence scripts in experiments/ (their declared territory in
     # DIRECTION.md) rather than beside their writeups like leg 53's -- these paths are
