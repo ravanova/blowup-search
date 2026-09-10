@@ -5212,3 +5212,13 @@ Defect in this entry's own landing: the amendment commit `8c944b3` was pushed al
 printed FAIL (ORCH LIVE 100-odd bytes over its cap) — a shell chain that took the exit status of `tail`
 instead of the gate's, the second time this session made that mistake (leg 433's ORCH commit was the
 first). Fixed in the next commit by a verbatim retirement; recorded here rather than rewritten.
+**Outcome (added 2026-09-10 12:55Z):** phase B ran in the fresh container and read **GREEN** — clone to
+`#print axioms` in 5605 s, 11251 jobs, 0 errors, both theorems on the standard three, `sorryAx` not
+reachable (`writeup/data/arc7/k1/phaseB/`). K1 is GREEN on both phases: stop and report, no extension.
+Two deviations recorded: the fresh session's commits reached `main` directly rather than staying on the
+outcome branch as its brief said (the gate passes on `main`, nothing is retracted); and, in the same
+hour, a separate pre-publication session (Leg 0, `29d4c3a`) removed the banked manuscript text from
+the repository for copyright reasons, so `arc6_dag_evidence.py` can no longer re-check the citation
+graph here until the text is regenerated per `writeup/data/arc6/REGENERATE.md` — that script crashes loudly
+by that policy's design, and the cross-leg `reproduction_evidence.py` now reports it as NOT RE-CHECKABLE
+HERE rather than as drift.

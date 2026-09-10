@@ -23,7 +23,13 @@ for s in ["writeup/arc6_ledger_evidence.py", "writeup/arc6_merged_evidence.py", 
     if not p.exists():
         check(False, f"{s} exists"); continue
     r = subprocess.run([sys.executable, str(p)], capture_output=True, text=True, cwd=ROOT)
-    check(r.returncode == 0, f"{s} passes", (r.stdout + r.stderr).strip().splitlines()[-1][:160] if (r.stdout + r.stderr).strip() else "")
+    out = (r.stdout + r.stderr).strip()
+    if r.returncode != 0 and "FileNotFoundError" in out and "manuscript_pages" in out:
+        # The manuscript text is not redistributed (NOTICE.md §3; Leg 0, 29d4c3a): the per-unit script crashes loudly
+        # by policy. Not drift of the record -- not re-checkable in this checkout until the text is regenerated.
+        print(f"  [SKIP] {s}: NOT RE-CHECKABLE HERE — the manuscript text is absent by policy; regenerate it per writeup/data/arc6/REGENERATE.md and re-run")
+        continue
+    check(r.returncode == 0, f"{s} passes", out.splitlines()[-1][:160] if out else "")
 
 print("== 2. R1–R3: the extraction, the two readings, the graph")
 si = J(D / "statement_index.json"); led = J(D / "ledger.json"); mg = J(D / "ledger" / "merged.json"); dag = J(D / "dag.json")
