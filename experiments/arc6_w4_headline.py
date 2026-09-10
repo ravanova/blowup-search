@@ -166,12 +166,25 @@ def profile_fields(dy, cache=None, drop_U=False):
     f = 1.0 / (1.0 + eta ** 2); d = 1.0 - eta ** 2; L = 1.0 - 2 * H * eta ** 2
     P_star = float(F["P_star"])
     # --- numerical part, y >= 0
-    y1, lx1, logE1, U1, W1 = F["yca"], F["lxc"], F["logEc"], F["Uc"], F["W"]
+    y1, lx1, logE1, U1 = F["yca"], F["lxc"], F["logEc"], F["Uc"]
     E1 = np.exp(logE1)
     Pi1 = -0.5 * F["gE"] * E1 ** 2
+    # W - 1 = -2 D eta M/X - d d_eta(M/X) computed as a SMALL quantity from rhoM = M/(XE) (the builder's W = 1 - ... absorbs
+    # it once M/X < 1e-16). Beyond the pulse end the carried M is the closure's roundoff residual (M = J = 0 there is solved
+    # to ~1e-12 of the pulse scale E_c1 X_c1, leg 430 G4): the paper's exact moment condition M = 0 for X >= X_v
+    # (Theorem 4.6(v), Lemma 4.8(ii)) is imposed there, i.e. rhoM := 0 for y >= interp start. Both facts are reported.
+    rhoM = F["rhoM"].copy()
+    y_interp = float(F["stage_starts"][5])
+    M_resid = float(np.max(np.abs(rhoM[y1 >= y_interp] * E1[y1 >= y_interp] * np.exp(lx1[y1 >= y_interp])[:, None])))
+    m_pulse = (y1 >= float(F["stage_starts"][4])) & (y1 < y_interp)
+    M_pulse = float(np.max(np.abs(rhoM[m_pulse] * E1[m_pulse] * np.exp(lx1[m_pulse])[:, None])))
+    rhoM[y1 >= y_interp] = 0.0
+    dE = lambda g: g @ Deta.T
+    Wm1 = -2 * D * eta[None, :] * rhoM * E1 - d[None, :] * (dE(rhoM) + rhoM * dE(logE1)) * E1
+    W1 = 1.0 + Wm1
     if drop_U:
-        U1 = np.zeros_like(U1); W1 = np.ones_like(W1)
-    v01 = (2 * eta[None, :] * U1 + W1 - 1.0) / L[None, :]
+        U1 = np.zeros_like(U1); Wm1 = np.zeros_like(Wm1); W1 = np.ones_like(W1)
+    v01 = (2 * eta[None, :] * U1 + Wm1) / L[None, :]
     # --- closed-form reference branch on [-5, 0): U = 4 eta, E = P_* f x^{1/10}, A_X(U) = 4 eta, Pi = Pi_0 + (5/2) P_*^2 f^2 x^{1/5}
     n0 = int(round(5.0 / dy))
     y0 = -5.0 + dy * np.arange(n0)                       # excludes 0 (the numerical grid starts there)
@@ -181,14 +194,15 @@ def profile_fields(dy, cache=None, drop_U=False):
     W0 = np.tile((1.0 - 8 * D * eta ** 2 - 4 * d)[None, :], (n0, 1))
     if drop_U:
         U0 = np.zeros_like(U0); W0 = np.ones_like(W0)
-    v00 = (2 * eta[None, :] * U0 + W0 - 1.0) / L[None, :]
+    v00 = (2 * eta[None, :] * U0 + (W0 - 1.0)) / L[None, :]
     Pi_0 = F["Pi0"]                                       # Pi(0, eta) (the axis datum, (4.31))
     Pi0_arr = Pi_0[None, :] + 2.5 * (P_star * f)[None, :] ** 2 * np.exp(0.2 * y0)[:, None]
     y = np.concatenate([y0, y1]); lx = np.concatenate([lx0, lx1])
     G = {"y": y, "lx": lx, "logE": np.vstack([logE0, logE1]), "U": np.vstack([U0, U1]), "v0": np.vstack([v00, v01]),
          "Pi": np.vstack([Pi0_arr, Pi1]), "W": np.vstack([W0, W1]), "eta": eta, "Deta": Deta, "f": f, "d": d, "L": L,
          "P_star": P_star, "y_tail0": float(F["y_tail0"]), "c_inf": float(F["c_inf"]), "stage_starts": F["stage_starts"],
-         "gates": json.loads(str(F["gates"])), "n_inner": n0}
+         "gates": json.loads(str(F["gates"])), "n_inner": n0,
+         "M_roundoff_residual_beyond_pulse": M_resid, "M_max_on_pulse": M_pulse}
     G["E"] = np.exp(G["logE"])
     return G
 
@@ -234,13 +248,18 @@ def radial_integrals(G):
     v0_ref = (8 * eta ** 2 - 8 * D * eta ** 2 - 4 * d) / L if not np.allclose(U[0], 0) else np.zeros_like(eta)
     g2_axis = v0_ref ** 2 * Xh ** 2 / 4.0
     e2_grid = np.trapezoid((E ** 2 + U ** 2) * X, y, axis=0)
-    g2_grid = np.trapezoid(0.5 * X ** 2 * v0 ** 2, y, axis=0)
+    # X v_0 in log form: X reaches 1e208 (X^2 overflows) while v_0 = 0 beyond the pulse
+    Xv0 = np.where(v0 != 0.0, np.sign(v0) * np.exp(lx[:, None] + np.log(np.abs(v0) + 1e-300)), 0.0)
+    g2_grid = np.trapezoid(0.5 * Xv0 ** 2, y, axis=0)
     # tail beyond the grid: E = c X^{-A} f_o (U = v_0 = 0): int_{X_end}^inf E^2 dX = E_end^2 X_end/(2A)
     e2_tail = E[-1] ** 2 * np.exp(lx[-1]) / (2 * A)
-    m_in = y < 0
+    m_in = y <= 0.0
     e2_in = e2_axis + np.trapezoid(((E ** 2 + U ** 2) * X)[m_in], y[m_in], axis=0)
+    # the paper's core lies in the inner region (p. 8): X <= X_R here (closed form on the reference branch)
+    e2_XR = (P_star * f) ** 2 * 1e12 * (5.0 / 6.0) + 16 * eta ** 2 * 1e12
+    g2_XR = v0_ref ** 2 * 1e24 / 4.0
     return {"e2": e2_axis + e2_grid + e2_tail, "g2": g2_axis + g2_grid, "e2_axis": e2_axis, "g2_axis": g2_axis,
-            "e2_tail": e2_tail, "e2_inner_XR": e2_in}
+            "e2_tail": e2_tail, "e2_inner_XR": e2_in, "e2_XR": e2_XR, "g2_XR": g2_XR, "e2_XR_grid_check": e2_in}
 
 
 def eta_quadrature(eta, w, vals, weight_exp, eta_max, n1=4001, n2=6000):
@@ -263,56 +282,61 @@ def eta_quadrature(eta, w, vals, weight_exp, eta_max, n1=4001, n2=6000):
     return tot
 
 
-def norms(G, taus, A_vel=A):
-    """L^2 (core, {q < q*}, truncated-eta divergence study) and L^inf at each tau. A_vel is the velocity power
-    (the control C_A replaces A by 0.85 in the velocity powers only)."""
+def norms(G, taus, A_vel=A, rp=-0.5):
+    """L^2 (core, {q < q*}, truncated-eta divergence study) and L^inf at each tau. A_vel is the tangential velocity
+    power (u_theta, u_z ~ q^{-A_vel}), rp the radial one (u_r ~ q^{rp}, the paper's -1/2). Two regions in X:
+    'core' = the paper's core X <= X_R (inner region, p. 8), 'allX' = the whole radial profile."""
     eta, d, L = G["eta"], G["d"], G["L"]
     w = bary_weights(eta)
     RI = radial_integrals(G)
-    e2, g2 = RI["e2"], RI["g2"]
     p_t = 1.0 + D - 2 * A_vel           # tangential tau-power of the norm^2
-    p_r = D                              # radial
+    p_r = 1.0 + D + 2 * rp               # radial (= D for rp = -1/2)
     w_t = 2 * A_vel - 2 - D
-    w_r = -1.0 - D
-    I_t_core = eta_quadrature(eta, w, e2, w_t, ETA_CORE)
-    I_r_core = eta_quadrature(eta, w, g2, w_r, ETA_CORE)
-    out = {"tau": taus.tolist(), "core_eta_c": ETA_CORE}
-    L2_core = np.sqrt(2 * np.pi * (taus ** p_t * I_t_core + taus ** p_r * I_r_core))
-    L2_core_t = np.sqrt(2 * np.pi * taus ** p_t * I_t_core)
-    L2_core_r = np.sqrt(2 * np.pi * taus ** p_r * I_r_core)
-    out["L2_core"] = L2_core.tolist(); out["L2_core_tangential"] = L2_core_t.tolist(); out["L2_core_radial"] = L2_core_r.tolist()
+    w_r = -2 * rp - 2 - D                # (= -1 - D for rp = -1/2)
+    out = {"tau": taus.tolist(), "core_eta_c": ETA_CORE, "core_X_c": 1e12, "powers": {"p_t": p_t, "p_r": p_r, "w_t": w_t, "w_r": w_r}}
+    regions = {"core": (RI["e2_XR"], RI["g2_XR"]), "allX": (RI["e2"], RI["g2"])}
+    for reg, (e2, g2) in regions.items():
+        I_t = eta_quadrature(eta, w, e2, w_t, ETA_CORE); I_r = eta_quadrature(eta, w, g2, w_r, ETA_CORE)
+        out[f"L2_{reg}"] = np.sqrt(2 * np.pi * (taus ** p_t * I_t + taus ** p_r * I_r)).tolist()
+        out[f"L2_{reg}_tangential"] = np.sqrt(2 * np.pi * taus ** p_t * I_t).tolist()
+        out[f"L2_{reg}_radial"] = np.sqrt(2 * np.pi * taus ** p_r * I_r).tolist()
+        out[f"I_t_{reg}"] = float(I_t); out[f"I_r_{reg}"] = float(I_r)
+    e2, g2 = RI["e2_XR"], RI["g2_XR"]
+    I_t_core, I_r_core = out["I_t_core"], out["I_r_core"]
     # direct per-tau quadrature (q = tau/d at every point, no factorisation) as a quadrature-drift check at 3 taus
     drift = []
     for tau in (taus[0], taus[len(taus) // 2], taus[-1]):
         def integrand_e(e):
             v_e = bary_eval(eta, w, e2, e); v_g = bary_eval(eta, w, g2, e)
             dd = 1 - e ** 2; LL = 1 - 2 * H * e ** 2; q = tau / dd
-            return 2 * np.pi * q ** (1 + D) * (LL / dd) * (q ** (-2 * A_vel) * v_e + q ** (-1) * v_g)
+            return 2 * np.pi * q ** (1 + D) * (LL / dd) * (q ** (-2 * A_vel) * v_e + q ** (2 * rp) * v_g)
         e_a = np.linspace(-ETA_CORE, ETA_CORE, 8001)
         direct = np.sqrt(np.trapezoid(integrand_e(e_a), e_a))
         fact = np.sqrt(2 * np.pi * (tau ** p_t * I_t_core + tau ** p_r * I_r_core))
         drift.append({"tau": float(tau), "direct": float(direct), "factorised": float(fact), "rel_diff": float(abs(direct - fact) / fact)})
     out["L2_core_direct_vs_factorised"] = drift
-    # {q < q*}: d >= tau/q*
-    for qs in Q_STARS:
-        vals = []
-        for tau in taus:
-            eta_max = np.sqrt(max(1.0 - tau / qs, 0.0))
-            if eta_max <= 0.5:
-                vals.append(float("nan")); continue
-            It = eta_quadrature(eta, w, e2, w_t, eta_max); Ir = eta_quadrature(eta, w, g2, w_r, eta_max)
-            vals.append(float(np.sqrt(2 * np.pi * (tau ** p_t * It + tau ** p_r * Ir))))
-        out[f"L2_q_lt_{qs:g}"] = vals
-    # R^3: truncated-eta divergence at one tau
-    tau0 = 1e-3
-    trunc = []
-    for eta_c in (0.9, 0.99, 0.999, 0.9999, 0.99999, 0.999999):
-        It = eta_quadrature(eta, w, e2, w_t, eta_c); Ir = eta_quadrature(eta, w, g2, w_r, eta_c)
-        trunc.append({"eta_c": eta_c, "d_c": 1 - eta_c ** 2, "L2_sq": float(2 * np.pi * (tau0 ** p_t * It + tau0 ** p_r * Ir))})
-    dc = np.array([t["d_c"] for t in trunc]); ns2 = np.array([t["L2_sq"] for t in trunc])
-    slope = np.polyfit(np.log(dc[-4:]), np.log(ns2[-4:]), 1)[0]
-    out["R3_truncated_eta_at_tau_1e-3"] = {"points": trunc, "fitted_dlog(L2^2)/dlog(d_c)_last4": float(slope),
-                                           "predicted": -0.5 + 3 * H, "diverges": bool(slope < -0.4)}
+    # {q < q*}: d >= tau/q*  (both X-regions)
+    for reg, (e2r, g2r) in regions.items():
+        for qs in Q_STARS:
+            vals = []
+            for tau in taus:
+                eta_max = np.sqrt(max(1.0 - tau / qs, 0.0))
+                if eta_max <= 0.5:
+                    vals.append(float("nan")); continue
+                It = eta_quadrature(eta, w, e2r, w_t, eta_max); Ir = eta_quadrature(eta, w, g2r, w_r, eta_max)
+                vals.append(float(np.sqrt(2 * np.pi * (tau ** p_t * It + tau ** p_r * Ir))))
+            out[f"L2_q_lt_{qs:g}" + ("" if reg == "core" else "_allX")] = vals
+        # R^3: truncated-eta divergence at one tau
+        tau0 = 1e-3
+        trunc = []
+        for eta_c in (0.9, 0.99, 0.999, 0.9999, 0.99999, 0.999999):
+            It = eta_quadrature(eta, w, e2r, w_t, eta_c); Ir = eta_quadrature(eta, w, g2r, w_r, eta_c)
+            trunc.append({"eta_c": eta_c, "d_c": 1 - eta_c ** 2, "L2_sq": float(2 * np.pi * (tau0 ** p_t * It + tau0 ** p_r * Ir))})
+        dc = np.array([t["d_c"] for t in trunc]); ns2 = np.array([t["L2_sq"] for t in trunc])
+        slope = np.polyfit(np.log(dc[-4:]), np.log(ns2[-4:]), 1)[0]
+        out["R3_truncated_eta_at_tau_1e-3" + ("" if reg == "core" else "_allX")] = {
+            "points": trunc, "fitted_dlog(L2^2)/dlog(d_c)_last4": float(slope),
+            "predicted_tangential": -0.5 + 3 * H, "predicted_radial": -0.5 + H, "diverges": bool(slope < -0.4)}
     # L^inf: |u|^2 = tau^{-1} d G^2 + tau^{-2A} d^{2A} (E^2 + U^2) on the grid, parabolic refinement in y
     y, lx, E, U, v0 = G["y"], G["lx"], G["E"], G["U"], G["v0"]
     Gr = np.exp(0.5 * (lx - np.log(2.0)))[:, None] * v0          # sqrt(X/2) v_0
@@ -331,22 +355,27 @@ def norms(G, taus, A_vel=A):
     for tau in taus:
         th2 = (tau ** (-2 * A_vel)) * (dA[None, :] ** 2) * E ** 2
         z2 = (tau ** (-2 * A_vel)) * (dA[None, :] ** 2) * U ** 2
-        r2 = (tau ** -1) * d[None, :] * Gr ** 2
+        r2 = (tau ** (2 * rp)) * (d[None, :] ** (-2 * rp)) * Gr ** 2
         s_all = sup_refined(th2 + z2 + r2); s_th = sup_refined(th2); s_r = sup_refined(r2); s_z = sup_refined(z2)
         Linf.append(s_all[0]); Linf_th.append(s_th[0]); Linf_r.append(s_r[0]); Linf_z.append(s_z[0])
         locs.append({"all": s_all[1:], "theta": s_th[1:], "r": s_r[1:], "z": s_z[1:]})
     out["Linf"] = Linf; out["Linf_theta"] = Linf_th; out["Linf_r"] = Linf_r; out["Linf_z"] = Linf_z
     out["Linf_location_y_eta"] = {"first_tau": locs[0], "last_tau": locs[-1]}
-    out["radial_integrals"] = {"e2_at_eta0": float(e2[len(eta) // 2]), "g2_at_eta0": float(g2[len(eta) // 2]),
-                               "e2_axis_share_eta0": float(RI["e2_axis"][len(eta) // 2] / e2[len(eta) // 2]),
-                               "e2_inner_XR_share_eta0": float(RI["e2_inner_XR"][len(eta) // 2] / e2[len(eta) // 2]),
-                               "e2_tail_share_eta0": float(RI["e2_tail"][len(eta) // 2] / e2[len(eta) // 2]),
-                               "I_t_core": float(I_t_core), "I_r_core": float(I_r_core)}
+    j0 = len(eta) // 2
+    out["radial_integrals"] = {"e2_allX_at_eta0": float(RI["e2"][j0]), "g2_allX_at_eta0": float(RI["g2"][j0]),
+                               "e2_XR_closed_form_at_eta0": float(RI["e2_XR"][j0]), "g2_XR_closed_form_at_eta0": float(RI["g2_XR"][j0]),
+                               "e2_XR_grid_vs_closed_form_rel": float(abs(RI["e2_XR_grid_check"][j0] - RI["e2_XR"][j0]) / RI["e2_XR"][j0]),
+                               "e2_axis_share_of_XR_eta0": float(RI["e2_axis"][j0] / RI["e2_XR"][j0]),
+                               "e2_XR_share_of_allX_eta0": float(RI["e2_XR"][j0] / RI["e2"][j0]),
+                               "g2_XR_share_of_allX_eta0": float(RI["g2_XR"][j0] / RI["g2"][j0]),
+                               "e2_tail_share_eta0": float(RI["e2_tail"][j0] / RI["e2"][j0])}
     return out
 
 
 def fit_exponent(taus, vals):
     m = np.isfinite(vals) & (np.asarray(vals) > 0)
+    if m.sum() < 3:
+        return {"slope": float("nan"), "note": "fewer than 3 positive finite values (identically zero norm)"}
     lt, lv = np.log(taus[m]), np.log(np.asarray(vals)[m])
     slope, icpt = np.polyfit(lt, lv, 1)
     resid = lv - (slope * lt + icpt)
@@ -390,10 +419,15 @@ def force_profiles(G, A_vel=A):
     def relerr(a, b, m):
         sc = np.max(np.abs(b[m])) if np.max(np.abs(b[m])) > 0 else 1.0
         return float(np.max(np.abs(a[m] - b[m])) / sc)
+    def loc(a, b, m):
+        err = np.where(m, np.abs(a - b), 0.0); i, j = np.unravel_index(np.argmax(err), err.shape)
+        return [float(y[i]), float(eta[j])]
     interior = np.ones(ny, bool); interior[:3] = False; interior[-3:] = False
     m = np.zeros_like(E, bool); m[interior, 1:-1] = True
     checks = {"K1_rel_max_(4.14)": relerr(K1_lhs, K1_rhs, m), "K2_rel_max_Sn": relerr(K2_lhs, K2_rhs, m),
-              "K0_rel_max_incompressibility": relerr(K0_lhs, K0_rhs, m), "l_minus_lc_note": "l recomputed from H"}
+              "K0_rel_max_incompressibility": relerr(K0_lhs, K0_rhs, m),
+              "K1_loc_y_eta": loc(K1_lhs, K1_rhs, m), "K2_loc_y_eta": loc(K2_lhs, K2_rhs, m), "K0_loc_y_eta": loc(K0_lhs, K0_rhs, m),
+              "note": "relative to the max of the paper's side over the interior; D_X by 2nd-order finite differences on the coarse grid"}
     return {"R_r": R_r, "R_r_ax": R_r_ax, "R_th": R_th, "R_th_ax": R_th_ax, "R_z": R_z, "R_z_ax": R_z_ax, "checks": checks,
             "s2X": s2X}
 
@@ -484,7 +518,7 @@ def physical_check(G, FP, tau, points):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--cache", default=None)
-    ap.add_argument("--quick", action="store_true")
+    ap.add_argument("--quick", action="store_true", help="dy = 4e-3 only; the artefact then marks the refinement sub-gates NOT-INSTANTIATED")
     args = ap.parse_args()
     t0 = time.time()
     dys = (4e-3,) if args.quick else DYS
@@ -497,11 +531,15 @@ def main():
         N = norms(G, taus)
         FP = force_profiles(G)
         FS = force_sup(G, FP, taus)
-        fits = {k: fit_exponent(taus, np.array(N[k])) for k in ("L2_core", "L2_core_tangential", "L2_core_radial", "Linf", "Linf_theta", "Linf_r", "Linf_z")}
+        fits = {k: fit_exponent(taus, np.array(N[k])) for k in ("L2_core", "L2_core_tangential", "L2_core_radial", "L2_allX", "L2_allX_tangential",
+                                                                "L2_allX_radial", "Linf", "Linf_theta", "Linf_r", "Linf_z")}
         for qs in Q_STARS:
-            fits[f"L2_q_lt_{qs:g}"] = fit_exponent(taus, np.array(N[f"L2_q_lt_{qs:g}"]))
+            for suf in ("", "_allX"):
+                fits[f"L2_q_lt_{qs:g}{suf}"] = fit_exponent(taus, np.array(N[f"L2_q_lt_{qs:g}{suf}"]))
         measured["per_dy"][f"{dy:g}"] = {"norms": N, "fits": fits, "force": FS, "force_checks": FP["checks"],
-                                         "profile_gates_G1_G8": G["gates"], "y_tail0": G["y_tail0"], "c_inf": G["c_inf"], "n_y": int(len(G["y"]))}
+                                         "profile_gates_G1_G8": G["gates"], "y_tail0": G["y_tail0"], "c_inf": G["c_inf"], "n_y": int(len(G["y"])),
+                                         "M_roundoff_residual_beyond_pulse": G["M_roundoff_residual_beyond_pulse"], "M_max_on_pulse": G["M_max_on_pulse"],
+                                         "M_residual_rel_to_pulse_scale": G["M_roundoff_residual_beyond_pulse"] / G["M_max_on_pulse"]}
         print(f"[{time.time()-t0:.0f}s] dy={dy}: L2core slope {fits['L2_core']['slope']:.9f} Linf_theta slope {fits['Linf_theta']['slope']:.9f} "
               f"Linf slope {fits['Linf']['slope']:.9f} |f| slope {FS['all_X_ge_Xh']['fit']['slope']:.6f} checks {FP['checks']}")
         if dy == dys[-1]:
@@ -509,7 +547,7 @@ def main():
             measured["K3_physical_space_fd_at_tau_1e-3"] = physical_check(G, FP, 1e-3, pts)
             print(f"[{time.time()-t0:.0f}s] K3:", [round(r["rel_diff"], 6) for r in measured["K3_physical_space_fd_at_tau_1e-3"]])
     # --- refinement stability across dy (relative, in the norm, at every tau)
-    keys = ("L2_core", "Linf", "Linf_theta", "L2_q_lt_0.1")
+    keys = ("L2_core", "L2_allX", "Linf", "Linf_theta", "Linf_r", "L2_q_lt_0.1", "L2_q_lt_0.1_allX")
     fine = measured["per_dy"][f"{dys[-1]:g}"]["norms"]
     stab = {}
     for k in keys:
@@ -520,23 +558,42 @@ def main():
             stab[k][f"dy{dy:g}_vs_dy{dys[-1]:g}_max_rel"] = float(np.max(np.abs(a[mm] - b[mm]) / np.abs(b[mm])))
         stab[k]["slopes_by_dy"] = {f"{dy:g}": measured["per_dy"][f"{dy:g}"]["fits"][k]["slope"] for dy in dys}
     measured["refinement_stability"] = stab
+    if len(dys) < 3:
+        measured["refinement_stability"] = {
+            "status": "NOT-INSTANTIATED",
+            "reason": f"only dy = {list(dys)} ran: the dy = 2e-3 and 1e-3 profile builds (arc6_profile_v1.build, ~3 and ~6 min each) had not "
+                      "completed when the session budget ended; the three-resolution comparison pre-registered in V1/V3 is therefore not measured. "
+                      "The tau-exponents are exact scalings of tau-independent profile integrals and do not depend on dy; what is missing is the "
+                      "1e-6-relative stability of the norm VALUES (quadrature of e2, g2 and the parabolic sup) across dy.",
+            "computed_for_available_dy": stab}
     fsup = {f"{dy:g}": measured["per_dy"][f"{dy:g}"]["force"]["all_X_ge_Xh"]["fit"]["slope"] for dy in dys}
     measured["force_slope_by_dy"] = fsup
     # --- controls at the coarsest dy (their twin: the unmodified run at the same dy)
     dyc = dys[0]
     Gc = profiles[dyc]
     twin = measured["per_dy"][f"{dyc:g}"]
-    NA = norms(Gc, taus, A_vel=0.85)
-    fitA = {k: fit_exponent(taus, np.array(NA[k])) for k in ("L2_core", "Linf_theta", "Linf")}
+    NA = norms(Gc, taus, A_vel=0.85, rp=-0.85)             # every velocity component ~ q^{-0.85} (the prereg's |u|^2 ~ q^{-2A} bookkeeping)
+    fitA = {k: fit_exponent(taus, np.array(NA[k])) for k in ("L2_core", "L2_allX", "Linf_theta", "Linf", "Linf_r")}
+    NAt = norms(Gc, taus, A_vel=0.85)                       # tangential powers only (u_r kept at q^{-1/2}); my first coding of the control
+    fitAt = {k: fit_exponent(taus, np.array(NAt[k])) for k in ("L2_core", "L2_core_tangential", "L2_allX", "Linf_theta", "Linf")}
     GU = profile_fields(dyc, cache=args.cache, drop_U=True)
     NU = norms(GU, taus)
     fitU = {k: fit_exponent(taus, np.array(NU[k])) for k in ("L2_core", "Linf_theta", "Linf", "Linf_r")}
     controls = {
         "C_A_0.85": {"expected": "core L^2 exponent = (1 + D - 2*0.85)/2 = -0.1 - h/2 < 0: the norm DIVERGES (sign flips); L^inf(u_theta) exponent -0.85",
                      "measured": {"L2_core_slope": fitA["L2_core"]["slope"], "L2_core_first_last": [NA["L2_core"][0], NA["L2_core"][-1]],
-                                  "Linf_theta_slope": fitA["Linf_theta"]["slope"], "Linf_slope": fitA["Linf"]["slope"]},
+                                  "L2_allX_slope": fitA["L2_allX"]["slope"],
+                                  "Linf_theta_slope": fitA["Linf_theta"]["slope"], "Linf_slope": fitA["Linf"]["slope"], "Linf_r_slope": fitA["Linf_r"]["slope"]},
                      "twin": {"L2_core_slope": twin["fits"]["L2_core"]["slope"], "Linf_theta_slope": twin["fits"]["Linf_theta"]["slope"]},
-                     "fired": bool(fitA["L2_core"]["slope"] < 0 and abs(fitA["L2_core"]["slope"] - (-0.1 - 0.5 * H)) < 1e-4)},
+                     "fired": bool(fitA["L2_core"]["slope"] < 0 and abs(fitA["L2_core"]["slope"] - (-0.1 - 0.5 * H)) < 1e-4),
+                     "variant_tangential_powers_only": {
+                         "note": "my first coding of this control changed only u_theta, u_z ~ q^{-0.85} and kept u_r ~ q^{-1/2}; on the "
+                                 "all-X region the unchanged radial part (the pulse annulus' flux) dominates by ~1e109 and the combined slope does "
+                                 "not move, on the X_R core the two parts cross inside the window (mixed fit, local slope -> -0.1 at small tau). "
+                                 "Recorded, not used for 'fired'; the prereg's bookkeeping |u|^2 ~ q^{-2A} scales every component.",
+                         "L2_core_slope": fitAt["L2_core"]["slope"], "L2_core_tangential_slope": fitAt["L2_core_tangential"]["slope"],
+                         "L2_core_local_slope_last": fitAt["L2_core"].get("local_slope_last"), "L2_allX_slope": fitAt["L2_allX"]["slope"],
+                         "Linf_theta_slope": fitAt["Linf_theta"]["slope"], "Linf_slope": fitAt["Linf"]["slope"]}},
         "C_U_zero": {"expected": "V_0 = 0 (W = 1, A_X(U) = 0), u_r = 0: the L^inf location moves from the u_r point to the u_theta peak; exponent exactly -A",
                      "measured": {"Linf_slope": fitU["Linf"]["slope"], "Linf_r_max": float(np.nanmax(NU["Linf_r"])),
                                   "Linf_location_first_tau": NU["Linf_location_y_eta"]["first_tau"], "L2_core_slope": fitU["L2_core"]["slope"],
@@ -554,9 +611,13 @@ def main():
     v1_all_slopes_ok = all(abs(measured["per_dy"][f"{dy:g}"]["fits"]["Linf_theta"]["slope"] + A) < 1e-4 and
                            abs(measured["per_dy"][f"{dy:g}"]["fits"]["L2_core"]["slope"] - (0.25 - 1.5 * H)) < 1e-4 for dy in dys)
     V1 = "YES" if (v1_linf and v1_l2 and v1_stab and v1_all_slopes_ok) else "NO"
+    if len(dys) < 3:
+        V1 = "NO (exponent sub-gates pass; refinement sub-gate NOT-INSTANTIATED, one resolution only)"
     fslopes = list(fsup.values())
     V2 = "YES" if all(abs(s - (-1.5 - H)) < 0.01 for s in fslopes) else "NO"
     V3 = "YES" if v1_stab else "NO"
+    if len(dys) < 3:
+        V3 = "NO (refinement stability NOT-INSTANTIATED, one resolution only; the statement, the drifts and the identity checks are reported)"
     controls["twin_passes_V1"] = bool(abs(twin["fits"]["Linf_theta"]["slope"] + A) < 1e-4 and abs(twin["fits"]["L2_core"]["slope"] - (0.25 - 1.5 * H)) < 1e-4)
     gates = {
         "V1": {"answer": V1, "Linf_theta_slope_finest": fine_fits["Linf_theta"]["slope"], "target": -A, "tol": 1e-4,
@@ -604,18 +665,26 @@ def main():
            ],
            "gate_answer": None, "tier": "This is Tier 2, not a proof.", "runtime_s": time.time() - t0}
     fs = measured["per_dy"][f"{dys[-1]:g}"]
+    if len(dys) >= 3:
+        ref_txt = (f"refinement: max relative change of the norms between dy = 4e-3, 2e-3 and 1e-3 is "
+                   f"{max((v for k in ('L2_core','Linf_theta') for kk, v in stab[k].items() if kk != 'slopes_by_dy'), default=float('nan')):.2e}")
+        v3_txt = "the norm fits' refinement stability is as reported in V1"
+    else:
+        ref_txt = (f"refinement: NOT-INSTANTIATED — only dy = {list(dys)} ran within the budget (the dy = 2e-3 and 1e-3 profile builds did not "
+                   "complete), so the pre-registered three-resolution stability of the norm values is not measured; the exponents are exact "
+                   "scalings and do not depend on dy")
+        v3_txt = "the refinement stability of the norm values is NOT-INSTANTIATED (one resolution)"
     out["gate_answer"] = (
         f"V1 {V1}: on the finest grid ||u_theta||_inf ~ tau^{fine_fits['Linf_theta']['slope']:.9f} (target -A = {-A}), full |u| ~ "
         f"tau^{fine_fits['Linf']['slope']:.9f}, u_r ~ tau^{fine_fits['Linf_r']['slope']:.9f}; the core L^2 norm ~ tau^{fine_fits['L2_core']['slope']:.9f} "
-        f"(bookkeeping 1/4 - 3h/2 = {0.25 - 1.5*H}); refinement: max relative change of the norms between dy = 4e-3, 2e-3 and 1e-3 is "
-        f"{max(v for k in ('L2_core','Linf_theta') for kk, v in stab[k].items() if kk != 'slopes_by_dy'):.2e}. The L^2(R^3) norm of the "
+        f"(bookkeeping 1/4 - 3h/2 = {0.25 - 1.5*H}); {ref_txt}. The L^2(R^3) norm of the "
         f"un-cut-off leading field is infinite (truncated-eta divergence exponent {fs['norms']['R3_truncated_eta_at_tau_1e-3']['fitted_dlog(L2^2)/dlog(d_c)_last4']:.4f}, "
         f"predicted {-0.5 + 3*H}); on the paper's domain q < 0.1 the norm is bounded and tends to a constant (local slope at tau = 1e-6: "
         f"{fs['fits']['L2_q_lt_0.1']['local_slope_last']:.4f}). V2 {V2}: ||f^(0)||_inf ~ q^{fs['force']['all_X_ge_Xh']['fit']['slope']:.6f} "
         f"(target -3/2 - h), from {fs['force']['all_X_ge_Xh']['sup'][0]:.3e} at tau = 1e-1 to {fs['force']['all_X_ge_Xh']['sup'][-1]:.3e} at tau = 1e-6: "
         f"the leading order's force is not bounded at t = 1, the paper's corrected force is claimed bounded and flat; the gap is 3/2 + h powers "
         f"of q (and every power for flatness). V3 {V3}: T* = 1 is prescribed and 'T* stable under refinement' cannot be tested on a prescribed "
-        f"field; the norm fits are refinement-stable as stated and the quadrature drift (direct vs factorised) is "
+        f"field; {v3_txt}; the quadrature drift (direct vs factorised) is "
         f"{max(dd['rel_diff'] for dd in fs['norms']['L2_core_direct_vs_factorised']):.2e}, incompressibility residual "
         f"{fs['force_checks']['K0_rel_max_incompressibility']:.2e}. Controls: C_A fired = {controls['C_A_0.85']['fired']}, C_U fired = "
         f"{controls['C_U_zero']['fired']}, twin passes V1 = {controls['twin_passes_V1']}. This is Tier 2, not a proof.")
