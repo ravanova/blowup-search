@@ -33,13 +33,9 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS CLOSED AND LANDED (legs 423–434, 2026-09-10). `R7` LANDED: `writeup/6_reproduction/`. NO SUCCESSOR SCHEDULED.**
+## LIVE — §3g CONDUCTOR. **ARC 6 SECOND PASS CLOSED AND LANDED (legs 423–435, 2026-09-10). `R7` LANDED: `writeup/6_reproduction/`. NO SUCCESSOR SCHEDULED.**
 
-**Mode:** `ORCHESTRATION.md` **§3g CONDUCTOR**, wave sizing **5** by user ruling (recorded in §3g
-beside its original reason; `CORRECTIONS.md` §67). The charter arrived while `R3` was mid-flight
-under the solo charter; `R0`–`R2` (legs 423–425) were already on `main`. The conductor charter is
-applied **forward** (§67): landed units are not redone; `R2` is **re-read by five fresh shards** and
-reconciled; `R3` stayed the Conductor's serial unit and has landed (this commit).
+**Mode paragraph** retired VERBATIM 2026-09-10 (leg 435) under §3j → this file, `## Superseded — mode paragraph`.
 
 **Gates answered so far** — retired VERBATIM 2026-09-10 (leg 433) under §3j → this file, `## Superseded — gates-answered paragraph`; the live table is `STATE.md`'s arc-6 block.
 
@@ -118,9 +114,9 @@ six controls fired; the prereg was amended on a derivation before any number. Ti
 
 **WAVE 4 — CLOSED (leg 433, §71): 11 of 12 signals `NOT EVIDENCE` by the pre-committed adversary rule; V2 `EVIDENCE`.**
 **`R7` LANDED (leg 434):** quartet in `writeup/6_reproduction/` (TECHNICAL, BLOG, `reproduction_evidence.py`, fig113/114),
-INDEX and README rows, STATE block retired verbatim under §3j, verdict paragraph in all three. **The Lean build the
-Conductor continued in the background had not reached the theorem's module when `R7` landed; if it does, the kernel
-check is a dated addendum to `leg_431.md` — nothing in `R7` depends on it.** No successor scheduled; the five open
+INDEX and README rows, STATE block retired verbatim under §3j, verdict paragraph in all three. **The Lean build the Conductor
+continued reached the theorem after `R7` landed (leg 435): both exported theorems accepted by the kernel with
+`[propext, Classical.choice, Quot.sound]` — `R6`(a) `ESTABLISHED-HERE`, (b)–(e) unchanged; addendum `leg_431.md` §7.** No successor scheduled; the five open
 escalations above are unchanged and unruled. **No wall moved. No `L1→L4` link moved. Clay ~0.05%.**
 
 **Open escalations:** the five rows above, unchanged; row 1 still carries `U1`'s measured fact and
@@ -1703,4 +1699,12 @@ and committing it on its worktree branch (not pushed):**
 `R3` acyclic `YES`, complete `NO-AND-HERE-ARE-THE-DANGLING-NODES` (Remark B.9; 134 labels in
 unnumbered prose; **Propositions 9.5/9.6 never cited by anything downstream**), spine through
 §4/§7/§9 **refuted by citation, confirmed by equation**, prereg 4 of 8 (§68).
+
+## Superseded — mode paragraph, retired VERBATIM from the LIVE block 2026-09-10 (leg 435) under §3j
+
+**Mode:** `ORCHESTRATION.md` **§3g CONDUCTOR**, wave sizing **5** by user ruling (recorded in §3g
+beside its original reason; `CORRECTIONS.md` §67). The charter arrived while `R3` was mid-flight
+under the solo charter; `R0`–`R2` (legs 423–425) were already on `main`. The conductor charter is
+applied **forward** (§67): landed units are not redone; `R2` is **re-read by five fresh shards** and
+reconciled; `R3` stayed the Conductor's serial unit and has landed (this commit).
 

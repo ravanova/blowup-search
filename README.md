@@ -56,7 +56,9 @@ claim in the repository is tiered, gated, and rebuildable from committed data.
 > `10⁻⁹`); its closure and cone do **not** reproduce at any `λ` a grid reaches — the paper's own asymptotics
 > put them at `λ ≲ 3·10⁻⁴`, `√λP_* ≪ 1`, and its outer-edge powers on a collar `δ ≲ 10⁻⁶⁹`. Measured, the
 > Lean is `sorry`-free outside its challenge placeholders, source-covers all 79 statements, exports
-> Fefferman's (C)/(D) — **strictly weaker than Theorem 1.1** — and **no kernel check of it was reached**.
+> Fefferman's (C)/(D) — **strictly weaker than Theorem 1.1** — and, in a build the Conductor completed after the
+> agents reported (leg 435), **both exported theorems are accepted by the Lean kernel with axioms
+> `[propext, Classical.choice, Quot.sound]`** — one run, one container, unreplayed.
 > Wave 4's adversary faked eleven of twelve pre-registered signals, so they are not evidence. **Nothing
 > measured contradicts the manuscript; nothing measured proves it; no wall moved.** Tier 2 throughout.
 > [TECHNICAL_REPRODUCTION.md](writeup/6_reproduction/TECHNICAL_REPRODUCTION.md) ·

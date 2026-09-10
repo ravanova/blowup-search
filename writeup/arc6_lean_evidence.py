@@ -64,6 +64,16 @@ check(x["mathlib_rev_agree"] and x["sorry_only_in_comparator_challenges"] and x[
 check(x["no_agent_ran_a_kernel_check"] and x["kernel_verdicts"] == {"1": "NOT-ESTABLISHED", "3": "NOT-ESTABLISHED"}, "no agent ran a kernel check; both kernel verdicts NOT-ESTABLISHED")
 check(all(a.get("could_not_determine") for a in A.values()), "every agent lists what it could not determine")
 
+print("== 3b. the Conductor's kernel check (leg 435 addendum), banked verbatim")
+kc = M.LD / "kernel_check_conductor.json"
+if kc.exists():
+    K = json.loads(kc.read_text())
+    check(K["result"]["navier_stokes_breakdown_R3_axioms"] == ["propext", "Classical.choice", "Quot.sound"] == K["result"]["navier_stokes_breakdown_periodic_axioms"] and K["result"]["exit_code"] == 0, "both exported theorems depend on exactly [propext, Classical.choice, Quot.sound]")
+    check("depends on axioms: [propext, Classical.choice, Quot.sound]" in K["output_verbatim"] and K["clone_head"].startswith("8937a8f4") and K["build_state_at_check"]["error_lines_in_build_log"] == 0, "output banked verbatim; same clone HEAD; zero build errors")
+    check("ESTABLISHED-HERE" in J and "§7. ADDENDUM" in J and "UNVERIFIED" in J, "the journal's §7 addendum records it as ESTABLISHED-HERE and UNVERIFIED by a second agent")
+    check("addendum" in K["run_by"].lower() or "after the five R6 agents" in K["run_by"], "the artefact says who ran it and when")
+else:
+    print("  [----] no kernel_check_conductor.json — (a) stands as the agents left it")
 print("== 4. the journal quotes what the artefacts hold")
 for tok in ["NOT-ESTABLISHED", "WEAKER", "74", "4 `sorry`", "7 PASS", "UNVERIFIED", "no kernel check", "13.6 min", "2409", "73 dead", str(b["oleans_after"]), "never run"]:
     check(tok in J, f"journal quotes {tok!r}")

@@ -27,15 +27,16 @@ direction check (seven questions, in every integration commit, per unit); **§3j
   `CLAY_OBLIGATIONS.md` §6 names the two obligations with **no known method**.
 - **Clay odds ~0.05%**, unmoved. **No `L1 → L4` link has EVER moved, in over 410 legs.** **The cheapest unit that could move one: NO SUCH UNIT IS KNOWN** — `CLAY_OBLIGATIONS.md` §6 names two obligations with **no known method**, every landed unit is Tier 2, and nothing in `OPTIONS.md` is priced to deliver a certified result.
 
-## ⚠⚠ ARC 6 — SECOND PASS **CLOSED AND LANDED 2026-09-10**, §3g CONDUCTOR ×5, legs 423–434. Block retired VERBATIM → `WALLS_HISTORY.md` §STATE-ARC6-CONDUCTOR. Quartet: `writeup/6_reproduction/`.
+## ⚠⚠ ARC 6 — SECOND PASS **CLOSED AND LANDED 2026-09-10**, §3g CONDUCTOR ×5, legs 423–435. Block retired VERBATIM → `WALLS_HISTORY.md` §STATE-ARC6-CONDUCTOR. Quartet: `writeup/6_reproduction/`.
 
 **The verdict (`R7`):** all 79 statements read twice (solo + five blind shards) and closing as the manuscript says;
 the 58-node spine re-derived, 0 `GAP`, **10 nodes `VERIFIED`** blind; Lemma 4.8's profile instantiated from the
 paper's schedule — constants, exponents, datum, tail stress reproduce (two routes to 10⁻⁹); closure and cone
 do **not** at any computable `λ` (paper's regime `λ ≲ 3·10⁻⁴`, `√λP_* ≪ 1`; edge powers on a `10⁻⁶⁹` collar); the Lean
-measured: kernel **`NOT-ESTABLISHED`**, top-level statement **strictly weaker** than Thm 1.1; wave 4's adversary
+measured: **kernel check REACHED (leg 435): both exported theorems accepted with `[propext, Classical.choice, Quot.sound]`** — for a
+top-level statement **strictly weaker** than Thm 1.1 (Fefferman (C)/(D)); wave 4's adversary
 faked **11 of 12** signals. **Nothing contradicts the manuscript; nothing proves it; no wall moved.**
-`CORRECTIONS.md` §66–§71. Every Conductor answer `UNVERIFIED`. **Tier 2. No `L1→L4` link moved. Clay ~0.05%.**
+`CORRECTIONS.md` §66–§71. Every Conductor answer `UNVERIFIED` (the kernel check included: one run, one container). **Tier 2. No `L1→L4` link moved. Clay ~0.05%.**
 **No successor scheduled.** Open escalations (ORCH_STATE rows 1–5) unchanged and unruled.
 
 ## THE LANES — **RE-RANKED 2026-08-19 AT THE STOP, on what is measured NOW** (order unchanged; Lane L DEMOTED); re-earned per unit under §3i
