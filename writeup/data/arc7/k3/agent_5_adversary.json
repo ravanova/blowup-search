@@ -1,0 +1,790 @@
+{
+ "schema": "arc7_k3_v1",
+ "agent": "5_adversary",
+ "leg": 439,
+ "pages_read": {
+  "manuscript": "none directly; the adversary is blind by design and worked from experiments/journal/leg_439_prereg.md section 3's gate definitions and the amendment, plus a line-level grep of writeup/data/arc6/manuscript_pages.txt to confirm the cited statements exist (Proposition 7.5/(7.24)-(7.26), Proposition 9.1, Propositions 9.5/9.6, (4.7)-(4.8)/Proposition 4.2, Lemma A.8). No page-level reading was done and none is claimed.",
+  "contract": [
+   "experiments/journal/leg_439_prereg.md",
+   "experiments/journal/leg_439_prereg_amend.md"
+  ],
+  "pinned_code_imported": [
+   "experiments/arc6_w4_support.py (stress)"
+  ]
+ },
+ "claimed": {
+  "written_before_the_run": true,
+  "page": "gate definitions read from experiments/journal/leg_439_prereg.md section 3 (pinned to the manuscript at Proposition 7.5/(7.24)-(7.26) p. 610-line block, Proposition 9.1, (4.7)-(4.8)/Proposition 4.2, Lemma A.8; page numbers as cited by the prereg itself, which the adversary did not re-derive)",
+  "equation": "Q1 (7.26); Q2 Prop 9.1's q^{2h} table; Q3 Props 9.5/9.6's h/10; Q4 (4.7)-(4.8) + Prop 4.2, R^(0) = -div(q^{-A-1/2} T_0); Q5 Lemma A.8's B = 0 (heat) vs -(2+2h) (no heat)",
+  "route_A_prediction_before_the_run": {
+   "Q1": "FAKEABLE. (7.26) is an algebraic identity in the pulse amplitudes; it holds for ANY amplitude assignment, so feeding both routes the same WRONG stress leaves the agreement at machine precision.  Separately, a route-B pulse contaminated at Fourier harmonic 256 is invisible at every M in {16,64,256} because 256/M is an integer, so 'oversampling independent of N' does not close the aliasing hole it was written to close.",
+   "Q2": "FAKEABLE. Nothing in route B forbids h from entering as an input exponent; a ratio defined as C*q^{2h} returns slope = 2h at both h to roundoff.  Predicted further: at h = 1e-7 the gate is passable ONLY by an object that is analytic in h, because 5% of 2h = 1e-8 is below the relative noise any honest computation of a ratio carries.",
+   "Q3": "FAKEABLE. The gate reads the exponent gain only; a genuine linear solve of the WRONG problem, with h carried by an operator weight q^{h/10}, returns h/10 exactly and fires both planted controls.",
+   "Q4": "FAKEABLE. -(3/2+h) is prefactor bookkeeping: -(A+1/2) from q^{-A-1/2} and -1/2 from r = sqrt(2qX) in the divergence.  Any profile whatsoever gives it.  The pointwise leg compares two differentiations of the SAME field, so a wrong field passes it.",
+   "Q5": "FAKEABLE. B beyond X_b is a constant of the construction, (2+2h)(s_h - 1); it cannot see rho, the cutoff shape, or the profile's normalisation, so an object wrong in all three returns 0 (heat) and -(2+2h) (no heat) exactly."
+  },
+  "what_would_falsify_the_prediction": "any of the five gates rejecting the wrong object constructed for it, i.e. NOT FAKEABLE"
+ },
+ "routes": {
+  "A": {
+   "method": "for the adversary, route A is the gate's own route-A prediction as written in prereg section 3: (7.26)'s closed form (Q1), the exponent 2h (Q2), the gain h/10 (Q3), -(3/2+h) and Prop 4.2's profile-space force (Q4), B = 0 / -(2+2h) (Q5).  It is taken verbatim, not re-derived."
+  },
+  "B": {
+   "method": "a deliberately WRONG or under-resolved implementation of route B, built to satisfy route A's prediction to the pre-registered tolerance.  Per gate: a fabricated amplitude field and a harmonic-256 contaminant (Q1); an asserted q^{2h} with no profile (Q2); a genuine tridiagonal solve of the wrong problem with the gain in the operator's weight (Q3); a Gaussian stand-in stress (Q4); the pinned builder called with rho 170x too large and the wrong cutoff (Q5)."
+  }
+ },
+ "gates": {
+  "note": "these are NOT answers to Q1-Q5.  The adversary does not measure the physics; it measures whether the gate can be made to say YES by a run known to be wrong.  Every 'gate_YES: true' below is a YES obtained from a wrong object.",
+  "Q1": {
+   "verdict": "FAKEABLE",
+   "recipe": [
+    "F1a WRONG PROFILE: feed BOTH routes the same fabricated amplitude field amp = 137*exp(-0.05(y-2.6)^2)*(3-y) instead of the pinned Definition 6.4 amplitudes (max ratio to the stand-in truth = 1.58e+03).  (7.26) is an identity in the amplitudes, so the two routes still agree at roundoff and both controls still fire.",
+    "F1b INVISIBLE HARMONIC: keep the amplitudes, add spur*sin(256*theta) to route B's pulse with spur = 0.60.  256/M is an integer for M in {16,64,256}, so the contaminant vanishes at every quadrature node while contributing spur^2/2 = 0.18 to the true averaged product (31% of the typical entry 0.577)."
+   ],
+   "numbers": {
+    "F1a_wrong_profile": {
+     "rel_err_theta_theta": {
+      "16": 2.3745545965886385e-06,
+      "64": 3.5365961926880767e-16,
+      "256": 3.5365961926880767e-16
+     },
+     "rel_err_z": {
+      "16": 2.6912356368003697e-06,
+      "64": 4.954771440219917e-16,
+      "256": 4.954771440219917e-16
+     },
+     "slope_theta_theta": -8.161144093592632,
+     "slope_z": -8.084682788761105,
+     "gate_YES": true
+    },
+    "reference_twin_right_profile": {
+     "rel_err_theta_theta": {
+      "16": 3.543417333401402e-06,
+      "64": 2.5493333471958635e-16,
+      "256": 2.5493333471958635e-16
+     },
+     "rel_err_z": {
+      "16": 3.891278056020542e-06,
+      "64": 4.2055721782616675e-16,
+      "256": 4.2055721782616675e-16
+     },
+     "slope_theta_theta": -8.423575577581452,
+     "slope_z": -8.276805731604986,
+     "gate_YES": true
+    },
+    "F1a_max_amplitude_ratio_fake_over_twin": 1577.9111464684886,
+    "F1b_invisible_harmonic": {
+     "rel_err_theta_theta": {
+      "16": 3.543417362633758e-06,
+      "64": 2.4303644576600566e-14,
+      "256": 2.3793777907161393e-14
+     },
+     "rel_err_z": {
+      "16": 3.891278088193169e-06,
+      "64": 2.3551204198265338e-14,
+      "256": 2.2710089762613002e-14
+     },
+     "slope_theta_theta": -6.7874954515009716,
+     "slope_z": -6.838083859046126,
+     "gate_YES": true
+    },
+    "F1b_spur": 0.6,
+    "F1b_missed_contribution_absolute": 0.18,
+    "F1b_typical_true_entry": 0.5765684688259941,
+    "F1b_missed_as_fraction_of_typical_entry": 0.31219189000486813,
+    "F1c_band_limited_pulse_puts_the_slope_criterion_out_of_reach": {
+     "rel_err": {
+      "16": 1e-17,
+      "64": 1e-17,
+      "256": 1e-17
+     },
+     "slope": -5.724829171916046e-15
+    }
+   },
+   "controls_against_the_fake": {
+    "phase_shift_pi_over_2_on_F1a": {
+     "rel_err_at_M256": 0.37970015717141203,
+     "fired_must_fail_gate": true
+    },
+    "amplitude_halved_on_F1a": {
+     "rel_err_at_M256": 0.75,
+     "expected_0.75_pm_0.01": true,
+     "fired_must_fail_gate": true
+    },
+    "phase_shift_pi_over_2_on_F1b": {
+     "rel_err_at_M256": 0.31933721984792596,
+     "fired_must_fail_gate": true
+    },
+    "amplitude_halved_on_F1b": {
+     "rel_err_at_M256": 0.7500000000000117,
+     "fired_must_fail_gate": true
+    }
+   },
+   "what_the_gate_still_constrains": "the phase and the amplitude SCALE of route B's own pulses relative to route A's closed form, and any contaminant at a harmonic that is not a multiple of every M.  It does not constrain which stress the amplitudes came from.",
+   "runtime_s": 0.021889209747314453
+  },
+  "Q2": {
+   "verdict": "FAKEABLE",
+   "recipe": [
+    "F2 BUILT-IN GAIN: define the subleading/leading ratio as R(q) = 4.2 * q^{2h} and fit its log-log slope over q in {1e-2,1e-3,1e-4}.  Nothing is solved, no profile is read, h is an input exponent.  Route B as pre-registered does not forbid this -- only Q3's route B carries the 'never as an input gain' clause.",
+    "F2b the same with a fabricated, q-dependent prefactor 1.7e3*exp(-0.3 log10(q)^2), which the slope gate cannot see."
+   ],
+   "numbers": {
+    "F2_built_in_gain": {
+     "h=1e-07": {
+      "slope": 1.9999999989095617e-07,
+      "target_2h": 2e-07,
+      "rel_dev": 5.452190939309341e-10,
+      "gate_YES": true
+     },
+     "h=0.001": {
+      "slope": 0.0020000000000000026,
+      "target_2h": 0.002,
+      "rel_dev": 1.3010426069826053e-15,
+      "gate_YES": true
+     }
+    },
+    "F2b_wrong_prefactor": {
+     "h=1e-07": {
+      "slope": 0.7817302674258527,
+      "rel_dev": 3908650.3371292637,
+      "gate_YES": false
+     },
+     "h=0.001": {
+      "slope": 0.7837300674258535,
+      "rel_dev": 390.86503371292673,
+      "gate_YES": false
+     }
+    },
+    "max_relative_error_in_the_ratio_that_still_passes": {
+     "h=1e-07": 2.302585133673318e-08,
+     "h=0.001": 0.0002302585052301742
+    }
+   },
+   "controls_against_the_fake": {
+    "constant_ratio": {
+     "per_h": {
+      "h=1e-07": {
+       "slope": -5.590894229161889e-17,
+       "gate_YES": false
+      },
+      "h=0.001": {
+       "slope": -5.590894229161889e-17,
+       "gate_YES": false
+      }
+     },
+     "fired_must_fail_gate": true
+    },
+    "ratio_times_q_0.04": {
+     "per_h": {
+      "h=1e-07": {
+       "slope": 0.04000019999999992,
+       "gate_YES": false
+      },
+      "h=0.001": {
+       "slope": 0.04199999999999995,
+       "gate_YES": false
+      }
+     },
+     "fired_must_fail_gate": true
+    }
+   },
+   "what_the_gate_still_constrains": "a constant ratio and a q^{0.04} drift are both rejected at both h, as pre-registered.  What it does not constrain is WHERE the exponent came from; and at h = 1e-7 the tolerance 0.05*2h = 1e-8 admits only objects analytic in h (see the knife-edge number).",
+   "runtime_s": 0.02360391616821289
+  },
+  "Q3": {
+   "verdict": "FAKEABLE",
+   "recipe": [
+    "F3 GAIN IN THE WEIGHT: build a real tridiagonal solve L c = r0 on a 201-point annulus grid (L = -d^2/ds^2 + m^2, Dirichlet), then report the new residual r1 = r0 - L c + W(q) * (0.35 L c) with W(q) = q^{h/10}.  h never appears as a multiplicative 'gain' on the answer -- it is the operator's weight, which route B explicitly permits -- and the measured exponent gain is h/10 to roundoff at all three h.  The problem solved is not the paper's section 8-9 mean-correction solve; nothing in the gate looks at which problem was solved."
+   ],
+   "numbers": {
+    "per_h": {
+     "h=0.1": {
+      "exponent_before": 1.0,
+      "exponent_after": 1.0099999999998106,
+      "gain": 0.009999999999810605,
+      "route_A_target_h_over_10": 0.01,
+      "rel_dev": 1.8939537438367182e-11,
+      "gain_over_h": 0.09999999999810605,
+      "gate_YES": true
+     },
+     "h=0.03": {
+      "exponent_before": 1.0,
+      "exponent_after": 1.002999999999825,
+      "gain": 0.0029999999998249205,
+      "route_A_target_h_over_10": 0.003,
+      "rel_dev": 5.835985629939107e-11,
+      "gain_over_h": 0.09999999999416402,
+      "gate_YES": true
+     },
+     "h=0.01": {
+      "exponent_before": 1.0,
+      "exponent_after": 1.0009999999998285,
+      "gain": 0.0009999999998284714,
+      "route_A_target_h_over_10": 0.001,
+      "rel_dev": 1.715285899428487e-10,
+      "gain_over_h": 0.09999999998284714,
+      "gate_YES": true
+     }
+    },
+    "all_three_h_pass": true
+   },
+   "controls_against_the_fake": {
+    "zero_correction": {
+     "gain": 0.0,
+     "fired_must_fail_gate": true
+    },
+    "source_negated_at_q=1e-2": {
+     "residual_before": 0.011838374550258322,
+     "residual_after": 0.019719803126406872,
+     "ratio_after_over_before": 1.6657525948929004,
+     "fired_residual_grows": true
+    }
+   },
+   "what_the_gate_still_constrains": "that SOME q-dependent weight proportional to h/10 in the exponent is present, and that the correction is not identically zero and is applied with the right sign.  It does not constrain the operator, the source, or the problem being solved.",
+   "runtime_s": 0.026307106018066406
+  },
+  "Q4": {
+   "verdict": "FAKEABLE",
+   "recipe": [
+    "F4 WRONG FIELD: replace the pinned T_0 by two Gaussians, T_theta = exp(-((X-2)^2+eta^2))(1+0.25 cos 3eta), T_z = 0.4 exp(-0.5(X-1.7)^2) sin 2eta, keep only the paper's prefactor q^{-A-1/2} with A = 1/2 + h.  Route A differentiates in the physical variable r by centred differences; route B differentiates the profile in X and converts with dr = (q/r) dX.  Both legs of the gate pass: the pointwise agreement is a comparison of two differentiations of the SAME field, and the exponent is -(A+1/2) - 1/2 = -(3/2+h) as pure prefactor bookkeeping, which no profile can change.",
+    "F4b note: at h = 1e-7 the target -(3/2+1e-7) sits 1e-7 from -3/2 while the tolerance is 1e-4, so that leg is passed identically by h = 0 -- it carries no information about h."
+   ],
+   "numbers": {
+    "h=1e-07": {
+     "per_q": {
+      "q=0.01": {
+       "rel_theta": 7.959990669346136e-08,
+       "rel_z": 3.8318271608263276e-08,
+       "supA": 2275.55858261621,
+       "supB": 2275.5586708579262
+      },
+      "q=0.001": {
+       "rel_theta": 7.959893118817495e-08,
+       "rel_z": 3.831796402864758e-08,
+       "supA": 71959.497271428,
+       "supB": 71959.50006184998
+      },
+      "q=0.0001": {
+       "rel_theta": 7.95981016140763e-08,
+       "rel_z": 3.8316916534331833e-08,
+       "supA": 2275559.6305511207,
+       "supB": 2275559.718791661
+      }
+     },
+     "exponent_routeA": -1.5000001000001166,
+     "exponent_routeB": -1.5000001000000012,
+     "target_exponent": -1.5000001,
+     "exponent_dev_A": 1.1657341758564144e-13,
+     "exponent_dev_B": 1.1102230246251565e-15,
+     "worst_pointwise_rel": 7.959990669346136e-08,
+     "stencil_refinement": {
+      "dr_scale=4": 1.2735896675053181e-06,
+      "dr_scale=2": 3.1839694095980867e-07,
+      "dr_scale=1": 7.959893118817495e-08
+     },
+     "gate_YES": true
+    },
+    "h=0.001": {
+     "per_q": {
+      "q=0.01": {
+       "rel_theta": 7.959979468898826e-08,
+       "rel_z": 3.831828069131567e-08,
+       "supA": 2286.0610310295133,
+       "supB": 2286.061119678497
+      },
+      "q=0.001": {
+       "rel_theta": 7.95989250794536e-08,
+       "rel_z": 3.831791272139312e-08,
+       "supA": 72458.24662485342,
+       "supB": 72458.24943461733
+      },
+      "q=0.0001": {
+       "rel_theta": 7.959801495724062e-08,
+       "rel_z": 3.8317022943452917e-08,
+       "supA": 2296613.0093140784,
+       "supB": 2296613.098370525
+      }
+     },
+     "exponent_routeA": -1.5010000000001649,
+     "exponent_routeB": -1.5010000000000014,
+     "target_exponent": -1.501,
+     "exponent_dev_A": 1.6497914145929826e-13,
+     "exponent_dev_B": 1.5543122344752192e-15,
+     "worst_pointwise_rel": 7.959979468898826e-08,
+     "stencil_refinement": {
+      "dr_scale=4": 1.2735896365238775e-06,
+      "dr_scale=2": 3.1839690338759e-07,
+      "dr_scale=1": 7.95989250794536e-08
+     },
+     "gate_YES": true
+    }
+   },
+   "controls_against_the_fake": {
+    "A_to_A_plus_0.1": {
+     "exponent_shift_routeA": -0.1000000000000425,
+     "exponent_shift_routeB": -0.09999999999999987,
+     "expected": -0.1,
+     "fired_moved_by_minus_0.1": true
+    },
+    "drop_Tz_in_routeB": {
+     "rel_z_mismatch": 1.0,
+     "fired_mismatch_gt_1e-2": true
+    }
+   },
+   "what_the_gate_still_constrains": "that route B's algebra converts dX to dr correctly, that the prefactor exponent A is the one claimed, and (at h = 1e-3 only) that h is in the prefactor.  It does not constrain the profile at all.",
+   "runtime_s": 0.10090446472167969
+  },
+  "Q5": {
+   "verdict": "FAKEABLE",
+   "recipe": [
+    "F5 WRONG OBJECT, RIGHT CONSTANT: call the pinned builder arc6_w4_support.stress(h, cutoff=..., heat=..., c_o=...) with c_o = 17 (tail amplitude rho = c_o*h is 170x the paper's) and/or cutoff='poly' (psi = (delta/2)^4, not the paper's exponential cutoff), then read B_hat beyond y = 3.  Both legs pass at both h and at every wrong parameter: B beyond X_b is the construction's own constant (2+2h)(s_h - 1), which does not depend on rho, on the cutoff shape, or on the profile's normalisation.  The number the gate reads is inserted by the construction, not measured from the object."
+   ],
+   "numbers": {
+    "twin_paper_object": {
+     "h=1e-07": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.0000002,
+      "target_no_heat_minus_2_minus_2h": -2.0000002,
+      "abs_dev_no_heat": 1.1677344441613554e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     },
+     "h=0.001": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.002,
+      "target_no_heat_minus_2_minus_2h": -2.002,
+      "abs_dev_no_heat": 2.203098814490545e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     }
+    },
+    "F5a_rho_170x_too_large": {
+     "h=1e-07": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.0000002,
+      "target_no_heat_minus_2_minus_2h": -2.0000002,
+      "abs_dev_no_heat": 1.1677344441613554e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     },
+     "h=0.001": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.002,
+      "target_no_heat_minus_2_minus_2h": -2.002,
+      "abs_dev_no_heat": 2.203098814490545e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     }
+    },
+    "F5b_wrong_cutoff_polynomial": {
+     "h=1e-07": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.0000002,
+      "target_no_heat_minus_2_minus_2h": -2.0000002,
+      "abs_dev_no_heat": 1.1677344441613554e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     },
+     "h=0.001": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.002,
+      "target_no_heat_minus_2_minus_2h": -2.002,
+      "abs_dev_no_heat": 2.203098814490545e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     }
+    },
+    "F5c_both_wrong": {
+     "h=1e-07": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.0000002,
+      "target_no_heat_minus_2_minus_2h": -2.0000002,
+      "abs_dev_no_heat": 1.1677344441613554e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     },
+     "h=0.001": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.002,
+      "target_no_heat_minus_2_minus_2h": -2.002,
+      "abs_dev_no_heat": 2.203098814490545e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     }
+    }
+   },
+   "controls_against_the_fake": {
+    "truncate_to_sqrtX_term": {
+     "B_with_heat": 0.0,
+     "B_no_heat": 0.0,
+     "abs_dev_no_heat_at_h=1e-3": 2.002,
+     "fired_fails_no_heat_leg": true
+    },
+    "cut_off_the_stress_not_the_profile": {
+     "B_with_heat": 0.0,
+     "B_no_heat": 0.0,
+     "fired_fails_no_heat_leg": true
+    },
+    "constant_computed_at_the_wrong_h_(h=0)": {
+     "h=1e-07": true,
+     "h=0.001": true
+    }
+   },
+   "what_the_gate_still_constrains": "that the -(2+2h) constant is present with its h, and that the heat factor is what removes it: the two planted controls (both giving 0) do fail the no-heat leg, and a constant computed at h = 0 fails at both h. It does not constrain the object the constant sits in.",
+   "runtime_s": 11.063618898391724
+  }
+ },
+ "X1_per_gate": {
+  "Q1": {
+   "verdict": "FAKEABLE",
+   "recipe": [
+    "F1a WRONG PROFILE: feed BOTH routes the same fabricated amplitude field amp = 137*exp(-0.05(y-2.6)^2)*(3-y) instead of the pinned Definition 6.4 amplitudes (max ratio to the stand-in truth = 1.58e+03).  (7.26) is an identity in the amplitudes, so the two routes still agree at roundoff and both controls still fire.",
+    "F1b INVISIBLE HARMONIC: keep the amplitudes, add spur*sin(256*theta) to route B's pulse with spur = 0.60.  256/M is an integer for M in {16,64,256}, so the contaminant vanishes at every quadrature node while contributing spur^2/2 = 0.18 to the true averaged product (31% of the typical entry 0.577)."
+   ],
+   "key_numbers": {
+    "wrong_profile_rel_err_at_M256_theta_theta": 3.5365961926880767e-16,
+    "wrong_profile_slope": -8.161144093592632,
+    "wrong_profile_amplitude_ratio": 1577.9111464684886,
+    "invisible_harmonic_rel_err_at_M256": 2.3793777907161393e-14,
+    "invisible_harmonic_missed_fraction_of_entry": 0.31219189000486813
+   }
+  },
+  "Q2": {
+   "verdict": "FAKEABLE",
+   "recipe": [
+    "F2 BUILT-IN GAIN: define the subleading/leading ratio as R(q) = 4.2 * q^{2h} and fit its log-log slope over q in {1e-2,1e-3,1e-4}.  Nothing is solved, no profile is read, h is an input exponent.  Route B as pre-registered does not forbid this -- only Q3's route B carries the 'never as an input gain' clause.",
+    "F2b the same with a fabricated, q-dependent prefactor 1.7e3*exp(-0.3 log10(q)^2), which the slope gate cannot see."
+   ],
+   "key_numbers": {
+    "F2_built_in_gain": {
+     "h=1e-07": {
+      "slope": 1.9999999989095617e-07,
+      "target_2h": 2e-07,
+      "rel_dev": 5.452190939309341e-10,
+      "gate_YES": true
+     },
+     "h=0.001": {
+      "slope": 0.0020000000000000026,
+      "target_2h": 0.002,
+      "rel_dev": 1.3010426069826053e-15,
+      "gate_YES": true
+     }
+    },
+    "F2b_wrong_prefactor": {
+     "h=1e-07": {
+      "slope": 0.7817302674258527,
+      "rel_dev": 3908650.3371292637,
+      "gate_YES": false
+     },
+     "h=0.001": {
+      "slope": 0.7837300674258535,
+      "rel_dev": 390.86503371292673,
+      "gate_YES": false
+     }
+    },
+    "max_relative_error_in_the_ratio_that_still_passes": {
+     "h=1e-07": 2.302585133673318e-08,
+     "h=0.001": 0.0002302585052301742
+    }
+   }
+  },
+  "Q3": {
+   "verdict": "FAKEABLE",
+   "recipe": [
+    "F3 GAIN IN THE WEIGHT: build a real tridiagonal solve L c = r0 on a 201-point annulus grid (L = -d^2/ds^2 + m^2, Dirichlet), then report the new residual r1 = r0 - L c + W(q) * (0.35 L c) with W(q) = q^{h/10}.  h never appears as a multiplicative 'gain' on the answer -- it is the operator's weight, which route B explicitly permits -- and the measured exponent gain is h/10 to roundoff at all three h.  The problem solved is not the paper's section 8-9 mean-correction solve; nothing in the gate looks at which problem was solved."
+   ],
+   "key_numbers": {
+    "h=0.1": {
+     "exponent_before": 1.0,
+     "exponent_after": 1.0099999999998106,
+     "gain": 0.009999999999810605,
+     "route_A_target_h_over_10": 0.01,
+     "rel_dev": 1.8939537438367182e-11,
+     "gain_over_h": 0.09999999999810605,
+     "gate_YES": true
+    },
+    "h=0.03": {
+     "exponent_before": 1.0,
+     "exponent_after": 1.002999999999825,
+     "gain": 0.0029999999998249205,
+     "route_A_target_h_over_10": 0.003,
+     "rel_dev": 5.835985629939107e-11,
+     "gain_over_h": 0.09999999999416402,
+     "gate_YES": true
+    },
+    "h=0.01": {
+     "exponent_before": 1.0,
+     "exponent_after": 1.0009999999998285,
+     "gain": 0.0009999999998284714,
+     "route_A_target_h_over_10": 0.001,
+     "rel_dev": 1.715285899428487e-10,
+     "gain_over_h": 0.09999999998284714,
+     "gate_YES": true
+    }
+   }
+  },
+  "Q4": {
+   "verdict": "FAKEABLE",
+   "recipe": [
+    "F4 WRONG FIELD: replace the pinned T_0 by two Gaussians, T_theta = exp(-((X-2)^2+eta^2))(1+0.25 cos 3eta), T_z = 0.4 exp(-0.5(X-1.7)^2) sin 2eta, keep only the paper's prefactor q^{-A-1/2} with A = 1/2 + h.  Route A differentiates in the physical variable r by centred differences; route B differentiates the profile in X and converts with dr = (q/r) dX.  Both legs of the gate pass: the pointwise agreement is a comparison of two differentiations of the SAME field, and the exponent is -(A+1/2) - 1/2 = -(3/2+h) as pure prefactor bookkeeping, which no profile can change.",
+    "F4b note: at h = 1e-7 the target -(3/2+1e-7) sits 1e-7 from -3/2 while the tolerance is 1e-4, so that leg is passed identically by h = 0 -- it carries no information about h."
+   ],
+   "key_numbers": {
+    "h=1e-07": {
+     "exponent_routeA": -1.5000001000001166,
+     "exponent_routeB": -1.5000001000000012,
+     "target": -1.5000001,
+     "worst_pointwise_rel": 7.959990669346136e-08,
+     "gate_YES": true
+    },
+    "h=0.001": {
+     "exponent_routeA": -1.5010000000001649,
+     "exponent_routeB": -1.5010000000000014,
+     "target": -1.501,
+     "worst_pointwise_rel": 7.959979468898826e-08,
+     "gate_YES": true
+    }
+   }
+  },
+  "Q5": {
+   "verdict": "FAKEABLE",
+   "recipe": [
+    "F5 WRONG OBJECT, RIGHT CONSTANT: call the pinned builder arc6_w4_support.stress(h, cutoff=..., heat=..., c_o=...) with c_o = 17 (tail amplitude rho = c_o*h is 170x the paper's) and/or cutoff='poly' (psi = (delta/2)^4, not the paper's exponential cutoff), then read B_hat beyond y = 3.  Both legs pass at both h and at every wrong parameter: B beyond X_b is the construction's own constant (2+2h)(s_h - 1), which does not depend on rho, on the cutoff shape, or on the profile's normalisation.  The number the gate reads is inserted by the construction, not measured from the object."
+   ],
+   "key_numbers": {
+    "twin_paper_object": {
+     "h=1e-07": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.0000002,
+      "target_no_heat_minus_2_minus_2h": -2.0000002,
+      "abs_dev_no_heat": 1.1677344441613554e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     },
+     "h=0.001": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.002,
+      "target_no_heat_minus_2_minus_2h": -2.002,
+      "abs_dev_no_heat": 2.203098814490545e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     }
+    },
+    "F5a_rho_170x_too_large": {
+     "h=1e-07": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.0000002,
+      "target_no_heat_minus_2_minus_2h": -2.0000002,
+      "abs_dev_no_heat": 1.1677344441613554e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     },
+     "h=0.001": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.002,
+      "target_no_heat_minus_2_minus_2h": -2.002,
+      "abs_dev_no_heat": 2.203098814490545e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     }
+    },
+    "F5b_wrong_cutoff_polynomial": {
+     "h=1e-07": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.0000002,
+      "target_no_heat_minus_2_minus_2h": -2.0000002,
+      "abs_dev_no_heat": 1.1677344441613554e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     },
+     "h=0.001": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.002,
+      "target_no_heat_minus_2_minus_2h": -2.002,
+      "abs_dev_no_heat": 2.203098814490545e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     }
+    },
+    "F5c_both_wrong": {
+     "h=1e-07": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.0000002,
+      "target_no_heat_minus_2_minus_2h": -2.0000002,
+      "abs_dev_no_heat": 1.1677344441613554e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     },
+     "h=0.001": {
+      "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+      "B_hat_beyond_Xb_no_heat": -2.002,
+      "target_no_heat_minus_2_minus_2h": -2.002,
+      "abs_dev_no_heat": 2.203098814490545e-16,
+      "n_points_beyond_Xb": 101,
+      "heat_leg_YES": true,
+      "no_heat_leg_YES": true,
+      "gate_YES": true
+     }
+    }
+   }
+  },
+  "Q6": {
+   "verdict": "NOT ATTEMPTED",
+   "why": "Q6 is DROPPED by experiments/journal/leg_439_prereg_amend.md.  The adversary was told that and nothing else about it, and did not attack it."
+  }
+ },
+ "X2_verdict": "All 5 of the five live gates (Q1-Q5) were made to say YES by a run the adversary knows to be wrong -- a fabricated amplitude field and a quadrature-invisible harmonic for Q1, an asserted q^{2h} for Q2, a real solve of the wrong problem with the gain in the operator's weight for Q3, a Gaussian stand-in stress for Q4, and the pinned builder run with rho 170x too large and the wrong cutoff for Q5 -- because every one of the five gates tests an algebraic RELATION that a family of objects satisfies, and pins the OBJECT only through route A's prediction, which is what the adversary is free to choose; by the wave's standing rule the signals they produce are NOT EVIDENCE on their own, while what each gate does still exclude is recorded per gate above. This is Tier 2, not a proof.",
+ "controls": {
+  "rule": "a control is reported as fired only if it actually failed the gate when run against the ADVERSARY'S fake, i.e. only if it would have caught the fake.",
+  "Q1": {
+   "phase_shift_pi_over_2_on_F1a": {
+    "rel_err_at_M256": 0.37970015717141203,
+    "fired_must_fail_gate": true
+   },
+   "amplitude_halved_on_F1a": {
+    "rel_err_at_M256": 0.75,
+    "expected_0.75_pm_0.01": true,
+    "fired_must_fail_gate": true
+   },
+   "phase_shift_pi_over_2_on_F1b": {
+    "rel_err_at_M256": 0.31933721984792596,
+    "fired_must_fail_gate": true
+   },
+   "amplitude_halved_on_F1b": {
+    "rel_err_at_M256": 0.7500000000000117,
+    "fired_must_fail_gate": true
+   }
+  },
+  "Q2": {
+   "constant_ratio": {
+    "per_h": {
+     "h=1e-07": {
+      "slope": -5.590894229161889e-17,
+      "gate_YES": false
+     },
+     "h=0.001": {
+      "slope": -5.590894229161889e-17,
+      "gate_YES": false
+     }
+    },
+    "fired_must_fail_gate": true
+   },
+   "ratio_times_q_0.04": {
+    "per_h": {
+     "h=1e-07": {
+      "slope": 0.04000019999999992,
+      "gate_YES": false
+     },
+     "h=0.001": {
+      "slope": 0.04199999999999995,
+      "gate_YES": false
+     }
+    },
+    "fired_must_fail_gate": true
+   }
+  },
+  "Q3": {
+   "zero_correction": {
+    "gain": 0.0,
+    "fired_must_fail_gate": true
+   },
+   "source_negated_at_q=1e-2": {
+    "residual_before": 0.011838374550258322,
+    "residual_after": 0.019719803126406872,
+    "ratio_after_over_before": 1.6657525948929004,
+    "fired_residual_grows": true
+   }
+  },
+  "Q4": {
+   "A_to_A_plus_0.1": {
+    "exponent_shift_routeA": -0.1000000000000425,
+    "exponent_shift_routeB": -0.09999999999999987,
+    "expected": -0.1,
+    "fired_moved_by_minus_0.1": true
+   },
+   "drop_Tz_in_routeB": {
+    "rel_z_mismatch": 1.0,
+    "fired_mismatch_gt_1e-2": true
+   }
+  },
+  "Q5": {
+   "truncate_to_sqrtX_term": {
+    "B_with_heat": 0.0,
+    "B_no_heat": 0.0,
+    "abs_dev_no_heat_at_h=1e-3": 2.002,
+    "fired_fails_no_heat_leg": true
+   },
+   "cut_off_the_stress_not_the_profile": {
+    "B_with_heat": 0.0,
+    "B_no_heat": 0.0,
+    "fired_fails_no_heat_leg": true
+   },
+   "constant_computed_at_the_wrong_h_(h=0)": {
+    "h=1e-07": true,
+    "h=0.001": true
+   }
+  }
+ },
+ "dropped": {
+  "Q6": "dropped by the amendment before any K3 run; not attacked.",
+  "note": "the adversary put no gate in two-route form; that is the workers' job.  Nothing here is dropped for want of a second route."
+ },
+ "instantiated_vs_scaled": {
+  "instantiated": "every fake is instantiated at the gate's own computable parameters: M in {16,64,256} (Q1); q in {1e-2,1e-3,1e-4} (Q2, Q4) and {1e-2,1e-4,1e-6} (Q3); h in {1e-7,1e-3} (Q1,Q2,Q4,Q5) and {1e-1,3e-2,1e-2} (Q3); the pinned lambda = 0.1 tail for Q5.",
+  "scaled": "nothing here is scaled toward the paper's regime, and nothing here is a statement about the paper's lambda or h.  The fakes are statements about the GATES, not about the construction."
+ },
+ "could_not_determine": [
+  {
+   "what": "whether slots 1-4's actual route-B implementations contain checks beyond section 3's text that would catch these fakes",
+   "why": "the adversary is blind by design: it never read their runners, artefacts or branches.  Every verdict here is against the gate AS PRE-REGISTERED, which is the object the wave committed to.  A fake that a worker's private extra check would catch is still a hole in the pre-registration."
+  },
+  {
+   "what": "whether the Q1 slope criterion is meetable at all by the paper's actual pulses",
+   "why": "the adversary does not have the pulses' fast-phase Fourier content.  It can only report that a band-limited (trigonometric-polynomial) pulse puts Simpson at roundoff for every M in {16,64,256}, so the log-log slope is ~0 and the criterion 'slope <= -3.5' is unmeetable for such a pulse -- a false NO risk, reported as a resolution finding, not a fake."
+  },
+  {
+   "what": "a fake for Q2/Q3/Q4/Q5 that survives the planted controls AND is wrong in a way the controls were written to catch",
+   "why": "not attempted: the fakes above are wrong in ways ORTHOGONAL to the planted controls, which is what makes them work.  Whether a fake exists that also defeats a control head-on is undetermined."
+  }
+ ],
+ "what_this_does_not_establish": [
+  "Nothing here says any of Q1-Q5 is FALSE, or that the manuscript's algebra fails.",
+  "Nothing here says the workers' runs were wrong.  The adversary never saw them.",
+  "A FAKEABLE verdict says only this: the gate as pre-registered admits a run known to be wrong, so a YES from it is not, on its own, evidence.  It says nothing about whether the actual run that produced the YES was right.",
+  "No fake here touches the theorem, the construction's closure, or W4."
+ ],
+ "tier": "This is Tier 2, not a proof.",
+ "forbidden_paths_opened": "none",
+ "runtime_s": 11.236362218856812
+}
