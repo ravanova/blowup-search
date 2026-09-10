@@ -5222,3 +5222,12 @@ the repository for copyright reasons, so `arc6_dag_evidence.py` can no longer re
 graph here until the text is regenerated per `writeup/data/arc6/REGENERATE.md` — that script crashes loudly
 by that policy's design, and the cross-leg `reproduction_evidence.py` now reports it as NOT RE-CHECKABLE
 HERE rather than as drift.
+
+**Outcome, second machine (added 2026-09-10 13:10Z by the laptop Conductor):** the same runner, same pin, run on
+the operator's 12-core laptop from a fresh clone, read **GREEN** — `total_s` 4272, 11251 jobs, 0 errors, both
+theorems on the standard three, `sorryAx` NO (`writeup/data/arc7/k1/phaseB_local/`, merged d526329). K1 is
+GREEN in three environments and stays `UNVERIFIED`: a second machine is not a second agent. Two further
+deviations beside the two above: the laptop's built tree was deleted with its session scratchpad before K2
+could use it, so the runner was relaunched (a support rebuild, banked under `k2/tree_rebuild/`, not a fourth
+gate answer); and the container Conductor landed 1829d68 on `main` after the user had designated the laptop
+session as Conductor — two Conductors live on one arc for about an hour, recorded in `ORCH_STATE.md`.
