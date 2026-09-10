@@ -33,7 +33,7 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — §3g CONDUCTOR, wave sizing 5. **ARC 7 — INDEPENDENT CONFIRMATION, OPEN 2026-09-10, legs 436–440.** `K0`, `K1` LANDED; **`K2` (leg 438) NEXT — pre-registration owed BEFORE dispatch.**
+## LIVE — §3g CONDUCTOR, wave sizing 5. **ARC 7 — INDEPENDENT CONFIRMATION, OPEN 2026-09-10, legs 436–440.** `K0`, `K1` LANDED; **`K2` (leg 438) IN FLIGHT — run 2, prereg `leg_438_prereg.md` pushed 13:20Z before dispatch.**
 
 **⚠ WHERE THE CONDUCTOR IS (13:10Z): the operator's LAPTOP session, by user designation at 13:00Z.** The container
 Conductor (`session_01LX5qCimBmdRGUMvwBDT3DZ`) landed K1 on `main` at 1829d68 (12:55Z) after that designation and
@@ -67,8 +67,9 @@ mathlib cache in `/dev/shm/k2_mlcache`, deleted after). Expected ~70 min. Artefa
 `writeup/data/arc7/k2/tree_rebuild/` as a support run. If this session dies: check for a live `lake`, read the newest
 `[n/N]` line, RESUME in the same tree; never restart clean.
 
-**Landed this arc:** `K0` (436), `K1` (437). **Audited but not landed:** none. **Live workers:** none at this
-write. **Open escalations:** the five rows above, unchanged and unruled; rulings 5–6 awaiting a one-word confirm
+**Landed this arc:** `K0` (436), `K1` (437). **Audited but not landed:** none. **Live workers (K2 run 2):** slots 1, 2, 4
+spawned 13:2xZ on `leg/438-k2-agent{1,2,4}` (source-only); slots 3, 5 spawned when the rebuilt tree's `t_end=` exists, on
+`leg/438-k2-agent{3,5}`. Outputs `writeup/data/arc7/k2/r2/`. A successor gates and cherry-picks whatever those branches hold. **Open escalations:** the five rows above, unchanged and unruled; rulings 5–6 awaiting a one-word confirm
 (nothing in arc 7 depends on them; the Conductor does not rule them). **Composition floor:** `K3` (leg 439), a `W4`
 attack — its prereg `leg_439_prereg.md` is on `main` (b091c21, 08:30Z, before any K3 run); `K1`/`K2` are audit.
 

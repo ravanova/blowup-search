@@ -5231,3 +5231,15 @@ deviations beside the two above: the laptop's built tree was deleted with its se
 could use it, so the runner was relaunched (a support rebuild, banked under `k2/tree_rebuild/`, not a fourth
 gate answer); and the container Conductor landed 1829d68 on `main` after the user had designated the laptop
 session as Conductor — two Conductors live on one arc for about an hour, recorded in `ORCH_STATE.md`.
+
+## §74 — arc 7 `K2` (leg 438): **four worker files reached `main` before any pre-registration, before the wave row, and without their own branches — §3g step 1 inverted, the arc-6 wave-1 defect repeated.**
+
+`writeup/data/arc7/k2/agent_{1,2,4,5}_*.json` (5f77a7e, b397f68, 601d7da, 40cbfdb; 08:38–09:21Z) were produced by
+the container Conductor's agents while `K1` phase A was still building, with `STATE.md`'s `K2` row still
+`planned`, no `leg_438_prereg.md`, and each committed directly to `main`. Slot 3 never ran (it needs a built
+tree); slot 5's S-d is `PENDING`; slot 2's cross-check was against leg 435, not `K1`. **Treatment:** the files are
+banked and never edited; they are **run 1**, worker files and not findings. `leg_438_prereg.md` (this landing,
+pushed 13:20Z before any run-2 worker was spawned) governs **run 2**, five fresh agents on their own branches,
+forbidden to open run 1. Run-1/run-2 agreement per slot is reported at integration as an unplanned second-agent
+cross-check, not as verification. The cause is the same as arc 6's: a Conductor with idle slots dispatched into
+them while a serial unit ran, and wrote the record afterwards.
