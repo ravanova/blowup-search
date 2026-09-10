@@ -40,8 +40,8 @@ $ elan --version
 elan 4.2.4 (227caca13 2026-08-25)
 $ elan toolchain list
 leanprover/lean4:v4.34.0-rc2
-$ du -sh ~/.elan/toolchains/*
-3.0G	/home/andy/.elan/toolchains/leanprover--lean4---v4.34.0-rc2
+$ du -sh $HOME/.elan/toolchains/*
+3.0G	$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc2
 $ lean --version
 error: no default toolchain configured. run `elan default stable` to install & configure the latest Lean 4 stable release.
    (the pinned toolchain IS installed; `lake` in the work tree selects it from lean-toolchain,
