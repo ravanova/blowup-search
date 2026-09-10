@@ -5212,3 +5212,45 @@ Defect in this entry's own landing: the amendment commit `8c944b3` was pushed al
 printed FAIL (ORCH LIVE 100-odd bytes over its cap) — a shell chain that took the exit status of `tail`
 instead of the gate's, the second time this session made that mistake (leg 433's ORCH commit was the
 first). Fixed in the next commit by a verbatim retirement; recorded here rather than rewritten.
+**Outcome (added 2026-09-10 12:55Z):** phase B ran in the fresh container and read **GREEN** — clone to
+`#print axioms` in 5605 s, 11251 jobs, 0 errors, both theorems on the standard three, `sorryAx` not
+reachable (`writeup/data/arc7/k1/phaseB/`). K1 is GREEN on both phases: stop and report, no extension.
+Two deviations recorded: the fresh session's commits reached `main` directly rather than staying on the
+outcome branch as its brief said (the gate passes on `main`, nothing is retracted); and, in the same
+hour, a separate pre-publication session (Leg 0, `29d4c3a`) removed the banked manuscript text from
+the repository for copyright reasons, so `arc6_dag_evidence.py` can no longer re-check the citation
+graph here until the text is regenerated per `writeup/data/arc6/REGENERATE.md` — that script crashes loudly
+by that policy's design, and the cross-leg `reproduction_evidence.py` now reports it as NOT RE-CHECKABLE
+HERE rather than as drift.
+
+**Outcome, second machine (added 2026-09-10 13:10Z by the laptop Conductor):** the same runner, same pin, run on
+the operator's 12-core laptop from a fresh clone, read **GREEN** — `total_s` 4272, 11251 jobs, 0 errors, both
+theorems on the standard three, `sorryAx` NO (`writeup/data/arc7/k1/phaseB_local/`, merged d526329). K1 is
+GREEN in three environments and stays `UNVERIFIED`: a second machine is not a second agent. Two further
+deviations beside the two above: the laptop's built tree was deleted with its session scratchpad before K2
+could use it, so the runner was relaunched (a support rebuild, banked under `k2/tree_rebuild/`, not a fourth
+gate answer); and the container Conductor landed 1829d68 on `main` after the user had designated the laptop
+session as Conductor — two Conductors live on one arc for about an hour, recorded in `ORCH_STATE.md`.
+
+## §74 — arc 7 `K2` (leg 438): **four worker files reached `main` before any pre-registration, before the wave row, and without their own branches — §3g step 1 inverted, the arc-6 wave-1 defect repeated.**
+
+`writeup/data/arc7/k2/agent_{1,2,4,5}_*.json` (5f77a7e, b397f68, 601d7da, 40cbfdb; 08:38–09:21Z) were produced by
+the container Conductor's agents while `K1` phase A was still building, with `STATE.md`'s `K2` row still
+`planned`, no `leg_438_prereg.md`, and each committed directly to `main`. Slot 3 never ran (it needs a built
+tree); slot 5's S-d is `PENDING`; slot 2's cross-check was against leg 435, not `K1`. **Treatment:** the files are
+banked and never edited; they are **run 1**, worker files and not findings. `leg_438_prereg.md` (this landing,
+pushed 13:20Z before any run-2 worker was spawned) governs **run 2**, five fresh agents on their own branches,
+forbidden to open run 1. Run-1/run-2 agreement per slot is reported at integration as an unplanned second-agent
+cross-check, not as verification. The cause is the same as arc 6's: a Conductor with idle slots dispatched into
+them while a serial unit ran, and wrote the record afterwards.
+
+## §75 — arc 7 `K3` (leg 439): **the pre-registration's Q6 was mis-scaled by the Conductor who wrote it — the flat weight's "linear coefficient −3" contradicts a banked leg-432 measurement by a factor of ~10³ and rests on a derivative taken wrongly; DROPPED beside the prereg before any run, not re-scaled.**
+
+`leg_439_prereg.md` §0 (b091c21, 08:30Z) derives `k(δ) = 8 − 3δ` from an expansion whose `−3 log δ` term
+differentiates to `−3δ²`, and whose presence at resolvable `δ` leg 432 had already measured as absent
+(`arc6_residual_v1.json` `H2/local_power_Ttheta_hat_at_0.05 = 0.051`, `H7/delta3_dlogT_ddelta_at_0.05 = 8.000135`).
+The prereg's own §0 cites §71's lesson while repeating it. Since the only surviving route-A prediction is the
+cutoff's own exponent, Q6 has no two-route form and is DROPPED under the wave's rule
+(`leg_439_prereg_amend.md`); Q1–Q5 are unchanged and were checked against the record in the same amendment.
+Found by the laptop Conductor reading the prereg against the banked JSON before dispatch — the check the charter
+asks for and the container Conductor recorded as done.

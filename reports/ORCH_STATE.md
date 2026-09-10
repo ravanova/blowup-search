@@ -33,7 +33,60 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — §3g CONDUCTOR, wave sizing 5. **ARC 7 — INDEPENDENT CONFIRMATION, OPEN 2026-09-10, legs 436–440.** `K0` LANDED (leg 436); **`K1` IN FLIGHT (leg 437, the kernel check, no time cap).**
+## LIVE — §3g CONDUCTOR, wave sizing 5. **ARC 7 — INDEPENDENT CONFIRMATION, OPEN 2026-09-10, legs 436–440.** `K0`, `K1` LANDED; **`K2` (leg 438) IN FLIGHT — run 2, prereg `leg_438_prereg.md` pushed 13:20Z before dispatch.**
+
+**⚠ WHERE THE CONDUCTOR IS (13:10Z): the operator's LAPTOP session, by user designation at 13:00Z.** The container
+Conductor (`session_01LX5qCimBmdRGUMvwBDT3DZ`) landed K1 on `main` at 1829d68 (12:55Z) after that designation and
+earlier committed four K2 worker files straight to `main` (08:38–09:21Z, see below). **If that session is still
+running: STOP dispatching, push branches only, never `main`.** Every laptop push is preceded by `git ls-remote`
+and a rebase; a collision is recorded here, never resolved by force.
+
+**Goal (user ruling 2026-09-10):** independently CONFIRM the OpenAI Navier–Stokes result by running the Lean
+kernel to completion on its two exported theorems. Rulings 1–6 recorded: `CORRECTIONS.md` §72, `STATE.md`
+arc-7 block, `ORCHESTRATION.md` §3g. Legs 436–440.
+
+**`K1` (leg 437) — LANDED GREEN in THREE environments, `UNVERIFIED`.** Journal `experiments/journal/leg_437.md`.
+Phase A (remote container 1, resume): GREEN. Phase B (remote fresh container 2): GREEN, `total_s` 5605
+(`writeup/data/arc7/k1/phaseB/`). Phase B on the operator's laptop (12 cores): GREEN, `total_s` 4272
+(`writeup/data/arc7/k1/phaseB_local/`, merged d526329). Same pin, mathlib `85e3a25e`, Comparator `19e111e2`, both
+theorems `[propext, Classical.choice, Quot.sound]`, `sorryAx` NO, everywhere. Three limits banked, none softened:
+mathlib oleans REPLAYED from cache, not rebuilt; statements are Fefferman (C)/(D), not Theorem 1.1; a second
+machine is not a second agent — **`VERIFIED` only when K2 slot 5, blind, reproduces it from the banked artefacts.**
+
+**`K2` (leg 438) — state of the board before its pre-registration.** Four worker files ALREADY on `main`
+(`writeup/data/arc7/k2/agent_{1,2,4,5}_*.json`, commits 5f77a7e b397f68 601d7da 40cbfdb) were produced by the
+container Conductor's agents 08:38–09:21Z **with no pre-registration pushed, no wave row committed, and no own
+branch** — the §3g step-1 defect arc 6's wave 1 recorded, repeated; slot 3 never ran (needs a built tree); slot 5's
+S-d is `PENDING`; slot 2 cross-checked against leg 435, not K1. They are banked worker files, not findings
+(`READING_THIS_REPO.md`); K2's prereg (`leg_438_prereg.md`) says how they are treated.
+
+**Built-tree cursor for K2 slots 3 and 5.** Phase A's tree is in remote container 1 (not reachable from here);
+the laptop's B-local tree was deleted with its session scratchpad. **Relaunched 12:53Z on the laptop:**
+`scripts/arc7_k1_kernel_check.sh B <scratchpad>/nse <scratchpad>/k2_rebuild_logs` (wrapper `k2_rebuild_wrapper.sh`,
+mathlib cache in `/dev/shm/k2_mlcache`, deleted after). Expected ~70 min. Artefacts to be banked under
+`writeup/data/arc7/k2/tree_rebuild/` as a support run. If this session dies: check for a live `lake`, read the newest
+`[n/N]` line, RESUME in the same tree; never restart clean.
+
+**Landed this arc:** `K0` (436), `K1` (437). **Audited but not landed:** none. **Live workers (K2 run 2):** slots 1, 2, 4
+spawned 13:2xZ on `leg/438-k2-agent{1,2,4}` (source-only); slots 3, 5 spawned when the rebuilt tree's `t_end=` exists, on
+`leg/438-k2-agent{3,5}`. Outputs `writeup/data/arc7/k2/r2/`. A successor gates and cherry-picks whatever those branches hold. **Open escalations:** the five rows above, unchanged and unruled; rulings 5–6 awaiting a one-word confirm
+(nothing in arc 7 depends on them; the Conductor does not rule them). **Composition floor:** `K3` (leg 439), a `W4`
+attack — its prereg `leg_439_prereg.md` is on `main` (b091c21, 08:30Z, before any K3 run); `K1`/`K2` are audit.
+
+**Headroom at this boundary (§3j, bytes):** `STATE.md` 23,772 (cap 24,576); **`WALLS.md` 32,157 of a 32,768 cap —
+611 B spare, `test_headroom.py` PASS. The previous note ("over its 32 KB cap by 157 B") read 32 KB as 32,000; NO
+retirement is owed.** `OPTIONS.md` 20,961; this live block under 8 KB; superseded blocks below exceed three
+(truncation owed at a quieter boundary). Integration cycles this session: 1. Context summarised: no.
+
+**What the next Conductor must do first:** read `git ls-remote origin main`; then, if `K2` is not yet dispatched,
+push `leg_438_prereg.md` and the K2 wave row BEFORE spawning anything; if it is, gate and merge the five
+`leg/438-k2-agent{1..5}` branches by cherry-pick, unedited.
+
+---
+
+## Superseded LIVE block — K1 in flight, demoted 2026-09-10 13:10Z at K1's landing (leg 437) under §3j. **Verbatim. Nothing edited.**
+
+## ~~LIVE~~ — §3g CONDUCTOR, wave sizing 5. **ARC 7 — INDEPENDENT CONFIRMATION, OPEN 2026-09-10, legs 436–440.** `K0` LANDED (leg 436); **`K1` IN FLIGHT (leg 437, the kernel check, no time cap).**
 
 **Goal (user ruling 2026-09-10):** independently CONFIRM the OpenAI Navier–Stokes result by running the Lean
 kernel to completion on its two exported theorems. Rulings 1–6 recorded: `CORRECTIONS.md` §72, `STATE.md`
@@ -47,7 +100,7 @@ arc-7 block, `ORCHESTRATION.md` §3g. **Legs renumbered 436–440** (leg 435 was
 **`K1` cursor — the next Conductor reads THIS before anything else.** Runner `scripts/arc7_k1_kernel_check.sh`,
 prereg `experiments/journal/leg_437_prereg.md` (pushed before the run). Two phases, same commit `8937a8f4`,
 same container (4 × Xeon 2.80 GHz, 15 GB, disk holds ONE tree):
-- **Phase A DONE 09:05Z, GREEN** (`writeup/data/arc7/k1/phaseA/phaseA.json`, commit 5f4efcb): all 11251 jobs, rc 0, both theorems on the standard three. **Phase B RELOCATED to a fresh container by user ruling (`leg_437_prereg_amend.md`, §73): A's tree is KEPT for K2 slots 3/5; a new remote session (`session_01VEipCs6B23bjiQ8aku2Pvn`, created 11:10Z from branch `claude/arc6-navier-stokes-verify-n76kpt`) runs `scripts/arc7_k1_kernel_check.sh B` from nothing and pushes `writeup/data/arc7/k1/phaseB/` on `leg/437-k1-phaseB` — never to `main`. The Conductor integrates after reading its log; RED stops everything.**
+- **Phase A DONE 09:05Z, GREEN** (`writeup/data/arc7/k1/phaseA/phaseA.json`, commit 5f4efcb): all 11251 jobs, rc 0, both theorems on the standard three. **Phase B DONE 12:44Z, GREEN, in a fresh container** (`session_01VEipCs6B23bjiQ8aku2Pvn`; `writeup/data/arc7/k1/phaseB/phaseB.json`, commit 0fe4d04): clone→axioms **5605 s** end to end (cache 121 s, build 5443 s, 11251 jobs, 0 errors), both theorems `[propext, Classical.choice, Quot.sound]`, `sorryAx` NO. **K1 is GREEN on both phases → STOP AND REPORT (prereg §2); `UNVERIFIED` until K2 slot 2's blind cross-check.** Deviation recorded: the fresh session merged `origin/main` into its branch and its result reached `main` directly (816929a) although its brief said push the outcome branch only; the gate passes on `main`.
 - Phase A's tree/log paths retired VERBATIM 2026-09-10 (leg 437 amend) under §3j → this file, `## Superseded — K1 phase A paths`.
 - **Phase B** (now in the fresh container, not here — A's tree is not deleted) fresh-clones at the pin, `lake exe cache get`, `lake build` from
   nothing, timed end to end, then `#print axioms`. Logs `k1/k1_B_*`.

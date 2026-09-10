@@ -1,0 +1,78 @@
+{
+ "schema": "arc7_k1_phase_v1",
+ "leg": 437,
+ "phase": "B (second machine: user's local laptop)",
+ "what": "fresh clone at the pin, lake exe cache get, lake build from nothing, timed end to end, then #print axioms; pre-registered leg_437_prereg.md §3 phase B, relocated to a second machine by leg_437_prereg_amend.md (CORRECTIONS §73) before it ran",
+ "runner": "scripts/arc7_k1_kernel_check.sh B (unchanged); wrapper set MATHLIB_CACHE_DIR=/dev/shm/k1_mlcache so the downloaded .ltar archives lived in RAM-backed tmpfs, not on the 96%-full disk; commands unchanged",
+ "machine": {
+  "nproc": 12,
+  "cpu": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
+  "mem_gb": 31,
+  "container": "user's local Linux laptop (Linux 7.0.0-31-generic), second machine, not the phase-A container; elan + toolchain v4.34.0-rc2 installed fresh before t_start (toolchain install excluded from the timer)",
+  "disk_free_at_start_gb": 11
+ },
+ "tree_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "upstream_head_at_clone": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "toolchain": "leanprover/lean4:v4.34.0-rc2",
+ "mathlib_rev": "85e3a25e006c35636f0e53b0e9296caca2685bc0",
+ "comparator_rev": "19e111e2141cf333c7daff0f64c5f24acc91dd2e",
+ "t_start": "2026-09-10T11:14:48Z",
+ "t_end": "2026-09-10T12:26:00Z",
+ "clone_s": 2,
+ "cache_get_rc": 0,
+ "cache_get_s": 117,
+ "build_rc": 0,
+ "build_s": 4148,
+ "build_error_lines": 0,
+ "axioms_s": 5,
+ "total_s": 4272,
+ "jobs": "11250/11251, all built in this phase from nothing (mathlib replayed from the official cache)",
+ "olean_count_project": 2486,
+ "axioms_verbatim": "=== AXIOMS_T0 2026-09-10T12:25:55Z\n'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n=== AXIOMS_RC=0 2026-09-10T12:26:00Z\n",
+ "result": {
+  "navier_stokes_breakdown_R3": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "navier_stokes_breakdown_periodic": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "sorryAx_reachable": "NO",
+  "exit_code": 0
+ },
+ "gate": {
+  "a_build_completes": "YES — Build completed successfully (11251 jobs), rc 0, 0 error lines",
+  "b_print_axioms": "verbatim in axioms_verbatim",
+  "c_sorryAx_reachable": "NO",
+  "d_wall_time": "END-TO-END: total_s=4272 (clone 2 s + cache get 117 s + build 4148 s + axioms 5 s) on 12 cores"
+ },
+ "reading": "GREEN (prereg §2)",
+ "agreement_with_phase_A": {
+  "tree_head": true,
+  "mathlib_rev": true,
+  "comparator_rev": true,
+  "axioms_identical": true
+ },
+ "what_this_does_not_establish": [
+  "that mathlib's cached oleans match their sources (cache get replays them; not rebuilt)",
+  "Theorem 1.1 of the paper (the statements are Fefferman (C)/(D))",
+  "verification by a second agent — same Conductor's brief, a second MACHINE not a second agent (§3f rule 1; K2 slot 2 cross-checks)"
+ ],
+ "files": [
+  "k1_B_build.log",
+  "k1_B_summary.txt",
+  "k1_B_axioms.log",
+  "k1_axioms_check.lean",
+  "k1_B_axioms_in_build_log.txt",
+  "k1_B_wrapper.sh"
+ ],
+ "operational_notes": [
+  "disk on the second machine was 96% full at t_start (11 GB free); at 11:22Z, during the NavierStokes part of the build, the operator moved an unrelated 4.8 GB tool cache (~/.cache/Cypress) to /dev/shm to keep headroom and moved it back after the run; nothing in the Lean tree was touched",
+  "the .ltar archives from lake exe cache get were 442 MB in /dev/shm/k1_mlcache and were deleted by the wrapper after the run",
+  "load average peaked ~30 on 12 cores; no other CPU-heavy job ran beside the build"
+ ],
+ "why_this_directory": "the fresh remote container (session_01VEipCs6B23bjiQ8aku2Pvn) started its own phase B at 11:11:30Z on 4 cores and pushes to writeup/data/arc7/k1/phaseB/ on leg/437-k1-phaseB; this run began 11:14:48Z on the user's 12-core laptop under the same runner and pin and is banked beside it as phaseB_local/ on leg/437-k1-phaseB-local so neither overwrites the other; the Conductor integrates both"
+}

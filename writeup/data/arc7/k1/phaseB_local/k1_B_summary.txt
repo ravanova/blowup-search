@@ -1,0 +1,22 @@
+phase=B
+t_start=2026-09-10T11:14:48Z
+nproc=12
+model name	: Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz
+Mem:              31           7           3           0          21          23
+/dev/nvme0n1p3  225G  204G   11G  96% /
+upstream_head_at_clone=8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538
+t_clone_done=2026-09-10T11:14:50Z clone_s=2
+tree_head=8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538
+toolchain=leanprover/lean4:v4.34.0-rc2
+Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)
+Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)
+cache_get_rc=0 cache_get_s=117
+mathlib_rev=85e3a25e006c35636f0e53b0e9296caca2685bc0
+comparator_rev=19e111e2141cf333c7daff0f64c5f24acc91dd2e
+build_rc=0 build_s=4148
+build_error_lines=0
+axioms_s=5
+olean_count=2486
+t_end=2026-09-10T12:26:00Z total_s=4272
+runner_rc=0
+442M	/dev/shm/k1_mlcache
