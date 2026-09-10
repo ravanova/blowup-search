@@ -53,18 +53,23 @@ every SHA this project's writeups cite stays valid. Nothing was rewritten.
 ### Third-party personal data
 
 Four banked artefacts under `writeup/data/arc7/k2/r2/agent_4_upstream/` captured GitHub commit
-metadata, which included **personal email addresses of third-party contributors** unconnected to this
-project. Those addresses were **redacted before this repository was made public** (`CORRECTIONS.md`
-§80) — the only deliberate edit of a banked datum in the record, made on an explicit user ruling.
-Author names, commit SHAs and file hashes are kept: they are public authorship and they are what the
-finding actually rests on.
+metadata, which included **seven distinct personal email addresses, across sixteen occurrences**,
+belonging to third-party contributors unconnected to this project. They appeared in three different
+field shapes — `email`, `message` (`Co-authored-by:` trailers) and `payload` (raw signed-commit text).
+**All sixteen were redacted before this repository was made public** (`CORRECTIONS.md` §80) — the only
+deliberate edit of a banked datum in the record, made on an explicit user ruling. Author names, commit
+SHAs, dates and file hashes are kept: they are public authorship and they are what the finding actually
+rests on.
+
+Because the raw `payload` is redacted, the GPG `signature` stored beside it can no longer be verified
+against it. Nothing here ever did that, but the capability is gone and you should know it.
 
 **They remain in git history.** No history rewrite was performed, so that every commit SHA cited by
 these writeups stays valid. If you are one of those contributors and would prefer a full history
 rewrite, open an issue and we will act on it.
 
-If you are a rights-holder and would like something here removed or attributed
-differently, open an issue and we will act on it.
+If you are a rights-holder, or a named contributor, and would like something here removed or
+attributed differently, open an issue and we will act on it.
 
 ### A note on stale local paths in the record
 

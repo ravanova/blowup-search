@@ -5434,9 +5434,27 @@ mechanism in a single commit — does not.
 **What was changed.** Four files under `writeup/data/arc7/k2/r2/agent_4_upstream/` —
 `commit_8323e878….json`, `commit_8bf45ed7….json`, `file_history.json` and `main_commit.json` — held
 GitHub commit metadata captured by `K2` slot 4 while re-verifying DeepMind byte-identity at upstream
-source. That metadata included **five distinct personal email addresses, across six occurrences, belonging to third-party
-contributors** who have nothing to do with this project. Each value of an `"email"` key is now the literal
-`[redacted 2026-09-10 — third-party personal address; user ruling, CORRECTIONS.md §80]`.
+source. That metadata included **seven distinct personal email addresses across sixteen occurrences**,
+belonging to third-party contributors who have nothing to do with this project. All sixteen are now
+redaction markers (`[redacted 2026-09-10 — third-party personal address; user ruling, CORRECTIONS.md §80]`
+in `"email"` fields, `[redacted-address CORRECTIONS.md §80]` inline).
+
+**The first pass of this redaction was incomplete, and that is the more useful half of this entry.**
+The addresses live in THREE different field shapes, and the first scan matched only one of them —
+`"email"` keys, 6 occurrences. It missed 10 more sitting inside `"message"` (commit messages carrying
+`Co-authored-by:` trailers) and `"payload"` (the raw signed-commit payload, which embeds
+`author NAME <address>` and `committer` lines). Two contributors (Paul Lezeau, two addresses) appeared
+ONLY in those fields and so were absent from the first inventory entirely. The commit that performed the
+first pass therefore claimed a completeness it did not have; it is superseded by this one, not amended.
+**The lesson is the arc's own, arriving from a new direction: a scan that reports "clean" is worth
+nothing unless it was aimed at every shape the datum takes.** A narrow pattern that finds some instances
+reads exactly like a broad pattern that finds all of them.
+
+**A consequence, disclosed rather than hidden.** Each commit's `verification` block pairs a GPG
+`signature` with the `payload` it signs. Because the payload is now redacted, **that signature can no
+longer be checked against it.** Nothing in this repository ever did so — no script, journal or writeup
+verifies GitHub commit signatures, and the byte-identity finding rests on the file sha256
+`f446284f…d25d` — but the capability is gone from these four files and a reader should know it.
 
 **What was NOT changed.** Author *names* are kept: they are public authorship, not contact details, and
 they are what slot 4's finding actually cites. GitHub's own non-personal `noreply@github.com` service
