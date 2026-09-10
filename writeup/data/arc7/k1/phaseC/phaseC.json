@@ -21,14 +21,18 @@
   "measured_free_bytes": 3474485248,
   "measured_free_gib": 3.24,
   "shortfall_gib": 16.76,
-  "verdict": "FAIL — 3.24 GiB free against ~20 GB required, on the only persistent writable filesystem",
+  "verdict": "FAIL — 3.23 GiB available to a non-root build against ~20 GB required. The verdict does not depend on the reserved-block question: even the 15.8 GB PHYSICALLY free figure is below ~20 GB.",
   "alternatives_examined": [
    "/boot/efi — 796 MB free, vfat: far too small",
    "/dev/nvme0n1p2 — 8 GB vfat, unmounted, EFI/recovery: too small AND not the agent's to mount or touch",
    "/dev/shm — 15 GB free but a 16 GB RAM-backed tmpfs: still BELOW the ~20 GB requirement, and it would consume the same RAM the 12-way build needs. Phase B local parked only the 442 MB of cache .ltar archives there; phase C has no .ltar files at all — the space needed IS the build output, which must live in the tree.",
-   "stale Lean trees to reclaim — searched, none exist: phaseB_local's work tree was already removed after that run"
+   "stale Lean trees to reclaim — searched, none exist: phaseB_local's work tree was already removed after that run",
+   "ext4 root-reserved pool (12.3 GB, `tune2fs -m 0`) — would still leave ~4 GB short of the requirement, and stripping the root filesystem's reserve costs fragmentation headroom and root's recovery margin: operator's call, not done"
   ],
-  "not_done_deliberately": "no user files were deleted to make room. The disk is 99% full with the user's own data (projects 30 GB, Unity 15 GB, ~/.cache 10 GB, ...); freeing ~17 GB is the operator's decision, not the agent's."
+  "not_done_deliberately": "no user files were deleted to make room. The disk is 99% full with the user's own data (projects 30 GB, Unity 15 GB, ~/.cache 10 GB, ...); freeing ~17 GB is the operator's decision, not the agent's.",
+  "measured_free_bytes_note": "3466952704 B (3.23 GiB) is f_bavail — what df and any non-root write see. The filesystem's f_bfree is 15811837952 B (15.8 GB / 14.73 GiB), which is what GNOME Disks displays as '16 GB free'; the 12344885248 B (12.3 GB) difference is ext4's root-reserved pool, 5.11% of total. Reconciled in k1_C_precondition.txt addendum.",
+  "physically_free_bytes": 15811837952,
+  "root_reserved_bytes": 12344885248
  },
  "tree_head": null,
  "upstream_head_at_clone": null,

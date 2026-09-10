@@ -51,3 +51,21 @@ error: no default toolchain configured. run `elan default stable` to install & c
 $ find $HOME /dev/shm /tmp -maxdepth 4 -type d \( -name 'NavierStokesAndEuler*' -o -name 'k1_*' -o -name '*.lake' \)
    (no output — phase B local's work tree was already removed after that run;
     there is no stale Lean tree on this machine to reclaim)
+
+=== ADDENDUM, same session: reconciling `df` (3.3 GB) against GNOME Disks (16 GB free)
+The operator's GNOME Disks screenshot reads "247 GB — 16 GB free (93.6% full)" while `df` reports
+3.3 GB avail. Both are correct; they report different quantities. statvfs('/') on the same filesystem:
+
+  block size          4096
+  total            241554038784 B = 241.6 GB = 224.96 GiB
+  f_bfree  (free)   15811837952 B =  15.8 GB =  14.73 GiB   <- GNOME Disks reports THIS
+  f_bavail (avail)   3466952704 B =   3.5 GB =   3.23 GiB   <- df, and any non-root write, gets THIS
+  reserved-for-root 12344885248 B =  12.3 GB =  11.50 GiB   (5.11% of total)
+
+The 12.3 GB gap is ext4's reserved-block pool (mke2fs default 5%), writable only by root. A `lake build`
+running as the user would fail at 3.5 GB, not 15.8 GB.
+
+THE READING IS UNCHANGED, AND NOT MARGINALLY SO: even the full 15.8 GB physically-free figure is
+below the ~20 GB requirement. Reclaiming the reserve (`tune2fs -m 0 /dev/nvme0n1p3`) would still leave
+roughly 4 GB short, and was NOT done: stripping the reserve on the root filesystem costs fragmentation
+headroom and root's ability to recover a full disk. That is the operator's call, not the agent's.
