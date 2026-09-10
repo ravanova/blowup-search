@@ -1,0 +1,277 @@
+{
+ "schema": "arc7_k3_v1",
+ "agent": "agent_4",
+ "leg": 439,
+ "pages_read": [
+  {
+   "page": 140,
+   "id": "Lemma A.8",
+   "why": "route A: the exact backward moment representation; K6 (leg 432) reads B == 0 with heat, -(2+2h) without"
+  },
+  {
+   "page": null,
+   "id": "leg_432.md sec 1 K6_no_heat",
+   "why": "the closed-form B_beyond_Xb prediction this gate checks, and the H7 field this runner reads via build()"
+  }
+ ],
+ "claimed": {
+  "quantity": "the bracket B of T_{0,theta} beyond X_b (T_0 = E_pow sqrt(X/2)[A/L + B/X])",
+  "route_a_prediction_with_heat_written_before_run": {
+   "1e-07": 0.0,
+   "0.001": 0.0
+  },
+  "route_a_prediction_no_heat_written_before_run": {
+   "1e-07": -2.0000002,
+   "0.001": -2.002
+  },
+  "note": "these numbers are the prereg's own Sec 3 Q5 text (Lemma A.8 / leg 432 K6); nothing here was adjusted after route B was read"
+ },
+ "routes": {
+  "1e-07": {
+   "heat": {
+    "route_a_method": "Lemma A.8 (page 140) / leg 432 K6: B == 0 with the heat exterior, -(2+2h) exactly without it",
+    "route_a_value": 0.0,
+    "route_b_method": "numerical: imported build(h, heat) from arc6_residual_v1.py; H7.B_beyond_Xb, cross-checked against the general calB_h array sampled at y >= 3 (fields.B_hat_eta0)",
+    "route_b": {
+     "H7_B_beyond_Xb": 0.0,
+     "H7_A_beyond_Xb": 0.0,
+     "field_B_hat_eta0_beyond_Xb_min": 0.0,
+     "field_B_hat_eta0_beyond_Xb_max": 0.0,
+     "field_B_hat_eta0_beyond_Xb_constant": true,
+     "runtime_s": 21.90526247024536
+    }
+   },
+   "no_heat": {
+    "route_a_method": "Lemma A.8 (page 140) / leg 432 K6: B == 0 with the heat exterior, -(2+2h) exactly without it",
+    "route_a_value": -2.0000002,
+    "route_b_method": "numerical: imported build(h, heat) from arc6_residual_v1.py; H7.B_beyond_Xb, cross-checked against the general calB_h array sampled at y >= 3 (fields.B_hat_eta0)",
+    "route_b": {
+     "H7_B_beyond_Xb": -2.0000002,
+     "H7_A_beyond_Xb": 0.0,
+     "field_B_hat_eta0_beyond_Xb_min": -2.0000002,
+     "field_B_hat_eta0_beyond_Xb_max": -2.0000002,
+     "field_B_hat_eta0_beyond_Xb_constant": true,
+     "runtime_s": 21.870123147964478
+    }
+   }
+  },
+  "0.001": {
+   "heat": {
+    "route_a_method": "Lemma A.8 (page 140) / leg 432 K6: B == 0 with the heat exterior, -(2+2h) exactly without it",
+    "route_a_value": 0.0,
+    "route_b_method": "numerical: imported build(h, heat) from arc6_residual_v1.py; H7.B_beyond_Xb, cross-checked against the general calB_h array sampled at y >= 3 (fields.B_hat_eta0)",
+    "route_b": {
+     "H7_B_beyond_Xb": 0.0,
+     "H7_A_beyond_Xb": 0.0,
+     "field_B_hat_eta0_beyond_Xb_min": 0.0,
+     "field_B_hat_eta0_beyond_Xb_max": 0.0,
+     "field_B_hat_eta0_beyond_Xb_constant": true,
+     "runtime_s": 21.898963928222656
+    }
+   },
+   "no_heat": {
+    "route_a_method": "Lemma A.8 (page 140) / leg 432 K6: B == 0 with the heat exterior, -(2+2h) exactly without it",
+    "route_a_value": -2.002,
+    "route_b_method": "numerical: imported build(h, heat) from arc6_residual_v1.py; H7.B_beyond_Xb, cross-checked against the general calB_h array sampled at y >= 3 (fields.B_hat_eta0)",
+    "route_b": {
+     "H7_B_beyond_Xb": -2.002,
+     "H7_A_beyond_Xb": 0.0,
+     "field_B_hat_eta0_beyond_Xb_min": -2.002,
+     "field_B_hat_eta0_beyond_Xb_max": -2.002,
+     "field_B_hat_eta0_beyond_Xb_constant": true,
+     "runtime_s": 21.71184539794922
+    }
+   }
+  }
+ },
+ "gates": {
+  "Q5": {
+   "per_h_per_leg": {
+    "1e-07": {
+     "heat": {
+      "leg": "heat",
+      "h": 1e-07,
+      "B_measured": 0.0,
+      "abs_error": 0.0,
+      "tol": 1e-14,
+      "pass": true
+     },
+     "no_heat": {
+      "leg": "no_heat",
+      "h": 1e-07,
+      "B_measured": -2.0000002,
+      "route_a_predicted": -2.0000002,
+      "abs_error": 0.0,
+      "tol": 1e-08,
+      "pass": true
+     }
+    },
+    "0.001": {
+     "heat": {
+      "leg": "heat",
+      "h": 0.001,
+      "B_measured": 0.0,
+      "abs_error": 0.0,
+      "tol": 1e-14,
+      "pass": true
+     },
+     "no_heat": {
+      "leg": "no_heat",
+      "h": 0.001,
+      "B_measured": -2.002,
+      "route_a_predicted": -2.002,
+      "abs_error": 0.0,
+      "tol": 1e-08,
+      "pass": true
+     }
+    }
+   },
+   "overall": "YES",
+   "tolerance_as_preregistered": {
+    "heat": "|B| < 1e-14 (scaled)",
+    "no_heat": "|B + 2 + 2h| < 1e-8 at h in {1e-7, 1e-3} both"
+   }
+  }
+ },
+ "controls": {
+  "1e-07": {
+   "heat": {
+    "truncate_sqrtX": {
+     "B_fake": 0.0,
+     "gate_check": {
+      "leg": "heat",
+      "h": 1e-07,
+      "B_measured": 0.0,
+      "abs_error": 0.0,
+      "tol": 1e-14,
+      "pass": true
+     },
+     "fired_as_planted": true,
+     "description": "Adversary planted fake 1: keep only the leading E_pow sqrt(X/2)*A/L term of"
+    },
+    "cutoff_stress": {
+     "B_fake": 0.0,
+     "gate_check": {
+      "leg": "heat",
+      "h": 1e-07,
+      "B_measured": 0.0,
+      "abs_error": 0.0,
+      "tol": 1e-14,
+      "pass": true
+     },
+     "fired_as_planted": true,
+     "description": "Adversary planted fake 2: cut off the total stress T_0 itself at X_b (T_0 := 0 for"
+    }
+   },
+   "no_heat": {
+    "truncate_sqrtX": {
+     "B_fake": 0.0,
+     "gate_check": {
+      "leg": "no_heat",
+      "h": 1e-07,
+      "B_measured": 0.0,
+      "route_a_predicted": -2.0000002,
+      "abs_error": 2.0000002,
+      "tol": 1e-08,
+      "pass": false
+     },
+     "fired_as_planted": true,
+     "description": "Adversary planted fake 1: keep only the leading E_pow sqrt(X/2)*A/L term of"
+    },
+    "cutoff_stress": {
+     "B_fake": 0.0,
+     "gate_check": {
+      "leg": "no_heat",
+      "h": 1e-07,
+      "B_measured": 0.0,
+      "route_a_predicted": -2.0000002,
+      "abs_error": 2.0000002,
+      "tol": 1e-08,
+      "pass": false
+     },
+     "fired_as_planted": true,
+     "description": "Adversary planted fake 2: cut off the total stress T_0 itself at X_b (T_0 := 0 for"
+    }
+   }
+  },
+  "0.001": {
+   "heat": {
+    "truncate_sqrtX": {
+     "B_fake": 0.0,
+     "gate_check": {
+      "leg": "heat",
+      "h": 0.001,
+      "B_measured": 0.0,
+      "abs_error": 0.0,
+      "tol": 1e-14,
+      "pass": true
+     },
+     "fired_as_planted": true,
+     "description": "Adversary planted fake 1: keep only the leading E_pow sqrt(X/2)*A/L term of"
+    },
+    "cutoff_stress": {
+     "B_fake": 0.0,
+     "gate_check": {
+      "leg": "heat",
+      "h": 0.001,
+      "B_measured": 0.0,
+      "abs_error": 0.0,
+      "tol": 1e-14,
+      "pass": true
+     },
+     "fired_as_planted": true,
+     "description": "Adversary planted fake 2: cut off the total stress T_0 itself at X_b (T_0 := 0 for"
+    }
+   },
+   "no_heat": {
+    "truncate_sqrtX": {
+     "B_fake": 0.0,
+     "gate_check": {
+      "leg": "no_heat",
+      "h": 0.001,
+      "B_measured": 0.0,
+      "route_a_predicted": -2.002,
+      "abs_error": 2.002,
+      "tol": 1e-08,
+      "pass": false
+     },
+     "fired_as_planted": true,
+     "description": "Adversary planted fake 1: keep only the leading E_pow sqrt(X/2)*A/L term of"
+    },
+    "cutoff_stress": {
+     "B_fake": 0.0,
+     "gate_check": {
+      "leg": "no_heat",
+      "h": 0.001,
+      "B_measured": 0.0,
+      "route_a_predicted": -2.002,
+      "abs_error": 2.002,
+      "tol": 1e-08,
+      "pass": false
+     },
+     "fired_as_planted": true,
+     "description": "Adversary planted fake 2: cut off the total stress T_0 itself at X_b (T_0 := 0 for"
+    }
+   }
+  }
+ },
+ "controls_summary": {
+  "all_fired_as_planted": true,
+  "note": "each planted fake gives B_fake = 0 identically; this must (and does) pass the heat leg trivially and FAIL the no-heat leg at both h -- a defect would be a fake that instead passed the no-heat leg or drifted with h"
+ },
+ "dropped": {
+  "Q6": {
+   "quantity": "the flat weight's linear coefficient k(delta) = delta^3 d/d(delta) log T_{0,theta}",
+   "reason": "DROPPED before any K3 run by experiments/journal/leg_439_prereg_amend.md. The prereg's expansion log T_{0,theta} = -4/delta^2 - 3 log delta + log b + O(delta) differentiates to k = 8 - 3 delta^2 + O(delta^3), not 8 - 3 delta as Sec 0/Q6 stated (delta^3 d/d(delta)(-3 log delta) = -3 delta^2, not -3 delta); on that corrected expansion the gated quantity c1 = (k-8)/delta -> -3 delta -> 0, never -3. Separately, leg 432's own measurement (writeup/data/arc6_residual_v1.json preregistered_runs/1e-07/H7/delta3_dlogT_ddelta_at_0.05 = 8.000135, i.e. (k-8)/delta = 0.0027) shows the expansion is not reached at any resolvable delta; H2/not_testable and H2/delta_cross = 1.1e-69 confirm the -3 log delta term needs a collar no pinned grid reaches. With the -3 gone, route A's only surviving, resolvable prediction is k -> 8, the bare cutoff's own exponent -- a quantity the adversary can choose outright (a bare cutoff with no profile at all returns k=8 exactly), which is the same tautology Sec 3 already dropped S2's support clauses for. Per the wave's one rule, a gate that cannot be put in two-route-on-an-adversary-proof quantity form is DROPPED, not weakened. This worker did not run Q6, did not compute k(delta), and did not substitute anything in its place."
+  }
+ },
+ "instantiated_vs_scaled": {
+  "instantiated": "lambda = 0.1 (arc6_profile_v1.json pinned outer profile), h in {1e-7, 1e-3} (the paper's h and a computable h per Sec 0's h-signal rule), the terminal tail y in [0, 3.5]",
+  "scaled": "everything carried as T_hat = e^{4/delta^2} T_0, delta = 3 - y (arc6_residual_v1.py's own convention), so nothing underflows at the paper's h = 1e-7"
+ },
+ "could_not_determine": [],
+ "what_this_does_not_establish": "This gate checks only that Lemma A.8's exact backward-moment algebra for the bracket B beyond X_b is realised numerically on the pinned outer profile at lambda = 0.1 and two computable h. It does not establish that the construction closes at the paper's own lambda or h, does not verify any other lemma or proposition in the manuscript, does not touch Q1-Q4 or the dropped Q6, and does not move any wall in DIRECTION.md (which this worker did not read). Route B here reuses the same imported, never-edited build() that also produced leg 432's own record; it is an independent numerical evaluation of the general calB_h array (cross-checked directly against the pinned fields.B_hat_eta0 beyond y=3 in this runner), not a re-derivation of Lemma A.8 from first principles. This is Tier 2, not a proof.",
+ "forbidden_paths_opened": "none",
+ "runtime_s": 87.38885617256165,
+ "tier2_statement": "This is Tier 2, not a proof."
+}
