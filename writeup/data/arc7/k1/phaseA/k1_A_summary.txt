@@ -1,0 +1,17 @@
+phase=A
+t_start=2026-09-10T08:30:58Z
+nproc=4
+model name	: Intel(R) Xeon(R) Processor @ 2.80GHz
+Mem:              15           0          14           0           0          15
+/dev/vda        252G   29G  8.8G  77% /
+tree_head=8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538
+toolchain=leanprover/lean4:v4.34.0-rc2
+Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)
+Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)
+mathlib_rev=85e3a25e006c35636f0e53b0e9296caca2685bc0
+comparator_rev=19e111e2141cf333c7daff0f64c5f24acc91dd2e
+build_rc=0 build_s=2047
+build_error_lines=0
+axioms_s=45
+olean_count=2486
+t_end=2026-09-10T09:05:51Z total_s=2093

@@ -1,0 +1,59 @@
+{
+ "schema": "arc7_k1_phase_v1",
+ "leg": 437,
+ "phase": "A",
+ "what": "resume the arc-6 tree (leg 435: NavierStokes built, Euler stopped at [10526/11251]) to completion, then #print axioms; pre-registered leg_437_prereg.md, pushed f2ad6fc before the run",
+ "runner": "scripts/arc7_k1_kernel_check.sh A",
+ "machine": {
+  "nproc": 4,
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+  "mem_gb": 15,
+  "container": "claude code remote, one session"
+ },
+ "tree_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "toolchain": "leanprover/lean4:v4.34.0-rc2",
+ "mathlib_rev": "85e3a25e006c35636f0e53b0e9296caca2685bc0",
+ "comparator_rev": "19e111e2141cf333c7daff0f64c5f24acc91dd2e",
+ "t_start": "2026-09-10T08:30:58Z",
+ "t_end": "2026-09-10T09:05:51Z",
+ "build_rc": 0,
+ "build_s": 2047,
+ "build_error_lines": 0,
+ "jobs": "11251/11251, 724 built in this phase, the rest replayed",
+ "olean_count_project": 2486,
+ "axioms_verbatim": "=== AXIOMS_T0 2026-09-10T09:05:06Z\n'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n=== AXIOMS_RC=0 2026-09-10T09:05:51Z\n",
+ "result": {
+  "navier_stokes_breakdown_R3": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "navier_stokes_breakdown_periodic": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "sorryAx_reachable": "NO",
+  "exit_code": 0
+ },
+ "gate": {
+  "a_build_completes": "YES \u2014 Build completed successfully (11251 jobs), rc 0, 0 error lines",
+  "b_print_axioms": "verbatim in axioms_verbatim",
+  "c_sorryAx_reachable": "NO",
+  "d_wall_time": "PARTIAL \u2014 2047 s for the Euler remainder only; NavierStokes was built in leg 435 (see arc6/lean/logs/lean_chain_leg431.log); phase B carries the end-to-end figure"
+ },
+ "reading": "GREEN (prereg \u00a72)",
+ "what_this_does_not_establish": [
+  "an end-to-end wall time (phase B)",
+  "that mathlib's cached oleans match their sources",
+  "Theorem 1.1 of the paper (the statements are Fefferman (C)/(D))",
+  "verification by a second agent \u2014 same Conductor, same container as leg 435"
+ ],
+ "files": [
+  "k1_A_build.log",
+  "k1_A_summary.txt",
+  "k1_A_axioms.log",
+  "k1_axioms_check.lean",
+  "k1_A_axioms_in_build_log.txt"
+ ]
+}
