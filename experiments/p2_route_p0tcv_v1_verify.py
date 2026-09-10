@@ -225,8 +225,11 @@ def locate_tex(explicit: str | None, allow_fetch: bool) -> tuple[Path, dict]:
     import urllib.request
     tmp = Path(tempfile.mkdtemp(prefix="leg300_bcg_"))
     tgz = tmp / "eprint.tar.gz"
+    # arXiv asks bulk downloaders to identify themselves; set CONTACT_EMAIL if you
+    # want your own address in the User-Agent rather than the repository's.
+    contact = os.environ.get("CONTACT_EMAIL", "blowup-search (github.com/ravanova/blowup-search)")
     req = urllib.request.Request(
-        BCG_EPRINT_URL, headers={"User-Agent": "leg300-verify/1.0 (andyisrav@gmail.com)"})
+        BCG_EPRINT_URL, headers={"User-Agent": f"leg300-verify/1.0 ({contact})"})
     with urllib.request.urlopen(req, timeout=180) as r, open(tgz, "wb") as fh:
         fh.write(r.read())
     prov["source"] = "downloaded"
