@@ -17,13 +17,23 @@ FILES = {3: "agent_3_pulses.json", 4: "agent_4_iteration.json", 5: "agent_5_head
 GATES = {3: ["P1", "P2", "P3"], 4: ["I1", "I2", "I3"], 5: ["V1", "V2", "V3"], 6: ["S1", "S2", "S3"]}
 
 
+def _norm(s):
+    """'NO (refinement NOT-INSTANTIATED ...)' -> 'NO'; 'NOT FAKEABLE' stays; the detail lives in gates_detail."""
+    s = str(s).strip()
+    head = s.split("(")[0].strip()
+    up = head.upper()
+    for tok in ("NOT FAKEABLE", "FAKEABLE", "NOT ATTEMPTED", "NOT-INSTANTIATED", "NOT TESTABLE", "YES", "NO"):
+        if up.startswith(tok): return tok
+    return head[:40]
+
+
 def _answer(v):
     """A gate entry may be a string, a [answer, detail] pair, or a dict with an 'answer'/'verdict' key."""
-    if isinstance(v, str): return v
-    if isinstance(v, (list, tuple)) and v: return str(v[0])
+    if isinstance(v, str): return _norm(v)
+    if isinstance(v, (list, tuple)) and v: return _norm(v[0])
     if isinstance(v, dict):
         for k in ("answer", "verdict", "result", "status"):
-            if k in v: return str(v[k])
+            if k in v: return _norm(v[k])
     return str(v)[:40]
 
 

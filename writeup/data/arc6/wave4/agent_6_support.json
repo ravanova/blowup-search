@@ -1,0 +1,1451 @@
+{
+ "schema": "arc6_wave4_v1",
+ "agent": 6,
+ "unit": "(vi) support",
+ "leg": 433,
+ "pdf_sha256": "0e779481c4da40bd28d1e642e1d8ca57447d129610df28dfa5a11e9af8ae228f",
+ "prereg": "experiments/journal/leg_433_prereg.md section 2 (vi)",
+ "pages_read": [
+  7,
+  9,
+  12,
+  13,
+  14,
+  15,
+  16,
+  21,
+  27,
+  32,
+  33,
+  54,
+  116,
+  117,
+  118,
+  119,
+  120,
+  121,
+  122,
+  123,
+  124,
+  125,
+  130,
+  137,
+  138,
+  140,
+  141,
+  142,
+  143,
+  144
+ ],
+ "claimed": {
+  "written_before_run": true,
+  "q_of_t": "(3.2), p. 7: tau = q(1 - eta^2), z = q^D eta, X = r^2/(2q), tau = 1 - t.  On z = 0 (eta = 0): q(t) = tau = 1 - t.  q = q(z, tau) unique with q ~ tau + |z|^{1/D}.",
+  "X_b": "p. 137 (A.6 preamble): y = log(X/X_tail), X_b = e^3 X_tail; (A.12) p. 130: psi_o(y) = 1 - sigma((y-1)/2), f_o = 1 - rho_o psi_o on 0 <= y <= 3, extended by 1 to the right.  Pinned: log X_tail = 476.1528541875995 (leg 430, lambda = 0.1).",
+  "support_clauses": [
+   {
+    "id": "C1",
+    "where": "Theorem 3.1(iii), (3.4)-(3.5), p. 15; Theorem 4.6(ii), p. 33; p. 9",
+    "claim": "For X >= X_ext the residual is identically zero and A = 0, B = K(r,tau) = r^{-1-2h} H_ext(tau/r^2) (3.5).  The leading stress profile T_0 is zero for 0 <= X <= X_a and X >= X_b and nonzero at every X_a < X < X_b (Thm 4.6(ii)); T is nonzero precisely in the annulus sqrt(2qX_a) < r < sqrt(2qX_b) (p. 9).",
+    "leading_order_can_check": "X >= X_b part only (S1); X <= X_a needs the axis construction (Prop B.2, Cor B.10) which this unit does not build."
+   },
+   {
+    "id": "C2",
+    "where": "Lemma A.8, p. 140-141; (A.46)",
+    "claim": "With U = 0, E = E_pow f_o [1 + chi_K (H(2d/X) - 1)] on y >= 0 and the exact moment conditions M(inf) = J(inf) = S(inf) = 0, int (H - H_pow) dX = 0, the leading tangential stresses vanish for X >= X_b; for X >= X_b the field is (0, K, 0) with z-independent pressure and Lemma A.6 makes both leading residuals zero there.",
+    "leading_order_can_check": "yes: R^(0) = 0 exactly for X >= X_b from the pinned T_0 (S1); the heat-exterior mechanism via (A.37) (S2b)."
+   },
+   {
+    "id": "C3",
+    "where": "Lemma A.6, (A.32)-(A.37), p. 138; Step 4 p. 116; (10.7)-(10.8) p. 119",
+    "claim": "K(r,t) = c_inf s^{-A} H(2 tau/s), H(Z) = Gamma(a_K)^{-1} int_0^inf e^{-v} v^{a_K-1} (1+Zv)^{-h} dv, a_K = 1 + h, satisfies d_t K = (d_rr + r^{-1} d_r - r^{-2}) K exactly because Z^2 H'' + (1 + 2 a_K Z) H' + a_K(a_K - 1) H = 0 (A.37); H(Z) = 1 - h(1+h) Z + O(Z^2) (A.36).  'The heat equation for K and d_r p_loc = K^2/r also show directly that the uncut exterior residual is exactly zero' (p. 119).",
+    "leading_order_can_check": "yes, from the paper's own integral: (A.37) residual by quadrature; (A.36) against the pinned kappa = 2h(1+h)d."
+   },
+   {
+    "id": "C4",
+    "where": "Step 4, p. 116; p. 117 (10.1); Theorem 3.1, p. 15",
+    "claim": "0 < X_a < X_ext < inf; 'for a fixed X_ext beyond all slow supports, A = 0 and B = K' (all annular wave and mean potentials vanish beyond X_b; Stokes streamfunctions vanish in the common exterior).  So X_ext >= X_b, with X_ext not given numerically.",
+    "leading_order_can_check": "only that the leading part vanishes beyond X_b (S1); the corrections' supports are not built here."
+   },
+   {
+    "id": "C5",
+    "where": "Proposition 10.1 and (10.2)-(10.4), p. 117-118",
+    "claim": "u = curl(cA) + cB e_theta, p = c p_loc, c = chi_x(x) chi_t(t), extended by zero outside the cutoff support (10.4); chi_x = 1 on r <= r_0/2, |z| <= z_0/2, supp chi_x in {r < r_0, |z| < z_0}; chi_t = 0 for 1 - t >= tau_0, = 1 for 1 - t <= tau_0/2; (10.3) q <= C_0(tau + |z|^{1/D}) and C_0(tau_0 + z_0^{1/D}) < q_*/2 keep supp c inside q < q_*/2.  supp u(.,t) U supp p(.,t) subset K = supp chi_x for every 0 <= t < 1; u = p = 0 for all small t (10.2).",
+    "leading_order_can_check": "no: r_0, z_0, tau_0, q_*, K are existence-only constants; the leading field u^(0) itself is NOT compactly supported (u_theta = K ~ r^{-1-2h} beyond X_b) - its compact support comes from chi_x alone.  Only r_b(t) of the leading residual's support is reported (S1)."
+   },
+   {
+    "id": "C6",
+    "where": "(10.5), p. 118; Lemma 10.2 and (10.6), (10.9), p. 118-119",
+    "claim": "f = R(u,p) for 0 <= t < 1 (10.5), including every cutoff derivative; div f may be nonzero.  d^alpha_x d^j_t f converges uniformly on R^3 as t -> 1 to d^alpha F_j, F_j in C_c^inf supported in K, d^alpha F_j(0) = 0 (10.6).  Near the origin, from (3.4) on X <= X_ext and the exact zero for larger X: |d^alpha_x d^j_t f| <= C (tau + |z|^{1/D})^N for every N (10.9).",
+    "leading_order_can_check": "no for the limits (they need the corrections); the leading residual's own q-exponent at fixed X is measured (S2c) and the gap to (10.9)/(3.4) reported."
+   },
+   {
+    "id": "C7",
+    "where": "Lemma 10.3 and (10.11)-(10.12), p. 120; Theorem 1.1 p. 1",
+    "claim": "f extends to C_c^inf(R^3 x (0, inf)) with support in K x [0, 2] by f(x, 1 + sigma) = sum_j chi_0(b_j sigma) sigma^j F_j(x)/j! (10.11), chi_0 = 1 near 0 and 0 for arguments >= 1, b_j >= 1 increasing.  NOTE: the paper does NOT extend f by zero at t = 1; the zero extension is spatial (outside the cutoff support, (10.4)) and temporal for t near 0 ((10.2), chi_t) and for t >= 2 (chi_0).  At t = 1 the extension is the Borel-type series (10.11) whose coefficients F_j vanish with all derivatives at x = 0 only.",
+    "leading_order_can_check": "no."
+   },
+   {
+    "id": "C8",
+    "where": "p. 54 (Step 5 of the higher-order stress), Theorem 4.6(iv) p. 33, p. 32 (flat at the edge)",
+    "claim": "Beyond X_b the leading profile is the z-independent heat field, so the order-1 stress T_1 is still supported in the closed active annulus; 1 - f_o = e^{-4/delta_b^2} x smooth, delta_b = log(X_b/X).  'Flat at the radial edge': d^j_X g(X_e, eta) = 0 for every j; the stress will be flat at both edges.",
+    "leading_order_can_check": "flatness of T_0 at X_b: yes, this is S3's (A.51)."
+   }
+  ],
+  "flatness_statement": "Theorem 3.1(iii), (3.4), p. 15: |d^alpha_x d^b_t R(u,p)| <= C_{alpha,b,N,X_1} q^N for 0 <= X <= X_1, q -> 0, every alpha, b, N, every finite X_1; Figure 6 p. 15; obtained by Lemma 5.4 and Prop 9.9 (sum of corrections, sigma_j = 51 + 10j -> inf, p. 14).  This is a property of the corrected field.  The leading order gives instead R^(0) = q^{-A-1/2} x (-div) T_0 (Prop 4.2, p. 27), a fixed negative power of q at fixed X in the annulus: the pulses (Prop 7.5) and the cycle (Prop 9.6) carry the flatness.",
+  "A51": "Proposition A.10, p. 142: for delta = 3 - y small, T_{0,theta} = e^{-4/delta^2} delta^{-3} b_theta(delta, eta), b_theta(0, eta) > 0 (A.48); T_{0,z} = e^{-4/delta^2} delta^3 b_z (A.49); T_{0,z}/T_{0,theta} = delta^6 b_z/b_theta -> 0 (A.50); for every fixed mixed profile derivative d^I: |d^I T_0| <= C_I e^{-4/delta^2} delta^{-N_I}, |T_0| >= c e^{-4/delta^2} delta^{-3} (A.51); constants independent of q.  Leg 432 (H2, H3, amendment section 1): the quoted delta-powers delta^{-3}, delta^3, delta^6 are the limit on a collar delta <~ 1e-69 for this profile; at every resolvable delta the pinned stress has T_theta ~ e^{-4/delta^2} delta^0 (boundary term 1e-203 of the total).  Expectation written before running: with That_theta ~ delta^0, (d_y T)^ ~ (8/delta^3) That -> N_1 = 3, (d_y^2 T)^ ~ (64/delta^6) That -> N_2 = 6; both inside N <= 3k + 3.  The lower bound |T_0| >= c e^{-4/delta^2} delta^{-3} is NOT TESTABLE at resolvable delta (leg 432); delta^3 That_theta is reported, not scored.",
+  "S1_pass_rule": "max over y >= 3 of |Ahat|, |Bhat|, |Tz bracket hat|, |That_theta|, |That_z|, |Rth hat|, |Rz hat| all == 0.0 exactly (floating zero, structural: every term is psi_o, f_o' or an integral over [y, 3], plus the constant (2+2h)(s_h - 1) that vanishes only with the heat factor); and the measured support edge (first y beyond which That == 0) equals 3.0; r_b(t) reported at t = 1 - 1e-2, 1e-4, 1e-6.",
+  "controls": {
+   "no_heat": "heat = False (leg 432 K6): S1 must fail, Bhat(y >= 3) = -(2 + 2h) and Rth hat beyond X_b = -h(2+2h) E_pow/sqrt(2X) (i.e. R^(0)_theta = -2h(2+2h) K/r^2, the power law's own swirl-viscosity residual); expected number at h = 1e-3: Bhat = -2.002, |Rth|/(E_pow/sqrt(2X)) = 2.002e-3.",
+   "poly_cutoff": "cutoff = 'poly' (leg 432 K1: psi_o = (delta/2)^4): S3 must fail, no N <= 60 bounds e^{4/delta^2} delta^N |d^k T|; the N the last pair would need is ~ (4/0.05^2 - 4/0.1^2)/ln 2 = 1731; reported.  S1 still passes for it (the cutoff is compactly supported) - reported, not a pre-registered expectation.",
+   "twin": "h = 1e-3, paper cutoff, heat on: S1 and S3 must pass (the controls run at h = 1e-3 as leg 432's did)."
+  }
+ },
+ "tier": "This is Tier 2, not a proof.",
+ "measured": {
+  "main_h=1e-7": {
+   "params": {
+    "h": 1e-07,
+    "dy": 0.001,
+    "cutoff": "paper",
+    "heat": true,
+    "n_eta": 17
+   },
+   "S1": {
+    "beyond_Xb_max_abs": {
+     "A_hat": 0.0,
+     "B_hat": 0.0,
+     "Tz_bracket_hat": 0.0,
+     "Ttheta_hat": 0.0,
+     "Tz_hat": 0.0,
+     "Rtheta_hat": 0.0,
+     "Rz_hat": 0.0,
+     "n_points": 501,
+     "Rtheta_over_Epow_sqrt2X_beyond": 0.0,
+     "B_hat_beyond_value": 0.0
+    },
+    "all_exactly_zero": true,
+    "support_edge_y": 3.0,
+    "support_edge_expected_y": 3.0,
+    "log10_Xb": 208.09344056186785,
+    "log10_X_tail": 206.7905571161581,
+    "r_b": {
+     "t=1-0.01": {
+      "q": 0.01,
+      "log10_r_b": 103.19723527876592,
+      "r_b": 1.574835799723465e+103
+     },
+     "t=1-0.0001": {
+      "q": 0.0001,
+      "log10_r_b": 102.19723527876592,
+      "r_b": 1.574835799723465e+102
+     },
+     "t=1-1e-06": {
+      "q": 1e-06,
+      "log10_r_b": 101.19723527876592,
+      "r_b": 1.574835799723465e+101
+     }
+    },
+    "tau_at_which_r_b_equals_1": 4.03208280533699e-209,
+    "log10_tau_at_which_r_b_equals_1": -208.39447055753186,
+    "r_b_scaling": "r_b(t) = sqrt(2 (1 - t) X_b) on z = 0: exact bookkeeping from (3.2); it tends to 0 as t -> 1, but for this lambda = 0.1 profile only once 1 - t < 1/(2 X_b)."
+   },
+   "S3": {
+    "deltas_used": [
+     0.3999999999999999,
+     0.19999999999999973,
+     0.10000000000000009,
+     0.04999999999999982
+    ],
+    "theta_k0": {
+     "log10_Q": [
+      -39.3727157727693,
+      -39.51795760760152,
+      -39.57328440997381,
+      -39.59769290904741
+     ],
+     "N_min": 0,
+     "bound": 3,
+     "local_power_0.1_to_0.05": -0.08108327882662786,
+     "N_needed_by_last_pair": 0.0
+    },
+    "theta_k1": {
+     "log10_Q": [
+      -37.26888965413526,
+      -36.517355937870164,
+      -35.67013090776167,
+      -34.79150560742207
+     ],
+     "N_min": 3,
+     "bound": 6,
+     "local_power_0.1_to_0.05": 2.9187300700769447,
+     "N_needed_by_last_pair": 3.0
+    },
+    "theta_k2": {
+     "log10_Q": [
+      -35.19095626211681,
+      -33.52329867074631,
+      -31.768608580013908,
+      -29.985725633912832
+     ],
+     "N_min": 6,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 5.9226089485486755,
+     "N_needed_by_last_pair": 6.0
+    },
+    "z_k0": {
+     "log10_Q": [
+      -177.06922987637932,
+      -178.1320847267105,
+      -179.1061785806149,
+      -180.0431696761598
+     ],
+     "N_min": 0,
+     "bound": 3,
+     "local_power_0.1_to_0.05": -3.1126170449498627,
+     "N_needed_by_last_pair": 0.0
+    },
+    "z_k1": {
+     "log10_Q": [
+      -174.94044473812076,
+      -175.12489572319242,
+      -175.20137730555,
+      -175.23657223732906
+     ],
+     "N_min": 0,
+     "bound": 6,
+     "local_power_0.1_to_0.05": -0.11691503267445504,
+     "N_needed_by_last_pair": 0.0
+    },
+    "z_k2": {
+     "log10_Q": [
+      -172.8351834955462,
+      -172.12408663328517,
+      -171.29819688553363,
+      -170.43038148496635
+     ],
+     "N_min": 3,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 2.882820360320362,
+     "N_needed_by_last_pair": 3.0
+    },
+    "delta3_Ttheta_hat": [
+     2.713090003603442e-41,
+     2.4273498745220883e-42,
+     2.6712564881836285e-43,
+     3.1565822055533994e-44
+    ],
+    "Ttheta_hat": [
+     4.23920313063038e-40,
+     3.034187343152623e-40,
+     2.6712564881836214e-40,
+     2.5252657644427463e-40
+    ],
+    "YES": true
+   },
+   "S2c_q_exponent": {
+    "y_star": 1.5,
+    "eta_star": 6.123233995736766e-17,
+    "Rtheta_at_y_star": 3.0542231962442093e-45,
+    "Rz_at_y_star": 1.5619415259161698e-192,
+    "fit_exponent_of_R0_theta_in_q": -1.5000000999999832,
+    "bookkeeping_exponent_minus_A_minus_1": -1.5000000999999998,
+    "abs_diff": 1.6764367671839864e-14,
+    "values": {
+     "0.01": {
+      "log10_abs_R0_theta": -145.08558345046185,
+      "log10_abs_R0_theta_over_c_inf": -113.1815679541231
+     },
+     "0.001": {
+      "log10_abs_R0_theta": -143.58558335046186,
+      "log10_abs_R0_theta_over_c_inf": -111.6815678541231
+     },
+     "0.0001": {
+      "log10_abs_R0_theta": -142.08558325046187,
+      "log10_abs_R0_theta_over_c_inf": -110.18156775412311
+     }
+    },
+    "log10_sup_annulus_of_q^(A+1)_R0_theta": -143.1310834676097,
+    "gap_to_flatness": {
+     "claimed": "(3.4): |R| <= C q^N for every N at fixed X <= X_1",
+     "leading_order": "|R^(0)| = C' q^{-(A+1)} = C' q^{-1.5-h} at fixed X in the annulus",
+     "gap_exponent_for_N": "N + 1.5 + h for every N; infinite in the sense that no power of q is enough - carried by the pulses and the cycle, not measured here"
+    }
+   },
+   "runtime_s": 3.3919334411621094,
+   "crosscheck_against_leg432_artefact": {
+    "A_hat_rel": 0.0,
+    "B_hat_eta0_rel": 0.0,
+    "log10_Ttheta_hat_eta=1_max_abs_diff": 0.0
+   }
+  },
+  "resolution_study_S3": {
+   "0.002": {
+    "deltas_used": [
+     0.3999999999999999,
+     0.19999999999999973,
+     0.10000000000000009,
+     0.04999999999999982
+    ],
+    "theta_k0": {
+     "log10_Q": [
+      -39.3727157727693,
+      -39.51795760760152,
+      -39.57328440997381,
+      -39.59769290904741
+     ],
+     "N_min": 0,
+     "bound": 3,
+     "local_power_0.1_to_0.05": -0.08108327882662786,
+     "N_needed_by_last_pair": 0.0
+    },
+    "theta_k1": {
+     "log10_Q": [
+      -37.26888958424702,
+      -36.51735593386401,
+      -35.6701309074109,
+      -34.79150560738506
+     ],
+     "N_min": 3,
+     "bound": 6,
+     "local_power_0.1_to_0.05": 2.918730069034652,
+     "N_needed_by_last_pair": 3.0
+    },
+    "theta_k2": {
+     "log10_Q": [
+      -35.190956114266,
+      -33.52329866261328,
+      -31.76860857930974,
+      -29.98572563383876
+     ],
+     "N_min": 6,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 5.922608946455533,
+     "N_needed_by_last_pair": 6.0
+    },
+    "z_k0": {
+     "log10_Q": [
+      -177.06922987637932,
+      -178.1320847267105,
+      -179.1061785806149,
+      -180.0431696761598
+     ],
+     "N_min": 0,
+     "bound": 3,
+     "local_power_0.1_to_0.05": -3.1126170449498627,
+     "N_needed_by_last_pair": 0.0
+    },
+    "z_k1": {
+     "log10_Q": [
+      -174.94044394836337,
+      -175.12489535823508,
+      -175.20137705757614,
+      -175.23657203506377
+     ],
+     "N_min": 0,
+     "bound": 6,
+     "local_power_0.1_to_0.05": -0.11691518451510073,
+     "N_needed_by_last_pair": 0.0
+    },
+    "z_k2": {
+     "log10_Q": [
+      -172.83518192615455,
+      -172.1240859036983,
+      -171.29819638960188,
+      -170.43038108043677
+     ],
+     "N_min": 3,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 2.8828200566889217,
+     "N_needed_by_last_pair": 3.0
+    },
+    "delta3_Ttheta_hat": [
+     2.713090003603442e-41,
+     2.4273498745220883e-42,
+     2.6712564881836285e-43,
+     3.1565822055533994e-44
+    ],
+    "Ttheta_hat": [
+     4.23920313063038e-40,
+     3.034187343152623e-40,
+     2.6712564881836214e-40,
+     2.5252657644427463e-40
+    ],
+    "YES": true
+   },
+   "0.0005": {
+    "deltas_used": [
+     0.3999999999999999,
+     0.19999999999999973,
+     0.10000000000000009,
+     0.04999999999999982
+    ],
+    "theta_k0": {
+     "log10_Q": [
+      -39.3727157727693,
+      -39.51795760760152,
+      -39.57328440997381,
+      -39.59769290904741
+     ],
+     "N_min": 0,
+     "bound": 3,
+     "local_power_0.1_to_0.05": -0.08108327882662786,
+     "N_needed_by_last_pair": 0.0
+    },
+    "theta_k1": {
+     "log10_Q": [
+      -37.268889671606985,
+      -36.517355938871724,
+      -35.670130907849355,
+      -34.79150560743132
+     ],
+     "N_min": 3,
+     "bound": 6,
+     "local_power_0.1_to_0.05": 2.918730070337506,
+     "N_needed_by_last_pair": 3.0
+    },
+    "theta_k2": {
+     "log10_Q": [
+      -35.19095629908104,
+      -33.52329867277969,
+      -31.768608580189944,
+      -29.98572563393135
+     ],
+     "N_min": 6,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 5.922608949071947,
+     "N_needed_by_last_pair": 6.0
+    },
+    "z_k0": {
+     "log10_Q": [
+      -177.06922987637932,
+      -178.1320847267105,
+      -179.1061785806149,
+      -180.0431696761598
+     ],
+     "N_min": 0,
+     "bound": 3,
+     "local_power_0.1_to_0.05": -3.1126170449498627,
+     "N_needed_by_last_pair": 0.0
+    },
+    "z_k1": {
+     "log10_Q": [
+      -174.94044493555853,
+      -175.12489581443126,
+      -175.20137736754313,
+      -175.23657228789511
+     ],
+     "N_min": 0,
+     "bound": 6,
+     "local_power_0.1_to_0.05": -0.11691499471457685,
+     "N_needed_by_last_pair": 0.0
+    },
+    "z_k2": {
+     "log10_Q": [
+      -172.8351838878923,
+      -172.12408681568098,
+      -171.29819700951595,
+      -170.4303815860982
+     ],
+     "N_min": 3,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 2.882820436227939,
+     "N_needed_by_last_pair": 3.0
+    },
+    "delta3_Ttheta_hat": [
+     2.713090003603442e-41,
+     2.4273498745220883e-42,
+     2.6712564881836285e-43,
+     3.1565822055533994e-44
+    ],
+    "Ttheta_hat": [
+     4.23920313063038e-40,
+     3.034187343152623e-40,
+     2.6712564881836214e-40,
+     2.5252657644427463e-40
+    ],
+    "YES": true
+   },
+   "0.001": {
+    "deltas_used": [
+     0.3999999999999999,
+     0.19999999999999973,
+     0.10000000000000009,
+     0.04999999999999982
+    ],
+    "theta_k0": {
+     "log10_Q": [
+      -39.3727157727693,
+      -39.51795760760152,
+      -39.57328440997381,
+      -39.59769290904741
+     ],
+     "N_min": 0,
+     "bound": 3,
+     "local_power_0.1_to_0.05": -0.08108327882662786,
+     "N_needed_by_last_pair": 0.0
+    },
+    "theta_k1": {
+     "log10_Q": [
+      -37.26888965413526,
+      -36.517355937870164,
+      -35.67013090776167,
+      -34.79150560742207
+     ],
+     "N_min": 3,
+     "bound": 6,
+     "local_power_0.1_to_0.05": 2.9187300700769447,
+     "N_needed_by_last_pair": 3.0
+    },
+    "theta_k2": {
+     "log10_Q": [
+      -35.19095626211681,
+      -33.52329867074631,
+      -31.768608580013908,
+      -29.985725633912832
+     ],
+     "N_min": 6,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 5.9226089485486755,
+     "N_needed_by_last_pair": 6.0
+    },
+    "z_k0": {
+     "log10_Q": [
+      -177.06922987637932,
+      -178.1320847267105,
+      -179.1061785806149,
+      -180.0431696761598
+     ],
+     "N_min": 0,
+     "bound": 3,
+     "local_power_0.1_to_0.05": -3.1126170449498627,
+     "N_needed_by_last_pair": 0.0
+    },
+    "z_k1": {
+     "log10_Q": [
+      -174.94044473812076,
+      -175.12489572319242,
+      -175.20137730555,
+      -175.23657223732906
+     ],
+     "N_min": 0,
+     "bound": 6,
+     "local_power_0.1_to_0.05": -0.11691503267445504,
+     "N_needed_by_last_pair": 0.0
+    },
+    "z_k2": {
+     "log10_Q": [
+      -172.8351834955462,
+      -172.12408663328517,
+      -171.29819688553363,
+      -170.43038148496635
+     ],
+     "N_min": 3,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 2.882820360320362,
+     "N_needed_by_last_pair": 3.0
+    },
+    "delta3_Ttheta_hat": [
+     2.713090003603442e-41,
+     2.4273498745220883e-42,
+     2.6712564881836285e-43,
+     3.1565822055533994e-44
+    ],
+    "Ttheta_hat": [
+     4.23920313063038e-40,
+     3.034187343152623e-40,
+     2.6712564881836214e-40,
+     2.5252657644427463e-40
+    ],
+    "YES": true
+   }
+  },
+  "heat_exterior_A32_A37": {
+   "0.0": {
+    "H": 1.000000000000001,
+    "H1": -1.0000000999999908e-07,
+    "H2": 2.0000005000000398e-07,
+    "A37_residual": 5.838775452947224e-17,
+    "A37_rel": 5.838774865660661e-10,
+    "A36_H_minus_1_plus_h1h_Z": 1.1102230246251565e-15,
+    "quad_err_max": 9.42409808917951e-13
+   },
+   "0.1": {
+    "H": 0.9999999908436654,
+    "H1": -8.436666698648106e-08,
+    "H2": 1.2399929867452237e-07,
+    "A37_residual": 5.838778099925184e-17,
+    "A37_rel": 5.838777566100163e-10,
+    "A36_H_minus_1_plus_h1h_Z": 8.436664700184338e-10,
+    "quad_err_max": 6.979206574242522e-13
+   },
+   "1.0": {
+    "H": 0.9999999403652614,
+    "H1": -4.036526312351346e-08,
+    "H2": 2.1095793407070223e-08,
+    "A37_residual": 5.838946183025655e-17,
+    "A37_rel": 5.838945943925941e-10,
+    "A36_H_minus_1_plus_h1h_Z": 4.036527145867552e-08,
+    "quad_err_max": 5.302425165609748e-13
+   },
+   "10.0": {
+    "H": 0.9999997985357586,
+    "H1": -7.985355929609316e-09,
+    "H2": 6.769250063893852e-10,
+    "A37_residual": 5.839156617773488e-17,
+    "A37_rel": 5.83915720682997e-10,
+    "A36_H_minus_1_plus_h1h_Z": 7.985358585482771e-07,
+    "quad_err_max": 5.310196726782124e-13
+   },
+   "A36_second_order_fit_exponent": 1.9964265983821738,
+   "H_prime_0_over_minus_h1h": 0.9999999999999908
+  },
+  "twin_h=1e-3": {
+   "params": {
+    "h": 0.001,
+    "dy": 0.001,
+    "cutoff": "paper",
+    "heat": true,
+    "n_eta": 17
+   },
+   "S1": {
+    "beyond_Xb_max_abs": {
+     "A_hat": 0.0,
+     "B_hat": 0.0,
+     "Tz_bracket_hat": 0.0,
+     "Ttheta_hat": 0.0,
+     "Tz_hat": 0.0,
+     "Rtheta_hat": 0.0,
+     "Rz_hat": 0.0,
+     "n_points": 501,
+     "Rtheta_over_Epow_sqrt2X_beyond": 0.0,
+     "B_hat_beyond_value": 0.0
+    },
+    "all_exactly_zero": true,
+    "support_edge_y": 3.0,
+    "support_edge_expected_y": 3.0,
+    "log10_Xb": 208.09344056186785,
+    "log10_X_tail": 206.7905571161581,
+    "r_b": {
+     "t=1-0.01": {
+      "q": 0.01,
+      "log10_r_b": 103.19723527876592,
+      "r_b": 1.574835799723465e+103
+     },
+     "t=1-0.0001": {
+      "q": 0.0001,
+      "log10_r_b": 102.19723527876592,
+      "r_b": 1.574835799723465e+102
+     },
+     "t=1-1e-06": {
+      "q": 1e-06,
+      "log10_r_b": 101.19723527876592,
+      "r_b": 1.574835799723465e+101
+     }
+    },
+    "tau_at_which_r_b_equals_1": 4.03208280533699e-209,
+    "log10_tau_at_which_r_b_equals_1": -208.39447055753186,
+    "r_b_scaling": "r_b(t) = sqrt(2 (1 - t) X_b) on z = 0: exact bookkeeping from (3.2); it tends to 0 as t -> 1, but for this lambda = 0.1 profile only once 1 - t < 1/(2 X_b)."
+   },
+   "S3": {
+    "deltas_used": [
+     0.3999999999999999,
+     0.19999999999999973,
+     0.10000000000000009,
+     0.04999999999999982
+    ],
+    "theta_k0": {
+     "log10_Q": [
+      -35.57974859266007,
+      -35.72507444449007,
+      -35.78044429831062,
+      -35.8048744626377
+     ],
+     "N_min": 0,
+     "bound": 3,
+     "local_power_0.1_to_0.05": -0.0811552492408375,
+     "N_needed_by_last_pair": 0.0
+    },
+    "theta_k1": {
+     "log10_Q": [
+      -33.47591923874188,
+      -32.72447234745011,
+      -31.877290742027206,
+      -30.99868715423364
+     ],
+     "N_min": 3,
+     "bound": 6,
+     "local_power_0.1_to_0.05": 2.918657942560266,
+     "N_needed_by_last_pair": 3.0
+    },
+    "theta_k2": {
+     "log10_Q": [
+      -31.397982220666158,
+      -29.730414640104478,
+      -27.975768359801744,
+      -26.192907173932976
+     ],
+     "N_min": 6,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 5.922536662621622,
+     "N_needed_by_last_pair": 6.0
+    },
+    "z_k0": {
+     "log10_Q": [
+      -173.48417064970909,
+      -174.54718860102543,
+      -175.5213678364573,
+      -176.45840216872577
+     ],
+     "N_min": 0,
+     "bound": 3,
+     "local_power_0.1_to_0.05": -3.112760674236622,
+     "N_needed_by_last_pair": 0.0
+    },
+    "z_k1": {
+     "log10_Q": [
+      -171.35537968410537,
+      -171.53999876751436,
+      -171.61656645402007,
+      -171.65180471634557
+     ],
+     "N_min": 0,
+     "bound": 6,
+     "local_power_0.1_to_0.05": -0.1170589736340638,
+     "N_needed_by_last_pair": 0.0
+    },
+    "z_k2": {
+     "log10_Q": [
+      -169.25011198507346,
+      -168.53918882328148,
+      -167.7133859258307,
+      -166.84561395040808
+     ],
+     "N_min": 3,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 2.882676105112266,
+     "N_needed_by_last_pair": 3.0
+    },
+    "delta3_Ttheta_hat": [
+     1.6843462784627083e-37,
+     1.5066609855044808e-38,
+     1.6578899606642653e-39,
+     1.959005026692083e-40
+    ],
+    "Ttheta_hat": [
+     2.6317910600979835e-36,
+     1.8833262318806088e-36,
+     1.657889960664261e-36,
+     1.567204021353683e-36
+    ],
+    "YES": true
+   },
+   "S2c_q_exponent": {
+    "y_star": 1.5,
+    "eta_star": 6.123233995736766e-17,
+    "Rtheta_at_y_star": 1.8947004282387116e-41,
+    "Rz_at_y_star": 6.003086250189448e-189,
+    "fit_exponent_of_R0_theta_in_q": -1.5009999999999755,
+    "bookkeeping_exponent_minus_A_minus_1": -1.501,
+    "abs_diff": 2.453592884421596e-14,
+    "values": {
+     "0.01": {
+      "log10_abs_R0_theta": -141.29094386839816,
+      "log10_abs_R0_theta_over_c_inf": -109.38692837205942
+     },
+     "0.001": {
+      "log10_abs_R0_theta": -139.78994386839818,
+      "log10_abs_R0_theta_over_c_inf": -107.88592837205941
+     },
+     "0.0001": {
+      "log10_abs_R0_theta": -138.28894386839818,
+      "log10_abs_R0_theta_over_c_inf": -106.3849283720594
+     }
+    },
+    "log10_sup_annulus_of_q^(A+1)_R0_theta": -139.33785073980815,
+    "gap_to_flatness": {
+     "claimed": "(3.4): |R| <= C q^N for every N at fixed X <= X_1",
+     "leading_order": "|R^(0)| = C' q^{-(A+1)} = C' q^{-1.5-h} at fixed X in the annulus",
+     "gap_exponent_for_N": "N + 1.5 + h for every N; infinite in the sense that no power of q is enough - carried by the pulses and the cycle, not measured here"
+    }
+   },
+   "runtime_s": 3.4006567001342773
+  },
+  "control_no_heat": {
+   "params": {
+    "h": 0.001,
+    "dy": 0.001,
+    "cutoff": "paper",
+    "heat": false,
+    "n_eta": 17
+   },
+   "S1": {
+    "beyond_Xb_max_abs": {
+     "A_hat": 0.0,
+     "B_hat": 2.002,
+     "Tz_bracket_hat": 0.0,
+     "Ttheta_hat": 8.818598629671836e-241,
+     "Tz_hat": 0.0,
+     "Rtheta_hat": 8.815652127570035e-244,
+     "Rz_hat": 0.0,
+     "n_points": 501,
+     "Rtheta_over_Epow_sqrt2X_beyond": 0.002002334758851862,
+     "B_hat_beyond_value": -2.002
+    },
+    "all_exactly_zero": false,
+    "support_edge_y": NaN,
+    "support_edge_expected_y": 3.0,
+    "log10_Xb": 208.09344056186785,
+    "log10_X_tail": 206.7905571161581,
+    "r_b": {
+     "t=1-0.01": {
+      "q": 0.01,
+      "log10_r_b": 103.19723527876592,
+      "r_b": 1.574835799723465e+103
+     },
+     "t=1-0.0001": {
+      "q": 0.0001,
+      "log10_r_b": 102.19723527876592,
+      "r_b": 1.574835799723465e+102
+     },
+     "t=1-1e-06": {
+      "q": 1e-06,
+      "log10_r_b": 101.19723527876592,
+      "r_b": 1.574835799723465e+101
+     }
+    },
+    "tau_at_which_r_b_equals_1": 4.03208280533699e-209,
+    "log10_tau_at_which_r_b_equals_1": -208.39447055753186,
+    "r_b_scaling": "r_b(t) = sqrt(2 (1 - t) X_b) on z = 0: exact bookkeeping from (3.2); it tends to 0 as t -> 1, but for this lambda = 0.1 profile only once 1 - t < 1/(2 X_b)."
+   },
+   "S3": {
+    "deltas_used": [
+     0.3999999999999999,
+     0.19999999999999973,
+     0.10000000000000009,
+     0.04999999999999982
+    ],
+    "theta_k0": {
+     "log10_Q": [
+      -35.57974859266007,
+      -35.72507444449007,
+      -35.78044429831062,
+      63.97327334763834
+     ],
+     "N_min": null,
+     "bound": 3,
+     "local_power_0.1_to_0.05": 331.374677217537,
+     "N_needed_by_last_pair": 332.0
+    },
+    "theta_k1": {
+     "log10_Q": [
+      -33.47591923874188,
+      -32.72447234745011,
+      -31.877290742027206,
+      68.77946011420738
+     ],
+     "N_min": null,
+     "bound": 6,
+     "local_power_0.1_to_0.05": 334.3744886094011,
+     "N_needed_by_last_pair": 335.0
+    },
+    "theta_k2": {
+     "log10_Q": [
+      -31.397982220666158,
+      -29.730414640104478,
+      -27.975768359801744,
+      73.58523955147605
+     ],
+     "N_min": null,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 337.3783655255492,
+     "N_needed_by_last_pair": 338.0
+    },
+    "z_k0": {
+     "log10_Q": [
+      -173.48417064970909,
+      -174.54718860102543,
+      -175.5213678364573,
+      -176.45840216872577
+     ],
+     "N_min": 0,
+     "bound": 3,
+     "local_power_0.1_to_0.05": -3.112760674236622,
+     "N_needed_by_last_pair": 0.0
+    },
+    "z_k1": {
+     "log10_Q": [
+      -171.35537968410537,
+      -171.53999876751436,
+      -171.61656645402007,
+      -171.65180471634557
+     ],
+     "N_min": 0,
+     "bound": 6,
+     "local_power_0.1_to_0.05": -0.1170589736340638,
+     "N_needed_by_last_pair": 0.0
+    },
+    "z_k2": {
+     "log10_Q": [
+      -169.25011198507346,
+      -168.53918882328148,
+      -167.7133859258307,
+      -166.84561395040808
+     ],
+     "N_min": 3,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 2.882676105112266,
+     "N_needed_by_last_pair": 3.0
+    },
+    "delta3_Ttheta_hat": [
+     1.6843462784627083e-37,
+     1.5066609855044808e-38,
+     1.6578899606642653e-39,
+     1.1753937055197133e+60
+    ],
+    "Ttheta_hat": [
+     2.6317910600979835e-36,
+     1.8833262318806088e-36,
+     1.657889960664261e-36,
+     9.403149644157807e+63
+    ],
+    "YES": false
+   },
+   "S2c_q_exponent": {
+    "y_star": 1.5,
+    "eta_star": 6.123233995736766e-17,
+    "Rtheta_at_y_star": 1.8947004282387116e-41,
+    "Rz_at_y_star": 6.003086250189448e-189,
+    "fit_exponent_of_R0_theta_in_q": -1.5009999999999755,
+    "bookkeeping_exponent_minus_A_minus_1": -1.501,
+    "abs_diff": 2.453592884421596e-14,
+    "values": {
+     "0.01": {
+      "log10_abs_R0_theta": -141.29094386839816,
+      "log10_abs_R0_theta_over_c_inf": -109.38692837205942
+     },
+     "0.001": {
+      "log10_abs_R0_theta": -139.78994386839818,
+      "log10_abs_R0_theta_over_c_inf": -107.88592837205941
+     },
+     "0.0001": {
+      "log10_abs_R0_theta": -138.28894386839818,
+      "log10_abs_R0_theta_over_c_inf": -106.3849283720594
+     }
+    },
+    "log10_sup_annulus_of_q^(A+1)_R0_theta": -139.33785073980815,
+    "gap_to_flatness": {
+     "claimed": "(3.4): |R| <= C q^N for every N at fixed X <= X_1",
+     "leading_order": "|R^(0)| = C' q^{-(A+1)} = C' q^{-1.5-h} at fixed X in the annulus",
+     "gap_exponent_for_N": "N + 1.5 + h for every N; infinite in the sense that no power of q is enough - carried by the pulses and the cycle, not measured here"
+    }
+   },
+   "runtime_s": 3.282480001449585
+  },
+  "control_poly": {
+   "params": {
+    "h": 0.001,
+    "dy": 0.001,
+    "cutoff": "poly",
+    "heat": true,
+    "n_eta": 17
+   },
+   "S1": {
+    "beyond_Xb_max_abs": {
+     "A_hat": 0.0,
+     "B_hat": 0.0,
+     "Tz_bracket_hat": 0.0,
+     "Ttheta_hat": 0.0,
+     "Tz_hat": 0.0,
+     "Rtheta_hat": 0.0,
+     "Rz_hat": 0.0,
+     "n_points": 501,
+     "Rtheta_over_Epow_sqrt2X_beyond": 0.0,
+     "B_hat_beyond_value": 0.0
+    },
+    "all_exactly_zero": true,
+    "support_edge_y": 3.0,
+    "support_edge_expected_y": 3.0,
+    "log10_Xb": 208.09344056186785,
+    "log10_X_tail": 206.7905571161581,
+    "r_b": {
+     "t=1-0.01": {
+      "q": 0.01,
+      "log10_r_b": 103.19723527876592,
+      "r_b": 1.574835799723465e+103
+     },
+     "t=1-0.0001": {
+      "q": 0.0001,
+      "log10_r_b": 102.19723527876592,
+      "r_b": 1.574835799723465e+102
+     },
+     "t=1-1e-06": {
+      "q": 1e-06,
+      "log10_r_b": 101.19723527876592,
+      "r_b": 1.574835799723465e+101
+     }
+    },
+    "tau_at_which_r_b_equals_1": 4.03208280533699e-209,
+    "log10_tau_at_which_r_b_equals_1": -208.39447055753186,
+    "r_b_scaling": "r_b(t) = sqrt(2 (1 - t) X_b) on z = 0: exact bookkeeping from (3.2); it tends to 0 as t -> 1, but for this lambda = 0.1 profile only once 1 - t < 1/(2 X_b)."
+   },
+   "S3": {
+    "deltas_used": [
+     0.3999999999999999,
+     0.19999999999999973,
+     0.10000000000000009,
+     0.04999999999999982
+    ],
+    "theta_k0": {
+     "log10_Q": [
+      -28.16444393565533,
+      3.185368794653371,
+      132.26069705678296,
+      652.2055514093115
+     ],
+     "N_min": null,
+     "bound": 3,
+     "local_power_0.1_to_0.05": 1727.219419465771,
+     "N_needed_by_last_pair": 1728.0
+    },
+    "theta_k1": {
+     "log10_Q": [
+      -27.155337985422836,
+      4.4908651793869225,
+      133.86500529041282,
+      654.109913232399
+     ],
+     "N_min": null,
+     "bound": 6,
+     "local_power_0.1_to_0.05": 1728.2161759145622,
+     "N_needed_by_last_pair": 1729.0
+    },
+    "theta_k2": {
+     "log10_Q": [
+      -26.265117373989273,
+      5.674370639963428,
+      135.3457623585212,
+      655.8897450757007
+     ],
+     "N_min": null,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 1729.209680812749,
+     "N_needed_by_last_pair": 1730.0
+    },
+    "z_k0": {
+     "log10_Q": [
+      -165.09616775084123,
+      -134.05880575905047,
+      -5.290273552029419,
+      514.3506553517495
+     ],
+     "N_min": null,
+     "bound": 3,
+     "local_power_0.1_to_0.05": 1726.2098009788187,
+     "N_needed_by_last_pair": 1727.0
+    },
+    "z_k1": {
+     "log10_Q": [
+      -163.98751662263456,
+      -132.65500055213425,
+      -3.5883001208776193,
+      516.3524626396028
+     ],
+     "N_min": null,
+     "bound": 6,
+     "local_power_0.1_to_0.05": 1727.2058274911935,
+     "N_needed_by_last_pair": 1728.0
+    },
+    "z_k2": {
+     "log10_Q": [
+      -162.9700509155027,
+      -131.3452563218844,
+      -1.9819431341342977,
+      518.2574706642536
+     ],
+     "N_min": null,
+     "bound": 9,
+     "local_power_0.1_to_0.05": 1728.1979247645857,
+     "N_needed_by_last_pair": 1729.0
+    },
+    "delta3_Ttheta_hat": [
+     6.086589195629131e-41,
+     4.560480376487086e-43,
+     3.490633846738838e-45,
+     2.699543792759255e-47
+    ],
+    "Ttheta_hat": [
+     9.510295618170524e-40,
+     5.70060047060888e-41,
+     3.490633846738829e-42,
+     2.159635034207427e-43
+    ],
+    "YES": false
+   },
+   "S2c_q_exponent": {
+    "y_star": 1.5,
+    "eta_star": 6.123233995736766e-17,
+    "Rtheta_at_y_star": 4.615744291018382e-37,
+    "Rz_at_y_star": 2.3728922240528898e-189,
+    "fit_exponent_of_R0_theta_in_q": -1.5009999999999895,
+    "bookkeeping_exponent_minus_A_minus_1": -1.501,
+    "abs_diff": 1.0547118733938987e-14,
+    "values": {
+     "0.01": {
+      "log10_abs_R0_theta": -136.9042426804687,
+      "log10_abs_R0_theta_over_c_inf": -105.00022718412997
+     },
+     "0.001": {
+      "log10_abs_R0_theta": -135.40324268046874,
+      "log10_abs_R0_theta_over_c_inf": -103.49922718412996
+     },
+     "0.0001": {
+      "log10_abs_R0_theta": -133.90224268046873,
+      "log10_abs_R0_theta_over_c_inf": -101.99822718412997
+     }
+    },
+    "log10_sup_annulus_of_q^(A+1)_R0_theta": -139.42263553155894,
+    "gap_to_flatness": {
+     "claimed": "(3.4): |R| <= C q^N for every N at fixed X <= X_1",
+     "leading_order": "|R^(0)| = C' q^{-(A+1)} = C' q^{-1.5-h} at fixed X in the annulus",
+     "gap_exponent_for_N": "N + 1.5 + h for every N; infinite in the sense that no power of q is enough - carried by the pulses and the cycle, not measured here"
+    }
+   },
+   "runtime_s": 2.1778931617736816
+  }
+ },
+ "gates": {
+  "S1": {
+   "answer": "YES",
+   "max_abs_beyond_Xb": {
+    "A_hat": 0.0,
+    "B_hat": 0.0,
+    "Tz_bracket_hat": 0.0,
+    "Ttheta_hat": 0.0,
+    "Tz_hat": 0.0,
+    "Rtheta_hat": 0.0,
+    "Rz_hat": 0.0,
+    "n_points": 501,
+    "Rtheta_over_Epow_sqrt2X_beyond": 0.0,
+    "B_hat_beyond_value": 0.0
+   },
+   "support_edge_y": 3.0,
+   "r_b": {
+    "t=1-0.01": {
+     "q": 0.01,
+     "log10_r_b": 103.19723527876592,
+     "r_b": 1.574835799723465e+103
+    },
+    "t=1-0.0001": {
+     "q": 0.0001,
+     "log10_r_b": 102.19723527876592,
+     "r_b": 1.574835799723465e+102
+    },
+    "t=1-1e-06": {
+     "q": 1e-06,
+     "log10_r_b": 101.19723527876592,
+     "r_b": 1.574835799723465e+101
+    }
+   },
+   "log10_Xb": 208.09344056186785,
+   "log10_tau_at_which_r_b_equals_1": -208.39447055753186
+  },
+  "S2": {
+   "answer": "YES",
+   "clauses": {
+    "C1_C2_X>=X_b_exact_zero (CHECKABLE)": "PASS",
+    "C3_heat_exterior_(A.37)_(A.36) (CHECKABLE from the paper's H)": {
+     "PASS": {
+      "0.0": {
+       "A37_rel": 5.838774865660661e-10,
+       "A36_dev": 1.1102230246251565e-15
+      },
+      "0.1": {
+       "A37_rel": 5.838777566100163e-10,
+       "A36_dev": 8.436664700184338e-10
+      },
+      "1.0": {
+       "A37_rel": 5.838945943925941e-10,
+       "A36_dev": 4.036527145867552e-08
+      },
+      "10.0": {
+       "A37_rel": 5.83915720682997e-10,
+       "A36_dev": 7.985358585482771e-07
+      }
+     },
+     "H'(0)/(-h(1+h))": 0.9999999999999908,
+     "A36_remainder_exponent_in_Z": 1.9964265983821738
+    },
+    "C6_leading_residual_q_exponent (MEASURED, not flat)": {
+     "fit": -1.5000000999999832,
+     "bookkeeping": -1.5000000999999998,
+     "abs_diff": 1.6764367671839864e-14,
+     "gap": {
+      "claimed": "(3.4): |R| <= C q^N for every N at fixed X <= X_1",
+      "leading_order": "|R^(0)| = C' q^{-(A+1)} = C' q^{-1.5-h} at fixed X in the annulus",
+      "gap_exponent_for_N": "N + 1.5 + h for every N; infinite in the sense that no power of q is enough - carried by the pulses and the cycle, not measured here"
+     }
+    },
+    "C1_X<=X_a": "NOT CHECKABLE here (axis construction not built; leg 432 H8)",
+    "C4_X_ext_vs_X_b": "NOT CHECKABLE (corrections' supports not built); leading part vanishes beyond X_b",
+    "C5_cutoffs_K_r0_z0_tau0_q*": "NOT CHECKABLE (existence-only constants); leading u^(0) is not compactly supported - K ~ r^{-1-2h} beyond X_b",
+    "C6_C7_limits_F_j_and_(10.11)_extension": "NOT CHECKABLE at leading order; NOTE the paper extends f at t = 1 by (10.11), not by zero",
+    "C8_flatness_of_T_0_at_X_b": "S3"
+   },
+   "flatness": "NOT CLAIMED: (3.4) is carried by the corrections; the leading residual is q^{-(A+1)} at fixed X in the annulus"
+  },
+  "S3": {
+   "answer": "YES",
+   "N_min": {
+    "theta_k0": 0,
+    "theta_k1": 3,
+    "theta_k2": 6,
+    "z_k0": 0,
+    "z_k1": 0,
+    "z_k2": 3
+   },
+   "bounds_3k+3": {
+    "k1": 6,
+    "k2": 9
+   },
+   "local_powers_0.1_to_0.05": {
+    "theta_k0": -0.08108327882662786,
+    "theta_k1": 2.9187300700769447,
+    "theta_k2": 5.9226089485486755,
+    "z_k0": -3.1126170449498627,
+    "z_k1": -0.11691503267445504,
+    "z_k2": 2.882820360320362
+   },
+   "log10_Q": {
+    "theta_k0": [
+     -39.3727157727693,
+     -39.51795760760152,
+     -39.57328440997381,
+     -39.59769290904741
+    ],
+    "theta_k1": [
+     -37.26888965413526,
+     -36.517355937870164,
+     -35.67013090776167,
+     -34.79150560742207
+    ],
+    "theta_k2": [
+     -35.19095626211681,
+     -33.52329867074631,
+     -31.768608580013908,
+     -29.985725633912832
+    ],
+    "z_k0": [
+     -177.06922987637932,
+     -178.1320847267105,
+     -179.1061785806149,
+     -180.0431696761598
+    ],
+    "z_k1": [
+     -174.94044473812076,
+     -175.12489572319242,
+     -175.20137730555,
+     -175.23657223732906
+    ],
+    "z_k2": [
+     -172.8351834955462,
+     -172.12408663328517,
+     -171.29819688553363,
+     -170.43038148496635
+    ]
+   },
+   "deltas_used": [
+    0.3999999999999999,
+    0.19999999999999973,
+    0.10000000000000009,
+    0.04999999999999982
+   ],
+   "delta3_Ttheta_hat_(A.51 lower bound, reported not scored)": [
+    2.713090003603442e-41,
+    2.4273498745220883e-42,
+    2.6712564881836285e-43,
+    3.1565822055533994e-44
+   ],
+   "resolution_stability": {
+    "theta_k1": {
+     "max_abs_diff_log10_Q_across_dy": 6.98882374194909e-08,
+     "N_min_by_dy": [
+      3,
+      3,
+      3
+     ]
+    },
+    "theta_k2": {
+     "max_abs_diff_log10_Q_across_dy": 1.4785081248192e-07,
+     "N_min_by_dy": [
+      6,
+      6,
+      6
+     ]
+    },
+    "z_k1": {
+     "max_abs_diff_log10_Q_across_dy": 7.897573937043489e-07,
+     "N_min_by_dy": [
+      0,
+      0,
+      0
+     ]
+    },
+    "z_k2": {
+     "max_abs_diff_log10_Q_across_dy": 1.5693916566306143e-06,
+     "N_min_by_dy": [
+      3,
+      3,
+      3
+     ]
+    }
+   }
+  }
+ },
+ "controls": {
+  "no_heat_factor": {
+   "expected": "S1 must fail: Bhat(y>=3) = -(2+2h) = -2.002 at h = 1e-3, Rtheta beyond X_b = -h(2+2h) E_pow/sqrt(2X)",
+   "fired": true,
+   "numbers": {
+    "B_hat_beyond": -2.002,
+    "max_abs_beyond": {
+     "A_hat": 0.0,
+     "B_hat": 2.002,
+     "Tz_bracket_hat": 0.0,
+     "Ttheta_hat": 8.818598629671836e-241,
+     "Tz_hat": 0.0,
+     "Rtheta_hat": 8.815652127570035e-244,
+     "Rz_hat": 0.0,
+     "n_points": 501,
+     "Rtheta_over_Epow_sqrt2X_beyond": 0.002002334758851862,
+     "B_hat_beyond_value": -2.002
+    },
+    "Rtheta_over_Epow_sqrt2X": 0.002002334758851862,
+    "expected_h(2+2h)": 0.002002,
+    "expected_with_FD_truncation_(1+h)^2dy^2/6": 0.002002334334333667,
+    "S3_of_control": false,
+    "S3_note": "reported, not scored: without the heat factor B carries the constant -(2+2h) e^{4/delta^2}, a term without the flat factor, so T_0 is not flat at X_b and no delta^N bounds e^{4/delta^2}|d^k T_0| (N_min = None); the heat factor is what makes (A.51) true"
+   },
+   "twin": {
+    "B_hat_beyond": 0.0,
+    "max_abs_beyond": {
+     "A_hat": 0.0,
+     "B_hat": 0.0,
+     "Tz_bracket_hat": 0.0,
+     "Ttheta_hat": 0.0,
+     "Tz_hat": 0.0,
+     "Rtheta_hat": 0.0,
+     "Rz_hat": 0.0,
+     "n_points": 501,
+     "Rtheta_over_Epow_sqrt2X_beyond": 0.0,
+     "B_hat_beyond_value": 0.0
+    },
+    "S1": true
+   }
+  },
+  "polynomial_cutoff": {
+   "expected": "S3 must fail: no N <= 60 with delta^N e^{4/delta^2}|d^k T| non-increasing; N needed by the last pair ~ 1731",
+   "fired": true,
+   "numbers": {
+    "theta_k1": {
+     "N_min": null,
+     "N_needed_by_last_pair": 1729.0,
+     "log10_Q_with_true_weight": [
+      -27.155337985422836,
+      4.4908651793869225,
+      133.86500529041282,
+      654.109913232399
+     ]
+    },
+    "theta_k2": {
+     "N_min": null,
+     "N_needed_by_last_pair": 1730.0,
+     "log10_Q_with_true_weight": [
+      -26.265117373989273,
+      5.674370639963428,
+      135.3457623585212,
+      655.8897450757007
+     ]
+    },
+    "z_k1": {
+     "N_min": null,
+     "N_needed_by_last_pair": 1728.0,
+     "log10_Q_with_true_weight": [
+      -163.98751662263456,
+      -132.65500055213425,
+      -3.5883001208776193,
+      516.3524626396028
+     ]
+    },
+    "z_k2": {
+     "N_min": null,
+     "N_needed_by_last_pair": 1729.0,
+     "log10_Q_with_true_weight": [
+      -162.9700509155027,
+      -131.3452563218844,
+      -1.9819431341342977,
+      518.2574706642536
+     ]
+    }
+   },
+   "S1_of_control": true,
+   "twin": {
+    "theta_k1": {
+     "N_min": 3,
+     "log10_Q": [
+      -33.47591923874188,
+      -32.72447234745011,
+      -31.877290742027206,
+      -30.99868715423364
+     ]
+    },
+    "theta_k2": {
+     "N_min": 6,
+     "log10_Q": [
+      -31.397982220666158,
+      -29.730414640104478,
+      -27.975768359801744,
+      -26.192907173932976
+     ]
+    },
+    "z_k1": {
+     "N_min": 0,
+     "log10_Q": [
+      -171.35537968410537,
+      -171.53999876751436,
+      -171.61656645402007,
+      -171.65180471634557
+     ]
+    },
+    "z_k2": {
+     "N_min": 3,
+     "log10_Q": [
+      -169.25011198507346,
+      -168.53918882328148,
+      -167.7133859258307,
+      -166.84561395040808
+     ]
+    }
+   }
+  },
+  "twin_h=1e-3_unmodified": {
+   "S1": true,
+   "S3": true,
+   "support_edge_y": 3.0
+  }
+ },
+ "instantiated_vs_scaled": "Instantiated at computable lambda = 0.1, h = 1e-7 (and 1e-3 for the controls): the pinned tail stress T_0 of leg 432 on y = log(X/X_tail) in [0, 3.5], the exact vanishing of R^(0) = -div(q^{-A-1/2} T_0) for X >= X_b, the (A.51)-type bounds on d_y T_0 and d_y^2 T_0 at delta >= 0.05, and the ODE (A.37) of the paper's own exterior heat profile H.  Measured only as a scaling toward the paper's regime: the q-dependence (the profile is q-invariant, leg 432 H6, so R^(0) ~ q^{-(A+1)} at fixed X is exact bookkeeping from (4.11) and d_r = (2/r) d_y, confirmed by the fit) and the physical support radius r_b(t) = sqrt(2(1-t) X_b): with this profile's log10 X_b = 208.09 (the paper's schedule (A.5)-(A.12) at h = 1e-7, lambda = 0.1 above X_R = 1e12), r_b is ~1e103 at t = 1 - 1e-2 and reaches 1 only at 1 - t ~ 1e-208; the paper needs only X_b finite.  The paper's delta-powers in (A.48)-(A.51) are the delta -> 0 limit on a collar delta <~ 1e-69 (leg 432); at resolvable delta the measured N_k are what delta^0 behaviour of That_theta predicts (3 and 6), inside the pre-registered 3k + 3.  Nothing here touches the corrections or the flatness (3.4).",
+ "could_not_determine": [
+  "I could not determine X_a (the inner support edge of T_0 / f at leading order), because it is fixed by the axis construction (Prop B.2, Cor B.10) which this unit does not build (leg 432 H8).",
+  "I could not determine whether X_ext = X_b or X_ext > X_b, because X_ext is 'beyond all slow supports' of the corrections (p. 116) and the corrections are not built here.",
+  "I could not determine the cutoff constants r_0, z_0, tau_0, q_*, the compact set K, or the time window [1 - tau_0, 1], because the manuscript gives them as existence-only (p. 118) with no numerical value.",
+  "I could not determine whether the derivative limits F_j of (10.6) are nonzero away from the origin (the cutoff-transition terms), because they need the corrected field; the leading residual has no limit at t = 1 (it grows as q^{-(A+1)}).",
+  "I could not test the lower bound |T_0| >= c e^{-4/delta^2} delta^{-3} of (A.51) or the delta^{-3}, delta^3, delta^6 of (A.48)-(A.50), because for this profile they hold only on a collar delta <~ 1e-69 (leg 432 H2); delta^3 That_theta at the four delta is reported instead.",
+  "The pre-registration's phrase 'the extension by zero at t = 1' does not match the manuscript: f is extended through t = 1 by the Borel-type series (10.11), p. 120; zero extension is spatial ((10.4), outside supp c) and temporal near t = 0 and for t >= 2.  Recorded, not adjudicated.",
+  "Flatness (3.4) at t = 1: not determined and not claimed - it is carried by the pulses and the correction cycle (units (iii), (iv))."
+ ],
+ "temptations": [
+  "None recorded: no tolerance was changed after a number existed."
+ ],
+ "gate_answer": "S1 YES: from the pinned stress, every scaled ingredient (A, B, the T_z bracket), both stress components and both leading residual profiles -(d_y+1)T_theta, -(d_y+1/2)T_z are exactly 0.0 at all 501 grid points y >= 3 (X >= X_b = e^3 X_tail), and the measured support edge is y = 3.0; the zero is structural (psi_o, f_o' and every integral over [y,3] vanish, and the constant (2+2h)(s_h-1) vanishes only with the heat factor) - dropping the heat factor gives B = -2.002 and a nonzero residual 2.0023e-03 E_pow/sqrt(2X) (= h(2+2h): the power law's own swirl-viscosity residual), so the control fired.  r_b(t) = sqrt(2(1-t)X_b) with q = 1 - t on z = 0 ((3.2), p. 7): log10 r_b = 103.20, 102.20, 101.20 at 1 - t = 1e-2, 1e-4, 1e-6 - the shrinking is exact bookkeeping but at this profile's X_b (1e208) it reaches r_b = 1 only at 1 - t = 1e-208.  S2 YES: the checkable clauses pass - R^(0) = 0 for X >= X_b (Thm 3.1(iii)/Thm 4.6(ii)/Lemma A.8); the paper's exterior heat profile (A.32) satisfies (A.37) to relative 5.8e-10 and H'(0) = -h(1+h) to 9.2e-15, which is the kappa the pinned stress keeps (so 'the uncut exterior residual is exactly zero', p. 119, is the paper's own formula at work); the leading residual's own q-exponent at fixed X is measured -1.5000001 against the bookkeeping -(A+1) = -1.5000001: a growing power, not flat - the gap to (3.4)'s q^N is N + 1.5 + h for every N and is carried by the pulses and the correction cycle, not by anything measured here.  The time window, K, the limits F_j and the (10.11) extension are not checkable at leading order.  S3 YES: N_min = {'theta_k0': 0, 'theta_k1': 3, 'theta_k2': 6, 'z_k0': 0, 'z_k1': 0, 'z_k2': 3} against 3k+3 = 6, 9; local powers -dlogQ/dlog delta between 0.1 and 0.05: {'theta_k0': -0.08108327882662786, 'theta_k1': 2.9187300700769447, 'theta_k2': 5.9226089485486755, 'z_k0': -3.1126170449498627, 'z_k1': -0.11691503267445504, 'z_k2': 2.882820360320362}, stable to 1.6e-06 in log10 Q across dy = 2e-3, 1e-3, 5e-4; the polynomial-cutoff control needs N ~ 1729 (no N <= 60), so it fired; the h = 1e-3 twin passes both.  This is Tier 2, not a proof.",
+ "runtime_s": 20.505146980285645
+}

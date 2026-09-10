@@ -1052,3 +1052,10 @@ Five R2 shard readers A–E, one file each, merged → `ledger/merged.json` (leg
 by the Conductor's serial `R3` and `R5`(i)–(ii). **WAVE 2 CLOSED (leg 429): `R4` ×5, integrated above. WAVE 3 (next): `R6` ×5 Lean**
 (`dag.json` `r4_spine`, partition `leg_426.md` §5, slot 5 adversarial verifier); in parallel, serial
 `R5`(i) with pre-registration first.
+
+## §STATE-ARC6-W2 — arc 6 conductor pass, rows `R3` and `R4`, retired VERBATIM from `STATE.md` 2026-09-10 (leg 433, wave 4) under §3j
+
+| unit | gate answer, in its own words | artefact |
+|---|---|---|
+| **`R3`** 426 DAG+SPINE | acyclic **`YES`** ×3 passes; complete **`NO-AND-HERE-ARE-THE-DANGLING-NODES`**: `Remark B.9`, 134 labels in unnumbered prose, and **Props 9.5/9.6 never cited downstream**. Spine through §4/§7/§9: **refuted by citation, confirmed by equation** (§68). Prereg 4/8 | `arc6/dag.json` |
+| **`R4`** 429 RE-DERIVE (×5) | **58 of 58 spine nodes `CHECKED`, 0 `GAP`, 0 `NOT-CHECKED`**; blind verifier (seed 428) 10/10 `CHECKED`, agreement **1.0** → **10 nodes `VERIFIED`**, 48 `UNVERIFIED`. Pre-committed "≥ 3 GAPs" **refuted**; Prop 9.6's smallest closing margin **0.07**; 53 extraction artefacts resolved at the PDF. **Not a proof of the theorem.** | `arc6/spine/merged.json` |

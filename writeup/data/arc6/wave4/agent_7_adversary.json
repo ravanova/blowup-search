@@ -1,0 +1,1371 @@
+{
+ "schema": "arc6_wave4_v1",
+ "agent": 7,
+ "unit": "(vii) adversary",
+ "leg": 433,
+ "pdf_sha256": "0e779481c4da40bd28d1e642e1d8ca57447d129610df28dfa5a11e9af8ae228f",
+ "pages_read": [
+  4,
+  7,
+  8,
+  9,
+  15,
+  24,
+  25,
+  26,
+  27,
+  69,
+  81,
+  82,
+  83,
+  84,
+  106,
+  107,
+  109,
+  110,
+  111,
+  113,
+  114,
+  115,
+  116,
+  117,
+  118,
+  119,
+  120,
+  140
+ ],
+ "inputs": {
+  "profile": "writeup/data/arc6_profile_v1.json (leg 430, lambda = 0.1): log X_tail = 476.152854, c_inf = 1.247339e-32",
+  "stress": "leg_432_prereg_amend.md section 1 formulas via arc6_residual_v1.Tail; h = 1e-7, dy = 1e-3, Chebyshev 17 in eta",
+  "what_the_adversary_saw": "only leg_433_prereg.md section 2's gate definitions, the pinned artefacts, the manuscript text and the two runners; no worker file"
+ },
+ "claimed": {
+  "P1": "Prop 7.5 (7.26), p. 82: C(W0) = eps T0,* exactly; columns carry errors |e_sigma| <= C S_*^{-1/2} (7.28), p. 83",
+  "I1": "(9.8), p. 106: sigma_j = 1/5 + j/10 as an exponent of eps = q^h; Lemma 9.8 (9.17), p. 113: g_j = h j/10 in q",
+  "V1": "(3.2), (4.3), p. 7 and p. 25: u_theta = q^{-A} E, u_z = q^{-A} U, z = q^D eta, X = r^2/(2q), tau = q(1 - eta^2)",
+  "S1": "Theorem 3.1(iii), p. 15; Lemma A.8, p. 140; S3: (A.51) via the (A.12) cutoff"
+ },
+ "attempts": [
+  {
+   "gate": "P1",
+   "mis_specification_tried": "Three fakes. (a) A pulse field that reproduces T_theta and sets T_z to zero or to minus itself, scored by the joint two-entry relative L2 error. (b) A phase-wrong pulse (u_theta shifted by pi/2, whose true averaged product with u_r is zero) averaged on M = 2N equispaced samples offset by phi0 = -pi/(4N) (aliasing of the 2N harmonic) at N in {8, 16, 32}. (c) The 'convergence exponent in N' measured with different averaging windows on the SAME exact field.",
+   "numbers": {
+    "a_joint_rel_err_Tz_zero": 9.706695330754398e-137,
+    "a_joint_rel_err_Tz_flipped": 1.9413390661508796e-136,
+    "a_log10_normTz_over_normTth_on_the_pinned_tail": -136.0129286015955,
+    "b_rel_err_phase_wrong_aliased_at_N": {
+     "8": 5.760804077851327e-16,
+     "16": 1.3249887860724283e-15,
+     "32": 3.3299778406007642e-15
+    },
+    "b_rel_err_twin_aliased_at_N": {
+     "8": 1.4537246368381043e-15,
+     "16": 1.3249887860724283e-15,
+     "32": 4.21702259147627e-15
+    },
+    "b_rel_err_phase_wrong_resolved_average": {
+     "8": 1.0000000000000002,
+     "16": 0.9999999999999983,
+     "32": 0.9999999999999962
+    },
+    "b_rel_err_amplitude_halved_aliased": {
+     "8": 0.7500000000000002,
+     "16": 0.7500000000000002,
+     "32": 0.750000000000001
+    },
+    "c_fitted_exponent_by_window": {
+     "box_window_theta_tuned_pi_over_6N0": -1.0000000000000004,
+     "box_window_theta_1rad": -0.16195485831602452,
+     "gaussian_window_theta_sigma_0.5": -346.2468098133514,
+     "monte_carlo_M_eq_4N_geomean_400_seeds": -0.3787489584865989,
+     "trapezoid_3_points_per_period": "undefined (error is roundoff)"
+    },
+    "c_rel_err_at_4N0_by_window": {
+     "box_window_theta_tuned_pi_over_6N0": 0.20674833578317198,
+     "box_window_theta_1rad": 0.014375406846824923,
+     "gaussian_window_theta_sigma_0.5": 4.377491037053051e-223,
+     "monte_carlo_M_eq_4N_geomean_400_seeds": 0.038207763268662244,
+     "trapezoid_3_points_per_period": 4.3298697960381105e-15
+    }
+   },
+   "verdict": "FAKEABLE",
+   "what_would_make_it_non_fakeable": "(a) Score the two entries separately (T_z/T_theta ~ 1e-136 on this profile: a joint norm cannot see T_z at all). (b) A Nyquist check on the averaging grid itself: <cos^2(N phi)> = 1/2 and <cos(N phi) sin(N phi)> = 0 to roundoff, plus a resolution study in the number of samples M (M >= 4N+1 or an exact period average); note the pre-registered pi/2 control does NOT fire under the aliased average (error 5.8e-16 at N = 8 against the required > 0.3) while the twin passes, so the control alone is not protection. (c) Report the averaging quadrature and show the error is below the quoted order at every N; with an exact period average the error is roundoff (~1e-15) at every N and no exponent exists to fit \u2014 the paper's (7.26) C(W0) = eps T0,* is exact, not asymptotic in N."
+  },
+  {
+   "gate": "P2",
+   "mis_specification_tried": "The P1 windows carried into the divergence: a theta-window (fixed angular window pi/(6 N0)) whose error multiplies T by a constant c(N), and a y-window (radial phase N y, window pi/(3 N0)) whose error oscillates in y.",
+   "numbers": {
+    "theta_window": {
+     "P1": -1.0000000000000004,
+     "P2": -1.0000000000000004
+    },
+    "y_window": {
+     "P1": -1.0103369942100306,
+     "P2": 0.009526828249296732
+    },
+    "per_N": {
+     "8": {
+      "theta_window": {
+       "P1_rel": 0.8269933431326881,
+       "P2_rel": 0.826993343132688
+      },
+      "y_window": {
+       "P1_rel": 0.5888467800264147,
+       "P2_rel": 17.3819778476469
+      }
+     },
+     "16": {
+      "theta_window": {
+       "P1_rel": 0.4134966715663442,
+       "P2_rel": 0.4134966715663441
+      },
+      "y_window": {
+       "P1_rel": 0.28996999655922556,
+       "P2_rel": 17.638714404546835
+      }
+     },
+     "32": {
+      "theta_window": {
+       "P1_rel": 0.20674833578317198,
+       "P2_rel": 0.20674833578317192
+      },
+      "y_window": {
+       "P1_rel": 0.14511717740873914,
+       "P2_rel": 17.613064042807828
+      }
+     }
+    },
+    "aliased_fake_div_error_is_roundoff": "the P1(b) aliased field has error ~1e-15 at every N, so its div error is roundoff too"
+   },
+   "verdict": "FAKEABLE",
+   "what_would_make_it_non_fakeable": "P2 'at the same exponent' catches only errors that vary along the divergence direction (the y-window fails it: P1 exponent -1.01, P2 exponent +0.01). Any multiplicative error (angular window, wrong constant, aliasing) passes trivially. Non-fakeable version: the div residual must be measured on an independent resolution of the fast phase (M doubled) and shown unchanged, and the pi/2 control must be run through the same averaging as the twin with a Nyquist check."
+  },
+  {
+   "gate": "P3",
+   "mis_specification_tried": "An ansatz whose 'lower-order term' is a q-independent 30% of the leading term (exponent 0), and one that drifts as q^0.04; both compared with the gate's +-0.05 window around the claimed 2h. Also measured: the actual axial/radial viscosity ratio of a prescribed leading field on the pinned annulus by finite differences in physical coordinates.",
+   "numbers": {
+    "measured_exponent_axial_over_radial": 2.0095803118268e-07,
+    "claimed_2h": 2e-07,
+    "measured_ratio_at_q": {
+     "0.01": 2.231904591234687e+207,
+     "0.001": 2.231903562504284e+207,
+     "0.0001": 2.231902525728411e+207
+    },
+    "q^2h_at_q": {
+     "0.01": 0.999999078966387,
+     "0.001": 0.9999986184498986,
+     "0.0001": 0.9999981579336222
+    },
+    "fake_constant_exponent": 9.444201668412412e-17,
+    "fake_constant_passes": true,
+    "fake_drift_exponent": 0.04000000000000011,
+    "fake_drift_passes": true,
+    "tolerance_over_signal_h_1e-7": 250000.00000000003,
+    "tolerance_over_signal_h_1e-3": 25.0
+   },
+   "verdict": "FAKEABLE",
+   "what_would_make_it_non_fakeable": "At h = 1e-7 the claimed factor q^{2h} is 1 - 1.8e-6 at q = 1e-4: the gate's +-0.05 exponent window is 2.5e5 times the signal, so a constant ratio (exponent 0) and a q^0.04 drift both pass. Non-fakeable: a tolerance scaled to h (say +-0.5 h) with the ratio resolved to 1e-9 relative (the FD measurement here does reach 2.0096e-7 vs 2e-7), or a calibration run at a synthetic large h where q^{2h} is O(1). Honest finding on the instantiated profile: the exponent is right but the prefactor is 2.2e207 \u2014 on the pinned tail (X_tail ~ 1e207) axial viscosity EXCEEDS radial viscosity by 2X q^{2h}; the paper's q^{2h} hierarchy is a statement at fixed X = O(1), not at this profile's annulus."
+  },
+  {
+   "gate": "I1",
+   "mis_specification_tried": "Fake A: a 'correction stage' that absorbs all but a q^{1/10} fraction of the source (the ansatz assumes the 1/10). Fake B: a genuine linear solve (u' + u = S, backward Euler) whose leftover is grid error, with the grid tied to q (n = 100 (q/1e-2)^{-0.1}). Also: the paper's per-stage gain converted to a q-exponent, against the gate's +-0.02 window.",
+   "numbers": {
+    "fakeA_gain_stage1": 0.10000000000000007,
+    "fakeA_R1_over_R0": {
+     "0.01": 0.6309573444801932,
+     "0.001": 0.5011872336272722,
+     "0.0001": 0.39810717055349726
+    },
+    "fakeB_gain_stage1": 0.10520932213487964,
+    "fakeB_leftover_at_q": {
+     "0.01": 0.022259537563506696,
+     "0.001": 0.01740529772667047,
+     "0.0001": 0.01371189545828377
+    },
+    "fakeB_same_solve_fixed_grid_gain": 2.3587253275424875e-16,
+    "paper_gain_as_q_exponent_h_over_10": 1e-08,
+    "zero_correction_control_gain": 0.0,
+    "zero_correction_control_within_0.02_of_paper_q_gain": true,
+    "log_eps_range_over_q_1e-2_to_1e-4": 4.605170185988092e-07,
+    "R0_norm_on_annulus_at_q": {
+     "0.01": 4.621101663729451e-36,
+     "0.001": 1.4613209921394113e-34,
+     "0.0001": 4.621103791825898e-33
+    }
+   },
+   "verdict": "FAKEABLE",
+   "what_would_make_it_non_fakeable": "sigma_{j+1} = sigma_j + 1/10 in (9.8) is an exponent of eps = q^h (Lemma 9.8: g_j = h j/10), so in q the claimed gain is h/10 = 1e-8: the gate's +-0.02 window then admits the zero-correction control (gain 0) \u2014 the control cannot fire. Read as an eps-exponent instead, the fit spans log eps = 4.6e-7 over q in [1e-4, 1e-2] and needs the residual norms to ~1e-9 relative. Non-fakeable: state which variable (q or eps) the exponent is in before running; measure at h = 1e-3 as well (gain 1e-4 in q, still below 0.02 \u2014 the gate window must be tied to h); show the correction is the solution of the paper's linear problem (8.20)/(8.25) sourced by the measured residual, with a fixed-grid resolution study (fake B collapses to gain 2e-16 on a fixed grid)."
+  },
+  {
+   "gate": "I2",
+   "mis_specification_tried": "The closing rows of Prop 9.6 (p. 111) implemented as arithmetic, then re-run with wrong inputs: kappa_s in {0.03, 1/30, 0.04}, B_0 = 0.75, and the row-4 constant 0.17 replaced by 0.11.",
+   "numbers": {
+    "paper_kappa_1e-5": {
+     "all_rows_hold": true,
+     "margins_vs_threshold": {
+      "wave_row": 0.0,
+      "tangential_mean_row": 0.0,
+      "H_minus_B": 0.39998,
+      "mean_0.17_row": 0.07,
+      "defect_row": 0.79996
+     },
+     "smallest_value_minus_0.1": 0.07
+    },
+    "kappa_0.03_all_rows_hold": true,
+    "kappa_1_over_30_all_rows_hold": true,
+    "kappa_0.04_all_rows_hold": false,
+    "B0_0.75_all_rows_hold": true,
+    "c4_0.11_all_rows_hold": true,
+    "c4_0.11_smallest_value_minus_0.1": 0.009999999999999995,
+    "sigma_j": [
+     0.2,
+     0.30000000000000004,
+     0.4,
+     0.5,
+     0.6000000000000001,
+     0.7
+    ]
+   },
+   "verdict": "FAKEABLE",
+   "what_would_make_it_non_fakeable": "The ledger passes for every kappa_s <= 1/30 (the paper's is 1e-5), for any B_0 >= 0.7 and for any row-4 constant > 0.1: two rows hold with margin exactly 0 as identities in kappa_s, the '+1/10' is the definition (9.8), and Prop 9.9's summation needs only h sigma_j -> infinity. It is arithmetic on quoted constants and cannot fail unless the constants are mistranscribed; it is not a measurement of the construction. Non-fakeable: derive B_0 = 0.7 and the 0.17 from the term table (9.11)-(9.14) rather than quote them, and record the kappa_s = 1/30 boundary as the ledger's only content."
+  },
+  {
+   "gate": "I3",
+   "mis_specification_tried": "Fake A repeated (second stage multiplies by q^{1/10} again); fake B repeated (second backward-Euler solve sourced by the first leftover, same q-tied grid).",
+   "numbers": {
+    "fakeA_gain_stage2": 0.10000000000000007,
+    "fakeB_gain_stage2": 0.04651395614088504,
+    "fakeB_leftover_stage2_at_q": {
+     "0.01": 0.25241145228901146,
+     "0.001": 0.22666295812378726,
+     "0.0001": 0.20374227130479552
+    }
+   },
+   "verdict": "FAKEABLE",
+   "what_would_make_it_non_fakeable": "Fake A repeats exactly (0.1, 0.1) because the gain is built in; fake B did NOT repeat (0.105 then 0.047) \u2014 a grid artefact does not compound cleanly, so 'the gain repeats' has some power against resolution artefacts but none against an ansatz. Non-fakeable: the two stages must be the paper's operators with the pre-stated exponent variable, and a planted control (a source that the linear problem cannot reduce, e.g. one in the kernel of the mean-correction operator) must show gain 0."
+  },
+  {
+   "gate": "V1",
+   "mis_specification_tried": "Any prescribed profile: a Gaussian bump in y with no cutoff and no heat factor (the wrong profile), the pinned tail shape, and the A -> 0.85 control, each at dy in {4, 2, 1}e-3, norms over |eta| <= 0.9, y in [0.5, 3].",
+   "numbers": {
+    "claimed_Linf_exponent": -0.5000001,
+    "claimed_L2_exponent_(1+D-2A)/2": 0.24999985000000002,
+    "bump_Linf_exponent_dy_4e-3": -0.5000001,
+    "bump_L2_exponent_dy_4e-3": 0.24999985000000446,
+    "bump_exponent_spread_over_resolutions": {
+     "Linf": 0.0,
+     "L2": 5.190292640122607e-15
+    },
+    "bump_norm_rel_change_4e-3_vs_1e-3": {
+     "Linf": 0.0,
+     "L2": 2.2185831172194526e-07
+    },
+    "pinned_tail_shape_exponents_dy_1e-3": {
+     "Linf": -0.5000001000000001,
+     "L2": 0.2499998500000013
+    },
+    "A_0.85_control_L2_exponent": -0.2750000000000014,
+    "eta_box_L2_at_tau_0.1_for_eta_c_0.9_0.99_0.999": {
+     "0.9": 1.2976817432683227e+104,
+     "0.99": 1.968048539487036e+104,
+     "0.999": 5.0906726377838975e+104
+    }
+   },
+   "verdict": "FAKEABLE",
+   "what_would_make_it_non_fakeable": "The norms of u = q^{-A} E(X, eta) factorise exactly: L_inf = tau^{-A} sup(d^A E) and L2 = tau^{(1+D-2A)/2} x (a q-independent quadrature), so every profile \u2014 right or wrong, divergence-free or not \u2014 gives the bookkeeping exponents to 1e-10 at every resolution, and 'stable across resolutions' tests only the quadrature of int E^2. The A -> 0.85 control is the same arithmetic. Beyond X_ext the leading field is the z-independent heat swirl K(r, tau) e_theta (3.5), so ||u^(0)(t)||_{L2(R^3)} is infinite and any finite value is a choice of box (the box norm grew 1.30e104 -> 1.97e104 -> 5.09e104 as eta_c -> 1). Nothing makes this gate evidence of Navier-Stokes blowup: any prescribed u solves NS with f := NS(u). It is a correct Jacobian identity and no more."
+  },
+  {
+   "gate": "V2",
+   "mis_specification_tried": "Report gate (no YES to fake): the theta-momentum residual of the prescribed bump field measured by finite differences in physical coordinates at q in {1e-2, 1e-3, 1e-4}.",
+   "numbers": {
+    "Linf_exponent_R_theta": -1.4999999440112317,
+    "expected_-A-1": -1.5000000999999998,
+    "exponent_if_leading_stress_vanished": -1.4999999,
+    "max_R_theta_at_q": {
+     "0.01": 5052.688423773041,
+     "0.001": 159780.01676410154,
+     "0.0001": 5052687.120999068
+    },
+    "max_dt_u_at_q": {
+     "0.01": 1186.0375828853796,
+     "0.001": 37505.81016079834,
+     "0.0001": 1186038.1290752287
+    },
+    "max_axial_visc_at_q": {
+     "0.01": 3923.2633600548825,
+     "0.001": 124064.4520619892,
+     "0.0001": 3923261.5371618504
+    },
+    "max_radial_visc_at_q": {
+     "0.01": 1.757809619399787e-204,
+     "0.001": 5.558683365457959e-203,
+     "0.0001": 1.7578104294144487e-201
+    }
+   },
+   "verdict": "NOT FAKEABLE",
+   "what_would_make_it_non_fakeable": "There is no YES to fake: the gate asks for a number and a sentence. But the number is uninformative: every prescribed leading field gives -A-1 = -1.5000001 (measured -1.4999999 on the bump), and a profile whose leading stress vanished exactly would give -A-1+2h \u2014 a difference of 2e-7 against the gate's +-0.01. The reported gap is real (the leading force diverges like q^{-1.5}) but cannot distinguish a good profile from a bad one at this h. On the pinned annulus the residual is dominated by axial viscosity (X ~ 1e207), not by the paper's leading balance."
+  },
+  {
+   "gate": "V3",
+   "mis_specification_tried": "The V1 fake's refinement stability: the bump's exponents and norms across dy in {4, 2, 1}e-3.",
+   "numbers": {
+    "bump_exponent_spread": {
+     "Linf": 0.0,
+     "L2": 5.190292640122607e-15
+    },
+    "bump_norm_rel_change": {
+     "Linf": 0.0,
+     "L2": 2.2185831172194526e-07
+    },
+    "pinned_tail_norm_rel_change": {
+     "Linf": 0.0,
+     "L2": 2.220446049250313e-16
+    }
+   },
+   "verdict": "FAKEABLE",
+   "what_would_make_it_non_fakeable": "Refinement stability of a prescribed field's norm fits is automatic (the q-dependence factors out of the quadrature; exponent spread 0 to 5e-15 for the wrong profile). T* = 1 is prescribed and cannot be tested on any prescribed field; the gate already says so. Non-fakeable only in a solve: T* from a time-integrated NS solution from data, stable under refinement."
+  },
+  {
+   "gate": "S1",
+   "mis_specification_tried": "Drop the heat factor (the honest control, T_theta beyond X_b nonzero), then (i) evaluate only the sqrt(X) term E_pow sqrt(X/2) calA/L, discarding B/X (which is 1e-207 relative to calA inside the annulus), or (ii) multiply the stress by any smooth cutoff vanishing at y >= 3.",
+   "numbers": {
+    "heat_max_abs_Ttheta_beyond_Xb": 0.0,
+    "no_heat_honest_max_abs_Ttheta_beyond_Xb": 1.4224538127823022e-240,
+    "no_heat_calB_beyond": -2.0000002,
+    "no_heat_sqrtX_term_only_beyond_Xb": 0.0,
+    "no_heat_smooth_cutoff_on_stress_beyond_Xb": 0.0,
+    "log10_support_radius_r_b_at_t": {
+     "0.99": 103.19723527876592,
+     "0.9999": 102.19723527876592,
+     "0.999999": 101.19723527876592
+    }
+   },
+   "verdict": "FAKEABLE",
+   "what_would_make_it_non_fakeable": "Exact zero beyond X_b is a property of the (A.12) cutoff psi_o for the sqrt(X) term (calA = 0 for y >= 3 with or without the heat factor); only the 1/X bracket B carries the heat-factor content (-(2+2h) without it), and B/X is 1e-207 relative \u2014 one 'leading-order' truncation, or any cutoff applied to the stress rather than to the profile, produces the exact zero for the wrong profile. Non-fakeable: derive T_0 from E through (4.11) with the moments carried exactly, run the kappa -> 0 control through the same pipeline and require calB(y >= 3) = -(2+2h) (leg 432's K6), and report B separately from A. Honest instantiation: r_b(t) = sqrt(2 q X_b) is 1e103 at t = 1 - 1e-2 and 1e101 at t = 1 - 1e-6 \u2014 the support 'shrinks to zero' only as a scaling; at every computable t it is astronomically large on this lambda = 0.1 profile."
+  },
+  {
+   "gate": "S2",
+   "mis_specification_tried": "The support clauses of Prop 10.1 applied to the wrong (bump) field: multiplication by chi_x chi_t gives compact support in K and zero initial datum for ANY field; the flatness clause (10.6)/(10.9) checked against the bump's measured force.",
+   "numbers": {
+    "support_after_cutoff": "subset of K = supp chi_x for every field, by construction (tautology; no number)",
+    "force_Linf_exponent_of_leading_order": -1.4999999440112317,
+    "max_force_at_q": {
+     "0.01": 5052.688423773041,
+     "0.001": 159780.01676410154,
+     "0.0001": 5052687.120999068
+    }
+   },
+   "verdict": "FAKEABLE",
+   "what_would_make_it_non_fakeable": "The checkable clauses (support in X <= X_ext, the time window, u = p = 0 for small t) are satisfied by any field once the paper's cutoffs are applied \u2014 they test the cutoffs, not the field. The one clause with content, flatness at t = 1, is NOT fakeable: the leading force grows like q^{-1.5} (5.1e3 -> 1.6e5 -> 5.1e6 over q = 1e-2 -> 1e-4) and no cutoff makes a divergent force flat; the gate already tells the worker not to claim it. Non-fakeable: state that S2's YES-able clauses are tautologies and report only the exponent gap."
+  },
+  {
+   "gate": "S3",
+   "mis_specification_tried": "A cutoff violating (A.51): multiply the pinned flat hat by e^{c/delta} (c = 0.2 and c = 0.5), so the true weight is e^{-4/delta^2 + c/delta}, then test delta^N e^{4/delta^2} |d^k T| at the four pre-registered delta with N = 3k+3.",
+   "numbers": {
+    "paper_cutoff_k1_N6": {
+     "0.4": 0.520218828324761,
+     "0.2": 0.04587116909171375,
+     "0.1": 0.005041791305674085,
+     "0.05": 0.0005957035543183895,
+     "0.02": 3.693667787063552e-05
+    },
+    "paper_local_power_k1_at_0.05": 3.0510437445878655,
+    "fake_c_0.2_k1_N6": {
+     "0.4": 0.8492543329372597,
+     "0.2": 0.12406814609168972,
+     "0.1": 0.037160925092246125,
+     "0.05": 0.032483534991065835,
+     "0.02": 0.8131487092303258
+    },
+    "fake_c_0.2_nonincreasing_over_four_delta": true,
+    "fake_c_0.2_local_power_k1_at_0.05": -1.4462108660820867,
+    "fake_c_0.2_ratio_0.02_over_0.05": 25.032642212553885,
+    "fake_c_0.5_k1_N6": {
+     "0.4": 1.7710652202048864,
+     "0.2": 0.5518488971893257,
+     "0.1": 0.7435876101490365,
+     "0.05": 13.079789848127712,
+     "0.02": 2655071.793362726
+    },
+    "fake_c_0.5_nonincreasing_over_four_delta": false,
+    "fake_c_0.2_k2_N9": {
+     "0.4": 6.4343489727976095,
+     "0.2": 0.9740682963559046,
+     "0.1": 0.2954718226884004,
+     "0.05": 0.2593031301410045,
+     "0.02": 6.500736318006824
+    }
+   },
+   "verdict": "FAKEABLE",
+   "what_would_make_it_non_fakeable": "With c = 0.2 the quantity is bounded AND non-increasing over delta in {0.4, 0.2, 0.1, 0.05} (0.85, 0.12, 0.037, 0.032) although the cutoff violates (A.51) \u2014 e^{0.2/delta} is not polynomially bounded; the violation shows only at delta = 0.02 (0.81, ratio 25 over delta = 0.05) or in the local log-slope at delta = 0.05 (-1.45 against +3.05 for the paper cutoff). c = 0.5 is caught at delta = 0.05 (13.1). Non-fakeable: add delta = 0.02 and 0.01 (carried as hats, nothing underflows) and require the local slope of delta^N e^{4/delta^2}|d^k T| in log delta to be >= 0 at the smallest delta."
+  }
+ ],
+ "gates": {
+  "X1": {
+   "P1": "FAKEABLE",
+   "P2": "FAKEABLE",
+   "P3": "FAKEABLE",
+   "I1": "FAKEABLE",
+   "I2": "FAKEABLE",
+   "I3": "FAKEABLE",
+   "V1": "FAKEABLE",
+   "V2": "NOT FAKEABLE",
+   "V3": "FAKEABLE",
+   "S1": "FAKEABLE",
+   "S2": "FAKEABLE",
+   "S3": "FAKEABLE"
+  },
+  "X2": "Verdict. (iii) P1-P2 are not evidence as gated: the averaged product of a prescribed pulse pair reproduces the target by construction (the paper's (7.26) is exact), the joint norm cannot see T_z (1e-136 relative on this profile), aliasing at M = 2N makes a phase-wrong field pass and the pi/2 control not fire, and the 'convergence exponent in N' is a property of the averaging window (-1, -0.16, -0.38, -346 or undefined on the same field). P3 is not evidence at h = 1e-7: the tolerance is 2.5e5 times the signal 2h; the q^{2h} scaling itself is real (measured 2.0096e-7) but on the pinned annulus axial viscosity exceeds radial by 2X ~ 2e207, so the hierarchy is a scaling, not an instantiation. (iv) I1/I3 are not evidence: the +1/10 is an eps-exponent (h/10 = 1e-8 in q), so the +-0.02 window admits the zero-correction control, an ansatz that assumes the gain measures it exactly, and a q-tied grid measures 0.105 from a solve that has gain 2e-16 on a fixed grid; I2 is arithmetic on quoted constants that holds for every kappa_s <= 1/30 \u2014 a transcription check, not a measurement. (v) V1/V3 are Jacobian identities of any prescribed field (exponents exact to 1e-10 for a wrong Gaussian profile; the R^3 norm of the similarity field is infinite and the finite value is a box choice); V2 is an honest report of a real gap (force ~ q^{-1.5}) whose exponent cannot tell a good profile from a bad one at this h. (vi) S1's exact zero is fakeable by truncating to the sqrt(X) term or cutting off the stress instead of the profile, and the instantiated support radius is 1e101-1e103; S2's checkable clauses are tautologies of the cutoffs, its flatness clause is the only content and is a gap the leading order cannot close; S3's boundedness at four delta admits a cutoff violating (A.51). What IS evidence in wave 4, if the workers did it: a two-route agreement (leg 432 style) on a quantity the adversary could not choose \u2014 the sign and shape of T_0, the exact zero of calB with the heat factor against -(2+2h) without it, the local delta-slopes of the flat weight, and the measured 2h scaling of the viscous ratio. None of (iii)-(vi)'s YES gates, as defined, is evidence that the paper's construction works; each is consistent with the paper's algebra being transcribed correctly. This is Tier 2, not a proof."
+ },
+ "measured": {
+  "P": {
+   "a_norm_hides_Tz": {
+    "rel_joint_err_Tz_set_to_zero": 9.706695330754398e-137,
+    "rel_joint_err_Tz_sign_flipped": 1.9413390661508796e-136,
+    "componentwise_err_Tz_zero": 1.0,
+    "componentwise_err_Tz_flipped": 2.0,
+    "log10_ratio_normTz_over_normTth": -136.0129286015955
+   },
+   "b_aliasing_M_eq_2k": {
+    "8": {
+     "M_samples": 16,
+     "phi0": -0.09817477042468103,
+     "rel_err_twin": 1.4537246368381043e-15,
+     "rel_err_phase_pi_over_2": 5.760804077851327e-16,
+     "rel_err_amplitude_halved": 0.7500000000000002,
+     "rel_err_phase_pi_over_2_with_resolved_average": 1.0000000000000002
+    },
+    "16": {
+     "M_samples": 32,
+     "phi0": -0.04908738521234052,
+     "rel_err_twin": 1.3249887860724283e-15,
+     "rel_err_phase_pi_over_2": 1.3249887860724283e-15,
+     "rel_err_amplitude_halved": 0.7500000000000002,
+     "rel_err_phase_pi_over_2_with_resolved_average": 0.9999999999999983
+    },
+    "32": {
+     "M_samples": 64,
+     "phi0": -0.02454369260617026,
+     "rel_err_twin": 4.21702259147627e-15,
+     "rel_err_phase_pi_over_2": 3.3299778406007642e-15,
+     "rel_err_amplitude_halved": 0.750000000000001,
+     "rel_err_phase_pi_over_2_with_resolved_average": 0.9999999999999962
+    }
+   },
+   "c_exponent_is_the_window": {
+    "box_window_theta_tuned_pi_over_6N0": {
+     "rel_err_at_N": {
+      "8": 0.8269933431326881,
+      "16": 0.4134966715663442,
+      "32": 0.20674833578317198
+     },
+     "fitted_exponent": -1.0000000000000004
+    },
+    "box_window_theta_1rad": {
+     "rel_err_at_N": {
+      "8": 0.01799395729156661,
+      "16": 0.01723208378880292,
+      "32": 0.014375406846824923
+     },
+     "fitted_exponent": -0.16195485831602452
+    },
+    "gaussian_window_theta_sigma_0.5": {
+     "rel_err_at_N": {
+      "8": 1.2664165549094176e-14,
+      "16": 2.572209372642415e-56,
+      "32": 4.377491037053051e-223
+     },
+     "fitted_exponent": -346.2468098133514
+    },
+    "monte_carlo_M_eq_4N_geomean_400_seeds": {
+     "rel_err_at_N": {
+      "8": 0.06459236838295125,
+      "16": 0.046836011870331644,
+      "32": 0.038207763268662244
+     },
+     "fitted_exponent": -0.3787489584865989
+    },
+    "trapezoid_3_points_per_period": {
+     "rel_err_at_N": {
+      "8": 9.992007221626409e-16,
+      "16": 1.9984014443252818e-15,
+      "32": 4.3298697960381105e-15
+     },
+     "fitted_exponent": "undefined (error is roundoff)"
+    }
+   },
+   "P2": {
+    "per_N": {
+     "8": {
+      "theta_window": {
+       "P1_rel": 0.8269933431326881,
+       "P2_rel": 0.826993343132688
+      },
+      "y_window": {
+       "P1_rel": 0.5888467800264147,
+       "P2_rel": 17.3819778476469
+      }
+     },
+     "16": {
+      "theta_window": {
+       "P1_rel": 0.4134966715663442,
+       "P2_rel": 0.4134966715663441
+      },
+      "y_window": {
+       "P1_rel": 0.28996999655922556,
+       "P2_rel": 17.638714404546835
+      }
+     },
+     "32": {
+      "theta_window": {
+       "P1_rel": 0.20674833578317198,
+       "P2_rel": 0.20674833578317192
+      },
+      "y_window": {
+       "P1_rel": 0.14511717740873914,
+       "P2_rel": 17.613064042807828
+      }
+     }
+    },
+    "theta_window_exponents": {
+     "P1": -1.0000000000000004,
+     "P2": -1.0000000000000004
+    },
+    "y_window_exponents": {
+     "P1": -1.0103369942100306,
+     "P2": 0.009526828249296732
+    }
+   }
+  },
+  "P3": {
+   "terms": {
+    "0.01": {
+     "max_u": 9.981654107430842,
+     "max_dt": 1186.0375828853796,
+     "max_radial_visc": 1.757809619399787e-204,
+     "max_axial_visc": 3923.2633600548825,
+     "max_R_theta": 5052.688423773041,
+     "axial_over_radial_max_over_max": 2.231904591234687e+207
+    },
+    "0.001": {
+     "max_u": 31.564769063512323,
+     "max_dt": 37505.81016079834,
+     "max_radial_visc": 5.558683365457959e-203,
+     "max_axial_visc": 124064.4520619892,
+     "max_R_theta": 159780.01676410154,
+     "axial_over_radial_max_over_max": 2.231903562504284e+207
+    },
+    "0.0001": {
+     "max_u": 99.81658704153487,
+     "max_dt": 1186038.1290752287,
+     "max_radial_visc": 1.7578104294144487e-201,
+     "max_axial_visc": 3923261.5371618504,
+     "max_R_theta": 5052687.120999068,
+     "axial_over_radial_max_over_max": 2.231902525728411e+207
+    }
+   },
+   "measured_axial_over_radial_ratio": {
+    "0.01": 2.231904591234687e+207,
+    "0.001": 2.231903562504284e+207,
+    "0.0001": 2.231902525728411e+207
+   },
+   "measured_exponent": 2.0095803118268e-07,
+   "claimed_exponent_2h": 2e-07,
+   "q^2h_at_the_three_q": {
+    "0.01": 0.999999078966387,
+    "0.001": 0.9999986184498986,
+    "0.0001": 0.9999981579336222
+   },
+   "fake_constant_ratio_exponent": 9.444201668412412e-17,
+   "fake_constant_passes_pm0.05": true,
+   "fake_drift_0.04_exponent": 0.04000000000000011,
+   "fake_drift_passes_pm0.05": true,
+   "tolerance_over_signal": 250000.00000000003,
+   "at_h_1e-3_tolerance_over_signal": 25.0
+  },
+  "I": {
+   "R0_norm": {
+    "0.01": 4.621101663729451e-36,
+    "0.001": 1.4613209921394113e-34,
+    "0.0001": 4.621103791825898e-33
+   },
+   "fakeA_builtin": {
+    "R1_over_R0": {
+     "0.01": 0.6309573444801932,
+     "0.001": 0.5011872336272722,
+     "0.0001": 0.39810717055349726
+    },
+    "gain_stage1": 0.10000000000000007,
+    "gain_stage2": 0.10000000000000007
+   },
+   "fakeB_grid_tied_to_q": {
+    "rel_leftover_stage1": {
+     "0.01": 0.022259537563506696,
+     "0.001": 0.01740529772667047,
+     "0.0001": 0.01371189545828377
+    },
+    "gain_stage1": 0.10520932213487964,
+    "rel_leftover_stage2": {
+     "0.01": 0.25241145228901146,
+     "0.001": 0.22666295812378726,
+     "0.0001": 0.20374227130479552
+    },
+    "gain_stage2": 0.04651395614088504,
+    "same_solve_fixed_grid_gain": 2.3587253275424875e-16,
+    "n_points": {
+     "0.01": 100,
+     "0.001": 126,
+     "0.0001": 158
+    }
+   },
+   "paper_gain_in_q_exponent": 1e-08,
+   "zero_correction_control_gain": 0.0,
+   "zero_correction_control_within_0.02_of_paper_q_gain": true,
+   "log_eps_range_over_q_1e-2_to_1e-4": 4.605170185988092e-07,
+   "note": "sigma_j = 1/5 + j/10 (9.8) is an exponent of eps = q^h (Lemma 9.8: g_j = h j/10); in q the per-stage gain is h/10."
+  },
+  "I2": {
+   "paper": {
+    "kappa_s": 1e-05,
+    "B0": 0.7,
+    "c4": 0.17,
+    "rows": {
+     "wave_row": {
+      "value": 0.4,
+      "threshold": 0.4
+     },
+     "tangential_mean_row": {
+      "value": 0.39999,
+      "threshold": 0.39999
+     },
+     "H_minus_B": {
+      "value": 0.49998,
+      "threshold": 0.1
+     },
+     "mean_0.17_row": {
+      "value": 0.17,
+      "threshold": 0.1
+     },
+     "defect_row": {
+      "value": 0.89996,
+      "threshold": 0.1
+     }
+    },
+    "margins_vs_threshold": {
+     "wave_row": 0.0,
+     "tangential_mean_row": 0.0,
+     "H_minus_B": 0.39998,
+     "mean_0.17_row": 0.07,
+     "defect_row": 0.79996
+    },
+    "values_minus_0.1": {
+     "wave_row": 0.30000000000000004,
+     "tangential_mean_row": 0.29999,
+     "H_minus_B": 0.39998,
+     "mean_0.17_row": 0.07,
+     "defect_row": 0.79996
+    },
+    "all_rows_hold": true,
+    "smallest_value_minus_0.1": 0.07,
+    "sigma_j": [
+     0.2,
+     0.30000000000000004,
+     0.4,
+     0.5,
+     0.6000000000000001,
+     0.7
+    ],
+    "h_sigma_j_to_infinity": true
+   },
+   "kappa_0.03": {
+    "kappa_s": 0.03,
+    "B0": 0.7,
+    "c4": 0.17,
+    "rows": {
+     "wave_row": {
+      "value": 0.4,
+      "threshold": 0.4
+     },
+     "tangential_mean_row": {
+      "value": 0.37,
+      "threshold": 0.37
+     },
+     "H_minus_B": {
+      "value": 0.44,
+      "threshold": 0.1
+     },
+     "mean_0.17_row": {
+      "value": 0.17,
+      "threshold": 0.1
+     },
+     "defect_row": {
+      "value": 0.78,
+      "threshold": 0.1
+     }
+    },
+    "margins_vs_threshold": {
+     "wave_row": 0.0,
+     "tangential_mean_row": 0.0,
+     "H_minus_B": 0.33999999999999997,
+     "mean_0.17_row": 0.07,
+     "defect_row": 0.68
+    },
+    "values_minus_0.1": {
+     "wave_row": 0.30000000000000004,
+     "tangential_mean_row": 0.27,
+     "H_minus_B": 0.33999999999999997,
+     "mean_0.17_row": 0.07,
+     "defect_row": 0.68
+    },
+    "all_rows_hold": true,
+    "smallest_value_minus_0.1": 0.07,
+    "sigma_j": [
+     0.2,
+     0.30000000000000004,
+     0.4,
+     0.5,
+     0.6000000000000001,
+     0.7
+    ],
+    "h_sigma_j_to_infinity": true
+   },
+   "kappa_1_over_30": {
+    "kappa_s": 0.03333333333333333,
+    "B0": 0.7,
+    "c4": 0.17,
+    "rows": {
+     "wave_row": {
+      "value": 0.4,
+      "threshold": 0.4
+     },
+     "tangential_mean_row": {
+      "value": 0.3666666666666667,
+      "threshold": 0.3666666666666667
+     },
+     "H_minus_B": {
+      "value": 0.43333333333333335,
+      "threshold": 0.1
+     },
+     "mean_0.17_row": {
+      "value": 0.17,
+      "threshold": 0.1
+     },
+     "defect_row": {
+      "value": 0.7666666666666667,
+      "threshold": 0.1
+     }
+    },
+    "margins_vs_threshold": {
+     "wave_row": 0.0,
+     "tangential_mean_row": 0.0,
+     "H_minus_B": 0.33333333333333337,
+     "mean_0.17_row": 0.07,
+     "defect_row": 0.6666666666666667
+    },
+    "values_minus_0.1": {
+     "wave_row": 0.30000000000000004,
+     "tangential_mean_row": 0.2666666666666667,
+     "H_minus_B": 0.33333333333333337,
+     "mean_0.17_row": 0.07,
+     "defect_row": 0.6666666666666667
+    },
+    "all_rows_hold": true,
+    "smallest_value_minus_0.1": 0.07,
+    "sigma_j": [
+     0.2,
+     0.30000000000000004,
+     0.4,
+     0.5,
+     0.6000000000000001,
+     0.7
+    ],
+    "h_sigma_j_to_infinity": true
+   },
+   "kappa_0.04": {
+    "kappa_s": 0.04,
+    "B0": 0.7,
+    "c4": 0.17,
+    "rows": {
+     "wave_row": {
+      "value": 0.38,
+      "threshold": 0.4
+     },
+     "tangential_mean_row": {
+      "value": 0.33999999999999997,
+      "threshold": 0.36000000000000004
+     },
+     "H_minus_B": {
+      "value": 0.42,
+      "threshold": 0.1
+     },
+     "mean_0.17_row": {
+      "value": 0.17,
+      "threshold": 0.1
+     },
+     "defect_row": {
+      "value": 0.74,
+      "threshold": 0.1
+     }
+    },
+    "margins_vs_threshold": {
+     "wave_row": -0.020000000000000018,
+     "tangential_mean_row": -0.020000000000000073,
+     "H_minus_B": 0.31999999999999995,
+     "mean_0.17_row": 0.07,
+     "defect_row": 0.64
+    },
+    "values_minus_0.1": {
+     "wave_row": 0.28,
+     "tangential_mean_row": 0.23999999999999996,
+     "H_minus_B": 0.31999999999999995,
+     "mean_0.17_row": 0.07,
+     "defect_row": 0.64
+    },
+    "all_rows_hold": false,
+    "smallest_value_minus_0.1": 0.07,
+    "sigma_j": [
+     0.2,
+     0.30000000000000004,
+     0.4,
+     0.5,
+     0.6000000000000001,
+     0.7
+    ],
+    "h_sigma_j_to_infinity": true
+   },
+   "B0_0.75": {
+    "kappa_s": 1e-05,
+    "B0": 0.75,
+    "c4": 0.17,
+    "rows": {
+     "wave_row": {
+      "value": 0.4,
+      "threshold": 0.4
+     },
+     "tangential_mean_row": {
+      "value": 0.39999,
+      "threshold": 0.39999
+     },
+     "H_minus_B": {
+      "value": 0.49998,
+      "threshold": 0.1
+     },
+     "mean_0.17_row": {
+      "value": 0.17,
+      "threshold": 0.1
+     },
+     "defect_row": {
+      "value": 0.89996,
+      "threshold": 0.1
+     }
+    },
+    "margins_vs_threshold": {
+     "wave_row": 0.0,
+     "tangential_mean_row": 0.0,
+     "H_minus_B": 0.39998,
+     "mean_0.17_row": 0.07,
+     "defect_row": 0.79996
+    },
+    "values_minus_0.1": {
+     "wave_row": 0.30000000000000004,
+     "tangential_mean_row": 0.29999,
+     "H_minus_B": 0.39998,
+     "mean_0.17_row": 0.07,
+     "defect_row": 0.79996
+    },
+    "all_rows_hold": true,
+    "smallest_value_minus_0.1": 0.07,
+    "sigma_j": [
+     0.2,
+     0.30000000000000004,
+     0.4,
+     0.5,
+     0.6000000000000001,
+     0.7
+    ],
+    "h_sigma_j_to_infinity": true
+   },
+   "c4_0.11": {
+    "kappa_s": 1e-05,
+    "B0": 0.7,
+    "c4": 0.11,
+    "rows": {
+     "wave_row": {
+      "value": 0.4,
+      "threshold": 0.4
+     },
+     "tangential_mean_row": {
+      "value": 0.39999,
+      "threshold": 0.39999
+     },
+     "H_minus_B": {
+      "value": 0.49998,
+      "threshold": 0.1
+     },
+     "mean_0.17_row": {
+      "value": 0.11,
+      "threshold": 0.1
+     },
+     "defect_row": {
+      "value": 0.89996,
+      "threshold": 0.1
+     }
+    },
+    "margins_vs_threshold": {
+     "wave_row": 0.0,
+     "tangential_mean_row": 0.0,
+     "H_minus_B": 0.39998,
+     "mean_0.17_row": 0.009999999999999995,
+     "defect_row": 0.79996
+    },
+    "values_minus_0.1": {
+     "wave_row": 0.30000000000000004,
+     "tangential_mean_row": 0.29999,
+     "H_minus_B": 0.39998,
+     "mean_0.17_row": 0.009999999999999995,
+     "defect_row": 0.79996
+    },
+    "all_rows_hold": true,
+    "smallest_value_minus_0.1": 0.009999999999999995,
+    "sigma_j": [
+     0.2,
+     0.30000000000000004,
+     0.4,
+     0.5,
+     0.6000000000000001,
+     0.7
+    ],
+    "h_sigma_j_to_infinity": true
+   }
+  },
+  "V": {
+   "claimed_bookkeeping_L2_exponent": 0.24999985000000002,
+   "claimed_Linf_exponent": -0.5000001,
+   "profiles": {
+    "pinned_tail_shape": {
+     "0.004": {
+      "taus": [
+       0.1,
+       0.01,
+       0.001,
+       0.0001,
+       1e-05,
+       1e-06
+      ],
+      "Linf": [
+       2.4725308307617963e-135,
+       7.818830810547711e-135,
+       2.472531969404584e-134,
+       7.818834411253191e-134,
+       2.4725331080478968e-133,
+       7.818838011960331e-133
+      ],
+      "L2": [
+       8.21623702224779e-32,
+       4.6203312109744187e-32,
+       2.5982040733854244e-32,
+       1.4610780263809074e-32,
+       8.216248373406554e-33,
+       4.620337594202285e-33
+      ],
+      "Linf_exponent": -0.5000001000000001,
+      "L2_exponent": 0.2499998500000013
+     },
+     "0.002": {
+      "taus": [
+       0.1,
+       0.01,
+       0.001,
+       0.0001,
+       1e-05,
+       1e-06
+      ],
+      "Linf": [
+       2.4725308307617963e-135,
+       7.818830810547711e-135,
+       2.472531969404584e-134,
+       7.818834411253191e-134,
+       2.4725331080478968e-133,
+       7.818838011960331e-133
+      ],
+      "L2": [
+       8.21623702224779e-32,
+       4.620331210974418e-32,
+       2.5982040733854244e-32,
+       1.4610780263809072e-32,
+       8.216248373406554e-33,
+       4.620337594202285e-33
+      ],
+      "Linf_exponent": -0.5000001000000001,
+      "L2_exponent": 0.2499998500000013
+     },
+     "0.001": {
+      "taus": [
+       0.1,
+       0.01,
+       0.001,
+       0.0001,
+       1e-05,
+       1e-06
+      ],
+      "Linf": [
+       2.4725308307617963e-135,
+       7.818830810547711e-135,
+       2.472531969404584e-134,
+       7.818834411253191e-134,
+       2.4725331080478968e-133,
+       7.818838011960331e-133
+      ],
+      "L2": [
+       8.216237022247789e-32,
+       4.6203312109744187e-32,
+       2.5982040733854244e-32,
+       1.4610780263809072e-32,
+       8.216248373406554e-33,
+       4.620337594202285e-33
+      ],
+      "Linf_exponent": -0.5000001000000001,
+      "L2_exponent": 0.2499998500000013
+     },
+     "norm_rel_change_4e-3_vs_1e-3": {
+      "Linf": 0.0,
+      "L2": 2.220446049250313e-16
+     },
+     "exponent_spread_over_resolutions": {
+      "Linf": 0.0,
+      "L2": 0.0
+     }
+    },
+    "gaussian_bump_wrong_profile": {
+     "0.004": {
+      "taus": [
+       0.1,
+       0.01,
+       0.001,
+       0.0001,
+       1e-05,
+       1e-06
+      ],
+      "Linf": [
+       3.1622783883098027,
+       10.000004605171243,
+       31.622798445931526,
+       100.00009210344608,
+       316.2281300877173,
+       1000.0013815520094
+      ],
+      "L2": [
+       1.2976817432683227e+104,
+       7.297403232281657e+103,
+       4.103632821433922e+103,
+       2.3076431159313203e+103,
+       1.297683536083142e+103,
+       7.297413314023752e+102
+      ],
+      "Linf_exponent": -0.5000001,
+      "L2_exponent": 0.24999985000000446
+     },
+     "0.002": {
+      "taus": [
+       0.1,
+       0.01,
+       0.001,
+       0.0001,
+       1e-05,
+       1e-06
+      ],
+      "Linf": [
+       3.1622783883098027,
+       10.000004605171243,
+       31.622798445931526,
+       100.00009210344608,
+       316.2281300877173,
+       1000.0013815520094
+      ],
+      "L2": [
+       1.2976819735894137e+104,
+       7.297404527472779e+103,
+       4.1036335497736655e+103,
+       2.3076435255069985e+103,
+       1.2976837664045511e+103,
+       7.297414609216664e+102
+      ],
+      "Linf_exponent": -0.5000001,
+      "L2_exponent": 0.2499998500000021
+     },
+     "0.001": {
+      "taus": [
+       0.1,
+       0.01,
+       0.001,
+       0.0001,
+       1e-05,
+       1e-06
+      ],
+      "Linf": [
+       3.1622783883098027,
+       10.000004605171243,
+       31.622798445931526,
+       100.00009210344608,
+       316.2281300877173,
+       1000.0013815520094
+      ],
+      "L2": [
+       1.2976820311698672e+104,
+       7.297404851271577e+103,
+       4.1036337318591734e+103,
+       2.3076436279012397e+103,
+       1.2976838239850842e+103,
+       7.2974149330159085e+102
+      ],
+      "Linf_exponent": -0.5000001,
+      "L2_exponent": 0.2499998500000073
+     },
+     "norm_rel_change_4e-3_vs_1e-3": {
+      "Linf": 0.0,
+      "L2": 2.2185831172194526e-07
+     },
+     "exponent_spread_over_resolutions": {
+      "Linf": 0.0,
+      "L2": 5.190292640122607e-15
+     }
+    },
+    "bump_A_0.85_control": {
+     "0.004": {
+      "taus": [
+       0.1,
+       0.01,
+       0.001,
+       0.0001,
+       1e-05,
+       1e-06
+      ],
+      "Linf": [
+       7.079457843841379,
+       50.11872336272722,
+       354.8133892335754,
+       2511.8864315095793,
+       17782.794100389223,
+       125892.54117941669
+      ],
+      "L2": [
+       3.482112885180995e+104,
+       6.559078765671883e+104,
+       1.2355002744849728e+105,
+       2.327248967098018e+105,
+       4.3837203978902605e+105,
+       8.257390936063855e+105
+      ],
+      "Linf_exponent": -0.8500000000000002,
+      "L2_exponent": -0.27499999999999936
+     },
+     "0.002": {
+      "taus": [
+       0.1,
+       0.01,
+       0.001,
+       0.0001,
+       1e-05,
+       1e-06
+      ],
+      "Linf": [
+       7.079457843841379,
+       50.11872336272722,
+       354.8133892335754,
+       2511.8864315095793,
+       17782.794100389223,
+       125892.54117941669
+      ],
+      "L2": [
+       3.4821135032092926e+104,
+       6.559079929820323e+104,
+       1.2355004937696878e+105,
+       2.3272493801534717e+105,
+       4.3837211759417897e+105,
+       8.257392401639911e+105
+      ],
+      "Linf_exponent": -0.8500000000000002,
+      "L2_exponent": -0.2749999999999996
+     },
+     "0.001": {
+      "taus": [
+       0.1,
+       0.01,
+       0.001,
+       0.0001,
+       1e-05,
+       1e-06
+      ],
+      "Linf": [
+       7.079457843841379,
+       50.11872336272722,
+       354.8133892335754,
+       2511.8864315095793,
+       17782.794100389223,
+       125892.54117941669
+      ],
+      "L2": [
+       3.482113657716852e+104,
+       6.559080220858347e+104,
+       1.2355005485910386e+105,
+       2.327249483417659e+105,
+       4.383721370455282e+105,
+       8.257392768035074e+105
+      ],
+      "Linf_exponent": -0.8500000000000002,
+      "L2_exponent": -0.2750000000000014
+     },
+     "norm_rel_change_4e-3_vs_1e-3": {
+      "Linf": 0.0,
+      "L2": 2.2185831172194526e-07
+     },
+     "exponent_spread_over_resolutions": {
+      "Linf": 0.0,
+      "L2": 2.0539125955565396e-15
+     }
+    }
+   },
+   "eta_box_divergence_of_L2_at_tau_0.1": {
+    "L2_bump": {
+     "0.9": 1.2976817432683227e+104,
+     "0.99": 1.968048539487036e+104,
+     "0.999": 5.0906726377838975e+104
+    },
+    "ratio_0.99_over_0.9": 1.5165879844547532,
+    "ratio_0.999_over_0.99": 2.5866601029620746,
+    "predicted_ratio_(1-eta_c)^(-1/2+3h)": 3.1622754757451137,
+    "note": "the similarity field is z-independent K(r,tau) beyond X_ext (3.5): its L2(R^3) norm is infinite; a box in eta gives the bookkeeping power exactly"
+   },
+   "V2_force_of_prescribed_bump": {
+    "terms": {
+     "0.01": {
+      "max_u": 9.981654107430842,
+      "max_dt": 1186.0375828853796,
+      "max_radial_visc": 1.757809619399787e-204,
+      "max_axial_visc": 3923.2633600548825,
+      "max_R_theta": 5052.688423773041,
+      "axial_over_radial_max_over_max": 2.231904591234687e+207
+     },
+     "0.001": {
+      "max_u": 31.564769063512323,
+      "max_dt": 37505.81016079834,
+      "max_radial_visc": 5.558683365457959e-203,
+      "max_axial_visc": 124064.4520619892,
+      "max_R_theta": 159780.01676410154,
+      "axial_over_radial_max_over_max": 2.231903562504284e+207
+     },
+     "0.0001": {
+      "max_u": 99.81658704153487,
+      "max_dt": 1186038.1290752287,
+      "max_radial_visc": 1.7578104294144487e-201,
+      "max_axial_visc": 3923261.5371618504,
+      "max_R_theta": 5052687.120999068,
+      "axial_over_radial_max_over_max": 2.231902525728411e+207
+     }
+    },
+    "Linf_exponent_R_theta": -1.4999999440112317,
+    "expected_-A-1": -1.5000000999999998,
+    "exponent_if_leading_stress_vanished_(axial_viscosity_only)": -1.4999999,
+    "difference_2h": 2e-07
+   }
+  },
+  "S": {
+   "heat": {
+    "max_abs_Ttheta_beyond_Xb": 0.0,
+    "calB_beyond": 0.0
+   },
+   "no_heat_honest": {
+    "max_abs_Ttheta_beyond_Xb": 1.4224538127823022e-240,
+    "calB_beyond": -2.0000002
+   },
+   "no_heat_faked_by_sqrtX_term_only": {
+    "max_abs_TthetaA_beyond_Xb": 0.0
+   },
+   "no_heat_faked_by_smooth_cutoff_on_stress": {
+    "max_abs_beyond_Xb": 0.0
+   },
+   "support_radius_r_b": {
+    "0.99": {
+     "log10_r_b": 103.19723527876592
+    },
+    "0.9999": {
+     "log10_r_b": 102.19723527876592
+    },
+    "0.999999": {
+     "log10_r_b": 101.19723527876592
+    }
+   },
+   "S3_paper_cutoff": {
+    "k1_N6": {
+     "0.4": 0.520218828324761,
+     "0.2": 0.04587116909171375,
+     "0.1": 0.005041791305674085,
+     "0.05": 0.0005957035543183895,
+     "0.02": 3.693667787063552e-05
+    },
+    "k2_N9": {
+     "0.4": 3.983817494517474,
+     "0.2": 0.3619820731525775,
+     "0.1": 0.040188999327363896,
+     "0.05": 0.004761241144076184,
+     "0.02": 0.0002954494035811431
+    },
+    "local_power_k1_at_0.05": 3.0510437445878655,
+    "local_power_k2_at_0.05": 3.0493239240171333,
+    "k1_nonincreasing_over_the_four_preregistered_delta": true,
+    "k1_ratio_0.02_over_0.05": 0.06200513259132534
+   },
+   "S3_fake_cutoff_exp(-4/d2+0.2/d)": {
+    "k1_N6": {
+     "0.4": 0.8492543329372597,
+     "0.2": 0.12406814609168972,
+     "0.1": 0.037160925092246125,
+     "0.05": 0.032483534991065835,
+     "0.02": 0.8131487092303258
+    },
+    "k2_N9": {
+     "0.4": 6.4343489727976095,
+     "0.2": 0.9740682963559046,
+     "0.1": 0.2954718226884004,
+     "0.05": 0.2593031301410045,
+     "0.02": 6.500736318006824
+    },
+    "local_power_k1_at_0.05": -1.4462108660820867,
+    "local_power_k2_at_0.05": -1.4491042628984743,
+    "k1_nonincreasing_over_the_four_preregistered_delta": true,
+    "k1_ratio_0.02_over_0.05": 25.032642212553885
+   },
+   "S3_fake_cutoff_exp(-4/d2+0.5/d)": {
+    "k1_N6": {
+     "0.4": 1.7710652202048864,
+     "0.2": 0.5518488971893257,
+     "0.1": 0.7435876101490365,
+     "0.05": 13.079789848127712,
+     "0.02": 2655071.793362726
+    },
+    "k2_N9": {
+     "0.4": 13.201816856347808,
+     "0.2": 4.299324228196173,
+     "0.1": 5.890004627195216,
+     "0.05": 104.211303832003,
+     "0.02": 21201080.192351874
+    },
+    "local_power_k1_at_0.05": -8.191985754567048,
+    "local_power_k2_at_0.05": -8.19653259728939,
+    "k1_nonincreasing_over_the_four_preregistered_delta": false,
+    "k1_ratio_0.02_over_0.05": 202990.40154248217
+   }
+  },
+  "runtime_s": 7.8509604930877686
+ },
+ "instantiated_vs_scaled": "Every fake here is instantiated at the pinned lambda = 0.1 profile (X_tail ~ 1e207, T_theta ~ 1e-39, T_z ~ 1e-175); the paper's regime (lambda <~ 3e-4, X = O(1)) is reached by none of them. Two of the honest measurements are scalings only: the 2h exponent of the viscous ratio (real, prefactor 2e207) and the support radius r_b ~ 1e103 sqrt(q).",
+ "could_not_determine": [
+  "I could not fake V2, because it has no YES to fake (it is a report gate); I could only show its number is profile-blind at this h.",
+  "I could not fake S2's flatness clause, because a force growing like q^{-1.5} cannot be made flat by any cutoff; the gate already forbids claiming it.",
+  "I could not make fake B (a q-tied grid) repeat its gain at the second stage (0.105 then 0.047); I3 is fakeable only by the built-in ansatz.",
+  "I could not fake S3 with c = 0.5 at the four pre-registered delta (caught at delta = 0.05); only c = 0.2 passes them.",
+  "I did not attempt to fake the leg-432 controls themselves (K1-K6); they were not in section 2's gate list."
+ ],
+ "tier": "This is Tier 2, not a proof.",
+ "runtime_s": 7.8509604930877686
+}
