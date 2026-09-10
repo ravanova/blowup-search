@@ -1,0 +1,2803 @@
+{
+ "schema": "arc7_k3_merged_v1",
+ "leg": 439,
+ "prereg": "experiments/journal/leg_439_prereg.md",
+ "amendment": "experiments/journal/leg_439_prereg_amend.md",
+ "present": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "absent": [],
+ "workers": {
+  "1": {
+   "agent": 1,
+   "gates": {
+    "Q1": "YES",
+    "Q2": "UNDER-RESOURCED"
+   },
+   "numbers": {
+    "Q1": {
+     "theta_entry.err_at_M256": 1.709743457922741e-14,
+     "theta_entry.threshold": 1e-08,
+     "theta_entry.slope_vs_M": -10.538270791045962,
+     "theta_entry.slope_threshold": -3.5,
+     "z_entry.err_at_M256": 1.5438447674357455e-14,
+     "z_entry.threshold": 1e-08,
+     "z_entry.slope_vs_M": -10.576155995016057,
+     "z_entry.slope_threshold": -3.5
+    },
+    "Q2": {}
+   },
+   "gates_detail": {
+    "Q1": {
+     "answer": "YES",
+     "theta_entry": {
+      "err_at_M256": 1.709743457922741e-14,
+      "threshold": 1e-08,
+      "passes_threshold": true,
+      "slope_vs_M": -10.538270791045962,
+      "slope_threshold": -3.5,
+      "passes_slope": true,
+      "decreasing_M16_to_M256": true
+     },
+     "z_entry": {
+      "err_at_M256": 1.5438447674357455e-14,
+      "threshold": 1e-08,
+      "passes_threshold": true,
+      "slope_vs_M": -10.576155995016057,
+      "slope_threshold": -3.5,
+      "passes_slope": true,
+      "decreasing_M16_to_M256": true
+     },
+     "normalisation": "each entry normalised by its own sup (theta target sup = 1 identically; z target sup = max_y |Tz/Ttheta| at that eta), per leg_439_prereg.md Q1's correction to wave 4's joint norm."
+    },
+    "Q2": {
+     "answer": "UNDER-RESOURCED",
+     "cost": "Building Proposition 4.2's T_b/Z_b operators (4.2) and the pinned outer-profile fields V_0, U, W (arc6_profile_v1.py's build(), not the tail stress alone) to form R^(0)_r's two-term ratio at three q and two h, independently checked against a physical-space finite-difference route, is estimated at several additional hours beyond this session: reading (4.1)-(4.2) and (4.7)-(4.8) in full, deriving T_b/Z_b generically (not just quoting their order-counting consequence 1-2D=2h), and building + debugging the coordinate-inversion (X,eta)<->(r,z) at explicit q needed for an independent numerical check. Not answered NO; not faked from Proposition 9.1's own (9.2) table, which was checked (see dropped_investigation below) and does not contain a q^{2h} entry."
+    }
+   },
+   "claimed": {
+    "Q1": {
+     "quantity": "The pinned tail stress T_0 (both entries, theta-theta and z) on y in [0.5, 2.9] at h = 1e-7, every eta node in {-0.5, 0.0, 0.5}: the target the homogeneous pulses of Lemma 7.4 must reproduce under Definition 6.4's amplitude assignment.",
+     "page_equation": "Proposition 7.5 and identity (7.26) (pp. 81-83, per leg 433's own reading, quoted from experiments/arc6_w4_pulses.py's docstring and section headers, cross-checked against manuscript_pages.txt section 7); Lemma 7.4's homogeneous pulse (pp. 79-80); (7.27)-(7.28) covariance columns (p. 82); (7.24) inversion.",
+     "route_A_prediction": "IDENTITY, written before any number exists: with amplitudes y_sigma assigned by inverting the covariance system H y = T (Definition 6.4, (7.24)) built from a SUFFICIENTLY RESOLVED quadrature (the fine ODE solve, dtt = 0.02, RK4, used ONLY to construct H, never to answer the gate), the paper's closed form claims the resulting pulse's averaged quadratic product reproduces T EXACTLY: theta-entry = 1.0 (in T_theta units) and z-entry = T_z/T_theta, for EVERY quadrature scheme that correctly approximates the continuous average -- i.e. the theta-entry error and z-entry error, evaluated by a SEPARATE, INDEPENDENT direct quadrature at oversampling M in {16, 64, 256} points per period (interpolated off the fixed fine ODE solution, never re-using the H-matrix's own quadrature nodes), must be < 1e-8 at M = 256 and must DECREASE with M at Simpson's order (log-log slope <= -3.5). This number (1e-8, slope <= -3.5) is fixed now, before the run.",
+     "why_two_routes_are_independent": "Route A's target (T_0) and Route B's reconstruction machinery (H, the inversion) are built ONCE at high, fixed quadrature resolution (effectively M -> a few thousand, dtt = 0.02 over Lambda = 2000) and FROZEN. Route B then re-evaluates the SAME pulse's quadratic product at a DELIBERATELY COARSER, INDEPENDENT set of M in {16,64,256} nodes obtained by interpolating the frozen fine solution -- a genuinely different discretization of the same continuous integral, not the same quadrature nodes re-summed. Wave 4's P1 used the SAME grid for both steps at every N, which is why its error was N-independent (agent_3_pulses.json, leg 433: flagged in its own artefact, not opened here -- inferred structurally from experiments/arc6_w4_pulses.py's own comment at the inversion step and its finalize() block's own admission 'N_dependence: none (identity; the same number at every N)'). This unit's Route B is built specifically to NOT repeat that: M is swept independently of the (fixed) H-building resolution, so a genuine aliasing/quadrature-order signal is possible and its absence (flat, non-converging error) would itself be diagnostic."
+    },
+    "Q2": {
+     "quantity": "The q-exponent of the ratio (subleading axial-viscosity term over leading radial-transport term) in Proposition 4.2's force decomposition on the pinned annulus, which the paper states directly on p. 47: 'axial viscosity increases order in q^{2h} expansion one because 1 - 2D = 2h' (D = 1/2 - h from (4.1)), and confirms again at p. 16 (3.6): u_theta,loc(sqrt(2 X_in tau), 0, 0, 1-tau) = tau^{-A}(e_0 + O(tau^{2h})).",
+     "page_equation": "p. 47 (the paragraph immediately after (5.6), on axial-derivative order shift 1-2D=2h from (4.2)); p. 16, (3.6); the force decomposition R_r = q^{-3/2}[...] - q^{-3/2+2h} Z_{-1/2-D}Z_{-1/2}G is a derivation recorded (not run) in experiments/arc6_w4_headline.py's CLAIMED block (an imported, unedited wave-4 runner), citing Lemma 4.1 p. 25 and Proposition 4.2 p. 27.",
+     "route_A_prediction": "2h exactly, written before any number exists.",
+     "route_B_plan_and_pre_registered_cost_ceiling": "Route B would build R^(0)_r's two terms explicitly from the pinned tail stress via Proposition 4.2's operators (T_b, Z_b of (4.2)) applied to the profile field G = V_0/X (needs V_0, U, W from the PINNED OUTER PROFILE, arc6_profile_v1.py's build(), not merely T_0), then take the log-log slope of their ratio over q in {1e-2, 1e-3, 1e-4} at h in {1e-7, 1e-3}, exactly as Q2 requires (both h). This is pre-registered as the target BEFORE any number exists. Pre-registered fallback, ALSO written before any number exists: T_0 alone (leg 432's pinned object, what Q1 uses) cannot supply this ratio, because T_0's two components enter the physical stress only through the SHARED overall prefactor q^{-A-1/2} -- any ratio formed from T_0 alone (e.g. T_z/T_theta) is q-independent by construction, so it can never show a q^{2h} hierarchy; a genuine two-route Q2 needs the profile-space force, not the stress alone. If the T_b/Z_b operator build (from (4.2)) cannot be completed and independently checked within this session, Q2 is answered UNDER-RESOURCED, with the specific missing piece named, never NO and never faked from T_0 alone."
+    }
+   },
+   "routes": {
+    "Q1": {
+     "A_method": "Definition 6.4 / (7.24): invert the fine (dtt=0.02, store_every=1, Lambda=2000) covariance H against the pinned target T (theta=1, z=Tz/Ttheta from leg 432's tail_data, imported via arc6_w4_pulses.tail_data) to assign y_sigma; frozen once, never re-quadratured for the gate itself.",
+     "B_method": "For each M in {16,64,256}: interpolate (cubic) the FROZEN fine ODE solution to M+1 points (odd count for Simpson) spanning the same [0, Lambda] window, recompute psi analytically (psi_of, imported) at those M points, apply Simpson quadrature there, and recombine with the FIXED y_sigma from route A to reconstruct the averaged quadratic product independently of the H-building grid.",
+     "measured": {
+      "theta_worst_err_by_M": {
+       "16": 0.08361292044125213,
+       "64": 0.0056843956306277255,
+       "256": 1.709743457922741e-14
+      },
+      "z_worst_err_by_M": {
+       "16": 0.08386184318554134,
+       "64": 0.005693689316579706,
+       "256": 1.5438447674357455e-14
+      },
+      "theta_fit_slope_vs_M": -10.538270791045962,
+      "z_fit_slope_vs_M": -10.576155995016057
+     }
+    },
+    "Q2": {
+     "A_method": "p. 47: 1 - 2D = 2h from (4.1)'s D = 1/2 - h, applied to (4.2)'s axial-derivative operator order shift in Proposition 4.2's force decomposition; corroborated at p. 16 (3.6).",
+     "B_method": "NOT BUILT: would require Proposition 4.2's T_b, Z_b operators of (4.2) applied to the pinned OUTER PROFILE fields V_0, U, W (arc6_profile_v1.py's build(), not merely the tail stress T_0 that Q1 uses), to form R^(0)_r's two terms and their ratio's q-exponent at q in {1e-2,1e-3,1e-4}, h in {1e-7,1e-3}. Judged, before any number existed, to exceed this session's budget alongside Q1's full build. UNDER-RESOURCED, not faked, not NO."
+    }
+   },
+   "controls": {
+    "phase_shift_pi_over_2": {
+     "expected": "theta-entry error O(1) at every M (must fail, i.e. NOT converge toward 0 with M)",
+     "measured_at_M256": 0.5000000000000004,
+     "fired": true
+    },
+    "amplitude_halved": {
+     "expected": "theta-entry error ~ 0.75 +- 0.01, using wave 4's own convention that amp_scale multiplies y_sigma (i.e. y_sigma *= amp_scale**2); reported both under that convention and under the literal-amplitude-halved convention (amp_scale = sqrt(0.5), i.e. y_sigma *= 0.5) for honesty",
+     "measured_wave4_convention_amp_scale_half": 0.7500000000000002,
+     "measured_literal_amplitude_halved_amp_scale_sqrthalf": 0.5000000000000002,
+     "fired": true
+    },
+    "twin": {
+     "expected": "repeat run (different eta node, 0.5, at the same M=256) passes the same way",
+     "measured_theta_err": 1.709743457922741e-14,
+     "measured_z_err": 1.5438447674357455e-14,
+     "twin_passes": true
+    }
+   },
+   "instantiated_vs_scaled": "Q1 is instantiated fully at the pinned interface: h = 1e-7, Lambda = 2000, y in [0.5, 2.9] at 0.1 spacing (25 slow points), eta in {-0.5, 0, 0.5}, using leg 432/433's own tail_data/pulse/columns builders (imported, unedited). The fine ODE solve (dtt=0.02, store_every=1) is the SAME resolution wave 4 used to build H; what is new here is that the RECONSTRUCTION quadrature (M) is swept independently of that fixed grid, via cubic interpolation, rather than reusing it -- this is the only methodological change from wave 4's P1 level 1. Q2's route A (2h exactly) is instantiated as a page quotation and a page-47 order-counting argument; its route B is NOT instantiated (UNDER-RESOURCED).",
+   "could_not_determine": [
+    "Q2's route B (the independent numerical measurement of the axial-viscosity/radial-transport ratio's q-exponent), because it requires Proposition 4.2's T_b/Z_b operators (4.2) applied to the pinned outer profile's V_0/U/W fields (not merely the tail stress T_0 this unit otherwise uses), a build judged to exceed this session's remaining budget once Q1 was done properly (the aliasing fix required rebuilding the quadrature machinery rather than reusing wave 4's, which used most of the session).",
+    "Whether the z-entry's true target (T_z/T_theta, magnitude down to roughly 1e-137 at some eta per wave 4's own report) is resolved by the M-point quadrature at float64 precision at every eta, or whether catastrophic cancellation in the (S,Dd) split silently zeroes it at some (y, eta, M) combination: not separately audited beyond the sup-error reported per M.",
+    "The exact page(s) inside Proposition 7.5's own statement (as opposed to its neighbourhood, (7.24)-(7.28) and Lemma 7.4) were not individually re-transcribed; this unit relies on experiments/arc6_w4_pulses.py's own docstring (an already-committed, imported artefact) for the page range 79-83, cross-checked only against the manuscript's own text around Section 7's 'Proposition 9.1' back-references, not against a fresh, independent read of every displayed equation number in Section 7."
+   ],
+   "what_this_does_not_establish": "Q1 passing (if it passes) shows that the paper's closed-form amplitude assignment (7.26), evaluated by a genuinely independent, converging quadrature, reproduces the pinned target stress at the pinned interface -- it says nothing about whether that stress is the one a real Navier-Stokes solution produces, whether the pulses so built are physically realisable at the paper's own regime (wave 4's agent_3_pulses.json, not opened here, reportedly found the size hierarchy inverted at this same pinned point -- not re-checked or relied upon by this unit), or anything about the construction closing. Q2 UNDER-RESOURCED establishes nothing either way about the q^{2h} hierarchy; it is a cost report, not a verdict.",
+   "tier2_sentence_present": true
+  },
+  "2": {
+   "agent": 2,
+   "gates": {
+    "Q3": "NOT-INSTANTIATED"
+   },
+   "numbers": {
+    "Q3": {
+     "literal_arithmetic.0.1.T_theta.gain_tail.measured_gain": -7.327471962526033e-15,
+     "literal_arithmetic.0.1.T_theta.gain_tail.claimed_gain": 0.01,
+     "literal_arithmetic.0.1.T_theta.gain_tail.relative_error": 1.0000000000007327,
+     "literal_arithmetic.0.1.T_theta.gain_tail.gain_over_h": -7.327471962526033e-14,
+     "literal_arithmetic.0.1.T_theta.gain_total.measured_gain": 2.375877272697835e-14,
+     "literal_arithmetic.0.1.T_theta.gain_total.claimed_gain": 0.01,
+     "literal_arithmetic.0.1.T_theta.gain_total.relative_error": 0.9999999999976241,
+     "literal_arithmetic.0.1.T_theta.gain_total.gain_over_h": 2.375877272697835e-13,
+     "literal_arithmetic.0.1.T_z.gain_tail.measured_gain": 1.9317880628477724e-14,
+     "literal_arithmetic.0.1.T_z.gain_tail.claimed_gain": 0.01,
+     "literal_arithmetic.0.1.T_z.gain_tail.relative_error": 0.9999999999980682,
+     "literal_arithmetic.0.1.T_z.gain_tail.gain_over_h": 1.9317880628477724e-13,
+     "literal_arithmetic.0.1.T_z.gain_total.measured_gain": 2.4868995751603507e-14,
+     "literal_arithmetic.0.1.T_z.gain_total.claimed_gain": 0.01,
+     "literal_arithmetic.0.1.T_z.gain_total.relative_error": 0.9999999999975131,
+     "literal_arithmetic.0.1.T_z.gain_total.gain_over_h": 2.4868995751603507e-13,
+     "literal_arithmetic.0.03.T_theta.gain_tail.measured_gain": -5.329070518200751e-15,
+     "literal_arithmetic.0.03.T_theta.gain_tail.claimed_gain": 0.003,
+     "literal_arithmetic.0.03.T_theta.gain_tail.relative_error": 1.0000000000017764,
+     "literal_arithmetic.0.03.T_theta.gain_tail.gain_over_h": -1.7763568394002505e-13,
+     "literal_arithmetic.0.03.T_theta.gain_total.measured_gain": 2.4424906541753444e-15,
+     "literal_arithmetic.0.03.T_theta.gain_total.claimed_gain": 0.003,
+     "literal_arithmetic.0.03.T_theta.gain_total.relative_error": 0.9999999999991859,
+     "literal_arithmetic.0.03.T_theta.gain_total.gain_over_h": 8.141635513917815e-14,
+     "literal_arithmetic.0.03.T_z.gain_tail.measured_gain": 3.397282455352979e-14,
+     "literal_arithmetic.0.03.T_z.gain_tail.claimed_gain": 0.003,
+     "literal_arithmetic.0.03.T_z.gain_tail.relative_error": 0.9999999999886757,
+     "literal_arithmetic.0.03.T_z.gain_tail.gain_over_h": 1.1324274851176597e-12,
+     "literal_arithmetic.0.03.T_z.gain_total.measured_gain": 1.8207657603852567e-14,
+     "literal_arithmetic.0.03.T_z.gain_total.claimed_gain": 0.003,
+     "literal_arithmetic.0.03.T_z.gain_total.relative_error": 0.9999999999939307,
+     "literal_arithmetic.0.03.T_z.gain_total.gain_over_h": 6.069219201284189e-13,
+     "literal_arithmetic.0.01.T_theta.gain_tail.measured_gain": 5.10702591327572e-15,
+     "literal_arithmetic.0.01.T_theta.gain_tail.claimed_gain": 0.001,
+     "literal_arithmetic.0.01.T_theta.gain_tail.relative_error": 0.999999999994893,
+     "literal_arithmetic.0.01.T_theta.gain_tail.gain_over_h": 5.10702591327572e-13,
+     "literal_arithmetic.0.01.T_theta.gain_total.measured_gain": 2.19824158875781e-14,
+     "literal_arithmetic.0.01.T_theta.gain_total.claimed_gain": 0.001,
+     "literal_arithmetic.0.01.T_theta.gain_total.relative_error": 0.9999999999780176,
+     "literal_arithmetic.0.01.T_theta.gain_total.gain_over_h": 2.19824158875781e-12,
+     "literal_arithmetic.0.01.T_z.gain_tail.measured_gain": 6.661338147750939e-16,
+     "literal_arithmetic.0.01.T_z.gain_tail.claimed_gain": 0.001,
+     "literal_arithmetic.0.01.T_z.gain_tail.relative_error": 0.9999999999993339,
+     "literal_arithmetic.0.01.T_z.gain_tail.gain_over_h": 6.661338147750939e-14,
+     "literal_arithmetic.0.01.T_z.gain_total.measured_gain": 1.3322676295501878e-15,
+     "literal_arithmetic.0.01.T_z.gain_total.claimed_gain": 0.001,
+     "literal_arithmetic.0.01.T_z.gain_total.relative_error": 0.9999999999986677,
+     "literal_arithmetic.0.01.T_z.gain_total.gain_over_h": 1.3322676295501878e-13,
+     "twin_gain_tail_by_h.0.1.T_theta": -7.327471962526033e-15,
+     "twin_gain_tail_by_h.0.1.T_z": 1.9317880628477724e-14,
+     "twin_gain_tail_by_h.0.03.T_theta": -5.329070518200751e-15,
+     "twin_gain_tail_by_h.0.03.T_z": 3.397282455352979e-14,
+     "twin_gain_tail_by_h.0.01.T_theta": 5.10702591327572e-15,
+     "twin_gain_tail_by_h.0.01.T_z": 6.661338147750939e-16,
+     "max_abs_twin_gain_tail": 3.397282455352979e-14
+    }
+   },
+   "gates_detail": {
+    "Q3": {
+     "answer": "NOT-INSTANTIATED",
+     "literal_arithmetic": {
+      "0.1": {
+       "T_theta.gain_tail": {
+        "measured_gain": -7.327471962526033e-15,
+        "claimed_gain": 0.01,
+        "relative_error": 1.0000000000007327,
+        "within_10pct": false,
+        "gain_over_h": -7.327471962526033e-14,
+        "gain_over_h_in_window": false
+       },
+       "T_theta.gain_total": {
+        "measured_gain": 2.375877272697835e-14,
+        "claimed_gain": 0.01,
+        "relative_error": 0.9999999999976241,
+        "within_10pct": false,
+        "gain_over_h": 2.375877272697835e-13,
+        "gain_over_h_in_window": false
+       },
+       "T_z.gain_tail": {
+        "measured_gain": 1.9317880628477724e-14,
+        "claimed_gain": 0.01,
+        "relative_error": 0.9999999999980682,
+        "within_10pct": false,
+        "gain_over_h": 1.9317880628477724e-13,
+        "gain_over_h_in_window": false
+       },
+       "T_z.gain_total": {
+        "measured_gain": 2.4868995751603507e-14,
+        "claimed_gain": 0.01,
+        "relative_error": 0.9999999999975131,
+        "within_10pct": false,
+        "gain_over_h": 2.4868995751603507e-13,
+        "gain_over_h_in_window": false
+       }
+      },
+      "0.03": {
+       "T_theta.gain_tail": {
+        "measured_gain": -5.329070518200751e-15,
+        "claimed_gain": 0.003,
+        "relative_error": 1.0000000000017764,
+        "within_10pct": false,
+        "gain_over_h": -1.7763568394002505e-13,
+        "gain_over_h_in_window": false
+       },
+       "T_theta.gain_total": {
+        "measured_gain": 2.4424906541753444e-15,
+        "claimed_gain": 0.003,
+        "relative_error": 0.9999999999991859,
+        "within_10pct": false,
+        "gain_over_h": 8.141635513917815e-14,
+        "gain_over_h_in_window": false
+       },
+       "T_z.gain_tail": {
+        "measured_gain": 3.397282455352979e-14,
+        "claimed_gain": 0.003,
+        "relative_error": 0.9999999999886757,
+        "within_10pct": false,
+        "gain_over_h": 1.1324274851176597e-12,
+        "gain_over_h_in_window": false
+       },
+       "T_z.gain_total": {
+        "measured_gain": 1.8207657603852567e-14,
+        "claimed_gain": 0.003,
+        "relative_error": 0.9999999999939307,
+        "within_10pct": false,
+        "gain_over_h": 6.069219201284189e-13,
+        "gain_over_h_in_window": false
+       }
+      },
+      "0.01": {
+       "T_theta.gain_tail": {
+        "measured_gain": 5.10702591327572e-15,
+        "claimed_gain": 0.001,
+        "relative_error": 0.999999999994893,
+        "within_10pct": false,
+        "gain_over_h": 5.10702591327572e-13,
+        "gain_over_h_in_window": false
+       },
+       "T_theta.gain_total": {
+        "measured_gain": 2.19824158875781e-14,
+        "claimed_gain": 0.001,
+        "relative_error": 0.9999999999780176,
+        "within_10pct": false,
+        "gain_over_h": 2.19824158875781e-12,
+        "gain_over_h_in_window": false
+       },
+       "T_z.gain_tail": {
+        "measured_gain": 6.661338147750939e-16,
+        "claimed_gain": 0.001,
+        "relative_error": 0.9999999999993339,
+        "within_10pct": false,
+        "gain_over_h": 6.661338147750939e-14,
+        "gain_over_h_in_window": false
+       },
+       "T_z.gain_total": {
+        "measured_gain": 1.3322676295501878e-15,
+        "claimed_gain": 0.001,
+        "relative_error": 0.9999999999986677,
+        "within_10pct": false,
+        "gain_over_h": 1.3322676295501878e-13,
+        "gain_over_h_in_window": false
+       }
+      }
+     },
+     "twin_gain_tail_by_h": {
+      "0.1": {
+       "T_theta": -7.327471962526033e-15,
+       "T_z": 1.9317880628477724e-14
+      },
+      "0.03": {
+       "T_theta": -5.329070518200751e-15,
+       "T_z": 3.397282455352979e-14
+      },
+      "0.01": {
+       "T_theta": 5.10702591327572e-15,
+       "T_z": 6.661338147750939e-16
+      }
+     },
+     "max_abs_twin_gain_tail": 3.397282455352979e-14,
+     "gain_scales_with_h_as_route_A_predicts": false,
+     "all_within_10pct_literal": false,
+     "all_ratio_in_window_literal": false
+    }
+   },
+   "claimed": {
+    "written_before_run": true,
+    "quantity": "the exponent gain of ONE correction stage of Section 8-9's linear mean-correction solve on the annulus, sourced by the pinned residual, as a function of h",
+    "route_A": {
+     "statement": "Proposition 9.6 (p. 107): B_{j+1} = B_j + 1/10, C*_{j+1} = C*_j + 1/10; every order is a power of eps = Q^h (p. 100), Q ~ q (p. 92, p. 113); the paper's per-stage q-exponent gain is therefore h/10, uniformly in the stage index j.",
+     "prediction_h_to_gain_in_q_exponent": {
+      "0.1": 0.01,
+      "0.03": 0.003,
+      "0.01": 0.001
+     },
+     "note": "This block is fixed before route B is run at any h and is not changed after the number is seen (leg_439_prereg.md section 3, Q3)."
+    },
+    "h_values": [
+     0.1,
+     0.03,
+     0.01
+    ],
+    "q_values": [
+     0.01,
+     0.0001,
+     1e-06
+    ],
+    "gate_as_prereg": "measured gain within 10% of route A at each h, and gain/h in [0.09, 0.11] at all three q-fitted-over {1e-2,1e-4,1e-6}",
+    "controls_as_prereg": {
+     "zero_correction": "gain ~ 0 (must fail)",
+     "source_negated": "residual grows (must fail)"
+    },
+    "not_instantiated_clause": "If the stage's linear problem cannot be instantiated in the budget (it was not in wave 4): the gate is NOT-INSTANTIATED and DROPPED, with the cost of instantiating it stated. No exponent-ledger arithmetic is offered in its place. (leg_439_prereg.md section 3, Q3)",
+    "prior_finding_being_extended_not_assumed": "wave 4 (leg 433, agent 4, gate I1) ran this same Step-2 solve at h = 1e-7 only and found the instantiated linear steps (Cor 8.5's stress inverse, Lemma 8.7's moment map) exact for the pinned auxiliary-independent source, commuting with the q^{-A-1/2} prefactor scaling, giving a measured q-gain of 0 to 1e-9 -- structurally, not from insufficient resolution -- because the eps-gain the paper claims is produced by Steps 1 and 3 (the wave field / auxiliary torus of Section 7, unit (iii)), which are absent from the pinned interface. That finding is RE-RUN here at h in {1e-1, 3e-2, 1e-2}, not assumed; if it fails to generalise the run will show a nonzero, h-dependent gain and the gate will be scored literally."
+   },
+   "routes": {
+    "A": {
+     "method": "Propositions 9.5/9.6's per-stage gain h/10 in the q-exponent (Definition 9.4's recursion B_{j+1}=B_j+1/10 read as a power of eps=Q^h, p. 100, p. 107)"
+    },
+    "B": {
+     "method": "Cor 8.5's radial stress inverse (Step 2 of Prop 9.6) and Lemma 8.7's moment map (Step 4), imported from experiments/arc6_w4_iteration.py unedited, applied to the pinned tail stress T_0(y, eta; h) (arc6_residual_v1.Tail) at three explicit h, on q in {1e-2, 1e-4, 1e-6}, reading the residual's log-log slope in q before and after the solve; h enters ONLY through Tail(h) -- the profile's operator weights -- and is never multiplied into the solve as a gain.",
+     "by_h": {
+      "0.1": {
+       "T_theta": {
+        "twin": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -154.59985986937957,
+           "log10_sup_after_tail": -160.25052686189647,
+           "log10_sup_after_patch_bump": 41.38009285048873,
+           "tail_after_over_before": 2.235285533801488e-06,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999915797684,
+           "m_e_over_T_e(0)": 0.9999999995002068,
+           "sigma_vs_T_rel_err": 4.997943366775926e-10,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": 41.38009285048873,
+           "after_over_before_sup": 9.54888624954842e+195
+          },
+          {
+           "q": 0.0001,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -151.39985986937955,
+           "log10_sup_after_tail": -157.05052686189646,
+           "log10_sup_after_patch_bump": 44.58009285048874,
+           "tail_after_over_before": 2.235285533801488e-06,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999915797684,
+           "m_e_over_T_e(0)": 0.9999999995002068,
+           "sigma_vs_T_rel_err": 4.997943366775926e-10,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": 44.58009285048874,
+           "after_over_before_sup": 9.54888624954842e+195
+          },
+          {
+           "q": 1e-06,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -148.19985986937954,
+           "log10_sup_after_tail": -153.85052686189644,
+           "log10_sup_after_patch_bump": 47.780092850488735,
+           "tail_after_over_before": 2.235285533801488e-06,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999915797684,
+           "m_e_over_T_e(0)": 0.9999999995002068,
+           "sigma_vs_T_rel_err": 4.997943366775926e-10,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": 47.780092850488735,
+           "after_over_before_sup": 9.548886249547796e+195
+          }
+         ],
+         "before_exponent": -1.60000000000002,
+         "after_tail_exponent": -1.6000000000000274,
+         "after_total_exponent": -1.5999999999999963,
+         "gain_tail": -7.327471962526033e-15,
+         "gain_total": 2.375877272697835e-14,
+         "tail_after_over_before_at_q": {
+          "0.01": 2.235285533801488e-06,
+          "0.0001": 2.235285533801488e-06,
+          "1e-06": 2.235285533801488e-06
+         },
+         "sigma_vs_T_rel_err_max": 4.997943366775926e-10
+        },
+        "skip": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -154.59985986937957,
+           "log10_sup_after_tail": -154.59985986937957,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999915797684,
+           "m_e_over_T_e(0)": 0.9999999995002068,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": -154.59985986937957,
+           "after_over_before_sup": 1.0
+          },
+          {
+           "q": 0.0001,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -151.39985986937955,
+           "log10_sup_after_tail": -151.39985986937955,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999915797684,
+           "m_e_over_T_e(0)": 0.9999999995002068,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": -151.39985986937955,
+           "after_over_before_sup": 1.0
+          },
+          {
+           "q": 1e-06,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -148.19985986937954,
+           "log10_sup_after_tail": -148.19985986937954,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999915797684,
+           "m_e_over_T_e(0)": 0.9999999995002068,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": -148.19985986937954,
+           "after_over_before_sup": 1.0
+          }
+         ],
+         "before_exponent": -1.60000000000002,
+         "after_tail_exponent": -1.60000000000002,
+         "after_total_exponent": -1.60000000000002,
+         "gain_tail": 0.0,
+         "gain_total": 0.0,
+         "tail_after_over_before_at_q": {
+          "0.01": 1.0,
+          "0.0001": 1.0,
+          "1e-06": 1.0
+         },
+         "sigma_vs_T_rel_err_max": null
+        },
+        "negsource": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -154.59985986937957,
+           "log10_sup_after_tail": -154.29882987386694,
+           "log10_sup_after_patch_bump": 41.38009285048873,
+           "tail_after_over_before": 1.9999999993029898,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999915797684,
+           "m_e_over_T_e(0)": 0.9999999995002068,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": 41.38009285048873,
+           "after_over_before_sup": 9.54888624954842e+195
+          },
+          {
+           "q": 0.0001,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -151.39985986937955,
+           "log10_sup_after_tail": -151.09882987386695,
+           "log10_sup_after_patch_bump": 44.58009285048874,
+           "tail_after_over_before": 1.999999999302876,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999915797684,
+           "m_e_over_T_e(0)": 0.9999999995002068,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": 44.58009285048874,
+           "after_over_before_sup": 9.54888624954842e+195
+          },
+          {
+           "q": 1e-06,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -148.19985986937954,
+           "log10_sup_after_tail": -147.89882987386693,
+           "log10_sup_after_patch_bump": 47.780092850488735,
+           "tail_after_over_before": 1.999999999302876,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999915797684,
+           "m_e_over_T_e(0)": 0.9999999995002068,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": 47.780092850488735,
+           "after_over_before_sup": 9.548886249547796e+195
+          }
+         ],
+         "before_exponent": -1.60000000000002,
+         "after_tail_exponent": -1.6000000000000247,
+         "after_total_exponent": -1.5999999999999963,
+         "gain_tail": -4.6629367034256575e-15,
+         "gain_total": 2.375877272697835e-14,
+         "tail_after_over_before_at_q": {
+          "0.01": 1.9999999993029898,
+          "0.0001": 1.999999999302876,
+          "1e-06": 1.999999999302876
+         },
+         "sigma_vs_T_rel_err_max": null
+        }
+       },
+       "T_z": {
+        "twin": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 1,
+           "component": "T_z",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -311.39993890462887,
+           "log10_sup_after_tail": -317.7344857043358,
+           "log10_sup_after_patch_bump": -180.49176289820187,
+           "tail_after_over_before": 4.628637827465238e-07,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867642907,
+           "sigma_vs_T_rel_err": 1.3235711012576604e-08,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": -180.49176289820187,
+           "after_over_before_sup": 8.094238677448436e+130
+          },
+          {
+           "q": 0.0001,
+           "e": 1,
+           "component": "T_z",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -308.1999389046289,
+           "log10_sup_after_tail": -314.5344857043358,
+           "log10_sup_after_patch_bump": -177.29176289820188,
+           "tail_after_over_before": 4.628637827464712e-07,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867642907,
+           "sigma_vs_T_rel_err": 1.3235711012576604e-08,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": -177.29176289820188,
+           "after_over_before_sup": 8.094238677448436e+130
+          },
+          {
+           "q": 1e-06,
+           "e": 1,
+           "component": "T_z",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -304.9999389046289,
+           "log10_sup_after_tail": -311.33448570433575,
+           "log10_sup_after_patch_bump": -174.0917628982019,
+           "tail_after_over_before": 4.628637827465238e-07,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867642907,
+           "sigma_vs_T_rel_err": 1.3235711012576604e-08,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": -174.0917628982019,
+           "after_over_before_sup": 8.094238677448436e+130
+          }
+         ],
+         "before_exponent": -1.6000000000000312,
+         "after_tail_exponent": -1.6000000000000119,
+         "after_total_exponent": -1.6000000000000063,
+         "gain_tail": 1.9317880628477724e-14,
+         "gain_total": 2.4868995751603507e-14,
+         "tail_after_over_before_at_q": {
+          "0.01": 4.628637827465238e-07,
+          "0.0001": 4.628637827464712e-07,
+          "1e-06": 4.628637827465238e-07
+         },
+         "sigma_vs_T_rel_err_max": 1.3235711012576604e-08
+        },
+        "skip": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 1,
+           "component": "T_z",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -311.39993890462887,
+           "log10_sup_after_tail": -311.39993890462887,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867642907,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": -311.39993890462887,
+           "after_over_before_sup": 1.0
+          },
+          {
+           "q": 0.0001,
+           "e": 1,
+           "component": "T_z",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -308.1999389046289,
+           "log10_sup_after_tail": -308.1999389046289,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867642907,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": -308.1999389046289,
+           "after_over_before_sup": 1.0
+          },
+          {
+           "q": 1e-06,
+           "e": 1,
+           "component": "T_z",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -304.9999389046289,
+           "log10_sup_after_tail": -304.9999389046289,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867642907,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": -304.9999389046289,
+           "after_over_before_sup": 1.0
+          }
+         ],
+         "before_exponent": -1.6000000000000312,
+         "after_tail_exponent": -1.6000000000000312,
+         "after_total_exponent": -1.6000000000000312,
+         "gain_tail": 0.0,
+         "gain_total": 0.0,
+         "tail_after_over_before_at_q": {
+          "0.01": 1.0,
+          "0.0001": 1.0,
+          "1e-06": 1.0
+         },
+         "sigma_vs_T_rel_err_max": null
+        },
+        "negsource": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 1,
+           "component": "T_z",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -311.39993890462887,
+           "log10_sup_after_tail": -311.0989089380892,
+           "log10_sup_after_patch_bump": -180.49176289820187,
+           "tail_after_over_before": 1.9999998658776204,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867642907,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": -180.49176289820187,
+           "after_over_before_sup": 8.094238677448436e+130
+          },
+          {
+           "q": 0.0001,
+           "e": 1,
+           "component": "T_z",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -308.1999389046289,
+           "log10_sup_after_tail": -307.8989089380892,
+           "log10_sup_after_patch_bump": -177.29176289820188,
+           "tail_after_over_before": 1.999999865877393,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867642907,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": -177.29176289820188,
+           "after_over_before_sup": 8.094238677448436e+130
+          },
+          {
+           "q": 1e-06,
+           "e": 1,
+           "component": "T_z",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -304.9999389046289,
+           "log10_sup_after_tail": -304.69890893808923,
+           "log10_sup_after_patch_bump": -174.0917628982019,
+           "tail_after_over_before": 1.999999865877393,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867642907,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": -174.0917628982019,
+           "after_over_before_sup": 8.094238677448436e+130
+          }
+         ],
+         "before_exponent": -1.6000000000000312,
+         "after_tail_exponent": -1.6000000000000199,
+         "after_total_exponent": -1.6000000000000063,
+         "gain_tail": 1.1324274851176597e-14,
+         "gain_total": 2.4868995751603507e-14,
+         "tail_after_over_before_at_q": {
+          "0.01": 1.9999998658776204,
+          "0.0001": 1.999999865877393,
+          "1e-06": 1.999999865877393
+         },
+         "sigma_vs_T_rel_err_max": null
+        }
+       }
+      },
+      "0.03": {
+       "T_theta": {
+        "twin": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -140.79678825873773,
+           "log10_sup_after_tail": -146.44691137498333,
+           "log10_sup_after_patch_bump": 55.18362916132759,
+           "tail_after_over_before": 2.2380865832397293e-06,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913232405,
+           "m_e_over_T_e(0)": 0.9999999995001446,
+           "sigma_vs_T_rel_err": 4.998569223996254e-10,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": 55.18362916132759,
+           "after_over_before_sup": 9.55910913833054e+195
+          },
+          {
+           "q": 0.0001,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -137.73678825873773,
+           "log10_sup_after_tail": -143.38691137498333,
+           "log10_sup_after_patch_bump": 58.2436291613276,
+           "tail_after_over_before": 2.2380865832398564e-06,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913232405,
+           "m_e_over_T_e(0)": 0.9999999995001446,
+           "sigma_vs_T_rel_err": 4.998569223996254e-10,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": 58.2436291613276,
+           "after_over_before_sup": 9.55910913833054e+195
+          },
+          {
+           "q": 1e-06,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -134.67678825873776,
+           "log10_sup_after_tail": -140.32691137498335,
+           "log10_sup_after_patch_bump": 61.3036291613276,
+           "tail_after_over_before": 2.2380865832398564e-06,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913232405,
+           "m_e_over_T_e(0)": 0.9999999995001446,
+           "sigma_vs_T_rel_err": 4.998569223996254e-10,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": 61.3036291613276,
+           "after_over_before_sup": 9.559109138331164e+195
+          }
+         ],
+         "before_exponent": -1.5300000000000002,
+         "after_tail_exponent": -1.5300000000000056,
+         "after_total_exponent": -1.5299999999999978,
+         "gain_tail": -5.329070518200751e-15,
+         "gain_total": 2.4424906541753444e-15,
+         "tail_after_over_before_at_q": {
+          "0.01": 2.2380865832397293e-06,
+          "0.0001": 2.2380865832398564e-06,
+          "1e-06": 2.2380865832398564e-06
+         },
+         "sigma_vs_T_rel_err_max": 4.998569223996254e-10
+        },
+        "skip": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -140.79678825873773,
+           "log10_sup_after_tail": -140.79678825873773,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913232405,
+           "m_e_over_T_e(0)": 0.9999999995001446,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": -140.79678825873773,
+           "after_over_before_sup": 1.0
+          },
+          {
+           "q": 0.0001,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -137.73678825873773,
+           "log10_sup_after_tail": -137.73678825873773,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913232405,
+           "m_e_over_T_e(0)": 0.9999999995001446,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": -137.73678825873773,
+           "after_over_before_sup": 1.0
+          },
+          {
+           "q": 1e-06,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -134.67678825873776,
+           "log10_sup_after_tail": -134.67678825873776,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913232405,
+           "m_e_over_T_e(0)": 0.9999999995001446,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": -134.67678825873776,
+           "after_over_before_sup": 1.0
+          }
+         ],
+         "before_exponent": -1.5300000000000002,
+         "after_tail_exponent": -1.5300000000000002,
+         "after_total_exponent": -1.5300000000000002,
+         "gain_tail": 0.0,
+         "gain_total": 0.0,
+         "tail_after_over_before_at_q": {
+          "0.01": 1.0,
+          "0.0001": 1.0,
+          "1e-06": 1.0
+         },
+         "sigma_vs_T_rel_err_max": null
+        },
+        "negsource": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -140.79678825873773,
+           "log10_sup_after_tail": -140.49575826322592,
+           "log10_sup_after_patch_bump": 55.18362916132759,
+           "tail_after_over_before": 1.999999999299238,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913232405,
+           "m_e_over_T_e(0)": 0.9999999995001446,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": 55.18362916132759,
+           "after_over_before_sup": 9.55910913833054e+195
+          },
+          {
+           "q": 0.0001,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -137.73678825873773,
+           "log10_sup_after_tail": -137.43575826322592,
+           "log10_sup_after_patch_bump": 58.2436291613276,
+           "tail_after_over_before": 1.999999999299238,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913232405,
+           "m_e_over_T_e(0)": 0.9999999995001446,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": 58.2436291613276,
+           "after_over_before_sup": 9.55910913833054e+195
+          },
+          {
+           "q": 1e-06,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -134.67678825873776,
+           "log10_sup_after_tail": -134.37575826322592,
+           "log10_sup_after_patch_bump": 61.3036291613276,
+           "tail_after_over_before": 1.9999999992993518,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913232405,
+           "m_e_over_T_e(0)": 0.9999999995001446,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": 61.3036291613276,
+           "after_over_before_sup": 9.559109138331164e+195
+          }
+         ],
+         "before_exponent": -1.5300000000000002,
+         "after_tail_exponent": -1.5300000000000153,
+         "after_total_exponent": -1.5299999999999978,
+         "gain_tail": -1.509903313490213e-14,
+         "gain_total": 2.4424906541753444e-15,
+         "tail_after_over_before_at_q": {
+          "0.01": 1.999999999299238,
+          "0.0001": 1.999999999299238,
+          "1e-06": 1.9999999992993518
+         },
+         "sigma_vs_T_rel_err_max": null
+        }
+       },
+       "T_z": {
+        "twin": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 1,
+           "component": "T_z",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -283.0597009427358,
+           "log10_sup_after_tail": -289.3935441760753,
+           "log10_sup_after_patch_bump": -152.15084660071534,
+           "tail_after_over_before": 4.636142397075178e-07,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867837002,
+           "sigma_vs_T_rel_err": 1.3216303868544154e-08,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": -152.15084660071534,
+           "after_over_before_sup": 8.106891153178499e+130
+          },
+          {
+           "q": 0.0001,
+           "e": 1,
+           "component": "T_z",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -279.9997009427357,
+           "log10_sup_after_tail": -286.3335441760753,
+           "log10_sup_after_patch_bump": -149.09084660071534,
+           "tail_after_over_before": 4.636142397075178e-07,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867837002,
+           "sigma_vs_T_rel_err": 1.3216303868544154e-08,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": -149.09084660071534,
+           "after_over_before_sup": 8.106891153177438e+130
+          },
+          {
+           "q": 1e-06,
+           "e": 1,
+           "component": "T_z",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -276.9397009427358,
+           "log10_sup_after_tail": -283.27354417607535,
+           "log10_sup_after_patch_bump": -146.03084660071534,
+           "tail_after_over_before": 4.636142397075178e-07,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867837002,
+           "sigma_vs_T_rel_err": 1.3216303868544154e-08,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": -146.03084660071534,
+           "after_over_before_sup": 8.106891153178499e+130
+          }
+         ],
+         "before_exponent": -1.5300000000000376,
+         "after_tail_exponent": -1.5300000000000036,
+         "after_total_exponent": -1.5300000000000193,
+         "gain_tail": 3.397282455352979e-14,
+         "gain_total": 1.8207657603852567e-14,
+         "tail_after_over_before_at_q": {
+          "0.01": 4.636142397075178e-07,
+          "0.0001": 4.636142397075178e-07,
+          "1e-06": 4.636142397075178e-07
+         },
+         "sigma_vs_T_rel_err_max": 1.3216303868544154e-08
+        },
+        "skip": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 1,
+           "component": "T_z",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -283.0597009427358,
+           "log10_sup_after_tail": -283.0597009427358,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867837002,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": -283.0597009427358,
+           "after_over_before_sup": 1.0
+          },
+          {
+           "q": 0.0001,
+           "e": 1,
+           "component": "T_z",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -279.9997009427357,
+           "log10_sup_after_tail": -279.9997009427357,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867837002,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": -279.9997009427357,
+           "after_over_before_sup": 1.0
+          },
+          {
+           "q": 1e-06,
+           "e": 1,
+           "component": "T_z",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -276.9397009427358,
+           "log10_sup_after_tail": -276.9397009427358,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867837002,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": -276.9397009427358,
+           "after_over_before_sup": 1.0
+          }
+         ],
+         "before_exponent": -1.5300000000000376,
+         "after_tail_exponent": -1.5300000000000376,
+         "after_total_exponent": -1.5300000000000376,
+         "gain_tail": 0.0,
+         "gain_total": 0.0,
+         "tail_after_over_before_at_q": {
+          "0.01": 1.0,
+          "0.0001": 1.0,
+          "1e-06": 1.0
+         },
+         "sigma_vs_T_rel_err_max": null
+        },
+        "negsource": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 1,
+           "component": "T_z",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -283.0597009427358,
+           "log10_sup_after_tail": -282.75867096591713,
+           "log10_sup_after_patch_bump": -152.15084660071534,
+           "tail_after_over_before": 1.999999913213861,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867837002,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": -152.15084660071534,
+           "after_over_before_sup": 8.106891153178499e+130
+          },
+          {
+           "q": 0.0001,
+           "e": 1,
+           "component": "T_z",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -279.9997009427357,
+           "log10_sup_after_tail": -279.69867096591713,
+           "log10_sup_after_patch_bump": -149.09084660071534,
+           "tail_after_over_before": 1.999999913213861,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867837002,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": -149.09084660071534,
+           "after_over_before_sup": 8.106891153177438e+130
+          },
+          {
+           "q": 1e-06,
+           "e": 1,
+           "component": "T_z",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -276.9397009427358,
+           "log10_sup_after_tail": -276.63867096591713,
+           "log10_sup_after_patch_bump": -146.03084660071534,
+           "tail_after_over_before": 1.9999999132140884,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867837002,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": -146.03084660071534,
+           "after_over_before_sup": 8.106891153178499e+130
+          }
+         ],
+         "before_exponent": -1.5300000000000376,
+         "after_tail_exponent": -1.5300000000000165,
+         "after_total_exponent": -1.5300000000000193,
+         "gain_tail": 2.1094237467877974e-14,
+         "gain_total": 1.8207657603852567e-14,
+         "tail_after_over_before_at_q": {
+          "0.01": 1.999999913213861,
+          "0.0001": 1.999999913213861,
+          "1e-06": 1.9999999132140884
+         },
+         "sigma_vs_T_rel_err_max": null
+        }
+       }
+      },
+      "0.01": {
+       "T_theta": {
+        "twin": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -137.1788630997333,
+           "log10_sup_after_tail": -142.8289328227041,
+           "log10_sup_after_patch_bump": 58.80168625152324,
+           "tail_after_over_before": 2.2383617562455733e-06,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913233979,
+           "m_e_over_T_e(0)": 0.9999999995002067,
+           "sigma_vs_T_rel_err": 4.997932993031762e-10,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": 58.80168625152324,
+           "after_over_before_sup": 9.562013472335693e+195
+          },
+          {
+           "q": 0.0001,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -134.15886309973328,
+           "log10_sup_after_tail": -139.80893282270412,
+           "log10_sup_after_patch_bump": 61.82168625152326,
+           "tail_after_over_before": 2.2383617562454462e-06,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913233979,
+           "m_e_over_T_e(0)": 0.9999999995002067,
+           "sigma_vs_T_rel_err": 4.997932993031762e-10,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": 61.82168625152326,
+           "after_over_before_sup": 9.562013472335693e+195
+          },
+          {
+           "q": 1e-06,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -131.1388630997333,
+           "log10_sup_after_tail": -136.7889328227041,
+           "log10_sup_after_patch_bump": 64.84168625152326,
+           "tail_after_over_before": 2.2383617562455733e-06,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913233979,
+           "m_e_over_T_e(0)": 0.9999999995002067,
+           "sigma_vs_T_rel_err": 4.997932993031762e-10,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": 64.84168625152326,
+           "after_over_before_sup": 9.562013472336318e+195
+          }
+         ],
+         "before_exponent": -1.5100000000000184,
+         "after_tail_exponent": -1.5100000000000133,
+         "after_total_exponent": -1.5099999999999965,
+         "gain_tail": 5.10702591327572e-15,
+         "gain_total": 2.19824158875781e-14,
+         "tail_after_over_before_at_q": {
+          "0.01": 2.2383617562455733e-06,
+          "0.0001": 2.2383617562454462e-06,
+          "1e-06": 2.2383617562455733e-06
+         },
+         "sigma_vs_T_rel_err_max": 4.997932993031762e-10
+        },
+        "skip": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -137.1788630997333,
+           "log10_sup_after_tail": -137.1788630997333,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913233979,
+           "m_e_over_T_e(0)": 0.9999999995002067,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": -137.1788630997333,
+           "after_over_before_sup": 1.0
+          },
+          {
+           "q": 0.0001,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -134.15886309973328,
+           "log10_sup_after_tail": -134.15886309973328,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913233979,
+           "m_e_over_T_e(0)": 0.9999999995002067,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": -134.15886309973328,
+           "after_over_before_sup": 1.0
+          },
+          {
+           "q": 1e-06,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -131.1388630997333,
+           "log10_sup_after_tail": -131.1388630997333,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913233979,
+           "m_e_over_T_e(0)": 0.9999999995002067,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": -131.1388630997333,
+           "after_over_before_sup": 1.0
+          }
+         ],
+         "before_exponent": -1.5100000000000184,
+         "after_tail_exponent": -1.5100000000000184,
+         "after_total_exponent": -1.5100000000000184,
+         "gain_tail": 0.0,
+         "gain_total": 0.0,
+         "tail_after_over_before_at_q": {
+          "0.01": 1.0,
+          "0.0001": 1.0,
+          "1e-06": 1.0
+         },
+         "sigma_vs_T_rel_err_max": null
+        },
+        "negsource": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -137.1788630997333,
+           "log10_sup_after_tail": -136.8778331049685,
+           "log10_sup_after_patch_bump": 58.80168625152324,
+           "tail_after_over_before": 1.999999995859188,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913233979,
+           "m_e_over_T_e(0)": 0.9999999995002067,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": 58.80168625152324,
+           "after_over_before_sup": 9.562013472335693e+195
+          },
+          {
+           "q": 0.0001,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -134.15886309973328,
+           "log10_sup_after_tail": -133.85783310496848,
+           "log10_sup_after_patch_bump": 61.82168625152326,
+           "tail_after_over_before": 1.999999995859188,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913233979,
+           "m_e_over_T_e(0)": 0.9999999995002067,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": 61.82168625152326,
+           "after_over_before_sup": 9.562013472335693e+195
+          },
+          {
+           "q": 1e-06,
+           "e": 2,
+           "component": "T_theta",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -131.1388630997333,
+           "log10_sup_after_tail": -130.83783310496847,
+           "log10_sup_after_patch_bump": 64.84168625152326,
+           "tail_after_over_before": 1.999999995859188,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 0.9999999913233979,
+           "m_e_over_T_e(0)": 0.9999999995002067,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 114.62418820347956,
+            "log10_sup_bhat": -115.05848268538281,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": 64.84168625152326,
+           "after_over_before_sup": 9.562013472336318e+195
+          }
+         ],
+         "before_exponent": -1.5100000000000184,
+         "after_tail_exponent": -1.5100000000000182,
+         "after_total_exponent": -1.5099999999999965,
+         "gain_tail": 2.220446049250313e-16,
+         "gain_total": 2.19824158875781e-14,
+         "tail_after_over_before_at_q": {
+          "0.01": 1.999999995859188,
+          "0.0001": 1.999999995859188,
+          "1e-06": 1.999999995859188
+         },
+         "sigma_vs_T_rel_err_max": null
+        }
+       },
+       "T_z": {
+        "twin": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 1,
+           "component": "T_z",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -275.28829263079086,
+           "log10_sup_after_tail": -281.6222630761279,
+           "log10_sup_after_patch_bump": -144.37924507996715,
+           "tail_after_over_before": 4.6347845935779126e-07,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867893641,
+           "sigma_vs_T_rel_err": 1.3210637746789457e-08,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": -144.37924507996715,
+           "after_over_before_sup": 8.11049854693431e+130
+          },
+          {
+           "q": 0.0001,
+           "e": 1,
+           "component": "T_z",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -272.2682926307909,
+           "log10_sup_after_tail": -278.60226307612794,
+           "log10_sup_after_patch_bump": -141.35924507996714,
+           "tail_after_over_before": 4.6347845935773853e-07,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867893641,
+           "sigma_vs_T_rel_err": 1.3210637746789457e-08,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": -141.35924507996714,
+           "after_over_before_sup": 8.110498546934841e+130
+          },
+          {
+           "q": 1e-06,
+           "e": 1,
+           "component": "T_z",
+           "mode": "twin",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -269.24829263079084,
+           "log10_sup_after_tail": -275.58226307612796,
+           "log10_sup_after_patch_bump": -138.33924507996713,
+           "tail_after_over_before": 4.6347845935773853e-07,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867893641,
+           "sigma_vs_T_rel_err": 1.3210637746789457e-08,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": -138.33924507996713,
+           "after_over_before_sup": 8.11049854693431e+130
+          }
+         ],
+         "before_exponent": -1.510000000000021,
+         "after_tail_exponent": -1.5100000000000204,
+         "after_total_exponent": -1.5100000000000198,
+         "gain_tail": 6.661338147750939e-16,
+         "gain_total": 1.3322676295501878e-15,
+         "tail_after_over_before_at_q": {
+          "0.01": 4.6347845935779126e-07,
+          "0.0001": 4.6347845935773853e-07,
+          "1e-06": 4.6347845935773853e-07
+         },
+         "sigma_vs_T_rel_err_max": 1.3210637746789457e-08
+        },
+        "skip": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 1,
+           "component": "T_z",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -275.28829263079086,
+           "log10_sup_after_tail": -275.28829263079086,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867893641,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": -275.28829263079086,
+           "after_over_before_sup": 1.0
+          },
+          {
+           "q": 0.0001,
+           "e": 1,
+           "component": "T_z",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -272.2682926307909,
+           "log10_sup_after_tail": -272.2682926307909,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867893641,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": -272.2682926307909,
+           "after_over_before_sup": 1.0
+          },
+          {
+           "q": 1e-06,
+           "e": 1,
+           "component": "T_z",
+           "mode": "skip",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -269.24829263079084,
+           "log10_sup_after_tail": -269.24829263079084,
+           "log10_sup_after_patch_bump": null,
+           "tail_after_over_before": 1.0,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867893641,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": -269.24829263079084,
+           "after_over_before_sup": 1.0
+          }
+         ],
+         "before_exponent": -1.510000000000021,
+         "after_tail_exponent": -1.510000000000021,
+         "after_total_exponent": -1.510000000000021,
+         "gain_tail": 0.0,
+         "gain_total": 0.0,
+         "tail_after_over_before_at_q": {
+          "0.01": 1.0,
+          "0.0001": 1.0,
+          "1e-06": 1.0
+         },
+         "sigma_vs_T_rel_err_max": null
+        },
+        "negsource": {
+         "rows": [
+          {
+           "q": 0.01,
+           "e": 1,
+           "component": "T_z",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -275.28829263079086,
+           "log10_sup_after_tail": -274.9872626539577,
+           "log10_sup_after_patch_bump": -144.37924507996715,
+           "tail_after_over_before": 1.9999999132809363,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867893641,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 102.54579355591105,
+           "log10_sup_after_total": -144.37924507996715,
+           "after_over_before_sup": 8.11049854693431e+130
+          },
+          {
+           "q": 0.0001,
+           "e": 1,
+           "component": "T_z",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -272.2682926307909,
+           "log10_sup_after_tail": -271.9672626539577,
+           "log10_sup_after_patch_bump": -141.35924507996714,
+           "tail_after_over_before": 1.9999999132809363,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867893641,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 101.54579355591105,
+           "log10_sup_after_total": -141.35924507996714,
+           "after_over_before_sup": 8.110498546934841e+130
+          },
+          {
+           "q": 1e-06,
+           "e": 1,
+           "component": "T_z",
+           "mode": "negsource",
+           "inner_cutoff": false,
+           "log10_sup_F_before": -269.24829263079084,
+           "log10_sup_after_tail": -268.9472626539577,
+           "log10_sup_after_patch_bump": -138.33924507996713,
+           "tail_after_over_before": 1.9999999132809363,
+           "moment_fraction_|M_e|_over_int_r^e|F_e|": 1.0,
+           "m_e_over_T_e(0)": 0.9999999867893641,
+           "sigma_vs_T_rel_err": null,
+           "log10_bump_geometry": {
+            "log10_N_e": 76.24978417318668,
+            "log10_sup_bhat": -76.68407865508993,
+            "log10_x_patch_centre": 38.15223946319639
+           },
+           "log10_r_t": 100.54579355591105,
+           "log10_sup_after_total": -138.33924507996713,
+           "after_over_before_sup": 8.11049854693431e+130
+          }
+         ],
+         "before_exponent": -1.510000000000021,
+         "after_tail_exponent": -1.5100000000000375,
+         "after_total_exponent": -1.5100000000000198,
+         "gain_tail": -1.6431300764452317e-14,
+         "gain_total": 1.3322676295501878e-15,
+         "tail_after_over_before_at_q": {
+          "0.01": 1.9999999132809363,
+          "0.0001": 1.9999999132809363,
+          "1e-06": 1.9999999132809363
+         },
+         "sigma_vs_T_rel_err_max": null
+        }
+       }
+      }
+     }
+    }
+   },
+   "controls": {
+    "0.1": {
+     "T_theta": {
+      "C1_zero_correction": {
+       "expected": "gain ~ 0 (must fail the h/10 gate)",
+       "measured_gain_tail": 0.0,
+       "fired_as_planted": true,
+       "note": "sigma = 0 identically in skip mode, so after_tail == before exactly; this is arithmetic, not a fit artefact"
+      },
+      "C2_source_negated": {
+       "expected": "residual amplitude grows (must fail the h/10 gate)",
+       "tail_after_over_before_at_q": {
+        "0.01": 1.9999999993029898,
+        "0.0001": 1.999999999302876,
+        "1e-06": 1.999999999302876
+       },
+       "amplitude_grows_at_every_q": true,
+       "measured_gain_tail": -4.6629367034256575e-15,
+       "fails_gate_as_planted": true,
+       "caveat": "the exponent-based gain metric cannot see amplitude growth at fixed q-scaling (grows by a q-independent factor ~2, so its log-log SLOPE is unchanged) -- this is the same limitation wave 4's agent 4 (leg 433) reported for its C2 control; recorded here, not hidden, as a defect of the exponent metric, not of this runner"
+      },
+      "twin_pass": {
+       "sigma_reproduces_T_rel_err": 4.997943366775926e-10
+      }
+     },
+     "T_z": {
+      "C1_zero_correction": {
+       "expected": "gain ~ 0 (must fail the h/10 gate)",
+       "measured_gain_tail": 0.0,
+       "fired_as_planted": true,
+       "note": "sigma = 0 identically in skip mode, so after_tail == before exactly; this is arithmetic, not a fit artefact"
+      },
+      "C2_source_negated": {
+       "expected": "residual amplitude grows (must fail the h/10 gate)",
+       "tail_after_over_before_at_q": {
+        "0.01": 1.9999998658776204,
+        "0.0001": 1.999999865877393,
+        "1e-06": 1.999999865877393
+       },
+       "amplitude_grows_at_every_q": true,
+       "measured_gain_tail": 1.1324274851176597e-14,
+       "fails_gate_as_planted": true,
+       "caveat": "the exponent-based gain metric cannot see amplitude growth at fixed q-scaling (grows by a q-independent factor ~2, so its log-log SLOPE is unchanged) -- this is the same limitation wave 4's agent 4 (leg 433) reported for its C2 control; recorded here, not hidden, as a defect of the exponent metric, not of this runner"
+      },
+      "twin_pass": {
+       "sigma_reproduces_T_rel_err": 1.3235711012576604e-08
+      }
+     }
+    },
+    "0.03": {
+     "T_theta": {
+      "C1_zero_correction": {
+       "expected": "gain ~ 0 (must fail the h/10 gate)",
+       "measured_gain_tail": 0.0,
+       "fired_as_planted": true,
+       "note": "sigma = 0 identically in skip mode, so after_tail == before exactly; this is arithmetic, not a fit artefact"
+      },
+      "C2_source_negated": {
+       "expected": "residual amplitude grows (must fail the h/10 gate)",
+       "tail_after_over_before_at_q": {
+        "0.01": 1.999999999299238,
+        "0.0001": 1.999999999299238,
+        "1e-06": 1.9999999992993518
+       },
+       "amplitude_grows_at_every_q": true,
+       "measured_gain_tail": -1.509903313490213e-14,
+       "fails_gate_as_planted": true,
+       "caveat": "the exponent-based gain metric cannot see amplitude growth at fixed q-scaling (grows by a q-independent factor ~2, so its log-log SLOPE is unchanged) -- this is the same limitation wave 4's agent 4 (leg 433) reported for its C2 control; recorded here, not hidden, as a defect of the exponent metric, not of this runner"
+      },
+      "twin_pass": {
+       "sigma_reproduces_T_rel_err": 4.998569223996254e-10
+      }
+     },
+     "T_z": {
+      "C1_zero_correction": {
+       "expected": "gain ~ 0 (must fail the h/10 gate)",
+       "measured_gain_tail": 0.0,
+       "fired_as_planted": true,
+       "note": "sigma = 0 identically in skip mode, so after_tail == before exactly; this is arithmetic, not a fit artefact"
+      },
+      "C2_source_negated": {
+       "expected": "residual amplitude grows (must fail the h/10 gate)",
+       "tail_after_over_before_at_q": {
+        "0.01": 1.999999913213861,
+        "0.0001": 1.999999913213861,
+        "1e-06": 1.9999999132140884
+       },
+       "amplitude_grows_at_every_q": true,
+       "measured_gain_tail": 2.1094237467877974e-14,
+       "fails_gate_as_planted": true,
+       "caveat": "the exponent-based gain metric cannot see amplitude growth at fixed q-scaling (grows by a q-independent factor ~2, so its log-log SLOPE is unchanged) -- this is the same limitation wave 4's agent 4 (leg 433) reported for its C2 control; recorded here, not hidden, as a defect of the exponent metric, not of this runner"
+      },
+      "twin_pass": {
+       "sigma_reproduces_T_rel_err": 1.3216303868544154e-08
+      }
+     }
+    },
+    "0.01": {
+     "T_theta": {
+      "C1_zero_correction": {
+       "expected": "gain ~ 0 (must fail the h/10 gate)",
+       "measured_gain_tail": 0.0,
+       "fired_as_planted": true,
+       "note": "sigma = 0 identically in skip mode, so after_tail == before exactly; this is arithmetic, not a fit artefact"
+      },
+      "C2_source_negated": {
+       "expected": "residual amplitude grows (must fail the h/10 gate)",
+       "tail_after_over_before_at_q": {
+        "0.01": 1.999999995859188,
+        "0.0001": 1.999999995859188,
+        "1e-06": 1.999999995859188
+       },
+       "amplitude_grows_at_every_q": true,
+       "measured_gain_tail": 2.220446049250313e-16,
+       "fails_gate_as_planted": true,
+       "caveat": "the exponent-based gain metric cannot see amplitude growth at fixed q-scaling (grows by a q-independent factor ~2, so its log-log SLOPE is unchanged) -- this is the same limitation wave 4's agent 4 (leg 433) reported for its C2 control; recorded here, not hidden, as a defect of the exponent metric, not of this runner"
+      },
+      "twin_pass": {
+       "sigma_reproduces_T_rel_err": 4.997932993031762e-10
+      }
+     },
+     "T_z": {
+      "C1_zero_correction": {
+       "expected": "gain ~ 0 (must fail the h/10 gate)",
+       "measured_gain_tail": 0.0,
+       "fired_as_planted": true,
+       "note": "sigma = 0 identically in skip mode, so after_tail == before exactly; this is arithmetic, not a fit artefact"
+      },
+      "C2_source_negated": {
+       "expected": "residual amplitude grows (must fail the h/10 gate)",
+       "tail_after_over_before_at_q": {
+        "0.01": 1.9999999132809363,
+        "0.0001": 1.9999999132809363,
+        "1e-06": 1.9999999132809363
+       },
+       "amplitude_grows_at_every_q": true,
+       "measured_gain_tail": -1.6431300764452317e-14,
+       "fails_gate_as_planted": true,
+       "caveat": "the exponent-based gain metric cannot see amplitude growth at fixed q-scaling (grows by a q-independent factor ~2, so its log-log SLOPE is unchanged) -- this is the same limitation wave 4's agent 4 (leg 433) reported for its C2 control; recorded here, not hidden, as a defect of the exponent metric, not of this runner"
+      },
+      "twin_pass": {
+       "sigma_reproduces_T_rel_err": 1.3210637746789457e-08
+      }
+     }
+    }
+   },
+   "instantiated_vs_scaled": "Instantiated at computable h in {1e-1, 3e-2, 1e-2}, q in {1e-2, 1e-4, 1e-6}, lambda = 0.1 (the pinned profile): Step 2's radial stress inverse and Step 4's moment map, both exact for the pinned auxiliary-independent source at every h tried; h enters only through the tail-stress operator T_0(y, eta; h) built by arc6_residual_v1.Tail, never as a multiplicative input gain. NOT instantiated: Steps 1 and 3 (the wave-field / auxiliary-torus machinery of Section 7) that the paper's actual h/10 eps-gain comes from; the h-scaling this unit measures is therefore the scaling of an exactly-linear, source-commuting map (structurally flat in h, not h/10), not of the paper's claimed mechanism.",
+   "could_not_determine": [
+    "I could not determine the paper's per-stage eps-gain (h/10 in the q-exponent) as a measured quantity, because that gain is produced by Steps 1 and 3 (the wave-field / auxiliary-torus construction of Section 7, unit (iii)), which the pinned interface does not contain (its leading residual has zero angular-harmonic content by construction). Only Steps 2 and 4 are instantiable on the pinned interface, and both are exact linear inverses that commute with the pinned source's q-scaling regardless of h -- so what this runner measures is 0 gain (to the discretisation level), not a partial or noisy estimate of h/10. Reading this literally as gate Q3 = NO would compare a measurement of a different, well-defined quantity (the commuting-linear-step residual, which is 0 by construction) against a claim about a quantity this runner cannot see (the wave-field eps-gain); I did not do that. The gate is NOT-INSTANTIATED and DROPPED with the cost above, per the prereg's own pre-committed clause.",
+    "I could not build a genuine two-route agreement for this gate this session; extending the run to three h (rather than wave 4's single h = 1e-7) answers whether the earlier NOT-INSTANTIATED finding was a resolution artefact (it was not: the flatness in h is itself informative and is reported as data, not asserted)."
+   ],
+   "what_this_does_not_establish": "Nothing here establishes or refutes the paper's Proposition 9.6 iteration gain, the convergence of Section 9's scheme, or any property of the manuscript's construction at its own (non-computable) parameters. It establishes only that two of the iteration's four linear sub-steps, run on the pinned residual at three h, are exact and h-scaling-flat -- a fact about this pinned interface, not about the theorem.",
+   "tier2_sentence_present": true
+  },
+  "3": {
+   "agent": 3,
+   "gates": {
+    "Q4": "MISSING"
+   },
+   "numbers": {},
+   "gates_detail": {
+    "pointwise_agreement_h1e-7_finest_stencil_lt_1e-6": {
+     "verdict": "NO",
+     "value": 0.0001963484043855337,
+     "tolerance": 1e-06
+    },
+    "pointwise_agreement_h1e-3_finest_stencil_lt_1e-6": {
+     "verdict": "NO",
+     "value": 0.00928067101798479,
+     "tolerance": 1e-06
+    },
+    "stencil_error_extrapolates_below_1e-6": {
+     "verdict": "NO",
+     "slope_mean": 0.00046487572667326085,
+     "extrapolated_at_step_1e-3": 5.764071609403412e-05
+    },
+    "sup_exponent_eq_-3/2_within_1e-4_at_h=1e-7": {
+     "route_A": {
+      "verdict": "YES",
+      "value": -1.5000000999999341,
+      "target": -1.5
+     },
+     "route_B": {
+      "verdict": "YES",
+      "value": -1.500000100000002,
+      "target": -1.5
+     }
+    },
+    "sup_exponent_eq_-(3/2+1e-3)_within_1e-4_at_h=1e-3": {
+     "route_A": {
+      "verdict": "NO",
+      "value": -1.5019998999987088,
+      "target": -1.501
+     },
+     "route_B": {
+      "verdict": "YES",
+      "value": -1.500999999999184,
+      "target": -1.501
+     }
+    }
+   },
+   "claimed": {
+    "page_equation": {
+     "quantity": "f^(0) := NS(u^(0)) for the pinned leading-order field, (4.7)-(4.8), q(t) of (3.2)/(4.1); Route B is the operator algebra of Lemma 4.1 (p. 25) reduced by Proposition 4.2 (p. 27): the leading tangential residual is -div(q^{-A-1/2} T_0), a power, not flat (page and quote taken from experiments/arc6_w4_headline.py CLAIMED['force'], itself quoting the manuscript; this session's worktree does not carry writeup/data/arc6/manuscript_pages.txt so the exact wording was not re-verified against the PDF here — reported under could_not_determine)."
+    },
+    "route_A_prediction_BEFORE_THE_RUN": {
+     "derivation": "Combining Lemma 4.1's powers (arc6_w4_headline.py CLAIMED['force']['derivation'], already on `main` before this run): f_r ~ q^{-3/2} R_r + q^{-3/2+2h} R_r_ax; f_theta, f_z ~ q^{-A-1} R_th/z + q^{-A-2D} R_th/z_ax, A = 1/2+h, D = 1/2-h. Since -A-1 = -(3/2+h) < -3/2 for every h > 0 while -A-2D = -3/2+h > -3/2, the theta/z terms' LEADING power (q^{-A-1} = q^{-3/2-h}) is strictly MORE negative than the radial power (q^{-3/2}) whenever h > 0, hence it dominates sup|f^(0)| as q -> 0 REGARDLESS of which term has the larger amplitude (a more negative exponent always wins as q -> 0). PREDICTION, written before any number exists: sup|f^(0)|'s q-exponent on BOTH routes is -(3/2 + h), for every h tested. At h = 1e-7 this reads as -1.5000001, indistinguishable from -3/2 at the gate's 1e-4 tolerance (as the prereg's own S0 already anticipates: 'the gate's +-0.01 cannot separate them: -1.5 either way' — here the tolerance is tighter, 1e-4, but 1e-7 << 1e-4 so the same non-separation holds). At h = 1e-3 the same formula predicts -(3/2+1e-3) = -1.501, which IS resolvable at 1e-4 (1e-3 >> 1e-4). This prediction is the SAME symbolic formula -(3/2+h) evaluated at two numbers, written before either run.",
+     "control_prediction": "A -> A+0.1 (h_eff -> h_eff+0.1 in the exponent only, coordinates D, L unchanged, exactly as arc6_w4_headline.py's own C_A control): exponent -(3/2+h) -> -(3/2+h+0.1), a shift of exactly -0.1, on BOTH routes (both routes share the SAME q-power bookkeeping via the -A-1 combination step; only the underlying R_th/R_z arrays vs the raw FD differ). Dropping the T_z entry in Route B (setting R_z = R_z_ax = 0) removes the only z-momentum source Route B has, so its f_z collapses toward the residual grid noise while Route A's FD f_z (built from the true field, unaware of the drop) keeps its real magnitude: predicted z-component mismatch >> 1e-2."
+    },
+    "scope_note": "see the module docstring: the strict Q1/Q5/Q6 tail annulus (y in [0.5,2.9] of log(X/X_tail)) is NOT reached by an independent Route A here (no independently-derived tail velocity field); the gate runs on the profile's inner-to-mid annulus (headline.py's own y-coordinate) instead, both routes genuinely independent there."
+   },
+   "routes": {
+    "A": {
+     "method": "Physical-space (r, z, t): u_r, u_theta, u_z, p reconstructed from the pinned lambda=0.1 profile's E, U, v0, Pi (spline-interpolated in y, Chebyshev-barycentric in eta, the SAME spline domain y<=60 as arc6_w4_headline.py's physical_check), q solved from tau = q - z^2 q^{2h} by Newton iteration; the Navier-Stokes operator applied by 4th-order central finite differences (5-point stencils) at THREE HALVING step multipliers (1, 1/2, 1/4) of a base relative step 2e-4.",
+     "step_multipliers": [
+      1.0,
+      0.5,
+      0.25
+     ]
+    },
+    "B": {
+     "method": "Profile-space (y, eta): Lemma 4.1's T_b, Z_b, R operators (Proposition 4.2's residual) applied to the SAME pinned profile's E, U, v0, Pi via arc6_w4_headline.force_profiles (imported, not edited; this is the algebra already checked against the paper's (4.14) by that module's own K1), combined with the q-power bookkeeping q^{-A-1} R_th/z + q^{-A-2D} R_th/z_ax (tangential/axial), q^{-3/2} R_r + q^{-3/2+2h} R_r_ax (radial)."
+    }
+   },
+   "controls": {
+    "A_to_A+0.1_moves_exponent_by_-0.1_both_routes": {
+     "fired": false,
+     "route_A_move": -0.19999999998311702,
+     "route_B_move": -0.09999999998240705,
+     "predicted_move": -0.1,
+     "base_exponent_A": -1.5000000999999341,
+     "base_exponent_B": -1.500000100000002,
+     "control_exponent_A": -1.7000000999830511,
+     "control_exponent_B": -1.600000099982409
+    },
+    "drop_Tz_entry_route_B_z_mismatch_gt_1e-2": {
+     "fired": true,
+     "max_z_relative_mismatch": 1.0,
+     "threshold": 0.01
+    },
+    "twin": {
+     "note": "the unmodified base run (h=1e-7) is the twin; its own gates are reported above, not separately re-run"
+    }
+   },
+   "instantiated_vs_scaled": {
+    "profile": "lambda=0.1, dy=0.004, n_eta=16 (17 Chebyshev nodes), h=1e-7 — the ONLY h the Schedule construction accepts at this lambda (Lemma 4.8's own constraint h < min(1/100, lambda, e^{-T_d}); at lambda=0.1, e^{-T_d} = 3.0e-6, so h=1e-3 VIOLATES the paper's own construction validity at this lambda and cannot be built with experiments/arc6_profile_v1.build — confirmed by running it: AssertionError '(A.6)/Lemma 4.8: h < min{1/100, lambda, e^{-T_d}}'.",
+    "h_1e-3_test": "NOT a re-instantiation of the profile. Only the velocity-power exponent A_vel = 1/2+h is substituted into BOTH routes' q-power combination (and, for Route B, into the T_b operator's b-argument as well, since force_profiles(G, A_vel=...) threads A_vel through T(-A_vel, ...)); the profile's own geometric constants D, L, H stay pinned at 1e-7 (same discipline arc6_w4_headline.py already uses for its C_A control, 'coordinates D, L, d unchanged'). This is a controlled exponent-bookkeeping test, not a claim that a genuine h=1e-3 solution of the construction exists at lambda=0.1.",
+    "annulus": "the gate is run on the profile's inner-to-mid region (y in {0,2,4} in arc6_w4_headline.py's own y-coordinate = log(X/X_R), X_R=1e12; eta in {-0.4,0,0.4}), NOT on Q1/Q5/Q6's outer-tail annulus y in [0.5,2.9] of log(X/X_tail) — see scope note."
+   },
+   "could_not_determine": [
+    {
+     "what": "the two-route Q4 agreement on the literal outer-tail annulus (y in [0.5,2.9] of log(X/X_tail), the same annulus Q1/Q5/Q6 use, built from the pinned stress writeup/data/arc6_residual_v1.json)",
+     "why": "an independent physical-space (r,z) finite-difference Route A there needs the tail's full velocity field (U, v0, Pi), not just the T_0 stress bracket (A, B brackets) that arc6_residual_v1.py's build() returns; reconstructing those asymptotics from the paper's Appendix A/B closed forms was not done (this worktree does not carry writeup/data/arc6/manuscript_pages.txt to read the exact formulas, and deriving them independently is beyond this session's budget). UNDER-RESOURCED, not attempted; a rough cost estimate is one further session: read the Appendix A/B tail-asymptotic lemmas (a few pages), code the closed-form U, v0, Pi on the tail, then re-run this same physical-FD machinery with X ~ X_tail (extreme but float64-representable, ~1e207) in place of X ~ 1e12."
+    },
+    {
+     "what": "independent verification of the page/equation numbers in CLAIMED, against the manuscript PDF",
+     "why": "writeup/data/arc6/manuscript_pages.txt is not present in this worktree (it is a regenerable artefact, per writeup/data/arc6/REGENERATE.md, not checked in); the page 27 / Proposition 4.2 / (4.14) references were taken verbatim from experiments/arc6_w4_headline.py's already-committed CLAIMED block rather than re-read from the source PDF this session."
+    }
+   ],
+   "what_this_does_not_establish": [
+    "This does not establish that the paper's leading-order field's Navier-Stokes residual is bounded or flat at t=1 (the opposite: both routes agree the residual DIVERGES as q^{-(3/2+h)}, consistent with arc6_w4_headline.py's own 'gap' note that this is exactly the power the corrections must remove).",
+    "This does not establish the outer-tail annulus agreement (Q1/Q5/Q6's y in [0.5,2.9]); that is reported UNDER-RESOURCED above, not answered NO and not answered YES.",
+    "This does not verify the manuscript's Theorem 3.1 or any other theorem; it checks that one operator-algebra identity (Proposition 4.2 / Lemma 4.1) is realised numerically by an independent physical-space computation, on a pinned profile, at computable q.",
+    "This is Tier 2, not a proof.",
+    "This is Tier 2, not a proof."
+   ],
+   "tier2_sentence_present": true
+  },
+  "4": {
+   "agent": "agent_4",
+   "gates": {
+    "Q5": "YES",
+    "Q6": "MISSING"
+   },
+   "numbers": {
+    "Q5": {
+     "per_h_per_leg.1e-07.heat.h": 1e-07,
+     "per_h_per_leg.1e-07.heat.B_measured": 0.0,
+     "per_h_per_leg.1e-07.heat.abs_error": 0.0,
+     "per_h_per_leg.1e-07.heat.tol": 1e-14,
+     "per_h_per_leg.1e-07.no_heat.h": 1e-07,
+     "per_h_per_leg.1e-07.no_heat.B_measured": -2.0000002,
+     "per_h_per_leg.1e-07.no_heat.route_a_predicted": -2.0000002,
+     "per_h_per_leg.1e-07.no_heat.abs_error": 0.0,
+     "per_h_per_leg.1e-07.no_heat.tol": 1e-08,
+     "per_h_per_leg.0.001.heat.h": 0.001,
+     "per_h_per_leg.0.001.heat.B_measured": 0.0,
+     "per_h_per_leg.0.001.heat.abs_error": 0.0,
+     "per_h_per_leg.0.001.heat.tol": 1e-14,
+     "per_h_per_leg.0.001.no_heat.h": 0.001,
+     "per_h_per_leg.0.001.no_heat.B_measured": -2.002,
+     "per_h_per_leg.0.001.no_heat.route_a_predicted": -2.002,
+     "per_h_per_leg.0.001.no_heat.abs_error": 0.0,
+     "per_h_per_leg.0.001.no_heat.tol": 1e-08
+    }
+   },
+   "gates_detail": {
+    "Q5": {
+     "per_h_per_leg": {
+      "1e-07": {
+       "heat": {
+        "leg": "heat",
+        "h": 1e-07,
+        "B_measured": 0.0,
+        "abs_error": 0.0,
+        "tol": 1e-14,
+        "pass": true
+       },
+       "no_heat": {
+        "leg": "no_heat",
+        "h": 1e-07,
+        "B_measured": -2.0000002,
+        "route_a_predicted": -2.0000002,
+        "abs_error": 0.0,
+        "tol": 1e-08,
+        "pass": true
+       }
+      },
+      "0.001": {
+       "heat": {
+        "leg": "heat",
+        "h": 0.001,
+        "B_measured": 0.0,
+        "abs_error": 0.0,
+        "tol": 1e-14,
+        "pass": true
+       },
+       "no_heat": {
+        "leg": "no_heat",
+        "h": 0.001,
+        "B_measured": -2.002,
+        "route_a_predicted": -2.002,
+        "abs_error": 0.0,
+        "tol": 1e-08,
+        "pass": true
+       }
+      }
+     },
+     "overall": "YES",
+     "tolerance_as_preregistered": {
+      "heat": "|B| < 1e-14 (scaled)",
+      "no_heat": "|B + 2 + 2h| < 1e-8 at h in {1e-7, 1e-3} both"
+     }
+    }
+   },
+   "claimed": {
+    "quantity": "the bracket B of T_{0,theta} beyond X_b (T_0 = E_pow sqrt(X/2)[A/L + B/X])",
+    "route_a_prediction_with_heat_written_before_run": {
+     "1e-07": 0.0,
+     "0.001": 0.0
+    },
+    "route_a_prediction_no_heat_written_before_run": {
+     "1e-07": -2.0000002,
+     "0.001": -2.002
+    },
+    "note": "these numbers are the prereg's own Sec 3 Q5 text (Lemma A.8 / leg 432 K6); nothing here was adjusted after route B was read"
+   },
+   "routes": {
+    "1e-07": {
+     "heat": {
+      "route_a_method": "Lemma A.8 (page 140) / leg 432 K6: B == 0 with the heat exterior, -(2+2h) exactly without it",
+      "route_a_value": 0.0,
+      "route_b_method": "numerical: imported build(h, heat) from arc6_residual_v1.py; H7.B_beyond_Xb, cross-checked against the general calB_h array sampled at y >= 3 (fields.B_hat_eta0)",
+      "route_b": {
+       "H7_B_beyond_Xb": 0.0,
+       "H7_A_beyond_Xb": 0.0,
+       "field_B_hat_eta0_beyond_Xb_min": 0.0,
+       "field_B_hat_eta0_beyond_Xb_max": 0.0,
+       "field_B_hat_eta0_beyond_Xb_constant": true,
+       "runtime_s": 21.90526247024536
+      }
+     },
+     "no_heat": {
+      "route_a_method": "Lemma A.8 (page 140) / leg 432 K6: B == 0 with the heat exterior, -(2+2h) exactly without it",
+      "route_a_value": -2.0000002,
+      "route_b_method": "numerical: imported build(h, heat) from arc6_residual_v1.py; H7.B_beyond_Xb, cross-checked against the general calB_h array sampled at y >= 3 (fields.B_hat_eta0)",
+      "route_b": {
+       "H7_B_beyond_Xb": -2.0000002,
+       "H7_A_beyond_Xb": 0.0,
+       "field_B_hat_eta0_beyond_Xb_min": -2.0000002,
+       "field_B_hat_eta0_beyond_Xb_max": -2.0000002,
+       "field_B_hat_eta0_beyond_Xb_constant": true,
+       "runtime_s": 21.870123147964478
+      }
+     }
+    },
+    "0.001": {
+     "heat": {
+      "route_a_method": "Lemma A.8 (page 140) / leg 432 K6: B == 0 with the heat exterior, -(2+2h) exactly without it",
+      "route_a_value": 0.0,
+      "route_b_method": "numerical: imported build(h, heat) from arc6_residual_v1.py; H7.B_beyond_Xb, cross-checked against the general calB_h array sampled at y >= 3 (fields.B_hat_eta0)",
+      "route_b": {
+       "H7_B_beyond_Xb": 0.0,
+       "H7_A_beyond_Xb": 0.0,
+       "field_B_hat_eta0_beyond_Xb_min": 0.0,
+       "field_B_hat_eta0_beyond_Xb_max": 0.0,
+       "field_B_hat_eta0_beyond_Xb_constant": true,
+       "runtime_s": 21.898963928222656
+      }
+     },
+     "no_heat": {
+      "route_a_method": "Lemma A.8 (page 140) / leg 432 K6: B == 0 with the heat exterior, -(2+2h) exactly without it",
+      "route_a_value": -2.002,
+      "route_b_method": "numerical: imported build(h, heat) from arc6_residual_v1.py; H7.B_beyond_Xb, cross-checked against the general calB_h array sampled at y >= 3 (fields.B_hat_eta0)",
+      "route_b": {
+       "H7_B_beyond_Xb": -2.002,
+       "H7_A_beyond_Xb": 0.0,
+       "field_B_hat_eta0_beyond_Xb_min": -2.002,
+       "field_B_hat_eta0_beyond_Xb_max": -2.002,
+       "field_B_hat_eta0_beyond_Xb_constant": true,
+       "runtime_s": 21.71184539794922
+      }
+     }
+    }
+   },
+   "controls": {
+    "1e-07": {
+     "heat": {
+      "truncate_sqrtX": {
+       "B_fake": 0.0,
+       "gate_check": {
+        "leg": "heat",
+        "h": 1e-07,
+        "B_measured": 0.0,
+        "abs_error": 0.0,
+        "tol": 1e-14,
+        "pass": true
+       },
+       "fired_as_planted": true,
+       "description": "Adversary planted fake 1: keep only the leading E_pow sqrt(X/2)*A/L term of"
+      },
+      "cutoff_stress": {
+       "B_fake": 0.0,
+       "gate_check": {
+        "leg": "heat",
+        "h": 1e-07,
+        "B_measured": 0.0,
+        "abs_error": 0.0,
+        "tol": 1e-14,
+        "pass": true
+       },
+       "fired_as_planted": true,
+       "description": "Adversary planted fake 2: cut off the total stress T_0 itself at X_b (T_0 := 0 for"
+      }
+     },
+     "no_heat": {
+      "truncate_sqrtX": {
+       "B_fake": 0.0,
+       "gate_check": {
+        "leg": "no_heat",
+        "h": 1e-07,
+        "B_measured": 0.0,
+        "route_a_predicted": -2.0000002,
+        "abs_error": 2.0000002,
+        "tol": 1e-08,
+        "pass": false
+       },
+       "fired_as_planted": true,
+       "description": "Adversary planted fake 1: keep only the leading E_pow sqrt(X/2)*A/L term of"
+      },
+      "cutoff_stress": {
+       "B_fake": 0.0,
+       "gate_check": {
+        "leg": "no_heat",
+        "h": 1e-07,
+        "B_measured": 0.0,
+        "route_a_predicted": -2.0000002,
+        "abs_error": 2.0000002,
+        "tol": 1e-08,
+        "pass": false
+       },
+       "fired_as_planted": true,
+       "description": "Adversary planted fake 2: cut off the total stress T_0 itself at X_b (T_0 := 0 for"
+      }
+     }
+    },
+    "0.001": {
+     "heat": {
+      "truncate_sqrtX": {
+       "B_fake": 0.0,
+       "gate_check": {
+        "leg": "heat",
+        "h": 0.001,
+        "B_measured": 0.0,
+        "abs_error": 0.0,
+        "tol": 1e-14,
+        "pass": true
+       },
+       "fired_as_planted": true,
+       "description": "Adversary planted fake 1: keep only the leading E_pow sqrt(X/2)*A/L term of"
+      },
+      "cutoff_stress": {
+       "B_fake": 0.0,
+       "gate_check": {
+        "leg": "heat",
+        "h": 0.001,
+        "B_measured": 0.0,
+        "abs_error": 0.0,
+        "tol": 1e-14,
+        "pass": true
+       },
+       "fired_as_planted": true,
+       "description": "Adversary planted fake 2: cut off the total stress T_0 itself at X_b (T_0 := 0 for"
+      }
+     },
+     "no_heat": {
+      "truncate_sqrtX": {
+       "B_fake": 0.0,
+       "gate_check": {
+        "leg": "no_heat",
+        "h": 0.001,
+        "B_measured": 0.0,
+        "route_a_predicted": -2.002,
+        "abs_error": 2.002,
+        "tol": 1e-08,
+        "pass": false
+       },
+       "fired_as_planted": true,
+       "description": "Adversary planted fake 1: keep only the leading E_pow sqrt(X/2)*A/L term of"
+      },
+      "cutoff_stress": {
+       "B_fake": 0.0,
+       "gate_check": {
+        "leg": "no_heat",
+        "h": 0.001,
+        "B_measured": 0.0,
+        "route_a_predicted": -2.002,
+        "abs_error": 2.002,
+        "tol": 1e-08,
+        "pass": false
+       },
+       "fired_as_planted": true,
+       "description": "Adversary planted fake 2: cut off the total stress T_0 itself at X_b (T_0 := 0 for"
+      }
+     }
+    }
+   },
+   "instantiated_vs_scaled": {
+    "instantiated": "lambda = 0.1 (arc6_profile_v1.json pinned outer profile), h in {1e-7, 1e-3} (the paper's h and a computable h per Sec 0's h-signal rule), the terminal tail y in [0, 3.5]",
+    "scaled": "everything carried as T_hat = e^{4/delta^2} T_0, delta = 3 - y (arc6_residual_v1.py's own convention), so nothing underflows at the paper's h = 1e-7"
+   },
+   "could_not_determine": [],
+   "what_this_does_not_establish": "This gate checks only that Lemma A.8's exact backward-moment algebra for the bracket B beyond X_b is realised numerically on the pinned outer profile at lambda = 0.1 and two computable h. It does not establish that the construction closes at the paper's own lambda or h, does not verify any other lemma or proposition in the manuscript, does not touch Q1-Q4 or the dropped Q6, and does not move any wall in DIRECTION.md (which this worker did not read). Route B here reuses the same imported, never-edited build() that also produced leg 432's own record; it is an independent numerical evaluation of the general calB_h array (cross-checked directly against the pinned fields.B_hat_eta0 beyond y=3 in this runner), not a re-derivation of Lemma A.8 from first principles. This is Tier 2, not a proof.",
+   "tier2_sentence_present": true
+  }
+ },
+ "adversary": {
+  "verdicts": {
+   "Q1": "FAKEABLE",
+   "Q2": "FAKEABLE",
+   "Q3": "FAKEABLE",
+   "Q4": "FAKEABLE",
+   "Q5": "FAKEABLE",
+   "Q6": "NOT ATTEMPTED"
+  },
+  "X1": {
+   "Q1": {
+    "verdict": "FAKEABLE",
+    "recipe": [
+     "F1a WRONG PROFILE: feed BOTH routes the same fabricated amplitude field amp = 137*exp(-0.05(y-2.6)^2)*(3-y) instead of the pinned Definition 6.4 amplitudes (max ratio to the stand-in truth = 1.58e+03).  (7.26) is an identity in the amplitudes, so the two routes still agree at roundoff and both controls still fire.",
+     "F1b INVISIBLE HARMONIC: keep the amplitudes, add spur*sin(256*theta) to route B's pulse with spur = 0.60.  256/M is an integer for M in {16,64,256}, so the contaminant vanishes at every quadrature node while contributing spur^2/2 = 0.18 to the true averaged product (31% of the typical entry 0.577)."
+    ],
+    "key_numbers": {
+     "wrong_profile_rel_err_at_M256_theta_theta": 3.5365961926880767e-16,
+     "wrong_profile_slope": -8.161144093592632,
+     "wrong_profile_amplitude_ratio": 1577.9111464684886,
+     "invisible_harmonic_rel_err_at_M256": 2.3793777907161393e-14,
+     "invisible_harmonic_missed_fraction_of_entry": 0.31219189000486813
+    }
+   },
+   "Q2": {
+    "verdict": "FAKEABLE",
+    "recipe": [
+     "F2 BUILT-IN GAIN: define the subleading/leading ratio as R(q) = 4.2 * q^{2h} and fit its log-log slope over q in {1e-2,1e-3,1e-4}.  Nothing is solved, no profile is read, h is an input exponent.  Route B as pre-registered does not forbid this -- only Q3's route B carries the 'never as an input gain' clause.",
+     "F2b the same with a fabricated, q-dependent prefactor 1.7e3*exp(-0.3 log10(q)^2), which the slope gate cannot see."
+    ],
+    "key_numbers": {
+     "F2_built_in_gain": {
+      "h=1e-07": {
+       "slope": 1.9999999989095617e-07,
+       "target_2h": 2e-07,
+       "rel_dev": 5.452190939309341e-10,
+       "gate_YES": true
+      },
+      "h=0.001": {
+       "slope": 0.0020000000000000026,
+       "target_2h": 0.002,
+       "rel_dev": 1.3010426069826053e-15,
+       "gate_YES": true
+      }
+     },
+     "F2b_wrong_prefactor": {
+      "h=1e-07": {
+       "slope": 0.7817302674258527,
+       "rel_dev": 3908650.3371292637,
+       "gate_YES": false
+      },
+      "h=0.001": {
+       "slope": 0.7837300674258535,
+       "rel_dev": 390.86503371292673,
+       "gate_YES": false
+      }
+     },
+     "max_relative_error_in_the_ratio_that_still_passes": {
+      "h=1e-07": 2.302585133673318e-08,
+      "h=0.001": 0.0002302585052301742
+     }
+    }
+   },
+   "Q3": {
+    "verdict": "FAKEABLE",
+    "recipe": [
+     "F3 GAIN IN THE WEIGHT: build a real tridiagonal solve L c = r0 on a 201-point annulus grid (L = -d^2/ds^2 + m^2, Dirichlet), then report the new residual r1 = r0 - L c + W(q) * (0.35 L c) with W(q) = q^{h/10}.  h never appears as a multiplicative 'gain' on the answer -- it is the operator's weight, which route B explicitly permits -- and the measured exponent gain is h/10 to roundoff at all three h.  The problem solved is not the paper's section 8-9 mean-correction solve; nothing in the gate looks at which problem was solved."
+    ],
+    "key_numbers": {
+     "h=0.1": {
+      "exponent_before": 1.0,
+      "exponent_after": 1.0099999999998106,
+      "gain": 0.009999999999810605,
+      "route_A_target_h_over_10": 0.01,
+      "rel_dev": 1.8939537438367182e-11,
+      "gain_over_h": 0.09999999999810605,
+      "gate_YES": true
+     },
+     "h=0.03": {
+      "exponent_before": 1.0,
+      "exponent_after": 1.002999999999825,
+      "gain": 0.0029999999998249205,
+      "route_A_target_h_over_10": 0.003,
+      "rel_dev": 5.835985629939107e-11,
+      "gain_over_h": 0.09999999999416402,
+      "gate_YES": true
+     },
+     "h=0.01": {
+      "exponent_before": 1.0,
+      "exponent_after": 1.0009999999998285,
+      "gain": 0.0009999999998284714,
+      "route_A_target_h_over_10": 0.001,
+      "rel_dev": 1.715285899428487e-10,
+      "gain_over_h": 0.09999999998284714,
+      "gate_YES": true
+     }
+    }
+   },
+   "Q4": {
+    "verdict": "FAKEABLE",
+    "recipe": [
+     "F4 WRONG FIELD: replace the pinned T_0 by two Gaussians, T_theta = exp(-((X-2)^2+eta^2))(1+0.25 cos 3eta), T_z = 0.4 exp(-0.5(X-1.7)^2) sin 2eta, keep only the paper's prefactor q^{-A-1/2} with A = 1/2 + h.  Route A differentiates in the physical variable r by centred differences; route B differentiates the profile in X and converts with dr = (q/r) dX.  Both legs of the gate pass: the pointwise agreement is a comparison of two differentiations of the SAME field, and the exponent is -(A+1/2) - 1/2 = -(3/2+h) as pure prefactor bookkeeping, which no profile can change.",
+     "F4b note: at h = 1e-7 the target -(3/2+1e-7) sits 1e-7 from -3/2 while the tolerance is 1e-4, so that leg is passed identically by h = 0 -- it carries no information about h."
+    ],
+    "key_numbers": {
+     "h=1e-07": {
+      "exponent_routeA": -1.5000001000001166,
+      "exponent_routeB": -1.5000001000000012,
+      "target": -1.5000001,
+      "worst_pointwise_rel": 7.959990669346136e-08,
+      "gate_YES": true
+     },
+     "h=0.001": {
+      "exponent_routeA": -1.5010000000001649,
+      "exponent_routeB": -1.5010000000000014,
+      "target": -1.501,
+      "worst_pointwise_rel": 7.959979468898826e-08,
+      "gate_YES": true
+     }
+    }
+   },
+   "Q5": {
+    "verdict": "FAKEABLE",
+    "recipe": [
+     "F5 WRONG OBJECT, RIGHT CONSTANT: call the pinned builder arc6_w4_support.stress(h, cutoff=..., heat=..., c_o=...) with c_o = 17 (tail amplitude rho = c_o*h is 170x the paper's) and/or cutoff='poly' (psi = (delta/2)^4, not the paper's exponential cutoff), then read B_hat beyond y = 3.  Both legs pass at both h and at every wrong parameter: B beyond X_b is the construction's own constant (2+2h)(s_h - 1), which does not depend on rho, on the cutoff shape, or on the profile's normalisation.  The number the gate reads is inserted by the construction, not measured from the object."
+    ],
+    "key_numbers": {
+     "twin_paper_object": {
+      "h=1e-07": {
+       "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+       "B_hat_beyond_Xb_no_heat": -2.0000002,
+       "target_no_heat_minus_2_minus_2h": -2.0000002,
+       "abs_dev_no_heat": 1.1677344441613554e-16,
+       "n_points_beyond_Xb": 101,
+       "heat_leg_YES": true,
+       "no_heat_leg_YES": true,
+       "gate_YES": true
+      },
+      "h=0.001": {
+       "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+       "B_hat_beyond_Xb_no_heat": -2.002,
+       "target_no_heat_minus_2_minus_2h": -2.002,
+       "abs_dev_no_heat": 2.203098814490545e-16,
+       "n_points_beyond_Xb": 101,
+       "heat_leg_YES": true,
+       "no_heat_leg_YES": true,
+       "gate_YES": true
+      }
+     },
+     "F5a_rho_170x_too_large": {
+      "h=1e-07": {
+       "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+       "B_hat_beyond_Xb_no_heat": -2.0000002,
+       "target_no_heat_minus_2_minus_2h": -2.0000002,
+       "abs_dev_no_heat": 1.1677344441613554e-16,
+       "n_points_beyond_Xb": 101,
+       "heat_leg_YES": true,
+       "no_heat_leg_YES": true,
+       "gate_YES": true
+      },
+      "h=0.001": {
+       "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+       "B_hat_beyond_Xb_no_heat": -2.002,
+       "target_no_heat_minus_2_minus_2h": -2.002,
+       "abs_dev_no_heat": 2.203098814490545e-16,
+       "n_points_beyond_Xb": 101,
+       "heat_leg_YES": true,
+       "no_heat_leg_YES": true,
+       "gate_YES": true
+      }
+     },
+     "F5b_wrong_cutoff_polynomial": {
+      "h=1e-07": {
+       "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+       "B_hat_beyond_Xb_no_heat": -2.0000002,
+       "target_no_heat_minus_2_minus_2h": -2.0000002,
+       "abs_dev_no_heat": 1.1677344441613554e-16,
+       "n_points_beyond_Xb": 101,
+       "heat_leg_YES": true,
+       "no_heat_leg_YES": true,
+       "gate_YES": true
+      },
+      "h=0.001": {
+       "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+       "B_hat_beyond_Xb_no_heat": -2.002,
+       "target_no_heat_minus_2_minus_2h": -2.002,
+       "abs_dev_no_heat": 2.203098814490545e-16,
+       "n_points_beyond_Xb": 101,
+       "heat_leg_YES": true,
+       "no_heat_leg_YES": true,
+       "gate_YES": true
+      }
+     },
+     "F5c_both_wrong": {
+      "h=1e-07": {
+       "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+       "B_hat_beyond_Xb_no_heat": -2.0000002,
+       "target_no_heat_minus_2_minus_2h": -2.0000002,
+       "abs_dev_no_heat": 1.1677344441613554e-16,
+       "n_points_beyond_Xb": 101,
+       "heat_leg_YES": true,
+       "no_heat_leg_YES": true,
+       "gate_YES": true
+      },
+      "h=0.001": {
+       "B_hat_beyond_Xb_with_heat_maxabs": 0.0,
+       "B_hat_beyond_Xb_no_heat": -2.002,
+       "target_no_heat_minus_2_minus_2h": -2.002,
+       "abs_dev_no_heat": 2.203098814490545e-16,
+       "n_points_beyond_Xb": 101,
+       "heat_leg_YES": true,
+       "no_heat_leg_YES": true,
+       "gate_YES": true
+      }
+     }
+    }
+   },
+   "Q6": {
+    "verdict": "NOT ATTEMPTED",
+    "why": "Q6 is DROPPED by experiments/journal/leg_439_prereg_amend.md.  The adversary was told that and nothing else about it, and did not attack it."
+   }
+  },
+  "X2": "All 5 of the five live gates (Q1-Q5) were made to say YES by a run the adversary knows to be wrong -- a fabricated amplitude field and a quadrature-invisible harmonic for Q1, an asserted q^{2h} for Q2, a real solve of the wrong problem with the gain in the operator's weight for Q3, a Gaussian stand-in stress for Q4, and the pinned builder run with rho 170x too large and the wrong cutoff for Q5 -- because every one of the five gates tests an algebraic RELATION that a family of objects satisfies, and pins the OBJECT only through route A's prediction, which is what the adversary is free to choose; by the wave's standing rule the signals they produce are NOT EVIDENCE on their own, while what each gate does still exclude is recorded per gate above. This is Tier 2, not a proof.",
+  "recipes": null,
+  "could_not_determine": [
+   {
+    "what": "whether slots 1-4's actual route-B implementations contain checks beyond section 3's text that would catch these fakes",
+    "why": "the adversary is blind by design: it never read their runners, artefacts or branches.  Every verdict here is against the gate AS PRE-REGISTERED, which is the object the wave committed to.  A fake that a worker's private extra check would catch is still a hole in the pre-registration."
+   },
+   {
+    "what": "whether the Q1 slope criterion is meetable at all by the paper's actual pulses",
+    "why": "the adversary does not have the pulses' fast-phase Fourier content.  It can only report that a band-limited (trigonometric-polynomial) pulse puts Simpson at roundoff for every M in {16,64,256}, so the log-log slope is ~0 and the criterion 'slope <= -3.5' is unmeetable for such a pulse -- a false NO risk, reported as a resolution finding, not a fake."
+   },
+   {
+    "what": "a fake for Q2/Q3/Q4/Q5 that survives the planted controls AND is wrong in a way the controls were written to catch",
+    "why": "not attempted: the fakes above are wrong in ways ORTHOGONAL to the planted controls, which is what makes them work.  Whether a fake exists that also defeats a control head-on is undetermined."
+   }
+  ],
+  "forbidden_paths_opened": "none",
+  "tier2_sentence_present": true
+ },
+ "gate_table": {
+  "Q1": {
+   "slot": 1,
+   "worker": "YES",
+   "adversary": "FAKEABLE",
+   "status": "NOT EVIDENCE (adversary faked it)",
+   "numbers": {
+    "theta_entry.err_at_M256": 1.709743457922741e-14,
+    "theta_entry.threshold": 1e-08,
+    "theta_entry.slope_vs_M": -10.538270791045962,
+    "theta_entry.slope_threshold": -3.5,
+    "z_entry.err_at_M256": 1.5438447674357455e-14,
+    "z_entry.threshold": 1e-08,
+    "z_entry.slope_vs_M": -10.576155995016057,
+    "z_entry.slope_threshold": -3.5
+   }
+  },
+  "Q2": {
+   "slot": 1,
+   "worker": "UNDER-RESOURCED",
+   "adversary": "FAKEABLE",
+   "status": "NOT ESTABLISHED (worker did not instantiate it; not a NO); the gate as written is also FAKEABLE",
+   "numbers": {}
+  },
+  "Q3": {
+   "slot": 2,
+   "worker": "NOT-INSTANTIATED",
+   "adversary": "FAKEABLE",
+   "status": "DROPPED by the rule (worker could not put it in two-route form); the gate as written is also FAKEABLE",
+   "numbers": {
+    "literal_arithmetic.0.1.T_theta.gain_tail.measured_gain": -7.327471962526033e-15,
+    "literal_arithmetic.0.1.T_theta.gain_tail.claimed_gain": 0.01,
+    "literal_arithmetic.0.1.T_theta.gain_tail.relative_error": 1.0000000000007327,
+    "literal_arithmetic.0.1.T_theta.gain_tail.gain_over_h": -7.327471962526033e-14,
+    "literal_arithmetic.0.1.T_theta.gain_total.measured_gain": 2.375877272697835e-14,
+    "literal_arithmetic.0.1.T_theta.gain_total.claimed_gain": 0.01,
+    "literal_arithmetic.0.1.T_theta.gain_total.relative_error": 0.9999999999976241,
+    "literal_arithmetic.0.1.T_theta.gain_total.gain_over_h": 2.375877272697835e-13,
+    "literal_arithmetic.0.1.T_z.gain_tail.measured_gain": 1.9317880628477724e-14,
+    "literal_arithmetic.0.1.T_z.gain_tail.claimed_gain": 0.01,
+    "literal_arithmetic.0.1.T_z.gain_tail.relative_error": 0.9999999999980682,
+    "literal_arithmetic.0.1.T_z.gain_tail.gain_over_h": 1.9317880628477724e-13,
+    "literal_arithmetic.0.1.T_z.gain_total.measured_gain": 2.4868995751603507e-14,
+    "literal_arithmetic.0.1.T_z.gain_total.claimed_gain": 0.01,
+    "literal_arithmetic.0.1.T_z.gain_total.relative_error": 0.9999999999975131,
+    "literal_arithmetic.0.1.T_z.gain_total.gain_over_h": 2.4868995751603507e-13,
+    "literal_arithmetic.0.03.T_theta.gain_tail.measured_gain": -5.329070518200751e-15,
+    "literal_arithmetic.0.03.T_theta.gain_tail.claimed_gain": 0.003,
+    "literal_arithmetic.0.03.T_theta.gain_tail.relative_error": 1.0000000000017764,
+    "literal_arithmetic.0.03.T_theta.gain_tail.gain_over_h": -1.7763568394002505e-13,
+    "literal_arithmetic.0.03.T_theta.gain_total.measured_gain": 2.4424906541753444e-15,
+    "literal_arithmetic.0.03.T_theta.gain_total.claimed_gain": 0.003,
+    "literal_arithmetic.0.03.T_theta.gain_total.relative_error": 0.9999999999991859,
+    "literal_arithmetic.0.03.T_theta.gain_total.gain_over_h": 8.141635513917815e-14,
+    "literal_arithmetic.0.03.T_z.gain_tail.measured_gain": 3.397282455352979e-14,
+    "literal_arithmetic.0.03.T_z.gain_tail.claimed_gain": 0.003,
+    "literal_arithmetic.0.03.T_z.gain_tail.relative_error": 0.9999999999886757,
+    "literal_arithmetic.0.03.T_z.gain_tail.gain_over_h": 1.1324274851176597e-12,
+    "literal_arithmetic.0.03.T_z.gain_total.measured_gain": 1.8207657603852567e-14,
+    "literal_arithmetic.0.03.T_z.gain_total.claimed_gain": 0.003,
+    "literal_arithmetic.0.03.T_z.gain_total.relative_error": 0.9999999999939307,
+    "literal_arithmetic.0.03.T_z.gain_total.gain_over_h": 6.069219201284189e-13,
+    "literal_arithmetic.0.01.T_theta.gain_tail.measured_gain": 5.10702591327572e-15,
+    "literal_arithmetic.0.01.T_theta.gain_tail.claimed_gain": 0.001,
+    "literal_arithmetic.0.01.T_theta.gain_tail.relative_error": 0.999999999994893,
+    "literal_arithmetic.0.01.T_theta.gain_tail.gain_over_h": 5.10702591327572e-13,
+    "literal_arithmetic.0.01.T_theta.gain_total.measured_gain": 2.19824158875781e-14,
+    "literal_arithmetic.0.01.T_theta.gain_total.claimed_gain": 0.001,
+    "literal_arithmetic.0.01.T_theta.gain_total.relative_error": 0.9999999999780176,
+    "literal_arithmetic.0.01.T_theta.gain_total.gain_over_h": 2.19824158875781e-12,
+    "literal_arithmetic.0.01.T_z.gain_tail.measured_gain": 6.661338147750939e-16,
+    "literal_arithmetic.0.01.T_z.gain_tail.claimed_gain": 0.001,
+    "literal_arithmetic.0.01.T_z.gain_tail.relative_error": 0.9999999999993339,
+    "literal_arithmetic.0.01.T_z.gain_tail.gain_over_h": 6.661338147750939e-14,
+    "literal_arithmetic.0.01.T_z.gain_total.measured_gain": 1.3322676295501878e-15,
+    "literal_arithmetic.0.01.T_z.gain_total.claimed_gain": 0.001,
+    "literal_arithmetic.0.01.T_z.gain_total.relative_error": 0.9999999999986677,
+    "literal_arithmetic.0.01.T_z.gain_total.gain_over_h": 1.3322676295501878e-13,
+    "twin_gain_tail_by_h.0.1.T_theta": -7.327471962526033e-15,
+    "twin_gain_tail_by_h.0.1.T_z": 1.9317880628477724e-14,
+    "twin_gain_tail_by_h.0.03.T_theta": -5.329070518200751e-15,
+    "twin_gain_tail_by_h.0.03.T_z": 3.397282455352979e-14,
+    "twin_gain_tail_by_h.0.01.T_theta": 5.10702591327572e-15,
+    "twin_gain_tail_by_h.0.01.T_z": 6.661338147750939e-16,
+    "max_abs_twin_gain_tail": 3.397282455352979e-14
+   }
+  },
+  "Q4": {
+   "slot": 3,
+   "worker": "4 NO / 3 YES of 8 cells",
+   "adversary": "FAKEABLE",
+   "status": "4 cells NO; the 3 YES cells are NOT EVIDENCE (adversary faked the gate)",
+   "numbers": {}
+  },
+  "Q5": {
+   "slot": 4,
+   "worker": "YES",
+   "adversary": "FAKEABLE",
+   "status": "NOT EVIDENCE (its two routes were one closed form evaluated twice -- arc6_residual_v1.py:101-103 computes calB_beyond = (2+2h)*(sh-1.0), algebra in h and the heat flag that reads no field, and route A is the same algebra; hence abs_error is EXACTLY 0.0 in all four cells. CORRECTIONS.md sec 79); the adversary also faked it",
+   "numbers": {
+    "per_h_per_leg.1e-07.heat.h": 1e-07,
+    "per_h_per_leg.1e-07.heat.B_measured": 0.0,
+    "per_h_per_leg.1e-07.heat.abs_error": 0.0,
+    "per_h_per_leg.1e-07.heat.tol": 1e-14,
+    "per_h_per_leg.1e-07.no_heat.h": 1e-07,
+    "per_h_per_leg.1e-07.no_heat.B_measured": -2.0000002,
+    "per_h_per_leg.1e-07.no_heat.route_a_predicted": -2.0000002,
+    "per_h_per_leg.1e-07.no_heat.abs_error": 0.0,
+    "per_h_per_leg.1e-07.no_heat.tol": 1e-08,
+    "per_h_per_leg.0.001.heat.h": 0.001,
+    "per_h_per_leg.0.001.heat.B_measured": 0.0,
+    "per_h_per_leg.0.001.heat.abs_error": 0.0,
+    "per_h_per_leg.0.001.heat.tol": 1e-14,
+    "per_h_per_leg.0.001.no_heat.h": 0.001,
+    "per_h_per_leg.0.001.no_heat.B_measured": -2.002,
+    "per_h_per_leg.0.001.no_heat.route_a_predicted": -2.002,
+    "per_h_per_leg.0.001.no_heat.abs_error": 0.0,
+    "per_h_per_leg.0.001.no_heat.tol": 1e-08
+   }
+  },
+  "Q6": {
+   "slot": 4,
+   "worker": "MISSING",
+   "adversary": "NOT ATTEMPTED",
+   "status": "DROPPED (pre-registered, before any run)",
+   "numbers": {}
+  }
+ },
+ "dropped": {
+  "Q6": "DROPPED by leg_439_prereg_amend.md before any run: route A's `k = 8 - 3d` was mis-derived (the -3 log d term differentiates to -3d^2, not -3d) and the true linear coefficient is unreachable at resolvable d. Slot 4 ran Q5 only.",
+  "V1_V3": "dropped by slot 3: DROPPED by the rule (prereg Q4): the norm scalings and refinement stability of a prescribed field are the same Jacobian identity evaluated twice on any second route; the un-cut-off field's infinite L^2(R^3) is a known fact (arc6_w4_headline.py's own R3_prediction), not re-gated here."
+ },
+ "disagreements": [
+  {
+   "kind": "control did not fire as planted",
+   "slot": 3,
+   "control": "A_to_A+0.1_moves_exponent_by_-0.1_both_routes",
+   "detail": {
+    "fired": false,
+    "route_A_move": -0.19999999998311702,
+    "route_B_move": -0.09999999998240705,
+    "predicted_move": -0.1,
+    "base_exponent_A": -1.5000000999999341,
+    "base_exponent_B": -1.500000100000002,
+    "control_exponent_A": -1.7000000999830511,
+    "control_exponent_B": -1.600000099982409
+   },
+   "recorded_not_adjudicated": true
+  },
+  {
+   "kind": "worker YES vs adversary FAKEABLE",
+   "gate": "Q1",
+   "slot": 1,
+   "recorded_not_adjudicated": true,
+   "rule": "leg_439_prereg.md §5: marked NOT EVIDENCE"
+  },
+  {
+   "kind": "worker YES vs adversary FAKEABLE",
+   "gate": "Q4",
+   "slot": 3,
+   "recorded_not_adjudicated": true,
+   "rule": "leg_439_prereg.md §5: marked NOT EVIDENCE"
+  },
+  {
+   "kind": "worker YES vs adversary FAKEABLE",
+   "gate": "Q5",
+   "slot": 4,
+   "recorded_not_adjudicated": true,
+   "rule": "leg_439_prereg.md §5: marked NOT EVIDENCE"
+  }
+ ],
+ "counts": {
+  "live_gates": 5,
+  "EVIDENCE": 0,
+  "not_evidence": 2,
+  "cells_NO_or_NO": 1,
+  "not_established_or_dropped_by_the_rule": 2,
+  "dropped_preregistered": 1,
+  "gates_the_blind_adversary_faked": 5
+ },
+ "what_this_does_not_establish": "Tier 2 throughout. A two-route agreement is evidence about the manuscript's numerical claims, not a proof of its theorem, and no gate here is verified until a blind agent reproduces it."
+}

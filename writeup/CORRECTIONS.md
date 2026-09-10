@@ -5361,3 +5361,70 @@ slot was asked to re-derive — and the slot's PART B had already completed befo
 level the honest answer is `none`; at section level it is not. **The disclosure is treated as the
 blinding discipline working, not as a breach**, and the finding is that a future prereg must state
 such constraints in the shape the field can actually answer.
+
+## §79 — arc 7 `K3` (leg 439): **three pre-registration defects, all mine, found by running it — one gate had no second route at all, one asked for a scale the construction forbids, and one cited a table that does not contain the quantity.**
+
+`leg_439_prereg.md` was written by the Conductor and pushed before any run, as required. Running it
+exposed three defects in it. None is a defect of the five workers, each of which executed the text it
+was given. Nothing below edits a banked artefact; every correction sits beside.
+
+**(a) Q5's "two routes" were one closed form evaluated twice.** §3 Q5 pre-committed route A as Lemma
+A.8's `ℬ = 0` (heat) / `−(2 + 2h)` (no heat), and route B as "numerical, from the pinned fields".
+Route B as implemented reads `H7.B_beyond_Xb` from the pinned `experiments/arc6_residual_v1.py`, which
+computes at lines 101–103:
+
+    sh = 1.0 if heat else 0.0
+    calB_beyond = (2 + 2 * h) * (sh - 1.0)
+
+That is algebra in `h` and a boolean. It reads no field, no profile, no quadrature. Route A is
+`0.0 if heat else -(2.0 + 2.0*h)` — the same algebra. Hence `agent_4_support.json`'s `abs_error` is
+EXACTLY `0.0` in all four cells (both legs × both `h`), not the ~1e-16 an independent numerical route
+would give. **An error of exactly 0.0 rather than ~1e-16 is the fingerprint of one closed form evaluated
+twice**, and is now a standing diagnostic. Conductor's confirmation, run before the finding was recorded:
+`B_beyond_Xb` is bit-identical to `−(2+2h)` at `h` = 1e-7, 1e-3, 3e-3; it is INVARIANT under every
+profile variation tried (`c_o=0.5`, `cutoff='poly'`, `flip=True`, `eps_moment=1e-3` — one value,
+`−2.002`, across all of them), and **a quantity that does not move when the profile is replaced measures
+nothing about the profile**; and `psi_hat`, `fop_hat`, `lW` are all exactly 0 beyond `y = 3`, so the
+worker's stated cross-check against `fields.B_hat_eta0` collapses onto the SAME term and is not a second
+check. The blind adversary reached the same conclusion independently, without seeing slot 4's work or
+this analysis (its `F5`). Q5 is integrated as **NOT EVIDENCE** under the wave's own pre-committed rule.
+
+**(b) Q4 (and Q2, Q5) were gated at a second `h` the construction itself forbids.** §0's scale check
+fixed a computable second scale `h = 10⁻³` because the paper's `10⁻⁷` makes `2h` and `h/10`
+unresolvable. It checked that the scale was RESOLVABLE. It did not check that the scale was ADMISSIBLE.
+At `λ = 0.1`, Lemma 4.8 / (A.6) requires `h < min{1/100, λ, e^{−T_d}}` and `e^{−T_d} = 3.0·10⁻⁶`, so
+`h = 10⁻³` **violates the construction's own validity** and cannot be built: `arc6_profile_v1.build`
+raises `AssertionError: (A.6)/Lemma 4.8: h < min{1/100, lambda, e^{-T_d}}`. Confirmed by the Conductor
+directly (`h` = 1e-7 and 1e-6 build; `h` = 1e-3 asserts). Slot 3 found this unaided, declared it in its
+artefact, and ran its `h = 10⁻³` test as a velocity-power-exponent substitution only, stating plainly
+that it is NOT a re-instantiation of the profile; slot 2 likewise confined its large `h` to the
+tail-stress operator at the profile's fixed scale. Both were honest about it; the prereg was wrong to
+ask. **This also explains slot 3's control that did not fire as planted**: holding `D` pinned while
+substituting `A_vel = 1/2 + h` breaks the paper's own `A + D = 1` identity that route B's pressure term
+relies on, so the planted `−0.1` shift moved route A by `−0.2`. That is a defect of the plant, not of
+the run, and slot 3 reported it with a full diagnosis rather than hiding it.
+
+**(c) Q2 cited a table that does not contain the quantity it gates.** The prereg traced `2h` to
+Proposition 9.1. Slot 1 read Proposition 9.1's own displayed table of remainder gains (after (9.2),
+p. 102) and found every entry `≤ 1`, giving relative order `q^{h·gain} ≤ q^h` and **no `q^{2h}` term at
+all**. The quantity traces instead to p. 47 ((4.2)'s `1 − 2D = 2h`) and p. 16 ((3.6)). Slot 1 reported
+this as a finding about the pre-registration's citation and did NOT re-scope its own gate. Q2's number
+(`2h`) and tolerance, fixed before the run, are unchanged; only the citation was wrong.
+
+**What the banked data does and does not lose.** No artefact is edited. `agent_4_support.json`'s numbers
+are correct as arithmetic; what changes is the label the gate carries at integration. §0's scale check
+was supposed to catch (a) and (b) before the push — the §71 lesson — and did not, because it verified
+that the gates' SCALES were resolvable rather than that each route B was a MEASUREMENT of an ADMISSIBLE
+object. **§71's lesson is restated in that stronger form: a scale check must ask, for each gate, (i) is
+the quantity resolvable, (ii) is the scale admissible to the construction's own hypotheses, and (iii)
+does route B read anything the profile determines.**
+
+**(d) A completed worker run was lost to a harness failure, and the method changed in response.**
+Slots 1, 3 and 5 were killed mid-run by an API session rate limit. Slots 1 and 3 had pushed nothing and
+their worktrees were removed: that work is gone and was re-run from the brief. Slot 5's artefact had
+been fully written but never committed; it was rescued from its worktree and committed UNEDITED by the
+Conductor on the worker's behalf (`a574d89`), with the provenance recorded in the commit message.
+Re-dispatched workers were instructed to COMMIT THE `claimed` BLOCK AND THE ARTEFACT AS SOON AS EACH IS
+VALID. Both re-runs did so, and slots 1 and 3 therefore carry an independently timestamped pre-run
+commit (`879f421`, `ce63cf9`) that slot 2 — which asserts its ordering through its own `--claimed`
+mechanism in a single commit — does not.
