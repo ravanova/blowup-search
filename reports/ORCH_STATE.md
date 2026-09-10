@@ -53,6 +53,38 @@ theorems `[propext, Classical.choice, Quot.sound]`, `sorryAx` NO, everywhere. Th
 mathlib oleans REPLAYED from cache, not rebuilt; statements are Fefferman (C)/(D), not Theorem 1.1; a second
 machine is not a second agent — **`VERIFIED` only when K2 slot 5, blind, reproduces it from the banked artefacts.**
 
+**Wave boundary — `K2` leg 438 run 2 INTEGRATED and landed.** Five blind workers, one file per owner,
+cherry-picked unedited into `writeup/data/arc7/k2/r2/`; the support rebuild banked at
+`writeup/data/arc7/k2/tree_rebuild/` (`runner_rc=0`, 11251 jobs, 2486 oleans, `total_s` 4287). Gate
+answers: (1) five `PARTIAL` statements characterised, none weakening the exported statements via the
+import path — `NO`, unanimous across both runs; (2) exactly four `sorry`, all challenge placeholders,
+none in either solution closure, `CONSISTENT` with `K1`'s axiom output; (3) run for real under a
+**real `landrun`** built from source — the follow-on's `fake-landrun.sh` deviation is closed — check 8
+`PASS`, check 9 `PASS` (all four exported theorems exactly `[propext, Classical.choice, Quot.sound]`,
+no `sorryAx`, RED not triggered), checks 0 and 1 `NOT-ESTABLISHED`; (4) DeepMind byte-identity `YES`
+modulo 21 enumerated wrapper hunks, one sha256 at both cited pins and at upstream `main` today;
+(5) adversarial verifier `VERIFIED-SUPPORTED`, blind, re-derived `K1` from the primary logs and re-ran
+it in the built tree. **`K1` moved `GREEN, UNVERIFIED` → `GREEN, VERIFIED`** on prereg §4(5)'s
+condition and nothing else — two agents, three machines, one pinned commit, two Fefferman (C)/(D)
+theorems on the standard three axioms; the second agent added no new machine, and no wall moves.
+Slot 3 and the container follow-on agree on every quantity both measured and neither chose, so no
+ESCALATION; what neither lineage has is a single run both real-sandboxed and nanoda-checked, and that
+remains owed. Defects recorded beside, nothing edited: §77 (two banked job counts off by one, plus one
+overstated verifier flag), §78 (three prereg wording defects — `FAIL` vs `NOT-ESTABLISHED` on check 0,
+slot 1's undefined label boundaries, `forbidden_paths_opened` path-shaped against a section-shaped
+constraint). The naming hazard — challenge placeholders share the exported theorems' fully-qualified
+names — is recorded at `leg_438.md` §3(e): not a RED, measured, but `K1`'s answer is made correct by
+the import line, not by the name. Next: `K3` leg 439, prereg and wave row pushed BEFORE dispatch.
+
+
+**`K1` follow-on (landed 1b9f9ea) — olean INTEGRITY established, SEMANTIC MATCH not.** The first of the three
+limits above is two claims. Integrity (the whole closure kernel-valid, no axiom outside the three) is now
+ESTABLISHED on the container tree by `lake exe comparator`: both kernels — Lean and nanoda 0.4.17, an
+independent Rust implementation — accept, statements identical, nothing recompiled
+(`writeup/data/arc7/k1/phaseB_integrity/`). Semantic match needs a full 8371-module recompile and is NOT
+established. Same Conductor lineage, so it verifies nothing: `K2` slot 3 is re-scoped and re-run BLIND on the
+laptop tree (`leg_438_prereg_amend.md`), not retired, and `K1` stays `UNVERIFIED` until slot 5. §76.
+
 **`K2` (leg 438) — state of the board before its pre-registration.** Four worker files ALREADY on `main`
 (`writeup/data/arc7/k2/agent_{1,2,4,5}_*.json`, commits 5f77a7e b397f68 601d7da 40cbfdb) were produced by the
 container Conductor's agents 08:38–09:21Z **with no pre-registration pushed, no wave row committed, and no own

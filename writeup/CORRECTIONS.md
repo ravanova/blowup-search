@@ -5254,3 +5254,110 @@ cutoff's own exponent, Q6 has no two-route form and is DROPPED under the wave's 
 (`leg_439_prereg_amend.md`); Q1–Q5 are unchanged and were checked against the record in the same amendment.
 Found by the laptop Conductor reading the prereg against the banked JSON before dispatch — the check the charter
 asks for and the container Conductor recorded as done.
+
+## §76 — arc 7 `K1` (leg 437 follow-on): **one banked limit was two claims in one sentence — mathlib olean INTEGRITY is now established by two independent kernels; SEMANTIC MATCH is not. Split beside; nothing edited.**
+
+All three `K1` phases banked, under `what_this_does_not_establish`, the line **"that mathlib's cached oleans
+match their sources"**. That sentence does two jobs, and the follow-on run separates them:
+
+- **INTEGRITY** — every declaration in the solution environment, mathlib's part of the closure included, is
+  kernel-valid and uses no axiom outside the permitted three. **ESTABLISHED**, on the container tree:
+  `lake exe comparator` rc 0 on both challenge configs, `lean4export` of the challenge and solution
+  environments, statement identity, axiom check, then replay through the Lean kernel AND through nanoda
+  0.4.17, an independent Rust kernel — `nanoda kernel accepts the solution` / `Lean default kernel accepts
+  the solution` / `Your solution is okay!`. NavierStokes 913 s, Euler 1442 s; nothing recompiled (every
+  build line `Replayed`). Artefacts `writeup/data/arc7/k1/phaseB_integrity/`, landed 1b9f9ea.
+- **SEMANTIC MATCH** — that the oleans MEAN what mathlib's source text says. **NOT ESTABLISHED**, and not
+  touched by the above: it needs a recompile of the closure, which is all 8371 mathlib modules because the
+  project files import the `Mathlib` umbrella.
+- **PROVENANCE** sits between them: a second `lake exe cache get` recomputed every content hash from the
+  sources on disk and found all 8747 files present; a second `lake build` re-checked every trace with 0
+  rebuilds. That establishes **labelling, not compilation** — the trust still sits with mathlib's CI and the
+  cache host.
+
+**Where the sentence lives, and why none of it was edited.** Six files carry it: `leg_437.md` §4,
+`leg_437_prereg.md` §4, `leg_438_prereg.md` §5, and the three banked JSONs (`k1/phaseA/phaseA.json`,
+`k1/phaseB/phaseB.json`, `k1/phaseB_local/phaseB.json`). Three are banked data and two are pre-registrations
+already pushed: a banked datum is never edited, only corrected beside. The phrase does **not** appear in
+`STATE.md`, `ORCH_STATE.md` or §73 — the brief requesting the split named those three, and a wrap-tolerant
+search finds 0 occurrences in each (`ORCH_STATE.md` carries "oleans REPLAYED from cache, not rebuilt", a
+different sentence, still true). This entry is the correction; all six sites stand verbatim.
+
+**Pre-registration ordering, as far as it can be checked here.** `README_prereg.md` was committed `ad0f429`
+at 13:06:06Z; the comparator's own `COMPARATOR_T0` line reads 13:06:09Z — three seconds. Commit order is
+confirmed from the object; the PUSH time is not recoverable from this machine, so "pushed before the run"
+rests on the running session's report, not on anything verified here.
+
+**Deviation carried, not repaired.** `landrun` was replaced by the comparator's own `scripts/fake-landrun.sh`
+shim (building landrun was blocked by that session's policy). Its warning — `WARNING: THIS IS NOT REAL
+LANDRUN! UNSAFELY RUNNING ...` — is verbatim on six lines of each log. The sandbox exists to contain an
+adversarial `Solution.lean` during COMPILATION; this tree was prebuilt and nothing recompiled, the case the
+comparator README exempts. `go` 1.22.2 IS present on the laptop, so the deviation is closable on the re-run.
+
+**Ruling A — `K2` slot 3 is NOT retired. Re-scoped and RE-RUN BLIND.** The follow-on was run by the same
+Conductor lineage as phase B, on phase B's own tree. §3f rule 1: verification is a fresh session or it is not
+verification; a second machine and a second KERNEL are still not a second agent. Retiring slot 3 on this
+result would let the lineage close its own check. Slot 3 therefore runs on the laptop's freshly built tree,
+told nothing of the container's result or of this entry, answering `STATE.md`'s K2 gate item (3) in its own
+wording; the Conductor compares afterwards. Recorded in `leg_438_prereg_amend.md`; the binding prereg is not
+edited.
+
+**Ruling B — `K1` stays `UNVERIFIED`.** Confirmed as the brief states it. Nothing in the follow-on touches "a
+second machine is not a second agent"; nanoda makes the INTEGRITY claim stronger, not the verification status.
+`K1` becomes `VERIFIED` only on `leg_438_prereg.md` §4(5)'s condition — a blind slot 5 reproducing it from the
+banked artefacts.
+
+## §77 — arc 7 `K1` (leg 437, phase B): **two banked job counts are off by one against their own build log — corrected beside, the artefact not edited.**
+Found by leg 438's blind adversarial verifier (slot 5), which was instructed to parse the logs rather
+than the JSON summaries, and confirmed independently by the Conductor by counting the log directly.
+
+`writeup/data/arc7/k1/phaseB/phaseB.json` banks, inside its `jobs` field, "NavierStokes 643, Euler
+1839". `writeup/data/arc7/k1/phaseB/k1_B_build.log` — the primary record — carries **644** lines
+matching `Built NavierStokes` and **1840** matching `Built Euler`. The correct figures are **644 and
+1840**. The banked file is left exactly as it is; this entry is the correction.
+
+Nothing in `K1`'s gate depends on either number. The gate is (a) does `lake build` complete, (b) the
+verbatim `#print axioms` output, (c) `sorryAx` reachable, (d) wall time and machine. The build's
+completion line (`Build completed successfully (11251 jobs).`), `BUILD_RC=0` and the axiom lines are
+unaffected, and were re-derived independently from the same log by the same verifier.
+
+A third field the verifier flagged, the `11250/11251` per-target counter, is **not** an error: the
+banked JSON reconciles it in its own text ("lake prints no line for the root job"). That flag is
+recorded here as overstated. A verifier's misses are banked beside its hits.
+
+## §78 — arc 7 `K2` (leg 438): **three pre-registration wording defects, found by running it — the vocabulary was pre-committed, the boundaries inside the vocabulary were not.**
+None of the three is a worker error. Each is a defect in wording the Conductor lineage wrote, found
+only because a blind worker hit its edge. Recorded beside the pre-registration; the pre-registration
+is not edited, and no worker file is edited.
+
+**(a) `FAIL` versus `NOT-ESTABLISHED` on Comparator check 0.** Slot 3 labelled check 0 `FAIL`. The
+pre-registration pre-commits the opposite three times over: §4(3), "a tool that cannot be installed
+within the session makes that check `NOT-ESTABLISHED` with the exact blocker"; §5, "a check not
+reached at that resourcing answers `NOT-ESTABLISHED` with a cost, never `FAIL`"; and
+`leg_438_prereg_amend.md` §3, "never a `FAIL`". `nanoda_bin` was never installed: four attempts were
+refused by the agent-harness worktree-isolation guard before any rustup process could run. The check
+is integrated at the pre-committed label, **`NOT-ESTABLISHED`**, with that blocker recorded. The
+worker's own wording stands verbatim in `agent_3_comparator.json`.
+The distinction is load-bearing: `FAIL` on check 0 would read as *the comparator rejected the
+solution*. It did not. Both real runs exited 1 at the nanoda step only, after statement identity held,
+the axiom footprints matched, and Lean's own kernel printed `Lean default kernel accepts the solution`
+for both challenges. The defect is that the prereg gave the worker a `FAIL` label at all for a
+condition it had already ruled out.
+
+**(b) Slot 1's label vocabulary has undefined boundaries.** Runs 1 and 2 differ on 4 of 5 labels while
+agreeing on every underlying fact and answering the load-bearing question (does a missing clause
+weaken the exported statements via the import path) `NO` unanimously. Two differences are a straight
+transposition of `MISSING-CLAUSE` and `WEAKER`; two are a boundary call between `NOT-A-THEOREM-IN-LEAN`
+and `PRESENT-IN-DIFFERENT-FORM`. The five terms were pre-committed at §4(1); no rule distinguishes
+them. Recorded, not repaired after the fact, and not adjudicated between the two runs.
+
+**(c) `forbidden_paths_opened` is path-shaped; two of the constraints were section-shaped.** Prereg §3
+requires the field to be `none`. Slot 5's brief forbade `experiments/journal/leg_437.md` **§5** while
+permitting §1–4 of the same file — a section, not a path. Slot 5 disclosed, unprompted, that a
+header-listing `grep -n` printed three lines belonging to §5. The Conductor verified this against the
+file: §5 begins at line 53 of 64; the three lines are a heading, a "written beside it" sentence, and a
+`CORRECTIONS.md` §76 cross-reference — no axiom output, no verdict, nothing about the quantity the
+slot was asked to re-derive — and the slot's PART B had already completed before the grep. At path
+level the honest answer is `none`; at section level it is not. **The disclosure is treated as the
+blinding discipline working, not as a breach**, and the finding is that a future prereg must state
+such constraints in the shape the field can actually answer.

@@ -1,0 +1,6 @@
+go: downloading github.com/zouuup/landrun v0.1.17
+go: github.com/zouuup/landrun@v0.1.17 requires go >= 1.24.0; switching to go1.26.8
+go: downloading github.com/landlock-lsm/go-landlock v0.9.0
+go: downloading github.com/urfave/cli/v3 v3.6.2
+go: downloading kernel.org/pub/linux/libs/security/libcap/psx v1.2.77
+go: downloading golang.org/x/sys v0.40.0

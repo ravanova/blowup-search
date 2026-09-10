@@ -1,0 +1,101 @@
+{
+  "sha": "8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+  "node_id": "C_kwDOOogmB9oAKDhiZjQ1ZWQ3MGQ0OGIyYjJhNTAxZGU5YzAwYjI2YmZhMzhjNTczZWU",
+  "commit": {
+    "author": {
+      "name": "Robert Joseph",
+      "email": "robujsph2001@gmail.com",
+      "date": "2026-07-27T07:31:09Z"
+    },
+    "committer": {
+      "name": "GitHub",
+      "email": "noreply@github.com",
+      "date": "2026-07-27T07:31:09Z"
+    },
+    "message": "Prove the basic divergence lemmas (#4643)\n\nSmall cleanup in the Navier–Stokes file :) This proves `divergence_add`\nand `divergence_smul` using linearity of `fderiv` and trace. The four\nopen Millennium problem statements are unchanged. `lake build` passes.\n\nCloses #4642",
+    "tree": {
+      "sha": "9ffdf5479f23c0d52896b2c132c91c7601d0b9b9",
+      "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/trees/9ffdf5479f23c0d52896b2c132c91c7601d0b9b9"
+    },
+    "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/git/commits/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+    "comment_count": 0,
+    "verification": {
+      "verified": true,
+      "reason": "valid",
+      "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqZwk9CRC1aQ7uu5UhlAAAiC4QAEVVox9UEH81xVGxmpEqRDaN\nwUHle8KVmg/6LpoJcpq3PzHYxSLfCuoGMLr2lSEgfbCGPWIlMhmGqcfcZQuUudnq\nsv0CddIWmSfwF9NAIwbjhW+3rPT/N7Npv5R8buQ7HaHebmMlkSW3wLR00QYGs2Ew\nfssTSdZi5fsABkP/q4UJK5Njpu+yuGPl2B+ocz0ef/L0nmPJMBYDBED9U5b1fk8V\nmmdTdP8uX4cBc5JhFdKnMAN6wH25y8tDfZgMHlSmquyLN7zlcVV7tVE9BEJxjYDL\n1Bn7WzWDmRZDVOScBeNLU9DRNxt/cVSd940XUprVCbIN+4fBAS8R4Rt2tO2pXNnf\n+Ym0h3YMeqSzZmbULOCEPlwOlrXlTChADvOyMGIOjcoFD5Uui0mYSynyLMzXDFwk\nSJLyaa4DBncPxtaY6dVaRe3SmfiqDRE5hx6o3WNoOmTMyYjNu599eUfFVhiP/Vpf\nVPFfji/wlkMDV1NZJLUVHHDPNbqg9pqpPTxkwuKWc296RdCGv8srUkzk+fc7RaId\nRw6Ah10fLEL5A1q9wt5u9NJu5wseTFE1P5YIP4MensdChXHIrro3ZO+ChxJUtM1z\nLPBdWFD7E4ldJxk41iLnPjwK3bBgnRBIh4clu8LFiM4ShuF+LFxS5C0csW+qxHgE\n3en4Gt8xabCNqMCVTzAp\n=n9nr\n-----END PGP SIGNATURE-----\n",
+      "payload": "tree 9ffdf5479f23c0d52896b2c132c91c7601d0b9b9\nparent b0f99dafb7d16d0c7bf22e9ae724a83168105968\nauthor Robert Joseph <robujsph2001@gmail.com> 1785137469 -0400\ncommitter GitHub <noreply@github.com> 1785137469 +0200\n\nProve the basic divergence lemmas (#4643)\n\nSmall cleanup in the Navier–Stokes file :) This proves `divergence_add`\nand `divergence_smul` using linearity of `fderiv` and trace. The four\nopen Millennium problem statements are unchanged. `lake build` passes.\n\nCloses #4642",
+      "verified_at": "2026-07-27T07:31:09Z"
+    }
+  },
+  "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+  "html_url": "https://github.com/google-deepmind/formal-conjectures/commit/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+  "comments_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/comments",
+  "author": {
+    "login": "Robertboy18",
+    "id": 32393571,
+    "node_id": "MDQ6VXNlcjMyMzkzNTcx",
+    "avatar_url": "https://avatars.githubusercontent.com/u/32393571?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/Robertboy18",
+    "html_url": "https://github.com/Robertboy18",
+    "followers_url": "https://api.github.com/users/Robertboy18/followers",
+    "following_url": "https://api.github.com/users/Robertboy18/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Robertboy18/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Robertboy18/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Robertboy18/subscriptions",
+    "organizations_url": "https://api.github.com/users/Robertboy18/orgs",
+    "repos_url": "https://api.github.com/users/Robertboy18/repos",
+    "events_url": "https://api.github.com/users/Robertboy18/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Robertboy18/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "web-flow",
+    "id": 19864447,
+    "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+    "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/web-flow",
+    "html_url": "https://github.com/web-flow",
+    "followers_url": "https://api.github.com/users/web-flow/followers",
+    "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+    "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+    "organizations_url": "https://api.github.com/users/web-flow/orgs",
+    "repos_url": "https://api.github.com/users/web-flow/repos",
+    "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/web-flow/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "b0f99dafb7d16d0c7bf22e9ae724a83168105968",
+      "url": "https://api.github.com/repos/google-deepmind/formal-conjectures/commits/b0f99dafb7d16d0c7bf22e9ae724a83168105968",
+      "html_url": "https://github.com/google-deepmind/formal-conjectures/commit/b0f99dafb7d16d0c7bf22e9ae724a83168105968"
+    }
+  ],
+  "stats": {
+    "total": 6,
+    "additions": 4,
+    "deletions": 2
+  },
+  "files": [
+    {
+      "sha": "6fd45b55c78e49ec79f45f4e226a9b9f71f57a81",
+      "filename": "FormalConjectures/Millenium/NavierStokes.lean",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 2,
+      "changes": 6,
+      "blob_url": "https://github.com/google-deepmind/formal-conjectures/blob/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjectures%2FMillenium%2FNavierStokes.lean",
+      "raw_url": "https://github.com/google-deepmind/formal-conjectures/raw/8bf45ed70d48b2b2a501de9c00b26bfa38c573ee/FormalConjectures%2FMillenium%2FNavierStokes.lean",
+      "contents_url": "https://api.github.com/repos/google-deepmind/formal-conjectures/contents/FormalConjectures%2FMillenium%2FNavierStokes.lean?ref=8bf45ed70d48b2b2a501de9c00b26bfa38c573ee",
+      "patch": "@@ -97,13 +97,15 @@ theorem divergence_const (c : ℝ^n) (x : ℝ^n) :\n theorem divergence_add {v w : ℝ^n → ℝ^n} {x : ℝ^n}\n     (hv : DifferentiableAt ℝ v x) (hw : DifferentiableAt ℝ w x) :\n     ∇⬝ (fun y => v y + w y) x = ∇⬝ v x + ∇⬝ w x := by\n-  sorry\n+  rw [divergence, fderiv_fun_add hv hw]\n+  exact map_add _ _ _\n \n /-- Divergence commutes with scalar multiplication at differentiability points. -/\n @[category API, AMS 35]\n theorem divergence_smul (c : ℝ) {v : ℝ^n → ℝ^n} {x : ℝ^n}\n     (hv : DifferentiableAt ℝ v x) : ∇⬝ (fun y => c • v y) x = c * ∇⬝ v x := by\n-  sorry\n+  rw [divergence, fderiv_fun_const_smul hv c]\n+  simp [divergence]\n \n /--\n A function $f : \\mathbb{R}^n \\to \\alpha$ is 1-periodic if it is periodic in each"
+    }
+  ]
+}
