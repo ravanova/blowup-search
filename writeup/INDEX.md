@@ -511,3 +511,17 @@ journal; nothing here is a summary written after the fact.*
 |---|---|---|
 | `writeup/ROUTE_MAP.html` | Decision tree of every route to a Clay answer: closed by measurement / live / in flight / never explored, plus the W4 clause table and the wall ledger. | **Never automatically.** Procedure and the reasons in `writeup/ROUTE_MAP.md`. A Conductor FLAGS it stale in the integration commit; it does not rebuild it. |
 | `writeup/papers/` | Three drafts aimed at refereed venues — P1 selection bias, P2 the α-pin pincer, P4 the methodology record — each with a `STATUS.md` enumerating blockers BEFORE drafting. | **A paper is a VIEW of the record, never a source. No unit may cite one.** Contract and the honesty rules: `writeup/papers/README.md`. |
+
+## Arc 5 — `5_outpaced/` (the field answered first; the 2026-09-08 claim recorded at primary)
+
+| Route | Gate / headline | R | D | B/T | E | F | Docs |
+|---|---|---|---|---|---|---|---|
+| Outpaced (legs 413–416) | The forced 3D Navier–Stokes blowup claim, as reported, and what it does to this programme's walls | — | Y | Y | Y | — | [T](5_outpaced/TECHNICAL_OUTPACED.md) · [B](5_outpaced/BLOG_OUTPACED.md) — **UNVERIFIED under §3f** |
+
+## Arc 6 — `6_adjudicated/` and `6_reproduction/` (the claim read at primary, then reproduced)
+
+| Route | Gate / headline | R | D | B/T | E | F | Docs |
+|---|---|---|---|---|---|---|---|
+| First pass, §3f SOLO (legs 417–422) | The statement adjudicated at primary (**(D) is claimed**, `A6-D` dead); the Lean censused at source; **`W4` does not break** under the ported mechanism, measured twice | Y | Y | Y | Y | fig112 | [T](6_adjudicated/TECHNICAL_ADJUDICATED.md) · [B](6_adjudicated/BLOG_ADJUDICATED.md) — **UNVERIFIED** |
+| Second pass, §3g CONDUCTOR ×5 (legs 423–434) | **Read all 166 pages twice; 58-node spine re-derived, 10 nodes `VERIFIED` blind; Lemma 4.8's profile instantiated from the paper's schedule (constants, exponents, datum, tail stress reproduce to 10⁻⁹; closure and cone live at `λ ≲ 3·10⁻⁴`, the outer-edge powers on a `10⁻⁶⁹` collar); the Lean measured (`NOT-ESTABLISHED` kernel, statement strictly weaker than Thm 1.1); wave 4's adversary faked 11 of 12 signals.** Nothing contradicts the manuscript; nothing proves it; no wall moved | Y | Y | Y | Y | fig113, fig114 | [T](6_reproduction/TECHNICAL_REPRODUCTION.md) · [B](6_reproduction/BLOG_REPRODUCTION.md) · [evidence](6_reproduction/reproduction_evidence.py) — Conductor-written answers **UNVERIFIED**; ten spine nodes **VERIFIED**. Ceiling **TIER 2**, no `L1→L4` link moved, **Clay ~0.05%** |
+
