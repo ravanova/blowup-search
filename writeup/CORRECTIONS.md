@@ -5145,3 +5145,25 @@ factor) and was rewritten to assert the derived disagreement.
 
 **Standing:** every pre-registered inequality stands as written or amended before numbers; the
 diagnoses sit beside the answers. Tier 2. **No wall moved. No `L1 → L4` link moved. Clay ~0.05%.**
+
+## §71 — wave 4 (leg 433, arc 6): **the Conductor's pre-registration mis-scaled three of twelve gates, one brief clause misread the paper, and the pre-committed adversary rule marked eleven of twelve signals `NOT EVIDENCE` — applied as written, not softened.**
+
+**Mis-scaled gates, found independently by the workers and the adversary:** I1's `±0.02` window on a
+per-stage gain the paper states as an exponent of `ε = Q^h`, i.e. `h/10 = 10⁻⁸` as a `q`-exponent (agent 4
+declined to answer `YES` vacuously or `NO` against a claim the paper does not make; agent 7 showed the
+zero-correction control passes the window); P3's `±0.05` against a `2h = 2·10⁻⁷` signal (agent 7); V1/V3's
+"three resolutions" and "refinement stability" on a prescribed field, where stability is automatic
+(agent 7) and the finer builds did not finish in the budget (agent 5). **Brief clause wrong:** (vi)'s
+"extension by zero at `t = 1`" — the paper uses the series (10.11); zero extension is spatial and for `t`
+near 0 / `t ≥ 2` (agent 6). None was widened after a number; the gates stand as written with the
+diagnoses beside them.
+
+**The rule (`leg_433_prereg.md` §3):** *a signal the adversary faked is `NOT EVIDENCE` whatever the worker's
+gate said.* Applied: P1–P3, I1–I3, V1, V3, S1–S3 `NOT EVIDENCE`; V2 `EVIDENCE` (a measured gap, not a
+reproduction). Workers' answers are recorded beside the rule, not overridden in their own files.
+
+**What the wave measured instead of its gates:** the exact identity (7.26) to `10⁻¹⁶`; the pinned tail's
+`F_0 ≈ 10⁻²⁴⁰` and the paper's own admissibility at `log₁₀ q ≲ −7.5·10⁸`; the smallest requirement margin of
+the exponent ledger `0.020` (leg 429's 0.07 was over the closing rows only); the leading order's force
+`∝ q^{−3/2−h}` and the `N + 1.5 + h` flatness gap; the `η`-weight `d^{−3/2+3h}` that makes the un-cut-off leading
+field's `L²(ℝ³)` norm infinite. Tier 2. **No wall moved. No `L1 → L4` link moved. Clay ~0.05%.**
