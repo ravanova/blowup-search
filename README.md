@@ -69,6 +69,29 @@ claim in the repository is tiered, gated, and rebuildable from committed data.
 > [TECHNICAL_REPRODUCTION.md](writeup/6_reproduction/TECHNICAL_REPRODUCTION.md) ·
 > [BLOG_REPRODUCTION.md](writeup/6_reproduction/BLOG_REPRODUCTION.md) · fig113, fig114
 >
+> **ARC 7 (legs 436–440, 2026-09-10, §3g CONDUCTOR ×5) — THE KERNEL WAS RUN TO COMPLETION. Added beside
+> the above, which is left standing and unrewritten.** The arc-6 line *"one run, one container,
+> unreplayed"* is now superseded by measurement, not by decision: **the Lean kernel check is GREEN and
+> `VERIFIED`.** On one pinned commit (`8937a8f4`), in **three environments** — a resumed container, a fresh
+> container (`total_s` 5605) and the operator's laptop (`total_s` 4272), same mathlib `85e3a25e`, same
+> Comparator `19e111e2` — `lake build` completes (`Build completed successfully (11251 jobs)`, 0 error
+> lines) and both exported theorems depend on exactly `[propext, Classical.choice, Quot.sound]`, with
+> `sorryAx` unreachable. A **blind** agent, given only the raw build and axiom logs, reproduced it and
+> returned `VERIFIED-SUPPORTED`; that, and nothing else, is why the label moved. Separately, `lake exe
+> comparator` replayed the whole environment through **nanoda 0.4.17, an independent Rust implementation
+> of the Lean kernel** — both kernels accept. **That is the whole of what arc 7 confirms.** It confirms
+> the Lean project proves what its own statements say; those statements are Fefferman's (C)/(D),
+> **strictly weaker than Theorem 1.1**. It is **not** a confirmation that the 166-page proof is correct.
+> And this repository's own attempt to check the construction numerically (`K3`) produced **ZERO**
+> surviving evidence in either direction — a blind adversary faked **all five** pre-registered gates, and
+> three of those gates were defective in this repository's own pre-registration, including one whose "two
+> routes" were a single closed form evaluated twice. That is a finding about **the gates**, not about the
+> manuscript. **This repository takes NO POSITION on the priority dispute.** No wall moved. No `L1 → L4`
+> link moved. Tier 2 throughout, and Tier 2 is never a proof.
+> [TECHNICAL_CONFIRMATION.md](writeup/7_confirmation/TECHNICAL_CONFIRMATION.md) ·
+> [BLOG_CONFIRMATION.md](writeup/7_confirmation/BLOG_CONFIRMATION.md) ·
+> [CONFIRMATION_FOR_OUTSIDERS.md](writeup/7_confirmation/CONFIRMATION_FOR_OUTSIDERS.md) · fig115
+>
 > [BLOG_ADJUDICATED.md](writeup/6_adjudicated/BLOG_ADJUDICATED.md) ·
 > [TECHNICAL_ADJUDICATED.md](writeup/6_adjudicated/TECHNICAL_ADJUDICATED.md) ·
 > [five curated JSONs](writeup/data/) · fig112

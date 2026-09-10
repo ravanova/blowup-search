@@ -33,7 +33,7 @@ WORDING is a user escalation.** Each row is phrased so it can be answered **Y or
 
 ---
 
-## LIVE — §3g CONDUCTOR, wave sizing 5. **ARC 7 — INDEPENDENT CONFIRMATION, OPEN 2026-09-10, legs 436–440.** `K0`, `K1` LANDED; **`K2` (leg 438) and `K3` (leg 439) LANDED; `K4` (leg 440) is next, SERIAL.**
+## LIVE — §3g CONDUCTOR, wave sizing 5. **ARC 7 — INDEPENDENT CONFIRMATION, OPEN 2026-09-10, legs 436–440.** **ALL FIVE UNITS LANDED — `K0`, `K1`, `K2`, `K3`, `K4`. THE ARC IS CLOSED; the verdict is published at `writeup/7_confirmation/`.**
 
 **⚠ WHERE THE CONDUCTOR IS (13:10Z): the operator's LAPTOP session, by user designation at 13:00Z.** The container
 Conductor (`session_01LX5qCimBmdRGUMvwBDT3DZ`) landed K1 on `main` at 1829d68 (12:55Z) after that designation and
@@ -82,24 +82,38 @@ also explains slot 3's control; and `Q2` cited a Prop 9.1 table that contains no
 `experiments/journal/leg_439.md`. Slot 5's completed artefact was rescued from a rate-limit-killed
 worktree and committed unedited on its behalf (`a574d89`, provenance in the commit message).
 
-**Headroom at this boundary (§3j, bytes):** `STATE.md` 23,943 (cap 24,576); `WALLS.md` 32,157 of 32,768;
-`OPTIONS.md` 20,961; superseded blocks below still exceed three (truncation owed at a quieter boundary).
+**Wave boundary — `K4` leg 440 INTEGRATED: THE ARC IS CLOSED AND THE VERDICT IS PUBLISHED.**
+`writeup/7_confirmation/` — `TECHNICAL_CONFIRMATION.md` (the full `K0`–`K4` record, every number cited by
+JSON field), `BLOG_CONFIRMATION.md`, `CONFIRMATION_FOR_OUTSIDERS.md`, and `confirmation_evidence.py`,
+which re-derives every quoted number from the banked `writeup/data/arc7/` artefacts and draws **fig115**
+(registered in `build_figures.py`): **all checks PASS**, no lake, no lean, no network. The verdict is the
+prereg's §2 wording verbatim and leads every document: the kernel check is **GREEN and `VERIFIED`** — one
+pin, three environments, two independent kernels — and that is the WHOLE of what arc 7 confirms; the
+statements are Fefferman (C)/(D), **strictly weaker** than Thm 1.1; it is NOT a confirmation that the
+166-page proof is correct; and `K3` produced ZERO surviving evidence in either direction. One prereg §4
+FAIL was hit and resolved the pre-committed way — **the document was corrected to the artefact** (the
+`11251 jobs` completion line is cited from `gate.a_build_completes`, per §77, not from the per-target
+counter). Every document carries the explicit no-position-on-priority sentence, since silence is not
+compliance. `INDEX.md` has its arc-7 row; the README verdict sits **BESIDE** the arc-6 banner, which is
+left standing and unrewritten.
+
+**Headroom at this boundary (§3j, bytes):** `STATE.md` 24,156 (cap 24,576); `WALLS.md` 32,157 of 32,768; `OPTIONS.md` 20,961; this LIVE block is the tight one — the superseded blocks below still exceed three and truncation is owed at a quieter boundary.
 
 **Open, surfaced to the user, NOT ruled by the Conductor:** the targeted 399-module semantic-match check
 for `K1` (costed at ~25 CPU-min / ~8–10 min wall on the phase-B container; declaration-level via
 `lean4export`, weaker than a full rebuild, and its prereg needs PASS/FAIL/INCOMPLETE pre-committed per
 §3g step 1). Rulings 5–6 still await a one-word confirm; nothing in arc 7 depends on them.
 
-**What the next Conductor must do first:** read `git ls-remote origin main`; then run `K4` (leg 440),
-SERIAL — `writeup/7_confirmation/`: the full §6 quartet plus ONE document written for outsiders. It
-LEADS WITH THE VERDICT, never with the fragments; every damning-sounding finding sits UNDER the verdict
-it qualifies; it must not exceed `READING_THIS_REPO.md`'s canonical claims list; `NOTICE.md` attribution
-is credit Andy and link the repository; and it takes NO position on the priority dispute and says so
-explicitly. `K3`'s verdict is the hard one to write honestly: zero gates survived, and the reason is the
-Conductor's own pre-registration, not the manuscript.
+**What the next Conductor must do first:** read `git ls-remote origin main`. **ARC 7 IS CLOSED —
+there is no next unit in it.** Do not open a new arc without a user ruling: the arc-7 goal was set
+by one (`CORRECTIONS.md` §72) and has now been met and published. Two things are OWED and neither
+is the Conductor's to rule: the **targeted 399-module semantic-match check** for `K1` (above), and
+**rulings 5–6**, which still await a one-word confirm. If the user schedules the semantic-match
+run it is a NEW leg, with its own pre-registration pushed BEFORE it (§3g step 1) and
+PASS/FAIL/INCOMPLETE pre-committed.
 
 
-**Landed this arc:** `K0` (436), `K1` (437), `K2` (438), `K3` (439). **Audited but not landed:** none. **Live workers:** none — all five `leg/439-k3-agent{1..5}` branches pushed, verified and cherry-picked unedited; `leg/439-k3-land` carries the integration. **Open escalations:** the five rows above, unchanged and unruled.
+**Landed this arc:** `K0` (436), `K1` (437), `K2` (438), `K3` (439), `K4` (440) — **arc 7 COMPLETE**. **Audited but not landed:** none. **Live workers:** none — all five `leg/439-k3-agent{1..5}` branches pushed, verified and cherry-picked unedited; `leg/439-k3-land` carries the integration. **Open escalations:** the five rows above, unchanged and unruled.
 
 
 ## Superseded — the K2 operational block, retired VERBATIM from the LIVE block 2026-09-10 (leg 439, arc 7 `K3`) under §3j. Nothing edited.
