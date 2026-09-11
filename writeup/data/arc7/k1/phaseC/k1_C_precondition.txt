@@ -83,6 +83,29 @@ Measured by the wrapper itself at t_start (k1_C_summary.txt, not retyped here):
   disk_avail_bytes_at_end   =  6724648960   ( 6.72 GB /  6.26 GiB)
   consumed by the run       = 17830518784   (17.83 GB / 16.61 GiB)
 
-So the ~20 GB pre-registered requirement was calibrated correctly: the run
-really did need 17.8 GB, and would have failed at the 3.24 GiB first measured.
 Nothing in the Lean trust path was touched to free the space.
+
+CORRECTION (appended after the above was first written and pushed; kept visible
+rather than patched away):
+The 17.83 GB above is the fall in AVAILABLE SPACE, not what the build needed.
+Measured afterwards, the build tree itself is 28516423302 bytes = 28.52 GB at the
+build's end (173192 files; the 0.37 GB of lean4export/comparator binaries that the
+prereg §5(c) check added later are excluded). The tree sits on /, the same
+filesystem the wrapper measured. So about 10.69 GB was freed ELSEWHERE on / by
+something outside this run while it was building.
+
+I could not determine what freed it: df keeps no history and the change is not
+attributable after the fact. The operator was freeing space around this period and
+is the likeliest candidate, but no evidence names it, so it is not asserted.
+
+What this changes: the ~20 GB requirement in prereg §3 was an UNDERESTIMATE.
+A from-source build of this project needs at least ~28.5 GB of tree
+  mathlib          16 GB
+  project's build  11 GB
+  other packages  ~1.4 GB
+Starting from the 24.56 GB measured here, this run would have exhausted the disk
+had that ~10.7 GB not appeared. Provision ~30 GB to repeat it.
+
+What this does NOT change: the reading. MATCH rests on the axioms being
+byte-identical, build rc 0 and 0 error lines. The build completed; it was not
+truncated. Disk accounting does not bear on the result.
