@@ -1,0 +1,111 @@
+=== leg 437 phase C — §3 PRECONDITION MEASUREMENT, 2026-09-10, user's laptop
+=== taken BEFORE any clone or build; the run did not start (see phaseC.json)
+
+$ nproc
+12
+
+$ grep -m1 'model name' /proc/cpuinfo
+model name	: Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz
+
+$ free -g
+               total        used        free      shared  buff/cache   available
+Mem:              31           8           3           1          20          22
+Swap:              1           0           1
+
+$ df -h $HOME
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  225G  211G  3.3G  99% /
+
+$ df -B1 --output=source,fstype,size,used,avail,pcent,target /
+Filesystem     Type    1B-blocks         Used      Avail Use% Mounted on
+/dev/nvme0n1p3 ext4 241554038784 225734668288 3474485248  99% /
+
+=== every other filesystem on this machine, for the record
+$ df -hT -x tmpfs -x devtmpfs -x squashfs
+/dev/nvme0n1p3 ext4      225G  211G  3.3G  99% /
+/dev/nvme0n1p1 vfat      861M   66M  796M   8% /boot/efi
+$ df -hT | grep tmpfs
+tmpfs          tmpfs     3.2G  3.6M  3.2G   1% /run
+tmpfs          tmpfs      16G  592M   15G   4% /dev/shm
+tmpfs          tmpfs     5.0M  8.0K  5.0M   1% /run/lock
+tmpfs          tmpfs     3.2G  168K  3.2G   1% /run/user/1001
+$ lsblk (partitions only)
+nvme0n1     238.5G
+├─nvme0n1p1   865M vfat     /boot/efi
+├─nvme0n1p2     8G vfat     (unmounted; EFI/recovery — not touched)
+└─nvme0n1p3 229.6G ext4     /
+
+=== toolchain state (not the blocker; recorded because the runner needs it)
+$ elan --version
+elan 4.2.4 (227caca13 2026-08-25)
+$ elan toolchain list
+leanprover/lean4:v4.34.0-rc2
+$ du -sh $HOME/.elan/toolchains/*
+3.0G	$HOME/.elan/toolchains/leanprover--lean4---v4.34.0-rc2
+$ lean --version
+error: no default toolchain configured. run `elan default stable` to install & configure the latest Lean 4 stable release.
+   (the pinned toolchain IS installed; `lake` in the work tree selects it from lean-toolchain,
+    so this is not a blocker in itself — recorded for completeness)
+
+=== leftover trees searched for, so that nothing reclaimable was missed
+$ find $HOME /dev/shm /tmp -maxdepth 4 -type d \( -name 'NavierStokesAndEuler*' -o -name 'k1_*' -o -name '*.lake' \)
+   (no output — phase B local's work tree was already removed after that run;
+    there is no stale Lean tree on this machine to reclaim)
+
+=== ADDENDUM, same session: reconciling `df` (3.3 GB) against GNOME Disks (16 GB free)
+The operator's GNOME Disks screenshot reads "247 GB — 16 GB free (93.6% full)" while `df` reports
+3.3 GB avail. Both are correct; they report different quantities. statvfs('/') on the same filesystem:
+
+  block size          4096
+  total            241554038784 B = 241.6 GB = 224.96 GiB
+  f_bfree  (free)   15811837952 B =  15.8 GB =  14.73 GiB   <- GNOME Disks reports THIS
+  f_bavail (avail)   3466952704 B =   3.5 GB =   3.23 GiB   <- df, and any non-root write, gets THIS
+  reserved-for-root 12344885248 B =  12.3 GB =  11.50 GiB   (5.11% of total)
+
+The 12.3 GB gap is ext4's reserved-block pool (mke2fs default 5%), writable only by root. A `lake build`
+running as the user would fail at 3.5 GB, not 15.8 GB.
+
+THE READING IS UNCHANGED, AND NOT MARGINALLY SO: even the full 15.8 GB physically-free figure is
+below the ~20 GB requirement. Reclaiming the reserve (`tune2fs -m 0 /dev/nvme0n1p3`) would still leave
+roughly 4 GB short, and was NOT done: stripping the reserve on the root filesystem costs fragmentation
+headroom and root's ability to recover a full disk. That is the operator's call, not the agent's.
+
+================================================================================
+FINAL — precondition resolution, 2026-09-11 (appended after the run)
+================================================================================
+The first measurement (above) FAILED at 3.24 GiB and the run was banked
+INCOMPLETE without starting, per prereg §3. The operator then freed space; the
+precondition was re-measured and re-banked in
+experiments/journal/leg_437_phaseC_prereg_addendum.md BEFORE the build started.
+
+Measured by the wrapper itself at t_start (k1_C_summary.txt, not retyped here):
+  disk_avail_bytes_at_start = 24555167744   (24.56 GB / 22.87 GiB)  -> PASS vs ~20 GB
+  disk_avail_bytes_at_end   =  6724648960   ( 6.72 GB /  6.26 GiB)
+  consumed by the run       = 17830518784   (17.83 GB / 16.61 GiB)
+
+Nothing in the Lean trust path was touched to free the space.
+
+CORRECTION (appended after the above was first written and pushed; kept visible
+rather than patched away):
+The 17.83 GB above is the fall in AVAILABLE SPACE, not what the build needed.
+Measured afterwards, the build tree itself is 28516423302 bytes = 28.52 GB at the
+build's end (173192 files; the 0.37 GB of lean4export/comparator binaries that the
+prereg §5(c) check added later are excluded). The tree sits on /, the same
+filesystem the wrapper measured. So about 10.69 GB was freed ELSEWHERE on / by
+something outside this run while it was building.
+
+I could not determine what freed it: df keeps no history and the change is not
+attributable after the fact. The operator was freeing space around this period and
+is the likeliest candidate, but no evidence names it, so it is not asserted.
+
+What this changes: the ~20 GB requirement in prereg §3 was an UNDERESTIMATE.
+A from-source build of this project needs at least ~28.5 GB of tree
+  mathlib          16 GB
+  project's build  11 GB
+  other packages  ~1.4 GB
+Starting from the 24.56 GB measured here, this run would have exhausted the disk
+had that ~10.7 GB not appeared. Provision ~30 GB to repeat it.
+
+What this does NOT change: the reading. MATCH rests on the axioms being
+byte-identical, build rc 0 and 0 error lines. The build completed; it was not
+truncated. Disk accounting does not bear on the result.

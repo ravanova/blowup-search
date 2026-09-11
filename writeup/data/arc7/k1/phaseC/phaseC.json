@@ -1,0 +1,119 @@
+{
+ "schema": "arc7_k1_phase_v1",
+ "leg": 437,
+ "phase": "C (from-source rebuild: no cache in the trust path)",
+ "what": "fresh clone of openai/NavierStokesAndEuler at the pin 8937a8f4, OUTSIDE this repository, then `lake build` alone — `lake exe cache get` NEVER run, not once, not to warm anything — so mathlib was compiled from its own source; then #print axioms on the two exported theorems. Pre-registered in experiments/journal/leg_437_phaseC_prereg.md with readings fixed and pushed BEFORE the run; the disk precondition initially FAILED and was banked INCOMPLETE, then re-measured and PASSED, recorded in leg_437_phaseC_prereg_addendum.md before the build started.",
+ "runner": "k1_C_wrapper.sh (banked beside this file), derived from scripts/arc7_k1_kernel_check.sh phase B with ONE deliberate difference, which is the entire point of phase C: the `lake exe cache get` step is deleted. scripts/arc7_k1_kernel_check.sh was NOT modified.",
+ "machine": {
+  "nproc": 12,
+  "cpu": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
+  "mem_gb": 31,
+  "container": "user's local Linux laptop (Linux 7.0.0-31-generic) — the SAME machine as phaseB_local, which is what makes the wall-time comparison meaningful",
+  "lean": "Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)",
+  "lake": "Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)",
+  "disk_avail_bytes_at_start": 24555167744,
+  "disk_avail_bytes_at_end": 6724648960,
+  "disk_note": "24.56 GB (22.87 GiB) available at t_start against the pre-registered ~20 GB requirement; 6.72 GB at t_end. The available-space DELTA is 17.83 GB, but that is NOT what the build needed — see disk_accounting_correction.",
+  "disk_avail_delta_bytes": 17830518784
+ },
+ "precondition": {
+  "required_free_gb": 20,
+  "required_basis": "mathlib's build output alone measured 6.6 GB (phaseB_integrity/rebuild_cost_estimate.md); from source the tree additionally carries .ir and .ilean for 8370 mathlib modules plus the project's own 2486 oleans",
+  "verdict": "PASS at t_start as pre-registered — 24555167744 bytes (22.87 GiB) available against the ~20 GB requirement, measured by the wrapper itself (k1_C_summary.txt). An earlier measurement on 2026-09-10 gave 3.24 GiB and the run was banked INCOMPLETE without starting, per prereg §3; the operator then freed space and the precondition was re-measured and re-banked (leg_437_phaseC_prereg_addendum.md) before anything built. Nothing in the Lean trust path was touched to free the space. BUT the ~20 GB threshold itself was too low: see disk_accounting_correction. The gate passed on a requirement that was wrong.",
+  "measured_tree_size_bytes_at_build_end": 28516423302,
+  "requirement_was": "UNDERESTIMATE — real tree ~28.5 GB; provision ~30 GB to repeat this"
+ },
+ "tree_head": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+ "upstream_head_at_clone": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
+ "upstream_head_note": "upstream main had moved on since phase B (which cloned at 8937a8f4 when that WAS upstream HEAD); the wrapper checked out the PIN 8937a8f4 explicitly, and tree_head confirms the build ran at the pin. The two phases therefore compiled the same commit.",
+ "toolchain": "leanprover/lean4:v4.34.0-rc2",
+ "mathlib_rev": "85e3a25e006c35636f0e53b0e9296caca2685bc0",
+ "comparator_rev": "19e111e2141cf333c7daff0f64c5f24acc91dd2e",
+ "t_start": "2026-09-11T00:00:54Z",
+ "t_end": "2026-09-11T03:13:52Z",
+ "clone_s": 1,
+ "cache_get_rc": "N/A — `lake exe cache get` was NEVER RUN. The string \"cache\" does not occur anywhere in k1_C_build.log (0 occurrences, case-insensitive). This is the defining property of phase C.",
+ "build_rc": 0,
+ "build_s": 11571,
+ "axioms_s": 5,
+ "total_s": 11578,
+ "build_error_lines": 0,
+ "jobs": "11259 jobs per lake's final line `Build completed successfully (11259 jobs).`; highest per-target line printed is `[11258/11259]`. 10857 `Built ...` lines were printed, of which: Mathlib 8370, Euler 1839, NavierStokes 643, ComparatorChallenges 2, plus 3 root/library targets.",
+ "jobs_delta_vs_phaseB": {
+  "phaseB_jobs": 11251,
+  "phaseC_jobs": 11259,
+  "delta": 8,
+  "pre_registered_expectation": 11251,
+  "honest_status": "NOT FULLY RECONCILED. What IS established from the logs: (1) phase B built the mathlib `cache` executable, because its runner invokes `lake exe cache get` — 21 printed targets unique to phase B (10 `Cache.*` modules, their 10 `:c.o`, and `cache:exe`); phase C built none of them and never mentions a cache at all. (2) Phase C printed one target phase B did not: the `Mathlib` root library target. Unique non-Mathlib targets: C 2487, B 2507. These named differences (-21, +1) do not sum to +8, so the remainder is NOT decomposed. It cannot be decomposed from the printed lines alone, because lake counts jobs it prints no line for: phase B printed only 2507 `Built` lines against 11251 jobs, the ~8747 replayed mathlib oleans being jobs with no printed line. The delta is recorded here unexplained rather than glossed. It does not bear on the reading: the reading rests on the axioms, which are byte-identical, and on rc 0 with 0 errors."
+ },
+ "mathlib_built_lines": 8370,
+ "mathlib_replayed_lines": 0,
+ "void_check": "PASSES DECISIVELY. The pre-registration (§4) set the void condition: if `grep -c \"Built Mathlib\\.\"` is 0, a cache was used and the run is void. It is 8370, and `Replayed Mathlib.` is 0. mathlib was genuinely compiled from source on this machine.",
+ "build_warning_lines": "4 × `declaration uses `sorry`` in ComparatorChallenges/Euler.lean:85,170 and ComparatorChallenges/NavierStokes.lean:273,280 — the challenge placeholders, the SAME four locations as phase B, and not in either theorem's closure per axioms_verbatim (sorryAx does not appear)",
+ "olean_count_project": 2486,
+ "axioms_verbatim": "=== AXIOMS_T0 2026-09-11T03:13:47Z\n'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]\n'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]\n=== AXIOMS_RC=0 2026-09-11T03:13:52Z\n",
+ "result": {
+  "navier_stokes_breakdown_R3": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "navier_stokes_breakdown_periodic": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "sorryAx_reachable": "NO",
+  "exit_code": 0
+ },
+ "gate": {
+  "a_build_completes": "YES — `lake build` rc 0, `Build completed successfully (11259 jobs)`, 0 error lines, with NO cache step at any point",
+  "b_print_axioms": "verbatim in axioms_verbatim: both theorems `[propext, Classical.choice, Quot.sound]`",
+  "c_sorryAx_reachable": "NO — 0 occurrences of sorryAx in the axioms output",
+  "d_wall_time": "END-TO-END 11578 s (3 h 12 min 58 s) from `git clone` to the end of #print axioms: clone 1 s, build 11571 s, axioms 5 s; machine: 12 cores i7-10750H @ 2.60GHz, 31 GB RAM; toolchain v4.34.0-rc2, mathlib 85e3a25e, Comparator 19e111e2"
+ },
+ "landrun_comparator_check": "RUN — with a REAL landrun, built from source here (`go install github.com/zouuup/landrun/cmd/landrun@latest`, landrun version 0.1.17, Go 1.26.8). The fake shim was NOT substituted. Full log: k1_C_comparator.log. Both pre-registered challenges were run against phase C's own from-source tree: lean4export built (rc 0), the comparator executable built (rc 0), and each theorem's closure was exported. RESULT, both files: `Lean default kernel accepts the solution` for ComparatorChallenges/NavierStokes.json AND ComparatorChallenges/Euler.json. The nanoda leg did NOT run: nanoda_bin is not installed on this machine and could not be installed (no cargo/rustup present), so landrun itself reports `Failed to find binary: exec: \"nanoda_bin\": executable file not found in $PATH`, after which the comparator prints `nanoda kernel rejected the solution` and raises `nanoda exited with 1`. THAT WORDING IS THE COMPARATOR'S PHRASING FOR AN EXEC FAILURE, NOT A MATHEMATICAL REJECTION — nanoda never saw the export and returned no verdict. This is the same outcome K2 slot 3 recorded, from the same missing external tool. Recorded as a tool gap, not as evidence about the theorems.",
+ "reading": "MATCH (phase C prereg §2)",
+ "reading_means": "The build completed rc 0 and both theorems report axioms exactly [propext, Classical.choice, Quot.sound], identical to phase B. Per the pre-registration, that reads: THE CACHED OLEANS WERE NOT LOAD-BEARING. Compiling all 8370 mathlib modules from their own source, with the official olean cache never consulted, yields the same axiom dependencies as replaying the cache did.",
+ "comparison_with_phaseB": {
+  "axioms_identical": "YES — byte-identical. The two `depends on axioms:` lines from phase C, phaseB_local and phaseB (container) all have md5 0883b714ddd5c08564bf58dbb22edf44; `diff` is empty in both pairings. This is a byte comparison, not an eyeball match.",
+  "build_rc_phaseC": 0,
+  "build_rc_phaseB_local": 0,
+  "build_rc_phaseB_container": 0,
+  "jobs_phaseC": 11259,
+  "jobs_phaseB_local": 11251,
+  "jobs_phaseB_container": 11251,
+  "jobs_note": "the +8 is recorded, unreconciled, in jobs_delta_vs_phaseB above",
+  "wall_time_from_source_s": 11578,
+  "wall_time_cached_same_laptop_s": 4272,
+  "wall_time_ratio_total": 2.71,
+  "wall_time_ratio_build_only": "2.79 (build 11571 s from source vs 4148 s cached)",
+  "wall_time_note": "both figures are the SAME laptop (12 cores, i7-10750H), phaseB_local on 2026-09-10 and phase C on 2026-09-11, so the ratio is a like-for-like cost of removing the cache from the trust path: about 2 hours of extra wall time. The phaseB container figure (5605 s) is a different, 4-core machine and is not comparable.",
+  "mathlib_built_vs_replayed_phaseC": "8370 `Built Mathlib.` lines, 0 `Replayed Mathlib.` — compiled from source",
+  "mathlib_built_vs_replayed_phaseB_local": "0 `Built Mathlib.` lines — mathlib replayed from the official cache",
+  "mathlib_built_vs_replayed_phaseB_container": "0 `Built Mathlib.` lines — 8747 oleans downloaded from lakecache.blob.core.windows.net",
+  "olean_count_project_both": "2486 in both phase C and phaseB_local — the project's own module count is unchanged by how mathlib arrived",
+  "revs_identical": "YES — tree_head 8937a8f4, mathlib_rev 85e3a25e, comparator_rev 19e111e2 all identical to both phase B runs"
+ },
+ "what_this_establishes_that_phaseB_did_not": "that mathlib's cached oleans were not load-bearing for this result. Phase B's GREEN depended on oleans fetched from the official cache, which proves those oleans' CONTENTS are kernel-valid but not that they MEAN what mathlib's source says. Phase C removed the cache from the trust path entirely and got the same axioms, byte for byte.",
+ "what_this_does_not_establish": [
+  "Theorem 1.1 of the paper — the two statements are Fefferman (C)/(D) as the project formalises them (leg 431 gate (b)). This is a machine kernel check of two statements, and must not be described as a proof of the paper's theorem.",
+  "that the Lean proof follows the paper's argument, or anything about priority",
+  "verification by a second agent — this is the same Conductor's brief on the same laptop that ran phaseB_local; a from-source rebuild is a stronger TRUST claim, not an independent one (§3f rule 1)",
+  "that the Lean toolchain binary itself (elan-installed v4.34.0-rc2, not built from source here) matches its own sources — the trust path now ends at the compiler, not at mathlib's oleans",
+  "anything about mathlib source that the two theorems' statements do not depend on"
+ ],
+ "files": [
+  "k1_C_build.log (732 KB, the full from-source build)",
+  "k1_C_summary.txt (the wrapper's own measurements)",
+  "k1_C_axioms.log",
+  "k1_axioms_check.lean",
+  "k1_C_wrapper.sh (the runner actually used)",
+  "k1_C_precondition.txt (the disk measurements, including the earlier failing one)",
+  "k1_C_comparator.log (prereg §5(c))",
+  "phaseC.json (this file)"
+ ],
+ "landrun_comparator_note_on_replayed": "k1_C_comparator.log contains `Replayed ...` lines. These refer to phase C's OWN from-source oleans being reused from the tree built earlier in this same phase; no official cache was fetched or consulted at any point in phase C. The from-source property of the build is established by k1_C_build.log (8370 `Built Mathlib.`, 0 `Replayed Mathlib.`, 0 occurrences of \"cache\"), not by this log.",
+ "euler_theorems_incidental": "Incidental, from the comparator's own info lines on the from-source tree (not a pre-registered gate item): 'Euler.euler_breakdown_R3' and 'Euler.exists_compact_smooth_euler_singularity' also depend on axioms [propext, Classical.choice, Quot.sound]. Phase C's pre-registered gate covers only the two NavierStokes.Comparator theorems.",
+ "disk_accounting_correction": "CORRECTION, found after the first version of this file was written and pushed, and recorded rather than quietly patched. The build tree was measured afterwards at 28.52 GB (28516423302 bytes summed over 173192 files with mtime at or before the build's end; the 0.37 GB of lean4export/comparator binaries added later by the §5(c) check are excluded). But available space on / fell by only 17.83 GB over the same window, and the tree is on / — the same filesystem the wrapper measured. Therefore approximately 10.69 GB was freed ELSEWHERE on / by something outside this run while it was building. I COULD NOT DETERMINE WHAT FREED IT, because df records no history and the change is not attributable after the fact; the operator was freeing space around this period, which is the likeliest candidate, but I have no evidence naming it and do not assert it. CONSEQUENCE FOR THE PRE-REGISTRATION: the ~20 GB requirement in prereg §3 was an UNDERESTIMATE. A from-source build of this project needs at least ~28.5 GB of tree (mathlib 16 GB, the project's own build 11 GB, other packages ~1.4 GB), and peak usage is at least that. Starting from the 24.56 GB measured here, the run would have run out of space had ~10.7 GB not been freed concurrently. Anyone repeating this should provision ~30 GB, not 20 GB. CONSEQUENCE FOR THE READING: NONE. The reading rests on the axioms (byte-identical), build rc 0 and 0 error lines. Disk accounting does not bear on it. The build completed; it was not truncated."
+}
