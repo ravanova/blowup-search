@@ -228,7 +228,7 @@ project: [`writeup/notes/PREREGISTERED_GATES_FAKED.md`](../notes/PREREGISTERED_G
 | `K1` kernel check | **GREEN, `VERIFIED`** — by `K2` slot 5, blind, on prereg §4(5)'s condition and nothing else |
 | `K1` olean integrity | **ESTABLISHED**, two independent kernels; same lineage, so `UNVERIFIED` by a second agent |
 | `K1` olean semantic match | **ESTABLISHED** 2026-09-11 (§3b) — mathlib rebuilt from source, cache never consulted, axioms byte-identical; same lineage, so `UNVERIFIED` by a second agent |
-| `K1` semantic match | **OPEN**, costed, not run |
+| ~~`K1` semantic match~~ | **STRUCK 2026-09-11 — duplicate of the row above.** It read *"OPEN, costed, not run"*; that was the same limit, and phase C closed it (§3b). Left struck, not deleted: it was the published status until that day |
 | `K2` gate answers | five blind workers agreeing across two runs; the Conductor's integration is `UNVERIFIED` |
 | `K3` gate answers | **`EVIDENCE` 0**; every gate `UNVERIFIED` |
 | `K4` this document | `UNVERIFIED` — Conductor-written |

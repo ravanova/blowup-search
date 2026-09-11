@@ -5567,3 +5567,45 @@ semantic-match bullet, new §3b, §6 bullet, §7 table row), `STATE.md` (`K1` an
 `reports/ORCH_STATE.md` (new phase C block; the targeted-check open item closed), `writeup/INDEX.md`
 (arc 7 row), and `experiments/journal/leg_437.md` (new §6, appended beside §4–§5).
 
+
+### §81c — the phase C documentation pass left FOUR stale statements standing, including one inside the published figure. Found on a sweep the day of the merge, 2026-09-11.
+
+§81b recorded what the phase C merge (`b68480a`) edited. It did not edit enough. A sweep of the
+reader-facing surfaces — asked for by the user, *"make sure they don't see redundant chat about having
+not rebuilt from source"* — found four places still telling a visitor the rebuild had not happened, two
+of them **contradicting the new text on the same page**:
+
+1. **`TECHNICAL_CONFIRMATION.md` §7 carried the same limit TWICE, with opposite statuses.** The merge
+   added `| K1 olean semantic match | ESTABLISHED 2026-09-11 |` above the pre-existing
+   `| K1 semantic match | OPEN, costed, not run |` and did not strike the old row. A reader of the
+   verification table saw both. The old row is now struck with its former wording kept visible.
+2. **`INDEX.md`'s arc-7 row said both things in one cell.** The merge prepended *"since 2026-09-11 this
+   no longer rests on the published olean cache"* and left *"SEMANTIC MATCH open (costed ~4 h, not run)"*
+   later in the same sentence. Corrected to `CLOSED 2026-09-11`.
+3. **fig115 — the published figure — was captioned `semantic match: NOT established (costed ~4 h, not
+   run)`, in red.** This is the worst of the four: a figure is quotable on its own, away from the page
+   that corrects it, and this one had been merged to `main` already saying the opposite of §3b. The
+   generator is fixed, the caption now reads ESTABLISHED, phase C is drawn as a fourth bar, and the PNG
+   is redrawn from the banked artefacts.
+4. **`BLOG_CONFIRMATION.md` and `CONFIRMATION_FOR_OUTSIDERS.md` were not touched by the merge at all.**
+   Both still told the reader the recompile was costed and deliberately not run. The blog's
+   three-claims passage now records that the third claim closed. The outsiders' note moved the library
+   question out of *"what was not verified"* and into *"what was actually verified"* as point 4 — and
+   replaced it in the negative list with the claim that is now the honest one: **the Lean compiler
+   itself was installed, not built**, and that is where the chain of trust ends.
+
+**Why it happened.** The merge pass worked from a list of documents to update. Nothing checked the
+documents against each other afterwards, so an added sentence and an unremoved sentence could sit in the
+same table. The figure was missed because its text lives in `confirmation_evidence.py`, not in any `.md`,
+and the evidence script passed — it re-derives numbers from artefacts and never asserted anything about
+that caption. `confirmation_evidence.py` now carries a phase C section (§4b, 10 checks) so the rebuild's
+numbers are re-derived like every other number, and drift in them fails the gate.
+
+**Not edited, deliberately.** `phaseA.json`, `phaseB.json`, `phaseB_local.json` still carry *"that
+mathlib's cached oleans match their sources"* — true of those runs, each a cache replay (§3f: a banked
+datum is never edited, only corrected beside). `rebuild_cost_estimate.md` still carries its ≈4 h estimate,
+its targeted 399-module alternative and its disk blocker; it gains a **note beside it**
+(`phaseB_integrity/NOTE_superseded_by_phaseC.md`) recording that the rebuild ran, that the targeted
+alternative was never needed, and that its own disk figure was low. Arc 6's `6_reproduction/` documents
+still say *"one run, one container, unreplayed"*, which was true when written and which the README
+already marks as superseded by measurement; prior arcs are left standing and unrewritten.

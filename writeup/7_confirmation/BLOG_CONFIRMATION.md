@@ -53,9 +53,17 @@ mathlib libraries are **kernel-valid** and use no forbidden axiom.
 It did **not** close the neighbouring question. "Are these cached binaries *labelled* as built from these
 sources" (yes, content-addressed, 8747 cache files, every key matching), "are they kernel-valid" (yes,
 twice over) and "do they **mean** what mathlib's source text says" are three different claims. The third
-still needs a recompile. We measured what it would cost — about four hours for the full thing, or eight
-to ten minutes for a targeted version covering just the two theorem statements — and then **did not run
-it**, because scheduling it is the operator's call, not ours.
+needed a recompile, and when we first published this page we had costed it — about four hours — and
+**not run it**, because scheduling it was the operator's call.
+
+**They scheduled it. It ran on 2026-09-11, and the third claim is now closed too.** mathlib was compiled
+from its own published source on the same laptop, with `lake exe cache get` **never invoked** — 8370
+`Built Mathlib.` lines, zero replayed — and both theorems returned the same three axioms, byte for byte:
+the `depends on axioms` lines from the rebuild and from both cached runs hash to the same md5. So the
+cached binaries were not load-bearing. It cost 11578 s against 4272 s cached — **2.71×** — and a 28.5 GB
+build tree. What it does **not** do is make any of this independent: same lineage, same laptop. And the
+end of the trust path simply moved — it now stops at the Lean compiler binary, which we installed rather
+than built.
 
 ## The part that went badly, and why we are leading with it anyway
 

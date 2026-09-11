@@ -32,6 +32,7 @@ print("== 1. K1: the same pin in all three environments")
 A = J(D / "k1" / "phaseA" / "phaseA.json")
 B = J(D / "k1" / "phaseB" / "phaseB.json")
 L = J(D / "k1" / "phaseB_local" / "phaseB.json")
+C = J(D / "k1" / "phaseC" / "phaseC.json")   # 2026-09-11: the from-source rebuild
 for nm, a in [("A", A), ("B", B), ("B-local", L)]:
     check(a["tree_head"] == PIN and a["mathlib_rev"] == MATHLIB and a["comparator_rev"] == COMPARATOR
           and a["toolchain"] == "leanprover/lean4:v4.34.0-rc2" and a["olean_count_project"] == 2486,
@@ -79,6 +80,28 @@ check("does not establish" in I["provenance"].get("what_this_does_not_establish"
       "were in fact produced by compiling" in I["provenance"]["what_this_does_not_establish"],
       "provenance carries its own negative clause")
 check("were in fact produced by compiling" in T, "the note quotes the provenance limit verbatim")
+
+print("== 4b. K1 phase C (2026-09-11): mathlib rebuilt FROM SOURCE, cache never invoked")
+check(C["tree_head"] == PIN and C["mathlib_rev"] == MATHLIB and C["comparator_rev"] == COMPARATOR
+      and C["olean_count_project"] == 2486, "phase C: same pin, same mathlib, same comparator, 2486 oleans")
+check(C["mathlib_built_lines"] == 8370 and C["mathlib_replayed_lines"] == 0,
+      "the prereg void check: 8370 `Built Mathlib.` lines, 0 replayed -- no cache was used",
+      f'{C["mathlib_built_lines"]} built / {C["mathlib_replayed_lines"]} replayed')
+check("NEVER RUN" in C["cache_get_rc"] and "0 occurrences" in C["cache_get_rc"],
+      "`lake exe cache get` never invoked; `cache` absent from the build log")
+rC = C["result"]
+check(C["build_rc"] == 0 and C["build_error_lines"] == 0 and rC["navier_stokes_breakdown_R3"] == STD3
+      and rC["navier_stokes_breakdown_periodic"] == STD3 and rC["sorryAx_reachable"] == "NO"
+      and C["reading"].startswith("MATCH"),
+      "phase C: rc 0, 0 errors, the standard three, sorryAx NO, reading MATCH")
+check("sorryAx" not in C["axioms_verbatim"], "phase C: sorryAx absent from the verbatim axioms log")
+check("0883b714" in C["comparison_with_phaseB"]["axioms_identical"],
+      "axioms byte-identical across all three runs, by md5 -- not by eye")
+check(C["total_s"] == 11578 and C["build_s"] == 11571, "phase C total 11578 s (build 11571)", str(C["total_s"]))
+check(round(C["total_s"] / L["total_s"], 2) == 2.71, "the cost of dropping the cache: 2.71x phase B",
+      f'{C["total_s"]}/{L["total_s"]} = {C["total_s"]/L["total_s"]:.2f}')
+for tok in ["8370", "11578", "2.71", "28.5 GB", "was never invoked, not once"]:
+    check(tok in T, f"the note quotes {tok!r} for phase C")
 
 print("== 5. K2: the five blind workers, and the label that moved")
 K2 = D / "k2" / "r2"
@@ -130,26 +153,29 @@ check("priority dispute" in T and "takes no position" in T, "the no-priority sen
 
 print("== 9. fig115, drawn from the banked artefacts alone")
 fig, ax = plt.subplots(1, 3, figsize=(15, 4.4))
-names = ["A\nresume\nXeon 2.80", "B\nfresh clone\nXeon 2.10", "B-local\nfresh clone\ni7-10750H"]
-build = [A["build_s"], B["build_s"], L["build_s"]]
-other = [0, B["total_s"] - B["build_s"], L["total_s"] - L["build_s"]]
-ax[0].bar(names, build, color="#2f6f4f", label="lake build")
+names = ["A\nresume\nXeon 2.80", "B\nfresh clone\nXeon 2.10", "B-local\nfresh clone\ni7-10750H",
+         "C\nFROM SOURCE\ni7-10750H"]
+build = [A["build_s"], B["build_s"], L["build_s"], C["build_s"]]
+other = [0, B["total_s"] - B["build_s"], L["total_s"] - L["build_s"], C["total_s"] - C["build_s"]]
+tags = ["GREEN\nrc 0 · 0 err", "GREEN\nrc 0 · 0 err", "GREEN\nrc 0 · 0 err", "MATCH\nno cache\n8370 built"]
+ax[0].bar(names, build, color=["#2f6f4f", "#2f6f4f", "#2f6f4f", "#1d4b36"], label="lake build")
 ax[0].bar(names, other, bottom=build, color="#9ec6b0", label="clone + cache + #print axioms")
 for i, (b, o) in enumerate(zip(build, other)):
-    ax[0].text(i, b + o + 90, f"{b+o} s", ha="center", fontsize=9)
-    ax[0].text(i, b / 2, "GREEN\nrc 0 · 0 err", ha="center", va="center", fontsize=8, color="white")
-ax[0].set_ylabel("seconds"); ax[0].set_ylim(0, 7400)
+    ax[0].text(i, b + o + 160, f"{b+o} s", ha="center", fontsize=9)
+    ax[0].text(i, b / 2, tags[i], ha="center", va="center", fontsize=8, color="white")
+ax[0].set_ylabel("seconds"); ax[0].set_ylim(0, 13400)
+ax[0].tick_params(axis="x", labelsize=8)   # four bars now: the labels crowd at the default size
 # legend upper-LEFT would sit on top of phase B's total label; the tall bar is centre-left
 ax[0].legend(fontsize=8, loc="upper right", framealpha=0.95)
-ax[0].set_title("K1: one pin, three environments\nboth theorems = [propext, Classical.choice, Quot.sound]", fontsize=9)
+ax[0].set_title("K1: one pin, three environments + the from-source rebuild\nboth theorems = [propext, Classical.choice, Quot.sound]", fontsize=9)
 
 ax[1].barh(["Euler\n(not in the gate)", "NavierStokes\n(the K1 gate)"], [eu["seconds"], ns["seconds"]],
            color=["#b9b9b9", "#2f6f4f"])
 for i, s in enumerate([eu["seconds"], ns["seconds"]]):
     ax[1].text(s - 60, i, f"{s} s", ha="right", va="center", color="white", fontsize=9)
 ax[1].set_xlabel("seconds"); ax[1].set_title("K1 integrity: two independent kernels\nLean kernel ACCEPTS · nanoda 0.4.17 ACCEPTS", fontsize=9)
-ax[1].text(0.98, 0.06, "semantic match: NOT established\n(costed ~4 h, not run)", transform=ax[1].transAxes,
-           ha="right", fontsize=8, style="italic", color="#8a2f2f")
+ax[1].text(0.98, 0.06, "semantic match: ESTABLISHED 2026-09-11\n(phase C: mathlib rebuilt from source)", transform=ax[1].transAxes,
+           ha="right", fontsize=8, style="italic", color="#2f6f4f")
 
 lab = ["live\ngates", "EVIDENCE", "faked by the\nblind adversary"]
 val = [c["live_gates"], c["EVIDENCE"], c["gates_the_blind_adversary_faked"]]
@@ -162,8 +188,8 @@ ax[2].text(0.5, 0.80, "a finding about THE GATES,\nnot about the manuscript", tr
            ha="center", fontsize=8, style="italic",
            bbox=dict(boxstyle="round,pad=0.35", fc="white", ec="#b0b0b0", alpha=0.95))
 
-fig.suptitle("fig115 — arc 7 / K4 (leg 440): the kernel check GREEN in three environments and by two kernels; "
-             "the construction wave's zero", fontsize=10)
+fig.suptitle("fig115 — arc 7 / K4 (leg 440): the kernel check GREEN in three environments and by two kernels, "
+             "and (2026-09-11) from source with no cache; the construction wave's zero", fontsize=10)
 fig.tight_layout(); FIGS.mkdir(exist_ok=True)
 out = FIGS / "fig115_arc7_confirmation.png"
 fig.savefig(out, dpi=110); plt.close(fig)

@@ -54,7 +54,7 @@ Phase A (remote container 1, resume): GREEN. Phase B (remote fresh container 2):
 (`writeup/data/arc7/k1/phaseB/`). Phase B on the operator's laptop (12 cores): GREEN, `total_s` 4272
 (`writeup/data/arc7/k1/phaseB_local/`, merged d526329). Same pin, mathlib `85e3a25e`, Comparator `19e111e2`, both
 theorems `[propext, Classical.choice, Quot.sound]`, `sorryAx` NO, everywhere. Three limits banked, none softened:
-mathlib oleans REPLAYED from cache, not rebuilt; statements are Fefferman (C)/(D), not Theorem 1.1; a second
+mathlib oleans REPLAYED from cache (CLOSED below); statements are Fefferman (C)/(D), not Theorem 1.1; a second
 machine is not a second agent — **`VERIFIED` only when K2 slot 5, blind, reproduces it from the banked artefacts.**
 
 
