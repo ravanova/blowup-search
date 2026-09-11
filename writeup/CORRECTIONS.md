@@ -5474,3 +5474,96 @@ requires a user ruling and an entry here.
 the same ruling — no history rewrite was performed, so every commit SHA this project's writeups cite
 stays valid. Redaction at the tip is not erasure. Anyone reading old blobs will still find them. If a
 named contributor would prefer a full history rewrite, open an issue and we will act on it (`NOTICE.md`).
+
+## §81 — arc 7 `K1` (leg 437, phase C): **the last of the three banked limits is CLOSED — mathlib REBUILT FROM SOURCE, the published olean cache never consulted, axioms byte-identical. Two numbers recorded unreconciled beside it, and one pre-registered threshold that was wrong.**
+
+§76 above split one banked sentence into three claims and closed the middle one. It ended:
+**SEMANTIC MATCH** — that the oleans MEAN what mathlib's source text says — **NOT ESTABLISHED**, needing
+a recompile of all 8371 modules. §76 stands **verbatim**; this is written beside it, not over it.
+
+**The user ruled that the run should happen, and it did.** Pre-registered in
+`experiments/journal/leg_437_phaseC_prereg.md` with `MATCH` / `MISMATCH` / `INCOMPLETE` fixed and pushed
+**before** anything built, per §3g step 1.
+
+**The run.** Fresh clone of `openai/NavierStokesAndEuler` at the same pin `8937a8f4`, **outside** this
+repository, then `lake build` alone. **`lake exe cache get` was never invoked — not once, not to warm
+anything.** The string `cache` does not occur anywhere in the 732 KB build log. The pre-registration's
+own void condition — *if `Built Mathlib.` is 0 a cache was used and the run is void* — passes decisively:
+**8370 `Built Mathlib.` lines, 0 `Replayed Mathlib.`**
+
+**Reading: `MATCH`.** rc 0, 0 error lines, `Build completed successfully (11259 jobs)`, both theorems
+`[propext, Classical.choice, Quot.sound]`, `sorryAx` absent. Compared **as bytes, not by eye**: the
+`depends on axioms` lines from phase C, phase B (laptop) and phase B (container) all hash to
+`0883b714ddd5c08564bf58dbb22edf44`, and `diff` is empty in both pairings. Per the pre-registration this
+reads: **the cached oleans were not load-bearing.** Cost on the same laptop as phase B, like for like:
+`total_s` 11578 against 4272 = **2.71×**, and a 28.5 GB build tree. Artefacts:
+`writeup/data/arc7/k1/phaseC/`.
+
+**The targeted 399-module alternative was never run and is now moot.** §76 and `ORCH_STATE.md` both
+carried it as the cheap substitute, surfaced to the user and unruled. The user scheduled the full
+rebuild, which subsumes it. Recorded so a reader does not go looking for a check that was deliberately
+skipped as unnecessary rather than forgotten.
+
+**A first attempt was banked `INCOMPLETE` and stopped, not fudged.** The pre-registered disk precondition
+failed at 3.24 GiB against ~20 GB required. Per the prereg that is `INCOMPLETE`, never `MISMATCH` — a
+disk says nothing about axioms — so it was banked with the measured number and the run did not start.
+The operator freed space; the precondition was re-measured and re-banked
+(`leg_437_phaseC_prereg_addendum.md`) **before** the build began. Nothing in the Lean trust path was
+touched to free it.
+
+**Three things this does NOT establish, stated plainly.**
+1. Nothing about **Theorem 1.1**. The statements are Fefferman (C)/(D), strictly weaker. This is a
+   machine kernel check of two statements and must not be described as a proof of the paper's theorem.
+2. Not **verification**. Same Conductor lineage, same laptop as phase B. A from-source rebuild is a
+   stronger *trust* claim, not an independent one; `K1`'s `VERIFIED` still rests on `K2` slot 5.
+3. The trust path now ends at the **Lean compiler binary** (installed by `elan`, not itself built from
+   source), rather than at mathlib's oleans. The limit moved; it did not vanish.
+
+**`landrun` was real this time (prereg §5(c)).** The earlier follow-on used a declared shim. Phase C
+built `landrun` v0.1.17 from source and ran the comparator against the from-source tree: **Lean's default
+kernel accepts both** challenge solutions. The **nanoda leg did not run** — `nanoda_bin` is absent and
+uninstallable on that machine (no cargo/rustup) — so the comparator's `nanoda kernel rejected the
+solution` is **its own phrasing for an `exec` failure**, not a mathematical rejection: nanoda never saw
+the export and returned no verdict. Banked as a tool gap. nanoda's *acceptance* remains established by
+§76's container run, and that is where it should be read from.
+
+### §81a — two numbers banked UNRECONCILED, and one pre-registered threshold that was simply wrong
+
+**(i) The job count is +8 and I could not decompose it.** Lake reports **11259** jobs; phase B reported
+11251 and the pre-registration expected 11251. What *is* established from the logs: phase B built the
+mathlib `cache` executable — 21 printed targets (10 `Cache.*` modules, their `:c.o`, and `cache:exe`) —
+which phase C never built at all; and phase C printed a `Mathlib` root library target that phase B did
+not. Those named differences (−21, +1) **do not sum to +8**, and the printed lines cannot decompose a
+total that counts jobs lake prints no line for (phase B printed 2507 `Built` lines against 11251 jobs).
+Recorded unexplained rather than glossed. It does not bear on the reading.
+
+**(ii) The ~20 GB disk requirement in the prereg was an UNDERESTIMATE — and the first version of the bank
+stated the consequence backwards.** `phaseC.json` originally said the run "consumed 17.83 GB, so the
+~20 GB requirement was calibrated correctly". That was **wrong**, was found after the bank was pushed,
+and was corrected in place with the error left visible rather than quietly patched. 17.83 GB is the fall
+in *available space*; the build tree itself measures **28.52 GB** (mathlib 16 GB, the project's own build
+11 GB, other packages ~1.4 GB). The tree sits on the same filesystem the wrapper measured, so **~10.69 GB
+was freed elsewhere on that volume, by something outside the run, while it was building.** **I could not
+determine what freed it**: `df` keeps no history and the change is not attributable after the fact. The
+operator was freeing space around that period and is the likeliest candidate, but no evidence names it,
+so it is not asserted. Consequence: starting from the 24.56 GB measured at `t_start`, this run would have
+exhausted the disk had that ~10.7 GB not appeared. **Anyone repeating it should provision ~30 GB.**
+
+Neither (i) nor (ii) bears on the reading, which rests on the axioms being byte-identical and on rc 0
+with 0 error lines. The build completed; it was not truncated.
+
+### §81b — what was edited in the living documents, and what was not
+
+**Not edited:** every banked artefact. `phaseA.json`, `phaseB.json` and `phaseB_local.json` still carry
+*"that mathlib's cached oleans match their sources"* under `what_this_does_not_establish`, and that is
+correct **for those runs** — each was a cache replay. §76, §3 of the confirmation page's original limit
+list, and `leg_437.md` §4–§5 are preserved verbatim, struck or annotated but not rewritten. The
+pre-registered verdict paragraph at `TECHNICAL_CONFIRMATION.md` §0 is **untouched**; a dated addendum sits
+beside it.
+
+**Edited, because they are living documents that a reader consults for current status:**
+`writeup/7_confirmation/TECHNICAL_CONFIRMATION.md` (§0 addendum, §3 limit 1 struck as closed, §3a
+semantic-match bullet, new §3b, §6 bullet, §7 table row), `STATE.md` (`K1` and `K4` rows),
+`reports/ORCH_STATE.md` (new phase C block; the targeted-check open item closed), `writeup/INDEX.md`
+(arc 7 row), and `experiments/journal/leg_437.md` (new §6, appended beside §4–§5).
+

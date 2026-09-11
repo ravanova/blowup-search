@@ -18,6 +18,13 @@ not from this page: `.venv/bin/python writeup/7_confirmation/confirmation_eviden
 
 Everything below qualifies that paragraph. Nothing below replaces it.
 
+**Addendum, 2026-09-11 — the verdict above is left VERBATIM; this is written beside it.** The verdict
+was pre-registered before this page existed and says "three environments". There is now a **fourth**
+run, and it closes the first of the three banked limits: mathlib has been **rebuilt from its own
+source**, with the official olean cache never consulted, and both theorems return the same three axioms
+byte for byte (§3b, `writeup/data/arc7/k1/phaseC/`). The verdict's substance is unchanged — what changes
+is that it no longer rests on cached oleans.
+
 **On authorship: this repository takes no position whatsoever on the priority dispute around the
 manuscript.** Not a hedged position, not an implied one. It is outside what any measurement here can
 reach, and no sentence in arc 7 should be read as leaning either way.
@@ -58,15 +65,18 @@ and the same for `…_periodic`. **`sorryAx` reachable: NO**, everywhere.
 **The gate's pre-committed reading (`leg_437_prereg.md` §2): GREEN in every environment → STOP AND
 REPORT.** No extension, no generalisation, no claim about Theorem 1.1. That is what was done.
 
-## 3. `K1`'s three banked limits — none softened
+## 3. `K1`'s three banked limits — ONE NOW CLOSED (2026-09-11), the other two standing, neither softened
 
-1. **mathlib's oleans were REPLAYED from the official cache, not rebuilt from source.**
+1. ~~**mathlib's oleans were REPLAYED from the official cache, not rebuilt from source.**~~ **CLOSED
+   2026-09-11 by phase C — see §3b.** mathlib has now been compiled from its own source, with the cache
+   never consulted, and the axioms are byte-identical. Struck, not deleted: it was a real limit for the
+   three runs above, and every artefact banked under those runs still carries it.
 2. **The statements are Fefferman's (C)/(D), not the manuscript's Theorem 1.1** — strictly weaker, with
    five existence clauses absent.
 3. **A second machine is not a second agent.** Three runs by one lineage is not verification (§3f rule 1:
    *verification is a fresh session or it is not verification*).
 
-### 3a. Limit 1 was two claims, and one of them is now closed (`k1/phaseB_integrity/`)
+### 3a. Limit 1 was two claims; this closed the first (2026-09-10, `k1/phaseB_integrity/`) — the second closed the next day, §3b
 
 - **PROVENANCE — established to labelling only.** mathlib's cache is content-addressed; 8747 `.ltar`
   files, 442 MB, every recomputed key matching a file already present (`second_cache_get` rc 0 in 14 s,
@@ -79,13 +89,55 @@ REPORT.** No extension, no generalisation, no claim about Theorem 1.1. That is w
   (`ammkrn/nanoda_lib @ 4c544ed4`), an **independent Rust implementation of the Lean kernel** — with
   statements identical to the challenge modules and nothing recompiled. Verdict string:
   `Your solution is okay!` Euler was run for completeness and is **not** part of the `K1` gate.
-- **SEMANTIC MATCH — NOT established.** Whether the cached oleans *mean* what mathlib's sources say
-  needs a recompile. Costed, not run: full rebuild `~2.7 h` wall for mathlib on 4 cores (95% CI 2.0–3.4,
-  8.9 CPU-hours) plus 1.5 h measured for the project's own 2484 modules — **~4 h**, blocked on disk
-  (11 GB free against 6.6 GB of mathlib build output, and phase B's tree must not be reused or deleted).
-  A **targeted** alternative is measured at 399 of 8370 mathlib modules, ~25 CPU-min / ~8–10 min wall —
-  the declaration-level semantic closure of the two theorem **statements** (5579 constants) via
-  `lean4export`. **Not scheduled: that is the user's to rule, not the Conductor's.**
+- **SEMANTIC MATCH — ESTABLISHED 2026-09-11, by the full rebuild, not the targeted alternative.**
+  This bullet previously read *NOT established*, costed at ~4 h and blocked on disk. The user scheduled
+  it; it ran; see §3b. The targeted 399-module check was **never needed and was not run** — the full
+  rebuild subsumes it.
+
+### 3b. Limit 1 is now CLOSED: mathlib rebuilt FROM SOURCE, 2026-09-11 (`k1/phaseC/`)
+
+Pre-registered in `leg_437_phaseC_prereg.md` with `MATCH`/`MISMATCH`/`INCOMPLETE` fixed and pushed
+**before** the run. A fresh clone at the same pin `8937a8f4`, outside the repository, then `lake build`
+alone — **`lake exe cache get` was never invoked, not once.** The string `cache` does not occur anywhere
+in the 732 KB build log.
+
+The pre-registration's own void condition decides whether the run counts: if `Built Mathlib.` is 0, a
+cache was used and the run is void.
+
+| | phase C | phase B (laptop) | phase B (container) |
+|---|---|---|---|
+| `Built Mathlib.` lines | **8370** | 0 | 0 |
+| `Replayed Mathlib.` lines | **0** | — | — |
+| mathlib's origin | **compiled here, from source** | official cache | 8747 `.ltar` downloaded |
+| wall time, end to end | **11578 s** | 4272 s | 5605 s |
+
+**Reading: `MATCH`.** `lake build` rc 0, 0 error lines, `Build completed successfully (11259 jobs)`, and
+both theorems report `[propext, Classical.choice, Quot.sound]` — compared **as bytes, not by eye**: the
+`depends on axioms` lines from phase C, phase B (laptop) and phase B (container) all hash to
+`0883b714ddd5c08564bf58dbb22edf44`, and `diff` is empty in both pairings. `sorryAx` does not appear.
+Per the pre-registration this reads: **the cached oleans were not load-bearing.**
+
+The price of removing the cache from the trust path, same laptop both times: **2.71×** wall clock
+(11578 s from source against 4272 s cached) and a **28.5 GB** build tree.
+
+Under `leg_437_phaseC_prereg.md` §5(c) the comparator was also re-run against this from-source tree under
+a **real `landrun` built from source** (v0.1.17) — the declared shim of the earlier follow-on was *not*
+substituted. **Lean's default kernel accepts both** challenge solutions. The nanoda leg did **not** run:
+`nanoda_bin` is absent and uninstallable on that machine, so the comparator's *"nanoda kernel rejected"*
+is its own phrasing for an `exec` failure — nanoda never saw the export and returned no verdict. Recorded
+as a tool gap, not as evidence. (nanoda's acceptance is already established in §3a, on the container.)
+
+**Three things phase C does not do.** It is the same Conductor lineage on the same laptop as phase B, so
+it is a stronger *trust* claim, not an independent one — `K1`'s `VERIFIED` still rests on `K2` slot 5.
+It moves the end of the trust path from mathlib's oleans to **the Lean compiler binary**, which was
+installed by `elan` and not itself built from source. And it says nothing whatever about Theorem 1.1.
+
+**One correction, recorded rather than smoothed over.** Two numbers in this unit are not fully
+reconciled, both banked as such in `phaseC.json`: lake reports **11259** jobs where phase B reported
+11251 and the prereg expected 11251 (the named target differences do not sum to the +8, and lake counts
+jobs it prints no line for); and the prereg's ~20 GB disk requirement was an **underestimate** — the real
+tree is 28.5 GB, and ~10.7 GB was freed elsewhere on the volume mid-run by something never identified.
+Neither bears on the reading, which rests on the axioms and on rc 0 with 0 errors. `CORRECTIONS.md` §81.
 
 ## 4. `K2` (leg 438) — five blind workers, and the label that moved
 
@@ -161,7 +213,9 @@ project: [`writeup/notes/PREREGISTERED_GATES_FAKED.md`](../notes/PREREGISTERED_G
 - **Not** that the kernel check settles Theorem 1.1. The Lean statement is Fefferman (C)/(D), strictly
   weaker, with five existence clauses absent.
 - **Not** that the Lean proof follows the paper's argument.
-- **Not** that mathlib's cached oleans *mean* what their sources say (§3a: integrity yes, semantics open).
+- **Not** that mathlib itself is correct. As of 2026-09-11 mathlib *is* compiled from source here, so
+  the earlier caveat "not that the cached oleans mean what their sources say" is **closed** (§3b) — but
+  the trust path now ends at the Lean compiler binary, which was installed, not built from source.
 - **Not** that `K3`'s zero says anything against the manuscript. It says the gates were fakeable.
 - **No position whatsoever on the priority dispute.**
 
@@ -173,6 +227,7 @@ project: [`writeup/notes/PREREGISTERED_GATES_FAKED.md`](../notes/PREREGISTERED_G
 |---|---|
 | `K1` kernel check | **GREEN, `VERIFIED`** — by `K2` slot 5, blind, on prereg §4(5)'s condition and nothing else |
 | `K1` olean integrity | **ESTABLISHED**, two independent kernels; same lineage, so `UNVERIFIED` by a second agent |
+| `K1` olean semantic match | **ESTABLISHED** 2026-09-11 (§3b) — mathlib rebuilt from source, cache never consulted, axioms byte-identical; same lineage, so `UNVERIFIED` by a second agent |
 | `K1` semantic match | **OPEN**, costed, not run |
 | `K2` gate answers | five blind workers agreeing across two runs; the Conductor's integration is `UNVERIFIED` |
 | `K3` gate answers | **`EVIDENCE` 0**; every gate `UNVERIFIED` |

@@ -58,13 +58,18 @@ mathlib oleans REPLAYED from cache, not rebuilt; statements are Fefferman (C)/(D
 machine is not a second agent — **`VERIFIED` only when K2 slot 5, blind, reproduces it from the banked artefacts.**
 
 
-**`K1` follow-on (landed 1b9f9ea) — olean INTEGRITY established, SEMANTIC MATCH not.** The first of the three
-limits above is two claims. Integrity (the whole closure kernel-valid, no axiom outside the three) is now
-ESTABLISHED on the container tree by `lake exe comparator`: both kernels — Lean and nanoda 0.4.17, an
-independent Rust implementation — accept, statements identical, nothing recompiled
-(`writeup/data/arc7/k1/phaseB_integrity/`). Semantic match needs a full 8371-module recompile and is NOT
-established. Same Conductor lineage, so it verifies nothing: `K2` slot 3 is re-scoped and re-run BLIND on the
-laptop tree (`leg_438_prereg_amend.md`), not retired, and `K1` stays `UNVERIFIED` until slot 5. §76.
+**`K1` follow-on (landed 1b9f9ea) — RETIRED VERBATIM to `## Superseded` below (§3j), nothing edited.** It
+established olean INTEGRITY and left SEMANTIC MATCH open; the block below closes that.
+
+**`K1` phase C (2026-09-11) — the FROM-SOURCE rebuild: banked limit 1 is CLOSED.** The retired block left
+semantic match NOT established, needing a full recompile. The user scheduled it; it ran. Pre-registered
+`leg_437_phaseC_prereg.md` (readings pushed before the run; an addendum re-measured the disk
+precondition after a first attempt was banked INCOMPLETE). Fresh clone at the same pin, outside the repo, `lake build` alone —
+**`lake exe cache get` never invoked**; `cache` does not appear in the build log. Void check passes: **8370
+`Built Mathlib.`, 0 `Replayed`**. Reading **MATCH**: rc 0, 0 errors, 11259 jobs, both theorems byte-identical to
+phase B (md5 `0883b714…` on all three runs), `sorryAx` NO. Cost, same laptop: `total_s` 11578 vs 4272 = **2.71×**.
+§5(c) re-ran the comparator under a **real `landrun`** (no shim): Lean's kernel accepts both; the nanoda leg could not run (binary absent). Two numbers banked unreconciled (+8 jobs; the ~20 GB disk threshold was low). Same lineage, so it verifies nothing — `VERIFIED` still rests on `K2` slot 5.
+`writeup/data/arc7/k1/phaseC/`, §81.
 
 **Retired VERBATIM at this boundary (§3j), nothing edited → `## Superseded — the K2 operational block` below:** the `K2` leg-438 wave-boundary record, the pre-pre-registration board state, the built-tree cursor for K2 slots 3/5, the previous headroom note, and the stale live-worker line.
 
@@ -103,24 +108,33 @@ left standing and unrewritten.
 
 **Headroom at this boundary (§3j, bytes):** `STATE.md` 24,156 (cap 24,576); `WALLS.md` 32,157 of 32,768; `OPTIONS.md` 20,961; this LIVE block is the tight one — the superseded blocks below still exceed three and truncation is owed at a quieter boundary.
 
-**Open, surfaced to the user, NOT ruled by the Conductor:** the targeted 399-module semantic-match check
-for `K1` (costed at ~25 CPU-min / ~8–10 min wall on the phase-B container; declaration-level via
-`lean4export`, weaker than a full rebuild, and its prereg needs PASS/FAIL/INCOMPLETE pre-committed per
-§3g step 1). Rulings 5–6 still await a one-word confirm; nothing in arc 7 depends on them.
+**Open, surfaced to the user, NOT ruled by the Conductor:** ~~the targeted 399-module semantic-match check
+for `K1`~~ — **CLOSED 2026-09-11.** The user scheduled the FULL rebuild instead, which subsumes it; the
+targeted check was never needed and was never run. Rulings 5–6 still await a one-word confirm; nothing in
+arc 7 depends on them.
 
 **What the next Conductor must do first:** read `git ls-remote origin main`. **ARC 7 IS CLOSED —
 there is no next unit in it.** Do not open a new arc without a user ruling: the arc-7 goal was set
 by one (`CORRECTIONS.md` §72) and has now been met and published. Two things are OWED and neither
-is the Conductor's to rule: the **targeted 399-module semantic-match check** for `K1` (above), and
-**rulings 5–6**, which still await a one-word confirm. If the user schedules the semantic-match
-run it is a NEW leg, with its own pre-registration pushed BEFORE it (§3g step 1) and
-PASS/FAIL/INCOMPLETE pre-committed.
+is the Conductor's to rule: ~~the **targeted 399-module semantic-match check** for `K1`~~ — **done, and
+done in the stronger form: the user scheduled the FULL from-source rebuild, which ran 2026-09-11 as `K1`
+phase C and closed the limit** (`k1/phaseC/`) — and **rulings 5–6**, which still await a one-word confirm.
 
 
 **Landed this arc:** `K0` (436), `K1` (437), `K2` (438), `K3` (439), `K4` (440) — **arc 7 COMPLETE**. **Audited but not landed:** none. **Live workers:** none — all five `leg/439-k3-agent{1..5}` branches pushed, verified and cherry-picked unedited; `leg/439-k3-land` carries the integration. **Open escalations:** the five rows above, unchanged and unruled.
 
 
 ## Superseded — the K2 operational block, retired VERBATIM from the LIVE block 2026-09-10 (leg 439, arc 7 `K3`) under §3j. Nothing edited.
+
+### Retired 2026-09-11 (§3j) — the `K1` follow-on block, VERBATIM, superseded by phase C. Nothing edited.
+
+**`K1` follow-on (landed 1b9f9ea) — olean INTEGRITY established, SEMANTIC MATCH not.** The first of the three
+limits above is two claims. Integrity (the whole closure kernel-valid, no axiom outside the three) is now
+ESTABLISHED on the container tree by `lake exe comparator`: both kernels — Lean and nanoda 0.4.17, an
+independent Rust implementation — accept, statements identical, nothing recompiled
+(`writeup/data/arc7/k1/phaseB_integrity/`). Semantic match needs a full 8371-module recompile and is NOT
+established. Same Conductor lineage, so it verifies nothing: `K2` slot 3 is re-scoped and re-run BLIND on the
+laptop tree (`leg_438_prereg_amend.md`), not retired, and `K1` stays `UNVERIFIED` until slot 5. §76.
 
 **Wave boundary — `K2` leg 438 run 2 INTEGRATED and landed.** Five blind workers, one file per owner,
 cherry-picked unedited into `writeup/data/arc7/k2/r2/`; the support rebuild banked at
