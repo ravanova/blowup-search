@@ -69,3 +69,20 @@ THE READING IS UNCHANGED, AND NOT MARGINALLY SO: even the full 15.8 GB physicall
 below the ~20 GB requirement. Reclaiming the reserve (`tune2fs -m 0 /dev/nvme0n1p3`) would still leave
 roughly 4 GB short, and was NOT done: stripping the reserve on the root filesystem costs fragmentation
 headroom and root's ability to recover a full disk. That is the operator's call, not the agent's.
+
+================================================================================
+FINAL — precondition resolution, 2026-09-11 (appended after the run)
+================================================================================
+The first measurement (above) FAILED at 3.24 GiB and the run was banked
+INCOMPLETE without starting, per prereg §3. The operator then freed space; the
+precondition was re-measured and re-banked in
+experiments/journal/leg_437_phaseC_prereg_addendum.md BEFORE the build started.
+
+Measured by the wrapper itself at t_start (k1_C_summary.txt, not retyped here):
+  disk_avail_bytes_at_start = 24555167744   (24.56 GB / 22.87 GiB)  -> PASS vs ~20 GB
+  disk_avail_bytes_at_end   =  6724648960   ( 6.72 GB /  6.26 GiB)
+  consumed by the run       = 17830518784   (17.83 GB / 16.61 GiB)
+
+So the ~20 GB pre-registered requirement was calibrated correctly: the run
+really did need 17.8 GB, and would have failed at the 3.24 GiB first measured.
+Nothing in the Lean trust path was touched to free the space.

@@ -1,0 +1,23 @@
+phase=C
+t_start=2026-09-11T00:00:54Z
+nproc=12
+model name	: Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz
+Mem:              31           6           5           0          20          24
+disk_avail_bytes_at_start=24555167744
+upstream_head_at_clone=f9e8bc5b38b6e212696e8a30e3e91517af887bbd
+t_clone_done=2026-09-11T00:00:55Z clone_s=1
+tree_head=8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538
+toolchain=leanprover/lean4:v4.34.0-rc2
+Lean (version 4.34.0-rc2, x86_64-unknown-linux-gnu, commit 6a10ac8c22beadecabdbb0919c2b50214762f91d, Release)
+Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)
+cache_get=NEVER-RUN (phase C: the cache is deliberately not in the trust path)
+build_rc=0 build_s=11571
+mathlib_rev=85e3a25e006c35636f0e53b0e9296caca2685bc0
+comparator_rev=19e111e2141cf333c7daff0f64c5f24acc91dd2e
+build_error_lines=0
+mathlib_built_lines=8370
+mathlib_replayed_lines=0
+axioms_s=5
+olean_count=2486
+disk_avail_bytes_at_end=6724648960
+t_end=2026-09-11T03:13:52Z total_s=11578

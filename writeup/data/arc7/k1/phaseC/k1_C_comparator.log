@@ -1,0 +1,64 @@
+=== K1 phase C, prereg §5(c): comparator under a REAL landrun (no shim) ===
+t0=2026-09-11T03:16:15Z
+--- go install landrun (module path is lowercase; K2 slot 3's recorded recipe) ---
+go: downloading go1.26.8 (linux/amd64)
+go: downloading github.com/urfave/cli/v3 v3.6.2
+go: downloading github.com/landlock-lsm/go-landlock v0.9.0
+go: downloading kernel.org/pub/linux/libs/security/libcap/psx v1.2.77
+go: downloading golang.org/x/sys v0.40.0
+go_install_rc=0
+landrun_version: landrun version 0.1.17
+--- build lean4export from the pinned tree ---
+✔ [5/6] Built Export:c.o (3.1s)
+✔ [6/6] Built lean4export:exe (1.5s)
+Build completed successfully (6 jobs).
+lean4export_rc=0
+--- build the comparator executable from the pinned tree ---
+✔ [15/16] Built Export.Parse:c.o (4.0s)
+✔ [16/16] Built comparator:exe (578ms)
+Build completed successfully (16 jobs).
+comparator_rc=0
+landrun=/dev/shm/k1c/go/bin/landrun
+lean4export=/tmp/claude-1001/-home-andy-projects-Unsolved/26962bba-3715-4082-867b-674ff0ae0950/scratchpad/k1_phaseC_tree/.lake/packages/lean4export/.lake/build/bin/lean4export (present)
+nanoda_bin on PATH: ABSENT — no cargo/rustup on this machine
+=== RUN NavierStokes  2026-09-11T03:16:46Z ===
+Building ComparatorChallenges.NavierStokes
+⚠ [8763/8763] Replayed ComparatorChallenges.NavierStokes
+warning: ComparatorChallenges/NavierStokes.lean:273:8: declaration uses `sorry`
+warning: ComparatorChallenges/NavierStokes.lean:280:8: declaration uses `sorry`
+Build completed successfully (8763 jobs).
+Exporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, NavierStokes.Comparator.navier_stokes_breakdown_R3, NavierStokes.Comparator.navier_stokes_breakdown_periodic, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from ComparatorChallenges.NavierStokes
+Building NavierStokes.ComparatorSolution
+ℹ [9342/9342] Replayed NavierStokes.ComparatorSolution
+info: NavierStokes/ComparatorSolution.lean:31:0: 'NavierStokes.Comparator.navier_stokes_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: NavierStokes/ComparatorSolution.lean:32:0: 'NavierStokes.Comparator.navier_stokes_breakdown_periodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (9342 jobs).
+Exporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, NavierStokes.Comparator.navier_stokes_breakdown_R3, NavierStokes.Comparator.navier_stokes_breakdown_periodic, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from NavierStokes.ComparatorSolution
+Running nanoda kernel on solution
+[landrun:error] 2026/09/11 04:19:03 Failed to find binary: exec: "nanoda_bin": executable file not found in $PATH
+nanoda kernel rejected the solution
+Running Lean default kernel on solution.
+Lean default kernel accepts the solution
+uncaught exception: nanoda exited with 1
+=== NavierStokes rc=0 (124 would mean OUR timeout killed it — that is not a result) ===
+=== RUN Euler  2026-09-11T03:24:06Z ===
+Building ComparatorChallenges.Euler
+⚠ [8763/8763] Replayed ComparatorChallenges.Euler
+warning: ComparatorChallenges/Euler.lean:85:8: declaration uses `sorry`
+warning: ComparatorChallenges/Euler.lean:170:8: declaration uses `sorry`
+Build completed successfully (8763 jobs).
+Exporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, Euler.euler_breakdown_R3, Euler.exists_compact_smooth_euler_singularity, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from ComparatorChallenges.Euler
+Building Euler.Solution
+ℹ [10591/10591] Replayed Euler.Solution
+info: Euler/Solution.lean:73:0: 'Euler.euler_breakdown_R3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Euler/Solution.lean:75:0: 'Euler.exists_compact_smooth_euler_singularity' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (10591 jobs).
+Exporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, Euler.euler_breakdown_R3, Euler.exists_compact_smooth_euler_singularity, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from Euler.Solution
+Running nanoda kernel on solution
+[landrun:error] 2026/09/11 04:26:16 Failed to find binary: exec: "nanoda_bin": executable file not found in $PATH
+nanoda kernel rejected the solution
+Running Lean default kernel on solution.
+Lean default kernel accepts the solution
+uncaught exception: nanoda exited with 1
+=== Euler rc=0 (124 would mean OUR timeout killed it — that is not a result) ===
+t_end=2026-09-11T03:36:00Z
