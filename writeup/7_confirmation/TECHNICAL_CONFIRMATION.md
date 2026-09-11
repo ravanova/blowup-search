@@ -36,7 +36,7 @@ reach, and no sentence in arc 7 should be read as leaning either way.
 The user's ruling of 2026-09-10 (`CORRECTIONS.md` §72): the programme is **not** finished, and its new
 goal is to *independently **confirm** the OpenAI Navier–Stokes result — not re-derive it — by running the
 Lean kernel to completion on its exported theorems, because out-refereeing 166 pages is beyond this
-repository and running a kernel is not, and nobody has published a kernel run.*
+repository and running a kernel is not, and we could not find a published kernel run.*
 
 `K0` recorded the rulings and corrected two discrepancies between the charter and the board, including
 re-describing arc 6's kernel check as what it actually was: `#print axioms` on a build that **never

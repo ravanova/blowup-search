@@ -16,7 +16,7 @@ claim in the repository is tiered, gated, and rebuildable from committed data.
 
 > ## ▶ Start here: [arc 7 — we ran the Lean kernel to completion](writeup/7_confirmation/BLOG_CONFIRMATION.md)
 >
-> **2026-09-10.** Nobody had published a kernel run on the 2026 Navier–Stokes Lean project. We ran one.
+> **2026-09-10.** We could not find a published kernel run on the 2026 Navier–Stokes Lean project, so we ran one.
 > On a single pinned commit, in **three environments** and by **two independently written kernels**
 > (Lean's own and **nanoda**, a separate Rust implementation), both exported theorems are accepted
 > depending on no axiom beyond `propext`, `Classical.choice` and `Quot.sound`, with `sorryAx`

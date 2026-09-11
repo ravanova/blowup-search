@@ -94,7 +94,7 @@ repository. This project has run 440 units of work and has not moved a single li
 would be required. We keep a running estimate of our own probability of success, and it is about 0.05%.
 
 We think that is worth publishing anyway. The kernel check is a small, sharp, reproducible fact that
-nobody else had published, and the failed numerical check is a useful warning about how easy it is to
+we could not find a published run of, and the failed numerical check is a useful warning about how easy it is to
 build a test that cannot fail.
 
 ---

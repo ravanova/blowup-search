@@ -22,7 +22,7 @@ we can measure reaches that question, so we say nothing about it.
 
 In September 2026 a 166-page manuscript claimed finite-time blowup for the **forced** 3D Navier–Stokes
 equations, together with a Lean formalisation. Out-refereeing 166 pages of hard analysis is beyond this
-project. Running a proof kernel to completion is not — and nobody had published one.
+project. Running a proof kernel to completion is not — and we could not find a published one.
 
 So that became the goal: not to re-derive the result, but to **check the machine-checkable part of it**.
 
