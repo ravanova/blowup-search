@@ -31,6 +31,11 @@ Think of it as three separate questions.
 3. **Is the checker itself trustworthy?** We replayed the whole thing through a **second** checker,
    written independently in a different programming language by different people. It also accepted. Two
    independent programs agreeing is much stronger than one program run twice.
+4. **Is the library underneath trustworthy?** Formal proofs are built on a large shared library, which is
+   normally downloaded as pre-compiled files rather than rebuilt. That download was the weakest link in
+   everything above. On 2026-09-11 we removed it: we rebuilt that entire library from its published
+   source text — three and a quarter hours of compilation, nothing downloaded — and ran the check again.
+   **Identical result, to the byte.** So the pre-compiled files were not doing any hidden work.
 
 ## What was not verified, stated plainly
 
@@ -39,10 +44,10 @@ Think of it as three separate questions.
   A green check on the weaker statement is not a green check on the stronger one.
 - **That the Lean proof follows the paper's reasoning.** It proves its own statement. Whether it does so
   by the argument the manuscript describes is a separate question we did not answer.
-- **The mathematics library underneath.** Formal proofs are built on a large shared library. We confirmed
-  the copy we used is internally valid and correctly labelled, but not that its pre-compiled files
-  *mean* what the library's published source text says. Closing that needs a full recompile. We measured
-  what it would cost — roughly four hours — and did not run it.
+- **The compiler itself.** Rebuilding the library from source (point 4 above) removed the pre-compiled
+  files from the chain of trust, but it did not remove the chain. Something still has to be trusted: the
+  Lean compiler we ran, which we installed as a published binary rather than building ourselves. That is
+  where the chain now ends, and we are saying so rather than implying it ends nowhere.
 - **Anything about who did what first.** There is a dispute about priority around this manuscript.
   **This project takes no position on it whatsoever.** We have no evidence bearing on it, so we say
   nothing about it, in either direction.

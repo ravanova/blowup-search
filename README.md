@@ -21,7 +21,10 @@ claim in the repository is tiered, gated, and rebuildable from committed data.
 > (Lean's own and **nanoda**, a separate Rust implementation), both exported theorems are accepted
 > depending on no axiom beyond `propext`, `Classical.choice` and `Quot.sound`, with `sorryAx`
 > unreachable. A **blind** agent reproduced it from the raw logs — which is the only reason it is
-> labelled `VERIFIED`, the one such label in this repository.
+> labelled `VERIFIED`, the one such label in this repository. **And since 2026-09-11 it no longer rests
+> on the published `mathlib` binary cache: a fourth run rebuilt `mathlib` from its own source —
+> `lake exe cache get` never invoked, 8370 `Built Mathlib.` lines, zero replayed — and returned the same
+> axioms byte for byte.**
 >
 > **That is the whole of what it confirms.** It confirms the Lean project proves what its own
 > statements say, and those statements are Fefferman's **(C)/(D)** — *strictly weaker* than the
@@ -100,7 +103,12 @@ claim in the repository is tiered, gated, and rebuildable from committed data.
 > `sorryAx` unreachable. A **blind** agent, given only the raw build and axiom logs, reproduced it and
 > returned `VERIFIED-SUPPORTED`; that, and nothing else, is why the label moved. Separately, `lake exe
 > comparator` replayed the whole environment through **nanoda 0.4.17, an independent Rust implementation
-> of the Lean kernel** — both kernels accept. **That is the whole of what arc 7 confirms.** It confirms
+> of the Lean kernel** — both kernels accept. **A FOURTH run on 2026-09-11 (`K1` phase C) removed the
+> last download from the trust path: `mathlib` was compiled from its own source with `lake exe cache get`
+> never invoked (8370 `Built Mathlib.`, 0 `Replayed`), at 2.71× the wall clock and a 28.5 GB tree, and
+> both theorems returned the same three axioms byte for byte — the cached oleans were not load-bearing.**
+> Same lineage and same laptop, so it strengthens trust, not independence; the trust path now ends at the
+> Lean compiler binary, which was installed rather than built. **That is the whole of what arc 7 confirms.** It confirms
 > the Lean project proves what its own statements say; those statements are Fefferman's (C)/(D),
 > **strictly weaker than Theorem 1.1**. It is **not** a confirmation that the 166-page proof is correct.
 > And this repository's own attempt to check the construction numerically (`K3`) produced **ZERO**
